@@ -63,7 +63,7 @@ class RememberController extends MainController
         
         self::rememberMeReset($token['auth_user_id'], $selector);
 
-        return true;
+        redirect('/');
     }
 
     // Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»

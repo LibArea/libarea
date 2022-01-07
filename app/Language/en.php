@@ -202,7 +202,6 @@ $data = [
     'publications'      => 'Publications',
     'selected post'     => 'Selected post',
     'edit post'         => 'Edit post',
-    'participant posts' => 'Participant posts',
     'color'             => 'Color',
     'text'              => 'Text',
     'author'            => 'Author',
@@ -373,8 +372,13 @@ $data = [
     'psychology'            => 'Psychology',
 
     /* Meta - desc */
-    'title-profile'         => '%1$s %2$s | Profile on %3$s',
-    'desc-profile'          => '%1$s - member profile page. %2$s Posts, comments, awards on %3$s',
+    'profile.posts.title'       => '%1$s — member profile, posts ',
+    'profile.answers.title'     => '%1$s — participant replies ',
+    'profile.comments.title'    => '%1$s — participant comments ',
+    'profile.posts.desc'        => '%1$s — member profile page. Posts, awards and contacts. %2$s',
+    'profile.answers.desc'      => '%1$s — page of responses of the participant to posts in topics and blogs. %2$s',
+    'profile.comments.desc'     => '%1$s — participant comments in chronological order. %2$s',
+    
     'page-number'           => ' Page %1$s. ',
     'main.top.title'        => 'Popular posts. ',
     'main.top.desc'         => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
@@ -486,7 +490,6 @@ $data = [
     'you can invite your friends'           => 'You can invite friends',
     'you were looking for'                  => 'You were looking for',
     'personal-messages-site'                => 'Private messages with site members',
-    'responses-members'                     => 'Responses from community members',
     'the page does not exist'               => 'The page does not exist',
     'to main'                               => 'To main',
     'the page has been removed'             => 'The page has been removed',

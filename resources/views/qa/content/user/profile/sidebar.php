@@ -3,7 +3,7 @@
 <div class="col-span-4 justify-between mb-none">
 
   <div class="br-box-gray bg-white p15 mb15">
-    <blockquote class="mb20 max-w640">
+    <blockquote class="ml0 mb10 max-w640 gray">
       <?= $user['user_about']; ?>...
     </blockquote>
     <div class="gray-400">

@@ -66,9 +66,9 @@ class UserData extends \MainMiddleware
             return self::$myAccount;
         }
 
-        $uid = Request::getSession('account') ?? null;
+        $uid = Request::getSession('account') ?? [];
  
-        if (!is_null($uid['user_id'])) {
+        if (!empty($uid['user_id'])) {
 
             $user = MiddlewareModel::getUser($uid['user_id']);
             

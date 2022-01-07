@@ -205,7 +205,6 @@ $data = [
     'publications'      => 'Publications',
     'selected post'     => 'Selected post',
     'edit post'         => 'Edit post',
-    'participant posts' => 'Participant posts',
     'color'             => 'Color',
     'text'              => 'Text',
     'author'            => 'Author',
@@ -376,8 +375,13 @@ $data = [
     'psychology'            => 'Psychology',
 
     /* Meta - desc */
-    'title-profile'         => '%1$s %2$s | Profile on %3$s',
-    'desc-profile'          => '%1$s - member profile page. %2$s Posts, comments, awards on %3$s',
+    'profile.posts.title'       => '%1$s — profil du membre, messages ',
+    'profile.answers.title'     => '%1$s — réponses des participants ',
+    'profile.comments.title'    => '%1$s — commentaires des participants ',
+    'profile.posts.desc'        => '%1$s — page de profil du membre. Publications, récompenses et contacts. %2$s',
+    'profile.answers.desc'      => '%1$s — page de réponses du participant aux publications dans les rubriques et les blogs. %2$s',
+    'profile.comments.desc'     => '%1$s — commentaires des participants par ordre chronologique. %2$s',
+    
     'page-number'           => ' Page %1$s. ',
     'main.top.title'        => 'Popular posts. ',
     'main.top.desc'         => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
@@ -489,7 +493,6 @@ $data = [
     'you can invite your friends'           => 'You can invite friends',
     'you were looking for'                  => 'You were looking for',
     'personal-messages-site'                => 'Private messages with site members',
-    'responses-members'                     => 'Responses from community members',
     'the page does not exist'               => 'The page does not exist',
     'to main'                               => 'To main',
     'the page has been removed'             => 'The page has been removed',

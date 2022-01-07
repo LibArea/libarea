@@ -8,7 +8,7 @@ if ($user['user_cover_art'] != 'cover_art.jpeg') {
 ?>
 
 <div class="col-span-12 justify-between">
-  <div class="br-box-gray bg-white">
+  <div class="br-box-gray bg-white mb-mb-10">
     <?php if ($user['user_cover_art'] != 'cover_art.jpeg') { ?>
       <div class="profile-box-cover relative min-h300 mb-min-h100" style="background-image: url(<?= cover_url($user['user_cover_art'], 'user'); ?>); background-position: 50% 50%;"></div>
     <?php } else { ?>
@@ -21,27 +21,25 @@ if ($user['user_cover_art'] != 'cover_art.jpeg') {
         </div>
         <div class="flex">
 
-          <h1 class="text-2xl5 font-normal mb-block m15 mb5 flex justify-between">
+          <h1 class="text-2xl  font-normal mb-block mt20 ml15 mb5 flex justify-between">
             <?= $user['user_login']; ?>
             <?php if ($user['user_name']) { ?> / <?= $user['user_name']; ?><?php } ?>
               <?php if ($user['user_up_count'] > 0) { ?>
                 <div class="flex">
                   <div class="up-id bi bi-heart red-500 mr10 ml20 mb-ml-5 text-sm"></div>
-                  <div class="text-sm gray-600"><?= $user['user_up_count']; ?></div>
+                  <div class="text-sm gray-400"><?= $user['user_up_count']; ?></div>
                 </div>
               <?php } ?>
           </h1>
 
           <div class="ml120 mt10 mb-none">
-
             <div class="flex justify-center">
-
               <?php if ($data['count']['count_posts'] > 0) { ?>
                 <div class="ml15 mr15 center box-number">
                   <a class="focus-user sky-500" href="<?= getUrlByName('profile.posts', ['login' => $user['user_login']]); ?>">
                     <?= $data['count']['count_posts']; ?>
                   </a>
-                  <div class="uppercase mt5 text-sm gray"><?= Translate::get('posts'); ?></div>
+                  <div class="uppercase mt5 text-sm gray-400"><?= Translate::get('posts'); ?></div>
                 </div>
               <?php } ?>
 
@@ -50,7 +48,7 @@ if ($user['user_cover_art'] != 'cover_art.jpeg') {
                   <a class="focus-user sky-500" href="<?= getUrlByName('profile.answers', ['login' => $user['user_login']]); ?>">
                     <?= $data['count']['count_answers']; ?>
                   </a>
-                  <div class="uppercase mt5 text-sm gray"><?= Translate::get('answers'); ?></div>
+                  <div class="uppercase mt5 text-sm gray-400"><?= Translate::get('answers'); ?></div>
                 </div>
               <?php } ?>
 
@@ -59,7 +57,7 @@ if ($user['user_cover_art'] != 'cover_art.jpeg') {
                   <a class="focus-user sky-500" href="<?= getUrlByName('profile.comments', ['login' => $user['user_login']]); ?>">
                     <?= $data['count']['count_comments']; ?>
                   </a>
-                  <div class="uppercase mt5 text-sm gray"><?= Translate::get('comments'); ?></div>
+                  <div class="uppercase mt5 text-sm gray-400"><?= Translate::get('comments'); ?></div>
                 </div>
               <?php } ?>
             </div>

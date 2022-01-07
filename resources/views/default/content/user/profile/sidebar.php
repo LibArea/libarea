@@ -3,7 +3,7 @@
 <div class="col-span-4 justify-between mb-none">
 
   <div class="br-box-gray bg-white p15 mb15">
-    <blockquote class="mb20 max-w640">
+    <blockquote class="ml0 mb10 max-w640 gray">
       <?= $user['user_about']; ?>...
     </blockquote>
     <div class="gray-400">
@@ -117,7 +117,7 @@
     <?php foreach (Config::get('fields-profile') as $block) { ?>
       <?php if ($user[$block['title']]) { ?>
         <div class="mt5">
-          <label for="name"><?= $block['lang']; ?>:</label>
+          <?= $block['lang']; ?>:
           <?php if ($block['url']) { ?>
             <a href="<?php if ($block['addition']) { ?><?= $block['addition']; ?><?php } ?><?= $user[$block['url']]; ?>" rel="noopener nofollow ugc">
               <span class="mr5 ml5"><?= $user[$block['title']]; ?></span>
@@ -129,8 +129,7 @@
       <?php } else { ?>
         <?php if ('user_location' == $block['title']) { ?>
           <div class="mb20">
-            <label for="name"><?= $block['lang']; ?>:</label>
-            ...
+            <?= $block['lang']; ?>: ...
           </div>
         <?php } ?>
       <?php } ?>

@@ -203,7 +203,6 @@ $data = [
     'publications'      => '出版物',
     'selected post'     => '選擇的帖子',
     'edit post'         => '編輯帖子',
-    'participant posts' => '參與者帖子',
     'color'             => '顏色',
     'text'              => '文本',
     'author'            => '作者',
@@ -374,8 +373,13 @@ $data = [
     'psychology'            => '心理學',
 
     /* 元描述  */
-    'title-profile'         => '%1$s %2$s | 簡介  %3$s',
-    'desc-profile'          => '%1$s - 會員資料頁面。 %2$s 帖子、評論、獎勵 %3$s',
+    'profile.posts.title'       => '%1$s — 會員資料、帖子 ',
+    'profile.answers.title'     => '%1$s — 參與者回复 ',
+    'profile.comments.title'    => '%1$s — 參與者評論 ',
+    'profile.posts.desc'        => '%1$s — 會員資料頁面。 帖子、獎項和聯繫方式. %2$s',
+    'profile.answers.desc'      => '%1$s — 參與者對主題和博客中的帖子的回复頁面. %2$s',
+    'profile.comments.desc'     => '%1$s — 參與者評論按時間順序排列. %2$s',
+    
     'page-number'           => ' 頁 %1$s. ',
     'main.top.title'        => '熱門帖子。 ',
     'main.top.desc'         => '社區提要中的熱門帖子列表（按回複數量）。 感興趣的話題。 對話、問答、評論。 ',
@@ -487,7 +491,6 @@ $data = [
     'you can invite your friends'           => '你可以邀請朋友',
     'you were looking for'                  => '你在找',
     'personal-messages-site'                => '與網站成員的私信',
-    'responses-members'                     => '社區成員的回應',
     'the page does not exist'               => '該頁面不存在',
     'to main'                               => '主要',
     'the page has been removed'             => '該頁面已被刪除',

@@ -196,7 +196,6 @@ $data = [
     'publications'      => 'Publicații',
     'selected post'     => 'Postare recomandată',
     'edit post'         => 'Editează postarea',
-    'participant posts' => 'Postări de membri',
     'color'             => 'Culoare',
     'text'              => 'Text',
     'author'            => 'Autor',
@@ -377,8 +376,13 @@ $data = [
     'psychology'            => 'Psihologie',
 
     /* Meta - desc */
-    'title-profile'         => '%1$s %2$s | Titlu profil  %3$s',
-    'desc-profile'          => '%1$s - pagina profilului. %2$s Postări, comentarii, premii pe %3$s',
+    'profile.posts.title'       => '%1$s — profil membru, postări ',
+    'profile.answers.title'     => '%1$s — răspunsurile participantului ',
+    'profile.comments.title'    => '%1$s — comentariile participantilor ',
+    'profile.posts.desc'        => '%1$s — pagina de profil de membru. Postări, premii și contacte. %2$s',
+    'profile.answers.desc'      => '%1$s — pagina de răspunsuri ale participantului la postările din subiecte și bloguri. %2$s',
+    'profile.comments.desc'     => '%1$s — comentariile participanților în ordine cronologică. %2$s',
+    
     'page-number'           => ' — pagina %1$s ',
     'main.top.title'        => 'Posturi populare. ',
     'main.top.desc'         => 'O listă de postări populare din feedul comunității (după numărul de răspunsuri). Subiecte de interes. Conversații, întrebări și Răspunsuri, Comentarii. ',
@@ -485,7 +489,6 @@ $data = [
     'flag not included'                 => 'Semnalizați-l lăsat, nu îl folosiți des',
     'invited you'                       => 'You were invited by a member from this site. Enter invite',
     'medal for registration'            => 'Medalie pentru înregistrare',
-    'responses-members'                 => 'Răspunsurile comunității',
     'design choice'                     => 'alegerea designului',
 
     'recommended posts'         => 'postări recomandate ',

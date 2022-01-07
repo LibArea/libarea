@@ -137,13 +137,13 @@ Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' 
 Route::get('/users')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
 Route::get('/users/page/{page?}')->controller('User\UserController')->where(['page' => '[0-9]+']);
 
-Route::get('/u/{login}')->controller('User\ProfileController', ['profile.posts', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('profile');
-Route::get('/u/{login}/posts')->controller('User\ProfileController@posts', ['profile.posts', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
-Route::get('/u/{login}/posts/page/{page?}')->controller('User\ProfileController@posts', ['profile.posts', 'user'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/answers')->controller('User\ProfileController@answers')->where(['login' => '[A-Za-z0-9]+'])->name('profile.answers');
-Route::get('/u/{login}/answers/page/{page?}')->controller('User\ProfileController@answers')->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/comments')->controller('User\ProfileController@comments')->where(['login' => '[A-Za-z0-9]+'])->name('profile.comments');
-Route::get('/u/{login}/comments/page/{page?}')->controller('User\ProfileController@comments')->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}')->controller('User\ProfileController', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile');
+Route::get('/u/{login}/posts')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
+Route::get('/u/{login}/posts/page/{page?}')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/answers')->controller('User\ProfileController@answers', ['profile.answers', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.answers');
+Route::get('/u/{login}/answers/page/{page?}')->controller('User\ProfileController@answers', ['profile.answers', 'profile'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/comments')->controller('User\ProfileController@comments', ['profile.comments', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.comments');
+Route::get('/u/{login}/comments/page/{page?}')->controller('User\ProfileController@comments', ['profile.comments', 'profile'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
 
 Route::get('/comments')->controller('Comment\CommentController', ['comments'])->name('comments');
 Route::get('/comments/page/{page?}')->controller('Comment\CommentController', ['comments'])->where(['page' => '[0-9]+']);

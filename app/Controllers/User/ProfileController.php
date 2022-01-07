@@ -43,21 +43,10 @@ class ProfileController extends MainController
             $result[$ind]                   = $row;
         }
 
-        $site_name  = Config::get('meta.name');
-        $meta_title = sprintf(Translate::get('title-profile'), $user['user_login'], $user['user_name'], $site_name);
-        $meta_desc  = sprintf(Translate::get('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
-
-        $m = [
-            'og'         => true,
-            'twitter'    => true,
-            'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
-            'url'        => getUrlByName('profile', ['login' => $user['user_login']]),
-        ];
-
         return agRender(
             '/user/profile/index',
             [
-                'meta'  => meta($m, $meta_title, $meta_desc),
+                'meta'  => self::metadata($sheet, $user),
                 'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
@@ -96,23 +85,16 @@ class ProfileController extends MainController
             $result[$ind]                   = $row;
         }
 
-        $m = [
-            'og'         => true,
-            'twitter'    => true,
-            'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
-            'url'        => getUrlByName('profile.posts', ['login' => $user['user_login']]),
-        ];
-
         return agRender(
             '/user/profile/post',
             [
-                'meta'  => meta($m, Translate::get('posts') . ' ' . $user['user_login'], Translate::get('participant posts') . ' ' . $user['user_login']),
+                'meta'  => self::metadata($sheet, $user),
                 'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'sheet'         => 'user-post',
-                    'type'          => 'posts.user',
+                    'sheet'         => $sheet,
+                    'type'          => $type,
                     'posts'         => $result,
                     'user'          => $user,
                     'count'         => UserModel::contentCount($user['user_id']),
@@ -126,7 +108,7 @@ class ProfileController extends MainController
         );
     }
 
-    public function answers()
+    public function answers($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -142,23 +124,16 @@ class ProfileController extends MainController
             $result[$ind]   = $row;
         }
 
-        $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('profile.answers', ['login' => $user['user_login']]),
-        ];
-
         return agRender(
             '/user/profile/answer',
             [
-                'meta'  => meta($m, Translate::get('answers') . ' ' . $user['user_login'], Translate::get('responses-members') . ' ' . $user['user_login']),
+                'meta'  => self::metadata($sheet, $user),
                 'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'sheet'         => 'user-answers',
-                    'type'          => 'answers.user',
+                    'sheet'         => $sheet,
+                    'type'          => $type,
                     'answers'       => $result,
                     'user'          => $user,
                     'count'         => UserModel::contentCount($user['user_id']),
@@ -173,7 +148,7 @@ class ProfileController extends MainController
     }
 
     // Комментарии участника
-    public function comments()
+    public function comments($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -189,23 +164,16 @@ class ProfileController extends MainController
             $result[$ind]           = $row;
         }
 
-        $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('comments.user', ['login' => $user['user_login']]),
-        ];
-
         return agRender(
             '/user/profile/comment',
             [
-                'meta'  => meta($m, Translate::get('comments') . ' ' . $user['user_login'], Translate::get('comments') . ' ' . $user['user_login']),
+                'meta'  => self::metadata($sheet, $user),
                 'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'sheet'         => 'user-comments',
-                    'type'          => 'comments.user',
+                    'sheet'         => $sheet,
+                    'type'          => $type,
                     'comments'      => $result,
                     'user'          => $user,
                     'count'         => UserModel::contentCount($user['user_id']),
@@ -219,7 +187,7 @@ class ProfileController extends MainController
             ]
         );
     }
-    
+
     public static function availability()
     {
         $login  = Request::get('login');
@@ -238,12 +206,35 @@ class ProfileController extends MainController
             UserModel::userHits($user['user_id']);
             $_SESSION['usernumbers'][$user['user_id']] = $user['user_id'];
         }
-        
+
         if (UserData::checkAdmin()) {
             Request::getResources()->addBottomScript('/assets/js/admin.js');
         }
 
         return $user;
     }
-    
+
+    public static function metadata($sheet, $user)
+    {
+        if ($sheet == 'profile.posts') {
+            $information = $user['user_about'];
+        }
+
+        $name = $user['user_login'];
+        if ($user['user_name']) {
+            $name = $user['user_name'] . ' (' . $user['user_login'] . ') ';
+        }
+
+        $title = sprintf(Translate::get($sheet . '.title'), $name);
+        $desc  = sprintf(Translate::get($sheet . '.desc'), $name, $information ?? '...');
+
+        $m = [
+            'og'         => true,
+            'twitter'    => true,
+            'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
+            'url'        => getUrlByName('profile', ['login' => $user['user_login']]),
+        ];
+
+        return meta($m, $title, $desc);
+    }
 }
