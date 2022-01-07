@@ -65,21 +65,25 @@ class UserData extends \MainMiddleware
         if (!is_null(self::$myAccount)) {
             return self::$myAccount;
         }
-        
+
         $uid = Request::getSession('account') ?? null;
+ 
+        if (!is_null($uid['user_id'])) {
 
-        if (!is_null($uid)) {
-
-            $user   = MiddlewareModel::getUser($uid['user_id']);
+            $user = MiddlewareModel::getUser($uid['user_id']);
             
             if ($user['user_ban_list'] == self::BANNED_USER) {
                 (new \App\Controllers\Auth\SessionController())->annul($user['user_id']);
-            }  
+            }
+            
+        } else {
        
             $remember = Request::getCookie('remember');
-            if ($remember) (new \App\Controllers\Auth\RememberController())->check($remember);
+            if ($remember) { 
+                (new \App\Controllers\Auth\RememberController())->check($remember);
+            }
         }
- 
+
         self::$myAccount = $user ?? null;
         
         return self::$myAccount;

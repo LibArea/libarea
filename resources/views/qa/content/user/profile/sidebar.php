@@ -157,9 +157,9 @@
       <h3 class="m0 uppercase gray font-normal text-sm">
         <?= Translate::get('admin'); ?>
       </h3>
-      <div class="m0">
+      <div class="mt5">
         <?php if ($user['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
-          <?php if ($data['isBan']) { ?>
+          <?php if ($user['user_ban_list'] == 1) { ?>
             <span class="type-ban gray mb5 block" data-id="<?= $user['user_id']; ?>" data-type="user">
               <i class="bi bi-person-x-fill red-500 middle mr5"></i>
               <span class="red-500 text-sm"><?= Translate::get('unban'); ?></span>

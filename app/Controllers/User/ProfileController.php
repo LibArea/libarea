@@ -26,37 +26,10 @@ class ProfileController extends MainController
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-
-        $login = Request::get('login');
-        $user  = UserModel::getUser($login, 'slug');
-        pageError404($user);
+        $user   = self::availability();
 
         if (!$user['user_about']) {
             $user['user_about'] = Translate::get('riddle') . '...';
-        }
-
-        $site_name  = Config::get('meta.name');
-        $meta_title = sprintf(Translate::get('title-profile'), $user['user_login'], $user['user_name'], $site_name);
-        $meta_desc  = sprintf(Translate::get('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
-
-        if ($user['user_ban_list'] == 1) {
-            Request::getHead()->addMeta('robots', 'noindex');
-        }
-
-        // Profile Views (просмотры профиля)
-        if (!isset($_SESSION['usernumbers'])) {
-            $_SESSION['usernumbers'] = [];
-        }
-
-        if (!isset($_SESSION['usernumbers'][$user['user_id']])) {
-            UserModel::userHits($user['user_id']);
-            $_SESSION['usernumbers'][$user['user_id']] = $user['user_id'];
-        }
-
-        $isBan = '';
-        if (UserData::checkAdmin()) {
-            Request::getResources()->addBottomScript('/assets/js/admin.js');
-            $isBan = UserModel::isBan($user['user_id']);
         }
 
         $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $user['user_id']);
@@ -70,6 +43,9 @@ class ProfileController extends MainController
             $result[$ind]                   = $row;
         }
 
+        $site_name  = Config::get('meta.name');
+        $meta_title = sprintf(Translate::get('title-profile'), $user['user_login'], $user['user_name'], $site_name);
+        $meta_desc  = sprintf(Translate::get('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
 
         $m = [
             'og'         => true,
@@ -92,7 +68,6 @@ class ProfileController extends MainController
                     'blogs'             => FacetModel::getOwnerFacet($user['user_id'], 'blog'),
                     'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
                     'user'              => $user,
-                    'isBan'             => $isBan,
                     'type'              => $type,
                     'posts'             => $result,
                     'sheet'             => $sheet,
@@ -104,15 +79,11 @@ class ProfileController extends MainController
         );
     }
 
-    // Посты участника
     public function posts($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-
-        $login  = Request::get('login');
-        $user   = UserModel::getUser($login, 'slug');
-        pageError404($user);
+        $user   = self::availability();
 
         $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $user['user_id']);
         $pagesCount = FeedModel::feedCount($this->uid, $sheet, $user['user_id']);
@@ -129,13 +100,13 @@ class ProfileController extends MainController
             'og'         => true,
             'twitter'    => true,
             'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
-            'url'        => getUrlByName('profile.posts', ['login' => $login]),
+            'url'        => getUrlByName('profile.posts', ['login' => $user['user_login']]),
         ];
 
         return agRender(
             '/user/profile/post',
             [
-                'meta'  => meta($m, Translate::get('posts') . ' ' . $login, Translate::get('participant posts') . ' ' . $login),
+                'meta'  => meta($m, Translate::get('posts') . ' ' . $user['user_login'], Translate::get('participant posts') . ' ' . $user['user_login']),
                 'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
@@ -155,15 +126,11 @@ class ProfileController extends MainController
         );
     }
 
-    // Ответы участника
     public function answers()
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-
-        $login  = Request::get('login');
-        $user   = UserModel::getUser($login, 'slug');
-        pageError404($user);
+        $user   = self::availability();
 
         $answers    = AnswerModel::userAnswers($page, $this->limit, $user['user_id'], $this->uid['user_id']);
         $pagesCount = AnswerModel::userAnswersCount($user['user_id']);
@@ -210,10 +177,7 @@ class ProfileController extends MainController
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-
-        $login  = Request::get('login');
-        $user   = UserModel::getUser($login, 'slug');
-        pageError404($user);
+        $user   = self::availability();
 
         $comments   = CommentModel::userComments($page, $this->limit, $user['user_id'], $this->uid['user_id']);
         $pagesCount = CommentModel::userCommentsCount($user['user_id']);
@@ -255,4 +219,31 @@ class ProfileController extends MainController
             ]
         );
     }
+    
+    public static function availability()
+    {
+        $login  = Request::get('login');
+        $user   = UserModel::getUser($login, 'slug');
+        pageError404($user);
+
+        if ($user['user_ban_list'] == 1) {
+            Request::getHead()->addMeta('robots', 'noindex');
+        }
+
+        if (!isset($_SESSION['usernumbers'])) {
+            $_SESSION['usernumbers'] = [];
+        }
+
+        if (!isset($_SESSION['usernumbers'][$user['user_id']])) {
+            UserModel::userHits($user['user_id']);
+            $_SESSION['usernumbers'][$user['user_id']] = $user['user_id'];
+        }
+        
+        if (UserData::checkAdmin()) {
+            Request::getResources()->addBottomScript('/assets/js/admin.js');
+        }
+
+        return $user;
+    }
+    
 }
