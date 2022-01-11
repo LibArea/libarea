@@ -25,10 +25,8 @@ if ($user['user_cover_art'] != 'cover_art.jpeg') {
             <?= $user['user_login']; ?>
             <?php if ($user['user_name']) { ?> / <?= $user['user_name']; ?><?php } ?>
               <?php if ($user['user_up_count'] > 0) { ?>
-                <div class="flex">
-                  <div class="up-id bi bi-heart red-500 mr10 ml20 mb-ml-5 text-sm"></div>
-                  <div class="text-sm gray-400"><?= $user['user_up_count']; ?></div>
-                </div>
+                <i class="up-id bi bi-heart red-500 mr10 ml20 mb-ml-5 text-sm inline"></i>
+                <sup class="text-sm gray-400 inline"><?= $user['user_up_count']; ?></sup>
               <?php } ?>
           </h1>
 

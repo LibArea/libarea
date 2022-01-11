@@ -5,7 +5,7 @@
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
-    <a class="gray" href="<?= getUrlByName('web'); ?>" class="text-sm gray-400"><?= Translate::get('sites'); ?></a>
+    <a class="gray" href="<?= getUrlByName('web'); ?>" class="text-sm gray-400"><?= Translate::get('websites'); ?></a>
 
     <?php if (!empty($data['high_topics'][0])) {
       $site = $data['high_topics'][0];   ?>

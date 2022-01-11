@@ -104,8 +104,8 @@
 
       <?php if ($uid['user_trust_level'] > 2) { ?>
         <?= import('/_block/form/select/content-tl', [
-          'uid' => $uid,
-          'data' => $post['post_tl']
+          'uid'     => $uid,
+          'data'    => $post['post_tl']
         ]); ?>
 
         <?= import('/_block/form/radio', [

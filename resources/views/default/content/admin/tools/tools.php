@@ -42,7 +42,11 @@
   </div>
   
   <div class="mt15 pt15">
-    <?= Translate::get('see more'); ?>: <a title="css" class="p5 pr15 pl15 white white-hover bg-red-500" href="<?= getUrlByName('admin.сss'); ?>">CSS</a>
+    <?= Translate::get('see more'); ?>: 
+    <a title="css" class="p5 pr15 pl15 white white-hover bg-red-500" href="<?= getUrlByName('admin.css'); ?>">
+      <i class="bi bi-brush mr5"></i>
+      CSS
+    </a>
   </div>
 </div>
 </main>

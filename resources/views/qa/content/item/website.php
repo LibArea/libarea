@@ -1,7 +1,7 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white items-center justify-between ml5 pr15 mb15">
 
-    <a href="<?= getUrlByName('web'); ?>"><?= Translate::get('sites'); ?></a> /
+    <a href="<?= getUrlByName('web'); ?>"><?= Translate::get('websites'); ?></a> /
     <span class="red-500"><?= Translate::get('website'); ?></span>
 
     <div class="right">

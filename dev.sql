@@ -394,24 +394,6 @@ CREATE TABLE `messages_dialog` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `moderations`
---
-
-CREATE TABLE `moderations` (
-  `mod_id` int(11) NOT NULL,
-  `mod_moderates_user_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Кто меняет',
-  `mod_moderates_user_tl` int(11) NOT NULL DEFAULT '0' COMMENT 'Модераторы от tl4',
-  `mod_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `mod_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `mod_post_id` int(11) NOT NULL DEFAULT '0' COMMENT 'id поста',
-  `mod_content_id` int(11) NOT NULL DEFAULT '0' COMMENT 'id контента',
-  `mod_action` varchar(255) NOT NULL COMMENT 'deleted, restored и т.д.',
-  `mod_reason` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `notifications`
 --
 
@@ -761,6 +743,68 @@ CREATE TABLE `votes_post` (
 INSERT INTO `votes_post` (`votes_post_id`, `votes_post_item_id`, `votes_post_points`, `votes_post_ip`, `votes_post_user_id`, `votes_post_date`) VALUES
 (1, 2, 1, '127.0.0.1', 1, '2021-08-16 16:29:32');
 
+
+
+CREATE TABLE `navigation` (
+  `nav_id` int(11) NOT NULL,
+  `nav_module` varchar(32) NOT NULL DEFAULT '' COMMENT 'What does (module) refer to',
+  `nav_type` varchar(32) NOT NULL DEFAULT '0' COMMENT 'Menu or navigation ',
+  `nav_radical` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Root, active element (1 active) ',
+  `nav_parent` int(11) NOT NULL DEFAULT '0' COMMENT 'Parent id ',
+  `nav_name` varchar(64) NOT NULL DEFAULT '' COMMENT 'Menu name (lang)',
+  `nav_icon` varchar(64) NOT NULL DEFAULT '' COMMENT 'Icon ',
+  `nav_url_routes` varchar(64) NOT NULL DEFAULT '' COMMENT 'Named Route from Router',
+  `nav_status` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Menu status, 1 active, 0 disabled',
+  `nav_auth_tl` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Visibility. From what level of trust is seen. 0 without registration ',
+  `nav_ordernum` smallint(6) NOT NULL DEFAULT '1' COMMENT 'Sorting the menu',
+  `nav_childs` int(11) NOT NULL DEFAULT '0' COMMENT 'Amount of children'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `navigation` (`nav_id`, `nav_module`, `nav_type`, `nav_radical`, `nav_parent`, `nav_name`, `nav_icon`, `nav_url_routes`, `nav_status`, `nav_auth_tl`, `nav_ordernum`, `nav_childs`) VALUES
+
+(1, 'admin', 'menu', 1, 0, 'admin', 'bi bi-shield-exclamation', 'admin', 0, 5, 1, 0),
+(2, 'admin', 'menu', 1, 0, 'users', 'bi bi-people', 'admin.users', 0, 5, 2, 0),
+(3, 'admin', 'menu', 1,  0, 'logs', 'bi bi-receipt', 'admin.logs', 0, 5, 3, 0),
+
+(4, 'admin', 'menu', 0, 0, 'audits', 'bi bi-flag', '', 0, 5, 4, 2),
+(5, 'admin', 'menu', 0, 4, 'reports', 'bi bi-flag', 'admin.reports', 0, 5, 4, 0),
+(6, 'admin', 'menu', 0, 4, 'audits', 'bi bi-exclamation-diamond', 'admin.audits', 0, 5, 6, 0),
+
+(7, 'admin', 'menu', 0,  0, 'facets', 'bi bi-columns-gap', '', 0, 5, 7, 3),
+(8, 'admin', 'menu', 0,  7, 'topics', 'bi bi-columns-gap', 'admin.topics', 0, 5, 8, 0),
+(9, 'admin', 'menu', 0,  7, 'blogs', 'bi bi-journals', 'admin.blogs', 0, 5, 9, 0),
+(10, 'admin', 'menu', 0,  7, 'sections', 'bi bi-columns-gap', 'admin.sections', 0, 5, 10, 0),
+
+(11, 'admin', 'menu', 0, 0, 'content', 'bi bi-journal-richtext', '', 0, 5, 11, 5),
+(12, 'admin', 'menu', 0, 11, 'posts', 'bi bi-journal-text', 'admin.posts', 0, 5, 12, 0),
+(13, 'admin', 'menu', 0, 11, 'pages', 'bi bi-journal-richtext', 'admin.pages', 0, 5, 13, 0),
+(14, 'admin', 'menu', 0, 11, 'answers', 'bi bi-chat-left-text', 'admin.answers', 0, 5, 14, 0),
+(15, 'admin', 'menu', 0, 11, 'comments', 'bi bi-chat-dots', 'admin.comments', 0, 5, 15, 0),
+(16, 'admin', 'menu', 0, 11, 'websites', 'bi bi-link-45deg', 'admin.sites', 0, 5, 16, 0),
+
+(17, 'admin', 'menu', 0, 0, 'other', 'bi bi-gear', '', 0, 5, 17, 3),
+(18, 'admin', 'menu', 0, 17, 'words', 'bi bi-badge-ad', 'admin.words', 0, 5, 18, 0),
+(19, 'admin', 'menu', 0, 17, 'invites', 'bi bi-person-plus', 'admin.invitations', 0, 5, 19, 0),
+(20, 'admin', 'menu', 0, 17, 'badges', 'bi bi-award', 'admin.badges', 0, 5, 20, 0),
+
+(21, 'admin', 'menu', 0, 0, 'development', 'bi bi-gear', '', 0, 5, 21, 2),
+(22, 'admin', 'menu', 0, 21, 'css', 'bi bi-brush', 'admin.css', 0, 5, 22, 0),
+(23, 'admin', 'menu', 0, 21, 'info', 'bi bi-brush', 'admin.info', 0, 5, 23, 0),
+
+(24, 'admin', 'menu', 1,  0, 'tools', 'bi bi-tools', 'admin.tools', 0, 5, 24, 0),
+(25, 'admin', 'menu', 1,  0, 'navigation', 'bi bi-menu-app', 'admin.navigation', 0, 5, 25, 0);
+
+
+ALTER TABLE `navigation`
+  ADD PRIMARY KEY (`nav_id`),
+  ADD KEY `nav_parent` (`nav_parent`) COMMENT 'pid',
+  ADD KEY `nav_status` (`nav_status`) COMMENT 'status',
+  ADD KEY `nav_ordernum` (`nav_ordernum`) COMMENT 'ordernum',
+  ADD KEY `nav_pidandstatus` (`nav_parent`,`nav_status`) COMMENT 'pidandstatus';
+
+
+ALTER TABLE `navigation`
+  MODIFY `nav_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;  
 --
 -- Индексы сохранённых таблиц
 --
@@ -911,12 +955,6 @@ ALTER TABLE `messages_dialog`
   ADD KEY `dialog_sender_id` (`dialog_sender_id`),
   ADD KEY `dialog_update_time` (`dialog_update_time`),
   ADD KEY `dialog_add_time` (`dialog_add_time`);
-
---
--- Индексы таблицы `moderations`
---
-ALTER TABLE `moderations`
-  ADD PRIMARY KEY (`mod_id`);
 
 --
 -- Индексы таблицы `notifications`
@@ -1124,12 +1162,6 @@ ALTER TABLE `messages`
 --
 ALTER TABLE `messages_dialog`
   MODIFY `dialog_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `moderations`
---
-ALTER TABLE `moderations`
-  MODIFY `mod_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `notifications`

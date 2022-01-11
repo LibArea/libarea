@@ -172,6 +172,11 @@ th { padding: 5px; }
   border-radius: 0.2rem;
 }
 
+.btn-small {
+  padding: 0.15rem 0.35rem;
+  font-size: 0.775rem;
+}
+
 .btn-primary {
   color: $white;
   background-color: #0085ee;
@@ -341,6 +346,8 @@ nav > ul > li > a {
   flex-direction: row;
   align-items: center;
 }
+
+ 
 
 /* Tippy.js - theme: light, */
 .dark .tippy-box[data-theme~="light"] {

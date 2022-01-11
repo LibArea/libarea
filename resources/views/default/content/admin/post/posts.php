@@ -5,15 +5,15 @@
     'uid'   => $uid,
     'menus' => [
       [
-        'id' => 'admin.' . $data['type'] . '.all',
-        'url' => getUrlByName('admin.' . $data['type']),
-        'name' => Translate::get('all'),
-        'icon' => 'bi bi-record-circle'
+        'id'    => 'admin.' . $data['type'] . '.all',
+        'url'   => getUrlByName('admin.' . $data['type']),
+        'name'  => Translate::get('all'),
+        'icon'  => 'bi bi-record-circle'
       ], [
-        'id' => 'admin.' . $data['type'] . '.ban',
-        'url' => getUrlByName('admin.' . $data['type'] . '.ban'),
-        'name' => Translate::get('deleted'),
-        'icon' => 'bi bi-x-circle'
+        'id'    => 'admin.' . $data['type'] . '.ban',
+        'url'   => getUrlByName('admin.' . $data['type'] . '.ban'),
+        'name'  => Translate::get('deleted'),
+        'icon'  => 'bi bi-x-circle'
       ]
     ]
   ]

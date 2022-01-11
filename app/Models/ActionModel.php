@@ -55,59 +55,6 @@ class ActionModel extends MainModel
         DB::run($sql, ['post_id' => $post_id]);
     }
 
-    public static function getModerations()
-    {
-        $sql = "SELECT 
-                    mod_id,
-                    mod_post_id,
-                    mod_moderates_user_id,
-                    mod_created_at,
-                    mod_action,
-                    user_id,
-                    user_login,
-                    user_avatar,
-                    post_id,
-                    post_title,
-                    post_slug,
-                    post_feature
-                        FROM moderations
-                        LEFT JOIN users ON user_id = mod_moderates_user_id
-                        LEFT JOIN posts ON post_id = mod_post_id
-                        ORDER BY mod_id DESC LIMIT 25";
-
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public static function moderationsAdd($data)
-    {
-        $params = [
-            'mod_moderates_user_id' => $data['user_id'],
-            'mod_moderates_user_tl' => $data['user_tl'],
-            'mod_created_at'        => $data['created_at'],
-            'mod_post_id'           => $data['post_id'],
-            'mod_content_id'        => $data['content_id'],
-            'mod_action'            => $data['action'],
-            'mod_reason'            => $data['reason'],
-        ];
-
-        $sql = "INSERT INTO moderations(mod_moderates_user_id, 
-                        mod_moderates_user_tl, 
-                        mod_created_at, 
-                        mod_post_id, 
-                        mod_content_id, 
-                        mod_action, 
-                        mod_reason) 
-                            VALUES(:mod_moderates_user_id, 
-                                :mod_moderates_user_tl, 
-                                :mod_created_at, 
-                                :mod_post_id, 
-                                :mod_content_id, 
-                                :mod_action, 
-                                :mod_reason)";
-
-        return DB::run($sql, $params);
-    }
-
     // Поиск контента для форм
     public static function getSearch($search, $type)
     {

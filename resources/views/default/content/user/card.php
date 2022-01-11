@@ -22,7 +22,7 @@
         <?php } ?>
       </div>
     </div>
-    <div class="gray mt5">
+    <div class="gray mt5 text-sm">
       <?= $user['user_about']; ?>
     </div>
     <?php if (!empty($post['post_id'])) { ?>

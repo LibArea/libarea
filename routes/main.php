@@ -95,8 +95,6 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
  
     Route::get('/all')->controller('HomeController', ['main.all', 'main'])->name('main.all');
     Route::get('/all/page/{page?}')->controller('HomeController', ['main.all', 'main'])->where(['page' => '[0-9]+']);
-    
-    Route::get('/moderations')->controller('ActionController@moderation')->name('moderation');
 Route::endGroup();
 
 Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();

@@ -4,13 +4,13 @@ Route::prefix('/admin');
 Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
 
     Route::get('/')->controller('Admin\HomeController')->name('admin');
-    Route::get('/css')->controller('Admin\HomeController@css')->name('admin.сss');
 
     Route::getType('post');
         Route::get('/test/mail')->controller('Admin\СonsoleController@testMail')->name('admin.test.mail');
         Route::get('/user/ban')->controller('Admin\UsersController@banUser');
         Route::get('/favicon/add')->controller('Admin\WebsController@favicon');
         Route::get('/word/ban')->controller('Admin\WordsController@deletes');
+        Route::get('/navigation/ban')->controller('Admin\NavigationController@visibility');
         Route::get('/audit/status')->controller('Admin\AuditsController@status');
         Route::get('/reports/status')->controller('Admin\ReportsController@status');
         Route::get('/topic/ban')->controller('Admin\FacetsController@deletes');
@@ -20,6 +20,8 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
             Route::get('/badge/user/create')->controller('Admin\BadgesController@addUser')->name('admin.user.badge.create');
             Route::get('/badge/create')->controller('Admin\BadgesController@create')->name('admin.badge.create');
             Route::get('/badge/edit/{id}')->controller('Admin\BadgesController@edit')->where(['id' => '[0-9]+']);
+            Route::get('/navigation/create')->controller('Admin\NavigationController@create')->name('admin.navigation.create');
+            Route::get('/navigation/edit')->controller('Admin\NavigationController@edit', ['edit'])->name('admin.navigation.edit');
             Route::get('/word/create')->controller('Admin\WordsController@create')->name('admin.word.create');
             Route::get('/user/edit/{id}')->controller('Admin\UsersController@edit')->where(['id' => '[0-9]+']);
         Route::endProtect();
@@ -71,12 +73,21 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/badges/{id}/edit')->controller('Admin\BadgesController@editPage', ['badges.edit', 'badges'])->where(['id' => '[0-9]+'])->name('admin.badges.edit');
     Route::get('/badges/user/add/{id}')->controller('Admin\BadgesController@addUserPage', ['add', 'badges'])->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
   
-    Route::get('/webs')->controller('Admin\WebsController', ['sites.all', 'sites'])->name('admin.sites');
-    Route::get('/webs/page/{page?}')->controller('Admin\WebsController', ['sites.all', 'sites'])->where(['page' => '[0-9]+']);
+    Route::get('/sites')->controller('Admin\WebsController', ['sites.all', 'sites'])->name('admin.sites');
+    Route::get('/sites/page/{page?}')->controller('Admin\WebsController', ['sites.all', 'sites'])->where(['page' => '[0-9]+']);
     
     Route::get('/words/add')->controller('Admin\WordsController@addPage', ['add', 'words'])->name('words.add');
     Route::get('/words')->controller('Admin\WordsController', ['words.all', 'words'])->name('admin.words');
     
     Route::get('/reports')->controller('Admin\ReportsController', ['reports.all', 'reports'])->name('admin.reports');
     Route::get('/reports/page/{page?}')->controller('Admin\ReportsController', ['reports.ban', 'reports'])->where(['page' => '[0-9]+']);
+    
+    Route::get('/navigation')->controller('Admin\NavigationController')->name('admin.navigation');
+    Route::get('/navigation/sub/{id}')->controller('Admin\NavigationController@subPage')->where(['id' => '[0-9]+'])->name('admin.navigation.sub');
+    Route::get('/navigation/{id}/add')->controller('Admin\NavigationController@addPage')->where(['id' => '[0-9]+'])->name('admin.navigation.add');
+    
+    Route::get('/logs')->controller('Admin\ReportsController@logs', ['logs.all', 'logs'])->name('admin.logs');
+    Route::get('/css')->controller('Admin\HomeController@css')->name('admin.css');
+    Route::get('/info')->controller('Admin\HomeController@css')->name('admin.info');
+    
 Route::endGroup();

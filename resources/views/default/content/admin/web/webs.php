@@ -68,7 +68,7 @@
     <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
   <?php } ?>
   
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.sites')); ?>
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.webs')); ?>
 </div>
  
 </main>

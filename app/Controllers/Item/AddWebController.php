@@ -46,7 +46,7 @@ class AddWebController extends MainController
         $item_title_url     = Request::getPost('title_url');
         $item_content_url   = Request::getPost('content_url');
 
-        $redirect = getUrlByName('sites.add');
+        $redirect = getUrlByName('site.add');
         Validation::checkUrl($item_url, 'URL', $redirect);
 
         $parse              = parse_url($item_url);

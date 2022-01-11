@@ -53,6 +53,29 @@ class ReportsController extends MainController
         );
     }
 
+    public function logs($sheet, $type)
+    {
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
+
+        Request::getResources()->addBottomScript('/assets/js/admin.js');
+        $pagesCount = 1;
+
+        return agRender(
+            '/admin/report/logs',
+            [
+                'meta'  => meta($m = [], Translate::get('logs')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $page,
+                    'type'          => $type,
+                    'sheet'         => $sheet,
+                ]
+            ]
+        );
+    }
+
     // Ознакомился
     public function status()
     {

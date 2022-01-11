@@ -398,7 +398,6 @@ function addMsg($msg, $class)
     $_SESSION['msg'][] = array($msg, $class);
 }
 
-
 function pageError404($variable)
 {
     if (!$variable) {

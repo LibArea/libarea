@@ -129,12 +129,12 @@ class WebController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('web.topic', ['slug' => $topic['facet_slug']]),
         ];
-        $desc  = Translate::get('sites') . ' ' . Translate::get('by') . ' ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
+        $desc  = Translate::get('websites') . ' ' . Translate::get('by') . ' ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
 
         return agRender(
             '/item/sites',
             [
-                'meta'  => meta($m, Translate::get('sites') . ': ' . $topic['facet_title'], $desc),
+                'meta'  => meta($m, Translate::get('websites') . ': ' . $topic['facet_title'], $desc),
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,

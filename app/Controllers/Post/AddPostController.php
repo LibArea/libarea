@@ -393,8 +393,9 @@ class AddPostController extends MainController
             'action'        => $status,
             'reason'        => '',
         ];
-
-        ActionModel::moderationsAdd($data);
+        
+        // TODO: It will be replaced with a shared user log
+        // ActionModel::logsAdd($data);
 
         return true;
     }

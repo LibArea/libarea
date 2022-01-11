@@ -58,34 +58,10 @@ class ActionController extends MainController
             'action'        => $status,
             'reason'        => '',
         ];
-
-        ActionModel::moderationsAdd($data);
+        // TODO: It will be replaced with a shared user log
+        // ActionModel::logsAdd($data);
 
         return true;
-    }
-
-    // Журнал логирования удалений / восстановлений контента
-    public function moderation()
-    {
-        $moderations_log    = ActionModel::getModerations();
-
-        $result = [];
-        foreach ($moderations_log as $ind => $row) {
-            $row['mod_created_at']  = lang_date($row['mod_created_at']);
-            $result[$ind]           = $row;
-        }
-
-        return agRender(
-            '/moderation/index',
-            [
-                'data' => [
-                    'moderations'   => $result,
-                    'sheet'         => 'moderations',
-                ],
-                'meta'  => meta($m = [], Translate::get('moderation log')),
-                'uid'   => $this->uid,
-            ]
-        );
     }
 
     // Связанные посты и выбор автора

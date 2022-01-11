@@ -23,13 +23,13 @@
   <?php if ($data['alluser']) {  ?>
     <table>
       <thead>
-        <th>N</th>
+        <th>id</th>
         <th><?= Translate::get('avatar'); ?></th>
         <th><?= Translate::get('information'); ?></th>
         <th>IP <?= Translate::get('registrations'); ?></th>
         <th><?= Translate::get('last'); ?></th>
         <th>Ban</th>
-        <th><?= Translate::get('action'); ?></th>
+        <th><?= Translate::get('edit'); ?></th>
       </thead>
       <?php foreach ($data['alluser'] as $user) {  ?>
         <tr>
