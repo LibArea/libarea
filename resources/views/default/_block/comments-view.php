@@ -91,7 +91,7 @@
             </ol>
           <?php } else { ?>
             <div class="gray m5 p5 text-sm">
-              <span class="answ-deletes">~ <?= Translate::get('comment deleted'); ?></span>
+              <span class="answ-deletes">~ <?= Translate::get('comment.deleted'); ?></span>
             </div>
           <?php } ?>
 

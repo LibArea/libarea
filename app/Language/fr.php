@@ -37,14 +37,15 @@ $data = [
     'report'            => 'Reportage',
     'reports'           => 'Rapports',
 
+    'comment.deleted'   => 'Commentaire supprimé',
+    'post.deleted'      => 'Message supprimé',
+    'answer.deleted'    => 'Réponse supprimée',
+
     /* La traduction est en outre complétée en partie */
     'build'             => 'Build',
     'complained about'  => 'complained about ',
     'freely'            => 'Free',
     'useful resources'  => 'Useful Resources',
-    'comment deleted'   => 'Comment has been deleted',
-    'post deleted'      => 'Post deleted',
-    'answer deleted'    => 'Answer deleted',
     'deleted'           => 'Deleted',
     'remote'            => 'Remote',                                 
     'email activated'   => 'Email activated',
@@ -298,15 +299,6 @@ $data = [
     'is this a draft?'      => 'Is this a draft?',
     'default'               => 'Default',
     'qa'                    => 'Q&A',
-    'moderation log'        => 'Moderation log',
-    'no moderation logs'    => 'No logs found in the moderation log',
-    'meta-moderation'       => 'Actions of members and moderators to remove and restore content in the community.',
-    'deleted-post'          => 'Deleted post',
-    'restored-post'         => 'Restored post',
-    'deleted-comment'       => 'Deleted comment',
-    'restored-comment'      => 'Restored comment',
-    'deleted-answer'        => 'Deleted the answer',
-    'restored-answer'       => 'Rebuilt the answer',
 
     /* Настройки */
     'setting profile page'  => 'Setting profile page',

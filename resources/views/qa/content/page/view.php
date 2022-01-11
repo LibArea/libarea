@@ -18,7 +18,7 @@
     </div>
   <?php } else { ?>
     <div class="bg-red-200 p15 center mr10">
-      <?= Translate::get('post deleted'); ?>...
+      <?= Translate::get('post.deleted'); ?>...
     </div>
   <?php } ?>
 </article>

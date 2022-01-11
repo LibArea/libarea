@@ -37,13 +37,18 @@ $data = [
     'whisper'           => 'Шёпот',
     'report'            => 'Флаг',
     'reports'           => 'Флаги',
+     
+   // 'content.deleted'   => '%1$s удален',
+   // 'content.added'     => 'Добавил %1$s',
+   // 'content.restored'  => 'Восстановил %1$s',
+    'content.deleted'   => 'Комментарий удален',
+    'post.deleted'      => 'Пост удален',
+    'answer.deleted'    => 'Ответ удален',
+
     'build'             => 'Собрать',
     'complained about'  => 'пожаловался на',
     'freely'            => 'Свободно',
     'useful resources'  => 'Полезные ресурсы',
-    'comment deleted'   => 'Комментарий удален',
-    'post deleted'      => 'Пост удален',
-    'answer deleted'    => 'Ответ удален',
     'deleted'           => 'Удаленные',
     'remote'            => 'Удаленный',
     'email activated'   => 'Активирован e-mail',
@@ -298,16 +303,6 @@ $data = [
     'fr-language'           => 'Французский (FR)',
     'zh-language'           => 'Китайский (ZH)',
     'md-language'           => 'Молдавский (MD)',
-
-    'moderation log'        => 'Журнал модерации',
-    'no moderation logs'    => 'Логов в журнале модерации не найдено',
-    'meta-moderation'       => 'Действия участников и модераторов по удалению и восстановлению контента в сообществе.',
-    'deleted-post'          => 'Удалил пост',
-    'restored-post'         => 'Восстановил пост',
-    'deleted-comment'       => 'Удалил комментарий',
-    'restored-comment'      => 'Восстановил комментарий',
-    'deleted-answer'        => 'Удалил ответ',
-    'restored-answer'       => 'Восстановил ответ',
 
     /* Настройки */
     'setting profile page'  => 'Страница настройки профиля',

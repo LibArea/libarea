@@ -1,56 +1,3 @@
-<?php 
-$result = [
-     [
-     'name' => 'ИМЯ1',
-     'int_value' => null,
-     'str_value' => 'Title',
-     'bool_value' => null,
-     'float_value' => null,
-     'description' => 'Titl1111111111'
-     ],
-     [
-     'name' => 'ИМЯ2',
-     'int_value' => 15,
-     'str_value' => null,
-     'bool_value' => null,
-     'float_value' => null,
-     'description' => 'Кол22222222222'
-     ],
-     [
-     'name' => 'ИМЯ3',
-     'int_value' => 111,
-     'str_value' => 22,
-     'bool_value' => 322,
-     'float_value' => 443,
-     'description' => 'Кол333333333'
-     ],
- ];
-
-$param = [];
-foreach($result as $res) {
-   $fun = function() use ($res) {
-
-    if (!is_null($res['int_value'])){  return (int) $res['int_value']; }
-
-    if (!is_null($res['str_value'])){  return (string) $res['str_value']; }
-    
-    if (!is_null($res['bool_value'])){  return (bool) $res['bool_value']; }
-
-    if (!is_null($res['float_value'])){  return (float) $res['float_value']; }
-
-    return null;
-   };
-    $param[$res['name']]['value'] = $fun();
-    $param[$res['name']]['description'] =  $res['description'];
-
-}
-
- print_r($param);
- 
- ?>
-
-
-
 <?php $page = $data['page']; ?>
 </div>
 <article class="page<?php if ($page['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
@@ -71,7 +18,7 @@ foreach($result as $res) {
     </div>
   <?php } else { ?>
     <div class="bg-red-200 p15 center mr10">
-      <?= Translate::get('post deleted'); ?>...
+      <?= Translate::get('post.deleted'); ?>...
     </div>
   <?php } ?>
 </article>

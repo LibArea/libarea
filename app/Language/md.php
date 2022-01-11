@@ -23,6 +23,11 @@ $data = [
     'whisper'           => 'șoaptă',
     'report'            => 'Steag',
     'reports'           => 'Steaguri',
+    
+    'comment.deleted'   => 'Comentariul a fost șters',
+    'post.deleted'      => 'Postarea a fost ștearsă',
+    'answer.deleted'    => 'Răspunsul a fost șters',
+    
     'build'             => 'Construiește',
     'complained about'  => 'S-a plâns',
     'understands'       => 'Înțelege',
@@ -30,9 +35,6 @@ $data = [
     'create account'    => 'Creați un cont',
     'not registered'    => 'Postează, răspunde, comentează... <br>Nu v-ați înregistrat încă',
     'useful resources'  => 'Resurse utile',
-    'comment deleted'   => 'Comentariul a fost șters',
-    'post deleted'      => 'Postarea a fost ștearsă',
-    'answer deleted'    => 'Răspunsul a fost șters',
     'necessarily'       => 'Necesar pentru a completa',
     'deleted'           => 'Sters',
     'remote'            => 'Remote',    
@@ -285,15 +287,6 @@ $data = [
     'raise'                 => 'Ridica',
     'default'               => 'Mod implicit',
     'qa'                    => 'Intrebari si raspunsuri',
-    'moderation log'        => 'Jurnal de moderare',
-    'no moderation logs'    => 'Nu s-au găsit jurnale în jurnalul de moderare',
-    'meta-moderation'       => 'Acțiuni ale membrilor și moderatorilor pentru eliminarea și restabilirea conținutului din comunitate.',
-    'deleted-post'          => 'Postare ștearsă',
-    'restored-post'         => 'Postare restaurată',
-    'deleted-comment'       => 'Comentariu șters',
-    'restored-comment'      => 'Comentariu restaurat',
-    'deleted-answer'        => 'Răspunsul a fost șters',
-    'restored-answer'       => 'Restaurați răspunsul',
 
     /* web */
     'news & media'      => 'Știri și media',
