@@ -12,24 +12,24 @@ class SendEmail
     {
         $uid    = UserData::getUid();
         $user   = UserModel::getUser($user_id, 'id');
-        
+
         require_once __DIR__ . '/../Language/mail/' . $uid['user_lang'] . '.php';
-        
+
         if (is_null($user_id)) {
             return false;
         }
-        
+
         if ($type == 'appealed') {
             $setting = SettingModel::getNotifications($user_id);
             if ($setting['setting_email_appealed'] == 0) {
                 return true;
             }
         }
-        
+
         $text_footer    = sprintf($data['footer'], Config::get('meta.url'));
         $user_email     = $user['user_email'];
         $url            = Config::get('meta.url');
-        
+
         switch ($type) {
             case 'changing.password':
                 $subject    = sprintf($data['changing.password.subject'], Config::get('meta.name'));
@@ -42,20 +42,20 @@ class SendEmail
             case 'activate.email':
                 $subject    = sprintf($data['activate.email.subject'], Config::get('meta.name'));
                 $message    = sprintf($data['activate.email.message'], $url . $variables['link']);
-                break; 
+                break;
             case 'invite.reg':
                 $user_email = $variables['invitation_email'];
                 $subject    = sprintf($data['invite.reg.subject'], Config::get('meta.name'));
                 $message    = sprintf($data['invite.reg.message'], $url . $variables['link']);
                 break;
             default:
+                $user_email = $variables['email'];
                 $subject    = sprintf($data['test.subject'], Config::get('meta.name'));
                 $message    = $data['test.message'];
                 break;
         }
-
         self::send($user_email, $subject, $message . $text_footer);
-        
+
         return true;
     }
 
@@ -84,5 +84,4 @@ class SendEmail
                 ->send();
         }
     }
-    
 }

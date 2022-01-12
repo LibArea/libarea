@@ -44,7 +44,7 @@ class СonsoleController extends MainController
     public static function testMail()
     {
         $email  = Request::getPost('mail');
-        SendEmail::mailText($email, 'admin.test');
+        SendEmail::mailText(1, 'admin.test', ['email' => $email]);
 
         self::consoleRedirect();
     }

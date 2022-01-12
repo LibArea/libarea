@@ -72,13 +72,13 @@ class NavigationController extends MainController
                 $nav_url_routes = strip_tags(Request::getPost('curl' . $id));
                 $navs = NavigationModel::getIdNavigation($id);
                 $data =  [
-                    'nav_id'        => $id,
-                    'nav_name'      => $nav_name,
-                    'nav_ordernum'  => $nav_ordernum,
-                    'nav_url_routes'       => $nav_url_routes,
-                    'nav_status'    => $navs['nav_status'],
-                    'nav_parent'    => $navs['nav_parent'],
-                    'nav_childs'    => $navs['nav_childs'],
+                    'nav_id'            => $id,
+                    'nav_name'          => $nav_name,
+                    'nav_ordernum'      => $nav_ordernum,
+                    'nav_url_routes'    => $nav_url_routes,
+                    'nav_status'        => $navs['nav_status'],
+                    'nav_parent'        => $navs['nav_parent'],
+                    'nav_childs'        => $navs['nav_childs'],
                 ];
                 NavigationModel::edit($data);
             } else {
@@ -145,10 +145,10 @@ class NavigationController extends MainController
                 'meta'  => meta($m = [], Translate::get('add')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'         => 'navigation.add',
-                    'type'          => 'navigation',
-                    'menu'          => $menu,
-                    'parent'        => $parent,
+                    'sheet'     => 'navigation.add',
+                    'type'      => 'navigation',
+                    'menu'      => $menu,
+                    'parent'    => $parent,
                 ]
             ]
         );
@@ -168,15 +168,15 @@ class NavigationController extends MainController
         Validation::Limits($nav_url_routes, Translate::get('URL'), '3', '60', $redirect);
 
         $data = [
-            'nav_module'    => 'admin',
-            'nav_type'      => 'menu',
-            'nav_parent'    => $nav_parent,
-            'nav_name'      => $nav_name,
-            'nav_url_routes'       => $nav_url_routes,
-            'nav_status'    => 0,
-            'nav_auth_tl'   => 5,
-            'nav_ordernum'  => 99,
-            'nav_childs'    => 0,
+            'nav_module'        => 'admin',
+            'nav_type'          => 'menu',
+            'nav_parent'        => $nav_parent,
+            'nav_name'          => $nav_name,
+            'nav_url_routes'    => $nav_url_routes,
+            'nav_status'        => 0,
+            'nav_auth_tl'       => 5,
+            'nav_ordernum'      => 99,
+            'nav_childs'        => 0,
         ];
 
         NavigationModel::add($data);
