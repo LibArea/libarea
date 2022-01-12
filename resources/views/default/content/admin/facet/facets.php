@@ -40,7 +40,7 @@
             <?= $fc['facet_id']; ?>
           </td>
           <td class="center">
-            <?= facet_logo_img($fc['facet_img'], 'max', $fc['facet_title'], 'w64'); ?>
+            <?= facet_logo_img($fc['facet_img'], 'max', $fc['facet_title'], 'w60 h60'); ?>
           </td>
           <td>
             <a class="text-2xl" rel="nofollow noreferrer" href="<?= getUrlByName($url, ['slug' => $fc['facet_slug']]); ?>">

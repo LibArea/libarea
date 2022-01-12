@@ -150,7 +150,7 @@
           <h3 class="uppercase mb5 mt0 font-light text-sm gray"><?= Translate::get('parents'); ?></h3>
           <?php foreach ($data['high_arr'] as $high) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $high['facet_slug']]); ?>">
-              <?= facet_logo_img($high['facet_img'], 'max', $high['facet_title'], 'w24 mr10 br-box-gray'); ?>
+              <?= facet_logo_img($high['facet_img'], 'max', $high['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
               <?= $high['facet_title']; ?>
             </a>
           <?php } ?>
@@ -162,7 +162,7 @@
           <h3 class="uppercase mb5 mt0 font-light text-sm gray"><?= Translate::get('children'); ?></h3>
           <?php foreach ($data['low_arr'] as $sub) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $sub['facet_slug']]); ?>">
-              <?= facet_logo_img($sub['facet_img'], 'max', $sub['facet_title'], 'w24 mr10 br-box-gray'); ?>
+              <?= facet_logo_img($sub['facet_img'], 'max', $sub['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
               <?= $sub['facet_title']; ?>
             </a>
           <?php } ?>
@@ -218,7 +218,7 @@
             <h3 class="uppercase mb5 mt0 font-light text-sm gray"><?= Translate::get('bound (parents)'); ?></h3>
             <?php foreach ($data['high_matching'] as $low_mat) { ?>
               <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $low_mat['facet_slug']]); ?>">
-                <?= facet_logo_img($low_mat['facet_img'], 'max', $low_mat['facet_title'], 'w24 mr10 br-box-gray'); ?>
+                <?= facet_logo_img($low_mat['facet_img'], 'max', $low_mat['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
                 <?= $low_mat['facet_title']; ?>
               </a>
             <?php } ?>

@@ -27,7 +27,7 @@ $facet = $data['facet'] ?? false; ?>
 <body class="p0 m0 black<?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white mt0 mb15">
-    <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl10 h24 mb10 mb-none items-center flex">
+    <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl10 mb10 mb-none items-center flex">
       <?php foreach (Config::get('menu.mobile') as $key => $topic) { ?>
         <a class="mr20 black dark-gray-300 text-xs" href="<?= $topic['url']; ?>">
           <i class="<?= $topic['icon']; ?> mr5"></i>
@@ -36,14 +36,14 @@ $facet = $data['facet'] ?? false; ?>
       <?php } ?>
     </div>
 
-    <div class="col-span-12 mr-auto max-w1240 w-100 pr10 pl10 h44 grid items-center flex justify-between">
+    <div class="col-span-12 mr-auto max-w1240 w-100 pr10 pl10 h50 grid items-center flex justify-between">
       <div class="flex items-center" id="find">
         <ag-menu data-template="one" class="tippy pl0 pr10 none mb-block">
           <div class="relative w-auto">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
          </ag-menu> 
-          <div id="one" style="display: none;" class="box-shadow2 min-w165 z-40 bg-white br-rd3">
+          <div id="one" style="display: none;" class="box-shadow2 z-40 bg-white br-rd3">
             <nav>
               <?= tabs_nav(
                 'menu',
@@ -99,7 +99,7 @@ $facet = $data['facet'] ?? false; ?>
 
             <ag-menu data-template="two" class="tippy pr10 pl10 ml20 mb-ml-10">
               <div class="relative w-auto">
-                <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
+                <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w30 h30 br-rd-50'); ?>
               </div>
             </ag-menu>  
             <div id="two" style="display: none;" class="bg-white br-rd3">

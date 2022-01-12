@@ -120,7 +120,7 @@
             </div>
             <div class="center">
               <a title="<?= $post['user_login']; ?>" href="<?= getUrlByName('profile', ['login' => $post['user_login']]); ?>">
-                <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'w34 br-rd-50'); ?>
+                <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'w30 h30 br-rd-50'); ?>
               </a>
             </div>
           </li>
@@ -131,7 +131,7 @@
             <div class="center">
               <?php if (!empty($data['last_user']['answer_id'])) { ?>
                 <a title="<?= $data['last_user']['user_login']; ?>" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
-                  <?= user_avatar_img($data['last_user']['user_avatar'], 'small', $data['last_user']['user_login'], 'w34 br-rd-50'); ?>
+                  <?= user_avatar_img($data['last_user']['user_avatar'], 'small', $data['last_user']['user_login'], 'w30 h30 br-rd-50'); ?>
                 </a>
               <?php } else { ?>
                 <span class="gray-400 text-sm">—</span>
@@ -242,7 +242,7 @@
           <?php } ?>
         <?php } ?>
         <a class="flex justify-center pt5 pr10 pb5 black dark-gray-300 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-          <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr10 br-box-gray'); ?>
+          <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
           <?= $topic['facet_title']; ?>
           <div class="gray-400 text-sm"><?= $topic['facet_short_description']; ?></div>
         </a>

@@ -17,7 +17,7 @@
               <div class="answ-telo">
                 <div class="flex text-sm">
                   <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['user_login']]); ?>">
-                    <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>
+                    <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w20 h20'); ?>
                     <span class="mr5 ml5">
                       <?= $answer['user_login']; ?>
                     </span>
@@ -123,7 +123,7 @@
                 <div class="max-w780">
                   <div class="text-sm flex">
                     <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['user_login']]); ?>">
-                      <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'w18'); ?>
+                      <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'w20 h20'); ?>
                       <span class="mr5 ml5">
                         <?= $comment['user_login']; ?>
                       </span>

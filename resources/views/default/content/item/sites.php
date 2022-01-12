@@ -109,7 +109,7 @@
               <?= $item['item_content_url']; ?>
             </div>
             <div class="flex flex-row gap-2 items-center max-w780">
-              <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'mr5 w18 h18'); ?>
+              <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'mr5 w20 h20'); ?>
               <div class="green-600 text-sm">
                 <?= $item['item_url_domain']; ?>
                 <?php if ($item['item_github_url']) { ?>

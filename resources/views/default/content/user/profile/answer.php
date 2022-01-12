@@ -11,7 +11,7 @@
       <div class="bg-white br-rd5 br-box-gray p15">
         <div class="text-sm mb5">
           <a class="gray" href="<?= getUrlByName('profile', ['login' => $answer['user_login']]); ?>">
-            <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 mr5'); ?>
+            <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w20 h20 mr5'); ?>
             <?= $answer['user_login']; ?>
           </a>
           <span class="mr5 ml5 gray-400 lowercase">

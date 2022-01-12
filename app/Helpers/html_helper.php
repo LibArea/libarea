@@ -73,10 +73,10 @@ function post_img($file, $alt, $style, $type)
 function website_img($domain, $type, $alt, $css = '')
 {
     $path = AG_PATH_FAVICONS;
-    $width = 'w18';
+    $w_h = 'w20 h20';
     if ($type == 'thumbs') {
         $path  = AG_PATH_THUMBS;
-        $width = 'w200';
+        $w_h = 'w200 h200';
     }
 
     if (file_exists(HLEB_PUBLIC_DIR . $path . $domain . '.png')) {
@@ -84,7 +84,7 @@ function website_img($domain, $type, $alt, $css = '')
         return $img;
     }
 
-    $img = '<img class="mr5 ' . $width . '" src="' . $path . 'no-link.png" alt="' . $alt . '">';
+    $img = '<img class="mr5 ' . $w_h . '" src="' . $path . 'no-link.png" alt="' . $alt . '">';
 
     return $img;
 }

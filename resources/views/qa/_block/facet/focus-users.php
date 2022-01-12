@@ -5,7 +5,7 @@
     foreach ($focus_users as $user) {
       $n++; ?>
       <a class="-mr-1" href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>">
-        <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'w24 br-rd-50'); ?>
+        <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'w30 h30 br-rd-50'); ?>
       </a>
     <?php } ?>
     <?php if ($n > 5) { ?><span class="ml10">...</span><?php } ?>

@@ -32,7 +32,7 @@
       <?php foreach ($data['users'] as $ind => $user) { ?>
         <div class="center inline pr10 pl10 mb20 mb-col-2">
           <a href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>">
-            <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'br-rd-50 w64'); ?>
+            <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'br-rd-50 w60 h60'); ?>
           </a>
           <a class="block black mt5" href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>">
             <?= $user['user_login']; ?>

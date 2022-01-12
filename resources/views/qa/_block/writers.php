@@ -7,7 +7,7 @@
           <span class="block gray lowercase"><?= Translate::get('views'); ?></span>
         </div>
         <div class="p15">
-          <?= user_avatar_img($writer['user_avatar'], 'max', $writer['user_login'], 'w54'); ?>
+          <?= user_avatar_img($writer['user_avatar'], 'max', $writer['user_login'], 'w50 h50'); ?>
         </div>
         <div class="mt10">
           <a href="<?= getUrlByName('profile', ['login' => $writer['user_login']]); ?>"><?= $writer['user_login']; ?></a>

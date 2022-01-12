@@ -20,12 +20,12 @@
           <div class="text-sm flex">
             <?php if ($msg['dialog_sender_id'] == $uid['user_id']) { ?>
               <a href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['user_login']]); ?>">
-                <?= user_avatar_img($msg['msg_to_user']['user_avatar'], 'small', $msg['msg_to_user']['user_login'], 'w18 mr5 ml5'); ?>
+                <?= user_avatar_img($msg['msg_to_user']['user_avatar'], 'small', $msg['msg_to_user']['user_login'], 'w20 h20 mr5 ml5'); ?>
                 <?= $msg['msg_to_user']['user_login']; ?>
               </a>
             <?php } else { ?>
               <a class="mr5" href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['user_login']]); ?>">
-                <?= user_avatar_img($msg['msg_user']['user_avatar'], 'small', $msg['msg_user']['user_login'], 'w18 mr5 ml5'); ?>
+                <?= user_avatar_img($msg['msg_user']['user_avatar'], 'small', $msg['msg_user']['user_login'], 'w20 h20 mr5 ml5'); ?>
                 <?= $msg['msg_user']['user_login']; ?>
               </a>
             <?php } ?>

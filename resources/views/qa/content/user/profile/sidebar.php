@@ -22,9 +22,9 @@
         <?= Translate::get('created by'); ?>
       </h3>
       <?php foreach ($data['blogs'] as $blog) { ?>
-        <div class="w-100 mb-w-100 flex flex-row">
+        <div class="w-100 mb-w-100 mb15 flex flex-row">
           <a title="<?= $blog['facet_title']; ?>" class="mr10" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
-            <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'w64 br-box-gray br-rd-50'); ?>
+            <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'w60 h60 br-box-gray br-rd-50'); ?>
           </a>
           <div class="ml5 w-100">
             <a class="black" title="<?= $blog['facet_title']; ?>" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
@@ -66,7 +66,7 @@
         <?php } ?>
         <div class="text-sm lowercase">
           <a class="gray" href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>">
-            <?= user_avatar_img($user['user_avatar'], 'small', $user['user_login'], 'w18 mr5'); ?>
+            <?= user_avatar_img($user['user_avatar'], 'small', $user['user_login'], 'w20 h20 br-rd-50 mr5'); ?>
             <?= $user['user_login']; ?>
           </a>
           <span class="gray-400 ml5"><?= $post['post_date'] ?></span>
@@ -89,7 +89,7 @@
       <?php foreach ($data['topics'] as  $topic) { ?>
         <div class="mt5 mb5">
           <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>" title="<?= $topic['facet_title']; ?>">
-            <?= facet_logo_img($topic['facet_img'], 'small', $topic['facet_title'], 'w24 h24 mr10'); ?>
+            <?= facet_logo_img($topic['facet_img'], 'small', $topic['facet_title'], 'w30 h30 mr10'); ?>
             <span class="bar-name text-sm"><?= $topic['facet_title']; ?></span>
           </a>
         </div>

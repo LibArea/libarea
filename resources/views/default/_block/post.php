@@ -14,7 +14,7 @@
       <?php } ?>
       <div class="flex mb15 relative">
         <div class="user-card" data-content_id="<?= $post['post_id']; ?>" data-user_id="<?= $post['user_id']; ?>">
-          <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 h44 br-rd-50 mr5'); ?>
+          <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w40 h40 br-rd-50 mr5'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
         <a class="flex black dark-gray-300 flex-center" href="<?= getUrlByName('profile', ['login' => $post['user_login']]); ?>">

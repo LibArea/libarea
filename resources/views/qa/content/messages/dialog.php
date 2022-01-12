@@ -27,7 +27,7 @@
           ?>
           <div class="flex relative">
             <div id="user-card" data-content_id="<?= $key; ?>" data-user_id="<?= $id; ?>">
-              <?= user_avatar_img($ava, 'max', $login, 'br-rd-50 w44 mr5'); ?>
+              <?= user_avatar_img($ava, 'max', $login, 'br-rd-50 w40 h40 mr5'); ?>
               <div id="content_<?= $key; ?>" class="content_<?= $key; ?>"></div>
             </div>
             <a class="flex black dark-gray-300 flex-center" href="<?= getUrlByName('profile', ['login' => $login]); ?>">
@@ -60,7 +60,7 @@
     <?php foreach ($data['dialog'] as $key => $val) { ?>
       <?php if ($val['user_id'] != $uid['user_id']) { ?>
         <div class="flex relative pt5 pb5 items-center hidden">
-          <?= user_avatar_img($val['user_avatar'], 'max', $val['user_login'], 'br-rd-50 w44 mr15'); ?>
+          <?= user_avatar_img($val['user_avatar'], 'max', $val['user_login'], 'br-rd-50 w40 h40 mr15'); ?>
           <a href="<?= getUrlByName('dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['user_login']; ?></a>
         </div> 
       <?php } ?>

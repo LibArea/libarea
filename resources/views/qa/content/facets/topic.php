@@ -112,7 +112,7 @@
           <div class="uppercase gray mt5 mb5"> <?= Translate::get('writers'); ?></div>
           <?php foreach ($data['writers'] as $ind => $row) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $row['user_login']]); ?>">
-              <?= user_avatar_img($row['user_avatar'], 'max', $row['user_login'], 'w24 mr5 br-rd-50'); ?>
+              <?= user_avatar_img($row['user_avatar'], 'max', $row['user_login'], 'w30 h30 mr5 br-rd-50'); ?>
               <span class="ml5"><?= $row['user_login']; ?> (<?= $row['hits_count']; ?>) </span>
             </a>
           <?php } ?>

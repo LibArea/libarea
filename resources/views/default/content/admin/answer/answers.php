@@ -27,7 +27,7 @@
       </a>
       <div id="answer_<?= $answer['answer_id']; ?>">
         <div class="text-sm gray">
-          <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 mr5'); ?>
+          <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w20 h20 mr5'); ?>
           <a class="date mr5" href="<?= getUrlByName('profile', ['login' => $answer['user_login']]); ?>">
             <?= $answer['user_login']; ?>
           </a>

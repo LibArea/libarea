@@ -3,7 +3,7 @@
 
         <div class="w-100 mb20 mb-w-100 flex flex-row">
           <a title="<?= $facet['facet_title']; ?>" class="mr10" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
-            <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'w64 br-box-gray br-rd-50'); ?>
+            <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'w60 h60 br-box-gray br-rd-50'); ?>
           </a>
           <div class="ml5 w-100">
 

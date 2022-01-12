@@ -23,14 +23,14 @@
 <body class="<?= $css; ?><?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white box-shadow mt0 mb15 <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
-    <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h44 grid items-center flex justify-between">
+    <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h50 grid items-center flex justify-between">
       <div class="flex items-center">
         <ag-menu data-template="one" class="tippy pl0 pr10 none mb-block">
           <div class="relative w-auto">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
          </ag-menu> 
-          <div id="one" style="display: none;" class="box-shadow2 min-w165 z-40 bg-white br-rd3">
+          <div id="one" style="display: none;" class="box-shadow2 z-40 bg-white br-rd3">
             <nav>
               <?= tabs_nav(
                 'menu',
@@ -96,7 +96,7 @@
 
             <ag-menu data-template="two" class="tippy pr10 pl0 ml20 mb-ml-10">
               <div class="relative w-auto">
-                <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
+                <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w30 h30 br-rd-50'); ?>
               </div>
             </ag-menu>  
             <div id="two" style="display: none;" class="bg-white br-rd3">

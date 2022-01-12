@@ -2,7 +2,7 @@
   <div class="bg-white br-rd5 mb15 br-box-gray p15">
     <h3 class="uppercase mb5 mt0 font-light text-sm gray"><?= Translate::get('created by'); ?></h3>
     <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['user_login']]); ?>" title="<?= $data['user']['user_login']; ?>" >
-      <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'w24 mr10'); ?>
+      <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'w30 h30 mr10'); ?>
       <?= $data['user']['user_login']; ?>
     </a>
   </div>

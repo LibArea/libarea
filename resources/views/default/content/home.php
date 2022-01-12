@@ -100,7 +100,7 @@
       ?>
         <div class="flex relative pt5 pb5 items-center justify-between hidden">
           <a class="gray-600" href="<?= $url; ?>">
-            <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr5'); ?>
+            <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr5'); ?>
             <span class="ml5 middle dark-gray-300"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($uid['user_id'] == $topic['facet_user_id']) { ?>
@@ -123,7 +123,7 @@
       </div>
       <?php foreach (Config::get('facets.default') as $key => $topic) { ?>
         <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $topic['url']; ?>">
-          <img class="w24 h24 mr5 br-box-gray" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
+          <img class="w30 h30 mr5 br-box-gray" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
           <span class="ml5"><?= $topic['name']; ?></span>
         </a>
       <?php } ?>
@@ -136,7 +136,7 @@
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <div class="mt15 mr0 mb15 ml0 text-sm">
             <div class="gray-400">
-              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 h18 br-rd-50 mr5'); ?>
+              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w20 h20 br-rd-50 mr5'); ?>
               <span class="middle lowercase"><?= $answer['answer_date']; ?></span>
             </div>
             <a class="black dark-gray-300" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
