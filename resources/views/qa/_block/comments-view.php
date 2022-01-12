@@ -90,7 +90,7 @@
             </ol>
           <?php } else { ?>
             <div class="gray m5 p5 text-sm">
-              <span class="answ-deletes">~ <?= Translate::get('comment.deleted'); ?></span>
+              ~ <?= sprintf(Translate::get('content.deleted'), Translate::get('comment')); ?>
             </div>
           <?php } ?>
 

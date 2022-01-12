@@ -80,14 +80,15 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/words')->controller('Admin\WordsController', ['words.all', 'words'])->name('admin.words');
     
     Route::get('/reports')->controller('Admin\ReportsController', ['reports.all', 'reports'])->name('admin.reports');
-    Route::get('/reports/page/{page?}')->controller('Admin\ReportsController', ['reports.ban', 'reports'])->where(['page' => '[0-9]+']);
+    Route::get('/reports/page/{page?}')->controller('Admin\ReportsController', ['reports.all', 'reports'])->where(['page' => '[0-9]+']);
     
     Route::get('/navigation')->controller('Admin\NavigationController')->name('admin.navigation');
     Route::get('/navigation/sub/{id}')->controller('Admin\NavigationController@subPage')->where(['id' => '[0-9]+'])->name('admin.navigation.sub');
     Route::get('/navigation/{id}/add')->controller('Admin\NavigationController@addPage')->where(['id' => '[0-9]+'])->name('admin.navigation.add');
     
-    Route::get('/logs')->controller('Admin\ReportsController@logs', ['logs.all', 'logs'])->name('admin.logs');
     Route::get('/css')->controller('Admin\HomeController@css')->name('admin.css');
     Route::get('/info')->controller('Admin\HomeController@css')->name('admin.info');
     
+    Route::get('/logs')->controller('Admin\ReportsController@logs', ['logs.all', 'logs'])->name('admin.logs');
+    Route::get('/logs/page/{page?}')->controller('Admin\ReportsController@logs', ['logs.all', 'logs'])->where(['page' => '[0-9]+']);
 Route::endGroup();

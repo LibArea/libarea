@@ -61,18 +61,14 @@ class NotificationsModel extends MainModel
     }
 
     // Отправка
-    public static function send($sender_id, $recipient_id, $action_type, $connection_type, $url, $model_type = 0)
+    public static function send($data)
     {
-        if (!$recipient_id) {
-            return false;
-        }
-
         $params = [
-            'notification_sender_id'        => $sender_id,
-            'notification_recipient_id'     => $recipient_id,
-            'notification_action_type'      => $action_type,
-            'notification_connection_type'  => $connection_type,
-            'notification_url'              => $url,
+            'notification_sender_id'        => $data['sender_id'],
+            'notification_recipient_id'     => $data['recipient_id'],
+            'notification_action_type'      => $data['action_type'],
+            'notification_connection_type'  => $data['connection_type'],
+            'notification_url'              => $data['content_url'],
             'notification_read_flag'        => 0,
         ];
 

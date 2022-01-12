@@ -37,14 +37,10 @@ $data = [
     'whisper'           => 'Шёпот',
     'report'            => 'Флаг',
     'reports'           => 'Флаги',
-     
-   // 'content.deleted'   => '%1$s удален',
-   // 'content.added'     => 'Добавил %1$s',
-   // 'content.restored'  => 'Восстановил %1$s',
-    'content.deleted'   => 'Комментарий удален',
-    'post.deleted'      => 'Пост удален',
-    'answer.deleted'    => 'Ответ удален',
-
+    'content.deleted'   => '%1$s удален',
+    'content.added'     => '%1$s добавлен',
+    'content.restored'  => '%1$s восстановлен',
+    'time'              => 'Время',
     'build'             => 'Собрать',
     'complained about'  => 'пожаловался на',
     'freely'            => 'Свободно',

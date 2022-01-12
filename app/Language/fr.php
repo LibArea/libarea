@@ -36,10 +36,10 @@ $data = [
     'whisper'           => 'Chuchotement',
     'report'            => 'Reportage',
     'reports'           => 'Rapports',
-
-    'comment.deleted'   => 'Commentaire supprimé',
-    'post.deleted'      => 'Message supprimé',
-    'answer.deleted'    => 'Réponse supprimée',
+    'content.deleted'   => '%1$s supprimé',
+    'content.added'     => '%1$s ajoutée',
+    'content.restored'  => '%1$s restauré',
+    'time'              => 'Temps',
 
     /* La traduction est en outre complétée en partie */
     'build'             => 'Build',

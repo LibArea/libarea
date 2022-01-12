@@ -743,7 +743,9 @@ CREATE TABLE `votes_post` (
 INSERT INTO `votes_post` (`votes_post_id`, `votes_post_item_id`, `votes_post_points`, `votes_post_ip`, `votes_post_user_id`, `votes_post_date`) VALUES
 (1, 2, 1, '127.0.0.1', 1, '2021-08-16 16:29:32');
 
-
+--
+-- Структура таблицы, дамп данных (и индексы) таблицы `navigation`
+--
 
 CREATE TABLE `navigation` (
   `nav_id` int(11) NOT NULL,
@@ -805,6 +807,29 @@ ALTER TABLE `navigation`
 
 ALTER TABLE `navigation`
   MODIFY `nav_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;  
+  
+--
+-- Структура таблицы, дамп данных (и индексы) таблицы `users_action_logs`
+--  
+  
+CREATE TABLE `users_action_logs` (
+  `log_id` int(11) NOT NULL,
+  `log_user_id` int(11) NOT NULL COMMENT 'User ID',
+  `log_user_login` varchar(50) NOT NULL COMMENT 'User login',
+  `log_id_content` int(11) NOT NULL COMMENT 'Content ID',
+  `log_type_content` varchar(32) NOT NULL COMMENT 'Content Type',
+  `log_action_name` varchar(124) NOT NULL COMMENT 'Action name',
+  `log_url_content` varchar(250) NOT NULL COMMENT 'URL content',
+  `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Date added'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `users_action_logs`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `log_user_id` (`log_user_id`) COMMENT 'uid';
+
+ALTER TABLE `users_action_logs`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;  
+  
 --
 -- Индексы сохранённых таблиц
 --

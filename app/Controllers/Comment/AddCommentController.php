@@ -48,10 +48,10 @@ class AddCommentController extends MainController
         // Если пользователь заморожен
         Content::stopContentQuietМode($this->uid['user_limiting_mode']);
 
-        $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+        $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
         // Проверяем длину тела
-        Validation::Limits($comment_content, Translate::get('comments'), '6', '2024', $redirect);
+        Validation::Limits($comment_content, Translate::get('comments'), '6', '2024', $url_post);
 
         // Ограничим добавления комментариев (в день)
         Validation::speedAdd($this->uid, 'comment');
@@ -77,14 +77,20 @@ class AddCommentController extends MainController
         ];
 
         $last_comment_id    = CommentModel::addComment($data);
-        $url_comment        = $redirect . '#comment_' . $last_comment_id;
+        $url_comment        = $url_post . '#comment_' . $last_comment_id;
 
         if ($comment_published == 0) {
             ActionModel::addAudit('comment', $this->uid['user_id'], $last_comment_id);
             // Оповещение админу
-            $type       = 15; // Упоминания в посте  
-            $user_id    = 1;  // админу
-            NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_comment_id, $url_comment, 1);
+            NotificationsModel::send(
+                [
+                    'sender_id'         => $this->uid['user_id'],
+                    'recipient_id'      => 1,  // admin
+                    'action_type'       => 15, // audit 
+                    'connection_type'   => $last_comment_id,
+                    'content_url'       => $url_comment,
+                ]
+            );
         }
 
         // Пересчитываем количество комментариев для поста + 1
@@ -95,8 +101,15 @@ class AddCommentController extends MainController
             // Себе не записываем
             $answ = AnswerModel::getAnswerId($answer_id);
             if ($this->uid['user_id'] != $answ['answer_user_id']) {
-                $type = 4; // Ответ на пост        
-                NotificationsModel::send($this->uid['user_id'], $answ['answer_user_id'], $type, $last_comment_id, $url_comment, 1);
+                NotificationsModel::send(
+                    [
+                        'sender_id'         => $this->uid['user_id'],
+                        'recipient_id'      => $answ['answer_user_id'],
+                        'action_type'       => 4, // comment 
+                        'connection_type'   => $last_comment_id,
+                        'content_url'       => $url_comment,
+                    ]
+                );
             }
         }
 
@@ -107,11 +120,29 @@ class AddCommentController extends MainController
                 if ($user_id == $this->uid['user_id'] || $user_id == $answ['answer_user_id']) {
                     continue;
                 }
-                $type = 12; // Упоминания в комментарии      
-                NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_comment_id, $url_comment, 1);
+                NotificationsModel::send(
+                    [
+                        'sender_id'         => $this->uid['user_id'],
+                        'recipient_id'      => $user_id,
+                        'action_type'       => 12, // Упоминания в комментарии
+                        'connection_type'   => $last_comment_id,
+                        'content_url'       => $url_comment,
+                    ]
+                );
                 SendEmail::mailText($user_id, 'appealed');
             }
         }
+
+        ActionModel::addLogs(
+            [
+                'user_id'           => $this->uid['user_id'],
+                'user_login'        => $this->uid['user_login'],
+                'log_id_content'    => $last_comment_id,
+                'log_type_content'  => 'comment',
+                'log_action_name'   => 'content.added',
+                'log_url_content'   => $url_comment,
+            ]
+        );
 
         redirect($url_comment);
     }

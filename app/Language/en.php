@@ -35,11 +35,10 @@ $data = [
     'whisper'           => 'Whisper',
     'report'            => 'Report',
     'reports'           => 'Reports',
-
-    'comment.deleted'   => 'Comment has been deleted',
-    'post.deleted'      => 'Post deleted',
-    'answer.deleted'    => 'Answer deleted',
-
+    'content.deleted'   => '%1$s deleted',
+    'content.added'     => '%1$s added',
+    'content.restored'  => '%1$s restored',
+    'time'              => 'Time',
     'build'             => 'Build',
     'complained about'  => 'complained about ',
     'freely'            => 'Free',

@@ -42,9 +42,15 @@ class ReportController extends MainController
 
         // Оповещение админу
         // Admin notification 
-        $type = 20;     // Система флагов  
-        $user_id  = 1;  // админу        
-        NotificationsModel::send($this->uid['user_id'], $user_id, $type, $post_id, $url_report, 1);
+        NotificationsModel::send(
+            [
+                'sender_id'         => $this->uid['user_id'],
+                'recipient_id'      => 1,  // admin
+                'action_type'       => 20, // Система флагов  
+                'connection_type'   => $post_id,
+                'content_url'       => $url_report,
+            ]
+        );
 
         $data = [
             'report_user_id'    => $this->uid['user_id'],

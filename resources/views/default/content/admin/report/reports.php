@@ -16,7 +16,7 @@
         <th><?= Translate::get('information'); ?></th>
         <th><?= Translate::get('saw'); ?></th>
       </thead>
-      <?php foreach ($data['reports'] as $report) {  ?>
+      <?php foreach ($data['reports'] as $report) { ?>
         <tr>
           <td class="center">
             <?= $report['report_id']; ?>

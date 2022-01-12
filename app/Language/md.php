@@ -24,9 +24,10 @@ $data = [
     'report'            => 'Steag',
     'reports'           => 'Steaguri',
     
-    'comment.deleted'   => 'Comentariul a fost șters',
-    'post.deleted'      => 'Postarea a fost ștearsă',
-    'answer.deleted'    => 'Răspunsul a fost șters',
+    'content.deleted'   => '%1$s sters',
+    'content.added'     => '%1$s adăugat',
+    'content.restored'  => '%1$s restaurat',
+    'time'              => 'Timp',
     
     'build'             => 'Construiește',
     'complained about'  => 'S-a plâns',

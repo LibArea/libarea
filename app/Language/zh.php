@@ -36,9 +36,10 @@ $data = [
     'report'            => '报告',
     'reports'           => '報告',
 
-    'comment.deleted'   => '評論已被刪除',
-    'post.deleted'      => '帖子已刪除',
-    'answer.deleted'    => '答案已刪除',
+    'content.deleted'   => '%1$s 已刪除',
+    'content.added'     => '%1$s 添加',
+    'content.restored'  => '%1$s 已恢復',
+    'time'              => '時間',
 
     'build'             => '建造',
     'complained about'  => '抱怨 ',

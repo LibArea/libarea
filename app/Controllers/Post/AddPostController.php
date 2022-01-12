@@ -195,10 +195,15 @@ class AddPostController extends MainController
 
         if ($post_published == 0) {
             ActionModel::addAudit('post', $this->uid['user_id'], $last_post_id);
-            // Оповещение админу
-            $type = 15; // Упоминания в посте  
-            $user_id  = 1; // админу        
-            NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
+            NotificationsModel::send(
+                [
+                    'sender_id'         => $this->uid['user_id'],
+                    'recipient_id'      => 1, // Оповещение админу  
+                    'action_type'       => 15,  // Упоминания в посте 
+                    'connection_type'   => $last_post_id,
+                    'content_url'       => $url_post,
+                ]
+            );
         }
 
         // Получим id блога с формы выбора
@@ -222,8 +227,16 @@ class AddPostController extends MainController
                 if ($user_id == $this->uid['user_id']) {
                     continue;
                 }
-                $type = 10; // Упоминания в посте      
-                NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
+                NotificationsModel::send(
+                    [
+                        'sender_id'         => $this->uid['user_id'],
+                        'recipient_id'      => $user_id,
+                        'action_type'       => 10, // Упоминания в посте 
+                        'connection_type'   => $last_post_id,
+                        'content_url'       => $url_post,
+                    ]
+                );
+               
                 SendEmail::mailText($user_id, 'appealed');
             }
         }
@@ -236,10 +249,20 @@ class AddPostController extends MainController
         }
 
         SubscriptionModel::focus($last_post_id, $this->uid['user_id'], 'post');
+        
+        ActionModel::addLogs(
+            [
+                'user_id'           => $this->uid['user_id'],
+                'user_login'        => $this->uid['user_login'],
+                'log_id_content'    => $last_post_id, 
+                'log_type_content'  => 'post',
+                'log_action_name'   => 'content.added',
+                'log_url_content'   => $url_post,
+            ]
+        );
 
         redirect($url_post);
     }
-
 
     // Добавим пост
     public function createPage()

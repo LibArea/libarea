@@ -136,4 +136,63 @@ class ActionModel extends MainModel
 
         return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];
     }
+    
+    // Get the logs
+    // Получим логи  
+    public static function getLogs($page, $limit)
+    {
+        $start  = ($page - 1) * $limit;
+        $sql = "SELECT 
+                    log_id,
+                    log_user_id,
+                    log_user_login,
+                    log_id_content,
+                    log_type_content,
+                    log_action_name,
+                    log_url_content,
+                    log_date
+                        FROM users_action_logs ORDER BY log_id DESC LIMIT $start, $limit";
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // Get gthe number of records 
+    // Получим количество записей  
+    public static function getLogsCount()
+    {
+        return DB::run("SELECT log_id FROM users_action_logs")->rowCount();
+    }
+    
+    // Let's write the logs
+    // Запишем логи   
+    public static function addLogs($data)
+    {
+        $params = [
+            'log_user_id'       => $data['user_id'],
+            'log_user_login'    => $data['user_login'],
+            'log_id_content'    => $data['log_id_content'],
+            'log_type_content'  => $data['log_type_content'],
+            'log_action_name'   => $data['log_action_name'],
+            'log_url_content'   => $data['log_url_content'],
+            'log_date'          => date("Y-m-d H:i:s"),
+        ];
+
+        $sql = "INSERT INTO users_action_logs(log_user_id, 
+                        log_user_login, 
+                        log_id_content, 
+                        log_type_content, 
+                        log_action_name, 
+                        log_url_content,
+                        log_date) 
+                            VALUES(:log_user_id, 
+                                :log_user_login, 
+                                :log_id_content, 
+                                :log_type_content, 
+                                :log_action_name, 
+                                :log_url_content,
+                                :log_date)";
+
+        return DB::run($sql, $params);
+    }
+  
 }

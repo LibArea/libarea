@@ -6,10 +6,11 @@
     </form>
   </div>
 
+  <div class="bg-white br-box-gray br-rd5 p15">
   <?php if (!empty($data['notifications'])) { ?>
     <?php foreach ($data['notifications'] as  $notif) { ?>
 
-      <div class="br-bottom p5<?php if ($notif['notification_read_flag'] == 0) { ?> bg-gray-200<?php } ?>">
+      <div class="br-bottom p5<?php if ($notif['notification_read_flag'] == 0) { ?> bg-sky-50<?php } ?>">
         <?php if ($notif['notification_action_type'] == 1) { ?>
           <i class="bi bi-envelope middle"></i>
           <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['user_login']]); ?>">
@@ -89,5 +90,6 @@
   <?php } else { ?>
     <?= no_content(Translate::get('no notifications yet'), 'bi bi-info-lg'); ?>
   <?php } ?>
+  </div>
 </main>
 <?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-notifications'), 'uid' => $uid]); ?>

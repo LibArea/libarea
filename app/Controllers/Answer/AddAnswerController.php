@@ -25,42 +25,49 @@ class AddAnswerController extends MainController
 
         $answer_content = $_POST['content']; // для Markdown
 
+        $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+        Validation::Limits($answer_content, Translate::get('bodies'), '6', '5000', $url_post);
+
         // Если пользователь заморожен
         Content::stopContentQuietМode($this->uid['user_limiting_mode']);
-
-        $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Limits($answer_content, Translate::get('bodies'), '6', '5000', $redirect);
 
         // Ограничим добавления ответов (в день)
         Validation::speedAdd($this->uid, 'answer');
 
         // Если контента меньше N и он содержит ссылку 
-        // Оповещение админу
         $answer_published = 1;
         if (!Validation::stopSpam($answer_content, $this->uid['user_id'])) {
             addMsg(Translate::get('content-audit'), 'error');
             $answer_published = 0;
         }
 
-        $answer_content = Content::change($answer_content);
+        $last_answer_id = AnswerModel::addAnswer(
+            [
+                'answer_post_id'    => $post_id,
+                'answer_content'    => Content::change($answer_content),
+                'answer_published'  => $answer_published,
+                'answer_ip'         => Request::getRemoteAddress(),
+                'answer_user_id'    => $this->uid['user_id'],
+            ]
+        );
 
-        $data = [
-            'answer_post_id'    => $post_id,
-            'answer_content'    => $answer_content,
-            'answer_published'  => $answer_published,
-            'answer_ip'         => Request::getRemoteAddress(),
-            'answer_user_id'    => $this->uid['user_id'],
-        ];
+        // Пересчитываем количество ответов для поста + 1
+        PostModel::updateCount($post_id, 'answers');
 
-        $last_id    = AnswerModel::addAnswer($data);
-        $url_answer = $redirect . '#answer_' . $last_id;
+        $url_answer = $url_post . '#answer_' . $last_answer_id;
 
         // Оповещение админу
         if ($answer_published == 0) {
-            ActionModel::addAudit('answer', $this->uid['user_id'], $last_id);
-            $type       = 15; // Упоминания в посте  
-            $user_id    = 1;
-            NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_id, $url_answer, 1);
+            ActionModel::addAudit('answer', $this->uid['user_id'], $last_answer_id);
+            NotificationsModel::send(
+                [
+                    'sender_id'         => $this->uid['user_id'],
+                    'recipient_id'      => 1,  // admin
+                    'action_type'       => 15, // audit 
+                    'connection_type'   => $last_answer_id,
+                    'content_url'       => $url_answer,
+                ]
+            );
         }
 
         // Уведомление (@login)
@@ -70,8 +77,15 @@ class AddAnswerController extends MainController
                 if ($user_id == $this->uid['user_id']) {
                     continue;
                 }
-                $type = 11; // Упоминания в ответе      
-                NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_id, $url_answer, 1);
+                NotificationsModel::send(
+                    [
+                        'sender_id'         => $this->uid['user_id'],
+                        'recipient_id'      => $user_id,
+                        'action_type'       => 11, // Упоминания в ответе (@login) 
+                        'connection_type'   => $last_answer_id,
+                        'content_url'       => $url_answer,
+                    ]
+                );
                 SendEmail::mailText($user_id, 'appealed');
             }
         }
@@ -80,14 +94,29 @@ class AddAnswerController extends MainController
         if ($focus_all = NotificationsModel::getFocusUsersPost($post['post_id'])) {
             foreach ($focus_all as $focus_user) {
                 if ($focus_user['signed_user_id'] != $this->uid['user_id']) {
-                    $type = 3; // Ответ на пост
-                    NotificationsModel::send($this->uid['user_id'], $focus_user['signed_user_id'], $type, $last_id, $url_answer, 1);
+                    NotificationsModel::send(
+                        [
+                            'sender_id'         => $this->uid['user_id'],
+                            'recipient_id'      => $focus_user['signed_user_id'],
+                            'action_type'       => 3, // Ответ на пост
+                            'connection_type'   => $last_answer_id,
+                            'content_url'       => $url_answer,
+                        ]
+                    );
                 }
             }
         }
 
-        // Пересчитываем количество ответов для поста + 1
-        PostModel::updateCount($post_id, 'answers');
+        ActionModel::addLogs(
+            [
+                'user_id'           => $this->uid['user_id'],
+                'user_login'        => $this->uid['user_login'],
+                'log_id_content'    => $last_answer_id,
+                'log_type_content'  => 'answer',
+                'log_action_name'   => 'content.added',
+                'log_url_content'   => $url_answer,
+            ]
+        );
 
         redirect($url_answer);
     }

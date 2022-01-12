@@ -37,7 +37,7 @@
           </div>
         <?php } else { ?>
           <div class="bg-red-200 mb20">
-            ~ <?= Translate::get('comment.deleted'); ?>
+            ~ <?= sprintf(Translate::get('content.deleted'), Translate::get('comment')); ?>
           </div>
         <?php } ?>
       </div>

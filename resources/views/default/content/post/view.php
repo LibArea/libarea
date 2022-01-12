@@ -90,7 +90,7 @@
         <div class="flex flex-row items-center mb20">
           <?php if (!empty($data['blog'])) { ?>
             <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray inline text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
-              <span class="bg-gray-200 pt5 pr10 pb5 pl10 br-rd5">
+              <span class="bg-sky-50 gray pt5 pr10 pb5 pl10 br-rd5">
                 <?= $data['blog'][0]['facet_title']; ?>
               </span>
             </a>
@@ -211,7 +211,7 @@
 
     <?php } else { ?>
       <div class="bg-red-300 p15 center mr10">
-        <?= Translate::get('post.deleted'); ?>...
+        <?= sprintf(Translate::get('content.deleted'), Translate::get('post')); ?>...
       </div>
     <?php } ?>
   </article>

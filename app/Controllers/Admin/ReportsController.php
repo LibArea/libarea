@@ -6,12 +6,12 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
-use App\Models\ReportModel;
+use App\Models\{ReportModel, ActionModel};
 use Translate;
 
 class ReportsController extends MainController
 {
-    protected $limit = 25;
+    protected $limit = 20;
 
     private $uid;
 
@@ -61,6 +61,9 @@ class ReportsController extends MainController
         Request::getResources()->addBottomScript('/assets/js/admin.js');
         $pagesCount = 1;
 
+        $logs       = ActionModel::getLogs($page, $this->limit);
+        $pagesCount = ActionModel::getLogsCount();
+
         return agRender(
             '/admin/report/logs',
             [
@@ -71,6 +74,7 @@ class ReportsController extends MainController
                     'pNum'          => $page,
                     'type'          => $type,
                     'sheet'         => $sheet,
+                    'logs'          => $logs,
                 ]
             ]
         );
