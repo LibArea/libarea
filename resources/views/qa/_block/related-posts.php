@@ -6,7 +6,7 @@
       <div class="mb10 flex">
         <?php if ($number == 'yes') { ?>
           <?php $num++; ?>
-          <div class="flex justify-center bg-sky-50 w21 mr5 br-rd-50">
+          <div class="flex justify-center bg-sky-50 w20 mr5 br-rd-50">
             <span class="gray-400"><?= $num; ?></span>
           </div>
         <?php } ?>

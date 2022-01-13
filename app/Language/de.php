@@ -354,7 +354,7 @@ $data = [
     'login-use-condition'   => 'By continuing, you agree to <a href="/info/privacy">Terms of use</a> site',
     'user-already'          => 'The user is already on the site',
     'invate-to-replay'      => 'You have already sent an invitation to this user',
-    'limit-content-day'     => 'For  %1$s you have reached the limit %2$s for today',
+    'limit.day'             => 'For  %1$s you have reached the limit %2$s for today',
     'limit-add-content-no'  => 'You have reached the limit for adding set on the site',
     'registration by invite' => 'Registration by invite',
     'details are here'      => 'Details here',

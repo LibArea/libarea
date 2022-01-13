@@ -258,7 +258,7 @@ function fetch_search() {
         for (var key in obj) {
           if (obj[key].facet_slug) {
             html += '<a class="sky-500 block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
-            html += '<img class="w21 mr5 br-box-gray" src="' + url + obj[key].facet_img + '">';
+            html += '<img class="w20 mr5 br-box-gray" src="' + url + obj[key].facet_img + '">';
             html += obj[key].facet_title + '</a>';
           }
           if (obj[key].post_id) {

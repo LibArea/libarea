@@ -354,7 +354,7 @@ $data = [
     'login-use-condition'   => '繼續，即表示您同意<a href="/info/privacy">使用條款</a>網站',
     'user-already'          => '該用戶已經在該網站上',
     'invate-to-replay'      => '您已經向該用戶發送了邀請',
-    'limit-content-day'     => '為了  %1$s 你已經達到極限 %2$s 今天',
+    'limit.day'             => '為了  %1$s 你已經達到極限 %2$s 今天',
     'limit-add-content-no'  => '您已達到站點添加集的上限',
     'registration by invite' => '邀請註冊',
     'details are here'      => '詳情在這裡',

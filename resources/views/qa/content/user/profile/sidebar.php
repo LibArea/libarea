@@ -88,7 +88,7 @@
       </h3>
       <?php foreach ($data['topics'] as  $topic) { ?>
         <div class="mt5 mb5">
-          <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>" title="<?= $topic['facet_title']; ?>">
+          <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>" title="<?= $topic['facet_title']; ?>">
             <?= facet_logo_img($topic['facet_img'], 'small', $topic['facet_title'], 'w30 h30 mr10'); ?>
             <span class="bar-name text-sm"><?= $topic['facet_title']; ?></span>
           </a>
