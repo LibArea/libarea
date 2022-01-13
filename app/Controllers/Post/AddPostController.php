@@ -186,17 +186,9 @@ class AddPostController extends MainController
 
         $url_post = getUrlByName('post', ['id' => $last_post_id, 'slug' => $post_slug]);
 
+        // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            ActionModel::addAudit('post', $this->uid['user_id'], $last_post_id);
-            NotificationsModel::send(
-                [
-                    'sender_id'         => $this->uid['user_id'],
-                    'recipient_id'      => 1, // Оповещение админу  
-                    'action_type'       => 15,  // Упоминания в посте 
-                    'connection_type'   => $last_post_id,
-                    'content_url'       => $url_post,
-                ]
-            );
+            ActionModel::addAudit('post', $this->uid['user_id'], $last_post_id, $url_post);
         }
 
         // Получим id блога с формы выбора

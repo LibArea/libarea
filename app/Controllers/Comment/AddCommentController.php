@@ -68,18 +68,9 @@ class AddCommentController extends MainController
         
         $url_comment    = $url_post . '#comment_' . $last_comment_id;
 
-        // Оповещение админу
+        // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            ActionModel::addAudit('comment', $this->uid['user_id'], $last_comment_id);
-            NotificationsModel::send(
-                [
-                    'sender_id'         => $this->uid['user_id'],
-                    'recipient_id'      => 1,  // admin
-                    'action_type'       => 15, // audit 
-                    'connection_type'   => $last_comment_id,
-                    'content_url'       => $url_comment,
-                ]
-            );
+            ActionModel::addAudit('comment', $this->uid['user_id'], $last_comment_id, $url_comment);
         }
 
         // Пересчитываем количество комментариев для поста + 1

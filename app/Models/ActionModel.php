@@ -9,7 +9,7 @@ use PDO;
 
 class ActionModel extends MainModel
 {
-    public static function addAudit($audit_type, $audit_user_id, $audit_content_id)
+    public static function addAudit($audit_type, $audit_user_id, $audit_content_id, $url)
     {
         $params = [
             'audit_type'        => $audit_type,
@@ -20,7 +20,22 @@ class ActionModel extends MainModel
         $sql = "INSERT INTO audits(audit_type, audit_user_id, audit_content_id, audit_read_flag) 
                     VALUES(:audit_type, :audit_user_id, :audit_content_id, 0)";
 
-        return DB::run($sql, $params);
+        DB::run($sql, $params);
+
+        // Send notification type 15 (audit) to administrator (id 1) 
+        // Отправим тип уведомления 15 (аудит) администратору (id 1)
+        (new \App\Models\NotificationsModel())->send(
+            [
+                'sender_id'         => $audit_user_id,
+                'recipient_id'      => 1,  // admin
+                'action_type'       => 15, // audit 
+                'connection_type'   => $audit_content_id,
+                'content_url'       => $url,
+            ]
+
+        );
+
+        return true;
     }
 
     // Получим информацию по контенту в зависимости от типа
@@ -138,14 +153,14 @@ class ActionModel extends MainModel
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // Get gthe number of records 
     // Получим количество записей  
     public static function getLogsCount()
     {
         return DB::run("SELECT log_id FROM users_action_logs")->rowCount();
     }
-    
+
     // Let's write the logs
     // Запишем логи   
     public static function addLogs($data)
@@ -177,5 +192,4 @@ class ActionModel extends MainModel
 
         return DB::run($sql, $params);
     }
-  
 }

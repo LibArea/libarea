@@ -48,19 +48,9 @@ class AddAnswerController extends MainController
 
         $url_answer = $url_post . '#answer_' . $last_answer_id;
 
-        // Notification to the admin
-        // Оповещение админу
+        // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            ActionModel::addAudit('answer', $this->uid['user_id'], $last_answer_id);
-            NotificationsModel::send(
-                [
-                    'sender_id'         => $this->uid['user_id'],
-                    'recipient_id'      => 1,  // admin
-                    'action_type'       => 15, // audit 
-                    'connection_type'   => $last_answer_id,
-                    'content_url'       => $url_answer,
-                ]
-            );
+            ActionModel::addAudit('answer', $this->uid['user_id'], $last_answer_id, $url_answer);
         }
 
         // Уведомление (@login)
