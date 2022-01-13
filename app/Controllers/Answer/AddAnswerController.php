@@ -26,38 +26,31 @@ class AddAnswerController extends MainController
         $answer_content = $_POST['content']; // для Markdown
 
         $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Limits($answer_content, Translate::get('bodies'), '6', '5000', $url_post);
+        Validation::Length($answer_content, Translate::get('bodies'), '6', '5000', $url_post);
 
-        // Если пользователь заморожен
-        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
-
-        // Ограничим добавления ответов (в день)
-        Validation::speedAdd($this->uid, 'answer');
-
-        // Если контента меньше N и он содержит ссылку 
-        $answer_published = 1;
-        if (!Validation::stopSpam($answer_content, $this->uid['user_id'])) {
-            addMsg(Translate::get('content-audit'), 'error');
-            $answer_published = 0;
-        }
+        // We will check for freezing, stop words, the frequency of posting content per day 
+        // Проверим на заморозку, стоп слова, частоту размещения контента в день
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($answer_content, 'answer');     
 
         $last_answer_id = AnswerModel::addAnswer(
             [
                 'answer_post_id'    => $post_id,
                 'answer_content'    => Content::change($answer_content),
-                'answer_published'  => $answer_published,
+                'answer_published'  => ($trigger === false) ? 0 : 1,
                 'answer_ip'         => Request::getRemoteAddress(),
                 'answer_user_id'    => $this->uid['user_id'],
             ]
         );
 
+        // Recalculating the number of responses for the post + 1
         // Пересчитываем количество ответов для поста + 1
         PostModel::updateCount($post_id, 'answers');
 
         $url_answer = $url_post . '#answer_' . $last_answer_id;
 
+        // Notification to the admin
         // Оповещение админу
-        if ($answer_published == 0) {
+        if ($trigger === false) {
             ActionModel::addAudit('answer', $this->uid['user_id'], $last_answer_id);
             NotificationsModel::send(
                 [

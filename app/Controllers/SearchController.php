@@ -30,7 +30,7 @@ class SearchController extends MainController
                 redirect(getUrlByName('search'));
             }
 
-            Validation::Limits($query, Translate::get('too short'), '3', '128', '/search');
+            Validation::Length($query, Translate::get('too short'), '3', '128', '/search');
 
             $qa     = self::searchPosts($query, $type);
             $count  = count($qa);

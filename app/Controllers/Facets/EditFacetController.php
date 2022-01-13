@@ -94,13 +94,13 @@ class EditFacetController extends MainController
             $type       = 'section';
         }
 
-        Validation::charset_slug($facet_slug, 'Slug (url)', $redirect);
-        Validation::Limits($facet_title, Translate::get('title'), '3', '64', $redirect);
-        Validation::Limits($facet_slug, Translate::get('slug'), '3', '43', $redirect);
-        Validation::Limits($facet_seo_title, Translate::get('name SEO'), '4', '225', $redirect);
-        Validation::Limits($facet_description, Translate::get('meta description'), '44', '225', $redirect);
-        Validation::Limits($facet_short_description, Translate::get('short description'), '11', '160', $redirect);
-        Validation::Limits($facet_info, Translate::get('Info'), '14', '5000', $redirect);
+        Validation::Slug($facet_slug, 'Slug (url)', $redirect);
+        Validation::Length($facet_title, Translate::get('title'), '3', '64', $redirect);
+        Validation::Length($facet_slug, Translate::get('slug'), '3', '43', $redirect);
+        Validation::Length($facet_seo_title, Translate::get('name SEO'), '4', '225', $redirect);
+        Validation::Length($facet_description, Translate::get('meta description'), '44', '225', $redirect);
+        Validation::Length($facet_short_description, Translate::get('short description'), '11', '160', $redirect);
+        Validation::Length($facet_info, Translate::get('Info'), '14', '5000', $redirect);
 
         // Запишем img
         $check_img  = $_FILES['images']['name'] ?? null;

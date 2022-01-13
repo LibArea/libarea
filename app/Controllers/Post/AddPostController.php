@@ -36,6 +36,7 @@ class AddPostController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
 
+        // Adding from page topic 
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
         $topic      = FacetModel::getFacet($topic_id, 'id');
@@ -48,8 +49,7 @@ class AddPostController extends MainController
             }
         }
 
-        $puth = '/post/add';
-        if ($type_content == 'page') $puth = '/page/add';
+        $puth = $type_content == 'page' ? '/page/add' : '/post/add';
 
         return agRender(
             $puth,
@@ -66,10 +66,10 @@ class AddPostController extends MainController
         );
     }
 
+    // Add post 
     // Добавим пост
     public function create()
     {
-        // Получаем title и содержание
         $post_title             = Request::getPost('post_title');
         $post_content           = $_POST['content']; // для Markdown
         $post_url               = Request::getPost('post_url');
@@ -84,6 +84,7 @@ class AddPostController extends MainController
 
         $post_fields    = Request::getPost() ?? [];
 
+        // Related posts 
         // Связанные посты
         $json_post  = $post_fields['post_select'] ?? [];
         $arr_post   = json_decode($json_post[0], true);
@@ -104,8 +105,9 @@ class AddPostController extends MainController
             $redirect = getUrlByName('post.add') . '/' . $blog_id;
         }
 
-        // Если пользователь заморожен
-        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
+        // We will check for freezing, stop words, the frequency of posting content per day 
+        // Проверим на заморозку, стоп слова, частоту размещения контента в день
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($post_content, 'post'); 
 
         // Если нет темы
         if (!$topics) {
@@ -113,8 +115,8 @@ class AddPostController extends MainController
             redirect($redirect);
         }
 
-        Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
-        Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
+        Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
+        Validation::Length($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
         if ($post_url) {
 
@@ -130,17 +132,18 @@ class AddPostController extends MainController
             $item = WebModel::getItemOne($post_url_domain, $this->uid['user_id']);
             if (!$item) {
                 // Запишем минимальные данный
-                $data = [
-                    'item_url'          => $item_url,
-                    'item_url_domain'   => $post_url_domain,
-                    'item_title_url'    => $post_title,
-                    'item_content_url'  => Translate::get('description is formed'),
-                    'item_published'    => 0,
-                    'item_user_id'      => $this->uid['user_id'],
-                    'item_type_url'     => 0,
-                    'item_status_url'   => 200,
-                ];
-                WebModel::add($data);
+                WebModel::add(
+                    [
+                        'item_url'          => $item_url,
+                        'item_url_domain'   => $post_url_domain,
+                        'item_title_url'    => $post_title,
+                        'item_content_url'  => Translate::get('description is formed'),
+                        'item_published'    => 0,
+                        'item_user_id'      => $this->uid['user_id'],
+                        'item_type_url'     => 0,
+                        'item_status_url'   => 200,
+                    ]
+                );
             } else {
                 WebModel::addItemCount($post_url_domain);
             }
@@ -152,48 +155,38 @@ class AddPostController extends MainController
             $post_img = UploadImage::cover_post($cover, 0, $redirect, $this->uid['user_id']);
         }
 
-        // Ограничим добавления постов (в день)
-        Validation::speedAdd($this->uid, 'post');
-
         // Получаем SEO поста
         $slug       = new Slug();
         $uri        = $slug->create($post_title);
         $post_slug  = substr($uri, 0, 90);
 
-        // Если контента меньше N и он содержит ссылку 
-        // Оповещение админу
-        $post_published = 1;
-        if (!Validation::stopSpam($post_content, $this->uid['user_id'])) {
-            addMsg(Translate::get('content-audit'), 'error');
-            $post_published = 0;
-        }
+        $last_post_id = PostModel::AddPost(
+            [
+                'post_title'            => $post_title,
+                'post_content'          => Content::change($post_content),
+                'post_content_img'      => $post_img ?? '',
+                'post_thumb_img'        => $og_img ?? '',
+                'post_related'          => $post_related,
+                'post_merged_id'        => $post_merged_id,
+                'post_tl'               => $post_tl ?? 0,
+                'post_slug'             => $post_slug,
+                'post_feature'          => $post_feature,
+                'post_type'             => 'post',
+                'post_translation'      => $post_translation,
+                'post_draft'            => $post_draft,
+                'post_ip'               => Request::getRemoteAddress(),
+                'post_published'        => ($trigger === false) ? 0 : 1,
+                'post_user_id'          => $this->uid['user_id'],
+                'post_url'              => $post_url ?? '',
+                'post_url_domain'       => $post_url_domain ?? '',
+                'post_closed'           => $post_closed,
+                'post_top'              => $post_top,
+            ]
+        );
 
-        $data = [
-            'post_title'            => $post_title,
-            'post_content'          => Content::change($post_content),
-            'post_content_img'      => $post_img ?? '',
-            'post_thumb_img'        => $og_img ?? '',
-            'post_related'          => $post_related,
-            'post_merged_id'        => $post_merged_id,
-            'post_tl'               => $post_tl ?? 0,
-            'post_slug'             => $post_slug,
-            'post_feature'          => $post_feature,
-            'post_type'             => 'post',
-            'post_translation'      => $post_translation,
-            'post_draft'            => $post_draft,
-            'post_ip'               => Request::getRemoteAddress(),
-            'post_published'        => $post_published,
-            'post_user_id'          => $this->uid['user_id'],
-            'post_url'              => $post_url ?? '',
-            'post_url_domain'       => $post_url_domain ?? '',
-            'post_closed'           => $post_closed,
-            'post_top'              => $post_top,
-        ];
+        $url_post = getUrlByName('post', ['id' => $last_post_id, 'slug' => $post_slug]);
 
-        $last_post_id   = PostModel::AddPost($data);
-        $url_post       = getUrlByName('post', ['id' => $last_post_id, 'slug' => $post_slug]);
-
-        if ($post_published == 0) {
+        if ($trigger === false) {
             ActionModel::addAudit('post', $this->uid['user_id'], $last_post_id);
             NotificationsModel::send(
                 [
@@ -209,7 +202,7 @@ class AddPostController extends MainController
         // Получим id блога с формы выбора
         $blog_post  = $post_fields['blog_select'] ?? false;
         if ($blog_post) {
-            $blog       = json_decode($blog_post, true);
+            $blog   = json_decode($blog_post, true);
             $topics = array_merge($blog, $topics);
         }
 
@@ -277,7 +270,7 @@ class AddPostController extends MainController
         $post_fields    = Request::getPost() ?? [];
         $facet_post     = $post_fields['section_select'] ?? [];
         if ($facet_post) {
-            $topics     = json_decode($facet_post, true);
+            $topics = json_decode($facet_post, true);
         }
 
         $blog_post  = $post_fields['blog_select'] ?? false;
@@ -292,9 +285,6 @@ class AddPostController extends MainController
             $redirect = getUrlByName('page.add') . '/' . $blog_id;
         }
 
-        // Если пользователь заморожен
-        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
-
         if ($this->uid['user_trust_level'] < UserData::REGISTERED_ADMIN) {
             $count  = FacetModel::countFacetsUser($this->uid['user_id'], 'blog');
             if (!$count) redirect('/');
@@ -306,11 +296,12 @@ class AddPostController extends MainController
             redirect($redirect);
         }
 
-        Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
-        Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
+        Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
+        Validation::Length($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
-        // Ограничим добавления постов (в день)
-        Validation::speedAdd($this->uid, 'post');
+        // We will check for freezing, stop words, the frequency of posting content per day 
+        // Проверим на заморозку, стоп слова, частоту размещения контента в день
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($post_content, 'page');       
 
         // Получаем SEO поста
         $slug       = new Slug();
@@ -331,7 +322,7 @@ class AddPostController extends MainController
             'post_translation'      => 0,
             'post_draft'            => 0,
             'post_ip'               => Request::getRemoteAddress(),
-            'post_published'        => 1,
+            'post_published'        => ($trigger === false) ? 0 : 1,
             'post_user_id'          => $this->uid['user_id'],
             'post_url'              => '',
             'post_url_domain'       => '',
@@ -352,7 +343,6 @@ class AddPostController extends MainController
 
         redirect($url_post);
     }
-
 
     // Парсинг
     public function grabMeta()

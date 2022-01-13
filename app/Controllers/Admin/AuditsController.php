@@ -62,7 +62,8 @@ class AuditsController extends MainController
         );
     }
 
-    // Восстановление после аудита
+    // Approve audit 
+    // Одобрить аудит
     public function status()
     {
         $st     = Request::getPost('status');

@@ -47,11 +47,11 @@ class SettingController extends MainController
 
         $redirect   = getUrlByName('setting', ['login' => $this->uid['user_login']]);
 
-        Validation::Limits($name, Translate::get('name'), '3', '11', $redirect);
-        Validation::Limits($about, Translate::get('about me'), '0', '255', $redirect);
+        Validation::Length($name, Translate::get('name'), '3', '11', $redirect);
+        Validation::Length($about, Translate::get('about me'), '0', '255', $redirect);
 
         if ($public_email) {
-            Validation::checkEmail($public_email, $redirect);
+            Validation::Email($public_email, $redirect);
         }
 
         $user   = UserModel::getUser($this->uid['user_id'], 'id');
@@ -164,7 +164,7 @@ class SettingController extends MainController
             redirect($redirect);
         }
 
-        Validation::Limits($password2, Translate::get('password'), 8, 32, $redirect);
+        Validation::Length($password2, Translate::get('password'), 8, 32, $redirect);
 
         // Данные участника
         $account    = Request::getSession('account');

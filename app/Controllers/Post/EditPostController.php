@@ -100,7 +100,7 @@ class EditPostController extends MainController
         }
 
         // Если пользователь заморожен
-        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
+        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']); 
 
         $redirect   = getUrlByName('post.edit', ['id' => $post_id]);
         if (!$topics) {
@@ -118,12 +118,12 @@ class EditPostController extends MainController
             }
         }
 
-        Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
+        Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
 
         if ($post_content == '') {
             $post_content = $post['post_content'];
         }
-        Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
+        Validation::Length($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
@@ -231,17 +231,17 @@ class EditPostController extends MainController
             }
         }
 
-        Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
+        Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
 
         if ($post_content == '') {
             $post_content = $post['post_content'];
         }
-        Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
+        Validation::Length($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
         if ($post_slug == '') {
             $post_slug = $post['post_slug'];
         }
-        Validation::Limits($post_slug, Translate::get('the post'), '6', '25000', $redirect);
+        Validation::Length($post_slug, Translate::get('the post'), '6', '25000', $redirect);
 
         $data = [
             'post_id'               => $post['post_id'],

@@ -44,19 +44,23 @@ class AuditModel extends MainModel
         return DB::run($sql)->rowCount();
     }
 
-    // Восстановление
+    // Let's approve the audit 
+    // Одобрим аудит
     public static function recoveryAudit($id, $type)
     {
         $sql = "UPDATE " . $type . "s SET " . $type . "_published = 1 WHERE " . $type . "_id = :id";
 
         DB::run($sql, ['id' => $id]);
 
+        self::auditAuthor($id);
+
         self::auditReadFlag($id);
 
         return true;
     }
 
-
+    // change the flag to approved 
+    // меняем флаг на одобрен
     public static function auditReadFlag($id)
     {
         $sql = "UPDATE audits
@@ -64,5 +68,36 @@ class AuditModel extends MainModel
                         WHERE audit_content_id = :id";
 
         return  DB::run($sql, ['id' => $id]);
+    }
+    
+    // Get user id and remove mute mode 
+    // Получаем id пользователя и убираем немой режим
+    public static function auditAuthor($id)
+    {
+        $sql = "SELECT audit_user_id FROM audits WHERE audit_content_id = :id";
+
+        $user_id = DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
+
+        $usql = "UPDATE users SET user_limiting_mode = 0 WHERE user_id = :user_id";
+        
+        return  DB::run($usql, ['user_id' => $user_id['audit_user_id']]);
+    }
+    
+    // Total contribution of the participant
+    // Общий вклад участника
+    public static function ceneralContributionCount($user_id)
+    {
+        $sql = "SELECT
+                (SELECT COUNT(*) FROM 
+                    posts WHERE post_user_id = :user_id and post_is_deleted = 0) AS t1Count,
+                (SELECT COUNT(*) FROM 
+                    answers WHERE answer_user_id = :user_id and answer_is_deleted = 0) AS t2Count,
+                (SELECT COUNT(*) FROM 
+                    comments WHERE comment_user_id = :user_id and comment_is_deleted = 0) AS t3Count";
+
+        $result = DB::run($sql, ['user_id' => $user_id]);
+        $lists  = $result->fetch(PDO::FETCH_ASSOC);
+
+        return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];
     }
 }

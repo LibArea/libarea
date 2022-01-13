@@ -47,7 +47,7 @@ class AddWebController extends MainController
         $item_content_url   = Request::getPost('content_url');
 
         $redirect = getUrlByName('site.add');
-        Validation::checkUrl($item_url, 'URL', $redirect);
+        Validation::Url($item_url, 'URL', $redirect);
 
         $parse              = parse_url($item_url);
         $url_domain         = $parse['host'];
@@ -61,8 +61,8 @@ class AddWebController extends MainController
             redirect($redirect);
         }
 
-        Validation::Limits($item_title_url, Translate::get('title'), '14', '250', $redirect);
-        Validation::Limits($item_content_url, Translate::get('description'), '24', '1500', $redirect);
+        Validation::Length($item_title_url, Translate::get('title'), '14', '250', $redirect);
+        Validation::Length($item_content_url, Translate::get('description'), '24', '1500', $redirect);
 
         $data = [
             'item_url'          => $item_url,

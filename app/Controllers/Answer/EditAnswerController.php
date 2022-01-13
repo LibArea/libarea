@@ -58,17 +58,16 @@ class EditAnswerController extends MainController
         $post           = PostModel::getPost($post_id, 'id', $this->uid);
 
         // Если пользователь заморожен
-        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
-
-        $answer = AnswerModel::getAnswerId($answer_id);
+        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']); 
 
         // Проверка доступа
+        $answer = AnswerModel::getAnswerId($answer_id);
         if (!accessСheck($answer, 'answer', $this->uid, 0, 0)) {
             redirect('/');
         }
 
         $url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Limits($answer_content, Translate::get('bodies'), '6', '5000', '/' . $url);
+        Validation::Length($answer_content, Translate::get('bodies'), '6', '5000', '/' . $url);
 
         $answer_content = Content::change($answer_content);
 

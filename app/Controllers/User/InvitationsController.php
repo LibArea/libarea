@@ -58,7 +58,7 @@ class InvitationsController extends MainController
 
         $redirect = getUrlByName('invitations');
 
-        Validation::checkEmail($invitation_email, $redirect);
+        Validation::Email($invitation_email, $redirect);
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['user_email'])) {

@@ -82,9 +82,9 @@ class BadgesController extends MainController
         $badge_icon          = $_POST['badge_icon']; // для Markdown
 
         $redirect = getUrlByName('admin.badges');
-        Validation::Limits($badge_title, Translate::get('title'), '4', '25', $redirect);
-        Validation::Limits($badge_description, Translate::get('description'), '12', '250', $redirect);
-        Validation::Limits($badge_icon, Translate::get('icon'), '12', '250', $redirect);
+        Validation::Length($badge_title, Translate::get('title'), '4', '25', $redirect);
+        Validation::Length($badge_description, Translate::get('description'), '12', '250', $redirect);
+        Validation::Length($badge_icon, Translate::get('icon'), '12', '250', $redirect);
 
         $data = [
             'badge_title'       => $badge_title,
@@ -151,9 +151,9 @@ class BadgesController extends MainController
         $badge_description   = Request::getPost('badge_description');
         $badge_icon          = $_POST['badge_icon']; // для Markdown
 
-        Validation::Limits($badge_title, Translate::get('title'), '4', '25', $redirect);
-        Validation::Limits($badge_description, Translate::get('description'), '12', '250', $redirect);
-        Validation::Limits($badge_icon, Translate::get('icon'), '12', '250', $redirect);
+        Validation::Length($badge_title, Translate::get('title'), '4', '25', $redirect);
+        Validation::Length($badge_description, Translate::get('description'), '12', '250', $redirect);
+        Validation::Length($badge_icon, Translate::get('icon'), '12', '250', $redirect);
 
         $data = [
             'badge_id'          => $badge_id,

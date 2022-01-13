@@ -45,7 +45,7 @@ class MessagesController extends MainController
                     $row['unread']   = $row['dialog_recipient_unread'];
                     $row['count']    = $row['dialog_recipient_count'];
 
-                    // Отправляющий  AND $row['dialog_sender_count']    
+                // Отправляющий  AND $row['dialog_sender_count']    
                 } else if ($row['dialog_sender_id'] == $this->uid['user_id']) {
                     $row['unread']   = $row['dialog_sender_unread'];
                     $row['count']    = $row['dialog_sender_count'];
@@ -77,9 +77,8 @@ class MessagesController extends MainController
 
     public function dialog()
     {
-        // Данные участника
-        $id     = Request::getInt('id');
 
+        $id = Request::getInt('id');
         if (!$dialog = MessagesModel::getDialogById($id)) {
             addMsg(Translate::get('the dialog does not exist'), 'error');
             redirect(getUrlByName('messages', ['login' => $this->uid['user_login']]));
@@ -90,7 +89,7 @@ class MessagesController extends MainController
             redirect(getUrlByName('messages', ['login' => $this->uid['user_login']]));
         }
 
-        // обновляем просмотры и т.д.
+        // update views, etc. 
         MessagesModel::setMessageRead($id, $this->uid['user_id']);
         // dialog_recipient_unread
         if ($list = MessagesModel::getMessageByDialogId($id)) {
@@ -132,7 +131,8 @@ class MessagesController extends MainController
         );
     }
 
-    // Форма отправки из профиля
+    // Form for sending personal messages from the profile 
+    // Форма отправки личных сообщений из профиля
     public function messages()
     {
         $login      = Request::get('login');
@@ -141,9 +141,9 @@ class MessagesController extends MainController
             redirect('/');
         }
 
-        // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ЛС
-        $add_pm  = Validation::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm'));
-        if ($add_pm === false) {
+        // We will limit the sending of PMs if the level of trust is low
+        // Ограничим отправк ЛС, если уровень доверия низок
+        if (Config::get('general.tl_add_pm') > $this->uid['user_trust_level']) {
             redirect('/');
         }
 
@@ -161,29 +161,29 @@ class MessagesController extends MainController
         );
     }
 
+    // Sending a private message to a user 
     // Отправка сообщения участнику
     public function send()
     {
-        // Данные участника
         $content        = Request::getPost('content');
         $recipient_id   = Request::getPost('recipient');
 
-        // Если пользователь заморожен
-        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
-
-        // Введите содержание сообщения
+        // If the user is frozen and if the private message is empty
+        // Если пользователь заморожен и если личное сообщение пустое
+        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']); 
         if ($content == '') {
             addMsg(Translate::get('enter content'), 'error');
             redirect(getUrlByName('messages', ['login' => $this->uid['user_login']]));
         }
 
-        // Этого пользователь не существует
+        // If the user does not exist 
+        // Если пользователя не существует
         $user  = UserModel::getUser($this->uid['user_id'], 'id');
         pageRedirection($user, getUrlByName('messages', ['login' => $this->uid['user_login']]));
 
-        // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ЛС
-        $add_pm  = Validation::accessPm($this->uid, $recipient_id, Config::get('general.tl_add_pm'));
-        if ($add_pm === false) {
+        // We will limit the sending of PMs if the level of trust is low
+        // Ограничим отправк ЛС, если уровень доверия низок
+        if (Config::get('general.tl_add_pm') > $this->uid['user_trust_level']) {
             redirect('/');
         }
 

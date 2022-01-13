@@ -4,42 +4,42 @@ use App\Models\{ContentModel, ActionModel};
 
 class Validation
 {
-    public static function checkEmail($email, $redirect)
+    public static function Email($email, $redirect)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            addMsg(Translate::get('invalid email address'), 'error');
+            addMsg(Translate::get('email.correctness'), 'error');
             redirect($redirect);
         }
         return true;
     }
 
-    public static function Limits($name, $content, $min, $max, $redirect)
+    public static function Length($name, $content, $min, $max, $redirect)
     {
         if (self::getStrlen($name) < $min || self::getStrlen($name) > $max) {
 
-            $text = sprintf(Translate::get('text-string-length'), '«' . $content . '»', $min, $max);
+            $text = sprintf(Translate::get('string.length'), '«' . $content . '»', $min, $max);
             addMsg($text, 'error');
             redirect($redirect);
         }
         return true;
     }
 
-    public static function checkUrl($url, $text, $redirect)
+    public static function Url($url, $text, $redirect)
     {
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
 
-            $text = sprintf(Translate::get('text-check-url'), '«' . $url . '»');
+            $text = sprintf(Translate::get('url.correctness'), '«' . $url . '»');
             addMsg($text, 'error');
             redirect($redirect);
         }
         return true;
     }
 
-    public static function charset_slug($slug, $text, $redirect)
+    public static function Slug($slug, $text, $redirect)
     {
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $slug)) {
 
-            $text = sprintf(Translate::get('text-charset-slug'), '«' . $text . '»');
+            $text = sprintf(Translate::get('slug.correctness'), '«' . $text . '»');
             addMsg($text, 'error');
             redirect($redirect);
         }
@@ -70,110 +70,4 @@ class Validation
         return true;
     }
 
-    // Отправки личных сообщений (ЛС)
-    // $uid - кто отправляет
-    // $user_id - кому
-    // $add_tl -  с какого уровня доверия
-    public static function accessPm($uid, $user_id, $add_tl)
-    {
-        // Запретим отправку себе
-        if ($uid['user_id'] == $user_id) {
-            return false;
-        }
-
-        // Если уровень доверия меньше установленного
-        if ($add_tl > $uid['user_trust_level']) {
-            return false;
-        }
-
-        return true;
-    }
-
-    // Частота добавления контента в день
-    public static function speedAdd($uid, $type)
-    {
-        $number =  ContentModel::getSpeed($uid['user_id'], $type);
-        if ($uid['user_trust_level'] >= 0 && $uid['user_trust_level'] <= 2) {
-
-            if ($number >= Config::get('trust-levels.tl_' . $uid['user_trust_level'] . '_add_' . $type)) {
-                self::inform($uid['user_trust_level'], $type . 's');
-            }
-        }
-
-        if ($number > Config::get('trust-levels.all_limit')) {
-            self::inform($uid['user_trust_level'], 'messages');
-        }
-
-        return true;
-    }
-
-    public static function inform($tl, $content)
-    {
-        $text = sprintf(Translate::get('limit-content-day'), 'TL' . $tl, '«' . Translate::get($content) . '»');
-        addMsg($text, 'error');
-        redirect('/');
-    }
-
-    public static function stopSpam($content, $user_id)
-    {
-        // TODO: лимиты возможно в конфиг
-        // Если ссылка
-        if (self::estimationUrl($content)) {
-            $all_count = ActionModel::ceneralContributionCount($user_id);
-            if ($all_count < 2) {
-                ActionModel::addLimitingMode($user_id);
-                return false;
-            }
-        }
-
-        // Если в стоп листе
-        if (self::stopWordsExists($content)) {
-            // Если меньше 2 ответов и если контент попал в стоп лист, то заморозка
-            $all_count = ActionModel::ceneralContributionCount($user_id);
-            if ($all_count < 2) {
-                ActionModel::addLimitingMode($user_id);
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    // Для тригера URL
-    public static function estimationUrl($content)
-    {
-        $regex = '/(?<!!!\[\]\(|"|\'|\=|\)|>)(https?:\/\/[-a-zA-Z0-9@:;%_\+.~#?\&\/\/=!]+)(?!"|\'|\)|>)/i';
-        if ($info = preg_match($regex, $content, $matches)) {
-            return  $matches[1];
-        }
-        return false;
-    }
-
-    // Аудит
-    public static function stopWordsExists($content, $replace = '*')
-    {
-        $stop_words = ContentModel::getStopWords();
-
-        foreach ($stop_words as $word) {
-
-            $word = trim($word['stop_word']);
-
-            if (!$word) {
-                continue;
-            }
-
-            if (substr($word, 0, 1) == '{' and substr($word, -1, 1) == '}') {
-
-                if (preg_match(substr($word, 1, -1), $content)) {
-                    return true;
-                }
-            } else {
-                if (strstr($content, $word)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
 }

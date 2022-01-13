@@ -51,7 +51,7 @@ class RecoverController extends MainController
             }
         }
 
-        Validation::checkEmail($email, $recover_uri);
+        Validation::Email($email, $recover_uri);
 
         $uInfo = UserModel::userInfo($email);
 
@@ -70,7 +70,7 @@ class RecoverController extends MainController
         UserModel::initRecover($uInfo['user_id'], $code);
 
         // Отправка e-mail
-        SendEmail::mailText($uInfo['user_id'], 'changing.password', ['newpass_link' => $recover_uri . '/remind/' . $code]);
+        SendEmail::mailText($uInfo['user_id'], 'changing.password', ['newpass_link' => getUrlByName('recover.code', ['code' => $code])]);
         
         addMsg(Translate::get('new password email'), 'success');
         redirect(getUrlByName('login'));
@@ -115,7 +115,7 @@ class RecoverController extends MainController
             return false;
         }
 
-        Validation::Limits($password, Translate::get('password'), '8', '32', getUrlByName('recover') . '/remind/' . $code);
+        Validation::Length($password, Translate::get('password'), '8', '32', getUrlByName('recover.code', ['code' => $code]));
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         $news     = SettingModel::editPassword($user_id, $newpass);

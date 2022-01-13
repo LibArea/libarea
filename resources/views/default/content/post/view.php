@@ -219,10 +219,10 @@
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_feature'] == 0) {
       import('/_block/comments-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
-      if ($post['post_closed'] == 1) echo no_content(Translate::get('the post is closed'), 'bi bi-door-closed');
+      if ($post['post_closed'] == 1) echo no_content(Translate::get('post.closed'), 'bi bi-door-closed');
     } else {
       import('/_block/questions-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
-      if ($post['post_closed'] == 1) echo no_content(Translate::get('the question is closed'), 'bi bi-door-closed');
+      if ($post['post_closed'] == 1) echo no_content(Translate::get('question.closed'), 'bi bi-door-closed');
     }
   } else {
     echo no_content(Translate::get('this is a draft'), 'bi bi-journal-medical');

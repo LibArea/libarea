@@ -57,7 +57,7 @@ class EditCommentController extends MainController
         }
 
         // Если пользователь заморожен
-        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
+        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']); 
 
         $slug = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         $redirect   = $slug . '#comment_' . $comment['comment_id'];

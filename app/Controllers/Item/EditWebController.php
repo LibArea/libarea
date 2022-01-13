@@ -71,8 +71,8 @@ class EditWebController extends MainController
         $item_is_github     = Request::getPostInt('item_is_github');
         $item_github_url    = Request::getPost('item_github_url');
 
-        Validation::Limits($item_title_url, Translate::get('title'), '14', '250', $redirect);
-        Validation::Limits($item_content_url, Translate::get('description'), '24', '1500', $redirect);
+        Validation::Length($item_title_url, Translate::get('title'), '14', '250', $redirect);
+        Validation::Length($item_content_url, Translate::get('description'), '24', '1500', $redirect);
 
         // Связанные посты
         $post_fields    = Request::getPost() ?? [];

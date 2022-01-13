@@ -62,7 +62,7 @@ class ProfileController extends MainController
                     'sheet'             => $sheet,
                     'participation'     => FacetModel::participation($user['user_id']),
                     'post'              => PostModel::getPost($user['user_my_post'], 'id', $this->uid),
-                    'button_pm'         => Validation::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
+                    'button_pm'         => self::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
                 ]
             ]
         );
@@ -236,5 +236,24 @@ class ProfileController extends MainController
         ];
 
         return meta($m, $title, $desc);
+    }
+    
+    // Отправки личных сообщений (ЛС)
+    // $uid - кто отправляет
+    // $user_id - кому
+    // $add_tl -  с какого уровня доверия
+    public static function accessPm($uid, $user_id, $add_tl)
+    {
+        // Запретим отправку себе
+        if ($uid['user_id'] == $user_id) {
+            return false;
+        }
+
+        // Если уровень доверия меньше установленного
+        if ($add_tl > $uid['user_trust_level']) {
+            return false;
+        }
+
+        return true;
     }
 }

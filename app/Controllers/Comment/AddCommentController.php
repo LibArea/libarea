@@ -10,7 +10,7 @@ use Content, Validation, SendEmail, Translate;
 
 class AddCommentController extends MainController
 {
-    private $uid;
+    protected $uid;
 
     public function __construct()
     {
@@ -41,47 +41,36 @@ class AddCommentController extends MainController
         $answer_id          = Request::getPostInt('answer_id');   // на какой ответ
         $comment_id         = Request::getPostInt('comment_id');   // на какой комментарий
 
-        $ip         = Request::getRemoteAddress();
-        $post       = PostModel::getPost($post_id, 'id', $this->uid);
+        $post   = PostModel::getPost($post_id, 'id', $this->uid);
         pageError404($post);
-
-        // Если пользователь заморожен
-        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
 
         $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
+        // Check body length 
         // Проверяем длину тела
-        Validation::Limits($comment_content, Translate::get('comments'), '6', '2024', $url_post);
+        Validation::Length($comment_content, Translate::get('comments'), '6', '2024', $url_post);
 
-        // Ограничим добавления комментариев (в день)
-        Validation::speedAdd($this->uid, 'comment');
+        // We will check for freezing, stop words, the frequency of posting content per day 
+        // Проверим на заморозку, стоп слова, частоту размещения контента в день
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($comment_content, 'comment');       
 
-        // Если контента меньше N и он содержит ссылку 
+        $last_comment_id = CommentModel::addComment(
+            [
+                'comment_post_id'       => $post_id,
+                'comment_answer_id'     => $answer_id,
+                'comment_comment_id'    => $comment_id,
+                'comment_content'       => Content::change($comment_content),
+                'comment_published'     => ($trigger === false) ? 0 : 1,
+                'comment_ip'            => Request::getRemoteAddress(),
+                'comment_user_id'       => $this->uid['user_id'],
+            ]
+        );
+        
+        $url_comment    = $url_post . '#comment_' . $last_comment_id;
+
         // Оповещение админу
-        $comment_published = 1;
-        if (!Validation::stopSpam($comment_content, $this->uid['user_id'])) {
-            addMsg(Translate::get('content-audit'), 'error');
-            $comment_published = 0;
-        }
-
-        $comment_content = Content::change($comment_content);
-
-        $data = [
-            'comment_post_id'       => $post_id,
-            'comment_answer_id'     => $answer_id,
-            'comment_comment_id'    => $comment_id,
-            'comment_content'       => $comment_content,
-            'comment_published'     => $comment_published,
-            'comment_ip'            => $ip,
-            'comment_user_id'       => $this->uid['user_id'],
-        ];
-
-        $last_comment_id    = CommentModel::addComment($data);
-        $url_comment        = $url_post . '#comment_' . $last_comment_id;
-
-        if ($comment_published == 0) {
+        if ($trigger === false) {
             ActionModel::addAudit('comment', $this->uid['user_id'], $last_comment_id);
-            // Оповещение админу
             NotificationsModel::send(
                 [
                     'sender_id'         => $this->uid['user_id'],

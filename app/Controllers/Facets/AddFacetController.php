@@ -58,12 +58,12 @@ class AddFacetController extends MainController
             }
         }
 
-        Validation::charset_slug($facet_slug, 'Slug (url)', $redirect);
-        Validation::Limits($facet_title, Translate::get('title'), '3', '64', $redirect);
-        Validation::Limits($facet_description, Translate::get('meta description'), '34', '225', $redirect);
-        Validation::Limits($facet_short_description, Translate::get('short description'), '9', '160', $redirect);
-        Validation::Limits($facet_slug, Translate::get('slug'), '3', '43', $redirect);
-        Validation::Limits($facet_seo_title, Translate::get('slug'), '4', '225', $redirect);
+        Validation::Slug($facet_slug, 'Slug (url)', $redirect);
+        Validation::Length($facet_title, Translate::get('title'), '3', '64', $redirect);
+        Validation::Length($facet_description, Translate::get('meta description'), '34', '225', $redirect);
+        Validation::Length($facet_short_description, Translate::get('short description'), '9', '160', $redirect);
+        Validation::Length($facet_slug, Translate::get('slug'), '3', '43', $redirect);
+        Validation::Length($facet_seo_title, Translate::get('slug'), '4', '225', $redirect);
 
         if (FacetModel::getFacet($facet_slug, 'slug')) {
             addMsg(Translate::get('url-already-exists'), 'error');

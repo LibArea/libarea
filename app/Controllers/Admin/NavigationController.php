@@ -164,8 +164,8 @@ class NavigationController extends MainController
         $nav_url_routes        = Request::getPost('nav_url_routes');
         $nav_parent     = Request::getPostInt('nav_parent');
 
-        Validation::Limits($nav_name, Translate::get('name'), '3', '40', $redirect);
-        Validation::Limits($nav_url_routes, Translate::get('URL'), '3', '60', $redirect);
+        Validation::Length($nav_name, Translate::get('name'), '3', '40', $redirect);
+        Validation::Length($nav_url_routes, Translate::get('URL'), '3', '60', $redirect);
 
         $data = [
             'nav_module'        => 'admin',

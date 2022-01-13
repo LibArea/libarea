@@ -58,7 +58,7 @@ class RegisterController extends MainController
 
         $redirect = $inv_code ? '/register/invite/' . $inv_code : '/register';
 
-        Validation::checkEmail($email, $redirect);
+        Validation::Email($email, $redirect);
 
         if (is_array(AuthModel::replayEmail($email))) {
             addMsg(Translate::get('e-mail-replay'), 'error');
@@ -66,7 +66,8 @@ class RegisterController extends MainController
         }
 
         # Если домен указанной почты содержится в списке недопустимых
-        $domain = array_pop(explode('@', $email));
+        $arr = explode('@', $email);
+        $domain = array_pop($arr);
         if (in_array($domain, Config::get('stop-email'))) {
             redirect($redirect);
         }
@@ -76,8 +77,8 @@ class RegisterController extends MainController
             redirect($redirect);
         }
 
-        Validation::charset_slug($login, Translate::get('nickname'), '/register');
-        Validation::Limits($login, Translate::get('nickname'), '3', '10', $redirect);
+        Validation::Slug($login, Translate::get('nickname'), '/register');
+        Validation::Length($login, Translate::get('nickname'), '3', '10', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
             addMsg(Translate::get('nickname-repeats-characters'), 'error');
@@ -95,7 +96,7 @@ class RegisterController extends MainController
             redirect($redirect);
         }
 
-        Validation::Limits($password, Translate::get('password'), '8', '32', $redirect);
+        Validation::Length($password, Translate::get('password'), '8', '32', $redirect);
         if (substr_count($password, ' ') > 0) {
             addMsg(Translate::get('password-spaces'), 'error');
             redirect($redirect);

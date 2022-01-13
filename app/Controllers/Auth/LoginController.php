@@ -26,7 +26,7 @@ class LoginController extends MainController
 
         $redirect   = getUrlByName('login');
 
-        Validation::checkEmail($email, $redirect);
+        Validation::Email($email, $redirect);
 
         $user = UserModel::userInfo($email);
 

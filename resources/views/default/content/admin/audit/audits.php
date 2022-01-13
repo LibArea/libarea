@@ -12,7 +12,7 @@
       ], [
         'id' => $data['type'] . '.ban',
         'url' => getUrlByName('admin.' . $data['type'] . '.ban'),
-        'name' => Translate::get('deleted'),
+        'name' => Translate::get('approved'),
         'icon' => 'bi bi-x-circle'
       ]
     ]
@@ -70,11 +70,16 @@
           <td class="center">
             <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action text-sm">
               <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
-                <span class="red-500"><?= Translate::get('recover'); ?></span>
+                <span class="red-500">
+                  <?= Translate::get('recover'); ?>
+                </span>
               <?php } else { ?>
                 <?= Translate::get('remove'); ?>
               <?php } ?>
             </a>
+            <div class="lowercase text-xs">
+              <?= Translate::get('content'); ?>
+            </div>
           </td>
           <td class="center">
             <?php if ($audit['audit_read_flag'] == 1) { ?>
@@ -86,6 +91,7 @@
               <a data-status="<?= $audit['audit_type']; ?>" data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" class="audit-status text-sm">
                 <?= Translate::get('to approve'); ?>
               </a>
+              <div class="text-xs"><?= Translate::get('off.mute.mode'); ?></div>
             <?php } ?>
           </td>
         </tr>
