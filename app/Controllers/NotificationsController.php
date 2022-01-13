@@ -54,7 +54,7 @@ class NotificationsController extends MainController
 
         // Если личные сообщения 
         if ($info['notification_action_type'] == 1) {
-            $info['notification_url'] = 'messages/read/' . $info['notification_connection_type'];
+            $info['notification_url'] = 'messages/' . $info['notification_connection_type'];
         }
 
         NotificationsModel::updateMessagesUnread($this->uid['user_id'], $notif_id);

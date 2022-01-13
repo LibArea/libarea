@@ -235,10 +235,17 @@ class MessagesModel extends MainModel
 			...
 		} */
 
-        $type = 1; // Личные сообщения        
-        NotificationsModel::send($dialog_sender_id, $dialog_recipient_id, $type, $messages_dialog_id, '');
+        NotificationsModel::send(
+            [
+                'sender_id'         => $dialog_sender_id,
+                'recipient_id'      => $dialog_recipient_id,
+                'action_type'       => 1, // Private messages
+                'connection_type'   => $messages_dialog_id,
+                'content_url'       => '',
+            ]
+        );
 
-        return;
+        return true;
     }
 
     // Изменение количество сообщений
