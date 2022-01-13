@@ -8,6 +8,7 @@ use PDO;
 
 class WebModel extends MainModel
 {
+    // All sites
     // Все сайты
     public static function getItemsAll($page, $limit, $user_id)
     {
@@ -56,6 +57,7 @@ class WebModel extends MainModel
         return DB::run($sql)->rowCount();
     }
 
+    // 5 popular domains
     // 5 популярных доменов
     public static function getItemsTop($domain)
     {
@@ -172,6 +174,7 @@ class WebModel extends MainModel
         return DB::run($sql)->rowCount();
     }
 
+    // Check if the domain exists 
     // Проверим наличие домена
     public static function getItemOne($domain, $user_id)
     {
@@ -202,6 +205,7 @@ class WebModel extends MainModel
         return DB::run($sql, ['domain' => $domain, 'user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Add a domain
     // Добавим домен
     public static function add($data)
     {
@@ -294,7 +298,8 @@ class WebModel extends MainModel
         return  DB::run($sql, $params);
     }
 
-    // Данные по id
+    // Get data by id
+    // Получим данные по id
     public static function getItemId($item_id)
     {
         $sql = "SELECT
@@ -322,6 +327,7 @@ class WebModel extends MainModel
         return DB::run($sql, ['item_id' => $item_id])->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Topics by reference 
     // Темы по ссылке
     public static function getItemTopic($item_id)
     {
@@ -337,5 +343,21 @@ class WebModel extends MainModel
                             WHERE relation_item_id  = :item_id";
 
         return DB::run($sql, ['item_id' => $item_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // More... 
+    // Еще...
+    public static function itemSimilar($item_id, $limit)
+    {
+        $sql = "SELECT 
+                    item_id,
+                    item_title_url,
+                    item_url_domain
+                        FROM items 
+                            WHERE item_id < :item_id 
+                                AND item_is_deleted = 0
+                                    ORDER BY item_id DESC LIMIT $limit";
+
+        return DB::run($sql, ['item_id' => $item_id])->fetchall(PDO::FETCH_ASSOC);
     }
 }

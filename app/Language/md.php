@@ -466,7 +466,6 @@ $data = [
 
     'the site is already there'             => 'Un astfel de site este deja în sistem',
     'joined in the early days'              => 'S-a alăturat în primele zile ale lansării comunității',
-    'the owner restricted the publication'  => 'Proprietarul spațiului a restricționat postarea',
     'the profile is being checked'          => 'Profilul dvs. este în așteptare',
 
     'nickname-replay'                       => 'Acest nume de utilizator este deja pe site',
@@ -477,11 +476,11 @@ $data = [
     'the code is incorrect'                 => 'Codul este incorect sau a fost deja utilizat',
     'format-cover-post'                     => 'Lățime mai mare de 500 px. Orientare orizontală',
 
-    'e-mail or password is not correct'     => 'E-mailul sau parola nu sunt corecte',
+    'email.password.not.correct'            => 'E-mailul sau parola nu sunt corecte',
     'your account is not activated'         => 'Contul dvs. nu este activat',
     'your account is under review'          => 'Contul dvs. este în așteptare',
     'email.correctness'                     => 'E-mail invalid',
-    'there is no such e-mail on the site'   => 'Acest e-mail nu se află pe site',
+    'email.no.site'                         => 'Acest e-mail nu se află pe site',
     'the command is executed'               => 'Comanda este executată',
     'you can add more'                      => 'Puteți adăuga mai multe',
 

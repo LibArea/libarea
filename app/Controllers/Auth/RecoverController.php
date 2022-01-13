@@ -56,7 +56,7 @@ class RecoverController extends MainController
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['user_email'])) {
-            addMsg(Translate::get('there is no such e-mail on the site'), 'error');
+            addMsg(Translate::get('email.no.site'), 'error');
             redirect($recover_uri);
         }
 

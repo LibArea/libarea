@@ -6,3 +6,4 @@ Disallow: /s/*/top*
 Disallow: /s/flud/*
 Disallow: /page/*
 Disallow: /*/page/*
+Disallow: /page

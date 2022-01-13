@@ -48,7 +48,7 @@ class LoginController extends MainController
         }
 
         if (!password_verify($password, $user['user_password'])) {
-            addMsg(Translate::get('e-mail or password is not correct'), 'error');
+            addMsg(Translate::get('email.password.not.correct'), 'error');
             redirect($redirect);
         }
 

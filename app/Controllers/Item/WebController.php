@@ -197,6 +197,7 @@ class WebController extends MainController
                     'type'          => 'web',
                     'item'          => $item,
                     'topics'        => $topics,
+                    'similar'       => WebModel::itemSimilar($item['item_id'], 3),
                     'high_leve'     => FacetModel::getHighLevelList($high_leve),
                     'related_posts' => $related_posts ?? [],
                 ]

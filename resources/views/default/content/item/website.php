@@ -59,6 +59,19 @@
 </main>
 <aside class="col-span-3 relative mb-none">
   <div class="bg-white br-rd5 br-box-gray box-shadow-all p15 mb15">
+    <?php if ($data['similar']) { ?>
+      <div class="gray mb5"><?= Translate::get('recommended'); ?></div>
+      <?php foreach ($data['similar'] as $link) { ?>
+      <?= website_img($link['item_url_domain'], 'thumbs', $link['item_title_url'], 'mr5 w200 box-shadow'); ?>
+        <a class="inline mr20 mb15 block text-sm" href="<?= getUrlByName('web.website', ['slug' => $link['item_url_domain']]); ?>">
+          <?= $link['item_title_url']; ?>
+        </a>
+      <?php } ?>
+    <?php } else { ?>
+      ....
+    <?php } ?>
+  </div>
+  <div class="bg-white br-rd5 br-box-gray box-shadow-all p15 mb15">
     <?php if ($data['high_leve']) { ?>
       <div class="gray"><?= Translate::get('see more'); ?></div>
       <?php foreach ($data['high_leve'] as $rl) { ?>
@@ -78,3 +91,5 @@
     </div>
   <?php } ?>
 </aside>
+</div>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
