@@ -43,7 +43,7 @@ class UserModel extends MainModel
         $sql = "SELECT 
                     user_id,
                     user_is_deleted
-                        FROM users WHERE user_ban_list > 0";
+                        FROM users WHERE user_ban_list = 0";
 
         return  DB::run($sql)->rowCount();
     }

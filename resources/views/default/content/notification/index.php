@@ -72,7 +72,7 @@
         <?php if ($notif['notification_action_type'] == 15) { ?>
           <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
             <i class="bi bi-exclamation-diamond middle red-500"></i>
-            <?= Translate::get('audit'); ?>
+            <?= Translate::get('audits'); ?>
           </a>
           |
           <a class="ntf2 lowercase" href="/admin/users/<?= $notif['notification_sender_id']; ?>/edit">
