@@ -17,7 +17,6 @@ class NotificationsController extends MainController
         $this->uid = UserData::getUid();
     }
 
-    // Страница уведомлений участника
     public function index()
     {
         $list = NotificationsModel::listNotification($this->uid['user_id']);
@@ -42,6 +41,7 @@ class NotificationsController extends MainController
         );
     }
 
+    // Change the subscription flag read or not (follow the link) 
     // Изменяем флаг подписки прочитан или нет (переход по ссылке)
     public function read()
     {
@@ -52,6 +52,7 @@ class NotificationsController extends MainController
             return false;
         }
 
+        // If private messages  
         // Если личные сообщения 
         if ($info['notification_action_type'] == 1) {
             $info['notification_url'] = 'messages/' . $info['notification_connection_type'];
@@ -74,34 +75,28 @@ class NotificationsController extends MainController
         return NotificationsModel::bell($user_id);
     }
 
-    // Обращение (@)
-    public function mention($type, $message, $last_id, $url, $owner_id = null)
+    // Appeal (@)
+    public function mention($action_type, $message, $connection_type, $content_url, $owner_id = null)
     {
-        foreach ($message as $user_id) {
-            // 
+        $sender_id = $this->uid['user_id'];
+        foreach ($message as $recipient_id) {
+            // Prohibit sending to yourself 
             // Запретим отправку себе
-            if ($user_id == $this->uid['user_id']) {
+            if ($recipient_id == $sender_id) {
                 continue;
             }
 
-            // 
-            // И автору ответа
+            // Forbid sending a reply to the author 
+            // Запретим отправку автору ответа
             if ($owner_id) {
-                if ($user_id == $owner_id) {
+                if ($recipient_id == $owner_id) {
                     continue;
                 }
             }
+            
+            NotificationsModel::send(compact('sender_id', 'recipient_id', 'action_type', 'connection_type', 'content_url'));
 
-            NotificationsModel::send(
-                [
-                    'sender_id'         => $this->uid['user_id'],
-                    'recipient_id'      => $user_id,
-                    'action_type'       => $type,
-                    'connection_type'   => $last_id,
-                    'content_url'       => $url,
-                ]
-            );
-            SendEmail::mailText($user_id, 'appealed');
+            SendEmail::mailText($recipient_id, 'appealed');
         }
 
         return true;

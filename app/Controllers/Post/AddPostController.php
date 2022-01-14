@@ -119,34 +119,7 @@ class AddPostController extends MainController
         Validation::Length($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
         if ($post_url) {
-
-            // Поскольку это для поста, то получим превью и разбор домена...
-            $og_img             = self::grabOgImg($post_url);
-            $parse              = parse_url($post_url);
-            $url_domain         = $parse['host'];
-            $domain             = new Domains($url_domain);
-            $post_url_domain    = $domain->getRegisterable();
-            $item_url           = $parse['scheme'] . '://' . $parse['host'];
-
-            // Если домена нет, то добавим его
-            $item = WebModel::getItemOne($post_url_domain, $this->uid['user_id']);
-            if (!$item) {
-                // Запишем минимальные данный
-                WebModel::add(
-                    [
-                        'item_url'          => $item_url,
-                        'item_url_domain'   => $post_url_domain,
-                        'item_title_url'    => $post_title,
-                        'item_content_url'  => Translate::get('description is formed'),
-                        'item_published'    => 0,
-                        'item_user_id'      => $this->uid['user_id'],
-                        'item_type_url'     => 0,
-                        'item_status_url'   => 200,
-                    ]
-                );
-            } else {
-                WebModel::addItemCount($post_url_domain);
-            }
+            $og_img = $this->addUrl($post_url, $post_title);
         }
 
         // Обложка поста
@@ -232,7 +205,7 @@ class AddPostController extends MainController
         redirect($url);
     }
 
-    // Добавим пост
+    // Добавим страницу
     public function createPage()
     {
         // Получаем title и содержание
@@ -318,7 +291,39 @@ class AddPostController extends MainController
 
         redirect($url_post);
     }
+    
+    public function addUrl($post_url, $post_title)
+    {
+            // Поскольку это для поста, то получим превью и разбор домена...
+            $og_img             = self::grabOgImg($post_url);
+            $parse              = parse_url($post_url);
+            $url_domain         = $parse['host'];
+            $domain             = new Domains($url_domain);
+            $post_url_domain    = $domain->getRegisterable();
+            $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
+            // Если домена нет, то добавим его
+            $item = WebModel::getItemOne($post_url_domain, $this->uid['user_id']);
+            if (!$item) {
+                // Запишем минимальные данный
+                WebModel::add(
+                    [
+                        'item_url'          => $item_url,
+                        'item_url_domain'   => $post_url_domain,
+                        'item_title_url'    => $post_title,
+                        'item_content_url'  => Translate::get('description is formed'),
+                        'item_published'    => 0,
+                        'item_user_id'      => $this->uid['user_id'],
+                        'item_type_url'     => 0,
+                        'item_status_url'   => 200,
+                    ]
+                );
+            } else {
+                WebModel::addItemCount($post_url_domain);
+            }
+            return $og_img;
+    }
+    
     // Парсинг
     public function grabMeta()
     {

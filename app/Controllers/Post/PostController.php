@@ -48,8 +48,6 @@ class PostController extends MainController
             $_SESSION['pagenumbers'][$post['post_id']] = $post['post_id'];
         }
 
-        // Выводить или нет? Что дает просмотр даты изменения?
-        // Учитывать ли изменение в сортировки и в оповещение в будущем...
         $post['modified'] = $post['post_date'] != $post['post_modified'] ? true : false;
 
         $facets = PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'topic');
