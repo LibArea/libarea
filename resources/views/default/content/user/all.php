@@ -30,6 +30,11 @@
             'url'   => getUrlByName($data['type'] . 's.all'),
             'title' => Translate::get('all'),
             'icon'  => 'bi bi-app'
+          ], [
+            'id'    => $data['type'] . 's.new',
+            'url'   => getUrlByName($data['type'] . 's.new'),
+            'title' => Translate::get('new ones'),
+            'icon'  => 'bi bi-sort-up'
           ],
         ]
       );
@@ -55,7 +60,7 @@
       <?php } ?>
     </div>
   </div>
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
 </main>
 </div>
 <?= import('/_block/wide-footer', ['uid' => $uid]); ?>

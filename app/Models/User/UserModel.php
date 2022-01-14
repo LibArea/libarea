@@ -9,8 +9,14 @@ use PDO;
 class UserModel extends MainModel
 {
     // Страница участников
-    public static function getUsersAll($page, $limit, $user_id)
+    public static function getUsersAll($page, $limit, $user_id, $type)
     {
+        $sort = "ORDER BY user_id = :user_id DESC, user_trust_level DESC";
+        if ($type == 'users.new') {
+            $sort = "ORDER BY user_created_at DESC";
+        }
+        
+        
         $start  = ($page - 1) * $limit;
         $sql = "SELECT  
                     user_id,
@@ -31,7 +37,7 @@ class UserModel extends MainModel
                     user_is_deleted
                         FROM users 
                         WHERE user_is_deleted != 1 and user_ban_list != 1
-                            ORDER BY user_id = :user_id DESC, user_trust_level DESC
+                            $sort
                             LIMIT $start, $limit";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);

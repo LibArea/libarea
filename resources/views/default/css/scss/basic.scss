@@ -147,7 +147,6 @@ img {
 .gray-500 { color: $gray-500; }
 .gray-600 { color: $gray-600; }
 .gray-hover:hover { color: $slate-300; }
-.gray-light-hover:hover { color: $slate-200; }
 .sky-500, .sky-500-hover:hover { color: $sky-500; }
 .sky-600-hover:hover { color: $blue-500; }
 
@@ -336,3 +335,4 @@ img {
 .table { display: table; }
 .inline { display: inline-block; }
 .list-none { list-style: none; }
+.lh1 { line-height: 1; }

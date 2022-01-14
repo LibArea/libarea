@@ -28,7 +28,7 @@ class UserController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $usersCount = UserModel::getUsersAllCount();
-        $users      = UserModel::getUsersAll($page, $this->limit, $this->uid['user_id']);
+        $users      = UserModel::getUsersAll($page, $this->limit, $this->uid['user_id'], $sheet);
         pageError404($users);
 
         $m = [

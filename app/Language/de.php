@@ -512,6 +512,10 @@ $data = [
     'users.all.info'            => 'List of participants in the order of their activity on the site',
     'users.all.desc'            => 'Participants in the order of their activity on the site. Ability to view profile data',
     
+    'users.new'                 => 'Neue Mitglieder',
+    'users.new.info'            => 'Liste der Mitglieder, die sich kürzlich auf der Website angemeldet haben',
+    'users.new.desc'            => 'Mitglieder, die sich kürzlich auf der Website registriert haben. Aktivität, Avatare, Profil anzeigen',
+    
     'blogs.all'                 => 'All blogs ',
     'blogs.all.info'            => 'Blogs created by contributors',
     'blogs.all.desc'            => 'Blogs in the order of their registration on the site, the ability to view the created blogs, subscribe to them, view statistics',

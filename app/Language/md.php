@@ -506,6 +506,10 @@ $data = [
     'users.all.info'            => 'Lista participanților în ordinea activității lor pe site',
     'users.all.desc'            => 'Participanții în ordinea activității lor pe site. Posibilitatea de a vizualiza datele de profil ',
     
+    'users.new'                 => 'Membri noi',
+    'users.new.info'            => 'Lista membrilor care s-au înscris recent pe site',
+    'users.new.desc'            => 'Membrii care s-au înregistrat recent pe site. Afișați activitatea, avatarele, profilul',
+    
     'blogs.all'                 => 'Toate blogurile ',
     'blogs.all.info'            => 'Bloguri create de colaboratori',
     'blogs.all.desc'            => 'Bloguri în ordinea înregistrării lor pe site, posibilitatea de a vizualiza blogurile create, de a vă abona la ele, de a vizualiza statistici',

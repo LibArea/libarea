@@ -55,6 +55,12 @@
         </a>
       </div>
     <?php } ?>
+    
+    <?php if ($data['related_posts']) { ?>
+      <div class="bg-white br-box-gray pt15">
+        <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => true, 'uid' => $uid]); ?>
+      </div>
+    <?php } ?>
   </div>
 </main>
 <aside class="col-span-3 relative mb-none">
@@ -85,11 +91,6 @@
       ....
     <?php } ?>
   </div>
-  <?php if ($data['related_posts']) { ?>
-    <div class="bg-white br-rd5 br-box-gray pt15 pl15 text-sm">
-      <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'no', 'uid' => $uid]); ?>
-    </div>
-  <?php } ?>
 </aside>
 </div>
 <?= import('/_block/wide-footer', ['uid' => $uid]); ?>

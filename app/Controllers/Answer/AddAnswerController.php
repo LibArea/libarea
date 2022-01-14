@@ -50,10 +50,8 @@ class AddAnswerController extends MainController
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-
             (new \App\Controllers\AuditController())->create('answer', $last_id, $url);
         }
-
 
         // Notification (@login). 11 - mentions in answers 
         if ($message = Content::parseUser($answer_content, true, true)) {

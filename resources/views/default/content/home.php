@@ -72,9 +72,9 @@
 
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
-      <div class="uppercase gray mt5 mb5 dark-gray-300">
+      <h3 class="uppercase lh1 text-sm gray-500 mt5 mb10 font-normal dark-gray-300">
         <?= Translate::get('reading'); ?>
-      </div>
+      </h3>
 
       <?php
       $my = [];
