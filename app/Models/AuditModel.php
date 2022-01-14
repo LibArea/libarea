@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use Hleb\Scheme\App\Models\MainModel;
 use DB;
@@ -69,7 +69,7 @@ class AuditModel extends MainModel
 
         return  DB::run($sql, ['id' => $id]);
     }
-    
+
     // Get user id and remove mute mode 
     // Получаем id пользователя и убираем немой режим
     public static function auditAuthor($id)
@@ -79,10 +79,26 @@ class AuditModel extends MainModel
         $user_id = DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
 
         $usql = "UPDATE users SET user_limiting_mode = 0 WHERE user_id = :user_id";
-        
+
         return  DB::run($usql, ['user_id' => $user_id['audit_user_id']]);
     }
-    
+
+    public static function add($type, $user_id, $content_id)
+    {
+        $params = [
+            'audit_type'        => $type,
+            'audit_user_id'     => $user_id,
+            'audit_content_id'  => $content_id,
+        ];
+
+        $sql = "INSERT INTO audits(audit_type, audit_user_id, audit_content_id, audit_read_flag) 
+                    VALUES(:audit_type, :audit_user_id, :audit_content_id, 0)";
+
+        DB::run($sql, $params);
+
+        return true;
+    }
+
     // Total contribution of the participant
     // Общий вклад участника
     public static function ceneralContributionCount($user_id)

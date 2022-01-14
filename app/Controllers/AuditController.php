@@ -4,8 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Middleware\Before\UserData;
-use App\Models\Admin\AuditModel;
-use App\Models\{ContentModel, ActionModel};
+use App\Models\{ContentModel, ActionModel, AuditModel, NotificationsModel};
 use Translate, Config;
 
 class AuditController extends MainController
@@ -16,28 +15,28 @@ class AuditController extends MainController
     {
         $this->uid  = UserData::getUid();
     }
-    
+
     // Check the freeze and the amount of content per day 
     // Проверим заморозку и количество контента в день
     public function placementSpeed($content, $type)
     {
         self::stopContentQuietМode($this->uid['user_limiting_mode']);
-        
+
         $number =  ContentModel::getSpeed($this->uid['user_id'], $type);
-        
+
         self::stopLimit($this->uid['user_trust_level'], $number, $type);
-         
-        if(!self::stopUrl($content, $this->uid['user_id'])) {
+
+        if (!self::stopUrl($content, $this->uid['user_id'])) {
             return false;
         }
 
-        if(!self::stopWords($content, $this->uid['user_id'])) {
+        if (!self::stopWords($content, $this->uid['user_id'])) {
             return false;
         }
-        
-        return true; 
+
+        return true;
     }
-   
+
     // Stop changing (adding) content if the user is "frozen"    
     // Остановим изменение (добавление) контента если пользователь "заморожен"
     public static function stopContentQuietМode($user_limiting_mode)
@@ -48,7 +47,7 @@ class AuditController extends MainController
         }
         return true;
     }
-    
+
     // Checking limits on the level of trust of a participant 
     // Проверка лимитов по уровню доверия участника
     public static function stopLimit($user_trust_level, $number, $type)
@@ -61,10 +60,10 @@ class AuditController extends MainController
 
         if ($number > Config::get('trust-levels.all_limit')) {
             self::infoMsg($user_trust_level, 'messages');
-        } 
+        }
         return true;
-    } 
-    
+    }
+
     // If there is a link and the total contribution (adding posts, replies and comments) is less than N 
     // Если есть ссылка и общий вклад (добавления постов, ответов и комментариев) меньше N
     public static function stopUrl($content, $user_id)
@@ -79,7 +78,7 @@ class AuditController extends MainController
         }
         return true;
     }
-    
+
     // If the word is on the stop list and the total contribution is minimal (less than 2)
     // Если слово в стоп листе и общий вклад минимальный (меньше 2)
     public static function stopWords($content, $user_id)
@@ -94,14 +93,14 @@ class AuditController extends MainController
         }
         return true;
     }
-    
+
     public static function infoMsg($tl, $content)
     {
         addMsg(sprintf(Translate::get('limit.day'), 'TL' . $tl, '«' . Translate::get($content) . '»'), 'error');
 
         redirect('/');
     }
-    
+
     // For URL trigger 
     // Для триггера URL
     public static function estimationUrl($content)
@@ -112,7 +111,7 @@ class AuditController extends MainController
         }
         return false;
     }
-    
+
     /// Check the presence of the word in the stop list (audit in the admin panel) 
     // Проверим наличия слова в стоп листе (аудит в админ-панели)
     public static function stopWordsExists($content, $replace = '*')
@@ -140,5 +139,24 @@ class AuditController extends MainController
         }
 
         return false;
+    }
+
+    public function create($type, $last_content_id, $url)
+    {
+        AuditModel::add($type, $this->uid['user_id'], $last_content_id);
+
+        // Send notification type 15 (audit) to administrator (id 1) 
+        // Отправим тип уведомления 15 (аудит) администратору (id 1)
+        NotificationsModel::send(
+            [
+                'sender_id'         => $this->uid['user_id'],
+                'recipient_id'      => 1,  // admin
+                'action_type'       => 15, // 15 audit
+                'connection_type'   => $last_content_id,
+                'content_url'       => $url,
+            ]
+        );
+
+        return true;
     }
 }

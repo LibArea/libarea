@@ -46,15 +46,13 @@ class AddCommentController extends MainController
 
         $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
-        // Check body length 
-        // Проверяем длину тела
         Validation::Length($comment_content, Translate::get('comments'), '6', '2024', $url_post);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
         $trigger = (new \App\Controllers\AuditController())->placementSpeed($comment_content, 'comment');       
 
-        $last_comment_id = CommentModel::addComment(
+        $last_id = CommentModel::addComment(
             [
                 'comment_post_id'       => $post_id,
                 'comment_answer_id'     => $answer_id,
@@ -66,64 +64,48 @@ class AddCommentController extends MainController
             ]
         );
         
-        $url_comment    = $url_post . '#comment_' . $last_comment_id;
+        $url = $url_post . '#comment_' . $last_id;
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            ActionModel::addAudit('comment', $this->uid['user_id'], $last_comment_id, $url_comment);
+            (new \App\Controllers\AuditController())->create('comment', $last_id, $url);
         }
 
-        // Пересчитываем количество комментариев для поста + 1
+        // Add the number of comments for the post + 1
         PostModel::updateCount($post_id, 'comments');
 
-        // Оповещение автору ответа, что есть комментарий
-        if ($answer_id) {
-            // Себе не записываем
-            $answ = AnswerModel::getAnswerId($answer_id);
-            if ($this->uid['user_id'] != $answ['answer_user_id']) {
-                NotificationsModel::send(
-                    [
-                        'sender_id'         => $this->uid['user_id'],
-                        'recipient_id'      => $answ['answer_user_id'],
-                        'action_type'       => 4, // comment 
-                        'connection_type'   => $last_comment_id,
-                        'content_url'       => $url_comment,
-                    ]
-                );
-            }
+        // Notification to the author of the answer that there is a comment (do not write to ourselves) 
+        // Оповещение автору ответа, что есть комментарий (себе не записываем)
+        $answ = AnswerModel::getAnswerId($answer_id);
+        $owner_id = $answ['answer_user_id'];
+        if ($this->uid['user_id'] != $owner_id) {
+            NotificationsModel::send(
+                [
+                    'sender_id'         => $this->uid['user_id'],
+                    'recipient_id'      => $owner_id,
+                    'action_type'       => 4, // 4 comment 
+                    'connection_type'   => $last_id,
+                    'content_url'       => $url,
+                ]
+            );
         }
 
-        // Уведомление (@login)
+        // Notification (@login). 12 - mentions in comments 
         if ($message = Content::parseUser($comment_content, true, true)) {
-            foreach ($message as $user_id) {
-                // Запретим отправку себе и автору ответа (оповщение ему выше)
-                if ($user_id == $this->uid['user_id'] || $user_id == $answ['answer_user_id']) {
-                    continue;
-                }
-                NotificationsModel::send(
-                    [
-                        'sender_id'         => $this->uid['user_id'],
-                        'recipient_id'      => $user_id,
-                        'action_type'       => 12, // Упоминания в комментарии
-                        'connection_type'   => $last_comment_id,
-                        'content_url'       => $url_comment,
-                    ]
-                );
-                SendEmail::mailText($user_id, 'appealed');
-            }
+            (new \App\Controllers\NotificationsController())->mention(12, $message, $last_id, $url, $owner_id);
         }
 
         ActionModel::addLogs(
             [
                 'user_id'           => $this->uid['user_id'],
                 'user_login'        => $this->uid['user_login'],
-                'log_id_content'    => $last_comment_id,
+                'log_id_content'    => $last_id,
                 'log_type_content'  => 'comment',
                 'log_action_name'   => 'content.added',
-                'log_url_content'   => $url_comment,
+                'log_url_content'   => $url,
             ]
         );
 
-        redirect($url_comment);
+        redirect($url);
     }
 }

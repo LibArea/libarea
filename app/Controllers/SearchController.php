@@ -16,7 +16,7 @@ class SearchController extends MainController
     {
         $this->uid  = UserData::getUid();
     }
-    
+
     public function index()
     {
         $query  = $result = $tags   = '';

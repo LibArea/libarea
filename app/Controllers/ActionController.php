@@ -6,7 +6,6 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{ActionModel, PostModel};
-use Translate;
 
 class ActionController extends MainController
 {
@@ -57,7 +56,7 @@ class ActionController extends MainController
             [
                 'user_id'           => $this->uid['user_id'],
                 'user_login'        => $this->uid['user_login'],
-                'log_id_content'    => $info_type[$content_type . '_id'] ?? 0, 
+                'log_id_content'    => $info_type[$content_type . '_id'] ?? 0,
                 'log_type_content'  => $content_type,
                 'log_action_name'   => $log_action_name,
                 'log_url_content'   => $url,

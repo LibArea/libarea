@@ -101,7 +101,7 @@ class PostModel extends MainModel
         if ($name == 'slug') {
             $sort = "post_slug = :params";
         }
-        
+
         $sql = "SELECT 
                     post_id,
                     post_title,
@@ -146,9 +146,9 @@ class PostModel extends MainModel
                         LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :user_id AND favorite_type = 1 
                         LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
                             WHERE $sort AND post_tl <= :trust_level";
-                            
+
         $data = ['params' => $params, 'user_id' => $uid['user_id'], 'trust_level' => $uid['user_trust_level']];
-        
+
         return DB::run($sql, $data)->fetch(PDO::FETCH_ASSOC);
     }
 

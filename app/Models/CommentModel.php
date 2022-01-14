@@ -151,6 +151,7 @@ class CommentModel extends MainModel
                     comment_content,
                     comment_date,
                     comment_votes,
+                    comment_published,
                     comment_ip,
                     comment_after,
                     comment_is_deleted,

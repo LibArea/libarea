@@ -5,8 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
-use App\Models\Admin\AuditModel;
-use App\Models\{PostModel, AnswerModel, CommentModel};
+use App\Models\{PostModel, AnswerModel, CommentModel, AuditModel};
 use Translate;
 
 class AuditsController extends MainController

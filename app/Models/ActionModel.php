@@ -9,35 +9,6 @@ use PDO;
 
 class ActionModel extends MainModel
 {
-    public static function addAudit($audit_type, $audit_user_id, $audit_content_id, $url)
-    {
-        $params = [
-            'audit_type'        => $audit_type,
-            'audit_user_id'     => $audit_user_id,
-            'audit_content_id'  => $audit_content_id,
-        ];
-
-        $sql = "INSERT INTO audits(audit_type, audit_user_id, audit_content_id, audit_read_flag) 
-                    VALUES(:audit_type, :audit_user_id, :audit_content_id, 0)";
-
-        DB::run($sql, $params);
-
-        // Send notification type 15 (audit) to administrator (id 1) 
-        // Отправим тип уведомления 15 (аудит) администратору (id 1)
-        (new \App\Models\NotificationsModel())->send(
-            [
-                'sender_id'         => $audit_user_id,
-                'recipient_id'      => 1,  // admin
-                'action_type'       => 15, // audit 
-                'connection_type'   => $audit_content_id,
-                'content_url'       => $url,
-            ]
-
-        );
-
-        return true;
-    }
-
     // Получим информацию по контенту в зависимости от типа
     public static function getInfoTypeContent($type_id, $type)
     {

@@ -120,7 +120,7 @@ class AuthModel extends MainModel
 
         return DB::run($sql, $params);
     }
-    
+
     public static function deleteTokenByUserId($user_id)
     {
         $sql = "DELETE FROM users_auth_tokens WHERE auth_user_id = :user_id";

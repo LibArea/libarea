@@ -32,7 +32,7 @@ class AddAnswerController extends MainController
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
         $trigger = (new \App\Controllers\AuditController())->placementSpeed($answer_content, 'answer');     
 
-        $last_answer_id = AnswerModel::addAnswer(
+        $last_id = AnswerModel::addAnswer(
             [
                 'answer_post_id'    => $post_id,
                 'answer_content'    => Content::change($answer_content),
@@ -46,33 +46,20 @@ class AddAnswerController extends MainController
         // Пересчитываем количество ответов для поста + 1
         PostModel::updateCount($post_id, 'answers');
 
-        $url_answer = $url_post . '#answer_' . $last_answer_id;
+        $url = $url_post . '#answer_' . $last_id;
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            ActionModel::addAudit('answer', $this->uid['user_id'], $last_answer_id, $url_answer);
+            
+            (new \App\Controllers\AuditController())->create('answer', $last_id, $url);
         }
 
-        // Уведомление (@login)
+
+        // Notification (@login). 11 - mentions in answers 
         if ($message = Content::parseUser($answer_content, true, true)) {
-            foreach ($message as $user_id) {
-                // Запретим отправку себе
-                if ($user_id == $this->uid['user_id']) {
-                    continue;
-                }
-                NotificationsModel::send(
-                    [
-                        'sender_id'         => $this->uid['user_id'],
-                        'recipient_id'      => $user_id,
-                        'action_type'       => 11, // Упоминания в ответе (@login) 
-                        'connection_type'   => $last_answer_id,
-                        'content_url'       => $url_answer,
-                    ]
-                );
-                SendEmail::mailText($user_id, 'appealed');
-            }
+            (new \App\Controllers\NotificationsController())->mention(11, $message, $last_id, $url);
         }
-
+        
         // Кто подписан на данный вопрос / пост
         if ($focus_all = NotificationsModel::getFocusUsersPost($post['post_id'])) {
             foreach ($focus_all as $focus_user) {
@@ -82,8 +69,8 @@ class AddAnswerController extends MainController
                             'sender_id'         => $this->uid['user_id'],
                             'recipient_id'      => $focus_user['signed_user_id'],
                             'action_type'       => 3, // Ответ на пост
-                            'connection_type'   => $last_answer_id,
-                            'content_url'       => $url_answer,
+                            'connection_type'   => $last_id,
+                            'content_url'       => $url,
                         ]
                     );
                 }
@@ -94,13 +81,13 @@ class AddAnswerController extends MainController
             [
                 'user_id'           => $this->uid['user_id'],
                 'user_login'        => $this->uid['user_login'],
-                'log_id_content'    => $last_answer_id,
+                'log_id_content'    => $last_id,
                 'log_type_content'  => 'answer',
                 'log_action_name'   => 'content.added',
-                'log_url_content'   => $url_answer,
+                'log_url_content'   => $url,
             ]
         );
 
-        redirect($url_answer);
+        redirect($url);
     }
 }

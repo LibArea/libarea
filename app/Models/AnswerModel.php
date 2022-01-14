@@ -113,6 +113,7 @@ class AnswerModel extends MainModel
                     answer_date,
                     answer_content,
                     answer_modified,
+                    answer_published,
                     answer_ip,
                     answer_votes,
                     answer_after,

@@ -1,5 +1,5 @@
 <?php if (!empty($data['answers'])) { ?>
-  <div class="bg-white mt15 mb15 p15">
+  <div class="bg-white br-rd5 br-box-gray mt15 mb15 p15">
     <h2 class="lowercase m0 mb15 text-2xl">
       <?= num_word($post['amount_content'], Translate::get('num-answer'), true); ?>
     </h2>
@@ -34,7 +34,7 @@
                     </span>
                   <?php } ?>
                   <a rel="nofollow" class="gray-400 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
-                  <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'uid' => $uid]); ?>
+                  <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'uid' => $uid, 'publ' => $answer['answer_published']]); ?>
                 </div>
                 <div class="m0 max-w780">
                   <?= $answer['answer_content'] ?>
@@ -42,7 +42,7 @@
               </div>
               <div class="flex text-sm">
                 <?= votes($uid['user_id'], $answer, 'answer', 'ps', 'mr5'); ?>
- 
+
                 <?php if ($post['post_closed'] == 0) { ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray-500 mr5 ml10"><?= Translate::get('reply'); ?></a>
@@ -51,12 +51,13 @@
 
                 <?php if (accessСheck($answer, 'answer', $uid, 1, 30) === true) { ?>
                   <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) { ?>
-                    <a class="editansw gray-500 mr10 ml10" href="/answer/edit/<?= $answer['answer_id']; ?>"> <?= Translate::get('edit'); ?>
+                    <a class="editansw gray-500 mr10 ml10" href="/answer/edit/<?= $answer['answer_id']; ?>"> 
+                      <?= Translate::get('edit'); ?>
                     </a>
                   <?php } ?>
                 <?php } ?>
 
-                <?php if (UserData::checkAdmin()) { ?>
+                <?php if ($uid['user_trust_level'] == UserData::REGISTERED_ADMIN) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-500 ml10 mr5">
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
@@ -76,7 +77,7 @@
 
         <?php } else { ?>
 
-          <?php if (UserData::checkAdmin()) { ?>
+          <?php if ($uid['user_trust_level'] == UserData::REGISTERED_ADMIN) { ?>
             <ol class="bg-red-200 text-sm pr5 list-none">
               <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">
@@ -139,7 +140,7 @@
                       <a class="gray-400 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi bi-arrow-up"></i></a>
                     <?php } ?>
                     <a class="gray-400 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi bi-hash"></i></a>
-                    <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'uid' => $uid]); ?>
+                    <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'uid' => $uid, 'publ' => $comment['comment_published']]); ?>
                   </div>
                   <div class="mt5 mb10">
                     <?= Content::text($comment['comment_content'], 'line'); ?>

@@ -7,7 +7,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\MessagesModel;
-use Content, Config, Validation, Translate;
+use Content, Config, Translate;
 
 class MessagesController extends MainController
 {
@@ -45,7 +45,7 @@ class MessagesController extends MainController
                     $row['unread']   = $row['dialog_recipient_unread'];
                     $row['count']    = $row['dialog_recipient_count'];
 
-                // Отправляющий  AND $row['dialog_sender_count']    
+                    // Отправляющий  AND $row['dialog_sender_count']    
                 } else if ($row['dialog_sender_id'] == $this->uid['user_id']) {
                     $row['unread']   = $row['dialog_sender_unread'];
                     $row['count']    = $row['dialog_sender_count'];
@@ -170,7 +170,7 @@ class MessagesController extends MainController
 
         // If the user is frozen and if the private message is empty
         // Если пользователь заморожен и если личное сообщение пустое
-        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']); 
+        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']);
         if ($content == '') {
             addMsg(Translate::get('enter content'), 'error');
             redirect(getUrlByName('messages', ['login' => $this->uid['user_login']]));

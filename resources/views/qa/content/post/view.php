@@ -53,7 +53,7 @@
                 <?php } ?>
               </a>
             <?php } ?>
-            <?= import('/_block/show-ip', ['ip' => $post['post_ip'], 'uid' => $uid]); ?>
+            <?= import('/_block/show-ip', ['ip' => $post['post_ip'], 'uid' => $uid, 'publ' => $post['post_published']]); ?>
           <?php } ?>
         </div>
       </div>

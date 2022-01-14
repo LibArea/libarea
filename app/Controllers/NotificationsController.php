@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\NotificationsModel;
-use Translate;
+use Translate, SendEmail;
 
 class NotificationsController extends MainController
 {
@@ -72,5 +72,38 @@ class NotificationsController extends MainController
     public static function setBell($user_id)
     {
         return NotificationsModel::bell($user_id);
+    }
+
+    // Обращение (@)
+    public function mention($type, $message, $last_id, $url, $owner_id = null)
+    {
+        foreach ($message as $user_id) {
+            // 
+            // Запретим отправку себе
+            if ($user_id == $this->uid['user_id']) {
+                continue;
+            }
+
+            // 
+            // И автору ответа
+            if ($owner_id) {
+                if ($user_id == $owner_id) {
+                    continue;
+                }
+            }
+
+            NotificationsModel::send(
+                [
+                    'sender_id'         => $this->uid['user_id'],
+                    'recipient_id'      => $user_id,
+                    'action_type'       => $type,
+                    'connection_type'   => $last_id,
+                    'content_url'       => $url,
+                ]
+            );
+            SendEmail::mailText($user_id, 'appealed');
+        }
+
+        return true;
     }
 }

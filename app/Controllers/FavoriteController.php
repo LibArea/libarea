@@ -16,7 +16,7 @@ class FavoriteController extends MainController
     {
         $this->uid = UserData::getUid();
     }
-    
+
     public function index($type)
     {
         $content_id = Request::getPostInt('content_id');

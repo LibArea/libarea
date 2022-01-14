@@ -160,7 +160,7 @@ class AddPostController extends MainController
         $uri        = $slug->create($post_title);
         $post_slug  = substr($uri, 0, 90);
 
-        $last_post_id = PostModel::AddPost(
+        $last_id = PostModel::AddPost(
             [
                 'post_title'            => $post_title,
                 'post_content'          => Content::change($post_content),
@@ -184,11 +184,11 @@ class AddPostController extends MainController
             ]
         );
 
-        $url_post = getUrlByName('post', ['id' => $last_post_id, 'slug' => $post_slug]);
+        $url = getUrlByName('post', ['id' => $last_id, 'slug' => $post_slug]);
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            ActionModel::addAudit('post', $this->uid['user_id'], $last_post_id, $url_post);
+            (new \App\Controllers\AuditController())->create('post', $last_id, $url);
         }
 
         // Получим id блога с формы выбора
@@ -203,50 +203,33 @@ class AddPostController extends MainController
         foreach ($topics as $ket => $row) {
             $arr[] = $row;
         }
-        FacetModel::addPostFacets($arr, $last_post_id);
+        FacetModel::addPostFacets($arr, $last_id);
 
-        // Уведомление (@login)
+        // Notification (@login). 10 - mentions in post 
         if ($message = Content::parseUser($post_content, true, true)) {
-            foreach ($message as $user_id) {
-                // Запретим отправку себе
-                if ($user_id == $this->uid['user_id']) {
-                    continue;
-                }
-                NotificationsModel::send(
-                    [
-                        'sender_id'         => $this->uid['user_id'],
-                        'recipient_id'      => $user_id,
-                        'action_type'       => 10, // Упоминания в посте 
-                        'connection_type'   => $last_post_id,
-                        'content_url'       => $url_post,
-                    ]
-                );
-               
-                SendEmail::mailText($user_id, 'appealed');
-            }
+            (new \App\Controllers\NotificationsController())->mention(10, $message, $last_id, $url);
         }
 
-        // Отправим в Discord
         if (Config::get('general.discord')) {
             if ($post_tl == 0 && $post_draft == 0) {
-                Integration::AddWebhook($post_content, $post_title, $url_post);
+                Integration::AddWebhook($post_content, $post_title, $url);
             }
         }
 
-        SubscriptionModel::focus($last_post_id, $this->uid['user_id'], 'post');
+        SubscriptionModel::focus($last_id, $this->uid['user_id'], 'post');
         
         ActionModel::addLogs(
             [
                 'user_id'           => $this->uid['user_id'],
                 'user_login'        => $this->uid['user_login'],
-                'log_id_content'    => $last_post_id, 
+                'log_id_content'    => $last_id, 
                 'log_type_content'  => 'post',
                 'log_action_name'   => 'content.added',
-                'log_url_content'   => $url_post,
+                'log_url_content'   => $url,
             ]
         );
 
-        redirect($url_post);
+        redirect($url);
     }
 
     // Добавим пост

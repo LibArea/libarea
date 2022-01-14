@@ -19,7 +19,7 @@
                     <?php if (empty($answer['edit'])) { ?>
                       (<?= Translate::get('ed'); ?>.)
                     <?php } ?>
-                    <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'uid' => $uid]); ?>
+                    <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'uid' => $uid, 'publ' => $answer['answer_published']]); ?>
                   </div>
                   <a class="qa-login" href="<?= getUrlByName('profile', ['login' => $answer['user_login']]); ?>"><?= $answer['user_login']; ?></a>
                 </div>
@@ -49,9 +49,9 @@
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
                 <?php } ?>
-               
-                 <?= favorite($uid['user_id'], $answer['answer_id'], 'answer', $answer['favorite_tid'], 'ps', 'ml5'); ?>
-                
+
+                <?= favorite($uid['user_id'], $answer['answer_id'], 'answer', $answer['favorite_tid'], 'ps', 'ml5'); ?>
+
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
                     <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
@@ -78,7 +78,7 @@
                   <span class="lowercase gray">
                     &nbsp; <?= lang_date($comment['comment_date']); ?>
                   </span>
-                  <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'uid' => $uid]); ?>
+                  <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'uid' => $uid, 'publ' => $comment['comment_published']]); ?>
                 </span>
 
                 <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>

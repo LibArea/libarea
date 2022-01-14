@@ -29,7 +29,7 @@
           </td>
           <td>
             <div class="text-sm gray lowercase">
-              <?= $report['report_type']; ?>
+              <?= Translate::get($report['report_type']); ?>
               <span class="mr5 ml5"> &#183; </span>
               <?= $report['date']; ?>
             </div>

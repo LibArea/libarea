@@ -344,7 +344,7 @@ class WebModel extends MainModel
 
         return DB::run($sql, ['item_id' => $item_id])->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // More... 
     // Еще...
     public static function itemSimilar($item_id, $limit)
