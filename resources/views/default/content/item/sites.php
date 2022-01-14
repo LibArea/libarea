@@ -1,7 +1,7 @@
 <main class="col-span-12 mb-col-12">
   <div class="pt5 mr15 pb5 ml15 text-sm">
     <?php if (UserData::checkAdmin()) { ?>
-      <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('sites.add'); ?>">
+      <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('site.add'); ?>">
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>

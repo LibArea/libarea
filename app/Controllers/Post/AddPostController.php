@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, WebModel, PostModel, FacetModel};
-use Content, UploadImage, Integration, Validation, SendEmail, Slug, URLScraper, Config, Translate, Domains;
+use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domains;
 
 class AddPostController extends MainController
 {
@@ -107,7 +107,7 @@ class AddPostController extends MainController
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($post_content, 'post'); 
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($post_content, 'post');
 
         // Если нет темы
         if (!$topics) {
@@ -217,12 +217,12 @@ class AddPostController extends MainController
         }
 
         SubscriptionModel::focus($last_id, $this->uid['user_id'], 'post');
-        
+
         ActionModel::addLogs(
             [
                 'user_id'           => $this->uid['user_id'],
                 'user_login'        => $this->uid['user_login'],
-                'log_id_content'    => $last_id, 
+                'log_id_content'    => $last_id,
                 'log_type_content'  => 'post',
                 'log_action_name'   => 'content.added',
                 'log_url_content'   => $url,
@@ -276,7 +276,7 @@ class AddPostController extends MainController
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($post_content, 'page');       
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($post_content, 'page');
 
         // Получаем SEO поста
         $slug       = new Slug();
@@ -381,7 +381,7 @@ class AddPostController extends MainController
             'action'        => $status,
             'reason'        => '',
         ];
-        
+
         // TODO: It will be replaced with a shared user log
         // ActionModel::logsAdd($data);
 

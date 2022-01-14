@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel};
-use Content, Validation, SendEmail, Translate;
+use Content, Validation, Translate;
 
 class AddAnswerController extends MainController
 {
@@ -30,7 +30,7 @@ class AddAnswerController extends MainController
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($answer_content, 'answer');     
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($answer_content, 'answer');
 
         $last_id = AnswerModel::addAnswer(
             [
@@ -50,7 +50,7 @@ class AddAnswerController extends MainController
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            
+
             (new \App\Controllers\AuditController())->create('answer', $last_id, $url);
         }
 
@@ -59,7 +59,7 @@ class AddAnswerController extends MainController
         if ($message = Content::parseUser($answer_content, true, true)) {
             (new \App\Controllers\NotificationsController())->mention(11, $message, $last_id, $url);
         }
-        
+
         // Кто подписан на данный вопрос / пост
         if ($focus_all = NotificationsModel::getFocusUsersPost($post['post_id'])) {
             foreach ($focus_all as $focus_user) {

@@ -133,7 +133,7 @@ Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-
 Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
 Route::get('/users')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
-Route::get('/users/page/{page?}')->controller('User\UserController')->where(['page' => '[0-9]+']);
+Route::get('/users/page/{page?}')->controller('User\UserController', ['users.all', 'user'])->where(['page' => '[0-9]+']);
 
 Route::get('/u/{login}')->controller('User\ProfileController', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile');
 Route::get('/u/{login}/posts')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');

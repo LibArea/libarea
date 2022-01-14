@@ -100,7 +100,7 @@ class EditPostController extends MainController
         }
 
         // Если пользователь заморожен
-        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']); 
+        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']);
 
         $redirect   = getUrlByName('post.edit', ['id' => $post_id]);
         if (!$topics) {

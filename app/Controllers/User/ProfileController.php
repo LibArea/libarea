@@ -102,7 +102,7 @@ class ProfileController extends MainController
                     'blogs'         => FacetModel::getOwnerFacet($user['user_id'], 'blog'),
                     'badges'        => BadgeModel::getBadgeUserAll($user['user_id']),
                     'post'          => PostModel::getPost($user['user_my_post'], 'id', $this->uid),
-                    'button_pm'     => Validation::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
+                    'button_pm'     => self::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
                 ]
             ]
         );
@@ -141,7 +141,7 @@ class ProfileController extends MainController
                     'blogs'         => FacetModel::getOwnerFacet($user['user_id'], 'blog'),
                     'badges'        => BadgeModel::getBadgeUserAll($user['user_id']),
                     'post'          => PostModel::getPost($user['user_my_post'], 'id', $this->uid),
-                    'button_pm'     => Validation::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
+                    'button_pm'     => self::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
                 ]
             ]
         );
@@ -181,7 +181,7 @@ class ProfileController extends MainController
                     'blogs'         => FacetModel::getOwnerFacet($user['user_id'], 'blog'),
                     'badges'        => BadgeModel::getBadgeUserAll($user['user_id']),
                     'post'          => PostModel::getPost($user['user_my_post'], 'id', $this->uid),
-                    'button_pm'     => Validation::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
+                    'button_pm'     => self::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
                     'user_login'    => $user['user_login'],
                 ]
             ]
@@ -237,7 +237,7 @@ class ProfileController extends MainController
 
         return meta($m, $title, $desc);
     }
-    
+
     // Отправки личных сообщений (ЛС)
     // $uid - кто отправляет
     // $user_id - кому

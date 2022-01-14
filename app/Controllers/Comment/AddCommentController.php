@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel};
-use Content, Validation, SendEmail, Translate;
+use Content, Validation, Translate;
 
 class AddCommentController extends MainController
 {
@@ -50,7 +50,7 @@ class AddCommentController extends MainController
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($comment_content, 'comment');       
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($comment_content, 'comment');
 
         $last_id = CommentModel::addComment(
             [
@@ -63,7 +63,7 @@ class AddCommentController extends MainController
                 'comment_user_id'       => $this->uid['user_id'],
             ]
         );
-        
+
         $url = $url_post . '#comment_' . $last_id;
 
         // Add an audit entry and an alert to the admin
