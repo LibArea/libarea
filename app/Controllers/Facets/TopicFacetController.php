@@ -108,7 +108,7 @@ class TopicFacetController extends MainController
         $m = [
             'og'         => true,
             'twitter'    => true,
-            'imgurl'     => '/uploads/topics/logos/' . $facet['facet_img'],
+            'imgurl'     => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
             'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
