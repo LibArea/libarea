@@ -119,7 +119,7 @@ class AddPostController extends MainController
         Validation::Length($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
         if ($post_url) {
-            $og_img = $this->addUrl($post_url, $post_title);
+            $site = $this->addUrl($post_url, $post_title);
         }
 
         // Обложка поста
@@ -138,7 +138,7 @@ class AddPostController extends MainController
                 'post_title'            => $post_title,
                 'post_content'          => Content::change($post_content),
                 'post_content_img'      => $post_img ?? '',
-                'post_thumb_img'        => $og_img ?? '',
+                'post_thumb_img'        => $site['og_img'] ?? '',
                 'post_related'          => $post_related,
                 'post_merged_id'        => $post_merged_id,
                 'post_tl'               => $post_tl ?? 0,
@@ -151,7 +151,7 @@ class AddPostController extends MainController
                 'post_published'        => ($trigger === false) ? 0 : 1,
                 'post_user_id'          => $this->uid['user_id'],
                 'post_url'              => $post_url ?? '',
-                'post_url_domain'       => $post_url_domain ?? '',
+                'post_url_domain'       => $site['post_url_domain'] ?? '',
                 'post_closed'           => $post_closed,
                 'post_top'              => $post_top,
             ]
@@ -321,7 +321,13 @@ class AddPostController extends MainController
             } else {
                 WebModel::addItemCount($post_url_domain);
             }
-            return $og_img;
+            
+            $site = [
+                'og_img' => $og_img,
+                'post_url_domain' => $post_url_domain,
+            ];
+            
+            return $site;
     }
     
     // Парсинг
