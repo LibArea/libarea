@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
-use App\Models\MessagesModel;
+use App\Models\{MessagesModel, NotificationsModel};
 use Content, Config, Translate;
 
 class MessagesController extends MainController
@@ -90,7 +90,11 @@ class MessagesController extends MainController
         }
 
         // update views, etc. 
-        MessagesModel::setMessageRead($id, $this->uid['user_id']);
+        $dialog_id = MessagesModel::setMessageRead($id, $this->uid['user_id']);
+        
+        // user_id получателя и индификатор события
+        NotificationsModel::updateMessagesUnread($this->uid['user_id'], $dialog_id);
+        
         // dialog_recipient_unread
         if ($list = MessagesModel::getMessageByDialogId($id)) {
 
@@ -187,7 +191,17 @@ class MessagesController extends MainController
             redirect('/');
         }
 
-        MessagesModel::sendMessage($this->uid['user_id'], $recipient_id, $content);
+        $dialog_id = MessagesModel::sendMessage($this->uid['user_id'], $recipient_id, $content);
+
+        NotificationsModel::send(
+            [
+                'sender_id'     => $this->uid['user_id'],
+                'recipient_id'  => $recipient_id,
+                'action_type'   => 1, // Private messages
+                'url'           => '/messages/' . $dialog_id,
+            ]
+        );
+
 
         redirect(getUrlByName('messages'));
     }

@@ -64,11 +64,10 @@ class AddAnswerController extends MainController
                 if ($focus_user['signed_user_id'] != $this->uid['user_id']) {
                     NotificationsModel::send(
                         [
-                            'sender_id'         => $this->uid['user_id'],
-                            'recipient_id'      => $focus_user['signed_user_id'],
-                            'action_type'       => 3, // Ответ на пост
-                            'connection_type'   => $last_id,
-                            'content_url'       => $url,
+                            'sender_id'     => $this->uid['user_id'],
+                            'recipient_id'  => $focus_user['signed_user_id'],
+                            'action_type'   => 3, // Ответ на пост
+                            'url'           => $url,
                         ]
                     );
                 }

@@ -66,7 +66,7 @@
           <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['user_login']]); ?>"><?= $notif['user_login']; ?></a>
           <?= Translate::get('complained about'); ?>
           <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
-            <?= Translate::get('comment'); ?>
+            <?= Translate::get('content'); ?>
           </a>
         <?php } ?>
         <?php if ($notif['notification_action_type'] == 15) { ?>

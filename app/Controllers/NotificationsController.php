@@ -52,12 +52,6 @@ class NotificationsController extends MainController
             return false;
         }
 
-        // If private messages  
-        // Если личные сообщения 
-        if ($info['notification_action_type'] == 1) {
-            $info['notification_url'] = 'messages/' . $info['notification_connection_type'];
-        }
-
         NotificationsModel::updateMessagesUnread($this->uid['user_id'], $notif_id);
 
         redirect('/' .  $info['notification_url']);
@@ -76,7 +70,7 @@ class NotificationsController extends MainController
     }
 
     // Appeal (@)
-    public function mention($action_type, $message, $connection_type, $content_url, $owner_id = null)
+    public function mention($action_type, $message, $connection_type, $url, $owner_id = null)
     {
         $sender_id = $this->uid['user_id'];
         foreach ($message as $recipient_id) {
@@ -94,7 +88,7 @@ class NotificationsController extends MainController
                 }
             }
             
-            NotificationsModel::send(compact('sender_id', 'recipient_id', 'action_type', 'connection_type', 'content_url'));
+            NotificationsModel::send(compact('sender_id', 'recipient_id', 'action_type', 'url'));
 
             SendEmail::mailText($recipient_id, 'appealed');
         }

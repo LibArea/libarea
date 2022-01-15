@@ -77,22 +77,21 @@ class AddCommentController extends MainController
         // Notification to the author of the answer that there is a comment (do not write to ourselves) 
         // Оповещение автору ответа, что есть комментарий (себе не записываем)
         $answ = AnswerModel::getAnswerId($answer_id);
-        $owner_id = $answ['answer_user_id'];
-        if ($this->uid['user_id'] != $owner_id) {
+        $recipient_id = $answ['answer_user_id'];
+        if ($this->uid['user_id'] != $recipient_id) {
             NotificationsModel::send(
                 [
-                    'sender_id'         => $this->uid['user_id'],
-                    'recipient_id'      => $owner_id,
-                    'action_type'       => 4, // 4 comment 
-                    'connection_type'   => $last_id,
-                    'content_url'       => $url,
+                    'sender_id'     => $this->uid['user_id'],
+                    'recipient_id'  => $recipient_id,
+                    'action_type'   => 4, // 4 comment 
+                    'url'           => $url,
                 ]
             );
         }
 
         // Notification (@login). 12 - mentions in comments 
         if ($message = Content::parseUser($comment_content, true, true)) {
-            (new \App\Controllers\NotificationsController())->mention(12, $message, $last_id, $url, $owner_id);
+            (new \App\Controllers\NotificationsController())->mention(12, $message, $last_id, $url, $recipient_id);
         }
 
         ActionModel::addLogs(

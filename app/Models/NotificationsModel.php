@@ -9,7 +9,7 @@ use PDO;
 class NotificationsModel extends MainModel
 {
     // $action_type
-    // 1 - сообщение
+    // 1 - сообщение 
     // 2 - пост
     // 3 - ответ
     // 4 - комментарий
@@ -30,7 +30,6 @@ class NotificationsModel extends MainModel
                     notification_sender_id,
                     notification_recipient_id,
                     notification_action_type,
-                    notification_connection_type,
                     notification_url,
                     notification_add_time,
                     notification_read_flag,
@@ -67,21 +66,18 @@ class NotificationsModel extends MainModel
             'notification_sender_id'        => $data['sender_id'],
             'notification_recipient_id'     => $data['recipient_id'],
             'notification_action_type'      => $data['action_type'],
-            'notification_connection_type'  => $data['connection_type'],
-            'notification_url'              => $data['content_url'],
+            'notification_url'              => $data['url'],
             'notification_read_flag'        => 0,
         ];
 
         $sql = "INSERT INTO notifications(notification_sender_id, 
                                 notification_recipient_id, 
                                 notification_action_type, 
-                                notification_connection_type, 
                                 notification_url, 
                                 notification_read_flag) 
                        VALUES(:notification_sender_id, 
                                :notification_recipient_id, 
                                :notification_action_type, 
-                               :notification_connection_type, 
                                :notification_url, 
                                :notification_read_flag)";
 
@@ -193,7 +189,6 @@ class NotificationsModel extends MainModel
                     notification_sender_id,
                     notification_recipient_id,
                     notification_action_type,
-                    notification_connection_type,
                     notification_url,
                     notification_add_time,
                     notification_read_flag,

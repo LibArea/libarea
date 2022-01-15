@@ -37,7 +37,7 @@
               <a href="<?= $report['report_url']; ?>"><?= $report['report_url']; ?></a>
             </div>
           </td>
-          <td class="center<?php if ($report['report_status'] == 0) { ?> bg-red-100<?php } ?>">
+          <td class="center<?php if ($report['report_status'] == 0) { ?> bg-red-200<?php } ?>">
             <span class="report-status" data-id="<?= $report['report_id']; ?>">
               <i class="bi bi-record-circle gray text-2xl"></i>
             </span>

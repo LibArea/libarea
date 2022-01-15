@@ -37,18 +37,17 @@ class ReportController extends MainController
             $type_id = 'answer_' . $content_id;
         }
 
-        $slug = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        $url_report   = $slug . '#' . $type_id;
+        $slug   = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+        $url    = $slug . '#' . $type_id;
 
         // Оповещение админу
         // Admin notification 
         NotificationsModel::send(
             [
-                'sender_id'         => $this->uid['user_id'],
-                'recipient_id'      => 1,  // admin
-                'action_type'       => 20, // Система флагов  
-                'connection_type'   => $post_id,
-                'content_url'       => $url_report,
+                'sender_id'     => $this->uid['user_id'],
+                'recipient_id'  => 1,  // admin
+                'action_type'   => 20, // Система флагов  
+                'url'           => $url,
             ]
         );
 
@@ -57,7 +56,7 @@ class ReportController extends MainController
             'report_type'       => $content_type,
             'report_content_id' => $content_id,
             'report_reason'     => Translate::get('breaking the rules'),
-            'report_url'        => $url_report,
+            'report_url'        => $url,
             'report_date'       => date("Y-m-d H:i:s"),
             'report_status'     => 0,
         ];

@@ -402,7 +402,6 @@ CREATE TABLE `notifications` (
   `notification_sender_id` int(11) DEFAULT NULL COMMENT 'Отправитель',
   `notification_recipient_id` int(11) DEFAULT '0' COMMENT 'Получает ID',
   `notification_action_type` int(4) DEFAULT NULL COMMENT 'Тип оповещения',
-  `notification_connection_type` int(11) DEFAULT NULL COMMENT 'Данные источника',
   `notification_url` varchar(255) DEFAULT NULL COMMENT 'URL источника',
   `notification_add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `notification_read_flag` tinyint(1) DEFAULT '0' COMMENT 'Состояние прочтения',

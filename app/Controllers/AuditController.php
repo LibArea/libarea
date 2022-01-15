@@ -149,11 +149,10 @@ class AuditController extends MainController
         // Отправим тип уведомления 15 (аудит) администратору (id 1)
         NotificationsModel::send(
             [
-                'sender_id'         => $this->uid['user_id'],
-                'recipient_id'      => 1,  // admin
-                'action_type'       => 15, // 15 audit
-                'connection_type'   => $last_content_id,
-                'content_url'       => $url,
+                'sender_id'     => $this->uid['user_id'],
+                'recipient_id'  => 1,  // admin
+                'action_type'   => 15, // 15 audit
+                'url'           => $url,
             ]
         );
 

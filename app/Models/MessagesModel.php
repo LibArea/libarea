@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Hleb\Scheme\App\Models\MainModel;
-use App\Models\NotificationsModel;
 use DB;
 use PDO;
 
@@ -99,10 +98,7 @@ class MessagesModel extends MainModel
             DB::run($sql, ['user_id' => $user_id, 'dialog_id' => $dialog_id]);
         }
 
-        // user_id получателя и индификатор события
-        NotificationsModel::updateMessagesUnread($user_id, $dialog_id);
-
-        return true;
+        return $dialog_id;
     }
 
     // Последнее сообщение в диалоге
@@ -228,24 +224,7 @@ class MessagesModel extends MainModel
 
         self::updateDialogCount($messages_dialog_id, $dialog_sender_id);
 
-        /* Отправим на E-mail...
-		   UserModel::updateInboxUnread($recipient_id);
-		if ($user_info = UserModel::getUser($sender_id, 'id'))
-		{
-			...
-		} */
-
-        NotificationsModel::send(
-            [
-                'sender_id'         => $dialog_sender_id,
-                'recipient_id'      => $dialog_recipient_id,
-                'action_type'       => 1, // Private messages
-                'connection_type'   => $messages_dialog_id,
-                'content_url'       => '',
-            ]
-        );
-
-        return true;
+        return $messages_dialog_id;
     }
 
     // Изменение количество сообщений
