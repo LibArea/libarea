@@ -7,17 +7,17 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\{SettingModel, BadgeModel};
 use App\Models\Admin\{BanUserModel, UserModel};
-use Validation, Translate;
+use Validation, Translate, Tpl;
 
 class UsersController extends MainController
 {
     protected $limit = 50;
 
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index($sheet, $type)
@@ -30,20 +30,19 @@ class UsersController extends MainController
 
         $result = [];
         foreach ($user_all as $ind => $row) {
-            $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['user_reg_ip']);
-            $row['last_visit_logs'] = UserModel::lastVisitLogs($row['user_id']);
-            $row['created_at']      = lang_date($row['user_created_at']);
-            $row['user_updated_at'] = lang_date($row['user_updated_at']);
+            $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['reg_ip']);
+            $row['last_visit_logs'] = UserModel::lastVisitLogs($row['id']);
+            $row['created_at']      = lang_date($row['created_at']);
+            $row['updated_at'] = lang_date($row['updated_at']);
             $result[$ind]           = $row;
         }
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/user/users',
             [
                 'meta'  => meta($m = [], Translate::get('users')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
@@ -67,15 +66,14 @@ class UsersController extends MainController
 
         $results = [];
         foreach ($user_all as $ind => $row) {
-            $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['user_id']);
+            $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['id']);
             $results[$ind]      = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/user/logip',
             [
                 'meta'  => meta($m = [], Translate::get('search')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'results'   => $results,
                     'option'    => $option,
@@ -109,11 +107,10 @@ class UsersController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/user/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit user')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -140,29 +137,30 @@ class UsersController extends MainController
         Validation::Length($login, Translate::get('login'), '3', '11', $redirect);
         Validation::Length($user_name, Translate::get('name'), '3', '11', $redirect);
 
-        $data = [
-            'user_id'            => $user_id,
-            'user_login'         => $login,
-            'user_email'         => Request::getPost('email'),
-            'user_whisper'       => $user_whisper ?? '',
-            'user_name'          => $user_name ?? '',
-            'user_activated'     => Request::getPostInt('activated'),
-            'user_limiting_mode' => Request::getPostInt('limiting_mode'),
-            'user_template'      => $user['user_template'],
-            'user_lang'          => $user['user_lang'],
-            'user_trust_level'   => Request::getPostInt('trust_level'),
-            'user_color'         => Request::getPostString('color', '#339900'),
-            'user_about'         => Request::getPost('about', ''),
-            'user_website'       => Request::getPost('website', ''),
-            'user_location'      => Request::getPost('location', ''),
-            'user_public_email'  => Request::getPost('public_email', ''),
-            'user_skype'         => Request::getPost('skype', ''),
-            'user_twitter'       => Request::getPost('twitter', ''),
-            'user_telegram'      => Request::getPost('telegram', ''),
-            'user_vk'            => Request::getPost('vk', ''),
-        ];
-
-        SettingModel::editProfile($data);
+        SettingModel::edit(
+            [
+                'id'            => $user_id,
+                'login'         => $login,
+                'email'         => Request::getPost('email'),
+                'whisper'       => $user_whisper ?? null,
+                'name'          => $user_name ?? null,
+                'activated'     => Request::getPostInt('activated'),
+                'limiting_mode' => Request::getPostInt('limiting_mode'),
+                'template'      => $user['template'] ?? 'default',
+                'lang'          => $user['lang'] ?? 'ru',
+                'trust_level'   => Request::getPostInt('trust_level'),
+                'updated_at'    => date('Y-m-d H:i:s'),
+                'color'         => Request::getPostString('color', '#339900'),
+                'about'         => Request::getPost('about', null),
+                'website'       => Request::getPost('website', null),
+                'location'      => Request::getPost('location', null),
+                'public_email'  => Request::getPost('public_email', null),
+                'skype'         => Request::getPost('skype', null),
+                'twitter'       => Request::getPost('twitter', null),
+                'telegram'      => Request::getPost('telegram', null),
+                'vk'            => Request::getPost('vk', null),
+            ]
+        );
 
         redirect($redirect);
     }

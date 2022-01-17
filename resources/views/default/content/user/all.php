@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -23,7 +23,7 @@
       <?= tabs_nav(
         'nav',
         $data['sheet'],
-        $uid,
+        $user,
         $pages = [
           [
             'id'    => $data['type'] . 's.all',
@@ -47,14 +47,14 @@
     <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>
         <div class="center inline pr10 pl10 mb20 mb-col-2">
-          <a href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>">
-            <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'br-rd-50 w60 h60'); ?>
+          <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+            <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'br-rd-50 w60 h60'); ?>
           </a>
-          <a class="block dark-gray-300 black mt5" href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>">
-            <?= $user['user_login']; ?>
+          <a class="block dark-gray-300 black mt5" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+            <?= $user['login']; ?>
           </a>
-          <?php if ($user['user_name']) { ?>
-            <span class="gray dark-gray-300 text-sm"><?= $user['user_name']; ?></span>
+          <?php if ($user['name']) { ?>
+            <span class="gray dark-gray-300 text-sm"><?= $user['name']; ?></span>
           <?php } ?>
         </div>
       <?php } ?>
@@ -63,4 +63,4 @@
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
 </main>
 </div>
-<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
+<?= Tpl::import('/_block/wide-footer'); ?>

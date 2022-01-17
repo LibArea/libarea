@@ -6,17 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\FeedModel;
-use Content, Translate;
+use Content, Translate, Tpl;
 
 class PostsController extends MainController
 {
     protected $limit = 50;
 
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index($sheet, $type)
@@ -25,8 +25,8 @@ class PostsController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $sort       = $sheet == 'admin.posts.all' ? 0 : 1;
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $sort);
-        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $sort);
+        $pagesCount = FeedModel::feedCount($this->user, $sheet, $sort);
+        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $sort);
 
         $result = [];
         foreach ($posts  as $ind => $row) {
@@ -36,11 +36,10 @@ class PostsController extends MainController
             $result[$ind]   = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/post/posts',
             [
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted posts') : Translate::get('posts')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

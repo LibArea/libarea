@@ -15,45 +15,45 @@ class СonsoleModel extends MainModel
         return DB::run($sql);
     }
 
-    public static function allUp($user_id)
+    public static function allUp($uid)
     {
         $sql = "SELECT 
-                    (SELECT SUM(post_votes) FROM posts WHERE post_user_id = :user_id) 
+                    (SELECT SUM(post_votes) FROM posts WHERE post_user_id = :uid) 
                             AS count_posts,
-                    (SELECT SUM(answer_votes) FROM answers WHERE answer_user_id = :user_id) 
+                    (SELECT SUM(answer_votes) FROM answers WHERE answer_user_id = :uid) 
                             AS count_answers,
-                    (SELECT SUM(comment_votes) FROM comments WHERE comment_user_id = :user_id) 
+                    (SELECT SUM(comment_votes) FROM comments WHERE comment_user_id = :uid) 
                             AS count_comments";
 
-        $user = DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+        $user = DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
         // Вернем сумму, но этот запрос необходим будет далее именно по отдельным типам 
         return $user['count_posts'] + $user['count_answers'] + $user['count_comments'];
     }
 
     public static function allUsers()
     {
-        return DB::run("SELECT user_id FROM users")->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run("SELECT id FROM users")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function setAllUp($user_id, $count)
+    public static function setAllUp($uid, $count)
     {
-        $sql = "UPDATE users SET user_up_count  = :count WHERE user_id = :user_id";
+        $sql = "UPDATE users SET up_count  = :count WHERE id = :uid";
 
-        return DB::run($sql, ['user_id' => $user_id, 'count' => $count]);
+        return DB::run($sql, ['uid' => $uid, 'count' => $count]);
     }
 
     // Users Trust Level
     public static function getTrustLevel($tl)
     {
-        $sql = "SELECT user_id, user_trust_level, user_up_count FROM users WHERE user_trust_level = :tl";
+        $sql = "SELECT id, trust_level, up_count FROM users WHERE trust_level = :tl";
 
         return DB::run($sql, ['tl' => $tl])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function setTrustLevel($user_id, $tl)
+    public static function setTrustLevel($uid, $tl)
     {
-        $sql = "UPDATE users SET user_trust_level = :tl WHERE user_id = :user_id";
+        $sql = "UPDATE users SET trust_level = :tl WHERE id = :id";
 
-        return DB::run($sql, ['user_id' => $user_id, 'tl' => $tl]);
+        return DB::run($sql, ['uid' => $uid, 'tl' => $tl]);
     }
 }

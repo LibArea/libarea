@@ -1,9 +1,9 @@
 <?php $post = $data['post']; ?>
 <div class="col-span-1 mb-none center">
   <div class="sticky top20">
-    <?= votes($uid['user_id'], $post, 'post', 'ps', 'text-2xl middle', 'block'); ?>
+    <?= votes($user['id'], $post, 'post', 'ps', 'text-2xl middle', 'block'); ?>
     <div class="pt20">
-      <?= favorite($uid['user_id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', 'text-2xl'); ?>
+      <?= favorite($user['id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
 </div>
@@ -12,7 +12,7 @@
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
       <div class="post-body">
         <h1 class="mb0 mt10 font-normal text-2xl">
-          <?= import('/_block/post-title', ['post' => $post, 'uid' => $uid]); ?>
+          <?= Tpl::import('/_block/post-title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm lowercase flex gray-400">
           <?= $post['post_date_lang']; ?>
@@ -20,15 +20,15 @@
             (<?= Translate::get('ed'); ?>)
           <?php } ?>
 
-          <?php if ($uid['user_id']) { ?>
-            <?php if ($uid['user_login'] == $post['user_login']  || UserData::checkAdmin()) { ?>
+          <?php if ($user['id']) { ?>
+            <?php if ($user['login'] == $post['login']  || UserData::checkAdmin()) { ?>
               <a class="gray-400 mr10 ml10" href="<?= getUrlByName('post.edit', ['id' => $post['post_id']]); ?>">
                 <?= Translate::get('edit'); ?>
               </a>
             <?php } ?>
-            <?php if ($uid['user_login'] == $post['user_login']) { ?>
+            <?php if ($user['login'] == $post['login']) { ?>
               <?php if ($post['post_draft'] == 0) { ?>
-                <?php if ($post['user_my_post'] == $post['post_id']) { ?>
+                <?php if ($post['my_post'] == $post['post_id']) { ?>
                   <span class="mu_post gray-400 mr10 ml10">+ <?= Translate::get('in-the-profile'); ?></span>
                 <?php } else { ?>
                   <a class="add-post-profile gray-400 mr10 ml10" data-post="<?= $post['post_id']; ?>">
@@ -53,7 +53,7 @@
                 <?php } ?>
               </a>
             <?php } ?>
-            <?= import('/_block/show-ip', ['ip' => $post['post_ip'], 'uid' => $uid, 'publ' => $post['post_published']]); ?>
+            <?= Tpl::import('/_block/show-ip', ['ip' => $post['post_ip'], 'user' => $user, 'publ' => $post['post_published']]); ?>
           <?php } ?>
         </div>
       </div>
@@ -85,7 +85,7 @@
             </div>
           </div>
         <?php } ?>
-        <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes', 'uid' => $uid]); ?>
+        <?= Tpl::import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes', 'user' => $user]); ?>
 
         <div class="flex flex-row items-center mb20">
           <?php if (!empty($data['blog'])) { ?>
@@ -110,7 +110,7 @@
 
       <div class="br-box-gray dark-br-black flex items-center mb5">
         <div class="left p10 none mb-block">
-          <?= votes($uid['user_id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
+          <?= votes($user['id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
         </div>
 
         <ul class="list-none w-100 p0 m0 lowercase">
@@ -119,8 +119,8 @@
               <?= Translate::get('created by'); ?>
             </div>
             <div class="center">
-              <a title="<?= $post['user_login']; ?>" href="<?= getUrlByName('profile', ['login' => $post['user_login']]); ?>">
-                <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'w30 h30 br-rd-50'); ?>
+              <a title="<?= $post['login']; ?>" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+                <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'w30 h30 br-rd-50'); ?>
               </a>
             </div>
           </li>
@@ -130,8 +130,8 @@
             </div>
             <div class="center">
               <?php if (!empty($data['last_user']['answer_id'])) { ?>
-                <a title="<?= $data['last_user']['user_login']; ?>" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
-                  <?= user_avatar_img($data['last_user']['user_avatar'], 'small', $data['last_user']['user_login'], 'w30 h30 br-rd-50'); ?>
+                <a title="<?= $data['last_user']['login']; ?>" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
+                  <?= user_avatar_img($data['last_user']['avatar'], 'small', $data['last_user']['login'], 'w30 h30 br-rd-50'); ?>
                 </a>
               <?php } else { ?>
                 <span class="gray-400 text-sm">—</span>
@@ -165,7 +165,7 @@
         </ul>
 
         <div class="mr15">
-          <?php if ($uid['user_id'] > 0) { ?>
+          <?php if ($user['id'] > 0) { ?>
             <?php if (is_array($data['post_signed'])) { ?>
               <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id text-sm right mt5 bg-gray-100 gray-400 br-gray-200 br-rd20 center pt5 pr15 pb5 pl15">
                 <?= Translate::get('unsubscribe'); ?>
@@ -183,18 +183,18 @@
         </div>
 
         <div class="right ml15 p10 none mb-block">
-          <?= favorite($uid['user_id'], $post['post_id'], 'post', $post['favorite_tid'], 'mob', 'text-2xl'); ?>
+          <?= favorite($user['id'], $post['post_id'], 'post', $post['favorite_tid'], 'mob', 'text-2xl'); ?>
         </div>
       </div>
 
-      <?php if ($uid['user_id'] > 0) { ?>
+      <?php if ($user['id'] > 0) { ?>
         <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
 
           <form class="mb15" action="<?= getUrlByName('answer.create'); ?>" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
 
-            <?= import('/_block/editor/editor', [
-              'uid'       => $uid,
+            <?= Tpl::import('/_block/editor/editor', [
+              'user'       => $user,
               'height'    => '250px',
               'preview'   => 'vertical',
             ]); ?>
@@ -218,10 +218,10 @@
   <div id="comment"></div>
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_feature'] == 0) {
-      import('/_block/comments-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
+      Tpl::import('/_block/comments-view', ['data' => $data, 'post' => $post, 'user' => $user]);
       if ($post['post_closed'] == 1) echo no_content(Translate::get('post.closed'), 'bi bi-door-closed');
     } else {
-      import('/_block/questions-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
+      Tpl::import('/_block/questions-view', ['data' => $data, 'post' => $post, 'user' => $user]);
       if ($post['post_closed'] == 1) echo no_content(Translate::get('question.closed'), 'bi bi-door-closed');
     }
   } else {
@@ -234,7 +234,7 @@
     <div class="br-box-gray box-shadow-all bg-white br-rd5 mb15 p15">
       <h3 class="uppercase mb5 mt0 font-light gray"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['topics'] as $topic) { ?>
-        <?php if ($uid['user_id']) { ?>
+        <?php if ($user['id']) { ?>
           <?php if (!$topic['signed_facet_id']) { ?>
             <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky-500 center mt5 mr5">
               <i class="bi bi-plus"></i> <?= Translate::get('read'); ?>
@@ -301,7 +301,7 @@
       }
     }));
 
-  <?php if ($uid['user_id'] > 0) { ?>
+  <?php if ($user['id'] > 0) { ?>
     document.querySelectorAll(".msg-flag")
       .forEach(el => el.addEventListener("click", function(e) {
         let post_id = el.dataset.post_id;
@@ -336,4 +336,4 @@
   <?php } ?>
 </script>
 </div>
-<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
+<?= Tpl::import('/_block/wide-footer'); ?>

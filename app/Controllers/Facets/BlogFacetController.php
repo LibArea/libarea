@@ -7,17 +7,17 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel};
-use Content, Translate;
+use Content, Translate, Tpl;
 
 class BlogFacetController extends MainController
 {
     protected $limit = 25;
-    
-    private $uid;
+
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Blog posts
@@ -37,9 +37,9 @@ class BlogFacetController extends MainController
         }
 
         $facet['facet_add_date']    = lang_date($facet['facet_add_date']);
- 
-        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $facet['facet_slug']);
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $facet['facet_slug']);
+
+        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $facet['facet_slug']);
+        $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
         $result = [];
         foreach ($posts as $ind => $row) {
@@ -60,11 +60,10 @@ class BlogFacetController extends MainController
             'url'        => $url,
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/facets/blog',
             [
                 'meta'  => meta($m, $title, $descr),
-                'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
@@ -74,7 +73,7 @@ class BlogFacetController extends MainController
                     'posts'         => $result,
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
-                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->uid['user_id'], 'topic'),
+                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'topic'),
                     'info'          => Content::text($facet['facet_info'], 'text'),
                     'pages'         => (new \App\Controllers\PageController())->last($facet['facet_id']),
 

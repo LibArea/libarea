@@ -6,27 +6,26 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{FacetModel, SubscriptionModel};
-use Validation, Config, Translate;
+use Validation, Config, Translate, Tpl;
 
 class AddFacetController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Add form topic
     public function index($sheet)
-    {  
+    {
         $limit   = self::limitFacer($sheet, 'redirect');
 
-        return agRender(
+        return Tpl::agRender(
             '/facets/add',
             [
                 'meta'  => meta($m = [], Translate::get('add topic')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $sheet,
@@ -38,7 +37,7 @@ class AddFacetController extends MainController
 
     // Add topic / blog
     public function create($type)
-    {   
+    {
         self::limitFacer($type, 'redirect');
 
         $facet_title                = Request::getPost('facet_title');
@@ -49,8 +48,8 @@ class AddFacetController extends MainController
 
         $redirect = getUrlByName('topic.add');
         if ($type == 'blog') {
-            $redirect = getUrlByName('blogs.my', ['login' => $this->uid['user_login']]);
-            if ($this->uid['user_trust_level'] != UserData::REGISTERED_ADMIN) {
+            $redirect = getUrlByName('blogs.my', ['login' => $this->user['login']]);
+            if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
                 if (in_array($facet_slug, Config::get('stop-blog'))) {
                     addMsg(Translate::get('stop-blog'), 'error');
                     redirect($redirect);
@@ -85,31 +84,31 @@ class AddFacetController extends MainController
             'facet_img'                 => 'facet-default.png',
             'facet_add_date'            => date("Y-m-d H:i:s"),
             'facet_seo_title'           => $facet_seo_title,
-            'facet_user_id'             => $this->uid['user_id'],
+            'facet_user_id'             => $this->user['id'],
             'facet_type'                => $type,
         ];
 
         $new_facet_id = FacetModel::add($data);
 
-        SubscriptionModel::focus($new_facet_id['facet_id'], $this->uid['user_id'], 'topic');
+        SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'topic');
 
         redirect(getUrlByName($type, ['slug' => $facet_slug]));
     }
 
     public function limitFacer($type, $action)
-    { 
-        $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
-        
+    {
+        $count      = FacetModel::countFacetsUser($this->user['id'], $type);
+
         $count_add  = UserData::checkAdmin() ? 999 : Config::get('trust-levels.count_add_' . $type);
-        
+
         $in_total   = $count_add - $count;
-        
+
         if ($action == 'no.redirect') {
-           return $in_total; 
+            return $in_total;
         }
-        
-        Validation::validTl($this->uid['user_trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
-        
+
+        Validation::validTl($this->user['trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
+
         if (!$in_total > 0) {
             redirect('/');
         }

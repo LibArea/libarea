@@ -7,17 +7,17 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
-use Content, Translate;
+use Content, Translate, Tpl;
 
 class TopicFacetController extends MainController
 {
     protected $limit = 25;
-    
-    private $uid;
+
+    private $user;
 
     public function __construct()
     {
-        $this->uid = UserData::getUid();
+        $this->user = UserData::get();
     }
 
     // Posts in the topic 
@@ -38,8 +38,8 @@ class TopicFacetController extends MainController
 
         $facet['facet_add_date']    = lang_date($facet['facet_add_date']);
 
-        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $facet['facet_slug']);
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $facet['facet_slug']);
+        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $facet['facet_slug']);
+        $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
         $result = [];
         foreach ($posts as $ind => $row) {
@@ -65,11 +65,10 @@ class TopicFacetController extends MainController
             'url'        => $url,
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/facets/topic',
             [
                 'meta'  => meta($m, $title, $desc),
-                'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
@@ -78,7 +77,7 @@ class TopicFacetController extends MainController
                     'facet'         => $facet,
                     'posts'         => $result,
                     'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
-                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->uid['user_id'], 'topic'),
+                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'topic'),
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
                     'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
@@ -112,11 +111,10 @@ class TopicFacetController extends MainController
             'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/facets/info',
             [
                 'meta'  => meta($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description']),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'info',
                     'type'          => 'info',
@@ -138,6 +136,6 @@ class TopicFacetController extends MainController
 
         $users      = FacetModel::getFocusUsers($topic_id, 25);
 
-        return agIncludeTemplate('/content/facets/followers', ['users' => $users, 'uid'   => $this->uid]);
+        return Tpl::agIncludeTemplate('/content/facets/followers', ['users' => $users]);
     }
 }

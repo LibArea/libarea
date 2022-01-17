@@ -4,21 +4,13 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{ReportModel, ActionModel};
-use Translate;
+use Translate, Tpl;
 
 class ReportsController extends MainController
 {
     protected $limit = 20;
-
-    private $uid;
-
-    public function __construct()
-    {
-        $this->uid  = UserData::getUid();
-    }
 
     public function index($sheet, $type)
     {
@@ -37,11 +29,10 @@ class ReportsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/report/reports',
             [
                 'meta'  => meta($m = [], Translate::get('reports')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
@@ -64,11 +55,10 @@ class ReportsController extends MainController
         $logs       = ActionModel::getLogs($page, $this->limit);
         $pagesCount = ActionModel::getLogsCount();
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/report/logs',
             [
                 'meta'  => meta($m = [], Translate::get('logs')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

@@ -8,8 +8,8 @@ use PDO;
 
 class MessagesModel extends MainModel
 {
-    // Все диалоги
-    public static function getMessages($user_id)
+    // All dialogs
+    public static function getMessages($uid)
     {
         $sql = "SELECT  
                     dialog_id,
@@ -22,13 +22,13 @@ class MessagesModel extends MainModel
                     dialog_sender_count,
                     dialog_recipient_count
                         FROM messages_dialog 
-                          WHERE dialog_sender_id = :user_id OR dialog_recipient_id = :user_id
+                          WHERE dialog_sender_id = :uid OR dialog_recipient_id = :uid
                             ORDER BY dialog_update_time DESC";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function lastBranches($user_id)
+    public static function lastBranches($uid)
     {
         $sql = "SELECT  
                     dialog_id,
@@ -36,18 +36,18 @@ class MessagesModel extends MainModel
                     dialog_add_time,
                     dialog_sender_count,
                     dialog_recipient_count,
-                    user_id,
-                    user_login,
-                    user_avatar
+                    id,
+                    login,
+                    avatar
                         FROM messages_dialog 
-                        LEFT JOIN users ON dialog_sender_id = user_id OR dialog_recipient_id = user_id
-                          WHERE dialog_sender_id = :user_id OR dialog_recipient_id = :user_id
+                        LEFT JOIN users ON dialog_sender_id = id OR dialog_recipient_id = id
+                          WHERE dialog_sender_id = :uid OR dialog_recipient_id = :uid
                             ORDER BY dialog_update_time DESC LIMIT 15";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Получаем диалог по id
+    // We get a dialog by id
     public static function getDialogById($dialog_id)
     {
         $sql = "SELECT  
@@ -61,41 +61,41 @@ class MessagesModel extends MainModel
                     dialog_sender_count,
                     dialog_recipient_count
                         FROM messages_dialog 
-                        WHERE dialog_id = :dialog_id";
+                            WHERE dialog_id = :dialog_id";
 
         return DB::run($sql, ['dialog_id' => $dialog_id])->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Пересчет просмотрено или нет
-    public static function setMessageRead($dialog_id, $user_id, $receipt = true)
+    // Recalculation viewed or not
+    public static function setMessageRead($dialog_id, $uid, $receipt = true)
     {
         if (!$messages_dialog = self::getDialogById($dialog_id)) {
             return false;
         }
 
         // Отправитель
-        if ($messages_dialog['dialog_sender_id'] == $user_id) {
+        if ($messages_dialog['dialog_sender_id'] == $uid) {
 
-            $sql = "UPDATE messages_dialog SET dialog_sender_unread = :user_id 
+            $sql = "UPDATE messages_dialog SET dialog_sender_unread = :uid 
             WHERE dialog_sender_unread = 0 AND dialog_id = :dialog_id";
 
-            DB::run($sql, ['user_id' => $user_id, 'dialog_id' => $dialog_id]);
+            DB::run($sql, ['uid' => $uid, 'dialog_id' => $dialog_id]);
 
             if ($receipt) {
 
-                $sql = "UPDATE messages_dialog SET dialog_sender_unread = :user_id 
+                $sql = "UPDATE messages_dialog SET dialog_sender_unread = :uid 
                             WHERE dialog_sender_unread = 0 AND dialog_id = :dialog_id";
 
-                DB::run($sql, ['user_id' => $user_id, 'dialog_id' => $dialog_id]);
+                DB::run($sql, ['uid' => $uid, 'dialog_id' => $dialog_id]);
             }
         }
         // Получатель
-        if ($messages_dialog['dialog_recipient_id'] == $user_id) {
+        if ($messages_dialog['dialog_recipient_id'] == $uid) {
 
-            $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :user_id 
+            $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :uid 
                         WHERE dialog_recipient_unread = 0 AND dialog_id = :dialog_id";
 
-            DB::run($sql, ['user_id' => $user_id, 'dialog_id' => $dialog_id]);
+            DB::run($sql, ['uid' => $uid, 'dialog_id' => $dialog_id]);
         }
 
         return $dialog_id;
@@ -114,8 +114,8 @@ class MessagesModel extends MainModel
                     message_recipient_remove,
                     message_receipt
                         FROM messages 
-                        WHERE message_dialog_id = :dialog_id
-                        ORDER BY message_id DESC";
+                            WHERE message_dialog_id = :dialog_id
+                                ORDER BY message_id DESC";
 
         return DB::run($sql, ['dialog_id' => $dialog_id])->fetch(PDO::FETCH_ASSOC);
     }
@@ -132,8 +132,8 @@ class MessagesModel extends MainModel
                     message_recipient_remove,
                     message_receipt
                         FROM messages 
-                        WHERE message_dialog_id = :dialog_id
-                        ORDER BY message_id DESC";
+                            WHERE message_dialog_id = :dialog_id
+                                ORDER BY message_id DESC";
 
         $query = DB::run($sql, ['dialog_id' => $dialog_id])->fetchAll(PDO::FETCH_ASSOC);
 
@@ -144,14 +144,6 @@ class MessagesModel extends MainModel
         }
 
         return $message;
-    }
-
-    // Количество сообщений (не задействованно)
-    public static function getMessagesTotal($user_id)
-    {
-        $sql = "SELECT dialog_id FROM messages_dialog";
-
-        return DB::run($sql)->rowCount();
     }
 
     public static function getLastMessages($dialog_ids)
@@ -174,19 +166,46 @@ class MessagesModel extends MainModel
             return false;
         }
 
-        if (!$messages_dialog = self::getDialogByUser($dialog_sender_id, $dialog_recipient_id)) {
+        $messages_dialog = self::getDialogByUser(
+            [
+                'dialog_sender_id'       => $dialog_sender_id,
+                'dialog_recipient_id'    => $dialog_recipient_id,
+            ]
+        );
 
-            // Записываем диалог (если его нет)
-            $params = [
-                'dialog_sender_id'        => $dialog_sender_id,
-                'dialog_sender_unread'     => 1,
-                'dialog_recipient_id'     => $dialog_recipient_id,
-                'dialog_recipient_unread'  => 0,
-                'dialog_sender_count'      => 0,
-                'dialog_recipient_count'   => 0,
-            ];
+        $messages_dialog_id = $messages_dialog['dialog_id'];
+        if (!$messages_dialog) {
 
-            $sql = "INSERT INTO messages_dialog(dialog_sender_id, 
+            // Create a dialog (if there is none)
+            $messages_dialog_id = self::createDialog(
+                [
+                    'dialog_sender_id'          => $dialog_sender_id,
+                    'dialog_sender_unread'      => 1,
+                    'dialog_recipient_id'       => $dialog_recipient_id,
+                    'dialog_recipient_unread'   => 0,
+                    'dialog_sender_count'       => 0,
+                    'dialog_recipient_count'    => 0,
+                ]
+            );
+        }
+
+        self::createMessage(
+            [
+                'message_dialog_id' => $messages_dialog_id,
+                'message_content'   => $message_content,
+                'message_sender_id' => $dialog_sender_id,
+            ]
+        );
+
+        self::updateDialogCount($messages_dialog_id, $dialog_sender_id);
+
+        return $messages_dialog_id;
+    }
+
+    // Creating a dialog
+    public static function createDialog($params)
+    {
+        $sql = "INSERT INTO messages_dialog(dialog_sender_id, 
                                         dialog_sender_unread, 
                                         dialog_recipient_id, 
                                         dialog_recipient_unread, 
@@ -200,35 +219,26 @@ class MessagesModel extends MainModel
                                         :dialog_sender_count, 
                                         :dialog_recipient_count)";
 
-            DB::run($sql, $params);
+        DB::run($sql, $params);
 
-            // Вернем id диалога для записи в `dialog_id` ниже          
-            $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
+        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
 
-            $messages_dialog_id = $sql_last_id['last_id'];
-        } else {
+        return $sql_last_id['last_id'];
+    }
 
-            $messages_dialog_id = $messages_dialog['dialog_id'];
-        }
 
-        $params_send = [
-            'message_dialog_id' => $messages_dialog_id,
-            'message_content'   => $message_content,
-            'message_sender_id' => $dialog_sender_id,
-        ];
-
+    // Creating a message
+    public static function createMessage($params)
+    {
         $sql = "INSERT INTO messages(message_dialog_id, message_content, message_sender_id)
                             VALUES(:message_dialog_id, :message_content, :message_sender_id)";
 
-        DB::run($sql, $params_send);
-
-        self::updateDialogCount($messages_dialog_id, $dialog_sender_id);
-
-        return $messages_dialog_id;
+        DB::run($sql, $params);
     }
 
-    // Изменение количество сообщений
-    public static function updateDialogCount($dialog_id, $user_id)
+
+    // Changing the number of messages
+    public static function updateDialogCount($dialog_id, $uid)
     {
         if (!$inbox_dialog = self::getDialogById($dialog_id)) {
             return false;
@@ -240,7 +250,7 @@ class MessagesModel extends MainModel
                     dialog_recipient_count,
                     dialog_recipient_unread
                         FROM messages_dialog
-                        WHERE dialog_id = :dialog_id";
+                            WHERE dialog_id = :dialog_id";
 
         $query = DB::run($sql, ['dialog_id' => $dialog_id])->fetch(PDO::FETCH_ASSOC);
 
@@ -263,7 +273,7 @@ class MessagesModel extends MainModel
 
         DB::run($sql_dialog, $params);
 
-        if ($inbox_dialog['dialog_sender_id'] == $user_id) {
+        if ($inbox_dialog['dialog_sender_id'] == $uid) {
 
             $recipient_unread = 0;
             $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :recipient 
@@ -280,8 +290,8 @@ class MessagesModel extends MainModel
         }
     }
 
-    // Информация о участнике
-    public static function getDialogByUser($dialog_sender_id, $dialog_recipient_id)
+    // User Information
+    public static function getDialogByUser($params)
     {
         $sql = "SELECT  
                     dialog_id,
@@ -294,11 +304,11 @@ class MessagesModel extends MainModel
                     dialog_sender_count,
                     dialog_recipient_count
                         FROM messages_dialog 
-                        WHERE dialog_sender_id = :dialog_sender_id AND 
-                        dialog_recipient_id = :dialog_recipient_id
-                        OR dialog_recipient_id = :dialog_sender_id AND 
-                        dialog_sender_id = :dialog_recipient_id";
+                            WHERE dialog_sender_id  = :dialog_sender_id AND 
+                                dialog_recipient_id     = :dialog_recipient_id
+                                OR dialog_recipient_id  = :dialog_sender_id AND 
+                                dialog_sender_id        = :dialog_recipient_id";
 
-        return DB::run($sql, ['dialog_sender_id' => $dialog_sender_id, 'dialog_recipient_id' => $dialog_recipient_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, $params)->fetch(PDO::FETCH_ASSOC);
     }
 }

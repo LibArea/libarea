@@ -6,17 +6,10 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\{SettingModel, UserModel};
-use Config, Integration, Validation, SendEmail, Translate;
+use Config, Integration, Validation, SendEmail, Translate, Tpl;
 
 class RecoverController extends MainController
 {
-    private $uid;
-
-    public function __construct()
-    {
-        $this->uid = UserData::getUid();
-    }
-
     public function showPasswordForm()
     {
         $m = [
@@ -26,11 +19,10 @@ class RecoverController extends MainController
             'url'        => getUrlByName('recover'),
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/auth/recover',
             [
                 'meta'  => meta($m, Translate::get('password recovery'), Translate::get('info-recover')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet' => 'recover',
                     'type'  => 'recover',
@@ -55,23 +47,29 @@ class RecoverController extends MainController
 
         $uInfo = UserModel::userInfo($email);
 
-        if (empty($uInfo['user_email'])) {
+        if (empty($uInfo['email'])) {
             addMsg(Translate::get('email.no.site'), 'error');
             redirect($recover_uri);
         }
 
         // Проверка на заблокированный аккаунт
-        if ($uInfo['user_ban_list'] == UserData::BANNED_USER) {
-            addMsg(Translate::get('your account is under review'), 'error');
+        if ($uInfo['ban_list'] == UserData::BANNED_USER) {
+            addMsg(Translate::get('account.being.verified'), 'error');
             redirect($recover_uri);
         }
 
-        $code = $uInfo['user_id'] . '-' . randomString('crypto', 25);
-        UserModel::initRecover($uInfo['user_id'], $code);
+        $code = $uInfo['id'] . '-' . randomString('crypto', 25);
+        UserModel::initRecover(
+            [
+                'activate_date'     => date('Y-m-d H:i:s'),
+                'activate_user_id'  => $uInfo['id'],
+                'activate_code'     => $code,
+            ]
+        );
 
         // Отправка e-mail
-        SendEmail::mailText($uInfo['user_id'], 'changing.password', ['newpass_link' => getUrlByName('recover.code', ['code' => $code])]);
-        
+        SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => getUrlByName('recover.code', ['code' => $code])]);
+
         addMsg(Translate::get('new password email'), 'success');
         redirect(getUrlByName('login'));
     }
@@ -90,11 +88,10 @@ class RecoverController extends MainController
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
         pageError404($user);
 
-        return agRender(
+        return Tpl::agRender(
             '/auth/newrecover',
             [
                 'meta'  => meta($m = [], Translate::get('password recovery'), Translate::get('info-recover')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'code'      => $code,
                     'user_id'   => $user_id['activate_user_id'],

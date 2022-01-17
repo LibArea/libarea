@@ -44,28 +44,29 @@ class ActionModel extends MainModel
     // Поиск контента для форм
     public static function getSearch($search, $type)
     {
-        $uid = UserData::getUid();
+        $user = UserData::get();
         $field_id   = $type . '_id';
         if ($type == 'post') {
             $field_tl = 'post_tl';
             $field_name = 'post_title';
-            $sql = "SELECT post_id, post_title, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id DESC LIMIT 100";
+            $sql = "SELECT post_id, post_title, post_tl, post_is_deleted FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id DESC LIMIT 100";
         } elseif ($type == 'user') {
-            $field_tl = 'user_trust_level';
-            $field_name = 'user_login';
-            $sql = "SELECT user_id, user_login, user_trust_level, user_activated FROM users WHERE user_activated = 1 AND user_login LIKE :user_login";
+            $field_tl = 'trust_level';
+            $field_id = 'id';
+            $field_name = 'login';
+            $sql = "SELECT id, login, trust_level, activated FROM users WHERE activated = 1 AND login LIKE :login";
         } elseif ($type == 'section') {
             $field_id = 'facet_id';
             $field_tl = 'facet_tl';
             $field_name = 'facet_title';
-            $condition = 'AND facet_user_id = ' . $uid['user_id'];
+            $condition = 'AND facet_user_id = ' . $user['id'];
             $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
                     WHERE facet_title LIKE :facet_title AND facet_type = 'section' $condition ORDER BY facet_count DESC LIMIT 100";
         } else {
             $condition = '';
-            if ($uid['user_trust_level'] != UserData::REGISTERED_ADMIN) {
+            if ($user['trust_level'] != UserData::REGISTERED_ADMIN) {
                 if ($type == 'blog') {
-                    $condition = 'AND facet_user_id = ' . $uid['user_id'];
+                    $condition = 'AND facet_user_id = ' . $user['id'];
                 }
             }
 
@@ -78,6 +79,7 @@ class ActionModel extends MainModel
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);
         $lists  = $result->fetchall(PDO::FETCH_ASSOC);
+
 
         $response = [];
         foreach ($lists as $list) {
@@ -92,18 +94,18 @@ class ActionModel extends MainModel
     }
 
     // Режим заморозки
-    public static function addLimitingMode($user_id)
+    public static function addLimitingMode($uid)
     {
-        $sql = "UPDATE users SET user_limiting_mode = 1 where user_id = :user_id";
+        $sql = "UPDATE users SET limiting_mode = 1 where id = :uid";
 
-        return DB::run($sql, ['user_id' => $user_id]);
+        return DB::run($sql, ['uid' => $uid]);
     }
 
-    public static function deleteLimitingMode($user_id)
+    public static function deleteLimitingMode($uid)
     {
-        $sql = "UPDATE users SET user_limiting_mode = 0 where user_id = :user_id";
+        $sql = "UPDATE users SET limiting_mode = 0 where id = :uid";
 
-        return DB::run($sql, ['user_id' => $user_id]);
+        return DB::run($sql, ['uid' => $uid]);
     }
 
     // Get the logs
@@ -134,18 +136,8 @@ class ActionModel extends MainModel
 
     // Let's write the logs
     // Запишем логи   
-    public static function addLogs($data)
+    public static function addLogs($params)
     {
-        $params = [
-            'log_user_id'       => $data['user_id'],
-            'log_user_login'    => $data['user_login'],
-            'log_id_content'    => $data['log_id_content'],
-            'log_type_content'  => $data['log_type_content'],
-            'log_action_name'   => $data['log_action_name'],
-            'log_url_content'   => $data['log_url_content'],
-            'log_date'          => date("Y-m-d H:i:s"),
-        ];
-
         $sql = "INSERT INTO users_action_logs(log_user_id, 
                         log_user_login, 
                         log_id_content, 

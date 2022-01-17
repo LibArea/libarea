@@ -60,7 +60,7 @@ class RememberController extends MainController
 
         // Сессия участника
         (new \App\Controllers\Auth\SessionController())->set($user);
-        
+
         self::rememberMeReset($token['auth_user_id'], $selector);
 
         redirect('/');
@@ -68,13 +68,13 @@ class RememberController extends MainController
 
     // Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»
     // Сбросить валидатор и обновить БД
-    public static function rememberMeReset($user_id, $selector)
+    public static function rememberMeReset($uid, $selector)
     {
         // Получаем по селектору       
         $existingToken = AuthModel::getAuthTokenBySelector($selector);
 
         if (empty($existingToken)) {
-            self::rememberMe($user_id);
+            self::rememberMe($uid);
             return true;
         }
 
@@ -85,30 +85,19 @@ class RememberController extends MainController
         // Установить
         $token = $selector . ':' . $validator;
 
-        // Если установлено значение true, каждый раз, когда пользователь посещает сайт 
-        // и обнаруживает файл cookie новая дата истечения срока действия 
-        // устанавливается с помощью параметра  $rememberMeExpire - выше 
-        $rememberMeRenew = true;
-
-        if ($rememberMeRenew) {
-            // Массивы данных установим
-            $data = [
-                'hashedvalidator' => hash('sha256', $validator),
-                'expires' => date('Y-m-d H:i:s', $expires)
-            ];
-        } else {
-            $data = [
-                'hashedvalidator' => hash('sha256', $validator),
-            ];
-        }
-
-        AuthModel::UpdateSelector($data, $selector);
+        AuthModel::UpdateSelector(
+            [
+                'auth_hashedvalidator'  => hash('sha256', $validator),
+                'auth_expires'          => date('Y-m-d H:i:s', $expires),
+                'auth_selector'         => $selector,
+            ]
+        );
 
         setcookie("remember", $token, $expires);
     }
 
     // Запомнить меня
-    public static function rememberMe($user_id)
+    public static function rememberMe($uid)
     {
         $rememberMeExpire       = 30;
         $selector               = randomString('crypto', 12);
@@ -116,25 +105,24 @@ class RememberController extends MainController
         $expires                = time() + 60 * 60 * 24 * $rememberMeExpire;
 
         $data = [
-            'user_id'           => $user_id,
-            'selector'          => $selector,
-            'hashedvalidator'   => hash('sha256', $validator),
-            'expires'           => date('Y-m-d H:i:s', $expires),
+            'auth_user_id'          => $uid,
+            'auth_selector'         => $selector,
+            'auth_hashedvalidator'  => hash('sha256', $validator),
+            'auth_expires'          => date('Y-m-d H:i:s', $expires),
         ];
 
         // Проверим, есть ли у пользователя уже набор токенов
-        $result = AuthModel::getAuthTokenByUserId($user_id);
-        
+        $result = AuthModel::getAuthTokenByUserId($uid);
+
         // Записываем или обновляем
         if (empty($result)) {
             AuthModel::insertToken($data);
         } else {
-            AuthModel::updateToken($data, $user_id);
+            AuthModel::updateToken($data);
         }
 
         // Установим токен
         $token = $selector . ':' . $validator;
         setcookie("remember", $token, $expires);
     }
-
 }

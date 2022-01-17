@@ -10,26 +10,31 @@ use Translate;
 
 class FavoriteController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid = UserData::getUid();
+        $this->user = UserData::get();
     }
 
     public function index($type)
     {
         $content_id = Request::getPostInt('content_id');
         if ($type == 'post') {
-            $content    = PostModel::getPost($content_id, 'id', $this->uid);
+            $content    = PostModel::getPost($content_id, 'id', $this->user);
         } else {
             $content    = AnswerModel::getAnswerId($content_id);
         }
 
         pageRedirection($content, '/');
 
-        $type_content   = $type == 'post' ? 1 : 2;
-        $action = FavoriteModel::setFavorite($content_id, $this->uid['user_id'], $type_content);
+        $action = FavoriteModel::setFavorite(
+            [
+                'favorite_tid'      => $content_id,
+                'favorite_user_id'  => $this->user['id'],
+                'favorite_type'     => ($type == 'post') ? 1 : 2,
+            ]
+        );
 
         $lang = Translate::get('bookmark deleted');
         if ($action == 'add') $lang = Translate::get('bookmark added');

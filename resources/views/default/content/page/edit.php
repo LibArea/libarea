@@ -8,10 +8,8 @@
     <form action="<?= getUrlByName('page.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
-      <?= import(
-        '/_block/form/field-input',
-        [
-          'uid' => $uid,
+      <?= Tpl::import(
+        '/_block/form/field-input', [
           'data' => [
             [
               'title' => Translate::get('heading'),
@@ -37,8 +35,7 @@
 
       ); ?>
 
-      <?= import('/_block/form/select/blog', [
-        'uid'         => $uid,
+      <?= Tpl::import('/_block/form/select/blog', [
         'data'        => $data,
         'action'      => 'edit',
         'type'        => 'blog',
@@ -46,8 +43,7 @@
       ]); ?>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <?= import('/_block/form/select/section', [
-          'uid'           => $uid,
+        <?= Tpl::import('/_block/form/select/section', [
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'section',
@@ -59,16 +55,15 @@
         ]); ?>
       <?php } ?>
 
-      <?= import('/_block/editor/editor', [
+      <?= Tpl::import('/_block/editor/editor', [
         'type'      => 'post',
         'height'    => '300px',
         'preview'   => 'vertical',
-        'uid'       => $uid,
         'content'   => $post['post_content'],
       ]); ?>
 
-      <?= import('/_block/form/select/user', [
-        'uid'           => $uid,
+      <?= Tpl::import('/_block/form/select/user', [
+        'uid'           => $user,
         'user'          => $data['user'],
         'action'        => 'user',
         'type'          => 'user',

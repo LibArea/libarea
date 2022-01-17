@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -25,7 +25,7 @@
     <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
-        $uid['user_id'],
+        $user['id'],
         $data['sheet'],
         $pages = [
           [

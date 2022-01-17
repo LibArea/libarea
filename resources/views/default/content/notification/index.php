@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -24,8 +24,8 @@
       <div class="br-bottom p5<?php if ($notif['notification_read_flag'] == 0) { ?> bg-sky-50<?php } ?>">
         <?php if ($notif['notification_action_type'] == 1) { ?>
           <i class="bi bi-envelope middle"></i>
-          <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['user_login']]); ?>">
-            <?= $notif['user_login']; ?>
+          <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['login']]); ?>">
+            <?= $notif['login']; ?>
           </a>
           <?= Translate::get('wrote to you'); ?>
           <a href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
@@ -39,8 +39,8 @@
 
         <?php if ($notif['notification_action_type'] == 3) { ?>
           <i class="bi bi-reply middle"></i>
-          <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['user_login']]); ?>">
-            <?= $notif['user_login']; ?>
+          <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['login']]); ?>">
+            <?= $notif['login']; ?>
           </a>
           <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
             <?= Translate::get('replied to post'); ?>
@@ -49,7 +49,7 @@
 
         <?php if ($notif['notification_action_type'] == 10 || $notif['notification_action_type'] == 11 || $notif['notification_action_type'] == 12) { ?>
           <i class="bi bi-person middle"></i>
-          <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['user_login']]); ?>">@<?= $notif['user_login']; ?></a>
+          <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['login']]); ?>">@<?= $notif['login']; ?></a>
           <?= Translate::get('appealed to you'); ?>
           <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
             <?php if ($notif['notification_action_type'] == 10) { ?>
@@ -63,7 +63,7 @@
         <?php } ?>
         <?php if ($notif['notification_action_type'] == 20) { ?>
           <i class="bi bi-exclamation-diamond middle red-500"></i>
-          <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['user_login']]); ?>"><?= $notif['user_login']; ?></a>
+          <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['login']]); ?>"><?= $notif['login']; ?></a>
           <?= Translate::get('complained about'); ?>
           <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
             <?= Translate::get('content'); ?>
@@ -76,7 +76,7 @@
           </a>
           |
           <a class="ntf2 lowercase" href="/admin/users/<?= $notif['notification_sender_id']; ?>/edit">
-            <?= $notif['user_login']; ?>
+            <?= $notif['login']; ?>
           </a>
           |
           <a class="ntf2 lowercase" href="/admin/audits">
@@ -86,7 +86,7 @@
         <span class="lowercase">
           <?php if ($notif['notification_action_type'] == 4) { ?>
             <i class="bi bi-chat-dots middle"></i>
-            <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['user_login']]); ?>"><?= $notif['user_login']; ?></a>
+            <a class="gray ml5" href="<?= getUrlByName('profile', ['login' => $notif['login']]); ?>"><?= $notif['login']; ?></a>
             <?= Translate::get('wrote'); ?>
             <a class="ntf2" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
               <?= Translate::get('comment'); ?>
@@ -103,4 +103,4 @@
   <?php } ?>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-notifications'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-notifications')]); ?>

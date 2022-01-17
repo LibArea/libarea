@@ -44,9 +44,10 @@ class UploadImage
                 $foto       = $images['topic_img'] ?? false;
             } else {
                 $images     = UserModel::getUser($content_id, 'id');
-                $foto       = $images['user_avatar'] ?? false;
+                $foto       = $images['avatar'] ?? false;
             }
 
+            // Delete the old avatar, except for the default one
             // Удалим старую аватарку, кроме дефолтной
             if ($foto != $default_img && $foto != $new_img) {
                 @unlink($path_img . $foto);
@@ -54,10 +55,9 @@ class UploadImage
             }
 
             if ($type == 'topic') {
-                FacetModel::setImg($content_id, $new_img);
+                FacetModel::setImg(['facet_id' => $content_id, 'facet_img' => $new_img]);
             } else {
-                $date = date('Y-m-d H:i:s');
-                SettingModel::setImg($content_id, $new_img, $date);
+                SettingModel::setImg(['id' => $content_id, 'avatar' => $new_img, 'updated_at' => date('Y-m-d H:i:s')]);
             }
 
             return $new_img;
@@ -143,7 +143,7 @@ class UploadImage
 
             if ($type == 'user') {
                 $user       = UserModel::getUser($content_id, 'id');
-                $cover_art  = $user['user_cover_art'];
+                $cover_art  = $user['cover_art'];
             } else {
                 $facet      = FacetModel::getFacet($content_id, 'id');
                 $cover_art  = $facet['facet_cover_art'];
@@ -158,9 +158,9 @@ class UploadImage
             // Запишем обложку 
             $date = date('Y-m-d H:i:s');
             if ($type == 'user') {
-                SettingModel::setCover($content_id, $new_cover, $date);
+                SettingModel::setCover(['id' => $content_id, 'cover_art' => $new_cover, 'updated_at' => $date]);
             } else {
-                FacetModel::setCover($content_id, $new_cover);
+                FacetModel::setCover(['facet_id' => $content_id, 'facet_cover_art' => $new_cover]);
             }
 
             return true;

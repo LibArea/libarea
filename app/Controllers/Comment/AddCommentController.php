@@ -6,21 +6,21 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel};
-use Content, Validation, Translate;
+use Content, Validation, Translate, Tpl;
 
 class AddCommentController extends MainController
 {
-    protected $uid;
+    protected $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Покажем форму
     public function index()
     {
-        agIncludeTemplate(
+        Tpl::agIncludeTemplate(
             '/_block/form/add-form-answer-and-comment',
             [
                 'data'  => [
@@ -28,7 +28,7 @@ class AddCommentController extends MainController
                     'post_id'       => Request::getPostInt('post_id'),
                     'comment_id'    => Request::getPostInt('comment_id'),
                 ],
-                'uid'   => $this->uid
+                'user'   => $this->user
             ]
         );
     }
@@ -41,7 +41,7 @@ class AddCommentController extends MainController
         $answer_id          = Request::getPostInt('answer_id');   // на какой ответ
         $comment_id         = Request::getPostInt('comment_id');   // на какой комментарий
 
-        $post   = PostModel::getPost($post_id, 'id', $this->uid);
+        $post   = PostModel::getPost($post_id, 'id', $this->user);
         pageError404($post);
 
         $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
@@ -52,7 +52,7 @@ class AddCommentController extends MainController
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
         $trigger = (new \App\Controllers\AuditController())->placementSpeed($comment_content, 'comment');
 
-        $last_id = CommentModel::addComment(
+        $last_id = CommentModel::add(
             [
                 'comment_post_id'       => $post_id,
                 'comment_answer_id'     => $answer_id,
@@ -60,7 +60,7 @@ class AddCommentController extends MainController
                 'comment_content'       => Content::change($comment_content),
                 'comment_published'     => ($trigger === false) ? 0 : 1,
                 'comment_ip'            => Request::getRemoteAddress(),
-                'comment_user_id'       => $this->uid['user_id'],
+                'comment_user_id'       => $this->user['id'],
             ]
         );
 
@@ -78,13 +78,16 @@ class AddCommentController extends MainController
         // Оповещение автору ответа, что есть комментарий (себе не записываем)
         $answ = AnswerModel::getAnswerId($answer_id);
         $recipient_id = $answ['answer_user_id'];
-        if ($this->uid['user_id'] != $recipient_id) {
+        if ($this->user['id'] != $recipient_id) {
+            // Оповещение админу
+            // Admin notification 
             NotificationsModel::send(
                 [
-                    'sender_id'     => $this->uid['user_id'],
-                    'recipient_id'  => $recipient_id,
-                    'action_type'   => 4, // 4 comment 
-                    'url'           => $url,
+                    'notification_sender_id'    => $this->user['id'],
+                    'notification_recipient_id' => $recipient_id,  // admin
+                    'notification_action_type'  => 4, // 4 comment 
+                    'notification_url'          => $url,
+                    'notification_read_flag'    => 0,
                 ]
             );
         }
@@ -96,12 +99,13 @@ class AddCommentController extends MainController
 
         ActionModel::addLogs(
             [
-                'user_id'           => $this->uid['user_id'],
-                'user_login'        => $this->uid['user_login'],
+                'log_user_id'       => $this->user['id'],
+                'log_user_login'    => $this->user['login'],
                 'log_id_content'    => $last_id,
                 'log_type_content'  => 'comment',
                 'log_action_name'   => 'content.added',
                 'log_url_content'   => $url,
+                'log_date'          => date("Y-m-d H:i:s"),
             ]
         );
 

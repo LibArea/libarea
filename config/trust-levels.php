@@ -16,15 +16,15 @@ return [
     // Установите на 4, если вы хотите запретить участникам создавать их
     // From what level of TL is it possible to create blogs
     // Set to 4 if you want to prevent members from creating them 
-    'tl_add_blog'       => 1,
+    'tl_add_blog'       => 2,
     'count_add_blog'    => 1,
 
     // С какого уровня TL возможна отправка личных сообщений
-    'tl_add_pm'         => 1,
+    'tl_add_pm'         => 2,
     // С какого TL можно комментировать ответы в QA модели
-    'tl_add_comm_qa'    => 1,
+    'tl_add_comm_qa'    => 2,
     // С какого TL можно размещать ссылки: Reddit
-    'tl_add_url'        => 2,
+    'tl_add_url'        => 3,
 
     // Общий лимит для TL >2 в день - отдельно по постам, комментариям, ответам
     // Total limit for TL >2 per day - separately by posts, comments, responses
@@ -50,7 +50,7 @@ return [
 
     // Уровень TL, до которого (включая) отправка жалоб невозможна
     // TL level, up to which (including) sending complaints is not possible
-    'tl_stop_report'    => 0,
+    'tl_stop_report'    => 1,
     // Общее количество жалоб в сутки (общие ограничения)
     // Total number of complaints per day (general restrictions)
     'all_stop_report'   => 3,

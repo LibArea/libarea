@@ -4,8 +4,7 @@
   <form class="form max-w300 mb20 block" action="<?= getUrlByName('register'); ?>/add" method="post">
     <?php csrf_field(); ?>
 
-    <?= import('/_block/form/field-input', [
-      'uid'  => $uid,
+    <?= Tpl::import('/_block/form/field-input', [
       'data' => [
         [
           'title' => Translate::get('nickname'),
@@ -38,7 +37,7 @@
       ]
     ]); ?>
 
-    <?= import('/_block/captcha', ['uid'  => $uid]); ?>
+    <?= Tpl::import('/_block/captcha'); ?>
 
     <div class="mb20">
       <?= sumbit(Translate::get('sign up')); ?>

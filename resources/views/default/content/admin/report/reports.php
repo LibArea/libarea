@@ -1,8 +1,7 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
     'menus' => []
   ]
 ); ?>
@@ -22,9 +21,9 @@
             <?= $report['report_id']; ?>
             </span>
           <td>
-            <a class="gray" href="<?= getUrlByName('profile', ['login' => $report['user']['user_login']]); ?>">
-              <?= user_avatar_img($report['user']['user_avatar'], 'max', $report['user']['user_login'], 'w30 h30 mr5'); ?>
-              <?= $report['user']['user_login']; ?>
+            <a class="gray" href="<?= getUrlByName('profile', ['login' => $report['user']['login']]); ?>">
+              <?= user_avatar_img($report['user']['avatar'], 'max', $report['user']['login'], 'w30 h30 mr5'); ?>
+              <?= $report['user']['login']; ?>
             </a>
           </td>
           <td>

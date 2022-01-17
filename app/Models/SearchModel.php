@@ -17,7 +17,7 @@ class SearchModel extends MainModel
                 post_thumb_img, post_merged_id, post_closed, post_tl, post_lo, post_top,  
                 post_url_domain, post_is_deleted, post_hits_count, 
                 rel.*,  
-                user_id, user_login, user_avatar 
+                id, login, avatar 
             FROM facets_posts_relation  
             LEFT JOIN posts ON relation_post_id = post_id 
             LEFT JOIN ( SELECT  
@@ -31,7 +31,7 @@ class SearchModel extends MainModel
                     LEFT JOIN facets_posts_relation on facet_id = relation_facet_id  
                         GROUP BY relation_post_id  
             ) AS rel ON rel.p_id = post_id  
-                LEFT JOIN users ON user_id = post_user_id 
+                LEFT JOIN users ON id = post_user_id 
                 WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
                      AND post_content LIKE :qa1 
                      OR post_title LIKE :qa2 ORDER BY post_id LIMIT $limit";
@@ -48,8 +48,8 @@ class SearchModel extends MainModel
                     post_votes, 
                     post_hits_count,
                     facet_list,
-                    user_login,
-                    user_avatar,
+                    login,
+                    avatar,
                     SNIPPET(post_title, :qa) AS title, 
                     SNIPPET(post_content, :qa) AS content 
                         FROM postind WHERE MATCH(:qa) LIMIT $limit";

@@ -5,16 +5,16 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
-use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, WebModel, PostModel, FacetModel};
-use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domains;
+use App\Models\{SubscriptionModel, ActionModel, WebModel, PostModel, FacetModel};
+use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domains, Tpl;
 
 class AddPostController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Форма добавление поста
@@ -24,7 +24,7 @@ class AddPostController extends MainController
             Request::getResources()->addBottomScript('/assets/js/uploads.js');
         } else {
             if (UserData::checkAdmin()) {
-                $count  = FacetModel::countFacetsUser($this->uid['user_id'], 'blog');
+                $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
                 if (!$count) redirect('/');
             }
         }
@@ -45,20 +45,19 @@ class AddPostController extends MainController
         if ($topic) {
             if ($topic['facet_type'] == 'blog') {
                 $facets  = ['blog' => $topic];
-                if ($topic['facet_user_id'] != $this->uid['user_id']) redirect('/');
+                if ($topic['facet_user_id'] != $this->user['id']) redirect('/');
             }
         }
 
         $puth = $type_content == 'page' ? '/page/add' : '/post/add';
 
-        return agRender(
+        return Tpl::agRender(
             $puth,
             [
                 'meta'      => meta($m = [], Translate::get('add post')),
-                'uid'       => $this->uid,
                 'data'  => [
                     'facets'     => $facets,
-                    'user_blog'  => FacetModel::getFacetsUser($this->uid['user_id'], 'blog'),
+                    'blog'  => FacetModel::getFacetsUser($this->user['id'], 'blog'),
                     'post_arr'   => PostModel::postRelatedAll(),
                     'type'       => 'add',
                 ]
@@ -125,13 +124,18 @@ class AddPostController extends MainController
         // Обложка поста
         $cover  = $_FILES['images'];
         if ($_FILES['images']['name']) {
-            $post_img = UploadImage::cover_post($cover, 0, $redirect, $this->uid['user_id']);
+            $post_img = UploadImage::cover_post($cover, 0, $redirect, $this->user['id']);
         }
 
         // Получаем SEO поста
         $slug       = new Slug();
         $uri        = $slug->create($post_title);
         $post_slug  = substr($uri, 0, 90);
+
+        $result     = PostModel::getSlug($post_slug);
+        if ($result) {
+            $post_slug = $post_slug . "-";
+        }
 
         $last_id = PostModel::AddPost(
             [
@@ -149,7 +153,7 @@ class AddPostController extends MainController
                 'post_draft'            => $post_draft,
                 'post_ip'               => Request::getRemoteAddress(),
                 'post_published'        => ($trigger === false) ? 0 : 1,
-                'post_user_id'          => $this->uid['user_id'],
+                'post_user_id'          => $this->user['id'],
                 'post_url'              => $post_url ?? '',
                 'post_url_domain'       => $site['post_url_domain'] ?? '',
                 'post_closed'           => $post_closed,
@@ -189,16 +193,17 @@ class AddPostController extends MainController
             }
         }
 
-        SubscriptionModel::focus($last_id, $this->uid['user_id'], 'post');
+        SubscriptionModel::focus($last_id, $this->user['id'], 'post');
 
         ActionModel::addLogs(
             [
-                'user_id'           => $this->uid['user_id'],
-                'user_login'        => $this->uid['user_login'],
+                'log_user_id'       => $this->user['id'],
+                'log_user_login'    => $this->user['login'],
                 'log_id_content'    => $last_id,
                 'log_type_content'  => 'post',
                 'log_action_name'   => 'content.added',
                 'log_url_content'   => $url,
+                'log_date'          => date("Y-m-d H:i:s"),
             ]
         );
 
@@ -233,8 +238,8 @@ class AddPostController extends MainController
             $redirect = getUrlByName('page.add') . '/' . $blog_id;
         }
 
-        if ($this->uid['user_trust_level'] < UserData::REGISTERED_ADMIN) {
-            $count  = FacetModel::countFacetsUser($this->uid['user_id'], 'blog');
+        if ($this->user['trust_level'] < UserData::REGISTERED_ADMIN) {
+            $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
             if (!$count) redirect('/');
         }
 
@@ -271,7 +276,7 @@ class AddPostController extends MainController
             'post_draft'            => 0,
             'post_ip'               => Request::getRemoteAddress(),
             'post_published'        => ($trigger === false) ? 0 : 1,
-            'post_user_id'          => $this->uid['user_id'],
+            'post_user_id'          => $this->user['id'],
             'post_url'              => '',
             'post_url_domain'       => '',
             'post_closed'           => 0,
@@ -291,45 +296,45 @@ class AddPostController extends MainController
 
         redirect($url_post);
     }
-    
+
     public function addUrl($post_url, $post_title)
     {
-            // Поскольку это для поста, то получим превью и разбор домена...
-            $og_img             = self::grabOgImg($post_url);
-            $parse              = parse_url($post_url);
-            $url_domain         = $parse['host'];
-            $domain             = new Domains($url_domain);
-            $post_url_domain    = $domain->getRegisterable();
-            $item_url           = $parse['scheme'] . '://' . $parse['host'];
+        // Поскольку это для поста, то получим превью и разбор домена...
+        $og_img             = self::grabOgImg($post_url);
+        $parse              = parse_url($post_url);
+        $url_domain         = $parse['host'];
+        $domain             = new Domains($url_domain);
+        $post_url_domain    = $domain->getRegisterable();
+        $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
-            // Если домена нет, то добавим его
-            $item = WebModel::getItemOne($post_url_domain, $this->uid['user_id']);
-            if (!$item) {
-                // Запишем минимальные данный
-                WebModel::add(
-                    [
-                        'item_url'          => $item_url,
-                        'item_url_domain'   => $post_url_domain,
-                        'item_title_url'    => $post_title,
-                        'item_content_url'  => Translate::get('description is formed'),
-                        'item_published'    => 0,
-                        'item_user_id'      => $this->uid['user_id'],
-                        'item_type_url'     => 0,
-                        'item_status_url'   => 200,
-                    ]
-                );
-            } else {
-                WebModel::addItemCount($post_url_domain);
-            }
-            
-            $site = [
-                'og_img' => $og_img,
-                'post_url_domain' => $post_url_domain,
-            ];
-            
-            return $site;
+        // Если домена нет, то добавим его
+        $item = WebModel::getItemOne($post_url_domain, $this->user['id']);
+        if (!$item) {
+            // Запишем минимальные данный
+            WebModel::add(
+                [
+                    'item_url'          => $item_url,
+                    'item_url_domain'   => $post_url_domain,
+                    'item_title_url'    => $post_title,
+                    'item_content_url'  => Translate::get('description is formed'),
+                    'item_published'    => 0,
+                    'item_user_id'      => $this->user['id'],
+                    'item_type_url'     => 0,
+                    'item_status_url'   => 200,
+                ]
+            );
+        } else {
+            WebModel::addItemCount($post_url_domain);
+        }
+
+        $site = [
+            'og_img' => $og_img,
+            'post_url_domain' => $post_url_domain,
+        ];
+
+        return $site;
     }
-    
+
     // Парсинг
     public function grabMeta()
     {
@@ -367,7 +372,7 @@ class AddPostController extends MainController
 
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($type_id, $type);
-        if (!accessСheck($info_type, $type, $this->uid, 1, 30)) {
+        if (!accessСheck($info_type, $type, $this->user, 1, 30)) {
             redirect('/');
         }
 
@@ -384,8 +389,8 @@ class AddPostController extends MainController
         }
 
         $data = [
-            'user_id'       => $this->uid['user_id'],
-            'user_tl'       => $this->uid['user_trust_level'],
+            'user_id'       => $this->user['id'],
+            'user_tl'       => $this->user['trust_level'],
             'created_at'    => date("Y-m-d H:i:s"),
             'post_id'       => $info_post_id,
             'content_id'    => $info_type[$type . '_id'],
@@ -405,9 +410,9 @@ class AddPostController extends MainController
         $post_id = Request::getPostInt('post_id');
 
         // Проверка доступа 
-        Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
+        Validation::validTl($this->user['trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
-        $post = PostModel::getPost($post_id, 'id', $this->uid);
+        $post = PostModel::getPost($post_id, 'id', $this->user);
         pageError404($post);
 
         ActionModel::setRecommend($post_id, $post['post_is_recommend']);

@@ -1,4 +1,4 @@
-<?php if ($uid['user_trust_level'] > 4) { ?>
+<?php if ($uid['trust_level'] > 4) { ?>
     <div class="mb20 max-w640">
         <?= Translate::get('author'); ?>
         <input name='user_id' id="user_id">
@@ -42,8 +42,8 @@
 
             tagify = new Tagify(input, options);
             tagify.addTags([{
-                id: '<?= $user['user_id']; ?>',
-                value: '<?= $user['user_login']; ?>'
+                id: '<?= $user['id']; ?>',
+                value: '<?= $user['login']; ?>'
             }])
 
         });

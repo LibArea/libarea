@@ -2,8 +2,8 @@
   <?php $n = 0;
   foreach ($data['posts'] as $post) {
     $n++; ?>
-    <?php if ($uid['user_id'] == 0 && $n == 6) { ?>
-      <?= import('/_block/no-login-screensaver', ['uid' => $uid]); ?>
+    <?php if ($user['id'] == 0 && $n == 6) { ?>
+      <?= Tpl::import('/_block/no-login-screensaver'); ?>
     <?php } ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="grid col-span-12 flex br-bottom p10 mb5 mt5 article_<?= $post['post_id']; ?>">
@@ -30,7 +30,7 @@
         <?php } ?>
         <a href="<?= $post_url; ?>">
           <span class="font-normal text-xl">
-            <?= import('/_block/post-title', ['post' => $post, 'uid' => $uid]); ?>
+            <?= Tpl::import('/_block/post-title', ['post' => $post]); ?>
           </span>
         </a>
         </div>
@@ -48,8 +48,8 @@
           <div class="gray-600 text-xs">
             <?= $post['post_date'] ?> ·
             <?= num_word($post['post_hits_count'], Translate::get('num-view'), true); ?> ·
-            <a class="dark-gray-300" href="<?= getUrlByName('profile', ['login' => $post['user_login']]); ?>">
-              <?= $post['user_login']; ?>
+            <a class="dark-gray-300" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+              <?= $post['login']; ?>
             </a>
           </div>
         </div>
@@ -63,7 +63,7 @@
     </div>
   <?php } ?>
 <?php } else { ?>
-  <?= import('/_block/recommended-topics', ['data' => $data, 'uid' => $uid]); ?>
+  <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>
   <div class="mt10 mb10 pt10 pr15 pb10 center pl15 bg-yellow-100 gray">
     <?= Translate::get('there are no posts'); ?>...
   </div>

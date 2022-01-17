@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -20,7 +20,7 @@
       <?= tabs_nav(
         'nav',
         $data['type'],
-        $uid,
+        $user,
         $pages = [
           [
             'id'        => 'edit',
@@ -60,7 +60,7 @@
             <?= $row['post_title']; ?>
           </a>
 
-          <?php if (UserData::checkAdmin() || $fs['facet_user_id'] == $uid['user_id']) { ?>
+          <?php if (UserData::checkAdmin() || $fs['facet_user_id'] == $user['id']) { ?>
             <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>

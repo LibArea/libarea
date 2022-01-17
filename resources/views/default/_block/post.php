@@ -3,7 +3,7 @@
   foreach ($data['posts'] as $post) {
     $n++; ?>
     <?php if (!UserData::checkActiveUser() && $n == 6) { ?>
-      <?= import('/_block/no-login-screensaver', ['uid' => $uid]); ?>
+      <?= Tpl::import('/_block/no-login-screensaver'); ?>
     <?php } ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="br-box-gray bg-white p20 mb15 br-rd5 article_<?= $post['post_id']; ?>">
@@ -13,14 +13,14 @@
         </div>
       <?php } ?>
       <div class="flex mb15 relative">
-        <div class="user-card" data-content_id="<?= $post['post_id']; ?>" data-user_id="<?= $post['user_id']; ?>">
-          <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w40 h40 br-rd-50 mr5'); ?>
+        <div class="user-card" data-content_id="<?= $post['post_id']; ?>" data-user_id="<?= $post['id']; ?>">
+          <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w40 h40 br-rd-50 mr5'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
-        <a class="flex black dark-gray-300 flex-center" href="<?= getUrlByName('profile', ['login' => $post['user_login']]); ?>">
+        <a class="flex black dark-gray-300 flex-center" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
 
           <div class="ml5">
-            <?= $post['user_login']; ?>
+            <?= $post['login']; ?>
             <div class="gray-400 lowercase text-sm">
               <?= $post['post_date'] ?>
             </div>
@@ -31,7 +31,7 @@
         <div class="w-auto mr20 mb-mr-5">
           <a class="black dark-gray-300" href="<?= $post_url; ?>">
             <h2 class="font-normal text-2xl mt0 mb0">
-              <?= import('/_block/post-title', ['post' => $post, 'uid' => $uid]); ?>
+              <?= Tpl::import('/_block/post-title', ['post' => $post]); ?>
             </h2>
           </a>
           <div class="lowercase">
@@ -68,7 +68,7 @@
       </div>
       <div class="flex flex-row items-center justify-between pt10">
         <div class="flex flex-row">
-          <?= votes($uid['user_id'], $post, 'post', 'ps', 'mr5'); ?>
+          <?= votes($user['id'], $post, 'post', 'ps', 'mr5'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="flex gray-400 ml15" href="<?= $post_url; ?>#comment">
               <i class="bi bi-chat-text mr5"></i>
@@ -77,13 +77,13 @@
           <?php } ?>
         </div>
         <div class="flex flex-row items-center">
-          <?= favorite($uid['user_id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', ''); ?>
+          <?= favorite($user['id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', ''); ?>
         </div>
       </div>
     </div>
   <?php } ?>
 <?php } else { ?>
-  <?= import('/_block/recommended-topics', ['data' => $data, 'uid' => $uid]); ?>
+  <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>
   <div class="mt10 mb10 pt10 pr15 pb10 center pl15 bg-yellow-100 gray">
     <?= Translate::get('there are no posts'); ?>...
   </div>

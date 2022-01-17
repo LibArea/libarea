@@ -8,18 +8,8 @@ use PDO;
 
 class FileModel extends MainModel
 {
-    public static function set($data)
+    public static function set($params)
     {
-        $params = [
-            'file_path'         => $data['file_path'],
-            'file_type'         => $data['file_type'],
-            'file_content_id'   => $data['file_content_id'],
-            'file_user_id'      => $data['file_user_id'],
-            'file_date'         => $data['file_date'],
-            'file_is_deleted'   => $data['file_is_deleted']
-
-        ];
-
         $sql = "INSERT INTO files(
                     file_path, 
                     file_type,
@@ -38,7 +28,7 @@ class FileModel extends MainModel
         return DB::run($sql, $params);
     }
 
-    public static function get($file_id, $user_id, $type)
+    public static function get($file_id, $uid, $type)
     {
         $sql = "SELECT 
                     file_id, 
@@ -50,15 +40,15 @@ class FileModel extends MainModel
                     file_is_deleted
                         FROM files 
                         WHERE file_id = :file_id AND 
-                            file_user_id = :user_id AND file_type = :type";
+                            file_user_id = :uid AND file_type = :type";
 
-        return  DB::run($sql, ['file_id' => $file_id, 'user_id' => $user_id, 'type' => $type])->fetch(PDO::FETCH_ASSOC);
+        return  DB::run($sql, ['file_id' => $file_id, 'uid' => $uid, 'type' => $type])->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function removal($file_path, $user_id)
+    public static function removal($file_path, $uid)
     {
-        $sql = "UPDATE files SET file_is_deleted = 1 WHERE file_path = :file_path AND file_user_id = :user_id";
+        $sql = "UPDATE files SET file_is_deleted = 1 WHERE file_path = :file_path AND file_user_id = :uid";
 
-        return DB::run($sql, ['file_path' => $file_path, 'user_id' => $user_id]);
+        return DB::run($sql, ['file_path' => $file_path, 'uid' => $uid]);
     }
 }

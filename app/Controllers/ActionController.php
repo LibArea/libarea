@@ -9,11 +9,11 @@ use App\Models\{ActionModel, PostModel};
 
 class ActionController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Удаление и восстановление контента
@@ -31,7 +31,7 @@ class ActionController extends MainController
 
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($type_id, $content_type);
-        if (!accessСheck($info_type, $content_type, $this->uid, 1, 30)) {
+        if (!accessСheck($info_type, $content_type, $this->user, 1, 30)) {
             redirect('/');
         }
 
@@ -40,11 +40,11 @@ class ActionController extends MainController
                 $url  = getUrlByName('post', ['id' => $info_type['post_id'], 'slug' => $info_type['post_slug']]);
                 break;
             case 'comment':
-                $post = PostModel::getPost($info_type['comment_post_id'], 'id', $this->uid);
+                $post = PostModel::getPost($info_type['comment_post_id'], 'id', $this->user);
                 $url  = getUrlByName('post', ['id' => $info_type['comment_post_id'], 'slug' => $post['post_slug']]) . '#comment_' . $info_type['comment_id'];
                 break;
             case 'answer':
-                $post = PostModel::getPost($info_type['answer_post_id'], 'id', $this->uid);
+                $post = PostModel::getPost($info_type['answer_post_id'], 'id', $this->user);
                 $url  = getUrlByName('post', ['id' => $info_type['answer_post_id'], 'slug' => $post['post_slug']]) . '#answer_' . $info_type['answer_id'];
                 break;
         }
@@ -54,12 +54,13 @@ class ActionController extends MainController
         $log_action_name = $info_type[$content_type . '_is_deleted'] == 1 ? 'content.restored' : 'content.deleted';
         ActionModel::addLogs(
             [
-                'user_id'           => $this->uid['user_id'],
-                'user_login'        => $this->uid['user_login'],
+                'log_user_id'       => $this->user['id'],
+                'log_user_login'    => $this->user['login'],
                 'log_id_content'    => $info_type[$content_type . '_id'] ?? 0,
                 'log_type_content'  => $content_type,
                 'log_action_name'   => $log_action_name,
                 'log_url_content'   => $url,
+                'log_date'          => date("Y-m-d H:i:s"),
             ]
         );
 

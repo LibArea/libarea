@@ -4,7 +4,7 @@
     <a href="/"><?= Translate::get('home'); ?></a> /
     <span class="red-500"><?= Translate::get('add ' . $data['sheet']); ?></span>
     
-  <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
+  <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
       <div class="text-sm gray mb15">
         <?= Translate::get('you can add more'); ?>:
         <span class="red-500"><?= $data['count_facet']; ?></span>
@@ -12,8 +12,7 @@
       <form class="" action="<?= getUrlByName($data['sheet'] . '.create'); ?>" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
-        <?= import('/_block/form/field-input', [
-          'uid'  => $uid,
+        <?= Tpl::import('/_block/form/field-input', [
           'data' => [
             [
               'title'       => Translate::get('title'),

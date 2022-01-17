@@ -17,8 +17,7 @@
         <?= $data['domain']['item_id']; ?> (<?= $data['domain']['item_url_domain']; ?>)
       </div>
 
-      <?= import('/_block/form/field-input', [
-        'uid'  => $uid,
+      <?= Tpl::import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('URL'),
@@ -41,8 +40,7 @@
         ]
       ]); ?>
 
-      <?= import('/_block/form/radio', [
-        'uid'  => $uid,
+      <?= Tpl::import('/_block/form/radio', [
         'data' => [
           [
             'title'   => Translate::get('posted') . '?',
@@ -53,8 +51,8 @@
         ]
       ]); ?>
 
-      <?php import('/_block/editor/textarea', [
-        'uid'   => $uid,
+      <?php Tpl::import('/_block/editor/textarea', [
+        'user'   => $user,
         'title' => Translate::get('description'),
         'type'  => 'text',
         'name'  => 'item_content_url',
@@ -65,8 +63,8 @@
       ]); ?>
 
 
-      <?= import('/_block/form/select/select', [
-        'uid'           => $uid,
+      <?= Tpl::import('/_block/form/select/select', [
+        'user'           => $user,
         'data'          => $data,
         'action'        => 'edit',
         'type'          => 'topic',
@@ -76,8 +74,7 @@
       ]); ?>
 
       <h3 class="mb5"><?= Translate::get('soft'); ?></h3>
-      <?= import('/_block/form/radio', [
-        'uid'  => $uid,
+      <?= Tpl::import('/_block/form/radio', [
         'data' => [
           [
             'title'   => Translate::get('there is a program'),
@@ -92,8 +89,7 @@
         ]
       ]); ?>
 
-      <?= import('/_block/form/field-input', [
-        'uid'  => $uid,
+      <?= Tpl::import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('url address github'),
@@ -110,8 +106,8 @@
         ]
       ]); ?>
 
-      <?php import('/_block/editor/textarea', [
-        'uid'   => $uid,
+      <?php Tpl::import('/_block/editor/textarea', [
+        'user'   => $user,
         'title' => Translate::get('description'),
         'type'  => 'text',
         'name'  => 'item_content_soft',
@@ -121,8 +117,8 @@
         'help'  => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
-      <?= import('/_block/form/select/related-posts', [
-        'uid'           => $uid,
+      <?= Tpl::import('/_block/form/select/related-posts', [
+        'user'           => $user,
         'data'          => $data,
         'action'        => 'edit',
         'type'          => 'post',

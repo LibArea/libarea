@@ -7,8 +7,8 @@
           </a>
           <div class="ml5 w-100">
 
-            <?php if ($uid['user_id']) { ?>
-              <?php if ($facet['facet_user_id'] != $uid['user_id']) { ?>
+            <?php if ($user['id']) { ?>
+              <?php if ($facet['facet_user_id'] != $user['id']) { ?>
                 <?php if ($facet['signed_facet_id']) { ?>
                   <div data-id="<?= $facet['facet_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 gray-400 center mr15">
                     <sup><?= Translate::get('unsubscribe'); ?></sup>
@@ -25,7 +25,7 @@
               <?= $facet['facet_title']; ?>
             </a>
 
-            <?php if ($uid['user_id'] == $facet['facet_user_id']) { ?>
+            <?php if ($user['id'] == $facet['facet_user_id']) { ?>
               <i class="bi bi-mic sky-500 text-sm"></i>
             <?php } ?>
             <div class="text-sm pr15 mb-pr-0 gray-400">

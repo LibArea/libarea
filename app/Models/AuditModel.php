@@ -24,9 +24,9 @@ class AuditModel extends MainModel
                     audit_user_id,
                     audit_content_id,
                     audit_read_flag,
-                    user_id, user_login, user_avatar, user_limiting_mode
+                    id, login, avatar, limiting_mode
                         FROM audits 
-                        LEFT JOIN users ON user_id = audit_user_id
+                        LEFT JOIN users ON id = audit_user_id
                         WHERE $sort ORDER BY audit_id DESC LIMIT $start, $limit";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -76,42 +76,34 @@ class AuditModel extends MainModel
     {
         $sql = "SELECT audit_user_id FROM audits WHERE audit_content_id = :id";
 
-        $user_id = DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
+        $user = DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
 
-        $usql = "UPDATE users SET user_limiting_mode = 0 WHERE user_id = :user_id";
+        $usql = "UPDATE users SET limiting_mode = 0 WHERE id = :uid";
 
-        return  DB::run($usql, ['user_id' => $user_id['audit_user_id']]);
+        return  DB::run($usql, ['uid' => $user['audit_user_id']]);
     }
 
-    public static function add($type, $user_id, $content_id)
+    public static function add($params)
     {
-        $params = [
-            'audit_type'        => $type,
-            'audit_user_id'     => $user_id,
-            'audit_content_id'  => $content_id,
-        ];
-
         $sql = "INSERT INTO audits(audit_type, audit_user_id, audit_content_id, audit_read_flag) 
                     VALUES(:audit_type, :audit_user_id, :audit_content_id, 0)";
 
-        DB::run($sql, $params);
-
-        return true;
+        return DB::run($sql, $params);
     }
 
     // Total contribution of the participant
     // Общий вклад участника
-    public static function ceneralContributionCount($user_id)
+    public static function ceneralContributionCount($uid)
     {
         $sql = "SELECT
                 (SELECT COUNT(*) FROM 
-                    posts WHERE post_user_id = :user_id and post_is_deleted = 0) AS t1Count,
+                    posts WHERE post_user_id = :uid and post_is_deleted = 0) AS t1Count,
                 (SELECT COUNT(*) FROM 
-                    answers WHERE answer_user_id = :user_id and answer_is_deleted = 0) AS t2Count,
+                    answers WHERE answer_user_id = :uid and answer_is_deleted = 0) AS t2Count,
                 (SELECT COUNT(*) FROM 
-                    comments WHERE comment_user_id = :user_id and comment_is_deleted = 0) AS t3Count";
+                    comments WHERE comment_user_id = :uid and comment_is_deleted = 0) AS t3Count";
 
-        $result = DB::run($sql, ['user_id' => $user_id]);
+        $result = DB::run($sql, ['uid' => $uid]);
         $lists  = $result->fetch(PDO::FETCH_ASSOC);
 
         return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];

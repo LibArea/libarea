@@ -4,18 +4,10 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\User\{InvitationModel, UserModel};
-use App\Middleware\Before\UserData;
-use Translate;
+use Translate, Tpl;
 
 class InvitationsController extends MainController
 {
-    private $uid;
-
-    public function __construct()
-    {
-        $this->uid  = UserData::getUid();
-    }
-
     public function index()
     {
         $invite = InvitationModel::get();
@@ -27,11 +19,10 @@ class InvitationsController extends MainController
             $result[$ind]       = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/invitation/invitations',
             [
                 'meta'  => meta($m = [], Translate::get('invites')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'type'          => 'invites',
                     'sheet'         => 'all',

@@ -355,6 +355,7 @@ $data = [
     'login-use-condition'   => '繼續，即表示您同意<a href="/info/privacy">使用條款</a>網站',
     'user-already'          => '該用戶已經在該網站上',
     'invate-to-replay'      => '您已經向該用戶發送了邀請',
+    'invate.limit.stop'     => '您已用盡邀請數量',
     'limit.day'             => '為了  %1$s 你已經達到極限 %2$s 今天',
     'limit-add-content-no'  => '您已達到站點添加集的上限',
     'registration by invite' => '邀請註冊',
@@ -475,8 +476,8 @@ $data = [
     'the code is incorrect'                 => '代碼不正確或已被使用',
     'format-cover-post'                     => '寬度大於 500px。 水平方向',
     'email.password.not.correct'            => '電子郵件或密碼不正確',
-    'your account is not activated'         => '您的帳戶未激活',
-    'your account is under review'          => '您的帳戶待處理',
+    'account.not.activated'                 => '您的帳戶未激活',
+    'account.being.verified'                => '您的帳戶待處理',
     'email.correctness'                     => '不合規電郵',
     'email.no.site'                         => '該電子郵件不在網站上',
     'english'                               => '英語',
@@ -492,7 +493,7 @@ $data = [
     'does this violate site rules'          => '這違反了網站的規則',
     'flag not included'                     => 'Flag 被遺漏了，不要經常使用它',
     'invited you'                           => '您是受此網站成員邀請的。 輸入邀請',
-    'you can invite your friends'           => '你可以邀請朋友',
+    'invite.features'           => '你可以邀請朋友',
     'you were looking for'                  => '你在找',
     'personal-messages-site'                => '與網站成員的私信',
     'the page does not exist'               => '該頁面不存在',
@@ -549,7 +550,8 @@ $data = [
     'tl2.title'                 => '會員',
     'tl3.title'                 => '居民',
     'tl4.title'                 => '領袖',
-    'tl5.title'                 => '員工',
+    'tl5.title'                 => '常客',
+    'tl10.title'                => '職員',
 ];
 
 return $data;

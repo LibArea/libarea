@@ -7,8 +7,7 @@
     <form action="<?= getUrlByName('web.create'); ?>" method="post">
       <?= csrf_field() ?>
 
-      <?= import('/_block/form/field-input', [
-        'uid'  => $uid,
+      <?= Tpl::import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('title'),
@@ -23,8 +22,7 @@
         ]
       ]); ?>
 
-      <?php import('/_block/editor/textarea', [
-        'uid'   => $uid,
+      <?php Tpl::import('/_block/editor/textarea', [
         'title' => Translate::get('description'),
         'type'  => 'text',
         'name'  => 'content_url',
@@ -33,8 +31,7 @@
         'help'  => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
-      <?= import('/_block/form/select/select', [
-        'uid'       => $uid,
+      <?= Tpl::import('/_block/form/select/select', [
         'data'      => ['topic' => false],
         'type'      => 'topic',
         'action'    => 'add',

@@ -5,7 +5,7 @@
       <?= tabs_nav(
         'nav',
         $data['sheet'],
-        $uid,
+        $user,
         $pages = [
           [
             'id'    => $data['type'] . '.feed',
@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+  <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
 
   <div class="mt10 mb15">
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
@@ -46,11 +46,11 @@
 </main>
 
 <aside class="col-span-3 mb-col-12 relative mb-none">
-  <?php if ($uid['user_id'] == 0) { ?>
-    <?= import('/_block/sidebar/login', ['uid' => $uid]); ?>
+  <?php if ($user['id'] == 0) { ?>
+    <?= Tpl::import('/_block/sidebar/login'); ?>
   <?php } ?>
 
-  <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
+  <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="br-box-gray box-shadow-all p15 mb15 br-rd5 bg-white text-sm">
       <div class="uppercase gray mb5 dark-gray-300">
         <?= Translate::get('reading'); ?>
@@ -60,7 +60,7 @@
       $my = [];
       $other = [];
       foreach ($data['topics_user'] as $topic) {
-        if ($topic['facet_user_id'] == $uid['user_id']) {
+        if ($topic['facet_user_id'] == $user['id']) {
           $my[] = $topic;
         } else {
           $other[] = $topic;
@@ -83,7 +83,7 @@
             <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr5'); ?>
             <span class="ml5 middle dark-gray-300"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
-          <?php if ($uid['user_id'] == $topic['facet_user_id']) { ?>
+          <?php if ($user['id'] == $topic['facet_user_id']) { ?>
             <a class="right sky-500" title="<?= Translate::get('add post'); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
               <i class="bi bi-plus-lg text-sm"></i>
             </a>
@@ -116,7 +116,7 @@
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <div class="mt15 mr0 mb15 ml0">
             <div class="text-sm gray-400">
-              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w20 h20 br-rd-50 mr5'); ?>
+              <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20 br-rd-50 mr5'); ?>
               <span class="middle"><?= $answer['answer_date']; ?></span>
             </div>
             <a class="black dark-gray-300" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
@@ -127,7 +127,7 @@
       </div>
     <?php } ?>
 
-    <?= import('/_block/sidebar/lang', ['lang' => [], 'uid' => $uid]); ?>
+    <?= Tpl::import('/_block/sidebar/lang'); ?>
   </div>
 </aside>
 </div>

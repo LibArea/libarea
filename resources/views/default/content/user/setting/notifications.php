@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -12,16 +12,15 @@
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
-    <?= import('/content/user/setting/nav', ['data' => $data, 'uid' => $uid]); ?>
+    <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
   </div>
   <div class="bg-white br-box-gray pt15 pr15 pb5 pl15 box">
     <form action="<?= getUrlByName('setting.notif.edit'); ?>" method="post">
       <?php csrf_field(); ?>
       <b class="mb15 block"><?= Translate::get('e-mail notification'); ?>?</b>
-      <?= import(
+      <?= Tpl::import(
         '/_block/form/radio',
         [
-          'uid'  => $uid,
           'data' => [
             [
               'title'   => Translate::get('message to PM'),
@@ -44,4 +43,4 @@
     </form>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-notification'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-notification')]); ?>

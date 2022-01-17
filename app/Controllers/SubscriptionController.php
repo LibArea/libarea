@@ -9,11 +9,11 @@ use App\Models\{SubscriptionModel, PostModel, FacetModel};
 
 class SubscriptionController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid = UserData::getUid();
+        $this->user = UserData::get();
     }
 
     public function index()
@@ -27,15 +27,15 @@ class SubscriptionController extends MainController
         if ($content_id <= 0) return false;
 
         if ($type == 'post') {
-            $content = PostModel::getPost($content_id, 'id', $this->uid);
+            $content = PostModel::getPost($content_id, 'id', $this->user);
         } else {
             $content =  FacetModel::getFacet($content_id, 'id');
             // Запретим владельцу отписываться от созданного фасета
             // Prevent the owner from unsubscribing from the created facet 
-            if ($content['facet_user_id'] == $this->uid['user_id']) return false;
+            if ($content['facet_user_id'] == $this->user['id']) return false;
         }
 
-        SubscriptionModel::focus($content_id, $this->uid['user_id'], $type);
+        SubscriptionModel::focus($content_id, $this->user['id'], $type);
 
         return true;
     }

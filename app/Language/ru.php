@@ -355,6 +355,7 @@ $data = [
     'login-use-condition'   => 'Продолжая, вы соглашаетесь с <a href="/info/privacy">Условиями использования</a> сайта',
     'user-already'          => 'Пользователь уже есть на сайте',
     'invate-to-replay'      => 'Вы уже отправили приглашение этому пользователю',
+    'invate.limit.stop'     => 'Вы исчерпали количество инвайтов',
     'limit.day'             => 'Для %1$s вы исчерпали лимит %2$s на сегодня',
     'limit-add-content-no'  => 'Вы исчерпали лимит на добавление установленный на сайте',
     'registration by invite' => 'Регистрация по инвайту',
@@ -479,8 +480,8 @@ $data = [
     'the code is incorrect'                 => 'Код неверен, или он уже использовался',
     'format-cover-post'                     => 'Ширина, больше 500px. Ориентация горизонтальная',
     'email.password.not.correct'            => 'E-mail или пароль не верен',
-    'your account is not activated'         => 'Ваш аккаунт не активирован',
-    'your account is under review'          => 'Ваш аккаунт находится на рассмотрении',
+    'account.not.activated'                 => 'Ваш аккаунт не активирован',
+    'account.being.verified'                => 'Ваш аккаунт находится на рассмотрении',
     'email.correctness'                     => 'Недопустимый e-mail',
     'email.no.site'                         => 'Такого e-mail нет на сайте',
     'english'                               => 'английский',
@@ -497,7 +498,7 @@ $data = [
     'does this violate site rules'          => 'Это нарушает правила сайта',
     'flag not included'                     => 'Флаг не учтен, не используйте его часто',
     'invited you'                           => 'Вас пригласил участник с этого сайта. Введите инвайт',
-    'you can invite your friends'           => 'Вы можете пригласить друзей',
+    'invite.features'           => 'Вы можете пригласить друзей',
     'you were looking for'                  => 'Вы искали',
     'personal-messages-site'                => 'Личные сообщения с участниками сайта',
     'the page does not exist'               => 'Страница не существует',
@@ -554,7 +555,8 @@ $data = [
     'tl2.title'                 => 'Участник',
     'tl3.title'                 => 'Постоялец',
     'tl4.title'                 => 'Лидер',
-    'tl5.title'                 => 'Персонал',
+    'tl5.title'                 => 'Завсегатый',
+    'tl10.title'                => 'Персонал',
   
 ];
 

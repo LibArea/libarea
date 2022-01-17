@@ -4,19 +4,11 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\RssModel;
-use Content, Config;
+use Content, Config, Tpl;
 
 class RssController extends MainController
 {
-    private $uid;
-
-    public function __construct()
-    {
-        $this->uid = UserData::getUid();
-    }
-
     // Route::get('/sitemap.xml')
     public function index()
     {
@@ -26,7 +18,7 @@ class RssController extends MainController
             'posts'     => RssModel::getPostsSitemap(),
         ];
 
-        agIncludeCachedTemplate('/content/rss/sitemap', ['data' => $data, 'uid' => $this->uid]);
+        Tpl::agIncludeCachedTemplate('/content/rss/sitemap', ['data' => $data]);
     }
 
     // Route::get('/turbo-feed/topic/{slug}')
@@ -49,12 +41,11 @@ class RssController extends MainController
             'posts' => $result,
         ];
 
-        agIncludeCachedTemplate(
+        Tpl::agIncludeCachedTemplate(
             '/content/rss/turbo-feed',
             [
                 'data' => $data,
                 'topic' => $topic,
-                'uid' => $this->uid
             ]
         );
     }
@@ -74,7 +65,7 @@ class RssController extends MainController
             $result[$ind]         = $row;
         }
 
-        agIncludeCachedTemplate(
+        Tpl::agIncludeCachedTemplate(
             '/content/rss/rss-feed',
             [
                 'data'  => [
@@ -82,7 +73,6 @@ class RssController extends MainController
                     'posts'     => $result,
                 ],
                 'topic' => $topic,
-                'uid'   => $this->uid
             ]
         );
     }

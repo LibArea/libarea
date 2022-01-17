@@ -7,33 +7,33 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, PostModel, FeedModel, AnswerModel, CommentModel};
-use Content, Config, Validation, Translate;
+use Content, Config, Validation, Translate, Tpl;
 
 class ProfileController extends MainController
 {
-    private $uid;
+    private $user;
 
     protected $limit = 20;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Member page (profile) 
     // Страница участника (профиль)
     function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-        $user   = self::availability();
+        $page       = Request::getInt('page');
+        $page       = $page == 0 ? 1 : $page;
+        $profile    = self::profile();
 
-        if (!$user['user_about']) {
-            $user['user_about'] = Translate::get('riddle') . '...';
+        if (!$profile['about']) {
+            $profile['about'] = Translate::get('riddle') . '...';
         }
 
-        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $user['user_id']);
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $user['user_id']);
+        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $profile['id']);
+        $pagesCount = FeedModel::feedCount($this->user, $sheet, $profile['id']);
 
         $result = [];
         foreach ($posts as $ind => $row) {
@@ -43,26 +43,25 @@ class ProfileController extends MainController
             $result[$ind]                   = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/user/profile/index',
             [
-                'meta'  => self::metadata($sheet, $user),
-                'uid'   => $this->uid,
+                'meta'  => self::metadata($sheet, $profile),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,
-                    'user_created_at'   => lang_date($user['user_created_at']),
-                    'count'             => UserModel::contentCount($user['user_id']),
-                    'topics'            => FacetModel::getFacetsAll(1, 10, $user['user_id'], 'topics.my'),
-                    'blogs'             => FacetModel::getOwnerFacet($user['user_id'], 'blog'),
-                    'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
-                    'user'              => $user,
+                    'created_at'        => lang_date($profile['created_at']),
+                    'count'             => UserModel::contentCount($profile['id']),
+                    'topics'            => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
+                    'blogs'             => FacetModel::getOwnerFacet($profile['id'], 'blog'),
+                    'badges'            => BadgeModel::getBadgeUserAll($profile['id']),
+                    'profile'           => $profile,
                     'type'              => $type,
                     'posts'             => $result,
                     'sheet'             => $sheet,
-                    'participation'     => FacetModel::participation($user['user_id']),
-                    'post'              => PostModel::getPost($user['user_my_post'], 'id', $this->uid),
-                    'button_pm'         => self::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
+                    'participation'     => FacetModel::participation($profile['id']),
+                    'post'              => PostModel::getPost($profile['my_post'], 'id', $this->user),
+                    'button_pm'         => $this->accessPm($profile['id']),
                 ]
             ]
         );
@@ -70,12 +69,12 @@ class ProfileController extends MainController
 
     public function posts($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-        $user   = self::availability();
+        $page       = Request::getInt('page');
+        $page       = $page == 0 ? 1 : $page;
+        $profile    = self::profile();
 
-        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $user['user_id']);
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $user['user_id']);
+        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $profile['id']);
+        $pagesCount = FeedModel::feedCount($this->user, $sheet, $profile['id']);
 
         $result = [];
         foreach ($posts as $ind => $row) {
@@ -85,24 +84,23 @@ class ProfileController extends MainController
             $result[$ind]                   = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/user/profile/post',
             [
-                'meta'  => self::metadata($sheet, $user),
-                'uid'   => $this->uid,
+                'meta'  => self::metadata($sheet, $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'posts'         => $result,
-                    'user'          => $user,
-                    'count'         => UserModel::contentCount($user['user_id']),
-                    'topics'        => FacetModel::getFacetsAll(1, 10, $user['user_id'], 'topics.my'),
-                    'blogs'         => FacetModel::getOwnerFacet($user['user_id'], 'blog'),
-                    'badges'        => BadgeModel::getBadgeUserAll($user['user_id']),
-                    'post'          => PostModel::getPost($user['user_my_post'], 'id', $this->uid),
-                    'button_pm'     => self::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
+                    'profile'       => $profile,
+                    'count'         => UserModel::contentCount($profile['id']),
+                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
+                    'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
+                    'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
+                    'post'          => PostModel::getPost($profile['my_post'], 'id', $this->user),
+                    'button_pm'     => $this->accessPm($profile['id']),
                 ]
             ]
         );
@@ -110,12 +108,12 @@ class ProfileController extends MainController
 
     public function answers($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-        $user   = self::availability();
+        $page       = Request::getInt('page');
+        $page       = $page == 0 ? 1 : $page;
+        $profile    = self::profile();
 
-        $answers    = AnswerModel::userAnswers($page, $this->limit, $user['user_id'], $this->uid['user_id']);
-        $pagesCount = AnswerModel::userAnswersCount($user['user_id']);
+        $answers    = AnswerModel::userAnswers($page, $this->limit, $profile['id'], $this->user['id']);
+        $pagesCount = AnswerModel::userAnswersCount($profile['id']);
 
         $result = [];
         foreach ($answers as $ind => $row) {
@@ -124,24 +122,23 @@ class ProfileController extends MainController
             $result[$ind]   = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/user/profile/answer',
             [
-                'meta'  => self::metadata($sheet, $user),
-                'uid'   => $this->uid,
+                'meta'  => self::metadata($sheet, $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'answers'       => $result,
-                    'user'          => $user,
-                    'count'         => UserModel::contentCount($user['user_id']),
-                    'topics'        => FacetModel::getFacetsAll(1, 10, $user['user_id'], 'topics.my'),
-                    'blogs'         => FacetModel::getOwnerFacet($user['user_id'], 'blog'),
-                    'badges'        => BadgeModel::getBadgeUserAll($user['user_id']),
-                    'post'          => PostModel::getPost($user['user_my_post'], 'id', $this->uid),
-                    'button_pm'     => self::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
+                    'profile'       => $profile,
+                    'count'         => UserModel::contentCount($profile['id']),
+                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
+                    'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
+                    'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
+                    'post'          => PostModel::getPost($profile['my_post'], 'id', $this->user),
+                    'button_pm'     => $this->accessPm($profile['id']),
                 ]
             ]
         );
@@ -152,10 +149,10 @@ class ProfileController extends MainController
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-        $user   = self::availability();
+        $profile   = self::profile();
 
-        $comments   = CommentModel::userComments($page, $this->limit, $user['user_id'], $this->uid['user_id']);
-        $pagesCount = CommentModel::userCommentsCount($user['user_id']);
+        $comments   = CommentModel::userComments($page, $this->limit, $profile['id'], $this->user['id']);
+        $pagesCount = CommentModel::userCommentsCount($profile['id']);
 
         $result = [];
         foreach ($comments as $ind => $row) {
@@ -164,37 +161,36 @@ class ProfileController extends MainController
             $result[$ind]           = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/user/profile/comment',
             [
-                'meta'  => self::metadata($sheet, $user),
-                'uid'   => $this->uid,
+                'meta'  => self::metadata($sheet, $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'comments'      => $result,
-                    'user'          => $user,
-                    'count'         => UserModel::contentCount($user['user_id']),
-                    'topics'        => FacetModel::getFacetsAll(1, 10, $user['user_id'], 'topics.my'),
-                    'blogs'         => FacetModel::getOwnerFacet($user['user_id'], 'blog'),
-                    'badges'        => BadgeModel::getBadgeUserAll($user['user_id']),
-                    'post'          => PostModel::getPost($user['user_my_post'], 'id', $this->uid),
-                    'button_pm'     => self::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm')),
-                    'user_login'    => $user['user_login'],
+                    'profile'       => $profile,
+                    'count'         => UserModel::contentCount($profile['id']),
+                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
+                    'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
+                    'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
+                    'post'          => PostModel::getPost($profile['my_post'], 'id', $this->user),
+                    'button_pm'     => $this->accessPm($profile['id']),
+                    'login'         => $profile['login'],
                 ]
             ]
         );
     }
 
-    public static function availability()
+    public static function profile()
     {
-        $login  = Request::get('login');
-        $user   = UserModel::getUser($login, 'slug');
-        pageError404($user);
+        $login      = Request::get('login');
+        $profile    = UserModel::getUser($login, 'slug');
+        pageError404($profile);
 
-        if ($user['user_ban_list'] == 1) {
+        if ($profile['ban_list'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
@@ -202,27 +198,27 @@ class ProfileController extends MainController
             $_SESSION['usernumbers'] = [];
         }
 
-        if (!isset($_SESSION['usernumbers'][$user['user_id']])) {
-            UserModel::userHits($user['user_id']);
-            $_SESSION['usernumbers'][$user['user_id']] = $user['user_id'];
+        if (!isset($_SESSION['usernumbers'][$profile['id']])) {
+            UserModel::userHits($profile['id']);
+            $_SESSION['usernumbers'][$profile['id']] = $profile['id'];
         }
 
         if (UserData::checkAdmin()) {
             Request::getResources()->addBottomScript('/assets/js/admin.js');
         }
 
-        return $user;
+        return $profile;
     }
 
     public static function metadata($sheet, $user)
     {
         if ($sheet == 'profile.posts') {
-            $information = $user['user_about'];
+            $information = $user['about'];
         }
 
-        $name = $user['user_login'];
-        if ($user['user_name']) {
-            $name = $user['user_name'] . ' (' . $user['user_login'] . ') ';
+        $name = $user['login'];
+        if ($user['name']) {
+            $name = $user['name'] . ' (' . $user['login'] . ') ';
         }
 
         $title = sprintf(Translate::get($sheet . '.title'), $name);
@@ -231,26 +227,23 @@ class ProfileController extends MainController
         $m = [
             'og'         => true,
             'twitter'    => true,
-            'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
-            'url'        => getUrlByName('profile', ['login' => $user['user_login']]),
+            'imgurl'     => '/uploads/users/avatars/' . $user['avatar'],
+            'url'        => getUrlByName('profile', ['login' => $user['login']]),
         ];
 
         return meta($m, $title, $desc);
     }
 
-    // Отправки личных сообщений (ЛС)
-    // $uid - кто отправляет
-    // $user_id - кому
-    // $add_tl -  с какого уровня доверия
-    public static function accessPm($uid, $user_id, $add_tl)
+    // Sending personal messages
+    public function accessPm($for_user_id)
     {
-        // Запретим отправку себе
-        if ($uid['user_id'] == $user_id) {
+        // We forbid sending to ourselves
+        if ($this->user['id'] == $for_user_id) {
             return false;
         }
 
-        // Если уровень доверия меньше установленного
-        if ($add_tl > $uid['user_trust_level']) {
+        // If the trust level is less than the established one
+        if ($this->user['trust_level'] >= Config::get('general.tl_add_pm')) {
             return false;
         }
 

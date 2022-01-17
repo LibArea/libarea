@@ -243,12 +243,12 @@ function favorite($user_id, $content_id, $type, $favorite_tid, $ind, $css = '')
     return $html;
 }
 
-function tabs_nav($name, $item, $uid, array $pages = [])
+function tabs_nav($name, $item, $user, array $pages = [])
 {
     if ($name == 'nav') {
         $html = '';
         foreach ($pages as $key => $page) {
-            if (empty($page['auth']) || $uid['user_id'] > 0) {
+            if (empty($page['auth']) || $user['id'] > 0) {
                 $classes    = 'mr20 gray-500 sky-500-hover';
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
@@ -263,10 +263,10 @@ function tabs_nav($name, $item, $uid, array $pages = [])
         foreach ($pages as $key => $page) {
 
             if (!empty($page['hr'])) {
-                if ($uid['user_id'] > 0) $html .= '<li><hr></li>';
+                if ($user['id'] > 0) $html .= '<li><hr></li>';
             } else {
 
-                if (empty($page['auth'])  || $uid['user_trust_level'] > $page['tl']) {
+                if (empty($page['auth'])  || $user['trust_level'] > $page['tl']) {
                     $classes    = 'sky-500-hover dark-gray-200';
                     $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
@@ -289,14 +289,14 @@ function tabs_nav($name, $item, $uid, array $pages = [])
 // $type -  post / answer / comment
 // $after - есть ли ответы
 // $stop_time - разрешенное время
-function accessСheck($content, $type, $uid, $after, $stop_time)
+function accessСheck($content, $type, $user, $after, $stop_time)
 {
     if (!$content) {
         return false;
     }
 
     // Доступ получает только автор и админ
-    if ($content[$type . '_user_id'] != $uid['user_id'] && !UserData::checkAdmin()) {
+    if ($content[$type . '_user_id'] != $user['id'] && !UserData::checkAdmin()) {
         return false;
     }
 

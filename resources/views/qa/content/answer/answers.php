@@ -2,7 +2,7 @@
   <?= tabs_nav(
         'menu',
         $data['type'],
-        $uid,
+        $user,
         $pages = Config::get('menu.left'),
       ); ?>
 </div>
@@ -16,9 +16,9 @@
       <div class="bg-white br-rd5 mt15 br-box-gray p15">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <div class="flex text-sm mb5">
-            <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w20 h20'); ?>
-            <a class="gray mr5 ml5" href="<?= getUrlByName('profile', ['login' => $answer['user_login']]); ?>">
-              <?= $answer['user_login']; ?>
+            <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20'); ?>
+            <a class="gray mr5 ml5" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
+              <?= $answer['login']; ?>
             </a>
             <span class="gray-400 lowercase"><?= $answer['date']; ?></span>
           </div>
@@ -30,7 +30,7 @@
           </div>
 
           <div class="hidden gray">
-            <?= votes($uid['user_id'], $answer, 'answer', 'ps', 'mr5'); ?>
+            <?= votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
           </div>
         <?php } else { ?>
           <div class="bg-red-200">
@@ -46,4 +46,4 @@
     <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('answers-desc'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('answers-desc')]); ?>

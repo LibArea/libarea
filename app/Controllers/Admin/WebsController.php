@@ -6,17 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\WebModel;
-use Content, Translate;
+use Content, Translate, Tpl;
 
 class WebsController extends MainController
 {
-    private $uid;
+    private $user;
 
     protected $limit = 25;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index($sheet, $type)
@@ -25,7 +25,7 @@ class WebsController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $pagesCount = WebModel::getItemsAllCount();
-        $domains    = WebModel::getItemsAll($page, $this->limit, $this->uid['user_id']);
+        $domains    = WebModel::getItemsAll($page, $this->limit, $this->user['id']);
 
         $result = [];
         foreach ($domains as $ind => $row) {
@@ -35,11 +35,10 @@ class WebsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/web/webs',
             [
                 'meta'  => meta($m = [], Translate::get('domains')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

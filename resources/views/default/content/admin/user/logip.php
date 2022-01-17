@@ -1,8 +1,7 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
     'menus' => []
   ]
 ); ?>
@@ -27,30 +26,30 @@
     <?php foreach ($data['results'] as $user) {  ?>
       <tr>
         <td class="center">
-          <?= $user['user_id']; ?>
+          <?= $user['id']; ?>
         </td>
         <td>
-          <?= user_avatar_img($user['user_avatar'], 'small', $user['user_login'], 'w20 h20 mr5'); ?>
-          <a href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>">
-            <?= $user['user_login']; ?>
+          <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w20 h20 mr5'); ?>
+          <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+            <?= $user['login']; ?>
           </a>
-          <?php if ($user['user_name']) { ?>
-            (<?= $user['user_name']; ?>)
+          <?php if ($user['name']) { ?>
+            (<?= $user['name']; ?>)
           <?php } ?>
-          <sup class="red-500">TL:<?= $user['user_trust_level']; ?></sup>
+          <sup class="red-500">TL:<?= $user['trust_level']; ?></sup>
 
         </td>
         <td>
-          <span class="date"><?= $user['user_email']; ?></span>
+          <span class="date"><?= $user['email']; ?></span>
         </td>
         <td>
-          <?= $user['user_created_at']; ?>
+          <?= $user['created_at']; ?>
         </td>
         <td>
           <?php if ($data['option'] == 'logs') { ?>
             <?= $user['latest_date']; ?>
           <?php } else { ?>
-            <?= $user['user_reg_ip']; ?>
+            <?= $user['reg_ip']; ?>
           <?php } ?>
 
           <?php if ($user['duplicat_ip_reg'] > 1) { ?>
@@ -58,13 +57,13 @@
           <?php } ?>
         </td>
         <td class="center">
-          <?php if ($user['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
-            <?php if ($user['user_ban_list']) { ?>
-              <div class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
+          <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
+            <?php if ($user['ban_list']) { ?>
+              <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
                 <span class="red-500"><?= Translate::get('unban'); ?></span>
               </div>
             <?php } else { ?>
-              <div class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
+              <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
                 <?= Translate::get('ban it'); ?>
               </div>
             <?php } ?>
@@ -73,8 +72,8 @@
           <?php } ?>
         </td>
         <td class="center">
-          <?php if ($user['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
-            <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['user_id']]); ?>">
+          <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
+            <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>
           <?php } else { ?>

@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -20,7 +20,7 @@
       <?= tabs_nav(
         'nav',
         $data['type'],
-        $uid,
+        $user,
         $pages = [
           [
             'id'        => 'edit',
@@ -84,8 +84,7 @@
         <?= sumbit(Translate::get('download')); ?>
       </div>
 
-      <?= import('/_block/form/field-input', [
-        'uid' => $uid,
+      <?= Tpl::import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('title'),
@@ -120,8 +119,7 @@
 
       <?php if ($fs['facet_type'] == 'topic' && UserData::checkAdmin()) { ?>
 
-        <?= import('/_block/form/radio', [
-          'uid' => $uid,
+        <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
               'title' => Translate::get('web-cat'),
@@ -144,15 +142,14 @@
           ]
         ]); ?>
 
-        <?= import('/_block/form/select/low-facets', [
-          'uid'           => $uid,
+        <!--?= Tpl::import('/_block/form/select/low-facets', [
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'topic',
           'title'         => Translate::get('children'),
           'help'          => Translate::get('necessarily'),
           'red'           => 'red'
-        ]); ?>
+        ]); ?-->
 
       <?php } ?>
 
@@ -183,9 +180,8 @@
       <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
       <textarea class="add max-w780" rows="6" minlength="34" name="facet_description"><?= $fs['facet_description']; ?></textarea>
       <div class="text-sm gray-400 mb20">> 34 <?= Translate::get('characters'); ?></div>
-
-      <?= import('/_block/form/field-input', [
-        'uid'           => $uid,
+ 
+      <?= Tpl::import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('short description'),
@@ -205,8 +201,7 @@
       <div class="mb20 text-sm gray-400">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
       <?php if ($fs['facet_type'] == 'topic') { ?>
-        <?= import('/_block/form/select/related-posts', [
-          'uid'           => $uid,
+        <?= Tpl::import('/_block/form/select/related-posts', [
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'post',
@@ -214,8 +209,7 @@
           'help'          => Translate::get('necessarily'),
         ]); ?>
 
-        <?= import('/_block/form/select/low-matching-facets', [
-          'uid'           => $uid,
+        <?= Tpl::import('/_block/form/select/low-matching-facets', [
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'topic',
@@ -238,18 +232,20 @@
       <?php } ?>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <?= import('/_block/form/select/content-tl', ['uid' => $uid, 'data' => $fs['facet_tl']]); ?>
-        <?= import('/_block/form/select/user', [
-          'uid'     => $uid,
+        <?= Tpl::import('/_block/form/select/content-tl', [
+          'user' => $user, 
+          'data' => $fs['facet_tl'],
+        ]); ?> 
+        <?= Tpl::import('/_block/form/select/user', [
+          'uid'     => $user,
           'user'    => $data['user'],
           'action'  => 'user',
           'type'    => 'user',
           'title'   => Translate::get('author'),
           'help'    => Translate::get('necessarily'),
         ]); ?>
-
-        <?= import('/_block/facet/facet-type', [
-          'uid'   => $uid,
+ 
+        <?= Tpl::import('/_block/facet/facet-type', [
           'type'  => $fs['facet_type'],
         ]); ?>
       <?php } ?>

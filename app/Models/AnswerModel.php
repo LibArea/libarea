@@ -8,19 +8,20 @@ use PDO;
 
 class AnswerModel extends MainModel
 {
-    // Добавляем ответ
-    public static function addAnswer($data)
+    // Add an answer
+    // Добавим ответ
+    public static function add($params)
     {
-        $params = [
-            'answer_post_id'    => $data['answer_post_id'],
-            'answer_content'    => $data['answer_content'],
-            'answer_published'  => $data['answer_published'],
-            'answer_ip'         => $data['answer_ip'],
-            'answer_user_id'    => $data['answer_user_id'],
-        ];
-
-        $sql = "INSERT INTO answers(answer_post_id, answer_content, answer_published, answer_ip, answer_user_id) 
-                       VALUES(:answer_post_id, :answer_content, :answer_published, :answer_ip, :answer_user_id)";
+        $sql = "INSERT INTO answers(answer_post_id, 
+                    answer_content, 
+                    answer_published, 
+                    answer_ip, 
+                    answer_user_id) 
+                       VALUES(:answer_post_id, 
+                           :answer_content, 
+                           :answer_published, 
+                           :answer_ip, 
+                           :answer_user_id)";
 
         DB::run($sql, $params);
 
@@ -29,13 +30,24 @@ class AnswerModel extends MainModel
         return $sql_last_id['last_id'];
     }
 
+    // Editing the answer
+    // Редактируем ответ
+    public static function edit($params)
+    {
+        $sql_two = "UPDATE answers SET answer_content = :answer_content, 
+                        answer_modified = :answer_modified 
+                            WHERE answer_id = :answer_id";
+
+        return DB::run($sql_two, $params);
+    }
+
     // Все ответы
-    public static function getAnswersAll($page, $limit, $uid, $sheet)
+    public static function getAnswersAll($page, $limit, $user, $sheet)
     {
         if ($sheet == 'user') {
             $sort = 'WHERE answer_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0';
-            if ($uid['user_trust_level']) {
-                $sort = 'WHERE answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $uid['user_trust_level'] . '';
+            if ($user['trust_level']) {
+                $sort = 'WHERE answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $user['trust_level'] . '';
             }
         } else {
             $sort = "WHERE answer_is_deleted = 0 AND post_is_deleted = 0";
@@ -61,18 +73,18 @@ class AnswerModel extends MainModel
                     answer_is_deleted,
                     votes_answer_item_id, 
                     votes_answer_user_id,
-                    user_id, 
-                    user_login, 
-                    user_avatar
+                    id, 
+                    login, 
+                    avatar
                         FROM answers
-                        INNER JOIN users ON user_id = answer_user_id
+                        INNER JOIN users ON id = answer_user_id
                         INNER JOIN posts ON answer_post_id = post_id 
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
-                            AND votes_answer_user_id = :user_id
+                            AND votes_answer_user_id = :uid
                         $sort
                         ORDER BY answer_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $user['id']])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество ответов
@@ -92,7 +104,7 @@ class AnswerModel extends MainModel
     }
 
     // Получаем ответы в посте
-    public static function getAnswersPost($post_id, $user_id, $type)
+    public static function getAnswersPost($post_id, $uid, $type)
     {
         $sort = "";
         if ($type == 1) {
@@ -123,15 +135,15 @@ class AnswerModel extends MainModel
                     favorite_tid,
                     favorite_user_id,
                     favorite_type,
-                    user_id, 
-                    user_login,
-                    user_avatar
+                    id, 
+                    login,
+                    avatar
                         FROM answers
-                        LEFT JOIN users ON user_id = answer_user_id
+                        LEFT JOIN users ON id = answer_user_id
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
-                            AND votes_answer_user_id = $user_id
+                            AND votes_answer_user_id = $uid
                         LEFT JOIN favorites ON favorite_tid = answer_id
-                            AND favorite_user_id  = $user_id
+                            AND favorite_user_id  = $uid
                             AND favorite_type = 2
                             WHERE answer_post_id = $post_id
                             $sort ";
@@ -140,7 +152,7 @@ class AnswerModel extends MainModel
     }
 
     // Страница ответов участника
-    public static function userAnswers($page, $limit, $user_id, $uid_id)
+    public static function userAnswers($page, $limit, $uid, $uid_vote)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
@@ -160,32 +172,32 @@ class AnswerModel extends MainModel
                     post_title,
                     post_slug,
                     post_is_deleted,
-                    user_id, 
-                    user_login, 
-                    user_avatar
+                    id, 
+                    login, 
+                    avatar
                         FROM answers
-                        LEFT JOIN users ON user_id = answer_user_id
+                        LEFT JOIN users ON id = answer_user_id
                         LEFT JOIN posts ON answer_post_id = post_id
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
-                            AND votes_answer_user_id = :uid_id
-                        WHERE answer_user_id = :user_id
+                            AND votes_answer_user_id = :uid_vote
+                        WHERE answer_user_id = :uid
                         AND answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
                         ORDER BY answer_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql, ['user_id' => $user_id, 'uid_id' => $uid_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid, 'uid_vote' => $uid_vote])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество ответов участника
-    public static function userAnswersCount($user_id)
+    public static function userAnswersCount($uid)
     {
         $sql = "SELECT 
                     answer_id
                         FROM answers
                         LEFT JOIN posts ON answer_post_id = post_id
-                            WHERE answer_user_id = :user_id AND answer_is_deleted = 0 
+                            WHERE answer_user_id = :uid AND answer_is_deleted = 0 
                                 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0";
 
-        return DB::run($sql, ['user_id' => $user_id])->rowCount();
+        return DB::run($sql, ['uid' => $uid])->rowCount();
     }
 
     // Информацию по id ответа
@@ -209,13 +221,5 @@ class AnswerModel extends MainModel
                             WHERE answer_id = :answer_id";
 
         return  DB::run($sql, ['answer_id' => $answer_id])->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Редактируем ответ
-    public static function AnswerEdit($answer_id, $content)
-    {
-        $sql_two = "UPDATE answers SET answer_content = :content, answer_modified = :date WHERE answer_id = :answer_id";
-
-        return DB::run($sql_two, ['answer_id' => $answer_id, 'content' => $content, 'date' => date("Y-m-d H:i:s")]);
     }
 }

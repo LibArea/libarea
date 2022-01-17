@@ -6,15 +6,15 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\SearchModel;
-use Translate, Validation, Config, Content;
+use Translate, Validation, Config, Content, Tpl;
 
 class SearchController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index()
@@ -46,11 +46,11 @@ class SearchController extends MainController
                 $result[$ind]   = $row;
             }
         }
-        return agRender(
+        return Tpl::agRender(
             '/search/index',
             [
                 'meta'  => meta($m = [], Translate::get('search')),
-                'uid'   => $this->uid,
+                'user'   => $this->user,
                 'data'  => [
                     'result'    => $result,
                     'query'     => $query,

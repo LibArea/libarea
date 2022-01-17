@@ -17,6 +17,7 @@
    // userInput: false, // <- отключим пользовательский ввод
     skipInvalid: true, // <- не добавлять повтороно не допускаемые теги
     enforceWhitelist: true, // <- добавлять только из белого списка
+    tagTextProp: "post_title",
     <?php if ($action == 'edit') { ?>
     whitelist: JSON.parse('<?= json_encode($data['post_arr']); ?>'),
     <?php } ?>
@@ -35,13 +36,14 @@
     fetch(`/search/post/${encodeURIComponent(term)}`, {signal: abortCtrl.signal})
       .then(r => r.json())
       .then(list => {
+          console.log(list);
         tagify_post.settings.whitelist.splice(0, list.length, ...list); // обновим массив бел. список на месте
         tagify_post.loading(false).dropdown.show.call(tagify_post, term); // отобразим раскрывающийся список предложений
       })
   });
 
   <?php if ($action == 'edit') { ?>
-    tagify_post.addTags(JSON.parse('<?= json_encode($data['post_arr']) ?>'));
+    tagify_post.addTags(JSON.parse('<?= json_encode($data['post_arr']); ?>'));
   <?php } ?>
 
   });

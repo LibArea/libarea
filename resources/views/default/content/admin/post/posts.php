@@ -1,8 +1,7 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
     'menus' => [
       [
         'id'    => 'admin.' . $data['type'] . '.all',
@@ -27,9 +26,9 @@
       </a>
       <div id="post_<?= $post['post_id']; ?>">
         <div class="text-sm gray">
-          <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'w20 h20 mr5'); ?>
-          <a class="date mr5" href="<?= getUrlByName('profile', ['login' => $post['user_login']]); ?>">
-            <?= $post['user_login']; ?>
+          <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'w20 h20 mr5'); ?>
+          <a class="date mr5" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+            <?= $post['login']; ?>
           </a>
           <span class="mr55">
             <?= $post['date']; ?>
@@ -49,7 +48,7 @@
         </div>
         <div class="br-bottom mb15 mt5 pb10 text-sm hidden gray">
           <span class="left mt5">
-            <?= votes($uid['user_id'], $post, 'post', 'ps', 'mr5'); ?>
+            <?= votes($user['id'], $post, 'post', 'ps', 'mr5'); ?>
           </span>
           <span id="cm_dell" class="right comment_link">
             <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action">

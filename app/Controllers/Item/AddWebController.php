@@ -6,30 +6,29 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{WebModel, FacetModel};
-use Validation, Translate, Domains;
+use Validation, Translate, Domains, Tpl;
 
 class AddWebController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Форма добавление домена
     public function index($sheet, $type)
     {
-        Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
+        Validation::validTl($this->user['trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
-        return agRender(
+        return Tpl::agRender(
             '/item/add',
             [
                 'meta'  => meta($m = [], Translate::get('add a website')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet' => $sheet,
                     'type'  => $type,
@@ -40,7 +39,7 @@ class AddWebController extends MainController
 
     public function create()
     {
-        Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
+        Validation::validTl($this->user['trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
         $item_url           = Request::getPost('url');
         $item_title_url     = Request::getPost('title_url');
@@ -55,7 +54,7 @@ class AddWebController extends MainController
         $item_url_domain    = $domain->getRegisterable();
         $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
-        $item = WebModel::getItemOne($item_url_domain, $this->uid['user_id']);
+        $item = WebModel::getItemOne($item_url_domain, $this->user['id']);
         if ($item) {
             addMsg(Translate::get('the site is already there'), 'error');
             redirect($redirect);
@@ -64,18 +63,22 @@ class AddWebController extends MainController
         Validation::Length($item_title_url, Translate::get('title'), '14', '250', $redirect);
         Validation::Length($item_content_url, Translate::get('description'), '24', '1500', $redirect);
 
-        $data = [
-            'item_url'          => $item_url,
-            'item_url_domain'   => $item_url_domain,
-            'item_title_url'    => $item_title_url,
-            'item_content_url'  => $item_content_url,
-            'item_published'    => 1,
-            'item_user_id'      => $this->uid['user_id'],
-            'item_type_url'     => 0,
-            'item_status_url'   => 200,
-        ];
-
-        $item_topic = WebModel::add($data);
+        $item_topic = WebModel::add(
+            [
+                'item_url'          => $item_url,
+                'item_url_domain'   => $item_url_domain,
+                'item_title_url'    => $item_title_url,
+                'item_content_url'  => $item_content_url,
+                'item_published'    => 1,
+                'item_user_id'      => $this->user['id'],
+                'item_type_url'     => 0,
+                'item_status_url'   => 200,
+                'item_is_soft'      => 0,
+                'item_is_github'    => 0,
+                'item_votes'        => 0,
+                'item_count'        => 1,
+            ]
+        );
 
         // Фасеты для сайте
         $post_fields    = Request::getPost() ?? [];

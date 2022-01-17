@@ -10,17 +10,17 @@ use Content, Validation, Translate;
 
 class AddAnswerController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function create()
     {
         $post_id = Request::getPostInt('post_id');
-        $post    = PostModel::getPost($post_id, 'id', $this->uid);
+        $post    = PostModel::getPost($post_id, 'id', $this->user);
         pageError404($post);
 
         $answer_content = $_POST['content']; // для Markdown
@@ -32,13 +32,13 @@ class AddAnswerController extends MainController
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
         $trigger = (new \App\Controllers\AuditController())->placementSpeed($answer_content, 'answer');
 
-        $last_id = AnswerModel::addAnswer(
+        $last_id = AnswerModel::add(
             [
                 'answer_post_id'    => $post_id,
                 'answer_content'    => Content::change($answer_content),
                 'answer_published'  => ($trigger === false) ? 0 : 1,
                 'answer_ip'         => Request::getRemoteAddress(),
-                'answer_user_id'    => $this->uid['user_id'],
+                'answer_user_id'    => $this->user['id'],
             ]
         );
 
@@ -61,13 +61,14 @@ class AddAnswerController extends MainController
         // Кто подписан на данный вопрос / пост
         if ($focus_all = NotificationsModel::getFocusUsersPost($post['post_id'])) {
             foreach ($focus_all as $focus_user) {
-                if ($focus_user['signed_user_id'] != $this->uid['user_id']) {
+                if ($focus_user['signed_user_id'] != $this->user['id']) {
                     NotificationsModel::send(
                         [
-                            'sender_id'     => $this->uid['user_id'],
-                            'recipient_id'  => $focus_user['signed_user_id'],
-                            'action_type'   => 3, // Ответ на пост
-                            'url'           => $url,
+                            'notification_sender_id'    => $this->user['id'],
+                            'notification_recipient_id' => $focus_user['signed_user_id'],
+                            'notification_action_type'  => 3, // Ответ на пост 
+                            'notification_url'          => $url,
+                            'notification_read_flag'    => 0,
                         ]
                     );
                 }
@@ -76,12 +77,13 @@ class AddAnswerController extends MainController
 
         ActionModel::addLogs(
             [
-                'user_id'           => $this->uid['user_id'],
-                'user_login'        => $this->uid['user_login'],
+                'log_user_id'       => $this->user['id'],
+                'log_user_login'    => $this->user['login'],
                 'log_id_content'    => $last_id,
                 'log_type_content'  => 'answer',
                 'log_action_name'   => 'content.added',
                 'log_url_content'   => $url,
+                'log_date'          => date("Y-m-d H:i:s"),
             ]
         );
 

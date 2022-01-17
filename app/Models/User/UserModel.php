@@ -8,48 +8,82 @@ use PDO;
 
 class UserModel extends MainModel
 {
-    // Страница участников
-    public static function getUsersAll($page, $limit, $user_id, $type)
+    // Регистрация участника
+    public static function create($params)
     {
-        $sort = "ORDER BY user_id = :user_id DESC, user_trust_level DESC";
+        $sql = "INSERT INTO users(login, 
+                                    email,
+                                    template,
+                                    lang,
+                                    whisper,
+                                    password, 
+                                    limiting_mode, 
+                                    activated, 
+                                    reg_ip, 
+                                    trust_level, 
+                                    invitation_id) 
+                                    
+                            VALUES(:login, 
+                                    :email, 
+                                    :template,
+                                    :lang,
+                                    :whisper,
+                                    :password, 
+                                    :limiting_mode, 
+                                    :activated, 
+                                    :reg_ip, 
+                                    :trust_level, 
+                                    :invitation_id)";
+
+        DB::run($sql, $params);
+
+        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
+
+        return $sql_last_id['last_id'];
+    }
+
+    // Страница участников
+    public static function getUsersAll($page, $limit, $uid, $type)
+    {
+        $sort = "ORDER BY id = :uid DESC, trust_level DESC";
         if ($type == 'users.new') {
-            $sort = "ORDER BY user_created_at DESC";
+            $sort = "ORDER BY created_at DESC";
         }
-        
-        
+
+
         $start  = ($page - 1) * $limit;
         $sql = "SELECT  
-                    user_id,
-                    user_login,
-                    user_email,
-                    user_name,
-                    user_avatar,
-                    user_created_at,
-                    user_whisper,
-                    user_updated_at,
-                    user_whisper,
-                    user_trust_level,
-                    user_activated,
-                    user_invitation_id,
-                    user_limiting_mode,
-                    user_reg_ip,
-                    user_ban_list,
-                    user_is_deleted
+                    id,
+                    login,
+                    email,
+                    name,
+                    avatar,
+                    created_at,
+                    whisper,
+                    updated_at,
+                    whisper,
+                    trust_level,
+                    activated,
+                    invitation_id,
+                    limiting_mode,
+                    reg_ip,
+                    ban_list,
+                    is_deleted
                         FROM users 
-                        WHERE user_is_deleted != 1 and user_ban_list != 1
+                        WHERE is_deleted != 1 and ban_list != 1
                             $sort
                             LIMIT $start, $limit";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество
     public static function getUsersAllCount()
     {
         $sql = "SELECT 
-                    user_id,
-                    user_is_deleted
-                        FROM users WHERE user_ban_list = 0";
+                    id,
+                    is_deleted
+                        FROM users WHERE ban_list = 0";
 
         return  DB::run($sql)->rowCount();
     }
@@ -57,116 +91,66 @@ class UserModel extends MainModel
     // Информация по участнику (id, slug)
     public static function getUser($params, $name)
     {
-        $sort = "user_id = :params";
+        $sort = "id = :params";
         if ($name == 'slug') {
-            $sort = "user_login = :params";
+            $sort = "login = :params";
         }
 
         $sql = "SELECT 
-                    user_id,
-                    user_login,
-                    user_name,
-                    user_whisper,
-                    user_activated,
-                    user_limiting_mode,
-                    user_reg_ip,
-                    user_email,
-                    user_avatar,
-                    user_trust_level,
-                    user_cover_art,
-                    user_color,
-                    user_template,
-                    user_lang,
-                    user_invitation_available,
-                    user_about,
-                    user_website,
-                    user_location,
-                    user_public_email,
-                    user_skype,
-                    user_twitter,
-                    user_telegram,
-                    user_vk,
-                    user_created_at,
-                    user_updated_at,
-                    user_my_post,
-                    user_ban_list,
-                    user_hits_count,
-                    user_up_count,
-                    user_is_deleted 
+                    id,
+                    login,
+                    name,
+                    whisper,
+                    activated,
+                    limiting_mode,
+                    reg_ip,
+                    email,
+                    avatar,
+                    trust_level,
+                    cover_art,
+                    color,
+                    template,
+                    lang,
+                    invitation_available,
+                    about,
+                    website,
+                    location,
+                    public_email,
+                    skype,
+                    twitter,
+                    telegram,
+                    vk,
+                    created_at,
+                    updated_at,
+                    my_post,
+                    ban_list,
+                    hits_count,
+                    up_count,
+                    is_deleted 
                         FROM users WHERE $sort";
 
-        $result = DB::run($sql, ['params' => $params]);
-
-        return $result->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Регистрация участника
-    public static function createUser($data)
-    {
-        $data = [
-            'user_login'                => $data['user_login'],
-            'user_email'                => $data['user_email'],
-            'user_template'             => $data['user_template'],
-            'user_lang'                 => $data['user_lang'],
-            'user_whisper'              => $data['user_whisper'],
-            'user_password'             => $data['user_password'],
-            'user_limiting_mode'        => $data['user_limiting_mode'],
-            'user_activated'            => $data['user_activated'],
-            'user_reg_ip'               => $data['user_reg_ip'],
-            'user_trust_level'          => $data['user_trust_level'],
-            'user_invitation_id'        => $data['user_invitation_id'],
-        ];
-
-        $sql = "INSERT INTO users(user_login, 
-                                    user_email,
-                                    user_template,
-                                    user_lang,
-                                    user_whisper,
-                                    user_password, 
-                                    user_limiting_mode, 
-                                    user_activated, 
-                                    user_reg_ip, 
-                                    user_trust_level, 
-                                    user_invitation_id) 
-                                    
-                            VALUES(:user_login, 
-                                    :user_email, 
-                                    :user_template,
-                                    :user_lang,
-                                    :user_whisper,
-                                    :user_password, 
-                                    :user_limiting_mode, 
-                                    :user_activated, 
-                                    :user_reg_ip, 
-                                    :user_trust_level, 
-                                    :user_invitation_id)";
-
-        DB::run($sql, $data);
-
-        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
-
-        return $sql_last_id['last_id'];
+        return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Просмотры  
-    public static function userHits($user_id)
+    public static function userHits($uid)
     {
-        $sql = "UPDATE users SET user_hits_count = (user_hits_count + 1) WHERE user_id = :user_id";
+        $sql = "UPDATE users SET hits_count = (hits_count + 1) WHERE id = :uid";
 
-        return  DB::run($sql, ['user_id' => $user_id]);
+        return  DB::run($sql, ['uid' => $uid]);
     }
 
     // Страница закладок участника (комментарии и посты)
-    public static function userFavorite($user_id)
+    public static function userFavorite($uid)
     {
         $sql = "SELECT 
                     favorite_id,
                     favorite_user_id, 
                     favorite_type,
                     favorite_tid,
-                    user_id, 
-                    user_login,
-                    user_avatar, 
+                    id, 
+                    login,
+                    avatar, 
                     post_id,
                     post_title,
                     post_slug,
@@ -176,16 +160,16 @@ class UserModel extends MainModel
                     answer_post_id,
                     answer_content
                         FROM favorites
-                        LEFT JOIN users ON user_id = favorite_user_id
+                        LEFT JOIN users ON id = favorite_user_id
                         LEFT JOIN posts ON post_id = favorite_tid AND favorite_type = 1
                         LEFT JOIN answers ON answer_id = favorite_tid AND favorite_type = 2
-                        WHERE favorite_user_id = :user_id ORDER BY favorite_id DESC LIMIT 100";
+                        WHERE favorite_user_id = :uid ORDER BY favorite_id DESC LIMIT 100";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Страница черновиков
-    public static function userDraftPosts($user_id)
+    public static function userDraftPosts($uid)
     {
         $sql = "SELECT
                    post_id,
@@ -195,107 +179,101 @@ class UserModel extends MainModel
                    post_draft,
                    post_is_deleted,
                    post_date,
-                   user_id, 
-                   user_login,
-                   user_name,
-                   user_avatar
+                   id, 
+                   login,
+                   name,
+                   avatar
                        FROM posts
-                       LEFT JOIN users ON user_id = post_user_id
-                           WHERE user_id = :user_id 
+                       LEFT JOIN users ON id = post_user_id
+                           WHERE id = :uid 
                            AND post_draft = 1 AND post_is_deleted = 0
                            ORDER BY post_id DESC";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Информация участника
     public static function userInfo($email)
     {
         $sql = "SELECT 
-                   user_id, 
-                   user_email, 
-                   user_password,
-                   user_login,
-                   user_name,
-                   user_template,
-                   user_lang,
-                   user_avatar,
-                   user_trust_level,
-                   user_ban_list,
-                   user_limiting_mode
+                   id, 
+                   email, 
+                   password,
+                   login,
+                   name,
+                   template,
+                   lang,
+                   avatar,
+                   trust_level,
+                   ban_list,
+                   limiting_mode
                         FROM users 
-                        WHERE user_email = :email";
+                        WHERE email = :email";
 
         return DB::run($sql, ['email' => $email])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Количество контента участника
-    public static function contentCount($user_id)
+    public static function contentCount($uid)
     {
         $sql = "SELECT 
                     (SELECT COUNT(post_id) 
                         FROM posts 
-                        WHERE post_user_id = :user_id and post_draft = 0 and post_is_deleted = 0) 
+                        WHERE post_user_id = :uid and post_draft = 0 and post_is_deleted = 0) 
                             AS count_posts,
                   
                     (SELECT COUNT(answer_id) 
                         FROM answers 
-                        WHERE answer_user_id = :user_id and answer_is_deleted = 0) 
+                        WHERE answer_user_id = :uid and answer_is_deleted = 0) 
                             AS count_answers,
                   
                     (SELECT COUNT(comment_id) 
                         FROM comments 
-                        WHERE comment_user_id = :user_id and comment_is_deleted = 0) 
+                        WHERE comment_user_id = :uid and comment_is_deleted = 0) 
                             AS count_comments";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Находит ли пользователь в бан- листе
-    public static function isBan($user_id)
+    public static function isBan($uid)
     {
         $sql = "SELECT
                     banlist_user_id,
                     banlist_status
                         FROM users_banlist
-                        WHERE banlist_user_id = :user_id AND banlist_status = 1";
+                        WHERE banlist_user_id = :uid AND banlist_status = 1";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Находит ли пользователь в бесшумном режиме
-    public static function isLimitingMode($user_id)
+    public static function isLimitingMode($uid)
     {
         $sql = "SELECT
-                    user_id,
-                    user_limiting_mode
+                    id,
+                    limiting_mode
                         FROM users
-                        WHERE user_id = :user_id AND user_limiting_mode = 1";
+                        WHERE id = :uid AND limiting_mode = 1";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Активирован ли пользователь (e-mail)
-    public static function isActivated($user_id)
+    public static function isActivated($uid)
     {
         $sql = "SELECT
-                    user_id,
-                    user_activated
+                    id,
+                    activated
                         FROM users
-                        WHERE user_id = :user_id AND user_activated = 1";
+                        WHERE id = :uid AND activated = 1";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Восстановление пароля
-    public static function initRecover($user_id, $code)
+    // Password Recovery
+    public static function initRecover($params)
     {
-        $params = [
-            'activate_date'     => date('Y-m-d H:i:s'),
-            'activate_user_id'  => $user_id,
-            'activate_code'     => $code,
-        ];
-
         $sql = "INSERT INTO users_activate(activate_date, activate_user_id, activate_code) 
                        VALUES(:activate_date, :activate_user_id, :activate_code)";
 
@@ -303,11 +281,11 @@ class UserModel extends MainModel
     }
 
     // Для одноразового использования кода восстановления
-    public static function editRecoverFlag($user_id)
+    public static function editRecoverFlag($uid)
     {
-        $sql = "UPDATE users_activate SET activate_flag = 1 WHERE activate_user_id = :user_id";
+        $sql = "UPDATE users_activate SET activate_flag = 1 WHERE activate_user_id = :uid";
 
-        return DB::run($sql, ['user_id' => $user_id]);
+        return DB::run($sql, ['uid' => $uid]);
     }
 
     // Проверяем код смены пароля (использовали его или нет)
@@ -325,15 +303,9 @@ class UserModel extends MainModel
         return DB::run($sql, ['code' => $code])->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Делаем запись в таблицу активации e-mail
-    public static function sendActivateEmail($user_id, $email_code)
+    // Email Activation
+    public static function sendActivateEmail($params)
     {
-        $params = [
-            'pubdate'       => date("Y-m-d H:i:s"),
-            'user_id'       => $user_id,
-            'email_code'    => $email_code,
-        ];
-
         $sql = "INSERT INTO users_email_activate(pubdate, user_id, email_code) 
                        VALUES(:pubdate, :user_id, :email_code)";
 
@@ -354,14 +326,14 @@ class UserModel extends MainModel
     }
 
     // Активируем e-mail
-    public static function EmailActivate($user_id)
+    public static function EmailActivate($uid)
     {
-        $sql = "UPDATE users_email_activate SET email_activate_flag = :flag WHERE user_id = :user_id";
+        $sql = "UPDATE users_email_activate SET email_activate_flag = :flag WHERE user_id = :uid";
 
-        DB::run($sql, ['user_id' => $user_id, 'flag' => 1]);
+        DB::run($sql, ['uid' => $uid, 'flag' => 1]);
 
-        $sql = "UPDATE users SET user_activated = :flag WHERE user_id = :user_id";
+        $sql = "UPDATE users SET activated = :flag WHERE id = :uid";
 
-        return DB::run($sql, ['user_id' => $user_id, 'flag' => 1]);
+        return DB::run($sql, ['uid' => $uid, 'flag' => 1]);
     }
 }

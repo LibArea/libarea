@@ -1,8 +1,7 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
     'menus' => []
   ]
 );
@@ -27,8 +26,7 @@
       <input type="hidden" value="0" name="nav_parent">
     <?php } ?>
 
-    <?= import('/_block/form/field-input', [
-      'uid'  => $uid,
+    <?= Tpl::import('/_block/form/field-input', [
       'data' => [
         [
           'title' => Translate::get('name'),

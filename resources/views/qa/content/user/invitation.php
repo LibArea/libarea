@@ -3,7 +3,7 @@
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
   <div class="bg-white br-rd5 br-box-gray p15">
-    <?php if ($uid['user_trust_level'] > 1) { ?>
+    <?php if ($user['trust_level'] > 1) { ?>
       <form method="post" action="<?= getUrlByName('invit.create'); ?>">
         <?php csrf_field(); ?>
         <div class="mb20">
@@ -21,8 +21,8 @@
         <?php foreach ($data['invitations'] as $invite) { ?>
           <?php if ($invite['active_status'] == 1) { ?>
             <div class="text-sm gray">
-              <?= user_avatar_img($invite['user_avatar'], 'small', $invite['user_login'], 'ava'); ?>
-              <a href="<?= $invite['user_login']; ?>"><?= $invite['user_login']; ?></a>
+              <?= user_avatar_img($invite['avatar'], 'small', $invite['login'], 'ava'); ?>
+              <a href="<?= $invite['login']; ?>"><?= $invite['login']; ?></a>
               - <?= Translate::get('registered'); ?>
             </div>
 
@@ -55,4 +55,4 @@
     <?php } ?>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('you can invite your friends'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('invite.features')]); ?>

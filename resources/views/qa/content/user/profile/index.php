@@ -1,12 +1,12 @@
-<?= import('/content/user/profile/header', ['uid' => $uid, 'data' => $data]); ?>
-
-<?= import('/content/user/profile/sidebar', ['uid' => $uid, 'data' => $data]); ?>
+<?= Tpl::import('/content/user/profile/header', ['user' => $user, 'data' => $data]); ?>
+ 
+<?= Tpl::import('/content/user/profile/sidebar', ['user' => $user, 'data' => $data]); ?>
 
 <main class="col-span-8 mb-col-12">
-  <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+  <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
 
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('profile', ['login' => $data['user']['user_login']]) . '/posts'); ?>
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('profile', ['login' => $data['profile']['login']]) . '/posts'); ?>
 </main>
 
 </div>
-<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
+<?= Tpl::import('/_block/wide-footer', ['user' => $user]); ?>

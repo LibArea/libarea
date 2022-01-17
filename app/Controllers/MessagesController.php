@@ -7,22 +7,21 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{MessagesModel, NotificationsModel};
-use Content, Config, Translate;
+use Content, Config, Translate, Tpl;
 
 class MessagesController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid = UserData::getUid();
+        $this->user = UserData::get();
     }
 
     public function index()
     {
-        if ($messages_dialog = MessagesModel::getMessages($this->uid['user_id'])) {
+        if ($messages_dialog = MessagesModel::getMessages($this->user['id'])) {
 
-            // $messages_total_rows = MessagesModel::getMessagesTotal($this->uid['user_id']);
             foreach ($messages_dialog as $val) {
                 $dialog_ids = $val['dialog_id'];
             }
@@ -41,12 +40,12 @@ class MessagesController extends MainController
             foreach ($messages_dialog as $ind => $row) {
 
                 // Принимающий  AND $row['dialog_recipient_count']
-                if ($row['dialog_recipient_id'] == $this->uid['user_id']) {
+                if ($row['dialog_recipient_id'] == $this->user['id']) {
                     $row['unread']   = $row['dialog_recipient_unread'];
                     $row['count']    = $row['dialog_recipient_count'];
 
                     // Отправляющий  AND $row['dialog_sender_count']    
-                } else if ($row['dialog_sender_id'] == $this->uid['user_id']) {
+                } else if ($row['dialog_sender_id'] == $this->user['id']) {
                     $row['unread']   = $row['dialog_sender_unread'];
                     $row['count']    = $row['dialog_sender_count'];
                 }
@@ -61,11 +60,10 @@ class MessagesController extends MainController
             }
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/messages/messages',
             [
                 'meta'  => meta($m = [], Translate::get('private messages')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'messages',
                     'type'      => 'messages',
@@ -81,55 +79,54 @@ class MessagesController extends MainController
         $id = Request::getInt('id');
         if (!$dialog = MessagesModel::getDialogById($id)) {
             addMsg(Translate::get('the dialog does not exist'), 'error');
-            redirect(getUrlByName('messages', ['login' => $this->uid['user_login']]));
+            redirect(getUrlByName('messages', ['login' => $this->user['login']]));
         }
 
-        if ($dialog['dialog_recipient_id'] != $this->uid['user_id'] and $dialog['dialog_sender_id'] != $this->uid['user_id']) {
+        if ($dialog['dialog_recipient_id'] != $this->user['id'] and $dialog['dialog_sender_id'] != $this->user['id']) {
             addMsg(Translate::get('the topic does not exist'), 'error');
-            redirect(getUrlByName('messages', ['login' => $this->uid['user_login']]));
+            redirect(getUrlByName('messages', ['login' => $this->user['login']]));
         }
 
         // update views, etc. 
-        $dialog_id = MessagesModel::setMessageRead($id, $this->uid['user_id']);
-        
-        // user_id получателя и индификатор события
-        NotificationsModel::updateMessagesUnread($this->uid['user_id'], $dialog_id);
-        
+        $dialog_id = MessagesModel::setMessageRead($id, $this->user['id']);
+
+        // id получателя и индификатор события
+        NotificationsModel::updateMessagesUnread($this->user['id'], $dialog_id);
+
         // dialog_recipient_unread
         if ($list = MessagesModel::getMessageByDialogId($id)) {
 
-            if ($dialog['dialog_sender_id'] != $this->uid['user_id']) {
+            if ($dialog['dialog_sender_id'] != $this->user['id']) {
                 $recipient_user = UserModel::getUser($dialog['dialog_sender_id'], 'id');
             } else {
                 $recipient_user = UserModel::getUser($dialog['dialog_recipient_id'], 'id');
             }
 
             foreach ($list as $key => $val) {
-                if ($dialog['dialog_sender_id'] == $this->uid['user_id'] and $val['message_sender_remove']) {
+                if ($dialog['dialog_sender_id'] == $this->user['id'] and $val['message_sender_remove']) {
                     unset($list[$key]);
-                } else if ($dialog['dialog_sender_id'] != $this->uid['user_id'] and $val['message_recipient_remove']) {
+                } else if ($dialog['dialog_sender_id'] != $this->user['id'] and $val['message_recipient_remove']) {
                     unset($list[$key]);
                 } else {
                     $list[$key]['message_content']  =  Content::text($val['message_content'], 'text');
-                    $list[$key]['user_login']   = $recipient_user['user_login'];
-                    $list[$key]['user_avatar']  = $recipient_user['user_avatar'];
+                    $list[$key]['login']   = $recipient_user['login'];
+                    $list[$key]['avatar']  = $recipient_user['avatar'];
                     $list[$key]['unread']       = $dialog['dialog_recipient_unread'];
                 }
             }
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/messages/dialog',
             [
                 'meta'  => meta($m = [], Translate::get('dialogue')),
-                'uid'   => $this->uid,
                 'data'  => [
-                    'h1'                => Translate::get('dialogue') . ' - ' . $list[$key]['user_login'],
-                    'sheet'             => Translate::get('dialogue') . ' - ' . $list[$key]['user_login'],
+                    'h1'                => Translate::get('dialogue') . ' - ' . $list[$key]['login'],
+                    'sheet'             => Translate::get('dialogue') . ' - ' . $list[$key]['login'],
                     'type'              => 'type',
                     'list'              => $list,
                     'recipient_user'    => $recipient_user,
-                    'dialog'            => MessagesModel::lastBranches($this->uid['user_id']),
+                    'dialog'            => MessagesModel::lastBranches($this->user['id']),
                 ]
             ]
         );
@@ -147,18 +144,17 @@ class MessagesController extends MainController
 
         // We will limit the sending of PMs if the level of trust is low
         // Ограничим отправк ЛС, если уровень доверия низок
-        if (Config::get('general.tl_add_pm') > $this->uid['user_trust_level']) {
+        if (Config::get('general.tl_add_pm') > $this->user['trust_level']) {
             redirect('/');
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/messages/user-add-messages',
             [
                 'meta'  => meta($m = [], Translate::get('send a message')),
-                'uid'   => $this->uid,
                 'data'  => [
-                    'recipient_uid' => $user['user_id'],
-                    'login'         => $user['user_login'],
+                    'recipient_uid' => $user['id'],
+                    'login'         => $user['login'],
                     'type'          => 'type',
                 ]
             ]
@@ -174,34 +170,36 @@ class MessagesController extends MainController
 
         // If the user is frozen and if the private message is empty
         // Если пользователь заморожен и если личное сообщение пустое
-        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']);
+        (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
         if ($content == '') {
             addMsg(Translate::get('enter content'), 'error');
-            redirect(getUrlByName('messages', ['login' => $this->uid['user_login']]));
+            redirect(getUrlByName('messages', ['login' => $this->user['login']]));
         }
 
         // If the user does not exist 
         // Если пользователя не существует
-        $user  = UserModel::getUser($this->uid['user_id'], 'id');
-        pageRedirection($user, getUrlByName('messages', ['login' => $this->uid['user_login']]));
+        $user  = UserModel::getUser($this->user['id'], 'id');
+        pageRedirection($user, getUrlByName('messages', ['login' => $this->user['login']]));
 
         // We will limit the sending of PMs if the level of trust is low
         // Ограничим отправк ЛС, если уровень доверия низок
-        if (Config::get('general.tl_add_pm') > $this->uid['user_trust_level']) {
+        if (Config::get('general.tl_add_pm') > $this->user['trust_level']) {
             redirect('/');
         }
 
-        $dialog_id = MessagesModel::sendMessage($this->uid['user_id'], $recipient_id, $content);
+        $dialog_id = MessagesModel::sendMessage($this->user['id'], $recipient_id, $content);
 
+        // Оповещение админу
+        // Admin notification 
         NotificationsModel::send(
             [
-                'sender_id'     => $this->uid['user_id'],
-                'recipient_id'  => $recipient_id,
-                'action_type'   => 1, // Private messages
-                'url'           => '/messages/' . $dialog_id,
+                'notification_sender_id'    => $this->user['id'],
+                'notification_recipient_id' => $recipient_id,  // admin
+                'notification_action_type'  => 1, // Private messages 
+                'notification_url'          => '/messages/' . $dialog_id,
+                'notification_read_flag'    => 0,
             ]
         );
-
 
         redirect(getUrlByName('messages'));
     }

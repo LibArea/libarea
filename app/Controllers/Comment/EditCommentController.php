@@ -6,28 +6,30 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{CommentModel, PostModel};
-use Content;
+use Content, Tpl;
 
 class EditCommentController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
-    // Форма редактирования comment
+    // Comment Editing Form
+    // Форма редактирования комментария
     public function index()
     {
         $comment_id     = Request::getPostInt('comment_id');
         $post_id        = Request::getPostInt('post_id');
 
+        // Access verification
         // Проверка доступа 
         $comment = CommentModel::getCommentsId($comment_id);
-        if (!accessСheck($comment, 'comment', $this->uid, 0, 0)) return false;
+        if (!accessСheck($comment, 'comment', $this->user, 0, 0)) return false;
 
-        agIncludeTemplate(
+        Tpl::agIncludeTemplate(
             '/_block/form/edit-form-comment',
             [
                 'data'  => [
@@ -35,7 +37,7 @@ class EditCommentController extends MainController
                     'post_id'           => $post_id,
                     'comment_content'   => $comment['comment_content'],
                 ],
-                'uid'   => $this->uid
+                'user'   => $this->user
             ]
         );
     }
@@ -46,26 +48,29 @@ class EditCommentController extends MainController
         $post_id            = Request::getPostInt('post_id');
         $comment_content    = Request::getPost('comment');
 
-        // Получим относительный url поста для возрата
-        $post       = PostModel::getPost($post_id, 'id', $this->uid);
+        $post       = PostModel::getPost($post_id, 'id', $this->user);
         pageRedirection($post, '/');
 
-        // Проверка доступа 
+        // Access verification 
         $comment = CommentModel::getCommentsId($comment_id);
-        if (!accessСheck($comment, 'comment', $this->uid, 0, 0)) {
+        if (!accessСheck($comment, 'comment', $this->user, 0, 0)) {
             redirect('/');
         }
 
-        // Если пользователь заморожен
-        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']); 
+        // If the user is frozen
+        (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
 
         $slug = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         $redirect   = $slug . '#comment_' . $comment['comment_id'];
 
-        $comment_content = Content::change($comment_content);
+        CommentModel::edit(
+            [
+                'comment_id'        => $comment_id,
+                'comment_content'   => Content::change($comment_content),
+                'comment_modified'  => date("Y-m-d H:i:s"),
+            ]
+        );
 
-        // Редактируем комментарий
-        CommentModel::CommentEdit($comment['comment_id'], $comment_content);
         redirect($redirect);
     }
 }

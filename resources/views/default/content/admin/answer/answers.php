@@ -1,8 +1,7 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
     'menus' => [
       [
         'id' => $data['type'] . '.all',
@@ -27,9 +26,9 @@
       </a>
       <div id="answer_<?= $answer['answer_id']; ?>">
         <div class="text-sm gray">
-          <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w20 h20 mr5'); ?>
-          <a class="date mr5" href="<?= getUrlByName('profile', ['login' => $answer['user_login']]); ?>">
-            <?= $answer['user_login']; ?>
+          <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20 mr5'); ?>
+          <a class="date mr5" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
+            <?= $answer['login']; ?>
           </a>
           <span class="mr5">
             <?= $answer['date']; ?>
@@ -46,7 +45,7 @@
         </div>
         <div class="br-bottom mb15 pb10 text-sm hidden gray">
           <span class="left mt5">
-            <?= votes($uid['user_id'], $answer, 'answer', 'ps', 'mr5'); ?>
+            <?= votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
           </span>
           <span id="cm_dell" class="right comment_link text-sm">
             <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">

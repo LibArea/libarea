@@ -6,42 +6,42 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\{UserModel, BadgeModel};
-use Validation, Translate;
+use Validation, Translate, Tpl;
 
 class BadgesController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
-
+    
+    // All awards
     // Все награды
     public function index($sheet, $type)
     {
-        return agRender(
+        return Tpl::agRender(
             '/admin/badge/badges',
             [
                 'meta'  => meta($m = [], Translate::get('badges')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
-                    'badges'    => BadgeModel::getBadgesAll(),
+                    'badges'    => BadgeModel::getAll(),
                 ]
             ]
         );
     }
 
+    // Form for adding an award
     // Форма добавления награды
     public function addPage($sheet, $type)
     {
-        return agRender(
+        return Tpl::agRender(
             '/admin/badge/add',
             [
                 'meta'  => meta($m = [], Translate::get('add badge')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,
@@ -50,21 +50,18 @@ class BadgesController extends MainController
         );
     }
 
+    // Reward change form 
     // Форма изменения награды
     public function editPage($sheet, $type)
     {
         $badge_id   = Request::getInt('id');
-        $badge      = BadgeModel::getBadgeId($badge_id);
+        $badge      = BadgeModel::getId($badge_id);
+        pageError404($badge);
 
-        if (!$badge['badge_id']) {
-            redirect('/admin/badges');
-        }
-
-        return agRender(
+        return Tpl::agRender(
             '/admin/badge/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit badge')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'badge' => $badge,
                     'sheet' => $sheet,
@@ -74,104 +71,107 @@ class BadgesController extends MainController
         );
     }
 
+    // Adding a reward 
     // Добавляем награду
     public function create()
     {
-        $badge_title         = Request::getPost('badge_title');
-        $badge_description   = Request::getPost('badge_description');
-        $badge_icon          = $_POST['badge_icon']; // для Markdown
+        $title         = Request::getPost('badge_title');
+        $description   = Request::getPost('badge_description');
+        $icon          = $_POST['badge_icon']; // для Markdown
 
         $redirect = getUrlByName('admin.badges');
-        Validation::Length($badge_title, Translate::get('title'), '4', '25', $redirect);
-        Validation::Length($badge_description, Translate::get('description'), '12', '250', $redirect);
-        Validation::Length($badge_icon, Translate::get('icon'), '12', '250', $redirect);
+        Validation::Length($title, Translate::get('title'), '4', '25', $redirect);
+        Validation::Length($description, Translate::get('description'), '12', '250', $redirect);
+        Validation::Length($icon, Translate::get('icon'), '12', '250', $redirect);
 
-        $data = [
-            'badge_title'       => $badge_title,
-            'badge_description' => $badge_description,
-            'badge_icon'        => $badge_icon,
-            'badge_tl'          => 0,
-            'badge_score'       => 0,
-        ];
+        BadgeModel::add(
+             [
+                'badge_title'       => $title,
+                'badge_description' => $description,
+                'badge_icon'        => $icon,
+                'badge_tl'          => 0,
+                'badge_score'       => 0,
+            ]
+        );
 
-        BadgeModel::add($data);
         redirect($redirect);
     }
 
-    // Форма награждения участинка
+    // Participant award form
+    // Форма награждения участника
     public function addUserPage($sheet, $type)
     {
         $user_id    = Request::getInt('id');
-        if ($user_id > 0) {
-            $user   = UserModel::getUser($user_id, 'id');
-        } else {
-            $user   = null;
-        }
+        $user       = UserModel::getUser($user_id, 'id');
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/badge/user-add',
             [
                 'meta'  => meta($m = [], Translate::get('reward the user')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
-                    'user'      => $user,
-                    'badges'    => BadgeModel::getBadgesAll(),
+                    'user'      => $user ?? null,
+                    'badges'    => BadgeModel::getAll(),
                 ]
             ]
         );
     }
 
-    // Награждение
     public function addUser()
     {
-        $user_id    = Request::getPostInt('user_id');
-        $badge_id   = Request::getPostInt('badge_id');
-
-        BadgeModel::badgeUserAdd($user_id, $badge_id);
+        $uid = Request::getPostInt('user_id');
+        BadgeModel::badgeUserAdd(
+            [
+            'user_id'   => $uid,
+            'badge_id'  => Request::getPostInt('badge_id')
+            ]
+        );
 
         addMsg(Translate::get('reward added'), 'success');
 
-        redirect('/admin/users/' . $user_id . '/edit');
+        redirect('/admin/users/' . $uid . '/edit');
     }
 
-    // Измененяем награду
     public function edit()
     {
         $badge_id   = Request::getInt('id');
-        $badge      = BadgeModel::getBadgeId($badge_id);
+        $badge      = BadgeModel::getId($badge_id);
 
         $redirect = getUrlByName('admin.badges');
         if (!$badge['badge_id']) {
             redirect($redirect);
         }
 
-        $badge_title         = Request::getPost('badge_title');
-        $badge_description   = Request::getPost('badge_description');
-        $badge_icon          = $_POST['badge_icon']; // для Markdown
+        $title         = Request::getPost('badge_title');
+        $description   = Request::getPost('badge_description');
+        $icon          = $_POST['badge_icon']; // для Markdown
 
-        Validation::Length($badge_title, Translate::get('title'), '4', '25', $redirect);
-        Validation::Length($badge_description, Translate::get('description'), '12', '250', $redirect);
-        Validation::Length($badge_icon, Translate::get('icon'), '12', '250', $redirect);
+        Validation::Length($title, Translate::get('title'), '4', '25', $redirect);
+        Validation::Length($description, Translate::get('description'), '12', '250', $redirect);
+        Validation::Length($icon, Translate::get('icon'), '12', '250', $redirect);
 
-        $data = [
+        BadgeModel::edit(
+          [
             'badge_id'          => $badge_id,
-            'badge_title'       => $badge_title,
-            'badge_description' => $badge_description,
-            'badge_icon'        => $badge_icon,
-        ];
-
-        BadgeModel::edit($data);
+            'badge_title'       => $title,
+            'badge_description' => $description,
+            'badge_icon'        => $icon,
+        ]
+        );
+        
         redirect($redirect);
     }
 
     public function remove()
     {
-        $id     = Request::getPostInt('id');
-        $uid    = Request::getPostInt('uid');
-
-        BadgeModel::remove($id, $uid);
+        $uid = Request::getPostInt('uid');
+        BadgeModel::remove(
+            [
+            'bu_id'         => Request::getPostInt('id'),
+            'bu_user_id'    => $uid,
+            ]
+        );
 
         addMsg(Translate::get('the command is executed'), 'success');
 

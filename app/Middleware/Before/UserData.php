@@ -16,11 +16,11 @@ class UserData extends \MainMiddleware
     // Немой режим
     const MUTE_MODE_USER = 1;
     
-    // Далее значение поля `user_trust_level` таблицы `users`
-    // Next, the value of the `user_trust_level' field of the `users` table
+    // Далее значение поля `trust_level` таблицы `users`
+    // Next, the value of the `trust_level' field of the `users` table
     
-    // User (level of trust 0)
-    // Пользователь (уровень доверия 0)
+    // Unauthorized (level of trust 0)
+    // Неавторизированный (уровень доверия 0)
     const USER_ZERO_LEVEL = 0;
     
     // User (level of trust 1)
@@ -39,17 +39,21 @@ class UserData extends \MainMiddleware
     // Пользователь (уровень доверия 4)
     const USER_FOURTH_LEVEL = 4;
    
-    // Administrator (level of trust 5)
-    // Администратор (уровень доверия 5)
-    const REGISTERED_ADMIN = 5;
+    // User (level of trust 5)
+    // Пользователь (уровень доверия 5)
+    const USER_FIFTH_LEVEL = 5;
+   
+    // Administrator (level of trust 10)
+    // Администратор (уровень доверия 10)
+    const REGISTERED_ADMIN = 10;
     
     static protected $type = null;
     
     static protected $myAccount = null;
     
-    static protected $user_id = null;
+    static protected $id = null;
     
-    static protected $uid = null;
+    static protected $user = null;
     
     static public function checkAccordance($type, $compare)
     {   
@@ -66,14 +70,14 @@ class UserData extends \MainMiddleware
             return self::$myAccount;
         }
 
-        $uid = Request::getSession('account') ?? [];
+        $account = Request::getSession('account') ?? [];
  
-        if (!empty($uid['user_id'])) {
+        if (!empty($account['id'])) {
 
-            $user = MiddlewareModel::getUser($uid['user_id']);
+            $user = MiddlewareModel::getUser($account['id']);
             
-            if ($user['user_ban_list'] == self::BANNED_USER) {
-                (new \App\Controllers\Auth\SessionController())->annul($user['user_id']);
+            if ($user['ban_list'] == self::BANNED_USER) {
+                (new \App\Controllers\Auth\SessionController())->annul($user['id']);
             }
             
         } else {
@@ -97,7 +101,7 @@ class UserData extends \MainMiddleware
     {
         $t = self::getAccount();
         
-        return $t['user_trust_level'] ?? false;
+        return $t['trust_level'] ?? false;
     }
     
     /**
@@ -154,24 +158,24 @@ class UserData extends \MainMiddleware
      * Возвращает массив значений, если пользователь зарегистрирован
      * TODO: возможно поменять название...
      */
-    static public function getUid()
+    static public function get()
     {
-        if (!is_null(self::$uid)) {
-            return self::$uid;
+        if (!is_null(self::$user)) {
+            return self::$user;
         }
         
         $noAuth = [
-            'user_id'           => self::USER_ZERO_LEVEL,
-            'user_trust_level'  => self::USER_ZERO_LEVEL,
-            'user_template'     => Config::get('general.template'),
-            'user_lang'         => Config::get('general.lang'),
+            'id'           => self::USER_ZERO_LEVEL,
+            'trust_level'  => self::USER_ZERO_LEVEL,
+            'template'     => Config::get('general.template'),
+            'lang'         => Config::get('general.lang'),
         ];
         
         $t = self::getAccount();
         
-        self::$uid = $t ? $t : $noAuth;
+        self::$user = $t ? $t : $noAuth;
 
-        return self::$uid;
+        return self::$user;
     }
     
     /**
@@ -180,15 +184,15 @@ class UserData extends \MainMiddleware
      */
     static public function getUserId(): ?int
     {
-        if (!is_null(self::$user_id)) {
-            return self::$user_id;
+        if (!is_null(self::$id)) {
+            return self::$id;
         }
         
         $t = self::getAccount();
         
-        self::$user_id = $t['user_id'] ?? 0;
+        self::$id = $t['id'] ?? 0;
         
-        return self::$user_id;
+        return self::$id;
     }
     
     /**

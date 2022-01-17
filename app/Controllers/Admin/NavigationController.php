@@ -5,29 +5,20 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\Admin\NavigationModel;
-use App\Middleware\Before\UserData;
-use Translate, Validation;
+use Translate, Validation, Tpl;
 
 class NavigationController extends MainController
 {
-    private $uid;
-
-    public function __construct()
-    {
-        $this->uid  = UserData::getUid();
-    }
-
     // Showing a page with root menu items
     // Показ страницы с корневыми пунктами меню
     public function index()
     {
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/navigation/parents',
             [
                 'meta'  => meta($m = [], Translate::get('navigation')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'navigation.all',
                     'type'      => 'navigation',
@@ -46,7 +37,14 @@ class NavigationController extends MainController
                 $id = intval($nav_id);
                 $navs = NavigationModel::getIdNavigation($id);
                 $parent = NavigationModel::getIdNavigation($navs['nav_parent']);
-                NavigationModel::editChilds($navs['nav_parent'], $parent['nav_childs'] - 1);
+
+                NavigationModel::editChilds(
+                    [
+                        'nav_id'        => $navs['nav_parent'],
+                        'nav_childs'    => $parent['nav_childs'] - 1,
+                    ]
+                );
+
                 NavigationModel::del($id);
             }
 
@@ -71,28 +69,37 @@ class NavigationController extends MainController
                 $id      = intval($nav_id);
                 $nav_url_routes = strip_tags(Request::getPost('curl' . $id));
                 $navs = NavigationModel::getIdNavigation($id);
-                $data =  [
-                    'nav_id'            => $id,
-                    'nav_name'          => $nav_name,
-                    'nav_ordernum'      => $nav_ordernum,
-                    'nav_url_routes'    => $nav_url_routes,
-                    'nav_status'        => $navs['nav_status'],
-                    'nav_parent'        => $navs['nav_parent'],
-                    'nav_childs'        => $navs['nav_childs'],
-                ];
-                NavigationModel::edit($data);
+
+                NavigationModel::edit(
+                    [
+                        'nav_id'            => $id,
+                        'nav_module'        => 'admin',
+                        'nav_type'          => 'menu',
+                        'nav_parent'        => $navs['nav_parent'],
+                        'nav_name'          => $nav_name,
+                        'nav_url_routes'    => $nav_url_routes,
+                        'nav_status'        => $navs['nav_status'],
+                        'nav_auth_tl'       => 5,
+                        'nav_ordernum'      => $nav_ordernum,
+                        'nav_childs'        => $navs['nav_childs'],
+                    ]
+                );
             } else {
                 // parents
-                $data = [
-                    'nav_id'            => intval($nav_id),
-                    'nav_name'          => $nav_name,
-                    'nav_ordernum'      => $nav_ordernum,
-                    'nav_parent'        => 0,
-                    'nav_childs'        => 0,
-                    'nav_status'        => 0,
-                    'nav_url_routes'    => ''
-                ];
-                NavigationModel::edit($data);
+                NavigationModel::edit(
+                    [
+                        'nav_id'            => intval($nav_id),
+                        'nav_module'        => 'admin',
+                        'nav_type'          => 'menu',
+                        'nav_parent'        => 0,
+                        'nav_name'          => $nav_name,
+                        'nav_url_routes'    => '',
+                        'nav_status'        => 0,
+                        'nav_auth_tl'       => 5,
+                        'nav_ordernum'      => $nav_ordernum,
+                        'nav_childs'        => 0,
+                    ]
+                );
             }
         }
 
@@ -110,11 +117,10 @@ class NavigationController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/navigation/children',
             [
                 'meta'  => meta($m = [], Translate::get('navigation')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'navigation.edit',
                     'type'          => 'navigation',
@@ -139,11 +145,10 @@ class NavigationController extends MainController
             $parent = 0;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/navigation/add',
             [
                 'meta'  => meta($m = [], Translate::get('add')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'navigation.add',
                     'type'      => 'navigation',
@@ -183,7 +188,12 @@ class NavigationController extends MainController
 
         if ($nav_parent != 0) {
             $navs = NavigationModel::getIdNavigation($nav_parent);
-            NavigationModel::editChilds($navs['nav_id'], $navs['nav_childs'] + 1);
+            NavigationModel::editChilds(
+                [
+                    'nav_id'        => $navs['nav_id'],
+                    'nav_childs'    => $navs['nav_childs'] + 1,
+                ]
+            );
         }
 
         addMsg(Translate::get('the command is executed'), 'success');

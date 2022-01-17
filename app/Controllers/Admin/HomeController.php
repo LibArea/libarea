@@ -7,15 +7,15 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\FacetModel;
 use App\Models\Admin\{UserModel, StatsModel};
-use Translate;
+use Translate, Tpl;
 
 class HomeController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index()
@@ -23,11 +23,10 @@ class HomeController extends MainController
         $size   = disk_total_space(HLEB_GLOBAL_DIRECTORY);
         $bytes  = number_format($size / 1048576, 2) . ' MB';
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/index',
             [
                 'meta'  => meta($m = [], Translate::get('admin')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'count'             => StatsModel::getCount(),
                     'posts_no_topic'    => FacetModel::getNoTopic(),
@@ -49,11 +48,10 @@ class HomeController extends MainController
         $bg_array = file_get_contents($bg_file);
         preg_match_all('/\.([\w\d\.-]+)[^{}]*{[^}]*}/', $bg_array, $matches);
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/css',
             [
                 'meta'  => meta($m = [], Translate::get('admin')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'type'  => 'Css',
                     'sheet' => 'Css',

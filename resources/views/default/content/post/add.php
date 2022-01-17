@@ -7,8 +7,7 @@
     <form action="<?= getUrlByName('post.create'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
-      <?= import('/_block/form/field-input', [
-        'uid'  => $uid,
+      <?= Tpl::import('/_block/form/field-input', [
         'data' => [
           [
             'title'     => Translate::get('heading'),
@@ -24,9 +23,8 @@
         ],
       ]); ?>
 
-      <?php if (!empty($data['user_blog'])) { ?>
-        <?= import('/_block/form/select/blog', [
-          'uid'         => $uid,
+      <?php if (!empty($data['blog'])) { ?>
+        <?= Tpl::import('/_block/form/select/blog', [
           'data'        => $data,
           'action'      => 'add',
           'type'        => 'blog',
@@ -34,8 +32,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= import('/_block/form/select/select', [
-        'uid'           => $uid,
+      <?= Tpl::import('/_block/form/select/select', [
         'data'          => $data['facets'],
         'type'          => 'topic',
         'action'        => 'add',
@@ -44,7 +41,7 @@
         'red'           => 'red'
       ]); ?>
 
-      <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_url')) { ?>
+      <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_url')) { ?>
         <div class="flex flex-row items-center justify-between mb20 max-w640">
           <div class="flex-auto mr15">
             <input id="link" placeholder="URL" class="post_url w-100 h30" type="text" name="post_url" />
@@ -70,16 +67,16 @@
         </div>
       </div>
 
-      <?= import('/_block/editor/editor', [
+      <?= Tpl::import('/_block/editor/editor', [
         'title'     => Translate::get('text'),
         'type'      => 'post',
         'height'    => '350px',
         'preview'   => 'vertical',
-        'uid'       => $uid,
+        'user'      => $user,
       ]); ?>
 
-      <?= import('/_block/form/radio',  [
-        'uid'  => $uid,
+      <?php if ($user['trust_level'] > 1) { ?> 
+      <?= Tpl::import('/_block/form/radio',  [
         'data' => [
           [
             'title' => Translate::get('is this a draft?'),
@@ -87,15 +84,15 @@
           ]
         ],
       ]); ?>
+     <?php } ?>
 
-      <?php if ($uid['user_trust_level'] > 1) { ?>
-        <?= import('/_block/form/select/content-tl', [
-          'uid' => $uid,
+      <?php if ($user['trust_level'] > 2) { ?>
+        <?= Tpl::import('/_block/form/select/content-tl', [
+          'user' => $user,
           'data' => null
         ]); ?>
 
-        <?= import('/_block/form/radio', [
-          'uid'  => $uid,
+        <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
               'title' => Translate::get('format Q&A?'),
@@ -109,8 +106,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= import('/_block/form/radio',  [
-        'uid'  => $uid,
+      <?= Tpl::import('/_block/form/radio',  [
         'data' => [
           [
             'title' => Translate::get('is this a translation?'),
@@ -119,9 +115,8 @@
         ]
       ]); ?>
 
-      <?php if ($uid['user_trust_level'] > 2) { ?>
-        <?= import('/_block/form/radio', [
-          'uid'  => $uid,
+      <?php if ($user['trust_level'] > 3) { ?>
+        <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
               'title'   => Translate::get('raise?'),
@@ -131,8 +126,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= import('/_block/form/select/related-posts', [
-        'uid'           => $uid,
+      <?= Tpl::import('/_block/form/select/related-posts', [
         'data'          => [],
         'action'        => 'add',
         'type'          => 'post',

@@ -9,28 +9,28 @@ use Translate, Config;
 
 class AuditController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Check the freeze and the amount of content per day 
     // Проверим заморозку и количество контента в день
     public function placementSpeed($content, $type)
     {
-        self::stopContentQuietМode($this->uid['user_limiting_mode']);
+        self::stopContentQuietМode($this->user['limiting_mode']);
 
-        $number =  ContentModel::getSpeed($this->uid['user_id'], $type);
+        $number =  ContentModel::getSpeed($this->user['id'], $type);
 
-        self::stopLimit($this->uid['user_trust_level'], $number, $type);
+        self::stopLimit($this->user['trust_level'], $number, $type);
 
-        if (!self::stopUrl($content, $this->uid['user_id'])) {
+        if (!self::stopUrl($content, $this->user['id'])) {
             return false;
         }
 
-        if (!self::stopWords($content, $this->uid['user_id'])) {
+        if (!self::stopWords($content, $this->user['id'])) {
             return false;
         }
 
@@ -143,16 +143,23 @@ class AuditController extends MainController
 
     public function create($type, $last_content_id, $url)
     {
-        AuditModel::add($type, $this->uid['user_id'], $last_content_id);
+        AuditModel::add(
+            [
+                'audit_type'        => $type,
+                'audit_user_id'     => $this->user['id'],
+                'audit_content_id'  => $last_content_id,
+            ]
+        );
 
         // Send notification type 15 (audit) to administrator (id 1) 
         // Отправим тип уведомления 15 (аудит) администратору (id 1)
         NotificationsModel::send(
             [
-                'sender_id'     => $this->uid['user_id'],
-                'recipient_id'  => 1,  // admin
-                'action_type'   => 15, // 15 audit
-                'url'           => $url,
+                'notification_sender_id'    => $this->user['id'],
+                'notification_recipient_id' => 1,  // admin
+                'notification_action_type'  => 15, // 15 audit 
+                'notification_url'          => $url,
+                'notification_read_flag'    => 0,
             ]
         );
 

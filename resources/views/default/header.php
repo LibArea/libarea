@@ -1,5 +1,5 @@
 <?php
-  Translate::setLang($uid['user_lang']);
+  Translate::setLang($user['lang']);
   $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
   $css      = $data['type'] == 'web' || $data['type'] == 'page'  ? 'p0 m0 black' : 'p0 m0 black bg-gray-100';
   $type     = $data['type'] ?? false;
@@ -35,7 +35,7 @@
               <?= tabs_nav(
                 'menu',
                 $type,
-                $uid,
+                $user,
                 $pages = Config::get('menu.mobile'),
               ); ?>
             </nav>
@@ -75,14 +75,14 @@
         <div class="col-span-4">
           <div class="flex right ml30 mb-ml-10 items-center">
 
-            <?= add_post($facet, $uid['user_id']); ?>
+            <?= add_post($facet, $user['id']); ?>
 
             <div id="toggledark" class="only-icon p10 ml20 mb-ml-10">
               <i class="bi bi-brightness-high gray-400 text-xl"></i>
             </div>
 
             <a class="gray-400 p10 text-xl ml20 mb-ml-10" href="<?= getUrlByName('notifications'); ?>">
-              <?php $notif = \App\Controllers\NotificationsController::setBell($uid['user_id']); ?>
+              <?php $notif = \App\Controllers\NotificationsController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['notification_action_type'] == 1) { ?>
                   <i class="bi bi-envelope red-500"></i>
@@ -96,7 +96,7 @@
 
             <ag-menu data-template="two" class="tippy pr10 pl0 ml20 mb-ml-10">
               <div class="relative w-auto">
-                <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w30 h30 br-rd-50'); ?>
+                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
               </div>
             </ag-menu>  
             <div id="two" style="display: none;" class="bg-white br-rd3">
@@ -104,7 +104,7 @@
                 <?= tabs_nav(
                   'menu',
                   $type,
-                  $uid,
+                  $user,
                   $pages = Config::get('menu.user'),
                 ); ?>
               </nav>

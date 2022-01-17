@@ -1,5 +1,5 @@
 <div class="answer_addentry">
-  <?php if ($data['user_id'] > 0) : ?>
+  <?php if ($data['id'] > 0) : ?>
     <form id="add_answ" class="new_answer" action="/answer/edit" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
       <textarea rows="5" name="answer" id="answer"><?= $data['answer_content']; ?></textarea>

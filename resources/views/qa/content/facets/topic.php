@@ -8,7 +8,7 @@
       <div class="ml15 mb-ml-0 flex-auto">
         <h1 class="mb0 mt10 text-2xl">
           <?= $topic['facet_seo_title']; ?>
-          <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == $uid['user_id']) { ?>
+          <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == $user['id']) { ?>
             <a class="right gray-600" href="<?= getUrlByName('topic.edit', ['id' => $topic['facet_id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>
@@ -17,15 +17,15 @@
         <div class="text-sm gray-400"><?= $topic['facet_short_description']; ?></div>
 
         <div class="mt15 right">
-          <?= import('/_block/facet/signed', [
-            'uid'            => $uid,
+          <?= Tpl::import('/_block/facet/signed', [
+            'user'            => $user,
             'topic'          => $topic,
             'topic_signed'   => is_array($data['facet_signed']),
           ]); ?>
         </div>
 
-        <?= import('/_block/facet/focus-users', [
-          'uid'               => $uid,
+        <?= Tpl::import('/_block/facet/focus-users', [
+          'user'               => $user,
           'topic_focus_count' => $topic['facet_focus_count'],
           'focus_users'       => $data['focus_users'] ?? '',
         ]); ?>
@@ -40,7 +40,7 @@
         <?= tabs_nav(
           'nav',
           $data['sheet'],
-          $uid,
+          $user,
           $pages = [
             [
               'id'      => 'facet.feed',
@@ -66,7 +66,7 @@
       </ul>
     </div>
 
-    <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+    <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
 
 
@@ -105,15 +105,15 @@
       </div>
     <?php } ?>
 
-    <?= import('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
+    <?= Tpl::import('/_block/sidebar/topic', ['data' => $data, 'user' => $user]); ?>
     <?php if (!empty($data['writers'])) { ?>
       <div class="sticky top0 top20">
         <div class="br-box-gray box-shadow-all mt15 p15 mb15 br-rd5 bg-white text-sm">
           <div class="uppercase gray mt5 mb5"> <?= Translate::get('writers'); ?></div>
           <?php foreach ($data['writers'] as $ind => $row) { ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $row['user_login']]); ?>">
-              <?= user_avatar_img($row['user_avatar'], 'max', $row['user_login'], 'w30 h30 mr5 br-rd-50'); ?>
-              <span class="ml5"><?= $row['user_login']; ?> (<?= $row['hits_count']; ?>) </span>
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
+              <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'w30 h30 mr5 br-rd-50'); ?>
+              <span class="ml5"><?= $row['login']; ?> (<?= $row['hits_count']; ?>) </span>
             </a>
           <?php } ?>
         </div>
@@ -123,7 +123,7 @@
   <?php } ?>
 </aside>
 </div>
-<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
+<?= Tpl::import('/_block/wide-footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

@@ -6,26 +6,26 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\FacetModel;
-use Translate;
+use Translate, Tpl;
 
 class AllFacetController extends MainController
 {
-    private $uid;
+    private $user;
 
     protected $limit = 40;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index($sheet, $type)
-    {   
+    {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $pagesCount = FacetModel::getFacetsAllCount($this->uid['user_id'], $sheet);
-        $facets     = FacetModel::getFacetsAll($page, $this->limit, $this->uid['user_id'], $sheet);
+        $pagesCount = FacetModel::getFacetsAllCount($this->user['id'], $sheet);
+        $facets     = FacetModel::getFacetsAll($page, $this->limit, $this->user['id'], $sheet);
 
         $num = ' ';
         if ($page > 1) {
@@ -41,11 +41,10 @@ class AllFacetController extends MainController
             'url'        => getUrlByName($sheet),
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/facets/all',
             [
                 'meta'  => meta($m, Translate::get($sheet) . $num, Translate::get($sheet . '.desc') . $num),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

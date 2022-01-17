@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'nav',
     $data['sheet'],
-    $uid,
+    1,
     $pages = [
       [
         'id' => 'settings',

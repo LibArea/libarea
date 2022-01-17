@@ -6,17 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\AnswerModel;
-use Content, Translate;
+use Content, Translate, Tpl;
 
 class AnswerController extends MainController
 {
-    private $uid;
+    private $user;
 
     protected $limit = 25;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Все ответы
@@ -26,7 +26,7 @@ class AnswerController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $pagesCount = AnswerModel::getAnswersAllCount('user');
-        $answ       = AnswerModel::getAnswersAll($page, $this->limit, $this->uid, 'user');
+        $answ       = AnswerModel::getAnswersAll($page, $this->limit, $this->user, 'user');
 
         $result = [];
         foreach ($answ  as $ind => $row) {
@@ -42,11 +42,10 @@ class AnswerController extends MainController
             'url'        => getUrlByName('answers'),
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/answer/answers',
             [
                 'meta'  => meta($m, Translate::get('all answers'), Translate::get('answers-desc')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

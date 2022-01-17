@@ -11,7 +11,7 @@
       <?= import(
         '/_block/form/field-input',
         [
-          'uid' => $uid,
+          'user' => $user,
           'data' => [
             [
               'title' => Translate::get('heading'),
@@ -37,8 +37,8 @@
 
       ); ?>
 
-      <?= import('/_block/form/select/blog', [
-        'uid'         => $uid,
+      <?= Tpl::import('/_block/form/select/blog', [
+        'user'         => $user,
         'data'        => $data,
         'action'      => 'edit',
         'type'        => 'blog',
@@ -46,8 +46,8 @@
       ]); ?>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <?= import('/_block/form/select/section', [
-          'uid'           => $uid,
+        <?= Tpl::import('/_block/form/select/section', [
+          'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'section',
@@ -59,16 +59,16 @@
         ]); ?>
       <?php } ?>
 
-      <?= import('/_block/editor/editor', [
+      <?= Tpl::import('/_block/editor/editor', [
         'type'      => 'post',
         'height'    => '300px',
         'preview'   => 'vertical',
-        'uid'       => $uid,
+        'user'       => $user,
         'content'   => $post['post_content'],
       ]); ?>
 
-      <?= import('/_block/form/select/user', [
-        'uid'           => $uid,
+      <?= Tpl::import('/_block/form/select/user', [
+        'uid'           => $user,
         'user'          => $data['user'],
         'action'        => 'user',
         'type'          => 'user',

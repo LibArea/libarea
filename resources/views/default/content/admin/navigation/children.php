@@ -1,9 +1,8 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
-    'sub'   => 'Аудит',
+    'sub'   => 'audits',
     'menus' => []
   ]
 ); ?>

@@ -7,8 +7,7 @@
     <form action="<?= getUrlByName('page.create'); ?>" method="post">
       <?= csrf_field() ?>
 
-      <?= import('/_block/form/field-input', [
-        'uid'  => $uid,
+      <?= Tpl::import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('heading'),
@@ -23,9 +22,9 @@
         ],
       ]); ?>
 
-      <?php if (!empty($data['user_blog'])) { ?>
-        <?= import('/_block/form/select/blog', [
-          'uid'         => $uid,
+      <?php if (!empty($data['blog'])) { ?>
+        <?= Tpl::import('/_block/form/select/blog', [
+          'user'         => $user,
           'data'        => $data,
           'action'      => 'add',
           'type'        => 'blog',
@@ -34,8 +33,8 @@
       <?php } ?>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <?= import('/_block/form/select/section', [
-          'uid'           => $uid,
+        <?= Tpl::import('/_block/form/select/section', [
+          'user'           => $user,
           'data'          => $data['facets'],
           'type'          => 'section',
           'action'        => 'add',
@@ -45,11 +44,11 @@
         ]); ?>
       <?php } ?>
 
-      <?= import('/_block/editor/editor', [
+      <?= Tpl::import('/_block/editor/editor', [
         'type'      => 'post',
         'height'    => '350px',
         'preview'   => 'vertical',
-        'uid'       => $uid,
+        'user'       => $user,
       ]); ?>
 
       <?= sumbit(Translate::get('create')); ?>

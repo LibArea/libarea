@@ -1,8 +1,7 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
     'menus' => [
       [
         'id' => $data['type'] . '.all',
@@ -34,32 +33,32 @@
       <?php foreach ($data['alluser'] as $user) {  ?>
         <tr>
           <td class="center">
-            <?= $user['user_id']; ?>
+            <?= $user['id']; ?>
           </td>
           <td class="center">
-            <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'w60 h60'); ?>
+            <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'w60 h60'); ?>
           </td>
           <td>
-            <a href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>"><?= $user['user_login']; ?></a>
-            <?php if ($user['user_name']) { ?>
-              (<?= $user['user_name']; ?>)
+            <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
+            <?php if ($user['name']) { ?>
+              (<?= $user['name']; ?>)
             <?php } ?>
-            <sup class="gray">TL:<?= $user['user_trust_level']; ?></sup>
-            <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?>
-            <?php if ($user['user_whisper']) { ?>
-              <span title="<?= $user['user_whisper']; ?>" class="tips text-sm gray-600">
+            <sup class="gray">TL:<?= $user['trust_level']; ?></sup>
+            <?php if ($user['invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?>
+            <?php if ($user['whisper']) { ?>
+              <span title="<?= $user['whisper']; ?>" class="tips text-sm gray-600">
                 <i class="bi bi-info-square green-600"></i>
               </span>
             <?php } ?>
             <div class="text-sm">
-              <?= $user['user_email']; ?>
-              <?php if ($user['user_activated'] == 1) { ?>
+              <?= $user['email']; ?>
+              <?php if ($user['activated'] == 1) { ?>
                 <div class="gray-600"><?= Translate::get('email activated'); ?></div>
               <?php } else { ?>
                 <div class="red-500"><?= Translate::get('not activated'); ?> e-mail</div>
               <?php } ?>
             </div>
-            <?php if ($user['user_limiting_mode'] == 1) { ?>
+            <?php if ($user['limiting_mode'] == 1) { ?>
               <div class="red-500"><?= Translate::get('dumb mode'); ?></div>
             <?php } ?>
             <?php if (!empty($user['banlist_int_num'])) { ?>
@@ -67,8 +66,8 @@
             <?php } ?>
           </td>
           <td class="text-sm align-right">
-            <a class="gray-600 ml10" href="<?= getUrlByName('admin.regip', ['ip' => $user['user_reg_ip']]); ?>">
-              <?= $user['user_reg_ip']; ?>
+            <a class="gray-600 ml10" href="<?= getUrlByName('admin.regip', ['ip' => $user['reg_ip']]); ?>">
+              <?= $user['reg_ip']; ?>
             </a>
             <?php if ($user['duplicat_ip_reg'] > 1) { ?>
               <sup class="red-500">(<?= $user['duplicat_ip_reg']; ?>)</sup>
@@ -88,13 +87,13 @@
             <?php } ?>
           </td>
           <td class="center">
-            <?php if ($user['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
-              <?php if ($user['user_ban_list']) { ?>
-                <span class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
+            <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
+              <?php if ($user['ban_list']) { ?>
+                <span class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
                   <span class="red-500"><?= Translate::get('unban'); ?></span>
                 </span>
               <?php } else { ?>
-                <span class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
+                <span class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
                   <?= Translate::get('ban it'); ?>
                 </span>
               <?php } ?>
@@ -103,7 +102,7 @@
             <?php } ?>
           </td>
           <td class="center">
-            <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['user_id']]); ?>">
+            <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>
           </td>

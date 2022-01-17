@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -15,7 +15,7 @@
     <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
-        $uid['user_id'],
+        $user['id'],
         $data['sheet'],
         $pages = [
           [
@@ -53,4 +53,4 @@
     <?php } ?>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('under development'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('under development')]); ?>

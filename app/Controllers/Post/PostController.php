@@ -6,17 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel};
-use Content, Config;
+use Content, Config, Tpl;
 
 class PostController extends MainController
 {
-    private $uid;
+    private $user;
 
     protected $limit = 25;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Полный пост
@@ -26,7 +26,7 @@ class PostController extends MainController
         $post_id    = Request::getInt('id');
 
         // Проверим (id, slug поста)
-        $post = PostModel::getPost($post_id, 'id', $this->uid);
+        $post = PostModel::getPost($post_id, 'id', $this->user);
         pageError404($post);
 
         if ($slug != $post['post_slug']) {
@@ -50,11 +50,11 @@ class PostController extends MainController
 
         $post['modified'] = $post['post_date'] != $post['post_modified'] ? true : false;
 
-        $facets = PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'topic');
-        $blog   = PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'blog');
+        $facets = PostModel::getPostTopic($post['post_id'], $this->user['id'], 'topic');
+        $blog   = PostModel::getPostTopic($post['post_id'], $this->user['id'], 'blog');
 
         // Покажем черновик только автору
-        if ($post['post_draft'] == 1 && $post['post_user_id'] != $this->uid['user_id']) {
+        if ($post['post_draft'] == 1 && $post['post_user_id'] != $this->user['id']) {
             redirect('/');
         }
 
@@ -77,7 +77,7 @@ class PostController extends MainController
             $post['amount_content'] = $comment_n;
         }
 
-        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $this->uid['user_id'], $post['post_feature']);
+        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $this->user['id'], $post['post_feature']);
 
         $answers = [];
         foreach ($post_answers as $ind => $row) {
@@ -86,7 +86,7 @@ class PostController extends MainController
                 $row['edit'] = 1;
             }
             // TODO: N+1 см. AnswerModel()
-            $row['comm']            = CommentModel::getComments($row['answer_id'], $this->uid['user_id']);
+            $row['comm']            = CommentModel::getComments($row['answer_id'], $this->user['id']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $answers[$ind]          = $row;
         }
@@ -112,7 +112,7 @@ class PostController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/prism/prism.css');
         Request::getResources()->addBottomScript('/assets/js/prism/prism.js');
 
-        if ($this->uid['user_id'] > 0 && $post['post_closed'] == 0) {
+        if ($this->user['id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
             Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
             Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
@@ -136,17 +136,16 @@ class PostController extends MainController
 
         $meta = meta($m, strip_tags($post['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $post['post_date']);
 
-        return agRender(
+        return Tpl::agRender(
             '/post/view',
             [
                 'meta'  => $meta,
-                'uid'   => $this->uid,
                 'data'  => [
                     'post'          => $post,
                     'answers'       => $answers,
-                    'recommend'     => PostModel::postsSimilar($post['post_id'], $this->uid, 5),
+                    'recommend'     => PostModel::postsSimilar($post['post_id'], $this->user, 5),
                     'related_posts' => $related_posts ?? '',
-                    'post_signed'   => SubscriptionModel::getFocus($post['post_id'], $this->uid['user_id'], 'post'),
+                    'post_signed'   => SubscriptionModel::getFocus($post['post_id'], $this->user['id'], 'post'),
                     'facets'        => $facets,
                     'blog'          => $blog ?? null,
                     'last_user'     => PostModel::getPostLastUser($post_id),
@@ -161,10 +160,10 @@ class PostController extends MainController
     public function addPostProfile()
     {
         $post_id    = Request::getPostInt('post_id');
-        $post       = PostModel::getPost($post_id, 'id', $this->uid);
+        $post       = PostModel::getPost($post_id, 'id', $this->user);
 
         // Проверка доступа
-        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
+        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
@@ -173,7 +172,7 @@ class PostController extends MainController
             return false;
         }
 
-        PostModel::addPostProfile($post_id, $this->uid['user_id']);
+        PostModel::addPostProfile($post_id, $this->user['id']);
 
         return true;
     }
@@ -182,14 +181,14 @@ class PostController extends MainController
     public function deletePostProfile()
     {
         $post_id    = Request::getPostInt('post_id');
-        $post       = PostModel::getPost($post_id, 'id', $this->uid);
+        $post       = PostModel::getPost($post_id, 'id', $this->user);
 
         // Проверка доступа
-        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
+        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
-        PostModel::deletePostProfile($post_id, $this->uid['user_id']);
+        PostModel::deletePostProfile($post_id, $this->user['id']);
 
         return true;
     }
@@ -198,10 +197,10 @@ class PostController extends MainController
     public function shownPost()
     {
         $post_id = Request::getPostInt('post_id');
-        $post    = PostModel::getPost($post_id, 'id', $this->uid);
+        $post    = PostModel::getPost($post_id, 'id', $this->user);
 
         $post['post_content'] = Content::text($post['post_content'], 'text');
 
-        agIncludeTemplate('/content/post/postcode', ['post' => $post, 'uid'   => $this->uid]);
+        Tpl::agIncludeTemplate('/content/post/postcode', ['post' => $post, 'user'   => $this->user]);
     }
 }

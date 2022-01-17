@@ -7,15 +7,15 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\AuthModel;
-use Config, Integration, Validation, SendEmail, Translate;
+use Config, Integration, Validation, SendEmail, Translate, Tpl;
 
 class RegisterController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid = UserData::getUid();
+        $this->user = UserData::get();
     }
 
     // Показ формы регистрации
@@ -33,11 +33,10 @@ class RegisterController extends MainController
             'url'        => getUrlByName('register'),
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/auth/register',
             [
                 'meta'  => meta($m, Translate::get('sign up'), Translate::get('info-security')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet' => 'sign up',
                     'type'  => 'register'
@@ -60,7 +59,7 @@ class RegisterController extends MainController
 
         Validation::Email($email, $redirect);
 
-        if (is_array(AuthModel::replayEmail($email))) {
+        if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
             addMsg(Translate::get('e-mail-replay'), 'error');
             redirect($redirect);
         }
@@ -91,7 +90,7 @@ class RegisterController extends MainController
             redirect($redirect);
         }
 
-        if (is_array(AuthModel::replayLogin($login))) {
+        if (is_array(AuthModel::checkRepetitions($login, 'login'))) {
             addMsg(Translate::get('nickname-replay'), 'error');
             redirect($redirect);
         }
@@ -115,41 +114,58 @@ class RegisterController extends MainController
 
         $count =  UserModel::getUsersAllCount();
         // Для "режима запуска" первые 50 участников получают trust_level = 1 
-        $tl = UserData::USER_ZERO_LEVEL;
+        $tl = UserData::USER_FIRST_LEVEL;
         if ($count < 50 && Config::get('general.mode') == true) {
-            $tl = UserData::USER_FIRST_LEVEL;
+            $tl = UserData::USER_SECOND_LEVEL;
         }
 
-        $params = [
-            'user_login'                => $login,
-            'user_email'                => $email,
-            'user_template'             => Config::get('general.template'),
-            'user_lang'                 => Config::get('general.lang'),
-            'user_whisper'              => '',
-            'user_password'             => password_hash($password, PASSWORD_BCRYPT),
-            'user_limiting_mode'        => 0, // Режим заморозки выключен
-            'user_activated'            => $inv_uid > 0 ? 1 : 0, // если инвайта нет, то активация
-            'user_reg_ip'               => $reg_ip,
-            'user_trust_level'          => $tl,
-            'user_invitation_id'        => $inv_uid,
-        ];
-
         // id участника после регистрации
-        $active_uid = UserModel::createUser($params);
+        $active_uid = UserModel::create(
+            [
+                'login'                => $login,
+                'email'                => $email,
+                'template'             => Config::get('general.template'),
+                'lang'                 => Config::get('general.lang'),
+                'whisper'              => '',
+                'password'             => password_hash($password, PASSWORD_BCRYPT),
+                'limiting_mode'        => 0, // Режим заморозки выключен
+                'activated'            => $inv_uid > 0 ? 1 : 0, // если инвайта нет, то активация
+                'reg_ip'               => $reg_ip,
+                'trust_level'          => $tl,
+                'invitation_id'        => $inv_uid,
+            ]
+        );
 
         if ($inv_uid > 0) {
             // Если регистрация по инвайту, активируем емайл
-            InvitationModel::activate($inv_code, $inv_uid, $reg_ip, $active_uid);
+            InvitationModel::activate(
+                [
+                    'uid'               => $inv_uid,
+                    'active_status'     => 1,
+                    'active_ip'         => $reg_ip,
+                    'active_time'       => date('Y-m-d H:i:s'),
+                    'active_uid'        => $active_uid,
+                    'invitation_code'   => $inv_code,
+                ]
+            );
+
             addMsg(Translate::get('successfully, log in'), 'success');
+
             redirect(getUrlByName('login'));
         }
 
-        // Активация e-mail
+        // Email Activation
         $email_code = randomString('crypto', 20);
-        UserModel::sendActivateEmail($active_uid, $email_code);
+        UserModel::sendActivateEmail(
+            [
+                'pubdate'       => date("Y-m-d H:i:s"),
+                'user_id'       => $active_uid,
+                'email_code'    => $email_code,
+            ]
+        );
 
-        // Отправка e-mail
-        SendEmail::mailText($active_uid, 'activate.email', ['link' => '/email/activate/' . $email_code]);
+        // Sending email
+        SendEmail::mailText($active_uid, 'activate.email', ['link' => getUrlByName('activate.code', ['code' => $email_code])]);
 
         addMsg(Translate::get('check your email'), 'success');
 
@@ -167,11 +183,10 @@ class RegisterController extends MainController
             redirect('/');
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/auth/register-invate',
             [
                 'meta'  => meta($m = [], Translate::get('registration by invite')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'invate' => $invate,
                     'type'  => 'invite'

@@ -6,17 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\HomeModel;
-use Content, Config, Translate;
+use Content, Config, Translate, Tpl;
 
 class HomeController extends MainController
 {
     protected $limit = 25;
 
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index($sheet, $type)
@@ -24,10 +24,10 @@ class HomeController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $latest_answers = HomeModel::latestAnswers($this->uid);
-        $topics_user    = HomeModel::subscription($this->uid['user_id']);
-        $pagesCount     = HomeModel::feedCount($topics_user, $this->uid, $sheet);
-        $posts          = HomeModel::feed($page, $this->limit, $topics_user, $this->uid, $sheet);
+        $latest_answers = HomeModel::latestAnswers($this->user);
+        $topics_user    = HomeModel::subscription($this->user['id']);
+        $pagesCount     = HomeModel::feedCount($topics_user, $this->user, $sheet);
+        $posts          = HomeModel::feed($page, $this->limit, $topics_user, $this->user, $sheet);
 
         $result_post = [];
         foreach ($posts as $ind => $row) {
@@ -55,7 +55,7 @@ class HomeController extends MainController
 
         $topics = [];
         if (count($topics_user) == 0) {
-            $topics = \App\Models\FacetModel::advice($this->uid['user_id']);
+            $topics = \App\Models\FacetModel::advice($this->user['id']);
         }
 
         $m = [
@@ -65,11 +65,10 @@ class HomeController extends MainController
             'url'        => $sheet == 'top' ? '/top' : '/',
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/home',
             [
                 'meta'  => meta($m, $meta_title, $meta_desc),
-                'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,

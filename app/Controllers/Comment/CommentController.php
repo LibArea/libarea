@@ -6,17 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\CommentModel;
-use Content, Translate;
+use Content, Translate, Tpl;
 
 class CommentController extends MainController
 {
-    private $uid;
+    private $user;
 
     protected $limit = 25;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Все комментарии
@@ -26,7 +26,7 @@ class CommentController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $pagesCount = CommentModel::getCommentsAllCount('user');
-        $comments   = CommentModel::getCommentsAll($page, $this->limit, $this->uid, 'user');
+        $comments   = CommentModel::getCommentsAll($page, $this->limit, $this->user, 'user');
 
         $result = [];
         foreach ($comments  as $ind => $row) {
@@ -42,11 +42,10 @@ class CommentController extends MainController
             'url'        => getUrlByName('comments'),
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/comment/comments',
             [
                 'meta'  => meta($m, Translate::get('all comments'), Translate::get('comments-desc')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

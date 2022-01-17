@@ -23,7 +23,7 @@ class NotificationsModel extends MainModel
     // 20 - флаг система
 
     // Лист уведомлений
-    public static function listNotification($user_id)
+    public static function listNotification($uid)
     {
         $sql = "SELECT
                     notification_id,
@@ -34,42 +34,34 @@ class NotificationsModel extends MainModel
                     notification_add_time,
                     notification_read_flag,
                     notification_is_deleted,
-                    user_id, 
-                    user_login, 
-                    user_avatar
+                    id, 
+                    login, 
+                    avatar
                         FROM notifications
-                        JOIN users ON user_id = notification_sender_id
-                        WHERE notification_recipient_id = :user_id
+                        JOIN users ON id = notification_sender_id
+                        WHERE notification_recipient_id = :uid
                         ORDER BY notification_id DESC LIMIT 100";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Уведомления
-    public static function bell($user_id)
+    public static function bell($uid)
     {
         $sql = "SELECT
                     notification_recipient_id,
                     notification_action_type,
                     notification_read_flag
                         FROM notifications
-                        WHERE notification_recipient_id = :user_id
+                        WHERE notification_recipient_id = :uid
                         AND notification_read_flag = 0";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Отправка
-    public static function send($data)
+    public static function send($params)
     {
-        $params = [
-            'notification_sender_id'        => $data['sender_id'],
-            'notification_recipient_id'     => $data['recipient_id'],
-            'notification_action_type'      => $data['action_type'],
-            'notification_url'              => $data['url'],
-            'notification_read_flag'        => 0,
-        ];
-
         $sql = "INSERT INTO notifications(notification_sender_id, 
                                 notification_recipient_id, 
                                 notification_action_type, 
@@ -97,20 +89,20 @@ class NotificationsModel extends MainModel
     }
 
     // Список читаемых постов
-    public static function getFocusPostUser($user_id)
+    public static function getFocusPostUser($uid)
     {
         $sql = "SELECT
                     signed_post_id,
                     signed_user_id 
                         FROM posts_signed
-                        WHERE signed_user_id = :user_id";
+                        WHERE signed_user_id = :uid";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getFocusPostsListUser($user_id)
+    public static function getFocusPostsListUser($uid)
     {
-        $focus_posts = self::getFocusPostUser($user_id);
+        $focus_posts = self::getFocusPostUser($uid);
 
         $result = [];
         foreach ($focus_posts as $ind => $row) {
@@ -149,7 +141,7 @@ class NotificationsModel extends MainModel
                     post_is_deleted,
                     rel.*,
                     votes_post_item_id, votes_post_user_id,
-                    user_id, user_login, user_avatar, 
+                    id, login, avatar, 
                     favorite_tid, favorite_user_id, favorite_type
                     
                         FROM posts
@@ -166,20 +158,20 @@ class NotificationsModel extends MainModel
                         ) AS rel
                             ON rel.relation_post_id = post_id 
 
-            INNER JOIN users ON user_id = post_user_id
-            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
-            LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :user_id AND favorite_type = 1
+            INNER JOIN users ON id = post_user_id
+            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :uid
+            LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :uid AND favorite_type = 1
             $string  LIMIT 100";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Оповещение просмотрено
-    public static function updateMessagesUnread($user_id, $notif_id)
+    public static function updateMessagesUnread($uid, $notif_id)
     {
-        $sql = "UPDATE notifications SET notification_read_flag = 1 WHERE notification_recipient_id = :user_id AND notification_id = :notif_id";
+        $sql = "UPDATE notifications SET notification_read_flag = 1 WHERE notification_recipient_id = :uid AND notification_id = :notif_id";
 
-        return DB::run($sql, ['user_id' => $user_id, 'notif_id' => $notif_id]);
+        return DB::run($sql, ['uid' => $uid, 'notif_id' => $notif_id]);
     }
 
     public static function getNotification($id)
@@ -199,11 +191,11 @@ class NotificationsModel extends MainModel
         return DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function setRemove($user_id)
+    public static function setRemove($uid)
     {
         $sql = "UPDATE notifications SET notification_read_flag = 1 
-                        WHERE notification_recipient_id = :user_id";
+                        WHERE notification_recipient_id = :uid";
 
-        return DB::run($sql, ['user_id' => $user_id]);
+        return DB::run($sql, ['uid' => $uid]);
     }
 }

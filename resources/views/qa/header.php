@@ -48,7 +48,7 @@ $facet = $data['facet'] ?? false; ?>
               <?= tabs_nav(
                 'menu',
                 $type,
-                $uid,
+                $user,
                 $pages = Config::get('menu.mobile'),
               ); ?>
             </nav>
@@ -60,7 +60,7 @@ $facet = $data['facet'] ?? false; ?>
         </div>
       </div>
 
-      <?php if ($uid['user_id'] == 0) { ?>
+      <?php if ($user['id'] == 0) { ?>
         <div class="flex right col-span-4 items-center">
           <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml-10">
             <i class="bi bi-brightness-high gray-400 text-xl"></i>
@@ -78,14 +78,14 @@ $facet = $data['facet'] ?? false; ?>
         <div class="col-span-4">
           <div class="flex right ml30 mb-ml-10 items-center">
 
-            <?= add_post($facet, $uid['user_id']); ?>
+            <?= add_post($facet, $user['id']); ?>
 
             <div id="toggledark" class="only-icon p10 ml20 mb-ml-10">
               <i class="bi bi-brightness-high gray-400 text-xl"></i>
             </div>
 
             <a class="gray-400 p10 text-xl ml20 mb-ml-10" href="<?= getUrlByName('notifications'); ?>">
-              <?php $notif = \App\Controllers\NotificationsController::setBell($uid['user_id']); ?>
+              <?php $notif = \App\Controllers\NotificationsController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['notification_action_type'] == 1) { ?>
                   <i class="bi bi-envelope red-500"></i>
@@ -99,7 +99,7 @@ $facet = $data['facet'] ?? false; ?>
 
             <ag-menu data-template="two" class="tippy pr10 pl10 ml20 mb-ml-10">
               <div class="relative w-auto">
-                <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w30 h30 br-rd-50'); ?>
+                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
               </div>
             </ag-menu>  
             <div id="two" style="display: none;" class="bg-white br-rd3">
@@ -107,7 +107,7 @@ $facet = $data['facet'] ?? false; ?>
                 <?= tabs_nav(
                   'menu',
                   $type,
-                  $uid,
+                  $user,
                   $pages = Config::get('menu.user'),
                 ); ?>
               </nav>

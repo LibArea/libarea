@@ -8,21 +8,8 @@ use PDO;
 
 class NavigationModel extends MainModel
 {
-    public static function edit($data)
+    public static function edit($params)
     {
-        $params = [
-            'nav_id'            => $data['nav_id'],
-            'nav_module'        => 'admin',
-            'nav_type'          => 'menu',
-            'nav_parent'        => $data['nav_parent'],
-            'nav_name'          => $data['nav_name'],
-            'nav_url_routes'    => $data['nav_url_routes'],
-            'nav_status'        => $data['nav_status'],
-            'nav_auth_tl'       => 5,
-            'nav_ordernum'      => $data['nav_ordernum'],
-            'nav_childs'        => $data['nav_childs'],
-        ];
-
         $sql = "UPDATE navigation SET 
                     nav_module          = :nav_module,  
                     nav_type            = :nav_type, 
@@ -38,20 +25,8 @@ class NavigationModel extends MainModel
         return  DB::run($sql, $params);
     }
 
-    public static function add($data)
+    public static function add($params)
     {
-        $params = [
-            'nav_module'        => $data['nav_module'],
-            'nav_type'          => $data['nav_type'],
-            'nav_parent'        => $data['nav_parent'],
-            'nav_name'          => $data['nav_name'],
-            'nav_url_routes'    => $data['nav_url_routes'],
-            'nav_status'        => $data['nav_status'],
-            'nav_auth_tl'       => $data['nav_auth_tl'],
-            'nav_ordernum'      => $data['nav_ordernum'],
-            'nav_childs'        => $data['nav_childs'],
-        ];
-
         $sql = "INSERT INTO navigation(nav_module, 
                         nav_type, 
                         nav_parent,
@@ -83,16 +58,9 @@ class NavigationModel extends MainModel
         return DB::run($sql, ['nav_id' => $nav_id]);
     }
 
-    public static function editChilds($id, $childs)
+    public static function editChilds($params)
     {
-        $params = [
-            'nav_id'        => $id,
-            'nav_childs'    => $childs,
-        ];
-
-        $sql = "UPDATE navigation SET 
-                    nav_childs          = :nav_childs
-                        WHERE nav_id    = :nav_id";
+        $sql = "UPDATE navigation SET nav_childs = :nav_childs WHERE nav_id    = :nav_id";
 
         return  DB::run($sql, $params);
     }

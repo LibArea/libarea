@@ -7,17 +7,17 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{NotificationsModel, PostModel};
-use Content, Translate;
+use Content, Translate, Tpl;
 
 class UserController extends MainController
 {
-    private $uid;
+    private $user;
 
     protected $limit = 42;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // All users
@@ -28,7 +28,7 @@ class UserController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $usersCount = UserModel::getUsersAllCount();
-        $users      = UserModel::getUsersAll($page, $this->limit, $this->uid['user_id'], $sheet);
+        $users      = UserModel::getUsersAll($page, $this->limit, $this->user['id'], $sheet);
         pageError404($users);
 
         $m = [
@@ -38,11 +38,10 @@ class UserController extends MainController
             'url'        => getUrlByName($sheet),
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/user/all',
             [
                 'meta'  => meta($m, Translate::get($type . 's'), Translate::get($sheet . '.desc')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,
@@ -58,7 +57,7 @@ class UserController extends MainController
     // Страница закладок участника
     function favorites()
     {
-        $favorites = UserModel::userFavorite($this->uid['user_id']);
+        $favorites = UserModel::userFavorite($this->user['id']);
 
         $result = [];
         foreach ($favorites as $ind => $row) {
@@ -68,15 +67,14 @@ class UserController extends MainController
             }
 
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
-            $row['post']            = PostModel::getPost($row['answer_post_id'], 'id', $this->uid);
+            $row['post']            = PostModel::getPost($row['answer_post_id'], 'id', $this->user);
             $result[$ind]           = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/user/favorite',
             [
                 'meta'  => meta($m = [], Translate::get('favorites')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
@@ -90,13 +88,12 @@ class UserController extends MainController
     // Страница черновиков участника
     function drafts()
     {
-        return agRender(
+        return Tpl::agRender(
             '/user/draft',
             [
                 'meta'  => meta($m = [], Translate::get('drafts')),
-                'uid'   => $this->uid,
                 'data'  => [
-                    'drafts'    => UserModel::userDraftPosts($this->uid['user_id']),
+                    'drafts'    => UserModel::userDraftPosts($this->user['id']),
                     'sheet'     => 'drafts',
                     'type'      => 'drafts',
                 ]
@@ -108,7 +105,7 @@ class UserController extends MainController
     // Страница предпочтений пользователя
     public function subscribed()
     {
-        $focus_posts = NotificationsModel::getFocusPostsListUser($this->uid['user_id']);
+        $focus_posts = NotificationsModel::getFocusPostsListUser($this->user['id']);
 
         $result = [];
         foreach ($focus_posts as $ind => $row) {
@@ -118,13 +115,12 @@ class UserController extends MainController
             $result[$ind]                   = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/user/subscribed',
             [
                 'meta'  => meta($m = [], Translate::get('subscribed')),
-                'uid'   => $this->uid,
                 'data'  => [
-                    'h1'    => Translate::get('subscribed') . ' ' . $this->uid['user_login'],
+                    'h1'    => Translate::get('subscribed') . ' ' . $this->user['login'],
                     'sheet' => 'subscribed',
                     'type'  => 'favorites',
                     'posts' => $result
@@ -137,16 +133,15 @@ class UserController extends MainController
     {
         $user_id    = Request::getPostInt('user_id');
         $user       = UserModel::getUser($user_id, 'id');
-        $post       = PostModel::getPost($user['user_my_post'], 'id', $this->uid);
+        $post       = PostModel::getPost($user['my_post'], 'id', $this->user);
         $badges     = BadgeModel::getBadgeUserAll($user_id);
 
-        agIncludeTemplate(
+        Tpl::agIncludeTemplate(
             '/content/user/card',
             [
-                'user' => $user,
-                'uid' => $this->uid,
-                'post' => $post,
-                'badges' => $badges
+                'user'      => $user,
+                'post'      => $post,
+                'badges'    => $badges
             ]
         );
     }

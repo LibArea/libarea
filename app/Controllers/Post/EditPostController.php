@@ -7,23 +7,23 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Content, UploadImage, Validation, Translate;
+use Content, UploadImage, Validation, Translate, Tpl;
 
 class EditPostController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Форма редактирования post
     public function index()
     {
         $post_id    = Request::getInt('id');
-        $post       = PostModel::getPost($post_id, 'id', $this->uid);
-        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
+        $post       = PostModel::getPost($post_id, 'id', $this->user);
+        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
@@ -45,11 +45,10 @@ class EditPostController extends MainController
         $puth = '/post/edit';
         if ($post['post_type'] == 'page') $puth = '/page/edit';
 
-        return agRender(
+        return Tpl::agRender(
             $puth,
             [
                 'meta'  => meta($m = [], Translate::get('edit post')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'edit-post',
                     'type'          => 'edit',
@@ -94,13 +93,13 @@ class EditPostController extends MainController
         $topics         = json_decode($facet_post[0], true);
 
         // Проверка доступа 
-        $post   = PostModel::getPost($post_id, 'id', $this->uid);
-        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
+        $post   = PostModel::getPost($post_id, 'id', $this->user);
+        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
         // Если пользователь заморожен
-        (new \App\Controllers\AuditController())->stopContentQuietМode($this->uid['user_limiting_mode']);
+        (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
 
         $redirect   = getUrlByName('post.edit', ['id' => $post_id]);
         if (!$topics) {
@@ -138,7 +137,7 @@ class EditPostController extends MainController
         // Обложка поста
         $cover          = $_FILES['images'];
         if ($_FILES['images']['name']) {
-            $post_img = UploadImage::cover_post($cover, $post, $redirect, $this->uid['user_id']);
+            $post_img = UploadImage::cover_post($cover, $post, $redirect, $this->user['id']);
         }
         $post_img = $post_img ?? $post['post_content_img'];
 
@@ -207,13 +206,13 @@ class EditPostController extends MainController
         }
 
         // Проверка доступа 
-        $post   = PostModel::getPost($post_id, 'id', $this->uid);
-        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
+        $post   = PostModel::getPost($post_id, 'id', $this->user);
+        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
         // Если пользователь заморожен
-        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
+        Content::stopContentQuietМode($this->user['limiting_mode']);
 
         $redirect   = getUrlByName('post.edit', ['id' => $post_id]);
         if (!$topics) {
@@ -280,13 +279,13 @@ class EditPostController extends MainController
     function imgPostRemove()
     {
         $post_id    = Request::getInt('id');
-        $post = PostModel::getPost($post_id, 'id', $this->uid);
-        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
+        $post = PostModel::getPost($post_id, 'id', $this->user);
+        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
         PostModel::setPostImgRemove($post['post_id']);
-        UploadImage::cover_post_remove($post['post_content_img'], $this->uid['user_id']);
+        UploadImage::cover_post_remove($post['post_content_img'], $this->user['id']);
 
         addMsg(Translate::get('cover removed'), 'success');
         redirect(getUrlByName('post.edit', ['id' => $post['post_id']]));
@@ -294,7 +293,7 @@ class EditPostController extends MainController
 
     public function uploadContentImage()
     {
-        $user_id    = $this->uid['user_id'];
+        $user_id    = $this->user['id'];
         $type       = Request::getGet('type');
         $post_id    = Request::getGet('post_id');
 

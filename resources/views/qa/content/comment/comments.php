@@ -2,7 +2,7 @@
   <?= tabs_nav(
         'menu',
         $data['type'],
-        $uid,
+        $user,
         $pages = Config::get('menu.left'),
       ); ?>
 </div>
@@ -15,10 +15,10 @@
       <div class="bg-white br-rd5 mt15 br-box-gray p15">
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
           <div class="text-sm mb5">
-            <a class="gray" href="<?= getUrlByName('profile', ['login' => $comment['user_login']]); ?>">
-              <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'w20 h20'); ?>
+            <a class="gray" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
+              <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'w20 h20'); ?>
               <span class="mr5 ml5">
-                <?= $comment['user_login']; ?>
+                <?= $comment['login']; ?>
               </span>
             </a>
             <span class="gray-400 lowercase"><?= $comment['date']; ?></span>
@@ -30,7 +30,7 @@
             <?= $comment['comment_content']; ?>
           </div>
           <div class="hidden gray">
-            <?= votes($uid['user_id'], $comment, 'comment', 'ps', 'mr5'); ?>
+            <?= votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
           </div>
         <?php } else { ?>
           <div class="bg-red-200 mb20">
@@ -46,4 +46,4 @@
     <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('comments-desc'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('comments-desc')]); ?>

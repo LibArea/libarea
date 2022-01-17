@@ -1,5 +1,5 @@
 <div class="cm_addentry max-w780 mt10">
-  <?php if ($uid['user_id'] > 0) { ?>
+  <?php if ($user['id'] > 0) { ?>
     <form id="add_comm" class="new_comment" action="/comment/create" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
       <textarea rows="5" minlength="6" placeholder="<?= Translate::get('write-something'); ?>..." name="comment" id="comment"></textarea>

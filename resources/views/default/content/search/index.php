@@ -28,9 +28,9 @@
         <?= html_facet($post['facet_list'], 'topic', 'black mr15 inline text-sm'); ?>
         <div class="gray"><?= $post['content']; ?>...</div>
         <div class="flex flex-row items-center justify-between mt10 text-sm gray">
-          <a class="flex flex-row items-center black mr15 gray" href="<?= getUrlByName('profile', ['login' => $post['user_login']]); ?>">
-            <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w20 h20 mr10'); ?>
-            <?= $post['user_login']; ?>
+          <a class="flex flex-row items-center black mr15 gray" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+            <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w20 h20 mr10'); ?>
+            <?= $post['login']; ?>
           </a>
           <div class="flex flex-row items-center gray text-sm lowercase">
             <i class="bi bi-heart sky-500 mr5"></i> <?= $post['post_votes']; ?>

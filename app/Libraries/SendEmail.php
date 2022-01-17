@@ -8,26 +8,26 @@ use App\Middleware\Before\UserData;
 class SendEmail
 {
     // https://github.com/JacksonJeans/php-mail
-    public static function mailText($user_id, $type, array $variables = [])
+    public static function mailText($uid, $type, array $variables = [])
     {
-        $uid    = UserData::getUid();
-        $user   = UserModel::getUser($user_id, 'id');
+        $u_data = UserData::get();
+        $user   = UserModel::getUser($uid, 'id');
 
-        require_once __DIR__ . '/../Language/mail/' . $uid['user_lang'] . '.php';
+        require_once __DIR__ . '/../Language/mail/' . $u_data['lang'] . '.php';
 
-        if (is_null($user_id)) {
+        if (is_null($uid)) {
             return false;
         }
 
         if ($type == 'appealed') {
-            $setting = SettingModel::getNotifications($user_id);
+            $setting = SettingModel::getNotifications($uid);
             if ($setting['setting_email_appealed'] == 0) {
                 return true;
             }
         }
 
         $text_footer    = sprintf($data['footer'], Config::get('meta.url'));
-        $user_email     = $user['user_email'];
+        $user_email     = $user['email'];
         $url            = Config::get('meta.url');
 
         switch ($type) {
@@ -54,6 +54,7 @@ class SendEmail
                 $message    = $data['test.message'];
                 break;
         }
+
         self::send($user_email, $subject, $message . $text_footer);
 
         return true;

@@ -1,8 +1,7 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
     'menus' => [],
   ]
 ); ?>
@@ -64,8 +63,8 @@
   <h4 class="mt5 mb5"><?= Translate::get('users'); ?></h4>
   <?php foreach ($data['last_visit'] as $user) { ?>
     <div class="gray">
-      id<?= $user['user_id']; ?>
-      <a href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>"><?= $user['user_login']; ?></a>
+      id<?= $user['id']; ?>
+      <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
       <span class="text-sm"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
     </div>
   <?php } ?>

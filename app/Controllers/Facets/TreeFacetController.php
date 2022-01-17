@@ -3,26 +3,17 @@
 namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use App\Middleware\Before\UserData;
 use App\Models\FacetModel;
-use Translate;
+use Translate, Tpl;
 
 class TreeFacetController extends MainController
 {
-    private $uid;
-
-    public function __construct()
-    {
-        $this->uid = UserData::getUid();
-    }
-
     public function index()
     {
-        return agRender(
+        return Tpl::agRender(
             '/facets/structure',
             [
                 'meta'  => meta($m = [], Translate::get('structure'), Translate::get('structure-desc')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'structure',
                     'type'      => 'topic',

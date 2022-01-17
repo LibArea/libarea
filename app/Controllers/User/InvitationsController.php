@@ -6,25 +6,24 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\{InvitationModel, UserModel};
-use Validation, Translate, SendEmail;
+use Validation, Translate, SendEmail, Tpl;
 
 class InvitationsController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Показ формы создания инвайта
     public function inviteForm()
     {
-        return agRender(
+        return Tpl::agRender(
             '/user/invite',
             [
                 'meta'  => meta($m = [], Translate::get('invite')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet' => 'invite',
                     'type'  => 'user',
@@ -36,14 +35,13 @@ class InvitationsController extends MainController
     // Страница инвайтов пользователя
     function invitationForm()
     {
-        return agRender(
+        return Tpl::agRender(
             '/user/invitation',
             [
                 'meta'  => meta($m = [], Translate::get('invites')),
-                'uid'   => $this->uid,
                 'data'  => [
-                    'invitations'   => InvitationModel::userResult($this->uid['user_id']),
-                    'count_invites' => $this->uid['user_invitation_available'],
+                    'invitations'   => InvitationModel::userResult($this->user['id']),
+                    'count_invites' => $this->user['invitation_available'],
                     'sheet' => 'invites',
                     'type'  => 'user',
                 ]
@@ -61,31 +59,38 @@ class InvitationsController extends MainController
         Validation::Email($invitation_email, $redirect);
 
         $user = UserModel::userInfo($invitation_email);
-        if (!empty($user['user_email'])) {
-
-            if ($user['user_email']) {
-                addMsg(Translate::get('user-already'), 'error');
-                redirect($redirect);
-            }
+        if (!empty($user['email'])) {
+            addMsg(Translate::get('user-already'), 'error');
+            redirect($redirect);
         }
 
-        $inv_user = InvitationModel::duplicate($this->uid['user_id']);
-
+        $inv_user = InvitationModel::duplicate($invitation_email);
         if ($inv_user['invitation_email'] == $invitation_email) {
             addMsg(Translate::get('invate-to-replay'), 'error');
             redirect($redirect);
         }
 
-        // + Повторная отправка
-        $add_time           = date('Y-m-d H:i:s');
-        $invitation_code    = randomString('crypto', 25);
-        $add_ip             = Request::getRemoteAddress();
+        // TODO : + Config::get('invite.limit')
+        if ($this->user['invitation_available'] >= 5) {
+            addMsg(Translate::get('invate.limit.stop'), 'error');
+            redirect($redirect);
+        }
 
-        InvitationModel::create($this->uid['user_id'], $invitation_code, $invitation_email, $add_time, $add_ip);
+        $invitation_code = randomString('crypto', 25);
+
+        InvitationModel::create(
+            [
+                'uid'               => $this->user['id'],
+                'invitation_code'   => $invitation_code,
+                'invitation_email'  => $invitation_email,
+                'add_time'          => date('Y-m-d H:i:s'),
+                'add_ip'            => Request::getRemoteAddress(),
+            ]
+        );
 
         // Отправка e-mail
         $link = getUrlByName('invite.reg', ['code' => $invitation_code]);
-        SendEmail::mailText($this->uid['user_id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
+        SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
         addMsg(Translate::get('invite created'), 'success');
         redirect($redirect);

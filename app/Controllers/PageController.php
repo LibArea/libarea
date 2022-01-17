@@ -6,15 +6,15 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{PageModel, FacetModel};
-use Translate, Content, Config;
+use Translate, Content, Config, Tpl;
 
 class PageController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index()
@@ -22,7 +22,7 @@ class PageController extends MainController
         $facet      = Request::get('facet');
         $slug       = Request::get('slug');
 
-        $page   = PageModel::getPage($slug, $this->uid['user_id'], 'slug');
+        $page   = PageModel::getPage($slug, $this->user['id'], 'slug');
         pageError404($page);
 
         $facet   = FacetModel::getFacet($facet, 'slug');
@@ -49,11 +49,10 @@ class PageController extends MainController
             $desc = strip_tags($page['post_title']);
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/page/view',
             [
                 'meta'  => meta($m, $title, $desc . ' (' . $facet['facet_title'] . ' - ' . Translate::get('page') . ')'),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet' => 'page',
                     'type'  => 'page',
@@ -92,11 +91,10 @@ class PageController extends MainController
             'url'        => getUrlByName('info.restriction'),
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/page/restriction',
             [
                 'meta'  => meta($m, Translate::get('restriction'), Translate::get('the profile is being checked')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet' => 'restriction',
                     'type'  => 'page',

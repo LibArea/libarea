@@ -520,47 +520,47 @@ CREATE TABLE `stop_words` (
 --
 
 CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `user_login` varchar(50) NOT NULL,
-  `user_name` varchar(50) DEFAULT NULL,
-  `user_email` varchar(100) NOT NULL,
-  `user_password` varchar(255) NOT NULL,
-  `user_activated` tinyint(1) DEFAULT '0',
-  `user_limiting_mode` tinyint(1) DEFAULT '0',
-  `user_reg_ip` varchar(45) DEFAULT NULL,
-  `user_trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
-  `user_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_invitation_available` int(11) NOT NULL DEFAULT '0',
-  `user_invitation_id` int(11) NOT NULL DEFAULT '0',
-  `user_template` varchar(12) NOT NULL DEFAULT 'default',
-  `user_lang` varchar(2) NOT NULL DEFAULT 'ru',
-  `user_scroll` tinyint(1) NOT NULL DEFAULT '0',
-  `user_whisper` varchar(255) NOT NULL,
-  `user_avatar` varchar(255) NOT NULL DEFAULT 'noavatar.png',
-  `user_cover_art` varchar(255) NOT NULL DEFAULT 'cover_art.jpeg',
-  `user_color` varchar(12) NOT NULL DEFAULT '#f56400',
-  `user_about` varchar(250) DEFAULT NULL,
-  `user_website` varchar(50) DEFAULT NULL,
-  `user_location` varchar(50) DEFAULT NULL,
-  `user_public_email` varchar(50) DEFAULT NULL,
-  `user_skype` varchar(50) DEFAULT NULL,
-  `user_twitter` varchar(50) DEFAULT NULL,
-  `user_telegram` varchar(50) DEFAULT NULL,
-  `user_vk` varchar(50) DEFAULT NULL,
-  `user_rating` int(11) DEFAULT '0',
-  `user_my_post` int(11) DEFAULT '0' COMMENT 'Пост выведенный в профиль',
-  `user_ban_list` tinyint(1) DEFAULT '0',
-  `user_hits_count` int(11) DEFAULT '0',
-  `user_up_count` int(11) DEFAULT '0',
-  `user_is_deleted` tinyint(1) DEFAULT '0'
+  `id` int(11) NOT NULL,
+  `login` varchar(50) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `activated` tinyint(1) DEFAULT '0',
+  `limiting_mode` tinyint(1) DEFAULT '0',
+  `reg_ip` varchar(45) DEFAULT NULL,
+  `trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `invitation_available` int(11) NOT NULL DEFAULT '0',
+  `invitation_id` int(11) NOT NULL DEFAULT '0',
+  `template` varchar(12) NOT NULL DEFAULT 'default',
+  `lang` varchar(2) NOT NULL DEFAULT 'ru',
+  `scroll` tinyint(1) NOT NULL DEFAULT '0',
+  `whisper` varchar(255) NOT NULL,
+  `avatar` varchar(255) NOT NULL DEFAULT 'noavatar.png',
+  `cover_art` varchar(255) NOT NULL DEFAULT 'cover_art.jpeg',
+  `color` varchar(12) NOT NULL DEFAULT '#f56400',
+  `about` varchar(250) DEFAULT NULL,
+  `website` varchar(50) DEFAULT NULL,
+  `location` varchar(50) DEFAULT NULL,
+  `public_email` varchar(50) DEFAULT NULL,
+  `skype` varchar(50) DEFAULT NULL,
+  `twitter` varchar(50) DEFAULT NULL,
+  `telegram` varchar(50) DEFAULT NULL,
+  `vk` varchar(50) DEFAULT NULL,
+  `rating` int(11) DEFAULT '0',
+  `my_post` int(11) DEFAULT '0' COMMENT 'Пост выведенный в профиль',
+  `ban_list` tinyint(1) DEFAULT '0',
+  `hits_count` int(11) DEFAULT '0',
+  `up_count` int(11) DEFAULT '0',
+  `is_deleted` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_email`, `user_password`, `user_activated`, `user_limiting_mode`, `user_reg_ip`, `user_trust_level`, `user_created_at`, `user_updated_at`, `user_invitation_available`, `user_invitation_id`, `user_template`, `user_lang`, `user_scroll`, `user_whisper`, `user_avatar`, `user_cover_art`, `user_color`, `user_about`, `user_website`, `user_location`, `user_public_email`, `user_skype`, `user_twitter`, `user_telegram`, `user_vk`, `user_rating`, `user_my_post`, `user_ban_list`, `user_hits_count`, `user_up_count`, `user_is_deleted`) VALUES
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `limiting_mode`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `template`, `lang`, `scroll`, `whisper`, `avatar`, `cover_art`, `color`, `about`, `website`, `location`, `public_email`, `skype`, `twitter`, `telegram`, `vk`, `rating`, `my_post`, `ban_list`, `hits_count`, `up_count`, `is_deleted`) VALUES
 (1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, 0, '127.0.0.1', 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 'default', 'ru', 0, '', 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0),
 (2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, 0, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 'default', 'ru', 0, '', 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 1, 0, 0);
 
@@ -1021,7 +1021,7 @@ ALTER TABLE `stop_words`
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `users_activate`
@@ -1221,7 +1221,7 @@ ALTER TABLE `stop_words`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `users_activate`

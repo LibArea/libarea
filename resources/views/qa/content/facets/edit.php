@@ -9,7 +9,7 @@
       <?= tabs_nav(
         'nav',
         $data['type'],
-        $uid,
+        $user,
         $pages = [
           [
             'id'        => 'edit',
@@ -73,8 +73,7 @@
         <?= sumbit(Translate::get('download')); ?>
       </div>
 
-      <?= import('/_block/form/field-input', [
-        'uid' => $uid,
+      <?= Tpl::import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('title'),
@@ -109,8 +108,7 @@
 
       <?php if ($fs['facet_type'] == 'topic' && UserData::checkAdmin()) { ?>
 
-        <?= import('/_block/form/radio', [
-          'uid' => $uid,
+        <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
               'title' => Translate::get('web-cat'),
@@ -133,8 +131,8 @@
           ]
         ]); ?>
 
-        <?= import('/_block/form/select/low-facets', [
-          'uid'           => $uid,
+        <?= Tpl::import('/_block/form/select/low-facets', [
+          'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'topic',
@@ -173,8 +171,7 @@
       <textarea class="add max-w780" rows="6" minlength="44" name="facet_description"><?= $fs['facet_description']; ?></textarea>
       <div class="text-sm gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
 
-      <?= import('/_block/form/field-input', [
-        'uid'           => $uid,
+      <?= Tpl::import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('short description'),
@@ -194,8 +191,8 @@
       <div class="mb20 text-sm gray-400">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
       <?php if ($fs['facet_type'] == 'topic') { ?>
-        <?= import('/_block/form/select/related-posts', [
-          'uid'           => $uid,
+        <?= Tpl::import('/_block/form/select/related-posts', [
+          'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'post',
@@ -203,8 +200,8 @@
           'help'          => Translate::get('necessarily'),
         ]); ?>
 
-        <?= import('/_block/form/select/low-matching-facets', [
-          'uid'           => $uid,
+        <?= Tpl::import('/_block/form/select/low-matching-facets', [
+          'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'topic',
@@ -227,9 +224,9 @@
       <?php } ?>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <?= import('/_block/form/select/content-tl', ['uid' => $uid, 'data' => $fs['facet_tl']]); ?>
-        <?= import('/_block/form/select/user', [
-          'uid'     => $uid,
+        <?= Tpl::import('/_block/form/select/content-tl', ['user' => $user, 'data' => $fs['facet_tl']]); ?>
+        <?= Tpl::import('/_block/form/select/user', [
+          'uid'     => $user,
           'user'    => $data['user'],
           'action'  => 'user',
           'type'    => 'user',
@@ -237,8 +234,8 @@
           'help'    => Translate::get('necessarily'),
         ]); ?>
  
-        <?= import('/_block/facet/facet-type', [
-          'uid'   => $uid,
+        <?= Tpl::import('/_block/facet/facet-type', [
+          'user'   => $user,
           'type'  => $fs['facet_type'],
         ]); ?>
       <?php } ?>

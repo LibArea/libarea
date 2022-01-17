@@ -9,7 +9,7 @@ use PDO;
 class PageModel extends MainModel
 {
     // Информация по странице  (id, slug)
-    public static function getPage($params, $user_id, $name)
+    public static function getPage($params, $uid, $name)
     {
         $sort = "post_id = :params";
         if ($name == 'slug') $sort = "post_slug = :params";
@@ -27,16 +27,16 @@ class PageModel extends MainModel
                     post_is_deleted,
                     votes_post_item_id, 
                     votes_post_user_id,
-                    user_id,
-                    user_login,
-                    user_avatar
+                    id,
+                    login,
+                    avatar
                         FROM posts 
-                        LEFT JOIN users ON user_id = post_user_id
+                        LEFT JOIN users ON id = post_user_id
                         LEFT JOIN votes_post ON votes_post_item_id = post_id 
-                                AND votes_post_user_id = :user_id
+                                AND votes_post_user_id = :uid
                             WHERE $sort";
 
-        $result = DB::run($sql, ['params' => $params, 'user_id' =>  $user_id]);
+        $result = DB::run($sql, ['params' => $params, 'uid' =>  $uid]);
 
         return $result->fetch(PDO::FETCH_ASSOC);
     }

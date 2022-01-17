@@ -4,19 +4,11 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\ContentModel;
-use Translate;
+use Translate, Tpl;
 
 class WordsController extends MainController
 {
-    private $uid;
-
-    public function __construct()
-    {
-        $this->uid  = UserData::getUid();
-    }
-
     public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
@@ -24,11 +16,10 @@ class WordsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/word/words',
             [
                 'meta'  => meta($m = [], Translate::get('words')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'words' => ContentModel::getStopWords(),
                     'sheet' => $sheet,
@@ -41,11 +32,10 @@ class WordsController extends MainController
     // Форма добавления стоп-слова
     public function addPage($sheet, $type)
     {
-        return agRender(
+        return Tpl::agRender(
             '/admin/word/add',
             [
                 'meta'  => meta($m = [], Translate::get('add a stop word')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,

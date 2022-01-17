@@ -9,7 +9,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       <div class="ml15 mb-ml-0 flex-auto">
         <h1 class="mb0 mt10 text-2xl">
           <?= $blog['facet_seo_title']; ?>
-          <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $uid['user_id']) { ?>
+          <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
             <a class="right white gray-hover fon-rgba -mt20" href="<?= getUrlByName('blog.edit', ['id' => $blog['facet_id']]); ?>">
               <i class="bi bi-pencil bold"></i>
             </a>
@@ -18,15 +18,14 @@ if ($blog['facet_is_deleted'] == 0) { ?>
         <div class="text-sm"><?= $blog['facet_short_description']; ?></div>
 
         <div class="mt15 right">
-          <?= import('/_block/facet/signed', [
-            'uid'           => $uid,
+          <?= Tpl::import('/_block/facet/signed', [
+            'user'           => $user,
             'topic'         => $blog,
             'topic_signed'  => is_array($data['facet_signed']),
           ]); ?>
         </div>
 
-        <?= import('/_block/facet/focus-users', [
-          'uid'               => $uid,
+        <?= Tpl::import('/_block/facet/focus-users', [
           'topic_focus_count' => $blog['facet_focus_count'],
           'focus_users'       => $data['focus_users'] ?? '',
         ]); ?>
@@ -35,16 +34,16 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 
     <div class="grid grid-cols-12 gap-4 mb-gap-05">
       <main class="col-span-9 mb-col-12">
-        <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+        <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>
       <aside class="col-span-3 relative mb-none">
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
           <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
             <div class="uppercase gray mb5"> <?= Translate::get('created by'); ?></div>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['user_login']]); ?>">
-              <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'w30 mr5 br-rd-50'); ?>
-              <span class="ml5"><?= $data['user']['user_login']; ?></span>
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
+              <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'w30 mr5 br-rd-50'); ?>
+              <span class="ml5"><?= $data['user']['login']; ?></span>
             </a>
             <div class="gray-400 text-sm mt5">
               <i class="bi bi-calendar-week mr5 ml5 middle"></i>
@@ -66,7 +65,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
                     <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('page', ['facet' => $blog['facet_slug'], 'slug' => $row['post_slug']]); ?>">
                       <?= $row['post_title']; ?>
                     </a>
-                    <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $uid['user_id']) { ?>
+                    <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
                       <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
                         <i class="bi bi-pencil"></i>
                       </a>
@@ -87,7 +86,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
   </div>
 <?php } ?>
 </div>
-<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
+<?= Tpl::import('/_block/wide-footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

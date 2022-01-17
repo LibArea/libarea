@@ -9,8 +9,8 @@ use PDO;
 class FeedModel extends MainModel
 {
     // Получаем посты по условиям
-    public static function feed($page, $limit, $uid, $sheet, $slug)
-    {   
+    public static function feed($page, $limit, $user, $sheet, $slug)
+    {
         switch ($sheet) {
             case 'facet.feed':
                 $string     = "WHERE facet_list LIKE :qa AND post_type != 'page'";
@@ -29,14 +29,14 @@ class FeedModel extends MainModel
                 break;
             case 'profile.posts':
                 $string     = "WHERE post_user_id  = :qa AND post_draft = 0";
-                break;     
+                break;
         }
-      
+
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
         $display = '';
-        if ($uid['user_trust_level'] != 5) {
-            $trust_level = "AND post_tl <= " . $uid['user_trust_level'];
-            if ($uid['user_id'] == 0) {
+        if ($user['trust_level'] != 5) {
+            $trust_level = "AND post_tl <= " . $user['trust_level'];
+            if ($user['id'] == 0) {
                 $trust_level = "AND post_tl = 0";
             }
 
@@ -79,7 +79,7 @@ class FeedModel extends MainModel
                     post_is_deleted,
                     rel.*,
                     votes_post_item_id, votes_post_user_id,
-                    user_id, user_login, user_avatar, 
+                    id, login, avatar, 
                     favorite_tid, favorite_user_id, favorite_type
                     
                         FROM posts
@@ -95,10 +95,10 @@ class FeedModel extends MainModel
                         ) AS rel
                             ON rel.relation_post_id = post_id 
                             
-                            INNER JOIN users ON user_id = post_user_id
-                            LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = " . $uid['user_id'] . " AND favorite_type = 1
+                            INNER JOIN users ON id = post_user_id
+                            LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = " . $user['id'] . " AND favorite_type = 1
                             LEFT JOIN votes_post ON votes_post_item_id = post_id 
-                                AND votes_post_user_id = " . $uid['user_id'] . "
+                                AND votes_post_user_id = " . $user['id'] . "
                                         
                         $string 
                         $display 
@@ -106,15 +106,15 @@ class FeedModel extends MainModel
 
 
         $request = ['qa' => $slug];
-        if ($sheet == 'facet.feed' || $sheet == 'facet.recommend') {   
-           $request = ['qa' => "%" . $slug . "@%"];
-        }  
- 
+        if ($sheet == 'facet.feed' || $sheet == 'facet.recommend') {
+            $request = ['qa' => "%" . $slug . "@%"];
+        }
+
         return DB::run($sql, $request)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество постов
-    public static function feedCount($uid, $sheet, $slug)
+    public static function feedCount($user, $sheet, $slug)
     {
         switch ($sheet) {
             case 'facet.feed':
@@ -134,14 +134,14 @@ class FeedModel extends MainModel
                 break;
             case 'profile.posts':
                 $string     = "WHERE post_user_id  = :qa AND post_draft = 0";
-                break;     
+                break;
         }
 
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
         $display = '';
-        if ($uid['user_trust_level'] != 5) {
-            $trust_level = "AND post_tl <= " . $uid['user_trust_level'];
-            if ($uid['user_id'] == 0) {
+        if ($user['trust_level'] != 5) {
+            $trust_level = "AND post_tl <= " . $user['trust_level'];
+            if ($user['id'] == 0) {
                 $trust_level = "AND post_tl = 0";
             }
 

@@ -5,14 +5,14 @@
 <script src="/assets/js/tippy/tippy-bundle.umd.min.js"></script>
 <script src="/assets/js/common.js"></script>
 
-<?php if ($uid['user_id'] > 0) { ?><script src="/assets/js/app.js"></script><?php } ?>
+<?php if ($user['id'] > 0) { ?><script src="/assets/js/app.js"></script><?php } ?>
  
 
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  <?php if ($uid['user_id'] == 0) { ?>
+  <?php if ($user['id'] == 0) { ?>
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
         const Toast = Swal.mixin({

@@ -1,8 +1,7 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
     'menus' => [
       [
         'id' => $data['type'] . '.all',
@@ -29,7 +28,7 @@
         <th><?= Translate::get('id'); ?></th>
       </thead>
       <?php foreach ($data['audits'] as $key => $audit) { ?>
-        <?php $user_id = $audit['user_id']; ?>
+        <?php $user_id = $audit['id']; ?>
         <tr>
           <td class="center">
             <?= $audit['audit_id']; ?>
@@ -40,10 +39,10 @@
             </div>
 
             (id:<?= $user_id; ?>)
-            <a href="<?= getUrlByName('profile', ['login' => $audit['user_login']]); ?>">
-              <?= $audit['user_login']; ?>
+            <a href="<?= getUrlByName('profile', ['login' => $audit['login']]); ?>">
+              <?= $audit['login']; ?>
             </a>
-            <?php if ($audit['user_limiting_mode'] == 1) { ?>
+            <?php if ($audit['limiting_mode'] == 1) { ?>
               <span class="mr5 ml5 red-500"> audit </span>
             <?php } ?>
             <span class="mr5 ml5"> &#183; </span>

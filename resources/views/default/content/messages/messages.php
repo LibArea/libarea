@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -18,15 +18,15 @@
       <?php foreach ($data['messages'] as  $msg) { ?>
         <div class="hidden mt15 mb15<?php if (!$msg['unread'] > 0) { ?> bg-yellow-100<?php } ?>">
           <div class="text-sm flex">
-            <?php if ($msg['dialog_sender_id'] == $uid['user_id']) { ?>
-              <a href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['user_login']]); ?>">
-                <?= user_avatar_img($msg['msg_to_user']['user_avatar'], 'small', $msg['msg_to_user']['user_login'], 'w20 h20 mr5 ml5'); ?>
-                <?= $msg['msg_to_user']['user_login']; ?>
+            <?php if ($msg['dialog_sender_id'] == $user['id']) { ?>
+              <a href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
+                <?= user_avatar_img($msg['msg_to_user']['avatar'], 'small', $msg['msg_to_user']['login'], 'w20 h20 mr5 ml5'); ?>
+                <?= $msg['msg_to_user']['login']; ?>
               </a>
             <?php } else { ?>
-              <a class="mr5" href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['user_login']]); ?>">
-                <?= user_avatar_img($msg['msg_user']['user_avatar'], 'small', $msg['msg_user']['user_login'], 'w20 h20 mr5 ml5'); ?>
-                <?= $msg['msg_user']['user_login']; ?>
+              <a class="mr5" href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
+                <?= user_avatar_img($msg['msg_user']['avatar'], 'small', $msg['msg_user']['login'], 'w20 h20 mr5 ml5'); ?>
+                <?= $msg['msg_user']['login']; ?>
               </a>
             <?php } ?>
             <span class="gray ml10 lowercase">
@@ -53,4 +53,4 @@
   <?= no_content(Translate::get('no dialogs'), 'bi bi-info-lg'); ?>
 <?php } ?>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('personal-messages-site'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('personal-messages-site')]); ?>

@@ -7,14 +7,14 @@ use App\Models\AuthModel;
 
 class SessionController extends MainController
 {
-    public static function set($uid)
+    public static function set($user)
     {
-        $_SESSION['account'] = ['user_id' => (int) $uid['user_id']];
+        $_SESSION['account'] = ['id' => (int) $user['id']];
 
         return true;
     }
 
-    public static function annul($user_id)
+    public static function annul($uid)
     {
         if (!isset($_SESSION)) {
             session_start();
@@ -22,7 +22,7 @@ class SessionController extends MainController
 
         session_destroy();
 
-        AuthModel::deleteTokenByUserId($user_id);
+        AuthModel::deleteTokenByUserId($uid);
 
         redirect(getUrlByName('info.restriction'));
     }

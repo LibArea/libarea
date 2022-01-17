@@ -5,11 +5,11 @@
     <span class="red-500"><?= Translate::get('website'); ?></span>
 
     <div class="right">
-      <?= votes($uid['user_id'], $data['item'], 'item', 'ps', 'text-2xl', 'block'); ?>
+      <?= votes($user['id'], $data['item'], 'item', 'ps', 'text-2xl', 'block'); ?>
     </div>
 
     <h1 class="mt5 mb10 text-2xl font-normal"><?= $data['item']['item_title_url']; ?>
-      <?php if ($uid['user_trust_level'] > 4) { ?>
+      <?php if ($user['trust_level'] > 4) { ?>
         <a class="text-sm ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['item']['item_id']]); ?>">
           <i class="bi bi-pencil"></i>
         </a>
@@ -58,7 +58,7 @@
     
     <?php if ($data['related_posts']) { ?>
       <div class="bg-white br-box-gray pt15">
-        <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => true, 'uid' => $uid]); ?>
+        <?= Tpl::import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => true]); ?>
       </div>
     <?php } ?>
   </div>
@@ -93,4 +93,4 @@
   </div>
 </aside>
 </div>
-<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
+<?= Tpl::import('/_block/wide-footer'); ?>

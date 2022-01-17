@@ -12,7 +12,7 @@
       <?= tabs_nav(
         'nav',
         $data['sheet'],
-        $uid,
+        $user,
         $pages = [
           [
             'id'    => $data['type'] . 's.all',
@@ -39,22 +39,24 @@
       ?>
 
     </ul>
+    <?php if ($user['trust_level'] > 1) { ?>
     <p class="m0 text-xl">
-     <?php if ($data['limit'] && $uid['user_id'] > 0) { ?>
+     <?php if ($data['limit']) { ?>
         <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
           <i class="bi bi-plus-lg middle"></i>
         </a>
      <?php } ?>
     </p>
+    <?php } ?>
   </div>
 
   <div class="bg-white p15">
 
     <?php if (!empty($data['facets'])) { ?>
       <?php if ($data['type'] == 'blog') { ?>
-        <?= import('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>
+        <?= Tpl::import('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
       <?php } else { ?>
-        <?= import('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>
+        <?= Tpl::import('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
       <?php } ?>
     <?php } else { ?>
       <?= no_content(Translate::get($data['type'] . 's.no'), 'bi bi-info-lg'); ?>
@@ -65,4 +67,4 @@
 
 </main>
 </div>
-<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
+<?= Tpl::import('/_block/wide-footer'); ?>

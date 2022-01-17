@@ -6,17 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\FacetModel;
-use Translate;
+use Translate, Tpl;
 
 class FacetsController extends MainController
 {
-    private $uid;
+    private $user;
 
     protected $limit = 25;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index($sheet, $type)
@@ -24,21 +24,20 @@ class FacetsController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $pagesCount = FacetModel::getFacetsAllCount($this->uid['user_id'], $sheet);
+        $pagesCount = FacetModel::getFacetsAllCount($this->user['id'], $sheet);
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/facet/facets',
             [
                 'meta'  => meta($m = [], Translate::get('topics')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'facets'        => FacetModel::getFacetsAll($page, $this->limit, $this->uid['user_id'], $sheet),
+                    'facets'        => FacetModel::getFacetsAll($page, $this->limit, $this->user['id'], $sheet),
                 ]
             ]
         );
@@ -55,11 +54,10 @@ class FacetsController extends MainController
 
         $pages =  (new \App\Controllers\PageController())->lastAll();
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/page/pages',
             [
                 'meta'  => meta($m = [], Translate::get('topics')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

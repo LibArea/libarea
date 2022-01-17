@@ -9,7 +9,7 @@ use PDO;
 class BadgeModel extends MainModel
 {
     // Все награды
-    public static function getBadgesAll()
+    public static function getAll()
     {
         $sql = "SELECT 
                     badge_id,
@@ -24,7 +24,7 @@ class BadgeModel extends MainModel
     }
 
     // Получим информацию по награде
-    public static function getBadgeId($badge_id)
+    public static function getId($badge_id)
     {
         $sql = "SELECT 
                     badge_id,
@@ -40,35 +40,20 @@ class BadgeModel extends MainModel
     }
 
     // Редактирование награды
-    public static function edit($data)
+    public static function edit($params)
     {
-        $params = [
-            'badge_title'       => $data['badge_title'],
-            'badge_description' => $data['badge_description'],
-            'badge_icon'        => $data['badge_icon'],
-            'badge_id'          => $data['badge_id'],
-        ];
-
         $sql = "UPDATE badges 
-                    SET badge_title = :badge_title,  
-                    badge_description = :badge_description, 
-                    badge_icon = :badge_icon 
-                        WHERE badge_id = :badge_id";
+                    SET badge_title     = :badge_title,  
+                    badge_description   = :badge_description, 
+                    badge_icon          = :badge_icon 
+                        WHERE badge_id  = :badge_id";
 
         return  DB::run($sql, $params);
     }
 
     // Добавить награды
-    public static function add($data)
+    public static function add($params)
     {
-        $params = [
-            'badge_tl'          => $data['badge_tl'],
-            'badge_score'       => $data['badge_score'],
-            'badge_title'       => $data['badge_title'],
-            'badge_description' => $data['badge_description'],
-            'badge_icon'        => $data['badge_icon'],
-        ];
-
         $sql = "INSERT INTO badges(badge_tl, 
                         badge_score, 
                         badge_title, 
@@ -83,24 +68,19 @@ class BadgeModel extends MainModel
         return DB::run($sql, $params);
     }
 
+    // Reward the participant 
     // Наградить участника
-    public static function badgeUserAdd($user_id, $badge_id)
+    public static function badgeUserAdd($params)
     {
-        $params = [
-            'user_id'   => $user_id,
-            'badge_id'  => $badge_id,
-        ];
-
-        $sql = "INSERT INTO badges_user(bu_user_id, bu_badge_id) 
-                    VALUES(:user_id, :badge_id)";
+        $sql = "INSERT INTO badges_user(bu_user_id, bu_badge_id) VALUES(:user_id, :badge_id)";
 
         return DB::run($sql, $params);
     }
 
+    // All participant awards
     // Все награды участника
-    public static function getBadgeUserAll($user_id)
+    public static function getBadgeUserAll($uid)
     {
-
         $sql = "SELECT 
                     bu_id,
                     bu_badge_id,
@@ -113,16 +93,17 @@ class BadgeModel extends MainModel
                     badge_description
                         FROM badges_user
                         LEFT JOIN badges ON badge_id = bu_badge_id
-                        WHERE bu_user_id = :user_id";
+                            WHERE bu_user_id = :uid";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Remove member award
     // Удалить награду участника
-    public static function remove($id, $uid)
+    public static function remove($params)
     {
-        $sql = "DELETE FROM badges_user WHERE bu_id = :id AND bu_user_id = :uid";
+        $sql = "DELETE FROM badges_user WHERE bu_id = :bu_id AND bu_user_id = :bu_user_id";
 
-        return DB::run($sql, ['id' => $id, 'uid' => $uid]);
+        return DB::run($sql, $params);
     }
 }

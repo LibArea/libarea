@@ -1,8 +1,7 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
     'menus' => [
       [
         'id' => $data['type'] . '.all',
@@ -37,7 +36,7 @@
         </div>
         <div class="br-bottom mb15 mt5 pb10 text-sm hidden gray">
           <span class="inline mr5">
-            <?= votes($uid['user_id'], $item, 'item', 'ps', 'mr5'); ?>
+            <?= votes($user['id'], $item, 'item', 'ps', 'mr5'); ?>
           </span>
           <a class="green-600" rel="nofollow noreferrer" href="<?= $item['item_url']; ?>">
             <span class="green-600"><?= $item['item_url']; ?></span>

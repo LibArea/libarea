@@ -6,17 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\AnswerModel;
-use Content, Translate;
+use Content, Translate, Tpl;
 
 class AnswersController extends MainController
 {
-    private $uid;
+    private $user;
 
     protected $limit = 50;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index($sheet, $type)
@@ -25,7 +25,7 @@ class AnswersController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $pagesCount = AnswerModel::getAnswersAllCount($sheet);
-        $answers    = AnswerModel::getAnswersAll($page, $this->limit, $this->uid, $sheet);
+        $answers    = AnswerModel::getAnswersAll($page, $this->limit, $this->user, $sheet);
 
         $result = [];
         foreach ($answers  as $ind => $row) {
@@ -34,11 +34,10 @@ class AnswersController extends MainController
             $result[$ind]   = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/admin/answer/answers',
             [
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted answers') : Translate::get('answers')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

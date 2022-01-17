@@ -354,6 +354,7 @@ $data = [
     'login-use-condition'   => 'By continuing, you agree to <a href="/info/privacy">Terms of use</a> site',
     'user-already'          => 'The user is already on the site',
     'invate-to-replay'      => 'You have already sent an invitation to this user',
+    'invate.limit.stop'     => 'Sie haben die Anzahl der Einladungen erschöpft',
     'limit.day'             => 'For  %1$s you have reached the limit %2$s for today',
     'limit-add-content-no'  => 'You have reached the limit for adding set on the site',
     'registration by invite' => 'Registration by invite',
@@ -474,8 +475,8 @@ $data = [
     'the code is incorrect'                 => 'The code is incorrect or has already been used',
     'format-cover-post'                     => 'Width greater than 500px. Orientation horizontal',
     'email.password.not.correct'            => 'Email or password is not correct',
-    'your account is not activated'         => 'Your account is not activated',
-    'your account is under review'          => 'Your account is pending',
+    'account.not.activated'                 => 'Your account is not activated',
+    'account.being.verified'                => 'Your account is pending',
     'email.correctness'                     => 'Invalid email',
     'email.no.site'                         => 'This email is not on the site',
     'english'                               => 'English',
@@ -491,7 +492,7 @@ $data = [
     'does this violate site rules'          => 'This violates the rules of the site',
     'flag not included'                     => 'Flag left out, don use it often',
     'invited you'                           => 'You were invited by a member from this site. Enter invite',
-    'you can invite your friends'           => 'You can invite friends',
+    'invite.features'           => 'You can invite friends',
     'you were looking for'                  => 'You were looking for',
     'personal-messages-site'                => 'Private messages with site members',
     'the page does not exist'               => 'The page does not exist',
@@ -548,7 +549,8 @@ $data = [
     'tl2.title'                 => 'Mitglied',
     'tl3.title'                 => 'Bewohner',
     'tl4.title'                 => 'Führer',
-    'tl5.title'                 => 'Mitarbeiter',
+    'tl5.title'                 => 'Regulär',
+    'tl10.title'                => 'Mitarbeiter',
 ];
 
 return $data;

@@ -6,20 +6,20 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\NotificationsModel;
-use Translate, SendEmail;
+use Translate, SendEmail, Tpl;
 
 class NotificationsController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid = UserData::getUid();
+        $this->user = UserData::get();
     }
 
     public function index()
     {
-        $list = NotificationsModel::listNotification($this->uid['user_id']);
+        $list = NotificationsModel::listNotification($this->user['id']);
 
         $result = [];
         foreach ($list as $ind => $row) {
@@ -27,11 +27,10 @@ class NotificationsController extends MainController
             $result[$ind]           = $row;
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/notification/index',
             [
                 'meta'  => meta($m = [], Translate::get('notifications')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'notifications',
                     'type'          => 'notifications',
@@ -48,18 +47,18 @@ class NotificationsController extends MainController
         $notif_id   = Request::getInt('id');
         $info       = NotificationsModel::getNotification($notif_id);
 
-        if ($this->uid['user_id'] != $info['notification_recipient_id']) {
+        if ($this->user['id'] != $info['notification_recipient_id']) {
             return false;
         }
 
-        NotificationsModel::updateMessagesUnread($this->uid['user_id'], $notif_id);
+        NotificationsModel::updateMessagesUnread($this->user['id'], $notif_id);
 
         redirect('/' .  $info['notification_url']);
     }
 
     public function remove()
     {
-        NotificationsModel::setRemove($this->uid['user_id']);
+        NotificationsModel::setRemove($this->user['id']);
 
         redirect(getUrlByName('notifications'));
     }
@@ -72,11 +71,10 @@ class NotificationsController extends MainController
     // Appeal (@)
     public function mention($action_type, $message, $connection_type, $url, $owner_id = null)
     {
-        $sender_id = $this->uid['user_id'];
         foreach ($message as $recipient_id) {
             // Prohibit sending to yourself 
             // Запретим отправку себе
-            if ($recipient_id == $sender_id) {
+            if ($recipient_id == $this->user['id']) {
                 continue;
             }
 
@@ -87,8 +85,18 @@ class NotificationsController extends MainController
                     continue;
                 }
             }
-            
-            NotificationsModel::send(compact('sender_id', 'recipient_id', 'action_type', 'url'));
+
+            // Оповещение админу
+            // Admin notification 
+            NotificationsModel::send(
+                [
+                    'notification_sender_id'    => $this->user['id'],
+                    'notification_recipient_id' => $recipient_id,  // admin
+                    'notification_action_type'  => $action_type, // Система флагов  
+                    'notification_url'          => $url,
+                    'notification_read_flag'    => 0,
+                ]
+            );
 
             SendEmail::mailText($recipient_id, 'appealed');
         }

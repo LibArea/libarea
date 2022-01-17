@@ -11,55 +11,56 @@ class InvitationModel extends MainModel
     public static function get()
     {
         $sql = "SELECT 
-                    user_id,
-                    user_login,
-                    user_avatar,
+                    id,
+                    login,
+                    avatar,
                     uid,
                     invitation_email,
                     add_time,
                     active_uid,
                     active_time
                         FROM invitations 
-                        LEFT JOIN users ON active_uid = user_id ORDER BY user_id DESC";
+                        LEFT JOIN users ON active_uid = id ORDER BY id DESC";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Создадим инвайт для участника
-    public static function create($user_id, $invitation_code, $invitation_email, $add_time, $add_ip)
+    public static function create($params)
     {
-        $sql = "UPDATE users SET user_invitation_available = (user_invitation_available + 1) WHERE user_id = :user_id";
+        $sql = "INSERT INTO invitations(uid, 
+                    invitation_code, 
+                    invitation_email, 
+                    add_time, 
+                    add_ip) 
+                       VALUES(:uid, 
+                           :invitation_code, 
+                           :invitation_email, 
+                           :add_time, 
+                           :add_ip)";
 
-        DB::run($sql, ['user_id' => $user_id]);
+        DB::run($sql, $params);
 
-        $params = [
-            'uid'               => $user_id,
-            'invitation_code'   => $invitation_code,
-            'invitation_email'  => $invitation_email,
-            'add_time'          => $add_time,
-            'add_ip'            => $add_ip,
-        ];
+        $sql = "UPDATE users SET invitation_available = (invitation_available + 1) WHERE id = :uid";
 
-        $sql = "INSERT INTO invitations(uid, invitation_code, invitation_email, add_time, add_ip) 
-                       VALUES(:uid, :invitation_code, :invitation_email, :add_time, :add_ip)";
+        DB::run($sql, ['uid' => $params['uid']]);
 
-        return DB::run($sql, $params);
+        return true;
     }
 
     // Проверим на повтор
-    public static function duplicate($user_id)
+    public static function duplicate($email)
     {
         $sql = "SELECT
-                    uid,
                     invitation_email
                         FROM invitations
-                        WHERE uid = :user_id";
+                        WHERE invitation_email = :email";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['email' => $email])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Все инвайты участинка
-    public static function userResult($user_id)
+    public static function userResult($uid)
     {
         $sql = "SELECT 
                    uid, 
@@ -68,15 +69,15 @@ class InvitationModel extends MainModel
                    add_time,
                    invitation_email,
                    invitation_code,                  
-                   user_id,
-                   user_avatar,
-                   user_login
+                   id,
+                   avatar,
+                   login
                         FROM invitations
-                            LEFT JOIN users ON user_id = active_uid
-                            WHERE uid = :user_id
+                            LEFT JOIN users ON id = active_uid
+                            WHERE uid = :uid
                             ORDER BY add_time DESC";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Проверим не активированный инвайт
@@ -94,17 +95,8 @@ class InvitationModel extends MainModel
     }
 
     // Проверим не активированный инвайт и поменяем статус
-    public static function activate($inv_code, $inv_uid, $reg_ip, $active_uid)
+    public static function activate($params)
     {
-        $params = [
-            'active_status'     => 1,
-            'active_ip'         => $reg_ip,
-            'active_time'       => date('Y-m-d H:i:s'),
-            'active_uid'        => $active_uid,
-            'invitation_code'   => $inv_code,
-            'uid'               => $inv_uid,
-        ];
-
         $sql = "UPDATE invitations SET 
                     active_status   = :active_status,
                     active_ip       = :active_ip,

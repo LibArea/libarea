@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -29,10 +29,9 @@
     <?= $facet['facet_info']; ?>
   </div>
 
-  <?= import(
+  <?= Tpl::import(
     '/_block/related-posts',
     [
-      'uid'             => $uid,
       'related_posts'   => $data['related_posts'],
       'number'          => 'yes'
     ]
@@ -53,7 +52,7 @@
     </div>
   </div>
 
-  <?= import('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
+  <?= Tpl::import('/_block/sidebar/topic', ['data' => $data]); ?>
 </aside>
 </div>
-<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
+<?= Tpl::import('/_block/wide-footer'); ?>

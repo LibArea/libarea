@@ -7,13 +7,13 @@
           <span class="block gray lowercase"><?= Translate::get('views'); ?></span>
         </div>
         <div class="p15">
-          <?= user_avatar_img($writer['user_avatar'], 'max', $writer['user_login'], 'w50 h50'); ?>
+          <?= user_avatar_img($writer['avatar'], 'max', $writer['login'], 'w50 h50'); ?>
         </div>
         <div class="mt10">
-          <a href="<?= getUrlByName('profile', ['login' => $writer['user_login']]); ?>"><?= $writer['user_login']; ?></a>
+          <a href="<?= getUrlByName('profile', ['login' => $writer['login']]); ?>"><?= $writer['login']; ?></a>
           <div class="mr13 gray-600 mr15">
-            <?php if ($writer['user_about']) { ?>
-              <?= $writer['user_about']; ?>
+            <?php if ($writer['about']) { ?>
+              <?= $writer['about']; ?>
             <?php } else { ?>
               ...
             <?php } ?>

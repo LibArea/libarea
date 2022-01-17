@@ -6,21 +6,21 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{WebModel, FacetModel, PostModel};
-use Validation, Translate;
+use Validation, Translate, Tpl;
 
 class EditWebController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Форма редактирование домена
     public function index()
-    {  
-        Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
+    {
+        Validation::validTl($this->user['trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
         $domain_id  = Request::getInt('id');
         $domain     = WebModel::getItemId($domain_id);
@@ -34,11 +34,10 @@ class EditWebController extends MainController
             $item_post_related = PostModel::postRelated($domain['item_post_related']);
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/item/edit',
             [
                 'meta'  => meta($m = [], Translate::get('change the site') . ' | ' . $domain['item_url_domain']),
-                'uid'   => $this->uid,
                 'data'  => [
                     'domain'    => $domain,
                     'sheet'     => 'domains',
@@ -52,7 +51,7 @@ class EditWebController extends MainController
 
     public function edit()
     {
-        Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
+        Validation::validTl($this->user['trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
         $redirect   = getUrlByName('web');
         $item_id    = Request::getPostInt('item_id');
@@ -93,7 +92,7 @@ class EditWebController extends MainController
             'item_title_soft'   => $item_title_soft ?? '',
             'item_content_soft' => $item_content_soft ?? '',
             'item_published'    => $item_published,
-            'item_user_id'      => $this->uid['user_id'],
+            'item_user_id'      => $this->user['id'],
             'item_type_url'     => 0,
             'item_status_url'   => $item_status_url,
             'item_is_soft'      => $item_is_soft,

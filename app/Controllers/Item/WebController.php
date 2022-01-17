@@ -6,17 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\{WebModel, FeedModel, FacetModel, PostModel};
-use Content, Translate;
+use Content, Translate, Tpl;
 
 class WebController extends MainController
 {
-    private $uid;
+    private $user;
 
     protected $limit = 25;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     public function index()
@@ -25,7 +25,7 @@ class WebController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $pagesCount = WebModel::getItemsAllCount();
-        $items      = WebModel::getItemsAll($page, $this->limit, $this->uid['user_id']);
+        $items      = WebModel::getItemsAll($page, $this->limit, $this->user['id']);
 
         $result = [];
         foreach ($items as $ind => $row) {
@@ -43,11 +43,10 @@ class WebController extends MainController
             'url'        => getUrlByName('web'),
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/item/home',
             [
                 'meta'  => meta($m, Translate::get('domains-title'), Translate::get('domains-desc')),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'domains',
                     'pagesCount'    => ceil($pagesCount / $this->limit),
@@ -66,13 +65,13 @@ class WebController extends MainController
         $page       = Request::getInt('page');
         $page       = $page == 0 ? 1 : $page;
 
-        $item       = WebModel::getItemOne($domain, $this->uid['user_id']);
+        $item       = WebModel::getItemOne($domain, $this->user['id']);
         pageError404($item);
 
         $item['item_content'] = Content::text($item['item_content_url'], 'line');
- 
-        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $item['item_url_domain']);
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $item['item_url_domain']);
+
+        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $item['item_url_domain']);
+        $pagesCount = FeedModel::feedCount($this->user, $sheet, $item['item_url_domain']);
 
         $result = [];
         foreach ($posts as $ind => $row) {
@@ -89,11 +88,10 @@ class WebController extends MainController
             'url'        => getUrlByName('domain', ['domain' => $domain]),
         ];
 
-        return agRender(
+        return Tpl::agRender(
             '/item/link',
             [
                 'meta'  => meta($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'domain',
                     'pagesCount'    => ceil($pagesCount / $this->limit),
@@ -120,7 +118,7 @@ class WebController extends MainController
         // Получим подтемы темы
         $topics =  FacetModel::getLowLevelList($topic['facet_id']);
 
-        $items      = WebModel::feedItem($page, $this->limit, $topics, $this->uid, $topic['facet_id'], $sheet);
+        $items      = WebModel::feedItem($page, $this->limit, $topics, $this->user, $topic['facet_id'], $sheet);
         $pagesCount = WebModel::feedItemCount($topics,  $topic['facet_id']);
 
         $m = [
@@ -131,11 +129,10 @@ class WebController extends MainController
         ];
         $desc  = Translate::get('websites') . ' ' . Translate::get('by') . ' ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
 
-        return agRender(
+        return Tpl::agRender(
             '/item/sites',
             [
                 'meta'  => meta($m, Translate::get('websites') . ': ' . $topic['facet_title'], $desc),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => 'web',
@@ -157,7 +154,7 @@ class WebController extends MainController
     {
         $slug       = Request::get('slug');
 
-        $item = WebModel::getItemOne($slug, $this->uid['user_id']);
+        $item = WebModel::getItemOne($slug, $this->user['id']);
         pageError404($item);
 
         if ($item['item_published'] == 0) {
@@ -187,11 +184,10 @@ class WebController extends MainController
             $related_posts = PostModel::postRelated($item['item_post_related']);
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/item/website',
             [
                 'meta'  => meta($m, Translate::get('website') . ': ' . $item['item_title_url'], $desc),
-                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'sites-topic',
                     'type'          => 'web',

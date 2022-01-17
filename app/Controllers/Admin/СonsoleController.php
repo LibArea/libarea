@@ -18,10 +18,10 @@ class СonsoleController extends MainController
 
     public static function up()
     {
-        $users_id = СonsoleModel::allUsers();
-        foreach ($users_id as $ind => $row) {
-            $row['count']   =  СonsoleModel::allUp($row['user_id']);
-            СonsoleModel::setAllUp($row['user_id'], $row['count']);
+        $users = СonsoleModel::allUsers();
+        foreach ($users as $ind => $row) {
+            $row['count']   =  СonsoleModel::allUp($row['id']);
+            СonsoleModel::setAllUp($row['id'], $row['count']);
         }
 
         self::consoleRedirect();
@@ -33,8 +33,8 @@ class СonsoleController extends MainController
     {
         $users = СonsoleModel::getTrustLevel(0);
         foreach ($users as $ind => $row) {
-            if ($row['user_up_count'] > 2) {
-                СonsoleModel::setTrustLevel($row['user_id'], 1);
+            if ($row['up_count'] > 2) {
+                СonsoleModel::setTrustLevel($row['id'], 1);
             }
         }
 

@@ -10,7 +10,7 @@
     </div>
     <div class="gray-400 text-sm italic mb15">
       <?= $page['post_modified']; ?>
-      <?php if (UserData::checkAdmin() || $page['post_user_id'] == $uid['user_id']) { ?>
+      <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
         <a class="text-sm gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
           <i class="bi bi-pencil"></i>
         </a>
@@ -23,7 +23,7 @@
   <?php } ?>
 </article>
 <div class="p15 m15 hidden">
-  <?= votes($uid['user_id'], $page, 'post', 'ps', 'text-2xl middle', 'block'); ?>
+  <?= votes($user['id'], $page, 'post', 'ps', 'text-2xl middle', 'block'); ?>
 </div>
 <div class="bg-gray-100 p60 hidden mt15 mb-pl-0 mb-pr-0">
   <div class="m15 pb15">

@@ -7,15 +7,15 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Validation, UploadImage, Translate;
+use Validation, UploadImage, Translate, Tpl;
 
 class EditFacetController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid  = UserData::getUid();
+        $this->user  = UserData::get();
     }
 
     // Форма редактирования Topic or Blog
@@ -26,7 +26,7 @@ class EditFacetController extends MainController
         pageError404($facet);
 
         // Доступ получает только автор и админ
-        if ($facet['facet_user_id'] != $this->uid['user_id'] && !UserData::checkAdmin()) {
+        if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
             redirect('/');
         }
 
@@ -34,11 +34,10 @@ class EditFacetController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
-        return agRender(
+        return Tpl::agRender(
             '/facets/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit') . ' | ' . $facet['facet_title']),
-                'uid'   => $this->uid,
                 'data'  => [
                     'facet'             => $facet,
                     'low_matching'      => FacetModel::getLowMatching($facet['facet_id']),
@@ -74,7 +73,7 @@ class EditFacetController extends MainController
         pageError404($facet);
 
         // Доступ получает только автор и админ
-        if ($facet['facet_user_id'] != $this->uid['user_id'] && !UserData::checkAdmin()) {
+        if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
             redirect('/');
         }
 
@@ -203,15 +202,14 @@ class EditFacetController extends MainController
         pageError404($facet);
 
         // Доступ получает только автор и админ
-        if ($facet['facet_user_id'] != $this->uid['user_id'] && !UserData::checkAdmin()) {
+        if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
             redirect('/');
         }
 
-        return agRender(
+        return Tpl::agRender(
             '/facets/edit-pages',
             [
                 'meta'  => meta($m = [], Translate::get('edit') . ' | ' . $facet['facet_title']),
-                'uid'   => $this->uid,
                 'data'  => [
                     'facet' => $facet,
                     'pages' => (new \App\Controllers\PageController())->last($facet['facet_id']),

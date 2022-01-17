@@ -1,8 +1,7 @@
-<?= import(
+<?= Tpl::import(
   '/content/admin/menu',
   [
     'data'  => $data,
-    'uid'   => $uid,
     'menus' => [
       [
         'id' => $data['type'] . '.all',
@@ -27,9 +26,9 @@
       </a>
       <div id="comment_<?= $comment['comment_id']; ?>">
         <div class="text-sm gray">
-          <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'w20 h20 mr5'); ?>
-          <a class="date mr5" href="<?= getUrlByName('profile', ['login' => $comment['user_login']]); ?>">
-            <?= $comment['user_login']; ?>
+          <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'w20 h20 mr5'); ?>
+          <a class="date mr5" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
+            <?= $comment['login']; ?>
           </a>
           <span class="date mr5">
             <?= $comment['date']; ?>
@@ -46,7 +45,7 @@
         </div>
         <div class="br-bottom mb15 mt5 pb10 text-sm hidden gray">
           <span class="left mt5">
-            <?= votes($uid['user_id'], $comment, 'comment', 'ps', 'mr5'); ?>
+            <?= votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
           </span>
           <span id="cm_dell" class="right comment_link text-sm">
             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">

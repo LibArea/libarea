@@ -53,7 +53,7 @@ class RssModel extends MainModel
                     post_url_domain,
                     post_is_deleted,
                     rel.*,
-                    user_id, user_login, user_avatar
+                    id, login, avatar
                         FROM posts
                         LEFT JOIN
                         (
@@ -70,7 +70,7 @@ class RssModel extends MainModel
                                 GROUP BY relation_post_id  
                         ) AS rel
                             ON rel.relation_post_id = post_id 
-                            INNER JOIN users ON user_id = post_user_id
+                            INNER JOIN users ON id = post_user_id
                                 WHERE facet_list LIKE :qa
                                 AND post_is_deleted = 0 AND post_tl = 0 AND post_draft != 1 
                                 ORDER BY post_top DESC, post_date DESC LIMIT 1000";

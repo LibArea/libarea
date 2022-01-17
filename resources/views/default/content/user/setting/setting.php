@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -13,7 +13,7 @@
 
   <div class="bg-white flex flex-row center items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
-    <?= import('/content/user/setting/nav', ['data' => $data, 'uid' => $uid]); ?>
+    <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
   </div>
 
   <div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
@@ -21,29 +21,29 @@
       <?php csrf_field(); ?>
 
       <div class="mb20">
-        <?= user_avatar_img($data['user']['user_avatar'], 'small', $data['user']['user_login'], 'mr5 ml5 ava'); ?>
+        <?= user_avatar_img($data['user']['avatar'], 'small', $data['user']['login'], 'mr5 ml5 ava'); ?>
         <span class="mr5 ml5">
-          <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $uid['user_login']]); ?>">
-            <?= $data['user']['user_login']; ?>
+          <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+            <?= $data['user']['login']; ?>
           </a>
         </span>
       </div>
 
       <div class="mb20">
         <span class="name gray">E-mail:</span>
-        <span class="mr5 ml5"><?= $data['user']['user_email']; ?></span>
+        <span class="mr5 ml5"><?= $data['user']['email']; ?></span>
       </div>
 
-      <?= import(
+      <?= Tpl::import(
         '/_block/form/field-input',
         [
-          'uid'  => $uid,
+          'user'  => $user,
           'data' => [
             [
               'title'   => Translate::get('name'),
               'type'    => 'text',
               'name'    => 'name',
-              'value'   => $data['user']['user_name'],
+              'value'   => $data['user']['name'],
               'min'     => 3,
               'max'     => 11,
               'help'    => '3 - 11 ' . Translate::get('characters'),
@@ -54,30 +54,30 @@
         ]
       ); ?>
 
-      <?php import('/_block/editor/textarea', [
+      <?php Tpl::import('/_block/editor/textarea', [
         'title'     => Translate::get('about me'),
         'type'      => 'text',
         'name'      => 'about',
-        'content'   => $data['user']['user_about'],
+        'content'   => $data['user']['about'],
         'min'       => 0,
         'max'       => 255,
         'help'      => '0 - 255 ' . Translate::get('characters'),
-        'uid'       => $uid
+        'user'       => $user
       ]); ?>
 
       <div id="box" class="mb20">
         <label class="block" for="post_content"><?= Translate::get('color'); ?></label>
-        <input type="color" value="<?= $data['user']['user_color']; ?>" id="colorPicker">
-        <input type="hidden" name="color" value="<?= $data['user']['user_color']; ?>" id="color">
+        <input type="color" value="<?= $data['user']['color']; ?>" id="colorPicker">
+        <input type="hidden" name="color" value="<?= $data['user']['color']; ?>" id="color">
       </div>
 
       <div class="mb20 max-w640">
         <label class="block mb5" for="template">
           <?= Translate::get('template'); ?>
         </label>
-        <select class="w-100 h30" name="user_template">
+        <select class="w-100 h30" name="template">
           <?php foreach (Config::get('general.templates') as $tpl) { ?>
-            <option <?php if ($data['user']['user_template'] == $tpl) { ?>selected<?php } ?> value="<?= $tpl; ?>">
+            <option <?php if ($data['user']['template'] == $tpl) { ?>selected<?php } ?> value="<?= $tpl; ?>">
               <?= Translate::get($tpl); ?>
             </option>
           <?php } ?>
@@ -86,9 +86,9 @@
 
       <div class="mb20 max-w640">
         <label class="block mb5" for="post_content"><?= Translate::get('language'); ?></label>
-        <select class="w-100 h30" name="user_lang">
+        <select class="w-100 h30" name="lang">
           <?php foreach (Config::get('general.languages') as $lang) {  ?>
-            <option <?php if ($data['user']['user_lang'] == $lang) { ?>selected<?php } ?> value="<?= $lang; ?>">
+            <option <?php if ($data['user']['lang'] == $lang) { ?>selected<?php } ?> value="<?= $lang; ?>">
               <?= Translate::get($lang . '-language'); ?>
             </option>
           <?php } ?>
@@ -113,4 +113,4 @@
     </form>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-setting'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-setting')]); ?>

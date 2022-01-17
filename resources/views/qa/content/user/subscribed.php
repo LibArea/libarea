@@ -6,7 +6,7 @@
       <?= tabs_nav(
         'nav',
         $data['sheet'],
-        $uid,
+        $user,
         $pages = [
           [
             'id'    => 'favorites',
@@ -26,7 +26,7 @@
     </ul>
   </div>
   <div class="mt10">
-    <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+    <?= Tpl::import('/_block/post', ['data' => $data]); ?>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-preferences'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-preferences')]); ?>

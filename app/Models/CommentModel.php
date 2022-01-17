@@ -8,19 +8,10 @@ use PDO;
 
 class CommentModel extends MainModel
 {
+    // Adding a comment
     // Добавляем комментарий
-    public static function addComment($data)
+    public static function add($params)
     {
-        $params = [
-            'comment_post_id'       => $data['comment_post_id'],
-            'comment_answer_id'     => $data['comment_answer_id'],
-            'comment_comment_id'    => $data['comment_comment_id'],
-            'comment_content'       => $data['comment_content'],
-            'comment_published'     => $data['comment_published'],
-            'comment_ip'            => $data['comment_ip'],
-            'comment_user_id'       => $data['comment_user_id'],
-        ];
-
         $sql = "INSERT INTO comments(comment_post_id, 
                                         comment_answer_id, 
                                         comment_comment_id, 
@@ -43,17 +34,29 @@ class CommentModel extends MainModel
         $last_id        =   $sql_last_id['last_id'];
 
         // Отмечаем комментарий, что за ним есть ответ
-        self::setThereComment($last_id, $data['comment_comment_id']);
+        self::setThereComment($last_id, $params['comment_comment_id']);
 
         $sql     = "SELECT * FROM answers WHERE answer_id = :comment_answer_id";
-        $answer  = DB::run($sql, ['comment_answer_id' => $data['comment_answer_id']])->fetch(PDO::FETCH_ASSOC);
+        $answer  = DB::run($sql, ['comment_answer_id' => $params['comment_answer_id']])->fetch(PDO::FETCH_ASSOC);
 
         if ($answer['answer_after'] == 0) {
 
-            self::setThereAnswer($last_id, $data['comment_answer_id']);
+            self::setThereAnswer($last_id, $params['comment_answer_id']);
         }
 
         return $last_id;
+    }
+
+    // Editing a comment
+    // Редактируем комментарий
+    public static function edit($params)
+    {
+        $sql = "UPDATE comments SET 
+                    comment_content     = :comment_content,
+                    comment_modified    = :comment_modified
+                         WHERE comment_id = :comment_id";
+
+        return DB::run($sql, $params);
     }
 
     // Отметим комментарий, что за ним есть ответ
@@ -74,13 +77,13 @@ class CommentModel extends MainModel
     }
 
     // Все комментарии
-    public static function getCommentsAll($page, $limit, $uid, $sheet)
+    public static function getCommentsAll($page, $limit, $user, $sheet)
     {
         if ($sheet == 'user') {
-            if (!$uid['user_trust_level']) {
+            if (!$user['trust_level']) {
                 $tl = 'AND comment_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0';
             } else {
-                $tl = 'AND comment_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $uid['user_trust_level'] . '';
+                $tl = 'AND comment_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $user['trust_level'] . '';
             }
             $sort = '';
         } else {
@@ -109,18 +112,18 @@ class CommentModel extends MainModel
                     comment_is_deleted,
                     votes_comment_item_id, 
                     votes_comment_user_id,
-                    user_id, 
-                    user_login, 
-                    user_avatar
+                    id, 
+                    login, 
+                    avatar
                         FROM comments 
-                        JOIN users ON user_id = comment_user_id
+                        JOIN users ON id = comment_user_id
                         JOIN posts ON comment_post_id = post_id " . $tl . "
                         LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
-                            AND votes_comment_user_id = :user_id
+                            AND votes_comment_user_id = :uid
                         $sort
                         ORDER BY comment_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $user['id']])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество комментариев 
@@ -141,7 +144,7 @@ class CommentModel extends MainModel
     }
 
     // Получаем комментарии к ответу
-    public static function getComments($answer_id, $user_id)
+    public static function getComments($answer_id, $uid)
     {
         $sql = "SELECT 
                     comment_id,
@@ -157,20 +160,20 @@ class CommentModel extends MainModel
                     comment_is_deleted,
                     votes_comment_item_id, 
                     votes_comment_user_id,
-                    user_id, 
-                    user_login, 
-                    user_avatar
+                    id, 
+                    login, 
+                    avatar
                         FROM comments 
-                        LEFT JOIN users  ON user_id = comment_user_id
+                        LEFT JOIN users  ON id = comment_user_id
                         LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 
-                        AND votes_comment_user_id = :user_id
-                        WHERE comment_answer_id = " . $answer_id;
+                        AND votes_comment_user_id = :uid
+                            WHERE comment_answer_id = " . $answer_id;
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Страница комментариев участника
-    public static function userComments($page, $limit, $user_id, $uid_id)
+    public static function userComments($page, $limit, $uid, $id)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
@@ -190,32 +193,32 @@ class CommentModel extends MainModel
                     post_slug,
                     post_title,
                     post_is_deleted,
-                    user_id, 
-                    user_login, 
-                    user_avatar
+                    id, 
+                    login, 
+                    avatar
                         FROM comments 
-                        LEFT JOIN users  ON user_id = comment_user_id
+                        LEFT JOIN users  ON id = comment_user_id
                         LEFT JOIN posts  ON comment_post_id = post_id 
                         LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id
-                        AND votes_comment_user_id = :uid_id
-                            WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
+                        AND votes_comment_user_id = :id
+                            WHERE comment_user_id = :uid AND comment_is_deleted = 0 
                                 AND post_is_deleted = 0 AND post_tl = 0
                                     ORDER BY comment_id DESC LIMIT $start, $limit";
 
-        return DB::run($sql, ['user_id' => $user_id, 'uid_id' => $uid_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid, 'id' => $id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество комментариев участника
-    public static function userCommentsCount($user_id)
+    public static function userCommentsCount($uid)
     {
         $sql = "SELECT 
                     comment_id
                         FROM comments 
                         LEFT JOIN posts  ON comment_post_id = post_id 
-                            WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
+                            WHERE comment_user_id = :uid AND comment_is_deleted = 0 
                                 AND post_is_deleted = 0 AND post_tl = 0";
 
-        return DB::run($sql, ['user_id' => $user_id])->rowCount();
+        return DB::run($sql, ['uid' => $uid])->rowCount();
     }
 
     // Получаем комментарий по id комментария
@@ -230,16 +233,5 @@ class CommentModel extends MainModel
                         FROM comments WHERE comment_id = :comment_id";
 
         return DB::run($sql, ['comment_id' => $comment_id])->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Редактируем комментарий
-    public static function CommentEdit($comment_id, $comment)
-    {
-        $sql = "UPDATE comments SET 
-                    comment_content     = :comment,
-                    comment_modified    = :data
-                         WHERE comment_id = :comment_id";
-
-        return DB::run($sql, ['comment_id' => $comment_id, 'comment' => $comment, 'data' => date("Y-m-d H:i:s")]);
     }
 }

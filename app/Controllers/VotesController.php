@@ -9,11 +9,11 @@ use App\Models\VotesModel;
 
 class VotesController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid = UserData::getUid();
+        $this->user = UserData::get();
     }
 
     public function index()
@@ -30,17 +30,17 @@ class VotesController extends MainController
         // We check that the participant does not vote for their content
         // $type = post / answer / comment / item
         $author_id = VotesModel::authorId($up_id, $type);
-        if ($this->uid['user_id'] == $author_id) return false;
+        if ($this->user['id'] == $author_id) return false;
 
         // Проверяем, голосовал ли пользователь
         // We check whether the user voted
-        $info = VotesModel::voteStatus($up_id, $this->uid['user_id'], $type);
+        $info = VotesModel::voteStatus($up_id, $this->user['id'], $type);
         if ($info) return false;
 
         $date = date("Y-m-d H:i:s");
         $ip = Request::getRemoteAddress();
 
-        VotesModel::saveVote($up_id, $ip, $this->uid['user_id'], $date, $type);
+        VotesModel::saveVote($up_id, $ip, $this->user['id'], $date, $type);
         VotesModel::saveVoteContent($up_id, $type);
 
         return true;

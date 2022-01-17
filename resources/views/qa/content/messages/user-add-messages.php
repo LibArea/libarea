@@ -1,8 +1,8 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
     <h1 class="mt0 mb10 text-2xl font-normal">
-      <?= Translate::get('send a message'); ?>  <?= $uid['user_login']; ?> / <?= $data['login']; ?>
-      <a class="right text-sm" href="<?= getUrlByName('profile', ['login' => $uid['user_login']]); ?>/messages"><?= Translate::get('all messages'); ?></a>
+      <?= Translate::get('send a message'); ?>  <?= $user['login']; ?> / <?= $data['login']; ?>
+      <a class="right text-sm" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>/messages"><?= Translate::get('all messages'); ?></a>
     </h1>
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
@@ -12,4 +12,4 @@
     </form>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('under development'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('under development')]); ?>

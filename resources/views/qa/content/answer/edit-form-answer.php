@@ -11,10 +11,10 @@
   <form action="<?= getUrlByName('answer.edit.pr'); ?>" accept-charset="UTF-8" method="post">
     <?= csrf_field() ?>
 
-    <?= import('/_block/editor/editor', [
+    <?= Tpl::import('/_block/editor/editor', [
       'height'    => '350px',
       'preview'   => 'vertical',
-      'uid'       => $uid,
+      'user'       => $user,
       'content'   => $data['content'],
     ]); ?>
 

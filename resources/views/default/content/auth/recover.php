@@ -4,8 +4,7 @@
   <form class="form max-w300" action="<?= getUrlByName('recover'); ?>/send" method="post">
     <?php csrf_field(); ?>
 
-    <?= import('/_block/form/field-input', [
-      'uid'  => $uid,
+    <?= Tpl::import('/_block/form/field-input', [
       'data' => [
         [
           'title' => Translate::get('E-mail'),
@@ -16,7 +15,7 @@
       ]
     ]); ?>
 
-    <?= import('/_block/captcha', ['uid'  => $uid]); ?>
+    <?= Tpl::import('/_block/captcha'); ?>
 
     <div class="mb20">
       <?= sumbit(Translate::get('reset')); ?>

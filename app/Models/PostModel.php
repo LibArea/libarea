@@ -9,35 +9,8 @@ use PDO;
 class PostModel extends MainModel
 {
     // Добавляем пост
-    public static function addPost($data)
+    public static function addPost($params)
     {
-        $result = self::getSlug($data['post_slug']);
-        if ($result) {
-            $data['post_slug'] =  $data['post_slug'] . "-";
-        }
-
-        $params = [
-            'post_title'        =>  $data['post_title'],
-            'post_content'      =>  $data['post_content'],
-            'post_content_img'  =>  $data['post_content_img'],
-            'post_thumb_img'    =>  $data['post_thumb_img'],
-            'post_related'      =>  $data['post_related'],
-            'post_merged_id'    =>  $data['post_merged_id'],
-            'post_tl'           =>  $data['post_tl'],
-            'post_slug'         =>  $data['post_slug'],
-            'post_feature'      =>  $data['post_feature'],
-            'post_type'         =>  $data['post_type'],
-            'post_translation'  =>  $data['post_translation'],
-            'post_draft'        =>  $data['post_draft'],
-            'post_ip'           =>  $data['post_ip'],
-            'post_published'    =>  $data['post_published'],
-            'post_user_id'      =>  $data['post_user_id'],
-            'post_closed'       =>  $data['post_closed'],
-            'post_top'          =>  $data['post_top'],
-            'post_url'          =>  $data['post_url'],
-            'post_url_domain'   =>  $data['post_url_domain'],
-        ];
-
         $sql = "INSERT INTO posts(post_title, 
                                     post_content, 
                                     post_content_img,
@@ -95,7 +68,7 @@ class PostModel extends MainModel
     }
 
     // Полная версия поста  
-    public static function getPost($params, $name, $uid)
+    public static function getPost($params, $name, $user)
     {
         $sort = "post_id = :params";
         if ($name == 'slug') {
@@ -132,32 +105,32 @@ class PostModel extends MainModel
                     post_url_domain,
                     post_hits_count,
                     post_is_deleted,
-                    user_id,
-                    user_login,
-                    user_avatar,
-                    user_my_post,
+                    id,
+                    login,
+                    avatar,
+                    my_post,
                     votes_post_item_id,
                     votes_post_user_id,
                     favorite_tid, 
                     favorite_user_id, 
                     favorite_type
                         FROM posts
-                        LEFT JOIN users ON user_id = post_user_id
-                        LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :user_id AND favorite_type = 1 
-                        LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
+                        LEFT JOIN users ON id = post_user_id
+                        LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :id AND favorite_type = 1 
+                        LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :id
                             WHERE $sort AND post_tl <= :trust_level";
 
-        $data = ['params' => $params, 'user_id' => $uid['user_id'], 'trust_level' => $uid['user_trust_level']];
+        $data = ['params' => $params, 'id' => $user['id'], 'trust_level' => $user['trust_level']];
 
         return DB::run($sql, $data)->fetch(PDO::FETCH_ASSOC);
     }
 
     // Рекомендованные посты
-    public static function postsSimilar($post_id, $uid, $limit)
+    public static function postsSimilar($post_id, $user, $limit)
     {
 
-        $tl = $uid['user_trust_level'];
-        if ($uid['user_trust_level'] == null) {
+        $tl = $user['trust_level'];
+        if ($user['trust_level'] == null) {
             $tl = 0;
         }
 
@@ -177,10 +150,10 @@ class PostModel extends MainModel
                                 AND post_is_deleted = 0
                                 AND post_draft = 0
                                 AND post_tl <= :tl 
-                                AND post_user_id != :user_id
+                                AND post_user_id != :id
                                 ORDER BY post_id DESC LIMIT $limit";
 
-        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $uid['user_id'], 'tl' => $tl])->fetchall(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['post_id' => $post_id, 'id' => $user['id'], 'tl' => $tl])->fetchall(PDO::FETCH_ASSOC);
     }
 
     // Пересчитываем количество
@@ -280,17 +253,17 @@ class PostModel extends MainModel
     // Добавить пост в профиль
     public static function addPostProfile($post_id, $user_id)
     {
-        $sql = "UPDATE users SET user_my_post = :post_id WHERE user_id = :user_id";
+        $sql = "UPDATE users SET my_post = :post_id WHERE id = :id";
 
-        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id]);
+        return DB::run($sql, ['post_id' => $post_id, 'id' => $user_id]);
     }
 
     // Удаление поста в профиле
     public static function deletePostProfile($post_id, $user_id)
     {
-        $sql = "UPDATE users SET user_my_post = :my_post_id WHERE user_id = :user_id AND user_my_post = :post_id";
+        $sql = "UPDATE users SET my_post = :my_post_id WHERE id = :id AND my_post = :post_id";
 
-        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id, 'my_post_id' => 0]);
+        return DB::run($sql, ['post_id' => $post_id, 'id' => $user_id, 'my_post_id' => 0]);
     }
 
     // Удален пост или нет
@@ -325,10 +298,10 @@ class PostModel extends MainModel
                     signed_user_id
                         FROM facets  
                         INNER JOIN facets_posts_relation ON relation_facet_id = facet_id
-                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id
+                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :id
                             WHERE relation_post_id  = :post_id AND facet_type = '$condition'";
 
-        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['post_id' => $post_id, 'id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -345,7 +318,6 @@ class PostModel extends MainModel
         return DB::run($sql, ['post_id' => $post_id, 'type' => $type])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     public static function getPostLastUser($post_id)
     {
         $sql = "SELECT
@@ -354,11 +326,11 @@ class PostModel extends MainModel
                     answer_user_id,
                     answer_date,
                     answer_id,
-                    user_id,
-                    user_login,
-                    user_avatar
+                    id,
+                    login,
+                    avatar
                         FROM answers 
-                        LEFT JOIN users ON user_id = answer_user_id                        
+                        LEFT JOIN users ON id = answer_user_id                        
                             WHERE answer_post_id = :post_id
                             ORDER BY answer_date DESC";
 

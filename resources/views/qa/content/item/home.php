@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 <div class="hidden lowercase ml-auto">
-                  <?= votes($uid['user_id'], $item, 'item', 'ps', 'mr5'); ?>
+                  <?= votes($user['id'], $item, 'item', 'ps', 'mr5'); ?>
                 </div>
               </div>
             </div>
@@ -92,4 +92,4 @@
   </div>
 </main>
 </div>
-<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
+<?= Tpl::import('/_block/wide-footer'); ?>

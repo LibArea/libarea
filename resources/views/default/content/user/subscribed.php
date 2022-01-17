@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -17,7 +17,7 @@
       <?= tabs_nav(
         'nav',
         $data['sheet'],
-        $uid,
+        $user,
         $pages = [
           [
             'id'    => 'favorites',
@@ -37,7 +37,7 @@
     </ul>
   </div>
   <div class="mt10">
-    <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+    <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-preferences'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-preferences')]); ?>

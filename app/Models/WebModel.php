@@ -10,7 +10,7 @@ class WebModel extends MainModel
 {
     // All sites
     // Все сайты
-    public static function getItemsAll($page, $limit, $user_id)
+    public static function getItemsAll($page, $limit, $uid)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT
@@ -43,11 +43,11 @@ class WebModel extends MainModel
                         ) AS rel
                             ON rel.relation_item_id = item_id 
 
-                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = $user_id
+                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid
                         WHERE item_is_deleted = 0
                         ORDER BY item_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getItemsAllCount()
@@ -81,7 +81,7 @@ class WebModel extends MainModel
 
     // Получаем домены по условиям
     // https://systemrequest.net/index.php/123/
-    public static function feedItem($page, $limit, $facets, $uid, $topic_id, $type)
+    public static function feedItem($page, $limit, $facets, $user, $topic_id, $type)
     {
         $result = [];
         foreach ($facets as $ind => $row) {
@@ -113,7 +113,7 @@ class WebModel extends MainModel
                     item_is_deleted,
                     rel.*,
                     votes_item_item_id, votes_item_user_id,
-                    user_id, user_login, user_avatar
+                    id, login, avatar
   
                         FROM facets_items_relation 
                         LEFT JOIN items ON relation_item_id = item_id
@@ -128,13 +128,13 @@ class WebModel extends MainModel
                                     GROUP BY relation_item_id
                         ) AS rel
                              ON rel.relation_item_id = item_id
-                            LEFT JOIN users ON user_id = item_user_id
+                            LEFT JOIN users ON id = item_user_id
                             LEFT JOIN votes_item 
-                                ON votes_item_item_id = item_id AND votes_item_user_id = :user_id
+                                ON votes_item_item_id = item_id AND votes_item_user_id = :uid
 
                                 WHERE $string $sort LIMIT $start, $limit";
 
-        return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $user['id']])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function feedItemCount($facets, $topic_id)
@@ -176,7 +176,7 @@ class WebModel extends MainModel
 
     // Check if the domain exists 
     // Проверим наличие домена
-    public static function getItemOne($domain, $user_id)
+    public static function getItemOne($domain, $uid)
     {
         $sql = "SELECT
                     item_id,
@@ -198,32 +198,17 @@ class WebModel extends MainModel
                     votes_item_user_id, 
                     votes_item_item_id
                         FROM items 
-                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :user_id
+                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid
                         WHERE item_url_domain = :domain AND item_is_deleted = 0";
 
 
-        return DB::run($sql, ['domain' => $domain, 'user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['domain' => $domain, 'uid' => $uid])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Add a domain
     // Добавим домен
-    public static function add($data)
+    public static function add($params)
     {
-        $params = [
-            'item_url'          => $data['item_url'],
-            'item_url_domain'   => $data['item_url_domain'],
-            'item_title_url'    => $data['item_title_url'],
-            'item_content_url'  => $data['item_content_url'],
-            'item_published'    => $data['item_published'],
-            'item_user_id'      => $data['item_user_id'],
-            'item_type_url'     => $data['item_type_url'],
-            'item_status_url'   => $data['item_status_url'],
-            'item_is_soft'      => 0,
-            'item_is_github'    => 0,
-            'item_votes'        => 0,
-            'item_count'        => 1,
-        ];
-
         $sql = "INSERT INTO items(item_url, 
                             item_url_domain, 
                             item_title_url, 
@@ -263,23 +248,8 @@ class WebModel extends MainModel
         DB::run($sql, ['domain' => $domain]);
     }
 
-    public static function edit($data)
+    public static function edit($params)
     {
-        $params = [
-            'item_url'          => $data['item_url'],
-            'item_title_url'    => $data['item_title_url'],
-            'item_content_url'  => $data['item_content_url'],
-            'item_title_soft'   => $data['item_title_soft'],
-            'item_content_soft' => $data['item_content_soft'],
-            'item_published'    => $data['item_published'],
-            'item_status_url'   => $data['item_status_url'],
-            'item_is_soft'      => $data['item_is_soft'],
-            'item_is_github'    => $data['item_is_github'],
-            'item_github_url'   => $data['item_github_url'],
-            'item_post_related' => $data['item_post_related'],
-            'item_id'           => $data['item_id'],
-        ];
-
         $sql = "UPDATE items 
                     SET item_url        = :item_url,  
                     item_title_url      = :item_title_url, 
@@ -292,7 +262,6 @@ class WebModel extends MainModel
                     item_is_github      = :item_is_github,
                     item_github_url     = :item_github_url,
                     item_post_related   = :item_post_related
-
                         WHERE item_id   = :item_id";
 
         return  DB::run($sql, $params);

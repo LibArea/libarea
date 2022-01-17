@@ -361,6 +361,7 @@ $data = [
     'pass-match-err'        => 'Parola nepotrivită',
     'user-already'          => 'Utilizatorul este deja pe site',
     'invate-to-replay'      => 'Ați trimis deja o invitație acestui utilizator',
+    'invate.limit.stop'     => 'Ați epuizat numărul de invitații',
     'registration by invite' => 'Înregistrare prin invitație',
     'breaking the rules'    => 'Încălcând regulile',
 
@@ -477,8 +478,8 @@ $data = [
     'format-cover-post'                     => 'Lățime mai mare de 500 px. Orientare orizontală',
 
     'email.password.not.correct'            => 'E-mailul sau parola nu sunt corecte',
-    'your account is not activated'         => 'Contul dvs. nu este activat',
-    'your account is under review'          => 'Contul dvs. este în așteptare',
+    'account.not.activated'                 => 'Contul dvs. nu este activat',
+    'account.being.verified'                => 'Contul dvs. este în așteptare',
     'email.correctness'                     => 'E-mail invalid',
     'email.no.site'                         => 'Acest e-mail nu se află pe site',
     'the command is executed'               => 'Comanda este executată',
@@ -543,7 +544,8 @@ $data = [
     'tl2.title'                 => 'Membru',
     'tl3.title'                 => 'Rezident',
     'tl4.title'                 => 'Lider',
-    'tl5.title'                 => 'Personal',
+    'tl5.title'                 => 'Regulat',
+    'tl10.title'                => 'Personal',
 ];
 
 return $data;

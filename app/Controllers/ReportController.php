@@ -10,11 +10,11 @@ use Config, Translate;
 
 class ReportController extends MainController
 {
-    private $uid;
+    private $user;
 
     public function __construct()
     {
-        $this->uid = UserData::getUid();
+        $this->user = UserData::get();
     }
 
     public function index()
@@ -24,12 +24,12 @@ class ReportController extends MainController
         $content_id     = Request::getPostInt('content_id');
 
         // Ограничим флаги
-        if ($this->uid['user_trust_level'] == Config::get('trust-levels.tl_stop_report')) return 1;
+        if ($this->user['trust_level'] == Config::get('trust-levels.tl_stop_report')) return 1;
 
-        $num_report =  ReportModel::getSpeed($this->uid['user_id']);
+        $num_report =  ReportModel::getSpeed($this->user['id']);
         if ($num_report > Config::get('trust-levels.all_stop_report')) return 1;
 
-        $post   = PostModel::getPost($post_id, 'id', $this->uid);
+        $post   = PostModel::getPost($post_id, 'id', $this->user);
         pageError404($post);
 
         $type_id = 'comment_' . $content_id;
@@ -44,15 +44,16 @@ class ReportController extends MainController
         // Admin notification 
         NotificationsModel::send(
             [
-                'sender_id'     => $this->uid['user_id'],
-                'recipient_id'  => 1,  // admin
-                'action_type'   => 20, // Система флагов  
-                'url'           => $url,
+                'notification_sender_id'    => $this->user['id'],
+                'notification_recipient_id' => 1,  // admin
+                'notification_action_type'  => 20, // Система флагов  
+                'notification_url'          => $url,
+                'notification_read_flag'    => 0,
             ]
         );
 
         $data = [
-            'report_user_id'    => $this->uid['user_id'],
+            'report_user_id'    => $this->user['id'],
             'report_type'       => $content_type,
             'report_content_id' => $content_id,
             'report_reason'     => Translate::get('breaking the rules'),

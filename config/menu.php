@@ -3,7 +3,7 @@
  * Файл конфигурации меню
  * Menu configuration file
  */
-$account = \UserData::getUid();
+$account = \UserData::get();
 return [
 
     // Left general menu
@@ -55,7 +55,7 @@ return [
             'id'    => 'favorites',
         ], [
             'auth'  => true,
-            'tl'    => 4,
+            'tl'    => 9,
             'url'   => getUrlByName('admin.users'),
             'title' => Translate::get('admin'),
             'icon'  => 'bi bi-person-x',
@@ -67,52 +67,58 @@ return [
     // Правое выпадающее меню в шапке сайта
     'user' => [
         [
-            'url'   => getUrlByName('profile', ['login' => $account['user_login'] ?? 'none']),
-            'title'  => Translate::get('profile'),
+            'url'   => getUrlByName('profile', ['login' => $account['login'] ?? 'none']),
+            'title' => Translate::get('profile'),
             'icon'  => 'bi bi-person',
             'id'    => '',
         ], [
             'url'   => getUrlByName('setting'),
-            'title'  => Translate::get('settings'),
+            'title' => Translate::get('settings'),
             'icon'  => 'bi bi-gear',
             'id'    => '',
         ], [
+            'auth'  => true,
+            'tl'    => 1,
             'url'   => getUrlByName('drafts'),
-            'title'  => Translate::get('drafts'),
+            'title' => Translate::get('drafts'),
             'icon'  => 'bi bi-pencil-square',
             'id'    => '',
         ], [
             'url'   => getUrlByName('notifications'),
-            'title'  => Translate::get('notifications'),
+            'title' => Translate::get('notifications'),
             'icon'  => 'bi bi-app-indicator',
-            'id'  => '',
+            'id'    => '',
         ], [
+            'auth'  => true,
+            'tl'    => 1,
             'url'   => getUrlByName('messages'),
-            'title'  => Translate::get('messages'),
+            'title' => Translate::get('messages'),
             'icon'  => 'bi bi-envelope',
             'id'    => '',
         ], [
             'url'   => getUrlByName('favorites'),
-            'title'  => Translate::get('favorites'),
+            'title' => Translate::get('favorites'),
             'icon'  => 'bi bi-bookmark',
             'id'    => '',
         ], [
+            'auth'  => true,
+            'tl'    => 1,
             'url'   => getUrlByName('invitations'),
-            'title'  => Translate::get('invites'),
+            'title' => Translate::get('invites'),
             'icon'  => 'bi bi-person-plus',
             'id'    => '',
         ], [
-            'hr'   => 'hr',
+            'hr'    => 'hr',
         ], [
             'auth'  => true,
-            'tl'    => 4,
+            'tl'    => 9,
             'url'   => getUrlByName('admin'),
-            'title'  => Translate::get('admin'),
+            'title' => Translate::get('admin'),
             'icon'  => 'bi bi-shield-exclamation',
             'id'    => '',
         ], [
             'url'   => getUrlByName('logout'),
-            'title'  => Translate::get('sign out'),
+            'title' => Translate::get('sign out'),
             'icon'  => 'bi bi-box-arrow-right',
             'id'    => '',
         ],

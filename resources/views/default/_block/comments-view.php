@@ -16,10 +16,10 @@
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="answ-telo">
                 <div class="flex text-sm">
-                  <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['user_login']]); ?>">
-                    <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w20 h20'); ?>
+                  <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
+                    <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20'); ?>
                     <span class="mr5 ml5">
-                      <?= $answer['user_login']; ?>
+                      <?= $answer['login']; ?>
                     </span>
                   </a>
                   <?php if ($post['post_user_id'] == $answer['answer_user_id']) { ?>
@@ -34,14 +34,14 @@
                     </span>
                   <?php } ?>
                   <a rel="nofollow" class="gray-400 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
-                  <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'uid' => $uid, 'publ' => $answer['answer_published']]); ?>
+                  <?= Tpl::import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
                 </div>
                 <div class="m0 max-w780">
                   <?= $answer['answer_content'] ?>
                 </div>
               </div>
               <div class="flex text-sm">
-                <?= votes($uid['user_id'], $answer, 'answer', 'ps', 'mr5'); ?>
+                <?= votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
 
                 <?php if ($post['post_closed'] == 0) { ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
@@ -49,7 +49,7 @@
                   <?php } ?>
                 <?php } ?>
 
-                <?php if (accessСheck($answer, 'answer', $uid, 1, 30) === true) { ?>
+                <?php if (accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
                   <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) { ?>
                     <a class="editansw gray-500 mr10 ml10" href="/answer/edit/<?= $answer['answer_id']; ?>"> 
                       <?= Translate::get('edit'); ?>
@@ -57,15 +57,15 @@
                   <?php } ?>
                 <?php } ?>
 
-                <?php if ($uid['user_trust_level'] == UserData::REGISTERED_ADMIN) { ?>
+                <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-500 ml10 mr5">
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
                 <?php } ?>
 
-                <?= favorite($uid['user_id'], $answer['answer_id'], 'answer', $answer['favorite_tid'], 'ps', 'ml5'); ?>
+                <?= favorite($user['id'], $answer['answer_id'], 'answer', $answer['favorite_tid'], 'ps', 'ml5'); ?>
 
-                <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
+                <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-500 ml15">
                     <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
                   </a>
@@ -77,12 +77,12 @@
 
         <?php } else { ?>
 
-          <?php if ($uid['user_trust_level'] == UserData::REGISTERED_ADMIN) { ?>
+          <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
             <ol class="bg-red-200 text-sm pr5 list-none">
               <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">
                   <?= $answer['answer_content']; ?>
-                  <?= Translate::get('answer'); ?> — <?= $answer['user_login']; ?>
+                  <?= Translate::get('answer'); ?> — <?= $answer['login']; ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action right">
                     <span><?= Translate::get('recover'); ?></span>
                   </a>
@@ -101,12 +101,12 @@
       <?php foreach ($answer['comm'] as  $comment) { ?>
 
         <?php if ($comment['comment_is_deleted'] == 1) { ?>
-          <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
+          <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
             <ol class="bg-red-200 text-sm list-none max-w780 <?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
                   <?= Content::text($comment['comment_content'], 'line'); ?>
-                  — <?= $comment['user_login']; ?>
+                  — <?= $comment['login']; ?>
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action right text-sm">
                     <?= Translate::get('recover'); ?>
                   </a>
@@ -122,10 +122,10 @@
               <div class="p5">
                 <div class="max-w780">
                   <div class="text-sm flex">
-                    <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['user_login']]); ?>">
-                      <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'w20 h20'); ?>
+                    <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
+                      <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'w20 h20'); ?>
                       <span class="mr5 ml5">
-                        <?= $comment['user_login']; ?>
+                        <?= $comment['login']; ?>
                       </span>
                     </a>
                     <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>
@@ -140,14 +140,14 @@
                       <a class="gray-400 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi bi-arrow-up"></i></a>
                     <?php } ?>
                     <a class="gray-400 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi bi-hash"></i></a>
-                    <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'uid' => $uid, 'publ' => $comment['comment_published']]); ?>
+                    <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
                   </div>
                   <div class="mt5 mb10">
                     <?= Content::text($comment['comment_content'], 'line'); ?>
                   </div>
                 </div>
                 <div class="text-sm flex">
-                  <?= votes($uid['user_id'], $comment, 'comment', 'ps', 'mr5'); ?>
+                  <?= votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
 
                   <?php if ($post['post_closed'] == 0) { ?>
                     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
@@ -157,7 +157,7 @@
                     <?php } ?>
                   <?php } ?>
 
-                  <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
+                  <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray mr10 ml10">
                       <?= Translate::get('edit'); ?>
                     </a>
@@ -166,7 +166,7 @@
                     </a>
                   <?php } ?>
 
-                  <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
+                  <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml15">
                       <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
                     </a>
@@ -182,7 +182,7 @@
   </div>
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
-    <?php if ($uid['user_id'] > 0) { ?>
+    <?php if ($user['id'] > 0) { ?>
       <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
     <?php } else { ?>
       <?= no_content(Translate::get('no-auth-login'), 'bi bi-info-lg'); ?>

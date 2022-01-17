@@ -8,28 +8,21 @@ use PDO;
 
 class AuthModel extends MainModel
 {
-    // Проверка Логина на дубликаты
-    public static function replayLogin($login)
+    // Check for repetitions  
+    // Проверка на повторы
+    public static function checkRepetitions($params, $type)
     {
-        $sql = "SELECT 
-                    user_login  
-                        FROM users 
-                        WHERE user_login = :login";
+        $sort = 'login = :params';
+        if ($type = 'email') {
+            $sort = 'login = :params';
+        }
 
-        return DB::run($sql, ['login' => $login])->fetch(PDO::FETCH_ASSOC);
+        $sql = "SELECT login, email FROM users WHERE $sort";
+
+        return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Проверка Email на дубликаты
-    public static function replayEmail($email)
-    {
-        $sql = "SELECT 
-                    user_email  
-                        FROM users 
-                        WHERE user_email = :email";
-
-        return DB::run($sql, ['email' => $email])->fetch(PDO::FETCH_ASSOC);
-    }
-
+    // Login is banned and the ban is not lifted, then ban and ip 
     // Login забанен и бан не снят, то запретить и ip
     public static function repeatIpBanRegistration($ip)
     {
@@ -42,7 +35,7 @@ class AuthModel extends MainModel
         return DB::run($sql, ['ip' => $ip])->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function getAuthTokenByUserId($user_id)
+    public static function getAuthTokenByUserId($uid)
     {
         $sql = "SELECT
                     auth_id,
@@ -51,46 +44,31 @@ class AuthModel extends MainModel
                     auth_hashedvalidator,
                     auth_expires
                         FROM users_auth_tokens
-                        WHERE auth_user_id = :user_id";
+                        WHERE auth_user_id = :uid";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function insertToken($data)
+    public static function insertToken($params)
     {
-        $params = [
-            'auth_user_id'          => $data['user_id'],
-            'auth_selector'         => $data['selector'],
-            'auth_hashedvalidator'  => $data['hashedvalidator'],
-            'auth_expires'          => $data['expires'],
-        ];
-
         $sql = "INSERT INTO users_auth_tokens(auth_user_id, auth_selector, auth_hashedvalidator, auth_expires) 
                        VALUES(:auth_user_id, :auth_selector, :auth_hashedvalidator, :auth_expires)";
 
         return DB::run($sql, $params);
     }
 
-    public static function updateToken($data, $user_id)
+    public static function updateToken($params)
     {
-        $params = [
-            'auth_user_id'          => $data['user_id'],
-            'auth_selector'         => $data['selector'],
-            'auth_hashedvalidator'  => $data['hashedvalidator'],
-            'auth_expires'          => $data['expires'],
-            'auth_user_id'          => $user_id,
-        ];
-
         $sql = "UPDATE users_auth_tokens 
-                    SET auth_user_id = :auth_user_id, 
-                        auth_selector = :auth_selector, 
-                        auth_hashedvalidator = :auth_hashedvalidator, 
-                        auth_expires = :auth_expires
-                            WHERE auth_user_id = :auth_user_id";
+                    SET auth_selector           = :auth_selector, 
+                        auth_hashedvalidator    = :auth_hashedvalidator, 
+                        auth_expires            = :auth_expires
+                            WHERE auth_user_id  = :auth_user_id";
 
         return DB::run($sql, $params);
     }
 
+    // Get an authentication token by selector 
     // Получаем токен аутентификации по селектору
     public static function getAuthTokenBySelector($selector)
     {
@@ -106,25 +84,20 @@ class AuthModel extends MainModel
         return DB::run($sql, ['auth_selector' => $selector])->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function UpdateSelector($data, $selector)
+    public static function UpdateSelector($params)
     {
-        $params = [
-            'auth_hashedvalidator'  => $data['hashedvalidator'],
-            'auth_expires'          => $data['expires'],
-            'auth_selector'         => $selector,
-        ];
-
         $sql = "UPDATE users_auth_tokens 
-                    SET auth_hashedvalidator = :auth_hashedvalidator,  auth_expires = :auth_expires
-                        WHERE auth_selector = :auth_selector";
+                    SET auth_hashedvalidator    = :auth_hashedvalidator,  
+                        auth_expires            = :auth_expires
+                            WHERE auth_selector = :auth_selector";
 
         return DB::run($sql, $params);
     }
 
-    public static function deleteTokenByUserId($user_id)
+    public static function deleteTokenByUserId($uid)
     {
-        $sql = "DELETE FROM users_auth_tokens WHERE auth_user_id = :user_id";
+        $sql = "DELETE FROM users_auth_tokens WHERE auth_user_id = :uid";
 
-        return DB::run($sql, ['user_id' => $user_id]);
+        return DB::run($sql, ['uid' => $uid]);
     }
 }

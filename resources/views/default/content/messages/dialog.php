@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -16,7 +16,7 @@
   <div class="mb15 mb-ml-0 hidden">
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
-      <input type="hidden" name="recipient" value="<?= $data['recipient_user']['user_id']; ?>" />
+      <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />
       <textarea rows="3" id="message" class="mess" placeholder="<?= Translate::get('write'); ?>..." type="text" name="content" /></textarea>
       <span class="right"><?= sumbit(Translate::get('reply')); ?></span>
     </form>
@@ -27,13 +27,13 @@
       <?php foreach ($data['list'] as $key => $val) { ?>
         <div class="hidden">
           <?php
-          $login  = $val['user_login'];
-          $ava    = $val['user_avatar'];
+          $login  = $val['login'];
+          $ava    = $val['avatar'];
           $id     = $val['message_sender_id'];
-          if ($val['message_sender_id'] == $uid['user_id']) {
-            $login  = $uid['user_login'];
-            $ava    = $uid['user_avatar'];
-            $id     = $uid['user_id'];
+          if ($val['message_sender_id'] == $user['id']) {
+            $login  = $user['login'];
+            $ava    = $user['avatar'];
+            $id     = $user['id'];
           }
           ?>
           <div class="flex relative">
@@ -53,7 +53,7 @@
           <div class="max-w780 ">
             <?= $val['message_content']; ?>
           </div>
-          <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $uid['user_id']) { ?>
+          <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $user['id']) { ?>
             <div class="right gray-400 lowercase text-sm hidden mb5 pb5">
               <?= Translate::get('it was read'); ?> (<?= lang_date($val['message_receipt']); ?>)
             </div>
@@ -69,10 +69,10 @@
   <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
     <div class="uppercase gray mt5 mb5"><?= Translate::get('dialogues'); ?></div>
     <?php foreach ($data['dialog'] as $key => $val) { ?>
-      <?php if ($val['user_id'] != $uid['user_id']) { ?>
+      <?php if ($val['id'] != $user['id']) { ?>
         <div class="flex relative pt5 pb5 items-center hidden">
-          <?= user_avatar_img($val['user_avatar'], 'max', $val['user_login'], 'br-rd-50 w40 h40 mr15'); ?>
-          <a href="<?= getUrlByName('dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['user_login']; ?></a>
+          <?= user_avatar_img($val['avatar'], 'max', $val['login'], 'br-rd-50 w40 h40 mr15'); ?>
+          <a href="<?= getUrlByName('dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['login']; ?></a>
         </div>
       <?php } ?>
     <?php } ?>

@@ -3,7 +3,7 @@
   <?= tabs_nav(
     'menu',
     $data['type'],
-    $uid,
+    $user,
     $pages = Config::get('menu.left'),
   ); ?>
   </nav>
@@ -17,7 +17,7 @@
       <?= tabs_nav(
         'nav',
         $data['sheet'],
-        $uid,
+        $user,
         $pages = [
           [
             'id'    => 'favorites',
@@ -41,8 +41,8 @@
     <?php foreach ($data['favorites'] as $content) { ?>
       <div class="bg-white br-rd5 br-box-gray mt10 pt5 pr15 pb15 pl15">
         <div class="pt5 pr15 pb0 text-sm flex">
-          <?= user_avatar_img($content['post']['user_avatar'], 'small', $content['post']['user_login'], 'w20 h20 mr10'); ?>
-          <?= $content['post']['user_login']; ?>
+          <?= user_avatar_img($content['post']['avatar'], 'small', $content['post']['login'], 'w20 h20 mr10'); ?>
+          <?= $content['post']['login']; ?>
           <span class="ml10 gray">
             <?= $content['post']['post_date']; ?>
           </span>
@@ -73,4 +73,4 @@
     <?= no_content(Translate::get('there are no favorites'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-favorite'), 'uid' => $uid]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-favorite')]); ?>
