@@ -6,51 +6,51 @@
 
 return [
     [
-        'url'       => 'user_website',
+        'url'       => 'website',
         'addition'  => false,
-        'title'     => 'user_website',
+        'title'     => 'website',
         'lang'      => Translate::get('URL'),
         'help'      => 'https://site.ru',
         'name'      => 'website'
     ], [
         'url'       => false,
         'addition'  => false,
-        'title'     => 'user_location',
+        'title'     => 'location',
         'lang'      => Translate::get('city'),
         'help'      => Translate::get('for example') . ': Moscow',
         'name'      => 'location'
     ], [
-        'url'       => 'user_public_email',
+        'url'       => 'public_email',
         'addition'  => 'mailto:',
-        'title'     => 'user_public_email',
+        'title'     => 'public_email',
         'lang'      => Translate::get('E-mail'),
         'help'      => '**@**.ru',
         'name'      => 'public_email'
     ], [
-        'url'       => 'user_skype',
+        'url'       => 'skype',
         'addition'  => 'skype:',
-        'title'     => 'user_skype',
+        'title'     => 'skype',
         'lang'      => Translate::get('Skype'),
         'help'      => 'skype:<b>NICK</b>',
         'name'      => 'skype'
     ], [
-        'url'       => 'user_twitter',
+        'url'       => 'twitter',
         'addition'  => 'https://twitter.com/',
-        'title'     => 'user_twitter',
+        'title'     => 'twitter',
         'lang'      => Translate::get('Twitter'),
         'help'      => 'https://twitter.com/<b>NICK</b>',
         'name'      => 'twitter'
     ], [
-        'url'       => 'user_telegram',
+        'url'       => 'telegram',
         'addition'  => 'tg://resolve?domain=',
-        'title'     => 'user_telegram',
+        'title'     => 'telegram',
         'lang'      => Translate::get('Telegram'),
         'help'      => 'tg://resolve?domain=<b>NICK</b>',
         'name'      => 'telegram'
     ], [
-        'url'       => 'user_vk',
+        'url'       => 'vk',
         'addition'  => 'https://vk.com/',
-        'title'     => 'user_vk',
+        'title'     => 'vk',
         'lang'      => Translate::get('VK'),
         'help'      => 'https://vk.com/<b>NICK / id</b>',
         'name'      => 'vk'
