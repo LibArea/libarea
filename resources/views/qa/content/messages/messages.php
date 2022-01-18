@@ -39,7 +39,10 @@
       <?php } ?>
   </div>
 <?php } else { ?>
-  <?= no_content(Translate::get('no dialogs'), 'bi bi-info-lg'); ?>
+    <div class="mt10 mb10 pt10 pr15 pb10 center pl15 gray-400">
+      <i class="bi bi-envelope block text-8xl"></i>
+      <?= Translate::get('no.dialogs'); ?>
+    </div>
 <?php } ?>
 </main>
 <?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('personal-messages-site')]); ?>

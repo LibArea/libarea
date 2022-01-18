@@ -225,7 +225,7 @@
       if ($post['post_closed'] == 1) echo no_content(Translate::get('question.closed'), 'bi bi-door-closed');
     }
   } else {
-    echo no_content(Translate::get('this is a draft'), 'bi bi-journal-medical');
+    echo no_content(Translate::get('this.draft'), 'bi bi-journal-medical');
   } ?>
 </main>
 <aside class="col-span-3 relative br-rd5 mb-none">

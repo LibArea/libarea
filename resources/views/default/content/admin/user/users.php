@@ -110,7 +110,7 @@
       <?php } ?>
     </table>
   <?php } else { ?>
-    <?= no_content(Translate::get('no users'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
   <?php } ?>
   <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('admin.users')); ?>
 </div>

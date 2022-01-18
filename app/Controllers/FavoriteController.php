@@ -36,9 +36,6 @@ class FavoriteController extends MainController
             ]
         );
 
-        $lang = Translate::get('bookmark deleted');
-        if ($action == 'add') $lang = Translate::get('bookmark added');
-
-        return $lang;
+        return Translate::get('successfully');
     }
 }

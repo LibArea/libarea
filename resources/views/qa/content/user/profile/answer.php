@@ -33,7 +33,7 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('profile', ['login' => $data['profile']['login']]) . '/answers'); ?>
 
   <?php } else { ?>
-    <?= no_content(Translate::get('no answers'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no.answers'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
 </div>

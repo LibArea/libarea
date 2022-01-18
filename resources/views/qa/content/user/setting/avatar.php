@@ -39,7 +39,7 @@
             </div>
           <?php } else { ?>
             <div class="block br-box-gray max-w-100 text-sm gray p20 mr15">
-              <?= Translate::get('no-cover'); ?>...
+              <?= Translate::get('no.cover'); ?>...
             </div>
           <?php } ?>
           <div id="start">

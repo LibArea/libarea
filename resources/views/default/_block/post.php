@@ -84,7 +84,8 @@
   <?php } ?>
 <?php } else { ?>
   <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>
-  <div class="mt10 mb10 pt10 pr15 pb10 center pl15 bg-yellow-100 gray">
-    <?= Translate::get('there are no posts'); ?>...
+  <div class="mt10 mb10 pt10 pr15 pb10 center pl15 gray-400">
+    <i class="bi bi-journal-richtext block text-8xl"></i>
+    <?= Translate::get('no.posts'); ?>
   </div>
 <?php } ?>

@@ -12,4 +12,4 @@
     </form>
   </div>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('under development')]); ?>
+<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('being.developed')]); ?>

@@ -7,5 +7,5 @@
     </a><br>
   <?php } ?>
 <?php } else { ?>
-  <p><?= Translate::get('there are no domains'); ?>...</p>
+  <p><?= Translate::get('no.content'); ?>...</p>
 <?php } ?>

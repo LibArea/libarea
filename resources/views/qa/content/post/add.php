@@ -81,7 +81,7 @@
       <?= Tpl::import('/_block/form/radio',  [
         'data' => [
           [
-            'title' => Translate::get('is this a draft?'),
+            'title' => Translate::get('draft'),
             'name'  => 'post_draft',
           ]
         ],
@@ -97,11 +97,11 @@
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
-              'title' => Translate::get('format Q&A?'),
+              'title' => Translate::get('format.Q&A'),
               'name' => 'post_feature',
             ],
             [
-              'title' => Translate::get('to close?'),
+              'title' => Translate::get('close'),
               'name' => 'closed',
             ],
           ]
@@ -111,8 +111,8 @@
       <?= Tpl::import('/_block/form/radio',  [
         'data' => [
           [
-            'title' => Translate::get('is this a translation?'),
-            'name' => 'translation',
+            'title' => Translate::get('translation'),
+            'name'  => 'translation',
           ],
         ]
       ]); ?>
@@ -121,7 +121,7 @@
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
-              'title'   => Translate::get('raise?'),
+              'title'   => Translate::get('pin'),
               'name'    => 'top',
             ],
           ]
@@ -129,7 +129,7 @@
       <?php } ?>
 
       <?= Tpl::import('/_block/form/select/related-posts', [
-        'user'           => $user,
+        'user'          => $user,
         'data'          => [],
         'action'        => 'add',
         'type'          => 'post',

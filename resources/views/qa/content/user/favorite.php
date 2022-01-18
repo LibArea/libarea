@@ -59,7 +59,10 @@
       </div>
     <?php } ?>
   <?php } else { ?>
-    <?= no_content(Translate::get('there are no favorites'), 'bi bi-info-lg'); ?>
+    <div class="mt10 mb10 pt10 pr15 pb10 center pl15 gray-400">
+      <i class="bi bi-bookmark block text-8xl"></i>
+      <?= Translate::get('no.favorites'); ?>
+    </div>
   <?php } ?>
 </main>
 <?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-favorite')]); ?>

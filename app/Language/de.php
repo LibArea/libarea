@@ -39,7 +39,6 @@ $data = [
     'content.added'     => '%1$s adăugat',
     'content.restored'  => '%1$s restaurat',
     'time'              => 'Timp',
-    
     'back'              => 'Zurück',
     'submenu'           => 'субменю',
     'edit'              => 'Bearbeiten',
@@ -48,6 +47,25 @@ $data = [
     'add.option'        => 'Hinzufügen %1$s',
     'edit.option'       => 'Bearbeiten %1$s',
     'change.saved'      => 'Änderung gespeichert',
+    'successfully'      => 'Erfolgreich!',
+    'desc.formed'       => 'Beschreibung wird gebildet',
+    'being.developed'   => 'In Entwicklung',
+    'activity'          => 'Aktivität',
+    'question.closed'   => 'Die Frage ist geschlossen',
+    'this.draft'        => 'Dieser Beitrag ist ein Entwurf',
+    'no.cover'          => 'Noch keine Cover',
+    'no.invites'        => 'Sie haben keine Einladungen erstellt',
+    'no.content'        => 'Entschuldigung, noch kein Inhalt',
+    'no.dialogs'        => 'Entschuldigung, es gibt noch keine Dialoge',    
+    'no.posts'          => 'Entschuldigung, noch keine Beiträge',
+    'no.favorites'      => 'Entschuldigung, es gibt noch keine Lesezeichen',
+    'no.comments'       => 'Leider gibt es noch keine Kommentare',
+    'no.answers'        => 'Entschuldigung, noch keine Antworten',
+    'default'           => 'Default',
+    'answered'          => 'Antwortete',
+    'translation'       => 'Übersetzung',
+    'format.Q&A'        => 'Q&A-Format',
+    'pin'               => 'Stift',  
     
     'build'             => 'Bauen',
     'complained about'  => 'beschwert ',
@@ -77,8 +95,6 @@ $data = [
     'blogs'             => 'Blogs',
     'topics'            => 'Themen',
     'topic'             => 'Thema',
-    'topics.no'         => 'Es gibt noch keine Themen ',
-    'blogs.no'          => 'Es gibt noch keine Blogs',
     'parent'            => 'Elternteil',
     'edit topic'        => 'Thema bearbeiten',
     'authorization'     => 'Genehmigung',
@@ -153,7 +169,6 @@ $data = [
     'up'                => 'Up',
     'user'              => 'User',
     'users'             => 'Users',
-    'no users'          => 'No users',
     'page'              => 'Page',
     'read'              => 'Read',
     'reads'             => 'Reads',
@@ -175,12 +190,9 @@ $data = [
     'password recovery' => 'Password recovery',
     'draft'             => 'Draft',
     'drafts'            => 'Drafts',
-    'there no drafts'   => 'There no drafts',
     'update the data'   => 'Update the data',
     'cancel'            => 'Cancel',
     'reply'             => 'Reply',
-
-
     'source'            => 'Source',
     'website'           => 'Website',
     'websites'          => 'Websites',
@@ -201,7 +213,6 @@ $data = [
     'badge'             => 'Badge',
     'badges'            => 'Badges',
     'reward the user'   => 'Reward the user',
-    'reward added'      => 'Reward added',
 
     'reward weight'     => 'Reward weight',
     'for example'       => 'For example',
@@ -227,7 +238,6 @@ $data = [
     'author'            => 'Author',
     'characters'        => 'Characters',
     'last answer'       => 'Last answer',
-    'no answers'        => 'Unfortunately, there are no answers. Write if you know the answer.',
     'comments-desc'     => 'All comments (on answers) are in order of priority in the community',
     'answers-desc'      => 'All responses (to posts) are in order of priority in the community',
     'no-auth-comm'      => 'You must be logged in to post a comment',
@@ -237,19 +247,9 @@ $data = [
     'in-the-profile'    => 'In profile',
     'add-favorites'     => 'Add favorites',
     'remove-favorites'  => 'Remove favorites',
-    'no-cover'          => 'No cover. Download',
-
-
-
-
     'registrations'     => 'Registrations',
-    'no dialogs'        => 'No dialogs',
     'words'             => 'Stop words',
     'word'              => 'Stop word',
-    'stop words no'     => 'Stop word no',
-
-    'bookmark added'    => 'Bookmark added',
-    'bookmark deleted'  => 'Bookmark deleted',
 
     'language'          => 'Lokalisierung',
     'ru-language'       => 'Russisch (RU)',
@@ -261,9 +261,7 @@ $data = [
 
     'repeat the password'   => 'Repeat password',
     'post.closed'       => 'Post closed',
-    'there are no posts'    => 'Unfortunately there are no posts',
     'forgot your password'  => 'Forgot your password',
-    'there are no comments' => 'Sorry, no comments',
     'rules'                 => 'Site rules',
     'privacy policy'        => 'Privacy Policy',
     'restriction'           => 'Restrictions',
@@ -292,16 +290,6 @@ $data = [
     'post'          => 'Post',
     'posts'         => 'Posts',
 
-    'answered'              => 'Answered',
-    'translation'           => 'Translation',
-    'is this a translation?' => 'Is this a translation?',
-    'to close?'             => 'To close?',
-    'format Q&A?'           => 'Format Q&A?',
-    'raise?'                => 'Raise?',
-    'is this a draft?'      => 'Is this a draft?',
-    'default'               => 'Default',
-    'qa'                    => 'Q&A',
-
     'setting profile page'  => 'Setting profile page',
     'cover art'             => 'Cover art',
     'type'                  => 'Type',
@@ -313,7 +301,6 @@ $data = [
     'recommended size'      => 'Recommended size',
 
     /* Notifications  */
-    'no notifications yet'  => 'No notifications yet',
     'i read'                => 'I read',
     'wrote'                 => 'Wrote',
     'wrote a post'          => 'Wrote a post',
@@ -387,21 +374,11 @@ $data = [
     'main.all.title'        => 'All posts. ',
     'main.all.desc'         => 'List of all posts in the community feed (by number of replies). Conversations, questions and answers, comments. ',
     'edit answer'           => 'Change the answer',
-    'no results'            => 'No results',
     'no search results'     => 'The search has not given any results.<br>Too short / long search term.',
     'empty request'         => 'Empty search term',
     'enter'                 => 'Enter',
     'enter your password'   => 'Enter password',
     'enter content'         => 'Enter content',
-
-    'description is formed' => 'Description is formed',
-    'under development'     => 'Under development',
-    'activity'              => 'Activity',
-    'question.closed'       => 'The question is closed',
-    'this is a draft'       => 'This is a draft',
-    'there are no favorites' => 'No bookmarks',
-    'users-ban'             => 'Users',
-    'posts-ban'             => 'Posts',
 
     /* web */
     'news & media'      => 'News & Media',
@@ -420,9 +397,9 @@ $data = [
     /* Setting */
     'info-setting'          => 'Fill in your name, this will help attendees refer to you by name. <br> <br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
     'info-avatar'           => 'Upload an avatar and cover for your profile. <br> <br> When each user has a unique avatar, it becomes much easier to follow the discussions! ',
-    'info-security'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more. <br> <br> Passwords must contain Large letters, small, numbers, specials. symbols.',
+    'info-security'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more.',
     'info-search'           => 'To refine your search, try to find a more precise query.',
-    'info-login'            => 'Authorization gives you the ability to publish posts, reply, comment. <br><br> You can vote for other publications, fill out and edit the profile.',
+    'info-login'            => 'Authorization gives you the ability to publish posts, reply, comment.',
     'info-recover'          => 'After clicking the "Reset" button, check your email...',
     'info-favorite'         => 'Posts, comments and questions in your bookmarks',
     'info-preferences'      => 'Posts you are subscribed to. You will be notified of all new replies',
@@ -433,9 +410,6 @@ $data = [
     'message to PM'         => 'When the message came to PM',
     'contacted via @'       => 'When they reached out to me through @',
     'linkchange password'   => 'Your link to change your password',
-    'there are no domains'  => 'No domains',
-
-    'description is formed' => 'Description is formed',
     'domain-desc'           => 'Grouping posts in a community by domain',
     'domains-title'         => 'Websites in the system',
     'domains-desc'          => 'Statistics on domains, links that are used to compile publications on the site. Most visited, popular sites',
@@ -444,7 +418,6 @@ $data = [
     'code-used'             => 'The code is incorrect or has already been used.',
     'audits'                => 'Audits',
     'content-audit'         => 'Your message has been sent for review.',
-    'no invitations'        => 'No invitations yet',
     'limit-tl-invitation'   => 'Your trust level does not yet allow using invites',
     'can send this link'    => 'You can send this link ',
     'link has been used'    => 'Link has been used',
@@ -542,8 +515,8 @@ $data = [
     'tl1.title'                 => 'Benutzer',
     'tl2.title'                 => 'Mitglied',
     'tl3.title'                 => 'Bewohner',
-    'tl4.title'                 => 'Führer',
-    'tl5.title'                 => 'Regulär',
+    'tl4.title'                 => 'Regulär',
+    'tl5.title'                 => 'Führer',
     'tl10.title'                => 'Mitarbeiter',
 ];
 

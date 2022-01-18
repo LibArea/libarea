@@ -340,14 +340,17 @@ a:hover > img { opacity: 0.8; }
 
 /* Drop-down menu and left nav */
 nav > ul > li > a {
-  color: #6b7280;
+  color: #9ca3af;
   padding: 3px 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
- 
+ul > li > a span { color: #4b5563; }
+
+ul > li > a:hover > span,
+a.sky-500 span  { color: #0ea5e9; }
 
 /* Tippy.js - theme: light, */
 .dark .tippy-box[data-theme~="light"] {

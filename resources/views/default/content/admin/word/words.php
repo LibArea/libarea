@@ -24,7 +24,7 @@
       </div>
     <?php } ?>
   <?php } else { ?>
-    <?= no_content(Translate::get('stop words no'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </div>
 </main>

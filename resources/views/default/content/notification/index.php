@@ -99,7 +99,7 @@
       </div>
     <?php } ?>
   <?php } else { ?>
-    <?= no_content(Translate::get('no notifications yet'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no.content'), 'bi bi-info-lg'); ?>
   <?php } ?>
   </div>
 </main>

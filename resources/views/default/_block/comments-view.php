@@ -183,7 +183,7 @@
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
     <?php if ($user['id'] > 0) { ?>
-      <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get('no.comments'), 'bi bi-info-lg'); ?>
     <?php } else { ?>
       <?= no_content(Translate::get('no-auth-login'), 'bi bi-info-lg'); ?>
     <?php } ?>

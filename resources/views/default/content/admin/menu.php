@@ -10,7 +10,7 @@
          <?php if ($cats['radical']  == 1) { ?>
            <li> <a class="sky-500-hover<?= $active; ?>" href="<?= getUrlByName($cats['url']); ?>">
                <i class="<?= $cats['icon']; ?> middle mr10 text-xl"></i>
-               <?= Translate::get($cats['name']); ?>
+               <span><?= Translate::get($cats['name']); ?></span>
              </a></li>
          <?php } else { ?>
 
@@ -19,7 +19,7 @@
 
              <a aria-expanded="true" class="has-arrow sky-500-hover<?= $active; ?>" href="#">
                <i class="bi bi-list middle mr10 text-xl"></i>
-               <?= Translate::get($cats['name']); ?>
+                <span><?= Translate::get($cats['name']); ?></span>
              </a>
 
              <?php if ($cats['childs'] > 0) { ?>
@@ -27,7 +27,7 @@
                  <?php foreach ($cats['childs'] as $cat) { ?>
                    <a class="gray mb5 block dark-gray-200<?= $active; ?>" href="<?= getUrlByName($cat['url']); ?>">
                      <i class="bi bi-circle green-600 middle mr5"></i>
-                     <?= Translate::get($cat['name']); ?>
+                      <span><?= Translate::get($cat['name']); ?></span>
                    </a>
                  <?php } ?>
                </ul>

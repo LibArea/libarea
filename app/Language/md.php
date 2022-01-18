@@ -26,7 +26,6 @@ $data = [
     'content.added'     => '%1$s adăugat',
     'content.restored'  => '%1$s restaurat',
     'time'              => 'Timp',
-    
     'back'              => 'Înapoi',
     'submenu'           => 'submeniu',
     'edit'              => 'Editați',
@@ -35,6 +34,25 @@ $data = [
     'add.option'        => 'Adăuga %1$s',
     'edit.option'       => 'Editați %1$s',
     'change.saved'      => 'Modificare salvată',
+    'successfully'      => 'Cu succes!',
+    'desc.formed'       => 'Se formează descrierea',
+    'being.developed'   => 'In dezvoltare',
+    'activity'          => 'Activitate',
+    'question.closed'   => 'Întrebarea este închisă',
+    'this.draft'        => 'Această postare este o schiță',
+    'no.cover'          => 'Nicio copertă încă',
+    'no.invites'        => 'Nu ați creat invitații',
+    'no.content'        => 'Ne pare rău, încă nu există conținut',
+    'no.dialogs'        => 'Ne pare rău, încă nu există dialoguri',    
+    'no.posts'          => 'Ne pare rău, încă nu există postări',
+    'no.favorites'      => 'Ne pare rău, nu există încă marcaje',
+    'no.comments'       => 'Din păcate, încă nu există comentarii',
+    'no.answers'        => 'Ne pare rău, încă nu există răspunsuri',
+    'default'           => 'Mod implicit',
+    'answered'          => 'Răspuns',
+    'translation'       => 'Traducere',
+    'format.Q&A'        => 'Format de întrebări și răspunsuri',
+    'pin'               => 'Pin',
     
     'build'             => 'Construiește',
     'complained about'  => 'S-a plâns',
@@ -69,8 +87,6 @@ $data = [
     'blogs'             => 'Bloguri',
     'topics'            => 'Subiecte',
     'topic'             => 'Subiect',
-    'topics.no'         => 'Subiecte nu sunt',
-    'blogs.no'          => 'Nu există încă bloguri',
     'parent'            => 'Părinte',
     'edit topic'        => 'Schimbați subiectul',
     'authorization'     => 'Autentificare',
@@ -144,7 +160,6 @@ $data = [
     'search'            => 'Căutare',
     'user'              => 'Utilizator',
     'users'             => 'Utilizatori',
-    'no users'          => 'Nu sunt utilizatori',
     'page'              => 'Pagină',
     'read'              => 'Pentru a citi',
     'reads'             => 'Citit',
@@ -166,12 +181,9 @@ $data = [
     'password recovery' => 'Recuperare parola',
     'draft'             => 'Proiect',
     'drafts'            => 'Proiecte',
-    'there no drafts'   => 'Fără proiecte',
     'update the data'   => 'Actualizați datele',
     'cancel'            => 'Anulare',
     'reply'             => 'Raspunde',
-
-
     'source'            => 'Sursă',
     'website'           => 'Site web',
     'websites'          => 'Sites',
@@ -192,7 +204,6 @@ $data = [
     'badge'             => 'Recompensa',
     'badges'            => 'Recompensii',
     'reward the user'   => 'Recompensează un participant',
-    'reward added'      => 'Recompensă adăugată',
     'reward weight'     => 'Greutatea premiului',
     'for example'       => 'Exemplu',
     'ed'                => 'ed',
@@ -218,7 +229,6 @@ $data = [
     'author'            => 'Autor',
     'characters'        => 'simbol',
     'last answer'       => 'Ultimul răspuns',
-    'no answers'        => 'Din păcate, nu există răspunsuri. Scrie dacă știi răspunsul.',
     'comments-desc'     => 'Toate comentariile (cu privire la răspunsuri) în ordinea priorității în comunitate',
     'answers-desc'      => 'Toate răspunsurile (la postări) în ordine de prioritate în comunitate',
     'site-banner-txt'   => 'Curiosii este în construcție',
@@ -229,17 +239,9 @@ $data = [
     'in-the-profile'    => 'In profil',
     'add-favorites'     => 'Adauga la favorite',
     'remove-favorites'  => 'Sterge din favorite',
-    'no-cover'          => 'Nu are cover. Incarca',
-
-
-
-
     'registrations'     => 'înregistrare',
-    'no dialogs'        => 'Fără dialoguri',
     'words'             => 'Oprește cuvintele',
     'word'              => 'Oprește cuvântul',
-    'stop words no'     => 'Fără cuvinte oprite',
-
 
     'language'              => 'Localization',
     'ru-language'           => 'Rusă (RU)',
@@ -251,9 +253,7 @@ $data = [
 
     'repeat the password'   => 'Repetati parola',
     'post.closed'           => 'Postarea este închisă',
-    'there are no posts'    => 'Din păcate nu există postări',
     'forgot your password'  => 'Am uitat parola',
-    'there are no comments' => 'Ne pare rău, fără comentarii',
     'rules'                 => 'Regulile site-ului',
     'privacy policy'        => 'Politica de confidențialitate',
     'restriction'           => 'Restricții',
@@ -283,12 +283,6 @@ $data = [
     'post'          => 'Postează',
     'posts'         => 'Postări',
 
-    'to close'              => 'Închide',
-    'format'                => 'Format',
-    'raise'                 => 'Ridica',
-    'default'               => 'Mod implicit',
-    'qa'                    => 'Intrebari si raspunsuri',
-
     /* web */
     'news & media'      => 'Știri și media',
     'social network'    => 'Rețea socială',
@@ -317,7 +311,6 @@ $data = [
     'recommended size'      => 'Dimensiunea recomandată',
 
     /* Notificări */
-    'no notifications yet'  => 'Nu există încă notificări',
     'i read'                => 'Citesc',
     'wrote'                 => 'A scris',
     'wrote a post'          => 'Am scris o postare',
@@ -329,8 +322,6 @@ $data = [
     'in answer'             => 'în raspuns',
     'in the comment'        => 'în comentariu',
     'to your answer'        => 'la răspunsul tău',
-    'bookmark added'        => 'Marcaj adăugat',
-    'bookmark deleted'      => 'Marcajul a fost șters',
 
     /* MSG */
     'string.length'         => 'Lungimea %1$s trebuie să aibă între %2$s și %3$s caractere',
@@ -390,27 +381,19 @@ $data = [
     'main.all.desc'         => 'O listă a tuturor postărilor din feedul comunității (după numărul de răspunsuri). Conversații, întrebări și Răspunsuri, Comentarii. ',
     'seleted comments'      => 'Comentarii șterse',
     'edit answer'           => 'Schimbați răspunsul',
-    'no results'            => 'Niciun rezultat',
     'no search results'     => 'The search has not given any results.<br>Termen de căutare prea scurt / lung.',
     'empty request'         => 'Termen de căutare gol',
     'enter'                 => 'Introduce',
     'enter your password'   => 'Introdu parola',
     'enter content'         => 'Introduceți conținut',
-
-    'no account available'  => 'Nu există cont disponibil',
-    'description is formed' => 'Descrierea este formată',
-    'under development'     => 'In dezvoltare',
-    'activity'              => 'Activitate',
-    'question.closed'       => 'Întrebarea este închisă',
-    'this is a draft'       => 'Aceasta este o schita',
-    'there are no favorites' => 'Fara favorite',
+  
     /* Setting */
     'info-setting'          => 'Completați numele dvs., acest lucru va ajuta participanții să vă facă referire după nume. <br> <br> Spune-ne ceva despre tine. Aveți o mare oportunitate de a vă deschide pentru a mulțumi pe alții și a părea o persoană interesantă.',
     'info-avatar'           => 'Încărcați un avatar și o acoperire pentru profilul dvs. <br> <br> Când fiecare utilizator are un avatar unic, devine mult mai ușor să urmărești discuțiile!',
-    'info-security'         => 'Asigurați-vă că toate parolele dvs. au 8 sau mai multe caractere, în mod ideal mult mai multe. <br> <br> Parolele trebuie să conțină litere mari, mici, cifre, simboluri.',
+    'info-security'         => 'Asigurați-vă că toate parolele dvs. au 8 sau mai multe caractere, în mod ideal mult mai multe.',
     'info-search'           => 'Pentru a rafina căutarea, încercați să găsiți o interogare mai precisă.',
     'info-notifications'    => 'Puteți marca toate anunțurile ca citite făcând clic pe linkul: „Am citit”.',
-    'info-login'            => 'Autorizarea vă permite să publicați postări, să răspundeți, să comentați. <br> <br> Puteți vota pentru alte publicații, completați și editați profilul.',
+    'info-login'            => 'Autorizarea vă permite să publicați postări, să răspundeți, să comentați.',
     'info-recover'          => 'După ce faceți clic pe butonul „Resetare”, verificați e-mailul ...',
 
     'info-favorite'         => 'Postări, comentarii și întrebări pe care le urmăriți',
@@ -424,10 +407,6 @@ $data = [
     'linkchange password'   => 'Link-ul dvs. pentru a vă schimba parola',
     'changing password'     => 'schimbați parola',
     'site under reconstruction' => 'Site în reconstrucție',
-
-    'there are no domains'  => 'Fără domenii',
-
-    'description is formed' => 'Se formează descrierea',
     'domain-desc'           => 'Gruparea postărilor într-o comunitate după domeniu',
     'domains-title'         => 'Site-uri web din sistem',
     'domains-desc'          => 'Statistici despre domenii, linkuri care sunt utilizate pentru a compila publicații pe site. Cele mai vizitate site-uri populare',
@@ -438,7 +417,6 @@ $data = [
     'content-audit'         => 'Mesajul dvs. a fost trimis spre examinare.',
     'limit.day'             => 'Pentru %1$s ați atins limita de %1$s pentru astăzi.',
     'limit-add-content-no'  => 'Ați atins limita de adăugare setată pe site',
-    'no invitations'        => 'Nu există încă invitații',
     'limit-tl-invitation'   => 'Nivelul dvs. de încredere nu permite încă utilizarea invitațiilor',
     'can send this link'    => 'puteți trimite acest link',
     'link has been used'    => 'Link-ul a fost folosit',
@@ -446,8 +424,6 @@ $data = [
     'registered'            => 'înregistrat',
     'invitations left'      => 'Invitații rămase',
     'no-topic-to-add'       => 'Nu aveți spațiu pentru a adăuga o postare. <a href="/topics"> Abonați-vă </a> la spațiu',
-    'users-ban'             => 'Utilizatori',
-    'posts-ban'             => 'Postări',
 
     'limiting-mode-1'       => 'Nu puteți posta conținut, contul dvs. este verificat',
     'the dialog does not exist'             => 'Caseta de dialog specificată nu există',
@@ -536,8 +512,8 @@ $data = [
     'tl1.title'                 => 'Utilizator',
     'tl2.title'                 => 'Membru',
     'tl3.title'                 => 'Rezident',
-    'tl4.title'                 => 'Lider',
-    'tl5.title'                 => 'Regulat',
+    'tl4.title'                 => 'Regulat',
+    'tl5.title'                 => 'Lider',
     'tl10.title'                => 'Personal',
 ];
 

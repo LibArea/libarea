@@ -47,7 +47,7 @@
         <?php } ?>
 
       <?php } else { ?>
-        <?= Translate::get('no invitations'); ?>
+        <?= Translate::get('no.invites'); ?>
       <?php } ?>
 
     <?php } else { ?>

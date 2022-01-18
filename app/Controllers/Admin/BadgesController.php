@@ -128,7 +128,7 @@ class BadgesController extends MainController
             ]
         );
 
-        addMsg(Translate::get('reward added'), 'success');
+        addMsg(Translate::get('successfully'), 'success');
 
         redirect('/admin/users/' . $uid . '/edit');
     }

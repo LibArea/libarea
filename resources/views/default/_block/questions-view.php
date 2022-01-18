@@ -120,7 +120,7 @@
   </div>
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
-    <?= no_content(Translate::get('no answers'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no.answers'), 'bi bi-info-lg'); ?>
   <?php } ?>
 <?php } ?>
 
