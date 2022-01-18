@@ -37,7 +37,7 @@ class EditWebController extends MainController
         return Tpl::agRender(
             '/item/edit',
             [
-                'meta'  => meta($m = [], Translate::get('change the site') . ' | ' . $domain['item_url_domain']),
+                'meta'  => meta($m = [], sprintf(Translate::get('edit.option'), Translate::get('website'))),
                 'data'  => [
                     'domain'    => $domain,
                     'sheet'     => 'domains',

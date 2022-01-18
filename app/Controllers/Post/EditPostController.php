@@ -48,7 +48,7 @@ class EditPostController extends MainController
         return Tpl::agRender(
             $puth,
             [
-                'meta'  => meta($m = [], Translate::get('edit post')),
+                'meta'  => meta($m = [], sprintf(Translate::get('edit.option'), Translate::get('post'))),
                 'data'  => [
                     'sheet'         => 'edit-post',
                     'type'          => 'edit',

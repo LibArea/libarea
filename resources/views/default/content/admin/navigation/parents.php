@@ -53,7 +53,7 @@
           </td>
           <td class="center">
             <a class="btn btn-small btn-primary" href="<?= getUrlByName('admin.navigation.add', ['id' => $menu['nav_id']]); ?>">
-              <?= Translate::get('add.submenu'); ?>
+              <?= sprintf(Translate::get('add.option'), Translate::get('submenu')); ?>
             </a>
         </tr>
       <?php } ?>

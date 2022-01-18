@@ -25,7 +25,7 @@ class AddFacetController extends MainController
         return Tpl::agRender(
             '/facets/add',
             [
-                'meta'  => meta($m = [], Translate::get('add topic')),
+                'meta'  => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('topics'))),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $sheet,

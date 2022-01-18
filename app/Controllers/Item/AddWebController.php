@@ -28,7 +28,7 @@ class AddWebController extends MainController
         return Tpl::agRender(
             '/item/add',
             [
-                'meta'  => meta($m = [], Translate::get('add a website')),
+                'meta'  => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('website'))),
                 'data'  => [
                     'sheet' => $sheet,
                     'type'  => $type,

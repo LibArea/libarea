@@ -41,7 +41,7 @@ class BadgesController extends MainController
         return Tpl::agRender(
             '/admin/badge/add',
             [
-                'meta'  => meta($m = [], Translate::get('add badge')),
+                'meta'  => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('badges'))),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,
@@ -61,7 +61,7 @@ class BadgesController extends MainController
         return Tpl::agRender(
             '/admin/badge/edit',
             [
-                'meta'  => meta($m = [], Translate::get('edit badge')),
+                'meta'  => meta($m = [], Translate::get('edit')),
                 'data'  => [
                     'badge' => $badge,
                     'sheet' => $sheet,

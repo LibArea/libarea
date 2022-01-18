@@ -3,7 +3,9 @@
   <div class="bg-white items-center justify-between p15 mb15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500"><?= Translate::get('edit page'); ?></span>
+    <span class="red-500">
+      <?= sprintf(Translate::get('edit.option'), Translate::get('page')); ?>
+    </span>
     
     <form action="<?= getUrlByName('page.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
@@ -63,7 +65,7 @@
         'type'      => 'post',
         'height'    => '300px',
         'preview'   => 'vertical',
-        'user'       => $user,
+        'user'      => $user,
         'content'   => $post['post_content'],
       ]); ?>
 

@@ -110,7 +110,7 @@ class UsersController extends MainController
         return Tpl::agRender(
             '/admin/user/edit',
             [
-                'meta'  => meta($m = [], Translate::get('edit user')),
+                'meta'  => meta($m = [], Translate::get('edit')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,

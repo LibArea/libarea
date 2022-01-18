@@ -2,7 +2,9 @@
   <div class="bg-white items-center justify-between p15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500"><?= Translate::get('add a website'); ?></span>
+    <span class="red-500">
+      <?= sprintf(Translate::get('add.option'), Translate::get('website')); ?>
+    </span>
 
     <form action="<?= getUrlByName('web.create'); ?>" method="post">
       <?= csrf_field() ?>

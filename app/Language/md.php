@@ -6,7 +6,6 @@ $data = [
     'news'              => 'Știri',
     'tools'             => 'Instrumente',
     'logs'              => 'Busteni',
-    'add.submenu'       => 'Adăugați submeniu',
     'sort'              => 'Sortează',
     'facets'            => 'Fațete',
     'content'           => 'Conţinut',
@@ -23,11 +22,19 @@ $data = [
     'whisper'           => 'șoaptă',
     'report'            => 'Steag',
     'reports'           => 'Steaguri',
-    
     'content.deleted'   => '%1$s sters',
     'content.added'     => '%1$s adăugat',
     'content.restored'  => '%1$s restaurat',
     'time'              => 'Timp',
+    
+    'back'              => 'Înapoi',
+    'submenu'           => 'submeniu',
+    'edit'              => 'Editați',
+    'save'              => 'Сохранить',
+    'add'               => 'Adăuga',
+    'add.option'        => 'Adăuga %1$s',
+    'edit.option'       => 'Editați %1$s',
+    'change.saved'      => 'Modificare salvată',
     
     'build'             => 'Construiește',
     'complained about'  => 'S-a plâns',
@@ -163,8 +170,8 @@ $data = [
     'update the data'   => 'Actualizați datele',
     'cancel'            => 'Anulare',
     'reply'             => 'Raspunde',
-    'edit'              => 'Editati',
-    'save'              => 'Salvați',
+
+
     'source'            => 'Sursă',
     'website'           => 'Site web',
     'websites'          => 'Sites',
@@ -186,10 +193,7 @@ $data = [
     'badges'            => 'Recompensii',
     'reward the user'   => 'Recompensează un participant',
     'reward added'      => 'Recompensă adăugată',
-    'add badge'         => 'Adăugați recompensă',
-    'edit badge'        => 'Schimbă recompensa',
     'reward weight'     => 'Greutatea premiului',
-    'edit user'         => 'Schimbați utilizatorul',
     'for example'       => 'Exemplu',
     'ed'                => 'ed',
     'add'               => 'Adaugă',
@@ -209,12 +213,10 @@ $data = [
     'just me'           => 'Doar eu',
     'publications'      => 'Publicații',
     'selected post'     => 'Postare recomandată',
-    'edit post'         => 'Editează postarea',
     'color'             => 'Culoare',
     'text'              => 'Text',
     'author'            => 'Autor',
     'characters'        => 'simbol',
-    'post added'        => 'Postare adăugată',
     'last answer'       => 'Ultimul răspuns',
     'no answers'        => 'Din păcate, nu există răspunsuri. Scrie dacă știi răspunsul.',
     'comments-desc'     => 'Toate comentariile (cu privire la răspunsuri) în ordinea priorității în comunitate',
@@ -228,19 +230,16 @@ $data = [
     'add-favorites'     => 'Adauga la favorite',
     'remove-favorites'  => 'Sterge din favorite',
     'no-cover'          => 'Nu are cover. Incarca',
-    'add post'          => 'Adăugați o postare',
-    'change'            => 'Schimbați',
-    'change saved'      => 'Modificare salvată',
-    'add topic'         => 'Adăugați subiect',
-    'add blog'          => 'Adaugă un Blog',
-    'add tag'           => 'Adăugați o etichetă',
-    'edit tag'          => 'Schimbați eticheta',
+
+
+
+
     'registrations'     => 'înregistrare',
     'no dialogs'        => 'Fără dialoguri',
     'words'             => 'Oprește cuvintele',
     'word'              => 'Oprește cuvântul',
     'stop words no'     => 'Fără cuvinte oprite',
-    'add a stop word'   => 'Adaugă cuvânt de oprire',
+
 
     'language'              => 'Localization',
     'ru-language'           => 'Rusă (RU)',
@@ -305,10 +304,8 @@ $data = [
     'soft-cat'           => 'Există programe în catalog?',
     'soft-cat-help'      => 'În directorul programului, va fi Categoria (va deveni vizibilă)',
 
-    /* Setări */
     'setting profile'       => 'Setari profil',
     'setting profile page'  => 'Pagina de configurare a profilului',
-    'change avatar'         => 'Schimbă avatarul',
     'avatar'                => 'Avatar',
     'cover art'             => 'Cover',
     'type'                  => 'Tip',
@@ -316,7 +313,6 @@ $data = [
     'last'                  => 'Ultimul',
     'cover removed'         => 'Cover sters',
     'change avatar page'    => 'Schimbați avatarul paginii',
-    'change password'       => 'Schimbați parola',
     'change password page'  => 'Modificare parolă pagină ',
     'recommended size'      => 'Dimensiunea recomandată',
 
@@ -373,8 +369,6 @@ $data = [
     'sections'              => 'Sectiuni',
     'section'               => 'Sectiune',
     'pages'                 => 'Pagini',
-    'edit page'             => 'Editează pagina',
-    'add page'              => 'Adăugați o pagină',
     'go to'                 => 'Mergi la',
     'frameworks'            => 'cadre',
     'interesting sites'     => 'Site-uri interesante',
@@ -432,8 +426,7 @@ $data = [
     'site under reconstruction' => 'Site în reconstrucție',
 
     'there are no domains'  => 'Fără domenii',
-    'change the site'       => 'Schimbați site-ul',
-    'add a website'         => 'Adăugați un site',
+
     'description is formed' => 'Se formează descrierea',
     'domain-desc'           => 'Gruparea postărilor într-o comunitate după domeniu',
     'domains-title'         => 'Site-uri web din sistem',

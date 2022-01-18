@@ -8,13 +8,15 @@
 ); ?>
 
 <div class="bg-white br-box-gray p15  text-sm">
-  <a href="<?= getUrlByName('admin.navigation'); ?>" class="btn btn-primary mb15">Назад к списку навигации</a>
+  <a href="<?= getUrlByName('admin.navigation'); ?>" class="btn btn-primary mb15">
+    << <?= Translate::get('back'); ?> 
+  </a>
 
   <div class="text-sm mb15">
     <b><?= Translate::get($data['menu']['nav_name']); ?>:</b>
     <a class="btn btn-small ml10 text-sm btn-primary" href="<?= getUrlByName('admin.navigation.add', ['id' => $data['menu']['nav_id']]); ?>">
       <i class="bi bi-plus-lg"></i>
-      <?= Translate::get('add.submenu'); ?>
+      <?= sprintf(Translate::get('add.option'), Translate::get('submenu')); ?>
     </a>
   </div>
 

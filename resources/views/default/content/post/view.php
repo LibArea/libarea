@@ -1,17 +1,38 @@
 <?php $post = $data['post']; ?>
 <div class="col-span-1 mb-none center">
   <div class="sticky top70">
-    <?= votes($user['id'], $post, 'post', 'ps', 'text-2xl middle', 'block'); ?>
+    <?= votes($user['id'], $post, 'post', 'ps', 'text-2xl middle mt15', 'block'); ?>
     <div class="pt20">
       <?= favorite($user['id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
 </div>
 <main class="col-span-8 mb-col-12">
-  <article class="post-full br-box-gray br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 pt0 pr15 pb5 pl15">
+  <article class="post-full br-box-gray br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 p15">
     <?php if ($post['post_is_deleted'] == 0 || $user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
       <div class="post-body">
-        <h1 class="mb0 mt10 font-normal text-2xl">
+      
+        <div class="flex flex-row items-center">
+          <?php if (!empty($data['blog'])) { ?>
+            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray inline text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
+              <span class="bg-sky-50 gray pt5 pr10 pb5 pl10 br-rd5">
+                <?= $data['blog'][0]['facet_title']; ?>
+              </span>
+            </a>
+          <?php } ?>
+
+          <?php if (!empty($data['facets'])) { ?>
+            <div class="lowercase">
+              <?php foreach ($data['facets'] as $topic) { ?>
+                <a class="bg-blue-100 bg-hover-green white-hover btn-small br-rd5 sky-500 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+                  <?= $topic['facet_title']; ?>
+                </a>
+              <?php } ?>
+            </div>
+          <?php } ?>
+        </div>
+      
+        <h1 class="mb0 mt5 font-normal text-2xl">
           <?= Tpl::import('/_block/post-title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm lowercase flex gray-400">
@@ -86,26 +107,6 @@
           </div>
         <?php } ?>
         <?= Tpl::import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes']); ?>
-
-        <div class="flex flex-row items-center mb20">
-          <?php if (!empty($data['blog'])) { ?>
-            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray inline text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
-              <span class="bg-sky-50 gray pt5 pr10 pb5 pl10 br-rd5">
-                <?= $data['blog'][0]['facet_title']; ?>
-              </span>
-            </a>
-          <?php } ?>
-
-          <?php if (!empty($data['facets'])) { ?>
-            <div class="lowercase">
-              <?php foreach ($data['facets'] as $topic) { ?>
-                <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 br-rd20 sky-500 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-                  <?= $topic['facet_title']; ?>
-                </a>
-              <?php } ?>
-            </div>
-          <?php } ?>
-        </div>
       </div>
 
       <div class="br-box-gray dark-br-black flex items-center mb5">

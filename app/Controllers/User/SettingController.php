@@ -81,7 +81,7 @@ class SettingController extends MainController
         );
 
 
-        addMsg(Translate::get('changes saved'), 'success');
+        addMsg(Translate::get('change.saved'), 'success');
         redirect($redirect);
     }
 
@@ -93,7 +93,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/avatar',
             [
-                'meta'  => meta($m = [], Translate::get('change avatar')),
+                'meta'  => meta($m = [], Translate::get('edit')),
                 'data'  => [
                     'sheet' => 'avatar',
                     'type'  => 'user',
@@ -122,7 +122,7 @@ class SettingController extends MainController
             UploadImage::cover($cover, $this->user['id'], 'user');
         }
 
-        addMsg(Translate::get('change saved'), 'success');
+        addMsg(Translate::get('change.saved'), 'success');
         redirect($redirect);
     }
 
@@ -132,7 +132,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/security',
             [
-                'meta'  => meta($m = [], Translate::get('change password')),
+                'meta'  => meta($m = [], sprintf(Translate::get('edit.option'), Translate::get('password'))),
                 'data'  => [
                     'password'      => '',
                     'password2'     => '',

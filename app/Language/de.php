@@ -10,7 +10,6 @@ $data = [
     'admin'             => 'Administratorin',
     'tools'             => 'Werkzeug',
     'logs'              => 'Protokolle',
-    'add.submenu'       => 'Untermenü hinzufügen',
     'sort'              => 'Sortieren',
     'facets'            => 'Facetten',
     'content'           => 'Inhalt',
@@ -40,6 +39,16 @@ $data = [
     'content.added'     => '%1$s adăugat',
     'content.restored'  => '%1$s restaurat',
     'time'              => 'Timp',
+    
+    'back'              => 'Zurück',
+    'submenu'           => 'субменю',
+    'edit'              => 'Bearbeiten',
+    'save'              => 'Speichern',
+    'add'               => 'Hinzufügen',
+    'add.option'        => 'Hinzufügen %1$s',
+    'edit.option'       => 'Bearbeiten %1$s',
+    'change.saved'      => 'Änderung gespeichert',
+    
     'build'             => 'Bauen',
     'complained about'  => 'beschwert ',
     'freely'            => 'Kostenlos',
@@ -170,8 +179,8 @@ $data = [
     'update the data'   => 'Update the data',
     'cancel'            => 'Cancel',
     'reply'             => 'Reply',
-    'edit'              => 'Edit',
-    'save'              => 'Save',
+
+
     'source'            => 'Source',
     'website'           => 'Website',
     'websites'          => 'Websites',
@@ -193,10 +202,8 @@ $data = [
     'badges'            => 'Badges',
     'reward the user'   => 'Reward the user',
     'reward added'      => 'Reward added',
-    'add badge'         => 'add badge',
-    'edit badge'        => 'Edit badge',
+
     'reward weight'     => 'Reward weight',
-    'edit user'         => 'Edit user',
     'for example'       => 'For example',
     'ed'                => 'ed',
     'add'               => 'Add',
@@ -215,12 +222,10 @@ $data = [
     'just me'           => 'Just me',
     'publications'      => 'Publications',
     'selected post'     => 'Selected post',
-    'edit post'         => 'Edit post',
     'color'             => 'Color',
     'text'              => 'Text',
     'author'            => 'Author',
     'characters'        => 'Characters',
-    'post added'        => 'Post added',
     'last answer'       => 'Last answer',
     'no answers'        => 'Unfortunately, there are no answers. Write if you know the answer.',
     'comments-desc'     => 'All comments (on answers) are in order of priority in the community',
@@ -233,19 +238,16 @@ $data = [
     'add-favorites'     => 'Add favorites',
     'remove-favorites'  => 'Remove favorites',
     'no-cover'          => 'No cover. Download',
-    'add post'          => 'Add post',
-    'change'            => 'Change',
-    'change saved'      => 'Change saved',
-    'add topic'         => 'Add Topic',
-    'add blog'          => 'Add Blog',
-    'add tag'           => 'Add tag',
-    'edit tag'          => 'Edit tag',
+
+
+
+
     'registrations'     => 'Registrations',
     'no dialogs'        => 'No dialogs',
     'words'             => 'Stop words',
     'word'              => 'Stop word',
     'stop words no'     => 'Stop word no',
-    'add a stop word'   => 'Add a stop word',
+
     'bookmark added'    => 'Bookmark added',
     'bookmark deleted'  => 'Bookmark deleted',
 
@@ -300,16 +302,13 @@ $data = [
     'default'               => 'Default',
     'qa'                    => 'Q&A',
 
-    /* Настройки */
     'setting profile page'  => 'Setting profile page',
-    'change avatar'         => 'Change avatar',
     'cover art'             => 'Cover art',
     'type'                  => 'Type',
     'logo'                  => 'Logo',
     'last'                  => 'Last',
     'cover removed'         => 'Cover removed',
     'change avatar page'    => 'Change avatar page',
-    'change password'       => 'Change password',
     'change password page'  => 'Change password page',
     'recommended size'      => 'Recommended size',
 
@@ -343,7 +342,6 @@ $data = [
     'access restricted'     => 'Access limited',
     'member does not exist' => 'Member does not exist',
 
-    'changes saved'         => 'Changes saved',
     'invite created'        => 'Invite created',
     'invalid'               => 'Invalid',
     'avatar changed'        => 'Avatar changed ',
@@ -369,8 +367,6 @@ $data = [
     'sections'              => 'Sections',
     'section'               => 'Section',
     'pages'                 => 'Pages',
-    'edit page'             => 'Edit page',
-    'add page'              => 'Add page',
     'go to'                 => 'Go to',
     'frameworks'            => 'Frameworks',
     'interesting sites'     => 'Interesting sites',
@@ -437,10 +433,8 @@ $data = [
     'message to PM'         => 'When the message came to PM',
     'contacted via @'       => 'When they reached out to me through @',
     'linkchange password'   => 'Your link to change your password',
-    'changing password'     => 'Change Password',
     'there are no domains'  => 'No domains',
-    'change the site'       => 'Change site',
-    'add a website'         => 'Add site',
+
     'description is formed' => 'Description is formed',
     'domain-desc'           => 'Grouping posts in a community by domain',
     'domains-title'         => 'Websites in the system',

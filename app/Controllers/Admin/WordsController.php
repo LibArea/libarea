@@ -35,7 +35,7 @@ class WordsController extends MainController
         return Tpl::agRender(
             '/admin/word/add',
             [
-                'meta'  => meta($m = [], Translate::get('add a stop word')),
+                'meta'  => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('word'))),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,

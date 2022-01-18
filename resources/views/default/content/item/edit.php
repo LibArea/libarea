@@ -2,7 +2,9 @@
   <div class="bg-white items-center justify-between p15">
 
     <a href="<?= getUrlByName('web.website', ['slug' => $data['domain']['item_url_domain']]); ?>"><?= $data['domain']['item_title_url']; ?></a> /
-    <span class="red-500"><?= Translate::get('change the site'); ?></span>
+    <span class="red-500">
+      <?= sprintf(Translate::get('edit.option'), Translate::get('website')); ?>
+    </span>
 
     <form action="<?= getUrlByName('web.edit.pr'); ?>" method="post">
       <?= csrf_field() ?>

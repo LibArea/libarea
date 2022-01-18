@@ -189,7 +189,7 @@ class EditFacetController extends MainController
             FacetModel::addLowFacetMatching($arr_mc, $facet_id);
         }
 
-        addMsg(Translate::get('changes saved'), 'success');
+        addMsg(Translate::get('change.saved'), 'success');
 
         if ($type == 'section') redirect(getUrlByName('admin.sections'));
         redirect(getUrlByName($type, ['slug' => $facet_slug]));

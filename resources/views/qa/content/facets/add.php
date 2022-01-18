@@ -2,7 +2,9 @@
   <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500"><?= Translate::get('add ' . $data['sheet']); ?></span>
+    <span class="red-500">
+      <?= sprintf(Translate::get('add.option'), Translate::get($data['sheet']. 's')); ?>
+    </span>
     
   <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
       <div class="text-sm gray mb15">

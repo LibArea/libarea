@@ -11,7 +11,7 @@
       ],  [
         'id'    => 'add',
         'url'   => getUrlByName('page.add'),
-        'name'  => Translate::get('add page'),
+        'name'  => Translate::get('add'),
         'icon'  => 'bi bi-plus-lg'
       ],
     ]

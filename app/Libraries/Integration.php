@@ -72,9 +72,9 @@ class Integration
             return false;
         }
 
-        $content    = Translate::get('Post added');
+        $content    = sprintf(Translate::get('content.added'), Translate::get('post'));
         $color      = hexdec("3366ff");
-
+ 
         // Формируем даты
         $timestamp  = date("c", strtotime("now"));
 

@@ -3,7 +3,9 @@
   <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500"><?= Translate::get('edit post'); ?></span>
+    <span class="red-500">
+      <?= sprintf(Translate::get('edit.option'), Translate::get('post')); ?>
+    </span>
     
     <form action="<?= getUrlByName('post.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>

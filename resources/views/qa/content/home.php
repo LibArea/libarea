@@ -84,7 +84,7 @@
             <span class="ml5 middle dark-gray-300"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($user['id'] == $topic['facet_user_id']) { ?>
-            <a class="right sky-500" title="<?= Translate::get('add post'); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
+            <a class="right sky-500" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
               <i class="bi bi-plus-lg text-sm"></i>
             </a>
           <?php } ?>
