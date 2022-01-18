@@ -243,10 +243,10 @@ class ProfileController extends MainController
         }
 
         // If the trust level is less than the established one
-        if ($this->user['trust_level'] >= Config::get('general.tl_add_pm')) {
+        if ($this->user['trust_level'] < Config::get('trust-levels.tl_add_pm')) {
             return false;
         }
-
+ 
         return true;
     }
 }
