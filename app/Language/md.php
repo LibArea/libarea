@@ -49,6 +49,7 @@ $data = [
     'no.comments'       => 'Din păcate, încă nu există comentarii',
     'no.answers'        => 'Ne pare rău, încă nu există răspunsuri',
     'default'           => 'Mod implicit',
+    'qa'                => 'Intrebari si raspunsuri',
     'answered'          => 'Răspuns',
     'translation'       => 'Traducere',
     'format.Q&A'        => 'Format de întrebări și răspunsuri',
@@ -462,6 +463,8 @@ $data = [
     'does this violate site rules'      => 'Acest lucru încalcă regulile site-ului.',
     'flag not included'                 => 'Semnalizați-l lăsat, nu îl folosiți des',
     'invited you'                       => 'You were invited by a member from this site. Enter invite',
+    'invite.features'                   => 'You can invite friends',
+    'results'                           => 'Rezultate',
     'medal for registration'            => 'Medalie pentru înregistrare',
     'design choice'                     => 'alegerea designului',
 

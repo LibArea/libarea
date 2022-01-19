@@ -131,8 +131,8 @@ class HomeModel extends MainModel
                             ON rel.relation_post_id = post_id 
 
             INNER JOIN users ON id = post_user_id
-            WHERE post_draft = 0       
-            $string $display";
+                WHERE post_draft = 0       
+                    $string $display";
 
         return DB::run($sql)->rowCount();
     }

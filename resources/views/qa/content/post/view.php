@@ -230,22 +230,29 @@
 </main>
 <aside class="col-span-3 relative br-rd5 mb-none">
 
-  <?php if (!empty($data['topics'])) { ?>
-    <div class="br-box-gray box-shadow-all bg-white br-rd5 mb15 p15">
-      <h3 class="uppercase mb5 mt0 font-light gray"><?= Translate::get('topics'); ?></h3>
-      <?php foreach ($data['topics'] as $topic) { ?>
-        <?php if ($user['id']) { ?>
-          <?php if (!$topic['signed_facet_id']) { ?>
+  <?php if (!empty($data['facets'])) { ?> 
+    <div class="br-box-gray bg-white box-shadow-all br-rd5 mb15 p15">
+      <h3 class="uppercase lh1 text-sm gray-500 mt5 mb10 font-normal dark-gray-300">
+        <?= Translate::get('topics'); ?>
+      </h3>
+      <?php foreach ($data['facets'] as $topic) { ?>
+        <div class="mb10">
+          <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
+
+          <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
             <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky-500 center mt5 mr5">
               <i class="bi bi-plus"></i> <?= Translate::get('read'); ?>
             </div>
           <?php } ?>
-        <?php } ?>
-        <a class="flex justify-center pt5 pr10 pb5 black dark-gray-300 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-          <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
-          <?= $topic['facet_title']; ?>
-          <div class="gray-400 text-sm"><?= $topic['facet_short_description']; ?></div>
-        </a>
+           
+          <a class="  black dark-gray-300 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+            <?= $topic['facet_title']; ?> 
+          </a>
+
+          <div class="text-sm mt5 pr15 mb-pr-0 gray-400">
+            <?= $topic['facet_short_description']; ?>          
+          </div>
+        </div>
       <?php } ?>
     </div>
   <?php } ?>

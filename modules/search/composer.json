@@ -1,0 +1,5 @@
+{
+    "require": {
+        "wamania/php-stemmer": "^3.0"
+    }
+}

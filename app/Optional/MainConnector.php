@@ -19,14 +19,14 @@ class MainConnector implements Connector
             "Models\*"                      => "app/Models/",
             "App\Middleware\Before\*"       => "app/Middleware/Before/",
             "App\Middleware\After\*"        => "app/Middleware/After/",
-            //  "Modules\*"                     => "modules/",
+            "Modules\*"                     => "modules/",
             "App\Commands\*"                => "app/Commands/",
 
             "DB"                            => "app/Config/DB.php",
             "Config"                        => "app/Config/Config.php",
 
             // ... or, if a specific class is added,
-            // "Phphleb\Debugpan\DPanel"      => "app/ThirdParty/phphleb/debugpan/DPanel.php",
+            "Phphleb\Debugpan\DPanel"      => "app/ThirdParty/phphleb/debugpan/DPanel.php",
             "Sass"                          => "app/Libraries/Sass.php",
             "Translate"                     => "app/Libraries/Translate.php",
             "Content"                       => "app/Libraries/Content.php",

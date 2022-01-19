@@ -47,4 +47,15 @@ class Tpl
     {
         insertTemplate(self::agTheme($template), $params);
     }
+    
+    public static function insert(string $hlTemplatePath, array $params = [])
+    {
+        extract($params);
+ 
+        // unset($params);
+        $hlTemplatePath = trim($hlTemplatePath, '/\\') . '.php';
+       
+        require HLEB_GLOBAL_DIRECTORY . '/resources/views/' . self::agTheme('/'.$hlTemplatePath);
+    }
+    
 }
