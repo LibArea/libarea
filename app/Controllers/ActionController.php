@@ -71,7 +71,7 @@ class ActionController extends MainController
     public function select()
     {
         $content_type   = Request::get('type');
-        $search         = Request::get('q');
+        $search         = Request::getPost('q');
         $search         = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
 
         return ActionModel::getSearch($search, $content_type);

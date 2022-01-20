@@ -12,7 +12,7 @@
             <?= Translate::get('message'); ?>
           </a>
         <?php } ?>
-        <a class="block text-2xl" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+        <a class="block text-2xl" href="/@<?= $user['login']; ?>">
           <?= $user['login']; ?>
         </a>
         <?php if ($user['name']) { ?>

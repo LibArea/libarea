@@ -32,19 +32,19 @@
     </ul>
   </div>
 
-  <div class="bg-white p20">
+  <div class="bg-white br-rd5 br-box-gray p20">
     <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>
         <div class="center inline pr10 pl10 mb20 mb-col-2">
-          <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+          <a href="/@<?= $user['login']; ?>">
             <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'br-rd-50 w60 h60'); ?>
-          </a>
-          <a class="block black mt5" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
-            <?= $user['login']; ?>
-          </a>
-          <?php if ($user['name']) { ?>
-            <span class="gray text-sm"><?= $user['name']; ?></span>
-          <?php } ?>
+            <div class="block dark-gray-300 mt5">
+              <?= $user['login']; ?>
+            </div>
+            <?php if ($user['name']) { ?>
+              <span class="gray dark-gray-300 text-sm"><?= $user['name']; ?></span>
+            <?php } ?>
+           </a>
         </div>
       <?php } ?>
     </div>

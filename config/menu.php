@@ -4,6 +4,7 @@
  * Menu configuration file
  */
 $account = \UserData::get();
+$login = $account['login'] ?? null;
 return [
 
     // Left general menu
@@ -67,7 +68,7 @@ return [
     // Правое выпадающее меню в шапке сайта
     'user' => [
         [
-            'url'   => getUrlByName('profile', ['login' => $account['login'] ?? 'none']),
+            'url'   => '/@' . $login,
             'title' => Translate::get('profile'),
             'icon'  => 'bi bi-person',
             'id'    => '',

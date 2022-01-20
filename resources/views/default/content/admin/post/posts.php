@@ -27,7 +27,7 @@
       <div id="post_<?= $post['post_id']; ?>">
         <div class="text-sm gray">
           <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'w20 h20 mr5'); ?>
-          <a class="date mr5" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+          <a class="date mr5" href="/@<?= $post['login']; ?>">
             <?= $post['login']; ?>
           </a>
           <span class="mr55">

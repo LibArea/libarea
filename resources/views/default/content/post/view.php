@@ -120,7 +120,7 @@
               <?= Translate::get('created by'); ?>
             </div>
             <div class="center">
-              <a title="<?= $post['login']; ?>" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+              <a title="<?= $post['login']; ?>" href="/@<?= $post['login']; ?>">
                 <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'w30 h30 br-rd-50'); ?>
               </a>
             </div>

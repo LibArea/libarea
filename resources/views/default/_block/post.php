@@ -17,7 +17,7 @@
           <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w40 h40 br-rd-50 mr5'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
-        <a class="flex black dark-gray-300 flex-center" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+        <a class="flex black dark-gray-300 flex-center" href="/@<?= $post['login']; ?>">
 
           <div class="ml5">
             <?= $post['login']; ?>

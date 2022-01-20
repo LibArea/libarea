@@ -23,7 +23,7 @@
       <div class="mb20">
         <?= user_avatar_img($data['user']['avatar'], 'small', $data['user']['login'], 'mr5 ml5 ava'); ?>
         <span class="mr5 ml5">
-          <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+          <a title="<?= Translate::get('profile'); ?>" href="/@<?= $user['login']; ?>">
             <?= $data['user']['login']; ?>
           </a>
         </span>

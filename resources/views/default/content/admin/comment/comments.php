@@ -27,7 +27,7 @@
       <div id="comment_<?= $comment['comment_id']; ?>">
         <div class="text-sm gray">
           <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'w20 h20 mr5'); ?>
-          <a class="date mr5" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
+          <a class="date mr5" href="/@<?= $comment['login']; ?>">
             <?= $comment['login']; ?>
           </a>
           <span class="date mr5">

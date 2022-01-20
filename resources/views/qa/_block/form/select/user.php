@@ -22,7 +22,6 @@
                 const fetchResponse = await fetch('/search/user', settings);
                 return await fetchResponse.json();
             } catch (e) {
-                console.log(e);
                 return e;
             }
         };

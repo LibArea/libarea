@@ -33,13 +33,17 @@
     abortCtrl = new AbortController();
     // покажем анимацию загрузки и скроем раскрывающийся список предложений
     tagify_post.loading(true).dropdown.hide.call(tagify_post);
-    fetch(`/search/post/${encodeURIComponent(term)}`, {signal: abortCtrl.signal})
+    
+    fetch("/search/post", {
+      method: "POST",
+      body: "q=" + encodeURIComponent(term),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
       .then(r => r.json())
-      .then(list => {
-          console.log(list);
+      .then((list) => {
         tagify_post.settings.whitelist.splice(0, list.length, ...list); // обновим массив бел. список на месте
         tagify_post.loading(false).dropdown.show.call(tagify_post, term); // отобразим раскрывающийся список предложений
-      })
+      });
   });
 
   <?php if ($action == 'edit') { ?>

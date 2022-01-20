@@ -127,7 +127,7 @@ class UserModel extends MainModel
                     hits_count,
                     up_count,
                     is_deleted 
-                        FROM users WHERE $sort";
+                        FROM users WHERE $sort"; // BINARY
 
         return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
     }

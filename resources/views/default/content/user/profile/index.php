@@ -5,7 +5,7 @@
 <main class="col-span-8 mb-col-12">
   <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
 
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('profile', ['login' => $data['profile']['login']]) . '/posts'); ?>
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/posts'); ?>
 </main>
 
 </div>

@@ -64,7 +64,7 @@
           <?php } ?>
         <?php } ?>
         <div class="text-sm lowercase">
-          <a class="gray" href="<?= getUrlByName('profile', ['login' => $profile['login']]); ?>">
+          <a class="gray" href="/@<?= $profile['login']; ?>">
             <?= user_avatar_img($profile['avatar'], 'small', $profile['login'], 'w20 h20 br-rd-50 mr5'); ?>
             <?= $profile['login']; ?>
           </a>

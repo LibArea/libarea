@@ -10,7 +10,7 @@
     <?php foreach ($data['comments'] as $comm) { ?>
       <div class="bg-white br-rd5 mt15 br-box-gray p15">
         <div class="text-sm gray mb5">
-          <a class="gray" href="<?= getUrlByName('profile', ['login' => $comm['login']]); ?>">
+          <a class="gray" href="/@<?= $comm['login']; ?>">
             <?= user_avatar_img($comm['avatar'], 'max', $comm['login'], 'w20 h20 mr5'); ?>
             <?= $comm['login']; ?>
           </a>
@@ -30,7 +30,7 @@
       </div>
     <?php } ?>
 
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('profile', ['login' => $data['profile']['login']]) . '/comments'); ?>
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/comments'); ?>
 
   <?php } else { ?>
     <?= no_content(Translate::get('no.comments'), 'bi bi-info-lg'); ?>

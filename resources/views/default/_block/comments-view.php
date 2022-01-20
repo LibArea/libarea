@@ -16,7 +16,7 @@
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="answ-telo">
                 <div class="flex text-sm">
-                  <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
+                  <a class="gray-600" href="/@<?= $answer['login']; ?>">
                     <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20'); ?>
                     <span class="mr5 ml5">
                       <?= $answer['login']; ?>
@@ -122,7 +122,7 @@
               <div class="p5">
                 <div class="max-w780">
                   <div class="text-sm flex">
-                    <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
+                    <a class="gray-600" href="/@<?= $comment['login']; ?>">
                       <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'w20 h20'); ?>
                       <span class="mr5 ml5">
                         <?= $comment['login']; ?>

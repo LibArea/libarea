@@ -4,7 +4,7 @@
     <?php $n = 0;
     foreach ($focus_users as $user) {
       $n++; ?>
-      <a class="-mr-1" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+      <a class="-mr-1" href="/@<?= $user['login']; ?>">
         <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'w30 h30 br-rd-50'); ?>
       </a>
     <?php } ?>

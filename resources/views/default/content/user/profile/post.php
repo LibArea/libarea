@@ -9,7 +9,7 @@
   <div class="mt15">
     <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
   </div>
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('profile', ['login' => $data['profile']['login']]) . '/posts'); ?>
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/posts'); ?>
 </main>
 
 </div>

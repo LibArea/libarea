@@ -23,6 +23,8 @@
  */
 define('HLEB_PROJECT_DEBUG', false);
 
+// define('HLEB_DB_LOG_ENABLED', true);
+
 /*
  |-----------------------------------------------------------------------------
  | Caching mode
@@ -177,7 +179,7 @@ error_reporting(E_ALL);
  | Изначально: "/^[a-z0-9а-яё\_\-\/\.]+$/u"
  |
  */
-define('HLEB_PROJECT_VALIDITY_URL', "/^[А-Яа-яa-zA-Z0-9\_\-\/\.]+$/u");
+define('HLEB_PROJECT_VALIDITY_URL', "/^[a-zA-Z0-9\@\_\-\/\.]+$/u");
 
 /*
  |-----------------------------------------------------------------------------
@@ -195,6 +197,7 @@ define('HLEB_PROJECT_VALIDITY_URL', "/^[А-Яа-яa-zA-Z0-9\_\-\/\.]+$/u");
  */
 
 define('HLEB_SEARCH_DBASE_CONFIG_FILE', realpath(HLEB_GLOBAL_DIRECTORY . '/config'));
+
 
 // Корневая папка шаблонов в системе
 // Root template folder on the system 

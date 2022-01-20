@@ -34,7 +34,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
             <div class="flex justify-center">
               <?php if ($data['count']['count_posts'] > 0) { ?>
                 <div class="ml15 mr15 center box-number">
-                  <a class="focus-user sky-500" href="<?= getUrlByName('profile.posts', ['login' => $profile['login']]); ?>">
+                  <a class="focus-user sky-500" href="/@<?= $profile['login']; ?>/posts">
                     <?= $data['count']['count_posts']; ?>
                   </a>
                   <div class="uppercase mt5 text-sm gray-400"><?= Translate::get('posts'); ?></div>
@@ -43,7 +43,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
 
               <?php if ($data['count']['count_answers'] > 0) { ?>
                 <div class="ml15 mr15 center box-number">
-                  <a class="focus-user sky-500" href="<?= getUrlByName('profile.answers', ['login' => $profile['login']]); ?>">
+                  <a class="focus-user sky-500" href="/@<?= $profile['login']; ?>/answers">
                     <?= $data['count']['count_answers']; ?>
                   </a>
                   <div class="uppercase mt5 text-sm gray-400"><?= Translate::get('answers'); ?></div>
@@ -52,7 +52,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
 
               <?php if ($data['count']['count_comments'] > 0) { ?>
                 <div class="ml15 mr15 center box-number">
-                  <a class="focus-user sky-500" href="<?= getUrlByName('profile.comments', ['login' => $profile['login']]); ?>">
+                  <a class="focus-user sky-500" href="/@<?= $profile['login']; ?>/comments">
                     <?= $data['count']['count_comments']; ?>
                   </a>
                   <div class="uppercase mt5 text-sm gray-400"><?= Translate::get('comments'); ?></div>

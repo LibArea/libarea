@@ -22,7 +22,7 @@
           <td><?= $log['log_id']; ?></td>
           <td> 
             <span class="gray-400 mr15">id: <?= $log['log_user_id']; ?></span>
-            <a href="<?= getUrlByName('profile', ['login' => $log['log_user_login']]); ?>"><?= $log['log_user_login']; ?></a>
+            <a href="/@<?= $log['log_user_login']; ?>"><?= $log['log_user_login']; ?></a>
           </td>
           <td class="gray-400"><?= Translate::get($log['log_type_content']); ?></td>
           <td><?= sprintf(Translate::get($log['log_action_name']), Translate::get($log['log_type_content'])); ?></td>
