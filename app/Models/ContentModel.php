@@ -8,6 +8,7 @@ use PDO;
 
 class ContentModel extends MainModel
 {
+    // Member information (id, slug) 
     // Информация по участнику (id, slug)
     public static function getUsers($params, $name)
     {
@@ -28,6 +29,7 @@ class ContentModel extends MainModel
         return $result->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Member Content Posting Frequency 
     // Частота размещения контента участника 
     public static function getSpeed($uid, $type)
     {
@@ -42,21 +44,17 @@ class ContentModel extends MainModel
         return  DB::run($sql, ['uid' => $uid])->rowCount();
     }
 
+    // Get a list of forbidden stop words
     // Получим список запрещенных стоп-слов
     public static function getStopWords()
     {
-        $sql = "SELECT 
-                    stop_id, 
-                    stop_word, 
-                    stop_add_uid, 
-                    stop_space_id, 
-                    stop_date
-                        FROM stop_words";
+        $sql = "SELECT stop_id, stop_word FROM stop_words";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Добавить стоп-слово
+    // Add a safe word
+    // Добавим стоп-слово
     public static function setStopWord($params)
     {
         $sql = "INSERT INTO stop_words(stop_word, stop_add_uid, stop_space_id) 
@@ -65,7 +63,8 @@ class ContentModel extends MainModel
         return DB::run($sql, $params);
     }
 
-    // Удалить стоп-слово
+    // Delete the safe word
+    // Удалим стоп-слово
     public static function deleteStopWord($word_id)
     {
         $sql = "DELETE FROM stop_words WHERE stop_id = :word_id";
