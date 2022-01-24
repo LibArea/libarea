@@ -60,7 +60,7 @@ class LoginController extends MainController
 
         (new \App\Controllers\Auth\SessionController())->set($user);
 
-        (new \App\Controllers\AgentController())->set();
+        (new \App\Controllers\AgentController())->set($user['id']);
 
         redirect('/');
     }
