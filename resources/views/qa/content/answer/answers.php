@@ -34,7 +34,7 @@
           </div>
         <?php } else { ?>
           <div class="bg-red-200">
-            ~ <?= Translate::get('Answer deleted'); ?>
+            ~ Удален
           </div>
         <?php } ?>
       </div>

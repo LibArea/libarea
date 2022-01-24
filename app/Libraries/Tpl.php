@@ -9,7 +9,8 @@ class Tpl
         $user  = UserData::get();
         $tpl_puth = $user['template'] . $file;
 
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $user['template'] . $file . '.php')) {
+        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php'))
+        {  
             $tpl_puth = Config::get('general.template') . $file;
         }
 
@@ -52,10 +53,19 @@ class Tpl
     {
         extract($params);
  
-        // unset($params);
+        unset($params);
         $hlTemplatePath = trim($hlTemplatePath, '/\\') . '.php';
        
         require HLEB_GLOBAL_DIRECTORY . '/resources/views/' . self::agTheme('/'.$hlTemplatePath);
     }
     
+    public static function insertModul(string $hlTemplatePath, array $params = [])
+    {
+        extract($params);
+ 
+        // unset($params);
+        $hlTemplatePath = trim($hlTemplatePath, '/\\') . '.php';
+       
+        require '/views/' . self::agTheme('/'.$hlTemplatePath);
+    }
 }

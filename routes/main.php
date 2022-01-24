@@ -143,10 +143,11 @@ Route::get('/{login}/answers/page/{page?}')->controller('User\ProfileController@
 Route::get('/{login}/comments')->controller('User\ProfileController@comments', ['profile.comments', 'profile'])->where(['login' => '@[A-Za-z0-9]+']);
 Route::get('/{login}/comments/page/{page?}')->controller('User\ProfileController@comments', ['profile.comments', 'profile'])->where(['page' => '[0-9]+', 'login' => '@[A-Za-z0-9]+']);
 
-Route::get('/comments')->controller('Comment\CommentController', ['comments'])->name('comments');
-Route::get('/comments/page/{page?}')->controller('Comment\CommentController', ['comments'])->where(['page' => '[0-9]+']);
-Route::get('/answers')->controller('Answer\AnswerController', ['answers'])->name('answers');
-Route::get('/answers/page/{page?}')->controller('Answer\AnswerController', ['answers'])->where(['page' => '[0-9]+']);
+Route::get('/comments')->controller('Comment\CommentController', ['comments.all', 'comments'])->name('comments');
+Route::get('/comments/page/{page?}')->controller('Comment\CommentController', ['comments.all', 'comments'])->where(['page' => '[0-9]+']);
+Route::get('/answers')->controller('Answer\AnswerController', ['answers.all', 'answers'])->name('answers');
+Route::get('/answers/page/{page?}')->controller('Answer\AnswerController', ['answers.all', 'answers'])->where(['page' => '[0-9]+']);
+
 
 Route::get('/topics')->controller('Facets\AllFacetController', ['topics.all', 'topic'])->name('topics.all');
 Route::get('/topics/page/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'topic'])->where(['page' => '[0-9]+']);
@@ -168,8 +169,8 @@ Route::get('/blogs/new/page/{page?}')->controller('Facets\AllFacetController', [
 Route::get('/blog/{slug}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('blog');
 Route::get('/blog/{slug}/page/{page?}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);
 
-Route::get('/web')->controller('Item\WebController', ['all'])->name('web');
-Route::get('/web/page/{page?}')->controller('Item\WebController', ['all'])->where(['page' => '[0-9]+']);
+Route::get('/web')->controller('Item\WebController', ['web.all', 'web'])->name('web');
+Route::get('/web/page/{page?}')->controller('Item\WebController', ['web.all', 'web'])->where(['page' => '[0-9]+']);
 
 Route::get('/domain/{domain}')->controller('Item\WebController@posts', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 Route::get('/domain/{domain}/page/{page?}')->controller('Item\WebController@posts', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
@@ -189,7 +190,7 @@ Route::get('/sitemap.xml')->controller('RssController');
 Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 
-Route::type(['get', 'post'])->get('/search')->module('search', 'SearchController')->name('search');
+Route::type(['get', 'post'])->get('/search')->module('search', 'App\Search')->name('search');
 
 require 'admin.php';
 

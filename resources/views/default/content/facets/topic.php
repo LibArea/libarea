@@ -77,7 +77,7 @@
       </ul>
     </div>
 
-    <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
+    <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
 
 

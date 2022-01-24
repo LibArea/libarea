@@ -246,7 +246,7 @@ class SettingController extends MainController
         );
 
 
-        addMsg(Translate::get('change saved'), 'success');
+        addMsg(Translate::get('change.saved'), 'success');
 
         redirect(getUrlByName('setting.notifications', ['login' => $this->user['login']]));
     }

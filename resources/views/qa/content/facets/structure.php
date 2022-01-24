@@ -40,7 +40,7 @@
             'id' => 'topics.my',
             'url' => getUrlByName('topics.my'),
             'content' => Translate::get('reading'),
-            'auth' => 'yes',
+            'tl' => 1,
             'icon' => 'bi bi-check2-square'
           ],
           [

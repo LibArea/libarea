@@ -14,7 +14,7 @@
             'icon'  => 'bi bi-sort-down'
           ],
           [
-            'auth'  => true,
+            'tl'    => 1,
             'id'    => $data['type'] . '.all',
             'url'   => getUrlByName('main.all'),
             'title' => Translate::get('all'),
@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
+  <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
 
   <div class="mt10 mb15">
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>

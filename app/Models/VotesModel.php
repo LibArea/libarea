@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class VotesModel extends MainModel
+class VotesModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Информация по контенту
     public static function authorId($content_id, $type)
@@ -14,7 +12,7 @@ class VotesModel extends MainModel
         // $type = post / comment / answer / item
         $sql = "SELECT " . $type . "_id, " . $type . "_user_id FROM " . $type . "s WHERE " . $type . "_id = :content_id";
 
-        $result = DB::run($sql, ['content_id' => $content_id])->fetch(PDO::FETCH_ASSOC);
+        $result = DB::run($sql, ['content_id' => $content_id])->fetch();
 
         return $result[$type . '_user_id'];
     }
@@ -26,7 +24,7 @@ class VotesModel extends MainModel
                     FROM votes_" . $type . "  
                         WHERE votes_" . $type . "_item_id = :content_id AND votes_" . $type . "_user_id = :author_id";
 
-        return  DB::run($sql, ['content_id' => $content_id, 'author_id' => $author_id])->fetch(PDO::FETCH_ASSOC);
+        return  DB::run($sql, ['content_id' => $content_id, 'author_id' => $author_id])->fetch();
     }
 
     // Записываем лайк

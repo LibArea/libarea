@@ -58,7 +58,7 @@
                 <?php } ?>
 
                 <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
-                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-500 ml10 mr5">
+                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-500 ml10 mr10">
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
                 <?php } ?>
@@ -98,7 +98,7 @@
         <?php } ?>
       </div>
 
-      <?php foreach ($answer['comm'] as  $comment) { ?>
+      <?php foreach ($answer['comments'] as  $comment) { ?>
 
         <?php if ($comment['comment_is_deleted'] == 1) { ?>
           <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>

@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class FacetModel extends MainModel
+class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // All facets
     // Все фасеты
@@ -14,7 +12,7 @@ class FacetModel extends MainModel
     {
         switch ($sort) {
             case 'topics.my':
-                $signet = "WHERE facet_type = 'topic' AND signed_user_id = :uid ORDER BY facet_count DESC";
+                $signet = "WHERE facet_type = 'topic' AND signed_user_id = $uid ORDER BY facet_count DESC";
                 break;
             case 'topics.new':
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
@@ -32,7 +30,7 @@ class FacetModel extends MainModel
                 $signet = "WHERE facet_type = 'blog' ORDER BY facet_id DESC";
                 break;
             case 'blogs.my':
-                $signet = "WHERE facet_type = 'blog' AND signed_user_id = :uid ORDER BY facet_user_id = :uid DESC, facet_count DESC";
+                $signet = "WHERE facet_type = 'blog' AND signed_user_id = $uid ORDER BY facet_user_id = $uid DESC, facet_count DESC";
                 break;
             case 'blogs.ban':
                 $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
@@ -62,18 +60,18 @@ class FacetModel extends MainModel
                     facet_type,
                     facet_is_deleted
                         FROM facets 
-                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :uid
+                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = $uid
                         $signet
                         LIMIT $start, $limit";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     public static function getFacetsAllCount($uid, $sort)
     {
         switch ($sort) {
             case 'topics.my':
-                $signet = "WHERE facet_type = 'topic' AND signed_user_id = :uid ORDER BY facet_count DESC";
+                $signet = "WHERE facet_type = 'topic' AND signed_user_id = $uid ORDER BY facet_count DESC";
                 break;
             case 'topics.new':
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
@@ -91,7 +89,7 @@ class FacetModel extends MainModel
                 $signet = "WHERE facet_type = 'blog' ORDER BY facet_id DESC";
                 break;
             case 'blogs.my':
-                $signet = "WHERE facet_type = 'blog' AND signed_user_id = :uid ORDER BY facet_count DESC";
+                $signet = "WHERE facet_type = 'blog' AND signed_user_id = $uid ORDER BY facet_count DESC";
                 break;
             case 'blogs.ban':
                 $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
@@ -111,10 +109,10 @@ class FacetModel extends MainModel
                     signed_user_id,
                     facet_is_deleted
                         FROM facets 
-                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :uid
+                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = $uid
                         $signet";
 
-        return DB::run($sql, ['uid' => $uid])->rowCount();
+        return DB::run($sql)->rowCount();
     }
 
     // Cell information (id, slug) 
@@ -150,7 +148,7 @@ class FacetModel extends MainModel
                     facet_is_deleted
                         FROM facets WHERE $sort";
 
-        return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['params' => $params])->fetch();
     }
 
     // Facet owner 
@@ -182,7 +180,7 @@ class FacetModel extends MainModel
                         FROM facets 
                             WHERE facet_type = :type AND facet_user_id = :uid AND facet_is_deleted = 0";
 
-        return DB::run($sql, ['uid' => $uid, 'type' => $type])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid, 'type' => $type])->fetchAll();
     }
 
     public static function addPostFacets($rows, $post_id)
@@ -292,7 +290,7 @@ class FacetModel extends MainModel
                  WHERE relation_facet_id = :facet_id  GROUP BY post_user_id 
                  ORDER BY hits_count DESC LIMIT 5";
 
-        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
     // Participant contribution
@@ -317,7 +315,7 @@ class FacetModel extends MainModel
                                     GROUP BY relation_facet_id 
                                         ORDER BY count DESC LIMIT 5";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     public static function userReads($uid)
@@ -327,7 +325,7 @@ class FacetModel extends MainModel
                         FROM facets_signed 
                             WHERE signed_user_id = :uid";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     public static function advice($uid)
@@ -352,7 +350,7 @@ class FacetModel extends MainModel
                         WHERE facet_id NOT IN(" . implode(',', $result ?? []) . ")
                         ORDER BY facet_count DESC LIMIT 6";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     public static function add($params)
@@ -378,7 +376,7 @@ class FacetModel extends MainModel
 
         DB::run($sql, $params);
 
-        return  DB::run("SELECT LAST_INSERT_ID() as facet_id")->fetch(PDO::FETCH_ASSOC);
+        return  DB::run("SELECT LAST_INSERT_ID() as facet_id")->fetch();
     }
 
     public static function edit($params)
@@ -418,7 +416,7 @@ class FacetModel extends MainModel
                     facet_type
                         FROM facets WHERE facet_user_id = :uid AND facet_type = :type";
 
-        return DB::run($sql, ['uid' => $uid, 'type' => $type])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid, 'type' => $type])->fetchAll();
     }
 
     // Number of faces created by the contributor
@@ -458,7 +456,7 @@ class FacetModel extends MainModel
                         LEFT JOIN users ON id = signed_user_id
                           WHERE signed_facet_id = :facet_id LIMIT $limit";
 
-        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
     // Up the structure of connected trees (PARENTS)
@@ -481,7 +479,7 @@ class FacetModel extends MainModel
                         LEFT JOIN facets_matching on facet_id = matching_parent_id
                         WHERE matching_chaid_id  = :facet_id";
 
-        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
     // Down the structure  (CHILDREN)
@@ -504,7 +502,7 @@ class FacetModel extends MainModel
                         LEFT JOIN facets_matching on facet_id = matching_chaid_id 
                         WHERE matching_parent_id = :facet_id";
 
-        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
     // Up the structure of the main trees (PARENTS)
@@ -527,7 +525,7 @@ class FacetModel extends MainModel
                         LEFT JOIN facets_relation on facet_id = facet_parent_id
                         WHERE facet_chaid_id  = :facet_id";
 
-        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
     // Down the structure of the main trees (CHILDREN)
@@ -550,7 +548,7 @@ class FacetModel extends MainModel
                         LEFT JOIN facets_relation on facet_id = facet_chaid_id 
                         WHERE facet_parent_id = :facet_id";
 
-        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
     // Getting root level 
@@ -567,7 +565,7 @@ class FacetModel extends MainModel
                         FROM facets  
                             WHERE facet_top_level = 0";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Theme Tree
@@ -599,7 +597,7 @@ class FacetModel extends MainModel
                         LEFT JOIN facets_relation on facet_id = facet_chaid_id 
                             WHERE facet_type = 'topic' ORDER BY facet_sort DESC";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Posts where there are no topics
@@ -619,7 +617,7 @@ class FacetModel extends MainModel
                             
                             WHERE relation_facet_id is NULL AND post_is_deleted = 0 AND post_draft = 0";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     public static function ban($id, $status)

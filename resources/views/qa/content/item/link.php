@@ -33,7 +33,7 @@
     <?php } ?>
   </div>
 
-  <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
+  <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
   <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('domain', ['domain' => $data['item']['item_url_domain']])); ?>
 </main>
 <aside class="col-span-3 relative">

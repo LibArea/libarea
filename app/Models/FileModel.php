@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class FileModel extends MainModel
+class FileModel extends \Hleb\Scheme\App\Models\MainModel
 {
     public static function set($params)
     {
@@ -42,7 +40,7 @@ class FileModel extends MainModel
                         WHERE file_id = :file_id AND 
                             file_user_id = :uid AND file_type = :type";
 
-        return  DB::run($sql, ['file_id' => $file_id, 'uid' => $uid, 'type' => $type])->fetch(PDO::FETCH_ASSOC);
+        return  DB::run($sql, ['file_id' => $file_id, 'uid' => $uid, 'type' => $type])->fetch();
     }
 
     public static function removal($file_path, $uid)

@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class PostModel extends MainModel
+class PostModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Добавляем пост
     public static function addPost($params)
@@ -53,7 +51,7 @@ class PostModel extends MainModel
 
         DB::run($sql, $params);
 
-        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
+        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch();
 
         return $sql_last_id['last_id'];
     }
@@ -64,12 +62,13 @@ class PostModel extends MainModel
                     post_slug 
                         FROM posts WHERE post_slug = :slug";
 
-        return DB::run($sql, ['slug' => $slug])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['slug' => $slug])->fetch();
     }
 
     // Полная версия поста  
     public static function getPost($params, $name, $user)
     {
+        $uid = $user['id'];
         $sort = "post_id = :params";
         if ($name == 'slug') {
             $sort = "post_slug = :params";
@@ -116,13 +115,13 @@ class PostModel extends MainModel
                     favorite_type
                         FROM posts
                         LEFT JOIN users ON id = post_user_id
-                        LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :id AND favorite_type = 1 
-                        LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :id
+                        LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = $uid AND favorite_type = 1 
+                        LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $uid
                             WHERE $sort AND post_tl <= :trust_level";
 
-        $data = ['params' => $params, 'id' => $user['id'], 'trust_level' => $user['trust_level']];
+        $data = ['params' => $params, 'trust_level' => $user['trust_level']];
 
-        return DB::run($sql, $data)->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, $data)->fetch();
     }
 
     // Рекомендованные посты
@@ -153,7 +152,7 @@ class PostModel extends MainModel
                                 AND post_user_id != :id
                                 ORDER BY post_id DESC LIMIT $limit";
 
-        return DB::run($sql, ['post_id' => $post_id, 'id' => $user['id'], 'tl' => $tl])->fetchall(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['post_id' => $post_id, 'id' => $user['id'], 'tl' => $tl])->fetchall();
     }
 
     // Пересчитываем количество
@@ -225,7 +224,7 @@ class PostModel extends MainModel
                         FROM posts 
                            WHERE $in post_is_deleted = 0 AND post_tl = 0";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
 
@@ -239,7 +238,7 @@ class PostModel extends MainModel
                         FROM posts 
                             WHERE post_is_deleted = 0 AND post_tl = 0";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Удаление обложки
@@ -273,7 +272,7 @@ class PostModel extends MainModel
                     FROM posts
                         WHERE post_id = :post_id";
 
-        $result = DB::run($sql, ['post_id' => $post_id])->fetch(PDO::FETCH_ASSOC);
+        $result = DB::run($sql, ['post_id' => $post_id])->fetch();
 
         return $result['post_is_deleted'];
     }
@@ -301,7 +300,7 @@ class PostModel extends MainModel
                         LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :id
                             WHERE relation_post_id  = :post_id AND facet_type = '$condition'";
 
-        return DB::run($sql, ['post_id' => $post_id, 'id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['post_id' => $post_id, 'id' => $user_id])->fetchAll();
     }
 
 
@@ -315,7 +314,7 @@ class PostModel extends MainModel
                         INNER JOIN facets_posts_relation ON relation_facet_id = facet_id
                             WHERE relation_post_id  = :post_id AND facet_type = :type";
 
-        return DB::run($sql, ['post_id' => $post_id, 'type' => $type])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['post_id' => $post_id, 'type' => $type])->fetchAll();
     }
 
     public static function getPostLastUser($post_id)
@@ -334,6 +333,6 @@ class PostModel extends MainModel
                             WHERE answer_post_id = :post_id
                             ORDER BY answer_date DESC";
 
-        return DB::run($sql, ['post_id' => $post_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['post_id' => $post_id])->fetch();
     }
 }

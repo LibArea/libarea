@@ -26,7 +26,7 @@
     </ul>
   </div>
   <div class="mt10">
-    <?= Tpl::import('/_block/post', ['data' => $data]); ?>
+    <?= Tpl::import('/content/post/post', ['data' => $data]); ?>
   </div>
 </main>
 <?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-preferences')]); ?>

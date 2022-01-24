@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class SubscriptionModel extends MainModel
+class SubscriptionModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // $type: post | facet
     public static function getFocus($content_id, $user_id, $type)
@@ -19,7 +17,7 @@ class SubscriptionModel extends MainModel
                     WHERE signed_facet_id = :content_id AND signed_user_id = :user_id";
         }
 
-        return DB::run($sql, ['content_id' => $content_id, 'user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['content_id' => $content_id, 'user_id' => $user_id])->fetch();
     }
 
     public static function focus($content_id, $user_id, $type)

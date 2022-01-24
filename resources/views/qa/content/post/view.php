@@ -12,7 +12,7 @@
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
       <div class="post-body">
         <h1 class="mb0 mt10 font-normal text-2xl">
-          <?= Tpl::import('/_block/post-title', ['post' => $post]); ?>
+          <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm lowercase flex gray-400">
           <?= $post['post_date_lang']; ?>

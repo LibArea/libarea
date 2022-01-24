@@ -19,13 +19,13 @@ class WebController extends MainController
         $this->user  = UserData::get();
     }
 
-    public function index()
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $pagesCount = WebModel::getItemsAllCount();
-        $items      = WebModel::getItemsAll($page, $this->limit, $this->user['id']);
+        $pagesCount = WebModel::getItemsAllCount($sheet);
+        $items      = WebModel::getItemsAll($page, $this->limit, $this->user, $sheet);
 
         $result = [];
         foreach ($items as $ind => $row) {
@@ -48,11 +48,11 @@ class WebController extends MainController
             [
                 'meta'  => meta($m, Translate::get('domains-title'), Translate::get('domains-desc')),
                 'data'  => [
-                    'sheet'         => 'domains',
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'items'         => $result,
-                    'type'          => 'web',
+                    'type'          => $type,
+                    'sheet'         => $sheet,
                 ]
             ]
         );

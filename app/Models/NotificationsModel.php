@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class NotificationsModel extends MainModel
+class NotificationsModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // $action_type
     // 1 - сообщение 
@@ -42,7 +40,7 @@ class NotificationsModel extends MainModel
                         WHERE notification_recipient_id = :uid
                         ORDER BY notification_id DESC LIMIT 100";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     // Уведомления
@@ -56,7 +54,7 @@ class NotificationsModel extends MainModel
                         WHERE notification_recipient_id = :uid
                         AND notification_read_flag = 0";
 
-        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch();
     }
 
     // Отправка
@@ -85,7 +83,7 @@ class NotificationsModel extends MainModel
                         FROM posts_signed
                         WHERE signed_post_id = :post_id";
 
-        return DB::run($sql, ['post_id' => $post_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['post_id' => $post_id])->fetchAll();
     }
 
     // Список читаемых постов
@@ -97,7 +95,7 @@ class NotificationsModel extends MainModel
                         FROM posts_signed
                         WHERE signed_user_id = :uid";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     public static function getFocusPostsListUser($uid)
@@ -159,11 +157,11 @@ class NotificationsModel extends MainModel
                             ON rel.relation_post_id = post_id 
 
             INNER JOIN users ON id = post_user_id
-            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :uid
-            LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :uid AND favorite_type = 1
+            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $uid
+            LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = $uid AND favorite_type = 1
             $string  LIMIT 100";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Оповещение просмотрено
@@ -188,7 +186,7 @@ class NotificationsModel extends MainModel
                         FROM notifications
                             WHERE notification_id = :id";
 
-        return DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['id' => $id])->fetch();
     }
 
     public static function setRemove($uid)

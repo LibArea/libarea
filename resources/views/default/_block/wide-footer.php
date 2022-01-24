@@ -42,7 +42,8 @@
         <i class="bi bi-github text-2xl"></i>
       </a>
       <div class="text-sm mt5 mb5 gray-400">
-        Agouti &copy; <?= date('Y'); ?> — <?= Translate::get('community'); ?>
+        <?= Config::get('meta.name'); ?>
+        &copy; <?= date('Y'); ?> — <?= Translate::get('community'); ?>
       </div>
     </div>
   </div>

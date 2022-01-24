@@ -1,48 +1,59 @@
 <div class="col-span-2 justify-between mb-none">
   <nav class="sticky top70">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
+    <?= tabs_nav(
+      'menu',
+      $data['type'],
+      $user,
+      $pages = Config::get('menu.left'),
+    ); ?>
   </nav>
 </div>
 
 <main class="col-span-7 mb-col-12 mb10">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-  </div>
-  <?php if (!empty($data['comments'])) { ?>
-    <?php foreach ($data['comments'] as $comment) { ?>
-      <div class="bg-white br-rd5 mt15 br-box-gray p15">
-        <?php if ($comment['comment_is_deleted'] == 0) { ?>
-          <div class="text-sm mb5">
-            <a class="gray" href="/@<?= $comment['login']; ?>">
-              <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'w20 h20'); ?>
-              <span class="mr5 ml5">
-                <?= $comment['login']; ?>
-              </span>
-            </a>
-            <span class="gray-400 lowercase"><?= $comment['date']; ?></span>
-          </div>
-          <a href="<?= getUrlByName('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>#comment_<?= $comment['comment_id']; ?>">
-            <?= $comment['post_title']; ?>
-          </a>
-          <div>
-            <?= $comment['comment_content']; ?>
-          </div>
-          <div class="hidden gray">
-            <?= votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
-          </div>
-        <?php } else { ?>
-          <div class="bg-red-200 mb20">
-            ~ <?= sprintf(Translate::get('content.deleted'), Translate::get('comment')); ?>
-          </div>
-        <?php } ?>
-      </div>
-    <?php } ?>
+    <ul class="flex flex-row list-none m0 p0 center">
 
+      <?= tabs_nav(
+        'nav',
+        $data['sheet'],
+        $user,
+        $pages = [
+          [
+            'tl'    => 0,
+            'id'    => $data['type'] . '.all',
+            'url'   => '/comments',
+            'title' => Translate::get('comments'),
+            'icon'  => 'bi bi-sort-down'
+          ],
+          [
+            'tl'    => UserData::REGISTERED_ADMIN,
+            'id'    => $data['type'] . '.deleted',
+            'url'   => getUrlByName('comments.deleted'),
+            'title' => Translate::get('deleted'),
+            'icon'  => 'bi bi-app'
+          ],
+        ]
+      ); ?>
+
+    </ul>
+    <div data-template="feed" class="tippy gray-400">
+      <i class="bi bi-info-square"></i>
+    </div>
+    <div id="feed" style="display: none;">
+      <div class="text-xm gray-500 p5 dark-gray-300 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
+    </div>
+  </div>
+
+  <?php if (!empty($data['comments'])) { ?>
+    <div class="bg-white br-rd5 br-box-gray mt15 mb15 p15">
+      <?= Tpl::import(
+        '/content/comment/comment',
+        [
+          'answer'   => $data['comments'],
+          'user'     => $user,
+        ]
+      ); ?>
+    </div>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/comments'); ?>
 
   <?php } else { ?>

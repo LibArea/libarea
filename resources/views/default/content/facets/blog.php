@@ -34,7 +34,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 
     <div class="grid grid-cols-12 gap-4 mb-gap-05">
       <main class="col-span-9 mb-col-12">
-        <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
+        <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>
       <aside class="col-span-3 relative mb-none">

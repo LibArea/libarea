@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class AuditModel extends MainModel
+class AuditModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Страница аудита
     public static function getAuditsAll($page, $limit, $sheet)
@@ -29,7 +27,7 @@ class AuditModel extends MainModel
                         LEFT JOIN users ON id = audit_user_id
                         WHERE $sort ORDER BY audit_id DESC LIMIT $start, $limit";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     public static function getAuditsAllCount($sheet)
@@ -76,7 +74,7 @@ class AuditModel extends MainModel
     {
         $sql = "SELECT audit_user_id FROM audits WHERE audit_content_id = :id";
 
-        $user = DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
+        $user = DB::run($sql, ['id' => $id])->fetch();
 
         $usql = "UPDATE users SET limiting_mode = 0 WHERE id = :uid";
 
@@ -104,7 +102,7 @@ class AuditModel extends MainModel
                     comments WHERE comment_user_id = :uid and comment_is_deleted = 0) AS t3Count";
 
         $result = DB::run($sql, ['uid' => $uid]);
-        $lists  = $result->fetch(PDO::FETCH_ASSOC);
+        $lists  = $result->fetch();
 
         return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];
     }

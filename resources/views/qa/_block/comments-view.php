@@ -98,7 +98,7 @@
         <?php } ?>
       </div>
 
-      <?php foreach ($answer['comm'] as  $comment) { ?>
+      <?php foreach ($answer['comments'] as  $comment) { ?>
 
         <?php if ($comment['comment_is_deleted'] == 1) { ?>
           <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>

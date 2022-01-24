@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class AnswerModel extends MainModel
+class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Add an answer
     // Добавим ответ
@@ -25,7 +23,7 @@ class AnswerModel extends MainModel
 
         DB::run($sql, $params);
 
-        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
+        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch();
 
         return $sql_last_id['last_id'];
     }
@@ -42,37 +40,34 @@ class AnswerModel extends MainModel
     }
 
     // Все ответы
-    public static function getAnswersAll($page, $limit, $user, $sheet)
+    public static function getAnswers($page, $limit, $user, $sheet)
     {
-        if ($sheet == 'user') {
-            $sort = 'WHERE answer_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0';
-            if ($user['trust_level']) {
-                $sort = 'WHERE answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $user['trust_level'] . '';
-            }
-        } else {
-            $sort = "WHERE answer_is_deleted = 0 AND post_is_deleted = 0";
-            if ($sheet == 'answers.ban') {
-                $sort = "WHERE answer_is_deleted = 1 OR post_is_deleted = 1";
-            }
-        }
-
+        $uid = $user['id'];
+        $sort = self::sorts($sheet);
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
                     post_id,
                     post_title,
                     post_slug,
+                    post_user_id,
+                    post_closed,
                     post_feature,
                     post_is_deleted,
                     answer_id,
                     answer_content,
                     answer_date,
+                    answer_after,
                     answer_user_id,
                     answer_ip,
                     answer_post_id,
                     answer_votes,
                     answer_is_deleted,
+                    answer_published,
                     votes_answer_item_id, 
                     votes_answer_user_id,
+                    favorite_tid,
+                    favorite_user_id,
+                    favorite_type,
                     id, 
                     login, 
                     avatar
@@ -80,28 +75,46 @@ class AnswerModel extends MainModel
                         INNER JOIN users ON id = answer_user_id
                         INNER JOIN posts ON answer_post_id = post_id 
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
-                            AND votes_answer_user_id = :uid
+                            AND votes_answer_user_id = $uid
+                        LEFT JOIN favorites ON favorite_tid = answer_id
+                            AND favorite_user_id  = $uid
+                            AND favorite_type = 2    
                         $sort
                         ORDER BY answer_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql, ['uid' => $user['id']])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Количество ответов
-    public static function getAnswersAllCount($sheet)
+    public static function getAnswersCount($sheet)
     {
-        $sort = "WHERE answer_is_deleted = 0";
-        if ($sheet == 'answers.ban') {
-            $sort = "WHERE answer_is_deleted = 1";
-        }
-
+        
+        $sort = self::sorts($sheet);
         $sql = "SELECT 
                     answer_id, 
                     answer_is_deleted 
-                        FROM answers $sort";
+                        FROM answers 
+                            INNER JOIN posts ON answer_post_id = post_id 
+                                $sort";
 
         return DB::run($sql)->rowCount();
     }
+
+
+    public static function sorts($sheet)
+    {
+        switch ($sheet) {
+            case 'answers.all':
+                $sort     = "WHERE answer_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0";
+                break;
+            case 'answers.deleted':
+                $sort     = "WHERE answer_is_deleted = 1";
+                break;
+        } 
+
+       return $sort;
+    }
+
 
     // Получаем ответы в посте
     public static function getAnswersPost($post_id, $uid, $type)
@@ -148,7 +161,7 @@ class AnswerModel extends MainModel
                             WHERE answer_post_id = $post_id
                             $sort ";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Страница ответов участника
@@ -184,7 +197,7 @@ class AnswerModel extends MainModel
                         AND answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
                         ORDER BY answer_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql, ['uid' => $uid, 'uid_vote' => $uid_vote])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid, 'uid_vote' => $uid_vote])->fetchAll();
     }
 
     // Количество ответов участника
@@ -220,6 +233,6 @@ class AnswerModel extends MainModel
                         FROM answers 
                             WHERE answer_id = :answer_id";
 
-        return  DB::run($sql, ['answer_id' => $answer_id])->fetch(PDO::FETCH_ASSOC);
+        return  DB::run($sql, ['answer_id' => $answer_id])->fetch();
     }
 }

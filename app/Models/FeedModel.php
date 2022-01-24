@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class FeedModel extends MainModel
+class FeedModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Получаем посты по условиям
     public static function feed($page, $limit, $user, $sheet, $slug)
@@ -110,7 +108,7 @@ class FeedModel extends MainModel
             $request = ['qa' => "%" . $slug . "@%"];
         }
 
-        return DB::run($sql, $request)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, $request)->fetchAll();
     }
 
     // Количество постов

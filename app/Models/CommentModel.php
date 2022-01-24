@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class CommentModel extends MainModel
+class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Adding a comment
     // Добавляем комментарий
@@ -30,14 +28,14 @@ class CommentModel extends MainModel
 
         DB::run($sql, $params);
 
-        $sql_last_id    =   DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
+        $sql_last_id    =   DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch();
         $last_id        =   $sql_last_id['last_id'];
 
         // Отмечаем комментарий, что за ним есть ответ
         self::setThereComment($last_id, $params['comment_comment_id']);
 
         $sql     = "SELECT * FROM answers WHERE answer_id = :comment_answer_id";
-        $answer  = DB::run($sql, ['comment_answer_id' => $params['comment_answer_id']])->fetch(PDO::FETCH_ASSOC);
+        $answer  = DB::run($sql, ['comment_answer_id' => $params['comment_answer_id']])->fetch();
 
         if ($answer['answer_after'] == 0) {
 
@@ -79,28 +77,18 @@ class CommentModel extends MainModel
     // Все комментарии
     public static function getCommentsAll($page, $limit, $user, $sheet)
     {
-        if ($sheet == 'user') {
-            if (!$user['trust_level']) {
-                $tl = 'AND comment_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0';
-            } else {
-                $tl = 'AND comment_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $user['trust_level'] . '';
-            }
-            $sort = '';
-        } else {
-            $sort = "WHERE comment_is_deleted = 0 AND post_is_deleted = 0";
-            if ($sheet == 'comments.ban') {
-                $sort = "WHERE comment_is_deleted = 1 OR post_is_deleted = 1";
-            }
-            $tl = '';
-        }
-
+        $sort = self::sorts($user, $sheet); 
+        $tl = $user['trust_level'];
         $start  = ($page - 1) * $limit;
+        
         $sql = "SELECT
                     post_id,
                     post_title,
                     post_slug,
                     post_tl,
                     post_feature,
+                    post_user_id,
+                    post_closed,
                     post_is_deleted,
                     comment_id,
                     comment_ip,
@@ -108,7 +96,10 @@ class CommentModel extends MainModel
                     comment_content,
                     comment_post_id,
                     comment_user_id,
+                    comment_comment_id,
+                    comment_published,
                     comment_votes,
+                    comment_after,
                     comment_is_deleted,
                     votes_comment_item_id, 
                     votes_comment_user_id,
@@ -116,31 +107,43 @@ class CommentModel extends MainModel
                     login, 
                     avatar
                         FROM comments 
-                        JOIN users ON id = comment_user_id
-                        JOIN posts ON comment_post_id = post_id " . $tl . "
-                        LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
-                            AND votes_comment_user_id = :uid
-                        $sort
-                        ORDER BY comment_id DESC LIMIT $start, $limit ";
+                            JOIN users ON id = comment_user_id
+                            JOIN posts ON comment_post_id = post_id AND post_tl <= $tl
+                            LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
+                                AND votes_comment_user_id = :uid
+                                $sort
+                                    ORDER BY comment_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql, ['uid' => $user['id']])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $user['id']])->fetchAll();
     }
 
     // Количество комментариев 
-    public static function getCommentsAllCount($sheet)
+    public static function getCommentsAllCount($user, $sheet)
     {
-        if ($sheet == 'user') {
-            $sort = "WHERE comment_is_deleted = 0";
-        } else {
-            $sort = "WHERE comment_is_deleted = 0";
-            if ($sheet == 'comments.ban') {
-                $sort = "WHERE comment_is_deleted = 1";
-            }
-        }
-
-        $sql = "SELECT comment_id, comment_is_deleted FROM comments $sort";
-
+        $tl = $user['trust_level'];
+        $sort = self::sorts($user, $sheet);
+        $sql = "SELECT 
+                    comment_id, 
+                    comment_is_deleted 
+                        FROM comments 
+                            JOIN posts ON comment_post_id = post_id AND post_tl <= $tl
+                                $sort";
+ 
         return DB::run($sql)->rowCount();
+    }
+
+    public static function sorts($user, $sheet)
+    {
+        switch ($sheet) {
+            case 'comments.all':
+                $sort     = "WHERE comment_is_deleted = 0";
+                break;
+            case 'comments.deleted':
+                $sort     = "WHERE comment_is_deleted = 1";
+                break;
+        } 
+
+       return $sort;
     }
 
     // Получаем комментарии к ответу
@@ -169,7 +172,7 @@ class CommentModel extends MainModel
                         AND votes_comment_user_id = :uid
                             WHERE comment_answer_id = " . $answer_id;
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     // Страница комментариев участника
@@ -205,7 +208,7 @@ class CommentModel extends MainModel
                                 AND post_is_deleted = 0 AND post_tl = 0
                                     ORDER BY comment_id DESC LIMIT $start, $limit";
 
-        return DB::run($sql, ['uid' => $uid, 'id' => $id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid, 'id' => $id])->fetchAll();
     }
 
     // Количество комментариев участника
@@ -232,6 +235,6 @@ class CommentModel extends MainModel
                     comment_is_deleted
                         FROM comments WHERE comment_id = :comment_id";
 
-        return DB::run($sql, ['comment_id' => $comment_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['comment_id' => $comment_id])->fetch();
     }
 }

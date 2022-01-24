@@ -2,11 +2,9 @@
 
 namespace App\Models\User;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class InvitationModel extends MainModel
+class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
 {
     public static function get()
     {
@@ -22,7 +20,7 @@ class InvitationModel extends MainModel
                         FROM invitations 
                         LEFT JOIN users ON active_uid = id ORDER BY id DESC";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Создадим инвайт для участника
@@ -56,7 +54,7 @@ class InvitationModel extends MainModel
                         FROM invitations
                         WHERE invitation_email = :email";
 
-        return DB::run($sql, ['email' => $email])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['email' => $email])->fetch();
     }
 
     // Все инвайты участинка
@@ -77,7 +75,7 @@ class InvitationModel extends MainModel
                             WHERE uid = :uid
                             ORDER BY add_time DESC";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     // Проверим не активированный инвайт
@@ -91,7 +89,7 @@ class InvitationModel extends MainModel
                         FROM invitations
                         WHERE invitation_code = :code AND active_status = 0";
 
-        return DB::run($sql, ['code' => $invitation_code])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['code' => $invitation_code])->fetch();
     }
 
     // Проверим не активированный инвайт и поменяем статус

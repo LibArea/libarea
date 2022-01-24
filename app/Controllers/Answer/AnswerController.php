@@ -20,13 +20,13 @@ class AnswerController extends MainController
     }
 
     // Все ответы
-    public function index($type)
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $pagesCount = AnswerModel::getAnswersAllCount('user');
-        $answ       = AnswerModel::getAnswersAll($page, $this->limit, $this->user, 'user');
+        $pagesCount = AnswerModel::getAnswersCount($sheet);
+        $answ       = AnswerModel::getAnswers($page, $this->limit, $this->user, $sheet);
 
         $result = [];
         foreach ($answ  as $ind => $row) {
@@ -49,7 +49,7 @@ class AnswerController extends MainController
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'sheet'         => 'answers',
+                    'sheet'         => $sheet,
                     'type'          => $type,
                     'answers'       => $result,
                 ]

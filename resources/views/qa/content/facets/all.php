@@ -27,8 +27,7 @@
             'icon'  => 'bi bi-sort-up'
           ],
           [
-            'auth'  => true,
-            'tl'    => 0,
+            'tl'    => 1,
             'id'    => $data['type'] . 's.my',
             'url'   => getUrlByName($data['type'] . '.my'),
             'title' => Translate::get('reading'),
@@ -59,7 +58,7 @@
         <?= Tpl::import('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
       <?php } ?>
     <?php } else { ?>
-      <?= no_content(Translate::get($data['type'] . 's.no'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get('no.content'), 'bi bi-info-lg'); ?>
     <?php } ?>
 
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>

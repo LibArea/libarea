@@ -2,11 +2,9 @@
 
 namespace App\Models\User;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class BadgeModel extends MainModel
+class BadgeModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Все награды
     public static function getAll()
@@ -20,7 +18,7 @@ class BadgeModel extends MainModel
                     badge_description
                         FROM badges";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Получим информацию по награде
@@ -36,7 +34,7 @@ class BadgeModel extends MainModel
                         FROM badges 
                         WHERE badge_id = :badge_id";
 
-        return DB::run($sql, ['badge_id' => $badge_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['badge_id' => $badge_id])->fetch();
     }
 
     // Редактирование награды
@@ -95,7 +93,7 @@ class BadgeModel extends MainModel
                         LEFT JOIN badges ON badge_id = bu_badge_id
                             WHERE bu_user_id = :uid";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     // Remove member award

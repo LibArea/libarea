@@ -65,7 +65,7 @@
       </div>
 
       <?php $n = 0;
-      foreach ($answer['comm'] as  $comment) {
+      foreach ($answer['comments'] as  $comment) {
         $n++; ?>
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
           <div class="br-bottom<?php if ($n > 1) { ?> ml30<?php } ?>"></div>

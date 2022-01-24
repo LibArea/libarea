@@ -69,7 +69,7 @@ class EditWebController extends MainController
         $item_is_soft       = Request::getPostInt('item_is_soft');
         $item_is_github     = Request::getPostInt('item_is_github');
         $item_github_url    = Request::getPost('item_github_url');
-
+ 
         Validation::Length($item_title_url, Translate::get('title'), '14', '250', $redirect);
         Validation::Length($item_content_url, Translate::get('description'), '24', '1500', $redirect);
 
@@ -84,24 +84,25 @@ class EditWebController extends MainController
         }
         $post_related = implode(',', $id ?? []);
 
-        $data = [
-            'item_id'           => $item['item_id'],
-            'item_url'          => $item_url,
-            'item_title_url'    => $item_title_url,
-            'item_content_url'  => $item_content_url,
-            'item_title_soft'   => $item_title_soft ?? '',
-            'item_content_soft' => $item_content_soft ?? '',
-            'item_published'    => $item_published,
-            'item_user_id'      => $this->user['id'],
-            'item_type_url'     => 0,
-            'item_status_url'   => $item_status_url,
-            'item_is_soft'      => $item_is_soft,
-            'item_is_github'    => $item_is_github,
-            'item_post_related' => $post_related,
-            'item_github_url'   => $item_github_url ?? '',
-        ];
-
-        WebModel::edit($data);
+        WebModel::edit(
+            [
+                'item_id'           => $item['item_id'],
+                'item_url'          => $item_url,
+                'item_title_url'    => $item_title_url,
+                'item_content_url'  => $item_content_url,
+                'item_title_soft'   => $item_title_soft ?? '',
+                'item_content_soft' => $item_content_soft ?? '',
+                'item_published'    => $item_published,
+                'item_user_id'      => $this->user['id'],
+                'item_type_url'     => 0,
+                'item_status_url'   => $item_status_url,
+                'item_is_soft'      => $item_is_soft,
+                'item_is_github'    => $item_is_github,
+                'item_post_related' => $post_related ?? '',
+                'item_github_url'   => $item_github_url ?? '',
+            ]
+        );
+ 
 
         // Фасеты для сайте
         $post_fields    = Request::getPost() ?? [];

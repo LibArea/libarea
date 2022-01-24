@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class FavoriteModel extends MainModel
+class FavoriteModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Добавить / удалить из закладок
     public static function setFavorite($params)
@@ -39,6 +37,6 @@ class FavoriteModel extends MainModel
                     FROM favorites 
                         WHERE favorite_tid = :favorite_tid AND favorite_user_id = :favorite_user_id AND favorite_type = :favorite_type";
 
-        return  DB::run($sql, $params)->fetch(PDO::FETCH_ASSOC);
+        return  DB::run($sql, $params)->fetch();
     }
 }

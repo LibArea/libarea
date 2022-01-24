@@ -48,14 +48,12 @@ return [
         ], [
             'hr'    => true,
         ], [
-            'auth'  => true,
             'tl'    => 0,
             'url'   => getUrlByName('favorites'),
             'title' => Translate::get('favorites'),
             'icon'  => 'bi bi-bookmark',
             'id'    => 'favorites',
         ], [
-            'auth'  => true,
             'tl'    => 9,
             'url'   => getUrlByName('admin.users'),
             'title' => Translate::get('admin'),
@@ -78,8 +76,7 @@ return [
             'icon'  => 'bi bi-gear',
             'id'    => '',
         ], [
-            'auth'  => true,
-            'tl'    => 1,
+            'tl'    => 2,
             'url'   => getUrlByName('drafts'),
             'title' => Translate::get('drafts'),
             'icon'  => 'bi bi-pencil-square',
@@ -90,8 +87,7 @@ return [
             'icon'  => 'bi bi-app-indicator',
             'id'    => '',
         ], [
-            'auth'  => true,
-            'tl'    => 1,
+            'tl'    => 2,
             'url'   => getUrlByName('messages'),
             'title' => Translate::get('messages'),
             'icon'  => 'bi bi-envelope',
@@ -102,8 +98,7 @@ return [
             'icon'  => 'bi bi-bookmark',
             'id'    => '',
         ], [
-            'auth'  => true,
-            'tl'    => 1,
+            'tl'    => 2,
             'url'   => getUrlByName('invitations'),
             'title' => Translate::get('invites'),
             'icon'  => 'bi bi-person-plus',
@@ -111,7 +106,6 @@ return [
         ], [
             'hr'    => 'hr',
         ], [
-            'auth'  => true,
             'tl'    => 9,
             'url'   => getUrlByName('admin'),
             'title' => Translate::get('admin'),
@@ -145,12 +139,12 @@ return [
             'id'    => '',
         ], [
             'url'   => getUrlByName('web'),
-            'title'  => Translate::get('domains'),
+            'title' => Translate::get('domains'),
             'icon'  => 'bi bi-link-45deg',
             'id'    => '',
         ], [
             'url'   => getUrlByName('search'),
-            'title'  => Translate::get('search'),
+            'title' => Translate::get('search'),
             'icon'  => 'bi bi-search',
             'id'    => '',
         ],

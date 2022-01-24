@@ -26,6 +26,7 @@ font-display: swap;
   vertical-align: -.125em;
 }
 
+.bi-house::before { content: "\f425"; }
 .bi-sort-down::before { content: "\f575"; }
 .bi-circle::before { content: "\f28a"; }
 .bi-columns-gap::before { content: "\f2cd"; }

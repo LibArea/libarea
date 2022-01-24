@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class PageModel extends MainModel
+class PageModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Информация по странице  (id, slug)
     public static function getPage($params, $uid, $name)
@@ -38,7 +36,7 @@ class PageModel extends MainModel
 
         $result = DB::run($sql, ['params' => $params, 'uid' =>  $uid]);
 
-        return $result->fetch(PDO::FETCH_ASSOC);
+        return $result->fetch();
     }
 
 
@@ -58,7 +56,7 @@ class PageModel extends MainModel
                                     $and
                                     ORDER BY post_id DESC LIMIT 5";
 
-        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
     // Последние 5 страниц по фасету
@@ -75,6 +73,6 @@ class PageModel extends MainModel
                                 WHERE post_type = 'page'
                                     ORDER BY post_id DESC LIMIT 25";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 }

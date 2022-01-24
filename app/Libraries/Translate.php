@@ -34,7 +34,15 @@ class Translate
         if (isset(self::$langData[$lang])) {
             return self::$langData;
         }
-        require_once __DIR__ . '/../Language/' . $lang . '.php';
+        
+        if (defined('HLEB_OPTIONAL_MODULE_SELECTION') && HLEB_OPTIONAL_MODULE_SELECTION) {
+           $data1 = require_once __DIR__ . '/../Language/' . $lang . '.php';
+           $data2 = require_once HLEB_GLOBAL_DIRECTORY . '/modules/' . HLEB_MODULE_NAME . '/App/Language/' . $lang . '.php';
+           $data = array_merge($data1, $data2); 
+        } else {
+           $data = require_once __DIR__ . '/../Language/' . $lang . '.php';
+        }
+        
         self::$langData[$lang] = $data;
         return self::$langData;
     }

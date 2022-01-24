@@ -7,7 +7,7 @@
     <p class="m0"><?= Translate::get('posts'); ?> <b><?= $data['profile']['login']; ?></b></p>
   </div>
   <div class="mt15">
-    <?= Tpl::import('/_block/post', ['data' => $data, 'user' => $user]); ?>
+    <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/posts'); ?>
 </main>

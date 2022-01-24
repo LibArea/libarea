@@ -2,19 +2,17 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use App\Middleware\Before\UserData;
 use DB;
-use PDO;
 
-class ActionModel extends MainModel
+class ActionModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Получим информацию по контенту в зависимости от типа
     public static function getInfoTypeContent($type_id, $type)
     {
         $sql = "select * from " . $type . "s where " . $type . "_id = " . $type_id . "";
 
-        return DB::run($sql)->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetch();
     }
 
     // Удаление / восстановление контента
@@ -78,7 +76,7 @@ class ActionModel extends MainModel
         }
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);
-        $lists  = $result->fetchall(PDO::FETCH_ASSOC);
+        $lists  = $result->fetchall();
 
 
         $response = [];
@@ -124,7 +122,7 @@ class ActionModel extends MainModel
                     log_date
                         FROM users_action_logs ORDER BY log_id DESC LIMIT $start, $limit";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Get gthe number of records 

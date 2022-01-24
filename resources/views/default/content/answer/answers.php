@@ -1,48 +1,54 @@
 <div class="col-span-2 justify-between mb-none">
   <nav class="sticky top70">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
+    <?= tabs_nav(
+      'menu',
+      $data['type'],
+      $user,
+      $pages = Config::get('menu.left'),
+    ); ?>
   </nav>
 </div>
 
 <main class="col-span-7 mb-col-12 mb10">
+
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+    <ul class="flex flex-row list-none m0 p0 center">
+
+      <?= tabs_nav(
+        'nav',
+        $data['sheet'],
+        $user,
+        $pages = [
+          [
+            'tl'    => 0,
+            'id'    => $data['type'] . '.all',
+            'url'   => '/answers',
+            'title' => Translate::get('answers'),
+            'icon'  => 'bi bi-sort-down'
+          ],
+          [
+            'tl'    => UserData::REGISTERED_ADMIN,
+            'id'    => $data['type'] . '.deleted',
+            'url'   => getUrlByName('answers.deleted'),
+            'title' => Translate::get('deleted'),
+            'icon'  => 'bi bi-app'
+          ],
+        ]
+      ); ?>
+
+    </ul>
+    <div data-template="feed" class="tippy gray-400">
+      <i class="bi bi-info-square"></i>
+    </div>
+    <div id="feed" style="display: none;">
+      <div class="text-xm gray-500 p5 dark-gray-300 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
+    </div>
   </div>
 
   <?php if (!empty($data['answers'])) { ?>
-    <?php foreach ($data['answers'] as $answer) { ?>
-      <div class="bg-white br-rd5 mt15 br-box-gray p15">
-        <?php if ($answer['answer_is_deleted'] == 0) { ?>
-          <div class="flex text-sm mb5">
-            <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20'); ?>
-            <a class="gray mr5 ml5" href="/@<?= $answer['login']; ?>">
-              <?= $answer['login']; ?>
-            </a>
-            <span class="gray-400 lowercase"><?= $answer['date']; ?></span>
-          </div>
-          <a href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
-            <?= $answer['post_title']; ?>
-          </a>
-          <div class="answ-telo">
-            <?= $answer['answer_content']; ?>
-          </div>
-
-          <div class="hidden gray">
-            <?= votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
-          </div>
-        <?php } else { ?>
-          <div class="bg-red-200">
-            ~ <?= Translate::get('Answer deleted'); ?>
-          </div>
-        <?php } ?>
-      </div>
-    <?php } ?>
-
+    <div class="bg-white br-rd5 br-box-gray mt15 mb15 p15">
+      <?= Tpl::import('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
+    </div>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
 
   <?php } else { ?>

@@ -2,11 +2,9 @@
 
 namespace App\Models\User;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class MiddlewareModel extends MainModel
+class MiddlewareModel extends \Hleb\Scheme\App\Models\MainModel
 {
     public static function getUser($id)
     {
@@ -24,6 +22,6 @@ class MiddlewareModel extends MainModel
                     is_deleted 
                         FROM users WHERE id = :id";
 
-        return DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['id' => $id])->fetch();
     }
 }

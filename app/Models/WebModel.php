@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class WebModel extends MainModel
+class WebModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // All sites
     // Все сайты
-    public static function getItemsAll($page, $limit, $uid)
+    public static function getItemsAll($page, $limit, $user, $sheet)
     {
+        $sort = self::sorts($sheet); 
         $start  = ($page - 1) * $limit;
         $sql = "SELECT
                     item_id, 
@@ -44,17 +43,32 @@ class WebModel extends MainModel
                             ON rel.relation_item_id = item_id 
 
                         LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid
-                        WHERE item_is_deleted = 0
+                        $sort
                         ORDER BY item_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $user['id']])->fetchAll();
     }
 
-    public static function getItemsAllCount()
+    public static function getItemsAllCount($sheet)
     {
-        $sql = "SELECT item_id, item_is_deleted FROM items WHERE item_is_deleted = 0";
+        $sort = self::sorts($sheet); 
+        $sql = "SELECT item_id, item_is_deleted FROM items $sort";
 
         return DB::run($sql)->rowCount();
+    }
+
+    public static function sorts($sheet)
+    {
+        switch ($sheet) {
+            case 'web.all':
+                $sort     = "WHERE item_is_deleted = 0";
+                break;
+            case 'web.deleted':
+                $sort     = "WHERE item_is_deleted = 1";
+                break;
+        } 
+
+       return $sort;
     }
 
     // 5 popular domains
@@ -76,7 +90,7 @@ class WebModel extends MainModel
                         WHERE item_url_domain != :domain AND item_published = 1 AND item_is_deleted = 0
                         ORDER BY item_count DESC LIMIT 10";
 
-        return DB::run($sql, ['domain' => $domain])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['domain' => $domain])->fetchAll();
     }
 
     // Получаем домены по условиям
@@ -134,7 +148,7 @@ class WebModel extends MainModel
 
                                 WHERE $string $sort LIMIT $start, $limit";
 
-        return DB::run($sql, ['uid' => $user['id']])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $user['id']])->fetchAll();
     }
 
     public static function feedItemCount($facets, $topic_id)
@@ -202,7 +216,7 @@ class WebModel extends MainModel
                         WHERE item_url_domain = :domain AND item_is_deleted = 0";
 
 
-        return DB::run($sql, ['domain' => $domain, 'uid' => $uid])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['domain' => $domain, 'uid' => $uid])->fetch();
     }
 
     // Add a domain
@@ -237,7 +251,7 @@ class WebModel extends MainModel
 
         DB::run($sql, $params);
 
-        $item_id =  DB::run("SELECT LAST_INSERT_ID() as item_id")->fetch(PDO::FETCH_ASSOC);
+        $item_id =  DB::run("SELECT LAST_INSERT_ID() as item_id")->fetch();
 
         return $item_id;
     }
@@ -257,11 +271,13 @@ class WebModel extends MainModel
                     item_title_soft     = :item_title_soft, 
                     item_content_soft   = :item_content_soft,
                     item_published      = :item_published,
+                    item_user_id        = :item_user_id,
+                    item_type_url       = :item_type_url,
                     item_status_url     = :item_status_url,
                     item_is_soft        = :item_is_soft,
                     item_is_github      = :item_is_github,
-                    item_github_url     = :item_github_url,
-                    item_post_related   = :item_post_related
+                    item_post_related   = :item_post_related,
+                    item_github_url     = :item_github_url
                         WHERE item_id   = :item_id";
 
         return  DB::run($sql, $params);
@@ -293,7 +309,7 @@ class WebModel extends MainModel
                         WHERE item_id = :item_id AND item_is_deleted = 0";
 
 
-        return DB::run($sql, ['item_id' => $item_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['item_id' => $item_id])->fetch();
     }
 
     // Topics by reference 
@@ -311,7 +327,7 @@ class WebModel extends MainModel
                         INNER JOIN facets_items_relation ON relation_facet_id = facet_id
                             WHERE relation_item_id  = :item_id";
 
-        return DB::run($sql, ['item_id' => $item_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['item_id' => $item_id])->fetchAll();
     }
 
     // More... 
@@ -327,6 +343,6 @@ class WebModel extends MainModel
                                 AND item_is_deleted = 0
                                     ORDER BY item_id DESC LIMIT $limit";
 
-        return DB::run($sql, ['item_id' => $item_id])->fetchall(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['item_id' => $item_id])->fetchall();
     }
 }

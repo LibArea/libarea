@@ -46,6 +46,7 @@ img {
 
 .top0 { top: $px-zero; }
 .top20 { top: $px-twenty; }
+.top50 { top: $px-fifty; }
 .top60 { top: $px-sixty; }
 .top70 { top: $px-seventy; }
 .right0 { right: $px-zero; }
@@ -192,6 +193,8 @@ img {
 .bg-pink-800  { background-color: $pink-800; }
 
 .bg-orange-800 { background-color: $orange-800; }
+
+.bg-blue-steel-700 { background-color: $blue-steel-700; }
 
 .bg-hover-green:hover { background-color: #5fb878; }
 .bg-hover-gray:hover { background-color: #f5f7fa; }

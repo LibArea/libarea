@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class HomeModel extends MainModel
+class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Posts on the central page
     // Посты на центральной странице
     public static function feed($page, $limit, $topics_user, $user, $type)
     {
+        $uid = $user['id'];
         $result = [];
         foreach ($topics_user as $ind => $row) {
             $result[$ind] = $row['signed_facet_id'];
@@ -19,16 +18,23 @@ class HomeModel extends MainModel
 
         $string = "";
         if ($type != 'main.all' && $type != 'main.top') {
-            if (!$user['id']) {
+            if (!$uid) {
                 $string = "";
             } else {
                 $string = "AND relation_facet_id IN(0)";
                 if ($result) $string = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")";
             }
         }
-
-        $display = "AND post_is_deleted = 0 AND post_tl <= " . $user['trust_level'];
-        if ($user['trust_level'] == 5) $display = "";
+        
+        if ($user['trust_level'] == 0) {
+            $display = "AND post_is_deleted = 0 AND post_votes > 1 AND post_tl <= " . $user['trust_level'];
+        }
+            
+        if ($user['trust_level'] > 0) {
+            $display = "AND post_is_deleted = 0 AND post_tl <= " . $user['trust_level'];
+        }
+        
+        if ($user['trust_level'] == 10) $display = "";
 
         $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
         if ($type == 'main.feed' || $type == 'main.all') $sort = "ORDER BY post_top DESC, post_date DESC";
@@ -79,13 +85,13 @@ class HomeModel extends MainModel
                  ON rel.relation_post_id= post_id
                 LEFT JOIN users ON id = post_user_id
                 LEFT JOIN favorites ON favorite_tid = post_id 
-                    AND favorite_user_id = :id AND favorite_type = 1  
+                    AND favorite_user_id = $uid AND favorite_type = 1  
                 LEFT JOIN votes_post 
-                    ON votes_post_item_id = post_id AND votes_post_user_id = :id
+                    ON votes_post_item_id = post_id AND votes_post_user_id = $uid
 
                 WHERE post_type != 'page' AND post_draft = 0 $string $display $sort LIMIT $start, $limit";
 
-        return DB::run($sql, ['id' => $user['id']])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     public static function feedCount($topics_user, $user, $type)
@@ -142,11 +148,12 @@ class HomeModel extends MainModel
     public static function latestAnswers($user)
     {
         $tl = $user['trust_level'];
-        $user_answer = "AND post_tl = :zero";
-        if ($user['id']) {
-            $user_answer = "AND answer_user_id != :id AND post_tl <= $tl";
+        $uid = $user['id'];
+        $user_answer = "AND post_tl = 0";
+        if ($uid) {
+            $user_answer = "AND answer_user_id != $uid AND post_tl <= $tl";
             if ($user['trust_level'] != 5) {
-                $user_answer = "AND answer_user_id != :id AND post_tl <= $tl";
+                $user_answer = "AND answer_user_id != $uid AND post_tl <= $tl";
             }
         }
 
@@ -167,11 +174,11 @@ class HomeModel extends MainModel
                         FROM answers 
                         LEFT JOIN posts ON post_id = answer_post_id
                         LEFT JOIN users ON id = answer_user_id
-                        WHERE answer_is_deleted = :zero AND post_is_deleted = :zero
+                        WHERE answer_is_deleted = 0 AND post_is_deleted = 0
                         $user_answer 
                         ORDER BY answer_id DESC LIMIT 5";
 
-        return DB::run($sql, ['id' => $user['id'], 'zero' => 0])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Facets (themes, blogs) all / subscribed
@@ -192,6 +199,6 @@ class HomeModel extends MainModel
                             AND facet_type != 'section' 
                                 ORDER BY facet_id DESC";
 
-        return DB::run($sql, ['id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['id' => $user_id])->fetchAll();
     }
 }

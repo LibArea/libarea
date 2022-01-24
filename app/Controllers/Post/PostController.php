@@ -86,7 +86,7 @@ class PostController extends MainController
                 $row['edit'] = 1;
             }
             // TODO: N+1 см. AnswerModel()
-            $row['comm']            = CommentModel::getComments($row['answer_id'], $this->user['id']);
+            $row['comments']            = CommentModel::getComments($row['answer_id'], $this->user['id']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $answers[$ind]          = $row;
         }

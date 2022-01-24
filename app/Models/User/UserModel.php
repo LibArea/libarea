@@ -2,11 +2,9 @@
 
 namespace App\Models\User;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class UserModel extends MainModel
+class UserModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Регистрация участника
     public static function create($params)
@@ -37,7 +35,7 @@ class UserModel extends MainModel
 
         DB::run($sql, $params);
 
-        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
+        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch();
 
         return $sql_last_id['last_id'];
     }
@@ -74,7 +72,7 @@ class UserModel extends MainModel
                             $sort
                             LIMIT $start, $limit";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     // Количество
@@ -129,7 +127,7 @@ class UserModel extends MainModel
                     is_deleted 
                         FROM users WHERE $sort"; // BINARY
 
-        return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['params' => $params])->fetch();
     }
 
     // Просмотры  
@@ -165,7 +163,7 @@ class UserModel extends MainModel
                         LEFT JOIN answers ON answer_id = favorite_tid AND favorite_type = 2
                         WHERE favorite_user_id = :uid ORDER BY favorite_id DESC LIMIT 100";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     // Страница черновиков
@@ -189,7 +187,7 @@ class UserModel extends MainModel
                            AND post_draft = 1 AND post_is_deleted = 0
                            ORDER BY post_id DESC";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     // Информация участника
@@ -210,7 +208,7 @@ class UserModel extends MainModel
                         FROM users 
                         WHERE email = :email";
 
-        return DB::run($sql, ['email' => $email])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['email' => $email])->fetch();
     }
 
     // Количество контента участника
@@ -219,20 +217,20 @@ class UserModel extends MainModel
         $sql = "SELECT 
                     (SELECT COUNT(post_id) 
                         FROM posts 
-                        WHERE post_user_id = :uid and post_draft = 0 and post_is_deleted = 0) 
+                        WHERE post_user_id = $uid and post_draft = 0 and post_is_deleted = 0) 
                             AS count_posts,
                   
                     (SELECT COUNT(answer_id) 
                         FROM answers 
-                        WHERE answer_user_id = :uid and answer_is_deleted = 0) 
+                        WHERE answer_user_id = $uid and answer_is_deleted = 0) 
                             AS count_answers,
                   
                     (SELECT COUNT(comment_id) 
                         FROM comments 
-                        WHERE comment_user_id = :uid and comment_is_deleted = 0) 
+                        WHERE comment_user_id = $uid and comment_is_deleted = 0) 
                             AS count_comments";
 
-        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetch();
     }
 
     // Находит ли пользователь в бан- листе
@@ -244,7 +242,7 @@ class UserModel extends MainModel
                         FROM users_banlist
                         WHERE banlist_user_id = :uid AND banlist_status = 1";
 
-        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch();
     }
 
     // Находит ли пользователь в бесшумном режиме
@@ -256,7 +254,7 @@ class UserModel extends MainModel
                         FROM users
                         WHERE id = :uid AND limiting_mode = 1";
 
-        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch();
     }
 
     // Активирован ли пользователь (e-mail)
@@ -268,7 +266,7 @@ class UserModel extends MainModel
                         FROM users
                         WHERE id = :uid AND activated = 1";
 
-        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch();
     }
 
     // Password Recovery
@@ -300,7 +298,7 @@ class UserModel extends MainModel
                         FROM users_activate
                         WHERE activate_code = :code AND activate_flag != 1";
 
-        return DB::run($sql, ['code' => $code])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['code' => $code])->fetch();
     }
 
     // Email Activation
@@ -322,7 +320,7 @@ class UserModel extends MainModel
                         FROM users_email_activate
                         WHERE email_code = :code AND email_activate_flag != :flag";
 
-        return DB::run($sql, ['code' => $code, 'flag' => 1])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['code' => $code, 'flag' => 1])->fetch();
     }
 
     // Активируем e-mail
@@ -335,5 +333,22 @@ class UserModel extends MainModel
         $sql = "UPDATE users SET activated = :flag WHERE id = :uid";
 
         return DB::run($sql, ['uid' => $uid, 'flag' => 1]);
+    }
+    
+    public static function setLogAgent($params)
+    {
+        $sql = "INSERT INTO users_agent_logs(log_date, 
+                                log_user_id, 
+                                log_user_browser, 
+                                log_user_os, 
+                                log_user_ip) 
+                                
+                            VALUES(:log_date, 
+                                :log_user_id, 
+                                :log_user_browser, 
+                                :log_user_os, 
+                                :log_user_ip)";
+
+        return DB::run($sql, $params);
     }
 }

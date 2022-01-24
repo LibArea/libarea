@@ -20,13 +20,13 @@ class CommentController extends MainController
     }
 
     // Все комментарии
-    public function index($type)
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $pagesCount = CommentModel::getCommentsAllCount('user');
-        $comments   = CommentModel::getCommentsAll($page, $this->limit, $this->user, 'user');
+        $pagesCount = CommentModel::getCommentsAllCount($this->user, $sheet);
+        $comments   = CommentModel::getCommentsAll($page, $this->limit, $this->user, $sheet);
 
         $result = [];
         foreach ($comments  as $ind => $row) {
@@ -49,9 +49,9 @@ class CommentController extends MainController
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'sheet'         => 'comments',
+                    'sheet'         => $sheet,
                     'type'          => $type,
-                    'comments'      => $result
+                    'comments'      => $result,
                 ]
             ]
         );

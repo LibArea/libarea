@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class RssModel extends MainModel
+class RssModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Все посты для Sitemap
     public static function getPostsSitemap()
@@ -15,7 +13,7 @@ class RssModel extends MainModel
                     FROM posts 
                       WHERE post_is_deleted != 1 AND post_tl = 0 AND post_draft != 1";
 
-        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return  DB::run($sql)->fetchAll();
     }
 
     // Все пространства для Sitemap
@@ -23,7 +21,7 @@ class RssModel extends MainModel
     {
         $sql = "SELECT facet_slug FROM facets";
 
-        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return  DB::run($sql)->fetchAll();
     }
 
     // Посты по id пространства для rss
@@ -75,7 +73,7 @@ class RssModel extends MainModel
                                 AND post_is_deleted = 0 AND post_tl = 0 AND post_draft != 1 
                                 ORDER BY post_top DESC, post_date DESC LIMIT 1000";
 
-        return DB::run($sql, ['qa' => "%" . $facet_slug . "%"])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['qa' => "%" . $facet_slug . "%"])->fetchAll();
     }
 
 
@@ -89,6 +87,6 @@ class RssModel extends MainModel
                     facet_img
                         FROM facets WHERE facet_slug = :facet_slug";
 
-        return DB::run($sql, ['facet_slug' => $facet_slug])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['facet_slug' => $facet_slug])->fetch();
     }
 }

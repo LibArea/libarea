@@ -142,14 +142,14 @@
           ]
         ]); ?>
 
-        <!--?= Tpl::import('/_block/form/select/low-facets', [
+        <?= Tpl::import('/_block/form/select/low-facets', [
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'topic',
           'title'         => Translate::get('children'),
           'help'          => Translate::get('necessarily'),
           'red'           => 'red'
-        ]); ?-->
+        ]); ?>
 
       <?php } ?>
 

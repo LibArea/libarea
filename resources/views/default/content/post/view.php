@@ -11,7 +11,7 @@
   <article class="post-full br-box-gray br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 p15">
     <?php if ($post['post_is_deleted'] == 0 || $user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
       <div class="post-body">
-      
+
         <div class="flex flex-row items-center">
           <?php if (!empty($data['blog'])) { ?>
             <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray inline text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
@@ -31,9 +31,9 @@
             </div>
           <?php } ?>
         </div>
-      
+
         <h1 class="mb0 mt5 font-normal text-2xl">
-          <?= Tpl::import('/_block/post-title', ['post' => $post]); ?>
+          <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm lowercase flex gray-400">
           <?= $post['post_date_lang']; ?>
@@ -142,7 +142,7 @@
           <li class="left p10 mb-none gray-400 text-2xl">
             <div class="text-2xl center mb5">
               <?php if ($post['post_hits_count'] == 0) { ?>
-                 —
+                —
               <?php } else { ?>
                 <?= $post['post_hits_count']; ?>
               <?php } ?>
@@ -231,7 +231,7 @@
 </main>
 <aside class="col-span-3 relative br-rd5 mb-none">
 
-  <?php if (!empty($data['facets'])) { ?> 
+  <?php if (!empty($data['facets'])) { ?>
     <div class="br-box-gray bg-white br-rd5 mb15 p15">
       <h3 class="uppercase lh1 text-sm gray-500 mt5 mb10 font-normal dark-gray-300">
         <?= Translate::get('topics'); ?>
@@ -245,13 +245,13 @@
               <i class="bi bi-plus"></i> <?= Translate::get('read'); ?>
             </div>
           <?php } ?>
-           
+
           <a class="  black dark-gray-300 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-            <?= $topic['facet_title']; ?> 
+            <?= $topic['facet_title']; ?>
           </a>
 
           <div class="text-sm mt5 pr15 mb-pr-0 gray-400">
-            <?= $topic['facet_short_description']; ?>          
+            <?= $topic['facet_short_description']; ?>
           </div>
         </div>
       <?php } ?>

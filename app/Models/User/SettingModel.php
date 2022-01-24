@@ -2,11 +2,9 @@
 
 namespace App\Models\User;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class SettingModel extends MainModel
+class SettingModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Editing a profile
     // Редактирование профиля
@@ -129,6 +127,6 @@ class SettingModel extends MainModel
                     setting_email_appealed
                         FROM users_setting WHERE setting_user_id = :uid";
 
-        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch();
     }
 }

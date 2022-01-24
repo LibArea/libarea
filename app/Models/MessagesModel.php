@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class MessagesModel extends MainModel
+class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // All dialogs
     public static function getMessages($uid)
@@ -22,10 +20,10 @@ class MessagesModel extends MainModel
                     dialog_sender_count,
                     dialog_recipient_count
                         FROM messages_dialog 
-                          WHERE dialog_sender_id = :uid OR dialog_recipient_id = :uid
+                          WHERE dialog_sender_id = $uid OR dialog_recipient_id = :uid
                             ORDER BY dialog_update_time DESC";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
 
     public static function lastBranches($uid)
@@ -41,10 +39,10 @@ class MessagesModel extends MainModel
                     avatar
                         FROM messages_dialog 
                         LEFT JOIN users ON dialog_sender_id = id OR dialog_recipient_id = id
-                          WHERE dialog_sender_id = :uid OR dialog_recipient_id = :uid
+                          WHERE dialog_sender_id = $uid OR dialog_recipient_id = $uid
                             ORDER BY dialog_update_time DESC LIMIT 15";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // We get a dialog by id
@@ -63,7 +61,7 @@ class MessagesModel extends MainModel
                         FROM messages_dialog 
                             WHERE dialog_id = :dialog_id";
 
-        return DB::run($sql, ['dialog_id' => $dialog_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['dialog_id' => $dialog_id])->fetch();
     }
 
     // Recalculation viewed or not
@@ -117,7 +115,7 @@ class MessagesModel extends MainModel
                             WHERE message_dialog_id = :dialog_id
                                 ORDER BY message_id DESC";
 
-        return DB::run($sql, ['dialog_id' => $dialog_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['dialog_id' => $dialog_id])->fetch();
     }
 
     public static function getMessageByDialogId($dialog_id)
@@ -135,7 +133,7 @@ class MessagesModel extends MainModel
                             WHERE message_dialog_id = :dialog_id
                                 ORDER BY message_id DESC";
 
-        $query = DB::run($sql, ['dialog_id' => $dialog_id])->fetchAll(PDO::FETCH_ASSOC);
+        $query = DB::run($sql, ['dialog_id' => $dialog_id])->fetchAll();
 
         if ($query) {
             foreach ($query as $key => $val) {
@@ -221,7 +219,7 @@ class MessagesModel extends MainModel
 
         DB::run($sql, $params);
 
-        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
+        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch();
 
         return $sql_last_id['last_id'];
     }
@@ -252,7 +250,7 @@ class MessagesModel extends MainModel
                         FROM messages_dialog
                             WHERE dialog_id = :dialog_id";
 
-        $query = DB::run($sql, ['dialog_id' => $dialog_id])->fetch(PDO::FETCH_ASSOC);
+        $query = DB::run($sql, ['dialog_id' => $dialog_id])->fetch();
 
         $dialog_sender_count    = $query['dialog_sender_count'] + 1;
         $dialog_recipient_count = $query['dialog_recipient_count'] + 1;
@@ -309,6 +307,6 @@ class MessagesModel extends MainModel
                                 OR dialog_recipient_id  = :dialog_sender_id AND 
                                 dialog_sender_id        = :dialog_recipient_id";
 
-        return DB::run($sql, $params)->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, $params)->fetch();
     }
 }

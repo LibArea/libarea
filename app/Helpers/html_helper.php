@@ -248,7 +248,8 @@ function tabs_nav($name, $item, $user, array $pages = [])
     if ($name == 'nav') {
         $html = '';
         foreach ($pages as $key => $page) {
-            if (empty($page['auth']) || $user['id'] > 0) {
+            $tl = $page['tl'] ?? null;
+            if ($user['trust_level'] >= $tl) {
                 $classes    = 'mr20 gray-500 sky-500-hover';
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
@@ -261,12 +262,11 @@ function tabs_nav($name, $item, $user, array $pages = [])
     } else {
         $html  = '<ul class="p0 mt10 list-none text-sm">';
         foreach ($pages as $key => $page) {
-
+            $tl = $page['tl'] ?? null;
             if (!empty($page['hr'])) {
                 if ($user['id'] > 0) $html .= '<li><hr></li>';
             } else {
-
-                if (empty($page['auth'])  || $user['trust_level'] > $page['tl']) {
+                if ($user['trust_level'] >= $tl) {
                     $classes    = 'sky-500-hover dark-gray-200';
                     $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';

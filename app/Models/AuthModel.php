@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class AuthModel extends MainModel
+class AuthModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Check for repetitions  
     // Проверка на повторы
@@ -19,7 +17,7 @@ class AuthModel extends MainModel
 
         $sql = "SELECT login, email FROM users WHERE $sort";
 
-        return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['params' => $params])->fetch();
     }
 
     // Login is banned and the ban is not lifted, then ban and ip 
@@ -32,7 +30,7 @@ class AuthModel extends MainModel
                         FROM users_banlist
                         WHERE banlist_ip = :ip AND banlist_status = 1";
 
-        return DB::run($sql, ['ip' => $ip])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['ip' => $ip])->fetch();
     }
 
     public static function getAuthTokenByUserId($uid)
@@ -46,7 +44,7 @@ class AuthModel extends MainModel
                         FROM users_auth_tokens
                         WHERE auth_user_id = :uid";
 
-        return DB::run($sql, ['uid' => $uid])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['uid' => $uid])->fetch();
     }
 
     public static function insertToken($params)
@@ -81,7 +79,7 @@ class AuthModel extends MainModel
                         FROM users_auth_tokens
                         WHERE auth_selector = :auth_selector";
 
-        return DB::run($sql, ['auth_selector' => $selector])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['auth_selector' => $selector])->fetch();
     }
 
     public static function UpdateSelector($params)

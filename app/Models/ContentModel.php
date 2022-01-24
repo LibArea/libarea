@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
 use DB;
-use PDO;
 
-class ContentModel extends MainModel
+class ContentModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Member information (id, slug) 
     // Информация по участнику (id, slug)
@@ -26,7 +24,7 @@ class ContentModel extends MainModel
 
         $result = DB::run($sql, ['params' => $params]);
 
-        return $result->fetch(PDO::FETCH_ASSOC);
+        return $result->fetch();
     }
 
     // Member Content Posting Frequency 
@@ -50,7 +48,7 @@ class ContentModel extends MainModel
     {
         $sql = "SELECT stop_id, stop_word FROM stop_words";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     // Add a safe word

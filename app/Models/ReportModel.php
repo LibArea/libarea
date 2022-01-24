@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Hleb\Scheme\App\Models\MainModel;
-use PDO;
 use DB;
 
-class ReportModel extends MainModel
+class ReportModel extends \Hleb\Scheme\App\Models\MainModel
 {
     public static function get($page, $limit)
     {
@@ -22,7 +20,7 @@ class ReportModel extends MainModel
                     report_status 
                         FROM reports ORDER BY report_id DESC LIMIT $start, $limit";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll();
     }
 
     public static function getCount()
