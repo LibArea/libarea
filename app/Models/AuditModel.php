@@ -95,14 +95,13 @@ class AuditModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT
                 (SELECT COUNT(*) FROM 
-                    posts WHERE post_user_id = :uid and post_is_deleted = 0) AS t1Count,
+                    posts WHERE post_user_id = $uid and post_is_deleted = 0) AS t1Count,
                 (SELECT COUNT(*) FROM 
-                    answers WHERE answer_user_id = :uid and answer_is_deleted = 0) AS t2Count,
+                    answers WHERE answer_user_id = $uid and answer_is_deleted = 0) AS t2Count,
                 (SELECT COUNT(*) FROM 
-                    comments WHERE comment_user_id = :uid and comment_is_deleted = 0) AS t3Count";
+                    comments WHERE comment_user_id = $uid and comment_is_deleted = 0) AS t3Count";
 
-        $result = DB::run($sql, ['uid' => $uid]);
-        $lists  = $result->fetch();
+        $lists  = DB::run($sql)->fetch();
 
         return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];
     }

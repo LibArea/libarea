@@ -99,7 +99,7 @@ class WebController extends MainController
                     'posts'         => $result,
                     'domains'       => WebModel::getItemsTop($domain),
                     'item'          => $item,
-                    'type'          => 'web',
+                    'type'          => $type,
                 ]
             ]
         );
@@ -189,7 +189,7 @@ class WebController extends MainController
             [
                 'meta'  => meta($m, Translate::get('website') . ': ' . $item['item_title_url'], $desc),
                 'data'  => [
-                    'sheet'         => 'sites-topic',
+                    'sheet'         => $sheet,
                     'type'          => 'web',
                     'item'          => $item,
                     'topics'        => $topics,

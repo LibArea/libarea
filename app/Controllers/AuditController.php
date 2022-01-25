@@ -21,7 +21,7 @@ class AuditController extends MainController
     public function placementSpeed($content, $type)
     {
         self::stopContentQuietМode($this->user['limiting_mode']);
-
+ 
         $number =  ContentModel::getSpeed($this->user['id'], $type);
 
         self::stopLimit($this->user['trust_level'], $number, $type);
@@ -66,12 +66,12 @@ class AuditController extends MainController
 
     // If there is a link and the total contribution (adding posts, replies and comments) is less than N 
     // Если есть ссылка и общий вклад (добавления постов, ответов и комментариев) меньше N
-    public static function stopUrl($content, $user_id)
+    public static function stopUrl($content, $uid)
     {
         if (self::estimationUrl($content)) {
-            $all_count = AuditModel::ceneralContributionCount($user_id);
+            $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
-                ActionModel::addLimitingMode($user_id);
+                ActionModel::addLimitingMode($uid);
                 addMsg(Translate::get('content-audit'), 'error');
                 return false;
             }
@@ -81,12 +81,12 @@ class AuditController extends MainController
 
     // If the word is on the stop list and the total contribution is minimal (less than 2)
     // Если слово в стоп листе и общий вклад минимальный (меньше 2)
-    public static function stopWords($content, $user_id)
+    public static function stopWords($content, $uid)
     {
         if (self::stopWordsExists($content)) {
-            $all_count = AuditModel::ceneralContributionCount($user_id);
+            $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
-                ActionModel::addLimitingMode($user_id);
+                ActionModel::addLimitingMode($uid);
                 addMsg(Translate::get('content-audit'), 'error');
                 return false;
             }
@@ -114,7 +114,7 @@ class AuditController extends MainController
 
     /// Check the presence of the word in the stop list (audit in the admin panel) 
     // Проверим наличия слова в стоп листе (аудит в админ-панели)
-    public static function stopWordsExists($content, $replace = '*')
+    public static function stopWordsExists($content)
     {
         $stop_words = ContentModel::getStopWords();
 

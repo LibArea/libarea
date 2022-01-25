@@ -21,7 +21,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
             Route::get('/badge/create')->module('admin', 'App\Badges@create')->name('admin.badge.create');
             Route::get('/badge/edit/{id}')->module('admin', 'App\Badges@edit')->where(['id' => '[0-9]+']);
             Route::get('/navigation/create')->module('admin', 'App\Navigation@create')->name('admin.navigation.create');
-            Route::get('/navigation/edit')->module('admin', 'App\Navigation@edit', ['edit'])->name('admin.navigation.edit');
+            Route::get('/navigation/edit')->module('admin', 'App\Navigation@edit')->name('admin.navigation.edit');
             Route::get('/word/create')->module('admin', 'App\Words@create')->name('admin.word.create');
             Route::get('/user/edit/{id}')->module('admin', 'App\Users@edit')->where(['id' => '[0-9]+']);
         Route::endProtect();

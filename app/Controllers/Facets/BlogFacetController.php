@@ -68,7 +68,7 @@ class BlogFacetController extends MainController
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => $sheet,
-                    'type'          => 'blog',
+                    'type'          => $type,
                     'facet'         => $facet,
                     'posts'         => $result,
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),

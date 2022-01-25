@@ -27,7 +27,7 @@ class Navigation
 
     // Changing and deleting (provided) menu items
     // Изменение и удаление (при условии) пунктов меню
-    public function edit($type)
+    public function edit()
     {
         if (Request::getPost('action') == 'delete') {
             foreach ($_POST['cid'] as $nav_id) {

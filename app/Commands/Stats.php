@@ -6,7 +6,7 @@ class Stats extends \Hleb\Scheme\App\Commands\MainTask
 {
     const DESCRIPTION = "stats";
 
-    protected function execute($arg = null)
+    protected function execute()
     {
 
         (new \App\Controllers\Admin\СonsoleController)->updateCountPostTopic();
