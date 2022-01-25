@@ -16,14 +16,14 @@ class СonsoleModel extends \Hleb\Scheme\App\Models\MainModel
     public static function allUp($uid)
     {
         $sql = "SELECT 
-                    (SELECT SUM(post_votes) FROM posts WHERE post_user_id = :uid) 
+                    (SELECT SUM(post_votes) FROM posts WHERE post_user_id = $uid) 
                             AS count_posts,
-                    (SELECT SUM(answer_votes) FROM answers WHERE answer_user_id = :uid) 
+                    (SELECT SUM(answer_votes) FROM answers WHERE answer_user_id = $uid) 
                             AS count_answers,
-                    (SELECT SUM(comment_votes) FROM comments WHERE comment_user_id = :uid) 
+                    (SELECT SUM(comment_votes) FROM comments WHERE comment_user_id = $uid) 
                             AS count_comments";
 
-        $user = DB::run($sql, ['uid' => $uid])->fetch();
+        $user = DB::run($sql)->fetch();
         // Вернем сумму, но этот запрос необходим будет далее именно по отдельным типам 
         return $user['count_posts'] + $user['count_answers'] + $user['count_comments'];
     }
