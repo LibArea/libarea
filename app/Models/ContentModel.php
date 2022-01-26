@@ -8,11 +8,11 @@ class ContentModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Member information (id, slug) 
     // Информация по участнику (id, slug)
-    public static function getUsers($uid, $name)
+    public static function getUsers($params, $type)
     {
-        $sort = "id = :uid";
-        if ($name == 'slug') {
-            $sort = "login = :uid";
+        $sort = "id = :params";
+        if ($type == 'slug') {
+            $sort = "login = :params";
         }
 
         $sql = "SELECT 
@@ -22,7 +22,7 @@ class ContentModel extends \Hleb\Scheme\App\Models\MainModel
                     is_deleted 
                         FROM users WHERE $sort AND activated = 1 AND is_deleted = 0";
 
-        return DB::run($sql, ['uid' => $uid])->fetch();
+        return DB::run($sql, ['params' => $params])->fetch();
     }
 
     // Member Content Posting Frequency 

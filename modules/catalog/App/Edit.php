@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controllers\Item;
+namespace Modules\Catalog\App;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
-use App\Models\{WebModel, FacetModel, PostModel};
-use Validation, Translate, Tpl;
+use Modules\Catalog\App\Models\WebModel;
+use App\Models\{FacetModel, PostModel};
+use Validation, Translate;
 
-class EditWebController extends MainController
+class Edit
 {
     private $user;
 
@@ -34,10 +34,11 @@ class EditWebController extends MainController
             $item_post_related = PostModel::postRelated($domain['item_post_related']);
         }
 
-        return Tpl::agRender(
-            '/item/edit',
+        return view(
+            '/view/default/edit',
             [
                 'meta'  => meta($m = [], sprintf(Translate::get('edit.option'), Translate::get('website'))),
+                'user'  => $this->user,
                 'data'  => [
                     'domain'    => $domain,
                     'sheet'     => 'domains',
@@ -69,7 +70,7 @@ class EditWebController extends MainController
         $item_is_soft       = Request::getPostInt('item_is_soft');
         $item_is_github     = Request::getPostInt('item_is_github');
         $item_github_url    = Request::getPost('item_github_url');
- 
+
         Validation::Length($item_title_url, Translate::get('title'), '14', '250', $redirect);
         Validation::Length($item_content_url, Translate::get('description'), '24', '1500', $redirect);
 
@@ -102,7 +103,7 @@ class EditWebController extends MainController
                 'item_github_url'   => $item_github_url ?? '',
             ]
         );
- 
+
 
         // Фасеты для сайте
         $post_fields    = Request::getPost() ?? [];

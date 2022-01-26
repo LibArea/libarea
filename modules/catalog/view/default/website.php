@@ -1,3 +1,4 @@
+<?= Tpl::insert('header', ['user' => $user, 'data' => $data, 'meta' => $meta]); ?>
 <main class="col-span-9 mb-col-12">
   <div class="bg-white items-center justify-between ml5 pr15 mb15">
 
@@ -55,10 +56,10 @@
         </a>
       </div>
     <?php } ?>
-    
+
     <?php if ($data['related_posts']) { ?>
       <div class="bg-white br-box-gray pt15">
-        <?= Tpl::import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => true]); ?>
+        <?= Tpl::insert('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => true]); ?>
       </div>
     <?php } ?>
   </div>
@@ -68,7 +69,7 @@
     <?php if ($data['similar']) { ?>
       <div class="gray mb5"><?= Translate::get('recommended'); ?></div>
       <?php foreach ($data['similar'] as $link) { ?>
-      <?= website_img($link['item_url_domain'], 'thumbs', $link['item_title_url'], 'mr5 w200 box-shadow'); ?>
+        <?= website_img($link['item_url_domain'], 'thumbs', $link['item_title_url'], 'mr5 w200 box-shadow'); ?>
         <a class="inline mr20 mb15 block text-sm" href="<?= getUrlByName('web.website', ['slug' => $link['item_url_domain']]); ?>">
           <?= $link['item_title_url']; ?>
         </a>
@@ -93,4 +94,4 @@
   </div>
 </aside>
 </div>
-<?= Tpl::import('/_block/wide-footer'); ?>
+<?= includeTemplate('/view/default/footer'); ?>

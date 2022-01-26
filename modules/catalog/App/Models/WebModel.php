@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Catalog\App\Models;
 
 use DB;
 
@@ -10,7 +10,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     // Все сайты
     public static function getItemsAll($page, $limit, $user, $sheet)
     {
-        $sort = self::sorts($sheet); 
+        $sort = self::sorts($sheet);
         $start  = ($page - 1) * $limit;
         $sql = "SELECT
                     item_id, 
@@ -51,7 +51,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getItemsAllCount($sheet)
     {
-        $sort = self::sorts($sheet); 
+        $sort = self::sorts($sheet);
         $sql = "SELECT item_id, item_is_deleted FROM items $sort";
 
         return DB::run($sql)->rowCount();
@@ -66,31 +66,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
             case 'web.deleted':
                 $sort     = "WHERE item_is_deleted = 1";
                 break;
-        } 
+        }
 
-       return $sort;
-    }
-
-    // 5 popular domains
-    // 5 популярных доменов
-    public static function getItemsTop($domain)
-    {
-        $sql = "SELECT
-                    item_id,
-                    item_title_url,
-                    item_content_url,
-                    item_published,
-                    item_user_id,
-                    item_url,
-                    item_url_domain,
-                    item_votes,
-                    item_count,
-                    item_is_deleted
-                        FROM items 
-                        WHERE item_url_domain != :domain AND item_published = 1 AND item_is_deleted = 0
-                        ORDER BY item_count DESC LIMIT 10";
-
-        return DB::run($sql, ['domain' => $domain])->fetchAll();
+        return $sort;
     }
 
     // Получаем домены по условиям

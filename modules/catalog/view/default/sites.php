@@ -1,3 +1,4 @@
+<?= Tpl::insert('header', ['user' => $user, 'data' => $data, 'meta' => $meta]); ?>
 <main class="col-span-12 mb-col-12">
   <div class="pt5 mr15 pb5 ml15 text-sm">
     <?php if (UserData::checkAdmin()) { ?>
@@ -94,7 +95,7 @@
   </div>
   <div class="pt5 mr15 pb5 ml15">
     <?php if (!empty($data['items'])) { ?>
-      <?= Tpl::import('/content/item/site', ['data' => $data, 'user' => $user]); ?>
+      <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user]); ?>
     <?php } else { ?>
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
@@ -107,4 +108,4 @@
   <?= $data['topic']['facet_description']; ?>
 </div>
 </div>
-<?= Tpl::import('/_block/wide-footer'); ?>
+<?= includeTemplate('/view/default/footer'); ?>

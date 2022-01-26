@@ -1,3 +1,4 @@
+<?= Tpl::insert('header', ['user' => $user, 'data' => $data, 'meta' => $meta]); ?>
 <main class="col-span-12 mb-col-12">
   <div class="bg-white items-center justify-between p15">
 
@@ -19,7 +20,7 @@
         <?= $data['domain']['item_id']; ?> (<?= $data['domain']['item_url_domain']; ?>)
       </div>
 
-      <?= Tpl::import('/_block/form/field-input', [
+      <?= Tpl::insert('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('URL'),
@@ -42,7 +43,7 @@
         ]
       ]); ?>
 
-      <?= Tpl::import('/_block/form/radio', [
+      <?= Tpl::insert('/_block/form/radio', [
         'data' => [
           [
             'title'   => Translate::get('posted') . '?',
@@ -53,7 +54,7 @@
         ]
       ]); ?>
 
-      <?php Tpl::import('/_block/editor/textarea', [
+      <?php Tpl::insert('/_block/editor/textarea', [
         'title'     => Translate::get('description'),
         'type'      => 'text',
         'name'      => 'item_content_url',
@@ -64,7 +65,7 @@
       ]); ?>
 
 
-      <?= Tpl::import('/_block/form/select/select', [
+      <?= Tpl::insert('/_block/form/select/select', [
         'data'      => $data,
         'action'    => 'edit',
         'type'      => 'topic',
@@ -74,25 +75,25 @@
       ]); ?>
 
       <h3 class="mb5"><?= Translate::get('soft'); ?></h3>
-      <?= Tpl::import('/_block/form/radio', [
+      <?= Tpl::insert('/_block/form/radio', [
         'data' => [
           [
-            'title'   => Translate::get('there is a program'),
+            'title'   => Translate::get('there.program'),
             'name'    => 'item_is_soft',
             'checked' => $data['domain']['item_is_soft'],
           ],
           [
-            'title'   => Translate::get('hosted on github'),
+            'title'   => Translate::get('hosted.github'),
             'name'    => 'item_is_github',
             'checked' => $data['domain']['item_is_github'],
           ],
         ]
       ]); ?>
 
-      <?= Tpl::import('/_block/form/field-input', [
+      <?= Tpl::insert('/_block/form/field-input', [
         'data' => [
           [
-            'title' => Translate::get('url address github'),
+            'title' => Translate::get('url.address.github'),
             'type'  => 'text',
             'name'  => 'item_github_url',
             'value' => $data['domain']['item_github_url'],
@@ -106,7 +107,7 @@
         ]
       ]); ?>
 
-      <?php Tpl::import('/_block/editor/textarea', [
+      <?php Tpl::insert('/_block/editor/textarea', [
         'title'     => Translate::get('description'),
         'type'      => 'text',
         'name'      => 'item_content_soft',
@@ -116,7 +117,7 @@
         'help'      => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
-      <?= Tpl::import('/_block/form/select/related-posts', [
+      <?= Tpl::insert('/_block/form/select/related-posts', [
         'data'      => $data,
         'action'    => 'edit',
         'type'      => 'post',
@@ -129,3 +130,4 @@
     </form>
   </div>
 </main>
+<?= includeTemplate('/view/default/footer'); ?>

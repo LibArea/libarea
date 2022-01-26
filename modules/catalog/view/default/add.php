@@ -1,3 +1,4 @@
+<?= Tpl::insert('header', ['user' => $user, 'data' => $data, 'meta' => $meta]); ?>
 <main class="col-span-12 mb-col-12">
   <div class="bg-white items-center justify-between p15">
 
@@ -9,7 +10,7 @@
     <form action="<?= getUrlByName('web.create'); ?>" method="post">
       <?= csrf_field() ?>
 
-      <?= Tpl::import('/_block/form/field-input', [
+      <?= Tpl::insert('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('title'),
@@ -24,7 +25,7 @@
         ]
       ]); ?>
 
-      <?php Tpl::import('/_block/editor/textarea', [
+      <?php Tpl::insert('/_block/editor/textarea', [
         'title' => Translate::get('description'),
         'type'  => 'text',
         'name'  => 'content_url',
@@ -33,7 +34,7 @@
         'help'  => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
-      <?= Tpl::import('/_block/form/select/select', [
+      <?= Tpl::insert('/_block/form/select/select', [
         'data'      => ['topic' => false],
         'type'      => 'topic',
         'action'    => 'add',
@@ -46,3 +47,4 @@
     </form>
   </div>
 </main>
+<?= includeTemplate('/view/default/footer'); ?>

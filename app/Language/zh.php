@@ -2,6 +2,7 @@
 $data = [
     'home'              => '家',
     'to the website'    => '到网站',
+    'catalog'           => '目錄',
     'feed'              => '饲料',
     'hi'                => '你好',
     'news'              => '新闻',
@@ -334,11 +335,6 @@ $data = [
     'details are here'      => '詳情在這裡',
     'breaking the rules'    => '打破規則',
 
-    'soft'                  => '軟件',
-    'there is a program'    => '有程序嗎？',
-    'hosted on github'      => '程序在 GitHub 上嗎？',
-    'url address github'    => 'GitHub 上的存儲庫 URL ',
-
     'sections'              => '節',
     'section'               => '節',
     'pages'                 => '頁面',
@@ -398,7 +394,6 @@ $data = [
     'linkchange password'   => '您更改密碼的鏈接',
     'changing password'     => '更改密碼',
     'domain-desc'           => '按域對社區中的帖子進行分組',
-    'domains-title'         => '系統中的網站',
     'domains-desc'          => '域的統計數據，用於編譯網站上的出版物的鏈接。 訪問量最大、最受歡迎的網站',
     'code-incorrect'        => '代碼不正確或已被使用。 再次執行恢復過程。',
     'yes-email-pass'        => '現在您可以使用您的電子郵件和密碼。',

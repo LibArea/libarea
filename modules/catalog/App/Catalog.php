@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controllers\Item;
+namespace Modules\Catalog\App;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
-use App\Models\{WebModel, FeedModel, FacetModel, PostModel};
-use Content, Translate, Tpl;
+use Modules\Catalog\App\Models\WebModel;
+use App\Models\{FacetModel, PostModel};
+use Content, Translate;
 
-class WebController extends MainController
+class Catalog
 {
     private $user;
 
@@ -17,92 +17,6 @@ class WebController extends MainController
     public function __construct()
     {
         $this->user  = UserData::get();
-    }
-
-    public function index($sheet, $type)
-    {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-
-        $pagesCount = WebModel::getItemsAllCount($sheet);
-        $items      = WebModel::getItemsAll($page, $this->limit, $this->user, $sheet);
-
-        $result = [];
-        foreach ($items as $ind => $row) {
-            $text = explode("\n", $row['item_content_url']);
-            $row['item_content_url']    = Content::text($text[0], 'line');
-            $result[$ind]           = $row;
-        }
-
-        $num = $page > 1 ? sprintf(Translate::get('page-number'), $page) : '';
-
-        $m = [
-            'og'         => true,
-            'twitter'    => true,
-            'imgurl'     => '/assets/images/agouti-web.png',
-            'url'        => getUrlByName('web'),
-        ];
-
-        return Tpl::agRender(
-            '/item/home',
-            [
-                'meta'  => meta($m, Translate::get('domains-title'), Translate::get('domains-desc')),
-                'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
-                    'items'         => $result,
-                    'type'          => $type,
-                    'sheet'         => $sheet,
-                ]
-            ]
-        );
-    }
-
-    // Посты по домену
-    public function posts($sheet, $type)
-    {
-        $domain     = Request::get('domain');
-        $page       = Request::getInt('page');
-        $page       = $page == 0 ? 1 : $page;
-
-        $item       = WebModel::getItemOne($domain, $this->user['id']);
-        pageError404($item);
-
-        $item['item_content'] = Content::text($item['item_content_url'], 'line');
-
-        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $item['item_url_domain']);
-        $pagesCount = FeedModel::feedCount($this->user, $sheet, $item['item_url_domain']);
-
-        $result = [];
-        foreach ($posts as $ind => $row) {
-            $text = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['post_date']               = lang_date($row['post_date']);
-            $result[$ind]                   = $row;
-        }
-
-        $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('domain', ['domain' => $domain]),
-        ];
-
-        return Tpl::agRender(
-            '/item/link',
-            [
-                'meta'  => meta($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain),
-                'data'  => [
-                    'sheet'         => 'domain',
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
-                    'posts'         => $result,
-                    'domains'       => WebModel::getItemsTop($domain),
-                    'item'          => $item,
-                    'type'          => $type,
-                ]
-            ]
-        );
     }
 
     // Лист сайтов по темам (сайты по "категориям")
@@ -129,10 +43,11 @@ class WebController extends MainController
         ];
         $desc  = Translate::get('websites') . ' ' . Translate::get('by') . ' ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
 
-        return Tpl::agRender(
-            '/item/sites',
+        return view(
+            '/view/default/sites',
             [
                 'meta'  => meta($m, Translate::get('websites') . ': ' . $topic['facet_title'], $desc),
+                'user' => $this->user,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => 'web',
@@ -184,10 +99,11 @@ class WebController extends MainController
             $related_posts = PostModel::postRelated($item['item_post_related']);
         }
 
-        return Tpl::agRender(
-            '/item/website',
+        return view(
+            '/view/default/website',
             [
                 'meta'  => meta($m, Translate::get('website') . ': ' . $item['item_title_url'], $desc),
+                'user' => $this->user,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => 'web',

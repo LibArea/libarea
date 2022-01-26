@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controllers\Item;
+namespace Modules\Catalog\App;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
-use App\Models\{WebModel, FacetModel};
-use Validation, Translate, Domains, Tpl;
+use Modules\Catalog\App\Models\WebModel;
+use App\Models\FacetModel;
+use Validation, Translate, Domains;
 
-class AddWebController extends MainController
+class Add
 {
     private $user;
 
@@ -25,10 +25,11 @@ class AddWebController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
-        return Tpl::agRender(
-            '/item/add',
+        return view(
+            '/view/default/add',
             [
                 'meta'  => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('website'))),
+                'user'  => $this->user,
                 'data'  => [
                     'sheet' => $sheet,
                     'type'  => $type,

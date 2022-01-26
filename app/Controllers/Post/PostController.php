@@ -5,8 +5,8 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
-use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel};
-use Content, Config, Tpl;
+use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel};
+use Content, Config, Tpl, Translate;
 
 class PostController extends MainController
 {
@@ -202,5 +202,52 @@ class PostController extends MainController
         $post['post_content'] = Content::text($post['post_content'], 'text');
 
         Tpl::agIncludeTemplate('/content/post/postcode', ['post' => $post, 'user'   => $this->user]);
+    }
+    
+    // Посты по домену
+    public function domain($sheet, $type)
+    {
+        $domain     = Request::get('domain');
+        $page       = Request::getInt('page');
+        $page       = $page == 0 ? 1 : $page;
+
+        $site       = PostModel::getDomain($domain, $this->user['id']);
+        pageError404($site);
+
+        $site['item_content'] = Content::text($site['item_content_url'], 'line');
+
+        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $site['item_url_domain']);
+        $pagesCount = FeedModel::feedCount($this->user, $sheet, $site['item_url_domain']);
+
+        $result = [];
+        foreach ($posts as $ind => $row) {
+            $text = explode("\n", $row['post_content']);
+            $row['post_content_preview']    = Content::text($text[0], 'line');
+            $row['post_date']               = lang_date($row['post_date']);
+            $result[$ind]                   = $row;
+        }
+
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('domain', ['domain' => $domain]),
+        ];
+
+        return Tpl::agRender(
+            '/post/link',
+            [
+                'meta'  => meta($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain),
+                'data'  => [
+                    'sheet'         => 'domain',
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $page,
+                    'posts'         => $result,
+                    'domains'       => PostModel::getDomainTop($domain),
+                    'site'          => $site,
+                    'type'          => $type,
+                ]
+            ]
+        );
     }
 }

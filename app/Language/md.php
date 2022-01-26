@@ -2,6 +2,7 @@
 $data = [
     'home'              => 'Acasă',
     'to the website'    => 'Pe site',
+    'catalog'           => 'Catalog',
     'top'               => 'TOP',
     'news'              => 'Știri',
     'sort'              => 'Sortează',
@@ -342,11 +343,6 @@ $data = [
     'registration by invite' => 'Înregistrare prin invitație',
     'breaking the rules'    => 'Încălcând regulile',
 
-    'soft'                  => 'Software',
-    'there is a program'    => 'Ai vreun program?',
-    'hosted on github'      => 'Este găzduit pe GitHub?',
-    'url address github'    => 'Adresa URL a depozitului GitHub',
-
     'sections'              => 'Sectiuni',
     'section'               => 'Sectiune',
     'pages'                 => 'Pagini',
@@ -396,7 +392,6 @@ $data = [
     'changing password'     => 'schimbați parola',
     'site under reconstruction' => 'Site în reconstrucție',
     'domain-desc'           => 'Gruparea postărilor într-o comunitate după domeniu',
-    'domains-title'         => 'Site-uri web din sistem',
     'domains-desc'          => 'Statistici despre domenii, linkuri care sunt utilizate pentru a compila publicații pe site. Cele mai vizitate site-uri populare',
     'code-incorrect'        => 'Codul este incorect sau a fost deja utilizat. Parcurgeți din nou procedura de recuperare.',
     'yes-email-pass'        => 'Acum puteți utiliza adresa de e-mail și parola.',

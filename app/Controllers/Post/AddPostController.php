@@ -5,7 +5,8 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
-use App\Models\{SubscriptionModel, ActionModel, WebModel, PostModel, FacetModel};
+use Modules\Catalog\App\Models\WebModel;
+use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel};
 use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domains, Tpl;
 
 class AddPostController extends MainController
@@ -307,8 +308,8 @@ class AddPostController extends MainController
         $post_url_domain    = $domain->getRegisterable();
         $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
-        // Если домена нет, то добавим его
-        $item = WebModel::getItemOne($post_url_domain, $this->user['id']);
+        // Если домена нет, то добавим его 
+        $item = PostModel::getDomain($post_url_domain, $this->user['id']);
         if (!$item) {
             // Запишем минимальные данный
             WebModel::add(

@@ -335,4 +335,57 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['post_id' => $post_id])->fetch();
     }
+    
+    // Check if the domain exists 
+    // Проверим наличие домена
+    public static function getDomain($domain, $uid)
+    {
+        $sql = "SELECT
+                    item_id,
+                    item_title_url,
+                    item_content_url,
+                    item_title_soft,
+                    item_content_soft,
+                    item_published,
+                    item_user_id,
+                    item_url,
+                    item_url_domain,
+                    item_votes,
+                    item_count,
+                    item_is_soft,
+                    item_is_github,
+                    item_github_url,
+                    item_post_related,
+                    item_is_deleted,
+                    votes_item_user_id, 
+                    votes_item_item_id
+                        FROM items 
+                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid
+                        WHERE item_url_domain = :domain AND item_is_deleted = 0";
+
+
+        return DB::run($sql, ['domain' => $domain, 'uid' => $uid])->fetch();
+    }
+    
+    // 5 popular domains
+    // 5 популярных доменов
+    public static function getDomainTop($domain)
+    {
+        $sql = "SELECT
+                    item_id,
+                    item_title_url,
+                    item_content_url,
+                    item_published,
+                    item_user_id,
+                    item_url,
+                    item_url_domain,
+                    item_votes,
+                    item_count,
+                    item_is_deleted
+                        FROM items 
+                        WHERE item_url_domain != :domain AND item_published = 1 AND item_is_deleted = 0
+                        ORDER BY item_count DESC LIMIT 10";
+
+        return DB::run($sql, ['domain' => $domain])->fetchAll();
+    }
 }

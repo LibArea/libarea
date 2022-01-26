@@ -1,3 +1,4 @@
+<?= Tpl::insert('header', ['user' => $user, 'data' => $data, 'meta' => $meta]); ?>
 <main class="col-span-12 mb-col-12">
   <div class="pt5 mr15 pb5 ml15">
     <?php if (UserData::checkAdmin()) { ?>
@@ -8,7 +9,7 @@
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
-    <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('domains-title'); ?></h1>
+    <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('site.directory'); ?></h1>
   </div>
   <div class="flex mb20 pt10 pr15 pb10 pl15 bg-yellow-50 flex-auto">
     <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
@@ -31,7 +32,7 @@
   </div>
   <div class="pt5 mr15 pb5 ml15">
     <?php if (!empty($data['items'])) { ?>
-        <?= Tpl::import('/content/item/site', ['data' => $data, 'user' => $user]); ?>
+      <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user]); ?>
     <?php } else { ?>
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
@@ -41,4 +42,4 @@
   </div>
 </main>
 </div>
-<?= Tpl::import('/_block/wide-footer'); ?>
+<?= includeTemplate('/view/default/footer'); ?>
