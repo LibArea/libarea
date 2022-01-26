@@ -55,8 +55,6 @@ img {
 .bottom5 { bottom: $px-five; }
 .left0 { left: $px-zero; }
 .mr-auto { margin: 0 auto; }
-
-.ml-auto { margin-left: auto; }
 .-mr-1 { margin-right: -0.5rem; }
 .-mt20 { margin-top: -20px; }
 .-mt50 { margin-top: -50px; }
@@ -160,40 +158,21 @@ img {
 
 .bg-black { background-color: $black; }
 .bg-white { background-color: $white; }
-
 .bg-green-600 { background-color: $green-600; }
 .bg-green-700 { background-color: $green-700; }
-
 .bg-gray-100 { background-color: $gray-100; }
-.bg-gray-500 { background-color: $gray-500; }
-.bg-gray-700 { background-color: $gray-700; }
-
 .bg-zinc-800 { background-color: $zinc-800; }
-
 .bg-yellow-50 { background-color: $yellow-50; } 
 .bg-yellow-100 { background-color: $yellow-100; }
-.bg-yellow-500 { background-color: $yellow-500; }
-
 .bg-purple-100 { background-color: $purple-100; }
-
-.bg-indigo-300 { background-color: $indigo-300; }
-
 .bg-orange-500 { background-color: $orange-500; }
-
 .bg-blue-100 { background-color: $blue-100; }
-.bg-blue-400 { background-color: $blue-400; }
 .bg-blue-500 { background-color: $blue-500; }
-
 .bg-sky-50 { background-color: $sky-50; }
-
 .bg-red-200 { background-color: $red-200; }
 .bg-red-300 { background-color: $red-300; }
 .bg-red-500 { background-color: $red-500; }
-
 .bg-pink-800  { background-color: $pink-800; }
-
-.bg-orange-800 { background-color: $orange-800; }
-
 .bg-blue-steel-700 { background-color: $blue-steel-700; }
 
 .bg-hover-green:hover { background-color: #5fb878; }
@@ -238,7 +217,6 @@ img {
 .w60 { width: 60px; }
 .w94 { width: 94px; }
 .w110 { width: 110px; }
-.w130 { width: 130px; }
 .w160 { width: 160px; }
 .w200 { width: 200px; }
 .w400 { width: 400px; }

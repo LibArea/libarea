@@ -12,7 +12,7 @@
           <ol class="p0 m0 list-none">
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="answ-telo hidden">
-                <div class="br-box-gray w130 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
+                <div class="br-box-gray w110 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
                   <?= user_avatar_img($answer['avatar'], 'max', $answer['login'], 'br-rd-50 w60 h60'); ?>
                   <div class="text-sm gray-600">
                     <?= lang_date($answer['answer_date']); ?>

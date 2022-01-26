@@ -10,12 +10,12 @@
             <?= $item['item_title_url']; ?>
           </h2>
         </a>
-        <div class="mt5 mb15 max-w780">
+        <div class="mt5 mb15 max-w640">
           <?= $item['item_content_url']; ?>
         </div>
-        <div class="flex flex-row gap-2 items-center max-w780">
-          <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'mr5 w20 h20'); ?>
+        <div class="flex justify-between flex-row gap-2 items-center max-w640">
           <div class="green-600 text-sm">
+            <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'mr5 w20 h20'); ?>
             <?= $item['item_url_domain']; ?>
             <?php if ($item['item_github_url']) { ?>
               <a class="ml15 gray-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">

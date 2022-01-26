@@ -44,7 +44,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
                         LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid
                         $sort
-                        ORDER BY item_id DESC LIMIT $start, $limit ";
+                        LIMIT $start, $limit ";
 
         return DB::run($sql, ['uid' => $user['id']])->fetchAll();
     }
@@ -61,10 +61,13 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         switch ($sheet) {
             case 'web.all':
-                $sort     = "WHERE item_is_deleted = 0";
+                $sort     = "WHERE item_is_deleted = 0 ORDER BY item_id DESC";
+                break;
+            case 'web.top':
+                $sort     = "WHERE item_is_deleted = 0 ORDER BY item_votes DESC";
                 break;
             case 'web.deleted':
-                $sort     = "WHERE item_is_deleted = 1";
+                $sort     = "WHERE item_is_deleted = 1 ORDER BY item_id DESC";
                 break;
         }
 

@@ -9,7 +9,7 @@
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
-    <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('site.directory'); ?></h1>
+    <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('categories'); ?></h1>
   </div>
   <div class="flex mb20 pt10 pr15 pb10 pl15 bg-yellow-50 flex-auto">
     <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
@@ -30,6 +30,20 @@
       </div>
     <?php } ?>
   </div>
+  <div class="ml15 flex justify-between flex-row items-center max-w780">
+    <div>
+    <?= num_word($data['count'], Translate::get('num-website'), false); ?>: 
+    <?= $data['count']; ?>
+    </div>
+    <div>
+    <a class="<?php if ( $data['sheet'] == 'web.all') { ?>bg-gray-100 p5 gray-600 <?php } ?>mr20" href="<?= getUrlByName('web'); ?>">
+      <?= Translate::get('by.date'); ?>
+    </a>
+    <a class="<?php if ( $data['sheet'] == 'web.top') { ?>bg-gray-100 p5 gray-600 <?php } ?>" href="<?= getUrlByName('web.top'); ?>">
+      TOP
+    </a>
+    </div>
+  </div>
   <div class="pt5 mr15 pb5 ml15">
     <?php if (!empty($data['items'])) { ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user]); ?>
@@ -38,7 +52,7 @@
     <?php } ?>
   </div>
   <div class="pl10">
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
   </div>
 </main>
 </div>

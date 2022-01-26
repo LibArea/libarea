@@ -49,6 +49,7 @@ class Home
                 'user'  => $this->user,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'count'         => $pagesCount,
                     'pNum'          => $page,
                     'items'         => $result,
                     'type'          => $type,

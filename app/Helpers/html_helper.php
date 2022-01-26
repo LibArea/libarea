@@ -264,7 +264,7 @@ function tabs_nav($name, $item, $user, array $pages = [])
         foreach ($pages as $key => $page) {
             $tl = $page['tl'] ?? null;
             if (!empty($page['hr'])) {
-                if ($user['id'] > 0) $html .= '<li><hr></li>';
+                if ($user['id'] > 0) $html .= '<li><hr class="w-90"></li>';
             } else {
                 if ($user['trust_level'] >= $tl) {
                     $classes    = 'sky-500-hover dark-gray-200';

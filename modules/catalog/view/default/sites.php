@@ -104,7 +104,7 @@
   </div>
 </main>
 </div>
-<div class="bg-white p15 mb-none br-box-gray">
+<div class="bg-white p15 mb-none">
   <?= $data['topic']['facet_description']; ?>
 </div>
 </div>
