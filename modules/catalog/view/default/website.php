@@ -9,7 +9,7 @@
       <?= votes($user['id'], $data['item'], 'item', 'ps', 'text-2xl', 'block'); ?>
     </div>
 
-    <h1 class="mt5 mb10 text-2xl font-normal"><?= $data['item']['item_title_url']; ?>
+    <h1><?= $data['item']['item_title_url']; ?>
       <?php if ($user['trust_level'] == 5) { ?>
         <a class="text-sm ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['item']['item_id']]); ?>">
           <i class="bi bi-pencil"></i>
@@ -44,30 +44,30 @@
       </div>
     </div>
     <?php if ($data['item']['item_is_soft'] == 1) { ?>
-      <h2 class="mb5 mb-mt-5 font-normal"><?= Translate::get('soft'); ?></h2>
-      <h3 class="mt5 mb10 font-normal"><?= $data['item']['item_title_soft']; ?></h3>
+      <h2><?= Translate::get('soft'); ?></h2>
+      <h3><?= $data['item']['item_title_soft']; ?></h3>
       <div class="gray-600">
         <?= $data['item']['item_content_soft']; ?>
       </div>
-      <div class="mb5">
+      <p>
         <i class="bi bi-github mr5"></i>
         <a target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_github_url']; ?>">
           <?= $data['item']['item_github_url']; ?>
         </a>
-      </div>
+      </p>
     <?php } ?>
 
     <?php if ($data['related_posts']) { ?>
-      <div class="bg-white br-box-gray pt15">
+      <p>
         <?= Tpl::insert('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => true]); ?>
-      </div>
+      </p>
     <?php } ?>
   </div>
 </main>
 <aside class="col-span-3 relative mb-none">
-  <div class="bg-white br-rd5 br-box-gray box-shadow-all p15 mb15">
+  <box class="bg-white br-box-gray box-shadow-all">
     <?php if ($data['similar']) { ?>
-      <div class="gray mb5"><?= Translate::get('recommended'); ?></div>
+      <h3 class="uppercase-box"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['similar'] as $link) { ?>
         <?= website_img($link['item_url_domain'], 'thumbs', $link['item_title_url'], 'mr5 w200 box-shadow'); ?>
         <a class="inline mr20 mb15 block text-sm" href="<?= getUrlByName('web.website', ['slug' => $link['item_url_domain']]); ?>">
@@ -77,8 +77,8 @@
     <?php } else { ?>
       ....
     <?php } ?>
-  </div>
-  <div class="bg-white br-rd5 br-box-gray box-shadow-all p15 mb15">
+  </box>
+  <box class="bg-white br-box-gray box-shadow-all">
     <?php if ($data['high_leve']) { ?>
       <div class="gray"><?= Translate::get('see more'); ?></div>
       <?php foreach ($data['high_leve'] as $rl) { ?>
@@ -91,7 +91,7 @@
     <?php } else { ?>
       ....
     <?php } ?>
-  </div>
+  </box>
 </aside>
-</div>
+</container>
 <?= includeTemplate('/view/default/footer'); ?>

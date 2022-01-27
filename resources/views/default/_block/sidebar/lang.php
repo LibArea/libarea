@@ -4,7 +4,7 @@
       <?= $lang; ?>...
     </div>
   <?php } ?>
-  <div class="flex flex-row items-center justify-between bg-white br-rd5 br-box-gray p15 mt15">
+  <div class="box-flex bg-white br-box-gray p15">
     <div class="text-sm">
       <a class="inline gray-400" title="<?= Translate::get('help'); ?>" href="/info/<?= Config::get('facets.page-one'); ?>">
         <?= Translate::get('help'); ?>

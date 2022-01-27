@@ -1,6 +1,5 @@
-<main class="col-span-12 mb-col-12 bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
-  <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('registration by invite'); ?></h1>
-  <div class="form">
+<main class="col-span-12 mb-col-12 bg-white br-rd5 br-box-gray p15">
+  <h1><?= Translate::get('registration by invite'); ?></h1>
     <form class="max-w300" action="<?= getUrlByName('register'); ?>/add" method="post">
       <?php csrf_field(); ?>
 
@@ -36,11 +35,10 @@
         ]
       ]); ?>
 
-      <div class="mb20">
+      <p>
         <input type="hidden" name="invitation_code" id="invitation_code" value="<?= $data['invate']['invitation_code']; ?>">
         <input type="hidden" name="invitation_id" id="invitation_id" value="<?= $data['invate']['uid']; ?>">
         <?= sumbit(Translate::get('sign up')); ?>
-      </div>
+      </p>
     </form>
-  </div>
 </main>

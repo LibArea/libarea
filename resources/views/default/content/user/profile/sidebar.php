@@ -2,7 +2,7 @@
 
 <div class="col-span-4 justify-between mb-none">
 
-  <div class="br-box-gray bg-white p15 mb15">
+  <box class="br-box-gray bg-white">
     <blockquote class="ml0 mb10 max-w640 gray">
       <?= $profile['about']; ?>...
     </blockquote>
@@ -13,20 +13,18 @@
         <sup class="ml5"><?= Translate::get('tl' . $profile['trust_level'] . '.title'); ?></sup>
       </span>
     </div>
-  </div>
+  </box>
 
   <?php if ($data['blogs']) { ?>
-    <div class="br-box-gray bg-white p15 mb15">
-      <h3 class="m0 uppercase gray font-normal text-sm mb15">
-        <?= Translate::get('created by'); ?>
-      </h3>
+    <box class="br-box-gray bg-white">
+      <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
       <?php foreach ($data['blogs'] as $blog) { ?>
         <div class="w-100 mb-w-100 mb15 flex flex-row">
-          <a title="<?= $blog['facet_title']; ?>" class="mr10" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
+          <a class="mr10" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
             <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'w60 h60 br-box-gray br-rd-50'); ?>
           </a>
           <div class="ml5 w-100">
-            <a class="black" title="<?= $blog['facet_title']; ?>" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
+            <a class="black" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
               <?= $blog['facet_title']; ?>
             </a>
             <div class="text-sm pr15 mb-pr-0 gray-400">
@@ -43,15 +41,13 @@
           </div>
         </div>
       <?php } ?>
-    </div>
+    </box>
   <?php } ?>
 
   <?php if ($profile['my_post'] != 0) { ?>
     <?php $post = $data['post']; ?>
-    <div class="br-box-gray bg-white p15 mb15">
-      <h3 class="m0 uppercase gray font-normal text-sm">
-        <?= Translate::get('selected post'); ?>
-      </h3>
+    <box class="br-box-gray bg-white">
+      <h3 class="uppercase-box"><?= Translate::get('selected post'); ?></h3>
       <div class="mt5">
         <a class="dark-gray-300" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
@@ -77,42 +73,36 @@
           <?php } ?>
         </div>
       </div>
-    </div>
+    </box>
   <?php } ?>
 
   <?php if ($data['topics']) { ?>
-    <div class="br-box-gray bg-white p15 mb15">
-      <h3 class="uppercase gray m0 font-normal text-sm mb5">
-        <?= Translate::get('is reading'); ?>
-      </h3>
+    <box class="br-box-gray bg-white">
+      <h3 class="uppercase-box"><?= Translate::get('is reading'); ?></h3>
       <?php foreach ($data['topics'] as  $topic) { ?>
         <div class="mt5 mb5">
-          <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>" title="<?= $topic['facet_title']; ?>">
+          <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
             <?= facet_logo_img($topic['facet_img'], 'small', $topic['facet_title'], 'w30 h30 mr10'); ?>
             <span class="bar-name text-sm"><?= $topic['facet_title']; ?></span>
           </a>
         </div>
       <?php } ?>
-    </div>
+    </box>
   <?php } ?>
 
   <?php if (!empty($data['participation'][0]['facet_id'])) { ?>
-    <div class="br-box-gray bg-white p15 mb15">
-      <h3 class="m0 uppercase gray font-normal text-sm mb5">
-        <?= Translate::get('understands'); ?>
-      </h3>
+    <box class="br-box-gray bg-white">
+      <h3 class="uppercase-box"><?= Translate::get('understands'); ?></h3>
       <?php foreach ($data['participation'] as $part) { ?>
         <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 sky-500 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
           <?= $part['facet_title']; ?>
         </a>
       <?php } ?>
-    </div>
+    </box>
   <?php } ?>
 
-  <div class="br-box-gray bg-white p15 mb15">
-    <h3 class="m0 uppercase gray font-normal text-sm">
-      <?= Translate::get('contacts'); ?>
-    </h3>
+  <box class="br-box-gray bg-white">
+    <h3 class="uppercase-box"><?= Translate::get('contacts'); ?></h3>
     <?php foreach (Config::get('fields-profile') as $block) { ?>
       <?php if ($profile[$block['title']]) { ?>
         <div class="mt5">
@@ -133,12 +123,10 @@
         <?php } ?>
       <?php } ?>
     <?php } ?>
-  </div>
+  </box>
 
-  <div class="br-box-gray bg-white p15 mb15">
-    <h3 class="m0 uppercase gray font-normal text-sm">
-      <?= Translate::get('badges'); ?>
-    </h3>
+  <box class="br-box-gray bg-white">
+    <h3 class="uppercase-box"><?= Translate::get('badges'); ?></h3>
     <div class="m0 text-3xl">
       <i title="<?= Translate::get('medal for registration'); ?>" class="bi bi-gift sky-500"></i>
       <?php if ($profile['id'] < 50) { ?>
@@ -148,13 +136,11 @@
         <?= $badge['badge_icon']; ?>
       <?php } ?>
     </div>
-  </div>
+  </box>
 
   <?php if (UserData::checkAdmin()) { ?>
-    <div class="br-box-gray bg-white p15 mb15">
-      <h3 class="m0 uppercase gray font-normal text-sm">
-        <?= Translate::get('admin'); ?>
-      </h3>
+    <box class="br-box-gray bg-white">
+      <h3 class="uppercase-box"><?= Translate::get('admin'); ?></h3>
       <div class="mt5">
         <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
           <?php if ($profile['ban_list'] == 1) { ?>
@@ -187,6 +173,6 @@
         <hr>
         <span class="gray">id<?= $profile['id']; ?> | <?= $profile['email']; ?></span>
       </div>
-    </div>
+    </box>
   <?php } ?>
 </div>

@@ -1,4 +1,4 @@
-</div>
+</container>
 <footer class="w-100 mt15 p15 bg-zinc-800 clear">
   <div class="col-span-12 max-width grid grid-cols-12 mr-auto">
     <div class="text-sm mt5 mb5 gray-400 col-span-3">

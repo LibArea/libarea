@@ -6,9 +6,7 @@
       </div>
       <div class="mr20 flex-auto">
         <a class="dark-gray-300" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
-          <h2 class="font-normal underline-hover text-2xl mt0 mb0">
-            <?= $item['item_title_url']; ?>
-          </h2>
+          <h2><?= $item['item_title_url']; ?></h2>
         </a>
         <div class="mt5 mb15 max-w640">
           <?= $item['item_content_url']; ?>

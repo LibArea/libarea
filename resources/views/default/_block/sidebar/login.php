@@ -1,29 +1,27 @@
 <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
-  <form class="" action="<?= getUrlByName('login'); ?>" method="post">
+  <form action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>
-    <div class="mb20">
-      <label for="email" class="block mb5">Email</label>
-      <input type="email" id="email" placeholder="<?= Translate::get('enter'); ?> e-mail" name="email" class="w-100 h30 pl5">
-    </div>
-    <div class="inputs relative mb20">
-      <label for="password" class="block mb5"><?= Translate::get('password'); ?></label>
-      <input type="password" id="password" placeholder="<?= Translate::get('enter your password'); ?>" name="password" class="password w-100 h30 pl5">
-      <span class="showPassword absolute gray-400 right5 text-xl"><i class="bi bi-eye"></i></span>
-    </div>
-    <div class="mb20 mb20 flex">
-      <input type="checkbox" class="left mr5" id="rememberme" name="rememberme" value="1">
-      <label id="rem-text" class="form-check-label" for="rememberme">
-        <span class="gray-600"><?= Translate::get('remember me'); ?></span>
+    <fieldset class="mt0">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="<?= Translate::get('enter'); ?> e-mail" name="email">
+    </fieldset>
+    <fieldset>
+      <label for="password"><?= Translate::get('password'); ?></label>
+      <input type="password" id="password" placeholder="<?= Translate::get('enter your password'); ?>" name="password">
+      <span class="showPassword absolute gray-400 right5 mt5 text-lg"><i class="bi bi-eye"></i></span>
+    </fieldset>
+    <fieldset class="flex items-center">
+      <input type="checkbox" id="rememberme" name="rememberme" value="1">
+      <label id="rem-text" class="mb0 ml5 gray-600" for="rememberme">
+        <?= Translate::get('remember me'); ?>
       </label>
-    </div>
-    <div class="mb20">
-      <?= sumbit(Translate::get('sign in')); ?>
-    </div>
-    <div class="center gray-600">
+    </fieldset>
+    <fieldset>
+      <?= sumbit(Translate::get('sign.in')); ?>
+    </fieldset>
+    <fieldset class="gray-600 center">
       <?= Translate::get('login-use-condition'); ?>
-    </div>
-    <div class="mt15 center">
-      <a class="gray-600" href="<?= getUrlByName('recover'); ?>"><?= Translate::get('forgot your password'); ?>?</a>
-    </div>
+      <a href="<?= getUrlByName('recover'); ?>"><?= Translate::get('forgot your password'); ?>?</a>
+    </fieldset>
   </form>
 </div>

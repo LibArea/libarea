@@ -1,9 +1,7 @@
-<div class="mb20 max-w640">
-  <label class="block">
-    <?= Translate::get('blog'); ?>
-  </label>
+<fieldset>
+  <label><?= Translate::get('blog'); ?></label>
   <input name="blog_select" id="blog_id">
-</div>
+</fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   let blog_search = async (props = {}) => {

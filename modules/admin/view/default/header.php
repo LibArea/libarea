@@ -45,4 +45,4 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
       </div>
     </div>
   </header>
-  <div class="max-width mr-auto grid grid-cols-12 gap-4 mb-gap-05 pr5 pl5">
+  <container>

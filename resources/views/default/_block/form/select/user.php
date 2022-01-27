@@ -1,8 +1,8 @@
 <?php if ($uid['trust_level'] > 4) { ?>
-    <div class="mb20 max-w640">
-        <?= Translate::get('author'); ?>
-        <input name='user_id' id="user_id">
-    </div>
+  <fieldset>
+    <label><?= Translate::get('author'); ?></label>
+    <input name='user_id' id="user_id">
+  </fieldset>
 
     <script nonce="<?= $_SERVER['nonce']; ?>">
         const user_search = async (props = {}) => {

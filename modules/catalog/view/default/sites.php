@@ -1,21 +1,20 @@
 <?= Tpl::insert('header', ['user' => $user, 'data' => $data, 'meta' => $meta]); ?>
 <main class="col-span-12 mb-col-12">
-  <div class="pt5 mr15 pb5 ml15 text-sm">
     <?php if (UserData::checkAdmin()) { ?>
       <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('site.add'); ?>">
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
-    <a class="gray" href="<?= getUrlByName('web'); ?>" class="text-sm gray-400"><?= Translate::get('websites'); ?></a>
+    <a href="<?= getUrlByName('web'); ?>" class="text-sm gray-400 ml10"><?= Translate::get('websites'); ?></a> 
 
     <?php if (!empty($data['high_topics'][0])) {
       $site = $data['high_topics'][0];   ?>
       <span class="gray mr5 ml5">/</span>
-      <a class="" href="<?= getUrlByName('web.topic', ['slug' => $site['facet_slug']]); ?>" title="<?= $site['facet_title']; ?>">
+      <a href="<?= getUrlByName('web.topic', ['slug' => $site['facet_slug']]); ?>">
         <?= $site['facet_title']; ?>
       </a>
     <?php } ?>
-    <h1 class="mt0 mb5 text-2xl font-normal">
+    <h1 class="ml10">
       <?= $data['topic']['facet_title']; ?>
       <?php if (UserData::checkAdmin()) { ?>
         <a class="text-sm ml5" href="<?= getUrlByName('topic.edit', ['id' => $data['topic']['facet_id']]); ?>">
@@ -26,9 +25,8 @@
         </a>
       <?php } ?>
     </h1>
-  </div>
 
-  <div class="mb20 pt10 pr15 pb10 pl15 bg-yellow-50 dark-bg-black">
+  <div class="mb20 p15 bg-yellow-50 dark-bg-black">
     <?php if ($data['low_topics']) { ?>
       <div class="grid grid-cols-3 gap-2 justify-between mb10">
         <?php foreach ($data['low_topics'] as $lt) { ?>
@@ -68,10 +66,12 @@
     <?php } ?>
   </div>
 
-  <div class="flex flex-row items-center justify-between pt5 mr15 pb5 ml15 w-90">
-    <p class="m0 text-xl lowercase"><?= num_word($data['count'], Translate::get('num-website'), true); ?></p>
+  <div class="box-flex ml15 max-w780">
+    <p class="m0 text-xl lowercase">
+      <?= num_word($data['count'], Translate::get('num-website'), true); ?>
+    </p>
     <ul class="flex flex-row list-none m0 p0 center">
-
+ 
       <?= tabs_nav(
         $user['id'],
         $data['sheet'],
@@ -103,7 +103,7 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
   </div>
 </main>
-</div>
+</container>
 <div class="bg-white p15 mb-none">
   <?= $data['topic']['facet_description']; ?>
 </div>

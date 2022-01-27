@@ -175,11 +175,11 @@ Route::get('/web/page/{page?}')->module('catalog', 'App\Home', ['web.all', 'web'
 Route::get('/web/top')->module('catalog', 'App\Home', ['web.top', 'web'])->name('web.top');
 Route::get('/web/top/page/{page?}')->module('catalog', 'App\Home', ['web.top', 'web'])->where(['page' => '[0-9]+']);
 
-Route::get('/web/{slug}')->module('catalog', 'App\Catalog@sites', ['all'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.topic');
-Route::get('/web/{slug}/new')->module('catalog', 'App\Catalog@sites', ['new'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.topic.new');
+Route::get('/web/{slug}')->module('catalog', 'App\Catalog', ['all'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.topic');
+Route::get('/web/{slug}/new')->module('catalog', 'App\Catalog', ['new'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.topic.new');
+Route::get('/web/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 
 Route::get('/web/website/{slug}')->module('catalog', 'App\Catalog@website', ['feed'])->where(['slug' => '[A-Za-z0-9.-]+'])->name('web.website');
-Route::get('/web/{slug}/page/{page?}')->module('catalog', 'App\Catalog@sites', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 
 Route::get('/')->controller('HomeController', ['main.feed', 'main']);
 Route::get('/page/{page?}')->controller('HomeController', ['main.feed', 'main'])->where(['page' => '[0-9]+']);

@@ -78,9 +78,9 @@ class LoginController extends MainController
         return Tpl::agRender(
             '/auth/login',
             [
-                'meta'  => meta($m, Translate::get('sign in'), Translate::get('info-login')),
+                'meta'  => meta($m, Translate::get('sign.in'), Translate::get('info-login')),
                 'data'  => [
-                    'sheet' => 'sign in',
+                    'sheet' => 'sign.in',
                     'type'  => 'login',
                 ]
             ]

@@ -27,7 +27,7 @@ $facet = $data['facet'] ?? false; ?>
 <body class="p0 m0 black<?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white mt0 mb15">
-    <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl10 mb10 mb-none items-center flex">
+    <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl15 mb10 mb-none items-center flex">
       <?php foreach (Config::get('menu.mobile') as $key => $topic) { ?>
         <a class="mr20 black dark-gray-300 text-xs" href="<?= $topic['url']; ?>">
           <i class="<?= $topic['icon']; ?> mr5"></i>
@@ -38,11 +38,11 @@ $facet = $data['facet'] ?? false; ?>
 
     <div class="col-span-12 mr-auto max-w1240 w-100 pr10 pl10 h50 grid items-center flex justify-between">
       <div class="flex items-center" id="find">
-        <ag-menu data-template="one" class="tippy pl0 pr10 none mb-block">
+        <menu data-template="one" class="tippy pl0 pr10 none mb-block">
           <div class="relative w-auto">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
-         </ag-menu> 
+         </menu> 
           <div id="one" style="display: none;" class="box-shadow2 z-40 bg-white br-rd3">
             <nav>
               <?= tabs_nav(
@@ -54,7 +54,7 @@ $facet = $data['facet'] ?? false; ?>
             </nav>
           </div>
         <div class="mr20 flex items-center">
-          <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl sky-500-hover uppercase" href="/">
+          <a title="<?= Translate::get('home'); ?>" class="logo ml5 dark-gray-300" href="/">
             <?= Config::get('meta.name'); ?>
           </a>
         </div>
@@ -70,8 +70,8 @@ $facet = $data['facet'] ?? false; ?>
               <?= Translate::get('sign up'); ?>
             </a>
           <?php } ?>
-          <a class="btn btn-outline-primary ml20" title="<?= Translate::get('sign in'); ?>" href="<?= getUrlByName('login'); ?>">
-            <?= Translate::get('sign in'); ?>
+          <a class="btn btn-outline-primary ml20" title="<?= Translate::get('sign.in'); ?>" href="<?= getUrlByName('login'); ?>">
+            <?= Translate::get('sign.in'); ?>
           </a>
         </div>
       <?php } else { ?>

@@ -60,8 +60,8 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/answers/deleted/page/{page?}')->controller('Answer\AnswerController', ['answers.deleted', 'answers'])->where(['page' => '[0-9]+']);
     Route::get('/comments/deleted')->controller('Comment\CommentController', ['comments.deleted', 'comments'])->name('comments.deleted');
     Route::get('/comments/deleted/page/{page?}')->controller('Comment\CommentController', ['comments.deleted', 'comments'])->where(['page' => '[0-9]+']);
-    Route::get('/web/deleted')->module('catalog', 'App\Catalog', ['web.deleted', 'web'])->name('web.deleted');
-    Route::get('/web/deleted/page/{page?}')->module('catalog', 'App\Catalog', ['web.deleted', 'web'])->where(['page' => '[0-9]+']);
+    Route::get('/web/deleted')->module('catalog', 'App\Home', ['web.deleted', 'web'])->name('web.deleted');
+    Route::get('/web/deleted/page/{page?}')->module('catalog', 'App\Home', ['web.deleted', 'web'])->where(['page' => '[0-9]+']);
     
     Route::get('/badges')->module('admin', 'App\Badges', ['badges.all', 'badges'])->name('admin.badges');
     Route::get('/badges/add')->module('admin', 'App\Badges@addPage', ['add', 'badges'])->name('badges.add');

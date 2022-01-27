@@ -1,10 +1,8 @@
 <?php if ($user['id'] == 0) { ?>
-  <div class="col-span-12 grid items-center grid-cols-12 mb5">
-    <div class="col-span-12 bg-white br-box-gray br-rd5 p20 center">
-      <h1 class="text-3xl mb-text-xl font-normal mt0 mb5"><?= Config::get('meta.banner_title'); ?></h1>
-      <div class="gray-600 mb5"><?= Config::get('meta.banner_desc'); ?>...</div>
-    </div>
-  </div>
+  <box class="col-span-12 bg-white br-box-gray center">
+    <h1><?= Config::get('meta.banner_title'); ?></h1>
+    <div class="mb5"><?= Config::get('meta.banner_desc'); ?>...</div>
+  </box>
 <?php } ?>
 
 <div class="col-span-2 justify-between mb-none">
@@ -19,7 +17,7 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex bg-white p15">
     <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
@@ -71,10 +69,8 @@
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
-    <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
-      <h3 class="uppercase lh1 text-sm gray-500 mt5 mb10 font-normal dark-gray-300">
-        <?= Translate::get('reading'); ?>
-      </h3>
+    <box class="br-box-gray bg-white text-sm">
+      <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
 
       <?php
       $my = [];
@@ -98,7 +94,7 @@
           $url = getUrlByName('blog', ['slug' => $topic['facet_slug']]);
         }
       ?>
-        <div class="flex relative pt5 pb5 items-center justify-between hidden">
+        <div class="bax-flex mb10">
           <a class="gray-600" href="<?= $url; ?>">
             <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr5'); ?>
             <span class="ml5 middle dark-gray-300"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
@@ -115,9 +111,9 @@
           <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
-    </div>
+    </box>
   <?php } else { ?>
-    <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
+    <box class="br-box-gray bg-white text-sm">
       <div class="uppercase gray mt5 mb5">
         <?= Translate::get('topics'); ?>
       </div>
@@ -127,27 +123,25 @@
           <span class="ml5"><?= $topic['name']; ?></span>
         </a>
       <?php } ?>
-    </div>
+    </box>
   <?php } ?>
 
   <div class="sticky top70">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="last-comm br-box-gray p5 pr15 pb5 pl15 bg-white br-rd5">
+      <box class="br-box-gray bg-white">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
-          <div class="mt15 mr0 mb15 ml0 text-sm">
-            <div class="gray-400">
-              <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20 br-rd-50 mr5'); ?>
-              <span class="middle lowercase"><?= $answer['answer_date']; ?></span>
-            </div>
-            <a class="black dark-gray-300" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
+          <div class="mb15 text-sm gray-400">
+            <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20 br-rd-50 mr5'); ?>
+            <span class="middle lowercase"><?= $answer['answer_date']; ?></span>
+            <a class="black block dark-gray-300" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
               <?= $answer['answer_content']; ?>...
             </a>
           </div>
         <?php } ?>
-      </div>
+      </box>
     <?php } ?>
 
     <?= Tpl::import('/_block/sidebar/lang', ['lang' => []]); ?>
   </div>
 </aside>
-</div>
+</container>

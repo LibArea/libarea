@@ -1,9 +1,7 @@
-<div class="mb20 max-w640">
-  <label class="block">
-    <?= Translate::get('section'); ?>
-  </label>
+<fieldset>
+  <label><?= Translate::get('section'); ?></label>
   <input name="section_select" id="section_id">
-</div>
+</fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   let section_search = async (props = {}) => {

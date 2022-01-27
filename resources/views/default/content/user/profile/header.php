@@ -21,7 +21,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
         </div>
         <div class="flex">
 
-          <h1 class="text-2xl  font-normal mb-block mt20 ml15 mb5 flex justify-between">
+          <h1 class="mb-block ml15 flex justify-between">
             <?= $profile['login']; ?>
             <?php if ($profile['name']) { ?> / <?= $profile['name']; ?><?php } ?>
               <?php if ($profile['up_count'] > 0) { ?>
@@ -82,6 +82,5 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
       <?php } ?>
 
     </div>
-
   </div>
 </div>

@@ -75,7 +75,7 @@
           </div>
         <?php } ?>
         <?php if ($post['post_url_domain']) { ?>
-          <h3 class="uppercase mb5 mt0 font-light text-sm gray"><?= Translate::get('source'); ?></h3>
+          <h3 class="uppercase-box"><?= Translate::get('source'); ?></h3>
           <div class="italic m15 mb15 p10 text-sm bg-gray-100 table gray">
             <div>
               <i class="bi bi-link-45deg"></i>
@@ -196,7 +196,7 @@
             <?= Tpl::import('/_block/editor/editor', [
               'user'       => $user,
               'height'    => '250px',
-              'preview'   => 'vertical',
+              'preview'   => 'none',
             ]); ?>
 
             <div class="clear pt5">
@@ -232,7 +232,7 @@
 
   <?php if (!empty($data['facets'])) { ?> 
     <div class="br-box-gray bg-white box-shadow-all br-rd5 mb15 p15">
-      <h3 class="uppercase lh1 text-sm gray-500 mt5 mb10 font-normal dark-gray-300">
+      <h3 class="uppercase-box">
         <?= Translate::get('topics'); ?>
       </h3>
       <?php foreach ($data['facets'] as $topic) { ?>

@@ -2,12 +2,10 @@
 // Выбор детей в основной структуре
 ?>
 
-<div class="mb20 max-w640">
-  <label class="block mb5">
-    <?= $title; ?>
-  </label>
+<fieldset>
+  <label><?= $title; ?></label>
   <input name="high_facet_id" id="high_facet_id">
-</div>
+</fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   var facet_search = async (props = {}) => {

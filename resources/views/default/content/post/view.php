@@ -32,7 +32,7 @@
           <?php } ?>
         </div>
 
-        <h1 class="mb0 mt5 font-normal text-2xl">
+        <h1 class="mb0">
           <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm lowercase flex gray-400">
@@ -96,7 +96,7 @@
           </div>
         <?php } ?>
         <?php if ($post['post_url_domain']) { ?>
-          <h3 class="uppercase mb5 mt0 font-light text-sm gray"><?= Translate::get('source'); ?></h3>
+          <h3 class="uppercase-box"><?= Translate::get('source'); ?></h3>
           <div class="italic m15 mb15 p10 text-sm bg-gray-100 table gray">
             <div>
               <i class="bi bi-link-45deg"></i>
@@ -197,7 +197,7 @@
             <?= Tpl::import('/_block/editor/editor', [
               'user'    => $user,
               'height'  => '250px',
-              'preview' => 'vertical',
+              'preview' => 'none',
             ]); ?>
 
             <div class="clear pt5">
@@ -233,9 +233,7 @@
 
   <?php if (!empty($data['facets'])) { ?>
     <div class="br-box-gray bg-white br-rd5 mb15 p15">
-      <h3 class="uppercase lh1 text-sm gray-500 mt5 mb10 font-normal dark-gray-300">
-        <?= Translate::get('topics'); ?>
-      </h3>
+      <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['facets'] as $topic) { ?>
         <div class="mb10">
           <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
@@ -270,7 +268,7 @@
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="br-box-gray bg-white br-rd5 mb15 sticky top70 p15">
-      <h3 class="uppercase mb10 mt0 font-light text-sm gray dark-gray-300"><?= Translate::get('recommended'); ?></h3>
+      <h3 class="uppercase-box"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex text-sm">
           <?php if ($rec_post['post_type'] == 'post') { ?>
@@ -343,5 +341,4 @@
       }));
   <?php } ?>
 </script>
-</div>
 <?= Tpl::import('/_block/wide-footer'); ?>

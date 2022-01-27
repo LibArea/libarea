@@ -22,8 +22,8 @@
           <label class="block mt20 mb5"><?= Translate::get('password'); ?></label>
           <input type="password" placeholder="<?= Translate::get('enter your password'); ?>" name="password" class="w-100 h30 pl5">
         </div>
-        <img class="mb5 right" src="<?= Config::get('meta.img_footer_url'); ?>">
-        <?= sumbit(Translate::get('sign in')); ?>
+        <img class="mb5 right" src="<?= Config::get('meta.img_footer_path'); ?>">
+        <?= sumbit(Translate::get('sign.in')); ?>
       </form>
 
     </main>

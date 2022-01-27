@@ -2,12 +2,10 @@
 // Связанные посты
 // Related posts
 ?>
-<div class="mb20 max-w640">
-  <label class="block mb5">
-    <?= $title; ?>
-  </label>
+<fieldset>
+  <label><?= $title; ?></label>
   <input name="post_select[]" id="post_id">
-</div>
+</fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
  document.addEventListener("DOMContentLoaded", async () => {

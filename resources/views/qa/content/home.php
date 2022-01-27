@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between br-rd5 p15 mb15">
+  <div class="box-flex ml10">
     <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
@@ -51,7 +51,7 @@
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
-    <div class="br-box-gray box-shadow-all p15 mb15 br-rd5 bg-white text-sm">
+    <box class="br-box-gray box-shadow-all bg-white text-sm">
       <div class="uppercase gray mb5 dark-gray-300">
         <?= Translate::get('reading'); ?>
       </div>
@@ -95,9 +95,9 @@
           <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
-    </div>
+    </box>
   <?php } else { ?>
-    <div class="br-box-gray box-shadow-all p15 mb15 br-rd5 bg-white text-sm">
+    <box class="br-box-gray box-shadow-all bg-white text-sm">
       <div class="uppercase gray mt5 mb5">
         <?= Translate::get('topics'); ?>
       </div>
@@ -107,12 +107,12 @@
           <span class="ml5"><?= $topic['name']; ?></span>
         </a>
       <?php } ?>
-    </div>
+    </box>
   <?php } ?>
 
   <div class="sticky top20">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="last-comm br-box-gray box-shadow-all p5 pr15 pb5 pl15 bg-white br-rd5">
+      <box class="br-box-gray box-shadow-all bg-white">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <div class="mt15 mr0 mb15 ml0">
             <div class="text-sm gray-400">
@@ -124,10 +124,8 @@
             </a>
           </div>
         <?php } ?>
-      </div>
+      </box>
     <?php } ?>
-
-    <?= Tpl::import('/_block/sidebar/lang'); ?>
   </div>
 </aside>
 </div>

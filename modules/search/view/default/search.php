@@ -45,11 +45,11 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/search'); ?>
 
   <?php } else { ?>
-    <div class="mb20"><?= Translate::get('no.search.results'); ?></div>
+    <p><?= Translate::get('no.search.results'); ?></p>
     <a class="mb20 block" href="/"><?= Translate::get('to main'); ?>...</a>
   <?php } ?>
 </main>
 <div class="col-span-2 mb-none"></div>
-</div>
+
 <?= Tpl::insert('/_block/wide-footer'); ?>
 <?= Tpl::insert('footer', ['user' => $user]); ?>

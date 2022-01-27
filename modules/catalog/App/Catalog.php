@@ -20,8 +20,8 @@ class Catalog
     }
 
     // Лист сайтов по темам (сайты по "категориям")
-    public function sites($sheet)
-    {
+    public function index($sheet)
+    { 
         $slug       = Request::get('slug');
         $page       = Request::getInt('page');
         $page       = $page == 0 ? 1 : $page;

@@ -1,0 +1,47 @@
+/*
+ * @form styles
+ *
+ * Стили для форм
+ */
+
+textarea {
+  width: 100%;
+  font-size: 16px;
+  padding: 1px 6px;
+  border: 1px solid $slate-300;
+}
+
+input, select {
+  border: 1px solid $slate-300;
+  font-size: 16px;
+}
+
+fieldset input:not([type=radio]):not([type=checkbox]):not([type=range]) {
+  width: 100%;
+  min-height: 34px;
+  font-size: 16px;
+  padding-left: 5px;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  position: relative;
+}
+
+fieldset {
+  margin-top: 15px;
+}
+
+select { background-color: #fff; }
+
+input:focus,
+textarea:focus { border: 1px solid #9ccdf8; }
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+::placeholder { color: #919191; }

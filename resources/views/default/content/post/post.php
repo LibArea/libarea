@@ -6,13 +6,13 @@
       <?= Tpl::import('/_block/no-login-screensaver'); ?>
     <?php } ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
-    <div class="br-box-gray bg-white p20 mb15 br-rd5 article_<?= $post['post_id']; ?>">
+    <box class="br-box-gray bg-white article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') { ?>
         <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id text-sm right">
           <?= Translate::get('unsubscribe'); ?>
         </div>
       <?php } ?>
-      <div class="flex mb15 relative">
+      <div class="flex mb10 relative">
         <div class="user-card" data-content_id="<?= $post['post_id']; ?>" data-user_id="<?= $post['id']; ?>">
           <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w40 h40 br-rd-50 mr5'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
@@ -30,7 +30,7 @@
       <div class="flex flex-row flex-auto">
         <div class="w-auto mr20 mb-mr-5">
           <a class="black dark-gray-300" href="<?= $post_url; ?>">
-            <h2 class="font-normal text-2xl mt0 mb0">
+            <h2 class="mb0">
               <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
             </h2>
           </a>
@@ -80,7 +80,7 @@
           <?= favorite($user['id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', ''); ?>
         </div>
       </div>
-    </div>
+    </box>
   <?php } ?>
 <?php } else { ?>
   <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>

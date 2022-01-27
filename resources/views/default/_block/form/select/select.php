@@ -3,8 +3,8 @@
 // $action (edit)
 ?>
 
-<div class="mb20 max-w640">
-  <label class="block mb5">
+<fieldset>
+  <label>
     <?= Translate::get($type); ?> <?php if (!empty($red)) { ?><sup class="red-500">*</sup><?php } ?>
   </label>
 
@@ -13,7 +13,7 @@
   <?php } ?>
 
   <?php if (!empty($help)) { ?><div class="gray text-sm"><?= $help; ?>...</div><?php } ?>
-</div>
+</fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   var focus_search = async (props = {}) => {

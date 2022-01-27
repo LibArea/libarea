@@ -22,35 +22,32 @@
 
 <body class="<?= $css; ?><?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
-  <header class="bg-white box-shadow mt0 mb15 <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
-    <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h50 grid items-center flex justify-between">
+  <header class="bg-white box-shadow <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
+    <div class="box-flex max-width mr-auto pl10 pr10 h50">
       <div class="flex items-center">
-        <ag-menu data-template="one" class="tippy pl0 pr10 none mb-block">
+        <menu data-template="one" class="tippy pl0 pr10 none mb-block">
           <div class="relative w-auto">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
-         </ag-menu> 
-          <div id="one" style="display: none;" class="box-shadow2 z-40 bg-white br-rd3">
-            <nav>
-              <?= tabs_nav(
-                'menu',
-                $type,
-                $user,
-                $pages = Config::get('menu.mobile'),
-              ); ?>
-            </nav>
+         </menu> 
+         <div id="one" style="display: none;" class="box-shadow2 z-40 bg-white br-rd3">
+           <nav>
+             <?= tabs_nav(
+               'menu',
+               $type,
+               $user,
+               $pages = Config::get('menu.mobile'),
+             ); ?>
+           </nav>
           </div>
-         
-        <div class="mr20 flex items-center">
-          <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl sky-500-hover p5 black dark-gray-300 uppercase" href="/">
-            <?= Config::get('meta.name'); ?>
-          </a>
-        </div>
+        <a title="<?= Translate::get('home'); ?>" class="logo dark-gray-300 " href="/">
+          <?= Config::get('meta.name'); ?>
+        </a>
       </div>
       <?php if (Request::getUri() != getUrlByName('search')) { ?>
         <div class="p5 ml30 mr20 relative mb-none w-100">
           <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
-            <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 p15 br-rd20 gray w-100">
+            <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="bg-gray-100 br-rd20 pl15 w-100 h30 gray">
             <input name="token" value="<?= csrf_token(); ?>" type="hidden">
             <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
           </form>
@@ -67,8 +64,8 @@
               <?= Translate::get('sign up'); ?>
             </a>
           <?php } ?>
-          <a class="btn btn-outline-primary ml20" title="<?= Translate::get('sign in'); ?>" href="<?= getUrlByName('login'); ?>">
-            <?= Translate::get('sign in'); ?>
+          <a class="btn btn-outline-primary ml20" title="<?= Translate::get('sign.in'); ?>" href="<?= getUrlByName('login'); ?>">
+            <?= Translate::get('sign.in'); ?>
           </a>
         </div>
       <?php } else { ?>
@@ -94,11 +91,11 @@
               <?php } ?>
             </a>
 
-            <ag-menu data-template="two" class="tippy pr10 pl0 ml20 mb-ml-10">
+            <menu data-template="two" class="tippy ml20 mb-ml-10">
               <div class="relative w-auto">
                 <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
               </div>
-            </ag-menu>  
+            </menu>  
             <div id="two" style="display: none;" class="bg-white br-rd3">
               <nav class="p0 pr20 m0">
                 <?= tabs_nav(
@@ -115,5 +112,5 @@
       <?php }  ?>
     </div>
   </header>
-  <div class="max-width mr-auto grid grid-cols-12 gap-4 mb-gap-05 pr5 pl5">
+  <container>
  

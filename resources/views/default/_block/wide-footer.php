@@ -1,3 +1,4 @@
+</container>
 <footer class="w-100 mt15 p15 bg-zinc-800 clear">
   <div class="col-span-12 max-width grid grid-cols-12 mr-auto">
     <div class="col-span-3 left mb-none ml10">

@@ -2,12 +2,10 @@
 // Связанные темы
 ?>
 
-<div class="mb20 max-w640">
-  <label class="block mb5">
-    <?= $title; ?>
-  </label>
+<fieldset>
+  <label><?= $title; ?></label>
   <input name="facet_matching[]" id="facet_id_matching">
-</div>
+</fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   var facet_search = async (props = {}) => {

@@ -226,7 +226,6 @@ function votes($user_id, $content, $type, $ind, $css = '', $block = '')
     return $html;
 }
 
-// function votes($user_id, $content, $type, $ind, $css = '', $block = '')
 function favorite($user_id, $content_id, $type, $favorite_tid, $ind, $css = '')
 {
     $html  = '';
@@ -250,7 +249,7 @@ function tabs_nav($name, $item, $user, array $pages = [])
         foreach ($pages as $key => $page) {
             $tl = $page['tl'] ?? null;
             if ($user['trust_level'] >= $tl) {
-                $classes    = 'mr20 gray-500 sky-500-hover';
+                $classes    = 'mr20 gray-500';
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
 
@@ -260,20 +259,20 @@ function tabs_nav($name, $item, $user, array $pages = [])
             }
         }
     } else {
-        $html  = '<ul class="p0 mt10 list-none text-sm">';
+        $html  = '<ul class="p0 m0 list-none text-sm">';
         foreach ($pages as $key => $page) {
             $tl = $page['tl'] ?? null;
             if (!empty($page['hr'])) {
                 if ($user['id'] > 0) $html .= '<li><hr class="w-90"></li>';
             } else {
                 if ($user['trust_level'] >= $tl) {
-                    $classes    = 'sky-500-hover dark-gray-200';
+                    $classes    = 'dark-gray-300';
                     $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
 
                     $html .= '<li><a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
                                 <i class="' . $page['icon'] . ' mr10 text-2xl"></i>
-                                    <span>' . $page['title'] . '</span></a></li>';
+                                    <span class="dark-gray-300">' . $page['title'] . '</span></a></li>';
                 }
             }
         }

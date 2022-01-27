@@ -1,0 +1,37 @@
+/*
+ * @dark styles
+ *
+ * Ночной режим
+ */
+
+.dark,
+.dark.bg-gray-100 {
+  background-color: $neutral-900;
+  color: #ccc;
+}
+
+.dark .gray { color: #ccc; }
+
+.dark .bg-yellow-100,
+.dark .bg-white {
+  background-color: $zinc-800;
+  color: $white;
+}
+
+.dark input,
+.dark select,
+.dark textarea,
+.dark blockquote,
+.dark table tr:nth-of-type(2n) {
+  background-color: $neutral-900;
+  color: $white;
+  border: 1px solid $black;
+}
+
+.dark .dark-bg-black,
+.dark .answers_subtree:target { background-color: $black; }
+
+.dark .br-box-gray { border: 1px solid $black; }
+.dark .dark-br-black { border: 1px solid $neutral-900; }
+.dark .br-bottom-black { border-bottom: 1px solid $black; }
+.dark .dark-gray-300 { color: $gray-300; }
