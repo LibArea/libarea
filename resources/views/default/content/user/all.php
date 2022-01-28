@@ -12,7 +12,7 @@
 <main class="col-span-10 mb-col-12">
   <div class="bg-white   center justify-between br-box-gray br-rd5 p15 mb15">
     <h1 class="m0 text-xl font-normal"><?= Translate::get($data['sheet']); ?></h1>
-    <span class="text-sm gray-500">
+    <span class="text-sm gray-600">
       <?= Translate::get($data['sheet'] . '.info'); ?>.
     </span>
   </div>
@@ -49,11 +49,11 @@
         <div class="center inline pr10 pl10 mb20 mb-col-2">
           <a href="/@<?= $user['login']; ?>">
             <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'br-rd-50 w60 h60'); ?>
-            <div class="block dark-gray-300 mt5">
+            <div class="block mt5">
               <?= $user['login']; ?>
             </div>
             <?php if ($user['name']) { ?>
-              <span class="gray dark-gray-300 text-sm"><?= $user['name']; ?></span>
+              <span class="gray text-sm"><?= $user['name']; ?></span>
             <?php } ?>
            </a>
         </div>

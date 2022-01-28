@@ -49,7 +49,7 @@
     <box class="br-box-gray bg-white">
       <h3 class="uppercase-box"><?= Translate::get('selected post'); ?></h3>
       <div class="mt5">
-        <a class="dark-gray-300" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+        <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
         </a>
         <?php if ($user['id'] > 0) { ?>
@@ -94,7 +94,7 @@
     <box class="br-box-gray bg-white">
       <h3 class="uppercase-box"><?= Translate::get('understands'); ?></h3>
       <?php foreach ($data['participation'] as $part) { ?>
-        <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 sky-500 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
+        <a class="tag" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
           <?= $part['facet_title']; ?>
         </a>
       <?php } ?>

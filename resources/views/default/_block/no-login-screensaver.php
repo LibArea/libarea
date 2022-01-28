@@ -1,4 +1,4 @@
-<box class="bg-blue-100 dark-bg-black gray dark-gray-300 center relative">
+<box class="bg-blue-100 gray center relative">
   <?= Translate::get('not.registered'); ?>?
   <form action="<?= getUrlByName('register'); ?>" class="mt15 mb15 block">
     <?= sumbit(Translate::get('create.account')); ?>

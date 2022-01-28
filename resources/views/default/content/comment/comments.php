@@ -40,7 +40,7 @@
       <i class="bi bi-info-square"></i>
     </div>
     <div id="feed" style="display: none;">
-      <div class="text-xm gray-500 p5 dark-gray-300 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
+      <div class="text-xm gray-600 p5 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
     </div>
   </div>
 

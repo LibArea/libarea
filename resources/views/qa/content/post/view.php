@@ -99,7 +99,7 @@
           <?php if (!empty($data['facets'])) { ?>
             <div class="lowercase">
               <?php foreach ($data['facets'] as $topic) { ?>
-                <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 br-rd20 sky-500 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+                <a class="tag" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
                   <?= $topic['facet_title']; ?>
                 </a>
               <?php } ?>
@@ -108,7 +108,7 @@
         </div>
       </div>
 
-      <div class="br-box-gray dark-br-black flex items-center mb5">
+      <div class="br-box-gray flex items-center mb5">
         <div class="left p10 none mb-block">
           <?= votes($user['id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
         </div>
@@ -167,16 +167,16 @@
         <div class="mr15">
           <?php if ($user['id'] > 0) { ?>
             <?php if (is_array($data['post_signed'])) { ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id text-sm right mt5 bg-gray-100 gray-400 br-gray-200 br-rd20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 yes">
                 <?= Translate::get('unsubscribe'); ?>
               </div>
             <?php } else { ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id text-sm right mt5 bg-sky-50 bg-hover-gray sky-500 br-sky-100 br-rd20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 no">
                 + <?= Translate::get('read'); ?>
               </div>
             <?php } ?>
           <?php } else { ?>
-            <a class="right text-sm mt5 bg-sky-50 sky-500 bg-hover-gray br-sky-100 br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
+            <a class="right mt5 focus-id no" href="<?= getUrlByName('login'); ?>">
               + <?= Translate::get('read'); ?>
             </a>
           <?php } ?>
@@ -245,7 +245,7 @@
             </div>
           <?php } ?>
            
-          <a class="  black dark-gray-300 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+          <a class="  black inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
             <?= $topic['facet_title']; ?> 
           </a>
 
@@ -269,7 +269,7 @@
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="br-box-gray bg-white box-shadow-all br-rd5 mb15 sticky top20 p15">
-      <h3 class="uppercase mb10 mt0 font-light text-sm gray dark-gray-300"><?= Translate::get('recommended'); ?></h3>
+      <h3 class="uppercase mb10 mt0 font-light text-sm gray"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex text-sm"> 
           <?php if ($rec_post['post_type'] == 'post') { ?>
@@ -285,7 +285,7 @@
           <?php } else { ?>
             <i class="bi bi-intersect gray-400 middle mr15 text-2xl"></i>
           <?php } ?>          
-          <a class="black dark-gray-300" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
+          <a class="black" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>
           </a>
         </div>

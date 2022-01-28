@@ -17,7 +17,7 @@
           <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w40 h40 br-rd-50 mr5'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
-        <a class="flex black dark-gray-300 flex-center" href="/@<?= $post['login']; ?>">
+        <a class="flex black flex-center" href="/@<?= $post['login']; ?>">
 
           <div class="ml5">
             <?= $post['login']; ?>
@@ -29,7 +29,7 @@
       </div>
       <div class="flex flex-row flex-auto">
         <div class="w-auto mr20 mb-mr-5">
-          <a class="black dark-gray-300" href="<?= $post_url; ?>">
+          <a class="black" href="<?= $post_url; ?>">
             <h2 class="mb0">
               <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
             </h2>
@@ -44,7 +44,7 @@
             <?php } ?>
           </div>
           <div class="show_add_<?= $post['post_id']; ?>">
-            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-600 dark-gray-300">
+            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-600">
               <?= $post['post_content_preview']; ?>
               <span class="s_<?= $post['post_id']; ?> show_detail"></span>
             </div>

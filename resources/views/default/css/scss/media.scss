@@ -6,7 +6,7 @@
 
 @media (max-width: 1150px) {
   .home-img {
-    width: $width-one-hundred;
+    width: 100%;
     height: auto;
   }
 
@@ -19,22 +19,22 @@
 @media (max-width: 910px) {
   .mb-col-2 { grid-column: span 2 / span 2; }
   .mb-col-12 { grid-column: span 12 / span 12; }
-  .mb-w-100 { width: $width-one-hundred; }
-  .mb-h-100 { height: $width-one-hundred; }
-  .mb-w100 { width: $px-one-hundred; }
-  .mb-h100 { height: $px-one-hundred; }
-  .mb-min-h100 { min-height: $px-one-hundred; }
-  .mb-ml-10 { margin-left: $px-ten; }
-  .mb-mr-10 { margin-right: $px-ten; }
-  .mb-mb-10 { margin-bottom: $px-ten; }
-  .mb-mt-5 { margin-top: $px-five; }
-  .mb-mr-5 { margin-right: $px-five; }
-  .mb-mb-5 { margin-bottom: $px-five; }
-  .mb-ml-5 { margin-left: $px-five; }
-  .mb-ml-0 { margin-left: $px-zero; }
-  .mb-pl-0 { padding-left: $px-zero; }
-  .mb-pr-0 { padding-right: $px-zero; }
-  .mb-text-xl { font-size: $fontSize-xl; }
+  .mb-w-100 { width: 100%; }
+  .mb-h-100 { height: 100%; }
+  .mb-w100 { width: 100%; }
+  .mb-h100 { height: 100%; }
+  .mb-min-h100 { min-height: 100%; }
+  .mb-ml-10 { margin-left: 10px; }
+  .mb-mr-10 { margin-right: 10px; }
+  .mb-mb-10 { margin-bottom: 10px; }
+  .mb-mt-5 { margin-top: 5px; }
+  .mb-mr-5 { margin-right: 5px; }
+  .mb-mb-5 { margin-bottom: 5px; }
+  .mb-ml-5 { margin-left: 5px; }
+  .mb-ml-0 { margin-left: 0; }
+  .mb-pl-0 { padding-left: 0; }
+  .mb-pr-0 { padding-right: 0; }
+  .mb-text-xl { font-size: 1.25rem; }
   .mb-inline { display: inline; }
   .mb-gap-05  { gap: 0.5rem; }
   .mb-none { display: none; }

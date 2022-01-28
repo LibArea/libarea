@@ -10,9 +10,7 @@
 <div class="w-100">
   <div class="w-50 left">
     <div class="bg-white br-box-gray p15 mr20">
-      <h4 class="uppercase lh1 text-sm gray-500 mt5 mb10 font-normal dark-gray-300">
-        <?= Translate::get('content'); ?>
-      </h4>
+      <h4 class="uppercase-box"><?= Translate::get('content'); ?></h4>
       <?php
       $sections = [
         [
@@ -60,7 +58,7 @@
   </div>
   <div class="w-50 left">
     <div class="bg-white br-box-gray p15 ml20">
-      <h4 class="uppercase lh1 text-sm gray-500 mt5 mb10 font-normal dark-gray-300"><?= Translate::get('users'); ?></h4>
+      <h4 class="uppercase-box"><?= Translate::get('users'); ?></h4>
       <?php foreach ($data['last_visit'] as $user) { ?>
         <div class="gray">
           <span class="gray-400 text-sm">id<?= $user['id']; ?></span>
@@ -86,17 +84,17 @@
 <?php } ?>
 
 <div class="pt15">
-  <a class="p5 pr15 pl15 mr5 inline mb15 white white-hover bg-red-500" href="<?= getUrlByName('admin.css'); ?>">
+  <a class="btn-small inline mr15 ml15 white bg-red-500" href="<?= getUrlByName('admin.css'); ?>">
     <i class="bi bi-brush mr5"></i>
     CSS
   </a>
 
-  <a class="ml5 p5 pr15 pl15 mr5 inline mb15 white white-hover bg-orange-500" href="<?= getUrlByName('admin.tools'); ?>">
+  <a class="btn-small mr15 inline white bg-orange-500" href="<?= getUrlByName('admin.tools'); ?>">
     <i class="bi bi-tools mr5"></i>
     <?= Translate::get('tools'); ?>
   </a>
 
-  <a class="ml5 p5 pr15 pl15 white inline mb15 white-hover bg-green-700" href="<?= getUrlByName('admin.words'); ?>">
+  <a class="btn-small mr15 white inline bg-green-700" href="<?= getUrlByName('admin.words'); ?>">
     <i class="bi bi-badge-ad mr5"></i>
     <?= Translate::get('words'); ?>
   </a>

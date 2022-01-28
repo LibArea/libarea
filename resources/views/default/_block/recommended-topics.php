@@ -1,5 +1,5 @@
 <?php if (Request::getUri() == '/') { ?>
-  <a class="bg-blue-100 bg-hover-green white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd5 p15 mb15 sky-500 text-sm" href="/topics">
+  <a class="tag" href="/topics">
     <i class="bi bi-lightbulb middle mr5"></i>
     <?= Translate::get('topic-subscription'); ?>
   </a>

@@ -8,14 +8,14 @@
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="grid col-span-12 flex br-bottom p10 mb5 mt5 article_<?= $post['post_id']; ?>">
       <div class="col-span-2 flex mb-inline mr15">
-        <div class="box-answer br-gray-200 block bg-gray-100 gray-600 mt5 br-rd3 lowercase mr15">
+        <div class="box-answer block bg-gray-100 gray-600 mt5 br-rd3 lowercase mr15">
           <?= $post['post_votes']; ?>
           <div class="text-xs"> <?= num_word($post['post_votes'], Translate::get('num-up'), false); ?></div>
         </div>
-        <?php $bg = $post['post_feature'] == 0 ? ' bg-green-700' : ' bg-pink-800'; ?>
+        <?php $bg = $post['post_feature'] == 0 ? ' bg-green-600' : ' bg-pink-800'; ?>
         <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue-500'; ?>
         <div class="box-answer mt5 br-rd3 lowercase <?= $bg; ?> <?= $bg_url; ?>">
-          <a class="block white white-hover" href="<?= $post_url; ?>#comment">
+          <a class="block white" href="<?= $post_url; ?>#comment">
             <?php $anw = $post['post_answers_count'] + $post['post_comments_count'];
             echo $anw; ?>
           </a>
@@ -48,7 +48,7 @@
           <div class="gray-600 text-xs">
             <?= $post['post_date'] ?> ·
             <?= num_word($post['post_hits_count'], Translate::get('num-view'), true); ?> ·
-            <a class="dark-gray-300" href="/@<?= $post['login']; ?>">
+            <a href="/@<?= $post['login']; ?>">
               <?= $post['login']; ?>
             </a>
           </div>

@@ -8,11 +8,11 @@ textarea {
   width: 100%;
   font-size: 16px;
   padding: 1px 6px;
-  border: 1px solid $slate-300;
+  border: 1px solid var(--slate-300);
 }
 
 input, select {
-  border: 1px solid $slate-300;
+  border: 1px solid var(--slate-300);
   font-size: 16px;
 }
 
@@ -34,7 +34,7 @@ fieldset {
   margin-top: 15px;
 }
 
-select { background-color: #fff; }
+select { background-color: var(--white); }
 
 input:focus,
 textarea:focus { border: 1px solid #9ccdf8; }

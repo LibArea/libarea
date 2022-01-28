@@ -48,7 +48,7 @@
             <span id="fav-comm" class="add-favorite right  ml15 text-sm" data-front="personal" data-id="<?= $content['answer_id']; ?>" data-type="answer">
               <i class="bi bi-trash text-2xl red-500"></i>
             </span>
-            <a class="black dark-gray-300" href="<?= getUrlByName('post', ['id' => $content['post']['post_id'], 'slug' => $content['post']['post_slug']]); ?>#answer_<?= $content['answer_id']; ?>">
+            <a class="black" href="<?= getUrlByName('post', ['id' => $content['post']['post_id'], 'slug' => $content['post']['post_slug']]); ?>#answer_<?= $content['answer_id']; ?>">
               <?= $content['post']['post_title']; ?>
             </a>
           <?php } ?>

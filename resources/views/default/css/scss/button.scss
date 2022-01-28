@@ -53,3 +53,24 @@
   background-color: rgba(0,0,0,.3);
   padding: 1px 6px;
 }
+
+.focus-id {
+  text-align: center;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  padding: 5px 15px 5px 15px;
+}
+
+.focus-id.yes{
+  background-color: #f3f4f6;
+  color: #9ca3af;
+}
+
+.focus-id.no{
+  background-color: #f0f9ff;
+  color: #0ea5e9;
+}
+
+.focus-id:hover{
+  opacity: 0.8;
+}

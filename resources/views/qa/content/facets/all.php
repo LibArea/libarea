@@ -1,7 +1,7 @@
 <main class="col-span-12 mb-col-12">
   <div class="bg-white center justify-between br-box-gray box-shadow-all br-rd5 p15 mb15">
     <h1 class="m0 text-xl font-normal"><?= Translate::get($data['sheet']); ?></h1>
-    <span class="text-sm gray-500">
+    <span class="text-sm gray-600">
       <?= Translate::get($data['sheet'] . '.info'); ?>.
     </span>
   </div>

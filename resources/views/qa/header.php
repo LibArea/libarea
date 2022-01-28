@@ -1,9 +1,7 @@
 <?php
-  $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
-  $css      = $data['type'] == 'web' || $data['type'] == 'page'  ? 'p0 m0 black' : 'p0 m0 black bg-gray-100';
-  $type     = $data['type'] ?? false;
-  $facet    = $data['facet'] ?? false; 
-?>
+$dark   = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
+$type   = $data['type'] ?? false;
+$facet  = $data['facet'] ?? false; ?>
 
 <!DOCTYPE html>
 <html lang="<?= Translate::getLang(); ?>" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
@@ -19,17 +17,12 @@
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
-<?php
-$dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
-$type  = $data['type'] ?? false;
-$facet = $data['facet'] ?? false; ?>
-
 <body class="p0 m0 black<?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white mt0 mb15">
     <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl15 mb10 mb-none items-center flex">
       <?php foreach (Config::get('menu.mobile') as $key => $topic) { ?>
-        <a class="mr20 black dark-gray-300 text-xs" href="<?= $topic['url']; ?>">
+        <a class="mr20 black text-xs" href="<?= $topic['url']; ?>">
           <i class="<?= $topic['icon']; ?> mr5"></i>
           <span><?= $topic['title']; ?> </span>
         </a>
@@ -54,7 +47,7 @@ $facet = $data['facet'] ?? false; ?>
             </nav>
           </div>
         <div class="mr20 flex items-center">
-          <a title="<?= Translate::get('home'); ?>" class="logo ml5 dark-gray-300" href="/">
+          <a title="<?= Translate::get('home'); ?>" class="logo black ml5" href="/">
             <?= Config::get('meta.name'); ?>
           </a>
         </div>

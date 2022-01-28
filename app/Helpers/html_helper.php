@@ -209,14 +209,14 @@ function votes($user_id, $content, $type, $ind, $css = '', $block = '')
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . ' sky-600-hover flex ' . $block . ' center gray-400">
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . '  flex ' . $block . ' center gray-400">
                         <div data-ind="' . $ind . '" data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart ' . $css . '"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
         }
     } else {
-        $html .= '<div class="voters sky-600-hover flex ' . $block . ' center gray-400">
+        $html .= '<div class="voters flex ' . $block . ' center gray-400">
                     <div class="up-id bi bi-heart ' . $css . ' click-no-auth"></div>
                     <div class="score">
                          ' . $count . '                
@@ -249,7 +249,7 @@ function tabs_nav($name, $item, $user, array $pages = [])
         foreach ($pages as $key => $page) {
             $tl = $page['tl'] ?? null;
             if ($user['trust_level'] >= $tl) {
-                $classes    = 'mr20 gray-500';
+                $classes    = 'mr20 gray-600';
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
 
@@ -266,13 +266,12 @@ function tabs_nav($name, $item, $user, array $pages = [])
                 if ($user['id'] > 0) $html .= '<li><hr class="w-90"></li>';
             } else {
                 if ($user['trust_level'] >= $tl) {
-                    $classes    = 'dark-gray-300';
-                    $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
+                    $isActive   = $page['id'] == $item ? ' sky-500 ' : '';
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
 
                     $html .= '<li><a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
                                 <i class="' . $page['icon'] . ' mr10 text-2xl"></i>
-                                    <span class="dark-gray-300">' . $page['title'] . '</span></a></li>';
+                                    <span>' . $page['title'] . '</span></a></li>';
                 }
             }
         }

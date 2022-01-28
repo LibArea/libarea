@@ -43,7 +43,7 @@
 
   <div class="mt15 pt15">
     <?= Translate::get('see more'); ?>:
-    <a title="css" class="p5 pr15 pl15 white white-hover bg-red-500" href="<?= getUrlByName('admin.css'); ?>">
+    <a title="css" class="p5 pr15 pl15 white bg-red-500" href="<?= getUrlByName('admin.css'); ?>">
       <i class="bi bi-brush mr5"></i>
       CSS
     </a>

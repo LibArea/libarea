@@ -52,7 +52,7 @@
        <i class="bi bi-info-square"></i>
     </div>
     <div id="feed" style="display: none;">
-      <div class="text-xm gray-500 p5 dark-gray-300 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
+      <div class="text-xm gray-600 p5 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
     </div>
   </div>
 
@@ -97,7 +97,7 @@
         <div class="bax-flex mb10">
           <a class="gray-600" href="<?= $url; ?>">
             <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr5'); ?>
-            <span class="ml5 middle dark-gray-300"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
+            <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($user['id'] == $topic['facet_user_id']) { ?>
             <a class="right sky-500" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
@@ -133,7 +133,7 @@
           <div class="mb15 text-sm gray-400">
             <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20 br-rd-50 mr5'); ?>
             <span class="middle lowercase"><?= $answer['answer_date']; ?></span>
-            <a class="black block dark-gray-300" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
+            <a class="black block" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
               <?= $answer['answer_content']; ?>...
             </a>
           </div>

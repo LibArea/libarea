@@ -34,7 +34,7 @@
        <i class="bi bi-info-square"></i>
     </div>
     <div id="feed" style="display: none;">
-      <div class="text-xm gray-500 p5 dark-gray-300 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
+      <div class="text-xm gray-600 p5 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
     </div>
   </div>
 
@@ -52,7 +52,7 @@
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
     <box class="br-box-gray box-shadow-all bg-white text-sm">
-      <div class="uppercase gray mb5 dark-gray-300">
+      <div class="uppercase gray mb5">
         <?= Translate::get('reading'); ?>
       </div>
 
@@ -81,7 +81,7 @@
         <div class="flex relative pt5 pb5 items-center justify-between hidden">
           <a class="gray-600" href="<?= $url; ?>">
             <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr5'); ?>
-            <span class="ml5 middle dark-gray-300"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
+            <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($user['id'] == $topic['facet_user_id']) { ?>
             <a class="right sky-500" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
@@ -91,7 +91,7 @@
         </div>
       <?php } ?>
       <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) { ?>
-        <a class="gray block dark-gray-300 mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
+        <a class="gray block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
           <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
@@ -119,7 +119,7 @@
               <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20 br-rd-50 mr5'); ?>
               <span class="middle"><?= $answer['answer_date']; ?></span>
             </div>
-            <a class="black dark-gray-300" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
+            <a class="black" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
               <?= $answer['answer_content']; ?>...
             </a>
           </div>

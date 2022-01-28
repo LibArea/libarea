@@ -12,7 +12,7 @@
   <div class="flex mb20 p15 bg-yellow-50 flex-auto">
     <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
       <div class="mr60">
-        <a class="pr10 mr60 dark-gray-300 underline-hover text-2xl block " href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
+        <a class="pr10 mr60 underline-hover text-2xl block " href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
           <?= $cat['title']; ?>
         </a>
         <?php if (!empty($cat['sub'])) { ?>
