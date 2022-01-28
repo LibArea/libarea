@@ -10,7 +10,7 @@
 <div class="w-100">
   <div class="w-50 left">
     <div class="bg-white br-box-gray p15 mr20">
-      <h4 class="uppercase-box"><?= Translate::get('content'); ?></h4>
+      <h3 class="uppercase-box"><?= Translate::get('content'); ?></h3>
       <?php
       $sections = [
         [
@@ -58,7 +58,7 @@
   </div>
   <div class="w-50 left">
     <div class="bg-white br-box-gray p15 ml20">
-      <h4 class="uppercase-box"><?= Translate::get('users'); ?></h4>
+      <h3 class="uppercase-box"><?= Translate::get('users'); ?></h3>
       <?php foreach ($data['last_visit'] as $user) { ?>
         <div class="gray">
           <span class="gray-400 text-sm">id<?= $user['id']; ?></span>
@@ -72,7 +72,7 @@
 
 <?php if ($data['posts_no_topic']) { ?>
   <div class="white-box mt10 pt5 pr15 pb5 pl15">
-    <h4 class="mt5 mb5"><?= Translate::get('posts'); ?> (no-topic)</h4>
+    <h3 class="uppercase-box"><?= Translate::get('posts'); ?> (no-topic)</h3>
     <?php foreach ($data['posts_no_topic'] as $post) { ?>
       <div class="gray">
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
@@ -84,37 +84,30 @@
 <?php } ?>
 
 <div class="pt15">
-  <a class="btn-small inline mr15 ml15 white bg-red-500" href="<?= getUrlByName('admin.css'); ?>">
-    <i class="bi bi-brush mr5"></i>
+  <a class="mr15 ml15" href="<?= getUrlByName('admin.css'); ?>">
+    <i class="bi bi-brush gray-400 mr5"></i>
     CSS
   </a>
 
-  <a class="btn-small mr15 inline white bg-orange-500" href="<?= getUrlByName('admin.tools'); ?>">
-    <i class="bi bi-tools mr5"></i>
+  <a class=" mr15" href="<?= getUrlByName('admin.tools'); ?>">
+    <i class="bi bi-tools gray-400 mr5"></i>
     <?= Translate::get('tools'); ?>
   </a>
 
-  <a class="btn-small mr15 white inline bg-green-700" href="<?= getUrlByName('admin.words'); ?>">
-    <i class="bi bi-badge-ad mr5"></i>
+  <a class="mr15" href="<?= getUrlByName('admin.words'); ?>">
+    <i class="bi bi-badge-ad gray-400 mr5"></i>
     <?= Translate::get('words'); ?>
   </a>
 </div>
 
-<div class="white-box mt10 pr15 pb5 pl15">
-  <h4 class="mt5 mb5"><?= Translate::get('useful.resources'); ?></h4>
-  <i class="bi bi-link-45deg mr5 gray-600"></i> <a rel="noreferrer" href="https://agouti.ru">Agouti.ru</a></br>
-  <i class="bi bi-github mr5 gray-600"></i> <a rel="noreferrer" href="https://discord.gg/dw47aNx5nU">Discord</a></br>
-  </ul>
+<div class="mt10 p15 gray-600">
+  <h3 class="uppercase-box"><?= Translate::get('useful.resources'); ?></h3>
+  <p><i class="bi bi-link-45deg mr5"></i> <a href="https://agouti.ru">Agouti.ru</a></p>
+  <p><i class="bi bi-github mr5"></i> <a href="https://discord.gg/dw47aNx5nU">Discord</a></p>
   <hr>
-  <div class="mb10">
-    <label for="name">PC:</label> <?= php_uname('s'); ?> <?php echo php_uname('r'); ?>
-  </div>
-  <div class="mb10">
-    <label for="name">PHP:</label> <?= PHP_VERSION; ?>
-  </div>
-  <div class="mb10">
-    <label for="name"><?= Translate::get('freely'); ?>:</label> <?= $data['bytes']; ?>
-  </div>
+  <p>PC: <?= php_uname('s'); ?> <?php echo php_uname('r'); ?></p>
+  <p>PHP: <?= PHP_VERSION; ?></p>
+  <p><?= Translate::get('freely'); ?>: <?= $data['bytes']; ?></p>
 </div>
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

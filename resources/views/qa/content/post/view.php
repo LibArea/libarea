@@ -210,7 +210,7 @@
       <?php } ?>
 
     <?php } else { ?>
-      <div class="bg-red-300 p15 center mr10">
+      <div class="bg-red-200 p15 center mr10">
         <?= sprintf(Translate::get('content.deleted'), Translate::get('post')); ?>...
       </div>
     <?php } ?>

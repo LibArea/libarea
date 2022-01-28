@@ -164,9 +164,8 @@ img {
 .pb20 { padding-bottom: 20px; }
 .pl20 { padding-left: 20px; }
 
-
 /*
- * Colors used in the Agouti project
+ * Used colors (and background) in Agouti project
  *
  * Используемые цвета (и фон) в проекте Агути
  */
@@ -187,14 +186,11 @@ img {
 .bg-yellow-50 { background-color: $yellow-50; } 
 .bg-yellow-100 { background-color: $yellow-100; }
 .bg-purple-100 { background-color: $purple-100; }
-.bg-orange-500 { background-color: $orange-500; }
 .bg-blue-100 { background-color: var(--blue-100); }
 .bg-blue-500 { background-color: $blue-500; }
 .bg-sky-50 { background-color: $sky-50; }
 .bg-red-200 { background-color: $red-200; }
-.bg-red-300 { background-color: $red-300; }
-.bg-red-500 { background-color: $red-500; }
-.bg-pink-800  { background-color: $pink-800; }
+.bg-pink-800 { background-color: $pink-800; }
 .bg-blue-steel-700 { background-color: $blue-steel-700; }
 
 /*

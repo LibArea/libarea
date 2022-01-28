@@ -8,8 +8,12 @@
 ); ?>
 
 <div class="bg-white p15 br-box-gray justify-between">
-  <h4 class="mt5 mb5"><?= Translate::get('color'); ?>:</h4>
-  <div class="mb30 hidden">
+  <h4 class="mt5 mb5"><?= Translate::get('topics'); ?>:</h4>
+  <a href="#" class="tag">.tag</a>
+  <a href="#" class="tags-xs">.tags-xs</a>
+
+  <h4 class="mt15"><?= Translate::get('color'); ?>:</h4>
+  <div class="mb10 hidden">
     <?php $i = 0;
     foreach ($data['bg'] as $bg) { ?>
       <?php if ($i % 10 == 0) echo "</div><div class=\"mb30 hidden\">"; ?>
@@ -22,10 +26,10 @@
     } ?>
   </div>
 
-  <div class="mb15">
+  <p>
     <?= Translate::get('bg.info'); ?>:
     <i class="bg-amber-100">.bg-res-400</i> / <i class="bg-amber-100">.res-400</i>.
-  </div>
+  </p>
 
 </div>
 </main>

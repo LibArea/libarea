@@ -168,7 +168,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
     }
 
     if ($pagesCount > $pNum) {
-        $html .= '<span class="bg-red-500 pt5 pr10 pb5 pl10 white ml5 mr5">' . ($pNum) . '</span>';
+        $html .= '<span class="bg-green-600 pt5 pr10 pb5 pl10 white ml5 mr5">' . ($pNum) . '</span>';
     }
 
     if ($pagesCount > $pNum) {
