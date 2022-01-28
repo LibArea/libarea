@@ -1,12 +1,12 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex p15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
       <?= sumbit(Translate::get('i read')); ?>
     </form>
   </div>
 
-  <div class="bg-white br-box-gray br-rd5 p15">
+  <div class="bg-white p15">
   <?php if (!empty($data['notifications'])) { ?>
     <?php foreach ($data['notifications'] as  $notif) { ?>
 

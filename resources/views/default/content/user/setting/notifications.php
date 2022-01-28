@@ -36,10 +36,10 @@
         ]
       ); ?>
 
-      <div class="mb20">
+      <p>
         <input type="hidden" name="nickname" id="nickname" value="">
         <?= sumbit(Translate::get('edit')); ?>
-      </div>
+      </p>
     </form>
   </div>
 </main>

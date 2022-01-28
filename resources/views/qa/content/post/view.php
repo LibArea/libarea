@@ -11,7 +11,7 @@
   <article class="post-full bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 pt0 pr15 pb5 pl15">
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
       <div class="post-body">
-        <h1 class="mb0 mt10 font-normal text-2xl">
+        <h1 class="mb0">
           <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm lowercase flex gray-400">

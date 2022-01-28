@@ -1,11 +1,11 @@
 <main class="col-span-9 mb-col-12">
 
-  <div class="bg-white flex flex-row center items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex p15">
     <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
     <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
   </div>
 
-  <div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
+  <div class="bg-white p15">
     <form class="max-w640" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 

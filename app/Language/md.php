@@ -55,8 +55,8 @@ $data = [
     
     'complained about'  => 'S-a plâns',
     'understands'       => 'Înțelege',
-    'create account'    => 'Creați un cont',
-    'not registered'    => 'Postează, răspunde, comentează... <br>Nu v-ați înregistrat încă',
+    'create.account'    => 'Creați un cont',
+    'not.registered'    => 'Postează, răspunde, comentează... <br>Nu v-ați înregistrat încă',
     'necessarily'       => 'Necesar pentru a completa',
     'deleted'           => 'Sters',
     'remote'            => 'Remote',    
