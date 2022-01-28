@@ -51,5 +51,5 @@
 </main>
 <div class="col-span-2 mb-none"></div>
 
-<?= Tpl::insert('/_block/wide-footer'); ?>
-<?= Tpl::insert('footer', ['user' => $user]); ?>
+<?= Tpl::insert('/footer'); ?>
+<?= Tpl::insert('scripts', ['user' => $user]); ?>

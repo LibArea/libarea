@@ -341,4 +341,4 @@
       }));
   <?php } ?>
 </script>
-<?= Tpl::import('/_block/wide-footer'); ?>
+<?= Tpl::import('/footer'); ?>

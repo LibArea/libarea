@@ -63,4 +63,4 @@
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
 </main>
 </div>
-<?= Tpl::import('/_block/wide-footer'); ?>
+<?= Tpl::import('/footer'); ?>

@@ -9,4 +9,4 @@
 </main>
 
 </div>
-<?= Tpl::import('/_block/wide-footer', ['user' => $user]); ?>
+<?= Tpl::import('/footer', ['user' => $user]); ?>

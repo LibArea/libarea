@@ -77,4 +77,4 @@
 
 </main>
 </div>
-<?= Tpl::import('/_block/wide-footer'); ?>
+<?= Tpl::import('/footer'); ?>

@@ -123,7 +123,7 @@
   <?php } ?>
 </aside>
 </div>
-<?= Tpl::import('/_block/wide-footer'); ?>
+<?= Tpl::import('/footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

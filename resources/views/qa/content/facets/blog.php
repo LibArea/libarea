@@ -87,7 +87,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
   </div>
 <?php } ?>
 </div>
-<?= Tpl::import('/_block/wide-footer'); ?>
+<?= Tpl::import('/footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

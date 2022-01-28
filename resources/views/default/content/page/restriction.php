@@ -3,4 +3,4 @@
   <div class="italic"><?= Translate::get('the profile is being checked'); ?>...</div>
 </main>
 </div>
-<?= Tpl::import('/_block/wide-footer'); ?>
+<?= Tpl::import('/footer'); ?>

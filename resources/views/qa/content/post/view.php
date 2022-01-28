@@ -343,4 +343,4 @@
   <?php } ?>
 </script>
 </div>
-<?= Tpl::import('/_block/wide-footer'); ?>
+<?= Tpl::import('/footer'); ?>

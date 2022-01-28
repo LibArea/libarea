@@ -9,9 +9,8 @@ class Tpl
         $user  = UserData::get();
         $tpl_puth = $user['template'] . $file;
 
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php'))
-        {  
-            $tpl_puth = Config::get('general.template') . $file;
+        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php')) {
+            $tpl_puth = 'default' . $file;
         }
 
         return $tpl_puth;
@@ -28,7 +27,7 @@ class Tpl
             [
                 self::agTheme('/header'),
                 self::agTheme('/content' . $name),
-                self::agTheme('/footer')
+                self::agTheme('/scripts')
             ],
             array_merge($data, ['user' => UserData::get()])
         );
@@ -48,24 +47,24 @@ class Tpl
     {
         insertTemplate(self::agTheme($template), $params);
     }
-    
+
     public static function insert(string $hlTemplatePath, array $params = [])
     {
         extract($params);
- 
+
         unset($params);
         $hlTemplatePath = trim($hlTemplatePath, '/\\') . '.php';
-       
-        require HLEB_GLOBAL_DIRECTORY . '/resources/views/' . self::agTheme('/'.$hlTemplatePath);
+
+        require HLEB_GLOBAL_DIRECTORY . '/resources/views/' . self::agTheme('/' . $hlTemplatePath);
     }
-    
+
     public static function insertModul(string $hlTemplatePath, array $params = [])
     {
         extract($params);
- 
+
         // unset($params);
         $hlTemplatePath = trim($hlTemplatePath, '/\\') . '.php';
-       
-        require '/views/' . self::agTheme('/'.$hlTemplatePath);
+
+        require '/views/' . self::agTheme('/' . $hlTemplatePath);
     }
 }
