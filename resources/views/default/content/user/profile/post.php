@@ -11,6 +11,4 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/posts'); ?>
 </main>
-
-</div>
 <?= Tpl::import('/footer'); ?>

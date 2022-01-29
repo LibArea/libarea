@@ -52,6 +52,31 @@ h3.uppercase-box {
   line-height: 1;
 }
 
+footer {
+  background-color: #27272a;
+  color: var(--gray-400);
+  padding: 15px;
+  overflow: hidden;
+}
+
+footer .icon {
+  color: var(--gray-400);
+  font-size: 21px;
+  margin-right: 15px;
+}
+
+footer ul {
+  padding-left: 60px;
+  list-style: none;
+  margin: 0;
+}
+
+footer ul li a {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
 code {
   color: #9b4f5e;
   background-color: #f5f2f0;

@@ -61,7 +61,6 @@
   </div>
 
   <div class="bg-white p15 br-box-gray">
-
     <?php if (!empty($data['facets'])) { ?>
       <?php if ($data['type'] == 'blog') { ?>
         <?= Tpl::import('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
@@ -71,10 +70,7 @@
     <?php } else { ?>
       <?= no_content(Translate::get('no.content'), 'bi bi-info-lg'); ?>
     <?php } ?>
-
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>
   </div>
-
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>
 </main>
-</div>
 <?= Tpl::import('/footer'); ?>

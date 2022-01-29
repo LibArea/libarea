@@ -42,16 +42,14 @@
     </a>
     </div>
   </div>
-  <div class="pt5 mr15 pb5 ml15">
+  <div class="ml15">
     <?php if (!empty($data['items'])) { ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user]); ?>
     <?php } else { ?>
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
-  <div class="pl10">
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
-  </div>
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
 </main>
 </container>
 <?= includeTemplate('/view/default/footer'); ?>

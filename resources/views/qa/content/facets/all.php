@@ -50,7 +50,6 @@
   </div>
 
   <div class="bg-white p15">
-
     <?php if (!empty($data['facets'])) { ?>
       <?php if ($data['type'] == 'blog') { ?>
         <?= Tpl::import('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
@@ -65,5 +64,4 @@
   </div>
 
 </main>
-</div>
 <?= Tpl::import('/footer'); ?>

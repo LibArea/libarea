@@ -93,19 +93,17 @@
 
     </ul>
   </div>
-  <div class="pt5 mr15 pb5 ml15">
+  <div class="ml15">
     <?php if (!empty($data['items'])) { ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user]); ?>
     <?php } else { ?>
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
-
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
   </div>
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
 </main>
 </container>
-<div class="bg-white p15 mb-none">
+<p class="p15 mb-none">
   <?= $data['topic']['facet_description']; ?>
-</div>
-</div>
+</p>
 <?= includeTemplate('/view/default/footer'); ?>

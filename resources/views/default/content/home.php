@@ -71,7 +71,7 @@
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
     <box class="br-box-gray bg-white text-sm">
       <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
-
+      <ul class="p0 m0 list-none text-sm">
       <?php
       $my = [];
       $other = [];
@@ -94,18 +94,19 @@
           $url = getUrlByName('blog', ['slug' => $topic['facet_slug']]);
         }
       ?>
-        <div class="bax-flex mb10">
-          <a class="gray-600" href="<?= $url; ?>">
+        <li class="mb10">
+          <a href="<?= $url; ?>">
             <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr5'); ?>
             <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($user['id'] == $topic['facet_user_id']) { ?>
-            <a class="right sky-500" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
+            <a class="right gray-400 mt5" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
               <i class="bi bi-plus-lg text-sm"></i>
             </a>
           <?php } ?>
-        </div>
+        </li>
       <?php } ?>
+      </ul>
       <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) { ?>
         <a class="gray-400 block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
           <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>

@@ -342,5 +342,4 @@
       }));
   <?php } ?>
 </script>
-</div>
 <?= Tpl::import('/footer'); ?>

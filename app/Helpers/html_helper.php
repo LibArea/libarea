@@ -157,7 +157,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
         $page = $other . '';
     }
 
-    $html = '<div class="mt5 mb5 gray">';
+    $html = '<p class="gray">';
 
     if ($pNum != 1) {
         if (($pNum - 1) == 1) {
@@ -187,7 +187,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
         $html .= '<a class="p5 ml5 lowercase gray-600" href="' . $page . '/page/' . ($pNum + 1) . '">' . Translate::get('page') . ' ' . ($pNum + 1) . ' >></a>';
     }
 
-    $html .= '</div>';
+    $html .= '</p>';
 
     return $html;
 }

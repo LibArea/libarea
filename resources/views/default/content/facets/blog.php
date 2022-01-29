@@ -85,7 +85,6 @@ if ($blog['facet_is_deleted'] == 0) { ?>
     <div class="mt5 gray"><?= Translate::get('remote'); ?></div>
   </div>
 <?php } ?>
-</div>
 <?= Tpl::import('/footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
