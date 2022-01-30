@@ -35,7 +35,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                 post_is_deleted, 
                 post_hits_count, 
                 rel.*,  
-                id, login, avatar 
+                id, login, avatar
                     FROM facets_posts_relation  
                     LEFT JOIN posts ON relation_post_id = post_id 
                     LEFT JOIN ( SELECT  
@@ -46,41 +46,24 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                                 GROUP BY relation_post_id  
                     ) AS rel ON rel.relation_post_id = post_id  
                         LEFT JOIN users ON id = post_user_id 
-                            WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
-                             AND post_content LIKE :qa1 
-                             OR post_title LIKE :qa2 ORDER BY post_id LIMIT $start, $limit";
-
-        return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchall();
+                            WHERE  post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
+                                AND MATCH(post_title, post_content) AGAINST (:qa)
+                                          LIMIT $start, $limit";
+        return DB::run($sql, ['qa' => $query])->fetchall();
     }
 
     public static function getSearchCount($query)
     {
         $sql = "SELECT DISTINCT 
-                post_id, 
-                post_title, 
-                post_slug, 
-                post_feature, 
-                post_translation, 
-                post_draft, 
-                post_date, 
-                post_published, 
-                post_content,
-                post_content_img, 
-                post_thumb_img, 
-                post_merged_id, 
-                post_closed, 
-                post_tl, 
-                post_lo 
+                  post_id
                     FROM posts
-
                             WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
-                             AND post_content LIKE :qa1 
-                             OR post_title LIKE :qa2";
+                             AND MATCH(post_title, post_content) AGAINST (:qa)";
 
-        return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->rowCount();
+        return DB::run($sql, ['qa' => "%" . $query . "%"])->rowCount();
     }
 
-    // Для Sphinx 
+    // For Sphinx 
     public static function getSearchPostServer($query, $limit)
     {
         $sql = "SELECT 

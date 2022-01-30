@@ -1,4 +1,5 @@
-<?= Tpl::insert('header', ['user' => $user, 'data' => $data, 'meta' => $meta]); ?>
+<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+<div class="grid grid-cols-12 gap-4">
 <main class="col-span-9 mb-col-12">
   <div class="bg-white items-center justify-between ml5 pr15 mb15">
 
@@ -93,5 +94,5 @@
     <?php } ?>
   </box>
 </aside>
-</container>
+</div> 
 <?= includeTemplate('/view/default/footer'); ?>

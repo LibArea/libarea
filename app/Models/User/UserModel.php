@@ -43,7 +43,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     // Страница участников
     public static function getUsersAll($page, $limit, $uid, $type)
     {
-        $sort = "ORDER BY id = :uid DESC, trust_level DESC";
+        $sort = "ORDER BY id = $uid DESC, trust_level DESC";
         if ($type == 'users.new') {
             $sort = "ORDER BY created_at DESC";
         }
@@ -72,7 +72,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                             $sort
                             LIMIT $start, $limit";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql)->fetchAll();
     }
 
     // Количество

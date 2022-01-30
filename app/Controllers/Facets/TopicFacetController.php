@@ -134,7 +134,7 @@ class TopicFacetController extends MainController
     {
         $topic_id   = Request::getInt('id');
 
-        $users      = FacetModel::getFocusUsers($topic_id, 25);
+        $users      = FacetModel::getFocusUsers($topic_id, 15);
 
         return Tpl::agIncludeTemplate('/content/facets/followers', ['users' => $users]);
     }

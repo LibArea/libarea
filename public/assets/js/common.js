@@ -312,4 +312,3 @@ tippy('.tippy', {
   interactive: 'true',
   theme: 'light',
 });
- 

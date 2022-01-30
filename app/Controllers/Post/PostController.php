@@ -86,7 +86,7 @@ class PostController extends MainController
                 $row['edit'] = 1;
             }
             // TODO: N+1 см. AnswerModel()
-            $row['comments']            = CommentModel::getComments($row['answer_id'], $this->user['id']);
+            $row['comments']        = CommentModel::getComments($row['answer_id'], $this->user['id']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $answers[$ind]          = $row;
         }
@@ -111,6 +111,8 @@ class PostController extends MainController
         Request::getResources()->addBottomScript('/assets/js/shares.js');
         Request::getResources()->addBottomStyles('/assets/js/prism/prism.css');
         Request::getResources()->addBottomScript('/assets/js/prism/prism.js');
+        Request::getResources()->addBottomStyles('/assets/js/tobii/tobii.min.css');
+        Request::getResources()->addBottomScript('/assets/js/tobii/tobii.min.js');
 
         if ($this->user['id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');

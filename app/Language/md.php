@@ -4,6 +4,7 @@ $data = [
     'to the website'    => 'Pe site',
     'catalog'           => 'Catalog',
     'top'               => 'TOP',
+    'well'              => 'Ei bine',
     'news'              => 'Știri',
     'sort'              => 'Sortează',
     'facets'            => 'Fațete',

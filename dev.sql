@@ -1276,4 +1276,7 @@ ALTER TABLE `votes_item`
 --
 ALTER TABLE `votes_post`
   MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  
+  
+ALTER TABLE `posts` ADD FULLTEXT(post_title, post_content);  
 COMMIT;

@@ -8,6 +8,7 @@ $data = [
     'news'              => 'News',
     'top'               => 'TOP',
     'admin'             => 'Admin panel',
+    'well'              => 'Well',
     'sort'              => 'Sort',
     'facets'            => 'Facets',
     'content'           => 'Content',

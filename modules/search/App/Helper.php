@@ -12,11 +12,8 @@ class Helper
             return true;
         }
 
-
         $result = [];
         foreach ($query as $ind => $row) {
-
-
             $text = self::fragment($row['content']);
             $row['content']     = Content::text($text, 'line');
             $result[$ind]       = $row;

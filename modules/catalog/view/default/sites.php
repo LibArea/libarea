@@ -1,5 +1,5 @@
-<?= Tpl::insert('header', ['user' => $user, 'data' => $data, 'meta' => $meta]); ?>
-<main class="col-span-12 mb-col-12">
+<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+
     <?php if (UserData::checkAdmin()) { ?>
       <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('site.add'); ?>">
         <i class="bi bi-plus-lg middle"></i>
@@ -65,8 +65,10 @@
       </div>
     <?php } ?>
   </div>
-
-  <div class="box-flex ml15 max-w780">
+  
+<div class="grid grid-cols-12 gap-4">
+  <main class="col-span-9 mb-col-12 ml15">
+  <div class="box-flex max-w780">
     <p class="m0 text-xl lowercase">
       <?= num_word($data['count'], Translate::get('num-website'), true); ?>
     </p>
@@ -102,8 +104,8 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
 </main>
-</container>
-<p class="p15 mb-none">
+<aside class="col-span-3 mb-col-12 relative mb-none">
   <?= $data['topic']['facet_description']; ?>
-</p>
+</aside>
+</div>
 <?= includeTemplate('/view/default/footer'); ?>

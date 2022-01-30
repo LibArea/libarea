@@ -9,6 +9,7 @@ $data = [
     'news'              => 'Nachrichten',
     'top'               => 'TOP',
     'admin'             => 'Administratorin',
+    'well'              => 'Gut',
     'sort'              => 'Sortieren',
     'facets'            => 'Facetten',
     'content'           => 'Inhalt',

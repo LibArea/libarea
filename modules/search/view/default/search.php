@@ -3,7 +3,7 @@
   <div id="find"></div>
 </div>
 <main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray p15">
-  <div class="col-span-233 mb20">
+  <div class="mb10">
     <form class="flex mb15 text-xl" method="post" action="<?= getUrlByName('search'); ?>">
       <input type="text" name="q" class="h40 bg-gray-100 p15 br-rd5 gray w-100" placeholder="<?= $data['query']; ?>">
       <input class="ml15 pr15 gray pl15" value="<?= Translate::get('to find'); ?>" type="submit">
@@ -18,23 +18,23 @@
     <?php } ?>
   </div>
   <?php if ($data['result']) { ?>
-    <div class="ml16 mb15 text-xl">
+    <p class="mt0 text-xl">
       <?= Translate::get('results.search'); ?> <?= $data['count']; ?>
-    </div>
+    </p>
 
     <?php foreach ($data['result'] as  $post) { ?>
-      <div class="search mr15 mb20 pb20">
+      <div class="mb20 gray">
         <a class="text-xl block" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['title']; ?>
         </a>
         <?= html_facet($post['facet_list'], 'topic', 'mr15 tag'); ?>
-        <div class="gray"><?= $post['content']; ?>...</div>
-        <div class="flex flex-row items-center justify-between mt10 text-sm gray">
-          <a class="flex flex-row items-center black mr15 gray" href="/@<?= $post['login']; ?>">
+        <p class="mt5"><?= $post['content']; ?>...</p>
+        <div class="box-flex text-sm">
+          <a class="flex black mb15" href="/@<?= $post['login']; ?>">
             <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w20 h20 mr10'); ?>
             <?= $post['login']; ?>
           </a>
-          <div class="flex flex-row items-center gray text-sm lowercase">
+          <div class="box-flex lowercase gray-400">
             <i class="bi bi-heart sky-500 mr5"></i> <?= $post['post_votes']; ?>
             <i class="bi bi-eye mr5 ml15"></i> <?= $post['post_hits_count']; ?>
           </div>

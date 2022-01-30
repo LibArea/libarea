@@ -1,4 +1,4 @@
-<?= Tpl::insert('header', ['user' => $user, 'data' => $data, 'meta' => $meta]); ?>
+<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <main class="col-span-12 mb-col-12">
   <div class="bg-white items-center justify-between p15">
 

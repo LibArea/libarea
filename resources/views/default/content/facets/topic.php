@@ -1,11 +1,11 @@
 <div class="col-span-2 justify-between mb-none">
   <nav class="sticky top70">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
+    <?= tabs_nav(
+      'menu',
+      $data['type'],
+      $user,
+      $pages = Config::get('menu.left'),
+    ); ?>
   </nav>
 </div>
 
@@ -90,7 +90,7 @@
 </main>
 <aside class="col-span-3 relative mb-none">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
-    <div class="bg-white flex justify-center br-rd5 mb15 br-box-gray p15">
+    <div class="bg-white flex justify-center relative br-rd5 mb15 br-box-gray p15">
       <div class="mr15 center box-number">
         <div class="uppercase mb5 text-sm gray"><?= Translate::get('posts'); ?></div>
         <?= $topic['facet_count']; ?>
@@ -136,16 +136,27 @@
 <?= Tpl::import('/footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  document.querySelectorAll(".focus-user")
-    .forEach(el => el.addEventListener("click", function(e) {
-      fetch('/topic/<?= $topic['facet_slug']; ?>/followers/<?= $topic['facet_id']; ?>').
-      then(response => response.text()).
-      then(function(data) {
-        Swal.fire({
-          title: '<?= Translate::get('reads'); ?>',
-          showConfirmButton: false,
-          html: data
-        });
-      });
-    }));
+  document.addEventListener('DOMContentLoaded', function() {
+    tippy('.focus-user', {
+      allowHTML: true,
+      trigger: 'click',
+      trigger: 'mouseenter click',
+      allowHTML: 'true',
+      hideOnClick: 'toggle',
+      maxWidth: 'none',
+      interactive: 'true',
+      placement: 'auto',
+      theme: 'light',
+      onShow(instance) {
+        fetch('/topic/<?= $topic['facet_slug']; ?>/followers/<?= $topic['facet_id']; ?>')
+          .then((response) => response.text())
+          .then(function(data) {
+            instance.setContent(data);
+          })
+          .catch((error) => {
+            instance.setContent(`Request failed. ${error}`);
+          });
+      },
+    });
+  });
 </script>

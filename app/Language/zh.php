@@ -8,6 +8,7 @@ $data = [
     'news'              => '新闻',
     'top'               => '最佳',
     'admin'             => '管理面板',
+    'well'              => '好吧',
     'sort'              => '排序',
     'facets'            => '刻面',
     'content'           => '內容',

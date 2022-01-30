@@ -88,16 +88,27 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 <?= Tpl::import('/footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  document.querySelectorAll(".focus-user")
-    .forEach(el => el.addEventListener("click", function(e) {
-      fetch('/topic/<?= $blog['facet_slug']; ?>/followers/<?= $blog['facet_id']; ?>').
-      then(response => response.text()).
-      then(function(data) {
-        Swal.fire({
-          title: '<?= Translate::get('reads'); ?>',
-          showConfirmButton: false,
-          html: data
-        });
-      });
-    }));
+  document.addEventListener('DOMContentLoaded', function() {
+    tippy('.focus-user', {
+      allowHTML: true,
+      trigger: 'click',
+      trigger: 'mouseenter click',
+      allowHTML: 'true',
+      hideOnClick: 'toggle',
+      maxWidth: 'none',
+      interactive: 'true',
+      placement: 'auto',
+      theme: 'light',
+      onShow(instance) {
+        fetch('/topic/<?= $blog['facet_slug']; ?>/followers/<?= $blog['facet_id']; ?>')
+          .then((response) => response.text())
+          .then(function(data) {
+            instance.setContent(data);
+          })
+          .catch((error) => {
+            instance.setContent(`Request failed. ${error}`);
+          });
+      },
+    });
+  });
 </script>

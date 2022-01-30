@@ -294,36 +294,34 @@
   <?php } ?>
 </aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  // Modal windows for photos in a post
-  document.querySelectorAll(".post-body.full .post img, .post-img img, .answ-telo p img")
-    .forEach(el => el.addEventListener("click", function(e) {
-      if (el.src) {
-        let img = '<img src="' + el.src + '">';
-        Swal.fire({
-          width: '100%',
-          showConfirmButton: false,
-          showCloseButton: true,
-          title: img
-        })
-      }
-    }));
-
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.post-body.full .post img, .post-img img, .answ-telo p img').forEach((articleImg) => {
+        // Add lightbox elements in blog articles for Tobii.
+        const lightbox = document.createElement('a');
+        lightbox.href = articleImg.src;
+        lightbox.classList.add('lightbox');
+        lightbox.dataset.group = 'article';
+        articleImg.parentNode.appendChild(lightbox);
+        lightbox.appendChild(articleImg);
+      });
+        const tobii = new Tobii({
+            captions: true,
+            zoom: false
+       })
+    });
   <?php if ($user['id'] > 0) { ?>
     document.querySelectorAll(".msg-flag")
       .forEach(el => el.addEventListener("click", function(e) {
         let post_id = el.dataset.post_id;
         let content_id = el.dataset.content_id;
         let type = el.dataset.type;
-        Swal.fire({
-          title: '<?= Translate::get('report'); ?>',
-          html: '<?= Translate::get('does this violate site rules'); ?>?',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: '<?= Translate::get('yes'); ?>',
-          cancelButtonText: '<?= Translate::get('no'); ?>',
-          showCancelButton: true,
-          showLoaderOnConfirm: true,
-          preConfirm: () => {
-            fetch("/flag/repost", {
+           Notiflix.Confirm.show(
+            '<?= Translate::get('report'); ?>',
+            '<?= Translate::get('does this violate site rules'); ?>?',
+            '<?= Translate::get('yes'); ?>',
+            '<?= Translate::get('no'); ?>',
+            function okCb() {
+              fetch("/flag/repost", {
                 method: "POST",
                 body: "type=" + type + "&post_id=" + post_id + "&content_id=" + content_id,
                 headers: {
@@ -336,9 +334,14 @@
                 }
               ).then(
                 text => {}
-              );
-          }
-        })
+              )
+            },
+            function cancelCb() {
+              // alert('...');
+            }, {
+              // option;  
+              },
+            );
       }));
   <?php } ?>
 </script>

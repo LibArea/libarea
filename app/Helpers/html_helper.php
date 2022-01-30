@@ -266,10 +266,10 @@ function tabs_nav($name, $item, $user, array $pages = [])
                 if ($user['id'] > 0) $html .= '<li><hr class="w-90"></li>';
             } else {
                 if ($user['trust_level'] >= $tl) {
-                    $isActive   = $page['id'] == $item ? ' sky-500 ' : '';
+                    $isActive   = $page['id'] == $item ? ' class="sky-500" ' : '';
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
 
-                    $html .= '<li><a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
+                    $html .= '<li><a ' . $isAria . $isActive . ' href="' . $page['url'] . '">
                                 <i class="' . $page['icon'] . ' mr10 text-2xl"></i>
                                     <span>' . $page['title'] . '</span></a></li>';
                 }

@@ -1,18 +1,18 @@
-<?= Tpl::insert('header', ['user' => $user, 'data' => $data, 'meta' => $meta]); ?>
-<main class="col-span-12 mb-col-12">
+<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+
   <?php if (UserData::checkAdmin()) { ?>
-    <a class="right mt5 ml15" href="<?= getUrlByName('web.deleted'); ?>">
-      <?= Translate::get('deleted'); ?>
-    </a>
-    <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('site.add'); ?>">
-      <i class="bi bi-plus-lg middle"></i>
-    </a>
+    <div class="mr15 ml15">
+      <a class="right" href="<?= getUrlByName('web.deleted'); ?>">
+        <?= Translate::get('deleted'); ?>
+      </a>
+      <h1><?= Translate::get('categories'); ?></h1>
+    </div>
   <?php } ?>
-  <h1 class="ml10"><?= Translate::get('categories'); ?></h1>
-  <div class="flex mb20 p15 bg-yellow-50 flex-auto">
+   
+  <div class="flex mb20 p15 bg-yellow-50">
     <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
       <div class="mr60">
-        <a class="pr10 mr60 underline-hover text-2xl block " href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
+        <a class="pr20 underline-hover text-2xl block " href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
           <?= $cat['title']; ?>
         </a>
         <?php if (!empty($cat['sub'])) { ?>
@@ -28,7 +28,9 @@
       </div>
     <?php } ?>
   </div>
-  <div class="box-flex ml15 max-w780">
+<div class="grid grid-cols-12 gap-4">
+  <main class="col-span-9 mb-col-12 ml15">
+  <div class="box-flex max-w780">
     <div>
     <?= num_word($data['count'], Translate::get('num-website'), false); ?>: 
     <?= $data['count']; ?>
@@ -42,14 +44,17 @@
     </a>
     </div>
   </div>
-  <div class="ml15">
-    <?php if (!empty($data['items'])) { ?>
-      <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user]); ?>
-    <?php } else { ?>
-      <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
-    <?php } ?>
-  </div>
+
+  <?php if (!empty($data['items'])) { ?>
+    <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user]); ?>
+  <?php } else { ?>
+    <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+  <?php } ?>
+
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
 </main>
-</container>
+<aside class="col-span-3 mb-col-12 relative mb-none">
+  <?= Translate::get('being.developed'); ?>
+</aside>
+</div>
 <?= includeTemplate('/view/default/footer'); ?>
