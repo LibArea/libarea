@@ -145,4 +145,3 @@
     <?= Tpl::import('/_block/sidebar/lang', ['lang' => []]); ?>
   </div>
 </aside>
-</container>

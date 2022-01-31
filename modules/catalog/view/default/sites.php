@@ -108,4 +108,4 @@
   <?= $data['topic']['facet_description']; ?>
 </aside>
 </div>
-<?= includeTemplate('/view/default/footer'); ?>
+<?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

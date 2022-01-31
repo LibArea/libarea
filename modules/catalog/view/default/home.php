@@ -57,4 +57,4 @@
   <?= Translate::get('being.developed'); ?>
 </aside>
 </div>
-<?= includeTemplate('/view/default/footer'); ?>
+<?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

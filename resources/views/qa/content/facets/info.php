@@ -43,4 +43,3 @@
 
   <?= Tpl::import('/_block/sidebar/topic', ['data' => $data]); ?>
 </aside>
-<?= Tpl::import('/footer'); ?>

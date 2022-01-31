@@ -122,7 +122,6 @@
 
   <?php } ?>
 </aside>
-<?= Tpl::import('/footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', function() {

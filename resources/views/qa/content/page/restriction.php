@@ -2,4 +2,3 @@
   <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('access restricted'); ?></h1>
   <div class="italic"><?= Translate::get('the profile is being checked'); ?>...</div>
 </main>
-<?= Tpl::import('/footer'); ?>

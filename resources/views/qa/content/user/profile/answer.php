@@ -36,4 +36,3 @@
     <?= no_content(Translate::get('no.answers'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= Tpl::import('/footer'); ?>

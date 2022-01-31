@@ -73,4 +73,3 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>
 </main>
-<?= Tpl::import('/footer'); ?>

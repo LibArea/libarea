@@ -110,4 +110,4 @@
   <p><?= Translate::get('freely'); ?>: <?= $data['bytes']; ?></p>
 </div>
 </main>
-<?= includeTemplate('/view/default/footer'); ?>
+<?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

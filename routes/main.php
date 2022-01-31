@@ -170,7 +170,7 @@ Route::get('/blog/{slug}/page/{page?}')->controller('Facets\BlogFacetController'
 Route::get('/domain/{domain}')->controller('Post\PostController@domain', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 Route::get('/domain/{domain}/page/{page?}')->controller('Post\PostController@domain', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
 
-Route::get('/web')->module('catalog', 'App\Home', ['web.all', 'web'])->name('web');
+Route::get('/web')->module('catalog', 'App\Home', ['web.all', 'web'])->name('web.all');
 Route::get('/web/page/{page?}')->module('catalog', 'App\Home', ['web.all', 'web'])->where(['page' => '[0-9]+']);
 Route::get('/web/top')->module('catalog', 'App\Home', ['web.top', 'web'])->name('web.top');
 Route::get('/web/top/page/{page?}')->module('catalog', 'App\Home', ['web.top', 'web'])->where(['page' => '[0-9]+']);

@@ -64,4 +64,3 @@
   </div>
 
 </main>
-<?= Tpl::import('/footer'); ?>

@@ -345,4 +345,3 @@
       }));
   <?php } ?>
 </script>
-<?= Tpl::import('/footer'); ?>

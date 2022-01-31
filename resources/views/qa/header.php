@@ -111,4 +111,4 @@ $facet  = $data['facet'] ?? false; ?>
       <?php }  ?>
     </div>
   </header>
-  <div class="max-w1240 mr-auto grid grid-cols-12 gap-4 mb-gap-05 pr5 pl5">
+  <container>
