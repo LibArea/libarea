@@ -66,7 +66,7 @@
   </div>
 </main>
 <aside class="col-span-3 relative mb-none">
-  <box class="bg-white br-box-gray box-shadow-all">
+  <div class="box bg-white br-box-gray box-shadow-all">
     <?php if ($data['similar']) { ?>
       <h3 class="uppercase-box"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['similar'] as $link) { ?>
@@ -78,8 +78,8 @@
     <?php } else { ?>
       ....
     <?php } ?>
-  </box>
-  <box class="bg-white br-box-gray box-shadow-all">
+  </div>
+  <div class="box bg-white br-box-gray box-shadow-all">
     <?php if ($data['high_leve']) { ?>
       <div class="gray"><?= Translate::get('see more'); ?></div>
       <?php foreach ($data['high_leve'] as $rl) { ?>
@@ -92,7 +92,7 @@
     <?php } else { ?>
       ....
     <?php } ?>
-  </box>
+  </div>
 </aside>
 </div> 
 <?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

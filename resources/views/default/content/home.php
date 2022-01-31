@@ -1,8 +1,8 @@
 <?php if ($user['id'] == 0) { ?>
-  <box class="col-span-12 bg-white br-box-gray center">
+  <div class="box col-span-12 bg-white br-box-gray center">
     <h1><?= Config::get('meta.banner_title'); ?></h1>
-    <div class="mb5"><?= Config::get('meta.banner_desc'); ?>...</div>
-  </box>
+    <p><?= Config::get('meta.banner_desc'); ?>...</p>
+  </div>
 <?php } ?>
 
 <div class="col-span-2 justify-between mb-none">
@@ -69,7 +69,7 @@
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
-    <box class="br-box-gray bg-white text-sm">
+    <div class="box br-box-gray bg-white text-sm">
       <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
       <ul class="p0 m0 list-none text-sm">
       <?php
@@ -112,24 +112,22 @@
           <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
-    </box>
+    </div>
   <?php } else { ?>
-    <box class="br-box-gray bg-white text-sm">
-      <div class="uppercase gray mt5 mb5">
-        <?= Translate::get('topics'); ?>
-      </div>
+    <div class="box br-box-gray bg-white text-sm">
+      <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
       <?php foreach (Config::get('facets.default') as $key => $topic) { ?>
         <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $topic['url']; ?>">
           <img class="w30 h30 mr5 br-box-gray" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
           <span class="ml5"><?= $topic['name']; ?></span>
         </a>
       <?php } ?>
-    </box>
+    </div>
   <?php } ?>
 
   <div class="sticky top70">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <box class="br-box-gray bg-white">
+      <div class="box br-box-gray bg-white">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <div class="mb15 text-sm gray-400">
             <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20 br-rd-50 mr5'); ?>
@@ -139,7 +137,7 @@
             </a>
           </div>
         <?php } ?>
-      </box>
+      </div>
     <?php } ?>
 
     <?= Tpl::import('/_block/sidebar/lang', ['lang' => []]); ?>

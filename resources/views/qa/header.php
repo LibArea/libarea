@@ -111,4 +111,4 @@ $facet  = $data['facet'] ?? false; ?>
       <?php }  ?>
     </div>
   </header>
-  <container>
+  <div id="contentWrapper">

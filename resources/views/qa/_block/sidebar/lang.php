@@ -1,10 +1,10 @@
 <aside class="col-span-3 relative br-rd5 mb-none">
   <?php if (!empty($lang)) { ?>
-    <box class="bg-white mb15 br-box-gray box-shadow-all">
+    <div class="box bg-white br-box-gray box-shadow-all">
       <?= $lang; ?>...
-    </box>
+    </div>
   <?php } ?>
-  <box class="box-flex bg-white br-box-gray box-shadow-all">
+  <div class="box-flex bg-white br-box-gray box-shadow-all">
     <div class="text-sm">
       <a class="inline gray-400" title="<?= Translate::get('help'); ?>" href="/info/<?= Config::get('facets.page-one'); ?>">
         <?= Translate::get('help'); ?>
@@ -21,5 +21,5 @@
         <i class="bi bi-github middle text-xl"></i>
       </a> 
     </div>
-  </box>
+  </div>
 </aside>

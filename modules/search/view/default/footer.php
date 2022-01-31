@@ -1,4 +1,4 @@
-</container>
+</div>
 <footer>
   <?= Config::get('meta.name'); ?> &copy; <?= date('Y'); ?> — <span class="lowercase"><?= Translate::get('search'); ?></span>
 </footer>

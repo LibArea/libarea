@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?21">
+  <link rel="stylesheet" href="/assets/css/style.css?26">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
@@ -25,12 +25,10 @@
   <header class="bg-white box-shadow <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
     <div class="box-flex max-width mr-auto pl10 pr10 h50">
       <div class="flex items-center">
-        <menu data-template="one" class="tippy pl0 pr10 none mb-block">
-          <div class="relative w-auto">
-            <i class="bi bi-list gray-400 text-xl"></i>
-          </div>
-         </menu> 
-         <div id="one" style="display: none;" class="box-shadow2 z-40 bg-white br-rd3">
+        <div data-template="one" class="tippy pl0 pr10 none mb-block">
+           <i class="bi bi-list gray-400 text-xl"></i>
+        </div> 
+        <div id="one" style="display: none;" class="box-shadow2 z-40 bg-white br-rd3">
            <nav>
              <?= tabs_nav(
                'menu',
@@ -39,7 +37,7 @@
                $pages = Config::get('menu.mobile'),
              ); ?>
            </nav>
-          </div>
+        </div>
         <a title="<?= Translate::get('home'); ?>" class="logo black" href="/">
           <?= Config::get('meta.name'); ?>
         </a>
@@ -91,11 +89,9 @@
               <?php } ?>
             </a>
 
-            <menu data-template="two" class="tippy ml20 mb-ml-10">
-              <div class="relative w-auto">
-                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
-              </div>
-            </menu>  
+            <div data-template="two" class="tippy ml20 mb-ml-10">
+               <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
+            </div>  
             <div id="two" style="display: none;" class="bg-white br-rd3">
               <nav class="p0 pr20 m0">
                 <?= tabs_nav(
@@ -112,5 +108,5 @@
       <?php }  ?>
     </div>
   </header>
-  <container>
+  <div id="contentWrapper">
  

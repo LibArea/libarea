@@ -1,0 +1,21 @@
+/*
+ * Drop-down menu and left nav
+ *
+ * Выпадающее меню и навигация слева
+ */
+ 
+menu { padding: 0px; }
+
+nav > ul > li > a {
+  color: var(--gray-400);
+  padding: 3px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+ul > li > a span { color: var(--gray-600); }
+
+ul > li > a:hover > span,
+ul > li > a:hover > i,
+a.sky-500 span { color: #0ea5e9; }

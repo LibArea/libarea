@@ -1,4 +1,4 @@
-<box class="bg-blue-100 gray center relative">
+<div class="box bg-blue-100 gray center relative">
   <?= Translate::get('not.registered'); ?>?
   <form action="<?= getUrlByName('register'); ?>" class="mt15 mb15 block">
     <?= sumbit(Translate::get('create.account')); ?>
@@ -7,4 +7,4 @@
   <a class="mt15 mb0 gray lowercase block text-sm" href="<?= getUrlByName('login'); ?>">
     <?= Translate::get('sign.in'); ?>
   </a>
-</box>
+</div>

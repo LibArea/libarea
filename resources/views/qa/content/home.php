@@ -51,7 +51,7 @@
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
-    <box class="br-box-gray box-shadow-all bg-white text-sm">
+    <div class="box br-box-gray box-shadow-all bg-white text-sm">
       <div class="uppercase gray mb5">
         <?= Translate::get('reading'); ?>
       </div>
@@ -95,9 +95,9 @@
           <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
-    </box>
+    </div>
   <?php } else { ?>
-    <box class="br-box-gray box-shadow-all bg-white text-sm">
+    <div class="box br-box-gray box-shadow-all bg-white text-sm">
       <div class="uppercase gray mt5 mb5">
         <?= Translate::get('topics'); ?>
       </div>
@@ -107,12 +107,12 @@
           <span class="ml5"><?= $topic['name']; ?></span>
         </a>
       <?php } ?>
-    </box>
+    </div>
   <?php } ?>
 
   <div class="sticky top20">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <box class="br-box-gray box-shadow-all bg-white">
+      <div class="box br-box-gray box-shadow-all bg-white">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <div class="mt15 mr0 mb15 ml0">
             <div class="text-sm gray-400">
@@ -124,7 +124,7 @@
             </a>
           </div>
         <?php } ?>
-      </box>
+      </div>
     <?php } ?>
   </div>
 </aside>

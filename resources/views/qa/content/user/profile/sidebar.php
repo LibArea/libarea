@@ -2,7 +2,7 @@
 
 <div class="col-span-4 justify-between mb-none">
 
-  <box class="br-box-gray bg-white">
+  <div class="box br-box-gray bg-white">
     <blockquote class="ml0 mb10 max-w640 gray">
       <?= $profile['about']; ?>...
     </blockquote>
@@ -13,10 +13,10 @@
         <sup class="ml5"><?= Translate::get('tl' . $profile['trust_level'] . '.title'); ?></sup>
       </span>
     </div>
-  </box>
+  </div>
 
   <?php if ($data['blogs']) { ?>
-    <box class="br-box-gray bg-white">
+    <div class="box br-box-gray bg-white">
       <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
       <?php foreach ($data['blogs'] as $blog) { ?>
         <div class="w-100 mb-w-100 mb15 flex flex-row">
@@ -41,12 +41,12 @@
           </div>
         </div>
       <?php } ?>
-    </box>
+    </div>
   <?php } ?>
 
   <?php if ($profile['my_post'] != 0) { ?>
     <?php $post = $data['post']; ?>
-    <box class="br-box-gray bg-white">
+    <div class="box br-box-gray bg-white">
       <h3 class="uppercase-box"><?= Translate::get('selected post'); ?></h3>
       <div class="mt5">
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
@@ -73,11 +73,11 @@
           <?php } ?>
         </div>
       </div>
-    </box>
+    </div>
   <?php } ?>
 
   <?php if ($data['topics']) { ?>
-    <box class="br-box-gray bg-white">
+    <div class="box br-box-gray bg-white">
       <h3 class="uppercase-box"><?= Translate::get('is reading'); ?></h3>
       <?php foreach ($data['topics'] as  $topic) { ?>
         <div class="mt5 mb5">
@@ -87,21 +87,21 @@
           </a>
         </div>
       <?php } ?>
-    </box>
+    </div>
   <?php } ?>
 
   <?php if (!empty($data['participation'][0]['facet_id'])) { ?>
-    <box class="br-box-gray bg-white">
+    <div class="box br-box-gray bg-white">
       <h3 class="uppercase-box"><?= Translate::get('understands'); ?></h3>
       <?php foreach ($data['participation'] as $part) { ?>
         <a class="tag" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
           <?= $part['facet_title']; ?>
         </a>
       <?php } ?>
-    </box>
+    </div>
   <?php } ?>
 
-  <box class="br-box-gray bg-white">
+  <div class="box br-box-gray bg-white">
     <h3 class="uppercase-box"><?= Translate::get('contacts'); ?></h3>
     <?php foreach (Config::get('fields-profile') as $block) { ?>
       <?php if ($profile[$block['title']]) { ?>
@@ -123,9 +123,9 @@
         <?php } ?>
       <?php } ?>
     <?php } ?>
-  </box>
+  </div>
 
-  <box class="br-box-gray bg-white">
+  <div class="box br-box-gray bg-white">
     <h3 class="uppercase-box"><?= Translate::get('badges'); ?></h3>
     <div class="m0 text-3xl">
       <i title="<?= Translate::get('medal for registration'); ?>" class="bi bi-gift sky-500"></i>
@@ -136,10 +136,10 @@
         <?= $badge['badge_icon']; ?>
       <?php } ?>
     </div>
-  </box>
+  </div>
 
   <?php if (UserData::checkAdmin()) { ?>
-    <box class="br-box-gray bg-white">
+    <div class="box br-box-gray bg-white">
       <h3 class="uppercase-box"><?= Translate::get('admin'); ?></h3>
       <div class="mt5">
         <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
@@ -173,6 +173,6 @@
         <hr>
         <span class="gray">id<?= $profile['id']; ?> | <?= $profile['email']; ?></span>
       </div>
-    </box>
+    </div>
   <?php } ?>
 </div>

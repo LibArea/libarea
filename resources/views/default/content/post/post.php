@@ -6,7 +6,7 @@
       <?= Tpl::import('/_block/no-login-screensaver'); ?>
     <?php } ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
-    <box class="br-box-gray bg-white article_<?= $post['post_id']; ?>">
+    <div class="box br-box-gray bg-white article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') { ?>
         <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id text-sm right">
           <?= Translate::get('unsubscribe'); ?>
@@ -80,7 +80,7 @@
           <?= favorite($user['id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', ''); ?>
         </div>
       </div>
-    </box>
+    </div>
   <?php } ?>
 <?php } else { ?>
   <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>

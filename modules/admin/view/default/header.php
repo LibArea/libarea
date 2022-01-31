@@ -45,4 +45,4 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
       </div>
     </div>
   </header>
-  <container>
+  <div id="contentWrapper">
