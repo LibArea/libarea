@@ -1,5 +1,5 @@
 </div>
-<footer>
+<footer class="box-shadow-top">
   <div class="left">
     <div class="mb5">
       <?= Config::get('meta.name'); ?>

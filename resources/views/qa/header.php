@@ -1,5 +1,4 @@
 <?php
-$dark   = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -17,7 +16,7 @@ $facet  = $data['facet'] ?? false; ?>
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
-<body class="p0 m0 black<?php if ($dark == 'dark') { ?> dark<?php } ?>">
+<body<?php if (Request::getCookie('dayNight') == 'dark') { ?> class="dark"<?php } ?>>
 
   <header class="bg-white mt0 mb15">
     <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl15 mb10 mb-none items-center flex">

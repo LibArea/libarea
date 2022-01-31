@@ -116,7 +116,6 @@ class PostController extends MainController
 
         if ($this->user['id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
-            Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
             Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
         }
 

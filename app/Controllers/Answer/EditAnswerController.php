@@ -30,7 +30,6 @@ class EditAnswerController extends MainController
         pageError404($post);
 
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
-        Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
 
         return Tpl::agRender(

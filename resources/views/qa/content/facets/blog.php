@@ -41,7 +41,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       <aside class="col-span-3 relative mb-none">
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
           <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
-            <div class="uppercase gray mb5"> <?= Translate::get('created by'); ?></div>
+            <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="/@<?= $data['user']['login']; ?>">
               <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'w30 mr5 br-rd-50'); ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>

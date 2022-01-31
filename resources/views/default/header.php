@@ -1,7 +1,7 @@
 <?php
   Translate::setLang($user['lang']);
   $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
-  $css      = $data['type'] == 'web' || $data['type'] == 'page'  ? '' : 'bg-fons';
+  $css      = $data['type'] == 'web' || $data['type'] == 'page'  ? '' : 'body-bg-fon';
   $type     = $data['type'] ?? false;
   $facet    = $data['facet'] ?? false; 
 ?>
@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?26">
+  <link rel="stylesheet" href="/assets/css/style.css?29">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>

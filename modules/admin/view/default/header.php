@@ -20,16 +20,16 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
 
 <body class="bg-fons<?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
-  <header class="bg-blue-steel-700 sticky top0 mt0">
+  <header class="bg-white br-bottom mt0 mb15">
     <div class="flex justify-between items-center max-width mr-auto h40">
       <div class="flex items-center">
-        <div class="w200 white">
+        <div class="w200 black">
           <a class="ml20" href="/">
-            <i class="bi bi-house white"></i>
+            <i class="bi bi-house black"></i>
           </a>
           <span class="mr5 ml5">/</span>
           <a href="<?= getUrlByName('admin'); ?>">
-            <span class="white"><?= Translate::get('admin'); ?><span>
+            <span class="black"><?= Translate::get('admin'); ?><span>
           </a>
         </div>
         <div class="w400 items-center">
@@ -40,7 +40,7 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
           </form>
         </div>
       </div>
-      <div class="white mr15">
+      <div class="black mr15">
         <?= Request::getRemoteAddress(); ?>
       </div>
     </div>

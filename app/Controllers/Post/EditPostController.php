@@ -32,7 +32,6 @@ class EditPostController extends MainController
         }
 
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
-        Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');

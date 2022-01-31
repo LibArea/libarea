@@ -52,9 +52,7 @@
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="box br-box-gray box-shadow-all bg-white text-sm">
-      <div class="uppercase gray mb5">
-        <?= Translate::get('reading'); ?>
-      </div>
+      <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
 
       <?php
       $my = [];
