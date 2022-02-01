@@ -24,18 +24,18 @@
 
     <?php foreach ($data['result'] as  $post) { ?>
       <div class="mb20 gray">
-        <a class="text-xl block" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+        <a class="text-xl" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['title']; ?>
         </a>
         <?= html_facet($post['facet_list'], 'topic', 'mr15 tag'); ?>
-        <p class="mt5"><?= $post['content']; ?>...</p>
-        <div class="box-flex text-sm">
-          <a class="flex black mb15" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
-            <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w20 h20 mr10'); ?>
+        <p class="mt5 mb5"><?= $post['content']; ?>...</p>
+        <div class="text-sm">
+          <a class="gray-400" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+            <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w20 h20 mr5'); ?>
             <?= $post['login']; ?>
           </a>
-          <div class="box-flex lowercase gray-400">
-            <i class="bi bi-heart sky-500 mr5"></i> <?= $post['post_votes']; ?>
+          <div class="right gray-400">
+            <i class="bi bi-heart mr5"></i> <?= $post['post_votes']; ?>
             <i class="bi bi-eye mr5 ml15"></i> <?= $post['post_hits_count']; ?>
           </div>
         </div>

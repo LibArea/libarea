@@ -1,5 +1,5 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
-<div class="col-span-2 justify-between mb-none">
+<div class="col-span-2 mb-none">
   <nav class="sticky top-sm">
 
     <ul class="metismenu list-none text-sm" id="menu">

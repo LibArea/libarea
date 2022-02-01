@@ -1,18 +1,9 @@
-<div class="sticky mt5 top0 col-span-2 justify-between mb-none">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $user,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
-<main class="col-span-7 mb-col-12 mb10">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-  </div>
+<main class="col-span-9 mb-col-12">
+  <h1 class="ml15"><?= Translate::get($data['type']); ?></h1>
+
   <?php if (!empty($data['comments'])) { ?>
     <?php foreach ($data['comments'] as $comment) { ?>
-      <div class="bg-white br-rd5 mt15 br-box-gray p15">
+      <div class="bg-white br-rd5 mt15 p15">
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
           <div class="text-sm mb5">
             <a class="gray" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
