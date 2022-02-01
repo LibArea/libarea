@@ -2,7 +2,7 @@
 <div class="col-span-2 justify-between mb-none">
   <nav class="sticky top-sm">
 
-    <ul class="metismenu p0 m0 list-none text-sm" id="menu">
+    <ul class="metismenu list-none text-sm" id="menu">
       <?php foreach (Modules\Admin\App\Navigation::menu() as $cats) {
         $active = '';
         if ($data['type'] == $cats['name']) $active = ' sky-500';

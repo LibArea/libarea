@@ -17,8 +17,8 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="box-flex bg-white br-box-gray text-sm">
-    <ul class="flex flex-row list-none center">
+  <div class="box-flex bg-white br-box-gray">
+    <ul class="flex flex-row list-none text-sm">
 
       <?= tabs_nav(
         'nav',
@@ -130,7 +130,7 @@
       <div class="box br-box-gray bg-white">
         <ul class="list-none text-sm">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
-          <li>
+          <li class="mb15">
             <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20 br-rd-50 mr5'); ?>
             <span class="middle lowercase gray-400"><?= $answer['answer_date']; ?></span>
             <a class="black block" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">

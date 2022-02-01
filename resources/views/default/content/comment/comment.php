@@ -21,7 +21,6 @@ foreach ($answer as  $comment) {
   <?php if ($comment['comment_is_deleted'] == 0) { ?>
     <ol class="p0 m0 mb15 list-none">
       <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
-        <div class="p5">
           <div class="max-w780">
             <div class="text-sm flex">
               <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
@@ -63,7 +62,6 @@ foreach ($answer as  $comment) {
               </a>
             <?php } ?>
           </div>
-        </div>
         <div id="comment_addentry<?= $comment['comment_id']; ?>" class="none"></div>
       </li>
     </ol>

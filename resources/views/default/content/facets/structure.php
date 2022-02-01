@@ -10,7 +10,7 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="bg-white box-flex br-box-gray">
     <p class="m0 text-xl"><?= Translate::get('structure'); ?>
       <?php if (UserData::checkAdmin()) { ?>
         <a class="ml15" href="<?= getUrlByName('admin.topics'); ?>">
@@ -22,7 +22,7 @@
       <?php } ?>
     </p>
 
-    <ul class="flex flex-row list-none center">
+    <ul class="flex flex-row list-none text-sm">
 
       <?= tabs_nav(
         $user['id'],

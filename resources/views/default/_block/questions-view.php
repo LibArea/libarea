@@ -5,7 +5,7 @@
     </h2>
 
     <?php foreach ($data['answers'] as  $answer) { ?>
-      <div class="block-answer">
+      <div class="block-answer mb15">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <?php if ($user['id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
           <div class="br-top-dotted mb20"></div>

@@ -9,7 +9,7 @@
       $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
     ?>
 
-      <div class="block-answer">
+      <div class="block-answer mb15">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
           <ol class="list-none">
@@ -117,9 +117,8 @@
         <?php } ?>
 
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
-          <ol class="pl15 list-none<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
-            <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
-              <div class="p5">
+          <ol class="list-none">
+            <li class="comment_subtree mb20 pl15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>" id="comment_<?= $comment['comment_id']; ?>">
                 <div class="max-w780">
                   <div class="text-sm flex">
                     <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
@@ -172,7 +171,6 @@
                     </a>
                   <?php } ?>
                 </div>
-              </div>
               <div id="comment_addentry<?= $comment['comment_id']; ?>" class="none"></div>
             </li>
           </ol>

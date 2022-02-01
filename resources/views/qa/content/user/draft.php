@@ -1,7 +1,7 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white box-flex br-box-gray">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <ul class="flex flex-row list-none center">
+    <ul class="flex flex-row list-none text-sm">
 
       <?= tabs_nav(
         $user['id'],
