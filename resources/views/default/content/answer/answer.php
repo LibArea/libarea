@@ -10,7 +10,7 @@ foreach ($data['answers'] as $answer) {
       <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
         <div class="answ-telo">
           <div class="flex text-sm">
-            <a class="gray-600" href="/@<?= $answer['login']; ?>">
+            <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
               <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20'); ?>
               <span class="mr5 ml5">
                 <?= $answer['login']; ?>

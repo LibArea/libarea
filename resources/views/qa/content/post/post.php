@@ -48,7 +48,7 @@
           <div class="gray-600 text-xs">
             <?= $post['post_date'] ?> ·
             <?= num_word($post['post_hits_count'], Translate::get('num-view'), true); ?> ·
-            <a href="/@<?= $post['login']; ?>">
+            <a href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
               <?= $post['login']; ?>
             </a>
           </div>

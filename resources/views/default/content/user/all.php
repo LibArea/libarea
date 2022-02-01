@@ -1,5 +1,5 @@
 <div class="col-span-2 justify-between mb-none">
-  <nav class="sticky top70">
+  <nav class="sticky top-sm">
   <?= tabs_nav(
     'menu',
     $data['type'],
@@ -47,7 +47,7 @@
     <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>
         <div class="center inline pr10 pl10 mb20 mb-col-2">
-          <a href="/@<?= $user['login']; ?>">
+          <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
             <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'br-rd-50 w60 h60'); ?>
             <div class="block mt5">
               <?= $user['login']; ?>

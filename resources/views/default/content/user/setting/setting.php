@@ -1,5 +1,5 @@
 <div class="col-span-2 justify-between mb-none">
-  <nav class="sticky top70">
+  <nav class="sticky top-sm">
   <?= tabs_nav(
     'menu',
     $data['type'],
@@ -23,7 +23,7 @@
       <fieldset>
         <?= user_avatar_img($data['user']['avatar'], 'small', $data['user']['login'], 'mr5 ml5 ava'); ?>
         <span class="mr5 ml5">
-          <a title="<?= Translate::get('profile'); ?>" href="/@<?= $user['login']; ?>">
+          <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
             <?= $data['user']['login']; ?>
           </a>
         </span>

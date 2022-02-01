@@ -65,8 +65,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/page/add/{topic_id}')->controller('Post\AddPostController', ['page'])->where(['topic_id' => '[0-9]+']);
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
-    Route::get('/u/{login}/delete/cover')->controller('User\SettingController@coverRemove')->where(['login' => '[A-Za-z0-9]+'])->name('delete.cover'); 
-    Route::get('/u/{login}/messages')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
+    Route::get('/@{login}/delete/cover')->controller('User\SettingController@coverRemove')->where(['login' => '[A-Za-z0-9]+'])->name('delete.cover'); 
+    Route::get('/@{login}/messages')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
 
     Route::get('/setting')->controller('User\SettingController@settingForm')->name('setting'); 
     Route::get('/setting/avatar')->controller('User\SettingController@avatarForm')->name('setting.avatar');
@@ -133,13 +133,13 @@ Route::get('/users/page/{page?}')->controller('User\UserController', ['users.all
 Route::get('/users/new')->controller('User\UserController', ['users.new', 'user'])->name('users.new');
 Route::get('/users/new/page/{page?}')->controller('User\UserController', ['users.new', 'user'])->where(['page' => '[0-9]+']);
 
-Route::get('/{login}')->controller('User\ProfileController', ['profile.posts', 'profile'])->where(['login' => '@[A-Za-z0-9]+']);
-Route::get('/{login}/posts')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['login' => '@[A-Za-z0-9]+']);
-Route::get('/{login}/posts/page/{page?}')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['page' => '[0-9]+', 'login' => '@[A-Za-z0-9]+']);
-Route::get('/{login}/answers')->controller('User\ProfileController@answers', ['profile.answers', 'profile'])->where(['login' => '@[A-Za-z0-9]+']);
-Route::get('/{login}/answers/page/{page?}')->controller('User\ProfileController@answers', ['profile.answers', 'profile'])->where(['page' => '[0-9]+', 'login' => '@[A-Za-z0-9]+']);
-Route::get('/{login}/comments')->controller('User\ProfileController@comments', ['profile.comments', 'profile'])->where(['login' => '@[A-Za-z0-9]+']);
-Route::get('/{login}/comments/page/{page?}')->controller('User\ProfileController@comments', ['profile.comments', 'profile'])->where(['page' => '[0-9]+', 'login' => '@[A-Za-z0-9]+']);
+Route::get('/@{login}')->controller('User\ProfileController', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile');
+Route::get('/@{login}/posts')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['login' => '@[A-Za-z0-9]+'])->name('profile.posts');
+Route::get('/@{login}/posts/page/{page?}')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
+Route::get('/@{login}/answers')->controller('User\ProfileController@answers', ['profile.answers', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.answers');
+Route::get('/@{login}/answers/page/{page?}')->controller('User\ProfileController@answers', ['profile.answers', 'profile'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
+Route::get('/@{login}/comments')->controller('User\ProfileController@comments', ['profile.comments', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.comments');
+Route::get('/@{login}/comments/page/{page?}')->controller('User\ProfileController@comments', ['profile.comments', 'profile'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
 
 Route::get('/comments')->controller('Comment\CommentController', ['comments.all', 'comments'])->name('comments');
 Route::get('/comments/page/{page?}')->controller('Comment\CommentController', ['comments.all', 'comments'])->where(['page' => '[0-9]+']);

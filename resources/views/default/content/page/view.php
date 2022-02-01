@@ -22,12 +22,11 @@
     </div>
   <?php } ?>
 </article>
-<div class="p15 m15 hidden">
+<div class="p20 hidden">
   <?= votes($user['id'], $page, 'post', 'ps', 'text-2xl middle', 'block'); ?>
 </div>
 <div class="bg-gray-100 p60 hidden mt15 mb-pl-0 mb-pr-0">
-  <div class="m15 pb15">
-    <div class="p15 mr-auto bg-white hidden br-box-gray br-rd5 max-w640 mb-mr-10 mb-ml-10">
+  <div class="p15 mr-auto bg-white hidden br-box-gray br-rd5 max-w640">
       <?php if ($data['facet']['facet_type'] == 'section') { ?>
         <h3 class="mt0 mb5 font-normal">
           <?= $data['facet']['facet_title']; ?>
@@ -42,10 +41,5 @@
           <i class="bi bi-info-square middle mr5"></i> <?= $row['post_title']; ?>
         </a>
       <?php } ?>
-    </div>
-  </div>
-  <div class="gray center">
-    <?= Translate::get('works on'); ?> <a href="/"><?= Config::get('meta.name'); ?></a>
-    — <?= Translate::get('community'); ?>
   </div>
 </div>

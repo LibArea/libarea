@@ -31,7 +31,7 @@
         </td>
         <td>
           <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w20 h20 mr5'); ?>
-          <a href="/@<?= $user['login']; ?>">
+          <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
             <?= $user['login']; ?>
           </a>
           <?php if ($user['name']) { ?>

@@ -1,5 +1,5 @@
 <div class="col-span-2 justify-between mb-none">
-  <nav class="sticky top70">
+  <nav class="sticky top-sm">
   <?= tabs_nav(
     'menu',
     $data['type'],
@@ -19,12 +19,12 @@
         <div class="hidden mt15 mb15<?php if (!$msg['unread'] > 0) { ?> bg-yellow-100<?php } ?>">
           <div class="text-sm flex">
             <?php if ($msg['dialog_sender_id'] == $user['id']) { ?>
-              <a href="/@<?= $msg['msg_to_user']['login']; ?>">
+              <a href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
                 <?= user_avatar_img($msg['msg_to_user']['avatar'], 'small', $msg['msg_to_user']['login'], 'w20 h20 mr5 ml5'); ?>
                 <?= $msg['msg_to_user']['login']; ?>
               </a>
             <?php } else { ?>
-              <a class="mr5" href="/@<?= $msg['msg_to_user']['login']; ?>">
+              <a class="mr5" href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
                 <?= user_avatar_img($msg['msg_user']['avatar'], 'small', $msg['msg_user']['login'], 'w20 h20 mr5 ml5'); ?>
                 <?= $msg['msg_user']['login']; ?>
               </a>

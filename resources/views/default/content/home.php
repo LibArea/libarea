@@ -6,7 +6,7 @@
 <?php } ?>
 
 <div class="col-span-2 justify-between mb-none">
-  <nav class="sticky top70">
+  <nav class="sticky top-sm">
   <?= tabs_nav(
     'menu',
     $data['type'],
@@ -17,7 +17,7 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="box-flex bg-white p15">
+  <div class="box-flex bg-white br-box-gray text-sm">
     <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
@@ -125,7 +125,7 @@
     </div>
   <?php } ?>
 
-  <div class="sticky top70">
+  <div class="sticky top-sm">
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="box br-box-gray bg-white">
         <?php foreach ($data['latest_answers'] as $answer) { ?>

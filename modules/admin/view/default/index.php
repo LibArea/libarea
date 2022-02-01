@@ -62,7 +62,7 @@
       <?php foreach ($data['last_visit'] as $user) { ?>
         <div class="gray">
           <span class="gray-400 text-sm">id<?= $user['id']; ?></span>
-          <a href="/@<?= $user['login']; ?>"><?= $user['login']; ?></a>
+          <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
           <span class="gray-400"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
         </div>
       <?php } ?>

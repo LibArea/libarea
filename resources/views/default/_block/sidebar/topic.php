@@ -1,7 +1,7 @@
 <?php if ($data['user']['id'] != 1) { ?>
   <div class="bg-white br-rd5 mb15 br-box-gray p15">
     <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
-    <a class="flex relative pt5 pb5 items-center hidden gray-600" href="/@<?= $data['user']['login']; ?>" title="<?= $data['user']['login']; ?>" >
+    <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
       <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'w30 h30 mr10'); ?>
       <?= $data['user']['login']; ?>
     </a>

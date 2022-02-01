@@ -30,7 +30,7 @@
         <?= html_facet($post['facet_list'], 'topic', 'mr15 tag'); ?>
         <p class="mt5"><?= $post['content']; ?>...</p>
         <div class="box-flex text-sm">
-          <a class="flex black mb15" href="/@<?= $post['login']; ?>">
+          <a class="flex black mb15" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
             <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w20 h20 mr10'); ?>
             <?= $post['login']; ?>
           </a>

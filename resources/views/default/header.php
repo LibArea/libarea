@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?29">
+  <link rel="stylesheet" href="/assets/css/style.css?36">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
@@ -43,7 +43,7 @@
         </a>
       </div>
       <?php if (Request::getUri() != getUrlByName('search')) { ?>
-        <div class="p5 ml30 mr20 relative mb-none w-100">
+        <div class="ml45 relative mb-none w-100">
           <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
             <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="bg-gray-100 br-rd20 pl15 w-100 h30 gray">
             <input name="token" value="<?= csrf_token(); ?>" type="hidden">
@@ -54,11 +54,11 @@
       <?php } ?>
       <?php if (!UserData::checkActiveUser()) { ?>
         <div class="flex right col-span-4 items-center">
-          <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml-10">
+          <div id="toggledark" class="header-menu-item mb-none ml45 mb-ml-10">
             <i class="bi bi-brightness-high gray-400 text-xl"></i>
           </div>
           <?php if (Config::get('general.invite') == false) { ?>
-            <a class="register gray ml30 mr15 mb-ml-10 mb-mr-5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
+            <a class="register gray ml45 mr15 mb-ml-10 mb-mr-5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
               <?= Translate::get('sign up'); ?>
             </a>
           <?php } ?>
@@ -68,15 +68,15 @@
         </div>
       <?php } else { ?>
         <div class="col-span-4">
-          <div class="flex right ml30 mb-ml-10 items-center">
+          <div class="flex right ml45 mb-ml-10 items-center text-xl">
 
             <?= add_post($facet, $user['id']); ?>
 
-            <div id="toggledark" class="only-icon p10 ml20 mb-ml-10">
-              <i class="bi bi-brightness-high gray-400 text-xl"></i>
+            <div id="toggledark" class="only-icon ml45 mb-ml-10">
+              <i class="bi bi-brightness-high gray-400"></i>
             </div>
 
-            <a class="gray-400 p10 text-xl ml20 mb-ml-10" href="<?= getUrlByName('notifications'); ?>">
+            <a class="gray-400 ml45 mb-ml-10" href="<?= getUrlByName('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationsController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['notification_action_type'] == 1) { ?>
@@ -89,7 +89,7 @@
               <?php } ?>
             </a>
 
-            <div data-template="two" class="tippy ml20 mb-ml-10">
+            <div data-template="two" class="tippy ml45 mb-ml-10">
                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
             </div>  
             <div id="two" style="display: none;" class="bg-white br-rd3">

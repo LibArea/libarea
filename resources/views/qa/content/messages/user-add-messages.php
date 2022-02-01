@@ -2,7 +2,9 @@
   <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
     <h1 class="mt0 mb10 text-2xl font-normal">
       <?= Translate::get('send a message'); ?>  <?= $user['login']; ?> / <?= $data['login']; ?>
-      <a class="right text-sm" href="/@<?= $user['login']; ?>/messages"><?= Translate::get('all messages'); ?></a>
+      <a class="right text-sm" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">
+        <?= Translate::get('all messages'); ?>
+      </a>
     </h1>
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>

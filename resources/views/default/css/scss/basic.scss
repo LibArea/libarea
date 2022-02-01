@@ -45,11 +45,12 @@ body {
 .body-bg-fon { background-color: #f3f4f6; }
 
 body.dark {
-  filter: invert(100%);
+  filter: invert(100%) hue-rotate(180deg);
   background-color: #222;
 }
 
 body.dark .bg-white { background-color: var(--br-box-gray); }
+body.dark img { filter: invert(100%); }
 
 a {
   color: #4183c4;
@@ -69,10 +70,8 @@ img {
 }
 
 .top0 { top: 0; }
-.top20 { top: 20px; }
-.top50 { top: 50px; }
-.top60 { top: 60px; }
-.top70 { top: 70px; }
+.top-sm { top: 65px; }
+.top-xl { top: 110px; }
 .right0 { right: 0; }
 .right5 { right: 5px; }
 .bottom0 { bottom: 0; }

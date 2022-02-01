@@ -14,7 +14,7 @@
     <ul class="mb-none">
       <li><a href="<?= getUrlByName('blogs.all'); ?>"><?= Translate::get('blogs'); ?></a></li>
       <li><a href="<?= getUrlByName('topics.all'); ?>"><?= Translate::get('topics'); ?></a></li>
-      <li><a href="<?= getUrlByName('web'); ?>"><?= Translate::get('catalog'); ?></a></li>
+      <li><a href="<?= getUrlByName('web.all'); ?>"><?= Translate::get('catalog'); ?></a></li>
     </ul>
     <ul class="mb-none">
       <li><a href="<?= getUrlByName('users.all'); ?>"><?= Translate::get('users'); ?></a></li>

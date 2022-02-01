@@ -1,5 +1,5 @@
 <div class="col-span-2 justify-between mb-none">
-  <nav class="sticky top70">
+  <nav class="sticky top-sm">
     <?= tabs_nav(
       'menu',
       $data['type'],
@@ -90,7 +90,7 @@
 </main>
 <aside class="col-span-3 relative mb-none">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
-    <div class="bg-white flex justify-center relative br-rd5 mb15 br-box-gray p15">
+    <div class="bg-white box-flex br-box-gray p15">
       <div class="mr15 center box-number">
         <div class="uppercase mb5 text-sm gray"><?= Translate::get('posts'); ?></div>
         <?= $topic['facet_count']; ?>
@@ -104,7 +104,7 @@
     </div>
 
     <?php if (!empty($data['pages'])) { ?>
-      <div class="sticky top0 top70">
+      <div class="sticky top0 top-sm">
         <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white text-sm">
           <div class="uppercase gray mt5 mb5"> <?= Translate::get('pages'); ?></div>
           <?php foreach ($data['pages'] as $ind => $row) { ?>
@@ -118,11 +118,11 @@
 
     <?= Tpl::import('/_block/sidebar/topic', ['data' => $data]); ?>
     <?php if (!empty($data['writers'])) { ?>
-      <div class="sticky top0 top70">
-        <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white text-sm">
+      <div class="sticky top0 top-sm">
+        <div class="box br-box-gray bg-white text-sm">
           <div class="uppercase gray mt5 mb5"> <?= Translate::get('writers'); ?></div>
           <?php foreach ($data['writers'] as $ind => $row) { ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="/@<?= $row['login']; ?>">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
               <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'w30 h30 mr5 br-rd-50'); ?>
               <span class="ml5"><?= $row['login']; ?> (<?= $row['hits_count']; ?>) </span>
             </a>

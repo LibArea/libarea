@@ -11,13 +11,13 @@
   <?php if (!empty($data['invitations'])) { ?>
     <?php foreach ($data['invitations'] as $key => $inv) { ?>
       <div class="content-telo mt5">
-        <a href="/@<?= $inv['uid']['login']; ?>">
+        <a href="<?= getUrlByName('profile', ['login' => $inv['uid']['login']]); ?>">
           <?= $inv['uid']['login']; ?>
         </a>
         <sup>id<?= $inv['uid']['id']; ?></sup>
         =>
         <?php if ($inv['login']) { ?>
-          <a href="/@<?= $inv['login']; ?>">
+          <a href="<?= getUrlByName('profile', ['login' => $inv['login']]); ?>">
             <?= $inv['login']; ?>
           </a>
           <span class="lowercase text-sm">

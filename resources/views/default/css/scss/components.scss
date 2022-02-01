@@ -104,8 +104,6 @@ details[open] > summary {
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 15px;
-  overflow: hidden;
-  display: block;
 }
 
 .box-flex {
@@ -114,6 +112,7 @@ details[open] > summary {
   align-items: center;
   justify-content: space-between;
   border-radius: 5px;
+  padding: 15px;
   margin-bottom: 15px;
 }
 
@@ -121,7 +120,6 @@ details[open] > summary {
   color: var(--gray-600);
   font-size: 0.875rem;
   text-transform: uppercase;
-  line-height: 1;
   font-weight: 400;
 }
 

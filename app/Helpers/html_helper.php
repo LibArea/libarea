@@ -331,7 +331,7 @@ function add_post($facet, $user_id)
     }
 
     $html  = '<a title="' . sprintf(Translate::get('add.option'), Translate::get('post')) . '" 
-                href="' . $url_add . '" class="sky-500 center p10">
+                href="' . $url_add . '" class="sky-500">
                 <i class="bi bi-plus-lg text-xl"></i>
               </a>';
 

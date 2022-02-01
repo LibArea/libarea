@@ -1,5 +1,5 @@
 <div class="col-span-2 justify-between mb-none">
-  <nav class="sticky top70">
+  <nav class="sticky top-sm">
   <?= tabs_nav(
     'menu',
     $data['type'],
@@ -44,7 +44,7 @@
           <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') { ?>
             <div class="relative mr15">
               <img class="block br-box-gray max-w-100" src="<?= cover_url($data['user']['cover_art'], 'user'); ?>">
-              <a class="right text-sm" href="/@<?= $user['login']; ?>/delete/cover">
+              <a class="right text-sm" href="<?= getUrlByName('delete.cover', ['login' => $user['login']]); ?>">
                 <?= Translate::get('remove'); ?>
               </a>
             </div>

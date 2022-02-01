@@ -1,5 +1,5 @@
 <div class="col-span-2 justify-between mb-none">
-  <nav class="sticky top70">
+  <nav class="sticky top-sm">
   <?= tabs_nav(
     'menu',
     $data['type'],
@@ -41,7 +41,7 @@
               <?= user_avatar_img($ava, 'max', $login, 'br-rd-50 w40 h40 mr5'); ?>
               <div id="content_<?= $key; ?>" class="content_<?= $key; ?>"></div>
             </div>
-            <a class="flex black flex-center" href="/@<?= $login; ?>">
+            <a class="flex black" href="<?= getUrlByName('profile', ['login' => $login); ?>">
               <div class="ml5">
                 <?= $login; ?>
                 <div class="gray-400 lowercase text-sm">

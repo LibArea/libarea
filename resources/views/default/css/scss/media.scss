@@ -19,14 +19,12 @@
 @media (max-width: 910px) {
   .mb-col-2 { grid-column: span 2 / span 2; }
   .mb-col-12 { grid-column: span 12 / span 12; }
-  .mb-w-100 { width: 100%; }
-  .mb-h-100 { height: 100%; }
+  .mb-w-100 { width: 100px; }
+  .mb-h-100 { height: 100px; }
   .mb-w100 { width: 100%; }
   .mb-h100 { height: 100%; }
-  .mb-min-h100 { min-height: 100%; }
   .mb-ml-10 { margin-left: 10px; }
-  .mb-mr-10 { margin-right: 10px; }
-  .mb-mb-10 { margin-bottom: 10px; }
+  .mb-ml-20 { margin-left: 20px; }
   .mb-mt-5 { margin-top: 5px; }
   .mb-mr-5 { margin-right: 5px; }
   .mb-mb-5 { margin-bottom: 5px; }

@@ -186,7 +186,7 @@ class ProfileController extends MainController
 
     public static function profile()
     {
-        $result = preg_replace('/@/', '', Request::get('login'));
+        $result = Request::get('login');
         pageError404($profile = UserModel::getUser($result, 'slug'));
 
         if ($profile['ban_list'] == 1) {
@@ -227,7 +227,7 @@ class ProfileController extends MainController
             'og'         => true,
             'twitter'    => true,
             'imgurl'     => '/uploads/users/avatars/' . $user['avatar'],
-            'url'        => '/@' . $user['login'],
+            'url'        => getUrlByName('profile', ['login' => $user['login']]),
         ];
 
         return meta($m, $title, $desc);

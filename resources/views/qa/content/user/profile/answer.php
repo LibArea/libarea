@@ -10,7 +10,7 @@
     <?php foreach ($data['answers'] as $answer) { ?>
       <div class="bg-white br-rd5 br-box-gray p15">
         <div class="text-sm mb5">
-          <a class="gray" href="/@<?= $answer['login']; ?>">
+          <a class="gray" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
             <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20 mr5'); ?>
             <?= $answer['login']; ?>
           </a>
@@ -30,7 +30,7 @@
       </div>
     <?php } ?>
 
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/answers'); ?>
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' .$data['profile']['login'] . '/answers'); ?>
 
   <?php } else { ?>
     <?= no_content(Translate::get('no.answers'), 'bi bi-info-lg'); ?>

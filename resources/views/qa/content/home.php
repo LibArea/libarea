@@ -108,7 +108,7 @@
     </div>
   <?php } ?>
 
-  <div class="sticky top20">
+  <div class="sticky top-sm">
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="box br-box-gray box-shadow-all bg-white">
         <?php foreach ($data['latest_answers'] as $answer) { ?>

@@ -48,7 +48,7 @@
           <div class="flex-auto mr15">
             <input id="link" placeholder="URL" class="post_url w-100 h30" type="text" name="post_url" />
           </div>
-          <input id="graburl" readonly="readonly" class="blog center pt5 pr15 pb5 pl15 w94 br-rd5" name="submit_url" value="<?= Translate::get('to extract'); ?>" />
+          <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= Translate::get('to extract'); ?>" />
         </div>
       <?php } ?>
 

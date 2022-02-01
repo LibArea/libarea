@@ -40,7 +40,7 @@
             <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'w60 h60'); ?>
           </td>
           <td>
-            <a href="/@<?= $user['login']; ?>"><?= $user['login']; ?></a>
+            <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
             <?php if ($user['name']) { ?>
               (<?= $user['name']; ?>)
             <?php } ?>

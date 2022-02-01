@@ -1,6 +1,6 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
 <div class="col-span-2 justify-between mb-none">
-  <nav class="sticky top50">
+  <nav class="sticky top-sm">
 
     <ul class="metismenu p0 m0 list-none text-sm" id="menu">
       <?php foreach (Modules\Admin\App\Navigation::menu() as $cats) {

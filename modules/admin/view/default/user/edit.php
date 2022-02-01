@@ -11,7 +11,7 @@
   <form action="/admin/user/edit/<?= $data['user']['id']; ?>" method="post">
     <?= csrf_field() ?>
     <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') { ?>
-      <a class="right text-sm" href="/@<?= $data['user']['login']; ?>/delete/cover">
+      <a class="right text-sm" href="<?= getUrlByName('delete.cover', ['login' => $data['user']['login']]); ?>">
         <?= Translate::get('remove'); ?>
       </a>
       <br>
@@ -22,7 +22,7 @@
     <div class="mb20">
       <label class="block" for="post_title">
         Id<?= $data['user']['id']; ?> |
-        <a target="_blank" rel="noopener noreferrer" href="/@<?= $data['user']['login']; ?>">
+        <a target="_blank" rel="noopener noreferrer" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
           <?= $data['user']['login']; ?>
         </a>
       </label>
@@ -67,13 +67,13 @@
     <div class="mb20">
       <?php if ($data['count']['count_posts'] != 0) { ?>
         <label class="required"><?= Translate::get('posts'); ?>:</label>
-        <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('posts'); ?> <?= $data['user']['login']; ?>" href="/@<?= $data['user']['login']; ?>/posts">
+        <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('posts'); ?> <?= $data['user']['login']; ?>" href="<?= getUrlByName('profile.posts', ['login' => $data['user']['login']]); ?>">
           <?= $data['count']['count_posts']; ?>
         </a> <br>
       <?php } ?>
       <?php if ($data['count']['count_answers'] != 0) { ?>
         <label class="required"><?= Translate::get('answers'); ?>:</label>
-        <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('answers'); ?> <?= $data['user']['login']; ?>" href="/@<?= $data['user']['login']; ?>/answers">
+        <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('answers'); ?> <?= $data['user']['login']; ?>" href="<?= getUrlByName('profile.answers', ['login' => $data['user']['login']]); ?>">
           <?= $data['count']['count_answers']; ?>
         </a> <br>
       <?php } else { ?>
@@ -81,7 +81,7 @@
       <?php } ?>
       <?php if ($data['count']['count_comments'] != 0) { ?>
         <label class="required"><?= Translate::get('comments'); ?>:</label>
-        <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('comments'); ?> <?= $data['user']['login']; ?>" href="/@<?= $data['user']['login']; ?>/comments">
+        <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('comments'); ?> <?= $data['user']['login']; ?>" href="<?= getUrlByName('profile.comments', ['login' => $data['user']['login']]); ?>">
           <?= $data['count']['count_comments']; ?>
         </a> <br>
       <?php } else { ?>

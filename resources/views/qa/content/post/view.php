@@ -1,6 +1,6 @@
 <?php $post = $data['post']; ?>
 <div class="col-span-1 mb-none center">
-  <div class="sticky top20">
+  <div class="sticky top-xl">
     <?= votes($user['id'], $post, 'post', 'ps', 'text-2xl middle', 'block'); ?>
     <div class="pt20">
       <?= favorite($user['id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', 'text-2xl'); ?>
@@ -119,7 +119,7 @@
               <?= Translate::get('created by'); ?>
             </div>
             <div class="center">
-              <a title="<?= $post['login']; ?>" href="/@<?= $post['login']; ?>">
+              <a title="<?= $post['login']; ?>" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
                 <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'w30 h30 br-rd-50'); ?>
               </a>
             </div>
@@ -268,7 +268,7 @@
     <a class="p15 gray-400" data-id="tw"><i class="bi bi-twitter"></i></a>
   </div>
   <?php if ($data['recommend']) { ?>
-    <div class="br-box-gray bg-white box-shadow-all br-rd5 mb15 sticky top20 p15">
+    <div class="br-box-gray bg-white box-shadow-all br-rd5 mb15 sticky top-sm p15">
       <h3 class="uppercase mb10 mt0 font-light text-sm gray"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex text-sm"> 
