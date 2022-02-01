@@ -5,6 +5,7 @@ $data = [
     'useful.resources'  => 'Resurse utile',
     'tools'             => 'Instrumente',
     'logs'              => 'Bușteni',
+    'buttons'           => 'Butoane',
     'freely'            => 'Gratuit',
     'words'             => 'Cuvinte oprite ',
     'word'              => 'Cuvânt oprit ',
@@ -13,7 +14,6 @@ $data = [
     'update.data'       => 'Actualizați datele',
     'build'             => 'Colectarea',
     'test.email'        => 'Testarea sistemului de mesagerie',
-    'bg.info'           => 'Putem adăuga/elimina <i class="bg-amber-100">.bg-</i> a obtine ',
 ];
 
 return $data;

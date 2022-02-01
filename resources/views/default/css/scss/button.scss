@@ -25,26 +25,26 @@
 }
 
 .btn-primary {
-  color: $white;
+  color: var(--white);
   background-color: #0085ee;
   border-color: #0379d7;
 }
 
 .btn-outline-primary {
   color: #0085ee;
-  background-color: $white;
+  background-color: var(--white);
   border-color: #0085ee;
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
-  color: $white;
+  color: var(--white);
   opacity: 0.8;
 }
 
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
-  color: $white;
+  color: var(--white);
   background-color: #0085ee;
   border-color: #0379d7;
 }

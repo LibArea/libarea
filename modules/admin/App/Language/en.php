@@ -5,6 +5,7 @@ $data = [
     'useful.resources'  => 'Useful Resources',
     'tools'             => 'Tools',
     'logs'              => 'Logs',
+    'buttons'           => 'Buttons',
     'freely'            => 'Free',
     'words'             => 'Stop words',
     'word'              => 'Stop word',

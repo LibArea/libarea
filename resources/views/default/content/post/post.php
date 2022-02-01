@@ -18,7 +18,6 @@
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
         <a class="flex black" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
-
           <div class="ml5">
             <?= $post['login']; ?>
             <div class="gray-400 lowercase text-sm">

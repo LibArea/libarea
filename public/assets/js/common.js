@@ -113,10 +113,6 @@ document.querySelectorAll(".add-comment-re")
         }
       );
 
-    $('#comment_addentry' + comment_id).on('click', '#cancel_comment', function () {
-      comment.classList.remove("block");
-    });
-
   }));
 
 // We will show a preview of the post on the central page

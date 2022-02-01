@@ -33,20 +33,13 @@ class Home
 
     public function css()
     {
-        Request::getResources()->addBottomStyles('/assets/css/color-help.css');
-
-        $bg_file = HLEB_GLOBAL_DIRECTORY . '/public/assets/css/color-help.css';
-        $bg_array = file_get_contents($bg_file);
-        preg_match_all('/\.([\w\d\.-]+)[^{}]*{[^}]*}/', $bg_array, $matches);
-
         return view(
             '/view/default/css',
             [
-                'meta'  => meta($m = [], Translate::get('admin')),
+                'meta'  => meta($m = [], Translate::get('Css')),
                 'data'  => [
                     'type'  => 'Css',
                     'sheet' => 'Css',
-                    'bg'    => $matches[1],
                 ]
             ]
         );
