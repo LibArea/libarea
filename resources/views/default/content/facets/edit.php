@@ -15,7 +15,7 @@
 
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
-    <ul class="flex flex-row list-none m0 p0 center">
+    <ul class="flex flex-row list-none center">
 
       <?= tabs_nav(
         'nav',

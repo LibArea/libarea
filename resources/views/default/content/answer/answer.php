@@ -6,7 +6,7 @@ foreach ($data['answers'] as $answer) {
 
   <?php if ($answer['answer_is_deleted'] == 0) { ?>
     <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
-    <ol class="p0 m0 list-none">
+    <ol class="list-none">
       <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
         <div class="answ-telo">
           <div class="flex text-sm">
@@ -72,7 +72,7 @@ foreach ($data['answers'] as $answer) {
   <?php } else { ?>
 
     <?php if (UserData::checkAdmin()) { ?>
-      <ol class="bg-red-200 text-sm hidden mt0 pl15 pr15 pb10 list-none">
+      <ol class="bg-red-200 text-sm hidden p15 list-none">
         <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
           <?= $answer['answer_content']; ?>
           <?= Translate::get('answer'); ?> — <?= $answer['login']; ?>

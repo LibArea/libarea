@@ -9,9 +9,9 @@
   </nav>
 </div>
 
-<main class="col-span-7 mb-col-12 mb10">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <ul class="flex flex-row list-none m0 p0 center">
+<main class="col-span-7 mb-col-12">
+  <div class="box-flex bg-white br-box-gray">
+    <ul class="flex flex-row list-none text-sm">
 
       <?= tabs_nav(
         'nav',

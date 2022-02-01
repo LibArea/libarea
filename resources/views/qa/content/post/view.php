@@ -113,7 +113,7 @@
           <?= votes($user['id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
         </div>
 
-        <ul class="list-none w-100 p0 m0 lowercase">
+        <ul class="list-none w-100 lowercase">
           <li class="left p10">
             <div class="text-sm gray-400 mb5">
               <?= Translate::get('created by'); ?>

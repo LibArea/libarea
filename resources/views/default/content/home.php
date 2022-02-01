@@ -18,7 +18,7 @@
 
 <main class="col-span-7 mb-col-12">
   <div class="box-flex bg-white br-box-gray text-sm">
-    <ul class="flex flex-row list-none m0 p0 center">
+    <ul class="flex flex-row list-none center">
 
       <?= tabs_nav(
         'nav',
@@ -71,7 +71,7 @@
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="box br-box-gray bg-white text-sm">
       <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
-      <ul class="p0 m0 list-none text-sm">
+      <ul class="list-none text-sm">
       <?php
       $my = [];
       $other = [];
@@ -128,15 +128,17 @@
   <div class="sticky top-sm">
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="box br-box-gray bg-white">
+        <ul class="list-none text-sm">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
-          <div class="mb15 text-sm gray-400">
+          <li>
             <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20 br-rd-50 mr5'); ?>
-            <span class="middle lowercase"><?= $answer['answer_date']; ?></span>
+            <span class="middle lowercase gray-400"><?= $answer['answer_date']; ?></span>
             <a class="black block" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
               <?= $answer['answer_content']; ?>...
             </a>
-          </div>
+          </li>
         <?php } ?>
+        <ul>
       </div>
     <?php } ?>
   </div>

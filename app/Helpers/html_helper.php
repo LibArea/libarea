@@ -259,7 +259,7 @@ function tabs_nav($name, $item, $user, array $pages = [])
             }
         }
     } else {
-        $html  = '<ul class="p0 m0 list-none text-sm">';
+        $html  = '<ul class="list-none text-sm">';
         foreach ($pages as $key => $page) {
             $tl = $page['tl'] ?? null;
             if (!empty($page['hr'])) {

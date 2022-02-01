@@ -1,6 +1,6 @@
 <main class="col-span-9 mb-col-12">
   <div class="box-flex ml10">
-    <ul class="flex flex-row list-none m0 p0 center">
+    <ul class="flex flex-row list-none text-sm">
 
       <?= tabs_nav(
         'nav',

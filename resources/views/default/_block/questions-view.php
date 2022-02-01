@@ -9,7 +9,7 @@
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <?php if ($user['id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
           <div class="br-top-dotted mb20"></div>
-          <ol class="p0 m0 list-none">
+          <ol class="list-none">
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="answ-telo hidden">
                 <div class="br-box-gray w110 br-rd3 right mt10 pt10 ml10 pb10 hidden center">

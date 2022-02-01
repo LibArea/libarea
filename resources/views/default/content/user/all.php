@@ -18,7 +18,7 @@
   </div>
 
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <ul class="flex flex-row list-none m0 p0 center text-sm">
+    <ul class="flex flex-row list-none center text-sm">
 
       <?= tabs_nav(
         'nav',

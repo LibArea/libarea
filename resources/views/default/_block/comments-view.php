@@ -12,7 +12,7 @@
       <div class="block-answer">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
-          <ol class="p0 m0 list-none">
+          <ol class="list-none">
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="answ-telo">
                 <div class="flex text-sm">
@@ -117,7 +117,7 @@
         <?php } ?>
 
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
-          <ol class="pl15 pb0 mb0 list-none<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
+          <ol class="pl15 list-none<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
             <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
               <div class="p5">
                 <div class="max-w780">

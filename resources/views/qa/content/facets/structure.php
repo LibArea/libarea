@@ -18,7 +18,7 @@
       <?php } ?>
     </p>
 
-    <ul class="flex flex-row list-none m0 p0 center">
+    <ul class="flex flex-row list-none text-sm">
 
       <?= tabs_nav(
         $user['id'],

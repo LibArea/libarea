@@ -41,6 +41,7 @@ html {
   --red-200: #fecaca;
   --sky-50: #f0f9ff;
   --sky-500: #0ea5e9;
+  --green-600: #16a34a;
 }
 
 body {
@@ -325,4 +326,9 @@ img {
 .block { display: block; }
 .table { display: table; }
 .inline { display: inline-block; }
-.list-none { list-style: none; }
+
+.list-none {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

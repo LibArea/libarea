@@ -35,7 +35,7 @@
 
     <div class="bg-white flex flex-row items-center justify-between p15 mb5">
       <p class="m0 text-xl mb-none"><?= Translate::get('feed'); ?></p>
-      <ul class="flex flex-row list-none m0 p0 center">
+      <ul class="flex flex-row list-none text-sm">
 
         <?= tabs_nav(
           'nav',

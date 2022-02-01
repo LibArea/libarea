@@ -6,8 +6,8 @@
     </span>
   </div>
 
-  <div class="bg-white flex flex-row items-center justify-between br-rd5 p15">
-    <ul class="flex flex-row list-none m0 p0 center text-sm">
+  <div class="bg-white box-flex">
+    <ul class="flex flex-row list-none text-sm">
 
       <?= tabs_nav(
         'nav',
