@@ -12,12 +12,12 @@
 <?php $topic = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
-    <div class="bg-white flex flex-row items-center justify-between br-rd5 br-box-gray mb15 p15">
+    <div class="box-flex-white">
       <div class="mb-none">
-        <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w94 br-box-gray mt5'); ?>
+        <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w94 br-box-gray mr15'); ?>
       </div>
-      <div class="ml15 mb-ml-0 flex-auto">
-        <h1 class="mb0 mt10 text-2xl">
+      <div class="flex-auto">
+        <h1 class="text-2xl">
           <?= $topic['facet_seo_title']; ?>
           <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == $user['id']) { ?>
             <a class="right gray-600" href="<?= getUrlByName('topic.edit', ['id' => $topic['facet_id']]); ?>">
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class="bg-white box-flex br-box-gray">
+    <div class="box-flex-white">
       <p class="m0 text-xl mb-none"><?= Translate::get('feed'); ?></p>
       <ul class="flex flex-row list-none text-sm">
 
@@ -80,7 +80,6 @@
     <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
 
-
   <?php } else { ?>
     <div class="center col-span-10">
       <i class="bi bi-x-octagon text-8xl"></i>
@@ -90,7 +89,7 @@
 </main>
 <aside class="col-span-3 relative mb-none">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
-    <div class="bg-white box-flex br-box-gray p15">
+    <div class="box-flex-white">
       <div class="mr15 center box-number">
         <div class="uppercase mb5 text-sm gray"><?= Translate::get('posts'); ?></div>
         <?= $topic['facet_count']; ?>
@@ -105,8 +104,8 @@
 
     <?php if (!empty($data['pages'])) { ?>
       <div class="sticky top0 top-sm">
-        <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white text-sm">
-          <div class="uppercase gray mt5 mb5"> <?= Translate::get('pages'); ?></div>
+        <div class="box-white text-sm">
+          <h3 class="uppercase-box"><?= Translate::get('pages'); ?></h3>
           <?php foreach ($data['pages'] as $ind => $row) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="">
               <?= $row['post_title']; ?>
@@ -119,12 +118,12 @@
     <?= Tpl::import('/_block/sidebar/topic', ['data' => $data]); ?>
     <?php if (!empty($data['writers'])) { ?>
       <div class="sticky top0 top-sm">
-        <div class="box br-box-gray bg-white text-sm">
-          <div class="uppercase gray mt5 mb5"> <?= Translate::get('writers'); ?></div>
+        <div class="box-white text-sm">
+          <h3 class="uppercase-box"><?= Translate::get('writers'); ?></h3>
           <?php foreach ($data['writers'] as $ind => $row) { ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
-              <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'w30 h30 mr5 br-rd-50'); ?>
-              <span class="ml5"><?= $row['login']; ?> (<?= $row['hits_count']; ?>) </span>
+            <a class="flex relative pb15 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
+              <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-sm mr10'); ?>
+              <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
             </a>
           <?php } ?>
         </div>

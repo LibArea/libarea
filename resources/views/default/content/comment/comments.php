@@ -10,7 +10,7 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="box-flex bg-white br-box-gray">
+  <div class="box-flex-white">
     <ul class="flex flex-row list-none text-sm">
 
       <?= tabs_nav(
@@ -45,7 +45,7 @@
   </div>
 
   <?php if (!empty($data['comments'])) { ?>
-    <div class="bg-white br-rd5 br-box-gray mt15 mb15 p15">
+    <div class="box-white">
       <?= Tpl::import(
         '/content/comment/comment',
         [

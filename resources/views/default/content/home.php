@@ -17,7 +17,7 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="box-flex bg-white br-box-gray">
+  <div class="box-flex-white">
     <ul class="flex flex-row list-none text-sm">
 
       <?= tabs_nav(
@@ -63,13 +63,13 @@
   </div>
 </main>
 
-<aside class="col-span-3 mb-col-12 relative mb-none">
+<aside class="col-span-3 mb-col-12 mb-none">
   <?php if ($user['id'] == 0) { ?>
     <?= Tpl::import('/_block/sidebar/login'); ?>
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
-    <div class="box br-box-gray bg-white text-sm">
+    <div class="box-white text-sm">
       <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
       <ul class="list-none text-sm">
       <?php
@@ -114,7 +114,7 @@
       <?php } ?>
     </div>
   <?php } else { ?>
-    <div class="box br-box-gray bg-white text-sm">
+    <div class="box-white text-sm">
       <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
       <?php foreach (Config::get('facets.default') as $key => $topic) { ?>
         <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $topic['url']; ?>">
@@ -127,7 +127,7 @@
 
   <div class="sticky top-sm">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="box br-box-gray bg-white">
+      <div class="box-white">
         <ul class="list-none text-sm">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <li class="mb15">

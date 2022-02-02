@@ -1,19 +1,21 @@
+<ol class="list-items">
 <?php foreach ($data['items'] as $key => $item) { ?>
+  
   <?php if ($item['item_published'] == 1) { ?>
-    <div class="pt20 pb5 flex flex-row gap-2">
-      <div class="mr20 w200 mb-none">
-        <?= website_img($item['item_url_domain'], 'thumbs', $item['item_title_url'], 'mr5 w200 box-shadow'); ?>
+    <li>
+      <div class="list-items__thumb mb-none">
+        <?= website_img($item['item_url_domain'], 'thumbs', $item['item_title_url'], 'list-items__thumb-image'); ?>
       </div>
-      <div class="mr20 flex-auto">
+      <div class="list-items__description">
         <a href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
           <h2><?= $item['item_title_url']; ?></h2>
         </a>
-        <div class="mt5 mb15 max-w640">
+        <div class="list-items__text">
           <?= $item['item_content_url']; ?>
         </div>
-        <div class="flex justify-between flex-row gap-2 items-center max-w640">
-          <div class="green-600 text-sm">
-            <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'mr5 w20 h20'); ?>
+        <div class="list-items__footer">
+          <div class="green-600"> 
+            <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>
             <?= $item['item_url_domain']; ?>
             <?php if ($item['item_github_url']) { ?>
               <a class="ml15 gray-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
@@ -26,16 +28,15 @@
                 <i class="bi bi-pencil text-sm"></i>
               </a>
             <?php } ?>
-            <div class="lowercase">
-              <?= html_facet($item['facet_list'], 'web.topic', 'gray-600 mr15'); ?>
-            </div>
-          </div>
-          <div class="hidden lowercase ml-auto pr10">
+            <?= html_facet($item['facet_list'], 'web.topic', 'gray-600 mr15'); ?>
+           </div> 
+           <div class="flex right gray-400">
+            <?= favorite($user['id'], $item['item_id'], 'item', $item['favorite_tid'], 'ps', 'mr20'); ?>
             <?= votes($user['id'], $item, 'item', 'ps', 'mr5'); ?>
           </div>
         </div>
       </div>
-    </div>
+    </li>
   <?php } else { ?>
     <?php if (UserData::checkAdmin()) { ?>
       <div class="mt15 mb15">
@@ -48,3 +49,4 @@
     <?php } ?>
   <?php } ?>
 <?php } ?>
+</ol>

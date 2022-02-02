@@ -10,11 +10,11 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex-white">
     <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
     <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
   </div>
-  <div class="bg-white br-box-gray pt15 pr15 pb5 pl15 box">
+  <div class="box-white">
     <form action="<?= getUrlByName('setting.notif.edit'); ?>" method="post">
       <?php csrf_field(); ?>
       <b class="mb15 block"><?= Translate::get('e-mail notification'); ?>?</b>

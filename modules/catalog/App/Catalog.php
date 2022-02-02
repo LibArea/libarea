@@ -116,4 +116,10 @@ class Catalog
             ]
         );
     }
+    
+    public function getItemId($id)
+    {
+       return  WebModel::getItemId($id);
+    }
+    
 }

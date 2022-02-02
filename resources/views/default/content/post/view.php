@@ -32,9 +32,7 @@
           <?php } ?>
         </div>
 
-        <h1 class="mb0">
-          <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
-        </h1>
+        <h1><?= $post['post_title']; ?></h1>
         <div class="text-sm lowercase flex gray-400">
           <?= $post['post_date_lang']; ?>
           <?php if ($post['modified']) { ?>
@@ -232,7 +230,7 @@
 <aside class="col-span-3 relative br-rd5 mb-none">
 
   <?php if (!empty($data['facets'])) { ?>
-    <div class="br-box-gray bg-white br-rd5 mb15 p15">
+    <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['facets'] as $topic) { ?>
         <div class="mb10">
@@ -257,17 +255,17 @@
   <?php } ?>
 
   <?php if ($post['post_content_img']) { ?>
-    <div class="br-box-gray bg-white br-rd5 mb15 post-img">
+    <div class="box-white post-img">
       <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 p15 br-rd5', 'cover', $post['post_content_img']); ?>
     </div>
   <?php } ?>
-  <div class="share-btn br-box-gray bg-white br-rd5 mb15 p15 text-2xl center">
+  <div class="share-btn box-white text-2xl center">
     <a class="p15 gray-400" data-id="fb"><i class="bi bi-facebook"></i></a>
     <a class="p15 gray-400" data-id="vk">VK</a>
     <a class="p15 gray-400" data-id="tw"><i class="bi bi-twitter"></i></a>
   </div>
   <?php if ($data['recommend']) { ?>
-    <div class="br-box-gray bg-white br-rd5 mb15 sticky top-sm p15">
+    <div class="box-white sticky top-sm">
       <h3 class="uppercase-box"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex text-sm">

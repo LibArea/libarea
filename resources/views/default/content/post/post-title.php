@@ -1,5 +1,3 @@
-<?= $post['post_title']; ?>
-
 <?php if ($post['post_is_deleted'] == 1) { ?><i class="bi bi-trash red-500"></i><?php } ?>
 <?php if ($post['post_closed'] == 1) { ?><i class="bi bi-lock gray"></i><?php } ?>
 <?php if ($post['post_top'] == 1) { ?><i class="bi bi-pin-angle sky-500"></i><?php } ?>

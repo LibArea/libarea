@@ -232,7 +232,7 @@ function favorite($user_id, $content_id, $type, $favorite_tid, $ind, $css = '')
     if ($user_id > 0) {
         $blue = $favorite_tid ? 'sky-500' : '';
         $my   = $favorite_tid ? 'bi bi-bookmark-dash' : 'bi-bookmark-plus';
-        $html .= '<span id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . ' gray-600" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . ' middle"></i></span>';
+        $html .= '<span id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . ' middle"></i></span>';
     } else {
         $html .= '<span class="click-no-auth gray-400 ' . $css . '">
                     <i class="bi bi-bookmark-plus middle"></i>

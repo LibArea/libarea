@@ -30,6 +30,7 @@
         <?php } ?>
         <a href="<?= $post_url; ?>">
           <span class="font-normal text-xl">
+            <?= $post['post_title']; ?>
             <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
           </span>
         </a>

@@ -11,12 +11,12 @@
 
 <main class="col-span-7 mb-col-12">
 
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex-white">
     <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
     <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
   </div>
 
-  <div class="bg-white br-box-gray pt15 pr15 pb5 pl15 box setting avatar">
+  <div class="box-white setting avatar">
     <form method="POST" action="<?= getUrlByName('setting.avatar.edit'); ?>" enctype="multipart/form-data">
       <?= csrf_field() ?>
 

@@ -822,7 +822,24 @@ ALTER TABLE `users_action_logs`
 
 ALTER TABLE `users_action_logs`
   MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;  
+
+
+--
+-- Структура и индексы таблицы `items_signed`
+--
+
+CREATE TABLE `items_signed` (
+  `signed_id` int(11) NOT NULL,
+  `signed_item_id` int(11) NOT NULL,
+  `signed_user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `items_signed`
+  ADD PRIMARY KEY (`signed_id`);
   
+ALTER TABLE `items_signed`
+  MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT;  
+
 --
 -- Индексы сохранённых таблиц
 --

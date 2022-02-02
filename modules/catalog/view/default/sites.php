@@ -26,7 +26,7 @@
       <?php } ?>
     </h1>
 
-  <div class="mb20 p15 bg-yellow-50">
+  <div class="mb20 p15 bg-violet-50">
     <?php if ($data['low_topics']) { ?>
       <div class="grid grid-cols-3 gap-2 justify-between mb10">
         <?php foreach ($data['low_topics'] as $lt) { ?>

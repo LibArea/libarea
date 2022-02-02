@@ -1,5 +1,5 @@
 <?php if ($data['user']['id'] != 1) { ?>
-  <div class="box-white">
+  <div class="box-white bg-violet-50">
     <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
     <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
       <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'w30 h30 mr10'); ?>
@@ -9,7 +9,7 @@
 <?php } ?>
 
 <?php if ($data['facet']['facet_is_web'] == 1) { ?>
-  <div class="box-white">
+  <div class="box-white bg-violet-50">
     <a class="green-600" href="<?= getUrlByName('web.topic', ['slug' => $data['facet']['facet_slug']]); ?>">
       <i class="bi bi-link-45deg text-2xl middle"></i>
       <?= Translate::get('related sites'); ?>

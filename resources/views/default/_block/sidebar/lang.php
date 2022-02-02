@@ -1,10 +1,10 @@
 <aside class="col-span-3 relative br-rd5 mb-none">
   <?php if (!empty($lang)) { ?>
-    <div class="bg-white p15 br-box-gray">
+    <div class="box-white">
       <?= $lang; ?>...
     </div>
   <?php } ?>
-  <div class="box-flex bg-white br-box-gray p15">
+  <div class="box-flex-white">
     <div class="text-sm">
       <a class="inline gray-400" title="<?= Translate::get('help'); ?>" href="/info/<?= Config::get('facets.page-one'); ?>">
         <?= Translate::get('help'); ?>

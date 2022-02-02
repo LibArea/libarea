@@ -1,12 +1,9 @@
-  <div class="mt5 mr0 mb5 ml0 justify-betwee">
-      <?php foreach ($facets as $key => $facet) { ?>
-
+       <?php foreach ($facets as $key => $facet) { ?>
         <div class="w-100 mb20 mb-w-100 flex flex-row">
           <a title="<?= $facet['facet_title']; ?>" class="mr10" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
-            <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'w60 h60 br-box-gray br-rd-50'); ?>
+            <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'ava-lg mt10'); ?>
           </a>
           <div class="ml5 w-100">
-
             <?php if ($user['id']) { ?>
               <?php if ($facet['facet_user_id'] != $user['id']) { ?>
                 <?php if ($facet['signed_facet_id']) { ?>
@@ -42,4 +39,4 @@
           </div>
         </div>
       <?php } ?>
-  </div>
+  

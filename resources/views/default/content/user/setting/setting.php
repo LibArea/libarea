@@ -11,24 +11,22 @@
 
 <main class="col-span-7 mb-col-12">
 
-  <div class="bg-white flex flex-row center items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex-white">
     <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
     <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
   </div>
 
-  <div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
+  <div class="box-white">
     <form class="max-w640" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
-      <fieldset>
-        <?= user_avatar_img($data['user']['avatar'], 'small', $data['user']['login'], 'mr5 ml5 ava'); ?>
-        <span class="mr5 ml5">
-          <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
-            <?= $data['user']['login']; ?>
-          </a>
-        </span>
-      </fieldset>
-
+      <?= user_avatar_img($data['user']['avatar'], 'small', $data['user']['login'], 'mr5 ml5 ava'); ?>
+      <span class="mr5 ml5">
+        <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+          <?= $data['user']['login']; ?>
+        </a>
+      </span>
+ 
       <fieldset>
         <span class="name gray">E-mail:</span>
         <span class="mr5 ml5"><?= $data['user']['email']; ?></span>

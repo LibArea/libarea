@@ -51,7 +51,7 @@
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
-    <div class="box br-box-gray box-shadow-all bg-white text-sm">
+    <div class="box-white bg-violet-50 text-sm">
       <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
 
       <?php
@@ -95,7 +95,7 @@
       <?php } ?>
     </div>
   <?php } else { ?>
-    <div class="box br-box-gray box-shadow-all bg-white text-sm">
+    <div class="box-white bg-violet-50 text-sm">
       <div class="uppercase gray mt5 mb5">
         <?= Translate::get('topics'); ?>
       </div>
@@ -110,7 +110,7 @@
 
   <div class="sticky top-sm">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="box br-box-gray box-shadow-all bg-white">
+      <div class="box-white bg-violet-50">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <div class="mt15 mr0 mb15 ml0">
             <div class="text-sm gray-400">

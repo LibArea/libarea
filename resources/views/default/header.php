@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?37">
+  <link rel="stylesheet" href="/assets/css/style.css?39">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
@@ -23,7 +23,7 @@
 <body class="<?= $css; ?><?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white box-shadow <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
-    <div class="box-flex max-width mr-auto pl10 pr10 h50">
+    <div class="box-flex-white pl10 pr10 h50">
       <div class="flex items-center">
         <div data-template="one" class="tippy pl0 pr10 none mb-block">
            <i class="bi bi-list gray-400 text-xl"></i>

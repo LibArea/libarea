@@ -1,4 +1,4 @@
- <div class="flex flex-row flex-wrap mt15">
+ <div class="flex flex-row flex-wrap">
    <?php foreach ($facets as $key => $facet) { ?>
      <div class="w-50 mb20 mb-w-100 flex flex-row<?php if (($key + 1) % 2 == 0) { ?> pl20 mb-pl-0<?php } ?>">
        <a title="<?= $facet['facet_title']; ?>" class="mr10" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">

@@ -28,25 +28,47 @@
 
   <?php if (!empty($data['favorites'])) { ?>
     <?php foreach ($data['favorites'] as $content) { ?>
-      <div class="bg-white br-rd5 br-box-gray mt10 pt5 pr15 pb15 pl15">
-        <div class="pt5 pr15 pb0 text-sm flex">
-          <?= user_avatar_img($content['post']['avatar'], 'small', $content['post']['login'], 'w20 h20 mr10'); ?>
-          <?= $content['post']['login']; ?>
-          <span class="ml10 gray">
-            <?= $content['post']['post_date']; ?>
-          </span>
-        </div>
-        <h3 class="text-2xl mt0 mr15 mb0">
+      <div class="bg-white br-rd5 br-box-gray mt10 p15">
+        <h3>
           <?php if ($content['favorite_type'] == 1) {  ?>
+            <div class="pr15 text-sm flex gray-400">
+              <?= user_avatar_img($content['post']['avatar'], 'small', $content['post']['login'], 'w20 h20 mr10'); ?>
+              <?= $content['post']['login']; ?>
+              <span class="ml10">
+                <?= $content['post']['post_date']; ?>
+              </span>
+            </div>
             <span id="favorite" class="add-favorite text-sm ml15 right" data-front="personal" data-id="<?= $content['post_id']; ?>" data-type="post">
-              <i class="bi bi-trash text-2xl red-500"></i>
+              <i class="bi bi-trash red-500"></i>
             </span>
-            <a class="font-normal black text-2xl mt0 mb0" href="<?= getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]); ?>">
+            <a class="font-normal black" href="<?= getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]); ?>">
               <?= $content['post_title']; ?>
             </a>
+          <?php } elseif ($content['favorite_type'] == 3) { ?>
+            <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $content['item_id']; ?>" data-type="item">
+              <i class="bi bi-trash red-500"></i>
+            </span>
+            <a class="black" href="<?= getUrlByName('web.website', ['slug' => $content['item_url_domain']]); ?>#answer_<?= $content['answer_id']; ?>">
+              <?= $content['item_title_url']; ?>
+            </a>
+           <div class="green-600 text-sm">
+            <?= website_img($content['item_url_domain'], 'favicon', $content['item_url_domain'], 'mr5 w20 h20'); ?>
+            <?= $content['item_url_domain']; ?>
+            <a target="_blank" href="<?= $content['item_url']; ?>" rel="nofollow noreferrer ugc">
+              <i class="bi bi-folder-symlink middle ml15 mr5"></i>
+              <?= $content['item_url']; ?>
+            </a>
+           </div> 
           <?php } else { ?>
-            <span id="fav-comm" class="add-favorite right  ml15 text-sm" data-front="personal" data-id="<?= $content['answer_id']; ?>" data-type="answer">
-              <i class="bi bi-trash text-2xl red-500"></i>
+            <div class="pr15 text-sm flex gray-400">
+              <?= user_avatar_img($content['post']['avatar'], 'small', $content['post']['login'], 'w20 h20 mr10'); ?>
+              <?= $content['post']['login']; ?>
+              <span class="ml10">
+                <?= $content['post']['post_date']; ?>
+              </span>
+            </div>
+            <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $content['answer_id']; ?>" data-type="answer">
+              <i class="bi bi-trash red-500"></i>
             </span>
             <a class="black" href="<?= getUrlByName('post', ['id' => $content['post']['post_id'], 'slug' => $content['post']['post_slug']]); ?>#answer_<?= $content['answer_id']; ?>">
               <?= $content['post']['post_title']; ?>

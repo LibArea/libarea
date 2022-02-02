@@ -6,7 +6,7 @@
       <?= Tpl::import('/_block/no-login-screensaver'); ?>
     <?php } ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
-    <div class="box br-box-gray bg-white article_<?= $post['post_id']; ?>">
+    <div class="box-white article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') { ?>
         <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id text-sm right">
           <?= Translate::get('unsubscribe'); ?>
@@ -14,7 +14,7 @@
       <?php } ?>
       <div class="flex mb10 relative">
         <div class="user-card" data-content_id="<?= $post['post_id']; ?>" data-user_id="<?= $post['id']; ?>">
-          <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w40 h40 br-rd-50 mr5'); ?>
+          <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'ava-base mr5'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
         <a class="flex black" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
@@ -29,9 +29,8 @@
       <div class="flex flex-row flex-auto">
         <div class="w-auto mr20 mb-mr-5">
           <a class="black" href="<?= $post_url; ?>">
-            <h2 class="mb0">
-              <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
-            </h2>
+            <h2><?= $post['post_title']; ?></h2>
+            <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
           </a>
           <div class="lowercase">
             <?= html_facet($post['facet_list'], 'blog', 'text-sm mr15'); ?>

@@ -10,7 +10,6 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
     // Посты на центральной странице
     public static function feed($page, $limit, $topics_user, $user, $type)
     {
-        $uid = $user['id'];
         $result = [];
         foreach ($topics_user as $ind => $row) {
             $result[$ind] = $row['signed_facet_id'];
@@ -18,7 +17,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
         $string = "";
         if ($type != 'main.all' && $type != 'main.top') {
-            if (!$uid) {
+            if (!$user['id']) {
                 $string = "";
             } else {
                 $string = "AND relation_facet_id IN(0)";
@@ -85,13 +84,13 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                  ON rel.relation_post_id= post_id
                 LEFT JOIN users ON id = post_user_id
                 LEFT JOIN favorites ON favorite_tid = post_id 
-                    AND favorite_user_id = $uid AND favorite_type = 1  
+                    AND favorite_user_id = :uid AND favorite_type = 1  
                 LEFT JOIN votes_post 
-                    ON votes_post_item_id = post_id AND votes_post_user_id = $uid
+                    ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
 
                 WHERE post_type != 'page' AND post_draft = 0 $string $display $sort LIMIT $start, $limit";
 
-        return DB::run($sql)->fetchAll();
+        return DB::run($sql, ['uid' => $user['id'], 'uid2' => $user['id']])->fetchAll();
     }
 
     public static function feedCount($topics_user, $user, $type)

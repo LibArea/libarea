@@ -2,7 +2,7 @@
 <div id="fetch" class="col-span-2 mb-none">
   <div id="find"></div>
 </div>
-<main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray p15">
+<main class="col-span-8 mb-col-12 box-white">
   <div class="mb10">
     <form class="flex mb15 text-xl" method="post" action="<?= getUrlByName('search'); ?>">
       <input type="text" name="q" class="h40 bg-gray-100 p15 br-rd5 gray w-100" placeholder="<?= $data['query']; ?>">

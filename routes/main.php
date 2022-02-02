@@ -12,6 +12,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/post/delete/profile')->controller('Post\PostController@deletePostProfile');
         Route::get('/favorite/post')->controller('FavoriteController', ['post']);
         Route::get('/favorite/answer')->controller('FavoriteController', ['answer']);
+        Route::get('/favorite/item')->controller('FavoriteController', ['item']);
         Route::get('/focus/{type}')->controller('SubscriptionController')->where(['type' => '[a-z]+']);
         // @ users | posts | topics
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);

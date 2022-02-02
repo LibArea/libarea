@@ -20,7 +20,7 @@ h3,
 h4,
 h5 {
   font-weight: 500;
-  margin: 0 0 10px 0;
+  margin: 0;
 }
 
 footer {
@@ -28,6 +28,7 @@ footer {
   color: var(--gray-600);
   padding: 15px;
   overflow: hidden;
+  margin-top: 15px;
 }
 
 footer .icon {
@@ -100,13 +101,99 @@ details[open] > summary {
   font-size: 21px;
 }
 
+
+.favicons {
+  height: 18px;
+  width: 18px;
+}
+
+.ava-sm {
+  height: 21px;
+  width: 21px;
+  border-radius: 50%;
+}
+
+.ava-base {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.ava-lg {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+
+.ava-xl {
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+}
+
+/* web catalog */ 
+.list-items {
+  margin: 0;
+  min-width: 426px;
+  padding: 0 30px 0 0;
+  list-style: none;
+}
+
+.list-items li {
+  position: relative;
+  display: table;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 28px
+}
+
+.list-items__thumb {
+  width: 200px;
+  margin-right: 20px;
+}
+
+.list-items__description {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.list-items__thumb-image {
+  box-sizing: border-box;
+  width: 200px;
+  height: 140px;
+  box-shadow: 0 2px 4px -1px rgb(0 0 0 / 15%);
+}
+
+.list-items__text {
+  color: var(--gray-600);
+}
+
+.list-items__footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-top: 10px;
+}
+/* end catalog */
+
+
 .box {
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 15px;
 }
 
-.box-flex {
+.box-white {
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid var(--br-box-gray);
+  background-color: var(--white);
+}
+
+.box-flex-white  {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -114,6 +201,8 @@ details[open] > summary {
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 15px;
+  border: 1px solid var(--br-box-gray);
+  background-color: var(--white);
 }
 
 .uppercase-box {
@@ -121,6 +210,7 @@ details[open] > summary {
   font-size: 0.875rem;
   text-transform: uppercase;
   font-weight: 400;
+  margin-bottom: 10px;
 }
 
 .page {

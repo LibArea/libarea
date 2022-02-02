@@ -156,11 +156,16 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     post_answers_count,
                     answer_id,
                     answer_post_id,
-                    answer_content
+                    answer_content,
+                    item_id,
+                    item_title_url,
+                    item_url,
+                    item_url_domain
                         FROM favorites
                         LEFT JOIN users ON id = favorite_user_id
                         LEFT JOIN posts ON post_id = favorite_tid AND favorite_type = 1
                         LEFT JOIN answers ON answer_id = favorite_tid AND favorite_type = 2
+                        LEFT JOIN items ON item_id = favorite_tid AND favorite_type = 3
                         WHERE favorite_user_id = :uid ORDER BY favorite_id DESC LIMIT 100";
 
         return DB::run($sql, ['uid' => $uid])->fetchAll();
