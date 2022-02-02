@@ -10,7 +10,7 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white box-flex br-box-gray">
+  <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <ul class="flex flex-row list-none text-sm">
 

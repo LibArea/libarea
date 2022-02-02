@@ -1,9 +1,6 @@
 <?php
   Translate::setLang($user['lang']);
   $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
-  $css      = $data['type'] == 'web' || $data['type'] == 'page'  ? '' : 'bg-fons';
-  $type     = $data['type'] ?? false;
-  $facet    = $data['facet'] ?? false; 
 ?>
 
 <!DOCTYPE html>
@@ -15,104 +12,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?21">
+  <link rel="stylesheet" href="/assets/css/style.css?41">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
-<body class="<?= $css; ?><?php if ($dark == 'dark') { ?> dark<?php } ?>">
-
-  <header class="bg-white box-shadow <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
-    <div class="box-flex 3mr-auto p15 h50">
-      <div class="flex items-center">
-        <menu data-template="one" class="tippy pl0 pr10 none mb-block">
-          <div class="relative w-auto">
-            <i class="bi bi-list gray-400 text-xl"></i>
-          </div>
-         </menu> 
-         <div id="one" style="display: none;" class="box-shadow2 z-40 bg-white br-rd3">
-           <nav>
-             <?= tabs_nav(
-               'menu',
-               $type,
-               $user,
-               $pages = Config::get('menu.mobile'),
-             ); ?>
-           </nav>
-          </div>
-        <a title="<?= Translate::get('home'); ?>" class="logo black" href="/">
-          <?= Config::get('meta.name'); ?>
-        </a>
-      </div>
-      <?php if (Request::getUri() != getUrlByName('search')) { ?>
-        <div class="p5 ml30 mr20 relative mb-none w-100">
-          <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
-            <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="bg-gray-100 br-rd20 pl15 w-100 h30 gray">
-            <input name="token" value="<?= csrf_token(); ?>" type="hidden">
-            <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
-          </form>
-          <div class="absolute box-shadow bg-white p15 pt0 mt5 max-w460 br-rd3 none" id="search_items"></div>
-        </div>
-      <?php } ?>
-      <?php if (!UserData::checkActiveUser()) { ?>
+<body <?php if ($dark == 'dark') { ?>class="dark"<?php } ?>>
+<header>
+  <div class="mr-auto item-search mb-p-10">
+    <a title="<?= Translate::get('home'); ?>" class="logo sky-500 mt30 mb-none" href="/">
+      <?= Config::get('meta.name'); ?>
+    </a>
+    <div class="w-100 ml45 mb-ml-0">
+      <div>
+        <a class="item-search__url" href="<?= getUrlByName('web.all'); ?>">Каталог</a>
         <div class="flex right col-span-4 items-center">
-          <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml-10">
+          <div id="toggledark" class="header-menu-item mb-none only-icon mr20 mb-ml-10">
             <i class="bi bi-brightness-high gray-400 text-xl"></i>
           </div>
-          <?php if (Config::get('general.invite') == false) { ?>
-            <a class="register gray ml30 mr15 mb-ml-10 mb-mr-5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
-              <?= Translate::get('sign up'); ?>
-            </a>
-          <?php } ?>
-          <a class="btn btn-outline-primary ml20" title="<?= Translate::get('sign.in'); ?>" href="<?= getUrlByName('login'); ?>">
-            <?= Translate::get('sign.in'); ?>
-          </a>
-        </div>
-      <?php } else { ?>
-        <div class="col-span-4">
-          <div class="flex right ml30 mb-ml-10 items-center">
-
-            <?php if (UserData::checkAdmin()) { ?>
-              <a title="<?= Translate::get('add'); ?>" class="right ml15" href="<?= getUrlByName('site.add'); ?>">
-                <i class="bi bi-plus-lg middle"></i>
+          <?php if (!UserData::checkActiveUser()) { ?>
+            <?php if (Config::get('general.invite') == false) { ?>
+              <a class="register gray-400 ml30 mr15 mb-ml-10 mb-mr-5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
+                <?= Translate::get('sign up'); ?>
               </a>
             <?php } ?>
-            
-            <div id="toggledark" class="only-icon p10 ml20 mb-ml-10">
-              <i class="bi bi-brightness-high gray-400 text-xl"></i>
-            </div>
-
-            <a class="gray-400 p10 text-xl ml20 mb-ml-10" href="<?= getUrlByName('notifications'); ?>">
-              <?php $notif = \App\Controllers\NotificationsController::setBell($user['id']); ?>
-              <?php if (!empty($notif)) { ?>
-                <?php if ($notif['notification_action_type'] == 1) { ?>
-                  <i class="bi bi-envelope red-500"></i>
-                <?php } else { ?>
-                  <i class="bi bi-bell-fill red-500"></i>
-                <?php } ?>
-              <?php } else { ?>
-                <i class="bi bi-bell"></i>
-              <?php } ?>
+            <a class="gray-400 mr10 ml10" title="<?= Translate::get('sign.in'); ?>" href="<?= getUrlByName('login'); ?>">
+              <?= Translate::get('sign.in'); ?>
             </a>
-
-            <menu data-template="two" class="tippy ml20 mb-ml-10">
-              <div class="relative w-auto">
-                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
-              </div>
-            </menu>  
-            <div id="two" style="display: none;" class="bg-white br-rd3">
-              <nav class="p0 pr20 m0">
-                <?= tabs_nav(
-                  'menu',
-                  $type,
-                  $user,
-                  $pages = Config::get('menu.user'),
-                ); ?>
-              </nav>
-            </div>
-             
-          </div>
+ 
+          <?php } else { ?>
+        
+            <?php if (UserData::checkAdmin()) { ?>
+              <a title="<?= Translate::get('add'); ?>" class="right mr20 ml20" href="<?= getUrlByName('site.add'); ?>">
+                <i class="bi bi-plus-lg middle"></i>
+              </a>
+              <a class="right mr10 ml20" href="<?= getUrlByName('web.deleted'); ?>">
+                <?= Translate::get('deleted'); ?>
+              </a>
+            <?php } ?>
+          <?php } ?>
         </div>
-      <?php }  ?>
+      </div>
+      <form method="post" action="<?= getUrlByName('search'); ?>">
+        <input type="text" name="q" placeholder="<?= Translate::get('to find'); ?>" class="item-search__input">
+        <input name="token" value="<?= csrf_token(); ?>" type="hidden">
+        <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
+      </form>
     </div>
-  </header>
+  </div>
+</header>

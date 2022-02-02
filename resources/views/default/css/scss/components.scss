@@ -134,7 +134,7 @@ details[open] > summary {
 /* web catalog */ 
 .list-items {
   margin: 0;
-  min-width: 426px;
+  max-width: 726px;
   padding: 0 30px 0 0;
   list-style: none;
 }
@@ -176,6 +176,31 @@ details[open] > summary {
   font-size: 0.875rem;
   margin-top: 10px;
 }
+
+.item-search {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 60px 30px 20px;
+}
+
+.item-search__input {
+  width: 100%;
+  border-radius: 5px;
+  height: 50px;
+  border: 9px solid #eee;
+  padding-left: 15px;
+  color: var(--gray-700);
+}
+
+.item-search__url{
+  text-decoration: underline;
+  font-size: 1.25rem;
+  margin-left: 5px;
+}
+
 /* end catalog */
 
 

@@ -18,7 +18,7 @@
             <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>
             <?= $item['item_url_domain']; ?>
             <?php if ($item['item_github_url']) { ?>
-              <a class="ml15 gray-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
+              <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
                 <i class="bi bi-github text-sm mr5"></i>
                 <?= $item['item_title_soft']; ?> <?= Translate::get('on'); ?> GitHub
               </a>
