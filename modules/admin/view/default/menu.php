@@ -44,7 +44,7 @@
 
 <main class="col-span-10 mb-col-12">
   <?php if ($data['type'] != 'admin') { ?>
-    <div class="bg-white flex flex-row items-center justify-between br-box-gray p15 mb15">
+    <div class="box-flex-white">
       <p class="m0">
         <a href="<?= getUrlByName('admin'); ?>"><?= Translate::get('admin'); ?></a> /
         <span class="red-500"><?= Translate::get($data['type']); ?></span>

@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?41">
+  <link rel="stylesheet" href="/assets/css/style.css?42">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
@@ -24,7 +24,7 @@
       <?= Config::get('meta.name'); ?>
     </a>
     <div class="w-100 ml45 mb-ml-0">
-      <div>
+      <div data-template="one" id="find tippy">
         <a class="item-search__url" href="<?= getUrlByName('web.all'); ?>">Каталог</a>
         <div class="flex right col-span-4 items-center">
           <div id="toggledark" class="header-menu-item mb-none only-icon mr20 mb-ml-10">

@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="bg-white br-box-gray p15">
+<div class="box-white">
   <label><?= Translate::get('build'); ?> CSS</label>
   <form action="<?= getUrlByName('admin.build.css'); ?>">
     <?= sumbit(Translate::get('build')); ?>

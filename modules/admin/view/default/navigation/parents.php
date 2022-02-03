@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="bg-white br-box-gray p15  text-sm">
+<div class="box-white">
   <form action="<?= getUrlByName('admin.navigation.edit'); ?>" method="post">
     <?= csrf_field() ?>
     <input type="hidden" name="upsub" value="0">

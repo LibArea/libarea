@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="bg-white br-box-gray p15  text-sm">
+<div class="box-white">
   <a href="<?= getUrlByName('admin.navigation'); ?>" class="btn btn-primary mb15">
     << <?= Translate::get('back'); ?> </a>
 

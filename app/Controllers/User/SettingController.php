@@ -46,7 +46,7 @@ class SettingController extends MainController
 
         $redirect   = getUrlByName('setting', ['login' => $this->user['login']]);
 
-        Validation::Length($name, Translate::get('name'), '3', '11', $redirect);
+        Validation::Length($name, Translate::get('name'), '0', '11', $redirect);
         Validation::Length($about, Translate::get('about me'), '0', '255', $redirect);
 
         if ($public_email) {

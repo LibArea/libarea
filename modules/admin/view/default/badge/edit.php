@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="bg-white br-box-gray p15 max-w780">
+<div class="box-white">
   <form action="/admin/badge/edit/<?= $data['badge']['badge_id']; ?>" method="post">
     <?= csrf_field() ?>
     <div class="mb20">

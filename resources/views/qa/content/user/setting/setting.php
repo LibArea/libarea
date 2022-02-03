@@ -33,11 +33,9 @@
               'type'    => 'text',
               'name'    => 'name',
               'value'   => $data['user']['name'],
-              'min'     => 3,
+              'min'     => 0,
               'max'     => 11,
-              'help'    => '3 - 11 ' . Translate::get('characters'),
-              'red'     => 'red',
-
+              'help'    => '0 - 11 ' . Translate::get('characters'),
             ],
           ]
         ]

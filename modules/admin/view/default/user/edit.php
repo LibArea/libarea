@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="bg-white br-box-gray p15">
+<div class="box-white">
   <form action="/admin/user/edit/<?= $data['user']['id']; ?>" method="post">
     <?= csrf_field() ?>
     <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') { ?>
@@ -19,7 +19,7 @@
     <img width="325" class="right" src="<?= cover_url($data['user']['cover_art'], 'user'); ?>">
     <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'avatar'); ?>
 
-    <div class="mb20">
+    <fieldset>
       <label class="block" for="post_title">
         Id<?= $data['user']['id']; ?> |
         <a target="_blank" rel="noopener noreferrer" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
@@ -39,11 +39,11 @@
       <?php } else { ?>
         ---
       <?php } ?>
-    </div>
-    <div class="mb20">
+    </fieldset>
+    <fieldset>
       <i class="bi bi-eye"></i> <?= $data['user']['hits_count']; ?>
-    </div>
-    <div class="mb20">
+    </fieldset>
+    <fieldset>
       <label class="block" for="post_title"><?= Translate::get('sign up'); ?></label>
       <?= $data['user']['created_at']; ?> |
       <?= $data['user']['reg_ip']; ?>
@@ -51,9 +51,9 @@
         <sup class="red-500">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
       <?php } ?>
       (<?= Translate::get('ed') ?>. <?= $data['user']['updated_at']; ?>)
-    </div>
+    </fieldset>
     <hr>
-    <div class="mb20">
+   <fieldset>
       <?php if ($data['user']['limiting_mode'] == 1) { ?>
         <span class="red-500"><?= Translate::get('dumb mode'); ?>!</span><br>
       <?php } ?>
@@ -62,9 +62,9 @@
       </label>
       <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
       <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
-    </div>
+    </fieldset>
     <hr>
-    <div class="mb20">
+    <fieldset>
       <?php if ($data['count']['count_posts'] != 0) { ?>
         <label class="required"><?= Translate::get('posts'); ?>:</label>
         <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('posts'); ?> <?= $data['user']['login']; ?>" href="<?= getUrlByName('profile.posts', ['login' => $data['user']['login']]); ?>">
@@ -87,14 +87,14 @@
       <?php } else { ?>
         ---
       <?php } ?>
-    </div>
+    </fieldset>
     <hr>
-    <div class="mb20">
+    <fieldset>
       <a class="text-sm" href="/admin/badges/user/add/<?= $data['user']['id']; ?>">
         + <?= Translate::get('reward the user'); ?>
       </a>
-    </div>
-    <div class="mb20">
+    </fieldset>
+    <fieldset>
       <label class="block" for="post_title"><?= Translate::get('badges'); ?></label>
       <?php if ($data['user']['badges']) { ?>
         <div class="text-2xl">
@@ -110,23 +110,23 @@
       <?php } else { ?>
         ---
       <?php } ?>
-    </div>
-    <div class="mb20">
+    </fieldset>
+    <fieldset>
       <label class="block" for="post_title"><?= Translate::get('whisper'); ?></label>
       <input class="w-100 h30" type="text" name="whisper" value="<?= $data['user']['whisper']; ?>">
-    </div>
+    </fieldset>
     <hr>
-    <div class="mb20">
+    <fieldset>
       <label class="block" for="post_title">E-mail<sup class="red">*</sup></label>
       <input class="w-100 h30" type="text" name="email" value="<?= $data['user']['email']; ?>" required>
-    </div>
-    <div class="mb20">
+    </fieldset>
+    <fieldset>
       <label class="block" for="post_content"><?= Translate::get('email activated'); ?>?</label>
       <input type="radio" name="activated" <?php if ($data['user']['activated'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
       <input type="radio" name="activated" <?php if ($data['user']['activated'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
-    </div>
+    </fieldset>
     <hr>
-    <div class="mb20">
+    <fieldset>
       <label class="block" for="post_title">TL</label>
       <select name="trust_level">
         <?php for ($i = 0; $i <= 5; $i++) {  ?>
@@ -135,29 +135,29 @@
           </option>
         <?php } ?>
       </select>
-    </div>
-    <div class="mb20">
+    </fieldset>
+    <fieldset>
       <label class="block" for="post_title"><?= Translate::get('nickname'); ?>: /u/**<sup class="red">*</sup></label>
       <input class="w-100 h30" type="text" name="login" value="<?= $data['user']['login']; ?>" required>
-    </div>
-    <div class="mb20">
-      <label class="block" for="post_title"><?= Translate::get('name'); ?><sup class="red">*</sup></label>
+    </fieldset>
+    <fieldset>
+      <label class="block" for="post_title"><?= Translate::get('name'); ?></label>
       <input class="w-100 h30" type="text" name="name" value="<?= $data['user']['name']; ?>">
-    </div>
-    <div class="mb20">
+    </fieldset>
+    <fieldset>
       <label class="block" for="post_title"><?= Translate::get('about me'); ?></label>
       <textarea class="add" name="about"><?= $data['user']['about']; ?></textarea>
-    </div>
+    </fieldset>
 
     <h3><?= Translate::get('contacts'); ?></h3>
     <?php foreach (Config::get('fields-profile') as $block) { ?>
-      <div class="mb20">
+      <fieldset>
         <label class="block" for="post_title"><?= $block['lang']; ?></label>
         <input class="w-100 h30" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
         <?php if ($block['help']) { ?>
           <div class="text-sm gray-400"><?= $block['help']; ?></div>
         <?php } ?>
-      </div>
+      </fieldset>
     <?php } ?>
 
     <?= sumbit(Translate::get('edit')); ?>

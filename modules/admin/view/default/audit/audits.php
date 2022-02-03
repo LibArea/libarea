@@ -19,7 +19,7 @@
   ]
 ); ?>
 
-<div class="bg-white br-box-gray p15">
+<div class="box-white">
   <?php if (!empty($data['audits'])) { ?>
     <table>
       <thead>

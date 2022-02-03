@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="bg-white br-box-gray p15">
+<div class="box-white">
   <form action="<?= getUrlByName('admin.navigation.create'); ?>" method="post">
     <?= csrf_field() ?>
 

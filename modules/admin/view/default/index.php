@@ -9,7 +9,7 @@
 
 <div class="w-100">
   <div class="w-50 left">
-    <div class="bg-white br-box-gray p15 mr20">
+    <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('content'); ?></h3>
       <?php
       $sections = [
@@ -57,7 +57,7 @@
     </div>
   </div>
   <div class="w-50 left">
-    <div class="bg-white br-box-gray p15 ml20">
+    <div class="box-white ml20">
       <h3 class="uppercase-box"><?= Translate::get('users'); ?></h3>
       <?php foreach ($data['last_visit'] as $user) { ?>
         <div class="gray">

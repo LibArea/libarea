@@ -19,7 +19,7 @@
   ]
 ); ?>
 
-<div class="bg-white br-box-gray p15">
+<div class="box-white">
   <?php if (!empty($data['domains'])) { ?>
     <?php foreach ($data['domains'] as $key => $item) { ?>
       <div class="domain-box">

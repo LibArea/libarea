@@ -18,7 +18,7 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
-<body class="bg-fons<?php if ($dark == 'dark') { ?> dark<?php } ?>">
+<body class="body-bg-fon<?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white br-bottom mt0 mb15">
     <div class="flex justify-between items-center max-width mr-auto h40">
