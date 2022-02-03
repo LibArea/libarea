@@ -101,8 +101,6 @@ class Catalog
             'url'        => getUrlByName('web.website', ['slug' => $item['item_url_domain']]),
         ];
         $desc       = $item['item_title_url'] . '. ' . $item['item_content_url'];
-        $topics     = WebModel::getItemTopic($item['item_id']);
-        $high_leve  = $topics[0]['value'] ?? 0;
 
         if ($item['item_post_related']) {
             $related_posts = PostModel::postRelated($item['item_post_related']);
@@ -117,9 +115,7 @@ class Catalog
                     'sheet'         => $sheet,
                     'type'          => 'web',
                     'item'          => $item,
-                    'topics'        => $topics,
                     'similar'       => WebModel::itemSimilar($item['item_id'], 3),
-                    'high_leve'     => FacetModel::getHighLevelList($high_leve),
                     'related_posts' => $related_posts ?? [],
                 ]
             ]

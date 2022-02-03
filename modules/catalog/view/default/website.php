@@ -1,12 +1,10 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <div id="contentWrapper">
   <div class="col-span-1 mb-none center mt30">
-
     <?= votes($user['id'], $data['item'], 'item', 'ps', 'text-2xl middle mt5', 'block'); ?>
     <div class="pt20">
       <?= favorite($user['id'], $data['item']['item_id'], 'item', $data['item']['favorite_tid'], 'ps', 'text-2xl'); ?>
     </div>
-
   </div>
   <main class="col-span-8 mb-col-12">
     <div class="bg-white items-center justify-between ml5 pr15 mb15">
@@ -22,26 +20,13 @@
         <?= website_img($data['item']['item_url_domain'], 'thumbs', $data['item']['item_title_url'], 'mr25 mt5 w400 mb-w-100 box-shadow'); ?>
         <div class="m15">
           <?= $data['item']['item_content_url']; ?>
-
           <div class="gray mt20 mb5">
             <a class="green-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
               <?= website_img($data['item']['item_url_domain'], 'favicon', $data['item']['item_url_domain'], 'favicons mr5'); ?>
               <?= $data['item']['item_url']; ?>
             </a>
           </div>
-
-          <?php if (!empty($data['topics'])) { ?>
-            <div class="mt20 mb20 mb-mb-5 lowercase">
-              <?php foreach ($data['topics'] as $topic) { ?>
-                <?php if ($topic['facet_is_web'] == 1) { ?>
-                  <a class="tag block" href="<?= getUrlByName('web.topic', ['slug' => $topic['facet_slug']]); ?>">
-                    <?= $topic['facet_title']; ?>
-                  </a>
-                <?php } ?>
-              <?php } ?>
-            </div>
-          <?php } ?>
-
+          <?= html_facet($data['item']['facet_list'], 'topic', 'web.topic', 'tag mr15'); ?>
         </div>
       </div>
       <?php if ($data['item']['item_is_soft'] == 1) { ?>
@@ -74,20 +59,6 @@
           <a class="inline mr20 mb15 block text-sm" href="<?= getUrlByName('web.website', ['slug' => $link['item_url_domain']]); ?>">
             <?= $link['item_title_url']; ?>
           </a>
-        <?php } ?>
-      <?php } else { ?>
-        ....
-      <?php } ?>
-    </div>
-    <div class="box bg-white br-box-gray box-shadow-all">
-      <?php if ($data['high_leve']) { ?>
-        <div class="gray"><?= Translate::get('see more'); ?></div>
-        <?php foreach ($data['high_leve'] as $rl) { ?>
-          <?php if ($rl['facet_is_web'] == 1) { ?>
-            <a class="inline mr20 text-sm black" href="<?= getUrlByName('web.topic', ['slug' => $rl['facet_slug']]); ?>">
-              <?= $rl['facet_title']; ?>
-            </a>
-          <?php } ?>
         <?php } ?>
       <?php } else { ?>
         ....

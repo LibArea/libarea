@@ -8,7 +8,11 @@
 
 return [
     'vvaa1.com',
+    'vixej.com',
     'slowimo.com',
+    'suspent.com',
+    'yopmail.com',
+    'jesdoit.com',
     'moxkid.com',
     'herrain.com',
     'noobf.com',

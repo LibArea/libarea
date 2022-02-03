@@ -195,8 +195,22 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_post_related,
                     item_is_deleted,
                     votes_item_user_id, votes_item_item_id,
+                    favorite_tid, favorite_user_id, favorite_type ,
+                    rel.*,
                     favorite_tid, favorite_user_id, favorite_type 
-                        FROM items 
+                        FROM items
+                        LEFT JOIN
+                        (
+                            SELECT 
+                                relation_item_id,
+                                GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                FROM facets  
+                                LEFT JOIN facets_items_relation 
+                                    on facet_id = relation_facet_id
+                                    WHERE facet_is_web = 1
+                                        GROUP BY relation_item_id
+                        ) AS rel
+                            ON rel.relation_item_id = item_id 
                         LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid
                         LEFT JOIN favorites ON favorite_tid = item_id 
                                 AND favorite_user_id = :uid_two AND favorite_type = 3
