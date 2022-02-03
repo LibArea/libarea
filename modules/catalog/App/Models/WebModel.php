@@ -195,7 +195,6 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_post_related,
                     item_is_deleted,
                     votes_item_user_id, votes_item_item_id,
-                    favorite_tid, favorite_user_id, favorite_type ,
                     rel.*,
                     favorite_tid, favorite_user_id, favorite_type 
                         FROM items

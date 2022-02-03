@@ -138,7 +138,7 @@ return [
             'icon'  => 'bi bi-people',
             'id'    => '',
         ], [
-            'url'   => getUrlByName('web'),
+            'url'   => getUrlByName('web.all'),
             'title' => Translate::get('domains'),
             'icon'  => 'bi bi-link-45deg',
             'id'    => '',
