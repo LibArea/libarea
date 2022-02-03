@@ -16,6 +16,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/focus/{type}')->controller('SubscriptionController')->where(['type' => '[a-z]+']);
         // @ users | posts | topics
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
+        // website
+        Route::get('/web/search')->module('catalog', 'App\Search', ['web.search'])->name('web.search');
         // @ post | answer | comment | link
         Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 
             Route::getProtect();

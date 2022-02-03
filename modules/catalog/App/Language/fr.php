@@ -9,6 +9,7 @@ $data = [
     'hosted.github'         => 'Il est hébergé sur GitHub',
     'url.address.github'    => 'URL du référentiel GitHub',
     'by.date'               => 'Par date',
+    'directory.info'        => 'Catalogue de sites classés par rubriques thématiques'
 ];
 
 return $data;

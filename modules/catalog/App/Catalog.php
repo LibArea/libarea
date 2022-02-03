@@ -19,9 +19,10 @@ class Catalog
         $this->user  = UserData::get();
     }
 
+    // List of sites by topic (sites by "category")
     // Лист сайтов по темам (сайты по "категориям")
     public function index($sheet)
-    { 
+    {
         $slug       = Request::get('slug');
         $page       = Request::getInt('page');
         $page       = $page == 0 ? 1 : $page;
@@ -29,7 +30,14 @@ class Catalog
         $topic = FacetModel::getFacet($slug, 'slug');
         pageError404($topic);
 
-        // Получим подтемы темы
+        // If the facet is not allowed in the site directory
+        // Если фасет не разрешен в каталоге сайтов
+        if ($topic['facet_is_web'] == 0) {
+            pageError404([]);
+        }
+
+        // We will get children
+        // Получим детей
         $topics =  FacetModel::getLowLevelList($topic['facet_id']);
 
         $items      = WebModel::feedItem($page, $this->limit, $topics, $this->user, $topic['facet_id'], $sheet);
@@ -64,6 +72,7 @@ class Catalog
         );
     }
 
+    // Detailed site page
     // Детальная страница сайта
     public function website($sheet)
     {
@@ -116,10 +125,9 @@ class Catalog
             ]
         );
     }
-    
+
     public function getItemId($id)
     {
-       return  WebModel::getItemId($id);
+        return  WebModel::getItemId($id);
     }
-    
 }

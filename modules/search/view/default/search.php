@@ -10,7 +10,7 @@
     </form>
 
     <?php foreach ($data['tags'] as $key => $topic) { ?>
-      <a class="flex justify-center pt5 pr5 pb5 br-rd20 black inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+      <a class="box-flex" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
         <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr5 br-box-gray'); ?>
         <?= $topic['facet_title']; ?>
       </a>

@@ -225,9 +225,12 @@ function getCookie(cname) {
 }
 
 // search
-document.getElementById('find').addEventListener('keydown', function () {
-  fetch_search();
-});
+let find = document.getElementById('find');
+if (find) {
+  find.addEventListener('keydown', function () {
+    fetch_search();
+  });
+}
 
 function fetch_search() {
   let val = document.getElementById("find").value;
@@ -297,6 +300,7 @@ function toggleType() {
     input.type = 'password';
   }
 }
+
 tippy('.tippy', {
   content(reference) {
     const id = reference.getAttribute('data-template');

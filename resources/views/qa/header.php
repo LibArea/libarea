@@ -35,7 +35,7 @@ $facet  = $data['facet'] ?? false; ?>
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
          </menu> 
-          <div id="one" style="display: none;" class="box-shadow2 z-40 bg-white br-rd3">
+          <div id="one" style="display: none;">
             <nav>
               <?= tabs_nav(
                 'menu',
@@ -94,7 +94,7 @@ $facet  = $data['facet'] ?? false; ?>
                 <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
               </div>
             </ag-menu>  
-            <div id="two" style="display: none;" class="bg-white br-rd3">
+            <div id="two" style="display: none;">
               <nav class="p0 pr20 m0">
                 <?= tabs_nav(
                   'menu',

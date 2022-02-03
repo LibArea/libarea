@@ -28,7 +28,7 @@
         <div data-template="one" class="tippy pl0 pr10 none mb-block">
            <i class="bi bi-list gray-400 text-xl"></i>
         </div> 
-        <div id="one" style="display: none;" class="box-shadow2 z-40 bg-white br-rd3">
+        <div id="one" style="display: none;">
            <nav>
              <?= tabs_nav(
                'menu',
@@ -92,7 +92,7 @@
             <div data-template="two" class="tippy ml45 mb-ml-10">
                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
             </div>  
-            <div id="two" style="display: none;" class="bg-white br-rd3">
+            <div id="two" style="display: none;">
               <nav class="p0 pr20 m0">
                 <?= tabs_nav(
                   'menu',

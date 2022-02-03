@@ -1,11 +1,9 @@
 <?php
 
 $data = [
-    'search'            => 'Поиск',
-    'to find'           => 'Найти',
-    'results.search'    => 'Результатов: примерно',
-    'no.search.results' => 'Поиск не дал никаких результатов. <br>Слишком короткий / длинный поисковый запрос',
-    'empty.request'     => 'Пустой поисковый запрос',
+    'results.search'    => '结果：大约',
+    'no.search.results' => '搜索没有产生任何结果 <br>太短/太长的搜索查询',
+    'empty.request'     => '空搜索查询',
 ];
 
 return $data;

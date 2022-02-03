@@ -9,6 +9,7 @@ $data = [
     'hosted.github'         => 'Este găzduit pe GitHub',
     'url.address.github'    => 'Adresa URL a depozitului GitHub',
     'by.date'               => 'După dată',
+    'directory.info'        => 'Catalog de site-uri sistematizate pe rubrici tematice'
 ];
 
 return $data;
