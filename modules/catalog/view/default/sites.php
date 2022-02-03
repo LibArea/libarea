@@ -1,11 +1,7 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <div class="ml15">
-  <?php if (UserData::checkAdmin()) { ?>
-    <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('site.add'); ?>">
-      <i class="bi bi-plus-lg middle"></i>
-    </a>
-  <?php } ?>
-  <a href="<?= getUrlByName('web'); ?>" class="text-sm gray-400"><?= Translate::get('websites'); ?></a>
+
+  <a href="<?= getUrlByName('web.all'); ?>" class="text-sm gray-400"><?= Translate::get('websites'); ?></a>
 
   <?php if (!empty($data['high_topics'][0])) {
     $site = $data['high_topics'][0];   ?>

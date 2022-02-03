@@ -364,17 +364,10 @@ $data = [
     'enter your password'   => 'Enter password',
     'enter content'         => 'Enter content',
 
-    /* web */
-    'news & media'          => 'News & Media',
-    'social network'        => 'Social network',
-    'internet'              => 'Internet',
-    'software'              => 'Software',
-    'reference info'        => 'Reference Information',
-    'related sites'         => 'Related Sites',
+    /* web / soft */
+    'related.sites'         => 'Sites connexes',
     'web-cat'               => 'Are there in the site directory?',
     'web-cat-help'          => 'In the site catalog, will be a Category (will become visible)',
-
-    /* soft */
     'soft-cat'              => 'Are there programs in the catalog?',
     'soft-cat-help'         => 'In the program directory, will be Category (will become visible)',
 

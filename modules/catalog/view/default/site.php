@@ -10,6 +10,7 @@
           <a href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
             <h2><?= $item['item_title_url']; ?></h2>
           </a>
+          <?= html_facet($item['facet_list'], 'topic', 'web.topic', 'tag mr15'); ?>
           <div class="list-items__text">
             <?= $item['item_content_url']; ?>
           </div>
@@ -24,11 +25,10 @@
                 </a>
               <?php } ?>
               <?php if (UserData::checkAdmin()) { ?>
-                <a class="ml15 inline" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
+                <a class="mr15 ml15 inline" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
                   <i class="bi bi-pencil text-sm"></i>
                 </a>
               <?php } ?>
-              <?= html_facet($item['facet_list'], 'web.topic', 'gray-600 mr15'); ?>
             </div>
             <div class="flex right gray-400">
               <?= favorite($user['id'], $item['item_id'], 'item', $item['favorite_tid'], 'ps', 'mr20'); ?>

@@ -1,10 +1,10 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <h1 class="ml20"><?= Translate::get('categories'); ?></h1>
 
-<div class="flex mb-block mb20 p20 bg-violet-50">
+<div class="grid grid-cols-3 gap-2 mb-block mb20 p20 bg-violet-50">
   <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
-    <div class="mr60 mb-pr-0">
-      <a class="pr20 underline-hover text-2xl block " href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
+    <div class="mb10">
+      <a class="underline-hover text-2xl block" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
         <?= $cat['title']; ?>
       </a>
       <?php if (!empty($cat['sub'])) { ?>
@@ -15,11 +15,12 @@
         <?php } ?>
       <?php } ?>
       <?php if (!empty($cat['help'])) { ?>
-        <div class="text-sm gray-400 mt5"><?= $cat['help']; ?>...</div>
+        <div class="text-sm gray-400"><?= $cat['help']; ?>...</div>
       <?php } ?>
     </div>
   <?php } ?>
 </div>
+
 <div class="grid grid-cols-12 gap-4">
   <main class="col-span-9 mb-col-12 ml20 mr20">
     <p>

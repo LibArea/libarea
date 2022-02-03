@@ -64,14 +64,15 @@
         'help'      => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
-
-      <?= Tpl::insert('/_block/form/select/select', [
-        'data'      => $data,
-        'action'    => 'edit',
-        'type'      => 'topic',
-        'title'     => Translate::get('topics'),
-        'help'      => Translate::get('necessarily'),
-        'red'       => 'red'
+     <?= Tpl::insert('/_block/form/select/select', [
+        'data'          => $data,
+        'action'        => 'edit',
+        'type'          => 'topic',
+        'title'         => Translate::get('topics'),
+        'required'      => false,
+        'maximum'       => 3,
+        'help'          => Translate::get('necessarily'),
+        'red'           => 'red'
       ]); ?>
 
       <h3 class="mb5"><?= Translate::get('soft'); ?></h3>

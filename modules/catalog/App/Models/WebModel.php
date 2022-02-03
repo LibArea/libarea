@@ -51,7 +51,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     public static function getItemsAllCount($sheet)
-    {
+    { 
         $sort = self::sorts($sheet);
         $sql = "SELECT item_id, item_is_deleted FROM items $sort";
 
@@ -306,10 +306,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT
                     facet_id as value,
                     facet_title,
-                    facet_slug,
                     facet_is_web,
-                    relation_facet_id,
-                    relation_item_id
+                    facet_slug
                         FROM facets  
                         INNER JOIN facets_items_relation ON relation_facet_id = facet_id
                             WHERE relation_item_id  = :item_id ";

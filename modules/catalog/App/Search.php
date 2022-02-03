@@ -31,13 +31,20 @@ class Search
 
             $stem   = (new \Modules\Search\App\Search())->stemmer($query);
 
-            $result = SearchModel::getSearch($page, $this->limit, $query);
+            $result = SearchModel::getSearch($page, $this->limit, $stem);
 
-            $count  = SearchModel::getSearchCount($query);
+            $count  = SearchModel::getSearchCount($stem);
         }
 
-        $result     = $result ?? null;
         $quantity   = $count ?? null;
+
+        $results = [];
+        foreach ($result as $ind => $row) {
+            $search = preg_quote($stem);
+            $row['content'] = preg_replace ("/($search)/ui", "<mark>$1</mark>", $row['content']);
+            $row['title'] = preg_replace ("/($search)/ui", "<mark>$1</mark>", $row['title']);             
+            $results[$ind]              = $row;
+        }
 
         return view(
             '/view/default/search',
@@ -45,7 +52,7 @@ class Search
                 'meta'  => meta($m = [], Translate::get('search')),
                 'user'  => $this->user,
                 'data'  => [
-                    'result'        => $result ?? null,
+                    'result'        => $results,
                     'type'          => 'admin',
                     'sheet'         => 'admin',
                     'query'         => $query ?? null,

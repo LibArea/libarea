@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
-use App\Models\WebModel;
+use Modules\Catalog\App\Models\WebModel;
 use Content, Translate;
 
 class Webs

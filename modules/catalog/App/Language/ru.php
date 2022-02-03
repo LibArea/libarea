@@ -13,6 +13,15 @@ $data = [
     'results.search'        => 'Сайтов: примерно',
     'no.search.results'     => 'Поиск не дал никаких результатов. <br>Слишком короткий / длинный поисковый запрос',
     'empty.request'         => 'Пустой поисковый запрос',
+    
+    'news.media'            => 'Новости и СМИ',
+    'social.network'        => 'Социальные сети',
+    'internet'              => 'Интернет',
+    'software'              => 'Программы',
+    'reference.info'        => 'Справочная информация',
+    'reference.help'        => 'Энциклопедии, справочники',
+    'science.education'     => 'Наука и образование',
+    'goods.services'        => 'Товары и услуги',
 ];
 
 return $data;

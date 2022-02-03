@@ -41,7 +41,7 @@ class Home
             'imgurl'     => '/assets/images/agouti-web.png',
             'url'        => getUrlByName('web'),
         ];
-
+ 
         return view(
             '/view/default/home',
             [

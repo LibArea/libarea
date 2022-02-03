@@ -1,20 +1,20 @@
 <?php
 
 // Blog or topics
-function html_facet($facet, $type, $css)
+function html_facet($facet, $type, $url, $css)
 {
     if (!$facet) {
         return '';
     }
-
+ 
     if (!is_array($facet)) {
         $facet = preg_split('/(@)/', $facet);
     }
 
-    $result = [];
+    $result = [];  
     foreach (array_chunk($facet, 3) as $ind => $row) {
         if ($row[0] == $type) {
-            $result[] = '<a class="' . $css . '" href="' . getUrlByName($type, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+            $result[] = '<a class="' . $css . '" href="' . getUrlByName($url, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
         }
     }
 

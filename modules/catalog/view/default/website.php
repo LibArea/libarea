@@ -10,10 +10,6 @@
   </div>
   <main class="col-span-8 mb-col-12">
     <div class="bg-white items-center justify-between ml5 pr15 mb15">
-
-      <a href="<?= getUrlByName('web.all'); ?>"><?= Translate::get('websites'); ?></a> /
-      <span class="red-500"><?= Translate::get('website'); ?></span>
-
       <h1><?= $data['item']['item_title_url']; ?>
         <?php if ($user['trust_level'] == 5) { ?>
           <a class="text-sm ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['item']['item_id']]); ?>">
@@ -29,7 +25,7 @@
 
           <div class="gray mt20 mb5">
             <a class="green-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
-              <?= website_img($data['item']['item_id'], 'favicon', $data['item']['item_url_domain'], 'mr5 w20 h20'); ?>
+              <?= website_img($data['item']['item_url_domain'], 'favicon', $data['item']['item_url_domain'], 'favicons mr5'); ?>
               <?= $data['item']['item_url']; ?>
             </a>
           </div>
@@ -38,7 +34,7 @@
             <div class="mt20 mb20 mb-mb-5 lowercase">
               <?php foreach ($data['topics'] as $topic) { ?>
                 <?php if ($topic['facet_is_web'] == 1) { ?>
-                  <a class="pt5 pr20 pb5 sky-500 block text-xl" href="<?= getUrlByName('web.topic', ['slug' => $topic['facet_slug']]); ?>">
+                  <a class="tag block" href="<?= getUrlByName('web.topic', ['slug' => $topic['facet_slug']]); ?>">
                     <?= $topic['facet_title']; ?>
                   </a>
                 <?php } ?>

@@ -363,19 +363,12 @@ $data = [
     'enter your password'   => '輸入密碼',
     'enter content'         => '輸入內容',
 
-    /* 網絡 */
-    'news & media'      => '新聞媒體',
-    'social network'    => '社交網絡',
-    'internet'          => '互聯網',
-    'software'          => '軟件',
-    'reference info'    => '參考信息',
-    'related sites'     => '相關網站',
-    'web-cat'           => '網站目錄中有嗎？',
-    'web-cat-help'      => '在站點目錄中，將是一個類別（將變為可見）',
-
-    /* 軟件 */
-    'soft-cat'           => '目錄中有程序嗎？',
-    'soft-cat-help'      => '在程序目錄中，將是 Category（將變為可見）',
+    /* 網絡 / 軟件 */
+    'related.sites'         => '相关网站',
+    'web-cat'               => '網站目錄中有嗎？',
+    'web-cat-help'          => '在站點目錄中，將是一個類別（將變為可見）',
+    'soft-cat'              => '目錄中有程序嗎？',
+    'soft-cat-help'         => '在程序目錄中，將是 Category（將變為可見）',
 
     /* 環境 */
     'info-setting'          => '填寫您的姓名，這將有助於與會者通過姓名來稱呼您。 <br> <br> 告訴我們一些關於你自己的事情。 你有一個很好的機會敞開心扉取悅他人，並且看起來是一個有趣的人。',

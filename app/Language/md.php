@@ -275,20 +275,12 @@ $data = [
     'post'          => 'Postează',
     'posts'         => 'Postări',
 
-    /* web */
-    'news & media'      => 'Știri și media',
-    'social network'    => 'Rețea socială',
-    'internet'          => 'Internetul',
-    'software'          => 'Software',
-    'reference info'    => 'Informații de referință',
-    'related sites'     => 'Site-uri conexe',
-    'web-cat'           => 'Disponibil în directorul site-ului?',
-    'web-cat-help'      => 'În catalogul site - ului, va fi o categorie (va deveni vizibil)',
-
-
-    /* soft */
-    'soft-cat'           => 'Există programe în catalog?',
-    'soft-cat-help'      => 'În directorul programului, va fi Categoria (va deveni vizibilă)',
+    /* web / soft */
+    'related.sites'         => 'Site-uri similare',
+    'web-cat'               => 'Disponibil în directorul site-ului?',
+    'web-cat-help'          => 'În catalogul site - ului, va fi o categorie (va deveni vizibil)',
+    'soft-cat'              => 'Există programe în catalog?',
+    'soft-cat-help'         => 'În directorul programului, va fi Categoria (va deveni vizibilă)',
 
     'setting profile'       => 'Setari profil',
     'setting profile page'  => 'Pagina de configurare a profilului',

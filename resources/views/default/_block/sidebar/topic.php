@@ -12,7 +12,7 @@
   <div class="box-white">
     <a class="green-600" href="<?= getUrlByName('web.topic', ['slug' => $data['facet']['facet_slug']]); ?>">
       <i class="bi bi-link-45deg text-2xl middle"></i>
-      <?= Translate::get('related sites'); ?>
+      <?= Translate::get('related.sites'); ?>
     </a>
   </div>
 <?php } ?>
