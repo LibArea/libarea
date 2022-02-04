@@ -7,10 +7,15 @@
           <?= website_img($item['item_url_domain'], 'thumbs', $item['item_title_url'], 'list-items__thumb-image'); ?>
         </div>
         <div class="list-items__description">
-          <a href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
+          <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
             <h2><?= $item['item_title_url']; ?></h2>
           </a>
           <?= html_facet($item['facet_list'], 'topic', 'web.topic', 'tag mr15'); ?>
+          <?php if (UserData::checkAdmin()) { ?>
+            <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
+              <i class="bi bi-pencil text-sm"></i>
+            </a>
+          <?php } ?>
           <div class="list-items__text">
             <?= $item['item_content_url']; ?>
           </div>
@@ -24,11 +29,12 @@
                   <?= $item['item_title_soft']; ?> <?= Translate::get('on'); ?> GitHub
                 </a>
               <?php } ?>
-              <?php if (UserData::checkAdmin()) { ?>
-                <a class="mr15 ml15 inline" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
-                  <i class="bi bi-pencil text-sm"></i>
+              <div>
+                <i class="bi bi-arrow-return-right gray-600 ml10"></i>
+                <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
+                  <?= Translate::get('more.detailed'); ?>
                 </a>
-              <?php } ?>
+              </div>
             </div>
             <div class="flex right gray-400">
               <?= favorite($user['id'], $item['item_id'], 'item', $item['favorite_tid'], 'ps', 'mr20'); ?>

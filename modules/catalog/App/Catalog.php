@@ -126,4 +126,18 @@ class Catalog
     {
         return  WebModel::getItemId($id);
     }
+    
+    // Click-throughs
+    // Переходы
+    public function cleek()
+    {
+        $id     = Request::getPostInt('id');
+        $item   = WebModel::getItemId($id);
+        pageError404($item);
+        
+        WebModel::setCleek($item['item_id']);
+        
+        return true;
+    }
+    
 }

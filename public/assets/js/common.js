@@ -312,3 +312,18 @@ tippy('.tippy', {
   interactive: 'true',
   theme: 'light',
 });
+
+document.querySelectorAll(".item_cleek")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let id = el.dataset.id;
+    fetch("/cleek", {
+      method: "POST",
+      body: "id=" + id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
+        //...
+      });
+  })); 

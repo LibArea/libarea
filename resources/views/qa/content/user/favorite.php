@@ -54,7 +54,7 @@
            <div class="green-600 text-sm">
             <?= website_img($content['item_url_domain'], 'favicon', $content['item_url_domain'], 'mr5 w20 h20'); ?>
             <?= $content['item_url_domain']; ?>
-            <a target="_blank" href="<?= $content['item_url']; ?>" rel="nofollow noreferrer ugc">
+            <a target="_blank" href="<?= $content['item_url']; ?>" class="item_cleek" data-id="<?= $content['item_id']; ?>" rel="nofollow noreferrer ugc">
               <i class="bi bi-folder-symlink middle ml15 mr5"></i>
               <?= $content['item_url']; ?>
             </a>

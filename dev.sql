@@ -1298,7 +1298,7 @@ ALTER TABLE `votes_post`
 ALTER TABLE `posts` ADD FULLTEXT(post_title, post_content); 
 ALTER TABLE `items` ADD FULLTEXT(item_title_url, item_content_url, item_url_domain); 
 
-ALTER TABLE `items` ADD `item_cleek` INT(11) NOT NULL DEFAULT '1' AFTER `item_count`;
+ALTER TABLE `items` ADD `item_following_link` INT(11) NOT NULL DEFAULT '1' AFTER `item_count`;
 
  
 COMMIT;

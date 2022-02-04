@@ -195,6 +195,7 @@ $data = [
     'related posts'     => '相關文章',
     'related topics'    => '相關話題',
     'see more'          => '查看更多',
+    'more.detailed'     => '更多的',
     'parents'           => '父母',
     'children'          => '孩子們',
     'bound (children)'  => '綁定（兒童）',

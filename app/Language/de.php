@@ -197,6 +197,7 @@ $data = [
     'related posts'     => 'Related posts',
     'related topics'    => 'Related topics',
     'see more'          => 'See more',
+    'more.detailed'     => 'Mehr',
     'parents'           => 'Parents',
     'children'          => 'Children',
     'bound (children)'  => 'Bound (children)',

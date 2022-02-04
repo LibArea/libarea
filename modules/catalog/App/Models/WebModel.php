@@ -343,4 +343,11 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['item_id' => $item_id])->fetchall();
     }
+    
+    public static function setCleek($id)
+    {
+        $sql = "UPDATE items SET item_following_link = (item_following_link + 1) WHERE item_id = :id";
+
+        return DB::run($sql, ['id' => $id]);
+    }
 }

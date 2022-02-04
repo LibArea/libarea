@@ -188,6 +188,7 @@ $data = [
     'related posts'     => 'Postări asemănatoare',
     'related topics'    => 'Subiecte asemănătoare',
     'see more'          => 'Vezi mai mult',
+    'more.detailed'     => 'Mai mult',
     'parents'           => 'Părinţi',
     'children'          => 'Copii',
     'bound (children)'  => 'Legat (copii)',

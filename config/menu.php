@@ -48,7 +48,7 @@ return [
         ], [
             'hr'    => true,
         ], [
-            'tl'    => 0,
+            'tl'    => 1,
             'url'   => getUrlByName('favorites'),
             'title' => Translate::get('favorites'),
             'icon'  => 'bi bi-bookmark',

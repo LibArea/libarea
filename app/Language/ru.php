@@ -196,6 +196,7 @@ $data = [
     'related posts'     => 'Связанные посты',
     'related topics'    => 'Связанные темы',
     'see more'          => 'См. ещё',
+    'more.detailed'     => 'Подробнее',
     'parents'           => 'Родители',
     'children'          => 'Дети',
     'bound (children)'  => 'Связанные (дети)',

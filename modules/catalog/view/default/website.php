@@ -38,6 +38,7 @@
         <p>
           <i class="bi bi-github mr5"></i>
           <a target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_github_url']; ?>">
+          <a target="_blank" href="<?= $data['item']['item_url']; ?>" class="item_cleek" data-id="<?= $data['item']['item_id']; ?>" rel="nofollow noreferrer ugc">
             <?= $data['item']['item_github_url']; ?>
           </a>
         </p>

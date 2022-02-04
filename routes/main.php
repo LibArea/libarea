@@ -184,6 +184,8 @@ Route::get('/web/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed'
 
 Route::get('/web/website/{slug}')->module('catalog', 'App\Catalog@website', ['feed'])->where(['slug' => '[A-Za-z0-9.-]+'])->name('web.website');
 
+Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
+
 Route::get('/')->controller('HomeController', ['main.feed', 'main']);
 Route::get('/page/{page?}')->controller('HomeController', ['main.feed', 'main'])->where(['page' => '[0-9]+']);
 Route::get('/top')->controller('HomeController', ['main.top', 'main'])->name('main.top');
