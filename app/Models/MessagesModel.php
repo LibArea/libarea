@@ -164,12 +164,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
             return false;
         }
 
-        $messages_dialog = self::getDialogByUser(
-            [
-                'dialog_sender_id'       => $dialog_sender_id,
-                'dialog_recipient_id'    => $dialog_recipient_id,
-            ]
-        );
+        $messages_dialog = self::getDialogByUser($dialog_sender_id, $dialog_recipient_id);
 
         $messages_dialog_id = $messages_dialog['dialog_id'];
         if (!$messages_dialog) {
@@ -289,7 +284,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // User Information
-    public static function getDialogByUser($params)
+    public static function getDialogByUser($dialog_sender_id, $dialog_recipient_id)
     {
         $sql = "SELECT  
                     dialog_id,
@@ -302,11 +297,11 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
                     dialog_sender_count,
                     dialog_recipient_count
                         FROM messages_dialog 
-                            WHERE dialog_sender_id  = :dialog_sender_id AND 
-                                dialog_recipient_id     = :dialog_recipient_id
-                                OR dialog_recipient_id  = :dialog_sender_id AND 
-                                dialog_sender_id        = :dialog_recipient_id";
+                            WHERE dialog_sender_id  = $dialog_sender_id AND 
+                                dialog_recipient_id     = $dialog_recipient_id
+                                OR dialog_recipient_id  = $dialog_sender_id AND 
+                                dialog_sender_id        = $dialog_recipient_id";
 
-        return DB::run($sql, $params)->fetch();
+        return DB::run($sql)->fetch();
     }
 }
