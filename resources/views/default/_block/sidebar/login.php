@@ -5,9 +5,9 @@
       <label for="email">Email</label>
       <input type="email" id="email" placeholder="<?= Translate::get('enter'); ?> e-mail" name="email">
     </fieldset>
-    <fieldset>
+    <fieldset class="inputs">
       <label for="password"><?= Translate::get('password'); ?></label>
-      <input type="password" id="password" placeholder="<?= Translate::get('enter your password'); ?>" name="password">
+      <input class="password" type="password" id="password" placeholder="<?= Translate::get('enter your password'); ?>" name="password">
       <span class="showPassword absolute gray-400 right5 mt5 text-lg"><i class="bi bi-eye"></i></span>
     </fieldset>
     <fieldset class="flex items-center">

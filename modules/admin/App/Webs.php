@@ -68,6 +68,7 @@ class Webs
     public static function getFavicon($url)
     {
         $url = str_replace("https://", '', $url);
-        return "https://www.google.com/s2/favicons?domain=" . $url;
+        //return "https://www.google.com/s2/favicons?domain=" . $url;
+        return "https://favicon.yandex.net/favicon/" . $url;
     }
 }

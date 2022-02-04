@@ -14,7 +14,7 @@
       ]
     ]); ?>
 
-    <fieldset>
+    <fieldset class="inputs">
       <label for="password" class="block mb5"><?= Translate::get('password'); ?></label>
       <input type="password" name="password" class="password w-100 h40 pl5">
       <span class="showPassword absolute gray-400 right5 bottom5 text-xl"><i class="bi bi-eye"></i></span>

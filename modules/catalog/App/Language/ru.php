@@ -22,6 +22,8 @@ $data = [
     'reference.help'        => 'Энциклопедии, справочники',
     'science.education'     => 'Наука и образование',
     'goods.services'        => 'Товары и услуги',
+    'private.life'          => 'Домашний очаг',
+    'private.life.help'     => 'Детям, животные, хобби...',
 ];
 
 return $data;

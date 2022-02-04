@@ -68,7 +68,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/badges/{id}/edit')->module('admin', 'App\Badges@editPage', ['badges.edit', 'badges'])->where(['id' => '[0-9]+'])->name('admin.badges.edit');
     Route::get('/badges/user/add/{id}')->module('admin', 'App\Badges@addUserPage', ['add', 'badges'])->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
   
-    Route::get('/sites')->module('admin', 'App\Webs', ['sites.all', 'sites'])->name('admin.sites');
+    Route::get('/sites')->module('admin', 'App\Webs', ['web.all', 'sites'])->name('admin.sites');
     Route::get('/sites/page/{page?}')->module('admin', 'App\Webs', ['sites.all', 'sites'])->where(['page' => '[0-9]+']);
     Route::get('/words/add')->module('admin', 'App\Words@addPage', ['add', 'words'])->name('words.add');
     Route::get('/words')->module('admin', 'App\Words', ['words.all', 'words'])->name('admin.words');
