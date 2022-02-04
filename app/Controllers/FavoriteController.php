@@ -20,7 +20,7 @@ class FavoriteController extends MainController
     public function index($type)
     {
         $content_id = Request::getPostInt('content_id');
-        self::redirectItem($content_id, $type);
+        self::redirectItem($content_id, $type, $this->user);
 
         switch ($type) {
             case 'post':
@@ -45,11 +45,11 @@ class FavoriteController extends MainController
         return Translate::get('successfully');
     }
     
-    public static function redirectItem($content_id, $type)
+    public static function redirectItem($content_id, $type, $uid)
     {
         switch ($type) {
             case 'post':
-                $content    = PostModel::getPost($content_id, 'id', $this->user);
+                $content    = PostModel::getPost($content_id, 'id', $uid);
                 break;
             case 'item':
                 $content    = (new \Modules\Catalog\App\Catalog()) -> getItemId($content_id);
