@@ -6,7 +6,7 @@
   <div class="mb10">
     <?php foreach ($data['tags'] as $key => $facet) { ?>
       <?php if ($facet['facet_is_web'] == 1) { ?>
-      <a class="box-flex" href="<?= getUrlByName('web.topic', ['slug' => $facet['facet_slug']]); ?>">
+      <a class="box-flex" href="<?= getUrlByName('web.dir.top', ['slug' => $facet['facet_slug']]); ?>">
         <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'w30 h30 mr5 br-box-gray'); ?>
         <?= $facet['facet_title']; ?>
       </a>

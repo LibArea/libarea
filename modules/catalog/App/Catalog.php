@@ -21,7 +21,7 @@ class Catalog
 
     // List of sites by topic (sites by "category")
     // Лист сайтов по темам (сайты по "категориям")
-    public function index($sheet)
+    public function index($sheet, $type)
     {
         $slug       = Request::get('slug');
         $page       = Request::getInt('page');
@@ -47,7 +47,7 @@ class Catalog
             'og'         => false,
             'twitter'    => false,
             'imgurl'     => false,
-            'url'        => getUrlByName('web.topic', ['slug' => $topic['facet_slug']]),
+            'url'        => getUrlByName('web.dir.top', ['slug' => $topic['facet_slug']]),
         ];
         $desc  = Translate::get('websites') . ' ' . Translate::get('by') . ' ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
 
@@ -58,7 +58,7 @@ class Catalog
                 'user' => $this->user,
                 'data'  => [
                     'sheet'         => $sheet,
-                    'type'          => 'web',
+                    'type'          => $type,
                     'count'         => $pagesCount,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

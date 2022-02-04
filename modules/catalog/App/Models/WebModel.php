@@ -24,6 +24,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_count,
                     item_title_soft,
                     item_github_url,
+                    item_following_link,
                     item_is_deleted,
                     rel.*,
                     votes_item_user_id, votes_item_item_id,
@@ -77,7 +78,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Получаем домены по условиям
     // https://systemrequest.net/index.php/123/
-    public static function feedItem($page, $limit, $facets, $user, $topic_id, $type)
+    public static function feedItem($page, $limit, $facets, $user, $topic_id, $sheet)
     {
         $result = [];
         foreach ($facets as $ind => $row) {
@@ -86,7 +87,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         $sort = "ORDER BY item_votes DESC";
-        if ($type == 'new') $sort = "ORDER BY item_date DESC";
+        if ($sheet == 'web.new') $sort = "ORDER BY item_date DESC";
 
         $string = "relation_facet_id IN($topic_id)";
         if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
@@ -106,6 +107,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_count,
                     item_title_soft,
                     item_github_url,
+                    item_following_link,
                     item_is_deleted,
                     rel.*,
                     votes_item_user_id, votes_item_item_id,
@@ -193,6 +195,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_is_github,
                     item_github_url,
                     item_post_related,
+                    item_following_link,
                     item_is_deleted,
                     votes_item_user_id, votes_item_item_id,
                     rel.*,
@@ -304,6 +307,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_is_github,
                     item_github_url,
                     item_post_related,
+                    item_following_link,
                     item_is_deleted
                         FROM items 
                         WHERE item_id = :item_id AND item_is_deleted = 0";

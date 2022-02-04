@@ -14,7 +14,7 @@
           <?php if (UserData::checkAdmin()) { ?>
             <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
               <i class="bi bi-pencil text-sm"></i>
-            </a>
+            </a> <small class="gray-400">- <?= $item['item_following_link']; ?></small>
           <?php } ?>
           <div class="list-items__text">
             <?= $item['item_content_url']; ?>
