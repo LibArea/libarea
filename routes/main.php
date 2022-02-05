@@ -125,7 +125,7 @@ Route::getType('post');
     Route::get('/comments/addform')->controller('Comment\AddCommentController');
 Route::endType();
   
-Route::get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+', 'id' => '[0-9]+'])->name('topic.followers');  
+Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+', 'id' => '[0-9]+'])->name('topic.followers');  
   
 // Other pages without authorization
 Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9]+']);

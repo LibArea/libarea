@@ -9,7 +9,7 @@
       </a>
     <?php } ?>
     <?php if ($n > 5) { ?><span class="ml10">...</span><?php } ?>
-    <span class="focus-user gray-600 ml10">
+    <span class="focus-user gray-400 ml10">
       <?= $topic_focus_count; ?>
     </span>
   </div>

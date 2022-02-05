@@ -19,7 +19,7 @@ $facet  = $data['facet'] ?? false; ?>
 <body<?php if (Request::getCookie('dayNight') == 'dark') { ?> class="dark"<?php } ?>>
 
   <header class="bg-white mt0 mb15">
-    <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl15 mb10 mb-none items-center flex">
+    <div class="br-bottom mr-auto max-width w-100 pr10 pl15 mb10 mb-none items-center flex">
       <?php foreach (Config::get('menu.mobile') as $key => $topic) { ?>
         <a class="mr20 black text-xs" href="<?= $topic['url']; ?>">
           <i class="<?= $topic['icon']; ?> mr5"></i>
@@ -28,23 +28,21 @@ $facet  = $data['facet'] ?? false; ?>
       <?php } ?>
     </div>
 
-    <div class="col-span-12 mr-auto max-w1240 w-100 pr10 pl10 h50 grid items-center flex justify-between">
+    <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h50 grid items-center flex justify-between">
       <div class="flex items-center" id="find">
-        <menu data-template="one" class="tippy pl0 pr10 none mb-block">
-          <div class="relative w-auto">
-            <i class="bi bi-list gray-400 text-xl"></i>
+        <div class="none mb-block">
+          <div class="trigger">
+            <i class="bi bi-list gray-400 text-xl mr10"></i>
           </div>
-         </menu> 
-          <div id="one" style="display: none;">
-            <nav>
-              <?= tabs_nav(
-                'menu',
-                $type,
-                $user,
-                $pages = Config::get('menu.mobile'),
-              ); ?>
-            </nav>
-          </div>
+          <ul class="dropdown left">
+            <?= tabs_nav(
+              'menu',
+              $type,
+              $user,
+              $pages = Config::get('menu.mobile')
+            ); ?>
+            <ul>
+        </div>
         <div class="mr20 flex items-center">
           <a title="<?= Translate::get('home'); ?>" class="logo black ml5" href="/">
             <?= Config::get('meta.name'); ?>
@@ -89,20 +87,18 @@ $facet  = $data['facet'] ?? false; ?>
               <?php } ?>
             </a>
 
-            <ag-menu data-template="two" class="tippy pr10 pl10 ml20 mb-ml-10">
-              <div class="relative w-auto">
+            <div class="ml45 mb-ml-20 relative">
+              <div class="trigger">
                 <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
               </div>
-            </ag-menu>  
-            <div id="two" style="display: none;">
-              <nav class="p0 pr20 m0">
+              <ul class="dropdown">
                 <?= tabs_nav(
                   'menu',
                   $type,
                   $user,
-                  $pages = Config::get('menu.user'),
+                  $pages = Config::get('menu.user')
                 ); ?>
-              </nav>
+                <ul>
             </div>
             
           </div>

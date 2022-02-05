@@ -30,12 +30,6 @@
       ); ?>
 
     </ul>
-    <div data-template="feed" class="tippy gray-400">
-       <i class="bi bi-info-square"></i>
-    </div>
-    <div id="feed" style="display: none;">
-      <div class="text-xm gray-600 p5 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
-    </div>
   </div>
 
   <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>

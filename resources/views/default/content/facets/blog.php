@@ -25,10 +25,13 @@ if ($blog['facet_is_deleted'] == 0) { ?>
           ]); ?>
         </div>
 
-        <?= Tpl::import('/_block/facet/focus-users', [
-          'topic_focus_count' => $blog['facet_focus_count'],
-          'focus_users'       => $data['focus_users'] ?? '',
-        ]); ?>
+        <div class="relative max-w200">
+          <?= Tpl::import('/_block/facet/focus-users', [
+            'topic_focus_count' => $blog['facet_focus_count'],
+            'focus_users'       => $data['focus_users'] ?? '',
+          ]); ?>
+          <div class="content_<?= $blog['facet_id']; ?> absolute bg-white box-shadow-all p5 z-10 right0"></div>
+        </div>
       </div>
     </div>
 
@@ -87,27 +90,26 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 <?php } ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  document.addEventListener('DOMContentLoaded', function() {
-    tippy('.focus-user', {
-      allowHTML: true,
-      trigger: 'click',
-      trigger: 'mouseenter click',
-      allowHTML: 'true',
-      hideOnClick: 'toggle',
-      maxWidth: 'none',
-      interactive: 'true',
-      placement: 'auto',
-      theme: 'light',
-      onShow(instance) {
-        fetch('/topic/<?= $blog['facet_slug']; ?>/followers/<?= $blog['facet_id']; ?>')
-          .then((response) => response.text())
-          .then(function(data) {
-            instance.setContent(data);
-          })
-          .catch((error) => {
-            instance.setContent(`Request failed. ${error}`);
-          });
-      },
+document.querySelectorAll(".focus-user")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let content = document.querySelector('.content_<?= $blog['facet_id']; ?>');
+    let div = document.querySelector(".content_<?= $blog['facet_id']; ?>");
+    div.classList.remove("none");
+    fetch("/topic/<?= $blog['facet_slug']; ?>/followers/<?= $blog['facet_id']; ?>", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then(
+        response => {
+          return response.text();
+        }
+      ).then(
+        text => {
+          content.innerHTML = text;
+        }
+      );
+    window.addEventListener('mouseup', e => {   
+      div.classList.add("none");
     });
-  });
+  }));
 </script>

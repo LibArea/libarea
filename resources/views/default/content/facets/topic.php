@@ -38,7 +38,7 @@
         </div>
 
         <?= Tpl::import('/_block/facet/focus-users', [
-          'user'               => $user,
+          'user'              => $user,
           'topic_focus_count' => $topic['facet_focus_count'],
           'focus_users'       => $data['focus_users'] ?? '',
         ]); ?>
@@ -92,15 +92,16 @@
 <aside class="col-span-3 relative mb-none">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
     <div class="box-flex-white">
-      <div class="mr15 center box-number">
+      <div class="mr15 center">
         <div class="uppercase mb5 text-sm gray"><?= Translate::get('posts'); ?></div>
         <?= $topic['facet_count']; ?>
       </div>
-      <div class="ml15 center box-number">
+      <div class="ml15 center relative">
         <div class="uppercase mb5 text-sm gray"><?= Translate::get('reads'); ?></div>
-        <div class="focus-user sky-500">
-          <?= $topic['facet_focus_count']; ?>
-        </div>
+          <div class="focus-user sky-500">
+            <?= $topic['facet_focus_count']; ?>
+          </div>
+          <div class="content_<?= $topic['facet_id']; ?> absolute bg-white box-shadow-all z-10 right0"></div>
       </div>
     </div>
 
@@ -136,27 +137,26 @@
 </aside>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  document.addEventListener('DOMContentLoaded', function() {
-    tippy('.focus-user', {
-      allowHTML: true,
-      trigger: 'click',
-      trigger: 'mouseenter click',
-      allowHTML: 'true',
-      hideOnClick: 'toggle',
-      maxWidth: 'none',
-      interactive: 'true',
-      placement: 'auto',
-      theme: 'light',
-      onShow(instance) {
-        fetch('/topic/<?= $topic['facet_slug']; ?>/followers/<?= $topic['facet_id']; ?>')
-          .then((response) => response.text())
-          .then(function(data) {
-            instance.setContent(data);
-          })
-          .catch((error) => {
-            instance.setContent(`Request failed. ${error}`);
-          });
-      },
+document.querySelectorAll(".focus-user")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let content = document.querySelector('.content_<?= $topic['facet_id']; ?>');
+    let div = document.querySelector(".content_<?= $topic['facet_id']; ?>");
+    div.classList.remove("none");
+    fetch("/topic/<?= $topic['facet_slug']; ?>/followers/<?= $topic['facet_id']; ?>", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then(
+        response => {
+          return response.text();
+        }
+      ).then(
+        text => {
+          content.innerHTML = text;
+        }
+      );
+    window.addEventListener('mouseup', e => {   
+      div.classList.add("none");
     });
-  });
+  }));
 </script>

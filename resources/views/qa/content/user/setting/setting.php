@@ -1,27 +1,27 @@
 <main class="col-span-9 mb-col-12">
 
-  <div class="box-flex p15">
+  <div class="box-flex-white bg-violet-50">
     <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
     <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
   </div>
 
-  <div class="bg-white p15">
+  <div class="box-white">
     <form class="max-w640" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
-      <div class="mb20">
+      <fieldset>
         <?= user_avatar_img($data['user']['avatar'], 'small', $data['user']['login'], 'mr5 ml5 ava'); ?>
         <span class="mr5 ml5">
           <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
             <?= $data['user']['login']; ?>
           </a>
         </span>
-      </div>
+      </fieldset>
 
-      <div class="mb20">
+      <fieldset>
         <span class="name gray">E-mail:</span>
         <span class="mr5 ml5"><?= $data['user']['email']; ?></span>
-      </div>
+      </fieldset>
 
       <?= Tpl::import(
         '/_block/form/field-input',
@@ -52,13 +52,13 @@
         'user'       => $user
       ]); ?>
 
-      <div id="box" class="mb20">
+      <fieldset id="box">
         <label class="block" for="post_content"><?= Translate::get('color'); ?></label>
         <input type="color" value="<?= $data['user']['color']; ?>" id="colorPicker">
         <input type="hidden" name="color" value="<?= $data['user']['color']; ?>" id="color">
-      </div>
+      </fieldset>
 
-      <div class="mb20 max-w640">
+      <fieldset class="max-w640">
         <label class="block mb5" for="template">
           <?= Translate::get('template'); ?>
         </label>
@@ -69,9 +69,9 @@
             </option>
           <?php } ?>
         </select>
-      </div>
+      </fieldset>
 
-      <div class="mb20 max-w640">
+       <fieldset class="max-w640">
         <label class="block mb5" for="post_content"><?= Translate::get('language'); ?></label>
         <select class="w-100 h30" name="lang">
           <?php foreach (Config::get('general.languages') as $lang) {  ?>
@@ -80,23 +80,23 @@
             </option>
           <?php } ?>
         </select>
-      </div>
+      </fieldset>
 
-      <h3><?= Translate::get('contacts'); ?></h3>
+      <h3 class="mt15 mb15"><?= Translate::get('contacts'); ?></h3>
       <?php foreach (Config::get('fields-profile') as $block) { ?>
-        <div class="mb20">
+        <fieldset>
           <label class="block mb5" for="post_title"><?= $block['lang']; ?></label>
           <input class="w-100 h30 pl5" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>
             <div class="text-sm gray-400"><?= $block['help']; ?></div>
           <?php } ?>
-        </div>
+        </fieldset>
       <?php } ?>
 
-      <div class="mb20">
+      <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
         <?= sumbit(Translate::get('edit')); ?>
-      </div>
+      <fieldset>
     </form>
   </div>
 </main>

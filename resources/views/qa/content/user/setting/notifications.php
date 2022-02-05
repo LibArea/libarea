@@ -1,10 +1,10 @@
 <main class="col-span-9 mb-col-12">
 
-  <div class="box-flex p15">
+  <div class="box-flex-white bg-violet-50">
     <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
     <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
   </div>
-  <div class="bg-white p15 box">
+  <div class="box-white">
     <form action="<?= getUrlByName('setting.notif.edit'); ?>" method="post">
       <?php csrf_field(); ?>
       <b class="mb15 block"><?= Translate::get('e-mail notification'); ?>?</b>

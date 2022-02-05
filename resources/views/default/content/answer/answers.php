@@ -12,7 +12,7 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="box-flex-white">
+  <div class="box-flex-white relative">
     <ul class="flex flex-row list-none text-sm">
 
       <?= tabs_nav(
@@ -38,12 +38,10 @@
       ); ?>
 
     </ul>
-    <div data-template="feed" class="tippy gray-400">
-      <i class="bi bi-info-square"></i>
+    <div class="trigger">
+      <i class="bi bi-info-square gray-400"></i>
     </div>
-    <div id="feed" style="display: none;">
-      <div class="text-xm gray-600 p5 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
-    </div>
+    <div class="dropdown tooltip"><?= Translate::get($data['sheet'] . '.info'); ?></div>
   </div>
 
   <?php if (!empty($data['answers'])) { ?>

@@ -91,7 +91,7 @@
         </select>
       </fieldset>
 
-      <h3><?= Translate::get('contacts'); ?></h3>
+      <h3 class="mt15 mb15"><?= Translate::get('contacts'); ?></h3>
       <?php foreach (Config::get('fields-profile') as $block) { ?>
         <div class="mb20">
           <label class="block mb5" for="post_title"><?= $block['lang']; ?></label>
@@ -102,10 +102,10 @@
         </div>
       <?php } ?>
 
-      <div class="mb20">
+      <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
         <?= sumbit(Translate::get('edit')); ?>
-      </div>
+      </fieldset>
     </form>
   </div>
 </main>
