@@ -301,18 +301,6 @@ function toggleType() {
   }
 }
 
-tippy('.tippy', {
-  content(reference) {
-    const id = reference.getAttribute('data-template');
-    const template = document.getElementById(id);
-    return template.innerHTML;
-  },
-  allowHTML: true,
-  trigger: 'click',
-  interactive: 'true',
-  theme: 'light',
-});
-
 document.querySelectorAll(".item_cleek")
   .forEach(el => el.addEventListener("click", function (e) {
     let id = el.dataset.id;
@@ -326,4 +314,50 @@ document.querySelectorAll(".item_cleek")
       }).then((text) => {
         //...
       });
-  })); 
+  }));
+  
+/*
+ *	Drop-down menus and lists
+ *	Выпадающие меню и списки
+ */
+let elm = document.querySelectorAll(".trigger");
+elm.forEach(function(elm) {
+  elm.addEventListener("click", function(e) {
+    e.stopPropagation();
+    let sibling = elm.nextElementSibling,
+       firstVisible = elm.querySelector('.block'),
+       dropDown;
+
+    /*
+     * Remove the block class if an element is already in the DOM
+     * TODO: next, it's worth getting rid of the use of `style` on the page everywhere
+     * to tighten the Content Security Policy
+     * 
+     * Удалим block класс, если элемент уже есть в DOM
+     * TODO: далее везде стоит избавится от задействования `style` на странице
+     * чтобы ужесточить Content Security Policy
+     */
+    if (firstVisible) {
+      // fadeOut(firstVisible);
+      firstVisible.classList.remove("block");
+    } 
+
+    if (!sibling.classList.contains("block")) {
+      // fadeIn(sibling);
+      sibling.classList.add("block");
+    } else {
+      // fadeOut(sibling);
+      sibling.classList.remove("block");
+    }
+  });
+});
+
+document.addEventListener("click", function() {
+  let block = document.querySelector(".block");
+
+  if (block) {
+    // fadeOut(block);
+    block.classList.remove("block");
+  }
+});
+ 

@@ -1,16 +1,18 @@
 <div class="col-span-2 mb-none">
   <nav class="sticky top-sm">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
+    <ul class="list-none text-sm">
+      <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $user,
+        $pages = Config::get('menu.left'),
+      ); ?>
+    </ul>  
   </nav>
 </div>
 
 <main class="col-span-10 mb-col-12 edit-post">
-  <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-white">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
     <span class="red-500">

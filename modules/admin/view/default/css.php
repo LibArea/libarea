@@ -17,7 +17,7 @@
   <p><i class="btn btn-small btn-outline-primary">btn btn-small btn-outline-primary</i></p>
   <p><i class="btn btn-primary">btn btn-primary</i></p>
   <p><i class="btn btn-small btn-primary">btn btn-small btn-primary</i></p>
-  
+
   <p>
     <?= Translate::get('being.developed'); ?>...
   </p>

@@ -101,7 +101,6 @@ details[open] > summary {
   font-size: 21px;
 }
 
-
 .favicons {
   height: 18px;
   width: 18px;
@@ -211,6 +210,18 @@ details[open] > summary {
   margin-left: 5px;
 }
 /* end catalog */
+
+.tooltip {
+  position: absolute;
+  right: 0;
+  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  color: var(--gray-400);
+  text-align: center;
+}
 
 
 .box {

@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\{ContentModel, ActionModel};
-
 class Validation
 {
     public static function Email($email, $redirect)

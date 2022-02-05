@@ -3,10 +3,26 @@
  *
  * Выпадающее меню и навигация слева
  */
- 
-menu { padding: 0px; }
 
-nav > ul > li > a {
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  top: 41px;
+  box-shadow: 0 12px 12px rgba(0,0,0,0.15);
+  padding: 5px 20px 5px 10px;
+  font-size: 0.875rem;
+  list-style: none;
+  margin: 0;
+}
+
+.dropdown.left {
+ left: 0;
+ width: 150px;
+}
+
+ul > li > a {
   color: var(--gray-400);
   padding: 3px 10px;
   display: flex;

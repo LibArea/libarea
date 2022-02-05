@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
+  <div class="box-white">
     <h1 class="mt0 mb10 text-2xl font-normal">
       <?= Translate::get('send a message'); ?> <?= $user['login']; ?> / <?= $data['login']; ?>
       <a class="right text-sm" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">

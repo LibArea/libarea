@@ -1,22 +1,24 @@
 <div class="col-span-2 mb-none">
   <nav class="sticky top-sm">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
+    <ul class="list-none text-sm">
+      <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $user,
+        $pages = Config::get('menu.left'),
+      ); ?>
+    </ul>  
   </nav>
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
     <?php if (!empty($data['messages'])) { ?>
-     <div class="bg-white br-rd5 br-box-gray p15">
+     <div class="box-white">
       <?php foreach ($data['messages'] as  $msg) { ?>
-        <div class="hidden mt15 mb15<?php if (!$msg['unread'] > 0) { ?> bg-yellow-100<?php } ?>">
+        <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> bg-yellow-100<?php } ?>">
           <div class="text-sm flex">
             <?php if ($msg['dialog_sender_id'] == $user['id']) { ?>
               <a href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">

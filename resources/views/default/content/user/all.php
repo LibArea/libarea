@@ -1,16 +1,18 @@
 <div class="col-span-2 mb-none">
   <nav class="sticky top-sm">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
+    <ul class="list-none text-sm">
+      <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $user,
+        $pages = Config::get('menu.left'),
+      ); ?>
+    </ul>  
   </nav>
 </div>
 
 <main class="col-span-10 mb-col-12">
-  <div class="bg-white   center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-white center">
     <h1 class="m0 text-xl font-normal"><?= Translate::get($data['sheet']); ?></h1>
     <span class="text-sm gray-600">
       <?= Translate::get($data['sheet'] . '.info'); ?>.

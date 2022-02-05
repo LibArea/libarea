@@ -1,17 +1,19 @@
 <div class="col-span-2 mb-none">
   <nav class="sticky top-sm">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
+    <ul class="list-none text-sm">
+      <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $user,
+        $pages = Config::get('menu.left'),
+      ); ?>
+    </ul>  
   </nav>
 </div>
 
 <?php $facet = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 mb15 pl15">
+  <div class="box-white">
     <a class="text-sm" title="<?= Translate::get('topics-all'); ?>" href="/topics">
       ← <?= Translate::get('topics'); ?>
     </a>
@@ -39,7 +41,7 @@
 
 </main>
 <aside class="col-span-3 relative mb-none">
-  <div class="bg-white br-rd5 br-box-gray p15 mb15">
+  <div class="box-white">
     <center>
       <a title="<?= $facet['facet_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $facet['facet_slug']]); ?>">
         <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'topic-img'); ?>

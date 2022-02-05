@@ -1,16 +1,18 @@
 <div class="col-span-2 mb-none">
   <nav class="sticky top-sm">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
+    <ul class="list-none text-sm">
+      <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $user,
+        $pages = Config::get('menu.left'),
+      ); ?>
+    </ul>  
   </nav>
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
   <div class="mb15 mb-ml-0 hidden">
@@ -22,7 +24,7 @@
     </form>
   </div>
 
-  <div class="bg-white br-rd5 br-box-gray ml10 mb-ml-0 p15">
+  <div class="box-white">
     <?php if ($data['list']) { ?>
       <?php foreach ($data['list'] as $key => $val) { ?>
         <div class="hidden">
@@ -66,8 +68,8 @@
 </main>
 
 <aside class="col-span-3 relative br-rd5 mb-none">
-  <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
-    <div class="uppercase gray mt5 mb5"><?= Translate::get('dialogues'); ?></div>
+  <div class="box-white text-sm">
+    <h3 class="uppercase-box"><?= Translate::get('dialogues'); ?></h3>
     <?php foreach ($data['dialog'] as $key => $val) { ?>
       <?php if ($val['id'] != $user['id']) { ?>
         <div class="flex relative pt5 pb5 items-center hidden">

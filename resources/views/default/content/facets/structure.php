@@ -1,16 +1,18 @@
 <div class="col-span-2 mb-none">
   <nav class="sticky top-sm">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
+    <ul class="list-none text-sm">
+      <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $user,
+        $pages = Config::get('menu.left'),
+      ); ?>
+    </ul>  
   </nav>
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white box-flex br-box-gray">
+  <div class="box-flex-white">
     <p class="m0 text-xl"><?= Translate::get('structure'); ?>
       <?php if (UserData::checkAdmin()) { ?>
         <a class="ml15" href="<?= getUrlByName('admin.topics'); ?>">
@@ -59,7 +61,7 @@
     </ul>
   </div>
 
-  <div class="bg-white p15 br-box-gray">
+  <div class="box-white">
     <?php if (!empty($data['structure'])) { ?>
       <div class="mb20">
         <?php foreach ($data['structure'] as $topic) { ?>

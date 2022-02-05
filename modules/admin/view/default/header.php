@@ -1,7 +1,7 @@
 <?php
 $user = App\Middleware\Before\UserData::get();
 Translate::setLang($user['lang']);
-$dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
+$dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
 ?>
 
 <!DOCTYPE html>
@@ -20,27 +20,26 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
 
 <body class="body-bg-fon<?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
-  <header class="bg-white br-bottom mt0 mb15">
-    <div class="flex justify-between items-center max-width mr-auto h40">
+  <header class="bg-white box-shadow sticky top0 z-30">
+    <div class="box-flex-white pl10 pr10 h50">
       <div class="flex items-center">
-        <div class="w200 black">
-          <a class="ml20" href="/">
-            <i class="bi bi-house black"></i>
-          </a>
-          <span class="mr5 ml5">/</span>
-          <a href="<?= getUrlByName('admin'); ?>">
-            <span class="black"><?= Translate::get('admin'); ?><span>
-          </a>
-        </div>
-        <div class="w400 items-center">
-          <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
-            <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 p10 br-rd5 gray w-100">
-            <input name="token" value="<?= csrf_token(); ?>" type="hidden">
-            <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
-          </form>
-        </div>
+        <a class="ml20" href="/">
+          <i class="bi bi-house black"></i>
+        </a>
+        <span class="mr5 ml5">/</span>
+        <a href="<?= getUrlByName('admin'); ?>">
+          <span class="black"><?= Translate::get('admin'); ?><span>
+        </a>
       </div>
-      <div class="black mr15">
+      <div class="ml45 mr15 relative mb-none w-90">
+        <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
+          <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 p10 br-rd5 gray w-100">
+          <input name="token" value="<?= csrf_token(); ?>" type="hidden">
+          <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
+        </form>
+      </div>
+
+      <div class="black m15">
         <?= Request::getRemoteAddress(); ?>
       </div>
     </div>
