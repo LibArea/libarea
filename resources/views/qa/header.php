@@ -41,7 +41,7 @@ $facet  = $data['facet'] ?? false; ?>
               $user,
               $pages = Config::get('menu.mobile')
             ); ?>
-            <ul>
+          </ul>
         </div>
         <div class="mr20 flex items-center">
           <a title="<?= Translate::get('home'); ?>" class="logo black ml5" href="/">
@@ -98,7 +98,7 @@ $facet  = $data['facet'] ?? false; ?>
                   $user,
                   $pages = Config::get('menu.user')
                 ); ?>
-                <ul>
+              </ul>
             </div>
             
           </div>
