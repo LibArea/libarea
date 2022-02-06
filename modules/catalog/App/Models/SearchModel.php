@@ -31,6 +31,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                             WHERE item_is_deleted = 0
                                 AND MATCH(item_title_url, item_content_url, item_url_domain) AGAINST (:qa)
                                           LIMIT $start, $limit";
+
         return DB::run($sql, ['qa' => $query])->fetchall();
     }
 

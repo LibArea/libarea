@@ -64,7 +64,7 @@
         'help'      => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
-     <?= Tpl::insert('/_block/form/select/select', [
+      <?= Tpl::insert('/_block/form/select/select', [
         'data'          => $data,
         'action'        => 'edit',
         'type'          => 'topic',

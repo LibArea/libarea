@@ -1,7 +1,6 @@
 <?php
 
 use Hleb\Constructor\Handlers\Request;
-use Config, Translate;
 
 class Integration
 {

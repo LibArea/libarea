@@ -41,16 +41,26 @@ class Home
             'imgurl'     => '/assets/images/agouti-web.png',
             'url'        => getUrlByName($sheet),
         ];
-     
-        $desc = Translate::get($sheet . '.desc');
-        if ($sheet == 'web') {
-            $desc = Translate::get('web.top.desc');
+
+        switch ($sheet) {
+            case 'web':
+                $title  = Translate::get('site.directory');
+                $desc   = Translate::get('web.desc');
+                break;
+            case 'web.all':
+                $title  = Translate::get('web.all');
+                $desc   = Translate::get('web.all.desc');
+                break;
+            case 'web.top':
+                $title  = Translate::get('web.top.title');
+                $desc   = Translate::get('web.top.desc');
+                break;
         }
-     
+
         return view(
             '/view/default/home',
             [
-                'meta'  => meta($m, Translate::get('site.directory'), $desc),
+                'meta'  => meta($m, $title, $desc),
                 'user'  => $this->user,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),

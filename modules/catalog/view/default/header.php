@@ -21,7 +21,7 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
   <header>
     <div class="mr-auto item-search mb-p-10">
       <a class="logo sky-500 mt30 mb-none" href="<?= getUrlByName('web'); ?>">
-         <?= Translate::get('catalog'); ?>
+        <?= Translate::get('catalog'); ?>
       </a>
       <div class="w-100 ml45 mb-ml-0">
         <div data-template="one" id="find tippy">
@@ -49,7 +49,7 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
                 <a class="right mr30" href="<?= getUrlByName('web.deleted'); ?>">
                   <?= Translate::get('deleted'); ?>
                 </a>
- 
+
                 <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>bg-gray-100 p5 gray-600 <?php } ?>mr30 green-600" href="<?= getUrlByName('web.bookmarks'); ?>">
                   <?= Translate::get('favorites'); ?>
                 </a>
@@ -66,7 +66,7 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
                     ); ?>
                   </ul>
                 </div>
-                
+
               <?php } ?>
             <?php } ?>
           </div>

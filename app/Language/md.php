@@ -429,7 +429,7 @@ $data = [
     'the command is executed'               => 'Comanda este executată',
     'you can add more'                      => 'Puteți adăuga mai multe',
 
-    'new password email'                => 'Noua parolă a fost trimisă prin e-mail',
+    'new password email'                => 'Linkul pentru resetarea parolei a fost trimis la e-mail',
     'check your email'                  => 'Verificați-vă e-mailul pentru a vă activa contul',
     'tl-limitation'                     => 'Nivelul dvs. de încredere (TL) nu permite această acțiune',
     'who will be able to post posts'    => 'Cine va putea posta',

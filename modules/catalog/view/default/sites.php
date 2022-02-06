@@ -6,7 +6,7 @@
   <?php if (!empty($data['high_topics'][0])) {
     $site = $data['high_topics'][0];   ?>
     <span class="gray mr5 ml5">/</span>
-    <a href="<?= getUrlByName('web.dir.top', ['slug' => $site['facet_slug']]); ?>">
+    <a href="<?= getUrlByName('web.dir', ['slug' => $site['facet_slug']]); ?>">
       <?= $site['facet_title']; ?>
     </a>
   <?php } ?>
@@ -24,36 +24,36 @@
 </div>
 <div class="item-categories mb-block">
   <?php if ($data['low_topics']) { ?>
-       <?php foreach ($data['low_topics'] as $lt) { ?>
-        <?php if ($lt['facet_is_web'] == 1) { ?>
-          <div>
-            <a class="text-2xl" href="<?= getUrlByName('web.dir', ['slug' => $lt['facet_slug']]); ?>">
-              <?= $lt['facet_title']; ?>
+    <?php foreach ($data['low_topics'] as $lt) { ?>
+      <?php if ($lt['facet_is_web'] == 1) { ?>
+        <div>
+          <a class="text-2xl" href="<?= getUrlByName('web.dir', ['slug' => $lt['facet_slug']]); ?>">
+            <?= $lt['facet_title']; ?>
+          </a>
+          <?php if (UserData::checkAdmin()) { ?>
+            <a class="ml5" href="<?= getUrlByName('topic.edit', ['id' => $lt['value']]); ?>">
+              <sup><i class="bi bi-pencil gray-400"></i></sup>
             </a>
-            <?php if (UserData::checkAdmin()) { ?>
-              <a class="ml5" href="<?= getUrlByName('topic.edit', ['id' => $lt['value']]); ?>">
-                <sup><i class="bi bi-pencil gray-400"></i></sup>
-              </a>
-            <?php } ?>
-          </div>
-        <?php } ?>
+          <?php } ?>
+        </div>
       <?php } ?>
-   <?php } ?>
+    <?php } ?>
+  <?php } ?>
   <?php if ($data['low_matching']) { ?>
-      <?php foreach ($data['low_matching'] as $rl) { ?>
-        <?php if ($rl['facet_is_web'] == 1) { ?>
-          <div class="inline mr20">
-            <a class="text-2xl" href="<?= getUrlByName('web.dir', ['slug' => $rl['facet_slug']]); ?>">
-              @<?= $rl['facet_title']; ?>
+    <?php foreach ($data['low_matching'] as $rl) { ?>
+      <?php if ($rl['facet_is_web'] == 1) { ?>
+        <div class="inline mr20">
+          <a class="text-2xl" href="<?= getUrlByName('web.dir', ['slug' => $rl['facet_slug']]); ?>">
+            @<?= $rl['facet_title']; ?>
+          </a>
+          <?php if (UserData::checkAdmin()) { ?>
+            <a class="text-sm ml5" href="<?= getUrlByName('topic.edit', ['id' => $rl['value']]); ?>">
+              <sup><i class="bi bi-pencil gray"></i></sup>
             </a>
-            <?php if (UserData::checkAdmin()) { ?>
-              <a class="text-sm ml5" href="<?= getUrlByName('topic.edit', ['id' => $rl['value']]); ?>">
-                <sup><i class="bi bi-pencil gray"></i></sup>
-              </a>
-            <?php } ?>
-          </div>
-        <?php } ?>
+          <?php } ?>
+        </div>
       <?php } ?>
+    <?php } ?>
   <?php } ?>
 </div>
 

@@ -23,7 +23,7 @@
             </span>
           </div>
           <div class="p15 br-rd5 mt5 relative bg-blue-100<?php if (!$msg['unread'] > 0) { ?> bg-purple-100<?php } ?> gray">
-            <?= $msg['message']['message_content']; ?>
+            <?= Content::text($msg['message']['message_content'], 'text'); ?>
           </div>
           <a class="lowercase text-sm right" href="<?= getUrlByName('dialogues', ['id' => $msg['dialog_id']]); ?>">
             <?php if ($msg['unread']) { ?>

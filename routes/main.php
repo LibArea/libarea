@@ -188,6 +188,15 @@ Route::get('/web/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed'
 
 Route::get('/web/website/{slug}')->module('catalog', 'App\Catalog@website', ['feed'])->where(['slug' => '[A-Za-z0-9.-]+'])->name('web.website');
 
+// Testing a faceted scheme
+Route::get('/map/{name-1}/{value-1}')->module('catalog', 'App\Map');
+Route::get('/map/{name-1}/{value-1}/{name-2}')->module('catalog', 'App\Map');
+Route::get('/map/{name-1}/{value-1}/{name-2}/{value-2}')->module('catalog', 'App\Map');
+Route::get('/map/{name-1}/{value-1}/{name-2}/{value-2}/{name-3}')->module('catalog', 'App\Map');
+Route::get('/map/{name-1}/{value-1}/{name-2}/{value-2}/{name-3}/{value-3}')->module('catalog', 'App\Map');
+Route::get('/map/{name-1}/{value-1}/{name-2}/{value-2}/{name-3}/{value-3}/{name-4}')->module('catalog', 'App\Map');
+Route::get('/map/{name-1}/{value-1}/{name-2}/{value-2}/{name-3}/{value-3}/{name-4}/{value-4}')->module('catalog', 'App\Map');
+
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
 
 Route::get('/')->controller('HomeController', ['main.feed', 'main']);

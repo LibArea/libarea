@@ -11,15 +11,15 @@
 
 <?php if (UserData::checkActiveUser()) { ?>
   <script src="/assets/js/app.js"></script>
-<?php } else {?>
+<?php } else { ?>
   <script nonce="<?= $_SERVER['nonce']; ?>">
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
-      Notiflix.Report.info(
-         '<?= Translate::get('you need to log in'); ?>',
-         '<?= Translate::get('info-login'); ?>',
-         '<?= Translate::get('well'); ?>',
-         ); 
+        Notiflix.Report.info(
+          '<?= Translate::get('you need to log in'); ?>',
+          '<?= Translate::get('info-login'); ?>',
+          '<?= Translate::get('well'); ?>',
+        );
       }));
   </script>
 <?php } ?>

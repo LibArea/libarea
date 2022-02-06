@@ -11,7 +11,7 @@
       </fieldset>
       <p>
         <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">
-        <input type="hidden" name="user_id" id="user_id" value="<?= $data['id']; ?>">
+        <input type="hidden" name="user_id" id="user_id" value="<?= $data['user_id']; ?>">
         <?= sumbit(Translate::get('reset')); ?>
         <?php if (Config::get('general.invite') == false) { ?>
           <span class="mr5 ml5 text-sm"><a href="<?= getUrlByName('register'); ?>"><?= Translate::get('sign up'); ?></a></span>

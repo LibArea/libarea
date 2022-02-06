@@ -27,9 +27,11 @@ $data = [
     'private.life'          => 'Home',
     'private.life.help'     => 'Children, animals, hobbies...',
     
-    'web.all'               => 'НNew sites in the catalog',
+    'web.desc'              => 'The list of sites in the catalog placed in chronological order. Ability to search, bookmark, sort by popularity',
+    'web.all'               => 'New sites in the catalog',
     'web.all.desc'          => 'New sites in chronological order on the catalog page. Sorting, searching, bookmarks after authorization. Announcements and screenshots',  
     'web.top'               => 'Sites by rating in the catalog',
+    'web.top.title'         => 'Website catalog (by rating)',
     'web.top.desc'          => 'Sites sorted by rating. Screenshots and descriptions of resources, the ability to search and bookmark',
 ];
 

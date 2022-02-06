@@ -432,7 +432,7 @@ $data = [
     'design choice'                         => 'Выбор дизайна',
 
     'work email'                            => 'Рабочий е-mail (для <b>активации</b> аккаунта)<br>Working email (for <b>account activation</b>)',
-    'new password email'                    => 'Новый пароль отправлен на e-mail',
+    'new password email'                    => 'Ссылка на сброс пароля отправлена на e-mail',
     'check your email'                      => 'Проверьте e-mail почту для активации аккаунта',
     'tl-limitation'                         => 'Ваш уровень доверия (TL) не позволяет совершить это действие',
     'who will be able to post posts'        => 'Кто может размещать посты',

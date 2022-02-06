@@ -27,9 +27,11 @@ $data = [
     'private.life'          => 'Acasă ',
     'private.life.help'     => 'Copii, animale, hobby-uri...',
     
+    'web.desc'              => 'Lista de site-uri din catalog plasate în ordine cronologică. Abilitatea de a căuta, marcaj, Sortare după popularitate',
     'web.all'               => 'Site-uri noi în catalog',
     'web.all.desc'          => 'Site-uri noi în ordine cronologică pe pagina catalogului. Sortare, căutare, Marcaje după autorizare. Anunțuri și capturi de ecran',  
     'web.top'               => 'Site-uri după evaluare în catalog',
+    'web.top.title'         => 'Catalog de site-uri web (după evaluare)',
     'web.top.desc'          => 'Site-uri sortate după rating. Capturi de ecran și descrieri ale resurselor, capacitatea de a căuta și marcaj',
 ];
 

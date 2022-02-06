@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{FacetModel, PostModel};
-use Content, Translate, Config;
+use Content, Translate;
 
 class Catalog
 {
@@ -49,11 +49,11 @@ class Catalog
             'imgurl'     => false,
             'url'        => getUrlByName('web.dir.top', ['slug' => $topic['facet_slug']]),
         ];
-        
-        $title = Translate::get('websites') . ': ' . $topic['facet_title'] . " | " . Config::get('meta.name');
+
+        $title = Translate::get('websites') . ': ' . $topic['facet_title'];
         $desc  = Translate::get('websites') . ', ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
         if ($sheet == 'web.top') {
-            $title = Translate::get('websites') . ' (top): ' . $topic['facet_title'] . " | " . Config::get('meta.name');
+            $title = Translate::get('websites') . ' (top): ' . $topic['facet_title'];
             $desc  = Translate::get('websites') . ' (top), ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
         }
 
@@ -169,7 +169,7 @@ class Catalog
     {
         return  WebModel::getItemId($id);
     }
-    
+
     // Click-throughs
     // Переходы
     public function cleek()
@@ -177,10 +177,9 @@ class Catalog
         $id     = Request::getPostInt('id');
         $item   = WebModel::getItemId($id);
         pageError404($item);
-        
+
         WebModel::setCleek($item['item_id']);
-        
+
         return true;
     }
-    
 }

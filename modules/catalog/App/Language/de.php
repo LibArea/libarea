@@ -27,9 +27,11 @@ $data = [
     'private.life'          => 'Heim',
     'private.life.help'     => 'Kinder, Tiere, Hobbys...',
     
+    'web.desc'              => 'Liste der Websites im Verzeichnis in chronologischer Reihenfolge. Fähigkeit zu suchen, Lesezeichen, Sortieren nach Beliebtheit',
     'web.all'               => 'Neue Websites im Verzeichnis',
     'web.all.desc'          => 'Neue Websites in chronologischer Reihenfolge auf der Katalogseite. Sortieren, suchen, Lesezeichen nach der Autorisierung. Ankündigungen und Screenshots',  
     'web.top'               => 'Websites nach Bewertung im Katalog',
+    'web.top.title'         => 'Der Katalog der Webseiten (nach der Bewertung)',
     'web.top.desc'          => 'Websites werden nach Bewertung sortiert. Screenshots und Beschreibung der Ressourcen, die Möglichkeit, zu suchen und zu Lesezeichen hinzuzufügen',
 ];
 

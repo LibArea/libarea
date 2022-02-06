@@ -6,12 +6,12 @@
   <div class="mb10">
     <?php foreach ($data['tags'] as $key => $facet) { ?>
       <?php if ($facet['facet_is_web'] == 1) { ?>
-      <a class="box-flex" href="<?= getUrlByName('web.dir.top', ['slug' => $facet['facet_slug']]); ?>">
-        <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'w30 h30 mr5 br-box-gray'); ?>
-        <?= $facet['facet_title']; ?>
-      </a>
-      <sup class="gray mr15">x<?= $facet['facet_count']; ?></sup>
-       <?php } ?>
+        <a class="box-flex" href="<?= getUrlByName('web.dir', ['slug' => $facet['facet_slug']]); ?>">
+          <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'w30 h30 mr5 br-box-gray'); ?>
+          <?= $facet['facet_title']; ?>
+        </a>
+        <sup class="gray mr15">x<?= $facet['facet_count']; ?></sup>
+      <?php } ?>
     <?php } ?>
   </div>
   <?php if ($data['result']) { ?>
@@ -24,7 +24,7 @@
         <a class="text-xl" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
           <?= $item['title']; ?>
         </a>
-        <?= html_facet($item['facet_list'], 'topic', 'web.topic', 'mr15 tag'); ?>
+        <?= html_facet($item['facet_list'], 'topic', 'web.dir', 'mr15 tag'); ?>
         <p class="mt5 mb5"><?= $item['content']; ?></p>
         <div class="text-sm">
           <a class="green-600" href="<?= $item['item_url']; ?>">

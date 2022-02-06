@@ -27,9 +27,11 @@ $data = [
     'private.life'          => 'Accueil',
     'private.life.help'     => 'Enfants, animaux, loisirs...',
     
+    'web.desc'              => 'Liste des sites du répertoire classés par ordre chronologique. Possibilité de rechercher, signets, trier par popularité',
     'web.all'               => 'Nouveaux sites dans lannuaire',
     'web.all.desc'          => 'Les nouveaux sites sont classés par ordre chronologique sur la page dannuaire. Tri, recherche, signets après autorisation. Annonces et captures décran',  
     'web.top'               => 'Sites classés dans lannuaire',
+    'web.top.title'         => 'Répertoire des sites (par Note)',    
     'web.top.desc'          => 'Les sites Web sont classés par note. Captures décran et description des ressources, possibilité de rechercher et Dajouter des signets',
 ];
 

@@ -41,8 +41,8 @@ class Search
         $results = [];
         foreach ($result as $ind => $row) {
             $search = preg_quote($stem);
-            $row['content'] = preg_replace ("/($search)/ui", "<mark>$1</mark>", $row['content']);
-            $row['title'] = preg_replace ("/($search)/ui", "<mark>$1</mark>", $row['title']);             
+            $row['content'] = preg_replace("/($search)/ui", "<mark>$1</mark>", $row['content']);
+            $row['title'] = preg_replace("/($search)/ui", "<mark>$1</mark>", $row['title']);
             $results[$ind]              = $row;
         }
 
