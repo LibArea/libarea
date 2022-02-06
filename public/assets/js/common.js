@@ -350,14 +350,13 @@ elm.forEach(function(elm) {
       sibling.classList.remove("block");
     }
   });
-});
 
-document.addEventListener("click", function() {
-  let block = document.querySelector(".block");
-
-  if (block) {
-    // fadeOut(block);
-    block.classList.remove("block");
-  }
+  document.addEventListener("click", function() {
+    let block = document.querySelector(".dropdown.block");
+    if (block) {
+      // fadeOut(block);
+      block.classList.remove("block");
+    }
+  }); 
 });
  

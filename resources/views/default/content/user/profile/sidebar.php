@@ -94,7 +94,7 @@
     <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('understands'); ?></h3>
       <?php foreach ($data['participation'] as $part) { ?>
-        <a class="tag" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
+        <a class="tags" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
           <?= $part['facet_title']; ?>
         </a>
       <?php } ?>

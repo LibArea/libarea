@@ -1,5 +1,5 @@
 <?php if (Request::getUri() == '/') { ?>
-  <a class="tag" href="/topics">
+  <a class="tags" href="/topics">
     <i class="bi bi-lightbulb middle mr5"></i>
     <?= Translate::get('topic-subscription'); ?>
   </a>

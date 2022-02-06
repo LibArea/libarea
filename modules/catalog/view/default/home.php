@@ -45,7 +45,7 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
   </main>
   <aside class="col-span-3 mb-col-12 mb-none">
-    <div class="right mt15 mr20"><?= Translate::get('being.developed'); ?></div>
+    <div class="box-yellow text-sm mt15"><?= Translate::get('directory.info'); ?></div>
   </aside>
 </div>
 <?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

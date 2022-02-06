@@ -6,8 +6,8 @@
     </span>
   </div>
 
-  <div class="box-flex-white bg-violet-50">
-    <ul class="flex flex-row list-none text-sm">
+  <div class="mb15">
+    <ul class="flex list-none text-sm">
 
       <?= tabs_nav(
         'nav',
@@ -36,17 +36,17 @@
         ]
       );
       ?>
-
+      
+        <?php if ($user['trust_level'] > 1) { ?>
+        <li class="right">
+          <?php if ($data['limit']) { ?>
+            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
+              <i class="bi bi-plus-lg middle"></i>
+            </a>
+         <?php } ?>
+        </li>
+        <?php } ?>
     </ul>
-    <?php if ($user['trust_level'] > 1) { ?>
-    <p class="m0 text-xl">
-      <?php if ($data['limit']) { ?>
-        <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
-          <i class="bi bi-plus-lg middle"></i>
-        </a>
-     <?php } ?>
-    </p>
-    <?php } ?>
   </div>
 
   <div class="p15">

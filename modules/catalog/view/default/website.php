@@ -26,7 +26,7 @@
               <?= $data['item']['item_url']; ?>
             </a>
           </div>
-          <?= html_facet($data['item']['facet_list'], 'topic', 'web.topic', 'tag mr15'); ?>
+          <?= html_facet($data['item']['facet_list'], 'topic', 'web.topic', 'tags mr15'); ?>
         </div>
       </div>
       <?php if ($data['item']['item_is_soft'] == 1) { ?>

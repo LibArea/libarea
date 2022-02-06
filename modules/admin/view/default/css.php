@@ -9,7 +9,7 @@
 
 <div class="box bg-white br-box-gray">
   <h4><?= Translate::get('topics'); ?>:</h4>
-  <a href="#" class="tag">.tag</a>
+  <a href="#" class="tags">.tags</a>
   <a href="#" class="tags-xs">.tags-xs</a>
 
   <h4 class="mt15"><?= Translate::get('buttons'); ?>:</h4>

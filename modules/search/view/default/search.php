@@ -27,7 +27,7 @@
         <a class="text-xl" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['title']; ?>
         </a>
-        <?= html_facet($post['facet_list'], 'topic', 'topic', 'mr15 tag'); ?>
+        <?= html_facet($post['facet_list'], 'topic', 'topic', 'mr15 tags'); ?>
         <p class="mt5 mb5"><?= $post['content']; ?>...</p>
         <div class="text-sm">
           <a class="gray-400" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">

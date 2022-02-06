@@ -238,6 +238,13 @@ details[open] > summary {
   background-color: var(--white);
 }
 
+.box-yellow {
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: rgb(247, 247, 235);
+}  
+
 .box-flex-white  {
   display: flex;
   flex-direction: row;
