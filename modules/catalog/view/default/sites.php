@@ -43,7 +43,7 @@
       <?php foreach ($data['low_matching'] as $rl) { ?>
         <?php if ($rl['facet_is_web'] == 1) { ?>
           <div class="inline mr20">
-            <a class="text-2xl" href="<?= getUrlByName('web.dir.top', ['slug' => $rl['facet_slug']]); ?>">
+            <a class="text-2xl" href="<?= getUrlByName('web.dir', ['slug' => $rl['facet_slug']]); ?>">
               @<?= $rl['facet_title']; ?>
             </a>
             <?php if (UserData::checkAdmin()) { ?>

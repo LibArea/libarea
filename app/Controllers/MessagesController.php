@@ -111,7 +111,7 @@ class MessagesController extends MainController
                     $list[$key]['message_content']  =  Content::text($val['message_content'], 'text');
                     $list[$key]['login']   = $recipient_user['login'];
                     $list[$key]['avatar']  = $recipient_user['avatar'];
-                    $list[$key]['unread']       = $dialog['dialog_recipient_unread'];
+                    $list[$key]['unread']  = $dialog['dialog_recipient_unread'];
                 }
             }
         }
@@ -165,7 +165,7 @@ class MessagesController extends MainController
     // Отправка сообщения участнику
     public function send()
     {
-        $content        = Request::getPost('content');
+        $content        = $_POST['content']; // для Markdown
         $recipient_id   = Request::getPost('recipient');
 
         // If the user is frozen and if the private message is empty
