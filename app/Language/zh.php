@@ -389,7 +389,6 @@ $data = [
     'linkchange password'   => '您更改密碼的鏈接',
     'changing password'     => '更改密碼',
     'domain-desc'           => '按域對社區中的帖子進行分組',
-    'domains-desc'          => '域的統計數據，用於編譯網站上的出版物的鏈接。 訪問量最大、最受歡迎的網站',
     'code-incorrect'        => '代碼不正確或已被使用。 再次執行恢復過程。',
     'yes-email-pass'        => '現在您可以使用您的電子郵件和密碼。',
     'code-used'             => '代碼不正確或已被使用。',

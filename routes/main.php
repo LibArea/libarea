@@ -71,6 +71,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/@{login}/delete/cover')->controller('User\SettingController@coverRemove')->where(['login' => '[A-Za-z0-9]+'])->name('delete.cover'); 
     Route::get('/@{login}/messages')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
 
+    Route::get('/web/bookmarks')->module('catalog', 'App\Catalog@bookmarks', ['web.bookmarks', 'web'])->name('web.bookmarks');
+
     Route::get('/setting')->controller('User\SettingController@settingForm')->name('setting'); 
     Route::get('/setting/avatar')->controller('User\SettingController@avatarForm')->name('setting.avatar');
     Route::get('/setting/security')->controller('User\SettingController@securityForm')->name('setting.security');
@@ -137,7 +139,7 @@ Route::get('/users/new')->controller('User\UserController', ['users.new', 'user'
 Route::get('/users/new/page/{page?}')->controller('User\UserController', ['users.new', 'user'])->where(['page' => '[0-9]+']);
 
 Route::get('/@{login}')->controller('User\ProfileController', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile');
-Route::get('/@{login}/posts')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['login' => '@[A-Za-z0-9]+'])->name('profile.posts');
+Route::get('/@{login}/posts')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
 Route::get('/@{login}/posts/page/{page?}')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
 Route::get('/@{login}/answers')->controller('User\ProfileController@answers', ['profile.answers', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.answers');
 Route::get('/@{login}/answers/page/{page?}')->controller('User\ProfileController@answers', ['profile.answers', 'profile'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
@@ -148,7 +150,6 @@ Route::get('/comments')->controller('Comment\CommentController', ['comments.all'
 Route::get('/comments/page/{page?}')->controller('Comment\CommentController', ['comments.all', 'comments'])->where(['page' => '[0-9]+']);
 Route::get('/answers')->controller('Answer\AnswerController', ['answers.all', 'answers'])->name('answers');
 Route::get('/answers/page/{page?}')->controller('Answer\AnswerController', ['answers.all', 'answers'])->where(['page' => '[0-9]+']);
-
 
 Route::get('/topics')->controller('Facets\AllFacetController', ['topics.all', 'topic'])->name('topics.all');
 Route::get('/topics/page/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'topic'])->where(['page' => '[0-9]+']);
@@ -173,13 +174,16 @@ Route::get('/blog/{slug}/page/{page?}')->controller('Facets\BlogFacetController'
 Route::get('/domain/{domain}')->controller('Post\PostController@domain', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 Route::get('/domain/{domain}/page/{page?}')->controller('Post\PostController@domain', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
 
-Route::get('/web')->module('catalog', 'App\Home', ['web.all', 'web'])->name('web.all');
-Route::get('/web/page/{page?}')->module('catalog', 'App\Home', ['web.all', 'web'])->where(['page' => '[0-9]+']);
+Route::get('/web')->module('catalog', 'App\Home', ['web', 'web'])->name('web');
+Route::get('/web/all')->module('catalog', 'App\Home', ['web.all', 'web'])->name('web.all');
 Route::get('/web/top')->module('catalog', 'App\Home', ['web.top', 'web'])->name('web.top');
-Route::get('/web/top/page/{page?}')->module('catalog', 'App\Home', ['web.top', 'web'])->where(['page' => '[0-9]+']);
 
-Route::get('/web/{slug}')->module('catalog', 'App\Catalog', ['web.top', 'web'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.dir.top');
-Route::get('/web/{slug}/new')->module('catalog', 'App\Catalog', ['web.new', 'web'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.dir.new');
+Route::get('/web/{slug}')->module('catalog', 'App\Catalog', ['web.top', 'web'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.dir');
+Route::get('/web/{slug}/all')->module('catalog', 'App\Catalog', ['web.all', 'web'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.dir.all');
+Route::get('/web/{slug}/top')->module('catalog', 'App\Catalog', ['web.top', 'web'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.dir.top');
+
+Route::get('/web/page/{page?}')->module('catalog', 'App\Home', ['web', 'web'])->where(['page' => '[0-9]+']);
+Route::get('/web/top/page/{page?}')->module('catalog', 'App\Home', ['web.top', 'web'])->where(['page' => '[0-9]+']);
 Route::get('/web/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 
 Route::get('/web/website/{slug}')->module('catalog', 'App\Catalog@website', ['feed'])->where(['slug' => '[A-Za-z0-9.-]+'])->name('web.website');

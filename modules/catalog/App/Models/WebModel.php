@@ -62,6 +62,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     public static function sorts($sheet)
     {
         switch ($sheet) {
+            case 'web':
+                $sort     = "WHERE item_is_deleted = 0 ORDER BY item_votes DESC";
+                break;
             case 'web.all':
                 $sort     = "WHERE item_is_deleted = 0 ORDER BY item_id DESC";
                 break;
@@ -69,6 +72,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                 $sort     = "WHERE item_is_deleted = 0 ORDER BY item_votes DESC";
                 break;
             case 'web.deleted':
+                $sort     = "WHERE item_is_deleted = 1 ORDER BY item_id DESC";
+                break;
+            case 'web.bookmarks':
                 $sort     = "WHERE item_is_deleted = 1 ORDER BY item_id DESC";
                 break;
         }
@@ -87,7 +93,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         $sort = "ORDER BY item_votes DESC";
-        if ($sheet == 'web.new') $sort = "ORDER BY item_date DESC";
+        if ($sheet == 'web.all') $sort = "ORDER BY item_date DESC";
 
         $string = "relation_facet_id IN($topic_id)";
         if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
@@ -353,5 +359,54 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "UPDATE items SET item_following_link = (item_following_link + 1) WHERE item_id = :id";
 
         return DB::run($sql, ['id' => $id]);
+    }
+    
+    public static function bookmarks($page, $limit, $uid)
+    {
+        $start  = ($page - 1) * $limit;
+        $sql = "SELECT 
+                    favorite_tid, 
+                    favorite_user_id, 
+                    favorite_type,
+                    rel.*,
+                    item_id,
+                    item_url,
+                    item_title_url,
+                    item_content_url,
+                    item_title_soft,
+                    item_url_domain,
+                    item_github_url,
+                    item_user_id,
+                    item_votes,
+                    item_following_link,
+                    item_published,
+                    votes_item_user_id, votes_item_item_id
+                        FROM favorites
+                        LEFT JOIN
+                        (
+                            SELECT 
+                                relation_item_id,
+                                GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                FROM facets  
+                                LEFT JOIN facets_items_relation 
+                                    on facet_id = relation_facet_id
+                                    WHERE facet_is_web = 1
+                                        GROUP BY relation_item_id
+                        ) AS rel
+                            ON rel.relation_item_id = favorite_tid
+                            LEFT JOIN items ON item_id = favorite_tid 
+                            LEFT JOIN votes_item ON votes_item_item_id = favorite_tid 
+                                AND votes_item_user_id = :uid
+                                    WHERE favorite_user_id = :uid_two AND favorite_type = 3 
+                                    LIMIT $start, $limit";
+
+        return  DB::run($sql, ['uid' => $uid, 'uid_two' => $uid])->fetchAll();
+    }
+    
+    public static function bookmarksCount($uid)
+    {
+        $sql = "SELECT favorite_user_id FROM favorites WHERE favorite_user_id = :uid AND favorite_type = 3";
+
+        return  DB::run($sql, ['uid' => $uid])->rowCount();
     }
 }

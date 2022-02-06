@@ -105,6 +105,7 @@
   <div class="sticky top-sm">
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="box-white bg-violet-50">
+        <ul class="list-none">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <li class="mb15">
             <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm mr5'); ?>
@@ -114,6 +115,7 @@
             </a>
           </li>
         <?php } ?>
+        </ul>
       </div>
     <?php } ?>
   </div>

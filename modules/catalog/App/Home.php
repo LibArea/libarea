@@ -39,13 +39,18 @@ class Home
             'og'         => true,
             'twitter'    => true,
             'imgurl'     => '/assets/images/agouti-web.png',
-            'url'        => getUrlByName('web'),
+            'url'        => getUrlByName($sheet),
         ];
- 
+     
+        $desc = Translate::get($sheet . '.desc');
+        if ($sheet == 'web') {
+            $desc = Translate::get('web.top.desc');
+        }
+     
         return view(
             '/view/default/home',
             [
-                'meta'  => meta($m, Translate::get('site.directory'), Translate::get('domains-desc')),
+                'meta'  => meta($m, Translate::get('site.directory'), $desc),
                 'user'  => $this->user,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),

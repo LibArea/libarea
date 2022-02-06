@@ -13,6 +13,8 @@ $data = [
     'results.search'        => 'Emplacements : env',
     'no.search.results'     => 'La recherche n*a donné aucun résultat. <br>Requête de recherche trop courte/longue',
     'empty.request'         => 'Terme de recherche vide',
+    'web.bookmarks.info'    => 'Mes favoris par site',
+    'web.banner.info'       => 'Catalogue de sites sélectionnés manuellement avec des annotations et des captures écran. Rubriques thématiques, régionales et types. Possibilité de rechercher des descriptions',
     
     'news.media'            => 'Actualités et médias',
     'social.network'        => 'Réseaux sociaux',
@@ -24,6 +26,11 @@ $data = [
     'goods.services'        => 'Biens et services',
     'private.life'          => 'Accueil',
     'private.life.help'     => 'Enfants, animaux, loisirs...',
+    
+    'web.all'               => 'Nouveaux sites dans lannuaire',
+    'web.all.desc'          => 'Les nouveaux sites sont classés par ordre chronologique sur la page dannuaire. Tri, recherche, signets après autorisation. Annonces et captures décran',  
+    'web.top'               => 'Sites classés dans lannuaire',
+    'web.top.desc'          => 'Les sites Web sont classés par note. Captures décran et description des ressources, possibilité de rechercher et Dajouter des signets',
 ];
 
 return $data;

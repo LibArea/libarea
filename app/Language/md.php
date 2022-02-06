@@ -386,7 +386,6 @@ $data = [
     'changing password'     => 'schimbați parola',
     'site under reconstruction' => 'Site în reconstrucție',
     'domain-desc'           => 'Gruparea postărilor într-o comunitate după domeniu',
-    'domains-desc'          => 'Statistici despre domenii, linkuri care sunt utilizate pentru a compila publicații pe site. Cele mai vizitate site-uri populare',
     'code-incorrect'        => 'Codul este incorect sau a fost deja utilizat. Parcurgeți din nou procedura de recuperare.',
     'yes-email-pass'        => 'Acum puteți utiliza adresa de e-mail și parola.',
     'code-used'             => 'Codul este incorect sau a fost deja utilizat.',

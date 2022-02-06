@@ -31,21 +31,21 @@
                 <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
                   <?php if ($post['post_closed'] == 0) { ?>
                     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
-                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10"><?= Translate::get('reply'); ?></a>
+                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10 mr10"><?= Translate::get('reply'); ?></a>
                     <?php } ?>
                   <?php } ?>
                 <?php } ?>
                 
                 <?php if (accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
                   <?php if ($user['id'] == $answer['answer_user_id'] || UserData::checkAdmin()) { ?>
-                    <a class="editansw gray ml15 mr5" href="/answer/edit/<?= $answer['answer_id']; ?>">
+                    <a class="editansw gray ml15 mr10" href="/answer/edit/<?= $answer['answer_id']; ?>">
                       <?= Translate::get('edit'); ?>
                     </a>
                   <?php } ?>
                 <?php } ?>
                 
                 <?php if (UserData::checkAdmin()) { ?>
-                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr5">
+                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr10">
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
                 <?php } ?>
@@ -53,7 +53,7 @@
                 <?= favorite($user['id'], $answer['answer_id'], 'answer', $answer['favorite_tid'], 'ps', 'ml5'); ?>
 
                 <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-400 ml15">
                     <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
                   </a>
                 <?php } ?>

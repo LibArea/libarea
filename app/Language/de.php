@@ -390,7 +390,6 @@ $data = [
     'contacted via @'       => 'When they reached out to me through @',
     'linkchange password'   => 'Your link to change your password',
     'domain-desc'           => 'Grouping posts in a community by domain',
-    'domains-desc'          => 'Statistics on domains, links that are used to compile publications on the site. Most visited, popular sites',
     'code-incorrect'        => 'The code is incorrect or has already been used. Go through the recovery procedure again.',
     'yes-email-pass'        => 'Now you can use your email and password.',
     'code-used'             => 'The code is incorrect or has already been used.',

@@ -1,7 +1,7 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <div class="ml30">
 
-  <a href="<?= getUrlByName('web.all'); ?>" class="text-sm gray-400"><?= Translate::get('websites'); ?></a>
+  <a href="<?= getUrlByName('web'); ?>" class="text-sm gray-400"><?= Translate::get('websites'); ?></a>
 
   <?php if (!empty($data['high_topics'][0])) {
     $site = $data['high_topics'][0];   ?>
@@ -27,7 +27,7 @@
        <?php foreach ($data['low_topics'] as $lt) { ?>
         <?php if ($lt['facet_is_web'] == 1) { ?>
           <div>
-            <a class="text-2xl" href="<?= getUrlByName('web.dir.top', ['slug' => $lt['facet_slug']]); ?>">
+            <a class="text-2xl" href="<?= getUrlByName('web.dir', ['slug' => $lt['facet_slug']]); ?>">
               <?= $lt['facet_title']; ?>
             </a>
             <?php if (UserData::checkAdmin()) { ?>
@@ -59,17 +59,7 @@
 
 <div class="grid grid-cols-12 gap-4">
   <main class="col-span-9 mb-col-12 ml30">
-    <p>
-      <?= num_word($data['count'], Translate::get('num-website'), true); ?>
-      <span class="right mr30">
-        <a class="<?php if ($data['sheet'] == 'web.top') { ?>bg-gray-100 p5 gray-600 <?php } ?>mr20" href="<?= getUrlByName('web.dit.top', ['slug' => $data['topic']['facet_slug']]); ?>">
-          TOP
-        </a>
-        <a class="<?php if ($data['sheet'] == 'web.new') { ?>bg-gray-100 p5 gray-600<?php } ?>" href="<?= getUrlByName('web.dir.new', ['slug' => $data['topic']['facet_slug']]); ?>">
-          <?= Translate::get('by.date'); ?>
-        </a>
-      </span>
-    </p>
+    <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>
 
     <?php if (!empty($data['items'])) { ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user]); ?>

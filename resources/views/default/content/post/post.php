@@ -29,7 +29,7 @@
       <div class="flex flex-row flex-auto">
         <div class="w-auto mr20 mb-mr-5">
           <a class="black" href="<?= $post_url; ?>">
-            <h2><?= $post['post_title']; ?></h2>
+            <h2 class="inline"><?= $post['post_title']; ?></h2>
             <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
           </a>
           <div class="lowercase">

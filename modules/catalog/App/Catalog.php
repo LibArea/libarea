@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{FacetModel, PostModel};
-use Content, Translate;
+use Content, Translate, Config;
 
 class Catalog
 {
@@ -23,11 +23,11 @@ class Catalog
     // Лист сайтов по темам (сайты по "категориям")
     public function index($sheet, $type)
     {
-        $slug       = Request::get('slug');
-        $page       = Request::getInt('page');
-        $page       = $page == 0 ? 1 : $page;
+        $slug   = Request::get('slug');
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
 
-        $topic = FacetModel::getFacet($slug, 'slug');
+        $topic  = FacetModel::getFacet($slug, 'slug');
         pageError404($topic);
 
         // If the facet is not allowed in the site directory
@@ -49,12 +49,18 @@ class Catalog
             'imgurl'     => false,
             'url'        => getUrlByName('web.dir.top', ['slug' => $topic['facet_slug']]),
         ];
-        $desc  = Translate::get('websites') . ' ' . Translate::get('by') . ' ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
+        
+        $title = Translate::get('websites') . ': ' . $topic['facet_title'] . " | " . Config::get('meta.name');
+        $desc  = Translate::get('websites') . ', ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
+        if ($sheet == 'web.top') {
+            $title = Translate::get('websites') . ' (top): ' . $topic['facet_title'] . " | " . Config::get('meta.name');
+            $desc  = Translate::get('websites') . ' (top), ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
+        }
 
         return view(
             '/view/default/sites',
             [
-                'meta'  => meta($m, Translate::get('websites') . ': ' . $topic['facet_title'], $desc),
+                'meta'  => meta($m, $title, $desc),
                 'user' => $this->user,
                 'data'  => [
                     'sheet'         => $sheet,
@@ -76,7 +82,7 @@ class Catalog
     // Детальная страница сайта
     public function website($sheet)
     {
-        $slug       = Request::get('slug');
+        $slug   = Request::get('slug');
 
         $item = WebModel::getItemOne($slug, $this->user['id']);
         pageError404($item);
@@ -121,6 +127,43 @@ class Catalog
             ]
         );
     }
+
+    // Bookmarks by sites
+    // Закладки по сайтам
+    public function bookmarks($sheet, $type)
+    {
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
+
+        $items      = WebModel::bookmarks($page, $this->limit, $this->user['id']);
+        $pagesCount = WebModel::bookmarksCount($this->user['id']);
+
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('web.bookmarks'),
+        ];
+        $desc  = Translate::get('favorites');
+
+        return view(
+            '/view/default/bookmarks',
+            [
+                'meta'  => meta($m, Translate::get('favorites'), Translate::get('favorites')),
+                'user' => $this->user,
+                'data'  => [
+                    'sheet'         => $sheet,
+                    'type'          => $type,
+                    'count'         => $pagesCount,
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $page,
+                    'items'         => $items,
+                ]
+            ]
+        );
+    }
+
+
 
     public function getItemId($id)
     {

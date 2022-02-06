@@ -20,12 +20,12 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
 <body <?php if ($dark == 'dark') { ?>class="dark" <?php } ?>>
   <header>
     <div class="mr-auto item-search mb-p-10">
-      <a title="<?= Translate::get('home'); ?>" class="logo sky-500 mt30 mb-none" href="/">
-        <?= Config::get('meta.name'); ?>
+      <a class="logo sky-500 mt30 mb-none" href="<?= getUrlByName('web'); ?>">
+         <?= Translate::get('catalog'); ?>
       </a>
       <div class="w-100 ml45 mb-ml-0">
         <div data-template="one" id="find tippy">
-          <a class="item-search__url" href="<?= getUrlByName('web.all'); ?>">Каталог</a>
+          <a class="item-search__url" href="/"><?= Config::get('meta.name'); ?></a>
           <div class="flex right col-span-4 items-center">
             <div id="toggledark" class="header-menu-item mb-none only-icon mr20 mb-ml-10">
               <i class="bi bi-brightness-high gray-400 text-xl"></i>
@@ -43,12 +43,30 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
             <?php } else { ?>
 
               <?php if (UserData::checkAdmin()) { ?>
-                <a title="<?= Translate::get('add'); ?>" class="right mr20 ml20" href="<?= getUrlByName('site.add'); ?>">
+                <a title="<?= Translate::get('add'); ?>" class="right mr30 ml20" href="<?= getUrlByName('site.add'); ?>">
                   <i class="bi bi-plus-lg middle"></i>
                 </a>
-                <a class="right mr10 ml20" href="<?= getUrlByName('web.deleted'); ?>">
+                <a class="right mr30" href="<?= getUrlByName('web.deleted'); ?>">
                   <?= Translate::get('deleted'); ?>
                 </a>
+ 
+                <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>bg-gray-100 p5 gray-600 <?php } ?>mr30 green-600" href="<?= getUrlByName('web.bookmarks'); ?>">
+                  <?= Translate::get('favorites'); ?>
+                </a>
+                <div class="mr15 m relative">
+                  <div class="trigger">
+                    <?= $user['login']; ?>
+                  </div>
+                  <ul class="dropdown">
+                    <?= tabs_nav(
+                      'menu',
+                      'dir',
+                      $user,
+                      $pages = Config::get('menu.user')
+                    ); ?>
+                  </ul>
+                </div>
+                
               <?php } ?>
             <?php } ?>
           </div>

@@ -16,6 +16,11 @@
               <i class="bi bi-pencil text-sm"></i>
             </a> <small class="gray-400">- <?= $item['item_following_link']; ?></small>
           <?php } ?>
+          <?php if (!empty($delete_fav)) { ?>
+            <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="item">
+              <i class="bi bi-trash red-500"></i>
+            </span>
+          <?php } ?>
           <div class="list-items__text">
             <?= $item['item_content_url']; ?>
           </div>

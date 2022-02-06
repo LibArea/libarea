@@ -41,7 +41,7 @@ return [
             'icon'  => 'bi bi-chat-quote',
             'id'    => 'comments',
         ], [
-            'url'   => getUrlByName('web.all'),
+            'url'   => getUrlByName('web'),
             'title' => Translate::get('catalog'),
             'icon'  => 'bi bi-link-45deg',
             'id'    => 'catalog',
@@ -138,7 +138,7 @@ return [
             'icon'  => 'bi bi-people',
             'id'    => '',
         ], [
-            'url'   => getUrlByName('web.all'),
+            'url'   => getUrlByName('web'),
             'title' => Translate::get('domains'),
             'icon'  => 'bi bi-link-45deg',
             'id'    => '',

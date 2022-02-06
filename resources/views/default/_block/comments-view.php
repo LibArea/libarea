@@ -166,7 +166,7 @@
                   <?php } ?>
 
                   <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
-                    <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml15">
+                    <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-400 ml15">
                       <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
                     </a>
                   <?php } ?>
