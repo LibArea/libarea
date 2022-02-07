@@ -570,7 +570,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Theme Tree
     // Дерево тем
-    public static function getStructure()
+    public static function getStructure($type)
     {
         $sql = "SELECT
                 facet_id,
@@ -595,9 +595,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                             ON rel.matching_parent_id = facet_id
 
                         LEFT JOIN facets_relation on facet_id = facet_chaid_id 
-                            WHERE facet_type = 'topic' ORDER BY facet_sort DESC";
+                            WHERE facet_type = :type ORDER BY facet_sort DESC";
 
-        return DB::run($sql)->fetchAll();
+        return DB::run($sql, ['type' => $type])->fetchAll();
     }
 
     // Posts where there are no topics

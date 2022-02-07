@@ -8,7 +8,7 @@ use Translate, Tpl;
 
 class TreeFacetController extends MainController
 {
-    public function index()
+    public function index($type)
     {
         return Tpl::agRender(
             '/facets/structure',
@@ -16,8 +16,8 @@ class TreeFacetController extends MainController
                 'meta'  => meta($m = [], Translate::get('structure'), Translate::get('structure-desc')),
                 'data'  => [
                     'sheet'     => 'structure',
-                    'type'      => 'topic',
-                    'structure' => self::builder(0, 0, FacetModel::getStructure()),
+                    'type'      => $type,
+                    'structure' => self::builder(0, 0, FacetModel::getStructure($type)),
                 ]
             ]
         );

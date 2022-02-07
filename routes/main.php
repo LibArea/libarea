@@ -157,7 +157,11 @@ Route::get('/topics/new')->controller('Facets\AllFacetController', ['topics.new'
 Route::get('/topics/new/page/{page?}')->controller('Facets\AllFacetController', ['topics.new', 'topic'])->where(['page' => '[0-9]+']);
 
 Route::get('/topic/{slug}')->controller('Facets\TopicFacetController', ['facet.feed', 'topic'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('topic');
-Route::get('/topics/structure')->controller('Facets\TreeFacetController')->name('topic.structure');
+
+Route::get('/facets/structure')->controller('Facets\TreeFacetController', ['topic'])->name('topic.structure');
+Route::get('/facets/structure/blog')->controller('Facets\TreeFacetController', ['blog'])->name('blog.structure');
+Route::get('/facets/structure/section')->controller('Facets\TreeFacetController', ['section'])->name('section.structure');
+
 Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['facet.recommend', 'topic'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
 Route::get('/topic/{slug}/recommend/page/{page?}')->controller('Facets\TopicFacetController', ['facet.recommend', 'topic'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);
 Route::get('/topic/{slug}/page/{page?}')->controller('Facets\TopicFacetController', ['facet.feed', 'topic'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);

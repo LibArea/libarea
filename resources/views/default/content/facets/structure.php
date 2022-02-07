@@ -13,7 +13,7 @@
 
 <main class="col-span-7 mb-col-12">
   <div class="box-flex-white">
-    <p class="m0 text-xl"><?= Translate::get('structure'); ?>
+    <p class="m0 text-xl"><?= Translate::get('structure'); ?> (<?= Translate::get($data['type'] .'s'); ?>)
       <?php if (UserData::checkAdmin()) { ?>
         <a class="ml15" href="<?= getUrlByName('admin.topics'); ?>">
           <i class="bi bi-pencil"></i>
@@ -49,12 +49,6 @@
             'tl' => 1,
             'icon' => 'bi bi-check2-square'
           ],
-          [
-            'id' => 'structure',
-            'url' => getUrlByName('topic.structure'),
-            'content' => Translate::get('structure'),
-            'icon' => 'bi bi-diagram-2'
-          ],
         ]
       ); ?>
 
@@ -85,7 +79,7 @@
         <?php } ?>
       </div>
     <?php } else { ?>
-      <?= no_content(Translate::get('topics no'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
 </main>
