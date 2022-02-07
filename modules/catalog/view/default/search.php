@@ -24,7 +24,7 @@
         <a class="text-xl" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
           <?= $item['title']; ?>
         </a>
-        <?= html_facet($item['facet_list'], 'topic', 'web.dir', 'mr15 tag'); ?>
+        <?= html_facet($item['facet_list'], 'topic', 'web.dir', 'mr15 tags'); ?>
         <p class="mt5 mb5"><?= $item['content']; ?></p>
         <div class="text-sm">
           <a class="green-600" href="<?= $item['item_url']; ?>">

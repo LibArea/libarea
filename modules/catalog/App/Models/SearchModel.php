@@ -19,15 +19,15 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                 item_votes,
                 item_count,
                 rel.*
-                    FROM facets_posts_relation  
-                    LEFT JOIN items ON relation_facet_id = item_id 
+                    FROM facets_items_relation  
+                    LEFT JOIN items ON relation_item_id = item_id 
                     LEFT JOIN ( SELECT  
-                            relation_facet_id,  
+                            relation_item_id,  
                             GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list  
                             FROM facets  
                             LEFT JOIN facets_items_relation on facet_id = relation_facet_id  
-                                GROUP BY relation_facet_id  
-                    ) AS rel ON rel.relation_facet_id = item_id  
+                                GROUP BY relation_item_id  
+                    ) AS rel ON rel.relation_item_id = item_id  
                             WHERE item_is_deleted = 0
                                 AND MATCH(item_title_url, item_content_url, item_url_domain) AGAINST (:qa)
                                           LIMIT $start, $limit";
