@@ -13,6 +13,7 @@ $data = [
     'facets'            => '刻面',
     'content'           => '內容',
     'navigation'        => '導航',
+    'category'          => '类别',
     'visibility'        => '能見度',
     'number'            => '數字',
     'icon'              => '圖標',

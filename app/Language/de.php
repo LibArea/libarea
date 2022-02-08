@@ -14,6 +14,7 @@ $data = [
     'facets'            => 'Facetten',
     'content'           => 'Inhalt',
     'navigation'        => 'Navigation',
+    'category'          => 'Kategorie',
     'visibility'        => 'Sichtweite',
     'number'            => 'Zahl',
     'icon'              => 'Symbol',

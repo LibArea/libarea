@@ -48,14 +48,15 @@ return [
       [
         'title' => Translate::get('topic'),
         'value' => 'topic',
-      ],
-      [
+      ], [
         'title' => Translate::get('blog'),
         'value' => 'blog',
-      ],
-      [
+      ], [
         'title' => Translate::get('section'),
         'value' => 'section',
+      ], [
+        'title' => Translate::get('category'),
+        'value' => 'category',
       ]
     ],
     

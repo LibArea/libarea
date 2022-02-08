@@ -13,6 +13,7 @@ $data = [
     'facets'            => 'Facets',
     'content'           => 'Content',
     'navigation'        => 'Navigation',
+    'category'          => 'Category',
     'visibility'        => 'Visibility',
     'number'            => 'Number',
     'icon'              => 'Icon',

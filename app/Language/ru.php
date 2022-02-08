@@ -14,6 +14,7 @@ $data = [
     'facets'            => 'Фасеты',
     'content'           => 'Контент',
     'navigation'        => 'Навигация',
+    'category'          => 'Категория',
     'visibility'        => 'Видимость',
     'number'            => 'Число',
     'icon'              => 'Иконка',

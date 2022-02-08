@@ -10,6 +10,7 @@ $data = [
     'facets'            => 'Fațete',
     'content'           => 'Conţinut',
     'navigation'        => 'Navigare',
+    'category'          => 'Categorie',
     'visibility'        => 'Vizibilitate',
     'number'            => 'Număr',
     'icon'              => 'Pictogramă',
