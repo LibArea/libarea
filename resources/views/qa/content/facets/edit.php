@@ -111,18 +111,6 @@
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
-              'title' => Translate::get('web-cat'),
-              'name' => 'facet_is_web',
-              'checked' => $fs['facet_is_web'],
-              'help' => Translate::get('web-cat-help')
-            ],
-            [
-              'title' => Translate::get('soft-cat'),
-              'name' => 'facet_is_soft',
-              'checked' => $fs['facet_is_soft'],
-              'help' => Translate::get('soft-cat-help')
-            ],
-            [
               'title' => Translate::get('root'),
               'name' => 'facet_top_level',
               'checked' => $fs['facet_top_level'],

@@ -218,6 +218,7 @@ $data = [
     'yes'               => 'Yes',
     'no'                => 'No',
     'all'               => 'All',
+    'alls'              => 'Tout',
     'you'               => 'You',
     'from'              => 'From',
     'by'                => 'by',
@@ -365,13 +366,6 @@ $data = [
     'enter'                 => 'Enter',
     'enter your password'   => 'Enter password',
     'enter content'         => 'Enter content',
-
-    /* web / soft */
-    'related.sites'         => 'Sites connexes',
-    'web-cat'               => 'Are there in the site directory?',
-    'web-cat-help'          => 'In the site catalog, will be a Category (will become visible)',
-    'soft-cat'              => 'Are there programs in the catalog?',
-    'soft-cat-help'         => 'In the program directory, will be Category (will become visible)',
 
     /* Setting */
     'info-setting'          => 'Fill in your name, this will help attendees refer to you by name. <br> <br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',

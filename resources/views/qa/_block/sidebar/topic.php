@@ -8,15 +8,6 @@
   </div>
 <?php } ?>
 
-<?php if ($data['facet']['facet_is_web'] == 1) { ?>
-  <div class="box-white bg-violet-50">
-    <a class="green-600" href="<?= getUrlByName('web.topic', ['slug' => $data['facet']['facet_slug']]); ?>">
-      <i class="bi bi-link-45deg text-2xl middle"></i>
-      <?= Translate::get('related.sites'); ?>
-    </a>
-  </div>
-<?php } ?>
-
 <?php if (!empty($data['high_topics'])) { ?>
   <?= Tpl::import('/_block/sidebar/topic_block', ['data' => $data['high_topics'], 'lang' => 'upper']); ?>
 <?php } ?>

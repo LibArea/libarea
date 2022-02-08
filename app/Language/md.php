@@ -209,6 +209,7 @@ $data = [
     'yes'               => 'Da',
     'no'                => 'Nu',
     'all'               => 'Tot',
+    'alls'              => 'Întreg',
     'you'               => 'Tu',
     'from'              => 'Din',
     'in'                => 'In',
@@ -276,13 +277,6 @@ $data = [
     'messages'      => 'Mesaje',
     'post'          => 'Postează',
     'posts'         => 'Postări',
-
-    /* web / soft */
-    'related.sites'         => 'Site-uri similare',
-    'web-cat'               => 'Disponibil în directorul site-ului?',
-    'web-cat-help'          => 'În catalogul site - ului, va fi o categorie (va deveni vizibil)',
-    'soft-cat'              => 'Există programe în catalog?',
-    'soft-cat-help'         => 'În directorul programului, va fi Categoria (va deveni vizibilă)',
 
     'setting profile'       => 'Setari profil',
     'setting profile page'  => 'Pagina de configurare a profilului',

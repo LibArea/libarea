@@ -118,22 +118,10 @@
         ]
       ]); ?>
 
-      <?php if ($fs['facet_type'] == 'topic' && UserData::checkAdmin()) { ?>
+      <?php if ($fs['facet_type'] != 'blog' && UserData::checkAdmin()) { ?>
 
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
-            [
-              'title' => Translate::get('web-cat'),
-              'name' => 'facet_is_web',
-              'checked' => $fs['facet_is_web'],
-              'help' => Translate::get('web-cat-help')
-            ],
-            [
-              'title' => Translate::get('soft-cat'),
-              'name' => 'facet_is_soft',
-              'checked' => $fs['facet_is_soft'],
-              'help' => Translate::get('soft-cat-help')
-            ],
             [
               'title' => Translate::get('root'),
               'name' => 'facet_top_level',
@@ -201,7 +189,7 @@
       <textarea class="add max-w780" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
       <div class="mb20 text-sm gray-400">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
-      <?php if ($fs['facet_type'] == 'topic') { ?>
+      <?php if ($fs['facet_type'] != 'blog') { ?>
         <?= Tpl::import('/_block/form/select/related-posts', [
           'data'          => $data,
           'action'        => 'edit',
@@ -250,10 +238,10 @@
           'type'  => $fs['facet_type'],
         ]); ?>
       <?php } ?>
-      <div class="mb20">
+      <fieldset>
         <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">
         <?= sumbit(Translate::get('edit')); ?>
-      </div>
+      </fieldset>
     </form>
   </div>
 </main>

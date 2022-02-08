@@ -143,12 +143,19 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_post_related,
                     facet_focus_count,
                     facet_count,
-                    facet_is_web,
-                    facet_is_soft,
                     facet_is_deleted
                         FROM facets WHERE $sort";
 
         return DB::run($sql, ['params' => $params])->fetch();
+    }
+
+    // Let's check the uniqueness of slug depending on the type of tree
+    // Проверим уникальность slug в зависимости от типа дерева
+    public static function uniqueSlug($facet_slug, $facet_type)
+    {
+        $sql = "SELECT facet_slug, facet_type FROM facets WHERE facet_slug = :slug AND facet_type = :type";
+        
+        return DB::run($sql, ['slug' => $facet_slug, 'type' => $facet_type])->fetch();
     }
 
     // Facet owner 
@@ -174,8 +181,6 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_post_related,
                     facet_focus_count,
                     facet_count,
-                    facet_is_web,
-                    facet_is_soft,
                     facet_is_deleted
                         FROM facets 
                             WHERE facet_type = :type AND facet_user_id = :uid AND facet_is_deleted = 0";
@@ -392,8 +397,6 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_top_level         = :facet_top_level, 
                     facet_tl                = :facet_tl,                    
                     facet_post_related      = :facet_post_related, 
-                    facet_is_web            = :facet_is_web,
-                    facet_is_soft           = :facet_is_soft,
                     facet_type              = :facet_type
                         WHERE facet_id      = :facet_id";
 
@@ -472,7 +475,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_title,
                     facet_slug,
                     facet_img,
-                    facet_is_web,
+                    facet_type,
                     matching_chaid_id,
                     matching_parent_id
                         FROM facets  
@@ -495,7 +498,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_title,
                     facet_slug,
                     facet_img,
-                    facet_is_web,
+                    facet_type,
                     matching_chaid_id,
                     matching_parent_id
                         FROM facets
@@ -518,7 +521,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_title,
                     facet_slug,
                     facet_img,
-                    facet_is_web,
+                    facet_type,
                     facet_chaid_id,
                     facet_parent_id
                         FROM facets  
@@ -541,7 +544,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_title,
                     facet_slug,
                     facet_img,
-                    facet_is_web,
+                    facet_type,
                     facet_chaid_id,
                     facet_parent_id
                         FROM facets
@@ -561,7 +564,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_slug,
                     facet_img,
                     facet_top_level,
-                    facet_is_web                    
+                    facet_type                    
                         FROM facets  
                             WHERE facet_top_level = 0";
 

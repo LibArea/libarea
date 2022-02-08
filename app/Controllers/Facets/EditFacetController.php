@@ -65,8 +65,6 @@ class EditFacetController extends MainController
         $facet_merged_id            = Request::getPostInt('facet_merged_id');
         $facet_top_level            = Request::getPostInt('facet_top_level');
         $facet_tl                   = Request::getPostInt('content_tl');
-        $facet_is_web               = Request::getPostInt('facet_is_web');
-        $facet_is_soft              = Request::getPostInt('facet_is_soft');
         $facet_type                 = Request::getPost('facet_type');
 
         $facet = FacetModel::getFacet($facet_id, 'id');
@@ -132,7 +130,7 @@ class EditFacetController extends MainController
 
         // Проверим повтор URL                       
         if ($facet_slug != $facet['facet_slug']) {
-            if (FacetModel::getFacet($facet_slug, 'slug')) {
+            if (FacetModel::uniqueSlug($facet_slug, $facet_new_type)) {
                 addMsg(Translate::get('url-already-exists'), 'error');
                 redirect(getUrlByName($facet_new_type  . '.edit', ['id' => $facet['facet_id']]));
             }
@@ -163,8 +161,6 @@ class EditFacetController extends MainController
                 'facet_tl'                  => $facet_tl,
                 'facet_top_level'           => $facet_top_level,
                 'facet_post_related'        => $post_related,
-                'facet_is_web'              => $facet_is_web,
-                'facet_is_soft'             => $facet_is_soft,
                 'facet_type'                => $facet_new_type,
             ]
         );
