@@ -43,6 +43,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 Route::get('/topic/edit')->controller('Facets\EditFacetController@edit', ['topic'])->name('topic.edit.pr');
                 Route::get('/blog/edit')->controller('Facets\EditFacetController@edit', ['blog'])->name('blog.edit.pr');
                 Route::get('/section/edit')->controller('Facets\EditFacetController@edit', ['section'])->name('section.edit.pr');
+                Route::get('/category/edit')->controller('Facets\EditFacetController@edit', ['category'])->name('category.edit.pr');
             Route::endProtect();
     Route::endType();
 
@@ -158,9 +159,11 @@ Route::get('/topics/new/page/{page?}')->controller('Facets\AllFacetController', 
 
 Route::get('/topic/{slug}')->controller('Facets\TopicFacetController', ['facet.feed', 'topic'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('topic');
 
-Route::get('/facets/structure')->controller('Facets\TreeFacetController', ['topic'])->name('topic.structure');
+Route::get('/facets/structure')->controller('Facets\TreeFacetController', ['all'])->name('all.structure');
+Route::get('/facets/structure/topic')->controller('Facets\TreeFacetController', ['topic'])->name('topic.structure');
 Route::get('/facets/structure/blog')->controller('Facets\TreeFacetController', ['blog'])->name('blog.structure');
 Route::get('/facets/structure/section')->controller('Facets\TreeFacetController', ['section'])->name('section.structure');
+Route::get('/facets/structure/category')->controller('Facets\TreeFacetController', ['category'])->name('category.structure');
 
 Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['facet.recommend', 'topic'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
 Route::get('/topic/{slug}/recommend/page/{page?}')->controller('Facets\TopicFacetController', ['facet.recommend', 'topic'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);

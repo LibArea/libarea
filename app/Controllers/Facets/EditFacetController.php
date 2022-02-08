@@ -83,14 +83,19 @@ class EditFacetController extends MainController
             $facet_new_type = $facet_type;
         }
 
-        $redirect = getUrlByName('admin.topic.edit', ['id' => $facet['facet_id']]);
-        $type = 'topic';
-        if ($facet_new_type == 'blog') {
-            $redirect   = getUrlByName('blog.edit', ['id' => $facet['facet_id']]);
-            $type       = 'blog';
-        } elseif ($facet_new_type == 'section') {
-            $redirect   = getUrlByName('admin.sections');
-            $type       = 'section';
+        switch ($facet_new_type) {
+            case 'blog':
+                $redirect   = getUrlByName('blog.edit', ['id' => $facet['facet_id']]);
+                break;
+            case 'section':
+                $redirect   = getUrlByName('admin.sections');
+                break;
+            case 'category':
+                $redirect   = getUrlByName('topic.edit', ['id' => $facet['facet_id']]);
+                break;
+            default:
+                $redirect   = getUrlByName('topic.edit', ['id' => $facet['facet_id']]);
+                break;
         }
 
         Validation::Slug($facet_slug, 'Slug (url)', $redirect);
@@ -129,7 +134,7 @@ class EditFacetController extends MainController
         if ($facet_slug != $facet['facet_slug']) {
             if (FacetModel::getFacet($facet_slug, 'slug')) {
                 addMsg(Translate::get('url-already-exists'), 'error');
-                redirect(getUrlByName($type . '.edit', ['id' => $facet['facet_id']]));
+                redirect(getUrlByName($facet_new_type  . '.edit', ['id' => $facet['facet_id']]));
             }
         }
 
@@ -145,25 +150,24 @@ class EditFacetController extends MainController
         }
         $post_related = implode(',', $id ?? []);
 
-        $facet_slug     = strtolower($facet_slug);
-        $data = [
-            'facet_id'                  => $facet_id,
-            'facet_title'               => $facet_title,
-            'facet_description'         => $facet_description,
-            'facet_short_description'   => $facet_short_description,
-            'facet_info'                => $facet_info,
-            'facet_slug'                => $facet_slug,
-            'facet_seo_title'           => $facet_seo_title,
-            'facet_user_id'             => $facet_user_id ?? 1,
-            'facet_tl'                  => $facet_tl,
-            'facet_top_level'           => $facet_top_level,
-            'facet_post_related'        => $post_related,
-            'facet_is_web'              => $facet_is_web,
-            'facet_is_soft'             => $facet_is_soft,
-            'facet_type'                => $type,
-        ];
-
-        FacetModel::edit($data);
+        FacetModel::edit(
+            [
+                'facet_id'                  => $facet_id,
+                'facet_title'               => $facet_title,
+                'facet_description'         => $facet_description,
+                'facet_short_description'   => $facet_short_description,
+                'facet_info'                => $facet_info,
+                'facet_slug'                => strtolower($facet_slug),
+                'facet_seo_title'           => $facet_seo_title,
+                'facet_user_id'             => $facet_user_id ?? 1,
+                'facet_tl'                  => $facet_tl,
+                'facet_top_level'           => $facet_top_level,
+                'facet_post_related'        => $post_related,
+                'facet_is_web'              => $facet_is_web,
+                'facet_is_soft'             => $facet_is_soft,
+                'facet_type'                => $facet_new_type,
+            ]
+        );
 
         // Тема, выбор детей в дереве
         $highs  = $fields['high_facet_id'] ?? [];
@@ -191,8 +195,7 @@ class EditFacetController extends MainController
 
         addMsg(Translate::get('change.saved'), 'success');
 
-        if ($type == 'section') redirect(getUrlByName('admin.sections'));
-        redirect(getUrlByName($type, ['slug' => $facet_slug]));
+        redirect($redirect);
     }
 
     public function pages()

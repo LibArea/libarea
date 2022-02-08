@@ -638,4 +638,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         return  DB::run($sql, $params);
     }
+    
+    public static function types()
+    {
+        return  DB::run('SELECT type_id, type_code, type_lang FROM facets_types');
+    }
 }

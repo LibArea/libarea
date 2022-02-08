@@ -15,9 +15,10 @@ class TreeFacetController extends MainController
             [
                 'meta'  => meta($m = [], Translate::get('structure'), Translate::get('structure-desc')),
                 'data'  => [
-                    'sheet'     => 'structure',
-                    'type'      => $type,
-                    'structure' => self::builder(0, 0, FacetModel::getStructure($type)),
+                    'sheet'         => 'structure',
+                    'type'          => $type,
+                    'structure'     => self::builder(0, 0, FacetModel::getStructure($type)),
+                    'types_facets'  => FacetModel::types(),
                 ]
             ]
         );

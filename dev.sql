@@ -262,6 +262,34 @@ INSERT INTO `facets_signed` (`signed_id`, `signed_facet_id`, `signed_user_id`) V
 
 -- --------------------------------------------------------
 
+
+--
+-- Структура таблицы, дамп данных (и индексы) таблицы `facets_types`
+--  
+
+CREATE TABLE `facets_types` (
+  `type_id` int(11) NOT NULL,
+  `type_code` varchar(50) NOT NULL,
+  `type_lang` varchar(50) NOT NULL,
+  `type_title` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `facets_types` (`type_id`, `type_code`, `type_lang`, `type_title`) VALUES
+(1, 'topic', 'topic', 'Темы'),
+(2, 'blog', 'blog', 'Блог'),
+(3, 'section', 'section', 'Секция'),
+(4, 'category', 'category', 'Категории');
+
+ALTER TABLE `facets_types`
+  ADD PRIMARY KEY (`type_id`),
+  ADD UNIQUE KEY `title_UNIQUE` (`type_code`);
+
+ALTER TABLE `facets_types`
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  
+-- --------------------------------------------------------  
+
 --
 -- Структура таблицы `favorites`
 --
