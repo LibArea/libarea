@@ -56,4 +56,9 @@ class AllFacetController extends MainController
             ]
         );
     }
+    
+    public static function types()
+    {
+        return FacetModel::types();
+    }
 }
