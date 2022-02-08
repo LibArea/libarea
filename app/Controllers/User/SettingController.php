@@ -164,10 +164,7 @@ class SettingController extends MainController
 
         Validation::Length($password2, Translate::get('password'), 8, 32, $redirect);
 
-        // Данные участника
-        $account    = Request::getSession('account');
-        $userInfo   = UserModel::userInfo($account['email']);
-
+        $userInfo   = UserModel::userInfo($this->user['email']);
         if (!password_verify($password, $userInfo['password'])) {
             addMsg(Translate::get('old-password-err'), 'error');
             redirect($redirect);
@@ -175,7 +172,7 @@ class SettingController extends MainController
 
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
 
-        SettingModel::editPassword(['id' => $account['id'], 'password' => $newpass]);
+        SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
 
         addMsg(Translate::get('password changed'), 'success');
 
