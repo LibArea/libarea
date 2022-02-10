@@ -80,7 +80,7 @@ class SettingController extends MainController
         );
 
 
-        addMsg(Translate::get('change.saved'), 'success');
+        addMsg('change.saved', 'success');
         redirect($redirect);
     }
 
@@ -121,7 +121,7 @@ class SettingController extends MainController
             UploadImage::cover($cover, $this->user['id'], 'user');
         }
 
-        addMsg(Translate::get('change.saved'), 'success');
+        addMsg('change.saved', 'success');
         redirect($redirect);
     }
 
@@ -152,12 +152,12 @@ class SettingController extends MainController
 
         $redirect = getUrlByName('setting.security', ['login' => $this->user['login']]);
         if ($password2 != $password3) {
-            addMsg(Translate::get('pass-match-err'), 'error');
+            addMsg('pass-match-err', 'error');
             redirect($redirect);
         }
 
         if (substr_count($password2, ' ') > 0) {
-            addMsg(Translate::get('password-spaces'), 'error');
+            addMsg('password-spaces', 'error');
             redirect($redirect);
         }
 
@@ -165,7 +165,7 @@ class SettingController extends MainController
 
         $userInfo   = UserModel::userInfo($this->user['email']);
         if (!password_verify($password, $userInfo['password'])) {
-            addMsg(Translate::get('old-password-err'), 'error');
+            addMsg('old-password-err', 'error');
             redirect($redirect);
         }
 
@@ -173,7 +173,7 @@ class SettingController extends MainController
 
         SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
 
-        addMsg(Translate::get('password changed'), 'success');
+        addMsg('password changed', 'success');
 
         redirect($redirect);
     }
@@ -242,7 +242,7 @@ class SettingController extends MainController
         );
 
 
-        addMsg(Translate::get('change.saved'), 'success');
+        addMsg('change.saved', 'success');
 
         redirect(getUrlByName('setting.notifications', ['login' => $this->user['login']]));
     }

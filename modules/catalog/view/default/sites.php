@@ -72,7 +72,7 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
   </main>
   <aside class="col-span-3 mb-col-12 relative mb-none">
-    <div class="box-yellow mt15 text-sm"><?= $data['category']['facet_description']; ?></div>
+    <div class="box-yellow mt15 text-sm"><?= $data['category']['facet_info']; ?></div>
   </aside>
 </div>
 <?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

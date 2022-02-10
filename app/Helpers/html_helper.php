@@ -29,7 +29,7 @@ function facet_logo_img($file, $size, $alt, $style)
         $src = AG_PATH_FACETS_SMALL_LOGOS . $file;
     }
 
-    $img = '<img class="' . $style . '" src="' . $src . '" alt="' . $alt . '">';
+    $img = '<img class="' . $style . '" src="' . $src . '" title="' . $alt . '" alt="' . $alt . '">';
 
     return $img;
 }
@@ -42,7 +42,7 @@ function user_avatar_img($file, $size, $alt, $style)
         $src = AG_PATH_USERS_SMALL_AVATARS . $file;
     }
 
-    $img = '<img class="' . $style . '" src="' . $src . '" alt="' . $alt . '">';
+    $img = '<img class="' . $style . '" src="' . $src . '" title="' . $alt . '" alt="' . $alt . '">';
 
     return $img;
 }
@@ -65,7 +65,7 @@ function post_img($file, $alt, $style, $type)
         $src = AG_PATH_POSTS_THUMB . $file;
     }
 
-    $img = '<img class="' . $style . '" src="' . $src . '" alt="' . $alt . '">';
+    $img = '<img class="' . $style . '" src="' . $src . '" title="' . $alt . '" alt="' . $alt . '">';
 
     return $img;
 }
@@ -80,11 +80,11 @@ function website_img($domain, $type, $alt, $css = '')
     }
 
     if (file_exists(HLEB_PUBLIC_DIR . $path . $domain . '.png')) {
-        $img = '<img class="' . $css . '" src="' . $path . $domain . '.png" alt="' . $alt . '">';
+        $img = '<img class="' . $css . '" src="' . $path . $domain . '.png" title="' . $alt . '" alt="' . $alt . '">';
         return $img;
     }
 
-    $img = '<img class="mr5 ' . $w_h . '" src="' . $path . 'no-link.png" alt="' . $alt . '">';
+    $img = '<img class="mr5 ' . $w_h . '" src="' . $path . 'no-link.png" title="' . $alt . '" alt="' . $alt . '">';
 
     return $img;
 }

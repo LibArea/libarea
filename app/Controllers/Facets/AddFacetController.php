@@ -53,7 +53,7 @@ class AddFacetController extends MainController
             $redirect = getUrlByName('blogs.my', ['login' => $this->user['login']]);
             if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
                 if (in_array($facet_slug, Config::get('stop-blog'))) {
-                    addMsg(Translate::get('stop-blog'), 'error');
+                    addMsg('stop-blog', 'error');
                     redirect($redirect);
                 }
             }
@@ -68,12 +68,12 @@ class AddFacetController extends MainController
 
         // ALTER TABLE `facets` ADD UNIQUE `unique_index`(`facet_slug`, `facet_type`);
         if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
-            addMsg(Translate::get('url-already-exists'), 'error');
+            addMsg('url-already-exists', 'error');
             redirect($redirect);
         }
 
         if (preg_match('/\s/', $facet_slug) || strpos($facet_slug, ' ')) {
-            addMsg(Translate::get('url-gaps'), 'error');
+            addMsg('url-gaps', 'error');
             redirect($redirect);
         }
 

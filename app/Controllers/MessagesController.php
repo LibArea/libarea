@@ -77,12 +77,12 @@ class MessagesController extends MainController
 
         $id = Request::getInt('id');
         if (!$dialog = MessagesModel::getDialogById($id)) {
-            addMsg(Translate::get('the dialog does not exist'), 'error');
+            addMsg('the dialog does not exist', 'error');
             redirect(getUrlByName('messages', ['login' => $this->user['login']]));
         }
 
         if ($dialog['dialog_recipient_id'] != $this->user['id'] and $dialog['dialog_sender_id'] != $this->user['id']) {
-            addMsg(Translate::get('the topic does not exist'), 'error');
+            addMsg('the topic does not exist', 'error');
             redirect(getUrlByName('messages', ['login' => $this->user['login']]));
         }
 
@@ -137,7 +137,7 @@ class MessagesController extends MainController
     {
         $login      = Request::get('login');
         if (!$user  = UserModel::getUser($login, 'slug')) {
-            addMsg(Translate::get('member does not exist'), 'error');
+            addMsg('member does not exist', 'error');
             redirect('/');
         }
 
@@ -171,7 +171,7 @@ class MessagesController extends MainController
         // Если пользователь заморожен и если личное сообщение пустое
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
         if ($content == '') {
-            addMsg(Translate::get('enter content'), 'error');
+            addMsg('enter content', 'error');
             redirect(getUrlByName('messages', ['login' => $this->user['login']]));
         }
 

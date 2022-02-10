@@ -37,7 +37,7 @@ class RecoverController extends MainController
 
         if (Config::get('general.captcha')) {
             if (!Integration::checkCaptchaCode()) {
-                addMsg(Translate::get('code error'), 'error');
+                addMsg('code error', 'error');
                 redirect($recover_uri);
             }
         }
@@ -47,13 +47,13 @@ class RecoverController extends MainController
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['email'])) {
-            addMsg(Translate::get('email.no.site'), 'error');
+            addMsg('email.no.site', 'error');
             redirect($recover_uri);
         }
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['ban_list'] == UserData::BANNED_USER) {
-            addMsg(Translate::get('account.being.verified'), 'error');
+            addMsg('account.being.verified', 'error');
             redirect($recover_uri);
         }
 
@@ -69,7 +69,7 @@ class RecoverController extends MainController
         // Отправка e-mail
         SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => getUrlByName('recover.code', ['code' => $code])]);
 
-        addMsg(Translate::get('new password email'), 'success');
+        addMsg('new password email', 'success');
         redirect(getUrlByName('login'));
     }
 
@@ -80,7 +80,7 @@ class RecoverController extends MainController
         $user_id    = UserModel::getPasswordActivate($code);
 
         if (!$user_id) {
-            addMsg(Translate::get('code-incorrect'), 'error');
+            addMsg('code-incorrect', 'error');
             redirect(getUrlByName('recover'));
         }
 
@@ -122,7 +122,7 @@ class RecoverController extends MainController
 
         UserModel::editRecoverFlag($user_id);
 
-        addMsg(Translate::get('password changed'), 'success');
+        addMsg('password changed', 'success');
         redirect(getUrlByName('login'));
     }
 
@@ -133,13 +133,13 @@ class RecoverController extends MainController
         $activate_email = UserModel::getEmailActivate($code);
 
         if (!$activate_email) {
-            addMsg(Translate::get('code-used'), 'error');
+            addMsg('code-used', 'error');
             redirect('/');
         }
 
         UserModel::EmailActivate($activate_email['user_id']);
 
-        addMsg(Translate::get('yes-email-pass'), 'success');
+        addMsg('yes-email-pass', 'success');
         redirect(getUrlByName('login'));
     }
 }

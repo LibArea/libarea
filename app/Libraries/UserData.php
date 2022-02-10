@@ -1,7 +1,5 @@
 <?php
 
-//namespace App\Controllers\User;
-
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\MiddlewareModel;
 

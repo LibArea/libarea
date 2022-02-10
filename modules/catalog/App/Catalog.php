@@ -43,10 +43,10 @@ class Catalog
             'url'        => getUrlByName('web.dir.top', ['slug' => $category['facet_slug']]),
         ];
 
-        $title = Translate::get('websites') . ': ' . $category['facet_title'];
+        $title = $category['facet_title']. ' - ' . mb_strtolower(Translate::get('websites'), 'UTF-8');
         $desc  = Translate::get('websites') . ', ' . $category['facet_title'] . '. ' . $category['facet_description'];
         if ($sheet == 'web.top') {
-            $title = Translate::get('websites') . ' (top): ' . $category['facet_title'];
+            $title = $category['facet_title']. ' - ' . mb_strtolower(Translate::get('websites') . ' (top)', 'UTF-8');
             $desc  = Translate::get('websites') . ' (top), ' . $category['facet_title'] . '. ' . $category['facet_description'];
         }
 

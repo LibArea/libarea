@@ -56,7 +56,7 @@ class Add
 
         $item = WebModel::getItemOne($item_url_domain, $this->user['id']);
         if ($item) {
-            addMsg(Translate::get('the site is already there'), 'error');
+            addMsg('the site is already there', 'error');
             redirect($redirect);
         }
 

@@ -58,7 +58,7 @@ class Сonsole
     public static function consoleRedirect()
     {
         if (PHP_SAPI != 'cli') {
-            addMsg(Translate::get('the command is executed'), 'success');
+            addMsg('the command is executed', 'success');
             redirect(getUrlByName('admin.tools'));
         }
         return true;

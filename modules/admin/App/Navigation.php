@@ -45,7 +45,7 @@ class Navigation
                 NavigationModel::del($id);
             }
 
-            addMsg(Translate::get('the command is executed'), 'success');
+            addMsg('the command is executed', 'success');
             redirect(getUrlByName('admin.navigation'));
         }
 
@@ -100,7 +100,7 @@ class Navigation
             }
         }
 
-        addMsg(Translate::get('the command is executed'), 'success');
+        addMsg('the command is executed', 'success');
         redirect(getUrlByName('admin.navigation'));
     }
 
@@ -191,7 +191,7 @@ class Navigation
             );
         }
 
-        addMsg(Translate::get('the command is executed'), 'success');
+        addMsg('the command is executed', 'success');
         redirect($redirect);
     }
 

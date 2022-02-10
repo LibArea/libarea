@@ -59,19 +59,19 @@ class InvitationsController extends MainController
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['email'])) {
-            addMsg(Translate::get('user-already'), 'error');
+            addMsg('user-already', 'error');
             redirect($redirect);
         }
 
         $inv_user = InvitationModel::duplicate($invitation_email);
         if ($inv_user['invitation_email'] == $invitation_email) {
-            addMsg(Translate::get('invate-to-replay'), 'error');
+            addMsg('invate-to-replay', 'error');
             redirect($redirect);
         }
 
         // TODO : + Config::get('invite.limit')
         if ($this->user['invitation_available'] >= 5) {
-            addMsg(Translate::get('invate.limit.stop'), 'error');
+            addMsg('invate.limit.stop', 'error');
             redirect($redirect);
         }
 
@@ -91,7 +91,7 @@ class InvitationsController extends MainController
         $link = getUrlByName('invite.reg', ['code' => $invitation_code]);
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
-        addMsg(Translate::get('invite created'), 'success');
+        addMsg('invite created', 'success');
         redirect($redirect);
     }
 }

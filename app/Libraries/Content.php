@@ -109,7 +109,7 @@ class Content
     public static function stopContentQuietМode($user_limiting_mode)
     {
         if ($user_limiting_mode == 1) {
-            addMsg(Translate::get('limiting-mode-1'), 'error');
+            addMsg('limiting-mode-1', 'error');
             redirect('/');
         }
 

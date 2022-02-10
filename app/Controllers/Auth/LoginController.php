@@ -30,24 +30,24 @@ class LoginController extends MainController
         $user = UserModel::userInfo($email);
 
         if (empty($user['id'])) {
-            addMsg(Translate::get('member does not exist'), 'error');
+            addMsg('member does not exist', 'error');
             redirect($redirect);
         }
 
         // Находится ли в бан- листе
         if (UserModel::isBan($user['id'])) {
-            addMsg(Translate::get('account.being.verified'), 'error');
+            addMsg('account.being.verified', 'error');
             redirect($redirect);
         }
 
         // Активирован ли E-mail
         if (!UserModel::isActivated($user['id'])) {
-            addMsg(Translate::get('account.not.activated'), 'error');
+            addMsg('account.not.activated', 'error');
             redirect($redirect);
         }
 
         if (!password_verify($password, $user['password'])) {
-            addMsg(Translate::get('email.password.not.correct'), 'error');
+            addMsg('email.password.not.correct', 'error');
             redirect($redirect);
         }
 

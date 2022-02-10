@@ -126,7 +126,7 @@ class Badges
             ]
         );
 
-        addMsg(Translate::get('successfully'), 'success');
+        addMsg('successfully', 'success');
 
         redirect('/admin/users/' . $uid . '/edit');
     }
@@ -171,7 +171,7 @@ class Badges
             ]
         );
 
-        addMsg(Translate::get('the command is executed'), 'success');
+        addMsg('the command is executed', 'success');
 
         redirect('/admin/users/' . $uid . '/edit');
     }

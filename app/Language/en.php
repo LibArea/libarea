@@ -351,9 +351,11 @@ $data = [
 
     /* Meta - desc */
     'profile.posts.title'       => '%1$s — member profile, posts ',
+    'profile.posts.all.title'   => '%1$s — post list ',
     'profile.answers.title'     => '%1$s — participant replies ',
     'profile.comments.title'    => '%1$s — participant comments ',
     'profile.posts.desc'        => '%1$s — member profile page. Posts, awards and contacts. %2$s',
+    'profile.posts.all.desc'    => '%1$s — list of posts, articles of the participant in chronological order. All publications on the site.',
     'profile.answers.desc'      => '%1$s — page of responses of the participant to posts in topics and blogs. %2$s',
     'profile.comments.desc'     => '%1$s — participant comments in chronological order. %2$s',
     

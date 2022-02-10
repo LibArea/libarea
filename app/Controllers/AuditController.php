@@ -41,7 +41,7 @@ class AuditController extends MainController
     public static function stopContentQuietМode($user_limiting_mode)
     {
         if ($user_limiting_mode == 1) {
-            addMsg(Translate::get('limiting-mode-1'), 'error');
+            addMsg('limiting-mode-1', 'error');
             redirect('/');
         }
         return true;
@@ -71,7 +71,7 @@ class AuditController extends MainController
             $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                addMsg(Translate::get('content-audit'), 'error');
+                addMsg('content-audit', 'error');
                 return false;
             }
         }
@@ -86,7 +86,7 @@ class AuditController extends MainController
             $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                addMsg(Translate::get('content-audit'), 'error');
+                addMsg('content-audit', 'error');
                 return false;
             }
         }

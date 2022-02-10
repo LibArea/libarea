@@ -343,9 +343,11 @@ $data = [
 
     /* Meta - desc */
     'profile.posts.title'       => '%1$s — profil membru, postări ',
+    'profile.posts.all.title'   => '%1$s — lista de postări ',
     'profile.answers.title'     => '%1$s — răspunsurile participantului ',
     'profile.comments.title'    => '%1$s — comentariile participantilor ',
     'profile.posts.desc'        => '%1$s — pagina de profil de membru. Postări, premii și contacte. %2$s',
+    'profile.posts.all.desc'    => '%1$s — lista de postări, articole ale participantului în ordine cronologică. Toate publicațiile de pe site',
     'profile.answers.desc'      => '%1$s — pagina de răspunsuri ale participantului la postările din subiecte și bloguri. %2$s',
     'profile.comments.desc'     => '%1$s — comentariile participanților în ordine cronologică. %2$s',
     

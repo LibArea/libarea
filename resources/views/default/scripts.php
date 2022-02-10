@@ -21,9 +21,9 @@
   <?php if ($msg = getMsg()) { ?>
     <?php foreach ($msg as $message) {  ?>
       <?php if ($message[1] == 'error') { ?>
-        Notiflix.Notify.failure('<?= $message[0]; ?>');
+        Notiflix.Notify.failure('<?= Translate::get($message[0]); ?>');
       <?php } else { ?>
-        Notiflix.Notify.info('<?= $message[0]; ?>');
+        Notiflix.Notify.info('<?= Translate::get($message[0]); ?>');
       <?php } ?>
     <?php } ?>
   <?php } ?>

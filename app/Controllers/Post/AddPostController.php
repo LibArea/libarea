@@ -109,7 +109,7 @@ class AddPostController extends MainController
 
         // Если нет темы
         if (!$topics) {
-            addMsg(Translate::get('select topic') . '!', 'error');
+            addMsg('select topic', 'error');
             redirect($redirect);
         }
 
@@ -244,7 +244,7 @@ class AddPostController extends MainController
 
         // Если нет темы
         if (!$topics) {
-            addMsg(Translate::get('select topic') . '!', 'error');
+            addMsg('select topic', 'error');
             redirect($redirect);
         }
 

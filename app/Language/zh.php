@@ -350,9 +350,11 @@ $data = [
 
     /* 元描述  */
     'profile.posts.title'       => '%1$s — 會員資料、帖子 ',
+    'profile.posts.all.title'   => '%1$s — 帖子列表 ',
     'profile.answers.title'     => '%1$s — 參與者回复 ',
     'profile.comments.title'    => '%1$s — 參與者評論 ',
     'profile.posts.desc'        => '%1$s — 會員資料頁面。 帖子、獎項和聯繫方式. %2$s',
+    'profile.posts.all.desc'    => '%1$s — 帖子列表，按時間順序排列的參與者的文章。 網站上的所有出版物.',
     'profile.answers.desc'      => '%1$s — 參與者對主題和博客中的帖子的回复頁面. %2$s',
     'profile.comments.desc'     => '%1$s — 參與者評論按時間順序排列. %2$s',
     

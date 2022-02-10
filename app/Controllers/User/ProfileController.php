@@ -86,7 +86,7 @@ class ProfileController extends MainController
         return Tpl::agRender(
             '/user/profile/post',
             [
-                'meta'  => self::metadata($sheet, $profile),
+                'meta'  => self::metadata($sheet . '.all', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

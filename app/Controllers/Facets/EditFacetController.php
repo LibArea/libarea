@@ -117,7 +117,7 @@ class EditFacetController extends MainController
         // Проверим повтор URL                       
         if ($facet_slug != $facet['facet_slug']) {
             if (FacetModel::uniqueSlug($facet_slug, $facet_new_type)) {
-                addMsg(Translate::get('url-already-exists'), 'error');
+                addMsg('url-already-exists', 'error');
                 redirect(getUrlByName($facet_new_type  . '.edit', ['id' => $facet['facet_id']]));
             }
         }
@@ -175,7 +175,7 @@ class EditFacetController extends MainController
             FacetModel::addLowFacetMatching($arr_mc, $facet_id);
         }
 
-        addMsg(Translate::get('change.saved'), 'success');
+        addMsg('change.saved', 'success');
 
         redirect($redirect);
     }

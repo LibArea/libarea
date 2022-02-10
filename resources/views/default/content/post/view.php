@@ -242,7 +242,7 @@
             </div>
           <?php } ?>
 
-          <a class="  black inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+          <a title="<?= $topic['facet_title']; ?>" class="black inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
             <?= $topic['facet_title']; ?>
           </a>
 
@@ -255,8 +255,10 @@
   <?php } ?>
 
   <?php if ($post['post_content_img']) { ?>
-    <div class="box-white post-img">
-      <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 p15 br-rd5', 'cover', $post['post_content_img']); ?>
+    <div class="box-white">
+      <a title="<?= $post['post_title']; ?>" href="<?= AG_PATH_POSTS_COVER . $post['post_content_img']; ?>" class="lightbox">
+        <img class="w-100 br-rd5" src="<?= AG_PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
+      </a>
     </div>
   <?php } ?>
   <div class="share-btn box-white text-2xl center">
@@ -292,7 +294,7 @@
 </aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.post-body.full .post img, .post-img img, .answ-telo p img').forEach((articleImg) => {
+    document.querySelectorAll('.post-body.full .post img, .answ-telo p img').forEach((articleImg) => {
       // Add lightbox elements in blog articles for Tobii.
       const lightbox = document.createElement('a');
       lightbox.href = articleImg.src;
