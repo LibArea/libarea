@@ -4,10 +4,9 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{NotificationsModel, PostModel};
-use Content, Translate, Tpl;
+use Content, Translate, Tpl, UserData;
 
 class UserController extends MainController
 {

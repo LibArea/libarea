@@ -4,10 +4,9 @@ namespace App\Controllers\Post;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Content, UploadImage, Validation, Translate, Tpl;
+use Content, UploadImage, Validation, Translate, Tpl, UserData;
 
 class EditPostController extends MainController
 {
@@ -270,7 +269,7 @@ class EditPostController extends MainController
         }
         FacetModel::addPostFacets($arr, $post_id);
 
-        $facet = FacetModel::getFacet($topics[0]['id'], 'id');
+        $facet = FacetModel::getFacet($topics[0]['id'], 'id', 'topic');
         redirect(getUrlByName('page', ['facet' => $facet['facet_slug'], 'slug' => $post_slug]));
     }
 

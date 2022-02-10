@@ -26,6 +26,7 @@ $data = [
     'goods.services'        => 'Biens et services',
     'private.life'          => 'Accueil',
     'private.life.help'     => 'Enfants, animaux, loisirs...',
+    'security'              => 'Sécurité..',
     
     'web.desc'              => 'Liste des sites du répertoire classés par ordre chronologique. Possibilité de rechercher, signets, trier par popularité',
     'web.all'               => 'Nouveaux sites dans lannuaire',

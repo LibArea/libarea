@@ -11,12 +11,12 @@
 <div class="item-categories mb-block">
   <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
     <div class="mb10">
-      <a class="text-2xl block" href="<?= getUrlByName('web.dir', ['slug' => $cat['url']]); ?>">
+      <a class="text-2xl block" href="/web/<?= $cat['url']; ?>">
         <?= $cat['title']; ?>
       </a>
       <?php if (!empty($cat['sub'])) { ?>
         <?php foreach ($cat['sub'] as $sub) { ?>
-          <a class="pr10 text-sm black inline" href="<?= getUrlByName('web.dir', ['slug' => $sub['url']]); ?>">
+          <a class="pr10 text-sm black inline" href="/web/<?= $sub['url']; ?>">
             <?= $sub['title']; ?>
           </a>
         <?php } ?>

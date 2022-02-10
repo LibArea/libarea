@@ -4,9 +4,8 @@ namespace App\Controllers\Post;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel};
-use Content, Config, Tpl, Translate;
+use Content, Config, Tpl, Translate, UserData;
 
 class PostController extends MainController
 {
@@ -204,7 +203,7 @@ class PostController extends MainController
 
         Tpl::agIncludeTemplate('/content/post/postcode', ['post' => $post, 'user'   => $this->user]);
     }
-    
+
     // Посты по домену
     public function domain($sheet, $type)
     {

@@ -30,7 +30,7 @@
       </div>
     <?php } ?>
 
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' .$data['profile']['login'] . '/answers'); ?>
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/answers'); ?>
 
   <?php } else { ?>
     <?= no_content(Translate::get('no.answers'), 'bi bi-info-lg'); ?>

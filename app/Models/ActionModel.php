@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Middleware\Before\UserData;
+use UserData;
 use DB;
 
 class ActionModel extends \Hleb\Scheme\App\Models\MainModel
@@ -41,7 +41,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Поиск контента для форм
     public static function getSearch($search, $type)
-    {
+    { 
         $user = UserData::get();
         $field_id   = $type . '_id';
         if ($type == 'post') {
@@ -57,9 +57,16 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
             $field_id = 'facet_id';
             $field_tl = 'facet_tl';
             $field_name = 'facet_title';
-            $condition = 'AND facet_user_id = ' . $user['id'];
+            $condition = 'AND facet_user_id = ' . $user['id']; // AND facet_type = 'section'
             $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
-                    WHERE facet_title LIKE :facet_title AND facet_type = 'section' $condition ORDER BY facet_count DESC LIMIT 100";
+                    WHERE facet_title LIKE :facet_title  $condition ORDER BY facet_count DESC LIMIT 100";
+       } elseif ($type == 'category') {
+            $field_id = 'facet_id';
+            $field_tl = 'facet_tl';
+            $field_name = 'facet_title';
+            $condition = 'AND facet_user_id = ' . $user['id']; // AND facet_type = 'category'
+            $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
+                    WHERE facet_title LIKE :facet_title AND facet_type = 'category' $condition ORDER BY facet_count DESC LIMIT 100"; 
         } else {
             $condition = '';
             if ($user['trust_level'] != UserData::REGISTERED_ADMIN) {
@@ -70,14 +77,13 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
 
             $field_id = 'facet_id';
             $field_tl = 'facet_tl';
-            $field_name = 'facet_title';
+            $field_name = 'facet_title'; // AND facet_type = '$type'
             $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
                     WHERE facet_title LIKE :facet_title AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 200";
         }
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);
         $lists  = $result->fetchall();
-
 
         $response = [];
         foreach ($lists as $list) {

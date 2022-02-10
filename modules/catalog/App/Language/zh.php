@@ -26,6 +26,7 @@ $data = [
     'goods.services'        => '貨物與服務',
     'private.life'          => '家',
     'private.life.help'     => '兒童，動物，愛好...',
+    'security'              => '保安...',
     
     'web.desc'              => '目录中的站点列表按时间顺序排列。 能够搜索，书签，按受欢迎程度排序',
     'web.all'               => '目录中的新网站',

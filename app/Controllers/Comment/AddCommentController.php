@@ -4,9 +4,8 @@ namespace App\Controllers\Comment;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel};
-use Content, Validation, Translate, Tpl;
+use Content, Validation, Translate, Tpl, UserData;
 
 class AddCommentController extends MainController
 {

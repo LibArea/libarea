@@ -26,6 +26,7 @@ $data = [
     'goods.services'        => 'Bunuri si servicii',
     'private.life'          => 'Acasă ',
     'private.life.help'     => 'Copii, animale, hobby-uri...',
+    'security'              => 'Securitate...',
     
     'web.desc'              => 'Lista de site-uri din catalog plasate în ordine cronologică. Abilitatea de a căuta, marcaj, Sortare după popularitate',
     'web.all'               => 'Site-uri noi în catalog',

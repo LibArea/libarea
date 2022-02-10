@@ -4,9 +4,8 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\HomeModel;
-use Content, Config, Translate, Tpl;
+use Content, Config, Translate, Tpl, UserData;
 
 class HomeController extends MainController
 {

@@ -1,11 +1,11 @@
 <div class="col-span-2 mb-none">
   <nav class="sticky top-sm">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
+    <?= tabs_nav(
+      'menu',
+      $data['type'],
+      $user,
+      $pages = Config::get('menu.left'),
+    ); ?>
   </nav>
 </div>
 

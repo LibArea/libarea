@@ -4,9 +4,8 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\{NotificationsModel, PostModel, ReportModel};
-use Config, Translate;
+use Config, Translate, UserData;
 
 class ReportController extends MainController
 {

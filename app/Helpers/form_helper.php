@@ -2,7 +2,7 @@
 
 function sumbit($text)
 {
-    $html  = '<button type="submit" name="action" class="btn btn-primary" value="submit">' . $text . '</button>';
+    $html  = '<button type="submit" name="action" class="btn btn-primary mt15" value="submit">' . $text . '</button>';
 
     return $html;
 }

@@ -67,7 +67,7 @@
             <?php } ?>
           </td>
           <td class="center">
-            <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('topic.edit', ['id' => $fc['facet_id']]); ?>">
+            <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName($fc['facet_type'] . '.edit', ['id' => $fc['facet_id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>
           </td>

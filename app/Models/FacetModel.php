@@ -117,7 +117,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Cell information (id, slug) 
     // Информация по фасету (id, slug)
-    public static function getFacet($params, $name)
+    public static function getFacet($params, $name, $type)
     {
         $sort = "facet_id = :params";
         if ($name == 'slug') {
@@ -144,9 +144,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_focus_count,
                     facet_count,
                     facet_is_deleted
-                        FROM facets WHERE $sort";
+                        FROM facets WHERE $sort AND facet_type = :type";
 
-        return DB::run($sql, ['params' => $params])->fetch();
+        return DB::run($sql, ['params' => $params, 'type' => $type])->fetch();
     }
 
     // Let's check the uniqueness of slug depending on the type of tree
@@ -209,10 +209,11 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         foreach ($rows as $row) {
             $facet_id   = $row['id'];
-            $sql = "INSERT INTO facets_items_relation (relation_facet_id, relation_item_id) 
+            if ($item_id == $row['id']) return true;
+                $sql = "INSERT INTO facets_items_relation (relation_facet_id, relation_item_id) 
                         VALUES ($facet_id, $item_id)";
 
-            DB::run($sql);
+                DB::run($sql);
         }
 
         return true;
@@ -226,10 +227,11 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         foreach ($rows as $row) {
             $facet_id   = $row['id'];
-            $sql = "INSERT INTO facets_relation (facet_parent_id, facet_chaid_id) 
+            if ($topic_id == $row['id']) return true;
+                $sql = "INSERT INTO facets_relation (facet_parent_id, facet_chaid_id) 
                         VALUES ($topic_id, $facet_id)";
 
-            DB::run($sql);
+                DB::run($sql);
         }
 
         return true;
@@ -243,10 +245,11 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         foreach ($rows as $row) {
             $facet_id   = $row['id'];
-            $sql = "INSERT INTO facets_matching (matching_parent_id, matching_chaid_id) 
+            if ($topic_id == $row['id']) return true;
+                $sql = "INSERT INTO facets_matching (matching_parent_id, matching_chaid_id) 
                         VALUES ($topic_id, $facet_id)";
 
-            DB::run($sql);
+                DB::run($sql);
         }
 
         return true;

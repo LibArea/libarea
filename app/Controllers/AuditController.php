@@ -3,9 +3,8 @@
 namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use App\Middleware\Before\UserData;
 use App\Models\{ContentModel, ActionModel, AuditModel, NotificationsModel};
-use Translate, Config;
+use Translate, Config, UserData;
 
 class AuditController extends MainController
 {
@@ -21,7 +20,7 @@ class AuditController extends MainController
     public function placementSpeed($content, $type)
     {
         self::stopContentQuietМode($this->user['limiting_mode']);
- 
+
         $number =  ContentModel::getSpeed($this->user['id'], $type);
 
         self::stopLimit($this->user['trust_level'], $number, $type);

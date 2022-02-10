@@ -7,7 +7,7 @@
         $user,
         $pages = Config::get('menu.left'),
       ); ?>
-    </ul>  
+    </ul>
   </nav>
 </div>
 
@@ -64,14 +64,14 @@
             <a class="black" href="<?= getUrlByName('web.website', ['slug' => $content['item_url_domain']]); ?>#answer_<?= $content['answer_id']; ?>">
               <?= $content['item_title_url']; ?>
             </a>
-           <div class="green-600 text-sm">
-            <?= website_img($content['item_url_domain'], 'favicon', $content['item_url_domain'], 'mr5 w20 h20'); ?>
-            <?= $content['item_url_domain']; ?>
-            <a target="_blank" href="<?= $content['item_url']; ?>" class="item_cleek" data-id="<?= $content['item_id']; ?>" rel="nofollow noreferrer ugc">
-              <i class="bi bi-folder-symlink middle ml15 mr5"></i>
-              <?= $content['item_url']; ?>
-            </a>
-           </div> 
+            <div class="green-600 text-sm">
+              <?= website_img($content['item_url_domain'], 'favicon', $content['item_url_domain'], 'mr5 w20 h20'); ?>
+              <?= $content['item_url_domain']; ?>
+              <a target="_blank" href="<?= $content['item_url']; ?>" class="item_cleek" data-id="<?= $content['item_id']; ?>" rel="nofollow noreferrer ugc">
+                <i class="bi bi-folder-symlink middle ml15 mr5"></i>
+                <?= $content['item_url']; ?>
+              </a>
+            </div>
           <?php } else { ?>
             <div class="pr15 text-sm flex gray-400">
               <?= user_avatar_img($content['post']['avatar'], 'small', $content['post']['login'], 'w20 h20 mr10'); ?>

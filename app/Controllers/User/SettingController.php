@@ -4,9 +4,8 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\{SettingModel, UserModel};
-use UploadImage, Validation, Translate, Tpl;
+use UploadImage, Validation, Translate, Tpl, UserData;
 
 class SettingController extends MainController
 {

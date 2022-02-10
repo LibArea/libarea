@@ -75,16 +75,16 @@
         'user'      => $user,
       ]); ?>
 
-      <?php if ($user['trust_level'] > 1) { ?> 
-      <?= Tpl::import('/_block/form/radio',  [
-        'data' => [
-          [
-            'title' => Translate::get('draft'),
-            'name'  => 'post_draft',
-          ]
-        ],
-      ]); ?>
-     <?php } ?>
+      <?php if ($user['trust_level'] > 1) { ?>
+        <?= Tpl::import('/_block/form/radio',  [
+          'data' => [
+            [
+              'title' => Translate::get('draft'),
+              'name'  => 'post_draft',
+            ]
+          ],
+        ]); ?>
+      <?php } ?>
 
       <?php if ($user['trust_level'] > 2) { ?>
         <?= Tpl::import('/_block/form/select/content-tl', [
@@ -136,5 +136,5 @@
 
       <p><?= sumbit(Translate::get('create')); ?></p>
     </form>
-  </div>  
+  </div>
 </main>

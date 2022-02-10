@@ -4,10 +4,9 @@ namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel};
-use Content, Translate, Tpl;
+use Content, Translate, Tpl, UserData;
 
 class BlogFacetController extends MainController
 {
@@ -28,7 +27,7 @@ class BlogFacetController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $slug   = Request::get('slug');
-        $facet  = FacetModel::getFacet($slug, 'slug');
+        $facet  = FacetModel::getFacet($slug, 'slug', 'blog');
         pageError404($facet);
 
         if ($facet['facet_type'] == 'topic') {

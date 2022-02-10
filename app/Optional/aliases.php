@@ -13,8 +13,6 @@ class_alias('Hleb\Scheme\App\Models\MainModel', 'MainModel');
 
 class_alias('Hleb\Constructor\Routes\Route', 'Route');
 
-class_alias('App\Middleware\Before\UserData', 'UserData');
-
 //class_alias('Hleb\Main\WorkDebug', 'WorkDebug');
 
 // ... //

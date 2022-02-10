@@ -3,9 +3,8 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\FacetModel;
-use Translate;
+use Translate, UserData;
 
 class Facets
 {

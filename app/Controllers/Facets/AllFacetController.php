@@ -4,9 +4,8 @@ namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\FacetModel;
-use Translate, Tpl;
+use Translate, Tpl, UserData;
 
 class AllFacetController extends MainController
 {
@@ -56,7 +55,7 @@ class AllFacetController extends MainController
             ]
         );
     }
-    
+
     public static function types()
     {
         return FacetModel::types();

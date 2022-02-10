@@ -89,8 +89,9 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                 facet_slug, 
                 facet_count, 
                 facet_title,
+                facet_type,
                 facet_img
-                    FROM tagind WHERE MATCH(:qa) LIMIT $limit";
+                    FROM tagind WHERE facet_type = 'topic' AND MATCH(:qa) LIMIT $limit";
 
             return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall();
         }
@@ -100,7 +101,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_count, 
                     facet_title,
                     facet_img
-                        FROM facets WHERE facet_title LIKE :qa1 OR facet_slug LIKE :qa2 
+                        FROM facets WHERE facet_type = 'topic' AND facet_title LIKE :qa1 OR facet_slug LIKE :qa2 
                             LIMIT $limit";
 
         return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchAll();

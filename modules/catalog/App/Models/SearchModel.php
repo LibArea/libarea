@@ -53,7 +53,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_slug, 
                     facet_count, 
                     facet_title,
-                    facet_is_web,
+                    facet_type,
                     facet_img
                         FROM facets WHERE facet_title LIKE :qa1 OR facet_slug LIKE :qa2 
                            LIMIT $limit";

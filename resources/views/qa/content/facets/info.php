@@ -9,7 +9,7 @@
         <?= $facet['facet_seo_title']; ?>
       </a>
       <?php if (UserData::checkAdmin()) { ?>
-        <a class="ml5 gray-600" href="<?= getUrlByName('topic.edit', ['id' => $facet['facet_id']]); ?>">
+        <a class="ml5 gray-600" href="<?= getUrlByName('facet.edit', ['id' => $facet['facet_id']]); ?>">
           <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>

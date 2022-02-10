@@ -20,10 +20,6 @@ return [
     // Настройки тем по умолчанию для не авторизованного участника
     'default' => [
         [
-            'img'   => '/uploads/facets/logos/t-7-1625151409.jpeg',
-            'name'  => Translate::get('frameworks'),
-            'url'   => '/topic/framework',
-        ], [
             'img'   => '/uploads/facets/logos/t-1-1625149922.jpeg',
             'name'  => Translate::get('SEO'),
             'url'   => '/topic/seo',
@@ -31,14 +27,6 @@ return [
             'img'   => '/uploads/facets/logos/t-2-1625149821.jpeg',
             'name'  => Translate::get('interesting sites'),
             'url'   => '/topic/sites',
-        ], [
-            'img'   => '/uploads/facets/logos/t-14-1625426679.jpeg',
-            'name'  => Translate::get('facts'),
-            'url'   => '/topic/facts',
-        ], [
-            'img'   => '/uploads/facets/logos/t-23-1626332348.jpeg',
-            'name'  => Translate::get('psychology'),
-            'url'   => '/topic/psychology',
-        ]
+        ],
     ],
 ];

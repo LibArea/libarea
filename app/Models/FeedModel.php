@@ -89,6 +89,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                                 FROM facets      
                                 LEFT JOIN facets_posts_relation 
                                     on facet_id = relation_facet_id 
+                                    
                                 GROUP BY relation_post_id  
                         ) AS rel
                             ON rel.relation_post_id = post_id 

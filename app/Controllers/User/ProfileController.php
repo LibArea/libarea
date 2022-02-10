@@ -4,10 +4,9 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, PostModel, FeedModel, AnswerModel, CommentModel};
-use Content, Config, Validation, Translate, Tpl;
+use Content, Config, Translate, Tpl, UserData;
 
 class ProfileController extends MainController
 {
@@ -245,7 +244,7 @@ class ProfileController extends MainController
         if ($this->user['trust_level'] < Config::get('trust-levels.tl_add_pm')) {
             return false;
         }
- 
+
         return true;
     }
 }

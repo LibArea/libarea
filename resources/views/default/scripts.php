@@ -1,5 +1,5 @@
 <a class="up_down_btn none" title="<?= Translate::get('up'); ?>">&uarr;</a>
- 
+
 <script src="/assets/js/common.js"></script>
 <script src="/assets/js/notiflix/notiflix-aio-3.2.2.min.js"></script>
 <?php if ($uid) { ?><script src="/assets/js/app.js"></script><?php } ?>
@@ -11,18 +11,18 @@
   <?php if (!$uid) { ?>
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
-      Notiflix.Report.info(
-         '<?= Translate::get('you need to log in'); ?>',
-         '<?= Translate::get('info-login'); ?>',
-         '<?= Translate::get('well'); ?>',
-         ); 
+        Notiflix.Report.info(
+          '<?= Translate::get('you need to log in'); ?>',
+          '<?= Translate::get('info-login'); ?>',
+          '<?= Translate::get('well'); ?>',
+        );
       }));
   <?php } ?>
   <?php if ($msg = getMsg()) { ?>
     <?php foreach ($msg as $message) {  ?>
       <?php if ($message[1] == 'error') { ?>
         Notiflix.Notify.failure('<?= $message[0]; ?>');
-     <?php } else { ?>
+      <?php } else { ?>
         Notiflix.Notify.info('<?= $message[0]; ?>');
       <?php } ?>
     <?php } ?>

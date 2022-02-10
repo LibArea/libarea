@@ -7,7 +7,7 @@
         $user,
         $pages = Config::get('menu.left'),
       ); ?>
-    </ul>  
+    </ul>
   </nav>
 </div>
 

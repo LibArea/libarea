@@ -10,7 +10,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
         <h1 class="mb0 mt10 text-2xl">
           <?= $blog['facet_seo_title']; ?>
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
-            <a class="right white fon-rgba -mt20" href="<?= getUrlByName('blog.edit', ['id' => $blog['facet_id']]); ?>">
+            <a class="right white fon-rgba -mt20" href="<?= getUrlByName('facet.edit', ['id' => $blog['facet_id']]); ?>">
               <i class="bi bi-pencil bold"></i>
             </a>
           <?php } ?>

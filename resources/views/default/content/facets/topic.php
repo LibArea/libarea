@@ -7,7 +7,7 @@
         $user,
         $pages = Config::get('menu.left'),
       ); ?>
-    </ul>  
+    </ul>
   </nav>
 </div>
 
@@ -22,7 +22,7 @@
         <h1 class="text-2xl">
           <?= $topic['facet_seo_title']; ?>
           <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == $user['id']) { ?>
-            <a class="right gray-600" href="<?= getUrlByName('topic.edit', ['id' => $topic['facet_id']]); ?>">
+            <a class="right gray-600" href="<?= getUrlByName($data['type'] . '.edit', ['id' => $topic['facet_id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>
           <?php } ?>
@@ -98,10 +98,10 @@
       </div>
       <div class="ml15 center relative">
         <div class="uppercase mb5 text-sm gray"><?= Translate::get('reads'); ?></div>
-          <div class="focus-user sky-500">
-            <?= $topic['facet_focus_count']; ?>
-          </div>
-          <div class="content_<?= $topic['facet_id']; ?> absolute bg-white box-shadow-all z-10 right0"></div>
+        <div class="focus-user sky-500">
+          <?= $topic['facet_focus_count']; ?>
+        </div>
+        <div class="content_<?= $topic['facet_id']; ?> absolute bg-white box-shadow-all z-10 right0"></div>
       </div>
     </div>
 
@@ -137,26 +137,28 @@
 </aside>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-document.querySelectorAll(".focus-user")
-  .forEach(el => el.addEventListener("click", function (e) {
-    let content = document.querySelector('.content_<?= $topic['facet_id']; ?>');
-    let div = document.querySelector(".content_<?= $topic['facet_id']; ?>");
-    div.classList.remove("none");
-    fetch("/topic/<?= $topic['facet_slug']; ?>/followers/<?= $topic['facet_id']; ?>", {
-      method: "POST",
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(
-        response => {
-          return response.text();
-        }
-      ).then(
-        text => {
-          content.innerHTML = text;
-        }
-      );
-    window.addEventListener('mouseup', e => {   
-      div.classList.add("none");
-    });
-  }));
+  document.querySelectorAll(".focus-user")
+    .forEach(el => el.addEventListener("click", function(e) {
+      let content = document.querySelector('.content_<?= $topic['facet_id']; ?>');
+      let div = document.querySelector(".content_<?= $topic['facet_id']; ?>");
+      div.classList.remove("none");
+      fetch("/topic/<?= $topic['facet_slug']; ?>/followers/<?= $topic['facet_id']; ?>", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        })
+        .then(
+          response => {
+            return response.text();
+          }
+        ).then(
+          text => {
+            content.innerHTML = text;
+          }
+        );
+      window.addEventListener('mouseup', e => {
+        div.classList.add("none");
+      });
+    }));
 </script>

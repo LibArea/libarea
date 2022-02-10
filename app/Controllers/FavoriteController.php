@@ -4,9 +4,8 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\{FavoriteModel, PostModel, AnswerModel};
-use Translate;
+use Translate, UserData;
 
 class FavoriteController extends MainController
 {
@@ -33,7 +32,7 @@ class FavoriteController extends MainController
                 $type = 3;
                 break;
         }
-        
+
         $action = FavoriteModel::setFavorite(
             [
                 'favorite_tid'      => $content_id,
@@ -44,7 +43,7 @@ class FavoriteController extends MainController
 
         return Translate::get('successfully');
     }
-    
+
     public static function redirectItem($content_id, $type, $uid)
     {
         switch ($type) {
@@ -52,7 +51,7 @@ class FavoriteController extends MainController
                 $content    = PostModel::getPost($content_id, 'id', $uid);
                 break;
             case 'item':
-                $content    = (new \Modules\Catalog\App\Catalog()) -> getItemId($content_id);
+                $content    = (new \Modules\Catalog\App\Catalog())->getItemId($content_id);
                 break;
             case 'answer':
                 $content    = AnswerModel::getAnswerId($content_id);

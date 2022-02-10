@@ -36,7 +36,7 @@
 
       <?= Tpl::insert('/_block/form/select/select', [
         'data'      => ['topic' => false],
-        'type'      => 'topic',
+        'type'      => 'category',
         'action'    => 'add',
         'title'     => Translate::get('facets'),
         'help'      => Translate::get('necessarily'),

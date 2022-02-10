@@ -7,11 +7,14 @@
         $user,
         $pages = Config::get('menu.left'),
       ); ?>
-    </ul>  
+    </ul>
   </nav>
 </div>
 
-<?php $fs = $data['facet']; ?>
+<?php
+$fs = $data['facet'];
+$url = $fs['facet_type'] == 'category' ? '/web/' . $fs['facet_slug'] : getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]);
+?>
 
 <main class="col-span-10 mb-col-12">
   <div class="box-flex-white">
@@ -35,7 +38,7 @@
             'icon'      => 'bi bi-app'
           ], [
             'id'        => 'all',
-            'url'       => getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]),
+            'url'       => $url,
             'title'     => Translate::get('go to'),
             'icon'      => 'bi bi-arrow-up-right-square'
           ]
@@ -48,8 +51,10 @@
   <div class="box-white">
     <form action="<?= getUrlByName($fs['facet_type'] . '.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
+      <i><?= Translate::get('edit'); ?></i>
+      <?= Tpl::import('/_block/facet/facet-type', ['type' => $fs['facet_type'], 'tl' => $user['trust_level']]); ?>
 
-      <div class="file-upload mb10" id="file-drag">
+      <div class="file-upload mb10 mt15" id="file-drag">
         <div class="flex">
           <?= facet_logo_img($fs['facet_img'], 'max', $fs['facet_title'], 'w94 h94 mr15'); ?>
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
@@ -134,7 +139,7 @@
         <?= Tpl::import('/_block/form/select/low-facets', [
           'data'          => $data,
           'action'        => 'edit',
-          'type'          => 'topic',
+          'type'          => $fs['facet_type'],
           'title'         => Translate::get('children'),
           'help'          => Translate::get('necessarily'),
           'red'           => 'red'
@@ -146,7 +151,7 @@
         <div class="bg-white br-rd5 br-box-gray p15">
           <h3 class="uppercase-box"><?= Translate::get('parents'); ?></h3>
           <?php foreach ($data['high_arr'] as $high) { ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $high['facet_slug']]); ?>">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $url; ?>">
               <?= facet_logo_img($high['facet_img'], 'max', $high['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
               <?= $high['facet_title']; ?>
             </a>
@@ -158,7 +163,7 @@
         <div class="bg-white br-rd5 br-box-gray p15">
           <h3 class="uppercase-box"><?= Translate::get('children'); ?></h3>
           <?php foreach ($data['low_arr'] as $sub) { ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $sub['facet_slug']]); ?>">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $url; ?>">
               <?= facet_logo_img($sub['facet_img'], 'max', $sub['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
               <?= $sub['facet_title']; ?>
             </a>
@@ -169,7 +174,7 @@
       <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
       <textarea class="add max-w780" rows="6" minlength="34" name="facet_description"><?= $fs['facet_description']; ?></textarea>
       <div class="text-sm gray-400 mb20">> 34 <?= Translate::get('characters'); ?></div>
- 
+
       <?= Tpl::import('/_block/form/field-input', [
         'data' => [
           [
@@ -185,63 +190,62 @@
         ]
       ]); ?>
 
-      <div for="mb5"><?= Translate::get('info'); ?><sup class="red-500">*</sup></div>
-      <textarea class="add max-w780" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
-      <div class="mb20 text-sm gray-400">Markdown, > 14 <?= Translate::get('characters'); ?></div>
-
-      <?php if ($fs['facet_type'] != 'blog') { ?>
-        <?= Tpl::import('/_block/form/select/related-posts', [
-          'data'          => $data,
-          'action'        => 'edit',
-          'type'          => 'post',
-          'title'         => Translate::get('related posts'),
-          'help'          => Translate::get('necessarily'),
-        ]); ?>
-
-        <?= Tpl::import('/_block/form/select/low-matching-facets', [
-          'data'          => $data,
-          'action'        => 'edit',
-          'type'          => 'topic',
-          'title'         => Translate::get('bound (children)'),
-          'help'          => Translate::get('necessarily'),
-          'red'           => 'red'
-        ]); ?>
-
-        <?php if (!empty($data['high_matching'])) { ?>
-          <div class="bg-white br-rd5 br-box-gray max-w780 p15 mb15">
-            <h3 class="uppercase-box"><?= Translate::get('bound (parents)'); ?></h3>
-            <?php foreach ($data['high_matching'] as $low_mat) { ?>
-              <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $low_mat['facet_slug']]); ?>">
-                <?= facet_logo_img($low_mat['facet_img'], 'max', $low_mat['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
-                <?= $low_mat['facet_title']; ?>
-              </a>
-            <?php } ?>
-          </div>
-        <?php } ?>
-      <?php } ?>
-
-      <?php if (UserData::checkAdmin()) { ?>
-        <?= Tpl::import('/_block/form/select/content-tl', [
-          'user' => $user, 
-          'data' => $fs['facet_tl'],
-        ]); ?> 
-        <?= Tpl::import('/_block/form/select/user', [
-          'uid'     => $user,
-          'user'    => $data['user'],
-          'action'  => 'user',
-          'type'    => 'user',
-          'title'   => Translate::get('author'),
-          'help'    => Translate::get('necessarily'),
-        ]); ?>
- 
-        <?= Tpl::import('/_block/facet/facet-type', [
-          'type'  => $fs['facet_type'],
-        ]); ?>
-      <?php } ?>
       <fieldset>
-        <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">
-        <?= sumbit(Translate::get('edit')); ?>
+        <?= Translate::get('info'); ?> (sidebar / info)<sup class="red-500">*</sup>
+        <textarea class="add max-w780 block" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
+        <div class="mb20 text-sm gray-400">Markdown, > 14 <?= Translate::get('characters'); ?></div>
+
+        <?php if ($fs['facet_type'] != 'blog') { ?>
+          <?= Tpl::import('/_block/form/select/related-posts', [
+            'data'          => $data,
+            'action'        => 'edit',
+            'type'          => 'post',
+            'title'         => Translate::get('related posts'),
+            'help'          => Translate::get('necessarily'),
+          ]); ?>
+
+          <?= Tpl::import('/_block/form/select/low-matching-facets', [
+            'data'          => $data,
+            'action'        => 'edit',
+            'type'          => $fs['facet_type'],
+            'title'         => Translate::get('bound (children)'),
+            'help'          => Translate::get('necessarily'),
+            'red'           => 'red'
+          ]); ?>
       </fieldset>
+
+      <?php if (!empty($data['high_matching'])) { ?>
+        <div class="bg-white br-rd5 br-box-gray max-w780 p15 mb15">
+          <h3 class="uppercase-box"><?= Translate::get('bound (parents)'); ?></h3>
+          <?php foreach ($data['high_matching'] as $low_mat) { ?>
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $url; ?>">
+              <?= facet_logo_img($low_mat['facet_img'], 'max', $low_mat['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
+              <?= $low_mat['facet_title']; ?>
+            </a>
+          <?php } ?>
+        </div>
+      <?php } ?>
+    <?php } ?>
+
+    <?php if (UserData::checkAdmin()) { ?>
+      <?= Tpl::import('/_block/form/select/content-tl', [
+        'user' => $user,
+        'data' => $fs['facet_tl'],
+      ]); ?>
+      <?= Tpl::import('/_block/form/select/user', [
+        'uid'     => $user,
+        'user'    => $data['user'],
+        'action'  => 'user',
+        'type'    => 'user',
+        'title'   => Translate::get('author'),
+        'help'    => Translate::get('necessarily'),
+      ]); ?>
+
+    <?php } ?>
+    <fieldset>
+      <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">
+      <?= sumbit(Translate::get('edit')); ?>
+    </fieldset>
     </form>
   </div>
 </main>

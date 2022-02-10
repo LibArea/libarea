@@ -26,6 +26,7 @@ $data = [
     'goods.services'        => 'Goods and services',
     'private.life'          => 'Home',
     'private.life.help'     => 'Children, animals, hobbies...',
+    'security'              => 'Security...',
     
     'web.desc'              => 'The list of sites in the catalog placed in chronological order. Ability to search, bookmark, sort by popularity',
     'web.all'               => 'New sites in the catalog',

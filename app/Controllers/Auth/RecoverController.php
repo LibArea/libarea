@@ -4,9 +4,8 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\{SettingModel, UserModel};
-use Config, Integration, Validation, SendEmail, Translate, Tpl;
+use Config, Integration, Validation, SendEmail, Translate, Tpl, UserData;
 
 class RecoverController extends MainController
 {

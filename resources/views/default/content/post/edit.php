@@ -6,7 +6,7 @@
     <span class="red-500">
       <?= sprintf(Translate::get('edit.option'), Translate::get('post')); ?>
     </span>
-    
+
     <form action="<?= getUrlByName('post.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
@@ -132,7 +132,7 @@
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
-              'title'   => Translate::get('pin'), 
+              'title'   => Translate::get('pin'),
               'name'    => 'top',
               'checked' => $post['post_top']
             ],

@@ -3,10 +3,9 @@
 namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{FacetModel, PostModel};
-use Validation, Translate;
+use Validation, Translate, UserData;
 
 class Edit
 {

@@ -90,26 +90,28 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 <?php } ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-document.querySelectorAll(".focus-user")
-  .forEach(el => el.addEventListener("click", function (e) {
-    let content = document.querySelector('.content_<?= $blog['facet_id']; ?>');
-    let div = document.querySelector(".content_<?= $blog['facet_id']; ?>");
-    div.classList.remove("none");
-    fetch("/topic/<?= $blog['facet_slug']; ?>/followers/<?= $blog['facet_id']; ?>", {
-      method: "POST",
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(
-        response => {
-          return response.text();
-        }
-      ).then(
-        text => {
-          content.innerHTML = text;
-        }
-      );
-    window.addEventListener('mouseup', e => {   
-      div.classList.add("none");
-    });
-  }));
+  document.querySelectorAll(".focus-user")
+    .forEach(el => el.addEventListener("click", function(e) {
+      let content = document.querySelector('.content_<?= $blog['facet_id']; ?>');
+      let div = document.querySelector(".content_<?= $blog['facet_id']; ?>");
+      div.classList.remove("none");
+      fetch("/topic/<?= $blog['facet_slug']; ?>/followers/<?= $blog['facet_id']; ?>", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        })
+        .then(
+          response => {
+            return response.text();
+          }
+        ).then(
+          text => {
+            content.innerHTML = text;
+          }
+        );
+      window.addEventListener('mouseup', e => {
+        div.classList.add("none");
+      });
+    }));
 </script>

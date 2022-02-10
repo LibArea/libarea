@@ -8,7 +8,7 @@
 
 # Agouti
 
-Discussion (forum) and Q&A platform. Community based on PHP Micro-Framework HLEB.
+A platform for collective blogs and social media platform, forum, question and answer service. Catalog of sites (programs), site navigation and directories - facets.
 
 ## Ideas
 
@@ -25,6 +25,11 @@ We are trying to study this.
 Second design (Q&A) in the system: 
 
 ![Agouti Q&A](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti4.jpg)
+
+Directory of sites (programs) uses a faceted scheme:
+
+![Agouti catalog](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/catalog.jpg)
+
 
 Demo: https://agouti.ru/
 
@@ -49,6 +54,12 @@ https://github.com/phphleb/hleb
 Routing > Controllers > Models > Page Builder > Debug Panel
 
 A distinctive feature of the micro-framework HLEB is the minimalism of the code and the speed of work.
+
+---
+
+Using the example of the Dmoz catalog, I want to create and test a universal and easy navigation for different types of content. Their relationship. 
+
+Используя пример, каталога Dmoz, хочется создать и проверить универсальную и легкую навигацию по разным типам контента. Их взаимосвязь.
 
 ---
 

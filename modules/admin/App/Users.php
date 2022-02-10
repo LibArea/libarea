@@ -3,10 +3,9 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\{SettingModel, BadgeModel};
 use Modules\Admin\App\Models\{BanUserModel, UserModel};
-use Validation, Translate;
+use Validation, Translate, UserData;
 
 class Users
 {

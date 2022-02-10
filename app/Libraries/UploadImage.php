@@ -40,7 +40,7 @@ class UploadImage
             $new_img    = $filename . '.jpeg';
 
             if ($type == 'topic') {
-                $images     = FacetModel::getFacet($content_id, 'id');
+                $images     = FacetModel::getFacet($content_id, 'id', $type);
                 $foto       = $images['topic_img'] ?? false;
             } else {
                 $images     = UserModel::getUser($content_id, 'id');
@@ -145,7 +145,7 @@ class UploadImage
                 $user       = UserModel::getUser($content_id, 'id');
                 $cover_art  = $user['cover_art'];
             } else {
-                $facet      = FacetModel::getFacet($content_id, 'id');
+                $facet      = FacetModel::getFacet($content_id, 'id', $type);
                 $cover_art  = $facet['facet_cover_art'];
             }
 

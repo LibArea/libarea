@@ -173,7 +173,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM answers 
                         LEFT JOIN posts ON post_id = answer_post_id
                         LEFT JOIN users ON id = answer_user_id
-                        WHERE answer_is_deleted = 0 AND post_is_deleted = 0
+                        WHERE answer_is_deleted = 0 AND post_is_deleted = 0 
                         $user_answer 
                         ORDER BY answer_id DESC LIMIT 5";
 
@@ -195,7 +195,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                     signed_user_id                    
                         FROM facets 
                         JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :id  
-                            AND facet_type != 'section' 
+                            AND facet_type != 'section'  AND facet_type != 'category'
                                 ORDER BY facet_id DESC";
 
         return DB::run($sql, ['id' => $user_id])->fetchAll();

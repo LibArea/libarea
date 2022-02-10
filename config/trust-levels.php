@@ -6,18 +6,34 @@
 
 return [
     // С какого уровня TL возможно создавать темы
-    // Установите на 4, если вы хотите запретить участникам создавать их
+    // Установите на 10, если вы хотите запретить участникам создавать их
     // From what level of TL it is possible to create Topics
-    // Set to 4 if you want to prevent members from creating them 
-    'tl_add_topic'      => 4,
+    // Set to 10 if you want to prevent members from creating them 
+    'tl_add_topic'      => 10,
     'count_add_topic'   => 0,
 
     // С какого уровня TL возможно создавать блоги
-    // Установите на 4, если вы хотите запретить участникам создавать их
+    // Установите на 10, если вы хотите запретить участникам создавать их
     // From what level of TL is it possible to create blogs
-    // Set to 4 if you want to prevent members from creating them 
-    'tl_add_blog'       => 2,
+    // Set to 10 if you want to prevent members from creating them 
+    'tl_add_blog'       => 1,
     'count_add_blog'    => 1,
+    
+    
+    // С какого уровня TL возможно создавать категории
+    // Установите на 10, если вы хотите запретить участникам создавать их
+    // From what level of TL is it possible to create categories
+    // Set to 10 if you want to prevent members from creating them 
+    'tl_add_category'   => 10,
+    'count_add_category'=> 1,
+
+
+    // С какого уровня TL возможно создавать секции
+    // Установите на 10, если вы хотите запретить участникам создавать их
+    // From what level of TL is it possible to create sections
+    // Set to 10 if you want to prevent members from creating them 
+    'tl_add_section'    => 10,
+    'count_add_section' => 1,
 
     // С какого уровня TL возможна отправка личных сообщений
     'tl_add_pm'         => 2,

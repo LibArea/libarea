@@ -4,9 +4,8 @@ namespace App\Controllers\Comment;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\{CommentModel, PostModel};
-use Content, Tpl;
+use Content, Tpl, UserData;
 
 class EditCommentController extends MainController
 {

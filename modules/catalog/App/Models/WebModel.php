@@ -38,7 +38,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                 FROM facets  
                                 LEFT JOIN facets_items_relation 
                                     on facet_id = relation_facet_id
-                                    WHERE facet_is_web = 1
+
                                         GROUP BY relation_item_id
                         ) AS rel
                             ON rel.relation_item_id = item_id 
@@ -87,11 +87,11 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     public static function feedItem($page, $limit, $facets, $user, $topic_id, $sheet)
     {
         $result = [];
-        foreach ($facets as $ind => $row) {
-            $result['9999'] = $topic_id;
-            $result[$ind] = $row['value'];
+        foreach ($facets as $ind => $row) { 
+             $result['9999'] = $topic_id;
+            $result[$ind] = $row['facet_id'];
         }
-
+ 
         $sort = "ORDER BY item_votes DESC";
         if ($sheet == 'web.all') $sort = "ORDER BY item_date DESC";
 
@@ -129,7 +129,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                 FROM facets
                                 LEFT JOIN facets_items_relation 
                                     on facet_id = relation_facet_id
-                                    WHERE facet_is_web = 1
+
                                     GROUP BY relation_item_id
                         ) AS rel
                              ON rel.relation_item_id = item_id
@@ -149,7 +149,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         $result = [];
         foreach ($facets as $ind => $row) {
             $result['9999'] = $topic_id;
-            $result[$ind] = $row['value'];
+            $result[$ind] = $row['facet_id'];
         }
 
         $string = "relation_facet_id IN($topic_id)";
@@ -171,7 +171,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                 FROM facets
                                 LEFT JOIN facets_items_relation 
                                     on facet_id = relation_facet_id
-                                    WHERE facet_is_web = 1
+
                                     GROUP BY relation_item_id
                         ) AS rel
                              ON rel.relation_item_id = item_id
@@ -215,7 +215,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                 FROM facets  
                                 LEFT JOIN facets_items_relation 
                                     on facet_id = relation_facet_id
-                                    WHERE facet_is_web = 1
+
                                         GROUP BY relation_item_id
                         ) AS rel
                             ON rel.relation_item_id = item_id 
@@ -329,7 +329,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT
                     facet_id as value,
                     facet_title,
-                    facet_is_web,
+                    facet_type,
                     facet_slug
                         FROM facets  
                         INNER JOIN facets_items_relation ON relation_facet_id = facet_id
@@ -390,7 +390,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                 FROM facets  
                                 LEFT JOIN facets_items_relation 
                                     on facet_id = relation_facet_id
-                                    WHERE facet_is_web = 1
+
                                         GROUP BY relation_item_id
                         ) AS rel
                             ON rel.relation_item_id = favorite_tid

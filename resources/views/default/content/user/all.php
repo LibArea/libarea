@@ -7,7 +7,7 @@
         $user,
         $pages = Config::get('menu.left'),
       ); ?>
-    </ul>  
+    </ul>
   </nav>
 </div>
 
@@ -57,7 +57,7 @@
             <?php if ($user['name']) { ?>
               <span class="gray text-sm"><?= $user['name']; ?></span>
             <?php } ?>
-           </a>
+          </a>
         </div>
       <?php } ?>
     </div>

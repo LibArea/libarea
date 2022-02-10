@@ -4,10 +4,9 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\AuthModel;
-use Config, Integration, Validation, SendEmail, Translate, Tpl;
+use Config, Integration, Validation, SendEmail, Translate, Tpl, UserData;
 
 class RegisterController extends MainController
 {

@@ -3,7 +3,8 @@
 namespace App\Controllers\Api;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use App\Models\{FacetModel, WebModel};
+use Modules\Catalog\App\Models\WebModel;
+use App\Models\FacetModel;
 
 class ApiController extends MainController
 {
@@ -23,7 +24,7 @@ class ApiController extends MainController
 
     public function items()
     {
-        $data = WebModel::getItemsAll(1, 25, 0);
+        $data = WebModel::getItemsAll(1, 25, 0, 'web');
 
         header('Content-Type: application/json');
 

@@ -22,7 +22,8 @@
       body: JSON.stringify(props)
     };
     try {
-      const fetchResponse = await fetch('/search/topic', settings);
+      const fetchResponse = await fetch('/search/<?= $type; ?>', settings);
+     
       return await fetchResponse.json();
     } catch (e) {
       return e;

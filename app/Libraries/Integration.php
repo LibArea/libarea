@@ -4,7 +4,7 @@ use Hleb\Constructor\Handlers\Request;
 
 class Integration
 {
-    // Работа с Captcha v2
+    // Captcha v2
     private static function callApi($params)
     {
         $api_url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -73,7 +73,7 @@ class Integration
 
         $content    = sprintf(Translate::get('content.added'), Translate::get('post'));
         $color      = hexdec("3366ff");
- 
+
         // Формируем даты
         $timestamp  = date("c", strtotime("now"));
 

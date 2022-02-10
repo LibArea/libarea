@@ -4,9 +4,8 @@ namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\{FacetModel, SubscriptionModel};
-use Validation, Config, Translate, Tpl;
+use Validation, Config, Translate, Tpl, UserData;
 
 class AddFacetController extends MainController
 {
@@ -18,27 +17,30 @@ class AddFacetController extends MainController
     }
 
     // Add form topic
-    public function index($sheet)
+    public function index()
     {
-        $limit   = self::limitFacer($sheet, 'redirect');
+        if ($this->user['trust_level'] != 10) {
+            //redirect('/');
+        }
 
         return Tpl::agRender(
             '/facets/add',
             [
                 'meta'  => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('topics'))),
                 'data'  => [
-                    'sheet'         => $sheet,
-                    'type'          => $sheet,
-                    'count_facet'   => $limit,
+                    // 'sheet'         => $sheet,
+                    'type'          => 'add',
+                    //  'count_facet'   => $limit,
                 ]
             ]
         );
     }
 
     // Add topic / blog
-    public function create($type)
+    public function create()
     {
-        self::limitFacer($type, 'redirect');
+        $facet_type = Request::getPost('facet_type');
+        self::limitFacer($facet_type, 'redirect');
 
         $facet_title                = Request::getPost('facet_title');
         $facet_description          = Request::getPost('facet_description');
@@ -47,7 +49,7 @@ class AddFacetController extends MainController
         $facet_seo_title            = Request::getPost('facet_seo_title');
 
         $redirect = getUrlByName('topic.add');
-        if ($type == 'blog') {
+        if ($facet_type == 'blog') {
             $redirect = getUrlByName('blogs.my', ['login' => $this->user['login']]);
             if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
                 if (in_array($facet_slug, Config::get('stop-blog'))) {
@@ -64,7 +66,8 @@ class AddFacetController extends MainController
         Validation::Length($facet_slug, Translate::get('slug'), '3', '43', $redirect);
         Validation::Length($facet_seo_title, Translate::get('slug'), '4', '225', $redirect);
 
-        if (FacetModel::getFacet($facet_slug, 'slug')) {
+        // ALTER TABLE `facets` ADD UNIQUE `unique_index`(`facet_slug`, `facet_type`);
+        if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
             addMsg(Translate::get('url-already-exists'), 'error');
             redirect($redirect);
         }
@@ -74,7 +77,7 @@ class AddFacetController extends MainController
             redirect($redirect);
         }
 
-        $type = $type ?? 'topic';
+        $type = $facet_type ?? 'topic';
         $facet_slug = strtolower($facet_slug);
         $data = [
             'facet_title'               => $facet_title,

@@ -67,7 +67,7 @@
       <?= Tpl::insert('/_block/form/select/select', [
         'data'          => $data,
         'action'        => 'edit',
-        'type'          => 'topic',
+        'type'          => 'category',
         'title'         => Translate::get('topics'),
         'required'      => false,
         'maximum'       => 3,

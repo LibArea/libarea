@@ -26,6 +26,7 @@ $data = [
     'goods.services'        => 'Waren und Dienstleistungen',
     'private.life'          => 'Heim',
     'private.life.help'     => 'Kinder, Tiere, Hobbys...',
+    'security'              => 'Sicherheit..',
     
     'web.desc'              => 'Liste der Websites im Verzeichnis in chronologischer Reihenfolge. Fähigkeit zu suchen, Lesezeichen, Sortieren nach Beliebtheit',
     'web.all'               => 'Neue Websites im Verzeichnis',

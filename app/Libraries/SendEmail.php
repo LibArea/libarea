@@ -3,7 +3,6 @@
 use App\Models\User\{SettingModel, UserModel};
 use JacksonJeans\Mail;
 use JacksonJeans\MailException;
-use App\Middleware\Before\UserData;
 
 class SendEmail
 {

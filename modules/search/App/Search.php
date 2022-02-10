@@ -3,10 +3,9 @@
 namespace Modules\Search\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use Modules\Search\App\Models\SearchModel;
 use Modules\Search\App\Helper;
-use Translate, Config;
+use Translate, Config, UserData;
 
 use Wamania\Snowball\StemmerFactory;
 

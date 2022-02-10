@@ -28,20 +28,39 @@
 
     <?php if (!empty($data['structure'])) { ?>
       <?php foreach ($data['structure'] as $topic) { ?>
+
+        <?php
+        switch ($topic['facet_type']) {
+          case 'category':
+            $url    = '/web/' . $topic['facet_slug'];
+            break;
+          default: // topic, blog, structure
+            $url = getUrlByName($topic['facet_type'], ['slug' => $topic['facet_slug']]);
+            break;
+        }
+        ?>
+
         <div class="w-50 mb5">
           <?php if ($topic['level'] > 0) { ?>
             <?php $color = true; ?>
             <i class="bi bi-arrow-return-right gray ml<?= $topic['level'] * 10; ?>"></i>
           <?php } ?>
-          <a class="<?php if ($topic['level'] == 0) { ?>relative pt5 text-xl items-center hidden<?php } ?> <?php if ($topic['level'] > 0) { ?> black<?php } ?>" href="/topic/<?= $topic['facet_slug']; ?>">
+          <a class="<?php if ($topic['level'] == 0) { ?>relative pt5 text-xl items-center hidden<?php } ?> <?php if ($topic['level'] > 0) { ?> black<?php } ?>" href="<?= $url; ?>">
             <?php if ($topic['level'] == 0) { ?>
               <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w20 h20 mr5 br-box-gray'); ?>
             <?php } ?>
             <?= $topic['facet_title']; ?>
           </a>
+
+          <?php if (UserData::checkAdmin()) { ?>
+            <a class="ml5" href="<?= getUrlByName($data['type'] . '.edit', ['id' => $topic['facet_id']]); ?>">
+              <sup><i class="bi bi-pencil gray-400"></i></sup>
+            </a>
+          <?php } ?>
+
           <?php if ($topic['matching_list']) { ?><div class="ml<?= $topic['level'] * 10; ?>">
               <i class="bi bi-bezier2 gray-600 text-sm mr5 ml5"></i>
-              <?= html_facet($topic['matching_list'], 'topic', 'topic', 'gray-600 text-sm mr15'); ?>
+              <?= html_facet($topic['matching_list'], $topic['facet_type'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
             </div>
           <?php } ?>
         </div>

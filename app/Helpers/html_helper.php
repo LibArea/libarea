@@ -1,7 +1,5 @@
 <?php
 
-use App\Middleware\Before\UserData;
-
 // Blog or topics
 function html_facet($facet, $type, $url, $css)
 {

@@ -7,7 +7,7 @@
         $user,
         $pages = Config::get('menu.left'),
       ); ?>
-    </ul>  
+    </ul>
   </nav>
 </div>
 
@@ -52,13 +52,21 @@
 
     </ul>
     <?php if ($user['trust_level'] > 1) { ?>
-    <p class="m0 text-xl">
-      <?php if ($data['limit']) { ?>
-        <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
-          <i class="bi bi-plus-lg middle"></i>
-        </a>
-     <?php } ?>
-    </p>
+      <p class="m0 text-xl">
+        <?php if ($data['type'] == 'blog') { ?>
+          <?php if ($data['limit']) { ?>
+            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('facet.add'); ?>">
+              <i class="bi bi-plus-lg middle"></i>
+            </a>
+          <?php } ?>
+        <?php } else { ?>
+          <?php if (UserData::checkAdmin()) { ?>
+            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('facet.add'); ?>">
+              <i class="bi bi-plus-lg middle"></i>
+            </a>
+          <?php } ?>
+        <?php } ?>
+      </p>
     <?php } ?>
   </div>
 

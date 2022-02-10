@@ -4,10 +4,9 @@ namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Validation, UploadImage, Translate, Tpl;
+use Validation, UploadImage, Translate, Tpl, UserData;
 
 class EditFacetController extends MainController
 {
@@ -19,10 +18,10 @@ class EditFacetController extends MainController
     }
 
     // Форма редактирования Topic or Blog
-    public function index()
+    public function index($type)
     {
         $facet_id   = Request::getInt('id');
-        $facet      = FacetModel::getFacet($facet_id, 'id');
+        $facet      = FacetModel::getFacet($facet_id, 'id', $type);
         pageError404($facet);
 
         // Доступ получает только автор и админ
@@ -67,7 +66,7 @@ class EditFacetController extends MainController
         $facet_tl                   = Request::getPostInt('content_tl');
         $facet_type                 = Request::getPost('facet_type');
 
-        $facet = FacetModel::getFacet($facet_id, 'id');
+        $facet = FacetModel::getFacet($facet_id, 'id', $facet_type);
         pageError404($facet);
 
         // Доступ получает только автор и админ
@@ -81,20 +80,7 @@ class EditFacetController extends MainController
             $facet_new_type = $facet_type;
         }
 
-        switch ($facet_new_type) {
-            case 'blog':
-                $redirect   = getUrlByName('blog.edit', ['id' => $facet['facet_id']]);
-                break;
-            case 'section':
-                $redirect   = getUrlByName('admin.sections');
-                break;
-            case 'category':
-                $redirect   = getUrlByName('topic.edit', ['id' => $facet['facet_id']]);
-                break;
-            default:
-                $redirect   = getUrlByName('topic.edit', ['id' => $facet['facet_id']]);
-                break;
-        }
+        $redirect   = getUrlByName($facet_type . '.edit', ['id' => $facet['facet_id']]);
 
         Validation::Slug($facet_slug, 'Slug (url)', $redirect);
         Validation::Length($facet_title, Translate::get('title'), '3', '64', $redirect);
@@ -197,7 +183,7 @@ class EditFacetController extends MainController
     public function pages()
     {
         $facet_id   = Request::getInt('id');
-        $facet      = FacetModel::getFacet($facet_id, 'id');
+        $facet      = FacetModel::getFacet($facet_id, 'id', 'section');
         pageError404($facet);
 
         // Доступ получает только автор и админ

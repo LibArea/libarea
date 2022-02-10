@@ -35,6 +35,8 @@ class MainConnector implements Connector
             "Validation"                    => "app/Libraries/Validation.php",
             "SendEmail"                     => "app/Libraries/SendEmail.php",
             "Tpl"                           => "app/Libraries/Tpl.php",
+            "UserData"                      => "app/Libraries/UserData.php",
+
 
             "Slug"                          => "app/ThirdParty/Slug/Slug.php",
             "Parsedown"                     => "app/ThirdParty/Parsedown/Parsedown.php",

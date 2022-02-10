@@ -4,10 +4,9 @@ namespace App\Controllers\Post;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel};
-use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domains, Tpl;
+use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domains, Tpl, UserData;
 
 class AddPostController extends MainController
 {
@@ -39,7 +38,7 @@ class AddPostController extends MainController
         // Adding from page topic 
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
-        $topic      = FacetModel::getFacet($topic_id, 'id');
+        $topic      = FacetModel::getFacet($topic_id, 'id', 'topic');
 
         $facets = ['topic' => $topic];
         if ($topic) {
@@ -284,7 +283,7 @@ class AddPostController extends MainController
         ];
 
         $last_post_id   = PostModel::AddPost($data);
-        $facet = FacetModel::getFacet($topics[0]['id'], 'id');
+        $facet = FacetModel::getFacet($topics[0]['id'], 'id', 'topic');
         $url_post       = getUrlByName('page', ['facet' => $facet['facet_slug'], 'slug' => $post_slug]);
 
         // Запишем темы и блог

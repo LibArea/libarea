@@ -3,9 +3,8 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\{UserModel, BadgeModel};
-use Validation, Translate;
+use Validation, Translate, UserData;
 
 class Badges
 {

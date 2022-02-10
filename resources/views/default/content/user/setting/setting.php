@@ -7,7 +7,7 @@
         $user,
         $pages = Config::get('menu.left'),
       ); ?>
-    </ul>  
+    </ul>
   </nav>
 </div>
 
@@ -28,7 +28,7 @@
           <?= $data['user']['login']; ?>
         </a>
       </span>
- 
+
       <fieldset>
         <span class="name gray">E-mail:</span>
         <span class="mr5 ml5"><?= $data['user']['email']; ?></span>

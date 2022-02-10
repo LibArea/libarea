@@ -14,7 +14,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/favorite/answer')->controller('FavoriteController', ['answer']);
         Route::get('/favorite/item')->controller('FavoriteController', ['item']);
         Route::get('/focus/{type}')->controller('SubscriptionController')->where(['type' => '[a-z]+']);
-        // @ users | posts | topics
+        // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
         // website
         Route::get('/web/search')->module('catalog', 'App\Search', ['web.search'])->name('web.search');
@@ -33,8 +33,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 Route::get('/comment/create')->controller('Comment\AddCommentController@create')->name('comment.create');
                 Route::get('/answer/create')->controller('Answer\AddAnswerController@create')->name('answer.create');
                 Route::get('/web/create')->module('catalog', 'App\Add@create')->name('web.create');
-                Route::get('/topic/create')->controller('Facets\AddFacetController@create', ['topic'])->name('topic.create');
-                Route::get('/blog/create')->controller('Facets\AddFacetController@create', ['blog'])->name('blog.create');
+                Route::get('/facet/create')->controller('Facets\AddFacetController@create')->name('facet.create');
                 Route::get('/post/edit')->controller('Post\EditPostController@edit')->name('post.edit.pr');
                 Route::get('/page/edit')->controller('Post\EditPostController@editPage')->name('page.edit.pr');
                 Route::get('/comment/edit')->controller('Comment\EditCommentController@edit')->name('comment.edit.pr');
@@ -50,21 +49,19 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     // The form of adding and changing: post | topic |  web
     Route::get('/post/add')->controller('Post\AddPostController', ['post'])->name('post.add');
     Route::get('/page/add')->controller('Post\AddPostController', ['page'])->name('page.add');
-    Route::get('/topic/add')->controller('Facets\AddFacetController', ['topic'])->name('topic.add');
-    Route::get('/blog/add')->controller('Facets\AddFacetController', ['blog'])->name('blog.add');
+    Route::get('/facet/add')->controller('Facets\AddFacetController')->name('facet.add');
     Route::get('/web/add')->module('catalog', 'App\Add', ['add', 'sites'])->name('site.add');
     
     Route::get('/post/edit/{id}')->controller('Post\EditPostController')->where(['id' => '[0-9]+'])->name('post.edit');
-    
     Route::get('/page/edit/{id}')->controller('Post\EditPostController')->where(['id' => '[0-9]+'])->name('page.edit');
-    
     Route::get('/answer/edit/{id}')->controller('Answer\EditAnswerController')->where(['id' => '[0-9]+'])->name('answer.edit');
-    Route::get('/topic/edit/{id}')->controller('Facets\EditFacetController')->where(['id' => '[0-9]+'])->name('topic.edit');
-    Route::get('/topic/edit/{id}/pages')->controller('Facets\EditFacetController@pages')->where(['id' => '[0-9]+'])->name('topic.edit.pages');
     Route::get('/web/edit/{id}')->module('catalog', 'App\Edit')->where(['id' => '[0-9]+'])->name('web.edit');
-    Route::get('/blog/edit/{id}')->controller('Facets\EditFacetController')->where(['id' => '[0-9]+'])->name('blog.edit');
-    Route::get('/blog/edit/{id}/pages')->controller('Facets\EditFacetController@pages')->where(['id' => '[0-9]+'])->name('blog.edit.pages');
-    
+
+    Route::get('/topic/edit/{id}')->controller('Facets\EditFacetController', ['topic'])->where(['id' => '[0-9]+'])->name('topic.edit');
+    Route::get('/blog/edit/{id}')->controller('Facets\EditFacetController', ['blog'])->where(['id' => '[0-9]+'])->name('blog.edit');
+    Route::get('/sections/edit/{id}')->controller('Facets\EditFacetController', ['sections'])->where(['id' => '[0-9]+'])->name('section.edit');
+    Route::get('/category/edit/{id}')->controller('Facets\EditFacetController', ['category'])->where(['id' => '[0-9]+'])->name('category.edit');    
+ 
     Route::get('/post/add/{topic_id}')->controller('Post\AddPostController', ['post'])->where(['topic_id' => '[0-9]+']);
     Route::get('/page/add/{topic_id}')->controller('Post\AddPostController', ['page'])->where(['topic_id' => '[0-9]+']);
 
@@ -191,18 +188,14 @@ Route::get('/web/{slug}/top')->module('catalog', 'App\Catalog', ['web.top', 'web
 
 Route::get('/web/page/{page?}')->module('catalog', 'App\Home', ['web', 'web'])->where(['page' => '[0-9]+']);
 Route::get('/web/top/page/{page?}')->module('catalog', 'App\Home', ['web.top', 'web'])->where(['page' => '[0-9]+']);
-Route::get('/web/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
+Route::get('/web/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed', 'web'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 
 Route::get('/web/website/{slug}')->module('catalog', 'App\Catalog@website', ['feed'])->where(['slug' => '[A-Za-z0-9.-]+'])->name('web.website');
 
 // Testing a faceted scheme
-Route::get('/map/{name-1}/{value-1}')->module('catalog', 'App\Map');
-Route::get('/map/{name-1}/{value-1}/{name-2}')->module('catalog', 'App\Map');
-Route::get('/map/{name-1}/{value-1}/{name-2}/{value-2}')->module('catalog', 'App\Map');
-Route::get('/map/{name-1}/{value-1}/{name-2}/{value-2}/{name-3}')->module('catalog', 'App\Map');
-Route::get('/map/{name-1}/{value-1}/{name-2}/{value-2}/{name-3}/{value-3}')->module('catalog', 'App\Map');
-Route::get('/map/{name-1}/{value-1}/{name-2}/{value-2}/{name-3}/{value-3}/{name-4}')->module('catalog', 'App\Map');
-Route::get('/map/{name-1}/{value-1}/{name-2}/{value-2}/{name-3}/{value-3}/{name-4}/{value-4}')->module('catalog', 'App\Map');
+// Route::get('/web/{slug-1}')->module('catalog', 'App\Map', ['web.all', 'web']);
+// Route::get('/web/{slug-1}/{slug-2}')->module('catalog', 'App\Map', ['web.all', 'web']);
+// Route::get('/web/{slug-1}/{slug-2}/{slug-3}')->module('catalog', 'App\Map', ['web.all', 'web']);
 
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
 

@@ -4,9 +4,8 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\{PageModel, FacetModel};
-use Translate, Content, Config, Tpl;
+use Translate, Content, Config, Tpl, UserData;
 
 class PageController extends MainController
 {
@@ -25,7 +24,7 @@ class PageController extends MainController
         $page   = PageModel::getPage($slug, $this->user['id'], 'slug');
         pageError404($page);
 
-        $facet   = FacetModel::getFacet($facet, 'slug');
+        $facet   = FacetModel::getFacet($facet, 'slug', 'section');
         pageError404($page);
 
         $page['post_content']   = Content::text($page['post_content'], 'text');

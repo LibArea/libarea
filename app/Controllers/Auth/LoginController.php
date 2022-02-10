@@ -4,9 +4,8 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
-use Validation, Translate, Tpl;
+use Validation, Translate, Tpl, UserData;
 
 class LoginController extends MainController
 {

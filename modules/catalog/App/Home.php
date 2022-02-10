@@ -3,9 +3,8 @@
 namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use Modules\Catalog\App\Models\WebModel;
-use Content, Translate;
+use Content, Translate, UserData;
 
 class Home
 {

@@ -14,7 +14,7 @@
         $user,
         $pages = Config::get('menu.left'),
       ); ?>
-    </ul>  
+    </ul>
   </nav>
 </div>
 
@@ -55,7 +55,7 @@
       <i class="bi bi-info-square gray-400"></i>
     </div>
     <div class="dropdown tooltip"><?= Translate::get($data['sheet'] . '.info'); ?></div>
-     
+
   </div>
 
   <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
@@ -74,40 +74,40 @@
     <div class="box-white text-sm">
       <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
       <ul class="list-none text-sm">
-      <?php
-      $my = [];
-      $other = [];
-      foreach ($data['topics_user'] as $topic) {
-        if ($topic['facet_user_id'] == $user['id']) {
-          $my[] = $topic;
-        } else {
-          $other[] = $topic;
+        <?php
+        $my = [];
+        $other = [];
+        foreach ($data['topics_user'] as $topic) {
+          if ($topic['facet_user_id'] == $user['id']) {
+            $my[] = $topic;
+          } else {
+            $other[] = $topic;
+          }
         }
-      }
-      $topics = array_merge($my, $other);
-      $n = 0;
-      foreach ($topics as $key => $topic) {
-        $n++;
-        if ($n > Config::get('facets.quantity_home')) break;
-        $url = getUrlByName('topic', ['slug' => $topic['facet_slug']]);
-        $blog = '';
-        if ($topic['facet_type'] == 'blog') {
-          $blog = '<sup class="red-500">b</span>';
-          $url = getUrlByName('blog', ['slug' => $topic['facet_slug']]);
-        }
-      ?>
-        <li class="mb10">
-          <a href="<?= $url; ?>">
-            <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr5'); ?>
-            <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
-          </a>
-          <?php if ($user['id'] == $topic['facet_user_id']) { ?>
-            <a class="right gray-400 mt5" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
-              <i class="bi bi-plus-lg text-sm"></i>
+        $topics = array_merge($my, $other);
+        $n = 0;
+        foreach ($topics as $key => $topic) {
+          $n++;
+          if ($n > Config::get('facets.quantity_home')) break;
+          $url = getUrlByName('topic', ['slug' => $topic['facet_slug']]);
+          $blog = '';
+          if ($topic['facet_type'] == 'blog') {
+            $blog = '<sup class="red-500">b</span>';
+            $url = getUrlByName('blog', ['slug' => $topic['facet_slug']]);
+          }
+        ?>
+          <li class="mb10">
+            <a href="<?= $url; ?>">
+              <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr5'); ?>
+              <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
             </a>
-          <?php } ?>
-        </li>
-      <?php } ?>
+            <?php if ($user['id'] == $topic['facet_user_id']) { ?>
+              <a class="right gray-400 mt5" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
+                <i class="bi bi-plus-lg text-sm"></i>
+              </a>
+            <?php } ?>
+          </li>
+        <?php } ?>
       </ul>
       <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) { ?>
         <a class="gray-400 block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
@@ -131,15 +131,15 @@
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="box-white">
         <ul class="list-none text-sm">
-        <?php foreach ($data['latest_answers'] as $answer) { ?>
-          <li class="mb15">
-            <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm mr5'); ?>
-            <span class="middle lowercase gray-400"><?= $answer['answer_date']; ?></span>
-            <a class="black block p0" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
-              <?= $answer['answer_content']; ?>...
-            </a>
-          </li>
-        <?php } ?>
+          <?php foreach ($data['latest_answers'] as $answer) { ?>
+            <li class="mb15">
+              <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm mr5'); ?>
+              <span class="middle lowercase gray-400"><?= $answer['answer_date']; ?></span>
+              <a class="black block p0" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
+                <?= $answer['answer_content']; ?>...
+              </a>
+            </li>
+          <?php } ?>
         </ul>
       </div>
     <?php } ?>

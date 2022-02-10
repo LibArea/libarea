@@ -3,7 +3,7 @@
   <div class="left">
     <div class="mb5">
       <?= Config::get('meta.name'); ?>
-      &copy; <?= date('Y'); ?> 
+      &copy; <?= date('Y'); ?>
       <span class="mb-none">— <?= Translate::get('community'); ?></span>
     </div>
     <a rel="nofollow noopener" class="icon" title="DISCORD" href="https://discord.gg/dw47aNx5nU"><i class="bi bi-discord text-2xl"></i></a>

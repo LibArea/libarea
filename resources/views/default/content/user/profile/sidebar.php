@@ -9,7 +9,7 @@
     <div class="gray-400">
       <i class="bi bi-calendar-week middle"></i>
       <span class="middle lowercase text-sm">
-        <?= $profile['created_at']; ?> 
+        <?= $profile['created_at']; ?>
         <sup class="ml5"><?= Translate::get('tl' . $profile['trust_level'] . '.title'); ?></sup>
       </span>
     </div>

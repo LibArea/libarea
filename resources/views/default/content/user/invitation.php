@@ -7,7 +7,7 @@
         $user,
         $pages = Config::get('menu.left'),
       ); ?>
-    </ul>  
+    </ul>
   </nav>
 </div>
 
@@ -40,8 +40,8 @@
             </div>
 
             <?php if (UserData::checkAdmin()) { ?>
-              <?= Translate::get('the link was used to'); ?>: 
-              <?= $invite['invitation_email']; ?> 
+              <?= Translate::get('the link was used to'); ?>:
+              <?= $invite['invitation_email']; ?>
               <code class="block">
                 <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
               </code>
@@ -49,8 +49,8 @@
 
             <span class="text-sm gray"><?= Translate::get('link has been used'); ?></span>
           <?php } else { ?>
-            <?= Translate::get('for'); ?> (<?= $invite['invitation_email']; ?>) 
-            <?= Translate::get('can send this link'); ?>: 
+            <?= Translate::get('for'); ?> (<?= $invite['invitation_email']; ?>)
+            <?= Translate::get('can send this link'); ?>:
             <code class="block">
               <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
             </code>

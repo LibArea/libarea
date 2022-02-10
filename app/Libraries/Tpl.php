@@ -1,7 +1,5 @@
 <?php
 
-use App\Middleware\Before\UserData;
-
 class Tpl
 {
     public static function agTheme($file)

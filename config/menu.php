@@ -59,6 +59,12 @@ return [
             'title' => Translate::get('admin'),
             'icon'  => 'bi bi-person-x',
             'id'    => 'admin',
+        ], [
+            'tl'    => 1,
+            'url'   => getUrlByName('all.structure'),
+            'title' => Translate::get('structure'),
+            'icon'  => 'bi bi-bezier2',
+            'id'    => 'admin',
         ],
     ],
 

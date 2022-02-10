@@ -4,10 +4,9 @@ namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
-use Content, Translate, Tpl;
+use Content, Translate, Tpl, UserData;
 
 class TopicFacetController extends MainController
 {
@@ -28,7 +27,7 @@ class TopicFacetController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $slug   = Request::get('slug');
-        $facet  = FacetModel::getFacet($slug, 'slug');
+        $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
         pageError404($facet);
 
         if ($facet['facet_type'] == 'blog' || $facet['facet_type'] == 'section') {
@@ -95,7 +94,7 @@ class TopicFacetController extends MainController
     public function info()
     {
         $slug   = Request::get('slug');
-        $facet  = FacetModel::getFacet($slug, 'slug');
+        $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
         pageError404($facet);
 
         $facet['facet_add_date']    = lang_date($facet['facet_add_date']);

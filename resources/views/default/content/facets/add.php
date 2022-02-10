@@ -7,7 +7,7 @@
         $user,
         $pages = Config::get('menu.left'),
       ); ?>
-    </ul>  
+    </ul>
   </nav>
 </div>
 
@@ -16,16 +16,14 @@
 
     <a href="/"><?= Translate::get('home'); ?></a> /
     <span class="red-500">
-      <?= sprintf(Translate::get('add.option'), Translate::get($data['sheet']. 's')); ?>
+      <?= Translate::get('add'); ?>
     </span>
-     
-  <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
-      <div class="text-sm gray mb15">
-        <?= Translate::get('you can add more'); ?>:
-        <span class="red-500"><?= $data['count_facet']; ?></span>
-      </div>
-      <form class="" action="<?= getUrlByName($data['sheet'] . '.create'); ?>" method="post" enctype="multipart/form-data">
+
+    <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
+      <form class="" action="<?= getUrlByName('facet.create'); ?>" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
+
+        <?= Tpl::import('/_block/facet/facet-type', ['tl' => $user['trust_level']]); ?>
 
         <?= Tpl::import('/_block/form/field-input', [
           'data' => [
@@ -76,10 +74,9 @@
         <textarea rows="6" class="add max-w780" required minlength="34" name="facet_description"></textarea>
         <div class="text-sm gray-400 mb20">> 34 <?= Translate::get('characters'); ?></div>
 
-        <input type="hidden" name="facet_type" value="<?= $data['sheet']; ?>">
         <?= sumbit(Translate::get('add')); ?>
       </form>
-  <?php } else { ?>
-    <?= Translate::get('limit-add-content-no'); ?>
-  <?php } ?>
+    <?php } else { ?>
+      <?= Translate::get('limit-add-content-no'); ?>
+    <?php } ?>
 </main>

@@ -3,10 +3,9 @@
 namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
-use Modules\Catalog\App\Models\WebModel;
-use App\Models\{FacetModel, PostModel};
-use Content, Translate;
+use Modules\Catalog\App\Models\{WebModel, FacetModel};
+use App\Models\PostModel;
+use Content, Translate, UserData;
 
 class Catalog
 {
@@ -23,38 +22,32 @@ class Catalog
     // Лист сайтов по темам (сайты по "категориям")
     public function index($sheet, $type)
     {
-        $slug   = Request::get('slug');
+
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $topic  = FacetModel::getFacet($slug, 'slug');
-        pageError404($topic);
-
-        // If the facet is not allowed in the site directory
-        // Если фасет не разрешен в каталоге сайтов
-        if ($topic['facet_is_web'] == 0) {
-            pageError404([]);
-        }
+        $category  = FacetModel::get(\Request::get('slug'), 'slug', $this->user['trust_level']);
+        pageError404($category);
 
         // We will get children
         // Получим детей
-        $topics =  FacetModel::getLowLevelList($topic['facet_id']);
-
-        $items      = WebModel::feedItem($page, $this->limit, $topics, $this->user, $topic['facet_id'], $sheet);
-        $pagesCount = WebModel::feedItemCount($topics,  $topic['facet_id']);
+        $childrens =  FacetModel::getChildrens($category['facet_id']);
+        
+        $items      = WebModel::feedItem($page, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet);
+        $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id']);
 
         $m = [
             'og'         => false,
             'twitter'    => false,
             'imgurl'     => false,
-            'url'        => getUrlByName('web.dir.top', ['slug' => $topic['facet_slug']]),
+            'url'        => getUrlByName('web.dir.top', ['slug' => $category['facet_slug']]),
         ];
 
-        $title = Translate::get('websites') . ': ' . $topic['facet_title'];
-        $desc  = Translate::get('websites') . ', ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
+        $title = Translate::get('websites') . ': ' . $category['facet_title'];
+        $desc  = Translate::get('websites') . ', ' . $category['facet_title'] . '. ' . $category['facet_description'];
         if ($sheet == 'web.top') {
-            $title = Translate::get('websites') . ' (top): ' . $topic['facet_title'];
-            $desc  = Translate::get('websites') . ' (top), ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
+            $title = Translate::get('websites') . ' (top): ' . $category['facet_title'];
+            $desc  = Translate::get('websites') . ' (top), ' . $category['facet_title'] . '. ' . $category['facet_description'];
         }
 
         return view(
@@ -69,10 +62,11 @@ class Catalog
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'items'         => $items,
-                    'topic'         => $topic,
-                    'high_topics'   => FacetModel::getHighLevelList($topic['facet_id']),
-                    'low_topics'    => FacetModel::getLowLevelList($topic['facet_id']),
-                    'low_matching'  => FacetModel::getLowMatching($topic['facet_id']),
+                    'category'      => $category,
+                    'childrens'     => $childrens,
+                    'high_topics'   => FacetModel::getHighLevelList($category['facet_id']),
+                //    'low_topics'    => FacetModel::getLowLevelList($category['facet_id']),
+                    'low_matching'  => FacetModel::getLowMatching($category['facet_id']),
                 ]
             ]
         );

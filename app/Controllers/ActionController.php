@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\{ActionModel, PostModel};
+use UserData;
 
 class ActionController extends MainController
 {
@@ -73,7 +73,6 @@ class ActionController extends MainController
         $content_type   = Request::get('type');
         $search         = Request::getPost('q');
         $search         = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
-
         return ActionModel::getSearch($search, $content_type);
     }
 }

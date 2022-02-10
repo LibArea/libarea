@@ -4,9 +4,8 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Middleware\Before\UserData;
 use App\Models\User\{InvitationModel, UserModel};
-use Validation, Translate, SendEmail, Tpl;
+use Validation, Translate, SendEmail, Tpl, UserData;
 
 class InvitationsController extends MainController
 {

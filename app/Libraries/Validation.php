@@ -56,7 +56,7 @@ class Validation
     // $count_content - сколько уже создал
     // $count_total - сколько разрешено
     public static function validTl($trust_level, $allowed_tl, $count_content, $count_total)
-    { 
+    {
         if ($trust_level < $allowed_tl) {
             redirect('/');
         }
@@ -67,5 +67,4 @@ class Validation
 
         return true;
     }
-
 }

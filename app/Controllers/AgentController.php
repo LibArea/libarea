@@ -14,7 +14,7 @@ class AgentController extends MainController
         require_once HLEB_GLOBAL_DIRECTORY . '/app/ThirdParty/PhpUserAgent/UserAgentParser.php';
 
         $ua_info    = parse_user_agent();
-        UserModel::setLogAgent( 
+        UserModel::setLogAgent(
             [
                 'log_date'          => date("Y-m-d H:i:s"),
                 'log_user_id'       => $uid,
