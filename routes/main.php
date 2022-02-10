@@ -57,10 +57,10 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/answer/edit/{id}')->controller('Answer\EditAnswerController')->where(['id' => '[0-9]+'])->name('answer.edit');
     Route::get('/web/edit/{id}')->module('catalog', 'App\Edit')->where(['id' => '[0-9]+'])->name('web.edit');
 
-    Route::get('/topic/edit/{id}')->controller('Facets\EditFacetController', ['topic'])->where(['id' => '[0-9]+'])->name('topic.edit');
-    Route::get('/blog/edit/{id}')->controller('Facets\EditFacetController', ['blog'])->where(['id' => '[0-9]+'])->name('blog.edit');
-    Route::get('/sections/edit/{id}')->controller('Facets\EditFacetController', ['sections'])->where(['id' => '[0-9]+'])->name('section.edit');
-    Route::get('/category/edit/{id}')->controller('Facets\EditFacetController', ['category'])->where(['id' => '[0-9]+'])->name('category.edit');    
+    Route::get('/topic/edit/{id}')->controller('Facets\EditFacetController', ['topic'])->name('topic.edit');
+    Route::get('/blog/edit/{id}')->controller('Facets\EditFacetController', ['blog'])->name('blog.edit');
+    Route::get('/sections/edit/{id}')->controller('Facets\EditFacetController', ['section'])->name('section.edit');
+    Route::get('/category/edit/{id}')->controller('Facets\EditFacetController', ['category'])->name('category.edit');    
  
     Route::get('/post/add/{topic_id}')->controller('Post\AddPostController', ['post'])->where(['topic_id' => '[0-9]+']);
     Route::get('/page/add/{topic_id}')->controller('Post\AddPostController', ['page'])->where(['topic_id' => '[0-9]+']);

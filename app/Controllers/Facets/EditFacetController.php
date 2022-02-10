@@ -66,7 +66,7 @@ class EditFacetController extends MainController
         $facet_tl                   = Request::getPostInt('content_tl');
         $facet_type                 = Request::getPost('facet_type');
 
-        $facet = FacetModel::getFacet($facet_id, 'id', $facet_type);
+        $facet = FacetModel::uniqueById($facet_id);
         pageError404($facet);
 
         // Доступ получает только автор и админ
@@ -76,11 +76,11 @@ class EditFacetController extends MainController
 
         // Изменять тип темы может только персонал
         $facet_new_type = $facet['facet_type'];
-        if (UserData::checkAdmin()) {
-            $facet_new_type = $facet_type;
+        if ($facet_type != $facet['facet_type']) {
+            if (UserData::checkAdmin()) $facet_new_type = $facet_type;
         }
 
-        $redirect   = getUrlByName($facet_type . '.edit', ['id' => $facet['facet_id']]);
+        $redirect   = getUrlByName($facet_new_type . '.edit', ['id' => $facet['facet_id']]);
 
         Validation::Slug($facet_slug, 'Slug (url)', $redirect);
         Validation::Length($facet_title, Translate::get('title'), '3', '64', $redirect);

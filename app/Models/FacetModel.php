@@ -158,6 +158,15 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['slug' => $facet_slug, 'type' => $facet_type])->fetch();
     }
 
+    // Let's check the uniqueness of id
+    // Проверим уникальность id
+    public static function uniqueById($facet_id)
+    {
+        $sql = "SELECT facet_id, facet_slug, facet_type, facet_user_id FROM facets WHERE facet_id = :id";
+        
+        return DB::run($sql, ['id' => $facet_id])->fetch();
+    }
+
     // Facet owner 
     // Собственник фасета
     public static function getOwnerFacet($uid, $type)
