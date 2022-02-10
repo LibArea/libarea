@@ -287,9 +287,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $params);
     }
 
-    // TOP of facet authors. Limit 10 
-    // TOP авторов фасета. Limit 10
-    public static function getWriters($facet_id)
+    // TOP of facet authors.
+    // TOP авторов фасета.
+    public static function getWriters($facet_id, $limit)
     {
         $sql = "SELECT SUM(post_hits_count) as hits_count, 
                     rel.*
@@ -300,12 +300,13 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                             SELECT 
                                 id,
                                 login,                                 
-                                avatar 
+                                avatar,
+                                about
                                     FROM users 
                         ) AS rel
                             ON rel.id = post_user_id
                  WHERE relation_facet_id = :facet_id  GROUP BY post_user_id 
-                 ORDER BY hits_count DESC LIMIT 5";
+                 ORDER BY hits_count DESC LIMIT $limit";
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }

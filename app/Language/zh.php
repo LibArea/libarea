@@ -25,6 +25,7 @@ $data = [
     'necessarily'       => '需要填写',
     'create'            => '创建',
     'writers'           => '作家',
+    'by.deposit'        => '按金支付',
     'welcome'           => '欢迎',
     'create.account'    => '创建账户',
     'not.registered'    => '发帖、回复、评论... <br>您还没有注册',

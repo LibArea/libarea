@@ -25,6 +25,7 @@ $data = [
     'necessarily'       => 'Required to fill ',
     'create'            => 'Сreate',
     'writers'           => 'Writers',
+    'by.deposit'        => 'By depositу',
     'welcome'           => 'Welcome',
     'create.account'    => 'Create account',
     'not.registered'    => 'Post, reply, comment... <br>You have not registered yet',

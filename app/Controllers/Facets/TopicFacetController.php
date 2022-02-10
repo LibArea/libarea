@@ -81,7 +81,7 @@ class TopicFacetController extends MainController
                     'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
                     'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
                     'low_matching'  => FacetModel::getLowMatching($facet['facet_id']),
-                    'writers'       => FacetModel::getWriters($facet['facet_id']),
+                    'writers'       => FacetModel::getWriters($facet['facet_id'], 5),
                     'pages'         => (new \App\Controllers\PageController())->last($facet['facet_id']),
                 ],
                 'facet'   => ['facet_id' => $facet['facet_id'], 'facet_type' => $facet['facet_type'], 'facet_user_id' => $facet['facet_user_id']],
@@ -118,8 +118,51 @@ class TopicFacetController extends MainController
                     'sheet'         => 'info',
                     'type'          => 'info',
                     'facet'         => $facet,
+                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'topic'),
+                    'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
                     'related_posts' => PostModel::postRelated($facet_related),
                     'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
+                    'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
+                    'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
+                ]
+            ]
+        );
+    }
+
+    // Information on the topic 
+    // Информация по теме
+    public function writers()
+    {
+        $slug   = Request::get('slug');
+        $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
+        pageError404($facet);
+
+        $facet['facet_add_date']    = lang_date($facet['facet_add_date']);
+
+        $facet['facet_info']   = Content::text($facet['facet_info'], 'text');
+
+        $facet_related = $facet['facet_post_related'] ?? null;
+
+        $m = [
+            'og'         => true,
+            'twitter'    => true,
+            'imgurl'     => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
+            'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
+        ];
+ 
+        return Tpl::agRender(
+            '/facets/writers',
+            [
+                'meta'  => meta($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description']),
+                'data'  => [
+                    'sheet'         => 'writers',
+                    'type'          => 'writers',
+                    'facet'         => $facet,
+                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'topic'),
+                    'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
+                    'related_posts' => PostModel::postRelated($facet_related),
+                    'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
+                    'writers'       => FacetModel::getWriters($facet['facet_id'], 15),
                     'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
                 ]

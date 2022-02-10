@@ -26,6 +26,7 @@ $data = [
     'necessarily'       => 'Obligatoire à remplir ',
     'create'            => 'Créer',
     'writers'           => 'Écrivains',
+    'by.deposit'        => 'Par contribution',
     'welcome'           => 'Bienvenu',
     'create.account'    => 'Créer un compte',
     'not.registered'    => 'Publier, répondre, commenter... <br>Vous nêtes pas encore inscrit',

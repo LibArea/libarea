@@ -18,22 +18,24 @@
           <?php if ($cats['parent'] == 0) { ?></li>
             <li><?php } ?>
 
-            <a aria-expanded="true" class="has-arrow<?= $active; ?>" href="#">
-              <i class="bi bi-list middle mr10 text-xl"></i>
+            <a class="dropdown-btn" href="#">
+              <span class="right"><i class="bi bi-chevron-down text-xl"></i></span>
+              <i class="bi bi-lis3t middle mr10 text-xl"></i>
               <span><?= Translate::get($cats['name']); ?></span>
+
             </a>
-
-            <?php if ($cats['childs'] > 0) { ?>
-              <ul>
-                <?php foreach ($cats['childs'] as $cat) { ?>
-                  <a class="gray mb5 block<?= $active; ?>" href="<?= getUrlByName($cat['url']); ?>">
-                    <i class="bi bi-circle green-600 middle mr5"></i>
-                    <span><?= Translate::get($cat['name']); ?></span>
-                  </a>
-                <?php } ?>
-              </ul>
-            <?php } ?>
-
+            <div class="none">
+              <?php if ($cats['childs'] > 0) { ?>
+                <ul class="pl20">
+                  <?php foreach ($cats['childs'] as $cat) { ?>
+                    <a class="gray m5 block<?= $active; ?>" href="<?= getUrlByName($cat['url']); ?>">
+                      <i class="bi bi-circle green-600 middle mr5"></i>
+                      <span><?= Translate::get($cat['name']); ?></span>
+                    </a>
+                  <?php } ?>
+                </ul>
+              <?php } ?>
+            </div>
           <?php } ?>
 
         <?php } ?>
@@ -59,10 +61,20 @@
       </ul>
     </div>
   <?php } ?>
-  <link rel="stylesheet" href="/assets/js/metismenujs/metismenujs.min.css">
-  <script src="/assets/js/metismenujs/metismenujs.min.js"></script>
   <script nonce="<?= $_SERVER['nonce']; ?>">
     document.addEventListener("DOMContentLoaded", function(event) {
-      new MetisMenu('#menu');
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+        });
+      }
     });
   </script>

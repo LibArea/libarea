@@ -23,8 +23,8 @@ $dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
   <header class="bg-white box-shadow sticky top0 z-30">
     <div class="box-flex-white pl10 pr10 h50">
       <div class="flex items-center">
-        <a class="ml20" href="/">
-          <i class="bi bi-house black"></i>
+        <a class="ml5 sky-500" href="/">
+          <i class="bi bi-house"></i>
         </a>
         <span class="mr5 ml5">/</span>
         <a href="<?= getUrlByName('admin'); ?>">
