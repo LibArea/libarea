@@ -1,17 +1,13 @@
-<div class="col-span-2 mb-none">
-  <nav class="sticky top-sm">
-    <ul class="list-none text-sm">
-      <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $user,
-        $pages = Config::get('menu.left'),
-      ); ?>
-    </ul>
-  </nav>
-</div>
+<?= includeTemplate(
+  '/view/default/menu',
+  [
+    'data'  => $data,
+    'meta'  => $meta,
+    'menus' => []
+  ]
+); ?>
 
-<main class="col-span-10 mb-col-12">
+<div class="white-box">
   <div class="box-flex-white">
     <p class="m0 text-xl"><?= Translate::get('structure'); ?> (<?= Translate::get($data['type']); ?>)</p>
   </div>
@@ -19,7 +15,7 @@
   <div class="box-white">
     <?php if ($data['type'] == 'all') { ?>
       <?php foreach ($data['types_facets'] as $type) { ?>
-        <a class="block mb10" href="<?= getUrlByName($type['type_code'] . '.structure'); ?>">
+        <a class="block mb10" href="<?= getUrlByName('admin.' . $type['type_code'] . '.structure'); ?>">
           <i class="bi bi-circle green-600 middle mr5"></i>
           <?= Translate::get($type['type_lang']); ?>
         </a>
@@ -70,5 +66,12 @@
         <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
       <?php } ?>
     <?php } ?>
+
+    <a class="mr5" href="<?= getUrlByName('admin.topics'); ?>"><?= Translate::get('topics'); ?></a> |
+
+    <a class="m5" href="<?= getUrlByName('admin.blogs'); ?>"><?= Translate::get('blogs'); ?></a> |
+
+    <a class="m5" href="<?= getUrlByName('admin.sections'); ?>"><?= Translate::get('sections'); ?></a> |
+ 
   </div>
 </main>

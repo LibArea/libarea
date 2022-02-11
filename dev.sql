@@ -435,7 +435,7 @@ CREATE TABLE `messages_dialog` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `navigation`
+-- Структура и данные таблицы `navigation`
 --
 
 CREATE TABLE `navigation` (
@@ -453,30 +453,35 @@ CREATE TABLE `navigation` (
   `nav_childs` int(11) NOT NULL DEFAULT '0' COMMENT 'Amount of children'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Дамп данных таблицы `navigation`
---
-
 INSERT INTO `navigation` (`nav_id`, `nav_module`, `nav_type`, `nav_radical`, `nav_parent`, `nav_name`, `nav_icon`, `nav_url_routes`, `nav_status`, `nav_auth_tl`, `nav_ordernum`, `nav_childs`) VALUES
-(1, 'admin', 'menu', 1, 0, 'users', 'bi bi-people', 'admin.users', 0, 5, 1, 0),
-(2, 'admin', 'menu', 1, 0, 'logs', 'bi bi-receipt', 'admin.logs', 0, 5, 2, 0),
-(3, 'admin', 'menu', 0, 0, 'audits', 'bi bi-flag', '', 0, 5, 3, 2),
-(4, 'admin', 'menu', 0, 3, 'reports', 'bi bi-flag', 'admin.reports', 0, 5, 4, 0),
-(5, 'admin', 'menu', 0, 3, 'audits', 'bi bi-exclamation-diamond', 'admin.audits', 0, 5, 5, 0),
-(6, 'admin', 'menu', 0, 0, 'facets', 'bi bi-columns-gap', '', 0, 5, 6, 3),
-(7, 'admin', 'menu', 0, 6, 'topics', 'bi bi-columns-gap', 'admin.topics', 0, 5, 7, 0),
-(8, 'admin', 'menu', 0, 6, 'blogs', 'bi bi-journals', 'admin.blogs', 0, 5, 8, 0),
-(9, 'admin', 'menu', 0, 6, 'sections', 'bi bi-columns-gap', 'admin.sections', 0, 5, 9, 0),
-(10, 'admin', 'menu', 0, 0, 'other', 'bi bi-gear', '', 0, 5, 10, 3),
-(11, 'admin', 'menu', 0, 10, 'words', 'bi bi-badge-ad', 'admin.words', 0, 5, 11, 0),
-(12, 'admin', 'menu', 0, 10, 'invites', 'bi bi-person-plus', 'admin.invitations', 0, 5, 12, 0),
-(13, 'admin', 'menu', 0, 10, 'badges', 'bi bi-award', 'admin.badges', 0, 5, 13, 0),
-(14, 'admin', 'menu', 0, 0, 'development', 'bi bi-gear', '', 0, 5, 14, 2),
-(15, 'admin', 'menu', 0, 14, 'css', 'bi bi-brush', 'admin.css', 0, 5, 15, 0),
-(16, 'admin', 'menu', 0, 14, 'info', 'bi bi-brush', 'admin.info', 0, 5, 16, 0),
-(17, 'admin', 'menu', 1, 0, 'pages', 'bi bi-journal-richtext', 'admin.pages', 0, 5, 17, 0),
-(18, 'admin', 'menu', 1, 0, 'tools', 'bi bi-tools', 'admin.tools', 0, 5, 18, 0),
-(19, 'admin', 'menu', 1, 0, 'navigation', 'bi bi-menu-app', 'admin.navigation', 0, 5, 19, 0);
+
+(1, 'admin', 'menu', 1, 0, 'admin', 'bi bi-shield-exclamation', 'admin', 0, 5, 1, 0),
+(2, 'admin', 'menu', 1, 0, 'users', 'bi bi-people', 'admin.users', 0, 5, 2, 0),
+(3, 'admin', 'menu', 1,  0, 'logs', 'bi bi-receipt', 'admin.logs', 0, 5, 3, 0),
+(4, 'admin', 'menu', 1,  0, 'facets', 'bi bi-columns-gap', 'admin.all.structure', 0, 5, 4, 3),
+
+(5, 'admin', 'menu', 0, 0, 'audits', 'bi bi-flag', '', 0, 5, 5, 2),
+(6, 'admin', 'menu', 0, 5, 'reports', 'bi bi-flag', 'admin.reports', 0, 5, 6, 0),
+(7, 'admin', 'menu', 0, 5, 'audits', 'bi bi-exclamation-diamond', 'admin.audits', 0, 5, 7, 0),
+
+(8, 'admin', 'menu', 0, 0, 'content', 'bi bi-journal-richtext', '', 0, 5, 8, 5),
+(9, 'admin', 'menu', 0, 8, 'pages', 'bi bi-journal-richtext', 'admin.pages', 0, 5, 9, 0),
+(10, 'admin', 'menu', 0, 8, 'answers', 'bi bi-chat-left-text', 'admin.answers', 0, 5, 10, 0),
+(11, 'admin', 'menu', 0, 8, 'comments', 'bi bi-chat-dots', 'admin.comments', 0, 5, 11, 0),
+(12, 'admin', 'menu', 0, 8, 'websites', 'bi bi-link-45deg', 'admin.sites', 0, 5, 12, 0),
+
+(13, 'admin', 'menu', 0, 0, 'other', 'bi bi-gear', '', 0, 5, 13, 3),
+(14, 'admin', 'menu', 0, 13, 'words', 'bi bi-badge-ad', 'admin.words', 0, 5, 14, 0),
+(15, 'admin', 'menu', 0, 13, 'invites', 'bi bi-person-plus', 'admin.invitations', 0, 5, 15, 0),
+(16, 'admin', 'menu', 0, 13, 'badges', 'bi bi-award', 'admin.badges', 0, 5, 16, 0),
+
+(17, 'admin', 'menu', 0, 0, 'development', 'bi bi-gear', '', 0, 5, 17, 2),
+(18, 'admin', 'menu', 0, 17, 'css', 'bi bi-brush', 'admin.css', 0, 5, 18, 0),
+(19, 'admin', 'menu', 0, 17, 'info', 'bi bi-brush', 'admin.info', 0, 5, 19, 0),
+
+(20, 'admin', 'menu', 1,  0, 'tools', 'bi bi-tools', 'admin.tools', 0, 5, 20, 0),
+(21, 'admin', 'menu', 1,  0, 'navigation', 'bi bi-menu-app', 'admin.navigation', 0, 5, 21, 0);
+
 
 -- --------------------------------------------------------
 
@@ -1014,16 +1019,6 @@ ALTER TABLE `messages_dialog`
   ADD KEY `dialog_add_time` (`dialog_add_time`);
 
 --
--- Индексы таблицы `navigation`
---
-ALTER TABLE `navigation`
-  ADD PRIMARY KEY (`nav_id`),
-  ADD KEY `nav_parent` (`nav_parent`) COMMENT 'pid',
-  ADD KEY `nav_status` (`nav_status`) COMMENT 'status',
-  ADD KEY `nav_ordernum` (`nav_ordernum`) COMMENT 'ordernum',
-  ADD KEY `nav_pidandstatus` (`nav_parent`,`nav_status`) COMMENT 'pidandstatus';
-
---
 -- Индексы таблицы `notifications`
 --
 ALTER TABLE `notifications`
@@ -1251,12 +1246,6 @@ ALTER TABLE `messages_dialog`
   MODIFY `dialog_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `navigation`
---
-ALTER TABLE `navigation`
-  MODIFY `nav_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
 -- AUTO_INCREMENT для таблицы `notifications`
 --
 ALTER TABLE `notifications`
@@ -1357,3 +1346,21 @@ ALTER TABLE `votes_item`
 --
 ALTER TABLE `votes_post`
   MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Индексы таблицы `navigation`
+--
+
+ALTER TABLE `navigation`
+  ADD PRIMARY KEY (`nav_id`),
+  ADD KEY `nav_parent` (`nav_parent`) COMMENT 'pid',
+  ADD KEY `nav_status` (`nav_status`) COMMENT 'status',
+  ADD KEY `nav_ordernum` (`nav_ordernum`) COMMENT 'ordernum',
+  ADD KEY `nav_pidandstatus` (`nav_parent`,`nav_status`) COMMENT 'pidandstatus';
+
+--
+-- AUTO_INCREMENT для таблицы `navigation`
+--
+
+ALTER TABLE `navigation`
+  MODIFY `nav_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22; 

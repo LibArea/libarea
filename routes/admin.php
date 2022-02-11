@@ -76,6 +76,12 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/reports')->module('admin', 'App\Reports', ['reports.all', 'reports'])->name('admin.reports');
     Route::get('/reports/page/{page?}')->module('admin', 'App\Reports', ['reports.all', 'reports'])->where(['page' => '[0-9]+']);
     
+    Route::get('/structure')->module('admin', 'App\TreeFacet', ['all'])->name('admin.all.structure');
+    Route::get('/structure/topic')->module('admin', 'App\TreeFacet', ['topic'])->name('admin.topic.structure');
+    Route::get('/structure/blog')->module('admin', 'App\TreeFacet', ['blog'])->name('admin.blog.structure');
+    Route::get('/structure/section')->module('admin', 'App\TreeFacet', ['section'])->name('admin.section.structure');
+    Route::get('/structure/category')->module('admin', 'App\TreeFacet', ['category'])->name('admin.category.structure');
+
     Route::get('/navigation')->module('admin', 'App\Navigation')->name('admin.navigation');
     Route::get('/navigation/sub/{id}')->module('admin', 'App\Navigation@subPage')->where(['id' => '[0-9]+'])->name('admin.navigation.sub');
     Route::get('/navigation/{id}/add')->module('admin', 'App\Navigation@addPage')->where(['id' => '[0-9]+'])->name('admin.navigation.add');

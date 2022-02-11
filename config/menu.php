@@ -60,8 +60,8 @@ return [
             'icon'  => 'bi bi-person-x',
             'id'    => 'admin',
         ], [
-            'tl'    => 1,
-            'url'   => getUrlByName('all.structure'),
+            'tl'    => 9,
+            'url'   => getUrlByName('admin.all.structure'),
             'title' => Translate::get('structure'),
             'icon'  => 'bi bi-bezier2',
             'id'    => 'admin',

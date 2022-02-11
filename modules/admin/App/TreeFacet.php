@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Controllers\Facets;
+namespace Modules\Admin\App;
 
-use Hleb\Scheme\App\Controllers\MainController;
-use App\Models\FacetModel;
+use Modules\Admin\App\Models\FacetModel;
 use Translate, Tpl;
 
-class TreeFacetController extends MainController
+class TreeFacet
 {
     public function index($type)
     {
-        return Tpl::agRender(
-            '/facets/structure',
+        return view(
+            '/view/default/facet/structure',
             [
                 'meta'  => meta($m = [], Translate::get('structure'), Translate::get('structure-desc')),
                 'data'  => [
                     'sheet'         => 'structure',
                     'type'          => $type,
-                    'structure'     => self::builder(0, 0, FacetModel::getStructure($type)),
+                    'structure'     => self::builder(0, 0, FacetModel::get($type)),
                     'types_facets'  => FacetModel::types(),
                 ]
             ]

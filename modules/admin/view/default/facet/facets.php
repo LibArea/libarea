@@ -19,7 +19,7 @@
   ]
 ); ?>
 
-<div class="white-box pt5 pr15 pb5 pl15">
+<div class="white-box">
   <?php if (!empty($data['facets'])) { ?>
     <table>
       <thead>
