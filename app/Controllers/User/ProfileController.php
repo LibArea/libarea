@@ -41,6 +41,11 @@ class ProfileController extends MainController
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }
+        
+        $count = UserModel::contentCount($profile['id']);
+        if (($count['count_answers'] + $count['count_comments']) < 3) {
+            Request::getHead()->addMeta('robots', 'noindex');
+        }
 
         return Tpl::agRender(
             '/user/profile/index',
@@ -50,7 +55,7 @@ class ProfileController extends MainController
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,
                     'created_at'        => lang_date($profile['created_at']),
-                    'count'             => UserModel::contentCount($profile['id']),
+                    'count'             => $count,
                     'topics'            => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
                     'blogs'             => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'            => BadgeModel::getBadgeUserAll($profile['id']),

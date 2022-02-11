@@ -12,18 +12,22 @@
             'url'   => '/',
             'title' => Translate::get('feed'),
             'icon'  => 'bi bi-sort-down'
-          ],
-          [
+          ], [
             'tl'    => 1,
             'id'    => $data['type'] . '.all',
             'url'   => getUrlByName('main.all'),
             'title' => Translate::get('all'),
             'icon'  => 'bi bi-app'
-          ],
-          [
+          ], [
             'id'    => $data['type'] . '.top',
             'url'   => getUrlByName('main.top'),
             'title' => Translate::get('top'),
+            'icon'  => 'bi bi-bar-chart'
+          ], [
+            'tl'    => 9,
+            'id'    => $data['type'] . '.deleted',
+            'url'   => getUrlByName('main.deleted'),
+            'title' => Translate::get('deleted'),
             'icon'  => 'bi bi-bar-chart'
           ],
         ]

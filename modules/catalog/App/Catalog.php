@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, FacetModel};
 use App\Models\PostModel;
-use Content, Translate, UserData;
+use Content, Translate, UserData, Breadcrumbs;
 
 class Catalog
 {
@@ -50,6 +50,19 @@ class Catalog
             $desc  = Translate::get('websites') . ' (top), ' . $category['facet_title'] . '. ' . $category['facet_description'];
         }
 
+        // TODO: https://dev.mysql.com/doc/refman/8.0/en/with.html
+        // Now we will do this to bring styles and templates to a single view (we need an example)
+        if ($parent = FacetModel::getHighLevelList($category['facet_id'])) {
+           $breadcrumb = (new Breadcrumbs('/'))
+            ->base(getUrlByName('web'), Translate::get('websites'))
+            ->addCrumb($parent['facet_title'], $parent['facet_slug']) 
+            ->addCrumb($category['facet_title'], $category['facet_slug']);
+        } else {
+           $breadcrumb = (new Breadcrumbs('/'))
+            ->base(getUrlByName('web'), Translate::get('websites'))
+            ->addCrumb($category['facet_title'], $category['facet_slug']); 
+        }
+
         return view(
             '/view/default/sites',
             [
@@ -64,8 +77,8 @@ class Catalog
                     'items'         => $items,
                     'category'      => $category,
                     'childrens'     => $childrens,
-                    'high_topics'   => FacetModel::getHighLevelList($category['facet_id']),
-                //    'low_topics'    => FacetModel::getLowLevelList($category['facet_id']),
+                    'breadcrumb'    => $breadcrumb->render('bread_crumbs'),
+                 // 'low_topics'    => FacetModel::getLowLevelList($category['facet_id']),
                     'low_matching'  => FacetModel::getLowMatching($category['facet_id']),
                 ]
             ]

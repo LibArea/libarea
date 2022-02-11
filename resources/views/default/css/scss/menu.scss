@@ -36,3 +36,17 @@ ul > li > a span { color: var(--gray-600); }
 ul > li > a:hover > span,
 ul > li > a:hover > i,
 a.sky-500 span { color: #0ea5e9; }
+
+#bread_crumbs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#bread_crumbs > li {
+  display: inline-block;
+}
+
+#bread_crumbs > li span {
+  padding: 0 0.5em 0 0.5em;
+}

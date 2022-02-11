@@ -27,7 +27,6 @@ font-display: swap;
 }
 
 .bi-house::before { content: "\f425"; }
-.bi-chevron-down::before { content: "\f282"; }
 .bi-bezier2::before { content: "\f18c"; }
 .bi-arrow-return-right::before { content: "\f132"; }
 .bi-sort-down::before { content: "\f575"; }
@@ -97,6 +96,8 @@ font-display: swap;
 .bi-emoji-wink::before { content: "\f32b"; }
 .bi-list::before { content: "\f479"; }
 .bi-info-square::before { content: "\f433"; }
+.bi-chevron-down::before { content: "\f282"; }
+.bi-chevron-right::before { content: "\f285"; }
 .bi-chevron-double-right::before { content: "\f280"; }
 .bi-emoji-smile::before { content: "\f327"; }
 .bi-lock::before { content: "\f47b"; }

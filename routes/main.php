@@ -94,6 +94,9 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
  
     Route::get('/all')->controller('HomeController', ['main.all', 'main'])->name('main.all');
     Route::get('/all/page/{page?}')->controller('HomeController', ['main.all', 'main'])->where(['page' => '[0-9]+']);
+    
+    Route::get('/deleted')->controller('HomeController', ['main.deleted', 'main'])->name('main.deleted');
+    Route::get('/deleted/page/{page?}')->controller('HomeController', ['main.deleted', 'main'])->where(['page' => '[0-9]+']);
 Route::endGroup();
 
 Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();
@@ -194,8 +197,8 @@ Route::get('/web/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed'
 Route::get('/web/website/{slug}')->module('catalog', 'App\Catalog@website', ['feed'])->where(['slug' => '[A-Za-z0-9.-]+'])->name('web.website');
 
 // Testing a faceted scheme
-// Route::get('/web/{slug-1}')->module('catalog', 'App\Map', ['web.all', 'web']);
-// Route::get('/web/{slug-1}/{slug-2}')->module('catalog', 'App\Map', ['web.all', 'web']);
+// Route::get('/web/{slug-1}')->module('catalog', 'App\Map', ['web.all', 'web'])->name('web.dir');
+// Route::get('/web/{slug-1}/{slug-2}')->module('catalog', 'App\Map', ['web.all', 'web'])->name('web.dir');
 // Route::get('/web/{slug-1}/{slug-2}/{slug-3}')->module('catalog', 'App\Map', ['web.all', 'web']);
 
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');

@@ -47,10 +47,10 @@
 <main class="col-span-10 mb-col-12">
   <?php if ($data['type'] != 'admin') { ?>
     <div class="box-flex-white">
-      <p class="m0">
-        <a href="<?= getUrlByName('admin'); ?>"><?= Translate::get('admin'); ?></a> /
-        <span class="red-500"><?= Translate::get($data['type']); ?></span>
-      </p>
+      <?= (new Breadcrumbs('/'))
+            ->base(getUrlByName('admin'), Translate::get('admin'))
+            ->addCrumb(Translate::get($data['type']), $data['type'])->render('bread_crumbs'); ?>
+
       <ul class="flex flex-row list-none m0 p0 center">
         <?php foreach ($menus as $menu) { ?>
           <a class="ml30 mb-mr-5 mb-ml-10 gray<?php if ($menu['id'] == $data['sheet']) { ?> sky-500<?php } ?>" href="<?= $menu['url']; ?>" <?php if ($menu['id'] == $data['sheet']) { ?> aria-current="page" <?php } ?>>

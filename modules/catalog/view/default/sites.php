@@ -1,25 +1,18 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <div class="ml30 mb15">
 
-  <a href="<?= getUrlByName('web'); ?>" class="text-sm gray-400"><?= Translate::get('websites'); ?></a>
+  <?= $data['breadcrumb']; ?>
 
-  <?php if (!empty($data['high_topics'])) {
-    $site = $data['high_topics']; ?>
-    <span class="gray mr5 ml5">/</span>
-    <a href="/web/<?= $site['facet_slug']; ?>">
-      <?= $site['facet_title']; ?>
-    </a>
-  <?php } ?>
-  
   <h1>
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) { ?>
       <a class="text-sm ml5" href="<?= getUrlByName('category.edit', ['id' => $data['category']['facet_id']]); ?>">
         <sup><i class="bi bi-pencil gray"></i></sup>
       </a>
-      <a class="text-sm ml15" href="<?= getUrlByName('topic', ['slug' => $data['category']['facet_slug']]); ?>">
-        <sup class="gray-400"><i class="bi bi-columns-gap"></i> <small><?= $data['category']['facet_type']; ?></small></sup>
+      <a class="text-sm ml15" href="<?= getUrlByName('category.structure'); ?>">
+        <sup class="gray-400"><i class="bi bi-columns-gap mr5"></i></sup>
       </a>
+      <small class="text-sm gray-400"><sup><?= $data['category']['facet_type']; ?></sup></small>
     <?php } ?>
   </h1>
 </div>
@@ -33,8 +26,9 @@
           </a> <sup class="gray-400"><?= $lt['count']; ?></sup>
           <?php if (UserData::checkAdmin()) { ?>
             <a class="ml5" href="<?= getUrlByName('category.edit', ['id' => $lt['facet_id']]); ?>">
-              <sup class="gray-400"><i class="bi bi-pencil"></i> <small><?= $lt['facet_type']; ?></small></sup>
+              <sup><i class="bi bi-pencil"></i>
             </a>
+            <small class="text-sm gray-400"><sup><?= $lt['facet_type']; ?></sup></small>
           <?php } ?>
         </div>
      <?php } ?>

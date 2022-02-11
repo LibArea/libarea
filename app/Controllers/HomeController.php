@@ -23,6 +23,10 @@ class HomeController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
+        if ($sheet == 'main.deleted' && $this->user['trust_level'] != 10) {
+            redirect('/');
+        }
+
         $latest_answers = HomeModel::latestAnswers($this->user);
         $topics_user    = HomeModel::subscription($this->user['id']);
         $pagesCount     = HomeModel::feedCount($topics_user, $this->user, $sheet);

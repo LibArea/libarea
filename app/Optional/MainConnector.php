@@ -36,7 +36,7 @@ class MainConnector implements Connector
             "SendEmail"                     => "app/Libraries/SendEmail.php",
             "Tpl"                           => "app/Libraries/Tpl.php",
             "UserData"                      => "app/Libraries/UserData.php",
-
+            "Breadcrumbs"                   => "app/Libraries/Breadcrumbs.php",
 
             "Slug"                          => "app/ThirdParty/Slug/Slug.php",
             "Parsedown"                     => "app/ThirdParty/Parsedown/Parsedown.php",

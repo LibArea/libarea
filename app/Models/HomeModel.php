@@ -25,21 +25,12 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             }
         }
         
-        if ($user['trust_level'] == 0) {
-            $display = "AND post_is_deleted = 0 AND post_votes > 1 AND post_tl <= " . $user['trust_level'];
-        }
-            
-        if ($user['trust_level'] > 0) {
-            $display = "AND post_is_deleted = 0 AND post_tl <= " . $user['trust_level'];
-        }
-        
-        if ($user['trust_level'] == 10) $display = "";
+        $display = self::display($type, $user['trust_level']);
 
-        $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
-        if ($type == 'main.feed' || $type == 'main.all') $sort = "ORDER BY post_top DESC, post_date DESC";
+        $sort = "ORDER BY post_top DESC, post_date DESC";
+        if ($type == 'main.top') $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
 
         $start  = ($page - 1) * $limit;
-
         $sql = "SELECT DISTINCT
                 post_id,
                 post_title,
@@ -110,9 +101,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             }
         }
 
-        $display = "AND post_is_deleted = 0 AND post_tl <= " . $user['trust_level'] ?? 0;
-        if ($user['trust_level'] == 5) $display = "";
-
+        $display = self::display($type, $user['trust_level']);
         $sql = "SELECT 
                     post_id,
                     post_draft,
@@ -140,6 +129,24 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                     $string $display";
 
         return DB::run($sql)->rowCount();
+    }
+
+    public static function display($type, $trust_level)
+    {
+        if ($trust_level == 10) {
+            $display = "AND post_is_deleted = 0";
+
+            if ($type == 'main.deleted') {
+                $display = "AND post_is_deleted = 1";
+            }
+
+        } elseif ($trust_level > 0) {
+            $display = "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
+        } else {
+            $display = "AND post_is_deleted = 0 AND post_votes > 1 AND post_tl <= " . $trust_level;
+        } 
+
+        return $display;
     }
 
     // The last 5 responses on the main page
