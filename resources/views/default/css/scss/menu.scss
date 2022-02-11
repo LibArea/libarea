@@ -24,18 +24,25 @@
 }
 
 ul > li > a {
-  color: var(--gray-400);
+  color: var(--gray-600);
   padding: 3px 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
+ul > li > a > i {
+  color: var(--gray-400);
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
 ul > li > a span { color: var(--gray-600); }
 
-ul > li > a:hover > span,
+ul > li > a:hover,
 ul > li > a:hover > i,
-a.sky-500 span { color: #0ea5e9; }
+a.sky-500,
+a.sky-500 > i { color: #0ea5e9; }
 
 #bread_crumbs {
   list-style: none;

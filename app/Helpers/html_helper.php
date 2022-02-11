@@ -254,8 +254,8 @@ function tabs_nav($name, $item, $user, array $pages = [])
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
 
                 $html .= '<li><a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
-                            <i class="mr5 ' . $page['icon'] . '"></i>
-                                <span>' . $page['title'] . '</span></a></li>';
+                            <i class="text-sm ' . $page['icon'] . '"></i>
+                                ' . $page['title'] . '</a></li>';
             }
         }
     } else {
@@ -269,8 +269,8 @@ function tabs_nav($name, $item, $user, array $pages = [])
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
 
                     $html .= '<li><a ' . $isAria . $isActive . ' href="' . $page['url'] . '">
-                                <i class="' . $page['icon'] . ' mr10 text-2xl"></i>
-                                    <span>' . $page['title'] . '</span></a></li>';
+                                <i class="' . $page['icon'] . '"></i>
+                                    ' . $page['title'] . '</a></li>';
                 }
             }
         }

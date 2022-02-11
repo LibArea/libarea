@@ -62,9 +62,9 @@ class Breadcrumbs
         for ($b = 0; $b <= $last; $b++) {
 
             if ($b == $last) {
-                $breadcrumb .= '<li class="active" aria-current="page"><span>' . $this->separator . '</span>' . $links[$b]['title'] . '</li>';
+                $breadcrumb .= '<li class="active" aria-current="page">' . $this->separator . $links[$b]['title'] . '</li>';
             } else {
-                $breadcrumb .= '<li><span>' . $this->separator . '</span><a href="' . $links[$b]["url"] . '">' . $links[$b]['title'] . '</a></li>';
+                $breadcrumb .= '<li>' . $this->separator . ' <a href="' . $links[$b]["url"] . '">' . $links[$b]['title'] . '</a></li>';
             }
         }
 

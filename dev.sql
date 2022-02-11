@@ -466,21 +466,19 @@ INSERT INTO `navigation` (`nav_id`, `nav_module`, `nav_type`, `nav_radical`, `na
 
 (8, 'admin', 'menu', 0, 0, 'content', 'bi bi-journal-richtext', '', 0, 5, 8, 5),
 (9, 'admin', 'menu', 0, 8, 'pages', 'bi bi-journal-richtext', 'admin.pages', 0, 5, 9, 0),
-(10, 'admin', 'menu', 0, 8, 'answers', 'bi bi-chat-left-text', 'admin.answers', 0, 5, 10, 0),
-(11, 'admin', 'menu', 0, 8, 'comments', 'bi bi-chat-dots', 'admin.comments', 0, 5, 11, 0),
-(12, 'admin', 'menu', 0, 8, 'websites', 'bi bi-link-45deg', 'admin.sites', 0, 5, 12, 0),
+(10, 'admin', 'menu', 0, 8, 'websites', 'bi bi-link-45deg', 'admin.sites', 0, 5, 10, 0),
 
-(13, 'admin', 'menu', 0, 0, 'other', 'bi bi-gear', '', 0, 5, 13, 3),
-(14, 'admin', 'menu', 0, 13, 'words', 'bi bi-badge-ad', 'admin.words', 0, 5, 14, 0),
-(15, 'admin', 'menu', 0, 13, 'invites', 'bi bi-person-plus', 'admin.invitations', 0, 5, 15, 0),
-(16, 'admin', 'menu', 0, 13, 'badges', 'bi bi-award', 'admin.badges', 0, 5, 16, 0),
+(11, 'admin', 'menu', 0, 0, 'other', 'bi bi-gear', '', 0, 5, 11, 3),
+(12, 'admin', 'menu', 0, 11, 'words', 'bi bi-badge-ad', 'admin.words', 0, 5, 12, 0),
+(13, 'admin', 'menu', 0, 11, 'invites', 'bi bi-person-plus', 'admin.invitations', 0, 5, 13, 0),
+(14, 'admin', 'menu', 0, 11, 'badges', 'bi bi-award', 'admin.badges', 0, 5, 14, 0),
 
-(17, 'admin', 'menu', 0, 0, 'development', 'bi bi-gear', '', 0, 5, 17, 2),
-(18, 'admin', 'menu', 0, 17, 'css', 'bi bi-brush', 'admin.css', 0, 5, 18, 0),
-(19, 'admin', 'menu', 0, 17, 'info', 'bi bi-brush', 'admin.info', 0, 5, 19, 0),
+(15, 'admin', 'menu', 0, 0, 'development', 'bi bi-gear', '', 0, 5, 15, 2),
+(16, 'admin', 'menu', 0, 15, 'css', 'bi bi-brush', 'admin.css', 0, 5, 16, 0),
+(17, 'admin', 'menu', 0, 15, 'info', 'bi bi-brush', 'admin.info', 0, 5, 17, 0),
 
-(20, 'admin', 'menu', 1,  0, 'tools', 'bi bi-tools', 'admin.tools', 0, 5, 20, 0),
-(21, 'admin', 'menu', 1,  0, 'navigation', 'bi bi-menu-app', 'admin.navigation', 0, 5, 21, 0);
+(18, 'admin', 'menu', 1,  0, 'tools', 'bi bi-tools', 'admin.tools', 0, 5, 18, 0),
+(19, 'admin', 'menu', 1,  0, 'navigation', 'bi bi-menu-app', 'admin.navigation', 0, 5, 19, 0);
 
 
 -- --------------------------------------------------------
@@ -1363,4 +1361,4 @@ ALTER TABLE `navigation`
 --
 
 ALTER TABLE `navigation`
-  MODIFY `nav_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22; 
+  MODIFY `nav_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20; 

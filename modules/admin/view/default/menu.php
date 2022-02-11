@@ -47,7 +47,7 @@
 <main class="col-span-10 mb-col-12">
   <?php if ($data['type'] != 'admin') { ?>
     <div class="box-flex-white">
-      <?= (new Breadcrumbs('/'))
+      <?= (new Breadcrumbs('<span>/</span>'))
             ->base(getUrlByName('admin'), Translate::get('admin'))
             ->addCrumb(Translate::get($data['type']), $data['type'])->render('bread_crumbs'); ?>
 
