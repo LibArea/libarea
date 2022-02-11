@@ -33,7 +33,7 @@ $url = $fs['facet_type'] == 'category' ? '/web/' . $fs['facet_slug'] : getUrlByN
             'icon'      => 'bi bi-gear'
           ], [
             'id'        => 'pages',
-            'url'       => getUrlByName($fs['facet_type'] . '.edit.pages', ['id' => $fs['facet_id']]),
+            'url'       => getUrlByName('pages.edit', ['id' => $fs['facet_id']]),
             'title'     => Translate::get('pages'),
             'icon'      => 'bi bi-app'
           ], [

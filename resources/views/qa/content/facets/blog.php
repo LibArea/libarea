@@ -10,7 +10,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
         <h1 class="mb0 mt10 text-2xl">
           <?= $blog['facet_seo_title']; ?>
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
-            <a class="right white fon-rgba -mt20" href="<?= getUrlByName('facet.edit', ['id' => $blog['facet_id']]); ?>">
+            <a class="right white fon-rgba -mt20" href="<?= getUrlByName('blog.edit', ['id' => $blog['facet_id']]); ?>">
               <i class="bi bi-pencil bold"></i>
             </a>
           <?php } ?>
@@ -42,7 +42,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       </main>
       <aside class="col-span-3 relative mb-none">
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
-          <div class="box-white bg-violet-50 text-sm">
+          <div class="box-white text-sm">
             <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
               <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'w30 mr5 br-rd-50'); ?>
@@ -54,14 +54,14 @@ if ($blog['facet_is_deleted'] == 0) { ?>
             </div>
           </div>
           <?php if ($data['info']) { ?>
-            <div class="box-white bg-violet-50 text-sm shown_post">
+            <div class="box-white text-sm shown_post">
               <?= $data['info']; ?>
             </div>
           <?php } ?>
 
           <?php if (!empty($data['pages'])) { ?>
             <div class="sticky top0 top-sm">
-              <div class="box-white bg-violet-50 text-sm">
+              <div class="box-white text-sm">
                 <h3 class="uppercase-box"><?= Translate::get('pages'); ?></h3>
                 <?php foreach ($data['pages'] as $ind => $row) { ?>
                   <div class="mb5">
@@ -90,26 +90,28 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 <?php } ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-document.querySelectorAll(".focus-user")
-  .forEach(el => el.addEventListener("click", function (e) {
-    let content = document.querySelector('.content_<?= $blog['facet_id']; ?>');
-    let div = document.querySelector(".content_<?= $blog['facet_id']; ?>");
-    div.classList.remove("none");
-    fetch("/topic/<?= $blog['facet_slug']; ?>/followers/<?= $blog['facet_id']; ?>", {
-      method: "POST",
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(
-        response => {
-          return response.text();
-        }
-      ).then(
-        text => {
-          content.innerHTML = text;
-        }
-      );
-    window.addEventListener('mouseup', e => {   
-      div.classList.add("none");
-    });
-  }));
+  document.querySelectorAll(".focus-user")
+    .forEach(el => el.addEventListener("click", function(e) {
+      let content = document.querySelector('.content_<?= $blog['facet_id']; ?>');
+      let div = document.querySelector(".content_<?= $blog['facet_id']; ?>");
+      div.classList.remove("none");
+      fetch("/topic/<?= $blog['facet_slug']; ?>/followers/<?= $blog['facet_id']; ?>", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        })
+        .then(
+          response => {
+            return response.text();
+          }
+        ).then(
+          text => {
+            content.innerHTML = text;
+          }
+        );
+      window.addEventListener('mouseup', e => {
+        div.classList.add("none");
+      });
+    }));
 </script>

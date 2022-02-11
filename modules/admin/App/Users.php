@@ -129,7 +129,6 @@ class Users
 
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
         Validation::Length($login, Translate::get('login'), '3', '11', $redirect);
-        Validation::Length($user_name, Translate::get('name'), '3', '11', $redirect);
 
         SettingModel::edit(
             [

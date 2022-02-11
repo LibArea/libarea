@@ -145,7 +145,7 @@ return [
             'id'    => '',
         ], [
             'url'   => getUrlByName('web'),
-            'title' => Translate::get('domains'),
+            'title' => Translate::get('catalog'),
             'icon'  => 'bi bi-link-45deg',
             'id'    => '',
         ], [

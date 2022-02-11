@@ -183,7 +183,8 @@ class EditFacetController extends MainController
     public function pages()
     {
         $facet_id   = Request::getInt('id');
-        $facet      = FacetModel::getFacet($facet_id, 'id', 'section');
+ 
+        $facet      = FacetModel::getFacet($facet_id, 'id', 'blog');
         pageError404($facet);
 
         // Доступ получает только автор и админ

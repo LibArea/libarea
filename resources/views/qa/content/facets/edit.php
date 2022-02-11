@@ -2,7 +2,7 @@
 
 <main class="col-span-12 mb-col-12">
 
-  <div class="bg-white box-flex br-box-gray">
+  <div class="box-flex-white bg-violet-50">
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
     <ul class="flex flex-row list-none text-sm">
 
@@ -18,7 +18,7 @@
             'icon'      => 'bi bi-gear'
           ], [
             'id'        => 'pages',
-            'url'       => getUrlByName($fs['facet_type'] . '.edit.pages', ['id' => $fs['facet_id']]),
+            'url'       => getUrlByName('pages.edit', ['id' => $fs['facet_id']]),
             'title'     => Translate::get('pages'),
             'icon'      => 'bi bi-app'
           ], [
@@ -222,15 +222,12 @@
           'help'    => Translate::get('necessarily'),
         ]); ?>
  
-        <?= Tpl::import('/_block/facet/facet-type', [
-          'user'   => $user,
-          'type'  => $fs['facet_type'],
-        ]); ?>
+        <?= Tpl::import('/_block/facet/facet-type', ['type' => $fs['facet_type'], 'tl' => $user['trust_level']]); ?>
       <?php } ?>
-      <div class="mb20">
+      <fieldset>
         <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">
         <?= sumbit(Translate::get('edit')); ?>
-      </div>
+      </fieldset>
     </form>
   </div>
 </main>
