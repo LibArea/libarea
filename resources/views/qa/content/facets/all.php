@@ -7,7 +7,7 @@
   </div>
 
   <div class="mb15">
-    <ul class="flex list-none text-sm">
+    <ul class="box-flex list-none text-sm">
 
       <?= tabs_nav(
         'nav',

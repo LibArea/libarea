@@ -15,12 +15,12 @@
 </main>
 <aside class="col-span-3 relative mb-none">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
-    <div class="box-flex-white">
-      <div class="mr15 center">
+    <div class="box-flex-white bg-violet-50">
+      <div class="center">
         <div class="uppercase mb5 text-sm gray"><?= Translate::get('posts'); ?></div>
         <?= $topic['facet_count']; ?>
       </div>
-      <div class="ml15 center relative">
+      <div class="center relative">
         <div class="uppercase mb5 text-sm gray"><?= Translate::get('reads'); ?></div>
         <div class="focus-user sky-500">
           <?= $topic['facet_focus_count']; ?>
@@ -31,7 +31,7 @@
 
     <?php if (!empty($data['pages'])) { ?>
       <div class="sticky top0 top-sm">
-        <div class="box-white text-sm">
+        <div class="box-white bg-violet-50 text-sm">
           <h3 class="uppercase-box"><?= Translate::get('pages'); ?></h3>
           <?php foreach ($data['pages'] as $ind => $row) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="">
@@ -45,14 +45,18 @@
     <?= Tpl::import('/_block/sidebar/topic', ['data' => $data]); ?>
     <?php if (!empty($data['writers'])) { ?>
       <div class="sticky top0 top-sm">
-        <div class="box-white text-sm">
+        <div class="box-white bg-violet-50 text-sm">
           <h3 class="uppercase-box"><?= Translate::get('writers'); ?></h3>
+          <ol class="list-none text-sm">
           <?php foreach ($data['writers'] as $ind => $row) { ?>
-            <a class="flex relative pb15 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
-              <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-sm'); ?>
-              <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
-            </a>
+            <li class="mb10">
+              <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
+                <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-sm'); ?>
+                <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
+              </a>
+            </li>  
           <?php } ?>
+          </ol>
         </div>
       </div>
     <?php } ?>

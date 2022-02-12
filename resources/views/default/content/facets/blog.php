@@ -6,7 +6,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       <div class="mb-none">
         <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'img-xl'); ?>
       </div>
-      <div class="mb-ml-0 flex-auto">
+      <div class="mb-ml0 flex-auto">
         <h1 class="mb0 mt10 text-2xl">
           <?= $blog['facet_seo_title']; ?>
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>

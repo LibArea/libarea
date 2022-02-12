@@ -2,7 +2,7 @@
   <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
-  <div class="mb15 mb-ml-0 hidden">
+  <div class="mb15 mb-ml0 hidden">
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />
@@ -11,7 +11,7 @@
     </form>
   </div>
 
-  <div class="bg-white br-rd5 br-box-gray ml10 mb-ml-0 p15">
+  <div class="bg-white br-rd5 br-box-gray ml10 mb-ml0 p15">
     <?php if ($data['list']) { ?>
       <?php foreach ($data['list'] as $key => $val) { ?>
         <div class="hidden">

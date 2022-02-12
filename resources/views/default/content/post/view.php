@@ -246,7 +246,7 @@
             <?= $topic['facet_title']; ?>
           </a>
 
-          <div class="text-sm mt5 pr15 mb-pr-0 gray-400">
+          <div class="text-sm mt5 pr15 mb-pr0 gray-400">
             <?= $topic['facet_short_description']; ?>
           </div>
         </div>

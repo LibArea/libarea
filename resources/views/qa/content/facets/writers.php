@@ -9,8 +9,8 @@
       </div>
       <hr>
       <?php foreach ($data['writers'] as $ind => $row) { ?>
-        <div class="flex flex-row items-centere mb20 mt20">
-          <div class="w94 p10">
+        <div class="box-flex">
+          <div class="w94">
             <?= $row['hits_count']; ?>
           </div>
           <div class="flex3">

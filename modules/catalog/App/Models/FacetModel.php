@@ -51,8 +51,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $facet_id
      * @return
      */
-    public static function getChildrens($facet_id)
-    {
+    public static function getChildrens($facet_id, $screening)
+    {       // TODO: the request is invalid, we should now consider nested sites by their parameters and not the total number of allowed 
+            // And it's more correct to build trees and make calculations from the central page, taking into account attachments 
             $sql = "SELECT
                     facet_id,
                     facet_title,

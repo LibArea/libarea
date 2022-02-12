@@ -12,27 +12,27 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?01">
+  <link rel="stylesheet" href="/assets/css/style.css?02">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
 <body <?php if ($dark == 'dark') { ?>class="dark" <?php } ?>>
   <header>
-    <div class="mr-auto item-search mb-p-10">
+    <div class="mr-auto item-search mb-p10">
       <a class="logo sky-500 mt30 mb-none" href="<?= getUrlByName('web'); ?>">
         <?= Translate::get('catalog'); ?>
       </a>
-      <div class="w-100 ml45 mb-ml-0">
+      <div class="w-100 ml45 mb-ml0">
         <div data-template="one" id="find tippy">
           <a class="item-search__url" href="/"><?= Config::get('meta.name'); ?></a>
           <div class="flex right col-span-4 items-center">
-            <div id="toggledark" class="header-menu-item mb-none only-icon mr20 mb-ml-10">
+            <div id="toggledark" class="header-menu-item mb-none only-icon mr20 mb-ml10">
               <i class="bi bi-brightness-high gray-400 text-xl"></i>
             </div>
             <?php if (!UserData::checkActiveUser()) { ?>
               <?php if (Config::get('general.invite') == false) { ?>
-                <a class="register gray-400 ml30 mr15 mb-ml-10 mb-mr-5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
+                <a class="register gray-400 ml30 mr15 mb-ml10 mb-mr5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
                   <?= Translate::get('sign up'); ?>
                 </a>
               <?php } ?>

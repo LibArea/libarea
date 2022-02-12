@@ -19,20 +19,15 @@
 @media (max-width: 910px) {
   .mb-col-2 { grid-column: span 2 / span 2; }
   .mb-col-12 { grid-column: span 12 / span 12; }
-  .mb-w-100 { width: 100px; }
-  .mb-h-100 { height: 100px; }
-  .mb-w100 { width: 100%; }
-  .mb-h100 { height: 100%; }
-  .mb-ml-10 { margin-left: 10px; }
-  .mb-ml-20 { margin-left: 20px; }
-  .mb-mt-5 { margin-top: 5px; }
-  .mb-mr-5 { margin-right: 5px; }
-  .mb-mb-5 { margin-bottom: 5px; }
-  .mb-ml-5 { margin-left: 5px; }
-  .mb-ml-0 { margin-left: 0; }
-  .mb-pl-0 { padding-left: 0; }
-  .mb-pr-0 { padding-right: 0; }
-  .mb-p-10 { padding: 10px; }
+  .mb-w100 { width: 100px; }
+  .mb-ml10 { margin-left: 10px; }
+  .mb-ml20 { margin-left: 20px; }
+  .mb-mr5 { margin-right: 5px; }
+  .mb-ml5 { margin-left: 5px; }
+  .mb-ml0 { margin-left: 0; }
+  .mb-pl0 { padding-left: 0; }
+  .mb-pr0 { padding-right: 0; }
+  .mb-p10 { padding: 10px; }
   .mb-text-xl { font-size: 1.25rem; }
   .mb-inline { display: inline; }
   .mb-gap-05  { gap: 0.5rem; }

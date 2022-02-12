@@ -13,7 +13,7 @@
 
 <?php
 $fs = $data['facet'];
-$url = $fs['facet_type'] == 'category' ? '/web/' . $fs['facet_slug'] : getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]);
+$url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]);
 ?>
 
 <main class="col-span-10 mb-col-12">

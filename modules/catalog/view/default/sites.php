@@ -21,7 +21,7 @@
     <div class="item-categories mb-block">
     <?php foreach ($data['childrens'] as $lt) { ?>
         <div>
-          <a class="text-2xl" href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $lt['facet_slug']]); ?>">
+          <a class="text-2xl" href="<?= getUrlByName('web.dir', ['cat' => $data['screening'], 'slug' => $lt['facet_slug']]); ?>">
             <?= $lt['facet_title']; ?>
           </a> <sup class="gray-400"><?= $lt['count']; ?></sup>
           <?php if (UserData::checkAdmin()) { ?>
@@ -38,7 +38,7 @@
    <div class="item-categories mb-block">
     <?php foreach ($data['low_matching'] as $rl) { ?>
         <div class="inline mr20">
-          <a class="text-2xl" href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $rl['facet_slug']]); ?>">
+          <a class="text-2xl" href="<?= getUrlByName('web.dir', ['cat' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
             @<?= $rl['facet_title']; ?>
           </a>
           <?php if (UserData::checkAdmin()) { ?>
@@ -58,12 +58,12 @@
     <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>
 
     <?php if (!empty($data['items'])) { ?>
-      <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user]); ?>
+      <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
     <?php } else { ?>
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
 
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/cat'); ?>
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/' . $data['screening']); ?>
   </main>
   <aside class="col-span-3 mb-col-12 relative mb-none">
     <div class="box-yellow mt15 text-sm"><?= $data['category']['facet_info']; ?></div>

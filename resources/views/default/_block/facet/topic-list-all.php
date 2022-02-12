@@ -1,6 +1,6 @@
  <div class="flex flex-row flex-wrap">
    <?php foreach ($facets as $key => $facet) { ?>
-     <div class="w-50 mb20 items-center mb-w-100 flex flex-row<?php if (($key + 1) % 2 == 0) { ?> pl20 mb-pl-0<?php } ?>">
+     <div class="w-50 mb20 items-center mb-w100 flex flex-row<?php if (($key + 1) % 2 == 0) { ?> pl20 mb-pl0<?php } ?>">
        <a title="<?= $facet['facet_title']; ?>" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
          <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'img-lg'); ?>
        </a>
@@ -29,7 +29,7 @@
          <?php if ($user['id'] == $facet['facet_user_id']) { ?>
            <i class="bi bi-mic sky-500 text-sm"></i>
          <?php } ?>
-         <div class="text-sm mt10 pr20 mb-pr-0 gray-400">
+         <div class="text-sm mt10 pr20 mb-pr0 gray-400">
            <?= $facet['facet_short_description']; ?>
            <sup class="flex justify-center right">
              <i class="bi bi-journal mr5"></i>

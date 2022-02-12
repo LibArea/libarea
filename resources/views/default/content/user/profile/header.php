@@ -1,9 +1,9 @@
 <?php
 $profile = $data['profile'];
 
-$css = 'w110 mb-w-100 ml15 z-10 -mt80 br-rd5';
+$css = 'w110 mb-w100 ml15 z-10 -mt80 br-rd5';
 if ($profile['cover_art'] != 'cover_art.jpeg') {
-  $css = 'w160 mb-w-100 ml15 z-10 -mt80 br-rd5';
+  $css = 'w160 mb-w100 ml15 z-10 -mt80 br-rd5';
 }
 ?>
 
@@ -25,7 +25,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
             <?= $profile['login']; ?>
             <?php if ($profile['name']) { ?> / <?= $profile['name']; ?><?php } ?>
               <?php if ($profile['up_count'] > 0) { ?>
-                <i class="up-id bi bi-heart red-500 mr10 ml20 mb-ml-5 text-sm inline"></i>
+                <i class="up-id bi bi-heart red-500 mr10 ml20 mb-ml5 text-sm inline"></i>
                 <sup class="text-sm gray-400 inline"><?= $profile['up_count']; ?></sup>
               <?php } ?>
           </h1>

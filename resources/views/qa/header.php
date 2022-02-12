@@ -11,7 +11,7 @@ $facet  = $data['facet'] ?? false; ?>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?v=54">
+  <link rel="stylesheet" href="/assets/css/style.css?v=02">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
@@ -52,11 +52,11 @@ $facet  = $data['facet'] ?? false; ?>
 
       <?php if ($user['id'] == 0) { ?>
         <div class="flex right col-span-4 items-center">
-          <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml-10">
+          <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml10">
             <i class="bi bi-brightness-high gray-400 text-xl"></i>
           </div>
           <?php if (Config::get('general.invite') == false) { ?>
-            <a class="register gray ml30 mr15 mb-ml-10 mb-mr-5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
+            <a class="register gray ml30 mr15 mb-ml10 mb-mr5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
               <?= Translate::get('sign up'); ?>
             </a>
           <?php } ?>
@@ -66,15 +66,15 @@ $facet  = $data['facet'] ?? false; ?>
         </div>
       <?php } else { ?>
         <div class="col-span-4">
-          <div class="flex right ml30 mb-ml-10 items-center">
+          <div class="flex right ml30 mb-ml10 items-center">
 
             <?= add_post($facet, $user['id']); ?>
 
-            <div id="toggledark" class="only-icon p10 ml20 mb-ml-10">
+            <div id="toggledark" class="only-icon p10 ml20 mb-ml10">
               <i class="bi bi-brightness-high gray-400 text-xl"></i>
             </div>
 
-            <a class="gray-400 p10 text-xl ml20 mb-ml-10" href="<?= getUrlByName('notifications'); ?>">
+            <a class="gray-400 p10 text-xl ml20 mb-ml10" href="<?= getUrlByName('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationsController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['notification_action_type'] == 1) { ?>
@@ -87,7 +87,7 @@ $facet  = $data['facet'] ?? false; ?>
               <?php } ?>
             </a>
 
-            <div class="ml45 mb-ml-20 relative">
+            <div class="ml45 mb-ml20 relative">
               <div class="trigger">
                 <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava-base'); ?>
               </div>

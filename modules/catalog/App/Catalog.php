@@ -22,19 +22,23 @@ class Catalog
     // Лист сайтов по темам (сайты по "категориям")
     public function index($sheet, $type)
     {
-
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
+
+        $os = ['cat', 'github', 'wap'];
+        if (!in_array($screening = \Request::get('cat'), $os)) {
+           pageError404([]);
+        }
 
         $category  = FacetModel::get(\Request::get('slug'), 'slug', $this->user['trust_level']);
         pageError404($category);
 
         // We will get children
         // Получим детей
-        $childrens =  FacetModel::getChildrens($category['facet_id']);
+        $childrens =  FacetModel::getChildrens($category['facet_id'], $screening);
         
-        $items      = WebModel::feedItem($page, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet);
-        $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id']);
+        $items      = WebModel::feedItem($page, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening );
+        $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'], $screening);
 
         $m = [
             'og'         => false,
@@ -56,19 +60,19 @@ class Catalog
         if ($parent_two = FacetModel::breadcrumb($parent['facet_id'])) {
              $breadcrumb = (new Breadcrumbs('<span>/</span>'))
                 ->base(getUrlByName('web'), Translate::get('websites'))
-                ->addCrumb($parent_two['facet_title'], 'cat/'. $parent_two['facet_slug'])
-                ->addCrumb($parent['facet_title'], 'cat/'. $parent['facet_slug']) 
-                ->addCrumb($category['facet_title'], 'cat/'. $category['facet_slug']);
+                ->addCrumb($parent_two['facet_title'], $screening . '/'. $parent_two['facet_slug'])
+                ->addCrumb($parent['facet_title'], $screening . '/'. $parent['facet_slug']) 
+                ->addCrumb($category['facet_title'], $screening . '/'. $category['facet_slug']);
         } else {
             if ($parent) {
                 $breadcrumb = (new Breadcrumbs('<span>/</span>'))
                     ->base(getUrlByName('web'), Translate::get('websites'))
-                    ->addCrumb($parent['facet_title'], 'cat/'. $parent['facet_slug']) 
-                    ->addCrumb($category['facet_title'], 'cat/'. $category['facet_slug']);
+                    ->addCrumb($parent['facet_title'], $screening . '/'. $parent['facet_slug']) 
+                    ->addCrumb($category['facet_title'], $screening . '/'. $category['facet_slug']);
             } else {
                 $breadcrumb = (new Breadcrumbs('<span>/</span>'))
                     ->base(getUrlByName('web'), Translate::get('websites'))
-                    ->addCrumb($category['facet_title'], 'cat/'. $category['facet_slug']); 
+                    ->addCrumb($category['facet_title'], $screening . '/'. $category['facet_slug']); 
             }
         }
         
@@ -78,6 +82,7 @@ class Catalog
                 'meta'  => meta($m, $title, $desc),
                 'user' => $this->user,
                 'data'  => [
+                    'screening'     => $screening,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'count'         => $pagesCount,

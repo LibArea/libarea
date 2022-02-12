@@ -32,22 +32,20 @@
     </ul>
   </div>
 
-  <div class="box-white">
-    <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">
-      <?php foreach ($data['users'] as $ind => $user) { ?>
-        <div class="center inline pr10 pl10 mb20 mb-col-2">
-          <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
-            <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-lg'); ?>
-            <div class="block mt5">
-              <?= $user['login']; ?>
-            </div>
-            <?php if ($user['name']) { ?>
-              <span class="gray text-sm"><?= $user['name']; ?></span>
-            <?php } ?>
-           </a>
-        </div>
-      <?php } ?>
-    </div>
+  <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">
+    <?php foreach ($data['users'] as $ind => $user) { ?>
+      <div class="center inline pr10 pl10 mb20 mb-col-2">
+        <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+          <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-lg'); ?>
+          <div class="block mt5">
+            <?= $user['login']; ?>
+          </div>
+          <?php if ($user['name']) { ?>
+            <span class="gray text-sm"><?= $user['name']; ?></span>
+          <?php } ?>
+         </a>
+      </div>
+    <?php } ?>
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
 </main>

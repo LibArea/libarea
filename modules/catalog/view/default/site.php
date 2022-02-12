@@ -10,7 +10,7 @@
           <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
             <h2><?= $item['item_title_url']; ?></h2>
           </a>
-          <?= html_category($item['facet_list'], 'category', 'cat', 'tags mr15'); ?>
+          <?= html_category($item['facet_list'], 'category', $screening, 'tags mr15'); ?>
           <?php if (UserData::checkAdmin()) { ?>
             <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
               <i class="bi bi-pencil text-sm"></i>

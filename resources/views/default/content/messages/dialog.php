@@ -15,7 +15,7 @@
   <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
-  <div class="mb15 mb-ml-0 hidden">
+  <div class="mb15 mb-ml0 hidden">
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />

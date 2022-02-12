@@ -82,21 +82,26 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return $sort;
     }
 
-    // Получаем домены по условиям
+    // Получаем сайты по условиям
     // https://systemrequest.net/index.php/123/
-    public static function feedItem($page, $limit, $facets, $user, $topic_id, $sheet)
+    public static function feedItem($page, $limit, $facets, $user, $topic_id, $sheet, $screening)
     {
         $result = [];
         foreach ($facets as $ind => $row) { 
              $result['9999'] = $topic_id;
             $result[$ind] = $row['facet_id'];
         }
- 
+
         $sort = "ORDER BY item_votes DESC";
         if ($sheet == 'web.all') $sort = "ORDER BY item_date DESC";
 
         $string = "relation_facet_id IN($topic_id)";
         if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
+        
+        $go = '';
+        if ($screening == 'github') {
+            $go = 'item_is_github = 1 AND';
+        }
 
         $start  = ($page - 1) * $limit;
 
@@ -112,6 +117,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_date,
                     item_count,
                     item_title_soft,
+                    item_is_github,
                     item_github_url,
                     item_following_link,
                     item_is_deleted,
@@ -139,17 +145,22 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN votes_item 
                                 ON votes_item_item_id = item_id AND votes_item_user_id = :uid_two
 
-                                WHERE $string $sort LIMIT $start, $limit";
+                                WHERE $go $string $sort LIMIT $start, $limit";
 
         return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id']])->fetchAll();
     }
 
-    public static function feedItemCount($facets, $topic_id)
+    public static function feedItemCount($facets, $topic_id, $screening)
     {
         $result = [];
         foreach ($facets as $ind => $row) {
             $result['9999'] = $topic_id;
             $result[$ind] = $row['facet_id'];
+        }
+
+        $go = '';
+        if ($screening == 'github') {
+            $go = 'item_is_github = 1 AND';
         }
 
         $string = "relation_facet_id IN($topic_id)";
@@ -158,6 +169,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT DISTINCT
                     item_id,
                     item_published,
+                    item_is_github,
                     item_url,
                     item_is_deleted,
                     rel.*
@@ -176,7 +188,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                         ) AS rel
                              ON rel.relation_item_id = item_id
                              
-                                WHERE $string";
+                                WHERE $go $string";
 
         return DB::run($sql)->rowCount();
     }

@@ -25,7 +25,7 @@
 <div class="p20 hidden">
   <?= votes($user['id'], $page, 'post', 'ps', 'text-2xl middle', 'block'); ?>
 </div>
-<div class="bg-gray-100 p60 hidden mt15 mb-pl-0 mb-pr-0">
+<div class="bg-gray-100 p60 hidden mt15 mb-pl0 mb-pr0">
   <div class="p15 mr-auto bg-white hidden br-box-gray br-rd5 max-w640">
       <?php if ($data['facet']['facet_type'] == 'section') { ?>
         <h3 class="mt0 mb5 font-normal">

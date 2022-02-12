@@ -6,7 +6,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       <div class="mb-none">
         <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'img-xl'); ?>
       </div>
-      <div class="mb-ml-0 flex-auto">
+      <div class="mb-ml0 flex-auto">
         <h1 class="mb0 mt10 text-2xl">
           <?= $blog['facet_seo_title']; ?>
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
@@ -42,7 +42,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       </main>
       <aside class="col-span-3 relative mb-none">
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
-          <div class="box-white text-sm">
+          <div class="box-white bg-violet-50 text-sm">
             <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
               <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'ava-base'); ?>
@@ -54,14 +54,14 @@ if ($blog['facet_is_deleted'] == 0) { ?>
             </div>
           </div>
           <?php if ($data['info']) { ?>
-            <div class="box-white text-sm shown_post">
+            <div class="box-white bg-violet-50 text-sm shown_post">
               <?= $data['info']; ?>
             </div>
           <?php } ?>
 
           <?php if (!empty($data['pages'])) { ?>
             <div class="sticky top0 top-sm">
-              <div class="box-white text-sm">
+              <div class="box-white bg-violet-50 text-sm">
                 <h3 class="uppercase-box"><?= Translate::get('pages'); ?></h3>
                 <?php foreach ($data['pages'] as $ind => $row) { ?>
                   <div class="mb5">

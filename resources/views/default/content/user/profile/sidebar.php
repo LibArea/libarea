@@ -19,7 +19,7 @@
     <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
       <?php foreach ($data['blogs'] as $blog) { ?>
-        <div class="w-100 mb-w-100 mb15 flex flex-row">
+        <div class="w-100 mb-w100 mb15 flex flex-row">
           <a class="mr10" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
             <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'img-lg'); ?>
           </a>
@@ -27,7 +27,7 @@
             <a class="black" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
               <?= $blog['facet_title']; ?>
             </a>
-            <div class="text-sm pr15 mb-pr-0 gray-400">
+            <div class="text-sm pr15 mb-pr0 gray-400">
               <?= $blog['facet_short_description']; ?>
               <div class="flex mt5 text-sm">
                 <i class="bi bi-journal mr5"></i>

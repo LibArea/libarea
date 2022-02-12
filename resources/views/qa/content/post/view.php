@@ -57,7 +57,7 @@
       </div>
 
       <?php if ($post['post_thumb_img']) { ?>
-        <?= post_img($post['post_thumb_img'], $post['post_title'], 'thumb right ml15 mb-ml-5', 'thumbnails'); ?>
+        <?= post_img($post['post_thumb_img'], $post['post_title'], 'thumb right ml15 mb-ml5', 'thumbnails'); ?>
       <?php } ?>
 
       <div class="post-body max-w780 full">
@@ -247,7 +247,7 @@
             <?= $topic['facet_title']; ?> 
           </a>
 
-          <div class="text-sm mt5 pr15 mb-pr-0 gray-400">
+          <div class="text-sm mt5 pr15 mb-pr0 gray-400">
             <?= $topic['facet_short_description']; ?>          
           </div>
         </div>

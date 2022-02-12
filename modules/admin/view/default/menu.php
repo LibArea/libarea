@@ -11,7 +11,7 @@
         <?php if ($cats['radical']  == 1) { ?>
           <li> <a class="<?= $active; ?>" href="<?= getUrlByName($cats['url']); ?>">
               <i class="<?= $cats['icon']; ?> middle mr10 text-xl"></i>
-              <span><?= Translate::get($cats['name']); ?></span>
+              <?= Translate::get($cats['name']); ?>
             </a></li>
         <?php } else { ?>
 
@@ -21,8 +21,7 @@
             <a class="dropdown-btn" href="#">
               <span class="right"><i class="bi bi-chevron-down text-xl"></i></span>
               <i class="bi bi-lis3t middle mr10 text-xl"></i>
-              <span><?= Translate::get($cats['name']); ?></span>
-
+              <?= Translate::get($cats['name']); ?>
             </a>
             <div class="none">
               <?php if ($cats['childs'] > 0) { ?>
@@ -30,7 +29,7 @@
                   <?php foreach ($cats['childs'] as $cat) { ?>
                     <a class="gray m5 block<?= $active; ?>" href="<?= getUrlByName($cat['url']); ?>">
                       <i class="bi bi-circle green-600 middle mr5"></i>
-                      <span><?= Translate::get($cat['name']); ?></span>
+                      <?= Translate::get($cat['name']); ?>
                     </a>
                   <?php } ?>
                 </ul>
@@ -53,7 +52,7 @@
 
       <ul class="flex flex-row list-none m0 p0 center">
         <?php foreach ($menus as $menu) { ?>
-          <a class="ml30 mb-mr-5 mb-ml-10 gray<?php if ($menu['id'] == $data['sheet']) { ?> sky-500<?php } ?>" href="<?= $menu['url']; ?>" <?php if ($menu['id'] == $data['sheet']) { ?> aria-current="page" <?php } ?>>
+          <a class="ml30 mb-mr5 mb-ml10 gray<?php if ($menu['id'] == $data['sheet']) { ?> sky-500<?php } ?>" href="<?= $menu['url']; ?>" <?php if ($menu['id'] == $data['sheet']) { ?> aria-current="page" <?php } ?>>
             <i class="<?= $menu['icon']; ?> mr5"></i>
             <span><?= $menu['name']; ?></span>
           </a>

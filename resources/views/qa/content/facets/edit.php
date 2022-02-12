@@ -1,4 +1,7 @@
-<?php $fs = $data['facet']; ?>
+<?php 
+$fs = $data['facet'];
+$url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]);
+?>
 
 <main class="col-span-12 mb-col-12">
 
@@ -23,7 +26,7 @@
             'icon'      => 'bi bi-app'
           ], [
             'id'        => 'all',
-            'url'       => getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]),
+            'url'       => $url,
             'title'     => Translate::get('go to'),
             'icon'      => 'bi bi-arrow-up-right-square'
           ]

@@ -62,6 +62,7 @@ class Home
                 'meta'  => meta($m, $title, $desc),
                 'user'  => $this->user,
                 'data'  => [
+                    'screening'     => 'cat',
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'count'         => $pagesCount,
                     'pNum'          => $page,

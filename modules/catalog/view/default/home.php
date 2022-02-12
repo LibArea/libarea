@@ -33,7 +33,7 @@
     <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>
 
     <?php if (!empty($data['items'])) { ?>
-      <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user]); ?>
+      <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
     <?php } else { ?>
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
