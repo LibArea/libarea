@@ -1,32 +1,11 @@
-<ul class="flex flex-row list-none text-sm">
-
-  <?= tabs_nav(
-    'nav',
-    $data['sheet'],
-    1,
-    $pages = [
-      [
-        'id' => 'settings',
-        'url' => getUrlByName('setting'),
-        'title' => Translate::get('settings'),
-        'icon' => 'bi bi-gear'
-      ], [
-        'id' => 'avatar',
-        'url' => getUrlByName('setting.avatar'),
-        'title' => Translate::get('avatar'),
-        'icon' => 'bi bi-emoji-smile'
-      ], [
-        'id' => 'security',
-        'url' => getUrlByName('setting.security'),
-        'title' => Translate::get('password'),
-        'icon' => 'bi bi-lock'
-      ], [
-        'id' => 'notifications',
-        'url' => getUrlByName('setting.notifications'),
-        'title' => Translate::get('notifications'),
-        'icon' => 'bi bi-app-indicator'
-      ]
-    ]
-  ); ?>
-
-</ul>
+<div class="box-flex-white">
+  <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
+  <ul class="flex flex-row list-none text-sm">
+    <?= tabs_nav(
+      'nav',
+      $data['sheet'],
+      1,
+      $pages = Config::get('menu.settings'),
+    ); ?>
+  </ul>
+</div>

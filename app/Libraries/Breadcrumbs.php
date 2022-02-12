@@ -74,7 +74,6 @@ class Breadcrumbs
     // @return string
     private function setBase(): string
     {
-
         $title = $this->base["icon"] ?? $this->base['title'];
         if (!$this->links) {
             return '<li class="active" aria-current="page">' . $title . '</li>';

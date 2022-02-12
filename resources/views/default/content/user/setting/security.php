@@ -13,12 +13,9 @@
 
 <main class="col-span-7 mb-col-12">
 
-  <div class="box-flex-white">
-    <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
-    <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
-  </div>
+  <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
 
-  <div class="box-white setting avatar">
+  <div class="box-white">
     <form action="<?= getUrlByName('setting.security.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 

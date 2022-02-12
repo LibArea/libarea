@@ -156,4 +156,30 @@ return [
         ],
     ],
 
+    // Member Settings
+    // Настройки участника
+    'settings' => [
+        [
+            'url'   => getUrlByName('setting'),
+            'title' => Translate::get('settings'),
+            'icon'  => 'bi bi-gear',
+            'id'    => 'settings',
+        ], [
+            'url'   => getUrlByName('setting.avatar'),
+            'title' => Translate::get('avatar'),
+            'icon'  => 'bi bi-emoji-smile',
+            'id'    => 'avatar',
+        ], [
+            'url'   => getUrlByName('setting.security'),
+            'title' => Translate::get('password'),
+            'icon'  => 'bi bi-lock',
+            'id'    => 'security',
+        ], [
+            'url'   => getUrlByName('setting.notifications'),
+            'title' => Translate::get('notifications'),
+            'icon'  => 'bi bi-app-indicator',
+            'id'    => 'notifications',
+        ],
+    ],
+
 ];

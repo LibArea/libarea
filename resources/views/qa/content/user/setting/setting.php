@@ -1,11 +1,7 @@
 <main class="col-span-9 mb-col-12">
+  <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
 
-  <div class="box-flex-white bg-violet-50">
-    <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
-    <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
-  </div>
-
-  <div class="box-white">
+  <div class="bg-white box">
     <form class="max-w640" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
