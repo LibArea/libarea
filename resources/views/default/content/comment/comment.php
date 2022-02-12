@@ -24,7 +24,7 @@ foreach ($answer as  $comment) {
           <div class="max-w780">
             <div class="text-sm flex">
               <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
-                <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'w20 h20'); ?>
+                <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava-sm'); ?>
                 <span class="mr5 ml5">
                   <?= $comment['login']; ?>
                 </span>

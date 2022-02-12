@@ -37,7 +37,7 @@
             <?= $user['id']; ?>
           </td>
           <td class="center">
-            <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'w60 h60'); ?>
+            <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-lg'); ?>
           </td>
           <td>
             <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>

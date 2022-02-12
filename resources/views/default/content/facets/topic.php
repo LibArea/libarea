@@ -62,7 +62,7 @@
           <h3 class="uppercase-box"><?= Translate::get('writers'); ?></h3>
           <?php foreach ($data['writers'] as $ind => $row) { ?>
             <a class="flex relative pb15 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
-              <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-sm mr10'); ?>
+              <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-sm'); ?>
               <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
             </a>
           <?php } ?>

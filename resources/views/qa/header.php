@@ -89,7 +89,7 @@ $facet  = $data['facet'] ?? false; ?>
 
             <div class="ml45 mb-ml-20 relative">
               <div class="trigger">
-                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
+                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava-base'); ?>
               </div>
               <ul class="dropdown">
                 <?= tabs_nav(

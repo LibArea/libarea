@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
   <div class="bg-white br-rd5 br-box-gray p15">
@@ -9,12 +9,12 @@
           <div class="text-sm flex">
             <?php if ($msg['dialog_sender_id'] == $user['id']) { ?>
               <a href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
-                <?= user_avatar_img($msg['msg_to_user']['avatar'], 'small', $msg['msg_to_user']['login'], 'w20 h20 mr5 ml5'); ?>
+                <?= user_avatar_img($msg['msg_to_user']['avatar'], 'small', $msg['msg_to_user']['login'], 'ava-sm'); ?>
                 <?= $msg['msg_to_user']['login']; ?>
               </a>
             <?php } else { ?>
               <a class="mr5" href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
-                <?= user_avatar_img($msg['msg_user']['avatar'], 'small', $msg['msg_user']['login'], 'w20 h20 mr5 ml5'); ?>
+                <?= user_avatar_img($msg['msg_user']['avatar'], 'small', $msg['msg_user']['login'], 'ava-sm'); ?>
                 <?= $msg['msg_user']['login']; ?>
               </a>
             <?php } ?>

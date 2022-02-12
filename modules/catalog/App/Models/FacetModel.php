@@ -114,7 +114,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function breadcrumb($facet_id)
     {
-        $sql = "SELECT facet_parent_id as id FROM facets_relation WHERE facet_chaid_id = :facet_id";
+        $sql = "SELECT facet_parent_id, facet_id, facet_title, facet_slug FROM facets_relation 
+                    LEFT JOIN facets ON facet_parent_id = facet_id WHERE facet_chaid_id = :facet_id";
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetch();
     }

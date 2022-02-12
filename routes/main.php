@@ -181,20 +181,15 @@ Route::get('/web')->module('catalog', 'App\Home', ['web', 'web'])->name('web');
 Route::get('/web/all')->module('catalog', 'App\Home', ['web.all', 'web'])->name('web.all');
 Route::get('/web/top')->module('catalog', 'App\Home', ['web.top', 'web'])->name('web.top');
 
-Route::get('/web/{slug}')->module('catalog', 'App\Catalog', ['web.top', 'web'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.dir');
-Route::get('/web/{slug}/all')->module('catalog', 'App\Catalog', ['web.all', 'web'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.dir.all');
-Route::get('/web/{slug}/top')->module('catalog', 'App\Catalog', ['web.top', 'web'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.dir.top');
+Route::get('/web/website/{slug}')->module('catalog', 'App\Catalog@website', ['feed'])->name('web.website');
 
-Route::get('/web/page/{page?}')->module('catalog', 'App\Home', ['web', 'web'])->where(['page' => '[0-9]+']);
-Route::get('/web/top/page/{page?}')->module('catalog', 'App\Home', ['web.top', 'web'])->where(['page' => '[0-9]+']);
-Route::get('/web/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed', 'web'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
+Route::get('/web/{cat}/{slug}')->module('catalog', 'App\Catalog', ['web.top', 'web'])->name('web.dir');
+Route::get('/web/{cat}/{slug}/all')->module('catalog', 'App\Catalog', ['web.all', 'web'])->name('web.dir.all');
+Route::get('/web/{cat}/{slug}/top')->module('catalog', 'App\Catalog', ['web.top', 'web'])->name('web.dir.top');
 
-Route::get('/web/website/{slug}')->module('catalog', 'App\Catalog@website', ['feed'])->where(['slug' => '[A-Za-z0-9.-]+'])->name('web.website');
-
-// Testing a faceted scheme
-// Route::get('/web/{slug-1}')->module('catalog', 'App\Map', ['web.all', 'web'])->name('web.dir');
-// Route::get('/web/{slug-1}/{slug-2}')->module('catalog', 'App\Map', ['web.all', 'web'])->name('web.dir');
-// Route::get('/web/{slug-1}/{slug-2}/{slug-3}')->module('catalog', 'App\Map', ['web.all', 'web']);
+Route::get('/web/{cat}/page/{page?}')->module('catalog', 'App\Home', ['web', 'web']);
+Route::get('/web/{cat}/top/page/{page?}')->module('catalog', 'App\Home', ['web.top', 'web']);
+Route::get('/web/{cat}/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed', 'web']);
 
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
 

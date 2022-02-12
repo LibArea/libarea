@@ -3,7 +3,7 @@
 <?= Tpl::import('/content/user/profile/sidebar', ['user' => $user, 'data' => $data]); ?>
 
 <main class="col-span-8 mb-col-12 mb10">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex-white">
     <p class="m0"><?= Translate::get('comments'); ?> <b><?= $data['profile']['login']; ?></b></p>
   </div>
   <?php if (!empty($data['comments'])) { ?>
@@ -11,7 +11,7 @@
       <div class="bg-white br-rd5 mt15 br-box-gray p15">
         <div class="text-sm gray mb5">
           <a class="gray" href="<?= getUrlByName('profile', ['login' => $comm['login']]); ?>">
-            <?= user_avatar_img($comm['avatar'], 'max', $comm['login'], 'w20 h20 mr5'); ?>
+            <?= user_avatar_img($comm['avatar'], 'max', $comm['login'], 'ava-sm'); ?>
             <?= $comm['login']; ?>
           </a>
           <span class="mr5 ml5 gray-400 lowercase">

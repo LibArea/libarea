@@ -11,12 +11,12 @@
 <div class="item-categories mb-block">
   <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
     <div class="mb10">
-      <a class="text-2xl block" href="<?= getUrlByName('web.dir', ['slug-1' => 'cat', 'slug' => $cat['url']]); ?>">
+      <a class="text-2xl block" href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $cat['url']]); ?>">
         <?= $cat['title']; ?>
       </a>
       <?php if (!empty($cat['sub'])) { ?>
         <?php foreach ($cat['sub'] as $sub) { ?>
-          <a class="pr10 text-sm black inline" href="<?= getUrlByName('web.dir', ['slug' => $sub['url']]); ?>">
+          <a class="pr10 text-sm black inline" href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $sub['url']]); ?>">
             <?= $sub['title']; ?>
           </a>
         <?php } ?>
@@ -37,8 +37,7 @@
     <?php } else { ?>
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
-
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/cat'); ?>
   </main>
   <aside class="col-span-3 mb-col-12 mb-none">
     <div class="box-yellow text-sm mt15 max-w300 right"><?= Translate::get('directory.info'); ?></div>

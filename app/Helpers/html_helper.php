@@ -21,6 +21,28 @@ function html_facet($facet, $type, $url, $css)
     return implode($result);
 }
 
+
+// Categories
+function html_category($facet, $type, $choice, $css)
+{
+    if (!$facet) {
+        return '';
+    }
+
+    if (!is_array($facet)) {
+        $facet = preg_split('/(@)/', $facet);
+    }
+
+    $result = [];
+    foreach (array_chunk($facet, 3) as $ind => $row) {
+        if ($row[0] == $type) {
+            $result[] = '<a class="' . $css . '" href="' . getUrlByName('web.dir', ['cat' => $choice, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
+        }
+    }
+
+    return implode($result);
+}
+
 // Topic or Blog logo img
 function facet_logo_img($file, $size, $alt, $style)
 {

@@ -27,7 +27,7 @@
       </div>
       <div class="gray mt5 mb5">
         <a class="green-600" rel="nofollow noreferrer ugc" href="<?= $data['site']['item_url']; ?>">
-          <?= website_img($data['site']['item_id'], 'favicon', $data['site']['item_url_domain'], 'mr5 w20 h20'); ?>
+          <?= website_img($data['site']['item_id'], 'favicon', $data['site']['item_url_domain'], 'favicons'); ?>
           <?= $data['site']['item_url']; ?>
         </a>
         <span class="right gray-400"><i class="bi bi-journal mr5"></i> <?= $data['site']['item_count']; ?></span>

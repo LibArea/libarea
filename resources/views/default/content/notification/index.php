@@ -12,7 +12,7 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
       <?= sumbit(Translate::get('i read')); ?>

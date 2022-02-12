@@ -15,7 +15,7 @@ $facet    = $data['facet'] ?? false;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?54">
+  <link rel="stylesheet" href="/assets/css/style.css?01">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
@@ -51,7 +51,7 @@ $facet    = $data['facet'] ?? false;
             <input name="token" value="<?= csrf_token(); ?>" type="hidden">
             <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
           </form>
-          <div class="absolute box-shadow bg-white p15 pt0 mt5 max-w460 br-rd3 none" id="search_items"></div>
+          <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
         </div>
       <?php } ?>
       <?php if (!UserData::checkActiveUser()) { ?>
@@ -93,7 +93,7 @@ $facet    = $data['facet'] ?? false;
 
             <div class="ml45 mb-ml-20">
               <div class="trigger">
-                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'w30 h30 br-rd-50'); ?>
+                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava-base'); ?>
               </div>
               <ul class="dropdown">
                 <?= tabs_nav(

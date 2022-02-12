@@ -4,9 +4,9 @@ if ($blog['facet_is_deleted'] == 0) { ?>
   <div class="col-span-12 mb-col-12">
     <div class="box-flex-white" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= cover_url($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
       <div class="mb-none">
-        <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'w94 br-box-gray mt5'); ?>
+        <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'img-xl'); ?>
       </div>
-      <div class="ml15 mb-ml-0 flex-auto">
+      <div class="mb-ml-0 flex-auto">
         <h1 class="mb0 mt10 text-2xl">
           <?= $blog['facet_seo_title']; ?>
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
@@ -45,7 +45,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
           <div class="box-white text-sm">
             <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
-              <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'w30 mr5 br-rd-50'); ?>
+              <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'ava-base'); ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>
             </a>
             <div class="gray-400 text-sm mt5">

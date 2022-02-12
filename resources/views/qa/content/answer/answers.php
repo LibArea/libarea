@@ -6,7 +6,7 @@
       <div class="bg-white br-rd5 mt15  p15">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <div class="flex text-sm mb5">
-            <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20'); ?>
+            <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
             <a class="gray mr5 ml5" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
               <?= $answer['login']; ?>
             </a>

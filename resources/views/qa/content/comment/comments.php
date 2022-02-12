@@ -7,7 +7,7 @@
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
           <div class="text-sm mb5">
             <a class="gray" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
-              <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'w20 h20'); ?>
+              <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava-sm'); ?>
               <span class="mr5 ml5">
                 <?= $comment['login']; ?>
               </span>

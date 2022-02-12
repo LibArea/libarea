@@ -56,7 +56,7 @@
             <?= Translate::get('edit'); ?>
           </a>
           <span class="right mr5">
-            <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'mr5 w20 h20'); ?>
+            <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons'); ?>
           </span>
           <?php if ($item['item_published'] == 0) { ?>
             <span class="ml15 red-500"> <?= Translate::get('posted'); ?> (<?= Translate::get('no'); ?>) </span>

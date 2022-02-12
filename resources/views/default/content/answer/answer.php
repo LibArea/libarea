@@ -11,7 +11,7 @@ foreach ($data['answers'] as $answer) {
         <div class="answ-telo">
           <div class="flex text-sm">
             <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
-              <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'w20 h20'); ?>
+              <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
               <span class="mr5 ml5">
                 <?= $answer['login']; ?>
               </span>

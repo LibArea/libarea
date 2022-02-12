@@ -11,7 +11,7 @@
 
     <?php foreach ($data['tags'] as $key => $topic) { ?>
       <a class="box-flex" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-        <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr5 br-box-gray'); ?>
+        <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'img-base'); ?>
         <?= $topic['facet_title']; ?>
       </a>
       <sup class="gray mr15">x<?= $topic['facet_count']; ?></sup>
@@ -31,7 +31,7 @@
         <p class="mt5 mb5"><?= $post['content']; ?>...</p>
         <div class="text-sm">
           <a class="gray-400" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
-            <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'w20 h20 mr5'); ?>
+            <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'ava-sm'); ?>
             <?= $post['login']; ?>
           </a>
           <div class="right gray-400">

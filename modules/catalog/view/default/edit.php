@@ -10,7 +10,7 @@
     <form action="<?= getUrlByName('web.edit.pr'); ?>" method="post">
       <?= csrf_field() ?>
       <div class="right">
-        <?= website_img($data['domain']['item_url_domain'], 'favicon', $data['domain']['item_url_domain'], 'mr5 w20 h20'); ?>
+        <?= website_img($data['domain']['item_url_domain'], 'favicon', $data['domain']['item_url_domain'], 'favicons'); ?>
         <span class="add-favicon right text-sm" data-id="<?= $data['domain']['item_id']; ?>">
           + favicon
         </span>

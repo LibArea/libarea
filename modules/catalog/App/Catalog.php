@@ -52,17 +52,26 @@ class Catalog
 
         // TODO: https://dev.mysql.com/doc/refman/8.0/en/with.html
         // Now we will do this to bring styles and templates to a single view (we need an example)
-        if ($parent = FacetModel::getHighLevelList($category['facet_id'])) {
-           $breadcrumb = (new Breadcrumbs('<span>/<span>'))
-            ->base(getUrlByName('web'), Translate::get('websites'))
-            ->addCrumb($parent['facet_title'], $parent['facet_slug']) 
-            ->addCrumb($category['facet_title'], $category['facet_slug']);
+        $parent = FacetModel::breadcrumb($category['facet_id']);
+        if ($parent_two = FacetModel::breadcrumb($parent['facet_id'])) {
+             $breadcrumb = (new Breadcrumbs('<span>/</span>'))
+                ->base(getUrlByName('web'), Translate::get('websites'))
+                ->addCrumb($parent_two['facet_title'], 'cat/'. $parent_two['facet_slug'])
+                ->addCrumb($parent['facet_title'], 'cat/'. $parent['facet_slug']) 
+                ->addCrumb($category['facet_title'], 'cat/'. $category['facet_slug']);
         } else {
-           $breadcrumb = (new Breadcrumbs('<span>/<span>'))
-            ->base(getUrlByName('web'), Translate::get('websites'))
-            ->addCrumb($category['facet_title'], $category['facet_slug']); 
+            if ($parent) {
+                $breadcrumb = (new Breadcrumbs('<span>/</span>'))
+                    ->base(getUrlByName('web'), Translate::get('websites'))
+                    ->addCrumb($parent['facet_title'], 'cat/'. $parent['facet_slug']) 
+                    ->addCrumb($category['facet_title'], 'cat/'. $category['facet_slug']);
+            } else {
+                $breadcrumb = (new Breadcrumbs('<span>/</span>'))
+                    ->base(getUrlByName('web'), Translate::get('websites'))
+                    ->addCrumb($category['facet_title'], 'cat/'. $category['facet_slug']); 
+            }
         }
-
+        
         return view(
             '/view/default/sites',
             [

@@ -12,9 +12,9 @@
           <?= Translate::get('unsubscribe'); ?>
         </div>
       <?php } ?>
-      <div class="flex mb10 relative">
+      <div class="flex mb10 relative items-center">
         <div class="user-card" data-content_id="<?= $post['post_id']; ?>" data-user_id="<?= $post['id']; ?>">
-          <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'ava-base mr5'); ?>
+          <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'ava-base'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
         <a class="flex black" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">

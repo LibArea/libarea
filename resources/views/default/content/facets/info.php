@@ -19,13 +19,7 @@
     <?= $topic['facet_info']; ?>
   </div>
 
-  <?= Tpl::import(
-    '/_block/related-posts',
-    [
-      'related_posts'   => $data['related_posts'],
-      'number'          => 'yes'
-    ]
-  ); ?>
+  <?= Tpl::import('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
 
 </main>
 <aside class="col-span-3 relative mb-none">

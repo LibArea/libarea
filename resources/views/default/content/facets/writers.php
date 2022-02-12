@@ -28,7 +28,7 @@
           </div>
           <div class="flex3">
             <a class="flex  flex-auto hidden3 gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
-              <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-base mr10'); ?>
+              <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-base'); ?>
               <div>
                 <div class="gray-600"><?= $row['login']; ?></div>
 

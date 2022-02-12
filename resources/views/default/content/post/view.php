@@ -104,7 +104,7 @@
             </div>
           </div>
         <?php } ?>
-        <?= Tpl::import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes']); ?>
+        <?= Tpl::import('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
       </div>
 
       <div class="br-box-gray flex items-center mb5">
@@ -119,7 +119,7 @@
             </div>
             <div class="center">
               <a title="<?= $post['login']; ?>" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
-                <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'w30 h30 br-rd-50'); ?>
+                <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava-base'); ?>
               </a>
             </div>
           </li>
@@ -130,7 +130,7 @@
             <div class="center">
               <?php if (!empty($data['last_user']['answer_id'])) { ?>
                 <a title="<?= $data['last_user']['login']; ?>" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
-                  <?= user_avatar_img($data['last_user']['avatar'], 'small', $data['last_user']['login'], 'w30 h30 br-rd-50'); ?>
+                  <?= user_avatar_img($data['last_user']['avatar'], 'small', $data['last_user']['login'], 'ava-base'); ?>
                 </a>
               <?php } else { ?>
                 <span class="gray-400 text-sm">—</span>
@@ -234,7 +234,7 @@
       <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['facets'] as $topic) { ?>
         <div class="mb10">
-          <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w30 h30 mr10 br-box-gray'); ?>
+          <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'img-base'); ?>
 
           <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
             <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky-500 center mt5 mr5">
