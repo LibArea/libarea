@@ -1,7 +1,6 @@
 <?php
 
 $data = [
-    'site.directory'        => 'Director de site-uri',
     'categories'            => 'Categorii',
     'soft'                  => 'Moale',
     'status'                => 'Stare link',
@@ -27,13 +26,19 @@ $data = [
     'private.life'          => 'Acasă ',
     'private.life.help'     => 'Copii, animale, hobby-uri...',
     'security'              => 'Securitate...',
+
+    'web.home.title'        => 'Director de site-uri',
+    'web.home.desc'         => 'Lista de site-uri din catalog plasate în ordine cronologică. Abilitatea de a căuta, marcaj, Sortare după popularitate',
+    'web.home.all'          => 'Site-uri noi în catalog',
+    'web.home.all.desc'     => 'Site-uri noi în ordine cronologică pe pagina catalogului. Sortare, căutare, Marcaje după autorizare. Anunțuri și capturi de ecran',  
+    'web.home.top'          => 'Site-uri după evaluare în catalog',
+    'web.home.top.title'    => 'Catalog de site-uri web (după evaluare)',
+    'web.home.top.desc'     => 'Site-uri sortate după rating. Capturi de ecran și descrieri ale resurselor, capacitatea de a căuta și marcaj',
     
-    'web.desc'              => 'Lista de site-uri din catalog plasate în ordine cronologică. Abilitatea de a căuta, marcaj, Sortare după popularitate',
-    'web.all'               => 'Site-uri noi în catalog',
-    'web.all.desc'          => 'Site-uri noi în ordine cronologică pe pagina catalogului. Sortare, căutare, Marcaje după autorizare. Anunțuri și capturi de ecran',  
-    'web.top'               => 'Site-uri după evaluare în catalog',
-    'web.top.title'         => 'Catalog de site-uri web (după evaluare)',
-    'web.top.desc'          => 'Site-uri sortate după rating. Capturi de ecran și descrieri ale resurselor, capacitatea de a căuta și marcaj',
+    'web.top.cat.title'     => '%1$s — site-uri după popularitate',
+    'web.top.cat.desc'      => 'Lista anunțată de site-uri pe subiect  %1$s. %2$s', 
+    'web.all.cat.title'     => '%1$s — rubrică, site-uri după dată',
+    'web.all.cat.desc'      => 'Site-uri în ordine cronologică în rubrica %1$s. %2$s', 
 ];
 
 return $data;

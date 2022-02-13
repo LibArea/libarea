@@ -63,7 +63,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         switch ($sheet) {
             case 'web':
-                $sort     = "WHERE item_is_deleted = 0 ORDER BY item_votes DESC";
+                $sort     = "WHERE item_is_deleted = 0 ORDER BY item_id DESC";
                 break;
             case 'web.all':
                 $sort     = "WHERE item_is_deleted = 0 ORDER BY item_id DESC";

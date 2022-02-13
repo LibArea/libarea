@@ -41,29 +41,10 @@ class Home
             'url'        => getUrlByName($sheet),
         ];
 
-        switch ($sheet) {
-            case 'web':
-                $title  = Translate::get('site.directory');
-                $desc   = Translate::get('web.desc');
-                break;
-            case 'web.all':
-                $title  = Translate::get('web.all');
-                $desc   = Translate::get('web.all.desc');
-                break;
-            case 'web.top':
-                $title  = Translate::get('web.top.title');
-                $desc   = Translate::get('web.top.desc');
-                break;
-            case 'web.deleted':
-                $title  = Translate::get('deleted');
-                $desc   = Translate::get('deleted');
-                break;
-        }
-
         return view(
             '/view/default/home',
             [
-                'meta'  => meta($m, $title, $desc),
+                'meta'  => meta($m, Translate::get($sheet . '.home.title'), Translate::get($sheet . '.home.desc')),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'     => 'cat',

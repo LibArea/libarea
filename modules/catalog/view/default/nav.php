@@ -18,10 +18,10 @@ if ($category) { ?>
   <p>
     <?= num_word($data['count'], Translate::get('num-website'), false); ?>: <?= $data['count']; ?>
     <span class="right mr30">
-      <a class="<?php if ($data['sheet'] == 'web.all') { ?>bg-gray-100 p5 gray-600 <?php } ?>mr20" href="<?= getUrlByName('web.all'); ?>">
+      <a class="<?php if ($data['sheet'] == 'web') { ?>bg-gray-100 p5 gray-600 <?php } ?>mr20" href="<?= getUrlByName('web'); ?>">
         <?= Translate::get('by.date'); ?>
       </a>
-      <a class="<?php if ($data['sheet'] == 'web.top' || $data['sheet'] == 'web') { ?>bg-gray-100 p5 gray-600 <?php } ?>" href="<?= getUrlByName('web.top'); ?>">
+      <a class="<?php if ($data['sheet'] == 'web.top') { ?>bg-gray-100 p5 gray-600 <?php } ?>" href="<?= getUrlByName('web.top'); ?>">
         TOP
       </a>
     </span>

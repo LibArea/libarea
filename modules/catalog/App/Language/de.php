@@ -1,7 +1,6 @@
 <?php
 
 $data = [
-    'site.directory'        => 'Website-Verzeichnis',
     'categories'            => 'Kategorien',
     'soft'                  => 'Sanft',
     'status'                => 'Verbindungsstatus',
@@ -27,13 +26,19 @@ $data = [
     'private.life'          => 'Heim',
     'private.life.help'     => 'Kinder, Tiere, Hobbys...',
     'security'              => 'Sicherheit..',
+
+    'web.home.title'        => 'Website-Verzeichnis',
+    'web.home.desc'         => 'Liste der Websites im Verzeichnis in chronologischer Reihenfolge. Fähigkeit zu suchen, Lesezeichen, Sortieren nach Beliebtheit',
+    'web.home.all'          => 'Neue Websites im Verzeichnis',
+    'web.home.all.desc'     => 'Neue Websites in chronologischer Reihenfolge auf der Katalogseite. Sortieren, suchen, Lesezeichen nach der Autorisierung. Ankündigungen und Screenshots',  
+    'web.home.top'          => 'Websites nach Bewertung im Katalog',
+    'web.home.top.title'    => 'Der Katalog der Webseiten (nach der Bewertung)',
+    'web.home.top.desc'     => 'Websites werden nach Bewertung sortiert. Screenshots und Beschreibung der Ressourcen, die Möglichkeit, zu suchen und zu Lesezeichen hinzuzufügen',
     
-    'web.desc'              => 'Liste der Websites im Verzeichnis in chronologischer Reihenfolge. Fähigkeit zu suchen, Lesezeichen, Sortieren nach Beliebtheit',
-    'web.all'               => 'Neue Websites im Verzeichnis',
-    'web.all.desc'          => 'Neue Websites in chronologischer Reihenfolge auf der Katalogseite. Sortieren, suchen, Lesezeichen nach der Autorisierung. Ankündigungen und Screenshots',  
-    'web.top'               => 'Websites nach Bewertung im Katalog',
-    'web.top.title'         => 'Der Katalog der Webseiten (nach der Bewertung)',
-    'web.top.desc'          => 'Websites werden nach Bewertung sortiert. Screenshots und Beschreibung der Ressourcen, die Möglichkeit, zu suchen und zu Lesezeichen hinzuzufügen',
+    'web.top.cat.title'     => '%1$s — Websites nach Beliebtheit',
+    'web.top.cat.desc'      => 'Angekündigte Liste von Websites nach Thema %1$s. %2$s', 
+    'web.all.cat.title'     => '%1$s — Rubrik, Websites nach Datum',
+    'web.all.cat.desc'      => 'Sites in chronologischer Reihenfolge in der Rubrik  %1$s. %2$s', 
 ];
 
 return $data;

@@ -43,15 +43,11 @@ class Catalog
             'og'         => false,
             'twitter'    => false,
             'imgurl'     => false,
-            'url'        => getUrlByName('web.dir.top', ['slug' => $category['facet_slug']]),
+            'url'        => getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $category['facet_slug']]),
         ];
 
-        $title = $category['facet_title']. ' - ' . mb_strtolower(Translate::get('websites'), 'UTF-8');
-        $desc  = Translate::get('websites') . ', ' . $category['facet_title'] . '. ' . $category['facet_description'];
-        if ($sheet == 'web.top') {
-            $title = $category['facet_title']. ' - ' . mb_strtolower(Translate::get('websites') . ' (top)', 'UTF-8');
-            $desc  = Translate::get('websites') . ' (top), ' . $category['facet_title'] . '. ' . $category['facet_description'];
-        }
+        $title = sprintf(Translate::get($sheet . '.cat.title'), $category['facet_title']);
+        $desc  = sprintf(Translate::get($sheet . '.cat.desc'), $category['facet_title'], $category['facet_description']);
 
         $parent = FacetModel::breadcrumb($category['facet_id']);
         return view(

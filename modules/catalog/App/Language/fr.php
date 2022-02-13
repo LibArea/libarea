@@ -1,7 +1,6 @@
 <?php
 
 $data = [
-    'site.directory'        => 'Annuaire de sites Web',
     'categories'            => 'Catégories',
     'soft'                  => 'Mou, tendre',
     'status'                => 'Statut du lien',
@@ -27,13 +26,19 @@ $data = [
     'private.life'          => 'Accueil',
     'private.life.help'     => 'Enfants, animaux, loisirs...',
     'security'              => 'Sécurité..',
+
+    'web.home.title'        => 'Annuaire de sites Web',
+    'web.home.desc'         => 'Liste des sites du répertoire classés par ordre chronologique. Possibilité de rechercher, signets, trier par popularité',
+    'web.home.all'          => 'Nouveaux sites dans lannuaire',
+    'web.home.all.desc'     => 'Les nouveaux sites sont classés par ordre chronologique sur la page dannuaire. Tri, recherche, signets après autorisation. Annonces et captures décran',  
+    'web.home.top'          => 'Sites classés dans lannuaire',
+    'web.home.top.title'    => 'Répertoire des sites (par Note)',    
+    'web.home.top.desc'     => 'Les sites Web sont classés par note. Captures décran et description des ressources, possibilité de rechercher et Dajouter des signets',
     
-    'web.desc'              => 'Liste des sites du répertoire classés par ordre chronologique. Possibilité de rechercher, signets, trier par popularité',
-    'web.all'               => 'Nouveaux sites dans lannuaire',
-    'web.all.desc'          => 'Les nouveaux sites sont classés par ordre chronologique sur la page dannuaire. Tri, recherche, signets après autorisation. Annonces et captures décran',  
-    'web.top'               => 'Sites classés dans lannuaire',
-    'web.top.title'         => 'Répertoire des sites (par Note)',    
-    'web.top.desc'          => 'Les sites Web sont classés par note. Captures décran et description des ressources, possibilité de rechercher et Dajouter des signets',
+    'web.top.cat.title'     => '%1$s — sites par popularité',
+    'web.top.cat.desc'      => 'Liste annoncée des sites par sujet %1$s. %2$s', 
+    'web.all.cat.title'     => '%1$s — rubrique, sites par date',
+    'web.all.cat.desc'      => 'Sites par ordre chronologique dans la rubrique %1$s. %2$s', 
 ];
 
 return $data;

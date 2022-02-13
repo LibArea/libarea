@@ -1,7 +1,6 @@
 <?php
 
 $data = [
-    'site.directory'        => '網站目錄',
     'categories'            => '類別',
     'soft'                  => '柔軟的',
     'status'                => '鏈接狀態',
@@ -27,13 +26,19 @@ $data = [
     'private.life'          => '家',
     'private.life.help'     => '兒童，動物，愛好...',
     'security'              => '保安...',
+
+    'web.home.title'        => '網站目錄',
+    'web.home.desc'         => '目录中的站点列表按时间顺序排列。 能够搜索，书签，按受欢迎程度排序',
+    'web.home.all'          => '目录中的新网站',
+    'web.home.all.desc'     => '目录页面上按时间顺序排列的新网站。 排序，搜索，授权后的书签。 公告及截图',  
+    'web.home.top'          => '按目录评级划分的网站',
+    'web.home.top.title'    => '网站目录(按评级)',
+    'web.home.top.desc'     => '按评级排序的网站。 资源的截图和描述，搜索和书签的能力',
     
-    'web.desc'              => '目录中的站点列表按时间顺序排列。 能够搜索，书签，按受欢迎程度排序',
-    'web.all'               => '目录中的新网站',
-    'web.all.desc'          => '目录页面上按时间顺序排列的新网站。 排序，搜索，授权后的书签。 公告及截图',  
-    'web.top'               => '按目录评级划分的网站',
-    'web.top.title'         => '网站目录(按评级)',
-    'web.top.desc'          => '按评级排序的网站。 资源的截图和描述，搜索和书签的能力',
+    'web.top.cat.title'     => '%1$s — 人氣網站',
+    'web.top.cat.desc'      => '按主題公佈的網站列表 %1$s. %2$s', 
+    'web.all.cat.title'     => '%1$s — 量規，網站按日期',
+    'web.all.cat.desc'      => '專欄中按時間順序排列的網站 %1$s. %2$s', 
 ];
 
 return $data;
