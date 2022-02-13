@@ -59,20 +59,20 @@ class Catalog
         $parent = FacetModel::breadcrumb($category['facet_id']);
         if ($parent_two = FacetModel::breadcrumb($parent['facet_id'])) {
              $breadcrumb = (new Breadcrumbs('<span>/</span>'))
-                ->base(getUrlByName('web'), Translate::get('websites'))
-                ->addCrumb($parent_two['facet_title'], $screening . '/'. $parent_two['facet_slug'])
-                ->addCrumb($parent['facet_title'], $screening . '/'. $parent['facet_slug']) 
-                ->addCrumb($category['facet_title'], $screening . '/'. $category['facet_slug']);
+                ->base(getUrlByName('web'), Translate::get('websites')) 
+                ->addCrumb($parent_two['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent_two['facet_slug']) 
+                ->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug'])
+                ->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']);
         } else {
             if ($parent) {
                 $breadcrumb = (new Breadcrumbs('<span>/</span>'))
                     ->base(getUrlByName('web'), Translate::get('websites'))
-                    ->addCrumb($parent['facet_title'], $screening . '/'. $parent['facet_slug']) 
-                    ->addCrumb($category['facet_title'], $screening . '/'. $category['facet_slug']);
+                    ->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug']) 
+                    ->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']);
             } else {
                 $breadcrumb = (new Breadcrumbs('<span>/</span>'))
                     ->base(getUrlByName('web'), Translate::get('websites'))
-                    ->addCrumb($category['facet_title'], $screening . '/'. $category['facet_slug']); 
+                    ->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']); 
             }
         }
         

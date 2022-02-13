@@ -343,6 +343,10 @@ $data = [
 
     'sections'              => 'Sections',
     'section'               => 'Section',
+    'menu'                  => 'Menu',
+    'category'              => 'Category',
+    'categories'            => 'Categories',
+    'categories.s'          => 'Categories',
     'pages'                 => 'Pages',
     'go to'                 => 'Go to',
     'frameworks'            => 'Frameworks',

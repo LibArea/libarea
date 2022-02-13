@@ -343,6 +343,10 @@ $data = [
 
     'sections'              => 'Разделы',
     'section'               => 'Раздел',
+    'menu'                  => 'Меню',
+    'category'              => 'Категория',
+    'categories'            => 'Категории',
+    'categories.s'          => 'Категорию',
     'pages'                 => 'Страницы',
     'go to'                 => 'Перейти',
     'frameworks'            => 'Фреймворки',

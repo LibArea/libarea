@@ -54,6 +54,10 @@ class Home
                 $title  = Translate::get('web.top.title');
                 $desc   = Translate::get('web.top.desc');
                 break;
+            case 'web.deleted':
+                $title  = Translate::get('deleted');
+                $desc   = Translate::get('deleted');
+                break;
         }
 
         return view(

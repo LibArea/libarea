@@ -23,7 +23,7 @@
         <div>
           <a class="text-2xl" href="<?= getUrlByName('web.dir', ['cat' => $data['screening'], 'slug' => $lt['facet_slug']]); ?>">
             <?= $lt['facet_title']; ?>
-          </a> <sup class="gray-400"><?= $lt['count']; ?></sup>
+          </a> <sup class="gray-400"><?= $lt['counts']; ?></sup>
           <?php if (UserData::checkAdmin()) { ?>
             <a class="ml5" href="<?= getUrlByName('category.edit', ['id' => $lt['facet_id']]); ?>">
               <sup><i class="bi bi-pencil"></i>
@@ -51,8 +51,6 @@
     </div>
   <?php } ?>
   
- 
-
 <div class="grid grid-cols-12 gap-4">
   <main class="col-span-9 mb-col-12 ml30">
     <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>

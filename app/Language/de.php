@@ -344,6 +344,10 @@ $data = [
 
     'sections'              => 'Sections',
     'section'               => 'Section',
+    'menu'                  => 'Speisekarte',
+    'category'              => 'Kategorie',
+    'categories'            => 'Kategorien',
+    'categories.s'          => 'Kategorien',
     'pages'                 => 'Pages',
     'go to'                 => 'Go to',
     'frameworks'            => 'Frameworks',

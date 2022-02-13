@@ -45,25 +45,32 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
 
-    // CHILDREN
-    // ДЕТИ
+    // Getting subcategories based on nested sites 
+    // Получаем подкатегории с учетов вложенных сайтов 
     /**
      * @param  int $facet_id
      * @return
      */
     public static function getChildrens($facet_id, $screening)
-    {       // TODO: the request is invalid, we should now consider nested sites by their parameters and not the total number of allowed 
-            // And it's more correct to build trees and make calculations from the central page, taking into account attachments 
-            $sql = "SELECT
-                    facet_id,
-                    facet_title,
-                    facet_type,
-                    facet_slug,
-                        (SELECT count(*) FROM facets_items_relation WHERE relation_facet_id = facet_id) as count
-                            FROM facets
-                                LEFT JOIN facets_relation on facet_id = facet_chaid_id 
-                                    WHERE facet_parent_id = :facet_id";
-
+    {       
+        $sort = '';
+        if ($screening == 'github') {
+            $sort = 'AND item_is_github = 1';
+        }
+        
+        $sql = "SELECT 
+                  facet_id,
+                  count(facet_id) as counts, 
+                  facet_title, 
+                  facet_slug, 
+                  facet_type 
+                      FROM facets_relation 
+                          LEFT JOIN facets on facet_id = facet_chaid_id 
+                          LEFT JOIN facets_items_relation on facet_chaid_id = relation_facet_id 
+                          LEFT JOIN items on item_id = relation_item_id 
+                              WHERE facet_parent_id = :facet_id  $sort
+                                 GROUP BY facet_id";
+                  
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
     

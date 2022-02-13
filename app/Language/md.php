@@ -336,6 +336,10 @@ $data = [
 
     'sections'              => 'Sectiuni',
     'section'               => 'Sectiune',
+    'menu'                  => 'Meniul',
+    'category'              => 'Categorie',
+    'categories'            => 'Categorii',
+    'categories.s'          => 'Categorii',
     'pages'                 => 'Pagini',
     'go to'                 => 'Mergi la',
     'frameworks'            => 'cadre',

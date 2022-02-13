@@ -71,7 +71,7 @@
 
     <a class="m5" href="<?= getUrlByName('admin.blogs'); ?>"><?= Translate::get('blogs'); ?></a> |
 
-    <a class="m5" href="<?= getUrlByName('admin.sections'); ?>"><?= Translate::get('sections'); ?></a> |
+    <a class="m5" href="<?= getUrlByName('admin.sections'); ?>"><?= Translate::get('sections'); ?></a>
  
   </div>
 </main>

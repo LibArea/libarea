@@ -342,6 +342,10 @@ $data = [
 
     'sections'              => '節',
     'section'               => '節',
+    'menu'                  => '菜單',
+    'category'              => '類別',
+    'categories'            => '類別',
+    'categories.s'          => '類別',
     'pages'                 => '頁面',
     'go to'                 => '前往',
     'frameworks'            => '框架',
