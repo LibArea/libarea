@@ -33,7 +33,7 @@
             <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
           </a>
           <div class="lowercase">
-            <?= html_facet($post['facet_list'], 'blog', 'topic', 'text-sm mr15'); ?>
+            <?= html_facet($post['facet_list'], 'blog', 'blog', 'text-sm mr15'); ?>
             <?= html_facet($post['facet_list'], 'topic', 'topic', 'gray-400 text-sm mr15'); ?>
             <?php if ($post['post_url_domain']) { ?>
               <a class="gray-400 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">

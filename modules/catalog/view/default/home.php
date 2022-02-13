@@ -40,7 +40,20 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/cat'); ?>
   </main>
   <aside class="col-span-3 mb-col-12 mb-none">
-    <div class="box-yellow text-sm mt15 max-w300 right"><?= Translate::get('directory.info'); ?></div>
+    <div class="box-yellow text-sm mt15 max-w300"><?= Translate::get('directory.info'); ?></div>
+    <?php if (UserData::checkAdmin()) { ?>
+      <div class="box-white text-sm bg-violet-50 mt15">
+        <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
+            <ul class="w200 list-none">
+                    <?= tabs_nav(
+                      'menu',
+                      'admin',
+                      $user,
+                      $pages = Config::get('menu.catalog')
+                    ); ?>
+           </ul>
+       </div> 
+    <?php } ?>
   </aside>
 </div>
 <?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

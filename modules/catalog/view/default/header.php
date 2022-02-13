@@ -40,6 +40,7 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
                 <?= Translate::get('sign.in'); ?>
               </a>
             <?php } else { ?>
+              <?php if (UserData::checkAdmin()) { ?>
                 <div class="relative mr30 gray-400">
                   <div class="trigger">
                     <?= Translate::get('menu'); ?>
@@ -52,7 +53,8 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
                       $pages = Config::get('menu.catalog')
                     ); ?>
                   </ul>
-                </div>
+                  </div>
+              <?php } ?>
                 <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>bg-gray-100 p5 gray-600 <?php } ?>mr30 green-600" href="<?= getUrlByName('web.bookmarks'); ?>">
                   <?= Translate::get('favorites'); ?>
                 </a>
