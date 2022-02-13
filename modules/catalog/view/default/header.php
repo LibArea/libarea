@@ -32,7 +32,7 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
             </div>
             <?php if (!UserData::checkActiveUser()) { ?>
               <?php if (Config::get('general.invite') == false) { ?>
-                <a class="register gray-400 ml30 mr15 mb-ml10 mb-mr5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
+                <a class="register gray-400 mr15 mb-ml10 mb-mr5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
                   <?= Translate::get('sign up'); ?>
                 </a>
               <?php } ?>
@@ -40,7 +40,19 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
                 <?= Translate::get('sign.in'); ?>
               </a>
             <?php } else { ?>
-               <?= includeTemplate('/view/default/_block/menu') ; ?>
+                <div class="relative mr30 gray-400">
+                  <div class="trigger">
+                    <?= Translate::get('menu'); ?>
+                  </div>
+                  <ul class="dropdown w200">
+                    <?= tabs_nav(
+                      'menu',
+                      'admin',
+                      $user,
+                      $pages = Config::get('menu.catalog')
+                    ); ?>
+                  </ul>
+                </div>
                 <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>bg-gray-100 p5 gray-600 <?php } ?>mr30 green-600" href="<?= getUrlByName('web.bookmarks'); ?>">
                   <?= Translate::get('favorites'); ?>
                 </a>

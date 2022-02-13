@@ -182,4 +182,39 @@ return [
         ],
     ],
 
+    // Menu in the catalog
+    // Меню в каталоге
+    'catalog' => [
+        [
+            'tl'    => 9,
+            'url'   => getUrlByName('site.add'),
+            'title' => sprintf(Translate::get('add.option'), mb_strtolower(Translate::get('website'))),
+            'icon'  => 'bi bi-plus-lg',
+            'id'    => 'admin',
+        ], [
+            'tl'    => 9,
+            'url'   => getUrlByName('facet.add'),
+            'title' => Translate::get('categories.s'),
+            'icon'  => 'bi bi-plus-lg',
+            'id'    => 'admin',
+        ], [
+            'tl'    => 9,
+            'url'   => getUrlByName('web.deleted'),
+            'title' => Translate::get('deleted'),
+            'icon'  => 'bi bi-circle',
+            'id'    => 'admin',
+        ], [
+            'tl'    => 9,
+            'url'   => getUrlByName('admin.category.structure'),
+            'title' => Translate::get('structure'),
+            'icon'  => 'bi bi-columns-gap',
+            'id'    => 'admin',
+        ],  [
+            'tl'    => 0,
+            'url'   => '/web/cat/website-development',
+            'title' => Translate::get('development'),
+            'icon'  => 'bi bi-bezier2',
+            'id'    => 'user',
+        ],
+    ],
 ];
