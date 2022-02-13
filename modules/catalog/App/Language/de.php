@@ -27,13 +27,17 @@ $data = [
     'private.life.help'     => 'Kinder, Tiere, Hobbys...',
     'security'              => 'Sicherheit..',
 
+    'web.top.view'          => 'Nach Bewertung',
+    'web.view'              => 'Neue Websites',
+    'web.audits.view'       => 'Rücksichtnahme erforderlich',
+    'web.bookmarks.view'    => 'Meine Lesezeichen',
+    'web.deleted.view'      => 'Entfernt',
+
     'web.home.title'        => 'Website-Verzeichnis',
     'web.home.desc'         => 'Liste der Websites im Verzeichnis in chronologischer Reihenfolge. Fähigkeit zu suchen, Lesezeichen, Sortieren nach Beliebtheit',
-    'web.home.all'          => 'Neue Websites im Verzeichnis',
-    'web.home.all.desc'     => 'Neue Websites in chronologischer Reihenfolge auf der Katalogseite. Sortieren, suchen, Lesezeichen nach der Autorisierung. Ankündigungen und Screenshots',  
-    'web.home.top'          => 'Websites nach Bewertung im Katalog',
-    'web.home.top.title'    => 'Der Katalog der Webseiten (nach der Bewertung)',
-    'web.home.top.desc'     => 'Websites werden nach Bewertung sortiert. Screenshots und Beschreibung der Ressourcen, die Möglichkeit, zu suchen und zu Lesezeichen hinzuzufügen',
+    'web.top.home'          => 'Websites nach Bewertung im Katalog',
+    'web.top.home.title'    => 'Der Katalog der Webseiten (nach der Bewertung)',
+    'web.top.home.desc'     => 'Websites werden nach Bewertung sortiert. Screenshots und Beschreibung der Ressourcen, die Möglichkeit, zu suchen und zu Lesezeichen hinzuzufügen',
     
     'web.top.cat.title'     => '%1$s — Websites nach Beliebtheit',
     'web.top.cat.desc'      => 'Angekündigte Liste von Websites nach Thema %1$s. %2$s', 

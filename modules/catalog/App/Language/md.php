@@ -27,13 +27,17 @@ $data = [
     'private.life.help'     => 'Copii, animale, hobby-uri...',
     'security'              => 'Securitate...',
 
+    'web.top.view'          => 'După evaluare',
+    'web.view'              => 'Site-uri noi',
+    'web.audits.view'       => 'Necesită examinare',
+    'web.bookmarks.view'    => 'Marcajele Mele',
+    'web.deleted.view'      => 'Eliminat',
+
     'web.home.title'        => 'Director de site-uri',
     'web.home.desc'         => 'Lista de site-uri din catalog plasate în ordine cronologică. Abilitatea de a căuta, marcaj, Sortare după popularitate',
-    'web.home.all'          => 'Site-uri noi în catalog',
-    'web.home.all.desc'     => 'Site-uri noi în ordine cronologică pe pagina catalogului. Sortare, căutare, Marcaje după autorizare. Anunțuri și capturi de ecran',  
-    'web.home.top'          => 'Site-uri după evaluare în catalog',
-    'web.home.top.title'    => 'Catalog de site-uri web (după evaluare)',
-    'web.home.top.desc'     => 'Site-uri sortate după rating. Capturi de ecran și descrieri ale resurselor, capacitatea de a căuta și marcaj',
+    'web.top.home'          => 'Site-uri după evaluare în catalog',
+    'web.top.home.title'    => 'Catalog de site-uri web (după evaluare)',
+    'web.top.home.desc'     => 'Site-uri sortate după rating. Capturi de ecran și descrieri ale resurselor, capacitatea de a căuta și marcaj',
     
     'web.top.cat.title'     => '%1$s — site-uri după popularitate',
     'web.top.cat.desc'      => 'Lista anunțată de site-uri pe subiect  %1$s. %2$s', 

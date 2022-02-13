@@ -10,7 +10,7 @@ class Home
 {
     private $user;
 
-    protected $limit = 25;
+    protected $limit = 15;
 
     public function __construct()
     {
@@ -22,8 +22,14 @@ class Home
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $pagesCount = WebModel::getItemsAllCount($sheet);
-        $items      = WebModel::getItemsAll($page, $this->limit, $this->user, $sheet);
+        $limit = 10;
+        $pagesCount = 1;
+        if ($sheet == 'web.deleted' || $sheet == 'web.audit') {
+            $limit = $this->limit;
+            $pagesCount = WebModel::getItemsAllCount($sheet);
+        }
+
+        $items  = WebModel::getItemsAll($page, $limit, $this->user, $sheet);
 
         $result = [];
         foreach ($items as $ind => $row) {
@@ -54,6 +60,34 @@ class Home
                     'items'         => $result,
                     'type'          => $type,
                     'sheet'         => $sheet,
+                ]
+            ]
+        );
+    }
+    
+    // Bookmarks by sites
+    // Закладки по сайтам
+    public function bookmarks($sheet, $type)
+    {
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
+
+        $items      = WebModel::bookmarks($page, $this->limit, $this->user['id']);
+        $pagesCount = WebModel::bookmarksCount($this->user['id']);
+
+        return view(
+            '/view/default/bookmarks',
+            [
+                'meta'  => meta([], Translate::get('favorites'), Translate::get('favorites')),
+                'user' => $this->user,
+                'data'  => [
+                    'screening'     => 'cat',
+                    'sheet'         => $sheet,
+                    'type'          => $type,
+                    'count'         => $pagesCount,
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $page,
+                    'items'         => $items,
                 ]
             ]
         );

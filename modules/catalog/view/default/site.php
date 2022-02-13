@@ -31,7 +31,7 @@
               <?php if ($item['item_github_url']) { ?>
                 <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
                   <i class="bi bi-github text-sm mr5"></i>
-                  <?= $item['item_title_soft']; ?> <?= Translate::get('on'); ?> GitHub
+                  <?= $item['item_title_soft']; ?>
                 </a>
               <?php } ?>
               <div>

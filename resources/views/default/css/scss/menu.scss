@@ -57,3 +57,18 @@ a.sky-500 > i { color: #0ea5e9; }
 #bread_crumbs > li span {
   padding: 0 0.5em 0 0.5em;
 }
+
+.nav-catalog {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 200px;
+}
+
+.nav-catalog > li {
+  margin-bottom: 10px;
+}
+
+.nav-catalog > li  > a {
+  padding: 3px 0;
+}

@@ -31,7 +31,6 @@
 <div class="grid grid-cols-12 gap-4">
   <main class="col-span-9 mb-col-12 ml30">
     <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>
-
     <?php if (!empty($data['items'])) { ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
     <?php } else { ?>
@@ -40,14 +39,14 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/cat'); ?>
   </main>
   <aside class="col-span-3 mb-col-12 mb-none">
-    <div class="box-yellow text-sm mt15 max-w300"><?= Translate::get('directory.info'); ?></div>
+    <div class="box-yellow text-sm max-w300"><?= Translate::get('directory.info'); ?></div>
     <?php if (UserData::checkAdmin()) { ?>
       <div class="box-white text-sm bg-violet-50 mt15">
         <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
-            <ul class="w200 list-none">
+            <ul class="nav-catalog">
                     <?= tabs_nav(
                       'menu',
-                      'admin',
+                      $data['sheet'],
                       $user,
                       $pages = Config::get('menu.catalog')
                     ); ?>

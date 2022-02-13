@@ -4,12 +4,11 @@
 
     <ul class="metismenu list-none text-sm" id="menu">
       <?php foreach (Modules\Admin\App\Navigation::menu() as $cats) {
-        $active = '';
-        if ($data['type'] == $cats['name']) $active = ' sky-500';
+        $active = $data['type'] == $cats['name'] ? 'class="sky-500  "' : 'class="gray   block"';
       ?>
 
         <?php if ($cats['radical']  == 1) { ?>
-          <li> <a class="<?= $active; ?>" href="<?= getUrlByName($cats['url']); ?>">
+          <li> <a <?= $active; ?> href="<?= getUrlByName($cats['url']); ?>">
               <i class="<?= $cats['icon']; ?> middle mr10 text-xl"></i>
               <?= Translate::get($cats['name']); ?>
             </a></li>
@@ -27,7 +26,7 @@
               <?php if ($cats['childs'] > 0) { ?>
                 <ul class="pl20">
                   <?php foreach ($cats['childs'] as $cat) { ?>
-                    <a class="gray m5 block<?= $active; ?>" href="<?= getUrlByName($cat['url']); ?>">
+                    <a <?= $active; ?> href="<?= getUrlByName($cat['url']); ?>">
                       <i class="bi bi-circle green-600 middle mr5"></i>
                       <?= Translate::get($cat['name']); ?>
                     </a>

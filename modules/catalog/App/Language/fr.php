@@ -27,13 +27,17 @@ $data = [
     'private.life.help'     => 'Enfants, animaux, loisirs...',
     'security'              => 'Sécurité..',
 
+    'web.top.view'          => 'Par classement',
+    'web.view'              => 'Nouveaux sites',
+    'web.audits.view'       => 'À examiner',
+    'web.bookmarks.view'    => 'Mes favoris',
+    'web.deleted.view'      => 'Distant',
+
     'web.home.title'        => 'Annuaire de sites Web',
     'web.home.desc'         => 'Liste des sites du répertoire classés par ordre chronologique. Possibilité de rechercher, signets, trier par popularité',
-    'web.home.all'          => 'Nouveaux sites dans lannuaire',
-    'web.home.all.desc'     => 'Les nouveaux sites sont classés par ordre chronologique sur la page dannuaire. Tri, recherche, signets après autorisation. Annonces et captures décran',  
-    'web.home.top'          => 'Sites classés dans lannuaire',
-    'web.home.top.title'    => 'Répertoire des sites (par Note)',    
-    'web.home.top.desc'     => 'Les sites Web sont classés par note. Captures décran et description des ressources, possibilité de rechercher et Dajouter des signets',
+    'web.top.home'          => 'Sites classés dans lannuaire',
+    'web.top.home.title'    => 'Répertoire des sites (par Note)',    
+    'web.top.home.desc'     => 'Les sites Web sont classés par note. Captures décran et description des ressources, possibilité de rechercher et Dajouter des signets',
     
     'web.top.cat.title'     => '%1$s — sites par popularité',
     'web.top.cat.desc'      => 'Liste annoncée des sites par sujet %1$s. %2$s', 

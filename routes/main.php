@@ -70,7 +70,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/@{login}/delete/cover')->controller('User\SettingController@coverRemove')->where(['login' => '[A-Za-z0-9]+'])->name('delete.cover'); 
     Route::get('/@{login}/messages')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
 
-    Route::get('/web/bookmarks')->module('catalog', 'App\Catalog@bookmarks', ['web.bookmarks', 'web'])->name('web.bookmarks');
+    Route::get('/web/bookmarks')->module('catalog', 'App\Home@bookmarks', ['web.bookmarks', 'web'])->name('web.bookmarks');
 
     Route::get('/setting')->controller('User\SettingController@settingForm')->name('setting'); 
     Route::get('/setting/avatar')->controller('User\SettingController@avatarForm')->name('setting.avatar');
@@ -178,7 +178,6 @@ Route::get('/domain/{domain}')->controller('Post\PostController@domain', ['web.f
 Route::get('/domain/{domain}/page/{page?}')->controller('Post\PostController@domain', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
 
 Route::get('/web')->module('catalog', 'App\Home', ['web', 'web'])->name('web');
-Route::get('/web/all')->module('catalog', 'App\Home', ['web.all', 'web'])->name('web.all');
 Route::get('/web/top')->module('catalog', 'App\Home', ['web.top', 'web'])->name('web.top');
 
 Route::get('/web/website/{slug}')->module('catalog', 'App\Catalog@website', ['feed'])->name('web.website');
@@ -187,7 +186,6 @@ Route::get('/web/{cat}/{slug}')->module('catalog', 'App\Catalog', ['web.top', 'w
 Route::get('/web/{cat}/{slug}/all')->module('catalog', 'App\Catalog', ['web.all', 'web'])->name('web.dir.all');
 Route::get('/web/{cat}/{slug}/top')->module('catalog', 'App\Catalog', ['web.top', 'web'])->name('web.dir.top');
 
-Route::get('/web/{cat}/page/{page?}')->module('catalog', 'App\Home', ['web', 'web']);
 Route::get('/web/{cat}/top/page/{page?}')->module('catalog', 'App\Home', ['web.top', 'web']);
 Route::get('/web/{cat}/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed', 'web']);
 

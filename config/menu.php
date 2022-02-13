@@ -202,7 +202,13 @@ return [
             'url'   => getUrlByName('web.deleted'),
             'title' => Translate::get('deleted'),
             'icon'  => 'bi bi-circle',
-            'id'    => 'official',
+            'id'    => 'web.deleted',
+        ], [
+            'tl'    => 9,
+            'url'   => getUrlByName('web.audits'),
+            'title' => Translate::get('audits'),
+            'icon'  => 'bi bi-circle',
+            'id'    => 'web.audits',
         ], [
             'tl'    => 9,
             'url'   => getUrlByName('admin.category.structure'),

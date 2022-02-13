@@ -12,7 +12,7 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?02">
+  <link rel="stylesheet" href="/assets/css/style.css?03">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
@@ -45,7 +45,7 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
                   <div class="trigger">
                     <?= Translate::get('menu'); ?>
                   </div>
-                  <ul class="dropdown w200">
+                  <ul class="dropdown nav-catalog pl10">
                     <?= tabs_nav(
                       'menu',
                       'admin',

@@ -65,14 +65,14 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
             case 'web':
                 $sort     = "WHERE item_is_deleted = 0 ORDER BY item_id DESC";
                 break;
-            case 'web.all':
-                $sort     = "WHERE item_is_deleted = 0 ORDER BY item_id DESC";
-                break;
             case 'web.top':
                 $sort     = "WHERE item_is_deleted = 0 ORDER BY item_votes DESC";
                 break;
             case 'web.deleted':
                 $sort     = "WHERE item_is_deleted = 1 ORDER BY item_id DESC";
+                break;
+            case 'web.audits':
+                $sort     = "WHERE item_is_deleted = 0 AND item_published = 0 ORDER BY item_id DESC";
                 break;
             case 'web.bookmarks':
                 $sort     = "WHERE item_is_deleted = 1 ORDER BY item_id DESC";
@@ -409,7 +409,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN items ON item_id = favorite_tid 
                             LEFT JOIN votes_item ON votes_item_item_id = favorite_tid 
                                 AND votes_item_user_id = :uid
-                                    WHERE favorite_user_id = :uid_two AND favorite_type = 3 
+                                    WHERE favorite_user_id = :uid_two AND favorite_type = 3 AND item_published = 1
                                     LIMIT $start, $limit";
 
         return  DB::run($sql, ['uid' => $uid, 'uid_two' => $uid])->fetchAll();

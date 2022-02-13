@@ -27,13 +27,17 @@ $data = [
     'private.life.help'     => 'Children, animals, hobbies...',
     'security'              => 'Security...',
 
+    'web.top.view'          => 'By rating',
+    'web.view'              => 'New sites',
+    'web.audits.view'       => 'Require consideration',
+    'web.bookmarks.view'    => 'My Bookmarks',
+    'web.deleted.view'      => 'Deleted',
+
     'web.home.title'        => 'Website directory',    
     'web.home.desc'         => 'The list of sites in the catalog placed in chronological order. Ability to search, bookmark, sort by popularity',
-    'web.home.all'          => 'New sites in the catalog',
-    'web.home.all.desc'     => 'New sites in chronological order on the catalog page. Sorting, searching, bookmarks after authorization. Announcements and screenshots',  
-    'web.home.top'          => 'Sites by rating in the catalog',
-    'web.home.top.title'    => 'Website catalog (by rating)',
-    'web.home.top.desc'     => 'Sites sorted by rating. Screenshots and descriptions of resources, the ability to search and bookmark',
+    'web.top.home'          => 'Sites by rating in the catalog',
+    'web.top.home.title'    => 'Website catalog (by rating)',
+    'web.top.home.desc'     => 'Sites sorted by rating. Screenshots and descriptions of resources, the ability to search and bookmark',
     
     'web.top.cat.title'     => '%1$s — sites by popularity',
     'web.top.cat.desc'      => 'Announced list of sites by subject %1$s. %2$s', 
