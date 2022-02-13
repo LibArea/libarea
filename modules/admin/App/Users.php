@@ -122,7 +122,8 @@ class Users
         $user_id        = Request::getInt('id');
         $user_whisper   = Request::getPost('whisper');
         $user_name      = Request::getPost('name');
-
+        $trust_level    = Request::getPostInt('trust_level');
+        
         if (!$user = UserModel::getUser($user_id, 'id')) {
             redirect(getUrlByName('admin.users'));
         }

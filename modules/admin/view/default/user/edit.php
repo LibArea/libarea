@@ -117,7 +117,7 @@
     </fieldset>
     <hr>
     <fieldset>
-      <label class="block" for="post_title">E-mail<sup class="red">*</sup></label>
+      <label class="block" for="post_title">E-mail<sup class="red-500">*</sup></label>
       <input class="w-100 h30" type="text" name="email" value="<?= $data['user']['email']; ?>" required>
     </fieldset>
     <fieldset>
@@ -129,7 +129,7 @@
     <fieldset>
       <label class="block" for="post_title">TL</label>
       <select name="trust_level">
-        <?php for ($i = 0; $i <= 5; $i++) {  ?>
+        <?php for ($i = 0; $i <= 10; $i++) { ?>
           <option <?php if ($data['user']['trust_level'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>">
             <?= $i; ?>
           </option>
@@ -137,7 +137,7 @@
       </select>
     </fieldset>
     <fieldset>
-      <label class="block" for="post_title"><?= Translate::get('nickname'); ?>: /u/**<sup class="red">*</sup></label>
+      <label class="block" for="post_title"><?= Translate::get('nickname'); ?>: /u/**<sup class="red-500">*</sup></label>
       <input class="w-100 h30" type="text" name="login" value="<?= $data['user']['login']; ?>" required>
     </fieldset>
     <fieldset>

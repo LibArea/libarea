@@ -34,7 +34,6 @@ class Catalog
         pageError404($category);
 
         // We will get children
-        // Получим детей
         $childrens =  FacetModel::getChildrens($category['facet_id'], $screening);
         
         $items      = WebModel::feedItem($page, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening );
@@ -54,28 +53,7 @@ class Catalog
             $desc  = Translate::get('websites') . ' (top), ' . $category['facet_title'] . '. ' . $category['facet_description'];
         }
 
-        // TODO: https://dev.mysql.com/doc/refman/8.0/en/with.html
-        // Now we will do this to bring styles and templates to a single view (we need an example)
         $parent = FacetModel::breadcrumb($category['facet_id']);
-        if ($parent_two = FacetModel::breadcrumb($parent['facet_id'])) {
-             $breadcrumb = (new Breadcrumbs('<span>/</span>'))
-                ->base(getUrlByName('web'), Translate::get('websites')) 
-                ->addCrumb($parent_two['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent_two['facet_slug']) 
-                ->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug'])
-                ->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']);
-        } else {
-            if ($parent) {
-                $breadcrumb = (new Breadcrumbs('<span>/</span>'))
-                    ->base(getUrlByName('web'), Translate::get('websites'))
-                    ->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug']) 
-                    ->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']);
-            } else {
-                $breadcrumb = (new Breadcrumbs('<span>/</span>'))
-                    ->base(getUrlByName('web'), Translate::get('websites'))
-                    ->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']); 
-            }
-        }
-        
         return view(
             '/view/default/sites',
             [
@@ -91,12 +69,28 @@ class Catalog
                     'items'         => $items,
                     'category'      => $category,
                     'childrens'     => $childrens,
-                    'breadcrumb'    => $breadcrumb->render('bread_crumbs'),
+                    'breadcrumb'    => self::breadcrumb($parent, $category, $screening),
                  // 'low_topics'    => FacetModel::getLowLevelList($category['facet_id']),
                     'low_matching'  => FacetModel::getLowMatching($category['facet_id']),
                 ]
             ]
         );
+    }
+    
+    // Bread crumbs
+    public static function breadcrumb($parent, $category, $screening)
+    {
+        $breadcrumb = (new Breadcrumbs('<span>/</span>'))->base(getUrlByName('web'), Translate::get('websites'));
+        if ($parent_two = FacetModel::breadcrumb($parent['facet_id'])) {
+             $breadcrumb->addCrumb($parent_two['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent_two['facet_slug']) 
+                ->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug']);
+        } elseif($parent) {
+             $breadcrumb->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug']);
+        }
+        
+        $breadcrumb->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']);
+       
+        return $breadcrumb->render('bread_crumbs');
     }
 
     // Detailed site page
@@ -159,18 +153,10 @@ class Catalog
         $items      = WebModel::bookmarks($page, $this->limit, $this->user['id']);
         $pagesCount = WebModel::bookmarksCount($this->user['id']);
 
-        $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('web.bookmarks'),
-        ];
-        $desc  = Translate::get('favorites');
-
         return view(
             '/view/default/bookmarks',
             [
-                'meta'  => meta($m, Translate::get('favorites'), Translate::get('favorites')),
+                'meta'  => meta([], Translate::get('favorites'), Translate::get('favorites')),
                 'user' => $this->user,
                 'data'  => [
                     'sheet'         => $sheet,
@@ -183,8 +169,6 @@ class Catalog
             ]
         );
     }
-
-
 
     public function getItemId($id)
     {
