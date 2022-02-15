@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, SearchModel};
-use Content, Translate, UserData;
+use Content, Translate, UserData, Domains;
 
 class Search
 {
@@ -63,4 +63,5 @@ class Search
             ]
         );
     }
+   
 }

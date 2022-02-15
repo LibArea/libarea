@@ -32,7 +32,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                                 AND MATCH(item_title_url, item_content_url, item_url_domain) AGAINST (:qa)
                                           LIMIT $start, $limit";
 
-        return DB::run($sql, ['qa' => $query])->fetchall();
+        return DB::run($sql, ['qa' => $query])->fetchAll();
     }
 
     public static function getSearchCount($query)
@@ -59,5 +59,6 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                            LIMIT $limit";
 
         return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchAll();
-    }
+    } 
+    
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Domains
+class Domain
 {
     /**
      * @var array
@@ -56,8 +56,8 @@ class Domains
      */
     public function __construct(string $domain)
     {
-        if ((strpos($domain, 'http') === 0) || (strpos($domain, 'https') === 0)) {
-            return false;
+        if ((strpos($domain, 'http://') === 0) || (strpos($domain, 'https://') === 0)) {
+            throw new Exception("'{$domain}' must be a valid domain or hostname");
         }
 
         $this->domain = \mb_strtolower($domain);

@@ -24,11 +24,10 @@ fieldset input:not([type=radio]):not([type=checkbox]):not([type=range]) {
 }
 
 fieldset {
-  margin: 0;
   padding: 0;
   border: 0;
   position: relative;
-  margin-top: 15px;
+  margin: 10px 0;
 }
 
 select { background-color: var(--white); }

@@ -443,3 +443,21 @@ function randomString($type, int $len = 8)
     // sha1
     return sha1(uniqid((string) mt_rand(), true));
 }
+
+// Длина строки
+function getStrlen($str)
+{
+    return mb_strlen($str, "utf-8");
+}
+
+// To be deleted
+function sumbit($text)
+{
+    return '<button id="submit" type="submit" name="action" class="btn btn-primary" value="submit">' . $text . '</button>';
+}
+
+// To be deleted
+function remove($text)
+{
+    return '<button type="submit" name="action" class="btn btn-outline-primary right mr10" value="delete">' . $text . '</button>';
+}

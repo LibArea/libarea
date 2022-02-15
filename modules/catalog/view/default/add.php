@@ -1,38 +1,17 @@
-<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
+$form = new Forms();
+$form->add_input(Translate::get('title'), ['min' => 14, 'max' => 250, 'required' => true], 'title');
+$form->add_input('URL', ['required' => true], 'url');
+$form->add_input(Translate::get('description'), ['type' => 'textarea', 'required' => true], 'content');
+?>
+
 <main class="col-span-12 mb-col-12">
-  <div class="bg-white items-center justify-between p15">
+  <div class="box max-w780">
+    <?= $data['breadcrumb']; ?>
 
-    <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500">
-      <?= sprintf(Translate::get('add.option'), Translate::get('website')); ?>
-    </span>
-
-    <form action="<?= getUrlByName('web.create'); ?>" method="post">
+    <form id="addUrl" class="max-w780">
       <?= csrf_field() ?>
-
-      <?= Tpl::insert('/_block/form/field-input', [
-        'data' => [
-          [
-            'title' => Translate::get('title'),
-            'type' => 'text',
-            'name' => 'title_url',
-            'help' => '14 - 250 ' . Translate::get('characters') . ' («Газета.Ru» — интернет-газета)'
-          ], [
-            'title' => Translate::get('URL'),
-            'type' => 'text',
-            'name' => 'url',
-          ],
-        ]
-      ]); ?>
-
-      <?php Tpl::insert('/_block/editor/textarea', [
-        'title' => Translate::get('description'),
-        'type'  => 'text',
-        'name'  => 'content_url',
-        'min'   => 24,
-        'max'   => 1500,
-        'help'  => '24 - 1500 ' . Translate::get('characters')
-      ]); ?>
+      <?= $form->build_form(); ?>
 
       <?= Tpl::insert('/_block/form/select/select', [
         'data'      => ['topic' => false],
@@ -43,8 +22,42 @@
         'red'       => 'red'
       ]); ?>
 
-      <?= sumbit(Translate::get('add')); ?>
+      <?= $form->sumbit(Translate::get('add')); ?>
     </form>
   </div>
 </main>
+
+<script nonce="<?= $_SERVER['nonce']; ?>">
+  document.addEventListener('DOMContentLoaded', () => {
+    const ajaxSend = async (formData) => {
+      const fetchResp = await fetch('<?= getUrlByName('web.create'); ?>', {
+        method: 'POST',
+        body: formData
+      });
+      if (!fetchResp.ok) {
+        throw new Error(`error url ${url}, status: ${fetchResp.status}`);
+      }
+      return await fetchResp.text();
+    };
+
+    const forms = document.querySelectorAll('form#addUrl');
+    forms.forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+
+        ajaxSend(formData)
+          .then((response) => {
+            let is_valid = JSON.parse(response);
+            if (is_valid.error == 'error') {
+              Notiflix.Notify.failure(is_valid.text);
+              return;
+            }
+            window.location.replace('<?= getUrlByName('web'); ?>');
+          })
+          .catch((err) => console.error(err))
+      });
+    });
+  });
+</script>
 <?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

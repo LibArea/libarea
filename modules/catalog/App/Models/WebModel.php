@@ -231,7 +231,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                         GROUP BY relation_item_id
                         ) AS rel
                             ON rel.relation_item_id = item_id 
-                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid
+                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND votes_item_user_id = :uid
                         LEFT JOIN favorites ON favorite_tid = item_id 
                                 AND favorite_user_id = :uid_two AND favorite_type = 3
                         WHERE item_url_domain = :domain AND item_is_deleted = 0";

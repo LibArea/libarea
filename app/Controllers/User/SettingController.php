@@ -128,7 +128,7 @@ class SettingController extends MainController
     // Форма изменение пароля
     function securityForm()
     {
-        return Tpl::agRender(
+         return Tpl::agRender(
             '/user/setting/security',
             [
                 'meta'  => meta($m = [], sprintf(Translate::get('edit.option'), Translate::get('password'))),

@@ -37,6 +37,7 @@ class MainConnector implements Connector
             "Tpl"                           => "app/Libraries/Tpl.php",
             "UserData"                      => "app/Libraries/UserData.php",
             "Breadcrumbs"                   => "app/Libraries/Breadcrumbs.php",
+            "Forms"                         => "app/Libraries/Forms.php",
 
             "Slug"                          => "app/ThirdParty/Slug/Slug.php",
             "Parsedown"                     => "app/ThirdParty/Parsedown/Parsedown.php",
@@ -45,7 +46,7 @@ class MainConnector implements Connector
             "URLScraper"                    => "app/ThirdParty/URLScraper.php",
             "JacksonJeans\MailException"    => "app/ThirdParty/php-mail/MailException.class.php",
             "JacksonJeans\Mail"             => "app/ThirdParty/php-mail/Mail.class.php",
-            "Domains"                       => "app/ThirdParty/Domains/Domains.php",
+            "Domain"                        => "app/ThirdParty/Domain/Domain.php",
         ];
     }
 }

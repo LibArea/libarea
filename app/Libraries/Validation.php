@@ -13,8 +13,7 @@ class Validation
 
     public static function Length($name, $content, $min, $max, $redirect)
     {
-        if (self::getStrlen($name) < $min || self::getStrlen($name) > $max) {
-
+        if (getStrlen($name) < $min || getStrlen($name) > $max) {
             $text = sprintf(Translate::get('string.length'), '«' . $content . '»', $min, $max);
             addMsg($text, 'error');
             redirect($redirect);
@@ -42,12 +41,6 @@ class Validation
             redirect($redirect);
         }
         return true;
-    }
-
-    // Длина строки
-    public static function getStrlen($str)
-    {
-        return mb_strlen($str, "utf-8");
     }
 
     // Права для TL

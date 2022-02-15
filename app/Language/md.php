@@ -412,7 +412,7 @@ $data = [
     'to main'                               => 'La principal ',
     'the page has been removed'             => 'Este posibil să fi fost șters',
 
-    'the site is already there'             => 'Un astfel de site este deja în sistem',
+    'site.replay'             => 'Un astfel de site este deja în sistem',
     'joined in the early days'              => 'S-a alăturat în primele zile ale lansării comunității',
     'the profile is being checked'          => 'Profilul dvs. este în așteptare',
 

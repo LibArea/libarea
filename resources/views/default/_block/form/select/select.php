@@ -1,5 +1,5 @@
 <?
-// $type (topic | blog | user | trust level)
+// $type (topic | blog | user | trust level | category)
 // $action (edit)
 ?>
 
@@ -12,7 +12,7 @@
     <input name="facet_select[]" id="topic_id" required>
   <?php } ?>
 
-  <?php if (!empty($help)) { ?><div class="gray text-sm"><?= $help; ?>...</div><?php } ?>
+  <?php if (!empty($help)) { ?><div class="text-sm gray-400"><?= $help; ?>...</div><?php } ?>
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">

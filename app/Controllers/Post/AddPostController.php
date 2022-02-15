@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel};
-use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domains, Tpl, UserData;
+use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domain, Tpl, UserData;
 
 class AddPostController extends MainController
 {
@@ -302,7 +302,7 @@ class AddPostController extends MainController
         $og_img             = self::grabOgImg($post_url);
         $parse              = parse_url($post_url);
         $url_domain         = $parse['host'];
-        $domain             = new Domains($url_domain);
+        $domain             = new Domain($url_domain);
         $post_url_domain    = $domain->getRegisterable();
         $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
