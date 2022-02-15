@@ -54,6 +54,10 @@ a.sky-500 > i { color: #0ea5e9; }
   display: inline-block;
 }
 
+#bread_crumbs > li.active {
+  color: #9b6c3a;
+}
+
 #bread_crumbs > li span {
   padding: 0 0.5em 0 0.5em;
 }

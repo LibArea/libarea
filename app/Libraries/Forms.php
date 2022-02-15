@@ -420,8 +420,18 @@ class Forms
 		return $this->form['markup'] === 'xhtml' ? ' />' : '>';
 	}
 
+    // To work with an array
+    function html_form(array $params = [])
+    {
+        $result = [];
+        foreach ($params as $opt) {
+            $result[] = $this->add_input($opt['title'], $opt['arr'], $opt['name']);
+        }
+        return $result;
+    }
+
 	// End of form
-	function sumbit($text)
+	function sumbit(string $text)
 	{
 		return '<button id="submit" type="submit" name="action" class="btn btn-primary" value="submit">' . $text . '</button>';
 	}
