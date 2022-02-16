@@ -45,22 +45,29 @@ ul > li > a:hover > i,
 a.sky-500,
 a.sky-500 > i { color: #0ea5e9; }
 
-#bread_crumbs {
+.breadcrumbs {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-#bread_crumbs > li {
-  display: inline-block;
+.breadcrumbs li {
+  display: inline;
+  color: var(--gray-400); 
 }
 
-#bread_crumbs > li.active {
-  color: #9b6c3a;
+.breadcrumbs li:last {
+  font-weight: bold;
+  color: #000;
 }
 
-#bread_crumbs > li span {
-  padding: 0 0.5em 0 0.5em;
+.breadcrumbs li:not(:last-child):after {
+  content: " / ";
+}
+
+.breadcrumbs a {
+  color: #48C;
+  text-decoration: none;
 }
 
 .nav-catalog {

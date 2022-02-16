@@ -1,6 +1,6 @@
 <?php 
 echo includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
-$breadcrumb = (new Breadcrumbs('<span>/</span>'))->base('/', Translate::get('home'));
+$breadcrumb = (new Breadcrumbs())->base('/', Translate::get('home'));
 $breadcrumb->addCrumb(Translate::get('site.add'), 'red');
 $form = new Forms();
 $form->html_form($user['trust_level'], Config::get('form/site.add'));
@@ -8,7 +8,7 @@ $form->html_form($user['trust_level'], Config::get('form/site.add'));
 
 <main class="col-span-12 mb-col-12">
   <div class="box max-w780">
-    <?= $breadcrumb->render('bread_crumbs'); ?>
+    <?= $breadcrumb->render('breadcrumbs'); ?>
 
     <form id="addUrl">
       <?= csrf_field() ?>

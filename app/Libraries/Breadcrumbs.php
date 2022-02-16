@@ -39,7 +39,7 @@ class Breadcrumbs
     // @return string
     public function render(?string $id = null): string
     {
-        $init   = '<nav><ol id="' . $id .'">';
+        $init   = '<nav><ol class="' . $id .'">';
         $end    = '</ol></nav>';
 
         return $init . ($this->links ? $this->setBase() : '') . $this->collect($this->links) . $end;

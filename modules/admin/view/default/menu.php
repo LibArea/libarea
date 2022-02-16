@@ -45,9 +45,9 @@
 <main class="col-span-10 mb-col-12">
   <?php if ($data['type'] != 'admin') { ?>
     <div class="box-flex-white">
-      <?= (new Breadcrumbs('<span>/</span>'))
+      <?= (new Breadcrumbs())
             ->base(getUrlByName('admin'), Translate::get('admin'))
-            ->addCrumb(Translate::get($data['type']), $data['type'])->render('bread_crumbs'); ?>
+            ->addCrumb(Translate::get($data['type']), $data['type'])->render('breadcrumbs'); ?>
 
       <ul class="flex flex-row list-none m0 p0 center">
         <?php foreach ($menus as $menu) { ?>

@@ -76,7 +76,7 @@ class Catalog
     // Bread crumbs
     public static function breadcrumb($parent, $category, $screening)
     {
-        $breadcrumb = (new Breadcrumbs('<span>/</span>'))->base(getUrlByName('web'), Translate::get('websites'));
+        $breadcrumb = (new Breadcrumbs())->base(getUrlByName('web'), Translate::get('websites'));
         if ($parent_two = FacetModel::breadcrumb($parent['facet_id'])) {
              $breadcrumb->addCrumb($parent_two['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent_two['facet_slug']) 
                 ->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug']);
@@ -86,7 +86,7 @@ class Catalog
         
         $breadcrumb->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']);
        
-        return $breadcrumb->render('bread_crumbs');
+        return $breadcrumb->render('breadcrumbs');
     }
 
     // Detailed site page

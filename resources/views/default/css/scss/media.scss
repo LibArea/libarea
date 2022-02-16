@@ -4,19 +4,15 @@
  * Медиа-запросы
  */
 
-@media (max-width: 1150px) {
-  .home-img {
-    width: 100%;
+@media (max-width: 1050px) {
+  .home-img,
+  img.thumb {
+    width: 160px;
     height: auto;
-  }
-
-  .flex-auto {
-    flex-wrap: wrap;
-    flex: 1 1 auto;
   }
 }
 
-@media (max-width: 910px) {
+@media (max-width: 980px) {
   .mb-col-2 { grid-column: span 2 / span 2; }
   .mb-col-12 { grid-column: span 12 / span 12; }
   .mb-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
@@ -41,5 +37,10 @@
   .mb-video-object {
     width: 280px;
     height: 155px;
+  }
+  
+  .flex-auto {
+    flex-wrap: wrap;
+    flex: 1 1 auto;
   }
 }
