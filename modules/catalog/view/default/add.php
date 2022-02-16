@@ -1,23 +1,7 @@
 <?php 
 echo includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
 $form = new Forms();
-$form->html_form(
-  [
-    [
-      'title' => Translate::get('title'),
-      'arr'   => ['min' => 14, 'max' => 250, 'required' => true],
-      'name'  => 'title'
-    ], [
-      'title' => 'URL',
-      'arr'   => ['required' => true],
-      'name'  => 'url',
-    ], [
-      'title' => Translate::get('description'),
-      'arr'   => ['type' => 'textarea', 'required' => true],
-      'name'  => 'content',
-    ]
-  ]
-);
+$form->html_form($user['trust_level'], Config::get('form/site.add'));
 ?>
 
 <main class="col-span-12 mb-col-12">

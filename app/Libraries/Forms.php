@@ -420,15 +420,20 @@ class Forms
 		return $this->form['markup'] === 'xhtml' ? ' />' : '>';
 	}
 
-    // To work with an array
-    function html_form(array $params = [])
-    {
-        $result = [];
-        foreach ($params as $opt) {
-            $result[] = $this->add_input($opt['title'], $opt['arr'], $opt['name']);
-        }
-        return $result;
-    }
+	// To work with an array
+	function html_form(int $user_tl, array $params)
+	{
+		if (!is_array($params)) {
+			return false;
+		}
+
+		foreach ($params as $opt) {
+			if ($user_tl >= $opt['tl']) {
+				$result[] = $this->add_input(Translate::get($opt['title']), $opt['arr'], $opt['name']);
+			}
+		}
+		return $result;
+	}
 
 	// End of form
 	function sumbit(string $text)
