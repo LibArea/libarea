@@ -29,18 +29,12 @@ class Add
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
-        // Let's form bread crumbs
-        $title = sprintf(Translate::get('add.option'), Translate::get('website'));
-        $breadcrumb = (new Breadcrumbs('<span>/</span>'))->base('/', Translate::get('home'));
-        $breadcrumb->addCrumb($title, 'red');
-
         return view(
             '/view/default/add',
             [
-                'meta'  => meta($m = [], $title),
+                'meta'  => meta($m = [], Translate::get('site.add')),
                 'user'  => $this->user,
                 'data'  => [
-                    'breadcrumb' => $breadcrumb->render('bread_crumbs'),
                     'sheet'      => $sheet,
                     'type'       => $type,
                 ]

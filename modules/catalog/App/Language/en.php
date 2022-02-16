@@ -43,6 +43,10 @@ $data = [
     'web.top.cat.desc'      => 'Announced list of sites by subject %1$s. %2$s', 
     'web.all.cat.title'     => '%1$s — rubric, sites by date',
     'web.all.cat.desc'      => 'Sites in chronological order in the rubric %1$s. %2$s', 
+    
+    'site.add'              => 'Add site',
+    'site.edit'             => 'Edit site',
+    'my,site'               => 'My Sites',
 ];
 
 return $data;

@@ -1,18 +1,13 @@
 <div class="col-span-2 mb-none"></div>
-<main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray p15 hidden">
+<main class="col-span-8 mb-col-12 box-white">
   <h1 class="center"><?= Translate::get('authorization'); ?></h1>
   <form class="max-w300" action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>
 
-    <?= Tpl::import('/_block/form/field-input', [
-      'data' =>  [
-        [
-          'title' => Translate::get('E-mail'),
-          'type' => 'email',
-          'name' => 'email',
-        ]
-      ]
-    ]); ?>
+    <fieldset>
+      <label for="email">E-mail</label>
+      <input type="email" name="email">
+    </fieldset>
 
     <fieldset class="inputs">
       <label for="password" class="block mb5"><?= Translate::get('password'); ?></label>

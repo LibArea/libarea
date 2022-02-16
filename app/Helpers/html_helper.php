@@ -21,7 +21,6 @@ function html_facet($facet, $type, $url, $css)
     return implode($result);
 }
 
-
 // Categories
 function html_category($facet, $type, $choice, $css)
 {
@@ -95,7 +94,7 @@ function post_img($file, $alt, $style, $type)
 function website_img($domain, $type, $alt, $css = '')
 {
     $path = AG_PATH_FAVICONS;
-    $w_h = 'w20 h20';
+    $w_h = 'favicons';
     if ($type == 'thumbs') {
         $path  = AG_PATH_THUMBS;
         $w_h = 'w200 h200';
@@ -106,7 +105,7 @@ function website_img($domain, $type, $alt, $css = '')
         return $img;
     }
 
-    $img = '<img class="mr5 ' . $w_h . '" src="' . $path . 'no-link.png" title="' . $alt . '" alt="' . $alt . '">';
+    $img = '<img class="mr5 ' . $w_h . $css . '" src="' . $path . 'no-link.png" title="' . $alt . '" alt="' . $alt . '">';
 
     return $img;
 }

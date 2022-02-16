@@ -8,10 +8,6 @@
 ); ?>
 
 <div class="white-box">
-  <div class="box-flex-white">
-    <p class="m0 text-xl"><?= Translate::get('structure'); ?> (<?= Translate::get($data['type']); ?>)</p>
-  </div>
-
   <div class="box-white">
     <?php if ($data['type'] == 'all') { ?>
       <?php foreach ($data['types_facets'] as $type) { ?>

@@ -1,6 +1,4 @@
 <?php
-$user = UserData::get();
-Translate::setLang($user['lang']);
 $dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
 ?>
 

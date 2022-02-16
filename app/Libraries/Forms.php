@@ -429,7 +429,7 @@ class Forms
 
 		foreach ($params as $opt) {
 			if ($user_tl >= $opt['tl']) {
-				$result[] = $this->add_input(Translate::get($opt['title']), $opt['arr'], $opt['name']);
+				$result[] = $this->add_input($opt['title'], $opt['arr'], $opt['name']);
 			}
 		}
 		return $result;

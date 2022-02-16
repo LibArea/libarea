@@ -1,7 +1,7 @@
 <main class="col-span-12 mb-col-12  bg-white br-rd5 br-box-gray p15">
   <h1 class="center"><?= Translate::get('password recovery'); ?></h1>
   <div class="box wide">
-    <form class="" action="<?= getUrlByName('recover'); ?>/send/pass" method="post">
+    <form action="<?= getUrlByName('recover'); ?>/send/pass" method="post">
       <?php csrf_field(); ?>
       <fieldset>
         <label class="block" for="password">

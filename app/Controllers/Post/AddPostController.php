@@ -307,9 +307,7 @@ class AddPostController extends MainController
         $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
         // Если домена нет, то добавим его 
-        $item = PostModel::getDomain($post_url_domain, $this->user['id']);
-        if (!$item) {
-            // Запишем минимальные данный
+        if (!$item = PostModel::getDomain($post_url_domain, $this->user['id']);) {
             WebModel::add(
                 [
                     'item_url'          => $item_url,

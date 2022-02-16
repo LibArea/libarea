@@ -32,10 +32,10 @@
     </ul>
   </div>
 
-  <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">
+  <div class="box">
+    <div class="grid grid-cols-6 mb-grid-cols-2 gap-2">
     <?php foreach ($data['users'] as $ind => $user) { ?>
-      <div class="center inline pr10 pl10 mb20 mb-col-2">
-        <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+        <a class="center mb20" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
           <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-lg'); ?>
           <div class="block mt5">
             <?= $user['login']; ?>
@@ -44,8 +44,8 @@
             <span class="gray text-sm"><?= $user['name']; ?></span>
           <?php } ?>
          </a>
-      </div>
     <?php } ?>
+    </div>
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
 </main>

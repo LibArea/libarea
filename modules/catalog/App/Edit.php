@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{FacetModel, PostModel};
-use Validation, Translate, UserData;
+use Validation, Translate, UserData, Breadcrumbs;
 
 class Edit
 {
@@ -19,7 +19,10 @@ class Edit
     // Форма редактирование домена
     public function index()
     {
-        Validation::validTl($this->user['trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
+        // Access rights by the trust level of the participant
+        // Права доступа по уровню доверия участника
+        $permissions = (new \Modules\Catalog\App\Сhecks())->permissions($this->user, UserData::REGISTERED_ADMIN);
+        if ($permissions == false) redirect('/');
 
         $domain_id  = Request::getInt('id');
         $domain     = WebModel::getItemId($domain_id);
@@ -36,14 +39,14 @@ class Edit
         return view(
             '/view/default/edit',
             [
-                'meta'  => meta($m = [], sprintf(Translate::get('edit.option'), Translate::get('website'))),
+                'meta'  => meta($m = [], Translate::get('site.edit')),
                 'user'  => $this->user,
                 'data'  => [
-                    'domain'    => $domain,
-                    'sheet'     => 'domains',
-                    'type'      => 'web',
-                    'topic_arr' => WebModel::getItemTopic($domain['item_id']),
-                    'post_arr'  => $item_post_related,
+                    'domain'        => $domain,
+                    'sheet'         => 'domains',
+                    'type'          => 'web',
+                    'topic_arr'     => WebModel::getItemTopic($domain['item_id']),
+                    'post_arr'      => $item_post_related,
                 ]
             ]
         );
@@ -59,9 +62,9 @@ class Edit
             redirect($redirect);
         }
 
-        $item_url           = Request::getPost('item_url');
-        $item_title_url     = Request::getPost('item_title_url');
-        $item_content_url   = Request::getPost('item_content_url');
+        $item_url           = Request::getPost('url');
+        $item_title_url     = Request::getPost('title');
+        $item_content_url   = Request::getPost('content');
         $item_title_soft    = Request::getPost('item_title_soft');
         $item_content_soft  = Request::getPost('item_content_soft');
         $item_published     = Request::getPostInt('item_published');

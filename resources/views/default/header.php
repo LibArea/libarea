@@ -1,5 +1,4 @@
 <?php
-Translate::setLang($user['lang']);
 $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
 $css      = $data['type'] == 'web' || $data['type'] == 'page'  ? '' : 'body-bg-fon';
 $type     = $data['type'] ?? false;

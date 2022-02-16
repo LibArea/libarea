@@ -49,12 +49,16 @@
     </ul>
   </div>
 
-  <div class="p15">
+  <div class="box">
     <?php if (!empty($data['facets'])) { ?>
       <?php if ($data['type'] == 'blog') { ?>
+        <div class="grid grid-cols-1 gap-2">
         <?= Tpl::import('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
+        </div>
       <?php } else { ?>
-        <?= Tpl::import('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
+        <div class="grid grid-cols-2 mb-grid-cols-1 gap-2">
+          <?= Tpl::import('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
+        </div>
       <?php } ?>
     <?php } else { ?>
       <?= no_content(Translate::get('no.content'), 'bi bi-info-lg'); ?>

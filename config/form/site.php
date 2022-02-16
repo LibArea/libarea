@@ -7,7 +7,7 @@
 return [
     'add' =>  [
        [
-          'title' => 'title',
+          'title' => Translate::get('title'),
           'tl'      => 1, // member's trust level 
           'arr'   => ['min' => 14, 'max' => 250, 'required' => true],
           'name'  => 'title'
@@ -17,7 +17,7 @@ return [
           'arr'   => ['required' => true],
           'name'  => 'url',
         ],  [
-          'title'   => 'description',
+          'title'   => Translate::get('description'),
           'tl'      => 1,
           'arr'     => ['type' => 'textarea', 'required' => true],
           'name'    => 'content',

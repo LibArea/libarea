@@ -1,7 +1,7 @@
 <div class="col-span-2 mb-none"></div>
-<main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray p15 hidden">
+<main class="col-span-8 mb-col-12 box-white">
   <h1 class="center"><?= Translate::get($data['sheet']); ?></h1>
-  <form class="form max-w300 mb20 block" action="<?= getUrlByName('register'); ?>/add" method="post">
+  <form class="form max-w300 mb20 block" action="<?= getUrlByName('register.add'); ?>" method="post">
     <?php csrf_field(); ?>
 
     <?= Tpl::import('/_block/form/field-input', [

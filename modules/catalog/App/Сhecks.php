@@ -34,8 +34,7 @@ class Сhecks
     public static function domain($url)
     {
         $parse      = parse_url($url);
-        $host       = $parse['host'];
-        $domain     = new Domain($host);
+        $domain     = new Domain($parse['host']);
 
         return $domain->getRegisterable();
     }

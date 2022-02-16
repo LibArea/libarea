@@ -1,6 +1,5 @@
- <div class="flex flex-row flex-wrap">
    <?php foreach ($facets as $key => $facet) { ?>
-     <div class="w-50 mb20 items-center mb-w100 flex flex-row<?php if (($key + 1) % 2 == 0) { ?> pl20 mb-pl0<?php } ?>">
+     <div class="flex <?php if (($key + 1) % 2 == 0) { ?> pl20 mb-pl0<?php } ?>">
        <a title="<?= $facet['facet_title']; ?>" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
          <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'img-lg'); ?>
        </a>
@@ -39,4 +38,3 @@
        </div>
      </div>
    <?php } ?>
- </div>
