@@ -268,7 +268,7 @@ function tabs_nav($name, $item, $user, array $pages = [])
     $html = '';
     if ($name == 'nav') {
         foreach ($pages as $key => $page) {
-            $tl = $page['tl'] ?? null;
+            $tl = $page['tl'] ?? 0;
             if ($user['trust_level'] >= $tl) {
                 $classes    = 'mr5 gray-600';
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
