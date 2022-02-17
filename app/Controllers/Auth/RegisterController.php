@@ -35,9 +35,9 @@ class RegisterController extends MainController
         return Tpl::agRender(
             '/auth/register',
             [
-                'meta'  => meta($m, Translate::get('sign up'), Translate::get('info-security')),
+                'meta'  => meta($m, Translate::get('sign.up'), Translate::get('info-security')),
                 'data'  => [
-                    'sheet' => 'sign up',
+                    'sheet' => 'sign.up',
                     'type'  => 'register'
                 ]
             ]
@@ -47,12 +47,13 @@ class RegisterController extends MainController
     // Отправка запроса для регистрации
     public function index()
     {
-        $email      = Request::getPost('email');
-        $login      = Request::getPost('login');
-        $inv_code   = Request::getPost('invitation_code');
-        $inv_uid    = Request::getPostInt('invitation_id');
-        $password   = Request::getPost('password');
-        $reg_ip     = Request::getRemoteAddress();
+        $email              = Request::getPost('email');
+        $login              = Request::getPost('login');
+        $inv_code           = Request::getPost('invitation_code');
+        $inv_uid            = Request::getPostInt('invitation_id');
+        $password           = Request::getPost('password');
+        $password_confirm   = Request::getPost('password_confirm');
+        $reg_ip             = Request::getRemoteAddress();
 
         $redirect = $inv_code ? '/register/invite/' . $inv_code : '/register';
 
@@ -98,6 +99,11 @@ class RegisterController extends MainController
         if (substr_count($password, ' ') > 0) {
             addMsg('password-spaces', 'error');
             redirect($redirect);
+        }
+
+        if ($password != $password_confirm) {
+            addMsg('pass-match-err', 'error');
+            redirect($redirect);  
         }
 
         if (!$inv_code) {

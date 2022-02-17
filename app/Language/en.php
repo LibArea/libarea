@@ -98,7 +98,7 @@ $data = [
     'authorization'     => 'Authorization',
     'sign.in'           => 'Sign in',
     'sign out'          => 'Sign out',
-    'sign up'           => 'Sign up',
+    'sign.up'           => 'Sign up',
     'advertising'       => 'Advertising',
     'private messages'  => 'Private messages',
     'it was read'       => 'It was read',
@@ -256,7 +256,7 @@ $data = [
 
     'repeat the password'   => 'Repeat password',
     'post.closed'           => 'Post closed',
-    'forgot your password'  => 'Forgot your password',
+    'forgot.password'   => 'Forgot your password',
     'rules'                 => 'Site rules',
     'privacy policy'        => 'Privacy Policy',
     'restriction'           => 'Restrictions',

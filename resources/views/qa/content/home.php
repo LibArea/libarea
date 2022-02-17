@@ -45,7 +45,7 @@
 
 <aside class="col-span-3 mb-col-12 relative mb-none">
   <?php if ($user['id'] == 0) { ?>
-    <?= Tpl::import('/_block/sidebar/login'); ?>
+    <?= Tpl::import('/_block/sidebar/login', ['user' => $user]); ?>
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>

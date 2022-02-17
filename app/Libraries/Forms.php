@@ -265,7 +265,7 @@ class Forms
 				case 'select':
 					$element = 'select';
 					$end     .= '>';
-					foreach ($val['options'] as $key => $opt) {
+					foreach ($val['options'] as $key => $opt) { // print_r($val);
 						$opt_insert = '';
 						if (
 							// Is this field set to automatically populate?
@@ -396,8 +396,13 @@ class Forms
 
 				$wrap_after = $val['after_html'];
 				if (!empty($val['wrap_tag'])) {
-					$wrap_after = '</' . $val['wrap_tag'] . '>' . $wrap_after;
+					$wrap_after = '' . $wrap_after . '</' . $val['wrap_tag'] . '>';
 				}
+
+			/*	$wrap_after = $val['help'];
+				if (!empty($val['wrap_tag'])) {
+					$wrap_after = '<div class="text-sm gray-400">' . $wrap_after . '</div></' . $val['wrap_tag'] . '>';
+				} */
 
 				$output .= $wrap_before . $field . $wrap_after;
 			else :
@@ -421,7 +426,7 @@ class Forms
 	}
 
 	// To work with an array
-	function html_form(int $user_tl, array $params)
+	function html_form(?int $user_tl, array $params)
 	{
 		if (!is_array($params)) {
 			return false;

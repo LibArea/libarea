@@ -20,7 +20,7 @@
     <p>
       <?= sumbit(Translate::get('reset')); ?>
       <?php if (Config::get('general.invite') == false) { ?>
-        <span class="mr5 ml15 text-sm"><a href="<?= getUrlByName('register'); ?>"><?= Translate::get('sign up'); ?></a></span>
+        <span class="mr5 ml15 text-sm"><a href="<?= getUrlByName('register'); ?>"><?= Translate::get('sign.up'); ?></a></span>
       <?php } ?>
       <span class="mr5 ml15 text-sm"><a href="<?= getUrlByName('login'); ?>"><?= Translate::get('sign.in'); ?></a></span>
     </p>

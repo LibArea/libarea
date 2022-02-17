@@ -98,7 +98,7 @@ $data = [
     'authorization'     => '授權',
     'sign.in'           => '登入',
     'sign out'          => '登出',
-    'sign up'           => '註冊',
+    'sign.up'           => '註冊',
     'advertising'       => '廣告',
     'private messages'  => '私人信息',
     'it was read'       => '已讀',
@@ -255,7 +255,7 @@ $data = [
 
     'repeat the password'   => '重複輸入密碼',
     'post.closed'           => '帖子已關閉',
-    'forgot your password'  => '忘記密碼了嗎',
+    'forgot.password'   => '忘記密碼了嗎',
     'rules'                 => '網站規則',
     'privacy policy'        => '隱私政策',
     'restriction'           => '限制',

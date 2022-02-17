@@ -10,12 +10,9 @@ class AuthModel extends \Hleb\Scheme\App\Models\MainModel
     // Проверка на повторы
     public static function checkRepetitions($params, $type)
     {
-        $sort = 'login = :params';
-        if ($type = 'email') {
-            $sort = 'login = :params';
-        }
+        $field = ($type == 'email') ? 'email' : 'login';
 
-        $sql = "SELECT login, email FROM users WHERE $sort";
+        $sql = "SELECT login, email FROM users WHERE $field = :params";
 
         return DB::run($sql, ['params' => $params])->fetch();
     }

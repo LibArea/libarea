@@ -92,7 +92,7 @@ $data = [
     'authorization'     => 'Autentificare',
     'sign.in'           => 'Autentificare',
     'sign out'          => 'Ieși',
-    'sign up'           => 'Inregistrare',
+    'sign.up'           => 'Inregistrare',
     'advertising'       => 'Publicitate',
     'private messages'  => 'Mesaje private',
     'it was read'       => 'A fost citit',
@@ -250,7 +250,7 @@ $data = [
 
     'repeat the password'   => 'Repetati parola',
     'post.closed'           => 'Postarea este închisă',
-    'forgot your password'  => 'Am uitat parola',
+    'forgot.password'   => 'Am uitat parola',
     'rules'                 => 'Regulile site-ului',
     'privacy policy'        => 'Politica de confidențialitate',
     'restriction'           => 'Restricții',

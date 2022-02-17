@@ -70,7 +70,7 @@ $data = [
     'authorization'     => 'Авторизация',
     'sign.in'           => 'Войти',
     'sign out'          => 'Выйти',
-    'sign up'           => 'Регистрация',
+    'sign.up'           => 'Регистрация',
     'advertising'       => 'Реклама',
     'private messages'  => 'Личные сообщения',
     'it was read'       => 'Было прочитано',
@@ -249,7 +249,7 @@ $data = [
 
     'repeat the password'   => 'Повторите пароль',
     'post.closed'           => 'Пост закрыт',
-    'forgot your password'  => 'Забыли пароль',
+    'forgot.password'   => 'Забыли пароль',
     'rules'                 => 'Правила сайта',
     'privacy policy'        => 'Политика конфиденциальности',
     'restriction'           => 'Ограничения',

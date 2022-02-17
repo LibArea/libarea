@@ -11,7 +11,7 @@ $facet  = $data['facet'] ?? false; ?>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?v=03">
+  <link rel="stylesheet" href="/assets/css/style.css?04">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
@@ -56,11 +56,11 @@ $facet  = $data['facet'] ?? false; ?>
             <i class="bi bi-brightness-high gray-400 text-xl"></i>
           </div>
           <?php if (Config::get('general.invite') == false) { ?>
-            <a class="register gray ml30 mr15 mb-ml10 mb-mr5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
-              <?= Translate::get('sign up'); ?>
+            <a class="register gray ml30 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
+              <?= Translate::get('sign.up'); ?>
             </a>
           <?php } ?>
-          <a class="btn btn-outline-primary ml20" title="<?= Translate::get('sign.in'); ?>" href="<?= getUrlByName('login'); ?>">
+          <a class="btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
             <?= Translate::get('sign.in'); ?>
           </a>
         </div>
