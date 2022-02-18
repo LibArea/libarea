@@ -43,7 +43,7 @@
   </div>
 </main>
 
-<aside class="col-span-3 mb-col-12 relative mb-none">
+<aside class="col-span-3 mb-none">
   <?php if ($user['id'] == 0) { ?>
     <?= Tpl::import('/_block/sidebar/login', ['user' => $user]); ?>
   <?php } ?>

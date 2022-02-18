@@ -82,7 +82,7 @@ foreach ($data['answers'] as $answer) {
         </li>
       </ol>
     <?php } else { ?>
-      <div class="gray m5 p5 text-sm">
+      <div class="gray-400 p10 text-sm">
         ~ <?= sprintf(Translate::get('content.deleted'), Translate::get('comment')); ?>
       </div>
     <?php } ?>

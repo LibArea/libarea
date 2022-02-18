@@ -90,8 +90,8 @@
               </li>
             </ol>
           <?php } else { ?>
-            <div class="gray m5 p5 text-sm">
-              ~ <?= sprintf(Translate::get('content.deleted'), Translate::get('comment')); ?>
+            <div class="gray-400 p10 text-sm">
+              ~ <?= sprintf(Translate::get('content.deleted'), Translate::get('answer')); ?>
             </div>
           <?php } ?>
 

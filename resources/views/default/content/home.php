@@ -69,7 +69,7 @@
   </div>
 </main>
 
-<aside class="col-span-3 mb-col-12 mb-none">
+<aside class="col-span-3 mb-none">
   <?php if ($user['id'] == 0) { ?>
     <?= Tpl::import('/_block/sidebar/login', ['user' => $user]); ?>
   <?php } ?>
@@ -123,9 +123,9 @@
     <div class="box-white text-sm">
       <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
       <?php foreach (Config::get('facets.default') as $key => $topic) { ?>
-        <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $topic['url']; ?>">
+        <a class="flex items-center relative pb10 gray-600" href="<?= $topic['url']; ?>">
           <img class="img-base" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
-          <span class="ml5"><?= $topic['name']; ?></span>
+          <?= $topic['name']; ?>
         </a>
       <?php } ?>
     </div>

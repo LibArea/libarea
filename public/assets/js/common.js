@@ -288,7 +288,7 @@ showPassword.forEach(item =>
 );
 
 function toggleType() {
-  let input = this.closest('.inputs').querySelector('.password');
+  let input = document.getElementById('password');
   let icon = this.querySelector('i');
   if (icon.classList.contains('bi-eye')) {
     icon.classList.remove('bi-eye');

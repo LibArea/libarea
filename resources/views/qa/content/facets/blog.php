@@ -40,7 +40,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
         <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>
-      <aside class="col-span-3 relative mb-none">
+      <aside class="col-span-3 mb-none">
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
           <div class="box-white bg-violet-50 text-sm">
             <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>

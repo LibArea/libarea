@@ -40,7 +40,7 @@
   <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
   <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('domain', ['domain' => $data['site']['item_url_domain']])); ?>
 </main>
-<aside class="col-span-3 relative">
+<aside class="col-span-3 mb-none">
   <div class="sticky top-sm">
     <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
       <?= Tpl::import('/_block/domains', ['data' => $data['domains']]); ?>

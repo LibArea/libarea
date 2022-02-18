@@ -87,10 +87,8 @@
 
         <div class="flex flex-row items-center mb20">
           <?php if (!empty($data['blog'])) { ?>
-            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray inline text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
-              <span class="bg-sky-50 gray pt5 pr10 pb5 pl10 br-rd5">
-                <?= $data['blog'][0]['facet_title']; ?>
-              </span>
+            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray-600 inline text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
+              <?= $data['blog'][0]['facet_title']; ?>
             </a>
           <?php } ?>
 
@@ -226,8 +224,7 @@
     echo no_content(Translate::get('this.draft'), 'bi bi-journal-medical');
   } ?>
 </main>
-<aside class="col-span-3 relative br-rd5 mb-none">
-
+<aside class="col-span-3 mb-none">
   <?php if (!empty($data['facets'])) { ?> 
     <div class="box-white bg-violet-50">
       <h3 class="uppercase-box">

@@ -15,7 +15,6 @@
 <main class="col-span-7 mb-col-12">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
     <?= Tpl::import('/content/facets/topic-header', ['topic' => $topic, 'user' => $user, 'data' => $data]); ?>
-
     <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
 
@@ -26,15 +25,15 @@
     </div>
   <?php } ?>
 </main>
-<aside class="col-span-3 relative mb-none">
+<aside class="col-span-3 mb-none">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
     <div class="box-flex-white">
       <div class="center">
-        <div class="uppercase mb5 text-sm gray"><?= Translate::get('posts'); ?></div>
+        <div class="uppercase text-sm gray-400"><?= Translate::get('posts'); ?></div>
         <?= $topic['facet_count']; ?>
       </div>
       <div class="center relative">
-        <div class="uppercase mb5 text-sm gray"><?= Translate::get('reads'); ?></div>
+        <div class="uppercase text-sm gray-400"><?= Translate::get('reads'); ?></div>
         <div class="focus-user sky-500">
           <?= $topic['facet_focus_count']; ?>
         </div>
@@ -47,7 +46,7 @@
         <div class="box-white text-sm">
           <h3 class="uppercase-box"><?= Translate::get('pages'); ?></h3>
           <?php foreach ($data['pages'] as $ind => $row) { ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="">
+            <a class="flex pb10 items-center gray-600" href="">
               <?= $row['post_title']; ?>
             </a>
           <?php } ?>

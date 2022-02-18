@@ -13,15 +13,15 @@
     </div>
   <?php } ?>
 </main>
-<aside class="col-span-3 relative mb-none">
+<aside class="col-span-3 mb-none">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
     <div class="box-flex-white bg-violet-50">
       <div class="center">
-        <div class="uppercase mb5 text-sm gray"><?= Translate::get('posts'); ?></div>
+        <div class="uppercase text-sm gray-400"><?= Translate::get('posts'); ?></div>
         <?= $topic['facet_count']; ?>
       </div>
       <div class="center relative">
-        <div class="uppercase mb5 text-sm gray"><?= Translate::get('reads'); ?></div>
+        <div class="uppercase text-sm gray-400"><?= Translate::get('reads'); ?></div>
         <div class="focus-user sky-500">
           <?= $topic['facet_focus_count']; ?>
         </div>

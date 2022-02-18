@@ -21,10 +21,8 @@ $facet    = $data['facet'] ?? false;
 
 <body class="<?= $css; ?><?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
-  <header class="bg-white box-shadow <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
-    <div class="box-flex-white pl10 pr10 h50">
-      <div class="flex items-center">
-
+  <header class="box-flex-white p5 box-shadow <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
+      <div class="flex ml10">
         <div class="none mb-block">
           <div class="trigger">
             <i class="bi bi-list gray-400 text-xl mr10"></i>
@@ -68,7 +66,7 @@ $facet    = $data['facet'] ?? false;
           </a>
         </div>
       <?php } else { ?>
-        <div class="col-span-4">
+ 
           <div class="flex right ml45 mb-ml20 items-center text-xl">
 
             <?= add_post($facet, $user['id']); ?>
@@ -104,8 +102,7 @@ $facet    = $data['facet'] ?? false;
               </ul>
             </div>
           </div>
-        </div>
+ 
       <?php }  ?>
-    </div>
   </header>
   <div id="contentWrapper">

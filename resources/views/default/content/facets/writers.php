@@ -41,7 +41,7 @@
     <?php } ?>
   </div>
 </main>
-<aside class="col-span-3 relative mb-none">
+<aside class="col-span-3 mb-none">
   <div class="box-white gray-400">
     <i class="bi bi-calendar-week mr5 middle"></i>
     <span class="middle"><?= $topic['facet_add_date']; ?></span>

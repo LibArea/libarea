@@ -6,8 +6,8 @@
       <?= Tpl::import('/_block/no-login-screensaver'); ?>
     <?php } ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
-    <div class="grid col-span-12 flex br-bottom p10 mb5 mt5 article_<?= $post['post_id']; ?>">
-      <div class="col-span-2 flex mb-inline mr15">
+    <div class="flex br-bottom p10 article_<?= $post['post_id']; ?>">
+      <div class="flex mb-inline mr15">
         <div class="box-answer block bg-gray-100 gray-600 mt5 br-rd3 lowercase mr15">
           <?= $post['post_votes']; ?>
           <div class="text-xs"> <?= num_word($post['post_votes'], Translate::get('num-up'), false); ?></div>

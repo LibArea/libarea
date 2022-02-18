@@ -67,7 +67,7 @@
   </div>
 </main>
 
-<aside class="col-span-3 relative br-rd5 mb-none">
+<aside class="col-span-3 mb-none">
   <div class="box-white text-sm">
     <h3 class="uppercase-box"><?= Translate::get('dialogues'); ?></h3>
     <?php foreach ($data['dialog'] as $key => $val) { ?>
