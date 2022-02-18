@@ -14,7 +14,7 @@ $data = [
     'empty.request'         => 'Leerer Suchbegriff',
     'web.bookmarks.info'    => 'Meine Lesezeichen nach Websites',
     'web.banner.info'       => 'Ein Katalog von manuell ausgewählten Websites mit Anmerkungen und Screenshots. Thematische, regionale und typische Rubriken. Möglichkeit, nach Beschreibungen zu suchen',
-    
+
     'news.media'            => 'Nachrichten und Medien',
     'social.network'        => 'Soziale Netzwerke',
     'internet'              => 'Internet',
@@ -38,11 +38,15 @@ $data = [
     'web.top.home'          => 'Websites nach Bewertung im Katalog',
     'web.top.home.title'    => 'Der Katalog der Webseiten (nach der Bewertung)',
     'web.top.home.desc'     => 'Websites werden nach Bewertung sortiert. Screenshots und Beschreibung der Ressourcen, die Möglichkeit, zu suchen und zu Lesezeichen hinzuzufügen',
-    
+
     'web.top.cat.title'     => '%1$s — Websites nach Beliebtheit',
-    'web.top.cat.desc'      => 'Angekündigte Liste von Websites nach Thema %1$s. %2$s', 
+    'web.top.cat.desc'      => 'Angekündigte Liste von Websites nach Thema %1$s. %2$s',
     'web.all.cat.title'     => '%1$s — Rubrik, Websites nach Datum',
-    'web.all.cat.desc'      => 'Sites in chronologischer Reihenfolge in der Rubrik  %1$s. %2$s', 
+    'web.all.cat.desc'      => 'Sites in chronologischer Reihenfolge in der Rubrik  %1$s. %2$s',
+    
+    'site.add'              => 'Website hinzufügen',
+    'site.edit'             => 'Website bearbeiten',
+    'my,site'               => 'Meine Seiten',
 ];
 
 return $data;

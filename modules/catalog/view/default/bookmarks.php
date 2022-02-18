@@ -1,26 +1,6 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
-<div class="item-categories mb-block">
-  <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
-    <div class="mb10">
-      <a class="text-2xl block" href="<?= getUrlByName('web.dir.top', ['slug' => $cat['url']]); ?>">
-        <?= $cat['title']; ?>
-      </a>
-      <?php if (!empty($cat['sub'])) { ?>
-        <?php foreach ($cat['sub'] as $sub) { ?>
-          <a class="pr10 text-sm black inline" href="<?= getUrlByName('web.dir.top', ['slug' => $sub['url']]); ?>">
-            <?= $sub['title']; ?>
-          </a>
-        <?php } ?>
-      <?php } ?>
-      <?php if (!empty($cat['help'])) { ?>
-        <div class="text-sm gray-400"><?= $cat['help']; ?>...</div>
-      <?php } ?>
-    </div>
-  <?php } ?>
-</div>
-
 <div class="grid grid-cols-12 gap-4">
-  <main class="col-span-9 mb-col-12 ml30">
+  <main>
     <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>
 
     <?php if (!empty($data['items'])) { ?>

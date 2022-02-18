@@ -8,28 +8,28 @@
   </div>
 <?php } ?>
 
-<div class="item-categories mb-block">
+<div class="item-categories">
   <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
-    <div class="mb10">
+    <div class="categories-telo">
       <a class="text-2xl block" href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $cat['url']]); ?>">
         <?= $cat['title']; ?>
       </a>
       <?php if (!empty($cat['sub'])) { ?>
         <?php foreach ($cat['sub'] as $sub) { ?>
-          <a class="pr10 text-sm black inline" href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $sub['url']]); ?>">
+          <a class="pr10 text-sm black mb-none" href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $sub['url']]); ?>">
             <?= $sub['title']; ?>
           </a>
         <?php } ?>
       <?php } ?>
       <?php if (!empty($cat['help'])) { ?>
-        <div class="text-sm gray-400"><?= $cat['help']; ?>...</div>
+        <div class="text-sm gray-400 mb-none"><?= $cat['help']; ?>...</div>
       <?php } ?>
     </div>
   <?php } ?>
 </div>
 
 <div class="grid grid-cols-12 gap-4">
-  <main class="col-span-9 mb-col-12 ml30">
+  <main>
     <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>
     <?php if (!empty($data['items'])) { ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
@@ -38,20 +38,20 @@
     <?php } ?>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/cat'); ?>
   </main>
-  <aside class="col-span-3 mb-col-12 mb-none">
+  <aside>
     <div class="box-yellow text-sm max-w300"><?= Translate::get('directory.info'); ?></div>
     <?php if (UserData::checkAdmin()) { ?>
       <div class="box-white text-sm bg-violet-50 mt15">
         <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
-            <ul class="nav-catalog">
-                    <?= tabs_nav(
-                      'menu',
-                      $data['sheet'],
-                      $user,
-                      $pages = Config::get('menu.catalog')
-                    ); ?>
-           </ul>
-       </div> 
+        <ul class="nav-catalog">
+          <?= tabs_nav(
+            'menu',
+            $data['sheet'],
+            $user,
+            $pages = Config::get('menu.catalog')
+          ); ?>
+        </ul>
+      </div>
     <?php } ?>
   </aside>
 </div>

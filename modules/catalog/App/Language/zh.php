@@ -14,7 +14,7 @@ $data = [
     'empty.request'         => '空搜索詞',
     'web.bookmarks.info'    => '按网站划分的书签',
     'web.banner.info'       => '带有注释和屏幕截图的手动选择站点目录。 主题、区域和典型的摩擦. 能够通过描述搜索',
-    
+
     'news.media'            => '新聞和媒體',
     'social.network'        => '社交網絡',
     'internet'              => '互聯網',
@@ -38,11 +38,15 @@ $data = [
     'web.top.home'          => '按目录评级划分的网站',
     'web.top.home.title'    => '网站目录(按评级)',
     'web.top.home.desc'     => '按评级排序的网站。 资源的截图和描述，搜索和书签的能力',
-    
+
     'web.top.cat.title'     => '%1$s — 人氣網站',
-    'web.top.cat.desc'      => '按主題公佈的網站列表 %1$s. %2$s', 
+    'web.top.cat.desc'      => '按主題公佈的網站列表 %1$s. %2$s',
     'web.all.cat.title'     => '%1$s — 量規，網站按日期',
-    'web.all.cat.desc'      => '專欄中按時間順序排列的網站 %1$s. %2$s', 
+    'web.all.cat.desc'      => '專欄中按時間順序排列的網站 %1$s. %2$s',
+    
+    'site.add'              => '添加站點',
+    'site.edit'             => '編輯網站',
+    'my,site'               => '我的網站',
 ];
 
 return $data;

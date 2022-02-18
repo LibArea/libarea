@@ -6,13 +6,15 @@
 
 class Forms
 {
-
 	// Stores all form inputs
 	private $inputs = [];
 
 	// Stores all form attributes
 	private $form = [];
 
+	// To substitute new values
+	private $meaning = [];
+ 
 	// Does this form have a submit value?
 	private $has_submit = false;
 
@@ -433,13 +435,26 @@ class Forms
 		}
 
 		foreach ($params as $opt) {
-			if ($user_tl >= $opt['tl']) {
+			if ($user_tl >= $opt['tl']) { 
+            
+                foreach ($this->meaning as $arr) {
+                    if($opt['name'] == $arr['name']) {
+                       $opt['arr'][$arr['type']] = $arr['var'];
+                    }
+                }    
+            
 				$result[] = $this->add_input($opt['title'], $opt['arr'], $opt['name']);
 			}
 		}
 		return $result;
 	}
 
+	// Add new values
+    function adding(array $insert_array)
+    {
+        return $this->meaning[] = $insert_array;
+    }
+    
 	// End of form
 	function sumbit(string $text)
 	{

@@ -59,6 +59,5 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                            LIMIT $limit";
 
         return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchAll();
-    } 
-    
+    }
 }

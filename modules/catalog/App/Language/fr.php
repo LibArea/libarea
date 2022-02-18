@@ -14,7 +14,7 @@ $data = [
     'empty.request'         => 'Terme de recherche vide',
     'web.bookmarks.info'    => 'Mes favoris par site',
     'web.banner.info'       => 'Catalogue de sites sélectionnés manuellement avec des annotations et des captures écran. Rubriques thématiques, régionales et types. Possibilité de rechercher des descriptions',
-    
+
     'news.media'            => 'Actualités et médias',
     'social.network'        => 'Réseaux sociaux',
     'internet'              => 'Internet',
@@ -36,13 +36,17 @@ $data = [
     'web.home.title'        => 'Annuaire de sites Web',
     'web.home.desc'         => 'Liste des sites du répertoire classés par ordre chronologique. Possibilité de rechercher, signets, trier par popularité',
     'web.top.home'          => 'Sites classés dans lannuaire',
-    'web.top.home.title'    => 'Répertoire des sites (par Note)',    
+    'web.top.home.title'    => 'Répertoire des sites (par Note)',
     'web.top.home.desc'     => 'Les sites Web sont classés par note. Captures décran et description des ressources, possibilité de rechercher et Dajouter des signets',
-    
+
     'web.top.cat.title'     => '%1$s — sites par popularité',
-    'web.top.cat.desc'      => 'Liste annoncée des sites par sujet %1$s. %2$s', 
+    'web.top.cat.desc'      => 'Liste annoncée des sites par sujet %1$s. %2$s',
     'web.all.cat.title'     => '%1$s — rubrique, sites par date',
-    'web.all.cat.desc'      => 'Sites par ordre chronologique dans la rubrique %1$s. %2$s', 
+    'web.all.cat.desc'      => 'Sites par ordre chronologique dans la rubrique %1$s. %2$s',
+    
+    'site.add'              => 'Ajouter un site',
+    'site.edit'             => 'Modifier le site',
+    'my,site'               => 'Mes sites',
 ];
 
 return $data;

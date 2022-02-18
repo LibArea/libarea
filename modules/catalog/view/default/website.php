@@ -1,13 +1,13 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <div id="contentWrapper">
   <div class="col-span-1 mb-none center mt30">
-    <?= votes($user['id'], $data['item'], 'item', 'ps', 'text-2xl middle mt5', 'block'); ?>
+    <?= votes($user['id'], $data['item'], 'item', 'ps', 'text-2xl middle', 'block'); ?>
     <div class="pt20">
       <?= favorite($user['id'], $data['item']['item_id'], 'item', $data['item']['favorite_tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
-  <main class="col-span-8 mb-col-12">
-    <div class="bg-white items-center justify-between ml5 pr15 mb15">
+  <main class="website">
+    <div class="bg-white items-center justify-between pr15 mb15">
       <h1><?= $data['item']['item_title_url']; ?>
         <?php if ($user['trust_level'] == 5) { ?>
           <a class="text-sm ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['item']['item_id']]); ?>">
@@ -17,10 +17,10 @@
       </h1>
 
       <div class="flex flex-auto">
-        <?= website_img($data['item']['item_url_domain'], 'thumbs', $data['item']['item_title_url'], 'mr25 mt5 w400 mb-w100 box-shadow'); ?>
-        <div class="m15">
+        <?= website_img($data['item']['item_url_domain'], 'thumbs', $data['item']['item_title_url'], 'mr25 w400 box-shadow'); ?>
+        <div class="m15 mb-ml0">
           <?= $data['item']['item_content_url']; ?>
-          <div class="gray mt20 mb5">
+          <div class="gray mt20">
             <a class="green-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
               <?= website_img($data['item']['item_url_domain'], 'favicon', $data['item']['item_url_domain'], 'favicons mr5'); ?>
               <?= $data['item']['item_url']; ?>
@@ -51,7 +51,7 @@
       <?php } ?>
     </div>
   </main>
-  <aside class="col-span-3 relative mb-none">
+  <aside>
     <div class="box bg-white br-box-gray box-shadow-all">
       <?php if ($data['similar']) { ?>
         <h3 class="uppercase-box"><?= Translate::get('recommended'); ?></h3>

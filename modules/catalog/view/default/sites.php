@@ -1,5 +1,5 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
-<div class="ml30 mb15">
+<div class="item-cat">
 
   <?= $data['breadcrumb']; ?>
 
@@ -17,42 +17,42 @@
   </h1>
 </div>
 
-  <?php if ($data['childrens']) { ?>
-    <div class="item-categories mb-block">
+<?php if ($data['childrens']) { ?>
+  <div class="item-categories">
     <?php foreach ($data['childrens'] as $lt) { ?>
-        <div>
-          <a class="text-2xl" href="<?= getUrlByName('web.dir', ['cat' => $data['screening'], 'slug' => $lt['facet_slug']]); ?>">
-            <?= $lt['facet_title']; ?>
-          </a> <sup class="gray-400"><?= $lt['counts']; ?></sup>
-          <?php if (UserData::checkAdmin()) { ?>
-            <a class="ml5" href="<?= getUrlByName('category.edit', ['id' => $lt['facet_id']]); ?>">
-              <sup><i class="bi bi-pencil"></i>
-            </a>
-            <small class="text-sm gray-400"><sup><?= $lt['facet_type']; ?></sup></small>
-          <?php } ?>
-        </div>
-     <?php } ?>
-     </div>
-  <?php } ?>
-  <?php if ($data['low_matching']) { ?>
-   <div class="item-categories mb-block">
-    <?php foreach ($data['low_matching'] as $rl) { ?>
-        <div class="inline mr20">
-          <a class="text-2xl" href="<?= getUrlByName('web.dir', ['cat' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
-            @<?= $rl['facet_title']; ?>
+      <div>
+        <a class="text-2xl" href="<?= getUrlByName('web.dir', ['cat' => $data['screening'], 'slug' => $lt['facet_slug']]); ?>">
+          <?= $lt['facet_title']; ?>
+        </a> <sup class="gray-400"><?= $lt['counts']; ?></sup>
+        <?php if (UserData::checkAdmin()) { ?>
+          <a class="ml5" href="<?= getUrlByName('category.edit', ['id' => $lt['facet_id']]); ?>">
+            <sup><i class="bi bi-pencil"></i>
           </a>
-          <?php if (UserData::checkAdmin()) { ?>
-            <a class="text-sm ml5" href="<?= getUrlByName('category.edit', ['id' => $rl['facet_id']]); ?>">
-              <sup class="gray-400"><i class="bi bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
-            </a>
-          <?php } ?>
-        </div>
+          <small class="text-sm gray-400"><sup><?= $lt['facet_type']; ?></sup></small>
+        <?php } ?>
+      </div>
     <?php } ?>
-    </div>
-  <?php } ?>
-  
+  </div>
+<?php } ?>
+<?php if ($data['low_matching']) { ?>
+  <div class="item-categories mb-block">
+    <?php foreach ($data['low_matching'] as $rl) { ?>
+      <div class="inline mr20">
+        <a class="text-2xl" href="<?= getUrlByName('web.dir', ['cat' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
+          @<?= $rl['facet_title']; ?>
+        </a>
+        <?php if (UserData::checkAdmin()) { ?>
+          <a class="text-sm ml5" href="<?= getUrlByName('category.edit', ['id' => $rl['facet_id']]); ?>">
+            <sup class="gray-400"><i class="bi bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
+          </a>
+        <?php } ?>
+      </div>
+    <?php } ?>
+  </div>
+<?php } ?>
+
 <div class="grid grid-cols-12 gap-4">
-  <main class="col-span-9 mb-col-12 ml30">
+  <main>
     <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>
 
     <?php if (!empty($data['items'])) { ?>

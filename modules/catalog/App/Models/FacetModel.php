@@ -13,8 +13,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         // Except for the staff and if it is not allowed in the catalog
         // Кроме персонала и если он не разрешен в каталоге
         $display = "facet_is_deleted = 0 AND";
-        if ($trust_level == 10) $display = "";   
-        
+        if ($trust_level == 10) $display = "";
+
         $sort = "facet_id = :params";
         if ($name == 'slug') $sort = "facet_slug = :params";
 
@@ -52,12 +52,12 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @return
      */
     public static function getChildrens($facet_id, $screening)
-    {       
+    {
         $sort = '';
         if ($screening == 'github') {
             $sort = 'AND item_is_github = 1';
         }
-        
+
         $sql = "SELECT 
                   facet_id,
                   count(facet_id) as counts, 
@@ -70,10 +70,10 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                           LEFT JOIN items on item_id = relation_item_id 
                               WHERE facet_parent_id = :facet_id  $sort
                                  GROUP BY facet_id";
-                  
+
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
-    
+
     // Down the structure  (CHILDREN)
     // Вниз по структуре связанных деревьев (ДЕТИ)
     /**
@@ -96,7 +96,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
-    
+
     // Up the structure of the main trees (PARENTS)
     // Вверх по структуре основных деревьев (РОДИТЕЛИ)
     /**
@@ -127,5 +127,4 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetch();
     }
-
 }

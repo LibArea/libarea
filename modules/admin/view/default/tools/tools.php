@@ -6,7 +6,6 @@
     'menus' => [],
   ]
 ); ?>
-
 <div class="box-white">
   <label><?= Translate::get('build'); ?> CSS</label>
   <form action="<?= getUrlByName('admin.build.css'); ?>">
@@ -34,10 +33,10 @@
     <label><?= Translate::get('Email'); ?></label>
     <form action="<?= getUrlByName('admin.test.mail'); ?>" method="post">
       <input class="w-100 h30" type="mail" name="mail" value="">
-      <div class="text-sm mt5 mb5 gray-400"><?= Translate::get('test.email'); ?>...</div>
+      <div class="help"><?= Translate::get('test.email'); ?>...</div>
+  </fieldset>    
       <?= sumbit(Translate::get('send')); ?>
-    </form>
-  </fieldset>
+  </form>
 </div>
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

@@ -52,7 +52,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     public static function getItemsAllCount($sheet)
-    { 
+    {
         $sort = self::sorts($sheet);
         $sql = "SELECT item_id, item_is_deleted FROM items $sort";
 
@@ -87,8 +87,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     public static function feedItem($page, $limit, $facets, $user, $topic_id, $sheet, $screening)
     {
         $result = [];
-        foreach ($facets as $ind => $row) { 
-             $result['9999'] = $topic_id;
+        foreach ($facets as $ind => $row) {
+            $result['9999'] = $topic_id;
             $result[$ind] = $row['facet_id'];
         }
 
@@ -97,7 +97,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
         $string = "relation_facet_id IN($topic_id)";
         if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
-        
+
         $go = '';
         if ($screening == 'github') {
             $go = 'item_is_github = 1 AND';
@@ -365,14 +365,14 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['item_id' => $item_id])->fetchall();
     }
-    
+
     public static function setCleek($id)
     {
         $sql = "UPDATE items SET item_following_link = (item_following_link + 1) WHERE item_id = :id";
 
         return DB::run($sql, ['id' => $id]);
     }
-    
+
     public static function bookmarks($page, $limit, $uid)
     {
         $start  = ($page - 1) * $limit;
@@ -414,7 +414,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
         return  DB::run($sql, ['uid' => $uid, 'uid_two' => $uid])->fetchAll();
     }
-    
+
     public static function bookmarksCount($uid)
     {
         $sql = "SELECT favorite_user_id FROM favorites WHERE favorite_user_id = :uid AND favorite_type = 3";

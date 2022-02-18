@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{FacetModel, PostModel};
-use Validation, Translate, UserData, Breadcrumbs;
+use Validation, Translate, UserData;
 
 class Edit
 {
@@ -65,13 +65,14 @@ class Edit
         $item_url           = Request::getPost('url');
         $item_title_url     = Request::getPost('title');
         $item_content_url   = Request::getPost('content');
-        $item_title_soft    = Request::getPost('item_title_soft');
-        $item_content_soft  = Request::getPost('item_content_soft');
-        $item_published     = Request::getPostInt('item_published');
-        $item_status_url    = Request::getPostInt('item_status_url');
-        $item_is_soft       = Request::getPostInt('item_is_soft');
-        $item_is_github     = Request::getPostInt('item_is_github');
-        $item_github_url    = Request::getPost('item_github_url');
+        $item_published     = Request::getPostInt('published');
+        $item_status_url    = Request::getPostInt('statusl');
+        // soft
+        $item_is_soft       = Request::getPostInt('soft');
+        $item_title_soft    = Request::getPost('title_soft');
+        $item_content_soft  = Request::getPost('content_soft');
+        $item_is_github     = Request::getPostInt('github');
+        $item_github_url    = Request::getPost('github_url');
 
         Validation::Length($item_title_url, Translate::get('title'), '14', '250', $redirect);
         Validation::Length($item_content_url, Translate::get('description'), '24', '1500', $redirect);

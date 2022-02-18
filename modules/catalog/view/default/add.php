@@ -1,9 +1,9 @@
-<?php 
+<?php
 echo includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
 $breadcrumb = (new Breadcrumbs())->base('/', Translate::get('home'));
 $breadcrumb->addCrumb(Translate::get('site.add'), 'red');
 $form = new Forms();
-$form->html_form($user['trust_level'], Config::get('form/site.add'));
+$form->html_form($user['trust_level'], Config::get('form/catalog.site'));
 ?>
 
 <main class="col-span-12 mb-col-12">

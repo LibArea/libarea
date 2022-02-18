@@ -33,9 +33,9 @@
               <span class="mr5 ml5"> &#183; </span>
               <?= $report['date']; ?>
             </div>
-            <div class="mt5">
+            <p>
               <a href="<?= $report['report_url']; ?>"><?= $report['report_url']; ?></a>
-            </div>
+            </p>
           </td>
           <td class="center<?php if ($report['report_status'] == 0) { ?> bg-red-200<?php } ?>">
             <span class="report-status" data-id="<?= $report['report_id']; ?>">

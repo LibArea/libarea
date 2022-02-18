@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\FacetModel;
-use Translate, UserData, Breadcrumbs;
+use Translate, UserData;
 
 class Add
 {

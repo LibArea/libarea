@@ -13,7 +13,7 @@
       <th>N</th>
       <th><?= Translate::get('information'); ?></th>
       <th>E-mail</th>
-      <th><?= Translate::get('sign up'); ?></th>
+      <th><?= Translate::get('sign.up'); ?></th>
       <th>
         <?php if ($data['option'] == 'logs') { ?>
           <?= Translate::get('last'); ?>

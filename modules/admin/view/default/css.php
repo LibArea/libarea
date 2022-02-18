@@ -6,8 +6,7 @@
     'menus' => [],
   ]
 ); ?>
-
-<div class="box bg-white br-box-gray">
+<div class="box-white">
   <h4><?= Translate::get('topics'); ?>:</h4>
   <a href="#" class="tags">.tags</a>
   <a href="#" class="tags-xs">.tags-xs</a>

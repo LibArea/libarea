@@ -35,27 +35,25 @@
         <div class="max-w780">
           <?= $item['item_content_url']; ?>
         </div>
-        <div class="br-bottom mb15 mt5 pb10 text-sm hidden gray">
-          <span class="inline mr5">
+        <div class="br-bottom mb15 pb10 text-sm hidden gray">
+          <span class="inline">
             <?= votes($user['id'], $item, 'item', 'ps', 'mr5'); ?>
           </span>
           <a class="green-600" rel="nofollow noreferrer" href="<?= $item['item_url']; ?>">
             <span class="green-600"><?= $item['item_url']; ?></span>
-          </a> |
-          id<?= $item['item_id']; ?>
-          <span class="mr5 ml5"> &#183; </span>
-          <?= $item['item_url_domain']; ?>
-          <span class="mr5 ml5"> &#183; </span>
+          </a> &#183; 
+           id<?= $item['item_id']; ?> &#183;
+          <?= $item['item_url_domain']; ?> &#183;
           <?php if ($item['item_is_deleted'] == 0) { ?>
             active
           <?php } else { ?>
             <span class="red-500">Ban</span>
           <?php } ?>
-          <span class="mr5 ml5"> &#183; </span>
+          &#183;
           <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
             <?= Translate::get('edit'); ?>
           </a>
-          <span class="right mr5">
+          <span class="right">
             <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons'); ?>
           </span>
           <?php if ($item['item_published'] == 0) { ?>

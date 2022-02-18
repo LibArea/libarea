@@ -64,7 +64,7 @@ class Home
             ]
         );
     }
-    
+
     // Bookmarks by sites
     // Закладки по сайтам
     public function bookmarks($sheet, $type)

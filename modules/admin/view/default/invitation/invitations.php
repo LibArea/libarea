@@ -10,7 +10,7 @@
 <div class="box-white">
   <?php if (!empty($data['invitations'])) { ?>
     <?php foreach ($data['invitations'] as $key => $inv) { ?>
-      <div class="content-telo mt5">
+      <div>
         <a href="<?= getUrlByName('profile', ['login' => $inv['uid']['login']]); ?>">
           <?= $inv['uid']['login']; ?>
         </a>
@@ -30,8 +30,6 @@
               <?= $inv['invitation_email']; ?> &nbsp; <?= lang_date($inv['add_time']); ?>
             </span>
           <?php } ?>
-
-
           </span>
       </div>
     <?php } ?>

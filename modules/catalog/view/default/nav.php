@@ -25,5 +25,5 @@ if ($category) { ?>
         TOP
       </a>
     </div>
-  </div>  
+  </div>
 <?php } ?>

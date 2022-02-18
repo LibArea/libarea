@@ -10,19 +10,21 @@ class Sass
 
         $compiler->setOutputStyle(ScssPhp\ScssPhp\OutputStyle::COMPRESSED);
 
-        $putch = TEMPLATES . DIRECTORY_SEPARATOR . Config::get('general.template') . '/css/scss/';
+        foreach (Config::get('modules.scss') as $arr) {
+            $putch_module = HLEB_GLOBAL_DIRECTORY . '/modules/' . $arr . '/view/default/css/';
+            $putch_base = TEMPLATES . DIRECTORY_SEPARATOR . Config::get('general.template') . '/css/scss/';
 
-        $compiler->setImportPaths($putch);
-
-        self::build($compiler, $putch);
+            $putch = ($arr == 'style') ? $putch_base :  $putch_module;
+            self::build($compiler, $putch, $arr);
+        }
     }
 
-    public static function build($compiler, $putch)
+    public static function build($compiler, $putch, $arr)
     {
-        $scssIn = file_get_contents($putch . 'build.scss');
+        $compiler->setImportPaths($putch);
+        $file = $compiler->compileString(file_get_contents($putch . 'build.scss'))->getCss();
+        file_put_contents(HLEB_GLOBAL_DIRECTORY . '/public/assets/css/' . $arr . '.css', $file);
 
-        $file = $compiler->compileString($scssIn)->getCss();
-
-        file_put_contents(HLEB_GLOBAL_DIRECTORY . '/public/assets/css/style.css', $file);
+        return true;
     }
 }

@@ -27,7 +27,7 @@ class Catalog
 
         $os = ['cat', 'github', 'wap'];
         if (!in_array($screening = \Request::get('cat'), $os)) {
-           pageError404([]);
+            pageError404([]);
         }
 
         $category  = FacetModel::get(\Request::get('slug'), 'slug', $this->user['trust_level']);
@@ -35,8 +35,8 @@ class Catalog
 
         // We will get children
         $childrens =  FacetModel::getChildrens($category['facet_id'], $screening);
-        
-        $items      = WebModel::feedItem($page, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening );
+
+        $items      = WebModel::feedItem($page, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening);
         $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'], $screening);
 
         $m = [
@@ -50,6 +50,7 @@ class Catalog
         $desc  = sprintf(Translate::get($sheet . '.cat.desc'), $category['facet_title'], $category['facet_description']);
 
         $parent = FacetModel::breadcrumb($category['facet_id']);
+
         return view(
             '/view/default/sites',
             [
@@ -66,26 +67,27 @@ class Catalog
                     'category'      => $category,
                     'childrens'     => $childrens,
                     'breadcrumb'    => self::breadcrumb($parent, $category, $screening),
-                 // 'low_topics'    => FacetModel::getLowLevelList($category['facet_id']),
+                    // 'low_topics'    => FacetModel::getLowLevelList($category['facet_id']),
                     'low_matching'  => FacetModel::getLowMatching($category['facet_id']),
                 ]
             ]
         );
     }
-    
+
     // Bread crumbs
     public static function breadcrumb($parent, $category, $screening)
     {
         $breadcrumb = (new Breadcrumbs())->base(getUrlByName('web'), Translate::get('websites'));
-        if ($parent_two = FacetModel::breadcrumb($parent['facet_id'])) {
-             $breadcrumb->addCrumb($parent_two['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent_two['facet_slug']) 
+        $facet_id = $parent['facet_id'] ?? 0;
+        if ($parent_two = FacetModel::breadcrumb($facet_id)) {
+            $breadcrumb->addCrumb($parent_two['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent_two['facet_slug'])
                 ->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug']);
-        } elseif($parent) {
-             $breadcrumb->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug']);
+        } elseif ($parent) {
+            $breadcrumb->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug']);
         }
-        
+
         $breadcrumb->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']);
-       
+
         return $breadcrumb->render('breadcrumbs');
     }
 

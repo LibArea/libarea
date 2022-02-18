@@ -25,7 +25,7 @@
           <?= $item['title']; ?>
         </a>
         <?= html_category($item['facet_list'], 'category', 'cat', 'mr15 tags'); ?>
-        <p class="mt5 mb5"><?= $item['content']; ?></p>
+        <p><?= $item['content']; ?></p>
         <div class="text-sm">
           <a class="green-600" href="<?= $item['item_url']; ?>">
             <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>

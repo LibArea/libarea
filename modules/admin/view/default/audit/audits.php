@@ -61,7 +61,7 @@
 
             <?php if (!empty($audit['post'])) { ?>
               <?php if ($audit['post']['post_slug']) { ?>
-                <a class="block mt5" href="<?= getUrlByName('post', ['id' => $audit['post']['post_id'], 'slug' => $audit['post']['post_slug']]); ?>">
+                <a class="block" href="<?= getUrlByName('post', ['id' => $audit['post']['post_id'], 'slug' => $audit['post']['post_slug']]); ?>">
                   <?= $audit['post']['post_title']; ?>
                 </a>
               <?php } ?>

@@ -3,7 +3,7 @@
 namespace Modules\Catalog\App;
 
 use Modules\Catalog\App\Models\WebModel;
-use Translate, Domain;
+use Domain;
 
 class Сhecks
 {
@@ -18,19 +18,19 @@ class Сhecks
     public static function length($content, $min, $max)
     {
         if (getStrlen($content) < $min || getStrlen($content) > $max) {
-           return false;
-        } 
-        
+            return false;
+        }
+
         return true;
     }
 
     public static function getDomain($url)
     {
         $basic_host = self::domain($url);
- 
+
         return WebModel::getItemOne($basic_host, 1);
     }
-    
+
     public static function domain($url)
     {
         $parse      = parse_url($url);
@@ -38,5 +38,4 @@ class Сhecks
 
         return $domain->getRegisterable();
     }
-
 }
