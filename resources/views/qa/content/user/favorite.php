@@ -87,4 +87,8 @@
     </div>
   <?php } ?>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-favorite')]); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white bg-violet-50 text-sm">
+    <?= Translate::get('info-favorite'); ?>
+  </div>
+</aside>

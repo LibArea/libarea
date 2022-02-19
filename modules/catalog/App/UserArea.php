@@ -3,10 +3,10 @@
 namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Catalog\App\Models\WebModel;
+use Modules\Catalog\App\Models\UserAreaModel;
 use Content, Translate, UserData;
 
-class Home
+class UserArea
 {
     private $user;
 
@@ -22,14 +22,8 @@ class Home
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 10;
-        $pagesCount = 1;
-        if ($sheet == 'web.deleted' || $sheet == 'web.audit') {
-            $limit = $this->limit;
-            $pagesCount = WebModel::getItemsAllCount($sheet);
-        }
-
-        $items  = WebModel::getItemsAll($page, $limit, $this->user, $sheet);
+        $pagesCount = UserAreaModel::getUserSitesCount($this->user);
+        $items  = UserAreaModel::getUserSites($page, $this->limit, $this->user);
 
         $result = [];
         foreach ($items as $ind => $row) {
@@ -48,9 +42,9 @@ class Home
         ];
 
         return view(
-            '/view/default/home',
+            '/view/default/user/user-sites',
             [
-                'meta'  => meta($m, Translate::get($sheet . '.home.title'), Translate::get($sheet . '.home.desc')),
+                'meta'  => meta($m, Translate::get('my.site'), Translate::get('my.site')),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'     => 'cat',
@@ -60,6 +54,34 @@ class Home
                     'items'         => $result,
                     'type'          => $type,
                     'sheet'         => $sheet,
+                ]
+            ]
+        );
+    }
+
+    // Bookmarks by sites
+    // Закладки по сайтам
+    public function bookmarks($sheet, $type)
+    {
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
+
+        $items      = UserAreaModel::bookmarks($page, $this->limit, $this->user['id']);
+        $pagesCount = UserAreaModel::bookmarksCount($this->user['id']);
+
+        return view(
+            '/view/default/user/bookmarks',
+            [
+                'meta'  => meta([], Translate::get('favorites'), Translate::get('favorites')),
+                'user' => $this->user,
+                'data'  => [
+                    'screening'     => 'cat',
+                    'sheet'         => $sheet,
+                    'type'          => $type,
+                    'count'         => $pagesCount,
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $page,
+                    'items'         => $items,
                 ]
             ]
         );

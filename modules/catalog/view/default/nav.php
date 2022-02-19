@@ -13,7 +13,6 @@ if ($category) { ?>
       </a>
     </span>
   </p>
-
 <?php } else { ?>
   <div class="flex justify-between items-center mb15">
     <h2 class="lfet inline"><?= Translate::get($data['sheet'] . '.view'); ?></h2>

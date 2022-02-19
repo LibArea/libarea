@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="box-flex p15">
+  <div class="box-flex-white bg-violet-50">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
       <?= sumbit(Translate::get('i read')); ?>
@@ -92,4 +92,8 @@
   <?php } ?>
   </div>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-notifications')]); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white bg-violet-50 text-sm">
+    <?= Translate::get('info-notifications'); ?>
+  </div>
+</aside>

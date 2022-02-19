@@ -84,6 +84,8 @@
     </form>
   </div>
 </main>
-<aside class="box bg-violet-50 text-sm col-span-3 mb-none">
-  <?=  Translate::get('info-setting'); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white bg-violet-50 text-sm">
+    <?= Translate::get('info-setting'); ?>
+  </div>
 </aside>

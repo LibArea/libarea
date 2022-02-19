@@ -72,7 +72,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/@{login}/delete/cover')->controller('User\SettingController@coverRemove')->where(['login' => '[A-Za-z0-9]+'])->name('delete.cover'); 
     Route::get('/@{login}/messages')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
 
-    Route::get('/web/bookmarks')->module('catalog', 'App\Home@bookmarks', ['web.bookmarks', 'web'])->name('web.bookmarks');
+    Route::get('/web/bookmarks')->module('catalog', 'App\UserArea@bookmarks', ['web.bookmarks', 'web'])->name('web.bookmarks');
+    Route::get('/web/my')->module('catalog', 'App\UserArea', ['web.user.sites', 'sites'])->name('web.user.sites');
 
     Route::get('/setting')->controller('User\SettingController@settingForm')->name('setting'); 
     Route::get('/setting/avatar')->controller('User\SettingController@avatarForm')->name('setting.avatar');

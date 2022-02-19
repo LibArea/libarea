@@ -106,7 +106,7 @@
     </div>
   <?php } ?>
 
-  <div class="sticky top-sm">
+  <div class="sticky top0">
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="box-white bg-violet-50">
         <ul class="list-none">

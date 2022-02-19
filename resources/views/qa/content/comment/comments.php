@@ -37,4 +37,8 @@
     <?= no_content(Translate::get('no.comments'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('comments-desc')]); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white bg-violet-50 text-sm">
+    <?= Translate::get('comments-desc'); ?>
+  </div>
+</aside>

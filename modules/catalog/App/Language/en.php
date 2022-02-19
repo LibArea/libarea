@@ -46,7 +46,11 @@ $data = [
 
     'site.add'              => 'Add site',
     'site.edit'             => 'Edit site',
-    'my,site'               => 'My Sites',
+    'web.user.sites.view'   => 'My Sites',
+    'no.user.sites'         => 'Încă nu există site-uri ',
+    'no.bookmarks.sites'    => 'Încă nu există marcaje',
+    'user.sites.info'       => 'Lista site-urilor adăugate de mine',
+    'moderation'            => 'Moderation',
 ];
 
 return $data;

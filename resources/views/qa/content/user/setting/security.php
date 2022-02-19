@@ -18,6 +18,8 @@ $form->html_form($user['trust_level'], Config::get('form/user-security'));
     </form>
   </div>
 </main>
-<aside class="box bg-violet-50 text-sm col-span-3 mb-none">
-  <?=  Translate::get('info-security'); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white bg-violet-50 text-sm">
+    <?= Translate::get('info-security'); ?>
+  </div>
 </aside>

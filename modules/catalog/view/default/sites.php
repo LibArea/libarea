@@ -9,7 +9,7 @@
       <a class="text-sm ml5" href="<?= getUrlByName('category.edit', ['id' => $data['category']['facet_id']]); ?>">
         <sup><i class="bi bi-pencil gray"></i></sup>
       </a>
-      <a class="text-sm ml15" href="<?= getUrlByName('category.structure'); ?>">
+      <a class="text-sm ml15" href="<?= getUrlByName('admin.category.structure'); ?>">
         <sup class="gray-400"><i class="bi bi-columns-gap mr5"></i></sup>
       </a>
       <small class="text-sm gray-400"><sup><?= $data['category']['facet_type']; ?></sup></small>
@@ -65,6 +65,19 @@
   </main>
   <aside class="col-span-3 mb-col-12 relative mb-none">
     <div class="box-yellow mt15 text-sm"><?= $data['category']['facet_info']; ?></div>
+    <?php if (UserData::checkActiveUser()) { ?>
+      <div class="box-white text-sm bg-violet-50 mt15">
+        <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
+        <ul class="nav-catalog">
+          <?= tabs_nav(
+            'menu',
+            $data['sheet'],
+            $user,
+            $pages = Config::get('menu.catalog')
+          ); ?>
+        </ul>
+      </div>
+    <?php } ?>
   </aside>
 </div>
 <?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

@@ -40,7 +40,7 @@
   </main>
   <aside>
     <div class="box-yellow text-sm max-w300"><?= Translate::get('directory.info'); ?></div>
-    <?php if (UserData::checkAdmin()) { ?>
+    <?php if (UserData::checkActiveUser()) { ?>
       <div class="box-white text-sm bg-violet-50 mt15">
         <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
         <ul class="nav-catalog">

@@ -58,4 +58,8 @@
     </div>
 <?php } ?>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('personal-messages-site')]); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white text-sm sticky top-sm">
+    <?=  Translate::get('personal-messages-site'); ?>
+  </div>
+</aside>

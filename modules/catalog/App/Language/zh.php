@@ -46,7 +46,11 @@ $data = [
     
     'site.add'              => '添加站點',
     'site.edit'             => '編輯網站',
-    'my,site'               => '我的網站',
+    'web.user.sites.view'   => '我的網站',
+    'no.user.sites'         => '還沒有網站',
+    'no.bookmarks.sites'    => '還沒有書籤',
+    'user.sites.info'       => '我添加的網站列表',
+    'moderation'            => '適度',
 ];
 
 return $data;

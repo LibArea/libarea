@@ -55,7 +55,7 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
                   </ul>
                 </div>
               <?php } ?>
-              <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>bg-gray-100 p5 gray-600 <?php } ?>mr30 green-600" href="<?= getUrlByName('web.bookmarks'); ?>">
+              <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>sky-500 <?php } ?>mr30 green-600" href="<?= getUrlByName('web.bookmarks'); ?>">
                 <?= Translate::get('favorites'); ?>
               </a>
               <div class="mr15 m relative">

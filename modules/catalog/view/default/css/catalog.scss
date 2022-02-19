@@ -24,6 +24,15 @@ aside { grid-column: span 3 / span 3; }
   background-color: rgb(247, 247, 235);
 } 
 
+.box-yellow-small {
+  border-radius: 3px;
+  padding: 0.15rem 0.35rem;
+  font-size: 0.775rem;
+  margin-right: 5px;
+  color: var(--gray-400);
+  background-color: rgb(247, 247, 235);
+} 
+
 .item-cat { padding: 0 0 10px 30px; }
 
 .item-search-right {

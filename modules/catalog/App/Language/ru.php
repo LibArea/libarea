@@ -46,7 +46,11 @@ $data = [
 
     'site.add'              => 'Добавить сайт',
     'site.edit'             => 'Изменить сайт',
-    'my,site'               => 'Мои сайты',
+    'web.user.sites.view'   => 'Мои сайты',
+    'no.user.sites'         => 'Cайтов пока нет',
+    'no.bookmarks.sites'    => 'Закладок пока нет',
+    'user.sites.info'       => 'Список сайтов добавленных мной',
+    'moderation'            => 'Модерация',
 ];
 
 return $data;

@@ -29,4 +29,8 @@
     <?= Tpl::import('/content/post/post', ['data' => $data]); ?>
   </div>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-preferences')]); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white bg-violet-50 text-sm">
+    <?= Translate::get('info-preferences'); ?>
+  </div>
+</aside>

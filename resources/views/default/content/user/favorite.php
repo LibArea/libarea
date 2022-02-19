@@ -100,4 +100,8 @@
     </div>
   <?php } ?>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-favorite')]); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white text-sm sticky top-sm">
+    <?=  Translate::get('info-favorite'); ?>
+  </div>
+</aside>

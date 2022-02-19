@@ -69,4 +69,8 @@
     <?php } ?>
   </div>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('invite.features')]); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white text-sm sticky top-sm">
+    <?=  Translate::get('invite.features'); ?>
+  </div>
+</aside>
