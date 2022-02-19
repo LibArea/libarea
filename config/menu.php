@@ -54,13 +54,13 @@ return [
             'icon'  => 'bi bi-bookmark',
             'id'    => 'favorites',
         ], [
-            'tl'    => 9,
+            'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('admin.users'),
             'title' => Translate::get('admin'),
             'icon'  => 'bi bi-person-x',
             'id'    => 'admin',
         ], [
-            'tl'    => 9,
+            'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('admin.all.structure'),
             'title' => Translate::get('structure'),
             'icon'  => 'bi bi-bezier2',
@@ -112,7 +112,7 @@ return [
         ], [
             'hr'    => 'hr',
         ], [
-            'tl'    => 9,
+            'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('admin'),
             'title' => Translate::get('admin'),
             'icon'  => 'bi bi-shield-exclamation',
@@ -186,31 +186,31 @@ return [
     // Меню в каталоге
     'catalog' => [
         [
-            'tl'    => 10,
+            'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('site.add'),
             'title' => sprintf(Translate::get('add.option'), mb_strtolower(Translate::get('website'))),
             'icon'  => 'bi bi-plus-lg',
             'id'    => 'official',
         ], [
-            'tl'    => 10,
+            'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('category.add'),
             'title' => Translate::get('categories.s'),
             'icon'  => 'bi bi-plus-lg',
             'id'    => 'official',
         ], [
-            'tl'    => 10,
+            'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('web.deleted'),
             'title' => Translate::get('deleted'),
             'icon'  => 'bi bi-circle',
             'id'    => 'web.deleted',
         ], [
-            'tl'    => 10,
+            'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('web.audits'),
             'title' => Translate::get('audits'),
             'icon'  => 'bi bi-circle',
             'id'    => 'web.audits',
         ], [
-            'tl'    => 10,
+            'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('admin.category.structure'),
             'title' => Translate::get('structure'),
             'icon'  => 'bi bi-columns-gap',

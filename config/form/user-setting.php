@@ -1,7 +1,7 @@
 <?php
 /*
- * Поля профиля (Контакты)
  * Profile Fields (Contacts)
+ * Поля профиля (Контакты)
  */
 
 return [

@@ -1,3 +1,7 @@
+<?php
+$form = new Forms();
+$form->html_form($user['trust_level'], Config::get('form/user-security'));
+?>
 <div class="col-span-2 mb-none">
   <nav class="sticky top-sm">
     <ul class="list-none text-sm">
@@ -16,39 +20,15 @@
   <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box-white">
-    <form action="<?= getUrlByName('setting.security.edit'); ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= getUrlByName('setting.security.edit'); ?>" method="post">
       <?php csrf_field(); ?>
 
-      <?= Tpl::import(
-        '/_block/form/field-input',
-        [
-          'data' => [
-            [
-              'title' => Translate::get('old'),
-              'type' => 'text',
-              'name' => 'password',
-            ],
-            [
-              'title' => Translate::get('new'),
-              'type' => 'password',
-              'name' => 'password2',
-              'min' => 6,
-              'max' => 32,
-              'help' => '6 - 32 ' . Translate::get('characters')
-            ],
-            [
-              'title' => Translate::get('repeat'),
-              'type' => 'password',
-              'name' => 'password3',
-            ],
-          ]
-        ]
-      ); ?>
+      <?= $form->build_form(); ?>
 
-      <p>
+      <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
         <?= sumbit(Translate::get('edit')); ?>
-      </p>
+      </fieldset>
     </form>
   </div>
 </main>

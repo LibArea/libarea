@@ -26,27 +26,17 @@
       <input type="hidden" value="0" name="nav_parent">
     <?php } ?>
 
-    <?= Tpl::import('/_block/form/field-input', [
-      'data' => [
-        [
-          'title' => Translate::get('name'),
-          'type' => 'text',
-          'name' => 'nav_name',
-          'min' => 3,
-          'max' => 40,
-          'help' => '3 - 40 (english) ' . Translate::get('characters'),
-          'red' => 'red'
-        ], [
-          'title' => Translate::get('URL'),
-          'type' => 'text',
-          'name' => 'nav_url_routes',
-          'min' => 3,
-          'max' => 60,
-          'help' => '3 - 60 (english) ' . Translate::get('characters'),
-          'red' => 'red'
-        ],
-      ]
-    ]); ?>
+    <fieldset>
+      <label for="nav_name"><?= Translate::get('name'); ?></label>
+      <input type="text" required="" minlength="3" maxlength="40" name="nav_name">
+      <div class="text-sm gray-400">3 - 40 (english) <?= Translate::get('characters'); ?></div>
+    </fieldset>
+    
+    <fieldset>
+      <label for="nav_url_routes"><?= Translate::get('URL'); ?></label>
+      <input type="text" required="" minlength="3" maxlength="60" name="nav_url_routes">
+      <div class="text-sm gray-400">3 - 60 (english) <?= Translate::get('characters'); ?></div>
+    </fieldset>
 
     <?= sumbit(Translate::get('add')); ?>
   </form>

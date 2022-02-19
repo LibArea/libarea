@@ -4,16 +4,10 @@
   <form class="form max-w300" action="<?= getUrlByName('recover.send'); ?>" method="post">
     <?php csrf_field(); ?>
 
-    <?= Tpl::import('/_block/form/field-input', [
-      'data' => [
-        [
-          'title' => Translate::get('E-mail'),
-          'type' => 'email',
-          'name' => 'email',
-          'value' => ''
-        ],
-      ]
-    ]); ?>
+    <fieldset>
+      <label for="post_title"><?= Translate::get('E-mail'); ?></label>
+      <input type="email" required="" name="email">
+    </fieldset>
 
     <?= Tpl::import('/_block/captcha'); ?>
 

@@ -19,23 +19,11 @@
         <span class="mr5 ml5"><?= $data['user']['email']; ?></span>
       </fieldset>
 
-      <?= Tpl::import(
-        '/_block/form/field-input',
-        [
-          'user'  => $user,
-          'data' => [
-            [
-              'title'   => Translate::get('name'),
-              'type'    => 'text',
-              'name'    => 'name',
-              'value'   => $data['user']['name'],
-              'min'     => 0,
-              'max'     => 11,
-              'help'    => '0 - 11 ' . Translate::get('characters'),
-            ],
-          ]
-        ]
-      ); ?>
+      <fieldset>
+        <label for="name"><?= Translate::get('name'); ?></label>
+        <input maxlength="11" value="<?= $data['user']['name']; ?>" type="text" name="name">
+        <div class="text-sm gray-400">0 - 11 <?= Translate::get('characters'); ?></div>  
+      </fieldset>
 
       <?php Tpl::import('/_block/editor/textarea', [
         'title'     => Translate::get('about me'),
@@ -79,10 +67,10 @@
       </fieldset>
 
       <h3 class="mt15 mb15"><?= Translate::get('contacts'); ?></h3>
-      <?php foreach (Config::get('fields-profile') as $block) { ?>
+      <?php foreach (Config::get('form/user-setting') as $block) { ?>
         <fieldset>
-          <label class="block mb5" for="post_title"><?= $block['lang']; ?></label>
-          <input class="w-100 h30 pl5" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
+          <label for="post_title"><?= $block['lang']; ?></label>
+          <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>
             <div class="text-sm gray-400"><?= $block['help']; ?></div>
           <?php } ?>

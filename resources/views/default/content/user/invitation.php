@@ -19,11 +19,12 @@
     <?php if ($user['trust_level'] > 1) { ?>
       <form method="post" action="<?= getUrlByName('invit.create'); ?>">
         <?php csrf_field(); ?>
-        <div class="mb20">
-          <input class="w-100 h30" type="email" name="email">
+        
+        <fieldset>
+          <input type="email" name="email">
           <div class="right pt5"><?= sumbit(Translate::get('send')); ?></div>
           <div class="text-sm pt5 gray-400"><?= Translate::get('enter'); ?> E-mail</div>
-        </div>
+        </fieldset>
         <?= Translate::get('invitations left'); ?> <?= 5 - $data['count_invites']; ?>
       </form>
 

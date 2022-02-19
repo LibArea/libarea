@@ -1,6 +1,6 @@
 <?php $post   = $data['post']; ?>
-<main class="col-span-12 mb-col-12 edit-post">
-  <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
+<main class="col-span-12">
+  <div class="box-white">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
     <span class="red-500">
@@ -10,32 +10,17 @@
     <form action="<?= getUrlByName('page.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
-      <?= Tpl::import(
-        '/_block/form/field-input', [
-          'data' => [
-            [
-              'title' => Translate::get('heading'),
-              'type'  => 'text',
-              'name'  => 'post_title',
-              'value' => $post['post_title'],
-              'min'   => 6,
-              'max'   => 250,
-              'help'  => '6 - 250 ' . Translate::get('characters'),
-              'red'   => 'red'
-            ], [
-              'title' => Translate::get('Slug (URL)'),
-              'type'  => 'text',
-              'name'  => 'post_slug',
-              'value' => $post['post_slug'],
-              'min'   => 3,
-              'max'   => 32,
-              'help'  => '3 - 32 ' . Translate::get('characters') . ' (a-z-0-9)',
-              'red'   => 'red'
-            ],
-          ]
-        ]
-
-      ); ?>
+    <fieldset>
+      <label for="post_title"><?= Translate::get('heading'); ?></label>
+      <input minlength="6" maxlength="250" value="<?= $post['post_title']; ?>" type="text" required="" name="post_title">
+      <div class="text-sm gray-400">6 - 250 <?= Translate::get('characters'); ?></div>  
+    </fieldset>
+    
+    <fieldset>
+      <label for="post_slug"><?= Translate::get('Slug (URL)'); ?></label>
+      <input minlength="3" maxlength="32" value="<?= $post['post_slug']; ?>" type="text" required="" name="post_slug">
+      <div class="text-sm gray-400">3 - 32 <?= Translate::get('characters'); ?></div>  
+    </fieldset>
 
       <?= Tpl::import('/_block/form/select/blog', [
         'data'        => $data,
