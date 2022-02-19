@@ -186,31 +186,31 @@ return [
     // Меню в каталоге
     'catalog' => [
         [
-            'tl'    => 9,
+            'tl'    => 10,
             'url'   => getUrlByName('site.add'),
             'title' => sprintf(Translate::get('add.option'), mb_strtolower(Translate::get('website'))),
             'icon'  => 'bi bi-plus-lg',
             'id'    => 'official',
         ], [
-            'tl'    => 9,
-            'url'   => getUrlByName('facet.add'),
+            'tl'    => 10,
+            'url'   => getUrlByName('category.add'),
             'title' => Translate::get('categories.s'),
             'icon'  => 'bi bi-plus-lg',
             'id'    => 'official',
         ], [
-            'tl'    => 9,
+            'tl'    => 10,
             'url'   => getUrlByName('web.deleted'),
             'title' => Translate::get('deleted'),
             'icon'  => 'bi bi-circle',
             'id'    => 'web.deleted',
         ], [
-            'tl'    => 9,
+            'tl'    => 10,
             'url'   => getUrlByName('web.audits'),
             'title' => Translate::get('audits'),
             'icon'  => 'bi bi-circle',
             'id'    => 'web.audits',
         ], [
-            'tl'    => 9,
+            'tl'    => 10,
             'url'   => getUrlByName('admin.category.structure'),
             'title' => Translate::get('structure'),
             'icon'  => 'bi bi-columns-gap',

@@ -10,7 +10,6 @@
     </ul>
   </nav>
 </div>
-
 <main class="col-span-10 mb-col-12">
   <div class="box-white center">
     <h1 class="text-xl"><?= Translate::get($data['sheet']); ?></h1>
@@ -55,13 +54,13 @@
       <p class="m0 text-xl">
         <?php if ($data['type'] == 'blog') { ?>
           <?php if ($data['limit']) { ?>
-            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('facet.add'); ?>">
+            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
               <i class="bi bi-plus-lg middle"></i>
             </a>
           <?php } ?>
         <?php } else { ?>
           <?php if (UserData::checkAdmin()) { ?>
-            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('facet.add'); ?>">
+            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
               <i class="bi bi-plus-lg middle"></i>
             </a>
           <?php } ?>

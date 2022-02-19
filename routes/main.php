@@ -46,10 +46,12 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
             Route::endProtect();
     Route::endType();
 
-    // The form of adding and changing: post | topic |  web
+    // The form of adding and changing: post | topic |  web | blog
     Route::get('/post/add')->controller('Post\AddPostController', ['post'])->name('post.add');
     Route::get('/page/add')->controller('Post\AddPostController', ['page'])->name('page.add');
-    Route::get('/facet/add')->controller('Facets\AddFacetController')->name('facet.add');
+    Route::get('/topic/add')->controller('Facets\AddFacetController', ['topic'])->name('topic.add');
+    Route::get('/blog/add')->controller('Facets\AddFacetController', ['blog'])->name('blog.add');
+    Route::get('/category/add')->controller('Facets\AddFacetController', ['category'])->name('category.add');
     Route::get('/web/add')->module('catalog', 'App\Add', ['add', 'sites'])->name('site.add');
     
     Route::get('/post/edit/{id}')->controller('Post\EditPostController')->where(['id' => '[0-9]+'])->name('post.edit');

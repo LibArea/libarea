@@ -3,7 +3,7 @@
 namespace Modules\Admin\App;
 
 use Modules\Admin\App\Models\FacetModel;
-use Translate, Tpl;
+use Translate;
 
 class TreeFacet
 {

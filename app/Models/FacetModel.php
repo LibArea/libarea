@@ -162,7 +162,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     // Проверим уникальность id
     public static function uniqueById($facet_id)
     {
-        $sql = "SELECT facet_id, facet_slug, facet_type, facet_user_id FROM facets WHERE facet_id = :id";
+        $sql = "SELECT facet_id, facet_slug, facet_type, facet_user_id, facet_is_deleted FROM facets WHERE facet_id = :id";
         
         return DB::run($sql, ['id' => $facet_id])->fetch();
     }

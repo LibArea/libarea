@@ -14,7 +14,7 @@ class Forms
 
 	// To substitute new values
 	private $meaning = [];
- 
+
 	// Does this form have a submit value?
 	private $has_submit = false;
 
@@ -165,6 +165,7 @@ class Forms
 			'wrap_style'       => '',
 			'before_html'      => '',
 			'after_html'       => '',
+			'help'             => '',
 			'request_populate' => true
 		];
 
@@ -401,10 +402,10 @@ class Forms
 					$wrap_after = '' . $wrap_after . '</' . $val['wrap_tag'] . '>';
 				}
 
-			/*	$wrap_after = $val['help'];
+				$wrap_after = $val['help'];
 				if (!empty($val['wrap_tag'])) {
 					$wrap_after = '<div class="text-sm gray-400">' . $wrap_after . '</div></' . $val['wrap_tag'] . '>';
-				} */
+				}
 
 				$output .= $wrap_before . $field . $wrap_after;
 			else :
@@ -435,14 +436,16 @@ class Forms
 		}
 
 		foreach ($params as $opt) {
-			if ($user_tl >= $opt['tl']) { 
-            
-                foreach ($this->meaning as $arr) {
-                    if($opt['name'] == $arr['name']) {
-                       $opt['arr'][$arr['type']] = $arr['var'];
-                    }
-                }    
-            
+
+            $tl = $opt['tl'] ?? 0;
+			if ($user_tl >= $tl) {
+
+				foreach ($this->meaning as $arr) {
+					if ($opt['name'] == $arr['name']) {
+						$opt['arr'][$arr['type']] = $arr['var'];
+					}
+				}
+
 				$result[] = $this->add_input($opt['title'], $opt['arr'], $opt['name']);
 			}
 		}
@@ -450,17 +453,16 @@ class Forms
 	}
 
 	// Add new values
-    function adding(array $insert_array)
-    {
-        return $this->meaning[] = $insert_array;
-    }
-    
+	function adding(array $insert_array)
+	{
+		return $this->meaning[] = $insert_array;
+	}
+
 	// End of form
 	function sumbit(string $text)
 	{
 		return '<button id="submit" type="submit" name="action" class="btn btn-primary" value="submit">' . $text . '</button>';
 	}
-
 
 	// Validates id and class attributes
 	// TODO: actually validate these things

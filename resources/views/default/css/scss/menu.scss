@@ -56,7 +56,7 @@ a.sky-500 > i { color: #0ea5e9; }
   color: var(--gray-400); 
 }
 
-.breadcrumbs li:last {
+.breadcrumbs li:last-child {
   font-weight: bold;
   color: #000;
 }

@@ -68,7 +68,7 @@ class Facets
     {
         $id = Request::getPostInt('id');
 
-        $topic = FacetModel::getFacet($id, 'id');
+        $topic = FacetModel::uniqueById($id);
         FacetModel::ban($id, $topic['facet_is_deleted']);
 
         return true;

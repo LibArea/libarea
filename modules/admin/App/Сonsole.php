@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\App\Models\СonsoleModel;
-use SendEmail, Translate, Sass;
+use SendEmail, Sass;
 
 class Сonsole
 {

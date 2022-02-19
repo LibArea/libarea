@@ -2,7 +2,6 @@
 
 namespace Modules\Admin\App;
 
-use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\App\Models\{UserModel, StatsModel};
 use App\Models\FacetModel;
 use Translate;

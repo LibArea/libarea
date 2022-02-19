@@ -16,11 +16,11 @@ class AddFacetController extends MainController
         $this->user  = UserData::get();
     }
 
-    // Add form topic
-    public function index()
+    // Add form topic | blog | category
+    public function index($type)
     {
         if ($this->user['trust_level'] != 10) {
-            //redirect('/');
+            redirect('/');
         }
 
         return Tpl::agRender(
@@ -28,15 +28,13 @@ class AddFacetController extends MainController
             [
                 'meta'  => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('topics'))),
                 'data'  => [
-                    // 'sheet'         => $sheet,
-                    'type'          => 'add',
-                    //  'count_facet'   => $limit,
+                    'type' => $type,
                 ]
             ]
         );
     }
 
-    // Add topic / blog
+    // Add topic | blog | category
     public function create()
     {
         $facet_type = Request::getPost('facet_type');
@@ -48,9 +46,8 @@ class AddFacetController extends MainController
         $facet_slug                 = Request::getPost('facet_slug');
         $facet_seo_title            = Request::getPost('facet_seo_title');
 
-        $redirect = getUrlByName('topic.add');
+        $redirect = ($facet_type == 'category') ? getUrlByName('web') : getUrlByName($facet_type . '.add');
         if ($facet_type == 'blog') {
-            $redirect = getUrlByName('blogs.my', ['login' => $this->user['login']]);
             if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
                 if (in_array($facet_slug, Config::get('stop-blog'))) {
                     addMsg('stop-blog', 'error');
@@ -66,7 +63,6 @@ class AddFacetController extends MainController
         Validation::Length($facet_slug, Translate::get('slug'), '3', '43', $redirect);
         Validation::Length($facet_seo_title, Translate::get('slug'), '4', '225', $redirect);
 
-        // ALTER TABLE `facets` ADD UNIQUE `unique_index`(`facet_slug`, `facet_type`);
         if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
             addMsg('url-already-exists', 'error');
             redirect($redirect);
@@ -79,23 +75,24 @@ class AddFacetController extends MainController
 
         $type = $facet_type ?? 'topic';
         $facet_slug = strtolower($facet_slug);
-        $data = [
-            'facet_title'               => $facet_title,
-            'facet_description'         => $facet_description,
-            'facet_short_description'   => $facet_short_description,
-            'facet_slug'                => $facet_slug,
-            'facet_img'                 => 'facet-default.png',
-            'facet_add_date'            => date("Y-m-d H:i:s"),
-            'facet_seo_title'           => $facet_seo_title,
-            'facet_user_id'             => $this->user['id'],
-            'facet_type'                => $type,
-        ];
-
-        $new_facet_id = FacetModel::add($data);
+        
+        $new_facet_id = FacetModel::add(
+            [  'facet_title'                => $facet_title,
+                'facet_description'         => $facet_description,
+                'facet_short_description'   => $facet_short_description,
+                'facet_slug'                => $facet_slug,
+                'facet_img'                 => 'facet-default.png',
+                'facet_add_date'            => date("Y-m-d H:i:s"),
+                'facet_seo_title'           => $facet_seo_title,
+                'facet_user_id'             => $this->user['id'],
+                'facet_type'                => $type,
+            ]
+        );
 
         SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'topic');
 
-        redirect(getUrlByName($type, ['slug' => $facet_slug]));
+        $redirect = $facet_type == 'category' ? getUrlByName('web') : '/' . $facet_type .'/'. $facet_slug;
+        redirect($redirect);
     }
 
     public function limitFacer($type, $action)
