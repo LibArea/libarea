@@ -18,4 +18,6 @@ $form->html_form($user['trust_level'], Config::get('form/user-security'));
     </form>
   </div>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-security')]); ?>
+<aside class="box bg-violet-50 text-sm col-span-3 mb-none">
+  <?=  Translate::get('info-security'); ?>
+</aside>

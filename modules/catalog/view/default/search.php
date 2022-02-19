@@ -2,22 +2,20 @@
 <div id="fetch" class="col-span-2 mb-none">
   <div id="find"></div>
 </div>
-<main class="ml20">
-  <div class="mb10">
-    <?php foreach ($data['tags'] as $key => $facet) { ?>
-      <?php if ($facet['facet_type'] == 'category') { ?>
-        <a class="box-flex" href="<?= getUrlByName('web.dir', ['slug' => $facet['facet_slug']]); ?>">
-          <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'img-base'); ?>
-          <?= $facet['facet_title']; ?>
-        </a>
-        <sup class="gray mr15">x<?= $facet['facet_count']; ?></sup>
-      <?php } ?>
+<main>
+  <?php foreach ($data['tags'] as $key => $facet) { ?>
+    <?php if ($facet['facet_type'] == 'category') { ?>
+    <a href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $facet['facet_slug']]); ?>">
+      <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'img-base'); ?>
+      <?= $facet['facet_title']; ?>
+      <sup class="gray-400 mr15">x<?= $facet['facet_count']; ?></sup>
+    </a>
     <?php } ?>
-  </div>
+  <?php } ?>
   <?php if ($data['result']) { ?>
-    <p class="mt0 text-xl">
+    <h3 class="mt20 mb20">
       <?= Translate::get('results.search'); ?> <?= $data['count']; ?>
-    </p>
+    </3>
 
     <?php foreach ($data['result'] as  $item) { ?>
       <div class="mb20 gray max-w780">
@@ -25,7 +23,7 @@
           <?= $item['title']; ?>
         </a>
         <?= html_category($item['facet_list'], 'category', 'cat', 'mr15 tags'); ?>
-        <p><?= $item['content']; ?></p>
+        <div><?= $item['content']; ?></div>
         <div class="text-sm">
           <a class="green-600" href="<?= $item['item_url']; ?>">
             <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>

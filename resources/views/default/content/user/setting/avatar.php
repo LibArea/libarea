@@ -70,4 +70,8 @@
     </form>
   </div>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-avatar')]); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white text-sm">
+    <?=  Translate::get('info-avatar'); ?>
+  </div>
+</aside>

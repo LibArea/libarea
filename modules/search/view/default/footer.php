@@ -5,6 +5,8 @@
 
 <a class="up_down_btn none" title="<?= Translate::get('up'); ?>">&uarr;</a>
 
+<script src="/assets/js/common.js"></script>
+
 </body>
 
 </html>

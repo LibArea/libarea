@@ -93,4 +93,8 @@
     </form>
   </div>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-setting')]); ?>
+<aside class="col-span-3 mb-none">
+  <div class="box-white text-sm">
+    <?=  Translate::get('info-setting'); ?>
+  </div>
+</aside>

@@ -15,7 +15,6 @@
       <?= $topic['facet_title']; ?>
       <sup class="gray-400 mr15">x<?= $topic['facet_count']; ?></sup>
     </a>
-
   <?php } ?>
 
   <?php if ($data['result']) { ?>

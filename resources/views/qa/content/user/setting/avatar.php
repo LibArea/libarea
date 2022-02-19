@@ -57,4 +57,6 @@
     </form>
   </div>
 </main>
-<?= Tpl::import('/_block/sidebar/lang', ['lang' => Translate::get('info-avatar')]); ?>
+<aside class="box bg-violet-50 text-sm col-span-3 mb-none">
+  <?=  Translate::get('info-avatar'); ?>
+</aside>
