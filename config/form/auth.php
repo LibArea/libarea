@@ -35,7 +35,7 @@ return [
       'arr'     => ['required' => true, 'type' => 'password', 'after_html' => '<span class="help">>= 8 ' . Translate::get('characters') . '</span>'],
       'name'    => 'password',
     ], [
-      'title'   => Translate::get('repeat the password'),
+      'title'   => Translate::get('repeat.password'),
       'arr'     => ['required' => true, 'type' => 'password'],
       'name'    => 'password_confirm',
     ],

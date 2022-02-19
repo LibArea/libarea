@@ -103,7 +103,7 @@
 
   <div class="box-white bg-violet-50">
     <h3 class="uppercase-box"><?= Translate::get('contacts'); ?></h3>
-    <?php foreach (Config::get('fields-profile') as $block) { ?>
+    <?php foreach (Config::get('form/user-setting') as $block) { ?>
       <?php if ($profile[$block['title']]) { ?>
         <div class="mt5">
           <?= $block['lang']; ?>:

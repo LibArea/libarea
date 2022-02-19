@@ -254,13 +254,13 @@ $data = [
     'zh-language'       => 'Chinois (ZH)',
     'md-language'       => 'Moldave (MD)',
 
-    'repeat the password'   => 'Repeat password',
-    'post.closed'           => 'Post closed',
+    'repeat.password'   => 'Repeat password',
+    'post.closed'       => 'Post closed',
     'forgot.password'   => 'Forgot your password',
-    'rules'                 => 'Site rules',
-    'privacy policy'        => 'Privacy Policy',
-    'restriction'           => 'Restrictions',
-    'no-invate-txt'         => 'Not a user yet? Registration is by invitation only to combat spam and increase accountability. If you know the <a href="/users">current user</a> of the site, ask him for an invitation.',
+    'rules'             => 'Site rules',
+    'privacy policy'    => 'Privacy Policy',
+    'restriction'       => 'Restrictions',
+    'no-invate-txt'     => 'Not a user yet? Registration is by invitation only to combat spam and increase accountability. If you know the <a href="/users">current user</a> of the site, ask him for an invitation.',
 
     /* Date and time + Events */
     'months'        => ['', 'January', 'February', 'Martha', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],

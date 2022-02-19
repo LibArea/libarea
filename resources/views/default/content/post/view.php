@@ -231,22 +231,20 @@
     <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['facets'] as $topic) { ?>
-        <div class="mb10">
-          <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'img-base'); ?>
+        <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'img-base'); ?>
 
-          <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
-            <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky-500 center mt5 mr5">
+        <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
+          <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky-500 center mt5 mr5">
               <i class="bi bi-plus"></i> <?= Translate::get('read'); ?>
-            </div>
-          <?php } ?>
-
-          <a title="<?= $topic['facet_title']; ?>" class="black inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-            <?= $topic['facet_title']; ?>
-          </a>
-
-          <div class="text-sm mt5 pr15 mb-pr0 gray-400">
-            <?= $topic['facet_short_description']; ?>
           </div>
+        <?php } ?>
+
+        <a title="<?= $topic['facet_title']; ?>" class="black inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+            <?= $topic['facet_title']; ?>
+        </a>
+
+        <div class="text-sm mt5 pr15 mb-pr0 gray-400">
+          <?= $topic['facet_short_description']; ?>
         </div>
       <?php } ?>
     </div>
