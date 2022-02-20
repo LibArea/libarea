@@ -1,15 +1,4 @@
-<div class="col-span-2 mb-none">
-  <nav class="sticky top-sm">
-    <ul class="list-none text-sm">
-      <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $user,
-        $pages = Config::get('menu.left'),
-      ); ?>
-    </ul>
-  </nav>
-</div>
+<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
 
 <?php $topic = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
@@ -59,7 +48,7 @@
       <div class="sticky top0 top-sm">
         <div class="box-white text-sm">
           <h3 class="uppercase-box"><?= Translate::get('writers'); ?></h3>
-          <ol class="list-none text-sm">
+          <ul>
           <?php foreach ($data['writers'] as $ind => $row) { ?>
             <li class="mb10">
               <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
@@ -68,7 +57,7 @@
               </a>
             </li>  
           <?php } ?>
-          </ol>
+          </ul>
         </div>
       </div>
     <?php } ?>

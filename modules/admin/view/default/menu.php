@@ -2,7 +2,7 @@
 <div class="col-span-2 mb-none">
   <nav class="sticky top-sm">
 
-    <ul class="metismenu list-none text-sm" id="menu">
+    <ul class="menu" id="menu">
       <?php foreach (Modules\Admin\App\Navigation::menu() as $cats) {
         $active = $data['type'] == $cats['name'] ? 'class="sky-500  "' : 'class="gray   block"';
       ?>
@@ -46,8 +46,8 @@
   <?php if ($data['type'] != 'admin') { ?>
     <div class="box-flex-white">
       <?= (new Breadcrumbs())
-            ->base(getUrlByName('admin'), Translate::get('admin'))
-            ->addCrumb(Translate::get($data['type']), $data['type'])->render('breadcrumbs'); ?>
+        ->base(getUrlByName('admin'), Translate::get('admin'))
+        ->addCrumb(Translate::get($data['type']), $data['type'])->render('breadcrumbs'); ?>
 
       <ul class="flex flex-row list-none m0 p0 center">
         <?php foreach ($menus as $menu) { ?>

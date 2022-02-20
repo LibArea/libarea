@@ -269,12 +269,10 @@ function tabs_nav($name, $item, $user, array $pages = [])
     if ($name == 'nav') {
         foreach ($pages as $key => $page) {
             $tl = $page['tl'] ?? 0;
-            if ($user['trust_level'] >= $tl) {
-                $classes    = 'mr5 gray-600';
-                $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
-                $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
-
-                $html .= '<li><a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
+            $trust_level = $user['trust_level'] ?? 0; 
+            if ($trust_level >= $tl) {
+                $isActive = $page['id'] == $item ? ' aria-current="page" class="active" ' : '';
+                $html .= '<li><a ' . $isActive . ' href="' . $page['url'] . '">
                             <i class="text-sm ' . $page['icon'] . '"></i>
                                 ' . $page['title'] . '</a></li>';
             }
@@ -286,10 +284,8 @@ function tabs_nav($name, $item, $user, array $pages = [])
                 if ($user['id'] > 0) $html .= '<li><hr class="w-90"></li>';
             } else {
                 if ($user['trust_level'] >= $tl) {
-                    $isActive   = $page['id'] == $item ? ' class="sky-500" ' : '';
-                    $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
-
-                    $html .= '<li><a ' . $isAria . $isActive . ' href="' . $page['url'] . '">
+                    $isActive = $page['id'] == $item ? ' aria-current="page" class="active" ' : '';
+                    $html .= '<li><a ' . $isActive . ' href="' . $page['url'] . '">
                                 <i class="' . $page['icon'] . '"></i>
                                     ' . $page['title'] . '</a></li>';
                 }

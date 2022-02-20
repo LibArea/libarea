@@ -252,9 +252,7 @@
 
   <?php if ($post['post_content_img']) { ?>
     <div class="box-white">
-      <a title="<?= $post['post_title']; ?>" href="<?= AG_PATH_POSTS_COVER . $post['post_content_img']; ?>" class="lightbox">
-        <img class="w-100 br-rd5" src="<?= AG_PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
-      </a>
+      <img class="preview w-100 br-rd5" src="<?= AG_PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php } ?>
   <div class="share-btn box-white text-2xl center">
@@ -290,19 +288,7 @@
 </aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.post-body.full .post img, .answ-telo p img').forEach((articleImg) => {
-      // Add lightbox elements in blog articles for Tobii.
-      const lightbox = document.createElement('a');
-      lightbox.href = articleImg.src;
-      lightbox.classList.add('lightbox');
-      lightbox.dataset.group = 'article';
-      articleImg.parentNode.appendChild(lightbox);
-      lightbox.appendChild(articleImg);
-    });
-    const tobii = new Tobii({
-      captions: true,
-      zoom: false
-    })
+    mediumZoom(document.querySelectorAll('.post-body.full .post img:not(.emoji), img.preview, .answ-telo p img:not(.emoji)'))
   });
   <?php if ($user['id'] > 0) { ?>
     document.querySelectorAll(".msg-flag")

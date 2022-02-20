@@ -4,18 +4,8 @@ $form->adding(['name' => 'setting_email_pm', 'type' => 'selected', 'var' => $dat
 $form->adding(['name' => 'setting_email_appealed', 'type' => 'selected', 'var' => $data['setting']['setting_email_appealed']]);
 $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
 ?>
-<div class="col-span-2 mb-none">
-  <nav class="sticky top-sm">
-    <ul class="list-none text-sm">
-      <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $user,
-        $pages = Config::get('menu.left'),
-      ); ?>
-    </ul>
-  </nav>
-</div>
+
+<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
 
 <main class="col-span-7 mb-col-12">
   <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>

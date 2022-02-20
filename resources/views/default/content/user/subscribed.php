@@ -1,20 +1,8 @@
-<div class="col-span-2 mb-none">
-  <nav class="sticky top-sm">
-    <ul class="list-none text-sm">
-      <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $user,
-        $pages = Config::get('menu.left'),
-      ); ?>
-    </ul>
-  </nav>
-</div>
+<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
 
 <main class="col-span-7 mb-col-12">
   <div class="box-flex-white">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <ul class="flex flex-row list-none text-sm">
+    <ul class="nav">
 
       <?= tabs_nav(
         'nav',
@@ -22,12 +10,16 @@
         $user,
         $pages = [
           [
+            'id'    => 'drafts',
+            'url'   => getUrlByName('drafts'),
+            'title' => Translate::get('drafts'),
+            'icon'  => 'bi bi-bookmark'
+          ], [
             'id'    => 'favorites',
             'url'   => getUrlByName('favorites'),
             'title' => Translate::get('favorites'),
             'icon'  => 'bi bi-bookmark'
-          ],
-          [
+          ], [
             'id'    => 'subscribed',
             'url'   => getUrlByName('subscribed'),
             'title' => Translate::get('subscribed'),

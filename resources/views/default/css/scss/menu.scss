@@ -4,27 +4,42 @@
  * Выпадающее меню и навигация слева
  */
 
+.dropdown,
+.menu,
+.nav,
+.breadcrumbs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+}
+
+.dropdown a i,
+.menu a i {
+  color: var(--gray-400);
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
 .dropdown {
   display: none;
   position: absolute;
   right: 0;
   background-color: #fff;
-  top: 45px;
+  top: 51px;
   box-shadow: 0 12px 12px rgba(0,0,0,0.15);
   padding: 5px 10px 5px 10px;
-  font-size: 0.875rem;
-  list-style: none;
-  margin: 0;
   z-index: 5;
   min-width: 160px;
 }
 
 .dropdown.left {
- left: 0;
- width: 150px;
+  left: 0;
+  width: 150px;
 }
 
-ul > li > a {
+.menu a,
+.dropdown li > a {
   color: var(--gray-600);
   padding: 3px 10px;
   display: flex;
@@ -32,24 +47,26 @@ ul > li > a {
   align-items: center;
 }
 
-ul > li > a > i {
+.nav { display: flex; }
+
+.nav a { 
+  padding-right: 20px;
+  color: var(--gray-600);
+}
+
+.nav a i {
   color: var(--gray-400);
-  margin-right: 10px;
-  font-size: 1.5rem;
+  margin-right: 4px;
 }
 
-ul > li > a span { color: var(--gray-600); }
-
-ul > li > a:hover,
-ul > li > a:hover > i,
-a.sky-500,
-a.sky-500 > i { color: #0ea5e9; }
-
-.breadcrumbs {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+a.active,
+a.active > i,
+.nav a:hover,
+.menu a:hover,
+.menu a:hover > i,
+.nav a:hover > i,
+.dropdown a:hover,
+.dropdown a:hover > i { color: #0ea5e9; }
 
 .breadcrumbs li {
   display: inline;
@@ -58,19 +75,4 @@ a.sky-500 > i { color: #0ea5e9; }
 
 .breadcrumbs li:not(:last-child):after {
   content: " / ";
-}
-
-.nav-catalog {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 200px;
-}
-
-.nav-catalog > li {
-  margin-bottom: 10px;
-}
-
-.nav-catalog > li  > a {
-  padding: 3px 0;
 }

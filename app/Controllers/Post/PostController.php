@@ -110,8 +110,7 @@ class PostController extends MainController
         Request::getResources()->addBottomScript('/assets/js/shares.js');
         Request::getResources()->addBottomStyles('/assets/js/prism/prism.css');
         Request::getResources()->addBottomScript('/assets/js/prism/prism.js');
-        Request::getResources()->addBottomStyles('/assets/js/tobii/tobii.min.css');
-        Request::getResources()->addBottomScript('/assets/js/tobii/tobii.min.js');
+        Request::getResources()->addBottomScript('/assets/js/zoom/medium-zoom.min.js');
 
         if ($this->user['id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');

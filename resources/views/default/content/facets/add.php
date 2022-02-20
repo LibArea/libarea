@@ -2,18 +2,8 @@
 $form = new Forms();
 $form->html_form($user['trust_level'], Config::get('form/facet.forma'));
 ?>
-<div class="col-span-2 mb-none">
-  <nav class="sticky top-sm">
-    <ul class="list-none text-sm">
-      <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $user,
-        $pages = Config::get('menu.left'),
-      ); ?>
-    </ul>
-  </nav>
-</div>
+
+<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
 
 <main class="col-span-10 mb-col-12 edit-post">
   <div class="box-white">

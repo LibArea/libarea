@@ -5,22 +5,11 @@
   </div>
 <?php } ?>
 
-<div class="col-span-2 mb-none">
-  <nav class="sticky top-sm">
-    <ul class="list-none text-sm">
-      <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $user,
-        $pages = Config::get('menu.left'),
-      ); ?>
-    </ul>
-  </nav>
-</div>
+<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
 
 <main class="col-span-7 mb-col-12">
   <div class="box-flex-white relative">
-    <ul class="flex flex-row list-none text-sm">
+    <ul class="nav">
 
       <?= tabs_nav(
         'nav',
@@ -77,7 +66,7 @@
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="box-white text-sm">
       <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
-      <ul class="list-none text-sm">
+      <ul>
         <?php
         $my = [];
         $other = [];

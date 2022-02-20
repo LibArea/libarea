@@ -8,7 +8,7 @@
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="box-white article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') { ?>
-        <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id text-sm right">
+        <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet-50 text-sm right">
           <?= Translate::get('unsubscribe'); ?>
         </div>
       <?php } ?>

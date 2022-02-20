@@ -1,7 +1,6 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white box-flex br-box-gray">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <ul class="flex flex-row list-none text-sm">
+    <ul class="nav">
 
       <?= tabs_nav(
         'nav',
@@ -9,12 +8,16 @@
         $user,
         $pages = [
           [
+            'id'    => 'drafts',
+            'url'   => getUrlByName('drafts'),
+            'title' => Translate::get('drafts'),
+            'icon'  => 'bi bi-bookmark'
+          ], [
             'id'    => 'favorites',
             'url'   => getUrlByName('favorites'),
             'title' => Translate::get('favorites'),
             'icon'  => 'bi bi-bookmark'
-          ],
-          [
+          ], [
             'id'    => 'subscribed',
             'url'   => getUrlByName('subscribed'),
             'title' => Translate::get('subscribed'),
@@ -26,7 +29,7 @@
     </ul>
   </div>
   <div class="mt10">
-    <?= Tpl::import('/content/post/post', ['data' => $data]); ?>
+    <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
   </div>
 </main>
 <aside class="col-span-3 mb-none">

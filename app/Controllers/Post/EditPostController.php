@@ -166,8 +166,8 @@ class EditPostController extends MainController
 
         // Получим id блога с формы выбора
         $blog_post  = $post_fields['blog_select'] ?? [];
-        $blog       = json_decode($blog_post, true); // <- Array ([0]=> Array ([id]=> 53 [value]=> Блог [tl]=> 0)) 
-        $form_id    = $blog[0]['id'];
+        $blog       = json_decode($blog_post, true);
+        // $form_id    = $blog[0]['id'] ?? 0;
 
         if ($blog) {
             $topics = array_merge($blog, $topics);

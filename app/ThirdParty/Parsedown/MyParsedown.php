@@ -100,7 +100,7 @@ class MyParsedown extends Parsedown
                     'name' => 'img',
                     'handler' => 'line',
                     'attributes' => [
-                        'class' => 'w18 h18 inline',
+                        'class' => 'emoji',
                         'src' => '/assets/images/emoji/' . $matches[1] . $file_ext,
                         'alt' => ':' . $matches[1] . ':',
                         'title' => ':' . $matches[1] . ':'

@@ -47,7 +47,7 @@
       <div class="sticky top0 top-sm">
         <div class="box-white bg-violet-50 text-sm">
           <h3 class="uppercase-box"><?= Translate::get('writers'); ?></h3>
-          <ol class="list-none text-sm">
+          <ul>
           <?php foreach ($data['writers'] as $ind => $row) { ?>
             <li class="mb10">
               <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
@@ -56,7 +56,7 @@
               </a>
             </li>  
           <?php } ?>
-          </ol>
+          </ul>
         </div>
       </div>
     <?php } ?>

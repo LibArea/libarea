@@ -14,18 +14,20 @@ $facet    = $data['facet'] ?? false;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?08">
+  <link rel="stylesheet" href="/assets/css/style.css?09">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
 <body class="<?= $css; ?><?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
-  <header class="box-flex-white p5 box-shadow <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
-      <div class="flex ml10">
+  <header class="d-header<?php if ($type != 'page') { ?> sticky top0<?php } ?>">
+    <div class="wrap">
+      <div class="d-header_contents">
+
         <div class="none mb-block">
-          <div class="trigger">
-            <i class="bi bi-list gray-400 text-xl mr10"></i>
+          <div class="trigger mr10">
+            <i class="bi bi-list gray-400 text-xl"></i>
           </div>
           <ul class="dropdown left">
             <?= tabs_nav(
@@ -40,34 +42,35 @@ $facet    = $data['facet'] ?? false;
         <a title="<?= Translate::get('home'); ?>" class="logo black" href="/">
           <?= Config::get('meta.name'); ?>
         </a>
-      </div>
-      <?php if (Request::getUri() != getUrlByName('search')) { ?>
-        <div class="ml45 relative mb-none w-100">
-          <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
-            <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="bg-gray-100 br-rd20 pl15 w-100 h30 gray">
-            <input name="token" value="<?= csrf_token(); ?>" type="hidden">
-            <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
-          </form>
-          <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
-        </div>
-      <?php } ?>
-      <?php if (!UserData::checkActiveUser()) { ?>
-        <div class="flex right col-span-4 items-center">
-          <div id="toggledark" class="header-menu-item mb-none ml45 mb-ml20">
-            <i class="bi bi-brightness-high gray-400 text-xl"></i>
-          </div>
-          <?php if (Config::get('general.invite') == false) { ?>
-            <a class="register gray ml45 mr15 mb-ml20 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
-              <?= Translate::get('sign.up'); ?>
-            </a>
+
+        <div class="ml45 relative w-100">
+          <?php if (Request::getUri() != getUrlByName('search')) { ?>
+            <form class="form mb-none" method="post" action="<?= getUrlByName('search'); ?>">
+              <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="bg-gray-100 br-rd20 pl15 w-100 h30 gray">
+              <input name="token" value="<?= csrf_token(); ?>" type="hidden">
+              <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
+            </form>
+            <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
           <?php } ?>
-          <a class="btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
-            <?= Translate::get('sign.in'); ?>
-          </a>
         </div>
-      <?php } else { ?>
- 
-          <div class="flex right ml45 mb-ml20 items-center text-xl">
+
+        <?php if (!UserData::checkActiveUser()) { ?>
+          <div class="flex right col-span-4 items-center">
+            <div id="toggledark" class="header-menu-item mb-none ml45">
+              <i class="bi bi-brightness-high gray-400 text-xl"></i>
+            </div>
+            <?php if (Config::get('general.invite') == false) { ?>
+              <a class="register gray ml45 mr15 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
+                <?= Translate::get('sign.up'); ?>
+              </a>
+            <?php } ?>
+            <a class="btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
+              <?= Translate::get('sign.in'); ?>
+            </a>
+          </div>
+        <?php } else { ?>
+
+          <div class="flex right ml45 mb-ml0 items-center text-xl">
 
             <?= add_post($facet, $user['id']); ?>
 
@@ -102,7 +105,8 @@ $facet    = $data['facet'] ?? false;
               </ul>
             </div>
           </div>
- 
-      <?php }  ?>
+        <?php } ?>
+      </div>
+    </div>
   </header>
   <div id="contentWrapper">

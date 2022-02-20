@@ -1,23 +1,27 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white box-flex br-box-gray">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <ul class="flex flex-row list-none text-sm">
+    <ul class="nav">
 
       <?= tabs_nav(
-        $user['id'],
+        'nav',
         $data['sheet'],
+        $user,
         $pages = [
           [
-            'id' => 'favorites',
-            'url' => getUrlByName('favorites'),
-            'content' => Translate::get('favorites'),
-            'icon' => 'bi bi-bookmark'
-          ],
-          [
-            'id' => 'subscribed',
-            'url' => getUrlByName('subscribed'),
-            'content' => Translate::get('subscribed'),
-            'icon' => 'bi bi-bookmark-plus'
+            'id'    => 'drafts',
+            'url'   => getUrlByName('drafts'),
+            'title' => Translate::get('drafts'),
+            'icon'  => 'bi bi-bookmark'
+          ], [
+            'id'    => 'favorites',
+            'url'   => getUrlByName('favorites'),
+            'title' => Translate::get('favorites'),
+            'icon'  => 'bi bi-bookmark'
+          ], [
+            'id'    => 'subscribed',
+            'url'   => getUrlByName('subscribed'),
+            'title' => Translate::get('subscribed'),
+            'icon'  => 'bi bi-bookmark-plus'
           ],
         ]
       ); ?>

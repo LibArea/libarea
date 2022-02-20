@@ -19,7 +19,7 @@
     <?php if (UserData::checkActiveUser()) { ?>
       <div class="box-white text-sm bg-violet-50 mt15">
         <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
-        <ul class="nav-catalog">
+        <ul class="menu">
           <?= tabs_nav(
             'menu',
             $data['sheet'],

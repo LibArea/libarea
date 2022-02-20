@@ -1,15 +1,4 @@
-<div class="col-span-2 mb-none">
-  <nav class="sticky top-sm">
-    <ul class="list-none text-sm">
-      <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $user,
-        $pages = Config::get('menu.left'),
-      ); ?>
-    </ul>
-  </nav>
-</div>
+<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
 
 <?php $fs = $data['facet']; ?>
 
@@ -17,7 +6,7 @@
 
   <div class="box-flex-white">
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
-    <ul class="flex flex-row list-none text-sm">
+    <ul class="nav">
 
       <?= tabs_nav(
         'nav',

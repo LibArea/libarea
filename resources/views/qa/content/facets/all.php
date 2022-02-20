@@ -6,8 +6,8 @@
     </span>
   </div>
 
-  <div class="mb15">
-    <ul class="box-flex list-none text-sm">
+  <div class="m15">
+    <ul class="nav">
 
       <?= tabs_nav(
         'nav',
