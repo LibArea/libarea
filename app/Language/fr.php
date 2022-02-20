@@ -383,9 +383,11 @@ $data = [
     'info-recover'          => 'After clicking the "Reset" button, check your email...',
     'info-favorite'         => 'Posts, comments and questions in your bookmarks',
     'info-preferences'      => 'Posts you are subscribed to. You will be notified of all new replies',
-    'e-mail notification'   => 'Notify by Email',
-    'info-notifications'    => 'You can mark all ads as read by clicking on the link: "I have read".',
-    'info-notification'     => 'You can unsubscribe from all notifications by Email in this section',
+
+    'notification.email'    => 'Notify by Email',
+    'notifications.info'    => 'You can mark all ads as read by clicking on the link: "I have read".',
+    'notification.info'     => 'You can unsubscribe from all notifications by Email in this section',
+    'notifications.limit'   => 'Afficher les 100 dernières notifications',
 
     'message to PM'         => 'When the message came to PM',
     'contacted via @'       => 'When they reached out to me through @',

@@ -19,7 +19,7 @@
     </form>
   </div>
 
-  <div class="bg-white br-box-gray br-rd5 p15">
+  <div class="bg-white mb15">
   <?php if (!empty($data['notifications'])) { ?>
     <?php foreach ($data['notifications'] as  $notif) { ?>
 
@@ -104,9 +104,10 @@
     <?= no_content(Translate::get('no.content'), 'bi bi-info-lg'); ?>
   <?php } ?>
   </div>
+    <?= no_content(Translate::get('notifications.limit'), 'bi bi-info-lg'); ?>
 </main>
 <aside class="col-span-3 mb-none">
   <div class="box-white text-sm sticky top-sm">
-    <?=  Translate::get('info-notifications'); ?>
+    <?=  Translate::get('notifications.info'); ?>
   </div>
 </aside>

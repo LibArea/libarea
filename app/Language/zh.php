@@ -382,9 +382,10 @@ $data = [
     'info-recover'          => '單擊“重置”按鈕後，檢查您的電子郵件...',
     'info-favorite'         => '書籤中的帖子、評論和問題',
     'info-preferences'      => '您訂閱的帖子。 您將收到所有新回复的通知',
-    'e-mail notification'   => '通過電子郵件通知',
-    'info-notifications'    => '您可以通過單擊以下鏈接將所有廣告標記為已讀：“我已閱讀”。',
-    'info-notification'     => '您可以在此部分取消訂閱通過電子郵件發送的所有通知',
+    'notification.email'    => '通過電子郵件通知',
+    'notifications.info'    => '您可以通過單擊以下鏈接將所有廣告標記為已讀：“我已閱讀”。',
+    'notification.info'     => '您可以在此部分取消訂閱通過電子郵件發送的所有通知',
+    'notifications.limit'   => '最后100个通知显示',
 
     'message to PM'         => '當消息來到 PM',
     'contacted via @'       => '當他們通過@聯繫我時 ',

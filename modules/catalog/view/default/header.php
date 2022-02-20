@@ -1,5 +1,5 @@
 <?php
-$dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
+$dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +11,8 @@ $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?v06">
-  <link rel="stylesheet" href="/assets/css/catalog.css?v06">
+  <link rel="stylesheet" href="/assets/css/style.css?v08">
+  <link rel="stylesheet" href="/assets/css/catalog.css?v08">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>

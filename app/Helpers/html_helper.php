@@ -383,8 +383,8 @@ function fragment($content, $maxlen = '20')
 
 function no_content($text, $icon)
 {
-    $html  = '<div class="mt10 mb10 pt10 pr15 pb10 pl15 bg-yellow-100 gray">
-                <i class="' . $icon . ' middle mr5"></i>
+    $html  = '<div class="box gray-600 bg-yellow-100">
+                <i class="' . $icon . ' green-600 middle mr5"></i>
                 <span class="middle">' . $text . '...</span>
               </div>';
 

@@ -91,9 +91,10 @@
     <?= no_content(Translate::get('no.content'), 'bi bi-info-lg'); ?>
   <?php } ?>
   </div>
+  <?= no_content(Translate::get('notifications.limit'), 'bi bi-info-lg'); ?>
 </main>
 <aside class="col-span-3 mb-none">
   <div class="box-white bg-violet-50 text-sm">
-    <?= Translate::get('info-notifications'); ?>
+    <?= Translate::get('notifications.info'); ?>
   </div>
 </aside>

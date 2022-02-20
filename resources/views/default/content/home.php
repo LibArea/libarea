@@ -134,12 +134,14 @@
   <div class="sticky top-sm">
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="box-white">
-        <ul class="list-none text-sm">
+        <ul class="last-content">
           <?php foreach ($data['latest_answers'] as $answer) { ?>
-            <li class="mb15">
-              <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
+            <li>
+              <a title="<?= $answer['login']; ?>" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
+                <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
+              </a>
               <span class="middle lowercase gray-400"><?= $answer['answer_date']; ?></span>
-              <a class="black block p0" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
+              <a class="last-content_telo" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
                 <?= $answer['answer_content']; ?>...
               </a>
             </li>

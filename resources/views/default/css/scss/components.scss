@@ -142,6 +142,24 @@ details[open] > summary {
   background-color: var(--white);
 }
 
+ul.last-content {
+  list-style: none;
+  font-size: 0.875rem;
+  padding: 0;
+  margin: 0;
+}
+
+ul.last-content li {
+  margin-bottom: 15px;
+}
+
+ul.last-content li a {
+  display: inline;
+  padding: 0;
+}
+
+ul.last-content a.last-content_telo { display: block; }
+
 .uppercase-box {
   color: var(--gray-600);
   font-size: 0.875rem;

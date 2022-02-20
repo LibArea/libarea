@@ -373,15 +373,16 @@ $data = [
     'info-avatar'           => 'Încărcați un avatar și o acoperire pentru profilul dvs. <br> <br> Când fiecare utilizator are un avatar unic, devine mult mai ușor să urmărești discuțiile!',
     'info-security'         => 'Asigurați-vă că toate parolele dvs. au 8 sau mai multe caractere, în mod ideal mult mai multe.',
     'info-search'           => 'Pentru a rafina căutarea, încercați să găsiți o interogare mai precisă.',
-    'info-notifications'    => 'Puteți marca toate anunțurile ca citite făcând clic pe linkul: „Am citit”.',
     'info-login'            => 'Autorizarea vă permite să publicați postări, să răspundeți, să comentați.',
     'info-recover'          => 'După ce faceți clic pe butonul „Resetare”, verificați e-mailul ...',
 
     'info-favorite'         => 'Postări, comentarii și întrebări pe care le urmăriți',
     'info-preferences'      => 'Postări la care sunteți abonat. Veți fi informat cu privire la toate răspunsurile noi',
 
-    'e-mail notification'   => 'Notificați prin e-mail',
-    'info-notifications'    => 'Vă puteți dezabona de la toate notificările prin e-mail în această secțiune',
+    'notification.email'    => 'Notifică prin e-mail',
+    'notifications.info'    => 'Puteți marca toate anunțurile ca citite, faceți clic pe linkul :" am citit".',
+    'notification.info'     => 'Vă puteți dezabona de la toate notificările prin e-mail din această secțiune',
+    'notifications.limit'   => 'Sunt afișate ultimele 100 de notificări',
 
     'message to PM'         => 'Când mesajul a venit la PM',
     'contacted via @'       => 'Când m-ați contactat prin @',
