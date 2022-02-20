@@ -1,6 +1,6 @@
 <div class="box-flex-white">
   <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
-  <ul class="flex flex-row list-none text-sm">
+  <ul class="flex flex-row list-none text-sm setting">
     <?= tabs_nav(
       'nav',
       $data['sheet'],
