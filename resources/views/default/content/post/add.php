@@ -6,11 +6,11 @@
 
     <form action="<?= getUrlByName('post.create'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
-
+    <div class="max-w780">
     <fieldset>
       <label for="post_title"><?= Translate::get('heading'); ?></label>
       <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
-      <div class="text-sm gray-400">6 - 250 <?= Translate::get('characters'); ?></div>  
+      <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>  
     </fieldset>
     
       <?php if (!empty($data['blog'])) { ?>
@@ -32,12 +32,14 @@
       ]); ?>
 
       <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_url')) { ?>
-        <div class="flex flex-row items-center justify-between mb20 max-w640">
-          <div class="flex-auto mr15">
-            <input id="link" placeholder="URL" class="post_url w-100 h30" type="text" name="post_url" />
+        <fieldset>
+          <div class="left w-70">
+            <input id="link" placeholder="URL" class="post_url" type="text" name="post_url" />
           </div>
-          <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= Translate::get('to extract'); ?>" />
-        </div>
+          <div class="left w-30 pl5">
+            <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= Translate::get('to extract'); ?>" />
+          </div>  
+        </fieldset>
       <?php } ?>
 
       <div class="file-upload mb20" id="file-drag">
@@ -56,7 +58,7 @@
           <div id="messages"></div>
         </div>
       </div>
-
+      </div>
       <?= Tpl::import('/_block/editor/editor', [
         'title'     => Translate::get('text'),
         'type'      => 'post',
@@ -64,7 +66,7 @@
         'preview'   => 'vertical',
         'user'      => $user,
       ]); ?>
-
+    <div class="max-w780">
       <?php if ($user['trust_level'] > 1) { ?>
         <?= Tpl::import('/_block/form/radio',  [
           'data' => [
@@ -125,6 +127,7 @@
       ]); ?>
 
       <p><?= sumbit(Translate::get('create')); ?></p>
+      </div>
     </form>
   </div>
 </main>

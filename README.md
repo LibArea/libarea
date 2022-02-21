@@ -55,6 +55,11 @@ Routing > Controllers > Models > Page Builder > Debug Panel
 
 A distinctive feature of the micro-framework HLEB is the minimalism of the code and the speed of work.
 
+
+#### Security
+
+If you discover any security related issues within Agouti, please send an e-mail to admin@agouti.ru instead of using the issue tracker. All security vulnerabilities will be promptly addressed.
+
 ---
 
 Using the example of the Dmoz catalog, I want to create and test a universal and easy navigation for different types of content. Their relationship. 

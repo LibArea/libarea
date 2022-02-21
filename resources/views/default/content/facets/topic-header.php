@@ -31,7 +31,7 @@
 
 <div class="box-flex-white">
   <p class="m0 text-xl mb-none"><?= Translate::get($data['type']); ?></p>
-  <ul class="flex flex-row list-none text-sm">
+  <ul class="nav">
 
     <?= tabs_nav(
       'nav',

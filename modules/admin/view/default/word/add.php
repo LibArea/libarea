@@ -14,13 +14,13 @@
   ]
 ); ?>
 
-<div class="box-white">
+<div class="box-white max-w780">
   <form action="<?= getUrlByName('admin.word.create'); ?>" method="post">
     <?= csrf_field() ?>
-    <div class="mb20 max-w780">
-      <label class="block mb5" or="post_title"><?= Translate::get('word'); ?></label>
-      <input type="text" class="w-100 h30" name="word">
-    </div>
+    <fieldset>
+      <label for="word"><?= Translate::get('word'); ?></label>
+      <input type="text" name="word">
+    </fieldset>
     <?= sumbit(Translate::get('add')); ?>
   </form>
 </div>

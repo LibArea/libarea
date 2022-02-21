@@ -56,6 +56,14 @@ h5 {
   position: relative;
 }
 
+.search {
+  height: 30px;
+  width: 100%;
+  border-radius: 20px;
+  background-color: var(--gray-100);
+  padding-left: 15px;
+}
+
 aside ul {
   list-style: none;
   padding: 0;

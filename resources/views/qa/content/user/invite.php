@@ -3,16 +3,16 @@
     <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('invite'); ?></h1>
     <form class="" action="/invite" method="post">
       <?php csrf_field(); ?>
-      <div class="mb20">
-        <label class="block" for="email"><?= Translate::get('code'); ?></label>
-        <input class="w-100 h30" type="text" name="invite" id="invite">
-      </div>
-      <div class="mb20">
+      <fieldset>
+        <label for="invite"><?= Translate::get('code'); ?></label>
+        <input type="text" name="invite" id="invite">
+      </fieldset>
+      <fieldset>
         <?= sumbit(Translate::get('sign.in')); ?>
         <span class="ml15 text-sm"><a href="<?= getUrlByName('recover'); ?>">
             <?= Translate::get('forgot.password'); ?>?</a>
         </span>
-      </div>
+      </fieldset>
     </form>
     <?php if (Config::get('general.invite') == true) { ?>
       <?= Translate::get('no-invate-txt'); ?>

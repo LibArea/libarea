@@ -4,10 +4,10 @@
     <form class="" action="<?= getUrlByName('recover'); ?>/send/pass" method="post">
       <?php csrf_field(); ?>
       <fieldset>
-        <label class="block" for="password">
+        <label for="password">
           <?= Translate::get('new password'); ?>
         </label>
-        <input class="w-100 h30" type="password" name="password" id="password">
+        <input type="password" name="password" id="password">
       </fieldset>
       <p>
         <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">

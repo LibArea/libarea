@@ -16,12 +16,12 @@
 
       <form class="mb20" action="/login" method="post">
         <?php csrf_field(); ?>
-        <div class="mb20 max-w640">
-          <label class="block mb5">E-mail</label>
-          <input type="text" class="w-100 h30 pl5" placeholder="<?= Translate::get('enter'); ?>  e-mail" name="email">
+        <fieldset class="max-w640">
+          <label for="email">E-mail</label>
+          <input type="text" placeholder="<?= Translate::get('enter'); ?>  e-mail" name="email">
           <label class="block mt20 mb5"><?= Translate::get('password'); ?></label>
           <input type="password" placeholder="<?= Translate::get('enter your password'); ?>" name="password" class="w-100 h30 pl5">
-        </div>
+        </fieldset>
         <img class="mb5 right" src="<?= Config::get('meta.img_footer_path'); ?>">
         <?= sumbit(Translate::get('sign.in')); ?>
       </form>

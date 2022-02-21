@@ -19,6 +19,12 @@ return [
     'tl_add_blog'       => 1,
     'count_add_blog'    => 1,
     
+    // С какого уровня TL возможно добавлять сайты
+    // Установите на 10, если вы хотите запретить участникам добавлять их
+    // From what TL level is it possible to add sites
+    // Set to 10 if you want to prevent participants from adding them
+    'tl_add_site'       => 2,
+    'count_add_site'    => 1,
     
     // С какого уровня TL возможно создавать категории
     // Установите на 10, если вы хотите запретить участникам создавать их

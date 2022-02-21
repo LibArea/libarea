@@ -14,7 +14,7 @@
           <?php if (UserData::checkAdmin()) { ?>
             <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
               <i class="bi bi-pencil text-sm"></i>
-            </a> <small class="gray-400">- <?= $item['item_following_link']; ?></small>
+            </a> - <?= $item['item_following_link']; ?>
           <?php } ?>
           <?php if (!empty($delete_fav)) { ?>
             <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="item">

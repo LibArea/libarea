@@ -30,9 +30,9 @@
     </form>
   </fieldset>
   <fieldset>
-    <label><?= Translate::get('Email'); ?></label>
+    <label for="mail"><?= Translate::get('Email'); ?></label>
     <form action="<?= getUrlByName('admin.test.mail'); ?>" method="post">
-      <input class="w-100 h30" type="mail" name="mail" value="">
+      <input type="mail" name="mail" value="">
       <div class="help"><?= Translate::get('test.email'); ?>...</div>
   </fieldset>    
       <?= sumbit(Translate::get('send')); ?>

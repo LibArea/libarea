@@ -10,7 +10,7 @@
     <fieldset>
       <label for="post_title"><?= Translate::get('heading'); ?></label>
       <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
-      <div class="text-sm gray-400">6 - 250 <?= Translate::get('characters'); ?></div>  
+      <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>  
     </fieldset>
 
       <?php if (!empty($data['blog'])) { ?>

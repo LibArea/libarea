@@ -11,7 +11,7 @@ $facet  = $data['facet'] ?? false; ?>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?08">
+  <link rel="stylesheet" href="/assets/css/style.css?10">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
@@ -28,7 +28,7 @@ $facet  = $data['facet'] ?? false; ?>
       <?php } ?>
     </div>
 
-    <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h50 grid items-center flex justify-between">
+    <div class="mr-auto max-width w-100 pr10 pl10 items-center flex justify-between">
       <div class="flex items-center" id="find">
         <div class="none mb-block">
           <div class="trigger">

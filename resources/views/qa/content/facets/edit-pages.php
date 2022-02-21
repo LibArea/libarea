@@ -4,7 +4,7 @@
 
   <div class="bg-white box-flex">
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
-    <ul class="flex flex-row list-none text-sm">
+    <ul class="nav">
 
       <?= tabs_nav(
         'nav',

@@ -11,7 +11,7 @@
         </a>
       <?php } ?>
     </h1>
-    <div class="text-sm gray-400"><?= $topic['facet_short_description']; ?></div>
+    <div class="help"><?= $topic['facet_short_description']; ?></div>
 
     <div class="mt15 right">
       <?= Tpl::import('/_block/facet/signed', [
@@ -31,7 +31,7 @@
 
 <div class="box-flex-white bg-violet-50">
   <p class="m0 text-xl mb-none"><?= Translate::get($data['type']); ?></p>
-  <ul class="flex flex-row list-none text-sm">
+  <ul class="nav">
 
     <?= tabs_nav(
       'nav',

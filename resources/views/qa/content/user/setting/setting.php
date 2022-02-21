@@ -22,7 +22,7 @@
       <fieldset>
         <label for="name"><?= Translate::get('name'); ?></label>
         <input maxlength="11" value="<?= $data['user']['name']; ?>" type="text" name="name">
-        <div class="text-sm gray-400">0 - 11 <?= Translate::get('characters'); ?></div>  
+        <div class="help">0 - 11 <?= Translate::get('characters'); ?></div>  
       </fieldset>
 
       <?php Tpl::import('/_block/editor/textarea', [
@@ -37,16 +37,16 @@
       ]); ?>
 
       <fieldset id="box">
-        <label class="block" for="post_content"><?= Translate::get('color'); ?></label>
+        <label for="post_content"><?= Translate::get('color'); ?></label>
         <input type="color" value="<?= $data['user']['color']; ?>" id="colorPicker">
         <input type="hidden" name="color" value="<?= $data['user']['color']; ?>" id="color">
       </fieldset>
 
       <fieldset class="max-w640">
-        <label class="block mb5" for="template">
+        <label for="template">
           <?= Translate::get('template'); ?>
         </label>
-        <select class="w-100 h30" name="template">
+        <select name="template">
           <?php foreach (Config::get('general.templates') as $tpl) { ?>
             <option <?php if ($data['user']['template'] == $tpl) { ?>selected<?php } ?> value="<?= $tpl; ?>">
               <?= Translate::get($tpl); ?>
@@ -57,7 +57,7 @@
 
        <fieldset class="max-w640">
         <label class="block mb5" for="post_content"><?= Translate::get('language'); ?></label>
-        <select class="w-100 h30" name="lang">
+        <select name="lang">
           <?php foreach (Config::get('general.languages') as $lang) {  ?>
             <option <?php if ($data['user']['lang'] == $lang) { ?>selected<?php } ?> value="<?= $lang; ?>">
               <?= Translate::get($lang . '-language'); ?>
@@ -72,7 +72,7 @@
           <label for="post_title"><?= $block['lang']; ?></label>
           <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>
-            <div class="text-sm gray-400"><?= $block['help']; ?></div>
+            <div class="help"><?= $block['help']; ?></div>
           <?php } ?>
         </fieldset>
       <?php } ?>

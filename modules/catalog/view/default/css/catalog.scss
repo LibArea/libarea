@@ -49,7 +49,7 @@ aside { grid-column: span 3 / span 3; }
 
 .list-items li {
   position: relative;
-  display: table;
+  display: flex;
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 28px
@@ -57,12 +57,12 @@ aside { grid-column: span 3 / span 3; }
 
 .list-items__thumb {
   width: 200px;
-  margin-right: 20px;
+  margin: 5px 20px 0 0;
 }
 
 .list-items__description {
-  display: table-cell;
-  vertical-align: top;
+  color: var(--gray-400);
+  width: 100%;
 }
 
 .list-items__thumb-image {

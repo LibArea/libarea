@@ -20,7 +20,7 @@
     <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'avatar'); ?>
 
     <fieldset>
-      <label class="block" for="post_title">
+      <label for="post_title">
         Id<?= $data['user']['id']; ?> |
         <a target="_blank" rel="noopener noreferrer" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
           <?= $data['user']['login']; ?>
@@ -44,7 +44,7 @@
       <i class="bi bi-eye"></i> <?= $data['user']['hits_count']; ?>
     </fieldset>
     <fieldset>
-      <label class="block" for="post_title"><?= Translate::get('sign.up'); ?></label>
+      <label for="post_title"><?= Translate::get('sign.up'); ?></label>
       <?= $data['user']['created_at']; ?> |
       <?= $data['user']['reg_ip']; ?>
       <?php if ($data['user']['duplicat_ip_reg'] > 1) { ?>
@@ -57,7 +57,7 @@
       <?php if ($data['user']['limiting_mode'] == 1) { ?>
         <span class="red-500"><?= Translate::get('dumb mode'); ?>!</span><br>
       <?php } ?>
-      <label class="block" for="post_content">
+      <label for="limiting_mode">
         <?= Translate::get('dumb mode'); ?>?
       </label>
       <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
@@ -95,7 +95,7 @@
       </a>
     </fieldset>
     <fieldset>
-      <label class="block" for="post_title"><?= Translate::get('badges'); ?></label>
+      <label for="badge_icon"><?= Translate::get('badges'); ?></label>
       <?php if ($data['user']['badges']) { ?>
         <div class="text-2xl">
           <?php foreach ($data['user']['badges'] as $badge) { ?>
@@ -112,22 +112,22 @@
       <?php } ?>
     </fieldset>
     <fieldset>
-      <label class="block" for="post_title"><?= Translate::get('whisper'); ?></label>
-      <input class="w-100 h30" type="text" name="whisper" value="<?= $data['user']['whisper']; ?>">
+      <label for="whisper"><?= Translate::get('whisper'); ?></label>
+      <input type="text" name="whisper" value="<?= $data['user']['whisper']; ?>">
     </fieldset>
     <hr>
     <fieldset>
-      <label class="block" for="post_title">E-mail<sup class="red-500">*</sup></label>
-      <input class="w-100 h30" type="text" name="email" value="<?= $data['user']['email']; ?>" required>
+      <label for="email">E-mail<sup class="red-500">*</sup></label>
+      <input type="text" name="email" value="<?= $data['user']['email']; ?>" required>
     </fieldset>
     <fieldset>
-      <label class="block" for="post_content"><?= Translate::get('email activated'); ?>?</label>
+      <label for="activated"><?= Translate::get('email activated'); ?>?</label>
       <input type="radio" name="activated" <?php if ($data['user']['activated'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
       <input type="radio" name="activated" <?php if ($data['user']['activated'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
     </fieldset>
     <hr>
     <fieldset>
-      <label class="block" for="post_title">TL</label>
+      <label for="trust_level">TL</label>
       <select name="trust_level">
         <?php for ($i = 0; $i <= 10; $i++) { ?>
           <option <?php if ($data['user']['trust_level'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>">
@@ -137,25 +137,25 @@
       </select>
     </fieldset>
     <fieldset>
-      <label class="block" for="post_title"><?= Translate::get('nickname'); ?>: /u/**<sup class="red-500">*</sup></label>
-      <input class="w-100 h30" type="text" name="login" value="<?= $data['user']['login']; ?>" required>
+      <label for="login"><?= Translate::get('nickname'); ?>: /u/**<sup class="red-500">*</sup></label>
+      <input type="text" name="login" value="<?= $data['user']['login']; ?>" required>
     </fieldset>
     <fieldset>
-      <label class="block" for="post_title"><?= Translate::get('name'); ?></label>
-      <input class="w-100 h30" type="text" name="name" value="<?= $data['user']['name']; ?>">
+      <label for="name"><?= Translate::get('name'); ?></label>
+      <input type="text" name="name" value="<?= $data['user']['name']; ?>">
     </fieldset>
     <fieldset>
-      <label class="block" for="post_title"><?= Translate::get('about me'); ?></label>
+      <label for="about"><?= Translate::get('about me'); ?></label>
       <textarea class="add" name="about"><?= $data['user']['about']; ?></textarea>
     </fieldset>
 
     <h3><?= Translate::get('contacts'); ?></h3>
     <?php foreach (Config::get('fields-profile') as $block) { ?>
       <fieldset>
-        <label class="block" for="post_title"><?= $block['lang']; ?></label>
-        <input class="w-100 h30" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
+        <label for="title"><?= $block['lang']; ?></label>
+        <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
         <?php if ($block['help']) { ?>
-          <div class="text-sm gray-400"><?= $block['help']; ?></div>
+          <div class="help"><?= $block['help']; ?></div>
         <?php } ?>
       </fieldset>
     <?php } ?>

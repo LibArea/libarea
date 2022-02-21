@@ -19,9 +19,7 @@ class AddFacetController extends MainController
     // Add form topic | blog | category
     public function index($type)
     {
-        if ($this->user['trust_level'] != 10) {
-            redirect('/');
-        }
+        self::limitFacer($type, 'redirect');
 
         return Tpl::agRender(
             '/facets/add',

@@ -16,10 +16,11 @@ input, select {
   font-size: 16px;
 }
 
-fieldset input:not([type=radio]):not([type=checkbox]):not([type=range]) {
+fieldset input:not([type=radio]):not([type=checkbox]):not([type=range]),
+fieldset select {
   width: 100%;
   min-height: 34px;
-  padding-left: 5px;
+  padding: 5px;
 }
 
 fieldset {

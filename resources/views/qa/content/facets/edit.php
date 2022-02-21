@@ -7,7 +7,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
 
   <div class="box-flex-white bg-violet-50">
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
-    <ul class="flex flex-row list-none text-sm">
+    <ul class="nav">
 
       <?= tabs_nav(
         'nav',
@@ -79,19 +79,19 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <fieldset>
         <label for="facet_title"><?= Translate::get('title'); ?><sup class="red-500">*</sup></label>
         <input  minlength="3" maxlength="64" type="text" name="facet_title" value="<?= $fs['facet_title']; ?>">
-        <div class="text-sm gray-400">3 - 64 <?= Translate::get('characters'); ?></div>
+        <div class="help">3 - 64 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
       <fieldset>
         <label for="facet_seo_title"><?= Translate::get('title'); ?> (SEO)<sup class="red-500">*</sup></label>
         <input  minlength="4" maxlength="255" type="text" name="facet_seo_title" value="<?= $fs['facet_seo_title']; ?>">
-        <div class="text-sm gray-400">4 - 255 <?= Translate::get('characters'); ?></div>
+        <div class="help">4 - 255 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
       <fieldset>
         <label for="facet_slug"><?= Translate::get('Slug (URL)'); ?><sup class="red-500">*</sup></label>
         <input  minlength="3" maxlength="32" type="text" name="facet_slug" value="<?= $fs['facet_slug']; ?>">
-        <div class="text-sm gray-400">3 - 32 <?= Translate::get('characters'); ?> (a-z-0-9)</div>
+        <div class="help">3 - 32 <?= Translate::get('characters'); ?> (a-z-0-9)</div>
       </fieldset>
 
       <?php if ($fs['facet_type'] == 'topic' && UserData::checkAdmin()) { ?>
@@ -146,18 +146,18 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <fieldset>
         <label for="facet_description"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></label>
         <textarea class="add max-w780" rows="6" minlength="44" name="facet_description"><?= $fs['facet_description']; ?></textarea>
-        <div class="text-sm gray-400">> 44 <?= Translate::get('characters'); ?></div>
+        <div class="help">> 44 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
       <fieldset>
         <label for="facet_short_description"><?= Translate::get('short description'); ?><sup class="red-500">*</sup></label>
         <input minlength="11" maxlength="120" value="<?= $fs['facet_short_description']; ?>" type="text" required="" name="facet_short_description">
-        <div class="text-sm gray-400">11 - 120 <?= Translate::get('characters'); ?></div>  
+        <div class="help">11 - 120 <?= Translate::get('characters'); ?></div>  
       </fieldset>
 
       <div for="mb5"><?= Translate::get('info'); ?><sup class="red-500">*</sup></div>
       <textarea class="add max-w780" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
-      <div class="mb20 text-sm gray-400">Markdown, > 14 <?= Translate::get('characters'); ?></div>
+      <div class="mb20 help">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
       <?php if ($fs['facet_type'] == 'topic') { ?>
         <?= Tpl::import('/_block/form/select/related-posts', [
