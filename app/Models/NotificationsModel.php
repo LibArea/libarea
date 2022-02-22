@@ -19,18 +19,27 @@ class NotificationsModel extends \Hleb\Scheme\App\Models\MainModel
     // 12 - в комментариях (@login)
     // 15 - аудит
     // 20 - флаг система
+    // 32 - сайт добавлен
+    // 33 - сайт изменен и поменял статус
+    // 34 - ваш сайт добавлен
+    
+    const FLAG_UNREAD           = 0;  // Unread
+    
+    const TYPE_ADD_WEBSITE      = 32; // Site added
+    const TYPE_EDIT_WEBSITE     = 33; // changed and status changed
+    const WEBSITE_APPROVED      = 34; // approved
 
     // Лист уведомлений
     public static function listNotification($uid)
     {
         $sql = "SELECT
-                    notification_id,
+                    notification_id as notif_id,
                     notification_sender_id,
                     notification_recipient_id,
-                    notification_action_type,
+                    notification_action_type as type,
                     notification_url,
-                    notification_add_time,
-                    notification_read_flag,
+                    notification_add_time as time,
+                    notification_read_flag as flag,
                     notification_is_deleted,
                     id, 
                     login, 

@@ -306,6 +306,10 @@ $data = [
     'in answer'             => '在回答',
     'in the comment'        => '在評論中',
     'to your answer'        => '給你的答案',
+    'added.site'            => '添加網站',
+    'changed.site'          => '更改站點',
+    'approved.site'         => '工作人員批准了您的網站',
+    'look'                  => '看',
 
     /* MSG */
     'string.length'         => '長度 %1$s 應該來自  %2$s -> %3$s 人物 ',

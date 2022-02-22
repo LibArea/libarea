@@ -3,7 +3,7 @@
 namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Catalog\App\Models\{WebModel, FacetModel};
+use Modules\Catalog\App\Models\{WebModel, FacetModel, UserAreaModel};
 use App\Models\PostModel;
 use Content, Translate, UserData, Breadcrumbs;
 
@@ -49,6 +49,8 @@ class Catalog
         $title = sprintf(Translate::get($sheet . '.cat.title'), $category['facet_title']);
         $desc  = sprintf(Translate::get($sheet . '.cat.desc'), $category['facet_title'], $category['facet_description']);
 
+        $count_site = ($this->user['trust_level'] == UserData::REGISTERED_ADMIN) ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+
         $parent = FacetModel::breadcrumb($category['facet_id']);
 
         return view(
@@ -57,18 +59,19 @@ class Catalog
                 'meta'  => meta($m, $title, $desc),
                 'user' => $this->user,
                 'data'  => [
-                    'screening'     => $screening,
-                    'sheet'         => $sheet,
-                    'type'          => $type,
-                    'count'         => $pagesCount,
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
-                    'items'         => $items,
-                    'category'      => $category,
-                    'childrens'     => $childrens,
-                    'breadcrumb'    => self::breadcrumb($parent, $category, $screening),
-                    // 'low_topics'    => FacetModel::getLowLevelList($category['facet_id']),
-                    'low_matching'  => FacetModel::getLowMatching($category['facet_id']),
+                    'screening'         => $screening,
+                    'sheet'             => $sheet,
+                    'type'              => $type,
+                    'count'             => $pagesCount,
+                    'pagesCount'        => ceil($pagesCount / $this->limit),
+                    'pNum'              => $page,
+                    'items'             => $items,
+                    'category'          => $category,
+                    'childrens'         => $childrens,
+                    'user_count_site'   => $count_site,
+                    'breadcrumb'        => self::breadcrumb($parent, $category, $screening),
+                    // 'low_topics'     => FacetModel::getLowLevelList($category['facet_id']),
+                    'low_matching'      => FacetModel::getLowMatching($category['facet_id']),
                 ]
             ]
         );

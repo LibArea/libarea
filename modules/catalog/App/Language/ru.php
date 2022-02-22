@@ -43,6 +43,11 @@ $data = [
     'web.top.cat.desc'      => 'Анонсированные список сайтов по тематики %1$s. %2$s',
     'web.all.cat.title'     => '%1$s — рубрика, сайты по дате',
     'web.all.cat.desc'      => 'Сайты в хронологическом порядке в рубрике %1$s. %2$s',
+    
+    'web.audits.home.title' => 'Аудит сайтов',
+    'web.audits.home.desc'  => 'Сайты на рассмотрении',
+    
+    'url.site.correctness'  => 'Адрес (URL) сайта не является корректным',
 
     'site.add'              => 'Добавить сайт',
     'site.edit'             => 'Изменить сайт',
@@ -51,6 +56,8 @@ $data = [
     'no.bookmarks.sites'    => 'Закладок пока нет',
     'user.sites.info'       => 'Список сайтов добавленных мной',
     'moderation'            => 'Модерация',
+    
+    'add.site.help'         => '<i class="gray-400">Формат заголовка:</i><br> «Agouti» — сообщество<br><br><i class="gray-400">Описание (без рекламы):</i><br> ...что есть на сайте?<i>',
 ];
 
 return $data;

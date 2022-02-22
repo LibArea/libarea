@@ -1,6 +1,6 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
 $domain = $data['domain'];
-$breadcrumb = (new Breadcrumbs())->base('/', Translate::get('home'));
+$breadcrumb = (new Breadcrumbs())->base(getUrlByName('web'), Translate::get('home'));
 $breadcrumb->addCrumb(Translate::get('site.edit'), 'red');
 $form = new Forms();
 
@@ -18,8 +18,9 @@ $form->adding(['name' => 'content_soft', 'type' => 'value', 'var' => $domain['it
 $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
 ?>
 
-<main class="col-span-12 mb-col-12">
-  <div class="box max-w780">
+<div class="grid grid-cols-12 gap-4">
+<main>
+  <div class="max-w640">
 
     <?= $breadcrumb->render('breadcrumbs'); ?>
 
@@ -32,16 +33,7 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
     <form action="<?= getUrlByName('web.edit.pr'); ?>" method="post">
       <?= csrf_field() ?>
 
-      <?= Tpl::insert('/_block/form/select/select', [
-        'data'          => $data,
-        'action'        => 'edit',
-        'type'          => 'category',
-        'title'         => Translate::get('topics'),
-        'required'      => false,
-        'maximum'       => 3,
-        'help'          => Translate::get('necessarily'),
-        'red'           => 'red'
-      ]); ?>
+      <?= includeTemplate('/view/default/_block/category', ['data' => $data, 'action' => 'edit']); ?>
 
       <?= $form->build_form(); ?>
 
@@ -58,5 +50,12 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
       <?= $form->sumbit(Translate::get('edit')); ?>
     </form>
   </div>
-</main>
+ </main>
+<aside>
+  <div class="box-white box-shadow-all text-sm">
+    <h3 class="uppercase-box"><?= Translate::get('help'); ?></h3>
+    <?= Translate::get('add.site.help'); ?>
+  <div>
+</aside>
+</div> 
 <?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

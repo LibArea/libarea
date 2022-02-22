@@ -18,14 +18,6 @@ class NotificationsController extends MainController
 
     public function index()
     {
-        $list = NotificationsModel::listNotification($this->user['id']);
-
-        $result = [];
-        foreach ($list as $ind => $row) {
-            $row['add_time']        = lang_date($row['notification_add_time']);
-            $result[$ind]           = $row;
-        }
-
         return Tpl::agRender(
             '/notification/index',
             [
@@ -33,7 +25,7 @@ class NotificationsController extends MainController
                 'data'  => [
                     'sheet'         => 'notifications',
                     'type'          => 'notifications',
-                    'notifications' => $result,
+                    'notifications' => NotificationsModel::listNotification($this->user['id']),
                 ]
             ]
         );

@@ -8,8 +8,8 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Sites added by the user
     // Сайты добавленные участником
-    public static function getUserSites($page, $limit, $user)
-    {  
+    public static function getUserSites($page, $limit, $uid)
+    {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT
                     item_id, 
@@ -41,14 +41,14 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                                 WHERE item_user_id = :uid ORDER BY item_id DESC
                                     LIMIT $start, $limit ";
 
-        return DB::run($sql, ['uid' => $user['id']])->fetchAll();
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
-    
-    public static function getUserSitesCount($user)
-    {  
+
+    public static function getUserSitesCount($uid)
+    {
         $sql = "SELECT item_id, item_is_deleted FROM items WHERE item_user_id = :uid ORDER BY item_id DESC";
 
-        return  DB::run($sql, ['uid' => $user['id']])->rowCount();
+        return  DB::run($sql, ['uid' => $uid])->rowCount();
     }
 
     // Bookmarks

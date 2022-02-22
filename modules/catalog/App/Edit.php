@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
-use App\Models\{FacetModel, PostModel};
+use App\Models\{FacetModel, PostModel, NotificationsModel};
 use Validation, Translate, UserData;
 
 class Edit
@@ -19,13 +19,14 @@ class Edit
     // Форма редактирование домена
     public function index()
     {
-        // Access rights by the trust level of the participant
-        // Права доступа по уровню доверия участника
-        $permissions = (new \Modules\Catalog\App\Сhecks())->permissions($this->user, UserData::REGISTERED_ADMIN);
-        if ($permissions == false) redirect('/');
-
         $domain_id  = Request::getInt('id');
         $domain     = WebModel::getItemId($domain_id);
+
+        // Only the site author and staff can edit
+        // Редактировать может только автор сайта и персонал
+        if (!accessСheck($domain, 'item', $this->user, false, false) === true) {
+            redirect(getUrlByName('web'));
+        }
 
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
@@ -45,7 +46,7 @@ class Edit
                     'domain'        => $domain,
                     'sheet'         => 'domains',
                     'type'          => 'web',
-                    'topic_arr'     => WebModel::getItemTopic($domain['item_id']),
+                    'category_arr'  => WebModel::getItemTopic($domain['item_id']),
                     'post_arr'      => $item_post_related,
                 ]
             ]
@@ -54,8 +55,6 @@ class Edit
 
     public function edit()
     {
-        Validation::validTl($this->user['trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
-
         $redirect   = getUrlByName('web');
         $item_id    = Request::getPostInt('item_id');
         if (!$item  = WebModel::getItemId($item_id)) {
@@ -66,7 +65,7 @@ class Edit
         $item_title_url     = Request::getPost('title');
         $item_content_url   = Request::getPost('content');
         $item_published     = Request::getPostInt('published');
-        $item_status_url    = Request::getPostInt('statusl');
+        $item_status_url    = Request::getPostInt('status');
         // soft
         $item_is_soft       = Request::getPostInt('soft');
         $item_title_soft    = Request::getPost('title_soft');
@@ -76,6 +75,17 @@ class Edit
 
         Validation::Length($item_title_url, Translate::get('title'), '14', '250', $redirect);
         Validation::Length($item_content_url, Translate::get('description'), '24', '1500', $redirect);
+
+        if (filter_var($item_url, FILTER_VALIDATE_URL) === FALSE) {
+            redirect($redirect);
+            // return json_encode(['error' => 'error', 'text' => Translate::get('url.site.correctness')]);
+        }
+
+        // Only the site author and staff can edit
+        // Редактировать может только автор сайта и персонал
+        if (!accessСheck($item, 'item', $this->user, false, false) === true) {
+            redirect(getUrlByName('web'));
+        }
 
         // Связанные посты
         $post_fields    = Request::getPost() ?? [];
@@ -88,6 +98,14 @@ class Edit
         }
         $post_related = implode(',', $id ?? []);
 
+        // If not staff, then we make the site inactive 
+        // Если не персонал, то делаем сайт не активным
+        $published = $this->user['trust_level'] == UserData::REGISTERED_ADMIN ? $item_published : 0;
+
+        // If the staff, then we save the author of the site 
+        // Если персонал, то сохраняем автора сайта
+        $uid = $this->user['trust_level'] == UserData::REGISTERED_ADMIN ? $item['item_user_id'] : $this->user['id'];
+
         WebModel::edit(
             [
                 'item_id'           => $item['item_id'],
@@ -96,8 +114,8 @@ class Edit
                 'item_content_url'  => $item_content_url,
                 'item_title_soft'   => $item_title_soft ?? '',
                 'item_content_soft' => $item_content_soft ?? '',
-                'item_published'    => $item_published,
-                'item_user_id'      => $this->user['id'],
+                'item_published'    => $published,
+                'item_user_id'      => $uid,
                 'item_type_url'     => 0,
                 'item_status_url'   => $item_status_url,
                 'item_is_soft'      => $item_is_soft,
@@ -107,6 +125,41 @@ class Edit
             ]
         );
 
+        // If the site was approved earlier, but was edited and changed the status, then:
+        // Если сайт был утвержден ранее, но был отредактирован и поменял статус, то:
+        if ($item_published == 1 || $published == 0) {
+            // Notification to staff
+            // Оповещение персоналу
+            if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
+                NotificationsModel::send(
+                    [
+                        'notification_sender_id'    => $this->user['id'],
+                        'notification_recipient_id' => 1,  // admin
+                        'notification_action_type'  => NotificationsModel::TYPE_EDIT_WEBSITE,
+                        'notification_url'          => getUrlByName('web.audits'),
+                        'notification_read_flag'    => NotificationsModel::FLAG_UNREAD,
+                    ]
+                );
+            }
+        }
+
+        // If the site has been approved:
+        // Если сайт был утвержден:
+        if ($item_published == 1 && $published == 1) {
+            // Notification to the author of the site
+            // Оповещение автору сайта
+            if ($this->user['trust_level'] == UserData::REGISTERED_ADMIN) {
+                NotificationsModel::send(
+                    [
+                        'notification_sender_id'    => $this->user['id'],
+                        'notification_recipient_id' => $uid,  // автор сайта
+                        'notification_action_type'  => NotificationsModel::WEBSITE_APPROVED,
+                        'notification_url'          => getUrlByName('web'),
+                        'notification_read_flag'    => NotificationsModel::FLAG_UNREAD,
+                    ]
+                );
+            }
+        }
 
         // Фасеты для сайте
         $post_fields    = Request::getPost() ?? [];

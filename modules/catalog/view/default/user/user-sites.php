@@ -24,10 +24,11 @@
                 </span>
               <?php } ?>
               <?= html_category($item['facet_list'], 'category', 'cat', 'tags mr15'); ?>
-              <?php if (UserData::checkAdmin()) { ?>
+
+              <?php if (accessСheck($item, 'item', $user, false, false) === true) { ?>
                 <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
                   <i class="bi bi-pencil text-sm"></i>
-                </a> <small class="gray-400">- <?= $item['item_following_link']; ?></small>
+                </a> - <?= $item['item_following_link']; ?>
               <?php } ?>
 
               <div class="list-items__text">
@@ -43,12 +44,14 @@
                       <?= $item['item_title_soft']; ?>
                     </a>
                   <?php } ?>
-                  <div>
-                    <i class="bi bi-arrow-return-right gray-600 ml10"></i>
-                    <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
-                      <?= Translate::get('more.detailed'); ?>
-                    </a>
-                  </div>
+                  <?php if ($item['item_published'] == 1) { ?>
+                    <div>
+                      <i class="bi bi-arrow-return-right gray-600 ml10"></i>
+                      <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
+                        <?= Translate::get('more.detailed'); ?>
+                      </a>
+                    </div>
+                  <?php } ?>
                 </div>
               </div>
             </div>
@@ -67,6 +70,8 @@
       <div class="box-white text-sm bg-violet-50 mt15">
         <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
         <ul class="menu">
+          <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
+
           <?= tabs_nav(
             'menu',
             $data['sheet'],

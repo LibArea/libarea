@@ -307,6 +307,10 @@ $data = [
     'in answer'             => 'In answer',
     'in the comment'        => 'In the comment',
     'to your answer'        => 'To your answer',
+    'added.site'            => 'added site',
+    'changed.site'          => 'changed site',
+    'approved.site'         => 'Staff approved your site',
+    'look'                  => 'look',
 
     /* MSG */
     'string.length'         => 'Length %1$s should be from  %2$s -> %3$s characters ',

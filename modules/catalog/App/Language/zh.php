@@ -44,6 +44,9 @@ $data = [
     'web.all.cat.title'     => '%1$s — 量規，網站按日期',
     'web.all.cat.desc'      => '專欄中按時間順序排列的網站 %1$s. %2$s',
     
+    'web.audits.home.title' => '網站審核',
+    'web.audits.home.desc'  => '正在考慮的網站',
+    
     'site.add'              => '添加站點',
     'site.edit'             => '編輯網站',
     'web.user.sites.view'   => '我的網站',
@@ -51,6 +54,8 @@ $data = [
     'no.bookmarks.sites'    => '還沒有書籤',
     'user.sites.info'       => '我添加的網站列表',
     'moderation'            => '適度',
+    
+    'add.site.help'         => '<i class="gray-400">標題格式:</i><br> «Agouti» — 社區<br><br><i class="gray-400">說明（不含廣告）:</i><br> ...網站上有什麼?<i>',
 ];
 
 return $data;

@@ -304,6 +304,10 @@ $data = [
     'in answer'             => 'în raspuns',
     'in the comment'        => 'în comentariu',
     'to your answer'        => 'la răspunsul tău',
+    'added.site'            => 'site adăugat',
+    'changed.site'          => 'site schimbat',
+    'approved.site'         => 'Personalul a aprobat site-ul dvs',
+    'look'                  => 'uite',
 
     /* MSG */
     'string.length'         => 'Lungimea %1$s trebuie să aibă între %2$s și %3$s caractere',

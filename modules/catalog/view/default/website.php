@@ -52,7 +52,7 @@
     </div>
   </main>
   <aside>
-    <div class="box bg-white br-box-gray box-shadow-all">
+    <div class="box-white box-shadow-all">
       <?php if ($data['similar']) { ?>
         <h3 class="uppercase-box"><?= Translate::get('recommended'); ?></h3>
         <?php foreach ($data['similar'] as $link) { ?>

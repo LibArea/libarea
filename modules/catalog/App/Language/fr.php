@@ -44,6 +44,9 @@ $data = [
     'web.all.cat.title'     => '%1$s — rubrique, sites par date',
     'web.all.cat.desc'      => 'Sites par ordre chronologique dans la rubrique %1$s. %2$s',
     
+    'web.audits.home.title' => 'Audit de site Web',
+    'web.audits.home.desc'  => 'Les sites sont considérés',
+    
     'site.add'              => 'Ajouter un site',
     'site.edit'             => 'Modifier le site',
     'web.user.sites.view'   => 'Mes sites',
@@ -51,6 +54,8 @@ $data = [
     'no.bookmarks.sites'    => 'Aucun marque-page pour le moment',
     'user.sites.info'       => 'Liste des sites ajoutés par moi',
     'moderation'            => 'Modération',
+    
+    'add.site.help'         => '<i class="gray-400">Format du titre:</i><br> «Agouti» — communauté<br><br><i class="gray-400">Description (sans publicité):</i><br> ...ce quil y a sur le site?<i>',
 ];
 
 return $data;

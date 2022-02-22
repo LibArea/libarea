@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
-use App\Models\FacetModel;
+use App\Models\{ActionModel, FacetModel, NotificationsModel};
 use Translate, UserData;
 
 class Add
@@ -22,8 +22,7 @@ class Add
     {
         // Access rights by the trust level of the participant
         // Права доступа по уровню доверия участника
-        $permissions = (new \Modules\Catalog\App\Сhecks())->permissions($this->user, UserData::REGISTERED_ADMIN);
-        if ($permissions == false) redirect('/');
+        (new \Modules\Catalog\App\Сhecks())->limit();
 
         // Plugin for selecting facets
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
@@ -45,10 +44,14 @@ class Add
     // Checks and directly adding 
     public function create()
     {
+        $url = Request::getPost('url');
+        if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
+            return json_encode(['error' => 'error', 'text' => Translate::get('url.site.correctness')]);
+        }
+
         // Access rights by the trust level of the participant
         // Права доступа по уровню доверия участника
-        $permissions = (new \Modules\Catalog\App\Сhecks())->permissions($this->user, UserData::REGISTERED_ADMIN);
-        if ($permissions == false) redirect('/');
+        (new \Modules\Catalog\App\Сhecks())->limit();
 
         // Check if the domain exists in the system  
         // Проверим наличие домена в системе
@@ -73,11 +76,11 @@ class Add
 
         // Instant accommodation for staff only
         // Мгновенное размещение только для персонала
-        $published = $this->user['id'] == UserData::REGISTERED_ADMIN ? 1 : 0;
+        $published = $this->user['trust_level'] == UserData::REGISTERED_ADMIN ? 1 : 0;
 
-        $item_topic = WebModel::add(
+        $item_last = WebModel::add(
             [
-                'item_url'          => Request::getPost('url'),
+                'item_url'          => $url,
                 'item_url_domain'   => $basic_host,
                 'item_title_url'    => Request::getPost('title'),
                 'item_content_url'  => $content,
@@ -103,7 +106,33 @@ class Add
             foreach ($topics as $ket => $row) {
                 $arr[] = $row;
             }
-            FacetModel::addItemFacets($arr, $item_topic['item_id']);
+            FacetModel::addItemFacets($arr, $item_last['item_id']);
+        }
+
+        ActionModel::addLogs(
+            [
+                'log_user_id'       => $this->user['id'],
+                'log_user_login'    => $this->user['login'],
+                'log_id_content'    => $item_last['item_id'],
+                'log_type_content'  => 'website',
+                'log_action_name'   => 'content.added',
+                'log_url_content'   => getUrlByName('web.audits'),
+                'log_date'          => date("Y-m-d H:i:s"),
+            ]
+        );
+
+        // Notification to staff
+        // Оповещение персоналу
+        if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
+            NotificationsModel::send(
+                [
+                    'notification_sender_id'    => $this->user['id'],
+                    'notification_recipient_id' => 1,  // admin
+                    'notification_action_type'  => NotificationsModel::TYPE_ADD_WEBSITE,
+                    'notification_url'          => getUrlByName('web.audits'),
+                    'notification_read_flag'    => NotificationsModel::FLAG_UNREAD,
+                ]
+            );
         }
 
         return true;

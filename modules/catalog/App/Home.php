@@ -3,7 +3,7 @@
 namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Catalog\App\Models\WebModel;
+use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
 use Content, Translate, UserData;
 
 class Home
@@ -47,19 +47,22 @@ class Home
             'url'        => getUrlByName($sheet),
         ];
 
+        $count_site = ($this->user['trust_level'] == UserData::REGISTERED_ADMIN) ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+
         return view(
             '/view/default/home',
             [
                 'meta'  => meta($m, Translate::get($sheet . '.home.title'), Translate::get($sheet . '.home.desc')),
                 'user'  => $this->user,
                 'data'  => [
-                    'screening'     => 'cat',
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'count'         => $pagesCount,
-                    'pNum'          => $page,
-                    'items'         => $result,
-                    'type'          => $type,
-                    'sheet'         => $sheet,
+                    'screening'         => 'cat',
+                    'pagesCount'        => ceil($pagesCount / $this->limit),
+                    'count'             => $pagesCount,
+                    'pNum'              => $page,
+                    'items'             => $result,
+                    'user_count_site'   => $count_site,
+                    'type'              => $type,
+                    'sheet'             => $sheet,
                 ]
             ]
         );

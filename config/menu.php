@@ -186,23 +186,11 @@ return [
     // Меню в каталоге
     'catalog' => [
         [
-            'tl'    => 2,
-            'url'   => getUrlByName('web.user.sites'),
-            'title' => Translate::get('web.user.sites.view'),
-            'icon'  => 'bi bi-link-45deg',
-            'id'    => 'web.user.sites',
-        ], [
             'tl'    => 1,
             'url'   => getUrlByName('web.bookmarks'),
             'title' => Translate::get('favorites'),
             'icon'  => 'bi bi-bookmark',
             'id'    => 'web.bookmarks',
-        ], [
-            'tl'    => UserData::REGISTERED_ADMIN,
-            'url'   => getUrlByName('site.add'),
-            'title' => sprintf(Translate::get('add.option'), mb_strtolower(Translate::get('website'))),
-            'icon'  => 'bi bi-plus-lg',
-            'id'    => 'official',
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('category.add'),

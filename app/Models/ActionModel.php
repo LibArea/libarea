@@ -64,9 +64,8 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
             $field_id = 'facet_id';
             $field_tl = 'facet_tl';
             $field_name = 'facet_title';
-            $condition = 'AND facet_user_id = ' . $user['id']; // AND facet_type = 'category'
             $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
-                    WHERE facet_title LIKE :facet_title AND facet_type = 'category' $condition ORDER BY facet_count DESC LIMIT 100"; 
+                    WHERE facet_title LIKE :facet_title AND facet_type = 'category' ORDER BY facet_count DESC LIMIT 100"; 
         } else {
             $condition = '';
             if ($user['trust_level'] != UserData::REGISTERED_ADMIN) {
@@ -83,7 +82,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);
-        $lists  = $result->fetchall();
+        $lists  = $result->fetchAll();
 
         $response = [];
         foreach ($lists as $list) {

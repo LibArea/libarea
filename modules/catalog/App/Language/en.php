@@ -44,6 +44,9 @@ $data = [
     'web.all.cat.title'     => '%1$s — rubric, sites by date',
     'web.all.cat.desc'      => 'Sites in chronological order in the rubric %1$s. %2$s',
 
+    'web.audits.home.title' => 'Site audit',
+    'web.audits.home.desc'  => 'Sites under consideration',
+
     'site.add'              => 'Add site',
     'site.edit'             => 'Edit site',
     'web.user.sites.view'   => 'My Sites',
@@ -51,6 +54,8 @@ $data = [
     'no.bookmarks.sites'    => 'Încă nu există marcaje',
     'user.sites.info'       => 'Lista site-urilor adăugate de mine',
     'moderation'            => 'Moderation',
+    
+    'add.site.help'         => '<i class="gray-400">Title Format:</i><br> «Agouti» — community<br><br><i class="gray-400">Description (without advertising):</i><br> ...what is on the site?<i>',
 ];
 
 return $data;

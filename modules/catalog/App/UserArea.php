@@ -22,8 +22,8 @@ class UserArea
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $pagesCount = UserAreaModel::getUserSitesCount($this->user);
-        $items  = UserAreaModel::getUserSites($page, $this->limit, $this->user);
+        $pagesCount = UserAreaModel::getUserSitesCount($this->user['id']);
+        $items  = UserAreaModel::getUserSites($page, $this->limit, $this->user['id']);
 
         $result = [];
         foreach ($items as $ind => $row) {
@@ -47,13 +47,14 @@ class UserArea
                 'meta'  => meta($m, Translate::get('my.site'), Translate::get('my.site')),
                 'user'  => $this->user,
                 'data'  => [
-                    'screening'     => 'cat',
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'count'         => $pagesCount,
-                    'pNum'          => $page,
-                    'items'         => $result,
-                    'type'          => $type,
-                    'sheet'         => $sheet,
+                    'screening'         => 'cat',
+                    'pagesCount'        => ceil($pagesCount / $this->limit),
+                    'count'             => $pagesCount,
+                    'pNum'              => $page,
+                    'items'             => $result,
+                    'user_count_site'   => $pagesCount,
+                    'type'              => $type,
+                    'sheet'             => $sheet,
                 ]
             ]
         );
@@ -69,19 +70,22 @@ class UserArea
         $items      = UserAreaModel::bookmarks($page, $this->limit, $this->user['id']);
         $pagesCount = UserAreaModel::bookmarksCount($this->user['id']);
 
+        $count_site = ($this->user['trust_level'] == UserData::REGISTERED_ADMIN) ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+
         return view(
             '/view/default/user/bookmarks',
             [
                 'meta'  => meta([], Translate::get('favorites'), Translate::get('favorites')),
                 'user' => $this->user,
                 'data'  => [
-                    'screening'     => 'cat',
-                    'sheet'         => $sheet,
-                    'type'          => $type,
-                    'count'         => $pagesCount,
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
-                    'items'         => $items,
+                    'screening'         => 'cat',
+                    'sheet'             => $sheet,
+                    'type'              => $type,
+                    'count'             => $pagesCount,
+                    'pagesCount'        => ceil($pagesCount / $this->limit),
+                    'user_count_site'   => $count_site,
+                    'pNum'              => $page,
+                    'items'             => $items,
                 ]
             ]
         );

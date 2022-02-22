@@ -3,7 +3,8 @@
  * Settings for the catalog 
  * Настройки для каталога
  */
-
+$ch = Translate::get('characters');
+$fe = Translate::get('for example');
 return [
   // Fields for adding and editing a site in the catalog 
   // Поля для добавления и редактирования сайта в каталоге
@@ -11,12 +12,12 @@ return [
     [
       'title'   => Translate::get('title'),
       'tl'      => 2,
-      'arr'     => ['min' => 14, 'max' => 250, 'required' => true],
+      'arr'     => ['min' => 14, 'max' => 250, 'required' => true, 'help' => '> 14 ' . $ch . '. ' . $fe . ': «Agouti» — сообщество'],
       'name'    => 'title'
     ], [
       'title'   => 'URL',
       'tl'      => 2,
-      'arr'     => ['required' => true],
+      'arr'     => ['required' => true, 'help' => $fe . ': https://google.ru'],
       'name'    => 'url',
     ],  [
       'title'   => Translate::get('status'),
@@ -26,7 +27,7 @@ return [
     ], [
       'title'   => Translate::get('description'),
       'tl'      => 2,
-      'arr'     => ['type' => 'textarea', 'required' => true],
+      'arr'     => ['type' => 'textarea', 'required' => true, 'help' => '> 25 ' . $ch],
       'name'    => 'content',
     ], [
       'title'   => Translate::get('posted'),

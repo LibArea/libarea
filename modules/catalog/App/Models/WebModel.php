@@ -63,7 +63,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         switch ($sheet) {
             case 'web':
-                $sort     = "WHERE item_is_deleted = 0 ORDER BY item_id DESC";
+                $sort     = "WHERE item_is_deleted = 0 AND item_published = 1 ORDER BY item_id DESC";
                 break;
             case 'web.top':
                 $sort     = "WHERE item_is_deleted = 0 ORDER BY item_votes DESC";
@@ -357,7 +357,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_url_domain
                         FROM items 
                             WHERE item_id < :item_id 
-                                AND item_is_deleted = 0
+                                AND item_published = 1 AND item_is_deleted = 0
                                     ORDER BY item_id DESC LIMIT $limit";
 
         return DB::run($sql, ['item_id' => $item_id])->fetchall();

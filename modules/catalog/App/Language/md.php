@@ -44,6 +44,9 @@ $data = [
     'web.all.cat.title'     => '%1$s — rubrică, site-uri după dată',
     'web.all.cat.desc'      => 'Site-uri în ordine cronologică în rubrica %1$s. %2$s',
     
+    'web.audits.home.title' => 'Auditul site-ului',
+    'web.audits.home.desc'  => 'Site-uri luate în considerare',
+    
     'site.add'              => 'Adăugați site',
     'site.edit'             => 'Editați site-ul',
     'web.user.sites.view'   => 'Site-urile mele',
@@ -51,6 +54,8 @@ $data = [
     'no.bookmarks.sites'    => 'Încă nu există marcaje',
     'user.sites.info'       => 'Lista site-urilor adăugate de mine',
     'moderation'            => 'Moderare',
+    
+    'add.site.help'         => '<i class="gray-400">Formatul titlului:</i><br> «Agouti» — comunitate<br><br><i class="gray-400">Descriere (fara publicitate):</i><br> ...ce este pe site?<i>',
 ];
 
 return $data;

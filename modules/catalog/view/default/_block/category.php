@@ -1,18 +1,9 @@
-<?
-// $type (topic | blog | user | trust level)
-// $action (edit)
-?>
-
 <fieldset>
   <label>
-    <?= Translate::get('category'); ?> <?php if (!empty($red)) { ?><sup class="red-500">*</sup><?php } ?>
+    <?= Translate::get('category'); ?> <sup class="red-500">*</sup>
   </label>
-
-  <?php if ($action == 'edit' || $action == 'add') { ?>
-    <input name="facet_select[]" id="topic_id" required>
-  <?php } ?>
-
-  <?php if (!empty($help)) { ?><div class="gray text-sm"><?= $help; ?>...</div><?php } ?>
+  <input name="facet_select[]" id="category_id" required>
+  <div class="help"><?= Translate::get('necessarily'); ?>...</div>
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
@@ -32,7 +23,7 @@
     try {
       const fetchResponse = await fetch('/search/category', settings);
       return await fetchResponse.json();
-    } catch (e) {
+    } catch (e) { 
       return e;
     }
   };
@@ -40,11 +31,10 @@
   document.addEventListener("DOMContentLoaded", async () => {
 
     let search = await focus_search();
-    let input = document.querySelector('#topic_id');
+    let input = document.querySelector('#category_id');
 
     let options = {
       tagTextProp: "facet_title", // <- чтобы не переопределять title в запросах
-      // userInput: false,        // <- отключим пользовательский ввод
       skipInvalid: true, // <- не добавлять повтороно не допускаемые теги
       enforceWhitelist: true, // <- добавлять только из белого списка
       dropdown: {
@@ -63,8 +53,7 @@
     let tagify = new Tagify(input, options);
 
     <?php if ($action == 'edit') { ?>
-      // tagify.addTags([{id:'20', value:'Веб-разработка'},{id:'43', value:'Новости и СМИ'},])
-      tagify.addTags(JSON.parse('<?= json_encode($data['topic_arr']) ?>'))
+      tagify.addTags(JSON.parse('<?= json_encode($data['category_arr']) ?>'))
     <?php } else { ?>
       <?php if (!empty($data['topic'])) { ?>
         <?php if ($data['topic']) {
@@ -81,6 +70,6 @@
       <?php } else { ?>
         tagify.addTags([])
       <?php } ?>
-    <?php }  ?>
+    <?php }  ?> 
   });
 </script>

@@ -307,6 +307,10 @@ $data = [
     'in answer'             => 'в ответе',
     'in the comment'        => 'в комментарии',
     'to your answer'        => 'на ваш ответ',
+    'added.site'            => 'добавил сайт',
+    'changed.site'          => 'изменил сайт',
+    'approved.site'         => 'Персонал утвердил Ваш сайт',
+    'look'                  => 'посмотреть',
 
     /* MSG */
     'string.length'         => 'Длина %1$s должна быть от %2$s до %3$s символов',
