@@ -77,7 +77,8 @@ class UserData
                 (new \App\Controllers\Auth\SessionController())->annul($user['id']);
             }
             
-            Translate::setLang($user['lang']);
+            $lang = $user['lang'] ?? Config::get('general.lang');
+            Translate::setLang($lang);
             
         } else {
 

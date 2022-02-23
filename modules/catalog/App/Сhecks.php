@@ -65,11 +65,11 @@ class Сhecks
         return $in_total;
     }
     
-    public static function checkStatus(string $url): void
+    public static function checkStatus(string $url)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_USERAGENT, sekf::USER_AGENT);
+        curl_setopt($ch, CURLOPT_USERAGENT, self::USER_AGENT);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
@@ -79,7 +79,7 @@ class Сhecks
         $page = curl_exec($ch);
 
         $err = curl_error($ch);
-        if (!empty($err))
+        if (!empty($err))  
         return $err;
 
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

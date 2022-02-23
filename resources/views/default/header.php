@@ -60,11 +60,11 @@ $facet    = $data['facet'] ?? false;
               <i class="bi bi-brightness-high gray-400 text-xl"></i>
             </div>
             <?php if (Config::get('general.invite') == false) { ?>
-              <a class="register gray ml45 mr15 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
+              <a class="w94 gray ml45 mr15 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
                 <?= Translate::get('sign.up'); ?>
               </a>
             <?php } ?>
-            <a class="btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
+            <a class="w94 btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
               <?= Translate::get('sign.in'); ?>
             </a>
           </div>

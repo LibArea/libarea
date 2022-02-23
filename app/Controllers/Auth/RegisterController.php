@@ -154,7 +154,7 @@ class RegisterController extends MainController
                 ]
             );
 
-            addMsg('successfully, log in', 'success');
+            addMsg('successfully.login', 'success');
 
             redirect(getUrlByName('login'));
         }

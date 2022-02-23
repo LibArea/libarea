@@ -9,25 +9,30 @@ class NotificationsModel extends \Hleb\Scheme\App\Models\MainModel
     // $action_type
     // 1 - сообщение 
     // 2 - пост
-    // 3 - ответ
-    // 4 - комментарий
-    // 5 - пост в чат
+    // 3 - ответ на пост
+    // 4 - комментарий на ответ в посте
+    // 5 - публикация в чат
     // 6 - понравился пост
-    // 7 - понравился ответ
+    // 7 - понравился ответ на пост
+    // 8 - понравился комментарий
     // 10 - обращение в постах (@login)
-    // 11 - в ответах (@login)
-    // 12 - в комментариях (@login)
-    // 15 - аудит
+    // 11 - в ответах  к постам (@login)
+    // 12 - в комментариях к постам (@login)
     // 20 - флаг система
-    // 32 - сайт добавлен
-    // 33 - сайт изменен и поменял статус
-    // 34 - ваш сайт добавлен
+    // 21 - аудит (бывший 15)
+    // 30 - сайт добавлен (бывший 32)
+    // 31 - сайт изменен и поменял статус (бывший 33)
+    // 32 - ваш сайт утвержден (бывший 34)
+    // 33 - был добавлен новый сайт в категорию на которую подписан
+    // 34 - был добавлен новый комментарий на сайт
+    // 35 - на ваш комментарий был дан ответ
+    // 36 - обращение (@) к комментариях на сайт
     
     const FLAG_UNREAD           = 0;  // Unread
     
-    const TYPE_ADD_WEBSITE      = 32; // Site added
-    const TYPE_EDIT_WEBSITE     = 33; // changed and status changed
-    const WEBSITE_APPROVED      = 34; // approved
+    const TYPE_ADD_WEBSITE      = 30; // Site added
+    const TYPE_EDIT_WEBSITE     = 31; // changed and status changed
+    const WEBSITE_APPROVED      = 32; // approved
 
     // Лист уведомлений
     public static function listNotification($uid)
