@@ -76,10 +76,7 @@ class UserData
             if ($user['ban_list'] == self::BANNED_USER) {
                 (new \App\Controllers\Auth\SessionController())->annul($user['id']);
             }
-            
-            $lang = $user['lang'] ?? Config::get('general.lang');
-            Translate::setLang($lang);
-            
+           
         } else {
 
             $remember = Request::getCookie('remember');
@@ -87,6 +84,9 @@ class UserData
                 (new \App\Controllers\Auth\RememberController())->check($remember);
             }
         }
+
+        $lang = $user['lang'] ?? Config::get('general.lang');
+        Translate::setLang($lang);
 
         self::$myAccount = $user ?? null;
 

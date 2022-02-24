@@ -1,0 +1,1 @@
+a:2:{i:0;a:2:{s:1:"k";s:11:"admin_email";s:1:"v";s:15:"adm@ag.ru";}i:1;a:2:{s:1:"k";s:4:"lang";s:1:"v";s:2:"ru";}}

@@ -203,6 +203,10 @@ define('HLEB_SEARCH_DBASE_CONFIG_FILE', realpath(HLEB_GLOBAL_DIRECTORY . '/confi
 // Root template folder on the system 
 define('TEMPLATES', realpath(HLEB_GLOBAL_DIRECTORY . '/resources/views'));
 
+// To store settings in serialized form
+// Для хранения настроек в сериализованом виде
+define('CACHE_SETTINGS_DIRECTORY', realpath(HLEB_GLOBAL_DIRECTORY . '/storage/cache/settings'));
+
 /*
  |-----------------------------------------------------------------------------
  | File paths
