@@ -33,7 +33,7 @@ $dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
             <?php if (!UserData::checkActiveUser()) { ?>
               <?php if (Config::get('general.invite') == false) { ?>
                 <a class="register gray-400 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
-                  <?= Translate::get('sign.up'); ?>
+                  <?= Translate::get('registration'); ?>
                 </a>
               <?php } ?>
               <a class="gray-400 mr10 ml10" href="<?= getUrlByName('login'); ?>">

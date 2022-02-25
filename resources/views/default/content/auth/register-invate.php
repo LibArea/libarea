@@ -13,7 +13,7 @@ $form->html_form($user['trust_level'], Config::get('form/auth.register'));
       <fieldset>
         <input type="hidden" name="invitation_code" value="<?= $data['invate']['invitation_code']; ?>">
         <input type="hidden" name="invitation_id" value="<?= $data['invate']['uid']; ?>">
-        <?= sumbit(Translate::get('sign.up')); ?>
+        <?= sumbit(Translate::get('registration')); ?>
       </fieldset>
     </form>
 </main>

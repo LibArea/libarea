@@ -44,7 +44,7 @@
       <i class="bi bi-eye"></i> <?= $data['user']['hits_count']; ?>
     </fieldset>
     <fieldset>
-      <label for="post_title"><?= Translate::get('sign.up'); ?></label>
+      <label for="post_title"><?= Translate::get('registration'); ?></label>
       <?= $data['user']['created_at']; ?> |
       <?= $data['user']['reg_ip']; ?>
       <?php if ($data['user']['duplicat_ip_reg'] > 1) { ?>

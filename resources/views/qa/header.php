@@ -57,7 +57,7 @@ $facet  = $data['facet'] ?? false; ?>
           </div>
           <?php if (Config::get('general.invite') == false) { ?>
             <a class="w94 gray ml30 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
-              <?= Translate::get('sign.up'); ?>
+              <?= Translate::get('registration'); ?>
             </a>
           <?php } ?>
           <a class="w94 btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
