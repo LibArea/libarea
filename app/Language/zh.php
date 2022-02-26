@@ -411,7 +411,6 @@ $data = [
     'the topic does not exist'              => '指定的主題不存在',
     'site.replay'             => '這樣的站點已經在系統中',
     'joined in the early days'              => '在社區啟動的早期加入',
-    'the profile is being checked'          => '您的個人資料待處理',
     'nickname-replay'                       => '該暱稱已在網站上',
     'e-mail-replay'                         => '此電子郵件已在網站上',
     'multiple-accounts'                     => '不要註冊多個賬戶 ',

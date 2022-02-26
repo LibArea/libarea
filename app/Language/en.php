@@ -411,7 +411,6 @@ $data = [
     'the topic does not exist'              => 'The specified topic does not exist',
     'site.replay'             => 'Such a site is already in the system',
     'joined in the early days'              => 'Joined in the early days of the community launch',
-    'the profile is being checked'          => 'Your profile is pending',
     'nickname-replay'                       => 'This nickname is already on the site',
     'e-mail-replay'                         => 'This email is already on the site',
     'multiple-accounts'                     => 'Don. t register multiple accounts ',

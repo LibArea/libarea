@@ -82,7 +82,6 @@ class TopicFacetController extends MainController
                     'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
                     'low_matching'  => FacetModel::getLowMatching($facet['facet_id']),
                     'writers'       => FacetModel::getWriters($facet['facet_id'], 5),
-                    'pages'         => (new \App\Controllers\PageController())->last($facet['facet_id']),
                 ],
                 'facet'   => ['facet_id' => $facet['facet_id'], 'facet_type' => $facet['facet_type'], 'facet_user_id' => $facet['facet_user_id']],
             ]

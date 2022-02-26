@@ -24,6 +24,7 @@ class SessionController extends MainController
 
         AuthModel::deleteTokenByUserId($uid);
 
-        redirect(getUrlByName('info.restriction'));
+        addMsg('account.being.verified', 'success');
+        redirect('/');
     }
 }

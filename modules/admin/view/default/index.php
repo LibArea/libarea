@@ -72,12 +72,17 @@
 
 <?php if ($data['posts_no_topic']) { ?>
   <div class="white-box mt10 pt5 pr15 pb5 pl15">
-    <h3 class="uppercase-box"><?= Translate::get('posts'); ?> (no-topic)</h3>
+    <h3 class="uppercase-box"><?= Translate::get('posts'); ?> (no facet)</h3>
     <?php foreach ($data['posts_no_topic'] as $post) { ?>
       <div class="gray">
-        <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
-          <?= $post['post_title']; ?>
-        </a>
+        <?php if ($post['post_type'] == 'post') { ?> 
+          <?php $url = getUrlByName($post['post_type'], ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
+        <?php } else { ?> 
+          <?php $url = getUrlByName('info.page', ['slug' => $post['post_slug']]); ?>
+        <?php } ?>
+          <a href="<?= $url; ?>">        
+            <?= $post['post_title']; ?>
+          </a>
       </div>
     <?php } ?>
   </div>

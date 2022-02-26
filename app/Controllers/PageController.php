@@ -18,13 +18,11 @@ class PageController extends MainController
 
     public function index()
     {
-        $facet      = Request::get('facet');
         $slug       = Request::get('slug');
-
         $page   = PageModel::getPage($slug, $this->user['id'], 'slug');
         pageError404($page);
 
-        $facet   = FacetModel::getFacet($facet, 'slug', 'section');
+        $facet   = FacetModel::getFacet('info', 'slug', 'section');
         pageError404($page);
 
         $page['post_content']   = Content::text($page['post_content'], 'text');
@@ -64,12 +62,6 @@ class PageController extends MainController
     }
 
     // Последние 5 страниц по id контенту
-    public function redirectPage()
-    {
-        redirect('/info/' . Config::get('facets.info'));
-    }
-
-    // Последние 5 страниц по id контенту
     public function last($content_id)
     {
         return PageModel::recentPosts($content_id, null);
@@ -81,24 +73,4 @@ class PageController extends MainController
         return PageModel::recentPostsAll();
     }
 
-    public function restriction()
-    {
-        $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('info.restriction'),
-        ];
-
-        return Tpl::agRender(
-            '/page/restriction',
-            [
-                'meta'  => meta($m, Translate::get('restriction'), Translate::get('the profile is being checked')),
-                'data'  => [
-                    'sheet' => 'restriction',
-                    'type'  => 'page',
-                ]
-            ]
-        );
-    }
 }

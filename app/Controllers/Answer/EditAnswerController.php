@@ -38,7 +38,7 @@ class EditAnswerController extends MainController
                 'data'  => [
                     'answer_id' => $answer['answer_id'],
                     'post_id'   => $post['post_id'],
-                    'content'   => $answer['answer_content'],
+                    'content'   => preg_replace('/</','',$answer['answer_content']),
                     'sheet'     => 'edit-answers',
                     'post'      => $post,
                     'type'      => 'answer',

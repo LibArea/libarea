@@ -592,6 +592,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     post_id,
                     post_title,
                     post_slug,
+                    post_type,
                     post_draft,
                     post_is_deleted,
                     relation_post_id,

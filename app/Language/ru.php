@@ -416,7 +416,6 @@ $data = [
     'the topic does not exist'              => 'Указанной темы не существует',
     'site.replay'             => 'Такой сайт уже есть в системе',
     'joined in the early days'              => 'Присоединился в первые дни запуска сообщества',
-    'the profile is being checked'          => 'Ваш профиль находится на рассмотрении',
     'nickname-replay'                       => 'Такой никнейм уже есть на сайте',
     'e-mail-replay'                         => 'Такой e-mail уже есть на сайте',
     'multiple-accounts'                     => 'Не регистрируйте множественные аккаунты',

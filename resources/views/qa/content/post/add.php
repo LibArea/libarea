@@ -7,11 +7,11 @@
     <form action="<?= getUrlByName('post.create'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
-    <fieldset>
-      <label for="post_title"><?= Translate::get('heading'); ?></label>
-      <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
-      <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>  
-    </fieldset>
+      <fieldset>
+        <label for="post_title"><?= Translate::get('heading'); ?></label>
+        <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
+        <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>
+      </fieldset>
 
       <?php if (!empty($data['blog'])) { ?>
         <?= Tpl::import('/_block/form/select/blog', [
@@ -40,7 +40,7 @@
           </div>
           <div class="left w-30 pl5">
             <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= Translate::get('to extract'); ?>" />
-          </div>  
+          </div>
         </fieldset>
       <?php } ?>
 
@@ -69,18 +69,16 @@
         'user'       => $user,
       ]); ?>
 
-      <?php if ($user['trust_level'] > 1) { ?>
-      <?= Tpl::import('/_block/form/radio',  [
-        'data' => [
-          [
-            'title' => Translate::get('draft'),
-            'name'  => 'post_draft',
-          ]
-        ],
-      ]); ?>
-    <?php } ?>
+      <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) { ?>
+        <?= Tpl::import('/_block/form/radio',  [
+          'data' => [
+            [
+              'title' => Translate::get('draft'),
+              'name'  => 'post_draft',
+            ]
+          ],
+        ]); ?>
 
-      <?php if ($user['trust_level'] > 2) { ?>
         <?= Tpl::import('/_block/form/select/content-tl', [
           'user' => $user,
           'data' => null
@@ -109,7 +107,7 @@
         ]
       ]); ?>
 
-      <?php if ($user['trust_level'] > 3) { ?>
+      <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
@@ -131,5 +129,5 @@
 
       <p><?= sumbit(Translate::get('create')); ?></p>
     </form>
-  </div>  
+  </div>
 </main>

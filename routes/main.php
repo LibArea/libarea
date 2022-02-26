@@ -35,7 +35,6 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 Route::get('/web/create')->module('catalog', 'App\Add@create')->name('web.create');
                 Route::get('/facet/create')->controller('Facets\AddFacetController@create')->name('facet.create');
                 Route::get('/post/edit')->controller('Post\EditPostController@edit')->name('post.edit.pr');
-                Route::get('/page/edit')->controller('Post\EditPostController@editPage')->name('page.edit.pr');
                 Route::get('/comment/edit')->controller('Comment\EditCommentController@edit')->name('comment.edit.pr');
                 Route::get('/answer/edit')->controller('Answer\EditAnswerController@edit')->name('answer.edit.pr');
                 Route::get('/web/edit')->module('catalog', 'App\Edit@edit')->name('web.edit.pr');
@@ -139,6 +138,8 @@ Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('F
 Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
+Route::get('/info/{slug}')->controller('PageController')->where(['slug' => '[A-Za-z0-9-_]+'])->name('info.page');
+
 Route::get('/users')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
 Route::get('/users/page/{page?}')->controller('User\UserController', ['users.all', 'user'])->where(['page' => '[0-9]+']);
 Route::get('/users/new')->controller('User\UserController', ['users.new', 'user'])->name('users.new');
@@ -207,9 +208,4 @@ Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where
 Route::type(['get', 'post'])->get('/search')->module('search', 'App\Search')->name('search');
 
 require 'admin.php';
-
-Route::get('/info/restriction')->controller('PageController@restriction')->name('info.restriction');
-Route::get('/{facet}/{slug}')->controller('PageController')->where(['facet' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('page');
-Route::get('/info')->controller('PageController@redirectPage');
-Route::get('/info/information')->controller('PageController@restriction')->name('info.information');
  

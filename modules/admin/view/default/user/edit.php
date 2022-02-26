@@ -150,7 +150,7 @@
     </fieldset>
 
     <h3><?= Translate::get('contacts'); ?></h3>
-    <?php foreach (Config::get('fields-profile') as $block) { ?>
+    <?php foreach (Config::get('/form/user-setting') as $block) { ?>
       <fieldset>
         <label for="title"><?= $block['lang']; ?></label>
         <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
