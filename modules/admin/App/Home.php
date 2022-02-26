@@ -37,8 +37,8 @@ class Home
             [
                 'meta'  => meta($m = [], Translate::get('Css')),
                 'data'  => [
-                    'type'  => 'Css',
-                    'sheet' => 'Css',
+                    'type'  => 'css',
+                    'sheet' => 'css',
                 ]
             ]
         );

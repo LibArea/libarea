@@ -24,7 +24,7 @@
     </form>
   </fieldset>
   <fieldset>
-    <label><?= Translate::get('trust level'); ?></label>
+    <label><?= Translate::get('trust.level'); ?></label>
     <form action="<?= getUrlByName('admin.users.tl'); ?>">
       <?= sumbit(Translate::get('update.data')); ?>
     </form>

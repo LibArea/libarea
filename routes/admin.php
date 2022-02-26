@@ -10,7 +10,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
         Route::get('/user/ban')->module('admin', 'App\Users@banUser');
         Route::get('/favicon/add')->module('admin', 'App\Webs@favicon');
         Route::get('/word/ban')->module('admin', 'App\Words@deletes');
-        Route::get('/navigation/ban')->module('admin', 'App\Navigation@visibility');
         Route::get('/audit/status')->module('admin', 'App\Audits@status');
         Route::get('/reports/status')->module('admin', 'App\Reports@status');
         Route::get('/topic/ban')->module('admin', 'App\Facets@deletes');
@@ -20,8 +19,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
             Route::get('/badge/user/create')->module('admin', 'App\Badges@addUser')->name('admin.user.badge.create');
             Route::get('/badge/create')->module('admin', 'App\Badges@create')->name('admin.badge.create');
             Route::get('/badge/edit/{id}')->module('admin', 'App\Badges@edit')->where(['id' => '[0-9]+']);
-            Route::get('/navigation/create')->module('admin', 'App\Navigation@create')->name('admin.navigation.create');
-            Route::get('/navigation/edit')->module('admin', 'App\Navigation@edit')->name('admin.navigation.edit');
             Route::get('/word/create')->module('admin', 'App\Words@create')->name('admin.word.create');
             Route::get('/user/edit/{id}')->module('admin', 'App\Users@edit')->where(['id' => '[0-9]+']);
         Route::endProtect();
@@ -70,8 +67,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/badges/{id}/edit')->module('admin', 'App\Badges@editPage', ['badges.edit', 'badges'])->where(['id' => '[0-9]+'])->name('admin.badges.edit');
     Route::get('/badges/user/add/{id}')->module('admin', 'App\Badges@addUserPage', ['add', 'badges'])->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
   
-    Route::get('/sites')->module('admin', 'App\Webs', ['web', 'sites'])->name('admin.sites');
-    Route::get('/sites/page/{page?}')->module('admin', 'App\Webs', ['sites.all', 'sites'])->where(['page' => '[0-9]+']);
     Route::get('/words/add')->module('admin', 'App\Words@addPage', ['add', 'words'])->name('words.add');
     Route::get('/words')->module('admin', 'App\Words', ['words.all', 'words'])->name('admin.words');
     
@@ -84,10 +79,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/structure/section')->module('admin', 'App\TreeFacet', ['section'])->name('admin.section.structure');
     Route::get('/structure/category')->module('admin', 'App\TreeFacet', ['category'])->name('admin.category.structure');
 
-    Route::get('/navigation')->module('admin', 'App\Navigation')->name('admin.navigation');
-    Route::get('/navigation/sub/{id}')->module('admin', 'App\Navigation@subPage')->where(['id' => '[0-9]+'])->name('admin.navigation.sub');
-    Route::get('/navigation/{id}/add')->module('admin', 'App\Navigation@addPage')->where(['id' => '[0-9]+'])->name('admin.navigation.add');
-    
     Route::get('/css')->module('admin', 'App\Home@css')->name('admin.css');
     Route::get('/info')->module('admin', 'App\Home@css')->name('admin.info');
     

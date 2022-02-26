@@ -11,8 +11,8 @@
   <?php if ($data['logs']) { ?>
     <table>
       <thead>
-        <th class="left">N</th>
-        <th><?= Translate::get('users'); ?></th>
+        <th class="w60">N</th>
+        <th class="w160"><?= Translate::get('users'); ?></th>
         <th><?= Translate::get('type'); ?></th>
         <th><?= Translate::get('action'); ?></th>
         <th><?= Translate::get('time'); ?></th>
@@ -22,8 +22,10 @@
         <tr>
           <td><?= $log['log_id']; ?></td>
           <td>
-            <span class="gray-400 mr15">id: <?= $log['log_user_id']; ?></span>
-            <a href="<?= getUrlByName('profile', ['login' => $log['log_user_login']]); ?>"><?= $log['log_user_login']; ?></a>
+            <a href="<?= getUrlByName('profile', ['login' => $log['log_user_login']]); ?>">
+              <?= $log['log_user_login']; ?>
+            </a>
+            <sup class="gray-400 ml5">id:<?= $log['log_user_id']; ?></sup>
           </td>
           <td class="gray-400"><?= Translate::get($log['log_type_content']); ?></td>
           <td><?= sprintf(Translate::get($log['log_action_name']), Translate::get($log['log_type_content'])); ?></td>

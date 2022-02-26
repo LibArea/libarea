@@ -14,7 +14,6 @@ $data = [
     'update.data'       => 'Update the data',
     'build'             => 'Collect',
     'test.email'        => 'Testing the messaging system',
-    'bg.info'           => 'We can add/remove  <i class="bg-amber-100">.bg-</i> to obtain',
 ];
 
 return $data;

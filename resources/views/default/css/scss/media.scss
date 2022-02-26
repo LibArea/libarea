@@ -17,6 +17,7 @@
   .mb-col-12 { grid-column: span 12 / span 12; }
   .mb-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
   .mb-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mb-w-100 { width: 100%; }
   .mb-w100 { width: 100px; }
   .mb-ml10 { margin-left: 10px; }
   .mb-ml20 { margin-left: 20px; }

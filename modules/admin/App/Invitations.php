@@ -23,8 +23,8 @@ class Invitations
             [
                 'meta'  => meta($m = [], Translate::get('invites')),
                 'data'  => [
-                    'type'          => 'invites',
-                    'sheet'         => 'all',
+                    'type'          => 'invitations',
+                    'sheet'         => 'invitations',
                     'invitations'   => $result,
                 ]
             ]

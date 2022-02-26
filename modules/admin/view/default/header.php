@@ -22,24 +22,26 @@ $dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
     <div class="wrap">
       <div class="d-header_contents">
         <div class="flex items-center w200">
-          <a class="ml5 sky-500" href="/">
-            <i class="bi bi-house"></i>
-          </a>
-          <span class="mr5 ml5">/</span>
           <a href="<?= getUrlByName('admin'); ?>">
             <span class="black"><?= Translate::get('admin'); ?></span>
           </a>
         </div>
-        <div class="mr30 relative mb-none w-90">
-          <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
-            <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="search">
-            <input name="token" value="<?= csrf_token(); ?>" type="hidden">
-            <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
-          </form>
+        <div class="relative w-90">
+          <a class="gray-400" href="<?= getUrlByName('admin.all.structure'); ?>">
+            <i class="bi bi-columns-gap middle mr5 text-sm"></i>
+            <span class="mb-none"><?= Translate::get('structure'); ?></span>
+          </a>
+          <a class="gray-400 ml30" href="<?= getUrlByName('admin.tools'); ?>">
+            <i class="bi bi-tools middle mr5 text-sm"></i>
+            <span class="mb-none"><?= Translate::get('tools'); ?></span>
+          </a>
         </div>
-        <div class="black m15">
+        <div class="m15 gray-400 mb-none">
           <?= Request::getRemoteAddress(); ?>
         </div>
+          <a class="ml5 sky-500" href="/">
+            <i class="bi bi-house"></i>
+          </a>
       </div>
     </div>
   </header>

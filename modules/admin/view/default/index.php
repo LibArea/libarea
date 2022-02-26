@@ -8,7 +8,7 @@
 ); ?>
 
 <div class="w-100">
-  <div class="w-50 left">
+  <div class="w-50 left mb-w-100">
     <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('content'); ?></h3>
       <?php
@@ -56,7 +56,7 @@
 
     </div>
   </div>
-  <div class="w-50 left">
+  <div class="w-50 left mb-w-100">
     <div class="box-white ml20">
       <h3 class="uppercase-box"><?= Translate::get('users'); ?></h3>
       <?php foreach ($data['last_visit'] as $user) { ?>
@@ -82,23 +82,6 @@
     <?php } ?>
   </div>
 <?php } ?>
-
-<div class="pt15">
-  <a class="mr15 ml15" href="<?= getUrlByName('admin.css'); ?>">
-    <i class="bi bi-brush gray-400 mr5"></i>
-    CSS
-  </a>
-
-  <a class=" mr15" href="<?= getUrlByName('admin.tools'); ?>">
-    <i class="bi bi-tools gray-400 mr5"></i>
-    <?= Translate::get('tools'); ?>
-  </a>
-
-  <a class="mr15" href="<?= getUrlByName('admin.words'); ?>">
-    <i class="bi bi-badge-ad gray-400 mr5"></i>
-    <?= Translate::get('words'); ?>
-  </a>
-</div>
 
 <div class="mt10 p15 gray-600">
   <h3 class="uppercase-box"><?= Translate::get('useful.resources'); ?></h3>

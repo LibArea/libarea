@@ -1,45 +1,15 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
 <div class="col-span-2 mb-none">
-  <nav class="sticky top-sm">
-
-    <ul class="menu" id="menu">
-      <?php foreach (Modules\Admin\App\Navigation::menu() as $cats) {
-        $active = $data['type'] == $cats['name'] ? 'class="sky-500  "' : 'class="gray   block"';
-      ?>
-
-        <?php if ($cats['radical']  == 1) { ?>
-          <li> <a <?= $active; ?> href="<?= getUrlByName($cats['url']); ?>">
-              <i class="<?= $cats['icon']; ?> middle mr10 text-xl"></i>
-              <?= Translate::get($cats['name']); ?>
-            </a></li>
-        <?php } else { ?>
-
-          <?php if ($cats['parent'] == 0) { ?></li>
-            <li><?php } ?>
-
-            <a class="dropdown-btn" href="#">
-              <span class="right"><i class="bi bi-chevron-down text-xl"></i></span>
-              <i class="bi bi-lis3t middle mr10 text-xl"></i>
-              <?= Translate::get($cats['name']); ?>
-            </a>
-            <div class="none">
-              <?php if ($cats['childs'] > 0) { ?>
-                <ul class="pl20">
-                  <?php foreach ($cats['childs'] as $cat) { ?>
-                    <a <?= $active; ?> href="<?= getUrlByName($cat['url']); ?>">
-                      <i class="bi bi-circle green-600 middle mr5"></i>
-                      <?= Translate::get($cat['name']); ?>
-                    </a>
-                  <?php } ?>
-                </ul>
-              <?php } ?>
-            </div>
-          <?php } ?>
-
-        <?php } ?>
-    </ul>
-
-  </nav>
+ 
+    <ul class="menu">
+     <?= tabs_nav(
+          'menu',
+          $data['type'],
+          1,
+          $pages = Config::get('menu.admin')
+        ); ?>
+     </ul>
+  
 </div>
 
 <main class="col-span-10 mb-col-12 ">
@@ -59,20 +29,3 @@
       </ul>
     </div>
   <?php } ?>
-  <script nonce="<?= $_SERVER['nonce']; ?>">
-    document.addEventListener("DOMContentLoaded", function(event) {
-      var dropdown = document.getElementsByClassName("dropdown-btn");
-      var i;
-      for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          var dropdownContent = this.nextElementSibling;
-          if (dropdownContent.style.display === "block") {
-            dropdownContent.style.display = "none";
-          } else {
-            dropdownContent.style.display = "block";
-          }
-        });
-      }
-    });
-  </script>

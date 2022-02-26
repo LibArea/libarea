@@ -4,49 +4,9 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
-use Content, Translate, UserData;
 
 class Webs
 {
-    private $user;
-
-    protected $limit = 25;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
-    public function index($sheet, $type)
-    {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-
-        $pagesCount = WebModel::getItemsAllCount($sheet);
-        $domains    = WebModel::getItemsAll($page, $this->limit, $this->user['id'], $sheet);
-
-        $result = [];
-        foreach ($domains as $ind => $row) {
-            $row['item_content']    = Content::text($row['item_content_url'], 'line');
-            $result[$ind]           = $row;
-        }
-
-        return view(
-            '/view/default/web/webs',
-            [
-                'meta'  => meta($m = [], Translate::get('domains')),
-                'user'  => $this->user,
-                'data'  => [
-                    'sheet'         => $sheet,
-                    'type'          => $type,
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
-                    'domains'       => $result,
-                ]
-            ]
-        );
-    }
-
     public function favicon()
     {
         $item_id    = Request::getPostInt('id');
