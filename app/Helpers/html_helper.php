@@ -266,10 +266,10 @@ function favorite($user_id, $content_id, $type, $favorite_tid, $ind, $css = '')
 function tabs_nav($name, $item, $user, array $pages = [])
 {
     $html = '';
+    $trust_level = $user['trust_level'] ?? 0; 
     if ($name == 'nav') {
         foreach ($pages as $key => $page) {
             $tl = $page['tl'] ?? 0;
-            $trust_level = $user['trust_level'] ?? 0; 
             if ($trust_level >= $tl) {
                 $isActive = $page['id'] == $item ? ' aria-current="page" class="active" ' : '';
                 $html .= '<li><a ' . $isActive . ' href="' . $page['url'] . '">
@@ -279,11 +279,11 @@ function tabs_nav($name, $item, $user, array $pages = [])
         }
     } else {
         foreach ($pages as $key => $page) {
-            $tl = $page['tl'] ?? null;
+            $tl = $page['tl'] ?? 0;
             if (!empty($page['hr'])) {
                 if ($user['id'] > 0) $html .= '<li><hr class="w-90"></li>';
             } else {
-                if ($user['trust_level'] >= $tl) {
+                if ($trust_level >= $tl) {
                     $isActive = $page['id'] == $item ? ' aria-current="page" class="active" ' : '';
                     $html .= '<li><a ' . $isActive . ' href="' . $page['url'] . '">
                                 <i class="' . $page['icon'] . '"></i>
@@ -448,7 +448,7 @@ function getStrlen($str)
 // To be deleted
 function sumbit($text)
 {
-    return '<button id="submit" type="submit" name="action" class="btn btn-primary" value="submit">' . $text . '</button>';
+    return '<button type="submit" name="action" class="btn btn-primary" value="submit">' . $text . '</button>';
 }
 
 // To be deleted
