@@ -37,8 +37,9 @@ class ComposerStaticInit2b147cb37a47efa5ad91d2a85ff8e433
     public static $prefixDirsPsr4 = array (
         'voku\\' => 
         array (
-            0 => __DIR__ . '/..' . '/voku/portable-utf8/src/voku',
-            1 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+            0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+            1 => __DIR__ . '/..' . '/voku/portable-utf8/src/voku',
+            2 => __DIR__ . '/..' . '/voku/stop-words/src/voku',
         ),
         'Wamania\\Snowball\\' => 
         array (

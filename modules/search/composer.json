@@ -1,5 +1,6 @@
 {
     "require": {
-        "wamania/php-stemmer": "^3.0"
+        "wamania/php-stemmer": "^3.0",
+        "voku/stop-words": "^2.0"
     }
 }

@@ -8,6 +8,7 @@ use Modules\Search\App\Helper;
 use Translate, Config, UserData;
 
 use Wamania\Snowball\StemmerFactory;
+use voku\helper\StopWords;
 
 class Search
 {
@@ -33,7 +34,7 @@ class Search
                 redirect(getUrlByName('search'));
             }
 
-            $stem   = self::stemmer($query);
+            $stem   = self::stemmerAndStopWords($query);
 
             $result = self::search($page, $this->limit, $stem, $type);
 
@@ -82,20 +83,27 @@ class Search
         return SearchModel::getSearchLogs($limit);
     }
 
-    public static function stemmer($query)
+    public static function stemmerAndStopWords($query)
     {
         require_once __DIR__ . '/../vendor/autoload.php';
+        $lang = Translate::getLang();
+        
+        $stopWords      = new StopWords();
+        $result         = $stopWords->getStopWordsAll();
+        $stemmer        = StemmerFactory::create($lang);
+        $arr_stop_words = $result[$lang];
 
         if (Config::get('general.lang') == 'ru') {
-            $stemmer    = StemmerFactory::create('ru');
             $stemmer    = StemmerFactory::create('russian');
         } else {
-            $stemmer    = StemmerFactory::create('en');
             $stemmer    = StemmerFactory::create('english');
         }
+        
+       $qa = implode(" ", array_diff(explode(" ", $query), $arr_stop_words)); 
 
-        return $stemmer->stem($query);
+       return $stemmer->stem($qa);
     }
+
 
     public static function search($page, $limit, $stem, $type)
     {

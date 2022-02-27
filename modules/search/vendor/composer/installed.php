@@ -82,6 +82,15 @@
             'reference' => '578f5266725dc9880483d24ad0cfb39f8ce170f7',
             'dev_requirement' => false,
         ),
+        'voku/stop-words' => array(
+            'pretty_version' => '2.0.1',
+            'version' => '2.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../voku/stop-words',
+            'aliases' => array(),
+            'reference' => '8e63c0af20f800b1600783764e0ce19e53969f71',
+            'dev_requirement' => false,
+        ),
         'wamania/php-stemmer' => array(
             'pretty_version' => 'v3.0.0',
             'version' => '3.0.0.0',
