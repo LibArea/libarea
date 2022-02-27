@@ -253,6 +253,7 @@ $data = [
     'zh-language'       => '中文 (ZH)',
     'md-language'       => '摩爾多瓦 (MD)',
 
+    'close?'            => '關閉?',
     'repeat.password'   => '重複輸入密碼',
     'post.closed'       => '帖子已關閉',
     'forgot.password'   => '忘記密碼了嗎',

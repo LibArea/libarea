@@ -43,6 +43,16 @@ class Search
         $result     = $result ?? null;
         $quantity   = $count ?? null;
 
+        self::setLogs(
+            [
+                'request'       => $query,
+                'action_type'   => 'post',
+                'add_ip'        => Request::getRemoteAddress(),
+                'user_id'       => $this->user['id'],
+                'count_results' => $quantity ?? 0,
+            ]
+        );
+
         return view(
             '/view/default/search',
             [
@@ -60,6 +70,16 @@ class Search
                 ]
             ]
         );
+    }
+
+    public static function setLogs($params)
+    {
+        return SearchModel::setSearchLogs($params);
+    }
+
+    public static function getLogs($limit)
+    {
+        return SearchModel::getSearchLogs($limit);
     }
 
     public static function stemmer($query)

@@ -89,7 +89,7 @@
                 'name' => 'post_feature',
               ],
               [
-                'title' => Translate::get('close'),
+                'title' => Translate::get('close?'),
                 'name' => 'closed',
               ],
             ]

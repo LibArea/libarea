@@ -78,7 +78,7 @@
         'content'   => $post['post_content'],
       ]); ?>
 
-      <?php if ($post['post_draft'] > 2) { ?>
+      <?php if ($post['post_draft'] > UserData::USER_FIRST_LEVEL) { ?>
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
@@ -101,7 +101,7 @@
               'checked' => $post['post_feature']
             ],
             [
-              'title' => Translate::get('close'),
+              'title' => Translate::get('close?'),
               'name' => 'closed',
               'checked' => $post['post_closed']
             ],
@@ -119,7 +119,7 @@
         ]
       ]); ?>
 
-      <?php if ($user['trust_level'] > 3) { ?>
+      <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [

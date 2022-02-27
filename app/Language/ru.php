@@ -247,6 +247,7 @@ $data = [
     'add-favorites'     => 'В закладки',
     'remove-favorites'  => 'Убрать из закладок',
 
+    'close?'            => 'Закрыть?',
     'repeat.password'   => 'Повторите пароль',
     'post.closed'       => 'Пост закрыт',
     'forgot.password'   => 'Забыли пароль',

@@ -22,6 +22,7 @@ class Home
                     'posts_no_topic'    => FacetModel::getNoTopic(),
                     'users_count'       => UserModel::getUsersCount('all'),
                     'last_visit'        => UserModel::getLastVisit(),
+                    'logs'              => (new \Modules\Search\App\Search())->getLogs(15),
                     'bytes'             => $bytes,
                     'type'              => 'admin',
                     'sheet'             => 'admin',
@@ -29,7 +30,7 @@ class Home
             ]
         );
     }
-
+    
     public function css()
     {
         return view(

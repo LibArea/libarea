@@ -63,7 +63,7 @@
         <div class="gray">
           <span class="gray-400 text-sm">id<?= $user['id']; ?></span>
           <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
-          <span class="gray-400"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
+          <span class="gray-400 lowercase"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
         </div>
       <?php } ?>
     </div>
@@ -88,8 +88,18 @@
   </div>
 <?php } ?>
 
-<div class="mt10 p15 gray-600">
-  <h3 class="uppercase-box"><?= Translate::get('useful.resources'); ?></h3>
+<div class="gray-600 ml10">
+  <h3 class="uppercase-box"><?= Translate::get('search'); ?></h3>
+  <?php foreach ($data['logs'] as $log) { ?>
+    <div class="gray">
+      <?= $log['request']; ?> <sup class="gray-400"><?= $log['count_results']; ?></sup>
+      <span class="gray-400 lowercase"> 
+        — (<?= Translate::get($log['action_type']); ?>) <?= lang_date($log['add_date']); ?>
+      </span>
+    </div>
+  <?php } ?>
+
+  <h3 class="uppercase-box mt15"><?= Translate::get('useful.resources'); ?></h3>
   <p><i class="bi bi-link-45deg mr5"></i> <a href="https://agouti.ru">Agouti.ru</a></p>
   <p><i class="bi bi-github mr5"></i> <a href="https://discord.gg/dw47aNx5nU">Discord</a></p>
   <hr>

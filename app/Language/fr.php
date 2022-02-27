@@ -254,6 +254,7 @@ $data = [
     'zh-language'       => 'Chinois (ZH)',
     'md-language'       => 'Moldave (MD)',
 
+    'close?'            => 'Fermer?',
     'repeat.password'   => 'Repeat password',
     'post.closed'       => 'Post closed',
     'forgot.password'   => 'Forgot your password',

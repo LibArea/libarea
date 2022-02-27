@@ -45,6 +45,16 @@ class Search
             $results[$ind]              = $row;
         }
 
+        (new \Modules\Search\App\Search())->setLogs(
+            [
+                'request'       => $query,
+                'action_type'   => 'website',
+                'add_ip'        => Request::getRemoteAddress(),
+                'user_id'       => $this->user['id'],
+                'count_results' => $quantity ?? 0,
+            ]
+        );
+
         return view(
             '/view/default/search',
             [

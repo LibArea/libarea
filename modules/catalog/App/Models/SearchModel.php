@@ -46,7 +46,6 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['qa' => "%" . $query . "%"])->rowCount();
     }
 
-
     public static function getSearchTags($query, $limit)
     {
         $sql = "SELECT 

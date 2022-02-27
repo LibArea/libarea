@@ -106,4 +106,34 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchAll();
     }
+
+    public static function setSearchLogs($params)
+    {
+        $sql = "INSERT INTO search_logs(request, 
+                            action_type, 
+                            add_ip,
+                            user_id, 
+                            count_results) 
+                               VALUES(:request, 
+                                   :action_type, 
+                                   :add_ip,
+                                   :user_id, 
+                                   :count_results)";
+
+        DB::run($sql, $params);
+    }
+
+    public static function getSearchLogs($limit)
+    {
+        $sql = "SELECT 
+                    request, 
+                    action_type,
+                    add_date,
+                    add_ip,
+                    user_id, 
+                    count_results
+                        FROM search_logs ORDER BY id DESC LIMIT $limit";
+
+        return DB::run($sql)->fetchAll();
+    }
 }

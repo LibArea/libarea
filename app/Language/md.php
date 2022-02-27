@@ -248,6 +248,7 @@ $data = [
     'zh-language'       => 'Chineză (ZH)',
     'md-language'       => 'Moldovenesc (MD)',
 
+    'close?'            => 'Închide?',
     'repeat.password'   => 'Repetati parola',
     'post.closed'       => 'Postarea este închisă',
     'forgot.password'   => 'Am uitat parola',
