@@ -28,7 +28,7 @@ class Search
                 redirect(getUrlByName('search'));
             }
 
-            $stem   = (new \Modules\Search\App\Search())->stemmer($query);
+            $stem   = (new \Modules\Search\App\Search())->stemmerAndStopWords($query);
 
             $result = SearchModel::getSearch($page, $this->limit, $stem);
 
