@@ -3,7 +3,6 @@
 namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Catalog\App\Models\SearchModel;
 use Translate, UserData;
 
 class Search
@@ -28,18 +27,18 @@ class Search
                 redirect(getUrlByName('search'));
             }
 
-            $stem   = (new \Modules\Search\App\Search())->stemmerAndStopWords($query);
+            $query  = (new \Modules\Search\App\Search())->stemmerAndStopWords($query);
 
-            $result = SearchModel::getSearch($page, $this->limit, $stem);
+            $result = (new \Modules\Search\App\Search())->search($page, $this->limit, $query, 'mysql', 'website');
 
-            $count  = SearchModel::getSearchCount($stem);
+            $count  = (new \Modules\Search\App\Search())->searchCount($query, 'website');
         }
 
         $quantity   = $count ?? null;
 
         $results = [];
         foreach ($result as $ind => $row) {
-            $search = preg_quote($stem);
+            $search = preg_quote($query);
             $row['content'] = preg_replace("/($search)/ui", "<mark>$1</mark>", $row['content']);
             $row['title'] = preg_replace("/($search)/ui", "<mark>$1</mark>", $row['title']);
             $results[$ind]              = $row;
@@ -68,7 +67,7 @@ class Search
                     'count'         => $quantity,
                     'pagesCount'    => ceil($quantity / $this->limit),
                     'pNum'          => $page,
-                    'tags'          => SearchModel::getSearchTags($query, 10),
+                    'tags'          => (new \Modules\Search\App\Search())->searchTags($query, 'mysql', 'category', 10),
                 ]
             ]
         );

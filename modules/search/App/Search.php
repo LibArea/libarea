@@ -34,11 +34,10 @@ class Search
                 redirect(getUrlByName('search'));
             }
 
-            $stem   = self::stemmerAndStopWords($query);
+            $query   = self::stemmerAndStopWords($query);
 
-            $result = self::search($page, $this->limit, $stem, $type);
-
-            $count  = SearchModel::getSearchCount($stem);
+            $result = self::search($page, $this->limit, $query, $type, 'post');
+            $count  = self::searchCount($query, 'post');
         }
 
         $result     = $result ?? null;
@@ -67,7 +66,7 @@ class Search
                     'count'         => $quantity,
                     'pagesCount'    => ceil($quantity / $this->limit),
                     'pNum'          => $page,
-                    'tags'          => SearchModel::getSearchTags($query, $type, 10),
+                    'tags'          => self::searchTags($query, 'mysql', 'topic', 10),
                 ]
             ]
         );
@@ -86,7 +85,9 @@ class Search
     public static function stemmerAndStopWords($query)
     {
         require_once __DIR__ . '/../vendor/autoload.php';
+        
         $lang = Translate::getLang();
+        $lang = $lang == 'zh' ? 'en' : $lang; 
         
         $stopWords      = new StopWords();
         $result         = $stopWords->getStopWordsAll();
@@ -105,23 +106,33 @@ class Search
     }
 
 
-    public static function search($page, $limit, $stem, $type)
+    public static function search($page, $limit, $query, $base, $type)
     {
-        if ($type == 'mysql') {
-            return SearchModel::getSearch($page, $limit, $stem);
+        if ($base == 'mysql') {
+            return SearchModel::getSearch($page, $limit, $query, $type);
         }
 
-        return SearchModel::getSearchPostServer($stem, 50);
+        return SearchModel::getSearchPostServer($query, 50);
+    }
+
+    public static function searchCount($query, $type)
+    {
+        return SearchModel::getSearchCount($query, $type);
+    }
+
+    public static function searchTags($query, $base, $type, $limit)
+    {
+        return SearchModel::getSearchTags($query, $base, $type, $limit);
     }
 
     public function api()
     {
 
-        $type   = Config::get('general.search') == false ? 'mysql' : 'server';
-        $topics = SearchModel::getSearchTags(Request::getPost('q'), $type, 5);
+        $base   = Config::get('general.search') == false ? 'mysql' : 'server';
+        $topics = SearchModel::getSearchTags(Request::getPost('q'), $base, 'topic', 5);
 
-        if ($type == 'mysql') {
-            $posts = SearchModel::getSearch(1, 5, Request::getPost('q'));
+        if ($base == 'mysql') {
+            $posts = SearchModel::getSearch(1, 5, Request::getPost('q'), 'post');
             $result = array_merge($topics, $posts);
 
             return json_encode($result, JSON_PRETTY_PRINT);

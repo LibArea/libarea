@@ -132,7 +132,6 @@ details {
   background-color: #f5f5fa;
   padding: 2px 6px;
   margin: 0;
-  box-shadow: 3px 3px 4px #eee;
 }
 
 summary {
@@ -144,6 +143,12 @@ summary {
 details[open] > summary {
   padding: 0 0 10px 0;
   color: #666;
+}
+
+.txt-closed {
+  padding: 10px;
+  background-color: var(--sky-50);
+  margin-bottom: 15px;
 }
 
 .tooltip {

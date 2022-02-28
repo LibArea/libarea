@@ -6,7 +6,7 @@ use DB;
 
 class SearchModel extends \Hleb\Scheme\App\Models\MainModel
 {
-    public static function getSearch($page, $limit, $query)
+    public static function getSearch($page, $limit, $query, $type)
     {
         $start  = ($page - 1) * $limit;
 
@@ -14,25 +14,10 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                 post_id, 
                 post_title as title, 
                 post_slug, 
-                post_feature, 
-                post_translation, 
-                post_draft, 
-                post_date, 
                 post_published, 
                 post_user_id, 
                 post_votes, 
-                post_answers_count, 
-                post_comments_count, 
                 post_content as content,
-                post_content_img, 
-                post_thumb_img, 
-                post_merged_id, 
-                post_closed, 
-                post_tl, 
-                post_lo, 
-                post_top,  
-                post_url_domain, 
-                post_is_deleted, 
                 post_hits_count, 
                 rel.*,  
                 id, login, avatar
@@ -49,16 +34,50 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                             WHERE  post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
                                 AND MATCH(post_title, post_content) AGAINST (:qa)
                                           LIMIT $start, $limit";
+           
+        if ($type == 'website') {                 
+            $sql = "SELECT DISTINCT 
+                item_id, 
+                item_title_url as title, 
+                item_content_url as content,
+                item_url,
+                item_url_domain,
+                item_votes,
+                item_count,
+                rel.*
+                    FROM facets_items_relation  
+                    LEFT JOIN items ON relation_item_id = item_id 
+                    LEFT JOIN ( SELECT  
+                            relation_item_id,  
+                            GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list  
+                            FROM facets  
+                            LEFT JOIN facets_items_relation on facet_id = relation_facet_id  
+                                GROUP BY relation_item_id  
+                    ) AS rel ON rel.relation_item_id = item_id  
+                            WHERE item_is_deleted = 0
+                                AND MATCH(item_title_url, item_content_url, item_url_domain) AGAINST (:qa)
+                                          LIMIT $start, $limit";
+        }
+
+           
         return DB::run($sql, ['qa' => $query])->fetchall();
     }
-
-    public static function getSearchCount($query)
+    
+    public static function getSearchCount($query, $type)
     {
-        $sql = "SELECT DISTINCT 
+        $sql = "SELECT 
                   post_id
                     FROM posts
                             WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
-                             AND MATCH(post_title, post_content) AGAINST (:qa)";
+                                AND MATCH(post_title, post_content) AGAINST (:qa)";
+                             
+        if ($type == 'website') {                 
+            $sql = "SELECT  
+                        item_id
+                            FROM items
+                                WHERE item_is_deleted = 0
+                                    AND MATCH(item_title_url, item_content_url, item_url_domain) AGAINST (:qa)";
+        }
 
         return DB::run($sql, ['qa' => "%" . $query . "%"])->rowCount();
     }
@@ -81,9 +100,9 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall();
     }
 
-    public static function getSearchTags($query, $type, $limit)
+    public static function getSearchTags($query, $base, $type, $limit)
     {
-        if ($type == 'server') {
+        if ($base == 'server') {
 
             $sql = "SELECT 
                 facet_slug, 
@@ -91,7 +110,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                 facet_title,
                 facet_type,
                 facet_img
-                    FROM tagind WHERE facet_type = 'topic' AND MATCH(:qa) LIMIT $limit";
+                    FROM tagind WHERE facet_type = '$type' AND MATCH(:qa) LIMIT $limit";
 
             return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall();
         }
@@ -100,8 +119,9 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_slug, 
                     facet_count, 
                     facet_title,
+                    facet_type,
                     facet_img
-                        FROM facets WHERE facet_type = 'topic' AND facet_title LIKE :qa1 OR facet_slug LIKE :qa2 
+                        FROM facets WHERE facet_type = '$type' AND facet_title LIKE :qa1 OR facet_slug LIKE :qa2 
                             LIMIT $limit";
 
         return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchAll();

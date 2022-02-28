@@ -256,6 +256,8 @@ $data = [
     'privacy policy'    => 'Politica de confidențialitate',
     'restriction'       => 'Restricții',
     'no-invate-txt'     => 'Nu ești încă utilizator? Înregistrarea se face doar prin invitație pentru a combate spamul și a spori responsabilitatea. Dacă cunoașteți <a href="/users"> utilizatorul actual </a> al site-ului, solicitați-i o invitație.',
+    
+    'text.closed'       => 'Fără autorizație este interzisă vizualizarea acestui text ascuns',
 
     /* Дата и время + события*/
     'months' => ['', 'ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'],

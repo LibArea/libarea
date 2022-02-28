@@ -5,17 +5,18 @@
 <main>
   <?php foreach ($data['tags'] as $key => $facet) { ?>
     <?php if ($facet['facet_type'] == 'category') { ?>
+      <div class="mb15">
       <a href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $facet['facet_slug']]); ?>">
         <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'img-base'); ?>
         <?= $facet['facet_title']; ?>
-        <sup class="gray-400 mr15">x<?= $facet['facet_count']; ?></sup>
       </a>
+      </div>
     <?php } ?>
   <?php } ?>
   <?php if ($data['result']) { ?>
-    <h3 class="mt20 mb20">
+    <h3 class="mb20">
       <?= Translate::get('results.search'); ?> <?= $data['count']; ?>
-      </3>
+    </h3>
 
       <?php foreach ($data['result'] as  $item) { ?>
         <div class="mb20 gray max-w780">

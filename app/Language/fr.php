@@ -262,6 +262,8 @@ $data = [
     'privacy policy'    => 'Privacy Policy',
     'restriction'       => 'Restrictions',
     'no-invate-txt'     => 'Not a user yet? Registration is by invitation only to combat spam and increase accountability. If you know the <a href="/users">current user</a> of the site, ask him for an invitation.',
+    
+    'text.closed'       => 'Sans autorisation, il est interdit de voir ce texte caché',
 
     /* Date and time + Events */
     'months'        => ['', 'January', 'February', 'Martha', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],

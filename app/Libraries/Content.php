@@ -41,9 +41,18 @@ class Content
 
     public static function parseSpoiler($content)
     {
-        $regexp = '/\{spoiler(?!.*\{spoiler)(\s?)(?(1)(.*?))\}(.*?)\{\/spoiler\}/is';
-        while (preg_match($regexp, $content)) {
-            $content = preg_replace($regexp, "<details><summary>" . Translate::get('see more') . "</summary>$2$3</details>", $content);
+        $regexpSp = '/\{spoiler(?!.*\{spoiler)(\s?)(?(1)(.*?))\}(.*?)\{\/spoiler\}/is';
+        while (preg_match($regexpSp, $content)) {
+            $content = preg_replace($regexpSp, "<details><summary>" . Translate::get('see more') . "</summary>$2$3</details>", $content);
+        }
+
+        $regexpAu = '/\{auth(?!.*\{auth)(\s?)(?(1)(.*?))\}(.*?)\{\/auth\}/is';
+        while (preg_match($regexpAu, $content)) {
+            if (UserData::checkActiveUser()) {
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed\"><i class=\"bi bi-unlock gray-400 mr5\"></i> $2$3</dev>", $content);
+            } else {
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-400\"><i class=\"bi bi-lock mr5 red-200\"></i>" . Translate::get('text.closed') . "...</dev>", $content);
+            }   
         }
 
         return $content;
