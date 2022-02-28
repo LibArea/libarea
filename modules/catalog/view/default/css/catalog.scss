@@ -35,11 +35,6 @@ aside { grid-column: span 3 / span 3; }
 
 .item-cat { padding: 0 0 10px 30px; }
 
-.item-search-right {
-  width: 100%;
-  margin-left: 45px;
-}
-
 .list-items {
   margin: 0;
   max-width: 926px;
@@ -95,31 +90,6 @@ aside { grid-column: span 3 / span 3; }
 
 .item-categories-telo {
   margin-bottom: 10px;
-}
-
-.item-search {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 60px 30px 30px;
-  margin: 0 auto;
-}
-
-.item-search__input {
-  width: 100%;
-  border-radius: 5px;
-  height: 50px;
-  border: 9px solid #eee;
-  padding-left: 15px;
-  color: var(--gray-700);
-}
-
-.item-search__url{
-  text-decoration: underline;
-  font-size: 1.25rem;
-  margin-left: 5px;
 }
 
 @media (max-width: 980px) {

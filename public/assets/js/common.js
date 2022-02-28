@@ -234,16 +234,13 @@ if (find) {
 
 function fetch_search() {
   let val = document.getElementById("find").value;
-  let token = document.querySelector('input[name="token"]').value;
-  let url  = document.querySelector('input[name="url"]').value;
-
   if (val.length < 3) {
     return;
   }
 
   fetch("/api-search", {
     method: "POST",
-    body: "q=" + val + "&_token=" + token,
+    body: "q=" + val,
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   })
     .then(
@@ -257,7 +254,6 @@ function fetch_search() {
         for (var key in obj) {
           if (obj[key].facet_slug) {
             html += '<a class="sky-500 block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
-            html += '<img class="w20 mr5 br-box-gray" src="' + url + obj[key].facet_img + '">';
             html += obj[key].facet_title + '</a>';
           }
           if (obj[key].post_id) {
@@ -265,10 +261,13 @@ function fetch_search() {
           }
           html += '</div>';
         }
- 
-        let items = document.getElementById("search_items");
-        items.classList.add("block");
-        items.innerHTML = html;
+
+        if (!Object.keys(obj).length == 0) {
+          let items = document.getElementById("search_items");
+          items.classList.add("block");
+          items.innerHTML = html;
+        }
+        
         var menu = document.querySelector('.none.block');
         if (menu) {
           document.onclick = function (e) {

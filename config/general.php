@@ -14,10 +14,6 @@ return [
     // TRUE - by invitation only
     'invite'            => false,
     
-    // Служба внешнего поиска: TRUE - включена. См. документацию.
-    // External search service: TRUE - enabled. See the documentation.
-    'search'            => false,
-
     // Шаблон по умолчанию (default).
     // Default template (default).
     'template'          => 'default',

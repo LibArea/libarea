@@ -16,9 +16,9 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                 post_slug, 
                 post_published, 
                 post_user_id, 
-                post_votes, 
+                post_votes as votes, 
                 post_content as content,
-                post_hits_count, 
+                post_hits_count as count, 
                 rel.*,  
                 id, login, avatar
                     FROM facets_posts_relation  
@@ -34,16 +34,16 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                             WHERE  post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
                                 AND MATCH(post_title, post_content) AGAINST (:qa)
                                           LIMIT $start, $limit";
-           
-        if ($type == 'website') {                 
+
+        if ($type == 'website') {
             $sql = "SELECT DISTINCT 
                 item_id, 
                 item_title_url as title, 
                 item_content_url as content,
                 item_url,
                 item_url_domain,
-                item_votes,
-                item_count,
+                item_votes as votes,
+                item_count as count,
                 rel.*
                     FROM facets_items_relation  
                     LEFT JOIN items ON relation_item_id = item_id 
@@ -59,10 +59,10 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                                           LIMIT $start, $limit";
         }
 
-           
+
         return DB::run($sql, ['qa' => $query])->fetchall();
     }
-    
+
     public static function getSearchCount($query, $type)
     {
         $sql = "SELECT 
@@ -70,8 +70,8 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                     FROM posts
                             WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
                                 AND MATCH(post_title, post_content) AGAINST (:qa)";
-                             
-        if ($type == 'website') {                 
+
+        if ($type == 'website') {
             $sql = "SELECT  
                         item_id
                             FROM items
@@ -82,49 +82,18 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['qa' => "%" . $query . "%"])->rowCount();
     }
 
-    // For Sphinx 
-    public static function getSearchPostServer($query, $limit)
+    public static function getSearchTags($query, $type, $limit)
     {
-        $sql = "SELECT 
-                    id AS post_id, 
-                    post_slug, 
-                    post_votes, 
-                    post_hits_count,
-                    facet_list,
-                    login,
-                    avatar,
-                    SNIPPET(post_title, :qa) AS title, 
-                    SNIPPET(post_content, :qa) AS content 
-                        FROM postind WHERE MATCH(:qa) LIMIT $limit";
-
-        return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall();
-    }
-
-    public static function getSearchTags($query, $base, $type, $limit)
-    {
-        if ($base == 'server') {
-
-            $sql = "SELECT 
-                facet_slug, 
-                facet_count, 
-                facet_title,
-                facet_type,
-                facet_img
-                    FROM tagind WHERE facet_type = '$type' AND MATCH(:qa) LIMIT $limit";
-
-            return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall();
-        }
-
         $sql = "SELECT 
                     facet_slug, 
                     facet_count, 
                     facet_title,
                     facet_type,
                     facet_img
-                        FROM facets WHERE facet_type = '$type' AND facet_title LIKE :qa1 OR facet_slug LIKE :qa2 
+                        FROM facets WHERE facet_type = :type AND (facet_title LIKE :qa1 OR facet_slug LIKE :qa2)
                             LIMIT $limit";
 
-        return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchAll();
+        return DB::run($sql, ['type' => $type, 'qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchAll();
     }
 
     public static function setSearchLogs($params)

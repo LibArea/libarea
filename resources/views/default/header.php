@@ -14,7 +14,7 @@ $facet    = $data['facet'] ?? false;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?10">
+  <link rel="stylesheet" href="/assets/css/style.css?12">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
@@ -44,14 +44,11 @@ $facet    = $data['facet'] ?? false;
         </a>
 
         <div class="ml45 relative w-100">
-          <?php if (Request::getUri() != getUrlByName('search')) { ?>
-            <form class="form mb-none" method="post" action="<?= getUrlByName('search'); ?>">
-              <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="search">
-              <input name="token" value="<?= csrf_token(); ?>" type="hidden">
-              <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
+            <form class="form mb-none" method="get" action="<?= getUrlByName('search'); ?>">
+              <input type="text" name="q" autocomplete = "off" id="find" placeholder="<?= Translate::get('to find'); ?>" class="search">
+              <input name="type" value="post" type="hidden">
             </form>
             <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
-          <?php } ?>
         </div>
 
         <?php if (!UserData::checkActiveUser()) { ?>

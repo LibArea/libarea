@@ -11,7 +11,7 @@
 
 <body class="max-width mr-auto w-100 grid grid-cols-12 justify-between">
   <div class="col-span-2 mb-none"></div>
-  <div class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray hidden p20 mt15">
+  <div class="col-span-8 mb-col-12 hidden p20 mt15">
     <div class="mb0">
       <h1 class="text-3xl font-semibold gray mt0 mb0">404</h1>
       <p class="gray-600"><?= Translate::get('the page does not exist'); ?></p>
@@ -22,7 +22,7 @@
         <?= Translate::get('the page has been removed'); ?>...
       </div>
     </div>
-    <img class="right" src="/assets/images/agouti_footer.gif">
+    <img class="right" src="<?= Config::get('meta.img_footer_path'); ?>">
   </div>
 
 </body>

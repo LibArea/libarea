@@ -16,7 +16,6 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/focus/{type}')->controller('SubscriptionController')->where(['type' => '[a-z]+']);
         // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
-        // @ post | answer | comment | link
         Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 
             Route::getProtect();
                 Route::get('/invitation/create')->controller('User\InvitationsController@create')->name('invit.create');
@@ -192,7 +191,7 @@ Route::get('/web/{cat}/{slug}/top')->module('catalog', 'App\Catalog', ['web.top'
 Route::get('/web/{cat}/top/page/{page?}')->module('catalog', 'App\Home', ['web.top', 'web']);
 Route::get('/web/{cat}/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed', 'web']);
 
-Route::type(['get', 'post'])->get('/web/search')->module('catalog', 'App\Search', ['web.search'])->name('web.search');
+Route::get('/serach')->module('search', 'App\Search')->name('search');
 
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
 
@@ -204,8 +203,6 @@ Route::get('/top/page/{page?}')->controller('HomeController', ['main.top', 'main
 Route::get('/sitemap.xml')->controller('RssController');
 Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
-
-Route::type(['get', 'post'])->get('/search')->module('search', 'App\Search')->name('search');
 
 require 'admin.php';
  
