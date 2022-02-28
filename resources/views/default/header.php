@@ -1,6 +1,5 @@
 <?php
 $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
-$css      = $data['type'] == 'web' || $data['type'] == 'page'  ? '' : 'body-bg-fon';
 $type     = $data['type'] ?? false;
 $facet    = $data['facet'] ?? false;
 ?>
@@ -19,9 +18,9 @@ $facet    = $data['facet'] ?? false;
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
-<body class="<?= $css; ?><?php if ($dark == 'dark') { ?> dark<?php } ?>">
+<body class="body-bg-fon<?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
-  <header class="d-header<?php if ($type != 'page') { ?> sticky top0<?php } ?>">
+  <header class="d-header sticky top0">
     <div class="wrap">
       <div class="d-header_contents">
 
