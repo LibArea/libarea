@@ -8,14 +8,6 @@
       <div class="post-body max-w780 full">
         <?= $page['post_content']; ?>
       </div>
-      <div class="gray-400 text-sm italic mb15">
-        <?= $page['post_modified']; ?>
-        <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
-          <a class="text-sm gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
-            <i class="bi bi-pencil"></i>
-          </a>
-        <?php } ?>
-      </div>
     <?php } else { ?>
       <div class="bg-red-200 p15 center mr10">
         <?= sprintf(Translate::get('content.deleted'), Translate::get('post')); ?>...
@@ -24,7 +16,14 @@
   </article>
   <div class="box-flex-white bg-violet-50 text-2xl">
     <?= votes($user['id'], $page, 'post', 'ps', 'middle mr15'); ?>
-    <?= favorite($user['id'], $page['post_id'], 'post', $page['favorite_tid'], 'ps', 'text-2xl'); ?>
+      <div class="gray-400 italic">
+        <?= $page['post_modified']; ?>
+        <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
+          <a class="gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
+            <i class="bi bi-pencil"></i>
+          </a>
+        <?php } ?>
+      </div>
   </div>
 </main>
 <aside class="col-span-4 mb-none">
