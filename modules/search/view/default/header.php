@@ -1,23 +1,11 @@
 <?php
-$dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
+Request::getHead()->addStyles('/assets/css/style.css?12');
 $uri = $data['type'] == 'post' ? 'post' : 'website';
 ?>
 
-<!DOCTYPE html>
-<html lang="<?= Translate::getLang(); ?>" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<?= Tpl::insert('meta', ['meta' => $meta]); ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <?= $meta; ?>
-  <?php getRequestHead()->output(); ?>
-  <link rel="stylesheet" href="/assets/css/style.css?v12">
-  <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
-</head>
-
-<body <?php if ($dark == 'dark') { ?>class="dark" <?php } ?>>
+<body <?php if (Request::getCookie('dayNight') == 'dark') { ?>class="dark" <?php } ?>>
   <header>
     <div class="page-search">
       <a class="logo black mt30" href="<?= getUrlByName('search'); ?>">
@@ -25,6 +13,11 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
       </a>
       <div class="page-search-right">
         <div data-template="one" id="find tippy">
+
+          <a class="tabs black mr15" href="/">
+            <i class="bi bi-house"></i>
+            <?= Translate::get('to the website'); ?>
+          </a>
 
           <a class="tabs<?php if ($uri == 'post') { ?> active<?php } ?>" href="<?= getUrlByName('search'); ?>">
             <?= Translate::get('posts'); ?>

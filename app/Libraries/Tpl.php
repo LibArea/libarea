@@ -55,14 +55,4 @@ class Tpl
 
         require HLEB_GLOBAL_DIRECTORY . '/resources/views/' . self::agTheme('/' . $hlTemplatePath);
     }
-
-    public static function insertModul(string $hlTemplatePath, array $params = [])
-    {
-        extract($params);
-
-        // unset($params);
-        $hlTemplatePath = trim($hlTemplatePath, '/\\') . '.php';
-
-        require '/views/' . self::agTheme('/' . $hlTemplatePath);
-    }
 }
