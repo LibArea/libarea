@@ -9,7 +9,7 @@
 <?php } ?>
 
 <div class="item-categories">
-  <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
+  <?php foreach (Config::get('catalog/home-categories') as $cat) { ?>
     <div class="categories-telo">
       <a class="text-2xl block" href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $cat['url']]); ?>">
         <?= $cat['title']; ?>
@@ -45,12 +45,11 @@
         <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
         <ul class="menu">
           <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
-
           <?= tabs_nav(
             'menu',
             $data['sheet'],
             $user,
-            $pages = Config::get('menu.catalog')
+            $pages = Config::get('catalog/menu.user')
           ); ?>
         </ul>
       </div>

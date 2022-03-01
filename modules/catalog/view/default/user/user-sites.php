@@ -76,7 +76,7 @@
             'menu',
             $data['sheet'],
             $user,
-            $pages = Config::get('menu.catalog')
+            $pages = Config::get('catalog/menu.user')
           ); ?>
         </ul>
       </div>

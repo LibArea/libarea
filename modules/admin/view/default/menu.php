@@ -6,7 +6,7 @@
           'menu',
           $data['type'],
           1,
-          $pages = Config::get('menu.admin')
+          $pages = Config::get('admin/menu.admin')
         ); ?>
      </ul>
   

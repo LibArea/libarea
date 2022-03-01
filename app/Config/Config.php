@@ -2,9 +2,9 @@
 
 class Config
 {
-    static protected $path  = HLEB_SEARCH_DBASE_CONFIG_FILE;
+    private static $path  = HLEB_SEARCH_DBASE_CONFIG_FILE;
 
-    static protected $cache = [];
+    private static $cache = [];
 
     public static function get($name, $default = null)
     {
@@ -12,33 +12,35 @@ class Config
 
         $key = ltrim(strstr($name, '.'), '.');
 
-        static::$path = realpath(static::$path);
+        self::$path = realpath(self::$path);
 
-        if (!static::$path) {
-            exit('Пути к конфигу не существует');
+        if (!self::$path) {
+            echo 'Config path does not exist';
+            exit;
         }
 
-        if (!is_file(static::$path . '/' . $file . '.php')) {
-            return $default;
+        if (!is_file(self::$path . '/' . $file . '.php')) {
+           echo 'The file does not exist';
+           exit;
         }
 
-        if (!array_key_exists(static::$path . '/' . $file . '.php', static::$cache)) {
+        if (!array_key_exists(self::$path . '/' . $file . '.php', self::$cache)) {
 
-            $data = include static::$path . '/' . $file . '.php';
+            $data = include self::$path . '/' . $file . '.php';
 
             if (!is_array($data)) {
-                exit('This is not an array: ' . static::$path . '/' . $file . '.php');
+                echo ('This is not an array: ' . self::$path . '/' . $file . '.php');
             }
 
-            static::$cache[static::$path . '/' . $file . '.php'] = $data;
+            self::$cache[self::$path . '/' . $file . '.php'] = $data;
         }
 
         if ($name === $file) {
-            return static::$cache[static::$path . '/' . $file . '.php'];
+            return self::$cache[self::$path . '/' . $file . '.php'];
         }
 
-        if (array_key_exists($key, static::$cache[static::$path . '/' . $file . '.php'])) {
-            return static::$cache[static::$path . '/' . $file . '.php'][$key];
+        if (array_key_exists($key, self::$cache[self::$path . '/' . $file . '.php'])) {
+            return self::$cache[self::$path . '/' . $file . '.php'][$key];
         }
         return $default;
     }
