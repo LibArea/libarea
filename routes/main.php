@@ -3,7 +3,7 @@
 Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::getType('post');
         Route::get('/flag/repost')->controller('ReportController');
-        Route::get('/backend/upload/image')->controller('Post\EditPostController@uploadContentImage');
+        Route::get('/backend/upload/image/{type}/{id}')->controller('Post\EditPostController@uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
         Route::get('/post/recommend')->controller('Post\AddPostController@recommend');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');

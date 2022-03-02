@@ -4,7 +4,7 @@ $form->adding(['name' => 'email', 'type' => 'value', 'var' => $data['invate']['i
 $form->html_form($user['trust_level'], Config::get('form/auth.register'));
 ?>
 <main class="box-white col-span-12">
-  <h1><?= Translate::get('registration by invite'); ?></h1>
+  <h1><?= Translate::get('registration.invite'); ?></h1>
     <form class="max-w300" action="<?= getUrlByName('register'); ?>/add" method="post">
       <?php csrf_field(); ?>
 

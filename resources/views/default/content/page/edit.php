@@ -42,13 +42,8 @@
         ]); ?>
       <?php } ?>
 
-      <?= Tpl::import('/_block/editor/editor', [
-        'type'      => 'post',
-        'height'    => '300px',
-        'preview'   => 'vertical',
-        'user'      => $user,
-        'content'   => $post['post_content'],
-      ]); ?>
+      <?= Tpl::import('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'page-telo', 'id' => $post['post_id']]); ?>
+      
 
       <?= Tpl::import('/_block/form/select/user', [
         'uid'           => $user,

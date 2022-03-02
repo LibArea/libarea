@@ -128,7 +128,7 @@
   <div class="box-white">
     <h3 class="uppercase-box"><?= Translate::get('badges'); ?></h3>
     <div class="m0 text-3xl">
-      <i title="<?= Translate::get('medal for registration'); ?>" class="bi bi-gift sky-500"></i>
+      <i title="<?= Translate::get('medal.registration'); ?>" class="bi bi-gift sky-500"></i>
       <?php if ($profile['id'] < 50) { ?>
         <i title="<?= Translate::get('joined in the early days'); ?>" class="bi bi-award green-600"></i>
       <?php } ?>

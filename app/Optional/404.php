@@ -14,12 +14,12 @@
   <div class="col-span-8 mb-col-12 hidden p20 mt15">
     <div class="mb0">
       <h1 class="text-3xl font-semibold gray mt0 mb0">404</h1>
-      <p class="gray-600"><?= Translate::get('the page does not exist'); ?></p>
+      <p class="gray-600"><?= Translate::get('page.not'); ?></p>
       <a class="btn btn-primary" href="/">
         <?= Translate::get('to main'); ?>
       </a>
       <div class="mt15 text-sm gray-400">
-        <?= Translate::get('the page has been removed'); ?>...
+        <?= Translate::get('page.removed'); ?>...
       </div>
     </div>
     <img class="right" src="<?= Config::get('meta.img_footer_path'); ?>">

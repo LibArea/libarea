@@ -53,7 +53,7 @@
               <?= Translate::get('format-cover-post'); ?>.
             </div>
             <i class="fa fa-download" aria-hidden="true"></i>
-            <div id="notimage" class="none">Please select an image</div>
+            <div id="notimage" class="none"><?= Translate::get('select.image');?></div>
           </div>
         </div>
         <div id="response" class="hidden">
@@ -61,13 +61,7 @@
         </div>
       </div>
 
-      <?= Tpl::import('/_block/editor/editor', [
-        'title'     => Translate::get('text'),
-        'type'      => 'post',
-        'height'    => '350px',
-        'preview'   => 'vertical',
-        'user'       => $user,
-      ]); ?>
+      <?= Tpl::import('/_block/editor/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
 
       <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) { ?>
         <?= Tpl::import('/_block/form/radio',  [

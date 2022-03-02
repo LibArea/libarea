@@ -28,8 +28,8 @@ class EditAnswerController extends MainController
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
         pageError404($post);
 
-        Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
 
         return Tpl::agRender(
             '/answer/edit-form-answer',

@@ -1,75 +1,56 @@
-<fieldset>
-  <?php if (!empty($title)) { ?><div class="mb5"><?= $title; ?><sup class="red-500">*</sup></div><?php } ?>
-  <div id="ag-redactor" class="editorSection"><?php if (!empty($content)) { ?><?= $content; ?><?php } ?></div>
-  <input type="hidden" name="content" class="text">
-</fieldset>
-<?php $lang = $user['lang']; ?>
-<script src="/assets/js/editor/i18n/<?= $lang; ?>.js" charset="utf-8"></script>
+<?php if (!empty($title)) { ?><div class="mb5"><?= $title; ?><sup class="red-500">*</sup></div><?php } ?>
+
+<textarea id="editor" name="content"><?php if (!empty($content)) { ?><?= $content; ?><?php } ?></textarea>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', function() {
+    let content = '';
+    const easyMDE = new EasyMDE({
+      autoDownloadFontAwesome: false,
+      maxHeight: '<?= $height; ?>',
+      element: document.getElementById('editor'),
+      imagePathAbsolute: true,
+      placeholder: "<?= Translate::get('supports.markdown'); ?>...",
+      imageUploadEndpoint: "/backend/upload/image/<?= $type; ?>/<?= $id; ?>",
+      previewImagesInEditor: true,
+      uploadImage: true,
+      spellChecker: false,
 
-    toastui.Editor.setLanguage(['<?= $lang; ?>'], LANG);
-
-    let dark = document.querySelector('.bg-gray-100.dark');
-    let viewerEl = document.querySelector('.editorSection');
-    let body = viewerEl.innerHTML.trim();
-    body = body.replace(/&gt;/gi, ">");
-
-    if (viewerEl == null) {
-      return;
-    }
-
-    let previewStyle = '<?= $preview; ?>';
-    let height = '<?= $height; ?>';
-    if (window.innerWidth < 721) {
-      previewStyle = 'tab';
-      height = '200px';
-    }
-
-    const editor = new toastui.Editor({
-      el: viewerEl,
-      usageStatistics: false,
-      height: height,
-      initialEditType: '<?= Config::get('editor.initialEditType'); ?>', // wysiwyg | markdown
-      previewStyle: previewStyle,
-      hideModeSwitch: '<?= Config::get('editor.hideModeSwitch'); ?>', // true | false
-      initialValue: body,
-      theme: '<?= Request::getCookie('dayNight'); ?>',
-      language: '<?= $lang; ?>',
-      autofocus: false,
-      toolbarItems: [
-        ['heading', 'bold', 'italic', 'strike'],
-        ['hr', 'quote'],
-        ['ul'],
-        ['table', 'image', 'link'],
-        ['code', 'codeblock'],
-      ],
-      events: {
-        change: function() {
-          let text = editor.getMarkdown();
-          inputelement = document.querySelector('input.text');
-          inputelement.value = text;
-        },
+      imageTexts: {
+        sbInit: '<?= Translate::get('attach.files'); ?>',
+        sbOnDragEnter: '<?= Translate::get('drop.image'); ?>',
       },
-      hooks: {
-        addImageBlobHook: function(file, callback) {
-          const formData = new FormData()
-          formData.append('file', file, file.name)
-          let alt_text = document.getElementById("toastuiAltTextInput").value;
-          const ajax = new XMLHttpRequest()
-          ajax.open('POST', '/backend/upload/image', true)
-          ajax.send(formData)
-          ajax.onreadystatechange = function() {
-            if (ajax.readyState === 4) {
-              if ((ajax.status >= 200 && ajax.status < 300) || ajax.status === 304) {
-                callback(ajax.responseText, alt_text);
-              }
-            }
-          }
+
+      toolbar: [
+        <?php foreach (Config::get('editor/buttons') as $row) { ?>
+          <?php if (!empty($row['separator']) == 'separator') { ?> '|',
+          <?php } else { ?> {
+              name: '<?= $row['name']; ?>',
+              action: <?= $row['action']; ?>,
+              className: '<?= $row['className']; ?>',
+              title: '<?= $row['title']; ?>',
+            },
+          <?php } ?>
+        <?php } ?> {
+          className: "bi-unlock",
+          title: "<?= Translate::get('spoiler'); ?>",
+          children: [{
+            className: "bi-eye-slash",
+            action: (e) => {
+              e.codemirror.replaceSelection('{spoiler} *** {/spoiler} ');
+              e.codemirror.focus();
+            },
+          }, {
+            className: "bi-unlock",
+            title: "<?= Translate::get('spoiler.auth'); ?>",
+            action: (e) => {
+              e.codemirror.replaceSelection('{auth} *** {/auth}');
+              e.codemirror.focus();
+            },
+          }],
         }
-      }
+      ],
+      initialValue: content
     });
-    editor.getMarkdown();
   });
 </script>

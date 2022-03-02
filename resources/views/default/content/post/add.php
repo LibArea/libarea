@@ -4,9 +4,8 @@
     <a href="/"><?= Translate::get('home'); ?></a> /
     <span class="red-500"><?= Translate::get($data['type']); ?></span>
 
-    <form action="<?= getUrlByName('post.create'); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= getUrlByName('post.create'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
-      <div class="max-w780">
         <fieldset>
           <label for="post_title"><?= Translate::get('heading'); ?></label>
           <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
@@ -51,22 +50,16 @@
                 <?= Translate::get('format-cover-post'); ?>.
               </div>
               <i class="fa fa-download" aria-hidden="true"></i>
-              <div id="notimage" class="none">Please select an image</div>
+              <div id="notimage" class="none"><?= Translate::get('select.image'); ?></div>
             </div>
           </div>
           <div id="response" class="hidden">
             <div id="messages"></div>
           </div>
         </div>
-      </div>
-      <?= Tpl::import('/_block/editor/editor', [
-        'title'     => Translate::get('text'),
-        'type'      => 'post',
-        'height'    => '350px',
-        'preview'   => 'vertical',
-        'user'      => $user,
-      ]); ?>
-      <div class="max-w780">
+
+      <?= Tpl::import('/_block/editor/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
+      
         <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) { ?>
           <?= Tpl::import('/_block/form/radio',  [
             'data' => [
@@ -125,7 +118,6 @@
         ]); ?>
 
         <p><?= sumbit(Translate::get('create')); ?></p>
-      </div>
     </form>
   </div>
 </main>

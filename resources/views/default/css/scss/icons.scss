@@ -26,6 +26,17 @@ font-display: swap;
   vertical-align: -.125em;
 }
 
+/* Editor */
+.bi-type-bold::before { content: "\f5f0"; }
+.bi-camera::before { content: "\f220"; }
+.bi-emoji-smile::before { content: "\f327"; }
+.bi-type-italic::before { content: "\f5f4"; }
+.bi-type-strikethrough::before { content: "\f5f5"; }
+.bi-quote::before { content: "\f6b0"; }
+.bi-code::before { content: "\f2c8"; }
+.bi-arrows-move::before { content: "\f14e"; }
+.bi-layout-split::before { content: "\f460"; }
+
 .bi-house::before { content: "\f425"; }
 .bi-bezier2::before { content: "\f18c"; }
 .bi-arrow-return-right::before { content: "\f132"; }
@@ -100,7 +111,6 @@ font-display: swap;
 .bi-chevron-down::before { content: "\f282"; }
 .bi-chevron-right::before { content: "\f285"; }
 .bi-chevron-double-right::before { content: "\f280"; }
-.bi-emoji-smile::before { content: "\f327"; }
 .bi-lock::before { content: "\f47b"; }
 .bi-pin-angle::before { content: "\f4eb"; }
 .bi-eye::before { content: "\f341"; }

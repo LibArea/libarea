@@ -66,7 +66,7 @@ class UploadImage
         return false;
     }
 
-    public static function post_img($img, $user_id)
+    public static function post_img($img, $user_id, $type, $content_id)
     {
         $path_img   = HLEB_PUBLIC_DIR . AG_PATH_POSTS_CONTENT;
         $year       = date('Y') . '/';
@@ -96,8 +96,8 @@ class UploadImage
         $img_post = AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
         $params = [
             'file_path'         => $img_post,
-            'file_type'         => 'post-telo',
-            'file_content_id'   => $post['post_id'] ?? 0,
+            'file_type'         => $type ?? 'none',
+            'file_content_id'   => $content_id ?? 0,
             'file_user_id'      => $user_id,
             'file_date'         => date('Y-m-d H:i:s'),
             'file_is_deleted'   => 0

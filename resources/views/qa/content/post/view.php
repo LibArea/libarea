@@ -189,11 +189,7 @@
           <form class="mb15" action="<?= getUrlByName('answer.create'); ?>" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
 
-            <?= Tpl::import('/_block/editor/editor', [
-              'user'       => $user,
-              'height'    => '250px',
-              'preview'   => 'none',
-            ]); ?>
+            <?= Tpl::import('/_block/editor/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
 
             <div class="clear pt5">
               <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
@@ -300,7 +296,7 @@
         let type = el.dataset.type;
            Notiflix.Confirm.show(
             '<?= Translate::get('report'); ?>',
-            '<?= Translate::get('does this violate site rules'); ?>?',
+            '<?= Translate::get('breaking.rules'); ?>?',
             '<?= Translate::get('yes'); ?>',
             '<?= Translate::get('no'); ?>',
             function okCb() {

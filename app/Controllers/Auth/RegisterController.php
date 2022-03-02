@@ -191,7 +191,7 @@ class RegisterController extends MainController
         return Tpl::agRender(
             '/auth/register-invate',
             [
-                'meta'  => meta($m = [], Translate::get('registration by invite')),
+                'meta'  => meta($m = [], Translate::get('registration.invite')),
                 'data'  => [
                     'invate' => $invate,
                     'type'  => 'invite'

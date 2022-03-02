@@ -30,8 +30,8 @@ class EditPostController extends MainController
             Request::getResources()->addBottomScript('/assets/js/uploads.js');
         }
 
-        Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
@@ -142,8 +142,6 @@ class EditPostController extends MainController
         }
         $post_img = $post_img ?? $post['post_content_img'];
 
- 
-
         $data = [
             'post_id'               => $post_id,
             'post_title'            => $post_title,
@@ -208,13 +206,12 @@ class EditPostController extends MainController
     public function uploadContentImage()
     {
         $user_id    = $this->user['id'];
-        $type       = Request::getGet('type');
-        $post_id    = Request::getGet('post_id');
+        $type       = Request::get('type');
+        $id         = Request::get('id');
 
-        // Фотографии в тело контента
-        $img        = $_FILES['file'];
-        if ($_FILES['file']['name']) {
-            return UploadImage::post_img($img, $user_id);
+        $img = $_FILES['image'];
+        if ($_FILES['image']['name']) {
+           return json_encode(array('data'=> array('filePath'=>UploadImage::post_img($img, $user_id, $type, $id))));
         }
 
         return false;

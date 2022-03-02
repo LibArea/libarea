@@ -35,12 +35,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= Tpl::import('/_block/editor/editor', [
-        'type'      => 'post',
-        'height'    => '350px',
-        'preview'   => 'vertical',
-        'user'       => $user,
-      ]); ?>
+      <?= Tpl::import('/_block/editor/editor', ['height'  => '250px', 'type' => 'page', 'id' => 0]); ?>
 
       <?= sumbit(Translate::get('create')); ?>
     </form>

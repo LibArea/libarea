@@ -11,12 +11,7 @@
   <form action="<?= getUrlByName('answer.edit.pr'); ?>" accept-charset="UTF-8" method="post">
     <?= csrf_field() ?>
 
-    <?= Tpl::import('/_block/editor/editor', [
-      'height'    => '350px',
-      'preview'   => 'vertical',
-      'user'       => $user,
-      'content'   => $data['content'],
-    ]); ?>
+    <?= Tpl::import('/_block/editor/editor', ['height'  => '300px', 'content' => $data['content']]); ?>
 
     <div class="pt5 clear">
       <input type="hidden" name="post_id" value="<?= $data['post']['post_id']; ?>">

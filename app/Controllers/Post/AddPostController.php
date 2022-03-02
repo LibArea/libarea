@@ -32,8 +32,8 @@ class AddPostController extends MainController
         // https://phphleb.ru/ru/v1/examples/#exampleE10
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
-        Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
 
         // Adding from page topic 
         // Добавление со странице темы
@@ -55,10 +55,10 @@ class AddPostController extends MainController
             [
                 'meta'      => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('post'))),
                 'data'  => [
-                    'facets'     => $facets,
-                    'blog'  => FacetModel::getFacetsUser($this->user['id'], 'blog'),
-                    'post_arr'   => PostModel::postRelatedAll(),
-                    'type'       => 'add',
+                    'facets'    => $facets,
+                    'blog'      => FacetModel::getFacetsUser($this->user['id'], 'blog'),
+                    'post_arr'  => PostModel::postRelatedAll(),
+                    'type'      => 'add',
                 ]
             ]
         );
