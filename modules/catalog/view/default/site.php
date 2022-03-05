@@ -10,7 +10,7 @@
           <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
             <h2><?= $item['item_title_url']; ?></h2>
           </a>
-          <?= html_category($item['facet_list'], 'category', $screening, 'tags mr15'); ?>
+          <?= facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', $screening); ?>
 
           <?php if (accessСheck($item, 'item', $user, false, false) === true) { ?>
             <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">

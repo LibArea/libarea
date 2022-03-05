@@ -11,7 +11,7 @@
       element: document.getElementById('editor'),
       imagePathAbsolute: true,
       placeholder: "<?= Translate::get('supports.markdown'); ?>...",
-      imageUploadEndpoint: "/backend/upload/image/<?= $type; ?>/<?= $id; ?>",
+      imageUploadEndpoint: "/backend/upload/<?= $type; ?>/<?= $id; ?>",
       previewImagesInEditor: true,
       uploadImage: true,
       spellChecker: false,

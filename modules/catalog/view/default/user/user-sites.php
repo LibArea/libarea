@@ -23,7 +23,7 @@
                   <?= Translate::get('moderation'); ?>
                 </span>
               <?php } ?>
-              <?= html_category($item['facet_list'], 'category', 'cat', 'tags mr15'); ?>
+              <?= facets($data['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
 
               <?php if (accessСheck($item, 'item', $user, false, false) === true) { ?>
                 <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">

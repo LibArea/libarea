@@ -16,9 +16,16 @@ class FavoriteController extends MainController
         $this->user = UserData::get();
     }
 
-    public function index($type)
+    public function index()
     {
         $content_id = Request::getPostInt('content_id');
+        $type       = Request::getPost('type');
+
+        $allowed = ['post', 'item', 'answer'];
+        if (!in_array($type, $allowed)) {
+            return false;
+        }
+        
         self::redirectItem($content_id, $type, $this->user);
 
         switch ($type) {

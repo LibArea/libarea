@@ -18,12 +18,11 @@ class VotesController extends MainController
 
     public function index()
     {
-        $up_id  = Request::getPostInt('up_id');
-        $type   = Request::get('type');
+        $up_id  = Request::getPostInt('content_id');
+        $type   = Request::getPost('type');
 
         $allowed = ['post', 'comment', 'answer', 'item'];
         if (!in_array($type, $allowed)) return false;
-
         if ($up_id <= 0) return false;
 
         // Проверяем, чтобы участник не голосовал за свой контент

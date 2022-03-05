@@ -52,7 +52,7 @@
 
           <?php if ($topic['matching_list']) { ?><div class="ml<?= $topic['level'] * 10; ?>">
               <i class="bi bi-bezier2 gray-600 text-sm mr5 ml5"></i>
-              <?= html_facet($topic['matching_list'], $topic['facet_type'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
+              <?= facets($topic['matching_list'], $topic['facet_type'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
             </div>
           <?php } ?>
         </div>

@@ -19,23 +19,21 @@ class ActionController extends MainController
     // Удаление и восстановление контента
     public function deletingAndRestoring()
     {
-        $info           = Request::getPost('info');
-        $status         = preg_split('/(@)/', $info);
-        $type_id        = (int)$status[0]; // id конткнта
-        $content_type   = $status[1];      // тип контента
+        $content_id = Request::getPostInt('content_id');
+        $type       = Request::getPost('type');
 
         $allowed = ['post', 'comment', 'answer'];
-        if (!in_array($content_type, $allowed)) {
+        if (!in_array($type, $allowed)) {
             return false;
         }
 
         // Проверка доступа 
-        $info_type = ActionModel::getInfoTypeContent($type_id, $content_type);
-        if (!accessСheck($info_type, $content_type, $this->user, 1, 30)) {
+        $info_type = ActionModel::getInfoTypeContent($content_id, $type);
+        if (!accessСheck($info_type, $type, $this->user, 1, 30)) {
             redirect('/');
         }
 
-        switch ($content_type) {
+        switch ($type) {
             case 'post':
                 $url  = getUrlByName('post', ['id' => $info_type['post_id'], 'slug' => $info_type['post_slug']]);
                 break;
@@ -49,15 +47,15 @@ class ActionController extends MainController
                 break;
         }
 
-        ActionModel::setDeletingAndRestoring($content_type, $info_type[$content_type . '_id'], $info_type[$content_type . '_is_deleted']);
+        ActionModel::setDeletingAndRestoring($type, $info_type[$type . '_id'], $info_type[$type . '_is_deleted']);
 
-        $log_action_name = $info_type[$content_type . '_is_deleted'] == 1 ? 'content.restored' : 'content.deleted';
+        $log_action_name = $info_type[$type . '_is_deleted'] == 1 ? 'content.restored' : 'content.deleted';
         ActionModel::addLogs(
             [
                 'user_id'       => $this->user['id'],
                 'user_login'    => $this->user['login'],
-                'id_content'    => $info_type[$content_type . '_id'] ?? 0,
-                'type_content'  => $content_type,
+                'id_content'    => $info_type[$type . '_id'] ?? 0,
+                'type_content'  => $type,
                 'action_name'   => $log_action_name,
                 'url_content'   => $url,
             ]
@@ -69,9 +67,13 @@ class ActionController extends MainController
     // Связанные посты и выбор автора
     public function select()
     {
-        $content_type   = Request::get('type');
+        $type           = Request::get('type');
         $search         = Request::getPost('q');
         $search         = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
-        return ActionModel::getSearch($search, $content_type);
+        
+        $allowed = ['post', 'user', 'blog',  'section', 'category', 'topic'];
+        if (!in_array($type, $allowed)) return false;
+        
+        return ActionModel::getSearch($search, $type);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-// Blog or topics
-function html_facet($facet, $type, $url, $css)
+// Blog, topic or category
+function facets($facet, $type, $url, $css, $choice = true)
 {
     if (!$facet) {
         return '';
@@ -14,28 +14,11 @@ function html_facet($facet, $type, $url, $css)
     $result = [];
     foreach (array_chunk($facet, 3) as $ind => $row) {
         if ($row[0] == $type) {
-            $result[] = '<a class="' . $css . '" href="' . getUrlByName($url, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
-        }
-    }
-
-    return implode($result);
-}
-
-// Categories
-function html_category($facet, $type, $choice, $css)
-{
-    if (!$facet) {
-        return '';
-    }
-
-    if (!is_array($facet)) {
-        $facet = preg_split('/(@)/', $facet);
-    }
-
-    $result = [];
-    foreach (array_chunk($facet, 3) as $ind => $row) {
-        if ($row[0] == $type) {
-            $result[] = '<a class="' . $css . '" href="' . getUrlByName('web.dir', ['cat' => $choice, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
+            if ($type == 'category') {
+                $result[] = '<a class="' . $css . '" href="' . getUrlByName($url, ['cat' => $choice, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
+            } else {
+                $result[] = '<a class="' . $css . '" href="' . getUrlByName($url, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+            }
         }
     }
 

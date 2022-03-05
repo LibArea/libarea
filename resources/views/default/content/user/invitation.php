@@ -32,7 +32,7 @@
             <?php if (UserData::checkAdmin()) { ?>
               <?= Translate::get('the link was used to'); ?>:
               <?= $invite['invitation_email']; ?>
-              <code class="block">
+              <code class="block w-90">
                 <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
               </code>
             <?php } ?>
@@ -41,7 +41,7 @@
           <?php } else { ?>
             <?= Translate::get('for'); ?> (<?= $invite['invitation_email']; ?>)
             <?= Translate::get('can send this link'); ?>:
-            <code class="block">
+            <code class="block w-90">
               <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
             </code>
           <?php } ?>

@@ -19,11 +19,10 @@ if (colorPicker) {
 document.querySelectorAll(".focus-id")
   .forEach(el => el.addEventListener("click", function (e) {
     let content_id = el.dataset.id;
-    let type_content = el.dataset.type;
-
-    fetch("/focus/" + type_content, {
+    let content_type = el.dataset.type;
+    fetch("/focus", {
       method: "POST",
-      body: "content_id=" + content_id,
+      body: "content_id=" + content_id + "&type=" + content_type,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -36,21 +35,20 @@ document.querySelectorAll(".focus-id")
 // Up
 document.querySelectorAll(".up-id")
   .forEach(el => el.addEventListener("click", function (e) {
-    let up_id = el.dataset.id;
-    let type_content = el.dataset.type;
+    let content_id = el.dataset.id;
+    let content_type = el.dataset.type;
     let count = el.dataset.count;
     let ind = el.dataset.ind;
-
-    fetch("/votes/" + type_content, {
+    fetch("/votes", {
       method: "POST",
-      body: "up_id=" + up_id,
+      body: "content_id=" + content_id + "&type=" + content_type,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
         return;
       }).then((text) => {
         let new_cont = (parseInt(count) + parseInt(1));
-        let upVot = document.querySelector('#up' + up_id + '.voters-' + ind);
+        let upVot = document.querySelector('#up' + content_id + '.voters-' + ind);
         let upScr = upVot.querySelector('.score');
         upVot.classList.add('sky-500');
         upScr.replaceWith(new_cont);
@@ -64,9 +62,9 @@ document.querySelectorAll(".add-favorite")
     let content_type = el.dataset.type;
     let front = el.dataset.front;
     let ind = el.dataset.ind;
-    fetch("/favorite/" + content_type, {
+    fetch("/favorite/add", {
       method: "POST",
-      body: "content_id=" + content_id,
+      body: "content_id=" + content_id + "&type=" + content_type,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -117,10 +115,10 @@ document.querySelectorAll(".post-recommend")
 document.querySelectorAll(".type-action")
   .forEach(el => el.addEventListener("click", function (e) {
     let content_id = el.dataset.id;
-    let content_type = el.dataset.type;
+    let type = el.dataset.type;
     fetch("/status/action", {
       method: "POST",
-      body: "info=" + content_id + "@" + content_type,
+      body: "content_id=" + content_id + "&type=" + type,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {

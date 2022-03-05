@@ -206,7 +206,12 @@ class EditPostController extends MainController
     {
         $user_id    = $this->user['id'];
         $type       = Request::get('type');
-        $id         = Request::get('id');
+        $id         = Request::getInt('id');
+
+        $allowed = ['post-telo', 'answer'];
+        if (!in_array($type, $allowed)) {
+            return false;
+        }
 
         $img = $_FILES['image'];
         if ($_FILES['image']['name']) {

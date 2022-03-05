@@ -3,7 +3,7 @@
     <a class="text-xl" href="<?= getUrlByName('post', ['id' => $gist['post_id'], 'slug' => $gist['post_slug']]); ?>">
       <?= $gist['title']; ?>
     </a>
-    <?= html_facet($gist['facet_list'], 'topic', 'topic', 'mr15 tags'); ?>
+    <?= facets($gist['facet_list'], 'topic', 'topic', 'mr15 tags'); ?>
     <div><?= $gist['content']; ?>...</div>
     <div class="text-sm mt5">
       <?php if ($type == 'post') { ?>

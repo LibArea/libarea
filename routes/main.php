@@ -3,19 +3,17 @@
 Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::getType('post');
         Route::get('/flag/repost')->controller('AuditController@report');
-        Route::get('/backend/upload/image/{type}/{id}')->controller('Post\EditPostController@uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
+        Route::get('/backend/upload/{type}/{id}')->controller('Post\EditPostController@uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
         Route::get('/post/recommend')->controller('Post\AddPostController@recommend');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController');
         Route::get('/post/profile')->controller('Post\PostController@postProfile');
-        Route::get('/favorite/post')->controller('FavoriteController', ['post']);
-        Route::get('/favorite/answer')->controller('FavoriteController', ['answer']);
-        Route::get('/favorite/item')->controller('FavoriteController', ['item']);
-        Route::get('/focus/{type}')->controller('SubscriptionController')->where(['type' => '[a-z]+']);
+        Route::get('/favorite/add')->controller('FavoriteController');
+        Route::get('/focus')->controller('SubscriptionController');
         // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
-        Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 
+        Route::get('/votes')->controller('VotesController'); 
             Route::getProtect();
                 Route::get('/invitation/create')->controller('User\InvitationsController@create')->name('invit.create');
                 Route::get('/messages/send')->controller('MessagesController@send')->name('messages.send');
