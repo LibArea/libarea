@@ -13,14 +13,12 @@ class FileModel extends \Hleb\Scheme\App\Models\MainModel
                     file_type,
                     file_content_id, 
                     file_user_id, 
-                    file_date, 
                     file_is_deleted) 
                        VALUES(
                        :file_path, 
                        :file_type,
                        :file_content_id,
                        :file_user_id,
-                       :file_date, 
                        :file_is_deleted)";
 
         return DB::run($sql, $params);

@@ -17,36 +17,25 @@ class AddPostController extends MainController
         $this->user  = UserData::get();
     }
 
-    // Форма добавление поста
+    // Form adding a post / page
+    // Форма добавление поста / страницы
     public function index($type_content)
     {
-        if ($type_content == 'post') {
-            Request::getResources()->addBottomScript('/assets/js/uploads.js');
-        } else {
-            if (UserData::checkAdmin()) {
-                $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
-                if (!$count) redirect('/');
-            }
+        if ($type_content == 'page') {
+            $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
+            pageError404($count);
         }
 
-        // https://phphleb.ru/ru/v1/examples/#exampleE10
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
         Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
-
+        Request::getResources()->addBottomScript('/assets/js/uploads.js');
+        
         // Adding from page topic 
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
         $topic      = FacetModel::getFacet($topic_id, 'id', 'topic');
-
-        $facets = ['topic' => $topic];
-        if ($topic) {
-            if ($topic['facet_type'] == 'blog') {
-                $facets  = ['blog' => $topic];
-                if ($topic['facet_user_id'] != $this->user['id']) redirect('/');
-            }
-        }
 
         $puth = $type_content == 'page' ? '/page/add' : '/post/add';
 
@@ -55,7 +44,7 @@ class AddPostController extends MainController
             [
                 'meta'      => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('post'))),
                 'data'  => [
-                    'facets'    => $facets,
+                    'facets'    => ['topic' => $topic],
                     'blog'      => FacetModel::getFacetsUser($this->user['id'], 'blog'),
                     'post_arr'  => PostModel::postRelatedAll(),
                     'type'      => 'add',
@@ -127,14 +116,7 @@ class AddPostController extends MainController
         }
 
         // Получаем SEO поста
-        $slug       = new Slug();
-        $uri        = $slug->create($post_title);
-        $post_slug  = substr($uri, 0, 90);
-
-        $result     = PostModel::getSlug($post_slug);
-        if ($result) {
-            $post_slug = $post_slug . "-";
-        }
+        $slug = self::slug($post_title);
 
         $last_id = PostModel::AddPost(
             [
@@ -145,7 +127,7 @@ class AddPostController extends MainController
                 'post_related'          => $post_related,
                 'post_merged_id'        => $post_merged_id,
                 'post_tl'               => $post_tl ?? 0,
-                'post_slug'             => $post_slug,
+                'post_slug'             => $slug,
                 'post_feature'          => $post_feature,
                 'post_type'             => 'post',
                 'post_translation'      => $post_translation,
@@ -160,7 +142,7 @@ class AddPostController extends MainController
             ]
         );
 
-        $url = getUrlByName('post', ['id' => $last_id, 'slug' => $post_slug]);
+        $url = getUrlByName('post', ['id' => $last_id, 'slug' => $slug]);
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
@@ -255,9 +237,7 @@ class AddPostController extends MainController
         $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'page');
 
         // Получаем SEO поста
-        $slug       = new Slug();
-        $uri        = $slug->create($post_title);
-        $post_slug  = substr($uri, 0, 90);
+        $slug = self::slug($post_title);
 
         $last_post_id = PostModel::AddPost(
             [
@@ -268,7 +248,7 @@ class AddPostController extends MainController
                 'post_related'          => '',
                 'post_merged_id'        => 0,
                 'post_tl'               => 0,
-                'post_slug'             => $post_slug,
+                'post_slug'             => $slug,
                 'post_feature'          => 0,
                 'post_type'             => 'page',
                 'post_translation'      => 0,
@@ -284,7 +264,7 @@ class AddPostController extends MainController
         );
 
         $facet = FacetModel::getFacet($topics[0]['id'], 'id', 'topic');
-        $url_post = getUrlByName('page', ['facet' => $facet['facet_slug'], 'slug' => $post_slug]);
+        $url_post = getUrlByName('page', ['facet' => $facet['facet_slug'], 'slug' => $slug]);
 
         // Запишем темы и блог
         $arr = [];
@@ -296,6 +276,19 @@ class AddPostController extends MainController
         redirect($url_post);
     }
 
+    public static function slug($title)
+    {
+        $slug       = new Slug();
+        $uri        = $slug->create($title);
+
+        $result     = PostModel::getSlug($new_slug = substr($uri, 0, 90));
+        if ($result) {
+            return $new_slug . "-";
+        }
+        
+        return $new_slug;
+    }
+    
     public function addUrl($post_url, $post_title)
     {
         // Поскольку это для поста, то получим превью и разбор домена...

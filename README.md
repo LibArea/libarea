@@ -30,7 +30,6 @@ Directory of sites (programs) uses a faceted scheme:
 
 ![Agouti catalog](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/catalog.jpg)
 
-
 Demo: https://agouti.ru/
 
 ### For testing
@@ -55,16 +54,16 @@ Routing > Controllers > Models > Page Builder > Debug Panel
 
 A distinctive feature of the micro-framework HLEB is the minimalism of the code and the speed of work.
 
-
 #### Security
 
 If you discover any security related issues within Agouti, please send an e-mail to admin@agouti.ru instead of using the issue tracker. All security vulnerabilities will be promptly addressed.
 
 ---
 
-Using the example of the Dmoz catalog, I want to create and test a universal and easy navigation for different types of content. Their relationship. 
+Using examples: Dmoz catalog, Yandex catalog, I want to create and test universal and easy navigation through different types of content. Facet scheme and other ideas.
 
-Используя пример, каталога Dmoz, хочется создать и проверить универсальную и легкую навигацию по разным типам контента. Их взаимосвязь.
+Используя примеры: каталог Dmoz, каталог Яндекса хочется создать и проверить универсальную и легкую навигацию по разным типам контента. Фасетную схему и другие идеи.
+
 
 ---
 

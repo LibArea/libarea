@@ -94,16 +94,15 @@ class UploadImage
         }
 
         $img_post = AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
-        $params = [
-            'file_path'         => $img_post,
-            'file_type'         => $type ?? 'none',
-            'file_content_id'   => $content_id ?? 0,
-            'file_user_id'      => $user_id,
-            'file_date'         => date('Y-m-d H:i:s'),
-            'file_is_deleted'   => 0
-
-        ];
-        FileModel::set($params);
+        FileModel::set(
+            [
+                'file_path'         => $img_post,
+                'file_type'         => $type ?? 'none',
+                'file_content_id'   => $content_id ?? 0,
+                'file_user_id'      => $user_id,
+                'file_is_deleted'   => 0
+            ]
+        );
 
         return $img_post;
     }
@@ -198,21 +197,21 @@ class UploadImage
         $post_img = $year . $filename . '.webp';
 
         // Удалим если есть старая
-        if ($post['post_content_img'] != $post_img) {
-            @unlink($path . $post['post_content_img']);
-            FileModel::removal($post['post_content_img'], $user_id);
+        $post_content_img  = $post['post_content_img'] ?? false;
+        if ($post_content_img != $post_img) {
+            @unlink($path . $post_content_img);
+            FileModel::removal($post_content_img, $user_id);
         }
 
-        $params = [
-            'file_path'         => $post_img,
-            'file_type'         => 'post',
-            'file_content_id'   => $post['post_id'] ?? 0,
-            'file_user_id'      => $user_id,
-            'file_date'         => date('Y-m-d H:i:s'),
-            'file_is_deleted'   => 0
-
-        ];
-        FileModel::set($params);
+        FileModel::set(
+            [
+                'file_path'         => $post_img,
+                'file_type'         => 'post',
+                'file_content_id'   => $post['post_id'] ?? 0,
+                'file_user_id'      => $user_id,
+                'file_is_deleted'   => 0
+            ]
+        );
 
         return $post_img;
     }
