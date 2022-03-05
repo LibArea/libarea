@@ -249,21 +249,34 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql_two, ['post_id' => $post_id]);
     }
 
+
     // Добавить пост в профиль
-    public static function addPostProfile($post_id, $user_id)
+    public static function setPostProfile($post_id, $user_id)
     {
+        $result = self::getPostProfile($post_id, $user_id);
+        
+        if (is_array($result)) {
+
+            $sql = "UPDATE users SET my_post = :my_post_id WHERE id = :id AND my_post = :post_id";
+
+            DB::run($sql, ['post_id' => $post_id, 'id' => $user_id, 'my_post_id' => 0]);
+
+            return 'del';
+        }
+
         $sql = "UPDATE users SET my_post = :post_id WHERE id = :id";
 
-        return DB::run($sql, ['post_id' => $post_id, 'id' => $user_id]);
+        DB::run($sql, ['post_id' => $post_id, 'id' => $user_id]);
+        
+        return 'add';
     }
-
-    // Удаление поста в профиле
-    public static function deletePostProfile($post_id, $user_id)
+    
+    public static function getPostProfile($post_id, $user_id)
     {
-        $sql = "UPDATE users SET my_post = :my_post_id WHERE id = :id AND my_post = :post_id";
+        $sql = "SELECT my_post FROM users WHERE my_post = :post_id AND id = :id";
 
-        return DB::run($sql, ['post_id' => $post_id, 'id' => $user_id, 'my_post_id' => 0]);
-    }
+        return  DB::run($sql, ['post_id' => $post_id, 'id' => $user_id])->fetch();
+    }    
 
     // Удален пост или нет
     public static function isThePostDeleted($post_id)

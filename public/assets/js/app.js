@@ -81,28 +81,11 @@ document.querySelectorAll(".add-favorite")
       });
   }));
 
-// Add a post to your profile
-document.querySelectorAll(".add-post-profile")
+// Add or remove your post to your profile 
+document.querySelectorAll(".add-profile")
   .forEach(el => el.addEventListener("click", function (e) {
     let post_id = el.dataset.post;
-    fetch("/post/add/profile", {
-      method: "POST",
-      body: "post_id=" + post_id,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then((response) => {
-        return;
-      }).then((text) => {
-        let mPost = document.querySelector('.add-post-profile').querySelector('.mu_post');
-        mPost.replaceWith('+++');
-      });
-  }));
-
-// Delete a post from your profile
-document.querySelectorAll(".del-post-profile")
-  .forEach(el => el.addEventListener("click", function (e) {
-    let post_id = el.dataset.post;
-    fetch("/post/delete/profile", {
+    fetch("/post/profile", {
       method: "POST",
       body: "post_id=" + post_id,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

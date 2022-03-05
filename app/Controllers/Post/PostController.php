@@ -156,7 +156,7 @@ class PostController extends MainController
     }
 
     // Размещение своего поста у себя в профиле
-    public function addPostProfile()
+    public function postProfile()
     {
         $post_id    = Request::getPostInt('post_id');
         $post       = PostModel::getPost($post_id, 'id', $this->user);
@@ -171,25 +171,7 @@ class PostController extends MainController
             return false;
         }
 
-        PostModel::addPostProfile($post_id, $this->user['id']);
-
-        return true;
-    }
-
-    // Удаление поста в профиле
-    public function deletePostProfile()
-    {
-        $post_id    = Request::getPostInt('post_id');
-        $post       = PostModel::getPost($post_id, 'id', $this->user);
-
-        // Проверка доступа
-        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
-            redirect('/');
-        }
-
-        PostModel::deletePostProfile($post_id, $this->user['id']);
-
-        return true;
+        return PostModel::setPostProfile($post_id, $this->user['id']);
     }
 
     // Просмотр поста с титульной страницы

@@ -347,30 +347,6 @@ class AddPostController extends MainController
         return UploadImage::thumb_post($metaData->image);
     }
 
-    // Удаление и восстановление контента
-    public function deletingAndRestoring()
-    {
-        $info       = Request::getPost('info');
-        $status     = preg_split('/(@)/', $info);
-        $type_id    = (int)$status[0]; // id конткнта
-        $type       = $status[1];      // тип контента
-
-        $allowed = ['post', 'comment', 'answer'];
-        if (!in_array($type, $allowed)) {
-            return false;
-        }
-
-        // Проверка доступа 
-        $info_type = ActionModel::getInfoTypeContent($type_id, $type);
-        if (!accessСheck($info_type, $type, $this->user, 1, 30)) {
-            redirect('/');
-        }
-
-        ActionModel::setDeletingAndRestoring($type, $info_type[$type . '_id'], $info_type[$type . '_is_deleted']);
-
-        return true;
-    }
-
     // Рекомендовать пост
     public function recommend()
     {

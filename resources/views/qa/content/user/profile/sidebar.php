@@ -54,7 +54,7 @@
         </a>
         <?php if ($user['id'] > 0) { ?>
           <?php if ($profile['login'] == $user['login']) { ?>
-            <a class="del-post-profile ml10" data-post="<?= $post['post_id']; ?>">
+            <a class="add-profile ml10" data-post="<?= $post['post_id']; ?>">
               <i class="bi bi-trash red-500"></i>
             </a>
           <?php } ?>

@@ -44,14 +44,14 @@
               </a>
             <?php } ?>
             <?php if ($user['login'] == $post['login']) { ?>
-              <?php if ($post['post_draft'] == 0) { ?>
-                <?php if ($post['my_post'] == $post['post_id']) { ?>
-                  <span class="mu_post gray-400 mr10 ml10">+ <?= Translate::get('in-the-profile'); ?></span>
-                <?php } else { ?>
-                  <a class="add-post-profile gray-400 mr10 ml10" data-post="<?= $post['post_id']; ?>">
-                    <span class="mu_post"><?= Translate::get('in-the-profile'); ?></span>
-                  </a>
-                <?php } ?>
+              <?php if ($post['my_post'] == $post['post_id']) { ?>
+                <span class="add-profile active mr10 ml10" data-post="<?= $post['post_id']; ?>">
+                  + <?= Translate::get('in-the-profile'); ?>
+                </span>
+              <?php } else { ?>
+                <span class="add-profile mr10 ml10" data-post="<?= $post['post_id']; ?>">
+                  <?= Translate::get('in-the-profile'); ?>
+                </span>
               <?php } ?>
             <?php } ?>
             <?php if (UserData::checkAdmin()) { ?>
