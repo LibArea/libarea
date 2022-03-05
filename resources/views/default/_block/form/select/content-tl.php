@@ -5,5 +5,5 @@
       <option <?php if ($data == $i) { ?>selected<?php } ?> value="<?= $i; ?>"><?= $i; ?></option>
     <?php } ?>
   </select>
-  <div class="help"><?= Translate::get('available.tl'); ?>...</div>
+  <div class="help"><?= Translate::get('view.post.tl'); ?>...</div>
 </fieldset>

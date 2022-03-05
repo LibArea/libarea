@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
-use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel};
+use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
 use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domain, Tpl, UserData;
 
 class AddPostController extends MainController
@@ -69,7 +69,7 @@ class AddPostController extends MainController
     public function create()
     {
         $post_title             = Request::getPost('post_title');
-        $post_content           = $_POST['content']; // для Markdown
+        $content                = $_POST['content']; // для Markdown
         $post_url               = Request::getPost('post_url');
         $post_closed            = Request::getPostInt('closed');
         $post_draft             = Request::getPostInt('post_draft');
@@ -105,7 +105,7 @@ class AddPostController extends MainController
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($post_content, 'post');
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'post');
 
         // Если нет темы
         if (!$topics) {
@@ -114,7 +114,7 @@ class AddPostController extends MainController
         }
 
         Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
-        Validation::Length($post_content, Translate::get('the post'), '6', '25000', $redirect);
+        Validation::Length($content, Translate::get('the post'), '6', '25000', $redirect);
 
         if ($post_url) {
             $site = $this->addUrl($post_url, $post_title);
@@ -139,7 +139,7 @@ class AddPostController extends MainController
         $last_id = PostModel::AddPost(
             [
                 'post_title'            => $post_title,
-                'post_content'          => Content::change($post_content),
+                'post_content'          => Content::change($content),
                 'post_content_img'      => $post_img ?? '',
                 'post_thumb_img'        => $site['og_img'] ?? '',
                 'post_related'          => $post_related,
@@ -182,13 +182,13 @@ class AddPostController extends MainController
         FacetModel::addPostFacets($arr, $last_id);
 
         // Notification (@login). 10 - mentions in post 
-        if ($message = Content::parseUser($post_content, true, true)) {
-            (new \App\Controllers\NotificationsController())->mention(10, $message, $last_id, $url);
+        if ($message = Content::parseUser($content, true, true)) {
+            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $last_id, $url);
         }
 
         if (Config::get('general.discord')) {
             if ($post_tl == 0 && $post_draft == 0) {
-                Integration::AddWebhook($post_content, $post_title, $url);
+                Integration::AddWebhook($content, $post_title, $url);
             }
         }
 
@@ -196,13 +196,12 @@ class AddPostController extends MainController
 
         ActionModel::addLogs(
             [
-                'log_user_id'       => $this->user['id'],
-                'log_user_login'    => $this->user['login'],
-                'log_id_content'    => $last_id,
-                'log_type_content'  => 'post',
-                'log_action_name'   => 'content.added',
-                'log_url_content'   => $url,
-                'log_date'          => date("Y-m-d H:i:s"),
+                'user_id'       => $this->user['id'],
+                'user_login'    => $this->user['login'],
+                'id_content'    => $last_id,
+                'type_content'  => 'post',
+                'action_name'   => 'content.added',
+                'url_content'   => $url,
             ]
         );
 
@@ -213,10 +212,10 @@ class AddPostController extends MainController
     public function createPage()
     {
         // Получаем title и содержание
-        $post_title             = Request::getPost('post_title');
-        $post_content           = $_POST['content']; // для Markdown
-        $post_url               = Request::getPost('post_url');
-        $blog_id                = Request::getPostInt('blog_id');
+        $post_title = Request::getPost('post_title');
+        $content    = $_POST['content']; // для Markdown
+        $post_url   = Request::getPost('post_url');
+        $blog_id    = Request::getPostInt('blog_id');
 
         // Получим id Блога с формы выбора или Раздел с фасета
         $post_fields    = Request::getPost() ?? [];
@@ -249,42 +248,43 @@ class AddPostController extends MainController
         }
 
         Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
-        Validation::Length($post_content, Translate::get('the post'), '6', '25000', $redirect);
+        Validation::Length($content, Translate::get('the post'), '6', '25000', $redirect);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($post_content, 'page');
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'page');
 
         // Получаем SEO поста
         $slug       = new Slug();
         $uri        = $slug->create($post_title);
         $post_slug  = substr($uri, 0, 90);
 
-        $data = [
-            'post_title'            => $post_title,
-            'post_content'          => Content::change($post_content),
-            'post_content_img'      => '',
-            'post_thumb_img'        => '',
-            'post_related'          => '',
-            'post_merged_id'        => 0,
-            'post_tl'               => 0,
-            'post_slug'             => $post_slug,
-            'post_feature'          => 0,
-            'post_type'             => 'page',
-            'post_translation'      => 0,
-            'post_draft'            => 0,
-            'post_ip'               => Request::getRemoteAddress(),
-            'post_published'        => ($trigger === false) ? 0 : 1,
-            'post_user_id'          => $this->user['id'],
-            'post_url'              => '',
-            'post_url_domain'       => '',
-            'post_closed'           => 0,
-            'post_top'              => 0,
-        ];
+        $last_post_id = PostModel::AddPost(
+            [
+                'post_title'            => $post_title,
+                'post_content'          => Content::change($content),
+                'post_content_img'      => '',
+                'post_thumb_img'        => '',
+                'post_related'          => '',
+                'post_merged_id'        => 0,
+                'post_tl'               => 0,
+                'post_slug'             => $post_slug,
+                'post_feature'          => 0,
+                'post_type'             => 'page',
+                'post_translation'      => 0,
+                'post_draft'            => 0,
+                'post_ip'               => Request::getRemoteAddress(),
+                'post_published'        => ($trigger === false) ? 0 : 1,
+                'post_user_id'          => $this->user['id'],
+                'post_url'              => '',
+                'post_url_domain'       => '',
+                'post_closed'           => 0,
+                'post_top'              => 0,
+            ]
+        );
 
-        $last_post_id   = PostModel::AddPost($data);
         $facet = FacetModel::getFacet($topics[0]['id'], 'id', 'topic');
-        $url_post       = getUrlByName('page', ['facet' => $facet['facet_slug'], 'slug' => $post_slug]);
+        $url_post = getUrlByName('page', ['facet' => $facet['facet_slug'], 'slug' => $post_slug]);
 
         // Запишем темы и блог
         $arr = [];
@@ -375,29 +375,6 @@ class AddPostController extends MainController
 
         ActionModel::setDeletingAndRestoring($type, $info_type[$type . '_id'], $info_type[$type . '_is_deleted']);
 
-        $status = 'deleted-' . $type;
-        if ($info_type[$type . '_is_deleted'] == 1) {
-            $status = 'restored-' . $type;
-        }
-
-        $info_post_id = $info_type[$type . '_post_id'];
-        if ($type == 'post') {
-            $info_post_id = $info_type[$type . '_id'];
-        }
-
-        $data = [
-            'user_id'       => $this->user['id'],
-            'user_tl'       => $this->user['trust_level'],
-            'created_at'    => date("Y-m-d H:i:s"),
-            'post_id'       => $info_post_id,
-            'content_id'    => $info_type[$type . '_id'],
-            'action'        => $status,
-            'reason'        => '',
-        ];
-
-        // TODO: It will be replaced with a shared user log
-        // ActionModel::logsAdd($data);
-
         return true;
     }
 
@@ -406,8 +383,9 @@ class AddPostController extends MainController
     {
         $post_id = Request::getPostInt('post_id');
 
-        // Проверка доступа 
-        Validation::validTl($this->user['trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
+        if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
+            return false;
+        }
 
         $post = PostModel::getPost($post_id, 'id', $this->user);
         pageError404($post);

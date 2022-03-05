@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
-use App\Models\{FacetModel, PostModel, NotificationsModel};
+use App\Models\{FacetModel, PostModel, NotificationModel};
 use Validation, Translate, UserData;
 
 class Edit
@@ -131,13 +131,12 @@ class Edit
             // Notification to staff
             // Оповещение персоналу
             if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
-                NotificationsModel::send(
+                NotificationModel::send(
                     [
-                        'notification_sender_id'    => $this->user['id'],
-                        'notification_recipient_id' => 1,  // admin
-                        'notification_action_type'  => NotificationsModel::TYPE_EDIT_WEBSITE,
-                        'notification_url'          => getUrlByName('web.audits'),
-                        'notification_read_flag'    => NotificationsModel::FLAG_UNREAD,
+                        'sender_id'    => $this->user['id'],
+                        'recipient_id' => 1,  // admin
+                        'action_type'  => NotificationModel::TYPE_EDIT_WEBSITE,
+                        'url'          => getUrlByName('web.audits'),
                     ]
                 );
             }
@@ -149,13 +148,12 @@ class Edit
             // Notification to the author of the site
             // Оповещение автору сайта
             if ($this->user['trust_level'] == UserData::REGISTERED_ADMIN) {
-                NotificationsModel::send(
+                NotificationModel::send(
                     [
-                        'notification_sender_id'    => $this->user['id'],
-                        'notification_recipient_id' => $uid,  // автор сайта
-                        'notification_action_type'  => NotificationsModel::WEBSITE_APPROVED,
-                        'notification_url'          => getUrlByName('web'),
-                        'notification_read_flag'    => NotificationsModel::FLAG_UNREAD,
+                        'sender_id'    => $this->user['id'],
+                        'recipient_id' => $uid,  // автор сайта
+                        'action_type'  => NotificationModel::WEBSITE_APPROVED,
+                        'url'          => getUrlByName('web'),
                     ]
                 );
             }

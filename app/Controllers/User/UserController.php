@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
-use App\Models\{NotificationsModel, PostModel};
+use App\Models\PostModel;
 use Content, Translate, Tpl, UserData;
 
 class UserController extends MainController
@@ -104,7 +104,7 @@ class UserController extends MainController
     // Страница предпочтений пользователя
     public function subscribed()
     {
-        $focus_posts = NotificationsModel::getFocusPostsListUser($this->user['id']);
+        $focus_posts = PostModel::getFocusPostsListUser($this->user['id']);
 
         $result = [];
         foreach ($focus_posts as $ind => $row) {

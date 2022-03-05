@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
-use App\Models\{MessagesModel, NotificationsModel};
+use App\Models\{MessagesModel, NotificationModel};
 use Content, Config, Translate, Tpl, UserData;
 
 class MessagesController extends MainController
@@ -90,7 +90,7 @@ class MessagesController extends MainController
         $dialog_id = MessagesModel::setMessageRead($id, $this->user['id']);
 
         // id получателя и индификатор события
-        NotificationsModel::updateMessagesUnread($this->user['id'], $dialog_id);
+        NotificationModel::updateMessagesUnread($this->user['id'], $dialog_id);
 
         // dialog_recipient_unread
         if ($list = MessagesModel::getMessageByDialogId($id)) {
@@ -190,13 +190,12 @@ class MessagesController extends MainController
 
         // Оповещение админу
         // Admin notification 
-        NotificationsModel::send(
+        NotificationModel::send(
             [
-                'notification_sender_id'    => $this->user['id'],
-                'notification_recipient_id' => $recipient_id,  // admin
-                'notification_action_type'  => 1, // Private messages 
-                'notification_url'          => '/messages/' . $dialog_id,
-                'notification_read_flag'    => 0,
+                'sender_id'    => $this->user['id'],
+                'recipient_id' => $recipient_id,  // admin
+                'action_type'  => 1, // Private messages 
+                'url'          => '/messages/' . $dialog_id,
             ]
         );
 

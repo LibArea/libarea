@@ -33,12 +33,13 @@ INSERT INTO `answers` (`answer_id`, `answer_post_id`, `answer_user_id`, `answer_
 --
 
 CREATE TABLE `audits` (
-  `audit_id` int(11) NOT NULL,
-  `audit_type` varchar(16) DEFAULT NULL COMMENT 'Посты, ответы, комментарии',
-  `audit_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `audit_user_id` int(11) NOT NULL DEFAULT '0',
-  `audit_content_id` int(11) NOT NULL DEFAULT '0',
-  `audit_read_flag` tinyint(1) DEFAULT '0' COMMENT 'Состояние прочтения'
+  `id` int(11) NOT NULL,
+  `type_content` varchar(16) DEFAULT NULL COMMENT 'post, answer, comment',
+  `type_belonging` varchar(16) NOT NULL DEFAULT 'audit' COMMENT 'audit or repost)',
+  `content_id` int(11) NOT NULL DEFAULT '0',
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `add_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `read_flag` tinyint(1) DEFAULT '0' COMMENT 'Состояние прочтения'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -439,14 +440,14 @@ CREATE TABLE `messages_dialog` (
 --
 
 CREATE TABLE `notifications` (
-  `notification_id` int(11) NOT NULL,
-  `notification_sender_id` int(11) DEFAULT NULL COMMENT 'Отправитель',
-  `notification_recipient_id` int(11) DEFAULT '0' COMMENT 'Получает ID',
-  `notification_action_type` int(4) DEFAULT NULL COMMENT 'Тип оповещения',
-  `notification_url` varchar(255) DEFAULT NULL COMMENT 'URL источника',
-  `notification_add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `notification_read_flag` tinyint(1) DEFAULT '0' COMMENT 'Состояние прочтения',
-  `notification_is_deleted` tinyint(1) UNSIGNED DEFAULT '0' COMMENT 'Удаление'
+  `id` int(11) NOT NULL,
+  `sender_id` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `recipient_id` int(11) DEFAULT '0' COMMENT 'Получает ID',
+  `action_type` int(4) DEFAULT NULL COMMENT 'Тип оповещения',
+  `url` varchar(255) DEFAULT NULL COMMENT 'URL источника',
+  `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `read_flag` tinyint(1) DEFAULT '0' COMMENT 'Состояние прочтения',
+  `is_deleted` tinyint(1) UNSIGNED DEFAULT '0' COMMENT 'Удаление'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -526,23 +527,6 @@ INSERT INTO `posts_signed` (`signed_id`, `signed_post_id`, `signed_user_id`) VAL
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `reports`
---
-
-CREATE TABLE `reports` (
-  `report_id` int(11) NOT NULL,
-  `report_user_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Индификатор участника id',
-  `report_type` varchar(50) NOT NULL COMMENT 'Тип контента',
-  `report_content_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Id контента',
-  `report_reason` varchar(255) NOT NULL COMMENT 'Причина флага',
-  `report_url` varchar(255) NOT NULL,
-  `report_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `report_status` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `stop_words`
 --
 
@@ -612,14 +596,14 @@ INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `l
 --
 
 CREATE TABLE `users_action_logs` (
-  `log_id` int(11) NOT NULL,
-  `log_user_id` int(11) NOT NULL COMMENT 'User ID',
-  `log_user_login` varchar(50) NOT NULL COMMENT 'User login',
-  `log_id_content` int(11) NOT NULL COMMENT 'Content ID',
-  `log_type_content` varchar(32) NOT NULL COMMENT 'Content Type',
-  `log_action_name` varchar(124) NOT NULL COMMENT 'Action name',
-  `log_url_content` varchar(250) NOT NULL COMMENT 'URL content',
-  `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Date added'
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL COMMENT 'User ID',
+  `user_login` varchar(50) NOT NULL COMMENT 'User login',
+  `id_content` int(11) NOT NULL COMMENT 'Content ID',
+  `type_content` varchar(32) NOT NULL COMMENT 'Content Type',
+  `action_name` varchar(124) NOT NULL COMMENT 'Action name',
+  `url_content` varchar(250) NOT NULL COMMENT 'URL content',
+  `add_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Date added'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -643,19 +627,19 @@ CREATE TABLE `users_activate` (
 --
 
 CREATE TABLE `users_agent_logs` (
-  `log_id` int(10) UNSIGNED NOT NULL,
-  `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `log_user_id` int(10) UNSIGNED NOT NULL,
-  `log_user_browser` varchar(64) NOT NULL,
-  `log_user_os` varchar(64) NOT NULL,
-  `log_user_ip` varchar(64) NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `add_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `user_browser` varchar(64) NOT NULL,
+  `user_os` varchar(64) NOT NULL,
+  `user_ip` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Дамп данных таблицы `users_agent_logs`
 --
 
-INSERT INTO `users_agent_logs` (`log_id`, `log_date`, `log_user_id`, `log_user_browser`, `log_user_os`, `log_user_ip`) VALUES
+INSERT INTO `users_agent_logs` (`id`, `add_date`, `user_id`, `user_browser`, `user_os`, `user_ip`) VALUES
 (1, '2021-09-20 10:09:38', 1, 'Firefox 92.0', 'Windows', '127.0.0.1'),
 (2, '2021-09-20 10:57:57', 2, 'Chrome 93.0.4577.82', 'Windows', '127.0.0.1'),
 (3, '2021-10-18 04:43:05', 1, 'Firefox 93.0', 'Windows', '127.0.0.1'),
@@ -839,10 +823,10 @@ ALTER TABLE `answers`
 -- Индексы таблицы `audits`
 --
 ALTER TABLE `audits`
-  ADD PRIMARY KEY (`audit_id`),
-  ADD KEY `audit_type` (`audit_type`),
-  ADD KEY `audit_user_id` (`audit_user_id`),
-  ADD KEY `audit_content_id` (`audit_content_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `type_content` (`type_content`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `content_id` (`content_id`);
 
 --
 -- Индексы таблицы `badges`
@@ -991,11 +975,11 @@ ALTER TABLE `messages_dialog`
 -- Индексы таблицы `notifications`
 --
 ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`notification_id`),
-  ADD KEY `notification_recipient_read_flag` (`notification_recipient_id`,`notification_read_flag`),
-  ADD KEY `notification_sender_id` (`notification_sender_id`),
-  ADD KEY `notification_action_type` (`notification_action_type`),
-  ADD KEY `notification_add_time` (`notification_add_time`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `recipient_read_flag` (`recipient_id`,`read_flag`),
+  ADD KEY `sender_id` (`sender_id`),
+  ADD KEY `action_type` (`action_type`),
+  ADD KEY `add_time` (`add_time`);
 
 --
 -- Индексы таблицы `posts`
@@ -1013,13 +997,6 @@ ALTER TABLE `posts_signed`
   ADD PRIMARY KEY (`signed_id`);
 
 --
--- Индексы таблицы `reports`
---
-ALTER TABLE `reports`
-  ADD PRIMARY KEY (`report_id`),
-  ADD KEY `status` (`report_status`);
-
---
 -- Индексы таблицы `stop_words`
 --
 ALTER TABLE `stop_words`
@@ -1035,8 +1012,8 @@ ALTER TABLE `users`
 -- Индексы таблицы `users_action_logs`
 --
 ALTER TABLE `users_action_logs`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `log_user_id` (`log_user_id`) COMMENT 'uid';
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`) COMMENT 'uid';
 
 --
 -- Индексы таблицы `users_activate`
@@ -1048,8 +1025,8 @@ ALTER TABLE `users_activate`
 -- Индексы таблицы `users_agent_logs`
 --
 ALTER TABLE `users_agent_logs`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `log_user_ip` (`log_user_ip`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_ip` (`user_ip`);
 
 --
 -- Индексы таблицы `users_auth_tokens`
@@ -1128,7 +1105,7 @@ ALTER TABLE `answers`
 -- AUTO_INCREMENT для таблицы `audits`
 --
 ALTER TABLE `audits`
-  MODIFY `audit_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `badges`
@@ -1218,7 +1195,7 @@ ALTER TABLE `messages_dialog`
 -- AUTO_INCREMENT для таблицы `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `posts`
@@ -1231,12 +1208,6 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `posts_signed`
   MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT для таблицы `reports`
---
-ALTER TABLE `reports`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `stop_words`
@@ -1254,7 +1225,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `users_action_logs`
 --
 ALTER TABLE `users_action_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `users_activate`
@@ -1266,7 +1237,7 @@ ALTER TABLE `users_activate`
 -- AUTO_INCREMENT для таблицы `users_agent_logs`
 --
 ALTER TABLE `users_agent_logs`
-  MODIFY `log_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `users_auth_tokens`

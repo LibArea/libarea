@@ -65,7 +65,7 @@ class MyParsedown extends Parsedown
 
     protected function inlineColoredText($excerpt)
     {
-        if (preg_match('/^{c:([#\w]\w+)}(.*?){\/c}/', $excerpt['text'], $matches)) {
+        if (preg_match('/^{color:([#\w]\w+)}(.*?){\/color}/', $excerpt['text'], $matches)) {
             return array(
 
                 // How many characters to advance the Parsedown's

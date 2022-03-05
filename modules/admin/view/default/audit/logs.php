@@ -20,17 +20,17 @@
       </thead>
       <?php foreach ($data['logs'] as $log) { ?>
         <tr>
-          <td><?= $log['log_id']; ?></td>
+          <td><?= $log['id']; ?></td>
           <td>
-            <a href="<?= getUrlByName('profile', ['login' => $log['log_user_login']]); ?>">
-              <?= $log['log_user_login']; ?>
+            <a href="<?= getUrlByName('profile', ['login' => $log['user_login']]); ?>">
+              <?= $log['user_login']; ?>
             </a>
-            <sup class="gray-400 ml5">id:<?= $log['log_user_id']; ?></sup>
+            <sup class="gray-400 ml5">id:<?= $log['user_id']; ?></sup>
           </td>
-          <td class="gray-400"><?= Translate::get($log['log_type_content']); ?></td>
-          <td><?= sprintf(Translate::get($log['log_action_name']), Translate::get($log['log_type_content'])); ?></td>
-          <td class="gray-400"><?= lang_date($log['log_date']); ?></td>
-          <th><a target="_blank" rel="noopener noreferrer" href="<?= $log['log_url_content']; ?>"><i class="bi bi-eye"></i></a></th>
+          <td class="gray-400"><?= Translate::get($log['type_content']); ?></td>
+          <td><?= sprintf(Translate::get($log['action_name']), Translate::get($log['type_content'])); ?></td>
+          <td class="gray-400"><?= lang_date($log['add_date']); ?></td>
+          <th><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><i class="bi bi-eye"></i></a></th>
         </tr>
       <?php } ?>
     </table>

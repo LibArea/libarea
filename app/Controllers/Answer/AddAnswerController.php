@@ -4,7 +4,7 @@ namespace App\Controllers\Answer;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel};
+use App\Models\{NotificationModel, ActionModel, AnswerModel, PostModel};
 use Content, Validation, Translate, UserData;
 
 class AddAnswerController extends MainController
@@ -22,19 +22,19 @@ class AddAnswerController extends MainController
         $post    = PostModel::getPost($post_id, 'id', $this->user);
         pageError404($post);
 
-        $answer_content = $_POST['content']; // для Markdown
+        $content = $_POST['content']; // для Markdown
 
         $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Length($answer_content, Translate::get('bodies'), '6', '5000', $url_post);
+        Validation::Length($content, Translate::get('bodies'), '6', '5000', $url_post);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($answer_content, 'answer');
+        $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'answer');
 
         $last_id = AnswerModel::add(
             [
                 'answer_post_id'    => $post_id,
-                'answer_content'    => Content::change($answer_content),
+                'answer_content'    => Content::change($content),
                 'answer_published'  => ($trigger === false) ? 0 : 1,
                 'answer_ip'         => Request::getRemoteAddress(),
                 'answer_user_id'    => $this->user['id'],
@@ -53,21 +53,20 @@ class AddAnswerController extends MainController
         }
 
         // Notification (@login). 11 - mentions in answers 
-        if ($message = Content::parseUser($answer_content, true, true)) {
-            (new \App\Controllers\NotificationsController())->mention(11, $message, $last_id, $url);
+        if ($message = Content::parseUser($content, true, true)) {
+            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_ANSWER, $message, $last_id, $url);
         }
 
         // Кто подписан на данный вопрос / пост
-        if ($focus_all = NotificationsModel::getFocusUsersPost($post['post_id'])) {
+        if ($focus_all = PostModel::getFocusUsersPost($post['post_id'])) {
             foreach ($focus_all as $focus_user) {
                 if ($focus_user['signed_user_id'] != $this->user['id']) {
-                    NotificationsModel::send(
+                    NotificationModel::send(
                         [
-                            'notification_sender_id'    => $this->user['id'],
-                            'notification_recipient_id' => $focus_user['signed_user_id'],
-                            'notification_action_type'  => 3, // Ответ на пост 
-                            'notification_url'          => $url,
-                            'notification_read_flag'    => 0,
+                            'sender_id'    => $this->user['id'],
+                            'recipient_id' => $focus_user['signed_user_id'],
+                            'action_type'  => NotificationModel::TYPE_AMSWER_POST,
+                            'url'          => $url,
                         ]
                     );
                 }
@@ -76,13 +75,12 @@ class AddAnswerController extends MainController
 
         ActionModel::addLogs(
             [
-                'log_user_id'       => $this->user['id'],
-                'log_user_login'    => $this->user['login'],
-                'log_id_content'    => $last_id,
-                'log_type_content'  => 'answer',
-                'log_action_name'   => 'content.added',
-                'log_url_content'   => $url,
-                'log_date'          => date("Y-m-d H:i:s"),
+                'user_id'       => $this->user['id'],
+                'user_login'    => $this->user['login'],
+                'id_content'    => $last_id,
+                'type_content'  => 'answer',
+                'action_name'   => 'content.added',
+                'url_content'   => $url,
             ]
         );
 

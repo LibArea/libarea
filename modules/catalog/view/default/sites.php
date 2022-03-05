@@ -64,7 +64,7 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/' . $data['screening']); ?>
   </main>
   <aside class="col-span-3 mb-col-12 relative mb-none">
-    <div class="box-yellow mt15 text-sm"><?= $data['category']['facet_info']; ?></div>
+    <div class="box-yellow mt15 text-sm"><?= Content::text($data['category']['facet_info'], 'line'); ?></div>
     <?php if (UserData::checkActiveUser()) { ?>
       <div class="box-white text-sm bg-violet-50 mt15">
         <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>

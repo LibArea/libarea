@@ -17,11 +17,6 @@ return [
             'icon'  => 'bi bi-receipt',
             'id'    => 'logs',
         ], [
-            'url'   => getUrlByName('admin.reports'),
-            'title' => Translate::get('reports'),
-            'icon'  => 'bi bi-flag',
-            'id'    => 'reports',
-        ], [
             'url'   => getUrlByName('admin.audits'),
             'title' => Translate::get('audits'),
             'icon'  => 'bi bi-exclamation-diamond',

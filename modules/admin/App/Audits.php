@@ -3,7 +3,8 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{PostModel, AnswerModel, CommentModel, AuditModel};
+use App\Models\{PostModel, AnswerModel, CommentModel};
+use Modules\Admin\App\Models\LogModel;
 use Translate, UserData;
 
 class Audits
@@ -22,20 +23,20 @@ class Audits
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $pagesCount = AuditModel::getAuditsAllCount($sheet);
-        $audits     = AuditModel::getAuditsAll($page, $this->limit, $sheet);
+        $pagesCount = LogModel::getAuditsAllCount($sheet, $type);
+        $audits     = LogModel::getAuditsAll($page, $this->limit, $sheet, $type);
 
         $result = [];
         foreach ($audits  as $ind => $row) {
 
-            if ($row['audit_type'] == 'post') {
-                $row['content'] = PostModel::getPost($row['audit_content_id'], 'id', $this->user);
-            } elseif ($row['audit_type'] == 'answer') {
-                $row['content'] = AnswerModel::getAnswerId($row['audit_content_id']);
+            if ($row['type_content'] == 'post') {
+                $row['content'] = PostModel::getPost($row['content_id'], 'id', $this->user);
+            } elseif ($row['type_content'] == 'answer') {
+                $row['content'] = AnswerModel::getAnswerId($row['content_id']);
 
                 $row['post'] = PostModel::getPost($row['content']['answer_post_id'], 'id', $this->user);
-            } elseif ($row['audit_type'] == 'comment') {
-                $row['content'] = CommentModel::getCommentsId($row['audit_content_id']);
+            } elseif ($row['type_content'] == 'comment') {
+                $row['content'] = CommentModel::getCommentsId($row['content_id']);
             }
 
             $result[$ind]   = $row;
@@ -44,13 +45,38 @@ class Audits
         return view(
             '/view/default/audit/audits',
             [
-                'meta'  => meta($m = [], Translate::get('audit')),
+                'meta'  => meta($m = [], Translate::get($type)),
                 'data' => [
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'audits'        => $result,
+                ]
+            ]
+        );
+    }
+
+    // Log log
+    // Журнал логов
+    public function logs($sheet, $type)
+    {
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
+
+        $logs       = LogModel::getLogs($page, $this->limit);
+        $pagesCount = LogModel::getLogsCount();
+
+        return view(
+            '/view/default/audit/logs',
+            [
+                'meta'  => meta($m = [], Translate::get('logs')),
+                'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $page,
+                    'type'          => $type,
+                    'sheet'         => $sheet,
+                    'logs'          => $logs,
                 ]
             ]
         );
@@ -63,7 +89,17 @@ class Audits
         $st     = Request::getPost('status');
         $status = preg_split('/(@)/', $st);
         // id, type
-        AuditModel::recoveryAudit($status[0], $status[1]);
+        LogModel::recoveryAudit($status[0], $status[1]);
+
+        return true;
+    }
+
+    // Ознакомился
+    public function saw()
+    {
+        $id  = Request::getPostInt('id');
+
+        LogModel::setSaw($id);
 
         return true;
     }

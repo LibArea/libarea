@@ -1,4 +1,4 @@
-<div class="br-rd5 bg-gray-100 w400 box-shadow-all absolute ml45 user-card z-40">
+<div class="br-rd5 bg-gray-100 w-90 box-shadow-all absolute ml45 z-40">
   <div <?php if ($user['cover_art'] != 'cover_art.jpeg') { ?> style="background-image: linear-gradient(0.25turn, #fefefe, #f3f3f369), url(<?= cover_url($user['cover_art'], 'user'); ?>); background-position: 50% 50%;" <?php } ?> class="p10">
 
     <div class="flex">

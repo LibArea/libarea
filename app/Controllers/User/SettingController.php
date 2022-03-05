@@ -213,7 +213,7 @@ class SettingController extends MainController
     }
 
     // Форма настройки предпочтений участника
-    function notificationsForm()
+    function notificationForm()
     {
         return Tpl::agRender(
             '/user/setting/notifications',
@@ -228,7 +228,7 @@ class SettingController extends MainController
         );
     }
 
-    function notificationsEdit()
+    function notificationEdit()
     {
         SettingModel::setNotifications(
             [

@@ -1,8 +1,8 @@
 // I have read the complaint
-document.querySelectorAll(".report-status")
+document.querySelectorAll(".report-saw")
   .forEach(el => el.addEventListener("click", function (e) {
     let report_id = el.dataset.id;
-    fetch("/admin/reports/status", {
+    fetch("/admin/reports/saw", {
       method: "POST",
       body: "id=" + report_id,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

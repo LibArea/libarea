@@ -111,50 +111,22 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['uid' => $uid]);
     }
 
-    // Get the logs
-    // Получим логи  
-    public static function getLogs($page, $limit)
-    {
-        $start  = ($page - 1) * $limit;
-        $sql = "SELECT 
-                    log_id,
-                    log_user_id,
-                    log_user_login,
-                    log_id_content,
-                    log_type_content,
-                    log_action_name,
-                    log_url_content,
-                    log_date
-                        FROM users_action_logs ORDER BY log_id DESC LIMIT $start, $limit";
-
-        return DB::run($sql)->fetchAll();
-    }
-
-    // Get gthe number of records 
-    // Получим количество записей  
-    public static function getLogsCount()
-    {
-        return DB::run("SELECT log_id FROM users_action_logs")->rowCount();
-    }
-
     // Let's write the logs
     // Запишем логи   
     public static function addLogs($params)
     {
-        $sql = "INSERT INTO users_action_logs(log_user_id, 
-                        log_user_login, 
-                        log_id_content, 
-                        log_type_content, 
-                        log_action_name, 
-                        log_url_content,
-                        log_date) 
-                            VALUES(:log_user_id, 
-                                :log_user_login, 
-                                :log_id_content, 
-                                :log_type_content, 
-                                :log_action_name, 
-                                :log_url_content,
-                                :log_date)";
+        $sql = "INSERT INTO users_action_logs(user_id, 
+                        user_login, 
+                        id_content, 
+                        type_content, 
+                        action_name, 
+                        url_content) 
+                            VALUES(:user_id, 
+                                :user_login, 
+                                :id_content, 
+                                :type_content, 
+                                :action_name, 
+                                :url_content)";
 
         return DB::run($sql, $params);
     }

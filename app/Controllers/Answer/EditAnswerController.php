@@ -49,10 +49,10 @@ class EditAnswerController extends MainController
 
     public function edit()
     {
-        $answer_id      = Request::getPostInt('answer_id');
-        $post_id        = Request::getPostInt('post_id');
-        $answer_content = $_POST['content']; // для Markdown
-        $post           = PostModel::getPost($post_id, 'id', $this->user);
+        $answer_id  = Request::getPostInt('answer_id');
+        $post_id    = Request::getPostInt('post_id');
+        $content    = $_POST['content']; // для Markdown
+        $post       = PostModel::getPost($post_id, 'id', $this->user);
 
         // Если пользователь заморожен
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
@@ -64,12 +64,12 @@ class EditAnswerController extends MainController
         }
 
         $url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Length($answer_content, Translate::get('bodies'), '6', '5000', '/' . $url);
+        Validation::Length($content, Translate::get('bodies'), '6', '5000', '/' . $url);
 
         AnswerModel::edit(
             [
                 'answer_id'         => $answer_id,
-                'answer_content'    => Content::change($answer_content),
+                'answer_content'    => Content::change($content),
                 'answer_modified'   => date("Y-m-d H:i:s"),
             ]
         );

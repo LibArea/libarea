@@ -21,7 +21,7 @@
         <a class="mr5 block" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>">
           <?= $answer['post_title']; ?>
         </a>
-        <div>
+        <div class="answ-telo">
           <?= $answer['content']; ?>
         </div>
         <div class="hidden gray">

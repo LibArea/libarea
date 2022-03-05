@@ -7,11 +7,11 @@ Request::getHead()->addStyles('/assets/css/catalog.css?v14');
 
 <body<?php if (Request::getCookie('dayNight') == 'dark') { ?>class="dark" <?php } ?>>
   <header>
-    <div class="page-search">
+    <div class="page-search mb-p10">
       <a class="logo black" href="<?= getUrlByName('web'); ?>">
         <?= Translate::get('catalog'); ?>
       </a>
-      <div class="page-search-right">
+      <div class="page-search-right mb-ml0">
         <div data-template="one" id="find tippy">
           <a class="tabs black mr15" href="/">
             <i class="bi bi-house"></i>

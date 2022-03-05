@@ -5,16 +5,21 @@
     'meta'  => $meta,
     'menus' => [
       [
-        'id' => $data['type'] . '.all',
-        'url' => getUrlByName('admin.' . $data['type']),
-        'name' => Translate::get('all'),
-        'icon' => 'bi bi-record-circle'
+        'id'    => 'audits.all',
+        'url'   => getUrlByName('admin.audits'),
+        'name'  => Translate::get('all'),
+        'icon'  => 'bi bi-record-circle',
       ], [
-        'id' => $data['type'] . '.ban',
-        'url' => getUrlByName('admin.' . $data['type'] . '.ban'),
-        'name' => Translate::get('approved'),
-        'icon' => 'bi bi-x-circle'
-      ]
+        'id'    => 'audits.ban',
+        'url'   => getUrlByName('admin.audits.ban'),
+        'name'  => Translate::get('approved'),
+        'icon'  => 'bi bi-x-circle',
+      ], [
+        'id'    => 'reports.all',
+        'url'   => getUrlByName('admin.reports'),
+        'name'  => Translate::get('reports'),
+        'icon'  => 'bi bi-record-circle',
+      ] 
     ]
   ]
 ); ?>
@@ -23,23 +28,24 @@
   <?php if (!empty($data['audits'])) { ?>
     <table>
       <thead>
-        <th>Id</th>
+        <th class="w50">id</th>
         <th><?= Translate::get('info'); ?></th>
+        <th><?= Translate::get('type'); ?></th>
         <th><?= Translate::get('action'); ?></th>
-        <th><?= Translate::get('id'); ?></th>
+        <th><?= Translate::get('action'); ?></th>
       </thead>
       <?php foreach ($data['audits'] as $key => $audit) { ?>
-        <?php $user_id = $audit['id']; ?>
         <tr>
-          <td class="center">
+          <td>
             <?= $audit['audit_id']; ?>
           </td>
           <td class="text-sm">
             <div class="content-telo">
-              <?= $audit['content'][$audit['audit_type'] . '_content']; ?>
+              <?php $content = $audit['content'][$audit['type_content'] . '_content']; ?>
+              <?= Content::text(fragment($content), 'text'); ?>
             </div>
 
-            (id:<?= $user_id; ?>)
+            (id:<?= $audit['id']; ?>)
             <a href="<?= getUrlByName('profile', ['login' => $audit['login']]); ?>">
               <?= $audit['login']; ?>
             </a>
@@ -47,15 +53,15 @@
               <span class="mr5 ml5 red-500"> audit </span>
             <?php } ?>
             <span class="mr5 ml5"> &#183; </span>
-            <a class="mr5 ml5" href="<?= getUrlByName('admin.user.edit', ['id' => $user_id]); ?>">
+            <a class="mr5 ml5" href="<?= getUrlByName('admin.user.edit', ['id' => $audit['id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>
             <span class="mr5 ml5"> &#183; </span>
-            <?= $audit['content'][$audit['audit_type'] . '_date']; ?>
+             <?= $audit['content'][$audit['type_content'] . '_date']; ?>
             <span class="mr5 ml5"> &#183; </span>
 
-            <?= Translate::get('type'); ?>: <i><?= $audit['audit_type']; ?></i>
-            <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
+            <?= Translate::get('type'); ?>: <i><?= $audit['type_content']; ?></i>
+            <?php if ($audit['content'][$audit['type_content'] . '_is_deleted'] == 1) { ?>
               <span class="red-500"><?= Translate::get('deleted'); ?> </span>
             <?php } ?>
 
@@ -67,9 +73,10 @@
               <?php } ?>
             <?php } ?>
           </td>
+          <th><?= Translate::get($audit['type_belonging']); ?></th>
           <td class="center">
-            <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action text-sm">
-              <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
+            <a data-id="<?= $audit['content'][$audit['type_content'] . '_id']; ?>" data-type="<?= $audit['type_content']; ?>" class="type-action text-sm">
+              <?php if ($audit['content'][$audit['type_content'] . '_is_deleted'] == 1) { ?>
                 <span class="red-500">
                   <?= Translate::get('recover'); ?>
                 </span>
@@ -82,16 +89,24 @@
             </div>
           </td>
           <td class="center">
-            <?php if ($audit['audit_read_flag'] == 1) { ?>
-              id:
-              <a href="<?= getUrlByName('admin.user.edit', ['id' => $user_id]); ?>">
-                <?= $audit['audit_user_id']; ?>
-              </a>
+            <?php if ($audit['type_belonging'] == 'audit') { ?>
+                <?php if ($audit['read_flag'] == 1) { ?>
+                  id:
+                  <a href="<?= getUrlByName('admin.user.edit', ['id' => $audit['audit_id']]); ?>">
+                    <?= $audit['user_id']; ?>
+                  </a>
+                <?php } else { ?>
+                  <a data-status="<?= $audit['type_content']; ?>" data-id="<?= $audit['content'][$audit['type_content'] . '_id']; ?>" class="audit-status text-sm">
+                    <?= Translate::get('to approve'); ?>
+                  </a>
+                  <div class="text-xs"><?= Translate::get('off.mute.mode'); ?></div>
+                <?php } ?>
             <?php } else { ?>
-              <a data-status="<?= $audit['audit_type']; ?>" data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" class="audit-status text-sm">
-                <?= Translate::get('to approve'); ?>
-              </a>
-              <div class="text-xs"><?= Translate::get('off.mute.mode'); ?></div>
+              <div class="<?php if ($audit['read_flag'] == 0) { ?> bg-red-200<?php } ?>">
+                <span class="report-saw" data-id="<?= $audit['audit_id']; ?>">
+                  <i class="bi bi-record-circle gray text-2xl"></i>
+                </span>
+              </div>  
             <?php } ?>
           </td>
         </tr>

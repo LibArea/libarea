@@ -142,11 +142,11 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     public static function lastVisitLogs($uid)
     {
         $sql = "SELECT 
-                    MAX(log_date) as latest_date,
-                    MAX(log_user_ip) as latest_ip,
-                    log_user_id
+                    MAX(add_date) as latest_date,
+                    MAX(user_ip) as latest_ip,
+                    user_id
                     FROM users_agent_logs 
-                    WHERE log_user_id = :uid GROUP BY log_user_id";
+                    WHERE user_id = :uid GROUP BY user_id";
 
         return DB::run($sql, ['uid' => $uid])->fetch();
     }
@@ -187,12 +187,12 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM users
                         JOIN 
                         ( SELECT 
-                            MAX(log_date) as latest_date,
-                            log_user_id
+                            MAX(add_date) as latest_date,
+                            user_id
                             FROM users_agent_logs 
-                            WHERE log_user_ip = :ip GROUP BY log_user_id
+                            WHERE user_ip = :ip GROUP BY user_id
                         ) as latest_date
-                        ON latest_date.log_user_id = id";
+                        ON latest_date.user_id = id";
         return DB::run($sql, ['ip' => $ip])->fetchAll();
     }
 
@@ -214,13 +214,13 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM users
                         JOIN 
                         ( SELECT 
-                            MAX(log_user_os) as os,
-                            MAX(log_date) as latest_date,
-                            log_user_id
+                            MAX(user_os) as os,
+                            MAX(add_date) as latest_date,
+                            user_id
                             FROM users_agent_logs 
-                            GROUP BY log_user_id
+                            GROUP BY user_id
                         ) as latest_date
-                        ON latest_date.log_user_id = id
+                        ON latest_date.user_id = id
                         ORDER BY latest_date DESC LIMIT 10 ";
 
         return DB::run($sql)->fetchAll();

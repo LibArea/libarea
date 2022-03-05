@@ -16,11 +16,10 @@ class AgentController extends MainController
         $ua_info    = parse_user_agent();
         UserModel::setLogAgent(
             [
-                'log_date'          => date("Y-m-d H:i:s"),
-                'log_user_id'       => $uid,
-                'log_user_browser'  => $ua_info['browser'] . ' ' . $ua_info['version'],
-                'log_user_os'       => $ua_info['platform'],
-                'log_user_ip'       => Request::getRemoteAddress(),
+                'user_id'       => $uid,
+                'user_browser'  => $ua_info['browser'] . ' ' . $ua_info['version'],
+                'user_os'       => $ua_info['platform'],
+                'user_ip'       => Request::getRemoteAddress(),
             ]
         );
     }

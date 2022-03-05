@@ -43,7 +43,7 @@ $facet  = $data['facet'] ?? false; ?>
               <i class="bi bi-brightness-high gray-400 text-xl"></i>
             </div>
             <?php if (Config::get('general.invite') == false) { ?>
-              <a class="w94 gray ml45 mr15 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
+              <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 block" href="<?= getUrlByName('register'); ?>">
                 <?= Translate::get('registration'); ?>
               </a>
             <?php } ?>
@@ -62,9 +62,9 @@ $facet  = $data['facet'] ?? false; ?>
             </div>
 
             <a class="gray-400 ml45 mb-ml20" href="<?= getUrlByName('notifications'); ?>">
-              <?php $notif = \App\Controllers\NotificationsController::setBell($user['id']); ?>
+              <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
-                <?php if ($notif['notification_action_type'] == 1) { ?>
+                <?php if ($notif['action_type'] == 1) { ?>
                   <i class="bi bi-envelope red-500"></i>
                 <?php } else { ?>
                   <i class="bi bi-bell-fill red-500"></i>

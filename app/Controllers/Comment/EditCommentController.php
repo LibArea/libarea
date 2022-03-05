@@ -43,9 +43,9 @@ class EditCommentController extends MainController
 
     public function edit()
     {
-        $comment_id         = Request::getPostInt('comment_id');
-        $post_id            = Request::getPostInt('post_id');
-        $comment_content    = Request::getPost('comment');
+        $comment_id = Request::getPostInt('comment_id');
+        $post_id    = Request::getPostInt('post_id');
+        $content    = Request::getPost('comment');
 
         $post       = PostModel::getPost($post_id, 'id', $this->user);
         pageRedirection($post, '/');
@@ -65,7 +65,7 @@ class EditCommentController extends MainController
         CommentModel::edit(
             [
                 'comment_id'        => $comment_id,
-                'comment_content'   => Content::change($comment_content),
+                'comment_content'   => Content::change($content),
                 'comment_modified'  => date("Y-m-d H:i:s"),
             ]
         );

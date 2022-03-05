@@ -342,17 +342,15 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     
     public static function setLogAgent($params)
     {
-        $sql = "INSERT INTO users_agent_logs(log_date, 
-                                log_user_id, 
-                                log_user_browser, 
-                                log_user_os, 
-                                log_user_ip) 
+        $sql = "INSERT INTO users_agent_logs(user_id, 
+                                user_browser, 
+                                user_os, 
+                                user_ip) 
                                 
-                            VALUES(:log_date, 
-                                :log_user_id, 
-                                :log_user_browser, 
-                                :log_user_os, 
-                                :log_user_ip)";
+                            VALUES(:user_id, 
+                                :user_browser, 
+                                :user_os, 
+                                :user_ip)";
 
         return DB::run($sql, $params);
     }

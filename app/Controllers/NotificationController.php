@@ -4,10 +4,10 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\NotificationsModel;
+use App\Models\NotificationModel;
 use Translate, SendEmail, Tpl, UserData;
 
-class NotificationsController extends MainController
+class NotificationController extends MainController
 {
     private $user;
 
@@ -25,7 +25,7 @@ class NotificationsController extends MainController
                 'data'  => [
                     'sheet'         => 'notifications',
                     'type'          => 'notifications',
-                    'notifications' => NotificationsModel::listNotification($this->user['id']),
+                    'notifications' => NotificationModel::listNotification($this->user['id']),
                 ]
             ]
         );
@@ -36,27 +36,27 @@ class NotificationsController extends MainController
     public function read()
     {
         $notif_id   = Request::getInt('id');
-        $info       = NotificationsModel::getNotification($notif_id);
+        $info       = NotificationModel::getNotification($notif_id);
 
-        if ($this->user['id'] != $info['notification_recipient_id']) {
+        if ($this->user['id'] != $info['recipient_id']) {
             return false;
         }
 
-        NotificationsModel::updateMessagesUnread($this->user['id'], $notif_id);
+        NotificationModel::updateMessagesUnread($this->user['id'], $notif_id);
 
-        redirect('/' .  $info['notification_url']);
+        redirect('/' .  $info['url']);
     }
 
     public function remove()
     {
-        NotificationsModel::setRemove($this->user['id']);
+        NotificationModel::setRemove($this->user['id']);
 
         redirect(getUrlByName('notifications'));
     }
 
     public static function setBell($user_id)
     {
-        return NotificationsModel::bell($user_id);
+        return NotificationModel::bell($user_id);
     }
 
     // Appeal (@)
@@ -79,13 +79,12 @@ class NotificationsController extends MainController
 
             // Оповещение админу
             // Admin notification 
-            NotificationsModel::send(
+            NotificationModel::send(
                 [
-                    'notification_sender_id'    => $this->user['id'],
-                    'notification_recipient_id' => $recipient_id,  // admin
-                    'notification_action_type'  => $action_type, // Система флагов  
-                    'notification_url'          => $url,
-                    'notification_read_flag'    => 0,
+                    'sender_id'    => $this->user['id'],
+                    'recipient_id' => $recipient_id,  // admin
+                    'action_type'  => $action_type, // Система флагов  
+                    'url'          => $url,
                 ]
             );
 

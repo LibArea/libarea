@@ -54,13 +54,12 @@ class ActionController extends MainController
         $log_action_name = $info_type[$content_type . '_is_deleted'] == 1 ? 'content.restored' : 'content.deleted';
         ActionModel::addLogs(
             [
-                'log_user_id'       => $this->user['id'],
-                'log_user_login'    => $this->user['login'],
-                'log_id_content'    => $info_type[$content_type . '_id'] ?? 0,
-                'log_type_content'  => $content_type,
-                'log_action_name'   => $log_action_name,
-                'log_url_content'   => $url,
-                'log_date'          => date("Y-m-d H:i:s"),
+                'user_id'       => $this->user['id'],
+                'user_login'    => $this->user['login'],
+                'id_content'    => $info_type[$content_type . '_id'] ?? 0,
+                'type_content'  => $content_type,
+                'action_name'   => $log_action_name,
+                'url_content'   => $url,
             ]
         );
 

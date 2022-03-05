@@ -56,7 +56,7 @@ class Сhecks
 
         $in_total   = $count_add - $count;
 
-        Validation::validTl($this->user['trust_level'], Config::get('trust-levels.tl_add_site'), $count, $count_add);
+        self::trustLevel($this->user['trust_level'], Config::get('trust-levels.tl_add_site'), $count, $count_add);
 
         if (!$in_total > 0) {
             redirect(getUrlByName('web'));
@@ -64,6 +64,20 @@ class Сhecks
 
         return $in_total;
     }
+    
+    public static function trustLevel($trust_level, $allowed_tl, $count_content, $count_total)
+    {
+        if ($trust_level < $allowed_tl) {
+            redirect('/');
+        }
+
+        if ($count_content >= $count_total) {
+            redirect('/');
+        }
+
+        return true;
+    }
+    
     
     public static function checkStatus(string $url)
     {

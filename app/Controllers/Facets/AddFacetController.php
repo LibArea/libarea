@@ -36,7 +36,7 @@ class AddFacetController extends MainController
     public function create()
     {
         $facet_type = Request::getPost('facet_type');
-        self::limitFacer($facet_type, 'redirect');
+        $this->limitFacer($facet_type, 'redirect');
 
         $facet_title                = Request::getPost('facet_title');
         $facet_description          = Request::getPost('facet_description');
@@ -105,12 +105,25 @@ class AddFacetController extends MainController
             return $in_total;
         }
 
-        Validation::validTl($this->user['trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
+        self::tl($this->user['trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
 
         if (!$in_total > 0) {
             redirect('/');
         }
 
         return $in_total;
+    }
+    
+    public static function tl($trust_level, $allowed_tl, $count_content, $count_total)
+    {
+        if ($trust_level < $allowed_tl) {
+            redirect('/');
+        }
+
+        if ($count_content >= $count_total) {
+            redirect('/');
+        }
+
+        return true;
     }
 }

@@ -65,7 +65,7 @@ class EditPostController extends MainController
     {
         $post_id                = Request::getPostInt('post_id');
         $post_title             = Request::getPost('post_title');
-        $post_content           = $_POST['content']; // для Markdown
+        $content                = $_POST['content']; // для Markdown
         $post_feature           = Request::getPostInt('post_feature');
         $post_translation       = Request::getPostInt('translation');
         $post_draft             = Request::getPostInt('post_draft');
@@ -120,10 +120,10 @@ class EditPostController extends MainController
 
         Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
 
-        if ($post_content == '') {
-            $post_content = $post['post_content'];
+        if ($content == '') {
+            $content = $post['post_content'];
         }
-        Validation::Length($post_content, Translate::get('the post'), '6', '25000', $redirect);
+        Validation::Length($content, Translate::get('the post'), '6', '25000', $redirect);
 
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
@@ -142,27 +142,26 @@ class EditPostController extends MainController
         }
         $post_img = $post_img ?? $post['post_content_img'];
 
-        $data = [
-            'post_id'               => $post_id,
-            'post_title'            => $post_title,
-            'post_slug'             => $post['post_slug'],
-            'post_feature'          => $post_feature,
-            'post_type'             => $post['post_type'],
-            'post_translation'      => $post_translation,
-            'post_date'             => $post_date,
-            'post_user_id'          => $post_user_id ?? 1,
-            'post_draft'            => $post_draft,
-            'post_content'          => Content::change($post_content),
-            'post_content_img'      => $post_img ?? '',
-            'post_related'          => $post_related ?? '',
-            'post_merged_id'        => $post_merged_id,
-            'post_tl'               => Request::getPostInt('content_tl'),
-            'post_closed'           => $post_closed,
-            'post_top'              => $post_top,
-        ];
-
-        // Перезапишем пост
-        PostModel::editPost($data);
+        PostModel::editPost(
+            [
+                'post_id'               => $post_id,
+                'post_title'            => $post_title,
+                'post_slug'             => $post['post_slug'],
+                'post_feature'          => $post_feature,
+                'post_type'             => $post['post_type'],
+                'post_translation'      => $post_translation,
+                'post_date'             => $post_date,
+                'post_user_id'          => $post_user_id ?? 1,
+                'post_draft'            => $post_draft,
+                'post_content'          => Content::change($content),
+                'post_content_img'      => $post_img ?? '',
+                'post_related'          => $post_related ?? '',
+                'post_merged_id'        => $post_merged_id,
+                'post_tl'               => Request::getPostInt('content_tl'),
+                'post_closed'           => $post_closed,
+                'post_top'              => $post_top,
+            ]
+        );
 
         // Получаем id существующего блога (использовать потом)
         $blog_id    = Request::getPostInt('blog_id');

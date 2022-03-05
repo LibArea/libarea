@@ -64,9 +64,9 @@ $facet  = $data['facet'] ?? false; ?>
             </div>
 
             <a class="gray-400 p10 text-xl ml20 mb-ml10" href="<?= getUrlByName('notifications'); ?>">
-              <?php $notif = \App\Controllers\NotificationsController::setBell($user['id']); ?>
+              <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
-                <?php if ($notif['notification_action_type'] == 1) { ?>
+                <?php if ($notif['action_type'] == 1) { ?>
                   <i class="bi bi-envelope red-500"></i>
                 <?php } else { ?>
                   <i class="bi bi-bell-fill red-500"></i>

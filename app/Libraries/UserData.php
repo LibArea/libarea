@@ -43,6 +43,10 @@ class UserData
     // Administrator (level of trust 10)
     // Администратор (уровень доверия 10)
     const REGISTERED_ADMIN = 10;
+    
+    // Administrator ID
+    // ID администратора
+    const REGISTERED_ADMIN_ID = 1;
 
     static protected $type = null;
 

@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
-use App\Models\{ActionModel, FacetModel, NotificationsModel};
+use App\Models\{ActionModel, FacetModel, NotificationModel};
 use Translate, UserData;
 
 class Add
@@ -111,26 +111,24 @@ class Add
 
         ActionModel::addLogs(
             [
-                'log_user_id'       => $this->user['id'],
-                'log_user_login'    => $this->user['login'],
-                'log_id_content'    => $item_last['item_id'],
-                'log_type_content'  => 'website',
-                'log_action_name'   => 'content.added',
-                'log_url_content'   => getUrlByName('web.audits'),
-                'log_date'          => date("Y-m-d H:i:s"),
+                'user_id'       => $this->user['id'],
+                'user_login'    => $this->user['login'],
+                'id_content'    => $item_last['item_id'],
+                'type_content'  => 'website',
+                'action_name'   => 'content.added',
+                'url_content'   => getUrlByName('web.audits'),
             ]
         );
 
         // Notification to staff
         // Оповещение персоналу
         if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
-            NotificationsModel::send(
+            NotificationModel::send(
                 [
-                    'notification_sender_id'    => $this->user['id'],
-                    'notification_recipient_id' => 1,  // admin
-                    'notification_action_type'  => NotificationsModel::TYPE_ADD_WEBSITE,
-                    'notification_url'          => getUrlByName('web.audits'),
-                    'notification_read_flag'    => NotificationsModel::FLAG_UNREAD,
+                    'sender_id'    => $this->user['id'],
+                    'recipient_id' => 1,  // admin
+                    'action_type'  => NotificationModel::TYPE_ADD_WEBSITE,
+                    'url'          => getUrlByName('web.audits'),
                 ]
             );
         }

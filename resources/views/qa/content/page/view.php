@@ -38,7 +38,7 @@
       </a>
     <?php } ?>
     <?php foreach ($data['pages'] as $ind => $row) { ?>
-      <a class="block pt5 pb5 gray" href="<?= getUrlByName('page', ['slug' => $row['post_slug'], 'facet' => $data['facet']['facet_slug'],]); ?>">
+      <a class="block pt5 pb5 gray" href="/info/<?= $row['post_slug']; ?>">
         <i class="bi bi-info-square middle mr5"></i> <?= $row['post_title']; ?>
       </a>
     <?php } ?>

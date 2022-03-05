@@ -47,6 +47,6 @@
 </main>
 <aside class="col-span-3 mb-none">
   <div class="box-white bg-violet-50 text-sm">
-    <?= Translate::get('personal-messages-site'); ?>
+    <?= Translate::get('messages.info'); ?>
   </div>
 </aside>

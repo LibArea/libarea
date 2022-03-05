@@ -11,7 +11,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
         Route::get('/favicon/add')->module('admin', 'App\Webs@favicon');
         Route::get('/word/ban')->module('admin', 'App\Words@deletes');
         Route::get('/audit/status')->module('admin', 'App\Audits@status');
-        Route::get('/reports/status')->module('admin', 'App\Reports@status');
+        Route::get('/reports/saw')->module('admin', 'App\Audits@saw');
         Route::get('/topic/ban')->module('admin', 'App\Facets@deletes');
         Route::get('/badge/remove')->module('admin', 'App\Badges@remove');
         
@@ -35,6 +35,8 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     
     Route::get('/audits')->module('admin', 'App\Audits', ['audits.all', 'audits'])->name('admin.audits');
     Route::get('/audits/approved')->module('admin', 'App\Audits', ['audits.ban', 'audits'])->name('admin.audits.ban');
+    Route::get('/report')->module('admin', 'App\Audits', ['reports.all', 'reports'])->name('admin.reports');
+
    
     Route::get('/topics')->module('admin', 'App\Facets', ['topics.all', 'topics'])->name('admin.topics');
     Route::get('/topics/ban')->module('admin', 'App\Facets', ['topics.ban', 'topics'])->name('admin.topics.ban');
@@ -70,9 +72,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/words/add')->module('admin', 'App\Words@addPage', ['add', 'words'])->name('words.add');
     Route::get('/words')->module('admin', 'App\Words', ['words.all', 'words'])->name('admin.words');
     
-    Route::get('/reports')->module('admin', 'App\Reports', ['reports.all', 'reports'])->name('admin.reports');
-    Route::get('/reports/page/{page?}')->module('admin', 'App\Reports', ['reports.all', 'reports'])->where(['page' => '[0-9]+']);
-    
     Route::get('/structure')->module('admin', 'App\TreeFacet', ['all'])->name('admin.all.structure');
     Route::get('/structure/topic')->module('admin', 'App\TreeFacet', ['topic'])->name('admin.topic.structure');
     Route::get('/structure/blog')->module('admin', 'App\TreeFacet', ['blog'])->name('admin.blog.structure');
@@ -82,6 +81,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/css')->module('admin', 'App\Home@css')->name('admin.css');
     Route::get('/info')->module('admin', 'App\Home@css')->name('admin.info');
     
-    Route::get('/logs')->module('admin', 'App\Reports@logs', ['logs.all', 'logs'])->name('admin.logs');
-    Route::get('/logs/page/{page?}')->module('admin', 'App\Reports@logs', ['logs.all', 'logs'])->where(['page' => '[0-9]+']);
+    Route::get('/logs')->module('admin', 'App\Audits@logs', ['logs.all', 'logs'])->name('admin.logs');
+    Route::get('/logs/page/{page?}')->module('admin', 'App\Audits@logs', ['logs.all', 'logs'])->where(['page' => '[0-9]+']);
 Route::endGroup();

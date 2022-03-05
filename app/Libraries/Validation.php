@@ -42,22 +42,4 @@ class Validation
         }
         return true;
     }
-
-    // Права для TL
-    // $trust_leve - уровень доверие участника
-    // $allowed_tl - с какого TL разрешено
-    // $count_content - сколько уже создал
-    // $count_total - сколько разрешено
-    public static function validTl($trust_level, $allowed_tl, $count_content, $count_total)
-    {
-        if ($trust_level < $allowed_tl) {
-            redirect('/');
-        }
-
-        if ($count_content >= $count_total) {
-            redirect('/');
-        }
-
-        return true;
-    }
 }

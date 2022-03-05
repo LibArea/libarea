@@ -2,7 +2,7 @@
 // https://phphleb.ru/ru/v1/groups/
 Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::getType('post');
-        Route::get('/flag/repost')->controller('ReportController');
+        Route::get('/flag/repost')->controller('AuditController@report');
         Route::get('/backend/upload/image/{type}/{id}')->controller('Post\EditPostController@uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
         Route::get('/post/recommend')->controller('Post\AddPostController@recommend');
@@ -23,7 +23,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 Route::get('/users/setting/edit')->controller('User\SettingController@edit')->name('setting.edit');
                 Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit')->name('setting.avatar.edit');
                 Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit')->name('setting.security.edit');
-                Route::get('/users/setting/notifications/edit')->controller('User\SettingController@notificationsEdit')->name('setting.notif.edit');
+                Route::get('/users/setting/notification/edit')->controller('User\SettingController@notificationEdit')->name('setting.notif.edit');
                 // Add / Edit: post | comment | answer | topic | web
                 Route::get('/post/create')->controller('Post\AddPostController@create')->name('post.create');
                 Route::get('/page/create')->controller('Post\AddPostController@createPage')->name('page.create');
@@ -75,12 +75,12 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/setting')->controller('User\SettingController@settingForm')->name('setting'); 
     Route::get('/setting/avatar')->controller('User\SettingController@avatarForm')->name('setting.avatar');
     Route::get('/setting/security')->controller('User\SettingController@securityForm')->name('setting.security');
-    Route::get('/setting/notifications')->controller('User\SettingController@notificationsForm')->name('setting.notifications');
+    Route::get('/setting/notifications')->controller('User\SettingController@notificationForm')->name('setting.notifications');
     Route::get('/messages')->controller('MessagesController')->name('messages');   
     Route::get('/messages/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 
-	Route::get('/notifications')->controller('NotificationsController')->name('notifications'); 
-    Route::get('/notifications/{id}')->controller('NotificationsController@read')->where(['id' => '[0-9]+'])->name('notif.read');  
-    Route::get('/notifications/delete')->controller('NotificationsController@remove')->name('notif.remove');  
+	Route::get('/notifications')->controller('NotificationController')->name('notifications'); 
+    Route::get('/notification/{id}')->controller('NotificationController@read')->where(['id' => '[0-9]+'])->name('notif.read');  
+    Route::get('/notifications/delete')->controller('NotificationController@remove')->name('notif.remove');  
     Route::get('/favorites')->controller('User\UserController@favorites')->name('favorites');
     Route::get('/subscribed')->controller('User\UserController@subscribed')->name('subscribed');
     Route::get('/drafts')->controller('User\UserController@drafts')->name('drafts');

@@ -388,4 +388,94 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['domain' => $domain])->fetchAll();
     }
+    
+    // Кто подписан на данный вопрос / пост
+    public static function getFocusUsersPost($post_id)
+    {
+        $sql = "SELECT
+                    signed_post_id,
+                    signed_user_id
+                        FROM posts_signed
+                        WHERE signed_post_id = :post_id";
+
+        return DB::run($sql, ['post_id' => $post_id])->fetchAll();
+    }
+    
+    // Список читаемых постов
+    public static function getFocusPostUser($uid)
+    {
+        $sql = "SELECT
+                    signed_post_id,
+                    signed_user_id 
+                        FROM posts_signed
+                        WHERE signed_user_id = :uid";
+
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
+    }
+
+    public static function getFocusPostsListUser($uid)
+    {
+        $focus_posts = self::getFocusPostUser($uid);
+
+        $result = [];
+        foreach ($focus_posts as $ind => $row) {
+            $result[$ind] = $row['signed_post_id'];
+        }
+
+        if ($result) {
+            $string = "WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0";
+        } else {
+            $string = "WHERE post_id IN(0) AND post_draft = 0";
+        }
+
+        $sql = "SELECT 
+                    post_id,
+                    post_title,
+                    post_slug,
+                    post_feature,
+                    post_translation,
+                    post_draft,
+                    post_date,
+                    post_published,
+                    post_user_id,
+                    post_votes,
+                    post_hits_count,
+                    post_answers_count,
+                    post_comments_count,
+                    post_content,
+                    post_content_img,
+                    post_thumb_img,
+                    post_merged_id,
+                    post_closed,
+                    post_tl,
+                    post_lo,
+                    post_top,
+                    post_url_domain,
+                    post_is_deleted,
+                    rel.*,
+                    votes_post_item_id, votes_post_user_id,
+                    id, login, avatar, 
+                    favorite_tid, favorite_user_id, favorite_type
+                    
+                        FROM posts
+                        LEFT JOIN
+                        (
+                            SELECT 
+                                relation_post_id,
+
+                                GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                FROM facets  
+                                LEFT JOIN facets_posts_relation 
+                                    on facet_id = relation_facet_id
+                                GROUP BY relation_post_id
+                        ) AS rel
+                            ON rel.relation_post_id = post_id 
+
+            INNER JOIN users ON id = post_user_id
+            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $uid
+            LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = $uid AND favorite_type = 1
+            $string  LIMIT 100";
+
+        return DB::run($sql)->fetchAll();
+    }
 }
