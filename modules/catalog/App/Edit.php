@@ -88,9 +88,9 @@ class Edit
         }
 
         // Связанные посты
-        $post_fields    = Request::getPost() ?? [];
+        $post_fields = Request::getPost() ?? [];
         $json_post  = $post_fields['post_select'] ?? [];
-        $arr_post   = json_decode($json_post[0], true);
+        $arr_post   = json_decode($json_post, true);
         if ($arr_post) {
             foreach ($arr_post as $value) {
                 $id[]   = $value['id'];
@@ -162,7 +162,7 @@ class Edit
         // Фасеты для сайте
         $post_fields    = Request::getPost() ?? [];
         $facet_post     = $post_fields['facet_select'] ?? [];
-        $topics         = json_decode($facet_post[0], true);
+        $topics         = json_decode($facet_post, true);
 
         if (!empty($topics)) {
             $arr = [];

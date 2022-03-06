@@ -63,16 +63,15 @@ class EditPostController extends MainController
 
     public function edit()
     {
-        $post_id                = Request::getPostInt('post_id');
-        $post_title             = Request::getPost('post_title');
-        $content                = $_POST['content']; // для Markdown
-        $post_feature           = Request::getPostInt('post_feature');
-        $post_translation       = Request::getPostInt('translation');
-        $post_draft             = Request::getPostInt('post_draft');
-        $post_closed            = Request::getPostInt('closed');
-        $post_top               = Request::getPostInt('top');
-        $draft                  = Request::getPost('draft');
-        $post_merged_id         = Request::getPostInt('post_merged_id');
+        $post_id            = Request::getPostInt('post_id');
+        $post_title         = Request::getPost('post_title');
+        $content            = $_POST['content']; // для Markdown
+        $post_feature       = Request::getPostInt('post_feature');
+        $post_translation   = Request::getPostInt('translation');
+        $post_draft         = Request::getPostInt('post_draft');
+        $post_closed        = Request::getPostInt('closed');
+        $post_top           = Request::getPostInt('top');
+        $draft              = Request::getPost('draft');
 
         // Проверка доступа 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
@@ -84,30 +83,33 @@ class EditPostController extends MainController
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
 
         // Связанные посты и темы
-        $post_fields    = Request::getPost() ?? [];
+        $fields    = Request::getPost() ?? [];
         if ($post['post_type'] == 'post') {
-            $json_post  = $post_fields['post_select'] ?? [];
-            $arr_post   = json_decode($json_post[0], true);
+            $json_post  = $fields['post_select'] ?? [];
+            $arr_post   = json_decode($json_post, true);
             if ($arr_post) {
                 foreach ($arr_post as $value) {
                     $id[]   = $value['id'];
                 }
             }
             $post_related = implode(',', $id ?? []);
-            $facet_post     = $post_fields['facet_select'] ?? [];
-            $topics         = json_decode($facet_post[0], true);
             $redirect   = getUrlByName('post.edit', ['id' => $post_id]);
         } else {
-            $facet_post     = $post_fields['section_select'] ?? [];
-            $topics         = json_decode($facet_post, true);
             $redirect   = getUrlByName('page.edit', ['id' => $post_id]);
         }
-        
-        if (!$topics) {
+
+        $facets = $fields['facet_select'] ?? [];
+        $topics = json_decode($facets, true);
+
+        $blog_post  = $fields['blog_select'] ?? false;
+        $blog       = json_decode($blog_post, true);
+   
+        $all_topics = array_merge($blog ?? [], $topics ?? []);
+        if (!$all_topics) {
             addMsg('select topic', 'error');
             redirect($redirect);
-        }
-        
+        } 
+
         // Если есть смена post_user_id и это TL5
         $user_new  = Request::getPost('user_id');
         $post_user_new = json_decode($user_new, true);
@@ -136,8 +138,8 @@ class EditPostController extends MainController
         }
 
         // Обложка поста
-        $cover          = $_FILES['images'];
-        if ($_FILES['images']['name']) {
+        $cover = $_FILES['images'] ?? false;
+        if ($cover) {
             $post_img = UploadImage::cover_post($cover, $post, $redirect, $this->user['id']);
         }
         $post_img = $post_img ?? $post['post_content_img'];
@@ -156,34 +158,20 @@ class EditPostController extends MainController
                 'post_content'          => Content::change($content),
                 'post_content_img'      => $post_img ?? '',
                 'post_related'          => $post_related ?? '',
-                'post_merged_id'        => $post_merged_id,
                 'post_tl'               => Request::getPostInt('content_tl'),
                 'post_closed'           => $post_closed,
                 'post_top'              => $post_top,
             ]
         );
 
-        // Получаем id существующего блога (использовать потом)
-        $blog_id    = Request::getPostInt('blog_id');
-
-        // Получим id блога с формы выбора
-        $blog_post  = $post_fields['blog_select'] ?? [];
-        $blog       = json_decode($blog_post, true);
-        // $form_id    = $blog[0]['id'] ?? 0;
-
-        if ($blog) {
-            $topics = array_merge($blog, $topics);
-        }
-
         // Запишем темы и блог
         $arr = [];
-        foreach ($topics as $ket => $row) {
+        foreach ($all_topics as $ket => $row) {
             $arr[] = $row;
         }
         FacetModel::addPostFacets($arr, $post_id);
-
-        $url = $post['post_type'] == 'post' ? 'post' : 'page';
-        redirect(getUrlByName($url, ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
+        
+        redirect('/');
     }
 
     // Удаление обложки

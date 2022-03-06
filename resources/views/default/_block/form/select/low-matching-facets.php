@@ -4,7 +4,7 @@
 
 <fieldset>
   <label><?= $title; ?></label>
-  <input name="facet_matching[]" id="facet_id_matching">
+  <input name="facet_matching" id="facet_id_matching">
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">

@@ -27,18 +27,20 @@
   </div>
 </main>
 <aside class="col-span-4 mb-none">
-  <div class="box-white bg-violet-50 sticky top0 text-sm">
-    <?php if ($data['facet']['facet_type'] == 'section') { ?>
+  <div class="box-white bg-violet-50 sticky top-sm text-sm">
+    <?php if ($data['type'] == 'blog.page') { ?>
       <h3 class="uppercase-box">
-        <?= $data['facet']['facet_title']; ?>
+        <?= Translate::get('blog'); ?>
       </h3>
-    <?php } else { ?>
-      <a href="<?= getUrlByName('blog', ['slug' => $data['facet']['facet_slug']]); ?>">
-        <?= $data['facet']['facet_title']; ?>
-      </a>
+      <div class="mb10">
+        <?= facet_logo_img($data['facet']['facet_img'], 'min', $data['facet']['facet_title'], 'img-base'); ?>
+        <a href="<?= getUrlByName('blog', ['slug' => $data['facet']['facet_slug']]); ?>">
+          <?= $data['facet']['facet_title']; ?></a>
+      </div>
     <?php } ?>
+    <?php $url = $data['type'] == 'blog.page' ? '/blog/' . $data['facet']['facet_slug'] . '/info/' : '/info/article/'; ?>
     <?php foreach ($data['pages'] as $ind => $row) { ?>
-      <a class="block pt5 pb5 gray" href="/info/<?= $row['post_slug']; ?>">
+      <a class="block pt5 pb5 gray" href="<?= $url; ?><?= $row['post_slug']; ?>">
         <i class="bi bi-info-square middle mr5"></i> <?= $row['post_title']; ?>
       </a>
     <?php } ?>

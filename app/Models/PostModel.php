@@ -7,14 +7,13 @@ use DB;
 class PostModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Добавляем пост
-    public static function addPost($params)
+    public static function create($params)
     {
         $sql = "INSERT INTO posts(post_title, 
                                     post_content, 
                                     post_content_img,
                                     post_thumb_img,
                                     post_related,
-                                    post_merged_id,
                                     post_tl,
                                     post_slug,
                                     post_feature,
@@ -34,7 +33,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                                     :post_content_img,
                                     :post_thumb_img,
                                     :post_related,
-                                    :post_merged_id,
                                     :post_tl,
                                     :post_slug,
                                     :post_feature,
@@ -180,7 +178,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
             'post_content'          => $data['post_content'],
             'post_content_img'      => $data['post_content_img'],
             'post_related'          => $data['post_related'],
-            'post_merged_id'        => $data['post_merged_id'],
             'post_tl'               => $data['post_tl'],
             'post_closed'           => $data['post_closed'],
             'post_top'              => $data['post_top'],
@@ -200,7 +197,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_content          = :post_content,
                     post_content_img      = :post_content_img,
                     post_related          = :post_related,
-                    post_merged_id        = :post_merged_id,
                     post_tl               = :post_tl,
                     post_closed           = :post_closed,
                     post_top              = :post_top

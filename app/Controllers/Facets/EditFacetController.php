@@ -127,7 +127,7 @@ class EditFacetController extends MainController
         // Связанные посты
         $json_post  = $fields['post_select'] ?? [];
         if (!empty($arr_post)) {
-            $arr_post   = json_decode($json_post[0], true);
+            $arr_post   = json_decode($json_post, true);
             foreach ($arr_post as $value) {
                 $id[]   = $value['id'];
             }
@@ -166,7 +166,7 @@ class EditFacetController extends MainController
         // Связанные темы, дети 
         $matching   = $fields['facet_matching'] ?? [];
         if ($matching) {
-            $match_facet    = json_decode($matching[0], true);
+            $match_facet    = json_decode($matching, true);
             $match_facet    = $match_facet ?? [];
             $arr_mc = [];
             foreach ($match_facet as $ket => $row) {

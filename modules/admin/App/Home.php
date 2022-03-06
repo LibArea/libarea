@@ -2,8 +2,7 @@
 
 namespace Modules\Admin\App;
 
-use Modules\Admin\App\Models\{UserModel, StatsModel};
-use App\Models\FacetModel;
+use Modules\Admin\App\Models\{UserModel, StatsModel, FacetModel};
 use Translate;
 
 class Home

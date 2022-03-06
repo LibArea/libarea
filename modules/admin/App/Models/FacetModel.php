@@ -42,4 +42,21 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     {
         return  DB::run('SELECT type_id, type_code, type_lang FROM facets_types');
     }
+    
+    // Posts where there are no topics
+    // Посты где нет тем
+    public static function getNoTopic()
+    {
+        $sql = "SELECT DISTINCT
+                    post_id,
+                    post_title,
+                    post_slug
+                        FROM posts
+                            LEFT JOIN facets_posts_relation on relation_post_id = post_id
+                                WHERE relation_facet_id is NULL 
+                                    AND post_type = 'post'
+                                       AND post_is_deleted = 0 AND post_draft = 0";
+
+        return DB::run($sql)->fetchAll();
+    }
 }

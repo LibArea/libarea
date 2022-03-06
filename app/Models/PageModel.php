@@ -59,7 +59,7 @@ class PageModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
-    // Последние 5 страниц по фасету
+    // Последние 25 страниц по фасету
     public static function recentPostsAll()
     {
         $sql = "SELECT 

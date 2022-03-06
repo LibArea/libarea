@@ -1,6 +1,6 @@
 <fieldset>
   <label><?= Translate::get('section'); ?></label>
-  <input name="section_select" id="section_id">
+  <input name="facet_select" id="section_id">
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">

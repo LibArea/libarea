@@ -99,7 +99,7 @@ class Add
         // Фасеты (тут называются категории) для сайта
         $post_fields    = Request::getPost() ?? [];
         $facet_post     = $post_fields['facet_select'] ?? [];
-        $topics         = json_decode($facet_post[0], true);
+        $topics         = json_decode($facet_post, true);
 
         if (!empty($topics)) {
             $arr = [];

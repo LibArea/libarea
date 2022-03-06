@@ -2,7 +2,7 @@
   <label>
     <?= Translate::get('category'); ?> <sup class="red-500">*</sup>
   </label>
-  <input name="facet_select[]" id="category_id" required>
+  <input name="facet_select" id="category_id" required>
   <div class="help"><?= Translate::get('necessarily'); ?>...</div>
 </fieldset>
 

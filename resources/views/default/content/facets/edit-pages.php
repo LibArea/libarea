@@ -46,10 +46,9 @@
 
       <?php foreach ($data['pages'] as $ind => $row) { ?>
         <div class="mb5">
-          <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('page', ['facet' => $fs['facet_slug'], 'slug' => $row['post_slug']]); ?>">
+          <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('blog.article', ['slug' => $fs['facet_slug'], 'post_slug' => $row['post_slug']]); ?>">
             <?= $row['post_title']; ?>
           </a>
-
           <?php if (UserData::checkAdmin() || $fs['facet_user_id'] == $user['id']) { ?>
             <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
               <i class="bi bi-pencil"></i>

@@ -16,29 +16,31 @@
   </article>
   <div class="box-flex-white center text-2xl">
     <?= votes($user['id'], $page, 'post', 'ps', 'middle mr15'); ?>
-      <div class="gray-400 italic">
-        <?= $page['post_modified']; ?>
-        <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
-          <a class="gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
-            <i class="bi bi-pencil"></i>
-          </a>
-        <?php } ?>
-      </div>
+    <div class="gray-400 italic">
+      <?= $page['post_modified']; ?>
+      <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
+        <a class="gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
+          <i class="bi bi-pencil"></i>
+        </a>
+      <?php } ?>
+    </div>
   </div>
 </main>
 <aside class="col-span-4 mb-none">
   <div class="box-white sticky top-sm text-sm">
-    <?php if ($data['facet']['facet_type'] == 'section') { ?>
+    <?php if ($data['type'] == 'blog.page') { ?>
       <h3 class="uppercase-box">
-        <?= $data['facet']['facet_title']; ?>
+        <?= Translate::get('blog'); ?>
       </h3>
-    <?php } else { ?>
-      <a href="<?= getUrlByName('blog', ['slug' => $data['facet']['facet_slug']]); ?>">
-        <?= $data['facet']['facet_title']; ?>
-      </a>
+      <div class="mb10">
+        <?= facet_logo_img($data['facet']['facet_img'], 'min', $data['facet']['facet_title'], 'img-base'); ?>
+        <a href="<?= getUrlByName('blog', ['slug' => $data['facet']['facet_slug']]); ?>">
+          <?= $data['facet']['facet_title']; ?></a>
+      </div>
     <?php } ?>
+    <?php $url = $data['type'] == 'blog.page' ? '/blog/' . $data['facet']['facet_slug'] . '/info/' : '/info/article/'; ?>
     <?php foreach ($data['pages'] as $ind => $row) { ?>
-      <a class="block pt5 pb5 gray" href="/info/<?= $row['post_slug']; ?>">
+      <a class="block pt5 pb5 gray" href="<?= $url; ?><?= $row['post_slug']; ?>">
         <i class="bi bi-info-square middle mr5"></i> <?= $row['post_title']; ?>
       </a>
     <?php } ?>

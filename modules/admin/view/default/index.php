@@ -75,14 +75,7 @@
     <h3 class="uppercase-box"><?= Translate::get('posts'); ?> (no facet)</h3>
     <?php foreach ($data['posts_no_topic'] as $post) { ?>
       <div class="gray">
-        <?php if ($post['post_type'] == 'post') { ?> 
-          <?php $url = getUrlByName($post['post_type'], ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
-        <?php } else { ?> 
-          <?php $url = getUrlByName('info.page', ['slug' => $post['post_slug']]); ?>
-        <?php } ?>
-          <a href="<?= $url; ?>">        
-            <?= $post['post_title']; ?>
-          </a>
+        id:<?= $post['post_id']; ?> | <?= $post['post_title']; ?> 
       </div>
     <?php } ?>
   </div>

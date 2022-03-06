@@ -584,27 +584,6 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetchAll();
     }
 
-    // Posts where there are no topics
-    // Посты где нет тем
-    public static function getNoTopic()
-    {
-        $sql = "SELECT DISTINCT
-                    post_id,
-                    post_title,
-                    post_slug,
-                    post_type,
-                    post_draft,
-                    post_is_deleted,
-                    relation_post_id,
-                    relation_facet_id
-                        FROM posts
-                            LEFT JOIN facets_posts_relation on relation_post_id = post_id
-                            
-                            WHERE relation_facet_id is NULL AND post_is_deleted = 0 AND post_draft = 0";
-
-        return DB::run($sql)->fetchAll();
-    }
-
     public static function ban($id, $status)
     {
         $sql = "UPDATE facets SET facet_is_deleted = 1 where facet_id = :id";

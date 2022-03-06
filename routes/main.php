@@ -22,8 +22,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit')->name('setting.security.edit');
                 Route::get('/users/setting/notification/edit')->controller('User\SettingController@notificationEdit')->name('setting.notif.edit');
                 // Add / Edit: post | comment | answer | topic | web
-                Route::get('/post/create')->controller('Post\AddPostController@create')->name('post.create');
-                Route::get('/page/create')->controller('Post\AddPostController@createPage')->name('page.create');
+                Route::get('/post/create')->controller('Post\AddPostController@create', ['post'])->name('post.create');
+                Route::get('/page/create')->controller('Post\AddPostController@create', ['page'])->name('page.create');
                 Route::get('/comment/create')->controller('Comment\AddCommentController@create')->name('comment.create');
                 Route::get('/answer/create')->controller('Answer\AddAnswerController@create')->name('answer.create');
                 Route::get('/web/create')->module('catalog', 'App\Add@create')->name('web.create');
@@ -132,8 +132,6 @@ Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('F
 Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
-Route::get('/info/{slug}')->controller('PageController')->where(['slug' => '[A-Za-z0-9-_]+'])->name('info.page');
-
 Route::get('/users')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
 Route::get('/users/page/{page?}')->controller('User\UserController', ['users.all', 'user'])->where(['page' => '[0-9]+']);
 Route::get('/users/new')->controller('User\UserController', ['users.new', 'user'])->name('users.new');
@@ -173,6 +171,10 @@ Route::get('/blogs/new/page/{page?}')->controller('Facets\AllFacetController', [
 Route::get('/blog/{slug}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('blog');
 Route::get('/blog/{slug}/page/{page?}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);
 
+// Страницы
+Route::get('/blog/{slug}/article/{post_slug}')->controller('PageController', ['blog.page'])->where(['slug' => '[A-Za-z0-9-_]+', 'post_slug' => '[A-Za-z0-9-_]+'])->name('blog.article');
+Route::get('/{slug}/article/{post_slug}')->controller('PageController', ['info.page'])->where(['slug' => '[A-Za-z0-9-_]+', 'post_slug' => '[A-Za-z0-9-_]+'])->name('facet.article'); 
+
 Route::get('/domain/{domain}')->controller('Post\PostController@domain', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 Route::get('/domain/{domain}/page/{page?}')->controller('Post\PostController@domain', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
 
@@ -202,4 +204,3 @@ Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->w
 Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 
 require 'admin.php';
- 

@@ -9,7 +9,7 @@
   </label>
 
   <?php if ($action == 'edit' || $action == 'add') { ?>
-    <input name="facet_select[]" id="topic_id" required>
+    <input name="facet_select" id="topic_id" required>
   <?php } ?>
 
   <?php if (!empty($help)) { ?><div class="help"><?= $help; ?>...</div><?php } ?>

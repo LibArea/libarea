@@ -4,7 +4,7 @@
 ?>
 <fieldset>
   <label><?= $title; ?></label>
-  <input name="post_select[]" id="post_id">
+  <input name="post_select" id="post_id">
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">

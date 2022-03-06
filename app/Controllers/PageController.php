@@ -16,13 +16,15 @@ class PageController extends MainController
         $this->user  = UserData::get();
     }
 
-    public function index()
+    public function index($type)
     {
-        $slug       = Request::get('slug');
-        $page   = PageModel::getPage($slug, $this->user['id'], 'slug');
+        $post_slug  = Request::get('post_slug');
+        $page       = PageModel::getPage($post_slug, $this->user['id'], 'slug');
         pageError404($page);
 
-        $facet   = FacetModel::getFacet('info', 'slug', 'section');
+        $type_facet = $type == 'blog.page' ? 'blog' : 'section';
+        $slug   = Request::get('slug');
+        $facet  = FacetModel::getFacet($slug, 'slug', $type_facet);
         pageError404($page);
 
         $page['post_content']   = Content::text($page['post_content'], 'text');
@@ -45,14 +47,14 @@ class PageController extends MainController
         if ($desc == '') {
             $desc = strip_tags($page['post_title']);
         }
-
+ 
         return Tpl::agRender(
             '/page/view',
             [
                 'meta'  => meta($m, $title, $desc . ' (' . $facet['facet_title'] . ' - ' . Translate::get('page') . ')'),
                 'data'  => [
                     'sheet' => 'page',
-                    'type'  => 'page',
+                    'type'  => $type,
                     'page'  => $page,
                     'facet' => $facet,
                     'pages' => PageModel::recentPosts($facet['facet_id'], $page['post_id'])
