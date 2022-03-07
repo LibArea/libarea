@@ -62,12 +62,12 @@ class AddFacetController extends MainController
         Validation::Length($facet_seo_title, Translate::get('slug'), '4', '225', $redirect);
 
         if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
-            addMsg('url-already-exists', 'error');
+            addMsg('repeat.url', 'error');
             redirect($redirect);
         }
 
         if (preg_match('/\s/', $facet_slug) || strpos($facet_slug, ' ')) {
-            addMsg('url-gaps', 'error');
+            addMsg('url.gaps', 'error');
             redirect($redirect);
         }
 

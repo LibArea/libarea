@@ -30,7 +30,7 @@ class LoginController extends MainController
         $user = UserModel::userInfo($email);
 
         if (empty($user['id'])) {
-            addMsg('member does not exist', 'error');
+            addMsg('no.user', 'error');
             redirect($redirect);
         }
 

@@ -98,18 +98,6 @@ class EditPostController extends MainController
             $redirect   = getUrlByName('page.edit', ['id' => $post_id]);
         }
 
-        $facets = $fields['facet_select'] ?? [];
-        $topics = json_decode($facets, true);
-
-        $blog_post  = $fields['blog_select'] ?? false;
-        $blog       = json_decode($blog_post, true);
-   
-        $all_topics = array_merge($blog ?? [], $topics ?? []);
-        if (!$all_topics) {
-            addMsg('select topic', 'error');
-            redirect($redirect);
-        } 
-
         // Если есть смена post_user_id и это TL5
         $user_new  = Request::getPost('user_id');
         $post_user_new = json_decode($user_new, true);
@@ -139,7 +127,7 @@ class EditPostController extends MainController
 
         // Обложка поста
         $cover = $_FILES['images'] ?? false;
-        if ($cover) {
+        if (!empty($_FILES['images']['name'])) {
             $post_img = UploadImage::cover_post($cover, $post, $redirect, $this->user['id']);
         }
         $post_img = $post_img ?? $post['post_content_img'];
@@ -164,14 +152,31 @@ class EditPostController extends MainController
             ]
         );
 
-        // Запишем темы и блог
+        self::addFacetsPost($fields, $post_id, $redirect);
+        
+        redirect('/');
+    }
+
+    // Add fastes (blogs, topics) to the post 
+    public static function addFacetsPost($fields, $content_id, $redirect)
+    {
+        $facets = $fields['facet_select'] ?? [];
+        $topics = json_decode($facets, true);
+
+        $blog_post  = $fields['blog_select'] ?? false;
+        $blog       = json_decode($blog_post, true);
+   
+        $all_topics = array_merge($blog ?? [], $topics ?? []);
+        if (!$all_topics) {
+            addMsg('select.topic', 'error');
+            redirect($redirect);
+        } 
+        
         $arr = [];
         foreach ($all_topics as $ket => $row) {
             $arr[] = $row;
         }
-        FacetModel::addPostFacets($arr, $post_id);
-        
-        redirect('/');
+        return FacetModel::addPostFacets($arr, $content_id);
     }
 
     // Удаление обложки

@@ -47,7 +47,7 @@ class PageController extends MainController
         if ($desc == '') {
             $desc = strip_tags($page['post_title']);
         }
- 
+
         return Tpl::agRender(
             '/page/view',
             [

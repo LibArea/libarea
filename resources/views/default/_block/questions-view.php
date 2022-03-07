@@ -125,7 +125,7 @@
 <?php } ?>
 
 <?php if (!empty($otvet)) { ?>
-  <?= no_content(Translate::get('you-question-no'), 'bi bi-info-lg'); ?>
+  <?= no_content(Translate::get('you.answered'), 'bi bi-info-lg'); ?>
 <?php } else { ?>
   <?php if ($user['id'] > 0) { ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>

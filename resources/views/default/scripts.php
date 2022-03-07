@@ -12,7 +12,7 @@
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
         Notiflix.Report.info(
-          '<?= Translate::get('you need to log in'); ?>',
+          '<?= Translate::get('need.to.login'); ?>',
           '<?= Translate::get('info-login'); ?>',
           '<?= Translate::get('well'); ?>',
         );

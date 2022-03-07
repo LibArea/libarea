@@ -137,7 +137,7 @@ class MessagesController extends MainController
     {
         $login      = Request::get('login');
         if (!$user  = UserModel::getUser($login, 'slug')) {
-            addMsg('member does not exist', 'error');
+            addMsg('no.user', 'error');
             redirect('/');
         }
 

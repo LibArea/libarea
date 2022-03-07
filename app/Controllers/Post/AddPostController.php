@@ -148,7 +148,8 @@ class AddPostController extends MainController
             (new \App\Controllers\AuditController())->create('post', $last_id, $url);
         }
 
-        self::addFacets($fields, $last_id);
+       // Add fastes (blogs, topics) to the post 
+       (new \App\Controllers\Post\EditPostController())->addFacetsPost($fields, $last_id, $url);
 
         // Notification (@login). 10 - mentions in post 
         if ($message = Content::parseUser($content, true, true)) {
@@ -175,27 +176,6 @@ class AddPostController extends MainController
         );
 
         redirect($url);
-    }
-
-    public static function addFacets($fields, $last_id)
-    {
-        $facets = $fields['facet_select'] ?? [];
-        $topics = json_decode($facets, true);
-
-        $blog_post  = $fields['blog_select'] ?? false;
-        $blog       = json_decode($blog_post, true);
-   
-        $all_topics = array_merge($blog ?? [], $topics ?? []);
-        if (!$all_topics) {
-            addMsg('select topic', 'error');
-            redirect($redirect);
-        } 
-        
-        $arr = [];
-        foreach ($all_topics as $ket => $row) {
-            $arr[] = $row;
-        }
-        return FacetModel::addPostFacets($arr, $last_id);
     }
 
     public static function slug($title)

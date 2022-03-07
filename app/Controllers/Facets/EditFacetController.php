@@ -117,7 +117,7 @@ class EditFacetController extends MainController
         // Проверим повтор URL                       
         if ($facet_slug != $facet['facet_slug']) {
             if (FacetModel::uniqueSlug($facet_slug, $facet_new_type)) {
-                addMsg('url-already-exists', 'error');
+                addMsg('repeat.url', 'error');
                 redirect(getUrlByName($facet_new_type  . '.edit', ['id' => $facet['facet_id']]));
             }
         }
