@@ -77,3 +77,51 @@ a.active > i,
 .breadcrumbs li:not(:last-child):after {
   content: " / ";
 }
+
+/* Left mobile menu */
+
+.menu-user .closebtn { display: none; }
+
+.boxUser .menu-user .closebtn {
+  color: #333;
+  float: right;
+  margin-right: 15px;
+  font-size: 21px;
+  display: block;
+}
+
+.boxUser .menu-user .menu {margin-top: 25px;} 
+
+.boxUser main {
+  margin-left: 145px;
+  transition: 0.25s;
+}
+
+.boxUser .menu-user {
+  opacity: 1;
+  visibility: visible;
+  transition: 0.25s;
+}
+
+.boxUser nav.top-sm { top: 0; }
+.menu-none {
+  opacity: 0;
+  position: absolute;
+}
+
+@media (max-width: 980px) {
+  .menu-user {
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity, visibility;
+    transition: 0.25s;
+    z-index: 98;
+    left: 0;
+    top: 0;
+    width: 143px;
+    background-color: #fff;
+    box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.25);
+    overflow-x: hidden;
+    position: absolute;
+  }
+}

@@ -359,3 +359,12 @@ elm.forEach(function(elm) {
   }); 
 });
  
+document.querySelectorAll(".menu-left")
+  .forEach(el => el.addEventListener("click", function (e) {
+    document.querySelector('body').classList.add('boxUser');  
+ })); 
+document.querySelectorAll(".closebtn")
+  .forEach(el => el.addEventListener("click", function (e) {
+    document.querySelector('body').classList.remove('boxUser');  
+ }));   
+  

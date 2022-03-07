@@ -17,7 +17,7 @@
       </h1>
 
       <div class="flex flex-auto">
-        <?= website_img($data['item']['item_url_domain'], 'thumbs', $data['item']['item_title_url'], 'mr25 w400 box-shadow'); ?>
+        <?= website_img($data['item']['item_url_domain'], 'thumbs', $data['item']['item_title_url'], 'mr25 box-shadow'); ?>
         <div class="m15 mb-ml0">
           <?= $data['item']['item_content_url']; ?>
           <div class="gray mt20">

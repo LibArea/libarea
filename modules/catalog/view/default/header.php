@@ -1,6 +1,6 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?14');
-Request::getHead()->addStyles('/assets/css/catalog.css?v14');
+Request::getHead()->addStyles('/assets/css/style.css?16');
+Request::getHead()->addStyles('/assets/css/catalog.css?v16');
 ?>
 
 <?= Tpl::insert('meta', ['meta' => $meta]); ?>

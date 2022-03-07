@@ -6,7 +6,19 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
   $css = 'w160 mb-w100 ml15 z-10 -mt80 br-rd5';
 }
 ?>
-
+<div class="menu-none menu-user">
+  <div class="closebtn">x</div>
+  <nav class="sticky top-sm">
+    <ul class="menu">
+      <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $user,
+        $pages = Config::get('menu.left'),
+      ); ?>
+    </ul>
+  </nav>
+</div>
 <div class="col-span-12 justify-between">
   <div class="br-box-gray bg-white">
     <?php if ($profile['cover_art'] != 'cover_art.jpeg') { ?>

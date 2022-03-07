@@ -180,9 +180,7 @@ class AddPostController extends MainController
 
     public static function slug($title)
     {
-        $slug   = new Slug();
-        $uri    = $slug->create($title);
-
+        $uri    = Slug::get($title); 
         $result = PostModel::getSlug($new_slug = substr($uri, 0, 90));
         if ($result) {
             return $new_slug . "-";

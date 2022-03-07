@@ -1,5 +1,5 @@
 <?php if ($user['id'] == 0) { ?>
-  <div class="box col-span-12 bg-white br-box-gray center">
+  <div class="box mb-none col-span-12 bg-white br-box-gray center">
     <h1><?= Config::get('meta.banner_title'); ?></h1>
     <p><?= Config::get('meta.banner_desc'); ?>...</p>
   </div>

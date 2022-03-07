@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?14');
+Request::getHead()->addStyles('/assets/css/style.css?16');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -12,17 +12,9 @@ $facet  = $data['facet'] ?? false; ?>
       <div class="d-header_contents">
 
         <div class="none mb-block">
-          <div class="trigger mr10">
+          <div class="menu-left mr10">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
-          <ul class="dropdown left">
-            <?= tabs_nav(
-              'menu',
-              $type,
-              $user,
-              $pages = Config::get('menu.mobile')
-            ); ?>
-          </ul>
         </div>
 
         <a title="<?= Translate::get('home'); ?>" class="logo black" href="/">

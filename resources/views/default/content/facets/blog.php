@@ -1,6 +1,18 @@
 <?php $blog = $data['facet'];
 if ($blog['facet_is_deleted'] == 0) { ?>
-
+  <div class="menu-none menu-user">
+    <div class="closebtn">x</div>
+    <nav class="sticky top-sm">
+      <ul class="menu">
+        <?= tabs_nav(
+          'menu',
+          $data['type'],
+          $user,
+          $pages = Config::get('menu.left'),
+        ); ?>
+      </ul>
+    </nav>
+  </div>
   <div class="col-span-12 mb-col-12">
     <div class="box-flex-white" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= cover_url($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
       <div class="mb-none">

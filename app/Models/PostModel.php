@@ -216,7 +216,8 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT 
                     post_id as id, 
                     post_title as value,
-                    post_slug
+                    post_slug,
+                    post_content_img
                         FROM posts 
                            WHERE $in post_is_deleted = 0 AND post_tl = 0";
 

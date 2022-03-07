@@ -125,37 +125,6 @@ return [
         ],
     ],
 
-    // Left dropdown menu for mobile devices in the site header
-    // Левое выпадающее меню для мобильных устройств в шапке сайта
-    'mobile' => [
-        [
-            'url'   => getUrlByName('topics.all'),
-            'title' => Translate::get('topics'),
-            'icon'  => 'bi bi-columns-gap',
-            'id'    => '',
-        ], [
-            'url'   => getUrlByName('blogs.all'),
-            'title' => Translate::get('blogs'),
-            'icon'  => 'bi bi-journals',
-            'id'    => '',
-        ], [
-            'url'   => getUrlByName('users.all'),
-            'title' => Translate::get('users'),
-            'icon'  => 'bi bi-people',
-            'id'    => '',
-        ], [
-            'url'   => getUrlByName('web'),
-            'title' => Translate::get('catalog'),
-            'icon'  => 'bi bi-link-45deg',
-            'id'    => '',
-        ], [
-            'url'   => getUrlByName('search'),
-            'title' => Translate::get('search'),
-            'icon'  => 'bi bi-search',
-            'id'    => '',
-        ],
-    ],
-
     // Member Settings
     // Настройки участника
     'settings' => [

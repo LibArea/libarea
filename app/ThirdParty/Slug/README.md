@@ -1,24 +1,19 @@
-# slug
-slug is a free function to create beautiful URL for blog or website.
+# Simplest Slugify for PHP to convert string into a slug
 
-# Installation
+https://github.com/Pharaonic/php-slugify
 
-  	require_once ('/path/to/slug.php');
+## Documentation
 
-# Usage
-Load the library
+You can find the detailed documentation here in [Slugify Documentation](https://pharaonic.io/package/1-general-php/1-slugify).
 
-	$slug = new Slug();
+## Contributing
 
-Create URL
+Thank you for considering contributing to this package! Be one of Pharaonic team.
 
-	$title 	= 'slug is a free function to create beautiful URL.';
-	$url 	= $slug->create($title);
-	echo $url;
+## Pharaonic Sponsors
 
-Result
+We would like to extend our thanks to the following sponsors for funding Pharaonic packages development. If you are interested in becoming a sponsor, please visit the Pharaonic [Liberapay page](https://en.liberapay.com/Pharaonic) or [Patreon page](https://patreon.com/Pharaonic).
 
-	slug-is-a-free-function-to-create-beautiful-url
+## License
 
-# License
-slug is licensed under the MIT license. See [License File](LICENSE.md) for more information.
+This package is an open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
