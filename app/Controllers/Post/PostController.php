@@ -107,7 +107,6 @@ class PostController extends MainController
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
-        Request::getResources()->addBottomScript('/assets/js/shares.js');
         Request::getResources()->addBottomStyles('/assets/js/prism/prism.css');
         Request::getResources()->addBottomScript('/assets/js/prism/prism.js');
         Request::getResources()->addBottomScript('/assets/js/zoom/medium-zoom.min.js');

@@ -251,10 +251,8 @@
       <img class="preview w-100 br-rd5" src="<?= AG_PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php } ?>
-  <div class="share-btn box-white text-2xl center">
-    <a class="p15 gray-400" data-id="fb"><i class="bi bi-facebook"></i></a>
-    <a class="p15 gray-400" data-id="vk">VK</a>
-    <a class="p15 gray-400" data-id="tw"><i class="bi bi-twitter"></i></a>
+  <div class="center box-white">
+     <?= Tpl::import('/content/share'); ?>
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="box-white sticky top-sm">
