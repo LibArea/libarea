@@ -365,9 +365,11 @@ elm.forEach(function(elm) {
  */
 const button = document.querySelector('.menu__button')
 const nav = document.querySelector('.menu__left')
-button.addEventListener('click', () => {
-  nav.classList.toggle('menu__active')
-})
+if (button) {
+  button.addEventListener('click', () => {
+    nav.classList.toggle('menu__active')
+  })
+}
 
 window.addEventListener('click', e => {
 const target = e.target

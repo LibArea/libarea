@@ -35,15 +35,15 @@
   <div class="box-white">
     <div class="grid grid-cols-6 mb-grid-cols-2 gap-2">
       <?php foreach ($data['users'] as $ind => $user) { ?>
-          <a class="center mb20" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
-            <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-lg'); ?>
-            <div class="block mt5">
-              <?= $user['login']; ?>
-            </div>
-            <?php if ($user['name']) { ?>
-              <span class="gray text-sm"><?= $user['name']; ?></span>
-            <?php } ?>
-          </a>
+        <a class="center mb20" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+          <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-lg'); ?>
+          <div class="block mt5">
+            <?= $user['login']; ?>
+          </div>
+          <?php if ($user['name']) { ?>
+            <span class="gray text-sm"><?= $user['name']; ?></span>
+          <?php } ?>
+        </a>
       <?php } ?>
     </div>
   </div>

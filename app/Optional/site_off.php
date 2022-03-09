@@ -2,7 +2,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title><?= Translate::get('site under reconstruction'); ?></title>
+  <title><?= Translate::get('under.reconstruction'); ?></title>
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
   <link rel="icon" href="/favicon.ico" type="image/png">
 </head>
@@ -12,7 +12,7 @@
     <div class="col-span-2 mb-none"></div>
     <main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray p15">
       <h1 class="text-3xl font-normal gray m0">Opss</h1>
-      <p class="gray-600"><?= Translate::get('site under reconstruction'); ?>...</p>
+      <p class="gray-600"><?= Translate::get('under.reconstruction'); ?>...</p>
 
       <form class="mb20" action="/login" method="post">
         <?php csrf_field(); ?>

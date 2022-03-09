@@ -152,7 +152,7 @@ class SettingController extends MainController
 
         $redirect = getUrlByName('setting.security', ['login' => $this->user['login']]);
         if ($password2 != $password3) {
-            addMsg('pass-match-err', 'error');
+            addMsg('pass.match.err', 'error');
             redirect($redirect);
         }
 
@@ -165,7 +165,7 @@ class SettingController extends MainController
 
         $userInfo   = UserModel::userInfo($this->user['email']);
         if (!password_verify($password, $userInfo['password'])) {
-            addMsg('old-password-err', 'error');
+            addMsg('old.password.err', 'error');
             redirect($redirect);
         }
 

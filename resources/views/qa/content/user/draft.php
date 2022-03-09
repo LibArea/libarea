@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="box-white">
+  <div class="box-white bg-violet-50">
     <ul class="nav">
 
       <?= tabs_nav(
@@ -11,25 +11,25 @@
             'id'    => 'drafts',
             'url'   => getUrlByName('drafts'),
             'title' => Translate::get('drafts'),
-            'icon'  => 'bi bi-bookmark'
+            'icon'  => 'bi-journal-richtext'
           ], [
             'id'    => 'favorites',
             'url'   => getUrlByName('favorites'),
             'title' => Translate::get('favorites'),
-            'icon'  => 'bi bi-bookmark'
+            'icon'  => 'bi-bookmark'
           ], [
             'id'    => 'subscribed',
             'url'   => getUrlByName('subscribed'),
             'title' => Translate::get('subscribed'),
-            'icon'  => 'bi bi-bookmark-plus'
+            'icon'  => 'bi-bookmark-plus'
           ],
         ]
       ); ?>
 
     </ul>
   </div>
-  <div class="box-white">
     <?php if (!empty($data['drafts'])) { ?>
+      <div class="box-white bg-violet-50">
       <?php foreach ($data['drafts'] as $draft) { ?>
 
         <a href="<?= getUrlByName('post', ['id' => $draft['post_id'], 'slug' => $draft['post_slug']]); ?>">
@@ -41,10 +41,13 @@
         </div>
 
       <?php } ?>
+    </div>
     <?php } else { ?>
-      <?= no_content(Translate::get('no.content'), 'bi bi-info-lg'); ?>
+    <div class="mt10 mb10 pt10 pr15 pb10 center pl15 gray-400">
+      <i class="bi-journal-richtext block text-8xl"></i>
+      <?= Translate::get('no.content'); ?>
+    </div>
     <?php } ?>
-  </div>
 </main>
 <aside class="col-span-3 mb-none">
   <div class="box-white bg-violet-50 text-sm">

@@ -37,7 +37,7 @@ class RecoverController extends MainController
 
         if (Config::get('general.captcha')) {
             if (!Integration::checkCaptchaCode()) {
-                addMsg('code error', 'error');
+                addMsg('code.error', 'error');
                 redirect($recover_uri);
             }
         }
@@ -69,7 +69,7 @@ class RecoverController extends MainController
         // Отправка e-mail
         SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => getUrlByName('recover.code', ['code' => $code])]);
 
-        addMsg('new password email', 'success');
+        addMsg('new.password.email', 'success');
         redirect(getUrlByName('login'));
     }
 
@@ -114,7 +114,7 @@ class RecoverController extends MainController
         Validation::Length($password, Translate::get('password'), '8', '32', getUrlByName('recover.code', ['code' => $code]));
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
-        $news     = SettingModel::editPassword($user_id, $newpass);
+        $news     = SettingModel::editPassword(['id' => $user_id, 'password' => $newpass]);
 
         if (!$news) {
             return false;

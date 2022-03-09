@@ -168,8 +168,8 @@ Route::get('/blogs/page/{page?}')->controller('Facets\AllFacetController', ['top
 Route::get('/blogs/new')->controller('Facets\AllFacetController', ['blogs.new', 'blog'])->name('blogs.new');
 Route::get('/blogs/new/page/{page?}')->controller('Facets\AllFacetController', ['blogs.new', 'blog'])->where(['page' => '[0-9]+']);
 
-Route::get('/blog/{slug}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('blog');
-Route::get('/blog/{slug}/page/{page?}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);
+Route::get('/blog/{slug}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog.user'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('blog');
+Route::get('/blog/{slug}/page/{page?}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog.user'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);
 
 // Страницы
 Route::get('/blog/{slug}/article/{post_slug}')->controller('PageController', ['blog.page'])->where(['slug' => '[A-Za-z0-9-_]+', 'post_slug' => '[A-Za-z0-9-_]+'])->name('blog.article');

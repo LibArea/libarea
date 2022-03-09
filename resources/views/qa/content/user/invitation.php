@@ -51,7 +51,7 @@
       <?php } ?>
 
     <?php } else { ?>
-      <?= Translate::get('limit-tl-invitation'); ?>.
+      <?= Translate::get('limit.tl.invitation'); ?>.
     <?php } ?>
   </div>
 </main>

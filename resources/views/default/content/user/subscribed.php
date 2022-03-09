@@ -11,17 +11,17 @@
             'id'    => 'drafts',
             'url'   => getUrlByName('drafts'),
             'title' => Translate::get('drafts'),
-            'icon'  => 'bi bi-bookmark'
+            'icon'  => 'bi-journal-richtext'
           ], [
             'id'    => 'favorites',
             'url'   => getUrlByName('favorites'),
             'title' => Translate::get('favorites'),
-            'icon'  => 'bi bi-bookmark'
+            'icon'  => 'bi-bookmark'
           ], [
             'id'    => 'subscribed',
             'url'   => getUrlByName('subscribed'),
             'title' => Translate::get('subscribed'),
-            'icon'  => 'bi bi-bookmark-plus'
+            'icon'  => 'bi-bookmark-plus'
           ],
         ]
       ); ?>
@@ -34,6 +34,6 @@
 </main>
 <aside class="col-span-3 mb-none">
   <div class="box-white text-sm sticky top-sm">
-    <?=  Translate::get('info-preferences'); ?>
+    <?= Translate::get('info-preferences'); ?>
   </div>
 </aside>

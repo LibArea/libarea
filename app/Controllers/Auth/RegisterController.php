@@ -102,14 +102,14 @@ class RegisterController extends MainController
         }
 
         if ($password != $password_confirm) {
-            addMsg('pass-match-err', 'error');
+            addMsg('pass.match.err', 'error');
             redirect($redirect);  
         }
 
         if (!$inv_code) {
             if (Config::get('general.captcha')) {
                 if (!Integration::checkCaptchaCode()) {
-                    addMsg('code error', 'error');
+                    addMsg('code.error', 'error');
                     redirect('/register');
                 }
             }
@@ -172,7 +172,7 @@ class RegisterController extends MainController
         // Sending email
         SendEmail::mailText($active_uid, 'activate.email', ['link' => getUrlByName('activate.code', ['code' => $email_code])]);
 
-        addMsg('check your email', 'success');
+        addMsg('check.your.email', 'success');
 
         redirect(getUrlByName('login'));
     }

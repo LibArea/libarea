@@ -39,7 +39,7 @@
       <?php } ?>
   </div>
 <?php } else { ?>
-    <div class="mt10 mb10 pt10 pr15 pb10 center pl15 gray-400">
+    <div class="p20 center gray-400">
       <i class="bi bi-envelope block text-8xl"></i>
       <?= Translate::get('no.dialogs'); ?>
     </div>

@@ -11,17 +11,17 @@
             'id'    => 'drafts',
             'url'   => getUrlByName('drafts'),
             'title' => Translate::get('drafts'),
-            'icon'  => 'bi bi-bookmark'
+            'icon'  => 'bi-journal-richtext'
           ], [
             'id'    => 'favorites',
             'url'   => getUrlByName('favorites'),
             'title' => Translate::get('favorites'),
-            'icon'  => 'bi bi-bookmark'
+            'icon'  => 'bi-bookmark'
           ], [
             'id'    => 'subscribed',
             'url'   => getUrlByName('subscribed'),
             'title' => Translate::get('subscribed'),
-            'icon'  => 'bi bi-bookmark-plus'
+            'icon'  => 'bi-bookmark-plus'
           ],
         ]
       ); ?>
@@ -84,7 +84,7 @@
       </div>
     <?php } ?>
   <?php } else { ?>
-    <div class="mt10 mb10 pt10 pr15 pb10 center pl15 gray-400">
+    <div class="p20 center gray-400">
       <i class="bi bi-bookmark block text-8xl"></i>
       <?= Translate::get('no.favorites'); ?>
     </div>
@@ -92,6 +92,6 @@
 </main>
 <aside class="col-span-3 mb-none">
   <div class="box-white text-sm sticky top-sm">
-    <?=  Translate::get('info-favorite'); ?>
+    <?= Translate::get('info-favorite'); ?>
   </div>
 </aside>

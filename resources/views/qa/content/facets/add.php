@@ -18,7 +18,7 @@ $form->html_form($user['trust_level'], Config::get('form/facet.forma'));
         <?= $form->sumbit(Translate::get('add')); ?>
       </form>  
     <?php } else { ?>
-      <?= Translate::get('limit-add-content-no'); ?>
+      <?= Translate::get('limit.add.content.no'); ?>
     <?php } ?>
   </div>  
 </main>

@@ -1,6 +1,6 @@
 <?php
   $css = '';
-  $arr = ['profile', 'blog', 'register', 'login', 'recover', 'info.page', 'post'];
+  $arr = ['profile', 'register', 'login', 'blog.user', 'recover', 'info.page', 'post'];
   if (in_array($data['type'], $arr)) {
      $css = 'menu-none';
   }

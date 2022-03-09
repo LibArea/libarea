@@ -72,7 +72,7 @@ class AuditController extends MainController
             $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                addMsg('content-audit', 'error');
+                addMsg('content.audit', 'error');
                 return false;
             }
         }
