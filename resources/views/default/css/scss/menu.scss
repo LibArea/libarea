@@ -16,7 +16,6 @@
 
 .dropdown a i,
 .menu a i {
-  color: var(--gray-400);
   margin-right: 10px;
   font-size: 1.5rem;
 }
@@ -30,7 +29,7 @@
   box-shadow: 0 12px 12px rgba(0,0,0,0.15);
   padding: 5px 10px 5px 10px;
   z-index: 5;
-  min-width: 160px;
+  min-width: 180px;
 }
 
 .dropdown.left {
@@ -54,10 +53,7 @@
   color: var(--gray-600);
 }
 
-.nav a i {
-  color: var(--gray-400);
-  margin-right: 4px;
-}
+.nav a i { margin-right: 4px; }
 
 .active,
 a.active,
@@ -79,49 +75,37 @@ a.active > i,
 }
 
 /* Left mobile menu */
-
-.menu-user .closebtn { display: none; }
-
-.boxUser .menu-user .closebtn {
-  color: #333;
-  float: right;
-  margin-right: 15px;
-  font-size: 21px;
-  display: block;
-}
-
-.boxUser .menu-user .menu {margin-top: 25px;} 
-
-.boxUser main {
-  margin-left: 145px;
-  transition: 0.25s;
-}
-
-.boxUser .menu-user {
-  opacity: 1;
-  visibility: visible;
-  transition: 0.25s;
-}
-
-.boxUser nav.top-sm { top: 0; }
-.menu-none {
-  opacity: 0;
-  position: absolute;
-}
-
 @media (max-width: 980px) {
-  .menu-user {
+
+  .menu__button { transition: 0.3s ease; }
+
+  .menu__left {
+    opacity: 0;
+    position: absolute;
+  }
+
+  .menu__left.menu__active {
+    opacity: 1;
+    visibility: visible;
+    transition: 0.25s;
+  }
+
+  .menu__left {
     opacity: 0;
     visibility: hidden;
     transition-property: opacity, visibility;
-    transition: 0.25s;
     z-index: 98;
     left: 0;
     top: 0;
-    width: 143px;
-    background-color: #fff;
+    bottom: 0;
+    min-width: 180px;
+    max-width: 60%;
+    background-color: #eaecf0;
     box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.25);
     overflow-x: hidden;
     position: absolute;
   }
+  
+  .menu__left.menu__active nav.top-sm { top: 0; }
+  .menu__left.menu__active .menu li { background-color: #fff; }  
 }

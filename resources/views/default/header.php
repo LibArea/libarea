@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?16');
+Request::getHead()->addStyles('/assets/css/style.css?18');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -12,7 +12,7 @@ $facet  = $data['facet'] ?? false; ?>
       <div class="d-header_contents">
 
         <div class="none mb-block">
-          <div class="menu-left mr10">
+          <div class="menu__button mr10">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
         </div>

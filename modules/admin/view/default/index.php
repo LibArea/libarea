@@ -75,7 +75,7 @@
     <h3 class="uppercase-box"><?= Translate::get('posts'); ?> (no facet)</h3>
     <?php foreach ($data['posts_no_topic'] as $post) { ?>
       <div class="gray">
-        id:<?= $post['post_id']; ?> | <?= $post['post_title']; ?> 
+        id:<?= $post['post_id']; ?> | <?= $post['post_title']; ?>
       </div>
     <?php } ?>
   </div>
@@ -86,7 +86,7 @@
   <?php foreach ($data['logs'] as $log) { ?>
     <div class="gray">
       <?= $log['request']; ?> <sup class="gray-400"><?= $log['count_results']; ?></sup>
-      <span class="gray-400 lowercase"> 
+      <span class="gray-400 lowercase">
         — (<?= Translate::get($log['action_type']); ?>) <?= lang_date($log['add_date']); ?>
       </span>
     </div>

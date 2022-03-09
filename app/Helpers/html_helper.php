@@ -264,7 +264,7 @@ function tabs_nav($name, $item, $user, array $pages = [])
         foreach ($pages as $key => $page) {
             $tl = $page['tl'] ?? 0;
             if (!empty($page['hr'])) {
-                if ($user['id'] > 0) $html .= '<li><hr class="w-90"></li>';
+                if ($user['id'] > 0) $html .= '<li><div class="m15"></div></li>';
             } else {
                 if ($trust_level >= $tl) {
                     $isActive = $page['id'] == $item ? ' aria-current="page" class="active" ' : '';

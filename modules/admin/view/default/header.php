@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?14');
+Request::getHead()->addStyles('/assets/css/style.css?18');
 ?>
 
 <?= Tpl::insert('meta', ['meta' => $meta]); ?>
@@ -9,6 +9,11 @@ Request::getHead()->addStyles('/assets/css/style.css?14');
   <header class="d-header sticky top0">
     <div class="wrap">
       <div class="d-header_contents">
+        <div class="none mb-block">
+          <div class="menu__button mr10">
+            <i class="bi bi-list gray-400 text-xl"></i>
+          </div>
+        </div>
         <div class="flex items-center w200">
           <a href="<?= getUrlByName('admin'); ?>">
             <span class="black"><?= Translate::get('admin'); ?></span>
@@ -27,9 +32,9 @@ Request::getHead()->addStyles('/assets/css/style.css?14');
         <div class="m15 gray-400 mb-none">
           <?= Request::getRemoteAddress(); ?>
         </div>
-          <a class="ml5 sky-500" href="/">
-            <i class="bi bi-house"></i>
-          </a>
+        <a class="ml5 sky-500" href="/">
+          <i class="bi bi-house"></i>
+        </a>
       </div>
     </div>
   </header>

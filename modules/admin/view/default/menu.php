@@ -1,15 +1,13 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
-<div class="col-span-2 mb-none">
- 
-    <ul class="menu">
-     <?= tabs_nav(
-          'menu',
-          $data['type'],
-          1,
-          $pages = Config::get('admin/menu.admin')
-        ); ?>
-     </ul>
-  
+<div class="menu__left col-span-2">
+  <ul class="menu">
+    <?= tabs_nav(
+      'menu',
+      $data['type'],
+      1,
+      $pages = Config::get('admin/menu.admin')
+    ); ?>
+  </ul>
 </div>
 
 <main class="col-span-10 mb-col-12 ">

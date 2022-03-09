@@ -316,8 +316,8 @@ document.querySelectorAll(".item_cleek")
   }));
   
 /*
- *	Drop-down menus and lists
- *	Выпадающие меню и списки
+ *	Drop-down menus (user) and lists
+ *	Выпадающие меню (user) и списки
  */
 let elm = document.querySelectorAll(".trigger");
 elm.forEach(function(elm) {
@@ -359,12 +359,19 @@ elm.forEach(function(elm) {
   }); 
 });
  
-document.querySelectorAll(".menu-left")
-  .forEach(el => el.addEventListener("click", function (e) {
-    document.querySelector('body').classList.add('boxUser');  
- })); 
-document.querySelectorAll(".closebtn")
-  .forEach(el => el.addEventListener("click", function (e) {
-    document.querySelector('body').classList.remove('boxUser');  
- }));   
-  
+/*
+ *	Left drop-down general menu (navigation)
+ *	Левое выпадающее общее меню (навигация)
+ */
+const button = document.querySelector('.menu__button')
+const nav = document.querySelector('.menu__left')
+button.addEventListener('click', () => {
+  nav.classList.toggle('menu__active')
+})
+
+window.addEventListener('click', e => {
+const target = e.target
+if (!target.closest('.menu__active') && !target.closest('.menu__button')) {
+  nav.classList.remove('menu__active')
+}
+})
