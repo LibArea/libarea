@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white box-flex br-box-gray">
+  <div class="box-white">
     <ul class="nav">
 
       <?= tabs_nav(
@@ -31,7 +31,7 @@
 
   <?php if (!empty($data['favorites'])) { ?>
     <?php foreach ($data['favorites'] as $content) { ?>
-      <div class="bg-white br-rd5 br-box-gray mt10 p15">
+      <div class="box-white">
         <h3>
           <?php if ($content['favorite_type'] == 1) {  ?>
             <div class="pr15 text-sm flex gray-400">

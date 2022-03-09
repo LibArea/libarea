@@ -121,7 +121,7 @@
       <input type="text" name="email" value="<?= $data['user']['email']; ?>" required>
     </fieldset>
     <fieldset>
-      <label for="activated"><?= Translate::get('email activated'); ?>?</label>
+      <label for="activated"><?= Translate::get('email.activated'); ?>?</label>
       <input type="radio" name="activated" <?php if ($data['user']['activated'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
       <input type="radio" name="activated" <?php if ($data['user']['activated'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
     </fieldset>

@@ -5,16 +5,25 @@ $facet  = $data['facet'] ?? false; ?>
 
 <?= Tpl::import('/meta', ['meta' => $meta]); ?>
 
-<body<?php if (Request::getCookie('dayNight') == 'dark') { ?> class="dark"<?php } ?>>
+<body<?php if (Request::getCookie('dayNight') == 'dark') { ?> class="dark" <?php } ?>>
 
   <header class="bg-white mt0 mb15">
     <div class="br-bottom mr-auto max-width w-100 pr10 pl15 mb10 mb-none items-center flex">
-      <?php foreach (Config::get('menu.mobile') as $key => $topic) { ?>
-        <a class="mr20 black text-xs" href="<?= $topic['url']; ?>">
-          <i class="<?= $topic['icon']; ?> mr5"></i>
-          <span><?= $topic['title']; ?> </span>
-        </a>
-      <?php } ?>
+      <a class="mr20 black text-xs" href="/topics">
+        <i class="bi bi-columns-gap mr5"></i> <?= Translate::get('topics'); ?>
+      </a>
+      <a class="mr20 black text-xs" href="/blogs">
+        <i class="bi bi-journals mr5"></i> <?= Translate::get('blogs'); ?>
+      </a>
+      <a class="mr20 black text-xs" href="/users">
+        <i class="bi bi-people mr5"></i> <?= Translate::get('users'); ?>
+      </a>
+      <a class="mr20 black text-xs" href="/web">
+        <i class="bi bi-link-45deg mr5"></i> <?= Translate::get('catalog'); ?>
+      </a>
+      <a class="mr20 black text-xs" href="/search">
+        <i class="bi bi-search mr5"></i> <?= Translate::get('search'); ?>
+      </a>
     </div>
 
     <div class="mr-auto max-width w-100 pr10 pl10 items-center flex justify-between">
@@ -28,7 +37,7 @@ $facet  = $data['facet'] ?? false; ?>
               'menu',
               $type,
               $user,
-              $pages = Config::get('menu.mobile')
+              $pages = Config::get('menu.user')
             ); ?>
           </ul>
         </div>
@@ -89,7 +98,7 @@ $facet  = $data['facet'] ?? false; ?>
                 ); ?>
               </ul>
             </div>
-            
+
           </div>
         </div>
       <?php }  ?>

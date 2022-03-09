@@ -89,13 +89,6 @@ a.active > i,
     position: absolute;
   }
 
-  .menu__left.menu__active,
-  .menu__left.menu-none.menu__active  {
-    opacity: 1;
-    visibility: visible;
-    transition: 0.25s;
-  }
-
   .menu__left {
     opacity: 0;
     visibility: hidden;
@@ -105,10 +98,17 @@ a.active > i,
     top: 0;
     bottom: 0;
     min-width: 180px;
-    max-width: 60%;
     background-color: #eaecf0;
     box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.25);
     overflow-x: hidden;
+    position: absolute;
+  }
+  
+  .menu__left.menu__active,
+  .menu__left.menu-none.menu__active  {
+    opacity: 1;
+    visibility: visible;
+    transition: 0.25s;
     position: fixed;
   }
   

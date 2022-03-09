@@ -11,7 +11,7 @@
     </form>
   </div>
 
-  <div class="bg-white br-rd5 br-box-gray ml10 mb-ml0 p15">
+  <div class="box-white">
     <?php if ($data['list']) { ?>
       <?php foreach ($data['list'] as $key => $val) { ?>
         <div class="hidden">

@@ -54,9 +54,9 @@
             <div class="text-sm">
               <?= $user['email']; ?>
               <?php if ($user['activated'] == 1) { ?>
-                <div class="gray-600"><?= Translate::get('email activated'); ?></div>
+                <div class="gray-600"><?= Translate::get('email.activated'); ?></div>
               <?php } else { ?>
-                <div class="red-500"><?= Translate::get('not activated'); ?> e-mail</div>
+                <div class="red-500"><?= Translate::get('not.activated'); ?> e-mail</div>
               <?php } ?>
             </div>
             <?php if ($user['limiting_mode'] == 1) { ?>

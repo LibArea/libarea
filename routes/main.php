@@ -190,7 +190,7 @@ Route::get('/web/{cat}/{slug}/top')->module('catalog', 'App\Catalog', ['web.top'
 Route::get('/web/{cat}/top/page/{page?}')->module('catalog', 'App\Home', ['web.top', 'web']);
 Route::get('/web/{cat}/{slug}/page/{page?}')->module('catalog', 'App\Catalog', ['feed', 'web']);
 
-Route::get('/serach')->module('search', 'App\Search')->name('search');
+Route::get('/search')->module('search', 'App\Search')->name('search');
 
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
 

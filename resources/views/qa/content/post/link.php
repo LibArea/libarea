@@ -10,7 +10,7 @@
 </div>
 
 <main class="col-span-7">
-  <div class="bg-white br-rd5 br-box-gray mb15 p15">
+  <div class="box-white">
     <?php if ($data['site']['item_title_url']) { ?>
       <div class="right mt10">
         <?= votes($user['id'], $data['site'], 'item', 'ps', 'mr10'); ?>
@@ -42,7 +42,7 @@
 </main>
 <aside class="col-span-3 mb-none">
   <div class="sticky top-sm">
-    <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
+    <div class="box-white">
       <?= Tpl::import('/_block/domains', ['data' => $data['domains']]); ?>
     </div>
   </div>

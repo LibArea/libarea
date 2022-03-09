@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white br-rd5 br-box-gray p15">
+  <div class="box-white">
     <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('invite'); ?></h1>
     <form class="" action="/invite" method="post">
       <?php csrf_field(); ?>

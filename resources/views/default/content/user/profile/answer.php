@@ -8,7 +8,7 @@
   </div>
   <?php if (!empty($data['answers'])) { ?>
     <?php foreach ($data['answers'] as $answer) { ?>
-      <div class="bg-white br-rd5 br-box-gray p15">
+      <div class="box-white">
         <div class="text-sm mb5">
           <a class="gray" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
             <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>

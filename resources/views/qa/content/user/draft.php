@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white box-flex br-box-gray">
+  <div class="box-white">
     <ul class="nav">
 
       <?= tabs_nav(
@@ -28,7 +28,7 @@
 
     </ul>
   </div>
-  <div class="bg-white br-rd5 br-box-gray br-rd5 p15">
+  <div class="box-white">
     <?php if (!empty($data['drafts'])) { ?>
       <?php foreach ($data['drafts'] as $draft) { ?>
 

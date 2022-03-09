@@ -36,7 +36,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
     </ul>
   </div>
 
-  <div class="bg-white p15">
+  <div class="box-white">
     <form action="<?= getUrlByName($fs['facet_type'] . '.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
@@ -120,7 +120,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <?php } ?>
 
       <?php if (!empty($data['high_arr'])) { ?>
-        <div class="bg-white br-rd5 br-box-gray p15">
+        <div class="box-white">
           <h3 class="uppercase-box"><?= Translate::get('parents'); ?></h3>
           <?php foreach ($data['high_arr'] as $high) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $high['facet_slug']]); ?>">
@@ -132,7 +132,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <?php } ?>
 
       <?php if (!empty($data['low_arr'])) { ?>
-        <div class="bg-white br-rd5 br-box-gray p15">
+        <div class="box-white">
           <h3 class="uppercase-box"><?= Translate::get('children'); ?></h3>
           <?php foreach ($data['low_arr'] as $sub) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $sub['facet_slug']]); ?>">
@@ -180,7 +180,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
         ]); ?>
 
         <?php if (!empty($data['high_matching'])) { ?>
-          <div class="bg-white br-rd5 br-box-gray max-w780 p15 mb15">
+          <div class="box-white max-w780">
             <h3 class="uppercase-box"><?= Translate::get('bound (parents)'); ?></h3>
             <?php foreach ($data['high_matching'] as $low_mat) { ?>
               <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $low_mat['facet_slug']]); ?>">

@@ -2,7 +2,7 @@
   <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
-  <div class="bg-white br-rd5 br-box-gray p15">
+  <div class="box-white">
     <?php if ($user['trust_level'] > 1) { ?>
       <form method="post" action="<?= getUrlByName('invit.create'); ?>">
         <?php csrf_field(); ?>

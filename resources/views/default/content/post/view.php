@@ -46,11 +46,11 @@
             <?php if ($user['login'] == $post['login']) { ?>
               <?php if ($post['my_post'] == $post['post_id']) { ?>
                 <span class="add-profile active mr10 ml10" data-post="<?= $post['post_id']; ?>">
-                  + <?= Translate::get('in-the-profile'); ?>
+                  + <?= Translate::get('in.profile'); ?>
                 </span>
               <?php } else { ?>
                 <span class="add-profile mr10 ml10" data-post="<?= $post['post_id']; ?>">
-                  <?= Translate::get('in-the-profile'); ?>
+                  <?= Translate::get('in.profile'); ?>
                 </span>
               <?php } ?>
             <?php } ?>

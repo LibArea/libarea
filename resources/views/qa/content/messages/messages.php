@@ -2,7 +2,7 @@
   <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
-  <div class="bg-white br-rd5 br-box-gray p15">
+  <div class="box-white">
     <?php if (!empty($data['messages'])) { ?>
       <?php foreach ($data['messages'] as  $msg) { ?>
         <div class="hidden mt15 mb15<?php if (!$msg['unread'] > 0) { ?> bg-yellow-100<?php } ?>">

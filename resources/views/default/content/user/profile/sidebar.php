@@ -47,7 +47,7 @@
   <?php if ($profile['my_post'] != 0) { ?>
     <?php $post = $data['post']; ?>
     <div class="box-white">
-      <h3 class="uppercase-box"><?= Translate::get('selected post'); ?></h3>
+      <h3 class="uppercase-box"><?= Translate::get('selected.post'); ?></h3>
       <div class="mt5">
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
