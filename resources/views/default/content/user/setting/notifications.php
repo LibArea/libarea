@@ -5,8 +5,6 @@ $form->adding(['name' => 'setting_email_appealed', 'type' => 'selected', 'var' =
 $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
 ?>
 
-<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
-
 <main class="col-span-7 mb-col-12">
   <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
 

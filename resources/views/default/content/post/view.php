@@ -252,7 +252,7 @@
     </div>
   <?php } ?>
   <div class="center box-white">
-     <?= Tpl::import('/content/share'); ?>
+     <?= Tpl::import('/share'); ?>
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="box-white sticky top-sm">

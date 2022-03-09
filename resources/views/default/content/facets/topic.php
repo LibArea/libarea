@@ -1,5 +1,3 @@
-<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
-
 <?php $topic = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>

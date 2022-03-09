@@ -75,6 +75,11 @@ a.active > i,
 }
 
 /* Left mobile menu */
+.menu__left.menu-none {
+  opacity: 0;
+  position: absolute;
+}
+
 @media (max-width: 980px) {
 
   .menu__button { transition: 0.3s ease; }
@@ -84,7 +89,8 @@ a.active > i,
     position: absolute;
   }
 
-  .menu__left.menu__active {
+  .menu__left.menu__active,
+  .menu__left.menu-none.menu__active  {
     opacity: 1;
     visibility: visible;
     transition: 0.25s;
@@ -103,7 +109,7 @@ a.active > i,
     background-color: #eaecf0;
     box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.25);
     overflow-x: hidden;
-    position: absolute;
+    position: fixed;
   }
   
   .menu__left.menu__active nav.top-sm { top: 0; }

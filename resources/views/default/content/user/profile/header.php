@@ -6,8 +6,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
   $css = 'w160 mb-w100 ml15 z-10 -mt80 br-rd5';
 }
 ?>
-<div class="menu-none menu-user">
-  <div class="closebtn">x</div>
+<div class="menu__left menu-none">
   <nav class="sticky top-sm">
     <ul class="menu">
       <?= tabs_nav(

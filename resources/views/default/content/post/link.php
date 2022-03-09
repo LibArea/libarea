@@ -1,5 +1,3 @@
-<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
-
 <main class="col-span-7">
   <div class="bg-white br-rd5 br-box-gray mb15 p15">
     <?php if ($data['site']['item_title_url']) { ?>

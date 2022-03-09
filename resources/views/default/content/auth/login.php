@@ -22,7 +22,7 @@ $form->html_form($user['trust_level'], Config::get('form/auth.login'));
   <?php if (Config::get('general.invite') == 1) { ?>
     <?= Translate::get('no-invate-txt'); ?>
   <?php } ?>
-  <p><?= Translate::get('login-use-condition'); ?>.</p>
+  <p><?= Translate::get('login.use.condition'); ?>.</p>
   <p><?= Translate::get('info-login'); ?></p>
   <img class="right" alt="<?= Config::get('meta.name'); ?>" src="<?= Config::get('meta.img_footer_path'); ?>">
 </main>

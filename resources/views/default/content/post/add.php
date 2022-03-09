@@ -1,4 +1,4 @@
-<main class="col-span-12 mb-col-12">
+<main class="col-span-10 mb-col-12">
   <div class="box-white">
 
     <a href="/"><?= Translate::get('home'); ?></a> /

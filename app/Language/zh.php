@@ -303,14 +303,11 @@ $data = [
     'post'          => '發布',
     'posts'         => '帖子',
 
-    'setting profile page'  => '設置個人資料頁面',
     'cover art'             => '封面藝術',
     'type'                  => '類型',
     'logo'                  => '標識',
     'last'                  => '最後的',
     'cover removed'         => '蓋子已移除',
-    'change avatar page'    => '更改頭像頁面',
-    'change password page'  => '修改密碼頁面',
     'recommended size'      => '推薦尺寸',
 
     /* 通知 */
@@ -349,7 +346,7 @@ $data = [
     'password changed'      => '密碼更換成功',
     'old-password-err'      => '舊密碼不正確',
     'pass-match-err'        => '密碼有誤',
-    'login-use-condition'   => '繼續，即表示您同意<a href="/info/privacy">使用條款</a>網站',
+    'login.use.condition'   => '繼續，即表示您同意<a href="/info/article/privacy">使用條款</a>網站',
     'user-already'          => '該用戶已經在該網站上',
     'invate-to-replay'      => '您已經向該用戶發送了邀請',
     'invate.limit.stop'     => '您已用盡邀請數量',

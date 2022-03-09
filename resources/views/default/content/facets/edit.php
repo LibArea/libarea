@@ -1,5 +1,3 @@
-<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
-
 <?php
 $fs = $data['facet'];
 $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]);

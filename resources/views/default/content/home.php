@@ -1,12 +1,3 @@
-<?php if ($user['id'] == 0) { ?>
-  <div class="box mb-none col-span-12 bg-white br-box-gray center">
-    <h1><?= Config::get('meta.banner_title'); ?></h1>
-    <p><?= Config::get('meta.banner_desc'); ?>...</p>
-  </div>
-<?php } ?>
-
-<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
-
 <main class="col-span-7 mb-col-12">
   <div class="box-flex-white relative">
     <ul class="nav">

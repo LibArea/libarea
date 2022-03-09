@@ -1,5 +1,3 @@
-<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
-
 <main class="col-span-7 mb-col-12">
   <div class="box-flex-white relative">
     <ul class="nav">

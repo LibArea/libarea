@@ -1,5 +1,3 @@
-<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
-
 <?php $fs = $data['facet']; ?>
 
 <main class="col-span-10 mb-col-12">

@@ -20,7 +20,7 @@
       <?= sumbit(Translate::get('sign.in')); ?>
     </fieldset>
     <fieldset class="gray-600 center">
-      <?= Translate::get('login-use-condition'); ?>
+      <?= Translate::get('login.use.condition'); ?>
       <a href="<?= getUrlByName('recover'); ?>"><?= Translate::get('forgot.password'); ?>?</a>
     </fieldset>
   </form>

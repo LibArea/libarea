@@ -19,7 +19,7 @@
       <span class="mr5 ml15 text-sm"><a href="<?= getUrlByName('login'); ?>"><?= Translate::get('sign.in'); ?></a></span>
     </fieldset>
   </form>
-  <p><?= Translate::get('login-use-condition'); ?>.</p>
+  <p><?= Translate::get('login.use.condition'); ?>.</p>
   <p><?= Translate::get('info-recover'); ?></p>
   <img class="right" alt="<?= Config::get('meta.name'); ?>" src="<?= Config::get('meta.img_footer_path'); ?>">
 </main>

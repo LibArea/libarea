@@ -304,14 +304,11 @@ $data = [
     'zh-language'           => 'Китайский (ZH)',
     'ro-language'           => 'Румынский (RO)',
 
-    'setting profile page'  => 'Страница настройки профиля',
     'cover art'             => 'Обложка',
     'type'                  => 'Тип',
     'logo'                  => 'Логотип',
     'last'                  => 'Последнее',
     'cover removed'         => 'Обложка удалена',
-    'change avatar page'    => 'Страница изменение аватарки',
-    'change password page'  => 'Страница изменение пароля',
     'recommended size'      => 'Рекомендуемый размер',
 
     'i.read'                    => 'Я прочитал',
@@ -349,7 +346,7 @@ $data = [
     'password changed'      => 'Пароль успешно изменен',
     'old-password-err'      => 'Старый пароль неверен',
     'pass-match-err'        => 'Пароли не совпадают',
-    'login-use-condition'   => 'Продолжая, вы соглашаетесь с <a href="/info/privacy">Условиями использования</a> сайта',
+    'login.use.condition'   => 'Продолжая, вы соглашаетесь с <a href="/info/article/privacy">Условиями использования</a> сайта',
     'user-already'          => 'Пользователь уже есть на сайте',
     'invate-to-replay'      => 'Вы уже отправили приглашение этому пользователю',
     'invate.limit.stop'     => 'Вы исчерпали количество инвайтов',

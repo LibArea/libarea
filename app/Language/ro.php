@@ -300,15 +300,12 @@ $data = [
     'posts'         => 'Postări',
 
     'setting profile'       => 'Setari profil',
-    'setting profile page'  => 'Pagina de configurare a profilului',
     'avatar'                => 'Avatar',
     'cover art'             => 'Cover',
     'type'                  => 'Tip',
     'logo'                  => 'Logo',
     'last'                  => 'Ultimul',
     'cover removed'         => 'Cover sters',
-    'change avatar page'    => 'Schimbați avatarul paginii',
-    'change password page'  => 'Modificare parolă pagină ',
     'recommended size'      => 'Dimensiunea recomandată',
 
     /* Notificări */
@@ -348,7 +345,7 @@ $data = [
     'password changed'      => 'Parola a fost schimbată cu succes',
     'old-password-err'      => 'Parola veche nu este corectă',
     'pass-match-err'        => 'Parola nepotrivită',
-    'login-use-condition'   => 'Continuând, sunteți de acord să <a href="/info/privacy">Termeni de Utilizare</a> site-ul',
+    'login.use.condition'   => 'Continuând, sunteți de acord să <a href="/info/article/privacy">Termeni de Utilizare</a> site-ul',
     'user-already'          => 'Utilizatorul este deja pe site',
     'invate-to-replay'      => 'Ați trimis deja o invitație acestui utilizator',
     'invate.limit.stop'     => 'Ați epuizat numărul de invitații',

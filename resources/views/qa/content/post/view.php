@@ -254,7 +254,7 @@
     </div>
   <?php } ?>
   <div class="box-white bg-violet-50 center">
-     <?= Tpl::import('/content/share'); ?>
+     <?= Tpl::import('/share'); ?>
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="box-white bg-violet-50 sticky top-sm">

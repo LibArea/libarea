@@ -302,14 +302,11 @@ $data = [
     'post'          => 'Post',
     'posts'         => 'Posts',
 
-    'setting profile page'  => 'Setting profile page',
     'cover art'             => 'Cover art',
     'type'                  => 'Type',
     'logo'                  => 'Logo',
     'last'                  => 'Last',
     'cover removed'         => 'Cover removed',
-    'change avatar page'    => 'Change avatar page',
-    'change password page'  => 'Change password page',
     'recommended size'      => 'Recommended size',
 
     /* Notifications  */
@@ -348,7 +345,7 @@ $data = [
     'password changed'      => 'Password changed successfully',
     'old-password-err'      => 'Old password is incorrect',
     'pass-match-err'        => 'Password mismatch',
-    'login-use-condition'   => 'By continuing, you agree to <a href="/info/privacy">Terms of use</a> site',
+    'login.use.condition'   => 'By continuing, you agree to <a href="/info/article/privacy">Terms of use</a> site',
     'user-already'          => 'The user is already on the site',
     'invate-to-replay'      => 'You have already sent an invitation to this user',
     'invate.limit.stop'     => 'You have exhausted the number of invites',

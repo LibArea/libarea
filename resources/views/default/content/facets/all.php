@@ -1,5 +1,3 @@
-<?= Tpl::import('/content/menu', ['data' => $data, 'user' => $user]); ?>
-
 <main class="col-span-10 mb-col-12">
   <div class="box-white center">
     <h1 class="text-xl"><?= Translate::get($data['sheet']); ?></h1>
