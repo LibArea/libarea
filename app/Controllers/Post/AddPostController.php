@@ -180,7 +180,8 @@ class AddPostController extends MainController
 
     public static function slug($title)
     {
-        $uri    = Slug::get($title); 
+        $title  = preg_replace( "/[^a-zA-ZА-Яа-я0-9 \s]/", '', $title);
+        $uri    = Slug::get($title);
         $result = PostModel::getSlug($new_slug = substr($uri, 0, 90));
         if ($result) {
             return $new_slug . "-";
@@ -211,6 +212,10 @@ class AddPostController extends MainController
                     'item_user_id'      => $this->user['id'],
                     'item_type_url'     => 0,
                     'item_status_url'   => 200,
+                    'item_is_soft'      => 0,
+                    'item_is_github'    => 0,
+                    'item_votes'        => 0,
+                    'item_count'        => 1,
                 ]
             );
         } else {
