@@ -1,6 +1,6 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <?php if ($user['id'] == 0) { ?>
-  <div class="box bg-white">
+  <div class="box bg-white mb-none">
     <center>
       <h1><?= Translate::get('web.home.title'); ?></h1>
       <p class="max-w780"><?= Translate::get('web.banner.info'); ?>.</p>

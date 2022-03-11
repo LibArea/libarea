@@ -180,7 +180,9 @@ class AddPostController extends MainController
 
     public static function slug($title)
     {
-        $title  = preg_replace("/[^a-zA-ZА-Яа-я0-9 \s]/", '', $title);
+        Slug::rule('«', '');
+        Slug::rule('»', '');
+        Slug::rule('—', '');
         $uri    = Slug::get($title);
         $result = PostModel::getSlug($new_slug = substr($uri, 0, 90));
         if ($result) {
