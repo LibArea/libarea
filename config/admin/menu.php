@@ -7,11 +7,6 @@
 return [
     'admin' => [
         [
-            'url'   => getUrlByName('admin.users'),
-            'title' => Translate::get('users'),
-            'icon'  => 'bi bi-people',
-            'id'    => 'users',
-        ], [
             'url'   => getUrlByName('admin.logs'),
             'title' => Translate::get('logs'),
             'icon'  => 'bi bi-receipt',

@@ -210,7 +210,6 @@ $data = [
     'children'          => '孩子們',
     'bound (children)'  => '綁定（兒童）',
     'bound (parents)'   => '綁定（父母）',
-    'structure'         => '結構 ',
     'root'              => '根',
     'root-help'         => '樹的頂部（主要）主題。',
     'upper'             => '上',
@@ -450,7 +449,6 @@ $data = [
     'recommended posts'         => '推薦帖子',
     'recommended.posts.desc'    => '推薦的帖子 «%1$s» 手選.',
 
-    'structure-desc'            => '不同樹代表的主題、主題的結構及其關係',
     'topic-subscription'        => '訂閱主題並在提要中閱讀它們',
     'stop-blog'                 => '此博客網址已保留。',
     

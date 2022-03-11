@@ -19,7 +19,7 @@
       <div class="gray-400 italic">
         <?= $page['post_modified']; ?>
         <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
-          <a class="gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
+          <a class="gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
             <i class="bi bi-pencil"></i>
           </a>
         <?php } ?>

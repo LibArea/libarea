@@ -14,7 +14,7 @@ return [
             'id'    => 'web.bookmarks',
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,
-            'url'   => getUrlByName('category.add'),
+            'url'   => getUrlByName('content.add', ['type' => 'category']),
             'title' => Translate::get('categories.s'),
             'icon'  => 'bi bi-plus-lg',
             'id'    => 'official',
@@ -32,8 +32,8 @@ return [
             'id'    => 'web.audits',
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,
-            'url'   => getUrlByName('admin.category.structure'),
-            'title' => Translate::get('structure'),
+            'url'   => getUrlByName('admin.facets.type', ['type' => 'category']),
+            'title' => Translate::get('facets'),
             'icon'  => 'bi bi-columns-gap',
             'id'    => 'official',
         ],

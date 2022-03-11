@@ -1,4 +1,4 @@
-<a class="up_down_btn none" title="<?= Translate::get('up'); ?>">&uarr;</a>
+<a class="up_down_btn none mb-none" title="<?= Translate::get('up'); ?>">&uarr;</a>
 
 <script src="/assets/js/common.js"></script>
 <script src="/assets/js/notiflix/notiflix-aio-3.2.2.min.js"></script>

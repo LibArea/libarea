@@ -9,7 +9,7 @@ $facet  = $data['facet'] ?? false; ?>
 
   <header class="d-header sticky top0">
     <div class="wrap">
-      <div class="d-header_contents">
+      <div class="d-header_contents mb-pl0 mb-pr0">
 
         <div class="none mb-block">
           <div class="menu__button mr10">
@@ -21,12 +21,12 @@ $facet  = $data['facet'] ?? false; ?>
           <?= Config::get('meta.name'); ?>
         </a>
 
-        <div class="ml45 relative w-100">
-            <form class="form mb-none" method="get" action="<?= getUrlByName('search'); ?>">
-              <input type="text" name="q" autocomplete = "off" id="find" placeholder="<?= Translate::get('to find'); ?>" class="search">
-              <input name="type" value="post" type="hidden">
-            </form>
-            <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
+        <div class="ml45 mb-ml10 relative w-100">
+          <form class="form mb-none" method="get" action="<?= getUrlByName('search'); ?>">
+            <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= Translate::get('to find'); ?>" class="search">
+            <input name="type" value="post" type="hidden">
+          </form>
+          <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
         </div>
 
         <?php if (!UserData::checkActiveUser()) { ?>
@@ -85,7 +85,7 @@ $facet  = $data['facet'] ?? false; ?>
     </div>
   </header>
   <div id="contentWrapper">
-  
+
     <?php if ($user['id'] == 0 && $data['type'] == 'main') { ?>
       <div class="box mb-none col-span-12 bg-white br-box-gray center">
         <h1><?= Config::get('meta.banner_title'); ?></h1>

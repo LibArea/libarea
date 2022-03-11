@@ -61,8 +61,8 @@ return [
             'id'    => 'admin',
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,
-            'url'   => getUrlByName('admin.all.structure'),
-            'title' => Translate::get('structure'),
+            'url'   => getUrlByName('admin.facets.all'),
+            'title' => Translate::get('facets'),
             'icon'  => 'bi bi-bezier2',
             'id'    => 'admin',
         ],

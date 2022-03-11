@@ -36,7 +36,7 @@ class EditFacetController extends MainController
         return Tpl::agRender(
             '/facets/edit',
             [
-                'meta'  => meta($m = [], Translate::get('edit') . ' | ' . $facet['facet_title']),
+                'meta'  => meta([], Translate::get('edit') . ' | ' . $facet['facet_title']),
                 'data'  => [
                     'facet'             => $facet,
                     'low_matching'      => FacetModel::getLowMatching($facet['facet_id']),

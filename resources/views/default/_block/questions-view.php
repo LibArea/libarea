@@ -38,7 +38,7 @@
                 
                 <?php if (accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
                   <?php if ($user['id'] == $answer['answer_user_id'] || UserData::checkAdmin()) { ?>
-                    <a class="editansw gray ml15 mr10" href="/answer/edit/<?= $answer['answer_id']; ?>">
+                    <a class="editansw gray ml15 mr10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                       <?= Translate::get('edit'); ?>
                     </a>
                   <?php } ?>
@@ -130,7 +130,7 @@
   <?php if ($user['id'] > 0) { ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
 
-      <form class="mb15" action="<?= getUrlByName('answer.create'); ?>" accept-charset="UTF-8" method="post">
+      <form class="mb15" action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
         <?= Tpl::import('/_block/editor/editor', [
           'height'    => '250px',

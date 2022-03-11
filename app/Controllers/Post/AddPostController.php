@@ -30,11 +30,11 @@ class AddPostController extends MainController
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
         Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
-        
+
         if ($type != 'page') {
             Request::getResources()->addBottomScript('/assets/js/uploads.js');
         }
-        
+
         // Adding from page topic 
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
@@ -45,7 +45,7 @@ class AddPostController extends MainController
         return Tpl::agRender(
             $puth,
             [
-                'meta'      => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('post'))),
+                'meta'      => meta([], sprintf(Translate::get('add.option'), Translate::get('post'))),
                 'data'  => [
                     'facets'    => ['topic' => $topic],
                     'blog'      => FacetModel::getFacetsUser($this->user['id'], 'blog'),
@@ -142,14 +142,14 @@ class AddPostController extends MainController
         if ($type == 'page') {
             $url = getUrlByName('info.page', ['slug' => $slug]);
         }
-        
+
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
             (new \App\Controllers\AuditController())->create('post', $last_id, $url);
         }
 
-       // Add fastes (blogs, topics) to the post 
-       (new \App\Controllers\Post\EditPostController())->addFacetsPost($fields, $last_id, $url);
+        // Add fastes (blogs, topics) to the post 
+        (new \App\Controllers\Post\EditPostController())->addFacetsPost($fields, $last_id, $url);
 
         // Notification (@login). 10 - mentions in post 
         if ($message = Content::parseUser($content, true, true)) {
@@ -180,16 +180,16 @@ class AddPostController extends MainController
 
     public static function slug($title)
     {
-        $title  = preg_replace( "/[^a-zA-ZА-Яа-я0-9 \s]/", '', $title);
+        $title  = preg_replace("/[^a-zA-ZА-Яа-я0-9 \s]/", '', $title);
         $uri    = Slug::get($title);
         $result = PostModel::getSlug($new_slug = substr($uri, 0, 90));
         if ($result) {
             return $new_slug . "-";
         }
-        
+
         return $new_slug;
     }
-    
+
     public function addUrl($post_url, $post_title)
     {
         // Поскольку это для поста, то получим превью и разбор домена...

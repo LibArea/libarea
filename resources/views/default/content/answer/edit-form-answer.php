@@ -8,7 +8,7 @@
     <?= $data['post']['post_title']; ?>
   </a>
 
-  <form action="<?= getUrlByName('answer.edit.pr'); ?>" accept-charset="UTF-8" method="post">
+  <form action="<?= getUrlByName('content.change', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
     <?= csrf_field() ?>
 
     <?= Tpl::import('/_block/editor/editor', ['height'  => '300px', 'content' => $data['content'], 'type' => 'answer', 'id' => $data['post']['post_id']]); ?>

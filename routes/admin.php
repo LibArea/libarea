@@ -37,18 +37,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/audits/approved')->module('admin', 'App\Audits', ['audits.ban', 'audits'])->name('admin.audits.ban');
     Route::get('/report')->module('admin', 'App\Audits', ['reports.all', 'reports'])->name('admin.reports');
 
-   
-    Route::get('/topics')->module('admin', 'App\Facets', ['topics.all', 'topics'])->name('admin.topics');
-    Route::get('/topics/ban')->module('admin', 'App\Facets', ['topics.ban', 'topics'])->name('admin.topics.ban');
-    Route::get('/topics/page/{page?}')->module('admin', 'App\Facets', ['topics.all', 'topics'])->where(['page' => '[0-9]+']);
-     
-    Route::get('/sections')->module('admin', 'App\Facets', ['sections.all', 'sections'])->name('admin.sections');     
-     
-    Route::get('/blogs')->module('admin', 'App\Facets', ['blogs.all', 'blogs'])->name('admin.blogs');
-    Route::get('/blogs/ban')->module('admin', 'App\Facets', ['blogs.ban', 'blogs'])->name('admin.blogs.ban');
-    
-    Route::get('/pages')->module('admin', 'App\Facets@pages', ['pages.all', 'pages'])->name('admin.pages');
-     
     Route::get('/update/count/topic')->module('admin', 'App\Сonsole@topic')->name('admin.count.topic'); 
     Route::get('/update/count/up')->module('admin', 'App\Сonsole@up')->name('admin.count.up');
     Route::get('/update/user/tl')->module('admin', 'App\Сonsole@tl')->name('admin.users.tl');
@@ -72,11 +60,9 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/words/add')->module('admin', 'App\Words@addPage', ['add', 'words'])->name('words.add');
     Route::get('/words')->module('admin', 'App\Words', ['words.all', 'words'])->name('admin.words');
     
-    Route::get('/structure')->module('admin', 'App\TreeFacet', ['all'])->name('admin.all.structure');
-    Route::get('/structure/topic')->module('admin', 'App\TreeFacet', ['topic'])->name('admin.topic.structure');
-    Route::get('/structure/blog')->module('admin', 'App\TreeFacet', ['blog'])->name('admin.blog.structure');
-    Route::get('/structure/section')->module('admin', 'App\TreeFacet', ['section'])->name('admin.section.structure');
-    Route::get('/structure/category')->module('admin', 'App\TreeFacet', ['category'])->name('admin.category.structure');
+    Route::get('/facets')->module('admin', 'App\Facets')->name('admin.facets.all');
+    Route::get('/facets/{type}')->module('admin', 'App\Facets@type')->where(['type' => '[a-z]+'])->name('admin.facets.type');
+    Route::get('/facets/ban/{type}')->module('admin', 'App\Facets@ban')->where(['type' => '[a-z]+'])->name('admin.facets.ban.type');
 
     Route::get('/css')->module('admin', 'App\Home@css')->name('admin.css');
     Route::get('/info')->module('admin', 'App\Home@css')->name('admin.info');

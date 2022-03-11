@@ -16,6 +16,7 @@ class ActionController extends MainController
         $this->user  = UserData::get();
     }
 
+    // Deleting and restoring content 
     // Удаление и восстановление контента
     public function deletingAndRestoring()
     {
@@ -64,16 +65,87 @@ class ActionController extends MainController
         return true;
     }
 
-    // Связанные посты и выбор автора
+    // Related posts, content author change, facets 
+    // Связанные посты, изменение автора контента, фасеты
     public function select()
     {
-        $type           = Request::get('type');
-        $search         = Request::getPost('q');
-        $search         = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
-        
+        $type       = Request::get('type');
+        $search     = Request::getPost('q');
+        $search     = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
+
         $allowed = ['post', 'user', 'blog',  'section', 'category', 'topic'];
         if (!in_array($type, $allowed)) return false;
-        
+
         return ActionModel::getSearch($search, $type);
+    }
+
+    // Pages (forms) adding content (facets) 
+    // Страницы (формы) добавления контента (фасетов)
+    public function add()
+    {
+        $type = Request::get('type');
+
+        if ($type == 'post' || $type == 'page') {
+            return (new Post\AddPostController)->index($type);
+        } elseif ($type == 'topic' || $type == 'blog' || $type == 'category' || $type == 'section') {
+            return (new Facets\AddFacetController)->index($type);
+        } else {
+            return false;
+        }
+    }
+
+    // Pages (forms) change content and facets (navigation)
+    // Страницы (формы) изменения контента и фасетов (навигации)
+    public function edit()
+    {
+        $type = Request::get('type');
+
+        if ($type == 'post' || $type == 'page') {
+            return (new Post\EditPostController)->index($type);
+        } elseif ($type == 'topic' || $type == 'blog' || $type == 'category'  || $type == 'section') {
+            return (new Facets\EditFacetController)->index($type);
+        } elseif ($type == 'answer') {
+            return (new Answer\EditAnswerController)->index($type);
+        } else {
+            return false;
+        }
+    }
+    
+    // Creating Content and Adding Facets (Navigation)
+    // Создание контента и добавление фасетов (навигация)
+    public function create()
+    {
+        $type = Request::get('type');
+
+        if ($type == 'post' || $type == 'page') {
+            return (new Post\AddPostController)->create($type);
+        } elseif ($type == 'topic' || $type == 'blog' || $type == 'category'  || $type == 'section') {
+            return (new Facets\AddFacetController)->create($type);
+        } elseif ($type == 'answer') {
+            return (new Answer\AddAnswerController)->create();
+        } elseif ($type == 'comment') {
+            return (new Comment\AddCommentController)->create();
+        } else {
+            return false;
+        }
+    }
+    
+    // Content and facet changes (navigation)
+    // Изменения контента и фасетов (навигация)
+    public function change()
+    {
+        $type = Request::get('type');
+
+        if ($type == 'post' || $type == 'page') {
+            return (new Post\EditPostController)->edit($type);
+        } elseif ($type == 'topic' || $type == 'blog' || $type == 'category'  || $type == 'section') {
+            return (new Facets\EditFacetController)->edit($type);
+        } elseif ($type == 'answer') {
+            return (new Answer\EditAnswerController)->edit();
+        } elseif ($type == 'comment') {
+            return (new Comment\EditCommentController)->edit();
+        } else {
+            return false;
+        }  
     }
 }

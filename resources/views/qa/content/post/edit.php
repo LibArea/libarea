@@ -7,7 +7,7 @@
       <?= sprintf(Translate::get('edit.option'), Translate::get('post')); ?>
     </span>
     
-    <form action="<?= getUrlByName('post.edit.pr'); ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= getUrlByName('content.change', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <fieldset>

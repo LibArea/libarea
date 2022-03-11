@@ -8,8 +8,10 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Theme Tree
     // Дерево тем
-    public static function get($type)
+    public static function get($type, $sort)
     {
+        $sort = $sort == 'ban' ? 'AND facet_is_deleted = 1' : '';
+
         $sql = "SELECT
                 facet_id,
                 facet_slug,
@@ -19,6 +21,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                 facet_type,
                 facet_parent_id,
                 facet_chaid_id,
+                facet_is_deleted,
                 rel.*
                     FROM facets 
                     LEFT JOIN
@@ -33,7 +36,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                             ON rel.matching_parent_id = facet_id
 
                         LEFT JOIN facets_relation on facet_id = facet_chaid_id 
-                            WHERE facet_type = :type ORDER BY facet_sort DESC";
+                            WHERE facet_type = :type $sort ORDER BY facet_sort DESC";
 
         return DB::run($sql, ['type' => $type])->fetchAll();
     }
@@ -42,7 +45,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     {
         return  DB::run('SELECT type_id, type_code, type_lang FROM facets_types');
     }
-    
+
     // Posts where there are no topics
     // Посты где нет тем
     public static function getNoTopic()
@@ -58,5 +61,26 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                                        AND post_is_deleted = 0 AND post_draft = 0";
 
         return DB::run($sql)->fetchAll();
+    }
+
+    // Let's check the uniqueness of id
+    // Проверим уникальность id
+    public static function uniqueById($facet_id)
+    {
+        $sql = "SELECT facet_id, facet_slug, facet_type, facet_user_id, facet_is_deleted FROM facets WHERE facet_id = :id";
+
+        return DB::run($sql, ['id' => $facet_id])->fetch();
+    }
+
+    // Delete (ban) the facet
+    // Удалим (забаним) фасет
+    public static function ban($id, $status)
+    {
+        $sql = "UPDATE facets SET facet_is_deleted = 1 where facet_id = :id";
+        if ($status == 1) {
+            $sql = "UPDATE facets SET facet_is_deleted = 0 where facet_id = :id";
+        }
+
+        DB::run($sql, ['id' => $id]);
     }
 }

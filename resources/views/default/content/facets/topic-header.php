@@ -6,7 +6,7 @@
     <h1 class="text-2xl">
       <?= $topic['facet_seo_title']; ?>
       <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == $user['id']) { ?>
-        <a class="right gray-600" href="<?= getUrlByName('topic.edit', ['id' => $topic['facet_id']]); ?>">
+        <a class="right gray-600" href="<?= getUrlByName('content.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
           <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>

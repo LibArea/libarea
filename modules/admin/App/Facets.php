@@ -3,67 +3,85 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\FacetModel;
-use Translate, UserData;
+use Modules\Admin\App\Models\{FacetModel, StatsModel};
+use Translate;
 
 class Facets
 {
-    private $user;
-
-    protected $limit = 25;
-
-    public function __construct()
+    // Let's show the types of facets
+    // Покажем типы фасетов
+    public function index()
     {
-        $this->user  = UserData::get();
-    }
-
-    public function index($sheet, $type)
-    {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-
-        $pagesCount = FacetModel::getFacetsAllCount($this->user['id'], $sheet);
-
         return view(
-            '/view/default/facet/facets',
+            '/view/default/facet/all',
             [
-                'meta'  => meta($m = [], Translate::get('topics')),
+                'meta'  => meta($m = [], Translate::get('facets'), Translate::get('facets')),
                 'data'  => [
-                    'sheet'         => $sheet,
-                    'type'          => $type,
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
-                    'facets'        => FacetModel::getFacetsAll($page, $this->limit, $this->user['id'], $sheet),
+                    'count'         => StatsModel::getCount(),
+                    'sheet'         => 'all',
+                    'type'          => 'facets',
+                    'types_facets'  => FacetModel::types(),
                 ]
             ]
         );
     }
 
-    public function pages($sheet, $type)
+    // Show faces by type 
+    // Покажем грани по типам
+    public function type()
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-
-        $pagesCount = 0;
-
-        $pages =  (new \App\Controllers\PageController())->lastAll();
+        $type = self::faceTypes(Request::get('type'));
 
         return view(
-            '/view/default/page/pages',
+            '/view/default/facet/type',
             [
-                'meta'  => meta($m = [], Translate::get('topics')),
+                'meta'  => meta($m = [], Translate::get($type), Translate::get('facets')),
                 'data'  => [
-                    'sheet'         => $sheet,
-                    'type'          => $type,
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
-                    'pages'         => $pages,
+                    'count'     => StatsModel::getCount(),
+                    'sheet'     => $type,
+                    'type'      => $type,
+                    'facets'    => self::builder(0, 0, FacetModel::get($type, 'all')),
                 ]
             ]
         );
     }
 
-    // Удалим Фасет
+    // Building a tree
+    // Дерево
+    public static function builder($chaid_id, $level, $data, array $tree = [])
+    {
+        $level++;
+        foreach ($data as $part) {
+            if ($part['facet_parent_id'] == $chaid_id) {
+                $part['level']  = $level - 1;
+                $tree[]         = $part;
+                $tree           = self::builder($part['facet_id'], $level, $data, $tree);
+            }
+        }
+        return $tree;
+    }
+
+    // Deleted Faces 
+    // Удаленные грани
+    public function ban()
+    {
+        $type = self::faceTypes(Request::get('type'));
+
+        return view(
+            '/view/default/facet/type',
+            [
+                'meta'  => meta($m = [], Translate::get('ban'), Translate::get('ban')),
+                'data'  => [
+                    'sheet'     => 'ban.facet',
+                    'type'      => $type,
+                    'facets'    => FacetModel::get($type, 'ban'),
+                ]
+            ]
+        );
+    }
+
+    // Remove Facet  
+    // Удалим фасет
     public function deletes()
     {
         $id = Request::getPostInt('id');
@@ -72,5 +90,17 @@ class Facets
         FacetModel::ban($id, $topic['facet_is_deleted']);
 
         return true;
+    }
+
+    // Check for allowed face types    
+    // Проверка на разрешенные типы граней
+    public static function faceTypes($type)
+    {
+        $allowed = ['topic', 'blog', 'category', 'section'];
+        if (!in_array($type, $allowed)) {
+            return false;
+        }
+
+        return $type;
     }
 }

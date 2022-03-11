@@ -6,7 +6,7 @@
     <?php if ($user['trust_level'] > 1) { ?>
       <form method="post" action="<?= getUrlByName('invit.create'); ?>">
         <?php csrf_field(); ?>
-        
+
         <fieldset>
           <input type="email" name="email">
           <div class="right pt5"><?= sumbit(Translate::get('send')); ?></div>
@@ -58,6 +58,6 @@
 </main>
 <aside class="col-span-3 mb-none">
   <div class="box-white text-sm sticky top-sm">
-    <?=  Translate::get('invite.features'); ?>
+    <?= Translate::get('invite.features'); ?>
   </div>
 </aside>

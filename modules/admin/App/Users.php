@@ -31,7 +31,7 @@ class Users
             $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['reg_ip']);
             $row['last_visit_logs'] = UserModel::lastVisitLogs($row['id']);
             $row['created_at']      = lang_date($row['created_at']);
-            $row['updated_at'] = lang_date($row['updated_at']);
+            $row['updated_at']      = lang_date($row['updated_at']);
             $result[$ind]           = $row;
         }
 
@@ -45,6 +45,7 @@ class Users
                     'alluser'       => $result,
                     'sheet'         => $sheet,
                     'type'          => $type,
+                    'users_count'   => $pagesCount,
                 ]
             ]
         );
@@ -123,7 +124,7 @@ class Users
         $user_whisper   = Request::getPost('whisper');
         $user_name      = Request::getPost('name');
         $trust_level    = Request::getPostInt('trust_level');
-        
+
         if (!$user = UserModel::getUser($user_id, 'id')) {
             redirect(getUrlByName('admin.users'));
         }

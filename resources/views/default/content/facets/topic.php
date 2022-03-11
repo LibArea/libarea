@@ -47,14 +47,14 @@
         <div class="box-white text-sm">
           <h3 class="uppercase-box"><?= Translate::get('writers'); ?></h3>
           <ul>
-          <?php foreach ($data['writers'] as $ind => $row) { ?>
-            <li class="mb10">
-              <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
-                <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-sm'); ?>
-                <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
-              </a>
-            </li>  
-          <?php } ?>
+            <?php foreach ($data['writers'] as $ind => $row) { ?>
+              <li class="mb10">
+                <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
+                  <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-sm'); ?>
+                  <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
+                </a>
+              </li>
+            <?php } ?>
           </ul>
         </div>
       </div>

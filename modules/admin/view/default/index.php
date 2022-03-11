@@ -7,89 +7,40 @@
   ]
 ); ?>
 
-<div class="w-100">
-  <div class="w-50 left mb-w-100">
-    <div class="box-white">
-      <h3 class="uppercase-box"><?= Translate::get('content'); ?></h3>
-      <?php
-      $sections = [
-        [
-          'icon'  => 'bi-journal-text',
-          'url'   => 'feed.all',
-          'title' => 'posts',
-          'count' => $data['count']['count_posts'],
-        ], [
-          'icon'  => 'bi-chat-left-text',
-          'url'   => 'answers',
-          'title' => 'answers',
-          'count' => $data['count']['count_answers'],
-        ], [
-          'icon'  => 'bi-chat-dots',
-          'url'   => 'comments',
-          'title' => 'comments',
-          'count' => $data['count']['count_comments'],
-        ], [
-          'icon'  => 'bi-people',
-          'url'   => 'admin.users',
-          'title' => 'users',
-          'count' => $data['users_count'],
-        ], [
-          'icon'  => 'bi-journals',
-          'url'   => 'admin.blogs',
-          'title' => 'blogs',
-          'count' => $data['count']['count_blogs'],
-        ], [
-          'icon'  => 'bi-journal-richtext',
-          'url'   => 'admin.pages',
-          'title' => 'pages',
-          'count' => $data['count']['count_pages'],
-        ],
-      ];
-
-      foreach ($sections as $section) { ?>
-        <a class="text-lg block mb5" href="<?= getUrlByName($section['url']); ?>">
-          <i class="bi <?= $section['icon']; ?> gray-400 mr5"></i>
-          <?= Translate::get($section['title']); ?>
-          <sup class="gray-400"><?= $section['count']; ?><sup>
-        </a>
-      <?php } ?>
-
-    </div>
+<div class="box-white w-100">
+  <div class="w-50 left mb15 mb-w-100">
+    <h3 class="uppercase-box"><?= Translate::get('users'); ?></h3>
+    <?php foreach ($data['last_visit'] as $user) { ?>
+      <div class="gray">
+        <span class="gray-400 text-sm">id<?= $user['id']; ?></span>
+        <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
+        <span class="gray-400 lowercase"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
+      </div>
+    <?php } ?>
   </div>
-  <div class="w-50 left mb-w-100">
-    <div class="box-white ml20">
-      <h3 class="uppercase-box"><?= Translate::get('users'); ?></h3>
-      <?php foreach ($data['last_visit'] as $user) { ?>
-        <div class="gray">
-          <span class="gray-400 text-sm">id<?= $user['id']; ?></span>
-          <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
-          <span class="gray-400 lowercase"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
-        </div>
-      <?php } ?>
-    </div>
-  </div>
-</div>
 
-<?php if ($data['posts_no_topic']) { ?>
-  <div class="white-box mt10 pt5 pr15 pb5 pl15">
+  <div class="w-50 left mb-w-100">
+    <h3 class="uppercase-box"><?= Translate::get('search'); ?></h3>
+    <?php foreach ($data['logs'] as $log) { ?>
+      <div class="gray">
+        <span class="gray-400 text-sm"><?= $log['count_results']; ?></span>
+        <?= $log['request']; ?>
+        <span class="gray-400 lowercase">
+          — (<?= Translate::get($log['action_type']); ?>) <?= lang_date($log['add_date']); ?>
+        </span>
+      </div>
+    <?php } ?>
+  </div>
+
+  <div class="w-100 p0">&nbsp;</div>
+
+  <?php if ($data['posts_no_topic']) { ?>
     <h3 class="uppercase-box"><?= Translate::get('posts'); ?> (no facet)</h3>
     <?php foreach ($data['posts_no_topic'] as $post) { ?>
       <div class="gray">
         id:<?= $post['post_id']; ?> | <?= $post['post_title']; ?>
       </div>
     <?php } ?>
-  </div>
-<?php } ?>
-
-<div class="gray-600 ml10">
-  <h3 class="uppercase-box"><?= Translate::get('search'); ?></h3>
-  <?php foreach ($data['logs'] as $log) { ?>
-    <div class="gray">
-      <?= $log['request']; ?> <sup class="gray-400"><?= $log['count_results']; ?></sup>
-      <span class="gray-400 lowercase">
-        — (<?= Translate::get($log['action_type']); ?>) <?= lang_date($log['add_date']); ?>
-      </span>
-    </div>
   <?php } ?>
 
   <h3 class="uppercase-box mt15"><?= Translate::get('useful.resources'); ?></h3>

@@ -21,45 +21,24 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit')->name('setting.avatar.edit');
                 Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit')->name('setting.security.edit');
                 Route::get('/users/setting/notification/edit')->controller('User\SettingController@notificationEdit')->name('setting.notif.edit');
-                // Add / Edit: post | comment | answer | topic | web
-                Route::get('/post/create')->controller('Post\AddPostController@create', ['post'])->name('post.create');
-                Route::get('/page/create')->controller('Post\AddPostController@create', ['page'])->name('page.create');
-                Route::get('/comment/create')->controller('Comment\AddCommentController@create')->name('comment.create');
-                Route::get('/answer/create')->controller('Answer\AddAnswerController@create')->name('answer.create');
-                Route::get('/web/create')->module('catalog', 'App\Add@create')->name('web.create');
-                Route::get('/facet/create')->controller('Facets\AddFacetController@create')->name('facet.create');
-                Route::get('/post/edit')->controller('Post\EditPostController@edit')->name('post.edit.pr');
-                Route::get('/comment/edit')->controller('Comment\EditCommentController@edit')->name('comment.edit.pr');
-                Route::get('/answer/edit')->controller('Answer\EditAnswerController@edit')->name('answer.edit.pr');
-                Route::get('/web/edit')->module('catalog', 'App\Edit@edit')->name('web.edit.pr');
-                Route::get('/topic/edit')->controller('Facets\EditFacetController@edit', ['topic'])->name('topic.edit.pr');
-                Route::get('/blog/edit')->controller('Facets\EditFacetController@edit', ['blog'])->name('blog.edit.pr');
-                Route::get('/section/edit')->controller('Facets\EditFacetController@edit', ['section'])->name('section.edit.pr');
-                Route::get('/category/edit')->controller('Facets\EditFacetController@edit', ['category'])->name('category.edit.pr');
+                
+                // Add / Edit: post | comment | answer | facet | web
+                Route::get('/web/create')->module('catalog', 'App\Add@create')->name('create.web');
+                Route::get('/create/{type}')->controller('ActionController@create')->where(['type' => '[a-z]+'])->name('content.create');
+                Route::get('/change/web')->module('catalog', 'App\Edit@edit')->name('change.web');
+                Route::get('/change/{type}')->controller('ActionController@change')->where(['type' => '[a-z]+'])->name('content.change');
             Route::endProtect();
     Route::endType();
 
-    // The form of adding and changing: post | topic |  web | blog
-    Route::get('/post/add')->controller('Post\AddPostController', ['post'])->name('post.add');
-    Route::get('/page/add')->controller('Post\AddPostController', ['page'])->name('page.add');
-    Route::get('/topic/add')->controller('Facets\AddFacetController', ['topic'])->name('topic.add');
-    Route::get('/blog/add')->controller('Facets\AddFacetController', ['blog'])->name('blog.add');
-    Route::get('/category/add')->controller('Facets\AddFacetController', ['category'])->name('category.add');
-    Route::get('/web/add')->module('catalog', 'App\Add', ['add', 'sites'])->name('site.add');
-    
-    Route::get('/post/edit/{id}')->controller('Post\EditPostController')->where(['id' => '[0-9]+'])->name('post.edit');
-    Route::get('/page/edit/{id}')->controller('Post\EditPostController')->where(['id' => '[0-9]+'])->name('page.edit');
-    Route::get('/answer/edit/{id}')->controller('Answer\EditAnswerController')->where(['id' => '[0-9]+'])->name('answer.edit');
+    // Pages (forms) for adding and changing: (post | page | answer), (topic | category | blog | sections) and site
+    Route::get('/web/add')->module('catalog', 'App\Add')->name('web.add');    
+    Route::get('/add/{type}')->controller('ActionController@add')->where(['type' => '[a-z]+'])->name('content.add');
     Route::get('/web/edit/{id}')->module('catalog', 'App\Edit')->where(['id' => '[0-9]+'])->name('web.edit');
+    Route::get('/edit/{type}/{id}')->controller('ActionController@edit')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('content.edit');
+    // end
 
-    Route::get('/topic/edit/{id}')->controller('Facets\EditFacetController', ['topic'])->name('topic.edit');
-    Route::get('/blog/edit/{id}')->controller('Facets\EditFacetController', ['blog'])->name('blog.edit');
-    Route::get('/sections/edit/{id}')->controller('Facets\EditFacetController', ['section'])->name('section.edit');
-    Route::get('/category/edit/{id}')->controller('Facets\EditFacetController', ['category'])->name('category.edit'); 
-    Route::get('/pages/edit/{id}')->controller('Facets\EditFacetController@pages', ['category'])->name('pages.edit');    
- 
-    Route::get('/post/add/{topic_id}')->controller('Post\AddPostController', ['post'])->where(['topic_id' => '[0-9]+']);
-    Route::get('/page/add/{topic_id}')->controller('Post\AddPostController', ['page'])->where(['topic_id' => '[0-9]+']);
+    Route::get('/add/post/{topic_id}')->controller('Post\AddPostController', ['post'])->where(['topic_id' => '[0-9]+']);
+    Route::get('/add/page/{topic_id}')->controller('Post\AddPostController', ['page'])->where(['topic_id' => '[0-9]+']);
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
     Route::get('/@{login}/delete/cover')->controller('User\SettingController@coverRemove')->where(['login' => '[A-Za-z0-9]+'])->name('delete.cover'); 
@@ -194,7 +173,7 @@ Route::get('/search')->module('search', 'App\Search')->name('search');
 
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
 
-Route::get('/')->controller('HomeController', ['main.feed', 'main']);
+Route::get('/')->controller('HomeController', ['main.feed', 'main'])->name('main');
 Route::get('/page/{page?}')->controller('HomeController', ['main.feed', 'main'])->where(['page' => '[0-9]+']);
 Route::get('/top')->controller('HomeController', ['main.top', 'main'])->name('main.top');
 Route::get('/top/page/{page?}')->controller('HomeController', ['main.top', 'main'])->where(['page' => '[0-9]+']);

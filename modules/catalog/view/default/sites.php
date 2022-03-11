@@ -6,7 +6,7 @@
   <h1>
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) { ?>
-      <a class="text-sm ml5" href="<?= getUrlByName('category.edit', ['id' => $data['category']['facet_id']]); ?>">
+      <a class="text-sm ml5" href="<?= getUrlByName('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
         <sup><i class="bi bi-pencil gray"></i></sup>
       </a>
       <a class="text-sm ml15" href="<?= getUrlByName('admin.category.structure'); ?>">
@@ -25,7 +25,7 @@
           <?= $lt['facet_title']; ?>
         </a> <sup class="gray-400"><?= $lt['counts']; ?></sup>
         <?php if (UserData::checkAdmin()) { ?>
-          <a class="ml5" href="<?= getUrlByName('category.edit', ['id' => $lt['facet_id']]); ?>">
+          <a class="ml5" href="<?= getUrlByName('content.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
             <sup><i class="bi bi-pencil"></i>
           </a>
           <small class="text-sm gray-400"><sup><?= $lt['facet_type']; ?></sup></small>

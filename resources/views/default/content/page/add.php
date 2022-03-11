@@ -4,7 +4,7 @@
     <a href="/"><?= Translate::get('home'); ?></a> /
     <span class="red-500"><?= sprintf(Translate::get('add.option'), Translate::get('pages')); ?></span>
     
-    <form action="<?= getUrlByName('page.create'); ?>" method="post">
+    <form action="<?= getUrlByName('content.create', ['type' => 'page']); ?>" method="post">
       <?= csrf_field() ?>
 
     <fieldset>

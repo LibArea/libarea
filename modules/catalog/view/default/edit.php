@@ -19,43 +19,43 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
 ?>
 
 <div class="grid grid-cols-12 gap-4">
-<main>
-  <div class="max-w640">
+  <main>
+    <div class="max-w640">
 
-    <?= $breadcrumb->render('breadcrumbs'); ?>
+      <?= $breadcrumb->render('breadcrumbs'); ?>
 
-    <fieldset class="gray-400">
-      <?= $domain['item_id']; ?>. <?= $domain['item_url_domain']; ?>
-      <?= website_img($domain['item_url_domain'], 'favicon', $domain['item_url_domain'], ' ml10'); ?>
-      <span class="add-favicon text-sm" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
-    </fieldset>
+      <fieldset class="gray-400">
+        <?= $domain['item_id']; ?>. <?= $domain['item_url_domain']; ?>
+        <?= website_img($domain['item_url_domain'], 'favicon', $domain['item_url_domain'], ' ml10'); ?>
+        <span class="add-favicon text-sm" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
+      </fieldset>
 
-    <form action="<?= getUrlByName('web.edit.pr'); ?>" method="post">
-      <?= csrf_field() ?>
+      <form action="<?= getUrlByName('change.web'); ?>" method="post">
+        <?= csrf_field() ?>
 
-      <?= includeTemplate('/view/default/_block/category', ['data' => $data, 'action' => 'edit']); ?>
+        <?= includeTemplate('/view/default/_block/category', ['data' => $data, 'action' => 'edit']); ?>
 
-      <?= $form->build_form(); ?>
+        <?= $form->build_form(); ?>
 
-      <?= Tpl::insert('/_block/form/select/related-posts', [
-        'data'      => $data,
-        'action'    => 'edit',
-        'type'      => 'post',
-        'title'     => Translate::get('related posts'),
-        'help'      => Translate::get('necessarily'),
-      ]); ?>
+        <?= Tpl::insert('/_block/form/select/related-posts', [
+          'data'      => $data,
+          'action'    => 'edit',
+          'type'      => 'post',
+          'title'     => Translate::get('related posts'),
+          'help'      => Translate::get('necessarily'),
+        ]); ?>
 
-      <input type="hidden" name="item_id" value="<?= $domain['item_id']; ?>">
+        <input type="hidden" name="item_id" value="<?= $domain['item_id']; ?>">
 
-      <?= $form->sumbit(Translate::get('edit')); ?>
-    </form>
-  </div>
- </main>
-<aside>
-  <div class="box-white box-shadow-all text-sm">
-    <h3 class="uppercase-box"><?= Translate::get('help'); ?></h3>
-    <?= Translate::get('add.site.help'); ?>
-  <div>
-</aside>
-</div> 
+        <?= $form->sumbit(Translate::get('edit')); ?>
+      </form>
+    </div>
+  </main>
+  <aside>
+    <div class="box-white box-shadow-all text-sm">
+      <h3 class="uppercase-box"><?= Translate::get('help'); ?></h3>
+      <?= Translate::get('add.site.help'); ?>
+      <div>
+  </aside>
+</div>
 <?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

@@ -2,9 +2,9 @@
   <div class="box-white">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500"><?= Translate::get($data['type']); ?></span>
-
-    <form class="max-w780" action="<?= getUrlByName('post.create'); ?>" method="post" enctype="multipart/form-data">
+    <span class="red-500"><?= sprintf(Translate::get('add.option'), Translate::get('post')); ?></span>
+    
+    <form class="max-w780" action="<?= getUrlByName('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
         <fieldset>
           <label for="post_title"><?= Translate::get('heading'); ?></label>

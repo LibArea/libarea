@@ -51,7 +51,7 @@
 
                 <?php if (accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
                   <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) { ?>
-                    <a class="editansw gray-600 mr10 ml10" href="/answer/edit/<?= $answer['answer_id']; ?>"> 
+                    <a class="editansw gray-600 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>"> 
                       <?= Translate::get('edit'); ?>
                     </a>
                   <?php } ?>

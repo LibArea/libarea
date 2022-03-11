@@ -9,12 +9,11 @@ $form->html_form($user['trust_level'], Config::get('form/facet.forma'));
     <h1 class="text-xl"><?= Translate::get('add'); ?> (<?= Translate::get($data['type']); ?>)</h1>
 
     <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
-      <form class="max-w780" action="<?= getUrlByName('facet.create'); ?>" method="post" enctype="multipart/form-data">
+      <form class="max-w780" action="<?= getUrlByName('content.create', ['type' => $data['type']); ?>" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
         <?= $form->build_form(); ?>
         
-        <input type="hidden" name="facet_type" value="<?= $data['type']; ?>">
         <?= $form->sumbit(Translate::get('add')); ?>
       </form>  
     <?php } else { ?>

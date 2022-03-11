@@ -18,7 +18,7 @@ class Add
 
     // Add Domain Form
     // Форма добавление домена
-    public function index($sheet, $type)
+    public function index()
     {
         // Access rights by the trust level of the participant
         // Права доступа по уровню доверия участника
@@ -31,11 +31,11 @@ class Add
         return view(
             '/view/default/add',
             [
-                'meta'  => meta($m = [], Translate::get('site.add')),
+                'meta'  => meta([], Translate::get('site.add')),
                 'user'  => $this->user,
                 'data'  => [
-                    'sheet'      => $sheet,
-                    'type'       => $type,
+                    'sheet'      => 'add',
+                    'type'       => 'web',
                 ]
             ]
         );

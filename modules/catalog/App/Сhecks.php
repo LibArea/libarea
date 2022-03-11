@@ -3,12 +3,12 @@
 namespace Modules\Catalog\App;
 
 use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
-use Domain, UserData, Validation, Config;
+use Domain, UserData, Config;
 
 class Сhecks
 {
     public const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0';
-    
+
     private $user;
 
     public function __construct()
@@ -64,7 +64,7 @@ class Сhecks
 
         return $in_total;
     }
-    
+
     public static function trustLevel($trust_level, $allowed_tl, $count_content, $count_total)
     {
         if ($trust_level < $allowed_tl) {
@@ -77,8 +77,8 @@ class Сhecks
 
         return true;
     }
-    
-    
+
+
     public static function checkStatus(string $url)
     {
         $ch = curl_init();
@@ -93,8 +93,8 @@ class Сhecks
         $page = curl_exec($ch);
 
         $err = curl_error($ch);
-        if (!empty($err))  
-        return $err;
+        if (!empty($err))
+            return $err;
 
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);

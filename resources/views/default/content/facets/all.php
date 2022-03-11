@@ -42,13 +42,13 @@
       <p class="m0 text-xl">
         <?php if ($data['type'] == 'blog') { ?>
           <?php if ($data['limit']) { ?>
-            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
+            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('content.add', ['type' => $data['type']]); ?>">
               <i class="bi bi-plus-lg middle"></i>
             </a>
           <?php } ?>
         <?php } else { ?>
           <?php if (UserData::checkAdmin()) { ?>
-            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
+            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('content.add', ['type' => $data['type']]); ?>">
               <i class="bi bi-plus-lg middle"></i>
             </a>
           <?php } ?>

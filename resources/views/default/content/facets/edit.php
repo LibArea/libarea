@@ -36,7 +36,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
   </div>
 
   <div class="box-white">
-    <form action="<?= getUrlByName($fs['facet_type'] . '.edit.pr'); ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= getUrlByName('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <i><?= Translate::get('edit'); ?></i>
       <?= Tpl::import('/_block/facet/facet-type', ['type' => $fs['facet_type'], 'tl' => $user['trust_level']]); ?>
@@ -47,7 +47,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
           <div id="start" class="mt15">
             <input id="file-upload" type="file" name="images" accept="image/*" />
-            <div id="notimage" class="none"><?= Translate::get('select.image');?></div>
+            <div id="notimage" class="none"><?= Translate::get('select.image'); ?></div>
           </div>
         </div>
         <div id="response" class="hidden">
@@ -79,19 +79,19 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
 
       <fieldset>
         <label for="facet_title"><?= Translate::get('title'); ?><sup class="red-500">*</sup></label>
-        <input  minlength="3" maxlength="64" type="text" name="facet_title" value="<?= $fs['facet_title']; ?>">
+        <input minlength="3" maxlength="64" type="text" name="facet_title" value="<?= $fs['facet_title']; ?>">
         <div class="help">3 - 64 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
       <fieldset>
         <label for="facet_seo_title"><?= Translate::get('title'); ?> (SEO)<sup class="red-500">*</sup></label>
-        <input  minlength="4" maxlength="255" type="text" name="facet_seo_title" value="<?= $fs['facet_seo_title']; ?>">
+        <input minlength="4" maxlength="255" type="text" name="facet_seo_title" value="<?= $fs['facet_seo_title']; ?>">
         <div class="help">4 - 255 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
       <fieldset>
         <label for="facet_slug"><?= Translate::get('Slug (URL)'); ?><sup class="red-500">*</sup></label>
-        <input  minlength="3" maxlength="32" type="text" name="facet_slug" value="<?= $fs['facet_slug']; ?>">
+        <input minlength="3" maxlength="32" type="text" name="facet_slug" value="<?= $fs['facet_slug']; ?>">
         <div class="help">3 - 32 <?= Translate::get('characters'); ?> (a-z-0-9)</div>
       </fieldset>
 
@@ -152,7 +152,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <fieldset>
         <label for="facet_short_description"><?= Translate::get('short description'); ?><sup class="red-500">*</sup></label>
         <input minlength="11" maxlength="120" value="<?= $fs['facet_short_description']; ?>" type="text" required="" name="facet_short_description">
-        <div class="help">11 - 120 <?= Translate::get('characters'); ?></div>  
+        <div class="help">11 - 120 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
       <fieldset>

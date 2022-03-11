@@ -46,7 +46,7 @@ class EditPostController extends MainController
         return Tpl::agRender(
             $puth,
             [
-                'meta'  => meta($m = [], sprintf(Translate::get('edit.option'), Translate::get('post'))),
+                'meta'  => meta([], sprintf(Translate::get('edit.option'), Translate::get('post'))),
                 'data'  => [
                     'sheet'         => 'edit-post',
                     'type'          => 'edit',
@@ -78,7 +78,7 @@ class EditPostController extends MainController
         if (!accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
-        
+
         // Если пользователь заморожен
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
 
@@ -93,9 +93,9 @@ class EditPostController extends MainController
                 }
             }
             $post_related = implode(',', $id ?? []);
-            $redirect   = getUrlByName('post.edit', ['id' => $post_id]);
+            $redirect   = getUrlByName('content.edit', ['type' => 'post', 'id' => $post_id]);
         } else {
-            $redirect   = getUrlByName('page.edit', ['id' => $post_id]);
+            $redirect   = getUrlByName('content.edit', ['type' => 'page', 'id' => $post_id]);
         }
 
         // Если есть смена post_user_id и это TL5
@@ -153,7 +153,7 @@ class EditPostController extends MainController
         );
 
         self::addFacetsPost($fields, $post_id, $redirect);
-        
+
         redirect('/');
     }
 
@@ -165,13 +165,13 @@ class EditPostController extends MainController
 
         $blog_post  = $fields['blog_select'] ?? false;
         $blog       = json_decode($blog_post, true);
-   
+
         $all_topics = array_merge($blog ?? [], $topics ?? []);
         if (!$all_topics) {
             addMsg('select.topic', 'error');
             redirect($redirect);
-        } 
-        
+        }
+
         $arr = [];
         foreach ($all_topics as $ket => $row) {
             $arr[] = $row;
@@ -208,7 +208,7 @@ class EditPostController extends MainController
 
         $img = $_FILES['image'];
         if ($_FILES['image']['name']) {
-           return json_encode(array('data'=> array('filePath'=>UploadImage::post_img($img, $user_id, $type, $id))));
+            return json_encode(array('data' => array('filePath' => UploadImage::post_img($img, $user_id, $type, $id))));
         }
 
         return false;

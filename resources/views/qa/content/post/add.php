@@ -4,7 +4,7 @@
     <a href="/"><?= Translate::get('home'); ?></a> /
     <span class="red-500"><?= Translate::get($data['type']); ?></span>
 
-    <form action="<?= getUrlByName('post.create'); ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= getUrlByName('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <fieldset>

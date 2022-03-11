@@ -1,6 +1,6 @@
 <main class="col-span-7 mb-col-12">
   <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
- 
+
   <div class="box-white">
     <form class="max-w640" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
@@ -20,7 +20,7 @@
       <fieldset>
         <label for="name"><?= Translate::get('name'); ?></label>
         <input maxlength="11" value="<?= $data['user']['name']; ?>" type="text" name="name">
-        <div class="help">0 - 11 <?= Translate::get('characters'); ?></div>  
+        <div class="help">0 - 11 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
       <?php Tpl::import('/_block/editor/textarea', [
@@ -82,6 +82,6 @@
 </main>
 <aside class="col-span-3 mb-none">
   <div class="box-white text-sm">
-    <?=  Translate::get('info-setting'); ?>
+    <?= Translate::get('info-setting'); ?>
   </div>
 </aside>

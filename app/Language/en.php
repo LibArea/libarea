@@ -209,7 +209,6 @@ $data = [
     'children'          => 'Children',
     'bound (children)'  => 'Bound (children)',
     'bound (parents)'   => 'Bound (parents)',
-    'structure'         => 'Structure',
     'root'              => 'Root',
     'root-help'         => 'The top (main) theme of the tree.',
     'upper'             => 'Upper',
@@ -447,7 +446,6 @@ $data = [
     'recommended posts'         => 'recommended posts',
     'recommended.posts.desc'    => 'Recommended posts in «%1$s» hand - selected. ',
 
-    'structure-desc'            => 'Topics represented by different trees, structure of topics and their relationship ',
     'topic-subscription'        => 'Subscribe to topics and read them in the feed',
     'stop-blog'                 => 'This blog URL is reserved',
     

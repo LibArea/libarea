@@ -13,10 +13,19 @@
 <main class="col-span-10 mb-col-12 ">
   <?php if ($data['type'] != 'admin') { ?>
     <div class="box-flex-white">
-      <?= (new Breadcrumbs())
-        ->base(getUrlByName('admin'), Translate::get('admin'))
-        ->addCrumb(Translate::get($data['type']), $data['type'])->render('breadcrumbs'); ?>
 
+      <?php $breadcrumbs = new Breadcrumbs();
+      $breadcrumbs->base(getUrlByName('admin'), Translate::get('admin')); ?>
+      <?php if (!empty($data['facets']) || $data['sheet'] == 'ban.facet') { ?>
+        <?php $breadcrumbs->addCrumb(Translate::get('facets'), getUrlByName('admin.facets.all'));
+        $breadcrumbs->addCrumb(Translate::get($data['type']), $data['type']); ?>
+      <?php } else { ?>
+        <?php $breadcrumbs->addCrumb(Translate::get($data['type']), $data['type']); ?>
+      <?php } ?>
+
+      <?= $breadcrumbs->render('breadcrumbs'); ?>
+
+      <?php if (!empty($data['users_count'])) { ?><?= $data['users_count'] ?><?php } ?>
       <ul class="flex flex-row list-none m0 p0 center">
         <?php foreach ($menus as $menu) { ?>
           <a class="ml30 mb-mr5 mb-ml10 gray<?php if ($menu['id'] == $data['sheet']) { ?> sky-500<?php } ?>" href="<?= $menu['url']; ?>" <?php if ($menu['id'] == $data['sheet']) { ?> aria-current="page" <?php } ?>>

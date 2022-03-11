@@ -1,9 +1,9 @@
 <?php
-  $css = '';
-  $arr = ['profile', 'register', 'login', 'blog.user', 'recover', 'info.page', 'post'];
-  if (in_array($data['type'], $arr)) {
-     $css = 'menu-none';
-  }
+$css = '';
+$arr = ['profile', 'register', 'login', 'blog.user', 'recover', 'info.page', 'post', 'blog.page'];
+if (in_array($data['type'], $arr)) {
+  $css = 'menu-none';
+}
 ?>
 
 <div class="menu__left <?= $css; ?> col-span-2">

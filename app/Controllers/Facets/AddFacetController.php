@@ -24,7 +24,7 @@ class AddFacetController extends MainController
         return Tpl::agRender(
             '/facets/add',
             [
-                'meta'  => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('topics'))),
+                'meta'  => meta([], sprintf(Translate::get('add.option'), Translate::get('topics'))),
                 'data'  => [
                     'type' => $type,
                 ]
@@ -33,9 +33,8 @@ class AddFacetController extends MainController
     }
 
     // Add topic | blog | category
-    public function create()
+    public function create($facet_type)
     {
-        $facet_type = Request::getPost('facet_type');
         $this->limitFacer($facet_type, 'redirect');
 
         $facet_title                = Request::getPost('facet_title');

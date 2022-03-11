@@ -69,7 +69,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
                       <?= $row['post_title']; ?>
                     </a>
                     <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
-                      <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
+                      <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
                         <i class="bi bi-pencil"></i>
                       </a>
                     <?php } ?>

@@ -31,7 +31,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                                 GROUP BY relation_post_id  
                     ) AS rel ON rel.relation_post_id = post_id  
                         LEFT JOIN users ON id = post_user_id 
-                            WHERE  post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
+                            WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 and post_type = 'post'
                                 AND MATCH(post_title, post_content) AGAINST (:qa)
                                           LIMIT $start, $limit";
 

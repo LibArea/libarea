@@ -15,16 +15,16 @@
       <ul class="mb-none">
         <li><a href="<?= getUrlByName('blogs.all'); ?>"><?= Translate::get('blogs'); ?></a></li>
         <li><a href="<?= getUrlByName('topics.all'); ?>"><?= Translate::get('topics'); ?></a></li>
-        <li><a href="<?= getUrlByName('web.all'); ?>"><?= Translate::get('catalog'); ?></a></li>
+        <li><a href="<?= getUrlByName('web'); ?>"><?= Translate::get('catalog'); ?></a></li>
       </ul>
       <ul class="mb-none">
         <li><a href="<?= getUrlByName('users.all'); ?>"><?= Translate::get('users'); ?></a></li>
         <li><a href="<?= getUrlByName('answers'); ?>"><?= Translate::get('answers'); ?></a></li>
         <li><a href="<?= getUrlByName('comments'); ?>"><?= Translate::get('comments'); ?></a></li>
       </ul>
-      <ul>
+      <ul class="mb-pl0">
         <li><a href="<?= getUrlByName('facet.article', ['slug' => 'info', 'post_slug' => Config::get('facets.page-one')]); ?>"><?= Translate::get('info'); ?></a></li>
-        <li><a href="<?= getUrlByName('facet.article', ['slug' => 'info', 'post_slug' => Config::get('facets.page-two')]); ?>"><?= Translate::get('privacy'); ?></a></li>        
+        <li><a href="<?= getUrlByName('facet.article', ['slug' => 'info', 'post_slug' => Config::get('facets.page-two')]); ?>"><?= Translate::get('privacy'); ?></a></li>
       </ul>
     </div>
   </div>

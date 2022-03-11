@@ -203,7 +203,6 @@ $data = [
     'children'          => 'Copii',
     'bound (children)'  => 'Legat (copii)',
     'bound (parents) '  => 'Legat (părinți)',
-    'structure'         => 'Structura',
     'root'              => 'Rădăcină',
     'root-help'         => 'Tema de sus (principală) a copacului.',
     'upper'             => 'Superior',
@@ -454,7 +453,6 @@ $data = [
     'recommended posts'         => 'postări recomandate ',
     'recommended.posts.desc'    => 'Postări recomandate în  «%1$s» selectat manual. ',
     
-    'structure-desc'            => 'Subiecte reprezentate de diferiți arbori, structura subiectelor și relația lor',
     'topic-subscription'        => 'Abonați-vă la subiecte și citiți-le în feed',
     'stop-blog'                 => 'URL-ul acestui blog este rezervat',
     

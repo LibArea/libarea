@@ -19,7 +19,7 @@
     <div class="gray-400 italic">
       <?= $page['post_modified']; ?>
       <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
-        <a class="gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
+        <a class="gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
           <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>
@@ -38,7 +38,7 @@
           <?= $data['facet']['facet_title']; ?></a>
       </div>
     <?php } ?>
-    <?php $url = $data['type'] == 'blog.page' ? '/blog/' . $data['facet']['facet_slug'] . '/info/' : '/info/article/'; ?>
+    <?php $url = $data['type'] == 'blog.page' ? '/blog/' . $data['facet']['facet_slug'] . '/article/' : '/info/article/'; ?>
     <?php foreach ($data['pages'] as $ind => $row) { ?>
       <a class="block pt5 pb5 gray" href="<?= $url; ?><?= $row['post_slug']; ?>">
         <i class="bi bi-info-square middle mr5"></i> <?= $row['post_title']; ?>
