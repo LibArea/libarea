@@ -7,17 +7,16 @@
       <?= sprintf(Translate::get('edit.option'), Translate::get('post')); ?>
     </span>
     
-    <form action="<?= getUrlByName('content.change', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= getUrlByName('content.change', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <fieldset>
         <label for="post_title"><?= Translate::get('heading'); ?></label>
         <input minlength="6" maxlength="250" id="title" value="<?= $post['post_title']; ?>" type="text" required="" name="post_title">
-        <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>  
+        <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
       <?= Tpl::import('/_block/form/select/blog', [
-        'user'         => $user,
         'data'        => $data,
         'action'      => 'edit',
         'type'        => 'blog',
@@ -25,7 +24,6 @@
       ]); ?>
 
       <?= Tpl::import('/_block/form/select/select', [
-        'user'           => $user,
         'data'          => $data,
         'action'        => 'edit',
         'type'          => 'topic',
@@ -74,7 +72,7 @@
 
       <?= Tpl::import('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
-      <?php if ($post['post_draft'] > 1) { ?>
+      <?php if ($post['post_draft'] > UserData::USER_FIRST_LEVEL) { ?>
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
@@ -86,27 +84,25 @@
         ]); ?>
       <?php } ?>
 
-      <?php if ($user['trust_level'] > > UserData::USER_FIRST_LEVEL) { ?>
-        <?= Tpl::import('/_block/form/select/content-tl', [
-          'user' => $user,
-          'data' => $post['post_tl']
-        ]); ?>
+      <?= Tpl::import('/_block/form/select/content-tl', [
+        'data' => $post['post_tl'],
+        'user' => $user
+      ]); ?>
 
-        <?= Tpl::import('/_block/form/radio', [
-          'data' => [
-            [
-              'title' => Translate::get('format.Q&A'),
-              'name' => 'post_feature',
-              'checked' => $post['post_feature']
-            ],
-            [
-              'title' => Translate::get('close?'),
-              'name' => 'closed',
-              'checked' => $post['post_closed']
-            ],
-          ]
-        ]); ?>
-      <?php } ?>
+      <?= Tpl::import('/_block/form/radio', [
+        'data' => [
+          [
+            'title' => Translate::get('format.Q&A'),
+            'name' => 'post_feature',
+            'checked' => $post['post_feature']
+          ],
+          [
+            'title' => Translate::get('close?'),
+            'name' => 'closed',
+            'checked' => $post['post_closed']
+          ],
+        ]
+      ]); ?>
 
       <?= Tpl::import('/_block/form/radio', [
         'data' => [
@@ -122,25 +118,24 @@
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
-              'title'   => Translate::get('pin'), 
+              'title'   => Translate::get('pin'),
               'name'    => 'top',
               'checked' => $post['post_top']
             ],
           ]
         ]); ?>
+
+        <?= Tpl::import('/_block/form/select/user', [
+          'uid'           => $user,
+          'user'          => $data['user'],
+          'action'        => 'user',
+          'type'          => 'user',
+          'title'         => Translate::get('author'),
+          'help'          => Translate::get('necessarily'),
+        ]); ?>
       <?php } ?>
 
-      <?= Tpl::import('/_block/form/select/user', [
-        'uid'           => $user,
-        'user'          => $data['user'],
-        'action'        => 'user',
-        'type'          => 'user',
-        'title'         => Translate::get('author'),
-        'help'          => Translate::get('necessarily'),
-      ]); ?>
-
       <?= Tpl::import('/_block/form/select/related-posts', [
-        'user'           => $user,
         'data'          => $data,
         'action'        => 'edit',
         'type'          => 'post',

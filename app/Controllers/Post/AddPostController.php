@@ -68,7 +68,7 @@ class AddPostController extends MainController
         $post_top               = Request::getPostInt('top');
         $post_feature           = Request::getPostInt('post_feature');
         $post_translation       = Request::getPostInt('translation');
-        $post_tl                = Request::getPostInt('post_tl');
+        $post_tl                = Request::getPostInt('content_tl');
         $blog_id                = Request::getPostInt('blog_id');
 
         $fields = Request::getPost() ?? [];

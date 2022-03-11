@@ -10,11 +10,11 @@
     <form class="max-w780" action="<?= getUrlByName('content.change', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
-    <fieldset>
-      <label for="post_title"><?= Translate::get('heading'); ?></label>
-      <input minlength="6" maxlength="250" id="title" value="<?= $post['post_title']; ?>" type="text" required="" name="post_title">
-      <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>  
-    </fieldset>
+      <fieldset>
+        <label for="post_title"><?= Translate::get('heading'); ?></label>
+        <input minlength="6" maxlength="250" id="title" value="<?= $post['post_title']; ?>" type="text" required="" name="post_title">
+        <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>
+      </fieldset>
 
       <?= Tpl::import('/_block/form/select/blog', [
         'data'        => $data,
@@ -62,7 +62,7 @@
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
           <div id="start">
             <input id="file-upload" type="file" name="images" accept="image/*" />
-            <div id="notimage" class="none"><?= Translate::get('select.image');?></div>
+            <div id="notimage" class="none"><?= Translate::get('select.image'); ?></div>
           </div>
         </div>
         <div id="response" class="hidden">
@@ -82,26 +82,27 @@
             ],
           ]
         ]); ?>
-
-        <?= Tpl::import('/_block/form/select/content-tl', [
-          'data'    => $post['post_tl']
-        ]); ?>
-
-        <?= Tpl::import('/_block/form/radio', [
-          'data' => [
-            [
-              'title' => Translate::get('format.Q&A'),
-              'name' => 'post_feature',
-              'checked' => $post['post_feature']
-            ],
-            [
-              'title' => Translate::get('close?'),
-              'name' => 'closed',
-              'checked' => $post['post_closed']
-            ],
-          ]
-        ]); ?>
       <?php } ?>
+
+      <?= Tpl::import('/_block/form/select/content-tl', [
+        'data' => $post['post_tl'],
+        'user' => $user
+      ]); ?>
+
+      <?= Tpl::import('/_block/form/radio', [
+        'data' => [
+          [
+            'title' => Translate::get('format.Q&A'),
+            'name' => 'post_feature',
+            'checked' => $post['post_feature']
+          ],
+          [
+            'title' => Translate::get('close?'),
+            'name' => 'closed',
+            'checked' => $post['post_closed']
+          ],
+        ]
+      ]); ?>
 
       <?= Tpl::import('/_block/form/radio', [
         'data' => [
@@ -123,16 +124,16 @@
             ],
           ]
         ]); ?>
-      <?php } ?>
 
-      <?= Tpl::import('/_block/form/select/user', [
-        'uid'           => $user,
-        'user'          => $data['user'],
-        'action'        => 'user',
-        'type'          => 'user',
-        'title'         => Translate::get('author'),
-        'help'          => Translate::get('necessarily'),
-      ]); ?>
+        <?= Tpl::import('/_block/form/select/user', [
+          'uid'           => $user,
+          'user'          => $data['user'],
+          'action'        => 'user',
+          'type'          => 'user',
+          'title'         => Translate::get('author'),
+          'help'          => Translate::get('necessarily'),
+        ]); ?>
+      <?php } ?>
 
       <?= Tpl::import('/_block/form/select/related-posts', [
         'data'          => $data,

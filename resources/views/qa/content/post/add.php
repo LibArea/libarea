@@ -4,9 +4,8 @@
     <a href="/"><?= Translate::get('home'); ?></a> /
     <span class="red-500"><?= Translate::get($data['type']); ?></span>
 
-    <form action="<?= getUrlByName('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= getUrlByName('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
-
       <fieldset>
         <label for="post_title"><?= Translate::get('heading'); ?></label>
         <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
@@ -15,7 +14,6 @@
 
       <?php if (!empty($data['blog'])) { ?>
         <?= Tpl::import('/_block/form/select/blog', [
-          'user'         => $user,
           'data'        => $data,
           'action'      => 'add',
           'type'        => 'blog',
@@ -24,7 +22,6 @@
       <?php } ?>
 
       <?= Tpl::import('/_block/form/select/select', [
-        'user'           => $user,
         'data'          => $data['facets'],
         'type'          => 'topic',
         'action'        => 'add',
@@ -53,7 +50,7 @@
               <?= Translate::get('format-cover-post'); ?>.
             </div>
             <i class="fa fa-download" aria-hidden="true"></i>
-            <div id="notimage" class="none"><?= Translate::get('select.image');?></div>
+            <div id="notimage" class="none"><?= Translate::get('select.image'); ?></div>
           </div>
         </div>
         <div id="response" class="hidden">
@@ -113,7 +110,6 @@
       <?php } ?>
 
       <?= Tpl::import('/_block/form/select/related-posts', [
-        'user'          => $user,
         'data'          => [],
         'action'        => 'add',
         'type'          => 'post',
