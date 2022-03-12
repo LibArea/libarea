@@ -57,9 +57,9 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
-                    favorite_tid, 
-                    favorite_user_id, 
-                    favorite_type,
+                    fav.tid, 
+                    fav.user_id, 
+                    fav.action_type,
                     rel.*,
                     item_id,
                     item_url,
@@ -73,7 +73,7 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                     item_following_link,
                     item_published,
                     votes_item_user_id, votes_item_item_id
-                        FROM favorites
+                        FROM favorites fav
                         LEFT JOIN
                         (
                             SELECT 
@@ -85,11 +85,11 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
 
                                         GROUP BY relation_item_id
                         ) AS rel
-                            ON rel.relation_item_id = favorite_tid
-                            LEFT JOIN items ON item_id = favorite_tid 
-                            LEFT JOIN votes_item ON votes_item_item_id = favorite_tid 
+                            ON rel.relation_item_id = fav.tid
+                            LEFT JOIN items ON item_id = fav.tid 
+                            LEFT JOIN votes_item ON votes_item_item_id = fav.tid 
                                 AND votes_item_user_id = :uid
-                                    WHERE favorite_user_id = :uid_two AND favorite_type = 3 AND item_published = 1
+                                    WHERE fav.user_id = :uid_two AND fav.action_type = 'website' AND item_published = 1
                                     LIMIT $start, $limit";
 
         return  DB::run($sql, ['uid' => $uid, 'uid_two' => $uid])->fetchAll();
@@ -97,7 +97,7 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function bookmarksCount($uid)
     {
-        $sql = "SELECT favorite_user_id FROM favorites WHERE favorite_user_id = :uid AND favorite_type = 3";
+        $sql = "SELECT user_id FROM favorites WHERE user_id = :uid AND action_type = 'website'";
 
         return  DB::run($sql, ['uid' => $uid])->rowCount();
     }

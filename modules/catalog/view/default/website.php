@@ -3,7 +3,7 @@
   <div class="col-span-1 mb-none center mt30">
     <?= votes($user['id'], $data['item'], 'item', 'ps', 'text-2xl middle', 'block'); ?>
     <div class="pt20">
-      <?= favorite($user['id'], $data['item']['item_id'], 'item', $data['item']['favorite_tid'], 'ps', 'text-2xl'); ?>
+      <?= favorite($user['id'], $data['item']['item_id'], 'website', $data['item']['tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
   <main class="website">

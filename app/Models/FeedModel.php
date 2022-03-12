@@ -77,8 +77,8 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                     post_is_deleted,
                     rel.*,
                     votes_post_item_id, votes_post_user_id,
-                    id, login, avatar, 
-                    favorite_tid, favorite_user_id, favorite_type
+                    u.id, u.login, u.avatar, 
+                    fav.tid, fav.user_id, fav.action_type
                     
                         FROM posts
                         LEFT JOIN
@@ -94,8 +94,9 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                         ) AS rel
                             ON rel.relation_post_id = post_id 
                             
-                            INNER JOIN users ON id = post_user_id
-                            LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = " . $user['id'] . " AND favorite_type = 1
+                            INNER JOIN users u ON u.id = post_user_id
+                            LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = " . $user['id'] . " 
+                                AND fav.action_type = 'post'
                             LEFT JOIN votes_post ON votes_post_item_id = post_id 
                                 AND votes_post_user_id = " . $user['id'] . "
                                         

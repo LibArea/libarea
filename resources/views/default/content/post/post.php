@@ -75,7 +75,7 @@
           <?php } ?>
         </div>
         <div class="flex flex-row items-center">
-          <?= favorite($user['id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', ''); ?>
+          <?= favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'ps', ''); ?>
         </div>
       </div>
     </div>

@@ -79,7 +79,6 @@ class AddFacetController extends MainController
                 'facet_short_description'   => $facet_short_description,
                 'facet_slug'                => $facet_slug,
                 'facet_img'                 => 'facet-default.png',
-                'facet_add_date'            => date("Y-m-d H:i:s"),
                 'facet_seo_title'           => $facet_seo_title,
                 'facet_user_id'             => $this->user['id'],
                 'facet_type'                => $type,

@@ -78,6 +78,7 @@ a.active > i,
 .menu__left.menu-none {
   opacity: 0;
   position: absolute;
+  display: block;
 }
 
 @media (max-width: 980px) {

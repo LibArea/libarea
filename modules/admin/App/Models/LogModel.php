@@ -16,7 +16,7 @@ class LogModel extends \Hleb\Scheme\App\Models\MainModel
                     user_id,
                     user_login,
                     id_content,
-                    type_content,
+                    action_type,
                     action_name,
                     url_content,
                     add_date
@@ -43,7 +43,7 @@ class LogModel extends \Hleb\Scheme\App\Models\MainModel
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
                     a.id as audit_id,
-                    a.type_content,
+                    a.action_type,
                     a.type_belonging,
                     a.add_date,
                     a.user_id,

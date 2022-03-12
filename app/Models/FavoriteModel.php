@@ -13,18 +13,14 @@ class FavoriteModel extends \Hleb\Scheme\App\Models\MainModel
 
         if (is_array($result)) {
 
-            $sql = "DELETE FROM favorites 
-                        WHERE favorite_tid = :favorite_tid 
-                            AND favorite_user_id = :favorite_user_id 
-                            AND favorite_type = :favorite_type";
+            $sql = "DELETE FROM favorites WHERE tid = :tid AND user_id = :user_id AND action_type = :action_type";
 
             DB::run($sql, $params);
 
             return 'del';
         }
 
-        $sql = "INSERT INTO favorites(favorite_tid, favorite_user_id, favorite_type) 
-                       VALUES(:favorite_tid, :favorite_user_id, :favorite_type)";
+        $sql = "INSERT INTO favorites(tid, user_id, action_type) VALUES(:tid, :user_id, :action_type)";
 
         DB::run($sql, $params);
 
@@ -33,9 +29,8 @@ class FavoriteModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getUserFavorite($params)
     {
-        $sql = "SELECT favorite_tid, favorite_user_id, favorite_type
-                    FROM favorites 
-                        WHERE favorite_tid = :favorite_tid AND favorite_user_id = :favorite_user_id AND favorite_type = :favorite_type";
+        $sql = "SELECT tid, user_id, action_type FROM favorites 
+                    WHERE tid = :tid AND user_id = :user_id AND action_type = :action_type";
 
         return  DB::run($sql, $params)->fetch();
     }

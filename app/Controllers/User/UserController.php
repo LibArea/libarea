@@ -61,7 +61,7 @@ class UserController extends MainController
         $result = [];
         foreach ($favorites as $ind => $row) {
 
-            if ($row['favorite_type'] == 1) {
+            if ($row['action_type'] == 'post') {
                 $row['answer_post_id'] = $row['post_id'];
             }
 

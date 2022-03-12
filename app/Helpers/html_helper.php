@@ -230,12 +230,12 @@ function votes($user_id, $content, $type, $ind, $css = '', $block = '')
     return $html;
 }
 
-function favorite($user_id, $content_id, $type, $favorite_tid, $ind, $css = '')
+function favorite($user_id, $content_id, $type, $tid, $ind, $css = '')
 {
     $html  = '';
     if ($user_id > 0) {
-        $blue = $favorite_tid ? 'sky-500' : 'gray-400';
-        $my   = $favorite_tid ? 'bi bi-bookmark-dash' : 'bi-bookmark-plus';
+        $blue = $tid ? 'sky-500' : 'gray-400';
+        $my   = $tid ? 'bi bi-bookmark-dash' : 'bi-bookmark-plus';
         $html .= '<span id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . ' middle"></i></span>';
     } else {
         $html .= '<span class="click-no-auth gray-400 ' . $css . '">

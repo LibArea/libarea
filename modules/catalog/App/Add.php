@@ -114,7 +114,7 @@ class Add
                 'user_id'       => $this->user['id'],
                 'user_login'    => $this->user['login'],
                 'id_content'    => $item_last['item_id'],
-                'type_content'  => 'website',
+                'action_type'   => 'website',
                 'action_name'   => 'content.added',
                 'url_content'   => getUrlByName('web.audits'),
             ]

@@ -10,8 +10,8 @@ class AuditModel extends \Hleb\Scheme\App\Models\MainModel
     // Добавим запись в таблицу аудита (аудит или флаг)
     public static function add($params)
     {
-        $sql = "INSERT INTO audits(type_content, type_belonging, user_id, content_id, read_flag) 
-                    VALUES(:type_content, :type_belonging, :user_id, :content_id, 0)";
+        $sql = "INSERT INTO audits(action_type, type_belonging, user_id, content_id, read_flag) 
+                    VALUES(:action_type, :type_belonging, :user_id, :content_id, 0)";
 
         return DB::run($sql, $params);
     }

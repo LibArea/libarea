@@ -27,8 +27,8 @@
             </a>
             <sup class="gray-400 ml5">id:<?= $log['user_id']; ?></sup>
           </td>
-          <td class="gray-400"><?= Translate::get($log['type_content']); ?></td>
-          <td><?= sprintf(Translate::get($log['action_name']), Translate::get($log['type_content'])); ?></td>
+          <td class="gray-400"><?= Translate::get($log['action_type']); ?></td>
+          <td><?= sprintf(Translate::get($log['action_name']), Translate::get($log['action_type'])); ?></td>
           <td class="gray-400"><?= lang_date($log['add_date']); ?></td>
           <th><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><i class="bi bi-eye"></i></a></th>
         </tr>

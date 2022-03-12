@@ -19,7 +19,7 @@
           <?php } ?>
 
           <?php if (!empty($delete_fav)) { ?>
-            <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="item">
+            <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="website">
               <i class="bi bi-trash red-500"></i>
             </span>
           <?php } ?>
@@ -44,7 +44,7 @@
               </div>
             </div>
             <div class="flex right gray-400">
-              <?= favorite($user['id'], $item['item_id'], 'item', $item['favorite_tid'], 'ps', 'mr20'); ?>
+              <?= favorite($user['id'], $item['item_id'], 'website', $item['tid'], 'ps', 'mr20'); ?>
               <?= votes($user['id'], $item, 'item', 'ps', 'mr5'); ?>
             </div>
           </div>

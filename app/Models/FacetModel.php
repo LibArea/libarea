@@ -378,7 +378,6 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                         facet_short_description,
                         facet_slug, 
                         facet_img,
-                        facet_add_date,
                         facet_seo_title,
                         facet_user_id,
                         facet_type) 
@@ -387,7 +386,6 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                                 :facet_short_description, 
                                 :facet_slug, 
                                 :facet_img, 
-                                :facet_add_date,
                                 :facet_seo_title,
                                 :facet_user_id,
                                 :facet_type)";

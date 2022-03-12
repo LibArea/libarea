@@ -29,13 +29,13 @@ class Audits
         $result = [];
         foreach ($audits  as $ind => $row) {
 
-            if ($row['type_content'] == 'post') {
+            if ($row['action_type'] == 'post') {
                 $row['content'] = PostModel::getPost($row['content_id'], 'id', $this->user);
-            } elseif ($row['type_content'] == 'answer') {
+            } elseif ($row['action_type'] == 'answer') {
                 $row['content'] = AnswerModel::getAnswerId($row['content_id']);
 
                 $row['post'] = PostModel::getPost($row['content']['answer_post_id'], 'id', $this->user);
-            } elseif ($row['type_content'] == 'comment') {
+            } elseif ($row['action_type'] == 'comment') {
                 $row['content'] = CommentModel::getCommentsId($row['content_id']);
             }
 

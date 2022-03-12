@@ -36,10 +36,9 @@ class VotesController extends MainController
         $info = VotesModel::voteStatus($up_id, $this->user['id'], $type);
         if ($info) return false;
 
-        $date = date("Y-m-d H:i:s");
         $ip = Request::getRemoteAddress();
 
-        VotesModel::saveVote($up_id, $ip, $this->user['id'], $date, $type);
+        VotesModel::saveVote($up_id, $ip, $this->user['id'], $type);
         VotesModel::saveVoteContent($up_id, $type);
 
         return true;

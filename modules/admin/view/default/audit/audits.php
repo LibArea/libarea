@@ -41,7 +41,7 @@
           </td>
           <td class="text-sm">
             <div class="content-telo">
-              <?php $content = $audit['content'][$audit['type_content'] . '_content']; ?>
+              <?php $content = $audit['content'][$audit['action_type'] . '_content']; ?>
               <?= Content::text(fragment($content), 'text'); ?>
             </div>
 
@@ -57,11 +57,11 @@
               <i class="bi bi-pencil"></i>
             </a>
             <span class="mr5 ml5"> &#183; </span>
-             <?= $audit['content'][$audit['type_content'] . '_date']; ?>
+             <?= $audit['content'][$audit['action_type'] . '_date']; ?>
             <span class="mr5 ml5"> &#183; </span>
 
-            <?= Translate::get('type'); ?>: <i><?= $audit['type_content']; ?></i>
-            <?php if ($audit['content'][$audit['type_content'] . '_is_deleted'] == 1) { ?>
+            <?= Translate::get('type'); ?>: <i><?= $audit['action_type']; ?></i>
+            <?php if ($audit['content'][$audit['action_type'] . '_is_deleted'] == 1) { ?>
               <span class="red-500"><?= Translate::get('deleted'); ?> </span>
             <?php } ?>
 
@@ -75,8 +75,8 @@
           </td>
           <th><?= Translate::get($audit['type_belonging']); ?></th>
           <td class="center">
-            <a data-id="<?= $audit['content'][$audit['type_content'] . '_id']; ?>" data-type="<?= $audit['type_content']; ?>" class="type-action text-sm">
-              <?php if ($audit['content'][$audit['type_content'] . '_is_deleted'] == 1) { ?>
+            <a data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" data-type="<?= $audit['action_type']; ?>" class="type-action text-sm">
+              <?php if ($audit['content'][$audit['action_type'] . '_is_deleted'] == 1) { ?>
                 <span class="red-500">
                   <?= Translate::get('recover'); ?>
                 </span>
@@ -96,7 +96,7 @@
                     <?= $audit['user_id']; ?>
                   </a>
                 <?php } else { ?>
-                  <a data-status="<?= $audit['type_content']; ?>" data-id="<?= $audit['content'][$audit['type_content'] . '_id']; ?>" class="audit-status text-sm">
+                  <a data-status="<?= $audit['action_type']; ?>" data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" class="audit-status text-sm">
                     <?= Translate::get('to approve'); ?>
                   </a>
                   <div class="text-xs"><?= Translate::get('off.mute.mode'); ?></div>

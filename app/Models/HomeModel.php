@@ -57,8 +57,8 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 post_is_deleted,
                 rel.*,
                 votes_post_item_id, votes_post_user_id,
-                id, login, avatar, 
-                favorite_tid, favorite_user_id, favorite_type 
+                u.id, u.login, u.avatar, 
+                fav.tid, fav.user_id, fav.action_type 
   
             FROM facets_posts_relation 
             LEFT JOIN posts ON relation_post_id = post_id
@@ -73,9 +73,9 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                         GROUP BY relation_post_id
             ) AS rel
                  ON rel.relation_post_id= post_id
-                LEFT JOIN users ON id = post_user_id
-                LEFT JOIN favorites ON favorite_tid = post_id 
-                    AND favorite_user_id = :uid AND favorite_type = 1  
+                LEFT JOIN users u ON u.id = post_user_id
+                LEFT JOIN favorites fav ON fav.tid = post_id 
+                    AND fav.user_id = :uid AND fav.action_type = 'post'  
                 LEFT JOIN votes_post 
                     ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
 

@@ -102,18 +102,18 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_url_domain,
                     post_hits_count,
                     post_is_deleted,
-                    id,
-                    login,
-                    avatar,
+                    u.id,
+                    u.login,
+                    u.avatar,
                     my_post,
                     votes_post_item_id,
                     votes_post_user_id,
-                    favorite_tid, 
-                    favorite_user_id, 
-                    favorite_type
+                    fav.tid, 
+                    fav.user_id, 
+                    fav.action_type
                         FROM posts
-                        LEFT JOIN users ON id = post_user_id
-                        LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = $uid AND favorite_type = 1 
+                        LEFT JOIN users u ON u.id = post_user_id
+                        LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $uid AND fav.action_type = 'post' 
                         LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $uid
                             WHERE $sort AND post_tl <= :trust_level";
 
@@ -464,8 +464,8 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_is_deleted,
                     rel.*,
                     votes_post_item_id, votes_post_user_id,
-                    id, login, avatar, 
-                    favorite_tid, favorite_user_id, favorite_type
+                    u.id, u.login, u.avatar, 
+                    fav.tid, fav.user_id, fav.action_type
                     
                         FROM posts
                         LEFT JOIN
@@ -481,9 +481,9 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                         ) AS rel
                             ON rel.relation_post_id = post_id 
 
-            INNER JOIN users ON id = post_user_id
+            INNER JOIN users u ON u.id = post_user_id
             LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $uid
-            LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = $uid AND favorite_type = 1
+            LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $uid AND fav.action_type = 'post'
             $string  LIMIT 100";
 
         return DB::run($sql)->fetchAll();

@@ -56,7 +56,7 @@ class ActionController extends MainController
                 'user_id'       => $this->user['id'],
                 'user_login'    => $this->user['login'],
                 'id_content'    => $info_type[$type . '_id'] ?? 0,
-                'type_content'  => $type,
+                'action_type'   => $type,
                 'action_name'   => $log_action_name,
                 'url_content'   => $url,
             ]

@@ -163,7 +163,6 @@ class RegisterController extends MainController
         $email_code = randomString('crypto', 20);
         UserModel::sendActivateEmail(
             [
-                'pubdate'       => date("Y-m-d H:i:s"),
                 'user_id'       => $active_uid,
                 'email_code'    => $email_code,
             ]

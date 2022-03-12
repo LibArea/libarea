@@ -65,20 +65,20 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                     answer_published,
                     votes_answer_item_id, 
                     votes_answer_user_id,
-                    favorite_tid,
-                    favorite_user_id,
-                    favorite_type,
-                    id, 
-                    login, 
-                    avatar
+                    fav.tid,
+                    fav.user_id,
+                    fav.action_type,
+                    u.id, 
+                    u.login, 
+                    u.avatar
                         FROM answers
-                        INNER JOIN users ON id = answer_user_id
+                        INNER JOIN users u ON u.id = answer_user_id
                         INNER JOIN posts ON answer_post_id = post_id 
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
                             AND votes_answer_user_id = $uid
-                        LEFT JOIN favorites ON favorite_tid = answer_id
-                            AND favorite_user_id  = $uid
-                            AND favorite_type = 2    
+                        LEFT JOIN favorites fav ON fav.tid = answer_id
+                            AND fav.user_id  = $uid
+                            AND fav.action_type = 'answer'    
                         $sort
                         ORDER BY answer_id DESC LIMIT $start, $limit ";
 
@@ -145,19 +145,19 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                     answer_is_deleted,
                     votes_answer_item_id, 
                     votes_answer_user_id,
-                    favorite_tid,
-                    favorite_user_id,
-                    favorite_type,
-                    id, 
-                    login,
-                    avatar
+                    fav.tid,
+                    fav.user_id,
+                    fav.action_type,
+                    u.id, 
+                    u.login,
+                    u.avatar
                         FROM answers
-                        LEFT JOIN users ON id = answer_user_id
+                        LEFT JOIN users u ON u.id = answer_user_id
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
                             AND votes_answer_user_id = $uid
-                        LEFT JOIN favorites ON favorite_tid = answer_id
-                            AND favorite_user_id  = $uid
-                            AND favorite_type = 2
+                        LEFT JOIN favorites fav ON fav.tid = answer_id
+                            AND fav.user_id  = $uid
+                            AND fav.action_type = 'answer'
                             WHERE answer_post_id = $post_id
                             $sort ";
 

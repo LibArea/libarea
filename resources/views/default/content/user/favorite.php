@@ -33,7 +33,7 @@
     <?php foreach ($data['favorites'] as $content) { ?>
       <div class="box-white">
         <h3>
-          <?php if ($content['favorite_type'] == 1) {  ?>
+          <?php if ($content['action_type'] == 'post') { ?>
             <div class="pr15 text-sm flex gray-400">
               <?= user_avatar_img($content['post']['avatar'], 'small', $content['post']['login'], 'ava-sm'); ?>
               <?= $content['post']['login']; ?>
@@ -47,8 +47,8 @@
             <a class="font-normal black" href="<?= getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]); ?>">
               <?= $content['post_title']; ?>
             </a>
-          <?php } elseif ($content['favorite_type'] == 3) { ?>
-            <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $content['item_id']; ?>" data-type="item">
+          <?php } elseif ($content['action_type'] == 'website') { ?>
+            <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $content['item_id']; ?>" data-type="website">
               <i class="bi bi-trash red-500"></i>
             </span>
             <a class="black" href="<?= getUrlByName('web.website', ['slug' => $content['item_url_domain']]); ?>#answer_<?= $content['answer_id']; ?>">
@@ -78,7 +78,7 @@
             </a>
           <?php } ?>
         </h3>
-        <?php if (!empty($content['favorite_type']) == 2) {
+        <?php if (!empty($content['action_type']) == 'answer') {
           echo $content['answer_content'];
         } ?>
       </div>

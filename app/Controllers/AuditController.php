@@ -145,7 +145,7 @@ class AuditController extends MainController
     {
         AuditModel::add(
             [
-                'type_content'      => $type,
+                'action_type'       => $type,
                 'type_belonging'    => 'audit',
                 'user_id'           => $this->user['id'],
                 'content_id'        => $last_content_id,
@@ -204,7 +204,7 @@ class AuditController extends MainController
 
         AuditModel::add(
             [
-                'type_content'      => $content_type,
+                'action_type'       => $content_type,
                 'type_belonging'    => 'report',
                 'user_id'           => $this->user['id'],
                 'content_id'        => $content_id,

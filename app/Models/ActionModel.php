@@ -118,13 +118,13 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "INSERT INTO users_action_logs(user_id, 
                         user_login, 
                         id_content, 
-                        type_content, 
+                        action_type, 
                         action_name, 
                         url_content) 
                             VALUES(:user_id, 
                                 :user_login, 
                                 :id_content, 
-                                :type_content, 
+                                :action_type, 
                                 :action_name, 
                                 :url_content)";
 

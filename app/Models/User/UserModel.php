@@ -142,13 +142,13 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     public static function userFavorite($uid)
     {
         $sql = "SELECT 
-                    favorite_id,
-                    favorite_user_id, 
-                    favorite_type,
-                    favorite_tid,
-                    id, 
-                    login,
-                    avatar, 
+                    fav.id,
+                    fav.user_id, 
+                    fav.action_type,
+                    fav.tid,
+                    u.id, 
+                    u.login,
+                    u.avatar, 
                     post_id,
                     post_title,
                     post_slug,
@@ -161,12 +161,12 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     item_title_url,
                     item_url,
                     item_url_domain
-                        FROM favorites
-                        LEFT JOIN users ON id = favorite_user_id
-                        LEFT JOIN posts ON post_id = favorite_tid AND favorite_type = 1
-                        LEFT JOIN answers ON answer_id = favorite_tid AND favorite_type = 2
-                        LEFT JOIN items ON item_id = favorite_tid AND favorite_type = 3
-                        WHERE favorite_user_id = :uid ORDER BY favorite_id DESC LIMIT 100";
+                        FROM favorites fav
+                        LEFT JOIN users u ON u.id = fav.user_id
+                        LEFT JOIN posts ON post_id = fav.tid AND fav.action_type = 'post'
+                        LEFT JOIN answers ON answer_id = fav.tid AND fav.action_type = 'answer'
+                        LEFT JOIN items ON item_id = fav.tid AND fav.action_type = 'website'
+                        WHERE fav.user_id = :uid ORDER BY fav.id DESC LIMIT 100";
 
         return DB::run($sql, ['uid' => $uid])->fetchAll();
     }
@@ -309,8 +309,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     // Email Activation
     public static function sendActivateEmail($params)
     {
-        $sql = "INSERT INTO users_email_activate(pubdate, user_id, email_code) 
-                       VALUES(:pubdate, :user_id, :email_code)";
+        $sql = "INSERT INTO users_email_activate(user_id, email_code) VALUES(:user_id, :email_code)";
 
         return DB::run($sql, $params);
     }

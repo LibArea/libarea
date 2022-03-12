@@ -98,7 +98,7 @@ class AddCommentController extends MainController
                 'user_id'       => $this->user['id'],
                 'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
-                'type_content'  => 'comment',
+                'action_type'   => 'comment',
                 'action_name'   => 'content.added',
                 'url_content'   => $url,
             ]

@@ -28,7 +28,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_is_deleted,
                     rel.*,
                     votes_item_user_id, votes_item_item_id,
-                    favorite_tid, favorite_user_id, favorite_type 
+                    fav.tid, fav.user_id, fav.action_type 
                         FROM items
                         LEFT JOIN
                         (
@@ -42,8 +42,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                         GROUP BY relation_item_id
                         ) AS rel
                             ON rel.relation_item_id = item_id 
-                        LEFT JOIN favorites ON favorite_tid = item_id 
-                           AND favorite_user_id = :uid AND favorite_type = 3
+                        LEFT JOIN favorites fav ON fav.tid = item_id 
+                           AND fav.user_id = :uid AND fav.action_type = 'website'
                         LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid_two
                         $sort
                         LIMIT $start, $limit ";
@@ -120,8 +120,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_is_deleted,
                     rel.*,
                     votes_item_user_id, votes_item_item_id,
-                    favorite_tid, favorite_user_id, favorite_type 
-                    id, login, avatar
+                    fav.tid, fav.user_id, fav.action_type, 
+                    u.id, u.login, u.avatar
   
                         FROM facets_items_relation 
                         LEFT JOIN items ON relation_item_id = item_id
@@ -136,9 +136,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                     GROUP BY relation_item_id
                         ) AS rel
                              ON rel.relation_item_id = item_id
-                            LEFT JOIN users ON id = item_user_id
-                            LEFT JOIN favorites ON favorite_tid = item_id 
-                                AND favorite_user_id = :uid AND favorite_type = 3
+                            LEFT JOIN users u ON u.id = item_user_id
+                            LEFT JOIN favorites fav ON fav.tid = item_id 
+                                AND fav.user_id = :uid AND fav.action_type = 'website'
                             LEFT JOIN votes_item 
                                 ON votes_item_item_id = item_id AND votes_item_user_id = :uid_two
 
@@ -214,7 +214,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_is_deleted,
                     votes_item_user_id, votes_item_item_id,
                     rel.*,
-                    favorite_tid, favorite_user_id, favorite_type 
+                    fav.tid, fav.user_id, fav.action_type 
                         FROM items
                         LEFT JOIN
                         (
@@ -229,8 +229,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                         ) AS rel
                             ON rel.relation_item_id = item_id 
                         LEFT JOIN votes_item ON votes_item_item_id = item_id AND votes_item_user_id = :uid
-                        LEFT JOIN favorites ON favorite_tid = item_id 
-                                AND favorite_user_id = :uid_two AND favorite_type = 3
+                        LEFT JOIN favorites fav ON fav.tid = item_id 
+                                AND fav.user_id = :uid_two AND fav.action_type = 'website'
                         WHERE item_url_domain = :domain AND item_is_deleted = 0";
 
 

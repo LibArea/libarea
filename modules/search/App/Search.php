@@ -12,7 +12,6 @@ use voku\helper\StopWords;
 
 class Search
 {
-
     protected $limit = 100;
 
     private $user;
@@ -23,7 +22,7 @@ class Search
     }
 
     public function index()
-    {
+    {    
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
         $query  = Request::getGet('q');
@@ -35,8 +34,8 @@ class Search
         if (!in_array($type, $arr)) {
             redirect(getUrlByName('search'));
         }
-
-        if (Request::getGet('q')) {
+ 
+        if ($query) {
 
             if ($query == '') {
                 redirect(getUrlByName('search'));
@@ -45,19 +44,14 @@ class Search
             $query  = self::stemmerAndStopWords($query);
             $result = self::search($page, $this->limit, $query, $type);
             $count  = self::searchCount($query, $type);
-        }
 
-        $result     = $result ?? null;
-        $quantity   = $count ?? null;
-
-        if (Request::getPost('q')) {
             self::setLogs(
                 [
                     'request'       => $query,
                     'action_type'   => $type,
                     'add_ip'        => Request::getRemoteAddress(),
                     'user_id'       => $this->user['id'],
-                    'count_results' => $quantity ?? 0,
+                    'count_results' => $count ?? 0,
                 ]
             );
         }
@@ -73,8 +67,8 @@ class Search
                     'type'          => $type,
                     'sheet'         => 'admin',
                     'query'         => $query ?? null,
-                    'count'         => $quantity,
-                    'pagesCount'    => ceil($quantity / $this->limit),
+                    'count'         => $count,
+                    'pagesCount'    => ceil($count / $this->limit),
                     'pNum'          => $page,
                     'tags'          => self::searchTags($query, $facet, 4),
                 ]

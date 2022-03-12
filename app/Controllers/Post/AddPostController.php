@@ -169,7 +169,7 @@ class AddPostController extends MainController
                 'user_id'       => $this->user['id'],
                 'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
-                'type_content'  => $type,
+                'action_type'   => $type,
                 'action_name'   => 'content.added',
                 'url_content'   => $url,
             ]

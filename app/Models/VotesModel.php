@@ -28,22 +28,20 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Записываем лайк
-    public static function saveVote($content_id, $ip, $user_id, $date, $type)
+    public static function saveVote($content_id, $ip, $user_id, $type)
     {
         $params = [
             'item_id'   => $content_id,
             'points'    => 1,
             'ip'        => $ip,
             'user_id'   => $user_id,
-            'date'      => $date,
         ];
 
         $sql = "INSERT INTO votes_" . $type . "(votes_" . $type . "_item_id, 
                                                 votes_" . $type . "_points, 
                                                 votes_" . $type . "_ip,
-                                                votes_" . $type . "_user_id,
-                                                votes_" . $type . "_date) 
-                                                    VALUES(:item_id, :points, :ip, :user_id, :date)";
+                                                votes_" . $type . "_user_id) 
+                                                    VALUES(:item_id, :points, :ip, :user_id)";
 
         return DB::run($sql, $params);
     }

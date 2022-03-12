@@ -3,7 +3,7 @@
   <div class="sticky top-xl">
     <?= votes($user['id'], $post, 'post', 'ps', 'text-2xl middle mt15', 'block'); ?>
     <div class="pt20">
-      <?= favorite($user['id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', 'text-2xl'); ?>
+      <?= favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
 </div>
@@ -180,7 +180,7 @@
         </div>
 
         <div class="right ml15 p10 none mb-block">
-          <?= favorite($user['id'], $post['post_id'], 'post', $post['favorite_tid'], 'mob', 'text-2xl'); ?>
+          <?= favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'mob', 'text-2xl'); ?>
         </div>
       </div>
 
