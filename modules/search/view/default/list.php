@@ -5,7 +5,6 @@
     <?php } else { ?>
       <a class="text-xl" target="_blank" rel="nofollow noreferrer" href="<?= $gist['item_url']; ?>">
     <?php } ?>
-     
       <?= $gist['title']; ?>
     </a>
     <?= facets($gist['facet_list'], 'topic', 'topic', 'mr15 tags'); ?>

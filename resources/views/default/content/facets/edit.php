@@ -36,7 +36,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
   </div>
 
   <div class="box-white">
-    <form action="<?= getUrlByName('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= getUrlByName('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <i><?= Translate::get('edit'); ?></i>
       <?= Tpl::import('/_block/facet/facet-type', ['type' => $fs['facet_type'], 'tl' => $user['trust_level']]); ?>
@@ -44,9 +44,9 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <div class="file-upload mb10 mt15" id="file-drag">
         <div class="flex">
           <?= facet_logo_img($fs['facet_img'], 'max', $fs['facet_title'], 'w94 h94 mr15'); ?>
-          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
+          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="br-box-gray">
           <div id="start" class="mt15">
-            <input id="file-upload" type="file" name="images" accept="image/*" />
+            <input class="text-xs" id="file-upload" type="file" name="images" accept="image/*" />
             <div id="notimage" class="none"><?= Translate::get('select.image'); ?></div>
           </div>
         </div>

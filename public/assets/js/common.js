@@ -367,13 +367,17 @@ const button = document.querySelector('.menu__button')
 const nav = document.querySelector('.menu__left')
 if (button) {
   button.addEventListener('click', () => {
-    nav.classList.toggle('menu__active')
+    if (nav) {  
+      nav.classList.toggle('menu__active')
+    }
   })
 }
 
 window.addEventListener('click', e => {
 const target = e.target
 if (!target.closest('.menu__active') && !target.closest('.menu__button')) {
-  nav.classList.remove('menu__active')
+  if (nav) {
+    nav.classList.remove('menu__active')
+  }
 }
 })

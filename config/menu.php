@@ -125,8 +125,8 @@ return [
         ],
     ],
 
-    // Member Settings
-    // Настройки участника
+    // Navigating the Participant Settings section
+    // Навигация раздела Настройки участника
     'settings' => [
         [
             'url'   => getUrlByName('setting'),
@@ -148,6 +148,27 @@ return [
             'title' => Translate::get('notifications'),
             'icon'  => 'bi bi-app-indicator',
             'id'    => 'notifications',
+        ],
+    ],
+
+    // Navigation section Bookmarks
+    // Навигация раздела Закладки
+    'favorites' => [
+        [
+            'id'    => 'drafts',
+            'url'   => getUrlByName('drafts'),
+            'title' => Translate::get('drafts'),
+            'icon'  => 'bi-journal-richtext'
+        ], [
+            'id'    => 'favorites',
+            'url'   => getUrlByName('favorites'),
+            'title' => Translate::get('favorites'),
+            'icon'  => 'bi-bookmark'
+        ], [
+            'id'    => 'subscribed',
+            'url'   => getUrlByName('subscribed'),
+            'title' => Translate::get('subscribed'),
+            'icon'  => 'bi-bookmark-plus'
         ],
     ],
 ];

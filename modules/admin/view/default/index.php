@@ -24,7 +24,9 @@
     <?php foreach ($data['logs'] as $log) { ?>
       <div class="gray">
         <span class="gray-400 text-sm"><?= $log['count_results']; ?></span>
-        <?= $log['request']; ?>
+        <a target="_blank" rel="noreferrer" href="/search?q=<?= $log['request']; ?>&type=<?= $log['action_type']; ?>">    
+          <?= $log['request']; ?>
+        </a>
         <span class="gray-400 lowercase">
           — (<?= Translate::get($log['action_type']); ?>) <?= lang_date($log['add_date']); ?>
         </span>

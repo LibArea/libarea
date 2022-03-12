@@ -58,6 +58,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/notification/{id}')->controller('NotificationController@read')->where(['id' => '[0-9]+'])->name('notif.read');  
     Route::get('/notifications/delete')->controller('NotificationController@remove')->name('notif.remove');  
     Route::get('/favorites')->controller('User\UserController@favorites')->name('favorites');
+    Route::get('/favorites/category')->controller('User\UserController@category')->name('favorites.category');
     Route::get('/subscribed')->controller('User\UserController@subscribed')->name('subscribed');
     Route::get('/drafts')->controller('User\UserController@drafts')->name('drafts');
     Route::get('/invitations')->controller('User\InvitationsController@invitationForm')->name('invitations');

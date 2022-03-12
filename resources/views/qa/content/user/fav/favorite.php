@@ -1,39 +1,11 @@
-<main class="col-span-7 mb-col-12">
-  <div class="box-flex-white">
-    <ul class="nav">
-
-      <?= tabs_nav(
-        'nav',
-        $data['sheet'],
-        $user,
-        $pages = [
-          [
-            'id'    => 'drafts',
-            'url'   => getUrlByName('drafts'),
-            'title' => Translate::get('drafts'),
-            'icon'  => 'bi-journal-richtext'
-          ], [
-            'id'    => 'favorites',
-            'url'   => getUrlByName('favorites'),
-            'title' => Translate::get('favorites'),
-            'icon'  => 'bi-bookmark'
-          ], [
-            'id'    => 'subscribed',
-            'url'   => getUrlByName('subscribed'),
-            'title' => Translate::get('subscribed'),
-            'icon'  => 'bi-bookmark-plus'
-          ],
-        ]
-      ); ?>
-
-    </ul>
-  </div>
+<main class="col-span-9 mb-col-12">
+  <?= Tpl::import('/content/user/fav/nav', ['data' => $data, 'user' => $user]); ?>
 
   <?php if (!empty($data['favorites'])) { ?>
     <?php foreach ($data['favorites'] as $content) { ?>
       <div class="box-white">
         <h3>
-          <?php if ($content['action_type'] == 'post') { ?>
+          <?php if ($content['action_type'] == 'post') {  ?>
             <div class="pr15 text-sm flex gray-400">
               <?= user_avatar_img($content['post']['avatar'], 'small', $content['post']['login'], 'ava-sm'); ?>
               <?= $content['post']['login']; ?>
@@ -54,14 +26,14 @@
             <a class="black" href="<?= getUrlByName('web.website', ['slug' => $content['item_url_domain']]); ?>#answer_<?= $content['answer_id']; ?>">
               <?= $content['item_title_url']; ?>
             </a>
-            <div class="green-600 text-sm">
-              <?= website_img($content['item_url_domain'], 'favicon', $content['item_url_domain'], 'favicons'); ?>
-              <?= $content['item_url_domain']; ?>
-              <a target="_blank" href="<?= $content['item_url']; ?>" class="item_cleek" data-id="<?= $content['item_id']; ?>" rel="nofollow noreferrer ugc">
-                <i class="bi bi-folder-symlink middle ml15 mr5"></i>
-                <?= $content['item_url']; ?>
-              </a>
-            </div>
+           <div class="green-600 text-sm">
+            <?= website_img($content['item_url_domain'], 'favicon', $content['item_url_domain'], 'favicons'); ?>
+            <?= $content['item_url_domain']; ?>
+            <a target="_blank" href="<?= $content['item_url']; ?>" class="item_cleek" data-id="<?= $content['item_id']; ?>" rel="nofollow noreferrer ugc">
+              <i class="bi bi-folder-symlink middle ml15 mr5"></i>
+              <?= $content['item_url']; ?>
+            </a>
+           </div> 
           <?php } else { ?>
             <div class="pr15 text-sm flex gray-400">
               <?= user_avatar_img($content['post']['avatar'], 'small', $content['post']['login'], 'ava-sm'); ?>
@@ -84,14 +56,14 @@
       </div>
     <?php } ?>
   <?php } else { ?>
-    <div class="p20 center gray-400">
+    <div class="mt10 mb10 pt10 pr15 pb10 center pl15 gray-400">
       <i class="bi bi-bookmark block text-8xl"></i>
       <?= Translate::get('no.favorites'); ?>
     </div>
   <?php } ?>
 </main>
 <aside class="col-span-3 mb-none">
-  <div class="box-white text-sm sticky top-sm">
+  <div class="box-white bg-violet-50 text-sm">
     <?= Translate::get('info-favorite'); ?>
   </div>
 </aside>

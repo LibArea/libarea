@@ -71,13 +71,31 @@ class UserController extends MainController
         }
 
         return Tpl::agRender(
-            '/user/favorite',
+            '/user/fav/favorite',
             [
                 'meta'  => meta($m = [], Translate::get('favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
                     'favorites' => $result
+                ]
+            ]
+        );
+    }
+
+
+    // Participant's folder page (for bookmarks)
+    // Страница папок участника (для закладок)
+    function category()
+    {
+        return Tpl::agRender(
+            '/user/fav/category',
+            [
+                'meta'  => meta($m = [], Translate::get('categories')),
+                'data'  => [
+                    'sheet'         => 'categories',
+                    'type'          => 'categories',
+                    'categories'    => []
                 ]
             ]
         );
@@ -115,7 +133,7 @@ class UserController extends MainController
         }
 
         return Tpl::agRender(
-            '/user/subscribed',
+            '/user/fav/subscribed',
             [
                 'meta'  => meta($m = [], Translate::get('subscribed')),
                 'data'  => [
