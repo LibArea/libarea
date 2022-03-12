@@ -72,16 +72,18 @@
 
       <?= Tpl::import('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
-      <?php if ($post['post_draft'] > UserData::USER_FIRST_LEVEL) { ?>
-        <?= Tpl::import('/_block/form/radio', [
-          'data' => [
-            [
-              'title' => Translate::get('draft'),
-              'name' => 'post_draft',
-              'checked' => $post['post_draft']
-            ],
-          ]
-        ]); ?>
+      <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) { ?>
+        <?php if ($post['post_draft'] == 1) { ?>
+          <?= Tpl::import('/_block/form/radio', [
+            'data' => [
+              [
+                'title' => Translate::get('draft'),
+                'name' => 'post_draft',
+                'checked' => $post['post_draft']
+              ],
+            ]
+          ]); ?>
+        <?php } ?>
       <?php } ?>
 
       <?= Tpl::import('/_block/form/select/content-tl', [

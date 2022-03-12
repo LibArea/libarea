@@ -2,7 +2,7 @@
 $css = '';
 $arr = ['profile', 'register', 'login', 'blog.user', 'recover', 'info.page', 'post', 'blog.page'];
 if (in_array($data['type'], $arr)) {
-  $css = 'menu-none';
+  $css = 'menu-none none';
 }
 ?>
 
