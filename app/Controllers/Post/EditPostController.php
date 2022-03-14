@@ -172,11 +172,7 @@ class EditPostController extends MainController
             redirect($redirect);
         }
 
-        $arr = [];
-        foreach ($all_topics as $ket => $row) {
-            $arr[] = $row;
-        }
-        return FacetModel::addPostFacets($arr, $content_id);
+        return FacetModel::addPostFacets($all_topics, $content_id);
     }
 
     // Удаление обложки

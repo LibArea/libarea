@@ -55,4 +55,5 @@ class FavoriteController extends MainController
 
         pageRedirection($content, '/');
     }
+
 }

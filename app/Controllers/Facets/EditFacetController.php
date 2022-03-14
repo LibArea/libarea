@@ -155,24 +155,18 @@ class EditFacetController extends MainController
         $highs  = $fields['high_facet_id'] ?? [];
         if ($highs) {
             $high_facet = json_decode($highs, true);
-            $high_facet = $high_facet ?? [];
-            $arr = [];
-            foreach ($high_facet as $ket => $row) {
-                $arr[] = $row;
-            }
-            FacetModel::addLowFacetRelation($arr, $facet_id);
+            $high_arr   = $high_facet ?? [];
+
+            FacetModel::addLowFacetRelation($high_arr, $facet_id);
         }
 
         // Связанные темы, дети 
         $matching   = $fields['facet_matching'] ?? [];
         if ($matching) {
             $match_facet    = json_decode($matching, true);
-            $match_facet    = $match_facet ?? [];
-            $arr_mc = [];
-            foreach ($match_facet as $ket => $row) {
-                $arr_mc[] = $row;
-            }
-            FacetModel::addLowFacetMatching($arr_mc, $facet_id);
+            $match_arr      = $match_facet ?? [];
+
+            FacetModel::addLowFacetMatching($match_arr, $facet_id);
         }
 
         addMsg('change.saved', 'success');

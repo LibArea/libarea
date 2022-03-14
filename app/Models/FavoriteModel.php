@@ -17,6 +17,8 @@ class FavoriteModel extends \Hleb\Scheme\App\Models\MainModel
 
             DB::run($sql, $params);
 
+            self::delFavoriteTag($params);
+
             return 'del';
         }
 
@@ -27,6 +29,15 @@ class FavoriteModel extends \Hleb\Scheme\App\Models\MainModel
         return 'add';
     }
 
+    // Delete data from the link table for folders in bookmarks
+    // Удалим данные из таблицы связи для папок в закладках
+    public static function delFavoriteTag($params)
+    { 
+        $sql = "DELETE FROM folders_relation WHERE tid = :tid AND user_id = :user_id AND action_type = :action_type";
+
+        return DB::run($sql, $params);
+    }
+
     public static function getUserFavorite($params)
     {
         $sql = "SELECT tid, user_id, action_type FROM favorites 
@@ -34,4 +45,5 @@ class FavoriteModel extends \Hleb\Scheme\App\Models\MainModel
 
         return  DB::run($sql, $params)->fetch();
     }
+   
 }

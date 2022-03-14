@@ -349,6 +349,14 @@ $data = [
     'category'              => 'Category',
     'categories'            => 'Categories',
     'categories.s'          => 'Categories',
+  
+    'tag'                   => 'Tag',
+    'tags'                  => 'Tags',
+    'tags.s'                => 'Tags',
+    'folder'                => 'Folder',
+    'folders'               => 'Folders',
+    'folders.s'             => 'Folders',
+
     'pages'                 => 'Pages',
     'go to'                 => 'Go to',
     'frameworks'            => 'Frameworks',

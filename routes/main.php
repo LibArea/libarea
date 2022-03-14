@@ -11,6 +11,9 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/post/profile')->controller('Post\PostController@postProfile');
         Route::get('/favorite/add')->controller('FavoriteController');
         Route::get('/focus')->controller('SubscriptionController');
+        Route::get('/folder/content/del')->controller('FolderController@delFolderContent');
+        Route::get('/folder/del')->controller('FolderController@delFolder');
+        
         // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
         Route::get('/votes')->controller('VotesController'); 
@@ -18,6 +21,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 Route::get('/invitation/create')->controller('User\InvitationsController@create')->name('invit.create');
                 Route::get('/messages/send')->controller('MessagesController@send')->name('messages.send');
                 Route::get('/users/setting/edit')->controller('User\SettingController@edit')->name('setting.edit');
+                Route::get('/folder/content/add')->controller('FolderController@set')->name('folder.content.create');
                 Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit')->name('setting.avatar.edit');
                 Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit')->name('setting.security.edit');
                 Route::get('/users/setting/notification/edit')->controller('User\SettingController@notificationEdit')->name('setting.notif.edit');
@@ -29,6 +33,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 Route::get('/change/{type}')->controller('ActionController@change')->where(['type' => '[a-z]+'])->name('content.change');
             Route::endProtect();
     Route::endType();
+
+    Route::type(['get', 'post'])->get('/folder/content/save')->controller('FolderController@addFolderContent');
 
     // Pages (forms) for adding and changing: (post | page | answer), (topic | category | blog | sections) and site
     Route::get('/web/add')->module('catalog', 'App\Add')->name('web.add');    
@@ -58,7 +64,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/notification/{id}')->controller('NotificationController@read')->where(['id' => '[0-9]+'])->name('notif.read');  
     Route::get('/notifications/delete')->controller('NotificationController@remove')->name('notif.remove');  
     Route::get('/favorites')->controller('User\UserController@favorites')->name('favorites');
-    Route::get('/favorites/category')->controller('User\UserController@category')->name('favorites.category');
+    Route::get('/favorites/folders')->controller('User\UserController@folders')->name('favorites.folders');
+    Route::get('/favorites/folders/{id}')->controller('User\UserController@foldersFavorite')->where(['id' => '[0-9]+'])->name('favorites.folder.id');
     Route::get('/subscribed')->controller('User\UserController@subscribed')->name('subscribed');
     Route::get('/drafts')->controller('User\UserController@drafts')->name('drafts');
     Route::get('/invitations')->controller('User\InvitationsController@invitationForm')->name('invitations');
@@ -107,6 +114,8 @@ Route::getType('post');
 Route::endType();
   
 Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+', 'id' => '[0-9]+'])->name('topic.followers');  
+  
+  
   
 // Other pages without authorization
 Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9]+']);

@@ -350,6 +350,14 @@ $data = [
     'category'              => 'Категория',
     'categories'            => 'Категории',
     'categories.s'          => 'Категорию',
+    
+    'tag'                   => 'Тег',
+    'tags'                  => 'Теги',
+    'tags.s'                => 'Тегов',
+    'folder'                => 'Папка',
+    'folders'               => 'Папки',
+    'folders.s'             => 'Папок',
+    
     'pages'                 => 'Страницы',
     'go to'                 => 'Перейти',
     'frameworks'            => 'Фреймворки',

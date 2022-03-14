@@ -346,6 +346,14 @@ $data = [
     'category'              => 'Categorie',
     'categories'            => 'Categorii',
     'categories.s'          => 'Categorii',
+
+    'tag'                   => 'Etichetă',
+    'tags'                  => 'Etichete',
+    'tags.s'                => 'Etichete',
+    'folder'                => 'Pliant',
+    'folders'               => 'Foldere',
+    'folders.s'             => 'Foldere',
+
     'pages'                 => 'Pagini',
     'go to'                 => 'Mergi la',
     'frameworks'            => 'cadre',

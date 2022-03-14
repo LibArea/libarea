@@ -746,7 +746,7 @@ CREATE TABLE `votes_answer` (
   `votes_answer_points` int(11) NOT NULL,
   `votes_answer_ip` varchar(45) NOT NULL,
   `votes_answer_user_id` int(11) NOT NULL DEFAULT '1',
-  `votes_answer_date` datetime NOT NULL
+  `votes_answer_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -761,7 +761,7 @@ CREATE TABLE `votes_comment` (
   `votes_comment_points` int(11) NOT NULL,
   `votes_comment_ip` varchar(45) NOT NULL,
   `votes_comment_user_id` int(11) NOT NULL DEFAULT '1',
-  `votes_comment_date` datetime NOT NULL
+  `votes_comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -776,7 +776,7 @@ CREATE TABLE `votes_item` (
   `votes_item_points` int(11) NOT NULL,
   `votes_item_ip` varchar(45) NOT NULL,
   `votes_item_user_id` int(11) NOT NULL DEFAULT '1',
-  `votes_item_date` datetime NOT NULL
+  `votes_item_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -791,7 +791,7 @@ CREATE TABLE `votes_post` (
   `votes_post_points` int(11) NOT NULL,
   `votes_post_ip` varchar(45) NOT NULL,
   `votes_post_user_id` int(11) NOT NULL DEFAULT '1',
-  `votes_post_date` datetime NOT NULL
+  `votes_post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -800,6 +800,41 @@ CREATE TABLE `votes_post` (
 
 INSERT INTO `votes_post` (`votes_post_id`, `votes_post_item_id`, `votes_post_points`, `votes_post_ip`, `votes_post_user_id`, `votes_post_date`) VALUES
 (1, 2, 1, '127.0.0.1', 1, '2021-08-16 16:29:32');
+
+--
+-- Дамп данных и индексы таблиц `folders` и `folders_relation`
+--
+
+CREATE TABLE `folders` (
+  `id` int(11) NOT NULL,
+  `title` varchar(64) NOT NULL,
+  `action_type` varchar(32) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `item_coun` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `folders_relation` (
+  `id` int(11) NOT NULL,
+  `folder_id` int(11) NOT NULL COMMENT 'ID папки (folders)',
+  `action_type` varchar(32) NOT NULL  COMMENT 'Тип контента',
+  `tid` int(11) NOT NULL COMMENT 'id контента',
+  `user_id` int(11) NOT NULL COMMENT 'id кто добавил'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `folders`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `folders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `folders_relation`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `folders_relation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `folders_relation` ADD UNIQUE(`action_type`, `tid`, `user_id`);
+
 
 --
 -- Индексы сохранённых таблиц

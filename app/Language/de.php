@@ -352,6 +352,14 @@ $data = [
     'category'              => 'Kategorie',
     'categories'            => 'Kategorien',
     'categories.s'          => 'Kategorien',
+
+    'tag'                   => 'Schild',
+    'tags'                  => 'Stichworte',
+    'tags.s'                => 'Stichworte',
+    'folder'                => 'Mappe',
+    'folders'               => 'Ordner',
+    'folders.s'             => 'Ordner',
+
     'pages'                 => 'Pages',
     'go to'                 => 'Go to',
     'frameworks'            => 'Frameworks',

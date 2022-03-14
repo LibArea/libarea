@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
-use App\Models\PostModel;
+use App\Models\{PostModel, FolderModel};
 use Content, Translate, Tpl, UserData;
 
 class UserController extends MainController
@@ -71,13 +71,14 @@ class UserController extends MainController
         }
 
         return Tpl::agRender(
-            '/user/fav/favorite',
+            '/user/favorite/all',
             [
                 'meta'  => meta($m = [], Translate::get('favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
-                    'favorites' => $result
+                    'favorites' => $result,
+                    'tags'      => FolderModel::get('favorite', $this->user['id']),
                 ]
             ]
         );
@@ -86,19 +87,44 @@ class UserController extends MainController
 
     // Participant's folder page (for bookmarks)
     // Страница папок участника (для закладок)
-    function category()
+    function folders()
     {
+        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
+        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
+        
+        $folders = FolderModel::get('favorite', $this->user['id']);
+        
         return Tpl::agRender(
-            '/user/fav/category',
+            '/user/favorite/folders',
             [
-                'meta'  => meta($m = [], Translate::get('categories')),
+                'meta'  => meta($m = [], Translate::get('folders')),
                 'data'  => [
-                    'sheet'         => 'categories',
-                    'type'          => 'categories',
-                    'categories'    => []
+                    'sheet'     => 'folders',
+                    'type'      => 'folders',
+                    'folders'   => $folders,
+                    'count'     => count($folders),
                 ]
             ]
         );
+    }
+    
+    public function foldersFavorite()
+    {
+        $tag_id = Request::getInt('id');
+        $favorites = UserModel::userFavorite($this->user['id'], $tag_id);
+        
+        return Tpl::agRender(
+            '/user/favorite/all',
+            [
+                'meta'  => meta($m = [], Translate::get('favorites')),
+                'data'  => [
+                    'sheet'     => 'favorites',
+                    'type'      => 'favorites',
+                    'favorites' => $favorites
+                ]
+            ]
+        );
+ 
     }
 
     // Member Draft Page
@@ -133,7 +159,7 @@ class UserController extends MainController
         }
 
         return Tpl::agRender(
-            '/user/fav/subscribed',
+            '/user/favorite/subscribed',
             [
                 'meta'  => meta($m = [], Translate::get('subscribed')),
                 'data'  => [

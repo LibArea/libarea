@@ -194,18 +194,22 @@ if (toggledark) {
   });
 }
 
-// Add Header Post
-let header = document.getElementById("stHeader");
-if (header) {
-  window.onscroll = function () { myFunction() };
-  let sticky = header.offsetTop;
-  function myFunction() {
-    if (window.pageYOffset > sticky) {
-      header.classList.add("sticky");
+// Navigation menu on/off
+let togglemenu = document.querySelector('#togglemenu');
+if (togglemenu) {
+  togglemenu.addEventListener('click', function () {
+    let mode = getCookie("menuYesNo");
+    let d = new Date();
+    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
+    let expires = "expires=" + d.toGMTString();
+    if (mode == "menuno") {
+      document.cookie = "menuYesNo" + "=" + "menuyes" + "; " + expires + ";path=/";
+      document.getElementsByTagName('body')[0].classList.remove('menuno');
     } else {
-      header.classList.remove("sticky");
+      document.cookie = "menuYesNo" + "=" + "menuno" + "; " + expires + ";path=/";
+      document.getElementsByTagName('body')[0].classList.add('menuno');
     }
-  }
+  });
 }
 
 // TODO: move to util

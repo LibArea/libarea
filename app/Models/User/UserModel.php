@@ -139,20 +139,21 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Страница закладок участника (комментарии и посты)
-    public static function userFavorite($uid)
+    public static function userFavorite($uid, $tag_id = null)
     {
+        $tag = '';
+        if ($tag_id) $tag = 'AND fol.id = ' . $tag_id;
+        
         $sql = "SELECT 
                     fav.id,
                     fav.user_id, 
                     fav.action_type,
                     fav.tid,
-                    u.id, 
-                    u.login,
-                    u.avatar, 
+                    fol.id as tag_id,
+                    fol.title as tag_title,
                     post_id,
                     post_title,
                     post_slug,
-                    post_date,
                     post_answers_count,
                     answer_id,
                     answer_post_id,
@@ -162,11 +163,12 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     item_url,
                     item_url_domain
                         FROM favorites fav
-                        LEFT JOIN users u ON u.id = fav.user_id
-                        LEFT JOIN posts ON post_id = fav.tid AND fav.action_type = 'post'
-                        LEFT JOIN answers ON answer_id = fav.tid AND fav.action_type = 'answer'
-                        LEFT JOIN items ON item_id = fav.tid AND fav.action_type = 'website'
-                        WHERE fav.user_id = :uid ORDER BY fav.id DESC LIMIT 100";
+                            LEFT JOIN posts ON post_id = fav.tid AND fav.action_type = 'post'
+                            LEFT JOIN answers ON answer_id = fav.tid AND fav.action_type = 'answer'
+                            LEFT JOIN items ON item_id = fav.tid AND fav.action_type = 'website'
+                              LEFT JOIN folders_relation fr ON fr.tid = fav.tid
+                              LEFT JOIN folders fol ON folder_id = fol.id
+                                WHERE fav.user_id = :uid $tag ORDER BY fav.id DESC LIMIT 100";
 
         return DB::run($sql, ['uid' => $uid])->fetchAll();
     }

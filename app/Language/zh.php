@@ -351,6 +351,14 @@ $data = [
     'category'              => '類別',
     'categories'            => '類別',
     'categories.s'          => '類別',
+
+    'tag'                   => '標籤',
+    'tags'                  => '標籤',
+    'tags.s'                => '標籤',
+    'folder'                => '文件夾',
+    'folders'               => '文件夾',
+    'folders.s'             => '文件夾',
+
     'pages'                 => '頁面',
     'go to'                 => '前往',
     'frameworks'            => '框架',

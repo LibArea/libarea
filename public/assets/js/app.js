@@ -95,6 +95,61 @@ document.querySelectorAll(".add-profile")
       });
   }));
 
+// Adding Folders
+document.querySelectorAll(".save-folder")
+  .forEach(el => el.addEventListener("click", function (e) {
+
+    let id = el.dataset.id;
+    let type = el.dataset.type;
+    let tid = el.dataset.tid;
+    fetch("/folder/content/save", {
+      method: "POST",
+      body: "id=" + id  + "&type=" + type + "&tid=" + tid,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
+        location.reload();
+      });
+  }));
+
+// Deleting a linked content folder 
+document.querySelectorAll(".del-folder-content")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let id = el.dataset.id;
+    let type = el.dataset.type;
+    let tid = el.dataset.tid;
+    fetch("/folder/content/del", {
+      method: "POST",
+      body: "id=" + id  + "&type=" + type + "&tid=" + tid,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
+        location.reload();
+      });
+  }));
+ 
+// Removing a tag
+document.querySelectorAll(".del-folder")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let id = el.dataset.id;
+    let type = el.dataset.type;
+    fetch("/folder/del", {
+      method: "POST",
+      body: "id=" + id  + "&type=" + type,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
+        location.reload();
+      });
+  }));
+
+
 // Recommend a post
 document.querySelectorAll(".post-recommend")
   .forEach(el => el.addEventListener("click", function (e) {
