@@ -196,12 +196,12 @@ define('HLEB_PROJECT_VALIDITY_URL', "/^[a-zA-Z0-9\@\_\-\/\.]+$/u");
  |
  */
 
-define('HLEB_SEARCH_DBASE_CONFIG_FILE', realpath('HLEB_GLOBAL_DIRECTORY' . '/config'));
+define('HLEB_SEARCH_DBASE_CONFIG_FILE', realpath(HLEB_GLOBAL_DIRECTORY . '/config'));
 
 
 // Корневая папка шаблонов в системе
 // Root template folder on the system 
-define('TEMPLATES', realpath('HLEB_GLOBAL_DIRECTORY' . '/resources/views'));
+define('TEMPLATES', realpath(HLEB_GLOBAL_DIRECTORY . '/resources/views'));
 
 /*
  |-----------------------------------------------------------------------------
