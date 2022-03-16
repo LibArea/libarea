@@ -1,5 +1,5 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
-<div class="menu__left col-span-2">
+<div class="menu__left">
   <ul class="menu">
     <?= tabs_nav(
       'menu',
@@ -10,7 +10,7 @@
   </ul>
 </div>
 
-<main class="col-span-10 mb-col-12 ">
+<main class="col-two">
   <?php if ($data['type'] != 'admin') { ?>
     <div class="box-flex-white">
 

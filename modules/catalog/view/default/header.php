@@ -1,6 +1,6 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?18');
-Request::getHead()->addStyles('/assets/css/catalog.css?v18');
+Request::getHead()->addStyles('/assets/css/style.css?21');
+Request::getHead()->addStyles('/assets/css/catalog.css?v21');
 ?>
 
 <?= Tpl::insert('meta', ['meta' => $meta]); ?>
@@ -14,12 +14,12 @@ Request::getHead()->addStyles('/assets/css/catalog.css?v18');
       <div class="page-search-right mb-ml0">
         <div data-template="one" id="find tippy">
           <a class="tabs black mr15" href="/">
-            <i class="bi bi-house"></i>
+            <i class="bi-house"></i>
             <?= Translate::get('to the website'); ?>
           </a>
-          <div class="flex right col-span-4 items-center">
+          <div class="flex right items-center">
             <div id="toggledark" class="header-menu-item mb-none only-icon mr30 mb-ml10">
-              <i class="bi bi-brightness-high gray-400 text-xl"></i>
+              <i class="bi-brightness-high gray-400 text-xl"></i>
             </div>
             <?php if (!UserData::checkActiveUser()) { ?>
               <?php if (Config::get('general.invite') == false) { ?>

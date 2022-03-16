@@ -23,8 +23,6 @@
  */
 define('HLEB_PROJECT_DEBUG', false);
 
-// define('HLEB_DB_LOG_ENABLED', true);
-
 /*
  |-----------------------------------------------------------------------------
  | Caching mode

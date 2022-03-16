@@ -22,7 +22,7 @@
     <fieldset>
       <label for="badge_icon"><?= Translate::get('icon'); ?></label>
       <textarea class="add" name="badge_icon" required><?= $data['badge']['badge_icon']; ?></textarea>
-      <div class="help"><?= Translate::get('for example'); ?>: &lt;i title="<?= Translate::get('title'); ?>" class="bi bi-trophy"&gt;&lt;/i&gt; </div>
+      <div class="help"><?= Translate::get('for example'); ?>: &lt;i title="<?= Translate::get('title'); ?>" class="bi-trophy"&gt;&lt;/i&gt; </div>
     </fieldset>
     <fieldset>
       <label for="badge_tl">Tl</label>

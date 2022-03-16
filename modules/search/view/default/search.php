@@ -1,8 +1,5 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
-<div id="fetch" class="col-span-2 mb-none">
-  <div id="find"></div>
-</div>
-<main class="main-search">
+<main class="main-search col-two">
   <?php foreach ($data['tags'] as $key => $tag) { ?>
     <?php if ($data['type'] == 'post') { ?>
       <a class="mr20" href="<?= getUrlByName('topic', ['slug' => $tag['facet_slug']]); ?>">
@@ -26,6 +23,5 @@
         <?= includeTemplate('/view/default/no-result', ['query' => $data['query']]); ?>
       <?php } ?>
 </main>
-<div class="col-span-2 mb-none"></div>
 
 <?= includeTemplate('/view/default/footer'); ?>

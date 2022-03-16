@@ -7,10 +7,10 @@
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) { ?>
       <a class="text-sm ml5" href="<?= getUrlByName('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
-        <sup><i class="bi bi-pencil gray"></i></sup>
+        <sup><i class="bi-pencil gray"></i></sup>
       </a>
       <a class="text-sm ml15" href="<?= getUrlByName('admin.category.structure'); ?>">
-        <sup class="gray-400"><i class="bi bi-columns-gap mr5"></i></sup>
+        <sup class="gray-400"><i class="bi-columns-gap mr5"></i></sup>
       </a>
       <small class="text-sm gray-400"><sup><?= $data['category']['facet_type']; ?></sup></small>
     <?php } ?>
@@ -26,7 +26,7 @@
         </a> <sup class="gray-400"><?= $lt['counts']; ?></sup>
         <?php if (UserData::checkAdmin()) { ?>
           <a class="ml5" href="<?= getUrlByName('content.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
-            <sup><i class="bi bi-pencil"></i>
+            <sup><i class="bi-pencil"></i>
           </a>
           <small class="text-sm gray-400"><sup><?= $lt['facet_type']; ?></sup></small>
         <?php } ?>
@@ -43,7 +43,7 @@
         </a>
         <?php if (UserData::checkAdmin()) { ?>
           <a class="text-sm ml5" href="<?= getUrlByName('category.edit', ['id' => $rl['facet_id']]); ?>">
-            <sup class="gray-400"><i class="bi bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
+            <sup class="gray-400"><i class="bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
           </a>
         <?php } ?>
       </div>
@@ -51,19 +51,19 @@
   </div>
 <?php } ?>
 
-<div class="grid grid-cols-12 gap-4">
+<div id="contentWrapper">
   <main>
     <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>
 
     <?php if (!empty($data['items'])) { ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
     <?php } else { ?>
-      <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
     <?php } ?>
 
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/' . $data['screening']); ?>
   </main>
-  <aside class="col-span-3 mb-col-12 relative mb-none">
+  <aside>
     <div class="box-yellow mt15 text-sm"><?= Content::text($data['category']['facet_info'], 'line'); ?></div>
     <?php if (UserData::checkActiveUser()) { ?>
       <div class="box-white text-sm bg-violet-50 mt15">

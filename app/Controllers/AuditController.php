@@ -165,7 +165,7 @@ class AuditController extends MainController
 
         return true;
     }
-    
+
     public function report()
     {
         $content_type   = Request::getPost('type');
@@ -197,7 +197,7 @@ class AuditController extends MainController
             [
                 'sender_id'    => $this->user['id'],
                 'recipient_id' => UserData::REGISTERED_ADMIN_ID,
-                'action_type'  => NotificationModel::TYPE_REPORT, 
+                'action_type'  => NotificationModel::TYPE_REPORT,
                 'url'          => $url,
             ]
         );

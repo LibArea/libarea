@@ -1,13 +1,13 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+
 <?php if ($user['id'] == 0) { ?>
-  <div class="box bg-white mb-none">
+  <div class="mb-none">
     <center>
       <h1><?= Translate::get('web.home.title'); ?></h1>
       <p class="max-w780"><?= Translate::get('web.banner.info'); ?>.</p>
     </center>
   </div>
 <?php } ?>
-
 <div class="item-categories">
   <?php foreach (Config::get('catalog/home-categories') as $cat) { ?>
     <div class="categories-telo">
@@ -28,7 +28,7 @@
   <?php } ?>
 </div>
 
-<div class="grid grid-cols-12 gap-4">
+<div id="contentWrapper">
   <main>
     <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>
     <?php if (!empty($data['items'])) { ?>

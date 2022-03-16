@@ -32,7 +32,7 @@ class FavoriteModel extends \Hleb\Scheme\App\Models\MainModel
     // Delete data from the link table for folders in bookmarks
     // Удалим данные из таблицы связи для папок в закладках
     public static function delFavoriteTag($params)
-    { 
+    {
         $sql = "DELETE FROM folders_relation WHERE tid = :tid AND user_id = :user_id AND action_type = :action_type";
 
         return DB::run($sql, $params);
@@ -45,5 +45,4 @@ class FavoriteModel extends \Hleb\Scheme\App\Models\MainModel
 
         return  DB::run($sql, $params)->fetch();
     }
-   
 }

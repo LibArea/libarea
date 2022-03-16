@@ -3,7 +3,7 @@ $form = new Forms();
 $form->html_form($user['trust_level'], Config::get('form/facet.forma'));
 ?>
 
-<main class="col-span-10 mb-col-12 edit-post">
+<main class="col-two">
   <div class="box-white">
     <h1 class="text-xl"><?= Translate::get('add'); ?> (<?= Translate::get($data['type']); ?>)</h1>
 

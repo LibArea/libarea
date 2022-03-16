@@ -1,4 +1,4 @@
-<main class="col-span-7 mb-col-12">
+<main>
   <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
@@ -56,7 +56,7 @@
     <?php } ?>
   </div>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white text-sm sticky top-sm">
     <?= Translate::get('invite.features'); ?>
   </div>

@@ -8,7 +8,7 @@
         'id' => 'add',
         'url' => getUrlByName($data['type'] . '.add'),
         'name' => Translate::get('add'),
-        'icon' => 'bi bi-plus-lg'
+        'icon' => 'bi-plus-lg'
       ]
     ]
   ]
@@ -38,14 +38,14 @@
           </td>
           <td class="center">
             <a title="<?= Translate::get('edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
-              <i class="bi bi-pencil"></i>
+              <i class="bi-pencil"></i>
             </a>
           </td>
         </tr>
       <?php } ?>
     </table>
   <?php } else { ?>
-    <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
   <?php } ?>
 </div>
 </div>

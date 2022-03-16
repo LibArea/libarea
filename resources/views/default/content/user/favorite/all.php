@@ -1,4 +1,4 @@
-<main class="col-span-7 mb-col-12">
+<main>
   <?= Tpl::import('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
 
   <?php if (!empty($data['tags'])) { ?>
@@ -26,7 +26,7 @@
             <?= website_img($fav['item_url_domain'], 'favicon', $fav['item_url_domain'], 'favicons'); ?>
             <?= $fav['item_url_domain']; ?>
             <a target="_blank" href="<?= $fav['item_url']; ?>" class="item_cleek" data-id="<?= $fav['item_id']; ?>" rel="nofollow noreferrer ugc">
-              <i class="bi bi-folder-symlink middle ml15 mr5"></i>
+              <i class="bi-folder-symlink middle ml15 mr5"></i>
               <?= $fav['item_url']; ?>
             </a>
           </span>
@@ -41,7 +41,7 @@
         } ?>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
-          <i class="bi bi-trash red-500"></i>
+          <i class="bi-trash red-500"></i>
         </span>
         <?php if ($fav['tag_id']) { ?>
           <a class="tags-xs ml15" href="<?= getUrlByName('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">
@@ -64,12 +64,12 @@
     <?php } ?>
   <?php } else { ?>
     <div class="p20 center gray-400">
-      <i class="bi bi-bookmark block text-8xl"></i>
+      <i class="bi-bookmark block text-8xl"></i>
       <?= Translate::get('no.favorites'); ?>
     </div>
   <?php } ?>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white text-sm sticky top-sm">
     <?= Translate::get('info-favorite'); ?>
   </div>

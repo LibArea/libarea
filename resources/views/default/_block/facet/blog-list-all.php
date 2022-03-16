@@ -13,7 +13,7 @@
                   </div>
                 <?php } else { ?>
                   <div data-id="<?= $facet['facet_id']; ?>" data-type="topic" class="focus-id no">
-                    <i class="bi bi-plus"></i> <?= Translate::get('read'); ?>
+                    <i class="bi-plus"></i> <?= Translate::get('read'); ?>
                   </div>
                 <?php } ?>
               <?php } ?>
@@ -25,15 +25,15 @@
             </a>
 
             <?php if ($user['id'] == $facet['facet_user_id']) { ?>
-              <i class="bi bi-mic sky-500 text-sm"></i>
+              <i class="bi-mic sky-500 text-sm"></i>
             <?php } ?>
             <div class="text-sm pr15 mb-pr0 gray-400">
               <?= $facet['facet_short_description']; ?>
               <div class="flex mt5 text-sm">
-                <i class="bi bi-journal mr5"></i>
+                <i class="bi-journal mr5"></i>
                 <?= $facet['facet_count']; ?>
                 <?php if ($facet['facet_focus_count'] > 0) { ?>
-                  <i class="bi bi-people ml15 mr5"></i>
+                  <i class="bi-people ml15 mr5"></i>
                   <?= $facet['facet_focus_count']; ?>
                 <?php } ?>
               </div>

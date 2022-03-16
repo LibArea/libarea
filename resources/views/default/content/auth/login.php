@@ -3,8 +3,7 @@ $form = new Forms();
 $form->html_form($user['trust_level'], Config::get('form/auth.login'));
 ?>
 
-<div class="col-span-2 mb-none"></div>
-<main class="col-span-8 mb-col-12 box-white">
+<main class="max-w780 mr-auto box-white">
   <h1 class="center"><?= Translate::get('authorization'); ?></h1>
   <form class="max-w300" action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>

@@ -7,10 +7,9 @@
   <link rel="icon" href="/favicon.ico" type="image/png">
 </head>
 
-<body class="bg-gray-000">
-  <div class="max-width mr-auto w-100 grid grid-cols-12 p20 justify-between">
-    <div class="col-span-2 mb-none"></div>
-    <main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray p15">
+<body class="body-bg-fon mt30">
+
+    <main class="max-w780 mr-auto box-white">
       <h1 class="text-3xl font-normal gray m0">Opss</h1>
       <p class="gray-600"><?= Translate::get('under.reconstruction'); ?>...</p>
 
@@ -27,7 +26,7 @@
       </form>
 
     </main>
-    <div class="col-span-2 mb-none"></div>
+
 </body>
 
 </html>

@@ -88,7 +88,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
     // Количество ответов
     public static function getAnswersCount($sheet)
     {
-        
+
         $sort = self::sorts($sheet);
         $sql = "SELECT 
                     answer_id, 
@@ -110,9 +110,9 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
             case 'answers.deleted':
                 $sort     = "WHERE answer_is_deleted = 1";
                 break;
-        } 
+        }
 
-       return $sort;
+        return $sort;
     }
 
 

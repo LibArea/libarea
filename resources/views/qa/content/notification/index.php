@@ -1,4 +1,4 @@
-<main class="col-span-9 mb-col-12">
+<main class="col-two">
   <div class="box-flex-white bg-violet-50">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
@@ -16,7 +16,7 @@
         <?php foreach (Config::get('notification') as $key => $n) { ?>
           <?php if ($n['id'] == $notif['type']) { ?>
             <div class="br-bottom p5<?php if ($notif['flag'] == 0) { ?> bg-sky-50<?php } ?>">
-              <i class="bi <?= $n['icon']; ?> middle"></i>
+              <i class="<?= $n['icon']; ?> middle"></i>
               <a class="black ml5" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
               <span class="lowercase gray-400">
                 <?= sprintf(Translate::get($n['lang']), '<a href="' . $url . '">', '</a>'); ?>
@@ -31,11 +31,11 @@
 
       <div class="p15 center gray-400"><?= Translate::get('notifications.limit'); ?></div>
     <?php } else { ?>
-      <?= no_content(Translate::get('no.content'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get('no.content'), 'bi-info-lg'); ?>
     <?php } ?>
   </div>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white bg-violet-50 text-sm sticky top-sm">
     <?= Translate::get('notifications.info'); ?>
   </div>

@@ -32,7 +32,7 @@ class AuditModel extends \Hleb\Scheme\App\Models\MainModel
 
         return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];
     }
-    
+
     // Let's limit How many complaints are filed today (for frequency limitation)
     // Сколько жалоб подано сегодня (для ограничение частоты)
     public static function getSpeedReport($uid)

@@ -77,10 +77,10 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     // Все комментарии
     public static function getCommentsAll($page, $limit, $user, $sheet)
     {
-        $sort = self::sorts($user, $sheet); 
+        $sort = self::sorts($user, $sheet);
         $tl = $user['trust_level'];
         $start  = ($page - 1) * $limit;
-        
+
         $sql = "SELECT
                     post_id,
                     post_title,
@@ -128,7 +128,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM comments 
                             JOIN posts ON comment_post_id = post_id AND post_tl <= $tl
                                 $sort";
- 
+
         return DB::run($sql)->rowCount();
     }
 
@@ -141,9 +141,9 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
             case 'comments.deleted':
                 $sort     = "WHERE comment_is_deleted = 1";
                 break;
-        } 
+        }
 
-       return $sort;
+        return $sort;
     }
 
     // Получаем комментарии к ответу

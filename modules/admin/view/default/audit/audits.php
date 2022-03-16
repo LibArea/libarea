@@ -8,17 +8,17 @@
         'id'    => 'audits.all',
         'url'   => getUrlByName('admin.audits'),
         'name'  => Translate::get('all'),
-        'icon'  => 'bi bi-record-circle',
+        'icon'  => 'bi-record-circle',
       ], [
         'id'    => 'audits.ban',
         'url'   => getUrlByName('admin.audits.ban'),
         'name'  => Translate::get('approved'),
-        'icon'  => 'bi bi-x-circle',
+        'icon'  => 'bi-x-circle',
       ], [
         'id'    => 'reports.all',
         'url'   => getUrlByName('admin.reports'),
         'name'  => Translate::get('reports'),
-        'icon'  => 'bi bi-record-circle',
+        'icon'  => 'bi-record-circle',
       ] 
     ]
   ]
@@ -54,7 +54,7 @@
             <?php } ?>
             <span class="mr5 ml5"> &#183; </span>
             <a class="mr5 ml5" href="<?= getUrlByName('admin.user.edit', ['id' => $audit['id']]); ?>">
-              <i class="bi bi-pencil"></i>
+              <i class="bi-pencil"></i>
             </a>
             <span class="mr5 ml5"> &#183; </span>
              <?= $audit['content'][$audit['action_type'] . '_date']; ?>
@@ -104,7 +104,7 @@
             <?php } else { ?>
               <div class="<?php if ($audit['read_flag'] == 0) { ?> bg-red-200<?php } ?>">
                 <span class="report-saw" data-id="<?= $audit['audit_id']; ?>">
-                  <i class="bi bi-record-circle gray text-2xl"></i>
+                  <i class="bi-record-circle gray text-2xl"></i>
                 </span>
               </div>  
             <?php } ?>
@@ -113,7 +113,7 @@
       <?php } ?>
     </table>
   <?php } else { ?>
-    <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
   <?php } ?>
 </div>
 <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.audits')); ?>

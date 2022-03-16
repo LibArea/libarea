@@ -1,5 +1,4 @@
-<div class="col-span-2 mb-none"></div>
-<main class="col-span-8 mb-col-12 box-white">
+<main class="max-w780 mr-auto box-white">
   <h1 class="center"><?= Translate::get($data['sheet']); ?></h1>
   <form class="form max-w300" action="<?= getUrlByName('recover.send'); ?>" method="post">
     <?php csrf_field(); ?>

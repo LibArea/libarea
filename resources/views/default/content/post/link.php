@@ -1,4 +1,4 @@
-<main class="col-span-7">
+<main>
   <div class="box-white">
     <?php if ($data['site']['item_title_url']) { ?>
       <div class="right mt15">
@@ -7,7 +7,7 @@
       <h1><?= $data['site']['item_title_url']; ?>
         <?php if ($user['trust_level'] > 4) { ?>
           <a class="text-sm ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['site']['item_id']]); ?>">
-            <i class="bi bi-pencil"></i>
+            <i class="bi-pencil"></i>
           </a>
         <?php } ?>
       </h1>
@@ -19,7 +19,7 @@
           <?= website_img($data['site']['item_id'], 'favicon', $data['site']['item_url_domain'], 'favicons'); ?>
           <?= $data['site']['item_url']; ?>
         </a>
-        <span class="right gray-400"><i class="bi bi-journal mr5"></i> <?= $data['site']['item_count']; ?></span>
+        <span class="right gray-400"><i class="bi-journal mr5"></i> <?= $data['site']['item_count']; ?></span>
       </div>
     <?php } else { ?>
       <h1><?= Translate::get('domain') . ': ' . $data['domain']; ?></h1>
@@ -29,7 +29,7 @@
   <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
   <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('domain', ['domain' => $data['site']['item_url_domain']])); ?>
 </main>
-<aside class="col-span-3">
+<aside>
   <div class="sticky top-sm">
     <div class="box-white">
       <?= Tpl::import('/_block/domains', ['data' => $data['domains']]); ?>

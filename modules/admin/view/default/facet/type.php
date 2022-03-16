@@ -8,13 +8,13 @@
         'id'    => $data['type'],
         'url'   => getUrlByName('admin.facets.type', ['type' => $data['type']]),
         'name'  => Translate::get('all'),
-        'icon'  => 'bi bi-x-circle'
+        'icon'  => 'bi-x-circle'
       ],
       [
         'id'    => 'ban.facet',
         'url'   => getUrlByName('admin.facets.ban.type', ['type' => $data['type']]),
         'name'  => Translate::get('deleted'),
-        'icon'  => 'bi bi-x-circle'
+        'icon'  => 'bi-x-circle'
       ]
     ]
   ]
@@ -39,7 +39,7 @@
       <div class="w-50 mb5">
         <?php if ($topic['level'] > 0) { ?>
           <?php $color = true; ?>
-          <i class="bi bi-arrow-return-right gray ml<?= $topic['level'] * 10; ?>"></i>
+          <i class="bi-arrow-return-right gray ml<?= $topic['level'] * 10; ?>"></i>
         <?php } ?>
         <a class="<?php if ($topic['level'] == 0) { ?>relative pt5 text-xl items-center hidden<?php } ?> <?php if ($topic['level'] > 0) { ?> black<?php } ?>" href="<?= $url; ?>">
           <?php if ($topic['level'] == 0) { ?>
@@ -49,22 +49,22 @@
         </a>
 
         <a class="ml15 mr15" href="<?= getUrlByName('content.edit', ['type' => $data['type'], 'id' => $topic['facet_id']]); ?>">
-          <sup><i class="bi bi-pencil gray-400"></i></sup>
+          <sup><i class="bi-pencil gray-400"></i></sup>
         </a>
 
         <?php if ($topic['facet_is_deleted'] == 1) { ?>
           <span class="type-ban" data-id="<?= $topic['facet_id']; ?>" data-type="topic">
-            <sup><i class="bi bi-trash red-500"></i></sup>
+            <sup><i class="bi-trash red-500"></i></sup>
           </span>
         <?php } else { ?>
           <span class="type-ban" data-id="<?= $topic['facet_id']; ?>" data-type="topic">
-            <sup><i class="bi bi-trash gray-400"></i></sup>
+            <sup><i class="bi-trash gray-400"></i></sup>
           </span>
         <?php } ?>
 
         <?php if ($topic['matching_list']) { ?>
           <div class="ml<?= $topic['level'] * 10; ?>">
-            <i class="bi bi-bezier2 gray-600 text-sm mr5 ml5"></i>
+            <i class="bi-bezier2 gray-600 text-sm mr5 ml5"></i>
             <?= facets($topic['matching_list'], $topic['facet_type'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
           </div>
         <?php } ?>
@@ -72,7 +72,7 @@
     <?php } ?>
   <?php } else { ?>
     <?php if ($data['type'] != 'all') { ?>
-      <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
     <?php } ?>
   <?php } ?>
 </div>

@@ -1,4 +1,4 @@
-<main class="col-span-7 mb-col-12">
+<main>
   <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
@@ -54,7 +54,7 @@
   </div>
 </main>
 
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white text-sm">
     <h3 class="uppercase-box"><?= Translate::get('dialogues'); ?></h3>
     <?php foreach ($data['dialog'] as $key => $val) { ?>

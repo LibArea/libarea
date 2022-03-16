@@ -1,7 +1,6 @@
 <?php $fs = $data['facet']; ?>
 
-<main class="col-span-10 mb-col-12">
-
+<main class="col-two">
   <div class="box-flex-white">
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
     <ul class="nav">
@@ -15,17 +14,17 @@
             'id'        => 'edit',
             'url'       => getUrlByName($fs['facet_type'] . '.edit', ['id' => $fs['facet_id']]),
             'title'     => Translate::get('settings'),
-            'icon'      => 'bi bi-gear'
+            'icon'      => 'bi-gear'
           ], [
             'id'        => 'pages',
             'url'       => '',
             'title'     => Translate::get('pages'),
-            'icon'      => 'bi bi-app'
+            'icon'      => 'bi-app'
           ], [
             'id'        => 'all',
             'url'       => getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]),
             'title'     => Translate::get('go to'),
-            'icon'      => 'bi bi-arrow-up-right-square'
+            'icon'      => 'bi-arrow-up-right-square'
           ]
         ]
       ); ?>
@@ -37,7 +36,7 @@
     <div class="uppercase gray mt5 mb5">
       <?= Translate::get('pages'); ?>
       <a class="mr15 right" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('page.add'); ?>">
-        <i class="bi bi-plus-lg text-xl"></i>
+        <i class="bi-plus-lg text-xl"></i>
       </a>
     </div>
     <?php if ($data['pages']) { ?>
@@ -49,14 +48,14 @@
           </a>
           <?php if (UserData::checkAdmin() || $fs['facet_user_id'] == $user['id']) { ?>
             <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
-              <i class="bi bi-pencil"></i>
+              <i class="bi-pencil"></i>
             </a>
           <?php } ?>
         </div>
       <?php } ?>
 
     <?php } else { ?>
-      <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
     <?php } ?>
   </div>
 </main>

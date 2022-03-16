@@ -1,5 +1,5 @@
 <?php $topic = $data['facet']; ?>
-<main class="col-span-9 mb-col-12 edit-post">
+<main class="col-two">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
     <?= Tpl::import('/content/facets/topic-header', ['topic' => $topic, 'user' => $user, 'data' => $data]); ?>
 
@@ -7,13 +7,13 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
 
   <?php } else { ?>
-    <div class="center col-span-10">
-      <i class="bi bi-x-octagon text-8xl"></i>
+    <div class="center">
+      <i class="bi-x-octagon text-8xl"></i>
       <div class="mt5 gray"><?= Translate::get('remote'); ?></div>
     </div>
   <?php } ?>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
     <div class="box-flex-white bg-violet-50">
       <div class="center">

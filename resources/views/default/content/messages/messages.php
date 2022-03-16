@@ -1,11 +1,11 @@
-<main class="col-span-7 mb-col-12">
+<main>
   <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
     <?php if (!empty($data['messages'])) { ?>
      <div class="box-white">
       <?php foreach ($data['messages'] as  $msg) { ?>
-        <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> bg-yellow-100<?php } ?>">
+        <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> bg-purple-100<?php } ?>">
           <div class="text-sm flex">
             <?php if ($msg['dialog_sender_id'] == $user['id']) { ?>
               <a href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
@@ -40,12 +40,12 @@
   </div>
 <?php } else { ?>
     <div class="p20 center gray-400">
-      <i class="bi bi-envelope block text-8xl"></i>
+      <i class="bi-envelope block text-8xl"></i>
       <?= Translate::get('no.dialogs'); ?>
     </div>
 <?php } ?>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white text-sm sticky top-sm">
     <?=  Translate::get('messages.info'); ?>
   </div>

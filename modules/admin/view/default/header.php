@@ -42,4 +42,4 @@ Request::getHead()->addStyles('/assets/css/style.css?18');
       </div>
     </div>
   </header>
-  <div id="contentWrapper">
+  <div id="contentWrapper" class="wrap">

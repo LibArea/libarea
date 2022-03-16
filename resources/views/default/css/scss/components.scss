@@ -5,12 +5,8 @@
  */
 
 #contentWrapper {
-  display: grid;
+  display: flex;
   gap: 1rem;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  max-width: 1636px;
-  padding-left: 5px;
-  padding-right: 5px;
   margin: 0 auto;
 }
 
@@ -24,8 +20,9 @@ h5 {
 }
 
 .d-header {
-  align-items: center;
+  top: 0;
   z-index: 50;
+  position: sticky;
   background-color: var(--white);
   box-shadow: 0 2px 4px -1px rgb(0 0 0 / 25%);
   backface-visibility: hidden;
@@ -39,12 +36,11 @@ h5 {
 .d-header .ava-base { margin-right: 0; }
 
 .wrap {
+  margin: 0 auto;
+  height: 100%;
   max-width: 1636px;
   padding-left: 5px;
   padding-right: 5px;
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
 }
 
 .d-header_contents {
@@ -69,7 +65,7 @@ h5 {
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 60px 30px 30px;
+  padding: 20px 60px 10px 30px;
   margin: 0 auto;
 }
 
@@ -99,6 +95,11 @@ h5 {
 .tabs.active {
   background-color: var(--gray-100);
   color: var(--gray-400);
+}
+
+aside {
+  min-width: 260px;
+  max-width: 310px;
 }
 
 aside ul {
@@ -340,4 +341,4 @@ a:hover > img { opacity: 0.8; }
   height: 48px;
   width: 54px;
   text-align: center;
-}
+} 

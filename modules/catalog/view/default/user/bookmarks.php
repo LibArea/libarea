@@ -14,7 +14,7 @@
 
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
   </main>
-  <aside class="col-span-3 mb-none">
+  <aside>
     <div class="box-yellow text-sm mt15"><?= Translate::get('web.bookmarks.info'); ?>.</div>
     <?php if (UserData::checkActiveUser()) { ?>
       <div class="box-white text-sm bg-violet-50 mt15">

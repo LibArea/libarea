@@ -64,7 +64,7 @@ class FolderModel extends \Hleb\Scheme\App\Models\MainModel
 
         return   DB::run($sql, ['id' => $id, 'tid' => $tid, 'type' => $type, 'uid' => $uid]);
     }
-    
+
     // Delete the folder itself
     // Удаляем саму папку
     public static function deletingFolder($id, $type, $uid)
@@ -72,10 +72,10 @@ class FolderModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "DELETE FROM folders WHERE id = :id AND action_type = :type AND user_id = :uid";
 
         DB::run($sql, ['id' => $id, 'type' => $type, 'uid' => $uid]);
-        
+
         return self::deletingLinkedContent($id, $type, $uid);
     }
-    
+
     // Removing a content link from a folder 
     // Удаляем привязку контента к папке
     public static function deletingLinkedContent($id, $type, $uid)

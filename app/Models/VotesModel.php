@@ -34,7 +34,7 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
             'item_id'   => $content_id,
             'points'    => 1,
             'ip'        => $ip,
-            'user_id'   => $user_id,           
+            'user_id'   => $user_id,
         ];
 
         $sql = "INSERT INTO votes_" . $type . "(votes_" . $type . "_item_id, 

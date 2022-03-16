@@ -1,6 +1,6 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
-<div id="contentWrapper">
-  <div class="col-span-1 mb-none center mt30">
+<div id="contentWrapper" class="wrap">
+  <div class="mb-none center mt30">
     <?= votes($user['id'], $data['item'], 'item', 'ps', 'text-2xl middle', 'block'); ?>
     <div class="pt20">
       <?= favorite($user['id'], $data['item']['item_id'], 'website', $data['item']['tid'], 'ps', 'text-2xl'); ?>
@@ -11,7 +11,7 @@
       <h1><?= $data['item']['item_title_url']; ?>
         <?php if ($user['trust_level'] == 5) { ?>
           <a class="text-sm ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['item']['item_id']]); ?>">
-            <i class="bi bi-pencil"></i>
+            <i class="bi-pencil"></i>
           </a>
         <?php } ?>
       </h1>
@@ -36,7 +36,7 @@
           <?= $data['item']['item_content_soft']; ?>
         </div>
         <p>
-          <i class="bi bi-github mr5"></i>
+          <i class="bi-github mr5"></i>
           <a target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_github_url']; ?>">
             <a target="_blank" href="<?= $data['item']['item_url']; ?>" class="item_cleek" data-id="<?= $data['item']['item_id']; ?>" rel="nofollow noreferrer ugc">
               <?= $data['item']['item_github_url']; ?>

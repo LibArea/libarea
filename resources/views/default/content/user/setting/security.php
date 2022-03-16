@@ -3,7 +3,7 @@ $form = new Forms();
 $form->html_form($user['trust_level'], Config::get('form/user-security'));
 ?>
 
-<main class="col-span-7 mb-col-12">
+<main>
 
   <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
 
@@ -20,7 +20,7 @@ $form->html_form($user['trust_level'], Config::get('form/user-security'));
     </form>
   </div>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white text-sm">
     <?= Translate::get('info-security'); ?>
   </div>

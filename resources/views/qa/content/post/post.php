@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div class="col-span-10 w-100 mr15">
+      <div class="w-100 mr15">
         <div class="mt0 mb0">
         <?php if ($bg_url) { ?>
           <span><?= Translate::get('news'); ?>:</span>
@@ -41,7 +41,7 @@
             <?= facets($post['facet_list'], 'topic', 'topic', 'tags-xs'); ?>
             <?php if ($post['post_url_domain']) { ?>
               <a class="gray-600 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
-                <i class="bi bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
+                <i class="bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
               </a>
             <?php } ?>
           </div>
@@ -66,7 +66,7 @@
 <?php } else { ?>
   <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>
   <div class="mt10 mb10 pt10 pr15 pb10 center pl15 gray-400">
-    <i class="bi bi-journal-richtext block text-8xl"></i>
+    <i class="bi-journal-richtext block text-8xl"></i>
     <?= Translate::get('no.posts'); ?>
   </div>
 <?php } ?>

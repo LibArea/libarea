@@ -1,12 +1,12 @@
-<main class="col-span-12 mb-col-12">
-  <div class="box-white bg-violet-50 center">
+<main class="col-two">
+  <div class="bg-violet-50 box center">
     <h1 class="m0 text-xl font-normal"><?= Translate::get($data['sheet']); ?></h1>
     <span class="text-sm gray-600">
       <?= Translate::get($data['sheet'] . '.info'); ?>.
     </span>
   </div>
 
-  <div class="m15">
+  <div class="box-flex">
     <ul class="nav">
 
       <?= tabs_nav(
@@ -32,10 +32,10 @@
     </ul>
   </div>
 
-  <div class="box">
-    <div class="grid grid-cols-6 mb-grid-cols-2 gap-2">
-    <?php foreach ($data['users'] as $ind => $user) { ?>
-        <a class="center mb20" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+    <div class="flex flex-wrap">
+      <?php foreach ($data['users'] as $user) { ?>
+      <div class="w-20 mb20 mb-w-33 center">
+        <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
           <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-lg'); ?>
           <div class="block mt5">
             <?= $user['login']; ?>
@@ -43,9 +43,9 @@
           <?php if ($user['name']) { ?>
             <span class="gray text-sm"><?= $user['name']; ?></span>
           <?php } ?>
-         </a>
-    <?php } ?>
+        </a>
+        </div>
+      <?php } ?>
     </div>
-  </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
 </main>

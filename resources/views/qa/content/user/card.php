@@ -8,7 +8,7 @@
       <div class="w-100">
         <?php if ($user['id'] > 0 && $user['login'] != $user['login']) { ?>
           <a class="right btn btn-primary block" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">
-            <i class="bi bi-envelope middle mr5"></i>
+            <i class="bi-envelope middle mr5"></i>
             <?= Translate::get('message'); ?>
           </a>
         <?php } ?>
@@ -44,16 +44,16 @@
     <div class="br-bottom mt10 mb5"></div>
     <div class="mt50  lowercase text-sm">
       <?php if ($user['up_count'] > 0) { ?>
-        <i class="up-id bi bi-heart middle red mr5"></i>
+        <i class="up-id bi-heart middle red mr5"></i>
         <span class="text-sm mr15"><?= $user['up_count']; ?></span>
       <?php } ?>
       <?php if ($user['hits_count'] > 0) { ?>
-        <i class="bi bi-eye middle mr5 ml5"></i>
+        <i class="bi-eye middle mr5 ml5"></i>
         <span class="text-sm mr15"> <?= $user['hits_count']; ?></span>
       <?php } ?>
-      <i title="<?= Translate::get('medal.registration'); ?>" class="bi bi-gift right mr5 ml5 sky-500"></i>
+      <i title="<?= Translate::get('medal.registration'); ?>" class="bi-gift right mr5 ml5 sky-500"></i>
       <?php if ($user['id'] < 50) { ?>
-        <i title="<?= Translate::get('joined in the early days'); ?>" class="bi bi-award right mr5 ml5 green-600"></i>
+        <i title="<?= Translate::get('joined in the early days'); ?>" class="bi-award right mr5 ml5 green-600"></i>
       <?php } ?>
       <?php foreach ($badges as $badge) { ?>
         <span class="ml15"><?= $badge['badge_icon']; ?></span>

@@ -1,4 +1,4 @@
-<main class="col-span-9 mb-col-12">
+<main>
   <div class="box-white">
     <h1 class="mt0 mb10 text-2xl font-normal">
       <?= Translate::get('send a message'); ?> <?= $user['login']; ?> / <?= $data['login']; ?>
@@ -14,7 +14,7 @@
     </form>
   </div>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white text-sm sticky top-sm">
     <?=  Translate::get('being.developed'); ?>
   </div>

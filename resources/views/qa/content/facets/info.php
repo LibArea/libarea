@@ -1,5 +1,5 @@
 <?php $topic = $data['facet']; ?>
-<main class="col-span-9 mb-col-12 edit-post">
+<main class="col-two">
   <?= Tpl::import('/content/facets/topic-header', ['topic' => $topic, 'user' => $user, 'data' => $data]); ?>
   <div class="box-white">
     <h2 class="mt5 mb5"><?= Translate::get('Wiki'); ?></h2>
@@ -9,9 +9,9 @@
   <?= Tpl::import('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
 
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white gray-400 bg-violet-50">
-    <i class="bi bi-calendar-week mr5 middle"></i>
+    <i class="bi-calendar-week mr5 middle"></i>
     <span class="middle"><?= $topic['facet_add_date']; ?></span>
   </div>
   <?= Tpl::import('/_block/sidebar/topic', ['data' => $data]); ?>

@@ -25,8 +25,8 @@
         </a>
       <?php } ?>
       <div class="right gray-400">
-        <i class="bi bi-heart mr5"></i> <?= $gist['votes']; ?>
-        <i class="bi bi-eye mr5 ml15"></i> <?= $gist['count']; ?>
+        <i class="bi-heart mr5"></i> <?= $gist['votes']; ?>
+        <i class="bi-eye mr5 ml15"></i> <?= $gist['count']; ?>
       </div>
     </div>
   </div>

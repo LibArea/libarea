@@ -1,16 +1,35 @@
 <?php $post = $data['post']; ?>
-<div class="col-span-1 mb-none center">
+<div class="w110 mb-none center">
   <div class="sticky top-xl">
-    <?= votes($user['id'], $post, 'post', 'ps', 'text-2xl middle', 'block'); ?>
+    <?= votes($user['id'], $post, 'post', 'ps', 'text-2xl middle mt15', 'block'); ?>
     <div class="pt20">
       <?= favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
 </div>
-<main class="col-span-8 mb-col-12">
-  <article class="post-full bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 pt0 pr15 pb5 pl15">
-    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
+<main>
+  <article class="post-full <?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
+    <?php if ($post['post_is_deleted'] == 0 || $user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
       <div class="post-body">
+
+        <div class="flex flex-row items-center">
+          <?php if (!empty($data['blog'])) { ?>
+            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray-600 text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
+              <?= $data['blog'][0]['facet_title']; ?>
+            </a>
+          <?php } ?>
+
+          <?php if (!empty($data['facets'])) { ?>
+            <div class="lowercase">
+              <?php foreach ($data['facets'] as $topic) { ?>
+                <a class="tags" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+                  <?= $topic['facet_title']; ?>
+                </a>
+              <?php } ?>
+            </div>
+          <?php } ?>
+        </div>
+
         <h1><?= $post['post_title']; ?></h1>
         <div class="text-sm lowercase flex gray-400">
           <?= $post['post_date_lang']; ?>
@@ -20,7 +39,7 @@
 
           <?php if ($user['id']) { ?>
             <?php if ($user['login'] == $post['login']  || UserData::checkAdmin()) { ?>
-              <a class="gray-400 mr10 ml10" href="<?= getUrlByName('post.edit', ['id' => $post['post_id']]); ?>">
+              <a class="gray-400 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
                 <?= Translate::get('edit'); ?>
               </a>
             <?php } ?>
@@ -38,16 +57,16 @@
             <?php if (UserData::checkAdmin()) { ?>
               <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-400 mr10 ml10">
                 <?php if ($post['post_is_deleted'] == 1) { ?>
-                  <i class="bi bi-trash red-500"></i>
+                  <i class="bi-trash red-500"></i>
                 <?php } else { ?>
-                  <i class="bi bi-trash"></i>
+                  <i class="bi-trash"></i>
                 <?php } ?>
               </a>
               <a data-id="<?= $post['post_id']; ?>" class="post-recommend gray-400 mr10 ml10">
                 <?php if ($post['post_is_recommend'] == 1) { ?>
-                  <i class="bi bi-lightning sky-500"></i>
+                  <i class="bi-lightning sky-500"></i>
                 <?php } else { ?>
-                  <i class="bi bi-lightning"></i>
+                  <i class="bi-lightning"></i>
                 <?php } ?>
               </a>
             <?php } ?>
@@ -57,7 +76,7 @@
       </div>
 
       <?php if ($post['post_thumb_img']) { ?>
-        <?= post_img($post['post_thumb_img'], $post['post_title'], 'thumb right ml15 mb-ml5', 'thumbnails'); ?>
+        <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb right ml15', 'thumbnails'); ?>
       <?php } ?>
 
       <div class="post-body max-w780 full">
@@ -68,7 +87,7 @@
           <div class="mb15">
             <a rel="nofollow noreferrer ugc" target="_blank" class="btn btn-primary" href="<?= $post['post_url']; ?>">
               <?= Translate::get('details are here'); ?>
-              <i class="bi bi-folder-symlink middle ml5"></i>
+              <i class="bi-folder-symlink middle ml5"></i>
             </a>
           </div>
         <?php } ?>
@@ -76,7 +95,7 @@
           <h3 class="uppercase-box"><?= Translate::get('source'); ?></h3>
           <div class="italic m15 mb15 p10 text-sm bg-gray-100 table gray">
             <div>
-              <i class="bi bi-link-45deg"></i>
+              <i class="bi-link-45deg"></i>
               <a class="gray" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <?= $post['post_url_domain']; ?>
               </a>
@@ -84,24 +103,6 @@
           </div>
         <?php } ?>
         <?= Tpl::import('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
-
-        <div class="flex flex-row items-center mb20">
-          <?php if (!empty($data['blog'])) { ?>
-            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray-600 inline text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
-              <?= $data['blog'][0]['facet_title']; ?>
-            </a>
-          <?php } ?>
-
-          <?php if (!empty($data['facets'])) { ?>
-            <div class="lowercase">
-              <?php foreach ($data['facets'] as $topic) { ?>
-                <a class="tags" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-                  <?= $topic['facet_title']; ?>
-                </a>
-              <?php } ?>
-            </div>
-          <?php } ?>
-        </div>
       </div>
 
       <div class="br-box-gray flex items-center mb5">
@@ -134,27 +135,27 @@
               <?php } ?>
             </div>
           </li>
-          <li class="left p10 mb-none">
-            <div class="text-2xl gray-600 center mb5">
+          <li class="left p10 mb-none gray-400 text-2xl">
+            <div class="text-2xl center mb5">
               <?php if ($post['post_hits_count'] == 0) { ?>
-                <span class="gray-400 text-sm">—</span>
+                —
               <?php } else { ?>
                 <?= $post['post_hits_count']; ?>
               <?php } ?>
             </div>
-            <div class="center text-sm gray-400">
+            <div class="center text-sm">
               <?= num_word($post['post_hits_count'], Translate::get('num-view'), false); ?>
             </div>
           </li>
-          <li class="left p10 mb-none">
-            <div class="text-2xl gray-600 center mb5">
+          <li class="left p10 mb-none gray-400 text-sm">
+            <div class="text-2xl center mb5">
               <?php if ($post['amount_content'] == 0) { ?>
-                <span class="gray-400 text-sm">—</span>
+                —
               <?php } else { ?>
                 <?= $post['amount_content']; ?>
               <?php } ?>
             </div>
-            <div class="center text-sm gray-400">
+            <div class="center">
               <?= num_word($post['amount_content'], Translate::get('num-answer'), false); ?>
             </div>
           </li>
@@ -186,7 +187,7 @@
       <?php if ($user['id'] > 0) { ?>
         <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
 
-          <form class="mb15" action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+          <form action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
 
             <?= Tpl::import('/_block/editor/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
@@ -211,56 +212,52 @@
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_feature'] == 0) {
       Tpl::import('/_block/comments-view', ['data' => $data, 'post' => $post, 'user' => $user]);
-      if ($post['post_closed'] == 1) echo no_content(Translate::get('post.closed'), 'bi bi-door-closed');
+      if ($post['post_closed'] == 1) echo no_content(Translate::get('post.closed'), 'bi-door-closed');
     } else {
       Tpl::import('/_block/questions-view', ['data' => $data, 'post' => $post, 'user' => $user]);
-      if ($post['post_closed'] == 1) echo no_content(Translate::get('question.closed'), 'bi bi-door-closed');
+      if ($post['post_closed'] == 1) echo no_content(Translate::get('question.closed'), 'bi-door-closed');
     }
   } else {
-    echo no_content(Translate::get('this.draft'), 'bi bi-journal-medical');
+    echo no_content(Translate::get('this.draft'), 'bi-journal-medical');
   } ?>
 </main>
-<aside class="col-span-3 mb-none">
-  <?php if (!empty($data['facets'])) { ?> 
-    <div class="box-white bg-violet-50">
-      <h3 class="uppercase-box">
-        <?= Translate::get('topics'); ?>
-      </h3>
+<aside>
+  <?php if (!empty($data['facets'])) { ?>
+    <div class="box bg-violet-50">
+      <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['facets'] as $topic) { ?>
-        <div class="mb10">
-          <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'img-base'); ?>
+        <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'img-base'); ?>
 
-          <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
-            <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky-500 center mt5 mr5">
-              <i class="bi bi-plus"></i> <?= Translate::get('read'); ?>
-            </div>
-          <?php } ?>
-           
-          <a class="  black inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-            <?= $topic['facet_title']; ?> 
-          </a>
-
-          <div class="text-sm mt5 pr15 mb-pr0 gray-400">
-            <?= $topic['facet_short_description']; ?>          
+        <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
+          <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky-500 center mt5 mr5">
+              <i class="bi-plus"></i> <?= Translate::get('read'); ?>
           </div>
+        <?php } ?>
+
+        <a title="<?= $topic['facet_title']; ?>" class="black inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+            <?= $topic['facet_title']; ?>
+        </a>
+
+        <div class="text-sm mt5 pr15 mb-pr0 gray-400">
+          <?= $topic['facet_short_description']; ?>
         </div>
       <?php } ?>
     </div>
   <?php } ?>
 
   <?php if ($post['post_content_img']) { ?>
-    <div class="box-white bg-violet-50">
-      <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 preview br-rd5', 'cover', $post['post_content_img']); ?>
+    <div class="box bg-violet-50">
+      <img class="preview w-100 br-rd5" src="<?= AG_PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php } ?>
-  <div class="box-white bg-violet-50 center">
+  <div class="center box bg-violet-50">
      <?= Tpl::import('/share'); ?>
   </div>
   <?php if ($data['recommend']) { ?>
-    <div class="box-white bg-violet-50 sticky top-sm">
-      <h3 class="uppercase mb10 mt0 font-light text-sm gray"><?= Translate::get('recommended'); ?></h3>
+    <div class="box bg-violet-50 sticky top-sm">
+      <h3 class="uppercase-box"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
-        <div class="mb15 hidden flex text-sm"> 
+        <div class="mb15 hidden flex text-sm">
           <?php if ($rec_post['post_type'] == 'post') { ?>
             <a class="gray" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
               <?php if ($rec_post['post_answers_count'] > 0) { ?>
@@ -272,8 +269,8 @@
               <?php } ?>
             </a>
           <?php } else { ?>
-            <i class="bi bi-intersect gray-400 middle mr15 text-2xl"></i>
-          <?php } ?>          
+            <i class="bi-intersect gray-400 middle mr15 text-2xl"></i>
+          <?php } ?>
           <a class="black" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>
           </a>
@@ -292,13 +289,13 @@
         let post_id = el.dataset.post_id;
         let content_id = el.dataset.content_id;
         let type = el.dataset.type;
-           Notiflix.Confirm.show(
-            '<?= Translate::get('report'); ?>',
-            '<?= Translate::get('breaking.rules'); ?>?',
-            '<?= Translate::get('yes'); ?>',
-            '<?= Translate::get('no'); ?>',
-            function okCb() {
-              fetch("/flag/repost", {
+        Notiflix.Confirm.show(
+          '<?= Translate::get('report'); ?>',
+          '<?= Translate::get('breaking.rules'); ?>?',
+          '<?= Translate::get('yes'); ?>',
+          '<?= Translate::get('no'); ?>',
+          function okCb() {
+            fetch("/flag/repost", {
                 method: "POST",
                 body: "type=" + type + "&post_id=" + post_id + "&content_id=" + content_id,
                 headers: {
@@ -312,13 +309,13 @@
               ).then(
                 text => {}
               )
-            },
-            function cancelCb() {
-              // alert('...');
-            }, {
-              // option;  
-              },
-            );
+          },
+          function cancelCb() {
+            // alert('...');
+          }, {
+            // option;  
+          },
+        );
       }));
   <?php } ?>
 </script>

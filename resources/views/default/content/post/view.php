@@ -1,5 +1,5 @@
 <?php $post = $data['post']; ?>
-<div class="col-span-1 mb-none center">
+<div class="w110 mb-none center">
   <div class="sticky top-xl">
     <?= votes($user['id'], $post, 'post', 'ps', 'text-2xl middle mt15', 'block'); ?>
     <div class="pt20">
@@ -7,8 +7,8 @@
     </div>
   </div>
 </div>
-<main class="col-span-8 mb-col-12">
-  <article class="post-full br-box-gray br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 p15">
+<main>
+  <article class="post-full box-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
     <?php if ($post['post_is_deleted'] == 0 || $user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
       <div class="post-body">
 
@@ -57,16 +57,16 @@
             <?php if (UserData::checkAdmin()) { ?>
               <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-400 mr10 ml10">
                 <?php if ($post['post_is_deleted'] == 1) { ?>
-                  <i class="bi bi-trash red-500"></i>
+                  <i class="bi-trash red-500"></i>
                 <?php } else { ?>
-                  <i class="bi bi-trash"></i>
+                  <i class="bi-trash"></i>
                 <?php } ?>
               </a>
               <a data-id="<?= $post['post_id']; ?>" class="post-recommend gray-400 mr10 ml10">
                 <?php if ($post['post_is_recommend'] == 1) { ?>
-                  <i class="bi bi-lightning sky-500"></i>
+                  <i class="bi-lightning sky-500"></i>
                 <?php } else { ?>
-                  <i class="bi bi-lightning"></i>
+                  <i class="bi-lightning"></i>
                 <?php } ?>
               </a>
             <?php } ?>
@@ -87,7 +87,7 @@
           <div class="mb15">
             <a rel="nofollow noreferrer ugc" target="_blank" class="btn btn-primary" href="<?= $post['post_url']; ?>">
               <?= Translate::get('details are here'); ?>
-              <i class="bi bi-folder-symlink middle ml5"></i>
+              <i class="bi-folder-symlink middle ml5"></i>
             </a>
           </div>
         <?php } ?>
@@ -95,7 +95,7 @@
           <h3 class="uppercase-box"><?= Translate::get('source'); ?></h3>
           <div class="italic m15 mb15 p10 text-sm bg-gray-100 table gray">
             <div>
-              <i class="bi bi-link-45deg"></i>
+              <i class="bi-link-45deg"></i>
               <a class="gray" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <?= $post['post_url_domain']; ?>
               </a>
@@ -187,7 +187,7 @@
       <?php if ($user['id'] > 0) { ?>
         <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
 
-          <form class="mb15" action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+          <form action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
 
             <?= Tpl::import('/_block/editor/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
@@ -212,17 +212,16 @@
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_feature'] == 0) {
       Tpl::import('/_block/comments-view', ['data' => $data, 'post' => $post, 'user' => $user]);
-      if ($post['post_closed'] == 1) echo no_content(Translate::get('post.closed'), 'bi bi-door-closed');
+      if ($post['post_closed'] == 1) echo no_content(Translate::get('post.closed'), 'bi-door-closed');
     } else {
       Tpl::import('/_block/questions-view', ['data' => $data, 'post' => $post, 'user' => $user]);
-      if ($post['post_closed'] == 1) echo no_content(Translate::get('question.closed'), 'bi bi-door-closed');
+      if ($post['post_closed'] == 1) echo no_content(Translate::get('question.closed'), 'bi-door-closed');
     }
   } else {
-    echo no_content(Translate::get('this.draft'), 'bi bi-journal-medical');
+    echo no_content(Translate::get('this.draft'), 'bi-journal-medical');
   } ?>
 </main>
-<aside class="col-span-3 mb-none">
-
+<aside>
   <?php if (!empty($data['facets'])) { ?>
     <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
@@ -231,7 +230,7 @@
 
         <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
           <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky-500 center mt5 mr5">
-              <i class="bi bi-plus"></i> <?= Translate::get('read'); ?>
+              <i class="bi-plus"></i> <?= Translate::get('read'); ?>
           </div>
         <?php } ?>
 
@@ -270,7 +269,7 @@
               <?php } ?>
             </a>
           <?php } else { ?>
-            <i class="bi bi-intersect gray-400 middle mr15 text-2xl"></i>
+            <i class="bi-intersect gray-400 middle mr15 text-2xl"></i>
           <?php } ?>
           <a class="black" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>

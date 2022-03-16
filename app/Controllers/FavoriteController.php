@@ -25,7 +25,7 @@ class FavoriteController extends MainController
         if (!in_array($type, $allowed)) {
             return false;
         }
-        
+
         self::redirectItem($content_id, $type, $this->user);
 
         $action = FavoriteModel::setFavorite(
@@ -55,5 +55,4 @@ class FavoriteController extends MainController
 
         pageRedirection($content, '/');
     }
-
 }

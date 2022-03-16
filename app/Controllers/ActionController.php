@@ -110,7 +110,7 @@ class ActionController extends MainController
             return false;
         }
     }
-    
+
     // Creating Content and Adding Facets (Navigation)
     // Создание контента и добавление фасетов (навигация)
     public function create()
@@ -129,7 +129,7 @@ class ActionController extends MainController
             return false;
         }
     }
-    
+
     // Content and facet changes (navigation)
     // Изменения контента и фасетов (навигация)
     public function change()
@@ -146,6 +146,6 @@ class ActionController extends MainController
             return (new Comment\EditCommentController)->edit();
         } else {
             return false;
-        }  
+        }
     }
 }

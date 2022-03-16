@@ -23,7 +23,7 @@
                     </span>
                   </a>
                   <?php if ($post['post_user_id'] == $answer['answer_user_id']) { ?>
-                    <span class="sky-500 mr5 ml0"><i class="bi bi-mic text-sm"></i></span>
+                    <span class="sky-500 mr5 ml0"><i class="bi-mic text-sm"></i></span>
                   <?php } ?>
                   <span class="mr5 ml5 gray-400 lowercase">
                     <?= lang_date($answer['answer_date']); ?>
@@ -33,7 +33,7 @@
                       (<?= Translate::get('ed'); ?>.)
                     </span>
                   <?php } ?>
-                  <a rel="nofollow" class="gray-400 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
+                  <a rel="nofollow" class="gray-400 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
                   <?= Tpl::import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
                 </div>
                 <div class="m0 max-w780">
@@ -59,7 +59,7 @@
 
                 <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600 ml10 mr10">
-                    <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
+                    <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
                   </a>
                 <?php } ?>
 
@@ -67,7 +67,7 @@
 
                 <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
-                    <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
+                    <i title="<?= Translate::get('report'); ?>" class="bi-flag"></i>
                   </a>
                 <?php } ?>
               </div>
@@ -128,17 +128,17 @@
                       </span>
                     </a>
                     <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>
-                      <span class="sky-500 mr5"><i class="bi bi-mic text-sm"></i></span>
+                      <span class="sky-500 mr5"><i class="bi-mic text-sm"></i></span>
                     <?php } ?>
                     <span class="mr5 ml5 gray-400 lowercase">
                       <?= lang_date($comment['comment_date']); ?>
                     </span>
                     <?php if ($comment['comment_comment_id'] > 0) { ?>
-                      <a class="gray-400 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><i class="bi bi-arrow-up"></i></a>
+                      <a class="gray-400 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><i class="bi-arrow-up"></i></a>
                     <?php } else { ?>
-                      <a class="gray-400 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi bi-arrow-up"></i></a>
+                      <a class="gray-400 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi-arrow-up"></i></a>
                     <?php } ?>
-                    <a class="gray-400 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi bi-hash"></i></a>
+                    <a class="gray-400 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi-hash"></i></a>
                     <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
                   </div>
                   <div class="mt5 mb10">
@@ -167,7 +167,7 @@
 
                   <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-400 ml15">
-                      <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
+                      <i title="<?= Translate::get('report'); ?>" class="bi-flag"></i>
                     </a>
                   <?php } ?>
                 </div>
@@ -181,9 +181,9 @@
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
     <?php if ($user['id'] > 0) { ?>
-      <?= no_content(Translate::get('no.comments'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get('no.comments'), 'bi-info-lg'); ?>
     <?php } else { ?>
-      <?= no_content(Translate::get('no.auth.login'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get('no.auth.login'), 'bi-info-lg'); ?>
     <?php } ?>
   <?php } ?>
 <?php } ?>

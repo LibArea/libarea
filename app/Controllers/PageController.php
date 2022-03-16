@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{PageModel, FacetModel};
-use Translate, Content, Config, Tpl, UserData;
+use Translate, Content, Tpl, UserData;
 
 class PageController extends MainController
 {
@@ -74,5 +74,4 @@ class PageController extends MainController
     {
         return PageModel::recentPostsAll();
     }
-
 }

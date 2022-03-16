@@ -1,7 +1,6 @@
 <?php $blog = $data['facet'];
 if ($blog['facet_is_deleted'] == 0) { ?>
-
-  <div class="col-span-12 mb-col-12">
+  <div>
     <div class="box-flex-white" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= cover_url($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
       <div class="mb-none">
         <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'img-xl'); ?>
@@ -10,8 +9,8 @@ if ($blog['facet_is_deleted'] == 0) { ?>
         <h1 class="mb0 mt10 text-2xl">
           <?= $blog['facet_seo_title']; ?>
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
-            <a class="right white fon-rgba -mt20" href="<?= getUrlByName('blog.edit', ['id' => $blog['facet_id']]); ?>">
-              <i class="bi bi-pencil bold"></i>
+            <a class="right white fon-rgba -mt20" href="<?= getUrlByName('content.edit', ['type' => 'blog', 'id' => $blog['facet_id']]); ?>">
+              <i class="bi-pencil bold"></i>
             </a>
           <?php } ?>
         </h1>
@@ -35,33 +34,33 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       </div>
     </div>
 
-    <div class="grid grid-cols-12 gap-4 mb-gap-05">
-      <main class="col-span-9 mb-col-12">
+    <div class="flex gap">
+      <main class="col-two">
         <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>
-      <aside class="col-span-3 mb-none">
+      <aside>
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
-          <div class="box-white bg-violet-50 text-sm">
+          <div class="bg-violet-50 box text-sm">
             <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
               <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'ava-base'); ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>
             </a>
             <div class="gray-400 text-sm mt5">
-              <i class="bi bi-calendar-week mr5 ml5 middle"></i>
+              <i class="bi-calendar-week mr5 ml5 middle"></i>
               <span class="middle lowercase"><?= $blog['facet_add_date']; ?></span>
             </div>
           </div>
           <?php if ($data['info']) { ?>
-            <div class="box-white bg-violet-50 text-sm shown_post">
+            <div class="bg-violet-50 box text-sm shown_post">
               <?= $data['info']; ?>
             </div>
           <?php } ?>
 
           <?php if (!empty($data['pages'])) { ?>
             <div class="sticky top0 top-sm">
-              <div class="box-white bg-violet-50 text-sm">
+              <div class="bg-violet-50 box text-sm">
                 <h3 class="uppercase-box"><?= Translate::get('pages'); ?></h3>
                 <?php foreach ($data['pages'] as $ind => $row) { ?>
                   <div class="mb5">
@@ -69,8 +68,8 @@ if ($blog['facet_is_deleted'] == 0) { ?>
                       <?= $row['post_title']; ?>
                     </a>
                     <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
-                      <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
-                        <i class="bi bi-pencil"></i>
+                      <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
+                        <i class="bi-pencil"></i>
                       </a>
                     <?php } ?>
                   </div>
@@ -83,8 +82,8 @@ if ($blog['facet_is_deleted'] == 0) { ?>
     </div>
   </div>
 <?php } else { ?>
-  <div class="center col-span-10">
-    <i class="bi bi-x-octagon text-8xl"></i>
+  <div class="center">
+    <i class="bi-x-octagon text-8xl"></i>
     <div class="mt5 gray"><?= Translate::get('remote'); ?></div>
   </div>
 <?php } ?>

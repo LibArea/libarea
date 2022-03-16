@@ -1,4 +1,4 @@
-<main class="col-span-9 mb-col-12">
+<main class="col-two">
   <div class="box-white">
     <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('invite'); ?></h1>
     <form class="" action="/invite" method="post">
@@ -19,7 +19,7 @@
     <?php } ?>
   </div>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white bg-violet-50 text-sm">
     <?= Translate::get('invited you'); ?>
   </div>

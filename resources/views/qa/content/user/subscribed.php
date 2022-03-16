@@ -1,4 +1,4 @@
-<main class="col-span-9 mb-col-12">
+<main class="col-two">
   <div class="box-white bg-violet-50">
     <ul class="nav">
 
@@ -32,7 +32,7 @@
     <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
   </div>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white bg-violet-50 text-sm">
     <?= Translate::get('info-preferences'); ?>
   </div>

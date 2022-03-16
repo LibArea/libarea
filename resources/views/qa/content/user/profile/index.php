@@ -1,9 +1,15 @@
-<?= Tpl::import('/content/user/profile/header', ['user' => $user, 'data' => $data]); ?>
- 
-<?= Tpl::import('/content/user/profile/sidebar', ['user' => $user, 'data' => $data]); ?>
+ <div>
+    <?= Tpl::import('/content/user/profile/header', ['user' => $user, 'data' => $data]); ?>
 
-<main class="col-span-8 mb-col-12">
-  <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
+    <div class="flex gap">
+       <main class="col-two">
+          <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
 
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/posts'); ?>
-</main>
+          <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/posts'); ?>
+       </main>
+       <aside>
+          <?= Tpl::import('/content/user/profile/sidebar', ['user' => $user, 'data' => $data]); ?>
+       </aside>
+    </div>
+
+ </div>

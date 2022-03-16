@@ -27,7 +27,7 @@
 
               <?php if (accessСheck($item, 'item', $user, false, false) === true) { ?>
                 <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
-                  <i class="bi bi-pencil text-sm"></i>
+                  <i class="bi-pencil text-sm"></i>
                 </a> - <?= $item['item_following_link']; ?>
               <?php } ?>
 
@@ -40,13 +40,13 @@
                   <?= $item['item_url_domain']; ?>
                   <?php if ($item['item_github_url']) { ?>
                     <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                      <i class="bi bi-github text-sm mr5"></i>
+                      <i class="bi-github text-sm mr5"></i>
                       <?= $item['item_title_soft']; ?>
                     </a>
                   <?php } ?>
                   <?php if ($item['item_published'] == 1) { ?>
                     <div>
-                      <i class="bi bi-arrow-return-right gray-600 ml10"></i>
+                      <i class="bi-arrow-return-right gray-600 ml10"></i>
                       <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
                         <?= Translate::get('more.detailed'); ?>
                       </a>
@@ -59,12 +59,12 @@
         <?php } ?>
       </ol>
     <?php } else { ?>
-      <?= no_content(Translate::get('no.user.sites'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get('no.user.sites'), 'bi-info-lg'); ?>
     <?php } ?>
 
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
   </main>
-  <aside class="col-span-3 mb-none">
+  <aside>
     <div class="box-yellow text-sm mt15"><?= Translate::get('user.sites.info'); ?>.</div>
     <?php if (UserData::checkActiveUser()) { ?>
       <div class="box-white text-sm bg-violet-50 mt15">

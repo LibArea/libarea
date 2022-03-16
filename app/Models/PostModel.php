@@ -251,7 +251,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     public static function setPostProfile($post_id, $user_id)
     {
         $result = self::getPostProfile($post_id, $user_id);
-        
+
         if (is_array($result)) {
 
             $sql = "UPDATE users SET my_post = :my_post_id WHERE id = :id AND my_post = :post_id";
@@ -264,16 +264,16 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "UPDATE users SET my_post = :post_id WHERE id = :id";
 
         DB::run($sql, ['post_id' => $post_id, 'id' => $user_id]);
-        
+
         return 'add';
     }
-    
+
     public static function getPostProfile($post_id, $user_id)
     {
         $sql = "SELECT my_post FROM users WHERE my_post = :post_id AND id = :id";
 
         return  DB::run($sql, ['post_id' => $post_id, 'id' => $user_id])->fetch();
-    }    
+    }
 
     // Удален пост или нет
     public static function isThePostDeleted($post_id)
@@ -345,7 +345,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['post_id' => $post_id])->fetch();
     }
-    
+
     // Check if the domain exists 
     // Проверим наличие домена
     public static function getDomain($domain, $uid)
@@ -376,7 +376,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['domain' => $domain, 'uid' => $uid])->fetch();
     }
-    
+
     // 5 popular domains
     // 5 популярных доменов
     public static function getDomainTop($domain)
@@ -398,7 +398,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['domain' => $domain])->fetchAll();
     }
-    
+
     // Кто подписан на данный вопрос / пост
     public static function getFocusUsersPost($post_id)
     {
@@ -410,7 +410,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['post_id' => $post_id])->fetchAll();
     }
-    
+
     // Список читаемых постов
     public static function getFocusPostUser($uid)
     {

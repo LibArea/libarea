@@ -8,12 +8,12 @@
         'id' => $data['type'] . '.all',
         'url' => getUrlByName('admin.' . $data['type']),
         'name' => Translate::get('all'),
-        'icon' => 'bi bi-record-circle'
+        'icon' => 'bi-record-circle'
       ], [
         'id' => $data['type'] . '.ban',
         'url' => getUrlByName('admin.' . $data['type'] . '.ban'),
         'name' => Translate::get('deleted'),
-        'icon' => 'bi bi-x-circle'
+        'icon' => 'bi-x-circle'
       ]
     ]
   ]
@@ -48,7 +48,7 @@
             <?php if ($user['invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?>
             <?php if ($user['whisper']) { ?>
               <span title="<?= $user['whisper']; ?>" class="tips text-sm gray-600">
-                <i class="bi bi-info-square green-600"></i>
+                <i class="bi-info-square green-600"></i>
               </span>
             <?php } ?>
             <div class="text-sm">
@@ -104,14 +104,14 @@
           </td>
           <td class="center">
             <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
-              <i class="bi bi-pencil"></i>
+              <i class="bi-pencil"></i>
             </a>
           </td>
         </tr>
       <?php } ?>
     </table>
   <?php } else { ?>
-    <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
   <?php } ?>
   <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('admin.users')); ?>
 </div>

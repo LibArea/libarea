@@ -154,7 +154,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     public static function uniqueSlug($facet_slug, $facet_type)
     {
         $sql = "SELECT facet_slug, facet_type FROM facets WHERE facet_slug = :slug AND facet_type = :type";
-        
+
         return DB::run($sql, ['slug' => $facet_slug, 'type' => $facet_type])->fetch();
     }
 
@@ -163,7 +163,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     public static function uniqueById($facet_id)
     {
         $sql = "SELECT facet_id, facet_slug, facet_type, facet_user_id, facet_is_deleted FROM facets WHERE facet_id = :id";
-        
+
         return DB::run($sql, ['id' => $facet_id])->fetch();
     }
 
@@ -219,10 +219,10 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         foreach ($rows as $row) {
             $facet_id   = $row['id'];
             if ($item_id == $row['id']) return true;
-                $sql = "INSERT INTO facets_items_relation (relation_facet_id, relation_item_id) 
+            $sql = "INSERT INTO facets_items_relation (relation_facet_id, relation_item_id) 
                         VALUES ($facet_id, $item_id)";
 
-                DB::run($sql);
+            DB::run($sql);
         }
 
         return true;
@@ -237,10 +237,10 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         foreach ($rows as $row) {
             $facet_id   = $row['id'];
             if ($topic_id == $row['id']) return true;
-                $sql = "INSERT INTO facets_relation (facet_parent_id, facet_chaid_id) 
+            $sql = "INSERT INTO facets_relation (facet_parent_id, facet_chaid_id) 
                         VALUES ($topic_id, $facet_id)";
 
-                DB::run($sql);
+            DB::run($sql);
         }
 
         return true;
@@ -255,10 +255,10 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         foreach ($rows as $row) {
             $facet_id   = $row['id'];
             if ($topic_id == $row['id']) return true;
-                $sql = "INSERT INTO facets_matching (matching_parent_id, matching_chaid_id) 
+            $sql = "INSERT INTO facets_matching (matching_parent_id, matching_chaid_id) 
                         VALUES ($topic_id, $facet_id)";
 
-                DB::run($sql);
+            DB::run($sql);
         }
 
         return true;
@@ -590,7 +590,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         return  DB::run($sql, $params);
     }
-    
+
     public static function types()
     {
         return  DB::run('SELECT type_id, type_code, type_lang FROM facets_types');

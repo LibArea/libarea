@@ -1,10 +1,10 @@
 <?php $topic = $data['facet']; ?>
-<main class="col-span-9 mb-col-12 edit-post">
+<main class="col-two">
   <?= Tpl::import('/content/facets/topic-header', ['topic' => $topic, 'user' => $user, 'data' => $data]); ?>
   <div class="box-whitee">
     <?php if (!empty($data['writers'])) { ?>
       <div class="flex items-center m10">
-        <i class="bi bi-award red-500 text-3xl mr10"></i>
+        <i class="bi-award red-500 text-3xl mr10"></i>
         <h2 class="gray-600"><?= Translate::get('by.deposit'); ?></h2>
       </div>
       <hr class="mb20">
@@ -27,9 +27,9 @@
     <?php } ?>
   </div>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white gray-400">
-    <i class="bi bi-calendar-week mr5 middle"></i>
+    <i class="bi-calendar-week mr5 middle"></i>
     <span class="middle"><?= $topic['facet_add_date']; ?></span>
   </div>
   <?= Tpl::import('/_block/sidebar/topic', ['data' => $data]); ?>

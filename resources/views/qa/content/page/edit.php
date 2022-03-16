@@ -1,5 +1,5 @@
 <?php $post   = $data['post']; ?>
-<main class="col-span-12 mb-col-12 edit-post">
+<main class="w-100">
   <div class="bg-white items-center justify-between p15 mb15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /

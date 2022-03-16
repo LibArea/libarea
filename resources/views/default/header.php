@@ -1,20 +1,22 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?18');
+Request::getHead()->addStyles('/assets/css/style.css?21');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
 <?= Tpl::import('/meta', ['meta' => $meta]); ?>
 
-<body class="body-bg-fon<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
+<body class="body-bg-fon<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?><?php if (Request::getCookie('menuYesNo') == 'menuno') { ?> menuno<?php } ?>">
 
-  <header class="d-header sticky top0">
+  <header class="d-header">
     <div class="wrap">
-      <div class="d-header_contents mb-pl0 mb-pr0">
+      <div class="d-header_contents">
 
-        <div class="none mb-block">
-          <div class="menu__button mr10">
-            <i class="bi bi-list gray-400 text-xl"></i>
-          </div>
+        <div id="togglemenu" class="mb-none mr10">
+            <i class="bi-list gray-400 text-xl"></i>
+        </div>
+        
+        <div class="menu__button none mb-block mr10">
+          <i class="bi-list gray-400 text-xl"></i>
         </div>
 
         <a title="<?= Translate::get('home'); ?>" class="logo black" href="/">
@@ -30,9 +32,9 @@ $facet  = $data['facet'] ?? false; ?>
         </div>
 
         <?php if (!UserData::checkActiveUser()) { ?>
-          <div class="flex right col-span-4 items-center">
+          <div class="flex right items-center">
             <div id="toggledark" class="header-menu-item mb-none ml45">
-              <i class="bi bi-brightness-high gray-400 text-xl"></i>
+              <i class="bi-brightness-high gray-400 text-xl"></i>
             </div>
             <?php if (Config::get('general.invite') == false) { ?>
               <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 block" href="<?= getUrlByName('register'); ?>">
@@ -50,19 +52,19 @@ $facet  = $data['facet'] ?? false; ?>
             <?= add_post($facet, $user['id']); ?>
 
             <div id="toggledark" class="only-icon ml45 mb-ml20">
-              <i class="bi bi-brightness-high gray-400"></i>
+              <i class="bi-brightness-high gray-400"></i>
             </div>
 
             <a class="gray-400 ml45 mb-ml20" href="<?= getUrlByName('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['action_type'] == 1) { ?>
-                  <i class="bi bi-envelope red-500"></i>
+                  <i class="bi-envelope red-500"></i>
                 <?php } else { ?>
-                  <i class="bi bi-bell-fill red-500"></i>
+                  <i class="bi-bell-fill red-500"></i>
                 <?php } ?>
               <?php } else { ?>
-                <i class="bi bi-bell"></i>
+                <i class="bi-bell"></i>
               <?php } ?>
             </a>
 
@@ -84,12 +86,14 @@ $facet  = $data['facet'] ?? false; ?>
       </div>
     </div>
   </header>
-  <div id="contentWrapper">
 
-    <?php if ($user['id'] == 0 && $data['type'] == 'main') { ?>
-      <div class="box mb-none col-span-12 bg-white br-box-gray center">
-        <h1><?= Config::get('meta.banner_title'); ?></h1>
-        <p><?= Config::get('meta.banner_desc'); ?>...</p>
-      </div>
-    <?php } ?>
-    <?= Tpl::import('/menu', ['data' => $data, 'user' => $user]); ?>
+  <?php if ($user['id'] == 0 && $data['type'] == 'main') { ?>
+    <div class="box-white mb-none br-box-gray center">
+      <h1><?= Config::get('meta.banner_title'); ?></h1>
+      <p><?= Config::get('meta.banner_desc'); ?>...</p>
+    </div>
+  <?php } ?>
+
+  <div id="contentWrapper" class="wrap">
+ 
+  <?= Tpl::import('/menu', ['data' => $data, 'user' => $user]); ?>

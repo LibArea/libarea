@@ -1,4 +1,4 @@
-<main class="col-span-9 mb-col-12">
+<main class="col-two">
   <h1 class="ml15"><?= Translate::get($data['type']); ?></h1>
 
   <?php if (!empty($data['comments'])) { ?>
@@ -37,7 +37,7 @@
     <?= no_content(Translate::get('no.comments'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white bg-violet-50 text-sm">
     <?= Translate::get('comments-desc'); ?>
   </div>

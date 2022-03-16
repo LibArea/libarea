@@ -34,7 +34,6 @@ html {
   --blue-500: #3b82f6;
   --slate-100: #f1f5f9;
   --slate-300: #cbd5e1;
-  --yellow-100: #fef9c3;
   --yellow-500: #eab308;
   --purple-100: #f3e8ff;
   --pink-800: #9d174d;
@@ -180,13 +179,12 @@ img {
 .bg-green-600 { background-color: var(--green-600); }
 .bg-gray-100 { background-color: var(--gray-100); }
 .bg-violet-50 { background-color: var(--violet-50); } 
-.bg-yellow-100 { background-color: var(--yellow-100); }
 .bg-purple-100 { background-color: var(--purple-100); }
 .bg-blue-100 { background-color: var(--blue-100); }
 .bg-blue-500 { background-color: var(--blue-500); }
 .bg-sky-50 { background-color: var(--sky-50); }
 .bg-red-200 { background-color: var(--red-200); }
-.bg-pink-800 { background-color: var(pink-800); }
+.bg-pink-800 { background-color: var(--pink-800); }
 
 /*
  * Other
@@ -208,6 +206,7 @@ img {
 .br-rd-50 { border-radius: 50%; }
 
 .w-auto { width: auto; }
+.w-20 { width: 20%; }
 .w-30 { width: 30%; }
 .w-50 { width: 50%; }
 .w-70 { width: 70%; }
@@ -254,34 +253,14 @@ img {
 .font-semibold { font-weight: 600; }
 .font-bold { font-weight: 700; }
 
-.grid { display:grid; }
-.grid-cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
-.grid-cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
-.grid-cols-6 { grid-template-columns: repeat(6, minmax(0,1fr)); }
-.grid-cols-8 { grid-template-columns: repeat(8, minmax(0,1fr)); }
-.grid-cols-12 { grid-template-columns: repeat(12, minmax(0,1fr)); }
-
-.col-span-1 { grid-column: span 1 / span 1; }
-.col-span-2 { grid-column: span 2 / span 2; }
-.col-span-3 { grid-column: span 3 / span 3; }
-.col-span-4 { grid-column: span 4 / span 4; }
-.col-span-5 { grid-column: span 5 / span 5; }
-.col-span-6 { grid-column: span 6 / span 6; }
-.col-span-7 { grid-column: span 7 / span 7; }
-.col-span-8 { grid-column: span 8 / span 8; }
-.col-span-9 { grid-column: span 9 / span 9; }
-.col-span-10 { grid-column: span 10 / span 10; }
-.col-span-12 { grid-column: span 12 / span 12; }
-
-.gap-2 { gap: 0.5rem; }
-.gap-4 { gap: 1rem; }
-
+.grid { display: grid; }
+.gap { gap: 1rem; }
 .flex { display: flex; }
 .fixed { position: fixed; }
 .flex-row { flex-direction:row; }
-.flex-col { flex-direction:column; }
-.flex-wrap { flex-wrap:wrap; }
-.flex-nowrap { flex-wrap:nowrap }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap }
 .flex-auto { flex: 1 1 0%; }
 
 .clear { clear: both; }

@@ -17,7 +17,7 @@ foreach ($data['answers'] as $answer) {
               </span>
             </a>
             <?php if ($answer['post_user_id'] == $answer['answer_user_id']) { ?>
-              <span class="sky-500 mr5 ml0"><i class="bi bi-mic text-sm"></i></span>
+              <span class="sky-500 mr5 ml0"><i class="bi-mic text-sm"></i></span>
             <?php } ?>
             <span class="mr5 ml5 gray-400 lowercase">
               <?= lang_date($answer['answer_date']); ?>
@@ -27,7 +27,7 @@ foreach ($data['answers'] as $answer) {
                 (<?= Translate::get('ed'); ?>.)
               </span>
             <?php } ?>
-            <a rel="nofollow" class="gray-400 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
+            <a rel="nofollow" class="gray-400 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
             <?= Tpl::import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
           </div>
           <div class="m0 max-w780">
@@ -53,7 +53,7 @@ foreach ($data['answers'] as $answer) {
 
           <?php if (UserData::checkAdmin()) { ?>
             <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600 ml10 mr10">
-              <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
+              <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
             </a>
           <?php } ?>
 
@@ -61,7 +61,7 @@ foreach ($data['answers'] as $answer) {
 
           <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
             <a data-post_id="<?= $answer['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
-              <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
+              <i title="<?= Translate::get('report'); ?>" class="bi-flag"></i>
             </a>
           <?php } ?>
         </div>

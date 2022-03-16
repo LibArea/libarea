@@ -9,21 +9,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 
-<body class="max-width mr-auto w-100 grid grid-cols-12 justify-between">
-  <div class="col-span-2 mb-none"></div>
-  <div class="col-span-8 mb-col-12 hidden p20 mt15">
-    <div class="mb0">
-      <h1 class="text-3xl font-semibold gray mt0 mb0">404</h1>
-      <p class="gray-600"><?= Translate::get('page.not'); ?></p>
-      <a class="btn btn-primary" href="/">
-        <?= Translate::get('to main'); ?>
-      </a>
-      <div class="mt15 text-sm gray-400">
-        <?= Translate::get('page.removed'); ?>...
-      </div>
-    </div>
+<body class="body-bg-fon mt30">
+
+  <main class="max-w780 mr-auto box-white">
+    <h1 class="text-3xl font-semibold gray mt0 mb0">404</h1>
+    <p class="gray-600"><?= Translate::get('page.not'); ?></p>
+    <a class="btn btn-primary" href="/"><?= Translate::get('to main'); ?></a>
     <img class="right" src="<?= Config::get('meta.img_footer_path'); ?>">
-  </div>
+    <p class="gray-400"><?= Translate::get('page.removed'); ?>...</p>
+  </main>
 
 </body>
 

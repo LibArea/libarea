@@ -4,13 +4,7 @@
  * Стили для каталога
  */
 
-main {
-  grid-column: span 9 / span 9;
-  margin-left: 30px;
-}
-
-main.website { grid-column: span 8 / span 8; }
-aside { grid-column: span 3 / span 3; }
+main { margin-left: 30px; }
 
 .logo {
   margin-top: 30px;
@@ -81,23 +75,15 @@ aside { grid-column: span 3 / span 3; }
 
 .item-categories {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   background-color: var(--violet-50);
   padding: 20px 20px 20px 30px;
   margin-bottom: 25px;
 }
 
-.item-categories-telo {
-  margin-bottom: 10px;
-}
+.item-categories-telo { margin-bottom: 10px; }
 
 @media (max-width: 980px) {
-  main { 
-    grid-column: span 12 / span 12;
-    margin-left: 15px; 
-  }
-    
   aside,  
   .logo {
     display: none;
@@ -106,9 +92,9 @@ aside { grid-column: span 3 / span 3; }
   .item-categories,
   .item-cat {
     padding: 20px 20px 20px 15px;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-  
+
+  main { margin-left: 15px; }  
   .item-search { padding: 10px; }
   .item-search-right { margin-left: 0; }
 }

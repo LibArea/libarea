@@ -15,7 +15,7 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
         <div data-template="one" id="find tippy">
 
           <a class="tabs black mr15" href="/">
-            <i class="bi bi-house"></i>
+            <i class="bi-house"></i>
             <?= Translate::get('to the website'); ?>
           </a>
 
@@ -27,9 +27,9 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
             <?= Translate::get('websites'); ?>
           </a>
 
-          <div class="flex right col-span-4 items-center">
+          <div class="flex right items-center">
             <div id="toggledark" class="header-menu-item mb-none only-icon mr30 mb-ml10">
-              <i class="bi bi-brightness-high gray-400 text-xl"></i>
+              <i class="bi-brightness-high gray-400 text-xl"></i>
             </div>
             <?php if (!UserData::checkActiveUser()) { ?>
               <?php if (Config::get('general.invite') == false) { ?>

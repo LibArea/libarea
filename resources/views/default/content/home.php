@@ -1,4 +1,4 @@
-<main class="col-span-7 mb-col-12">
+<main>
   <div class="box-flex-white relative">
     <ul class="nav">
 
@@ -11,24 +11,24 @@
             'id'    => $data['type'] . '.feed',
             'url'   => '/',
             'title' => Translate::get('feed'),
-            'icon'  => 'bi bi-sort-down'
+            'icon'  => 'bi-sort-down'
           ], [
             'tl'    => 1,
             'id'    => $data['type'] . '.all',
             'url'   => getUrlByName('main.all'),
             'title' => Translate::get('all'),
-            'icon'  => 'bi bi-app'
+            'icon'  => 'bi-app'
           ], [
             'id'    => $data['type'] . '.top',
             'url'   => getUrlByName('main.top'),
             'title' => Translate::get('top'),
-            'icon'  => 'bi bi-bar-chart'
+            'icon'  => 'bi-bar-chart'
           ], [
             'tl'    => 9,
             'id'    => $data['type'] . '.deleted',
             'url'   => getUrlByName('main.deleted'),
             'title' => Translate::get('deleted'),
-            'icon'  => 'bi bi-bar-chart'
+            'icon'  => 'bi-bar-chart'
           ],
         ]
       ); ?>
@@ -36,7 +36,7 @@
     </ul>
 
     <div class="trigger">
-      <i class="bi bi-info-square gray-400"></i>
+      <i class="bi-info-square gray-400"></i>
     </div>
     <div class="dropdown tooltip"><?= Translate::get($data['sheet'] . '.info'); ?></div>
 
@@ -49,7 +49,7 @@
   </div>
 </main>
 
-<aside class="col-span-3 mb-none">
+<aside>
   <?php if ($user['id'] == 0) { ?>
     <?= Tpl::import('/_block/sidebar/login', ['user' => $user]); ?>
   <?php } ?>
@@ -87,7 +87,7 @@
             </a>
             <?php if ($user['id'] == $topic['facet_user_id']) { ?>
               <a class="right gray-400 mt5" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
-                <i class="bi bi-plus-lg text-sm"></i>
+                <i class="bi-plus-lg text-sm"></i>
               </a>
             <?php } ?>
           </li>
@@ -95,7 +95,7 @@
       </ul>
       <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) { ?>
         <a class="gray-400 block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
-          <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
+          <?= Translate::get('see more'); ?> <i class="bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
     </div>

@@ -41,7 +41,7 @@
       <?php } ?>
     </fieldset>
     <fieldset>
-      <i class="bi bi-eye"></i> <?= $data['user']['hits_count']; ?>
+      <i class="bi-eye"></i> <?= $data['user']['hits_count']; ?>
     </fieldset>
     <fieldset>
       <label for="post_title"><?= Translate::get('registration'); ?></label>

@@ -1,4 +1,4 @@
-<main class="col-span-7 mb-col-12">
+<main>
   <div class="box-flex-white">
     <ul class="nav">
 
@@ -49,7 +49,7 @@
   <?php } ?>
 
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white text-sm sticky top-sm">
     <?= Translate::get('being.developed'); ?>
   </div>

@@ -1,4 +1,4 @@
-<main class="col-span-9 mb-col-12">
+<main class="col-two">
   <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
 
   <div class="bg-white box">
@@ -84,7 +84,7 @@
     </form>
   </div>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white bg-violet-50 text-sm">
     <?= Translate::get('info-setting'); ?>
   </div>

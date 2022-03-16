@@ -8,7 +8,7 @@
     <fieldset>
       <label for="password"><?= Translate::get('password'); ?></label>
       <input type="password" id="password" placeholder="<?= Translate::get('enter your password'); ?>" name="password">
-      <span class="showPassword absolute gray-400 right5 mt5 text-lg"><i class="bi bi-eye"></i></span>
+      <span class="showPassword absolute gray-400 right5 mt5 text-lg"><i class="bi-eye"></i></span>
     </fieldset>
     <fieldset class="flex items-center">
       <input type="checkbox" id="rememberme" name="rememberme" value="1">

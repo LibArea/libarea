@@ -62,7 +62,7 @@ class FolderController extends MainController
 
         FolderModel::saveFolderContent($id, $tid, $type, $this->user['id']);
     }
-    
+
     // Delete the folder itself
     // Удаляем саму папку
     public function delFolder()
@@ -72,5 +72,4 @@ class FolderController extends MainController
 
         return FolderModel::deletingFolder($id, $type, $this->user['id']);
     }
-    
 }

@@ -24,7 +24,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 if ($result) $string = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")";
             }
         }
-        
+
         $display = self::display($type, $user['trust_level']);
 
         $sort = "ORDER BY post_top DESC, post_date DESC";
@@ -139,12 +139,11 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             if ($type == 'main.deleted') {
                 $display = "AND post_is_deleted = 1";
             }
-
         } elseif ($trust_level > 0) {
             $display = "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
         } else {
             $display = "AND post_is_deleted = 0 AND post_votes > 1 AND post_tl <= " . $trust_level;
-        } 
+        }
 
         return $display;
     }

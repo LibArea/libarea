@@ -29,7 +29,7 @@
       <?= sumbit(Translate::get('update.data')); ?>
     </form>
   </fieldset>
-  <fieldset>
+  <fieldset class="max-w640">
     <label for="mail"><?= Translate::get('Email'); ?></label>
     <form action="<?= getUrlByName('admin.test.mail'); ?>" method="post">
       <input type="mail" name="mail" value="">

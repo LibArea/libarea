@@ -14,13 +14,13 @@
 
           <?php if (accessСheck($item, 'item', $user, false, false) === true) { ?>
             <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
-              <i class="bi bi-pencil text-sm"></i>
+              <i class="bi-pencil text-sm"></i>
             </a> - <?= $item['item_following_link']; ?>
           <?php } ?>
 
           <?php if (!empty($delete_fav)) { ?>
             <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="website">
-              <i class="bi bi-trash red-500"></i>
+              <i class="bi-trash red-500"></i>
             </span>
           <?php } ?>
           <div class="list-items__text">
@@ -32,12 +32,12 @@
               <?= $item['item_url_domain']; ?>
               <?php if ($item['item_github_url']) { ?>
                 <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                  <i class="bi bi-github text-sm mr5"></i>
+                  <i class="bi-github text-sm mr5"></i>
                   <?= $item['item_title_soft']; ?>
                 </a>
               <?php } ?>
               <div>
-                <i class="bi bi-arrow-return-right gray-600 ml10"></i>
+                <i class="bi-arrow-return-right gray-600 ml10"></i>
                 <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
                   <?= Translate::get('more.detailed'); ?>
                 </a>
@@ -53,10 +53,10 @@
     <?php } else { ?>
       <?php if (UserData::checkAdmin()) { ?>
         <div class="mt15 mb15">
-          <i class="bi bi-link-45deg red mr5 text-2xl"></i>
+          <i class="bi-link-45deg red mr5 text-2xl"></i>
           <?= $item['item_title_url']; ?> (<?= $item['item_url_domain']; ?>)
           <a class="ml15" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
-            <i class="bi bi-pencil"></i>
+            <i class="bi-pencil"></i>
           </a>
         </div>
       <?php } ?>

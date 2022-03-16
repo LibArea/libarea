@@ -4,7 +4,7 @@ $form->adding(['name' => 'setting_email_pm', 'type' => 'selected', 'var' => $dat
 $form->adding(['name' => 'setting_email_appealed', 'type' => 'selected', 'var' => $data['setting']['setting_email_appealed']]);
 $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
 ?>
-<main class="col-span-9 mb-col-12">
+<main class="col-two">
   <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="bg-white box">
@@ -18,7 +18,7 @@ $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
     </form>
   </div>
 </main>
-<aside class="col-span-3 mb-none">
+<aside>
   <div class="box-white bg-violet-50 text-sm">
     <?= Translate::get('info-notification'); ?>
   </div>

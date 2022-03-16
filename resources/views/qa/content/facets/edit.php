@@ -3,7 +3,7 @@ $fs = $data['facet'];
 $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]);
 ?>
 
-<main class="col-span-12 mb-col-12">
+<main class="w-100">
 
   <div class="box-flex-white bg-violet-50">
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>

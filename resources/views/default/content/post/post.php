@@ -37,7 +37,7 @@
             <?= facets($post['facet_list'], 'topic', 'topic', 'gray-400 text-sm mr15'); ?>
             <?php if ($post['post_url_domain']) { ?>
               <a class="gray-400 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
-                <i class="bi bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
+                <i class="bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
               </a>
             <?php } ?>
           </div>
@@ -69,7 +69,7 @@
           <?= votes($user['id'], $post, 'post', 'ps', 'mr5'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="flex gray-400 ml15" href="<?= $post_url; ?>#comment">
-              <i class="bi bi-chat-text mr5"></i>
+              <i class="bi-chat-text mr5"></i>
               <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
             </a>
           <?php } ?>
@@ -83,7 +83,7 @@
 <?php } else { ?>
   <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>
   <div class="p20 center gray-400">
-    <i class="bi bi-journal-richtext block text-8xl"></i>
+    <i class="bi-journal-richtext block text-8xl"></i>
     <?= Translate::get('no.posts'); ?>
   </div>
 <?php } ?>

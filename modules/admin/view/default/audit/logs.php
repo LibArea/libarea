@@ -16,7 +16,7 @@
         <th><?= Translate::get('type'); ?></th>
         <th><?= Translate::get('action'); ?></th>
         <th><?= Translate::get('time'); ?></th>
-        <th><i class="bi bi-eye"></i></th>
+        <th><i class="bi-eye"></i></th>
       </thead>
       <?php foreach ($data['logs'] as $log) { ?>
         <tr>
@@ -30,12 +30,12 @@
           <td class="gray-400"><?= Translate::get($log['action_type']); ?></td>
           <td><?= sprintf(Translate::get($log['action_name']), Translate::get($log['action_type'])); ?></td>
           <td class="gray-400"><?= lang_date($log['add_date']); ?></td>
-          <th><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><i class="bi bi-eye"></i></a></th>
+          <th><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><i class="bi-eye"></i></a></th>
         </tr>
       <?php } ?>
     </table>
   <?php } else { ?>
-    <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
   <?php } ?>
 
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.logs')); ?>

@@ -75,7 +75,7 @@
         <td class="center">
           <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
             <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
-              <i class="bi bi-pencil"></i>
+              <i class="bi-pencil"></i>
             </a>
           <?php } else { ?>
             ---

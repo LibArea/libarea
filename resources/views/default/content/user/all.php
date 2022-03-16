@@ -1,4 +1,4 @@
-<main class="col-span-10 mb-col-12">
+<main class="col-two">
   <div class="box-white center">
     <h1 class="m0 text-xl font-normal"><?= Translate::get($data['sheet']); ?></h1>
     <span class="text-sm gray-600">
@@ -33,9 +33,10 @@
   </div>
 
   <div class="box-white">
-    <div class="grid grid-cols-6 mb-grid-cols-2 gap-2">
-      <?php foreach ($data['users'] as $ind => $user) { ?>
-        <a class="center mb20" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+    <div class="flex flex-wrap">
+      <?php foreach ($data['users'] as $user) { ?>
+      <div class="w-20 mb20 mb-w-33 center">
+        <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
           <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-lg'); ?>
           <div class="block mt5">
             <?= $user['login']; ?>
@@ -44,6 +45,7 @@
             <span class="gray text-sm"><?= $user['name']; ?></span>
           <?php } ?>
         </a>
+        </div>
       <?php } ?>
     </div>
   </div>

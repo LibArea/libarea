@@ -1,20 +1,18 @@
 <?php
 $css = '';
-$arr = ['profile', 'register', 'login', 'blog.user', 'recover', 'info.page', 'post', 'blog.page'];
+$arr = ['register', 'login', 'recover', 'post', 'blog.page'];
 if (in_array($data['type'], $arr)) {
-  $css = 'menu-none';
+  $css = ' none';
 }
 ?>
 
-<div class="menu__left <?= $css; ?> col-span-2">
-  <nav class="sticky top-sm">
-    <ul class="menu">
-      <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $user,
-        $pages = Config::get('menu.left'),
-      ); ?>
-    </ul>
-  </nav>
-</div>
+<nav class="menu__left<?= $css; ?> mb-none">
+  <ul class="menu sticky top-sm">
+    <?= tabs_nav(
+      'menu',
+      $data['type'],
+      $user,
+      $pages = Config::get('menu.left'),
+    ); ?>
+  </ul>
+</nav>

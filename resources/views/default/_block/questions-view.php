@@ -46,7 +46,7 @@
                 
                 <?php if (UserData::checkAdmin()) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr10">
-                    <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
+                    <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
                   </a>
                 <?php } ?>
 
@@ -54,7 +54,7 @@
 
                 <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-400 ml15">
-                    <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
+                    <i title="<?= Translate::get('report'); ?>" class="bi-flag"></i>
                   </a>
                 <?php } ?>
               </div>
@@ -94,14 +94,14 @@
                 <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
                   <?php if ($user['id'] == $comment['comment_user_id'] || UserData::checkAdmin()) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml10 mr5">
-                      <i title="<?= Translate::get('edit'); ?>" class="bi bi-pencil-square"></i>
+                      <i title="<?= Translate::get('edit'); ?>" class="bi-pencil-square"></i>
                     </a>
                   <?php } ?>
                 <?php } ?>
 
                 <?php if (UserData::checkAdmin()) { ?>
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray ml10">
-                    <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
+                    <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
                   </a>
                 <?php } ?>
                 <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > 0) { ?>
@@ -120,12 +120,12 @@
   </div>
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
-    <?= no_content(Translate::get('no.answers'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no.answers'), 'bi-info-lg'); ?>
   <?php } ?>
 <?php } ?>
 
 <?php if (!empty($otvet)) { ?>
-  <?= no_content(Translate::get('you.answered'), 'bi bi-info-lg'); ?>
+  <?= no_content(Translate::get('you.answered'), 'bi-info-lg'); ?>
 <?php } else { ?>
   <?php if ($user['id'] > 0) { ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
