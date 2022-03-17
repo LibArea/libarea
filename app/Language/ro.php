@@ -361,21 +361,6 @@ $data = [
     'facts'                 => 'Fapte',
     'psychology'            => 'Psihologie',
 
-    /* Meta - desc */
-    'profile.posts.title'       => '%1$s — profil membru, postări ',
-    'profile.posts.all.title'   => '%1$s — lista de postări ',
-    'profile.answers.title'     => '%1$s — răspunsurile participantului ',
-    'profile.comments.title'    => '%1$s — comentariile participantilor ',
-    'profile.posts.desc'        => '%1$s — pagina de profil de membru. Postări, premii și contacte. %2$s',
-    'profile.posts.all.desc'    => '%1$s — lista de postări, articole ale participantului în ordine cronologică. Toate publicațiile de pe site',
-    'profile.answers.desc'      => '%1$s — pagina de răspunsuri ale participantului la postările din subiecte și bloguri. %2$s',
-    'profile.comments.desc'     => '%1$s — comentariile participanților în ordine cronologică. %2$s',
-    
-    'page-number'           => ' — pagina %1$s ',
-    'main.top.title'        => 'Posturi populare. ',
-    'main.top.desc'         => 'O listă de postări populare din feedul comunității (după numărul de răspunsuri). Subiecte de interes. Conversații, întrebări și Răspunsuri, Comentarii. ',
-    'main.all.title'        => 'Toate mesajele. ',
-    'main.all.desc'         => 'O listă a tuturor postărilor din feedul comunității (după numărul de răspunsuri). Conversații, întrebări și Răspunsuri, Comentarii. ',
     'seleted comments'      => 'Comentarii șterse',
     'edit answer'           => 'Schimbați răspunsul',
     'enter'                 => 'Introduce',
@@ -463,6 +448,23 @@ $data = [
     
     'topic-subscription'        => 'Abonați-vă la subiecte și citiți-le în feed',
     'stop-blog'                 => 'URL-ul acestui blog este rezervat',
+    
+    /* Meta - desc */
+    'profile.posts.title'       => '%1$s — profil membru, postări ',
+    'profile.posts.all.title'   => '%1$s — lista de postări ',
+    'profile.answers.title'     => '%1$s — răspunsurile participantului ',
+    'profile.comments.title'    => '%1$s — comentariile participantilor ',
+    'profile.posts.desc'        => '%1$s — pagina de profil de membru. Postări, premii și contacte. %2$s',
+    'profile.posts.all.desc'    => '%1$s — lista de postări, articole ale participantului în ordine cronologică. Toate publicațiile de pe site',
+    'profile.answers.desc'      => '%1$s — pagina de răspunsuri ale participantului la postările din subiecte și bloguri. %2$s',
+    'profile.comments.desc'     => '%1$s — comentariile participanților în ordine cronologică. %2$s',
+    
+    'page-number'           => ' — pagina %1$s ',
+    'main.top.title'        => 'Posturi populare. ',
+    'main.top.desc'         => 'O listă de postări populare din feedul comunității (după numărul de răspunsuri). Subiecte de interes. Conversații, întrebări și Răspunsuri, Comentarii. ',
+    'main.all.title'        => 'Toate mesajele. ',
+    'main.all.desc'         => 'O listă a tuturor postărilor din feedul comunității (după numărul de răspunsuri). Conversații, întrebări și Răspunsuri, Comentarii. ',
+    'main.deleted.title'    => 'Postări șterse ',
     
     'users.all'                 => 'Lista participanților',
     'users.all.info'            => 'Lista participanților în ordinea activității lor pe site',

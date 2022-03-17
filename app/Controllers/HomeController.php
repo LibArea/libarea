@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\HomeModel;
-use Content, Config, Translate, Tpl, UserData;
+use Content, Config, Tpl, UserData;
 
 class HomeController extends MainController
 {
@@ -40,30 +40,17 @@ class HomeController extends MainController
             $result_post[$ind]              = $row;
         }
 
-        $result_answers = [];
-        foreach ($latest_answers as $ind => $row) {
-            $row['answer_content']      = cutWords($row['answer_content'], 8);
-            $row['answer_date']         = lang_date($row['answer_date']);
-            $result_answers[$ind]       = $row;
-        }
-
-        $num        = $page > 1 ? sprintf(Translate::get('page-number'), $page) : '';
-        $meta_title = Config::get('meta.title') . $num;
-        $meta_desc  = Config::get('meta.desc') . $num;
-
-        if ($sheet == 'main.top' || $sheet == 'main.all') {
-            $meta_title = Translate::get($sheet . '.title') . $num . Config::get('meta.title');
-            $meta_desc  = Translate::get($sheet . '.desc') . $num . Config::get('meta.desc');
-        }
-
         $topics = [];
         if (count($topics_user) == 0) {
             $topics = \App\Models\FacetModel::advice($this->user['id']);
         }
 
+        $meta_title = Config::get('meta.' . $sheet . '.title');
+        $meta_desc  = Config::get('meta.' . $sheet . '.desc');
+
         $m = [
             'og'         => true,
-            'twitter'    => true,
+            'twitter'    => false,
             'imgurl'     => '/assets/images/agouti-max.png',
             'url'        => $sheet == 'top' ? '/top' : '/',
         ];
@@ -71,13 +58,13 @@ class HomeController extends MainController
         return Tpl::agRender(
             '/home',
             [
-                'meta'  => meta($m, $meta_title, $meta_desc),
+                'meta'  => meta($m, $meta_title ?? Config::get('meta.title'), $meta_desc ?? Config::get('meta.desc')),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,
                     'sheet'             => $sheet,
                     'type'              => $type,
-                    'latest_answers'    => $result_answers,
+                    'latest_answers'    => $latest_answers,
                     'topics_user'       => $topics_user,
                     'posts'             => $result_post,
                     'topics'            => $topics,

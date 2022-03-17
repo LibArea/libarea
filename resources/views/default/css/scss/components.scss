@@ -255,11 +255,10 @@ ul.last-content li a {
 ul.last-content a.last-content_telo { display: block; }
 
 .uppercase-box {
-  color: var(--gray-600);
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  font-weight: 400;
   margin-bottom: 10px;
+  letter-spacing: 1.5px;
 }
 
 a:hover > img { opacity: 0.8; }

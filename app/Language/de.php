@@ -367,21 +367,6 @@ $data = [
     'facts'                 => 'Facts',
     'psychology'            => 'Psychology',
 
-    /* Meta - desc */
-    'profile.posts.title'       => '%1$s — Mitgliederprofil, Beiträge ',
-    'profile.posts.all.title'   => '%1$s — postliste ',
-    'profile.answers.title'     => '%1$s — Teilnehmer antwortet ',
-    'profile.comments.title'    => '%1$s — Teilnehmerkommentare ',
-    'profile.posts.desc'        => '%1$s — Mitgliederprofilseite. Beiträge, Auszeichnungen und Kontakte. %2$s',
-    'profile.posts.all.desc'    => '%1$s — Liste der Beiträge, Artikel des Teilnehmers in chronologischer Reihenfolge. Alle Veröffentlichungen auf der Website.',
-    'profile.answers.desc'      => '%1$s — Seite mit Antworten des Teilnehmers auf Beiträge in Themen und Blogs. %2$s',
-    'profile.comments.desc'     => '%1$s — Teilnehmerkommentare in chronologischer Reihenfolge. %2$s',
-    
-    'page-number'           => ' Page %1$s. ',
-    'main.top.title'        => 'Popular posts. ',
-    'main.top.desc'         => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
-    'main.all.title'        => 'All posts. ',
-    'main.all.desc'         => 'List of all posts in the community feed (by number of replies). Conversations, questions and answers, comments. ',
     'edit answer'           => 'Change the answer',
     'enter'                 => 'Enter',
     'enter your password'   => 'Enter password',
@@ -460,6 +445,23 @@ $data = [
 
     'topic-subscription'        => 'Subscribe to topics and read them in the feed',
     'stop-blog'                 => 'This blog URL is reserved',
+    
+    /* Meta - desc */
+    'profile.posts.title'       => '%1$s — Mitgliederprofil, Beiträge ',
+    'profile.posts.all.title'   => '%1$s — postliste ',
+    'profile.answers.title'     => '%1$s — Teilnehmer antwortet ',
+    'profile.comments.title'    => '%1$s — Teilnehmerkommentare ',
+    'profile.posts.desc'        => '%1$s — Mitgliederprofilseite. Beiträge, Auszeichnungen und Kontakte. %2$s',
+    'profile.posts.all.desc'    => '%1$s — Liste der Beiträge, Artikel des Teilnehmers in chronologischer Reihenfolge. Alle Veröffentlichungen auf der Website.',
+    'profile.answers.desc'      => '%1$s — Seite mit Antworten des Teilnehmers auf Beiträge in Themen und Blogs. %2$s',
+    'profile.comments.desc'     => '%1$s — Teilnehmerkommentare in chronologischer Reihenfolge. %2$s',
+    
+    'page-number'           => ' Page %1$s. ',
+    'main.top.title'        => 'Popular posts. ',
+    'main.top.desc'         => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
+    'main.all.title'        => 'All posts. ',
+    'main.all.desc'         => 'List of all posts in the community feed (by number of replies). Conversations, questions and answers, comments. ',
+    'main.deleted.title'    => 'Gelöschte Beiträge ',
     
     'users.all'                 => 'List of participants',
     'users.all.info'            => 'List of participants in the order of their activity on the site',

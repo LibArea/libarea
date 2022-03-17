@@ -115,9 +115,9 @@
               <a title="<?= $answer['login']; ?>" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
               </a>
-              <span class="middle lowercase gray-400"><?= $answer['answer_date']; ?></span>
+              <span class="middle lowercase gray-400"><?= lang_date($answer['answer_date']); ?></span>
               <a class="last-content_telo" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
-                <?= $answer['answer_content']; ?>...
+                <?= cutWords($answer['answer_content'], 8); ?>...
               </a>
             </li>
           <?php } ?>

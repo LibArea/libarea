@@ -367,21 +367,6 @@ $data = [
     'facts'                 => 'Facts',
     'psychology'            => 'Psychology',
 
-    /* Meta - desc */
-    'profile.posts.title'       => '%1$s — profil du membre, messages ',
-    'profile.posts.all.title'   => '%1$s — liste des articles ',
-    'profile.answers.title'     => '%1$s — réponses des participants ',
-    'profile.comments.title'    => '%1$s — commentaires des participants ',
-    'profile.posts.desc'        => '%1$s — page de profil du membre. Publications, récompenses et contacts. %2$s',
-    'profile.posts.all.desc'    => '%1$s — liste des posts, articles du participant par ordre chronologique. Toutes les publications sur le site.',
-    'profile.answers.desc'      => '%1$s — page de réponses du participant aux publications dans les rubriques et les blogs. %2$s',
-    'profile.comments.desc'     => '%1$s — commentaires des participants par ordre chronologique. %2$s',
-    
-    'page-number'           => ' Page %1$s. ',
-    'main.top.title'        => 'Popular posts. ',
-    'main.top.desc'         => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
-    'main.all.title'        => 'All posts. ',
-    'main.all.desc'         => 'List of all posts in the community feed (by number of replies). Conversations, questions and answers, comments. ',
     'edit answer'           => 'Change the answer',
     'enter'                 => 'Enter',
     'enter your password'   => 'Enter password',
@@ -460,6 +445,23 @@ $data = [
 
     'topic-subscription'        => 'Subscribe to topics and read them in the feed',
     'stop-blog'                 => 'This blog URL is reserved',
+    
+    /* Meta - desc */
+    'profile.posts.title'       => '%1$s — profil du membre, messages ',
+    'profile.posts.all.title'   => '%1$s — liste des articles ',
+    'profile.answers.title'     => '%1$s — réponses des participants ',
+    'profile.comments.title'    => '%1$s — commentaires des participants ',
+    'profile.posts.desc'        => '%1$s — page de profil du membre. Publications, récompenses et contacts. %2$s',
+    'profile.posts.all.desc'    => '%1$s — liste des posts, articles du participant par ordre chronologique. Toutes les publications sur le site.',
+    'profile.answers.desc'      => '%1$s — page de réponses du participant aux publications dans les rubriques et les blogs. %2$s',
+    'profile.comments.desc'     => '%1$s — commentaires des participants par ordre chronologique. %2$s',
+    
+    'page-number'           => ' Page %1$s. ',
+    'main.top.title'        => 'Popular posts. ',
+    'main.top.desc'         => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
+    'main.all.title'        => 'All posts. ',
+    'main.all.desc'         => 'List of all posts in the community feed (by number of replies). Conversations, questions and answers, comments. ',
+    'main.deleted.title'    => 'Posts supprimés ',
     
     'users.all'                 => 'List of participants',
     'users.all.info'            => 'List of participants in the order of their activity on the site',
