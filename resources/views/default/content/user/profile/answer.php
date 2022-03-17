@@ -1,4 +1,4 @@
-<div>
+<div class="w-100">
   <?= Tpl::import('/content/user/profile/header', ['user' => $user, 'data' => $data]); ?>
 
   <div class="flex gap">
@@ -40,5 +40,4 @@
       <?= Tpl::import('/content/user/profile/sidebar', ['user' => $user, 'data' => $data]); ?>
     </aside>
   </div>
-
 </div>

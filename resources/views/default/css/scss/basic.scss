@@ -91,7 +91,7 @@ img {
 .-mr-1 { margin-right: -0.5rem; }
 .-mt20 { margin-top: -20px; }
 .-mt50 { margin-top: -50px; }
-.-mt80 { margin-top: -80px; }
+.-mt90 { margin-top: -90px; }
 .m0 { margin: 0; }
 .mt0 { margin-top: 0; }
 .mr0 { margin-right: 0; }
@@ -221,14 +221,12 @@ img {
 .w110 { width: 110px; }
 .w160 { width: 160px; }
 .w200 { width: 200px; }
-.w400 { width: 400px; }
 
 .max-w-100 { max-width: 100%; }
 .max-w300 { max-width: 300px; }  
 .max-w640 { max-width: 640px; }
 .max-w780 { max-width: 780px; }
 .max-width { max-width: 1636px; }
-.min-h300 { min-height: 300px; }  
 .min-h100 { min-height: 100px;}
 
 .z-10 { z-index: 10; }
@@ -251,7 +249,6 @@ img {
 .font-normal { font-weight: 400; }
 .font-medium { font-weight: 500; }
 .font-semibold { font-weight: 600; }
-.font-bold { font-weight: 700; }
 
 .grid { display: grid; }
 .gap { gap: 1rem; }

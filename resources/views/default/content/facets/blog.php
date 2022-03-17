@@ -1,6 +1,6 @@
 <?php $blog = $data['facet'];
 if ($blog['facet_is_deleted'] == 0) { ?>
-  <div>
+  <div class="w-100">
     <div class="box-flex-white" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= cover_url($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
       <div class="mb-none">
         <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'img-xl'); ?>

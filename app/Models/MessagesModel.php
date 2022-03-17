@@ -166,7 +166,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 
         $messages_dialog = self::getDialogByUser($dialog_sender_id, $dialog_recipient_id);
 
-        $messages_dialog_id = $messages_dialog['dialog_id'];
+        $messages_dialog_id = $messages_dialog['dialog_id'] ?? null;
         if (!$messages_dialog) {
 
             // Create a dialog (if there is none)

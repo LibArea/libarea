@@ -41,7 +41,7 @@ class ProfileController extends MainController
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }
-        
+
         $count = UserModel::contentCount($profile['id']);
         if (($count['count_answers'] + $count['count_comments']) < 3) {
             Request::getHead()->addMeta('robots', 'noindex');
