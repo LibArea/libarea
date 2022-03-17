@@ -41,11 +41,9 @@
               </a>
             <?php } ?>
           </div>
-          <div class="show_add_<?= $post['post_id']; ?>">
-            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-600">
-              <?= $post['post_content_preview']; ?>
-              <span class="s_<?= $post['post_id']; ?> show_detail"></span>
-            </div>
+          <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-600">
+            <?= $post['post_content_preview']; ?>
+            <span class="s_<?= $post['post_id']; ?> show_detail"></span>
           </div>
         </div>
         <?php if ($post['post_content_img']) { ?>
