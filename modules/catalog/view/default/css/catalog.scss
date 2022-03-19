@@ -74,14 +74,18 @@ main { margin-left: 30px; }
 }
 
 .item-categories {
-  display: grid;
-  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
   background-color: var(--violet-50);
   padding: 20px 20px 20px 30px;
   margin-bottom: 25px;
 }
 
-.item-categories-telo { margin-bottom: 10px; }
+.categories-telo,
+.item-categories > div {
+  width: 33%;
+  margin-bottom: 10px;
+}
 
 @media (max-width: 980px) {
   aside,  
@@ -93,6 +97,12 @@ main { margin-left: 30px; }
   .item-cat {
     padding: 20px 20px 20px 15px;
   }
+  
+  .categories-telo,
+  .item-categories > div {
+    width: 99%;
+    margin-bottom: 10px;
+  }  
 
   main { margin-left: 15px; }  
   .item-search { padding: 10px; }
