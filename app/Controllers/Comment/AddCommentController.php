@@ -35,7 +35,7 @@ class AddCommentController extends MainController
     // Добавление комментария
     public function create()
     {
-        $content    = Request::getPost('comment');
+        $content    = $_POST['comment']; // для Markdown
         $post_id    = Request::getPostInt('post_id');   // в каком посту ответ
         $answer_id  = Request::getPostInt('answer_id');   // на какой ответ
         $comment_id = Request::getPostInt('comment_id');   // на какой комментарий

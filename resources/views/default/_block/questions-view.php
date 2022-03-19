@@ -72,7 +72,7 @@
           <ol class="max-w780 list-none mb0 mt0">
             <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
               <div class="text-sm pt5 pr5 pb5 pl5">
-                <?= $comment['comment_content'] ?>
+                <?= Content::text($comment['comment_content'], 'text'); ?>
                 <span class="gray">
                   — <a class="gray" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
                   <span class="lowercase gray">

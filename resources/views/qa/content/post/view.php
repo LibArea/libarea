@@ -282,6 +282,31 @@
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
     mediumZoom(document.querySelectorAll('.post-body.full .post img:not(.emoji), img.preview, .answ-telo p img:not(.emoji)'))
+    // Добавим цитирование    
+    function get_text() {
+      var text;
+      if (window.getSelection) {
+        text = window.getSelection().toString();
+      } else if (document.getSelection) {
+        // Старый способ
+        text = document.getSelection();
+      } else if (document.selection) {
+        // IE, или уберем?
+        text = document.selection.createRange().text;
+      }
+
+      if (text) {
+        let comment =  document.getElementById('qcomment');
+        if (comment) {
+            comment.innerHTML = '> ' + text;
+        }
+      }
+    }
+    // Применять эту функцию к тегам, содержащим text
+    var p_arr = document.getElementsByTagName("p");
+    for (var i = 0; i < p_arr.length; i++) {
+      p_arr[i].onmouseup = get_text;
+    }
   });
   <?php if ($user['id'] > 0) { ?>
     document.querySelectorAll(".msg-flag")

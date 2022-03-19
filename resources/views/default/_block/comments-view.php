@@ -142,7 +142,7 @@
                     <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
                   </div>
                   <div class="mt5 mb10">
-                    <?= Content::text($comment['comment_content'], 'line'); ?>
+                    <?= Content::text($comment['comment_content'], 'text'); ?>
                   </div>
                 </div>
                 <div class="text-sm flex">

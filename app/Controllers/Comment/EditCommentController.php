@@ -45,7 +45,7 @@ class EditCommentController extends MainController
     {
         $comment_id = Request::getPostInt('comment_id');
         $post_id    = Request::getPostInt('post_id');
-        $content    = Request::getPost('comment');
+        $content    = $_POST['comment']; // для Markdown
 
         $post       = PostModel::getPost($post_id, 'id', $this->user);
         pageRedirection($post, '/');
