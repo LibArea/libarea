@@ -56,6 +56,7 @@ class Search
             );
         }
 
+        $count = $count ?? 0;
         $facet = $type == 'post' ? 'topic' : 'category';
         return view(
             '/view/default/search',

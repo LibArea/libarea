@@ -1,5 +1,5 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
-<div class="grid grid-cols-12 gap-4">
+<div id="contentWrapper">
   <main>
     <h2 class="mb20">
       <?= Translate::get($data['sheet'] . '.view'); ?>

@@ -167,10 +167,10 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN answers ON answer_id = fav.tid AND fav.action_type = 'answer'
                             LEFT JOIN items ON item_id = fav.tid AND fav.action_type = 'website'
                               LEFT JOIN folders_relation fr ON fr.tid = fav.tid
-                              LEFT JOIN folders fol ON folder_id = fol.id
+                              LEFT JOIN folders fol ON folder_id = fol.id AND fol.user_id = :uid2
                                 WHERE fav.user_id = :uid $tag ORDER BY fav.id DESC LIMIT 100";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql, ['uid' => $uid, 'uid2' => $uid])->fetchAll();
     }
 
     // Страница черновиков

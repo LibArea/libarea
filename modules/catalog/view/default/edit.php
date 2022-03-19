@@ -18,7 +18,7 @@ $form->adding(['name' => 'content_soft', 'type' => 'value', 'var' => $domain['it
 $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
 ?>
 
-<div class="grid grid-cols-12 gap-4">
+<div id="contentWrapper">
   <main>
     <div class="max-w640">
 

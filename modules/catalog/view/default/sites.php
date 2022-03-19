@@ -1,6 +1,5 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <div class="item-cat">
-
   <?= $data['breadcrumb']; ?>
 
   <h1>
