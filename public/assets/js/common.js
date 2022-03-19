@@ -81,12 +81,7 @@ document.querySelectorAll(".add-comment")
           comment.innerHTML = text;
         }
       );
-
-    $('#answer_addentry' + answer_id).on('click', '#cancel_comment', function () {
-      comment.classList.remove("block");
-    });
-
-  }));
+}));
 
 document.querySelectorAll(".add-comment-re")
   .forEach(el => el.addEventListener("click", function (e) {
