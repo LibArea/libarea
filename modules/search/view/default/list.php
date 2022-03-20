@@ -16,7 +16,7 @@
           <?= $gist['login']; ?>
         </a>
       <?php } else { ?>
-        <a class="green-600" href="<?= $gist['item_url']; ?>">
+        <a class="green" href="<?= $gist['item_url']; ?>">
           <?= website_img($gist['item_url_domain'], 'favicon', $gist['item_url_domain'], 'favicons mr5'); ?>
           <?= $gist['item_url_domain']; ?>
         </a>

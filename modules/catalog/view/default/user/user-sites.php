@@ -35,7 +35,7 @@
                 <?= $item['item_content_url']; ?>
               </div>
               <div class="list-items__footer">
-                <div class="green-600">
+                <div class="green">
                   <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>
                   <?= $item['item_url_domain']; ?>
                   <?php if ($item['item_github_url']) { ?>

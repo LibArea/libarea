@@ -3,7 +3,7 @@
   <div class="bg-white items-center justify-between p15 mb15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500">
+    <span class="red">
       <?= sprintf(Translate::get('edit.option'), Translate::get('page')); ?>
     </span>
     

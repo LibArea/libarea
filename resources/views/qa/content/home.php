@@ -70,7 +70,7 @@
         $url = getUrlByName('topic', ['slug' => $topic['facet_slug']]);
         $blog = '';
         if ($topic['facet_type'] == 'blog') {
-          $blog = '<sup class="red-500">b</span>';
+          $blog = '<sup class="red">b</span>';
           $url = getUrlByName('blog', ['slug' => $topic['facet_slug']]);
         }
       ?>

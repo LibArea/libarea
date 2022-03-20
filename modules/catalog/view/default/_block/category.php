@@ -1,6 +1,6 @@
 <fieldset>
   <label>
-    <?= Translate::get('category'); ?> <sup class="red-500">*</sup>
+    <?= Translate::get('category'); ?> <sup class="red">*</sup>
   </label>
   <input name="facet_select" id="category_id" required>
   <div class="help"><?= Translate::get('necessarily'); ?>...</div>

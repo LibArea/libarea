@@ -45,7 +45,7 @@ class Edit
                 'data'  => [
                     'domain'        => $domain,
                     'sheet'         => 'domains',
-                    'type'          => 'web',
+                    'type'          => 'web.edit',
                     'category_arr'  => WebModel::getItemTopic($domain['item_id']),
                     'post_arr'      => $item_post_related,
                 ]

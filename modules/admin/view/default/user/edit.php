@@ -29,11 +29,11 @@
       <?php if ($data['user']['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
         <?php if ($data['user']['ban_list']) { ?>
           <span class="type-ban" data-id="<?= $data['user']['id']; ?>" data-type="user">
-            <span class="red-500"><?= Translate::get('unban'); ?></span>
+            <span class="red"><?= Translate::get('unban'); ?></span>
           </span>
         <?php } else { ?>
           <span class="type-ban" data-id="<?= $data['user']['id']; ?>" data-type="user">
-            <span class="green-600">+ <?= Translate::get('ban it'); ?></span>
+            <span class="green">+ <?= Translate::get('ban it'); ?></span>
           </span>
         <?php } ?>
       <?php } else { ?>
@@ -48,14 +48,14 @@
       <?= $data['user']['created_at']; ?> |
       <?= $data['user']['reg_ip']; ?>
       <?php if ($data['user']['duplicat_ip_reg'] > 1) { ?>
-        <sup class="red-500">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
+        <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
       <?php } ?>
       (<?= Translate::get('ed') ?>. <?= $data['user']['updated_at']; ?>)
     </fieldset>
     <hr>
    <fieldset>
       <?php if ($data['user']['limiting_mode'] == 1) { ?>
-        <span class="red-500"><?= Translate::get('dumb mode'); ?>!</span><br>
+        <span class="red"><?= Translate::get('dumb mode'); ?>!</span><br>
       <?php } ?>
       <label for="limiting_mode">
         <?= Translate::get('dumb mode'); ?>?
@@ -117,7 +117,7 @@
     </fieldset>
     <hr>
     <fieldset>
-      <label for="email">E-mail<sup class="red-500">*</sup></label>
+      <label for="email">E-mail<sup class="red">*</sup></label>
       <input type="text" name="email" value="<?= $data['user']['email']; ?>" required>
     </fieldset>
     <fieldset>
@@ -137,7 +137,7 @@
       </select>
     </fieldset>
     <fieldset>
-      <label for="login"><?= Translate::get('nickname'); ?>: /u/**<sup class="red-500">*</sup></label>
+      <label for="login"><?= Translate::get('nickname'); ?>: /u/**<sup class="red">*</sup></label>
       <input type="text" name="login" value="<?= $data['user']['login']; ?>" required>
     </fieldset>
     <fieldset>

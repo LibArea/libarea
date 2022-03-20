@@ -30,7 +30,7 @@
       </a>
       <a data-type="post" data-id="<?= $page['post_id']; ?>" class="type-action gray-600 mr10 ml10">
         <?php if ($page['post_is_deleted'] == 1) { ?>
-          <i class="bi-trash red-500"></i>
+          <i class="bi-trash red"></i>
         <?php } else { ?>
           <i class="bi-trash"></i>
         <?php } ?>

@@ -365,7 +365,7 @@ class Forms
 				$field .= $label_html;
 			} elseif ($val['add_label'] && !in_array($val['type'], ['hidden', 'submit', 'title', 'html'])) {
 				if ($val['required']) {
-					$val['label'] .= ' <strong class="red-500">*</strong>';
+					$val['label'] .= ' <strong class="red">*</strong>';
 				}
 				$field .= '<label for="' . $val['id'] . '">' . $val['label'] . '</label>';
 			}

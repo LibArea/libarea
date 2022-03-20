@@ -1,6 +1,6 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?21');
-Request::getHead()->addStyles('/assets/css/catalog.css?v21');
+Request::getHead()->addStyles('/assets/css/style.css?01');
+Request::getHead()->addStyles('/assets/css/catalog.css?01');
 ?>
 
 <?= Tpl::insert('meta', ['meta' => $meta]); ?>
@@ -8,7 +8,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?v21');
 <body<?php if (Request::getCookie('dayNight') == 'dark') { ?>class="dark" <?php } ?>>
   <header>
     <div class="page-search mb-p10">
-      <a class="logo black" href="<?= getUrlByName('web'); ?>">
+      <a class="logo" href="<?= getUrlByName('web'); ?>">
         <?= Translate::get('catalog'); ?>
       </a>
       <div class="page-search-right mb-ml0">
@@ -46,7 +46,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?v21');
                   </ul>
                 </div>
               <?php } ?>
-              <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>sky-500 <?php } ?>mr30 green-600" href="<?= getUrlByName('web.bookmarks'); ?>">
+              <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>sky-500 <?php } ?>mr30 green" href="<?= getUrlByName('web.bookmarks'); ?>">
                 <?= Translate::get('favorites'); ?>
               </a>
               <div class="mr15 m relative">

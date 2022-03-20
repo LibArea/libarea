@@ -20,14 +20,14 @@
 
           <?php if (!empty($delete_fav)) { ?>
             <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="website">
-              <i class="bi-trash red-500"></i>
+              <i class="bi-trash red"></i>
             </span>
           <?php } ?>
           <div class="list-items__text">
             <?= $item['item_content_url']; ?>
           </div>
           <div class="list-items__footer">
-            <div class="green-600">
+            <div class="green">
               <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>
               <?= $item['item_url_domain']; ?>
               <?php if ($item['item_github_url']) { ?>

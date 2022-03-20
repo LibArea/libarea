@@ -23,25 +23,24 @@ html {
 }
 
 :root {
-  --body-bg-color: #f3f4f6;
   --black: #030303;
   --white: #fff;
+  --yellow: #eab308;
+  --purple: #f3e8ff;
+  --green: #16a34a;
+  --red: #ef4444;
+  --red-200: #fecaca;
   --br-box-gray: #ededed;
   --gray-100: #f3f4f6;
   --gray-400: #9ca3af;
   --gray-600: #4b5563;
+  --blue: #3b82f6;
   --blue-100: #dbeafe;
-  --blue-500: #3b82f6;
   --slate-100: #f1f5f9;
   --slate-300: #cbd5e1;
-  --yellow-500: #eab308;
-  --purple-100: #f3e8ff;
   --pink-800: #9d174d;
-  --red-200: #fecaca;
-  --red-500: #ef4444;
   --sky-50: #f0f9ff;
   --sky-500: #0ea5e9;
-  --green-600: #16a34a;
   --violet-50: #f3f1ed;
 }
 
@@ -52,7 +51,7 @@ body {
   margin: 0;
 }
 
-.body-bg-fon { background-color: #f3f4f6; }
+.body-bg-fon { background-color: var(--gray-100); }
 
 body.dark {
   filter: invert(100%) hue-rotate(180deg);
@@ -159,32 +158,32 @@ img {
 .pl20 { padding-left: 20px; }
 
 /*
- * Used colors (and background) in Agouti project
+ * Used colors (and background) in LibArea project
  *
- * Используемые цвета (и фон) в проекте Агути
+ * Используемые цвета (и фон) в проекте LibArea
  */
 .black { color: var(--black); }
 .white { color: var(--white); }
 .gray { color: var(--gray-700); }
-.green-600 { color: var(--green-600); }
-.red-500 { color: var(--red-500); }
+.yellow { color: var(--yellow); }
+.green { color: var(--green); }
+.red { color: var(--red); }
+.red-200 { color: var(--red-200); }
 .gray-400 { color: var(--gray-400); }
 .gray-600 { color: var(--gray-600); }
 .sky-500 { color: var(--sky-500); }
-.red-200 { color: var(--red-200); }
-.yellow-500 { color: var(--yellow-500); }
 
 .bg-black { background-color: var(--black); }
 .bg-white { background-color: var(--white); }
-.bg-green-600 { background-color: var(--green-600); }
+.bg-green { background-color: var(--green); }
+.bg-pink { background-color: var(--pink); }
+.bg-purple { background-color: var(--purple); }
 .bg-gray-100 { background-color: var(--gray-100); }
 .bg-violet-50 { background-color: var(--violet-50); } 
-.bg-purple-100 { background-color: var(--purple-100); }
+.bg-blue { background-color: var(--blue); }
 .bg-blue-100 { background-color: var(--blue-100); }
-.bg-blue-500 { background-color: var(--blue-500); }
 .bg-sky-50 { background-color: var(--sky-50); }
 .bg-red-200 { background-color: var(--red-200); }
-.bg-pink-800 { background-color: var(--pink-800); }
 
 /*
  * Other
@@ -223,7 +222,6 @@ img {
 .w200 { width: 200px; }
 
 .max-w-100 { max-width: 100%; }
-.max-w300 { max-width: 300px; }  
 .max-w640 { max-width: 640px; }
 .max-w780 { max-width: 780px; }
 .max-width { max-width: 1636px; }
@@ -280,9 +278,3 @@ img {
 .block { display: block; }
 .table { display: table; }
 .inline { display: inline-block; }
-
-.list-none {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}

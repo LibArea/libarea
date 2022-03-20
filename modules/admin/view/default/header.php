@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?18');
+Request::getHead()->addStyles('/assets/css/style.css?01');
 ?>
 
 <?= Tpl::insert('meta', ['meta' => $meta]); ?>

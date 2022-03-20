@@ -172,7 +172,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
     }
 
     if ($pagesCount > $pNum) {
-        $html .= '<span class="bg-green-600 pt5 pr10 pb5 pl10 white ml5 mr5">' . ($pNum) . '</span>';
+        $html .= '<span class="bg-green pt5 pr10 pb5 pl10 white ml5 mr5">' . ($pNum) . '</span>';
     }
 
     if ($pagesCount > $pNum) {
@@ -318,6 +318,18 @@ function accessСheck($content, $type, $user, $after, $stop_time)
     return true;
 }
 
+// Если 2 недели регистраци, то ник зеленый
+function loginColor($time)
+{
+    $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($time);
+    $tm = floor($diff / 60);
+
+    if ($tm > 20160) {
+        return false;
+    }  
+    return true;
+}    
+
 function add_post($facet, $user_id)
 {
     $url_add = getUrlByName('content.add', ['type' => 'post']);
@@ -363,7 +375,7 @@ function fragment($content, $maxlen = '20')
 function no_content($text, $icon)
 {
     $html  = '<div class="box gray-600 bg-violet-50">
-                <i class="' . $icon . ' green-600 middle mr5"></i>
+                <i class="' . $icon . ' green middle mr5"></i>
                 <span class="middle">' . $text . '...</span>
               </div>';
 

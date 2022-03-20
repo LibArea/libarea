@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?21');
+Request::getHead()->addStyles('/assets/css/style.css?01');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -19,7 +19,7 @@ $facet  = $data['facet'] ?? false; ?>
           <i class="bi-list gray-400 text-xl"></i>
         </div>
 
-        <a title="<?= Translate::get('home'); ?>" class="logo black" href="/">
+        <a title="<?= Translate::get('home'); ?>" class="logo" href="/">
           <?= Config::get('meta.name'); ?>
         </a>
 
@@ -59,9 +59,9 @@ $facet  = $data['facet'] ?? false; ?>
               <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['action_type'] == 1) { ?>
-                  <i class="bi-envelope red-500"></i>
+                  <i class="bi-envelope red"></i>
                 <?php } else { ?>
-                  <i class="bi-bell-fill red-500"></i>
+                  <i class="bi-bell-fill red"></i>
                 <?php } ?>
               <?php } else { ?>
                 <i class="bi-bell"></i>
@@ -88,7 +88,7 @@ $facet  = $data['facet'] ?? false; ?>
   </header>
 
   <?php if ($user['id'] == 0 && $data['type'] == 'main') { ?>
-    <div class="box-white mb-none br-box-gray center">
+    <div class="box-white mb-none center">
       <h1><?= Config::get('meta.banner_title'); ?></h1>
       <p><?= Config::get('meta.banner_desc'); ?>...</p>
     </div>

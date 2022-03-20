@@ -15,7 +15,7 @@
                 <div class="br-box-gray w110 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
                   <?= user_avatar_img($answer['avatar'], 'max', $answer['login'], 'img-lg'); ?>
                   <div class="text-sm gray-600">
-                    <?= lang_date($answer['answer_date']); ?>
+                    <?= lang_date($answer['date']); ?>
                     <?php if (empty($answer['edit'])) { ?>
                       (<?= Translate::get('ed'); ?>.)
                     <?php } ?>
@@ -23,7 +23,9 @@
                   </div>
                   <a class="qa-login" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
                 </div>
-                <?= $answer['answer_content'] ?>
+                <div class="max-w780">
+                  <?= Content::text($answer['answer_content'], 'text'); ?>
+                </DIV>
               </div>
               <div class="flex text-sm">
                 <?= votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
@@ -76,7 +78,7 @@
                 <span class="gray">
                   — <a class="gray" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
                   <span class="lowercase gray">
-                    &nbsp; <?= lang_date($comment['comment_date']); ?>
+                    &nbsp; <?= lang_date($comment['date']); ?>
                   </span>
                   <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
                 </span>
@@ -133,9 +135,9 @@
       <form class="mb15" action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
         <?= Tpl::import('/_block/editor/editor', [
-          'height'    => '250px',
-          'preview'   => 'tab',
-          'user'       => $user,
+          'height'  => '250px',
+          'id'      => $post['post_id'],
+          'type'    => 'answer',
         ]); ?>
 
         <div class="clear pt5">

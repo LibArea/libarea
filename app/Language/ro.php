@@ -3,6 +3,7 @@ $data = [
     'home'              => 'Acasă',
     'to the website'    => 'Pe site',
     'catalog'           => 'Catalog',
+    'feed'              => 'Panglică',
     'top'               => 'TOP',
     'well'              => 'Ei bine',
     'news'              => 'Știri',

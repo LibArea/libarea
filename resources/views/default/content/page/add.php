@@ -2,7 +2,7 @@
   <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500"><?= sprintf(Translate::get('add.option'), Translate::get('pages')); ?></span>
+    <span class="red"><?= sprintf(Translate::get('add.option'), Translate::get('pages')); ?></span>
     
     <form action="<?= getUrlByName('content.create', ['type' => 'page']); ?>" method="post">
       <?= csrf_field() ?>

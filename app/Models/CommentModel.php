@@ -155,7 +155,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     comment_answer_id,
                     comment_comment_id,
                     comment_content,
-                    comment_date,
+                    comment_date as date,
                     comment_votes,
                     comment_published,
                     comment_ip,
@@ -165,7 +165,8 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     votes_comment_user_id,
                     id, 
                     login, 
-                    avatar
+                    avatar,
+                    created_at
                         FROM comments 
                         LEFT JOIN users  ON id = comment_user_id
                         LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 

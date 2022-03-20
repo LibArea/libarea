@@ -5,7 +5,7 @@
 
 <fieldset>
   <label>
-    <?= Translate::get($type); ?> <?php if (!empty($red)) { ?><sup class="red-500">*</sup><?php } ?>
+    <?= Translate::get($type); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
   </label>
 
   <?php if ($action == 'edit' || $action == 'add') { ?>

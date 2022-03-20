@@ -18,7 +18,7 @@
                 <div class="flex text-sm">
                   <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
                     <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
-                    <span class="mr5">
+                    <span class="mr5<?php if (loginColor($answer['created_at'])) { ?> green<?php } ?>">
                       <?= $answer['login']; ?>
                     </span>
                   </a>
@@ -26,7 +26,7 @@
                     <span class="sky-500 mr5 ml0"><i class="bi-mic text-sm"></i></span>
                   <?php } ?>
                   <span class="mr5 ml5 gray-400 lowercase">
-                    <?= lang_date($answer['answer_date']); ?>
+                    <?= lang_date($answer['date']); ?>
                   </span>
                   <?php if (empty($answer['edit'])) { ?>
                     <span class="mr5 ml10 gray-400">
@@ -36,8 +36,8 @@
                   <a rel="nofollow" class="gray-400 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
                   <?= Tpl::import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
                 </div>
-                <div class="m0 max-w780">
-                  <?= $answer['answer_content'] ?>
+                <div class="max-w780">
+                  <?= Content::text($answer['answer_content'], 'text'); ?>
                 </div>
               </div>
               <div class="flex text-sm">
@@ -82,9 +82,12 @@
               <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">
                   <?= $answer['answer_content']; ?>
-                  <?= Translate::get('answer'); ?> — <?= $answer['login']; ?>
+                  <?= Translate::get('answer'); ?> — 
+                  <span class="u<?php if (loginColor($answer['created_at'])) { ?> green<?php } ?>">
+                    <?= $answer['login']; ?>
+                  </span>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action right">
-                    <span><?= Translate::get('recover'); ?></span>
+                    <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
                   </a>
                 </span>
               </li>
@@ -106,7 +109,10 @@
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
                   <?= Content::text($comment['comment_content'], 'line'); ?>
-                  — <?= $comment['login']; ?>
+                  — 
+                  <span class="u<?php if (loginColor($comment['created_at'])) { ?> green<?php } ?>">
+                    <?= $comment['login']; ?>
+                  </span>
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action right text-sm">
                     <?= Translate::get('recover'); ?>
                   </a>
@@ -123,7 +129,7 @@
                   <div class="text-sm flex">
                     <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
                       <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava-sm'); ?>
-                      <span class="mr5">
+                      <span class="mr5<?php if (loginColor($comment['created_at'])) { ?> green<?php } ?>">
                         <?= $comment['login']; ?>
                       </span>
                     </a>
@@ -131,7 +137,7 @@
                       <span class="sky-500 mr5"><i class="bi-mic text-sm"></i></span>
                     <?php } ?>
                     <span class="mr5 ml5 gray-400 lowercase">
-                      <?= lang_date($comment['comment_date']); ?>
+                      <?= lang_date($comment['date']); ?>
                     </span>
                     <?php if ($comment['comment_comment_id'] > 0) { ?>
                       <a class="gray-400 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><i class="bi-arrow-up"></i></a>
@@ -141,9 +147,7 @@
                     <a class="gray-400 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi-hash"></i></a>
                     <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
                   </div>
-                  <div class="mt5 mb10">
-                    <?= Content::text($comment['comment_content'], 'text'); ?>
-                  </div>
+                  <?= Content::text($comment['comment_content'], 'text'); ?>
                 </div>
                 <div class="text-sm flex">
                   <?= votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
@@ -161,7 +165,7 @@
                       <?= Translate::get('edit'); ?>
                     </a>
                     <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray mr5 ml5">
-                      <?= Translate::get('remove'); ?>
+                      <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
                     </a>
                   <?php } ?>
 

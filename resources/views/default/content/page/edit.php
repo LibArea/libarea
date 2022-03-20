@@ -3,7 +3,7 @@
   <div class="box-white">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500">
+    <span class="red">
       <?= sprintf(Translate::get('edit.option'), Translate::get('page')); ?>
     </span>
     

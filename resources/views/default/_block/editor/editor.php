@@ -1,4 +1,4 @@
-<?php if (!empty($title)) { ?><div class="mb5"><?= $title; ?><sup class="red-500">*</sup></div><?php } ?>
+<?php if (!empty($title)) { ?><div class="mb5"><?= $title; ?><sup class="red">*</sup></div><?php } ?>
 
 <textarea id="editor" name="content"><?php if (!empty($content)) { ?><?= $content; ?><?php } ?></textarea>
 

@@ -37,7 +37,7 @@
           <?php if ($user['name']) { ?>
             (<?= $user['name']; ?>)
           <?php } ?>
-          <sup class="red-500">TL:<?= $user['trust_level']; ?></sup>
+          <sup class="red">TL:<?= $user['trust_level']; ?></sup>
 
         </td>
         <td>
@@ -54,14 +54,14 @@
           <?php } ?>
 
           <?php if ($user['duplicat_ip_reg'] > 1) { ?>
-            <br> <sup class="red-500">(<?= $user['duplicat_ip_reg']; ?>)</sup>
+            <br> <sup class="red">(<?= $user['duplicat_ip_reg']; ?>)</sup>
           <?php } ?>
         </td>
         <td class="center">
           <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
             <?php if ($user['ban_list']) { ?>
               <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                <span class="red-500"><?= Translate::get('unban'); ?></span>
+                <span class="red"><?= Translate::get('unban'); ?></span>
               </div>
             <?php } else { ?>
               <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">

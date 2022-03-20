@@ -135,7 +135,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                     answer_id,
                     answer_user_id,
                     answer_post_id,
-                    answer_date,
+                    answer_date as date,
                     answer_content,
                     answer_modified,
                     answer_published,
@@ -150,7 +150,8 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                     fav.action_type,
                     u.id, 
                     u.login,
-                    u.avatar
+                    u.avatar,
+                    u.created_at
                         FROM answers
                         LEFT JOIN users u ON u.id = answer_user_id
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id

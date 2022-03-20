@@ -57,7 +57,7 @@
             <?php if (UserData::checkAdmin()) { ?>
               <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-400 mr10 ml10">
                 <?php if ($post['post_is_deleted'] == 1) { ?>
-                  <i class="bi-trash red-500"></i>
+                  <i class="bi-trash red"></i>
                 <?php } else { ?>
                   <i class="bi-trash"></i>
                 <?php } ?>
@@ -261,7 +261,7 @@
           <?php if ($rec_post['post_type'] == 'post') { ?>
             <a class="gray" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
               <?php if ($rec_post['post_answers_count'] > 0) { ?>
-                <div class="p5 pr10 pb5 pl10 bg-green-600 br-rd3 white center mr15">
+                <div class="p5 pr10 pb5 pl10 bg-green br-rd3 white center mr15">
                   <?= $rec_post['post_answers_count'] ?>
                 </div>
               <?php } else { ?>

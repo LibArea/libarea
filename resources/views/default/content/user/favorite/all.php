@@ -22,7 +22,7 @@
           <a class="block" href="<?= getUrlByName('web.website', ['slug' => $fav['item_url_domain']]); ?>">
             <?= $fav['item_title_url']; ?>
           </a>
-          <span class="green-600 text-sm">
+          <span class="green text-sm">
             <?= website_img($fav['item_url_domain'], 'favicon', $fav['item_url_domain'], 'favicons'); ?>
             <?= $fav['item_url_domain']; ?>
             <a target="_blank" href="<?= $fav['item_url']; ?>" class="item_cleek" data-id="<?= $fav['item_id']; ?>" rel="nofollow noreferrer ugc">
@@ -41,7 +41,7 @@
         } ?>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
-          <i class="bi-trash red-500"></i>
+          <i class="bi-trash red"></i>
         </span>
         <?php if ($fav['tag_id']) { ?>
           <a class="tags-xs ml15" href="<?= getUrlByName('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">

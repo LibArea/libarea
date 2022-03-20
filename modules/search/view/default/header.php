@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?16');
+Request::getHead()->addStyles('/assets/css/style.css?01');
 $uri = $data['type'] == 'post' ? 'post' : 'website';
 ?>
 
@@ -8,7 +8,7 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
 <body <?php if (Request::getCookie('dayNight') == 'dark') { ?>class="dark" <?php } ?>>
   <header>
     <div class="page-search mb-p10">
-      <a class="logo black mt30 mb-none" href="<?= getUrlByName('search'); ?>">
+      <a class="logo mt30 mb-none" href="<?= getUrlByName('search'); ?>">
         <?= Translate::get('search'); ?>
       </a>
       <div class="page-search-right mb-ml0">

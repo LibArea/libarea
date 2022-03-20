@@ -1,7 +1,7 @@
 /*
- * Components based on the basic style of Agouti
+ * Components based on the basic style of libArea
  *
- * Компоненты, основанные на базовом стиле Агути
+ * Компоненты, основанные на базовом стиле LibArea
  */
 
 #contentWrapper {
@@ -16,6 +16,12 @@ h3,
 h4,
 h5 {
   font-weight: 500;
+  margin: 0;
+}
+
+.list-none {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 

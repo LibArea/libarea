@@ -53,7 +53,7 @@
       <?php } ?>
       <i title="<?= Translate::get('medal.registration'); ?>" class="bi-gift right mr5 ml5 sky-500"></i>
       <?php if ($user['id'] < 50) { ?>
-        <i title="<?= Translate::get('joined in the early days'); ?>" class="bi-award right mr5 ml5 green-600"></i>
+        <i title="<?= Translate::get('joined in the early days'); ?>" class="bi-award right mr5 ml5 green"></i>
       <?php } ?>
       <?php foreach ($badges as $badge) { ?>
         <span class="ml15"><?= $badge['badge_icon']; ?></span>

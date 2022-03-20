@@ -4,7 +4,7 @@
   <div class="box-white">
     <?php if (!empty($data['writers'])) { ?>
       <div class="flex items-center mb20 mt10">
-        <i class="bi-award red-500 text-3xl mr10"></i>
+        <i class="bi-award red text-3xl mr10"></i>
         <h2 class="gray-600"><?= Translate::get('by.deposit'); ?></h2>
       </div>
       <hr class="mb20">

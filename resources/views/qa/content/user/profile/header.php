@@ -41,7 +41,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
           <?= $profile['login']; ?>
           <?php if ($profile['name']) { ?> / <?= $profile['name']; ?><?php } ?>
             <?php if ($profile['up_count'] > 0) { ?>
-              <i class="up-id bi-heart red-500 mr10 ml20 mb-ml5 text-sm inline"></i>
+              <i class="up-id bi-heart red mr10 ml20 mb-ml5 text-sm inline"></i>
               <sup class="text-sm gray-400 inline"><?= $profile['up_count']; ?></sup>
             <?php } ?>
         </h1>

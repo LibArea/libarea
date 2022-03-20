@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?21');
+Request::getHead()->addStyles('/assets/css/style.css?01');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -42,7 +42,7 @@ $facet  = $data['facet'] ?? false; ?>
           </ul>
         </div>
         <div class="ml20 flex items-center">
-          <a title="<?= Translate::get('home'); ?>" class="logo black ml5" href="/">
+          <a title="<?= Translate::get('home'); ?>" class="logo ml5" href="/">
             <?= Config::get('meta.name'); ?>
           </a>
         </div>
@@ -76,9 +76,9 @@ $facet  = $data['facet'] ?? false; ?>
               <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['action_type'] == 1) { ?>
-                  <i class="bi-envelope red-500"></i>
+                  <i class="bi-envelope red"></i>
                 <?php } else { ?>
-                  <i class="bi-bell-fill red-500"></i>
+                  <i class="bi-bell-fill red"></i>
                 <?php } ?>
               <?php } else { ?>
                 <i class="bi-bell"></i>

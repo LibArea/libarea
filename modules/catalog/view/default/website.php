@@ -21,7 +21,7 @@
         <div class="m15 mb-ml0">
           <?= $data['item']['item_content_url']; ?>
           <div class="gray mt20">
-            <a class="green-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
+            <a class="green" target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
               <?= website_img($data['item']['item_url_domain'], 'favicon', $data['item']['item_url_domain'], 'favicons mr5'); ?>
               <?= $data['item']['item_url']; ?>
             </a>

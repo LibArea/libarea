@@ -12,8 +12,8 @@
           <?= $post['post_votes']; ?>
           <div class="text-xs"> <?= num_word($post['post_votes'], Translate::get('num-up'), false); ?></div>
         </div>
-        <?php $bg = $post['post_feature'] == 0 ? ' bg-green-600' : ' bg-pink-800'; ?>
-        <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue-500'; ?>
+        <?php $bg = $post['post_feature'] == 0 ? ' bg-green' : ' bg-pink'; ?>
+        <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
         <div class="box-answer mt5 br-rd3 lowercase <?= $bg; ?> <?= $bg_url; ?>">
           <a class="block white" href="<?= $post_url; ?>#comment">
             <?php $anw = $post['post_answers_count'] + $post['post_comments_count'];

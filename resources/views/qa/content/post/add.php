@@ -2,7 +2,7 @@
   <div class="bg-white items-center justify-between p15 mb15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500"><?= Translate::get($data['type']); ?></span>
+    <span class="red"><?= Translate::get($data['type']); ?></span>
 
     <form class="max-w780" action="<?= getUrlByName('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>

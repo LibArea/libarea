@@ -5,7 +5,7 @@
     <?php if (!empty($data['messages'])) { ?>
      <div class="box-white">
       <?php foreach ($data['messages'] as  $msg) { ?>
-        <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> bg-purple-100<?php } ?>">
+        <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> bg-purple<?php } ?>">
           <div class="text-sm flex">
             <?php if ($msg['dialog_sender_id'] == $user['id']) { ?>
               <a href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
@@ -22,14 +22,14 @@
               <?= lang_date($msg['dialog_update_time']); ?>
             </span>
           </div>
-          <div class="p15 br-rd5 mt5 relative bg-blue-100<?php if (!$msg['unread'] > 0) { ?> bg-purple-100<?php } ?> gray">
+          <div class="p15 br-rd5 mt5 relative bg-blue-100<?php if (!$msg['unread'] > 0) { ?> bg-purple<?php } ?> gray">
             <?= Content::text($msg['message']['message_content'], 'text'); ?>
           </div>
           <a class="lowercase text-sm right" href="<?= getUrlByName('dialogues', ['id' => $msg['dialog_id']]); ?>">
             <?php if ($msg['unread']) { ?>
               <?= Translate::get('there are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
             <?php } else { ?>
-              <span class="red-500"><?= Translate::get('view'); ?></span>
+              <span class="red"><?= Translate::get('view'); ?></span>
               <?php if ($msg['count'] != 0) { ?>
                 <?= $msg['count']; ?> <?= $msg['count_num']; ?>
               <?php } ?>

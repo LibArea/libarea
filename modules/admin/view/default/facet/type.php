@@ -54,7 +54,7 @@
 
         <?php if ($topic['facet_is_deleted'] == 1) { ?>
           <span class="type-ban" data-id="<?= $topic['facet_id']; ?>" data-type="topic">
-            <sup><i class="bi-trash red-500"></i></sup>
+            <sup><i class="bi-trash red"></i></sup>
           </span>
         <?php } else { ?>
           <span class="type-ban" data-id="<?= $topic['facet_id']; ?>" data-type="topic">

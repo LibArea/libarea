@@ -55,7 +55,7 @@
         <?php if ($user['id'] > 0) { ?>
           <?php if ($profile['login'] == $user['login']) { ?>
             <a class="add-profile ml10" data-post="<?= $post['post_id']; ?>">
-              <i class="bi-trash red-500"></i>
+              <i class="bi-trash red"></i>
             </a>
           <?php } ?>
         <?php } ?>
@@ -130,7 +130,7 @@
     <div class="m0 text-3xl">
       <i title="<?= Translate::get('medal.registration'); ?>" class="bi-gift sky-500"></i>
       <?php if ($profile['id'] < 50) { ?>
-        <i title="<?= Translate::get('joined in the early days'); ?>" class="bi-award green-600"></i>
+        <i title="<?= Translate::get('joined in the early days'); ?>" class="bi-award green"></i>
       <?php } ?>
       <?php foreach ($data['badges'] as $badge) { ?>
         <?= $badge['badge_icon']; ?>
@@ -145,8 +145,8 @@
         <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
           <?php if ($profile['ban_list'] == 1) { ?>
             <span class="type-ban gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
-              <i class="bi-person-x-fill red-500 middle mr5"></i>
-              <span class="red-500 text-sm"><?= Translate::get('unban'); ?></span>
+              <i class="bi-person-x-fill red middle mr5"></i>
+              <span class="red text-sm"><?= Translate::get('unban'); ?></span>
             </span>
           <?php } else { ?>
             <span class="type-ban text-sm gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
@@ -165,7 +165,7 @@
         </a>
         <?php if ($profile['whisper']) { ?>
           <div class="tips text-sm pt15 pb10 gray-600">
-            <i class="bi-info-square green-600 mr5"></i>
+            <i class="bi-info-square green mr5"></i>
             <?= $profile['whisper']; ?>
           </div>
         <?php } ?>

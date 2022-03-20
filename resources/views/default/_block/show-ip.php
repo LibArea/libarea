@@ -3,6 +3,6 @@
     <?= $ip; ?>
   </a> 
   <?php if ($publ == 0) { ?>
-     <span class="ml15 red-500 lowercase"><?= Translate::get('audits'); ?></span>
+     <span class="ml15 red lowercase"><?= Translate::get('audits'); ?></span>
   <?php } ?>
 <?php } ?>

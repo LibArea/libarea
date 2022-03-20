@@ -26,7 +26,7 @@
         <?= $data['site']['item_content_url']; ?>
       </div>
       <div class="gray mt5 mb5">
-        <a class="green-600" rel="nofollow noreferrer ugc" href="<?= $data['site']['item_url']; ?>">
+        <a class="green" rel="nofollow noreferrer ugc" href="<?= $data['site']['item_url']; ?>">
           <?= website_img($data['site']['item_id'], 'favicon', $data['site']['item_url_domain'], 'favicons'); ?>
           <?= $data['site']['item_url']; ?>
         </a>

@@ -13,7 +13,7 @@
     <fieldset>
       <label for="post_content">
         <?= Translate::get('badge'); ?>:
-        <span class="red-500"><?= $data['user']['login']; ?></span>
+        <span class="red"><?= $data['user']['login']; ?></span>
       </label>
       <select name="badge_id">
         <?php foreach ($data['badges'] as $badge) { ?>

@@ -2,7 +2,7 @@
   <div class="box-white">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red-500"><?= sprintf(Translate::get('add.option'), Translate::get('post')); ?></span>
+    <span class="red"><?= sprintf(Translate::get('add.option'), Translate::get('post')); ?></span>
 
     <form class="max-w780" action="<?= getUrlByName('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>

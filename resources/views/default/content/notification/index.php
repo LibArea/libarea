@@ -22,7 +22,7 @@
                 <?= sprintf(Translate::get($n['lang']), '<a href="' . $url . '">', '</a>'); ?>
                 — <?= lang_date($notif['time']); ?>
               </span>
-              <?php if ($notif['flag'] == 0) { ?><sup class="ml5 red-500">✔</sup><?php } ?>
+              <?php if ($notif['flag'] == 0) { ?><sup class="ml5 red">✔</sup><?php } ?>
             </div>
           <?php } ?>
         <?php } ?>
