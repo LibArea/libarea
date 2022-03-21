@@ -12,9 +12,9 @@
     <h3 class="uppercase-box"><?= Translate::get('users'); ?></h3>
     <?php foreach ($data['last_visit'] as $user) { ?>
       <div class="gray">
-        <span class="gray-400 text-sm">id<?= $user['id']; ?></span>
+        <span class="gray-600 text-sm">id<?= $user['id']; ?></span>
         <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
-        <span class="gray-400 lowercase"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
+        <span class="gray-600 lowercase"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
       </div>
     <?php } ?>
   </div>
@@ -23,11 +23,11 @@
     <h3 class="uppercase-box"><?= Translate::get('search'); ?></h3>
     <?php foreach ($data['logs'] as $log) { ?>
       <div class="gray">
-        <span class="gray-400 text-sm"><?= $log['count_results']; ?></span>
+        <span class="gray-600 text-sm"><?= $log['count_results']; ?></span>
         <a target="_blank" rel="noreferrer" href="/search?q=<?= $log['request']; ?>&type=<?= $log['action_type']; ?>">    
           <?= $log['request']; ?>
         </a>
-        <span class="gray-400 lowercase">
+        <span class="gray-600 lowercase">
           — (<?= Translate::get($log['action_type']); ?>) <?= lang_date($log['add_date']); ?>
         </span>
       </div>

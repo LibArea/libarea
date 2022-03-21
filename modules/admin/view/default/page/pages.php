@@ -25,7 +25,7 @@
       <a class="text-2xl" href="<?= getUrlByName('page', ['facet' => 'info', 'slug' => $page['post_slug']]); ?>">
         <i class="bi-info-square middle mr5"></i> <?= $page['post_title']; ?>
       </a>
-      <a class="text-sm gray-400" href="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
+      <a class="text-sm gray-600" href="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
         <i class="bi-pencil"></i>
       </a>
       <a data-type="post" data-id="<?= $page['post_id']; ?>" class="type-action gray-600 mr10 ml10">

@@ -6,7 +6,7 @@
     <blockquote class="ml0 mb10 max-w640 gray">
       <?= $profile['about']; ?>...
     </blockquote>
-    <div class="gray-400">
+    <div class="gray-600">
       <i class="bi-calendar-week middle"></i>
       <span class="middle lowercase text-sm">
         <?= $profile['created_at']; ?>
@@ -27,7 +27,7 @@
             <a class="black" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
               <?= $blog['facet_title']; ?>
             </a>
-            <div class="text-sm pr15 mb-pr0 gray-400">
+            <div class="text-sm pr15 mb-pr0 gray-600">
               <?= $blog['facet_short_description']; ?>
               <div class="flex mt5 text-sm">
                 <i class="bi-journal mr5"></i>
@@ -64,9 +64,9 @@
             <?= user_avatar_img($profile['avatar'], 'small', $profile['login'], 'ava-sm'); ?>
             <?= $profile['login']; ?>
           </a>
-          <span class="gray-400 ml5"><?= $post['post_date'] ?></span>
+          <span class="gray-600 ml5"><?= $post['post_date'] ?></span>
           <?php if ($post['post_answers_count'] != 0) { ?>
-            <a class="gray-400 right" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+            <a class="gray-600 right" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
               <i class="bi-chat-dots middle"></i>
               <?= $post['post_answers_count']; ?>
             </a>
@@ -128,7 +128,7 @@
   <div class="bg-violet-50 box">
     <h3 class="uppercase-box"><?= Translate::get('badges'); ?></h3>
     <div class="m0 text-3xl">
-      <i title="<?= Translate::get('medal.registration'); ?>" class="bi-gift sky-500"></i>
+      <i title="<?= Translate::get('medal.registration'); ?>" class="bi-gift sky"></i>
       <?php if ($profile['id'] < 50) { ?>
         <i title="<?= Translate::get('joined in the early days'); ?>" class="bi-award green"></i>
       <?php } ?>

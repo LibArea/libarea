@@ -40,14 +40,6 @@ class BlogFacetController extends MainController
         $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
-        $result = [];
-        foreach ($posts as $ind => $row) {
-            $text = fragment($row['post_content']);
-            $row['post_content_preview']    = Content::text($text, 'line');
-            $row['post_date']               = lang_date($row['post_date']);
-            $result[$ind]                   = $row;
-        }
-
         $url    = getUrlByName('blog', ['slug' => $facet['facet_slug']]);
         $title  = $facet['facet_seo_title'] . ' — ' .  Translate::get('blog');
         $descr  = $facet['facet_description'];
@@ -69,7 +61,7 @@ class BlogFacetController extends MainController
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'facet'         => $facet,
-                    'posts'         => $result,
+                    'posts'         => $posts,
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
                     'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'topic'),

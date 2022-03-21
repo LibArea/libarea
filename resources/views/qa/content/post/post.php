@@ -8,7 +8,7 @@
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="flex br-bottom p10 article_<?= $post['post_id']; ?>">
       <div class="flex mb-inline mr15">
-        <div class="box-answer block bg-gray-100 gray-600 mt5 br-rd3 lowercase mr15">
+        <div class="box-answer block bg-gray-100 gray mt5 br-rd3 lowercase mr15">
           <?= $post['post_votes']; ?>
           <div class="text-xs"> <?= num_word($post['post_votes'], Translate::get('num-up'), false); ?></div>
         </div>
@@ -65,7 +65,7 @@
   <?php } ?>
 <?php } else { ?>
   <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>
-  <div class="mt10 mb10 pt10 pr15 pb10 center pl15 gray-400">
+  <div class="m10 p15 center gray-600">
     <i class="bi-journal-richtext block text-8xl"></i>
     <?= Translate::get('no.posts'); ?>
   </div>

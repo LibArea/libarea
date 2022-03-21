@@ -206,21 +206,21 @@ function votes($user_id, $content, $type, $ind, $css = '', $block = '')
 
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
-            $html .= '<div class="voters sky-500 flex ' . $block . ' gray-400 center">
+            $html .= '<div class="voters sky flex ' . $block . ' center">
                         <div class="up-id bi-heart ' . $css . '"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . '  flex ' . $block . ' center gray-400">
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . '  flex ' . $block . ' center gray-600">
                         <div data-ind="' . $ind . '" data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi-heart ' . $css . '"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
         }
     } else {
-        $html .= '<div class="voters flex ' . $block . ' center gray-400">
+        $html .= '<div class="voters flex ' . $block . ' center gray-600">
                     <div class="up-id bi-heart ' . $css . ' click-no-auth"></div>
                     <div class="score">
                          ' . $count . '                
@@ -234,11 +234,11 @@ function favorite($user_id, $content_id, $type, $tid, $ind, $css = '')
 {
     $html  = '';
     if ($user_id > 0) {
-        $blue = $tid ? 'sky-500' : 'gray-400';
+        $blue = $tid ? 'sky' : 'gray-600';
         $my   = $tid ? 'bi-bookmark-dash' : 'bi-bookmark-plus';
         $html .= '<span id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . ' middle"></i></span>';
     } else {
-        $html .= '<span class="click-no-auth gray-400 ' . $css . '">
+        $html .= '<span class="click-no-auth gray-600 ' . $css . '">
                     <i class="bi-bookmark-plus middle"></i>
                         </span>';
     }
@@ -340,7 +340,7 @@ function add_post($facet, $user_id)
     }
 
     $html  = '<a title="' . sprintf(Translate::get('add.option'), Translate::get('post')) . '" 
-                href="' . $url_add . '" class="sky-500">
+                href="' . $url_add . '" class="sky">
                 <i class="bi-plus-lg text-xl"></i>
               </a>';
 

@@ -49,7 +49,7 @@
           </a>
           <sup class="del-folder-content gray-600" data-tid="<?= $fav['tid']; ?>" data-type="favorite">x</sup>
         <?php } else { ?>
-          <span class="trigger right lowercase gray-600 text-sm"> <i class="bi-plus-lg gray-400 mr5"></i></span>
+          <span class="trigger right lowercase gray-600 text-sm"> <i class="bi-plus-lg gray-600 mr5"></i></span>
           <span class="dropdown right">
             <?php if ($data['tags']) { ?>
               <?php foreach ($data['tags'] as $tag) { ?>
@@ -63,7 +63,7 @@
       </div>
     <?php } ?>
   <?php } else { ?>
-    <div class="p20 center gray-400">
+    <div class="p20 center gray-600">
       <i class="bi-bookmark block text-8xl"></i>
       <?= Translate::get('no.favorites'); ?>
     </div>

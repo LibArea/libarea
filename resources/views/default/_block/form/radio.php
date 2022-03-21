@@ -11,6 +11,6 @@
     <input type="radio" name="<?= $value['name']; ?>" <?php if ($checked == 1) { ?>checked<?php } ?> value="1">
     <span class="checkmark"></span>      
       <?= Translate::get('yes'); ?>
-    <?php if ($help) { ?><div class="mt5 text-sm gray-400"><?= $help; ?></div><?php } ?>
+    <?php if ($help) { ?><div class="mt5 text-sm gray-600"><?= $help; ?></div><?php } ?>
   </fieldset>
 <?php } ?>

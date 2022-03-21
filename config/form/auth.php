@@ -12,7 +12,7 @@ return [
       'name'    => 'email'
     ], [
       'title'   => Translate::get('password'),
-      'arr'     => ['type' => 'password', 'after_html' => '<span class="showPassword absolute gray-400 right5 mt5"><i class="bi bi-eye"></i></span>'],
+      'arr'     => ['type' => 'password', 'after_html' => '<span class="showPassword absolute gray-600 right5 mt5"><i class="bi bi-eye"></i></span>'],
       'name'    => 'password',
     ], [
       'title'   => Translate::get('remember me'),

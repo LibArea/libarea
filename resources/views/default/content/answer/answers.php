@@ -26,7 +26,7 @@
 
     </ul>
     <div class="trigger">
-      <i class="bi-info-square gray-400"></i>
+      <i class="bi-info-square gray-600"></i>
     </div>
     <div class="dropdown tooltip"><?= Translate::get($data['sheet'] . '.info'); ?></div>
   </div>

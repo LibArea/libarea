@@ -1,5 +1,5 @@
 <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
-  <a class="gray-400 ml10" href="<?= getUrlByName('admin.logip', ['ip' => $ip]); ?>">
+  <a class="gray-600 ml10" href="<?= getUrlByName('admin.logip', ['ip' => $ip]); ?>">
     <?= $ip; ?>
   </a> 
   <?php if ($publ == 0) { ?>

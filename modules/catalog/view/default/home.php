@@ -22,7 +22,7 @@
         <?php } ?>
       <?php } ?>
       <?php if (!empty($cat['help'])) { ?>
-        <div class="text-sm gray-400 mb-none"><?= $cat['help']; ?>...</div>
+        <div class="text-sm gray-600 mb-none"><?= $cat['help']; ?>...</div>
       <?php } ?>
     </div>
   <?php } ?>

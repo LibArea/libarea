@@ -42,7 +42,7 @@
 
 .menu a,
 .dropdown li > a {
-  color: var(--gray-600);
+  color: var(--gray);
   padding: 3px 10px 3px 13px;
   display: flex;
   flex-direction: row;
@@ -53,7 +53,7 @@
 
 .nav a { 
   padding-right: 20px;
-  color: var(--gray-600);
+  color: var(--gray);
 }
 
 .nav a i { margin-right: 4px; }
@@ -70,7 +70,7 @@ a.active > i,
 
 .breadcrumbs li {
   display: inline;
-  color: var(--gray-400); 
+  color: var(--gray-600); 
 }
 
 .breadcrumbs li:not(:last-child):after {

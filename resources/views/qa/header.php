@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?01');
+Request::getHead()->addStyles('/assets/css/style.css?02');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -30,7 +30,7 @@ $facet  = $data['facet'] ?? false; ?>
       <div class="flex items-center" id="find">
         <div class="none mb-block">
           <div class="trigger">
-            <i class="bi-list gray-400 text-xl mr10"></i>
+            <i class="bi-list gray-600 text-xl mr10"></i>
           </div>
           <ul class="dropdown left">
             <?= tabs_nav(
@@ -51,7 +51,7 @@ $facet  = $data['facet'] ?? false; ?>
       <?php if ($user['id'] == 0) { ?>
         <div class="flex right items-center">
           <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml10">
-            <i class="bi-brightness-high gray-400 text-xl"></i>
+            <i class="bi-brightness-high gray-600 text-xl"></i>
           </div>
           <?php if (Config::get('general.invite') == false) { ?>
             <a class="w94 gray ml30 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
@@ -69,10 +69,10 @@ $facet  = $data['facet'] ?? false; ?>
             <?= add_post($facet, $user['id']); ?>
 
             <div id="toggledark" class="only-icon p10 ml20 mb-ml10">
-              <i class="bi-brightness-high gray-400 text-xl"></i>
+              <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
 
-            <a class="gray-400 p10 text-xl ml20 mb-ml10" href="<?= getUrlByName('notifications'); ?>">
+            <a class="gray-600 p10 text-xl ml20 mb-ml10" href="<?= getUrlByName('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['action_type'] == 1) { ?>

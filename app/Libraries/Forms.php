@@ -404,7 +404,7 @@ class Forms
 
 				$wrap_after = $val['help'];
 				if (!empty($val['wrap_tag'])) {
-					$wrap_after = '<div class="text-sm gray-400">' . $wrap_after . '</div></' . $val['wrap_tag'] . '>';
+					$wrap_after = '<div class="text-sm gray-600">' . $wrap_after . '</div></' . $val['wrap_tag'] . '>';
 				}
 
 				$output .= $wrap_before . $field . $wrap_after;

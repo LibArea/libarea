@@ -100,7 +100,7 @@ h5 {
 
 .tabs.active {
   background-color: var(--gray-100);
-  color: var(--gray-400);
+  color: var(--gray-600);
 }
 
 aside {
@@ -115,7 +115,7 @@ aside ul {
   font-size: 0.875rem;
 }
 
-aside ul a { color: var(--gray-600); }
+aside ul a { color: var(--gray); }
 
 footer {
   background-color: var(--white);
@@ -126,7 +126,7 @@ footer {
 }
 
 footer .icon {
-  color: var(--gray-400);
+  color: var(--gray-600);
   font-size: 21px;
   margin-right: 15px;
 }
@@ -193,7 +193,7 @@ details[open] > summary {
 
 .txt-closed {
   padding: 10px;
-  background-color: var(--sky-50);
+  background-color: lightyellow;
   margin-bottom: 15px;
   display: inherit;
 }
@@ -206,7 +206,7 @@ details[open] > summary {
   padding: 10px;
   font-size: 14px;
   border-radius: 5px;
-  color: var(--gray-400);
+  color: var(--gray-600);
   text-align: center;
 }
 

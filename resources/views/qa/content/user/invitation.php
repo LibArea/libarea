@@ -9,7 +9,7 @@
         <fieldset>
           <input type="email" name="email">
           <div class="right pt5"><?= sumbit(Translate::get('send')); ?></div>
-          <div class="text-sm pt5 gray-400"><?= Translate::get('enter'); ?> E-mail</div>
+          <div class="text-sm pt5 gray-600"><?= Translate::get('enter'); ?> E-mail</div>
         </fieldset>
         <?= Translate::get('invitations left'); ?> <?= 5 - $data['count_invites']; ?>
       </form>

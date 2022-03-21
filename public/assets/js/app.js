@@ -50,7 +50,7 @@ document.querySelectorAll(".up-id")
         let new_cont = (parseInt(count) + parseInt(1));
         let upVot = document.querySelector('#up' + content_id + '.voters-' + ind);
         let upScr = upVot.querySelector('.score');
-        upVot.classList.add('sky-500');
+        upVot.classList.add('sky');
         upScr.replaceWith(new_cont);
       });
   }));
@@ -74,7 +74,7 @@ document.querySelectorAll(".add-favorite")
           location.reload();
         } else {
             let dom = document.querySelector("#favorite_" + content_id + '.fav-' + ind);
-            dom.classList.toggle("sky-500");
+            dom.classList.toggle("sky");
         }
       });
   }));

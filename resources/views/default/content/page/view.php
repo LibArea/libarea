@@ -16,10 +16,10 @@
   </article>
   <div class="box-flex-white center text-2xl">
     <?= votes($user['id'], $page, 'post', 'ps', 'middle mr15'); ?>
-    <div class="gray-400 italic">
+    <div class="gray-600 italic">
       <?= $page['post_modified']; ?>
       <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
-        <a class="gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
+        <a class="gray-600 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
           <i class="bi-pencil"></i>
         </a>
       <?php } ?>

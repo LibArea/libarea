@@ -12,7 +12,7 @@
                 <?= $comment['login']; ?>
               </span>
             </a>
-            <span class="gray-400 lowercase"><?= $comment['date']; ?></span>
+            <span class="gray-600 lowercase"><?= $comment['date']; ?></span>
           </div>
           <a href="<?= getUrlByName('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>#comment_<?= $comment['comment_id']; ?>">
             <?= $comment['post_title']; ?>

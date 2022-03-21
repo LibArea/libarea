@@ -43,7 +43,7 @@
                 </a>
               </div>
             </div>
-            <div class="flex right gray-400">
+            <div class="flex right gray-600">
               <?= favorite($user['id'], $item['item_id'], 'website', $item['tid'], 'ps', 'mr20'); ?>
               <?= votes($user['id'], $item, 'item', 'ps', 'mr5'); ?>
             </div>

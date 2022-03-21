@@ -30,9 +30,9 @@ foreach ($answer as  $comment) {
                 </span>
               </a>
               <?php if ($comment['post_user_id'] == $comment['comment_user_id']) { ?>
-                <span class="sky-500 mr5"><i class="bi-mic text-sm"></i></span>
+                <span class="sky mr5"><i class="bi-mic text-sm"></i></span>
               <?php } ?>
-              <span class="mr5 ml5 gray-400 lowercase">
+              <span class="mr5 ml5 gray-600 lowercase">
                 <?= lang_date($comment['comment_date']); ?>
               </span>
               <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
@@ -57,7 +57,7 @@ foreach ($answer as  $comment) {
             <?php } ?>
 
             <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
-              <a data-post_id="<?= $comment['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-400 ml15">
+              <a data-post_id="<?= $comment['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml15">
                 <i title="<?= Translate::get('report'); ?>" class="bi-flag"></i>
               </a>
             <?php } ?>

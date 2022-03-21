@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?01');
+Request::getHead()->addStyles('/assets/css/style.css?02');
 $uri = $data['type'] == 'post' ? 'post' : 'website';
 ?>
 
@@ -29,15 +29,15 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
 
           <div class="flex right items-center">
             <div id="toggledark" class="header-menu-item mb-none only-icon mr30 mb-ml10">
-              <i class="bi-brightness-high gray-400 text-xl"></i>
+              <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
             <?php if (!UserData::checkActiveUser()) { ?>
               <?php if (Config::get('general.invite') == false) { ?>
-                <a class="register gray-400 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
+                <a class="register gray-600 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
                   <?= Translate::get('registration'); ?>
                 </a>
               <?php } ?>
-              <a class="gray-400 mr10 ml10" href="<?= getUrlByName('login'); ?>">
+              <a class="gray-600 mr10 ml10" href="<?= getUrlByName('login'); ?>">
                 <?= Translate::get('sign.in'); ?>
               </a>
             <?php } else { ?>

@@ -25,11 +25,11 @@
             <a href="<?= getUrlByName('profile', ['login' => $log['user_login']]); ?>">
               <?= $log['user_login']; ?>
             </a>
-            <sup class="gray-400 ml5">id:<?= $log['user_id']; ?></sup>
+            <sup class="gray-600 ml5">id:<?= $log['user_id']; ?></sup>
           </td>
-          <td class="gray-400"><?= Translate::get($log['action_type']); ?></td>
+          <td class="gray-600"><?= Translate::get($log['action_type']); ?></td>
           <td><?= sprintf(Translate::get($log['action_name']), Translate::get($log['action_type'])); ?></td>
-          <td class="gray-400"><?= lang_date($log['add_date']); ?></td>
+          <td class="gray-600"><?= lang_date($log['add_date']); ?></td>
           <th><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><i class="bi-eye"></i></a></th>
         </tr>
       <?php } ?>

@@ -9,9 +9,9 @@
         <sup><i class="bi-pencil gray"></i></sup>
       </a>
       <a class="text-sm ml15" href="<?= getUrlByName('admin.category.structure'); ?>">
-        <sup class="gray-400"><i class="bi-columns-gap mr5"></i></sup>
+        <sup class="gray-600"><i class="bi-columns-gap mr5"></i></sup>
       </a>
-      <small class="text-sm gray-400"><sup><?= $data['category']['facet_type']; ?></sup></small>
+      <small class="text-sm gray-600"><sup><?= $data['category']['facet_type']; ?></sup></small>
     <?php } ?>
   </h1>
 </div>
@@ -22,12 +22,12 @@
       <div>
         <a class="text-2xl" href="<?= getUrlByName('web.dir', ['cat' => $data['screening'], 'slug' => $lt['facet_slug']]); ?>">
           <?= $lt['facet_title']; ?>
-        </a> <sup class="gray-400"><?= $lt['counts']; ?></sup>
+        </a> <sup class="gray-600"><?= $lt['counts']; ?></sup>
         <?php if (UserData::checkAdmin()) { ?>
           <a class="ml5" href="<?= getUrlByName('content.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
             <sup><i class="bi-pencil"></i>
           </a>
-          <small class="text-sm gray-400"><sup><?= $lt['facet_type']; ?></sup></small>
+          <small class="text-sm gray-600"><sup><?= $lt['facet_type']; ?></sup></small>
         <?php } ?>
       </div>
     <?php } ?>
@@ -42,7 +42,7 @@
         </a>
         <?php if (UserData::checkAdmin()) { ?>
           <a class="text-sm ml5" href="<?= getUrlByName('category.edit', ['id' => $rl['facet_id']]); ?>">
-            <sup class="gray-400"><i class="bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
+            <sup class="gray-600"><i class="bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
           </a>
         <?php } ?>
       </div>

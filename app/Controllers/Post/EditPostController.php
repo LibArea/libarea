@@ -154,7 +154,7 @@ class EditPostController extends MainController
 
         self::addFacetsPost($fields, $post_id, $redirect);
 
-        redirect('/');
+        redirect('/post/' . $post_id);
     }
 
     // Add fastes (blogs, topics) to the post 

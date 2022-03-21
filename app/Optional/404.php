@@ -16,7 +16,7 @@
     <p class="gray-600"><?= Translate::get('page.not'); ?></p>
     <a class="btn btn-primary" href="/"><?= Translate::get('to main'); ?></a>
     <img class="right" src="<?= Config::get('meta.img_footer_path'); ?>">
-    <p class="gray-400"><?= Translate::get('page.removed'); ?>...</p>
+    <p class="gray-600"><?= Translate::get('page.removed'); ?>...</p>
   </main>
 
 </body>

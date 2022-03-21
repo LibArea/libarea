@@ -17,12 +17,12 @@
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
     <div class="box-flex-white bg-violet-50">
       <div class="center">
-        <div class="uppercase text-sm gray-400"><?= Translate::get('posts'); ?></div>
+        <div class="uppercase text-sm gray-600"><?= Translate::get('posts'); ?></div>
         <?= $topic['facet_count']; ?>
       </div>
       <div class="center relative">
-        <div class="uppercase text-sm gray-400"><?= Translate::get('reads'); ?></div>
-        <div class="focus-user sky-500">
+        <div class="uppercase text-sm gray-600"><?= Translate::get('reads'); ?></div>
+        <div class="focus-user sky">
           <?= $topic['facet_focus_count']; ?>
         </div>
         <div class="content_<?= $topic['facet_id']; ?> absolute bg-white box-shadow-all z-10 right0"></div>

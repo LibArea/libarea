@@ -51,7 +51,7 @@
         <i class="bi-eye middle mr5 ml5"></i>
         <span class="text-sm mr15"> <?= $user['hits_count']; ?></span>
       <?php } ?>
-      <i title="<?= Translate::get('medal.registration'); ?>" class="bi-gift right mr5 ml5 sky-500"></i>
+      <i title="<?= Translate::get('medal.registration'); ?>" class="bi-gift right mr5 ml5 sky"></i>
       <?php if ($user['id'] < 50) { ?>
         <i title="<?= Translate::get('joined in the early days'); ?>" class="bi-award right mr5 ml5 green"></i>
       <?php } ?>

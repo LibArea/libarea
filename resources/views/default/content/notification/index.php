@@ -15,10 +15,10 @@
 
         <?php foreach (Config::get('notification') as $key => $n) { ?>
           <?php if ($n['id'] == $notif['type']) { ?>
-            <div class="br-bottom p5<?php if ($notif['flag'] == 0) { ?> bg-sky-50<?php } ?>">
+            <div class="br-bottom p5<?php if ($notif['flag'] == 0) { ?> bg-lightyellow<?php } ?>">
               <i class="<?= $n['icon']; ?> middle"></i>
               <a class="black ml5" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
-              <span class="lowercase gray-400">
+              <span class="lowercase gray-600">
                 <?= sprintf(Translate::get($n['lang']), '<a href="' . $url . '">', '</a>'); ?>
                 — <?= lang_date($notif['time']); ?>
               </span>
@@ -29,7 +29,7 @@
 
       <?php } ?>
 
-      <div class="p15 center gray-400"><?= Translate::get('notifications.limit'); ?></div>
+      <div class="p15 center gray-600"><?= Translate::get('notifications.limit'); ?></div>
     <?php } else { ?>
       <?= no_content(Translate::get('no.content'), 'bi-info-lg'); ?>
     <?php } ?>

@@ -25,9 +25,9 @@
             </a>
 
             <?php if ($user['id'] == $facet['facet_user_id']) { ?>
-              <i class="bi-mic sky-500 text-sm"></i>
+              <i class="bi-mic sky text-sm"></i>
             <?php } ?>
-            <div class="text-sm pr15 mb-pr0 gray-400">
+            <div class="text-sm pr15 mb-pr0 gray">
               <?= $facet['facet_short_description']; ?>
               <div class="flex mt5 text-sm">
                 <i class="bi-journal mr5"></i>

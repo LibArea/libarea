@@ -49,7 +49,7 @@
         </a>
 
         <a class="ml15 mr15" href="<?= getUrlByName('content.edit', ['type' => $data['type'], 'id' => $topic['facet_id']]); ?>">
-          <sup><i class="bi-pencil gray-400"></i></sup>
+          <sup><i class="bi-pencil gray-600"></i></sup>
         </a>
 
         <?php if ($topic['facet_is_deleted'] == 1) { ?>
@@ -58,7 +58,7 @@
           </span>
         <?php } else { ?>
           <span class="type-ban" data-id="<?= $topic['facet_id']; ?>" data-type="topic">
-            <sup><i class="bi-trash gray-400"></i></sup>
+            <sup><i class="bi-trash gray-600"></i></sup>
           </span>
         <?php } ?>
 

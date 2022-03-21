@@ -26,7 +26,7 @@
           <sup>id<?= $inv['active_uid']; ?></sup>
           <span class="text-sm"> - <?= lang_date($inv['active_time']); ?>
           <?php } else { ?>
-            <span class="gray-400 lowercase text-sm">
+            <span class="gray-600 lowercase text-sm">
               <?= $inv['invitation_email']; ?> &nbsp; <?= lang_date($inv['add_time']); ?>
             </span>
           <?php } ?>

@@ -1,6 +1,6 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?01');
-Request::getHead()->addStyles('/assets/css/catalog.css?01');
+Request::getHead()->addStyles('/assets/css/style.css?02');
+Request::getHead()->addStyles('/assets/css/catalog.css?02');
 ?>
 
 <?= Tpl::insert('meta', ['meta' => $meta]); ?>
@@ -19,20 +19,20 @@ Request::getHead()->addStyles('/assets/css/catalog.css?01');
           </a>
           <div class="flex right items-center">
             <div id="toggledark" class="header-menu-item mb-none only-icon mr30 mb-ml10">
-              <i class="bi-brightness-high gray-400 text-xl"></i>
+              <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
             <?php if (!UserData::checkActiveUser()) { ?>
               <?php if (Config::get('general.invite') == false) { ?>
-                <a class="register gray-400 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
+                <a class="register gray-600 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
                   <?= Translate::get('registration'); ?>
                 </a>
               <?php } ?>
-              <a class="gray-400 mr10 ml10" href="<?= getUrlByName('login'); ?>">
+              <a class="gray-600 mr10 ml10" href="<?= getUrlByName('login'); ?>">
                 <?= Translate::get('sign.in'); ?>
               </a>
             <?php } else { ?>
               <?php if (UserData::checkAdmin()) { ?>
-                <div class="relative mr30 gray-400">
+                <div class="relative mr30 gray-600">
                   <div class="trigger">
                     <?= Translate::get('menu'); ?>
                   </div>
@@ -46,7 +46,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?01');
                   </ul>
                 </div>
               <?php } ?>
-              <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>sky-500 <?php } ?>mr30 green" href="<?= getUrlByName('web.bookmarks'); ?>">
+              <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>sky <?php } ?>mr30 green" href="<?= getUrlByName('web.bookmarks'); ?>">
                 <?= Translate::get('favorites'); ?>
               </a>
               <div class="mr15 m relative">

@@ -33,7 +33,7 @@
             <a class="flex black" href="<?= getUrlByName('profile', ['login' => $login]); ?>">
               <div class="ml5">
                 <?= $login; ?>
-                <div class="gray-400 lowercase text-sm">
+                <div class="gray-600 lowercase text-sm">
                   <?= lang_date($val['message_add_time']); ?>
                 </div>
               </div>
@@ -43,7 +43,7 @@
             <?= $val['message_content']; ?>
           </div>
           <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $user['id']) { ?>
-            <div class="right gray-400 lowercase text-sm hidden mb5 pb5">
+            <div class="right gray-600 lowercase text-sm hidden mb5 pb5">
               <?= Translate::get('it was read'); ?> (<?= lang_date($val['message_receipt']); ?>)
             </div>
           <?php } ?>

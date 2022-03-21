@@ -32,14 +32,6 @@ class HomeController extends MainController
         $pagesCount     = HomeModel::feedCount($topics_user, $this->user, $sheet);
         $posts          = HomeModel::feed($page, $this->limit, $topics_user, $this->user, $sheet);
 
-        $result_post = [];
-        foreach ($posts as $ind => $row) {
-            $text = fragment($row['post_content']);
-            $row['post_content_preview']    = Content::text($text, 'line');
-            $row['post_date']               = lang_date($row['post_date']);
-            $result_post[$ind]              = $row;
-        }
-
         $topics = [];
         if (count($topics_user) == 0) {
             $topics = \App\Models\FacetModel::advice($this->user['id']);
@@ -66,7 +58,7 @@ class HomeController extends MainController
                     'type'              => $type,
                     'latest_answers'    => $latest_answers,
                     'topics_user'       => $topics_user,
-                    'posts'             => $result_post,
+                    'posts'             => $posts,
                     'topics'            => $topics,
                 ],
             ],

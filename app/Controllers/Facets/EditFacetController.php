@@ -125,9 +125,9 @@ class EditFacetController extends MainController
         $fields     = Request::getPost() ?? [];
 
         // Связанные посты
-        $json_post  = $fields['post_select'] ?? [];
+        $arr_post  = $fields['post_select'] ?? [];
         if (!empty($arr_post)) {
-            $arr_post   = json_decode($json_post, true);
+            $arr_post   = json_decode($arr_post, true);
             foreach ($arr_post as $value) {
                 $id[]   = $value['id'];
             }

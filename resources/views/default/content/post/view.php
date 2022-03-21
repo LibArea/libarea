@@ -31,7 +31,7 @@
         </div>
 
         <h1><?= $post['post_title']; ?></h1>
-        <div class="text-sm lowercase flex gray-400">
+        <div class="text-sm lowercase flex gray-600">
           <?= $post['post_date_lang']; ?>
           <?php if ($post['modified']) { ?>
             (<?= Translate::get('ed'); ?>)
@@ -39,7 +39,7 @@
 
           <?php if ($user['id']) { ?>
             <?php if ($user['login'] == $post['login']  || UserData::checkAdmin()) { ?>
-              <a class="gray-400 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
+              <a class="gray-600 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
                 <?= Translate::get('edit'); ?>
               </a>
             <?php } ?>
@@ -55,16 +55,16 @@
               <?php } ?>
             <?php } ?>
             <?php if (UserData::checkAdmin()) { ?>
-              <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-400 mr10 ml10">
+              <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-600 mr10 ml10">
                 <?php if ($post['post_is_deleted'] == 1) { ?>
                   <i class="bi-trash red"></i>
                 <?php } else { ?>
                   <i class="bi-trash"></i>
                 <?php } ?>
               </a>
-              <a data-id="<?= $post['post_id']; ?>" class="post-recommend gray-400 mr10 ml10">
+              <a data-id="<?= $post['post_id']; ?>" class="post-recommend gray-600 mr10 ml10">
                 <?php if ($post['post_is_recommend'] == 1) { ?>
-                  <i class="bi-lightning sky-500"></i>
+                  <i class="bi-lightning sky"></i>
                 <?php } else { ?>
                   <i class="bi-lightning"></i>
                 <?php } ?>
@@ -112,7 +112,7 @@
 
         <ul class="list-none w-100 lowercase">
           <li class="left p10">
-            <div class="text-sm gray-400 mb5">
+            <div class="text-sm gray-600 mb5">
               <?= Translate::get('created by'); ?>
             </div>
             <div class="center">
@@ -122,7 +122,7 @@
             </div>
           </li>
           <li class="left p10 mb-none">
-            <div class="text-sm gray-400 mb5">
+            <div class="text-sm gray-600 mb5">
               <?= Translate::get('last answer'); ?>
             </div>
             <div class="center">
@@ -131,11 +131,11 @@
                   <?= user_avatar_img($data['last_user']['avatar'], 'small', $data['last_user']['login'], 'ava-base'); ?>
                 </a>
               <?php } else { ?>
-                <span class="gray-400 text-sm">—</span>
+                <span class="gray-600 text-sm">—</span>
               <?php } ?>
             </div>
           </li>
-          <li class="left p10 mb-none gray-400 text-2xl">
+          <li class="left p10 mb-none gray-600 text-2xl">
             <div class="text-2xl center mb5">
               <?php if ($post['post_hits_count'] == 0) { ?>
                 —
@@ -147,7 +147,7 @@
               <?= num_word($post['post_hits_count'], Translate::get('num-view'), false); ?>
             </div>
           </li>
-          <li class="left p10 mb-none gray-400 text-sm">
+          <li class="left p10 mb-none gray-600 text-sm">
             <div class="text-2xl center mb5">
               <?php if ($post['amount_content'] == 0) { ?>
                 —
@@ -229,7 +229,7 @@
         <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'img-base'); ?>
 
         <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
-          <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky-500 center mt5 mr5">
+          <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky center mt5 mr5">
               <i class="bi-plus"></i> <?= Translate::get('read'); ?>
           </div>
         <?php } ?>
@@ -238,7 +238,7 @@
             <?= $topic['facet_title']; ?>
         </a>
 
-        <div class="text-sm mt5 pr15 mb-pr0 gray-400">
+        <div class="text-sm mt5 pr15 mb-pr0 gray-600">
           <?= $topic['facet_short_description']; ?>
         </div>
       <?php } ?>
@@ -269,7 +269,7 @@
               <?php } ?>
             </a>
           <?php } else { ?>
-            <i class="bi-intersect gray-400 middle mr15 text-2xl"></i>
+            <i class="bi-intersect gray-600 middle mr15 text-2xl"></i>
           <?php } ?>
           <a class="black" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>

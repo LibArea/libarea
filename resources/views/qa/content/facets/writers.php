@@ -18,7 +18,7 @@
               <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-base'); ?>
               <div class="ml5">
                 <div class="gray-600"><?= $row['login']; ?></div>
-                <?php if ($row['about']) { ?><div class="gray-400 mb-none text-sm"><?= cutWords($row['about'], 5); ?></div><?php } ?>
+                <?php if ($row['about']) { ?><div class="mb-none text-sm"><?= cutWords($row['about'], 5); ?></div><?php } ?>
               </div>
             </a>
           </div>
@@ -28,7 +28,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white gray-400">
+  <div class="box-white gray-600">
     <i class="bi-calendar-week mr5 middle"></i>
     <span class="middle"><?= $topic['facet_add_date']; ?></span>
   </div>

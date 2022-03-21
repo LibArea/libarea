@@ -30,7 +30,7 @@
           <?= website_img($data['site']['item_id'], 'favicon', $data['site']['item_url_domain'], 'favicons'); ?>
           <?= $data['site']['item_url']; ?>
         </a>
-        <span class="right gray-400"><i class="bi-journal mr5"></i> <?= $data['site']['item_count']; ?></span>
+        <span class="right gray-600"><i class="bi-journal mr5"></i> <?= $data['site']['item_count']; ?></span>
       </div>
     <?php } else { ?>
       <h1><?= Translate::get('domain') . ': ' . $data['domain']; ?></h1>

@@ -46,7 +46,7 @@
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
           <div id="start">
             <input id="file-upload" type="file" name="images" accept="image/*" />
-            <div class="text-sm gray mt5">
+            <div class="text-sm gray-600 mt5">
               <?= Translate::get('format-cover-post'); ?>.
             </div>
             <i class="fa fa-download" aria-hidden="true"></i>

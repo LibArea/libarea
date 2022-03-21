@@ -34,7 +34,7 @@
       <div class="box-white">
         <h3>
           <?php if ($content['action_type'] == 'post') {  ?>
-            <div class="pr15 text-sm flex gray-400">
+            <div class="pr15 text-sm flex gray-600">
               <?= user_avatar_img($content['post']['avatar'], 'small', $content['post']['login'], 'ava-sm'); ?>
               <?= $content['post']['login']; ?>
               <span class="ml10">
@@ -63,7 +63,7 @@
             </a>
            </div> 
           <?php } else { ?>
-            <div class="pr15 text-sm flex gray-400">
+            <div class="pr15 text-sm flex gray-600">
               <?= user_avatar_img($content['post']['avatar'], 'small', $content['post']['login'], 'ava-sm'); ?>
               <?= $content['post']['login']; ?>
               <span class="ml10">
@@ -84,7 +84,7 @@
       </div>
     <?php } ?>
   <?php } else { ?>
-    <div class="mt10 mb10 pt10 pr15 pb10 center pl15 gray-400">
+    <div class="m10 p15 center gray-600">
       <i class="bi-bookmark block text-8xl"></i>
       <?= Translate::get('no.favorites'); ?>
     </div>

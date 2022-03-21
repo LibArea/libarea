@@ -32,15 +32,14 @@ html {
   --red-200: #fecaca;
   --br-box-gray: #ededed;
   --gray-100: #f3f4f6;
-  --gray-400: #9ca3af;
-  --gray-600: #4b5563;
+  --gray-600: #9ca3af;
+  --gray: #4b5563;
   --blue: #3b82f6;
   --blue-100: #dbeafe;
   --slate-100: #f1f5f9;
   --slate-300: #cbd5e1;
   --pink-800: #9d174d;
-  --sky-50: #f0f9ff;
-  --sky-500: #0ea5e9;
+  --sky: #0ea5e9;
   --violet-50: #f3f1ed;
 }
 
@@ -164,25 +163,26 @@ img {
  */
 .black { color: var(--black); }
 .white { color: var(--white); }
-.gray { color: var(--gray-700); }
 .yellow { color: var(--yellow); }
 .green { color: var(--green); }
+
+.gray { color: var(--gray); }
+.gray-600 { color: var(--gray-600); }
+
+.sky { color: var(--sky); }
 .red { color: var(--red); }
 .red-200 { color: var(--red-200); }
-.gray-400 { color: var(--gray-400); }
-.gray-600 { color: var(--gray-600); }
-.sky-500 { color: var(--sky-500); }
 
 .bg-black { background-color: var(--black); }
 .bg-white { background-color: var(--white); }
 .bg-green { background-color: var(--green); }
 .bg-pink { background-color: var(--pink); }
 .bg-purple { background-color: var(--purple); }
+.bg-lightyellow { background-color: lightyellow; }
 .bg-gray-100 { background-color: var(--gray-100); }
 .bg-violet-50 { background-color: var(--violet-50); } 
 .bg-blue { background-color: var(--blue); }
 .bg-blue-100 { background-color: var(--blue-100); }
-.bg-sky-50 { background-color: var(--sky-50); }
 .bg-red-200 { background-color: var(--red-200); }
 
 /*

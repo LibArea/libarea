@@ -11,7 +11,7 @@
     <div><?= $gist['content']; ?>...</div>
     <div class="text-sm mt5">
       <?php if ($type == 'post') { ?>
-        <a class="gray-400" href="<?= getUrlByName('profile', ['login' => $gist['login']]); ?>">
+        <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $gist['login']]); ?>">
           <?= user_avatar_img($gist['avatar'], 'max', $gist['login'], 'ava-sm'); ?>
           <?= $gist['login']; ?>
         </a>
@@ -20,11 +20,11 @@
           <?= website_img($gist['item_url_domain'], 'favicon', $gist['item_url_domain'], 'favicons mr5'); ?>
           <?= $gist['item_url_domain']; ?>
         </a>
-        <a class="gray-400 lowercase ml15" href="<?= getUrlByName('web.website', ['slug' => $gist['item_url_domain']]); ?>">
+        <a class="gray-600 lowercase ml15" href="<?= getUrlByName('web.website', ['slug' => $gist['item_url_domain']]); ?>">
           <?= Translate::get('more.detailed'); ?>
         </a>
       <?php } ?>
-      <div class="right gray-400">
+      <div class="right gray-600">
         <i class="bi-heart mr5"></i> <?= $gist['votes']; ?>
         <i class="bi-eye mr5 ml15"></i> <?= $gist['count']; ?>
       </div>

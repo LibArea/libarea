@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?01');
+Request::getHead()->addStyles('/assets/css/style.css?02');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -12,11 +12,11 @@ $facet  = $data['facet'] ?? false; ?>
       <div class="d-header_contents">
 
         <div id="togglemenu" class="mb-none mr10">
-            <i class="bi-list gray-400 text-xl"></i>
+            <i class="bi-list gray-600 text-xl"></i>
         </div>
         
         <div class="menu__button none mb-block mr10">
-          <i class="bi-list gray-400 text-xl"></i>
+          <i class="bi-list gray-600 text-xl"></i>
         </div>
 
         <a title="<?= Translate::get('home'); ?>" class="logo" href="/">
@@ -34,7 +34,7 @@ $facet  = $data['facet'] ?? false; ?>
         <?php if (!UserData::checkActiveUser()) { ?>
           <div class="flex right items-center">
             <div id="toggledark" class="header-menu-item mb-none ml45">
-              <i class="bi-brightness-high gray-400 text-xl"></i>
+              <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
             <?php if (Config::get('general.invite') == false) { ?>
               <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 block" href="<?= getUrlByName('register'); ?>">
@@ -52,10 +52,10 @@ $facet  = $data['facet'] ?? false; ?>
             <?= add_post($facet, $user['id']); ?>
 
             <div id="toggledark" class="only-icon ml45 mb-ml20">
-              <i class="bi-brightness-high gray-400"></i>
+              <i class="bi-brightness-high gray-600"></i>
             </div>
 
-            <a class="gray-400 ml45 mb-ml20" href="<?= getUrlByName('notifications'); ?>">
+            <a class="gray-600 ml45 mb-ml20" href="<?= getUrlByName('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['action_type'] == 1) { ?>

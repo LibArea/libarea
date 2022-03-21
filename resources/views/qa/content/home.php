@@ -80,7 +80,7 @@
             <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($user['id'] == $topic['facet_user_id']) { ?>
-            <a class="right gray-400 mt5" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+            <a class="right gray-600 mt5" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
               <i class="bi-plus-lg text-sm"></i>
             </a>
           <?php } ?>
@@ -115,7 +115,7 @@
               <a title="<?= $answer['login']; ?>" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
               </a>
-              <span class="middle lowercase gray-400"><?= lang_date($answer['answer_date']); ?></span>
+              <span class="middle lowercase gray-600"><?= lang_date($answer['answer_date']); ?></span>
               <a class="last-content_telo" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
                 <?= cutWords($answer['answer_content'], 8); ?>...
               </a>

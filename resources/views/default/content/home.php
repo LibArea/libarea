@@ -36,7 +36,7 @@
     </ul>
 
     <div class="trigger">
-      <i class="bi-info-square gray-400"></i>
+      <i class="bi-info-square gray-600"></i>
     </div>
     <div class="dropdown tooltip"><?= Translate::get($data['sheet'] . '.info'); ?></div>
 
@@ -86,7 +86,7 @@
               <span class="middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
             </a>
             <?php if ($user['id'] == $topic['facet_user_id']) { ?>
-              <a class="right gray-400 mt5" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+              <a class="right gray-600 mt5" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
                 <i class="bi-plus-lg text-sm"></i>
               </a>
             <?php } ?>
@@ -94,7 +94,7 @@
         <?php } ?>
       </ul>
       <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) { ?>
-        <a class="gray-400 block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
+        <a class="gray-600 block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
           <?= Translate::get('see more'); ?> <i class="bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
@@ -120,7 +120,7 @@
               <a title="<?= $answer['login']; ?>" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
               </a>
-              <span class="middle lowercase gray-400"><?= lang_date($answer['answer_date']); ?></span>
+              <span class="middle lowercase gray-600"><?= lang_date($answer['answer_date']); ?></span>
               <a class="last-content_telo" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
                 <?= cutWords($answer['answer_content'], 8); ?>...
               </a>

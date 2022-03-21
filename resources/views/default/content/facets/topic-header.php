@@ -11,7 +11,7 @@
         </a>
       <?php } ?>
     </h1>
-    <div class="text-sm gray-400"><?= $topic['facet_short_description']; ?></div>
+    <div class="text-sm gray-600"><?= $topic['facet_short_description']; ?></div>
 
     <div class="mt15 right">
       <?= Tpl::import('/_block/facet/signed', [

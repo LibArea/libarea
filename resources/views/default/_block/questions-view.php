@@ -14,7 +14,7 @@
               <div class="answ-telo hidden">
                 <div class="br-box-gray w110 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
                   <?= user_avatar_img($answer['avatar'], 'max', $answer['login'], 'img-lg'); ?>
-                  <div class="text-sm gray-600">
+                  <div class="text-sm gray">
                     <?= lang_date($answer['date']); ?>
                     <?php if (empty($answer['edit'])) { ?>
                       (<?= Translate::get('ed'); ?>.)
@@ -55,7 +55,7 @@
                 <?= favorite($user['id'], $answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml5'); ?>
 
                 <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-400 ml15">
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
                     <i title="<?= Translate::get('report'); ?>" class="bi-flag"></i>
                   </a>
                 <?php } ?>

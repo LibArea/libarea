@@ -57,7 +57,7 @@ $data = [
     'user.sites.info'       => 'Список сайтов добавленных мной',
     'moderation'            => 'Модерация',
     
-    'add.site.help'         => '<i class="gray-400">Формат заголовка:</i><br> «Agouti» — сообщество<br><br><i class="gray-400">Описание (без рекламы):</i><br> ...что есть на сайте?<i>',
+    'add.site.help'         => '<i class="gray-600">Формат заголовка:</i><br> «Agouti» — сообщество<br><br><i class="gray-600">Описание (без рекламы):</i><br> ...что есть на сайте?<i>',
 ];
 
 return $data;

@@ -252,7 +252,7 @@ function fetch_search() {
         var html = '<div class="flex">';
         for (var key in obj) {
           if (obj[key].facet_slug) {
-            html += '<a class="sky-500 block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
+            html += '<a class="sky block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
             html += obj[key].facet_title + '</a>';
           }
           if (obj[key].post_id) {

@@ -81,7 +81,7 @@ class PostController extends MainController
         $answers = [];
         foreach ($post_answers as $ind => $row) {
 
-            if (strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
+            if (strtotime($row['answer_modified']) < strtotime($row['date'])) {
                 $row['edit'] = 1;
             }
             // TODO: N+1 см. AnswerModel()

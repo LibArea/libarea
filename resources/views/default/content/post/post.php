@@ -20,8 +20,8 @@
         <a class="flex black" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
           <div class="ml5">
             <?= $post['login']; ?>
-            <div class="gray-400 lowercase text-sm">
-              <?= $post['post_date'] ?>
+            <div class="gray-600 lowercase text-sm">
+              <?= lang_date($post['post_date']); ?>
             </div>
           </div>
         </a>
@@ -34,15 +34,15 @@
           </a>
           <div class="lowercase">
             <?= facets($post['facet_list'], 'blog', 'blog', 'text-sm mr15'); ?>
-            <?= facets($post['facet_list'], 'topic', 'topic', 'gray-400 text-sm mr15'); ?>
+            <?= facets($post['facet_list'], 'topic', 'topic', 'gray-600 text-sm mr15'); ?>
             <?php if ($post['post_url_domain']) { ?>
-              <a class="gray-400 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
+              <a class="gray-600 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
               </a>
             <?php } ?>
           </div>
-          <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-600">
-            <?= $post['post_content_preview']; ?>
+          <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray">
+            <?= Content::text(fragment($post['post_content']), 'line'); ?>
             <span class="s_<?= $post['post_id']; ?> show_detail"></span>
           </div>
         </div>
@@ -66,7 +66,7 @@
         <div class="flex flex-row">
           <?= votes($user['id'], $post, 'post', 'ps', 'mr5'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
-            <a class="flex gray-400 ml15" href="<?= $post_url; ?>#comment">
+            <a class="flex gray-600 ml15" href="<?= $post_url; ?>#comment">
               <i class="bi-chat-text mr5"></i>
               <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
             </a>
@@ -80,7 +80,7 @@
   <?php } ?>
 <?php } else { ?>
   <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>
-  <div class="p20 center gray-400">
+  <div class="p20 center gray-600">
     <i class="bi-journal-richtext block text-8xl"></i>
     <?= Translate::get('no.posts'); ?>
   </div>

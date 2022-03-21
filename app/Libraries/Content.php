@@ -49,9 +49,9 @@ class Content
         $regexpAu = '/\{auth(?!.*\{auth)(\s?)(?(1)(.*?))\}(.*?)\{\/auth\}/is';
         while (preg_match($regexpAu, $content)) {
             if (UserData::checkActiveUser()) {
-                $content = preg_replace($regexpAu, "<dev class=\"txt-closed\"><i class=\"bi bi-unlock gray-400 mr5\"></i> $2$3</dev>", $content);
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed\"><i class=\"bi bi-unlock gray-600 mr5\"></i> $2$3</dev>", $content);
             } else {
-                $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-400\"><i class=\"bi bi-lock mr5 red-200\"></i>" . Translate::get('text.closed') . "...</dev>", $content);
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-600\"><i class=\"bi bi-lock mr5 red-200\"></i>" . Translate::get('text.closed') . "...</dev>", $content);
             }   
         }
 

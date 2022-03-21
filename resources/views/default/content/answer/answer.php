@@ -17,17 +17,17 @@ foreach ($data['answers'] as $answer) {
               </span>
             </a>
             <?php if ($answer['post_user_id'] == $answer['answer_user_id']) { ?>
-              <span class="sky-500 mr5 ml0"><i class="bi-mic text-sm"></i></span>
+              <span class="sky mr5 ml0"><i class="bi-mic text-sm"></i></span>
             <?php } ?>
-            <span class="mr5 ml5 gray-400 lowercase">
+            <span class="mr5 ml5 gray-600 lowercase">
               <?= lang_date($answer['answer_date']); ?>
             </span>
             <?php if (empty($answer['edit'])) { ?>
-              <span class="mr5 ml10 gray-400">
+              <span class="mr5 ml10 gray-600">
                 (<?= Translate::get('ed'); ?>.)
               </span>
             <?php } ?>
-            <a rel="nofollow" class="gray-400 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
+            <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
             <?= Tpl::import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
           </div>
           <div class="m0 max-w780">
@@ -82,7 +82,7 @@ foreach ($data['answers'] as $answer) {
         </li>
       </ol>
     <?php } else { ?>
-      <div class="gray-400 p10 text-sm">
+      <div class="gray-600 p10 text-sm">
         ~ <?= sprintf(Translate::get('content.deleted'), Translate::get('comment')); ?>
       </div>
     <?php } ?>

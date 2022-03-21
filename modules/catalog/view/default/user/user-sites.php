@@ -3,7 +3,7 @@
   <main>
     <h2 class="mb20">
       <?= Translate::get($data['sheet'] . '.view'); ?>
-      <?php if ($data['count'] != 0) { ?><sup class="gray-400 text-sm"><?= $data['count']; ?></sup><?php } ?>
+      <?php if ($data['count'] != 0) { ?><sup class="gray-600 text-sm"><?= $data['count']; ?></sup><?php } ?>
     </h2>
 
     <?php if (!empty($data['items'])) { ?>
