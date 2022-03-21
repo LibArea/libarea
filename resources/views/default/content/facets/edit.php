@@ -20,7 +20,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
             'icon'      => 'bi bi-gear'
           ], [
             'id'        => 'pages',
-            'url'       => getUrlByName('pages.edit', ['id' => $fs['facet_id']]),
+            'url'       => getUrlByName('content.edit.page', ['type' => 'page', 'id' => $fs['facet_id']]),
             'title'     => Translate::get('pages'),
             'icon'      => 'bi bi-app'
           ], [

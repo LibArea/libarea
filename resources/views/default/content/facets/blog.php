@@ -64,7 +64,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
                 <h3 class="uppercase-box"><?= Translate::get('pages'); ?></h3>
                 <?php foreach ($data['pages'] as $ind => $row) { ?>
                   <div class="mb5">
-                    <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('blog.article', ['slug' => $blog['facet_slug'], 'post_slug' => $row['post_slug']]); ?>">
+                    <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('blog.article', ['facet_slug' => $blog['facet_slug'], 'slug' => $row['post_slug']]); ?>">
                       <?= $row['post_title']; ?>
                     </a>
                     <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>

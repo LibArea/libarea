@@ -35,7 +35,7 @@
   <div class="box-white">
     <div class="uppercase gray mt5 mb5">
       <?= Translate::get('pages'); ?>
-      <a class="mr15 right" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('page.add'); ?>">
+      <a class="mr15 right" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('content.add', ['type' => 'page']); ?>">
         <i class="bi-plus-lg text-xl"></i>
       </a>
     </div>
@@ -43,7 +43,7 @@
 
       <?php foreach ($data['pages'] as $ind => $row) { ?>
         <div class="mb5">
-          <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('blog.article', ['slug' => $fs['facet_slug'], 'post_slug' => $row['post_slug']]); ?>">
+          <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('blog.article', ['facet_slug' => $fs['facet_slug'], 'slug' => $row['post_slug']]); ?>">
             <?= $row['post_title']; ?>
           </a>
           <?php if (UserData::checkAdmin() || $fs['facet_user_id'] == $user['id']) { ?>

@@ -4,7 +4,7 @@ namespace App\Controllers\Post;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel};
+use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
 use Content, Config, Tpl, Translate, UserData;
 
 class PostController extends MainController
@@ -19,64 +19,53 @@ class PostController extends MainController
     }
 
     // Полный пост
-    public function index()
+    public function index($type)
     {
-        $slug       = Request::get('slug');
-        $post_id    = Request::getInt('id');
+        $slug  = Request::get('slug');
+        $id    = Request::getInt('id');
 
-        // Проверим (id, slug поста)
-        $post = PostModel::getPost($post_id, 'id', $this->user);
-        pageError404($post);
-
-        if ($slug != $post['post_slug']) {
-            redirect(getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
-        }
-
-        // Редирект для слияния
-        if ($post['post_merged_id'] > 0 && !UserData::checkAdmin()) {
-            redirect('/post/' . $post['post_merged_id']);
-        }
-
+        $content = self::presence($type, $id, $slug, $this->user);
+ 
         // Просмотры поста
         if (!isset($_SESSION['pagenumbers'])) {
             $_SESSION['pagenumbers'] = [];
         }
 
-        if (!isset($_SESSION['pagenumbers'][$post['post_id']])) {
-            PostModel::updateCount($post['post_id'], 'hits');
-            $_SESSION['pagenumbers'][$post['post_id']] = $post['post_id'];
+        if (!isset($_SESSION['pagenumbers'][$content['post_id']])) {
+            PostModel::updateCount($content['post_id'], 'hits');
+            $_SESSION['pagenumbers'][$content['post_id']] = $content['post_id'];
         }
 
-        $post['modified'] = $post['post_date'] != $post['post_modified'] ? true : false;
+        $content['modified'] = $content['post_date'] != $content['post_modified'] ? true : false;
 
-        $facets = PostModel::getPostTopic($post['post_id'], $this->user['id'], 'topic');
-        $blog   = PostModel::getPostTopic($post['post_id'], $this->user['id'], 'blog');
-
+        $facets = PostModel::getPostTopic($content['post_id'], $this->user['id'], 'topic');
+        $blog   = PostModel::getPostTopic($content['post_id'], $this->user['id'], 'blog');
+ 
         // Покажем черновик только автору
-        if ($post['post_draft'] == 1 && $post['post_user_id'] != $this->user['id']) {
+        if ($content['post_draft'] == 1 && $content['post_user_id'] != $this->user['id']) {
             redirect('/');
         }
 
         // If the post type is a page, then depending on the conditions we make a redirect
         // Если тип поста страница, то в зависимости от условий делаем редирект
-        if ($post['post_type'] == 'page') {
+        if ($content['post_type'] == 'page' && $id > 0) {
             if ($blog) {
-                redirect(getUrlByName('page', ['facet' => $blog[0]['facet_slug'], 'slug' => $post['post_slug']]));
+                redirect(getUrlByName('blog.article', ['facet_slug' => $blog[0]['facet_slug'], 'slug' => $content['post_slug']]));
             }
-            redirect(getUrlByName('page', ['facet' => 'info', 'slug' => $post['post_slug']]));
+            redirect(getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => $content['post_slug']]));
         }
 
-        $post['post_content']   = Content::text($post['post_content'], 'text');
-        $post['post_date_lang'] = lang_date($post['post_date']);
+        $content['post_content']   = Content::text($content['post_content'], 'text');
+        $content['post_date_lang'] = lang_date($content['post_date']);
 
         // Q&A (post_feature == 1) или Дискуссия
-        $post['amount_content'] = $post['post_answers_count'];
-        if ($post['post_feature'] == 0) {
-            $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
-            $post['amount_content'] = $comment_n;
+        $content['amount_content'] = $content['post_answers_count'];
+        if ($content['post_feature'] == 0) {
+            $comment_n = $content['post_comments_count'] + $content['post_answers_count'];
+            $content['amount_content'] = $comment_n;
         }
 
-        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $this->user['id'], $post['post_feature']);
+        $post_answers = AnswerModel::getAnswersPost($content['post_id'], $this->user['id'], $content['post_feature']);
 
         $answers = [];
         foreach ($post_answers as $ind => $row) {
@@ -90,19 +79,19 @@ class PostController extends MainController
         }
 
         $content_img  = Config::get('meta.img_path');
-        if ($post['post_content_img']) {
-            $content_img  = AG_PATH_POSTS_COVER . $post['post_content_img'];
-        } elseif ($post['post_thumb_img']) {
-            $content_img  = AG_PATH_POSTS_THUMB . $post['post_thumb_img'];
+        if ($content['post_content_img']) {
+            $content_img  = AG_PATH_POSTS_COVER . $content['post_content_img'];
+        } elseif ($content['post_thumb_img']) {
+            $content_img  = AG_PATH_POSTS_THUMB . $content['post_thumb_img'];
         }
 
-        $desc  = explode("\n", $post['post_content']);
+        $desc  = explode("\n", $content['post_content']);
         $desc  = strip_tags($desc[0]);
         if ($desc == '') {
-            $desc = strip_tags($post['post_title']);
+            $desc = strip_tags($content['post_title']);
         }
 
-        if ($post['post_is_deleted'] == 1) {
+        if ($content['post_is_deleted'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
@@ -110,20 +99,20 @@ class PostController extends MainController
         Request::getResources()->addBottomScript('/assets/js/prism/prism.js');
         Request::getResources()->addBottomScript('/assets/js/zoom/medium-zoom.min.js');
 
-        if ($this->user['id'] > 0 && $post['post_closed'] == 0) {
+        if ($this->user['id'] > 0 && $content['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
             Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
         }
 
-        if ($post['post_related']) {
-            $related_posts = PostModel::postRelated($post['post_related']);
+        if ($content['post_related']) {
+            $related_posts = PostModel::postRelated($content['post_related']);
         }
 
         $m = [
             'og'         => true,
             'twitter'    => true,
             'imgurl'     => $content_img,
-            'url'        => getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]),
+            'url'        => getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
         ];
 
         $topic = $facets[0]['facet_title'] ?? 'agouti';
@@ -131,26 +120,84 @@ class PostController extends MainController
             $topic = $blog[0]['facet_title'];
         }
 
-        $meta = meta($m, strip_tags($post['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $post['post_date']);
+        $meta = meta($m, strip_tags($content['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $content['post_date']);
 
+        $view = $type == 'post' ? '/post/view' : '/page/view';
+         
+        if ($type == 'post') {    
+            return Tpl::agRender(
+                '/post/view',
+                [
+                    'meta'  => $meta,
+                    'data'  => [
+                        'post'          => $content,
+                        'answers'       => $answers,
+                        'recommend'     => PostModel::postsSimilar($content['post_id'], $this->user, 5),
+                        'related_posts' => $related_posts ?? '',
+                        'post_signed'   => SubscriptionModel::getFocus($content['post_id'], $this->user['id'], 'post'),
+                        'facets'        => $facets,
+                        'blog'          => $blog ?? null,
+                        'last_user'     => PostModel::getPostLastUser($content['post_id']),
+                        'sheet'         => 'article',
+                        'type'          => 'post',
+                    ]
+                ]
+            );
+        }  
+        
+        $slug_facet = Request::get('facet_slug');
+        $type_facet = $type == 'info.page' ? 'section' : 'blog';
+
+        $facet  = FacetModel::getFacet($slug_facet, 'slug', $type_facet);
+        pageError404($facet);
+ 
+         $m = [
+            'og'        => false,
+            'twitter'   => false,
+            'imgurl'    => false,
+            'url'       => getUrlByName('page', ['facet' => $content['post_slug'], 'slug' => $facet['facet_slug']]),
+        ];
+ 
+        $title = $content['post_title'] . ' - ' . Translate::get('page');
         return Tpl::agRender(
-            '/post/view',
+            '/page/view',
             [
-                'meta'  => $meta,
+                'meta'  => meta($m, $title, $desc . ' (' . $facet['facet_title'] . ' - ' . Translate::get('page') . ')'),
                 'data'  => [
-                    'post'          => $post,
-                    'answers'       => $answers,
-                    'recommend'     => PostModel::postsSimilar($post['post_id'], $this->user, 5),
-                    'related_posts' => $related_posts ?? '',
-                    'post_signed'   => SubscriptionModel::getFocus($post['post_id'], $this->user['id'], 'post'),
-                    'facets'        => $facets,
-                    'blog'          => $blog ?? null,
-                    'last_user'     => PostModel::getPostLastUser($post_id),
-                    'sheet'         => 'article',
-                    'type'          => 'post',
+                    'sheet' => 'page',
+                    'type'  => $type,
+                    'page'  => $content,
+                    'facet' => $facet,
+                    'pages' => PostModel::recent($facet['facet_id'], $content['post_id'])
                 ]
             ]
         );
+    }
+
+    public static function presence($type, $id, $slug, $user)
+    {
+        // Проверим id и получим данные контента
+        if ($type == 'post') {
+            $content = PostModel::getPost($id, 'id', $user);
+            
+            // Если slug поста отличается от данных в базе
+            if ($slug != $content['post_slug']) {
+                redirect(getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]));
+            }
+            
+            // Редирект для слияния поста
+            if ($content['post_merged_id'] > 0 && !UserData::checkAdmin()) {
+                redirect('/post/' . $content['post_merged_id']);
+            }
+            
+        } else {
+            $content  = PostModel::getPost($slug, 'slug', $user);
+        }
+        
+        // Если контента нет
+        pageError404($content);
+        
+        return $content;
     }
 
     // Размещение своего поста у себя в профиле
@@ -228,5 +275,11 @@ class PostController extends MainController
                 ]
             ]
         );
+    }
+    
+    // Последние 5 страниц по id контенту
+    public function last($content_id)
+    {
+        return PostModel::recent($content_id, null);
     }
 }

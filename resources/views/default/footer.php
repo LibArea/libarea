@@ -23,8 +23,8 @@
         <li><a href="<?= getUrlByName('comments'); ?>"><?= Translate::get('comments'); ?></a></li>
       </ul>
       <ul class="mb-pl0">
-        <li><a href="<?= getUrlByName('facet.article', ['slug' => 'info', 'post_slug' => Config::get('facets.page-one')]); ?>"><?= Translate::get('info'); ?></a></li>
-        <li><a href="<?= getUrlByName('facet.article', ['slug' => 'info', 'post_slug' => Config::get('facets.page-two')]); ?>"><?= Translate::get('privacy'); ?></a></li>
+        <li><a href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => Config::get('facets.page-one')]); ?>"><?= Translate::get('info'); ?></a></li>
+        <li><a href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => Config::get('facets.page-two')]); ?>"><?= Translate::get('privacy'); ?></a></li>
       </ul>
     </div>
   </div>

@@ -75,12 +75,12 @@ class EditFacetController extends MainController
         }
 
         // Изменять тип темы может только персонал
-        $facet_new_type = $facet['facet_type'];
+        $new_type = $facet['facet_type'];
         if ($facet_type != $facet['facet_type']) {
-            if (UserData::checkAdmin()) $facet_new_type = $facet_type;
+            if (UserData::checkAdmin()) $new_type = $facet_type;
         }
 
-        $redirect   = getUrlByName($facet_new_type . '.edit', ['id' => $facet['facet_id']]);
+        $redirect = getUrlByName('content.edit', ['type' => $new_type, 'id' => $facet['facet_id']]);
 
         Validation::Slug($facet_slug, 'Slug (url)', $redirect);
         Validation::Length($facet_title, Translate::get('title'), '3', '64', $redirect);
@@ -116,13 +116,13 @@ class EditFacetController extends MainController
 
         // Проверим повтор URL                       
         if ($facet_slug != $facet['facet_slug']) {
-            if (FacetModel::uniqueSlug($facet_slug, $facet_new_type)) {
+            if (FacetModel::uniqueSlug($facet_slug, $new_type)) {
                 addMsg('repeat.url', 'error');
-                redirect(getUrlByName($facet_new_type  . '.edit', ['id' => $facet['facet_id']]));
+                redirect(getUrlByName($new_type  . '.edit', ['id' => $facet['facet_id']]));
             }
         }
 
-        $fields     = Request::getPost() ?? [];
+        $fields = Request::getPost() ?? [];
 
         // Связанные посты
         $arr_post  = $fields['post_select'] ?? [];
@@ -133,6 +133,7 @@ class EditFacetController extends MainController
             }
         }
         $post_related = implode(',', $id ?? []);
+        $facet_slug = strtolower($facet_slug);
 
         FacetModel::edit(
             [
@@ -141,13 +142,13 @@ class EditFacetController extends MainController
                 'facet_description'         => $facet_description,
                 'facet_short_description'   => $facet_short_description,
                 'facet_info'                => $facet_info,
-                'facet_slug'                => strtolower($facet_slug),
+                'facet_slug'                => $facet_slug,
                 'facet_seo_title'           => $facet_seo_title,
                 'facet_user_id'             => $facet_user_id ?? 1,
                 'facet_tl'                  => $facet_tl,
                 'facet_top_level'           => $facet_top_level,
                 'facet_post_related'        => $post_related,
-                'facet_type'                => $facet_new_type,
+                'facet_type'                => $new_type,
             ]
         );
 
@@ -171,7 +172,7 @@ class EditFacetController extends MainController
 
         addMsg('change.saved', 'success');
 
-        redirect($redirect);
+        redirect(getUrlByName($new_type, ['slug' => $facet_slug]));
     }
 
     public function pages()
@@ -192,7 +193,7 @@ class EditFacetController extends MainController
                 'meta'  => meta($m = [], Translate::get('edit') . ' | ' . $facet['facet_title']),
                 'data'  => [
                     'facet' => $facet,
-                    'pages' => (new \App\Controllers\PageController())->last($facet['facet_id']),
+                    'pages' => (new \App\Controllers\Post\PostController())->last($facet['facet_id']),
                     'sheet' => $facet['facet_type'] . 's',
                     'type'  => 'pages',
                 ]

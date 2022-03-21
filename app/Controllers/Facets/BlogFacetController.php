@@ -66,7 +66,7 @@ class BlogFacetController extends MainController
                     'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
                     'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'topic'),
                     'info'          => Content::text($facet['facet_info'], 'text'),
-                    'pages'         => (new \App\Controllers\PageController())->last($facet['facet_id']),
+                    'pages'         => (new \App\Controllers\Post\PostController())->last($facet['facet_id']),
 
                 ],
                 'facet'   => [

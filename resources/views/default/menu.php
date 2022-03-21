@@ -1,6 +1,6 @@
 <?php
 $css = '';
-$arr = ['register', 'login', 'recover', 'post', 'blog.page'];
+$arr = ['register', 'login', 'recover', 'post'];
 if (in_array($data['type'], $arr)) {
   $css = ' none';
 }

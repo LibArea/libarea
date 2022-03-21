@@ -488,4 +488,25 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql)->fetchAll();
     }
+    
+    // Последние 5 страниц по фасету
+    public static function recent($facet_id, $post_id)
+    {
+        $and = '';
+        if ($post_id > 0) $and = 'AND post_id != ' . $post_id;
+
+        $sql = "SELECT 
+                    post_id,
+                    post_slug,
+                    post_title
+                        FROM facets_posts_relation 
+                            LEFT JOIN posts on post_id = relation_post_id
+                                WHERE relation_facet_id = :facet_id AND post_type = 'page'
+                                    $and
+                                    ORDER BY post_id DESC LIMIT 5";
+
+        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
+    }
+    
+
 }
