@@ -18,6 +18,7 @@ class PostController extends MainController
         $this->user  = UserData::get();
     }
 
+    // Full post
     // Полный пост
     public function index($type)
     {
@@ -25,8 +26,9 @@ class PostController extends MainController
         $id    = Request::getInt('id');
 
         $content = self::presence($type, $id, $slug, $this->user);
- 
-        // Просмотры поста
+
+        // Let's record views 
+        // Запишем просмотры
         if (!isset($_SESSION['pagenumbers'])) {
             $_SESSION['pagenumbers'] = [];
         }
@@ -40,7 +42,8 @@ class PostController extends MainController
 
         $facets = PostModel::getPostTopic($content['post_id'], $this->user['id'], 'topic');
         $blog   = PostModel::getPostTopic($content['post_id'], $this->user['id'], 'blog');
- 
+
+        // Show the draft only to the author
         // Покажем черновик только автору
         if ($content['post_draft'] == 1 && $content['post_user_id'] != $this->user['id']) {
             redirect('/');
@@ -58,7 +61,7 @@ class PostController extends MainController
         $content['post_content']   = Content::text($content['post_content'], 'text');
         $content['post_date_lang'] = lang_date($content['post_date']);
 
-        // Q&A (post_feature == 1) или Дискуссия
+        // Q&A (post_feature == 1) or Discussiona
         $content['amount_content'] = $content['post_answers_count'];
         if ($content['post_feature'] == 0) {
             $comment_n = $content['post_comments_count'] + $content['post_answers_count'];
@@ -123,8 +126,8 @@ class PostController extends MainController
         $meta = meta($m, strip_tags($content['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $content['post_date']);
 
         $view = $type == 'post' ? '/post/view' : '/page/view';
-         
-        if ($type == 'post') {    
+
+        if ($type == 'post') {
             return Tpl::agRender(
                 '/post/view',
                 [
@@ -143,21 +146,21 @@ class PostController extends MainController
                     ]
                 ]
             );
-        }  
-        
+        }
+
         $slug_facet = Request::get('facet_slug');
         $type_facet = $type == 'info.page' ? 'section' : 'blog';
 
         $facet  = FacetModel::getFacet($slug_facet, 'slug', $type_facet);
         pageError404($facet);
- 
-         $m = [
+
+        $m = [
             'og'        => false,
             'twitter'   => false,
             'imgurl'    => false,
             'url'       => getUrlByName('page', ['facet' => $content['post_slug'], 'slug' => $facet['facet_slug']]),
         ];
- 
+
         $title = $content['post_title'] . ' - ' . Translate::get('page');
         return Tpl::agRender(
             '/page/view',
@@ -176,41 +179,45 @@ class PostController extends MainController
 
     public static function presence($type, $id, $slug, $user)
     {
+        // Check id and get content data
         // Проверим id и получим данные контента
         if ($type == 'post') {
             $content = PostModel::getPost($id, 'id', $user);
-            
+
+            // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
             if ($slug != $content['post_slug']) {
                 redirect(getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]));
             }
-            
-            // Редирект для слияния поста
+
+            // Redirect when merging a post
+            // Редирект при слиянии поста
             if ($content['post_merged_id'] > 0 && !UserData::checkAdmin()) {
                 redirect('/post/' . $content['post_merged_id']);
             }
-            
         } else {
             $content  = PostModel::getPost($slug, 'slug', $user);
         }
-        
-        // Если контента нет
+
         pageError404($content);
-        
+
         return $content;
     }
 
+    // Posting your post on your profile
     // Размещение своего поста у себя в профиле
     public function postProfile()
     {
         $post_id    = Request::getPostInt('post_id');
         $post       = PostModel::getPost($post_id, 'id', $this->user);
 
+        // Access check
         // Проверка доступа
         if (!accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
+        // Prohibit adding a draft to the profile
         // Запретим добавлять черновик в профиль
         if ($post['post_draft'] == 1) {
             return false;
@@ -219,6 +226,7 @@ class PostController extends MainController
         return PostModel::setPostProfile($post_id, $this->user['id']);
     }
 
+    // View post from cover page
     // Просмотр поста с титульной страницы
     public function shownPost()
     {
@@ -230,6 +238,7 @@ class PostController extends MainController
         Tpl::agIncludeTemplate('/content/post/postcode', ['post' => $post, 'user'   => $this->user]);
     }
 
+    // Posts by domain
     // Посты по домену
     public function domain($sheet, $type)
     {
@@ -244,14 +253,6 @@ class PostController extends MainController
 
         $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $site['item_url_domain']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $site['item_url_domain']);
-
-        $result = [];
-        foreach ($posts as $ind => $row) {
-            $text = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['post_date']               = lang_date($row['post_date']);
-            $result[$ind]                   = $row;
-        }
 
         $m = [
             'og'         => false,
@@ -268,7 +269,7 @@ class PostController extends MainController
                     'sheet'         => 'domain',
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'posts'         => $result,
+                    'posts'         => $posts,
                     'domains'       => PostModel::getDomainTop($domain),
                     'site'          => $site,
                     'type'          => $type,
@@ -276,7 +277,8 @@ class PostController extends MainController
             ]
         );
     }
-    
+
+    // Last 5 pages by content id
     // Последние 5 страниц по id контенту
     public function last($content_id)
     {

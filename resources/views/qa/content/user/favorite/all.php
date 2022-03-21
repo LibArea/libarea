@@ -11,7 +11,7 @@
 
   <?php if (!empty($data['favorites'])) { ?>
     <?php foreach ($data['favorites'] as $fav) { ?>
-      <div class="box-white relative">
+      <div class="box-white relative hidden">
         <div class="left gray-600 mr5"> <?= Translate::get($fav['action_type']); ?>:</div>
 
         <?php if ($fav['action_type'] == 'post') { ?>
