@@ -42,3 +42,4 @@
     <?= Translate::get('comments-desc'); ?>
   </div>
 </aside>
+<?= Tpl::import('/_block/js-msg-flag', ['uid' => $user['id']]); ?>

@@ -7,7 +7,7 @@ foreach ($answer as  $comment) {
       <ol class="bg-red-200 text-sm list-none max-w780">
         <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
           <span class="comm-deletes gray">
-            <?= $comment['comment_content']; ?>
+            <?= Content::text($comment['content'], 'text'); ?>
             — <?= $comment['login']; ?>
             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action right text-sm">
               <?= Translate::get('recover'); ?>
@@ -48,10 +48,10 @@ foreach ($answer as  $comment) {
             <?= votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
 
             <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
-              <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray mr10 ml10">
+              <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 mr10 ml10">
                 <?= Translate::get('edit'); ?>
               </a>
-              <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray mr5 ml5">
+              <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600 mr5 ml5">
                 <?= Translate::get('remove'); ?>
               </a>
             <?php } ?>

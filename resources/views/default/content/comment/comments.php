@@ -32,7 +32,7 @@
   </div>
 
   <?php if (!empty($data['comments'])) { ?>
-    <div class="box-white">
+    <div class="box-white"> 
       <?= Tpl::import(
         '/content/comment/comment',
         [
@@ -42,7 +42,6 @@
       ); ?>
     </div>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/comments'); ?>
-
   <?php } else { ?>
     <?= no_content(Translate::get('no.comments'), 'bi-info-lg'); ?>
   <?php } ?>
@@ -52,3 +51,4 @@
     <?=  Translate::get('comments-desc'); ?>
   </div>
 </aside>
+<?= Tpl::import('/_block/js-msg-flag', ['uid' => $user['id']]); ?>

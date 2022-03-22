@@ -46,3 +46,4 @@
     <?=  Translate::get('answers-desc'); ?>
   </div>
 </aside>
+<?= Tpl::import('/_block/js-msg-flag', ['uid' => $user['id']]); ?>

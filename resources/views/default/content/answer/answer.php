@@ -53,11 +53,9 @@ foreach ($data['answers'] as $answer) {
 
           <?php if (UserData::checkAdmin()) { ?>
             <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600 ml10 mr10">
-              <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
+              <?= Translate::get('remove'); ?>
             </a>
           <?php } ?>
-
-          <?= favorite($user['id'], $answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml5'); ?>
 
           <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
             <a data-post_id="<?= $answer['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
@@ -72,9 +70,9 @@ foreach ($data['answers'] as $answer) {
   <?php } else { ?>
 
     <?php if (UserData::checkAdmin()) { ?>
-      <ol class="bg-red-200 text-sm hidden p15 list-none">
+      <ol class="bg-red-200 text-sm hidden p15 mb10 list-none">
         <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
-          <?= $answer['answer_content']; ?>
+          <?= Content::text($answer['content'], 'text'); ?>
           <?= Translate::get('answer'); ?> — <?= $answer['login']; ?>
           <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action right">
             <span><?= Translate::get('recover'); ?></span>

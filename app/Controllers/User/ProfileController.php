@@ -135,13 +135,6 @@ class ProfileController extends MainController
         $comments   = CommentModel::userComments($page, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = CommentModel::userCommentsCount($profile['id']);
 
-        $result = [];
-        foreach ($comments as $ind => $row) {
-            $row['comment_content'] = Content::text($row['comment_content'], 'text');
-            $row['date']            = lang_date($row['comment_date']);
-            $result[$ind]           = $row;
-        }
-
         return Tpl::agRender(
             '/user/profile/comment',
             [
@@ -151,7 +144,7 @@ class ProfileController extends MainController
                     'pNum'          => $page,
                     'sheet'         => $sheet,
                     'type'          => $type,
-                    'comments'      => $result,
+                    'comments'      => $comments,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),
                     'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
