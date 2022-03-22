@@ -18,6 +18,7 @@ class AnswerController extends MainController
         $this->user  = UserData::get();
     }
 
+    // All answers
     // Все ответы
     public function index($sheet, $type)
     {
@@ -25,14 +26,7 @@ class AnswerController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $pagesCount = AnswerModel::getAnswersCount($sheet);
-        $answ       = AnswerModel::getAnswers($page, $this->limit, $this->user, $sheet);
-
-        $result = [];
-        foreach ($answ  as $ind => $row) {
-            $row['answer_content']  = Content::text($row['answer_content'], 'text');
-            $row['date']            = lang_date($row['answer_date']);
-            $result[$ind]           = $row;
-        }
+        $answers    = AnswerModel::getAnswers($page, $this->limit, $this->user, $sheet);
 
         $m = [
             'og'         => false,
@@ -50,7 +44,7 @@ class AnswerController extends MainController
                     'pNum'          => $page,
                     'sheet'         => $sheet,
                     'type'          => $type,
-                    'answers'       => $result,
+                    'answers'       => $answers,
                 ]
             ]
         );

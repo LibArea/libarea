@@ -12,14 +12,14 @@
                 <?= $comment['login']; ?>
               </span>
             </a>
-            <span class="gray-600 lowercase"><?= $comment['date']; ?></span>
+            <span class="gray-600 lowercase"><?= lang_date($comment['date']); ?></span>
           </div>
           <a href="<?= getUrlByName('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>#comment_<?= $comment['comment_id']; ?>">
             <?= $comment['post_title']; ?>
           </a>
-          <div>
-            <?= $comment['comment_content']; ?>
-          </div>
+           <div class="content-body">
+              <?= Content::text($comment['content'], 'text'); ?>
+            </div>
           <div class="hidden gray">
             <?= votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
           </div>

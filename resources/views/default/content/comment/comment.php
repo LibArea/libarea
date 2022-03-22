@@ -33,15 +33,15 @@ foreach ($answer as  $comment) {
                 <span class="sky mr5"><i class="bi-mic text-sm"></i></span>
               <?php } ?>
               <span class="mr5 ml5 gray-600 lowercase">
-                <?= lang_date($comment['comment_date']); ?>
+                <?= lang_date($comment['date']); ?>
               </span>
               <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
             </div>
             <a href="<?= getUrlByName('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>#comment_<?= $comment['comment_id']; ?>">
               <?= $comment['post_title']; ?>
             </a>
-            <div class="mt5 mb10">
-              <?= $comment['comment_content']; ?>
+            <div class="content-body">
+              <?= Content::text($comment['content'], 'text'); ?>
             </div>
           </div>
           <div class="text-sm flex">

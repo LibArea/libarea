@@ -34,14 +34,6 @@ class ProfileController extends MainController
         $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $profile['id']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $profile['id']);
 
-        $result = [];
-        foreach ($posts as $ind => $row) {
-            $text                           = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['post_date']               = lang_date($row['post_date']);
-            $result[$ind]                   = $row;
-        }
-
         $count = UserModel::contentCount($profile['id']);
         if (($count['count_answers'] + $count['count_comments']) < 3) {
             Request::getHead()->addMeta('robots', 'noindex');
@@ -61,7 +53,7 @@ class ProfileController extends MainController
                     'badges'            => BadgeModel::getBadgeUserAll($profile['id']),
                     'profile'           => $profile,
                     'type'              => $type,
-                    'posts'             => $result,
+                    'posts'             => $posts,
                     'sheet'             => $sheet,
                     'participation'     => FacetModel::participation($profile['id']),
                     'post'              => PostModel::getPost($profile['my_post'], 'id', $this->user),
@@ -80,14 +72,6 @@ class ProfileController extends MainController
         $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $profile['id']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $profile['id']);
 
-        $result = [];
-        foreach ($posts as $ind => $row) {
-            $text                           = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['post_date']               = lang_date($row['post_date']);
-            $result[$ind]                   = $row;
-        }
-
         return Tpl::agRender(
             '/user/profile/post',
             [
@@ -97,7 +81,7 @@ class ProfileController extends MainController
                     'pNum'          => $page,
                     'sheet'         => $sheet,
                     'type'          => $type,
-                    'posts'         => $result,
+                    'posts'         => $posts,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),
                     'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
@@ -119,13 +103,6 @@ class ProfileController extends MainController
         $answers    = AnswerModel::userAnswers($page, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = AnswerModel::userAnswersCount($profile['id']);
 
-        $result = [];
-        foreach ($answers as $ind => $row) {
-            $row['content'] = Content::text($row['answer_content'], 'text');
-            $row['date']    = lang_date($row['answer_date']);
-            $result[$ind]   = $row;
-        }
-
         return Tpl::agRender(
             '/user/profile/answer',
             [
@@ -135,7 +112,7 @@ class ProfileController extends MainController
                     'pNum'          => $page,
                     'sheet'         => $sheet,
                     'type'          => $type,
-                    'answers'       => $result,
+                    'answers'       => $answers,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),
                     'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),

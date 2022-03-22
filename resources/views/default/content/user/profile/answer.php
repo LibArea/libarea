@@ -21,8 +21,8 @@
             <a class="mr5 block" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>">
               <?= $answer['post_title']; ?>
             </a>
-            <div class="answ-telo">
-              <?= $answer['content']; ?>
+            <div class="content-body">
+              <?= Content::text($answer['content'], 'text'); ?>
             </div>
             <div class="hidden gray">
               <?= votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>

@@ -15,8 +15,8 @@
           <a href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
             <?= $answer['post_title']; ?>
           </a>
-          <div class="answ-telo">
-            <?= $answer['answer_content']; ?>
+          <div class="content-body">
+            <?= Content::text($answer['content'], 'line'); ?>
           </div>
 
           <div class="hidden gray">

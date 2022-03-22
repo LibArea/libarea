@@ -8,7 +8,7 @@ foreach ($data['answers'] as $answer) {
     <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
     <ol class="list-none">
       <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
-        <div class="answ-telo">
+        <div class="content-body">
           <div class="flex text-sm">
             <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
               <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
@@ -20,7 +20,7 @@ foreach ($data['answers'] as $answer) {
               <span class="sky mr5 ml0"><i class="bi-mic text-sm"></i></span>
             <?php } ?>
             <span class="mr5 ml5 gray-600 lowercase">
-              <?= lang_date($answer['answer_date']); ?>
+              <?= lang_date($answer['date']); ?>
             </span>
             <?php if (empty($answer['edit'])) { ?>
               <span class="mr5 ml10 gray-600">
@@ -30,8 +30,8 @@ foreach ($data['answers'] as $answer) {
             <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
             <?= Tpl::import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
           </div>
-          <div class="m0 max-w780">
-            <?= $answer['answer_content'] ?>
+          <div class="content-body">
+            <?= Content::text($answer['content'], 'text'); ?>
           </div>
         </div>
         <div class="flex text-sm">

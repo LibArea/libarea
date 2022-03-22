@@ -14,7 +14,7 @@
           <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
           <ol class="list-none">
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
-              <div class="answ-telo">
+              <div class="content-body">
                 <div class="flex text-sm">
                   <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
                     <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>

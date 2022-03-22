@@ -27,13 +27,6 @@ class CommentController extends MainController
         $pagesCount = CommentModel::getCommentsAllCount($this->user, $sheet);
         $comments   = CommentModel::getCommentsAll($page, $this->limit, $this->user, $sheet);
 
-        $result = [];
-        foreach ($comments  as $ind => $row) {
-            $row['date']                = lang_date($row['comment_date']);
-            $row['comment_content']     = Content::text($row['comment_content'], 'text');
-            $result[$ind]   = $row;
-        }
-
         $m = [
             'og'         => false,
             'twitter'    => false,
@@ -50,7 +43,7 @@ class CommentController extends MainController
                     'pNum'          => $page,
                     'sheet'         => $sheet,
                     'type'          => $type,
-                    'comments'      => $result,
+                    'comments'      => $comments,
                 ]
             ]
         );

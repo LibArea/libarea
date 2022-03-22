@@ -11,7 +11,7 @@
           <div class="br-top-dotted mb20"></div>
           <ol class="list-none">
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
-              <div class="answ-telo hidden">
+              <div class="content-body hidden">
                 <div class="br-box-gray w110 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
                   <?= user_avatar_img($answer['avatar'], 'max', $answer['login'], 'img-lg'); ?>
                   <div class="text-sm gray">
