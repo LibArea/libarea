@@ -19,17 +19,15 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
       <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
 
       <?php if ($user['id']) { ?>
-        <div class="right m15">
+        <div class="right m20">
           <?php if ($profile['login'] == $user['login']) { ?>
-            <a class="btn btn-primary" href="<?= getUrlByName('setting'); ?>">
-              <i class="bi-gear mr5"></i>
-              <?= Translate::get('settings'); ?>
+            <a class="btn btn-primary" title="<?= Translate::get('settings'); ?>" href="<?= getUrlByName('setting'); ?>">
+              <i class="bi-gear"></i>
             </a>
           <?php } else { ?>
             <?php if ($data['button_pm'] === true) { ?>
-              <a class="btn btn-primary" href="<?= getUrlByName('send.messages', ['login' => $profile['login']]); ?>">
-                <i class="bi-envelope mr5"></i>
-                <?= Translate::get('write a message'); ?>
+              <a class="btn btn-primary" title="<?= Translate::get('write a message'); ?>" href="<?= getUrlByName('send.messages', ['login' => $profile['login']]); ?>">
+                <i class="bi-envelope"></i>
               </a>
             <?php } ?>
           <?php } ?>

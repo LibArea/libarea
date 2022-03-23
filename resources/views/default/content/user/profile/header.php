@@ -19,17 +19,15 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
       <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
 
       <?php if ($user['id']) { ?>
-        <div class="right m15">
+        <div class="right m20">
           <?php if ($profile['login'] == $user['login']) { ?>
-            <a class="btn btn-primary" href="<?= getUrlByName('setting'); ?>">
-              <i class="bi-gear mr5"></i>
-              <?= Translate::get('settings'); ?>
+            <a class="btn btn-primary" title="<?= Translate::get('settings'); ?>" href="<?= getUrlByName('setting'); ?>">
+              <i class="bi-gear"></i>
             </a>
           <?php } else { ?>
             <?php if ($data['button_pm'] === true) { ?>
-              <a class="btn btn-primary" href="<?= getUrlByName('send.messages', ['login' => $profile['login']]); ?>">
-                <i class="bi-envelope mr5"></i>
-                <?= Translate::get('write a message'); ?>
+              <a class="btn btn-primary" title="<?= Translate::get('write a message'); ?>" href="<?= getUrlByName('send.messages', ['login' => $profile['login']]); ?>">
+                <i class="bi-envelope"></i>
               </a>
             <?php } ?>
           <?php } ?>
@@ -37,7 +35,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
       <?php } ?>
 
       <div class="flex">
-        <h1 class="mb-block mb-text-xl m15 mb-mt5 flex">
+        <h1 class="mb-block mb-text-xl m15 mb-mt5 flex flex-auto">
           <?= $profile['login']; ?>
           <?php if ($profile['name']) { ?> / <?= $profile['name']; ?><?php } ?>
             <?php if ($profile['up_count'] > 0) { ?>
@@ -46,7 +44,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
             <?php } ?>
         </h1>
 
-        <div class="ml120 mt10 mb-none">
+        <div class="m10 mb-none right">
           <div class="flex justify-center">
             <?php if ($data['count']['count_posts'] > 0) { ?>
               <div class="ml15 mr15 center box-number">
