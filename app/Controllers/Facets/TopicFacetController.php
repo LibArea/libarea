@@ -35,8 +35,6 @@ class TopicFacetController extends MainController
             hl_preliminary_exit();
         }
 
-        $facet['facet_add_date']    = Html::langDate($facet['facet_add_date']);
-
         $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
@@ -87,10 +85,6 @@ class TopicFacetController extends MainController
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
         Html::pageError404($facet);
 
-        $facet['facet_add_date']    = Html::langDate($facet['facet_add_date']);
-
-        $facet['facet_info']   = Content::text($facet['facet_info'], 'text');
-
         $facet_related = $facet['facet_post_related'] ?? null;
 
         $m = [
@@ -125,10 +119,6 @@ class TopicFacetController extends MainController
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
         Html::pageError404($facet);
-
-        $facet['facet_add_date']    = Html::langDate($facet['facet_add_date']);
-
-        $facet['facet_info']   = Content::text($facet['facet_info'], 'text');
 
         $facet_related = $facet['facet_post_related'] ?? null;
 

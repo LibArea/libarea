@@ -46,7 +46,7 @@ class ProfileController extends MainController
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,
-                    'created_at'        => Html::langDate($profile['created_at']),
+                    'created_at'        => $profile['created_at'],
                     'count'             => $count,
                     'topics'            => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
                     'blogs'             => FacetModel::getOwnerFacet($profile['id'], 'blog'),

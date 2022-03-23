@@ -108,9 +108,6 @@ class UserController extends MainController
 
     public function foldersFavorite()
     {
-        $tag_id = Request::getInt('id');
-        $favorites = UserModel::userFavorite($this->user['id'], $tag_id);
-
         return Tpl::agRender(
             '/user/favorite/all',
             [
@@ -118,7 +115,7 @@ class UserController extends MainController
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
-                    'favorites' => $favorites
+                    'favorites' => UserModel::userFavorite($this->user['id'], Request::getInt('id'))
                 ]
             ]
         );
@@ -145,16 +142,6 @@ class UserController extends MainController
     // Страница предпочтений пользователя
     public function subscribed()
     {
-        $focus_posts = PostModel::getFocusPostsListUser($this->user['id']);
-
-        $result = [];
-        foreach ($focus_posts as $ind => $row) {
-            $text                           = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['post_date']               = Html::langDate($row['post_date']);
-            $result[$ind]                   = $row;
-        }
-
         return Tpl::agRender(
             '/user/favorite/subscribed',
             [
@@ -163,12 +150,13 @@ class UserController extends MainController
                     'h1'    => Translate::get('subscribed') . ' ' . $this->user['login'],
                     'sheet' => 'subscribed',
                     'type'  => 'favorites',
-                    'posts' => $result
+                    'posts' => PostModel::getFocusPostsListUser($this->user['id'])
                 ]
             ]
         );
     }
 
+    // User card when hovering over the avatar in the post feed
     public function card()
     {
         $user_id    = Request::getPostInt('user_id');

@@ -35,8 +35,6 @@ class BlogFacetController extends MainController
             hl_preliminary_exit();
         }
 
-        $facet['facet_add_date']    = Html::langDate($facet['facet_add_date']);
-
         $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 

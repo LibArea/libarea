@@ -30,7 +30,7 @@
 <aside>
   <div class="box-white gray-600">
     <i class="bi-calendar-week mr5 middle"></i>
-    <span class="middle"><?= $topic['facet_add_date']; ?></span>
+    <span class="middle"><?= Html::langDate($topic['facet_add_date']); ?></span>
   </div>
   <?= Tpl::import('/_block/sidebar/topic', ['data' => $data]); ?>
 </aside>

@@ -49,7 +49,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
             </a>
             <div class="gray-600 text-sm mt5">
               <i class="bi-calendar-week mr5 ml5 middle"></i>
-              <span class="middle lowercase"><?= $blog['facet_add_date']; ?></span>
+              <span class="middle lowercase"><?= Html::langDate($blog['facet_add_date']); ?></span>
             </div>
           </div>
           <?php if ($data['info']) { ?>
