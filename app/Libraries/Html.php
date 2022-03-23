@@ -356,7 +356,7 @@ class Html
             }
 
             if ($stop_time > 0) {
-                $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($content[$type . '_date']);
+                $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($content['date']);
                 $time = floor($diff / 60);
 
                 if ($time > $stop_time) {
