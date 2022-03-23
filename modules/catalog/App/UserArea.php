@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\UserAreaModel;
-use Content, Translate, UserData;
+use Content, Translate, UserData, Meta;
 
 class UserArea
 {
@@ -36,7 +36,6 @@ class UserArea
 
         $m = [
             'og'         => true,
-            'twitter'    => true,
             'imgurl'     => '/assets/images/agouti-web.png',
             'url'        => getUrlByName($sheet),
         ];
@@ -44,7 +43,7 @@ class UserArea
         return view(
             '/view/default/user/user-sites',
             [
-                'meta'  => meta($m, Translate::get('my.site'), Translate::get('my.site')),
+                'meta'  => Meta::get($m, Translate::get('my.site'), Translate::get('my.site')),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'cat',
@@ -75,7 +74,7 @@ class UserArea
         return view(
             '/view/default/user/bookmarks',
             [
-                'meta'  => meta([], Translate::get('favorites'), Translate::get('favorites')),
+                'meta'  => Meta::get([], Translate::get('favorites'), Translate::get('favorites')),
                 'user' => $this->user,
                 'data'  => [
                     'screening'         => 'cat',

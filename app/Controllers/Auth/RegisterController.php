@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\AuthModel;
-use Config, Integration, Validation, SendEmail, Translate, Tpl, UserData;
+use Config, Integration, Validation, SendEmail, Translate, Tpl, Meta, Html, UserData;
 
 class RegisterController extends MainController
 {
@@ -26,16 +26,14 @@ class RegisterController extends MainController
         }
 
         $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('register'),
+            'og'    => false,
+            'url'   => getUrlByName('register'),
         ];
 
         return Tpl::agRender(
             '/auth/register',
             [
-                'meta'  => meta($m, Translate::get('registration'), Translate::get('info-security')),
+                'meta'  => Meta::get($m, Translate::get('registration'), Translate::get('info-security')),
                 'data'  => [
                     'sheet' => 'registration',
                     'type'  => 'register'
@@ -60,7 +58,7 @@ class RegisterController extends MainController
         Validation::Email($email, $redirect);
 
         if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
-            addMsg('e-mail-replay', 'error');
+            Html::addMsg('e-mail-replay', 'error');
             redirect($redirect);
         }
 
@@ -72,7 +70,7 @@ class RegisterController extends MainController
         }
 
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
-            addMsg('multiple-accounts', 'error');
+            Html::addMsg('multiple-accounts', 'error');
             redirect($redirect);
         }
 
@@ -80,36 +78,36 @@ class RegisterController extends MainController
         Validation::Length($login, Translate::get('nickname'), '3', '10', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
-            addMsg('nickname-repeats-characters', 'error');
+            Html::addMsg('nickname-repeats-characters', 'error');
             redirect($redirect);
         }
 
         // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
         if (in_array($login, Config::get('stop-nickname'))) {
-            addMsg('nickname-replay', 'error');
+            Html::addMsg('nickname-replay', 'error');
             redirect($redirect);
         }
 
         if (is_array(AuthModel::checkRepetitions($login, 'login'))) {
-            addMsg('nickname-replay', 'error');
+            Html::addMsg('nickname-replay', 'error');
             redirect($redirect);
         }
 
         Validation::Length($password, Translate::get('password'), '8', '32', $redirect);
         if (substr_count($password, ' ') > 0) {
-            addMsg('password-spaces', 'error');
+            Html::addMsg('password-spaces', 'error');
             redirect($redirect);
         }
 
         if ($password != $password_confirm) {
-            addMsg('pass.match.err', 'error');
-            redirect($redirect);  
+            Html::addMsg('pass.match.err', 'error');
+            redirect($redirect);
         }
 
         if (!$inv_code) {
             if (Config::get('general.captcha')) {
                 if (!Integration::checkCaptchaCode()) {
-                    addMsg('code.error', 'error');
+                    Html::addMsg('code.error', 'error');
                     redirect('/register');
                 }
             }
@@ -154,13 +152,13 @@ class RegisterController extends MainController
                 ]
             );
 
-            addMsg('successfully.login', 'success');
+            Html::addMsg('successfully.login', 'success');
 
             redirect(getUrlByName('login'));
         }
 
         // Email Activation
-        $email_code = randomString('crypto', 20);
+        $email_code = Html::randomString('crypto', 20);
         UserModel::sendActivateEmail(
             [
                 'user_id'       => $active_uid,
@@ -171,7 +169,7 @@ class RegisterController extends MainController
         // Sending email
         SendEmail::mailText($active_uid, 'activate.email', ['link' => getUrlByName('activate.code', ['code' => $email_code])]);
 
-        addMsg('check.your.email', 'success');
+        Html::addMsg('check.your.email', 'success');
 
         redirect(getUrlByName('login'));
     }
@@ -183,14 +181,14 @@ class RegisterController extends MainController
         $invate = InvitationModel::available($code);
 
         if (!$invate) {
-            addMsg('the code is incorrect', 'error');
+            Html::addMsg('the code is incorrect', 'error');
             redirect('/');
         }
 
         return Tpl::agRender(
             '/auth/register-invate',
             [
-                'meta'  => meta($m = [], Translate::get('registration.invite')),
+                'meta'  => Meta::get($m = [], Translate::get('registration.invite')),
                 'data'  => [
                     'invate' => $invate,
                     'type'  => 'invite'

@@ -1,6 +1,6 @@
 <div class="box-flex-white bg-violet-50">
   <ul class="nav">
-    <?= tabs_nav(
+    <?= Html::nav(
       'nav',
       $data['sheet'],
       1,

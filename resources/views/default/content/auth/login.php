@@ -11,7 +11,7 @@ $form->html_form($user['trust_level'], Config::get('form/auth.login'));
     <?= $form->build_form(); ?>
 
     <fieldset>
-      <?= sumbit(Translate::get('sign.in')); ?>
+      <?= Html::sumbit(Translate::get('sign.in')); ?>
       <?php if (Config::get('general.invite') == false) { ?>
         <a class="ml20 text-sm" href="<?= getUrlByName('register'); ?>"><?= Translate::get('registration'); ?></a>
       <?php } ?>

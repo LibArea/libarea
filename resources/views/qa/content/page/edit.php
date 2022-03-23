@@ -60,7 +60,7 @@
           <input type="hidden" name="draft" id="draft" value="1">
         <?php } ?>
         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
-        <?= sumbit(Translate::get('edit')); ?>
+        <?= Html::sumbit(Translate::get('edit')); ?>
       </div>
     </form>
   </div>

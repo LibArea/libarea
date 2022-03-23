@@ -5,7 +5,7 @@
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
     <ul class="nav">
 
-      <?= tabs_nav(
+      <?= Html::nav(
         'nav',
         $data['type'],
         $user,
@@ -55,7 +55,7 @@
       <?php } ?>
 
     <?php } else { ?>
-      <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
+      <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no')]); ?>
     <?php } ?>
   </div>
 </main>

@@ -22,7 +22,7 @@
       </select>
       <input type="hidden" name="user_id" id="post_id" value="<?= $data['user']['id']; ?>">
     </fieldset>
-    <?= sumbit(Translate::get('add')); ?>
+    <?= Html::sumbit(Translate::get('add')); ?>
   </form>
 </div>
 </main>

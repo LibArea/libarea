@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\FolderModel;
-use UserData, Translate;
+use UserData, Translate, Html;
 
 class FolderController extends MainController
 {
@@ -28,7 +28,7 @@ class FolderController extends MainController
 
         $url    = getUrlByName('favorites.folders');
         if (empty($arr)) {
-            addMsg(Translate::get('necessarily'), 'error');
+            Html::addMsg(Translate::get('necessarily'), 'error');
             redirect($url);
         }
 

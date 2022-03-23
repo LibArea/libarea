@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Validation, UploadImage, Translate, Tpl, UserData;
+use Validation, UploadImage, Translate, Tpl, Meta, Html, UserData;
 
 class EditFacetController extends MainController
 {
@@ -22,7 +22,7 @@ class EditFacetController extends MainController
     {
         $facet_id   = Request::getInt('id');
         $facet      = FacetModel::getFacet($facet_id, 'id', $type);
-        pageError404($facet);
+        Html::pageError404($facet);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
@@ -36,7 +36,7 @@ class EditFacetController extends MainController
         return Tpl::agRender(
             '/facets/edit',
             [
-                'meta'  => meta([], Translate::get('edit') . ' | ' . $facet['facet_title']),
+                'meta'  => Meta::get([], Translate::get('edit') . ' | ' . $facet['facet_title']),
                 'data'  => [
                     'facet'             => $facet,
                     'low_matching'      => FacetModel::getLowMatching($facet['facet_id']),
@@ -67,7 +67,7 @@ class EditFacetController extends MainController
         $facet_type                 = Request::getPost('facet_type');
 
         $facet = FacetModel::uniqueById($facet_id);
-        pageError404($facet);
+        Html::pageError404($facet);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
@@ -117,7 +117,7 @@ class EditFacetController extends MainController
         // Проверим повтор URL                       
         if ($facet_slug != $facet['facet_slug']) {
             if (FacetModel::uniqueSlug($facet_slug, $new_type)) {
-                addMsg('repeat.url', 'error');
+                Html::addMsg('repeat.url', 'error');
                 redirect(getUrlByName($new_type  . '.edit', ['id' => $facet['facet_id']]));
             }
         }
@@ -170,7 +170,7 @@ class EditFacetController extends MainController
             FacetModel::addLowFacetMatching($match_arr, $facet_id);
         }
 
-        addMsg('change.saved', 'success');
+        Html::addMsg('change.saved', 'success');
 
         redirect(getUrlByName($new_type, ['slug' => $facet_slug]));
     }
@@ -178,9 +178,9 @@ class EditFacetController extends MainController
     public function pages()
     {
         $facet_id   = Request::getInt('id');
- 
+
         $facet      = FacetModel::getFacet($facet_id, 'id', 'blog');
-        pageError404($facet);
+        Html::pageError404($facet);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
@@ -190,7 +190,7 @@ class EditFacetController extends MainController
         return Tpl::agRender(
             '/facets/edit-pages',
             [
-                'meta'  => meta($m = [], Translate::get('edit') . ' | ' . $facet['facet_title']),
+                'meta'  => Meta::get($m = [], Translate::get('edit') . ' | ' . $facet['facet_title']),
                 'data'  => [
                     'facet' => $facet,
                     'pages' => (new \App\Controllers\Post\PostController())->last($facet['facet_id']),

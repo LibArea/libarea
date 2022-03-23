@@ -27,7 +27,6 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
                     location        = :location,
                     public_email    = :public_email,
                     skype           = :skype,
-                    twitter         = :twitter,
                     telegram        = :telegram,
                     vk              = :vk
                         WHERE id    = :id";

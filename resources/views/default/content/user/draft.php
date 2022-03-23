@@ -2,7 +2,7 @@
   <div class="box-flex-white">
     <ul class="nav">
 
-      <?= tabs_nav(
+      <?= Html::nav(
         'nav',
         $data['sheet'],
         $user,
@@ -42,10 +42,7 @@
       <?php } ?>
     </div>
   <?php } else { ?>
-    <div class="p20 center gray-600">
-      <i class="bi-journal-richtext block text-8xl"></i>
-      <?= Translate::get('no.content'); ?>
-    </div>
+    <?= Tpl::import('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.content'), 'icon' => 'bi-journal-richtext']); ?>
   <?php } ?>
 
 </main>

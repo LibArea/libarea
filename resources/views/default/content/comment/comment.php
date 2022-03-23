@@ -3,7 +3,7 @@ foreach ($answer as  $comment) {
   $n++; ?>
   <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
   <?php if ($comment['comment_is_deleted'] == 1) { ?>
-    <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
+    <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
       <ol class="bg-red-200 text-sm list-none max-w780">
         <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
           <span class="comm-deletes gray">
@@ -24,7 +24,7 @@ foreach ($answer as  $comment) {
           <div class="max-w780">
             <div class="text-sm flex">
               <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
-                <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava-sm'); ?>
+                <?= Html::image($comment['avatar'], $comment['login'], 'ava-sm', 'avatar', 'small'); ?>
                 <span class="mr5 ml5">
                   <?= $comment['login']; ?>
                 </span>
@@ -33,7 +33,7 @@ foreach ($answer as  $comment) {
                 <span class="sky mr5"><i class="bi-mic text-sm"></i></span>
               <?php } ?>
               <span class="mr5 ml5 gray-600 lowercase">
-                <?= lang_date($comment['date']); ?>
+                <?= Html::langDate($comment['date']); ?>
               </span>
               <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
             </div>
@@ -45,9 +45,9 @@ foreach ($answer as  $comment) {
             </div>
           </div>
           <div class="text-sm flex">
-            <?= votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
+            <?= Html::votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
 
-            <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
+            <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
               <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 mr10 ml10">
                 <?= Translate::get('edit'); ?>
               </a>

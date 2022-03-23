@@ -16,7 +16,7 @@
     <div class="pt5 clear">
       <input type="hidden" name="post_id" value="<?= $data['post']['post_id']; ?>">
       <input type="hidden" name="answer_id" value="<?= $data['answer_id']; ?>">
-      <?= sumbit(Translate::get('edit')); ?>
+      <?= Html::sumbit(Translate::get('edit')); ?>
     </div>
   </form>
 </main>

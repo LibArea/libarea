@@ -30,7 +30,7 @@
           <?= $user['id']; ?>
         </td>
         <td>
-          <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava-sm'); ?>
+          <?= Html::image($user['avatar'], $user['login'], 'ava-sm', 'avatar', 'small'); ?>
           <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
             <?= $user['login']; ?>
           </a>

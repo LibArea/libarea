@@ -1,6 +1,6 @@
 <div class="box-flex-white">
   <div class="mb-none">
-    <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w94 br-box-gray mr15'); ?>
+    <?= Html::image($topic['facet_img'], $topic['facet_title'], 'w94 br-box-gray mr15', 'logo', 'max'); ?>
   </div>
   <div class="flex-auto">
     <h1 class="text-2xl">
@@ -33,7 +33,7 @@
   <p class="m0 text-xl mb-none"><?= Translate::get($data['type']); ?></p>
   <ul class="nav">
 
-    <?= tabs_nav(
+    <?= Html::nav(
       'nav',
       $data['sheet'],
       $user,

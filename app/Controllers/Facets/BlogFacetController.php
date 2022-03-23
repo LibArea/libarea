@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel};
-use Content, Translate, Tpl, UserData;
+use Content, Translate, Tpl, Meta, Html, UserData;
 
 class BlogFacetController extends MainController
 {
@@ -28,14 +28,14 @@ class BlogFacetController extends MainController
 
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'blog');
-        pageError404($facet);
+        Html::pageError404($facet);
 
         if ($facet['facet_type'] == 'topic') {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
 
-        $facet['facet_add_date']    = lang_date($facet['facet_add_date']);
+        $facet['facet_add_date']    = Html::langDate($facet['facet_add_date']);
 
         $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
@@ -45,16 +45,15 @@ class BlogFacetController extends MainController
         $descr  = $facet['facet_description'];
 
         $m = [
-            'og'         => true,
-            'twitter'    => true,
-            'imgurl'     => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
-            'url'        => $url,
+            'og'        => true,
+            'imgurl'    => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
+            'url'       => $url,
         ];
 
         return Tpl::agRender(
             '/facets/blog',
             [
-                'meta'  => meta($m, $title, $descr),
+                'meta'  => Meta::get($m, $title, $descr),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

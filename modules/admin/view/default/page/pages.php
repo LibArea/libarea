@@ -38,9 +38,9 @@
     </div>
   <?php } ?>
 
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.topics')); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.topics')); ?>
 <?php } else { ?>
-  <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
 <?php } ?>
 
 </main>

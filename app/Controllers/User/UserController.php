@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{PostModel, FolderModel};
-use Content, Translate, Tpl, UserData;
+use Content, Translate, Tpl, Meta, Html, UserData;
 
 class UserController extends MainController
 {
@@ -28,19 +28,17 @@ class UserController extends MainController
 
         $usersCount = UserModel::getUsersAllCount();
         $users      = UserModel::getUsersAll($page, $this->limit, $this->user['id'], $sheet);
-        pageError404($users);
+        Html::pageError404($users);
 
         $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName($sheet),
+            'og'    => false,
+            'url'   => getUrlByName($sheet),
         ];
 
         return Tpl::agRender(
             '/user/all',
             [
-                'meta'  => meta($m, Translate::get($type . 's'), Translate::get($sheet . '.desc')),
+                'meta'  => Meta::get($m, Translate::get($type . 's'), Translate::get($sheet . '.desc')),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,
@@ -73,7 +71,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/favorite/all',
             [
-                'meta'  => meta($m = [], Translate::get('favorites')),
+                'meta'  => Meta::get($m = [], Translate::get('favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
@@ -91,13 +89,13 @@ class UserController extends MainController
     {
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
-        
+
         $folders = FolderModel::get('favorite', $this->user['id']);
-        
+
         return Tpl::agRender(
             '/user/favorite/folders',
             [
-                'meta'  => meta($m = [], Translate::get('folders')),
+                'meta'  => Meta::get($m = [], Translate::get('folders')),
                 'data'  => [
                     'sheet'     => 'folders',
                     'type'      => 'folders',
@@ -107,16 +105,16 @@ class UserController extends MainController
             ]
         );
     }
-    
+
     public function foldersFavorite()
     {
         $tag_id = Request::getInt('id');
         $favorites = UserModel::userFavorite($this->user['id'], $tag_id);
-        
+
         return Tpl::agRender(
             '/user/favorite/all',
             [
-                'meta'  => meta($m = [], Translate::get('favorites')),
+                'meta'  => Meta::get($m = [], Translate::get('favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
@@ -124,7 +122,6 @@ class UserController extends MainController
                 ]
             ]
         );
- 
     }
 
     // Member Draft Page
@@ -134,7 +131,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/draft',
             [
-                'meta'  => meta($m = [], Translate::get('drafts')),
+                'meta'  => Meta::get($m = [], Translate::get('drafts')),
                 'data'  => [
                     'drafts'    => UserModel::userDraftPosts($this->user['id']),
                     'sheet'     => 'drafts',
@@ -154,14 +151,14 @@ class UserController extends MainController
         foreach ($focus_posts as $ind => $row) {
             $text                           = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['post_date']               = lang_date($row['post_date']);
+            $row['post_date']               = Html::langDate($row['post_date']);
             $result[$ind]                   = $row;
         }
 
         return Tpl::agRender(
             '/user/favorite/subscribed',
             [
-                'meta'  => meta($m = [], Translate::get('subscribed')),
+                'meta'  => Meta::get($m = [], Translate::get('subscribed')),
                 'data'  => [
                     'h1'    => Translate::get('subscribed') . ' ' . $this->user['login'],
                     'sheet' => 'subscribed',

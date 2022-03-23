@@ -117,7 +117,7 @@
         'help'          => Translate::get('necessarily'),
       ]); ?>
 
-      <p><?= sumbit(Translate::get('create')); ?></p>
+      <p><?= Html::sumbit(Translate::get('create')); ?></p>
     </form>
   </div>
 </main>

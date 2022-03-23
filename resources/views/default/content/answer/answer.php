@@ -11,7 +11,7 @@ foreach ($data['answers'] as $answer) {
         <div class="content-body">
           <div class="flex text-sm">
             <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
-              <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
+              <?= Html::image($answer['avatar'],  $answer['login'], 'ava-sm', 'avatar', 'small'); ?>
               <span class="mr5 ml5">
                 <?= $answer['login']; ?>
               </span>
@@ -20,7 +20,7 @@ foreach ($data['answers'] as $answer) {
               <span class="sky mr5 ml0"><i class="bi-mic text-sm"></i></span>
             <?php } ?>
             <span class="mr5 ml5 gray-600 lowercase">
-              <?= lang_date($answer['date']); ?>
+              <?= Html::langDate($answer['date']); ?>
             </span>
             <?php if (empty($answer['edit'])) { ?>
               <span class="mr5 ml10 gray-600">
@@ -35,7 +35,7 @@ foreach ($data['answers'] as $answer) {
           </div>
         </div>
         <div class="flex text-sm">
-          <?= votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
+          <?= Html::votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
 
           <?php if ($answer['post_closed'] == 0) { ?>
             <?php if ($answer['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
@@ -43,7 +43,7 @@ foreach ($data['answers'] as $answer) {
             <?php } ?>
           <?php } ?>
 
-          <?php if (accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
+          <?php if (Html::accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
             <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) { ?>
               <a class="editansw gray-600 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                 <?= Translate::get('edit'); ?>

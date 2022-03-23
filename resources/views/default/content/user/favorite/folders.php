@@ -4,7 +4,6 @@
     <h3 class="uppercase-box"><?= Translate::get('folders.s'); ?>: <?= $data['count']; ?></h3>
 
     <?= Tpl::import('/_block/form/select/folders', ['data' => $data]); ?>
-
   </div>
 </main>
 <aside>

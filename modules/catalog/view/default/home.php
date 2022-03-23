@@ -34,9 +34,9 @@
     <?php if (!empty($data['items'])) { ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
     <?php } else { ?>
-      <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/cat'); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/cat'); ?>
   </main>
   <aside>
     <div class="box-yellow text-sm max-w300"><?= Translate::get('directory.info'); ?></div>
@@ -45,7 +45,7 @@
         <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
         <ul class="menu">
           <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
-          <?= tabs_nav(
+          <?= Html::nav(
             'menu',
             $data['sheet'],
             $user,

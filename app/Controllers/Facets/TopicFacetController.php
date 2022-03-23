@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
-use Content, Translate, Tpl, UserData;
+use Content, Translate, Tpl, Meta, Html, UserData;
 
 class TopicFacetController extends MainController
 {
@@ -28,14 +28,14 @@ class TopicFacetController extends MainController
 
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
-        pageError404($facet);
+        Html::pageError404($facet);
 
         if ($facet['facet_type'] == 'blog' || $facet['facet_type'] == 'section') {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
 
-        $facet['facet_add_date']    = lang_date($facet['facet_add_date']);
+        $facet['facet_add_date']    = Html::langDate($facet['facet_add_date']);
 
         $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
@@ -51,7 +51,6 @@ class TopicFacetController extends MainController
 
         $m = [
             'og'         => true,
-            'twitter'    => true,
             'imgurl'     => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
             'url'        => $url,
         ];
@@ -59,7 +58,7 @@ class TopicFacetController extends MainController
         return Tpl::agRender(
             '/facets/topic',
             [
-                'meta'  => meta($m, $title, $desc),
+                'meta'  => Meta::get($m, $title, $desc),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
@@ -86,9 +85,9 @@ class TopicFacetController extends MainController
     {
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
-        pageError404($facet);
+        Html::pageError404($facet);
 
-        $facet['facet_add_date']    = lang_date($facet['facet_add_date']);
+        $facet['facet_add_date']    = Html::langDate($facet['facet_add_date']);
 
         $facet['facet_info']   = Content::text($facet['facet_info'], 'text');
 
@@ -96,7 +95,6 @@ class TopicFacetController extends MainController
 
         $m = [
             'og'         => true,
-            'twitter'    => true,
             'imgurl'     => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
             'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
         ];
@@ -104,7 +102,7 @@ class TopicFacetController extends MainController
         return Tpl::agRender(
             '/facets/info',
             [
-                'meta'  => meta($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description']),
+                'meta'  => Meta::get($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description']),
                 'data'  => [
                     'sheet'         => 'info',
                     'type'          => 'info',
@@ -126,9 +124,9 @@ class TopicFacetController extends MainController
     {
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
-        pageError404($facet);
+        Html::pageError404($facet);
 
-        $facet['facet_add_date']    = lang_date($facet['facet_add_date']);
+        $facet['facet_add_date']    = Html::langDate($facet['facet_add_date']);
 
         $facet['facet_info']   = Content::text($facet['facet_info'], 'text');
 
@@ -136,15 +134,14 @@ class TopicFacetController extends MainController
 
         $m = [
             'og'         => true,
-            'twitter'    => true,
             'imgurl'     => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
             'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
         ];
- 
+
         return Tpl::agRender(
             '/facets/writers',
             [
-                'meta'  => meta($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description']),
+                'meta'  => Meta::get($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description']),
                 'data'  => [
                     'sheet'         => 'writers',
                     'type'          => 'writers',

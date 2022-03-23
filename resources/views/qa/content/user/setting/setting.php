@@ -6,7 +6,7 @@
       <?php csrf_field(); ?>
 
       <fieldset>
-        <?= user_avatar_img($data['user']['avatar'], 'small', $data['user']['login'], 'mr5 ml5 ava'); ?>
+        <?= Html::image($data['user']['avatar'], $data['user']['login'], 'mr5 ml5 ava', 'avatar', 'small'); ?>
         <span class="mr5 ml5">
           <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
             <?= $data['user']['login']; ?>
@@ -79,7 +79,7 @@
 
       <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
-        <?= sumbit(Translate::get('edit')); ?>
+        <?= Html::sumbit(Translate::get('edit')); ?>
       <fieldset>
     </form>
   </div>

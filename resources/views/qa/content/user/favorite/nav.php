@@ -1,7 +1,7 @@
 <div class="box-flex-white">
   <ul class="nav">
 
-    <?= tabs_nav(
+    <?= Html::nav(
       'nav',
       $data['sheet'],
       $user,

@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{AnswerModel, PostModel};
-use Content, Validation, Translate, Tpl, UserData;
+use Content, Validation, Translate, Tpl, Meta, Html, UserData;
 
 class EditAnswerController extends MainController
 {
@@ -21,12 +21,12 @@ class EditAnswerController extends MainController
     {
         $answer_id  = Request::getInt('id');
         $answer = AnswerModel::getAnswerId($answer_id);
-        if (!accessСheck($answer, 'answer', $this->user, 0, 0)) {
+        if (!Html::accessСheck($answer, 'answer', $this->user, 0, 0)) {
             redirect('/');
         }
 
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
-        pageError404($post);
+        Html::pageError404($post);
 
         Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
         Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
@@ -34,11 +34,11 @@ class EditAnswerController extends MainController
         return Tpl::agRender(
             '/answer/edit-form-answer',
             [
-                'meta'  => meta($m = [], Translate::get('edit answer')),
+                'meta'  => Meta::get($m = [], Translate::get('edit answer')),
                 'data'  => [
                     'answer_id' => $answer['answer_id'],
                     'post_id'   => $post['post_id'],
-                    'content'   => preg_replace('/</','',$answer['answer_content']),
+                    'content'   => preg_replace('/</', '', $answer['answer_content']),
                     'sheet'     => 'edit-answers',
                     'post'      => $post,
                     'type'      => 'answer',
@@ -59,7 +59,7 @@ class EditAnswerController extends MainController
 
         // Проверка доступа
         $answer = AnswerModel::getAnswerId($answer_id);
-        if (!accessСheck($answer, 'answer', $this->user, 0, 0)) {
+        if (!Html::accessСheck($answer, 'answer', $this->user, 0, 0)) {
             redirect('/');
         }
 

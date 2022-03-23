@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, FacetModel, UserAreaModel};
 use App\Models\PostModel;
-use Content, Translate, UserData, Breadcrumbs;
+use Content, Translate, UserData, Breadcrumbs, Meta, Html;
 
 class Catalog
 {
@@ -27,11 +27,11 @@ class Catalog
 
         $os = ['cat', 'github', 'wap'];
         if (!in_array($screening = \Request::get('cat'), $os)) {
-            pageError404([]);
+            Html::pageError404([]);
         }
 
         $category  = FacetModel::get(\Request::get('slug'), 'slug', $this->user['trust_level']);
-        pageError404($category);
+        Html::pageError404($category);
 
         // We will get children
         $childrens =  FacetModel::getChildrens($category['facet_id'], $screening);
@@ -40,10 +40,8 @@ class Catalog
         $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'], $screening);
 
         $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $category['facet_slug']]),
+            'og'    => false,
+            'url'   => getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $category['facet_slug']]),
         ];
 
         $title = sprintf(Translate::get($sheet . '.cat.title'), $category['facet_title']);
@@ -56,7 +54,7 @@ class Catalog
         return view(
             '/view/default/sites',
             [
-                'meta'  => meta($m, $title, $desc),
+                'meta'  => Meta::get($m, $title, $desc),
                 'user' => $this->user,
                 'data'  => [
                     'screening'         => $screening,
@@ -101,10 +99,10 @@ class Catalog
         $slug   = Request::get('slug');
 
         $item = WebModel::getItemOne($slug, $this->user['id']);
-        pageError404($item);
+        Html::pageError404($item);
 
         if ($item['item_published'] == 0) {
-            pageError404([]);
+            Html::pageError404([]);
         }
 
         if ($item['item_content_soft']) {
@@ -118,7 +116,6 @@ class Catalog
 
         $m = [
             'og'         => true,
-            'twitter'    => true,
             'imgurl'     => $content_img,
             'url'        => getUrlByName('web.website', ['slug' => $item['item_url_domain']]),
         ];
@@ -131,7 +128,7 @@ class Catalog
         return view(
             '/view/default/website',
             [
-                'meta'  => meta($m, Translate::get('website') . ': ' . $item['item_title_url'], $desc),
+                'meta'  => Meta::get($m, Translate::get('website') . ': ' . $item['item_title_url'], $desc),
                 'user' => $this->user,
                 'data'  => [
                     'sheet'         => $sheet,
@@ -155,7 +152,7 @@ class Catalog
     {
         $id     = Request::getPostInt('id');
         $item   = WebModel::getItemId($id);
-        pageError404($item);
+        Html::pageError404($item);
 
         WebModel::setCleek($item['item_id']);
 

@@ -14,7 +14,7 @@ $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
       <?= $form->build_form(); ?>
       <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
-        <?= sumbit(Translate::get('edit')); ?>
+        <?= Html::sumbit(Translate::get('edit')); ?>
       </fieldset>
     </form>
   </div>

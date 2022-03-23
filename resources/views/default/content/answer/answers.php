@@ -2,7 +2,7 @@
   <div class="box-flex-white relative">
     <ul class="nav">
 
-      <?= tabs_nav(
+      <?= Html::nav(
         'nav',
         $data['sheet'],
         $user,
@@ -35,10 +35,9 @@
     <div class="box-white">
       <?= Tpl::import('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
     </div>
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
-
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
   <?php } else { ?>
-    <?= no_content(Translate::get('no.comments'), 'bi-info-lg'); ?>
+    <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 </main>
 <aside>

@@ -9,10 +9,10 @@
     <?php if (!empty($data['items'])) { ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'delete_fav' => 'yes', 'screening' => $data['screening']]); ?>
     <?php } else { ?>
-      <?= no_content(Translate::get('no.bookmarks.sites'), 'bi bi-info-lg'); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.bookmarks.sites'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
 
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
   </main>
   <aside>
     <div class="box-yellow text-sm mt15"><?= Translate::get('web.bookmarks.info'); ?>.</div>
@@ -22,7 +22,7 @@
         <ul class="menu">
           <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
 
-          <?= tabs_nav(
+          <?= Html::nav(
             'menu',
             $data['sheet'],
             $user,

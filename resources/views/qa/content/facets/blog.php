@@ -1,9 +1,9 @@
 <?php $blog = $data['facet'];
 if ($blog['facet_is_deleted'] == 0) { ?>
   <div class="w-100">
-    <div class="box-flex-white" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= cover_url($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
+    <div class="box-flex-white" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= Html::coverUrl($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
       <div class="mb-none">
-        <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'img-xl'); ?>
+        <?= Html::image($blog['facet_img'], $blog['facet_title'], 'img-xl', 'logo', 'max'); ?>
       </div>
       <div class="mb-ml0 flex-auto">
         <h1 class="mb0 mt10 text-2xl">
@@ -37,14 +37,14 @@ if ($blog['facet_is_deleted'] == 0) { ?>
     <div class="flex gap">
       <main class="col-two">
         <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
-        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('blog', ['slug' => $blog['facet_slug']])); ?>
+        <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>
       <aside>
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
           <div class="bg-violet-50 box text-sm">
             <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
-              <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'ava-base'); ?>
+              <?= Html::image($data['user']['avatar'], $data['user']['login'], 'ava-base', 'avatar', 'max'); ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>
             </a>
             <div class="gray-600 text-sm mt5">

@@ -1,7 +1,7 @@
 <?php if (!empty($data['answers'])) { ?>
   <div class="box-white">
     <h2 class="lowercase m0 text-2xl">
-      <?= num_word($post['amount_content'], Translate::get('num-answer'), true); ?>
+      <?= Html::numWord($post['amount_content'], Translate::get('num-answer'), true); ?>
     </h2>
 
     <?php foreach ($data['answers'] as  $answer) { ?>
@@ -13,9 +13,9 @@
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="content-body hidden">
                 <div class="br-box-gray w110 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
-                  <?= user_avatar_img($answer['avatar'], 'max', $answer['login'], 'img-lg'); ?>
+                  <?= Html::image($answer['avatar'], $answer['login'], 'img-lg', 'avatar', 'max'); ?>
                   <div class="text-sm gray">
-                    <?= lang_date($answer['date']); ?>
+                    <?= Html::langDate($answer['date']); ?>
                     <?php if (empty($answer['edit'])) { ?>
                       (<?= Translate::get('ed'); ?>.)
                     <?php } ?>
@@ -28,7 +28,7 @@
                 </DIV>
               </div>
               <div class="flex text-sm">
-                <?= votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
+                <?= Html::votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
 
                 <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
                   <?php if ($post['post_closed'] == 0) { ?>
@@ -38,7 +38,7 @@
                   <?php } ?>
                 <?php } ?>
                 
-                <?php if (accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
+                <?php if (Html::accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
                   <?php if ($user['id'] == $answer['answer_user_id'] || UserData::checkAdmin()) { ?>
                     <a class="editansw gray ml15 mr10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                       <?= Translate::get('edit'); ?>
@@ -52,7 +52,7 @@
                   </a>
                 <?php } ?>
 
-                <?= favorite($user['id'], $answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml5'); ?>
+                <?= Html::favorite($user['id'], $answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml5'); ?>
 
                 <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
@@ -78,7 +78,7 @@
                 <span class="gray">
                   — <a class="gray" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
                   <span class="lowercase gray">
-                    &nbsp; <?= lang_date($comment['date']); ?>
+                    &nbsp; <?= Html::langDate($comment['date']); ?>
                   </span>
                   <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
                 </span>
@@ -93,7 +93,7 @@
                   <?php } ?>
                 <?php } ?>
 
-                <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
+                <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
                   <?php if ($user['id'] == $comment['comment_user_id'] || UserData::checkAdmin()) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml10 mr5">
                       <i title="<?= Translate::get('edit'); ?>" class="bi-pencil-square"></i>
@@ -122,12 +122,12 @@
   </div>
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
-    <?= no_content(Translate::get('no.answers'), 'bi-info-lg'); ?>
+    <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.answers'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 <?php } ?>
 
 <?php if (!empty($otvet)) { ?>
-  <?= no_content(Translate::get('you.answered'), 'bi-info-lg'); ?>
+  <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('you.answered'), 'icon' => 'bi-info-lg']); ?>
 <?php } else { ?>
   <?php if ($user['id'] > 0) { ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
@@ -143,7 +143,7 @@
         <div class="clear pt5">
           <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
           <input type="hidden" name="answer_id" value="0">
-          <?= sumbit(Translate::get('reply')); ?>
+          <?= Html::sumbit(Translate::get('reply')); ?>
         </div>
       </form>
 

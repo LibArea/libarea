@@ -5,7 +5,7 @@ namespace App\Controllers\Facets;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{FacetModel, SubscriptionModel};
-use Validation, Config, Translate, Tpl, UserData;
+use Validation, Config, Translate, Tpl, Meta, Html, UserData;
 
 class AddFacetController extends MainController
 {
@@ -24,7 +24,7 @@ class AddFacetController extends MainController
         return Tpl::agRender(
             '/facets/add',
             [
-                'meta'  => meta([], sprintf(Translate::get('add.option'), Translate::get('topics'))),
+                'meta'  => Meta::get([], sprintf(Translate::get('add.option'), Translate::get('topics'))),
                 'data'  => [
                     'type' => $type,
                 ]
@@ -47,7 +47,7 @@ class AddFacetController extends MainController
         if ($facet_type == 'blog') {
             if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
                 if (in_array($facet_slug, Config::get('stop-blog'))) {
-                    addMsg('stop-blog', 'error');
+                    Html::addMsg('stop-blog', 'error');
                     redirect($redirect);
                 }
             }
@@ -61,20 +61,21 @@ class AddFacetController extends MainController
         Validation::Length($facet_seo_title, Translate::get('slug'), '4', '225', $redirect);
 
         if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
-            addMsg('repeat.url', 'error');
+            Html::addMsg('repeat.url', 'error');
             redirect($redirect);
         }
 
         if (preg_match('/\s/', $facet_slug) || strpos($facet_slug, ' ')) {
-            addMsg('url.gaps', 'error');
+            Html::addMsg('url.gaps', 'error');
             redirect($redirect);
         }
 
         $type = $facet_type ?? 'topic';
         $facet_slug = strtolower($facet_slug);
-        
+
         $new_facet_id = FacetModel::add(
-            [  'facet_title'                => $facet_title,
+            [
+                'facet_title'                => $facet_title,
                 'facet_description'         => $facet_description,
                 'facet_short_description'   => $facet_short_description,
                 'facet_slug'                => $facet_slug,
@@ -87,7 +88,7 @@ class AddFacetController extends MainController
 
         SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'topic');
 
-        $redirect = $facet_type == 'category' ? getUrlByName('web') : '/' . $facet_type .'/'. $facet_slug;
+        $redirect = $facet_type == 'category' ? getUrlByName('web') : '/' . $facet_type . '/' . $facet_slug;
         redirect($redirect);
     }
 
@@ -111,7 +112,7 @@ class AddFacetController extends MainController
 
         return $in_total;
     }
-    
+
     public static function tl($trust_level, $allowed_tl, $count_content, $count_total)
     {
         if ($trust_level < $allowed_tl) {

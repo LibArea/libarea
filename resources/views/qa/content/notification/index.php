@@ -2,7 +2,7 @@
   <div class="box-flex-white bg-violet-50">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
-      <?= sumbit(Translate::get('i.read')); ?>
+      <?= Html::sumbit(Translate::get('i.read')); ?>
     </form>
   </div>
 
@@ -20,7 +20,7 @@
               <a class="black ml5" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
               <span class="lowercase gray-600">
                 <?= sprintf(Translate::get($n['lang']), '<a href="' . $url . '">', '</a>'); ?>
-                — <?= lang_date($notif['time']); ?>
+                — <?= Html::langDate($notif['time']); ?>
               </span>
               <?php if ($notif['flag'] == 0) { ?><sup class="ml5 red">✔</sup><?php } ?>
             </div>
@@ -31,7 +31,7 @@
 
       <div class="p15 center gray-600"><?= Translate::get('notifications.limit'); ?></div>
     <?php } else { ?>
-      <?= no_content(Translate::get('no.content'), 'bi-info-lg'); ?>
+      <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.content'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
   </div>
 </main>

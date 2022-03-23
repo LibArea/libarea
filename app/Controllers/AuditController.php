@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{ContentModel, ActionModel, AuditModel, NotificationModel, PostModel};
-use Translate, Config, UserData;
+use Translate, Config, UserData, Html;
 
 class AuditController extends MainController
 {
@@ -42,7 +42,7 @@ class AuditController extends MainController
     public static function stopContentQuietМode($user_limiting_mode)
     {
         if ($user_limiting_mode == 1) {
-            addMsg('limiting-mode-1', 'error');
+            Html::addMsg('limiting-mode-1', 'error');
             redirect('/');
         }
         return true;
@@ -72,7 +72,7 @@ class AuditController extends MainController
             $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                addMsg('content.audit', 'error');
+                Html::addMsg('content.audit', 'error');
                 return false;
             }
         }
@@ -87,7 +87,7 @@ class AuditController extends MainController
             $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                addMsg('content-audit', 'error');
+                Html::addMsg('content-audit', 'error');
                 return false;
             }
         }
@@ -96,7 +96,7 @@ class AuditController extends MainController
 
     public static function infoMsg($tl, $content)
     {
-        addMsg(sprintf(Translate::get('limit.day'), 'TL' . $tl, '«' . Translate::get($content) . '»'), 'error');
+        Html::addMsg(sprintf(Translate::get('limit.day'), 'TL' . $tl, '«' . Translate::get($content) . '»'), 'error');
 
         redirect('/');
     }
@@ -179,7 +179,7 @@ class AuditController extends MainController
         if ($num_report > Config::get('trust-levels.all_stop_report')) return 1;
 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
-        pageError404($post);
+        Html::pageError404($post);
 
         $arr = ['post', 'answer', 'comment'];
         if (!in_array($content_type, $arr)) {

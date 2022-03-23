@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{FavoriteModel, PostModel, AnswerModel};
-use Translate, UserData;
+use Translate, UserData, Html;
 
 class FavoriteController extends MainController
 {
@@ -53,6 +53,6 @@ class FavoriteController extends MainController
                 break;
         }
 
-        pageRedirection($content, '/');
+        Html::pageRedirection($content, '/');
     }
 }

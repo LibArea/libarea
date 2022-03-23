@@ -6,7 +6,7 @@
       <?php } else { ?>
         <a class="mr20" href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $tag['facet_slug']]); ?>">
         <?php } ?>
-        <?= facet_logo_img($tag['facet_img'], 'max', $tag['facet_title'], 'img-base'); ?>
+        <?= Html::image($tag['facet_img'], $tag['facet_title'], 'img-base', 'logo', 'max'); ?>
         <?= $tag['facet_title']; ?>
         </a>
       <?php } ?>
@@ -18,7 +18,7 @@
 
         <?= includeTemplate('/view/default/list', ['result' => $data['result'], 'type' => $data['type']]); ?>
 
-        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/search'); ?>
+        <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/search'); ?>
       <?php } else { ?>
         <?= includeTemplate('/view/default/no-result', ['query' => $data['query']]); ?>
       <?php } ?>

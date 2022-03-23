@@ -39,7 +39,7 @@
       <textarea class="add" minlength="12" name="badge_description" required><?= $data['badge']['badge_description']; ?></textarea>
       <div class="help">12 - 250 <?= Translate::get('characters'); ?></div>
     </fieldset>
-    <?= sumbit(Translate::get('edit')); ?>
+    <?= Html::sumbit(Translate::get('edit')); ?>
   </form>
 </div>
 </main>

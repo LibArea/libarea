@@ -12,7 +12,7 @@ $form->html_form($user['trust_level'], Config::get('form/auth.register'));
     <?= Tpl::import('/_block/captcha'); ?>
 
     <fieldset>
-      <?= sumbit(Translate::get('registration')); ?>
+      <?= Html::sumbit(Translate::get('registration')); ?>
       <a class="ml15 text-sm" href="<?= getUrlByName('login'); ?>"><?= Translate::get('sign.in'); ?></a>
     </fieldset>
   </form>

@@ -49,7 +49,7 @@ $facet  = $data['facet'] ?? false; ?>
 
           <div class="flex right ml45 mb-ml0 items-center text-xl">
 
-            <?= add_post($facet, $user['id']); ?>
+            <?= Html::addPost($facet, $user['id']); ?>
 
             <div id="toggledark" class="only-icon ml45 mb-ml20">
               <i class="bi-brightness-high gray-600"></i>
@@ -70,10 +70,10 @@ $facet  = $data['facet'] ?? false; ?>
 
             <div class="ml45 mb-ml20">
               <div class="trigger">
-                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava-base'); ?>
+                <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
-                <?= tabs_nav(
+                <?= Html::nav(
                   'menu',
                   $type,
                   $user,

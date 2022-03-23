@@ -5,7 +5,7 @@ class Validation
     public static function Email($email, $redirect)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            addMsg('email.correctness', 'error');
+            Html::addMsg('email.correctness', 'error');
             redirect($redirect);
         }
         return true;
@@ -13,9 +13,9 @@ class Validation
 
     public static function Length($name, $content, $min, $max, $redirect)
     {
-        if (getStrlen($name) < $min || getStrlen($name) > $max) {
+        if (Html::getStrlen($name) < $min || Html::getStrlen($name) > $max) {
             $text = sprintf(Translate::get('string.length'), '«' . $content . '»', $min, $max);
-            addMsg($text, 'error');
+            Html::addMsg($text, 'error');
             redirect($redirect);
         }
         return true;
@@ -26,7 +26,7 @@ class Validation
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
 
             $text = sprintf(Translate::get('url.correctness'), '«' . $url . '»');
-            addMsg($text, 'error');
+            Html::addMsg($text, 'error');
             redirect($redirect);
         }
         return true;
@@ -37,7 +37,7 @@ class Validation
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $slug)) {
 
             $text = sprintf(Translate::get('slug.correctness'), '«' . $text . '»');
-            addMsg($text, 'error');
+            Html::addMsg($text, 'error');
             redirect($redirect);
         }
         return true;

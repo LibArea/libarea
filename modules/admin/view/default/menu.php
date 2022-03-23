@@ -1,7 +1,7 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
 <div class="menu__left">
   <ul class="menu">
-    <?= tabs_nav(
+    <?= Html::nav(
       'menu',
       $data['type'],
       1,

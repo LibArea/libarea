@@ -4,10 +4,10 @@ class Breadcrumbs
 {
     // @var
     private $base;
-    
+
     // @var null | string
     private $separator;
-    
+
     // @var array
     private $links;
 
@@ -39,7 +39,7 @@ class Breadcrumbs
     // @return string
     public function render(?string $id = null): string
     {
-        $init   = '<nav><ol class="' . $id .'">';
+        $init   = '<nav><ol class="' . $id . '">';
         $end    = '</ol></nav>';
 
         return $init . ($this->links ? $this->setBase() : '') . $this->collect($this->links) . $end;

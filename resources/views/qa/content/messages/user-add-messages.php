@@ -10,7 +10,7 @@
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_uid']; ?>" />
       <textarea rows="3" id="message" class="mess" placeholder="<?= Translate::get('write'); ?>..." type="text" name="content" /></textarea>
-      <?= sumbit(Translate::get('send')); ?>
+      <?= Html::sumbit(Translate::get('send')); ?>
     </form>
   </div>
 </main>

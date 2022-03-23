@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\NotificationModel;
-use Translate, SendEmail, Tpl, UserData;
+use Translate, SendEmail, Tpl, Meta, UserData;
 
 class NotificationController extends MainController
 {
@@ -21,7 +21,7 @@ class NotificationController extends MainController
         return Tpl::agRender(
             '/notification/index',
             [
-                'meta'  => meta($m = [], Translate::get('notifications')),
+                'meta'  => Meta::get($m = [], Translate::get('notifications')),
                 'data'  => [
                     'sheet'         => 'notifications',
                     'type'          => 'notifications',

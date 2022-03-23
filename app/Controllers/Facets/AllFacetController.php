@@ -5,7 +5,7 @@ namespace App\Controllers\Facets;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\FacetModel;
-use Translate, Tpl, UserData;
+use Translate, Tpl, Meta, UserData;
 
 class AllFacetController extends MainController
 {
@@ -34,16 +34,14 @@ class AllFacetController extends MainController
         $Flimit = (new \App\Controllers\Facets\AddFacetController())->limitFacer($type, 'no.redirect');
 
         $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName($sheet),
+            'og'    => false,
+            'url'   => getUrlByName($sheet),
         ];
 
         return Tpl::agRender(
             '/facets/all',
             [
-                'meta'  => meta($m, Translate::get($sheet) . $num, Translate::get($sheet . '.desc') . $num),
+                'meta'  => Meta::get($m, Translate::get($sheet) . $num, Translate::get($sheet . '.desc') . $num),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

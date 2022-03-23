@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
-use Content, Translate, UserData;
+use Content, Translate, UserData, Meta;
 
 class Home
 {
@@ -42,7 +42,6 @@ class Home
 
         $m = [
             'og'         => true,
-            'twitter'    => true,
             'imgurl'     => '/assets/images/agouti-web.png',
             'url'        => getUrlByName($sheet),
         ];
@@ -52,7 +51,7 @@ class Home
         return view(
             '/view/default/home',
             [
-                'meta'  => meta($m, Translate::get($sheet . '.home.title'), Translate::get($sheet . '.home.desc')),
+                'meta'  => Meta::get($m, Translate::get($sheet . '.home.title'), Translate::get($sheet . '.home.desc')),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'cat',

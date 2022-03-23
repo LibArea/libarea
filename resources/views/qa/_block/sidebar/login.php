@@ -17,7 +17,7 @@
       </label>
     </fieldset>
     <fieldset>
-      <?= sumbit(Translate::get('sign.in')); ?>
+      <?= Html::sumbit(Translate::get('sign.in')); ?>
     </fieldset>
     <fieldset class="gray-600 center">
       <?= Translate::get('login.use.condition'); ?>

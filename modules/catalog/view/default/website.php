@@ -1,9 +1,9 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <div id="contentWrapper" class="wrap">
   <div class="mb-none center mt30">
-    <?= votes($user['id'], $data['item'], 'item', 'ps', 'text-2xl middle', 'block'); ?>
+    <?= Html::votes($user['id'], $data['item'], 'item', 'ps', 'text-2xl middle', 'block'); ?>
     <div class="pt20">
-      <?= favorite($user['id'], $data['item']['item_id'], 'website', $data['item']['tid'], 'ps', 'text-2xl'); ?>
+      <?= Html::favorite($user['id'], $data['item']['item_id'], 'website', $data['item']['tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
   <main class="website">
@@ -17,16 +17,16 @@
       </h1>
 
       <div class="flex flex-auto">
-        <?= website_img($data['item']['item_url_domain'], 'thumbs', $data['item']['item_title_url'], 'mr25 box-shadow'); ?>
+        <?= Html::websiteImage($data['item']['item_url_domain'], 'thumbs', $data['item']['item_title_url'], 'mr25 box-shadow'); ?>
         <div class="m15 mb-ml0">
           <?= $data['item']['item_content_url']; ?>
           <div class="gray mt20">
             <a class="green" target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
-              <?= website_img($data['item']['item_url_domain'], 'favicon', $data['item']['item_url_domain'], 'favicons mr5'); ?>
+              <?= Html::websiteImage($data['item']['item_url_domain'], 'favicon', $data['item']['item_url_domain'], 'favicons mr5'); ?>
               <?= $data['item']['item_url']; ?>
             </a>
           </div>
-          <?= facets($data['item']['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
+          <?= Html::facets($data['item']['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
         </div>
       </div>
       <?php if ($data['item']['item_is_soft'] == 1) { ?>
@@ -56,7 +56,7 @@
       <?php if ($data['similar']) { ?>
         <h3 class="uppercase-box"><?= Translate::get('recommended'); ?></h3>
         <?php foreach ($data['similar'] as $link) { ?>
-          <?= website_img($link['item_url_domain'], 'thumbs', $link['item_title_url'], 'mr5 w200 box-shadow'); ?>
+          <?= Html::websiteImage($link['item_url_domain'], 'thumbs', $link['item_title_url'], 'mr5 w200 box-shadow'); ?>
           <a class="inline mr20 mb15 block text-sm" href="<?= getUrlByName('web.website', ['slug' => $link['item_url_domain']]); ?>">
             <?= $link['item_title_url']; ?>
           </a>

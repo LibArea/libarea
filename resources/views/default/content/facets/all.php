@@ -9,7 +9,7 @@
   <div class="box-flex-white">
     <ul class="nav">
 
-      <?= tabs_nav(
+      <?= Html::nav(
         'nav',
         $data['sheet'],
         $user,
@@ -67,8 +67,8 @@
         </div>
       <?php } ?>
     <?php } else { ?>
-      <?= no_content(Translate::get('no.content'), 'bi-info-lg'); ?>
+      <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.content'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
   </div>
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>
 </main>

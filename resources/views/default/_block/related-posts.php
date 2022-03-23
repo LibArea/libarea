@@ -4,7 +4,7 @@
   <?php foreach ($related_posts as $related) { ?>
     <li class="flex items-center mb15"> 
       <?php if ($related['post_content_img']) { ?>
-        <?= post_img($related['post_content_img'], $related['value'], 'w60 mr20', 'cover' ); ?>
+        <?= Html::image($related['post_content_img'], $related['value'], 'w60 mr20', 'post', 'cover' ); ?>
       <?php } ?>  
       <a href="<?= getUrlByName('post', ['id' => $related['id'], 'slug' => $related['post_slug']]); ?>">
         <?= $related['value']; ?>

@@ -12,7 +12,7 @@
 
           <li>
             <div class="list-items__thumb mb-none">
-              <?= website_img($item['item_url_domain'], 'thumbs', $item['item_title_url'], 'list-items__thumb-image'); ?>
+              <?= Html::websiteImage($item['item_url_domain'], 'thumbs', $item['item_title_url'], 'list-items__thumb-image'); ?>
             </div>
             <div class="list-items__description">
               <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
@@ -23,9 +23,9 @@
                   <?= Translate::get('moderation'); ?>
                 </span>
               <?php } ?>
-              <?= facets($data['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
+              <?= Html::facets($data['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
 
-              <?php if (accessСheck($item, 'item', $user, false, false) === true) { ?>
+              <?php if (Html::accessСheck($item, 'item', $user, false, false) === true) { ?>
                 <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
                   <i class="bi-pencil text-sm"></i>
                 </a> - <?= $item['item_following_link']; ?>
@@ -36,7 +36,7 @@
               </div>
               <div class="list-items__footer">
                 <div class="green">
-                  <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>
+                  <?= Html::websiteImage($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>
                   <?= $item['item_url_domain']; ?>
                   <?php if ($item['item_github_url']) { ?>
                     <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
@@ -59,10 +59,10 @@
         <?php } ?>
       </ol>
     <?php } else { ?>
-      <?= no_content(Translate::get('no.user.sites'), 'bi-info-lg'); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
 
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
   </main>
   <aside>
     <div class="box-yellow text-sm mt15"><?= Translate::get('user.sites.info'); ?>.</div>
@@ -72,7 +72,7 @@
         <ul class="menu">
           <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
 
-          <?= tabs_nav(
+          <?= Html::nav(
             'menu',
             $data['sheet'],
             $user,

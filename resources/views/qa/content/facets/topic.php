@@ -4,7 +4,7 @@
     <?= Tpl::import('/content/facets/topic-header', ['topic' => $topic, 'user' => $user, 'data' => $data]); ?>
 
     <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
 
   <?php } else { ?>
     <div class="center">
@@ -51,7 +51,7 @@
           <?php foreach ($data['writers'] as $ind => $row) { ?>
             <li class="mb10">
               <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
-                <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-sm'); ?>
+                <?= Html::image($row['avatar'], $row['login'], 'ava-sm', 'avatar', 'max'); ?>
                 <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
               </a>
             </li>  

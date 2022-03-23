@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{ActionModel, FacetModel, NotificationModel};
-use Translate, UserData;
+use Translate, UserData, Meta;
 
 class Add
 {
@@ -31,7 +31,7 @@ class Add
         return view(
             '/view/default/add',
             [
-                'meta'  => meta([], Translate::get('site.add')),
+                'meta'  => Meta::get([], Translate::get('site.add')),
                 'user'  => $this->user,
                 'data'  => [
                     'sheet'      => 'add',

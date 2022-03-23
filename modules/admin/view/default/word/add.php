@@ -21,7 +21,7 @@
       <label for="word"><?= Translate::get('word'); ?></label>
       <input type="text" name="word">
     </fieldset>
-    <?= sumbit(Translate::get('add')); ?>
+    <?= Html::sumbit(Translate::get('add')); ?>
   </form>
 </div>
 </main>

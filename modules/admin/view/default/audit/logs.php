@@ -29,16 +29,16 @@
           </td>
           <td class="gray-600"><?= Translate::get($log['action_type']); ?></td>
           <td><?= sprintf(Translate::get($log['action_name']), Translate::get($log['action_type'])); ?></td>
-          <td class="gray-600"><?= lang_date($log['add_date']); ?></td>
+          <td class="gray-600"><?= Html::langDate($log['add_date']); ?></td>
           <th><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><i class="bi-eye"></i></a></th>
         </tr>
       <?php } ?>
     </table>
   <?php } else { ?>
-    <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.logs')); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.logs')); ?>
 </div>
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

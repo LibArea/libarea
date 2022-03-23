@@ -46,7 +46,7 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
                   <?= $user['login']; ?>
                 </div>
                 <ul class="dropdown">
-                  <?= tabs_nav(
+                  <?= Html::nav(
                     'menu',
                     'dir',
                     $user,

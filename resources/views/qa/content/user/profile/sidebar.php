@@ -21,7 +21,7 @@
       <?php foreach ($data['blogs'] as $blog) { ?>
         <div class="w-100 mb-w100 mb15 flex flex-row">
           <a class="mr10" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
-            <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'img-lg'); ?>
+            <?= Html::image($blog['facet_img'], $blog['facet_title'], 'img-lg', 'logo', 'max'); ?>
           </a>
           <div class="ml5 w-100">
             <a class="black" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
@@ -61,7 +61,7 @@
         <?php } ?>
         <div class="text-sm lowercase">
           <a class="gray" href="<?= getUrlByName('profile', ['login' => $profile['login']]); ?>">
-            <?= user_avatar_img($profile['avatar'], 'small', $profile['login'], 'ava-sm'); ?>
+            <?= Html::image($profile['avatar'], $profile['login'], 'ava-sm', 'avatar', 'small'); ?>
             <?= $profile['login']; ?>
           </a>
           <span class="gray-600 ml5"><?= $post['post_date'] ?></span>
@@ -82,7 +82,7 @@
       <?php foreach ($data['topics'] as  $topic) { ?>
         <div class="mt5 mb5">
           <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-            <?= facet_logo_img($topic['facet_img'], 'small', $topic['facet_title'], 'img-base'); ?>
+            <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'small'); ?>
             <span class="bar-name text-sm"><?= $topic['facet_title']; ?></span>
           </a>
         </div>

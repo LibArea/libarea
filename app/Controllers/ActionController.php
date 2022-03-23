@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{ActionModel, PostModel};
-use UserData;
+use UserData, Html;
 
 class ActionController extends MainController
 {
@@ -30,7 +30,7 @@ class ActionController extends MainController
 
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($content_id, $type);
-        if (!accessСheck($info_type, $type, $this->user, 1, 30)) {
+        if (!Html::accessСheck($info_type, $type, $this->user, 1, 30)) {
             redirect('/');
         }
 

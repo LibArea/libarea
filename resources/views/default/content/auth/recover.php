@@ -11,7 +11,7 @@
     <?= Tpl::import('/_block/captcha'); ?>
 
     <fieldset>
-      <?= sumbit(Translate::get('reset')); ?>
+      <?= Html::sumbit(Translate::get('reset')); ?>
       <?php if (Config::get('general.invite') == false) { ?>
         <span class="mr5 ml15 text-sm"><a href="<?= getUrlByName('register'); ?>"><?= Translate::get('registration'); ?></a></span>
       <?php } ?>

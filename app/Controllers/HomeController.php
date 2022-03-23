@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\HomeModel;
-use Content, Config, Tpl, UserData;
+use Config, Tpl, UserData, Meta;
 
 class HomeController extends MainController
 {
@@ -42,7 +42,6 @@ class HomeController extends MainController
 
         $m = [
             'og'         => true,
-            'twitter'    => false,
             'imgurl'     => '/assets/images/agouti-max.png',
             'url'        => $sheet == 'top' ? '/top' : '/',
         ];
@@ -50,7 +49,7 @@ class HomeController extends MainController
         return Tpl::agRender(
             '/home',
             [
-                'meta'  => meta($m, $meta_title ?? Config::get('meta.title'), $meta_desc ?? Config::get('meta.desc')),
+                'meta'  => Meta::get($m, $meta_title ?? Config::get('meta.title'), $meta_desc ?? Config::get('meta.desc')),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,

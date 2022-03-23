@@ -4,6 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
+use Html;
 
 class Webs
 {
@@ -11,7 +12,7 @@ class Webs
     {
         $item_id    = Request::getPostInt('id');
         $item       = WebModel::getItemId($item_id);
-        pageError404($item);
+        Html::pageError404($item);
 
         $puth = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $item["item_url_domain"] . '.png';
         $dirF = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS;

@@ -1,7 +1,7 @@
 <?php if (!empty($data['answers'])) { ?>
   <div class="box-white">
     <h2 class="lowercase m0 mb15 text-2xl">
-      <?= num_word($post['amount_content'], Translate::get('num-answer'), true); ?>
+      <?= Html::numWord($post['amount_content'], Translate::get('num-answer'), true); ?>
     </h2>
     <?php $n = 0;
     foreach ($data['answers'] as  $answer) {
@@ -17,8 +17,8 @@
               <div class="content-body">
                 <div class="flex text-sm">
                   <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
-                    <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
-                    <span class="mr5<?php if (loginColor($answer['created_at'])) { ?> green<?php } ?>">
+                    <?= Html::image($answer['avatar'], $answer['login'], 'ava-sm', 'avatar', 'small'); ?>
+                    <span class="mr5<?php if (Html::loginColor($answer['created_at'])) { ?> green<?php } ?>">
                       <?= $answer['login']; ?>
                     </span>
                   </a>
@@ -26,7 +26,7 @@
                     <span class="sky mr5 ml0"><i class="bi-mic text-sm"></i></span>
                   <?php } ?>
                   <span class="mr5 ml5 gray-600 lowercase">
-                    <?= lang_date($answer['date']); ?>
+                    <?= Html::langDate($answer['date']); ?>
                   </span>
                   <?php if (empty($answer['edit'])) { ?>
                     <span class="mr5 ml10 gray-600">
@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="flex text-sm">
-                <?= votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
+                <?= Html::votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
 
                 <?php if ($post['post_closed'] == 0) { ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
@@ -49,7 +49,7 @@
                   <?php } ?>
                 <?php } ?>
 
-                <?php if (accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
+                <?php if (Html::accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
                   <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) { ?>
                     <a class="editansw gray-600 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>"> 
                       <?= Translate::get('edit'); ?>
@@ -63,7 +63,7 @@
                   </a>
                 <?php } ?>
 
-                <?= favorite($user['id'], $answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml5'); ?>
+                <?= Html::favorite($user['id'], $answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml5'); ?>
 
                 <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
@@ -81,9 +81,9 @@
             <ol class="bg-red-200 text-sm pr5 list-none">
               <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">
-                  <?= $answer['answer_content']; ?>
+                  <?= Content::text($answer['answer_content'], 'text'); ?>
                   <?= Translate::get('answer'); ?> — 
-                  <span class="u<?php if (loginColor($answer['created_at'])) { ?> green<?php } ?>">
+                  <span class="u<?php if (Html::loginColor($answer['created_at'])) { ?> green<?php } ?>">
                     <?= $answer['login']; ?>
                   </span>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action right">
@@ -104,13 +104,13 @@
       <?php foreach ($answer['comments'] as  $comment) { ?>
 
         <?php if ($comment['comment_is_deleted'] == 1) { ?>
-          <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
+          <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
             <ol class="bg-red-200 text-sm list-none max-w780 <?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
                   <?= Content::text($comment['comment_content'], 'line'); ?>
                   — 
-                  <span class="u<?php if (loginColor($comment['created_at'])) { ?> green<?php } ?>">
+                  <span class="u<?php if (Html::loginColor($comment['created_at'])) { ?> green<?php } ?>">
                     <?= $comment['login']; ?>
                   </span>
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action right text-sm">
@@ -128,8 +128,8 @@
                 <div class="max-w780">
                   <div class="text-sm flex">
                     <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
-                      <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava-sm'); ?>
-                      <span class="mr5<?php if (loginColor($comment['created_at'])) { ?> green<?php } ?>">
+                      <?= Html::image($comment['avatar'], $comment['login'], 'ava-sm', 'avatar', 'small'); ?>
+                      <span class="mr5<?php if (Html::loginColor($comment['created_at'])) { ?> green<?php } ?>">
                         <?= $comment['login']; ?>
                       </span>
                     </a>
@@ -137,7 +137,7 @@
                       <span class="sky mr5"><i class="bi-mic text-sm"></i></span>
                     <?php } ?>
                     <span class="mr5 ml5 gray-600 lowercase">
-                      <?= lang_date($comment['date']); ?>
+                      <?= Html::langDate($comment['date']); ?>
                     </span>
                     <?php if ($comment['comment_comment_id'] > 0) { ?>
                       <a class="gray-600 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><i class="bi-arrow-up"></i></a>
@@ -150,7 +150,7 @@
                   <?= Content::text($comment['comment_content'], 'text'); ?>
                 </div>
                 <div class="text-sm flex">
-                  <?= votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
+                  <?= Html::votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
 
                   <?php if ($post['post_closed'] == 0) { ?>
                     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
@@ -160,7 +160,7 @@
                     <?php } ?>
                   <?php } ?>
 
-                  <?php if (accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
+                  <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray mr10 ml10">
                       <?= Translate::get('edit'); ?>
                     </a>
@@ -185,9 +185,9 @@
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
     <?php if ($user['id'] > 0) { ?>
-      <?= no_content(Translate::get('no.comments'), 'bi-info-lg'); ?>
+      <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
     <?php } else { ?>
-      <?= no_content(Translate::get('no.auth.login'), 'bi-info-lg'); ?>
+      <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.auth.login'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
   <?php } ?>
 <?php } ?>

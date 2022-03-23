@@ -2,7 +2,7 @@
 
 namespace Modules\Admin\App;
 
-use Translate;
+use Translate, Meta;
 
 class Tools
 {
@@ -11,7 +11,7 @@ class Tools
         return view(
             '/view/default/tools/tools',
             [
-                'meta'  => meta($m = [], Translate::get('tools')),
+                'meta'  => Meta::get($m = [], Translate::get('tools')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,

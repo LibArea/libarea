@@ -8,7 +8,7 @@ if (in_array($data['type'], $arr)) {
 
 <nav class="menu__left<?= $css; ?> mb-none">
   <ul class="menu sticky top-sm">
-    <?= tabs_nav(
+    <?= Html::nav(
       'menu',
       $data['type'],
       $user,

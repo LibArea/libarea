@@ -9,14 +9,14 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
 <div class="br-box-gray bg-white mb15">
   <?php if ($profile['cover_art'] != 'cover_art.jpeg') { ?>
     <div class="profile-box-cover relative">
-      <img class="w-100 min-h100" src="<?= cover_url($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
+      <img class="w-100 min-h100" src="<?= Html::coverUrl($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
     </div>
   <?php } else { ?>
     <div class="profile-box w-100 relative" style="background: <?= $profile['color']; ?>;min-height: 90px;"></div>
   <?php } ?>
   <div class="flex justify-between">
     <div class="z-10 w-100">
-      <?= user_avatar_img($profile['avatar'], 'max', $profile['login'], $css); ?>
+      <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
 
       <?php if ($user['id']) { ?>
         <div class="right m15">

@@ -43,7 +43,7 @@
         <?php } ?>
         <a class="<?php if ($topic['level'] == 0) { ?>relative pt5 text-xl items-center hidden<?php } ?> <?php if ($topic['level'] > 0) { ?> black<?php } ?>" href="<?= $url; ?>">
           <?php if ($topic['level'] == 0) { ?>
-            <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w20 h20 mr5 br-box-gray'); ?>
+            <?= Html::image($topic['facet_img'], $topic['facet_title'], 'w20 h20 mr5 br-box-gray', 'logo', 'max'); ?>
           <?php } ?>
           <?= $topic['facet_title']; ?>
         </a>
@@ -65,14 +65,14 @@
         <?php if ($topic['matching_list']) { ?>
           <div class="ml<?= $topic['level'] * 10; ?>">
             <i class="bi-bezier2 gray-600 text-sm mr5 ml5"></i>
-            <?= facets($topic['matching_list'], $topic['facet_type'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
+            <?= Html::facets($topic['matching_list'], $topic['facet_type'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
           </div>
         <?php } ?>
       </div>
     <?php } ?>
   <?php } else { ?>
     <?php if ($data['type'] != 'all') { ?>
-      <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
   <?php } ?>
 </div>

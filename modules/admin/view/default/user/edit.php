@@ -16,8 +16,8 @@
       </a>
       <br>
     <?php } ?>
-    <img width="325" class="right" src="<?= cover_url($data['user']['cover_art'], 'user'); ?>">
-    <?= user_avatar_img($data['user']['avatar'], 'max', $data['user']['login'], 'avatar'); ?>
+    <img width="325" class="right" src="<?= Html::coverUrl($data['user']['cover_art'], 'user'); ?>">
+    <?= Html::image($data['user']['avatar'], $data['user']['login'], 'avatar', 'avatar', 'max'); ?>
 
     <fieldset>
       <label for="post_title">
@@ -160,7 +160,7 @@
       </fieldset>
     <?php } ?>
 
-    <?= sumbit(Translate::get('edit')); ?>
+    <?= Html::sumbit(Translate::get('edit')); ?>
   </form>
 </div>
 </main>

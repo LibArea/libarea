@@ -9,7 +9,7 @@
   <div class="bg-white box-flex br-box-gray">
     <ul class="nav">
 
-      <?= tabs_nav(
+      <?= Html::nav(
         'nav',
         $data['sheet'],
         $user,
@@ -37,7 +37,7 @@
       <?php foreach ($data['users'] as $user) { ?>
       <div class="w-20 mb20 mb-w-33 center">
         <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
-          <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-lg'); ?>
+          <?= Html::image($user['avatar'], $user['login'], 'ava-lg', 'avatar', 'max'); ?>
           <div class="block mt5">
             <?= $user['login']; ?>
           </div>
@@ -49,5 +49,5 @@
       <?php } ?>
     </div>
   </div>
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
 </main>

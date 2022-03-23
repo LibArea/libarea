@@ -7,7 +7,7 @@
           <span class="block gray lowercase"><?= Translate::get('views'); ?></span>
         </div>
         <div class="p15">
-          <?= user_avatar_img($writer['avatar'], 'max', $writer['login'], 'w50 h50'); ?>
+          <?= Html::image($writer['avatar'], $writer['login'], 'w50 h50', 'avatar', 'small'); ?>
         </div>
         <div class="mt10">
           <a href="<?= getUrlByName('profile', ['login' => $writer['login']]); ?>"><?= $writer['login']; ?></a>
@@ -23,5 +23,5 @@
     <?php } ?>
   </div>
 <?php } else { ?>
-  <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+  <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
 <?php } ?>

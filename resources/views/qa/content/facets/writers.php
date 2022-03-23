@@ -15,10 +15,10 @@
           </div>
           <div class="flex">
             <a class="flex items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
-              <?= user_avatar_img($row['avatar'], 'max', $row['login'], 'ava-base'); ?>
+              <?= Html::image($row['avatar'], $row['login'], 'ava-base', 'avatar', 'max'); ?>
               <div class="ml5">
                 <div class="gray-600"><?= $row['login']; ?></div>
-                <?php if ($row['about']) { ?><div class="mb-none text-sm"><?= cutWords($row['about'], 5); ?></div><?php } ?>
+                <?php if ($row['about']) { ?><div class="mb-none text-sm"><?= Html::cutWords($row['about'], 5); ?></div><?php } ?>
               </div>
             </a>
           </div>

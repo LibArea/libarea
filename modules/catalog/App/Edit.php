@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{FacetModel, PostModel, NotificationModel};
-use Validation, Translate, UserData;
+use Validation, Translate, UserData, Meta, Html;
 
 class Edit
 {
@@ -24,7 +24,7 @@ class Edit
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (!accessСheck($domain, 'item', $this->user, false, false) === true) {
+        if (!Html::accessСheck($domain, 'item', $this->user, false, false) === true) {
             redirect(getUrlByName('web'));
         }
 
@@ -40,7 +40,7 @@ class Edit
         return view(
             '/view/default/edit',
             [
-                'meta'  => meta([], Translate::get('site.edit')),
+                'meta'  => Meta::get([], Translate::get('site.edit')),
                 'user'  => $this->user,
                 'data'  => [
                     'domain'        => $domain,
@@ -83,7 +83,7 @@ class Edit
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (!accessСheck($item, 'item', $this->user, false, false) === true) {
+        if (!Html::accessСheck($item, 'item', $this->user, false, false) === true) {
             redirect(getUrlByName('web'));
         }
 

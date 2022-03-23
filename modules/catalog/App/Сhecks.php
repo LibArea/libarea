@@ -3,7 +3,7 @@
 namespace Modules\Catalog\App;
 
 use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
-use Domain, UserData, Config;
+use Domain, UserData, Config, Html;
 
 class Сhecks
 {
@@ -26,7 +26,7 @@ class Сhecks
 
     public static function length($content, $min, $max)
     {
-        if (getStrlen($content) < $min || getStrlen($content) > $max) {
+        if (Html::getStrlen($content) < $min || Html::getStrlen($content) > $max) {
             return false;
         }
 

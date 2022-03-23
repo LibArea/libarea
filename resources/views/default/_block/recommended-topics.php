@@ -12,7 +12,7 @@
           <i class="bi-plus"></i> <?= Translate::get('read'); ?>
         </div>
         <a class="" title="<?= $topic['facet_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-          <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'img-base'); ?>
+          <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
           <?= $topic['facet_title']; ?>
         </a>
         <div class="mt5 text-sm gray-600">

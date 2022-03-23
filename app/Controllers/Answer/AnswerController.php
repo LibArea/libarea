@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\AnswerModel;
-use Content, Translate, Tpl, UserData;
+use Translate, Tpl, Meta, UserData;
 
 class AnswerController extends MainController
 {
@@ -29,16 +29,14 @@ class AnswerController extends MainController
         $answers    = AnswerModel::getAnswers($page, $this->limit, $this->user, $sheet);
 
         $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('answers'),
+            'og'    => false,
+            'url'   => getUrlByName('answers'),
         ];
 
         return Tpl::agRender(
             '/answer/answers',
             [
-                'meta'  => meta($m, Translate::get('all.answers'), Translate::get('answers-desc')),
+                'meta'  => Meta::get($m, Translate::get('all.answers'), Translate::get('answers-desc')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

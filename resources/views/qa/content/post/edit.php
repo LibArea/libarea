@@ -42,7 +42,7 @@
             </a>
           </div>
           <?php if ($post['post_thumb_img']) { ?>
-            <?= post_img($post['post_thumb_img'], $post['post_title'], 'w94', 'thumbnails'); ?>
+            <?= Html::image($post['post_thumb_img'], $post['post_title'], 'w94', 'post', 'thumbnails'); ?>
           <?php } ?>
         </div>
       <?php } ?>
@@ -51,7 +51,7 @@
         <div class="flex">
           <?php if ($post['post_content_img']) { ?>
             <div class="mr20">
-              <?= post_img($post['post_content_img'], $post['post_title'], 'w160', 'cover'); ?>
+              <?= Html::image($post['post_content_img'], $post['post_title'], 'w160', 'post', 'cover'); ?>
               <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
               <a class="img-remove text-sm" href="/post/img/<?= $post['post_id']; ?>/remove">
                 <?= Translate::get('remove'); ?>
@@ -150,7 +150,7 @@
           <input type="hidden" name="draft" id="draft" value="1">
         <?php } ?>
         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
-        <?= sumbit(Translate::get('edit')); ?>
+        <?= Html::sumbit(Translate::get('edit')); ?>
       </p>
     </form>
   </div>

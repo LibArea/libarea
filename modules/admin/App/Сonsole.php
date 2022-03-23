@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\App\Models\СonsoleModel;
-use SendEmail, Sass;
+use SendEmail, Sass, Html;
 
 class Сonsole
 {
@@ -58,7 +58,7 @@ class Сonsole
     public static function consoleRedirect()
     {
         if (PHP_SAPI != 'cli') {
-            addMsg('the command is executed', 'success');
+            Html::addMsg('the command is executed', 'success');
             redirect(getUrlByName('admin.tools'));
         }
         return true;

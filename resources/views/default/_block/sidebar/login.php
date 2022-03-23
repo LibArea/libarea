@@ -7,7 +7,7 @@ $form->html_form($user['trust_level'], Config::get('form/auth.login'));
     <?php csrf_field(); ?>
     <?= $form->build_form(); ?>
     <fieldset>
-      <?= sumbit(Translate::get('sign.in')); ?>
+      <?= Html::sumbit(Translate::get('sign.in')); ?>
     </fieldset>
     <fieldset class="gray-600 center">
       <?= Translate::get('login.use.condition'); ?>

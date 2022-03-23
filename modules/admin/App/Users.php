@@ -5,7 +5,7 @@ namespace Modules\Admin\App;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, BadgeModel};
 use Modules\Admin\App\Models\{BanUserModel, UserModel};
-use Validation, Translate, UserData;
+use Validation, Translate, UserData, Meta, Html;
 
 class Users
 {
@@ -30,15 +30,15 @@ class Users
         foreach ($user_all as $ind => $row) {
             $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['reg_ip']);
             $row['last_visit_logs'] = UserModel::lastVisitLogs($row['id']);
-            $row['created_at']      = lang_date($row['created_at']);
-            $row['updated_at']      = lang_date($row['updated_at']);
+            $row['created_at']      = Html::langDate($row['created_at']);
+            $row['updated_at']      = Html::langDate($row['updated_at']);
             $result[$ind]           = $row;
         }
 
         return view(
             '/view/default/user/users',
             [
-                'meta'  => meta($m = [], Translate::get('users')),
+                'meta'  => Meta::get($m = [], Translate::get('users')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
@@ -70,7 +70,7 @@ class Users
         return view(
             '/view/default/user/logip',
             [
-                'meta'  => meta($m = [], Translate::get('search')),
+                'meta'  => Meta::get($m = [], Translate::get('search')),
                 'data'  => [
                     'results'   => $results,
                     'option'    => $option,
@@ -105,7 +105,7 @@ class Users
         return view(
             '/view/default/user/edit',
             [
-                'meta'  => meta($m = [], Translate::get('edit')),
+                'meta'  => Meta::get($m = [], Translate::get('edit')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -151,7 +151,6 @@ class Users
                 'location'      => Request::getPost('location', null),
                 'public_email'  => Request::getPost('public_email', null),
                 'skype'         => Request::getPost('skype', null),
-                'twitter'       => Request::getPost('twitter', null),
                 'telegram'      => Request::getPost('telegram', null),
                 'vk'            => Request::getPost('vk', null),
             ]

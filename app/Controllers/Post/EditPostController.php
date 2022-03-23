@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Content, UploadImage, Validation, Translate, Tpl, UserData;
+use Content, UploadImage, Validation, Translate, Tpl, Meta, Html, UserData;
 
 class EditPostController extends MainController
 {
@@ -22,7 +22,7 @@ class EditPostController extends MainController
     {
         $post_id    = Request::getInt('id');
         $post       = PostModel::getPost($post_id, 'id', $this->user);
-        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
+        if (!Html::accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
@@ -46,7 +46,7 @@ class EditPostController extends MainController
         return Tpl::agRender(
             $puth,
             [
-                'meta'  => meta([], sprintf(Translate::get('edit.option'), Translate::get('post'))),
+                'meta'  => Meta::get([], sprintf(Translate::get('edit.option'), Translate::get('post'))),
                 'data'  => [
                     'sheet'         => 'edit-post',
                     'type'          => 'edit',
@@ -75,7 +75,7 @@ class EditPostController extends MainController
 
         // Проверка доступа 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
-        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
+        if (!Html::accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
@@ -168,7 +168,7 @@ class EditPostController extends MainController
 
         $all_topics = array_merge($blog ?? [], $topics ?? []);
         if (!$all_topics) {
-            addMsg('select.topic', 'error');
+            Html::addMsg('select.topic', 'error');
             redirect($redirect);
         }
 
@@ -180,14 +180,14 @@ class EditPostController extends MainController
     {
         $post_id    = Request::getInt('id');
         $post = PostModel::getPost($post_id, 'id', $this->user);
-        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
+        if (!Html::accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
         PostModel::setPostImgRemove($post['post_id']);
         UploadImage::cover_post_remove($post['post_content_img'], $this->user['id']);
 
-        addMsg('cover removed', 'success');
+        Html::addMsg('cover removed', 'success');
         redirect(getUrlByName('post.edit', ['id' => $post['post_id']]));
     }
 

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\RssModel;
-use Content, Config, Tpl;
+use Content, Config, Tpl, Html;
 
 class RssController extends MainController
 {
@@ -26,7 +26,7 @@ class RssController extends MainController
     {
         $topic_slug = Request::get('slug');
         $topic      = RssModel::getTopicSlug($topic_slug);
-        pageError404($topic);
+        Html::pageError404($topic);
 
         $posts  = RssModel::getPostsFeed($topic_slug);
         $result = [];
@@ -55,7 +55,7 @@ class RssController extends MainController
     {
         $topic_slug = Request::get('slug');
         $topic      = RssModel::getTopicSlug($topic_slug);
-        pageError404($topic);
+        Html::pageError404($topic);
 
         $posts  = RssModel::getPostsFeed($topic_slug);
         $result = [];

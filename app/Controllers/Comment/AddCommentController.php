@@ -5,7 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, CommentModel, PostModel};
-use Content, Validation, Translate, Tpl, UserData;
+use Content, Validation, Translate, Tpl, Html, UserData;
 
 class AddCommentController extends MainController
 {
@@ -41,7 +41,7 @@ class AddCommentController extends MainController
         $comment_id = Request::getPostInt('comment_id');   // на какой комментарий
 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
-        pageError404($post);
+        Html::pageError404($post);
 
         $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 

@@ -10,7 +10,7 @@
       <div class="flex mb-inline mr15">
         <div class="box-answer block bg-gray-100 gray mt5 br-rd3 lowercase mr15">
           <?= $post['post_votes']; ?>
-          <div class="text-xs"> <?= num_word($post['post_votes'], Translate::get('num-up'), false); ?></div>
+          <div class="text-xs"> <?= Html::numWord($post['post_votes'], Translate::get('num-up'), false); ?></div>
         </div>
         <?php $bg = $post['post_feature'] == 0 ? ' bg-green' : ' bg-pink'; ?>
         <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
@@ -19,7 +19,7 @@
             <?php $anw = $post['post_answers_count'] + $post['post_comments_count'];
             echo $anw; ?>
           </a>
-          <div class="text-xs white"> <?= num_word($anw, Translate::get('num-answer'), false); ?></div>
+          <div class="text-xs white"> <?= Html::numWord($anw, Translate::get('num-answer'), false); ?></div>
         </div>
       </div>
 
@@ -48,7 +48,7 @@
 
           <div class="gray-600 text-xs">
             <?= $post['post_date'] ?> ·
-            <?= num_word($post['post_hits_count'], Translate::get('num-view'), true); ?> ·
+            <?= Html::numWord($post['post_hits_count'], Translate::get('num-view'), true); ?> ·
             <a href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
               <?= $post['login']; ?>
             </a>

@@ -6,7 +6,7 @@
       <div class="bg-white br-rd5 mt15  p15">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <div class="flex text-sm mb5">
-            <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
+            <?= Html::image($answer['avatar'], $answer['login'], 'ava-sm', 'avatar', 'small'); ?>
             <a class="gray mr5 ml5" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
               <?= $answer['login']; ?>
             </a>
@@ -20,7 +20,7 @@
           </div>
 
           <div class="hidden gray">
-            <?= votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
+            <?= Html::votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
           </div>
         <?php } else { ?>
           <div class="bg-red-200">
@@ -30,10 +30,10 @@
       </div>
     <?php } ?>
 
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
 
   <?php } else { ?>
-    <?= no_content(Translate::get('no.comments'), 'bi bi-info-lg'); ?>
+    <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 </main>
 <aside>

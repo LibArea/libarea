@@ -5,23 +5,21 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, UserModel};
-use Config, Integration, Validation, SendEmail, Translate, Tpl, UserData;
+use Config, Integration, Validation, SendEmail, Translate, Tpl, Meta, Html, UserData;
 
 class RecoverController extends MainController
 {
     public function showPasswordForm()
     {
         $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('recover'),
+            'og'    => false,
+            'url'   => getUrlByName('recover'),
         ];
 
         return Tpl::agRender(
             '/auth/recover',
             [
-                'meta'  => meta($m, Translate::get('password recovery'), Translate::get('info-recover')),
+                'meta'  => Meta::get($m, Translate::get('password recovery'), Translate::get('info-recover')),
                 'data'  => [
                     'sheet' => 'recover',
                     'type'  => 'recover',
@@ -37,7 +35,7 @@ class RecoverController extends MainController
 
         if (Config::get('general.captcha')) {
             if (!Integration::checkCaptchaCode()) {
-                addMsg('code.error', 'error');
+                Html::addMsg('code.error', 'error');
                 redirect($recover_uri);
             }
         }
@@ -47,17 +45,17 @@ class RecoverController extends MainController
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['email'])) {
-            addMsg('email.no.site', 'error');
+            Html::addMsg('email.no.site', 'error');
             redirect($recover_uri);
         }
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['ban_list'] == UserData::BANNED_USER) {
-            addMsg('account.being.verified', 'error');
+            Html::addMsg('account.being.verified', 'error');
             redirect($recover_uri);
         }
 
-        $code = $uInfo['id'] . '-' . randomString('crypto', 25);
+        $code = $uInfo['id'] . '-' . Html::randomString('crypto', 25);
         UserModel::initRecover(
             [
                 'activate_date'     => date('Y-m-d H:i:s'),
@@ -69,7 +67,7 @@ class RecoverController extends MainController
         // Отправка e-mail
         SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => getUrlByName('recover.code', ['code' => $code])]);
 
-        addMsg('new.password.email', 'success');
+        Html::addMsg('new.password.email', 'success');
         redirect(getUrlByName('login'));
     }
 
@@ -80,17 +78,17 @@ class RecoverController extends MainController
         $user_id    = UserModel::getPasswordActivate($code);
 
         if (!$user_id) {
-            addMsg('code-incorrect', 'error');
+            Html::addMsg('code-incorrect', 'error');
             redirect(getUrlByName('recover'));
         }
 
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
-        pageError404($user);
+        Html::pageError404($user);
 
         return Tpl::agRender(
             '/auth/newrecover',
             [
-                'meta'  => meta($m = [], Translate::get('password recovery'), Translate::get('info-recover')),
+                'meta'  => Meta::get($m = [], Translate::get('password recovery'), Translate::get('info-recover')),
                 'data'  => [
                     'code'      => $code,
                     'user_id'   => $user_id['activate_user_id'],
@@ -122,7 +120,7 @@ class RecoverController extends MainController
 
         UserModel::editRecoverFlag($user_id);
 
-        addMsg('password changed', 'success');
+        Html::addMsg('password changed', 'success');
         redirect(getUrlByName('login'));
     }
 
@@ -133,13 +131,13 @@ class RecoverController extends MainController
         $activate_email = UserModel::getEmailActivate($code);
 
         if (!$activate_email) {
-            addMsg('code-used', 'error');
+            Html::addMsg('code-used', 'error');
             redirect('/');
         }
 
         UserModel::EmailActivate($activate_email['user_id']);
 
-        addMsg('yes-email-pass', 'success');
+        Html::addMsg('yes-email-pass', 'success');
         redirect(getUrlByName('login'));
     }
 }

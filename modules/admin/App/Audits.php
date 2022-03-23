@@ -5,7 +5,7 @@ namespace Modules\Admin\App;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{PostModel, AnswerModel, CommentModel};
 use Modules\Admin\App\Models\LogModel;
-use Translate, UserData;
+use Translate, UserData, Meta;
 
 class Audits
 {
@@ -45,7 +45,7 @@ class Audits
         return view(
             '/view/default/audit/audits',
             [
-                'meta'  => meta($m = [], Translate::get($type)),
+                'meta'  => Meta::get($m = [], Translate::get($type)),
                 'data' => [
                     'sheet'         => $sheet,
                     'type'          => $type,
@@ -70,7 +70,7 @@ class Audits
         return view(
             '/view/default/audit/logs',
             [
-                'meta'  => meta($m = [], Translate::get('logs')),
+                'meta'  => Meta::get($m = [], Translate::get('logs')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

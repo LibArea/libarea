@@ -15,7 +15,7 @@ $form->html_form($user['trust_level'], Config::get('form/user-security'));
 
       <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
-        <?= sumbit(Translate::get('edit')); ?>
+        <?= Html::sumbit(Translate::get('edit')); ?>
       </fieldset>
     </form>
   </div>

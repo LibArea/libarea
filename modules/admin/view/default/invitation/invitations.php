@@ -24,17 +24,17 @@
             <?= $inv['invitation_email']; ?>
           </span>
           <sup>id<?= $inv['active_uid']; ?></sup>
-          <span class="text-sm"> - <?= lang_date($inv['active_time']); ?>
+          <span class="text-sm"> - <?= Html::langDate($inv['active_time']); ?>
           <?php } else { ?>
             <span class="gray-600 lowercase text-sm">
-              <?= $inv['invitation_email']; ?> &nbsp; <?= lang_date($inv['add_time']); ?>
+              <?= $inv['invitation_email']; ?> &nbsp; <?= Html::langDate($inv['add_time']); ?>
             </span>
           <?php } ?>
           </span>
       </div>
     <?php } ?>
   <?php } else { ?>
-    <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 </div>
 </main>

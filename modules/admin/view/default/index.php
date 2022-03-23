@@ -14,7 +14,7 @@
       <div class="gray">
         <span class="gray-600 text-sm">id<?= $user['id']; ?></span>
         <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
-        <span class="gray-600 lowercase"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
+        <span class="gray-600 lowercase"> — <?= Html::langDate($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
       </div>
     <?php } ?>
   </div>
@@ -28,7 +28,7 @@
           <?= $log['request']; ?>
         </a>
         <span class="gray-600 lowercase">
-          — (<?= Translate::get($log['action_type']); ?>) <?= lang_date($log['add_date']); ?>
+          — (<?= Translate::get($log['action_type']); ?>) <?= Html::langDate($log['add_date']); ?>
         </span>
       </div>
     <?php } ?>

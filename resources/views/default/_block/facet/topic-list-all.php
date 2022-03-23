@@ -2,7 +2,7 @@
      <div class="w-50 mb20 mb-w-100 <?php if (($key + 1) % 2 == 0) { ?> pl20 mb-pl0<?php } ?>">
      <div class="flex">
        <a title="<?= $facet['facet_title']; ?>" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
-         <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'img-lg'); ?>
+         <?= Html::image($facet['facet_img'], $facet['facet_title'], 'img-lg', 'logo', 'max'); ?>
        </a>
        <div class="ml5 w-100">
 

@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
-use Validation, Translate, UserData;
+use Validation, Translate, UserData, Meta, Html;
 
 class Badges
 {
@@ -22,7 +22,7 @@ class Badges
         return view(
             '/view/default/badge/badges',
             [
-                'meta'  => meta($m = [], Translate::get('badges')),
+                'meta'  => Meta::get($m = [], Translate::get('badges')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -39,7 +39,7 @@ class Badges
         return view(
             '/view/default/badge/add',
             [
-                'meta'  => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('badges'))),
+                'meta'  => Meta::get($m = [], sprintf(Translate::get('add.option'), Translate::get('badges'))),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,
@@ -54,12 +54,12 @@ class Badges
     {
         $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getId($badge_id);
-        pageError404($badge);
+        Html::pageError404($badge);
 
         return view(
             '/view/default/badge/edit',
             [
-                'meta'  => meta($m = [], Translate::get('edit')),
+                'meta'  => Meta::get($m = [], Translate::get('edit')),
                 'data'  => [
                     'badge' => $badge,
                     'sheet' => $sheet,
@@ -105,7 +105,7 @@ class Badges
         return view(
             '/view/default/badge/user-add',
             [
-                'meta'  => meta($m = [], Translate::get('reward the user')),
+                'meta'  => Meta::get($m = [], Translate::get('reward the user')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -126,7 +126,7 @@ class Badges
             ]
         );
 
-        addMsg('successfully', 'success');
+        Html::addMsg('successfully', 'success');
 
         redirect('/admin/users/' . $uid . '/edit');
     }
@@ -171,7 +171,7 @@ class Badges
             ]
         );
 
-        addMsg('the command is executed', 'success');
+        Html::addMsg('the command is executed', 'success');
 
         redirect('/admin/users/' . $uid . '/edit');
     }

@@ -37,7 +37,7 @@
 
       <?= Tpl::import('/_block/editor/editor', ['height'  => '250px', 'type' => 'page', 'id' => 0]); ?>
 
-      <?= sumbit(Translate::get('create')); ?>
+      <?= Html::sumbit(Translate::get('create')); ?>
     </form>
   </div>
 </main>

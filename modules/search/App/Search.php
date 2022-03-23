@@ -5,7 +5,7 @@ namespace Modules\Search\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Search\App\Models\SearchModel;
 use Modules\Search\App\Helper;
-use Translate, Config, UserData;
+use Translate, Config, UserData, Meta;
 
 use Wamania\Snowball\StemmerFactory;
 use voku\helper\StopWords;
@@ -22,7 +22,7 @@ class Search
     }
 
     public function index()
-    {    
+    {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
         $query  = Request::getGet('q');
@@ -34,7 +34,7 @@ class Search
         if (!in_array($type, $arr)) {
             redirect(getUrlByName('search'));
         }
- 
+
         if ($query) {
 
             if ($query == '') {
@@ -56,12 +56,18 @@ class Search
             );
         }
 
+        $m = [
+            'og'    => false,
+            'url'   => false,
+        ];
+
         $count = $count ?? 0;
+        $result = $result ?? 0;
         $facet = $type == 'post' ? 'topic' : 'category';
         return view(
             '/view/default/search',
             [
-                'meta'  => meta($m = [], Translate::get('search')),
+                'meta'  => Meta::get($m, Translate::get('search')),
                 'user'  => $this->user,
                 'data'  => [
                     'result'        => $result ? Helper::handler($result) : null,

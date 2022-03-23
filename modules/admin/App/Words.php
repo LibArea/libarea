@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\ContentModel;
-use Translate;
+use Translate, Meta;
 
 class Words
 {
@@ -16,7 +16,7 @@ class Words
         return view(
             '/view/default/word/words',
             [
-                'meta'  => meta($m = [], Translate::get('words')),
+                'meta'  => Meta::get($m = [], Translate::get('words')),
                 'data'  => [
                     'words' => ContentModel::getStopWords(),
                     'sheet' => $sheet,
@@ -32,7 +32,7 @@ class Words
         return view(
             '/view/default/word/add',
             [
-                'meta'  => meta($m = [], sprintf(Translate::get('add.option'), Translate::get('word'))),
+                'meta'  => Meta::get($m = [], sprintf(Translate::get('add.option'), Translate::get('word'))),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,

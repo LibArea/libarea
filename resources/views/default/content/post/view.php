@@ -1,9 +1,9 @@
 <?php $post = $data['post']; ?>
 <div class="w110 mb-none center">
   <div class="sticky top-xl">
-    <?= votes($user['id'], $post, 'post', 'ps', 'text-2xl middle mt15', 'block'); ?>
+    <?= Html::votes($user['id'], $post, 'post', 'ps', 'text-2xl middle mt15', 'block'); ?>
     <div class="pt20">
-      <?= favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl'); ?>
+      <?= Html::favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
 </div>
@@ -32,7 +32,7 @@
 
         <h1><?= $post['post_title']; ?></h1>
         <div class="text-sm lowercase flex gray-600">
-          <?= $post['post_date_lang']; ?>
+          <?= Html::langDate($post['post_date']); ?>
           <?php if ($post['modified']) { ?>
             (<?= Translate::get('ed'); ?>)
           <?php } ?>
@@ -76,12 +76,12 @@
       </div>
 
       <?php if ($post['post_thumb_img']) { ?>
-        <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb right ml15', 'thumbnails'); ?>
+        <?= Html::image($post['post_thumb_img'], $post['post_title'],  'thumb right ml15', 'post', 'thumbnails'); ?>
       <?php } ?>
 
       <div class="post-body max-w780 full">
         <div class="post">
-          <?= $post['post_content']; ?>
+          <?= Content::text($post['post_content'], 'text'); ?>
         </div>
         <?php if ($post['post_url_domain']) { ?>
           <div class="mb15">
@@ -107,7 +107,7 @@
 
       <div class="br-box-gray flex items-center mb5">
         <div class="left p10 none mb-block">
-          <?= votes($user['id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
+          <?= Html::votes($user['id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
         </div>
 
         <ul class="list-none w-100 lowercase">
@@ -117,7 +117,7 @@
             </div>
             <div class="center">
               <a title="<?= $post['login']; ?>" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
-                <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava-base'); ?>
+                <?= Html::image($post['avatar'], $post['login'], 'ava-base', 'avatar', 'small'); ?>
               </a>
             </div>
           </li>
@@ -128,7 +128,7 @@
             <div class="center">
               <?php if (!empty($data['last_user']['answer_id'])) { ?>
                 <a title="<?= $data['last_user']['login']; ?>" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
-                  <?= user_avatar_img($data['last_user']['avatar'], 'small', $data['last_user']['login'], 'ava-base'); ?>
+                  <?= Html::image($data['last_user']['avatar'], $data['last_user']['login'], 'ava-base', 'avatar', 'small'); ?>
                 </a>
               <?php } else { ?>
                 <span class="gray-600 text-sm">—</span>
@@ -144,7 +144,7 @@
               <?php } ?>
             </div>
             <div class="center text-sm">
-              <?= num_word($post['post_hits_count'], Translate::get('num-view'), false); ?>
+              <?= Html::numWord($post['post_hits_count'], Translate::get('num-view'), false); ?>
             </div>
           </li>
           <li class="left p10 mb-none gray-600 text-sm">
@@ -156,7 +156,7 @@
               <?php } ?>
             </div>
             <div class="center">
-              <?= num_word($post['amount_content'], Translate::get('num-answer'), false); ?>
+              <?= Html::numWord($post['amount_content'], Translate::get('num-answer'), false); ?>
             </div>
           </li>
         </ul>
@@ -180,7 +180,7 @@
         </div>
 
         <div class="right ml15 p10 none mb-block">
-          <?= favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'mob', 'text-2xl'); ?>
+          <?= Html::favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'mob', 'text-2xl'); ?>
         </div>
       </div>
 
@@ -195,7 +195,7 @@
             <div class="clear pt5">
               <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
               <input type="hidden" name="answer_id" value="0">
-              <?= sumbit(Translate::get('reply')); ?>
+              <?= Html::sumbit(Translate::get('reply')); ?>
             </div>
           </form>
 
@@ -212,13 +212,18 @@
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_feature'] == 0) {
       Tpl::import('/_block/comments-view', ['data' => $data, 'post' => $post, 'user' => $user]);
-      if ($post['post_closed'] == 1) echo no_content(Translate::get('post.closed'), 'bi-door-closed');
+      if ($post['post_closed'] == 1) { 
+        echo Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('post.closed'), 'icon' => 'bi-door-closed']);
+      }
+
     } else {
       Tpl::import('/_block/questions-view', ['data' => $data, 'post' => $post, 'user' => $user]);
-      if ($post['post_closed'] == 1) echo no_content(Translate::get('question.closed'), 'bi-door-closed');
+      if ($post['post_closed'] == 1) {
+         echo Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('question.closed'), 'icon' => 'bi-door-closed']);
+      }
     }
   } else {
-    echo no_content(Translate::get('this.draft'), 'bi-journal-medical');
+    echo Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('this.draft'), 'icon' => 'bi-door-closed']);
   } ?>
 </main>
 <aside>
@@ -226,7 +231,7 @@
     <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['facets'] as $topic) { ?>
-        <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'img-base'); ?>
+        <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
 
         <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
           <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky center mt5 mr5">

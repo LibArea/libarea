@@ -5,6 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\User\UserModel;
 use App\Models\AuthModel;
+use Html;
 
 class RememberController extends MainController
 {
@@ -79,7 +80,7 @@ class RememberController extends MainController
         }
 
         $rememberMeExpire = 30;
-        $validator = randomString('crypto', 20);
+        $validator = Html::randomString('crypto', 20);
         $expires = time() + 60 * 60 * 24 * $rememberMeExpire;
 
         // Установить
@@ -100,8 +101,8 @@ class RememberController extends MainController
     public static function rememberMe($uid)
     {
         $rememberMeExpire       = 30;
-        $selector               = randomString('crypto', 12);
-        $validator              = randomString('crypto', 20);
+        $selector               = Html::randomString('crypto', 12);
+        $validator              = Html::randomString('crypto', 20);
         $expires                = time() + 60 * 60 * 24 * $rememberMeExpire;
 
         $data = [

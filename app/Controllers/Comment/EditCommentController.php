@@ -5,7 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{CommentModel, PostModel};
-use Content, Tpl, UserData;
+use Content, Tpl, Html, UserData;
 
 class EditCommentController extends MainController
 {
@@ -26,7 +26,7 @@ class EditCommentController extends MainController
         // Access verification
         // Проверка доступа 
         $comment = CommentModel::getCommentsId($comment_id);
-        if (!accessСheck($comment, 'comment', $this->user, 0, 0)) return false;
+        if (!Html::accessСheck($comment, 'comment', $this->user, 0, 0)) return false;
 
         Tpl::agIncludeTemplate(
             '/_block/form/edit-form-comment',
@@ -48,11 +48,11 @@ class EditCommentController extends MainController
         $content    = $_POST['comment']; // для Markdown
 
         $post       = PostModel::getPost($post_id, 'id', $this->user);
-        pageRedirection($post, '/');
+        Html::pageRedirection($post, '/');
 
         // Access verification 
         $comment = CommentModel::getCommentsId($comment_id);
-        if (!accessСheck($comment, 'comment', $this->user, 0, 0)) {
+        if (!Html::accessСheck($comment, 'comment', $this->user, 0, 0)) {
             redirect('/');
         }
 

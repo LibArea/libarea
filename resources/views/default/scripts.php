@@ -18,7 +18,7 @@
         );
       }));
   <?php } ?>
-  <?php if ($msg = getMsg()) { ?>
+  <?php if ($msg = Html::getMsg()) { ?>
     <?php foreach ($msg as $message) {  ?>
       <?php if ($message[1] == 'error') { ?>
         Notiflix.Notify.failure('<?= Translate::get($message[0]); ?>');

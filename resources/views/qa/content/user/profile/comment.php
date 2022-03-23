@@ -8,9 +8,9 @@
       </div>
       <?php if (!empty($data['comments'])) { ?>
         <?= Tpl::import('/content/comment/comment', ['answer' => $data['comments'], 'user' => $user]); ?>
-        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/comments'); ?>
+        <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/comments'); ?>
       <?php } else { ?>
-        <?= no_content(Translate::get('no.comments'), 'bi bi-info-lg'); ?>
+        <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
       <?php } ?>
     </main>
     <aside>

@@ -115,7 +115,6 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     location,
                     public_email,
                     skype,
-                    twitter,
                     telegram,
                     vk,
                     created_at,

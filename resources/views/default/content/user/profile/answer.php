@@ -9,9 +9,9 @@
         <div class="box-white"> 
           <?= Tpl::import('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
         </div>   
-        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/answers'); ?>
+        <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/answers'); ?>
       <?php } else { ?>
-        <?= no_content(Translate::get('no.answers'), 'bi bi-info-lg'); ?>
+        <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.answers'), 'icon' => 'bi-info-lg']); ?>
       <?php } ?>
     </main>
     <aside>

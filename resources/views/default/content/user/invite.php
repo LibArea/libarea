@@ -8,7 +8,7 @@
         <input type="text" name="invite" id="invite">
       </fieldset>
       <fieldset>
-        <?= sumbit(Translate::get('sign.in')); ?>
+        <?= Html::sumbit(Translate::get('sign.in')); ?>
         <span class="ml15 text-sm"><a href="<?= getUrlByName('recover'); ?>">
             <?= Translate::get('forgot.password'); ?>?</a>
         </span>

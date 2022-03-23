@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, PostModel, FeedModel, AnswerModel, CommentModel};
-use Content, Config, Translate, Tpl, UserData;
+use Config, Translate, Tpl, Meta, Html, UserData;
 
 class ProfileController extends MainController
 {
@@ -46,7 +46,7 @@ class ProfileController extends MainController
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,
-                    'created_at'        => lang_date($profile['created_at']),
+                    'created_at'        => Html::langDate($profile['created_at']),
                     'count'             => $count,
                     'topics'            => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
                     'blogs'             => FacetModel::getOwnerFacet($profile['id'], 'blog'),
@@ -161,7 +161,7 @@ class ProfileController extends MainController
     public static function profile()
     {
         $result = Request::get('login');
-        pageError404($profile = UserModel::getUser($result, 'slug'));
+        Html::pageError404($profile = UserModel::getUser($result, 'slug'));
 
         if ($profile['ban_list'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
@@ -198,13 +198,12 @@ class ProfileController extends MainController
         $desc  = sprintf(Translate::get($sheet . '.desc'), $name, $information ?? '...');
 
         $m = [
-            'og'         => true,
-            'twitter'    => true,
-            'imgurl'     => '/uploads/users/avatars/' . $user['avatar'],
-            'url'        => getUrlByName('profile', ['login' => $user['login']]),
+            'og'        => true,
+            'imgurl'    => '/uploads/users/avatars/' . $user['avatar'],
+            'url'       => getUrlByName('profile', ['login' => $user['login']]),
         ];
 
-        return meta($m, $title, $desc);
+        return Meta::get($m, $title, $desc);
     }
 
     // Sending personal messages

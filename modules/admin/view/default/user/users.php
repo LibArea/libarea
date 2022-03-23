@@ -37,7 +37,7 @@
             <?= $user['id']; ?>
           </td>
           <td class="center">
-            <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-lg'); ?>
+            <?= Html::image($user['avatar'], $user['login'], 'ava-lg', 'avatar', 'max'); ?>
           </td>
           <td>
             <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
@@ -111,9 +111,9 @@
       <?php } ?>
     </table>
   <?php } else { ?>
-    <?= no_content(Translate::get('no'), 'bi-info-lg'); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
-  <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('admin.users')); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('admin.users')); ?>
 </div>
 </div>
 </main>

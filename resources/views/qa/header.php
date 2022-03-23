@@ -33,7 +33,7 @@ $facet  = $data['facet'] ?? false; ?>
             <i class="bi-list gray-600 text-xl mr10"></i>
           </div>
           <ul class="dropdown left">
-            <?= tabs_nav(
+            <?= Html::nav(
               'menu',
               $type,
               $user,
@@ -66,7 +66,7 @@ $facet  = $data['facet'] ?? false; ?>
         <div>
           <div class="flex right ml30 mb-ml10 items-center">
 
-            <?= add_post($facet, $user['id']); ?>
+            <?= Html::addPost($facet, $user['id']); ?>
 
             <div id="toggledark" class="only-icon p10 ml20 mb-ml10">
               <i class="bi-brightness-high gray-600 text-xl"></i>
@@ -87,10 +87,10 @@ $facet  = $data['facet'] ?? false; ?>
 
             <div class="ml45 mb-ml20 relative">
               <div class="trigger">
-                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava-base'); ?>
+                <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
-                <?= tabs_nav(
+                <?= Html::nav(
                   'menu',
                   $type,
                   $user,

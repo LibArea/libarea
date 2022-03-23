@@ -37,7 +37,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?02');
                     <?= Translate::get('menu'); ?>
                   </div>
                   <ul class="dropdown">
-                    <?= tabs_nav(
+                    <?= Html::nav(
                       'menu',
                       'admin',
                       $user,
@@ -54,7 +54,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?02');
                   <?= $user['login']; ?>
                 </div>
                 <ul class="dropdown">
-                  <?= tabs_nav(
+                  <?= Html::nav(
                     'menu',
                     'dir',
                     $user,

@@ -6,7 +6,7 @@
         <?= $page['post_title']; ?>
       </h1>
       <div class="post-body max-w780 full">
-        <?= $page['post_content']; ?>
+        <?= Content::text($page['post_content'], 'text'); ?>
       </div>
     <?php } else { ?>
       <div class="bg-red-200 p15 center mr10">
@@ -15,7 +15,7 @@
     <?php } ?>
   </article>
   <div class="box-flex-white bg-violet-50 text-2xl">
-    <?= votes($user['id'], $page, 'post', 'ps', 'middle mr15'); ?>
+    <?= Html::votes($user['id'], $page, 'post', 'ps', 'middle mr15'); ?>
       <div class="gray-600 italic">
         <?= $page['post_modified']; ?>
         <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
@@ -33,7 +33,7 @@
         <?= Translate::get('blog'); ?>
       </h3>
       <div class="mb10">
-        <?= facet_logo_img($data['facet']['facet_img'], 'min', $data['facet']['facet_title'], 'img-base'); ?>
+        <?= Html::image($data['facet']['facet_img'], $data['facet']['facet_title'], 'img-base', 'logo', 'small'); ?>
         <a href="<?= getUrlByName('blog', ['slug' => $data['facet']['facet_slug']]); ?>">
           <?= $data['facet']['facet_title']; ?></a>
       </div>

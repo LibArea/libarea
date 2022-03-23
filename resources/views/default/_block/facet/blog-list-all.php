@@ -1,7 +1,7 @@
        <?php foreach ($facets as $key => $facet) { ?>
         <div class="mb20 items-center flex flex-row">
           <a title="<?= $facet['facet_title']; ?>" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
-            <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'ava-lg'); ?>
+            <?= Html::image($facet['facet_img'], $facet['facet_title'], 'ava-lg', 'logo', 'max'); ?>
           </a>
           <div class="ml5 w-100">
             <?php if ($user['id']) { ?>

@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, UserModel};
-use UploadImage, Validation, Translate, Tpl, UserData;
+use UploadImage, Validation, Translate, Tpl, Meta, Html, UserData;
 
 class SettingController extends MainController
 {
@@ -24,7 +24,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/setting',
             [
-                'meta'  => meta($m = [], Translate::get('setting')),
+                'meta'  => Meta::get($m = [], Translate::get('setting')),
                 'data'  => [
                     'sheet'         => 'settings',
                     'type'          => 'user',
@@ -73,14 +73,13 @@ class SettingController extends MainController
                 'location'             => Request::getPostString('location', null),
                 'public_email'         => $public_email ?? null,
                 'skype'                => Request::getPostString('skype', null),
-                'twitter'              => Request::getPostString('twitter', null),
                 'telegram'             => Request::getPostString('telegram', null),
                 'vk'                   => Request::getPostString('vk', null),
             ]
         );
 
 
-        addMsg('change.saved', 'success');
+        Html::addMsg('change.saved', 'success');
         redirect($redirect);
     }
 
@@ -92,7 +91,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/avatar',
             [
-                'meta'  => meta($m = [], Translate::get('edit')),
+                'meta'  => Meta::get($m = [], Translate::get('edit')),
                 'data'  => [
                     'sheet' => 'avatar',
                     'type'  => 'user',
@@ -121,17 +120,17 @@ class SettingController extends MainController
             UploadImage::cover($cover, $this->user['id'], 'user');
         }
 
-        addMsg('change.saved', 'success');
+        Html::addMsg('change.saved', 'success');
         redirect($redirect);
     }
 
     // Форма изменение пароля
     function securityForm()
     {
-         return Tpl::agRender(
+        return Tpl::agRender(
             '/user/setting/security',
             [
-                'meta'  => meta($m = [], sprintf(Translate::get('edit.option'), Translate::get('password'))),
+                'meta'  => Meta::get($m = [], sprintf(Translate::get('edit.option'), Translate::get('password'))),
                 'data'  => [
                     'password'      => '',
                     'password2'     => '',
@@ -152,12 +151,12 @@ class SettingController extends MainController
 
         $redirect = getUrlByName('setting.security', ['login' => $this->user['login']]);
         if ($password2 != $password3) {
-            addMsg('pass.match.err', 'error');
+            Html::addMsg('pass.match.err', 'error');
             redirect($redirect);
         }
 
         if (substr_count($password2, ' ') > 0) {
-            addMsg('password-spaces', 'error');
+            Html::addMsg('password-spaces', 'error');
             redirect($redirect);
         }
 
@@ -165,7 +164,7 @@ class SettingController extends MainController
 
         $userInfo   = UserModel::userInfo($this->user['email']);
         if (!password_verify($password, $userInfo['password'])) {
-            addMsg('old.password.err', 'error');
+            Html::addMsg('old.password.err', 'error');
             redirect($redirect);
         }
 
@@ -173,7 +172,7 @@ class SettingController extends MainController
 
         SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
 
-        addMsg('password changed', 'success');
+        Html::addMsg('password changed', 'success');
 
         redirect($redirect);
     }
@@ -218,7 +217,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/notifications',
             [
-                'meta'  => meta($m = [], Translate::get('notifications')),
+                'meta'  => Meta::get($m = [], Translate::get('notifications')),
                 'data'  => [
                     'sheet'     => 'notifications',
                     'type'      => 'user',
@@ -242,7 +241,7 @@ class SettingController extends MainController
         );
 
 
-        addMsg('change.saved', 'success');
+        Html::addMsg('change.saved', 'success');
 
         redirect(getUrlByName('setting.notifications', ['login' => $this->user['login']]));
     }

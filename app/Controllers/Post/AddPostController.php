@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
-use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domain, Tpl, UserData;
+use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domain, Tpl, Meta, Html, UserData;
 
 class AddPostController extends MainController
 {
@@ -23,7 +23,7 @@ class AddPostController extends MainController
     {
         if ($type == 'page') {
             $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
-            pageError404($count);
+            Html::pageError404($count);
         }
 
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
@@ -45,7 +45,7 @@ class AddPostController extends MainController
         return Tpl::agRender(
             $puth,
             [
-                'meta'      => meta([], sprintf(Translate::get('add.option'), Translate::get('post'))),
+                'meta'      => Meta::get([], sprintf(Translate::get('add.option'), Translate::get('post'))),
                 'data'  => [
                     'facets'    => ['topic' => $topic],
                     'blog'      => FacetModel::getFacetsUser($this->user['id'], 'blog'),
@@ -75,7 +75,7 @@ class AddPostController extends MainController
 
         if ($type == 'page') {
             $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
-            pageError404($count);
+            Html::pageError404($count);
         }
 
         // Related posts 
@@ -264,7 +264,7 @@ class AddPostController extends MainController
         }
 
         $post = PostModel::getPost($post_id, 'id', $this->user);
-        pageError404($post);
+        Html::pageError404($post);
 
         ActionModel::setRecommend($post_id, $post['post_is_recommend']);
 

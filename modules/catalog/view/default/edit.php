@@ -26,7 +26,7 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
 
       <fieldset class="gray-600">
         <?= $domain['item_id']; ?>. <?= $domain['item_url_domain']; ?>
-        <?= website_img($domain['item_url_domain'], 'favicon', $domain['item_url_domain'], ' ml10'); ?>
+        <?= Html::websiteImage($domain['item_url_domain'], 'favicon', $domain['item_url_domain'], ' ml10'); ?>
         <span class="add-favicon text-sm" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
       </fieldset>
 

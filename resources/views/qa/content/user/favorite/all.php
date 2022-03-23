@@ -23,7 +23,7 @@
             <?= $fav['item_title_url']; ?>
           </a>
           <span class="green text-sm">
-            <?= website_img($fav['item_url_domain'], 'favicon', $fav['item_url_domain'], 'favicons'); ?>
+            <?= Html::websiteImage($fav['item_url_domain'], 'favicon', $fav['item_url_domain'], 'favicons'); ?>
             <?= $fav['item_url_domain']; ?>
             <a target="_blank" href="<?= $fav['item_url']; ?>" class="item_cleek" data-id="<?= $fav['item_id']; ?>" rel="nofollow noreferrer ugc">
               <i class="bi-folder-symlink middle ml15 mr5"></i>
@@ -63,10 +63,7 @@
       </div>
     <?php } ?>
   <?php } else { ?>
-    <div class="p20 center gray-600">
-      <i class="bi-bookmark block text-8xl"></i>
-      <?= Translate::get('no.favorites'); ?>
-    </div>
+    <?= Tpl::import('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.favorites'), 'icon' => 'bi-bookmark']); ?>
   <?php } ?>
 </main>
 <aside>

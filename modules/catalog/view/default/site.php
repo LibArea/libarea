@@ -4,15 +4,15 @@
     <?php if ($item['item_published'] == 1) { ?>
       <li>
         <div class="list-items__thumb mb-none">
-          <?= website_img($item['item_url_domain'], 'thumbs', $item['item_title_url'], 'list-items__thumb-image'); ?>
+          <?= Html::websiteImage($item['item_url_domain'], 'thumbs', $item['item_title_url'], 'list-items__thumb-image'); ?>
         </div>
         <div class="list-items__description">
           <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
             <h2><?= $item['item_title_url']; ?></h2>
           </a>
-          <?= facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', $screening); ?>
+          <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', $screening); ?>
 
-          <?php if (accessСheck($item, 'item', $user, false, false) === true) { ?>
+          <?php if (Html::accessСheck($item, 'item', $user, false, false) === true) { ?>
             <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
               <i class="bi-pencil text-sm"></i>
             </a> - <?= $item['item_following_link']; ?>
@@ -28,7 +28,7 @@
           </div>
           <div class="list-items__footer">
             <div class="green">
-              <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>
+              <?= Html::websiteImage($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>
               <?= $item['item_url_domain']; ?>
               <?php if ($item['item_github_url']) { ?>
                 <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
@@ -44,8 +44,8 @@
               </div>
             </div>
             <div class="flex right gray-600">
-              <?= favorite($user['id'], $item['item_id'], 'website', $item['tid'], 'ps', 'mr20'); ?>
-              <?= votes($user['id'], $item, 'item', 'ps', 'mr5'); ?>
+              <?= Html::favorite($user['id'], $item['item_id'], 'website', $item['tid'], 'ps', 'mr20'); ?>
+              <?= Html::votes($user['id'], $item, 'item', 'ps', 'mr5'); ?>
             </div>
           </div>
         </div>

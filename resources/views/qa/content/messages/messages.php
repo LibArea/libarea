@@ -9,17 +9,17 @@
           <div class="text-sm flex">
             <?php if ($msg['dialog_sender_id'] == $user['id']) { ?>
               <a href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
-                <?= user_avatar_img($msg['msg_to_user']['avatar'], 'small', $msg['msg_to_user']['login'], 'ava-sm'); ?>
+                <?= Html::image($msg['msg_to_user']['avatar'], $msg['msg_to_user']['login'], 'ava-sm', 'avatar', 'small'); ?>
                 <?= $msg['msg_to_user']['login']; ?>
               </a>
             <?php } else { ?>
               <a class="mr5" href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
-                <?= user_avatar_img($msg['msg_user']['avatar'], 'small', $msg['msg_user']['login'], 'ava-sm'); ?>
+                <?= Html::image($msg['msg_user']['avatar'], $msg['msg_user']['login'], 'ava-sm', 'avatar', 'small'); ?>
                 <?= $msg['msg_user']['login']; ?>
               </a>
             <?php } ?>
             <span class="gray ml10 lowercase">
-              <?= lang_date($msg['dialog_update_time']); ?>
+              <?= Html::langDate($msg['dialog_update_time']); ?>
             </span>
           </div>
           <div class="p15 br-rd5 mt5 relative bg-blue-100<?php if (!$msg['unread'] > 0) { ?> bg-purple<?php } ?> gray">
@@ -39,10 +39,7 @@
       <?php } ?>
   </div>
 <?php } else { ?>
-    <div class="m10 p15 center gray-600">
-      <i class="bi-envelope block text-8xl"></i>
-      <?= Translate::get('no.dialogs'); ?>
-    </div>
+  <?= Tpl::import('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.dialogs'), 'icon' => 'bi-envelope']); ?>
 <?php } ?>
 </main>
 <aside>

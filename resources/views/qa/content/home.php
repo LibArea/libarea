@@ -2,7 +2,7 @@
   <div class="box-flex ml10">
     <ul class="nav">
 
-      <?= tabs_nav(
+      <?= Html::nav(
         'nav',
         $data['sheet'],
         $user,
@@ -39,7 +39,7 @@
   <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
 
   <div class="mt10 mb15">
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
   </div>
 </main>
 
@@ -76,7 +76,7 @@
       ?>
         <div class="flex relative pt5 pb5 items-center justify-between hidden">
           <a class="gray-600" href="<?= $url; ?>">
-            <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'img-base'); ?>
+            <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
             <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($user['id'] == $topic['facet_user_id']) { ?>
@@ -113,11 +113,11 @@
           <?php foreach ($data['latest_answers'] as $answer) { ?>
             <li>
               <a title="<?= $answer['login']; ?>" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
-                <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava-sm'); ?>
+                <?= Html::image($answer['avatar'], $answer['login'], 'ava-sm', 'avatar', 'small'); ?>
               </a>
-              <span class="middle lowercase gray-600"><?= lang_date($answer['answer_date']); ?></span>
+              <span class="middle lowercase gray-600"><?= Html::langDate($answer['answer_date']); ?></span>
               <a class="last-content_telo" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
-                <?= cutWords($answer['answer_content'], 8); ?>...
+                <?= Html::cutWords($answer['answer_content'], 8); ?>...
               </a>
             </li>
           <?php } ?>

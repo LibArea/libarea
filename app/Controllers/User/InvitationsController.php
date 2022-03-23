@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{InvitationModel, UserModel};
-use Validation, Translate, SendEmail, Tpl, UserData;
+use Validation, Translate, SendEmail, Tpl, Meta, Html, UserData;
 
 class InvitationsController extends MainController
 {
@@ -22,7 +22,7 @@ class InvitationsController extends MainController
         return Tpl::agRender(
             '/user/invite',
             [
-                'meta'  => meta($m = [], Translate::get('invite')),
+                'meta'  => Meta::get($m = [], Translate::get('invite')),
                 'data'  => [
                     'sheet' => 'invite',
                     'type'  => 'user',
@@ -37,7 +37,7 @@ class InvitationsController extends MainController
         return Tpl::agRender(
             '/user/invitation',
             [
-                'meta'  => meta($m = [], Translate::get('invites')),
+                'meta'  => Meta::get($m = [], Translate::get('invites')),
                 'data'  => [
                     'invitations'   => InvitationModel::userResult($this->user['id']),
                     'count_invites' => $this->user['invitation_available'],
@@ -59,23 +59,23 @@ class InvitationsController extends MainController
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['email'])) {
-            addMsg('user-already', 'error');
+            Html::addMsg('user-already', 'error');
             redirect($redirect);
         }
 
         $inv_user = InvitationModel::duplicate($invitation_email);
         if ($inv_user['invitation_email'] == $invitation_email) {
-            addMsg('invate-to-replay', 'error');
+            Html::addMsg('invate-to-replay', 'error');
             redirect($redirect);
         }
 
         // TODO : + Config::get('invite.limit')
         if ($this->user['invitation_available'] >= 5) {
-            addMsg('invate.limit.stop', 'error');
+            Html::addMsg('invate.limit.stop', 'error');
             redirect($redirect);
         }
 
-        $invitation_code = randomString('crypto', 25);
+        $invitation_code = Html::randomString('crypto', 25);
 
         InvitationModel::create(
             [
@@ -91,7 +91,7 @@ class InvitationsController extends MainController
         $link = getUrlByName('invite.reg', ['code' => $invitation_code]);
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
-        addMsg('invite created', 'success');
+        Html::addMsg('invite created', 'success');
         redirect($redirect);
     }
 }

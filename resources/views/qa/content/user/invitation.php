@@ -8,7 +8,7 @@
         <?php csrf_field(); ?>
         <fieldset>
           <input type="email" name="email">
-          <div class="right pt5"><?= sumbit(Translate::get('send')); ?></div>
+          <div class="right pt5"><?= Html::sumbit(Translate::get('send')); ?></div>
           <div class="text-sm pt5 gray-600"><?= Translate::get('enter'); ?> E-mail</div>
         </fieldset>
         <?= Translate::get('invitations left'); ?> <?= 5 - $data['count_invites']; ?>
@@ -21,7 +21,7 @@
         <?php foreach ($data['invitations'] as $invite) { ?>
           <?php if ($invite['active_status'] == 1) { ?>
             <div class="text-sm gray">
-              <?= user_avatar_img($invite['avatar'], 'small', $invite['login'], 'ava'); ?>
+              <?= Html::image($invite['avatar'], $invite['login'], 'ava', 'avatar', 'small'); ?>
               <a href="<?= $invite['login']; ?>"><?= $invite['login']; ?></a>
               - <?= Translate::get('registered'); ?>
             </div>

@@ -14,14 +14,14 @@
       <?php } ?>
       <div class="flex mb10 relative items-center">
         <div class="user-card" data-content_id="<?= $post['post_id']; ?>" data-user_id="<?= $post['id']; ?>">
-          <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'ava-base'); ?>
+          <?= Html::image($post['avatar'], $post['login'], 'ava-base', 'avatar', 'max'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
         <a class="flex black" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
           <div class="ml5">
             <?= $post['login']; ?>
             <div class="gray-600 lowercase text-sm">
-              <?= lang_date($post['post_date']); ?>
+              <?= Html::langDate($post['post_date']); ?>
             </div>
           </div>
         </a>
@@ -33,8 +33,8 @@
             <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
           </a>
           <div class="lowercase">
-            <?= facets($post['facet_list'], 'blog', 'blog', 'text-sm mr15'); ?>
-            <?= facets($post['facet_list'], 'topic', 'topic', 'gray-600 text-sm mr15'); ?>
+            <?= Html::facets($post['facet_list'], 'blog', 'blog', 'text-sm mr15'); ?>
+            <?= Html::facets($post['facet_list'], 'topic', 'topic', 'gray-600 text-sm mr15'); ?>
             <?php if ($post['post_url_domain']) { ?>
               <a class="gray-600 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
@@ -42,21 +42,21 @@
             <?php } ?>
           </div>
           <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray">
-            <?= Content::text(fragment($post['post_content']), 'line'); ?>
+            <?= Content::text(Html::fragment($post['post_content']), 'line'); ?>
             <span class="s_<?= $post['post_id']; ?> show_detail"></span>
           </div>
         </div>
         <?php if ($post['post_content_img']) { ?>
           <div class="mt10 flex-auto">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= post_img($post['post_content_img'], $post['post_title'], 'home-img right br-rd5', 'cover'); ?>
+              <?= Html::image($post['post_content_img'], $post['post_title'], 'home-img right br-rd5', 'post', 'cover'); ?>
             </a>
           </div>
         <?php } else { ?>
           <?php if ($post['post_thumb_img']) { ?>
             <div class="home-img mt15 flex-auto mb-none">
               <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb br-rd5 right', 'thumbnails'); ?>
+                <?= Html::image($post['post_thumb_img'], $post['post_title'],  'thumb br-rd5 right', 'post', 'thumbnails'); ?>
               </a>
             </div>
           <?php } ?>
@@ -64,7 +64,7 @@
       </div>
       <div class="flex flex-row items-center justify-between pt10">
         <div class="flex flex-row">
-          <?= votes($user['id'], $post, 'post', 'ps', 'mr5'); ?>
+          <?= Html::votes($user['id'], $post, 'post', 'ps', 'mr5'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="flex gray-600 ml15" href="<?= $post_url; ?>#comment">
               <i class="bi-chat-text mr5"></i>
@@ -73,15 +73,12 @@
           <?php } ?>
         </div>
         <div class="flex flex-row items-center">
-          <?= favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'ps', ''); ?>
+          <?= Html::favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'ps', ''); ?>
         </div>
       </div>
     </div>
   <?php } ?>
 <?php } else { ?>
   <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>
-  <div class="p20 center gray-600">
-    <i class="bi-journal-richtext block text-8xl"></i>
-    <?= Translate::get('no.posts'); ?>
-  </div>
+  <?= Tpl::import('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.posts'), 'icon' => 'bi-journal-richtext']); ?>
 <?php } ?>

@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
-use Content, Config, Tpl, Translate, UserData;
+use Content, Config, Tpl, Html, Meta, Translate, UserData;
 
 class PostController extends MainController
 {
@@ -58,9 +58,6 @@ class PostController extends MainController
             redirect(getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => $content['post_slug']]));
         }
 
-        $content['post_content']   = Content::text($content['post_content'], 'text');
-        $content['post_date_lang'] = lang_date($content['post_date']);
-
         // Q&A (post_feature == 1) or Discussiona
         $content['amount_content'] = $content['post_answers_count'];
         if ($content['post_feature'] == 0) {
@@ -112,10 +109,9 @@ class PostController extends MainController
         }
 
         $m = [
-            'og'         => true,
-            'twitter'    => true,
-            'imgurl'     => $content_img,
-            'url'        => getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
+            'og'        => true,
+            'imgurl'    => $content_img,
+            'url'       => getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
         ];
 
         $topic = $facets[0]['facet_title'] ?? 'agouti';
@@ -123,7 +119,7 @@ class PostController extends MainController
             $topic = $blog[0]['facet_title'];
         }
 
-        $meta = meta($m, strip_tags($content['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $content['post_date']);
+        $meta = Meta::get($m, strip_tags($content['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $content['post_date']);
 
         $view = $type == 'post' ? '/post/view' : '/page/view';
 
@@ -152,20 +148,18 @@ class PostController extends MainController
         $type_facet = $type == 'info.page' ? 'section' : 'blog';
 
         $facet  = FacetModel::getFacet($slug_facet, 'slug', $type_facet);
-        pageError404($facet);
+        Html::pageError404($facet);
 
         $m = [
-            'og'        => false,
-            'twitter'   => false,
-            'imgurl'    => false,
-            'url'       => getUrlByName('page', ['facet' => $content['post_slug'], 'slug' => $facet['facet_slug']]),
+            'og'    => false,
+            'url'   => getUrlByName('page', ['facet' => $content['post_slug'], 'slug' => $facet['facet_slug']]),
         ];
 
         $title = $content['post_title'] . ' - ' . Translate::get('page');
         return Tpl::agRender(
             '/page/view',
             [
-                'meta'  => meta($m, $title, $desc . ' (' . $facet['facet_title'] . ' - ' . Translate::get('page') . ')'),
+                'meta'  => Meta::get($m, $title, $desc . ' (' . $facet['facet_title'] . ' - ' . Translate::get('page') . ')'),
                 'data'  => [
                     'sheet' => 'page',
                     'type'  => $type,
@@ -199,7 +193,7 @@ class PostController extends MainController
             $content  = PostModel::getPost($slug, 'slug', $user);
         }
 
-        pageError404($content);
+        Html::pageError404($content);
 
         return $content;
     }
@@ -213,7 +207,7 @@ class PostController extends MainController
 
         // Access check
         // Проверка доступа
-        if (!accessСheck($post, 'post', $this->user, 0, 0)) {
+        if (!Html::accessСheck($post, 'post', $this->user, 0, 0)) {
             redirect('/');
         }
 
@@ -247,7 +241,7 @@ class PostController extends MainController
         $page       = $page == 0 ? 1 : $page;
 
         $site       = PostModel::getDomain($domain, $this->user['id']);
-        pageError404($site);
+        Html::pageError404($site);
 
         $site['item_content'] = Content::text($site['item_content_url'], 'line');
 
@@ -255,16 +249,14 @@ class PostController extends MainController
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $site['item_url_domain']);
 
         $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('domain', ['domain' => $domain]),
+            'og'    => false,
+            'url'   => getUrlByName('domain', ['domain' => $domain]),
         ];
 
         return Tpl::agRender(
             '/post/link',
             [
-                'meta'  => meta($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain),
+                'meta'  => Meta::get($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain),
                 'data'  => [
                     'sheet'         => 'domain',
                     'pagesCount'    => ceil($pagesCount / $this->limit),

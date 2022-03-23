@@ -9,7 +9,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
     <ul class="nav">
 
-      <?= tabs_nav(
+      <?= Html::nav(
         'nav',
         $data['type'],
         $user,
@@ -42,7 +42,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
 
       <div class="file-upload mb10" id="file-drag">
         <div class="flex">
-          <?= facet_logo_img($fs['facet_img'], 'max', $fs['facet_title'], 'w94 h94 mr15'); ?>
+          <?= Html::image($fs['facet_img'], $fs['facet_title'], 'w94 h94 mr15', 'logo', 'max'); ?>
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
           <div id="start" class="mt15">
             <input id="file-upload" type="file" name="images" accept="image/*" />
@@ -58,7 +58,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           <div class="flex">
             <?php if ($fs['facet_cover_art']) { ?>
               <div class="mr20">
-                <img src="<?= cover_url($fs['facet_cover_art'], 'blog'); ?>" class="w160 h94 br-box-gray">
+                <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="w160 h94 br-box-gray">
                 <input type="hidden" name="cover" value="<?= $fs['facet_cover_art']; ?>">
               </div>
             <?php } ?>
@@ -73,7 +73,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
         </div>
       <?php } ?>
       <div class="mb20">
-        <?= sumbit(Translate::get('download')); ?>
+        <?= Html::sumbit(Translate::get('download')); ?>
       </div>
 
       <fieldset>
@@ -124,7 +124,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           <h3 class="uppercase-box"><?= Translate::get('parents'); ?></h3>
           <?php foreach ($data['high_arr'] as $high) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $high['facet_slug']]); ?>">
-              <?= facet_logo_img($high['facet_img'], 'max', $high['facet_title'], 'img-base'); ?>
+              <?= Html::image($high['facet_img'], $high['facet_title'], 'img-base', 'logo', 'max'); ?>
               <?= $high['facet_title']; ?>
             </a>
           <?php } ?>
@@ -136,7 +136,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           <h3 class="uppercase-box"><?= Translate::get('children'); ?></h3>
           <?php foreach ($data['low_arr'] as $sub) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $sub['facet_slug']]); ?>">
-              <?= facet_logo_img($sub['facet_img'], 'max', $sub['facet_title'], 'img-base'); ?>
+              <?= Html::image($sub['facet_img'], $sub['facet_title'], 'img-base', 'logo', 'max'); ?>
               <?= $sub['facet_title']; ?>
             </a>
           <?php } ?>
@@ -184,7 +184,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
             <h3 class="uppercase-box"><?= Translate::get('bound (parents)'); ?></h3>
             <?php foreach ($data['high_matching'] as $low_mat) { ?>
               <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $low_mat['facet_slug']]); ?>">
-                <?= facet_logo_img($low_mat['facet_img'], 'max', $low_mat['facet_title'], 'img-base'); ?>
+                <?= Html::image($low_mat['facet_img'], $low_mat['facet_title'], 'img-base', 'logo', 'max'); ?>
                 <?= $low_mat['facet_title']; ?>
               </a>
             <?php } ?>
@@ -207,7 +207,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <?php } ?>
       <fieldset>
         <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">
-        <?= sumbit(Translate::get('edit')); ?>
+        <?= Html::sumbit(Translate::get('edit')); ?>
       </fieldset>
     </form>
   </div>

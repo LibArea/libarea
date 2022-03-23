@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, PostModel};
-use Content, Validation, Translate, UserData;
+use Content, Validation, Translate, UserData, Html;
 
 class AddAnswerController extends MainController
 {
@@ -20,7 +20,7 @@ class AddAnswerController extends MainController
     {
         $post_id = Request::getPostInt('post_id');
         $post    = PostModel::getPost($post_id, 'id', $this->user);
-        pageError404($post);
+        Html::pageError404($post);
 
         $content = $_POST['content']; // для Markdown
 

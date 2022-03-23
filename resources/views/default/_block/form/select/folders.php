@@ -11,7 +11,7 @@
   <?php csrf_field(); ?>
   <input name='cat-outside' class='tagify' placeholder='<?= Translate::get('add'); ?>...'>
   <fieldset>
-    <?= sumbit(Translate::get('add')); ?>
+    <?= Html::sumbit(Translate::get('add')); ?>
   </fieldset>
 </form>
 <script nonce="<?= $_SERVER['nonce']; ?>">

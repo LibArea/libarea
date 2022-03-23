@@ -175,7 +175,7 @@ class UploadImage
         $width_h  = getimagesize($cover['tmp_name']);
         if ($width_h < 500) {
             $valid = false;
-            addMsg('Ширина меньше 500 пикселей', 'error');
+            Html::addMsg('Ширина меньше 500 пикселей', 'error');
             redirect($redirect);
         }
 

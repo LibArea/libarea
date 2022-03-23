@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
-use Validation, Translate, Tpl, UserData;
+use Validation, Translate, Tpl, Meta, Html, UserData;
 
 class LoginController extends MainController
 {
@@ -30,24 +30,24 @@ class LoginController extends MainController
         $user = UserModel::userInfo($email);
 
         if (empty($user['id'])) {
-            addMsg('no.user', 'error');
+            Html::addMsg('no.user', 'error');
             redirect($redirect);
         }
 
         // Находится ли в бан- листе
         if (UserModel::isBan($user['id'])) {
-            addMsg('account.being.verified', 'error');
+            Html::addMsg('account.being.verified', 'error');
             redirect($redirect);
         }
 
         // Активирован ли E-mail
         if (!UserModel::isActivated($user['id'])) {
-            addMsg('account.not.activated', 'error');
+            Html::addMsg('account.not.activated', 'error');
             redirect($redirect);
         }
 
         if (!password_verify($password, $user['password'])) {
-            addMsg('email.password.not.correct', 'error');
+            Html::addMsg('email.password.not.correct', 'error');
             redirect($redirect);
         }
 
@@ -68,16 +68,14 @@ class LoginController extends MainController
     public function showLoginForm()
     {
         $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('login'),
+            'og'    => false,
+            'url'   => getUrlByName('login'),
         ];
 
         return Tpl::agRender(
             '/auth/login',
             [
-                'meta'  => meta($m, Translate::get('sign.in'), Translate::get('info-login')),
+                'meta'  => Meta::get($m, Translate::get('sign.in'), Translate::get('info-login')),
                 'data'  => [
                     'sheet' => 'sign.in',
                     'type'  => 'login',
