@@ -1,5 +1,3 @@
-<p align="center"><a href="https://agouti.ru" target="_blank"><img src="https://agouti.ru/assets/svg/agouti.svg" width="120"></a></p>
-
 <p align="center">
 <a href="https://github.com/LibArea/libarea/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT%20(Free)-brightgreen.svg" alt="License: MIT"></a>
 <img src="https://img.shields.io/badge/PHP-^7.4.0-blue" alt="PHP">
@@ -16,15 +14,13 @@ We like the classification system based on labels (tags), how it works in the ex
 
 We are trying to study this.
 
-![LibArea](https://raw.githubusercontent.com/LebArea/libarea/main/public/assets/images/libarea1.jpg)
+![LibArea](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libarea1.jpg)
 
 ![LibArea spaces](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libarea2.jpg)
 
-![LibArea topics](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libarea3.jpg)
-
 Second design (Q&A) in the system: 
 
-![LibArea Q&A](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libareai4.jpg)
+![LibArea topics](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libarea3.jpg)
 
 Directory of sites (programs) uses a faceted scheme:
 
