@@ -55,7 +55,7 @@
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
-    <div class="box-white text-sm">
+    <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
       <ul>
         <?php
@@ -100,7 +100,7 @@
       <?php } ?>
     </div>
   <?php } else { ?>
-    <div class="box-white text-sm">
+    <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
       <?php foreach (Config::get('facets.default') as $key => $topic) { ?>
         <a class="flex items-center relative pb10 gray-600" href="<?= $topic['url']; ?>">

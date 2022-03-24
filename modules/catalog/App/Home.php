@@ -42,7 +42,7 @@ class Home
 
         $m = [
             'og'         => true,
-            'imgurl'     => '/assets/images/agouti-web.png',
+            'imgurl'     => '/assets/images/libarea-web.png',
             'url'        => getUrlByName($sheet),
         ];
 

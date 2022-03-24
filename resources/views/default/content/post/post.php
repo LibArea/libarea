@@ -27,7 +27,7 @@
         </a>
       </div>
       <div class="flex flex-row flex-auto">
-        <div class="w-auto mr20 mb-mr5">
+        <div class="w-auto">
           <a class="black" href="<?= $post_url; ?>">
             <h2 class="inline"><?= $post['post_title']; ?></h2>
             <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
@@ -47,16 +47,16 @@
           </div>
         </div>
         <?php if ($post['post_content_img']) { ?>
-          <div class="mt10 flex-auto">
+          <div class="mt10 ml30 mb-ml0 flex-auto">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= Html::image($post['post_content_img'], $post['post_title'], 'home-img right br-rd5', 'post', 'cover'); ?>
+              <?= Html::image($post['post_content_img'], $post['post_title'], 'home-img right', 'post', 'cover'); ?>
             </a>
           </div>
         <?php } else { ?>
           <?php if ($post['post_thumb_img']) { ?>
-            <div class="home-img mt15 flex-auto mb-none">
+            <div class="home-img mt15 ml30 flex-auto mb-none">
               <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                <?= Html::image($post['post_thumb_img'], $post['post_title'],  'thumb br-rd5 right', 'post', 'thumbnails'); ?>
+                <?= Html::image($post['post_thumb_img'], $post['post_title'],  'thumb right', 'post', 'thumbnails'); ?>
               </a>
             </div>
           <?php } ?>

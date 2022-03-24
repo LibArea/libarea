@@ -114,7 +114,7 @@ class PostController extends MainController
             'url'       => getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
         ];
 
-        $topic = $facets[0]['facet_title'] ?? 'agouti';
+        $topic = $facets[0]['facet_title'] ?? 'libarea';
         if ($blog) {
             $topic = $blog[0]['facet_title'];
         }
