@@ -10,14 +10,14 @@ class UploadImage
     {
         switch ($type) {
             case 'topic':
-                $path_img       = HLEB_PUBLIC_DIR . AG_PATH_FACETS_LOGOS;
-                $path_img_small = HLEB_PUBLIC_DIR . AG_PATH_FACETS_SMALL_LOGOS;
+                $path_img       = HLEB_PUBLIC_DIR . PATH_FACETS_LOGOS;
+                $path_img_small = HLEB_PUBLIC_DIR . PATH_FACETS_SMALL_LOGOS;
                 $pref = 't-';
                 $default_img = 'topic-default.png';
                 break;
             default:
-                $path_img       = HLEB_PUBLIC_DIR . AG_PATH_USERS_AVATARS;
-                $path_img_small = HLEB_PUBLIC_DIR . AG_PATH_USERS_SMALL_AVATARS;
+                $path_img       = HLEB_PUBLIC_DIR . PATH_USERS_AVATARS;
+                $path_img_small = HLEB_PUBLIC_DIR . PATH_USERS_SMALL_AVATARS;
                 $pref =  'a-';
                 $default_img = 'noavatar.png';
         }
@@ -68,7 +68,7 @@ class UploadImage
 
     public static function post_img($img, $user_id, $type, $content_id)
     {
-        $path_img   = HLEB_PUBLIC_DIR . AG_PATH_POSTS_CONTENT;
+        $path_img   = HLEB_PUBLIC_DIR . PATH_POSTS_CONTENT;
         $year       = date('Y') . '/';
         $month      = date('n') . '/';
         $file       = $img['tmp_name'];
@@ -93,7 +93,7 @@ class UploadImage
                 ->toFile($path_img . $year . $month . $filename . '.jpeg', 'image/jpeg');
         }
 
-        $img_post = AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
+        $img_post = PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
         FileModel::set(
             [
                 'file_path'         => $img_post,
@@ -113,12 +113,12 @@ class UploadImage
         switch ($type) {
             case 'user':
                 // 1920px / 350px
-                $path_cover_img     = HLEB_PUBLIC_DIR . AG_PATH_USERS_COVER;
-                $path_cover_small   = HLEB_PUBLIC_DIR . AG_PATH_USERS_SMALL_COVER;
+                $path_cover_img     = HLEB_PUBLIC_DIR . PATH_USERS_COVER;
+                $path_cover_small   = HLEB_PUBLIC_DIR . PATH_USERS_SMALL_COVER;
                 break;
             default:
-                $path_cover_img     = HLEB_PUBLIC_DIR . AG_PATH_BLOGS_COVER;
-                $path_cover_small   = HLEB_PUBLIC_DIR . AG_PATH_BLOGS_SMALL_COVER;
+                $path_cover_img     = HLEB_PUBLIC_DIR . PATH_BLOGS_COVER;
+                $path_cover_small   = HLEB_PUBLIC_DIR . PATH_BLOGS_SMALL_COVER;
         }
 
         $pref = 'cover-';
@@ -180,7 +180,7 @@ class UploadImage
         }
 
         $image = new  SimpleImage();
-        $path = HLEB_PUBLIC_DIR . AG_PATH_POSTS_COVER;
+        $path = HLEB_PUBLIC_DIR . PATH_POSTS_COVER;
         $year = date('Y') . '/';
         $file = $cover['tmp_name'];
         $filename = 'c-' . time();
@@ -219,7 +219,7 @@ class UploadImage
     // Удаление обложка поста
     public static function cover_post_remove($path_img, $user_id)
     {
-        unlink(HLEB_PUBLIC_DIR . AG_PATH_POSTS_COVER . $path_img);
+        unlink(HLEB_PUBLIC_DIR . PATH_POSTS_COVER . $path_img);
 
         return FileModel::removal($path_img, $user_id);
     }
@@ -230,7 +230,7 @@ class UploadImage
         $ext = pathinfo(parse_url($image, PHP_URL_PATH), PATHINFO_EXTENSION);
         if (in_array($ext, array('jpg', 'jpeg', 'png'))) {
 
-            $path = HLEB_PUBLIC_DIR . AG_PATH_POSTS_THUMB;
+            $path = HLEB_PUBLIC_DIR . PATH_POSTS_THUMB;
             $year = date('Y') . '/';
             $filename = 'p-' . time() . '.' . $ext;
             $file = 'p-' . time();

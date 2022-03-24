@@ -80,9 +80,9 @@ class PostController extends MainController
 
         $content_img  = Config::get('meta.img_path');
         if ($content['post_content_img']) {
-            $content_img  = AG_PATH_POSTS_COVER . $content['post_content_img'];
+            $content_img  = PATH_POSTS_COVER . $content['post_content_img'];
         } elseif ($content['post_thumb_img']) {
-            $content_img  = AG_PATH_POSTS_THUMB . $content['post_thumb_img'];
+            $content_img  = PATH_POSTS_THUMB . $content['post_thumb_img'];
         }
 
         $desc  = explode("\n", $content['post_content']);

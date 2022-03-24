@@ -49,11 +49,11 @@ class Html
     public static function image($file, $alt, $style, $type, $size)
     {
         if ($type == 'post') {
-            $src = $size == 'thumbnails' ? AG_PATH_POSTS_THUMB . $file : AG_PATH_POSTS_COVER . $file;
+            $src = $size == 'thumbnails' ? PATH_POSTS_THUMB . $file : PATH_POSTS_COVER . $file;
         } elseif ($type == 'logo') {
-            $src = $size == 'small' ? AG_PATH_FACETS_SMALL_LOGOS . $file : AG_PATH_FACETS_LOGOS . $file;
+            $src = $size == 'small' ? PATH_FACETS_SMALL_LOGOS . $file : PATH_FACETS_LOGOS . $file;
         } else {
-            $src = $size == 'small' ? AG_PATH_USERS_SMALL_AVATARS . $file : AG_PATH_USERS_AVATARS . $file;
+            $src = $size == 'small' ? PATH_USERS_SMALL_AVATARS . $file : PATH_USERS_AVATARS . $file;
         }
 
         $img = '<img class="' . $style . '" src="' . $src . '" title="' . $alt . '" alt="' . $alt . '">';
@@ -64,10 +64,10 @@ class Html
     // Icons, screenshots associated with the site
     public static function websiteImage($domain, $type, $alt, $css = '')
     {
-        $path = AG_PATH_FAVICONS;
+        $path = PATH_FAVICONS;
         $w_h = 'favicons';
         if ($type == 'thumbs') {
-            $path  = AG_PATH_THUMBS;
+            $path  = PATH_THUMBS;
             $w_h = 'w200 h200';
         }
 
@@ -85,10 +85,10 @@ class Html
     public static function coverUrl($file, $type)
     {
         if ($type == 'blog') {
-            return AG_PATH_BLOGS_COVER . $file;
+            return PATH_BLOGS_COVER . $file;
         }
 
-        return AG_PATH_USERS_COVER . $file;
+        return PATH_USERS_COVER . $file;
     }
 
     // Menu and navigation

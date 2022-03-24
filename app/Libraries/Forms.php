@@ -1,8 +1,8 @@
 <?php
 // https://github.com/joshcanhelp/php-form-builder
 // MIT License v 0.8.6
-// Removed and added some elements for the Agouti project
-// https://agouti.ru
+// Removed and added some elements for the LibArea project
+// https://libarea.ru
 
 class Forms
 {

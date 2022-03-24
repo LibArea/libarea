@@ -55,7 +55,7 @@ $data = [
     'user.sites.info'       => 'Lista site-urilor adăugate de mine',
     'moderation'            => 'Moderare',
     
-    'add.site.help'         => '<i class="gray-600">Formatul titlului:</i><br> «Agouti» — comunitate<br><br><i class="gray-600">Descriere (fara publicitate):</i><br> ...ce este pe site?<i>',
+    'add.site.help'         => '<i class="gray-600">Formatul titlului:</i><br> «LibArea» — comunitate<br><br><i class="gray-600">Descriere (fara publicitate):</i><br> ...ce este pe site?<i>',
 ];
 
 return $data;

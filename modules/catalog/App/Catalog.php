@@ -109,9 +109,9 @@ class Catalog
             $item['item_content_soft'] = Content::text($item['item_content_soft'], 'text');
         }
 
-        $content_img = AG_PATH_THUMBS . 'default.png';
-        if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_THUMBS . $item['item_url_domain'] . '.png')) {
-            $content_img =  AG_PATH_THUMBS . $item['item_url_domain'] . '.png';
+        $content_img = PATH_THUMBS . 'default.png';
+        if (file_exists(HLEB_PUBLIC_DIR . PATH_THUMBS . $item['item_url_domain'] . '.png')) {
+            $content_img =  PATH_THUMBS . $item['item_url_domain'] . '.png';
         }
 
         $m = [

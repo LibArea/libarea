@@ -216,21 +216,21 @@ define('TEMPLATES', realpath(HLEB_GLOBAL_DIRECTORY . '/resources/views'));
  |
  */
 
-define('AG_PATH_USERS_COVER', '/uploads/users/cover/');
-define('AG_PATH_USERS_SMALL_COVER', '/uploads/users/cover/small/');
+define('PATH_USERS_COVER', '/uploads/users/cover/');
+define('PATH_USERS_SMALL_COVER', '/uploads/users/cover/small/');
 
-define('AG_PATH_USERS_AVATARS', '/uploads/users/avatars/');
-define('AG_PATH_USERS_SMALL_AVATARS', '/uploads/users/avatars/small/');
+define('PATH_USERS_AVATARS', '/uploads/users/avatars/');
+define('PATH_USERS_SMALL_AVATARS', '/uploads/users/avatars/small/');
 
-define('AG_PATH_FACETS_LOGOS', '/uploads/facets/logos/');
-define('AG_PATH_FACETS_SMALL_LOGOS', '/uploads/facets/logos/small/');
+define('PATH_FACETS_LOGOS', '/uploads/facets/logos/');
+define('PATH_FACETS_SMALL_LOGOS', '/uploads/facets/logos/small/');
 
-define('AG_PATH_BLOGS_COVER', '/uploads/facets/cover/');
-define('AG_PATH_BLOGS_SMALL_COVER', '/uploads/facets/cover/small/');
+define('PATH_BLOGS_COVER', '/uploads/facets/cover/');
+define('PATH_BLOGS_SMALL_COVER', '/uploads/facets/cover/small/');
 
-define('AG_PATH_POSTS_CONTENT', '/uploads/posts/content/');
-define('AG_PATH_POSTS_COVER', '/uploads/posts/cover/');
-define('AG_PATH_POSTS_THUMB', '/uploads/posts/thumbnails/');
+define('PATH_POSTS_CONTENT', '/uploads/posts/content/');
+define('PATH_POSTS_COVER', '/uploads/posts/cover/');
+define('PATH_POSTS_THUMB', '/uploads/posts/thumbnails/');
 
-define('AG_PATH_FAVICONS', '/uploads/favicons/');
-define('AG_PATH_THUMBS', '/uploads/thumbs/');
+define('PATH_FAVICONS', '/uploads/favicons/');
+define('PATH_THUMBS', '/uploads/thumbs/');

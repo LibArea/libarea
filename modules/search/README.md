@@ -1,4 +1,4 @@
-# Agouti site search module
+# LibArea site search module
 
 Place the following code in Routes 
 
@@ -14,4 +14,4 @@ radjax.php:
 Radjax\Route::get("/api-search/{?query}", ["post"], "Modules\Search\App\Search@api", ["protected" => true, "where" => ["query" => "[А-Яа-яa-zA-Z0-9]+"],  "session_saved" => false]);
 ```
 
-This module is included in the Agouti site by default.
+This module is included in the LibArea site by default.

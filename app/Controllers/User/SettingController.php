@@ -191,8 +191,8 @@ class SettingController extends MainController
 
         // Удалим, кроме дефолтной
         if ($user['cover_art'] != 'cover_art.jpeg') {
-            unlink(HLEB_PUBLIC_DIR . AG_PATH_USERS_COVER . $user['cover_art']);
-            unlink(HLEB_PUBLIC_DIR . AG_PATH_USERS_SMALL_COVER . $user['cover_art']);
+            unlink(HLEB_PUBLIC_DIR . PATH_USERS_COVER . $user['cover_art']);
+            unlink(HLEB_PUBLIC_DIR . PATH_USERS_SMALL_COVER . $user['cover_art']);
         }
 
         SettingModel::coverRemove(

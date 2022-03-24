@@ -8,8 +8,8 @@
         <span class="mb-none">— <?= Translate::get('community'); ?></span>
       </div>
       <a rel="nofollow noopener" class="icon" title="DISCORD" href="https://discord.gg/dw47aNx5nU"><i class="bi-discord text-2xl"></i></a>
-      <a rel="nofollow noopener" class="icon" title="Vkontakte" href="https://vk.com/agouti">VK</a>
-      <a rel="nofollow noopener" class="icon" title="GitHub" href="https://github.com/agoutiDev/agouti"><i class="bi-github text-2xl"></i></a>
+      <a rel="nofollow noopener" class="icon" title="Vkontakte" href="https://vk.com/libarea">VK</a>
+      <a rel="nofollow noopener" class="icon" title="GitHub" href="https://github.com/libarea/agouti"><i class="bi-github text-2xl"></i></a>
     </div>
     <div class="flex right">
       <ul class="mb-none">

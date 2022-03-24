@@ -49,7 +49,7 @@ class TopicFacetController extends MainController
 
         $m = [
             'og'         => true,
-            'imgurl'     => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
+            'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
             'url'        => $url,
         ];
 
@@ -89,7 +89,7 @@ class TopicFacetController extends MainController
 
         $m = [
             'og'         => true,
-            'imgurl'     => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
+            'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
             'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
@@ -124,7 +124,7 @@ class TopicFacetController extends MainController
 
         $m = [
             'og'         => true,
-            'imgurl'     => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
+            'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
             'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 

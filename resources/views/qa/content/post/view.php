@@ -251,7 +251,7 @@
 
   <?php if ($post['post_content_img']) { ?>
     <div class="box bg-violet-50">
-      <img class="preview w-100 br-rd5" src="<?= AG_PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
+      <img class="preview w-100 br-rd5" src="<?= PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php } ?>
   <div class="center box bg-violet-50">

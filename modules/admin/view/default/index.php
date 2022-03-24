@@ -46,7 +46,7 @@
   <?php } ?>
 
   <h3 class="uppercase-box mt15"><?= Translate::get('useful.resources'); ?></h3>
-  <p><i class="bi-link-45deg mr5"></i> <a href="https://agouti.ru">Agouti.ru</a></p>
+  <p><i class="bi-link-45deg mr5"></i> <a href="https://libarea.ru">LibArea.ru</a></p>
   <p><i class="bi-github mr5"></i> <a href="https://discord.gg/dw47aNx5nU">Discord</a></p>
   <hr>
   <p>PC: <?= php_uname('s'); ?> <?php echo php_uname('r'); ?></p>

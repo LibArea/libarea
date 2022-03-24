@@ -55,7 +55,7 @@ $data = [
     'user.sites.info'       => '我添加的網站列表',
     'moderation'            => '適度',
     
-    'add.site.help'         => '<i class="gray-600">標題格式:</i><br> «Agouti» — 社區<br><br><i class="gray-600">說明（不含廣告）:</i><br> ...網站上有什麼?<i>',
+    'add.site.help'         => '<i class="gray-600">標題格式:</i><br> «LibArea» — 社區<br><br><i class="gray-600">說明（不含廣告）:</i><br> ...網站上有什麼?<i>',
 ];
 
 return $data;

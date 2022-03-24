@@ -44,7 +44,7 @@ class BlogFacetController extends MainController
 
         $m = [
             'og'        => true,
-            'imgurl'    => AG_PATH_FACETS_LOGOS . $facet['facet_img'],
+            'imgurl'    => PATH_FACETS_LOGOS . $facet['facet_img'],
             'url'       => $url,
         ];
 

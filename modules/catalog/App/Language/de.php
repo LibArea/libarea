@@ -55,7 +55,7 @@ $data = [
     'user.sites.info'       => 'Liste der von mir hinzugefügten Websites',
     'moderation'            => 'Mäßigung',
     
-    'add.site.help'         => '<i class="gray-600">Titelformat:</i><br> «Agouti» — gemeinschaft<br><br><i class="gray-600">Beschreibung (ohne Werbung):</i><br> ...was ist auf der Website?<i>',
+    'add.site.help'         => '<i class="gray-600">Titelformat:</i><br> «LibArea» — gemeinschaft<br><br><i class="gray-600">Beschreibung (ohne Werbung):</i><br> ...was ist auf der Website?<i>',
 ];
 
 return $data;
