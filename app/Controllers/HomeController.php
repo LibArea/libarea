@@ -42,7 +42,7 @@ class HomeController extends MainController
 
         $m = [
             'og'         => true,
-            'imgurl'     => '/assets/images/agouti-max.png',
+            'imgurl'     => Config::get('meta.img_path'),
             'url'        => $sheet == 'top' ? '/top' : '/',
         ];
 

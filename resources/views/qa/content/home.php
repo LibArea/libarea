@@ -108,7 +108,7 @@
 
   <div class="sticky top0">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="box-white">
+      <div class="box-white bg-violet-50">
         <ul class="last-content">
           <?php foreach ($data['latest_answers'] as $answer) { ?>
             <li>

@@ -20,5 +20,4 @@
   </form>
   <p><?= Translate::get('login.use.condition'); ?>.</p>
   <p><?= Translate::get('info-recover'); ?></p>
-  <img class="right" alt="<?= Config::get('meta.name'); ?>" src="<?= Config::get('meta.img_footer_path'); ?>">
 </main>

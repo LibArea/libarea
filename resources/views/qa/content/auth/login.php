@@ -23,5 +23,4 @@ $form->html_form($user['trust_level'], Config::get('form/auth.login'));
   <?php } ?>
   <p><?= Translate::get('login.use.condition'); ?>.</p>
   <p><?= Translate::get('info-login'); ?></p>
-  <img class="right" alt="<?= Config::get('meta.name'); ?>" src="<?= Config::get('meta.img_footer_path'); ?>">
 </main>

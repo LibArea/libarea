@@ -1,12 +1,12 @@
 <p align="center"><a href="https://agouti.ru" target="_blank"><img src="https://agouti.ru/assets/svg/agouti.svg" width="120"></a></p>
 
 <p align="center">
-<a href="https://github.com/AgoutiDev/agouti/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT%20(Free)-brightgreen.svg" alt="License: MIT"></a>
+<a href="https://github.com/LibArea/libarea/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT%20(Free)-brightgreen.svg" alt="License: MIT"></a>
 <img src="https://img.shields.io/badge/PHP-^7.4.0-blue" alt="PHP">
 <img src="https://img.shields.io/badge/PHP-8-blue" alt="PHP">
 </p>
 
-# Agouti
+# LibArea
 
 A platform for collective blogs and social media platform, forum, question and answer service. Catalog of sites (programs), site navigation and directories - facets.
 
@@ -16,21 +16,21 @@ We like the classification system based on labels (tags), how it works in the ex
 
 We are trying to study this.
 
-![Agouti](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti.jpg)
+![LibArea](https://raw.githubusercontent.com/LebArea/libarea/main/public/assets/images/libarea1.jpg)
 
-![Agouti spaces](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti2.jpg)
+![LibArea spaces](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libarea2.jpg)
 
-![Agouti topics](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti3.jpg)
+![LibArea topics](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libarea3.jpg)
 
 Second design (Q&A) in the system: 
 
-![Agouti Q&A](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti4.jpg)
+![LibArea Q&A](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libareai4.jpg)
 
 Directory of sites (programs) uses a faceted scheme:
 
-![Agouti catalog](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/catalog.jpg)
+![LibArea catalog](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/catalog.jpg)
 
-Demo: https://agouti.ru/
+Demo: https://libarea.ru/
 
 ### For testing
 
@@ -42,7 +42,7 @@ Demo: https://agouti.ru/
 
 PHP 7.4+
 
-More information (rus.): https://agouti.info/
+More information (rus.): https://libarea.com/
 
 ...
 
