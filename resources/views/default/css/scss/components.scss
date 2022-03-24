@@ -44,7 +44,7 @@ h5 {
 .wrap {
   margin: 0 auto;
   height: 100%;
-  max-width: 1336px;
+  max-width: 1436px;
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -289,11 +289,6 @@ a:hover > img { opacity: 0.8; }
   display: block;
 }
 
-.content-body .video-object {
-  width: 290px;
-  height: 160px;
-}
-
 .comment_subtree:target,
 .comment_subtree.edit,
 .answers_subtree:target,
@@ -305,8 +300,8 @@ a:hover > img { opacity: 0.8; }
 }
 
 .video-object {
-  width: 640px;
-  height: 360px;
+  max-width: 640px;
+  max-height: 360px;
 }
 
 .home-img,

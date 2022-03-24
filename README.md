@@ -52,7 +52,7 @@ A distinctive feature of the micro-framework HLEB is the minimalism of the code 
 
 #### Security
 
-If you discover any security related issues within Agouti, please send an e-mail to admin@agouti.ru instead of using the issue tracker. All security vulnerabilities will be promptly addressed.
+If you discover any security related issues within LibArea, please send an e-mail to dev@libarea.ru instead of using the issue tracker. All security vulnerabilities will be promptly addressed.
 
 ---
 
@@ -63,4 +63,4 @@ Using examples: Dmoz catalog, Yandex catalog, I want to create and test universa
 
 ---
 
-**ATTENTION:** you are on the README file of an unstable branch of Agouti specifically meant for the development of future releases. This means that the code on this branch is potentially unstable, and breaking change may happen without any prior notice. Do not use it in production environments or use it at your own risk! This is a test version, a training project!
+**ATTENTION:** you are on the README file of an unstable branch of LibArea specifically meant for the development of future releases. This means that the code on this branch is potentially unstable, and breaking change may happen without any prior notice. Do not use it in production environments or use it at your own risk! This is a test version, a training project!

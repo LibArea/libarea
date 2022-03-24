@@ -34,13 +34,6 @@ return [
         'help'      => 'skype:<b>NICK</b>',
         'name'      => 'skype'
     ], [
-        'url'       => 'twitter',
-        'addition'  => 'https://twitter.com/',
-        'title'     => 'twitter',
-        'lang'      => Translate::get('Twitter'),
-        'help'      => 'https://twitter.com/<b>NICK</b>',
-        'name'      => 'twitter'
-    ], [
         'url'       => 'telegram',
         'addition'  => 'tg://resolve?domain=',
         'title'     => 'telegram',

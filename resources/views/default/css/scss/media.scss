@@ -96,8 +96,8 @@ main { width: calc(100% - 390px); }
   .home-img { width: 100%; }
 
   .mb-video-object {
-    width: 280px;
-    height: 155px;
+    max-width: 280px;
+    max-height: 155px;
   }
   
   .flex-auto {
