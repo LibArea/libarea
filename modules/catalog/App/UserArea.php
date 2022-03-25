@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\UserAreaModel;
-use Content, Translate, UserData, Meta;
+use Content, Config, Translate, UserData, Meta;
 
 class UserArea
 {
@@ -25,18 +25,11 @@ class UserArea
         $pagesCount = UserAreaModel::getUserSitesCount($this->user['id']);
         $items  = UserAreaModel::getUserSites($page, $this->limit, $this->user['id']);
 
-        $result = [];
-        foreach ($items as $ind => $row) {
-            $text = explode("\n", $row['item_content_url']);
-            $row['item_content_url']    = Content::text($text[0], 'line');
-            $result[$ind]           = $row;
-        }
-
         $num = $page > 1 ? sprintf(Translate::get('page-number'), $page) : '';
 
         $m = [
             'og'         => true,
-            'imgurl'     => '/assets/images/libarea-web.png',
+            'imgurl'     => Config::get('meta.img_path_web'),
             'url'        => getUrlByName($sheet),
         ];
 
@@ -50,7 +43,7 @@ class UserArea
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'count'             => $pagesCount,
                     'pNum'              => $page,
-                    'items'             => $result,
+                    'items'             => $items,
                     'user_count_site'   => $pagesCount,
                     'type'              => $type,
                     'sheet'             => $sheet,
@@ -75,7 +68,7 @@ class UserArea
             '/view/default/user/bookmarks',
             [
                 'meta'  => Meta::get([], Translate::get('favorites'), Translate::get('favorites')),
-                'user' => $this->user,
+                'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'cat',
                     'sheet'             => $sheet,

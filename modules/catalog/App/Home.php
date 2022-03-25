@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
-use Content, Translate, UserData, Meta;
+use Content, Config, Translate, UserData, Meta;
 
 class Home
 {
@@ -42,7 +42,7 @@ class Home
 
         $m = [
             'og'         => true,
-            'imgurl'     => '/assets/images/libarea-web.png',
+            'imgurl'     => Config::get('meta.img_path_web'),
             'url'        => getUrlByName($sheet),
         ];
 

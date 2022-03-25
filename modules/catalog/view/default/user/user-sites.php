@@ -23,7 +23,7 @@
                   <?= Translate::get('moderation'); ?>
                 </span>
               <?php } ?>
-              <?= Html::facets($data['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
+              <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
 
               <?php if (Html::accessСheck($item, 'item', $user, false, false) === true) { ?>
                 <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
@@ -32,7 +32,7 @@
               <?php } ?>
 
               <div class="list-items__text">
-                <?= $item['item_content_url']; ?>
+                <?= Html::fragment($item['item_content_url']); ?>
               </div>
               <div class="list-items__footer">
                 <div class="green">
