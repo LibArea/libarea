@@ -21,7 +21,7 @@ class VotesController extends MainController
         $up_id  = Request::getPostInt('content_id');
         $type   = Request::getPost('type');
 
-        $allowed = ['post', 'comment', 'answer', 'item'];
+        $allowed = ['post', 'comment', 'answer', 'item', 'reply'];
         if (!in_array($type, $allowed)) return false;
         if ($up_id <= 0) return false;
 

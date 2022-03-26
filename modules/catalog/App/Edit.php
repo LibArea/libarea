@@ -62,8 +62,8 @@ class Edit
         }
 
         $item_url           = Request::getPost('url');
-        $item_title_url     = Request::getPost('title');
-        $item_content_url   = Request::getPost('content');
+        $item_title         = Request::getPost('title');
+        $item_content       = Request::getPost('content');
         $item_published     = Request::getPostInt('published');
         $item_status_url    = Request::getPostInt('status');
         // soft
@@ -73,8 +73,8 @@ class Edit
         $item_is_github     = Request::getPostInt('github');
         $item_github_url    = Request::getPost('github_url');
 
-        Validation::Length($item_title_url, Translate::get('title'), '14', '250', $redirect);
-        Validation::Length($item_content_url, Translate::get('description'), '24', '1500', $redirect);
+        Validation::Length($item_title, Translate::get('title'), '14', '250', $redirect);
+        Validation::Length($item_content, Translate::get('description'), '24', '1500', $redirect);
 
         if (filter_var($item_url, FILTER_VALIDATE_URL) === FALSE) {
             redirect($redirect);
@@ -110,8 +110,8 @@ class Edit
             [
                 'item_id'           => $item['item_id'],
                 'item_url'          => $item_url,
-                'item_title_url'    => $item_title_url,
-                'item_content_url'  => $item_content_url,
+                'item_title'        => $item_title,
+                'item_content'      => $item_content,
                 'item_title_soft'   => $item_title_soft ?? '',
                 'item_content_soft' => $item_content_soft ?? '',
                 'item_published'    => $published,

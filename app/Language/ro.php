@@ -174,6 +174,7 @@ $data = [
     'drafts'            => 'Proiecte',
     'cancel'            => 'Anulare',
     'reply'             => 'Raspunde',
+    'reply.web'         => 'Răspuns (la director)',
     
     // Editor
     'foto'              => 'O fotografie',

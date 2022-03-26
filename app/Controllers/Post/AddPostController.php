@@ -207,9 +207,9 @@ class AddPostController extends MainController
             WebModel::add(
                 [
                     'item_url'          => $item_url,
-                    'item_url_domain'   => $post_url_domain,
-                    'item_title_url'    => $post_title,
-                    'item_content_url'  => Translate::get('description is formed'),
+                    'item_domain'       => $post_url_domain,
+                    'item_title'        => $post_title,
+                    'item_content'      => Translate::get('description is formed'),
                     'item_published'    => 0,
                     'item_user_id'      => $this->user['id'],
                     'item_type_url'     => 0,

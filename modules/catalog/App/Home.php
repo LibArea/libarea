@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
-use Content, Config, Translate, UserData, Meta;
+use Config, Translate, UserData, Meta;
 
 class Home
 {
@@ -29,15 +29,6 @@ class Home
             $pagesCount = WebModel::getItemsAllCount($sheet);
         }
 
-        $items  = WebModel::getItemsAll($page, $limit, $this->user, $sheet);
-
-        $result = [];
-        foreach ($items as $ind => $row) {
-            $text = explode("\n", $row['item_content_url']);
-            $row['item_content_url']    = Content::text($text[0], 'line');
-            $result[$ind]           = $row;
-        }
-
         $num = $page > 1 ? sprintf(Translate::get('page-number'), $page) : '';
 
         $m = [
@@ -58,7 +49,7 @@ class Home
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'count'             => $pagesCount,
                     'pNum'              => $page,
-                    'items'             => $result,
+                    'items'             => WebModel::getItemsAll($page, $limit, $this->user, $sheet),
                     'user_count_site'   => $count_site,
                     'type'              => $type,
                     'sheet'             => $sheet,

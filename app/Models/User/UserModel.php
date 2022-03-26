@@ -158,9 +158,9 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     answer_post_id,
                     answer_content,
                     item_id,
-                    item_title_url,
+                    item_title,
                     item_url,
-                    item_url_domain
+                    item_domain
                         FROM favorites fav
                             LEFT JOIN posts ON post_id = fav.tid AND fav.action_type = 'post'
                             LEFT JOIN answers ON answer_id = fav.tid AND fav.action_type = 'answer'

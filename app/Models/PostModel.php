@@ -352,14 +352,14 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT
                     item_id,
-                    item_title_url,
-                    item_content_url,
+                    item_title,
+                    item_content,
                     item_title_soft,
                     item_content_soft,
                     item_published,
                     item_user_id,
                     item_url,
-                    item_url_domain,
+                    item_domain,
                     item_votes,
                     item_count,
                     item_is_soft,
@@ -371,7 +371,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     votes_item_item_id
                         FROM items 
                         LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid
-                        WHERE item_url_domain = :domain AND item_is_deleted = 0";
+                        WHERE item_domain = :domain AND item_is_deleted = 0";
 
 
         return DB::run($sql, ['domain' => $domain, 'uid' => $uid])->fetch();
@@ -383,17 +383,17 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT
                     item_id,
-                    item_title_url,
-                    item_content_url,
+                    item_title,
+                    item_content,
                     item_published,
                     item_user_id,
                     item_url,
-                    item_url_domain,
+                    item_domain,
                     item_votes,
                     item_count,
                     item_is_deleted
                         FROM items 
-                        WHERE item_url_domain != :domain AND item_published = 1 AND item_is_deleted = 0
+                        WHERE item_domain != :domain AND item_published = 1 AND item_is_deleted = 0
                         ORDER BY item_count DESC LIMIT 10";
 
         return DB::run($sql, ['domain' => $domain])->fetchAll();

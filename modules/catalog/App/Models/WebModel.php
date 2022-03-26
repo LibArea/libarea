@@ -14,12 +14,12 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         $start  = ($page - 1) * $limit;
         $sql = "SELECT
                     item_id, 
-                    item_title_url,
-                    item_content_url,
+                    item_title,
+                    item_content,
                     item_published,
                     item_user_id,
                     item_url,
-                    item_url_domain,
+                    item_domain,
                     item_votes,
                     item_count,
                     item_title_soft,
@@ -104,12 +104,12 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
         $sql = "SELECT DISTINCT
                     item_id,
-                    item_title_url,
-                    item_content_url,
+                    item_title,
+                    item_content,
                     item_published,
                     item_user_id,
                     item_url,
-                    item_url_domain,
+                    item_domain,
                     item_votes,
                     item_date,
                     item_count,
@@ -196,14 +196,14 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT
                     item_id,
-                    item_title_url,
-                    item_content_url,
+                    item_title,
+                    item_content,
                     item_title_soft,
                     item_content_soft,
                     item_published,
                     item_user_id,
                     item_url,
-                    item_url_domain,
+                    item_domain,
                     item_votes,
                     item_count,
                     item_is_soft,
@@ -231,7 +231,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                         LEFT JOIN votes_item ON votes_item_item_id = item_id AND votes_item_user_id = :uid
                         LEFT JOIN favorites fav ON fav.tid = item_id 
                                 AND fav.user_id = :uid_two AND fav.action_type = 'website'
-                        WHERE item_url_domain = :domain AND item_is_deleted = 0";
+                        WHERE item_domain = :domain AND item_is_deleted = 0";
 
 
         return DB::run($sql, ['domain' => $domain, 'uid' => $uid, 'uid_two' => $uid])->fetch();
@@ -242,9 +242,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     public static function add($params)
     {
         $sql = "INSERT INTO items(item_url, 
-                            item_url_domain, 
-                            item_title_url, 
-                            item_content_url, 
+                            item_domain, 
+                            item_title, 
+                            item_content, 
                             item_published,
                             item_user_id, 
                             item_type_url, 
@@ -255,9 +255,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                             item_count) 
                             
                        VALUES(:item_url, 
-                       :item_url_domain, 
-                       :item_title_url, 
-                       :item_content_url, 
+                       :item_domain, 
+                       :item_title, 
+                       :item_content, 
                        :item_published,
                        :item_user_id, 
                        :item_type_url, 
@@ -276,7 +276,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function addItemCount($domain)
     {
-        $sql = "UPDATE items SET item_count = (item_count + 1) WHERE item_url_domain = :domain";
+        $sql = "UPDATE items SET item_count = (item_count + 1) WHERE item_domain = :domain";
         DB::run($sql, ['domain' => $domain]);
     }
 
@@ -284,8 +284,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "UPDATE items 
                     SET item_url        = :item_url,  
-                    item_title_url      = :item_title_url, 
-                    item_content_url    = :item_content_url,
+                    item_title          = :item_title, 
+                    item_content        = :item_content,
                     item_title_soft     = :item_title_soft, 
                     item_content_soft   = :item_content_soft,
                     item_published      = :item_published,
@@ -307,14 +307,14 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT
                     item_id,
-                    item_title_url,
-                    item_content_url,
+                    item_title,
+                    item_content,
                     item_title_soft,
                     item_content_soft,
                     item_published,
                     item_user_id,
                     item_url,
-                    item_url_domain,
+                    item_domain,
                     item_votes,
                     item_count,
                     item_status_url,
@@ -353,8 +353,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT 
                     item_id,
-                    item_title_url,
-                    item_url_domain
+                    item_title,
+                    item_domain
                         FROM items 
                             WHERE item_id < :item_id 
                                 AND item_published = 1 AND item_is_deleted = 0

@@ -12,11 +12,11 @@
 
           <li>
             <div class="list-items__thumb mb-none">
-              <?= Html::websiteImage($item['item_url_domain'], 'thumbs', $item['item_title_url'], 'list-items__thumb-image'); ?>
+              <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'list-items__thumb-image'); ?>
             </div>
             <div class="list-items__description">
               <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
-                <h2><?= $item['item_title_url']; ?></h2>
+                <h2><?= $item['item_title']; ?></h2>
               </a>
               <?php if ($item['item_published'] == 0) { ?>
                 <span class="box-yellow-small">
@@ -32,12 +32,12 @@
               <?php } ?>
 
               <div class="list-items__text">
-                <?= Html::fragment($item['item_content_url']); ?>
+                <?= Content::text(Html::fragment($item['item_content']), 'line'); ?>
               </div>
               <div class="list-items__footer">
                 <div class="green">
-                  <?= Html::websiteImage($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'favicons mr5'); ?>
-                  <?= $item['item_url_domain']; ?>
+                  <?= Html::websiteImage($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
+                  <?= $item['item_domain']; ?>
                   <?php if ($item['item_github_url']) { ?>
                     <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
                       <i class="bi-github text-sm mr5"></i>
@@ -47,7 +47,7 @@
                   <?php if ($item['item_published'] == 1) { ?>
                     <div>
                       <i class="bi-arrow-return-right gray-600 ml10"></i>
-                      <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
+                      <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_domain']]); ?>">
                         <?= Translate::get('more.detailed'); ?>
                       </a>
                     </div>

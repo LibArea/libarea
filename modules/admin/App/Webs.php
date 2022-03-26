@@ -14,11 +14,11 @@ class Webs
         $item       = WebModel::getItemId($item_id);
         Html::pageError404($item);
 
-        $puth = HLEB_PUBLIC_DIR . PATH_FAVICONS . $item["item_url_domain"] . '.png';
+        $puth = HLEB_PUBLIC_DIR . PATH_FAVICONS . $item["item_domain"] . '.png';
         $dirF = HLEB_PUBLIC_DIR . PATH_FAVICONS;
 
         if (!file_exists($puth)) {
-            $urls = self::getFavicon($item['item_url_domain']);
+            $urls = self::getFavicon($item['item_domain']);
             copy($urls, $puth);
         }
 

@@ -19,12 +19,12 @@
             <?= $fav['post_title']; ?>
           </a>
         <?php } elseif ($fav['action_type'] == 'website') { ?>
-          <a class="block" href="<?= getUrlByName('web.website', ['slug' => $fav['item_url_domain']]); ?>">
-            <?= $fav['item_title_url']; ?>
+          <a class="block" href="<?= getUrlByName('web.website', ['slug' => $fav['item_domain']]); ?>">
+            <?= $fav['item_title']; ?>
           </a>
           <span class="green text-sm">
-            <?= Html::websiteImage($fav['item_url_domain'], 'favicon', $fav['item_url_domain'], 'favicons'); ?>
-            <?= $fav['item_url_domain']; ?>
+            <?= Html::websiteImage($fav['item_domain'], 'favicon', $fav['item_domain'], 'favicons'); ?>
+            <?= $fav['item_domain']; ?>
             <a target="_blank" href="<?= $fav['item_url']; ?>" class="item_cleek" data-id="<?= $fav['item_id']; ?>" rel="nofollow noreferrer ugc">
               <i class="bi-folder-symlink middle ml15 mr5"></i>
               <?= $fav['item_url']; ?>

@@ -354,9 +354,9 @@ CREATE TABLE `invitations` (
 CREATE TABLE `items` (
   `item_id` int(11) NOT NULL,
   `item_url` varchar(255) DEFAULT NULL,
-  `item_url_domain` varchar(255) DEFAULT NULL,
-  `item_title_url` varchar(255) DEFAULT NULL,
-  `item_content_url` text,
+  `item_domain` varchar(255) DEFAULT NULL,
+  `item_title` varchar(255) DEFAULT NULL,
+  `item_content` text,
   `item_title_soft` varchar(255) DEFAULT NULL,
   `item_content_soft` text,
   `item_published` tinyint(1) NOT NULL DEFAULT '1',
@@ -379,7 +379,7 @@ CREATE TABLE `items` (
 -- Дамп данных таблицы `items`
 --
 
-INSERT INTO `items` (`item_id`, `item_url`, `item_url_domain`, `item_title_url`, `item_content_url`, `item_title_soft`, `item_content_soft`, `item_published`, `item_user_id`, `item_date`, `item_type_url`, `item_status_url`, `item_status_date`, `item_is_soft`, `item_is_github`, `item_github_url`, `item_post_related`, `item_votes`, `item_count`, `item_following_link`, `item_is_deleted`) VALUES
+INSERT INTO `items` (`item_id`, `item_url`, `item_domain`, `item_title`, `item_content`, `item_title_soft`, `item_content_soft`, `item_published`, `item_user_id`, `item_date`, `item_type_url`, `item_status_url`, `item_status_date`, `item_is_soft`, `item_is_github`, `item_github_url`, `item_post_related`, `item_votes`, `item_count`, `item_following_link`, `item_is_deleted`) VALUES
 (1, 'https://agouti.ru', 'agouti.ru', '«Agouti» — сообщество по интересам', 'Лучшие публикации за сутки. Темы, личные дневники, группы. Каталог сайтов и программ, поиск..', 'Agouti', 'Discussion (forum) and Q&A platform. Community based on PHP Micro-Framework HLEB. (Zhihu, Quora clone)', 1, 1, '2021-06-20 19:35:02', 0, 200, '2021-06-20 19:35:02', 1, 1, 'https://github.com/AgoutiDev/agouti', '2', 1, 1, 1, 0),
 (2, 'https://github.com', 'github.com', '«GitHub» — веб-сервис для хостинга IT-проектов', 'Веб-сервис, хостинговая платформа  для программистов основанная на системе контроля версий Git. Бесплатные, платные версии репозитория.', '', '', 1, 1, '2021-11-02 23:30:40', 0, 200, '2021-11-02 23:30:40', 0, 0, '', '', 1, 1, 1, 0),
 (3, 'https://phphleb.ru', 'phphleb.ru', '«HLEB» — микрофреймворк', 'Документация и описание Micro-Framework(а) использующий базовую реализацию MVC на PHP. Установить, настройка, структура проекта. Маршрутизация, контроллеры и модели.', 'HLEB', 'Отличительной особенностью микропрограммы HLEB является минимализм кода и скорость работы. Выбор данного фреймворка позволяет запустить полноценный продукт с минимальными временными затратами и обращениями к документации; это легко, просто и быстро. \r\n\r\nВ то же время он решает типовые задачи, такие как маршрутизация, перенос действий на контроллеры, поддержка модели, то есть базовая реализация MVC. Это самый минимум, необходимый для быстрого запуска приложения.', 1, 1, '2021-11-08 08:02:24', 0, 200, '2021-11-08 08:02:24', 1, 1, 'https://github.com/phphleb/hleb', '', 1, 1, 1, 0),
@@ -810,7 +810,7 @@ CREATE TABLE `folders` (
   `title` varchar(64) NOT NULL,
   `action_type` varchar(32) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `item_coun` int(11) NOT NULL DEFAULT '0'
+  `item_count` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `folders_relation` (
@@ -835,6 +835,55 @@ ALTER TABLE `folders_relation`
 
 ALTER TABLE `folders_relation` ADD UNIQUE(`action_type`, `tid`, `user_id`);
 
+
+--
+-- Структура и индексы таблицы `replys`
+--
+
+CREATE TABLE `replys` (
+  `reply_id` int(11) NOT NULL,
+  `reply_parent_id` int(11) NOT NULL,
+  `reply_item_id` int(11) NOT NULL,
+  `reply_content` text NOT NULL,
+  `reply_type` varchar(32) NOT NULL DEFAULT 'web' COMMENT 'web, soft...',
+  `reply_user_id` int(11) NOT NULL,
+  `reply_ip` varchar(64) NOT NULL,
+  `reply_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reply_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reply_count` int(7) NOT NULL DEFAULT '0',
+  `reply_votes` int(7) NOT NULL DEFAULT '0',
+  `reply_published` tinyint(1) NOT NULL DEFAULT '1',
+  `reply_is_deleted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+ALTER TABLE `replys`
+  ADD PRIMARY KEY (`reply_id`);
+  
+ALTER TABLE `replys`
+  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT;  
+
+
+--
+-- Структура и индексы таблицы `votes_reply`
+--
+
+CREATE TABLE `votes_reply` (
+  `votes_reply_id` int(11) NOT NULL,
+  `votes_reply_item_id` int(11) NOT NULL,
+  `votes_reply_points` int(11) NOT NULL,
+  `votes_reply_ip` varchar(45) NOT NULL,
+  `votes_reply_user_id` int(11) NOT NULL DEFAULT '1',
+  `votes_reply_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `votes_reply`
+  ADD PRIMARY KEY (`votes_reply_id`),
+  ADD KEY `votes_reply_item_id` (`votes_reply_item_id`,`votes_reply_user_id`) USING BTREE,
+  ADD KEY `votes_reply_user_id` (`votes_reply_user_id`) USING BTREE,
+  ADD KEY `votes_reply_ip` (`votes_reply_item_id`,`votes_reply_ip`) USING BTREE;
+
+ALTER TABLE `votes_reply`
+  MODIFY `votes_reply_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Индексы сохранённых таблиц
@@ -972,7 +1021,7 @@ ALTER TABLE `invitations`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`item_id`);
-ALTER TABLE `items` ADD FULLTEXT KEY `item_title_url` (`item_title_url`,`item_content_url`,`item_url_domain`);
+ALTER TABLE `items` ADD FULLTEXT KEY `item_title` (`item_title`,`item_content`,`item_domain`);
 
 --
 -- Индексы таблицы `items_signed`

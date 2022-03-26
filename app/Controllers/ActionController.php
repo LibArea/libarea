@@ -23,7 +23,7 @@ class ActionController extends MainController
         $content_id = Request::getPostInt('content_id');
         $type       = Request::getPost('type');
 
-        $allowed = ['post', 'comment', 'answer'];
+        $allowed = ['post', 'comment', 'answer', 'reply'];
         if (!in_array($type, $allowed)) {
             return false;
         }
@@ -37,26 +37,34 @@ class ActionController extends MainController
         switch ($type) {
             case 'post':
                 $url  = getUrlByName('post', ['id' => $info_type['post_id'], 'slug' => $info_type['post_slug']]);
+                $action_type = 'post';
                 break;
             case 'comment':
                 $post = PostModel::getPost($info_type['comment_post_id'], 'id', $this->user);
                 $url  = getUrlByName('post', ['id' => $info_type['comment_post_id'], 'slug' => $post['post_slug']]) . '#comment_' . $info_type['comment_id'];
+                $action_type = 'comment';
                 break;
             case 'answer':
                 $post = PostModel::getPost($info_type['answer_post_id'], 'id', $this->user);
                 $url  = getUrlByName('post', ['id' => $info_type['answer_post_id'], 'slug' => $post['post_slug']]) . '#answer_' . $info_type['answer_id'];
+                $action_type = 'answer';
+                break;
+            case 'reply':
+                $url  = '/';
+                $action_type = 'reply.web';
                 break;
         }
 
         ActionModel::setDeletingAndRestoring($type, $info_type[$type . '_id'], $info_type[$type . '_is_deleted']);
 
         $log_action_name = $info_type[$type . '_is_deleted'] == 1 ? 'content.restored' : 'content.deleted';
+ 
         ActionModel::addLogs(
             [
                 'user_id'       => $this->user['id'],
                 'user_login'    => $this->user['login'],
                 'id_content'    => $info_type[$type . '_id'] ?? 0,
-                'action_type'   => $type,
+                'action_type'   => $action_type,
                 'action_name'   => $log_action_name,
                 'url_content'   => $url,
             ]

@@ -179,6 +179,7 @@ $data = [
     'drafts'            => 'Drafts',
     'cancel'            => 'Cancel',
     'reply'             => 'Reply',
+    'reply.web'         => 'Answer (to directory)',
 
     // Editor
     'foto'              => 'A photo',

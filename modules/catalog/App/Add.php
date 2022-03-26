@@ -81,9 +81,9 @@ class Add
         $item_last = WebModel::add(
             [
                 'item_url'          => $url,
-                'item_url_domain'   => $basic_host,
-                'item_title_url'    => Request::getPost('title'),
-                'item_content_url'  => $content,
+                'item_domain'       => $basic_host,
+                'item_title'        => Request::getPost('title'),
+                'item_content'      => $content,
                 'item_published'    => $published,
                 'item_user_id'      => $this->user['id'],
                 'item_type_url'     => 0,

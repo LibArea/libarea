@@ -17,10 +17,10 @@
         </a>
       <?php } else { ?>
         <a class="green" href="<?= $gist['item_url']; ?>">
-          <?= Html::websiteImage($gist['item_url_domain'], 'favicon', $gist['item_url_domain'], 'favicons mr5'); ?>
-          <?= $gist['item_url_domain']; ?>
+          <?= Html::websiteImage($gist['item_domain'], 'favicon', $gist['item_domain'], 'favicons mr5'); ?>
+          <?= $gist['item_domain']; ?>
         </a>
-        <a class="gray-600 lowercase ml15" href="<?= getUrlByName('web.website', ['slug' => $gist['item_url_domain']]); ?>">
+        <a class="gray-600 lowercase ml15" href="<?= getUrlByName('web.website', ['slug' => $gist['item_domain']]); ?>">
           <?= Translate::get('more.detailed'); ?>
         </a>
       <?php } ?>

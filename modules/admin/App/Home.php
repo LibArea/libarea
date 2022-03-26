@@ -22,6 +22,7 @@ class Home
                     'users_count'       => UserModel::getUsersCount('all'),
                     'last_visit'        => UserModel::getLastVisit(),
                     'logs'              => (new \Modules\Search\App\Search())->getLogs(10),
+                    'replys'            => StatsModel::getReplys(10),
                     'bytes'             => $bytes,
                     'type'              => 'admin',
                     'sheet'             => 'admin',

@@ -28,4 +28,26 @@ class StatsModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql)->fetch();
     }
+    
+    // Страница аудита
+    public static function getReplys($limit)
+    {
+        $sql = "SELECT 
+                    reply_id,
+                    reply_user_id,                
+                    reply_item_id,
+                    reply_parent_id,
+                    reply_content as content,
+                    reply_date as date,
+                    item_domain,
+                    id, 
+                    login, 
+                    avatar
+                        FROM replys 
+                          LEFT JOIN users ON id = reply_user_id
+                          LEFT JOIN items ON item_id = reply_item_id
+                              ORDER BY reply_id DESC LIMIT :limit";
+
+        return DB::run($sql, ['limit' => $limit])->fetchAll();
+    }
 }

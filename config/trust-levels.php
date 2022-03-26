@@ -33,13 +33,18 @@ return [
     'tl_add_category'   => 10,
     'count_add_category'=> 1,
 
-
     // С какого уровня TL возможно создавать секции
     // Установите на 10, если вы хотите запретить участникам создавать их
     // From what level of TL is it possible to create sections
     // Set to 10 if you want to prevent members from creating them 
     'tl_add_section'    => 10,
     'count_add_section' => 1,
+    
+    // С какого уровня TL возможно создавать ответы (в каталоге)
+    // Установите на 10, если вы хотите запретить участникам создавать их
+    // From what level of TL is it possible to answers (in catalog)
+    // Set to 10 if you want to prevent members from creating them 
+    'tl_add_reply'    => 10,
 
     // С какого уровня TL возможна отправка личных сообщений
     'tl_add_pm'         => 2,
@@ -54,22 +59,28 @@ return [
 
     // Сколько постов в зависимости от TL можно добавлять в день
     // How many posts, depending on TL, can be added per day
-    'tl_0_add_post'     => 1,
+    'tl_0_add_post'     => 0,
     'tl_1_add_post'     => 3,
     'tl_2_add_post'     => 5,
 
     // Сколько ответов в зависимости от TL можно добавлять в день
     // How many responses, depending on TL, can be added per day
-    'tl_0_add_answer'   => 3,
+    'tl_0_add_answer'   => 0,
     'tl_1_add_answer'   => 5,
     'tl_2_add_answer'   => 10,
 
     // Сколько комментариев в зависимости от TL можно добавлять в день
     // How many comments, depending on TL, can be added per day
-    'tl_0_add_comment'  => 5,
+    'tl_0_add_comment'  => 0,
     'tl_1_add_comment'  => 10,
     'tl_2_add_comment'  => 20,
-
+    
+    // Сколько ответов в зависимости от TL можно добавлять в день
+    // How many replys, depending on TL, can be added per day
+    'tl_0_add_reply'  => 0,
+    'tl_1_add_reply'  => 0,
+    'tl_2_add_reply'  => 0,
+    
     // Уровень TL, до которого (включая) отправка жалоб невозможна
     // TL level, up to which (including) sending complaints is not possible
     'tl_stop_report'    => 1,

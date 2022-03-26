@@ -181,6 +181,7 @@ $data = [
     'drafts'            => 'Drafts',
     'cancel'            => 'Cancel',
     'reply'             => 'Reply',
+    'reply.web'         => 'Antwort (zum Verzeichnis)',
     
     // Editor
     'foto'              => 'Ein Foto',

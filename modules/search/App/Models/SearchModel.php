@@ -38,10 +38,10 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         if ($type == 'website') {
             $sql = "SELECT DISTINCT 
                 item_id, 
-                item_title_url as title, 
-                item_content_url as content,
+                item_title as title, 
+                item_content as content,
                 item_url,
-                item_url_domain,
+                item_domain,
                 item_votes as votes,
                 item_count as count,
                 rel.*
@@ -55,7 +55,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                                 GROUP BY relation_item_id  
                     ) AS rel ON rel.relation_item_id = item_id  
                             WHERE item_is_deleted = 0
-                                AND MATCH(item_title_url, item_content_url, item_url_domain) AGAINST (:qa)
+                                AND MATCH(item_title, item_content, item_domain) AGAINST (:qa)
                                           LIMIT $start, $limit";
         }
 
@@ -76,7 +76,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                         item_id
                             FROM items
                                 WHERE item_is_deleted = 0
-                                    AND MATCH(item_title_url, item_content_url, item_url_domain) AGAINST (:qa)";
+                                    AND MATCH(item_title, item_content, item_domain) AGAINST (:qa)";
         }
 
         return DB::run($sql, ['qa' => "%" . $query . "%"])->rowCount();

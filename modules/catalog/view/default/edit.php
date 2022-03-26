@@ -4,10 +4,10 @@ $breadcrumb = (new Breadcrumbs())->base(getUrlByName('web'), Translate::get('hom
 $breadcrumb->addCrumb(Translate::get('site.edit'), 'red');
 $form = new Forms();
 
-$form->adding(['name' => 'title', 'type' => 'value', 'var' => $domain['item_title_url']]);
+$form->adding(['name' => 'title', 'type' => 'value', 'var' => $domain['item_title']]);
 $form->adding(['name' => 'url', 'type' => 'value', 'var' => $domain['item_url']]);
 $form->adding(['name' => 'status', 'type' => 'value', 'var' => $domain['item_status_url']]);
-$form->adding(['name' => 'content', 'type' => 'value', 'var' => $domain['item_content_url']]);
+$form->adding(['name' => 'content', 'type' => 'value', 'var' => $domain['item_content']]);
 $form->adding(['name' => 'published', 'type' => 'selected', 'var' => $domain['item_published']]);
 $form->adding(['name' => 'soft', 'type' => 'selected', 'var' => $domain['item_is_soft']]);
 $form->adding(['name' => 'github', 'type' => 'selected', 'var' => $domain['item_is_github']]);
@@ -25,8 +25,8 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
       <?= $breadcrumb->render('breadcrumbs'); ?>
 
       <fieldset class="gray-600">
-        <?= $domain['item_id']; ?>. <?= $domain['item_url_domain']; ?>
-        <?= Html::websiteImage($domain['item_url_domain'], 'favicon', $domain['item_url_domain'], ' ml10'); ?>
+        <?= $domain['item_id']; ?>. <?= $domain['item_domain']; ?>
+        <?= Html::websiteImage($domain['item_domain'], 'favicon', $domain['item_domain'], ' ml10'); ?>
         <span class="add-favicon text-sm" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
       </fieldset>
 

@@ -243,10 +243,10 @@ class PostController extends MainController
         $site       = PostModel::getDomain($domain, $this->user['id']);
         Html::pageError404($site);
 
-        $site['item_content'] = Content::text($site['item_content_url'], 'line');
+        $site['item_content'] = Content::text($site['item_content'], 'line');
 
-        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $site['item_url_domain']);
-        $pagesCount = FeedModel::feedCount($this->user, $sheet, $site['item_url_domain']);
+        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $site['item_domain']);
+        $pagesCount = FeedModel::feedCount($this->user, $sheet, $site['item_domain']);
 
         $m = [
             'og'    => false,

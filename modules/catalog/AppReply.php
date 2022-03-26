@@ -4,7 +4,8 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, FacetModel, UserAreaModel};
-use Translate, UserData, Breadcrumbs, Meta, Html;
+use App\Models\PostModel;
+use Content, Translate, UserData, Breadcrumbs, Meta, Html;
 
 class Catalog
 {
@@ -89,6 +90,60 @@ class Catalog
         $breadcrumb->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']);
 
         return $breadcrumb->render('breadcrumbs');
+    }
+
+    // Detailed site page
+    // Детальная страница сайта
+    public function website($sheet)
+    {
+        $slug   = Request::get('slug');
+
+        $item = WebModel::getItemOne($slug, $this->user['id']);
+        Html::pageError404($item);
+
+        if ($item['item_published'] == 0) {
+            Html::pageError404([]);
+        }
+
+        if ($item['item_content_soft']) {
+            $item['item_content_soft'] = Content::text($item['item_content_soft'], 'text');
+        }
+
+        if ($this->user['id'] > 0) {
+            Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
+            Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
+        }
+
+        $content_img = PATH_THUMBS . 'default.png';
+        if (file_exists(HLEB_PUBLIC_DIR . PATH_THUMBS . $item['item_domain'] . '.png')) {
+            $content_img =  PATH_THUMBS . $item['item_domain'] . '.png';
+        }
+
+        $m = [
+            'og'         => true,
+            'imgurl'     => $content_img,
+            'url'        => getUrlByName('web.website', ['slug' => $item['item_domain']]),
+        ];
+        $desc       = $item['item_title'] . '. ' . $item['item_content'];
+
+        if ($item['item_post_related']) {
+            $related_posts = PostModel::postRelated($item['item_post_related']);
+        }
+
+        return view(
+            '/view/default/website',
+            [
+                'meta'  => Meta::get($m, Translate::get('website') . ': ' . $item['item_title'], $desc),
+                'user' => $this->user,
+                'data'  => [
+                    'sheet'         => $sheet,
+                    'type'          => 'web',
+                    'item'          => $item,
+                    'similar'       => WebModel::itemSimilar($item['item_id'], 3),
+                    'related_posts' => $related_posts ?? [],
+                ]
+            ]
+        );
     }
 
     public function getItemId($id)

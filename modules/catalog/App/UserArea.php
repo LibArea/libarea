@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\UserAreaModel;
-use Content, Config, Translate, UserData, Meta;
+use Config, Translate, UserData, Meta;
 
 class UserArea
 {

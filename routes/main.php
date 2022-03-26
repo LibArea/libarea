@@ -28,6 +28,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 
                 // Add / Edit: post | comment | answer | facet | web
                 Route::get('/web/create')->module('catalog', 'App\Add@create')->name('create.web');
+                Route::get('/web/reply/create')->module('catalog', 'App\Reply@create')->name('reply.create');
                 Route::get('/create/{type}')->controller('ActionController@create')->where(['type' => '[a-z]+'])->name('content.create');
                 Route::get('/change/web')->module('catalog', 'App\Edit@edit')->name('change.web');
                 Route::get('/change/{type}')->controller('ActionController@change')->where(['type' => '[a-z]+'])->name('content.change');
@@ -114,6 +115,7 @@ Route::getType('post');
     Route::get('/user/card')->controller('User\UserController@card');
     Route::get('/msg/go')->controller('Post\AddPostController@msg');
     Route::get('/comments/addform')->controller('Comment\AddCommentController');
+    Route::get('/reply/addform')->module('catalog', 'App\Reply@addForma');
 Route::endType();
   
 Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+', 'id' => '[0-9]+'])->name('topic.followers');  
@@ -174,7 +176,7 @@ Route::get('/domain/{domain}/page/{page?}')->controller('Post\PostController@dom
 Route::get('/web')->module('catalog', 'App\Home', ['web', 'web'])->name('web');
 Route::get('/web/top')->module('catalog', 'App\Home', ['web.top', 'web'])->name('web.top');
 
-Route::get('/web/website/{slug}')->module('catalog', 'App\Catalog@website', ['feed'])->name('web.website');
+Route::get('/web/website/{slug}')->module('catalog', 'App\Detailed', ['feed'])->name('web.website');
 
 Route::get('/web/{cat}/{slug}')->module('catalog', 'App\Catalog', ['web.top', 'web'])->name('web.dir');
 Route::get('/web/{cat}/{slug}/all')->module('catalog', 'App\Catalog', ['web.all', 'web'])->name('web.dir.all');
