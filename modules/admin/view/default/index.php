@@ -46,7 +46,7 @@
       <a class="black" href="<?= getUrlByName('web.website', ['slug' => $reply['item_domain']]); ?>">
         <i class="bi-eye"></i>
       </a>
-      <div class="gray-600 text-sm mb15"><?= $reply['content']; ?></div>
+      <div class="gray-600 text-sm mb15"><?= Content::text($reply['content'], 'line'); ?></div>
     </div>
   <?php } ?>
 </div>

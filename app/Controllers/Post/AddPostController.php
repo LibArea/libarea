@@ -183,6 +183,7 @@ class AddPostController extends MainController
         Slug::rule('«', '');
         Slug::rule('»', '');
         Slug::rule('—', '');
+        Slug::rule('’', '');
         $uri    = Slug::get($title);
         $result = PostModel::getSlug($new_slug = substr($uri, 0, 90));
         if ($result) {
