@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, ReplyModel};
 use App\Models\ActionModel;
-use Translate, UserData, Html, Validation;
+use Translate, UserData, Html, Validation, Content;
 
 class Reply
 {
@@ -16,15 +16,72 @@ class Reply
         $this->user  = UserData::get();
     }
 
+    // Editing Form
+    // Форма редактирования
+    public function index()
+    {
+        $id         = Request::getPostInt('id'); // 67
+        $item_id    = Request::getPostInt('item_id');
+
+        // Access verification
+        // Проверка доступа 
+        $reply = ReplyModel::getId($id);
+        if (!Html::accessСheck($reply, 'reply', $this->user, 0, 0)) return false;
+
+        includeTemplate(
+            '/view/default/_block/edit-form-reply',
+            [
+                'data'  => [
+                    'id'        => $id,
+                    'item_id'   => $item_id,
+                    'content'   => $reply['content'],
+                ],
+                'user' => $this->user
+            ]
+        );
+    }
+
+    public function edit()
+    {
+        // Array ( [comment] => test test... [item_id] => 67 [id] => 28... ) 
+        $id         = Request::getPostInt('id');
+        $item_id    = Request::getPostInt('item_id');
+        $content    = $_POST['comment']; // для Markdown
+
+        $item = WebModel::getItemId($item_id);
+        Html::pageRedirection($item, '/');
+
+        // Access verification 
+        $reply = ReplyModel::getId($id);
+        if (!Html::accessСheck($reply, 'reply', $this->user, 0, 0)) {
+            redirect('/');
+        }
+
+        // If the user is frozen
+        (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
+
+        $redirect  = getUrlByName('web.website', ['slug' => $item['item_domain']]) . '#reply_' . $reply['reply_id'];
+
+        ReplyModel::edit(
+            [
+                'reply_id'        => $reply['reply_id'],
+                'reply_content'   => Content::change($content),
+                'reply_modified'  => date("Y-m-d H:i:s"),
+            ]
+        );
+
+        redirect($redirect);
+    }
+
     // Adding an answer
     // Добавление ответа
     public function create()
     {
         $id         = Request::getPostInt('id');
-        $pid        = Request::getPostInt('pid');
-        $content    = Request::getPost('content');
+        $item_id    = Request::getPostInt('item_id');
+        $content    = $_POST['comment']; // для Markdown
 
-        $item = WebModel::getItemId($id);
+        $item = WebModel::getItemId($item_id);
         Html::pageError404($item);
 
         $url = getUrlByName('web.website', ['slug' => $item['item_domain']]);
@@ -34,9 +91,9 @@ class Reply
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
         $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'reply');
 
-        // If root, then parent_id = content id, otherwise, response id
-        // Если корневой, то parent_id = id контента, в противном случае, id ответа
-        $parent_id = $pid == 0 ? $item['item_id'] : $pid;
+        // If root, then parent_id = content id, otherwise, id that is being answered
+        // Если корневой, то parent_id = id контента, в противном случае, id на который дается ответ
+        $parent_id = $id == 0 ? $item['item_id'] : $id;
 
         $last_id = ReplyModel::add(
             [
@@ -61,6 +118,8 @@ class Reply
             ]
         );
 
+        $url = getUrlByName('web.website', ['slug' => $item['item_domain']]) . '#reply_' . $last_id;
+
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
             (new \App\Controllers\AuditController())->create('reply', $last_id, $url);
@@ -77,12 +136,11 @@ class Reply
             '/view/default/_block/add-form-reply',
             [
                 'data'  => [
-                    'id'    => Request::getPostInt('id'),
-                    'pid'   => Request::getPostInt('pid'),
+                    'id'        => Request::getPostInt('id'),
+                    'item_id'   => Request::getPostInt('item_id'),
                 ],
                 'user'   => $this->user
             ]
         );
     }
-   
 }

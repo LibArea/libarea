@@ -10,7 +10,7 @@
           <?php if ($user['id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
           <div class="br-top-dotted mb20"></div>
           <ol class="list-none">
-            <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
+            <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="content-body hidden">
                 <div class="br-box-gray w110 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
                   <?= Html::image($answer['avatar'], $answer['login'], 'img-lg', 'avatar', 'max'); ?>
@@ -72,7 +72,7 @@
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
           <div class="br-bottom<?php if ($n > 1) { ?> ml30<?php } ?>"></div>
           <ol class="max-w780 list-none mb0 mt0">
-            <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
+            <li class="content_tree" id="comment_<?= $comment['comment_id']; ?>">
               <div class="text-sm pt5 pr5 pb5 pl5">
                 <?= Content::text($comment['comment_content'], 'text'); ?>
                 <span class="gray">

@@ -6,7 +6,6 @@ $facet  = $data['facet'] ?? false; ?>
 <?= Tpl::import('/meta', ['meta' => $meta]); ?>
 
 <body class="body-bg-fon<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?><?php if (Request::getCookie('menuYesNo') == 'menuno') { ?> menuno<?php } ?>">
-
   <header class="d-header">
     <div class="wrap">
       <div class="d-header_contents">

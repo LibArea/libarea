@@ -53,7 +53,9 @@ class Detailed
             $related_posts = PostModel::postRelated($item['item_post_related']);
         }
 
-        $answers = self::builderReply($item['item_id'], 0, ReplyModel::get($item['item_id'], $this->user));
+        $flat = ReplyModel::get($item['item_id'], $this->user);
+
+        $tree = !empty($flat) ? self::buildTree($item['item_id'], $flat) : false;
 
         return view(
             '/view/default/website',
@@ -64,7 +66,7 @@ class Detailed
                     'sheet'         => $sheet,
                     'type'          => 'web',
                     'item'          => $item,
-                    'answers'       => $answers,
+                    'tree'          => $tree,
                     'similar'       => WebModel::itemSimilar($item['item_id'], 3),
                     'related_posts' => $related_posts ?? [],
                 ]
@@ -72,18 +74,25 @@ class Detailed
         );
     }
 
-    // Building a tree
-    // Дерево
-    public static function builderReply($chaid_id, $level, $data, array $tree = [])
+    // https://stackoverflow.com/questions/4196157/create-array-tree-from-array-list/4196879#4196879
+    public static function buildTree($group, array $flatList)
     {
-        $level++;
-        foreach ($data as $part) {
-            if ($part['reply_parent_id'] == $chaid_id) {
-                $part['level']  = $level - 1;
-                $tree[]         = $part;
-                $tree           = self::builderReply($part['reply_id'], $level, $data, $tree);
-            }
+        $grouped = [];
+        foreach ($flatList as $node) {
+            $grouped[$node['reply_parent_id']][] = $node;
         }
-        return $tree;
+
+        $fnBuilder = function ($siblings) use (&$fnBuilder, $grouped) {
+            foreach ($siblings as $k => $sibling) {
+                $id = $sibling['reply_id'];
+                if (isset($grouped[$id])) {
+                    $sibling['children'] = $fnBuilder($grouped[$id]);
+                }
+                $siblings[$k] = $sibling;
+            }
+            return $siblings;
+        };
+
+        return $fnBuilder($grouped[$group]);
     }
 }

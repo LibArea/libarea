@@ -1,0 +1,15 @@
+<div class="cm_addentry max-w780 mt10">
+  <?php if ($user['id'] > 0) { ?>
+    <form action="<?= getUrlByName('reply.edit'); ?>" accept-charset="UTF-8" method="post">
+      <?= csrf_field() ?>
+      <textarea rows="5" minlength="6" name="comment"><?= $data['content']; ?></textarea>
+      <fieldset>
+        <input type="hidden" name="item_id" value="<?= $data['item_id']; ?>">
+        <input type="hidden" name="id" value="<?= $data['id']; ?>">
+        <?= Html::sumbit(Translate::get('edit')); ?>
+        <span id="cancel_comment" class="text-sm inline ml5 gray"><?= Translate::get('cancel'); ?></span>
+      </fieldset>
+      <div class="v-otsr"></div>
+    </form>
+  <?php } ?>
+</div>

@@ -57,8 +57,8 @@ class ReplyModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['reply_id' => $reply_id])->fetch();
     }
 
-    // Adding a comment
-    // Добавляем комментарий
+    // Adding a replica
+    // Добавляем реплику
     public static function add($params)
     {
         $sql = "INSERT INTO replys(reply_item_id, 
@@ -84,8 +84,8 @@ class ReplyModel extends \Hleb\Scheme\App\Models\MainModel
         return  $sql_last_id['last_id'];
     }
 
-    // Editing a comment
-    // Редактируем комментарий
+    // Editing a replica
+    // Редактируем реплику
     public static function edit($params)
     {
         $sql = "UPDATE replys SET 

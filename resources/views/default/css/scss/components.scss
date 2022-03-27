@@ -289,15 +289,16 @@ a:hover > img { opacity: 0.8; }
   display: block;
 }
 
-.comment_subtree:target,
-.comment_subtree.edit,
-.answers_subtree:target,
-.answers_subtree.edit {
+.content_tree:target,
+.content_tree.edit {
   background-clip: content-box;
   background-color: lightyellow;
   margin-top: -70px;
   padding-top: 70px;
 }
+
+/* Markdown */
+.ind-first-p p:first-child { margin-top: 3px; }
 
 .video-object {
   max-width: 640px;

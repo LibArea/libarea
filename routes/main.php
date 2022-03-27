@@ -8,6 +8,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/post/recommend')->controller('Post\AddPostController@recommend');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController');
+        Route::get('/reply/editform')->module('catalog', 'App\Reply');
         Route::get('/post/profile')->controller('Post\PostController@postProfile');
         Route::get('/favorite/add')->controller('FavoriteController');
         Route::get('/focus')->controller('SubscriptionController');
@@ -29,6 +30,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 // Add / Edit: post | comment | answer | facet | web
                 Route::get('/web/create')->module('catalog', 'App\Add@create')->name('create.web');
                 Route::get('/web/reply/create')->module('catalog', 'App\Reply@create')->name('reply.create');
+                Route::get('/web/reply/edit')->module('catalog', 'App\Reply@edit')->name('reply.edit');
                 Route::get('/create/{type}')->controller('ActionController@create')->where(['type' => '[a-z]+'])->name('content.create');
                 Route::get('/change/web')->module('catalog', 'App\Edit@edit')->name('change.web');
                 Route::get('/change/{type}')->controller('ActionController@change')->where(['type' => '[a-z]+'])->name('content.change');

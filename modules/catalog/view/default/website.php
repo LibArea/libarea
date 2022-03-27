@@ -66,50 +66,16 @@ $item = $data['item'];
           'help'      => '5 - 555 ' . Translate::get('characters'),
         ]); ?>
 
-        <input type="hidden" name="id" value="<?= $item['item_id']; ?>">
+        <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>">
         <?= Html::sumbit(Translate::get('reply')); ?>
       </form>
     <?php } ?>
 
-    <?php if ($data['answers']) { ?>
+    <?php if ($data['tree']) { ?>
       <h2 class="mt10"><?= Translate::get('answers'); ?></h2>
+
       <ul class="list-none mt20">
-        <?php foreach ($data['answers'] as  $reply) { ?>
-          <?php $left = $reply['level'] * 10; ?>
-
-          <li class="ml<?= $left; ?> mb20<?php if ($reply['reply_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
-            <div class="flex text-sm">
-              <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $reply['login']]); ?>">
-                <?= Html::image($reply['avatar'], $reply['login'], 'ava-sm', 'avatar', 'small'); ?>
-                <span class="mr5<?php if (Html::loginColor($reply['created_at'])) { ?> green<?php } ?>">
-                  <?= $reply['login']; ?>
-                </span>
-              </a>
-
-              <span class="mr5 ml5 gray-600 lowercase">
-                <?= Html::langDate($reply['date']); ?>
-              </span>
-            </div>
-            <div class="max-w780">
-              <?= Content::text($reply['content'], 'line'); ?>
-            </div>
-            <div class="flex text-sm">
-              <?= Html::votes($user['id'], $reply, 'reply', 'ps', 'mr5'); ?>
-
-              <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_reply')) { ?>
-                <a data-id="<?= $item['item_id']; ?>" data-pid="<?= $reply['reply_id']; ?>" class="add-reply gray-600 mr15 ml10"><?= Translate::get('reply'); ?></a>
-              <?php } ?>
-
-              <?php if (UserData::checkAdmin()) { ?>
-                <div data-id="<?= $reply['reply_id']; ?>" data-type="reply" class="type-action gray-600">
-                  <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
-                </div>
-              <?php } ?>
-            </div>
-          </li>
-
-          <div id="reply_addentry<?= $reply['reply_id']; ?>" class="none"></div>
-        <?php } ?>
+        <?= includeTemplate('/view/default/replys', ['data' => $data, 'user' => $user]); ?>
       </ul>
     <?php } else { ?>
       <div class="p20 center gray-600">

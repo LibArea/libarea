@@ -7,7 +7,7 @@ foreach ($data['answers'] as $answer) {
   <?php if ($answer['answer_is_deleted'] == 0) { ?>
     <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
     <ol class="list-none">
-      <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
+      <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
         <div class="content-body">
           <div class="flex text-sm">
             <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
@@ -71,7 +71,7 @@ foreach ($data['answers'] as $answer) {
 
     <?php if (UserData::checkAdmin()) { ?>
       <ol class="bg-red-200 text-sm hidden p15 mb10 list-none">
-        <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
+        <li class="content_tree" id="comment_<?= $answer['answer_id']; ?>">
           <?= Content::text($answer['content'], 'text'); ?>
           <?= Translate::get('answer'); ?> — <?= $answer['login']; ?>
           <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action right">

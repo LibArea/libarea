@@ -129,7 +129,9 @@
     <fieldset>
       <label for="trust_level">TL</label>
       <select name="trust_level">
-        <?php for ($i = 0; $i <= 10; $i++) { ?>
+        <?php for ($i = 0; $i <= 10; $i++) {
+            if ($i == UserData::USER_FIFTH_LEVEL + 1) { break; }
+            ?>
           <option <?php if ($data['user']['trust_level'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>">
             <?= $i; ?>
           </option>

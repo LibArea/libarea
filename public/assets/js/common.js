@@ -79,6 +79,12 @@ document.querySelectorAll(".add-comment")
       ).then(
         text => {
           comment.innerHTML = text;
+          
+            document.querySelectorAll("#cancel_comment")
+            .forEach(el => el.addEventListener("click", function (e) {
+              comment.classList.remove("block");
+            }));
+          
         }
       );
 }));

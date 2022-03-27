@@ -13,7 +13,7 @@
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
           <ol class="list-none">
-            <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
+            <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="content-body">
                 <div class="flex text-sm">
                   <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
@@ -36,7 +36,7 @@
                   <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
                   <?= Tpl::import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
                 </div>
-                <div class="max-w780">
+                <div class="max-w780 ind-first-p">
                   <?= Content::text($answer['answer_content'], 'text'); ?>
                 </div>
               </div>
@@ -79,7 +79,7 @@
 
           <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
             <ol class="bg-red-200 text-sm pr5 list-none">
-              <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
+              <li class="content_tree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">
                   <?= Content::text($answer['answer_content'], 'text'); ?>
                   <?= Translate::get('answer'); ?> — 
@@ -124,8 +124,7 @@
 
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
           <ol class="list-none">
-            <li class="comment_subtree mb20 pl15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>" id="comment_<?= $comment['comment_id']; ?>">
-                <div class="max-w780">
+            <li class="content_tree mb20 pl15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>" id="comment_<?= $comment['comment_id']; ?>">
                   <div class="text-sm flex">
                     <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
                       <?= Html::image($comment['avatar'], $comment['login'], 'ava-sm', 'avatar', 'small'); ?>
@@ -147,6 +146,7 @@
                     <a class="gray-600 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi-hash"></i></a>
                     <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
                   </div>
+                 <div class="max-w780 ind-first-p">  
                   <?= Content::text($comment['comment_content'], 'text'); ?>
                 </div>
                 <div class="text-sm flex">
