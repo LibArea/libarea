@@ -8,11 +8,11 @@
               <div class="right">
               <?php if ($facet['facet_user_id'] != $user['id']) { ?>
                 <?php if ($facet['signed_facet_id']) { ?>
-                  <div data-id="<?= $facet['facet_id']; ?>" data-type="topic" class="focus-id yes">
+                  <div data-id="<?= $facet['facet_id']; ?>" data-type="facet" class="focus-id yes">
                      <?= Translate::get('unsubscribe'); ?>
                   </div>
                 <?php } else { ?>
-                  <div data-id="<?= $facet['facet_id']; ?>" data-type="topic" class="focus-id no">
+                  <div data-id="<?= $facet['facet_id']; ?>" data-type="facet" class="focus-id no">
                     <i class="bi-plus"></i> <?= Translate::get('read'); ?>
                   </div>
                 <?php } ?>

@@ -22,13 +22,32 @@ $item = $data['item'];
         <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'mr25 box-shadow'); ?>
         <div class="m15 mb-ml0">
           <?= Content::text($item['item_content'], 'text'); ?>
-          <div class="gray mt20">
+          <div class="gray mt20 mb15">
             <a class="green" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
               <?= Html::websiteImage($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
               <?= $item['item_url']; ?>
             </a>
           </div>
-          <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
+          <div class="mb20">
+            <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
+          </div>
+          
+          <?php if ($user['id'] > 0) { ?>
+            <?php if (is_array($data['item_signed'])) { ?>
+              <div data-id="<?= $item['item_id']; ?>" data-type="item" class="focus-id left yes">
+                <?= Translate::get('unsubscribe'); ?>
+              </div>
+            <?php } else { ?>
+              <div data-id="<?= $item['item_id']; ?>" data-type="item" class="focus-id left no">
+                + <?= Translate::get('read'); ?>
+              </div>
+            <?php } ?>
+          <?php } else { ?>
+            <a class="left focus-id no" href="<?= getUrlByName('login'); ?>">
+              + <?= Translate::get('read'); ?>
+            </a>
+          <?php } ?>
+          
         </div>
       </div>
       <?php if ($item['item_is_soft'] == 1) { ?>

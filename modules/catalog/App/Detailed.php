@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, ReplyModel};
-use App\Models\PostModel;
+use App\Models\{PostModel, SubscriptionModel};
 use Content, Translate, UserData, Meta, Html;
 
 class Detailed
@@ -54,7 +54,6 @@ class Detailed
         }
 
         $flat = ReplyModel::get($item['item_id'], $this->user);
-
         $tree = !empty($flat) ? self::buildTree($item['item_id'], $flat) : false;
 
         return view(
@@ -67,6 +66,7 @@ class Detailed
                     'type'          => 'web',
                     'item'          => $item,
                     'tree'          => $tree,
+                    'item_signed'   => SubscriptionModel::getFocus($item['item_id'], $this->user['id'], 'item'),
                     'similar'       => WebModel::itemSimilar($item['item_id'], 3),
                     'related_posts' => $related_posts ?? [],
                 ]

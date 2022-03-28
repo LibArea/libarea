@@ -21,7 +21,7 @@ class SubscriptionController extends MainController
         $content_id = Request::getPostInt('content_id');
         $type       = Request::getPost('type');
 
-        $allowed = ['post', 'topic', 'blog', 'category'];
+        $allowed = ['post', 'facet', 'blog', 'category', 'item'];
         if (!in_array($type, $allowed)) return false;
         if ($content_id <= 0) return false;
 

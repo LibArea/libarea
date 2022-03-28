@@ -1,5 +1,5 @@
 <?php if ($focus_users) { ?>
-  <div class="text-sm mt20 gray-600">
+  <span class="text-sm mt20 gray-600">
     <div class="uppercase inline mr5"><?= Translate::get('reads'); ?>:</div>
     <?php $n = 0;
     foreach ($focus_users as $user) {
@@ -12,5 +12,5 @@
     <span class="focus-user gray-600 ml10">
       <?= $topic_focus_count; ?>
     </span>
-  </div>
+  </span>
 <?php } ?>

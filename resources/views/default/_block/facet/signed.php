@@ -7,11 +7,11 @@
 <?php } else { ?>
   <?php if ($topic['facet_user_id'] != $user['id']) { ?>
     <?php if ($topic_signed) { ?>
-      <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id yes">
+      <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id yes">
         <?= Translate::get('unsubscribe'); ?>
       </div>
     <?php } else { ?>
-      <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id no">
+      <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id no">
         + <?= Translate::get('read'); ?>
       </div>
     <?php } ?>

@@ -233,7 +233,7 @@
         <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
 
         <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
-          <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline text-sm sky center mt5 mr5">
+          <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm sky center mt5 mr5">
               <i class="bi-plus"></i> <?= Translate::get('read'); ?>
           </div>
         <?php } ?>

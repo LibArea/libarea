@@ -18,7 +18,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 
         <div class="mt15 right">
           <?= Tpl::import('/_block/facet/signed', [
-            'user'           => $user,
+            'user'          => $user,
             'topic'         => $blog,
             'topic_signed'  => is_array($data['facet_signed']),
           ]); ?>
