@@ -25,14 +25,12 @@ class SubscriptionController extends MainController
         if (!in_array($type, $allowed)) return false;
         if ($content_id <= 0) return false;
 
-        if ($type == 'post') {
-            $content = PostModel::getPost($content_id, 'id', $this->user);
-        } else {
+        if ($type == 'facet') {
             $content =  FacetModel::getFacet($content_id, 'id', $type);
             // Запретим владельцу отписываться от созданного фасета
             // Prevent the owner from unsubscribing from the created facet 
             if ($content['facet_user_id'] == $this->user['id']) return false;
-        }
+        } 
 
         SubscriptionModel::focus($content_id, $this->user['id'], $type);
 

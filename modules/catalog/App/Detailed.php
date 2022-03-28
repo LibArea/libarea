@@ -54,7 +54,7 @@ class Detailed
         }
 
         $flat = ReplyModel::get($item['item_id'], $this->user);
-        $tree = !empty($flat) ? self::buildTree($item['item_id'], $flat) : false;
+        $tree = !empty($flat) ? self::buildTree(0, $flat) : false;
 
         return view(
             '/view/default/website',

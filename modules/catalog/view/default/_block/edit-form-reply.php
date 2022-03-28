@@ -2,7 +2,7 @@
   <?php if ($user['id'] > 0) { ?>
     <form action="<?= getUrlByName('reply.edit'); ?>" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
-      <textarea rows="5" minlength="6" name="comment"><?= $data['content']; ?></textarea>
+      <textarea rows="5" minlength="6" name="content"><?= $data['content']; ?></textarea>
       <fieldset>
         <input type="hidden" name="item_id" value="<?= $data['item_id']; ?>">
         <input type="hidden" name="id" value="<?= $data['id']; ?>">

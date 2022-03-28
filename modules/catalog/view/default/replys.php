@@ -4,7 +4,7 @@
     {
         echo '<ul class="list-none-one mb20 mt10">';
         foreach($nodes as $node) {
-            $minus = $node['reply_parent_id'] == $node['reply_item_id'] ? ' ml-40' : '';
+            $minus = $node['reply_parent_id'] == 0 ? ' ml-40' : '';
             $delete = $node['reply_is_deleted'] == 1 ? ' bg-red-200' : '';
             
             echo '<li class="mt20' . $minus . $delete . '">

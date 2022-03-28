@@ -43,13 +43,14 @@ class Reply
 
     public function edit()
     {
-        // Array ( [comment] => test test... [item_id] => 67 [id] => 28... ) 
         $id         = Request::getPostInt('id');
         $item_id    = Request::getPostInt('item_id');
-        $content    = $_POST['comment']; // для Markdown
+        $content    = $_POST['content']; // для Markdown
 
         $item = WebModel::getItemId($item_id);
         Html::pageRedirection($item, '/');
+
+        Validation::Length($content, Translate::get('content'), '6', '555', $url);
 
         // Access verification 
         $reply = ReplyModel::getId($id);
@@ -79,7 +80,7 @@ class Reply
     {
         $id         = Request::getPostInt('id');
         $item_id    = Request::getPostInt('item_id');
-        $content    = $_POST['comment']; // для Markdown
+        $content    = $_POST['content']; // для Markdown
 
         $item = WebModel::getItemId($item_id);
         Html::pageError404($item);
@@ -91,13 +92,9 @@ class Reply
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
         $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'reply');
 
-        // If root, then parent_id = content id, otherwise, id that is being answered
-        // Если корневой, то parent_id = id контента, в противном случае, id на который дается ответ
-        $parent_id = $id == 0 ? $item['item_id'] : $id;
-
         $last_id = ReplyModel::add(
             [
-                'reply_parent_id'   => $parent_id,
+                'reply_parent_id'   => $id,
                 'reply_item_id'     => $item['item_id'],
                 'reply_content'     => $content,
                 'reply_type'        => 'web',
