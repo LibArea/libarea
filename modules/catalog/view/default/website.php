@@ -31,23 +31,17 @@ $item = $data['item'];
           <div class="mb20">
             <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
           </div>
-          
-          <?php if ($user['id'] > 0) { ?>
-            <?php if (is_array($data['item_signed'])) { ?>
-              <div data-id="<?= $item['item_id']; ?>" data-type="item" class="focus-id left yes">
-                <?= Translate::get('unsubscribe'); ?>
-              </div>
-            <?php } else { ?>
-              <div data-id="<?= $item['item_id']; ?>" data-type="item" class="focus-id left no">
-                + <?= Translate::get('read'); ?>
-              </div>
-            <?php } ?>
-          <?php } else { ?>
-            <a class="left focus-id no" href="<?= getUrlByName('login'); ?>">
-              + <?= Translate::get('read'); ?>
-            </a>
-          <?php } ?>
-          
+          <div class="left mt20">
+            <?= Html::signed([
+              'user_id'         => $user['id'],
+              'type'            => 'item',
+              'id'              => $item['item_id'],
+              'content_user_id' => $item['item_user_id'],
+              'state'           => is_array($data['item_signed']),
+              'unsubscribe'     => Translate::get('unsubscribe'),
+              'read'            => Translate::get('read'),
+            ]); ?>
+          </div>
         </div>
       </div>
       <?php if ($item['item_is_soft'] == 1) { ?>

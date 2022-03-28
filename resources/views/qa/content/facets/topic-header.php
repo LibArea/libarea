@@ -14,10 +14,14 @@
     <div class="help"><?= $topic['facet_short_description']; ?></div>
 
     <div class="mt15 right">
-      <?= Tpl::import('/_block/facet/signed', [
-        'user'           => $user,
-        'topic'          => $topic,
-        'topic_signed'   => is_array($data['facet_signed']),
+      <?= Html::signed([
+          'user_id'         => $user['id'], 
+          'type'            => 'facet', 
+          'id'              => $topic['facet_id'], 
+          'content_user_id' => $topic['facet_user_id'], 
+          'state'           => is_array($data['facet_signed']),
+          'unsubscribe'     => Translate::get('unsubscribe'),
+          'read'            => Translate::get('read'),
       ]); ?>
     </div>
 

@@ -217,6 +217,25 @@ class Html
         return $html;
     }
 
+    // Subscription: groups, blogs, posts, directory
+    public static function signed($arr)
+    {
+        $html  = '';
+        if ($arr['user_id'] > 0) {
+            if ($arr['content_user_id'] != $arr['user_id']) {
+                if ($arr['state']) {
+                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id yes">' . $arr['unsubscribe'] . '</div>';
+                } else {
+                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id no">+ ' . $arr['read'] . '</div>';
+                }
+            }
+        } else {
+            $html .= '<a href="' . getUrlByName('login') . '"><div class="focus-id no">+ ' . $arr['read'] . '</div></a>';
+        }
+
+        return $html;
+    }
+
     // Page pagination
     public static function pagination($pNum, $pagesCount, $sheet, $other)
     {
