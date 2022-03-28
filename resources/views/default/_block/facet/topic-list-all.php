@@ -13,8 +13,6 @@
             'id'              => $facet['facet_id'],
             'content_user_id' => $facet['facet_user_id'],
             'state'           => $facet['signed_facet_id'],
-            'unsubscribe'     => Translate::get('unsubscribe'),
-            'read'            => Translate::get('read'),
           ]); ?>
         </div>
 

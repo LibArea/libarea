@@ -65,7 +65,7 @@ class InvitationsController extends MainController
 
         $inv_user = InvitationModel::duplicate($invitation_email);
         if ($inv_user['invitation_email'] == $invitation_email) {
-            Html::addMsg('invate-to-replay', 'error');
+            Html::addMsg('invate.to.replay', 'error');
             redirect($redirect);
         }
 

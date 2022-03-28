@@ -2,7 +2,7 @@
   <center>
     <a class="tags center" href="/topics">
       <i class="bi-lightbulb middle mr5"></i>
-      <?= Translate::get('topic-subscription'); ?>
+      <?= Translate::get('topic.subscription'); ?>
     </a>
   </center>
   <div class="grid-cols-2 pt20">

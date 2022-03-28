@@ -224,13 +224,13 @@ class Html
         if ($arr['user_id'] > 0) {
             if ($arr['content_user_id'] != $arr['user_id']) {
                 if ($arr['state']) {
-                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id yes">' . $arr['unsubscribe'] . '</div>';
+                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id yes">' . Translate::get('unsubscribe') . '</div>';
                 } else {
-                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id no">+ ' . $arr['read'] . '</div>';
+                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id no">+ ' . Translate::get('read') . '</div>';
                 }
             }
         } else {
-            $html .= '<a href="' . getUrlByName('login') . '"><div class="focus-id no">+ ' . $arr['read'] . '</div></a>';
+            $html .= '<a href="' . getUrlByName('login') . '"><div class="focus-id no">+ ' . Translate::get('read') . '</div></a>';
         }
 
         return $html;

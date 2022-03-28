@@ -27,14 +27,14 @@
             </div>
 
             <?php if (UserData::checkAdmin()) { ?>
-              <?= Translate::get('the link was used to'); ?>: 
+              <?= Translate::get('link.used'); ?>: 
               <?= $invite['invitation_email']; ?>
               <code class="block w-90">
                 <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
               </code>
             <?php } ?>
 
-            <span class="text-sm gray"><?= Translate::get('link has been used'); ?></span>
+            <span class="text-sm gray"><?= Translate::get('link.used'); ?></span>
           <?php } else { ?>
             <?= Translate::get('for'); ?> (<?= $invite['invitation_email']; ?>) 
             <?= Translate::get('can send this link'); ?>:

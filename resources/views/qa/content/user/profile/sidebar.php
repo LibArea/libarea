@@ -130,7 +130,7 @@
     <div class="m0 text-3xl">
       <i title="<?= Translate::get('medal.registration'); ?>" class="bi-gift sky"></i>
       <?php if ($profile['id'] < 50) { ?>
-        <i title="<?= Translate::get('joined in the early days'); ?>" class="bi-award green"></i>
+        <i title="<?= Translate::get('first.days'); ?>" class="bi-award green"></i>
       <?php } ?>
       <?php foreach ($data['badges'] as $badge) { ?>
         <?= $badge['badge_icon']; ?>

@@ -62,7 +62,7 @@ class MessagesController extends MainController
         return Tpl::agRender(
             '/messages/messages',
             [
-                'meta'  => Meta::get($m = [], Translate::get('private messages')),
+                'meta'  => Meta::get($m = [], Translate::get('private.messages')),
                 'data'  => [
                     'sheet'     => 'messages',
                     'type'      => 'messages',
@@ -77,12 +77,12 @@ class MessagesController extends MainController
 
         $id = Request::getInt('id');
         if (!$dialog = MessagesModel::getDialogById($id)) {
-            Html::addMsg('the dialog does not exist', 'error');
+            Html::addMsg('no.dialogue', 'error');
             redirect(getUrlByName('messages', ['login' => $this->user['login']]));
         }
 
         if ($dialog['dialog_recipient_id'] != $this->user['id'] and $dialog['dialog_sender_id'] != $this->user['id']) {
-            Html::addMsg('the topic does not exist', 'error');
+            Html::addMsg('no.topic', 'error');
             redirect(getUrlByName('messages', ['login' => $this->user['login']]));
         }
 
@@ -150,7 +150,7 @@ class MessagesController extends MainController
         return Tpl::agRender(
             '/messages/user-add-messages',
             [
-                'meta'  => Meta::get($m = [], Translate::get('send a message')),
+                'meta'  => Meta::get($m = [], Translate::get('send.message')),
                 'data'  => [
                     'recipient_uid' => $user['id'],
                     'login'         => $user['login'],

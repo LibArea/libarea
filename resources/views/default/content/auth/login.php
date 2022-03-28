@@ -19,7 +19,7 @@ $form->html_form($user['trust_level'], Config::get('form/auth.login'));
     </fieldset>
   </form>
   <?php if (Config::get('general.invite') == 1) { ?>
-    <?= Translate::get('no-invate-txt'); ?>
+    <?= Translate::get('invate.text'); ?>
   <?php } ?>
   <p><?= Translate::get('login.use.condition'); ?>.</p>
   <p><?= Translate::get('info-login'); ?></p>

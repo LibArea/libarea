@@ -118,7 +118,7 @@ class Content
     public static function stopContentQuietМode($user_limiting_mode)
     {
         if ($user_limiting_mode == 1) {
-            Html::addMsg('limiting-mode-1', 'error');
+            Html::addMsg('silent.mode', 'error');
             redirect('/');
         }
 

@@ -58,7 +58,7 @@ class RegisterController extends MainController
         Validation::Email($email, $redirect);
 
         if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
-            Html::addMsg('e-mail-replay', 'error');
+            Html::addMsg('email.replay', 'error');
             redirect($redirect);
         }
 
@@ -70,7 +70,7 @@ class RegisterController extends MainController
         }
 
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
-            Html::addMsg('multiple-accounts', 'error');
+            Html::addMsg('multiple.accounts', 'error');
             redirect($redirect);
         }
 
@@ -78,13 +78,13 @@ class RegisterController extends MainController
         Validation::Length($login, Translate::get('nickname'), '3', '10', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
-            Html::addMsg('nickname-repeats-characters', 'error');
+            Html::addMsg('nick.character.repetitions', 'error');
             redirect($redirect);
         }
 
         // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
         if (in_array($login, Config::get('stop-nickname'))) {
-            Html::addMsg('nickname-replay', 'error');
+            Html::addMsg('nickname.replay', 'error');
             redirect($redirect);
         }
 
@@ -95,7 +95,7 @@ class RegisterController extends MainController
 
         Validation::Length($password, Translate::get('password'), '8', '32', $redirect);
         if (substr_count($password, ' ') > 0) {
-            Html::addMsg('password-spaces', 'error');
+            Html::addMsg('password.spaces', 'error');
             redirect($redirect);
         }
 
@@ -181,7 +181,7 @@ class RegisterController extends MainController
         $invate = InvitationModel::available($code);
 
         if (!$invate) {
-            Html::addMsg('the code is incorrect', 'error');
+            Html::addMsg('code.incorrect', 'error');
             redirect('/');
         }
 

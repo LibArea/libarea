@@ -210,7 +210,7 @@ class AddPostController extends MainController
                     'item_url'          => $item_url,
                     'item_domain'       => $post_url_domain,
                     'item_title'        => $post_title,
-                    'item_content'      => Translate::get('description is formed'),
+                    'item_content'      => Translate::get('description.formed'),
                     'item_published'    => 0,
                     'item_user_id'      => $this->user['id'],
                     'item_type_url'     => 0,

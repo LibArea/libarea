@@ -156,7 +156,7 @@ class SettingController extends MainController
         }
 
         if (substr_count($password2, ' ') > 0) {
-            Html::addMsg('password-spaces', 'error');
+            Html::addMsg('password.spaces', 'error');
             redirect($redirect);
         }
 

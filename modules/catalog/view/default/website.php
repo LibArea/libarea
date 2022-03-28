@@ -38,8 +38,6 @@ $item = $data['item'];
               'id'              => $item['item_id'],
               'content_user_id' => $item['item_user_id'],
               'state'           => is_array($data['item_signed']),
-              'unsubscribe'     => Translate::get('unsubscribe'),
-              'read'            => Translate::get('read'),
             ]); ?>
           </div>
         </div>

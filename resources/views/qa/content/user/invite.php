@@ -15,7 +15,7 @@
       </fieldset>
     </form>
     <?php if (Config::get('general.invite') == true) { ?>
-      <?= Translate::get('no-invate-txt'); ?>
+      <?= Translate::get('invate.text'); ?>
     <?php } ?>
   </div>
 </main>

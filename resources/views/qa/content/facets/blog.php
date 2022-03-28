@@ -23,8 +23,6 @@ if ($blog['facet_is_deleted'] == 0) { ?>
             'id'              => $blog['facet_id'],
             'content_user_id' => $blog['facet_user_id'],
             'state'           => is_array($data['facet_signed']),
-            'unsubscribe'     => Translate::get('unsubscribe'),
-            'read'            => Translate::get('read'),
           ]); ?>
         </div>
 

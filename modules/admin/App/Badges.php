@@ -171,7 +171,7 @@ class Badges
             ]
         );
 
-        Html::addMsg('the command is executed', 'success');
+        Html::addMsg('command.executed', 'success');
 
         redirect('/admin/users/' . $uid . '/edit');
     }

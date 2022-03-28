@@ -46,8 +46,8 @@ class AddFacetController extends MainController
         $redirect = ($facet_type == 'category') ? getUrlByName('web') : getUrlByName($facet_type . '.add');
         if ($facet_type == 'blog') {
             if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
-                if (in_array($facet_slug, Config::get('stop-blog'))) {
-                    Html::addMsg('stop-blog', 'error');
+                if (in_array($facet_slug, Config::get('stop.blog'))) {
+                    Html::addMsg('url.reserved', 'error');
                     redirect($redirect);
                 }
             }

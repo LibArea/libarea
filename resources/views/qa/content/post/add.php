@@ -47,7 +47,7 @@
           <div id="start">
             <input id="file-upload" type="file" name="images" accept="image/*" />
             <div class="text-sm gray-600 mt5">
-              <?= Translate::get('format-cover-post'); ?>.
+              <?= Translate::get('format.cover.post'); ?>.
             </div>
             <i class="fa fa-download" aria-hidden="true"></i>
             <div id="notimage" class="none"><?= Translate::get('select.image'); ?></div>

@@ -20,8 +20,6 @@
           'id'              => $topic['facet_id'], 
           'content_user_id' => $topic['facet_user_id'], 
           'state'           => is_array($data['facet_signed']),
-          'unsubscribe'     => Translate::get('unsubscribe'),
-          'read'            => Translate::get('read'),
       ]); ?>
     </div>
 

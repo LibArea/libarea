@@ -1,7 +1,7 @@
 <main class="col-two">
   <div class="box-white">
     <h1 class="mt0 mb10 text-2xl font-normal">
-      <?= Translate::get('send a message'); ?>  <?= $user['login']; ?> / <?= $data['login']; ?>
+      <?= Translate::get('send.message'); ?>  <?= $user['login']; ?> / <?= $data['login']; ?>
       <a class="right text-sm" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">
         <?= Translate::get('all messages'); ?>
       </a>
