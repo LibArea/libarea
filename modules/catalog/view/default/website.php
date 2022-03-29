@@ -38,7 +38,7 @@ $item = $data['item'];
               'user_id'         => $user['id'],
               'type'            => 'item',
               'id'              => $item['item_id'],
-              'content_user_id' => $item['item_user_id'],
+              'content_user_id' => false, // allow subscription and unsubscribe to the owner 
               'state'           => is_array($data['item_signed']),
             ]); ?>
           </div>
