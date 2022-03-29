@@ -42,7 +42,7 @@
           <td class="text-sm">
             <div class="content-telo">
               <?php $content = $audit['content'][$audit['action_type'] . '_content']; ?>
-              <?= Content::text(fragment($content), 'text'); ?>
+              <?= Content::text(Html::fragment($content), 'text'); ?>
             </div>
 
             (id:<?= $audit['id']; ?>)

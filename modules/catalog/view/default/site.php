@@ -8,7 +8,9 @@
         </div>
         <div class="list-items__description">
           <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
-            <h2><?= $item['item_title']; ?></h2>
+            <h2><?= $item['item_title']; ?>
+              <?php $date = date_diff(new DateTime(), new DateTime($item['item_date']))->days; ?>
+              <?php if ($date < 3) { ?><sup class="red text-sm">new</sup><? } ?></h2>
           </a>
           <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', $screening); ?>
 

@@ -1,6 +1,7 @@
 <?php
     $tl = $user['trust_level'];
-    function internalRender($nodes, $tl)
+    $user_id = $user['id'];
+    function internalRender($nodes, $tl, $user_id)
     {
         echo '<ul class="list-none-one mb20 mt10">';
         foreach($nodes as $node) {
@@ -26,7 +27,7 @@
             }
 
             echo '<div class="max-w780 text-base ind-first-p">' . Content::text($node['content'], 'text') . '</div>
-                    <div class="flex">' . Html::votes($node['id'], $node, 'reply', 'ps', 'mr5');
+                    <div class="flex">' . Html::votes($user_id, $node, 'reply', 'ps', 'mr5');
             
             if ($tl >= Config::get('trust-levels.tl_add_reply')) { 
                echo '<a data-item_id="' . $node['reply_item_id'] . '" data-id="' . $node['reply_id'] . '" class="addreply gray-600 mr15 ml10">' . Translate::get('reply') . '</a>';
@@ -40,7 +41,7 @@
                  <div id="reply_addentry' . $node['reply_id'] . '" class="none"></div>';
             
             if (isset($node['children'])) {
-                internalRender($node['children'], $tl);
+                internalRender($node['children'], $tl, $user_id);
             }
             
             echo '</li>';
@@ -48,4 +49,4 @@
         echo '</ul>';
     }
 
- echo internalRender($data['tree'], $user);
+ echo internalRender($data['tree'], $tl, $user_id);
