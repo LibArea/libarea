@@ -311,6 +311,7 @@ $data = [
     'notif.add.website'         => 'added site %1$s look it up %2$s',
     'notif.edit.website'        => 'changed site, %1$s check it out %2$s',
     'notif.approved.website'    => '(moderator) %1$s approved your site %2$s',
+    'notif.add.website.comment' =>'%1$s commented on the site you subscribed to %2$s',
 
     /* MSG */
     'string.length'         => 'Length %1$s should be from  %2$s -> %3$s characters ',
@@ -449,11 +450,6 @@ $data = [
     'profile.comments.desc'     => '%1$s — participant comments in chronological order. %2$s',
     
     'page-number'           => ' Page %1$s. ',
-    'main.top.title'        => 'Popular posts. ',
-    'main.top.desc'         => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
-    'main.all.title'        => 'All posts. ',
-    'main.all.desc'         => 'List of all posts in the community feed (by number of replies). Conversations, questions and answers, comments. ',
-    'main.deleted.title'    => 'Deleted posts ',
   
     'users.all'                 => 'List of participants',
     'users.all.info'            => 'List of participants in the order of their activity on the site',
@@ -486,6 +482,13 @@ $data = [
     'topics.my'                 => 'I read ',
     'topics.my.info'            => 'Topics I follow, I read',
     'topics.my.desc'            => 'Topics that I read or have created',
+    
+    'main.feed.title'           => '%1$s — community (topics, blogs of interest)',
+    'main.top.title'            => '%1$s — popular posts',
+    'main.all.title'            => '%1$s — all posts',
+    'main.feed.desc'            => 'Interest topics, feed, blogs. Conversations, questions and answers, interesting facts. Scripts CMS and social networks, Frameworks. Script  %1$s.',
+    'main.top.desc'             => 'List of popular posts in the community feed (by number of replies). Topics by interest. Conversations, questions and answers, comments. Script %1$s.',
+    'main.all.desc'             => 'List of all posts in the community feed. Script  %1$s.',
     
     'main.feed.info'            => 'Posts in chronological order...',
     'main.all.info'             => 'All posts in the community feed...',

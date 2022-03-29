@@ -41,6 +41,7 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
     const TYPE_ADD_WEBSITE          = 30; // site added
     const TYPE_EDIT_WEBSITE         = 31; // changed and status changed
     const WEBSITE_APPROVED          = 32; // approved
+    const TYPE_ADD_REPLY_WEBSITE    = 34; // replica added to the site
 
     // Лист уведомлений
     public static function listNotification($uid)

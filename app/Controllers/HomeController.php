@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\HomeModel;
-use Config, Tpl, UserData, Meta;
+use Config, Tpl, UserData, Meta, Translate;
 
 class HomeController extends MainController
 {
@@ -37,8 +37,8 @@ class HomeController extends MainController
             $topics = \App\Models\FacetModel::advice($this->user['id']);
         }
 
-        $meta_title = Config::get('meta.' . $sheet . '.title');
-        $meta_desc  = Config::get('meta.' . $sheet . '.desc');
+        $meta_title = sprintf(Translate::get($sheet . '.title'), Config::get('meta.name'));
+        $meta_desc  = sprintf(Translate::get($sheet . '.desc'), Config::get('meta.name'));
 
         $m = [
             'og'         => true,
@@ -49,7 +49,7 @@ class HomeController extends MainController
         return Tpl::agRender(
             '/home',
             [
-                'meta'  => Meta::get($m, $meta_title ?? Config::get('meta.title'), $meta_desc ?? Config::get('meta.desc')),
+                'meta'  => Meta::get($m, $meta_title, $meta_desc, 'main'),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,

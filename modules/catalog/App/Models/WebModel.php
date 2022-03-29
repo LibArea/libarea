@@ -374,4 +374,17 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['id' => $id]);
     }
+    
+    // Кто подписан на данный сайт
+    public static function getFocusUsersItem($item_id)
+    {
+        $sql = "SELECT
+                    signed_item_id,
+                    signed_user_id
+                        FROM items_signed
+                        WHERE signed_item_id = :item_id";
+
+        return DB::run($sql, ['item_id' => $item_id])->fetchAll();
+    }
+    
 }

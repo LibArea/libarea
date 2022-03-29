@@ -2,7 +2,7 @@
 
 class Meta
 {
-    public static function get($m, $title = '', $desc = '', $date_article = '')
+    public static function get($m, $title = '', $desc = '', $date_article = '', $url_page = '')
     {
         $output = '';
         if ($title == '') {
@@ -12,8 +12,13 @@ class Meta
             $desc = Config::get('meta.name');
         }
 
-        $output .= '<title>' . $title . ' | ' . Config::get('meta.name') . '</title>'
-            . '<meta name="description" content="' . $desc . '">';
+        if ($url_page = 'main') {
+            $output .= '<title>' . $title . '</title>';
+        }  else {
+            $output .= '<title>' . $title . ' | ' . Config::get('meta.name') . '</title>';
+        }  
+
+        $output .= '<meta name="description" content="' . $desc . '">';
 
         if ($date_article != '') {
             $output .= '<meta property="og:type" content="article" />'
@@ -25,12 +30,12 @@ class Meta
                 $output .= '<link rel="canonical" href="' . Config::get('meta.url') . $m['url'] . '">';
             }
 
-            if ($m['og']) {
+            if (!empty($m['og'])) {
                 $output .= '<meta property="og:title" content="' . $title . '"/>'
                     . '<meta property="og:description" content="' . $desc . '"/>'
                     . '<meta property="og:url" content="' . Config::get('meta.url') . $m['url'] . '"/>';
 
-                if ($m['imgurl']) {
+                if (!empty($m['imgurl'])) {
                     $output .= '<meta property="og:image" content="' . Config::get('meta.url') . $m['imgurl'] . '"/>'
                         . '<meta property="og:image:width" content="820" />'
                         . '<meta property="og:image:height" content="320" />';

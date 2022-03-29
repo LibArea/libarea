@@ -34,7 +34,7 @@ class AllFacetController extends MainController
         $Flimit = (new \App\Controllers\Facets\AddFacetController())->limitFacer($type, 'no.redirect');
 
         $m = [
-            'og'    => false,
+            'og'    => true,
             'url'   => getUrlByName($sheet),
         ];
 

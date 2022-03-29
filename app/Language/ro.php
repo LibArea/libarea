@@ -311,6 +311,7 @@ $data = [
     'notif.add.website'         => 'site adăugat  %1$s cauta-l caut-o %2$s',
     'notif.edit.website'        => 'site schimbat , %1$s verifică  %2$s',
     'notif.approved.website'    => '(moderator) %1$s a aprobat site-ul dvs %2$s',
+    'notif.add.website.comment' =>'%1$s a comentat pe site-ul la care te-ai abonat %2$s',
 
     /* MSG */
     'string.length'         => 'Lungimea %1$s trebuie să aibă între %2$s și %3$s caractere',
@@ -455,11 +456,6 @@ $data = [
     'profile.comments.desc'     => '%1$s — comentariile participanților în ordine cronologică. %2$s',
     
     'page-number'           => ' — pagina %1$s ',
-    'main.top.title'        => 'Posturi populare. ',
-    'main.top.desc'         => 'O listă de postări populare din feedul comunității (după numărul de răspunsuri). Subiecte de interes. Conversații, întrebări și Răspunsuri, Comentarii. ',
-    'main.all.title'        => 'Toate mesajele. ',
-    'main.all.desc'         => 'O listă a tuturor postărilor din feedul comunității (după numărul de răspunsuri). Conversații, întrebări și Răspunsuri, Comentarii. ',
-    'main.deleted.title'    => 'Postări șterse ',
     
     'users.all'                 => 'Lista participanților',
     'users.all.info'            => 'Lista participanților în ordinea activității lor pe site',
@@ -492,7 +488,14 @@ $data = [
     'topics.my'                 => 'Citesc',
     'topics.my.info'            => 'Subiecte pe care le urmăresc, le citesc',
     'topics.my.desc'            => 'Subiecte pe care le-am citit sau pe care le-am creat',
-    
+
+    'main.feed.title'           => '%1$s — comunitate (subiecte, bloguri de interes)',
+    'main.top.title'            => '%1$s — postari populare',
+    'main.all.title'            => '%1$s — toate postările',
+    'main.feed.desc'            => 'Subiecte de interes, feed, bloguri. Conversații, întrebări și răspunsuri, fapte interesante. Scripturi CMS și rețele sociale, Framework. Scenariul %1$s.',
+    'main.top.desc'             => 'Lista postărilor populare din feedul comunității (după numărul de răspunsuri). Subiecte după interes. Conversații, întrebări și răspunsuri, comentarii. Scenariul %1$s.',
+    'main.all.desc'             => 'Lista tuturor postărilor din feedul comunității. Scenariul %1$s.',
+
     'main.feed.info'            => 'Postări în ordine cronologică...',
     'main.all.info'             => 'Toate postările din fluxul comunității...',
     'main.top.info'             => 'Postări active recente...',

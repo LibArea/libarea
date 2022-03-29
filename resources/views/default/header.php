@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?02');
+Request::getHead()->addStyles('/assets/css/style.css?08');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 

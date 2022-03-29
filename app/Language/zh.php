@@ -313,6 +313,7 @@ $data = [
     'notif.add.website'         => '添加網站, %1$s 看 %2$s',
     'notif.edit.website'        => '更改站點, %1$s 看 %2$s',
     'notif.approved.website'    => '（主持人） %1$s 批准您的網站 %2$s',
+    'notif.add.website.comment' =>'%1$s 评论了您订阅的网站 %2$s',
 
     /* MSG */
     'string.length'         => '長度 %1$s 應該來自  %2$s -> %3$s 人物 ',
@@ -452,11 +453,6 @@ $data = [
     'profile.comments.desc'     => '%1$s — 參與者評論按時間順序排列. %2$s',
     
     'page-number'           => ' 頁 %1$s. ',
-    'main.top.title'        => '熱門帖子。 ',
-    'main.top.desc'         => '社區提要中的熱門帖子列表（按回複數量）。 感興趣的話題。 對話、問答、評論。 ',
-    'main.all.title'        => '所有帖子。 ',
-    'main.all.desc'         => '社區提要中所有帖子的列表（按回複數量）。 對話、問答、評論。 ',
-    'main.deleted.title'    => '已删除的帖子 ',
     
     'users.all'                 => '參賽者名單',
     'users.all.info'            => '參與者名單按他們在網站上的活動順序排列',
@@ -489,6 +485,13 @@ $data = [
     'topics.my'                 => '我讀',
     'topics.my.info'            => '我關注的話題，我閱讀',
     'topics.my.desc'            => '我閱讀或創建的主題',
+    
+    'main.feed.title'           => '%1$s — 社區（主題、感興趣的博客）',
+    'main.top.title'            => '%1$s — 熱門帖子',
+    'main.all.title'            => '%1$s — 所有帖子 ',
+    'main.feed.desc'            => '興趣主題、提要、博客。 對話、問答、有趣的事實。 腳本 CMS 和社交網絡、框架。 腳本 %1$s.',
+    'main.top.desc'             => '社區提要中的熱門帖子列表（按回複數）。 興趣話題。 對話、問答、評論。 腳本 %1$s.',
+    'main.all.desc'             => '社區提要中所有帖子的列表。 腳本 %1$s.',
     
     'main.feed.info'            => '按時間順序發帖...',
     'main.all.info'             => '社區提要中的所有帖子...',

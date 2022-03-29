@@ -8,7 +8,6 @@ return [
     'url'               => 'https://libarea.ru',
     'name'              => 'LibArea',
     'title'             => 'LibArea — сообщество (темы, блоги по интересам)',
-    'desc'              => 'Темы по интересам, лента, блоги. Беседы, вопросы и ответы, интересные факты. Скрипты CMS и социальных сетей, Фреймворки. Скрипт LibArea.',
     'img_path'          => '/assets/images/libarea.jpg',
     
     // For the main page - the banner title and text

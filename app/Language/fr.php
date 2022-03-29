@@ -314,6 +314,7 @@ $data = [
     'notif.add.website'         => 'site ajouté %1$s Cherchez-le %2$s',
     'notif.edit.website'        => 'changé de site, %1$s Vérifiez-le %2$s',
     'notif.approved.website'    => '(modérateur ) %1$s approuvé votre site %2$s',
+    'notif.add.website.comment' =>'%1$s commenté sur le site auquel vous êtes abonné %2$s',
 
     /* MSG */
     'string.length'         => 'Length %1$s should be from  %2$s -> %3$s characters ',
@@ -453,11 +454,6 @@ $data = [
     'profile.comments.desc'     => '%1$s — commentaires des participants par ordre chronologique. %2$s',
     
     'page-number'           => ' Page %1$s. ',
-    'main.top.title'        => 'Popular posts. ',
-    'main.top.desc'         => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
-    'main.all.title'        => 'All posts. ',
-    'main.all.desc'         => 'List of all posts in the community feed (by number of replies). Conversations, questions and answers, comments. ',
-    'main.deleted.title'    => 'Posts supprimés ',
     
     'users.all'                 => 'List of participants',
     'users.all.info'            => 'List of participants in the order of their activity on the site',
@@ -490,7 +486,14 @@ $data = [
     'topics.my'                 => 'I read ',
     'topics.my.info'            => 'Topics I follow, I read',
     'topics.my.desc'            => 'Topics that I read or have created',
-    
+
+    'main.feed.title'           => '%1$s — communauté (sujets, blogs intérêt)',
+    'main.top.title'            => '%1$s — Articles populaires',
+    'main.all.title'            => '%1$s — Tous les messages',
+    'main.feed.desc'            => 'Sujets intérêt, flux, blogs. Conversations, questions et réponses, faits intéressants. Scripts CMS et réseaux sociaux, Frameworks. Scénario  %1$s.',
+    'main.top.desc'             => 'Liste des messages populaires dans le fil de la communauté (par nombre de réponses). Sujets par intérêt. Conversations, questions et réponses, commentaires. Scénario %1$s.',
+    'main.all.desc'             => 'Liste de tous les messages du flux de la communauté. Scénario %1$s.',
+
     'main.feed.info'            => 'Posts in chronological order...',
     'main.all.info'             => 'All posts in the community feed...',
     'main.top.info'             => 'Recent active posts...',

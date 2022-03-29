@@ -314,6 +314,7 @@ $data = [
     'notif.add.website'         => 'Seite hinzugefügt  %1$s Schlag es nach %2$s',
     'notif.edit.website'        => 'Website geändert, %1$s Hör zu %2$s',
     'notif.approved.website'    => '(Moderator ) %1$s genehmigt Ihre Website %2$s',
+    'notif.add.website.comment' =>'%1$s die Seite kommentiert, die Sie abonniert haben %2$s',
 
     /* MSG */
     'string.length'         => 'Length %1$s should be from  %2$s -> %3$s characters ',
@@ -453,11 +454,6 @@ $data = [
     'profile.comments.desc'     => '%1$s — Teilnehmerkommentare in chronologischer Reihenfolge. %2$s',
     
     'page-number'           => ' Page %1$s. ',
-    'main.top.title'        => 'Popular posts. ',
-    'main.top.desc'         => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
-    'main.all.title'        => 'All posts. ',
-    'main.all.desc'         => 'List of all posts in the community feed (by number of replies). Conversations, questions and answers, comments. ',
-    'main.deleted.title'    => 'Gelöschte Beiträge ',
     
     'users.all'                 => 'List of participants',
     'users.all.info'            => 'List of participants in the order of their activity on the site',
@@ -490,7 +486,14 @@ $data = [
     'topics.my'                 => 'I read ',
     'topics.my.info'            => 'Topics I follow, I read',
     'topics.my.desc'            => 'Topics that I read or have created',
-    
+
+    'main.feed.title'           => '%1$s — Community (Themen, Blogs von Interesse)',
+    'main.top.title'            => '%1$s — Beliebte Beiträge',
+    'main.all.title'            => '%1$s — alle Artikel ',
+    'main.feed.desc'            => 'Interessenthemen, Feed, Blogs. Gespräche, Fragen und Antworten, Wissenswertes. Skripte CMS und soziale Netzwerke, Frameworks. Skript %1$s.',
+    'main.top.desc'             => 'Liste beliebter Beiträge im Community-Feed (nach Anzahl der Antworten). Themen nach Interesse. Gespräche, Fragen und Antworten, Kommentare. Skript %1$s.',
+    'main.all.desc'             => 'Liste aller Beiträge im Community-Feed. Skript  %1$s.',
+
     'main.feed.info'            => 'Posts in chronological order...',
     'main.all.info'             => 'All posts in the community feed...',
     'main.top.info'             => 'Recent active posts...',

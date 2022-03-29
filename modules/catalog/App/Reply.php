@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, ReplyModel};
-use App\Models\ActionModel;
+use App\Models\{ActionModel, NotificationModel};
 use Translate, UserData, Html, Validation, Content;
 
 class Reply
@@ -120,6 +120,22 @@ class Reply
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
             (new \App\Controllers\AuditController())->create('reply', $last_id, $url);
+        }
+
+        // Кто подписан на данный вопрос / пост
+        if ($focus_all = WebModel::getFocusUsersItem($item['item_id'])) {
+            foreach ($focus_all as $focus_user) {
+                if ($focus_user['signed_user_id'] != $this->user['id']) {
+                    NotificationModel::send(
+                        [
+                            'sender_id'    => $this->user['id'],
+                            'recipient_id' => $focus_user['signed_user_id'],
+                            'action_type'  => NotificationModel::TYPE_ADD_REPLY_WEBSITE,
+                            'url'          => $url,
+                        ]
+                    );
+                }
+            }
         }
 
         redirect($url);

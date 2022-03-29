@@ -9,7 +9,7 @@ $item = $data['item'];
     </div>
   </div>
   <main>
-    <div class="bg-white items-center max-w780 justify-between pr15 mb20">
+    <div class="bg-white hidden pr15 mb20">
       <h1><?= $item['item_title']; ?>
         <?php if (UserData::REGISTERED_ADMIN) { ?>
           <a class="text-sm ml5" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
@@ -18,9 +18,11 @@ $item = $data['item'];
         <?php } ?>
       </h1>
 
-      <div class="flex flex-auto">
-        <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'mr25 box-shadow'); ?>
-        <div class="m15 mb-ml0">
+      <div class="w-100">
+        <div class="w-40 mt10 left mb-w-100">
+           <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'w-100 box-shadow'); ?>
+        </div>
+        <div class="w-60 left pl20 mb-w-100 max-w780 mb-p10">
           <?= Content::text($item['item_content'], 'text'); ?>
           <div class="gray mt20 mb15">
             <a class="green" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
@@ -28,10 +30,10 @@ $item = $data['item'];
               <?= $item['item_url']; ?>
             </a>
           </div>
-          <div class="mb20">
+           
             <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
-          </div>
-          <div class="left mt20">
+           
+          <div class="right mr20">
             <?= Html::signed([
               'user_id'         => $user['id'],
               'type'            => 'item',

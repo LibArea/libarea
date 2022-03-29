@@ -67,7 +67,6 @@ class Catalog
                     'childrens'         => $childrens,
                     'user_count_site'   => $count_site,
                     'breadcrumb'        => self::breadcrumb($parent, $category, $screening),
-                    // 'low_topics'     => FacetModel::getLowLevelList($category['facet_id']),
                     'low_matching'      => FacetModel::getLowMatching($category['facet_id']),
                 ]
             ]
