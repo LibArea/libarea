@@ -54,6 +54,9 @@ $data = [
     'no.bookmarks.sites'    => 'Noch keine Lesezeichen',
     'user.sites.info'       => 'Liste der von mir hinzugefügten Websites',
     'moderation'            => 'Mäßigung',
+
+    'deny.replies'          => 'Antworten ablehnen?',
+    'discussions.closed'    => 'Diskussionen über die Website sind verboten. Der Autor oder Mitarbeiter hat die Diskussion geschlossen.',
     
     'add.site.help'         => '<i class="gray-600">Titelformat:</i><br> «LibArea» — gemeinschaft<br><br><i class="gray-600">Beschreibung (ohne Werbung):</i><br> ...was ist auf der Website?<i>',
 ];

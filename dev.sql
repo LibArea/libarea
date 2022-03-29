@@ -1380,3 +1380,4 @@ ALTER TABLE `votes_post`
   MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
   
 ALTER TABLE `items` ADD `item_focus_count` INT(11) NULL DEFAULT '0' AFTER `item_post_related`;  
+ALTER TABLE `items` ADD `item_close_replies` TINYINT(1) NOT NULL DEFAULT '0' AFTER `item_focus_count`;

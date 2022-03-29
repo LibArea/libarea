@@ -64,6 +64,7 @@ $item = $data['item'];
       <?php } ?>
     </div>
 
+    <?php if ($item['item_close_replies'] == 0) { ?>
     <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_reply')) { ?>
       <form class="max-w780" action="<?= getUrlByName('reply.create'); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
@@ -81,17 +82,25 @@ $item = $data['item'];
         <?= Html::sumbit(Translate::get('reply')); ?>
       </form>
     <?php } ?>
+    <?php } ?>
 
     <?php if ($data['tree']) { ?>
       <h2 class="mt10"><?= Translate::get('answers'); ?></h2>
-
       <ul class="list-none mt20">
         <?= includeTemplate('/view/default/replys', ['data' => $data, 'user' => $user]); ?>
       </ul>
     <?php } else { ?>
-      <div class="p20 center gray-600">
-        <i class="bi-chat-dots block text-8xl"></i>
-        <?= Translate::get('no.answers'); ?>
+      <?php if ($item['item_close_replies'] == 0) { ?>
+        <div class="p20 center gray-600">
+          <i class="bi-chat-dots block text-8xl"></i>
+          <?= Translate::get('no.answers'); ?>
+        </div>
+      <?php } ?>
+    <?php } ?>
+        
+    <?php if ($item['item_close_replies'] == 1) { ?>
+      <div class="mt20">
+        <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('discussions.closed'), 'icon' => 'bi-door-closed']); ?>
       </div>
     <?php } ?>
   </main>

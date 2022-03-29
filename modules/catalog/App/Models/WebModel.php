@@ -211,6 +211,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_github_url,
                     item_post_related,
                     item_following_link,
+                    item_close_replies,
                     item_is_deleted,
                     votes_item_user_id, votes_item_item_id,
                     rel.*,
@@ -251,6 +252,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                             item_status_url, 
                             item_is_soft,
                             item_is_github,
+                            item_close_replies,
                             item_votes,
                             item_count) 
                             
@@ -264,6 +266,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                        :item_status_url, 
                        :item_is_soft,
                        :item_is_github,
+                       :item_close_replies,
                        :item_votes,
                        :item_count)";
 
@@ -295,6 +298,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_is_soft        = :item_is_soft,
                     item_is_github      = :item_is_github,
                     item_post_related   = :item_post_related,
+                    item_close_replies  = :item_close_replies,
                     item_github_url     = :item_github_url
                         WHERE item_id   = :item_id";
 
@@ -323,6 +327,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_github_url,
                     item_post_related,
                     item_following_link,
+                    item_close_replies,
                     item_is_deleted
                         FROM items 
                         WHERE item_id = :item_id AND item_is_deleted = 0";

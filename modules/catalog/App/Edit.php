@@ -5,6 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{FacetModel, PostModel, NotificationModel};
+use App\Models\User\UserModel;
 use Validation, Translate, UserData, Meta, Html;
 
 class Edit
@@ -46,6 +47,7 @@ class Edit
                     'domain'        => $domain,
                     'sheet'         => 'domains',
                     'type'          => 'web.edit',
+                    'user'          => UserModel::getUser($domain['item_user_id'], 'id'),
                     'category_arr'  => WebModel::getItemTopic($domain['item_id']),
                     'post_arr'      => $item_post_related,
                 ]
@@ -106,22 +108,33 @@ class Edit
         // Если персонал, то сохраняем автора сайта
         $uid = $this->user['trust_level'] == UserData::REGISTERED_ADMIN ? $item['item_user_id'] : $this->user['id'];
 
+        // If there is a change in item_user_id (owner) and who changes staff
+        // Если есть смена item_user_id (владельца) и кто меняет персонал
+        if (UserData::checkAdmin()) {
+            $user_new  = Request::getPost('user_id');
+            $item_user_new = json_decode($user_new, true);
+            if ($item['item_user_id'] != $item_user_new[0]['id']) {
+                $uid = $item_user_new[0]['id'];
+            }    
+        }
+
         WebModel::edit(
             [
-                'item_id'           => $item['item_id'],
-                'item_url'          => $item_url,
-                'item_title'        => $item_title,
-                'item_content'      => $item_content,
-                'item_title_soft'   => $item_title_soft ?? '',
-                'item_content_soft' => $item_content_soft ?? '',
-                'item_published'    => $published,
-                'item_user_id'      => $uid,
-                'item_type_url'     => 0,
-                'item_status_url'   => $item_status_url,
-                'item_is_soft'      => $item_is_soft,
-                'item_is_github'    => $item_is_github,
-                'item_post_related' => $post_related ?? '',
-                'item_github_url'   => $item_github_url ?? '',
+                'item_id'               => $item['item_id'],
+                'item_url'              => $item_url,
+                'item_title'            => $item_title,
+                'item_content'          => $item_content,
+                'item_title_soft'       => $item_title_soft ?? '',
+                'item_content_soft'     => $item_content_soft ?? '',
+                'item_published'        => $published,
+                'item_close_replies'    => Request::getPostInt('close_replies'),
+                'item_user_id'          => $uid ?? 1,
+                'item_type_url'         => 0,
+                'item_status_url'       => $item_status_url,
+                'item_is_soft'          => $item_is_soft,
+                'item_is_github'        => $item_is_github,
+                'item_post_related'     => $post_related ?? '',
+                'item_github_url'       => $item_github_url ?? '',
             ]
         );
 

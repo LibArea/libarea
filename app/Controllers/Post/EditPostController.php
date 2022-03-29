@@ -98,14 +98,15 @@ class EditPostController extends MainController
             $redirect   = getUrlByName('content.edit', ['type' => 'page', 'id' => $post_id]);
         }
 
-        // Если есть смена post_user_id и это TL5
-        $user_new  = Request::getPost('user_id');
-        $post_user_new = json_decode($user_new, true);
+        // If there is a change in post_user_id (owner) and who changes staff
+        // Если есть смена post_user_id (владельца) и кто меняет персонал
         $post_user_id = $post['post_user_id'];
-        if ($post['post_user_id'] != $post_user_new[0]['id']) {
-            if (UserData::checkAdmin()) {
-                $post_user_id = $post_user_new[0]['id'];
-            }
+        if (UserData::checkAdmin()) {
+            $user_new  = Request::getPost('user_id');
+            $post_user_new = json_decode($user_new, true);
+                if ($post['post_user_id'] != $post_user_new[0]['id']) {
+                    $post_user_id = $post_user_new[0]['id'];
+                }
         }
 
         Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);

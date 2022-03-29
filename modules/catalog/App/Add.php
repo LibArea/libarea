@@ -80,18 +80,19 @@ class Add
 
         $item_last = WebModel::add(
             [
-                'item_url'          => $url,
-                'item_domain'       => $basic_host,
-                'item_title'        => Request::getPost('title'),
-                'item_content'      => $content,
-                'item_published'    => $published,
-                'item_user_id'      => $this->user['id'],
-                'item_type_url'     => 0,
-                'item_status_url'   => 200,
-                'item_is_soft'      => 0,
-                'item_is_github'    => 0,
-                'item_votes'        => 0,
-                'item_count'        => 1,
+                'item_url'              => $url,
+                'item_domain'           => $basic_host,
+                'item_title'            => Request::getPost('title'),
+                'item_content'          => $content,
+                'item_published'        => $published,
+                'item_user_id'          => $this->user['id'],
+                'item_close_replies'    => Request::getPostInt('close_replies'),
+                'item_type_url'         => 0,
+                'item_status_url'       => 200,
+                'item_is_soft'          => 0,
+                'item_is_github'        => 0,
+                'item_votes'            => 0,
+                'item_count'            => 1,
             ]
         );
 

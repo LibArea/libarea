@@ -55,6 +55,9 @@ $data = [
     'user.sites.info'       => 'Lista site-urilor adăugate de mine',
     'moderation'            => 'Moderation',
     
+    'deny.replies'          => 'Deny replies?',
+    'discussions.closed'    => 'Discussion of the site is prohibited. The author or staff has closed the discussion.',
+    
     'add.site.help'         => '<i class="gray-600">Title Format:</i><br> «LibArea» — community<br><br><i class="gray-600">Description (without advertising):</i><br> ...what is on the site?<i>',
 ];
 

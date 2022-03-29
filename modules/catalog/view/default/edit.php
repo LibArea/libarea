@@ -14,6 +14,7 @@ $form->adding(['name' => 'github', 'type' => 'selected', 'var' => $domain['item_
 $form->adding(['name' => 'github_url', 'type' => 'value', 'var' => $domain['item_github_url']]);
 $form->adding(['name' => 'title_soft', 'type' => 'value', 'var' => $domain['item_title_soft']]);
 $form->adding(['name' => 'content_soft', 'type' => 'value', 'var' => $domain['item_content_soft']]);
+$form->adding(['name' => 'close_replies', 'type' => 'selected', 'var' => $domain['item_close_replies']]);
 
 $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
 ?>
@@ -44,6 +45,17 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
           'title'     => Translate::get('related posts'),
           'help'      => Translate::get('necessarily'),
         ]); ?>
+        
+         <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
+            <?= Tpl::insert('/_block/form/select/user', [
+              'uid'           => $user,
+              'user'          => $data['user'],
+              'action'        => 'user',
+              'type'          => 'user',
+              'title'         => Translate::get('author'),
+              'help'          => Translate::get('necessarily'),
+            ]); ?>
+        <?php } ?>
 
         <input type="hidden" name="item_id" value="<?= $domain['item_id']; ?>">
 

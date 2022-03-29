@@ -3,8 +3,7 @@
  * Settings for the catalog 
  * Настройки для каталога
  */
-$ch = Translate::get('characters');
-$fe = Translate::get('for example');
+
 return [
   // Fields for adding and editing a site in the catalog 
   // Поля для добавления и редактирования сайта в каталоге
@@ -12,12 +11,12 @@ return [
     [
       'title'   => Translate::get('title'),
       'tl'      => 2,
-      'arr'     => ['min' => 14, 'max' => 250, 'required' => true, 'help' => '> 14 ' . $ch . '. ' . $fe . ': «Agouti» — сообщество'],
+      'arr'     => ['min' => 14, 'max' => 250, 'required' => true],
       'name'    => 'title'
     ], [
       'title'   => 'URL',
       'tl'      => 2,
-      'arr'     => ['required' => true, 'help' => $fe . ': https://google.ru'],
+      'arr'     => ['required' => true],
       'name'    => 'url',
     ],  [
       'title'   => Translate::get('status'),
@@ -27,8 +26,13 @@ return [
     ], [
       'title'   => Translate::get('description'),
       'tl'      => 2,
-      'arr'     => ['type' => 'textarea', 'required' => true, 'help' => '> 25 ' . $ch],
+      'arr'     => ['type' => 'textarea', 'required' => true],
       'name'    => 'content',
+    ],  [
+      'title'   => Translate::get('deny.replies'),
+      'tl'      => 2,
+      'arr'     => ['options' => ['0' => Translate::get('no'), '1' => Translate::get('yes')], 'type' => 'select'],
+      'name'    => 'close_replies',
     ], [
       'title'   => Translate::get('posted'),
       'tl'      => UserData::REGISTERED_ADMIN,
@@ -37,7 +41,7 @@ return [
     ], [
       'title'   => Translate::get('there.program'),
       'tl'      => UserData::REGISTERED_ADMIN,
-      'arr'     => ['options' => ['0' => Translate::get('no'), '1' => Translate::get('yes')], 'type' => 'select', 'before_html' => '<h3>Soft</h3>'],
+      'arr'     => ['options' => ['0' => Translate::get('no'), '1' => Translate::get('yes')], 'type' => 'select', 'before_html' => '<h2>Soft</h2>'],
       'name'    => 'soft',
     ], [
       'title'   => Translate::get('hosted.github'),
