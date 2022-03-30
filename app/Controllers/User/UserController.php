@@ -58,14 +58,12 @@ class UserController extends MainController
 
         $result = [];
         foreach ($favorites as $ind => $row) {
-
             if ($row['action_type'] == 'post') {
                 $row['answer_post_id'] = $row['post_id'];
             }
 
-            $row['answer_content']  = Content::text($row['answer_content'], 'text');
-            $row['post']            = PostModel::getPost($row['answer_post_id'], 'id', $this->user);
-            $result[$ind]           = $row;
+            $row['post']    = PostModel::getPost($row['answer_post_id'], 'id', $this->user);
+            $result[$ind]   = $row;
         }
 
         return Tpl::agRender(

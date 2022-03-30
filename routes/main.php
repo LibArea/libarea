@@ -120,8 +120,6 @@ Route::endType();
   
 Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+', 'id' => '[0-9]+'])->name('topic.followers');  
   
-  
-  
 // Other pages without authorization
 Route::get('/post/{id}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
@@ -129,7 +127,6 @@ Route::get('/post/{id}/{slug}')->controller('Post\PostController', ['post'])->wh
 // Страницы
 Route::get('/blog/{facet_slug}/article/{slug}')->controller('Post\PostController', ['blog.page'])->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('blog.article');
 Route::get('/{facet_slug}/article/{slug}')->controller('Post\PostController', ['info.page'])->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('facet.article'); 
-
 
 Route::get('/users')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
 Route::get('/users/page/{page?}')->controller('User\UserController', ['users.all', 'user'])->where(['page' => '[0-9]+']);

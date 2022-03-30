@@ -61,8 +61,7 @@ class SettingController extends MainController
         $template       = Request::getPost('template');
         $lang           = Request::getPost('lang');
 
-        $redirect   = getUrlByName('setting', ['login' => $this->user['login']]);
-
+        $redirect   = getUrlByName('setting');
         Validation::Length($name, Translate::get('name'), '0', '11', $redirect);
         Validation::Length($about, Translate::get('about me'), '0', '255', $redirect);
 
@@ -122,8 +121,6 @@ class SettingController extends MainController
 
     function avatarEdit()
     {
-        $redirect   = getUrlByName('setting.avatar', ['login' => $this->user['login']]);
-
         $img        = $_FILES['images'];
         $check_img  = $_FILES['images']['name'];
         if ($check_img) {
@@ -137,7 +134,7 @@ class SettingController extends MainController
         }
 
         Html::addMsg('change.saved', 'success');
-        redirect($redirect);
+        redirect('/setting/avatar');
     }
 
     // Change password form
@@ -165,7 +162,7 @@ class SettingController extends MainController
         $password2   = Request::getPost('password2');
         $password3   = Request::getPost('password3');
 
-        $redirect = getUrlByName('setting.security', ['login' => $this->user['login']]);
+        $redirect   = '/setting/security';
         if ($password2 != $password3) {
             Html::addMsg('pass.match.err', 'error');
             redirect($redirect);
@@ -197,8 +194,6 @@ class SettingController extends MainController
     // Удаление обложки
     function coverRemove()
     {
-        $redirect   = getUrlByName('setting.avatar', ['login' => $this->user['login']]);
-
         $user = UserModel::getUser($this->user['login'], 'slug');
 
         // Удалять может только автор и админ
@@ -225,7 +220,7 @@ class SettingController extends MainController
             redirect('/admin/users/' . $user['id'] . '/edit');
         }
 
-        redirect($redirect);
+        redirect('/setting/avatar');
     }
 
     // Member preference setting form
@@ -259,7 +254,6 @@ class SettingController extends MainController
         );
 
         Html::addMsg('change.saved', 'success');
-
-        redirect(getUrlByName('setting.notifications', ['login' => $this->user['login']]));
+        redirect('/setting/notifications');
     }
 }

@@ -153,7 +153,6 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     post_id,
                     post_title,
                     post_slug,
-                    post_answers_count,
                     answer_id,
                     answer_post_id,
                     answer_content,

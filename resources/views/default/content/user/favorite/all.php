@@ -37,7 +37,7 @@
         <?php } ?>
 
         <?php if (!empty($fav['action_type']) == 'answer') {
-          echo $fav['answer_content'];
+          echo Content::text($fav['answer_content'], 'text');
         } ?>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">

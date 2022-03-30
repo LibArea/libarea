@@ -74,7 +74,6 @@ class MessagesController extends MainController
 
     public function dialog()
     {
-
         $id = Request::getInt('id');
         if (!$dialog = MessagesModel::getDialogById($id)) {
             Html::addMsg('no.dialogue', 'error');
