@@ -16,7 +16,7 @@
     <div>
       <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
       <input type="hidden" name="answer_id" id="answer_id" value="<?= $data['answer_id']; ?>">
-      <?= sumbit(Translate::get('comment')); ?>
+      <?= Html::sumbit(Translate::get('comment')); ?>
       <span id="cancel_comment" class="text-sm inline ml5 gray"><?= Translate::get('cancel'); ?></span>
     </div>
   <?php } ?>

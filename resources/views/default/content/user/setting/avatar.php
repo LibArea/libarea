@@ -52,7 +52,7 @@
 
       <div class="clear gray mb10">
         <div class="mb5 text-sm"><?= Translate::get('recommended size'); ?>: 1920x240px (jpg, jpeg, png)</div>
-        <?= sumbit(Translate::get('download')); ?>
+        <?= Html::sumbit(Translate::get('download')); ?>
       </div>
     </form>
   </div>
