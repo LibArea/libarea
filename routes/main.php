@@ -60,10 +60,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/web/my')->module('catalog', 'App\UserArea', ['web.user.sites', 'sites'])->name('web.user.sites');
     Route::get('/web/my/page/{page?}')->module('catalog', 'App\UserArea', ['web.user.sites', 'sites'])->where(['page' => '[0-9]+']);
 
-    Route::get('/setting')->controller('User\SettingController@settingForm')->name('setting'); 
-    Route::get('/setting/avatar')->controller('User\SettingController@avatarForm')->name('setting.avatar');
-    Route::get('/setting/security')->controller('User\SettingController@securityForm')->name('setting.security');
-    Route::get('/setting/notifications')->controller('User\SettingController@notificationForm')->name('setting.notifications');
+    Route::get('/setting/{type?}')->controller('User\SettingController')->name('setting'); 
+
     Route::get('/messages')->controller('MessagesController')->name('messages');   
     Route::get('/messages/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 
 	Route::get('/notifications')->controller('NotificationController')->name('notifications'); 

@@ -16,6 +16,25 @@ class SettingController extends MainController
         $this->user  = UserData::get();
     }
 
+    function index()
+    {
+        switch (Request::get('type')) {
+            case 'avatar':
+                return $this->avatarForm();
+                break;
+            case 'security':
+                return $this->securityForm();
+                break;
+            case 'notifications':
+                return $this->notificationForm();
+                break;
+            default:
+                return $this->settingForm();
+                break;
+        }
+    }
+
+    // Profile setup form
     // Форма настройки профиля
     function settingForm()
     {
@@ -34,7 +53,6 @@ class SettingController extends MainController
         );
     }
 
-    // Изменение профиля
     function edit()
     {
         $name           = Request::getPost('name');
@@ -83,7 +101,8 @@ class SettingController extends MainController
         redirect($redirect);
     }
 
-    // Форма загрузки аватарки
+    // Avatar and cover upload form
+    // Форма загрузки аватарки и обложики
     function avatarForm()
     {
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
@@ -101,19 +120,16 @@ class SettingController extends MainController
         );
     }
 
-    // Изменение аватарки
     function avatarEdit()
     {
         $redirect   = getUrlByName('setting.avatar', ['login' => $this->user['login']]);
 
-        // Запишем img
         $img        = $_FILES['images'];
         $check_img  = $_FILES['images']['name'];
         if ($check_img) {
             UploadImage::img($img, $this->user['id'], 'user');
         }
 
-        // Баннер
         $cover          = $_FILES['cover'];
         $check_cover    = $_FILES['cover']['name'];
         if ($check_cover) {
@@ -124,6 +140,7 @@ class SettingController extends MainController
         redirect($redirect);
     }
 
+    // Change password form
     // Форма изменение пароля
     function securityForm()
     {
@@ -142,7 +159,6 @@ class SettingController extends MainController
         );
     }
 
-    // Изменение пароля
     function securityEdit()
     {
         $password    = Request::getPost('password');
@@ -177,6 +193,7 @@ class SettingController extends MainController
         redirect($redirect);
     }
 
+    // Cover Removal
     // Удаление обложки
     function coverRemove()
     {
@@ -211,6 +228,7 @@ class SettingController extends MainController
         redirect($redirect);
     }
 
+    // Member preference setting form
     // Форма настройки предпочтений участника
     function notificationForm()
     {
@@ -239,7 +257,6 @@ class SettingController extends MainController
                 'setting_email_comment'     => 0,
             ]
         );
-
 
         Html::addMsg('change.saved', 'success');
 

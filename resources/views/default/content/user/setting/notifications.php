@@ -21,6 +21,6 @@ $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
 </main>
 <aside>
   <div class="box-white text-sm">
-    <?= Translate::get('info-notification'); ?>
+    <?= Translate::get('notification.info'); ?>
   </div>
 </aside>

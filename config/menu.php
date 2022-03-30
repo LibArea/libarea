@@ -134,17 +134,17 @@ return [
             'icon'  => 'bi bi-gear',
             'id'    => 'settings',
         ], [
-            'url'   => getUrlByName('setting.avatar'),
+            'url'   => '/setting/avatar',
             'title' => Translate::get('avatar'),
             'icon'  => 'bi bi-emoji-smile',
             'id'    => 'avatar',
         ], [
-            'url'   => getUrlByName('setting.security'),
+            'url'   => '/setting/security',
             'title' => Translate::get('password'),
             'icon'  => 'bi bi-lock',
             'id'    => 'security',
         ], [
-            'url'   => getUrlByName('setting.notifications'),
+            'url'   => '/setting/notifications',
             'title' => Translate::get('notifications'),
             'icon'  => 'bi bi-app-indicator',
             'id'    => 'notifications',
