@@ -12,6 +12,7 @@ class MiddlewareModel extends \Hleb\Scheme\App\Models\MainModel
                     id,
                     login,
                     limiting_mode,
+                    scroll,
                     email,
                     avatar,
                     trust_level,

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use DB;
+use Config;
 
 class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 {
@@ -133,6 +134,8 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function display($type, $trust_level)
     {
+        $countLike = Config::get('feed.countLike');
+        
         if ($trust_level == 10) {
             $display = "AND post_is_deleted = 0";
 
@@ -142,7 +145,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         } elseif ($trust_level > 0) {
             $display = "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
         } else {
-            $display = "AND post_is_deleted = 0 AND post_votes > 1 AND post_tl <= " . $trust_level;
+            $display = "AND post_is_deleted = 0 AND post_votes > $countLike AND post_tl <= " . $trust_level;
         }
 
         return $display;

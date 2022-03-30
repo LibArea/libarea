@@ -1381,3 +1381,4 @@ ALTER TABLE `votes_post`
   
 ALTER TABLE `items` ADD `item_focus_count` INT(11) NULL DEFAULT '0' AFTER `item_post_related`;  
 ALTER TABLE `items` ADD `item_close_replies` TINYINT(1) NOT NULL DEFAULT '0' AFTER `item_focus_count`;
+ALTER TABLE `users` ADD `scroll` TINYINT(1) NOT NULL DEFAULT '0' AFTER `limiting_mode`;
