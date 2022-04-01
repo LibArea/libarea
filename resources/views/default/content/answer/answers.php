@@ -42,7 +42,7 @@
 </main>
 <aside>
   <div class="box-white text-sm sticky top-sm">
-    <?=  Translate::get('answers-desc'); ?>
+    <?=  Translate::get('answers.desc'); ?>
   </div>
 </aside>
 <?= Tpl::import('/_block/js-msg-flag', ['uid' => $user['id']]); ?>

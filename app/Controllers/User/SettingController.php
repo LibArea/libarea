@@ -186,7 +186,7 @@ class SettingController extends MainController
 
         SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
 
-        Html::addMsg('password changed', 'success');
+        Html::addMsg('password.changed', 'success');
 
         redirect($redirect);
     }

@@ -28,7 +28,7 @@ class AllFacetController extends MainController
 
         $num = ' ';
         if ($page > 1) {
-            $num = sprintf(Translate::get('page-number'), $page);
+            $num = sprintf(Translate::get('page.number'), $page);
         }
 
         $Flimit = (new \App\Controllers\Facets\AddFacetController())->limitFacer($type, 'no.redirect');

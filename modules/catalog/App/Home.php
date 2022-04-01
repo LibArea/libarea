@@ -29,7 +29,7 @@ class Home
             $pagesCount = WebModel::getItemsAllCount($sheet);
         }
 
-        $num = $page > 1 ? sprintf(Translate::get('page-number'), $page) : '';
+        $num = $page > 1 ? sprintf(Translate::get('page.number'), $page) : '';
 
         $m = [
             'og'         => true,

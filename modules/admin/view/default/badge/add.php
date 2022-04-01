@@ -30,7 +30,7 @@
     <fieldset>
       <label for="badge_tl">Tl</label>
       <input type="text" name="badge_tl" value="0" required>
-      <div class="help"><?= Translate::get('for'); ?> TL (0 <?= Translate::get('by default'); ?>)</div>
+      <div class="help"><?= Translate::get('for'); ?> TL (0 <?= Translate::get('by.default'); ?>)</div>
     </fieldset>
     <fieldset>
       <label for="badge_score">Score</label>

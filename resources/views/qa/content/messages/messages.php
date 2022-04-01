@@ -27,7 +27,7 @@
           </div>
           <a class="lowercase text-sm right" href="<?= getUrlByName('dialogues', ['id' => $msg['dialog_id']]); ?>">
             <?php if ($msg['unread']) { ?>
-              <?= Translate::get('there are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
+              <?= Translate::get('there.are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
             <?php } else { ?>
               <span class="red"><?= Translate::get('view'); ?></span>
               <?php if ($msg['count'] != 0) { ?>

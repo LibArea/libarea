@@ -256,7 +256,7 @@ class PostController extends MainController
         return Tpl::agRender(
             '/post/link',
             [
-                'meta'  => Meta::get($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain),
+                'meta'  => Meta::get($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain.desc') . ': ' . $domain),
                 'data'  => [
                     'sheet'         => 'domain',
                     'pagesCount'    => ceil($pagesCount / $this->limit),

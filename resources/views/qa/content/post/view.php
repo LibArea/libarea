@@ -86,7 +86,7 @@
         <?php if ($post['post_url_domain']) { ?>
           <div class="mb15">
             <a rel="nofollow noreferrer ugc" target="_blank" class="btn btn-primary" href="<?= $post['post_url']; ?>">
-              <?= Translate::get('details are here'); ?>
+              <?= Translate::get('details.here'); ?>
               <i class="bi-folder-symlink middle ml5"></i>
             </a>
           </div>
@@ -123,7 +123,7 @@
           </li>
           <li class="left p10 mb-none">
             <div class="text-sm gray-600 mb5">
-              <?= Translate::get('last answer'); ?>
+              <?= Translate::get('last.answer'); ?>
             </div>
             <div class="center">
               <?php if (!empty($data['last_user']['answer_id'])) { ?>

@@ -36,7 +36,7 @@ class AnswerController extends MainController
         return Tpl::agRender(
             '/answer/answers',
             [
-                'meta'  => Meta::get($m, Translate::get('all.answers'), Translate::get('answers-desc')),
+                'meta'  => Meta::get($m, Translate::get('all.answers'), Translate::get('answers.desc')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

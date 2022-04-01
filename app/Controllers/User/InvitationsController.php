@@ -59,7 +59,7 @@ class InvitationsController extends MainController
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['email'])) {
-            Html::addMsg('user-already', 'error');
+            Html::addMsg('user.already', 'error');
             redirect($redirect);
         }
 
@@ -91,7 +91,7 @@ class InvitationsController extends MainController
         $link = getUrlByName('invite.reg', ['code' => $invitation_code]);
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
-        Html::addMsg('invite created', 'success');
+        Html::addMsg('invite.created', 'success');
         redirect($redirect);
     }
 }

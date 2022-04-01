@@ -25,7 +25,7 @@ class UserArea
         $pagesCount = UserAreaModel::getUserSitesCount($this->user['id']);
         $items  = UserAreaModel::getUserSites($page, $this->limit, $this->user['id']);
 
-        $num = $page > 1 ? sprintf(Translate::get('page-number'), $page) : '';
+        $num = $page > 1 ? sprintf(Translate::get('page.number'), $page) : '';
 
         $m = [
             'og'         => true,

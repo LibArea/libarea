@@ -35,7 +35,7 @@ class CommentController extends MainController
         return Tpl::agRender(
             '/comment/comments',
             [
-                'meta'  => Meta::get($m, Translate::get('all.comments'), Translate::get('comments-desc')),
+                'meta'  => Meta::get($m, Translate::get('all.comments'), Translate::get('comments.desc')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

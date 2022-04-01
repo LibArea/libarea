@@ -78,7 +78,7 @@ class RecoverController extends MainController
         $user_id    = UserModel::getPasswordActivate($code);
 
         if (!$user_id) {
-            Html::addMsg('code-incorrect', 'error');
+            Html::addMsg('code.incorrect', 'error');
             redirect(getUrlByName('recover'));
         }
 
@@ -120,7 +120,7 @@ class RecoverController extends MainController
 
         UserModel::editRecoverFlag($user_id);
 
-        Html::addMsg('password changed', 'success');
+        Html::addMsg('password.changed', 'success');
         redirect(getUrlByName('login'));
     }
 
@@ -137,7 +137,7 @@ class RecoverController extends MainController
 
         UserModel::EmailActivate($activate_email['user_id']);
 
-        Html::addMsg('yes-email-pass', 'success');
+        Html::addMsg('yes.email.pass', 'success');
         redirect(getUrlByName('login'));
     }
 }

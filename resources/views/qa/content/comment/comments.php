@@ -39,7 +39,7 @@
 </main>
 <aside>
   <div class="box-white bg-violet-50 text-sm">
-    <?= Translate::get('comments-desc'); ?>
+    <?= Translate::get('comments.desc'); ?>
   </div>
 </aside>
 <?= Tpl::import('/_block/js-msg-flag', ['uid' => $user['id']]); ?>
