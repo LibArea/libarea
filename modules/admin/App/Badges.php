@@ -105,7 +105,7 @@ class Badges
         return view(
             '/view/default/badge/user-add',
             [
-                'meta'  => Meta::get($m = [], Translate::get('reward the user')),
+                'meta'  => Meta::get($m = [], Translate::get('reward.user')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,

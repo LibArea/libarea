@@ -16,7 +16,7 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
 
           <a class="tabs black mr15" href="/">
             <i class="bi-house"></i>
-            <?= Translate::get('to the website'); ?>
+            <?= Translate::get('to.the.website'); ?>
           </a>
 
           <a class="tabs<?php if ($uri == 'post') { ?> active<?php } ?>" href="<?= getUrlByName('search'); ?>">

@@ -7,17 +7,17 @@
 return [
     'user' => [
         [
-            'tl'    => 1,
-            'url'   => getUrlByName('web.bookmarks'),
-            'title' => Translate::get('favorites'),
-            'icon'  => 'bi bi-bookmark',
-            'id'    => 'web.bookmarks',
-        ], [
             'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('content.add', ['type' => 'category']),
             'title' => Translate::get('categories.s'),
             'icon'  => 'bi bi-plus-lg',
             'id'    => 'official',
+        ], [
+            'tl'    => 1,
+            'url'   => getUrlByName('web.bookmarks'),
+            'title' => Translate::get('favorites'),
+            'icon'  => 'bi bi-bookmark',
+            'id'    => 'web.bookmarks',
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('web.deleted'),

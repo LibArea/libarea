@@ -15,7 +15,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?08');
         <div data-template="one" id="find tippy">
           <a class="tabs black mr15" href="/">
             <i class="bi-house"></i>
-            <?= Translate::get('to the website'); ?>
+            <?= Translate::get('to.the.website'); ?>
           </a>
           <div class="flex right items-center">
             <div id="toggledark" class="header-menu-item mb-none only-icon mr30 mb-ml10">

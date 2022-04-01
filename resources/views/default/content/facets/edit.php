@@ -103,7 +103,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
               'title' => Translate::get('root'),
               'name' => 'facet_top_level',
               'checked' => $fs['facet_top_level'],
-              'help' => Translate::get('root-help')
+              'help' => Translate::get('root.help')
             ],
           ]
         ]); ?>
@@ -173,7 +173,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
             'data'          => $data,
             'action'        => 'edit',
             'type'          => $fs['facet_type'],
-            'title'         => Translate::get('bound (children)'),
+            'title'         => Translate::get('bound.children'),
             'help'          => Translate::get('necessarily'),
             'red'           => 'red'
           ]); ?>
@@ -181,7 +181,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
 
       <?php if (!empty($data['high_matching'])) { ?>
         <div class="box-white max-w780">
-          <h3 class="uppercase-box"><?= Translate::get('bound (parents)'); ?></h3>
+          <h3 class="uppercase-box"><?= Translate::get('bound.parents'); ?></h3>
           <?php foreach ($data['high_matching'] as $low_mat) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
               <?= Html::image($low_mat['facet_img'], $low_mat['facet_title'], 'img-base', 'logo', 'max'); ?>

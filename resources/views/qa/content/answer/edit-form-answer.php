@@ -2,7 +2,7 @@
   <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red"><?= Translate::get('edit answer'); ?></span>
+    <span class="red"><?= Translate::get('edit.answer'); ?></span>
 
   <a class="mb5 block" href="<?= getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>">
     <?= $data['post']['post_title']; ?>

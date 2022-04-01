@@ -34,7 +34,7 @@ class EditAnswerController extends MainController
         return Tpl::agRender(
             '/answer/edit-form-answer',
             [
-                'meta'  => Meta::get($m = [], Translate::get('edit answer')),
+                'meta'  => Meta::get($m = [], Translate::get('edit.answer')),
                 'data'  => [
                     'answer_id' => $answer['answer_id'],
                     'post_id'   => $post['post_id'],

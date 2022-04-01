@@ -19,7 +19,7 @@ class RecoverController extends MainController
         return Tpl::agRender(
             '/auth/recover',
             [
-                'meta'  => Meta::get($m, Translate::get('password recovery'), Translate::get('recover.info')),
+                'meta'  => Meta::get($m, Translate::get('password.recovery'), Translate::get('recover.info')),
                 'data'  => [
                     'sheet' => 'recover',
                     'type'  => 'recover',

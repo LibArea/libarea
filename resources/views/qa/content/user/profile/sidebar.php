@@ -161,7 +161,7 @@
         </a>
         <a class="gray block" href="<?= getUrlByName('admin.badges.user.add', ['id' => $profile['id']]); ?>">
           <i class="bi-award middle mr5"></i>
-          <span class="middle"><?= Translate::get('reward the user'); ?></span>
+          <span class="middle"><?= Translate::get('reward.user'); ?></span>
         </a>
         <?php if ($profile['whisper']) { ?>
           <div class="tips text-sm pt15 pb10 gray-600">

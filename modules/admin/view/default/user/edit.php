@@ -91,7 +91,7 @@
     <hr>
     <fieldset>
       <a class="text-sm" href="/admin/badges/user/add/<?= $data['user']['id']; ?>">
-        + <?= Translate::get('reward the user'); ?>
+        + <?= Translate::get('reward.user'); ?>
       </a>
     </fieldset>
     <fieldset>

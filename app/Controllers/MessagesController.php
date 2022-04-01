@@ -170,7 +170,7 @@ class MessagesController extends MainController
         // Если пользователь заморожен и если личное сообщение пустое
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
         if ($content == '') {
-            Html::addMsg('enter content', 'error');
+            Html::addMsg('enter.content', 'error');
             redirect(getUrlByName('messages', ['login' => $this->user['login']]));
         }
 

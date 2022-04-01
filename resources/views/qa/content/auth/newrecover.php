@@ -1,11 +1,11 @@
 <main class="max-w780 mr-auto">
-  <h1 class="center"><?= Translate::get('password recovery'); ?></h1>
+  <h1 class="center"><?= Translate::get('password.recovery'); ?></h1>
   <div class="box wide">
     <form action="<?= getUrlByName('recover'); ?>/send/pass" method="post">
       <?php csrf_field(); ?>
       <fieldset>
         <label for="password">
-          <?= Translate::get('new password'); ?>
+          <?= Translate::get('new.password'); ?>
         </label>
         <input type="password" name="password" id="password">
       </fieldset>

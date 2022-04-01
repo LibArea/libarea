@@ -38,7 +38,7 @@
             <span class="text-sm gray"><?= Translate::get('link.used'); ?></span>
           <?php } else { ?>
             <?= Translate::get('for'); ?> (<?= $invite['invitation_email']; ?>)
-            <?= Translate::get('can send this link'); ?>:
+            <?= Translate::get('can.send.this.link'); ?>:
             <code class="block w-90">
               <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
             </code>
