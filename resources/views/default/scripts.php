@@ -54,8 +54,7 @@
         getPosts(`/post/scroll/${postPage}`);
       }
     });
-
-    observer.observe(coolDiv);
+    if (coolDiv) { observer.observe(coolDiv); }
   <?php } ?>
 </script>
 

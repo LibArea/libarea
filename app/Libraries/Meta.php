@@ -12,7 +12,7 @@ class Meta
             $desc = Config::get('meta.name');
         }
 
-        if ($url_page = 'main') {
+        if ($url_page == 'main') {
             $output .= '<title>' . $title . '</title>';
         }  else {
             $output .= '<title>' . $title . ' | ' . Config::get('meta.name') . '</title>';
