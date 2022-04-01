@@ -9,7 +9,7 @@ use Config, Tpl, UserData, Meta, Translate;
 
 class HomeController extends MainController
 {
-    protected $limit = 5;
+    protected $limit = 25;
 
     private $user;
 
