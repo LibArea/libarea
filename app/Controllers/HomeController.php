@@ -9,7 +9,7 @@ use Config, Tpl, UserData, Meta, Translate;
 
 class HomeController extends MainController
 {
-    protected $limit = 20;
+    protected $limit = 5;
 
     private $user;
 
@@ -23,7 +23,7 @@ class HomeController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        if ($sheet == 'main.deleted' && $this->user['trust_level'] != 10) {
+        if ($sheet == 'main.deleted' && $this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
             redirect('/');
         }
 
@@ -61,6 +61,29 @@ class HomeController extends MainController
                     'topics'            => $topics,
                 ],
             ],
+        );
+    }
+
+    // Infinite scroll
+    // Бесконечный скролл
+    public function scroll()
+    {
+        $page           = Request::getInt('page');
+        $page           = $page == 0 ? 1 : $page;
+        $topics_user    = HomeModel::subscription($this->user['id']);
+        $posts          = HomeModel::feed($page, $this->limit, $topics_user, $this->user, 'main.feed');
+
+        Tpl::agIncludeTemplate(
+            '/content/post/postscroll',
+            [
+                'user'  => $this->user,
+                'data'  => [
+                    'pages' => $page,
+                    'sheet' => 'main.feed',
+                    'posts' => $posts,
+
+                ]
+            ]
         );
     }
 }

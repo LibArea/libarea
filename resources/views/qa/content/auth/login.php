@@ -22,5 +22,5 @@ $form->html_form($user['trust_level'], Config::get('form/auth.login'));
     <?= Translate::get('invate.text'); ?>
   <?php } ?>
   <p><?= Translate::get('login.use.condition'); ?>.</p>
-  <p><?= Translate::get('info-login'); ?></p>
+  <p><?= Translate::get('login.info'); ?></p>
 </main>

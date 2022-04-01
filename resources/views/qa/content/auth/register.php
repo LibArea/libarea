@@ -17,5 +17,5 @@ $form->html_form($user['trust_level'], Config::get('form/auth.register'));
     </fieldset>
   </form>
   <p><?= Translate::get('login.use.condition'); ?>.</p>
-  <p><?= Translate::get('info-security'); ?></p>
+  <p><?= Translate::get('security.info'); ?></p>
 </main>

@@ -374,14 +374,14 @@ $data = [
     'enter content'         => 'Enter content',
 
     /* Setting */
-    'info-setting'          => 'Fill in your name, this will help attendees refer to you by name. <br> <br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
-    'info-avatar'           => 'Upload an avatar and cover for your profile. <br> <br> When each user has a unique avatar, it becomes much easier to follow the discussions! ',
-    'info-security'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more.',
-    'info-login'            => 'Authorization gives you the ability to publish posts, reply, comment.',
-    'info-recover'          => 'After clicking the "Reset" button, check your email...',
-    'info-favorite'         => 'Posts, comments and questions in your bookmarks',
-    'info-preferences'      => 'Posts you are subscribed to. You will be notified of all new replies',
-
+    'setting.info'          => 'Fill in your name, this will help attendees refer to you by name. <br> <br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
+    'avatar.info'           => 'Upload an avatar and cover for your profile. <br> <br> When each user has a unique avatar, it becomes much easier to follow the discussions! ',
+    'security.info'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more.',
+    'login.info'            => 'Authorization gives you the ability to publish posts, reply, comment.',
+    'recover.info'          => 'After clicking the "Reset" button, check your email...',
+    'favorite.info'         => 'Posts, comments and questions in your bookmarks',
+    'preferences.info'      => 'Posts you are subscribed to. You will be notified of all new replies',
+    'endless.scroll'        => 'Unendliches Scrollen aktivieren?',
     'notification.email'    => 'Notify by Email',
     'notifications.info'    => 'You can mark all ads as read by clicking on the link: "I have read".',
     'notification.info'     => 'You can unsubscribe from all notifications by Email in this section',

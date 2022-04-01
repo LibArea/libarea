@@ -30,4 +30,4 @@
   </div>
 </footer>
 
-<?= Tpl::import('/scripts', ['uid' => $user['id']]); ?>
+<?= Tpl::import('/scripts', ['uid' => $user['id'], 'scroll' => $user['scroll']]); ?>

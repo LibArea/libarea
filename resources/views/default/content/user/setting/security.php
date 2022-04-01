@@ -22,6 +22,6 @@ $form->html_form($user['trust_level'], Config::get('form/user-security'));
 </main>
 <aside>
   <div class="box-white text-sm">
-    <?= Translate::get('info-security'); ?>
+    <?= Translate::get('security.info'); ?>
   </div>
 </aside>

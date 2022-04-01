@@ -13,7 +13,7 @@
       .forEach(el => el.addEventListener("click", function(e) {
         Notiflix.Report.info(
           '<?= Translate::get('need.to.login'); ?>',
-          '<?= Translate::get('info-login'); ?>',
+          '<?= Translate::get('login.info'); ?>',
           '<?= Translate::get('well'); ?>',
         );
       }));
@@ -26,6 +26,36 @@
         Notiflix.Notify.info('<?= Translate::get($message[0]); ?>');
       <?php } ?>
     <?php } ?>
+  <?php } ?>
+
+  <?php if ($scroll) { ?>
+    // Что будет смотреть
+    const coolDiv = document.getElementById("scroll");
+
+    // Куда будем подгружать
+    const scroll = document.getElementById("scrollArea");
+
+    // Начальная загрузка (первая страница загружается статически)
+    let postPage = 2;
+
+    function getPosts(path) {
+      fetch(path)
+        .then(res => res.text()).then((res) => {
+          scroll.insertAdjacentHTML("beforeend", res);
+          postPage += 1;
+        })
+        .catch((e) => alert(e));
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      const firstEntry = entries[0];
+      if (firstEntry.isIntersecting) {
+        if (`${postPage}` > 25) return;
+        getPosts(`/post/scroll/${postPage}`);
+      }
+    });
+
+    observer.observe(coolDiv);
   <?php } ?>
 </script>
 

@@ -49,14 +49,14 @@ class Html
     public static function image($file, $alt, $style, $type, $size)
     {
         if ($type == 'post') {
-            $src = $size == 'thumbnails' ? PATH_POSTS_THUMB . $file : PATH_POSTS_COVER . $file;
+            $img = $size == 'thumbnails' ? PATH_POSTS_THUMB . $file : PATH_POSTS_COVER . $file;
         } elseif ($type == 'logo') {
-            $src = $size == 'small' ? PATH_FACETS_SMALL_LOGOS . $file : PATH_FACETS_LOGOS . $file;
+            $img = $size == 'small' ? PATH_FACETS_SMALL_LOGOS . $file : PATH_FACETS_LOGOS . $file;
         } else {
-            $src = $size == 'small' ? PATH_USERS_SMALL_AVATARS . $file : PATH_USERS_AVATARS . $file;
+            $img = $size == 'small' ? PATH_USERS_SMALL_AVATARS . $file : PATH_USERS_AVATARS . $file;
         }
 
-        $img = '<img class="' . $style . '" src="' . $src . '" title="' . $alt . '" alt="' . $alt . '">';
+        $img = '<img class="' . $style . '" src="' . $img . '" title="' . $alt . '" alt="' . $alt . '">';
 
         return $img;
     }

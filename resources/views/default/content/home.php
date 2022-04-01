@@ -39,14 +39,17 @@
       <i class="bi-info-square gray-600"></i>
     </div>
     <div class="dropdown tooltip"><?= Translate::get($data['sheet'] . '.info'); ?></div>
-
   </div>
 
   <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
-
-  <div class="mb15">
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
-  </div>
+  <?php if ($user['scroll'] == 0) { ?>
+    <div class="mb15">
+      <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
+    </div>
+  <?php } else { ?>
+    <div id="scrollArea"></div>     
+    <div id="scroll"></div>
+  <?php } ?>
 </main>
 
 <aside>

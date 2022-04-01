@@ -86,6 +86,6 @@
 </main>
 <aside>
   <div class="box-white bg-violet-50 text-sm">
-    <?= Translate::get('info-setting'); ?>
+    <?= Translate::get('setting.info'); ?>
   </div>
 </aside>

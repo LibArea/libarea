@@ -19,5 +19,5 @@
     </fieldset>
   </form>
   <p><?= Translate::get('login.use.condition'); ?>.</p>
-  <p><?= Translate::get('info-recover'); ?></p>
+  <p><?= Translate::get('recover.info'); ?></p>
 </main>

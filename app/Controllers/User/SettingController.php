@@ -79,6 +79,7 @@ class SettingController extends MainController
                 'name'                 => $name,
                 'activated'            => $user['activated'],
                 'limiting_mode'        => $user['limiting_mode'],
+                'scroll'               => Request::getPostInt('scroll'),
                 'trust_level'          => $user['trust_level'],
                 'updated_at'           => date('Y-m-d H:i:s'),
                 'color'                => Request::getPostString('color', '#339900'),

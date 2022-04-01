@@ -171,6 +171,7 @@ class UserData
         $noAuth = [
             'id'           => self::USER_ZERO_LEVEL,
             'trust_level'  => self::USER_ZERO_LEVEL,
+            'scroll'       => self::USER_ZERO_LEVEL,
             'template'     => Config::get('general.template'),
             'lang'         => Config::get('general.lang'),
         ];

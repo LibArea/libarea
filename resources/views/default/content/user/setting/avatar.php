@@ -59,6 +59,6 @@
 </main>
 <aside>
   <div class="box-white text-sm">
-    <?= Translate::get('info-avatar'); ?>
+    <?= Translate::get('avatar.info'); ?>
   </div>
 </aside>

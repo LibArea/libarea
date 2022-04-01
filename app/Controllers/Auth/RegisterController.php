@@ -33,7 +33,7 @@ class RegisterController extends MainController
         return Tpl::agRender(
             '/auth/register',
             [
-                'meta'  => Meta::get($m, Translate::get('registration'), Translate::get('info-security')),
+                'meta'  => Meta::get($m, Translate::get('registration'), Translate::get('security.info')),
                 'data'  => [
                     'sheet' => 'registration',
                     'type'  => 'register'

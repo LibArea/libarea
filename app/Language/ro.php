@@ -370,15 +370,14 @@ $data = [
     'enter content'         => 'Introduceți conținut',
   
     /* Setting */
-    'info-setting'          => 'Completați numele dvs., acest lucru va ajuta participanții să vă facă referire după nume. <br> <br> Spune-ne ceva despre tine. Aveți o mare oportunitate de a vă deschide pentru a mulțumi pe alții și a părea o persoană interesantă.',
-    'info-avatar'           => 'Încărcați un avatar și o acoperire pentru profilul dvs. <br> <br> Când fiecare utilizator are un avatar unic, devine mult mai ușor să urmărești discuțiile!',
+    'setting.info'          => 'Completați numele dvs., acest lucru va ajuta participanții să vă facă referire după nume. <br> <br> Spune-ne ceva despre tine. Aveți o mare oportunitate de a vă deschide pentru a mulțumi pe alții și a părea o persoană interesantă.',
+    'avatar.info'           => 'Încărcați un avatar și o acoperire pentru profilul dvs. <br> <br> Când fiecare utilizator are un avatar unic, devine mult mai ușor să urmărești discuțiile!',
     'info-security'         => 'Asigurați-vă că toate parolele dvs. au 8 sau mai multe caractere, în mod ideal mult mai multe.',
-    'info-login'            => 'Autorizarea vă permite să publicați postări, să răspundeți, să comentați.',
-    'info-recover'          => 'După ce faceți clic pe butonul „Resetare”, verificați e-mailul ...',
-
-    'info-favorite'         => 'Postări, comentarii și întrebări pe care le urmăriți',
-    'info-preferences'      => 'Postări la care sunteți abonat. Veți fi informat cu privire la toate răspunsurile noi',
-
+    'login.info'            => 'Autorizarea vă permite să publicați postări, să răspundeți, să comentați.',
+    'recover.info'          => 'După ce faceți clic pe butonul „Resetare”, verificați e-mailul ...',
+    'favorite.info'         => 'Postări, comentarii și întrebări pe care le urmăriți',
+    'preferences.info'      => 'Postări la care sunteți abonat. Veți fi informat cu privire la toate răspunsurile noi',
+    'endless.scroll'        => 'Activați derularea infinită?',
     'notification.email'    => 'Notifică prin e-mail',
     'notifications.info'    => 'Puteți marca toate anunțurile ca citite, faceți clic pe linkul :" am citit".',
     'notification.info'     => 'Vă puteți dezabona de la toate notificările prin e-mail din această secțiune',

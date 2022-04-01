@@ -49,14 +49,14 @@
         <?php if ($post['post_content_img']) { ?>
           <div class="mt10 ml30 mb-ml0 flex-auto">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= Html::image($post['post_content_img'], $post['post_title'], 'home-img right', 'post', 'cover'); ?>
+              <?= Html::image($post['post_content_img'], $post['post_title'], 'lazy home-img right', 'post', 'cover'); ?>
             </a>
           </div>
         <?php } else { ?>
           <?php if ($post['post_thumb_img']) { ?>
             <div class="home-img mt15 ml30 flex-auto mb-none">
               <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                <?= Html::image($post['post_thumb_img'], $post['post_title'],  'thumb right', 'post', 'thumbnails'); ?>
+                <?= Html::image($post['post_thumb_img'], $post['post_title'],  'lazy thumb right', 'post', 'thumbnails'); ?>
               </a>
             </div>
           <?php } ?>

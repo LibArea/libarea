@@ -1,0 +1,1 @@
+<?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>

@@ -101,6 +101,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     whisper,
                     activated,
                     limiting_mode,
+                    scroll,
                     reg_ip,
                     email,
                     avatar,

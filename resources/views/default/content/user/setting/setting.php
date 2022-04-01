@@ -62,6 +62,16 @@
         </select>
       </fieldset>
 
+      <?= Tpl::import('/_block/form/radio', [
+        'data' => [
+          [
+            'title'     => Translate::get('endless.scroll'),
+            'name'      => 'scroll',
+            'checked'   => $data['user']['scroll']
+          ],
+        ]
+      ]); ?>
+
       <h3 class="mt15 mb15"><?= Translate::get('contacts'); ?></h3>
       <?php foreach (Config::get('form/user-setting') as $block) { ?>
         <fieldset>
@@ -82,6 +92,6 @@
 </main>
 <aside>
   <div class="box-white text-sm">
-    <?= Translate::get('info-setting'); ?>
+    <?= Translate::get('setting.info'); ?>
   </div>
 </aside>
