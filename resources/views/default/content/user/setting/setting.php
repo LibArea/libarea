@@ -2,7 +2,7 @@
   <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
 
   <div class="box-white">
-    <form class="max-w640" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
       <?= Html::image($data['user']['avatar'], $data['user']['login'], 'mr5 ml5 ava', 'avatar', 'small'); ?>
@@ -17,7 +17,7 @@
         <span class="mr5 ml5"><?= $data['user']['email']; ?></span>
       </fieldset>
 
-      <fieldset>
+      <fieldset class="max-w300">
         <label for="name"><?= Translate::get('name'); ?></label>
         <input maxlength="11" value="<?= $data['user']['name']; ?>" type="text" name="name">
         <div class="help">0 - 11 <?= Translate::get('characters'); ?></div>
@@ -34,13 +34,13 @@
         'user'       => $user
       ]); ?>
 
-      <fieldset id="box">
+      <fieldset id="box" class="max-w300">
         <label for="post_content"><?= Translate::get('color'); ?></label>
         <input type="color" value="<?= $data['user']['color']; ?>" id="colorPicker">
         <input type="hidden" name="color" value="<?= $data['user']['color']; ?>" id="color">
       </fieldset>
 
-      <fieldset class="max-w640">
+      <fieldset class="max-w300">
         <label for="template"><?= Translate::get('template'); ?></label>
         <select name="template">
           <?php foreach (Config::get('general.templates') as $tpl) { ?>
@@ -51,7 +51,7 @@
         </select>
       </fieldset>
 
-      <fieldset class="max-w640">
+      <fieldset class="max-w300">
         <label for="post_content"><?= Translate::get('language'); ?></label>
         <select name="lang">
           <?php foreach (Config::get('general.languages') as $lang) {  ?>
@@ -74,7 +74,7 @@
 
       <h3 class="mt15 mb15"><?= Translate::get('contacts'); ?></h3>
       <?php foreach (Config::get('form/user-setting') as $block) { ?>
-        <fieldset>
+        <fieldset class="max-w300">
           <label for="post_title"><?= $block['lang']; ?></label>
           <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>

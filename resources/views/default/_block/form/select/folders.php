@@ -7,7 +7,7 @@
   </div>
 <?php } ?>
 
-<form class="max-w640" action="<?= getUrlByName('folder.content.create'); ?>" method="post" enctype="multipart/form-data">
+<form class="max-w780" action="<?= getUrlByName('folder.content.create'); ?>" method="post" enctype="multipart/form-data">
   <?php csrf_field(); ?>
   <input name='cat-outside' class='tagify' placeholder='<?= Translate::get('add'); ?>...'>
   <fieldset>

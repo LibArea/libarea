@@ -2,7 +2,7 @@
   <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
 
   <div class="bg-white box">
-    <form class="max-w640" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
       <fieldset>
@@ -19,7 +19,7 @@
         <span class="mr5 ml5"><?= $data['user']['email']; ?></span>
       </fieldset>
 
-      <fieldset>
+      <fieldset class="max-w300">
         <label for="name"><?= Translate::get('name'); ?></label>
         <input maxlength="11" value="<?= $data['user']['name']; ?>" type="text" name="name">
         <div class="help">0 - 11 <?= Translate::get('characters'); ?></div>  
@@ -42,7 +42,7 @@
         <input type="hidden" name="color" value="<?= $data['user']['color']; ?>" id="color">
       </fieldset>
 
-      <fieldset class="max-w640">
+      <fieldset class="max-w300">
         <label for="template">
           <?= Translate::get('template'); ?>
         </label>
@@ -55,7 +55,7 @@
         </select>
       </fieldset>
 
-       <fieldset class="max-w640">
+       <fieldset class="max-w300">
         <label class="block mb5" for="post_content"><?= Translate::get('language'); ?></label>
         <select name="lang">
           <?php foreach (Config::get('general.languages') as $lang) {  ?>
@@ -68,7 +68,7 @@
 
       <h3 class="mt15 mb15"><?= Translate::get('contacts'); ?></h3>
       <?php foreach (Config::get('form/user-setting') as $block) { ?>
-        <fieldset>
+        <fieldset class="max-w300">
           <label for="post_title"><?= $block['lang']; ?></label>
           <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>

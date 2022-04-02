@@ -397,9 +397,9 @@ class Forms
 					$wrap_before .= '>';
 				}
 
-				$wrap_after = $val['after_html'];
+				$after = $val['after_html'];
 				if (!empty($val['wrap_tag'])) {
-					$wrap_after = '' . $wrap_after . '</' . $val['wrap_tag'] . '>';
+					$after = '' . $after . '';
 				}
 
 				$wrap_after = $val['help'];
@@ -407,7 +407,7 @@ class Forms
 					$wrap_after = '<div class="text-sm gray-600">' . $wrap_after . '</div></' . $val['wrap_tag'] . '>';
 				}
 
-				$output .= $wrap_before . $field . $wrap_after;
+				$output .= $wrap_before . $field . $after . $wrap_after ;
 			else :
 				$output .= $field;
 			endif;
