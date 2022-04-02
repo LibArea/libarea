@@ -28,19 +28,6 @@ $facet  = $data['facet'] ?? false; ?>
 
     <div class="wrap items-center flex justify-between">
       <div class="flex items-center" id="find">
-        <div class="none mb-block">
-          <div class="trigger">
-            <i class="bi-list gray-600 text-xl mr10"></i>
-          </div>
-          <ul class="dropdown left">
-            <?= Html::nav(
-              'menu',
-              $type,
-              $user,
-              $pages = Config::get('menu.user')
-            ); ?>
-          </ul>
-        </div>
         <div class="ml20 flex items-center">
           <a title="<?= Translate::get('home'); ?>" class="logo ml5" href="/">
             <?= Config::get('meta.name'); ?>
@@ -90,12 +77,7 @@ $facet  = $data['facet'] ?? false; ?>
                 <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
-                <?= Html::nav(
-                  'menu',
-                  $type,
-                  $user,
-                  $pages = Config::get('menu.user')
-                ); ?>
+                <?= Tpl::import('/_block/navigation/menu', ['type' => $type, 'user' => $user, 'list' => Config::get('menu.user')]); ?>
               </ul>
             </div>
 

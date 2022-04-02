@@ -16,6 +16,6 @@
 </main>
 <aside>
   <div class="box-white text-sm sticky top-sm">
-    <?=  Translate::get('being.developed'); ?>
+    <?= Translate::get('being.developed'); ?>
   </div>
 </aside>

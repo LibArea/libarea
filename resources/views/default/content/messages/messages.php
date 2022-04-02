@@ -2,8 +2,8 @@
   <div class="box-flex-white">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
-    <?php if (!empty($data['messages'])) { ?>
-     <div class="box-white">
+  <?php if (!empty($data['messages'])) { ?>
+    <div class="box-white">
       <?php foreach ($data['messages'] as  $msg) { ?>
         <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> bg-purple<?php } ?>">
           <div class="text-sm flex">
@@ -37,13 +37,13 @@
           </a>
         </div>
       <?php } ?>
-  </div>
-<?php } else { ?>
-   <?= Tpl::import('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.dialogs'), 'icon' => 'bi-envelope']); ?>
-<?php } ?>
+    </div>
+  <?php } else { ?>
+    <?= Tpl::import('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.dialogs'), 'icon' => 'bi-envelope']); ?>
+  <?php } ?>
 </main>
 <aside>
   <div class="box-white text-sm sticky top-sm">
-    <?=  Translate::get('messages.info'); ?>
+    <?= Translate::get('messages.info'); ?>
   </div>
 </aside>

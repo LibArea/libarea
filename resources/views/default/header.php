@@ -11,9 +11,9 @@ $facet  = $data['facet'] ?? false; ?>
       <div class="d-header_contents">
 
         <div id="togglemenu" class="mb-none mr10">
-            <i class="bi-list gray-600 text-xl"></i>
+          <i class="bi-list gray-600 text-xl"></i>
         </div>
-        
+
         <div class="menu__button none mb-block mr10">
           <i class="bi-list gray-600 text-xl"></i>
         </div>
@@ -72,12 +72,7 @@ $facet  = $data['facet'] ?? false; ?>
                 <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
-                <?= Html::nav(
-                  'menu',
-                  $type,
-                  $user,
-                  $pages = Config::get('menu.user')
-                ); ?>
+                <?= Tpl::import('/_block/navigation/menu', ['type' => $type, 'user' => $user, 'list' => Config::get('menu.user')]); ?>
               </ul>
             </div>
           </div>
@@ -94,5 +89,5 @@ $facet  = $data['facet'] ?? false; ?>
   <?php } ?>
 
   <div id="contentWrapper" class="wrap">
- 
-  <?= Tpl::import('/menu', ['data' => $data, 'user' => $user]); ?>
+
+    <?= Tpl::import('/menu', ['data' => $data, 'user' => $user]); ?>

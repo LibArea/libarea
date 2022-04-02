@@ -1,10 +1,5 @@
 <div class="box-flex-white">
   <ul class="nav">
-    <?= Html::nav(
-      'nav',
-      $data['sheet'],
-      1,
-      $pages = Config::get('menu.settings'),
-    ); ?>
+    <?= Tpl::import('/_block/navigation/menu', ['type' => $data['sheet'], 'user' => 1, 'list' => Config::get('menu.settings')]); ?>
   </ul>
 </div>

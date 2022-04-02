@@ -212,14 +212,13 @@
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_feature'] == 0) {
       Tpl::import('/_block/comments-view', ['data' => $data, 'post' => $post, 'user' => $user]);
-      if ($post['post_closed'] == 1) { 
+      if ($post['post_closed'] == 1) {
         echo Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('post.closed'), 'icon' => 'bi-door-closed']);
       }
-
     } else {
       Tpl::import('/_block/questions-view', ['data' => $data, 'post' => $post, 'user' => $user]);
       if ($post['post_closed'] == 1) {
-         echo Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('question.closed'), 'icon' => 'bi-door-closed']);
+        echo Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('question.closed'), 'icon' => 'bi-door-closed']);
       }
     }
   } else {
@@ -235,12 +234,12 @@
 
         <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
           <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm sky center mt5 mr5">
-              <i class="bi-plus"></i> <?= Translate::get('read'); ?>
+            <i class="bi-plus"></i> <?= Translate::get('read'); ?>
           </div>
         <?php } ?>
 
         <a title="<?= $topic['facet_title']; ?>" class="black inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
-            <?= $topic['facet_title']; ?>
+          <?= $topic['facet_title']; ?>
         </a>
 
         <div class="text-sm mt5 pr15 mb-pr0 gray-600">
@@ -256,7 +255,7 @@
     </div>
   <?php } ?>
   <div class="center box-white">
-     <?= Tpl::import('/share'); ?>
+    <?= Tpl::import('/share'); ?>
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="box-white sticky top-sm">
@@ -302,9 +301,9 @@
       }
 
       if (text) {
-        let comment =  document.getElementById('qcomment');
+        let comment = document.getElementById('qcomment');
         if (comment) {
-            comment.innerHTML = '> ' + text;
+          comment.innerHTML = '> ' + text;
         }
       }
     }

@@ -6,9 +6,9 @@
         <p class="m0"><?= Translate::get('answers'); ?> <b><?= $data['profile']['login']; ?></b></p>
       </div>
       <?php if (!empty($data['answers'])) { ?>
-        <div class="box-white"> 
+        <div class="box-white">
           <?= Tpl::import('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
-        </div>   
+        </div>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/answers'); ?>
       <?php } else { ?>
         <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.answers'), 'icon' => 'bi-info-lg']); ?>

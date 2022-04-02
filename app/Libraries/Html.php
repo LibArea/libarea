@@ -91,40 +91,6 @@ class Html
         return PATH_USERS_COVER . $file;
     }
 
-    // Menu and navigation
-    public static function nav($name, $item, $user, array $pages = [])
-    {
-        $html = '';
-        $trust_level = $user['trust_level'] ?? 0;
-        if ($name == 'nav') {
-            foreach ($pages as $key => $page) {
-                $tl = $page['tl'] ?? 0;
-                if ($trust_level >= $tl) {
-                    $isActive = $page['id'] == $item ? ' aria-current="page" class="active" ' : '';
-                    $html .= '<li><a ' . $isActive . ' href="' . $page['url'] . '">
-                                <i class="text-sm ' . $page['icon'] . '"></i>
-                                    ' . $page['title'] . '</a></li>';
-                }
-            }
-        } else {
-            foreach ($pages as $key => $page) {
-                $tl = $page['tl'] ?? 0;
-                if (!empty($page['hr'])) {
-                    if ($user['id'] > 0) $html .= '<li><div class="m15"></div></li>';
-                } else {
-                    if ($trust_level >= $tl) {
-                        $isActive = $page['id'] == $item ? ' aria-current="page" class="active" ' : '';
-                        $html .= '<li><a ' . $isActive . ' href="' . $page['url'] . '">
-                                    <i class="' . $page['icon'] . '"></i>
-                                        ' . $page['title'] . '</a></li>';
-                    }
-                }
-            }
-        }
-
-        return $html;
-    }
-
     // Localization of dates and events....
     public static function langDate($string)
     {

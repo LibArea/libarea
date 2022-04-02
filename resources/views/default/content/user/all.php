@@ -9,22 +9,24 @@
   <div class="bg-white box-flex br-box-gray">
     <ul class="nav">
 
-      <?= Html::nav(
-        'nav',
-        $data['sheet'],
-        $user,
-        $pages = [
-          [
-            'id'    => $data['type'] . 's.all',
-            'url'   => getUrlByName($data['type'] . 's.all'),
-            'title' => Translate::get('all'),
-            'icon'  => 'bi bi-app'
-          ], [
-            'id'    => $data['type'] . 's.new',
-            'url'   => getUrlByName($data['type'] . 's.new'),
-            'title' => Translate::get('new ones'),
-            'icon'  => 'bi bi-sort-up'
-          ],
+      <?= Tpl::import(
+        '/_block/navigation/nav',
+        [
+          'type' => $data['sheet'],
+          'user' => $user,
+          'list' => [
+            [
+              'id'    => $data['type'] . 's.all',
+              'url'   => getUrlByName($data['type'] . 's.all'),
+              'title' => Translate::get('all'),
+              'icon'  => 'bi bi-app'
+            ], [
+              'id'    => $data['type'] . 's.new',
+              'url'   => getUrlByName($data['type'] . 's.new'),
+              'title' => Translate::get('new ones'),
+              'icon'  => 'bi bi-sort-up'
+            ],
+          ]
         ]
       );
       ?>
@@ -35,16 +37,16 @@
   <div class="box-white">
     <div class="flex flex-wrap">
       <?php foreach ($data['users'] as $user) { ?>
-      <div class="w-20 mb20 mb-w-33 center">
-        <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
-          <?= Html::image($user['avatar'], $user['login'], 'ava-lg', 'avatar', 'max'); ?>
-          <div class="block mt5">
-            <?= $user['login']; ?>
-          </div>
-          <?php if ($user['name']) { ?>
-            <span class="gray text-sm"><?= $user['name']; ?></span>
-          <?php } ?>
-        </a>
+        <div class="w-20 mb20 mb-w-33 center">
+          <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+            <?= Html::image($user['avatar'], $user['login'], 'ava-lg', 'avatar', 'max'); ?>
+            <div class="block mt5">
+              <?= $user['login']; ?>
+            </div>
+            <?php if ($user['name']) { ?>
+              <span class="gray text-sm"><?= $user['name']; ?></span>
+            <?php } ?>
+          </a>
         </div>
       <?php } ?>
     </div>

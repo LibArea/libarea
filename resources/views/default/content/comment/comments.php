@@ -1,26 +1,27 @@
 <main>
   <div class="box-flex-white relative">
     <ul class="nav">
-
-      <?= Html::nav(
-        'nav',
-        $data['sheet'],
-        $user,
-        $pages = [
-          [
-            'tl'    => 0,
-            'id'    => $data['type'] . '.all',
-            'url'   => '/comments',
-            'title' => Translate::get('comments'),
-            'icon'  => 'bi-sort-down'
-          ],
-          [
-            'tl'    => UserData::REGISTERED_ADMIN,
-            'id'    => $data['type'] . '.deleted',
-            'url'   => getUrlByName('comments.deleted'),
-            'title' => Translate::get('deleted'),
-            'icon'  => 'bi-app'
-          ],
+      <?= Tpl::import(
+        '/_block/navigation/nav',
+        [
+          'type' => $data['sheet'],
+          'user' => $user,
+          'list' => [
+            [
+              'tl'    => 0,
+              'id'    => $data['type'] . '.all',
+              'url'   => '/comments',
+              'title' => Translate::get('comments'),
+              'icon'  => 'bi-sort-down'
+            ],
+            [
+              'tl'    => UserData::REGISTERED_ADMIN,
+              'id'    => $data['type'] . '.deleted',
+              'url'   => getUrlByName('comments.deleted'),
+              'title' => Translate::get('deleted'),
+              'icon'  => 'bi-app'
+            ],
+          ]
         ]
       ); ?>
 
@@ -32,7 +33,7 @@
   </div>
 
   <?php if (!empty($data['comments'])) { ?>
-    <div class="box-white"> 
+    <div class="box-white">
       <?= Tpl::import(
         '/content/comment/comment',
         [
@@ -48,7 +49,7 @@
 </main>
 <aside>
   <div class="box-white text-sm sticky top-sm">
-    <?=  Translate::get('comments.desc'); ?>
+    <?= Translate::get('comments.desc'); ?>
   </div>
 </aside>
 <?= Tpl::import('/_block/js-msg-flag', ['uid' => $user['id']]); ?>

@@ -1,14 +1,3 @@
-<div class="mb-none">
-  <nav class="sticky top-sm">
-  <?= Html::nav(
-    'menu',
-    $data['type'],
-    $user,
-    $pages = Config::get('menu.left'),
-  ); ?>
-  </nav>
-</div>
-
 <main class="col-two">
   <div class="box-white">
     <?php if ($data['site']['item_title']) { ?>

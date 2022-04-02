@@ -71,13 +71,7 @@
         <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
         <ul class="menu">
           <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
-
-          <?= Html::nav(
-            'menu',
-            $data['sheet'],
-            $user,
-            $pages = Config::get('catalog/menu.user')
-          ); ?>
+          <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('catalog/menu.user')]); ?>
         </ul>
       </div>
     <?php } ?>

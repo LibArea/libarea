@@ -15,11 +15,11 @@
 
     <div class="mt15 right">
       <?= Html::signed([
-          'user_id'         => $user['id'], 
-          'type'            => 'facet', 
-          'id'              => $topic['facet_id'], 
-          'content_user_id' => $topic['facet_user_id'], 
-          'state'           => is_array($data['facet_signed']),
+        'user_id'         => $user['id'],
+        'type'            => 'facet',
+        'id'              => $topic['facet_id'],
+        'content_user_id' => $topic['facet_user_id'],
+        'state'           => is_array($data['facet_signed']),
       ]); ?>
     </div>
 
@@ -35,32 +35,34 @@
   <p class="m0 text-xl mb-none"><?= Translate::get($data['type']); ?></p>
   <ul class="nav">
 
-    <?= Html::nav(
-      'nav',
-      $data['sheet'],
-      $user,
-      $pages = [
-        [
-          'id'      => 'facet.feed',
-          'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]),
-          'title'   => Translate::get('feed'),
-          'icon'    => 'bi-sort-down'
-        ], [
-          'id'      => 'facet.recommend',
-          'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
-          'title'   => Translate::get('recommended'),
-          'icon'    => 'bi-lightning'
-        ],  [
-          'id'      => 'writers',
-          'url'     => getUrlByName('topic.writers', ['slug' => $topic['facet_slug']]),
-          'title'   => Translate::get('writers'),
-          'icon'    => 'bi-award'
-        ], [
-          'id'      => 'info',
-          'url'     => getUrlByName('topic.info', ['slug' => $topic['facet_slug']]),
-          'title'   => '',
-          'icon'    => 'bi-info-lg'
-        ],
+    <?= Tpl::import(
+      '/_block/navigation/nav',
+      [
+        'type' => $data['sheet'],
+        'user' => $user,
+        'list' =>  [
+          [
+            'id'      => 'facet.feed',
+            'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]),
+            'title'   => Translate::get('feed'),
+            'icon'    => 'bi-sort-down'
+          ], [
+            'id'      => 'facet.recommend',
+            'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
+            'title'   => Translate::get('recommended'),
+            'icon'    => 'bi-lightning'
+          ],  [
+            'id'      => 'writers',
+            'url'     => getUrlByName('topic.writers', ['slug' => $topic['facet_slug']]),
+            'title'   => Translate::get('writers'),
+            'icon'    => 'bi-award'
+          ], [
+            'id'      => 'info',
+            'url'     => getUrlByName('topic.info', ['slug' => $topic['facet_slug']]),
+            'title'   => '',
+            'icon'    => 'bi-info-lg'
+          ],
+        ]
       ]
     ); ?>
 

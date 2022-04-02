@@ -46,12 +46,7 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
                   <?= $user['login']; ?>
                 </div>
                 <ul class="dropdown">
-                  <?= Html::nav(
-                    'menu',
-                    'dir',
-                    $user,
-                    $pages = Config::get('menu.user')
-                  ); ?>
+                  <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'user' => $user, 'list' => Config::get('menu.user')]); ?>
                 </ul>
               </div>
             <?php } ?>

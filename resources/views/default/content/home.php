@@ -2,34 +2,36 @@
   <div class="box-flex-white relative">
     <ul class="nav">
 
-      <?= Html::nav(
-        'nav',
-        $data['sheet'],
-        $user,
-        $pages = [
-          [
-            'id'    => $data['type'] . '.feed',
-            'url'   => '/',
-            'title' => Translate::get('feed'),
-            'icon'  => 'bi-sort-down'
-          ], [
-            'tl'    => 1,
-            'id'    => $data['type'] . '.all',
-            'url'   => getUrlByName('main.all'),
-            'title' => Translate::get('all'),
-            'icon'  => 'bi-app'
-          ], [
-            'id'    => $data['type'] . '.top',
-            'url'   => getUrlByName('main.top'),
-            'title' => Translate::get('top'),
-            'icon'  => 'bi-bar-chart'
-          ], [
-            'tl'    => 9,
-            'id'    => $data['type'] . '.deleted',
-            'url'   => getUrlByName('main.deleted'),
-            'title' => Translate::get('deleted'),
-            'icon'  => 'bi-bar-chart'
-          ],
+      <?= Tpl::import(
+        '/_block/navigation/nav',
+        [
+          'type' => $data['sheet'],
+          'user' => $user,
+          'list' => [
+            [
+              'id'    => $data['type'] . '.feed',
+              'url'   => '/',
+              'title' => Translate::get('feed'),
+              'icon'  => 'bi-sort-down'
+            ], [
+              'tl'    => 1,
+              'id'    => $data['type'] . '.all',
+              'url'   => getUrlByName('main.all'),
+              'title' => Translate::get('all'),
+              'icon'  => 'bi-app'
+            ], [
+              'id'    => $data['type'] . '.top',
+              'url'   => getUrlByName('main.top'),
+              'title' => Translate::get('top'),
+              'icon'  => 'bi-bar-chart'
+            ], [
+              'tl'    => 9,
+              'id'    => $data['type'] . '.deleted',
+              'url'   => getUrlByName('main.deleted'),
+              'title' => Translate::get('deleted'),
+              'icon'  => 'bi-bar-chart'
+            ],
+          ]
         ]
       ); ?>
 
@@ -47,7 +49,7 @@
       <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
     </div>
   <?php } else { ?>
-    <div id="scrollArea"></div>     
+    <div id="scrollArea"></div>
     <div id="scroll"></div>
   <?php } ?>
 </main>

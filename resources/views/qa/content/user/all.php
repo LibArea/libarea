@@ -8,27 +8,27 @@
 
   <div class="box-flex">
     <ul class="nav">
-
-      <?= Html::nav(
-        'nav',
-        $data['sheet'],
-        $user,
-        $pages = [
-          [
-            'id'    => $data['type'] . 's.all',
-            'url'   => getUrlByName($data['type'] . 's.all'),
-            'title' => Translate::get('all'),
-            'icon'  => 'bi bi-app'
-          ], [
-            'id'    => $data['type'] . 's.new',
-            'url'   => getUrlByName($data['type'] . 's.new'),
-            'title' => Translate::get('new ones'),
-            'icon'  => 'bi bi-sort-up'
-          ],
+      <?= Tpl::import(
+        '/_block/navigation/nav',
+        [
+          'type' => $data['sheet'],
+          'user' => $user,
+          'list' => [
+            [
+              'id'    => $data['type'] . 's.all',
+              'url'   => getUrlByName($data['type'] . 's.all'),
+              'title' => Translate::get('all'),
+              'icon'  => 'bi bi-app'
+            ], [
+              'id'    => $data['type'] . 's.new',
+              'url'   => getUrlByName($data['type'] . 's.new'),
+              'title' => Translate::get('new ones'),
+              'icon'  => 'bi bi-sort-up'
+            ],
+          ]
         ]
       );
       ?>
-
     </ul>
   </div>
 

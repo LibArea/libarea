@@ -1,13 +1,6 @@
 <div class="box-flex-white">
   <ul class="nav">
-
-    <?= Html::nav(
-      'nav',
-      $data['sheet'],
-      $user,
-      $pages = Config::get('menu.favorites'),
-    ); ?>
-
+    <?= Tpl::import('/_block/navigation/menu', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('menu.favorites')]); ?>
   </ul>
   <div class="text-sm">
     <i class="bi-plus-lg gray-600 mr5"></i>

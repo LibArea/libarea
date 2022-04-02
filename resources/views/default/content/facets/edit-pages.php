@@ -5,26 +5,28 @@
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
     <ul class="nav">
 
-      <?= Html::nav(
-        'nav',
-        $data['type'],
-        $user,
-        $pages = [
-          [
-            'id'        => 'edit',
-            'url'       => getUrlByName($fs['facet_type'] . '.edit', ['id' => $fs['facet_id']]),
-            'title'     => Translate::get('settings'),
-            'icon'      => 'bi-gear'
-          ], [
-            'id'        => 'pages',
-            'url'       => '',
-            'title'     => Translate::get('pages'),
-            'icon'      => 'bi-app'
-          ], [
-            'id'        => 'all',
-            'url'       => getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]),
-            'title'     => Translate::get('go to'),
-            'icon'      => 'bi-arrow-up-right-square'
+      <?= Tpl::import(
+        '/_block/navigation/nav',
+        [
+          'type' => $data['sheet'],
+          'user' => $user,
+          'list' =>  [
+            [
+              'id'        => 'edit',
+              'url'       => getUrlByName($fs['facet_type'] . '.edit', ['id' => $fs['facet_id']]),
+              'title'     => Translate::get('settings'),
+              'icon'      => 'bi-gear'
+            ], [
+              'id'        => 'pages',
+              'url'       => '',
+              'title'     => Translate::get('pages'),
+              'icon'      => 'bi-app'
+            ], [
+              'id'        => 'all',
+              'url'       => getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]),
+              'title'     => Translate::get('go to'),
+              'icon'      => 'bi-arrow-up-right-square'
+            ]
           ]
         ]
       ); ?>

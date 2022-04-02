@@ -9,26 +9,28 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
     <ul class="nav">
 
-      <?= Html::nav(
-        'nav',
-        $data['type'],
-        $user,
-        $pages = [
-          [
-            'id'        => 'edit',
-            'url'       => '',
-            'title'     => Translate::get('settings'),
-            'icon'      => 'bi bi-gear'
-          ], [
-            'id'        => 'pages',
-            'url'       => getUrlByName('pages.edit', ['id' => $fs['facet_id']]),
-            'title'     => Translate::get('pages'),
-            'icon'      => 'bi bi-app'
-          ], [
-            'id'        => 'all',
-            'url'       => $url,
-            'title'     => Translate::get('go to'),
-            'icon'      => 'bi bi-arrow-up-right-square'
+      <?= Tpl::import(
+        '/_block/navigation/nav',
+        [
+          'type' => $data['sheet'],
+          'user' => $user,
+          'list' => [
+            [
+              'id'        => 'edit',
+              'url'       => '',
+              'title'     => Translate::get('settings'),
+              'icon'      => 'bi bi-gear'
+            ], [
+              'id'        => 'pages',
+              'url'       => getUrlByName('content.edit.page', ['type' => 'page', 'id' => $fs['facet_id']]),
+              'title'     => Translate::get('pages'),
+              'icon'      => 'bi bi-app'
+            ], [
+              'id'        => 'all',
+              'url'       => $url,
+              'title'     => Translate::get('go to'),
+              'icon'      => 'bi bi-arrow-up-right-square'
+            ]
           ]
         ]
       ); ?>

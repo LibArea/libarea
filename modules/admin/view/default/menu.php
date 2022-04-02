@@ -1,12 +1,7 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
 <div class="menu__left">
   <ul class="menu">
-    <?= Html::nav(
-      'menu',
-      $data['type'],
-      1,
-      $pages = Config::get('admin/menu.admin')
-    ); ?>
+    <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['type'], 'user' => 1, 'list' => Config::get('admin/menu.admin')]); ?>
   </ul>
 </div>
 

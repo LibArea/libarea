@@ -9,30 +9,32 @@
   <div class="box-flex">
     <ul class="nav">
 
-      <?= Html::nav(
-        'nav',
-        $data['sheet'],
-        $user,
-        $pages = [
-          [
-            'id'    => $data['type'] . 's.all',
-            'url'   => getUrlByName($data['type'] . 's.all'),
-            'title' => Translate::get('all'),
-            'icon'  => 'bi-app'
-          ],
-          [
-            'id'    => $data['type'] . 's.new',
-            'url'   => getUrlByName($data['type'] . 's.new'),
-            'title' => Translate::get('new ones'),
-            'icon'  => 'bi-sort-up'
-          ],
-          [
-            'tl'    => 1,
-            'id'    => $data['type'] . 's.my',
-            'url'   => getUrlByName($data['type'] . 's.my'),
-            'title' => Translate::get('reading'),
-            'icon'  => 'bi-check2-square'
-          ],
+      <?= Tpl::import(
+        '/_block/navigation/nav',
+        [
+          'type' => $data['sheet'],
+          'user' => $user,
+          'list' => [
+            [
+              'id'    => $data['type'] . 's.all',
+              'url'   => getUrlByName($data['type'] . 's.all'),
+              'title' => Translate::get('all'),
+              'icon'  => 'bi-app'
+            ],
+            [
+              'id'    => $data['type'] . 's.new',
+              'url'   => getUrlByName($data['type'] . 's.new'),
+              'title' => Translate::get('new ones'),
+              'icon'  => 'bi-sort-up'
+            ],
+            [
+              'tl'    => 1,
+              'id'    => $data['type'] . 's.my',
+              'url'   => getUrlByName($data['type'] . 's.my'),
+              'title' => Translate::get('reading'),
+              'icon'  => 'bi-check2-square'
+            ],
+          ]
         ]
       );
       ?>

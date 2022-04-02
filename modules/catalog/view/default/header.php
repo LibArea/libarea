@@ -37,12 +37,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?08');
                     <?= Translate::get('menu'); ?>
                   </div>
                   <ul class="dropdown">
-                    <?= Html::nav(
-                      'menu',
-                      'admin',
-                      $user,
-                      $pages = Config::get('catalog/menu.user')
-                    ); ?>
+                    <?= Tpl::insert('/_block/navigation/menu', ['type' => 'admin', 'user' => $user, 'list' => Config::get('catalog/menu.user')]); ?>
                   </ul>
                 </div>
               <?php } ?>
@@ -54,12 +49,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?08');
                   <?= $user['login']; ?>
                 </div>
                 <ul class="dropdown">
-                  <?= Html::nav(
-                    'menu',
-                    'dir',
-                    $user,
-                    $pages = Config::get('menu.user')
-                  ); ?>
+                  <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'user' => $user, 'list' => Config::get('menu.user')]); ?>
                 </ul>
               </div>
             <?php } ?>

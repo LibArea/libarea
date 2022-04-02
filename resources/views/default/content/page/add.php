@@ -3,15 +3,15 @@
 
     <a href="/"><?= Translate::get('home'); ?></a> /
     <span class="red"><?= sprintf(Translate::get('add.option'), Translate::get('pages')); ?></span>
-    
+
     <form action="<?= getUrlByName('content.create', ['type' => 'page']); ?>" method="post">
       <?= csrf_field() ?>
 
-    <fieldset>
-      <label for="post_title"><?= Translate::get('heading'); ?></label>
-      <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
-      <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>  
-    </fieldset>
+      <fieldset>
+        <label for="post_title"><?= Translate::get('heading'); ?></label>
+        <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
+        <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>
+      </fieldset>
 
       <?php if (!empty($data['blog'])) { ?>
         <?= Tpl::import('/_block/form/select/blog', [

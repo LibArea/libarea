@@ -8,11 +8,6 @@ if (in_array($data['type'], $arr)) {
 
 <nav class="menu__left<?= $css; ?> mb-none">
   <ul class="menu sticky top-sm">
-    <?= Html::nav(
-      'menu',
-      $data['type'],
-      $user,
-      $pages = Config::get('menu.left'),
-    ); ?>
+    <?= Tpl::import('/_block/navigation/menu', ['type' => $data['type'], 'user' => $user, 'list' => Config::get('menu.left')]); ?>
   </ul>
 </nav>
