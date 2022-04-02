@@ -25,10 +25,13 @@ class MyParsedown extends Parsedown
             $server_host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : null;
             $href_host = isset($Element['attributes']['href']) ? parse_url($Element['attributes']['href'], PHP_URL_HOST) : null;
 
-            // Add a list of allowed urls to the config?
-            if ($server_host != $href_host) {
-                $Element['attributes']['target'] = '_blank';
-                $Element['attributes']['rel'] = 'noopener nofollow ugc';
+            if($href_host) {
+                // Add a list of allowed urls to the config?
+                if ($server_host != $href_host) {
+                    $Element['attributes']['target'] = '_blank';
+                    $Element['attributes']['class'] = 'external-url';
+                    $Element['attributes']['rel'] = 'noopener nofollow ugc';
+                }
             }
         }
 

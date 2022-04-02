@@ -346,4 +346,11 @@ a:hover > img { opacity: 0.8; }
   height: 48px;
   width: 54px;
   text-align: center;
-} 
+}
+
+.external-url:after {
+  content: "\f470";
+  font-family: bootstrap-icons;
+  color: var(--gray-600);
+  vertical-align: middle;
+}

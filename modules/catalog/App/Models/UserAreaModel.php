@@ -67,6 +67,7 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                     item_content,
                     item_title_soft,
                     item_domain,
+                    item_date,
                     item_github_url,
                     item_user_id,
                     item_votes,
