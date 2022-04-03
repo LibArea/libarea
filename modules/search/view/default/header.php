@@ -46,14 +46,14 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
                   <?= $user['login']; ?>
                 </div>
                 <ul class="dropdown">
-                  <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'user' => $user, 'list' => Config::get('menu.user')]); ?>
+                  <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'user' => $user, 'list' => Config::get('navigation/menu.user')]); ?>
                 </ul>
               </div>
             <?php } ?>
           </div>
         </div>
         <form method="get" action="<?= getUrlByName('search'); ?>">
-          <input type="text" name="q" placeholder="<?= Translate::get('to find'); ?>" class="page-search__input">
+          <input type="text" name="q" placeholder="<?= Translate::get('to.find'); ?>" class="page-search__input">
           <input name="type" value="<?= $uri; ?>" type="hidden">
         </form>
       </div>

@@ -48,7 +48,7 @@ return [
         ], [
             'hr'    => true,
         ], [
-            'tl'    => 1,
+            'tl'    => UserData::USER_ZERO_LEVEL,
             'url'   => getUrlByName('favorites'),
             'title' => Translate::get('favorites'),
             'icon'  => 'bi bi-bookmark',
@@ -122,53 +122,6 @@ return [
             'title' => Translate::get('sign out'),
             'icon'  => 'bi bi-box-arrow-right',
             'id'    => '',
-        ],
-    ],
-
-    // Navigating the Participant Settings section
-    // Навигация раздела Настройки участника
-    'settings' => [
-        [
-            'url'   => getUrlByName('setting'),
-            'title' => Translate::get('settings'),
-            'icon'  => 'bi bi-gear',
-            'id'    => 'settings',
-        ], [
-            'url'   => '/setting/avatar',
-            'title' => Translate::get('avatar'),
-            'icon'  => 'bi bi-emoji-smile',
-            'id'    => 'avatar',
-        ], [
-            'url'   => '/setting/security',
-            'title' => Translate::get('password'),
-            'icon'  => 'bi bi-lock',
-            'id'    => 'security',
-        ], [
-            'url'   => '/setting/notifications',
-            'title' => Translate::get('notifications'),
-            'icon'  => 'bi bi-app-indicator',
-            'id'    => 'notifications',
-        ],
-    ],
-
-    // Navigation section Bookmarks
-    // Навигация раздела Закладки
-    'favorites' => [
-        [
-            'id'    => 'drafts',
-            'url'   => getUrlByName('drafts'),
-            'title' => Translate::get('drafts'),
-            'icon'  => 'bi-journal-richtext'
-        ], [
-            'id'    => 'favorites',
-            'url'   => getUrlByName('favorites'),
-            'title' => Translate::get('favorites'),
-            'icon'  => 'bi-bookmark'
-        ], [
-            'id'    => 'subscribed',
-            'url'   => getUrlByName('subscribed'),
-            'title' => Translate::get('subscribed'),
-            'icon'  => 'bi-bookmark-plus'
         ],
     ],
 ];

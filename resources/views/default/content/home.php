@@ -1,40 +1,7 @@
 <main>
   <div class="box-flex-white relative">
     <ul class="nav">
-
-      <?= Tpl::import(
-        '/_block/navigation/nav',
-        [
-          'type' => $data['sheet'],
-          'user' => $user,
-          'list' => [
-            [
-              'id'    => $data['type'] . '.feed',
-              'url'   => '/',
-              'title' => Translate::get('feed'),
-              'icon'  => 'bi-sort-down'
-            ], [
-              'tl'    => 1,
-              'id'    => $data['type'] . '.all',
-              'url'   => getUrlByName('main.all'),
-              'title' => Translate::get('all'),
-              'icon'  => 'bi-app'
-            ], [
-              'id'    => $data['type'] . '.top',
-              'url'   => getUrlByName('main.top'),
-              'title' => Translate::get('top'),
-              'icon'  => 'bi-bar-chart'
-            ], [
-              'tl'    => 9,
-              'id'    => $data['type'] . '.deleted',
-              'url'   => getUrlByName('main.deleted'),
-              'title' => Translate::get('deleted'),
-              'icon'  => 'bi-bar-chart'
-            ],
-          ]
-        ]
-      ); ?>
-
+       <?= Tpl::import('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.home')]); ?>
     </ul>
 
     <div class="trigger">

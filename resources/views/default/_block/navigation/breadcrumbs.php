@@ -1,19 +1,4 @@
-<?php // Let's add something for the test
-$list = [
-  [
-    'name' => 'Name',
-    'link' => '/one'
-  ], [
-    'name' => 'Name 2',
-    'link' => '/two'
-  ], [
-    'name' => 'Name 3',
-    'link' => '/three'
-  ],
-];
-?>
-
-<ul itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumbs">
+ <ul itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumbs">
   <?php
 
   // Найдем последний элемент

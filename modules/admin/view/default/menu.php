@@ -9,16 +9,17 @@
   <?php if ($data['type'] != 'admin') { ?>
     <div class="box-flex-white">
 
-      <?php $breadcrumbs = new Breadcrumbs();
-      $breadcrumbs->base(getUrlByName('admin'), Translate::get('admin')); ?>
-      <?php if (!empty($data['facets']) || $data['sheet'] == 'ban.facet') { ?>
-        <?php $breadcrumbs->addCrumb(Translate::get('facets'), getUrlByName('admin.facets.all'));
-        $breadcrumbs->addCrumb(Translate::get($data['type']), $data['type']); ?>
-      <?php } else { ?>
-        <?php $breadcrumbs->addCrumb(Translate::get($data['type']), $data['type']); ?>
-      <?php } ?>
-
-      <?= $breadcrumbs->render('breadcrumbs'); ?>
+      <?= Tpl::insert('/_block/navigation/breadcrumbs', [
+        'list' => [
+          [
+            'name' => Translate::get('admin'),
+            'link' => getUrlByName('admin')
+          ], [
+            'name' => Translate::get($data['type']),
+            'link' => $data['type']
+          ],
+        ]
+      ]); ?>
 
       <?php if (!empty($data['users_count'])) { ?><?= $data['users_count'] ?><?php } ?>
       <ul class="flex flex-row list-none m0 p0 center">

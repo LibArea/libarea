@@ -150,6 +150,7 @@ $data = [
     'community'         => 'comunitate',
     'trust.level'       => 'Nivel de încredere',
     'search'            => 'Căutare',
+    'to.find'           => 'A găsi',
     'user'              => 'Utilizator',
     'users'             => 'Utilizatori',
     'page'              => 'Pagină',

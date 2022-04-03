@@ -20,8 +20,8 @@ class Config
         }
 
         if (!is_file(self::$path . '/' . $file . '.php')) {
-           echo 'The file does not exist';
-           exit;
+            echo 'The file does not exist';
+            exit;
         }
 
         if (!array_key_exists(self::$path . '/' . $file . '.php', self::$cache)) {

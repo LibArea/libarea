@@ -1,14 +1,22 @@
 <?php
 echo includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
-$breadcrumb = (new Breadcrumbs())->base(getUrlByName('web'), Translate::get('home'));
-$breadcrumb->addCrumb(Translate::get('site.add'), 'red');
 $form = new Forms();
 $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
 ?>
 
 <div id="contentWrapper">
   <main>
-    <?= $breadcrumb->render('breadcrumbs'); ?>
+    <?= Tpl::insert('/_block/navigation/breadcrumbs', [
+        'list' => [
+          [
+            'name' => Translate::get('home'),
+            'link' => getUrlByName('web')
+          ], [
+            'name' => Translate::get('site.add'),
+            'link' => 'red'
+          ],
+        ]
+      ]); ?>
 
     <form id="addUrl" class="max-w640">
       <?= csrf_field() ?>

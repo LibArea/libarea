@@ -1,31 +1,7 @@
 <main>
   <div class="box-flex-white relative">
     <ul class="nav">
-
-      <?= Tpl::import(
-        '/_block/navigation/nav',
-        [
-          'type' => $data['sheet'],
-          'user' => $user,
-          'list' => [
-            [
-              'tl'    => 0,
-              'id'    => $data['type'] . '.all',
-              'url'   => '/answers',
-              'title' => Translate::get('answers'),
-              'icon'  => 'bi-sort-down'
-            ],
-            [
-              'tl'    => UserData::REGISTERED_ADMIN,
-              'id'    => $data['type'] . '.deleted',
-              'url'   => getUrlByName('answers.deleted'),
-              'title' => Translate::get('deleted'),
-              'icon'  => 'bi-app'
-            ],
-          ]
-        ]
-      ); ?>
-
+      <?= Tpl::import('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.answers')]); ?>
     </ul>
     <div class="trigger">
       <i class="bi-info-square gray-600"></i>

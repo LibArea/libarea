@@ -1,30 +1,7 @@
 <main>
   <div class="box-flex-white relative">
     <ul class="nav">
-      <?= Tpl::import(
-        '/_block/navigation/nav',
-        [
-          'type' => $data['sheet'],
-          'user' => $user,
-          'list' => [
-            [
-              'tl'    => 0,
-              'id'    => $data['type'] . '.all',
-              'url'   => '/comments',
-              'title' => Translate::get('comments'),
-              'icon'  => 'bi-sort-down'
-            ],
-            [
-              'tl'    => UserData::REGISTERED_ADMIN,
-              'id'    => $data['type'] . '.deleted',
-              'url'   => getUrlByName('comments.deleted'),
-              'title' => Translate::get('deleted'),
-              'icon'  => 'bi-app'
-            ],
-          ]
-        ]
-      ); ?>
-
+      <?= Tpl::import('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.comments')]); ?>
     </ul>
     <div class="trigger">
       <i class="bi-info-square gray-600"></i>
@@ -34,13 +11,7 @@
 
   <?php if (!empty($data['comments'])) { ?>
     <div class="box-white">
-      <?= Tpl::import(
-        '/content/comment/comment',
-        [
-          'answer'   => $data['comments'],
-          'user'     => $user,
-        ]
-      ); ?>
+      <?= Tpl::import('/content/comment/comment', ['answer' => $data['comments'], 'user' => $user]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/comments'); ?>
   <?php } else { ?>

@@ -77,7 +77,7 @@ $facet  = $data['facet'] ?? false; ?>
                 <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
-                <?= Tpl::import('/_block/navigation/menu', ['type' => $type, 'user' => $user, 'list' => Config::get('menu.user')]); ?>
+                <?= Tpl::import('/_block/navigation/menu', ['type' => $type, 'user' => $user, 'list' => Config::get('navigation/menu.user')]); ?>
               </ul>
             </div>
 

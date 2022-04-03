@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, FacetModel, UserAreaModel};
-use Translate, UserData, Breadcrumbs, Meta, Html;
+use Translate, UserData, Breadcrumbs, Meta, Html, Tpl;
 
 class Catalog
 {
@@ -66,7 +66,7 @@ class Catalog
                     'category'          => $category,
                     'childrens'         => $childrens,
                     'user_count_site'   => $count_site,
-                    'breadcrumb'        => self::breadcrumb($parent, $category, $screening),
+                    'breadcrumb'        => self::breadcrumb($parent, $category, $screening ?? 'cat'),
                     'low_matching'      => FacetModel::getLowMatching($category['facet_id']),
                 ]
             ]
@@ -74,20 +74,33 @@ class Catalog
     }
 
     // Bread crumbs
+    // TODO: Temporary solution, we have to rewrite the query to get the array
     public static function breadcrumb($parent, $category, $screening)
     {
-        $breadcrumb = (new Breadcrumbs())->base(getUrlByName('web'), Translate::get('websites'));
+        $arr = [
+          ['name' => Translate::get('catalog'), 'link' => getUrlByName('web')], 
+          ['name' => $category['facet_title'], 'link' => getUrlByName('web.dir', ['cat' => $screening, 'slug' => $category['facet_slug']])],
+        ];
+        
+        if ($parent) {
+            $arr = [
+              ['name' => Translate::get('catalog'), 'link' => getUrlByName('web')], 
+              ['name' => $parent['facet_title'], 'link' => getUrlByName('web.dir', ['cat' => $screening, 'slug' => $parent['facet_slug']])],
+              ['name' => $category['facet_title'], 'link' => getUrlByName('web.dir', ['cat' => $screening, 'slug' => $category['facet_slug']])],
+            ];
+        }  
+ 
         $facet_id = $parent['facet_id'] ?? 0;
         if ($parent_two = FacetModel::breadcrumb($facet_id)) {
-            $breadcrumb->addCrumb($parent_two['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent_two['facet_slug'])
-                ->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug']);
-        } elseif ($parent) {
-            $breadcrumb->addCrumb($parent['facet_title'], $screening . DIRECTORY_SEPARATOR . $parent['facet_slug']);
+            $arr = [
+              ['name' => Translate::get('catalog'), 'link' => getUrlByName('web')], 
+              ['name' => $parent_two['facet_title'], 'link' => getUrlByName('web.dir', ['cat' => $screening, 'slug' => $parent_two['facet_slug']])],
+              ['name' => $parent['facet_title'], 'link' => getUrlByName('web.dir', ['cat' => $screening, 'slug' => $parent['facet_slug']])],
+              ['name' => $category['facet_title'], 'link' => getUrlByName('web.dir', ['cat' => $screening, 'slug' => $category['facet_slug']])],
+            ];
         }
-
-        $breadcrumb->addCrumb($category['facet_title'], $screening . DIRECTORY_SEPARATOR . $category['facet_slug']);
-
-        return $breadcrumb->render('breadcrumbs');
+ 
+        return $arr;
     }
 
     public function getItemId($id)

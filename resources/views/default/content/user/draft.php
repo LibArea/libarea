@@ -1,33 +1,7 @@
 <main>
   <div class="box-flex-white">
     <ul class="nav">
-
-      <?= Tpl::import(
-        '/_block/navigation/nav',
-        [
-          'type' => $data['sheet'],
-          'user' => $user,
-          'list' => [
-            [
-              'id'    => 'drafts',
-              'url'   => getUrlByName('drafts'),
-              'title' => Translate::get('drafts'),
-              'icon'  => 'bi-journal-richtext'
-            ], [
-              'id'    => 'favorites',
-              'url'   => getUrlByName('favorites'),
-              'title' => Translate::get('favorites'),
-              'icon'  => 'bi-bookmark'
-            ], [
-              'id'    => 'subscribed',
-              'url'   => getUrlByName('subscribed'),
-              'title' => Translate::get('subscribed'),
-              'icon'  => 'bi-bookmark-plus'
-            ],
-          ]
-        ]
-      ); ?>
-
+      <?= Tpl::import('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.favorites')]); ?>
     </ul>
   </div>
 

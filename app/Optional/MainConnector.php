@@ -38,7 +38,6 @@ class MainConnector implements Connector
             "Html"                          => "app/Libraries/Html.php",
             "Meta"                          => "app/Libraries/Meta.php",
             "UserData"                      => "app/Libraries/UserData.php",
-            "Breadcrumbs"                   => "app/Libraries/Breadcrumbs.php",
             "Forms"                         => "app/Libraries/Forms.php",
 
             "Slug"                          => "app/ThirdParty/Slug/Slug.php",

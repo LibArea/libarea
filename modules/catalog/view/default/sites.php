@@ -1,6 +1,6 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 <div class="item-cat">
-  <?= $data['breadcrumb']; ?>
+  <?= Tpl::insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]); ?>
 
   <h1>
     <?= $data['category']['facet_title']; ?>

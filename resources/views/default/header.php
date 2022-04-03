@@ -24,7 +24,7 @@ $facet  = $data['facet'] ?? false; ?>
 
         <div class="ml45 mb-ml10 relative w-100">
           <form class="form mb-none" method="get" action="<?= getUrlByName('search'); ?>">
-            <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= Translate::get('to find'); ?>" class="search">
+            <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= Translate::get('to.find'); ?>" class="search">
             <input name="type" value="post" type="hidden">
           </form>
           <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
@@ -72,7 +72,7 @@ $facet  = $data['facet'] ?? false; ?>
                 <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
-                <?= Tpl::import('/_block/navigation/menu', ['type' => $type, 'user' => $user, 'list' => Config::get('menu.user')]); ?>
+                <?= Tpl::import('/_block/navigation/menu', ['type' => $type, 'user' => $user, 'list' => Config::get('navigation/menu.user')]); ?>
               </ul>
             </div>
           </div>

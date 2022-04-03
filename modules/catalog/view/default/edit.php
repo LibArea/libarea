@@ -1,7 +1,5 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
 $domain = $data['domain'];
-$breadcrumb = (new Breadcrumbs())->base(getUrlByName('web'), Translate::get('home'));
-$breadcrumb->addCrumb(Translate::get('site.edit'), 'red');
 $form = new Forms();
 
 $form->adding(['name' => 'title', 'type' => 'value', 'var' => $domain['item_title']]);
@@ -23,7 +21,17 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
   <main>
     <div class="max-w640">
 
-      <?= $breadcrumb->render('breadcrumbs'); ?>
+    <?= Tpl::insert('/_block/navigation/breadcrumbs', [
+        'list' => [
+          [
+            'name' => Translate::get('home'),
+            'link' => getUrlByName('web')
+          ], [
+            'name' => Translate::get('site.edit'),
+            'link' => 'red'
+          ],
+        ]
+      ]); ?>
 
       <fieldset class="gray-600">
         <?= $domain['item_id']; ?>. <?= $domain['item_domain']; ?>
