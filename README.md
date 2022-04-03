@@ -30,7 +30,7 @@ Demo: https://libarea.ru/
 
 ### For testing
 
-*   Project root folder: public (configure the server )
+*   Set up the web server configuration: `public/` (The Public Directory)
 *   dev.sql
 *   settings: config/dbase.config.php and other files in the directory
 *   Log in to your account using administrator credentials: `ss@sdf.ru` / `qwer14qwer14`
@@ -38,7 +38,11 @@ Demo: https://libarea.ru/
 
 PHP 7.4+
 
-More information (rus.): https://libarea.com/
+**The Public Directory**
+
+The `public` directory contains the `index.php` file, which is the entry point for all requests entering your application and configures autoloading. This directory also houses your assets such as images, JavaScript, and CSS.
+
+More information: https://libarea.com/
 
 ...
 
