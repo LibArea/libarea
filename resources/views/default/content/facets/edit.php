@@ -27,7 +27,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
             ], [
               'id'        => 'all',
               'url'       => $url,
-              'title'     => Translate::get('go to'),
+              'title'     => Translate::get('go.to'),
               'icon'      => 'bi bi-arrow-up-right-square'
             ]
           ]

@@ -217,7 +217,7 @@ $data = [
     'badges'            => 'Badges',
     'reward.user'       => 'Reward the user',
 
-    'for example'       => 'For example',
+    'for.example'       => 'For example',
     'ed'                => 'ed',
     'add'               => 'Add',
     'there.are'         => 'There are',
@@ -286,12 +286,11 @@ $data = [
     'post'          => 'Post',
     'posts'         => 'Posts',
 
-    'cover art'             => 'Cover art',
     'type'                  => 'Type',
     'logo'                  => 'Logo',
     'last'                  => 'Last',
-    'cover removed'         => 'Cover removed',
-    'recommended size'      => 'Recommended size',
+    'cover.removed'         => 'Cover removed',
+    'recommended.size'      => 'Recommended size',
 
     /* Notifications  */
     'i.read'                    => 'I read',
@@ -353,7 +352,7 @@ $data = [
     'folders.s'             => 'Dossiers',
 
     'pages'                 => 'Pages',
-    'go to'                 => 'Go to',
+    'go.to'                 => 'Go to',
     'frameworks'            => 'Frameworks',
     'interesting sites'     => 'Interesting sites',
     'facts'                 => 'Facts',
@@ -378,8 +377,8 @@ $data = [
     'notification.info'     => 'You can unsubscribe from all notifications by Email in this section',
     'notifications.limit'   => 'Afficher les 100 dernières notifications',
 
-    'message to PM'         => 'When the message came to PM',
-    'contacted via @'       => 'When they reached out to me through @',
+    'message.PM'            => 'When the message came to PM',
+    'appeal.@'              => 'When they reached out to me through @',
     'code.incorrect'        => 'The code is incorrect or has already been used. Go through the recovery procedure again.',
     'yes.email.pass'        => 'Now you can use your email and password.',
     'code.used'             => 'The code is incorrect or has already been used.',
@@ -416,8 +415,7 @@ $data = [
     'check.your.email'              => 'Check your email to activate your account',
     'view.post.tl'              => 'Qui peut voir la publication (à partir de quel TL)',
     'breaking.rules'            => 'This violates the rules of the site',
-    'flag not included'         => 'Flag left out, don use it often',
-    'invited you'               => 'You were invited by a member from this site. Enter invite',
+    'invited.you'               => 'You were invited by a member from this site. Enter invite',
     'invite.features'           => 'You can invite friends',
     'messages.info'             => 'Private messages with site members',
     'page.not'                  => 'The page does not exist',
@@ -425,7 +423,7 @@ $data = [
     'page.removed'              => 'The page has been removed',
     'command.executed'   => 'Command executed',
 
-    'recommended posts'         => 'recommended posts',
+    'recommended.posts'         => 'recommended posts',
     'recommended.posts.desc'    => 'Recommended posts in «%1$s» hand - selected. ',
 
     'topic.subscription'        => 'Subscribe to topics and read them in the feed',

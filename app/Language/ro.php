@@ -211,7 +211,7 @@ $data = [
     'badge'             => 'Recompensa',
     'badges'            => 'Recompensii',
     'reward.user'       => 'Recompensează un participant',
-    'for example'       => 'Exemplu',
+    'for.example'       => 'Exemplu',
     'ed'                => 'ed',
     'add'               => 'Adaugă',
     'there.are'         => 'Există',
@@ -284,12 +284,11 @@ $data = [
 
     'setting profile'       => 'Setari profil',
     'avatar'                => 'Avatar',
-    'cover art'             => 'Cover',
     'type'                  => 'Tip',
     'logo'                  => 'Logo',
     'last'                  => 'Ultimul',
-    'cover removed'         => 'Cover sters',
-    'recommended size'      => 'Dimensiunea recomandată',
+    'cover.removed'         => 'Cover sters',
+    'recommended.size'      => 'Dimensiunea recomandată',
 
     /* Notificări */
     'i.read'                    => 'Citesc',
@@ -350,7 +349,7 @@ $data = [
     'folders.s'             => 'Foldere',
 
     'pages'                 => 'Pagini',
-    'go to'                 => 'Mergi la',
+    'go.to'                 => 'Mergi la',
     'frameworks'            => 'cadre',
     'interesting sites'     => 'Site-uri interesante',
     'facts'                 => 'Fapte',
@@ -376,8 +375,8 @@ $data = [
     'notification.info'     => 'Vă puteți dezabona de la toate notificările prin e-mail din această secțiune',
     'notifications.limit'   => 'Sunt afișate ultimele 100 de notificări',
 
-    'message to PM'         => 'Când mesajul a venit la PM',
-    'contacted via @'       => 'Când m-ați contactat prin @',
+    'message.PM'            => 'Când mesajul a venit la PM',
+    'appeal.@'              => 'Când m-ați contactat prin @',
     'under.reconstruction'  => 'Site în reconstrucție',
     'code.incorrect'        => 'Codul este incorect sau a fost deja utilizat. Parcurgeți din nou procedura de recuperare.',
     'yes.email.pass'        => 'Acum puteți utiliza adresa de e-mail și parola.',
@@ -422,12 +421,11 @@ $data = [
     'check.your.email'              => 'Verificați-vă e-mailul pentru a vă activa contul',
     'breaking.rules'                => 'Acest lucru încalcă regulile site-ului',
     'view.post.tl'                  => 'Cine poate vizualiza postarea (din care TL)',
-    'flag not included'             => 'Semnalizați-l lăsat, nu îl folosiți des',
-    'invited you'                   => 'You were invited by a member from this site. Enter invite',
+    'invited.you'                   => 'You were invited by a member from this site. Enter invite',
     'invite.features'               => 'You can invite friends',
     'medal.registration'            => 'Medalie pentru înregistrare',
 
-    'recommended posts'         => 'postări recomandate ',
+    'recommended.posts'         => 'postări recomandate ',
     'recommended.posts.desc'    => 'Postări recomandate în  «%1$s» selectat manual. ',
     
     'topic.subscription'        => 'Abonați-vă la subiecte și citiți-le în feed',

@@ -188,7 +188,7 @@ class EditPostController extends MainController
         PostModel::setPostImgRemove($post['post_id']);
         UploadImage::cover_post_remove($post['post_content_img'], $this->user['id']);
 
-        Html::addMsg('cover removed', 'success');
+        Html::addMsg('cover.removed', 'success');
         redirect(getUrlByName('post.edit', ['id' => $post['post_id']]));
     }
 

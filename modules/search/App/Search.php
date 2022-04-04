@@ -4,8 +4,7 @@ namespace Modules\Search\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Search\App\Models\SearchModel;
-use Modules\Search\App\Helper;
-use Translate, Config, UserData, Meta;
+use Translate, Config, UserData, Meta, Html, Content;
 
 use Wamania\Snowball\StemmerFactory;
 use voku\helper\StopWords;
@@ -42,7 +41,7 @@ class Search
             }
 
             $query  = self::stemmerAndStopWords($query);
-            $result = self::search($page, $this->limit, $query, $type);
+            $results = self::search($page, $this->limit, $query, $type);
             $count  = self::searchCount($query, $type);
 
             self::setLogs(
@@ -61,8 +60,14 @@ class Search
             'url'   => false,
         ];
 
+        $result = [];
+        foreach ($results as $ind => $row) {
+            $text = Html::fragment($row['content']);
+            $row['content'] = Content::text($text, 'line');
+            $result[$ind]   = $row;
+        }
+
         $count = $count ?? 0;
-        $result = $result ?? 0;
         $facet = $type == 'post' ? 'topic' : 'category';
         return view(
             '/view/default/search',
@@ -70,10 +75,10 @@ class Search
                 'meta'  => Meta::get($m, Translate::get('search')),
                 'user'  => $this->user,
                 'data'  => [
-                    'result'        => $result ? Helper::handler($result) : null,
+                    'result'        => $result ?? false,
                     'type'          => $type,
                     'sheet'         => 'admin',
-                    'query'         => $query ?? null,
+                    'query'         => $query ?? false,
                     'count'         => $count,
                     'pagesCount'    => ceil($count / $this->limit),
                     'pNum'          => $page,

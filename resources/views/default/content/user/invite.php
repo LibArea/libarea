@@ -21,6 +21,6 @@
 </main>
 <aside>
   <div class="box-white text-sm sticky top-sm">
-    <?= Translate::get('invited you'); ?>
+    <?= Translate::get('invited.you'); ?>
   </div>
 </aside>

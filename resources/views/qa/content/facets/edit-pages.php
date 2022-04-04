@@ -25,7 +25,7 @@
             ], [
               'id'        => 'all',
               'url'       => getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]),
-              'title'     => Translate::get('go to'),
+              'title'     => Translate::get('go.to'),
               'icon'      => 'bi-arrow-up-right-square'
             ]
           ]

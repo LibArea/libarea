@@ -17,7 +17,7 @@ return [
         'addition'  => false,
         'title'     => 'location',
         'lang'      => Translate::get('city'),
-        'help'      => Translate::get('for example') . ': Moscow',
+        'help'      => Translate::get('for.example') . ': Moscow',
         'name'      => 'location'
     ], [
         'url'       => 'public_email',

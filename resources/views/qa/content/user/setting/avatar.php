@@ -20,7 +20,7 @@
       </div>
 
       <div class="clear gray mb10">
-        <div class="mb5 text-sm"><?= Translate::get('recommended size'); ?>: 240x240px (jpg, jpeg, png)</div>
+        <div class="mb5 text-sm"><?= Translate::get('recommended.size'); ?>: 240x240px (jpg, jpeg, png)</div>
         <?= Html::sumbit(Translate::get('download')); ?>
       </div>
 
@@ -51,7 +51,7 @@
       </div>
 
       <div class="clear gray mb10">
-        <div class="mb5 text-sm"><?= Translate::get('recommended size'); ?>: 1920x240px (jpg, jpeg, png)</div>
+        <div class="mb5 text-sm"><?= Translate::get('recommended.size'); ?>: 1920x240px (jpg, jpeg, png)</div>
         <?= Html::sumbit(Translate::get('download')); ?>
       </div>
     </form>
