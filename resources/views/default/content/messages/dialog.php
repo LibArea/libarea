@@ -44,7 +44,7 @@
           </div>
           <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $user['id']) { ?>
             <div class="right gray-600 lowercase text-sm hidden mb5 pb5">
-              <?= Translate::get('it was read'); ?> (<?= Html::langDate($val['message_receipt']); ?>)
+              <?= Translate::get('it.was.read'); ?> (<?= Html::langDate($val['message_receipt']); ?>)
             </div>
           <?php } ?>
         </div>

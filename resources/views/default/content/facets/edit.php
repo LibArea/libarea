@@ -146,13 +146,13 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <?php } ?>
 
       <fieldset>
-        <label for="facet_description"><?= Translate::get('meta description'); ?><sup class="red">*</sup></label>
+        <label for="facet_description"><?= Translate::get('meta.description'); ?><sup class="red">*</sup></label>
         <textarea class="add max-w780" rows="6" minlength="44" name="facet_description"><?= $fs['facet_description']; ?></textarea>
         <div class="help">> 44 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
       <fieldset>
-        <label for="facet_short_description"><?= Translate::get('short description'); ?><sup class="red">*</sup></label>
+        <label for="facet_short_description"><?= Translate::get('short.description'); ?><sup class="red">*</sup></label>
         <input minlength="11" maxlength="120" value="<?= $fs['facet_short_description']; ?>" type="text" required="" name="facet_short_description">
         <div class="help">11 - 120 <?= Translate::get('characters'); ?></div>
       </fieldset>

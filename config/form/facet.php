@@ -12,7 +12,7 @@ return [
       'arr'     => ['required' => true, 'min' => 3, 'max' => 64, 'help' => '3 - 64 ' . $ch],
       'name'    => 'facet_title'
     ], [
-      'title'   => Translate::get('short description'),
+      'title'   => Translate::get('short.description'),
       'tl'      => 2,
       'arr'     => ['required' => true, 'min' => 9, 'max' => 120, 'help' => '9 - 120 ' . $ch],
       'name'    => 'facet_short_description',
@@ -27,7 +27,7 @@ return [
       'arr'     => ['required' => true, 'min' => 4, 'max' => 32, 'help' => '4 - 32 ' . $ch],
       'name'    => 'facet_slug',
     ], [
-      'title'   => Translate::get('meta description'),
+      'title'   => Translate::get('meta.description'),
       'tl'      => 2,
       'arr'     => ['type' => 'textarea', 'required' => true, 'min' => 34, 'help' => '> 34 ' . $ch],
       'name'    => 'facet_description',

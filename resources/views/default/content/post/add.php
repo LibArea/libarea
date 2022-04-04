@@ -36,7 +36,7 @@
             <input id="link" placeholder="URL" class="post_url" type="text" name="post_url" />
           </div>
           <div class="left w-30 pl5">
-            <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= Translate::get('to extract'); ?>" />
+            <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= Translate::get('to.extract'); ?>" />
           </div>
         </fieldset>
       <?php } ?>

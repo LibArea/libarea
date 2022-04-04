@@ -24,7 +24,7 @@
       </fieldset>
 
       <?php Tpl::import('/_block/editor/textarea', [
-        'title'     => Translate::get('about me'),
+        'title'     => Translate::get('about.me'),
         'type'      => 'text',
         'name'      => 'about',
         'content'   => $data['user']['about'],

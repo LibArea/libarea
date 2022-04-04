@@ -24,7 +24,7 @@
             [
               'id'    => $data['type'] . 's.new',
               'url'   => getUrlByName($data['type'] . 's.new'),
-              'title' => Translate::get('new ones'),
+              'title' => Translate::get('new.ones'),
               'icon'  => 'bi-sort-up'
             ],
             [

@@ -17,7 +17,7 @@
 
   <?php if ($data['blogs']) { ?>
     <div class="box-white">
-      <h3 class="uppercase-box"><?= Translate::get('created by'); ?></h3>
+      <h3 class="uppercase-box"><?= Translate::get('created.by'); ?></h3>
       <?php foreach ($data['blogs'] as $blog) { ?>
         <div class="w-100 mb-w100 mb15 flex flex-row">
           <a class="mr10" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
@@ -151,7 +151,7 @@
           <?php } else { ?>
             <span class="type-ban text-sm gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
               <i class="bi-person-x middle mr5"></i>
-              <?= Translate::get('ban it'); ?>
+              <?= Translate::get('ban.it'); ?>
             </span>
           <?php } ?>
         <?php } ?>

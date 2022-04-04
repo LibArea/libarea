@@ -119,7 +119,7 @@ return [
             'id'    => '',
         ], [
             'url'   => getUrlByName('logout'),
-            'title' => Translate::get('sign out'),
+            'title' => Translate::get('sign.out'),
             'icon'  => 'bi bi-box-arrow-right',
             'id'    => '',
         ],

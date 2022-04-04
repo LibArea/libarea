@@ -33,7 +33,7 @@
           </span>
         <?php } else { ?>
           <span class="type-ban" data-id="<?= $data['user']['id']; ?>" data-type="user">
-            <span class="green">+ <?= Translate::get('ban it'); ?></span>
+            <span class="green">+ <?= Translate::get('ban.it'); ?></span>
           </span>
         <?php } ?>
       <?php } else { ?>
@@ -55,10 +55,10 @@
     <hr>
    <fieldset>
       <?php if ($data['user']['limiting_mode'] == 1) { ?>
-        <span class="red"><?= Translate::get('dumb mode'); ?>!</span><br>
+        <span class="red"><?= Translate::get('dumb.mode'); ?>!</span><br>
       <?php } ?>
       <label for="limiting_mode">
-        <?= Translate::get('dumb mode'); ?>?
+        <?= Translate::get('dumb.mode'); ?>?
       </label>
       <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
       <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
@@ -147,7 +147,7 @@
       <input type="text" name="name" value="<?= $data['user']['name']; ?>">
     </fieldset>
     <fieldset>
-      <label for="about"><?= Translate::get('about me'); ?></label>
+      <label for="about"><?= Translate::get('about.me'); ?></label>
       <textarea class="add" name="about"><?= $data['user']['about']; ?></textarea>
     </fieldset>
 

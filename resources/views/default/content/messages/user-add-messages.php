@@ -3,7 +3,7 @@
     <h1 class="mt0 mb10 text-2xl font-normal">
       <?= Translate::get('send.message'); ?> <?= $user['login']; ?> / <?= $data['login']; ?>
       <a class="right text-sm" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">
-        <?= Translate::get('all messages'); ?>
+        <?= Translate::get('all.messages'); ?>
       </a>
     </h1>
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">

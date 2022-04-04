@@ -48,8 +48,6 @@ class Catalog
 
         $count_site = ($this->user['trust_level'] == UserData::REGISTERED_ADMIN) ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
-      //  $parent = FacetModel::breadcrumb($category['facet_id']);
-
         $tree = FacetModel::breadcrumb($category['facet_id']);
 
         return view(

@@ -113,7 +113,7 @@
         <ul class="list-none w-100 lowercase">
           <li class="left p10">
             <div class="text-sm gray-600 mb5">
-              <?= Translate::get('created by'); ?>
+              <?= Translate::get('created.by'); ?>
             </div>
             <div class="center">
               <a title="<?= $post['login']; ?>" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">

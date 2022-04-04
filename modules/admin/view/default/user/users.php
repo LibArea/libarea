@@ -60,7 +60,7 @@
               <?php } ?>
             </div>
             <?php if ($user['limiting_mode'] == 1) { ?>
-              <div class="red"><?= Translate::get('dumb mode'); ?></div>
+              <div class="red"><?= Translate::get('dumb.mode'); ?></div>
             <?php } ?>
             <?php if (!empty($user['banlist_int_num'])) { ?>
               <div class="red">bans: <?= $user['banlist_int_num']; ?></div>
@@ -95,7 +95,7 @@
                 </span>
               <?php } else { ?>
                 <span class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                  <?= Translate::get('ban it'); ?>
+                  <?= Translate::get('ban.it'); ?>
                 </span>
               <?php } ?>
             <?php } else { ?>

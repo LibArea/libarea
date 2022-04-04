@@ -65,7 +65,7 @@
               </div>
             <?php } else { ?>
               <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                <?= Translate::get('ban it'); ?>
+                <?= Translate::get('ban.it'); ?>
               </div>
             <?php } ?>
           <?php } else { ?>
