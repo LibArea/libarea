@@ -78,7 +78,7 @@
 
   <?php if ($data['topics']) { ?>
     <div class="bg-violet-50 box">
-      <h3 class="uppercase-box"><?= Translate::get('is reading'); ?></h3>
+      <h3 class="uppercase-box"><?= Translate::get('is.reading'); ?></h3>
       <?php foreach ($data['topics'] as  $topic) { ?>
         <div class="mt5 mb5">
           <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">

@@ -15,7 +15,7 @@ return [
       'arr'     => ['type' => 'password', 'after_html' => '<span class="showPassword absolute gray-600 right5 mt5"><i class="bi-eye"></i></span>'],
       'name'    => 'password',
     ], [
-      'title'   => Translate::get('remember me'),
+      'title'   => Translate::get('remember.me'),
       'arr'     => ['type' => 'checkbox', 'value' => 1, 'wrap_class' => ['class' => 'rememberme']],
       'name'    => 'rememberme',
     ]
@@ -28,7 +28,7 @@ return [
       'name'    => 'login'
     ], [
       'title'   => 'Email',
-      'arr'     => ['required' => true, 'type' => 'email', 'after_html' => '<span class="help">' . Translate::get('work email') . '</span>'],
+      'arr'     => ['required' => true, 'type' => 'email', 'after_html' => '<span class="help">' . Translate::get('work.email') . '</span>'],
       'name'    => 'email',
     ], [
       'title'   => Translate::get('password'),

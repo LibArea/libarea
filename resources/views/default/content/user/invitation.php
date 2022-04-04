@@ -12,10 +12,10 @@
           <div class="right pt5"><?= Html::sumbit(Translate::get('send')); ?></div>
           <div class="text-sm pt5 gray-600"><?= Translate::get('enter'); ?> E-mail</div>
         </fieldset>
-        <?= Translate::get('invitations left'); ?> <?= 5 - $data['count_invites']; ?>
+        <?= Translate::get('invitations.left'); ?> <?= 5 - $data['count_invites']; ?>
       </form>
 
-      <h3><?= Translate::get('invited guests'); ?></h3>
+      <h3><?= Translate::get('invited.uests'); ?></h3>
 
       <?php if (!empty($data['invitations'])) { ?>
 

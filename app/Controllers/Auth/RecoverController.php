@@ -131,7 +131,7 @@ class RecoverController extends MainController
         $activate_email = UserModel::getEmailActivate($code);
 
         if (!$activate_email) {
-            Html::addMsg('code-used', 'error');
+            Html::addMsg('code.used', 'error');
             redirect('/');
         }
 

@@ -13,7 +13,7 @@
     <fieldset class="flex items-center">
       <input type="checkbox" id="rememberme" name="rememberme" value="1">
       <label id="rem-text" class="mb0 ml5 gray-600" for="rememberme">
-        <?= Translate::get('remember me'); ?>
+        <?= Translate::get('remember.me'); ?>
       </label>
     </fieldset>
     <fieldset>

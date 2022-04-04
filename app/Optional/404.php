@@ -14,7 +14,7 @@
   <main class="max-w780 mr-auto box-white">
     <h1 class="text-3xl font-semibold gray mt0 mb0">404</h1>
     <p class="gray-600"><?= Translate::get('page.not'); ?></p>
-    <a class="btn btn-primary" href="/"><?= Translate::get('to main'); ?></a>
+    <a class="btn btn-primary" href="/"><?= Translate::get('to.main'); ?></a>
     <p class="gray-600"><?= Translate::get('page.removed'); ?>...</p>
   </main>
 

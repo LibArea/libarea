@@ -26,7 +26,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
             </a>
           <?php } else { ?>
             <?php if ($data['button_pm'] === true) { ?>
-              <a class="btn btn-primary" title="<?= Translate::get('write a message'); ?>" href="<?= getUrlByName('send.messages', ['login' => $profile['login']]); ?>">
+              <a class="btn btn-primary" title="<?= Translate::get('write.message'); ?>" href="<?= getUrlByName('send.messages', ['login' => $profile['login']]); ?>">
                 <i class="bi-envelope"></i>
               </a>
             <?php } ?>

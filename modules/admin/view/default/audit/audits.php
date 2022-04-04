@@ -97,7 +97,7 @@
                   </a>
                 <?php } else { ?>
                   <a data-status="<?= $audit['action_type']; ?>" data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" class="audit-status text-sm">
-                    <?= Translate::get('to approve'); ?>
+                    <?= Translate::get('to.approve'); ?>
                   </a>
                   <div class="text-xs"><?= Translate::get('off.mute.mode'); ?></div>
                 <?php } ?>
