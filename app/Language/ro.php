@@ -305,7 +305,7 @@ $data = [
     'notif.references.comment'  => 'te-a menționat într-un %1$s comentariu %2$s',
     'notif.add.website'         => 'site adăugat  %1$s cauta-l caut-o %2$s',
     'notif.edit.website'        => 'site schimbat , %1$s verifică  %2$s',
-    'notif.approved.website'    => '(moderator) %1$s a aprobat site-ul dvs %2$s',
+    'notif.approved.website'    => '(moderator) %1$s a schimbat (a aprobat) site-ul dvs %2$s',
     'notif.add.website.comment' =>'%1$s a comentat pe site-ul la care te-ai abonat %2$s',
 
     /* MSG */

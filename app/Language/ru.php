@@ -304,7 +304,7 @@ $data = [
     'notif.references.comment'  => 'упомянул вас в %1$s комментарии %2$s',
     'notif.add.website'         => 'добавил сайт %1$s посмотрите его %2$s',
     'notif.edit.website'        => 'изменил сайт, %1$s проверьте его %2$s',
-    'notif.approved.website'    => '(модератор) %1$s утвердил ваш сайт %2$s',
+    'notif.approved.website'    => '(модератор) %1$s изменил (утвердил) ваш сайт %2$s',
     'notif.add.website.comment' =>'%1$s прокомментировал сайт на который вы подписались %2$s',
 
     /* MSG */

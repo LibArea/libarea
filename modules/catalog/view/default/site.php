@@ -1,7 +1,7 @@
 <ol class="list-items">
-  <?php foreach ($data['items'] as $key => $item) { ?>
+  <?php foreach ($data['items'] as $item) : ?>
 
-    <?php if ($item['item_published'] == 1) { ?>
+    <?php if ($item['item_published'] == 1) : ?>
       <li>
         <div class="list-items__thumb mb-none">
           <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'list-items__thumb-image'); ?>
@@ -10,21 +10,21 @@
           <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
             <h2><?= $item['item_title']; ?>
               <?php $date = date_diff(new DateTime(), new DateTime($item['item_date']))->days; ?>
-              <?php if ($date < 3) { ?><sup class="red text-sm">new</sup><? } ?></h2>
+              <?php if ($date < 3) : ?><sup class="red text-sm">new</sup><?php endif; ?></h2>
           </a>
           <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', $screening); ?>
 
-          <?php if (Html::accessСheck($item, 'item', $user, false, false) === true) { ?>
+          <?php if (Html::accessСheck($item, 'item', $user, false, false) === true) : ?>
             <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
               <i class="bi-pencil text-sm"></i>
             </a> - <?= $item['item_following_link']; ?>
-          <?php } ?>
+          <?php endif; ?>
 
-          <?php if (!empty($delete_fav)) { ?>
+          <?php if (!empty($delete_fav)) : ?>
             <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="website">
               <i class="bi-trash red"></i>
             </span>
-          <?php } ?>
+          <?php endif; ?>
           <div class="list-items__text">
             <?= Content::text(Html::fragment($item['item_content']), 'line'); ?>
           </div>
@@ -32,12 +32,12 @@
             <div class="green">
               <?= Html::websiteImage($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
               <?= $item['item_domain']; ?>
-              <?php if ($item['item_github_url']) { ?>
+              <?php if ($item['item_github_url']) : ?>
                 <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
                   <i class="bi-github text-sm mr5"></i>
                   <?= $item['item_title_soft']; ?>
                 </a>
-              <?php } ?>
+              <?php endif; ?>
               <div>
                 <i class="bi-arrow-return-right gray-600 ml10"></i>
                 <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_domain']]); ?>">
@@ -52,8 +52,8 @@
           </div>
         </div>
       </li>
-    <?php } else { ?>
-      <?php if (UserData::checkAdmin()) { ?>
+    <?php else : ?>
+      <?php if (UserData::checkAdmin()) : ?>
         <div class="mt15 mb15">
           <i class="bi-link-45deg red mr5 text-2xl"></i>
           <?= $item['item_title']; ?> (<?= $item['item_domain']; ?>)
@@ -61,7 +61,7 @@
             <i class="bi-pencil"></i>
           </a>
         </div>
-      <?php } ?>
-    <?php } ?>
-  <?php } ?>
+      <?php endif; ?>
+    <?php endif; ?>
+  <?php endforeach; ?>
 </ol>

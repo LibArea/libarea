@@ -79,7 +79,9 @@ class ActionController extends MainController
     {
         $type       = Request::get('type');
         $search     = Request::getPost('q');
-        $search     = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
+        if ($search) {
+            $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
+        }
 
         $allowed = ['post', 'user', 'blog',  'section', 'category', 'topic'];
         if (!in_array($type, $allowed)) return false;

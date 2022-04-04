@@ -307,7 +307,7 @@ $data = [
     'notif.references.comment'  => 'dich in einem %1$s Kommentar erwähnt %2$s',
     'notif.add.website'         => 'Seite hinzugefügt  %1$s Schlag es nach %2$s',
     'notif.edit.website'        => 'Website geändert, %1$s Hör zu %2$s',
-    'notif.approved.website'    => '(Moderator ) %1$s genehmigt Ihre Website %2$s',
+    'notif.approved.website'    => '(Moderator ) %1$s hat Ihre Website geändert (genehmigt) %2$s',
     'notif.add.website.comment' =>'%1$s die Seite kommentiert, die Sie abonniert haben %2$s',
 
     /* MSG */

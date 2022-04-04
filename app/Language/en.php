@@ -304,7 +304,7 @@ $data = [
     'notif.references.comment'  => 'mentioned you in a %1$s comment %2$s',
     'notif.add.website'         => 'added site %1$s look it up %2$s',
     'notif.edit.website'        => 'changed site, %1$s check it out %2$s',
-    'notif.approved.website'    => '(moderator) %1$s approved your site %2$s',
+    'notif.approved.website'    => '(moderator) %1$s changed (approved) your website %2$s',
     'notif.add.website.comment' =>'%1$s commented on the site you subscribed to %2$s',
 
     /* MSG */

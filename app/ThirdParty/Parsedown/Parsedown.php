@@ -1457,7 +1457,7 @@ class Parsedown
         }
         else
         {
-            $text = preg_replace('/(?:[ ][ ]+|[ ]*\\\\)\n/', "<br />\n", $text);
+            $text = $text ? preg_replace('/(?:[ ][ ]+|[ ]*\\\\)\n/', "<br />\n", $text): '';
             $text = str_replace(" \n", "\n", $text);
         }
 

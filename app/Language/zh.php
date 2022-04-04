@@ -306,7 +306,7 @@ $data = [
     'notif.references.comment'  => '%1$s 在留言裡提到了你 %2$s',
     'notif.add.website'         => '添加網站, %1$s 看 %2$s',
     'notif.edit.website'        => '更改站點, %1$s 看 %2$s',
-    'notif.approved.website'    => '（主持人） %1$s 批准您的網站 %2$s',
+    'notif.approved.website'    => '（主持人） %1$s 更改（批准）您的網站 %2$s',
     'notif.add.website.comment' =>'%1$s 评论了您订阅的网站 %2$s',
 
     /* MSG */
