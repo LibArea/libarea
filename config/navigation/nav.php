@@ -62,7 +62,7 @@ return [
       'title' => Translate::get('feed'),
       'icon'  => 'bi-sort-down'
     ], [
-      'tl'    => UserData::USER_ZERO_LEVEL,
+      'tl'    => UserData::USER_FIRST_LEVEL,
       'id'    => 'main.all',
       'url'   => getUrlByName('main.all'),
       'title' => Translate::get('all'),

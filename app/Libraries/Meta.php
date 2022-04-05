@@ -2,7 +2,7 @@
 
 class Meta
 {
-    public static function get($m, $title = '', $desc = '', $date_article = '', $url_page = '')
+    public static function get($m, $title = '', $desc = '', $date_article = '')
     {
         $output = '';
         if ($title == '') {
@@ -12,7 +12,7 @@ class Meta
             $desc = Config::get('meta.name');
         }
 
-        if ($url_page == 'main') {
+        if ($m['url'] == '/') {
             $output .= '<title>' . $title . '</title>';
         }  else {
             $output .= '<title>' . $title . ' | ' . Config::get('meta.name') . '</title>';

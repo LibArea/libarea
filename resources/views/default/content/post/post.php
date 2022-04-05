@@ -29,8 +29,9 @@
       <div class="flex flex-row flex-auto">
         <div class="w-auto">
           <a class="black" href="<?= $post_url; ?>">
-            <h2 class="inline"><?= $post['post_title']; ?></h2>
+            <h2><?= $post['post_title']; ?>
             <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
+            </h2>
           </a>
           <div class="lowercase">
             <?= Html::facets($post['facet_list'], 'blog', 'blog', 'text-sm mr15'); ?>
