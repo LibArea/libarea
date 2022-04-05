@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
-use App\Models\{ActionModel, FacetModel, NotificationModel};
+use App\Models\{SubscriptionModel, ActionModel, FacetModel, NotificationModel};
 use Translate, UserData, Meta;
 
 class Add
@@ -133,6 +133,8 @@ class Add
                 ]
             );
         }
+
+        SubscriptionModel::focus($item_last['item_id'], $this->user['id'], 'item');
 
         return true;
     }
