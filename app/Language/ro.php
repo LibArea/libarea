@@ -486,6 +486,7 @@ $data = [
     'main.feed.info'            => 'Postări în ordine cronologică...',
     'main.all.info'             => 'Toate postările din fluxul comunității...',
     'main.top.info'             => 'Postări active recente...',
+    'main.deleted.title'        => 'Postări șterse',
     
     'comments.all.info'         => 'Toate comentariile ...',
     'comments.deleted.info'     => 'Comentarii eliminate...',

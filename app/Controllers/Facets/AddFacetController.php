@@ -86,7 +86,7 @@ class AddFacetController extends MainController
             ]
         );
 
-        SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'topic');
+        SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'facet');
 
         $redirect = $facet_type == 'category' ? getUrlByName('web') : '/' . $facet_type . '/' . $facet_slug;
         redirect($redirect);

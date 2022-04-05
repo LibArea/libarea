@@ -109,17 +109,13 @@ class PostController extends MainController
         }
 
         $m = [
+            'date'      => $content['post_date'],
             'og'        => true,
             'imgurl'    => $content_img,
             'url'       => getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
         ];
 
-        $topic = $facets[0]['facet_title'] ?? 'libarea';
-        if ($blog) {
-            $topic = $blog[0]['facet_title'];
-        }
-
-        $meta = Meta::get($m, strip_tags($content['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $content['post_date']);
+        $meta = Meta::get($m, strip_tags($content['post_title']), $desc);
 
         $view = $type == 'post' ? '/post/view' : '/page/view';
 

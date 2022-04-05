@@ -41,15 +41,16 @@ class HomeController extends MainController
         $meta_desc  = sprintf(Translate::get($sheet . '.desc'), Config::get('meta.name'));
 
         $m = [
-            'og'         => true,
-            'imgurl'     => Config::get('meta.img_path'),
-            'url'        => $sheet == 'top' ? '/top' : '/',
+            'main'      => 'main',
+            'og'        => true,
+            'imgurl'    => Config::get('meta.img_path'),
+            'url'       => $sheet == 'top' ? '/top' : '/',
         ];
 
         return Tpl::agRender(
             '/home',
             [
-                'meta'  => Meta::get($m, $meta_title, $meta_desc, 'main'),
+                'meta'  => Meta::get($m, $meta_title, $meta_desc),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,

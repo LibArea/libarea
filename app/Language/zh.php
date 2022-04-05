@@ -483,6 +483,7 @@ $data = [
     'main.feed.info'            => '按時間順序發帖...',
     'main.all.info'             => '社區提要中的所有帖子...',
     'main.top.info'             => '最近的活躍帖子...',
+    'main.deleted.title'        => '已刪除的帖子',
     
     'comments.all.info'         => '所有評論...',
     'comments.deleted.info'     => '刪除評論...',

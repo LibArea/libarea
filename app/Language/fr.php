@@ -484,6 +484,7 @@ $data = [
     'main.feed.info'            => 'Posts in chronological order...',
     'main.all.info'             => 'All posts in the community feed...',
     'main.top.info'             => 'Recent active posts...',
+    'main.deleted.title'        => 'Messages supprimés',
     
     'comments.all.info'         => 'Tous les commentaires...',
     'comments.deleted.info'     => 'Commentaires supprimés...',

@@ -2,7 +2,7 @@
 
 class Meta
 {
-    public static function get($m, $title = '', $desc = '', $date_article = '')
+    public static function get(array $m = [], string $title = '', string $desc = '')
     {
         $output = '';
         if ($title == '') {
@@ -12,17 +12,18 @@ class Meta
             $desc = Config::get('meta.name');
         }
 
-        if ($m['url'] == '/') {
-            $output .= '<title>' . $title . '</title>';
-        }  else {
-            $output .= '<title>' . $title . ' | ' . Config::get('meta.name') . '</title>';
-        }  
+        
+       if (!empty($m['main'])) {
+           $output .= '<title>' . $title . '</title>'; 
+       }  else {
+           $output .= '<title>' . $title . ' | ' . Config::get('meta.name') . '</title>';
+       }   
 
         $output .= '<meta name="description" content="' . $desc . '">';
 
-        if ($date_article != '') {
+        if (!empty($m['date'])) {
             $output .= '<meta property="og:type" content="article" />'
-                . '<meta property="article:published_time" content="' . $date_article . '" />';
+                . '<meta property="article:published_time" content="' . $m['date'] . '" />';
         }
 
         if (!empty($m)) {
