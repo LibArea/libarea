@@ -30,7 +30,9 @@
           <?php } ?>
         </div>
 
-        <h1><?= $post['post_title']; ?></h1>
+        <h1><?= $post['post_title']; ?>
+          <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
+        </h1>
         <div class="text-sm lowercase flex gray-600">
           <?= Html::langDate($post['post_date']); ?>
           <?php if ($post['modified']) { ?>
@@ -107,7 +109,7 @@
 
       <div class="br-box-gray flex items-center mb5">
         <div class="left p10 none mb-block">
-          <?= votes($user['id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
+          <?= Html::votes($user['id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
         </div>
 
         <ul class="list-none w-100 lowercase">

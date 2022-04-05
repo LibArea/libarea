@@ -30,7 +30,9 @@
           <?php } ?>
         </div>
 
-        <h1><?= $post['post_title']; ?></h1>
+        <h1><?= $post['post_title']; ?>
+          <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
+        </h1>
         <div class="text-sm lowercase flex gray-600">
           <?= Html::langDate($post['post_date']); ?>
           <?php if ($post['modified']) { ?>
