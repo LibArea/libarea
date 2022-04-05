@@ -296,6 +296,7 @@ $data = [
     'successfully.login'        => '成功，登錄',
     'notif.add.pm'              => '寫信給你 %1$s 私人信息 %2$s',
     'notif.add.comment'         => '回复 %1$s 你的答案 %2$s',
+    'notif.add.comment.comment' => '回复 %1$s 你的評論 %2$s',
     'notif.add.answer'          => '回复 %1$s 你的帖子 %2$s',
     'notif.add.flag'            => '註冊 %1$s 抱怨 %2$s',
     'notif.add.audit'           => '需要審計 %1$s 內容  %2$s',

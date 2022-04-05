@@ -10,15 +10,15 @@ return [
     ['id' => 3, 'icon' => 'bi-reply gray-600', 'lang' => 'notif.add.answer'],
     ['id' => 4, 'icon' => 'bi-chat-dots', 'lang' => 'notif.add.comment'],
 
-    ['id' => 5, 'icon' => 'bi bi-lightbulb', 'lang' => 'notif.add.chat'],
+    ['id' => 5, 'icon' => 'bi-chat-quote', 'lang' => 'notif.add.comment.comment'],
 
-    ['id' => 6, 'icon' => 'bi bi-lightbulb', 'lang' => 'notif.like.post'],
-    ['id' => 7, 'icon' => 'bi bi-lightbulb', 'lang' => 'notif.like.answer'],
-    ['id' => 8, 'icon' => 'bi bi-lightbulb', 'lang' => 'notif.like.comment'],
+    ['id' => 6, 'icon' => 'bi-lightbulb', 'lang' => 'notif.like.post'],
+    ['id' => 7, 'icon' => 'bi-lightbulb', 'lang' => 'notif.like.answer'],
+    ['id' => 8, 'icon' => 'bi-lightbulb', 'lang' => 'notif.like.comment'],
 
-    ['id' => 10, 'icon' => 'bi bi-person', 'lang' => 'notif.references.post'],
-    ['id' => 11, 'icon' => 'bi bi-person', 'lang' => 'notif.references.amswer'],
-    ['id' => 12, 'icon' => 'bi bi-person', 'lang' => 'notif.references.comment'],
+    ['id' => 10, 'icon' => 'bi-person', 'lang' => 'notif.references.post'],
+    ['id' => 11, 'icon' => 'bi-person', 'lang' => 'notif.references.amswer'],
+    ['id' => 12, 'icon' => 'bi-person', 'lang' => 'notif.references.comment'],
 
     ['id' => 20, 'icon' => 'bi-exclamation-diamond red', 'lang' => 'notif.add.flag'],
     ['id' => 21, 'icon' => 'bi-exclamation-diamond red', 'lang' => 'notif.add.audit'],

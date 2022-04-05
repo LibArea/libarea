@@ -12,7 +12,7 @@ class UserController extends MainController
 {
     private $user;
 
-    protected $limit = 42;
+    protected $limit = 40;
 
     public function __construct()
     {

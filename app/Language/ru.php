@@ -294,6 +294,7 @@ $data = [
     'successfully.login'        => 'Успешно, войдите в систему',
     'notif.add.pm'              => 'написал вам %1$s личное сообщение %2$s',
     'notif.add.comment'         => 'прокомментировал %1$s ваш ответ %2$s',
+    'notif.add.comment.comment' => 'ответил на %1$s ваш комментарий %2$s',
     'notif.add.answer'          => 'ответил на %1$s ваш пост %2$s',
     'notif.add.flag'            => 'поступила %1$s жалоба %2$s',
     'notif.add.audit'           => 'требуется аудит %1$s контента %2$s',

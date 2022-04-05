@@ -76,21 +76,34 @@ class AddCommentController extends MainController
         // Notification to the author of the answer that there is a comment (do not write to ourselves) 
         // Оповещение автору ответа, что есть комментарий (себе не записываем)
         $answ = AnswerModel::getAnswerId($answer_id);
-        $recipient_id = $answ['answer_user_id'];
-        if ($this->user['id'] != $recipient_id) {
+        if ($this->user['id'] != $answ['answer_user_id']) {
             NotificationModel::send(
                 [
                     'sender_id'    => $this->user['id'],
-                    'recipient_id' => $recipient_id,
+                    'recipient_id' => $answ['answer_user_id'],
                     'action_type'  => NotificationModel::TYPE_COMMENT_ANSWER,
                     'url'          => $url,
                 ]
             );
         }
 
+        if ($comment_id) {
+            $comment = CommentModel::getCommentsId($comment_id);
+            if ($this->user['id'] != $comment['comment_user_id']) {
+                NotificationModel::send(
+                    [
+                        'sender_id'    => $this->user['id'],
+                        'recipient_id' => $comment['comment_user_id'],
+                        'action_type'  => NotificationModel::TYPE_COMMENT_COMMENT,
+                        'url'          => $url,
+                    ]
+                );
+            }
+        }
+
         // Notification (@login). 12 - mentions in comments 
         if ($message = Content::parseUser($content, true, true)) {
-            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_COMMENT, $message, $last_id, $url, $recipient_id);
+            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_COMMENT, $message, $last_id, $url, $answ['answer_user_id']);
         }
 
         ActionModel::addLogs(

@@ -297,6 +297,7 @@ $data = [
     'successfully.login'        => 'Successfully, log in',
     'notif.add.pm'              => 'hat dir geschrieben %1$s private Nachricht %2$s',
     'notif.add.comment'         => 'geantwortet %1$s Deine Antwort %2$s',
+    'notif.add.comment.comment' => 'geantwortet %1$s dein Kommentar %2$s',
     'notif.add.answer'          => 'geantwortet %1$s deine Post %2$s',
     'notif.add.flag'            => 'eingeschrieben %1$s Beschwerde %2$s',
     'notif.add.audit'           => 'Rechnungsprüfung erforderlich %1$s Inhalt %2$s',

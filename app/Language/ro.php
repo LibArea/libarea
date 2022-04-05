@@ -295,6 +295,7 @@ $data = [
     'successfully.login'        => 'Conectare cu succes',
     'notif.add.pm'              => 'ti-a scris  %1$s mesaj privat %2$s',
     'notif.add.comment'         => 'a răspuns la la %1$s raspunsul tau %2$s',
+    'notif.add.comment.comment' => 'a răspuns la la %1$s comentariul tau %2$s',
     'notif.add.answer'          => 'a răspuns la %1$s postul tau %2$s',
     'notif.add.flag'            => 'înscris %1$s plângere %2$s',
     'notif.add.audit'           => 'auditul necesar %1$s conţinut %2$s',

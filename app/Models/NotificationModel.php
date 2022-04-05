@@ -11,7 +11,7 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
     // 2 - пост
     // 3 - ответ на пост
     // 4 - комментарий на ответ в посте
-    // 5 - публикация в чат
+    // 5 - ответ на комментарий
     // 6 - понравился пост
     // 7 - понравился ответ на пост
     // 8 - понравился комментарий
@@ -30,6 +30,7 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
 
     const TYPE_AMSWER_POST          = 3;  // answer to question (post)
     const TYPE_COMMENT_ANSWER       = 4;  // comment on answer
+    const TYPE_COMMENT_COMMENT      = 5;  // comment on comment
 
     const TYPE_ADDRESSED_POST       = 10; // addressed the participant in the post 
     const TYPE_ADDRESSED_ANSWER     = 11; // addressed to the participant in the answer
