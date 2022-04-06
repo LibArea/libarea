@@ -336,6 +336,7 @@ $data = [
     'registration.invite'   => '邀請註冊',
     'details.here'          => '詳情在這裡',
     'breaking.rules'        => '打破規則',
+    'five.hundred.width'    => '封面寬度小於 500px',
 
     'sections'              => '節',
     'section'               => '節',

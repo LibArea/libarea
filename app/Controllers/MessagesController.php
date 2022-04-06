@@ -27,11 +27,7 @@ class MessagesController extends MainController
         } else {
             $dialog_ids = null;
         }
-
-        if ($dialog_ids) {
-            $last_message = MessagesModel::getLastMessages($dialog_ids);
-        }
-
+ 
         $result = [];
         if ($messages_dialog) {
 

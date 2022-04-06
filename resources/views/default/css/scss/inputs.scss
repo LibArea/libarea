@@ -44,8 +44,8 @@ fieldset.rememberme label {
 
 select { background-color: var(--white); }
 
-input:focus,
-textarea:focus { border: 1px solid #9ccdf8; }
+input: focus,
+textarea: focus { border: 1px solid #9ccdf8; }
 
 label {
   display: block;

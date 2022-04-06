@@ -60,7 +60,7 @@ class NotificationController extends MainController
     }
 
     // Appeal (@)
-    public function mention($action_type, $message, $connection_type, $url, $owner_id = null)
+    public function mention($action_type, $message, $url, $owner_id = null)
     {
         foreach ($message as $recipient_id) {
             // Prohibit sending to yourself 

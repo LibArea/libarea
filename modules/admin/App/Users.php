@@ -70,7 +70,7 @@ class Users
         return view(
             '/view/default/user/logip',
             [
-                'meta'  => Meta::get($m = [], Translate::get('search')),
+                'meta'  => Meta::get(Translate::get('search')),
                 'data'  => [
                     'results'   => $results,
                     'option'    => $option,
@@ -105,7 +105,7 @@ class Users
         return view(
             '/view/default/user/edit',
             [
-                'meta'  => Meta::get($m = [], Translate::get('edit')),
+                'meta'  => Meta::get(Translate::get('edit')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,

@@ -54,7 +54,7 @@ class AddAnswerController extends MainController
 
         // Notification (@login). 11 - mentions in answers 
         if ($message = Content::parseUser($content, true, true)) {
-            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_ANSWER, $message, $last_id, $url);
+            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_ANSWER, $message, $url, $post['post_user_id']);
         }
 
         // Кто подписан на данный вопрос / пост

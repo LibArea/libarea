@@ -144,19 +144,6 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
         return $message;
     }
 
-    public static function getLastMessages($dialog_ids)
-    {
-        if (!is_array($dialog_ids)) {
-            return false;
-        }
-
-        foreach ($dialog_ids as $dialog_id) {
-            $last_message =  self::getMessageOne($dialog_id);
-        }
-
-        return $last_message;
-    }
-
     // Записываем личное сообщение
     public static function sendMessage($dialog_sender_id, $dialog_recipient_id, $message_content)
     {

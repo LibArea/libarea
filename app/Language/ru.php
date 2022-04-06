@@ -334,6 +334,7 @@ $data = [
     'registration.invite'   => 'Регистрация по инвайту',
     'details.here'          => 'Подробности здесь',
     'breaking.rules'        => 'Нарушение правил',
+    'five.hundred.width'    => 'Ширина обложки меньше 500px',
 
     'sections'              => 'Разделы',
     'section'               => 'Раздел',

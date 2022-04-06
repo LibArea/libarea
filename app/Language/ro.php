@@ -334,6 +334,7 @@ $data = [
     'registration.invite'   => 'Înregistrare prin invitație',
     'details.here'          => 'Detalii aici',
     'breaking.rules'        => 'Încălcând regulile',
+    'five.hundred.width'    => 'Lățimea copertei mai mică de 500 px',
 
     'sections'              => 'Sectiuni',
     'section'               => 'Sectiune',

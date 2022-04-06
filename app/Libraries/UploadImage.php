@@ -5,7 +5,6 @@ use App\Models\User\{UserModel, SettingModel};
 
 class UploadImage
 {
-    // Запишем img
     public static function img($img, $content_id, $type)
     {
         switch ($type) {
@@ -107,7 +106,7 @@ class UploadImage
         return $img_post;
     }
 
-    // Обложка участника
+    // Member cover
     public static function cover($cover, $content_id, $type)
     {
         switch ($type) {
@@ -168,14 +167,13 @@ class UploadImage
         return false;
     }
 
-    // Обложка поста
+    // Post cover
     public static function cover_post($cover, $post, $redirect, $user_id)
     {
-        // Проверка ширину
+        // Width check
         $width_h  = getimagesize($cover['tmp_name']);
         if ($width_h < 500) {
-            $valid = false;
-            Html::addMsg('Ширина меньше 500 пикселей', 'error');
+            Html::addMsg(Translate::get('five.hundred.width'), 'error');
             redirect($redirect);
         }
 
@@ -196,7 +194,7 @@ class UploadImage
 
         $post_img = $year . $filename . '.webp';
 
-        // Удалим если есть старая
+        // Delete if there is an old one
         $post_content_img  = $post['post_content_img'] ?? false;
         if ($post_content_img != $post_img) {
             @unlink($path . $post_content_img);

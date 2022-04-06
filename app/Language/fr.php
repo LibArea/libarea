@@ -337,6 +337,7 @@ $data = [
     'registration.invite'   => 'Registration by invite',
     'details.here'          => 'Details here',
     'breaking.rules'        => 'Breaking the rules',
+    'five.hundred.width'    => 'Largeur de couverture inférieure à 500px',
 
     'sections'              => 'Sections',
     'section'               => 'Section',

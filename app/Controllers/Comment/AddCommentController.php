@@ -103,7 +103,7 @@ class AddCommentController extends MainController
 
         // Notification (@login). 12 - mentions in comments 
         if ($message = Content::parseUser($content, true, true)) {
-            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_COMMENT, $message, $last_id, $url, $answ['answer_user_id']);
+            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_COMMENT, $message, $url, $comment['comment_user_id']);
         }
 
         ActionModel::addLogs(

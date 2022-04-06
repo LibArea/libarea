@@ -153,7 +153,7 @@ class AddPostController extends MainController
 
         // Notification (@login). 10 - mentions in post 
         if ($message = Content::parseUser($content, true, true)) {
-            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $last_id, $url);
+            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $url);
         }
 
         if (Config::get('general.discord')) {

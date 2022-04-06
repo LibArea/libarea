@@ -61,7 +61,6 @@ class EditFacetController extends MainController
         $facet_info                 = Request::getPost('facet_info');
         $facet_slug                 = Request::getPost('facet_slug');
         $facet_seo_title            = Request::getPost('facet_seo_title');
-        $facet_merged_id            = Request::getPostInt('facet_merged_id');
         $facet_top_level            = Request::getPostInt('facet_top_level');
         $facet_tl                   = Request::getPostInt('content_tl');
         $facet_type                 = Request::getPost('facet_type');
