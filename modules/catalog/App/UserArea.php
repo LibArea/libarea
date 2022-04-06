@@ -36,7 +36,7 @@ class UserArea
         return view(
             '/view/default/user/user-sites',
             [
-                'meta'  => Meta::get($m, Translate::get('my.site'), Translate::get('my.site')),
+                'meta'  => Meta::get(Translate::get('my.site'), Translate::get('my.site'), $m),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'cat',
@@ -67,7 +67,7 @@ class UserArea
         return view(
             '/view/default/user/bookmarks',
             [
-                'meta'  => Meta::get([], Translate::get('favorites'), Translate::get('favorites')),
+                'meta'  => Meta::get(Translate::get('favorites'), Translate::get('favorites')),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'cat',

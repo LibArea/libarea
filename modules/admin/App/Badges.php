@@ -22,7 +22,7 @@ class Badges
         return view(
             '/view/default/badge/badges',
             [
-                'meta'  => Meta::get($m = [], Translate::get('badges')),
+                'meta'  => Meta::get(Translate::get('badges')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -39,7 +39,7 @@ class Badges
         return view(
             '/view/default/badge/add',
             [
-                'meta'  => Meta::get($m = [], sprintf(Translate::get('add.option'), Translate::get('badges'))),
+                'meta'  => Meta::get(sprintf(Translate::get('add.option'), Translate::get('badges'))),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,
@@ -59,7 +59,7 @@ class Badges
         return view(
             '/view/default/badge/edit',
             [
-                'meta'  => Meta::get($m = [], Translate::get('edit')),
+                'meta'  => Meta::get(Translate::get('edit')),
                 'data'  => [
                     'badge' => $badge,
                     'sheet' => $sheet,
@@ -105,7 +105,7 @@ class Badges
         return view(
             '/view/default/badge/user-add',
             [
-                'meta'  => Meta::get($m = [], Translate::get('reward.user')),
+                'meta'  => Meta::get($Translate::get('reward.user')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,

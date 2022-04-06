@@ -15,7 +15,7 @@ class Home
         return view(
             '/view/default/index',
             [
-                'meta'  => Meta::get($m = [], Translate::get('admin')),
+                'meta'  => Meta::get(Translate::get('admin')),
                 'data'  => [
                     'count'             => StatsModel::getCount(),
                     'posts_no_topic'    => FacetModel::getNoTopic(),
@@ -36,7 +36,7 @@ class Home
         return view(
             '/view/default/css',
             [
-                'meta'  => Meta::get($m = [], Translate::get('Css')),
+                'meta'  => Meta::get(Translate::get('Css')),
                 'data'  => [
                     'type'  => 'css',
                     'sheet' => 'css',

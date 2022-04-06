@@ -41,7 +41,7 @@ class Edit
         return view(
             '/view/default/edit',
             [
-                'meta'  => Meta::get([], Translate::get('site.edit')),
+                'meta'  => Meta::get(Translate::get('site.edit')),
                 'user'  => $this->user,
                 'data'  => [
                     'domain'        => $domain,

@@ -42,7 +42,7 @@ class Home
         return view(
             '/view/default/home',
             [
-                'meta'  => Meta::get($m, Translate::get($sheet . '.home.title'), Translate::get($sheet . '.home.desc')),
+                'meta'  => Meta::get(Translate::get($sheet . '.home.title'), Translate::get($sheet . '.home.desc'), $m),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'cat',

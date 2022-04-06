@@ -15,7 +15,7 @@ class Facets
         return view(
             '/view/default/facet/all',
             [
-                'meta'  => Meta::get($m = [], Translate::get('facets'), Translate::get('facets')),
+                'meta'  => Meta::get(Translate::get('facets'), Translate::get('facets')),
                 'data'  => [
                     'count'         => StatsModel::getCount(),
                     'sheet'         => 'all',
@@ -35,7 +35,7 @@ class Facets
         return view(
             '/view/default/facet/type',
             [
-                'meta'  => Meta::get($m = [], Translate::get($type), Translate::get('facets')),
+                'meta'  => Meta::get(Translate::get($type), Translate::get('facets')),
                 'data'  => [
                     'count'     => StatsModel::getCount(),
                     'sheet'     => $type,
@@ -70,7 +70,7 @@ class Facets
         return view(
             '/view/default/facet/type',
             [
-                'meta'  => Meta::get($m = [], Translate::get('ban'), Translate::get('ban')),
+                'meta'  => Meta::get(Translate::get('ban'), Translate::get('ban')),
                 'data'  => [
                     'sheet'     => 'ban.facet',
                     'type'      => $type,

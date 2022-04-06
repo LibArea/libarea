@@ -22,7 +22,7 @@ class InvitationsController extends MainController
         return Tpl::agRender(
             '/user/invite',
             [
-                'meta'  => Meta::get($m = [], Translate::get('invite')),
+                'meta'  => Meta::get(Translate::get('invite')),
                 'data'  => [
                     'sheet' => 'invite',
                     'type'  => 'user',
@@ -37,7 +37,7 @@ class InvitationsController extends MainController
         return Tpl::agRender(
             '/user/invitation',
             [
-                'meta'  => Meta::get($m = [], Translate::get('invites')),
+                'meta'  => Meta::get(Translate::get('invites')),
                 'data'  => [
                     'invitations'   => InvitationModel::userResult($this->user['id']),
                     'count_invites' => $this->user['invitation_available'],

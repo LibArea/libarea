@@ -37,8 +37,8 @@ class HomeController extends MainController
             $topics = \App\Models\FacetModel::advice($this->user['id']);
         }
 
-        $meta_title = sprintf(Translate::get($sheet . '.title'), Config::get('meta.name'));
-        $meta_desc  = sprintf(Translate::get($sheet . '.desc'), Config::get('meta.name'));
+        $title = sprintf(Translate::get($sheet . '.title'), Config::get('meta.name'));
+        $description  = sprintf(Translate::get($sheet . '.desc'), Config::get('meta.name'));
 
         $m = [
             'main'      => 'main',
@@ -50,7 +50,7 @@ class HomeController extends MainController
         return Tpl::agRender(
             '/home',
             [
-                'meta'  => Meta::get($m, $meta_title, $meta_desc),
+                'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,

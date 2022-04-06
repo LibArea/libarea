@@ -38,7 +38,7 @@ class Users
         return view(
             '/view/default/user/users',
             [
-                'meta'  => Meta::get($m = [], Translate::get('users')),
+                'meta'  => Meta::get(Translate::get('users')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

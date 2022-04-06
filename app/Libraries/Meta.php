@@ -2,24 +2,23 @@
 
 class Meta
 {
-    public static function get(array $m = [], string $title = '', string $desc = '')
+    public static function get($title = '', $description = '', $m = [])
     {
         $output = '';
         if ($title == '') {
             $title = Config::get('meta.title');
         }
-        if ($desc == '') {
-            $desc = Config::get('meta.name');
+        if ($description == '') {
+            $description = Config::get('meta.name');
         }
 
-        
-       if (!empty($m['main'])) {
-           $output .= '<title>' . $title . '</title>'; 
-       }  else {
-           $output .= '<title>' . $title . ' | ' . Config::get('meta.name') . '</title>';
-       }   
+        if (!empty($m['main'])) {
+            $output .= '<title>' . $title . '</title>';
+        } else {
+            $output .= '<title>' . $title . ' | ' . Config::get('meta.name') . '</title>';
+        }
 
-        $output .= '<meta name="description" content="' . $desc . '">';
+        $output .= '<meta name="description" content="' . $description . '">';
 
         if (!empty($m['date'])) {
             $output .= '<meta property="og:type" content="article" />'
@@ -33,7 +32,7 @@ class Meta
 
             if (!empty($m['og'])) {
                 $output .= '<meta property="og:title" content="' . $title . '"/>'
-                    . '<meta property="og:description" content="' . $desc . '"/>'
+                    . '<meta property="og:description" content="' . $description . '"/>'
                     . '<meta property="og:url" content="' . Config::get('meta.url') . $m['url'] . '"/>';
 
                 if (!empty($m['imgurl'])) {

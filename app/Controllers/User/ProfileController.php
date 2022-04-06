@@ -195,7 +195,7 @@ class ProfileController extends MainController
         }
 
         $title = sprintf(Translate::get($sheet . '.title'), $name);
-        $desc  = sprintf(Translate::get($sheet . '.desc'), $name, $information ?? '...');
+        $description  = sprintf(Translate::get($sheet . '.desc'), $name, $information ?? '...');
 
         $m = [
             'og'        => true,
@@ -203,7 +203,7 @@ class ProfileController extends MainController
             'url'       => getUrlByName('profile', ['login' => $user['login']]),
         ];
 
-        return Meta::get($m, $title, $desc);
+        return Meta::get($title, $description, $m);
     }
 
     // Sending personal messages

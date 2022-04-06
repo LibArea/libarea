@@ -45,7 +45,7 @@ class Audits
         return view(
             '/view/default/audit/audits',
             [
-                'meta'  => Meta::get($m = [], Translate::get($type)),
+                'meta'  => Meta::get(Translate::get($type)),
                 'data' => [
                     'sheet'         => $sheet,
                     'type'          => $type,
@@ -70,7 +70,7 @@ class Audits
         return view(
             '/view/default/audit/logs',
             [
-                'meta'  => Meta::get($m = [], Translate::get('logs')),
+                'meta'  => Meta::get(Translate::get('logs')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

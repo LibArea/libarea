@@ -55,11 +55,6 @@ class Search
             );
         }
 
-        $m = [
-            'og'    => false,
-            'url'   => false,
-        ];
-
         $result = [];
         foreach ($results as $ind => $row) {
             $text = Html::fragment($row['content']);
@@ -72,7 +67,7 @@ class Search
         return view(
             '/view/default/search',
             [
-                'meta'  => Meta::get($m, Translate::get('search')),
+                'meta'  => Meta::get(Translate::get('search')),
                 'user'  => $this->user,
                 'data'  => [
                     'result'        => $result ?? false,

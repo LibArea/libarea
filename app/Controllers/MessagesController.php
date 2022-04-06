@@ -62,7 +62,7 @@ class MessagesController extends MainController
         return Tpl::agRender(
             '/messages/messages',
             [
-                'meta'  => Meta::get($m = [], Translate::get('private.messages')),
+                'meta'  => Meta::get(Translate::get('private.messages')),
                 'data'  => [
                     'sheet'     => 'messages',
                     'type'      => 'messages',
@@ -117,7 +117,7 @@ class MessagesController extends MainController
         return Tpl::agRender(
             '/messages/dialog',
             [
-                'meta'  => Meta::get($m = [], Translate::get('dialogue')),
+                'meta'  => Meta::get(Translate::get('dialogue')),
                 'data'  => [
                     'h1'                => Translate::get('dialogue') . ' - ' . $list[$key]['login'],
                     'sheet'             => Translate::get('dialogue') . ' - ' . $list[$key]['login'],
@@ -149,7 +149,7 @@ class MessagesController extends MainController
         return Tpl::agRender(
             '/messages/user-add-messages',
             [
-                'meta'  => Meta::get($m = [], Translate::get('send.message')),
+                'meta'  => Meta::get(Translate::get('send.message')),
                 'data'  => [
                     'recipient_uid' => $user['id'],
                     'login'         => $user['login'],

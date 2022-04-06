@@ -16,7 +16,7 @@ class Words
         return view(
             '/view/default/word/words',
             [
-                'meta'  => Meta::get($m = [], Translate::get('words')),
+                'meta'  => Meta::get(Translate::get('words')),
                 'data'  => [
                     'words' => ContentModel::getStopWords(),
                     'sheet' => $sheet,
@@ -32,7 +32,7 @@ class Words
         return view(
             '/view/default/word/add',
             [
-                'meta'  => Meta::get($m = [], sprintf(Translate::get('add.option'), Translate::get('word'))),
+                'meta'  => Meta::get(sprintf(Translate::get('add.option'), Translate::get('word'))),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,

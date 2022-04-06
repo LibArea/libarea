@@ -44,7 +44,7 @@ class Catalog
         ];
 
         $title = sprintf(Translate::get($sheet . '.cat.title'), $category['facet_title']);
-        $desc  = sprintf(Translate::get($sheet . '.cat.desc'), $category['facet_title'], $category['facet_description']);
+        $description  = sprintf(Translate::get($sheet . '.cat.desc'), $category['facet_title'], $category['facet_description']);
 
         $count_site = ($this->user['trust_level'] == UserData::REGISTERED_ADMIN) ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
@@ -53,8 +53,8 @@ class Catalog
         return view(
             '/view/default/sites',
             [
-                'meta'  => Meta::get($m, $title, $desc),
-                'user' => $this->user,
+                'meta'  => Meta::get($title, $description, $m),
+                'user'  => $this->user,
                 'data'  => [
                     'screening'         => $screening,
                     'sheet'             => $sheet,

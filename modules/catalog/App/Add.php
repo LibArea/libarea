@@ -31,7 +31,7 @@ class Add
         return view(
             '/view/default/add',
             [
-                'meta'  => Meta::get([], Translate::get('site.add')),
+                'meta'  => Meta::get(Translate::get('site.add')),
                 'user'  => $this->user,
                 'data'  => [
                     'sheet'      => 'add',

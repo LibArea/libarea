@@ -38,7 +38,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/all',
             [
-                'meta'  => Meta::get($m, Translate::get($type . 's'), Translate::get($sheet . '.desc')),
+                'meta'  => Meta::get(Translate::get($type . 's'), Translate::get($sheet . '.desc'), $m),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,
@@ -69,7 +69,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/favorite/all',
             [
-                'meta'  => Meta::get($m = [], Translate::get('favorites')),
+                'meta'  => Meta::get(Translate::get('favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
@@ -93,7 +93,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/favorite/folders',
             [
-                'meta'  => Meta::get($m = [], Translate::get('folders')),
+                'meta'  => Meta::get(Translate::get('folders')),
                 'data'  => [
                     'sheet'     => 'folders',
                     'type'      => 'folders',
@@ -109,7 +109,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/favorite/all',
             [
-                'meta'  => Meta::get($m = [], Translate::get('favorites')),
+                'meta'  => Meta::get(Translate::get('favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
@@ -126,7 +126,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/draft',
             [
-                'meta'  => Meta::get($m = [], Translate::get('drafts')),
+                'meta'  => Meta::get(Translate::get('drafts')),
                 'data'  => [
                     'drafts'    => UserModel::userDraftPosts($this->user['id']),
                     'sheet'     => 'drafts',
@@ -143,7 +143,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/favorite/subscribed',
             [
-                'meta'  => Meta::get($m = [], Translate::get('subscribed')),
+                'meta'  => Meta::get(Translate::get('subscribed')),
                 'data'  => [
                     'h1'    => Translate::get('subscribed') . ' ' . $this->user['login'],
                     'sheet' => 'subscribed',

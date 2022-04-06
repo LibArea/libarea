@@ -40,11 +40,11 @@ class TopicFacetController extends MainController
 
         $url    = getUrlByName('topic', ['slug' => $facet['facet_slug']]);
         $title  = $facet['facet_seo_title'] . ' — ' .  Translate::get('topic');
-        $desc   = $facet['facet_description'];
+        $description   = $facet['facet_description'];
         if ($sheet == 'facet.recommend') {
             $url    =  getUrlByName('recommend', ['slug' => $facet['facet_slug']]);
             $title  = $facet['facet_seo_title'] . ' — ' .  Translate::get('recommended.posts');
-            $desc   = sprintf(Translate::get('recommended.posts.desc'), $facet['facet_seo_title']) . $facet['facet_description'];
+            $description  = sprintf(Translate::get('recommended.posts.desc'), $facet['facet_seo_title']) . $facet['facet_description'];
         }
 
         $m = [
@@ -56,7 +56,7 @@ class TopicFacetController extends MainController
         return Tpl::agRender(
             '/facets/topic',
             [
-                'meta'  => Meta::get($m, $title, $desc),
+                'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
@@ -96,7 +96,7 @@ class TopicFacetController extends MainController
         return Tpl::agRender(
             '/facets/info',
             [
-                'meta'  => Meta::get($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description']),
+                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description'], $m),
                 'data'  => [
                     'sheet'         => 'info',
                     'type'          => 'info',
@@ -131,7 +131,7 @@ class TopicFacetController extends MainController
         return Tpl::agRender(
             '/facets/writers',
             [
-                'meta'  => Meta::get($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description']),
+                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description'], $m),
                 'data'  => [
                     'sheet'         => 'writers',
                     'type'          => 'writers',

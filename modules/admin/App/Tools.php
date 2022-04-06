@@ -11,7 +11,7 @@ class Tools
         return view(
             '/view/default/tools/tools',
             [
-                'meta'  => Meta::get($m = [], Translate::get('tools')),
+                'meta'  => Meta::get(Translate::get('tools')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,

@@ -45,7 +45,7 @@ class AddPostController extends MainController
         return Tpl::agRender(
             $puth,
             [
-                'meta'      => Meta::get([], sprintf(Translate::get('add.option'), Translate::get('post'))),
+                'meta'      => Meta::get(sprintf(Translate::get('add.option'), Translate::get('post'))),
                 'data'  => [
                     'facets'    => ['topic' => $topic],
                     'blog'      => FacetModel::getFacetsUser($this->user['id'], 'blog'),

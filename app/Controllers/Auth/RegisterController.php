@@ -33,7 +33,7 @@ class RegisterController extends MainController
         return Tpl::agRender(
             '/auth/register',
             [
-                'meta'  => Meta::get($m, Translate::get('registration'), Translate::get('security.info')),
+                'meta'  => Meta::get(Translate::get('registration'), Translate::get('security.info'), $m),
                 'data'  => [
                     'sheet' => 'registration',
                     'type'  => 'register'
@@ -188,7 +188,7 @@ class RegisterController extends MainController
         return Tpl::agRender(
             '/auth/register-invate',
             [
-                'meta'  => Meta::get($m = [], Translate::get('registration.invite')),
+                'meta'  => Meta::get(Translate::get('registration.invite')),
                 'data'  => [
                     'invate' => $invate,
                     'type'  => 'invite'

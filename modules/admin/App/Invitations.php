@@ -21,7 +21,7 @@ class Invitations
         return view(
             '/view/default/invitation/invitations',
             [
-                'meta'  => Meta::get($m = [], Translate::get('invites')),
+                'meta'  => Meta::get(Translate::get('invites')),
                 'data'  => [
                     'type'          => 'invitations',
                     'sheet'         => 'invitations',

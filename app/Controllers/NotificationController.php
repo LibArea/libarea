@@ -21,7 +21,7 @@ class NotificationController extends MainController
         return Tpl::agRender(
             '/notification/index',
             [
-                'meta'  => Meta::get($m = [], Translate::get('notifications')),
+                'meta'  => Meta::get(Translate::get('notifications')),
                 'data'  => [
                     'sheet'         => 'notifications',
                     'type'          => 'notifications',

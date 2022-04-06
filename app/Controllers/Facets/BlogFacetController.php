@@ -40,7 +40,7 @@ class BlogFacetController extends MainController
 
         $url    = getUrlByName('blog', ['slug' => $facet['facet_slug']]);
         $title  = $facet['facet_seo_title'] . ' — ' .  Translate::get('blog');
-        $descr  = $facet['facet_description'];
+        $description  = $facet['facet_description'];
 
         $m = [
             'og'        => true,
@@ -51,7 +51,7 @@ class BlogFacetController extends MainController
         return Tpl::agRender(
             '/facets/blog',
             [
-                'meta'  => Meta::get($m, $title, $descr),
+                'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

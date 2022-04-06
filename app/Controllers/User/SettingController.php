@@ -43,7 +43,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/setting',
             [
-                'meta'  => Meta::get($m = [], Translate::get('setting')),
+                'meta'  => Meta::get(Translate::get('setting')),
                 'data'  => [
                     'sheet'         => 'settings',
                     'type'          => 'user',
@@ -110,7 +110,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/avatar',
             [
-                'meta'  => Meta::get($m = [], Translate::get('edit')),
+                'meta'  => Meta::get(Translate::get('edit')),
                 'data'  => [
                     'sheet' => 'avatar',
                     'type'  => 'user',
@@ -145,7 +145,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/security',
             [
-                'meta'  => Meta::get($m = [], sprintf(Translate::get('edit.option'), Translate::get('password'))),
+                'meta'  => Meta::get(sprintf(Translate::get('edit.option'), Translate::get('password'))),
                 'data'  => [
                     'password'      => '',
                     'password2'     => '',
@@ -231,7 +231,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/notifications',
             [
-                'meta'  => Meta::get($m = [], Translate::get('notifications')),
+                'meta'  => Meta::get(Translate::get('notifications')),
                 'data'  => [
                     'sheet'     => 'notifications',
                     'type'      => 'user',

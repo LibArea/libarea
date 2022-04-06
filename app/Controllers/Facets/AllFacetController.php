@@ -41,7 +41,7 @@ class AllFacetController extends MainController
         return Tpl::agRender(
             '/facets/all',
             [
-                'meta'  => Meta::get($m, Translate::get($sheet) . $num, Translate::get($sheet . '.desc') . $num),
+                'meta'  => Meta::get(Translate::get($sheet) . $num, Translate::get($sheet . '.desc') . $num, $m),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

@@ -58,7 +58,7 @@ class ActionController extends MainController
         ActionModel::setDeletingAndRestoring($type, $info_type[$type . '_id'], $info_type[$type . '_is_deleted']);
 
         $log_action_name = $info_type[$type . '_is_deleted'] == 1 ? 'content.restored' : 'content.deleted';
- 
+
         ActionModel::addLogs(
             [
                 'user_id'       => $this->user['id'],

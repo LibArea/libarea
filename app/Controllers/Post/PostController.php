@@ -85,10 +85,10 @@ class PostController extends MainController
             $content_img  = PATH_POSTS_THUMB . $content['post_thumb_img'];
         }
 
-        $desc  = explode("\n", $content['post_content']);
-        $desc  = strip_tags($desc[0]);
-        if ($desc == '') {
-            $desc = strip_tags($content['post_title']);
+        $description  = explode("\n", $content['post_content']);
+        $description  = strip_tags($description[0]);
+        if ($description == '') {
+            $description = strip_tags($content['post_title']);
         }
 
         if ($content['post_is_deleted'] == 1) {
@@ -115,15 +115,13 @@ class PostController extends MainController
             'url'       => getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
         ];
 
-        $meta = Meta::get($m, strip_tags($content['post_title']), $desc);
-
         $view = $type == 'post' ? '/post/view' : '/page/view';
 
         if ($type == 'post') {
             return Tpl::agRender(
                 '/post/view',
                 [
-                    'meta'  => $meta,
+                    'meta'  => Meta::get(strip_tags($content['post_title']), $description, $m),
                     'data'  => [
                         'post'          => $content,
                         'answers'       => $answers,
@@ -155,7 +153,7 @@ class PostController extends MainController
         return Tpl::agRender(
             '/page/view',
             [
-                'meta'  => Meta::get($m, $title, $desc . ' (' . $facet['facet_title'] . ' - ' . Translate::get('page') . ')'),
+                'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . Translate::get('page') . ')', $m),
                 'data'  => [
                     'sheet' => 'page',
                     'type'  => $type,
@@ -252,7 +250,7 @@ class PostController extends MainController
         return Tpl::agRender(
             '/post/link',
             [
-                'meta'  => Meta::get($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain.desc') . ': ' . $domain),
+                'meta'  => Meta::get(Translate::get('domain') . ': ' . $domain, Translate::get('domain.desc') . ': ' . $domain, $m),
                 'data'  => [
                     'sheet'         => 'domain',
                     'pagesCount'    => ceil($pagesCount / $this->limit),

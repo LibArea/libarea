@@ -47,7 +47,8 @@ class Detailed
             'imgurl'     => $content_img,
             'url'        => getUrlByName('web.website', ['slug' => $item['item_domain']]),
         ];
-        $desc       = $item['item_title'] . '. ' . $item['item_content'];
+        $title = Translate::get('website') . ': ' . $item['item_title'];
+        $description  = $item['item_title'] . '. ' . $item['item_content'];
 
         if ($item['item_post_related']) {
             $related_posts = PostModel::postRelated($item['item_post_related']);
@@ -59,8 +60,8 @@ class Detailed
         return view(
             '/view/default/website',
             [
-                'meta'  => Meta::get($m, Translate::get('website') . ': ' . $item['item_title'], $desc),
-                'user' => $this->user,
+                'meta'  => Meta::get($title, $description, $m),
+                'user'  => $this->user,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => 'web',
