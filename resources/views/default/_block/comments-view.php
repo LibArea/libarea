@@ -57,7 +57,7 @@
                   <?php } ?>
                 <?php } ?>
 
-                <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
+                <?php if (UserData::checkAdmin()) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600 ml10 mr10">
                     <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
                   </a>
@@ -77,7 +77,7 @@
 
         <?php } else { ?>
 
-          <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
+          <?php if (UserData::checkAdmin()) { ?>
             <ol class="bg-red-200 text-sm pr5 list-none">
               <li class="content_tree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">

@@ -1,4 +1,4 @@
-<?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
+<?php if (UserData::checkAdmin()) { ?>
   <a class="gray-600 ml10" href="<?= getUrlByName('admin.logip', ['ip' => $ip]); ?>">
     <?= $ip; ?>
   </a> 

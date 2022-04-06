@@ -3,28 +3,27 @@
   <div class="wrap">
     <div class="left">
       <div class="mb5">
-        <?= Config::get('meta.name'); ?>
-        &copy; <?= date('Y'); ?>
-        <span class="mb-none">— <?= Translate::get('community'); ?></span>
+        <?= Config::get('meta.name'); ?> &copy; <?= date('Y'); ?>
+        <span class="mb-none">— <?= __('community'); ?></span>
       </div>
-      <a rel="nofollow noopener" class="icon" title="DISCORD" href="https://discord.gg/dw47aNx5nU"><i class="bi-discord text-2xl"></i></a>
-      <a rel="nofollow noopener" class="icon" title="Vkontakte" href="https://vk.com/libarea">VK</a>
-      <a rel="nofollow noopener" class="icon" title="GitHub" href="https://github.com/libarea/agouti"><i class="bi-github text-2xl"></i></a>
+      <a rel="nofollow noopener" class="icon" title="<?= __('DISCORD'); ?>" href="https://discord.gg/dw47aNx5nU"><i class="bi-discord text-2xl"></i></a>
+      <a rel="nofollow noopener" class="icon" title="<?= __('VK'); ?>" href="https://vk.com/libarea"><?= __('VK'); ?></a>
+      <a rel="nofollow noopener" class="icon" title="<?= __('GitHub'); ?>" href="https://github.com/libarea/agouti"><i class="bi-github text-2xl"></i></a>
     </div>
     <div class="flex right">
       <ul class="mb-none">
-        <li><a href="<?= getUrlByName('blogs.all'); ?>"><?= Translate::get('blogs'); ?></a></li>
-        <li><a href="<?= getUrlByName('topics.all'); ?>"><?= Translate::get('topics'); ?></a></li>
-        <li><a href="<?= getUrlByName('web'); ?>"><?= Translate::get('catalog'); ?></a></li>
+        <li><a href="<?= getUrlByName('blogs.all'); ?>"><?= __('blogs'); ?></a></li>
+        <li><a href="<?= getUrlByName('topics.all'); ?>"><?= __('topics'); ?></a></li>
+        <li><a href="<?= getUrlByName('web'); ?>"><?= __('catalog'); ?></a></li>
       </ul>
       <ul class="mb-none">
-        <li><a href="<?= getUrlByName('users.all'); ?>"><?= Translate::get('users'); ?></a></li>
-        <li><a href="<?= getUrlByName('answers'); ?>"><?= Translate::get('answers'); ?></a></li>
-        <li><a href="<?= getUrlByName('comments'); ?>"><?= Translate::get('comments'); ?></a></li>
+        <li><a href="<?= getUrlByName('users.all'); ?>"><?= __('users'); ?></a></li>
+        <li><a href="<?= getUrlByName('answers'); ?>"><?= __('answers'); ?></a></li>
+        <li><a href="<?= getUrlByName('comments'); ?>"><?= __('comments'); ?></a></li>
       </ul>
       <ul class="mb-pl0">
-        <li><a href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => Config::get('facets.page-one')]); ?>"><?= Translate::get('info'); ?></a></li>
-        <li><a href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => Config::get('facets.page-two')]); ?>"><?= Translate::get('privacy'); ?></a></li>
+        <li><a href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => Config::get('facets.page-one')]); ?>"><?= __('info'); ?></a></li>
+        <li><a href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => Config::get('facets.page-two')]); ?>"><?= __('privacy'); ?></a></li>
       </ul>
     </div>
   </div>

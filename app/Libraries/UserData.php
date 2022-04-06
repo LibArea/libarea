@@ -138,16 +138,6 @@ class UserData
     }
 
     /**
-     * Checking for a user who is marked as deleted or banned.
-     * Проверка на пользователя, который помечен удалённым или забанен.
-     * @return bool
-     */
-    static public function checkBan(): bool
-    {
-        return self::getTl() < self::USER_ZERO_LEVEL;
-    }
-
-    /**
      * Check for any unblocked user.
      * Проверка на любого незаблокированного пользователя.
      * @return bool
@@ -181,23 +171,6 @@ class UserData
         self::$user = $t ? $t : $noAuth;
 
         return self::$user;
-    }
-
-    /**
-     * Возвращает ID, если пользователь зарегистрирован
-     * @return null|int
-     */
-    static public function getUserId(): ?int
-    {
-        if (!is_null(self::$id)) {
-            return self::$id;
-        }
-
-        $t = self::getAccount();
-
-        self::$id = $t['id'] ?? 0;
-
-        return self::$id;
     }
 
     /**

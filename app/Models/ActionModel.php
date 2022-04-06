@@ -68,7 +68,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
                     WHERE facet_title LIKE :facet_title AND facet_type = 'category' ORDER BY facet_count DESC LIMIT 100";
         } else {
             $condition = '';
-            if ($user['trust_level'] != UserData::REGISTERED_ADMIN) {
+            if (!UserData::checkAdmin()) {
                 if ($type == 'blog') {
                     $condition = 'AND facet_user_id = ' . $user['id'];
                 }

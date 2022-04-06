@@ -23,7 +23,7 @@ class HomeController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        if ($sheet == 'main.deleted' && $this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
+        if ($sheet == 'main.deleted' && !UserData::checkAdmin()) {
             redirect('/');
         }
 

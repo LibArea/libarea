@@ -260,7 +260,7 @@ class AddPostController extends MainController
     {
         $post_id = Request::getPostInt('post_id');
 
-        if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
+        if (!UserData::checkAdmin()) {
             return false;
         }
 

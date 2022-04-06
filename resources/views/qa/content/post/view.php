@@ -9,7 +9,7 @@
 </div>
 <main>
   <article class="post-full <?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
-    <?php if ($post['post_is_deleted'] == 0 || $user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
+    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
       <div class="post-body">
 
         <div class="flex flex-row items-center">

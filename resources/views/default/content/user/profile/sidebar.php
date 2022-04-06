@@ -142,7 +142,7 @@
     <div class="box-white">
       <h3 class="uppercase-box"><?= Translate::get('admin'); ?></h3>
       <div class="mt5">
-        <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
+        <?php if (!UserData::checkAdmin()) { ?>
           <?php if ($profile['ban_list'] == 1) { ?>
             <span class="type-ban gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
               <i class="bi-person-x-fill red middle mr5"></i>

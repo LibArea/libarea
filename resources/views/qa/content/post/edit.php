@@ -116,7 +116,7 @@
         ]
       ]); ?>
 
-      <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
+      <?php if (UserData::checkAdmin()) { ?>
         <?= Tpl::import('/_block/form/radio', [
           'data' => [
             [
