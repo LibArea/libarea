@@ -1,12 +1,12 @@
 (function () {
   'use strict';
 
-  var upDownBtn = document.querySelector('.up_down_btn');
-  var check;
+  let upDownBtn = document.querySelector('.up_down_btn');
+  let check;
 
   function trackScroll() {
-    var scrolled = window.pageYOffset;
-    var coords = document.documentElement.clientHeight;
+    let scrolled = window.pageYOffset;
+    let coords = document.documentElement.clientHeight;
 
     if (scrolled > coords) {
       upDownBtn.classList.add('block');
@@ -38,7 +38,7 @@
 
     } else if (check) {
       (function goBottom() {
-        var match = Math.ceil(window.pageYOffset + document.documentElement.clientHeight);
+        let match = Math.ceil(window.pageYOffset + document.documentElement.clientHeight);
 
         if (match != document.documentElement.scrollHeight) {
           window.scrollBy(0, 80);
@@ -255,8 +255,8 @@ function fetch_search() {
     ).then(
       text => {
         let obj = JSON.parse(text);
-        var html = '<div class="flex">';
-        for (var key in obj) {
+        let html = '<div class="flex">';
+        for (let key in obj) {
           if (obj[key].facet_slug) {
             html += '<a class="sky block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
             html += obj[key].facet_title + '</a>';
@@ -273,7 +273,7 @@ function fetch_search() {
           items.innerHTML = html;
         }
         
-        var menu = document.querySelector('.none.block');
+        let menu = document.querySelector('.none.block');
         if (menu) {
           document.onclick = function (e) {
             if (event.target.className != '.none.block') {

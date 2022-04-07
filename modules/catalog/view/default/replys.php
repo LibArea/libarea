@@ -30,11 +30,11 @@
                     <div class="flex">' . Html::votes($user_id, $node, 'reply', 'ps', 'mr5');
             
             if ($tl >= Config::get('trust-levels.tl_add_reply')) { 
-               echo '<a data-item_id="' . $node['reply_item_id'] . '" data-id="' . $node['reply_id'] . '" class="addreply gray-600 mr15 ml10">' . Translate::get('reply') . '</a>';
+               echo '<a data-item_id="' . $node['reply_item_id'] . '" data-type="addform" data-id="' . $node['reply_id'] . '" class="actreply gray-600 mr15 ml10">' . Translate::get('reply') . '</a>';
             } 
             
             if ($tl >= Config::get('trust-levels.tl_add_reply')) { 
-                echo '<a data-item_id="' . $node['reply_item_id'] . '" data-id="' . $node['reply_id'] . '" class="editreply gray-600 mr10 ml10">' . Translate::get('edit') . '</a>'; 
+                echo '<a data-item_id="' . $node['reply_item_id'] . '" data-type="editform" data-id="' . $node['reply_id'] . '" class="actreply gray-600 mr10 ml10">' . Translate::get('edit') . '</a>'; 
             }
             
            echo '</div></div>

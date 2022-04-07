@@ -49,16 +49,12 @@ function ekUpload(){
   }
 
   function parseFile(file) {
-
-    console.log(file.name);
     output(
       '<strong>' + encodeURI(file.name) + '</strong>'
     );
     
     // var fileType = file.type;
-    // console.log(fileType);
     let imageName = file.name;
-
     let isGood = (/\.(?=gif|jpg|png|jpeg)/gi).test(imageName);
     if (isGood) {
       document.getElementById('start').classList.add("none");
@@ -77,33 +73,19 @@ function ekUpload(){
     }
   }
 
-
   function uploadFile(file) {
-
     let xhr = new XMLHttpRequest(),
       fileInput = document.getElementById('class-roster-file'),
       pBar = document.getElementById('file-progress'),
-      fileSizeLimit = 2024; // In MB
+      fileSizeLimit = 2024; // bytes
     if (xhr.upload) {
-      // Check if file is less than x MB
-      if (file.size <= fileSizeLimit * 1024 * 1024) {
-
+      if (file.size <= fileSizeLimit * 1024) {
         // File received / failed
         xhr.onreadystatechange = function(e) {
           if (xhr.readyState == 4) {
             // Everything is good!
-
-            // progress.className = (xhr.status == 200 ? "success" : "failure");
-            // document.location.reload(true);
           }
         };
-
-        // Start upload
-        // xhr.open('POST', document.getElementById('file-upload').action, true);
-        // xhr.setRequestHeader('X-File-Name', file.name);
-        // xhr.setRequestHeader('X-File-Size', file.size);
-        // xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-        //  xhr.send(file);
       } else {
         output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
       }
