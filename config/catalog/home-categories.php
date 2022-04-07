@@ -12,7 +12,7 @@ return [
         'url'   => 'internet',
         'sub'   => [
                 [
-                    'title' => Translate::get('Security'),
+                    'title' => Translate::get('security'),
                     'url'   => 'security',
                     'sub'   => '',
                 ],

@@ -48,7 +48,7 @@ return [
         ], [
             'hr'    => true,
         ], [
-            'tl'    => UserData::USER_ZERO_LEVEL,
+            'tl'    => UserData::USER_FIRST_LEVEL,
             'url'   => getUrlByName('favorites'),
             'title' => Translate::get('favorites'),
             'icon'  => 'bi bi-bookmark',
