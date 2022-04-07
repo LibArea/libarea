@@ -8,6 +8,19 @@ use SendEmail, Sass, Html;
 
 class Сonsole
 {
+    public static function index()
+    {
+        $choice  = Request::get('choice');
+        $allowed = ['css', 'topic', 'up', 'tl'];
+        if (!in_array($choice, $allowed)) {
+            redirect('/admin/tools');
+        }
+         
+        self::$choice();
+
+        redirect('/admin/tools');
+    }
+    
     public static function topic()
     {
         СonsoleModel::recalculateTopic();

@@ -8,24 +8,24 @@
 ); ?>
 <div class="box-white">
   <label><?= Translate::get('build'); ?> CSS</label>
-  <form action="<?= getUrlByName('admin.build.css'); ?>">
+  <form action="./update/css">
     <?= Html::sumbit(Translate::get('build')); ?>
   </form>
   <fieldset>
     <label><?= Translate::get('topics'); ?> / <?= Translate::get('posts'); ?></label>
-    <form action="<?= getUrlByName('admin.count.topic'); ?>">
+    <form action="./update/topic">
       <?= Html::sumbit(Translate::get('update.data')); ?>
     </form>
   </fieldset>
   <fieldset>
     <label><?= Translate::get('like'); ?></label>
-    <form action="<?= getUrlByName('admin.count.up'); ?>">
+    <form action="./update/up">
       <?= Html::sumbit(Translate::get('update.data')); ?>
     </form>
   </fieldset>
   <fieldset>
     <label><?= Translate::get('trust.level'); ?></label>
-    <form action="<?= getUrlByName('admin.users.tl'); ?>">
+    <form action="./update/tl">
       <?= Html::sumbit(Translate::get('update.data')); ?>
     </form>
   </fieldset>

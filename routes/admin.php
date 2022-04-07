@@ -37,10 +37,8 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/audits/approved')->module('admin', 'App\Audits', ['audits.ban', 'audits'])->name('admin.audits.ban');
     Route::get('/report')->module('admin', 'App\Audits', ['reports.all', 'reports'])->name('admin.reports');
 
-    Route::get('/update/count/topic')->module('admin', 'App\Сonsole@topic')->name('admin.count.topic'); 
-    Route::get('/update/count/up')->module('admin', 'App\Сonsole@up')->name('admin.count.up');
-    Route::get('/update/user/tl')->module('admin', 'App\Сonsole@tl')->name('admin.users.tl');
-    Route::get('/update/build/css')->module('admin', 'App\Сonsole@css')->name('admin.build.css');    
+    Route::get('/update/{choice}')->module('admin', 'App\Сonsole')->where(['choice' => '[a-z].+']); 
+
     Route::get('/invitations')->module('admin', 'App\Invitations')->name('admin.invitations');
    
     Route::get('/answers/deleted')->controller('Answer\AnswerController', ['answers.deleted', 'answers'])->name('answers.deleted');
