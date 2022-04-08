@@ -9,13 +9,13 @@
 <?php } ?>
 
 <?php if (!empty($data['high_topics'])) { ?>
-  <?= Tpl::import('/_block/sidebar/topic_block', ['data' => $data['high_topics'], 'lang' => 'upper']); ?>
+  <?= Tpl::insert('/_block/sidebar/topic_block', ['data' => $data['high_topics'], 'lang' => 'upper']); ?>
 <?php } ?>
 
 <?php if (!empty($data['low_topics'])) { ?>
-  <?= Tpl::import('/_block/sidebar/topic_block', ['data' => $data['low_topics'], 'lang' => 'subtopics']); ?>
+  <?= Tpl::insert('/_block/sidebar/topic_block', ['data' => $data['low_topics'], 'lang' => 'subtopics']); ?>
 <?php } ?>
 
 <?php if (!empty($data['low_matching'])) { ?>
-  <?= Tpl::import('/_block/sidebar/topic_block', ['data' => $data['low_matching'], 'lang' => 'related']); ?>
+  <?= Tpl::insert('/_block/sidebar/topic_block', ['data' => $data['low_matching'], 'lang' => 'related']); ?>
 <?php } ?>

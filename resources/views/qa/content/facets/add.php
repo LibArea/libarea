@@ -9,7 +9,7 @@ $form->html_form($user['trust_level'], Config::get('form/facet.forma'));
     <h1 class="text-xl"><?= Translate::get('add'); ?> (<?= Translate::get($data['type']); ?>)</h1>
 
     <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
-      <form class="max-w780" action="<?= getUrlByName('content.create', ['type' => $data['type']); ?>" method="post" enctype="multipart/form-data">
+      <form class="max-w780" action="<?= getUrlByName('content.create', ['type' => $data['type']]); ?>" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
         <?= $form->build_form(); ?>

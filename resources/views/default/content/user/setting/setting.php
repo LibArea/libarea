@@ -1,5 +1,5 @@
 <main>
-  <?= Tpl::import('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
+  <?= Tpl::insert('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
 
   <div class="box-white">
     <form class="max-w780" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
@@ -23,7 +23,7 @@
         <div class="help">0 - 11 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
-      <?php Tpl::import('/_block/editor/textarea', [
+      <?php Tpl::insert('/_block/editor/textarea', [
         'title'     => Translate::get('about.me'),
         'type'      => 'text',
         'name'      => 'about',
@@ -62,7 +62,7 @@
         </select>
       </fieldset>
 
-      <?= Tpl::import('/_block/form/radio', [
+      <?= Tpl::insert('/_block/form/radio', [
         'data' => [
           [
             'title'     => Translate::get('endless.scroll'),

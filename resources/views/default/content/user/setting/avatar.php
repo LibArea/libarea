@@ -1,5 +1,5 @@
 <main>
-  <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
+  <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box-white">
     <form method="POST" action="<?= getUrlByName('setting.avatar.edit'); ?>" enctype="multipart/form-data">
@@ -7,8 +7,8 @@
 
       <div class="file-upload mb10" id="file-drag">
         <div class="flex">
-          <?= Html::image($data['user']['avatar'], $data['user']['login'], 'w94 mr20 br-box-gray', 'avatar', 'max'); ?>
-          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
+          <?= Html::image($data['user']['avatar'], $data['user']['login'], 'img-xl', 'avatar', 'max'); ?>
+          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
           <div id="start" class="mt15">
             <input id="file-upload" type="file" name="images" accept="image/*" />
             <div id="notimage" class="none"><?= Translate::get('select.image'); ?></div>

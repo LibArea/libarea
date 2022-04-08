@@ -9,7 +9,7 @@ $form->html_form($user['trust_level'], Config::get('form/auth.register'));
 
     <?= $form->build_form(); ?>
 
-    <?= Tpl::import('/_block/captcha'); ?>
+    <?= Tpl::insert('/_block/captcha'); ?>
 
     <fieldset>
       <?= Html::sumbit(Translate::get('registration')); ?>

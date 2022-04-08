@@ -60,6 +60,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/web/my')->module('catalog', 'App\UserArea', ['web.user.sites', 'sites'])->name('web.user.sites');
     Route::get('/web/my/page/{page?}')->module('catalog', 'App\UserArea', ['web.user.sites', 'sites'])->where(['page' => '[0-9]+']);
 
+    Route::get('/teams/{section?}')->module('teams', 'App\Section')->where(['section' => '[a-z]+']);
+
     Route::get('/setting/{type?}')->controller('User\SettingController')->name('setting'); 
 
     Route::get('/messages')->controller('MessagesController')->name('messages');   

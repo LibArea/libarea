@@ -26,13 +26,13 @@
     <?php } ?>
   </div>
 
-  <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
+  <?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('domain', ['domain' => $data['site']['item_domain']])); ?>
 </main>
 <aside>
   <div class="sticky top-sm">
     <div class="box-white">
-      <?= Tpl::import('/_block/domains', ['data' => $data['domains']]); ?>
+      <?= Tpl::insert('/_block/domains', ['data' => $data['domains']]); ?>
     </div>
   </div>
 </aside>

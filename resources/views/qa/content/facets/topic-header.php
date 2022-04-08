@@ -23,7 +23,7 @@
       ]); ?>
     </div>
 
-    <?= Tpl::import('/_block/facet/focus-users', [
+    <?= Tpl::insert('/_block/facet/focus-users', [
       'user'              => $user,
       'topic_focus_count' => $topic['facet_focus_count'],
       'focus_users'       => $data['focus_users'] ?? '',
@@ -35,7 +35,7 @@
   <p class="m0 text-xl mb-none"><?= Translate::get($data['type']); ?></p>
   <ul class="nav">
 
-    <?= Tpl::import(
+    <?= Tpl::insert(
       '/_block/navigation/nav',
       [
         'type' => $data['sheet'],

@@ -39,7 +39,7 @@
       <?php } ?>
   </div>
 <?php } else { ?>
-  <?= Tpl::import('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.dialogs'), 'icon' => 'bi-envelope']); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.dialogs'), 'icon' => 'bi-envelope']); ?>
 <?php } ?>
 </main>
 <aside>

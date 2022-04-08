@@ -1,6 +1,6 @@
 <div class="box-flex-white">
   <ul class="nav">
-    <?= Tpl::import('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.favorites')]); ?>
+    <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.favorites')]); ?>
   </ul>
 
   <div class="text-sm">

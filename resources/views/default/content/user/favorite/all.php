@@ -1,5 +1,5 @@
 <main>
-  <?= Tpl::import('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
+  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
 
   <?php if (!empty($data['tags'])) { ?>
     <div class="mb15">
@@ -36,9 +36,9 @@
           </a>
         <?php } ?>
 
-        <?php if (!empty($fav['action_type']) == 'answer') {
-          echo Content::text($fav['answer_content'], 'text');
-        } ?>
+        <?php if ($fav['action_type'] == 'answer') { ?>
+         <?= Content::text($fav['answer_content'], 'text'); ?>
+        <?php } ?>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
           <i class="bi-trash red"></i>
@@ -63,7 +63,7 @@
       </div>
     <?php } ?>
   <?php } else { ?>
-    <?= Tpl::import('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.favorites'), 'icon' => 'bi-bookmark']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.favorites'), 'icon' => 'bi-bookmark']); ?>
   <?php } ?>
 </main>
 <aside>

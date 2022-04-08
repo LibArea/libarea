@@ -28,7 +28,7 @@ foreach ($data['answers'] as $answer) {
               </span>
             <?php } ?>
             <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
-            <?= Tpl::import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
+            <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
           </div>
           <div class="content-body">
             <?= Content::text($answer['content'], 'text'); ?>

@@ -14,7 +14,7 @@
       </fieldset>
 
       <?php if (!empty($data['blog'])) { ?>
-        <?= Tpl::import('/_block/form/select/blog', [
+        <?= Tpl::insert('/_block/form/select/blog', [
           'data'        => $data,
           'action'      => 'add',
           'type'        => 'blog',
@@ -23,7 +23,7 @@
       <?php } ?>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <?= Tpl::import('/_block/form/select/section', [
+        <?= Tpl::insert('/_block/form/select/section', [
           'data'          => $data['facets'],
           'type'          => 'section',
           'action'        => 'add',
@@ -33,7 +33,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= Tpl::import('/_block/editor/editor', ['height'  => '250px', 'type' => 'page', 'id' => 0]); ?>
+      <?= Tpl::insert('/_block/editor/editor', ['height'  => '250px', 'type' => 'page', 'id' => 0]); ?>
 
       <?= Html::sumbit(Translate::get('create')); ?>
     </form>

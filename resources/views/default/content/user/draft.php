@@ -1,7 +1,7 @@
 <main>
   <div class="box-flex-white">
     <ul class="nav">
-      <?= Tpl::import('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.favorites')]); ?>
+      <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.favorites')]); ?>
     </ul>
   </div>
 
@@ -18,7 +18,7 @@
       <?php } ?>
     </div>
   <?php } else { ?>
-    <?= Tpl::import('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.content'), 'icon' => 'bi-journal-richtext']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.content'), 'icon' => 'bi-journal-richtext']); ?>
   <?php } ?>
 
 </main>

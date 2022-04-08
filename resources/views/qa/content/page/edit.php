@@ -22,7 +22,7 @@
       <div class="help">3 - 32 <?= Translate::get('characters'); ?></div>  
     </fieldset>
 
-      <?= Tpl::import('/_block/form/select/blog', [
+      <?= Tpl::insert('/_block/form/select/blog', [
         'user'         => $user,
         'data'        => $data,
         'action'      => 'edit',
@@ -31,7 +31,7 @@
       ]); ?>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <?= Tpl::import('/_block/form/select/section', [
+        <?= Tpl::insert('/_block/form/select/section', [
           'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
@@ -44,9 +44,9 @@
         ]); ?>
       <?php } ?>
 
-      <?= Tpl::import('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'page-telo', 'id' => $post['post_id']]); ?>
+      <?= Tpl::insert('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'page-telo', 'id' => $post['post_id']]); ?>
 
-      <?= Tpl::import('/_block/form/select/user', [
+      <?= Tpl::insert('/_block/form/select/user', [
         'uid'           => $user,
         'user'          => $data['user'],
         'action'        => 'user',

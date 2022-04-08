@@ -1,7 +1,7 @@
 <main>
   <div class="box-flex-white relative">
     <ul class="nav">
-       <?= Tpl::import('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.home')]); ?>
+       <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.home')]); ?>
     </ul>
 
     <div class="trigger">
@@ -10,7 +10,7 @@
     <div class="dropdown tooltip"><?= Translate::get($data['sheet'] . '.info'); ?></div>
   </div>
 
-  <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
+  <?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>
   <?php if ($user['scroll'] == 0) { ?>
     <div class="mb15">
       <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
@@ -23,7 +23,7 @@
 
 <aside>
   <?php if ($user['id'] == 0) { ?>
-    <?= Tpl::import('/_block/sidebar/login', ['user' => $user]); ?>
+    <?= Tpl::insert('/_block/sidebar/login', ['user' => $user]); ?>
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>

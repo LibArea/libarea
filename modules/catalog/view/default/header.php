@@ -3,7 +3,7 @@ Request::getHead()->addStyles('/assets/css/style.css?08');
 Request::getHead()->addStyles('/assets/css/catalog.css?08');
 ?>
 
-<?= Tpl::insert('meta', ['meta' => $meta]); ?>
+<?= Tpl::insert('/meta', ['meta' => $meta]); ?>
 
 <body<?php if (Request::getCookie('dayNight') == 'dark') { ?>class="dark" <?php } ?>>
   <header>

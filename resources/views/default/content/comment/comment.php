@@ -35,7 +35,7 @@ foreach ($answer as  $comment) {
             <span class="mr5 ml5 gray-600 lowercase">
               <?= Html::langDate($comment['date']); ?>
             </span>
-            <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
+            <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
           </div>
           <a href="<?= getUrlByName('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>#comment_<?= $comment['comment_id']; ?>">
             <?= $comment['post_title']; ?>

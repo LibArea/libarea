@@ -9,7 +9,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
     <ul class="nav">
 
-      <?= Tpl::import(
+      <?= Tpl::insert(
         '/_block/navigation/nav',
         [
           'type' => $data['sheet'],
@@ -44,8 +44,8 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
 
       <div class="file-upload mb10" id="file-drag">
         <div class="flex">
-          <?= Html::image($fs['facet_img'], $fs['facet_title'], 'w94 h94 mr15', 'logo', 'max'); ?>
-          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
+          <?= Html::image($fs['facet_img'], $fs['facet_title'], 'img-xl', 'logo', 'max'); ?>
+          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
           <div id="start" class="mt15">
             <input id="file-upload" type="file" name="images" accept="image/*" />
             <div id="notimage" class="none"><?= Translate::get('select.image');?></div>
@@ -98,7 +98,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
 
       <?php if ($fs['facet_type'] == 'topic' && UserData::checkAdmin()) { ?>
 
-        <?= Tpl::import('/_block/form/radio', [
+        <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
               'title' => Translate::get('root'),
@@ -109,7 +109,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           ]
         ]); ?>
 
-        <?= Tpl::import('/_block/form/select/low-facets', [
+        <?= Tpl::insert('/_block/form/select/low-facets', [
           'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
@@ -162,7 +162,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <div class="mb20 help">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
       <?php if ($fs['facet_type'] == 'topic') { ?>
-        <?= Tpl::import('/_block/form/select/related-posts', [
+        <?= Tpl::insert('/_block/form/select/related-posts', [
           'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
@@ -171,7 +171,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           'help'          => Translate::get('necessarily'),
         ]); ?>
 
-        <?= Tpl::import('/_block/form/select/low-matching-facets', [
+        <?= Tpl::insert('/_block/form/select/low-matching-facets', [
           'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
@@ -195,8 +195,8 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <?php } ?>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <?= Tpl::import('/_block/form/select/content-tl', ['user' => $user, 'data' => $fs['facet_tl']]); ?>
-        <?= Tpl::import('/_block/form/select/user', [
+        <?= Tpl::insert('/_block/form/select/content-tl', ['user' => $user, 'data' => $fs['facet_tl']]); ?>
+        <?= Tpl::insert('/_block/form/select/user', [
           'uid'     => $user,
           'user'    => $data['user'],
           'action'  => 'user',
@@ -205,7 +205,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           'help'    => Translate::get('necessarily'),
         ]); ?>
  
-        <?= Tpl::import('/_block/facet/facet-type', ['type' => $fs['facet_type'], 'tl' => $user['trust_level']]); ?>
+        <?= Tpl::insert('/_block/facet/facet-type', ['type' => $fs['facet_type'], 'tl' => $user['trust_level']]); ?>
       <?php } ?>
       <fieldset>
         <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">

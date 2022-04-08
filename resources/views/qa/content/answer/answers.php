@@ -3,12 +3,12 @@
 
   <?php if (!empty($data['answers'])) { ?>
     <div class="box">
-      <?= Tpl::import('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
+      <?= Tpl::insert('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
 
   <?php } else { ?>
-    <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 </main>
 <aside>
@@ -16,4 +16,4 @@
     <?= Translate::get('answers.desc'); ?>
   </div>
 </aside>
-<?= Tpl::import('/_block/js-msg-flag', ['uid' => $user['id']]); ?>
+<?= Tpl::insert('/_block/js-msg-flag', ['uid' => $user['id']]); ?>

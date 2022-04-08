@@ -5,7 +5,7 @@ $form->adding(['name' => 'setting_email_appealed', 'type' => 'selected', 'var' =
 $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
 ?>
 <main class="col-two">
-  <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
+  <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="bg-white box">
     <form action="<?= getUrlByName('setting.notif.edit'); ?>" method="post">

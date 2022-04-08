@@ -3,12 +3,12 @@
 
   <?php if (!empty($data['comments'])) { ?>
     <div class="box">
-      <?= Tpl::import('/content/comment/comment', ['answer' => $data['comments'], 'user' => $user]); ?>
+      <?= Tpl::insert('/content/comment/comment', ['answer' => $data['comments'], 'user' => $user]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/comments'); ?>
 
   <?php } else { ?>
-    <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi bi-info-lg']); ?>
   <?php } ?>
 </main>
 <aside>
@@ -16,4 +16,4 @@
     <?= Translate::get('comments.desc'); ?>
   </div>
 </aside>
-<?= Tpl::import('/_block/js-msg-flag', ['uid' => $user['id']]); ?>
+<?= Tpl::insert('/_block/js-msg-flag', ['uid' => $user['id']]); ?>

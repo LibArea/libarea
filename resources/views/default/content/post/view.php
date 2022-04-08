@@ -31,7 +31,7 @@
         </div>
 
         <h1><?= $post['post_title']; ?>
-          <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
+          <?= Tpl::insert('/content/post/post-title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm lowercase flex gray-600">
           <?= Html::langDate($post['post_date']); ?>
@@ -72,7 +72,7 @@
                 <?php } ?>
               </a>
             <?php } ?>
-            <?= Tpl::import('/_block/show-ip', ['ip' => $post['post_ip'], 'user' => $user, 'publ' => $post['post_published']]); ?>
+            <?= Tpl::insert('/_block/show-ip', ['ip' => $post['post_ip'], 'user' => $user, 'publ' => $post['post_published']]); ?>
           <?php } ?>
         </div>
       </div>
@@ -104,7 +104,7 @@
             </div>
           </div>
         <?php } ?>
-        <?= Tpl::import('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
+        <?= Tpl::insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
       </div>
 
       <div class="br-box-gray flex items-center mb5">
@@ -192,7 +192,7 @@
           <form action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
 
-            <?= Tpl::import('/_block/editor/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
+            <?= Tpl::insert('/_block/editor/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
 
             <div class="clear pt5">
               <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
@@ -213,18 +213,18 @@
   <div id="comment"></div>
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_feature'] == 0) {
-      Tpl::import('/_block/comments-view', ['data' => $data, 'post' => $post, 'user' => $user]);
+      Tpl::insert('/_block/comments-view', ['data' => $data, 'post' => $post, 'user' => $user]);
       if ($post['post_closed'] == 1) {
-        echo Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('post.closed'), 'icon' => 'bi-door-closed']);
+        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('post.closed'), 'icon' => 'bi-door-closed']);
       }
     } else {
-      Tpl::import('/_block/questions-view', ['data' => $data, 'post' => $post, 'user' => $user]);
+      Tpl::insert('/_block/questions-view', ['data' => $data, 'post' => $post, 'user' => $user]);
       if ($post['post_closed'] == 1) {
-        echo Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('question.closed'), 'icon' => 'bi-door-closed']);
+        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('question.closed'), 'icon' => 'bi-door-closed']);
       }
     }
   } else {
-    echo Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('this.draft'), 'icon' => 'bi-door-closed']);
+    echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('this.draft'), 'icon' => 'bi-door-closed']);
   } ?>
 </main>
 <aside>
@@ -257,7 +257,7 @@
     </div>
   <?php } ?>
   <div class="center box-white">
-    <?= Tpl::import('/share'); ?>
+    <?= Tpl::insert('/share'); ?>
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="box-white sticky top-sm">
@@ -316,4 +316,4 @@
     }
   });
 </script>
-<?= Tpl::import('/_block/js-msg-flag', ['uid' => $user['id']]); ?>
+<?= Tpl::insert('/_block/js-msg-flag', ['uid' => $user['id']]); ?>

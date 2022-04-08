@@ -8,7 +8,7 @@
 
   <div class="box-flex">
     <ul class="nav">
-      <?= Tpl::import(
+      <?= Tpl::insert(
         '/_block/navigation/nav',
         [
           'type' => $data['sheet'],

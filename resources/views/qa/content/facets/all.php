@@ -9,7 +9,7 @@
   <div class="box-flex">
     <ul class="nav">
 
-      <?= Tpl::import(
+      <?= Tpl::insert(
         '/_block/navigation/nav',
         [
           'type' => $data['sheet'],
@@ -62,14 +62,14 @@
   <div>
     <?php if (!empty($data['facets'])) { ?>
       <?php if ($data['type'] == 'blog') { ?>
-        <?= Tpl::import('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
+        <?= Tpl::insert('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
       <?php } else { ?>
         <div class="flex flex-wrap">
-          <?= Tpl::import('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
+          <?= Tpl::insert('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
         </div>
       <?php } ?>
     <?php } else { ?>
-      <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.content'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.content'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
   </div>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>

@@ -3,7 +3,7 @@
   foreach ($data['posts'] as $post) {
     $n++; ?>
     <?php if (!UserData::checkActiveUser() && $n == 6) { ?>
-      <?= Tpl::import('/_block/no-login-screensaver'); ?>
+      <?= Tpl::insert('/_block/no-login-screensaver'); ?>
     <?php } ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="box-white article_<?= $post['post_id']; ?>">
@@ -30,7 +30,7 @@
         <div class="w-auto">
           <a class="black" href="<?= $post_url; ?>">
             <h2><?= $post['post_title']; ?>
-            <?= Tpl::import('/content/post/post-title', ['post' => $post]); ?>
+            <?= Tpl::insert('/content/post/post-title', ['post' => $post]); ?>
             </h2>
           </a>
           <div class="lowercase">
@@ -80,6 +80,6 @@
     </div>
   <?php } ?>
 <?php } else { ?>
-  <?= Tpl::import('/_block/recommended-topics', ['data' => $data]); ?>
-  <?= Tpl::import('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.posts'), 'icon' => 'bi-journal-richtext']); ?>
+  <?= Tpl::insert('/_block/recommended-topics', ['data' => $data]); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.posts'), 'icon' => 'bi-journal-richtext']); ?>
 <?php } ?>

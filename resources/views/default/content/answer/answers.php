@@ -1,7 +1,7 @@
 <main>
   <div class="box-flex-white relative">
     <ul class="nav">
-      <?= Tpl::import('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.answers')]); ?>
+      <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.answers')]); ?>
     </ul>
     <div class="trigger">
       <i class="bi-info-square gray-600"></i>
@@ -11,11 +11,11 @@
 
   <?php if (!empty($data['answers'])) { ?>
     <div class="box-white">
-      <?= Tpl::import('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
+      <?= Tpl::insert('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
   <?php } else { ?>
-    <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 </main>
 <aside>
@@ -23,4 +23,4 @@
     <?= Translate::get('answers.desc'); ?>
   </div>
 </aside>
-<?= Tpl::import('/_block/js-msg-flag', ['uid' => $user['id']]); ?>
+<?= Tpl::insert('/_block/js-msg-flag', ['uid' => $user['id']]); ?>

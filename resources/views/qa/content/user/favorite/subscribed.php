@@ -1,7 +1,7 @@
 <main class="col-two">
-  <?= Tpl::import('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
+  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
   <div class="mt10">
-    <?= Tpl::import('/content/post/post', ['data' => $data, 'user' => $user]); ?>
+    <?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>
   </div>
 </main>
 <aside>

@@ -34,7 +34,7 @@
                     </span>
                   <?php } ?>
                   <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
-                  <?= Tpl::import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
+                  <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
                 </div>
                 <div class="max-w780 ind-first-p">
                   <?= Content::text($answer['answer_content'], 'text'); ?>
@@ -144,7 +144,7 @@
                       <a class="gray-600 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi-arrow-up"></i></a>
                     <?php } ?>
                     <a class="gray-600 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi-hash"></i></a>
-                    <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
+                    <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
                   </div>
                  <div class="max-w780 ind-first-p">  
                   <?= Content::text($comment['comment_content'], 'text'); ?>
@@ -185,9 +185,9 @@
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
     <?php if ($user['id'] > 0) { ?>
-      <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
     <?php } else { ?>
-      <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.auth.login'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.auth.login'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
   <?php } ?>
 <?php } ?>

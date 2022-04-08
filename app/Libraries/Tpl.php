@@ -41,11 +41,6 @@ class Tpl
         return hleb_include_template(self::agTheme($template), $params);
     }
 
-    public static function import($template, array $params = [])
-    {
-        insertTemplate(self::agTheme($template), $params);
-    }
-
     public static function insert(string $hlTemplatePath, array $params = [])
     {
         extract($params);

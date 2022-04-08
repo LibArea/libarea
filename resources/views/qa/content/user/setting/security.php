@@ -3,7 +3,7 @@ $form = new Forms();
 $form->html_form($user['trust_level'], Config::get('form/user-security'));
 ?>
 <main class="col-two">
-  <?= Tpl::import('/content/user/setting/nav', ['data' => $data]); ?>
+  <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box-white">
     <form action="<?= getUrlByName('setting.security.edit'); ?>" method="post">

@@ -16,14 +16,14 @@
         <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>
       </fieldset>
 
-      <?= Tpl::import('/_block/form/select/blog', [
+      <?= Tpl::insert('/_block/form/select/blog', [
         'data'        => $data,
         'action'      => 'edit',
         'type'        => 'blog',
         'title'       => Translate::get('blogs'),
       ]); ?>
 
-      <?= Tpl::import('/_block/form/select/select', [
+      <?= Tpl::insert('/_block/form/select/select', [
         'data'          => $data,
         'action'        => 'edit',
         'type'          => 'topic',
@@ -70,11 +70,11 @@
         </div>
       </div>
 
-      <?= Tpl::import('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
+      <?= Tpl::insert('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
       <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) { ?>
         <?php if ($post['post_draft'] == 1) { ?>
-          <?= Tpl::import('/_block/form/radio', [
+          <?= Tpl::insert('/_block/form/radio', [
             'data' => [
               [
                 'title' => Translate::get('draft'),
@@ -86,12 +86,12 @@
         <?php } ?>
       <?php } ?>
 
-      <?= Tpl::import('/_block/form/select/content-tl', [
+      <?= Tpl::insert('/_block/form/select/content-tl', [
         'data' => $post['post_tl'],
         'user' => $user
       ]); ?>
 
-      <?= Tpl::import('/_block/form/radio', [
+      <?= Tpl::insert('/_block/form/radio', [
         'data' => [
           [
             'title' => Translate::get('format.Q&A'),
@@ -106,7 +106,7 @@
         ]
       ]); ?>
 
-      <?= Tpl::import('/_block/form/radio', [
+      <?= Tpl::insert('/_block/form/radio', [
         'data' => [
           [
             'title'     => Translate::get('translation'),
@@ -117,7 +117,7 @@
       ]); ?>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <?= Tpl::import('/_block/form/radio', [
+        <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
               'title'   => Translate::get('pin'),
@@ -127,7 +127,7 @@
           ]
         ]); ?>
 
-        <?= Tpl::import('/_block/form/select/user', [
+        <?= Tpl::insert('/_block/form/select/user', [
           'uid'           => $user,
           'user'          => $data['user'],
           'action'        => 'user',
@@ -137,7 +137,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= Tpl::import('/_block/form/select/related-posts', [
+      <?= Tpl::insert('/_block/form/select/related-posts', [
         'data'          => $data,
         'action'        => 'edit',
         'type'          => 'post',

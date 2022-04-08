@@ -23,5 +23,5 @@
     <?php } ?>
   </div>
 <?php } else { ?>
-  <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
 <?php } ?>

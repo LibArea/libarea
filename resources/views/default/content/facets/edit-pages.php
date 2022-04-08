@@ -5,7 +5,7 @@
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
     <ul class="nav">
 
-      <?= Tpl::import(
+      <?= Tpl::insert(
         '/_block/navigation/nav',
         [
           'type' => $data['sheet'],
@@ -57,7 +57,7 @@
       <?php } ?>
 
     <?php } else { ?>
-      <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no')]); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no')]); ?>
     <?php } ?>
   </div>
 </main>

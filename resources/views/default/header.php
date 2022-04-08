@@ -3,7 +3,7 @@ Request::getHead()->addStyles('/assets/css/style.css?08');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
-<?= Tpl::import('/meta', ['meta' => $meta]); ?>
+<?= Tpl::insert('/meta', ['meta' => $meta]); ?>
 
 <body class="body-bg-fon<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?><?php if (Request::getCookie('menuYesNo') == 'menuno') { ?> menuno<?php } ?>">
   <header class="d-header">
@@ -72,7 +72,7 @@ $facet  = $data['facet'] ?? false; ?>
                 <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
-                <?= Tpl::import('/_block/navigation/menu', ['type' => $type, 'user' => $user, 'list' => Config::get('navigation/menu.user')]); ?>
+                <?= Tpl::insert('/_block/navigation/menu', ['type' => $type, 'user' => $user, 'list' => Config::get('navigation/menu.user')]); ?>
               </ul>
             </div>
           </div>
@@ -90,4 +90,4 @@ $facet  = $data['facet'] ?? false; ?>
 
   <div id="contentWrapper" class="wrap">
 
-    <?= Tpl::import('/menu', ['data' => $data, 'user' => $user]); ?>
+    <?= Tpl::insert('/menu', ['data' => $data, 'user' => $user]); ?>

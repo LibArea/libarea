@@ -13,7 +13,7 @@
       </fieldset>
 
       <?php if (!empty($data['blog'])) { ?>
-        <?= Tpl::import('/_block/form/select/blog', [
+        <?= Tpl::insert('/_block/form/select/blog', [
           'data'        => $data,
           'action'      => 'add',
           'type'        => 'blog',
@@ -21,7 +21,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= Tpl::import('/_block/form/select/select', [
+      <?= Tpl::insert('/_block/form/select/select', [
         'data'          => $data['facets'],
         'type'          => 'topic',
         'action'        => 'add',
@@ -58,10 +58,10 @@
         </div>
       </div>
 
-      <?= Tpl::import('/_block/editor/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
+      <?= Tpl::insert('/_block/editor/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
 
       <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) { ?>
-        <?= Tpl::import('/_block/form/radio',  [
+        <?= Tpl::insert('/_block/form/radio',  [
           'data' => [
             [
               'title' => Translate::get('draft'),
@@ -70,12 +70,12 @@
           ],
         ]); ?>
 
-        <?= Tpl::import('/_block/form/select/content-tl', [
+        <?= Tpl::insert('/_block/form/select/content-tl', [
           'user' => $user,
           'data' => null
         ]); ?>
 
-        <?= Tpl::import('/_block/form/radio', [
+        <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
               'title' => Translate::get('format.Q&A'),
@@ -89,7 +89,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= Tpl::import('/_block/form/radio',  [
+      <?= Tpl::insert('/_block/form/radio',  [
         'data' => [
           [
             'title' => Translate::get('translation'),
@@ -99,7 +99,7 @@
       ]); ?>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <?= Tpl::import('/_block/form/radio', [
+        <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
               'title'   => Translate::get('pin'),
@@ -109,7 +109,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= Tpl::import('/_block/form/select/related-posts', [
+      <?= Tpl::insert('/_block/form/select/related-posts', [
         'data'          => [],
         'action'        => 'add',
         'type'          => 'post',

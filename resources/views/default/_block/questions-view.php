@@ -19,7 +19,7 @@
                     <?php if (empty($answer['edit'])) { ?>
                       (<?= Translate::get('ed'); ?>.)
                     <?php } ?>
-                    <?= Tpl::import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
+                    <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
                   </div>
                   <a class="qa-login" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
                 </div>
@@ -80,7 +80,7 @@
                   <span class="lowercase gray">
                     &nbsp; <?= Html::langDate($comment['date']); ?>
                   </span>
-                  <?= Tpl::import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
+                  <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
                 </span>
 
                 <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
@@ -122,19 +122,19 @@
   </div>
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
-    <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.answers'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.answers'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 <?php } ?>
 
 <?php if (!empty($otvet)) { ?>
-  <?= Tpl::import('/_block/no-content', ['type' => 'small', 'text' => Translate::get('you.answered'), 'icon' => 'bi-info-lg']); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('you.answered'), 'icon' => 'bi-info-lg']); ?>
 <?php } else { ?>
   <?php if ($user['id'] > 0) { ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
 
       <form class="mb15" action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
-        <?= Tpl::import('/_block/editor/editor', [
+        <?= Tpl::insert('/_block/editor/editor', [
           'height'  => '250px',
           'id'      => $post['post_id'],
           'type'    => 'answer',

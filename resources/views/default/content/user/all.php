@@ -9,7 +9,7 @@
   <div class="bg-white box-flex br-box-gray">
     <ul class="nav">
 
-      <?= Tpl::import(
+      <?= Tpl::insert(
         '/_block/navigation/nav',
         [
           'type' => $data['sheet'],
