@@ -1,10 +1,12 @@
 <?= Tpl::insert('/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 
 <main>
-  <div class="box-white relative">
-    <h1><?= __('teams'); ?></h1>
-
-    <i><?= __('being.developed'); ?></i>
+  <div class="box-flex-white">
+    <p class="m0"><?= __('teams'); ?></p>
+    <a href="<?= getUrlByName('team.add'); ?>" class="btn btn-primary"><?= __('add'); ?></a>
+  </div>
+  <div class="bg-white mb15">
+    <i>Все команды добавленные мною...</i>
   </div>
 </main> 
 

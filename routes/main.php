@@ -28,11 +28,13 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 Route::get('/users/setting/notification/edit')->controller('User\SettingController@notificationEdit')->name('setting.notif.edit');
                 
                 // Add / Edit: post | comment | answer | facet | web
-                Route::get('/web/create')->module('catalog', 'App\Add@create')->name('create.web');
+                Route::get('/web/create')->module('catalog', 'App\Add@create')->name('web.create');
                 Route::get('/web/reply/create')->module('catalog', 'App\Reply@create')->name('reply.create');
                 Route::get('/web/reply/edit')->module('catalog', 'App\Reply@edit')->name('reply.edit');
+                Route::get('/web/change')->module('catalog', 'App\Edit@edit')->name('web.change');
+                Route::get('/team/change')->module('teams', 'App\Teams@create')->name('team.create');
+                
                 Route::get('/create/{type}')->controller('ActionController@create')->where(['type' => '[a-z]+'])->name('content.create');
-                Route::get('/change/web')->module('catalog', 'App\Edit@edit')->name('change.web');
                 Route::get('/change/{type}')->controller('ActionController@change')->where(['type' => '[a-z]+'])->name('content.change');
             Route::endProtect();
     Route::endType();
@@ -60,7 +62,9 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/web/my')->module('catalog', 'App\UserArea', ['web.user.sites', 'sites'])->name('web.user.sites');
     Route::get('/web/my/page/{page?}')->module('catalog', 'App\UserArea', ['web.user.sites', 'sites'])->where(['page' => '[0-9]+']);
 
-    Route::get('/teams/{section?}')->module('teams', 'App\Section')->where(['section' => '[a-z]+']);
+    Route::get('/teams')->module('teams', 'App\Teams')->name('teams');
+    Route::get('/teams/add')->module('teams', 'App\Teams@add')->name('team.add');
+    Route::get('/teams/edit/{id}')->module('teams', 'App\Teams@edit')->where(['id' => '[0-9]+'])->name('team.edit');
 
     Route::get('/setting/{type?}')->controller('User\SettingController')->where(['section' => '[a-z]+'])->name('setting'); 
 

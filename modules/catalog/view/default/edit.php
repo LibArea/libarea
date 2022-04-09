@@ -39,7 +39,7 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
         <span class="add-favicon text-sm" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
       </fieldset>
 
-      <form action="<?= getUrlByName('change.web'); ?>" method="post">
+      <form action="<?= getUrlByName('web.change'); ?>" method="post">
         <?= csrf_field() ?>
 
         <?= includeTemplate('/view/default/_block/category', ['data' => $data, 'action' => 'edit']); ?>

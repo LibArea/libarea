@@ -7,6 +7,7 @@
 CREATE TABLE `teams` (
   `id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
+  `content` text,
   `user_id` int(11) NOT NULL,
   `action_type` varchar(32) NOT NULL COMMENT 'тип команды, к чему относится?',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
