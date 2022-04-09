@@ -1,5 +1,5 @@
 <fieldset>
-  <label><?= Translate::get('blog'); ?></label>
+  <label><?= __('blog'); ?></label>
   <input name="blog_select" id="blog_id">
 </fieldset>
 

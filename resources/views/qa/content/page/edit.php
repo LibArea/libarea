@@ -2,24 +2,24 @@
 <main class="w-100">
   <div class="bg-white items-center justify-between p15 mb15">
 
-    <a href="/"><?= Translate::get('home'); ?></a> /
+    <a href="/"><?= __('home'); ?></a> /
     <span class="red">
-      <?= sprintf(Translate::get('edit.option'), Translate::get('page')); ?>
+      <?= sprintf(__('edit.option'), __('page')); ?>
     </span>
     
     <form action="<?= getUrlByName('content.change', ['type' => 'page']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
     <fieldset>
-      <label for="post_title"><?= Translate::get('heading'); ?></label>
+      <label for="post_title"><?= __('heading'); ?></label>
       <input minlength="6" maxlength="250" value="<?= $post['post_title']; ?>" type="text" required="" name="post_title">
-      <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>  
+      <div class="help">6 - 250 <?= __('characters'); ?></div>  
     </fieldset>
     
     <fieldset>
-      <label for="post_slug"><?= Translate::get('Slug (URL)'); ?></label>
+      <label for="post_slug"><?= __('Slug (URL)'); ?></label>
       <input minlength="3" maxlength="32" value="<?= $post['post_slug']; ?>" type="text" required="" name="post_slug">
-      <div class="help">3 - 32 <?= Translate::get('characters'); ?></div>  
+      <div class="help">3 - 32 <?= __('characters'); ?></div>  
     </fieldset>
 
       <?= Tpl::insert('/_block/form/select/blog', [
@@ -27,7 +27,7 @@
         'data'        => $data,
         'action'      => 'edit',
         'type'        => 'blog',
-        'title'       => Translate::get('blogs'),
+        'title'       => __('blogs'),
       ]); ?>
 
       <?php if (UserData::checkAdmin()) { ?>
@@ -36,10 +36,10 @@
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'section',
-          'title'         => Translate::get('section'),
+          'title'         => __('section'),
           'required'      => false,
           'maximum'       => 1,
-          'help'          => Translate::get('necessarily'),
+          'help'          => __('necessarily'),
           'red'           => 'red'
         ]); ?>
       <?php } ?>
@@ -51,8 +51,8 @@
         'user'          => $data['user'],
         'action'        => 'user',
         'type'          => 'user',
-        'title'         => Translate::get('author'),
-        'help'          => Translate::get('necessarily'),
+        'title'         => __('author'),
+        'help'          => __('necessarily'),
       ]); ?>
 
       <div class="mb20">
@@ -60,7 +60,7 @@
           <input type="hidden" name="draft" id="draft" value="1">
         <?php } ?>
         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
-        <?= Html::sumbit(Translate::get('edit')); ?>
+        <?= Html::sumbit(__('edit')); ?>
       </div>
     </form>
   </div>

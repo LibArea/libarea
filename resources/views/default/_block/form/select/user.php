@@ -1,6 +1,6 @@
 <?php if ($uid['trust_level'] > 4) { ?>
   <fieldset>
-    <label><?= Translate::get('author'); ?></label>
+    <label><?= __('author'); ?></label>
     <input name='user_id' id="user_id">
   </fieldset>
 

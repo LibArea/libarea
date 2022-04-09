@@ -10,7 +10,7 @@ foreach ($answer as  $comment) {
             <?= Content::text($comment['content'], 'text'); ?>
             — <?= $comment['login']; ?>
             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action right text-sm">
-              <?= Translate::get('recover'); ?>
+              <?= __('recover'); ?>
             </a>
           </span>
         </li>
@@ -49,16 +49,16 @@ foreach ($answer as  $comment) {
 
           <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 mr10 ml10">
-              <?= Translate::get('edit'); ?>
+              <?= __('edit'); ?>
             </a>
             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600 mr5 ml5">
-              <?= Translate::get('remove'); ?>
+              <?= __('remove'); ?>
             </a>
           <?php } ?>
 
           <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml15">
-              <i title="<?= Translate::get('report'); ?>" class="bi-flag"></i>
+              <i title="<?= __('report'); ?>" class="bi-flag"></i>
             </a>
           <?php } ?>
         </div>

@@ -7,7 +7,7 @@
       [
         'id' => 'add',
         'url' => getUrlByName($data['type'] . '.add'),
-        'name' => Translate::get('add'),
+        'name' => __('add'),
         'icon' => 'bi bi-plus-lg'
       ]
     ]
@@ -18,10 +18,10 @@
   <form action="<?= getUrlByName('admin.word.create'); ?>" method="post">
     <?= csrf_field() ?>
     <fieldset>
-      <label for="word"><?= Translate::get('word'); ?></label>
+      <label for="word"><?= __('word'); ?></label>
       <input type="text" name="word">
     </fieldset>
-    <?= Html::sumbit(Translate::get('add')); ?>
+    <?= Html::sumbit(__('add')); ?>
   </form>
 </div>
 </main>

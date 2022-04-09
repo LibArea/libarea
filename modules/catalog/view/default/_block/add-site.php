@@ -1,7 +1,7 @@
 <li>
   <a href="<?= getUrlByName('web.user.sites'); ?>">
     <i class="bi-plus-lg"></i>
-    <?= Translate::get('web.user.sites.view'); ?>
+    <?= __('web.user.sites.view'); ?>
     <?php if ($data['user_count_site'] != 0) { ?>
       (<?= $data['user_count_site']; ?>)
     <?php } ?>
@@ -12,7 +12,7 @@
     <li>
       <a href="<?= getUrlByName('web.add'); ?>">
         <i class="bi-plus-lg"></i>
-        <?= sprintf(Translate::get('add.option'), mb_strtolower(Translate::get('website'))); ?>
+        <?= sprintf(__('add.option'), mb_strtolower(__('website'))); ?>
       </a>
     </li>
   <?php } ?>

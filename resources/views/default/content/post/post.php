@@ -9,7 +9,7 @@
     <div class="box-white article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') { ?>
         <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet-50 text-sm right">
-          <?= Translate::get('unsubscribe'); ?>
+          <?= __('unsubscribe'); ?>
         </div>
       <?php } ?>
       <div class="flex mb10 relative items-center">
@@ -81,5 +81,5 @@
   <?php } ?>
 <?php } else { ?>
   <?= Tpl::insert('/_block/recommended-topics', ['data' => $data]); ?>
-  <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.posts'), 'icon' => 'bi-journal-richtext']); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.posts'), 'icon' => 'bi-journal-richtext']); ?>
 <?php } ?>

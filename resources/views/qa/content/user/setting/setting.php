@@ -8,7 +8,7 @@
       <fieldset>
         <?= Html::image($data['user']['avatar'], $data['user']['login'], 'mr5 ml5 ava', 'avatar', 'small'); ?>
         <span class="mr5 ml5">
-          <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+          <a title="<?= __('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
             <?= $data['user']['login']; ?>
           </a>
         </span>
@@ -20,53 +20,53 @@
       </fieldset>
 
       <fieldset class="max-w300">
-        <label for="name"><?= Translate::get('name'); ?></label>
+        <label for="name"><?= __('name'); ?></label>
         <input maxlength="11" value="<?= $data['user']['name']; ?>" type="text" name="name">
-        <div class="help">0 - 11 <?= Translate::get('characters'); ?></div>  
+        <div class="help">0 - 11 <?= __('characters'); ?></div>  
       </fieldset>
 
       <?php Tpl::insert('/_block/editor/textarea', [
-        'title'     => Translate::get('about.me'),
+        'title'     => __('about.me'),
         'type'      => 'text',
         'name'      => 'about',
         'content'   => $data['user']['about'],
         'min'       => 0,
         'max'       => 255,
-        'help'      => '0 - 255 ' . Translate::get('characters'),
+        'help'      => '0 - 255 ' . __('characters'),
         'user'       => $user
       ]); ?>
 
       <fieldset id="box">
-        <label for="post_content"><?= Translate::get('color'); ?></label>
+        <label for="post_content"><?= __('color'); ?></label>
         <input type="color" value="<?= $data['user']['color']; ?>" id="colorPicker">
         <input type="hidden" name="color" value="<?= $data['user']['color']; ?>" id="color">
       </fieldset>
 
       <fieldset class="max-w300">
         <label for="template">
-          <?= Translate::get('template'); ?>
+          <?= __('template'); ?>
         </label>
         <select name="template">
           <?php foreach (Config::get('general.templates') as $tpl) { ?>
             <option <?php if ($data['user']['template'] == $tpl) { ?>selected<?php } ?> value="<?= $tpl; ?>">
-              <?= Translate::get($tpl); ?>
+              <?= __($tpl); ?>
             </option>
           <?php } ?>
         </select>
       </fieldset>
 
        <fieldset class="max-w300">
-        <label class="block mb5" for="post_content"><?= Translate::get('language'); ?></label>
+        <label class="block mb5" for="post_content"><?= __('language'); ?></label>
         <select name="lang">
           <?php foreach (Config::get('general.languages') as $lang) {  ?>
             <option <?php if ($data['user']['lang'] == $lang) { ?>selected<?php } ?> value="<?= $lang; ?>">
-              <?= Translate::get($lang . '-language'); ?>
+              <?= __($lang . '.language'); ?>
             </option>
           <?php } ?>
         </select>
       </fieldset>
 
-      <h3 class="mt15 mb15"><?= Translate::get('contacts'); ?></h3>
+      <h3 class="mt15 mb15"><?= __('contacts'); ?></h3>
       <?php foreach (Config::get('form/user-setting') as $block) { ?>
         <fieldset class="max-w300">
           <label for="post_title"><?= $block['lang']; ?></label>
@@ -79,13 +79,13 @@
 
       <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
-        <?= Html::sumbit(Translate::get('edit')); ?>
+        <?= Html::sumbit(__('edit')); ?>
       <fieldset>
     </form>
   </div>
 </main>
 <aside>
   <div class="box-white bg-violet-50 text-sm">
-    <?= Translate::get('setting.info'); ?>
+    <?= __('setting.info'); ?>
   </div>
 </aside>

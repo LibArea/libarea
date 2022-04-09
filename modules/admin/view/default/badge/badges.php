@@ -7,7 +7,7 @@
       [
         'id' => 'add',
         'url' => getUrlByName($data['type'] . '.add'),
-        'name' => Translate::get('add'),
+        'name' => __('add'),
         'icon' => 'bi-plus-lg'
       ]
     ]
@@ -19,9 +19,9 @@
     <table class="mt20">
       <thead>
         <th>Id</th>
-        <th><?= Translate::get('icon'); ?></th>
-        <th><?= Translate::get('title'); ?>&nbsp;/&nbsp;<?= Translate::get('description'); ?></th>
-        <th><?= Translate::get('action'); ?></th>
+        <th><?= __('icon'); ?></th>
+        <th><?= __('title'); ?>&nbsp;/&nbsp;<?= __('description'); ?></th>
+        <th><?= __('action'); ?></th>
       </thead>
       <?php foreach ($data['badges'] as $key => $bg) { ?>
         <tr>
@@ -37,7 +37,7 @@
             <?= $bg['badge_description']; ?>
           </td>
           <td class="center">
-            <a title="<?= Translate::get('edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
+            <a title="<?= __('edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
               <i class="bi-pencil"></i>
             </a>
           </td>
@@ -45,7 +45,7 @@
       <?php } ?>
     </table>
   <?php } else { ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 </div>
 </div>

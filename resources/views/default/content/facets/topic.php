@@ -8,7 +8,7 @@
   <?php } else { ?>
     <div class="center">
       <i class="bi-x-octagon text-8xl"></i>
-      <div class="mt5 gray"><?= Translate::get('remote'); ?></div>
+      <div class="mt5 gray"><?= __('remote'); ?></div>
     </div>
   <?php } ?>
 </main>
@@ -16,11 +16,11 @@
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
     <div class="box-flex-white">
       <div class="center">
-        <div class="uppercase text-sm gray-600"><?= Translate::get('posts'); ?></div>
+        <div class="uppercase text-sm gray-600"><?= __('posts'); ?></div>
         <?= $topic['facet_count']; ?>
       </div>
       <div class="center relative">
-        <div class="uppercase text-sm gray-600"><?= Translate::get('reads'); ?></div>
+        <div class="uppercase text-sm gray-600"><?= __('reads'); ?></div>
         <div class="focus-user sky">
           <?= $topic['facet_focus_count']; ?>
         </div>
@@ -31,7 +31,7 @@
     <?php if (!empty($data['pages'])) { ?>
       <div class="sticky top0 top-sm">
         <div class="box-white text-sm">
-          <h3 class="uppercase-box"><?= Translate::get('pages'); ?></h3>
+          <h3 class="uppercase-box"><?= __('pages'); ?></h3>
           <?php foreach ($data['pages'] as $ind => $row) { ?>
             <a class="flex pb10 items-center gray-600" href="">
               <?= $row['post_title']; ?>
@@ -45,7 +45,7 @@
     <?php if (!empty($data['writers'])) { ?>
       <div class="sticky top0 top-sm">
         <div class="box-white text-sm">
-          <h3 class="uppercase-box"><?= Translate::get('writers'); ?></h3>
+          <h3 class="uppercase-box"><?= __('writers'); ?></h3>
           <ul>
             <?php foreach ($data['writers'] as $ind => $row) { ?>
               <li class="mb10">

@@ -12,7 +12,7 @@
   <?php if (!empty($data['favorites'])) { ?>
     <?php foreach ($data['favorites'] as $fav) { ?>
       <div class="box-white relative hidden">
-        <div class="left gray-600 mr5"> <?= Translate::get($fav['action_type']); ?>:</div>
+        <div class="left gray-600 mr5"> <?= __($fav['action_type']); ?>:</div>
 
         <?php if ($fav['action_type'] == 'post') { ?>
           <a class="font-normal" href="<?= getUrlByName('post', ['id' => $fav['post_id'], 'slug' => $fav['post_slug']]); ?>">
@@ -56,18 +56,18 @@
                 <div class="save-folder gray-600 text-sm p5" data-id="<?= $tag['id']; ?>" data-tid="<?= $fav['tid']; ?>" data-type="favorite"><?= $tag['value']; ?></div>
               <?php } ?>
             <?php } else { ?>
-              <?= Translate::get('no'); ?>...
+              <?= __('no'); ?>...
             <?php }  ?>
           </span>
         <?php } ?>
       </div>
     <?php } ?>
   <?php } else { ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.favorites'), 'icon' => 'bi-bookmark']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.favorites'), 'icon' => 'bi-bookmark']); ?>
   <?php } ?>
 </main>
 <aside>
   <div class="box-white text-sm sticky top-sm">
-    <?= Translate::get('favorite.info'); ?>
+    <?= __('favorite.info'); ?>
   </div>
 </aside>

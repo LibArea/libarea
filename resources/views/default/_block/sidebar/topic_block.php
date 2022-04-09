@@ -1,5 +1,5 @@
 <div class="box-white text-sm">
-  <h3 class="uppercase-box"><?= Translate::get($lang); ?></h3>
+  <h3 class="uppercase-box"><?= __($lang); ?></h3>
   <ul>
   <?php foreach ($data as $sub) { ?>
     <li class="mb10">

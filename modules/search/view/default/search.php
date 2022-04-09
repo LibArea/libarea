@@ -13,7 +13,7 @@
 
       <?php if ($data['result']) { ?>
         <h3 class="mt20 mb20">
-          <?= Translate::get('results.search'); ?> <?= $data['count']; ?>
+          <?= __('results.search'); ?> <?= $data['count']; ?>
         </h3>
 
         <?= includeTemplate('/view/default/list', ['result' => $data['result'], 'type' => $data['type']]); ?>

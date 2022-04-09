@@ -11,18 +11,18 @@
   <table>
     <thead>
       <th>N</th>
-      <th><?= Translate::get('information'); ?></th>
+      <th><?= __('information'); ?></th>
       <th>E-mail</th>
-      <th><?= Translate::get('registration'); ?></th>
+      <th><?= __('registration'); ?></th>
       <th>
         <?php if ($data['option'] == 'logs') { ?>
-          <?= Translate::get('last'); ?>
+          <?= __('last'); ?>
         <?php } else { ?>
           IP
         <?php } ?>
       </th>
       <th>Ban</th>
-      <th><?= Translate::get('action'); ?></th>
+      <th><?= __('action'); ?></th>
     </thead>
     <?php foreach ($data['results'] as $user) {  ?>
       <tr>
@@ -61,11 +61,11 @@
           <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
             <?php if ($user['ban_list']) { ?>
               <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                <span class="red"><?= Translate::get('unban'); ?></span>
+                <span class="red"><?= __('unban'); ?></span>
               </div>
             <?php } else { ?>
               <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                <?= Translate::get('ban.it'); ?>
+                <?= __('ban.it'); ?>
               </div>
             <?php } ?>
           <?php } else { ?>
@@ -74,7 +74,7 @@
         </td>
         <td class="center">
           <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
-            <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
+            <a title="<?= ____('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
           <?php } else { ?>

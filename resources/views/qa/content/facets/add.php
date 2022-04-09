@@ -6,7 +6,7 @@ $form->html_form($user['trust_level'], Config::get('form/facet.forma'));
 <main class="w-100">
   <div class="box-white">
 
-    <h1 class="text-xl"><?= Translate::get('add'); ?> (<?= Translate::get($data['type']); ?>)</h1>
+    <h1 class="text-xl"><?= __('add'); ?> (<?= __($data['type']); ?>)</h1>
 
     <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
       <form class="max-w780" action="<?= getUrlByName('content.create', ['type' => $data['type']]); ?>" method="post" enctype="multipart/form-data">
@@ -14,10 +14,10 @@ $form->html_form($user['trust_level'], Config::get('form/facet.forma'));
 
         <?= $form->build_form(); ?>
         
-        <?= $form->sumbit(Translate::get('add')); ?>
+        <?= $form->sumbit(__('add')); ?>
       </form>  
     <?php } else { ?>
-      <?= Translate::get('limit.add.content.no'); ?>
+      <?= __('limit.add.content.no'); ?>
     <?php } ?>
   </div>  
 </main>

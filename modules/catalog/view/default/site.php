@@ -41,7 +41,7 @@
               <div>
                 <i class="bi-arrow-return-right gray-600 ml10"></i>
                 <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_domain']]); ?>">
-                  <?= Translate::get('more.detailed'); ?>
+                  <?= __('more.detailed'); ?>
                 </a>
               </div>
             </div>
@@ -57,7 +57,7 @@
         <div class="mt15 mb15">
           <i class="bi-link-45deg red mr5 text-2xl"></i>
           <?= $item['item_title']; ?> (<?= $item['item_domain']; ?>)
-          <a class="ml15" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
+          <a class="ml15" title="<?= __('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
             <i class="bi-pencil"></i>
           </a>
         </div>

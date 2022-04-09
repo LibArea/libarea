@@ -1,7 +1,7 @@
 <?php if (!empty($data['answers'])) { ?>
   <div class="box-white">
     <h2 class="lowercase m0 text-2xl">
-      <?= Html::numWord($post['amount_content'], Translate::get('num-answer'), true); ?>
+      <?= Html::numWord($post['amount_content'], __('num.answer'), true); ?>
     </h2>
 
     <?php foreach ($data['answers'] as  $answer) { ?>
@@ -17,7 +17,7 @@
                   <div class="text-sm gray">
                     <?= Html::langDate($answer['date']); ?>
                     <?php if (empty($answer['edit'])) { ?>
-                      (<?= Translate::get('ed'); ?>.)
+                      (<?= __('ed'); ?>.)
                     <?php } ?>
                     <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
                   </div>
@@ -33,7 +33,7 @@
                 <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
                   <?php if ($post['post_closed'] == 0) { ?>
                     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
-                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10 mr10"><?= Translate::get('reply'); ?></a>
+                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10 mr10"><?= __('reply'); ?></a>
                     <?php } ?>
                   <?php } ?>
                 <?php } ?>
@@ -41,14 +41,14 @@
                 <?php if (Html::accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
                   <?php if ($user['id'] == $answer['answer_user_id'] || UserData::checkAdmin()) { ?>
                     <a class="editansw gray ml15 mr10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                      <?= Translate::get('edit'); ?>
+                      <?= __('edit'); ?>
                     </a>
                   <?php } ?>
                 <?php } ?>
                 
                 <?php if (UserData::checkAdmin()) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr10">
-                    <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
+                    <i title="<?= __('remove'); ?>" class="bi-trash"></i>
                   </a>
                 <?php } ?>
 
@@ -56,7 +56,7 @@
 
                 <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
-                    <i title="<?= Translate::get('report'); ?>" class="bi-flag"></i>
+                    <i title="<?= __('report'); ?>" class="bi-flag"></i>
                   </a>
                 <?php } ?>
               </div>
@@ -87,7 +87,7 @@
                   <?php if ($post['post_closed'] == 0) { ?>
                     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5 mr5">
-                        <?= Translate::get('reply'); ?>
+                        <?= __('reply'); ?>
                       </a>
                     <?php } ?>
                   <?php } ?>
@@ -96,19 +96,19 @@
                 <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
                   <?php if ($user['id'] == $comment['comment_user_id'] || UserData::checkAdmin()) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml10 mr5">
-                      <i title="<?= Translate::get('edit'); ?>" class="bi-pencil-square"></i>
+                      <i title="<?= __('edit'); ?>" class="bi-pencil-square"></i>
                     </a>
                   <?php } ?>
                 <?php } ?>
 
                 <?php if (UserData::checkAdmin()) { ?>
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray ml10">
-                    <i title="<?= Translate::get('remove'); ?>" class="bi-trash"></i>
+                    <i title="<?= __('remove'); ?>" class="bi-trash"></i>
                   </a>
                 <?php } ?>
                 <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > 0) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml5">
-                    <?= Translate::get('report'); ?>
+                    <?= __('report'); ?>
                   </a>
                 <?php } ?>
               </div>
@@ -122,12 +122,12 @@
   </div>
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.answers'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.answers'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 <?php } ?>
 
 <?php if (!empty($otvet)) { ?>
-  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('you.answered'), 'icon' => 'bi-info-lg']); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('you.answered'), 'icon' => 'bi-info-lg']); ?>
 <?php } else { ?>
   <?php if ($user['id'] > 0) { ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
@@ -143,7 +143,7 @@
         <div class="clear pt5">
           <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
           <input type="hidden" name="answer_id" value="0">
-          <?= Html::sumbit(Translate::get('reply')); ?>
+          <?= Html::sumbit(__('reply')); ?>
         </div>
       </form>
 

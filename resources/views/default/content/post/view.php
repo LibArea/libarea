@@ -36,23 +36,23 @@
         <div class="text-sm lowercase flex gray-600">
           <?= Html::langDate($post['post_date']); ?>
           <?php if ($post['modified']) { ?>
-            (<?= Translate::get('ed'); ?>)
+            (<?= __('ed'); ?>)
           <?php } ?>
 
           <?php if ($user['id']) { ?>
             <?php if ($user['login'] == $post['login']  || UserData::checkAdmin()) { ?>
               <a class="gray-600 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
-                <?= Translate::get('edit'); ?>
+                <?= __('edit'); ?>
               </a>
             <?php } ?>
             <?php if ($user['login'] == $post['login']) { ?>
               <?php if ($post['my_post'] == $post['post_id']) { ?>
                 <span class="add-profile active mr10 ml10" data-post="<?= $post['post_id']; ?>">
-                  + <?= Translate::get('in.profile'); ?>
+                  + <?= __('in.profile'); ?>
                 </span>
               <?php } else { ?>
                 <span class="add-profile mr10 ml10" data-post="<?= $post['post_id']; ?>">
-                  <?= Translate::get('in.profile'); ?>
+                  <?= __('in.profile'); ?>
                 </span>
               <?php } ?>
             <?php } ?>
@@ -88,13 +88,13 @@
         <?php if ($post['post_url_domain']) { ?>
           <div class="mb15">
             <a rel="nofollow noreferrer ugc" target="_blank" class="btn btn-primary" href="<?= $post['post_url']; ?>">
-              <?= Translate::get('details.here'); ?>
+              <?= __('details.here'); ?>
               <i class="bi-folder-symlink middle ml5"></i>
             </a>
           </div>
         <?php } ?>
         <?php if ($post['post_url_domain']) { ?>
-          <h3 class="uppercase-box"><?= Translate::get('source'); ?></h3>
+          <h3 class="uppercase-box"><?= __('source'); ?></h3>
           <div class="italic m15 mb15 p10 text-sm bg-gray-100 table gray">
             <div>
               <i class="bi-link-45deg"></i>
@@ -115,7 +115,7 @@
         <ul class="list-none w-100 lowercase">
           <li class="left p10">
             <div class="text-sm gray-600 mb5">
-              <?= Translate::get('created.by'); ?>
+              <?= __('created.by'); ?>
             </div>
             <div class="center">
               <a title="<?= $post['login']; ?>" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
@@ -125,7 +125,7 @@
           </li>
           <li class="left p10 mb-none">
             <div class="text-sm gray-600 mb5">
-              <?= Translate::get('last.answer'); ?>
+              <?= __('last.answer'); ?>
             </div>
             <div class="center">
               <?php if (!empty($data['last_user']['answer_id'])) { ?>
@@ -146,7 +146,7 @@
               <?php } ?>
             </div>
             <div class="center text-sm">
-              <?= Html::numWord($post['post_hits_count'], Translate::get('num-view'), false); ?>
+              <?= Html::numWord($post['post_hits_count'], __('num.view'), false); ?>
             </div>
           </li>
           <li class="left p10 mb-none gray-600 text-sm">
@@ -158,7 +158,7 @@
               <?php } ?>
             </div>
             <div class="center">
-              <?= Html::numWord($post['amount_content'], Translate::get('num-answer'), false); ?>
+              <?= Html::numWord($post['amount_content'], __('num.answer'), false); ?>
             </div>
           </li>
         </ul>
@@ -167,16 +167,16 @@
           <?php if ($user['id'] > 0) { ?>
             <?php if (is_array($data['post_signed'])) { ?>
               <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 yes">
-                <?= Translate::get('unsubscribe'); ?>
+                <?= __('unsubscribe'); ?>
               </div>
             <?php } else { ?>
               <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 no">
-                + <?= Translate::get('read'); ?>
+                + <?= __('read'); ?>
               </div>
             <?php } ?>
           <?php } else { ?>
             <a class="right mt5 focus-id no" href="<?= getUrlByName('login'); ?>">
-              + <?= Translate::get('read'); ?>
+              + <?= __('read'); ?>
             </a>
           <?php } ?>
         </div>
@@ -197,7 +197,7 @@
             <div class="clear pt5">
               <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
               <input type="hidden" name="answer_id" value="0">
-              <?= Html::sumbit(Translate::get('reply')); ?>
+              <?= Html::sumbit(__('reply')); ?>
             </div>
           </form>
 
@@ -206,7 +206,7 @@
 
     <?php } else { ?>
       <div class="bg-red-200 p15 center mr10">
-        <?= sprintf(Translate::get('content.deleted'), Translate::get('post')); ?>...
+        <?= sprintf(__('content.deleted'), __('post')); ?>...
       </div>
     <?php } ?>
   </article>
@@ -215,28 +215,28 @@
     if ($post['post_feature'] == 0) {
       Tpl::insert('/_block/comments-view', ['data' => $data, 'post' => $post, 'user' => $user]);
       if ($post['post_closed'] == 1) {
-        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('post.closed'), 'icon' => 'bi-door-closed']);
+        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('post.closed'), 'icon' => 'bi-door-closed']);
       }
     } else {
       Tpl::insert('/_block/questions-view', ['data' => $data, 'post' => $post, 'user' => $user]);
       if ($post['post_closed'] == 1) {
-        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('question.closed'), 'icon' => 'bi-door-closed']);
+        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('question.closed'), 'icon' => 'bi-door-closed']);
       }
     }
   } else {
-    echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('this.draft'), 'icon' => 'bi-door-closed']);
+    echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('this.draft'), 'icon' => 'bi-door-closed']);
   } ?>
 </main>
 <aside>
   <?php if (!empty($data['facets'])) { ?>
     <div class="box-white">
-      <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
+      <h3 class="uppercase-box"><?= __('topics'); ?></h3>
       <?php foreach ($data['facets'] as $topic) { ?>
         <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
 
         <?php if (!$topic['signed_facet_id'] && $user['id']) { ?>
           <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm sky center mt5 mr5">
-            <i class="bi-plus"></i> <?= Translate::get('read'); ?>
+            <i class="bi-plus"></i> <?= __('read'); ?>
           </div>
         <?php } ?>
 
@@ -261,7 +261,7 @@
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="box-white sticky top-sm">
-      <h3 class="uppercase-box"><?= Translate::get('recommended'); ?></h3>
+      <h3 class="uppercase-box"><?= __('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex text-sm">
           <?php if ($rec_post['post_type'] == 'post') { ?>

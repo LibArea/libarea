@@ -18,13 +18,13 @@ $facet  = $data['facet'] ?? false; ?>
           <i class="bi-list gray-600 text-xl"></i>
         </div>
 
-        <a title="<?= Translate::get('home'); ?>" class="logo" href="/">
+        <a title="<?= __('home'); ?>" class="logo" href="/">
           <?= Config::get('meta.name'); ?>
         </a>
 
         <div class="ml45 mb-ml10 relative w-100">
           <form class="form mb-none" method="get" action="<?= getUrlByName('search'); ?>">
-            <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= Translate::get('to.find'); ?>" class="search">
+            <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('to.find'); ?>" class="search">
             <input name="type" value="post" type="hidden">
           </form>
           <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
@@ -37,11 +37,11 @@ $facet  = $data['facet'] ?? false; ?>
             </div>
             <?php if (Config::get('general.invite') == false) { ?>
               <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 block" href="<?= getUrlByName('register'); ?>">
-                <?= Translate::get('registration'); ?>
+                <?= __('registration'); ?>
               </a>
             <?php } ?>
             <a class="w94 btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
-              <?= Translate::get('sign.in'); ?>
+              <?= __('sign.in'); ?>
             </a>
           </div>
         <?php } else { ?>

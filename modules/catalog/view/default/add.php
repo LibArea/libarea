@@ -9,10 +9,10 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
     <?= Tpl::insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
-            'name' => Translate::get('home'),
+            'name' => __('home'),
             'link' => getUrlByName('web')
           ], [
-            'name' => Translate::get('site.add'),
+            'name' => __('site.add'),
             'link' => 'red'
           ],
         ]
@@ -25,13 +25,13 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
 
       <?= $form->build_form(); ?>
 
-      <?= $form->sumbit(Translate::get('add')); ?>
+      <?= $form->sumbit(__('add')); ?>
     </form>
   </main>
   <aside>
     <div class="box-white box-shadow-all text-sm">
-      <h3 class="uppercase-box"><?= Translate::get('help'); ?></h3>
-      <?= Translate::get('add.site.help'); ?>
+      <h3 class="uppercase-box"><?= __('help'); ?></h3>
+      <?= __('add.site.help'); ?>
       <div>
   </aside>
 </div>

@@ -1,15 +1,15 @@
 <main class="col-two">
   <div class="box-white">
 
-    <a href="/"><?= Translate::get('home'); ?></a> /
-    <span class="red"><?= sprintf(Translate::get('add.option'), Translate::get('post')); ?></span>
+    <a href="/"><?= __('home'); ?></a> /
+    <span class="red"><?= sprintf(__('add.option'), __('post')); ?></span>
 
     <form class="max-w780" action="<?= getUrlByName('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <fieldset>
-        <label for="post_title"><?= Translate::get('heading'); ?></label>
+        <label for="post_title"><?= __('heading'); ?></label>
         <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
-        <div class="help">6 - 250 <?= Translate::get('characters'); ?></div>
+        <div class="help">6 - 250 <?= __('characters'); ?></div>
       </fieldset>
 
       <?php if (!empty($data['blog'])) { ?>
@@ -17,7 +17,7 @@
           'data'        => $data,
           'action'      => 'add',
           'type'        => 'blog',
-          'title'       => Translate::get('blogs'),
+          'title'       => __('blogs'),
         ]); ?>
       <?php } ?>
 
@@ -25,8 +25,8 @@
         'data'          => $data['facets'],
         'type'          => 'topic',
         'action'        => 'add',
-        'title'         => Translate::get('facets'),
-        'help'          => Translate::get('necessarily'),
+        'title'         => __('facets'),
+        'help'          => __('necessarily'),
         'red'           => 'red'
       ]); ?>
 
@@ -36,7 +36,7 @@
             <input id="link" placeholder="URL" class="post_url" type="text" name="post_url" />
           </div>
           <div class="left w-30 pl5">
-            <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= Translate::get('to.extract'); ?>" />
+            <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= __('to.extract'); ?>" />
           </div>
         </fieldset>
       <?php } ?>
@@ -47,10 +47,10 @@
           <div id="start">
             <input id="file-upload" type="file" name="images" accept="image/*" />
             <div class="text-sm gray-600 mt5">
-              <?= Translate::get('format.cover.post'); ?>.
+              <?= __('format.cover.post'); ?>.
             </div>
             <i class="fa fa-download" aria-hidden="true"></i>
-            <div id="notimage" class="none"><?= Translate::get('select.image'); ?></div>
+            <div id="notimage" class="none"><?= __('select.image'); ?></div>
           </div>
         </div>
         <div id="response" class="hidden">
@@ -64,7 +64,7 @@
         <?= Tpl::insert('/_block/form/radio',  [
           'data' => [
             [
-              'title' => Translate::get('draft'),
+              'title' => __('draft'),
               'name'  => 'post_draft',
             ]
           ],
@@ -78,11 +78,11 @@
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
-              'title' => Translate::get('format.Q&A'),
+              'title' => __('format.Q&A'),
               'name' => 'post_feature',
             ],
             [
-              'title' => Translate::get('close?'),
+              'title' => __('close?'),
               'name' => 'closed',
             ],
           ]
@@ -92,7 +92,7 @@
       <?= Tpl::insert('/_block/form/radio',  [
         'data' => [
           [
-            'title' => Translate::get('translation'),
+            'title' => __('translation'),
             'name'  => 'translation',
           ],
         ]
@@ -102,7 +102,7 @@
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
-              'title'   => Translate::get('pin'),
+              'title'   => __('pin'),
               'name'    => 'top',
             ],
           ]
@@ -113,11 +113,11 @@
         'data'          => [],
         'action'        => 'add',
         'type'          => 'post',
-        'title'         => Translate::get('related'),
-        'help'          => Translate::get('necessarily'),
+        'title'         => __('related'),
+        'help'          => __('necessarily'),
       ]); ?>
 
-      <p><?= Html::sumbit(Translate::get('create')); ?></p>
+      <p><?= Html::sumbit(__('create')); ?></p>
     </form>
   </div>
 </main>

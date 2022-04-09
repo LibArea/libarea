@@ -6,7 +6,7 @@
     <div class="trigger">
       <i class="bi-info-square gray-600"></i>
     </div>
-    <div class="dropdown tooltip"><?= Translate::get($data['sheet'] . '.info'); ?></div>
+    <div class="dropdown tooltip"><?= __($data['sheet'] . '.info'); ?></div>
   </div>
 
   <?php if (!empty($data['answers'])) { ?>
@@ -15,12 +15,12 @@
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
   <?php } else { ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.comments'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.comments'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
 </main>
 <aside>
   <div class="box-white text-sm sticky top-sm">
-    <?= Translate::get('answers.desc'); ?>
+    <?= __('answers.desc'); ?>
   </div>
 </aside>
 <?= Tpl::insert('/_block/js-msg-flag', ['uid' => $user['id']]); ?>

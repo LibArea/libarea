@@ -10,26 +10,26 @@ $facet  = $data['facet'] ?? false; ?>
   <header class="bg-white mt0 mb15">
     <div class="br-bottom mr-auto max-width w-100 pr10 pl15 mb10 mb-none items-center flex">
       <a class="mr20 black text-xs" href="/topics">
-        <i class="bi-columns-gap mr5"></i> <?= Translate::get('topics'); ?>
+        <i class="bi-columns-gap mr5"></i> <?= __('topics'); ?>
       </a>
       <a class="mr20 black text-xs" href="/blogs">
-        <i class="bi-journals mr5"></i> <?= Translate::get('blogs'); ?>
+        <i class="bi-journals mr5"></i> <?= __('blogs'); ?>
       </a>
       <a class="mr20 black text-xs" href="/users">
-        <i class="bi-people mr5"></i> <?= Translate::get('users'); ?>
+        <i class="bi-people mr5"></i> <?= __('users'); ?>
       </a>
       <a class="mr20 black text-xs" href="/web">
-        <i class="bi-link-45deg mr5"></i> <?= Translate::get('catalog'); ?>
+        <i class="bi-link-45deg mr5"></i> <?= __('catalog'); ?>
       </a>
       <a class="mr20 black text-xs" href="/search">
-        <i class="bi-search mr5"></i> <?= Translate::get('search'); ?>
+        <i class="bi-search mr5"></i> <?= __('search'); ?>
       </a>
     </div>
 
     <div class="wrap items-center flex justify-between">
       <div class="flex items-center" id="find">
         <div class="ml20 flex items-center">
-          <a title="<?= Translate::get('home'); ?>" class="logo ml5" href="/">
+          <a title="<?= __('home'); ?>" class="logo ml5" href="/">
             <?= Config::get('meta.name'); ?>
           </a>
         </div>
@@ -42,11 +42,11 @@ $facet  = $data['facet'] ?? false; ?>
           </div>
           <?php if (Config::get('general.invite') == false) { ?>
             <a class="w94 gray ml30 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
-              <?= Translate::get('registration'); ?>
+              <?= __('registration'); ?>
             </a>
           <?php } ?>
           <a class="w94 btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
-            <?= Translate::get('sign.in'); ?>
+            <?= __('sign.in'); ?>
           </a>
         </div>
       <?php } else { ?>

@@ -1,13 +1,13 @@
 <main class="col-two">
   <div class="box-flex-white">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+    <p class="m0"><?= __($data['sheet']); ?></p>
   </div>
   <div class="mb15 mb-ml0 hidden">
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />
-      <textarea rows="3" id="message" class="mess" placeholder="<?= Translate::get('write'); ?>..." type="text" name="content" /></textarea>
-      <span class="right"><?= Html::sumbit(Translate::get('reply')); ?></span>
+      <textarea rows="3" id="message" class="mess" placeholder="<?= __('write'); ?>..." type="text" name="content" /></textarea>
+      <span class="right"><?= Html::sumbit(__('reply')); ?></span>
     </form>
   </div>
 
@@ -44,7 +44,7 @@
           </div>
           <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $user['id']) { ?>
             <div class="right gray-600 lowercase text-sm hidden mb5 pb5">
-              <?= Translate::get('it.was.read'); ?> (<?= Html::langDate($val['message_receipt']); ?>)
+              <?= __('it.was.read'); ?> (<?= Html::langDate($val['message_receipt']); ?>)
             </div>
           <?php } ?>
         </div>
@@ -56,7 +56,7 @@
 
 <aside>
   <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
-    <div class="uppercase gray mt5 mb5"><?= Translate::get('dialogues'); ?></div>
+    <div class="uppercase gray mt5 mb5"><?= __('dialogues'); ?></div>
     <?php foreach ($data['dialog'] as $key => $val) { ?>
       <?php if ($val['id'] != $user['id']) { ?>
         <div class="flex relative pt5 pb5 items-center hidden">

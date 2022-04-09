@@ -7,8 +7,8 @@
         <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
         <input type="hidden" name="answer_id" id="answer_id" value="<?= $data['answer_id']; ?>">
         <div class="mt5 mb20">
-          <?= Html::sumbit(Translate::get('edit')); ?>
-          <span id="cancel_answ" class="text-sm inline ml5 gray"><?= Translate::get('cancel'); ?></span>
+          <?= Html::sumbit(__('edit')); ?>
+          <span id="cancel_answ" class="text-sm inline ml5 gray"><?= __('cancel'); ?></span>
         </div>
       </div>
     </form>

@@ -62,7 +62,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     Route::get('/teams/{section?}')->module('teams', 'App\Section')->where(['section' => '[a-z]+']);
 
-    Route::get('/setting/{type?}')->controller('User\SettingController')->name('setting'); 
+    Route::get('/setting/{type?}')->controller('User\SettingController')->where(['section' => '[a-z]+'])->name('setting'); 
 
     Route::get('/messages')->controller('MessagesController')->name('messages');   
     Route::get('/messages/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 

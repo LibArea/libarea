@@ -7,7 +7,7 @@
       [
         'id' => 'add',
         'url' => getUrlByName($data['type'] . '.add'),
-        'name' => Translate::get('add'),
+        'name' => __('add'),
         'icon' => 'bi-plus-lg'
       ]
     ]
@@ -18,31 +18,31 @@
   <form action="<?= getUrlByName('admin.badge.create'); ?>" method="post">
     <?= csrf_field() ?>
     <fieldset>
-      <label for="badge_title"><?= Translate::get('title'); ?></label>
+      <label for="badge_title"><?= __('title'); ?></label>
       <input type="text" minlength="4" name="badge_title" value="" required>
-      <div class="help">4 - 25 <?= Translate::get('characters'); ?></div>
+      <div class="help">4 - 25 <?= __('characters'); ?></div>
     </fieldset>
     <fieldset>
-      <label for="badge_icon"><?= Translate::get('icon'); ?></label>
+      <label for="badge_icon"><?= __('icon'); ?></label>
       <textarea class="add" name="badge_icon" required></textarea>
-      <div class="help"><?= Translate::get('for.example'); ?>: &lt;i title="<?= Translate::get('title'); ?>" class="bi-trophy"&gt;&lt;/i&gt;</div>
+      <div class="help"><?= __('for.example'); ?>: &lt;i title="<?= __('title'); ?>" class="bi-trophy"&gt;&lt;/i&gt;</div>
     </fieldset>
     <fieldset>
       <label for="badge_tl">Tl</label>
       <input type="text" name="badge_tl" value="0" required>
-      <div class="help"><?= Translate::get('for'); ?> TL (0 <?= Translate::get('by.default'); ?>)</div>
+      <div class="help"><?= __('for'); ?> TL (0 <?= __('by.default'); ?>)</div>
     </fieldset>
     <fieldset>
       <label for="badge_score">Score</label>
       <input type="text" name="badge_score" value="10" required>
-      <div class="help"><?= Translate::get('reward.weight'); ?></div>
+      <div class="help"><?= __('reward.weight'); ?></div>
     </fieldset>
     <fieldset>
-      <label for="badge_description"><?= Translate::get('description'); ?></label>
+      <label for="badge_description"><?= __('description'); ?></label>
       <textarea class="add" minlength="12" name="badge_description" required></textarea>
-      <div class="help">12 - 250 <?= Translate::get('characters'); ?></div>
+      <div class="help">12 - 250 <?= __('characters'); ?></div>
     </fieldset>
-    <?= Html::sumbit(Translate::get('add')); ?>
+    <?= Html::sumbit(__('add')); ?>
   </form>
 </div>
 </main>

@@ -2,7 +2,7 @@
 <div id="contentWrapper">
   <main>
     <h2 class="mb20">
-      <?= Translate::get($data['sheet'] . '.view'); ?>
+      <?= __($data['sheet'] . '.view'); ?>
       <?php if ($data['count'] != 0) { ?><sup class="gray-600 text-sm"><?= $data['count']; ?></sup><?php } ?>
     </h2>
 
@@ -20,7 +20,7 @@
               </a>
               <?php if ($item['item_published'] == 0) { ?>
                 <span class="box-yellow-small">
-                  <?= Translate::get('moderation'); ?>
+                  <?= __('moderation'); ?>
                 </span>
               <?php } ?>
               <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
@@ -48,7 +48,7 @@
                     <div>
                       <i class="bi-arrow-return-right gray-600 ml10"></i>
                       <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_domain']]); ?>">
-                        <?= Translate::get('more.detailed'); ?>
+                        <?= __('more.detailed'); ?>
                       </a>
                     </div>
                   <?php } ?>
@@ -59,16 +59,16 @@
         <?php } ?>
       </ol>
     <?php } else { ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
 
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
   </main>
   <aside>
-    <div class="box-yellow text-sm mt15"><?= Translate::get('user.sites.info'); ?>.</div>
+    <div class="box-yellow text-sm mt15"><?= __('user.sites.info'); ?>.</div>
     <?php if (UserData::checkActiveUser()) { ?>
       <div class="box-white text-sm bg-violet-50 mt15">
-        <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
+        <h3 class="uppercase-box"><?= __('menu'); ?></h3>
         <ul class="menu">
           <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
           <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('catalog/menu.user')]); ?>

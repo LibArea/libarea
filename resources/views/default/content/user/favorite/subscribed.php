@@ -6,6 +6,6 @@
 </main>
 <aside>
   <div class="box-white text-sm sticky top-sm">
-    <?= Translate::get('preferences.info'); ?>
+    <?= __('preferences.info'); ?>
   </div>
 </aside>

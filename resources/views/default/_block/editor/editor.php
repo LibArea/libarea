@@ -10,15 +10,15 @@
       maxHeight: '<?= $height; ?>',
       element: document.getElementById('editor'),
       imagePathAbsolute: true,
-      placeholder: "<?= Translate::get('supports.markdown'); ?>...",
+      placeholder: "<?= __('supports.markdown'); ?>...",
       imageUploadEndpoint: "/backend/upload/<?= $type; ?>/<?= $id; ?>",
       previewImagesInEditor: true,
       uploadImage: true,
       spellChecker: false,
 
       imageTexts: {
-        sbInit: '<?= Translate::get('attach.files'); ?>',
-        sbOnDragEnter: '<?= Translate::get('drop.image'); ?>',
+        sbInit: '<?= __('attach.files'); ?>',
+        sbOnDragEnter: '<?= __('drop.image'); ?>',
       },
 
       toolbar: [
@@ -33,7 +33,7 @@
           <?php } ?>
         <?php } ?> {
           className: "bi-unlock",
-          title: "<?= Translate::get('spoiler'); ?>",
+          title: "<?= __('spoiler'); ?>",
           children: [{
             className: "bi-eye-slash",
             action: (e) => {
@@ -42,7 +42,7 @@
             },
           }, {
             className: "bi-unlock",
-            title: "<?= Translate::get('spoiler.auth'); ?>",
+            title: "<?= __('spoiler.auth'); ?>",
             action: (e) => {
               e.codemirror.replaceSelection('{auth} *** {/auth}');
               e.codemirror.focus();

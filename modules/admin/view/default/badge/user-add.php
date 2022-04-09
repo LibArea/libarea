@@ -12,7 +12,7 @@
     <?= csrf_field() ?>
     <fieldset>
       <label for="post_content">
-        <?= Translate::get('badge'); ?>:
+        <?= __('badge'); ?>:
         <span class="red"><?= $data['user']['login']; ?></span>
       </label>
       <select name="badge_id">
@@ -22,7 +22,7 @@
       </select>
       <input type="hidden" name="user_id" id="post_id" value="<?= $data['user']['id']; ?>">
     </fieldset>
-    <?= Html::sumbit(Translate::get('add')); ?>
+    <?= Html::sumbit(__('add')); ?>
   </form>
 </div>
 </main>

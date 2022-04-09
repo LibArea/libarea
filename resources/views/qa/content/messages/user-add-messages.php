@@ -1,21 +1,21 @@
 <main class="col-two">
   <div class="box-white">
     <h1 class="mt0 mb10 text-2xl font-normal">
-      <?= Translate::get('send.message'); ?>  <?= $user['login']; ?> / <?= $data['login']; ?>
+      <?= __('send.message'); ?>  <?= $user['login']; ?> / <?= $data['login']; ?>
       <a class="right text-sm" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">
-        <?= Translate::get('all.messages'); ?>
+        <?= __('all.messages'); ?>
       </a>
     </h1>
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_uid']; ?>" />
-      <textarea rows="3" id="message" class="mess" placeholder="<?= Translate::get('write'); ?>..." type="text" name="content" /></textarea>
-      <?= Html::sumbit(Translate::get('send')); ?>
+      <textarea rows="3" id="message" class="mess" placeholder="<?= __('write'); ?>..." type="text" name="content" /></textarea>
+      <?= Html::sumbit(__('send')); ?>
     </form>
   </div>
 </main>
 <aside>
   <div class="box-white bg-violet-50 text-sm">
-    <?= Translate::get('being.developed'); ?>
+    <?= __('being.developed'); ?>
   </div>
 </aside>

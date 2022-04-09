@@ -7,7 +7,7 @@
     <div class="trigger">
       <i class="bi-info-square gray-600"></i>
     </div>
-    <div class="dropdown tooltip"><?= Translate::get($data['sheet'] . '.info'); ?></div>
+    <div class="dropdown tooltip"><?= __($data['sheet'] . '.info'); ?></div>
   </div>
 
   <?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>
@@ -28,7 +28,7 @@
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="box-white">
-      <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
+      <h3 class="uppercase-box"><?= __('reading'); ?></h3>
       <ul>
         <?php
         $my = [];
@@ -58,7 +58,7 @@
               <span class="middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
             </a>
             <?php if ($user['id'] == $topic['facet_user_id']) { ?>
-              <a class="right gray-600 mt5" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+              <a class="right gray-600 mt5" title="<?= sprintf(__('add.option'), __('post')); ?>" href="<?= getUrlByName('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
                 <i class="bi-plus-lg text-sm"></i>
               </a>
             <?php } ?>
@@ -66,14 +66,14 @@
         <?php } ?>
       </ul>
       <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) { ?>
-        <a class="gray-600 block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
-          <?= Translate::get('see more'); ?> <i class="bi-chevron-double-right middle"></i>
+        <a class="gray-600 block mt5" title="<?= __('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
+          <?= __('see more'); ?> <i class="bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
     </div>
   <?php } else { ?>
     <div class="box-white">
-      <h3 class="uppercase-box"><?= Translate::get('topics'); ?></h3>
+      <h3 class="uppercase-box"><?= __('topics'); ?></h3>
       <?php foreach (Config::get('facets.default') as $key => $topic) { ?>
         <a class="flex items-center relative pb10 gray-600" href="<?= $topic['url']; ?>">
           <img class="img-base" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">

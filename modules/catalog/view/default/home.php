@@ -3,8 +3,8 @@
 <?php if ($user['id'] == 0) { ?>
   <div class="mb-none">
     <center>
-      <h1><?= Translate::get('web.home.title'); ?></h1>
-      <p class="max-w780"><?= Translate::get('web.banner.info'); ?>.</p>
+      <h1><?= __('web.home.title'); ?></h1>
+      <p class="max-w780"><?= __('web.banner.info'); ?>.</p>
     </center>
   </div>
 <?php } ?>
@@ -34,15 +34,15 @@
     <?php if (!empty($data['items'])) { ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
     <?php } else { ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/cat'); ?>
   </main>
   <aside>
-    <div class="box-yellow text-sm max-w300"><?= Translate::get('directory.info'); ?></div>
+    <div class="box-yellow text-sm max-w300"><?= __('directory.info'); ?></div>
     <?php if (UserData::checkActiveUser()) { ?>
       <div class="box-white text-sm bg-violet-50 mt15">
-        <h3 class="uppercase-box"><?= Translate::get('menu'); ?></h3>
+        <h3 class="uppercase-box"><?= __('menu'); ?></h3>
         <ul class="menu">
           <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
           <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('catalog/menu.user')]); ?>

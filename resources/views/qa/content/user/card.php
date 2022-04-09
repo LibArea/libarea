@@ -9,7 +9,7 @@
         <?php if ($user['id'] > 0 && $user['login'] != $user['login']) { ?>
           <a class="right btn btn-primary block" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">
             <i class="bi-envelope middle mr5"></i>
-            <?= Translate::get('message'); ?>
+            <?= __('message'); ?>
           </a>
         <?php } ?>
         <a class="block text-2xl" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
@@ -27,7 +27,7 @@
     </div>
     <?php if (!empty($post['post_id'])) { ?>
       <div class="gray-600 mt5">
-        <?= Translate::get('post'); ?>:
+        <?= __('post'); ?>:
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
         </a>
@@ -35,7 +35,7 @@
     <?php } ?>
     <?php if ($user['website']) { ?>
       <div class="gray-600 mt5">
-        <?= Translate::get('website'); ?>:
+        <?= __('website'); ?>:
         <a rel="noopener nofollow ugc" href="<?= $user['website']; ?>">
           <?= $user['website']; ?>
         </a>
@@ -51,9 +51,9 @@
         <i class="bi-eye middle mr5 ml5"></i>
         <span class="text-sm mr15"> <?= $user['hits_count']; ?></span>
       <?php } ?>
-      <i title="<?= Translate::get('medal.registration'); ?>" class="bi-gift right mr5 ml5 sky"></i>
+      <i title="<?= __('medal.registration'); ?>" class="bi-gift right mr5 ml5 sky"></i>
       <?php if ($user['id'] < 50) { ?>
-        <i title="<?= Translate::get('first.days'); ?>" class="bi-award right mr5 ml5 green"></i>
+        <i title="<?= __('first.days'); ?>" class="bi-award right mr5 ml5 green"></i>
       <?php } ?>
       <?php foreach ($badges as $badge) { ?>
         <span class="ml15"><?= $badge['badge_icon']; ?></span>

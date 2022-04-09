@@ -1,8 +1,8 @@
 <main class="col-two">
   <div class="bg-violet-50 box center">
-    <h1 class="m0 text-xl font-normal"><?= Translate::get($data['sheet']); ?></h1>
+    <h1 class="m0 text-xl font-normal"><?= __($data['sheet']); ?></h1>
     <span class="text-sm gray-600">
-      <?= Translate::get($data['sheet'] . '.info'); ?>.
+      <?= __($data['sheet'] . '.info'); ?>.
     </span>
   </div>
 
@@ -17,12 +17,12 @@
             [
               'id'    => $data['type'] . 's.all',
               'url'   => getUrlByName($data['type'] . 's.all'),
-              'title' => Translate::get('all'),
+              'title' => __('all'),
               'icon'  => 'bi bi-app'
             ], [
               'id'    => $data['type'] . 's.new',
               'url'   => getUrlByName($data['type'] . 's.new'),
-              'title' => Translate::get('new.ones'),
+              'title' => __('new.ones'),
               'icon'  => 'bi bi-sort-up'
             ],
           ]

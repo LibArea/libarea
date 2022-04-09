@@ -1,8 +1,8 @@
 <main>
   <div class="box-flex-white">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+    <p class="m0"><?= __($data['sheet']); ?></p>
     <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
-      <?= Html::sumbit(Translate::get('i.read')); ?>
+      <?= Html::sumbit(__('i.read')); ?>
     </form>
   </div>
 
@@ -19,7 +19,7 @@
               <i class="<?= $n['icon']; ?> middle"></i>
               <a class="black ml5" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
               <span class="lowercase gray-600">
-                <?= sprintf(Translate::get($n['lang']), '<a href="' . $url . '">', '</a>'); ?>
+                <?= sprintf(__($n['lang']), '<a href="' . $url . '">', '</a>'); ?>
                 — <?= Html::langDate($notif['time']); ?>
               </span>
               <?php if ($notif['flag'] == 0) { ?><sup class="ml5 red">✔</sup><?php } ?>
@@ -29,14 +29,14 @@
 
       <?php } ?>
 
-      <div class="p15 center gray-600"><?= Translate::get('notifications.limit'); ?></div>
+      <div class="p15 center gray-600"><?= __('notifications.limit'); ?></div>
     <?php } else { ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.content'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.content'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
   </div>
 </main>
 <aside>
   <div class="box-white text-sm sticky top-sm">
-    <?= Translate::get('notifications.info'); ?>
+    <?= __('notifications.info'); ?>
   </div>
 </aside>

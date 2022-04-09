@@ -1,6 +1,6 @@
 <?php if ($focus_users) { ?>
   <span class="text-sm mt20 gray-600">
-    <div class="uppercase inline mr5"><?= Translate::get('reads'); ?>:</div>
+    <div class="uppercase inline mr5"><?= __('reads'); ?>:</div>
     <?php $n = 0;
     foreach ($focus_users as $user) {
       $n++; ?>

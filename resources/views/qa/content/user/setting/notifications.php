@@ -13,13 +13,13 @@ $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
       <?= $form->build_form(); ?>
       <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
-        <?= Html::sumbit(Translate::get('edit')); ?>
+        <?= Html::sumbit(__('edit')); ?>
       </fieldset>
     </form>
   </div>
 </main>
 <aside>
   <div class="box-white bg-violet-50 text-sm">
-    <?= Translate::get('notification.info'); ?>
+    <?= __('notification.info'); ?>
   </div>
 </aside>

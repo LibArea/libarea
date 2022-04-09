@@ -56,10 +56,12 @@ class Search
         }
 
         $result = [];
-        foreach ($results as $ind => $row) {
-            $text = Html::fragment($row['content']);
-            $row['content'] = Content::text($text, 'line');
-            $result[$ind]   = $row;
+        if(!empty($results)) {
+            foreach ($results as $ind => $row) {
+                $text = Html::fragment($row['content']);
+                $row['content'] = Content::text($text, 'line');
+                $result[$ind]   = $row;
+            }
         }
 
         $count = $count ?? 0;

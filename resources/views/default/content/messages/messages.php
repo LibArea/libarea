@@ -1,6 +1,6 @@
 <main>
   <div class="box-flex-white">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+    <p class="m0"><?= __($data['sheet']); ?></p>
   </div>
   <?php if (!empty($data['messages'])) { ?>
     <div class="box-white">
@@ -27,9 +27,9 @@
           </div>
           <a class="lowercase text-sm right" href="<?= getUrlByName('dialogues', ['id' => $msg['dialog_id']]); ?>">
             <?php if ($msg['unread']) { ?>
-              <?= Translate::get('there.are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
+              <?= __('there.are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
             <?php } else { ?>
-              <span class="red"><?= Translate::get('view'); ?></span>
+              <span class="red"><?= __('view'); ?></span>
               <?php if ($msg['count'] != 0) { ?>
                 <?= $msg['count']; ?> <?= $msg['count_num']; ?>
               <?php } ?>
@@ -39,11 +39,11 @@
       <?php } ?>
     </div>
   <?php } else { ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.dialogs'), 'icon' => 'bi-envelope']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.dialogs'), 'icon' => 'bi-envelope']); ?>
   <?php } ?>
 </main>
 <aside>
   <div class="box-white text-sm sticky top-sm">
-    <?= Translate::get('messages.info'); ?>
+    <?= __('messages.info'); ?>
   </div>
 </aside>

@@ -2,7 +2,7 @@
 <main>
   <?= Tpl::insert('/content/facets/topic-header', ['topic' => $topic, 'user' => $user, 'data' => $data]); ?>
   <div class="box-white">
-    <h2 class="mt5 mb5"><?= Translate::get('Wiki'); ?></h2>
+    <h2 class="mt5 mb5"><?= __('Wiki'); ?></h2>
     <?= Content::text($topic['facet_info'], 'text'); ?>
   </div>
   <div class="box-white">

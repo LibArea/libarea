@@ -21,7 +21,7 @@
           <?= $gist['item_domain']; ?>
         </a>
         <a class="gray-600 lowercase ml15" href="<?= getUrlByName('web.website', ['slug' => $gist['item_domain']]); ?>">
-          <?= Translate::get('more.detailed'); ?>
+          <?= __('more.detailed'); ?>
         </a>
       <?php } ?>
       <div class="right gray-600">

@@ -6,8 +6,8 @@
       <fieldset>
         <input type="hidden" name="item_id" value="<?= $data['item_id']; ?>">
         <input type="hidden" name="id" value="<?= $data['id']; ?>">
-        <?= Html::sumbit(Translate::get('edit')); ?>
-        <span id="cancel_comment" class="text-sm inline ml5 gray"><?= Translate::get('cancel'); ?></span>
+        <?= Html::sumbit(__('edit')); ?>
+        <span id="cancel_comment" class="text-sm inline ml5 gray"><?= __('cancel'); ?></span>
       </fieldset>
       <div class="v-otsr"></div>
     </form>

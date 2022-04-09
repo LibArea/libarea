@@ -19,7 +19,7 @@
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="box-white bg-violet-50 text-sm">
-      <h3 class="uppercase-box"><?= Translate::get('reading'); ?></h3>
+      <h3 class="uppercase-box"><?= __('reading'); ?></h3>
 
       <?php
       $my = [];
@@ -49,22 +49,22 @@
             <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($user['id'] == $topic['facet_user_id']) { ?>
-            <a class="right gray-600 mt5" title="<?= sprintf(Translate::get('add.option'), Translate::get('post')); ?>" href="<?= getUrlByName('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+            <a class="right gray-600 mt5" title="<?= sprintf(__('add.option'), __('post')); ?>" href="<?= getUrlByName('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
               <i class="bi-plus-lg text-sm"></i>
             </a>
           <?php } ?>
         </div>
       <?php } ?>
       <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) { ?>
-        <a class="gray block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
-          <?= Translate::get('see more'); ?> <i class="bi-chevron-double-right middle"></i>
+        <a class="gray block mt5" title="<?= __('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
+          <?= __('see more'); ?> <i class="bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
     </div>
   <?php } else { ?>
     <div class="box-white bg-violet-50 text-sm">
       <div class="uppercase gray mt5 mb5">
-        <?= Translate::get('topics'); ?>
+        <?= __('topics'); ?>
       </div>
       <?php foreach (Config::get('facets.default') as $key => $topic) { ?>
         <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $topic['url']; ?>">

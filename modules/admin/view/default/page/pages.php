@@ -7,12 +7,12 @@
       [
         'id'    => $data['type'] . '.all',
         'url'   => getUrlByName('admin.' . $data['type']),
-        'name'  => Translate::get('all'),
+        'name'  => __('all'),
         'icon'  => 'bi-record-circle'
       ],  [
         'id'    => 'add',
         'url'   => getUrlByName('page.add'),
-        'name'  => Translate::get('add'),
+        'name'  => __('add'),
         'icon'  => 'bi-plus-lg'
       ],
     ]
@@ -25,7 +25,7 @@
       <a class="text-2xl" href="<?= getUrlByName('page', ['facet' => 'info', 'slug' => $page['post_slug']]); ?>">
         <i class="bi-info-square middle mr5"></i> <?= $page['post_title']; ?>
       </a>
-      <a class="text-sm gray-600" href="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
+      <a class="text-sm gray-600" href="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
         <i class="bi-pencil"></i>
       </a>
       <a data-type="post" data-id="<?= $page['post_id']; ?>" class="type-action gray-600 mr10 ml10">
@@ -40,7 +40,7 @@
 
   <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.topics')); ?>
 <?php } else { ?>
-  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
 <?php } ?>
 
 </main>

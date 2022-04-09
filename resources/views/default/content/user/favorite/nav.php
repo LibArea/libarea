@@ -5,6 +5,6 @@
 
   <div class="text-sm">
     <i class="bi-plus-lg gray-600 mr5"></i>
-    <a href="<?= getUrlByName('favorites.folders'); ?>"><?= Translate::get('folders'); ?></a>
+    <a href="<?= getUrlByName('favorites.folders'); ?>"><?= __('folders'); ?></a>
   </div>
 </div>

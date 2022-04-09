@@ -4,8 +4,7 @@ class Tpl
 {
     public static function agTheme($file)
     {
-        $user  = UserData::get();
-        $tpl_puth = $user['template'] . $file;
+        $tpl_puth = self::userTheme() . DIRECTORY_SEPARATOR . $file;
 
         if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php')) {
             $tpl_puth = 'default' . $file;
@@ -46,8 +45,20 @@ class Tpl
         extract($params);
 
         unset($params);
-        $hlTemplatePath = trim($hlTemplatePath, '/\\') . '.php';
 
-        require HLEB_GLOBAL_DIRECTORY . '/resources/views/' . self::agTheme('/' . $hlTemplatePath);
+        $tpl_puth = self::userTheme() . DIRECTORY_SEPARATOR . trim($hlTemplatePath, '/\\');
+ 
+        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php')) {
+            $tpl_puth = 'default' . $hlTemplatePath;
+        }
+
+        require TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php';
+    }
+    
+    public static function userTheme()
+    {
+        $user  = UserData::get();
+        
+        return $user['template'];
     }
 }

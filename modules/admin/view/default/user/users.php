@@ -7,12 +7,12 @@
       [
         'id' => $data['type'] . '.all',
         'url' => getUrlByName('admin.' . $data['type']),
-        'name' => Translate::get('all'),
+        'name' => __('all'),
         'icon' => 'bi-record-circle'
       ], [
         'id' => $data['type'] . '.ban',
         'url' => getUrlByName('admin.' . $data['type'] . '.ban'),
-        'name' => Translate::get('deleted'),
+        'name' => __('deleted'),
         'icon' => 'bi-x-circle'
       ]
     ]
@@ -24,12 +24,12 @@
     <table>
       <thead>
         <th>id</th>
-        <th><?= Translate::get('avatar'); ?></th>
-        <th><?= Translate::get('information'); ?></th>
-        <th>IP <?= Translate::get('registrations'); ?></th>
-        <th><?= Translate::get('last'); ?></th>
+        <th><?= __('avatar'); ?></th>
+        <th><?= __('information'); ?></th>
+        <th>IP <?= __('registrations'); ?></th>
+        <th><?= __('last'); ?></th>
         <th>Ban</th>
-        <th><?= Translate::get('edit'); ?></th>
+        <th><?= __('edit'); ?></th>
       </thead>
       <?php foreach ($data['alluser'] as $user) {  ?>
         <tr>
@@ -54,13 +54,13 @@
             <div class="text-sm">
               <?= $user['email']; ?>
               <?php if ($user['activated'] == 1) { ?>
-                <div class="gray-600"><?= Translate::get('email.activated'); ?></div>
+                <div class="gray-600"><?= __('email.activated'); ?></div>
               <?php } else { ?>
-                <div class="red"><?= Translate::get('not.activated'); ?> e-mail</div>
+                <div class="red"><?= __('not.activated'); ?> e-mail</div>
               <?php } ?>
             </div>
             <?php if ($user['limiting_mode'] == 1) { ?>
-              <div class="red"><?= Translate::get('dumb.mode'); ?></div>
+              <div class="red"><?= __('dumb.mode'); ?></div>
             <?php } ?>
             <?php if (!empty($user['banlist_int_num'])) { ?>
               <div class="red">bans: <?= $user['banlist_int_num']; ?></div>
@@ -91,11 +91,11 @@
             <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
               <?php if ($user['ban_list']) { ?>
                 <span class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                  <span class="red"><?= Translate::get('unban'); ?></span>
+                  <span class="red"><?= __('unban'); ?></span>
                 </span>
               <?php } else { ?>
                 <span class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                  <?= Translate::get('ban.it'); ?>
+                  <?= __('ban.it'); ?>
                 </span>
               <?php } ?>
             <?php } else { ?>
@@ -103,7 +103,7 @@
             <?php } ?>
           </td>
           <td class="center">
-            <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
+            <a title="<?= __('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
           </td>
@@ -111,7 +111,7 @@
       <?php } ?>
     </table>
   <?php } else { ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
   <?php } ?>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('admin.users')); ?>
 </div>

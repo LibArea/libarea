@@ -10,7 +10,7 @@
       </div>
     <?php } else { ?>
       <div class="bg-red-200 p15 center mr10">
-        <?= sprintf(Translate::get('content.deleted'), Translate::get('post')); ?>...
+        <?= sprintf(__('content.deleted'), __('post')); ?>...
       </div>
     <?php } ?>
   </article>
@@ -19,7 +19,7 @@
       <div class="gray-600 italic">
         <?= $page['post_modified']; ?>
         <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
-          <a class="gray-600 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
+          <a class="gray-600 ml5" title="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
             <i class="bi-pencil"></i>
           </a>
         <?php } ?>
@@ -30,7 +30,7 @@
   <div class="box-white bg-violet-50 sticky top-sm text-sm">
     <?php if ($data['type'] == 'blog.page') { ?>
       <h3 class="uppercase-box">
-        <?= Translate::get('blog'); ?>
+        <?= __('blog'); ?>
       </h3>
       <div class="mb10">
         <?= Html::image($data['facet']['facet_img'], $data['facet']['facet_title'], 'img-base', 'logo', 'small'); ?>

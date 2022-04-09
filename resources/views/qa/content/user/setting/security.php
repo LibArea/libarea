@@ -13,13 +13,13 @@ $form->html_form($user['trust_level'], Config::get('form/user-security'));
 
       <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
-        <?= Html::sumbit(Translate::get('edit')); ?>
+        <?= Html::sumbit(__('edit')); ?>
       </fieldset>
     </form>
   </div>
 </main>
 <aside>
   <div class="box-white bg-violet-50 text-sm">
-    <?= Translate::get('security.info'); ?>
+    <?= __('security.info'); ?>
   </div>
 </aside>

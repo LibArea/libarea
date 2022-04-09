@@ -44,7 +44,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       <aside>
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
           <div class="bg-violet-50 box text-sm">
-            <h3 class="uppercase-box"><?= Translate::get('created.by'); ?></h3>
+            <h3 class="uppercase-box"><?= __('created.by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
               <?= Html::image($data['user']['avatar'], $data['user']['login'], 'ava-base', 'avatar', 'max'); ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>
@@ -63,14 +63,14 @@ if ($blog['facet_is_deleted'] == 0) { ?>
           <?php if (!empty($data['pages'])) { ?>
             <div class="sticky top0 top-sm">
               <div class="bg-violet-50 box text-sm">
-                <h3 class="uppercase-box"><?= Translate::get('pages'); ?></h3>
+                <h3 class="uppercase-box"><?= __('pages'); ?></h3>
                 <?php foreach ($data['pages'] as $ind => $row) { ?>
                   <div class="mb5">
                     <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('blog.article', ['slug' => $blog['facet_slug'], 'post_slug' => $row['post_slug']]); ?>">
                       <?= $row['post_title']; ?>
                     </a>
                     <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
-                      <a class="text-sm gray-600" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
+                      <a class="text-sm gray-600" title="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
                         <i class="bi-pencil"></i>
                       </a>
                     <?php } ?>
@@ -86,7 +86,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 <?php } else { ?>
   <div class="center">
     <i class="bi-x-octagon text-8xl"></i>
-    <div class="mt5 gray"><?= Translate::get('remote'); ?></div>
+    <div class="mt5 gray"><?= __('remote'); ?></div>
   </div>
 <?php } ?>
 

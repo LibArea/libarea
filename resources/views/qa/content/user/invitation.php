@@ -1,6 +1,6 @@
 <main class="col-two">
   <div class="box-flex-white bg-violet-50">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+    <p class="m0"><?= __($data['sheet']); ?></p>
   </div>
   <div class="p15">
     <?php if ($user['trust_level'] > 1) { ?>
@@ -8,13 +8,13 @@
         <?php csrf_field(); ?>
         <fieldset>
           <input type="email" name="email">
-          <div class="right pt5"><?= Html::sumbit(Translate::get('send')); ?></div>
-          <div class="text-sm pt5 gray-600"><?= Translate::get('enter'); ?> E-mail</div>
+          <div class="right pt5"><?= Html::sumbit(__('send')); ?></div>
+          <div class="text-sm pt5 gray-600"><?= __('enter'); ?> E-mail</div>
         </fieldset>
-        <?= Translate::get('invitations.left'); ?> <?= 5 - $data['count_invites']; ?>
+        <?= __('invitations.left'); ?> <?= 5 - $data['count_invites']; ?>
       </form>
 
-      <h3><?= Translate::get('invited.guests'); ?></h3>
+      <h3><?= __('invited.guests'); ?></h3>
 
       <?php if (!empty($data['invitations'])) { ?>
 
@@ -23,21 +23,21 @@
             <div class="text-sm gray">
               <?= Html::image($invite['avatar'], $invite['login'], 'ava', 'avatar', 'small'); ?>
               <a href="<?= $invite['login']; ?>"><?= $invite['login']; ?></a>
-              - <?= Translate::get('registered'); ?>
+              - <?= __('registered'); ?>
             </div>
 
             <?php if (UserData::checkAdmin()) { ?>
-              <?= Translate::get('link.used'); ?>: 
+              <?= __('link.used'); ?>: 
               <?= $invite['invitation_email']; ?>
               <code class="block w-90">
                 <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
               </code>
             <?php } ?>
 
-            <span class="text-sm gray"><?= Translate::get('link.used'); ?></span>
+            <span class="text-sm gray"><?= __('link.used'); ?></span>
           <?php } else { ?>
-            <?= Translate::get('for'); ?> (<?= $invite['invitation_email']; ?>) 
-            <?= Translate::get('can.send.this.link'); ?>:
+            <?= __('for'); ?> (<?= $invite['invitation_email']; ?>) 
+            <?= __('can.send.this.link'); ?>:
             <code class="block w-90">
               <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
             </code>
@@ -47,16 +47,16 @@
         <?php } ?>
 
       <?php } else { ?>
-        <?= Translate::get('no.invites'); ?>
+        <?= __('no.invites'); ?>
       <?php } ?>
 
     <?php } else { ?>
-      <?= Translate::get('limit.tl.invitation'); ?>.
+      <?= __('limit.tl.invitation'); ?>.
     <?php } ?>
   </div>
 </main>
 <aside>
   <div class="box-white bg-violet-50 text-sm">
-    <?= Translate::get('invite.features'); ?>
+    <?= __('invite.features'); ?>
   </div>
 </aside>

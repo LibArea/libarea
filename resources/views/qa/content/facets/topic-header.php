@@ -32,7 +32,7 @@
 </div>
 
 <div class="box-flex-white bg-violet-50">
-  <p class="m0 text-xl mb-none"><?= Translate::get($data['type']); ?></p>
+  <p class="m0 text-xl mb-none"><?= __($data['type']); ?></p>
   <ul class="nav">
 
     <?= Tpl::insert(
@@ -44,17 +44,17 @@
           [
             'id'      => 'facet.feed',
             'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]),
-            'title'   => Translate::get('feed'),
+            'title'   => __('feed'),
             'icon'    => 'bi-sort-down'
           ], [
             'id'      => 'facet.recommend',
             'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
-            'title'   => Translate::get('recommended'),
+            'title'   => __('recommended'),
             'icon'    => 'bi-lightning'
           ],  [
             'id'      => 'writers',
             'url'     => getUrlByName('topic.writers', ['slug' => $topic['facet_slug']]),
-            'title'   => Translate::get('writers'),
+            'title'   => __('writers'),
             'icon'    => 'bi-award'
           ], [
             'id'      => 'info',

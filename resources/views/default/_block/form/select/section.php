@@ -1,5 +1,5 @@
 <fieldset>
-  <label><?= Translate::get('section'); ?></label>
+  <label><?= __('section'); ?></label>
   <input name="facet_select" id="section_id">
 </fieldset>
 

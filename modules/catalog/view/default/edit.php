@@ -24,10 +24,10 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
     <?= Tpl::insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
-            'name' => Translate::get('home'),
+            'name' => __('home'),
             'link' => getUrlByName('web')
           ], [
-            'name' => Translate::get('site.edit'),
+            'name' => __('site.edit'),
             'link' => 'red'
           ],
         ]
@@ -50,8 +50,8 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
           'data'      => $data,
           'action'    => 'edit',
           'type'      => 'post',
-          'title'     => Translate::get('related posts'),
-          'help'      => Translate::get('necessarily'),
+          'title'     => __('related posts'),
+          'help'      => __('necessarily'),
         ]); ?>
         
          <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
@@ -60,21 +60,21 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
               'user'          => $data['user'],
               'action'        => 'user',
               'type'          => 'user',
-              'title'         => Translate::get('author'),
-              'help'          => Translate::get('necessarily'),
+              'title'         => __('author'),
+              'help'          => __('necessarily'),
             ]); ?>
         <?php } ?>
 
         <input type="hidden" name="item_id" value="<?= $domain['item_id']; ?>">
 
-        <?= $form->sumbit(Translate::get('edit')); ?>
+        <?= $form->sumbit(__('edit')); ?>
       </form>
     </div>
   </main>
   <aside>
     <div class="box-white box-shadow-all text-sm">
-      <h3 class="uppercase-box"><?= Translate::get('help'); ?></h3>
-      <?= Translate::get('add.site.help'); ?>
+      <h3 class="uppercase-box"><?= __('help'); ?></h3>
+      <?= __('add.site.help'); ?>
       <div>
   </aside>
 </div>

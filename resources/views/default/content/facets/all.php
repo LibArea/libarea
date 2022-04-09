@@ -1,8 +1,8 @@
 <main class="col-two">
   <div class="box-white center">
-    <h1 class="text-xl"><?= Translate::get($data['sheet']); ?></h1>
+    <h1 class="text-xl"><?= __($data['sheet']); ?></h1>
     <span class="text-sm gray-600">
-      <?= Translate::get($data['sheet'] . '.info'); ?>.
+      <?= __($data['sheet'] . '.info'); ?>.
     </span>
   </div>
 
@@ -18,20 +18,20 @@
             [
               'id'    => $data['type'] . 's.all',
               'url'   => getUrlByName($data['type'] . 's.all'),
-              'title' => Translate::get('all'),
+              'title' => __('all'),
               'icon'  => 'bi-app'
             ],
             [
               'id'    => $data['type'] . 's.new',
               'url'   => getUrlByName($data['type'] . 's.new'),
-              'title' => Translate::get('new.ones'),
+              'title' => __('new.ones'),
               'icon'  => 'bi-sort-up'
             ],
             [
               'tl'    => 1,
               'id'    => $data['type'] . 's.my',
               'url'   => getUrlByName($data['type'] . 's.my'),
-              'title' => Translate::get('reading'),
+              'title' => __('reading'),
               'icon'  => 'bi-check2-square'
             ],
           ]
@@ -44,13 +44,13 @@
       <p class="m0 text-xl">
         <?php if ($data['type'] == 'blog') { ?>
           <?php if ($data['limit']) { ?>
-            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('content.add', ['type' => $data['type']]); ?>">
+            <a class="ml15" title="<?= __('add'); ?>" href="<?= getUrlByName('content.add', ['type' => $data['type']]); ?>">
               <i class="bi-plus-lg middle"></i>
             </a>
           <?php } ?>
         <?php } else { ?>
           <?php if (UserData::checkAdmin()) { ?>
-            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('content.add', ['type' => $data['type']]); ?>">
+            <a class="ml15" title="<?= __('add'); ?>" href="<?= getUrlByName('content.add', ['type' => $data['type']]); ?>">
               <i class="bi-plus-lg middle"></i>
             </a>
           <?php } ?>
@@ -69,7 +69,7 @@
         </div>
       <?php } ?>
     <?php } else { ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no.content'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.content'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
   </div>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>

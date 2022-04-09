@@ -10,14 +10,14 @@
       <i class="bi-calendar-week middle"></i>
       <span class="middle lowercase text-sm">
         <?= Html::langDate($profile['created_at']); ?>
-        <sup class="ml5"><?= Translate::get('tl' . $profile['trust_level'] . '.title'); ?></sup>
+        <sup class="ml5"><?= __('tl' . $profile['trust_level'] . '.title'); ?></sup>
       </span>
     </div>
   </div>
 
   <?php if ($data['blogs']) { ?>
     <div class="bg-violet-50 box">
-      <h3 class="uppercase-box"><?= Translate::get('created.by'); ?></h3>
+      <h3 class="uppercase-box"><?= __('created.by'); ?></h3>
       <?php foreach ($data['blogs'] as $blog) { ?>
         <div class="w-100 mb-w100 mb15 flex flex-row">
           <a class="mr10" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
@@ -47,7 +47,7 @@
   <?php if ($profile['my_post'] != 0) { ?>
     <?php $post = $data['post']; ?>
     <div class="bg-violet-50 box">
-      <h3 class="uppercase-box"><?= Translate::get('selected.post'); ?></h3>
+      <h3 class="uppercase-box"><?= __('selected.post'); ?></h3>
       <div class="mt5">
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
@@ -78,7 +78,7 @@
 
   <?php if ($data['topics']) { ?>
     <div class="bg-violet-50 box">
-      <h3 class="uppercase-box"><?= Translate::get('is.reading'); ?></h3>
+      <h3 class="uppercase-box"><?= __('is.reading'); ?></h3>
       <?php foreach ($data['topics'] as  $topic) { ?>
         <div class="mt5 mb5">
           <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
@@ -92,7 +92,7 @@
 
   <?php if (!empty($data['participation'][0]['facet_id'])) { ?>
     <div class="bg-violet-50 box">
-      <h3 class="uppercase-box"><?= Translate::get('understands'); ?></h3>
+      <h3 class="uppercase-box"><?= __('understands'); ?></h3>
       <?php foreach ($data['participation'] as $part) { ?>
         <a class="tags" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
           <?= $part['facet_title']; ?>
@@ -102,7 +102,7 @@
   <?php } ?>
 
   <div class="bg-violet-50 box">
-    <h3 class="uppercase-box"><?= Translate::get('contacts'); ?></h3>
+    <h3 class="uppercase-box"><?= __('contacts'); ?></h3>
     <?php foreach (Config::get('form/user-setting') as $block) { ?>
       <?php if ($profile[$block['title']]) { ?>
         <div class="mt5">
@@ -126,11 +126,11 @@
   </div>
 
   <div class="bg-violet-50 box">
-    <h3 class="uppercase-box"><?= Translate::get('badges'); ?></h3>
+    <h3 class="uppercase-box"><?= __('badges'); ?></h3>
     <div class="m0 text-3xl">
-      <i title="<?= Translate::get('medal.registration'); ?>" class="bi-gift sky"></i>
+      <i title="<?= __('medal.registration'); ?>" class="bi-gift sky"></i>
       <?php if ($profile['id'] < 50) { ?>
-        <i title="<?= Translate::get('first.days'); ?>" class="bi-award green"></i>
+        <i title="<?= __('first.days'); ?>" class="bi-award green"></i>
       <?php } ?>
       <?php foreach ($data['badges'] as $badge) { ?>
         <?= $badge['badge_icon']; ?>
@@ -140,28 +140,28 @@
 
   <?php if (UserData::checkAdmin()) { ?>
     <div class="box-white">
-      <h3 class="uppercase-box"><?= Translate::get('admin'); ?></h3>
+      <h3 class="uppercase-box"><?= __('admin'); ?></h3>
       <div class="mt5">
         <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
           <?php if ($profile['ban_list'] == 1) { ?>
             <span class="type-ban gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
               <i class="bi-person-x-fill red middle mr5"></i>
-              <span class="red text-sm"><?= Translate::get('unban'); ?></span>
+              <span class="red text-sm"><?= __('unban'); ?></span>
             </span>
           <?php } else { ?>
             <span class="type-ban text-sm gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
               <i class="bi-person-x middle mr5"></i>
-              <?= Translate::get('ban.it'); ?>
+              <?= __('ban.it'); ?>
             </span>
           <?php } ?>
         <?php } ?>
         <a class="gray mb5 block" href="<?= getUrlByName('admin.user.edit', ['id' => $profile['id']]); ?>">
           <i class="bi-gear middle mr5"></i>
-          <span class="middle"><?= Translate::get('edit'); ?></span>
+          <span class="middle"><?= __('edit'); ?></span>
         </a>
         <a class="gray block" href="<?= getUrlByName('admin.badges.user.add', ['id' => $profile['id']]); ?>">
           <i class="bi-award middle mr5"></i>
-          <span class="middle"><?= Translate::get('reward.user'); ?></span>
+          <span class="middle"><?= __('reward.user'); ?></span>
         </a>
         <?php if ($profile['whisper']) { ?>
           <div class="tips text-sm pt15 pb10 gray-600">

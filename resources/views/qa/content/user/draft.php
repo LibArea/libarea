@@ -13,17 +13,17 @@
         </a>
         <div class="mr5 text-sm gray-600 lowercase">
           <?= $draft['post_date']; ?> |
-          <a href="<?= getUrlByName('post.edit', ['id' => $draft['post_id']]); ?>"><?= Translate::get('edit'); ?></a>
+          <a href="<?= getUrlByName('post.edit', ['id' => $draft['post_id']]); ?>"><?= __('edit'); ?></a>
         </div>
 
       <?php } ?>
     </div>
     <?php } else { ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => Translate::get('no.content'), 'icon' => 'bi-journal-richtext']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.content'), 'icon' => 'bi-journal-richtext']); ?>
     <?php } ?>
 </main>
 <aside>
   <div class="box-white bg-violet-50 text-sm">
-    <?= Translate::get('being.developed'); ?>
+    <?= __('being.developed'); ?>
   </div>
 </aside>

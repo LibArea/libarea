@@ -5,7 +5,7 @@
     <?php if (!empty($data['writers'])) { ?>
       <div class="flex items-center m10">
         <i class="bi-award red text-3xl mr10"></i>
-        <h2 class="gray-600"><?= Translate::get('by.deposit'); ?></h2>
+        <h2 class="gray-600"><?= __('by.deposit'); ?></h2>
       </div>
       <hr class="mb20">
       <?php foreach ($data['writers'] as $ind => $row) { ?>

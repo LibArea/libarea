@@ -7,13 +7,13 @@
       [
         'id'    => $data['type'],
         'url'   => getUrlByName('admin.facets.type', ['type' => $data['type']]),
-        'name'  => Translate::get('all'),
+        'name'  => __('all'),
         'icon'  => 'bi-x-circle'
       ],
       [
         'id'    => 'ban.facet',
         'url'   => getUrlByName('admin.facets.ban.type', ['type' => $data['type']]),
-        'name'  => Translate::get('deleted'),
+        'name'  => __('deleted'),
         'icon'  => 'bi-x-circle'
       ]
     ]
@@ -72,7 +72,7 @@
     <?php } ?>
   <?php } else { ?>
     <?php if ($data['type'] != 'all') { ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => Translate::get('no'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
     <?php } ?>
   <?php } ?>
 </div>

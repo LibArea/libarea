@@ -12,10 +12,10 @@
       <?= Tpl::insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
-            'name' => Translate::get('admin'),
+            'name' => __('admin'),
             'link' => getUrlByName('admin')
           ], [
-            'name' => Translate::get($data['type']),
+            'name' => __($data['type']),
             'link' => $data['type']
           ],
         ]
