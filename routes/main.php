@@ -15,6 +15,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/folder/content/del')->controller('FolderController@delFolderContent');
         Route::get('/folder/del')->controller('FolderController@delFolder');
         
+        Route::get('/team/action')->module('teams', 'App\Teams@action');
         // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
         Route::get('/votes')->controller('VotesController'); 
@@ -27,12 +28,13 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
                 Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit')->name('setting.security.edit');
                 Route::get('/users/setting/notification/edit')->controller('User\SettingController@notificationEdit')->name('setting.notif.edit');
                 
-                // Add / Edit: post | comment | answer | facet | web
+                // Add / Edit: post | comment | answer | facet | web | team
                 Route::get('/web/create')->module('catalog', 'App\Add@create')->name('web.create');
                 Route::get('/web/reply/create')->module('catalog', 'App\Reply@create')->name('reply.create');
                 Route::get('/web/reply/edit')->module('catalog', 'App\Reply@edit')->name('reply.edit');
                 Route::get('/web/change')->module('catalog', 'App\Edit@edit')->name('web.change');
-                Route::get('/team/change')->module('teams', 'App\Teams@create')->name('team.create');
+                Route::get('/team/create')->module('teams', 'App\Teams@create')->name('team.create');
+                Route::get('/team/change')->module('teams', 'App\Teams@change')->name('team.change');
                 
                 Route::get('/create/{type}')->controller('ActionController@create')->where(['type' => '[a-z]+'])->name('content.create');
                 Route::get('/change/{type}')->controller('ActionController@change')->where(['type' => '[a-z]+'])->name('content.change');
@@ -63,8 +65,9 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/web/my/page/{page?}')->module('catalog', 'App\UserArea', ['web.user.sites', 'sites'])->where(['page' => '[0-9]+']);
 
     Route::get('/teams')->module('teams', 'App\Teams')->name('teams');
-    Route::get('/teams/add')->module('teams', 'App\Teams@add')->name('team.add');
-    Route::get('/teams/edit/{id}')->module('teams', 'App\Teams@edit')->where(['id' => '[0-9]+'])->name('team.edit');
+    Route::get('/team/add')->module('teams', 'App\Teams@add')->name('team.add');
+    Route::get('/team/edit/{id}')->module('teams', 'App\Teams@edit')->where(['id' => '[0-9]+'])->name('team.edit');
+    Route::get('/team/view/{id}')->module('teams', 'App\Teams@view')->where(['id' => '[0-9]+'])->name('team.view');
 
     Route::get('/setting/{type?}')->controller('User\SettingController')->where(['section' => '[a-z]+'])->name('setting'); 
 
