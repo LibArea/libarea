@@ -30,7 +30,7 @@ class Teams
                 'meta'  => Meta::get(__('teams')),
                 'user'  => $this->user,
                 'data'  => [
-                    'type'  => 'user',
+                    'type'  => 'teams',
                     'teams' => $teams,
                     'limit' => $this->limit,
                     'count' => TeamModel::allCount($this->user['id']),
