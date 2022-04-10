@@ -6,6 +6,7 @@ $data = [
     'team.change'       => 'Befehl erfolgreich geändert',
     'team.reestablish'  => 'Der Befehl wurde gelöscht',
     'team.info'         => 'Sie können bis zu 5 Teams erstellen, um zusammenzuarbeiten.',
+    'no.users'          => 'Keine Teammitglieder',
 ];
 
 return $data;

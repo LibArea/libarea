@@ -28,13 +28,37 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
         return  DB::run($sql, ['id' => $id])->fetch();
     }
 
-    // All participant teams
-    // Все команды участника
-    public static function all($uid)
-    {
-        $sql = "SELECT id, name, content, user_id, is_deleted FROM teams WHERE user_id = :uid";
-
-        return  DB::run($sql, ['uid' => $uid])->fetchAll();
+    // Get the full version of teams with participants in them
+    // Получим полную версию команд с участниками в них
+     public static function all($uid, $limit)
+     {
+         $sql = "SELECT 
+                    t.id,
+                    t.name,
+                    t.content,
+                    t.user_id,
+                    t.created_at,
+                    t.updated_at,
+                    t.is_deleted,
+                    u.id as uid,
+                    u.login,
+                    u.avatar,
+                    rel.*
+                     FROM teams t
+                        LEFT JOIN users u ON t.user_id = u.id
+                         LEFT JOIN (
+                            SELECT 
+                                team_id,
+                                GROUP_CONCAT(id, '@', login, '@', avatar SEPARATOR '@') AS users_list
+                                FROM users
+                                LEFT JOIN teams_users_relation 
+                                    on user_id = id
+                                        GROUP BY team_id
+                            ) AS rel
+                                ON rel.team_id= t.id
+                                        WHERE u.id = :uid LIMIT :limit";
+                            
+        return DB::run($sql, ['uid' => $uid, 'limit' => $limit])->fetchAll(); 
     }
 
     // Number of folders

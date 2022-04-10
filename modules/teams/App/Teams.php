@@ -23,7 +23,7 @@ class Teams
     {
         Request::getResources()->addBottomScript('/assets/js/team.js');
 
-        $teams = TeamModel::all($this->user['id']);
+        $teams = TeamModel::all($this->user['id'], $this->limit);
 
         return view(
             '/view/default/user',
@@ -191,4 +191,27 @@ class Teams
 
         TeamModel::action($id, $team['is_deleted']);
     }
+    
+   // Formation of team members
+    public static function users($users)
+    {
+        if (!$users) {
+            return '';
+        }
+
+        if (!is_array($users)) {
+            $users = preg_split('/(@)/', $users);
+        }
+
+        $result = [];
+        foreach (array_chunk($users, 3) as $ind => $row) {
+            $result[] = '<a class="mr15 gray-600" href="' . getUrlByName('profile', ['login' => $row[1]]) . '">
+            ' . Html::image($row[2], $row[1], 'ava-sm', 'avatar', 'small') . '
+            ' . $row[1] . '</a>';
+        }
+
+        return implode($result);
+    }
+    
+    
 }

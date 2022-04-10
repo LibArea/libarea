@@ -16,6 +16,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/folder/del')->controller('FolderController@delFolder');
         
         Route::get('/team/action')->module('teams', 'App\Teams@action');
+        Route::get('/team/search/user')->module('teams', 'App\Search@select');
         // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
         Route::get('/votes')->controller('VotesController'); 
