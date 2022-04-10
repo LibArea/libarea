@@ -48,4 +48,5 @@
     </div>
   </div>
   <aside>
+
     <?= Tpl::insert('/footer', ['user' => $user]); ?>

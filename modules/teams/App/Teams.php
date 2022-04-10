@@ -21,8 +21,9 @@ class Teams
     // Все команды созданные пользователем
     public function index()
     {
-        $teams = TeamModel::all($this->user['id']);
         Request::getResources()->addBottomScript('/assets/js/team.js');
+
+        $teams = TeamModel::all($this->user['id']);
 
         return view(
             '/view/default/user',
@@ -55,8 +56,9 @@ class Teams
                 'meta'  => Meta::get(__('team')),
                 'user'  => $this->user,
                 'data'  => [
-                    'type'  => 'view',
-                    'team'  => $team,
+                    'type'          => 'view',
+                    'team'          => $team,
+                    'team_users'    => TeamModel::getUsersTeam($team['id']),
                 ]
             ]
         );
@@ -101,6 +103,7 @@ class Teams
                 'data'  => [
                     'type'  => 'edit',
                     'team'  => $team,
+                    'users' => TeamModel::getUsersTeam($team['id']),
                 ]
             ]
         );
@@ -151,14 +154,28 @@ class Teams
 
         TeamModel::edit(
             [
-                'id'        => $id,
-                'name'      => $name,
-                'content'   => $content,
+                'id'            => $id,
+                'name'          => $name,
+                'content'       => $content,
+                'updated_at'    => date("Y-m-d H:i:s"),
             ]
         );
 
+        $users    = Request::getPost() ?? [];
+        self::editUser($users, $id);
+
         Html::addMsg('team.change', 'success');
         redirect(getUrlByName('teams'));
+    }
+
+
+    // Add fastes (blogs, topics) to the post 
+    public static function editUser($users, $content_id)
+    {
+        $arr = $users['user_id'] ?? [];
+        $arr_user = json_decode($arr, true);
+
+        return TeamModel::editUsersRelation($arr_user, $content_id);
     }
 
     // Deleting or restoring a team

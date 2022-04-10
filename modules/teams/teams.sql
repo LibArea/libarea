@@ -15,20 +15,15 @@ CREATE TABLE `teams` (
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
  
-CREATE TABLE `teams_relation` (
+CREATE TABLE `teams_content_relation` (
   `team_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL
+  `content_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-CREATE TABLE `teams_users` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `teams_users_relation` (
   `team_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_access` int(6) NOT NULL DEFAULT '1' COMMENT 'Права: 1 - общие, 2 - расширенные, 3 - полные',
-  `is_deleted` tinyint(1) NOT NULL DEFAULT '0'
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
 
 --
@@ -41,14 +36,11 @@ ALTER TABLE `teams`
 ALTER TABLE `teams`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-
-ALTER TABLE `teams_relation`
+ALTER TABLE `teams_content_relation`
   ADD KEY `team_id` (`team_id`) USING BTREE,
-  ADD KEY `item_id` (`item_id`) USING BTREE;
+  ADD KEY `content_id` (`content_id`) USING BTREE;
   
-ALTER TABLE `teams_users`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `teams_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `teams_users_relation`
+  ADD KEY `team_id` (`team_id`) USING BTREE,
+  ADD KEY `user_id` (`user_id`) USING BTREE;
   
