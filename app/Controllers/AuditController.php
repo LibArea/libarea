@@ -106,7 +106,7 @@ class AuditController extends MainController
     public static function estimationUrl($content)
     {
         $regex = '/(?<!!!\[\]\(|"|\'|\=|\)|>)(https?:\/\/[-a-zA-Z0-9@:;%_\+.~#?\&\/\/=!]+)(?!"|\'|\)|>)/i';
-        if ($info = preg_match($regex, $content, $matches)) {
+        if (preg_match($regex, $content, $matches)) {
             return  $matches[1];
         }
         return false;

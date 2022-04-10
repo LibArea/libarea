@@ -12,7 +12,7 @@
         <?php } ?>
       </h1>
       <div class="gray">
-        <?= Content::text(Html::fragment($data['site']['item_content']), 'line'); ?>
+        <?= Html::fragment(Content::text($data['site']['item_content'], 'line'), 200); ?>
       </div>
       <div class="gray mt5 mb5">
         <a class="green" rel="nofollow noreferrer ugc" href="<?= $data['site']['item_url']; ?>">

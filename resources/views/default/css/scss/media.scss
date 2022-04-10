@@ -35,11 +35,6 @@ main { width: calc(100% - 390px); }
 
   .menu__left {
     opacity: 0;
-    position: absolute;
-  }
-
-  .menu__left {
-    opacity: 0;
     visibility: hidden;
     transition-property: opacity, visibility;
     z-index: 98;

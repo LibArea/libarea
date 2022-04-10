@@ -86,7 +86,7 @@
               </a>
               <span class="middle lowercase gray-600"><?= Html::langDate($answer['answer_date']); ?></span>
               <a class="last-content_telo" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
-                <?= Html::cutWords($answer['answer_content'], 8); ?>...
+                <?= Html::fragment(Content::text($answer['answer_content'], 'line'), 98); ?>
               </a>
             </li>
           <?php } ?>

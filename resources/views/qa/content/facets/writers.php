@@ -18,7 +18,11 @@
               <?= Html::image($row['avatar'], $row['login'], 'ava-base', 'avatar', 'max'); ?>
               <div class="ml5">
                 <div class="gray-600"><?= $row['login']; ?></div>
-                <?php if ($row['about']) { ?><div class="mb-none text-sm"><?= Html::cutWords($row['about'], 5); ?></div><?php } ?>
+                <?php if ($row['about']) { ?>
+                  <div class="mb-none text-sm">
+                    <?= Html::fragment(Content::text($row['about'], 'line'), 88); ?>
+                  </div>
+                <?php } ?>
               </div>
             </a>
           </div>

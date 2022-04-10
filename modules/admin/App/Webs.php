@@ -15,7 +15,6 @@ class Webs
         Html::pageError404($item);
 
         $puth = HLEB_PUBLIC_DIR . PATH_FAVICONS . $item["item_domain"] . '.png';
-        $dirF = HLEB_PUBLIC_DIR . PATH_FAVICONS;
 
         if (!file_exists($puth)) {
             $urls = self::getFavicon($item['item_domain']);

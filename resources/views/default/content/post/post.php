@@ -43,7 +43,7 @@
             <?php } ?>
           </div>
           <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray">
-            <?= Content::text(Html::fragment($post['post_content']), 'line'); ?>
+            <?= Html::fragment(Content::text($post['post_content'], 'line'), 200); ?>
             <span class="s_<?= $post['post_id']; ?> show_detail"></span>
           </div>
         </div>

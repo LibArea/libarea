@@ -85,8 +85,7 @@ class PostController extends MainController
             $content_img  = PATH_POSTS_THUMB . $content['post_thumb_img'];
         }
 
-        $description  = explode("\n", $content['post_content']);
-        $description  = strip_tags($description[0]);
+        $description  = Html::fragment(Content::text($content['post_content'], 'line'), 250);
         if ($description == '') {
             $description = strip_tags($content['post_title']);
         }

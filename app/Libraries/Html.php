@@ -14,7 +14,7 @@ class Html
         }
 
         $result = [];
-        foreach (array_chunk($facet, 3) as $ind => $row) {
+        foreach (array_chunk($facet, 3) as $row) {
             if ($row[0] == $type) {
                 if ($type == 'category') {
                     $result[] = '<a class="' . $css . '" href="' . getUrlByName($url, ['cat' => $choice, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
@@ -115,20 +115,6 @@ class Html
                 return ($a[2] . " " . $months[$mm] . " " . $a[0] . " " . $a[3] . ":" . $a[4]);
             }
         }
-    }
-
-    // Getting a piece of text
-    public static function fragment($content, $maxlen = '20')
-    {
-        $text = explode("\n", $content);
-        $words = preg_split('#[\s\r\n]+#um', $text[0]);
-
-        if ($maxlen < count($words)) {
-            $words = array_slice($words, 0, $maxlen);
-            return join(' ', $words) . '...';
-        }
-
-        return $text[0];
     }
 
     // Voting for posts, replies, comments and sites
@@ -254,17 +240,17 @@ class Html
         return $html;
     }
 
-    // Trimming text by words
-    public static function cutWords($content, $maxlen)
-    {
-        $words = preg_split('#[\s\r\n]+#um', $content);
-        if ($maxlen < count($words)) {
-            $words = array_slice($words, 0, $maxlen);
+    // Getting a piece of text
+    public static function fragment($str, $lenght = 100, $end = '...', $charset = 'UTF-8', $token = '~') {
+        $str = strip_tags($str);
+        if (mb_strlen($str, $charset) >= $lenght) {
+            $wrap = wordwrap($str, $lenght, $token);
+            $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, $token, 0, $charset), $charset);    
+            return $str_cut .= $end;
+        } else {
+            return $str;
         }
-        $code_match = array('>', '*', '!', '~', '`', '[ADD:');
-        $words      = str_replace($code_match, '', $words);
-        return join(' ', $words);
-    }
+    } 
 
     public static function getMsg()
     {

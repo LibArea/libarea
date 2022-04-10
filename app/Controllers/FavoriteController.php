@@ -28,7 +28,7 @@ class FavoriteController extends MainController
 
         self::redirectItem($content_id, $type, $this->user);
 
-        $action = FavoriteModel::setFavorite(
+        FavoriteModel::setFavorite(
             [
                 'tid'           => $content_id,
                 'user_id'       => $this->user['id'],
