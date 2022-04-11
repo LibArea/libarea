@@ -37,10 +37,10 @@ ALTER TABLE `teams`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `teams_content_relation`
-  ADD KEY `team_id` (`team_id`) USING BTREE,
-  ADD KEY `content_id` (`content_id`) USING BTREE;
+    ADD UNIQUE INDEX `tc_relation` (`team_id`, `content_id`);  
   
 ALTER TABLE `teams_users_relation`
-  ADD KEY `team_id` (`team_id`) USING BTREE,
-  ADD KEY `user_id` (`user_id`) USING BTREE;
-  
+    ADD UNIQUE INDEX `tu_relation` (`team_id`, `user_id`);
+    
+ALTER TABLE `teams_content_relation` ADD INDEX(`content_id`); 
+ALTER TABLE `teams_users_relation` ADD INDEX(`team_id`);   
