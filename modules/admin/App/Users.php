@@ -5,7 +5,7 @@ namespace Modules\Admin\App;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, BadgeModel};
 use Modules\Admin\App\Models\{BanUserModel, UserModel};
-use Validation, Translate, UserData, Meta, Html;
+use Validation, Translate, UserData, Meta, Html, Tpl;
 
 class Users
 {
@@ -20,11 +20,9 @@ class Users
 
     public function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-
+        $pageNumber = Tpl::pageNumber();
         $pagesCount = UserModel::getUsersCount($sheet);
-        $user_all   = UserModel::getUsers($page, $this->limit, $sheet);
+        $user_all   = UserModel::getUsers($pageNumber, $this->limit, $sheet);
 
         $result = [];
         foreach ($user_all as $ind => $row) {
@@ -41,7 +39,7 @@ class Users
                 'meta'  => Meta::get(Translate::get('users')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'alluser'       => $result,
                     'sheet'         => $sheet,
                     'type'          => $type,
@@ -143,6 +141,7 @@ class Users
                 'limiting_mode' => Request::getPostInt('limiting_mode'),
                 'template'      => $user['template'] ?? 'default',
                 'lang'          => $user['lang'] ?? 'ru',
+                'scroll'        => $user['lang'] ?? 0,
                 'trust_level'   => Request::getPostInt('trust_level'),
                 'updated_at'    => date('Y-m-d H:i:s'),
                 'color'         => Request::getPostString('color', '#339900'),

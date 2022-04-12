@@ -102,12 +102,12 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                                         
                         $string 
                         $display 
-                        $sort LIMIT $start, $limit";
+                        $sort LIMIT :start, :limit";
 
 
-        $request = ['qa' => $slug];
+        $request = ['qa' => $slug, 'start' => $start, 'limit' => $limit];
         if ($sheet == 'facet.feed' || $sheet == 'facet.recommend') {
-            $request = ['qa' => "%" . $slug . "@%"];
+            $request = ['qa' => "%" . $slug . "@%", 'start' => $start, 'limit' => $limit];
         }
 
         return DB::run($sql, $request)->fetchAll();

@@ -8,7 +8,7 @@
 ); ?>
 
 <div class="box-white">
-  <form action="/admin/badge/edit/<?= $data['badge']['badge_id']; ?>" method="post">
+  <form action="<?= getUrlByName('admin.badge.change', ['id' => $data['badge']['badge_id']]); ?>" method="post">
     <?= csrf_field() ?>
     <fieldset>
       <label>Id</label>

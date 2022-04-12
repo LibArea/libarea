@@ -15,7 +15,7 @@
 ); ?>
 
 <div class="box-white">
-  <?php if (!empty($data['badges'])) { ?>
+  <?php if (!empty($data['badges'])) : ?>
     <table class="mt20">
       <thead>
         <th>Id</th>
@@ -23,7 +23,7 @@
         <th><?= __('title'); ?>&nbsp;/&nbsp;<?= __('description'); ?></th>
         <th><?= __('action'); ?></th>
       </thead>
-      <?php foreach ($data['badges'] as $key => $bg) { ?>
+      <?php foreach ($data['badges'] as $key => $bg) : ?>
         <tr>
           <td class="center">
             <?= $bg['badge_id']; ?>
@@ -37,16 +37,16 @@
             <?= $bg['badge_description']; ?>
           </td>
           <td class="center">
-            <a title="<?= __('edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
+            <a title="<?= __('edit'); ?>" href="<?= getUrlByName('admin.badges.edit', ['id' => $bg['badge_id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
           </td>
         </tr>
-      <?php } ?>
+      <?php endforeach; ?>
     </table>
-  <?php } else { ?>
+  <?php else : ?>
     <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
-  <?php } ?>
+  <?php endif; ?>
 </div>
 </div>
 </main>

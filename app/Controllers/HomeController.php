@@ -19,9 +19,8 @@ class HomeController extends MainController
     }
 
     public function index($sheet, $type)
-    {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+    { 
+        $pageNumber   = Tpl::pageNumber();
 
         if ($sheet == 'main.deleted' && !UserData::checkAdmin()) {
             redirect('/');
@@ -30,7 +29,7 @@ class HomeController extends MainController
         $latest_answers = HomeModel::latestAnswers($this->user);
         $topics_user    = HomeModel::subscription($this->user['id']);
         $pagesCount     = HomeModel::feedCount($topics_user, $this->user, $sheet);
-        $posts          = HomeModel::feed($page, $this->limit, $topics_user, $this->user, $sheet);
+        $posts          = HomeModel::feed($pageNumber, $this->limit, $topics_user, $this->user, $sheet);
 
         $topics = [];
         if (count($topics_user) == 0) {
@@ -53,7 +52,7 @@ class HomeController extends MainController
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
-                    'pNum'              => $page,
+                    'pNum'              => $pageNumber,
                     'sheet'             => $sheet,
                     'type'              => $type,
                     'latest_answers'    => $latest_answers,
@@ -69,17 +68,16 @@ class HomeController extends MainController
     // Бесконечный скролл
     public function scroll()
     {
-        $page           = Request::getInt('page');
-        $page           = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
         $topics_user    = HomeModel::subscription($this->user['id']);
-        $posts          = HomeModel::feed($page, $this->limit, $topics_user, $this->user, 'main.feed');
+        $posts          = HomeModel::feed($pageNumber, $this->limit, $topics_user, $this->user, 'main.feed');
 
         Tpl::agIncludeTemplate(
             '/content/post/postscroll',
             [
                 'user'  => $this->user,
                 'data'  => [
-                    'pages' => $page,
+                    'pages' => $pageNumber,
                     'sheet' => 'main.feed',
                     'posts' => $posts,
 

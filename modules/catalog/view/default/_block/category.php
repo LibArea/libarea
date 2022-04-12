@@ -52,11 +52,11 @@
 
     let tagify = new Tagify(input, options);
 
-    <?php if ($action == 'edit') { ?>
+    <?php if ($action == 'edit') : ?>
       tagify.addTags(JSON.parse('<?= json_encode($data['category_arr']) ?>'))
-    <?php } else { ?>
-      <?php if (!empty($data['topic'])) { ?>
-        <?php if ($data['topic']) {
+    <?php else : ?>
+      <?php if (!empty($data['topic'])) : ?>
+        <?php if ($data['topic']) :
           $id     = $data['topic']['facet_id'];
           $title  = $data['topic']['facet_title'];
         ?>
@@ -64,12 +64,12 @@
             value: '<?= $id; ?>',
             facet_title: '<?= $title; ?>'
           }])
-        <?php } else { ?>
+        <?php else : ?>
           tagify.addTags([])
-        <?php } ?>
-      <?php } else { ?>
+        <?php endif; ?>
+      <?php else : ?>
         tagify.addTags([])
-      <?php } ?>
-    <?php }  ?> 
+      <?php endif; ?>
+    <?php endif;  ?> 
   });
 </script>

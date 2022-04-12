@@ -80,9 +80,9 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 LEFT JOIN votes_post 
                     ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
 
-                WHERE post_type != 'page' AND post_draft = 0 $string $display $sort LIMIT $start, $limit";
+                WHERE post_type != 'page' AND post_draft = 0 $string $display $sort LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $user['id'], 'uid2' => $user['id']])->fetchAll();
+        return DB::run($sql, ['uid' => $user['id'], 'uid2' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function feedCount($topics_user, $user, $type)

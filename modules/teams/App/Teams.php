@@ -129,6 +129,7 @@ class Teams
                 'name'      => $name,
                 'content'   => $content,
                 'user_id'   => $this->user['id'],
+                'action_type' => 'post',
             ]
         );
 
@@ -140,8 +141,7 @@ class Teams
     // Изменение команды
     public function change()
     {
-        $id     = Request::getPostInt('id');
-        $team   = TeamModel::get($id);
+        $team = TeamModel::get(Request::getPostInt('id'));
         if ($team['user_id'] != $this->user['id']) {
             return;
         }
@@ -154,15 +154,16 @@ class Teams
 
         TeamModel::edit(
             [
-                'id'            => $id,
+                'id'            => $team['id'],
                 'name'          => $name,
                 'content'       => $content,
+                'action_type'   => 'post',
                 'updated_at'    => date("Y-m-d H:i:s"),
             ]
         );
 
         $users    = Request::getPost() ?? [];
-        self::editUser($users, $id);
+        self::editUser($users, $team['id']);
 
         Html::addMsg('team.change', 'success');
         redirect(getUrlByName('teams'));

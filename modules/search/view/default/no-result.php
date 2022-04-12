@@ -1,8 +1,8 @@
-<?php if ($query) { ?>
+<?php if ($query) : ?>
   <p><?= __('no.search.results'); ?></p>
-<?php } else { ?>
+<?php else : ?>
   <p><?= __('search.home'); ?>...</p>
-<?php } ?>
+<?php endif; ?>
 
 <a class="mb20 block" href="/">
   <i class="bi-house"></i>

@@ -23,15 +23,14 @@ class ProfileController extends MainController
     // Страница участника (профиль)
     function index($sheet, $type)
     {
-        $page       = Request::getInt('page');
-        $page       = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
         $profile    = self::profile();
 
         if (!$profile['about']) {
             $profile['about'] = Translate::get('riddle') . '...';
         }
 
-        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $profile['id']);
+        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $profile['id']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $profile['id']);
 
         $count = UserModel::contentCount($profile['id']);
@@ -45,7 +44,7 @@ class ProfileController extends MainController
                 'meta'  => self::metadata($sheet, $profile),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
-                    'pNum'              => $page,
+                    'pNum'              => $pageNumber,
                     'created_at'        => $profile['created_at'],
                     'count'             => $count,
                     'topics'            => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
@@ -65,11 +64,10 @@ class ProfileController extends MainController
 
     public function posts($sheet, $type)
     {
-        $page       = Request::getInt('page');
-        $page       = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
         $profile    = self::profile();
 
-        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $profile['id']);
+        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $profile['id']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $profile['id']);
 
         return Tpl::agRender(
@@ -78,7 +76,7 @@ class ProfileController extends MainController
                 'meta'  => self::metadata($sheet . '.all', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'posts'         => $posts,
@@ -96,11 +94,10 @@ class ProfileController extends MainController
 
     public function answers($sheet, $type)
     {
-        $page       = Request::getInt('page');
-        $page       = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
         $profile    = self::profile();
 
-        $answers    = AnswerModel::userAnswers($page, $this->limit, $profile['id'], $this->user['id']);
+        $answers    = AnswerModel::userAnswers($pageNumber, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = AnswerModel::userAnswersCount($profile['id']);
 
         return Tpl::agRender(
@@ -109,7 +106,7 @@ class ProfileController extends MainController
                 'meta'  => self::metadata($sheet, $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'answers'       => $answers,
@@ -128,11 +125,10 @@ class ProfileController extends MainController
     // Комментарии участника
     public function comments($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
         $profile   = self::profile();
 
-        $comments   = CommentModel::userComments($page, $this->limit, $profile['id'], $this->user['id']);
+        $comments   = CommentModel::userComments($pageNumber, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = CommentModel::userCommentsCount($profile['id']);
 
         return Tpl::agRender(
@@ -141,7 +137,7 @@ class ProfileController extends MainController
                 'meta'  => self::metadata($sheet, $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'comments'      => $comments,

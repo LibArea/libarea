@@ -47,9 +47,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                            AND fav.user_id = :uid AND fav.action_type = 'website'
                         LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid_two
                         $sort
-                        LIMIT $start, $limit ";
+                        LIMIT :start, :limit ";
 
-        return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id']])->fetchAll();
+        return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function getItemsAllCount($sheet)
@@ -143,9 +143,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN votes_item 
                                 ON votes_item_item_id = item_id AND votes_item_user_id = :uid_two
 
-                                WHERE $go $string $sort LIMIT $start, $limit";
+                                WHERE $go $string $sort LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id']])->fetchAll();
+        return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function feedItemCount($facets, $topic_id, $screening)

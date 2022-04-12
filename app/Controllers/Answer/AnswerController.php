@@ -22,11 +22,10 @@ class AnswerController extends MainController
     // Все ответы
     public function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
         $pagesCount = AnswerModel::getAnswersCount($sheet);
-        $answers    = AnswerModel::getAnswers($page, $this->limit, $this->user, $sheet);
+        $answers    = AnswerModel::getAnswers($pageNumber, $this->limit, $this->user, $sheet);
 
         $m = [
             'og'    => false,
@@ -39,7 +38,7 @@ class AnswerController extends MainController
                 'meta'  => Meta::get(Translate::get('all.answers'), Translate::get('answers.desc'), $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'answers'       => $answers,

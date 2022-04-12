@@ -21,11 +21,10 @@ class CommentController extends MainController
     // Все комментарии
     public function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
         $pagesCount = CommentModel::getCommentsAllCount($this->user, $sheet);
-        $comments   = CommentModel::getCommentsAll($page, $this->limit, $this->user, $sheet);
+        $comments   = CommentModel::getCommentsAll($pageNumber, $this->limit, $this->user, $sheet);
 
         $m = [
             'og'    => false,
@@ -38,7 +37,7 @@ class CommentController extends MainController
                 'meta'  => Meta::get(Translate::get('all.comments'), Translate::get('comments.desc'), $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'comments'      => $comments,

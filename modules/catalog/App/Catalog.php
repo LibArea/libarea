@@ -21,11 +21,10 @@ class Catalog
     // Лист сайтов по темам (сайты по "категориям")
     public function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
-        $os = ['cat', 'github', 'wap'];
-        if (!in_array($screening = \Request::get('cat'), $os)) {
+        $os = ['all', 'github', 'wap'];
+        if (!in_array($screening = \Request::get('grouping'), $os)) {
             Html::pageError404([]);
         }
 
@@ -35,18 +34,18 @@ class Catalog
         // We will get children
         $childrens =  FacetModel::getChildrens($category['facet_id'], $screening);
 
-        $items      = WebModel::feedItem($page, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening);
+        $items      = WebModel::feedItem($pageNumber, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening);
         $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'], $screening);
 
         $m = [
             'og'    => false,
-            'url'   => getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $category['facet_slug']]),
+            'url'   => getUrlByName('web.dir', ['grouping' => 'all', 'slug' => $category['facet_slug']]),
         ];
 
         $title = sprintf(Translate::get($sheet . '.cat.title'), $category['facet_title']);
         $description  = sprintf(Translate::get($sheet . '.cat.desc'), $category['facet_title'], $category['facet_description']);
 
-        $count_site = ($this->user['trust_level'] == UserData::REGISTERED_ADMIN) ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
         $tree = FacetModel::breadcrumb($category['facet_id']);
 
@@ -61,7 +60,7 @@ class Catalog
                     'type'              => $type,
                     'count'             => $pagesCount,
                     'pagesCount'        => ceil($pagesCount / $this->limit),
-                    'pNum'              => $page,
+                    'pNum'              => $pageNumber,
                     'items'             => $items,
                     'category'          => $category,
                     'childrens'         => $childrens,
@@ -82,7 +81,7 @@ class Catalog
         
         $result = [];
         foreach ($tree as $row) {
-            $result[] = [ "name" => $row['name'], "link" => getUrlByName('web.dir', ['cat' => $screening, 'slug' => $row['link']]) ]; 
+            $result[] = [ "name" => $row['name'], "link" => getUrlByName('web.dir', ['grouping' => $screening, 'slug' => $row['link']]) ]; 
         } 
   
         return array_merge($arr, $result);

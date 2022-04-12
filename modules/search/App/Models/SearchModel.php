@@ -33,7 +33,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                         LEFT JOIN users ON id = post_user_id 
                             WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 and post_type = 'post'
                                 AND MATCH(post_title, post_content) AGAINST (:qa)
-                                          LIMIT $start, $limit";
+                                          LIMIT :start, :limit";
 
         if ($type == 'website') {
             $sql = "SELECT DISTINCT 
@@ -56,11 +56,11 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                     ) AS rel ON rel.relation_item_id = item_id  
                             WHERE item_is_deleted = 0
                                 AND MATCH(item_title, item_content, item_domain) AGAINST (:qa)
-                                          LIMIT $start, $limit";
+                                          LIMIT :start, :limit";
         }
 
 
-        return DB::run($sql, ['qa' => $query])->fetchall();
+        return DB::run($sql, ['qa' => $query, 'start' => $start, 'limit' => $limit])->fetchall();
     }
 
     public static function getSearchCount($query, $type)

@@ -20,15 +20,14 @@ class AllFacetController extends MainController
 
     public function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
         $pagesCount = FacetModel::getFacetsAllCount($this->user['id'], $sheet);
-        $facets     = FacetModel::getFacetsAll($page, $this->limit, $this->user['id'], $sheet);
+        $facets     = FacetModel::getFacetsAll($pageNumber, $this->limit, $this->user['id'], $sheet);
 
         $num = ' ';
-        if ($page > 1) {
-            $num = sprintf(Translate::get('page.number'), $page);
+        if ($pageNumber > 1) {
+            $num = sprintf(Translate::get('page.number'), $pageNumber);
         }
 
         $Flimit = (new \App\Controllers\Facets\AddFacetController())->limitFacer($type, 'no.redirect');
@@ -47,7 +46,7 @@ class AllFacetController extends MainController
                     'type'          => $type,
                     'facets'        => $facets,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'limit'         => $Flimit,
                 ]
             ]

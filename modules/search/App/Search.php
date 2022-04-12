@@ -4,7 +4,7 @@ namespace Modules\Search\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Search\App\Models\SearchModel;
-use Translate, Config, UserData, Meta, Html, Content;
+use Translate, Config, UserData, Meta, Html, Tpl, Content;
 
 use Wamania\Snowball\StemmerFactory;
 use voku\helper\StopWords;
@@ -22,8 +22,7 @@ class Search
 
     public function index()
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
         $query  = Request::getGet('q');
 
         $type   = Request::getGet('type');
@@ -41,7 +40,7 @@ class Search
             }
 
             $query  = self::stemmerAndStopWords($query);
-            $results = self::search($page, $this->limit, $query, $type);
+            $results = self::search($pageNumber, $this->limit, $query, $type);
             $count  = self::searchCount($query, $type);
 
             self::setLogs(
@@ -77,7 +76,7 @@ class Search
                     'query'         => $query ?? false,
                     'count'         => $count,
                     'pagesCount'    => ceil($count / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'tags'          => self::searchTags($query, $facet, 4),
                 ]
             ]
@@ -118,9 +117,9 @@ class Search
     }
 
 
-    public static function search($page, $limit, $query, $type)
+    public static function search($pageNumber, $limit, $query, $type)
     {
-        return SearchModel::getSearch($page, $limit, $query, $type);
+        return SearchModel::getSearch($pageNumber, $limit, $query, $type);
     }
 
     public static function searchCount($query, $type)

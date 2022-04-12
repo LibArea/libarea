@@ -230,15 +230,14 @@ class PostController extends MainController
     public function domain($sheet, $type)
     {
         $domain     = Request::get('domain');
-        $page       = Request::getInt('page');
-        $page       = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
         $site       = PostModel::getDomain($domain, $this->user['id']);
         Html::pageError404($site);
 
         $site['item_content'] = Content::text($site['item_content'], 'line');
 
-        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $site['item_domain']);
+        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $site['item_domain']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $site['item_domain']);
 
         $m = [
@@ -253,7 +252,7 @@ class PostController extends MainController
                 'data'  => [
                     'sheet'         => 'domain',
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'posts'         => $posts,
                     'domains'       => PostModel::getDomainTop($domain),
                     'site'          => $site,

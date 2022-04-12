@@ -70,9 +70,9 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM users 
                         WHERE is_deleted != 1 and ban_list != 1
                             $sort
-                            LIMIT $start, $limit";
+                            LIMIT :start, :limit";
 
-        return DB::run($sql)->fetchAll();
+        return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     // Количество

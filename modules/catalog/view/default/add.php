@@ -36,7 +36,7 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
   </aside>
 </div>
 
-<?php $url = $user['trust_level'] == UserData::REGISTERED_ADMIN ? 'web' : 'web.user.sites'; ?>
+<?php $url = UserData::checkAdmin() ? 'web' : 'web.user.sites'; ?>
 <?= includeTemplate('/view/default/_block/ajax', ['url' => 'web.create', 'redirect' => $url, 'id' => 'form#addUrl']); ?>
 
 <?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

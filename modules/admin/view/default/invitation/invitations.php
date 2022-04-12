@@ -8,15 +8,15 @@
 ); ?>
 
 <div class="box-white">
-  <?php if (!empty($data['invitations'])) { ?>
-    <?php foreach ($data['invitations'] as $key => $inv) { ?>
+  <?php if (!empty($data['invitations'])) : ?>
+    <?php foreach ($data['invitations'] as $key => $inv) : ?>
       <div>
         <a href="<?= getUrlByName('profile', ['login' => $inv['uid']['login']]); ?>">
           <?= $inv['uid']['login']; ?>
         </a>
         <sup>id<?= $inv['uid']['id']; ?></sup>
         =>
-        <?php if ($inv['login']) { ?>
+        <?php if ($inv['login']) : ?>
           <a href="<?= getUrlByName('profile', ['login' => $inv['login']]); ?>">
             <?= $inv['login']; ?>
           </a>
@@ -25,17 +25,17 @@
           </span>
           <sup>id<?= $inv['active_uid']; ?></sup>
           <span class="text-sm"> - <?= Html::langDate($inv['active_time']); ?>
-          <?php } else { ?>
+          <?php else : ?>
             <span class="gray-600 lowercase text-sm">
               <?= $inv['invitation_email']; ?> &nbsp; <?= Html::langDate($inv['add_time']); ?>
             </span>
-          <?php } ?>
+          <?php endif; ?>
           </span>
       </div>
-    <?php } ?>
-  <?php } else { ?>
+    <?php endforeach; ?>
+  <?php else : ?>
     <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
-  <?php } ?>
+  <?php endif; ?>
 </div>
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

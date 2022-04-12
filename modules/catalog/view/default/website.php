@@ -11,16 +11,16 @@ $item = $data['item'];
   <main>
     <div class="bg-white hidden pr15 mb20">
       <h1><?= $item['item_title']; ?>
-        <?php if (UserData::REGISTERED_ADMIN) { ?>
+        <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm ml5" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
             <i class="bi-pencil"></i>
           </a>
-        <?php } ?>
+        <?php endif; ?>
       </h1>
 
       <div class="w-100">
         <div class="w-40 mt10 left mb-w-100">
-           <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'w-100 box-shadow'); ?>
+          <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'w-100 box-shadow'); ?>
         </div>
         <div class="w-60 left pl20 mb-w-100 max-w780 mb-p10">
           <?= Content::text($item['item_content'], 'text'); ?>
@@ -30,9 +30,9 @@ $item = $data['item'];
               <?= $item['item_url']; ?>
             </a>
           </div>
-           
-            <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'cat'); ?>
-           
+
+          <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'all'); ?>
+
           <div class="right mr20">
             <?= Html::signed([
               'user_id'         => $user['id'],
@@ -44,7 +44,7 @@ $item = $data['item'];
           </div>
         </div>
       </div>
-      <?php if ($item['item_is_soft'] == 1) { ?>
+      <?php if ($item['item_is_soft'] == 1) : ?>
         <h2><?= __('soft'); ?></h2>
         <h3><?= $item['item_title_soft']; ?></h3>
         <div class="gray-600">
@@ -57,68 +57,68 @@ $item = $data['item'];
               <?= $item['item_github_url']; ?>
             </a>
         </p>
-      <?php } ?>
+      <?php endif; ?>
 
-      <?php if ($data['related_posts']) { ?>
+      <?php if ($data['related_posts']) : ?>
         <p>
           <?= Tpl::insert('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => true]); ?>
         </p>
-      <?php } ?>
+      <?php endif; ?>
     </div>
 
-    <?php if ($item['item_close_replies'] == 0) { ?>
-    <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_reply')) { ?>
-      <form class="max-w780" action="<?= getUrlByName('reply.create'); ?>" accept-charset="UTF-8" method="post">
-        <?= csrf_field() ?>
+    <?php if ($item['item_close_replies'] == 0) : ?>
+      <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_reply')) : ?>
+        <form class="max-w780" action="<?= getUrlByName('reply.create'); ?>" accept-charset="UTF-8" method="post">
+          <?= csrf_field() ?>
 
-        <?php Tpl::insert('/_block/editor/textarea', [
-          'title'     => __('reply'),
-          'type'      => 'text',
-          'name'      => 'content',
-          'min'       => 5,
-          'max'       => 555,
-          'help'      => '5 - 555 ' . __('characters'),
-        ]); ?>
+          <?php Tpl::insert('/_block/editor/textarea', [
+            'title'     => __('reply'),
+            'type'      => 'text',
+            'name'      => 'content',
+            'min'       => 5,
+            'max'       => 555,
+            'help'      => '5 - 555 ' . __('characters'),
+          ]); ?>
 
-        <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>">
-        <?= Html::sumbit(__('reply')); ?>
-      </form>
-    <?php } ?>
-    <?php } ?>
+          <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>">
+          <?= Html::sumbit(__('reply')); ?>
+        </form>
+      <?php endif; ?>
+    <?php endif; ?>
 
-    <?php if ($data['tree']) { ?>
+    <?php if ($data['tree']) : ?>
       <h2 class="mt10"><?= __('answers'); ?></h2>
       <ul class="list-none mt20">
         <?= includeTemplate('/view/default/replys', ['data' => $data, 'user' => $user]); ?>
       </ul>
-    <?php } else { ?>
-      <?php if ($item['item_close_replies'] == 0) { ?>
+    <?php else : ?>
+      <?php if ($item['item_close_replies'] == 0) : ?>
         <div class="p20 center gray-600">
           <i class="bi-chat-dots block text-8xl"></i>
           <?= __('no.answers'); ?>
         </div>
-      <?php } ?>
-    <?php } ?>
-        
-    <?php if ($item['item_close_replies'] == 1) { ?>
+      <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if ($item['item_close_replies'] == 1) : ?>
       <div class="mt20">
         <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('discussions.closed'), 'icon' => 'bi-door-closed']); ?>
       </div>
-    <?php } ?>
+    <?php endif; ?>
   </main>
   <aside class="mr20">
     <div class="box-white box-shadow-all">
-      <?php if ($data['similar']) { ?>
+      <?php if ($data['similar']) : ?>
         <h3 class="uppercase-box"><?= __('recommended'); ?></h3>
-        <?php foreach ($data['similar'] as $link) { ?>
+        <?php foreach ($data['similar'] as $link) : ?>
           <?= Html::websiteImage($link['item_domain'], 'thumbs', $link['item_title'], 'mr5 w200 box-shadow'); ?>
           <a class="inline mr20 mb15 block text-sm" href="<?= getUrlByName('web.website', ['slug' => $link['item_domain']]); ?>">
             <?= $link['item_title']; ?>
           </a>
-        <?php } ?>
-      <?php } else { ?>
+        <?php endforeach; ?>
+      <?php else : ?>
         ....
-      <?php } ?>
+      <?php endif; ?>
     </div>
   </aside>
 </div>

@@ -1,5 +1,5 @@
 <div class="cm_addentry max-w780 mt10">
-  <?php if ($user['id'] > 0) { ?>
+  <?php if ($user['id'] > 0) : ?>
     <form action="<?= getUrlByName('reply.create'); ?>" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
       <textarea rows="5" minlength="6" placeholder="<?= __('supports.markdown'); ?>..." name="content"></textarea>
@@ -10,11 +10,11 @@
         <span id="cancel_comment" class="text-sm inline ml5 gray"><?= __('cancel'); ?></span>
       </fieldset>
     </form>
-  <?php } else { ?>
+  <?php else : ?>
     <textarea rows="5" disabled="disabled"><?= __('no.auth.comm'); ?>...</textarea>
     <div>
       <?= Html::sumbit(__('comment')); ?>
       <span id="cancel_comment" class="text-sm inline ml5 gray"><?= __('cancel'); ?></span>
     </div>
-  <?php } ?>
+  <?php endif; ?>
 </div>

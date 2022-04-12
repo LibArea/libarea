@@ -80,9 +80,9 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                             AND fav.user_id  = $uid
                             AND fav.action_type = 'answer'    
                         $sort
-                        ORDER BY answer_id DESC LIMIT $start, $limit ";
+                        ORDER BY answer_id DESC LIMIT :start, :limit ";
 
-        return DB::run($sql)->fetchAll();
+        return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     // Количество ответов
@@ -199,9 +199,9 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                             AND votes_answer_user_id = :uid_vote
                         WHERE answer_user_id = :uid
                         AND answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
-                        ORDER BY answer_id DESC LIMIT $start, $limit ";
+                        ORDER BY answer_id DESC LIMIT :start, :limit ";
 
-        return DB::run($sql, ['uid' => $uid, 'uid_vote' => $uid_vote])->fetchAll();
+        return DB::run($sql, ['uid' => $uid, 'uid_vote' => $uid_vote, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     // Количество ответов участника

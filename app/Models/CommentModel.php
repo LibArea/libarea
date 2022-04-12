@@ -112,9 +112,9 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
                                 AND votes_comment_user_id = :uid
                                 $sort
-                                    ORDER BY comment_id DESC LIMIT $start, $limit ";
+                                    ORDER BY comment_id DESC LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $user['id']])->fetchAll();
+        return DB::run($sql, ['uid' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     // Количество комментариев 
@@ -210,9 +210,9 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                         AND votes_comment_user_id = :id
                             WHERE comment_user_id = :uid AND comment_is_deleted = 0 
                                 AND post_is_deleted = 0 AND post_tl = 0
-                                    ORDER BY comment_id DESC LIMIT $start, $limit";
+                                    ORDER BY comment_id DESC LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $uid, 'id' => $id])->fetchAll();
+        return DB::run($sql, ['uid' => $uid, 'id' => $id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     // Количество комментариев участника

@@ -23,8 +23,7 @@ class BlogFacetController extends MainController
     // Посты в блоге
     public function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'blog');
@@ -35,7 +34,7 @@ class BlogFacetController extends MainController
             hl_preliminary_exit();
         }
 
-        $posts      = FeedModel::feed($page, $this->limit, $this->user, $sheet, $facet['facet_slug']);
+        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
         $url    = getUrlByName('blog', ['slug' => $facet['facet_slug']]);
@@ -54,7 +53,7 @@ class BlogFacetController extends MainController
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'facet'         => $facet,

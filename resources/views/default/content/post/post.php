@@ -80,6 +80,8 @@
     </div>
   <?php } ?>
 <?php } else { ?>
-  <?= Tpl::insert('/_block/recommended-topics', ['data' => $data]); ?>
+  <?php if (UserData::checkActiveUser()) : ?>
+    <?= Tpl::insert('/_block/recommended-topics', ['data' => $data]); ?>
+  <?php endif; ?>
   <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.posts'), 'icon' => 'bi-journal-richtext']); ?>
 <?php } ?>

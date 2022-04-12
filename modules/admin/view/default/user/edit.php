@@ -8,14 +8,14 @@
 ); ?>
 
 <div class="box-white">
-  <form action="/admin/user/edit/<?= $data['user']['id']; ?>" method="post">
+  <form action="<?= getUrlByName('admin.user.change', ['id' => $data['user']['id']]); ?>" method="post">
     <?= csrf_field() ?>
-    <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') { ?>
+    <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
       <a class="right text-sm" href="<?= getUrlByName('delete.cover', ['login' => $data['user']['login']]); ?>">
         <?= __('remove'); ?>
       </a>
       <br>
-    <?php } ?>
+    <?php endif; ?>
     <img width="325" class="right" src="<?= Html::coverUrl($data['user']['cover_art'], 'user'); ?>">
     <?= Html::image($data['user']['avatar'], $data['user']['login'], 'avatar', 'avatar', 'max'); ?>
 
@@ -26,19 +26,19 @@
           <?= $data['user']['login']; ?>
         </a>
       </label>
-      <?php if ($data['user']['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
-        <?php if ($data['user']['ban_list']) { ?>
+      <?php if ($data['user']['trust_level'] != UserData::REGISTERED_ADMIN) : ?>
+        <?php if ($data['user']['ban_list']) : ?>
           <span class="type-ban" data-id="<?= $data['user']['id']; ?>" data-type="user">
             <span class="red"><?= __('unban'); ?></span>
           </span>
-        <?php } else { ?>
+        <?php else : ?>
           <span class="type-ban" data-id="<?= $data['user']['id']; ?>" data-type="user">
             <span class="green">+ <?= __('ban.it'); ?></span>
           </span>
-        <?php } ?>
-      <?php } else { ?>
+        <?php endif; ?>
+      <?php else : ?>
         ---
-      <?php } ?>
+      <?php endif; ?>
     </fieldset>
     <fieldset>
       <i class="bi-eye"></i> <?= $data['user']['hits_count']; ?>
@@ -63,6 +63,15 @@
       <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 0) { ?>checked<?php } ?> value="0"> <?= __('no'); ?>
       <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 1) { ?>checked<?php } ?> value="1"> <?= __('yes'); ?>
     </fieldset>
+    
+    <fieldset>
+      <label for="limiting_mode">
+        <?= __('endless.scroll'); ?>
+      </label>
+      <input type="radio" name="limiting_mode" <?php if ($data['user']['scroll'] == 0) { ?>checked<?php } ?> value="0"> <?= __('no'); ?>
+      <input type="radio" name="limiting_mode" <?php if ($data['user']['scroll'] == 1) { ?>checked<?php } ?> value="1"> <?= __('yes'); ?>
+    </fieldset>
+
     <hr>
     <fieldset>
       <?php if ($data['count']['count_posts'] != 0) { ?>
@@ -90,7 +99,7 @@
     </fieldset>
     <hr>
     <fieldset>
-      <a class="text-sm" href="/admin/badges/user/add/<?= $data['user']['id']; ?>">
+      <a class="text-sm" href="<?= getUrlByName('admin.badges.user.add', ['id' => $data['user']['id']]); ?>">
         + <?= __('reward.user'); ?>
       </a>
     </fieldset>
@@ -126,18 +135,22 @@
       <input type="radio" name="activated" <?php if ($data['user']['activated'] == 1) { ?>checked<?php } ?> value="1"> <?= __('yes'); ?>
     </fieldset>
     <hr>
-    <fieldset>
-      <label for="trust_level">TL</label>
-      <select name="trust_level">
-        <?php for ($i = 0; $i <= 10; $i++) {
-            if ($i == UserData::USER_FIFTH_LEVEL + 1) { break; }
-            ?>
-          <option <?php if ($data['user']['trust_level'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>">
-            <?= $i; ?>
-          </option>
-        <?php } ?>
-      </select>
-    </fieldset>
+    <?php if (UserData::REGISTERED_ADMIN != $data['user']['trust_level']) { ?>
+      <fieldset>
+        <label for="trust_level">TL</label>
+        <select name="trust_level">
+          <?php for ($i = 0; $i <= 10; $i++) {
+              if ($i == UserData::USER_FIFTH_LEVEL + 1) { break; }
+              ?>
+            <option <?php if ($data['user']['trust_level'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>">
+              <?= $i; ?>
+            </option>
+          <?php } ?>
+        </select>
+      </fieldset>
+    <?php } else { ?>
+      <input type="hidden" name="trust_level" value="10">
+    <?php } ?>
     <fieldset>
       <label for="login"><?= __('nickname'); ?>: /u/**<sup class="red">*</sup></label>
       <input type="text" name="login" value="<?= $data['user']['login']; ?>" required>

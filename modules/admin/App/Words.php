@@ -10,9 +10,6 @@ class Words
 {
     public function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-
         return view(
             '/view/default/word/words',
             [

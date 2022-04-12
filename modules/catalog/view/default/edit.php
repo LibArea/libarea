@@ -54,7 +54,7 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
           'help'      => __('necessarily'),
         ]); ?>
         
-         <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) { ?>
+         <?php if (UserData::checkAdmin()) { ?>
             <?= Tpl::insert('/_block/form/select/user', [
               'uid'           => $user,
               'user'          => $data['user'],

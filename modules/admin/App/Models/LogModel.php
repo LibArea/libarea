@@ -20,9 +20,9 @@ class LogModel extends \Hleb\Scheme\App\Models\MainModel
                     action_name,
                     url_content,
                     add_date
-                        FROM users_action_logs ORDER BY id DESC LIMIT $start, $limit";
+                        FROM users_action_logs ORDER BY id DESC LIMIT :start, :limit";
 
-        return DB::run($sql)->fetchAll();
+        return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     // Get gthe number of records 
@@ -52,9 +52,9 @@ class LogModel extends \Hleb\Scheme\App\Models\MainModel
                     u.id, u.login, u.avatar, u.limiting_mode
                         FROM audits a
                         LEFT JOIN users u ON u.id = a.user_id
-                        WHERE a.type_belonging = :type $sort ORDER BY a.id DESC LIMIT $start, $limit";
+                        WHERE a.type_belonging = :type $sort ORDER BY a.id DESC LIMIT :start, :limit";
 
-        return DB::run($sql, ['type' => $type])->fetchAll();
+        return DB::run($sql, ['type' => $type, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function getAuditsAllCount($sheet, $type)

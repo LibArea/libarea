@@ -25,7 +25,6 @@
         'user'       => $user
       ]); ?>
 
-
       <?= includeTemplate('/view/default/form/user', ['users' => $data['users']]); ?>
 
       <input type="hidden" name="id" value="<?= $team['id']; ?>">

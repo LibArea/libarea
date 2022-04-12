@@ -39,9 +39,9 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                         ) AS rel
                             ON rel.relation_item_id = item_id 
                                 WHERE item_user_id = :uid ORDER BY item_id DESC
-                                    LIMIT $start, $limit ";
+                                    LIMIT :start, :limit ";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql, ['uid' => $uid, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function getUserSitesCount($uid)
@@ -91,9 +91,9 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN votes_item ON votes_item_item_id = fav.tid 
                                 AND votes_item_user_id = :uid
                                     WHERE fav.user_id = :uid_two AND fav.action_type = 'website' AND item_published = 1
-                                    LIMIT $start, $limit";
+                                    LIMIT :start, :limit";
 
-        return  DB::run($sql, ['uid' => $uid, 'uid_two' => $uid])->fetchAll();
+        return  DB::run($sql, ['uid' => $uid, 'uid_two' => $uid, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function bookmarksCount($uid)

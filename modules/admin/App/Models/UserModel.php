@@ -26,6 +26,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     whisper,
                     updated_at,
                     whisper,
+                    scroll,
                     trust_level,
                     activated,
                     invitation_id,
@@ -39,9 +40,9 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM users 
                         LEFT JOIN users_banlist ON banlist_user_id = id
                         $string
-                        $start, $limit";
+                        :start, :limit";
 
-        return DB::run($sql)->fetchAll();
+        return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function getUsersCount($sheet)
@@ -79,6 +80,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     avatar,
                     trust_level,
                     cover_art,
+                    scroll,
                     color,
                     template,
                     lang,

@@ -23,11 +23,10 @@ class UserController extends MainController
     // Все пользователи
     function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
         $usersCount = UserModel::getUsersAllCount();
-        $users      = UserModel::getUsersAll($page, $this->limit, $this->user['id'], $sheet);
+        $users      = UserModel::getUsersAll($pageNumber, $this->limit, $this->user['id'], $sheet);
         Html::pageError404($users);
 
         $m = [
@@ -43,7 +42,7 @@ class UserController extends MainController
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'pagesCount'    => ceil($usersCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'users'         => $users
                 ]
             ]

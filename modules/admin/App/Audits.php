@@ -5,7 +5,7 @@ namespace Modules\Admin\App;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{PostModel, AnswerModel, CommentModel};
 use Modules\Admin\App\Models\LogModel;
-use Translate, UserData, Meta;
+use Translate, UserData, Meta, Tpl;
 
 class Audits
 {
@@ -20,11 +20,10 @@ class Audits
 
     public function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
         $pagesCount = LogModel::getAuditsAllCount($sheet, $type);
-        $audits     = LogModel::getAuditsAll($page, $this->limit, $sheet, $type);
+        $audits     = LogModel::getAuditsAll($pageNumber, $this->limit, $sheet, $type);
 
         $result = [];
         foreach ($audits  as $ind => $row) {
@@ -50,7 +49,7 @@ class Audits
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'audits'        => $result,
                 ]
             ]
@@ -61,10 +60,9 @@ class Audits
     // Журнал логов
     public function logs($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
-        $logs       = LogModel::getLogs($page, $this->limit);
+        $logs       = LogModel::getLogs($pageNumber, $this->limit);
         $pagesCount = LogModel::getLogsCount();
 
         return view(
@@ -73,7 +71,7 @@ class Audits
                 'meta'  => Meta::get(Translate::get('logs')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
+                    'pNum'          => $pageNumber,
                     'type'          => $type,
                     'sheet'         => $sheet,
                     'logs'          => $logs,

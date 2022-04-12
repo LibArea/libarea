@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\UserAreaModel;
-use Config, Translate, UserData, Meta;
+use Config, Translate, UserData, Meta, Tpl;
 
 class UserArea
 {
@@ -19,13 +19,10 @@ class UserArea
 
     public function index($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
         $pagesCount = UserAreaModel::getUserSitesCount($this->user['id']);
-        $items  = UserAreaModel::getUserSites($page, $this->limit, $this->user['id']);
-
-        $num = $page > 1 ? sprintf(Translate::get('page.number'), $page) : '';
+        $items  = UserAreaModel::getUserSites($pageNumber, $this->limit, $this->user['id']);
 
         $m = [
             'og'         => true,
@@ -39,10 +36,10 @@ class UserArea
                 'meta'  => Meta::get(Translate::get('my.site'), Translate::get('my.site'), $m),
                 'user'  => $this->user,
                 'data'  => [
-                    'screening'         => 'cat',
+                    'screening'         => 'all',
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'count'             => $pagesCount,
-                    'pNum'              => $page,
+                    'pNum'              => $pageNumber,
                     'items'             => $items,
                     'user_count_site'   => $pagesCount,
                     'type'              => $type,
@@ -56,13 +53,12 @@ class UserArea
     // Закладки по сайтам
     public function bookmarks($sheet, $type)
     {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
+        $pageNumber = Tpl::pageNumber();
 
-        $items      = UserAreaModel::bookmarks($page, $this->limit, $this->user['id']);
+        $items      = UserAreaModel::bookmarks($pageNumber, $this->limit, $this->user['id']);
         $pagesCount = UserAreaModel::bookmarksCount($this->user['id']);
 
-        $count_site = ($this->user['trust_level'] == UserData::REGISTERED_ADMIN) ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
         return view(
             '/view/default/user/bookmarks',
@@ -76,7 +72,7 @@ class UserArea
                     'count'             => $pagesCount,
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'user_count_site'   => $count_site,
-                    'pNum'              => $page,
+                    'pNum'              => $pageNumber,
                     'items'             => $items,
                 ]
             ]

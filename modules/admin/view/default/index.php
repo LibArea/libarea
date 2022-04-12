@@ -10,16 +10,16 @@
 <div class="box-white w-100">
 
   <h3 class="uppercase-box"><?= __('users'); ?></h3>
-  <?php foreach ($data['last_visit'] as $user) { ?>
+  <?php foreach ($data['last_visit'] as $user) : ?>
     <div class="gray">
       <span class="gray-600 text-sm">id<?= $user['id']; ?></span>
       <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
       <span class="gray-600 lowercase"> — <?= Html::langDate($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
     </div>
-  <?php } ?>
+  <?php endforeach; ?>
 
   <h3 class="uppercase-box mt15"><?= __('search'); ?></h3>
-  <?php foreach ($data['logs'] as $log) { ?>
+  <?php foreach ($data['logs'] as $log) : ?>
     <div class="gray">
       <span class="gray-600 text-sm"><?= $log['count_results']; ?></span>
       <a target="_blank" rel="noreferrer" href="/search?q=<?= $log['request']; ?>&type=<?= $log['action_type']; ?>">
@@ -29,10 +29,10 @@
         — (<?= __($log['action_type']); ?>) <?= Html::langDate($log['add_date']); ?>
       </span>
     </div>
-  <?php } ?>
+  <?php endforeach; ?>
 
   <h3 class="uppercase-box mt15"><?= __('reply.web'); ?></h3>
-  <?php foreach ($data['replys'] as $reply) { ?>
+  <?php foreach ($data['replys'] as $reply) : ?>
     <div class="gray">
       <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $reply['login']]); ?>">
         <?= Html::image($reply['avatar'], $reply['login'], 'ava-sm', 'avatar', 'small'); ?>
@@ -48,7 +48,7 @@
       </a>
       <div class="gray-600 text-sm mb15"><?= Content::text($reply['content'], 'line'); ?></div>
     </div>
-  <?php } ?>
+  <?php endforeach; ?>
 </div>
 
 </main>
@@ -63,14 +63,14 @@
     <p>PHP: <?= PHP_VERSION; ?></p>
     <p><?= __('freely'); ?>: <?= $data['bytes']; ?></p>
 
-    <?php if ($data['posts_no_topic']) { ?>
+    <?php if ($data['posts_no_topic']) : ?>
       <h3 class="uppercase-box"><?= __('posts'); ?> (no facet)</h3>
-      <?php foreach ($data['posts_no_topic'] as $post) { ?>
+      <?php foreach ($data['posts_no_topic'] as $post) : ?>
         <div class="gray">
           id:<?= $post['post_id']; ?> | <?= $post['post_title']; ?>
         </div>
-      <?php } ?>
-    <?php } ?>
+      <?php endforeach; ?>
+    <?php endif; ?>
   </div>
 </aside>
 <?= includeTemplate('/view/default/footer', ['user' => $user]); ?>

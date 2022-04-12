@@ -18,7 +18,7 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
                     t.created_at,
                     t.updated_at,
                     t.is_deleted,
-                    u.id,
+                    u.id as uid,
                     u.login,
                     u.avatar
                         FROM teams t
@@ -72,7 +72,7 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
     // Добавление команды
     public static function create($params)
     {
-        $sql    = "INSERT INTO teams (name, content, user_id) VALUES (:name, :content, :user_id)";
+        $sql    = "INSERT INTO teams (name, content, user_id, action_type) VALUES (:name, :content, :user_id, :action_type)";
 
         return DB::run($sql, $params);
     }
@@ -81,7 +81,12 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
     // Изменим команду
     public static function edit($params)
     {
-        $sql_two = "UPDATE teams SET name = :name, content = :content, updated_at = :updated_at WHERE id = :id";
+        $sql_two = "UPDATE teams 
+                        SET name = :name, 
+                            content = :content, 
+                            action_type = :action_type, 
+                            updated_at = :updated_at 
+                                WHERE id = :id";
 
         return DB::run($sql_two, $params);
     }

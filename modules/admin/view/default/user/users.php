@@ -20,7 +20,7 @@
 ); ?>
 
 <div class="box-white">
-  <?php if ($data['alluser']) {  ?>
+  <?php if ($data['alluser']) :  ?>
     <table>
       <thead>
         <th>id</th>
@@ -31,7 +31,7 @@
         <th>Ban</th>
         <th><?= __('edit'); ?></th>
       </thead>
-      <?php foreach ($data['alluser'] as $user) {  ?>
+      <?php foreach ($data['alluser'] as $user) :  ?>
         <tr>
           <td class="center">
             <?= $user['id']; ?>
@@ -41,66 +41,66 @@
           </td>
           <td>
             <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
-            <?php if ($user['name']) { ?>
+            <?php if ($user['name']) : ?>
               (<?= $user['name']; ?>)
-            <?php } ?>
+            <?php endif; ?>
             <sup class="gray">TL:<?= $user['trust_level']; ?></sup>
-            <?php if ($user['invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?>
-            <?php if ($user['whisper']) { ?>
+            <?php if ($user['invitation_id'] != 0) : ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php endif; ?>
+            <?php if ($user['whisper']) : ?>
               <span title="<?= $user['whisper']; ?>" class="tips text-sm gray-600">
                 <i class="bi-info-square green"></i>
               </span>
-            <?php } ?>
+            <?php endif; ?>
             <div class="text-sm">
               <?= $user['email']; ?>
-              <?php if ($user['activated'] == 1) { ?>
+              <?php if ($user['activated'] == 1) : ?>
                 <div class="gray-600"><?= __('email.activated'); ?></div>
-              <?php } else { ?>
+              <?php else : ?>
                 <div class="red"><?= __('not.activated'); ?> e-mail</div>
-              <?php } ?>
+              <?php endif; ?>
             </div>
-            <?php if ($user['limiting_mode'] == 1) { ?>
+            <?php if ($user['limiting_mode'] == 1) : ?>
               <div class="red"><?= __('dumb.mode'); ?></div>
-            <?php } ?>
-            <?php if (!empty($user['banlist_int_num'])) { ?>
+            <?php endif; ?>
+            <?php if (!empty($user['banlist_int_num'])) : ?>
               <div class="red">bans: <?= $user['banlist_int_num']; ?></div>
-            <?php } ?>
+            <?php endif; ?>
           </td>
           <td class="text-sm align-right">
             <a class="gray-600 ml10" href="<?= getUrlByName('admin.regip', ['ip' => $user['reg_ip']]); ?>">
               <?= $user['reg_ip']; ?>
             </a>
-            <?php if ($user['duplicat_ip_reg'] > 1) { ?>
+            <?php if ($user['duplicat_ip_reg'] > 1) : ?>
               <sup class="red">(<?= $user['duplicat_ip_reg']; ?>)</sup>
-            <?php } ?>
+            <?php endif; ?>
             <br>
             <?= $user['created_at']; ?>
           </td>
           <td class="text-sm align-right">
-            <?php if (!empty($user['last_visit_logs']['latest_ip'])) { ?>
+            <?php if (!empty($user['last_visit_logs']['latest_ip'])) : ?>
               <a class="gray-600 ml10" href="<?= getUrlByName('admin.logip', ['ip' => $user['last_visit_logs']['latest_ip']]); ?>">
                 <?= $user['last_visit_logs']['latest_ip']; ?>
               </a>
               <br>
-            <?php } ?>
-            <?php if (!empty($user['last_visit_logs']['latest_date'])) { ?>
+            <?php endif; ?>
+            <?php if (!empty($user['last_visit_logs']['latest_date'])) : ?>
               <?= $user['last_visit_logs']['latest_date']; ?>
-            <?php } ?>
+            <?php endif; ?>
           </td>
           <td class="center">
-            <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
-              <?php if ($user['ban_list']) { ?>
+            <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) : ?>
+              <?php if ($user['ban_list']) : ?>
                 <span class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
                   <span class="red"><?= __('unban'); ?></span>
                 </span>
-              <?php } else { ?>
+              <?php else : ?>
                 <span class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
                   <?= __('ban.it'); ?>
                 </span>
-              <?php } ?>
-            <?php } else { ?>
+              <?php endif; ?>
+            <?php else : ?>
               ---
-            <?php } ?>
+            <?php endif; ?>
           </td>
           <td class="center">
             <a title="<?= __('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
@@ -108,11 +108,11 @@
             </a>
           </td>
         </tr>
-      <?php } ?>
+      <?php endforeach; ?>
     </table>
-  <?php } else { ?>
+  <?php else : ?>
     <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
-  <?php } ?>
+  <?php endif; ?>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('admin.users')); ?>
 </div>
 </div>

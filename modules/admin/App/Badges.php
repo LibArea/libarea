@@ -105,7 +105,7 @@ class Badges
         return view(
             '/view/default/badge/user-add',
             [
-                'meta'  => Meta::get($Translate::get('reward.user')),
+                'meta'  => Meta::get(Translate::get('reward.user')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -128,7 +128,7 @@ class Badges
 
         Html::addMsg('successfully', 'success');
 
-        redirect('/admin/users/' . $uid . '/edit');
+        redirect(getUrlByName('admin.user.edit', ['id' => $uid]));
     }
 
     public function edit()

@@ -15,16 +15,16 @@
       <th>E-mail</th>
       <th><?= __('registration'); ?></th>
       <th>
-        <?php if ($data['option'] == 'logs') { ?>
+        <?php if ($data['option'] == 'logs') : ?>
           <?= __('last'); ?>
-        <?php } else { ?>
+        <?php else : ?>
           IP
-        <?php } ?>
+        <?php endif; ?>
       </th>
       <th>Ban</th>
       <th><?= __('action'); ?></th>
     </thead>
-    <?php foreach ($data['results'] as $user) {  ?>
+    <?php foreach ($data['results'] as $user) :  ?>
       <tr>
         <td class="center">
           <?= $user['id']; ?>
@@ -34,11 +34,10 @@
           <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
             <?= $user['login']; ?>
           </a>
-          <?php if ($user['name']) { ?>
+          <?php if ($user['name']) : ?>
             (<?= $user['name']; ?>)
-          <?php } ?>
+          <?php endif; ?>
           <sup class="red">TL:<?= $user['trust_level']; ?></sup>
-
         </td>
         <td>
           <span class="date"><?= $user['email']; ?></span>
@@ -47,42 +46,42 @@
           <?= $user['created_at']; ?>
         </td>
         <td>
-          <?php if ($data['option'] == 'logs') { ?>
+          <?php if ($data['option'] == 'logs') : ?>
             <?= $user['latest_date']; ?>
-          <?php } else { ?>
+          <?php else : ?>
             <?= $user['reg_ip']; ?>
-          <?php } ?>
+          <?php endif; ?>
 
-          <?php if ($user['duplicat_ip_reg'] > 1) { ?>
+          <?php if ($user['duplicat_ip_reg'] > 1) : ?>
             <br> <sup class="red">(<?= $user['duplicat_ip_reg']; ?>)</sup>
-          <?php } ?>
+          <?php endif; ?>
         </td>
         <td class="center">
-          <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
-            <?php if ($user['ban_list']) { ?>
+          <?php if (UserData::checkAdmin()) : ?>
+            ---
+          <?php else : ?>
+            <?php if ($user['ban_list']) : ?>
               <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
                 <span class="red"><?= __('unban'); ?></span>
               </div>
-            <?php } else { ?>
+            <?php else : ?>
               <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
                 <?= __('ban.it'); ?>
               </div>
-            <?php } ?>
-          <?php } else { ?>
-            ---
-          <?php } ?>
+            <?php endif; ?>
+          <?php endif; ?>
         </td>
         <td class="center">
-          <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) { ?>
-            <a title="<?= ____('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
+          <?php if (UserData::checkAdmin()) : ?>
+            ---
+          <?php else : ?>
+            <a title="<?= __('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
-          <?php } else { ?>
-            ---
-          <?php } ?>
+          <?php endif; ?>
         </td>
       </tr>
-    <?php } ?>
+    <?php endforeach; ?>
   </table>
 </div>
 </main>

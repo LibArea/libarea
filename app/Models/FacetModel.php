@@ -62,9 +62,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM facets 
                         LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = $uid
                         $signet
-                        LIMIT $start, $limit";
+                        LIMIT :start, :limit";
 
-        return DB::run($sql)->fetchAll();
+        return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function getFacetsAllCount($uid, $sort)

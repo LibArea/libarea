@@ -61,4 +61,29 @@ class Tpl
         
         return $user['template'];
     }
+    
+    public static function pageNumber()
+    {
+        $string = Request::get();
+        $arr    = $string['page'] ?? null;
+        
+        $pageNumber = 1;
+        if ($arr) {
+            $arr = explode('.', $string['page']);
+        
+            $attr = $arr[1] ?? null;
+            if ($attr != 'html') {
+                include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+                hl_preliminary_exit();
+            }
+          
+           if ($arr[0] < 0) {
+               include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+               hl_preliminary_exit();
+           }
+           $pageNumber = (int)$arr[0];  
+       }        
+       return $pageNumber <= 1 ? 1 : $pageNumber;
+    }
+    
 }
