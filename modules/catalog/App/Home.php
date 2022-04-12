@@ -38,6 +38,7 @@ class Home
                     'user_count_site'   => $count_site,
                     'type'              => $type,
                     'sheet'             => $sheet,
+                    'audit_count'       => UserAreaModel::auditCount(),
                 ]
             ]
         );

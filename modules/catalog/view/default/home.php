@@ -30,7 +30,7 @@
 
 <div id="contentWrapper">
   <main class="col-two">
-    <h2><?= __('web.view'); ?></h2>
+    <h2 class="inline"><?= __('web.view'); ?></h2>
     <?php if (!empty($data['items'])) : ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
     <?php else : ?>

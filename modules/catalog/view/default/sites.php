@@ -52,7 +52,7 @@
 
 <div id="contentWrapper">
   <main>
-    <?= includeTemplate('/view/default/nav', ['data' => $data, 'uid' => $user['id']]); ?>
+    <?= includeTemplate('/view/default/_block/nav', ['data' => $data, 'uid' => $user['id']]); ?>
 
     <?php if (!empty($data['items'])) : ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>

@@ -1,3 +1,13 @@
+<?php if (UserData::checkAdmin()) : ?>
+    <li>
+      <a href="<?= getUrlByName('web.audits'); ?>">
+        <i class="bi bi-exclamation-diamond"></i>
+        <?= __('audits'); ?>
+         <?php if (!empty($data['audit_count'])) : ?><span class="red ml5">(<?= $data['audit_count']; ?>)</span><?php endif; ?>
+      </a>
+    </li>
+<?php endif; ?>
+
 <li>
   <a href="<?= getUrlByName('web.user.sites'); ?>">
     <i class="bi-plus-lg"></i>

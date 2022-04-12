@@ -26,12 +26,6 @@ return [
             'id'    => 'web.deleted',
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,
-            'url'   => getUrlByName('web.audits'),
-            'title' => Translate::get('audits'),
-            'icon'  => 'bi bi-circle',
-            'id'    => 'web.audits',
-        ], [
-            'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('admin.facets.type', ['type' => 'category']),
             'title' => Translate::get('facets'),
             'icon'  => 'bi bi-columns-gap',

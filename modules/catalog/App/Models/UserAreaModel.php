@@ -102,4 +102,9 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
 
         return  DB::run($sql, ['uid' => $uid])->rowCount();
     }
+    
+    public static function auditCount()
+    {
+        return  DB::run("SELECT item_id FROM items WHERE item_published = 0")->rowCount();
+    }
 }

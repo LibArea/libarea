@@ -102,11 +102,11 @@ class Edit
 
         // If not staff, then we make the site inactive 
         // Если не персонал, то делаем сайт не активным
-        $published = $this->user['trust_level'] == UserData::REGISTERED_ADMIN ? $item_published : 0;
+        $published = UserData::checkAdmin() ? $item_published : 0;
 
         // If the staff, then we save the author of the site 
         // Если персонал, то сохраняем автора сайта
-        $uid = $this->user['trust_level'] == UserData::REGISTERED_ADMIN ? $item['item_user_id'] : $this->user['id'];
+        $owner_uid = UserData::checkAdmin() ? $item['item_user_id'] : $this->user['id'];
 
         // If there is a change in item_user_id (owner) and who changes staff
         // Если есть смена item_user_id (владельца) и кто меняет персонал
@@ -114,7 +114,7 @@ class Edit
             $user_new  = Request::getPost('user_id');
             $item_user_new = json_decode($user_new, true);
             if ($item['item_user_id'] != $item_user_new[0]['id']) {
-                $uid = $item_user_new[0]['id'];
+                $owner_uid = $item_user_new[0]['id'];
             }    
         }
 
@@ -128,7 +128,7 @@ class Edit
                 'item_content_soft'     => $item_content_soft ?? '',
                 'item_published'        => $published,
                 'item_close_replies'    => Request::getPostInt('close_replies'),
-                'item_user_id'          => $uid ?? 1,
+                'item_user_id'          => $owner_uid ?? 1,
                 'item_type_url'         => 0,
                 'item_status_url'       => $item_status_url,
                 'item_is_soft'          => $item_is_soft,
@@ -138,38 +138,17 @@ class Edit
             ]
         );
 
-        // If the site was approved earlier, but was edited and changed the status, then:
-        // Если сайт был утвержден ранее, но был отредактирован и поменял статус, то:
-        if ($item_published == 1 || $published == 0) {
-            // Notification to staff
-            // Оповещение персоналу
-            if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
-                NotificationModel::send(
-                    [
-                        'sender_id'    => $this->user['id'],
-                        'recipient_id' => 1,  // admin
-                        'action_type'  => NotificationModel::TYPE_EDIT_WEBSITE,
-                        'url'          => getUrlByName('web.audits'),
-                    ]
-                );
-            }
-        }
-
-        // If the site has been approved:
-        // Если сайт был утвержден:
-        if ($item_published == 1 && $published == 1) {
-            // Notification to the author of the site
-            // Оповещение автору сайта
-            if ($this->user['trust_level'] == UserData::REGISTERED_ADMIN) {
-                NotificationModel::send(
-                    [
-                        'sender_id'    => $this->user['id'],
-                        'recipient_id' => $uid,  // автор сайта
-                        'action_type'  => NotificationModel::WEBSITE_APPROVED,
-                        'url'          => getUrlByName('web'),
-                    ]
-                );
-            }
+        // If the site has changed status (for example, after editing)
+        // Если сайт сменил статус (например, после редактирования)
+        if ($item['item_published'] != $published) {
+            NotificationModel::send(
+                [
+                    'sender_id'    => $this->user['id'],
+                    'recipient_id' => UserData::checkAdmin() ? $owner_uid : 1,
+                    'action_type'  => UserData::checkAdmin() ? NotificationModel::WEBSITE_APPROVED : NotificationModel::TYPE_EDIT_WEBSITE,
+                    'url'          => getUrlByName('web'),
+                ]
+            );
         }
 
         // Фасеты для сайте
