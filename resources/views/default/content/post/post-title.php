@@ -5,6 +5,6 @@
 <?php if ($post['post_feature'] == 1) : ?><i class="bi-patch-question green"></i><?php endif; ?>
 <?php if ($post['post_translation'] == 1) : ?>
   <?php if ($post['post_merged_id']) : ?><i class="bi-link-45deg sky"></i><?php endif; ?>
-  <span class="pt5 pr10 pb5 pl10 gray-600 bg-violet-50 br-rd3 text-sm italic lowercase"><?= __('translation'); ?></span>
+  <span class="pt5 pr10 pb5 pl10 gray-600 bg-violet br-rd3 text-sm italic lowercase"><?= __('translation'); ?></span>
 <?php endif; ?>
 <?php if ($post['post_tl']) : ?><span class="yellow italic text-sm">tl<?= $post['post_tl']; ?></span><?php endif; ?>

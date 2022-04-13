@@ -2,7 +2,7 @@
 <?php $team = $data['team']; ?>
 
 <main>
-  <div class="box-white">
+  <div class="box">
     <a href="<?= getUrlByName('teams'); ?>"><?= __('teams'); ?></a> /
     <span class="red"><?= sprintf(__('edit.option'), __('team')); ?></span>
 

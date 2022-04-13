@@ -1,6 +1,6 @@
 <?php $post = $data['post']; ?>
 <main class="col-two">
-  <div class="box-white">
+  <div class="box">
 
     <a href="/"><?= __('home'); ?></a> /
     <span class="red">
@@ -59,7 +59,7 @@
             </div>
           <?php } ?>
 
-          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
+          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-gray">
           <div id="start">
             <input id="file-upload" type="file" name="images" accept="image/*" />
             <div id="notimage" class="none"><?= __('select.image'); ?></div>

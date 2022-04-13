@@ -1,6 +1,6 @@
 <?php $page = $data['page']; ?>
 <main>
-  <article class="box-white <?php if ($page['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
+  <article class="box <?php if ($page['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
     <?php if ($page['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
       <h1>
         <?= $page['post_title']; ?>
@@ -14,9 +14,9 @@
       </div>
     <?php } ?>
   </article>
-  <div class="box-flex-white center text-2xl">
+  <div class="box-flex justify-between text-2xl">
     <?= Html::votes($user['id'], $page, 'post', 'ps', 'middle mr15'); ?>
-    <div class="gray-600 italic">
+    <div class="gray-600 italic ml15">
       <?= $page['post_modified']; ?>
       <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
         <a class="gray-600 ml5" title="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
@@ -27,7 +27,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white sticky top-sm text-sm">
+  <div class="box sticky top-sm text-sm">
     <?php if ($data['type'] == 'blog.page') { ?>
       <h3 class="uppercase-box">
         <?= __('blog'); ?>

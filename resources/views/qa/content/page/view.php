@@ -14,9 +14,9 @@
       </div>
     <?php } ?>
   </article>
-  <div class="box-flex-white bg-violet-50 text-2xl">
+  <div class="box-flex bg-violet justify-between text-2xl">
     <?= Html::votes($user['id'], $page, 'post', 'ps', 'middle mr15'); ?>
-      <div class="gray-600 italic">
+      <div class="gray-600 italic ml15">
         <?= $page['post_modified']; ?>
         <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) { ?>
           <a class="gray-600 ml5" title="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
@@ -27,7 +27,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white bg-violet-50 sticky top-sm text-sm">
+  <div class="box bg-violet sticky top-sm text-sm">
     <?php if ($data['type'] == 'blog.page') { ?>
       <h3 class="uppercase-box">
         <?= __('blog'); ?>

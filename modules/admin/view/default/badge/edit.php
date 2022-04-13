@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="box-white">
+<div class="box">
   <form action="<?= getUrlByName('admin.badge.change', ['id' => $data['badge']['badge_id']]); ?>" method="post">
     <?= csrf_field() ?>
     <fieldset>

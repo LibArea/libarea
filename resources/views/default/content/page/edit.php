@@ -1,6 +1,6 @@
 <?php $post   = $data['post']; ?>
 <main class="col-two">
-  <div class="box-white">
+  <div class="box">
 
     <a href="/"><?= __('home'); ?></a> /
     <span class="red">

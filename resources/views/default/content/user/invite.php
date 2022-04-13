@@ -1,5 +1,5 @@
 <main>
-  <div class="box-white">
+  <div class="box">
     <h1 class="mt0 mb10 text-2xl font-normal"><?= __('invite'); ?></h1>
     <form class="" action="/invite" method="post">
       <?php csrf_field(); ?>
@@ -20,7 +20,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white text-sm sticky top-sm">
+  <div class="box text-sm sticky top-sm">
     <?= __('invited.you'); ?>
   </div>
 </aside>

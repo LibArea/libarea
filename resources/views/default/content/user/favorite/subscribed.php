@@ -5,7 +5,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white text-sm sticky top-sm">
+  <div class="box text-sm sticky top-sm">
     <?= __('preferences.info'); ?>
   </div>
 </aside>

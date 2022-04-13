@@ -19,7 +19,7 @@
   ]
 ); ?>
 
-<div class="box-white">
+<div class="box">
   <?php if ($data['alluser']) :  ?>
     <table>
       <thead>

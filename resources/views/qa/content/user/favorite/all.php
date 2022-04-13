@@ -11,7 +11,7 @@
 
   <?php if (!empty($data['favorites'])) { ?>
     <?php foreach ($data['favorites'] as $fav) { ?>
-      <div class="box-white relative hidden">
+      <div class="box relative hidden">
         <div class="left gray-600 mr5"> <?= __($fav['action_type']); ?>:</div>
 
         <?php if ($fav['action_type'] == 'post') { ?>
@@ -67,7 +67,7 @@
   <?php } ?>
 </main>
 <aside>
-  <div class="box-white text-sm sticky top-sm">
+  <div class="box text-sm sticky top-sm">
     <?= __('favorite.info'); ?>
   </div>
 </aside>

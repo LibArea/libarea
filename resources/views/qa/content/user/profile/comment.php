@@ -3,7 +3,7 @@
 
   <div class="flex gap">
     <main class="col-two">
-      <div class="box-flex-white">
+      <div class="box-flex">
         <p class="m0"><?= __('comments'); ?> <b><?= $data['profile']['login']; ?></b></p>
       </div>
       <?php if (!empty($data['comments'])) { ?>

@@ -7,7 +7,7 @@ $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
 <main class="col-two">
   <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
 
-  <div class="bg-white box">
+  <div class="box">
     <form action="<?= getUrlByName('setting.notif.edit'); ?>" method="post">
       <?php csrf_field(); ?>
       <?= $form->build_form(); ?>
@@ -19,7 +19,7 @@ $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
   </div>
 </main>
 <aside>
-  <div class="box-white bg-violet-50 text-sm">
+  <div class="box bg-violet text-sm">
     <?= __('notification.info'); ?>
   </div>
 </aside>

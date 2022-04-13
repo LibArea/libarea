@@ -9,7 +9,7 @@ $item = $data['item'];
     </div>
   </div>
   <main>
-    <div class="bg-white hidden pr15 mb20">
+    <div class="box hidden pr15 mb20">
       <h1><?= $item['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm ml5" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
@@ -107,7 +107,7 @@ $item = $data['item'];
     <?php endif; ?>
   </main>
   <aside class="mr20">
-    <div class="box-white box-shadow-all">
+    <div class="box box-shadow-all">
       <?php if ($data['similar']) : ?>
         <h3 class="uppercase-box"><?= __('recommended'); ?></h3>
         <?php foreach ($data['similar'] as $link) : ?>

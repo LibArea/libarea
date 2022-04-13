@@ -1,4 +1,4 @@
-<main class="max-w780 mr-auto box-white">
+<main class="max-w780 mr-auto box">
   <h1 class="center"><?= __($data['sheet']); ?></h1>
   <form class="form max-w300" action="<?= getUrlByName('recover.send'); ?>" method="post">
     <?php csrf_field(); ?>

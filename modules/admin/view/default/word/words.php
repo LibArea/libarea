@@ -14,7 +14,7 @@
   ]
 ); ?>
 
-<div class="box-white">
+<div class="box">
   <?php if (!empty($data['words'])) : ?>
     <?php foreach ($data['words'] as $key => $word) : ?>
       <div class="content-telo">

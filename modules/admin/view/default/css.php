@@ -6,7 +6,7 @@
     'menus' => [],
   ]
 ); ?>
-<div class="box-white">
+<div class="box">
   <h4><?= __('topics'); ?>:</h4>
   <a href="#" class="tags">.tags</a>
   <a href="#" class="tags-xs">.tags-xs</a>

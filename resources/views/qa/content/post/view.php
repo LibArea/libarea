@@ -95,7 +95,7 @@
         <?php } ?>
         <?php if ($post['post_url_domain']) { ?>
           <h3 class="uppercase-box"><?= __('source'); ?></h3>
-          <div class="italic m15 mb15 p10 text-sm bg-gray-100 table gray">
+          <div class="italic m15 mb15 p10 text-sm bg-lightgray table gray">
             <div>
               <i class="bi-link-45deg"></i>
               <a class="gray" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
@@ -107,7 +107,7 @@
         <?= Tpl::insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
       </div>
 
-      <div class="br-box-gray flex items-center mb5">
+      <div class="br-gray flex items-center mb5">
         <div class="left p10 none mb-block">
           <?= Html::votes($user['id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
         </div>
@@ -229,7 +229,7 @@
 </main>
 <aside>
   <?php if (!empty($data['facets'])) { ?>
-    <div class="box bg-violet-50">
+    <div class="box bg-violet">
       <h3 class="uppercase-box"><?= __('topics'); ?></h3>
       <?php foreach ($data['facets'] as $topic) { ?>
         <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
@@ -252,15 +252,15 @@
   <?php } ?>
 
   <?php if ($post['post_content_img']) { ?>
-    <div class="box bg-violet-50">
+    <div class="box bg-violet">
       <img class="preview w-100 br-rd5" src="<?= PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php } ?>
-  <div class="center box bg-violet-50">
+  <div class="center box bg-violet">
      <?= Tpl::insert('/share'); ?>
   </div>
   <?php if ($data['recommend']) { ?>
-    <div class="box bg-violet-50 sticky top-sm">
+    <div class="box bg-violet sticky top-sm">
       <h3 class="uppercase-box"><?= __('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex text-sm">
@@ -271,7 +271,7 @@
                   <?= $rec_post['post_answers_count'] ?>
                 </div>
               <?php } else { ?>
-                <div class="p5 pr10 pb5 pl10 bg-gray-100 br-rd3 gray center mr15">0</div>
+                <div class="p5 pr10 pb5 pl10 bg-lightgray br-rd3 gray center mr15">0</div>
               <?php } ?>
             </a>
           <?php } else { ?>

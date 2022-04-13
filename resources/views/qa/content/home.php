@@ -18,7 +18,7 @@
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
-    <div class="box-white bg-violet-50 text-sm">
+    <div class="box bg-violet text-sm">
       <h3 class="uppercase-box"><?= __('reading'); ?></h3>
 
       <?php
@@ -62,7 +62,7 @@
       <?php } ?>
     </div>
   <?php } else { ?>
-    <div class="box-white bg-violet-50 text-sm">
+    <div class="box bg-violet text-sm">
       <div class="uppercase gray mt5 mb5">
         <?= __('topics'); ?>
       </div>
@@ -77,7 +77,7 @@
 
   <div class="sticky top0">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="box-white bg-violet-50">
+      <div class="box bg-violet">
         <ul class="last-content">
           <?php foreach ($data['latest_answers'] as $answer) { ?>
             <li>

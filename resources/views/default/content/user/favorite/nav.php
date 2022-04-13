@@ -1,4 +1,4 @@
-<div class="box-flex-white">
+<div class="box-flex justify-between">
   <ul class="nav">
     <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.favorites')]); ?>
   </ul>

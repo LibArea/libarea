@@ -1,5 +1,5 @@
 <?php if (!empty($data['answers'])) { ?>
-  <div class="box-white">
+  <div class="box">
     <h2 class="lowercase m0 text-2xl">
       <?= Html::numWord($post['amount_content'], __('num.answer'), true); ?>
     </h2>
@@ -12,7 +12,7 @@
           <ol class="list-none">
             <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="hidden">
-                <div class="br-box-gray w110 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
+                <div class="br-gray w110 box right hidden center">
                   <?= Html::image($answer['avatar'], $answer['login'], 'img-lg', 'avatar', 'max'); ?>
                   <div class="text-sm gray">
                     <?= Html::langDate($answer['date']); ?>

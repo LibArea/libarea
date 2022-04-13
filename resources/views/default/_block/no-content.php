@@ -1,5 +1,5 @@
 <?php if ($type == 'small') { ?>
-  <div class="box gray-600 bg-violet-50">
+  <div class="box gray-600 bg-violet">
     <i class="<?= $icon; ?> green middle mr5"></i>
     <span class="middle"><?= $text; ?>...</span>
   </div>

@@ -1,11 +1,11 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?08');
+Request::getHead()->addStyles('/assets/css/style.css?12');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
 <?= Tpl::insert('/meta', ['meta' => $meta]); ?>
 
-<body<?php if (Request::getCookie('dayNight') == 'dark') { ?> class="dark" <?php } ?>>
+<body<?php if (Request::getCookie('dayNight') == 'dark') : ?> class="dark" <?php endif; ?>>
 
   <header class="bg-white mt0 mb15">
     <div class="br-bottom mr-auto max-width w-100 pr10 pl15 mb10 mb-none items-center flex">
@@ -35,21 +35,21 @@ $facet  = $data['facet'] ?? false; ?>
         </div>
       </div>
 
-      <?php if ($user['id'] == 0) { ?>
+      <?php if (!UserData::checkActiveUser()) : ?>
         <div class="flex right items-center">
           <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml10">
             <i class="bi-brightness-high gray-600 text-xl"></i>
           </div>
-          <?php if (Config::get('general.invite') == false) { ?>
+          <?php if (Config::get('general.invite') == false) : ?>
             <a class="w94 gray ml30 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
               <?= __('registration'); ?>
             </a>
-          <?php } ?>
+          <?php endif; ?>
           <a class="w94 btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
             <?= __('sign.in'); ?>
           </a>
         </div>
-      <?php } else { ?>
+      <?php else : ?>
         <div>
           <div class="flex right ml30 mb-ml10 items-center">
 
@@ -61,15 +61,15 @@ $facet  = $data['facet'] ?? false; ?>
 
             <a class="gray-600 p10 text-xl ml20 mb-ml10" href="<?= getUrlByName('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
-              <?php if (!empty($notif)) { ?>
-                <?php if ($notif['action_type'] == 1) { ?>
+              <?php if (!empty($notif)) : ?>
+                <?php if ($notif['action_type'] == 1) : ?>
                   <i class="bi-envelope red"></i>
-                <?php } else { ?>
+                <?php else : ?>
                   <i class="bi-bell-fill red"></i>
-                <?php } ?>
-              <?php } else { ?>
+                <?php endif; ?>
+              <?php else : ?>
                 <i class="bi-bell"></i>
-              <?php } ?>
+              <?php endif; ?>
             </a>
 
             <div class="ml45 mb-ml20 relative">
@@ -83,7 +83,7 @@ $facet  = $data['facet'] ?? false; ?>
 
           </div>
         </div>
-      <?php }  ?>
+      <?php endif;  ?>
     </div>
   </header>
   <div id="contentWrapper" class="wrap">

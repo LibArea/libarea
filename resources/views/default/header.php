@@ -1,11 +1,11 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?08');
+Request::getHead()->addStyles('/assets/css/style.css?12');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
 <?= Tpl::insert('/meta', ['meta' => $meta]); ?>
 
-<body class="body-bg-fon<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?><?php if (Request::getCookie('menuYesNo') == 'menuno') { ?> menuno<?php } ?>">
+<body class="body-bg-fon<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if (Request::getCookie('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
   <header class="d-header">
     <div class="wrap">
       <div class="d-header_contents">
@@ -30,21 +30,21 @@ $facet  = $data['facet'] ?? false; ?>
           <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
         </div>
 
-        <?php if (!UserData::checkActiveUser()) { ?>
+        <?php if (!UserData::checkActiveUser()) : ?>
           <div class="flex right items-center">
             <div id="toggledark" class="header-menu-item mb-none ml45">
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
-            <?php if (Config::get('general.invite') == false) { ?>
+            <?php if (Config::get('general.invite') == false) : ?>
               <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 block" href="<?= getUrlByName('register'); ?>">
                 <?= __('registration'); ?>
               </a>
-            <?php } ?>
+            <?php endif; ?>
             <a class="w94 btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
               <?= __('sign.in'); ?>
             </a>
           </div>
-        <?php } else { ?>
+        <?php else : ?>
 
           <div class="flex right ml45 mb-ml0 items-center text-xl">
 
@@ -56,15 +56,15 @@ $facet  = $data['facet'] ?? false; ?>
 
             <a class="gray-600 ml45 mb-ml20" href="<?= getUrlByName('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
-              <?php if (!empty($notif)) { ?>
-                <?php if ($notif['action_type'] == 1) { ?>
+              <?php if (!empty($notif)) : ?>
+                <?php if ($notif['action_type'] == 1) : ?>
                   <i class="bi-envelope red"></i>
-                <?php } else { ?>
+                <?php else : ?>
                   <i class="bi-bell-fill red"></i>
-                <?php } ?>
-              <?php } else { ?>
+                <?php endif; ?>
+              <?php else : ?>
                 <i class="bi-bell"></i>
-              <?php } ?>
+              <?php endif; ?>
             </a>
 
             <div class="ml45 mb-ml20">
@@ -76,17 +76,17 @@ $facet  = $data['facet'] ?? false; ?>
               </ul>
             </div>
           </div>
-        <?php } ?>
+        <?php endif; ?>
       </div>
     </div>
   </header>
 
-  <?php if ($user['id'] == 0 && $data['type'] == 'main') { ?>
-    <div class="box-white mb-none center">
+  <?php if ($user['id'] == 0 && $data['type'] == 'main') : ?>
+    <div class="box mb-none center">
       <h1><?= Config::get('meta.banner_title'); ?></h1>
       <p><?= Config::get('meta.banner_desc'); ?>...</p>
     </div>
-  <?php } ?>
+  <?php endif; ?>
 
   <div id="contentWrapper" class="wrap">
 

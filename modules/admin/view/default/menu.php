@@ -7,7 +7,7 @@
 
 <main class="col-two">
   <?php if ($data['type'] != 'admin') : ?>
-    <div class="box-flex-white">
+    <div class="box-flex justify-between">
 
       <?= Tpl::insert('/_block/navigation/breadcrumbs', [
         'list' => [

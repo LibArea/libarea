@@ -1,8 +1,8 @@
 <main class="col-two">
-  <div class="box-flex-white">
+  <div class="box-flex">
     <p class="m0"><?= __($data['sheet']); ?></p>
   </div>
-  <div class="box-white">
+  <div class="box">
     <?php if (!empty($data['messages'])) { ?>
       <?php foreach ($data['messages'] as  $msg) { ?>
         <div class="hidden mt15 mb15<?php if (!$msg['unread'] > 0) { ?> bg-purple<?php } ?>">
@@ -43,7 +43,7 @@
 <?php } ?>
 </main>
 <aside>
-  <div class="box-white bg-violet-50 text-sm">
+  <div class="box bg-violet text-sm">
     <?= __('messages.info'); ?>
   </div>
 </aside>

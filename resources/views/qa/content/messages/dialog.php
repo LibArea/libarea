@@ -1,5 +1,5 @@
 <main class="col-two">
-  <div class="box-flex-white">
+  <div class="box-flex">
     <p class="m0"><?= __($data['sheet']); ?></p>
   </div>
   <div class="mb15 mb-ml0 hidden">
@@ -11,7 +11,7 @@
     </form>
   </div>
 
-  <div class="box-white">
+  <div class="box">
     <?php if ($data['list']) { ?>
       <?php foreach ($data['list'] as $key => $val) { ?>
         <div class="hidden">
@@ -55,7 +55,7 @@
 </main>
 
 <aside>
-  <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
+  <div class="br-gray p15 mb15 br-rd5 bg-white text-sm">
     <div class="uppercase gray mt5 mb5"><?= __('dialogues'); ?></div>
     <?php foreach ($data['dialog'] as $key => $val) { ?>
       <?php if ($val['id'] != $user['id']) { ?>

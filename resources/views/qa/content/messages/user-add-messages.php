@@ -1,5 +1,5 @@
 <main class="col-two">
-  <div class="box-white">
+  <div class="box">
     <h1 class="mt0 mb10 text-2xl font-normal">
       <?= __('send.message'); ?>  <?= $user['login']; ?> / <?= $data['login']; ?>
       <a class="right text-sm" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">
@@ -15,7 +15,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white bg-violet-50 text-sm">
+  <div class="box bg-violet text-sm">
     <?= __('being.developed'); ?>
   </div>
 </aside>

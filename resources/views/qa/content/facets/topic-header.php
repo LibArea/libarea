@@ -1,6 +1,6 @@
-<div class="box-flex-white bg-violet-50">
+<div class="box-flex bg-violet">
   <div class="mb-none">
-    <?= Html::image($topic['facet_img'], $topic['facet_title'], 'w94 br-box-gray mr15', 'logo', 'max'); ?>
+    <?= Html::image($topic['facet_img'], $topic['facet_title'], 'w94 br-gray mr15', 'logo', 'max'); ?>
   </div>
   <div class="flex-auto">
     <h1 class="text-2xl">
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<div class="box-flex-white bg-violet-50">
+<div class="box-flex bg-violet">
   <p class="m0 text-xl mb-none"><?= __($data['type']); ?></p>
   <ul class="nav">
 

@@ -2,7 +2,7 @@
   <?= Tpl::insert('/content/user/profile/header', ['user' => $user, 'data' => $data]); ?>
   <div class="flex gap">
     <main class="col-two">
-      <div class="box-flex-white">
+      <div class="box-flex">
         <p class="m0"><?= __('answers'); ?> <b><?= $data['profile']['login']; ?></b></p>
       </div>
       <?php if (!empty($data['answers'])) { ?>

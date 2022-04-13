@@ -216,32 +216,26 @@ details[open] > summary {
   margin-bottom: 15px;
 }
 
-.box-white {
-  border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 15px;
-  border: 1px solid var(--br-box-gray);
-  background-color: var(--white);
-}
-
 .box-flex {
   display: flex;
+  border-radius: 5px;
+  position: relative;
   flex-direction: row;
   align-items: center;
   padding: 15px;
   margin-bottom: 15px;
 }
 
-.box-flex-white {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 15px;
-  border: 1px solid var(--br-box-gray);
+.body-bg-fon .box-flex,
+.body-bg-fon .box {
+  border: 1px solid var(--gray-300);
   background-color: var(--white);
+}
+
+.body-bg-fon.dark .box-flex,
+.body-bg-fon.dark .box {
+  border: 1px solid #d0d0d0;
+  background-color: #d0d0d0;
 }
 
 ul.last-content {

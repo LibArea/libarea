@@ -11,7 +11,7 @@
 
 <body class="body-bg-fon mt30">
 
-  <main class="max-w780 mr-auto box-white">
+  <main class="max-w780 mr-auto box">
     <h1 class="text-3xl font-semibold gray mt0 mb0">404</h1>
     <p class="gray-600"><?= Translate::get('page.not'); ?></p>
     <a class="btn btn-primary" href="/"><?= Translate::get('to.main'); ?></a>

@@ -1,7 +1,7 @@
 <main>
   <?= Tpl::insert('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
 
-  <div class="box-white">
+  <div class="box">
     <form class="max-w780" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
@@ -91,7 +91,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white text-sm">
+  <div class="box text-sm">
     <?= __('setting.info'); ?>
   </div>
 </aside>

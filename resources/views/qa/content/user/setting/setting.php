@@ -85,7 +85,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white bg-violet-50 text-sm">
+  <div class="box bg-violet text-sm">
     <?= __('setting.info'); ?>
   </div>
 </aside>

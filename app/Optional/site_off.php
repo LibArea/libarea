@@ -9,7 +9,7 @@
 
 <body class="body-bg-fon mt30">
 
-    <main class="max-w780 mr-auto box-white">
+    <main class="max-w780 mr-auto box">
       <h1 class="text-3xl font-normal gray m0">Opss</h1>
       <p class="gray-600"><?= Translate::get('under.reconstruction'); ?>...</p>
 

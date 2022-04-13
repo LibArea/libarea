@@ -1,11 +1,11 @@
 <main class="col-two">
-  <div class="box-white bg-violet-50">
+  <div class="box bg-violet">
     <ul class="nav">
       <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.favorites')]); ?>
     </ul>
   </div>
     <?php if (!empty($data['drafts'])) { ?>
-      <div class="box-white bg-violet-50">
+      <div class="box bg-violet">
       <?php foreach ($data['drafts'] as $draft) { ?>
 
         <a href="<?= getUrlByName('post', ['id' => $draft['post_id'], 'slug' => $draft['post_slug']]); ?>">
@@ -23,7 +23,7 @@
     <?php } ?>
 </main>
 <aside>
-  <div class="box-white bg-violet-50 text-sm">
+  <div class="box bg-violet text-sm">
     <?= __('being.developed'); ?>
   </div>
 </aside>

@@ -28,13 +28,13 @@
         <div class="flex">
           <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') { ?>
             <div class="relative mr15">
-              <img class="block br-box-gray max-w-100" src="<?= Html::coverUrl($data['user']['cover_art'], 'user'); ?>">
+              <img class="block br-gray max-w-100" src="<?= Html::coverUrl($data['user']['cover_art'], 'user'); ?>">
               <a class="right text-sm" href="<?= getUrlByName('delete.cover', ['login' => $user['login']]); ?>">
                 <?= __('remove'); ?>
               </a>
             </div>
           <?php } else { ?>
-            <div class="block br-box-gray max-w-100 text-sm gray p20 mr15">
+            <div class="block br-gray max-w-100 text-sm gray p20 mr15">
               <?= __('no.cover'); ?>...
             </div>
           <?php } ?>
@@ -58,7 +58,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white bg-violet-50 text-sm">
+  <div class="box bg-violet text-sm">
     <?= __('avatar.info'); ?>
   </div>
 </aside>

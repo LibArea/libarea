@@ -1,13 +1,13 @@
 <?= Tpl::insert('/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 
 <main>
-  <div class="box-flex-white">
+  <div class="box-flex">
     <p class="m0"><?= __('teams'); ?></p>
     <?php if ($data['count'] < $data['limit']) : ?>
       <a href="<?= getUrlByName('team.add'); ?>" class="btn btn-primary"><?= __('add'); ?></a>
     <?php endif; ?>
   </div>
-  <div class="box-white">
+  <div class="box">
     <?php if (!empty($data['teams'])) : ?>
 
       <?php foreach ($data['teams'] as $team) : ?>
@@ -17,7 +17,7 @@
             <div class="content-body">
               <?= Content::text($team['content'], 'line'); ?>
             </div>
-            <blockquote class="bg-white">
+            <blockquote class="box">
               <?php if ($team['users_list']) : ?>
                 <?= \Modules\Teams\App\Teams::users($team['users_list']); ?>
               <?php else : ?>
@@ -45,7 +45,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white">
+  <div class="box">
     <h3 class="uppercase-box"><?= __('info'); ?></h3>
     <span class="gray-600"><?= __('team.info'); ?></span>
     <h3 class="uppercase-box mt15"><?= __('owner'); ?></h3>

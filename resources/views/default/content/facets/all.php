@@ -1,12 +1,12 @@
 <main class="col-two">
-  <div class="box-white center">
+  <div class="box center">
     <h1 class="text-xl"><?= __($data['sheet']); ?></h1>
     <span class="text-sm gray-600">
       <?= __($data['sheet'] . '.info'); ?>.
     </span>
   </div>
 
-  <div class="box-flex-white">
+  <div class="box-flex justify-between">
     <ul class="nav">
 
       <?= Tpl::insert(
@@ -59,7 +59,7 @@
     <?php } ?>
   </div>
 
-  <div class="box-white">
+  <div class="box">
     <?php if (!empty($data['facets'])) { ?>
       <?php if ($data['type'] == 'blog') { ?>
         <?= Tpl::insert('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>

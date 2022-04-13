@@ -2,11 +2,11 @@
   <?= Tpl::insert('/content/user/profile/header', ['user' => $user, 'data' => $data]); ?>
   <div class="flex gap">
     <main class="col-two">
-      <div class="box-flex-white">
+      <div class="box-flex">
         <p class="m0"><?= __('comments'); ?> <b><?= $data['profile']['login']; ?></b></p>
       </div>
       <?php if (!empty($data['comments'])) { ?>
-        <div class="box-white">
+        <div class="box">
           <?= Tpl::insert('/content/comment/comment', ['answer' => $data['comments'], 'user' => $user]); ?>
         </div>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/comments'); ?>

@@ -1,5 +1,5 @@
 <?php if (!empty($data['answers'])) { ?>
-  <div class="box-white">
+  <div class="box">
     <h2 class="lowercase m0 mb15 text-2xl">
       <?= Html::numWord($post['amount_content'], __('num.answer'), true); ?>
     </h2>

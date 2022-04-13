@@ -1,7 +1,7 @@
 <?php $fs = $data['facet']; ?>
 
 <main class="col-two">
-  <div class="box-flex-white">
+  <div class="box-flex">
     <p class="m0 text-xl"><?= __($fs['facet_type']); ?></p>
     <ul class="nav">
 
@@ -34,7 +34,7 @@
     </ul>
   </div>
 
-  <div class="box-white">
+  <div class="box">
     <div class="uppercase gray mt5 mb5">
       <?= __('pages'); ?>
       <a class="mr15 right" title="<?= __('add'); ?>" href="<?= getUrlByName('content.add', ['type' => 'page']); ?>">

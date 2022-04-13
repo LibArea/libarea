@@ -1,5 +1,5 @@
 <main class="col-two">
-  <div class="box-flex-white bg-violet-50">
+  <div class="box-flex bg-violet">
     <p class="m0"><?= __($data['sheet']); ?></p>
   </div>
   <div class="p15">
@@ -56,7 +56,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white bg-violet-50 text-sm">
+  <div class="box bg-violet text-sm">
     <?= __('invite.features'); ?>
   </div>
 </aside>

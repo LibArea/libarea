@@ -1,7 +1,7 @@
 <?php $blog = $data['facet'];
 if ($blog['facet_is_deleted'] == 0) { ?>
   <div class="w-100">
-    <div class="box-flex-white" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= Html::coverUrl($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
+    <div class="box-flex" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= Html::coverUrl($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
       <div class="mb-none">
         <?= Html::image($blog['facet_img'], $blog['facet_title'], 'img-xl', 'logo', 'max'); ?>
       </div>
@@ -43,7 +43,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       </main>
       <aside>
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
-          <div class="bg-violet-50 box text-sm">
+          <div class="bg-violet box text-sm">
             <h3 class="uppercase-box"><?= __('created.by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
               <?= Html::image($data['user']['avatar'], $data['user']['login'], 'ava-base', 'avatar', 'max'); ?>
@@ -55,14 +55,14 @@ if ($blog['facet_is_deleted'] == 0) { ?>
             </div>
           </div>
           <?php if ($data['info']) { ?>
-            <div class="bg-violet-50 box text-sm shown_post">
+            <div class="bg-violet box text-sm shown_post">
               <?= $data['info']; ?>
             </div>
           <?php } ?>
 
           <?php if (!empty($data['pages'])) { ?>
             <div class="sticky top0 top-sm">
-              <div class="bg-violet-50 box text-sm">
+              <div class="bg-violet box text-sm">
                 <h3 class="uppercase-box"><?= __('pages'); ?></h3>
                 <?php foreach ($data['pages'] as $ind => $row) { ?>
                   <div class="mb5">

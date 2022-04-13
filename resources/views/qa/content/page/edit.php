@@ -1,6 +1,6 @@
 <?php $post   = $data['post']; ?>
 <main class="w-100">
-  <div class="bg-white items-center justify-between p15 mb15">
+  <div class="box">
 
     <a href="/"><?= __('home'); ?></a> /
     <span class="red">

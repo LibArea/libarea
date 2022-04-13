@@ -4,7 +4,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
 ?>
 
 <main class="col-two">
-  <div class="box-flex-white">
+  <div class="box-flex">
     <p class="m0 text-xl"><?= __($fs['facet_type']); ?></p>
     <ul class="nav">
 
@@ -37,7 +37,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
     </ul>
   </div>
 
-  <div class="box-white">
+  <div class="box">
     <form class="max-w780" action="<?= getUrlByName('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <i><?= __('edit'); ?></i>
@@ -61,7 +61,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           <div class="flex">
             <?php if ($fs['facet_cover_art']) { ?>
               <div class="mr20">
-                <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="w160 h94 br-box-gray">
+                <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="w160 h94 br-gray">
                 <input type="hidden" name="cover" value="<?= $fs['facet_cover_art']; ?>">
               </div>
             <?php } ?>
@@ -122,7 +122,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <?php } ?>
 
       <?php if (!empty($data['high_arr'])) { ?>
-        <div class="box-white">
+        <div class="box">
           <h3 class="uppercase-box"><?= __('parents'); ?></h3>
           <?php foreach ($data['high_arr'] as $high) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
@@ -134,7 +134,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <?php } ?>
 
       <?php if (!empty($data['low_arr'])) { ?>
-        <div class="box-white">
+        <div class="box">
           <h3 class="uppercase-box"><?= __('children'); ?></h3>
           <?php foreach ($data['low_arr'] as $sub) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
@@ -182,7 +182,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       </fieldset>
 
       <?php if (!empty($data['high_matching'])) { ?>
-        <div class="box-white max-w780">
+        <div class="box max-w780">
           <h3 class="uppercase-box"><?= __('bound.parents'); ?></h3>
           <?php foreach ($data['high_matching'] as $low_mat) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">

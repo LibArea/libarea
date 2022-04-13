@@ -1,5 +1,5 @@
 <main class="col-two">
-  <div class="bg-violet-50 box center">
+  <div class="bg-violet box center">
     <h1 class="text-xl"><?= __($data['sheet']); ?></h1>
     <span class="text-sm gray-600">
       <?= __($data['sheet'] . '.info'); ?>.

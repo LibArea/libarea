@@ -7,7 +7,7 @@ $form->html_form($user['trust_level'], Config::get('form/user-security'));
 
   <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
 
-  <div class="box-white">
+  <div class="box">
     <form action="<?= getUrlByName('setting.security.edit'); ?>" method="post">
       <?php csrf_field(); ?>
 
@@ -21,7 +21,7 @@ $form->html_form($user['trust_level'], Config::get('form/user-security'));
   </div>
 </main>
 <aside>
-  <div class="box-white text-sm">
+  <div class="box text-sm">
     <?= __('security.info'); ?>
   </div>
 </aside>

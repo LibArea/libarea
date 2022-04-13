@@ -1,12 +1,12 @@
 <main class="col-two">
-  <div class="box-flex-white bg-violet-50">
+  <div class="box-flex bg-violet">
     <p class="m0"><?= __($data['sheet']); ?></p>
     <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
       <?= Html::sumbit(__('i.read')); ?>
     </form>
   </div>
 
-  <div class="bg-white mb15">
+  <div class="bg mb15">
     <?php if (!empty($data['notifications'])) { ?>
       <?php foreach ($data['notifications'] as  $notif) {
         $url = getUrlByName('notif.read', ['id' => $notif['notif_id']]);
@@ -36,7 +36,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white bg-violet-50 text-sm sticky top-sm">
+  <div class="box bg-violet text-sm sticky top-sm">
     <?= __('notifications.info'); ?>
   </div>
 </aside>

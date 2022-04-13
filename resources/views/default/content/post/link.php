@@ -1,5 +1,5 @@
 <main>
-  <div class="box-white">
+  <div class="box">
     <?php if ($data['site']['item_title']) { ?>
       <div class="right mt15">
         <?= Html::votes($user['id'], $data['site'], 'item', 'ps', 'mr10'); ?>
@@ -31,7 +31,7 @@
 </main>
 <aside>
   <div class="sticky top-sm">
-    <div class="box-white">
+    <div class="box">
       <?= Tpl::insert('/_block/domains', ['data' => $data['domains']]); ?>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <main class="col-two">
-  <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="bg-white items-center justify-between br-gray br-rd5 p15 mb15">
 
     <a href="/"><?= __('home'); ?></a> /
     <span class="red"><?= __('edit.answer'); ?></span>

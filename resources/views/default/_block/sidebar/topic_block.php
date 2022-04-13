@@ -1,4 +1,4 @@
-<div class="box-white text-sm">
+<div class="box text-sm">
   <h3 class="uppercase-box"><?= __($lang); ?></h3>
   <ul>
   <?php foreach ($data as $sub) { ?>

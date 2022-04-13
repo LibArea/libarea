@@ -38,9 +38,9 @@
     <?php endif; ?>
   </main>
   <aside>
-    <div class="box-yellow text-sm max-w300"><?= __('directory.info'); ?></div>
+    <div class="box bg-yellow text-sm max-w300"><?= __('directory.info'); ?></div>
     <?php if (UserData::checkActiveUser()) : ?>
-      <div class="box-white text-sm bg-violet-50 mt15">
+      <div class="box text-sm bg-violet mt15">
         <h3 class="uppercase-box"><?= __('menu'); ?></h3>
         <ul class="menu">
           <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>

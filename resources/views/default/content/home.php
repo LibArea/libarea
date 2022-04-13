@@ -1,5 +1,5 @@
 <main>
-  <div class="box-flex-white relative">
+  <div class="box-flex justify-between">
     <ul class="nav">
        <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.home')]); ?>
     </ul>
@@ -27,7 +27,7 @@
   <?php } ?>
 
   <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
-    <div class="box-white">
+    <div class="box">
       <h3 class="uppercase-box"><?= __('reading'); ?></h3>
       <ul>
         <?php
@@ -72,7 +72,7 @@
       <?php } ?>
     </div>
   <?php } else { ?>
-    <div class="box-white">
+    <div class="box">
       <h3 class="uppercase-box"><?= __('topics'); ?></h3>
       <?php foreach (Config::get('facets.default') as $key => $topic) { ?>
         <a class="flex items-center relative pb10 gray-600" href="<?= $topic['url']; ?>">
@@ -85,7 +85,7 @@
 
   <div class="sticky top-sm">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="box-white">
+      <div class="box">
         <ul class="last-content">
           <?php foreach ($data['latest_answers'] as $answer) { ?>
             <li>

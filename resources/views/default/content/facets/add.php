@@ -4,7 +4,7 @@ $form->html_form($user['trust_level'], Config::get('form/facet.forma'));
 ?>
 
 <main class="col-two">
-  <div class="box-white">
+  <div class="box">
     <h1 class="text-xl"><?= __('add'); ?> (<?= __($data['type']); ?>)</h1>
 
     <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>

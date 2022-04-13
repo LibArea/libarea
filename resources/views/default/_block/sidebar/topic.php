@@ -1,5 +1,5 @@
 <?php if ($data['user']['id'] != 1) { ?>
-  <div class="box-white">
+  <div class="box">
     <h3 class="uppercase-box"><?= __('created.by'); ?></h3>
     <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
       <?= Html::image($data['user']['avatar'], $data['user']['login'], 'ava-base', 'avatar', 'max'); ?>

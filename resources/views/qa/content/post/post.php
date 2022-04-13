@@ -8,7 +8,7 @@
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="flex br-bottom p10 article_<?= $post['post_id']; ?>">
       <div class="flex mb-inline mr15">
-        <div class="box-answer block bg-gray-100 gray mt5 br-rd3 lowercase mr15">
+        <div class="box-answer block bg-lightgray gray mt5 br-rd3 lowercase mr15">
           <?= $post['post_votes']; ?>
           <div class="text-xs"> <?= Html::numWord($post['post_votes'], __('num.up'), false); ?></div>
         </div>
@@ -56,7 +56,7 @@
         </div>
 
         <?php if ($data['sheet'] == 'subscribed') { ?>
-          <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet-50 text-sm right">
+          <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet text-sm right">
             <?= __('unsubscribe'); ?>
           </div>
         <?php } ?>

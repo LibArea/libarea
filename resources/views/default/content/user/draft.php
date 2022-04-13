@@ -1,12 +1,12 @@
 <main>
-  <div class="box-flex-white">
+  <div class="box-flex">
     <ul class="nav">
       <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.favorites')]); ?>
     </ul>
   </div>
 
   <?php if (!empty($data['drafts'])) { ?>
-    <div class="box-white">
+    <div class="box">
       <?php foreach ($data['drafts'] as $draft) { ?>
         <a href="<?= getUrlByName('post', ['id' => $draft['post_id'], 'slug' => $draft['post_slug']]); ?>">
           <h3 class="m0 text-2xl"><?= $draft['post_title']; ?></h3>
@@ -23,7 +23,7 @@
 
 </main>
 <aside>
-  <div class="box-white text-sm sticky top-sm">
+  <div class="box text-sm sticky top-sm">
     <?= __('being.developed'); ?>
   </div>
 </aside>

@@ -1,7 +1,7 @@
 <?= Tpl::insert('/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 
 <main class="col-two">
-  <div class="box-white">
+  <div class="box">
 
     <a href="<?= getUrlByName('teams'); ?>"><?= __('teams'); ?></a> /
     <span class="red"><?= sprintf(__('add.option'), __('team')); ?></span>

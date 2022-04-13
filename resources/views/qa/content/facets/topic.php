@@ -15,7 +15,7 @@
 </main>
 <aside>
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
-    <div class="box-flex-white bg-violet-50">
+    <div class="box-flex bg-violet">
       <div class="center">
         <div class="uppercase text-sm gray-600"><?= __('posts'); ?></div>
         <?= $topic['facet_count']; ?>
@@ -31,7 +31,7 @@
 
     <?php if (!empty($data['pages'])) { ?>
       <div class="sticky top0 top-sm">
-        <div class="box-white bg-violet-50 text-sm">
+        <div class="box bg-violet text-sm">
           <h3 class="uppercase-box"><?= __('pages'); ?></h3>
           <?php foreach ($data['pages'] as $ind => $row) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="">
@@ -45,7 +45,7 @@
     <?= Tpl::insert('/_block/sidebar/topic', ['data' => $data]); ?>
     <?php if (!empty($data['writers'])) { ?>
       <div class="sticky top0 top-sm">
-        <div class="box-white bg-violet-50 text-sm">
+        <div class="box bg-violet text-sm">
           <h3 class="uppercase-box"><?= __('writers'); ?></h3>
           <ul>
           <?php foreach ($data['writers'] as $ind => $row) { ?>

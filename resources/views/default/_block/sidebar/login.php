@@ -2,7 +2,7 @@
 $form = new Forms();
 $form->html_form($user['trust_level'], Config::get('form/auth.login'));
 ?>
-<div class="box-white text-sm">
+<div class="box text-sm">
   <form action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>
     <?= $form->build_form(); ?>

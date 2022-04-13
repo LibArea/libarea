@@ -1,8 +1,8 @@
 <main>
-  <div class="box-flex-white">
+  <div class="box-flex">
     <p class="m0"><?= __($data['sheet']); ?></p>
   </div>
-  <div class="box-white">
+  <div class="box">
     <?php if ($user['trust_level'] > 1) { ?>
       <form method="post" action="<?= getUrlByName('invit.create'); ?>">
         <?php csrf_field(); ?>
@@ -15,7 +15,7 @@
         <?= __('invitations.left'); ?> <?= 5 - $data['count_invites']; ?>
       </form>
 
-      <h3><?= __('invited.uests'); ?></h3>
+      <h3 class="mt15"><?= __('invited.guests'); ?></h3>
 
       <?php if (!empty($data['invitations'])) { ?>
 
@@ -48,16 +48,16 @@
         <?php } ?>
 
       <?php } else { ?>
-        <?= __('no.invites'); ?>
+        <span class="gray"><?= __('no.invites'); ?></span>
       <?php } ?>
 
     <?php } else { ?>
-      <?= __('limit.tl.invitation'); ?>.
+      <span class="gray"><?= __('limit.tl.invitation'); ?>.</span>
     <?php } ?>
   </div>
 </main>
 <aside>
-  <div class="box-white text-sm sticky top-sm">
+  <div class="box text-sm sticky top-sm">
     <?= __('invite.features'); ?>
   </div>
 </aside>

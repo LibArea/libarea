@@ -1,4 +1,4 @@
-<main class="max-w780 mr-auto box-white">
+<main class="max-w780 mr-auto box">
   <h1 class="center"><?= __('password.recovery'); ?></h1>
   <div class="box wide">
     <form action="<?= getUrlByName('recover'); ?>/send/pass" method="post">

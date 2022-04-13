@@ -1,11 +1,11 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?08');
-Request::getHead()->addStyles('/assets/css/catalog.css?08');
+Request::getHead()->addStyles('/assets/css/style.css?12');
+Request::getHead()->addStyles('/assets/css/catalog.css?12');
 ?>
 
 <?= Tpl::insert('/meta', ['meta' => $meta]); ?>
 
-<body<?php if (Request::getCookie('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
+<body<?php if (Request::getCookie('dayNight') == 'dark') : ?> class="dark"<?php endif; ?>>
   <header>
     <div class="page-search mb-p10">
       <a class="logo" href="<?= getUrlByName('web'); ?>">

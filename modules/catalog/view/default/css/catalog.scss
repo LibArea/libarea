@@ -11,22 +11,6 @@ main { margin-left: 30px; }
   font-size: 21px;
 }
 
-.box-yellow {
-  border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 15px;
-  background-color: rgb(247, 247, 235);
-} 
-
-.box-yellow-small {
-  border-radius: 3px;
-  padding: 0.15rem 0.35rem;
-  font-size: 0.775rem;
-  margin-right: 5px;
-  color: var(--gray-600);
-  background-color: rgb(247, 247, 235);
-} 
-
 .item-cat { padding: 0 0 10px 30px; }
 
 .list-items {
@@ -85,6 +69,15 @@ main { margin-left: 30px; }
 .item-categories > div {
   width: 33%;
   margin-bottom: 10px;
+}
+
+body.dark h2,
+body.dark .categories-telo a {
+  color: #111;
+}
+
+body.dark .box {
+  background-color: #d0d0d0;
 }
 
 @media (max-width: 890px) {

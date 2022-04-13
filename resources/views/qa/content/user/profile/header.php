@@ -6,7 +6,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
 }
 ?>
 
-<div class="br-box-gray bg-white mb15">
+<div class="br-gray box">
   <?php if ($profile['cover_art'] != 'cover_art.jpeg') { ?>
     <div class="profile-box-cover relative">
       <img class="w-100 min-h100" src="<?= Html::coverUrl($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">

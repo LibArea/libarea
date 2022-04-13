@@ -1,5 +1,5 @@
 <main>
-  <div class="box-flex-white relative">
+  <div class="box-flex justify-between">
     <ul class="nav">
       <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.answers')]); ?>
     </ul>
@@ -10,7 +10,7 @@
   </div>
 
   <?php if (!empty($data['answers'])) { ?>
-    <div class="box-white">
+    <div class="box">
       <?= Tpl::insert('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
@@ -19,7 +19,7 @@
   <?php } ?>
 </main>
 <aside>
-  <div class="box-white text-sm sticky top-sm">
+  <div class="box text-sm sticky top-sm">
     <?= __('answers.desc'); ?>
   </div>
 </aside>

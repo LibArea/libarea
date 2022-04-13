@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="box-white">
+<div class="box">
   <?php if ($data['logs']) : ?>
     <table>
       <thead>

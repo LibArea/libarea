@@ -72,7 +72,7 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
     </div>
   </main>
   <aside>
-    <div class="box-white box-shadow-all text-sm">
+    <div class="box box-shadow-all text-sm">
       <h3 class="uppercase-box"><?= __('help'); ?></h3>
       <?= __('add.site.help'); ?>
       <div>

@@ -1,4 +1,4 @@
-<div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
+<div class="br-gray box text-sm">
   <form action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>
     <fieldset class="mt0">

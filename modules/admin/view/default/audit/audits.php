@@ -24,7 +24,7 @@
   ]
 ); ?>
 
-<div class="box-white">
+<div class="box">
   <?php if (!empty($data['audits'])) : ?>
     <table>
       <thead>

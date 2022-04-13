@@ -1,5 +1,5 @@
 <main>
-  <div class="box-flex-white">
+  <div class="box-flex justify-between">
     <p class="m0"><?= __($data['sheet']); ?></p>
     <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
       <?= Html::sumbit(__('i.read')); ?>
@@ -36,7 +36,7 @@
   </div>
 </main>
 <aside>
-  <div class="box-white text-sm sticky top-sm">
+  <div class="box text-sm sticky top-sm">
     <?= __('notifications.info'); ?>
   </div>
 </aside>

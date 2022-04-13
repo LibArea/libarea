@@ -2,7 +2,7 @@
 
 <script src="/assets/js/common.js"></script>
 <script src="/assets/js/notiflix/notiflix-aio-3.2.5.min.js"></script>
-<?php if ($uid) { ?><script src="/assets/js/app.js"></script><?php } ?>
+<?php if ($uid) : ?><script src="/assets/js/app.js"></script><?php endif; ?>
 
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>
@@ -18,17 +18,17 @@
         );
       }));
   <?php } ?>
-  <?php if ($msg = Html::getMsg()) { ?>
-    <?php foreach ($msg as $message) {  ?>
-      <?php if ($message[1] == 'error') { ?>
+  <?php if ($msg = Html::getMsg()) : ?>
+    <?php foreach ($msg as $message) :  ?>
+      <?php if ($message[1] == 'error') : ?>
         Notiflix.Notify.failure('<?= __($message[0]); ?>');
-      <?php } else { ?>
+      <?php else : ?>
         Notiflix.Notify.info('<?= __($message[0]); ?>');
-      <?php } ?>
-    <?php } ?>
-  <?php } ?>
+      <?php endif; ?>
+    <?php endforeach ?>
+  <?php endif; ?>
 
-  <?php if ($scroll) { ?>
+  <?php if ($scroll) : ?>
     // Что будет смотреть
     const coolDiv = document.getElementById("scroll");
 
@@ -57,7 +57,7 @@
     if (coolDiv) {
       observer.observe(coolDiv);
     }
-  <?php } ?>
+  <?php endif; ?>
 </script>
 
 </body>
