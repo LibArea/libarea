@@ -5,7 +5,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
 
 <main class="w-100">
 
-  <div class="box-flex bg-violet">
+  <div class="box-flex bg-violet justify-between">
     <p class="m0 text-xl"><?= __($fs['facet_type']); ?></p>
     <ul class="nav">
 

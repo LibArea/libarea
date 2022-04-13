@@ -6,7 +6,7 @@
     'menus' => [],
   ]
 ); ?>
-<div class="box">
+<div class="box bg-white">
   <label><?= __('build'); ?> CSS</label>
   <form action="./update/css">
     <?= Html::sumbit(__('build')); ?>

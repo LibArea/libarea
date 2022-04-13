@@ -21,7 +21,7 @@
 );
 ?>
 
-<div class="box">
+<div class="box bg-white">
   <?php if (!empty($data['facets'])) : ?>
     <?php foreach ($data['facets'] as $topic) : ?>
 

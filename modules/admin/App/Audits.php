@@ -56,8 +56,8 @@ class Audits
         );
     }
 
-    // Log log
-    // Журнал логов
+    // Member activity log
+    // Журнал логов действий участников
     public function logs($sheet, $type)
     {
         $pageNumber = Tpl::pageNumber();
@@ -75,6 +75,23 @@ class Audits
                     'type'          => $type,
                     'sheet'         => $sheet,
                     'logs'          => $logs,
+                ]
+            ]
+        );
+    }
+    
+    // Search log
+    // Журнал логов поиска
+    public function logsSearch($sheet, $type)
+    {
+        return view(
+            '/view/default/audit/logs-search',
+            [
+                'meta'  => Meta::get(Translate::get('logs')),
+                'data'  => [
+                    'type'          => $type,
+                    'sheet'         => $sheet,
+                    'logs'          => (new \Modules\Search\App\Search())->getLogs(100),
                 ]
             ]
         );

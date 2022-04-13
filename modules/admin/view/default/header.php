@@ -4,7 +4,7 @@ Request::getHead()->addStyles('/assets/css/style.css?12');
 
 <?= Tpl::insert('/meta', ['meta' => $meta]); ?>
 
-<body class="body-bg-fon<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?>">
+<body class="bg-lightgray<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?>">
 
   <header class="d-header sticky top0">
     <div class="wrap">

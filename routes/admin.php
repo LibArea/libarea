@@ -59,8 +59,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/facets/ban/{type}')->module('admin', 'App\Facets@ban')->where(['type' => '[a-z]+'])->name('admin.facets.ban.type');
 
     Route::get('/css')->module('admin', 'App\Home@css')->name('admin.css');
-    Route::get('/info')->module('admin', 'App\Home@css')->name('admin.info');
-    
+    Route::get('/logs/search')->module('admin', 'App\Audits@logsSearch', ['logssearch.all', 'logs'])->name('admin.logs.search');
     Route::get('/logs/{page?}')->module('admin', 'App\Audits@logs', ['logs.all', 'logs'])->name('admin.logs');
  
 Route::endGroup();

@@ -245,6 +245,8 @@ $data = [
     'supports.markdown' => 'Поддерживает Markdown',
     'write'             => 'Напишите',
     'in.profile'        => 'в профиль',
+    'request'           => 'Запрос',
+    'results'           => 'Результатов',
 
     'close?'            => 'Закрыть?',
     'repeat.password'   => 'Повторите пароль',

@@ -14,7 +14,7 @@
   ]
 ); ?>
 
-<div class="box max-w780">
+<div class="box bg-white max-w780">
   <form action="<?= getUrlByName('admin.word.create'); ?>" method="post">
     <?= csrf_field() ?>
     <fieldset>

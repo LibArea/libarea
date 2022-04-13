@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="box">
+<div class="box bg-white">
   <table>
     <thead>
       <th>N</th>

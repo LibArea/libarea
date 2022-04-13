@@ -3,11 +3,18 @@
   [
     'data'  => $data,
     'meta'  => $meta,
-    'menus' => []
+    'menus' => [
+      [
+        'id'    => 'audits.all',
+        'url'   => getUrlByName('admin.logs.search'),
+        'name'  => __('search'),
+        'icon'  => 'bi-search',
+      ]
+    ]
   ]
 ); ?>
 
-<div class="box">
+<div class="box bg-white">
   <?php if ($data['logs']) : ?>
     <table>
       <thead>

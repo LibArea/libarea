@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="box">
+<div class="box bg-white">
   <form action="<?= getUrlByName('admin.user.badge.create'); ?>" method="post">
     <?= csrf_field() ?>
     <fieldset>

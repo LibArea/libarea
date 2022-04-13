@@ -246,6 +246,8 @@ $data = [
     'supports.markdown' => '支持降價',
     'write'             => '寫',
     'in.profile'        => '在個人資料中',
+    'request'           => '要求',
+    'results'           => '結果',
 
     'language'          => '本土化',
     'ru.language'       => '俄語 (RU)',

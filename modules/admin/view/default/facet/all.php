@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="box">
+<div class="box bg-white">
   <?php foreach ($data['types_facets'] as $type) : ?>
     <a class="block mb10" href="<?= getUrlByName('admin.facets.type', ['type' => $type['type_code']]); ?>">
       <i class="bi-circle green middle mr5"></i>

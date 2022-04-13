@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="box">
+<div class="box bg-white">
   <form action="<?= getUrlByName('admin.user.change', ['id' => $data['user']['id']]); ?>" method="post">
     <?= csrf_field() ?>
     <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>

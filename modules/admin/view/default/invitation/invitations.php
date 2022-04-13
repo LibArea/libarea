@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="box">
+<div class="box bg-white">
   <?php if (!empty($data['invitations'])) : ?>
     <?php foreach ($data['invitations'] as $key => $inv) : ?>
       <div>

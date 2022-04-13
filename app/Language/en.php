@@ -244,6 +244,8 @@ $data = [
     'supports.markdown' => 'Supports Markdown',
     'write'             => 'Write',
     'in.profile'        => 'In profile',
+    'request'           => 'Request',
+    'results'           => 'Results',
 
     'language'          => 'Localization',
     'ru.language'       => 'Russian (RU)',

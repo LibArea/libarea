@@ -14,7 +14,7 @@
   ]
 ); ?>
 
-<div class="box">
+<div class="box bg-white">
   <?php if (!empty($data['badges'])) : ?>
     <table class="mt20">
       <thead>
