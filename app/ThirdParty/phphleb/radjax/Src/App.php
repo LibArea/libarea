@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Radjax\Src;
 
 use Radjax\Route;
-use Request;
 
 class App
 {
@@ -98,9 +97,10 @@ class App
             }
 
             if (count($data["before"])) {
-                $this->getBefore($data);
+               if ($this->getBefore($data) === false) {
+                   exit();
+               }
             }
-
             $result = $this->getController($data);
 
             if (is_string($result) || is_numeric($result)) {
@@ -138,9 +138,11 @@ class App
             $method = ($call[1] ?? "index") .
                 (method_exists($controller, ($call[1] ?? "index")) ? "" : "Http" . ucfirst(strtolower($_SERVER['REQUEST_METHOD'])));
 
-            $controller->{$method}();
+           if ($controller->{$method}() === false) {
+               return false;
+           }
         }
-
+         return true;
     }
 
     private function getController(array $param) {

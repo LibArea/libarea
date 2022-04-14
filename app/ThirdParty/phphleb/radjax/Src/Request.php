@@ -1,5 +1,7 @@
 <?php
 
+namespace Radjax\Src;
+
 class Request
 {
     private static $instance;
