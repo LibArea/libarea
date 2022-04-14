@@ -1,5 +1,5 @@
-<?php foreach ($facets as $key => $facet) { ?>
-  <div class="w-50 mb20 mb-w-100 <?php if (($key + 1) % 2 == 0) { ?> pl20 mb-pl0<?php } ?>">
+<?php foreach ($facets as $key => $facet) : ?>
+  <div class="w-50 mb20 mb-w-100 <?php if (($key + 1) % 2 == 0) : ?> pl20 mb-pl0<?php endif; ?>">
     <div class="flex">
       <a title="<?= $facet['facet_title']; ?>" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
         <?= Html::image($facet['facet_img'], $facet['facet_title'], 'img-lg', 'logo', 'max'); ?>
@@ -20,9 +20,9 @@
           <?= $facet['facet_title']; ?>
         </a>
 
-        <?php if ($user['id'] == $facet['facet_user_id']) { ?>
+        <?php if ($user['id'] == $facet['facet_user_id']) : ?>
           <i class="bi-mic sky text-sm"></i>
-        <?php } ?>
+        <?php endif; ?>
         <div class="text-sm mt10 pr20 mb-pr0 gray">
           <?= $facet['facet_short_description']; ?>
           <sup class="flex justify-center right">
@@ -33,4 +33,4 @@
       </div>
     </div>
   </div>
-<?php } ?>
+<?php endforeach; ?>

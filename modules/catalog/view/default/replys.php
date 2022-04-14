@@ -17,7 +17,7 @@
                     
                     <span class="mr5 ml5 gray-600 lowercase">' . Html::langDate($node['date']) . '</span>'; 
             
-            if ($node['reply_parent_id'] != $node['reply_item_id'] ) {  
+            if ($node['reply_parent_id'] != $node['reply_item_id'] && $node['reply_parent_id'] != 0) {  
                 echo '<a rel="nofollow" class="gray-600 mr5 ml10" href="#reply_' . $node['reply_parent_id'] . '"><i class="bi-arrow-up"></i></a>';
             }
 

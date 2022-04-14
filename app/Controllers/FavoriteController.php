@@ -18,32 +18,31 @@ class FavoriteController extends MainController
 
     public function index()
     {
-        $content_id = Request::getPostInt('content_id');
-        $type       = Request::getPost('type');
+        $arr    = Request::getJsonBodyList();
 
         $allowed = ['post', 'website', 'answer'];
-        if (!in_array($type, $allowed)) {
+        if (!in_array($arr['type'], $allowed)) {
             return false;
         }
 
-        self::redirectItem($content_id, $type, $this->user);
+        self::redirectItem((int)$arr['content_id'], $arr['type'], $this->user);
 
         FavoriteModel::setFavorite(
             [
-                'tid'           => $content_id,
+                'tid'           => (int)$arr['content_id'],
                 'user_id'       => $this->user['id'],
-                'action_type'   => $type,
+                'action_type'   => $arr['type'],
             ]
         );
 
         return Translate::get('successfully');
     }
 
-    public static function redirectItem($content_id, $type, $uid)
+    public static function redirectItem($content_id, $type, $user)
     {
         switch ($type) {
             case 'post':
-                $content  = PostModel::getPost($content_id, 'id', $uid);
+                $content  = PostModel::getPost($content_id, 'id', $user);
                 break;
             case 'website':
                 $content  = (new \Modules\Catalog\App\Catalog())->getItemId($content_id);
@@ -53,6 +52,8 @@ class FavoriteController extends MainController
                 break;
         }
 
-        Html::pageRedirection($content, '/');
+        if (!$content) exit;
+
+        return true;
     }
 }

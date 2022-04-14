@@ -239,15 +239,11 @@ if (find) {
 
 function fetch_search() {
   let val = document.getElementById("find").value;
-  if (val.length < 3) {
-    return;
-  }
-
-  fetch("/api-search", {
-    method: "POST",
-    body: "q=" + val,
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-  })
+  if (val.length < 2) return;
+    fetch("/search", {
+      method: "POST",
+      body: JSON.stringify({ q: val })
+    })
     .then(
       response => {
         return response.text();
@@ -256,10 +252,9 @@ function fetch_search() {
       text => {
         let obj = JSON.parse(text);
         let html = '<div class="flex">';
-        for (let key in obj) {
+        for (let key in obj) { console.log(obj);
           if (obj[key].facet_slug) {
-            html += '<a class="sky block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
-            html += obj[key].facet_title + '</a>';
+            html += '<a class="sky block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">' + obj[key].facet_title + '</a>';
           }
           if (obj[key].post_id) {
             html += '<a class="block black text-sm mb10" href="/post/' + obj[key].post_id + '">' + obj[key].title + '</a>';
@@ -277,12 +272,13 @@ function fetch_search() {
         if (menu) {
           document.onclick = function (e) {
             if (event.target.className != '.none.block') {
+              let items = document.getElementById("search_items");  
               items.classList.remove("block");
             };
           };
         } 
       }
-    );
+   );  
 }
 
 // Show / hide password 

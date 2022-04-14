@@ -1,6 +1,6 @@
-<?php if ($data['writers']) { ?>
+<?php if ($data['writers']) : ?>
   <div class="box">
-    <?php foreach ($data['writers'] as  $writer) { ?>
+    <?php foreach ($data['writers'] as  $writer) : ?>
       <div class="flex br-bottom">
         <div class="mr15 mt10">
           <?= $writer['sum']; ?>
@@ -12,16 +12,16 @@
         <div class="mt10">
           <a href="<?= getUrlByName('profile', ['login' => $writer['login']]); ?>"><?= $writer['login']; ?></a>
           <div class="mr13 gray-600 mr15">
-            <?php if ($writer['about']) { ?>
+            <?php if ($writer['about']) : ?>
               <?= $writer['about']; ?>
-            <?php } else { ?>
+            <?php else : ?>
               ...
-            <?php } ?>
+            <?php endif; ?>
           </div>
         </div>
       </div>
-    <?php } ?>
+    <?php endforeach; ?>
   </div>
-<?php } else { ?>
+<?php else : ?>
   <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
-<?php } ?>
+<?php endif; ?>

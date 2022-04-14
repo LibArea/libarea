@@ -1,4 +1,4 @@
-<?php foreach ($facets as $key => $facet) { ?>
+<?php foreach ($facets as $key => $facet) : ?>
   <div class="mb20 items-center flex flex-row">
     <a title="<?= $facet['facet_title']; ?>" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
       <?= Html::image($facet['facet_img'], $facet['facet_title'], 'ava-lg', 'logo', 'max'); ?>
@@ -18,20 +18,20 @@
         <?= $facet['facet_title']; ?>
       </a>
 
-      <?php if ($user['id'] == $facet['facet_user_id']) { ?>
+      <?php if ($user['id'] == $facet['facet_user_id']) : ?>
         <i class="bi-mic sky text-sm"></i>
-      <?php } ?>
+      <?php endif; ?>
       <div class="text-sm pr15 mb-pr0 gray">
         <?= $facet['facet_short_description']; ?>
         <div class="flex mt5 text-sm">
           <i class="bi-journal mr5"></i>
           <?= $facet['facet_count']; ?>
-          <?php if ($facet['facet_focus_count'] > 0) { ?>
+          <?php if ($facet['facet_focus_count'] > 0) : ?>
             <i class="bi-people ml15 mr5"></i>
             <?= $facet['facet_focus_count']; ?>
-          <?php } ?>
+          <?php endif; ?>
         </div>
       </div>
     </div>
   </div>
-<?php } ?>
+<?php endforeach; ?>

@@ -133,9 +133,12 @@ class Search
     }
 
     public function api()
-    {
-        $topics = SearchModel::getSearchTags(Request::getPost('q'), 'topic', 5);
-        $posts  = SearchModel::getSearch(1, 5, Request::getPost('q'), 'post');
+    {   
+        $arr    = Request::getJsonBodyList();
+        $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $arr['q']);
+
+        $topics = SearchModel::getSearchTags($search, 'topic', 3);
+        $posts  = SearchModel::getSearch(1, 5, $search, 'post');
         $result = array_merge($topics, $posts);
 
         return json_encode($result, JSON_PRETTY_PRINT);

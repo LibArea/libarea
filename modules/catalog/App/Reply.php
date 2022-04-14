@@ -20,20 +20,19 @@ class Reply
     // Форма редактирования
     public function index()
     {
-        $id         = Request::getPostInt('id'); // 67
-        $item_id    = Request::getPostInt('item_id');
+        $arr  = Html::parseJsonBody();
 
         // Access verification
         // Проверка доступа 
-        $reply = ReplyModel::getId($id);
+        $reply = ReplyModel::getId((int)$arr['id']);
         if (!Html::accessСheck($reply, 'reply', $this->user, 0, 0)) return false;
 
         includeTemplate(
             '/view/default/_block/edit-form-reply',
             [
                 'data'  => [
-                    'id'        => $id,
-                    'item_id'   => $item_id,
+                    'id'        => (int)$arr['id'],
+                    'item_id'   => (int)$arr['item_id'],
                     'content'   => $reply['content'],
                 ],
                 'user' => $this->user
@@ -50,6 +49,7 @@ class Reply
         $item = WebModel::getItemId($item_id);
         Html::pageRedirection($item, '/');
 
+        $url = getUrlByName('web.website', ['slug' => $item['item_domain']]);
         Validation::Length($content, Translate::get('content'), '6', '555', $url);
 
         // Access verification 
@@ -145,12 +145,13 @@ class Reply
     // Покажем форму ответа
     public function addForma()
     {
+        $arr  = Html::parseJsonBody();
         includeTemplate(
             '/view/default/_block/add-form-reply',
             [
                 'data'  => [
-                    'id'        => Request::getPostInt('id'),
-                    'item_id'   => Request::getPostInt('item_id'),
+                    'id'        => (int)$arr['id'],
+                    'item_id'   => (int)$arr['item_id'],
                 ],
                 'user'   => $this->user
             ]

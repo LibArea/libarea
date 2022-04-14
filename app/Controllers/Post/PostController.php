@@ -195,8 +195,9 @@ class PostController extends MainController
     // Размещение своего поста у себя в профиле
     public function postProfile()
     {
-        $post_id    = Request::getPostInt('post_id');
-        $post       = PostModel::getPost($post_id, 'id', $this->user);
+        $arr    = Request::getJsonBodyList();
+        $post   = PostModel::getPost((int)$arr['post_id'], 'id', $this->user);
+
 
         // Access check
         // Проверка доступа
@@ -210,7 +211,7 @@ class PostController extends MainController
             return false;
         }
 
-        return PostModel::setPostProfile($post_id, $this->user['id']);
+        return PostModel::setPostProfile((int)$post['post_id'], $this->user['id']);
     }
 
     // View post from cover page

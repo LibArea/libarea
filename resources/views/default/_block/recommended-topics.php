@@ -1,4 +1,4 @@
-<?php if (Request::getUri() == '/') { ?>
+<?php if (Request::getUri() == '/') : ?>
   <center>
     <a class="tags center" href="/topics">
       <i class="bi-lightbulb middle mr5"></i>
@@ -6,7 +6,7 @@
     </a>
   </center>
   <div class="grid-cols-2 pt20">
-    <?php foreach ($data['topics'] as $topic) { ?>
+    <?php foreach ($data['topics'] as $topic) : ?>
       <div class="box">
         <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id bg-violet gray-600 text-sm right">
           <i class="bi-plus"></i> <?= __('read'); ?>
@@ -19,6 +19,6 @@
           <?= $topic['facet_description']; ?>
         </div>
       </div>
-    <?php } ?>
+    <?php endforeach; ?>
   </div>
-<?php } ?>
+<?php endif; ?>

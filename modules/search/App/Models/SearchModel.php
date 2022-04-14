@@ -68,8 +68,8 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT 
                   post_id
                     FROM posts
-                            WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
-                                AND MATCH(post_title, post_content) AGAINST (:qa)";
+                       WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
+                           AND MATCH(post_title, post_content) AGAINST (:qa)";
 
         if ($type == 'website') {
             $sql = "SELECT  
@@ -91,9 +91,9 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_type,
                     facet_img
                         FROM facets WHERE facet_type = :type AND (facet_title LIKE :qa1 OR facet_slug LIKE :qa2)
-                            LIMIT $limit";
+                            LIMIT :limit";
 
-        return DB::run($sql, ['type' => $type, 'qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchAll();
+        return DB::run($sql, ['type' => $type, 'qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%", 'limit' => $limit])->fetchAll();
     }
 
     public static function setSearchLogs($params)
@@ -121,8 +121,8 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                     add_ip,
                     user_id, 
                     count_results
-                        FROM search_logs ORDER BY id DESC LIMIT $limit";
+                        FROM search_logs ORDER BY id DESC LIMIT :limit";
 
-        return DB::run($sql)->fetchAll();
+        return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
 }

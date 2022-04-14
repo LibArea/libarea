@@ -1,5 +1,5 @@
 <div class="cm_addentry max-w780 mt10">
-  <?php if ($user['id'] > 0) { ?>
+  <?php if ($user['id'] > 0) : ?>
     <form id="add_comm" class="new_comment" action="<?= getUrlByName('content.change', ['type' => 'comment']); ?>" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
       <textarea rows="5" minlength="6" name="comment" id="comment"><?= $data['comment_content']; ?></textarea>
@@ -11,5 +11,5 @@
       </fieldset>
       <div class="v-otsr"></div>
     </form>
-  <?php } ?>
+  <?php endif; ?>
 </div>

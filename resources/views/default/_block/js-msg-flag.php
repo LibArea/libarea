@@ -1,4 +1,4 @@
-<?php if ($uid > 0) { ?>
+<?php if ($uid > 0) : ?>
   <script nonce="<?= $_SERVER['nonce']; ?>">
     document.querySelectorAll(".msg-flag")
       .forEach(el => el.addEventListener("click", function(e) {
@@ -34,4 +34,4 @@
         );
       }));
   </script>
-<?php } ?>
+<?php endif; ?>

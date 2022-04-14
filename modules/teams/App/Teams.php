@@ -183,14 +183,14 @@ class Teams
     // Удаление и восстановление команды
     public function action()
     {
-        $id = Request::getPostInt('id');
+        $arr  = Request::getJsonBodyList();
 
-        $team = TeamModel::get($id);
+        $team = TeamModel::get((int)$arr['id']);
         if ($team['user_id'] != $this->user['id']) {
             return;
         }
 
-        TeamModel::action($id, $team['is_deleted']);
+        TeamModel::action($team['id'], $team['is_deleted']);
     }
     
    // Formation of team members
@@ -213,6 +213,5 @@ class Teams
 
         return implode($result);
     }
-    
-    
+
 }

@@ -10,13 +10,10 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController');
         Route::get('/reply/editform')->module('catalog', 'App\Reply');
-        Route::get('/post/profile')->controller('Post\PostController@postProfile');
-        Route::get('/favorite/add')->controller('FavoriteController');
         Route::get('/focus')->controller('SubscriptionController');
         Route::get('/folder/content/del')->controller('FolderController@delFolderContent');
         Route::get('/folder/del')->controller('FolderController@delFolder');
         
-        Route::get('/team/action')->module('teams', 'App\Teams@action');
         Route::get('/team/search/user')->module('teams', 'App\Search@select');
         // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);

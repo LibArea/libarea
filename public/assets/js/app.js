@@ -58,42 +58,37 @@ document.querySelectorAll(".up-id")
 // Add / Remove from favorites
 document.querySelectorAll(".add-favorite")
   .forEach(el => el.addEventListener("click", function (e) {
-    let content_id = el.dataset.id;
-    let content_type = el.dataset.type;
-    let front = el.dataset.front;
-    let ind = el.dataset.ind;
-    fetch("/favorite/add", {
+    fetch("/favorite", {
       method: "POST",
-      body: "content_id=" + content_id + "&type=" + content_type,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      body: JSON.stringify({
+        content_id: el.dataset.id,
+        type: el.dataset.type
+      })
     })
-      .then((response) => {
-        return;
-      }).then((text) => {
-        if (front == 'personal') {
+    .then(response => response.text())
+    .then( text => { 
+       if (el.dataset.front == 'personal') {
           location.reload();
         } else {
-            let dom = document.querySelector("#favorite_" + content_id + '.fav-' + ind);
+            let dom = document.querySelector("#favorite_" + el.dataset.id + '.fav-' + el.dataset.ind);
             dom.classList.toggle("sky");
         }
-      });
-  }));
+    });
+  }));   
 
 // Add or remove your post to your profile 
 document.querySelectorAll(".add-profile")
   .forEach(el => el.addEventListener("click", function (e) {
-    let post_id = el.dataset.post;
     fetch("/post/profile", {
       method: "POST",
-      body: "post_id=" + post_id,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      body: JSON.stringify({
+        post_id: el.dataset.post
+      })
     })
-      .then((response) => {
-        return;
-      }).then((text) => {
-        location.reload();
-      });
-  }));
+    .then( (response) => { 
+       location.reload();
+    });
+  }));  
 
 // Adding Folders
 document.querySelectorAll(".save-folder")
@@ -148,7 +143,6 @@ document.querySelectorAll(".del-folder")
         location.reload();
       });
   }));
-
 
 // Recommend a post
 document.querySelectorAll(".post-recommend")

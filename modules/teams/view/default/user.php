@@ -1,7 +1,7 @@
 <?= Tpl::insert('/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 
 <main>
-  <div class="box-flex">
+  <div class="box-flex justify-between">
     <p class="m0"><?= __('teams'); ?></p>
     <?php if ($data['count'] < $data['limit']) : ?>
       <a href="<?= getUrlByName('team.add'); ?>" class="btn btn-primary"><?= __('add'); ?></a>

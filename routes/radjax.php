@@ -1,3 +1,8 @@
 <?php
 
-Radjax\Route::get("/api-search/{?query}", ["post"], "Modules\Search\App\Search@api", ["protected" => false, "where" => ["query" => "[А-Яа-яa-zA-Z0-9]+"],  "session_saved" => false]);
+Radjax\Route::get("/search", ["post"], "Modules\Search\App\Search@api", ["protected" => false, "session_saved" => false]);
+ 
+$access = 'App\Middleware\Before\UserAuth@index'; 
+Radjax\Route::get("/team/action", ["post"], "Modules\Teams\App\Teams@action", ["protected" => false, "before" => $access]);
+Radjax\Route::get("/favorite", ["post"], "App\Controllers\FavoriteController@index", ["protected" => false, "before" => $access]);
+Radjax\Route::get("/post/profile", ["post"], "App\Controllers\Post\PostController@postProfile", ["protected" => false, "before" => $access]);
