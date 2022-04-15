@@ -5,4 +5,4 @@
   </div>
 </footer>
 <script src="/assets/js/admin.js"></script>
-<?= Tpl::insert('scripts', ['uid' => 1, 'scroll' => false]); ?>
+<?= Tpl::insert('/scripts', ['uid' => 1, 'scroll' => false]); ?>

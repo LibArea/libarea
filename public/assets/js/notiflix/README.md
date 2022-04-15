@@ -1,10 +1,12 @@
 # Notiflix
 
-Notiflix is a JavaScript library for client-side non-blocking notifications, popup boxes, loading indicators, and more that makes your web projects much better.
+Notiflix is a pure JavaScript library for client-side non-blocking notifications, popup boxes, loading indicators, and more that makes your web projects much better.
+
+https://github.com/notiflix/Notiflix
 
 ### Current Version
 
-3.2.2 [*](https://github.com/notiflix/Notiflix/blob/main/CHANGELOG.md "CHANGELOG")
+3.2.5 [*](https://github.com/notiflix/Notiflix/blob/main/CHANGELOG.md "CHANGELOG")
 
 ### Browser Compatibility
 
@@ -65,27 +67,27 @@ import { Block } from 'notiflix/build/notiflix-block-aio';
 
 #### CSS and JS
 ```html
-<link rel="stylesheet" href="dist/notiflix-3.2.2.min.css" />
+<link rel="stylesheet" href="dist/notiflix-3.2.5.min.css" />
 
-<script src="dist/notiflix-3.2.2.min.js"></script>
+<script src="dist/notiflix-3.2.5.min.js"></script>
 ```
 
 #### or only JS (All in One - Internal CSS)
 ```html
-<script src="dist/notiflix-aio-3.2.2.min.js"></script>
+<script src="dist/notiflix-aio-3.2.5.min.js"></script>
 ```
 
 #### or only Modules JS (All in One - Internal CSS)
 ```html
-<script src="dist/notiflix-notify-aio-3.2.2.min.js"></script>
+<script src="dist/notiflix-notify-aio-3.2.5.min.js"></script>
 
-<script src="dist/notiflix-report-aio-3.2.2.min.js"></script>
+<script src="dist/notiflix-report-aio-3.2.5.min.js"></script>
 
-<script src="dist/notiflix-confirm-aio-3.2.2.min.js"></script>
+<script src="dist/notiflix-confirm-aio-3.2.5.min.js"></script>
 
-<script src="dist/notiflix-loading-aio-3.2.2.min.js"></script>
+<script src="dist/notiflix-loading-aio-3.2.5.min.js"></script>
 
-<script src="dist/notiflix-block-aio-3.2.2.min.js"></script>
+<script src="dist/notiflix-block-aio-3.2.5.min.js"></script>
 ```
 
 ---------
@@ -594,6 +596,7 @@ Notiflix.Report.init({
   zindex: 4002,
   backOverlay: true,
   backOverlayColor: 'rgba(0,0,0,0.5)',
+  backOverlayClickToClose: false,
   fontFamily: 'Quicksand',
   svgSize: '110px',
   plainText: true,
@@ -737,7 +740,7 @@ Notiflix.Block.init({
 ---------
 
 ### Copyright
-Copyright &copy; 2019 - 2021 Notiflix
+Copyright &copy; 2019 - 2022 Notiflix
 
 ### License
 MIT license - https://opensource.org/licenses/MIT

@@ -29,10 +29,10 @@
       <?= Html::sumbit(__('update.data')); ?>
     </form>
   </fieldset>
-  <fieldset class="max-w640">
+  <fieldset class="max-w300">
     <label for="mail"><?= __('Email'); ?></label>
     <form action="<?= getUrlByName('admin.test.mail'); ?>" method="post">
-      <input type="mail" name="mail" value="">
+      <input type="mail" name="mail" value="" required>
       <div class="help"><?= __('test.email'); ?>...</div>
   </fieldset>    
       <?= Html::sumbit(__('send')); ?>
