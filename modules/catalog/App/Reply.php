@@ -20,19 +20,26 @@ class Reply
     // Форма редактирования
     public function index()
     {
-        $arr  = Html::parseJsonBody();
+        $arr  = Request::getJsonBodyList();
+        if (!filter_var($id = $arr['id'], FILTER_VALIDATE_INT)) {
+            return;
+        }
 
         // Access verification
         // Проверка доступа 
-        $reply = ReplyModel::getId((int)$arr['id']);
+        $reply = ReplyModel::getId($arr['id']);
         if (!Html::accessСheck($reply, 'reply', $this->user, 0, 0)) return false;
+
+        if (!filter_var($arr['item_id'], FILTER_VALIDATE_INT)) {
+            return;
+        }
 
         includeTemplate(
             '/view/default/_block/edit-form-reply',
             [
                 'data'  => [
-                    'id'        => (int)$arr['id'],
-                    'item_id'   => (int)$arr['item_id'],
+                    'id'        => $arr['id'],
+                    'item_id'   => $arr['item_id'],
                     'content'   => $reply['content'],
                 ],
                 'user' => $this->user
@@ -145,13 +152,13 @@ class Reply
     // Покажем форму ответа
     public function addForma()
     {
-        $arr  = Html::parseJsonBody();
+        $arr  = Request::getJsonBodyList();
         includeTemplate(
             '/view/default/_block/add-form-reply',
             [
                 'data'  => [
-                    'id'        => (int)$arr['id'],
-                    'item_id'   => (int)$arr['item_id'],
+                    'id'        => $arr['id'],
+                    'item_id'   => $arr['item_id'],
                 ],
                 'user'   => $this->user
             ]

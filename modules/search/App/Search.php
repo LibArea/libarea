@@ -24,7 +24,6 @@ class Search
     {
         $pageNumber = Tpl::pageNumber();
         $query  = Request::getGet('q');
-
         $type   = Request::getGet('type');
         $type   = $type ?? 'post';
 

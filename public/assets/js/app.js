@@ -199,9 +199,7 @@ document.querySelectorAll("#graburl")
         return response.json();
       }).then(function (data) {
         document.querySelector('input[name=post_title]').value = data.title;
-       // document.getElementById("editor").value = data.description;
-       //document.querySelector('.CodeMirror-code .CodeMirror-line span').insertAdjacentHTML('afterBegin', data.description);
-       // document.querySelector('.CodeMirror-line').insertAdjacentHTML('afterBegin', data.description);
+        // document.querySelector('.EasyMDEContainer textarea').insertAdjacentHTML('afterBegin', data.description);
       }).catch(function (error) {
         // error
       })

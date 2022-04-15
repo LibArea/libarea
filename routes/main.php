@@ -6,14 +6,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/flag/repost')->controller('AuditController@report');
         Route::get('/backend/upload/{type}/{id}')->controller('Post\EditPostController@uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
-        Route::get('/post/recommend')->controller('Post\AddPostController@recommend');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController');
-        Route::get('/reply/editform')->module('catalog', 'App\Reply');
-        Route::get('/focus')->controller('SubscriptionController');
-        Route::get('/folder/content/del')->controller('FolderController@delFolderContent');
-        Route::get('/folder/del')->controller('FolderController@delFolder');
-        
         Route::get('/team/search/user')->module('teams', 'App\Search@select');
         // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
@@ -168,7 +162,7 @@ Route::get('/web/dir/{grouping}/{slug}')->module('catalog', 'App\Catalog', ['web
 Route::get('/web/dir/{grouping}/{slug}/all')->module('catalog', 'App\Catalog', ['web.all', 'web'])->name('web.dir.all');
 Route::get('/web/dir/{grouping}/{slug}/top')->module('catalog', 'App\Catalog', ['web.top', 'web'])->name('web.dir.top');
 
-Route::get('/search')->module('search', 'App\Search')->name('search');
+Route::get('/search/go')->module('search', 'App\Search')->name('search');
 
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
 
