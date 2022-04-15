@@ -1,20 +1,20 @@
 <?php $topic = $data['facet']; ?>
 <main class="col-two">
-  <?php if ($topic['facet_is_deleted'] == 0) { ?>
+  <?php if ($topic['facet_is_deleted'] == 0) : ?>
     <?= Tpl::insert('/content/facets/topic-header', ['topic' => $topic, 'user' => $user, 'data' => $data]); ?>
 
     <?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
 
-  <?php } else { ?>
+  <?php else : ?>
     <div class="center">
       <i class="bi-x-octagon text-8xl"></i>
       <div class="mt5 gray"><?= __('remote'); ?></div>
     </div>
-  <?php } ?>
+  <?php endif; ?>
 </main>
 <aside>
-  <?php if ($topic['facet_is_deleted'] == 0) { ?>
+  <?php if ($topic['facet_is_deleted'] == 0) : ?>
     <div class="box-flex bg-violet">
       <div class="center">
         <div class="uppercase text-sm gray-600"><?= __('posts'); ?></div>
@@ -29,39 +29,39 @@
       </div>
     </div>
 
-    <?php if (!empty($data['pages'])) { ?>
+    <?php if (!empty($data['pages'])) : ?>
       <div class="sticky top0 top-sm">
         <div class="box bg-violet text-sm">
           <h3 class="uppercase-box"><?= __('pages'); ?></h3>
-          <?php foreach ($data['pages'] as $ind => $row) { ?>
+          <?php foreach ($data['pages'] as $ind => $row) : ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="">
               <?= $row['post_title']; ?>
             </a>
-          <?php } ?>
+          <?php endforeach; ?>
         </div>
       </div>
-    <?php } ?>
+    <?php endif; ?>
 
     <?= Tpl::insert('/_block/sidebar/topic', ['data' => $data]); ?>
-    <?php if (!empty($data['writers'])) { ?>
+    <?php if (!empty($data['writers'])) : ?>
       <div class="sticky top0 top-sm">
         <div class="box bg-violet text-sm">
           <h3 class="uppercase-box"><?= __('writers'); ?></h3>
           <ul>
-          <?php foreach ($data['writers'] as $ind => $row) { ?>
+          <?php foreach ($data['writers'] as $ind => $row) : ?>
             <li class="mb10">
               <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
                 <?= Html::image($row['avatar'], $row['login'], 'ava-sm', 'avatar', 'max'); ?>
                 <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
               </a>
             </li>  
-          <?php } ?>
+          <?php endforeach; ?>
           </ul>
         </div>
       </div>
-    <?php } ?>
+    <?php endif; ?>
 
-  <?php } ?>
+  <?php endif; ?>
 </aside>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">

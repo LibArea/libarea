@@ -1,4 +1,4 @@
-<main class="col-two">
+<main class="w-100">
   <div class="bg-violet box center">
     <h1 class="m0 text-xl font-normal"><?= __($data['sheet']); ?></h1>
     <span class="text-sm gray-600">
@@ -6,7 +6,7 @@
     </span>
   </div>
 
-  <div class="box-flex">
+  <div class="box-flex justify-between">
     <ul class="nav">
       <?= Tpl::insert(
         '/_block/navigation/nav',
@@ -33,19 +33,19 @@
   </div>
 
     <div class="flex flex-wrap">
-      <?php foreach ($data['users'] as $user) { ?>
+      <?php foreach ($data['users'] as $user) : ?>
       <div class="w-20 mb20 mb-w-33 center">
         <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
           <?= Html::image($user['avatar'], $user['login'], 'ava-lg', 'avatar', 'max'); ?>
           <div class="block mt5">
             <?= $user['login']; ?>
           </div>
-          <?php if ($user['name']) { ?>
+          <?php if ($user['name']) : ?>
             <span class="gray text-sm"><?= $user['name']; ?></span>
-          <?php } ?>
+          <?php endif; ?>
         </a>
         </div>
-      <?php } ?>
+      <?php endforeach; ?>
     </div>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
 </main>

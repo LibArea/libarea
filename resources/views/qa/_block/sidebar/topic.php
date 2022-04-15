@@ -1,4 +1,4 @@
-<?php if ($data['user']['id'] != 1) { ?>
+<?php if ($data['user']['id'] != 1) : ?>
   <div class="box bg-violet">
     <h3 class="uppercase-box"><?= __('created.by'); ?></h3>
     <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
@@ -6,16 +6,16 @@
       <?= $data['user']['login']; ?>
     </a>
   </div>
-<?php } ?>
+<?php endif; ?>
 
-<?php if (!empty($data['high_topics'])) { ?>
+<?php if (!empty($data['high_topics'])) : ?>
   <?= Tpl::insert('/_block/sidebar/topic_block', ['data' => $data['high_topics'], 'lang' => 'upper']); ?>
-<?php } ?>
+<?php endif; ?>
 
-<?php if (!empty($data['low_topics'])) { ?>
+<?php if (!empty($data['low_topics'])) : ?>
   <?= Tpl::insert('/_block/sidebar/topic_block', ['data' => $data['low_topics'], 'lang' => 'subtopics']); ?>
-<?php } ?>
+<?php endif; ?>
 
-<?php if (!empty($data['low_matching'])) { ?>
+<?php if (!empty($data['low_matching'])) : ?>
   <?= Tpl::insert('/_block/sidebar/topic_block', ['data' => $data['low_matching'], 'lang' => 'related']); ?>
-<?php } ?>
+<?php endif; ?>

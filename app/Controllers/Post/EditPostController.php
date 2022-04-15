@@ -109,7 +109,7 @@ class EditPostController extends MainController
                 }
         }
 
-        $post_title = str_replace("&nbsp;", '', $post_title)
+        $post_title = str_replace("&nbsp;", '', $post_title);
         Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
 
         if ($content == '') {

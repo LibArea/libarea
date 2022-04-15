@@ -1,7 +1,5 @@
 <main class="col-two">
-  <div class="box-flex">
-    <p class="m0"><?= __($data['sheet']); ?></p>
-  </div>
+  <p class="m0"><?= __($data['sheet']); ?></p>
   <div class="mb15 mb-ml0 hidden">
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
@@ -12,8 +10,8 @@
   </div>
 
   <div class="box">
-    <?php if ($data['list']) { ?>
-      <?php foreach ($data['list'] as $key => $val) { ?>
+    <?php if ($data['list']) : ?>
+      <?php foreach ($data['list'] as $key => $val) : ?>
         <div class="hidden">
           <?php
           $login  = $val['login'];
@@ -42,28 +40,28 @@
           <div class="max-w780 ">
             <?= $val['message_content']; ?>
           </div>
-          <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $user['id']) { ?>
+          <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $user['id']) : ?>
             <div class="right gray-600 lowercase text-sm hidden mb5 pb5">
               <?= __('it.was.read'); ?> (<?= Html::langDate($val['message_receipt']); ?>)
             </div>
-          <?php } ?>
+          <?php endif; ?>
         </div>
         <div class="br-bottom mb15"></div>
-      <?php } ?>
-    <?php } ?>
+      <?php endforeach; ?>
+    <?php endif; ?>
   </div>
 </main>
 
 <aside>
   <div class="br-gray p15 mb15 br-rd5 bg-white text-sm">
     <div class="uppercase gray mt5 mb5"><?= __('dialogues'); ?></div>
-    <?php foreach ($data['dialog'] as $key => $val) { ?>
-      <?php if ($val['id'] != $user['id']) { ?>
+    <?php foreach ($data['dialog'] as $key => $val) : ?>
+      <?php if ($val['id'] != $user['id']) : ?>
         <div class="flex relative pt5 pb5 items-center hidden">
           <?= Html::image($val['avatar'], $val['login'], 'ava-base', 'avatar', 'max'); ?>
           <a href="<?= getUrlByName('dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['login']; ?></a>
         </div> 
-      <?php } ?>
-    <?php } ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
   </div>  
 </aside>

@@ -1,5 +1,5 @@
 <main class="w-100">
-  <div class="box-flex justify-between">
+  <div class="box justify-between">
 
     <a href="/"><?= __('home'); ?></a> /
     <span class="red"><?= __('edit.answer'); ?></span>

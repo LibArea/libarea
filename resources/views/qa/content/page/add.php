@@ -13,7 +13,7 @@
       <div class="help">6 - 250 <?= __('characters'); ?></div>  
     </fieldset>
 
-      <?php if (!empty($data['blog'])) { ?>
+      <?php if (!empty($data['blog'])) : ?>
         <?= Tpl::insert('/_block/form/select/blog', [
           'user'         => $user,
           'data'        => $data,
@@ -21,9 +21,9 @@
           'type'        => 'blog',
           'title'       => __('blogs'),
         ]); ?>
-      <?php } ?>
+      <?php endif; ?>
 
-      <?php if (UserData::checkAdmin()) { ?>
+      <?php if (UserData::checkAdmin()) : ?>
         <?= Tpl::insert('/_block/form/select/section', [
           'user'           => $user,
           'data'          => $data['facets'],
@@ -33,7 +33,7 @@
           'help'          => __('necessarily'),
           'red'           => 'red'
         ]); ?>
-      <?php } ?>
+      <?php endif; ?>
 
       <?= Tpl::insert('/_block/editor/editor', ['height'  => '250px', 'type' => 'page', 'id' => 0]); ?>
 

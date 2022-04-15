@@ -2,13 +2,13 @@
 <main class="col-two">
   <?= Tpl::insert('/content/facets/topic-header', ['topic' => $topic, 'user' => $user, 'data' => $data]); ?>
   <div class="box">
-    <?php if (!empty($data['writers'])) { ?>
+    <?php if (!empty($data['writers'])) : ?>
       <div class="flex items-center m10">
         <i class="bi-award red text-3xl mr10"></i>
         <h2 class="gray-600"><?= __('by.deposit'); ?></h2>
       </div>
       <hr class="mb20">
-      <?php foreach ($data['writers'] as $ind => $row) { ?>
+      <?php foreach ($data['writers'] as $ind => $row) : ?>
         <div class="flex flex-auto items-center mb20">
           <div class="w94">
             <?= $row['hits_count']; ?>
@@ -18,17 +18,17 @@
               <?= Html::image($row['avatar'], $row['login'], 'ava-base', 'avatar', 'max'); ?>
               <div class="ml5">
                 <div class="gray-600"><?= $row['login']; ?></div>
-                <?php if ($row['about']) { ?>
+                <?php if ($row['about']) : ?>
                   <div class="mb-none text-sm">
                     <?= Html::fragment(Content::text($row['about'], 'line'), 88); ?>
                   </div>
-                <?php } ?>
+                <?php endif; ?>
               </div>
             </a>
           </div>
         </div>
-      <?php } ?>
-    <?php } ?>
+      <?php endforeach; ?>
+    <?php endif; ?>
   </div>
 </main>
 <aside>

@@ -14,9 +14,9 @@
         </span>
       </fieldset>
     </form>
-    <?php if (Config::get('general.invite') == true) { ?>
+    <?php if (Config::get('general.invite') == true) : ?>
       <?= __('invate.text'); ?>
-    <?php } ?>
+    <?php endif; ?>
   </div>
 </main>
 <aside>

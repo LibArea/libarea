@@ -43,25 +43,25 @@
         <i class="bi-plus-lg text-xl"></i>
       </a>
     </div>
-    <?php if ($data['pages']) { ?>
+    <?php if ($data['pages']) : ?>
 
-      <?php foreach ($data['pages'] as $ind => $row) { ?>
+      <?php foreach ($data['pages'] as $ind => $row) : ?>
         <div class="mb5">
           <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('page', ['facet' => $fs['facet_slug'], 'slug' => $row['post_slug']]); ?>">
             <?= $row['post_title']; ?>
           </a>
 
-          <?php if (UserData::checkAdmin() || $fs['facet_user_id'] == $user['id']) { ?>
+          <?php if (UserData::checkAdmin() || $fs['facet_user_id'] == $user['id']) : ?>
             <a class="text-sm gray-600" title="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
-          <?php } ?>
+          <?php endif; ?>
         </div>
-      <?php } ?>
+      <?php endif; ?>
 
-    <?php } else { ?>
+    <?php else : ?>
       <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
-    <?php } ?>
+    <?php endif; ?>
 
   </div>
 </main>

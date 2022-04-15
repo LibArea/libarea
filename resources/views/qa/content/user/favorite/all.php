@@ -1,24 +1,25 @@
 <main class="col-two">
-  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
-
-  <?php if (!empty($data['tags'])) { ?>
+  <div class="bg-violet">
+     <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
+  </div>
+  <?php if (!empty($data['tags'])) : ?>
     <div class="mb15">
-      <?php foreach ($data['tags'] as $tag) { ?>
+      <?php foreach ($data['tags'] as $tag) : ?>
         <a class="tags-xs" href="<?= getUrlByName('favorites.folder.id', ['id' => $tag['id']]); ?>"><?= $tag['value']; ?></a>
-      <?php } ?>
+      <?php endforeach; ?>
     </div>
-  <?php } ?>
+  <?php endif; ?>
 
-  <?php if (!empty($data['favorites'])) { ?>
-    <?php foreach ($data['favorites'] as $fav) { ?>
+  <?php if (!empty($data['favorites'])) : ?>
+    <?php foreach ($data['favorites'] as $fav) : ?>
       <div class="box relative">
         <div class="left gray-600 mr5"> <?= __($fav['action_type']); ?>:</div>
 
-        <?php if ($fav['action_type'] == 'post') { ?>
+        <?php if ($fav['action_type'] == 'post') : ?>
           <a class="font-normal" href="<?= getUrlByName('post', ['id' => $fav['post_id'], 'slug' => $fav['post_slug']]); ?>">
             <?= $fav['post_title']; ?>
           </a>
-        <?php } elseif ($fav['action_type'] == 'website') { ?>
+        <?php elseif ($fav['action_type'] == 'website') : ?>
           <a class="block" href="<?= getUrlByName('web.website', ['slug' => $fav['item_domain']]); ?>">
             <?= $fav['item_title']; ?>
           </a>
@@ -30,44 +31,44 @@
               <?= $fav['item_url']; ?>
             </a>
           </span>
-        <?php } else { ?>
+        <?php else : ?>
           <a href="<?= getUrlByName('post', ['id' => $fav['post']['post_id'], 'slug' => $fav['post']['post_slug']]); ?>#answer_<?= $fav['answer_id']; ?>">
             <?= $fav['post']['post_title']; ?>
           </a>
-        <?php } ?>
+        <?php endif; ?>
 
-        <?php if ($fav['action_type'] == 'answer') { ?>
+        <?php if ($fav['action_type'] == 'answer') : ?>
           <div class="inline"> <?= Content::text($fav['answer_content'], 'text'); ?></div>
-        <?php } ?>
+        <?php endif; ?>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
           <i class="bi-trash red"></i>
         </span>
-        <?php if ($fav['tag_id']) { ?>
+        <?php if ($fav['tag_id']) : ?>
           <a class="tags-xs ml15" href="<?= getUrlByName('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">
             <?= $fav['tag_title']; ?>
           </a>
           <sup class="del-folder-content gray-600" data-tid="<?= $fav['tid']; ?>" data-type="favorite">x</sup>
-        <?php } else { ?>
+        <?php else : ?>
           <span class="trigger right lowercase gray-600 text-sm"> <i class="bi-plus-lg gray-600 mr5"></i></span>
           <span class="dropdown right">
-            <?php if ($data['tags']) { ?>
-              <?php foreach ($data['tags'] as $tag) { ?>
+            <?php if ($data['tags']) : ?>
+              <?php foreach ($data['tags'] as $tag) : ?>
                 <div class="save-folder gray-600 text-sm p5" data-id="<?= $tag['id']; ?>" data-tid="<?= $fav['tid']; ?>" data-type="favorite"><?= $tag['value']; ?></div>
-              <?php } ?>
-            <?php } else { ?>
+              <?php endforeach; ?>
+            <?php else : ?>
               <?= __('no'); ?>...
-            <?php }  ?>
+            <?php endif;  ?>
           </span>
-        <?php } ?>
+        <?php endif; ?>
       </div>
-    <?php } ?>
-  <?php } else { ?>
+    <?php endforeach; ?>
+  <?php else : ?>
     <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.favorites'), 'icon' => 'bi-bookmark']); ?>
-  <?php } ?>
+  <?php endif; ?>
 </main>
 <aside>
-  <div class="box text-sm sticky top-sm">
+  <div class="box bg-violet text-sm sticky top-sm">
     <?= __('favorite.info'); ?>
   </div>
 </aside>

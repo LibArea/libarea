@@ -1,4 +1,4 @@
-<main class="col-two">
+<main class="w-100">
   <div class="bg-violet box center">
     <h1 class="text-xl"><?= __($data['sheet']); ?></h1>
     <span class="text-sm gray-600">
@@ -6,7 +6,7 @@
     </span>
   </div>
 
-  <div class="box-flex">
+  <div class="box-flex justify-between">
     <ul class="nav">
 
       <?= Tpl::insert(
@@ -40,37 +40,37 @@
       ?>
 
     </ul>
-    <?php if ($user['trust_level'] > 1) { ?>
+    <?php if ($user['trust_level'] > 1) : ?>
       <p class="m0 text-xl">
-        <?php if ($data['type'] == 'blog') { ?>
-          <?php if ($data['limit']) { ?>
+        <?php if ($data['type'] == 'blog') : ?>
+          <?php if ($data['limit']) : ?>
             <a class="ml15" title="<?= __('add'); ?>" href="<?= getUrlByName('content.add', ['type' => $data['type']]); ?>">
               <i class="bi-plus-lg middle"></i>
             </a>
-          <?php } ?>
-        <?php } else { ?>
-          <?php if (UserData::checkAdmin()) { ?>
+          <?php endif; ?>
+        <?php else : ?>
+          <?php if (UserData::checkAdmin()) : ?>
             <a class="ml15" title="<?= __('add'); ?>" href="<?= getUrlByName('content.add', ['type' => $data['type']]); ?>">
               <i class="bi-plus-lg middle"></i>
             </a>
-          <?php } ?>
-        <?php } ?>
+          <?php endif; ?>
+        <?php endif; ?>
       </p>
-    <?php } ?>
+    <?php endif; ?>
   </div>
 
   <div>
-    <?php if (!empty($data['facets'])) { ?>
-      <?php if ($data['type'] == 'blog') { ?>
+    <?php if (!empty($data['facets'])) : ?>
+      <?php if ($data['type'] == 'blog') : ?>
         <?= Tpl::insert('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
-      <?php } else { ?>
+      <?php else : ?>
         <div class="flex flex-wrap">
           <?= Tpl::insert('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
         </div>
-      <?php } ?>
-    <?php } else { ?>
+      <?php endif; ?>
+    <?php else : ?>
       <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.content'), 'icon' => 'bi-info-lg']); ?>
-    <?php } ?>
+    <?php endif; ?>
   </div>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>
 </main>

@@ -18,9 +18,9 @@ $form->html_form($user['trust_level'], Config::get('form/auth.login'));
       <a class="ml20 text-sm" href="<?= getUrlByName('recover'); ?>"><?= __('forgot.password'); ?>?</a>
     </fieldset>
   </form>
-  <?php if (Config::get('general.invite') == 1) { ?>
+  <?php if (Config::get('general.invite') == 1) : ?>
     <?= __('invate.text'); ?>
-  <?php } ?>
+  <?php endif; ?>
   <p><?= __('login.use.condition'); ?>.</p>
   <p><?= __('login.info'); ?></p>
 </main>
