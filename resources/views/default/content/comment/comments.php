@@ -9,14 +9,14 @@
     <div class="dropdown tooltip"><?= __($data['sheet'] . '.info'); ?></div>
   </div>
 
-  <?php if (!empty($data['comments'])) { ?>
+  <?php if (!empty($data['comments'])) : ?>
     <div class="box">
       <?= Tpl::insert('/content/comment/comment', ['answer' => $data['comments'], 'user' => $user]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/comments'); ?>
-  <?php } else { ?>
+  <?php else : ?>
     <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.comments'), 'icon' => 'bi-info-lg']); ?>
-  <?php } ?>
+  <?php endif; ?>
 </main>
 <aside>
   <div class="box text-sm sticky top-sm">

@@ -50,20 +50,21 @@ class EditAnswerController extends MainController
     public function edit()
     {
         $answer_id  = Request::getPostInt('answer_id');
-        $post_id    = Request::getPostInt('post_id');
         $content    = $_POST['content']; // для Markdown
         $post       = PostModel::getPost($post_id, 'id', $this->user);
 
+        // If the user is frozen
         // Если пользователь заморожен
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
 
+        // Access check
         // Проверка доступа
         $answer = AnswerModel::getAnswerId($answer_id);
         if (!Html::accessСheck($answer, 'answer', $this->user, 0, 0)) {
             redirect('/');
         }
 
-        $url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+        $url = getUrlByName('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
         Validation::Length($content, Translate::get('bodies'), '6', '5000', '/' . $url);
 
         AnswerModel::edit(

@@ -4,7 +4,7 @@ $trust_level = $user['trust_level'] ?? 0;
 foreach ($list as $key => $item) :
   $tl = $item['tl'] ?? 0; ?>
   <?php if (!empty($item['hr'])) : ?>
-    <?php if ($user['id'] > 0) : ?><li>
+    <?php if (UserData::checkActiveUser()) : ?><li>
         <div class="m15"></div>
       </li><?php endif; ?>
   <?php else : ?>

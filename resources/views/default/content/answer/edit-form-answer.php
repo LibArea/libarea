@@ -14,7 +14,6 @@
       <?= Tpl::insert('/_block/editor/editor', ['height'  => '300px', 'content' => $data['content'], 'type' => 'answer', 'id' => $data['post']['post_id']]); ?>
 
       <div class="pt5 clear">
-        <input type="hidden" name="post_id" value="<?= $data['post']['post_id']; ?>">
         <input type="hidden" name="answer_id" value="<?= $data['answer_id']; ?>">
         <?= Html::sumbit(__('edit')); ?>
       </div>

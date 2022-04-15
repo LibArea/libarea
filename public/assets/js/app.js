@@ -211,12 +211,11 @@ document.querySelectorAll("#graburl")
 document.querySelectorAll(".editcomm")
   .forEach(el => el.addEventListener("click", function (e) {
     let comment_id = el.dataset.comment_id;
-    let post_id = el.dataset.post_id;
-    let comment = document.getElementById("comment_addentry" + comment_id);
+    let comment = document.querySelector('#insert_id_' + el.dataset.comment_id);
 
     fetch("/comment/editform", {
       method: "POST",
-      body: "comment_id=" + comment_id + "&post_id=" + post_id,
+      body: "comment_id=" + comment_id,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then(

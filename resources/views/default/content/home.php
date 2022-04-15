@@ -26,7 +26,7 @@
     <?= Tpl::insert('/_block/sidebar/login', ['user' => $user]); ?>
   <?php } ?>
 
-  <?php if ($user['id'] > 0 && !empty($data['topics_user'])) { ?>
+  <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) { ?>
     <div class="box">
       <h3 class="uppercase-box"><?= __('reading'); ?></h3>
       <ul>

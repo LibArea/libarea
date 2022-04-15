@@ -4,7 +4,7 @@
       <?= Html::numWord($post['amount_content'], __('num.answer'), true); ?>
     </h2>
 
-    <?php foreach ($data['answers'] as  $answer) { ?>
+    <?php foreach ($data['answers'] as  $answer) : ?>
       <div class="block-answer mb15">
         <?php if ($answer['answer_is_deleted'] == 0) : ?>
           <?php if ($user['id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
@@ -33,11 +33,11 @@
                 <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) : ?>
                   <?php if ($post['post_closed'] == 0) : ?>
                     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10 mr10"><?= __('reply'); ?></a>
+                      <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10 mr10"><?= __('reply'); ?></a>
                     <?php endif; ?>
                   <?php endif; ?>
                 <?php endif; ?>
-                
+
                 <?php if (Html::accessСheck($answer, 'answer', $user, 1, 30) === true) : ?>
                   <?php if ($user['id'] == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
                     <a class="editansw gray ml15 mr10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
@@ -45,7 +45,7 @@
                     </a>
                   <?php endif; ?>
                 <?php endif; ?>
-                
+
                 <?php if (UserData::checkAdmin()) : ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr10">
                     <i title="<?= __('remove'); ?>" class="bi-trash"></i>
@@ -60,65 +60,67 @@
                   </a>
                 <?php endif; ?>
               </div>
-              <div id="answer_addentry<?= $answer['answer_id']; ?>" class="none"></div>
+              <div data-insert="<?= $answer['answer_id']; ?>" id="insert_id_<?= $answer['answer_id']; ?>" class="none"></div>
             </li>
           </ol>
         <?php endif; ?>
       </div>
 
       <?php $n = 0;
-      foreach ($answer['comments'] as  $comment) {
+      foreach ($answer['comments'] as  $comment) :
         $n++; ?>
         <?php if ($comment['comment_is_deleted'] == 0) : ?>
-          <div class="br-bottom<?php if ($n > 1) { ?> ml30<?php } ?>"></div>
+          <div class="br-bottom<?php if ($n > 1) : ?> ml30<?php endif; ?>"></div>
           <ol class="max-w780 list-none mb0 mt0">
             <li class="content_tree" id="comment_<?= $comment['comment_id']; ?>">
-              <div class="text-sm pt5 pr5 pb5 pl5">
-                <?= Content::text($comment['comment_content'], 'text'); ?>
-                <span class="gray">
-                  — <a class="gray" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
-                  <span class="lowercase gray">
-                    &nbsp; <?= Html::langDate($comment['date']); ?>
+              <div class="text-sm ml30">
+                <?= Content::text($comment['comment_content'], 'line'); ?>
+                <div class="mb5 mt5">
+                  <span class="gray-600">
+                    <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
+                    <span class="lowercase gray-600">
+                      &nbsp; <?= Html::langDate($comment['date']); ?>
+                    </span>
+                    <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
                   </span>
-                  <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
-                </span>
 
-                <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) : ?>
-                  <?php if ($post['post_closed'] == 0) : ?>
-                    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5 mr5">
-                        <?= __('reply'); ?>
+                  <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) : ?>
+                    <?php if ($post['post_closed'] == 0) : ?>
+                      <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+                        <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600 ml5 mr5">
+                          <?= __('reply'); ?>
+                        </a>
+                      <?php endif; ?>
+                    <?php endif; ?>
+                  <?php endif; ?>
+
+                  <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) : ?>
+                    <?php if ($user['id'] == $comment['comment_user_id'] || UserData::checkAdmin()) : ?>
+                      <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 ml10 mr5">
+                        <i title="<?= __('edit'); ?>" class="bi-pencil-square"></i>
                       </a>
                     <?php endif; ?>
                   <?php endif; ?>
-                <?php endif; ?>
 
-                <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) : ?>
-                  <?php if ($user['id'] == $comment['comment_user_id'] || UserData::checkAdmin()) : ?>
-                    <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml10 mr5">
-                      <i title="<?= __('edit'); ?>" class="bi-pencil-square"></i>
+                  <?php if (UserData::checkAdmin()) : ?>
+                    <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600 ml10">
+                      <i title="<?= __('remove'); ?>" class="bi-trash"></i>
                     </a>
                   <?php endif; ?>
-                <?php endif; ?>
-
-                <?php if (UserData::checkAdmin()) : ?>
-                  <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray ml10">
-                    <i title="<?= __('remove'); ?>" class="bi-trash"></i>
-                  </a>
-                <?php endif; ?>
-                <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > 0) : ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml5">
-                    <?= __('report'); ?>
-                  </a>
-                <?php endif; ?>
+                  <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > 0) : ?>
+                    <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml5">
+                      <?= __('report'); ?>
+                    </a>
+                  <?php endif; ?>
+                </div>
               </div>
-              <div id="comment_addentry<?= $comment['comment_id']; ?>" class="none"></div>
+              <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>
             </li>
           </ol>
         <?php endif; ?>
-      <?php } ?>
+      <?php endforeach; ?>
 
-    <?php } ?>
+    <?php endforeach; ?>
   </div>
 <?php else : ?>
   <?php if ($post['post_closed'] != 1) : ?>
@@ -129,7 +131,7 @@
 <?php if (!empty($otvet)) : ?>
   <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('you.answered'), 'icon' => 'bi-info-lg']); ?>
 <?php else : ?>
-  <?php if ($user['id'] > 0) : ?>
+  <?php if (UserData::checkActiveUser()) : ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
       <form class="mb15" action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">

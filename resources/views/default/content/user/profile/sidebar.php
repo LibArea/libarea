@@ -52,7 +52,7 @@
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
         </a>
-        <?php if ($user['id'] > 0) { ?>
+        <?php if (UserData::checkActiveUser()) { ?>
           <?php if ($profile['login'] == $user['login']) { ?>
             <a class="add-profile ml10" data-post="<?= $post['post_id']; ?>">
               <i class="bi-trash red"></i>

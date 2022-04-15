@@ -280,7 +280,7 @@ class Html
         return true;
     }
 
-    public static function pageRedirection($variable, $redirect)
+    public static function pageRedirection($variable, $redirect = '/')
     {
         if (!$variable) {
             redirect($redirect);

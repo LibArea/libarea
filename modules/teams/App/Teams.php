@@ -184,13 +184,16 @@ class Teams
     public function action()
     {
         $arr  = Request::getJsonBodyList();
-
-        $team = TeamModel::get((int)$arr['id']);
+        if (!filter_var($id = $arr['id'], FILTER_VALIDATE_INT)) {
+            return;
+        }
+        
+        $team = TeamModel::get($id);
         if ($team['user_id'] != $this->user['id']) {
             return;
         }
 
-        TeamModel::action($team['id'], $team['is_deleted']);
+        TeamModel::action($id, $team['is_deleted']);
     }
     
    // Formation of team members

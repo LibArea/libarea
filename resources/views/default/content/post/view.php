@@ -164,7 +164,7 @@
         </ul>
 
         <div class="mr15">
-          <?php if ($user['id'] > 0) { ?>
+          <?php if (UserData::checkActiveUser()) { ?>
             <?php if (is_array($data['post_signed'])) { ?>
               <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 yes">
                 <?= __('unsubscribe'); ?>
@@ -186,7 +186,7 @@
         </div>
       </div>
 
-      <?php if ($user['id'] > 0) { ?>
+      <?php if (UserData::checkActiveUser()) { ?>
         <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
 
           <form action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">

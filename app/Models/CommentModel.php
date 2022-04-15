@@ -236,6 +236,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     comment_content,
                     comment_user_id,
                     comment_date,
+                    comment_post_id,
                     comment_is_deleted
                         FROM comments WHERE comment_id = :comment_id";
 

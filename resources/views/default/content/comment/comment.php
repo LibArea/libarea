@@ -1,9 +1,9 @@
 <?php $n = 0;
-foreach ($answer as  $comment) {
+foreach ($answer as  $comment) :
   $n++; ?>
   <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
-  <?php if ($comment['comment_is_deleted'] == 1) { ?>
-    <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
+  <?php if ($comment['comment_is_deleted'] == 1) : ?>
+    <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) : ?>
       <ol class="bg-red-200 text-sm list-none max-w780">
         <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
           <span class="comm-deletes gray">
@@ -15,10 +15,10 @@ foreach ($answer as  $comment) {
           </span>
         </li>
       </ol>
-    <?php } ?>
-  <?php } ?>
+    <?php endif; ?>
+  <?php endif; ?>
 
-  <?php if ($comment['comment_is_deleted'] == 0) { ?>
+  <?php if ($comment['comment_is_deleted'] == 0) : ?>
     <ol class="p0 m0 mb15 list-none">
       <li class="content_tree" id="comment_<?= $comment['comment_id']; ?>">
         <div class="max-w780">
@@ -29,9 +29,9 @@ foreach ($answer as  $comment) {
                 <?= $comment['login']; ?>
               </span>
             </a>
-            <?php if ($comment['post_user_id'] == $comment['comment_user_id']) { ?>
+            <?php if ($comment['post_user_id'] == $comment['comment_user_id']) : ?>
               <span class="sky mr5"><i class="bi-mic text-sm"></i></span>
-            <?php } ?>
+            <?php endif; ?>
             <span class="mr5 ml5 gray-600 lowercase">
               <?= Html::langDate($comment['date']); ?>
             </span>
@@ -47,23 +47,23 @@ foreach ($answer as  $comment) {
         <div class="text-sm flex">
           <?= Html::votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
 
-          <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) { ?>
+          <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) : ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 mr10 ml10">
               <?= __('edit'); ?>
             </a>
             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600 mr5 ml5">
               <?= __('remove'); ?>
             </a>
-          <?php } ?>
+          <?php endif; ?>
 
-          <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
+          <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) : ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml15">
               <i title="<?= __('report'); ?>" class="bi-flag"></i>
             </a>
-          <?php } ?>
+          <?php endif; ?>
         </div>
-        <div id="comment_addentry<?= $comment['comment_id']; ?>" class="none"></div>
+        <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>
       </li>
     </ol>
-  <?php } ?>
-<?php } ?>
+  <?php endif; ?>
+<?php endforeach; ?>

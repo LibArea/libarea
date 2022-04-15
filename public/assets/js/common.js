@@ -61,15 +61,20 @@
 document.querySelectorAll(".add-comment")
   .forEach(el => el.addEventListener("click", function (e) {
 
-    let answer_id = this.dataset.answer_id;
-    let post_id = this.dataset.post_id;
+    let answer_id = el.dataset.answer_id;
+    let comment_id = el.dataset.comment_id;
+   
+    let insert_id = answer_id;
+    if(comment_id) {
+        insert_id = el.dataset.comment_id;
+    }
 
-    let comment = document.querySelector('#answer_addentry' + answer_id);
+    let comment = document.querySelector('#insert_id_' + insert_id);
     comment.classList.add("block");
 
     fetch("/comments/addform", {
       method: "POST",
-      body: "answer_id=" + answer_id + "&post_id=" + post_id,
+      body: "answer_id=" + answer_id + "&comment_id=" + comment_id,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then(
@@ -79,42 +84,13 @@ document.querySelectorAll(".add-comment")
       ).then(
         text => {
           comment.innerHTML = text;
-          
-            document.querySelectorAll("#cancel_comment")
+          document.querySelectorAll("#cancel_comment")
             .forEach(el => el.addEventListener("click", function (e) {
               comment.classList.remove("block");
-            }));
-          
+          }));
         }
       );
 }));
-
-document.querySelectorAll(".add-comment-re")
-  .forEach(el => el.addEventListener("click", function (e) {
-
-    let post_id = this.dataset.post_id;
-    let answer_id = this.dataset.answer_id;
-    let comment_id = this.dataset.comment_id;
-
-    let comment = document.querySelector('#comment_addentry' + comment_id);
-    comment.classList.add("block");
-
-    fetch("/comments/addform", {
-      method: "POST",
-      body: "answer_id=" + answer_id + "&post_id=" + post_id + "&comment_id=" + comment_id,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(
-        response => {
-          return response.text();
-        }
-      ).then(
-        text => {
-          comment.innerHTML = text;
-        }
-      );
-
-  }));
 
 // We will show a preview of the post on the central page
 document.querySelectorAll(".showpost")
@@ -252,7 +228,7 @@ function fetch_search() {
       text => {
         let obj = JSON.parse(text);
         let html = '<div class="flex">';
-        for (let key in obj) { console.log(obj);
+        for (let key in obj) {
           if (obj[key].facet_slug) {
             html += '<a class="sky block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">' + obj[key].facet_title + '</a>';
           }

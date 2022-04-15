@@ -1,11 +1,11 @@
 <?php $n = 0;
-foreach ($data['answers'] as $answer) {
+foreach ($data['answers'] as $answer) :
   $n++;
   $post_url = getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]);
 ?>
 
-  <?php if ($answer['answer_is_deleted'] == 0) { ?>
-    <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
+  <?php if ($answer['answer_is_deleted'] == 0) : ?>
+    <?php if ($n != 1) : ?><div class="br-top-dotted mt10 mb10"></div><?php endif; ?>
     <ol class="list-none">
       <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
         <div class="content-body">
@@ -16,17 +16,17 @@ foreach ($data['answers'] as $answer) {
                 <?= $answer['login']; ?>
               </span>
             </a>
-            <?php if ($answer['post_user_id'] == $answer['answer_user_id']) { ?>
+            <?php if ($answer['post_user_id'] == $answer['answer_user_id']) : ?>
               <span class="sky mr5 ml0"><i class="bi-mic text-sm"></i></span>
-            <?php } ?>
+            <?php endif; ?>
             <span class="mr5 ml5 gray-600 lowercase">
               <?= Html::langDate($answer['date']); ?>
             </span>
-            <?php if (empty($answer['edit'])) { ?>
+            <?php if (empty($answer['edit'])) : ?>
               <span class="mr5 ml10 gray-600">
                 (<?= __('ed'); ?>.)
               </span>
-            <?php } ?>
+            <?php endif; ?>
             <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
             <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
           </div>
@@ -37,39 +37,39 @@ foreach ($data['answers'] as $answer) {
         <div class="flex text-sm">
           <?= Html::votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
 
-          <?php if ($answer['post_closed'] == 0) { ?>
-            <?php if ($answer['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
-              <a data-post_id="<?= $answer['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray-600 mr5 ml10"><?= __('reply'); ?></a>
-            <?php } ?>
-          <?php } ?>
+          <?php if ($answer['post_closed'] == 0) : ?>
+            <?php if ($answer['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+              <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray-600 mr5 ml10"><?= __('reply'); ?></a>
+            <?php endif; ?>
+          <?php endif; ?>
 
-          <?php if (Html::accessСheck($answer, 'answer', $user, 1, 30) === true) { ?>
-            <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) { ?>
+          <?php if (Html::accessСheck($answer, 'answer', $user, 1, 30) === true) : ?>
+            <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) : ?>
               <a class="editansw gray-600 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                 <?= __('edit'); ?>
               </a>
-            <?php } ?>
-          <?php } ?>
+            <?php endif; ?>
+          <?php endif; ?>
 
-          <?php if (UserData::checkAdmin()) { ?>
+          <?php if (UserData::checkAdmin()) : ?>
             <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600 ml10 mr10">
               <?= __('remove'); ?>
             </a>
-          <?php } ?>
+          <?php endif; ?>
 
-          <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
+          <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) : ?>
             <a data-post_id="<?= $answer['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
               <i title="<?= __('report'); ?>" class="bi-flag"></i>
             </a>
-          <?php } ?>
+          <?php endif; ?>
         </div>
-        <div id="answer_addentry<?= $answer['answer_id']; ?>" class="none"></div>
+        <div data-insert="<?= $answer['answer_id']; ?>" id="insert_id_<?= $answer['answer_id']; ?>" class="none"></div>
       </li>
     </ol>
 
-  <?php } else { ?>
+  <?php else : ?>
 
-    <?php if (UserData::checkAdmin()) { ?>
+    <?php if (UserData::checkAdmin()) : ?>
       <ol class="bg-red-200 text-sm hidden p15 mb10 list-none">
         <li class="content_tree" id="comment_<?= $answer['answer_id']; ?>">
           <?= Content::text($answer['content'], 'text'); ?>
@@ -79,11 +79,11 @@ foreach ($data['answers'] as $answer) {
           </a>
         </li>
       </ol>
-    <?php } else { ?>
+    <?php else : ?>
       <div class="gray-600 p10 text-sm">
         ~ <?= sprintf(__('content.deleted'), __('comment')); ?>
       </div>
-    <?php } ?>
+    <?php endif; ?>
 
-  <?php } ?>
-<?php } ?>
+  <?php endif; ?>
+<?php endforeach; ?>

@@ -20,12 +20,10 @@ class EditCommentController extends MainController
     // Форма редактирования комментария
     public function index()
     {
-        $comment_id     = Request::getPostInt('comment_id');
-        $post_id        = Request::getPostInt('post_id');
-
         // Access verification
         // Проверка доступа 
-        $comment = CommentModel::getCommentsId($comment_id);
+        $comment_id = Request::getPostInt('comment_id');
+        $comment    = CommentModel::getCommentsId($comment_id);
         if (!Html::accessСheck($comment, 'comment', $this->user, 0, 0)) return false;
 
         Tpl::agIncludeTemplate(
@@ -33,7 +31,6 @@ class EditCommentController extends MainController
             [
                 'data'  => [
                     'comment_id'        => $comment_id,
-                    'post_id'           => $post_id,
                     'comment_content'   => $comment['comment_content'],
                 ],
                 'user'   => $this->user
@@ -44,11 +41,7 @@ class EditCommentController extends MainController
     public function edit()
     {
         $comment_id = Request::getPostInt('comment_id');
-        $post_id    = Request::getPostInt('post_id');
         $content    = $_POST['comment']; // для Markdown
-
-        $post       = PostModel::getPost($post_id, 'id', $this->user);
-        Html::pageRedirection($post, '/');
 
         // Access verification 
         $comment = CommentModel::getCommentsId($comment_id);
@@ -58,6 +51,9 @@ class EditCommentController extends MainController
 
         // If the user is frozen
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
+        
+        $post       = PostModel::getPost($comment['comment_post_id'], 'id', $this->user);
+        Html::pageRedirection($post, '/');
 
         $slug = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         $redirect   = $slug . '#comment_' . $comment['comment_id'];

@@ -6,7 +6,7 @@
         <?= Html::image($user['avatar'], $user['login'], 'w94 br-rd-50 mr15', 'avatar', 'max'); ?>
       </div>
       <div class="w-100">
-        <?php if ($user['id'] > 0 && $user['login'] != $user['login']) { ?>
+        <?php if (UserData::checkActiveUser() && $user['login'] != $user['login']) { ?>
           <a class="right btn btn-primary block" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">
             <i class="bi-envelope middle mr5"></i>
             <?= __('message'); ?>

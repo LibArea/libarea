@@ -99,6 +99,7 @@ class AddPostController extends MainController
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
         $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'post');
 
+        $post_title = str_replace("&nbsp;", '', $post_title);
         Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
         Validation::Length($content, Translate::get('the post'), '6', '25000', $redirect);
 

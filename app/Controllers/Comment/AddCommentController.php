@@ -16,32 +16,34 @@ class AddCommentController extends MainController
         $this->user  = UserData::get();
     }
 
-    // Покажем форму
+    // Show the form for adding a comment
+    // Покажем форму добавление комментария
     public function index()
     {
         Tpl::agIncludeTemplate(
-            '/_block/form/add-form-answer-and-comment',
+            '/_block/form/add-form-comment',
             [
                 'data'  => [
-                    'answer_id'     => Request::getPostInt('answer_id'),
-                    'post_id'       => Request::getPostInt('post_id'),
-                    'comment_id'    => Request::getPostInt('comment_id'),
+                    'answer_id'  => Request::getPostInt('answer_id'),
+                    'comment_id' => Request::getPostInt('comment_id'),
                 ],
-                'user'   => $this->user
+                'user' => $this->user
             ]
         );
     }
 
-    // Добавление комментария
+    // Adding a comment
     public function create()
     {
         $content    = $_POST['comment']; // для Markdown
-        $post_id    = Request::getPostInt('post_id');   // в каком посту ответ
         $answer_id  = Request::getPostInt('answer_id');   // на какой ответ
         $comment_id = Request::getPostInt('comment_id');   // на какой комментарий
 
-        $post   = PostModel::getPost($post_id, 'id', $this->user);
-        Html::pageError404($post);
+        $answer = AnswerModel::getAnswerId($answer_id);
+        Html::pageRedirection($answer);
+
+        $post   = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
+        Html::pageRedirection($post);
 
         $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
@@ -53,7 +55,7 @@ class AddCommentController extends MainController
 
         $last_id = CommentModel::add(
             [
-                'comment_post_id'       => $post_id,
+                'comment_post_id'       => $post['post_id'],
                 'comment_answer_id'     => $answer_id,
                 'comment_comment_id'    => $comment_id,
                 'comment_content'       => Content::change($content),
@@ -71,7 +73,7 @@ class AddCommentController extends MainController
         }
 
         // Add the number of comments for the post + 1
-        PostModel::updateCount($post_id, 'comments');
+        PostModel::updateCount($post['post_id'], 'comments');
 
         // Notification to the author of the answer that there is a comment (do not write to ourselves) 
         // Оповещение автору ответа, что есть комментарий (себе не записываем)

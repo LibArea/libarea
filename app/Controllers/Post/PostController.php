@@ -196,8 +196,11 @@ class PostController extends MainController
     public function postProfile()
     {
         $arr    = Request::getJsonBodyList();
-        $post   = PostModel::getPost((int)$arr['post_id'], 'id', $this->user);
-
+        if (!filter_var($id = $arr['post_id'], FILTER_VALIDATE_INT)) {
+            return false;
+        }
+        
+        $post   = PostModel::getPost($id, 'id', $this->user);
 
         // Access check
         // Проверка доступа
@@ -211,7 +214,7 @@ class PostController extends MainController
             return false;
         }
 
-        return PostModel::setPostProfile((int)$post['post_id'], $this->user['id']);
+        return PostModel::setPostProfile($id, $this->user['id']);
     }
 
     // View post from cover page

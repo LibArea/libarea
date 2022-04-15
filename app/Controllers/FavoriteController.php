@@ -25,11 +25,15 @@ class FavoriteController extends MainController
             return false;
         }
 
-        self::redirectItem((int)$arr['content_id'], $arr['type'], $this->user);
+        if (!filter_var($id = $arr['content_id'], FILTER_VALIDATE_INT)) {
+            return false;
+        }
+
+        self::redirectItem($id, $arr['type'], $this->user);
 
         FavoriteModel::setFavorite(
             [
-                'tid'           => (int)$arr['content_id'],
+                'tid'           => $id,
                 'user_id'       => $this->user['id'],
                 'action_type'   => $arr['type'],
             ]

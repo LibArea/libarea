@@ -13,6 +13,7 @@ class Validation
 
     public static function Length($name, $content, $min, $max, $redirect)
     {
+        $name = str_replace(" ", '', $name);
         if (Html::getStrlen($name) < $min || Html::getStrlen($name) > $max) {
             $text = sprintf(Translate::get('string.length'), '«' . $content . '»', $min, $max);
             Html::addMsg($text, 'error');
