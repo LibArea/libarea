@@ -7,20 +7,20 @@
     <changefreq>daily</changefreq>
   </url>
   <!-- Sitemap -->
-  <?php foreach ($data['topics'] as $topic) { ?>
+  <?php foreach ($data['topics'] as $topic) : ?>
     <url>
       <loc><?= $data['url']; ?>/topic/<?= $topic['facet_slug']; ?></loc>
       <priority>0.5</priority>
       <changefreq>daily</changefreq>
     </url>
-  <?php } ?>
-  <?php foreach ($data['posts'] as $post) { ?>
+  <?php endforeach; ?>
+  <?php foreach ($data['posts'] as $post) : ?>
     <url>
       <loc><?= $data['url']; ?><?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?></loc>
       <priority>0.5</priority>
       <changefreq>daily</changefreq>
     </url>
-  <?php } ?>
+  <?php endforeach; ?>
   <url>
     <loc><?= $data['url']; ?>/info</loc>
     <priority>0.5</priority>

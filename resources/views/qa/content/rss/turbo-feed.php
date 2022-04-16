@@ -5,7 +5,7 @@
     <link><?= $data['url']; ?>/topic/<?= $topic['facet_slug']; ?></link>
     <description><?= $topic['facet_description']; ?></description>
     <language>ru</language>
-    <?php foreach ($data['posts'] as $post) { ?>
+    <?php foreach ($data['posts'] as $post) : ?>
       <item turbo="true">
         <link><?= $data['url']; ?><?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?></link>
         <pubDate><?= $post['post_date']; ?></pubDate>
@@ -23,6 +23,6 @@
           ]]>
         </turbo:content>
       </item>
-    <?php } ?>
+    <?php endforeach; ?>
   </channel>
 </rss>

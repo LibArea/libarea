@@ -3,7 +3,7 @@
     <p class="m0"><?= __($data['sheet']); ?></p>
   </div>
   <div class="p15">
-    <?php if ($user['trust_level'] > 1) { ?>
+    <?php if ($user['trust_level'] > 1) : ?>
       <form method="post" action="<?= getUrlByName('invit.create'); ?>">
         <?php csrf_field(); ?>
         <fieldset>
@@ -16,43 +16,43 @@
 
       <h3><?= __('invited.guests'); ?></h3>
 
-      <?php if (!empty($data['invitations'])) { ?>
+      <?php if (!empty($data['invitations'])) : ?>
 
-        <?php foreach ($data['invitations'] as $invite) { ?>
-          <?php if ($invite['active_status'] == 1) { ?>
+        <?php foreach ($data['invitations'] as $invite) : ?>
+          <?php if ($invite['active_status'] == 1) : ?>
             <div class="text-sm gray">
               <?= Html::image($invite['avatar'], $invite['login'], 'ava', 'avatar', 'small'); ?>
               <a href="<?= $invite['login']; ?>"><?= $invite['login']; ?></a>
               - <?= __('registered'); ?>
             </div>
 
-            <?php if (UserData::checkAdmin()) { ?>
+            <?php if (UserData::checkAdmin()) : ?>
               <?= __('link.used'); ?>: 
               <?= $invite['invitation_email']; ?>
               <code class="block w-90">
                 <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
               </code>
-            <?php } ?>
+            <?php endif; ?>
 
             <span class="text-sm gray"><?= __('link.used'); ?></span>
-          <?php } else { ?>
+          <?php else : ?>
             <?= __('for'); ?> (<?= $invite['invitation_email']; ?>) 
             <?= __('can.send.this.link'); ?>:
             <code class="block w-90">
               <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
             </code>
-          <?php } ?>
+          <?php endif; ?>
 
           <br><br>
-        <?php } ?>
+        <?php endforeach; ?>
 
-      <?php } else { ?>
+      <?php else : ?>
         <?= __('no.invites'); ?>
-      <?php } ?>
+      <?php endif; ?>
 
-    <?php } else { ?>
+    <?php else : ?>
       <?= __('limit.tl.invitation'); ?>.
-    <?php } ?>
+    <?php endif; ?>
   </div>
 </main>
 <aside>

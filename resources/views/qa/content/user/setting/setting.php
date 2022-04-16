@@ -47,35 +47,35 @@
           <?= __('template'); ?>
         </label>
         <select name="template">
-          <?php foreach (Config::get('general.templates') as $tpl) { ?>
-            <option <?php if ($data['user']['template'] == $tpl) { ?>selected<?php } ?> value="<?= $tpl; ?>">
+          <?php foreach (Config::get('general.templates') as $tpl) : ?>
+            <option <?php if ($data['user']['template'] == $tpl) : ?>selected<?php endif; ?> value="<?= $tpl; ?>">
               <?= __($tpl); ?>
             </option>
-          <?php } ?>
+          <?php endforeach; ?>
         </select>
       </fieldset>
 
        <fieldset class="max-w300">
         <label class="block mb5" for="post_content"><?= __('language'); ?></label>
         <select name="lang">
-          <?php foreach (Config::get('general.languages') as $lang) {  ?>
-            <option <?php if ($data['user']['lang'] == $lang) { ?>selected<?php } ?> value="<?= $lang; ?>">
+          <?php foreach (Config::get('general.languages') as $lang) :  ?>
+            <option <?php if ($data['user']['lang'] == $lang) : ?>selected<?php endif; ?> value="<?= $lang; ?>">
               <?= __($lang . '.language'); ?>
             </option>
-          <?php } ?>
+          <?php endforeach; ?>
         </select>
       </fieldset>
 
       <h3 class="mt15 mb15"><?= __('contacts'); ?></h3>
-      <?php foreach (Config::get('form/user-setting') as $block) { ?>
+      <?php foreach (Config::get('form/user-setting') as $block) : ?>
         <fieldset class="max-w300">
           <label for="post_title"><?= $block['lang']; ?></label>
           <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
-          <?php if ($block['help']) { ?>
+          <?php if ($block['help']) : ?>
             <div class="help"><?= $block['help']; ?></div>
-          <?php } ?>
+          <?php endif; ?>
         </fieldset>
-      <?php } ?>
+      <?php endforeach; ?>
 
       <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">

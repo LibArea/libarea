@@ -12,14 +12,14 @@
         <div class="help">6 - 250 <?= __('characters'); ?></div>
       </fieldset>
 
-      <?php if (!empty($data['blog'])) { ?>
+      <?php if (!empty($data['blog'])) : ?>
         <?= Tpl::insert('/_block/form/select/blog', [
           'data'        => $data,
           'action'      => 'add',
           'type'        => 'blog',
           'title'       => __('blogs'),
         ]); ?>
-      <?php } ?>
+      <?php endif; ?>
 
       <?= Tpl::insert('/_block/form/select/select', [
         'data'          => $data['facets'],
@@ -30,7 +30,7 @@
         'red'           => 'red'
       ]); ?>
 
-      <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_url')) { ?>
+      <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_url')) : ?>
         <fieldset>
           <div class="left w-70">
             <input id="link" placeholder="URL" class="post_url" type="text" name="post_url" />
@@ -39,7 +39,7 @@
             <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= __('to.extract'); ?>" />
           </div>
         </fieldset>
-      <?php } ?>
+      <?php endif; ?>
 
       <div class="file-upload mb20" id="file-drag">
         <div class="flex">
@@ -60,7 +60,7 @@
 
       <?= Tpl::insert('/_block/editor/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
 
-      <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) { ?>
+      <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) : ?>
         <?= Tpl::insert('/_block/form/radio',  [
           'data' => [
             [
@@ -87,7 +87,7 @@
             ],
           ]
         ]); ?>
-      <?php } ?>
+      <?php endif; ?>
 
       <?= Tpl::insert('/_block/form/radio',  [
         'data' => [
@@ -98,7 +98,7 @@
         ]
       ]); ?>
 
-      <?php if (UserData::checkAdmin()) { ?>
+      <?php if (UserData::checkAdmin()) : ?>
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
@@ -107,7 +107,7 @@
             ],
           ]
         ]); ?>
-      <?php } ?>
+      <?php endif; ?>
 
       <?= Tpl::insert('/_block/form/select/related-posts', [
         'data'          => [],

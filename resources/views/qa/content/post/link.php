@@ -1,15 +1,15 @@
 <main class="col-two">
   <div class="box">
-    <?php if ($data['site']['item_title']) { ?>
+    <?php if ($data['site']['item_title']) : ?>
       <div class="right mt10">
         <?= Html::votes($user['id'], $data['site'], 'item', 'ps', 'mr10'); ?>
       </div>
       <h1><?= $data['site']['item_title']; ?>
-        <?php if ($user['trust_level'] > 4) { ?>
+        <?php if ($user['trust_level'] > 4) : ?>
           <a class="text-sm ml5" title="<?= __('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['site']['item_id']]); ?>">
             <i class="bi-pencil"></i>
           </a>
-        <?php } ?>
+        <?php endif; ?>
       </h1>
       <div class="gray">
         <?= Html::fragment(Content::text($data['site']['item_content'], 'line'), 200); ?>
@@ -21,9 +21,9 @@
         </a>
         <span class="right gray-600"><i class="bi-journal mr5"></i> <?= $data['site']['item_count']; ?></span>
       </div>
-    <?php } else { ?>
+    <?php else : ?>
       <h1><?= __('domain') . ': ' . $data['domain']; ?></h1>
-    <?php } ?>
+    <?php endif; ?>
   </div>
 
   <?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>

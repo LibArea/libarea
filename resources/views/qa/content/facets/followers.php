@@ -3,5 +3,5 @@
     <?= Html::image($user['avatar'], $user['login'], 'ava-sm', 'avatar', 'max'); ?>
     <?= $user['login']; ?>
   </a>
-<?php endif; ?>
+<?php endforeach; ?>
  

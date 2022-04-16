@@ -57,7 +57,7 @@
             </a>
           <?php endif; ?>
         </div>
-      <?php endif; ?>
+      <?php endforeach; ?>
 
     <?php else : ?>
       <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>

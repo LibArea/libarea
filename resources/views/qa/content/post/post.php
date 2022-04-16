@@ -1,10 +1,10 @@
-<?php if (!empty($data['posts'])) { ?>
+<?php if (!empty($data['posts'])) : ?>
   <?php $n = 0;
-  foreach ($data['posts'] as $post) {
+  foreach ($data['posts'] as $post) :
     $n++; ?>
-    <?php if ($user['id'] == 0 && $n == 6) { ?>
+    <?php if ($user['id'] == 0 && $n == 6) : ?>
       <?= Tpl::insert('/_block/no-login-screensaver'); ?>
-    <?php } ?>
+    <?php endif; ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="flex br-bottom p10 article_<?= $post['post_id']; ?>">
       <div class="flex mb-inline mr15">
@@ -25,9 +25,9 @@
 
       <div class="w-100 mr15">
         <div class="mt0 mb0">
-        <?php if ($bg_url) { ?>
+        <?php if ($bg_url) : ?>
           <span><?= __('news'); ?>:</span>
-        <?php } ?>
+        <?php endif; ?>
         <a href="<?= $post_url; ?>">
           <span class="font-normal text-xl">
             <?= $post['post_title']; ?>
@@ -39,11 +39,11 @@
           <div class="flex-auto">
             <?= Html::facets($post['facet_list'], 'blog', 'blog', 'gray text-xs mr15'); ?>
             <?= Html::facets($post['facet_list'], 'topic', 'topic', 'tags-xs'); ?>
-            <?php if ($post['post_url_domain']) { ?>
+            <?php if ($post['post_url_domain']) : ?>
               <a class="gray-600 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
               </a>
-            <?php } ?>
+            <?php endif; ?>
           </div>
 
           <div class="gray-600 text-xs">
@@ -55,15 +55,15 @@
           </div>
         </div>
 
-        <?php if ($data['sheet'] == 'subscribed') { ?>
+        <?php if ($data['sheet'] == 'subscribed') : ?>
           <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet text-sm right">
             <?= __('unsubscribe'); ?>
           </div>
-        <?php } ?>
+        <?php endif; ?>
       </div>
     </div>
-  <?php } ?>
-<?php } else { ?>
+  <?php endforeach; ?>
+<?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?= Tpl::insert('/_block/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>  
@@ -71,4 +71,4 @@
     <i class="bi-journal-richtext block text-8xl"></i>
     <?= __('no.posts'); ?>
   </div>
-<?php } ?>
+<?php endif; ?>

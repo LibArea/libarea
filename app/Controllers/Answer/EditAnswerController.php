@@ -51,7 +51,6 @@ class EditAnswerController extends MainController
     {
         $answer_id  = Request::getPostInt('answer_id');
         $content    = $_POST['content']; // для Markdown
-        $post       = PostModel::getPost($post_id, 'id', $this->user);
 
         // If the user is frozen
         // Если пользователь заморожен
@@ -64,6 +63,7 @@ class EditAnswerController extends MainController
             redirect('/');
         }
 
+        $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
         $url = getUrlByName('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
         Validation::Length($content, Translate::get('bodies'), '6', '5000', '/' . $url);
 

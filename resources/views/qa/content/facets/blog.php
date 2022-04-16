@@ -64,7 +64,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
             <div class="sticky top0 top-sm">
               <div class="bg-violet box text-sm">
                 <h3 class="uppercase-box"><?= __('pages'); ?></h3>
-                <?php foreach ($data['pages'] as $ind => $row) ; ?>
+                <?php foreach ($data['pages'] as $ind => $row) : ?>
                   <div class="mb5">
                     <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('blog.article', ['slug' => $blog['facet_slug'], 'post_slug' => $row['post_slug']]); ?>">
                       <?= $row['post_title']; ?>

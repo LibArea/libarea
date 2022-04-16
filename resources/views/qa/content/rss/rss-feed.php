@@ -5,7 +5,7 @@
     <link><?= $data['url']; ?>/topic/<?= $topic['facet_slug']; ?></link>
     <description>RSS feed for <?= $topic['facet_title']; ?></description>
     <atom:link href="<?= $data['url']; ?>/rss-feed/topic/<?= $topic['facet_slug']; ?>" rel="self" type="application/rss+xml" />
-    <?php foreach ($data['posts'] as $post) { ?>
+    <?php foreach ($data['posts'] as $post) : ?>
       <item>
         <title><?= $post['post_title']; ?></title>
         <description>
@@ -15,6 +15,6 @@
         <pubDate><?= date(DATE_RFC822, strtotime($post['post_date'])); ?></pubDate>
         <guid><?= $data['url']; ?><?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?></guid>
       </item>
-    <?php } ?>
+    <?php endforeach; ?>
   </channel>
 </rss>
