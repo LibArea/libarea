@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\App\Models\СonsoleModel;
 use SendEmail, Sass, Html;
 
-class Сonsole
+class Console
 {
     public static function index()
     {

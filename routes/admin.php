@@ -6,7 +6,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/')->module('admin', 'App\Home')->name('admin');
 
     Route::getType('post');
-        Route::get('/test/mail')->module('admin', 'App\Сonsole@testMail')->name('admin.test.mail');
+        Route::get('/test/mail')->module('admin', 'App\Console@testMail')->name('admin.test.mail');
         Route::get('/user/ban')->module('admin', 'App\Users@banUser');
         Route::get('/favicon/add')->module('admin', 'App\Webs@favicon');
         Route::get('/word/ban')->module('admin', 'App\Words@deletes');
@@ -37,7 +37,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/audits/approved')->module('admin', 'App\Audits', ['audits.ban', 'audits'])->name('admin.audits.ban');
     Route::get('/report')->module('admin', 'App\Audits', ['reports.all', 'reports'])->name('admin.reports');
 
-    Route::get('/update/{choice}')->module('admin', 'App\Сonsole')->where(['choice' => '[a-z].+']); 
+    Route::get('/update/{choice}')->module('admin', 'App\Console')->where(['choice' => '[a-z].+']); 
 
     Route::get('/invitations')->module('admin', 'App\Invitations')->name('admin.invitations');
    
