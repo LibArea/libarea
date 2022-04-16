@@ -29,7 +29,7 @@
         'title'       => __('blogs'),
       ]); ?>
 
-      <?php if (UserData::checkAdmin()) { ?>
+      <?php if (UserData::checkAdmin()) : ?>
         <?= Tpl::insert('/_block/form/select/section', [
           'data'          => $data,
           'action'        => 'edit',
@@ -40,7 +40,7 @@
           'help'          => __('necessarily'),
           'red'           => 'red'
         ]); ?>
-      <?php } ?>
+      <?php endif; ?>
 
       <?= Tpl::insert('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'page-telo', 'id' => $post['post_id']]); ?>
 
@@ -55,9 +55,9 @@
       ]); ?>
 
       <div class="mb20">
-        <?php if ($post['post_draft'] == 1) { ?>
+        <?php if ($post['post_draft'] == 1) : ?>
           <input type="hidden" name="draft" id="draft" value="1">
-        <?php } ?>
+        <?php endif; ?>
         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
         <?= Html::sumbit(__('edit')); ?>
       </div>

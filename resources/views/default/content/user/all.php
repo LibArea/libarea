@@ -36,19 +36,19 @@
 
   <div class="box">
     <div class="flex flex-wrap">
-      <?php foreach ($data['users'] as $user) { ?>
+      <?php foreach ($data['users'] as $user) : ?>
         <div class="w-20 mb20 mb-w-33 center">
           <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
             <?= Html::image($user['avatar'], $user['login'], 'ava-lg', 'avatar', 'max'); ?>
             <div class="block mt5">
               <?= $user['login']; ?>
             </div>
-            <?php if ($user['name']) { ?>
+            <?php if ($user['name']) : ?>
               <span class="gray text-sm"><?= $user['name']; ?></span>
-            <?php } ?>
+            <?php endif; ?>
           </a>
         </div>
-      <?php } ?>
+      <?php endforeach; ?>
     </div>
   </div>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>

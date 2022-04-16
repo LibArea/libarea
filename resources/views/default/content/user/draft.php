@@ -5,9 +5,9 @@
     </ul>
   </div>
 
-  <?php if (!empty($data['drafts'])) { ?>
+  <?php if (!empty($data['drafts'])) : ?>
     <div class="box">
-      <?php foreach ($data['drafts'] as $draft) { ?>
+      <?php foreach ($data['drafts'] as $draft) : ?>
         <a href="<?= getUrlByName('post', ['id' => $draft['post_id'], 'slug' => $draft['post_slug']]); ?>">
           <h3 class="m0 text-2xl"><?= $draft['post_title']; ?></h3>
         </a>
@@ -15,11 +15,11 @@
           <?= $draft['post_date']; ?> |
           <a href="<?= getUrlByName('post.edit', ['id' => $draft['post_id']]); ?>"><?= __('edit'); ?></a>
         </div>
-      <?php } ?>
+      <?php endforeach; ?>
     </div>
-  <?php } else { ?>
+  <?php else : ?>
     <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.content'), 'icon' => 'bi-journal-richtext']); ?>
-  <?php } ?>
+  <?php endif; ?>
 
 </main>
 <aside>

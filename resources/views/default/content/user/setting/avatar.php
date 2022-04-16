@@ -26,18 +26,18 @@
 
       <div class="file-upload mt20 mb10" id="file-drag">
         <div class="flex">
-          <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') { ?>
+          <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
             <div class="relative mr15">
               <img class="block br-gray max-w-100" src="<?= Html::coverUrl($data['user']['cover_art'], 'user'); ?>">
               <a class="right text-sm" href="<?= getUrlByName('delete.cover', ['login' => $user['login']]); ?>">
                 <?= __('remove'); ?>
               </a>
             </div>
-          <?php } else { ?>
+          <?php else : ?>
             <div class="block br-gray max-w-100 text-sm gray p20 mr15">
               <?= __('no.cover'); ?>...
             </div>
-          <?php } ?>
+          <?php endif; ?>
           <div id="start">
             <img id="file-image bi bi-cloud-download" src="/assets/images/1px.jpg" alt="" class="h94">
 

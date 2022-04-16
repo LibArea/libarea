@@ -5,14 +5,14 @@
       <div class="box-flex">
         <p class="m0"><?= __('answers'); ?> <b><?= $data['profile']['login']; ?></b></p>
       </div>
-      <?php if (!empty($data['answers'])) { ?>
+      <?php if (!empty($data['answers'])) : ?>
         <div class="box">
           <?= Tpl::insert('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
         </div>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/answers'); ?>
-      <?php } else { ?>
+      <?php else : ?>
         <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.answers'), 'icon' => 'bi-info-lg']); ?>
-      <?php } ?>
+      <?php endif; ?>
     </main>
     <aside>
       <?= Tpl::insert('/content/user/profile/sidebar', ['user' => $user, 'data' => $data]); ?>

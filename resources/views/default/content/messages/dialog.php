@@ -12,18 +12,18 @@
   </div>
 
   <div class="box">
-    <?php if ($data['list']) { ?>
-      <?php foreach ($data['list'] as $key => $val) { ?>
+    <?php if ($data['list']) : ?>
+      <?php foreach ($data['list'] as $key => $val) : ?>
         <div class="hidden">
           <?php
           $login  = $val['login'];
           $ava    = $val['avatar'];
           $id     = $val['message_sender_id'];
-          if ($val['message_sender_id'] == $user['id']) {
+          if ($val['message_sender_id'] == $user['id']) :
             $login  = $user['login'];
             $ava    = $user['avatar'];
             $id     = $user['id'];
-          }
+          endif;
           ?>
           <div class="flex relative">
             <div id="user-card" data-content_id="<?= $key; ?>" data-user_id="<?= $id; ?>">
@@ -42,28 +42,28 @@
           <div class="max-w780 ">
             <?= $val['message_content']; ?>
           </div>
-          <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $user['id']) { ?>
+          <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $user['id']) : ?>
             <div class="right gray-600 lowercase text-sm hidden mb5 pb5">
               <?= __('it.was.read'); ?> (<?= Html::langDate($val['message_receipt']); ?>)
             </div>
-          <?php } ?>
+          <?php endif; ?>
         </div>
         <div class="br-bottom mb15"></div>
-      <?php } ?>
-    <?php } ?>
+      <?php endforeach; ?>
+    <?php endif; ?>
   </div>
 </main>
 
 <aside>
   <div class="box text-sm">
     <h3 class="uppercase-box"><?= __('dialogues'); ?></h3>
-    <?php foreach ($data['dialog'] as $key => $val) { ?>
-      <?php if ($val['id'] != $user['id']) { ?>
+    <?php foreach ($data['dialog'] as $key => $val) : ?>
+      <?php if ($val['id'] != $user['id']) : ?>
         <div class="flex relative pt5 pb5 items-center hidden">
           <?= Html::image($val['avatar'], $val['login'], 'ava-base', 'avatar', 'max'); ?>
           <a href="<?= getUrlByName('dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['login']; ?></a>
         </div>
-      <?php } ?>
-    <?php } ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
   </div>
 </aside>

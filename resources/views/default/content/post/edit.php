@@ -34,22 +34,22 @@
         'red'           => 'red'
       ]); ?>
 
-      <?php if ($post['post_url']) { ?>
+      <?php if ($post['post_url']) : ?>
         <div class="mb20 2flex">
           <div class="mb5" for="post_title">URL:
             <a target="_blank" rel="noreferrer ugc" href="<?= $post['post_url']; ?>" class="text-sm">
               <?= $post['post_url']; ?>
             </a>
           </div>
-          <?php if ($post['post_thumb_img']) { ?>
+          <?php if ($post['post_thumb_img']) : ?>
             <?= Html::image($post['post_thumb_img'], $post['post_title'], 'w94', 'post', 'thumbnails'); ?>
-          <?php } ?>
+          <?php endif; ?>
         </div>
-      <?php } ?>
+      <?php endif; ?>
 
       <div class="file-upload mb20" id="file-drag">
         <div class="flex">
-          <?php if ($post['post_content_img']) { ?>
+          <?php if ($post['post_content_img']) : ?>
             <div class="mr20">
               <?= Html::image($post['post_content_img'], $post['post_title'], 'w160', 'post', 'cover'); ?>
               <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
@@ -57,7 +57,7 @@
                 <?= __('remove'); ?>
               </a>
             </div>
-          <?php } ?>
+          <?php endif; ?>
 
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-gray">
           <div id="start">
@@ -72,8 +72,8 @@
 
       <?= Tpl::insert('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
-      <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) { ?>
-        <?php if ($post['post_draft'] == 1) { ?>
+      <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) : ?>
+        <?php if ($post['post_draft'] == 1) : ?>
           <?= Tpl::insert('/_block/form/radio', [
             'data' => [
               [
@@ -83,8 +83,8 @@
               ],
             ]
           ]); ?>
-        <?php } ?>
-      <?php } ?>
+        <?php endif; ?>
+      <?php endif; ?>
 
       <?= Tpl::insert('/_block/form/select/content-tl', [
         'data' => $post['post_tl'],
@@ -116,7 +116,7 @@
         ]
       ]); ?>
 
-      <?php if (UserData::checkAdmin()) { ?>
+      <?php if (UserData::checkAdmin()) : ?>
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
@@ -135,7 +135,7 @@
           'title'         => __('author'),
           'help'          => __('necessarily'),
         ]); ?>
-      <?php } ?>
+      <?php endif; ?>
 
       <?= Tpl::insert('/_block/form/select/related-posts', [
         'data'          => $data,
@@ -146,9 +146,9 @@
       ]); ?>
 
       <p>
-        <?php if ($post['post_draft'] == 1) { ?>
+        <?php if ($post['post_draft'] == 1) : ?>
           <input type="hidden" name="draft" id="draft" value="1">
-        <?php } ?>
+        <?php endif; ?>
         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
         <?= Html::sumbit(__('edit')); ?>
       </p>

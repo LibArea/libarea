@@ -131,9 +131,8 @@ Route::get('/post/{id}/{slug}')->controller('Post\PostController', ['post'])->wh
 Route::get('/blog/{facet_slug}/article/{slug}')->controller('Post\PostController', ['blog.page'])->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('blog.article');
 Route::get('/{facet_slug}/article/{slug}')->controller('Post\PostController', ['info.page'])->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('facet.article'); 
 
-Route::get('/users/{page?}')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
 Route::get('/users/new/{page?}')->controller('User\UserController', ['users.new', 'user'])->name('users.new');
-
+Route::get('/users/{page?}')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
 
 Route::get('/@{login}')->controller('User\ProfileController', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile');
 Route::get('/@{login}/posts/{page?}')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');

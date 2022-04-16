@@ -73,15 +73,15 @@
       ]); ?>
 
       <h3 class="mt15 mb15"><?= __('contacts'); ?></h3>
-      <?php foreach (Config::get('form/user-setting') as $block) { ?>
+      <?php foreach (Config::get('form/user-setting') as $block) : ?>
         <fieldset class="max-w300">
           <label for="post_title"><?= $block['lang']; ?></label>
           <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
-          <?php if ($block['help']) { ?>
+          <?php if ($block['help']) : ?>
             <div class="help"><?= $block['help']; ?></div>
-          <?php } ?>
+          <?php endif; ?>
         </fieldset>
-      <?php } ?>
+      <?php endforeach; ?>
 
       <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">

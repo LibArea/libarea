@@ -13,9 +13,9 @@
         <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">
         <input type="hidden" name="user_id" id="user_id" value="<?= $data['user_id']; ?>">
         <?= Html::sumbit(__('reset')); ?>
-        <?php if (Config::get('general.invite') == false) { ?>
+        <?php if (Config::get('general.invite') == false) : ?>
           <span class="mr5 ml5 text-sm"><a href="<?= getUrlByName('register'); ?>"><?= __('registration'); ?></a></span>
-        <?php } ?>
+        <?php endif; ?>
         <span class="mr5 ml5 text-sm"><a href="<?= getUrlByName('login'); ?>"><?= __('sign.in'); ?></a></span>
       </p>
     </form>

@@ -1,5 +1,5 @@
 <?php $blog = $data['facet'];
-if ($blog['facet_is_deleted'] == 0) { ?>
+if ($blog['facet_is_deleted'] == 0) : ?>
   <div class="w-100">
     <div class="box-flex" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= Html::coverUrl($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
       <div class="mb-none">
@@ -8,11 +8,11 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       <div class="mb-ml0 flex-auto">
         <h1 class="mb0 mt10 text-2xl">
           <?= $blog['facet_seo_title']; ?>
-          <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
+          <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) : ?>
             <a class="right white fon-rgba -mt20" href="<?= getUrlByName('content.edit', ['type' => 'blog', 'id' => $blog['facet_id']]); ?>">
               <i class="bi-pencil bold"></i>
             </a>
-          <?php } ?>
+          <?php endif; ?>
         </h1>
         <div class="text-sm"><?= $blog['facet_short_description']; ?></div>
 
@@ -42,7 +42,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>
       <aside>
-        <?php if ($blog['facet_is_deleted'] == 0) { ?>
+        <?php if ($blog['facet_is_deleted'] == 0) : ?>
           <div class="box text-sm">
             <h3 class="uppercase-box"><?= __('created.by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
@@ -54,41 +54,41 @@ if ($blog['facet_is_deleted'] == 0) { ?>
               <span class="middle lowercase"><?= Html::langDate($blog['facet_add_date']); ?></span>
             </div>
           </div>
-          <?php if ($data['info']) { ?>
+          <?php if ($data['info']) : ?>
             <div class="box text-sm shown_post">
               <?= $data['info']; ?>
             </div>
-          <?php } ?>
+          <?php endif; ?>
 
-          <?php if (!empty($data['pages'])) { ?>
+          <?php if (!empty($data['pages'])) : ?>
             <div class="sticky top0 top-sm">
               <div class="box text-sm">
                 <h3 class="uppercase-box"><?= __('pages'); ?></h3>
-                <?php foreach ($data['pages'] as $ind => $row) { ?>
+                <?php foreach ($data['pages'] as $ind => $row) : ?>
                   <div class="mb5">
                     <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('blog.article', ['facet_slug' => $blog['facet_slug'], 'slug' => $row['post_slug']]); ?>">
                       <?= $row['post_title']; ?>
                     </a>
-                    <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) { ?>
+                    <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) : ?>
                       <a class="text-sm gray-600" title="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
                         <i class="bi-pencil"></i>
                       </a>
-                    <?php } ?>
+                    <?php endif; ?>
                   </div>
-                <?php } ?>
+                <?php endforeach; ?>
               </div>
             </div>
-          <?php } ?>
-        <?php } ?>
+          <?php endif; ?>
+        <?php endif; ?>
       </aside>
     </div>
   </div>
-<?php } else { ?>
+<?php else : ?>
   <div class="center">
     <i class="bi-x-octagon text-8xl"></i>
     <div class="mt5 gray"><?= __('remote'); ?></div>
   </div>
-<?php } ?>
+<?php endif; ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

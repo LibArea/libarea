@@ -6,58 +6,58 @@
         <?= Html::image($user['avatar'], $user['login'], 'w94 br-rd-50 mr15', 'avatar', 'max'); ?>
       </div>
       <div class="w-100">
-        <?php if (UserData::checkActiveUser() && $user['login'] != $user['login']) { ?>
+        <?php if (UserData::checkActiveUser() && $user['login'] != $user['login']) : ?>
           <a class="right btn btn-primary block" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">
             <i class="bi-envelope middle mr5"></i>
             <?= __('message'); ?>
           </a>
-        <?php } ?>
+        <?php endif; ?>
         <a class="block text-2xl" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
           <?= $user['login']; ?>
         </a>
-        <?php if ($user['name']) { ?>
+        <?php if ($user['name']) : ?>
           <div>
             <?= $user['name']; ?>
           </div>
-        <?php } ?>
+        <?php endif; ?>
       </div>
     </div>
     <div class="gray mt5 text-sm">
       <?= $user['about']; ?>
     </div>
-    <?php if (!empty($post['post_id'])) { ?>
+    <?php if (!empty($post['post_id'])) : ?>
       <div class="gray-600 mt5">
         <?= __('post'); ?>:
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
         </a>
       </div>
-    <?php } ?>
-    <?php if ($user['website']) { ?>
+    <?php endif; ?>
+    <?php if ($user['website']) : ?>
       <div class="gray-600 mt5">
         <?= __('website'); ?>:
         <a rel="noopener nofollow ugc" href="<?= $user['website']; ?>">
           <?= $user['website']; ?>
         </a>
       </div>
-    <?php } ?>
+    <?php endif; ?>
     <div class="br-bottom mt10 mb5"></div>
     <div class="mt50  lowercase text-sm">
-      <?php if ($user['up_count'] > 0) { ?>
+      <?php if ($user['up_count'] > 0) : ?>
         <i class="up-id bi-heart middle red mr5"></i>
         <span class="text-sm mr15"><?= $user['up_count']; ?></span>
-      <?php } ?>
-      <?php if ($user['hits_count'] > 0) { ?>
+      <?php endif; ?>
+      <?php if ($user['hits_count'] > 0) : ?>
         <i class="bi-eye middle mr5 ml5"></i>
         <span class="text-sm mr15"> <?= $user['hits_count']; ?></span>
-      <?php } ?>
+      <?php endif; ?>
       <i title="<?= __('medal.registration'); ?>" class="bi-gift right mr5 ml5 sky"></i>
-      <?php if ($user['id'] < 50) { ?>
+      <?php if ($user['id'] < 50) : ?>
         <i title="<?= __('first.days'); ?>" class="bi-award right mr5 ml5 green"></i>
-      <?php } ?>
-      <?php foreach ($badges as $badge) { ?>
+      <?php endif; ?>
+      <?php foreach ($badges as $badge) : ?>
         <span class="ml15"><?= $badge['badge_icon']; ?></span>
-      <?php } ?>
+      <?php endforeach; ?>
     </div>
 
   </div>

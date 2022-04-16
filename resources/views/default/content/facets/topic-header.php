@@ -5,11 +5,11 @@
   <div class="flex-auto">
     <h1 class="text-2xl">
       <?= $topic['facet_seo_title']; ?>
-      <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == $user['id']) { ?>
+      <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == $user['id']) : ?>
         <a class="right gray-600" href="<?= getUrlByName('content.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
           <i class="bi-pencil"></i>
         </a>
-      <?php } ?>
+      <?php endif; ?>
     </h1>
     <div class="text-sm gray-600"><?= $topic['facet_short_description']; ?></div>
 

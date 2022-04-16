@@ -12,9 +12,9 @@
 
     <fieldset>
       <?= Html::sumbit(__('reset')); ?>
-      <?php if (Config::get('general.invite') == false) { ?>
+      <?php if (Config::get('general.invite') == false) : ?>
         <span class="mr5 ml15 text-sm"><a href="<?= getUrlByName('register'); ?>"><?= __('registration'); ?></a></span>
-      <?php } ?>
+      <?php endif; ?>
       <span class="mr5 ml15 text-sm"><a href="<?= getUrlByName('login'); ?>"><?= __('sign.in'); ?></a></span>
     </fieldset>
   </form>

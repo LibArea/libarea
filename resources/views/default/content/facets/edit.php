@@ -56,15 +56,15 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           <div id="messages"></div>
         </div>
       </div>
-      <?php if ($fs['facet_type'] == 'blog') { ?>
+      <?php if ($fs['facet_type'] == 'blog') : ?>
         <div class="file-upload mb20" id="file-drag">
           <div class="flex">
-            <?php if ($fs['facet_cover_art']) { ?>
+            <?php if ($fs['facet_cover_art']) : ?>
               <div class="mr20">
                 <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="w160 h94 br-gray">
                 <input type="hidden" name="cover" value="<?= $fs['facet_cover_art']; ?>">
               </div>
-            <?php } ?>
+            <?php endif; ?>
             <div id="start">
               <input id="file-upload" type="file" name="cover" accept="image/*" />
               <div id="notimage" class="none">Please select an image</div>
@@ -74,7 +74,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
             <div id="messages"></div>
           </div>
         </div>
-      <?php } ?>
+      <?php endif; ?>
       <div class="mb20">
         <?= Html::sumbit(__('download')); ?>
       </div>
@@ -97,7 +97,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
         <div class="help">3 - 32 <?= __('characters'); ?> (a-z-0-9)</div>
       </fieldset>
 
-      <?php if ($fs['facet_type'] != 'blog' && UserData::checkAdmin()) { ?>
+      <?php if ($fs['facet_type'] != 'blog' && UserData::checkAdmin()) : ?>
 
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
@@ -119,31 +119,31 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           'red'           => 'red'
         ]); ?>
 
-      <?php } ?>
+      <?php endif; ?>
 
-      <?php if (!empty($data['high_arr'])) { ?>
+      <?php if (!empty($data['high_arr'])) : ?>
         <div class="box">
           <h3 class="uppercase-box"><?= __('parents'); ?></h3>
-          <?php foreach ($data['high_arr'] as $high) { ?>
+          <?php foreach ($data['high_arr'] as $high) : ?>
             <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
               <?= Html::image($high['facet_img'], $high['facet_title'], 'img-base', 'logo', 'max'); ?>
               <?= $high['facet_title']; ?>
             </a>
-          <?php } ?>
+          <?php endforeach; ?>
         </div>
-      <?php } ?>
+      <?php endif; ?>
 
-      <?php if (!empty($data['low_arr'])) { ?>
+      <?php if (!empty($data['low_arr'])) : ?>
         <div class="box">
           <h3 class="uppercase-box"><?= __('children'); ?></h3>
-          <?php foreach ($data['low_arr'] as $sub) { ?>
+          <?php foreach ($data['low_arr'] as $sub) : ?>
             <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
               <?= Html::image($sub['facet_img'], $sub['facet_title'], 'img-base', 'logo', 'max'); ?>
               <?= $sub['facet_title']; ?>
             </a>
-          <?php } ?>
+          <?php endforeach; ?>
         </div>
-      <?php } ?>
+      <?php endif; ?>
 
       <fieldset>
         <label for="facet_description"><?= __('meta.description'); ?><sup class="red">*</sup></label>
@@ -162,7 +162,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
         <textarea class="add max-w780 block" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
         <div class="mb20 help">Markdown, > 14 <?= __('characters'); ?></div>
 
-        <?php if ($fs['facet_type'] != 'blog') { ?>
+        <?php if ($fs['facet_type'] != 'blog') : ?>
           <?= Tpl::insert('/_block/form/select/related-posts', [
             'data'          => $data,
             'action'        => 'edit',
@@ -181,20 +181,20 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           ]); ?>
       </fieldset>
 
-      <?php if (!empty($data['high_matching'])) { ?>
+      <?php if (!empty($data['high_matching'])) : ?>
         <div class="box max-w780">
           <h3 class="uppercase-box"><?= __('bound.parents'); ?></h3>
-          <?php foreach ($data['high_matching'] as $low_mat) { ?>
+          <?php foreach ($data['high_matching'] as $low_mat) : ?>
             <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
               <?= Html::image($low_mat['facet_img'], $low_mat['facet_title'], 'img-base', 'logo', 'max'); ?>
               <?= $low_mat['facet_title']; ?>
             </a>
-          <?php } ?>
+          <?php endforeach; ?>
         </div>
-      <?php } ?>
-    <?php } ?>
+      <?php endif; ?>
+    <?php endif; ?>
 
-    <?php if (UserData::checkAdmin()) { ?>
+    <?php if (UserData::checkAdmin()) : ?>
       <?= Tpl::insert('/_block/form/select/content-tl', [
         'user' => $user,
         'data' => $fs['facet_tl'],
@@ -207,8 +207,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
         'title'   => __('author'),
         'help'    => __('necessarily'),
       ]); ?>
-
-    <?php } ?>
+    <?php endif; ?>
     <fieldset>
       <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">
       <?= Html::sumbit(__('edit')); ?>

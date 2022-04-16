@@ -12,15 +12,15 @@ $form->html_form($user['trust_level'], Config::get('form/auth.login'));
 
     <fieldset>
       <?= Html::sumbit(__('sign.in')); ?>
-      <?php if (Config::get('general.invite') == false) { ?>
+      <?php if (Config::get('general.invite') == false) : ?>
         <a class="ml20 text-sm" href="<?= getUrlByName('register'); ?>"><?= __('registration'); ?></a>
-      <?php } ?>
+      <?php endif; ?>
       <a class="ml20 text-sm" href="<?= getUrlByName('recover'); ?>"><?= __('forgot.password'); ?>?</a>
     </fieldset>
   </form>
-  <?php if (Config::get('general.invite') == 1) { ?>
+  <?php if (Config::get('general.invite') == 1) : ?>
     <?= __('invate.text'); ?>
-  <?php } ?>
+  <?php endif; ?>
   <p><?= __('login.use.condition'); ?>.</p>
   <p><?= __('login.info'); ?></p>
 </main>
