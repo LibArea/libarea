@@ -23,7 +23,7 @@ class Search
     public function index()
     {
         $pageNumber = Tpl::pageNumber();
-        $query  = Request::getGet('q');
+        $query  = Request::getGet('query');
         $type   = Request::getGet('type');
         $type   = $type ?? 'post';
 
@@ -133,8 +133,8 @@ class Search
 
     public function api()
     {   
-        $arr    = Request::getJsonBodyList();
-        $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $arr['q']);
+        $query  = Request::getPost('query');
+        $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $query);
 
         $topics = SearchModel::getSearchTags($search, 'topic', 3);
         $posts  = SearchModel::getSearch(1, 5, $search, 'post');

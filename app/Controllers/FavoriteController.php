@@ -18,24 +18,21 @@ class FavoriteController extends MainController
 
     public function index()
     {
-        $arr    = Request::getJsonBodyList();
+        $content_id = Request::getPostInt('content_id');
+        $type       = Request::getPost('type');
 
         $allowed = ['post', 'website', 'answer'];
-        if (!in_array($arr['type'], $allowed)) {
+        if (!in_array($type, $allowed)) {
             return false;
         }
 
-        if (!filter_var($id = $arr['content_id'], FILTER_VALIDATE_INT)) {
-            return false;
-        }
-
-        self::redirectItem($id, $arr['type'], $this->user);
+        self::redirectItem($content_id, $type, $this->user);
 
         FavoriteModel::setFavorite(
             [
-                'tid'           => $id,
+                'tid'           => $content_id,
                 'user_id'       => $this->user['id'],
-                'action_type'   => $arr['type'],
+                'action_type'   => $type,
             ]
         );
 

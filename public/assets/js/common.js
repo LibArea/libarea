@@ -1,3 +1,4 @@
+let token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 (function () {
   'use strict';
 
@@ -214,11 +215,12 @@ if (find) {
 }
 
 function fetch_search() {
-  let val = document.getElementById("find").value;
-  if (val.length < 2) return;
+   let query = document.getElementById("find").value;
+   if (query.length < 2) return;
     fetch("/search", {
       method: "POST",
-      body: JSON.stringify({ q: val })
+      headers: { 'Content-Type':'application/x-www-form-urlencoded'},
+      body:  "query=" + query  + "&_token=" + token,
     })
     .then(
       response => {

@@ -21,7 +21,7 @@ $facet  = $data['facet'] ?? false; ?>
       <a class="mr20 black text-xs" href="/web">
         <i class="bi-link-45deg mr5"></i> <?= __('catalog'); ?>
       </a>
-      <a class="mr20 black text-xs" href="/search">
+      <a class="mr20 black text-xs" href="/search/go">
         <i class="bi-search mr5"></i> <?= __('search'); ?>
       </a>
     </div>

@@ -195,11 +195,7 @@ class PostController extends MainController
     // Размещение своего поста у себя в профиле
     public function postProfile()
     {
-        $arr    = Request::getJsonBodyList();
-        if (!filter_var($id = $arr['post_id'], FILTER_VALIDATE_INT)) {
-            return false;
-        }
-        
+        $id     = Request::getPostInt('post_id');
         $post   = PostModel::getPost($id, 'id', $this->user);
 
         // Access check

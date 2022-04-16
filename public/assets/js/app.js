@@ -22,7 +22,7 @@ document.querySelectorAll(".focus-id")
     let content_type = el.dataset.type;
     fetch("/focus", {
       method: "POST",
-      body: "content_id=" + content_id + "&type=" + content_type,
+      body: "content_id=" + content_id + "&type=" + content_type + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -41,7 +41,7 @@ document.querySelectorAll(".up-id")
     let ind = el.dataset.ind;
     fetch("/votes", {
       method: "POST",
-      body: "content_id=" + content_id + "&type=" + content_type,
+      body: "content_id=" + content_id + "&type=" + content_type + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -59,11 +59,9 @@ document.querySelectorAll(".up-id")
 document.querySelectorAll(".add-favorite")
   .forEach(el => el.addEventListener("click", function (e) {
     fetch("/favorite", {
-      method: "POST",
-      body: JSON.stringify({
-        content_id: el.dataset.id,
-        type: el.dataset.type
-      })
+      method: "POST",  
+      headers: { 'Content-Type':'application/x-www-form-urlencoded'},
+      body:  "content_id=" + el.dataset.id  + "&type=" + el.dataset.type + "&_token=" + token,  
     })
     .then(response => response.text())
     .then( text => { 
@@ -81,9 +79,8 @@ document.querySelectorAll(".add-profile")
   .forEach(el => el.addEventListener("click", function (e) {
     fetch("/post/profile", {
       method: "POST",
-      body: JSON.stringify({
-        post_id: el.dataset.post
-      })
+      headers: { 'Content-Type':'application/x-www-form-urlencoded'},
+      body:  "post_id=" + el.dataset.post + "&_token=" + token, 
     })
     .then( (response) => { 
        location.reload();
@@ -117,7 +114,7 @@ document.querySelectorAll(".del-folder-content")
     let tid = el.dataset.tid;
     fetch("/folder/content/del", {
       method: "POST",
-      body: "id=" + id  + "&type=" + type + "&tid=" + tid,
+      body: "id=" + id  + "&type=" + type + "&tid=" + tid + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -134,7 +131,7 @@ document.querySelectorAll(".del-folder")
     let type = el.dataset.type;
     fetch("/folder/del", {
       method: "POST",
-      body: "id=" + id  + "&type=" + type,
+      body: "id=" + id  + "&type=" + type + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -150,7 +147,7 @@ document.querySelectorAll(".post-recommend")
     let post_id = el.dataset.id;
     fetch("/post/recommend", {
       method: "POST",
-      body: "post_id=" + post_id,
+      body: "post_id=" + post_id + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -167,7 +164,7 @@ document.querySelectorAll(".type-action")
     let type = el.dataset.type;
     fetch("/status/action", {
       method: "POST",
-      body: "content_id=" + content_id + "&type=" + type,
+      body: "content_id=" + content_id + "&type=" + type + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {

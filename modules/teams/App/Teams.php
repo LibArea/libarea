@@ -183,12 +183,8 @@ class Teams
     // Удаление и восстановление команды
     public function action()
     {
-        $arr  = Request::getJsonBodyList();
-        if (!filter_var($id = $arr['id'], FILTER_VALIDATE_INT)) {
-            return;
-        }
-        
-        $team = TeamModel::get($id);
+        $id     = Request::getPostInt('id');
+        $team   = TeamModel::get($id);
         if ($team['user_id'] != $this->user['id']) {
             return;
         }

@@ -9,14 +9,14 @@ class SendEmail
     // https://github.com/JacksonJeans/php-mail
     public static function mailText($uid, $type, array $variables = [])
     {
+        if (is_null($uid)) {
+            return false;
+        }
+
         $u_data = UserData::get();
         $user   = UserModel::getUser($uid, 'id');
 
         require_once __DIR__ . '/../Language/mail/' . $u_data['lang'] . '.php';
-
-        if (is_null($uid)) {
-            return false;
-        }
 
         if ($type == 'appealed') {
             $setting = SettingModel::getNotifications($uid);

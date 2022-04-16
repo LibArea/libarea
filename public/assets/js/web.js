@@ -4,10 +4,8 @@ document.querySelectorAll(".actreply")
     let reply = document.querySelector('#reply_addentry' + el.dataset.id);  
     fetch("/reply/" + el.dataset.type, {
       method: "POST",
-      body: JSON.stringify({
-        id: el.dataset.id,
-        item_id: el.dataset.item_id
-      })
+      body: "id=" + el.dataset.id  + "&item_id=" + el.dataset.item_id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .then(response => response.text())
     .then( text => { 

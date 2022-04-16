@@ -9,9 +9,10 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController');
         Route::get('/team/search/user')->module('teams', 'App\Search@select');
+        Route::get('/reply/editform')->module('catalog', 'App\Reply@index');
         // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
-        Route::get('/votes')->controller('VotesController'); 
+         
             Route::getProtect();
                 Route::get('/invitation/create')->controller('User\InvitationsController@create')->name('invit.create');
                 Route::get('/messages/send')->controller('MessagesController@send')->name('messages.send');
@@ -118,6 +119,8 @@ Route::getType('post');
     Route::get('/reply/addform')->module('catalog', 'App\Reply@addForma');
 Route::endType();
   
+Route::get('/search/go')->module('search', 'App\Search')->name('search');  
+  
 Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+', 'id' => '[0-9]+'])->name('topic.followers');  
   
 // Other pages without authorization
@@ -161,8 +164,6 @@ Route::get('/web/website/{slug}')->module('catalog', 'App\Detailed', ['feed'])->
 Route::get('/web/dir/{grouping}/{slug}')->module('catalog', 'App\Catalog', ['web.top', 'web'])->name('web.dir');
 Route::get('/web/dir/{grouping}/{slug}/all')->module('catalog', 'App\Catalog', ['web.all', 'web'])->name('web.dir.all');
 Route::get('/web/dir/{grouping}/{slug}/top')->module('catalog', 'App\Catalog', ['web.top', 'web'])->name('web.dir.top');
-
-Route::get('/search/go')->module('search', 'App\Search')->name('search');
 
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
 

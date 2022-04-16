@@ -24,8 +24,8 @@ $facet  = $data['facet'] ?? false; ?>
 
         <div class="ml45 mb-ml10 relative w-100">
           <form class="form mb-none" method="get" action="<?= getUrlByName('search'); ?>">
-            <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('to.find'); ?>" class="search">
             <input name="type" value="post" type="hidden">
+            <input type="text" name="query" autocomplete="off" id="find" placeholder="<?= __('to.find'); ?>" class="search">
           </form>
           <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
         </div>
