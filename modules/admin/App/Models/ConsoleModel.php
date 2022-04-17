@@ -4,7 +4,7 @@ namespace Modules\Admin\App\Models;
 
 use DB;
 
-class СonsoleModel extends \Hleb\Scheme\App\Models\MainModel
+class ConsoleModel extends \Hleb\Scheme\App\Models\MainModel
 {
     public static function recalculateTopic()
     {
