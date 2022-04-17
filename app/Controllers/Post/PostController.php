@@ -114,8 +114,6 @@ class PostController extends MainController
             'url'       => getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
         ];
 
-        $view = $type == 'post' ? '/post/view' : '/page/view';
-
         if ($type == 'post') {
             return Tpl::agRender(
                 '/post/view',

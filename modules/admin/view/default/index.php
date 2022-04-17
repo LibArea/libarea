@@ -22,7 +22,7 @@
   <?php foreach ($data['logs'] as $log) : ?>
     <div class="gray">
       <span class="gray-600 text-sm"><?= $log['count_results']; ?></span>
-      <a target="_blank" rel="noreferrer" href="/search?q=<?= $log['request']; ?>&type=<?= $log['action_type']; ?>">
+      <a target="_blank" rel="noreferrer" href="/search/go?q=<?= $log['request']; ?>&type=<?= $log['action_type']; ?>">
         <?= $log['request']; ?>
       </a>
       <span class="gray-600 lowercase">

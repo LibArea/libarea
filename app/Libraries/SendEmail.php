@@ -20,7 +20,8 @@ class SendEmail
 
         if ($type == 'appealed') {
             $setting = SettingModel::getNotifications($uid);
-            if ($setting['setting_email_appealed'] == 0) {
+            $appealed = $setting['setting_email_appealed'] ?? 0;
+            if ($appealed == 0) {
                 return true;
             }
         }

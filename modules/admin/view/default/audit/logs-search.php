@@ -25,7 +25,7 @@
       <?php foreach ($data['logs'] as $log) : ?> 
         <tr>
           <td class="gray-600">
-            <a target="_blank" rel="noreferrer" href="/search?q=<?= $log['request']; ?>&type=<?= $log['action_type']; ?>">
+            <a target="_blank" rel="noreferrer" href="/search/go?q=<?= $log['request']; ?>&type=<?= $log['action_type']; ?>">
               <?= $log['request']; ?>
             </a>
           </td>

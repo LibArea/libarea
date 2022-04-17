@@ -158,7 +158,7 @@ class Edit
 
         if (!empty($topics)) {
             $arr = [];
-            foreach ($topics as $ket => $row) {
+            foreach ($topics as $row) {
                 $arr[] = $row;
             }
             FacetModel::addItemFacets($arr, $item['item_id']);
