@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="box w-100">
+<div class="box w-100 bg-white">
 
   <h3 class="uppercase-box"><?= __('users'); ?></h3>
   <?php foreach ($data['last_visit'] as $user) : ?>
@@ -54,7 +54,7 @@
 </main>
 
 <aside>
-  <div class="box">
+  <div class="box bg-white">
     <h3 class="uppercase-box"><?= __('useful.resources'); ?></h3>
     <p><i class="bi-link-45deg mr5"></i> <a href="https://libarea.ru">LibArea.ru</a></p>
     <p><i class="bi-github mr5"></i> <a href="https://discord.gg/dw47aNx5nU">Discord</a></p>
