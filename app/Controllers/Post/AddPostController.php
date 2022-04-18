@@ -219,6 +219,7 @@ class AddPostController extends MainController
                     'item_is_soft'      => 0,
                     'item_is_github'    => 0,
                     'item_votes'        => 0,
+                    'item_close_replies'=> 0,
                     'item_count'        => 1,
                 ]
             );

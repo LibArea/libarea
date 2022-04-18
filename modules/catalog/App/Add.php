@@ -22,7 +22,7 @@ class Add
     {
         // Access rights by the trust level of the participant
         // Права доступа по уровню доверия участника
-        (new \Modules\Catalog\App\Сhecks())->limit();
+        (new \Modules\Catalog\App\Checks())->limit();
 
         // Plugin for selecting facets
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
@@ -51,21 +51,21 @@ class Add
 
         // Access rights by the trust level of the participant
         // Права доступа по уровню доверия участника
-        (new \Modules\Catalog\App\Сhecks())->limit();
+        (new \Modules\Catalog\App\Checks())->limit();
 
         // Check if the domain exists in the system  
         // Проверим наличие домена в системе
-        if ($domain = (new \Modules\Catalog\App\Сhecks())->getDomain(Request::getPost('url'))) {
+        if ($domain = (new \Modules\Catalog\App\Checks())->getDomain(Request::getPost('url'))) {
             return json_encode(['error' => 'error', 'text' => Translate::get('site.replay')]);
         }
 
         // Get a first level domain       
         // Получим данные домена первого уровня
-        $basic_host =  (new \Modules\Catalog\App\Сhecks())->domain(Request::getPost('url'));
+        $basic_host =  (new \Modules\Catalog\App\Checks())->domain(Request::getPost('url'));
 
         // Check the length of the site name
         // Проверим длину названия сайта
-        if (!$title = (new \Modules\Catalog\App\Сhecks())->length(Request::getPost('title'), 14, 250)) {
+        if (!$title = (new \Modules\Catalog\App\Checks())->length(Request::getPost('title'), 14, 250)) {
             $msg = sprintf(Translate::get('string.length'), '«' . Translate::get('title') . '»', 14, 250);
             return json_encode(['error' => 'error', 'text' => $msg]);
         }
