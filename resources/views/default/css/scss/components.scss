@@ -226,6 +226,30 @@ details[open] > summary {
   margin-bottom: 15px;
 }
 
+.box-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.search-input {
+  width: 300px;
+  height: 50px;
+  padding-left: 15px;
+  border-radius: 3px;
+}
+
+.search-button-icon {
+  border: none;
+  height: 50px;
+  width: 50px;
+  color: #4f5b66;
+  font-size: 18px;
+  border-radius: 3px;
+}
+
 .body-bg-fon .box-flex,
 .body-bg-fon .box {
   border: 1px solid var(--gray-300);
