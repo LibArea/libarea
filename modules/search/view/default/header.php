@@ -1,6 +1,10 @@
 <?php
+
+use Hleb\Constructor\Handlers\Request;
+
 Request::getHead()->addStyles('/assets/css/style.css?12');
 $uri = $data['type'] == 'post' ? 'post' : 'website';
+$q = $data['q'];
 ?>
 
 <?= Tpl::insert('/meta', ['meta' => $meta]); ?>
@@ -19,11 +23,11 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
             <?= __('to.the.website'); ?>
           </a>
 
-          <a class="tabs<?php if ($uri == 'post') : ?> active<?php endif; ?>" href="<?= getUrlByName('search'); ?>">
+          <a class="tabs<?php if ($uri == 'post') : ?> active<?php endif; ?>" href="<?= getUrlByName('search.go'); ?>?q=<?= $q; ?>&cat=post">
             <?= __('posts'); ?>
           </a>
 
-          <a class="tabs<?php if ($uri == 'website') : ?> active<?php endif; ?>" href="<?= getUrlByName('search'); ?>?type=website">
+          <a class="tabs<?php if ($uri == 'website') : ?> active<?php endif; ?>" href="<?= getUrlByName('search.go'); ?>?q=<?= $q; ?>&cat=website">
             <?= __('websites'); ?>
           </a>
 
@@ -52,9 +56,10 @@ $uri = $data['type'] == 'post' ? 'post' : 'website';
             <?php endif; ?>
           </div>
         </div>
-        <form method="get" action="<?= getUrlByName('search'); ?>">
-          <input type="text" name="q" placeholder="<?= __('to.find'); ?>" class="page-search__input">
-          <input name="type" value="<?= $uri; ?>" type="hidden">
+        <form method="get" action="<?= getUrlByName('search.go'); ?>">
+          <input type="text" name="q" value="<?= $q; ?>" placeholder="<?= __('to.find'); ?>" class="page-search__input">
+          <input name="cat" value="<?= $uri; ?>" type="hidden">
+          <?= csrf_field() ?>
         </form>
       </div>
     </div>

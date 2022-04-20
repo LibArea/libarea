@@ -4,7 +4,7 @@ namespace Modules\Teams\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Teams\App\Models\TeamModel;
-use UserData, Meta, Html, Validation, Translate;
+use UserData, Meta, Html, Validation;
 
 class Teams
 {
@@ -121,8 +121,8 @@ class Teams
         $name = Request::getPost('name');
         $content = Request::getPost('content');
 
-        Validation::Length($name, Translate::get('title'), '6', '250', getUrlByName('team.add'));
-        Validation::Length($content, Translate::get('the post'), '6', '5000', getUrlByName('team.add'));
+        Validation::Length($name, __('title'), '6', '250', getUrlByName('team.add'));
+        Validation::Length($content, __('the post'), '6', '5000', getUrlByName('team.add'));
 
         TeamModel::create(
             [
@@ -149,8 +149,8 @@ class Teams
         $name = Request::getPost('name');
         $content = Request::getPost('content');
 
-        Validation::Length($name, Translate::get('title'), '6', '250', getUrlByName('team.add'));
-        Validation::Length($content, Translate::get('the post'), '6', '5000', getUrlByName('team.add'));
+        Validation::Length($name, __('title'), '6', '250', getUrlByName('team.add'));
+        Validation::Length($content, __('the post'), '6', '5000', getUrlByName('team.add'));
 
         TeamModel::edit(
             [

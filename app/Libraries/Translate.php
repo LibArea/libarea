@@ -1,49 +1,87 @@
 <?php
 
+// localization class
 class Translate
 {
-    protected static $lang = "ru";
+    protected static $localesDir =  HLEB_GLOBAL_DIRECTORY . '/app/Language/';
 
-    private static $langData = [];
+    protected static $defaultLang = 'ru';
 
-    public static function setLang(string $type)
-    {
-        self::$lang = $type;
-    }
+    protected static $loadedLocales = [];
 
+    protected static $currentLang = '';
+
+    protected static $replacementPattern = ['{', '}'];
+
+    // Get the language used
     public static function getLang()
     {
-        return self::$lang;
+        return self::$defaultLang;
     }
 
-    public static function get(string $name, $lang = null)
+    // Returns the translation of a specific key from the current language locale.
+    // Возвращает перевод определенного ключа из текущей языковой локали.
+    public static function get($localeKey, $parameters = [])
     {
-        if (empty($lang)) $lang = self::$lang;
+       // static::checkInitialization();
+        static::checkLoaded();
 
-        $data = self::load($lang);
+        if (is_string($localeKey) && !empty(static::$loadedLocales[static::$currentLang][$localeKey])) {
+            $text = static::$loadedLocales[static::$currentLang][$localeKey];
 
-        if (!empty($data[$lang][$name])) {
-            return $data[$lang][$name];
-        };
-        return $name;
+            if (!empty($parameters) && is_array($parameters)) {
+                foreach ($parameters as $parameter => $replacement) {
+                    $text = str_replace(static::$replacementPattern[0] . $parameter . static::$replacementPattern[1], $replacement, $text);
+                }
+            }
+
+            return $text;
+        }
+
+        return null;
     }
 
-    // Подгружает языковые файлы
-    public static function load(string $lang)
+    // Set by default, and after authorization of the participant
+    public static function setLang($language)
     {
-        if (isset(self::$langData[$lang])) {
-            return self::$langData;
-        }
+       // static::checkInitialization();
+        static::$currentLang = (!empty($language) && is_string($language)) ? $language : static::getClientLang();
+        static::checkLoaded();
+    }
 
-        if (defined('HLEB_OPTIONAL_MODULE_SELECTION') && HLEB_OPTIONAL_MODULE_SELECTION) {
-            $data1 = require_once __DIR__ . '/../Language/' . $lang . '.php';
-            $data2 = require_once HLEB_GLOBAL_DIRECTORY . '/modules/' . HLEB_MODULE_NAME . '/App/Language/' . $lang . '.php';
-            $data = array_merge($data1, $data2);
-        } else {
-            $data = require_once __DIR__ . '/../Language/' . $lang . '.php';
-        }
+    // Define the user agent
+    protected static function getClientLang()
+    {
+        return !empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 5) : null;
+    }
 
-        self::$langData[$lang] = $data;
-        return self::$langData;
+    // Next, checking and loading...
+    protected static function checkLoaded()
+    {
+        if (empty(static::$loadedLocales[static::$currentLang])) {
+            static::checkLang();
+            static::$loadedLocales[static::$currentLang] = require(static::$localesDir . '/' . static::$currentLang . '.php');
+        }
+    }
+
+    protected static function checkDir()
+    {
+        if (!is_dir(static::$localesDir)) {
+            throw new \Exception('Directory "' . static::$localesDir . '" not found!');
+        }
+    }
+
+    protected static function checkLocale()
+    {
+        if (!file_exists(static::$localesDir . '/' . static::$defaultLang . '.php')) {
+            throw new \Exception('Default language locale not found!');
+        }
+    }
+
+    protected static function checkLang()
+    {
+        if (!file_exists(static::$localesDir . '/' . static::$currentLang . '.php')) {
+            static::$currentLang = static::$defaultLang;
+        }
     }
 }

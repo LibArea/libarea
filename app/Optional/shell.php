@@ -11,11 +11,11 @@ declare(strict_types=1);
 if (! function_exists('__')) 
 {
     // @param  string|null  $key
-    function __($key = null) {
+    function __(string $key = null, array $params = []) {
         if (is_null($key)) {
             return $key;
         }
 
-        return Translate::get($key);
+        return Translate::get($key, $params);
     }
 }

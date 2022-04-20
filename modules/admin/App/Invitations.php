@@ -3,7 +3,7 @@
 namespace Modules\Admin\App;
 
 use App\Models\User\{InvitationModel, UserModel};
-use Translate, Meta;
+use Meta;
 
 class Invitations
 {
@@ -21,7 +21,7 @@ class Invitations
         return view(
             '/view/default/invitation/invitations',
             [
-                'meta'  => Meta::get(Translate::get('invites')),
+                'meta'  => Meta::get(__('invites')),
                 'data'  => [
                     'type'          => 'invitations',
                     'sheet'         => 'invitations',

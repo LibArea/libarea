@@ -55,9 +55,10 @@ Request::getHead()->addStyles('/assets/css/catalog.css?12');
             <?php endif; ?>
           </div>
         </div>
-        <form method="get" action="<?= getUrlByName('search'); ?>">
+        <form method="get" action="<?= getUrlByName('search.go'); ?>">
           <input type="text" name="q" placeholder="<?= __('to.find'); ?>" class="page-search__input">
-          <input name="type" value="website" type="hidden">
+          <input name="cat" value="website" type="hidden">
+          <?= csrf_field() ?>
         </form>
       </div>
     </div>

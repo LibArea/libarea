@@ -1,33 +1,21 @@
 <?php foreach ($result as  $gist) : ?>
   <div class="mb20 gray max-w780">
-    <?php if ($type == 'post') : ?>
-      <a class="text-xl" href="<?= getUrlByName('post', ['id' => $gist['post_id'], 'slug' => $gist['post_slug']]); ?>">
-    <?php else : ?>
-      <a class="text-xl" target="_blank" rel="nofollow noreferrer" href="<?= $gist['item_url']; ?>">
-    <?php endif; ?>
+    <a class="text-xl" target="_blank" rel="nofollow noreferrer" href="<?= $gist['url']; ?>">
       <?= $gist['title']; ?>
     </a>
-    <?= Html::facets($gist['facet_list'], 'topic', 'topic', 'mr15 tags'); ?>
-    <div><?= $gist['content']; ?>...</div>
-    <div class="text-sm mt5">
-      <?php if ($type == 'post') : ?>
-        <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $gist['login']]); ?>">
-          <?= html::image($gist['avatar'], $gist['login'], 'ava-sm', 'avatar', 'max'); ?>
-          <?= $gist['login']; ?>
-        </a>
-      <?php else : ?>
-        <a class="green" href="<?= $gist['item_url']; ?>">
-          <?= Html::websiteImage($gist['item_domain'], 'favicon', $gist['item_domain'], 'favicons mr5'); ?>
-          <?= $gist['item_domain']; ?>
-        </a>
-        <a class="gray-600 lowercase ml15" href="<?= getUrlByName('web.website', ['slug' => $gist['item_domain']]); ?>">
-          <?= __('more.detailed'); ?>
-        </a>
-      <?php endif; ?>
-      <div class="right gray-600">
-        <i class="bi-heart mr5"></i> <?= $gist['votes']; ?>
-        <i class="bi-eye mr5 ml15"></i> <?= $gist['count']; ?>
-      </div>
+    <!--?= Html::facets($gist['facet_list'], 'topic', 'topic', 'mr15 tags'); ?-->
+    <div class="text-sm mb5">
+      <span class="green">
+        <?= Html::websiteImage($gist['domain'], 'favicon', $gist['domain'], 'favicons mr5'); ?>
+        <?= $gist['domain']; ?>
+      </span>
+      <a class="gray-600 lowercase ml15" href="<?= getUrlByName('web.website', ['slug' => $gist['domain']]); ?>">
+        <?= __('more.detailed'); ?>
+      </a>
+      <span class="gray-600">
+        ~ <?= $gist['_score']; ?>
+      </span>
     </div>
+    <div><?= $gist['content']; ?>...</div>
   </div>
 <?php endforeach; ?>

@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, ReplyModel};
 use App\Models\{ActionModel, NotificationModel};
-use Translate, UserData, Html, Validation, Content;
+use UserData, Html, Validation, Content;
 
 class Reply
 {
@@ -49,7 +49,7 @@ class Reply
         Html::pageRedirection($item, '/');
 
         $url = getUrlByName('web.website', ['slug' => $item['item_domain']]);
-        Validation::Length($content, Translate::get('content'), '6', '555', $url);
+        Validation::Length($content, __('content'), '6', '555', $url);
 
         // Access verification 
         $reply = ReplyModel::getId($id);
@@ -85,7 +85,7 @@ class Reply
         Html::pageError404($item);
 
         $url = getUrlByName('web.website', ['slug' => $item['item_domain']]);
-        Validation::Length($content, Translate::get('content'), '6', '555', $url);
+        Validation::Length($content, __('content'), '6', '555', $url);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день

@@ -41,11 +41,11 @@ class AddPostController extends MainController
         $topic      = FacetModel::getFacet($topic_id, 'id', 'topic');
 
         $puth = $type == 'page' ? '/page/add' : '/post/add';
-
+         
         return Tpl::agRender(
             $puth,
             [
-                'meta'      => Meta::get(sprintf(Translate::get('add.option'), Translate::get('post'))),
+                'meta'      => Meta::get(Translate::get('add.option', ['name' => Translate::get('post')])),
                 'data'  => [
                     'facets'    => ['topic' => $topic],
                     'blog'      => FacetModel::getFacetsUser($this->user['id'], 'blog'),

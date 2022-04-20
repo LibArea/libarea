@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\UserAreaModel;
-use Config, Translate, UserData, Meta, Tpl;
+use Config, UserData, Meta, Tpl;
 
 class UserArea
 {
@@ -33,7 +33,7 @@ class UserArea
         return view(
             '/view/default/user/user-sites',
             [
-                'meta'  => Meta::get(Translate::get('my.site'), Translate::get('my.site'), $m),
+                'meta'  => Meta::get(__('my.site'), __('my.site'), $m),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'all',
@@ -63,7 +63,7 @@ class UserArea
         return view(
             '/view/default/user/bookmarks',
             [
-                'meta'  => Meta::get(Translate::get('favorites'), Translate::get('favorites')),
+                'meta'  => Meta::get(__('favorites'), __('favorites')),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'cat',

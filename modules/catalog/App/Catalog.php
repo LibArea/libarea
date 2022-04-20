@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, FacetModel, UserAreaModel};
-use Translate, UserData, Breadcrumbs, Meta, Html, Tpl;
+use UserData, Breadcrumbs, Meta, Html, Tpl;
 
 class Catalog
 {
@@ -42,8 +42,8 @@ class Catalog
             'url'   => getUrlByName('web.dir', ['grouping' => 'all', 'slug' => $category['facet_slug']]),
         ];
 
-        $title = sprintf(Translate::get($sheet . '.cat.title'), $category['facet_title']);
-        $description  = sprintf(Translate::get($sheet . '.cat.desc'), $category['facet_title'], $category['facet_description']);
+        $title = __($sheet . '.cat.title', ['name' => $category['facet_title']]);
+        $description  = __($sheet . '.cat.desc', ['name' => $category['facet_title'], 'desc' => $category['facet_description']]);
 
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
@@ -76,7 +76,7 @@ class Catalog
     public static function breadcrumb($tree, $screening)
     {
         $arr = [
-          ['name' => Translate::get('catalog'), 'link' => getUrlByName('web')]
+          ['name' => __('catalog'), 'link' => getUrlByName('web')]
         ];
         
         $result = [];

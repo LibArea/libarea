@@ -43,7 +43,7 @@ class TopicFacetController extends MainController
         if ($sheet == 'facet.recommend') {
             $url    =  getUrlByName('recommend', ['slug' => $facet['facet_slug']]);
             $title  = $facet['facet_seo_title'] . ' — ' .  Translate::get('recommended.posts');
-            $description  = sprintf(Translate::get('recommended.posts.desc'), $facet['facet_seo_title']) . $facet['facet_description'];
+            $description  = Translate::get('recommended.posts.desc', ['name' => $facet['facet_seo_title']]) . $facet['facet_description'];
         }
 
         $m = [

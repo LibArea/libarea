@@ -119,8 +119,9 @@ Route::getType('post');
     Route::get('/reply/addform')->module('catalog', 'App\Reply@addForma');
 Route::endType();
   
-Route::get('/search/go')->module('search', 'App\Search')->name('search');  
-  
+Route::get('/search')->module('search', 'App\Search')->name('search'); 
+Route::get('/search/go')->module('search', 'App\Search@go')->name('search.go');
+ 
 Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+', 'id' => '[0-9]+'])->name('topic.followers');  
   
 // Other pages without authorization

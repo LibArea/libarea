@@ -5,7 +5,7 @@ namespace Modules\Admin\App;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, BadgeModel};
 use Modules\Admin\App\Models\{BanUserModel, UserModel};
-use Validation, Translate, UserData, Meta, Html, Tpl;
+use Validation, UserData, Meta, Html, Tpl;
 
 class Users
 {
@@ -36,7 +36,7 @@ class Users
         return view(
             '/view/default/user/users',
             [
-                'meta'  => Meta::get(Translate::get('users')),
+                'meta'  => Meta::get(__('users')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
@@ -68,7 +68,7 @@ class Users
         return view(
             '/view/default/user/logip',
             [
-                'meta'  => Meta::get(Translate::get('search')),
+                'meta'  => Meta::get(__('search')),
                 'data'  => [
                     'results'   => $results,
                     'option'    => $option,
@@ -103,7 +103,7 @@ class Users
         return view(
             '/view/default/user/edit',
             [
-                'meta'  => Meta::get(Translate::get('edit')),
+                'meta'  => Meta::get(__('edit')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -128,7 +128,7 @@ class Users
         }
 
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
-        Validation::Length($login, Translate::get('login'), '3', '11', $redirect);
+        Validation::Length($login, __('login'), '3', '11', $redirect);
 
         SettingModel::edit(
             [

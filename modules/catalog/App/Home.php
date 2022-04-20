@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
-use Config, Translate, UserData, Meta, Tpl;
+use Config, UserData, Meta, Tpl;
 
 class Home
 {
@@ -30,7 +30,7 @@ class Home
         return view(
             '/view/default/home',
             [
-                'meta'  => Meta::get(Translate::get($sheet . '.home.title'), Translate::get($sheet . '.home.desc'), $m),
+                'meta'  => Meta::get(__($sheet . '.home.title'), __($sheet . '.home.desc'), $m),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'all',

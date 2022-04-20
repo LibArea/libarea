@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
-use Validation, Translate, UserData, Meta, Html;
+use Validation, UserData, Meta, Html;
 
 class Badges
 {
@@ -22,7 +22,7 @@ class Badges
         return view(
             '/view/default/badge/badges',
             [
-                'meta'  => Meta::get(Translate::get('badges')),
+                'meta'  => Meta::get(__('badges')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -39,7 +39,7 @@ class Badges
         return view(
             '/view/default/badge/add',
             [
-                'meta'  => Meta::get(sprintf(Translate::get('add.option'), Translate::get('badges'))),
+                'meta'  => Meta::get(sprintf(__('add.option'), __('badges'))),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,
@@ -59,7 +59,7 @@ class Badges
         return view(
             '/view/default/badge/edit',
             [
-                'meta'  => Meta::get(Translate::get('edit')),
+                'meta'  => Meta::get(__('edit')),
                 'data'  => [
                     'badge' => $badge,
                     'sheet' => $sheet,
@@ -78,9 +78,9 @@ class Badges
         $icon          = $_POST['badge_icon']; // для Markdown
 
         $redirect = getUrlByName('admin.badges');
-        Validation::Length($title, Translate::get('title'), '4', '25', $redirect);
-        Validation::Length($description, Translate::get('description'), '12', '250', $redirect);
-        Validation::Length($icon, Translate::get('icon'), '12', '250', $redirect);
+        Validation::Length($title, __('title'), '4', '25', $redirect);
+        Validation::Length($description, __('description'), '12', '250', $redirect);
+        Validation::Length($icon, __('icon'), '12', '250', $redirect);
 
         BadgeModel::add(
             [
@@ -105,7 +105,7 @@ class Badges
         return view(
             '/view/default/badge/user-add',
             [
-                'meta'  => Meta::get(Translate::get('reward.user')),
+                'meta'  => Meta::get(__('reward.user')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -145,9 +145,9 @@ class Badges
         $description   = Request::getPost('badge_description');
         $icon          = $_POST['badge_icon']; // для Markdown
 
-        Validation::Length($title, Translate::get('title'), '4', '25', $redirect);
-        Validation::Length($description, Translate::get('description'), '12', '250', $redirect);
-        Validation::Length($icon, Translate::get('icon'), '12', '250', $redirect);
+        Validation::Length($title, __('title'), '4', '25', $redirect);
+        Validation::Length($description, __('description'), '12', '250', $redirect);
+        Validation::Length($icon, __('icon'), '12', '250', $redirect);
 
         BadgeModel::edit(
             [

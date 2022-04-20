@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
-use Content, Config, Tpl, Html, Meta, Translate, UserData;
+use Content, Config, Tpl, Html, Meta, UserData;
 
 class PostController extends MainController
 {
@@ -97,6 +97,9 @@ class PostController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/prism/prism.css');
         Request::getResources()->addBottomScript('/assets/js/prism/prism.js');
         Request::getResources()->addBottomScript('/assets/js/zoom/medium-zoom.min.js');
+        
+        Request::getResources()->addBottomStyles('/assets/css/share.css');
+        Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
 
         if ($this->user['id'] > 0 && $content['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
@@ -146,11 +149,11 @@ class PostController extends MainController
             'url'   => getUrlByName('page', ['facet' => $content['post_slug'], 'slug' => $facet['facet_slug']]),
         ];
 
-        $title = $content['post_title'] . ' - ' . Translate::get('page');
+        $title = $content['post_title'] . ' - ' . __('page');
         return Tpl::agRender(
             '/page/view',
             [
-                'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . Translate::get('page') . ')', $m),
+                'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . __('page') . ')', $m),
                 'data'  => [
                     'sheet' => 'page',
                     'type'  => $type,
@@ -246,7 +249,7 @@ class PostController extends MainController
         return Tpl::agRender(
             '/post/link',
             [
-                'meta'  => Meta::get(Translate::get('domain') . ': ' . $domain, Translate::get('domain.desc') . ': ' . $domain, $m),
+                'meta'  => Meta::get(__('domain') . ': ' . $domain, __('domain.desc') . ': ' . $domain, $m),
                 'data'  => [
                     'sheet'         => 'domain',
                     'pagesCount'    => ceil($pagesCount / $this->limit),

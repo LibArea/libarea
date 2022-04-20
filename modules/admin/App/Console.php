@@ -10,15 +10,12 @@ class Console
 {
     public static function index()
     {
-        $choice  = Request::get('choice');
-        $allowed = ['css', 'topic', 'up', 'tl'];
+        $choice  = Request::getPost('type');
+        $allowed = ['css', 'topic', 'up', 'tl', 'indexer'];
         if (!in_array($choice, $allowed)) {
-            redirect('/admin/tools');
+            redirect(getUrlByName('admin.tools'));
         }
-         
         self::$choice();
-
-        redirect('/admin/tools');
     }
     
     public static function topic()
@@ -42,13 +39,20 @@ class Console
     // Если пользователь имеет нулевой уровень доверия (tl) но ему UP >=3, то повышаем до 1
     // If the user has a zero level of trust (tl) but he has UP >=3, then we raise it to 1
     public static function tl()
-    {
+    { 
         $users = ConsoleModel::getTrustLevel(0);
-        foreach ($users as $ind => $row) {
+        foreach ($users as $ind => $row) {  
             if ($row['up_count'] > 2) {
                 ConsoleModel::setTrustLevel($row['id'], 1);
             }
         }
+
+        self::consoleRedirect();
+    }
+
+    public static function indexer()
+    {    
+        (new \Modules\Admin\App\Indexer)->indexerAll();
 
         self::consoleRedirect();
     }
@@ -69,10 +73,9 @@ class Console
     }
 
     public static function consoleRedirect()
-    {
+    { 
         if (PHP_SAPI != 'cli') {
             Html::addMsg('command.executed', 'success');
-            redirect(getUrlByName('admin.tools'));
         }
         return true;
     }

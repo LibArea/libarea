@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\App\Models\{FacetModel, StatsModel};
-use Translate, Meta;
+use Meta;
 
 class Facets
 {
@@ -15,7 +15,7 @@ class Facets
         return view(
             '/view/default/facet/all',
             [
-                'meta'  => Meta::get(Translate::get('facets'), Translate::get('facets')),
+                'meta'  => Meta::get(__('facets'), __('facets')),
                 'data'  => [
                     'count'         => StatsModel::getCount(),
                     'sheet'         => 'all',
@@ -35,7 +35,7 @@ class Facets
         return view(
             '/view/default/facet/type',
             [
-                'meta'  => Meta::get(Translate::get($type), Translate::get('facets')),
+                'meta'  => Meta::get(__($type), __('facets')),
                 'data'  => [
                     'count'     => StatsModel::getCount(),
                     'sheet'     => $type,
@@ -70,7 +70,7 @@ class Facets
         return view(
             '/view/default/facet/type',
             [
-                'meta'  => Meta::get(Translate::get('ban'), Translate::get('ban')),
+                'meta'  => Meta::get(__('ban'), __('ban')),
                 'data'  => [
                     'sheet'     => 'ban.facet',
                     'type'      => $type,

@@ -8,26 +8,22 @@
 ); ?>
 <div class="box bg-white">
   <label><?= __('build'); ?> CSS</label>
-  <form action="./update/css">
-    <?= Html::sumbit(__('build')); ?>
-  </form>
+  <div class="update btn btn-primary" data-type="css"><?= __('build'); ?></div>
   <fieldset>
     <label><?= __('topics'); ?> / <?= __('posts'); ?></label>
-    <form action="./update/topic">
-      <?= Html::sumbit(__('update.data')); ?>
-    </form>
+    <div class="update btn btn-primary" data-type="topic"><?= __('update.data'); ?></div>
   </fieldset>
   <fieldset>
     <label><?= __('like'); ?></label>
-    <form action="./update/up">
-      <?= Html::sumbit(__('update.data')); ?>
-    </form>
+    <div class="update btn btn-primary" data-type="up"><?= __('update.data'); ?></div>
   </fieldset>
   <fieldset>
     <label><?= __('trust.level'); ?></label>
-    <form action="./update/tl">
-      <?= Html::sumbit(__('update.data')); ?>
-    </form>
+    <div class="update btn btn-primary" data-type="tl"><?= __('update.data'); ?></div>
+  </fieldset>
+  <fieldset>
+    <label><?= __('search'); ?></label>
+    <div class="update update-index btn btn-primary" data-type="indexer"><?= __('rebuild.index'); ?></div>
   </fieldset>
   <fieldset class="max-w300">
     <label for="mail"><?= __('Email'); ?></label>
@@ -39,4 +35,11 @@
   </form>
 </div>
 </main>
+<script nonce="<?= $_SERVER['nonce']; ?>">
+document.querySelectorAll(".update-index")
+  .forEach(el => el.addEventListener("click", function (e) {
+      Notiflix.Loading.standard('<?= __('end.window.close'); ?>...');
+}));       
+</script>
+
 <?= includeTemplate('/view/default/footer'); ?>

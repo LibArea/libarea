@@ -70,3 +70,16 @@ document.querySelectorAll(".audit-status")
         location.reload();
       })
   }));
+  
+document.querySelectorAll(".update")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let type = el.dataset.type;
+    fetch("/mod/admin/manual/update", {
+      method: "POST",
+      body: "type=" + type,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+          location.reload();
+      });
+  }));  

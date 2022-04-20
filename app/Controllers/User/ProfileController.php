@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, PostModel, FeedModel, AnswerModel, CommentModel};
-use Config, Translate, Tpl, Meta, Html, UserData;
+use Config, Tpl, Meta, Html, UserData;
 
 class ProfileController extends MainController
 {
@@ -27,7 +27,7 @@ class ProfileController extends MainController
         $profile    = self::profile();
 
         if (!$profile['about']) {
-            $profile['about'] = Translate::get('riddle') . '...';
+            $profile['about'] = __('riddle') . '...';
         }
 
         $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $profile['id']);
@@ -190,8 +190,8 @@ class ProfileController extends MainController
             $name = $user['name'] . ' (' . $user['login'] . ') ';
         }
 
-        $title = sprintf(Translate::get($sheet . '.title'), $name);
-        $description  = sprintf(Translate::get($sheet . '.desc'), $name, $information ?? '...');
+        $title = __($sheet . '.title', ['name' => $name]);
+        $description  = __($sheet . '.desc', ['name' => $name, 'information' => $information ?? '...']);
 
         $m = [
             'og'        => true,

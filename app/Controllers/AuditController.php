@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{ContentModel, ActionModel, AuditModel, NotificationModel, PostModel};
-use Translate, Config, UserData, Html;
+use Config, UserData, Html;
 
 class AuditController extends MainController
 {
@@ -96,7 +96,7 @@ class AuditController extends MainController
 
     public static function infoMsg($tl, $content)
     {
-        Html::addMsg(sprintf(Translate::get('limit.day'), 'TL' . $tl, '«' . Translate::get($content) . '»'), 'error');
+        Html::addMsg(__('limit.day', ['tl' => 'TL' . $tl, 'name' => __($content)]), 'error');
 
         redirect('/');
     }

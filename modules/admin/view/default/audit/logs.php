@@ -35,7 +35,7 @@
             <sup class="gray-600 ml5">id:<?= $log['user_id']; ?></sup>
           </td>
           <td class="gray-600"><?= __($log['action_type']); ?></td>
-          <td><?= sprintf(__($log['action_name']), __($log['action_type'])); ?></td>
+          <td><?= __($log['action_name'], ['name' => __($log['action_type'])]); ?></td>
           <td class="gray-600"><?= Html::langDate($log['add_date']); ?></td>
           <th><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><i class="bi-eye"></i></a></th>
         </tr>

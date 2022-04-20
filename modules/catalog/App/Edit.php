@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{FacetModel, PostModel, NotificationModel};
 use App\Models\User\UserModel;
-use Validation, Translate, UserData, Meta, Html;
+use Validation, UserData, Meta, Html;
 
 class Edit
 {
@@ -41,7 +41,7 @@ class Edit
         return view(
             '/view/default/edit',
             [
-                'meta'  => Meta::get(Translate::get('site.edit')),
+                'meta'  => Meta::get(__('site.edit')),
                 'user'  => $this->user,
                 'data'  => [
                     'domain'        => $domain,
@@ -75,12 +75,12 @@ class Edit
         $item_is_github     = Request::getPostInt('github');
         $item_github_url    = Request::getPost('github_url');
 
-        Validation::Length($item_title, Translate::get('title'), '14', '250', $redirect);
-        Validation::Length($item_content, Translate::get('description'), '24', '1500', $redirect);
+        Validation::Length($item_title, __('title'), '14', '250', $redirect);
+        Validation::Length($item_content, __('description'), '24', '1500', $redirect);
 
         if (filter_var($item_url, FILTER_VALIDATE_URL) === FALSE) {
             redirect($redirect);
-            // return json_encode(['error' => 'error', 'text' => Translate::get('url.site.correctness')]);
+            // return json_encode(['error' => 'error', 'text' => __('url.site.correctness')]);
         }
 
         // Only the site author and staff can edit

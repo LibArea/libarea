@@ -3,7 +3,7 @@
 namespace Modules\Admin\App;
 
 use Modules\Admin\App\Models\{UserModel, StatsModel, FacetModel};
-use Translate, Meta;
+use Meta;
 
 class Home
 {
@@ -15,7 +15,7 @@ class Home
         return view(
             '/view/default/index',
             [
-                'meta'  => Meta::get(Translate::get('admin')),
+                'meta'  => Meta::get(__('admin')),
                 'data'  => [
                     'count'             => StatsModel::getCount(),
                     'posts_no_topic'    => FacetModel::getNoTopic(),
@@ -36,7 +36,7 @@ class Home
         return view(
             '/view/default/css',
             [
-                'meta'  => Meta::get(Translate::get('Css')),
+                'meta'  => Meta::get(__('Css')),
                 'data'  => [
                     'type'  => 'css',
                     'sheet' => 'css',

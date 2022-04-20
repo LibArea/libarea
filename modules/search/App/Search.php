@@ -4,79 +4,117 @@ namespace Modules\Search\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Search\App\Models\SearchModel;
-use Translate, Config, UserData, Meta, Html, Tpl, Content;
-
-use Wamania\Snowball\StemmerFactory;
-use voku\helper\StopWords;
+use Modules\Search\App\Query\QueryBuilder;
+use Modules\Search\App\Query\QuerySegment;
+use Modules\Search\App\Engine;
+use UserData, Meta, Config;
 
 class Search
 {
-    protected $limit = 100;
+    protected $limit = 10;
 
     private $user;
 
     public function __construct()
     {
         $this->user  = UserData::get();
+        $this->engine = new Engine([]);
     }
 
     public function index()
     {
-        $pageNumber = Tpl::pageNumber();
-        $query  = Request::getGet('query');
-        $type   = Request::getGet('type');
-        $type   = $type ?? 'post';
+        return view(
+            '/view/default/home',
+            [
+                'meta'  => Meta::get(__('search.title'), __('search.desc', ['name' => Config::get('meta.name')])),
+                'user'  => $this->user,
+                'data'  => [
+                    'type' => 'search',
 
-        $arr = ['post', 'website'];
-        if (!in_array($type, $arr)) {
-            redirect(getUrlByName('search'));
-        }
+                ]
+            ]
+        );
+    }
 
-        if ($query) {
+    public function go()
+    {
+        $pageNumber = self::pageNumber(Request::getGetInt('page'));
 
-            if ($query == '') {
-                redirect(getUrlByName('search'));
+        $q      = Request::getGet('q');
+        $cat    = Request::getGet('cat') ?? 'post';
+        $cat    = $cat == 'post' ? 'post' : 'website';
+        $sw     = microtime(true);
+
+        if ($q) {
+
+            $segments = [];
+            $isFacetSearching = false;
+            foreach (Request::getGet() as $field => $value) {
+                if (strpos($field, 'facet-') === 0) {
+                    $isFacetSearching = true;
+                    $facetField = substr($field, 6);
+                    $subSeg = [];
+                    foreach ($value as $v) {
+                        $subSeg[] = QuerySegment::exactSearch($facetField, $v);
+                    }
+                    $segments[] = QuerySegment::or($subSeg);
+                }
             }
 
-            $query  = self::stemmerAndStopWords($query);
-            $results = self::search($pageNumber, $this->limit, $query, $type);
-            $count  = self::searchCount($query, $type);
+            if ($cat) {
+                $isFacetSearching = false;
+                $segments =  QuerySegment::or(QuerySegment::exactSearch('cat', $cat));
+            }
 
-            self::setLogs(
+            $query = new QueryBuilder(QuerySegment::search($q, QuerySegment::and($segments)));
+            $query->setLimit(Request::getGetInt('limit') == 0 ? 10 : Request::getGetInt('limit'));
+
+            $start  = ($pageNumber - 1) * $this->limit;
+            $query->setOffset($start);
+
+            if (Request::getGet('connex') ?? false) $query->enableConnex();
+            $facets = Request::getGet('facets');
+            if (!empty($facets)) {
+                foreach (explode(',', $facets) as $facet) {
+                    $query->addFacet($facet);
+                }
+            }
+
+            if ($isFacetSearching) {
+                $results = $this->engine->search($q, $query->getFilters());
+            } else {
+                $results = $this->engine->search($query);
+            }
+
+            $count = $results['numFound'] ?? 0;
+
+            /* self::setLogs(
                 [
-                    'request'       => $query,
-                    'action_type'   => $type,
+                    'request'       => 1,
+                    'action_type'   => $cat,
                     'add_ip'        => Request::getRemoteAddress(),
                     'user_id'       => $this->user['id'],
                     'count_results' => $count ?? 0,
                 ]
-            );
+            ); */
         }
 
-        $result = [];
-        if(!empty($results)) {
-            foreach ($results as $ind => $row) {
-                $row['content'] = Html::fragment(Content::text($row['content'], 'line'), 200);
-                $result[$ind]   = $row;
-            }
-        }
-
-        $count = $count ?? 0;
-        $facet = $type == 'post' ? 'topic' : 'category';
+        $count = $results['numFound'] ?? 0;
+        $facet = $cat == 'post' ? 'topic' : 'category';
         return view(
             '/view/default/search',
             [
-                'meta'  => Meta::get(Translate::get('search')),
+                'meta'  => Meta::get(__('search')),
                 'user'  => $this->user,
                 'data'  => [
-                    'result'        => $result ?? false,
-                    'type'          => $type,
+                    'results'       => $results ?? false,
+                    'type'          => $cat,
                     'sheet'         => 'admin',
-                    'query'         => $query ?? false,
-                    'count'         => $count,
+                    'q'             => $q,
+                    'tags'          => self::searchTags($q, $facet, 4),
+                    'sw'            => (microtime(true) - $sw ?? 0) * 1000,
                     'pagesCount'    => ceil($count / $this->limit),
                     'pNum'          => $pageNumber,
-                    'tags'          => self::searchTags($query, $facet, 4),
                 ]
             ]
         );
@@ -91,30 +129,6 @@ class Search
     {
         return SearchModel::getSearchLogs($limit);
     }
-
-    public static function stemmerAndStopWords($query)
-    {
-        require_once __DIR__ . '/../vendor/autoload.php';
-
-        $lang = Translate::getLang();
-        $lang = $lang == 'zh' ? 'en' : $lang;
-
-        $stopWords      = new StopWords();
-        $result         = $stopWords->getStopWordsAll();
-        $stemmer        = StemmerFactory::create($lang);
-        $arr_stop_words = $result[$lang];
-
-        if (Config::get('general.lang') == 'ru') {
-            $stemmer    = StemmerFactory::create('russian');
-        } else {
-            $stemmer    = StemmerFactory::create('english');
-        }
-
-        $qa = implode(" ", array_diff(explode(" ", $query), $arr_stop_words));
-
-        return $stemmer->stem($qa);
-    }
-
 
     public static function search($pageNumber, $limit, $query, $type)
     {
@@ -132,7 +146,7 @@ class Search
     }
 
     public function api()
-    {   
+    {
         $query  = Request::getPost('query');
         $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $query);
 
@@ -141,5 +155,10 @@ class Search
         $result = array_merge($topics, $posts);
 
         return json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    public static function pageNumber($num)
+    {
+        return $num <= 1 ? 1 : $num;
     }
 }

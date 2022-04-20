@@ -25,11 +25,6 @@ class AllFacetController extends MainController
         $pagesCount = FacetModel::getFacetsAllCount($this->user['id'], $sheet);
         $facets     = FacetModel::getFacetsAll($pageNumber, $this->limit, $this->user['id'], $sheet);
 
-        $num = ' ';
-        if ($pageNumber > 1) {
-            $num = sprintf(Translate::get('page.number'), $pageNumber);
-        }
-
         $Flimit = (new \App\Controllers\Facets\AddFacetController())->limitFacer($type, 'no.redirect');
 
         $m = [
@@ -40,7 +35,7 @@ class AllFacetController extends MainController
         return Tpl::agRender(
             '/facets/all',
             [
-                'meta'  => Meta::get(Translate::get($sheet) . $num, Translate::get($sheet . '.desc') . $num, $m),
+                'meta'  => Meta::get(Translate::get($sheet), Translate::get($sheet . '.desc'), $m),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

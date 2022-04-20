@@ -14,6 +14,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
         Route::get('/reports/saw')->module('admin', 'App\Audits@saw');
         Route::get('/topic/ban')->module('admin', 'App\Facets@deletes');
         Route::get('/badge/remove')->module('admin', 'App\Badges@remove');
+        Route::get('/manual/update')->module('admin', 'App\Console'); 
         
         Route::getProtect();
             Route::get('/badge/user/create')->module('admin', 'App\Badges@addUser')->name('admin.user.badge.create');
@@ -26,6 +27,10 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
   
     Route::get('/tools')->module('admin', 'App\Tools', ['tools.all', 'tools'])->name('admin.tools');
 
+    Route::get('/search')->module('admin', 'App\Search')->name('admin.search');
+    Route::get('/search/query')->module('admin', 'App\Search@query')->name('admin.search.query');
+    Route::get('/search/schemas')->module('admin', 'App\Search@schemas')->name('admin.search.schemas');
+
     Route::get('/users/ban')->module('admin', 'App\Users', ['users.ban', 'users'])->name('admin.users.ban');
     Route::get('/users/{id}/edit')->module('admin', 'App\Users@userEditPage', ['users.edit', 'users'])->where(['id' => '[0-9]+'])->name('admin.user.edit');
     Route::get('/users/{page?}')->module('admin', 'App\Users', ['users.all', 'users'])->name('admin.users');       
@@ -36,8 +41,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/audits')->module('admin', 'App\Audits', ['audits.all', 'audits'])->name('admin.audits');
     Route::get('/audits/approved')->module('admin', 'App\Audits', ['audits.ban', 'audits'])->name('admin.audits.ban');
     Route::get('/report')->module('admin', 'App\Audits', ['reports.all', 'reports'])->name('admin.reports');
-
-    Route::get('/update/{choice}')->module('admin', 'App\Console')->where(['choice' => '[a-z].+']); 
 
     Route::get('/invitations')->module('admin', 'App\Invitations')->name('admin.invitations');
    

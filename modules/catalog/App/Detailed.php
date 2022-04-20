@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, ReplyModel};
 use App\Models\{PostModel, SubscriptionModel};
-use Content, Translate, UserData, Meta, Html;
+use Content, UserData, Meta, Html;
 
 class Detailed
 {
@@ -47,7 +47,7 @@ class Detailed
             'imgurl'     => $content_img,
             'url'        => getUrlByName('web.website', ['slug' => $item['item_domain']]),
         ];
-        $title = Translate::get('website') . ': ' . $item['item_title'];
+        $title = __('website') . ': ' . $item['item_title'];
         $description  = $item['item_title'] . '. ' . $item['item_content'];
 
         if ($item['item_post_related']) {

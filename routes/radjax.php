@@ -1,6 +1,6 @@
 <?php
 
-Radjax\Route::get("/search", ["post"], "Modules\Search\App\Search@api", ["protected" => true, "session_saved" => false]);
+Radjax\Route::get("/search/api", ["post"], "Modules\Search\App\Search@api", ["protected" => true, "session_saved" => false]);
  
 $access = 'App\Middleware\Before\UserAuth@index'; 
 Radjax\Route::get("/team/action", ["post"], "Modules\Teams\App\Teams@action", ["protected" => true, "before" => $access]);

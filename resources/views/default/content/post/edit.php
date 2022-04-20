@@ -4,7 +4,7 @@
 
     <a href="/"><?= __('home'); ?></a> /
     <span class="red">
-      <?= sprintf(__('edit.option'), __('post')); ?>
+      <?= Translate::get('edit.option', ['name' => __('post')]); ?> 
     </span>
 
     <form class="max-w780" action="<?= getUrlByName('content.change', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">

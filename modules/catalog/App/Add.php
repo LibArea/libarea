@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, FacetModel, NotificationModel};
-use Translate, UserData, Meta;
+use UserData, Meta;
 
 class Add
 {
@@ -31,7 +31,7 @@ class Add
         return view(
             '/view/default/add',
             [
-                'meta'  => Meta::get(Translate::get('site.add')),
+                'meta'  => Meta::get(__('site.add')),
                 'user'  => $this->user,
                 'data'  => [
                     'sheet'      => 'add',
@@ -46,7 +46,7 @@ class Add
     {
         $url = Request::getPost('url');
         if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
-            return json_encode(['error' => 'error', 'text' => Translate::get('url.site.correctness')]);
+            return json_encode(['error' => 'error', 'text' => __('url.site.correctness')]);
         }
 
         // Access rights by the trust level of the participant
@@ -56,7 +56,7 @@ class Add
         // Check if the domain exists in the system  
         // Проверим наличие домена в системе
         if ($domain = (new \Modules\Catalog\App\Checks())->getDomain(Request::getPost('url'))) {
-            return json_encode(['error' => 'error', 'text' => Translate::get('site.replay')]);
+            return json_encode(['error' => 'error', 'text' => __('site.replay')]);
         }
 
         // Get a first level domain       
@@ -66,13 +66,13 @@ class Add
         // Check the length of the site name
         // Проверим длину названия сайта
         if (!$title = (new \Modules\Catalog\App\Checks())->length(Request::getPost('title'), 14, 250)) {
-            $msg = sprintf(Translate::get('string.length'), '«' . Translate::get('title') . '»', 14, 250);
+            $msg = sprintf(__('string.length'), '«' . __('title') . '»', 14, 250);
             return json_encode(['error' => 'error', 'text' => $msg]);
         }
 
         // Make the description optional for publication (it will still be rewritten) 
         // Сделать описание необязательным для публикации (оно все равно будет переписано) 
-        $content = Request::getPost('content') ?? Translate::get('desc.formed');
+        $content = Request::getPost('content') ?? __('desc.formed');
 
         // Instant accommodation for staff only
         // Мгновенное размещение только для персонала

@@ -217,7 +217,7 @@ if (find) {
 function fetch_search() {
    let query = document.getElementById("find").value;
    if (query.length < 2) return;
-    fetch("/search", {
+    fetch("/search/api", {
       method: "POST",
       headers: { 'Content-Type':'application/x-www-form-urlencoded'},
       body:  "query=" + query  + "&_token=" + token,
