@@ -18,20 +18,22 @@ if (empty($document)) {
 
 <div class="box bg-white">
     <h2><?= __('edit'); ?></h2>
+    <div class="pt15 pb15 flex justify-between">
     <form action="<?= getUrlByName('admin.search.search'); ?>" method="post" class="flex">
         <?= csrf_field() ?>
         <label class="mr5" for="search_id">id: <?= Request::getInt('id'); ?></label>
         <input id="search_id" type="text" name="search_id" value="">
         <input type="submit" value="<?= __('search'); ?>" style="">
     </form>
+
     <?php if ($found) : ?>
         <form action="<?= getUrlByName('admin.search.remove', ['id' => Request::getInt('id')]); ?>" method="post">
             <?= csrf_field() ?>
             <input type="hidden" name="delete" value="<?= Request::getInt('id'); ?>">
-            <input type="submit" class="delete" value="<?= __('remove'); ?>">
+            <input type="submit" class="btn-small" value="<?= __('remove'); ?>">
         </form>
     <?php endif ?>
-
+    </div>
     <?php
     if (!empty($errors)) {
         echo '<div class="container-v">';
@@ -49,6 +51,7 @@ if (empty($document)) {
         <input type="hidden" name="id" value="<?= Request::getInt('id'); ?>">
         <input class="btn btn-primary" type="submit" value="<?= __('edit'); ?> / <?= __('add'); ?>">
     </form>
+    
 </div>
 
 </main>

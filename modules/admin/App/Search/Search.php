@@ -1,11 +1,12 @@
 <?php
 
 
-namespace Modules\Admin\App;
+namespace Modules\Admin\App\Search;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Search\App\Query\QueryBuilder;
 use Modules\Search\App\Query\QuerySegment;
+use Modules\Admin\App\Search\Actions;
 use Modules\Search\App\Engine;
 use Meta, UserData;
 
@@ -14,11 +15,14 @@ class Search
     private $user;
 
     private $engine;
+    
+    private $actions;
 
     public function __construct()
     {
         $this->user  = UserData::get();
-        $this->engine = new Engine([]);
+        $this->engine = new Engine();
+        $this->actions = new Actions();
     }
 
     public function index()
@@ -92,7 +96,7 @@ class Search
     {
         $delete_id = Request::getPostInt('delete');
         if (isset($delete_id)) {
-            $this->engine->delete($delete_id);
+            $this->actions->delete($delete_id);
             $this->engine->getIndex()->getDocument($delete_id);
         }
 
@@ -127,7 +131,7 @@ class Search
         if (empty($errors)) {
             // if everything's okay we create/update the document
             try {
-                $this->engine->update($content);
+                $this->actions->update($content);
             } catch (\Throwable $exception) {
                 $errors[] = get_class($exception) . ": " . $exception->getMessage();
             }

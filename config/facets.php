@@ -21,11 +21,11 @@ return [
     'default' => [
         [
             'img'   => '/uploads/facets/logos/t-1-1625149922.jpeg',
-            'name'  => Translate::get('SEO'),
+            'name'  => __('SEO'),
             'url'   => '/topic/seo',
         ], [
             'img'   => '/uploads/facets/logos/t-2-1625149821.jpeg',
-            'name'  => Translate::get('interesting sites'),
+            'name'  => __('interesting sites'),
             'url'   => '/topic/sites',
         ],
     ],

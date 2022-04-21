@@ -52,7 +52,7 @@ class Console
 
     public static function indexer()
     {    
-        (new \Modules\Admin\App\Indexer)->indexerAll();
+        (new \Modules\Admin\App\Search\Indexer)->indexerAll();
 
         self::consoleRedirect();
     }

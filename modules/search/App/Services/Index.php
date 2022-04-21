@@ -839,6 +839,7 @@ class Index
 
     /**
      * Builds the index and tokenize every authorized terms
+     * Создает индекс и токенизирует все авторизованные термины
      * @param $fieldName
      * @param $definition
      * @param $data

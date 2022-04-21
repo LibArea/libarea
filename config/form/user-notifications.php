@@ -6,12 +6,12 @@
 
 return [
     [
-      'title'   => Translate::get('message.PM'),
-      'arr'     => ['options' => ['0' => Translate::get('no'), '1' => Translate::get('yes')], 'type' => 'select', 'before_html' => '<h3>' . Translate::get('notification.email') . '</h3>'],
+      'title'   => __('message.PM'),
+      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select', 'before_html' => '<h3>' . __('notification.email') . '</h3>'],
       'name'    => 'setting_email_pm',
     ], [
-      'title'   => Translate::get('appeal.@'),
-      'arr'     => ['options' => ['0' => Translate::get('no'), '1' => Translate::get('yes')], 'type' => 'select'],
+      'title'   => __('appeal.@'),
+      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select'],
       'name'    => 'setting_email_appealed',
     ]
 ];

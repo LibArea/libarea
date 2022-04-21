@@ -63,25 +63,6 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['qa' => $query, 'start' => $start, 'limit' => $limit])->fetchall();
     }
 
-    public static function getSearchCount($query, $type)
-    {
-        $sql = "SELECT 
-                  post_id
-                    FROM posts
-                       WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
-                           AND MATCH(post_title, post_content) AGAINST (:qa)";
-
-        if ($type == 'website') {
-            $sql = "SELECT  
-                        item_id
-                            FROM items
-                                WHERE item_is_deleted = 0
-                                    AND MATCH(item_title, item_content, item_domain) AGAINST (:qa)";
-        }
-
-        return DB::run($sql, ['qa' => "%" . $query . "%"])->rowCount();
-    }
-
     public static function getSearchTags($query, $type, $limit)
     {
         $sql = "SELECT 

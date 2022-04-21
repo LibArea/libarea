@@ -80,7 +80,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     Route::get('/topics/my/{page?}')->controller('Facets\AllFacetController', ['topics.my', 'topic'])->name('topics.my');
  
-    Route::get('/post/scroll/{page?}')->controller('HomeController@scroll')->where(['page' => '[0-9]+']); 
+    Route::get('/post/scroll/{page?}')->controller('HomeController@scroll'); 
  
     Route::get('/blogs/my')->controller('Facets\AllFacetController', ['blogs.my', 'blog'])->name('blogs.my');
  

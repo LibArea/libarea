@@ -17,9 +17,9 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
         Route::get('/manual/update')->module('admin', 'App\Console'); 
         
         Route::getProtect();
-            Route::get('/search/remove')->module('admin', 'App\Search@remove')->name('admin.search.remove');
-            Route::get('/search/search')->module('admin', 'App\Search@search')->name('admin.search.search');
-            Route::get('/search/edit')->module('admin', 'App\Search@edit')->name('admin.search.edit');
+            Route::get('/search/remove')->module('admin', 'App\Search\Search@remove')->name('admin.search.remove');
+            Route::get('/search/search')->module('admin', 'App\Search\Search@search')->name('admin.search.search');
+            Route::get('/search/edit')->module('admin', 'App\Search\Search@edit')->name('admin.search.edit');
             
             Route::get('/badge/user/create')->module('admin', 'App\Badges@addUser')->name('admin.user.badge.create');
             Route::get('/badge/create')->module('admin', 'App\Badges@create')->name('admin.badge.create');
@@ -31,10 +31,10 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
   
     Route::get('/tools')->module('admin', 'App\Tools', ['tools.all', 'tools'])->name('admin.tools');
 
-    Route::get('/search')->module('admin', 'App\Search')->name('admin.search');
-    Route::get('/search/query')->module('admin', 'App\Search@query')->name('admin.search.query');
-    Route::get('/search/edit/{id}')->module('admin', 'App\Search@editForm')->where(['ip' => '[0-9].+'])->name('admin.search.edit.form');
-    Route::get('/search/schemas')->module('admin', 'App\Search@schemas')->name('admin.search.schemas');
+    Route::get('/search')->module('admin', 'App\Search\Search')->name('admin.search');
+    Route::get('/search/query')->module('admin', 'App\Search\Search@query')->name('admin.search.query');
+    Route::get('/search/edit/{id}')->module('admin', 'App\Search\Search@editForm')->where(['ip' => '[0-9].+'])->name('admin.search.edit.form');
+    Route::get('/search/schemas')->module('admin', 'App\Search\Search@schemas')->name('admin.search.schemas');
 
     Route::get('/users/ban')->module('admin', 'App\Users', ['users.ban', 'users'])->name('admin.users.ban');
     Route::get('/users/{id}/edit')->module('admin', 'App\Users@userEditPage', ['users.edit', 'users'])->where(['id' => '[0-9]+'])->name('admin.user.edit');

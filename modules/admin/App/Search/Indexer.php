@@ -1,17 +1,22 @@
 <?php
 
-namespace Modules\Admin\App;
+namespace Modules\Admin\App\Search;
 
 use Modules\Search\App\Engine;
+use Modules\Admin\App\Search\Actions;
 use Modules\Admin\App\Models\IndexerModel;
+use Html, Content;
 
 class Indexer
 {
     private $engine;
+    
+    private $actions;
 
     public function __construct()
     {
         $this->engine  = new Engine();
+        $this->actions = new Actions();
     }
 
     public function indexerAll()
@@ -25,19 +30,19 @@ class Indexer
     {
         $posts = IndexerModel::getPosts();
         foreach ($posts as $post) {
-
+            $content = Html::fragment(Content::text($post['post_content'], 'line'), 600);
             $title = $this->filtration($post['post_title']);
             $arr = [
                 "id"        => $post['post_id'],
                 "type"      => "example-url",
                 "title"     => $title,
-                "content"   => $post['post_content'],
+                "content"   => $content,
                 "domain"    => '',
                 "url"       => '',
                 "cat"       => ["post"],
             ];
 
-            $this->engine->update($arr);
+            $this->actions->update($arr);
         }
     }
 
@@ -57,7 +62,7 @@ class Indexer
                 "cat"       => ["website"],
             ];
 
-            $this->engine->update($arr);
+            $this->actions->update($arr);
         }
     }
 

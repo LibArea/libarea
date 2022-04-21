@@ -8,20 +8,20 @@
 // https://stackoverflow.com/questions/3077305/how-to-use-multilanguage-database-schema-with-orm/4745863#4745863
 return [
     [
-        'title' => Translate::get('internet'),
+        'title' => __('internet'),
         'url'   => 'internet',
         'sub'   => [
                 [
-                    'title' => Translate::get('security'),
+                    'title' => __('security'),
                     'url'   => 'security',
                     'sub'   => '',
                 ],
         
         ],
     ], [
-        'title' => Translate::get('reference.info'),
+        'title' => __('reference.info'),
         'url'   => 'reference',
-        'help'  => Translate::get('reference.help'),
+        'help'  => __('reference.help'),
         'sub'   => [], 
          
     ],

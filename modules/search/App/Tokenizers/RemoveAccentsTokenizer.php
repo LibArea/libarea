@@ -13,7 +13,7 @@ class RemoveAccentsTokenizer implements TokenizerInterface
                
             }
             
-            return html_entity_decode(preg_replace($regexp, '$1', htmlentities($elem)));
+            return html_entity_decode(preg_replace($regexp, '$1', htmlentities($elem  ?? '')));
         }, $data);
     }
 }

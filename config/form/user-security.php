@@ -6,15 +6,15 @@
 
 return [
     [
-      'title'   => Translate::get('old'),
+      'title'   => __('old'),
       'arr'     => ['type' => 'password', 'required' => true],
       'name'    => 'password',
     ], [
-      'title'   => Translate::get('new'),
+      'title'   => __('new'),
       'arr'     => ['type' => 'password', 'min' => 6, 'max' => 32, 'required' => true],
       'name'    => 'password2',
     ], [
-      'title'   => Translate::get('repeat'),
+      'title'   => __('repeat'),
       'arr'     => ['type' => 'password', 'required' => true],
       'name'    => 'password3',
     ]

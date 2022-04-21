@@ -12,37 +12,37 @@ return [
     'left' => [
         [
             'url'   => '/',
-            'title' => Translate::get('feed'),
+            'title' => __('feed'),
             'icon'  => 'bi bi-sort-down',
             'id'    => 'main',
         ], [
             'url'   => getUrlByName('topics.all'),
-            'title' => Translate::get('topics'),
+            'title' => __('topics'),
             'icon'  => 'bi bi-columns-gap',
             'id'    => 'topic',
         ], [
             'url'   => getUrlByName('blogs.all'),
-            'title' => Translate::get('blogs'),
+            'title' => __('blogs'),
             'icon'  => 'bi bi-journals',
             'id'    => 'blog',
         ], [
             'url'   => getUrlByName('users.all'),
-            'title' => Translate::get('users'),
+            'title' => __('users'),
             'icon'  => 'bi bi-people',
             'id'    => 'user',
         ], [
             'url'   => getUrlByName('answers'),
-            'title' => Translate::get('answers'),
+            'title' => __('answers'),
             'icon'  => 'bi bi-chat-dots',
             'id'    => 'answers',
         ], [
             'url'   => getUrlByName('comments'),
-            'title' => Translate::get('comments'),
+            'title' => __('comments'),
             'icon'  => 'bi bi-chat-quote',
             'id'    => 'comments',
         ], [
             'url'   => getUrlByName('web'),
-            'title' => Translate::get('catalog'),
+            'title' => __('catalog'),
             'icon'  => 'bi bi-link-45deg',
             'id'    => 'catalog',
         ], [
@@ -50,19 +50,19 @@ return [
         ], [
             'tl'    => UserData::USER_FIRST_LEVEL,
             'url'   => getUrlByName('favorites'),
-            'title' => Translate::get('favorites'),
+            'title' => __('favorites'),
             'icon'  => 'bi bi-bookmark',
             'id'    => 'favorites',
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('admin.users'),
-            'title' => Translate::get('admin'),
+            'title' => __('admin'),
             'icon'  => 'bi bi-person-x',
             'id'    => 'admin',
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('admin.facets.all'),
-            'title' => Translate::get('facets'),
+            'title' => __('facets'),
             'icon'  => 'bi bi-bezier2',
             'id'    => 'admin',
         ],
@@ -73,40 +73,40 @@ return [
     'user' => [
         [
             'url'   => '/@' . $login,
-            'title' => Translate::get('profile'),
+            'title' => __('profile'),
             'icon'  => 'bi bi-person',
             'id'    => '',
         ], [
             'url'   => getUrlByName('setting'),
-            'title' => Translate::get('settings'),
+            'title' => __('settings'),
             'icon'  => 'bi bi-gear',
             'id'    => '',
         ], [
             'tl'    => 2,
             'url'   => getUrlByName('drafts'),
-            'title' => Translate::get('drafts'),
+            'title' => __('drafts'),
             'icon'  => 'bi bi-pencil-square',
             'id'    => '',
         ], [
             'url'   => getUrlByName('notifications'),
-            'title' => Translate::get('notifications'),
+            'title' => __('notifications'),
             'icon'  => 'bi bi-app-indicator',
             'id'    => '',
         ], [
             'tl'    => 2,
             'url'   => getUrlByName('messages'),
-            'title' => Translate::get('messages'),
+            'title' => __('messages'),
             'icon'  => 'bi bi-envelope',
             'id'    => '',
         ], [
             'url'   => getUrlByName('favorites'),
-            'title' => Translate::get('favorites'),
+            'title' => __('favorites'),
             'icon'  => 'bi bi-bookmark',
             'id'    => '',
         ], [
             'tl'    => 2,
             'url'   => getUrlByName('invitations'),
-            'title' => Translate::get('invites'),
+            'title' => __('invites'),
             'icon'  => 'bi bi-person-plus',
             'id'    => '',
         ], [
@@ -114,12 +114,12 @@ return [
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => getUrlByName('admin'),
-            'title' => Translate::get('admin'),
+            'title' => __('admin'),
             'icon'  => 'bi bi-shield-exclamation',
             'id'    => '',
         ], [
             'url'   => getUrlByName('logout'),
-            'title' => Translate::get('sign.out'),
+            'title' => __('sign.out'),
             'icon'  => 'bi bi-box-arrow-right',
             'id'    => '',
         ],

@@ -3,7 +3,7 @@
 use Hleb\Constructor\Handlers\Request;
 
 Request::getHead()->addStyles('/assets/css/style.css?12');
-$uri = $data['type'] == 'post' ? 'post' : 'website';
+$uri = $data['type'] ?? 'all';
 $q = $data['q'];
 ?>
 
@@ -21,6 +21,10 @@ $q = $data['q'];
           <a class="tabs black mr15" href="/">
             <i class="bi-house"></i>
             <?= __('to.the.website'); ?>
+          </a>
+
+          <a class="tabs<?php if ($uri == 'all') : ?> active<?php endif; ?>" href="<?= getUrlByName('search.go'); ?>?q=<?= $q; ?>">
+            <?= __('all'); ?>
           </a>
 
           <a class="tabs<?php if ($uri == 'post') : ?> active<?php endif; ?>" href="<?= getUrlByName('search.go'); ?>?q=<?= $q; ?>&cat=post">

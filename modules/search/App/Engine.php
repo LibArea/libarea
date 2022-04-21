@@ -18,7 +18,6 @@ class Engine
      */
     private $config;
 
-
     /**
      * Engine constructor.
      * @param array $config
@@ -39,28 +38,6 @@ class Engine
     public function getIndex()
     {
         return $this->index;
-    }
-
-    /**
-     * Insert or update a given document to the index
-     * @param $document
-     * @return bool
-     * @throws Exception
-     */
-    public function update($document)
-    {
-        return $this->index->update($document);
-    }
-
-    /**
-     * Insert or update multiple documents to the index
-     * @param array $document
-     * @return bool
-     * @throws Exception
-     */
-    public function updateMultiple(array $document)
-    {
-        return $this->index->updateMultiple($document);
     }
 
     /**
@@ -118,21 +95,11 @@ class Engine
      * @param bool|string $wrapSpan if true, wrap <span> tags around the matching values.
      *                              if it's a string, adds the string as a class
      * @return array
-     * @throws Exception
+     * @throws Exception -  ô'||'îðóì  
      */
     public function suggestField($field, $value, $wrapSpan = false)
     {
         return $this->index->suggestField($field, $value, $wrapSpan);
     }
 
-    /**
-     * delete the given document ID from the index
-     * @param $id
-     * @return bool
-     * @throws Exception
-     */
-    public function delete($id)
-    {
-        return $this->index->delete($id);
-    }
 }

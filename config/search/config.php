@@ -70,10 +70,10 @@ return [
         ]
     ],
     'types' => [
-        'datetime' => [
-            DateFormatTokenizer::class,
-            DateSplitTokenizer::class
-        ],
+    //    'datetime' => [
+    //        DateFormatTokenizer::class,
+    //        DateSplitTokenizer::class
+    //    ],
         '_default' => [
             RemoveAccentsTokenizer::class,
             LowerCaseTokenizer::class,

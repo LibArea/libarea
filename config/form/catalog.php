@@ -9,7 +9,7 @@ return [
   // Поля для добавления и редактирования сайта в каталоге
   'site' =>  [
     [
-      'title'   => Translate::get('title'),
+      'title'   => __('title'),
       'tl'      => 2,
       'arr'     => ['min' => 14, 'max' => 250, 'required' => true],
       'name'    => 'title'
@@ -19,47 +19,47 @@ return [
       'arr'     => ['required' => true],
       'name'    => 'url',
     ],  [
-      'title'   => Translate::get('status'),
+      'title'   => __('status'),
       'tl'      => UserData::REGISTERED_ADMIN,
       'arr'     => ['required' => false],
       'name'    => 'status',
     ], [
-      'title'   => Translate::get('description'),
+      'title'   => __('description'),
       'tl'      => 2,
       'arr'     => ['type' => 'textarea', 'required' => true],
       'name'    => 'content',
     ],  [
-      'title'   => Translate::get('deny.replies'),
+      'title'   => __('deny.replies'),
       'tl'      => 2,
-      'arr'     => ['options' => ['0' => Translate::get('no'), '1' => Translate::get('yes')], 'type' => 'select'],
+      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select'],
       'name'    => 'close_replies',
     ], [
-      'title'   => Translate::get('posted'),
+      'title'   => __('posted'),
       'tl'      => UserData::REGISTERED_ADMIN,
-      'arr'     => ['options' => ['0' => Translate::get('no'), '1' => Translate::get('yes')], 'type' => 'select'],
+      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select'],
       'name'    => 'published',
     ], [
-      'title'   => Translate::get('there.program'),
+      'title'   => __('there.program'),
       'tl'      => UserData::REGISTERED_ADMIN,
-      'arr'     => ['options' => ['0' => Translate::get('no'), '1' => Translate::get('yes')], 'type' => 'select', 'before_html' => '<h2>Soft</h2>'],
+      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select', 'before_html' => '<h2>Soft</h2>'],
       'name'    => 'soft',
     ], [
-      'title'   => Translate::get('hosted.github'),
+      'title'   => __('hosted.github'),
       'tl'      => UserData::REGISTERED_ADMIN,
-      'arr'     => ['options' => ['0' => Translate::get('no'), '1' => Translate::get('yes')], 'type' => 'select'],
+      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select'],
       'name'    => 'github',
     ], [
-      'title'   => Translate::get('url.address.github'),
+      'title'   => __('url.address.github'),
       'tl'      => UserData::REGISTERED_ADMIN,
       'arr'     => ['required' => false],
       'name'    => 'github_url',
     ], [
-      'title'   => Translate::get('title'),
+      'title'   => __('title'),
       'tl'      => UserData::REGISTERED_ADMIN,
       'arr'     => ['required' => false],
       'name'    => 'title_soft',
     ], [
-      'title'   => Translate::get('description'),
+      'title'   => __('description'),
       'tl'      => UserData::REGISTERED_ADMIN,
       'arr'     => ['type' => 'textarea', 'required' => false],
       'name'    => 'content_soft',

@@ -1,5 +1,5 @@
 <main class="col-two">
-  <p class="m0"><?= __($data['sheet']); ?></p>
+  <p class="m0"><?= $data['sheet']; ?></p>
   <div class="mb15 mb-ml0 hidden">
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>

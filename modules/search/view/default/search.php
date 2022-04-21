@@ -24,12 +24,22 @@ $sw = $sw ?? '?';
       <?php endif; ?>
     </p>
 
-    <?php foreach ($results['documents'] as $result) : ?>
+    <?php foreach ($results['documents'] as $result) : 
+          $type = 'post';
+          $url_content = '/post/' . $result['id'];
+          if ($result['domain']) {
+              $url_content = $result['url'];
+              $type = 'website';
+          }
+    ?>
+
       <div class="mb20 gray max-w780">
-        <?php if ($data['type'] == 'website') : ?>
-          <a class="text-xl" target="_blank" rel="nofollow noreferrer" href="<?= $result['url']; ?>">
-            <?= $result['title']; ?>
-          </a>
+          <div>
+            <a class="text-xl" target="_blank" rel="nofollow noreferrer" href="<?= $url_content; ?>">
+              <?= $result['title']; ?>
+            </a> <span class="text-sm gray-600">~ <?= $result['_score']; ?></span>
+          </div>
+        <?php if ($type == 'website') : ?>
           <div class="text-sm mb5 lowercase">
             <span class="green">
               <?= Html::websiteImage($result['domain'], 'favicon', $result['domain'], 'favicons mr5'); ?>
@@ -38,16 +48,16 @@ $sw = $sw ?? '?';
             <a class="gray-600 ml15" href="<?= getUrlByName('web.website', ['slug' => $result['domain']]); ?>"><?= __('more.detailed'); ?></a>
             <span class="gray-600">~ <?= $result['_score']; ?></span>
           </div>
-        <?php else : ?>
-          <div class="text-xl">
-            <a target="_blank" rel="nofollow noreferrer" href="/post/<?= $result['id']; ?>"><?= $result['title']; ?></a>
-            <span class="text-sm gray-600">~ <?= $result['_score']; ?></span>
-          </div>
         <?php endif; ?>
         <?= Html::fragment(Content::text($result['content'], 'line'), 250); ?>
       </div>
     <?php endforeach; ?>
-    <?php $url = 'go?q=' . $data['q'] . '&cat=' . $data['type'] . ''; ?>
+    
+    <?php 
+      $url = 'go?q=' . $data['q'] . '&cat=' . $data['type'] . ''; 
+      if ($data['type'] == 'all') $url = 'go?q=' . $data['q'];
+    ?>
+    
     <?= includeTemplate('/view/default/pagination', ['pNum' => $data['pNum'], 'pagesCount' => $data['pagesCount'], 'url' => $url]); ?>
   <?php else : ?>
     <?= includeTemplate('/view/default/no-result', ['query' => $data['q']]); ?>

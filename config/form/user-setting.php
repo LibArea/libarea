@@ -9,42 +9,42 @@ return [
         'url'       => 'website',
         'addition'  => false,
         'title'     => 'website',
-        'lang'      => Translate::get('URL'),
+        'lang'      => __('URL'),
         'help'      => 'https://site.ru',
         'name'      => 'website'
     ], [
         'url'       => false,
         'addition'  => false,
         'title'     => 'location',
-        'lang'      => Translate::get('city'),
-        'help'      => Translate::get('for.example') . ': Moscow',
+        'lang'      => __('city'),
+        'help'      => __('for.example') . ': Moscow',
         'name'      => 'location'
     ], [
         'url'       => 'public_email',
         'addition'  => 'mailto:',
         'title'     => 'public_email',
-        'lang'      => Translate::get('E-mail'),
+        'lang'      => __('E-mail'),
         'help'      => '**@**.ru',
         'name'      => 'public_email'
     ], [
         'url'       => 'skype',
         'addition'  => 'skype:',
         'title'     => 'skype',
-        'lang'      => Translate::get('Skype'),
+        'lang'      => __('Skype'),
         'help'      => 'skype:<b>NICK</b>',
         'name'      => 'skype'
     ], [
         'url'       => 'telegram',
         'addition'  => 'tg://resolve?domain=',
         'title'     => 'telegram',
-        'lang'      => Translate::get('Telegram'),
+        'lang'      => __('Telegram'),
         'help'      => 'tg://resolve?domain=<b>NICK</b>',
         'name'      => 'telegram'
     ], [
         'url'       => 'vk',
         'addition'  => 'https://vk.com/',
         'title'     => 'vk',
-        'lang'      => Translate::get('VK'),
+        'lang'      => __('VK'),
         'help'      => 'https://vk.com/<b>NICK / id</b>',
         'name'      => 'vk'
     ],

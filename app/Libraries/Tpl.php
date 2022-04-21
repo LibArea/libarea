@@ -66,8 +66,8 @@ class Tpl
     {
         $string = Request::get();
         $arr    = $string['page'] ?? null;
-        
         $pageNumber = 1;
+
         if ($arr) {
             $arr = explode('.', $string['page']);
         

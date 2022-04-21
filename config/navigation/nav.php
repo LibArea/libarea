@@ -11,22 +11,22 @@ return [
   'settings' => [
     [
       'url'   => getUrlByName('setting'),
-      'title' => Translate::get('settings'),
+      'title' => __('settings'),
       'icon'  => 'bi bi-gear',
       'id'    => 'settings',
     ], [
       'url'   => '/setting/avatar',
-      'title' => Translate::get('avatar'),
+      'title' => __('avatar'),
       'icon'  => 'bi bi-emoji-smile',
       'id'    => 'avatar',
     ], [
       'url'   => '/setting/security',
-      'title' => Translate::get('password'),
+      'title' => __('password'),
       'icon'  => 'bi bi-lock',
       'id'    => 'security',
     ], [
       'url'   => '/setting/notifications',
-      'title' => Translate::get('notifications'),
+      'title' => __('notifications'),
       'icon'  => 'bi bi-app-indicator',
       'id'    => 'notifications',
     ],
@@ -38,17 +38,17 @@ return [
     [
       'id'    => 'drafts',
       'url'   => getUrlByName('drafts'),
-      'title' => Translate::get('drafts'),
+      'title' => __('drafts'),
       'icon'  => 'bi-journal-richtext'
     ], [
       'id'    => 'favorites',
       'url'   => getUrlByName('favorites'),
-      'title' => Translate::get('favorites'),
+      'title' => __('favorites'),
       'icon'  => 'bi-bookmark'
     ], [
       'id'    => 'subscribed',
       'url'   => getUrlByName('subscribed'),
-      'title' => Translate::get('subscribed'),
+      'title' => __('subscribed'),
       'icon'  => 'bi-bookmark-plus'
     ],
   ],
@@ -59,24 +59,24 @@ return [
     [
       'id'    => 'main.feed',
       'url'   => '/',
-      'title' => Translate::get('feed'),
+      'title' => __('feed'),
       'icon'  => 'bi-sort-down'
     ], [
       'tl'    => UserData::USER_FIRST_LEVEL,
       'id'    => 'main.all',
       'url'   => getUrlByName('main.all'),
-      'title' => Translate::get('all'),
+      'title' => __('all'),
       'icon'  => 'bi-app'
     ], [
       'id'    => 'main.top',
       'url'   => getUrlByName('main.top'),
-      'title' => Translate::get('top'),
+      'title' => __('top'),
       'icon'  => 'bi-bar-chart'
     ], [
       'tl'    => UserData::REGISTERED_ADMIN,
       'id'    => 'main.deleted',
       'url'   => getUrlByName('main.deleted'),
-      'title' => Translate::get('deleted'),
+      'title' => __('deleted'),
       'icon'  => 'bi-bar-chart'
     ],
   ],
@@ -88,14 +88,14 @@ return [
       'tl'    => UserData::USER_ZERO_LEVEL,
       'id'    => 'answers.all',
       'url'   => '/answers',
-      'title' => Translate::get('answers'),
+      'title' => __('answers'),
       'icon'  => 'bi-sort-down'
     ],
     [
       'tl'    => UserData::REGISTERED_ADMIN,
       'id'    => 'answers.deleted',
       'url'   => getUrlByName('answers.deleted'),
-      'title' => Translate::get('deleted'),
+      'title' => __('deleted'),
       'icon'  => 'bi-app'
     ],
   ],
@@ -107,14 +107,14 @@ return [
       'tl'    => UserData::USER_ZERO_LEVEL,
       'id'    => 'comments.all',
       'url'   => '/comments',
-      'title' => Translate::get('comments'),
+      'title' => __('comments'),
       'icon'  => 'bi-sort-down'
     ],
     [
       'tl'    => UserData::REGISTERED_ADMIN,
       'id'    => 'comments.deleted',
       'url'   => getUrlByName('comments.deleted'),
-      'title' => Translate::get('deleted'),
+      'title' => __('deleted'),
       'icon'  => 'bi-app'
     ],
   ]

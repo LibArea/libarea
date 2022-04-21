@@ -18,7 +18,7 @@ class Search
     public function __construct()
     {
         $this->user  = UserData::get();
-        $this->engine = new Engine([]);
+        $this->engine = new Engine();
     }
 
     public function index()
@@ -41,15 +41,21 @@ class Search
         $pageNumber = self::pageNumber(Request::getGetInt('page'));
 
         $q      = Request::getGet('q');
-        $cat    = Request::getGet('cat') ?? 'post';
-        $cat    = $cat == 'post' ? 'post' : 'website';
-        $sw     = microtime(true);
+        $cat    = Request::getGet('cat');
+        
+        $allowed = ['post', 'website', 'all'];
+        if (!in_array($cat, $allowed)) {
+            $cat = 'all';
+        }
+        
+        $sw = microtime(true);
 
         if ($q) {
-
             $segments = [];
             $isFacetSearching = false;
-            foreach (Request::getGet() as $field => $value) {
+           
+           /* TODO: If we introduce facets
+           foreach (Request::getGet() as $field => $value) {
                 if (strpos($field, 'facet-') === 0) {
                     $isFacetSearching = true;
                     $facetField = substr($field, 6);
@@ -59,9 +65,9 @@ class Search
                     }
                     $segments[] = QuerySegment::or($subSeg);
                 }
-            }
+            } */
 
-            if ($cat) {
+            if ($cat != 'all') {
                 $isFacetSearching = false;
                 $segments =  QuerySegment::or(QuerySegment::exactSearch('cat', $cat));
             }
@@ -87,16 +93,15 @@ class Search
             }
 
             $count = $results['numFound'] ?? 0;
-
-            /* self::setLogs(
+            self::setLogs(
                 [
-                    'request'       => 1,
+                    'request'       => $q,
                     'action_type'   => $cat,
                     'add_ip'        => Request::getRemoteAddress(),
                     'user_id'       => $this->user['id'],
                     'count_results' => $count ?? 0,
                 ]
-            ); */
+            );
         }
 
         $count = $results['numFound'] ?? 0;
@@ -133,11 +138,6 @@ class Search
     public static function search($pageNumber, $limit, $query, $type)
     {
         return SearchModel::getSearch($pageNumber, $limit, $query, $type);
-    }
-
-    public static function searchCount($query, $type)
-    {
-        return SearchModel::getSearchCount($query, $type);
     }
 
     public static function searchTags($query, $type, $limit)

@@ -1,6 +1,6 @@
 <main>
   <div class="box-flex">
-    <p class="m0"><?= __($data['sheet']); ?></p>
+    <p class="m0"><?= $data['sheet']; ?></p>
   </div>
   <div class="mb15 mb-ml0 hidden">
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
