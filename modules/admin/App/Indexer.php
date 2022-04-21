@@ -16,12 +16,12 @@ class Indexer
 
     public function indexerAll()
     {
-       self::indexerPost(); 
-       self::indexerItem();  
-       redirect(getUrlByName('admin.search')); 
+        self::indexerPost();
+        self::indexerItem();
+        redirect(getUrlByName('admin.search'));
     }
-    
-     public function indexerPost()
+
+    public function indexerPost()
     {
         $posts = IndexerModel::getPosts();
         foreach ($posts as $post) {
@@ -40,12 +40,12 @@ class Indexer
             $this->engine->update($arr);
         }
     }
-    
-     public function indexerItem()
+
+    public function indexerItem()
     {
         $items = IndexerModel::getItems();
         foreach ($items as $item) {
-            
+
             $title = $this->filtration($item['item_title']);
             $arr = [
                 "id"        => $item['item_id'],
@@ -56,18 +56,18 @@ class Indexer
                 "url"       => $item['item_url'],
                 "cat"       => ["website"],
             ];
-            
+
             $this->engine->update($arr);
         }
     }
-    
-     public function filtration($title)
+
+    public function filtration($title)
     {
-            $chars = ['«', '»'];
-            return str_replace($chars, '', $title);
+        $chars = ['«', '»'];
+        return str_replace($chars, '', $title);
     }
-    
-     public function clearCache()
+
+    public function clearCache()
     {
         $this->engine->getIndex()->clearCache();
         $this->engine->getIndex()->rebuild();
