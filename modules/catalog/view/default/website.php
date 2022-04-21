@@ -20,7 +20,7 @@ $item = $data['item'];
 
       <div class="w-100">
         <div class="w-40 mt10 left mb-w-100">
-          <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'w-100 box-shadow'); ?>
+          <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'preview w-100 box-shadow'); ?>
         </div>
         <div class="w-60 left pl20 mb-w-100 max-w780 mb-p10">
           <?= Content::text($item['item_content'], 'text'); ?>

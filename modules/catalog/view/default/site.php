@@ -4,7 +4,7 @@
     <?php if ($item['item_published'] == 1) : ?>
       <li>
         <div class="list-items__thumb mb-none">
-          <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'list-items__thumb-image'); ?>
+          <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'preview list-items__thumb-image'); ?>
         </div>
         <div class="list-items__description">
           <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
