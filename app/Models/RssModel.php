@@ -70,7 +70,7 @@ class RssModel extends \Hleb\Scheme\App\Models\MainModel
                             ON rel.relation_post_id = post_id 
                             INNER JOIN users ON id = post_user_id
                                 WHERE facet_list LIKE :qa
-                                AND post_is_deleted = 0 AND post_tl = 0 AND post_draft != 1 
+                                AND post_is_deleted = 0 AND post_tl = 0 AND post_draft = 0 
                                 ORDER BY post_top DESC, post_date DESC LIMIT 1000";
 
         return DB::run($sql, ['qa' => "%" . $facet_slug . "%"])->fetchAll();

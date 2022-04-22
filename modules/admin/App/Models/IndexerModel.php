@@ -13,6 +13,6 @@ class IndexerModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getPosts()
     {
-        return DB::run("SELECT post_id, post_title, post_content FROM posts WHERE post_is_deleted = 0")->fetchAll();
+        return DB::run("SELECT post_id, post_title, post_content FROM posts WHERE post_is_deleted = 0 AND post_draft = 0")->fetchAll();
     }
 }

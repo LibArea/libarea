@@ -11,19 +11,19 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
     {
         switch ($sheet) {
             case 'facet.feed':
-                $string     = "WHERE facet_list LIKE :qa AND post_type != 'page'";
+                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type != 'page'";
                 break;
             case 'facet.recommend':
-                $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_type != 'page'";
+                $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type != 'page'";
                 break;
             case 'web.feed':
                 $string     = "WHERE post_url_domain = :qa AND post_draft = 0";
                 break;
             case 'admin.posts.all':
-                $string     = "WHERE post_user_id != :qa AND post_is_deleted = 0 AND post_type != 'page'";
+                $string     = "WHERE post_user_id != :qa AND post_is_deleted = 0 AND post_draft = 0 AND post_type != 'page'";
                 break;
             case 'admin.posts.ban':
-                $string     = "WHERE post_is_deleted = :qa AND post_type != 'page'";
+                $string     = "WHERE post_is_deleted = :qa AND post_type != 'page' AND post_draft = 0";
                 break;
             case 'profile.posts':
                 $string     = "WHERE post_user_id  = :qa AND post_draft = 0";

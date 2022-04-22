@@ -3,7 +3,7 @@
 <div class="mb-none">
 
   <div class="box">
-    <blockquote class="ml0 mb10 gray">
+    <blockquote class="ml0 mb10 gray break-all">
       <?= $profile['about']; ?>...
     </blockquote>
     <div class="gray-600">

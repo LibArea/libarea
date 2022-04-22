@@ -3,9 +3,7 @@
   <div class="box">
 
     <a href="/"><?= __('home'); ?></a> /
-    <span class="red">
-      <?= sprintf(__('edit.option'), __('page')); ?>
-    </span>
+    <span class="red"><?= __('edit.option', ['name' => __('pages')]); ?></span>
     
     <form action="<?= getUrlByName('content.change', ['type' => 'page']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>

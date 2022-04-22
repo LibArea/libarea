@@ -2,7 +2,7 @@
   <div class="box">
 
     <a href="/"><?= __('home'); ?></a> /
-    <span class="red"><?= sprintf(__('add.option'), __('pages')); ?></span>
+    <span class="red"><?= __('add.option', ['name' => __('pages')]); ?></span>
 
     <form action="<?= getUrlByName('content.create', ['type' => 'page']); ?>" method="post">
       <?= csrf_field() ?>
