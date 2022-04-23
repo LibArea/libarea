@@ -28,7 +28,7 @@
       <?php
       switch ($topic['facet_type']) :
         case 'category':
-          $url    = '/web/' . $topic['facet_slug'];
+          $url    = getUrlByName('web.dir', ['grouping' => 'all', 'slug' =>$topic['facet_slug']]);
           break;
         default:
           $url = getUrlByName($topic['facet_type'], ['slug' => $topic['facet_slug']]);
@@ -37,6 +37,7 @@
       ?>
 
       <div class="w-50 mb5">
+        <?php $topic['level'] = $topic['level'] ?? null; ?>
         <?php if ($topic['level'] > 0) : ?>
           <?php $color = true; ?>
           <i class="bi-arrow-return-right gray ml<?= $topic['level'] * 10; ?>"></i>
@@ -73,6 +74,18 @@
   <?php else : ?>
     <?php if ($data['type'] != 'all') : ?>
       <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
+    <?php endif; ?>
+  <?php endif; ?>
+  
+  <?php if ($data['type'] == 'section') : ?>
+  
+    <?php if (!empty($data['pages'])) :?>
+    <h3 class="mb5"><?= __('pages'); ?></h3>
+      <?php foreach ($data['pages'] as $page) : ?>
+        <a class="block mb5" href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => $page['post_slug']]); ?>">
+          <i class="bi-info-square middle mr5"></i> <?= $page['post_title']; ?> <sup><?= $page['post_id']; ?></sup>
+        </a>
+      <?php endforeach; ?>
     <?php endif; ?>
   <?php endif; ?>
 </div>

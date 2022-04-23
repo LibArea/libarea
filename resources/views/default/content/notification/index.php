@@ -19,7 +19,7 @@
               <i class="<?= $n['icon']; ?> middle"></i>
               <a class="black ml5" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
               <span class="lowercase gray-600">
-                <?= sprintf(__($n['lang']), '<a href="' . $url . '">', '</a>'); ?>
+                <?= __($n['lang'], ['url' => '<a href="' . $url . '">', 'a' => '</a>']); ?>
                 — <?= Html::langDate($notif['time']); ?>
               </span>
               <?php if ($notif['flag'] == 0) : ?><sup class="ml5 red">✔</sup><?php endif; ?>

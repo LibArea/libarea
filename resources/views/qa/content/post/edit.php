@@ -1,12 +1,9 @@
 <?php $post = $data['post']; ?>
-<main class="w-100">
-  <div class="bg-white items-center justify-between br-gray br-rd5 p15 mb15">
+<main class="col-two">
+  <div class="box">
 
-    <a href="/"><?= __('home'); ?></a> /
-    <span class="red">
-      <?= __('edit.option', ['name' => __('post')]); ?>
-    </span>
-    
+    <a href="/"><?= __('home'); ?></a> / <span class="red"><?= __('edit.option', ['name' => __($post['post_type'])]); ?></span>
+
     <form class="max-w780" action="<?= getUrlByName('content.change', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
@@ -15,13 +12,6 @@
         <input minlength="6" maxlength="250" id="title" value="<?= $post['post_title']; ?>" type="text" required="" name="post_title">
         <div class="help">6 - 250 <?= __('characters'); ?></div>
       </fieldset>
-
-      <?= Tpl::insert('/_block/form/select/blog', [
-        'data'        => $data,
-        'action'      => 'edit',
-        'type'        => 'blog',
-        'title'       => __('blogs'),
-      ]); ?>
 
       <?= Tpl::insert('/_block/form/select/select', [
         'data'          => $data,
@@ -33,6 +23,29 @@
         'help'          => __('necessarily'),
         'red'           => 'red'
       ]); ?>
+
+      <?php if (!empty($data['blog'])) : ?>
+        <?= Tpl::insert('/_block/form/select/blog', [
+          'data'        => $data,
+          'action'      => 'edit',
+          'type'        => 'blog',
+          'title'       => __('blogs'),
+        ]); ?>
+      <?php endif; ?>
+
+      <?php if (UserData::checkAdmin()) : ?>
+        <?= Tpl::insert('/_block/form/select/section', [
+          'data'          => $data,
+          'action'        => 'edit',
+          'type'          => 'section',
+          'title'         => __('section'),
+          'required'      => false,
+          'maximum'       => 1,
+          'help'          => __('necessarily'),
+        ]); ?>
+      <?php endif; ?>
+
+
 
       <?php if ($post['post_url']) : ?>
         <div class="mb20 2flex">
@@ -47,28 +60,30 @@
         </div>
       <?php endif; ?>
 
-      <div class="file-upload mb20" id="file-drag">
-        <div class="flex">
-          <?php if ($post['post_content_img']) : ?>
-            <div class="mr20">
-              <?= Html::image($post['post_content_img'], $post['post_title'], 'w160', 'post', 'cover'); ?>
-              <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
-              <a class="img-remove text-sm" href="/post/img/<?= $post['post_id']; ?>/remove">
-                <?= __('remove'); ?>
-              </a>
-            </div>
-          <?php endif; ?>
+      <?php if ($post['post_type'] == 'post') : ?>
+        <div class="file-upload mb20" id="file-drag">
+          <div class="flex">
+            <?php if ($post['post_content_img']) : ?>
+              <div class="mr20">
+                <?= Html::image($post['post_content_img'], $post['post_title'], 'w160', 'post', 'cover'); ?>
+                <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
+                <a class="img-remove text-sm" href="/post/img/<?= $post['post_id']; ?>/remove">
+                  <?= __('remove'); ?>
+                </a>
+              </div>
+            <?php endif; ?>
 
-          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-gray">
-          <div id="start">
-            <input id="file-upload" type="file" name="images" accept="image/*" />
-            <div id="notimage" class="none"><?= __('select.image'); ?></div>
+            <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-gray">
+            <div id="start">
+              <input id="file-upload" type="file" name="images" accept="image/*" />
+              <div id="notimage" class="none"><?= __('select.image'); ?></div>
+            </div>
+          </div>
+          <div id="response" class="hidden">
+            <div id="messages"></div>
           </div>
         </div>
-        <div id="response" class="hidden">
-          <div id="messages"></div>
-        </div>
-      </div>
+      <?php endif; ?>
 
       <?= Tpl::insert('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
@@ -86,47 +101,54 @@
         <?php endif; ?>
       <?php endif; ?>
 
-      <?= Tpl::insert('/_block/form/select/content-tl', [
-        'data' => $post['post_tl'],
-        'user' => $user
-      ]); ?>
+      <?php if ($post['post_type'] == 'post') : ?>
+        <?= Tpl::insert('/_block/form/select/content-tl', [
+          'data' => $post['post_tl'],
+          'user' => $user
+        ]); ?>
 
-      <?= Tpl::insert('/_block/form/radio', [
-        'data' => [
-          [
-            'title' => __('format.Q&A'),
-            'name' => 'post_feature',
-            'checked' => $post['post_feature']
-          ],
-          [
-            'title' => __('close?'),
-            'name' => 'closed',
-            'checked' => $post['post_closed']
-          ],
-        ]
-      ]); ?>
-
-      <?= Tpl::insert('/_block/form/radio', [
-        'data' => [
-          [
-            'title'     => __('translation'),
-            'name'      => 'translation',
-            'checked'   => $post['post_translation']
-          ],
-        ]
-      ]); ?>
-
-      <?php if (UserData::checkAdmin()) : ?>
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
-              'title'   => __('pin'),
-              'name'    => 'top',
-              'checked' => $post['post_top']
+              'title' => __('format.Q&A'),
+              'name' => 'post_feature',
+              'checked' => $post['post_feature']
+            ],
+            [
+              'title' => __('close?'),
+              'name' => 'closed',
+              'checked' => $post['post_closed']
             ],
           ]
         ]); ?>
 
+        <?= Tpl::insert('/_block/form/radio', [
+          'data' => [
+            [
+              'title'     => __('translation'),
+              'name'      => 'translation',
+              'checked'   => $post['post_translation']
+            ],
+          ]
+        ]); ?>
+
+
+        <?php if (UserData::checkAdmin()) : ?>
+          <?= Tpl::insert('/_block/form/radio', [
+            'data' => [
+              [
+                'title'   => __('pin'),
+                'name'    => 'top',
+                'checked' => $post['post_top']
+              ],
+            ]
+          ]); ?>
+        <?php endif; ?>
+
+      <?php endif; ?>
+
+
+      <?php if (UserData::checkAdmin()) : ?>
         <?= Tpl::insert('/_block/form/select/user', [
           'uid'           => $user,
           'user'          => $data['user'],
@@ -137,19 +159,23 @@
         ]); ?>
       <?php endif; ?>
 
-      <?= Tpl::insert('/_block/form/select/related-posts', [
-        'data'          => $data,
-        'action'        => 'edit',
-        'type'          => 'post',
-        'title'         => __('related posts'),
-        'help'          => __('necessarily'),
-      ]); ?>
+      <?php if ($post['post_type'] == 'post') : ?>
+        <?= Tpl::insert('/_block/form/select/related-posts', [
+          'data'          => $data,
+          'action'        => 'edit',
+          'type'          => 'post',
+          'title'         => __('related posts'),
+          'help'          => __('necessarily'),
+        ]); ?>
+      <?php endif; ?>
+
+
 
       <p>
         <?php if ($post['post_draft'] == 1) : ?>
-          <input type="hidden" name="draft" id="draft" value="1">
+          <input type="hidden" name="draft" value="1">
         <?php endif; ?>
-        <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
+        <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
         <?= Html::sumbit(__('edit')); ?>
       </p>
     </form>

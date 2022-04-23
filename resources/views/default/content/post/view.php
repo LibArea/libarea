@@ -14,7 +14,7 @@
 
         <div class="flex flex-row items-center">
           <?php if (!empty($data['blog'])) : ?>
-            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray-600 text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
+            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
               <?= $data['blog'][0]['facet_title']; ?>
             </a>
           <?php endif; ?>

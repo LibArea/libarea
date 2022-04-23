@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{FavoriteModel, PostModel, AnswerModel};
-use Translate, UserData, Html;
+use UserData;
 
 class FavoriteController extends MainController
 {
@@ -36,7 +36,7 @@ class FavoriteController extends MainController
             ]
         );
 
-        return Translate::get('successfully');
+        return __('successfully');
     }
 
     public static function redirectItem($content_id, $type, $user)

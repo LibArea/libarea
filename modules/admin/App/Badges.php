@@ -4,17 +4,10 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
-use Validation, UserData, Meta, Html;
+use Validation, Meta, Html;
 
 class Badges
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // All awards
     // Все награды
     public function index($sheet, $type)
@@ -39,7 +32,7 @@ class Badges
         return view(
             '/view/default/badge/add',
             [
-                'meta'  => Meta::get(sprintf(__('add.option'), __('badges'))),
+                'meta'  => Meta::get(__('badges')),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,
@@ -78,9 +71,9 @@ class Badges
         $icon          = $_POST['badge_icon']; // для Markdown
 
         $redirect = getUrlByName('admin.badges');
-        Validation::Length($title, __('title'), '4', '25', $redirect);
-        Validation::Length($description, __('description'), '12', '250', $redirect);
-        Validation::Length($icon, __('icon'), '12', '250', $redirect);
+        Validation::Length($title, 'title', '4', '25', $redirect);
+        Validation::Length($description, 'description', '12', '250', $redirect);
+        Validation::Length($icon, 'icon', '12', '250', $redirect);
 
         BadgeModel::add(
             [
@@ -126,9 +119,7 @@ class Badges
             ]
         );
 
-        Html::addMsg('successfully', 'success');
-
-        redirect(getUrlByName('admin.user.edit', ['id' => $uid]));
+        Validation::ComeBack('successfully', 'success', getUrlByName('admin.user.edit', ['id' => $uid]));
     }
 
     public function edit()
@@ -145,9 +136,9 @@ class Badges
         $description   = Request::getPost('badge_description');
         $icon          = $_POST['badge_icon']; // для Markdown
 
-        Validation::Length($title, __('title'), '4', '25', $redirect);
-        Validation::Length($description, __('description'), '12', '250', $redirect);
-        Validation::Length($icon, __('icon'), '12', '250', $redirect);
+        Validation::Length($title, 'title', '4', '25', $redirect);
+        Validation::Length($description, 'description', '12', '250', $redirect);
+        Validation::Length($icon, 'icon', '12', '250', $redirect);
 
         BadgeModel::edit(
             [
@@ -158,7 +149,7 @@ class Badges
             ]
         );
 
-        redirect($redirect);
+        Validation::ComeBack('change.saved', 'success', $redirect);
     }
 
     public function remove()
@@ -171,8 +162,6 @@ class Badges
             ]
         );
 
-        Html::addMsg('command.executed', 'success');
-
-        redirect('/admin/users/' . $uid . '/edit');
+        Validation::ComeBack('command.executed', 'success', '/admin/users/' . $uid . '/edit');
     }
 }

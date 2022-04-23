@@ -40,7 +40,7 @@
       ?>
 
     </ul>
-    <?php if ($user['trust_level'] > 1) : ?>
+    <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_blog')) : ?>
       <p class="m0 text-xl">
         <?php if ($data['type'] == 'blog') : ?>
           <?php if ($data['limit']) : ?>

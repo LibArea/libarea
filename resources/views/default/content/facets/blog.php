@@ -59,26 +59,6 @@ if ($blog['facet_is_deleted'] == 0) : ?>
               <?= $data['info']; ?>
             </div>
           <?php endif; ?>
-
-          <?php if (!empty($data['pages'])) : ?>
-            <div class="sticky top0 top-sm">
-              <div class="box text-sm">
-                <h3 class="uppercase-box"><?= __('pages'); ?></h3>
-                <?php foreach ($data['pages'] as $ind => $row) : ?>
-                  <div class="mb5">
-                    <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('blog.article', ['facet_slug' => $blog['facet_slug'], 'slug' => $row['post_slug']]); ?>">
-                      <?= $row['post_title']; ?>
-                    </a>
-                    <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $user['id']) : ?>
-                      <a class="text-sm gray-600" title="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
-                        <i class="bi-pencil"></i>
-                      </a>
-                    <?php endif; ?>
-                  </div>
-                <?php endforeach; ?>
-              </div>
-            </div>
-          <?php endif; ?>
         <?php endif; ?>
       </aside>
     </div>

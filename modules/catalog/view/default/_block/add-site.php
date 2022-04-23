@@ -22,7 +22,7 @@
     <li>
       <a href="<?= getUrlByName('web.add'); ?>">
         <i class="bi-plus-lg"></i>
-        <?= sprintf(__('add.option'), mb_strtolower(__('website'))); ?>
+          <?= __('add.option', ['name' => __('website')]); ?>
       </a>
     </li>
   <?php endif; ?>

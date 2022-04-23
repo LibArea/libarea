@@ -2,9 +2,8 @@
 
 namespace Modules\Catalog\App;
 
-use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
-use Config, UserData, Meta, Tpl;
+use Config, UserData, Meta;
 
 class Home
 {

@@ -42,19 +42,19 @@ class Search
 
         $q      = Request::getGet('q');
         $cat    = Request::getGet('cat');
-        
+
         $allowed = ['post', 'website', 'all'];
         if (!in_array($cat, $allowed)) {
             $cat = 'all';
         }
-        
+
         $sw = microtime(true);
 
         if ($q) {
             $segments = [];
             $isFacetSearching = false;
-           
-           /* TODO: If we introduce facets
+
+            /* TODO: If we introduce facets
            foreach (Request::getGet() as $field => $value) {
                 if (strpos($field, 'facet-') === 0) {
                     $isFacetSearching = true;

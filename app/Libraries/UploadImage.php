@@ -173,8 +173,7 @@ class UploadImage
         // Width check
         $width_h  = getimagesize($cover['tmp_name']);
         if ($width_h < 500) {
-            Html::addMsg(Translate::get('five.hundred.width'), 'error');
-            redirect($redirect);
+            Validation::ComeBack('five.hundred.width', 'error', $redirect);
         }
 
         $image = new  SimpleImage();

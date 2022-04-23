@@ -8,7 +8,7 @@
 <?= getRequestResources()->getBottomScripts(); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  <?php if (!$uid) { ?>
+  <?php if (!$uid) : ?>
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
         Notiflix.Report.info(
@@ -17,16 +17,9 @@
           '<?= __('well'); ?>',
         );
       }));
-  <?php } ?>
-  <?php if ($msg = Html::getMsg()) : ?>
-    <?php foreach ($msg as $message) :  ?>
-      <?php if ($message[1] == 'error') : ?>
-        Notiflix.Notify.failure('<?= __($message[0]); ?>');
-      <?php else : ?>
-        Notiflix.Notify.info('<?= __($message[0]); ?>');
-      <?php endif; ?>
-    <?php endforeach ?>
   <?php endif; ?>
+  
+  <?= Html::getMsg(); ?>
 
   <?php if ($scroll) : ?>
     // Что будет смотреть

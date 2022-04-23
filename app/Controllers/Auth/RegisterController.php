@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\AuthModel;
-use Config, Integration, Validation, SendEmail, Translate, Tpl, Meta, Html, UserData;
+use Config, Integration, Validation, SendEmail, Tpl, Meta, Html, UserData;
 
 class RegisterController extends MainController
 {
@@ -33,7 +33,7 @@ class RegisterController extends MainController
         return Tpl::agRender(
             '/auth/register',
             [
-                'meta'  => Meta::get(Translate::get('registration'), Translate::get('security.info'), $m),
+                'meta'  => Meta::get(__('registration'), __('security.info'), $m),
                 'data'  => [
                     'sheet' => 'registration',
                     'type'  => 'register'
@@ -58,8 +58,7 @@ class RegisterController extends MainController
         Validation::Email($email, $redirect);
 
         if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
-            Html::addMsg('email.replay', 'error');
-            redirect($redirect);
+            Validation::ComeBack('email.replay', 'error', $redirect);
         }
 
         # Если домен указанной почты содержится в списке недопустимых
@@ -70,45 +69,38 @@ class RegisterController extends MainController
         }
 
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
-            Html::addMsg('multiple.accounts', 'error');
-            redirect($redirect);
+            Validation::ComeBack('multiple.accounts', 'error', $redirect);
         }
 
-        Validation::Slug($login, Translate::get('nickname'), '/register');
-        Validation::Length($login, Translate::get('nickname'), '3', '10', $redirect);
+        Validation::Slug($login, 'nickname', '/register');
+        Validation::Length($login, 'nickname', '3', '10', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
-            Html::addMsg('nick.character.repetitions', 'error');
-            redirect($redirect);
+            Validation::ComeBack('nick.character.repetitions', 'error', $redirect);
         }
 
         // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
         if (in_array($login, Config::get('stop-nickname'))) {
-            Html::addMsg('nickname.replay', 'error');
-            redirect($redirect);
+            Validation::ComeBack('nickname.replay', 'error', $redirect);
         }
 
         if (is_array(AuthModel::checkRepetitions($login, 'login'))) {
-            Html::addMsg('nickname-replay', 'error');
-            redirect($redirect);
+            Validation::ComeBack('nickname-replay', 'error', $redirect);
         }
 
-        Validation::Length($password, Translate::get('password'), '8', '32', $redirect);
+        Validation::Length($password, 'password', '8', '32', $redirect);
         if (substr_count($password, ' ') > 0) {
-            Html::addMsg('password.spaces', 'error');
-            redirect($redirect);
+            Validation::ComeBack('password.spaces', 'error', $redirect);
         }
 
         if ($password != $password_confirm) {
-            Html::addMsg('pass.match.err', 'error');
-            redirect($redirect);
+            Validation::ComeBack('pass.match.err', 'error', $redirect);
         }
 
         if (!$inv_code) {
             if (Config::get('general.captcha')) {
                 if (!Integration::checkCaptchaCode()) {
-                    Html::addMsg('code.error', 'error');
-                    redirect('/register');
+                    Validation::ComeBack('code.error', 'error', '/register');
                 }
             }
             // Если хакинг формы
@@ -152,9 +144,7 @@ class RegisterController extends MainController
                 ]
             );
 
-            Html::addMsg('successfully.login', 'success');
-
-            redirect(getUrlByName('login'));
+            Validation::ComeBack('successfully.login', 'success', getUrlByName('login'));
         }
 
         // Email Activation
@@ -169,9 +159,7 @@ class RegisterController extends MainController
         // Sending email
         SendEmail::mailText($active_uid, 'activate.email', ['link' => getUrlByName('activate.code', ['code' => $email_code])]);
 
-        Html::addMsg('check.your.email', 'success');
-
-        redirect(getUrlByName('login'));
+        Validation::ComeBack('check.your.email', 'success', getUrlByName('login'));
     }
 
     // Показ формы регистрации с инвайтом
@@ -181,14 +169,13 @@ class RegisterController extends MainController
         $invate = InvitationModel::available($code);
 
         if (!$invate) {
-            Html::addMsg('code.incorrect', 'error');
-            redirect('/');
+            Validation::ComeBack('code.incorrect', 'error', '/');
         }
 
         return Tpl::agRender(
             '/auth/register-invate',
             [
-                'meta'  => Meta::get(Translate::get('registration.invite')),
+                'meta'  => Meta::get(__('registration.invite')),
                 'data'  => [
                     'invate' => $invate,
                     'type'  => 'invite'

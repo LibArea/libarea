@@ -23,7 +23,7 @@
               <?php else : ?>
                 <?= __('no.users'); ?>...
               <?php endif; ?>
-            </blockquote> 
+            </blockquote>
             <a class="mr15 gray-600" href="<?= getUrlByName('team.edit', ['id' => $team['id']]); ?>">
               <?= __('edit'); ?>
             </a>

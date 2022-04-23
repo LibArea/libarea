@@ -65,11 +65,11 @@
     </fieldset>
     
     <fieldset>
-      <label for="limiting_mode">
+      <label for="scroll">
         <?= __('endless.scroll'); ?>
       </label>
-      <input type="radio" name="limiting_mode" <?php if ($data['user']['scroll'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('no'); ?>
-      <input type="radio" name="limiting_mode" <?php if ($data['user']['scroll'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('yes'); ?>
+      <input type="radio" name="scroll" <?php if ($data['user']['scroll'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('no'); ?>
+      <input type="radio" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('yes'); ?>
     </fieldset>
 
     <hr>

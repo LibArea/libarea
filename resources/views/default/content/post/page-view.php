@@ -19,7 +19,7 @@
     <div class="gray-600 italic ml15">
       <?= $page['post_modified']; ?>
       <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) : ?>
-        <a class="gray-600 ml5" title="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => 'page', 'id' => $page['post_id']]); ?>">
+        <a class="gray-600 ml5" title="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
           <i class="bi-pencil"></i>
         </a>
       <?php endif; ?>
@@ -28,21 +28,15 @@
 </main>
 <aside>
   <div class="box sticky top-sm text-sm">
-    <?php if ($data['type'] == 'blog.page') : ?>
-      <h3 class="uppercase-box">
-        <?= __('blog'); ?>
-      </h3>
-      <div class="mb10">
-        <?= Html::image($data['facet']['facet_img'], $data['facet']['facet_title'], 'img-base', 'logo', 'small'); ?>
-        <a href="<?= getUrlByName('blog', ['slug' => $data['facet']['facet_slug']]); ?>">
-          <?= $data['facet']['facet_title']; ?></a>
-      </div>
-    <?php endif; ?>
-    <?php $url = $data['type'] == 'blog.page' ? '/blog/' . $data['facet']['facet_slug'] . '/article/' : '/info/article/'; ?>
     <?php foreach ($data['pages'] as $ind => $row) : ?>
-      <a class="block pt5 pb5 gray" href="<?= $url; ?><?= $row['post_slug']; ?>">
-        <i class="bi-info-square middle mr5"></i> <?= $row['post_title']; ?>
-      </a>
+      <div class=" pt5 pb5">
+        <a class="gray" href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
+          <i class="bi-info-square middle mr5"></i> <?= $row['post_title']; ?>
+        </a>
+        <?php if (UserData::checkAdmin()) : ?>
+          <a href="<?= getUrlByName('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><i class="bi-pencil"></i></a>
+        <?php endif; ?>
+      </div>
     <?php endforeach; ?>
   </div>
 </aside>

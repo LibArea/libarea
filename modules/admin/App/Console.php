@@ -75,7 +75,7 @@ class Console
     public static function consoleRedirect()
     { 
         if (PHP_SAPI != 'cli') {
-            Html::addMsg('command.executed', 'success');
+            Html::addMsg(__('command.executed'), 'success');
         }
         return true;
     }

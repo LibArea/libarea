@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Content, UploadImage, Validation, Translate, Tpl, Meta, Html, UserData;
+use Content, UploadImage, Validation, Tpl, Meta, Html, UserData;
 
 class EditPostController extends MainController
 {
@@ -40,18 +40,16 @@ class EditPostController extends MainController
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
-        $puth = '/post/edit';
-        if ($post['post_type'] == 'page') $puth = '/page/edit';
-
         return Tpl::agRender(
-            $puth,
+            '/post/edit',
             [
-                'meta'  => Meta::get(Translate::get('edit.option', ['name' => Translate::get('post')])),
+                'meta'  => Meta::get(__('edit.option', ['name' => __('post')])),
                 'data'  => [
                     'sheet'         => 'edit-post',
                     'type'          => 'edit',
                     'post'          => $post,
                     'user'          => UserModel::getUser($post['post_user_id'], 'id'),
+                    'blog'          => FacetModel::getFacetsUser($this->user['id'], 'blog'),
                     'post_arr'      => $post_related,
                     'topic_arr'     => PostModel::getPostFacet($post['post_id'], 'topic'),
                     'blog_arr'      => PostModel::getPostFacet($post['post_id'], 'blog'),
@@ -84,6 +82,8 @@ class EditPostController extends MainController
 
         // Связанные посты и темы
         $fields    = Request::getPost() ?? [];
+
+
         if ($post['post_type'] == 'post') {
             $json_post  = $fields['post_select'] ?? [];
             $arr_post   = json_decode($json_post, true);
@@ -93,29 +93,30 @@ class EditPostController extends MainController
                 }
             }
             $post_related = implode(',', $id ?? []);
-            $redirect   = getUrlByName('content.edit', ['type' => 'post', 'id' => $post_id]);
-        } else {
-            $redirect   = getUrlByName('content.edit', ['type' => 'page', 'id' => $post_id]);
         }
+
+        $redirect   = getUrlByName('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
         // If there is a change in post_user_id (owner) and who changes staff
         // Если есть смена post_user_id (владельца) и кто меняет персонал
         $post_user_id = $post['post_user_id'];
         if (UserData::checkAdmin()) {
             $user_new  = Request::getPost('user_id');
-            $post_user_new = json_decode($user_new, true);
+            if ($user_new) {
+                $post_user_new = json_decode($user_new, true);
                 if ($post['post_user_id'] != $post_user_new[0]['id']) {
                     $post_user_id = $post_user_new[0]['id'];
                 }
+            }
         }
 
         $post_title = str_replace("&nbsp;", '', $post_title);
-        Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
+        Validation::Length($post_title, 'title', '6', '250', $redirect);
 
         if ($content == '') {
             $content = $post['post_content'];
         }
-        Validation::Length($content, Translate::get('the post'), '6', '25000', $redirect);
+        Validation::Length($content, 'the.post', '6', '25000', $redirect);
 
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
@@ -128,11 +129,12 @@ class EditPostController extends MainController
         }
 
         // Обложка поста
-        $cover = $_FILES['images'] ?? false;
         if (!empty($_FILES['images']['name'])) {
-            $post_img = UploadImage::cover_post($cover, $post, $redirect, $this->user['id']);
+            $post_img = UploadImage::cover_post($_FILES['images'], $post, $redirect, $this->user['id']);
         }
         $post_img = $post_img ?? $post['post_content_img'];
+
+        $new_type = self::addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
 
         PostModel::editPost(
             [
@@ -140,7 +142,7 @@ class EditPostController extends MainController
                 'post_title'            => $post_title,
                 'post_slug'             => $post['post_slug'],
                 'post_feature'          => $post_feature,
-                'post_type'             => $post['post_type'],
+                'post_type'             => $new_type,
                 'post_translation'      => $post_translation,
                 'post_date'             => $post_date,
                 'post_user_id'          => $post_user_id ?? 1,
@@ -154,27 +156,38 @@ class EditPostController extends MainController
             ]
         );
 
-        self::addFacetsPost($fields, $post_id, $redirect);
 
-        redirect('/post/' . $post_id);
+
+        Validation::ComeBack('change.saved', 'success', '/post/' . $post_id);
     }
 
     // Add fastes (blogs, topics) to the post 
     public static function addFacetsPost($fields, $content_id, $redirect)
     {
-        $facets = $fields['facet_select'] ?? [];
+        // topic
+        $new_type = 'post';
+        $facets = $fields['facet_select'] ?? false;
+        if (!$facets) {
+            Validation::ComeBack('select.topic', 'error', $redirect);
+        }
         $topics = json_decode($facets, true);
 
-        $blog_post  = $fields['blog_select'] ?? false;
-        $blog       = json_decode($blog_post, true);
-
-        $all_topics = array_merge($blog ?? [], $topics ?? []);
-        if (!$all_topics) {
-            Html::addMsg('select.topic', 'error');
-            redirect($redirect);
+        $section  = $fields['section_select'] ?? false;
+        if ($section) {
+            $new_type = 'page';
+            $OneFacets = json_decode($section, true);
         }
 
-        return FacetModel::addPostFacets($all_topics, $content_id);
+        $blog_post  = $fields['blog_select'] ?? false;
+        if ($blog_post) {
+            $TwoFacets = json_decode($blog_post, true);
+        }
+
+        $GeneralFacets = array_merge($OneFacets ?? [], $TwoFacets ?? []);
+
+        FacetModel::addPostFacets(array_merge($GeneralFacets ?? [], $topics), $content_id);
+
+        return $new_type;
     }
 
     // Удаление обложки
@@ -189,8 +202,7 @@ class EditPostController extends MainController
         PostModel::setPostImgRemove($post['post_id']);
         UploadImage::cover_post_remove($post['post_content_img'], $this->user['id']);
 
-        Html::addMsg('cover.removed', 'success');
-        redirect(getUrlByName('post.edit', ['id' => $post['post_id']]));
+        Validation::ComeBack('cover.removed', 'success', getUrlByName('content.edit', ['type' => 'post', 'id' => $post['post_id']]));
     }
 
     public function uploadContentImage()

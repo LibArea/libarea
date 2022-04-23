@@ -1,7 +1,7 @@
-<main class="col-two">
+<main>
   <div class="box">
     <?php if ($data['site']['item_title']) : ?>
-      <div class="right mt10">
+      <div class="right mt15">
         <?= Html::votes($user['id'], $data['site'], 'item', 'ps', 'mr10'); ?>
       </div>
       <h1><?= $data['site']['item_title']; ?>

@@ -27,6 +27,7 @@ class PostController extends MainController
 
         $content = self::presence($type, $id, $slug, $this->user);
 
+
         // Let's record views 
         // Запишем просмотры
         if (!isset($_SESSION['pagenumbers'])) {
@@ -52,9 +53,6 @@ class PostController extends MainController
         // If the post type is a page, then depending on the conditions we make a redirect
         // Если тип поста страница, то в зависимости от условий делаем редирект
         if ($content['post_type'] == 'page' && $id > 0) {
-            if ($blog) {
-                redirect(getUrlByName('blog.article', ['facet_slug' => $blog[0]['facet_slug'], 'slug' => $content['post_slug']]));
-            }
             redirect(getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => $content['post_slug']]));
         }
 
@@ -97,7 +95,7 @@ class PostController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/prism/prism.css');
         Request::getResources()->addBottomScript('/assets/js/prism/prism.js');
         Request::getResources()->addBottomScript('/assets/js/zoom/medium-zoom.min.js');
-        
+
         Request::getResources()->addBottomStyles('/assets/css/share.css');
         Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
 
@@ -139,19 +137,17 @@ class PostController extends MainController
         }
 
         $slug_facet = Request::get('facet_slug');
-        $type_facet = $type == 'info.page' ? 'section' : 'blog';
-
-        $facet  = FacetModel::getFacet($slug_facet, 'slug', $type_facet);
+        $facet  = FacetModel::getFacet($slug_facet, 'slug', 'section');
         Html::pageError404($facet);
 
         $m = [
             'og'    => false,
-            'url'   => getUrlByName('page', ['facet' => $content['post_slug'], 'slug' => $facet['facet_slug']]),
+            'url'   => getUrlByName('facet.article', ['facet_slug' => $facet['facet_slug'], 'slug' => $content['post_slug']]),
         ];
 
         $title = $content['post_title'] . ' - ' . __('page');
         return Tpl::agRender(
-            '/page/view',
+            '/post/page-view',
             [
                 'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . __('page') . ')', $m),
                 'data'  => [
@@ -262,7 +258,7 @@ class PostController extends MainController
             ]
         );
     }
-
+    
     // Last 5 pages by content id
     // Последние 5 страниц по id контенту
     public function last($content_id)

@@ -67,7 +67,8 @@
       <h3 class="uppercase-box"><?= __('posts'); ?> (no facet)</h3>
       <?php foreach ($data['posts_no_topic'] as $post) : ?>
         <div class="gray">
-          id:<?= $post['post_id']; ?> | <?= $post['post_title']; ?>
+          <a href="<?= getUrlByName('content.edit', ['type' => $post['post_type'], 'id' => $post['post_id']]) ?>">
+             id:<?= $post['post_id']; ?></a> | <?= $post['post_title']; ?>
         </div>
       <?php endforeach; ?>
     <?php endif; ?>

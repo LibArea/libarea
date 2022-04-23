@@ -15,6 +15,23 @@
       <div class="box relative">
         <div class="left gray-600 mr5"> <?= __($fav['action_type']); ?>:</div>
 
+        <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
+          <i class="bi-trash red"></i>
+        </span>
+
+        <?php if (!$fav['tag_id']) : ?>
+          <span class="trigger right lowercase gray-600 text-sm"> <i class="bi-plus-lg gray-600 mr5"></i></span>
+          <span class="dropdown right">
+            <?php if ($data['tags']) : ?>
+              <?php foreach ($data['tags'] as $tag) : ?>
+                <div class="save-folder gray-600 text-sm p5" data-id="<?= $tag['id']; ?>" data-tid="<?= $fav['tid']; ?>" data-type="favorite"><?= $tag['value']; ?></div>
+              <?php endforeach; ?>
+            <?php else : ?>
+              <?= __('no'); ?>...
+            <?php endif;  ?>
+          </span>
+        <?php endif; ?>
+
         <?php if ($fav['action_type'] == 'post') : ?>
           <a class="font-normal" href="<?= getUrlByName('post', ['id' => $fav['post_id'], 'slug' => $fav['post_slug']]); ?>">
             <?= $fav['post_title']; ?>
@@ -41,26 +58,15 @@
           <div class="inline"> <?= Content::text($fav['answer_content'], 'text'); ?></div>
         <?php endif; ?>
 
-        <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
-          <i class="bi-trash red"></i>
-        </span>
         <?php if ($fav['tag_id']) : ?>
-          <a class="tags-xs ml15" href="<?= getUrlByName('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">
-            <?= $fav['tag_title']; ?>
-          </a>
-          <sup class="del-folder-content gray-600" data-tid="<?= $fav['tid']; ?>" data-type="favorite">x</sup>
-        <?php else : ?>
-          <span class="trigger right lowercase gray-600 text-sm"> <i class="bi-plus-lg gray-600 mr5"></i></span>
-          <span class="dropdown right">
-            <?php if ($data['tags']) : ?>
-              <?php foreach ($data['tags'] as $tag) : ?>
-                <div class="save-folder gray-600 text-sm p5" data-id="<?= $tag['id']; ?>" data-tid="<?= $fav['tid']; ?>" data-type="favorite"><?= $tag['value']; ?></div>
-              <?php endforeach; ?>
-            <?php else : ?>
-              <?= __('no'); ?>...
-            <?php endif;  ?>
-          </span>
+          <div>
+            <a class="tags-xs mr15" href="<?= getUrlByName('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">
+              <?= $fav['tag_title']; ?>
+            </a>
+            <sup class="del-folder-content gray-600" data-tid="<?= $fav['tid']; ?>" data-type="favorite">x</sup>
+          </div>
         <?php endif; ?>
+
       </div>
     <?php endforeach; ?>
   <?php else : ?>

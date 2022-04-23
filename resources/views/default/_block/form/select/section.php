@@ -1,6 +1,6 @@
 <fieldset>
-  <label><?= __('section'); ?></label>
-  <input name="facet_select" id="section_id">
+  <label><?= __('section'); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?></label>
+  <input name="section_select" id="section_id">
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">

@@ -307,6 +307,12 @@ a:hover > img { opacity: 0.8; }
   display: block;
 }
 
+.content-body .emoji {
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+}
+
 .content_tree:target,
 .content_tree.edit {
   background-clip: content-box;

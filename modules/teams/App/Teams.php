@@ -121,8 +121,8 @@ class Teams
         $name = Request::getPost('name');
         $content = Request::getPost('content');
 
-        Validation::Length($name, __('title'), '6', '250', getUrlByName('team.add'));
-        Validation::Length($content, __('the post'), '6', '5000', getUrlByName('team.add'));
+        Validation::Length($name, 'title', '6', '250', getUrlByName('team.add'));
+        Validation::Length($content, 'the.post', '6', '5000', getUrlByName('team.add'));
 
         TeamModel::create(
             [
@@ -132,9 +132,7 @@ class Teams
                 'action_type' => 'post',
             ]
         );
-
-        Html::addMsg('team.created', 'success');
-        redirect(getUrlByName('teams'));
+        Validation::ComeBack('team.created', 'success', getUrlByName('teams'));
     }
 
     // Team change
@@ -149,8 +147,8 @@ class Teams
         $name = Request::getPost('name');
         $content = Request::getPost('content');
 
-        Validation::Length($name, __('title'), '6', '250', getUrlByName('team.add'));
-        Validation::Length($content, __('the post'), '6', '5000', getUrlByName('team.add'));
+        Validation::Length($name, 'title', '6', '250', getUrlByName('team.add'));
+        Validation::Length($content, 'the.post', '6', '5000', getUrlByName('team.add'));
 
         TeamModel::edit(
             [
@@ -165,8 +163,7 @@ class Teams
         $users    = Request::getPost() ?? [];
         self::editUser($users, $team['id']);
 
-        Html::addMsg('team.change', 'success');
-        redirect(getUrlByName('teams'));
+        Validation::ComeBack('team.change', 'success', getUrlByName('teams'));
     }
 
 

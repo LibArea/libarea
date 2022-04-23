@@ -8,13 +8,13 @@
   </div>
 </div>
 <main>
-  <article class="post-full <?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
+  <article class="post-full box<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
       <div class="post-body">
 
         <div class="flex flex-row items-center">
           <?php if (!empty($data['blog'])) : ?>
-            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray-600 text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
+            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
               <?= $data['blog'][0]['facet_title']; ?>
             </a>
           <?php endif; ?>
@@ -224,7 +224,7 @@
       endif;
     endif;
   else :
-    echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('this.draft'), 'icon' => 'bi-info-lg']);
+    echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('this.draft'), 'icon' => 'bi-door-closed']);
   endif; ?>
 </main>
 <aside>
@@ -260,7 +260,7 @@
     <?= Tpl::insert('/share'); ?>
   </div>
   <?php if ($data['recommend']) : ?>
-    <div class="box bg-violet sticky top-sm">
+    <div class="box sticky top-sm bg-violet">
       <h3 class="uppercase-box"><?= __('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) : ?>
         <div class="mb15 hidden flex text-sm">
@@ -288,6 +288,7 @@
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
     mediumZoom(document.querySelectorAll('.post-body.full .post img:not(.emoji), img.preview, .content-body p img:not(.emoji)'))
+
     // Добавим цитирование    
     function get_text() {
       var text;

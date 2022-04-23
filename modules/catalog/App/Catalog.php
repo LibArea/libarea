@@ -4,7 +4,7 @@ namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, FacetModel, UserAreaModel};
-use UserData, Breadcrumbs, Meta, Html, Tpl;
+use UserData, Meta, Html, Tpl;
 
 class Catalog
 {
@@ -24,11 +24,11 @@ class Catalog
         $pageNumber = Tpl::pageNumber();
 
         $os = ['all', 'github', 'wap'];
-        if (!in_array($screening = \Request::get('grouping'), $os)) {
+        if (!in_array($screening = Request::get('grouping'), $os)) {
             Html::pageError404([]);
         }
 
-        $category  = FacetModel::get(\Request::get('slug'), 'slug', $this->user['trust_level']);
+        $category  = FacetModel::get(Request::get('slug'), 'slug', $this->user['trust_level']);
         Html::pageError404($category);
 
         // We will get children
@@ -76,14 +76,14 @@ class Catalog
     public static function breadcrumb($tree, $screening)
     {
         $arr = [
-          ['name' => __('catalog'), 'link' => getUrlByName('web')]
+            ['name' => __('catalog'), 'link' => getUrlByName('web')]
         ];
-        
+
         $result = [];
         foreach ($tree as $row) {
-            $result[] = [ "name" => $row['name'], "link" => getUrlByName('web.dir', ['grouping' => $screening, 'slug' => $row['link']]) ]; 
-        } 
-  
+            $result[] = ["name" => $row['name'], "link" => getUrlByName('web.dir', ['grouping' => $screening, 'slug' => $row['link']])];
+        }
+
         return array_merge($arr, $result);
     }
 

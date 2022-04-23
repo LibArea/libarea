@@ -5,18 +5,11 @@ namespace Modules\Admin\App;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, BadgeModel};
 use Modules\Admin\App\Models\{BanUserModel, UserModel};
-use Validation, UserData, Meta, Html, Tpl;
+use Validation, Meta, Html, Tpl;
 
 class Users
 {
     protected $limit = 50;
-
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
 
     public function index($sheet, $type)
     {
@@ -128,7 +121,7 @@ class Users
         }
 
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
-        Validation::Length($login, __('login'), '3', '11', $redirect);
+        Validation::Length($login, 'login', '3', '11', $redirect);
 
         SettingModel::edit(
             [
@@ -141,7 +134,7 @@ class Users
                 'limiting_mode' => Request::getPostInt('limiting_mode'),
                 'template'      => $user['template'] ?? 'default',
                 'lang'          => $user['lang'] ?? 'ru',
-                'scroll'        => $user['lang'] ?? 0,
+                'scroll'        => $user['scroll'] ?? 0,
                 'trust_level'   => Request::getPostInt('trust_level'),
                 'updated_at'    => date('Y-m-d H:i:s'),
                 'color'         => Request::getPostString('color', '#339900'),

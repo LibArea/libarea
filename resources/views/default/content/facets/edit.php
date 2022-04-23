@@ -15,16 +15,6 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           'user' => $user,
           'list' => [
             [
-              'id'        => 'edit',
-              'url'       => '',
-              'title'     => __('settings'),
-              'icon'      => 'bi bi-gear'
-            ], [
-              'id'        => 'pages',
-              'url'       => getUrlByName('content.edit.page', ['type' => 'page', 'id' => $fs['facet_id']]),
-              'title'     => __('pages'),
-              'icon'      => 'bi bi-app'
-            ], [
               'id'        => 'all',
               'url'       => $url,
               'title'     => __('go.to'),
@@ -92,7 +82,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       </fieldset>
 
       <fieldset>
-        <label for="facet_slug"><?= __('Slug (URL)'); ?><sup class="red">*</sup></label>
+        <label for="facet_slug"><?= __('slug'); ?><sup class="red">*</sup></label>
         <input minlength="3" maxlength="32" type="text" name="facet_slug" value="<?= $fs['facet_slug']; ?>">
         <div class="help">3 - 32 <?= __('characters'); ?> (a-z-0-9)</div>
       </fieldset>

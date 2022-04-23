@@ -75,8 +75,8 @@ class Edit
         $item_is_github     = Request::getPostInt('github');
         $item_github_url    = Request::getPost('github_url');
 
-        Validation::Length($item_title, __('title'), '14', '250', $redirect);
-        Validation::Length($item_content, __('description'), '24', '1500', $redirect);
+        Validation::Length($item_title, 'title', '14', '250', $redirect);
+        Validation::Length($item_content, 'description', '24', '1500', $redirect);
 
         if (filter_var($item_url, FILTER_VALIDATE_URL) === FALSE) {
             redirect($redirect);
@@ -115,7 +115,7 @@ class Edit
             $item_user_new = json_decode($user_new, true);
             if ($item['item_user_id'] != $item_user_new[0]['id']) {
                 $owner_uid = $item_user_new[0]['id'];
-            }    
+            }
         }
 
         WebModel::edit(

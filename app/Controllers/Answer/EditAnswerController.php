@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{AnswerModel, PostModel};
-use Content, Validation, Translate, Tpl, Meta, Html, UserData;
+use Content, Validation, Tpl, Meta, Html, UserData;
 
 class EditAnswerController extends MainController
 {
@@ -34,7 +34,7 @@ class EditAnswerController extends MainController
         return Tpl::agRender(
             '/answer/edit-form-answer',
             [
-                'meta'  => Meta::get(Translate::get('edit.answer')),
+                'meta'  => Meta::get(__('edit.answer')),
                 'data'  => [
                     'answer_id' => $answer['answer_id'],
                     'post_id'   => $post['post_id'],
@@ -65,7 +65,7 @@ class EditAnswerController extends MainController
 
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
         $url = getUrlByName('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
-        Validation::Length($content, Translate::get('bodies'), '6', '5000', '/' . $url);
+        Validation::Length($content, 'bodies', '6', '5000', '/' . $url);
 
         AnswerModel::edit(
             [

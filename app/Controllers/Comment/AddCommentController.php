@@ -5,7 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, CommentModel, PostModel};
-use Content, Validation, Translate, Tpl, Html, UserData;
+use Content, Validation, Tpl, Html, UserData;
 
 class AddCommentController extends MainController
 {
@@ -47,7 +47,7 @@ class AddCommentController extends MainController
 
         $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
-        Validation::Length($content, Translate::get('comments'), '6', '2024', $url_post);
+        Validation::Length($content, 'comments', '6', '2024', $url_post);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
@@ -69,7 +69,7 @@ class AddCommentController extends MainController
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            (new \App\Controllers\AuditController())->create('comment', $last_id, $url);
+            (new \App\Controllers\AuditController())->create('comment', $last_id, getUrlByName('admin.audits'));
         }
 
         // Add the number of comments for the post + 1

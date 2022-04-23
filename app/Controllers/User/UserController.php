@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{PostModel, FolderModel};
-use Content, Translate, Tpl, Meta, Html, UserData;
+use Tpl, Meta, Html, UserData;
 
 class UserController extends MainController
 {
@@ -37,7 +37,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/all',
             [
-                'meta'  => Meta::get(Translate::get($type . 's'), Translate::get($sheet . '.desc'), $m),
+                'meta'  => Meta::get(__($type . 's'), __($sheet . '.desc'), $m),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,
@@ -68,7 +68,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/favorite/all',
             [
-                'meta'  => Meta::get(Translate::get('favorites')),
+                'meta'  => Meta::get(__('favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
@@ -92,7 +92,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/favorite/folders',
             [
-                'meta'  => Meta::get(Translate::get('folders')),
+                'meta'  => Meta::get(__('folders')),
                 'data'  => [
                     'sheet'     => 'folders',
                     'type'      => 'folders',
@@ -108,7 +108,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/favorite/all',
             [
-                'meta'  => Meta::get(Translate::get('favorites')),
+                'meta'  => Meta::get(__('favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
@@ -125,7 +125,7 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/draft',
             [
-                'meta'  => Meta::get(Translate::get('drafts')),
+                'meta'  => Meta::get(__('drafts')),
                 'data'  => [
                     'drafts'    => UserModel::userDraftPosts($this->user['id']),
                     'sheet'     => 'drafts',
@@ -142,9 +142,9 @@ class UserController extends MainController
         return Tpl::agRender(
             '/user/favorite/subscribed',
             [
-                'meta'  => Meta::get(Translate::get('subscribed')),
+                'meta'  => Meta::get(__('subscribed')),
                 'data'  => [
-                    'h1'    => Translate::get('subscribed') . ' ' . $this->user['login'],
+                    'h1'    => __('subscribed') . ' ' . $this->user['login'],
                     'sheet' => 'subscribed',
                     'type'  => 'favorites',
                     'posts' => PostModel::getFocusPostsListUser($this->user['id'])

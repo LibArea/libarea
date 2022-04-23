@@ -5,7 +5,7 @@ namespace App\Controllers\Facets;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{FacetModel, SubscriptionModel};
-use Validation, Config, Translate, Tpl, Meta, Html, UserData;
+use Validation, Config, Tpl, Meta, UserData;
 
 class AddFacetController extends MainController
 {
@@ -24,7 +24,7 @@ class AddFacetController extends MainController
         return Tpl::agRender(
             '/facets/add',
             [
-                'meta'  => Meta::get(sprintf(Translate::get('add.option'), Translate::get('topics'))),
+                'meta'  => Meta::get(sprintf(__('add.option'), __('topics'))),
                 'data'  => [
                     'type' => $type,
                 ]
@@ -46,28 +46,25 @@ class AddFacetController extends MainController
         $redirect = ($facet_type == 'category') ? getUrlByName('web') : getUrlByName($facet_type . '.add');
         if ($facet_type == 'blog') {
             if (!UserData::checkAdmin()) {
-                if (in_array($facet_slug, Config::get('stop.blog'))) {
-                    Html::addMsg('url.reserved', 'error');
-                    redirect($redirect);
+                if (in_array($facet_slug, Config::get('stop-blog'))) {
+                    Validation::ComeBack('url.reserved', 'error', $redirect);
                 }
             }
         }
 
         Validation::Slug($facet_slug, 'Slug (url)', $redirect);
-        Validation::Length($facet_title, Translate::get('title'), '3', '64', $redirect);
-        Validation::Length($facet_description, Translate::get('meta.description'), '34', '225', $redirect);
-        Validation::Length($facet_short_description, Translate::get('short.description'), '9', '160', $redirect);
-        Validation::Length($facet_slug, Translate::get('slug'), '3', '43', $redirect);
-        Validation::Length($facet_seo_title, Translate::get('slug'), '4', '225', $redirect);
+        Validation::Length($facet_title, 'title', '3', '64', $redirect);
+        Validation::Length($facet_description, 'meta.description', '34', '225', $redirect);
+        Validation::Length($facet_short_description, 'short.description', '9', '160', $redirect);
+        Validation::Length($facet_slug, 'slug', '3', '43', $redirect);
+        Validation::Length($facet_seo_title, 'slug', '4', '225', $redirect);
 
         if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
-            Html::addMsg('repeat.url', 'error');
-            redirect($redirect);
+            Validation::ComeBack('repeat.url', 'error', $redirect);
         }
 
         if (preg_match('/\s/', $facet_slug) || strpos($facet_slug, ' ')) {
-            Html::addMsg('url.gaps', 'error');
-            redirect($redirect);
+            Validation::ComeBack('url.gaps', 'error', $redirect);
         }
 
         $type = $facet_type ?? 'topic';

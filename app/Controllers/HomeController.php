@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use Hleb\Constructor\Handlers\Request;
 use App\Models\HomeModel;
 use Config, Tpl, UserData, Meta;
 

@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{InvitationModel, UserModel};
-use Validation, Translate, SendEmail, Tpl, Meta, Html, UserData;
+use Validation, SendEmail, Tpl, Meta, Html, Config, UserData;
 
 class InvitationsController extends MainController
 {
@@ -22,7 +22,7 @@ class InvitationsController extends MainController
         return Tpl::agRender(
             '/user/invite',
             [
-                'meta'  => Meta::get(Translate::get('invite')),
+                'meta'  => Meta::get(__('invite')),
                 'data'  => [
                     'sheet' => 'invite',
                     'type'  => 'user',
@@ -37,7 +37,7 @@ class InvitationsController extends MainController
         return Tpl::agRender(
             '/user/invitation',
             [
-                'meta'  => Meta::get(Translate::get('invites')),
+                'meta'  => Meta::get(__('invites')),
                 'data'  => [
                     'invitations'   => InvitationModel::userResult($this->user['id']),
                     'count_invites' => $this->user['invitation_available'],
@@ -59,20 +59,16 @@ class InvitationsController extends MainController
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['email'])) {
-            Html::addMsg('user.already', 'error');
-            redirect($redirect);
+            Validation::ComeBack('user.already', 'error', $redirect);
         }
 
         $inv_user = InvitationModel::duplicate($invitation_email);
         if ($inv_user['invitation_email'] == $invitation_email) {
-            Html::addMsg('invate.to.replay', 'error');
-            redirect($redirect);
+            Validation::ComeBack('invate.to.replay', 'error', $redirect);
         }
 
-        // TODO : + Config::get('invite.limit')
-        if ($this->user['invitation_available'] >= 5) {
-            Html::addMsg('invate.limit.stop', 'error');
-            redirect($redirect);
+        if ($this->user['invitation_available'] >= Config::get('general.invite_limit')) {
+            Validation::ComeBack('invate.limit.stop', 'error', $redirect);
         }
 
         $invitation_code = Html::randomString('crypto', 25);
@@ -91,7 +87,6 @@ class InvitationsController extends MainController
         $link = getUrlByName('invite.reg', ['code' => $invitation_code]);
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
-        Html::addMsg('invite.created', 'success');
-        redirect($redirect);
+        Validation::ComeBack('invite.created', 'success', $redirect);
     }
 }

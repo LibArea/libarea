@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, UserModel};
-use UploadImage, Validation, Translate, Tpl, Meta, Html, UserData;
+use UploadImage, Validation, Tpl, Meta, UserData;
 
 class SettingController extends MainController
 {
@@ -43,7 +43,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/setting',
             [
-                'meta'  => Meta::get(Translate::get('setting')),
+                'meta'  => Meta::get(__('setting')),
                 'data'  => [
                     'sheet'         => 'settings',
                     'type'          => 'user',
@@ -62,8 +62,8 @@ class SettingController extends MainController
         $lang           = Request::getPost('lang');
 
         $redirect   = getUrlByName('setting');
-        Validation::Length($name, Translate::get('name'), '0', '11', $redirect);
-        Validation::Length($about, Translate::get('about.me'), '0', '255', $redirect);
+        Validation::Length($name, 'name', '0', '11', $redirect);
+        Validation::Length($about, 'about.me', '0', '255', $redirect);
 
         if ($public_email) {
             Validation::Email($public_email, $redirect);
@@ -96,9 +96,7 @@ class SettingController extends MainController
             ]
         );
 
-
-        Html::addMsg('change.saved', 'success');
-        redirect($redirect);
+        Validation::ComeBack('change.saved', 'success', $redirect);
     }
 
     // Avatar and cover upload form
@@ -110,7 +108,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/avatar',
             [
-                'meta'  => Meta::get(Translate::get('edit')),
+                'meta'  => Meta::get(__('edit')),
                 'data'  => [
                     'sheet' => 'avatar',
                     'type'  => 'user',
@@ -134,8 +132,7 @@ class SettingController extends MainController
             UploadImage::cover($cover, $this->user['id'], 'user');
         }
 
-        Html::addMsg('change.saved', 'success');
-        redirect('/setting/avatar');
+        Validation::ComeBack('change.saved', 'success', '/setting/avatar');
     }
 
     // Change password form
@@ -145,7 +142,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/security',
             [
-                'meta'  => Meta::get(sprintf(Translate::get('edit.option'), Translate::get('password'))),
+                'meta'  => Meta::get(sprintf(__('edit.option'), __('password'))),
                 'data'  => [
                     'password'      => '',
                     'password2'     => '',
@@ -165,30 +162,25 @@ class SettingController extends MainController
 
         $redirect   = '/setting/security';
         if ($password2 != $password3) {
-            Html::addMsg('pass.match.err', 'error');
-            redirect($redirect);
+            Validation::ComeBack('pass.match.err', 'success', $redirect);
         }
 
         if (substr_count($password2, ' ') > 0) {
-            Html::addMsg('password.spaces', 'error');
-            redirect($redirect);
+            Validation::ComeBack('password.spaces', 'error', $redirect);
         }
 
-        Validation::Length($password2, Translate::get('password'), 8, 32, $redirect);
+        Validation::Length($password2, 'password', 8, 32, $redirect);
 
         $userInfo   = UserModel::userInfo($this->user['email']);
         if (!password_verify($password, $userInfo['password'])) {
-            Html::addMsg('old.password.err', 'error');
-            redirect($redirect);
+            Validation::ComeBack('old.password.err', 'error', $redirect);
         }
 
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
 
         SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
 
-        Html::addMsg('password.changed', 'success');
-
-        redirect($redirect);
+        Validation::ComeBack('password.changed', 'error', $redirect);
     }
 
     // Cover Removal
@@ -231,7 +223,7 @@ class SettingController extends MainController
         return Tpl::agRender(
             '/user/setting/notifications',
             [
-                'meta'  => Meta::get(Translate::get('notifications')),
+                'meta'  => Meta::get(__('notifications')),
                 'data'  => [
                     'sheet'     => 'notifications',
                     'type'      => 'user',
@@ -254,7 +246,6 @@ class SettingController extends MainController
             ]
         );
 
-        Html::addMsg('change.saved', 'success');
-        redirect('/setting/notifications');
+        Validation::ComeBack('password.changed', 'success', '/setting/notifications');
     }
 }

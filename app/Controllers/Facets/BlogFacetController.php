@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel};
-use Content, Translate, Tpl, Meta, Html, UserData;
+use Content, Tpl, Meta, Html, UserData;
 
 class BlogFacetController extends MainController
 {
@@ -38,7 +38,7 @@ class BlogFacetController extends MainController
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
         $url    = getUrlByName('blog', ['slug' => $facet['facet_slug']]);
-        $title  = $facet['facet_seo_title'] . ' — ' .  Translate::get('blog');
+        $title  = $facet['facet_seo_title'] . ' — ' .  __('blog');
         $description  = $facet['facet_description'];
 
         $m = [
@@ -61,9 +61,7 @@ class BlogFacetController extends MainController
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
                     'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
-                    'info'          => Content::text($facet['facet_info'], 'text'),
-                    'pages'         => (new \App\Controllers\Post\PostController())->last($facet['facet_id']),
-
+                    'info'          => Content::text($facet['facet_info'] ?? false, 'text'),
                 ],
                 'facet'   => [
                     'facet_id' => $facet['facet_id'],

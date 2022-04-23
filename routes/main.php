@@ -43,9 +43,6 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/web/edit/{id}')->module('catalog', 'App\Edit')->where(['id' => '[0-9]+'])->name('web.edit');
     Route::get('/edit/{type}/{id}')->controller('ActionController@edit')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('content.edit');
     // end
-
-    // Страницы для блога
-    Route::get('/edit/blog/{id}/page')->controller('Facets\EditFacetController@pages')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('content.edit.page');
  
     Route::get('/add/post/{topic_id}')->controller('Post\AddPostController', ['post'])->where(['topic_id' => '[0-9]+']);
     Route::get('/add/page/{topic_id}')->controller('Post\AddPostController', ['page'])->where(['topic_id' => '[0-9]+']);
@@ -128,8 +125,7 @@ Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('F
 Route::get('/post/{id}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
-// Страницы
-Route::get('/blog/{facet_slug}/article/{slug}')->controller('Post\PostController', ['blog.page'])->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('blog.article');
+// Страницы info
 Route::get('/{facet_slug}/article/{slug}')->controller('Post\PostController', ['info.page'])->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('facet.article'); 
 
 Route::get('/users/new/{page?}')->controller('User\UserController', ['users.new', 'user'])->name('users.new');

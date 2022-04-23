@@ -1,1 +1,1 @@
-<div class="shown_post pt5 pr15 pb15 pl15 bg-lightgray black"><?= $post['post_content']; ?></div>
+<div class="shown_post p5 bg-lightgray black"><?= $post['post_content']; ?></div>

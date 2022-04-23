@@ -2,7 +2,6 @@
 
 namespace Modules\Catalog\App;
 
-use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\UserAreaModel;
 use Config, UserData, Meta, Tpl;
 

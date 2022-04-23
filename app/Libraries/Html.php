@@ -252,6 +252,7 @@ class Html
         }
     } 
 
+
     public static function getMsg()
     {
         if (isset($_SESSION['msg'])) {
@@ -262,13 +263,21 @@ class Html
 
         unset($_SESSION['msg']);
 
-        return $msg;
+       $html = '';
+         if ($msg) {
+             if ($msg['status'] == 'error') :
+                $html .= "Notiflix.Notify.failure('" . $msg['msg'] . "')";
+             else : 
+                $html .= "Notiflix.Notify.info('" . $msg['msg'] . "')";
+             endif;
+         }
+         
+        return $html;  
     }
 
-    public static function addMsg($msg, $class)
+    public static function addMsg($msg, $status)
     {
-        $class = ($class == 'error') ? 'error' : 'success';
-        $_SESSION['msg'][] = array($msg, $class);
+        $_SESSION['msg'] = ['msg' => $msg, 'status' =>  $status ?? 'error'];
     }
 
     public static function pageError404($variable)

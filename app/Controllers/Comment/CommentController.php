@@ -3,9 +3,8 @@
 namespace App\Controllers\Comment;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use Hleb\Constructor\Handlers\Request;
 use App\Models\CommentModel;
-use Content, Translate, Tpl, Meta, UserData;
+use Tpl, Meta, UserData;
 
 class CommentController extends MainController
 {
@@ -34,7 +33,7 @@ class CommentController extends MainController
         return Tpl::agRender(
             '/comment/comments',
             [
-                'meta'  => Meta::get(Translate::get('all.comments'), Translate::get('comments.desc'), $m),
+                'meta'  => Meta::get(__('all.comments'), __('comments.desc'), $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,

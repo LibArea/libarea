@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{ContentModel, ActionModel, AuditModel, NotificationModel, PostModel};
-use Config, UserData, Html;
+use Config, UserData, Html, Validation;
 
 class AuditController extends MainController
 {
@@ -42,8 +42,7 @@ class AuditController extends MainController
     public static function stopContentQuietМode($user_limiting_mode)
     {
         if ($user_limiting_mode == 1) {
-            Html::addMsg('silent.mode', 'error');
-            redirect('/');
+            Validation::ComeBack('silent.mode', 'error', '/');
         }
         return true;
     }
@@ -72,7 +71,7 @@ class AuditController extends MainController
             $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                Html::addMsg('content.audit', 'error');
+                Html::addMsg(__('content.audit'), 'error');
                 return false;
             }
         }
@@ -87,7 +86,7 @@ class AuditController extends MainController
             $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                Html::addMsg('content-audit', 'error');
+                Html::addMsg(__('content-audit'), 'error');
                 return false;
             }
         }
@@ -96,9 +95,7 @@ class AuditController extends MainController
 
     public static function infoMsg($tl, $content)
     {
-        Html::addMsg(__('limit.day', ['tl' => 'TL' . $tl, 'name' => __($content)]), 'error');
-
-        redirect('/');
+        Validation::Returns(__('limit.day', ['tl' => '«'.  __('trust.level') .'» '. $tl, 'name' => __($content)]), 'error', '/');
     }
 
     // For URL trigger 

@@ -30,7 +30,7 @@
         <div class="w-auto">
           <a class="black" href="<?= $post_url; ?>">
             <h2><?= $post['post_title']; ?>
-            <?= Tpl::insert('/content/post/post-title', ['post' => $post]); ?>
+              <?= Tpl::insert('/content/post/post-title', ['post' => $post]); ?>
             </h2>
           </a>
           <div class="lowercase">

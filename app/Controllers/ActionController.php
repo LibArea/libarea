@@ -148,7 +148,7 @@ class ActionController extends MainController
 
         if ($type == 'post' || $type == 'page') {
             return (new Post\EditPostController)->edit($type);
-        } elseif ($type == 'topic' || $type == 'blog' || $type == 'category'  || $type == 'section') {
+        } elseif ($type == 'topic' || $type == 'category'  || $type == 'section') {
             return (new Facets\EditFacetController)->edit($type);
         } elseif ($type == 'answer') {
             return (new Answer\EditAnswerController)->edit();

@@ -3,9 +3,8 @@
 namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use Hleb\Constructor\Handlers\Request;
 use App\Models\FacetModel;
-use Translate, Tpl, Meta, UserData;
+use Tpl, Meta, UserData;
 
 class AllFacetController extends MainController
 {
@@ -35,7 +34,7 @@ class AllFacetController extends MainController
         return Tpl::agRender(
             '/facets/all',
             [
-                'meta'  => Meta::get(Translate::get($sheet), Translate::get($sheet . '.desc'), $m),
+                'meta'  => Meta::get(__($sheet), __($sheet . '.desc'), $m),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

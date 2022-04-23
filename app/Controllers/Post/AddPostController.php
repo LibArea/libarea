@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
-use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Translate, Domain, Tpl, Meta, Html, UserData;
+use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Domain, Tpl, Meta, Html, UserData;
 
 class AddPostController extends MainController
 {
@@ -41,11 +41,11 @@ class AddPostController extends MainController
         $topic      = FacetModel::getFacet($topic_id, 'id', 'topic');
 
         $puth = $type == 'page' ? '/page/add' : '/post/add';
-         
+
         return Tpl::agRender(
             $puth,
             [
-                'meta'      => Meta::get(Translate::get('add.option', ['name' => Translate::get('post')])),
+                'meta'      => Meta::get(__('add.option', ['name' => __('post')])),
                 'data'  => [
                     'facets'    => ['topic' => $topic],
                     'blog'      => FacetModel::getFacetsUser($this->user['id'], 'blog'),
@@ -80,14 +80,16 @@ class AddPostController extends MainController
 
         // Related posts 
         // Связанные посты
-        $json_post  = $fields['post_select'] ?? [];
-        $arr_post   = json_decode($json_post, true);
-        if ($arr_post) {
-            foreach ($arr_post as $value) {
-                $id[]   = $value['id'];
+        $json_post  = $fields['post_select'] ?? null;
+        if ($json_post) {
+            $arr_post   = json_decode($json_post, true);
+            if ($arr_post) {
+                foreach ($arr_post as $value) {
+                    $id[]   = $value['id'];
+                }
             }
+            $post_related = implode(',', $id ?? []);
         }
-        $post_related = implode(',', $id ?? []);
 
         // Используем для возврата
         $redirect = getUrlByName('post.add');
@@ -100,17 +102,16 @@ class AddPostController extends MainController
         $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'post');
 
         $post_title = str_replace("&nbsp;", '', $post_title);
-        Validation::Length($post_title, Translate::get('title'), '6', '250', $redirect);
-        Validation::Length($content, Translate::get('the post'), '6', '25000', $redirect);
+        Validation::Length($post_title, 'title', '6', '250', $redirect);
+        Validation::Length($content, 'the.post', '6', '25000', $redirect);
 
         if ($post_url) {
             $site = $this->addUrl($post_url, $post_title);
         }
 
         // Обложка поста
-        $cover  = $_FILES['images'];
-        if ($_FILES['images']['name']) {
-            $post_img = UploadImage::cover_post($cover, 0, $redirect, $this->user['id']);
+        if (!empty($_FILES['images']['name'])) {
+            $post_img = UploadImage::cover_post($_FILES['images'], 0, $redirect, $this->user['id']);
         }
 
         // Получаем SEO поста
@@ -122,7 +123,7 @@ class AddPostController extends MainController
                 'post_content'          => Content::change($content),
                 'post_content_img'      => $post_img ?? '',
                 'post_thumb_img'        => $site['og_img'] ?? '',
-                'post_related'          => $post_related,
+                'post_related'          => $post_related  ?? false,
                 'post_tl'               => $post_tl ?? 0,
                 'post_slug'             => $slug,
                 'post_feature'          => $post_feature,
@@ -139,27 +140,27 @@ class AddPostController extends MainController
             ]
         );
 
-        $url = getUrlByName('post', ['id' => $last_id, 'slug' => $slug]);
-        if ($type == 'page') {
-            $url = getUrlByName('info.page', ['slug' => $slug]);
-        }
-
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            (new \App\Controllers\AuditController())->create('post', $last_id, $url);
+            (new \App\Controllers\AuditController())->create('post', $last_id, getUrlByName('admin.audits'));
+        }
+
+        $redirect = getUrlByName('post', ['id' => $last_id, 'slug' => $slug]);
+        if ($type == 'page') {
+            $redirect = getUrlByName('info.page', ['slug' => $slug]);
         }
 
         // Add fastes (blogs, topics) to the post 
-        (new \App\Controllers\Post\EditPostController())->addFacetsPost($fields, $last_id, $url);
+        $type = (new \App\Controllers\Post\EditPostController())->addFacetsPost($fields, $last_id, $redirect);
 
         // Notification (@login). 10 - mentions in post 
         if ($message = Content::parseUser($content, true, true)) {
-            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $url);
+            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $redirect);
         }
 
         if (Config::get('general.discord')) {
             if ($post_tl == 0 && $post_draft == 0) {
-                Integration::AddWebhook($content, $post_title, $url);
+                Integration::AddWebhook($content, $post_title, $redirect);
             }
         }
 
@@ -172,11 +173,11 @@ class AddPostController extends MainController
                 'id_content'    => $last_id,
                 'action_type'   => $type,
                 'action_name'   => 'content.added',
-                'url_content'   => $url,
+                'url_content'   => $redirect,
             ]
         );
 
-        redirect($url);
+        redirect($redirect);
     }
 
     public static function slug($title)
@@ -211,7 +212,7 @@ class AddPostController extends MainController
                     'item_url'          => $item_url,
                     'item_domain'       => $post_url_domain,
                     'item_title'        => $post_title,
-                    'item_content'      => Translate::get('description.formed'),
+                    'item_content'      => __('description.formed'),
                     'item_published'    => 0,
                     'item_user_id'      => $this->user['id'],
                     'item_type_url'     => 0,
@@ -219,7 +220,7 @@ class AddPostController extends MainController
                     'item_is_soft'      => 0,
                     'item_is_github'    => 0,
                     'item_votes'        => 0,
-                    'item_close_replies'=> 0,
+                    'item_close_replies' => 0,
                     'item_count'        => 1,
                 ]
             );

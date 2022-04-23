@@ -49,7 +49,7 @@ class Reply
         Html::pageRedirection($item, '/');
 
         $url = getUrlByName('web.website', ['slug' => $item['item_domain']]);
-        Validation::Length($content, __('content'), '6', '555', $url);
+        Validation::Length($content, 'content', '6', '555', $url);
 
         // Access verification 
         $reply = ReplyModel::getId($id);
@@ -85,7 +85,7 @@ class Reply
         Html::pageError404($item);
 
         $url = getUrlByName('web.website', ['slug' => $item['item_domain']]);
-        Validation::Length($content, __('content'), '6', '555', $url);
+        Validation::Length($content, 'content', '6', '555', $url);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день

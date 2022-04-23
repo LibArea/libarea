@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\ContentModel;
-use Meta;
+use Meta, Validation;
 
 class Words
 {
@@ -29,7 +29,7 @@ class Words
         return view(
             '/view/default/word/add',
             [
-                'meta'  => Meta::get(sprintf(__('add.option'), __('word'))),
+                'meta'  => Meta::get(__('word')),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,
@@ -49,7 +49,7 @@ class Words
 
         ContentModel::setStopWord($data);
 
-        redirect(getUrlByName('admin.words'));
+        Validation::ComeBack('change.saved', 'success', getUrlByName('admin.words'));
     }
 
     // Удаление стоп-слова
@@ -58,7 +58,5 @@ class Words
         $word_id = Request::getPostInt('id');
 
         ContentModel::deleteStopWord($word_id);
-
-        redirect(getUrlByName('admin.words'));
     }
 }

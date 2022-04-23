@@ -12,15 +12,6 @@
         <div class="help">6 - 250 <?= __('characters'); ?></div>
       </fieldset>
 
-      <?php if (!empty($data['blog'])) : ?>
-        <?= Tpl::insert('/_block/form/select/blog', [
-          'data'        => $data,
-          'action'      => 'add',
-          'type'        => 'blog',
-          'title'       => __('blogs'),
-        ]); ?>
-      <?php endif; ?>
-
       <?= Tpl::insert('/_block/form/select/select', [
         'data'          => $data['facets'],
         'type'          => 'topic',
@@ -29,6 +20,15 @@
         'help'          => __('necessarily'),
         'red'           => 'red'
       ]); ?>
+
+      <?php if (!empty($data['blog'])) : ?>
+        <?= Tpl::insert('/_block/form/select/blog', [
+          'data'        => $data,
+          'action'      => 'add',
+          'type'        => 'blog',
+          'title'       => __('blogs'),
+        ]); ?>
+      <?php endif; ?>
 
       <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_url')) : ?>
         <fieldset>

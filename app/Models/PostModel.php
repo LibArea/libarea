@@ -313,8 +313,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['post_id' => $post_id, 'id' => $user_id])->fetchAll();
     }
 
-
-
     public static function getPostFacet($post_id, $type)
     {
         $sql = "SELECT
@@ -498,7 +496,8 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT 
                     post_id,
                     post_slug,
-                    post_title
+                    post_title,
+                    post_type
                         FROM facets_posts_relation 
                             LEFT JOIN posts on post_id = relation_post_id
                                 WHERE relation_facet_id = :facet_id AND post_type = 'page'

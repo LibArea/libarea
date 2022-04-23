@@ -101,5 +101,4 @@ class Engine
     {
         return $this->index->suggestField($field, $value, $wrapSpan);
     }
-
 }
