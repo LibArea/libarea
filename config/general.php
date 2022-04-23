@@ -13,6 +13,7 @@ return [
     // TRUE - только по приглашению
     // TRUE - by invitation only
     'invite'            => false,
+    'invite_limit'      => 5,
     
     // Шаблон по умолчанию (default).
     // Default template (default).

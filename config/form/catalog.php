@@ -10,12 +10,12 @@ return [
   'site' =>  [
     [
       'title'   => __('title'),
-      'tl'      => 2,
+      'tl'      => 1,
       'arr'     => ['min' => 14, 'max' => 250, 'required' => true],
       'name'    => 'title'
     ], [
       'title'   => 'URL',
-      'tl'      => 2,
+      'tl'      => 1,
       'arr'     => ['required' => true],
       'name'    => 'url',
     ],  [
@@ -25,12 +25,12 @@ return [
       'name'    => 'status',
     ], [
       'title'   => __('description'),
-      'tl'      => 2,
+      'tl'      => 1,
       'arr'     => ['type' => 'textarea', 'required' => true],
       'name'    => 'content',
     ],  [
       'title'   => __('deny.replies'),
-      'tl'      => 2,
+      'tl'      => 1,
       'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select'],
       'name'    => 'close_replies',
     ], [
@@ -64,5 +64,5 @@ return [
       'arr'     => ['type' => 'textarea', 'required' => false],
       'name'    => 'content_soft',
     ]
-  ],
+  ]
 ];

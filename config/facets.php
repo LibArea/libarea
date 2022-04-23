@@ -21,7 +21,7 @@ return [
     'default' => [
         [
             'img'   => '/uploads/facets/logos/t-1-1625149922.jpeg',
-            'name'  => __('SEO'),
+            'name'  => __('seo'),
             'url'   => '/topic/seo',
         ], [
             'img'   => '/uploads/facets/logos/t-2-1625149821.jpeg',
