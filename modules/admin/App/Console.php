@@ -62,7 +62,9 @@ class Console
         $email  = Request::getPost('mail');
         SendEmail::mailText(1, 'admin.test', ['email' => $email]);
 
-        self::consoleRedirect();
+        Html::addMsg(__('command.executed'), 'success');
+
+        redirect(getUrlByName('admin.tools'));
     }
 
     public static function css()

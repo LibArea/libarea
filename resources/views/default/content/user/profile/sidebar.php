@@ -15,6 +15,30 @@
     </div>
   </div>
 
+  <div class="box">
+    <h3 class="uppercase-box"><?= __('contacts'); ?></h3>
+    <?php foreach (Config::get('form/user-setting') as $block) : ?>
+      <?php if ($profile[$block['title']]) : ?>
+        <div class="mt5">
+          <?= $block['lang']; ?>:
+          <?php if ($block['url']) : ?>
+            <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
+              <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
+            </a>
+          <?php else : ?>
+            <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
+          <?php endif; ?>
+        </div>
+      <?php else : ?>
+        <?php if ('location' == $block['title']) : ?>
+          <div class="mb20">
+            <?= $block['lang']; ?>: ...
+          </div>
+        <?php endif; ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
+
   <?php if ($data['blogs']) : ?>
     <div class="box">
       <h3 class="uppercase-box"><?= __('created.by'); ?></h3>
@@ -100,30 +124,6 @@
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
-
-  <div class="box">
-    <h3 class="uppercase-box"><?= __('contacts'); ?></h3>
-    <?php foreach (Config::get('form/user-setting') as $block) : ?>
-      <?php if ($profile[$block['title']]) : ?>
-        <div class="mt5">
-          <?= $block['lang']; ?>:
-          <?php if ($block['url']) : ?>
-            <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
-              <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-            </a>
-          <?php else : ?>
-            <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-          <?php endif; ?>
-        </div>
-      <?php else : ?>
-        <?php if ('location' == $block['title']) : ?>
-          <div class="mb20">
-            <?= $block['lang']; ?>: ...
-          </div>
-        <?php endif; ?>
-      <?php endif; ?>
-    <?php endforeach; ?>
-  </div>
 
   <div class="box">
     <h3 class="uppercase-box"><?= __('badges'); ?></h3>

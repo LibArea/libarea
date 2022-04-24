@@ -1,7 +1,8 @@
 <?php $profile = $data['profile']; ?>
+
 <div class="mb-none">
 
-  <div class="bg-violet box">
+  <div class="box bg-violet">
     <blockquote class="ml0 mb10 gray break-all">
       <?= $profile['about']; ?>...
     </blockquote>
@@ -14,8 +15,32 @@
     </div>
   </div>
 
+  <div class="box bg-violet">
+    <h3 class="uppercase-box"><?= __('contacts'); ?></h3>
+    <?php foreach (Config::get('form/user-setting') as $block) : ?>
+      <?php if ($profile[$block['title']]) : ?>
+        <div class="mt5">
+          <?= $block['lang']; ?>:
+          <?php if ($block['url']) : ?>
+            <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
+              <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
+            </a>
+          <?php else : ?>
+            <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
+          <?php endif; ?>
+        </div>
+      <?php else : ?>
+        <?php if ('location' == $block['title']) : ?>
+          <div class="mb20">
+            <?= $block['lang']; ?>: ...
+          </div>
+        <?php endif; ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
+
   <?php if ($data['blogs']) : ?>
-    <div class="bg-violet box">
+    <div class="box bg-violet">
       <h3 class="uppercase-box"><?= __('created.by'); ?></h3>
       <?php foreach ($data['blogs'] as $blog) : ?>
         <div class="w-100 mb-w100 mb15 flex flex-row">
@@ -45,7 +70,7 @@
 
   <?php if ($profile['my_post'] != 0) : ?>
     <?php $post = $data['post']; ?>
-    <div class="bg-violet box">
+    <div class="box bg-violet">
       <h3 class="uppercase-box"><?= __('selected.post'); ?></h3>
       <div class="mt5">
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
@@ -76,7 +101,7 @@
   <?php endif; ?>
 
   <?php if ($data['topics']) : ?>
-    <div class="bg-violet box">
+    <div class="box bg-violet">
       <h3 class="uppercase-box"><?= __('is.reading'); ?></h3>
       <?php foreach ($data['topics'] as  $topic) : ?>
         <div class="mt5 mb5">
@@ -90,7 +115,7 @@
   <?php endif; ?>
 
   <?php if (!empty($data['participation'][0]['facet_id'])) : ?>
-    <div class="bg-violet box">
+    <div class="box bg-violet">
       <h3 class="uppercase-box"><?= __('understands'); ?></h3>
       <?php foreach ($data['participation'] as $part) : ?>
         <a class="tags" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
@@ -100,31 +125,7 @@
     </div>
   <?php endif; ?>
 
-  <div class="bg-violet box">
-    <h3 class="uppercase-box"><?= __('contacts'); ?></h3>
-    <?php foreach (Config::get('form/user-setting') as $block) : ?>
-      <?php if ($profile[$block['title']]) : ?>
-        <div class="mt5">
-          <?= $block['lang']; ?>:
-          <?php if ($block['url']) : ?>
-            <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
-              <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-            </a>
-          <?php else : ?>
-            <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-          <?php endif; ?>
-        </div>
-      <?php else : ?>
-        <?php if ('location' == $block['title']) : ?>
-          <div class="mb20">
-            <?= $block['lang']; ?>: ...
-          </div>
-        <?php endif; ?>
-      <?php endif; ?>
-    <?php endforeach; ?>
-  </div>
-
-  <div class="bg-violet box">
+  <div class="box bg-violet">
     <h3 class="uppercase-box"><?= __('badges'); ?></h3>
     <div class="m0 text-3xl">
       <i title="<?= __('medal.registration'); ?>" class="bi-gift sky"></i>
@@ -138,7 +139,7 @@
   </div>
 
   <?php if (UserData::checkAdmin()) : ?>
-    <div class="boxe">
+    <div class="box bg-violet">
       <h3 class="uppercase-box"><?= __('admin'); ?></h3>
       <div class="mt5">
         <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) : ?>

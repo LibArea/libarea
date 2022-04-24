@@ -9,7 +9,7 @@ return [
         'url'       => 'website',
         'addition'  => false,
         'title'     => 'website',
-        'lang'      => __('URL'),
+        'lang'      => __('url'),
         'help'      => 'https://site.ru',
         'name'      => 'website'
     ], [
@@ -23,28 +23,28 @@ return [
         'url'       => 'public_email',
         'addition'  => 'mailto:',
         'title'     => 'public_email',
-        'lang'      => __('E-mail'),
+        'lang'      => 'Email',
         'help'      => '**@**.ru',
         'name'      => 'public_email'
     ], [
         'url'       => 'skype',
         'addition'  => 'skype:',
         'title'     => 'skype',
-        'lang'      => __('Skype'),
+        'lang'      => 'Skype',
         'help'      => 'skype:<b>NICK</b>',
         'name'      => 'skype'
     ], [
         'url'       => 'telegram',
         'addition'  => 'tg://resolve?domain=',
         'title'     => 'telegram',
-        'lang'      => __('Telegram'),
+        'lang'      => 'Telegram',
         'help'      => 'tg://resolve?domain=<b>NICK</b>',
         'name'      => 'telegram'
     ], [
         'url'       => 'vk',
         'addition'  => 'https://vk.com/',
         'title'     => 'vk',
-        'lang'      => __('VK'),
+        'lang'      => 'Vk',
         'help'      => 'https://vk.com/<b>NICK / id</b>',
         'name'      => 'vk'
     ],
