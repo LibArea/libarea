@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Enter console commands from framework HLEB.
  * All service commands: php console --help
@@ -6,6 +7,10 @@
 
 define('HLEB_GLOBAL_DIRECTORY', __DIR__);
 define('HLEB_PUBLIC_DIR', realpath(HLEB_GLOBAL_DIRECTORY . '/public'));
+
+// Корневая папка шаблонов в системе
+// Root template folder on the system 
+define('TEMPLATES', realpath(HLEB_GLOBAL_DIRECTORY . '/resources/views'));
 
 // Additional structural paths
 /*
