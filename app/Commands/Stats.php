@@ -8,9 +8,8 @@ class Stats extends \Hleb\Scheme\App\Commands\MainTask
 
     protected function execute()
     {
-
-        (new \App\Controllers\Admin\СonsoleController)->updateCountPostTopic();
-        (new \App\Controllers\Admin\СonsoleController)->updateCountUp();
+        (new \Modules\Admin\App\Console)->up();
+        (new \Modules\Admin\App\Console)->topic();
 
         echo PHP_EOL . __CLASS__ . " done." . PHP_EOL;
     }

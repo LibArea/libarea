@@ -15,7 +15,7 @@
 </main>
 <aside>
   <?php if ($topic['facet_is_deleted'] == 0) : ?>
-    <div class="box-flex bg-violet">
+    <div class="box-flex justify-between bg-violet">
       <div class="center">
         <div class="uppercase text-sm gray-600"><?= __('posts'); ?></div>
         <?= $topic['facet_count']; ?>

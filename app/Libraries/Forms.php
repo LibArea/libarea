@@ -407,7 +407,7 @@ class Forms
 					$wrap_after = '<div class="text-sm gray-600">' . $wrap_after . '</div></' . $val['wrap_tag'] . '>';
 				}
 
-				$output .= $wrap_before . $field . $after . $wrap_after ;
+				$output .= $wrap_before . $field . $after . $wrap_after;
 			else :
 				$output .= $field;
 			endif;
@@ -437,7 +437,7 @@ class Forms
 
 		foreach ($params as $opt) {
 
-            $tl = $opt['tl'] ?? 0;
+			$tl = $opt['tl'] ?? 0;
 			if ($user_tl >= $tl) {
 
 				foreach ($this->meaning as $arr) {

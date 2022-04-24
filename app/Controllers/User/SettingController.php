@@ -86,7 +86,7 @@ class SettingController extends MainController
                 'about'                => $about,
                 'template'             => $template ?? 'default',
                 'lang'                 => $lang ?? 'ru',
-                'whisper'              => $user['whisper'] ?? null,
+                'whisper'              => $user['whisper'] ?? '',
                 'website'              => Request::getPostString('website', null),
                 'location'             => Request::getPostString('location', null),
                 'public_email'         => $public_email ?? null,

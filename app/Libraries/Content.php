@@ -49,7 +49,7 @@ class Content
                 $content = preg_replace($regexpAu, "<dev class=\"txt-closed\"><i class=\"bi bi-unlock gray-600 mr5\"></i> $2$3</dev>", $content);
             } else {
                 $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-600\"><i class=\"bi bi-lock mr5 red-200\"></i>" . Translate::get('text.closed') . "...</dev>", $content);
-            }   
+            }
         }
 
         return $content;
@@ -87,7 +87,7 @@ class Content
                 }
 
                 if ($user_info) {
-                    $content = str_replace('@' . $login, '<a href="' .  getUrlByName('profile', ['login' => $user_info['login']]) . '" class="to-user">@' . $user_info['login'] . '</a>', $content);
+                    $content = str_replace('@' . $login, '<a href="/@' .  $user_info['login'] . '" class="to-user">@' . $user_info['login'] . '</a>', $content);
 
                     if ($to_uid) {
                         $content_uid = str_replace('@' . $login, '@' . $user_info['id'], $content_uid);

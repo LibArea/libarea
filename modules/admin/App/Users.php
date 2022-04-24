@@ -112,24 +112,30 @@ class Users
     {
         $login          = Request::getPost('login');
         $user_id        = Request::getInt('id');
+        $email          = Request::getPost('email');
         $user_whisper   = Request::getPost('whisper');
         $user_name      = Request::getPost('name');
         $trust_level    = Request::getPostInt('trust_level');
 
+        $redirect = getUrlByName('admin.users');
         if (!$user = UserModel::getUser($user_id, 'id')) {
-            redirect(getUrlByName('admin.users'));
+            redirect($redirect);
         }
 
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
         Validation::Length($login, 'login', '3', '11', $redirect);
 
+        if ($email) {
+            Validation::Email($email, $redirect);
+        }
+
         SettingModel::edit(
             [
                 'id'            => $user_id,
                 'login'         => $login,
-                'email'         => Request::getPost('email'),
-                'whisper'       => $user_whisper ?? null,
-                'name'          => $user_name ?? null,
+                'email'         => $email,
+                'whisper'       => $user_whisper ?? '',
+                'name'          => $user_name ?? '',
                 'activated'     => Request::getPostInt('activated'),
                 'limiting_mode' => Request::getPostInt('limiting_mode'),
                 'template'      => $user['template'] ?? 'default',

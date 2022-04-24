@@ -1,13 +1,15 @@
 <?php
 
+use Hleb\Constructor\Handlers\Request;
+
 class Tpl
 {
     public static function agTheme($file)
     {
-        $tpl_puth = self::userTheme() . DIRECTORY_SEPARATOR . $file;
+        $tpl_puth = UserData::getUserTheme() . DIRECTORY_SEPARATOR . $file;
 
         if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php')) {
-            $tpl_puth = 'default' . $file;
+            $tpl_puth = 'default/' . $file;
         }
 
         return $tpl_puth;
@@ -46,20 +48,13 @@ class Tpl
 
         unset($params);
 
-        $tpl_puth = self::userTheme() . DIRECTORY_SEPARATOR . trim($hlTemplatePath, '/\\');
+        $tpl_puth = UserData::getUserTheme() . DIRECTORY_SEPARATOR . trim($hlTemplatePath, '/\\');
  
         if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php')) {
             $tpl_puth = 'default' . $hlTemplatePath;
         }
 
         require TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php';
-    }
-    
-    public static function userTheme()
-    {
-        $user  = UserData::get();
-        
-        return $user['template'];
     }
     
     public static function pageNumber()

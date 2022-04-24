@@ -18,7 +18,7 @@
         );
       }));
   <?php endif; ?>
-  
+
   <?= Html::getMsg(); ?>
 
   <?php if ($scroll) : ?>

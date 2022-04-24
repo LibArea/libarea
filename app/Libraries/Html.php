@@ -241,16 +241,17 @@ class Html
     }
 
     // Getting a piece of text
-    public static function fragment($str, $lenght = 100, $end = '...', $charset = 'UTF-8', $token = '~') {
+    public static function fragment($str, $lenght = 100, $end = '...', $charset = 'UTF-8', $token = '~')
+    {
         $str = strip_tags($str);
         if (mb_strlen($str, $charset) >= $lenght) {
             $wrap = wordwrap($str, $lenght, $token);
-            $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, $token, 0, $charset), $charset);    
+            $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, $token, 0, $charset), $charset);
             return $str_cut .= $end;
         } else {
             return $str;
         }
-    } 
+    }
 
 
     public static function getMsg()
@@ -263,16 +264,16 @@ class Html
 
         unset($_SESSION['msg']);
 
-       $html = '';
-         if ($msg) {
-             if ($msg['status'] == 'error') :
+        $html = '';
+        if ($msg) {
+            if ($msg['status'] == 'error') :
                 $html .= "Notiflix.Notify.failure('" . $msg['msg'] . "')";
-             else : 
+            else :
                 $html .= "Notiflix.Notify.info('" . $msg['msg'] . "')";
-             endif;
-         }
-         
-        return $html;  
+            endif;
+        }
+
+        return $html;
     }
 
     public static function addMsg($msg, $status)

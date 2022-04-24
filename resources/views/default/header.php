@@ -1,4 +1,7 @@
 <?php
+
+use Hleb\Constructor\Handlers\Request;
+
 Request::getHead()->addStyles('/assets/css/style.css?12');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>

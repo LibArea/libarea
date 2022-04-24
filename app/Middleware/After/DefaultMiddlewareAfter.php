@@ -2,7 +2,9 @@
 
 namespace App\Middleware\After;
 
-class DefaultMiddlewareAfter extends \MainMiddleware
+use Hleb\Scheme\App\Middleware\MainMiddleware;
+
+class DefaultMiddlewareAfter extends MainMiddleware
 {
     public function index()
     {

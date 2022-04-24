@@ -12,18 +12,18 @@
     </div>
     <div class="flex right">
       <ul class="mb-none">
-        <li><a href="<?= getUrlByName('blogs.all'); ?>"><?= __('blogs'); ?></a></li>
-        <li><a href="<?= getUrlByName('topics.all'); ?>"><?= __('topics'); ?></a></li>
-        <li><a href="<?= getUrlByName('web'); ?>"><?= __('catalog'); ?></a></li>
+        <li><a href="<?= url('blogs.all'); ?>"><?= __('blogs'); ?></a></li>
+        <li><a href="<?= url('topics.all'); ?>"><?= __('topics'); ?></a></li>
+        <li><a href="<?= url('web'); ?>"><?= __('catalog'); ?></a></li>
       </ul>
       <ul class="mb-none">
-        <li><a href="<?= getUrlByName('users.all'); ?>"><?= __('users'); ?></a></li>
-        <li><a href="<?= getUrlByName('answers'); ?>"><?= __('answers'); ?></a></li>
-        <li><a href="<?= getUrlByName('comments'); ?>"><?= __('comments'); ?></a></li>
+        <li><a href="<?= url('users.all'); ?>"><?= __('users'); ?></a></li>
+        <li><a href="<?= url('answers'); ?>"><?= __('answers'); ?></a></li>
+        <li><a href="<?= url('comments'); ?>"><?= __('comments'); ?></a></li>
       </ul>
       <ul class="mb-pl0">
-        <li><a href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => Config::get('facets.page-one')]); ?>"><?= __('info'); ?></a></li>
-        <li><a href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => Config::get('facets.page-two')]); ?>"><?= __('privacy'); ?></a></li>
+        <li><a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => Config::get('facets.page-one')]); ?>"><?= __('info'); ?></a></li>
+        <li><a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => Config::get('facets.page-two')]); ?>"><?= __('privacy'); ?></a></li>
       </ul>
     </div>
   </div>

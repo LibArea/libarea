@@ -23,7 +23,6 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     name,
                     avatar,
                     created_at,
-                    whisper,
                     updated_at,
                     whisper,
                     scroll,

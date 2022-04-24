@@ -43,7 +43,7 @@ class UserData
     // Administrator (level of trust 10)
     // Администратор (уровень доверия 10)
     const REGISTERED_ADMIN = 10;
-    
+
     // Administrator ID
     // ID администратора
     const REGISTERED_ADMIN_ID = 1;
@@ -80,7 +80,6 @@ class UserData
             if ($user['ban_list'] == self::BANNED_USER) {
                 (new \App\Controllers\Auth\SessionController())->annul($user['id']);
             }
-           
         } else {
 
             $remember = Request::getCookie('remember');
@@ -106,6 +105,17 @@ class UserData
         $t = self::getAccount();
 
         return $t['trust_level'] ?? false;
+    }
+
+    /**
+     * Returns the member template.
+     * Возвращает шаблон участника.
+     */
+    static public function getUserTheme()
+    {
+        $t = self::getAccount();
+
+        return $t['template'] ?? Config::get('general.template');
     }
 
     /**

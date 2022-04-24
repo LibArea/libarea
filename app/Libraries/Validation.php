@@ -13,7 +13,7 @@ class Validation
     public static function Length($name, $content, $min, $max, $redirect)
     {
         $name = str_replace(" ", '', $name);
-        if (Html::getStrlen($name) < $min || Html::getStrlen($name) > $max) { 
+        if (Html::getStrlen($name) < $min || Html::getStrlen($name) > $max) {
             $text = __('string.length', ['name' => '«' . __($content) . '»', 'min' => $min, 'max' => $max]);
             self::Returns($text, 'error', $redirect);
         }
@@ -28,13 +28,13 @@ class Validation
         }
         return true;
     }
-    
+
     public static function Returns($text, $status, $redirect = '/')
     {
         Html::addMsg($text, $status);
         redirect($redirect);
     }
-    
+
     public static function ComeBack($text, $status, $redirect = '/')
     {
         Html::addMsg(__($text), $status);
