@@ -580,6 +580,7 @@ $data = [
     'moderation'            => 'Modération',
     
     'deny.replies'          => 'Refuser les réponses?',
+    'there.forum'           => 'Le site a-t-il un forum?',
     'discussions.closed'    => 'La discussion du site est interdite. L*auteur ou l*équipe a clos la discussion.',
     
     'add.site.help'         => '<i class="gray-600">Format du titre:</i><br> «LibArea» — communauté<br><br><i class="gray-600">Description (sans publicité):</i><br> ...ce quil y a sur le site?<i>',

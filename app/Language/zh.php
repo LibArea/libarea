@@ -579,6 +579,7 @@ $data = [
     'moderation'            => '適度',
     
     'deny.replies'          => '拒絕回复？',
+    'there.forum'           => '網站有論壇嗎？',
     'discussions.closed'    => '禁止討論該網站。 作者或工作人員已結束討論。',
     
     'add.site.help'         => '<i class="gray-600">標題格式:</i><br> «LibArea» — 社區<br><br><i class="gray-600">說明（不含廣告）:</i><br> ...網站上有什麼?<i>',

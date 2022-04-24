@@ -7,7 +7,7 @@
         <span class="mb-none">— <?= __('community'); ?></span>
       </div>
       <a rel="nofollow noopener" class="icon" title="<?= __('DISCORD'); ?>" href="https://discord.gg/dw47aNx5nU"><i class="bi-discord text-2xl"></i></a>
-      <a rel="nofollow noopener" class="icon" title="<?= __('VK'); ?>" href="https://vk.com/libarea"><?= __('VK'); ?></a>
+      <a rel="nofollow noopener" class="icon" title="<?= __('VK'); ?>" href="https://vk.com/libarea">VK</a>
       <a rel="nofollow noopener" class="icon" title="<?= __('GitHub'); ?>" href="https://github.com/libarea/agouti"><i class="bi-github text-2xl"></i></a>
     </div>
     <div class="flex right">

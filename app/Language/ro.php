@@ -582,6 +582,7 @@ $data = [
     'moderation'            => 'Moderare',
 
     'deny.replies'          => 'Respinge răspunsurile?',
+    'there.forum'           => 'Site-ul are forum?',
     'discussions.closed'    => 'Discuțiile despre site sunt interzise. Autorul sau personalul a închis discuția.',
     
     'add.site.help'         => '<i class="gray-600">Formatul titlului:</i><br> «LibArea» — comunitate<br><br><i class="gray-600">Descriere (fara publicitate):</i><br> ...ce este pe site?<i>',
