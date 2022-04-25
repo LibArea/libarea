@@ -12,6 +12,16 @@ use Modules\Search\App\Tokenizers\RemoveAccentsTokenizer;
 use Modules\Search\App\Tokenizers\singleQuoteTokenizer;
 use Modules\Search\App\Tokenizers\WhiteSpaceTokenizer;
 
+// Commented example for Romanian
+// Please note that if uncommented, then these classes should be added below
+// use Modules\Search\App\Tokenizers\RomanianStopWordsTokenizer;
+// use Modules\Search\App\Tokenizers\RomanianStemmingTokenizer;
+
+// For English
+use Modules\Search\App\Tokenizers\EnglishStemmingTokenizer;
+use Modules\Search\App\Tokenizers\EnglishStopWordsTokenizer;
+
+// Для русского языка
 use Modules\Search\App\Tokenizers\RussianStemmingTokenizer;
 use Modules\Search\App\Tokenizers\RussianStopWordsTokenizer;
 
@@ -60,20 +70,20 @@ return [
                 '_boost' => 0.5
             ],
             'cat' => [
-                '_type' => 'list',
-                '_type.' => 'string',
-                '_indexed' => true,
-                '_filterable' => true,
-                '_boost' => 6
-            ],
+                        '_type' => 'list',
+                        '_type.' => 'string',
+                        '_indexed' => true,
+                        '_filterable' => true,
+                        '_boost' => 6
+                    ], 
 
         ]
     ],
     'types' => [
-    //    'datetime' => [
-    //        DateFormatTokenizer::class,
-    //        DateSplitTokenizer::class
-    //    ],
+        'datetime' => [
+            DateFormatTokenizer::class,
+            DateSplitTokenizer::class
+        ],
         '_default' => [
             RemoveAccentsTokenizer::class,
             LowerCaseTokenizer::class,
@@ -81,6 +91,11 @@ return [
             singleQuoteTokenizer::class,
             AlphaNumericTokenizer::class,
 
+            // For English
+            EnglishStemmingTokenizer::class,
+            EnglishStopWordsTokenizer::class,
+
+            // Для русского языка
             RussianStemmingTokenizer::class,
             RussianStopWordsTokenizer::class,
         ]
