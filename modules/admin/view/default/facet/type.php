@@ -82,9 +82,18 @@
     <?php if (!empty($data['pages'])) :?>
     <h3 class="mb5"><?= __('pages'); ?></h3>
       <?php foreach ($data['pages'] as $page) : ?>
-        <a class="block mb5" href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => $page['post_slug']]); ?>">
-          <i class="bi-info-square middle mr5"></i> <?= $page['post_title']; ?> <sup><?= $page['post_id']; ?></sup>
-        </a>
+        <div class="mb5">
+          <a href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => $page['post_slug']]); ?>">
+            <i class="bi-info-square middle mr5"></i> <?= $page['post_title']; ?> <sup><?= $page['post_id']; ?></sup>
+          </a>
+          <a data-type="post" data-id="<?= $page['post_id']; ?>" class="type-action gray-600 mr10 ml10">
+            <?php if ($page['post_is_deleted'] == 1) : ?>
+              <i class="bi-trash red"></i>
+            <?php else : ?>
+              <i class="bi-trash"></i>
+            <?php endif; ?>
+          </a>
+        </div>       
       <?php endforeach; ?>
     <?php endif; ?>
   <?php endif; ?>

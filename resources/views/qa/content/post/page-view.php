@@ -19,7 +19,7 @@
     <div class="gray-600 italic ml15">
       <?= $page['post_modified']; ?>
       <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) : ?>
-        <a class="gray-600 ml5" title="<?= __('edit'); ?>" href="<?= getUrlByName('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
+        <a class="gray-600 ml5" title="<?= __('edit'); ?>" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
           <i class="bi-pencil"></i>
         </a>
       <?php endif; ?>
@@ -30,13 +30,16 @@
   <div class="box sticky top-sm text-sm bg-violet">
     <?php foreach ($data['pages'] as $ind => $row) : ?>
       <div class=" pt5 pb5">
-        <a class="gray" href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
+        <a class="gray" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
           <i class="bi-info-square middle mr5"></i> <?= $row['post_title']; ?>
         </a>
         <?php if (UserData::checkAdmin()) : ?>
-          <a href="<?= getUrlByName('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><i class="bi-pencil"></i></a>
+          <a href="<?= url('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><i class="bi-pencil"></i></a>
         <?php endif; ?>
       </div>
     <?php endforeach; ?>
+    <?php if (UserData::checkAdmin()) : ?>
+      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><i class="bi-pencil"></i> <?=  __('edit'); ?></a>
+    <?php endif; ?>
   </div>
 </aside>
