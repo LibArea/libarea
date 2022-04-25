@@ -419,6 +419,7 @@ $data = [
     'email.correctness'             => '不合規電郵',
     'email.no.site'                 => '該電子郵件不在網站上',
     'english'                       => '英語',
+    'if.fill.then.page'             => '如果填寫，則帖子將是一個頁面（在文檔中）',
     'work.email'                    => '工作郵箱（用於<b>激活</b>帳戶）',
     'new.password.email'            => '重置密码的链接已发送到电子邮件',
     'check.your.email'              => '檢查您的電子郵件以激活您的帳戶',

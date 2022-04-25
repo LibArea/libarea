@@ -41,7 +41,7 @@
           'title'         => __('section'),
           'required'      => false,
           'maximum'       => 1,
-          'help'          => __('necessarily'),
+          'help'          => __('if.fill.then.page'),
         ]); ?>
       <?php endif; ?>
 

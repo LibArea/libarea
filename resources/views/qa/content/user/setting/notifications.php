@@ -1,7 +1,7 @@
 <?php
 $form = new Forms();
-$form->adding(['name' => 'setting_email_pm', 'type' => 'selected', 'var' => $data['setting']['setting_email_pm']]);
-$form->adding(['name' => 'setting_email_appealed', 'type' => 'selected', 'var' => $data['setting']['setting_email_appealed']]);
+$form->adding(['name' => 'setting_email_pm', 'type' => 'selected', 'var' => $data['setting']['setting_email_pm'] ?? 0]);
+$form->adding(['name' => 'setting_email_appealed', 'type' => 'selected', 'var' => $data['setting']['setting_email_appealed'] ?? 0]);
 $form->html_form($user['trust_level'], Config::get('form/user-notifications'));
 ?>
 <main class="col-two">

@@ -1,6 +1,7 @@
 <fieldset>
   <label><?= __('section'); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?></label>
   <input name="section_select" id="section_id">
+  <?php if (!empty($help)) { ?><div class="help"><?= $help; ?>...</div><?php } ?>
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">

@@ -417,6 +417,7 @@ $data = [
     'email.correctness'             => 'Недопустимый e-mail',
     'email.no.site'                 => 'Такого e-mail нет на сайте',
     'english'                       => 'английский',
+    'if.fill.then.page'             => 'Если заполнить, то Пост будет Страницей (в документации)',
 
     'work.email'            => 'Рабочий е-mail (для <b>активации</b> аккаунта)<br>Working email (for <b>account activation</b>)',
     'new.password.email'    => 'Ссылка на сброс пароля отправлена на e-mail',

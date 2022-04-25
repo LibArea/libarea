@@ -1,5 +1,5 @@
 <main>
-  <div class="box-flex justify-betweene">
+  <div class="box-flex justify-between">
     <ul class="nav">
       <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.comments')]); ?>
     </ul>

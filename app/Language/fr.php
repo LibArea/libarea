@@ -420,6 +420,7 @@ $data = [
     'email.correctness'             => 'Invalid email',
     'email.no.site'                 => 'This email is not on the site',
     'english'                       => 'English',
+    'if.fill.then.page'             => 'S*il est rempli, le message sera une page (dans la documentation)',
     'work.email'                    => 'Work email (for <b> activation </b> account)',
     'new.password.email'            => 'Le lien de réinitialisation du mot de passe est envoyé à email',
     'check.your.email'              => 'Check your email to activate your account',

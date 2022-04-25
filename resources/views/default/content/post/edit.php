@@ -41,11 +41,9 @@
           'title'         => __('section'),
           'required'      => false,
           'maximum'       => 1,
-          'help'          => __('necessarily'),
+          'help'          => __('if.fill.then.page'),
         ]); ?>
       <?php endif; ?>
-
-
 
       <?php if ($post['post_url']) : ?>
         <div class="mb20 2flex">

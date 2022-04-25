@@ -425,6 +425,8 @@ $data = [
     'account.being.verified'        => 'Contul dvs. este în așteptare',
     'email.correctness'             => 'E-mail invalid',
     'email.no.site'                 => 'Acest e-mail nu se află pe site',
+    'english'                       => 'Engleză',
+    'if.fill.then.page'             => 'Dacă este completat, atunci Postarea va fi o pagină (în documentație)',
     'command.executed'              => 'Comanda este executată',
 
     'new.password.email'            => 'Linkul pentru resetarea parolei a fost trimis la e-mail',
