@@ -3,16 +3,16 @@ $item = $data['item'];
 ?>
 <div id="contentWrapper">
   <div class="mb-none center mt30 w110">
-    <?= Html::votes($user['id'], $item, 'item', 'ps', 'text-2xl middle', 'block'); ?>
+    <?= Html::votes($item, 'item', 'ps', 'text-2xl middle', 'block'); ?>
     <div class="pt20">
-      <?= Html::favorite($user['id'], $item['item_id'], 'website', $item['tid'], 'ps', 'text-2xl'); ?>
+      <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
   <main>
     <div class="box hidden pr15 mb20">
       <h1><?= $item['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
-          <a class="text-sm ml5" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
+          <a class="text-sm ml5" href="<?= url('web.edit', ['id' => $item['item_id']]); ?>">
             <i class="bi-pencil"></i>
           </a>
         <?php endif; ?>
@@ -35,7 +35,6 @@ $item = $data['item'];
 
           <div class="right mr20">
             <?= Html::signed([
-              'user_id'         => $user['id'],
               'type'            => 'item',
               'id'              => $item['item_id'],
               'content_user_id' => false, // allow subscription and unsubscribe to the owner 
@@ -67,8 +66,8 @@ $item = $data['item'];
     </div>
 
     <?php if ($item['item_close_replies'] == 0) : ?>
-      <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_reply')) : ?>
-        <form class="max-w780" action="<?= getUrlByName('reply.create'); ?>" accept-charset="UTF-8" method="post">
+      <?php if (UserData::getRegType(config('trust-levels.tl_add_reply'))) : ?>
+        <form class="max-w780" action="<?= url('reply.create'); ?>" accept-charset="UTF-8" method="post">
           <?= csrf_field() ?>
 
           <?php Tpl::insert('/_block/editor/textarea', [
@@ -112,7 +111,7 @@ $item = $data['item'];
         <h3 class="uppercase-box"><?= __('recommended'); ?></h3>
         <?php foreach ($data['similar'] as $link) : ?>
           <?= Html::websiteImage($link['item_domain'], 'thumbs', $link['item_title'], 'mr5 w200 box-shadow'); ?>
-          <a class="inline mr20 mb15 block text-sm" href="<?= getUrlByName('web.website', ['slug' => $link['item_domain']]); ?>">
+          <a class="inline mr20 mb15 block text-sm" href="<?= url('web.website', ['slug' => $link['item_domain']]); ?>">
             <?= $link['item_title']; ?>
           </a>
         <?php endforeach; ?>
@@ -122,4 +121,4 @@ $item = $data['item'];
     </div>
   </aside>
 </div>
-<?= includeTemplate('/view/default/footer', ['user' => $user]); ?>
+<?= includeTemplate('/view/default/footer'); ?>

@@ -28,7 +28,7 @@ class Tpl
                 self::agTheme('/content' . $name),
                 self::agTheme('/footer')
             ],
-            array_merge($data, ['user' => UserData::get()])
+            $data
         );
     }
 

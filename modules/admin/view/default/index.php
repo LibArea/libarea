@@ -13,7 +13,7 @@
   <?php foreach ($data['last_visit'] as $user) : ?>
     <div class="gray">
       <span class="gray-600 text-sm">id<?= $user['id']; ?></span>
-      <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
+      <a href="<?= url('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
       <span class="gray-600 lowercase"> — <?= Html::langDate($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
     </div>
   <?php endforeach; ?>
@@ -34,7 +34,7 @@
   <h3 class="uppercase-box mt15"><?= __('reply.web'); ?></h3>
   <?php foreach ($data['replys'] as $reply) : ?>
     <div class="gray">
-      <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $reply['login']]); ?>">
+      <a class="gray-600" href="<?= url('profile', ['login' => $reply['login']]); ?>">
         <?= Html::image($reply['avatar'], $reply['login'], 'ava-sm', 'avatar', 'small'); ?>
         <span class="mr5">
           <?= $reply['login']; ?>
@@ -43,7 +43,7 @@
       <span class="mr15 ml5 gray-600 lowercase">
         <?= Html::langDate($reply['date']); ?>
       </span>
-      <a class="black" href="<?= getUrlByName('web.website', ['slug' => $reply['item_domain']]); ?>">
+      <a class="black" href="<?= url('web.website', ['slug' => $reply['item_domain']]); ?>">
         <i class="bi-eye"></i>
       </a>
       <div class="gray-600 text-sm mb15"><?= Content::text($reply['content'], 'line'); ?></div>
@@ -67,7 +67,7 @@
       <h3 class="uppercase-box"><?= __('posts'); ?> (no facet)</h3>
       <?php foreach ($data['posts_no_topic'] as $post) : ?>
         <div class="gray">
-          <a href="<?= getUrlByName('content.edit', ['type' => $post['post_type'], 'id' => $post['post_id']]) ?>">
+          <a href="<?= url('content.edit', ['type' => $post['post_type'], 'id' => $post['post_id']]) ?>">
              id:<?= $post['post_id']; ?></a> | <?= $post['post_title']; ?>
         </div>
       <?php endforeach; ?>

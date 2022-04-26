@@ -1,7 +1,7 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
 <div class="menu__left">
   <ul class="menu">
-    <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['type'], 'user' => 1, 'list' => Config::get('admin/menu.admin')]); ?>
+    <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['type'], 'list' => config('admin/menu.admin')]); ?>
   </ul>
 </div>
 
@@ -13,7 +13,7 @@
         'list' => [
           [
             'name' => __('admin'),
-            'link' => getUrlByName('admin')
+            'link' => url('admin')
           ], [
             'name' => __($data['type']),
             'link' => $data['type']

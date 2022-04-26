@@ -117,7 +117,7 @@ class Add
                 'id_content'    => $item_last['item_id'],
                 'action_type'   => 'website',
                 'action_name'   => 'content.added',
-                'url_content'   => getUrlByName('web.audits'),
+                'url_content'   => url('web.audits'),
             ]
         );
 
@@ -129,7 +129,7 @@ class Add
                     'sender_id'    => $this->user['id'],
                     'recipient_id' => 1,  // admin
                     'action_type'  => NotificationModel::TYPE_ADD_WEBSITE,
-                    'url'          => getUrlByName('web.audits'),
+                    'url'          => url('web.audits'),
                 ]
             );
         }

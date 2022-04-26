@@ -1,6 +1,6 @@
 <?php
-    $tl = $user['trust_level'];
-    $user_id = $user['id'];
+    $tl = UserData::getUserTl();
+    $user_id = UserData::getUserId();
     function internalRender($nodes, $tl, $user_id)
     {
         echo '<ul class="list-none-one mb20 mt10">';
@@ -27,9 +27,9 @@
             }
 
             echo '<div class="max-w780 text-base ind-first-p">' . Content::text($node['content'], 'text') . '</div>
-                    <div class="flex">' . Html::votes($user_id, $node, 'reply', 'ps', 'mr5');
+                    <div class="flex">' . Html::votes($node, 'reply', 'ps', 'mr5');
             
-            if ($tl >= Config::get('trust-levels.tl_add_reply')) { 
+            if ($tl >= config('trust-levels.tl_add_reply')) { 
                echo '<a data-item_id="' . $node['reply_item_id'] . '" data-type="addform" data-id="' . $node['reply_id'] . '" class="actreply gray-600 mr15 ml10">' . __('reply') . '</a>';
             } 
 

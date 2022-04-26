@@ -24,7 +24,7 @@ class EditCommentController extends MainController
         // Проверка доступа 
         $comment_id = Request::getPostInt('comment_id');
         $comment    = CommentModel::getCommentsId($comment_id);
-        if (!Html::accessСheck($comment, 'comment', $this->user, 0, 0)) return false;
+        if (!Html::accessСheck($comment, 'comment', 0, 0)) return false;
 
         Tpl::agIncludeTemplate(
             '/_block/form/edit-form-comment',
@@ -45,7 +45,7 @@ class EditCommentController extends MainController
 
         // Access verification 
         $comment = CommentModel::getCommentsId($comment_id);
-        if (!Html::accessСheck($comment, 'comment', $this->user, 0, 0)) {
+        if (!Html::accessСheck($comment, 'comment', 0, 0)) {
             redirect('/');
         }
 

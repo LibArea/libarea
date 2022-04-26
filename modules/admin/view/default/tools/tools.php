@@ -27,7 +27,7 @@
   </fieldset>
   <fieldset class="max-w300">
     <label for="mail"><?= __('Email'); ?></label>
-    <form action="<?= getUrlByName('admin.test.mail'); ?>" method="post">
+    <form action="<?= url('admin.test.mail'); ?>" method="post">
       <input type="mail" name="mail" value="" required>
       <div class="help"><?= __('test.email'); ?>...</div>
   </fieldset>    

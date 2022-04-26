@@ -7,7 +7,7 @@
     <language>ru</language>
     <?php foreach ($data['posts'] as $post) : ?>
       <item turbo="true">
-        <link><?= $data['url']; ?><?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?></link>
+        <link><?= $data['url']; ?><?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?></link>
         <pubDate><?= $post['post_date']; ?></pubDate>
         <turbo:content>
           <![CDATA[

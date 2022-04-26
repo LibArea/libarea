@@ -1,6 +1,6 @@
 <div class="cm_addentry max-w780 mt10">
-  <?php if ($user['id'] > 0) : ?>
-    <form action="<?= getUrlByName('reply.edit'); ?>" accept-charset="UTF-8" method="post">
+  <?php if (UserData::checkActiveUser()) : ?>
+    <form action="<?= url('reply.edit'); ?>" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
       <textarea rows="5" minlength="6" name="content"><?= $data['content']; ?></textarea>
       <fieldset>

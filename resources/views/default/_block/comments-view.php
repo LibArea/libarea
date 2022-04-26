@@ -6,7 +6,7 @@
     <?php $n = 0;
     foreach ($data['answers'] as  $answer) :
       $n++;
-      $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+      $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
     ?>
 
       <div class="block-answer mb15">
@@ -16,7 +16,7 @@
             <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="content-body">
                 <div class="flex text-sm">
-                  <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
+                  <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">
                     <?= Html::image($answer['avatar'], $answer['login'], 'ava-sm', 'avatar', 'small'); ?>
                     <span class="mr5<?php if (Html::loginColor($answer['created_at'])) : ?> green<?php endif; ?>">
                       <?= $answer['login']; ?>
@@ -34,14 +34,14 @@
                     </span>
                   <?php endif; ?>
                   <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
-                  <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
+                  <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
                 </div>
                 <div class="max-w780 ind-first-p">
                   <?= Content::text($answer['answer_content'], 'text'); ?>
                 </div>
               </div>
               <div class="flex text-sm">
-                <?= Html::votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
+                <?= Html::votes($answer, 'answer', 'ps', 'mr5'); ?>
 
                 <?php if ($post['post_closed'] == 0) : ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
@@ -49,9 +49,9 @@
                   <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if (Html::accessСheck($answer, 'answer', $user, 1, 30) === true) : ?>
+                <?php if (Html::accessСheck($answer, 'answer', 1, 30) === true) : ?>
                   <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) : ?>
-                    <a class="editansw gray-600 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                    <a class="editansw gray-600 mr10 ml10" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                       <?= __('edit'); ?>
                     </a>
                   <?php endif; ?>
@@ -63,9 +63,9 @@
                   </a>
                 <?php endif; ?>
 
-                <?= Html::favorite($user['id'], $answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml5'); ?>
+                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml5'); ?>
 
-                <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) : ?>
+                <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_stop_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
                     <i title="<?= __('report'); ?>" class="bi-flag"></i>
                   </a>
@@ -104,7 +104,7 @@
       <?php foreach ($answer['comments'] as  $comment) : ?>
 
         <?php if ($comment['comment_is_deleted'] == 1) : ?>
-          <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) : ?>
+          <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
             <ol class="bg-red-200 text-sm list-none max-w780 <?php if ($comment['comment_comment_id'] > 0) : ?> ml30<?php endif; ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
@@ -126,7 +126,7 @@
           <ol class="list-none">
             <li class="content_tree mb20 pl15<?php if ($comment['comment_comment_id'] > 0) : ?> ml30<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
               <div class="text-sm flex">
-                <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
+                <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>">
                   <?= Html::image($comment['avatar'], $comment['login'], 'ava-sm', 'avatar', 'small'); ?>
                   <span class="mr5<?php if (Html::loginColor($comment['created_at'])) : ?> green<?php endif; ?>">
                     <?= $comment['login']; ?>
@@ -144,13 +144,13 @@
                   <a class="gray-600 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi-arrow-up"></i></a>
                 <?php endif; ?>
                 <a class="gray-600 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi-hash"></i></a>
-                <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
+                <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
               </div>
               <div class="max-w780 ind-first-p">
                 <?= Content::text($comment['comment_content'], 'text'); ?>
               </div>
               <div class="text-sm flex">
-                <?= Html::votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
+                <?= Html::votes($comment, 'comment', 'ps', 'mr5'); ?>
 
                 <?php if ($post['post_closed'] == 0) : ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
@@ -160,7 +160,7 @@
                   <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) : ?>
+                <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray mr10 ml10">
                     <?= __('edit'); ?>
                   </a>
@@ -169,7 +169,7 @@
                   </a>
                 <?php endif; ?>
 
-                <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) : ?>
+                <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_stop_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml15">
                     <i title="<?= __('report'); ?>" class="bi-flag"></i>
                   </a>

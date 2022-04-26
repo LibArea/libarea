@@ -49,7 +49,7 @@ class Words
 
         ContentModel::setStopWord($data);
 
-        Validation::ComeBack('change.saved', 'success', getUrlByName('admin.words'));
+        Validation::ComeBack('change.saved', 'success', url('admin.words'));
     }
 
     // Удаление стоп-слова

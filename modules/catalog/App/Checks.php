@@ -16,14 +16,6 @@ class Checks
         $this->user  = UserData::get();
     }
 
-    public static function permissions($user, $allowed_tl)
-    {
-        if ($user['trust_level'] < $allowed_tl) {
-            return false;
-        }
-        return true;
-    }
-
     public static function length($content, $min, $max)
     {
         if (Html::getStrlen($content) < $min || Html::getStrlen($content) > $max) {
@@ -52,14 +44,14 @@ class Checks
     {
         $count      = UserAreaModel::getUserSitesCount($this->user['id']);
 
-        $count_add  = UserData::checkAdmin() ? 999 : Config::get('trust-levels.count_add_site');
+        $count_add  = UserData::checkAdmin() ? 999 : config('trust-levels.count_add_site');
 
         $in_total   = $count_add - $count;
 
-        self::trustLevel($this->user['trust_level'], Config::get('trust-levels.tl_add_site'), $count, $count_add);
+        self::trustLevel($this->user['trust_level'], config('trust-levels.tl_add_site'), $count, $count_add);
 
         if (!$in_total > 0) {
-            redirect(getUrlByName('web'));
+            redirect(url('web'));
         }
 
         return $in_total;

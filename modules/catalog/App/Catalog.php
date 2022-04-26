@@ -39,7 +39,7 @@ class Catalog
 
         $m = [
             'og'    => false,
-            'url'   => getUrlByName('web.dir', ['grouping' => 'all', 'slug' => $category['facet_slug']]),
+            'url'   => url('web.dir', ['grouping' => 'all', 'slug' => $category['facet_slug']]),
         ];
 
         $title = __($sheet . '.cat.title', ['name' => $category['facet_title']]);
@@ -76,12 +76,12 @@ class Catalog
     public static function breadcrumb($tree, $screening)
     {
         $arr = [
-            ['name' => __('catalog'), 'link' => getUrlByName('web')]
+            ['name' => __('catalog'), 'link' => url('web')]
         ];
 
         $result = [];
         foreach ($tree as $row) {
-            $result[] = ["name" => $row['name'], "link" => getUrlByName('web.dir', ['grouping' => $screening, 'slug' => $row['link']])];
+            $result[] = ["name" => $row['name'], "link" => url('web.dir', ['grouping' => $screening, 'slug' => $row['link']])];
         }
 
         return array_merge($arr, $result);

@@ -14,8 +14,8 @@
           </a>
           <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', $screening); ?>
 
-          <?php if (Html::accessСheck($item, 'item', $user, false, false) === true) : ?>
-            <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
+          <?php if (Html::accessСheck($item, 'item', false, false) === true) : ?>
+            <a href="<?= url('web.edit', ['id' => $item['item_id']]); ?>">
               <i class="bi-pencil text-sm"></i>
             </a> - <?= $item['item_following_link']; ?>
           <?php endif; ?>
@@ -40,14 +40,14 @@
               <?php endif; ?>
               <div>
                 <i class="bi-arrow-return-right gray-600 ml10"></i>
-                <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_domain']]); ?>">
+                <a class="black" href="<?= url('web.website', ['slug' => $item['item_domain']]); ?>">
                   <?= __('more.detailed'); ?>
                 </a>
               </div>
             </div>
             <div class="flex right gray-600">
-              <?= Html::favorite($user['id'], $item['item_id'], 'website', $item['tid'], 'ps', 'mr20'); ?>
-              <?= Html::votes($user['id'], $item, 'item', 'ps', 'mr5'); ?>
+              <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'mr20'); ?>
+              <?= Html::votes($item, 'item', 'ps', 'mr5'); ?>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="mt15 mb15">
           <i class="bi-link-45deg red mr5 text-2xl"></i>
           <?= $item['item_title']; ?> (<?= $item['item_domain']; ?>)
-          <a class="ml15" title="<?= __('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
+          <a class="ml15" title="<?= __('edit'); ?>" href="<?= url('web.edit', ['id' => $item['item_id']]); ?>">
             <i class="bi-pencil"></i>
           </a>
         </div>

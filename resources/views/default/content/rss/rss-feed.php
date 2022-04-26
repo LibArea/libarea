@@ -11,9 +11,9 @@
         <description>
           <![CDATA[{{ <?= $post['post_content']; ?> }}]]>
         </description>
-        <link><?= $data['url']; ?><?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?></link>
+        <link><?= $data['url']; ?><?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?></link>
         <pubDate><?= date(DATE_RFC822, strtotime($post['post_date'])); ?></pubDate>
-        <guid><?= $data['url']; ?><?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?></guid>
+        <guid><?= $data['url']; ?><?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?></guid>
       </item>
     <?php endforeach; ?>
   </channel>

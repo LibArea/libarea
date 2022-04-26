@@ -12,7 +12,7 @@
       <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.bookmarks.sites'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
 
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>
   </main>
   <aside>
     <div class="box-yellow text-sm mt15"><?= __('web.bookmarks.info'); ?>.</div>
@@ -20,8 +20,8 @@
       <div class="box text-sm bg-violet mt15">
         <h3 class="uppercase-box"><?= __('menu'); ?></h3>
         <ul class="menu">
-          <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
-          <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('catalog/menu.user')]); ?>
+          <?= includeTemplate('/view/default/_block/add-site', ['data' => $data]); ?>
+          <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'list' => config('catalog/menu.user')]); ?>
         </ul>
       </div>
     <?php endif; ?>

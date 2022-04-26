@@ -3,7 +3,7 @@
 
   <?php if (!empty($data['answers'])) : ?>
     <div class="box">
-      <?= Tpl::insert('/content/answer/answer', ['data' => $data, 'user' => $user]); ?>
+      <?= Tpl::insert('/content/answer/answer', ['data' => $data]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
 
@@ -16,4 +16,4 @@
     <?= __('answers.desc'); ?>
   </div>
 </aside>
-<?= Tpl::insert('/_block/js-msg-flag', ['uid' => $user['id']]); ?>
+<?= Tpl::insert('/_block/js-msg-flag'); ?>

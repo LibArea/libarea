@@ -4,7 +4,7 @@
 
     <a href="/"><?= __('home'); ?></a> / <span class="red"><?= __('edit.option', ['name' => __($post['post_type'])]); ?></span>
 
-    <form class="max-w780" action="<?= getUrlByName('content.change', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= url('content.change', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <fieldset>
@@ -85,7 +85,7 @@
 
       <?= Tpl::insert('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
-      <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) : ?>
+      <?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
         <?php if ($post['post_draft'] == 1) : ?>
           <?= Tpl::insert('/_block/form/radio', [
             'data' => [
@@ -100,10 +100,7 @@
       <?php endif; ?>
 
       <?php if ($post['post_type'] == 'post') : ?>
-        <?= Tpl::insert('/_block/form/select/content-tl', [
-          'data' => $post['post_tl'],
-          'user' => $user
-        ]); ?>
+        <?= Tpl::insert('/_block/form/select/content-tl', ['data' => $post['post_tl']]); ?>
 
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [

@@ -22,7 +22,7 @@ class EditPostController extends MainController
     {
         $post_id    = Request::getInt('id');
         $post       = PostModel::getPost($post_id, 'id', $this->user);
-        if (!Html::accessСheck($post, 'post', $this->user, 0, 0)) {
+        if (!Html::accessСheck($post, 'post', 0, 0)) {
             redirect('/');
         }
 
@@ -73,7 +73,7 @@ class EditPostController extends MainController
 
         // Проверка доступа 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
-        if (!Html::accessСheck($post, 'post', $this->user, 0, 0)) {
+        if (!Html::accessСheck($post, 'post', 0, 0)) {
             redirect('/');
         }
 
@@ -195,7 +195,7 @@ class EditPostController extends MainController
     {
         $post_id    = Request::getInt('id');
         $post = PostModel::getPost($post_id, 'id', $this->user);
-        if (!Html::accessСheck($post, 'post', $this->user, 0, 0)) {
+        if (!Html::accessСheck($post, 'post', 0, 0)) {
             redirect('/');
         }
 

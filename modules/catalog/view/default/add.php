@@ -1,7 +1,7 @@
 <?php
 echo includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
 $form = new Forms();
-$form->html_form($user['trust_level'], Config::get('form/catalog.site'));
+$form->html_form(UserData::getUserTl(), config('form/catalog.site'));
 ?>
 
 <div id="contentWrapper">
@@ -10,7 +10,7 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
         'list' => [
           [
             'name' => __('home'),
-            'link' => getUrlByName('web')
+            'link' => url('web')
           ], [
             'name' => __('site.add'),
             'link' => 'red'

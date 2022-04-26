@@ -6,12 +6,12 @@
     'menus' => [
       [
         'id' => $data['type'] . '.all',
-        'url' => getUrlByName('admin.' . $data['type']),
+        'url' => url('admin.' . $data['type']),
         'name' => __('all'),
         'icon' => 'bi-record-circle'
       ], [
         'id' => $data['type'] . '.ban',
-        'url' => getUrlByName('admin.' . $data['type'] . '.ban'),
+        'url' => url('admin.' . $data['type'] . '.ban'),
         'name' => __('deleted'),
         'icon' => 'bi-x-circle'
       ]
@@ -40,7 +40,7 @@
             <?= Html::image($user['avatar'], $user['login'], 'ava-lg', 'avatar', 'max'); ?>
           </td>
           <td>
-            <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
+            <a href="<?= url('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
             <?php if ($user['name']) : ?>
               (<?= $user['name']; ?>)
             <?php endif; ?>
@@ -67,7 +67,7 @@
             <?php endif; ?>
           </td>
           <td class="text-sm align-right">
-            <a class="gray-600 ml10" href="<?= getUrlByName('admin.regip', ['ip' => $user['reg_ip']]); ?>">
+            <a class="gray-600 ml10" href="<?= url('admin.regip', ['ip' => $user['reg_ip']]); ?>">
               <?= $user['reg_ip']; ?>
             </a>
             <?php if ($user['duplicat_ip_reg'] > 1) : ?>
@@ -78,7 +78,7 @@
           </td>
           <td class="text-sm align-right">
             <?php if (!empty($user['last_visit_logs']['latest_ip'])) : ?>
-              <a class="gray-600 ml10" href="<?= getUrlByName('admin.logip', ['ip' => $user['last_visit_logs']['latest_ip']]); ?>">
+              <a class="gray-600 ml10" href="<?= url('admin.logip', ['ip' => $user['last_visit_logs']['latest_ip']]); ?>">
                 <?= $user['last_visit_logs']['latest_ip']; ?>
               </a>
               <br>
@@ -103,7 +103,7 @@
             <?php endif; ?>
           </td>
           <td class="center">
-            <a title="<?= __('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
+            <a title="<?= __('edit'); ?>" href="<?= url('admin.user.edit', ['id' => $user['id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
           </td>
@@ -113,7 +113,7 @@
   <?php else : ?>
     <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
-  <?= Html::pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('admin.users')); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], null, url('admin.users')); ?>
 </div>
 </div>
 </main>

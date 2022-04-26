@@ -4,7 +4,7 @@
     <a href="/"><?= __('home'); ?></a> /
     <span class="red"><?= __('add.option', ['name' => __('post')]); ?></span>
 
-    <form class="max-w780" action="<?= getUrlByName('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= url('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <fieldset>
         <label for="post_title"><?= __('heading'); ?></label>
@@ -30,7 +30,7 @@
         ]); ?>
       <?php endif; ?>
 
-      <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_url')) : ?>
+      <?php if (UserData::getRegType(config('trust-levels.tl_add_url'))) : ?>
         <fieldset>
           <div class="left w-70">
             <input id="link" placeholder="URL" class="post_url" type="text" name="post_url" />
@@ -60,7 +60,7 @@
 
       <?= Tpl::insert('/_block/editor/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
 
-      <?php if ($user['trust_level'] > UserData::USER_FIRST_LEVEL) : ?>
+      <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL)) : ?>
         <?= Tpl::insert('/_block/form/radio',  [
           'data' => [
             [
@@ -70,10 +70,7 @@
           ],
         ]); ?>
 
-        <?= Tpl::insert('/_block/form/select/content-tl', [
-          'user' => $user,
-          'data' => null
-        ]); ?>
+        <?= Tpl::insert('/_block/form/select/content-tl', ['data' => null]); ?>
 
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [

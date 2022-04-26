@@ -14,7 +14,7 @@ $form->adding(['name' => 'title_soft', 'type' => 'value', 'var' => $domain['item
 $form->adding(['name' => 'content_soft', 'type' => 'value', 'var' => $domain['item_content_soft']]);
 $form->adding(['name' => 'close_replies', 'type' => 'selected', 'var' => $domain['item_close_replies']]);
 
-$form->html_form($user['trust_level'], Config::get('form/catalog.site'));
+$form->html_form(UserData::getUserTl(), config('form/catalog.site'));
 ?>
 
 <div id="contentWrapper">
@@ -25,7 +25,7 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
         'list' => [
           [
             'name' => __('home'),
-            'link' => getUrlByName('web')
+            'link' => url('web')
           ], [
             'name' => __('site.edit'),
             'link' => 'red'
@@ -39,7 +39,7 @@ $form->html_form($user['trust_level'], Config::get('form/catalog.site'));
         <span class="add-favicon text-sm" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
       </fieldset>
 
-      <form action="<?= getUrlByName('web.change'); ?>" method="post">
+      <form action="<?= url('web.change'); ?>" method="post">
         <?= csrf_field() ?>
 
         <?= includeTemplate('/view/default/_block/category', ['data' => $data, 'action' => 'edit']); ?>

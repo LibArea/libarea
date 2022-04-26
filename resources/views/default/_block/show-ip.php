@@ -1,5 +1,5 @@
 <?php if (UserData::checkAdmin()) : ?>
-  <a class="gray-600 ml10" href="<?= getUrlByName('admin.logip', ['ip' => $ip]); ?>">
+  <a class="gray-600 ml10" href="<?= url('admin.logip', ['ip' => $ip]); ?>">
     <?= $ip; ?>
   </a> 
   <?php if ($publ == 0) : ?>

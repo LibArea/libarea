@@ -17,7 +17,7 @@
 
   <div class="box bg-violet">
     <h3 class="uppercase-box"><?= __('contacts'); ?></h3>
-    <?php foreach (Config::get('form/user-setting') as $block) : ?>
+    <?php foreach (config('form/user-setting') as $block) : ?>
       <?php if ($profile[$block['title']]) : ?>
         <div class="mt5">
           <?= $block['lang']; ?>:
@@ -44,11 +44,11 @@
       <h3 class="uppercase-box"><?= __('created.by'); ?></h3>
       <?php foreach ($data['blogs'] as $blog) : ?>
         <div class="w-100 mb-w100 mb15 flex flex-row">
-          <a class="mr10" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
+          <a class="mr10" href="<?= url($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
             <?= Html::image($blog['facet_img'], $blog['facet_title'], 'img-lg', 'logo', 'max'); ?>
           </a>
           <div class="ml5 w-100">
-            <a class="black" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
+            <a class="black" href="<?= url($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
               <?= $blog['facet_title']; ?>
             </a>
             <div class="text-sm pr15 mb-pr0 gray-600">
@@ -73,24 +73,22 @@
     <div class="box bg-violet">
       <h3 class="uppercase-box"><?= __('selected.post'); ?></h3>
       <div class="mt5">
-        <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+        <a href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
         </a>
-        <?php if (UserData::checkActiveUser()) : ?>
-          <?php if ($profile['login'] == $user['login']) : ?>
-            <a class="add-profile ml10" data-post="<?= $post['post_id']; ?>">
-              <i class="bi-trash red"></i>
-            </a>
-          <?php endif; ?>
+        <?php if ($profile['id'] == UserData::getUserId()) : ?>
+          <a class="add-profile ml10" data-post="<?= $post['post_id']; ?>">
+            <i class="bi-trash red"></i>
+          </a>
         <?php endif; ?>
         <div class="text-sm lowercase">
-          <a class="gray" href="<?= getUrlByName('profile', ['login' => $profile['login']]); ?>">
+          <a class="gray" href="<?= url('profile', ['login' => $profile['login']]); ?>">
             <?= Html::image($profile['avatar'], $profile['login'], 'ava-sm', 'avatar', 'small'); ?>
             <?= $profile['login']; ?>
           </a>
           <span class="gray-600 ml5"><?= $post['post_date'] ?></span>
           <?php if ($post['post_answers_count'] != 0) : ?>
-            <a class="gray-600 right" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+            <a class="gray-600 right" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
               <i class="bi-chat-dots middle"></i>
               <?= $post['post_answers_count']; ?>
             </a>
@@ -105,7 +103,7 @@
       <h3 class="uppercase-box"><?= __('is.reading'); ?></h3>
       <?php foreach ($data['topics'] as  $topic) : ?>
         <div class="mt5 mb5">
-          <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+          <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
             <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'small'); ?>
             <span class="bar-name text-sm"><?= $topic['facet_title']; ?></span>
           </a>
@@ -118,7 +116,7 @@
     <div class="box bg-violet">
       <h3 class="uppercase-box"><?= __('understands'); ?></h3>
       <?php foreach ($data['participation'] as $part) : ?>
-        <a class="tags" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
+        <a class="tags" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
           <?= $part['facet_title']; ?>
         </a>
       <?php endforeach; ?>
@@ -155,11 +153,11 @@
             </span>
           <?php endif; ?>
         <?php endif; ?>
-        <a class="gray mb5 block" href="<?= getUrlByName('admin.user.edit', ['id' => $profile['id']]); ?>">
+        <a class="gray mb5 block" href="<?= url('admin.user.edit', ['id' => $profile['id']]); ?>">
           <i class="bi-gear middle mr5"></i>
           <span class="middle"><?= __('edit'); ?></span>
         </a>
-        <a class="gray block" href="<?= getUrlByName('admin.badges.user.add', ['id' => $profile['id']]); ?>">
+        <a class="gray block" href="<?= url('admin.badges.user.add', ['id' => $profile['id']]); ?>">
           <i class="bi-award middle mr5"></i>
           <span class="middle"><?= __('reward.user'); ?></span>
         </a>

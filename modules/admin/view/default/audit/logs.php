@@ -6,7 +6,7 @@
     'menus' => [
       [
         'id'    => 'audits.all',
-        'url'   => getUrlByName('admin.logs.search'),
+        'url'   => url('admin.logs.search'),
         'name'  => __('search'),
         'icon'  => 'bi-search',
       ]
@@ -29,7 +29,7 @@
         <tr>
           <td><?= $log['id']; ?></td>
           <td>
-            <a href="<?= getUrlByName('profile', ['login' => $log['user_login']]); ?>">
+            <a href="<?= url('profile', ['login' => $log['user_login']]); ?>">
               <?= $log['user_login']; ?>
             </a>
             <sup class="gray-600 ml5">id:<?= $log['user_id']; ?></sup>
@@ -45,7 +45,7 @@
     <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 
-  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.logs')); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('admin.logs')); ?>
 </div>
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

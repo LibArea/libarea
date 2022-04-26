@@ -9,7 +9,7 @@
 
 <div class="box bg-white">
   <?php foreach ($data['types_facets'] as $type) : ?>
-    <a class="block mb10" href="<?= getUrlByName('admin.facets.type', ['type' => $type['type_code']]); ?>">
+    <a class="block mb10" href="<?= url('admin.facets.type', ['type' => $type['type_code']]); ?>">
       <i class="bi-circle green middle mr5"></i>
       <?= __($type['type_lang']); ?>
       <sup class="gray-600"><?= $data['count']['count_' . $type['type_code']]; ?></sup>

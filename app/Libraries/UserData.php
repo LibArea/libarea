@@ -55,7 +55,8 @@ class UserData
     static protected $id = null;
 
     static protected $user = null;
-
+ 
+ 
     static public function checkAccordance($type, $compare)
     {
         $check = self::getRegType($type, $compare);
@@ -63,6 +64,32 @@ class UserData
             redirect('/');
         }
         return true;
+    }
+
+    /**
+     * Returns an array of values if the user is registered
+     * Возвращает массив значений, если пользователь зарегистрирован
+     * TODO: возможно поменять название...
+     */
+    static public function get()
+    {
+        if (!is_null(self::$user)) {
+            return self::$user;
+        }
+
+        $noAuth = [
+            'id'           => self::USER_ZERO_LEVEL,
+            'trust_level'  => self::USER_ZERO_LEVEL,
+            'scroll'       => self::USER_ZERO_LEVEL,
+            'template'     => Config::get('general.template'),
+            'lang'         => Config::get('general.lang'),
+        ];
+
+        $t = self::getAccount();
+
+        self::$user = $t ? $t : $noAuth;
+ 
+        return self::$user;
     }
 
     static public function getAccount()
@@ -97,28 +124,6 @@ class UserData
     }
 
     /**
-     * Returns the trust level if the user is registere.
-     * Возвращает уровень доверия, если пользователь зарегистрирован.
-     */
-    static public function getTl()
-    {
-        $t = self::getAccount();
-
-        return $t['trust_level'] ?? false;
-    }
-
-    /**
-     * Returns the member template.
-     * Возвращает шаблон участника.
-     */
-    static public function getUserTheme()
-    {
-        $t = self::getAccount();
-
-        return $t['template'] ?? Config::get('general.template');
-    }
-
-    /**
      * Checking for registration by integer user type and comparison sign.
      * Проверка на регистрацию по числовому типу пользователя и знаку сравнения.
      * @param integer|array $type
@@ -131,7 +136,8 @@ class UserData
      */
     static public function getRegType($type, $cp = '>='): bool
     {
-        $t = self::getTl();
+        $t = self::getUserTl();
+        
         if ((is_integer($type) && (
                 ($cp == '=' && $t == $type) ||
                 ($cp == '>=' && $t >= $type) ||
@@ -148,48 +154,80 @@ class UserData
     }
 
     /**
-     * Check for any unblocked user.
-     * Проверка на любого незаблокированного пользователя.
-     * @return bool
-     */
-    static public function checkActiveUser(): bool
-    {
-        return self::getTl() >= self::USER_FIRST_LEVEL;
-    }
-
-    /**
-     * Returns an array of values if the user is registered
-     * Возвращает массив значений, если пользователь зарегистрирован
-     * TODO: возможно поменять название...
-     */
-    static public function get()
-    {
-        if (!is_null(self::$user)) {
-            return self::$user;
-        }
-
-        $noAuth = [
-            'id'           => self::USER_ZERO_LEVEL,
-            'trust_level'  => self::USER_ZERO_LEVEL,
-            'scroll'       => self::USER_ZERO_LEVEL,
-            'template'     => Config::get('general.template'),
-            'lang'         => Config::get('general.lang'),
-        ];
-
-        $t = self::getAccount();
-
-        self::$user = $t ? $t : $noAuth;
-
-        return self::$user;
-    }
-
-    /**
      * Checking for administrator and higher.
      * Проверка на администратора и выше.
      * @return bool
      */
     static public function checkAdmin(): bool
     {
-        return self::getTl() == self::REGISTERED_ADMIN;
+        return self::getUserTl() == self::REGISTERED_ADMIN;
+    }
+
+    /**
+     * Check for any unblocked user.
+     * Проверка на любого незаблокированного пользователя.
+     * @return bool
+     */
+    static public function checkActiveUser(): bool
+    {
+        return self::getUserTl() >= self::USER_FIRST_LEVEL;
+    }
+
+    /**
+     * Returns the trust level if the user is registere.
+     * Возвращает уровень доверия, если пользователь зарегистрирован.
+     */
+    static public function getUserTl(): int
+    {
+        $t = self::getAccount();
+        
+        return  $t['trust_level'] ?? false;
+    }
+
+    /**
+     * Returns the trust level if the user is registere.
+     * Возвращает уровень доверия, если пользователь зарегистрирован.
+     */
+    static public function getUserId()
+    {
+        $t = self::getAccount();
+        
+        return self::$myAccount['id'] ?? false;
+    }
+
+    /**
+     * Returns the member template.
+     * Возвращает шаблон участника.
+     */
+    static public function getUserTheme()
+    {
+        return self::$myAccount['template'] ?? Config::get('general.template');
+    }
+
+    /**
+     * Returns the member's avatar file (default).
+     * Возвращает файл аватара участника (по умолчанию дефолтный).
+     */
+    static public function getUserAvatar()
+    {
+        return self::$myAccount['avatar'];
+    }
+
+    /**
+     * Returns the login (nickname) of the participant.
+     * Возвращает логин (никнейм) участника.
+     */
+    static public function getUserLogin()
+    {
+        return self::$myAccount['login'];
+    }
+
+    /**
+     * Returns whether the member has scroll enabled.
+     * Возвращает, включен ли скролл у участника.
+     */
+    static public function getUserScroll()
+    {
+        return self::$myAccount['scroll'] ?? false;
     }
 }

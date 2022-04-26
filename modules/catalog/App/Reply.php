@@ -24,7 +24,7 @@ class Reply
         // Проверка доступа
         $id  = Request::getPostInt('id');
         $reply = ReplyModel::getId($id);
-        if (!Html::accessСheck($reply, 'reply', $this->user, 0, 0)) return false;
+        if (!Html::accessСheck($reply, 'reply', 0, 0)) return false;
 
         includeTemplate(
             '/view/default/_block/edit-form-reply',
@@ -48,19 +48,19 @@ class Reply
         $item = WebModel::getItemId($item_id);
         Html::pageRedirection($item, '/');
 
-        $url = getUrlByName('web.website', ['slug' => $item['item_domain']]);
+        $url = url('web.website', ['slug' => $item['item_domain']]);
         Validation::Length($content, 'content', '6', '555', $url);
 
         // Access verification 
         $reply = ReplyModel::getId($id);
-        if (!Html::accessСheck($reply, 'reply', $this->user, 0, 0)) {
+        if (!Html::accessСheck($reply, 'reply', 0, 0)) {
             redirect('/');
         }
 
         // If the user is frozen
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
 
-        $redirect  = getUrlByName('web.website', ['slug' => $item['item_domain']]) . '#reply_' . $reply['reply_id'];
+        $redirect  = url('web.website', ['slug' => $item['item_domain']]) . '#reply_' . $reply['reply_id'];
 
         ReplyModel::edit(
             [
@@ -84,7 +84,7 @@ class Reply
         $item = WebModel::getItemId($item_id);
         Html::pageError404($item);
 
-        $url = getUrlByName('web.website', ['slug' => $item['item_domain']]);
+        $url = url('web.website', ['slug' => $item['item_domain']]);
         Validation::Length($content, 'content', '6', '555', $url);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
@@ -114,7 +114,7 @@ class Reply
             ]
         );
 
-        $url = getUrlByName('web.website', ['slug' => $item['item_domain']]) . '#reply_' . $last_id;
+        $url = url('web.website', ['slug' => $item['item_domain']]) . '#reply_' . $last_id;
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {

@@ -8,7 +8,7 @@
 ); ?>
 
 <div class="box bg-white">
-  <form action="<?= getUrlByName('admin.user.badge.create'); ?>" method="post">
+  <form action="<?= url('admin.user.badge.create'); ?>" method="post">
     <?= csrf_field() ?>
     <fieldset>
       <label for="post_content">

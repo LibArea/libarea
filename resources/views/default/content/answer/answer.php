@@ -1,7 +1,7 @@
 <?php $n = 0;
 foreach ($data['answers'] as $answer) :
   $n++;
-  $post_url = getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]);
+  $post_url = url('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]);
 ?>
 
   <?php if ($answer['answer_is_deleted'] == 0) : ?>
@@ -10,7 +10,7 @@ foreach ($data['answers'] as $answer) :
       <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
         <div class="content-body">
           <div class="flex text-sm">
-            <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
+            <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">
               <?= Html::image($answer['avatar'],  $answer['login'], 'ava-sm', 'avatar', 'small'); ?>
               <span class="mr5 ml5">
                 <?= $answer['login']; ?>
@@ -28,14 +28,14 @@ foreach ($data['answers'] as $answer) :
               </span>
             <?php endif; ?>
             <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
-            <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
+            <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
           </div>
           <div class="content-body">
             <?= Content::text($answer['content'], 'text'); ?>
           </div>
         </div>
         <div class="flex text-sm">
-          <?= Html::votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
+          <?= Html::votes($answer, 'answer', 'ps', 'mr5'); ?>
 
           <?php if ($answer['post_closed'] == 0) : ?>
             <?php if ($answer['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
@@ -43,9 +43,9 @@ foreach ($data['answers'] as $answer) :
             <?php endif; ?>
           <?php endif; ?>
 
-          <?php if (Html::accessСheck($answer, 'answer', $user, 1, 30) === true) : ?>
+          <?php if (Html::accessСheck($answer, 'answer', 1, 30) === true) : ?>
             <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) : ?>
-              <a class="editansw gray-600 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+              <a class="editansw gray-600 mr10 ml10" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                 <?= __('edit'); ?>
               </a>
             <?php endif; ?>
@@ -57,7 +57,7 @@ foreach ($data['answers'] as $answer) :
             </a>
           <?php endif; ?>
 
-          <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) : ?>
+          <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_stop_report'))) : ?>
             <a data-post_id="<?= $answer['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
               <i title="<?= __('report'); ?>" class="bi-flag"></i>
             </a>

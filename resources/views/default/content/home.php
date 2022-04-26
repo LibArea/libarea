@@ -1,7 +1,7 @@
 <main>
   <div class="box-flex justify-between">
     <ul class="nav">
-      <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('navigation/nav.home')]); ?>
+      <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'list' => config('navigation/nav.home')]); ?>
     </ul>
 
     <div class="trigger">
@@ -10,20 +10,20 @@
     <div class="dropdown tooltip"><?= __($data['sheet'] . '.info'); ?></div>
   </div>
 
-  <?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>
-  <?php if ($user['scroll'] == 0) : ?>
+  <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
+  <?php if (UserData::getUserScroll()) : ?>
+    <div id="scrollArea"></div>
+    <div id="scroll"></div>
+  <?php else : ?>
     <div class="mb15">
       <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
     </div>
-  <?php else : ?>
-    <div id="scrollArea"></div>
-    <div id="scroll"></div>
   <?php endif; ?>
 </main>
 
 <aside>
-  <?php if ($user['id'] == 0) : ?>
-    <?= Tpl::insert('/_block/sidebar/login', ['user' => $user]); ?>
+  <?php if (!UserData::checkActiveUser()) : ?>
+    <?= Tpl::insert('/_block/sidebar/login'); ?>
   <?php endif; ?>
 
   <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) : ?>
@@ -34,7 +34,7 @@
         $my = [];
         $other = [];
         foreach ($data['topics_user'] as $topic) :
-          if ($topic['facet_user_id'] == $user['id']) :
+          if ($topic['facet_user_id'] == UserData::getUserId()) :
             $my[] = $topic;
           else :
             $other[] = $topic;
@@ -44,12 +44,12 @@
         $n = 0;
         foreach ($topics as $key => $topic) :
           $n++;
-          if ($n > Config::get('facets.quantity_home')) break;
-          $url = getUrlByName('topic', ['slug' => $topic['facet_slug']]);
+          if ($n > config('facets.quantity_home')) break;
+          $url = url('topic', ['slug' => $topic['facet_slug']]);
           $blog = '';
           if ($topic['facet_type'] == 'blog') :
             $blog = '<sup class="red">b</span>';
-            $url = getUrlByName('blog', ['slug' => $topic['facet_slug']]);
+            $url = url('blog', ['slug' => $topic['facet_slug']]);
           endif;
         ?>
           <li class="mb10">
@@ -57,16 +57,16 @@
               <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
               <span class="middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
             </a>
-            <?php if ($user['id'] == $topic['facet_user_id']) : ?>
-              <a class="right gray-600 mt5" title="<?= sprintf(__('add.option'), __('post')); ?>" href="<?= getUrlByName('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+            <?php if (UserData::getUserId() == $topic['facet_user_id']) : ?>
+              <a class="right gray-600 mt5" title="<?= sprintf(__('add.option'), __('post')); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
                 <i class="bi-plus-lg text-sm"></i>
               </a>
             <?php endif; ?>
           </li>
         <?php endforeach; ?>
       </ul>
-      <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) : ?>
-        <a class="gray-600 block mt5" title="<?= __('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
+      <?php if (count($data['topics_user']) > config('facets.quantity_home')) : ?>
+        <a class="gray-600 block mt5" title="<?= __('topics'); ?>" href="<?= url('topics.my'); ?>">
           <?= __('see more'); ?> <i class="bi-chevron-double-right middle"></i>
         </a>
       <?php endif; ?>
@@ -74,7 +74,7 @@
   <?php else : ?>
     <div class="box">
       <h3 class="uppercase-box"><?= __('topics'); ?></h3>
-      <?php foreach (Config::get('facets.default') as $key => $topic) : ?>
+      <?php foreach (config('facets.default') as $key => $topic) : ?>
         <a class="flex items-center relative pb10 gray-600" href="<?= $topic['url']; ?>">
           <img class="img-base" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
           <?= $topic['name']; ?>
@@ -89,11 +89,11 @@
         <ul class="last-content">
           <?php foreach ($data['latest_answers'] as $answer) : ?>
             <li>
-              <a title="<?= $answer['login']; ?>" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>">
+              <a title="<?= $answer['login']; ?>" href="<?= url('profile', ['login' => $answer['login']]); ?>">
                 <?= Html::image($answer['avatar'], $answer['login'], 'ava-sm', 'avatar', 'small'); ?>
               </a>
               <span class="middle lowercase gray-600"><?= Html::langDate($answer['answer_date']); ?></span>
-              <a class="last-content_telo" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
+              <a class="last-content_telo" href="<?= url('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
                 <?= Html::fragment(Content::text($answer['answer_content'], 'line'), 98); ?>
               </a>
             </li>

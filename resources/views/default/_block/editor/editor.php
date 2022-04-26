@@ -22,7 +22,7 @@
       },
 
       toolbar: [
-        <?php foreach (Config::get('editor/buttons') as $row) : ?>
+        <?php foreach (config('editor/buttons') as $row) : ?>
           <?php if (!empty($row['separator']) == 'separator') : ?> '|',
           <?php else : ?> {
               name: '<?= $row['name']; ?>',

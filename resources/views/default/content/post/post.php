@@ -5,7 +5,7 @@
     <?php if (!UserData::checkActiveUser() && $n == 6) : ?>
       <?= Tpl::insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
-    <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
+    <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="box article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') : ?>
         <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet text-sm right">
@@ -17,7 +17,7 @@
           <?= Html::image($post['avatar'], $post['login'], 'ava-base', 'avatar', 'max'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
-        <a class="flex black" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+        <a class="flex black" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <div class="ml5">
             <?= $post['login']; ?>
             <div class="gray-600 lowercase text-sm">
@@ -37,7 +37,7 @@
             <?= Html::facets($post['facet_list'], 'blog', 'blog', 'text-sm mr15'); ?>
             <?= Html::facets($post['facet_list'], 'topic', 'topic', 'gray-600 text-sm mr15'); ?>
             <?php if ($post['post_url_domain']) : ?>
-              <a class="gray-600 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
+              <a class="gray-600 text-sm ml10" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
               </a>
             <?php endif; ?>
@@ -65,7 +65,7 @@
       </div>
       <div class="flex flex-row items-center justify-between pt10">
         <div class="flex flex-row">
-          <?= Html::votes($user['id'], $post, 'post', 'ps', 'mr5'); ?>
+          <?= Html::votes($post, 'post', 'ps', 'mr5'); ?>
           <?php if ($post['post_answers_count'] != 0) : ?>
             <a class="flex gray-600 ml15" href="<?= $post_url; ?>#comment">
               <i class="bi-chat-text mr5"></i>
@@ -74,7 +74,7 @@
           <?php endif; ?>
         </div>
         <div class="flex flex-row items-center">
-          <?= Html::favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'ps', ''); ?>
+          <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', ''); ?>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@
         <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id bg-violet gray-600 text-sm right">
           <i class="bi-plus"></i> <?= __('read'); ?>
         </div>
-        <a class="" title="<?= $topic['facet_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+        <a class="" title="<?= $topic['facet_title']; ?>" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
           <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
           <?= $topic['facet_title']; ?>
         </a>

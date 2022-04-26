@@ -5,10 +5,10 @@
   <h1>
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) : ?>
-      <a class="text-sm ml5" href="<?= getUrlByName('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
+      <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
         <sup><i class="bi-pencil gray"></i></sup>
       </a>
-      <a class="text-sm ml15" href="<?= getUrlByName('admin.category.structure'); ?>">
+      <a class="text-sm ml15" href="<?= url('admin.category.structure'); ?>">
         <sup class="gray-600"><i class="bi-columns-gap mr5"></i></sup>
       </a>
       <small class="text-sm gray-600"><sup><?= $data['category']['facet_type']; ?></sup></small>
@@ -20,11 +20,11 @@
   <div class="item-categories">
     <?php foreach ($data['childrens'] as $lt) : ?>
       <div>
-        <a class="text-2xl" href="<?= getUrlByName('web.dir', ['grouping' => $data['screening'], 'slug' => $lt['facet_slug']]); ?>">
+        <a class="text-2xl" href="<?= url('web.dir', ['grouping' => $data['screening'], 'slug' => $lt['facet_slug']]); ?>">
           <?= $lt['facet_title']; ?>
         </a> <sup class="gray-600"><?= $lt['counts']; ?></sup>
         <?php if (UserData::checkAdmin()) : ?>
-          <a class="ml5" href="<?= getUrlByName('content.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
+          <a class="ml5" href="<?= url('content.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
             <sup><i class="bi-pencil"></i>
           </a>
           <small class="text-sm gray-600"><sup><?= $lt['facet_type']; ?></sup></small>
@@ -37,11 +37,11 @@
   <div class="item-categories mb-block">
     <?php foreach ($data['low_matching'] as $rl) : ?>
       <div class="inline mr20">
-        <a class="text-2xl" href="<?= getUrlByName('web.dir', ['grouping' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
+        <a class="text-2xl" href="<?= url('web.dir', ['grouping' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
           @<?= $rl['facet_title']; ?>
         </a>
         <?php if (UserData::checkAdmin()) : ?>
-          <a class="text-sm ml5" href="<?= getUrlByName('category.edit', ['id' => $rl['facet_id']]); ?>">
+          <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
             <sup class="gray-600"><i class="bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
           </a>
         <?php endif; ?>
@@ -52,7 +52,7 @@
 
 <div id="contentWrapper">
   <main>
-    <?= includeTemplate('/view/default/_block/nav', ['data' => $data, 'uid' => $user['id']]); ?>
+    <?= includeTemplate('/view/default/_block/nav', ['data' => $data]); ?>
 
     <?php if (!empty($data['items'])) : ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
@@ -68,8 +68,8 @@
       <div class="box text-sm bg-violet mt15">
         <h3 class="uppercase-box"><?= __('menu'); ?></h3>
         <ul class="menu">
-          <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
-          <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('catalog/menu.user')]); ?>
+          <?= includeTemplate('/view/default/_block/add-site', ['data' => $data]); ?>
+          <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'list' => config('catalog/menu.user')]); ?>
         </ul>
       </div>
     <?php endif; ?>

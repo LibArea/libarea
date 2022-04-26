@@ -23,7 +23,7 @@ class Indexer
     {
         self::indexerPost();
         self::indexerItem();
-        redirect(getUrlByName('admin.search'));
+        redirect(url('admin.search'));
     }
 
     public function indexerPost()

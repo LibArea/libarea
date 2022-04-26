@@ -7,12 +7,12 @@
       </div>
       <div class="w-100">
         <?php if (UserData::checkActiveUser() && $user['login'] != $user['login']) : ?>
-          <a class="right btn btn-primary block" href="<?= getUrlByName('send.messages', ['login' => $user['login']]); ?>">
+          <a class="right btn btn-primary block" href="<?= url('send.messages', ['login' => $user['login']]); ?>">
             <i class="bi-envelope middle mr5"></i>
             <?= __('message'); ?>
           </a>
         <?php endif; ?>
-        <a class="block text-2xl" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+        <a class="block text-2xl" href="<?= url('profile', ['login' => $user['login']]); ?>">
           <?= $user['login']; ?>
         </a>
         <?php if ($user['name']) : ?>
@@ -28,7 +28,7 @@
     <?php if (!empty($post['post_id'])) : ?>
       <div class="gray-600 mt5">
         <?= __('post'); ?>:
-        <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+        <a href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
         </a>
       </div>

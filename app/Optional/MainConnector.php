@@ -22,13 +22,14 @@ class MainConnector implements Connector
             "Modules\*"                     => "modules/",
             "App\Commands\*"                => "app/Commands/",
 
-            "DB"                            => "app/Config/DB.php",
-            "Config"                        => "app/Config/Config.php",
-
             // ... or, if a specific class is added,
             // "Phphleb\Debugpan\DPanel"      => "app/ThirdParty/phphleb/debugpan/DPanel.php",
-            "Sass"                          => "app/Libraries/Sass.php",
+
+            "DB"                            => "app/Libraries/DB.php",
+            "Config"                        => "app/Libraries/Config.php",
             "Translate"                     => "app/Libraries/Translate.php",
+
+            "Sass"                          => "app/Libraries/Sass.php",
             "Content"                       => "app/Libraries/Content.php",
             "UploadImage"                   => "app/Libraries/UploadImage.php",
             "Integration"                   => "app/Libraries/Integration.php",

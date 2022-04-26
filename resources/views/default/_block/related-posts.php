@@ -6,7 +6,7 @@
       <?php if ($related['post_content_img']) : ?>
         <?= Html::image($related['post_content_img'], $related['value'], 'w60 mr20', 'post', 'cover' ); ?>
       <?php endif; ?>  
-      <a href="<?= getUrlByName('post', ['id' => $related['id'], 'slug' => $related['post_slug']]); ?>">
+      <a href="<?= url('post', ['id' => $related['id'], 'slug' => $related['post_slug']]); ?>">
         <?= $related['value']; ?>
       </a>
     </li>

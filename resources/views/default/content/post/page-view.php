@@ -15,10 +15,10 @@
     <?php endif; ?>
   </article>
   <div class="box-flex justify-between text-2xl">
-    <?= Html::votes($user['id'], $page, 'post', 'ps', 'middle mr15'); ?>
+    <?= Html::votes($page, 'post', 'ps', 'middle mr15'); ?>
     <div class="gray-600 italic ml15">
       <?= $page['post_modified']; ?>
-      <?php if (UserData::checkAdmin() || $page['post_user_id'] == $user['id']) : ?>
+      <?php if (UserData::checkAdmin() || $page['post_user_id'] == UserData::getUserId()) : ?>
         <a class="gray-600 ml5" title="<?= __('edit'); ?>" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
           <i class="bi-pencil"></i>
         </a>
@@ -34,7 +34,7 @@
           <i class="bi-info-square mr5"></i> <?= $row['post_title']; ?>
         </a>
         <?php if (UserData::checkAdmin()) : ?>
-          <a href="<?= url('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><i class="bi-pencil"></i></a>
+          <a class="text-sm gray-600" href="<?= url('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><i class="bi-pencil"></i></a>
         <?php endif; ?>
       </div>
     <?php endforeach; ?>

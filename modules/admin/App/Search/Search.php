@@ -85,9 +85,9 @@ class Search
         if (isset($search_id)) {
             $document = $this->engine->getIndex()->getDocument($search_id);
             if ($document) {
-                redirect(getUrlByName('admin.search.edit.form', ['id' => $search_id]));
+                redirect(url('admin.search.edit.form', ['id' => $search_id]));
             }
-            redirect(getUrlByName('admin.search.query'));
+            redirect(url('admin.search.query'));
         }
     }
 
@@ -100,7 +100,7 @@ class Search
             $this->engine->getIndex()->getDocument($delete_id);
         }
 
-        redirect(getUrlByName('admin.search.query'));
+        redirect(url('admin.search.query'));
     }
 
     // Edit document
@@ -138,7 +138,7 @@ class Search
         }
         if (isset($content['id'])) $_GET['id'] = $content['id'];
 
-        redirect(getUrlByName('admin.search.edit.form', ['id' => $content['id']]));
+        redirect(url('admin.search.edit.form', ['id' => $content['id']]));
     }
 
 

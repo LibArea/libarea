@@ -10,7 +10,7 @@
           <?= Html::image($writer['avatar'], $writer['login'], 'w50 h50', 'avatar', 'small'); ?>
         </div>
         <div class="mt10">
-          <a href="<?= getUrlByName('profile', ['login' => $writer['login']]); ?>"><?= $writer['login']; ?></a>
+          <a href="<?= url('profile', ['login' => $writer['login']]); ?>"><?= $writer['login']; ?></a>
           <div class="mr13 gray-600 mr15">
             <?php if ($writer['about']) : ?>
               <?= $writer['about']; ?>

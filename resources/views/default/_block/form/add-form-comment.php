@@ -1,6 +1,6 @@
 <div class="cm_addentry max-w780 mt10">
   <?php if (UserData::checkActiveUser()) : ?>
-    <form action="<?= getUrlByName('content.create', ['type' => 'comment']); ?>" accept-charset="UTF-8" method="post">
+    <form action="<?= url('content.create', ['type' => 'comment']); ?>" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
       <textarea rows="5" minlength="6" placeholder="<?= __('supports.markdown'); ?>..." name="comment"></textarea>
       <fieldset>

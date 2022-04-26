@@ -1,1 +1,1 @@
-<?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>
+<?= Tpl::insert('/content/post/post', ['data' => $data]); ?>

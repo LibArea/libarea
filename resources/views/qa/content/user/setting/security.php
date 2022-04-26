@@ -1,12 +1,12 @@
 <?php
 $form = new Forms();
-$form->html_form($user['trust_level'], Config::get('form/user-security'));
+$form->html_form(UserData::getUserTl(), config('form/user-security'));
 ?>
 <main class="col-two">
   <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
-    <form action="<?= getUrlByName('setting.security.edit'); ?>" method="post">
+    <form action="<?= url('setting.security.edit'); ?>" method="post">
       <?php csrf_field(); ?>
 
       <?= $form->build_form(); ?>

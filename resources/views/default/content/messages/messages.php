@@ -7,13 +7,13 @@
       <?php foreach ($data['messages'] as  $msg) : ?>
         <div class="hidden mb15<?php if (!$msg['unread'] > 0) : ?> bg-purple<?php endif; ?>">
           <div class="text-sm flex">
-            <?php if ($msg['dialog_sender_id'] == $user['id']) : ?>
-              <a href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
+            <?php if ($msg['dialog_sender_id'] == UserData::getUserId()) : ?>
+              <a href="<?= url('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
                 <?= Html::image($msg['msg_to_user']['avatar'], $msg['msg_to_user']['login'], 'ava-sm', 'avatar', 'small'); ?>
                 <?= $msg['msg_to_user']['login']; ?>
               </a>
             <?php else : ?>
-              <a class="mr5" href="<?= getUrlByName('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
+              <a class="mr5" href="<?= url('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
                 <?= Html::image($msg['msg_user']['avatar'], $msg['msg_user']['login'], 'ava-sm', 'avatar', 'small'); ?>
                 <?= $msg['msg_user']['login']; ?>
               </a>
@@ -25,7 +25,7 @@
           <div class="p15 br-rd5 mt5 relative bg-blue-100<?php if (!$msg['unread'] > 0) { ?> bg-purple<?php } ?> gray">
             <?= Content::text($msg['message']['message_content'], 'text'); ?>
           </div>
-          <a class="lowercase text-sm right" href="<?= getUrlByName('dialogues', ['id' => $msg['dialog_id']]); ?>">
+          <a class="lowercase text-sm right" href="<?= url('dialogues', ['id' => $msg['dialog_id']]); ?>">
             <?php if ($msg['unread']) : ?>
               <?= __('there.are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
             <?php else : ?>

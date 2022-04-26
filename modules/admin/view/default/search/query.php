@@ -22,7 +22,7 @@ function getFields($fields, $id = 0, $isDocument = false)
 {
     $title = $fields['title'] ?? $fields['name'] ?? '';
     if (empty($title)) $title = (isset($fields['id']) ? 'Document ID = ' . $fields['id'] : '');
-    if ($isDocument && !empty($title)) $title = '<a title="' . __('edit') . '" href="' . getUrlByName('admin.search.edit.form', ['id' => $id]) . '">' . $title . '</a>';
+    if ($isDocument && !empty($title)) $title = '<a title="' . __('edit') . '" href="' . url('admin.search.edit.form', ['id' => $id]) . '">' . $title . '</a>';
     $html = '<table class="mb0">' . $title . '<tbody>';
     foreach ($fields as $field => $value) {
         $html .= '<tr><td>';

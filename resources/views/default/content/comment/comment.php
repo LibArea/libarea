@@ -3,7 +3,7 @@ foreach ($answer as  $comment) :
   $n++; ?>
   <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
   <?php if ($comment['comment_is_deleted'] == 1) : ?>
-    <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) : ?>
+    <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
       <ol class="bg-red-200 text-sm list-none max-w780">
         <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
           <span class="comm-deletes gray">
@@ -23,7 +23,7 @@ foreach ($answer as  $comment) :
       <li class="content_tree" id="comment_<?= $comment['comment_id']; ?>">
         <div class="max-w780">
           <div class="text-sm flex">
-            <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>">
+            <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>">
               <?= Html::image($comment['avatar'], $comment['login'], 'ava-sm', 'avatar', 'small'); ?>
               <span class="mr5 ml5">
                 <?= $comment['login']; ?>
@@ -35,9 +35,9 @@ foreach ($answer as  $comment) :
             <span class="mr5 ml5 gray-600 lowercase">
               <?= Html::langDate($comment['date']); ?>
             </span>
-            <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
+            <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
           </div>
-          <a href="<?= getUrlByName('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>#comment_<?= $comment['comment_id']; ?>">
+          <a href="<?= url('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>#comment_<?= $comment['comment_id']; ?>">
             <?= $comment['post_title']; ?>
           </a>
           <div class="content-body">
@@ -45,9 +45,9 @@ foreach ($answer as  $comment) :
           </div>
         </div>
         <div class="text-sm flex">
-          <?= Html::votes($user['id'], $comment, 'comment', 'ps', 'mr5'); ?>
+          <?= Html::votes($comment, 'comment', 'ps', 'mr5'); ?>
 
-          <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) : ?>
+          <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 mr10 ml10">
               <?= __('edit'); ?>
             </a>
@@ -56,7 +56,7 @@ foreach ($answer as  $comment) :
             </a>
           <?php endif; ?>
 
-          <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) : ?>
+          <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_stop_report'))) : ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml15">
               <i title="<?= __('report'); ?>" class="bi-flag"></i>
             </a>

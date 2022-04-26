@@ -23,7 +23,6 @@ class Translate
     // Возвращает перевод определенного ключа из текущей языковой локали.
     public static function get($localeKey, $parameters = [])
     {
-        // static::checkInitialization();
         static::checkLoaded();
 
         if (is_string($localeKey) && !empty(static::$loadedLocales[static::$currentLang][$localeKey])) {
@@ -34,7 +33,7 @@ class Translate
                     $text = str_replace(static::$replacementPattern[0] . $parameter . static::$replacementPattern[1], $replacement, $text);
                 }
             }
-
+ 
             return $text;
         }
 
@@ -44,7 +43,6 @@ class Translate
     // Set by default, and after authorization of the participant
     public static function setLang($language)
     {
-        // static::checkInitialization();
         static::$currentLang = (!empty($language) && is_string($language)) ? $language : static::getClientLang();
         static::checkLoaded();
     }

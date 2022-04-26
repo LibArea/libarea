@@ -6,17 +6,17 @@
     'menus' => [
       [
         'id'    => 'statistics',
-        'url'   => getUrlByName('admin.search'),
+        'url'   => url('admin.search'),
         'name'  => __('statistics'),
         'icon'  => 'bi-x-circle',
       ], [
         'id'    => 'query',
-        'url'   => getUrlByName('admin.search.query'),
+        'url'   => url('admin.search.query'),
         'name'  => __('query'),
         'icon'  => 'bi-x-circle',
       ], [
         'id'    => 'schemas',
-        'url'   => getUrlByName('admin.search.schemas'),
+        'url'   => url('admin.search.schemas'),
         'name'  => __('schemas'),
         'icon'  => 'bi-x-circle',
       ]

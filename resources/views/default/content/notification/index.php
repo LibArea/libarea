@@ -1,7 +1,7 @@
 <main>
   <div class="box-flex justify-between">
     <p class="m0"><?= __($data['sheet']); ?></p>
-    <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
+    <form action="<?= url('notif.remove'); ?>" class="right">
       <?= Html::sumbit(__('i.read')); ?>
     </form>
   </div>
@@ -9,11 +9,11 @@
   <div class="bg-white mb15">
     <?php if (!empty($data['notifications'])) : ?>
       <?php foreach ($data['notifications'] as  $notif) :
-        $url = getUrlByName('notif.read', ['id' => $notif['notif_id']]);
-        $profile = getUrlByName('profile', ['login' => $notif['login']]);
+        $url = url('notif.read', ['id' => $notif['notif_id']]);
+        $profile = url('profile', ['login' => $notif['login']]);
       ?>
 
-        <?php foreach (Config::get('notification') as $key => $n) : ?>
+        <?php foreach (config('notification') as $key => $n) : ?>
           <?php if ($n['id'] == $notif['type']) : ?>
             <div class="br-bottom p5<?php if ($notif['flag'] == 0) { ?> bg-lightyellow<?php } ?>">
               <i class="<?= $n['icon']; ?> middle"></i>

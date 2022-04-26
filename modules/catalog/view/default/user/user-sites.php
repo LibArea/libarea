@@ -25,8 +25,8 @@
               <?php endif; ?>
               <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'all'); ?>
 
-              <?php if (Html::accessСheck($item, 'item', $user, false, false) === true) : ?>
-                <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
+              <?php if (Html::accessСheck($item, 'item', false, false) === true) : ?>
+                <a href="<?= url('web.edit', ['id' => $item['item_id']]); ?>">
                   <i class="bi-pencil text-sm"></i>
                 </a> - <?= $item['item_following_link']; ?>
               <?php endif; ?>
@@ -47,7 +47,7 @@
                   <?php if ($item['item_published'] == 1) : ?>
                     <div>
                       <i class="bi-arrow-return-right gray-600 ml10"></i>
-                      <a class="black" href="<?= getUrlByName('web.website', ['slug' => $item['item_domain']]); ?>">
+                      <a class="black" href="<?= url('web.website', ['slug' => $item['item_domain']]); ?>">
                         <?= __('more.detailed'); ?>
                       </a>
                     </div>
@@ -62,7 +62,7 @@
       <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
     <?php endif ?>
 
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>
   </main>
   <aside>
     <div class="box bg-yellow text-sm mt15"><?= __('user.sites.info'); ?>.</div>
@@ -70,8 +70,8 @@
       <div class="box text-sm bg-violet mt15">
         <h3 class="uppercase-box"><?= __('menu'); ?></h3>
         <ul class="menu">
-          <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
-          <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('catalog/menu.user')]); ?>
+          <?= includeTemplate('/view/default/_block/add-site', ['data' => $data]); ?>
+          <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'list' => config('catalog/menu.user')]); ?>
         </ul>
       </div>
     <?php endif; ?>

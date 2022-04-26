@@ -1,7 +1,7 @@
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
     const ajaxSend = async (formData) => {
-      const fetchResp = await fetch('<?= getUrlByName($url); ?>', {
+      const fetchResp = await fetch('<?= url($url); ?>', {
         method: 'POST',
         body: formData
       });
@@ -24,7 +24,7 @@
               Notiflix.Notify.failure(is_valid.text);
               return;
             }
-            window.location.replace('<?= getUrlByName($redirect); ?>');
+            window.location.replace('<?= url($redirect); ?>');
           })
           .catch((err) => console.error(err))
       });

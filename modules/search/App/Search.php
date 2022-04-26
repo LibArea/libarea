@@ -26,7 +26,7 @@ class Search
         return view(
             '/view/default/home',
             [
-                'meta'  => Meta::get(__('search.title'), __('search.desc', ['name' => Config::get('meta.name')])),
+                'meta'  => Meta::get(__('search.title'), __('search.desc', ['name' => config('meta.name')])),
                 'user'  => $this->user,
                 'data'  => [
                     'type' => 'search',

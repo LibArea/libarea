@@ -22,11 +22,11 @@ $facet  = $data['facet'] ?? false; ?>
         </div>
 
         <a title="<?= __('home'); ?>" class="logo" href="/">
-          <?= Config::get('meta.name'); ?>
+          <?= config('meta.name'); ?>
         </a>
 
         <div class="ml45 mb-ml10 relative w-100">
-          <form class="form mb-none" method="get" action="<?= getUrlByName('search.go'); ?>">
+          <form class="form mb-none" method="get" action="<?= url('search.go'); ?>">
             <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('to.find'); ?>" class="search">
           </form>
           <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
@@ -37,12 +37,12 @@ $facet  = $data['facet'] ?? false; ?>
             <div id="toggledark" class="header-menu-item mb-none ml45">
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
-            <?php if (Config::get('general.invite') == false) : ?>
-              <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 block" href="<?= getUrlByName('register'); ?>">
+            <?php if (config('general.invite') == false) : ?>
+              <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 block" href="<?= url('register'); ?>">
                 <?= __('registration'); ?>
               </a>
             <?php endif; ?>
-            <a class="w94 btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
+            <a class="w94 btn btn-outline-primary ml20" href="<?= url('login'); ?>">
               <?= __('sign.in'); ?>
             </a>
           </div>
@@ -50,14 +50,14 @@ $facet  = $data['facet'] ?? false; ?>
 
           <div class="flex right ml45 mb-ml0 items-center text-xl">
 
-            <?= Html::addPost($facet, $user['id']); ?>
+            <?= Html::addPost($facet); ?>
 
             <div id="toggledark" class="only-icon ml45 mb-ml20">
               <i class="bi-brightness-high gray-600"></i>
             </div>
 
-            <a class="gray-600 ml45 mb-ml20" href="<?= getUrlByName('notifications'); ?>">
-              <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
+            <a class="gray-600 ml45 mb-ml20" href="<?= url('notifications'); ?>">
+              <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
               <?php if (!empty($notif)) : ?>
                 <?php if ($notif['action_type'] == 1) : ?>
                   <i class="bi-envelope red"></i>
@@ -71,25 +71,24 @@ $facet  = $data['facet'] ?? false; ?>
 
             <div class="ml45 mb-ml20">
               <div class="trigger">
-                <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
+                <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'ava-base', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
-                <?= Tpl::insert('/_block/navigation/menu', ['type' => $type, 'user' => $user, 'list' => Config::get('navigation/menu.user')]); ?>
+                <?= Tpl::insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
               </ul>
             </div>
           </div>
         <?php endif; ?>
       </div>
     </div>
-  </header>
-
-  <?php if ($user['id'] == 0 && $data['type'] == 'main') : ?>
+  </header> 
+  <?php if (!UserData::checkActiveUser() && $data['type'] == 'main') : ?>
     <div class="box mb-none center">
-      <h1><?= Config::get('meta.banner_title'); ?></h1>
-      <p><?= Config::get('meta.banner_desc'); ?>...</p>
+      <h1><?= config('meta.banner_title'); ?></h1>
+      <p><?= config('meta.banner_desc'); ?>...</p>
     </div>
   <?php endif; ?>
 
   <div id="contentWrapper" class="wrap">
 
-    <?= Tpl::insert('/menu', ['data' => $data, 'user' => $user]); ?>
+    <?= Tpl::insert('/menu', ['data' => $data]); ?>

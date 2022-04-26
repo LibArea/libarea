@@ -6,7 +6,7 @@
     'menus' => [
       [
         'id'    => 'logssearch.all',
-        'url'   => getUrlByName('admin.logs.search'),
+        'url'   => url('admin.logs.search'),
         'name'  => __('search'),
         'icon'  => 'bi-search',
       ]

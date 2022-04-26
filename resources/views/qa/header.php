@@ -33,7 +33,7 @@ $facet  = $data['facet'] ?? false; ?>
       <div class="flex items-center" id="find">
         <div class="ml20 flex items-center">
           <a title="<?= __('home'); ?>" class="logo ml5" href="/">
-            <?= Config::get('meta.name'); ?>
+            <?= config('meta.name'); ?>
           </a>
         </div>
       </div>
@@ -43,12 +43,12 @@ $facet  = $data['facet'] ?? false; ?>
           <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml10">
             <i class="bi-brightness-high gray-600 text-xl"></i>
           </div>
-          <?php if (Config::get('general.invite') == false) : ?>
-            <a class="w94 gray ml30 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
+          <?php if (config('general.invite') == false) : ?>
+            <a class="w94 gray ml30 mr15 mb-ml10 mb-mr5 block" href="<?= url('register'); ?>">
               <?= __('registration'); ?>
             </a>
           <?php endif; ?>
-          <a class="w94 btn btn-outline-primary ml20" href="<?= getUrlByName('login'); ?>">
+          <a class="w94 btn btn-outline-primary ml20" href="<?= url('login'); ?>">
             <?= __('sign.in'); ?>
           </a>
         </div>
@@ -56,14 +56,14 @@ $facet  = $data['facet'] ?? false; ?>
         <div>
           <div class="flex right ml30 mb-ml10 items-center">
 
-            <?= Html::addPost($facet, $user['id']); ?>
+            <?= Html::addPost($facet); ?>
 
             <div id="toggledark" class="only-icon p10 ml20 mb-ml10">
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
 
-            <a class="gray-600 p10 text-xl ml20 mb-ml10" href="<?= getUrlByName('notifications'); ?>">
-              <?php $notif = \App\Controllers\NotificationController::setBell($user['id']); ?>
+            <a class="gray-600 p10 text-xl ml20 mb-ml10" href="<?= url('notifications'); ?>">
+              <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
               <?php if (!empty($notif)) : ?>
                 <?php if ($notif['action_type'] == 1) : ?>
                   <i class="bi-envelope red"></i>
@@ -77,10 +77,10 @@ $facet  = $data['facet'] ?? false; ?>
 
             <div class="ml45 mb-ml20 relative">
               <div class="trigger">
-                <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
+                <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'ava-base', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
-                <?= Tpl::insert('/_block/navigation/menu', ['type' => $type, 'user' => $user, 'list' => Config::get('navigation/menu.user')]); ?>
+                <?= Tpl::insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
               </ul>
             </div>
 

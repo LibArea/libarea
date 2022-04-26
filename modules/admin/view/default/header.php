@@ -15,20 +15,20 @@ Request::getHead()->addStyles('/assets/css/style.css?12');
           </div>
         </div>
         <div class="flex items-center w200">
-          <a href="<?= getUrlByName('admin'); ?>">
+          <a href="<?= url('admin'); ?>">
             <span class="black"><?= __('admin'); ?></span>
           </a>
         </div>
         <div class="relative w-90">
-          <a class="gray-600" href="<?= getUrlByName('admin.users'); ?>">
+          <a class="gray-600" href="<?= url('admin.users'); ?>">
             <i class="bi-people middle mr5"></i>
             <span class="mb-none middle"><?= __('users'); ?></span>
           </a>
-          <a class="gray-600 ml30" href="<?= getUrlByName('admin.facets.all'); ?>">
+          <a class="gray-600 ml30" href="<?= url('admin.facets.all'); ?>">
             <i class="bi-columns-gap middle mr5"></i>
             <span class="mb-none middle text-sm"><?= __('facets'); ?></span>
           </a>
-          <a class="gray-600 ml30" href="<?= getUrlByName('admin.tools'); ?>">
+          <a class="gray-600 ml30" href="<?= url('admin.tools'); ?>">
             <i class="bi-tools middle mr5"></i>
             <span class="mb-none middle text-sm"><?= __('tools'); ?></span>
           </a>

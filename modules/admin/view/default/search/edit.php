@@ -19,7 +19,7 @@ if (empty($document)) {
 <div class="box bg-white">
     <h2><?= __('edit'); ?></h2>
     <div class="pt15 pb15 flex justify-between">
-    <form action="<?= getUrlByName('admin.search.search'); ?>" method="post" class="flex">
+    <form action="<?= url('admin.search.search'); ?>" method="post" class="flex">
         <?= csrf_field() ?>
         <label class="mr5" for="search_id">id: <?= Request::getInt('id'); ?></label>
         <input id="search_id" type="text" name="search_id" value="">
@@ -27,7 +27,7 @@ if (empty($document)) {
     </form>
 
     <?php if ($found) : ?>
-        <form action="<?= getUrlByName('admin.search.remove', ['id' => Request::getInt('id')]); ?>" method="post">
+        <form action="<?= url('admin.search.remove', ['id' => Request::getInt('id')]); ?>" method="post">
             <?= csrf_field() ?>
             <input type="hidden" name="delete" value="<?= Request::getInt('id'); ?>">
             <input type="submit" class="btn-small" value="<?= __('remove'); ?>">
@@ -44,7 +44,7 @@ if (empty($document)) {
     }
     ?>
 
-    <form action="<?= getUrlByName('admin.search.edit'); ?>" method="post">
+    <form action="<?= url('admin.search.edit'); ?>" method="post">
         <?= csrf_field() ?>
         <label for="document-content">Document</label>
         <textarea name="content" id="document-content" cols="30" rows="30"><?php echo (!empty(Request::getPost('prefill')) ? htmlspecialchars_decode(Request::getPost('prefill')) : (!empty($document) ? json_encode($document, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) : '')) ?></textarea>

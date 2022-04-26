@@ -1,5 +1,5 @@
 <div class="br-gray box text-sm">
-  <form action="<?= getUrlByName('login'); ?>" method="post">
+  <form action="<?= url('login'); ?>" method="post">
     <?php csrf_field(); ?>
     <fieldset class="mt0">
       <label for="email">Email</label>
@@ -21,7 +21,7 @@
     </fieldset>
     <fieldset class="gray-600 center">
       <?= __('login.use.condition'); ?>
-      <a href="<?= getUrlByName('recover'); ?>"><?= __('forgot.password'); ?>?</a>
+      <a href="<?= url('recover'); ?>"><?= __('forgot.password'); ?>?</a>
     </fieldset>
   </form>
 </div>

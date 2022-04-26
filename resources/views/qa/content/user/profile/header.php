@@ -18,15 +18,15 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
     <div class="z-10 w-100">
       <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
 
-      <?php if ($user['id']) : ?>
+      <?php if (UserData::checkActiveUser()) : ?>
         <div class="right m20">
-          <?php if ($profile['login'] == $user['login']) : ?>
-            <a class="btn btn-primary" title="<?= __('settings'); ?>" href="<?= getUrlByName('setting'); ?>">
+          <?php if ($profile['id'] == UserData::getUserId()) : ?>
+            <a class="btn btn-primary" title="<?= __('settings'); ?>" href="<?= url('setting'); ?>">
               <i class="bi-gear"></i>
             </a>
           <?php else : ?>
             <?php if ($data['button_pm'] === true) : ?>
-              <a class="btn btn-primary" title="<?= __('write.message'); ?>" href="<?= getUrlByName('send.messages', ['login' => $profile['login']]); ?>">
+              <a class="btn btn-primary" title="<?= __('write.message'); ?>" href="<?= url('send.messages', ['login' => $profile['login']]); ?>">
                 <i class="bi-envelope"></i>
               </a>
             <?php endif; ?>
@@ -48,7 +48,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
           <div class="flex justify-center">
             <?php if ($data['count']['count_posts'] > 0) : ?>
               <div class="ml15 mr15 center box-number">
-                <a class="focus-user sky" href="<?= getUrlByName('profile.posts', ['login' => $profile['login']]); ?>">
+                <a class="focus-user sky" href="<?= url('profile.posts', ['login' => $profile['login']]); ?>">
                   <?= $data['count']['count_posts']; ?>
                 </a>
                 <div class="uppercase mt5 text-sm gray-600"><?= __('posts'); ?></div>
@@ -57,7 +57,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
 
             <?php if ($data['count']['count_answers'] > 0) : ?>
               <div class="ml15 mr15 center box-number">
-                <a class="focus-user sky" href="<?= getUrlByName('profile.answers', ['login' => $profile['login']]); ?>">
+                <a class="focus-user sky" href="<?= url('profile.answers', ['login' => $profile['login']]); ?>">
                   <?= $data['count']['count_answers']; ?>
                 </a>
                 <div class="uppercase mt5 text-sm gray-600"><?= __('answers'); ?></div>
@@ -66,7 +66,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
 
             <?php if ($data['count']['count_comments'] > 0) : ?>
               <div class="ml15 mr15 center box-number">
-                <a class="focus-user sky" href="<?= getUrlByName('profile.comments', ['login' => $profile['login']]); ?>">
+                <a class="focus-user sky" href="<?= url('profile.comments', ['login' => $profile['login']]); ?>">
                   <?= $data['count']['count_comments']; ?>
                 </a>
                 <div class="uppercase mt5 text-sm gray-600"><?= __('comments'); ?></div>

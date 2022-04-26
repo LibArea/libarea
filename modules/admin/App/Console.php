@@ -13,7 +13,7 @@ class Console
         $choice  = Request::getPost('type');
         $allowed = ['css', 'topic', 'up', 'tl', 'indexer'];
         if (!in_array($choice, $allowed)) {
-            redirect(getUrlByName('admin.tools'));
+            redirect(url('admin.tools'));
         }
         self::$choice();
     }
@@ -64,7 +64,7 @@ class Console
 
         Html::addMsg(__('command.executed'), 'success');
 
-        redirect(getUrlByName('admin.tools'));
+        redirect(url('admin.tools'));
     }
 
     public static function css()

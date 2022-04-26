@@ -13,24 +13,23 @@
         '/_block/navigation/nav',
         [
           'type' => $data['sheet'],
-          'user' => $user,
           'list' => [
             [
               'id'    => $data['type'] . 's.all',
-              'url'   => getUrlByName($data['type'] . 's.all'),
+              'url'   => url($data['type'] . 's.all'),
               'title' => __('all'),
               'icon'  => 'bi-app'
             ],
             [
               'id'    => $data['type'] . 's.new',
-              'url'   => getUrlByName($data['type'] . 's.new'),
+              'url'   => url($data['type'] . 's.new'),
               'title' => __('new.ones'),
               'icon'  => 'bi-sort-up'
             ],
             [
               'tl'    => 1,
               'id'    => $data['type'] . 's.my',
-              'url'   => getUrlByName($data['type'] . 's.my'),
+              'url'   => url($data['type'] . 's.my'),
               'title' => __('reading'),
               'icon'  => 'bi-check2-square'
             ],
@@ -40,17 +39,18 @@
       ?>
 
     </ul>
-    <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_blog')) : ?>
+
+    <?php if (UserData::getRegType(config('trust-levels.tl_add_blog'))) : ?>
       <p class="m0 text-xl">
         <?php if ($data['type'] == 'blog') : ?>
           <?php if ($data['limit']) : ?>
-            <a class="ml15" title="<?= __('add'); ?>" href="<?= getUrlByName('content.add', ['type' => $data['type']]); ?>">
+            <a class="ml15" title="<?= __('add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
               <i class="bi-plus-lg middle"></i>
             </a>
           <?php endif; ?>
         <?php else : ?>
           <?php if (UserData::checkAdmin()) : ?>
-            <a class="ml15" title="<?= __('add'); ?>" href="<?= getUrlByName('content.add', ['type' => $data['type']]); ?>">
+            <a class="ml15" title="<?= __('add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
               <i class="bi-plus-lg middle"></i>
             </a>
           <?php endif; ?>
@@ -62,10 +62,10 @@
   <div class="box">
     <?php if (!empty($data['facets'])) : ?>
       <?php if ($data['type'] == 'blog') : ?>
-        <?= Tpl::insert('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
+        <?= Tpl::insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
       <?php else : ?>
         <div class="flex flex-wrap">
-          <?= Tpl::insert('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'user' => $user]); ?>
+          <?= Tpl::insert('/_block/facet/topic-list-all', ['facets' => $data['facets']]); ?>
         </div>
       <?php endif; ?>
     <?php else : ?>

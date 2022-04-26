@@ -31,7 +31,7 @@
         </td>
         <td>
           <?= Html::image($user['avatar'], $user['login'], 'ava-sm', 'avatar', 'small'); ?>
-          <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+          <a href="<?= url('profile', ['login' => $user['login']]); ?>">
             <?= $user['login']; ?>
           </a>
           <?php if ($user['name']) : ?>
@@ -75,7 +75,7 @@
           <?php if (UserData::checkAdmin()) : ?>
             ---
           <?php else : ?>
-            <a title="<?= __('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['id']]); ?>">
+            <a title="<?= __('edit'); ?>" href="<?= url('admin.user.edit', ['id' => $user['id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
           <?php endif; ?>

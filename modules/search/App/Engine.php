@@ -25,7 +25,7 @@ class Engine
      */
     public function __construct($config = [])
     {
-        $defaultConfig = Config::get('search/config');
+        $defaultConfig = config('search/config');
         $this->config = array_replace_recursive($defaultConfig, $config);
         $this->index = new Index($this->config['config'], $this->config['schemas'], $this->config['types']);
     }

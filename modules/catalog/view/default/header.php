@@ -8,7 +8,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?12');
 <body<?php if (Request::getCookie('dayNight') == 'dark') : ?> class="dark"<?php endif; ?>>
   <header>
     <div class="page-search mb-p10">
-      <a class="logo" href="<?= getUrlByName('web'); ?>">
+      <a class="logo" href="<?= url('web'); ?>">
         <?= __('catalog'); ?>
       </a>
       <div class="page-search-right mb-ml0">
@@ -22,12 +22,12 @@ Request::getHead()->addStyles('/assets/css/catalog.css?12');
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
             <?php if (!UserData::checkActiveUser()) : ?>
-              <?php if (Config::get('general.invite') == false) : ?>
-                <a class="register gray-600 mr15 mb-ml10 mb-mr5 block" href="<?= getUrlByName('register'); ?>">
+              <?php if (config('general.invite') == false) : ?>
+                <a class="register gray-600 mr15 mb-ml10 mb-mr5 block" href="<?= url('register'); ?>">
                   <?= __('registration'); ?>
                 </a>
               <?php endif; ?>
-              <a class="gray-600 mr10 ml10" href="<?= getUrlByName('login'); ?>">
+              <a class="gray-600 mr10 ml10" href="<?= url('login'); ?>">
                 <?= __('sign.in'); ?>
               </a>
             <?php else : ?>
@@ -37,11 +37,11 @@ Request::getHead()->addStyles('/assets/css/catalog.css?12');
                     <?= __('menu'); ?>
                   </div>
                   <ul class="dropdown">
-                    <?= Tpl::insert('/_block/navigation/menu', ['type' => 'admin', 'user' => $user, 'list' => Config::get('catalog/menu.user')]); ?>
+                    <?= Tpl::insert('/_block/navigation/menu', ['type' => 'admin', 'list' => config('catalog/menu.user')]); ?>
                   </ul>
                 </div>
               <?php endif; ?>
-              <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>sky <?php } ?>mr30 green" href="<?= getUrlByName('web.bookmarks'); ?>">
+              <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>sky <?php } ?>mr30 green" href="<?= url('web.bookmarks'); ?>">
                 <?= __('favorites'); ?>
               </a>
               <div class="mr15 m relative">
@@ -49,13 +49,13 @@ Request::getHead()->addStyles('/assets/css/catalog.css?12');
                   <?= $user['login']; ?>
                 </div>
                 <ul class="dropdown">
-                  <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'user' => $user, 'list' => Config::get('navigation/menu.user')]); ?>
+                  <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'user' => $user, 'list' => config('navigation/menu.user')]); ?>
                 </ul>
               </div>
             <?php endif; ?>
           </div>
         </div>
-        <form method="get" action="<?= getUrlByName('search.go'); ?>">
+        <form method="get" action="<?= url('search.go'); ?>">
           <input type="text" name="q" placeholder="<?= __('to.find'); ?>" class="page-search__input">
           <input name="cat" value="website" type="hidden">
           <?= csrf_field() ?>

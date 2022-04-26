@@ -1,6 +1,6 @@
 <?php
 $fs = $data['facet'];
-$url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]);
+$url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : url($fs['facet_type'], ['slug' => $fs['facet_slug']]);
 ?>
 
 <main class="col-two">
@@ -12,7 +12,6 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
         '/_block/navigation/nav',
         [
           'type' => $data['sheet'],
-          'user' => $user,
           'list' => [
             [
               'id'        => 'all',
@@ -28,10 +27,10 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
   </div>
 
   <div class="box">
-    <form class="max-w780" action="<?= getUrlByName('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <i><?= __('edit'); ?></i>
-      <?= Tpl::insert('/_block/facet/facet-type', ['type' => $fs['facet_type'], 'tl' => $user['trust_level']]); ?>
+      <?= Tpl::insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
 
       <div class="file-upload mb10 mt15" id="file-drag">
         <div class="flex">
@@ -185,10 +184,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
     <?php endif; ?>
 
     <?php if (UserData::checkAdmin()) : ?>
-      <?= Tpl::insert('/_block/form/select/content-tl', [
-        'user' => $user,
-        'data' => $fs['facet_tl'],
-      ]); ?>
+      <?= Tpl::insert('/_block/form/select/content-tl', ['data' => $fs['facet_tl']]); ?>
       <?= Tpl::insert('/_block/form/select/user', [
         'uid'     => $user,
         'user'    => $data['user'],

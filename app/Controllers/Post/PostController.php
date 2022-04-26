@@ -197,7 +197,7 @@ class PostController extends MainController
 
         // Access check
         // Проверка доступа
-        if (!Html::accessСheck($post, 'post', $this->user, 0, 0)) {
+        if (!Html::accessСheck($post, 'post', 0, 0)) {
             redirect('/');
         }
 

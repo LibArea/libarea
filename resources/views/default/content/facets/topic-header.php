@@ -5,8 +5,8 @@
   <div class="flex-auto">
     <h1 class="text-2xl">
       <?= $topic['facet_seo_title']; ?>
-      <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == $user['id']) : ?>
-        <a class="right gray-600" href="<?= getUrlByName('content.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
+      <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == UserData::getUserId()) : ?>
+        <a class="right gray-600" href="<?= url('content.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
           <i class="bi-pencil"></i>
         </a>
       <?php endif; ?>
@@ -15,7 +15,6 @@
 
     <div class="mt15 right">
       <?= Html::signed([
-        'user_id'         => $user['id'],
         'type'            => 'facet',
         'id'              => $topic['facet_id'],
         'content_user_id' => $topic['facet_user_id'],
@@ -24,7 +23,6 @@
     </div>
 
     <?= Tpl::insert('/_block/facet/focus-users', [
-      'user'              => $user,
       'topic_focus_count' => $topic['facet_focus_count'],
       'focus_users'       => $data['focus_users'] ?? '',
     ]); ?>
@@ -39,26 +37,25 @@
       '/_block/navigation/nav',
       [
         'type' => $data['sheet'],
-        'user' => $user,
         'list' =>  [
           [
             'id'      => 'facet.feed',
-            'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]),
+            'url'     => url('topic', ['slug' => $topic['facet_slug']]),
             'title'   => __('feed'),
             'icon'    => 'bi-sort-down'
           ], [
             'id'      => 'facet.recommend',
-            'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
+            'url'     => url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
             'title'   => __('recommended'),
             'icon'    => 'bi-lightning'
           ],  [
             'id'      => 'writers',
-            'url'     => getUrlByName('topic.writers', ['slug' => $topic['facet_slug']]),
+            'url'     => url('topic.writers', ['slug' => $topic['facet_slug']]),
             'title'   => __('writers'),
             'icon'    => 'bi-award'
           ], [
             'id'      => 'info',
-            'url'     => getUrlByName('topic.info', ['slug' => $topic['facet_slug']]),
+            'url'     => url('topic.info', ['slug' => $topic['facet_slug']]),
             'title'   => '',
             'icon'    => 'bi-info-lg'
           ],

@@ -7,7 +7,7 @@
     <?php foreach ($data['answers'] as  $answer) : ?>
       <div class="block-answer mb15">
         <?php if ($answer['answer_is_deleted'] == 0) : ?>
-          <?php if ($user['id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
+          <?php if (UserData::getUserId() == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
           <div class="br-top-dotted mb20"></div>
           <ol class="list-none">
             <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
@@ -19,18 +19,18 @@
                     <?php if (empty($answer['edit'])) : ?>
                       (<?= __('ed'); ?>.)
                     <?php endif; ?>
-                    <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user' => $user, 'publ' => $answer['answer_published']]); ?>
+                    <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
                   </div>
-                  <a class="qa-login" href="<?= getUrlByName('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
+                  <a class="qa-login" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
                 </div>
                 <div class="max-w780">
                   <?= Content::text($answer['answer_content'], 'text'); ?>
                 </DIV>
               </div>
               <div class="flex text-sm">
-                <?= Html::votes($user['id'], $answer, 'answer', 'ps', 'mr5'); ?>
-
-                <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) : ?>
+                <?= Html::votes($answer, 'answer', 'ps', 'mr5'); ?>
+ 
+                <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                   <?php if ($post['post_closed'] == 0) : ?>
                     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
                       <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10 mr10"><?= __('reply'); ?></a>
@@ -38,9 +38,9 @@
                   <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if (Html::accessСheck($answer, 'answer', $user, 1, 30) === true) : ?>
-                  <?php if ($user['id'] == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
-                    <a class="editansw gray ml15 mr10" href="<?= getUrlByName('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                <?php if (Html::accessСheck($answer, 'answer', 1, 30) === true) : ?>
+                  <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
+                    <a class="editansw gray ml15 mr10" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                       <?= __('edit'); ?>
                     </a>
                   <?php endif; ?>
@@ -52,9 +52,9 @@
                   </a>
                 <?php endif; ?>
 
-                <?= Html::favorite($user['id'], $answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml10'); ?>
-
-                <?php if ($user['id'] != $answer['answer_user_id'] && $user['trust_level'] > Config::get('trust-levels.tl_stop_report')) : ?>
+                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml10'); ?>
+ 
+                <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_stop_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
                     <i title="<?= __('report'); ?>" class="bi-flag"></i>
                   </a>
@@ -77,14 +77,14 @@
                 <?= Content::text($comment['comment_content'], 'line'); ?>
                 <div class="mb5 mt5">
                   <span class="gray-600">
-                    <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
+                    <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
                     <span class="lowercase gray-600">
                       &nbsp; <?= Html::langDate($comment['date']); ?>
                     </span>
-                    <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user' => $user, 'publ' => $comment['comment_published']]); ?>
+                    <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
                   </span>
 
-                  <?php if ($user['trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) : ?>
+                  <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                     <?php if ($post['post_closed'] == 0) : ?>
                       <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
                         <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600 ml5 mr5">
@@ -94,8 +94,8 @@
                     <?php endif; ?>
                   <?php endif; ?>
 
-                  <?php if (Html::accessСheck($comment, 'comment', $user, 1, 30) === true) : ?>
-                    <?php if ($user['id'] == $comment['comment_user_id'] || UserData::checkAdmin()) : ?>
+                  <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
+                    <?php if (UserData::getUserId() == $comment['comment_user_id'] || UserData::checkAdmin()) : ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 ml10 mr5">
                         <i title="<?= __('edit'); ?>" class="bi-pencil-square"></i>
                       </a>
@@ -107,7 +107,7 @@
                       <i title="<?= __('remove'); ?>" class="bi-trash"></i>
                     </a>
                   <?php endif; ?>
-                  <?php if ($user['id'] != $comment['comment_user_id'] && $user['trust_level'] > 0) : ?>
+                  <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml5">
                       <?= __('report'); ?>
                     </a>
@@ -134,7 +134,7 @@
   <?php if (UserData::checkActiveUser()) : ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
-      <form class="mb15" action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+      <form class="mb15" action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
         <?= Tpl::insert('/_block/editor/editor', [
           'height'  => '250px',

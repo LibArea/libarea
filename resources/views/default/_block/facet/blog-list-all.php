@@ -1,12 +1,11 @@
 <?php foreach ($facets as $key => $facet) : ?>
   <div class="mb20 items-center flex flex-row">
-    <a title="<?= $facet['facet_title']; ?>" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
+    <a title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
       <?= Html::image($facet['facet_img'], $facet['facet_title'], 'ava-lg', 'logo', 'max'); ?>
     </a>
     <div class="ml5 w-100">
       <div class="right">
         <?= Html::signed([
-          'user_id'         => $user['id'],
           'type'            => 'facet',
           'id'              => $facet['facet_id'],
           'content_user_id' => $facet['facet_user_id'],
@@ -14,11 +13,11 @@
         ]); ?>
       </div>
 
-      <a class="black" title="<?= $facet['facet_title']; ?>" href="<?= getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
+      <a class="black" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
         <?= $facet['facet_title']; ?>
       </a>
 
-      <?php if ($user['id'] == $facet['facet_user_id']) : ?>
+      <?php if (UserData::getUserId() == $facet['facet_user_id']) : ?>
         <i class="bi-mic sky text-sm"></i>
       <?php endif; ?>
       <div class="text-sm pr15 mb-pr0 gray">

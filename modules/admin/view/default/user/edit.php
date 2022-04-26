@@ -8,10 +8,10 @@
 ); ?>
 
 <div class="box bg-white">
-  <form action="<?= getUrlByName('admin.user.change', ['id' => $data['user']['id']]); ?>" method="post">
+  <form action="<?= url('admin.user.change', ['id' => $data['user']['id']]); ?>" method="post">
     <?= csrf_field() ?>
     <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
-      <a class="right text-sm" href="<?= getUrlByName('delete.cover', ['login' => $data['user']['login']]); ?>">
+      <a class="right text-sm" href="<?= url('delete.cover', ['login' => $data['user']['login']]); ?>">
         <?= __('remove'); ?>
       </a>
       <br>
@@ -22,7 +22,7 @@
     <fieldset>
       <label for="post_title">
         Id<?= $data['user']['id']; ?> |
-        <a target="_blank" rel="noopener noreferrer" href="<?= getUrlByName('profile', ['login' => $data['user']['login']]); ?>">
+        <a target="_blank" rel="noopener noreferrer" href="<?= url('profile', ['login' => $data['user']['login']]); ?>">
           <?= $data['user']['login']; ?>
         </a>
       </label>
@@ -76,13 +76,13 @@
     <fieldset>
       <?php if ($data['count']['count_posts'] != 0) : ?>
         <label class="required"><?= __('posts'); ?>:</label>
-        <a target="_blank" rel="noopener noreferrer" title="<?= __('posts'); ?> <?= $data['user']['login']; ?>" href="<?= getUrlByName('profile.posts', ['login' => $data['user']['login']]); ?>">
+        <a target="_blank" rel="noopener noreferrer" title="<?= __('posts'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.posts', ['login' => $data['user']['login']]); ?>">
           <?= $data['count']['count_posts']; ?>
         </a> <br>
       <?php endif; ?>
       <?php if ($data['count']['count_answers'] != 0) : ?>
         <label class="required"><?= __('answers'); ?>:</label>
-        <a target="_blank" rel="noopener noreferrer" title="<?= __('answers'); ?> <?= $data['user']['login']; ?>" href="<?= getUrlByName('profile.answers', ['login' => $data['user']['login']]); ?>">
+        <a target="_blank" rel="noopener noreferrer" title="<?= __('answers'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.answers', ['login' => $data['user']['login']]); ?>">
           <?= $data['count']['count_answers']; ?>
         </a> <br>
       <?php else : ?>
@@ -90,7 +90,7 @@
       <?php endif; ?>
       <?php if ($data['count']['count_comments'] != 0) : ?>
         <label class="required"><?= __('comments'); ?>:</label>
-        <a target="_blank" rel="noopener noreferrer" title="<?= __('comments'); ?> <?= $data['user']['login']; ?>" href="<?= getUrlByName('profile.comments', ['login' => $data['user']['login']]); ?>">
+        <a target="_blank" rel="noopener noreferrer" title="<?= __('comments'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.comments', ['login' => $data['user']['login']]); ?>">
           <?= $data['count']['count_comments']; ?>
         </a> <br>
       <?php else : ?>
@@ -99,7 +99,7 @@
     </fieldset>
     <hr>
     <fieldset>
-      <a class="text-sm" href="<?= getUrlByName('admin.badges.user.add', ['id' => $data['user']['id']]); ?>">
+      <a class="text-sm" href="<?= url('admin.badges.user.add', ['id' => $data['user']['id']]); ?>">
         + <?= __('reward.user'); ?>
       </a>
     </fieldset>
@@ -165,7 +165,7 @@
     </fieldset>
 
     <h3><?= __('contacts'); ?></h3>
-    <?php foreach (Config::get('/form/user-setting') as $block) : ?>
+    <?php foreach (config('/form/user-setting') as $block) : ?>
       <fieldset>
         <label for="title"><?= $block['lang']; ?></label>
         <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">

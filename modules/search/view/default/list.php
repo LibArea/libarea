@@ -9,7 +9,7 @@
         <?= Html::websiteImage($gist['domain'], 'favicon', $gist['domain'], 'favicons mr5'); ?>
         <?= $gist['domain']; ?>
       </span>
-      <a class="gray-600 lowercase ml15" href="<?= getUrlByName('web.website', ['slug' => $gist['domain']]); ?>">
+      <a class="gray-600 lowercase ml15" href="<?= url('web.website', ['slug' => $gist['domain']]); ?>">
         <?= __('more.detailed'); ?>
       </a>
       <span class="gray-600">

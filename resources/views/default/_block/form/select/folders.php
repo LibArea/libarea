@@ -1,13 +1,13 @@
 <?php if (!empty($data['folders'])) { ?>
   <div class="mb15">
     <?php foreach ($data['folders'] as $tag) { ?>
-      <a class="tags-xs" href="<?= getUrlByName('favorites.folder.id', ['id' => $tag['id']]); ?>"><?= $tag['value']; ?></a>
+      <a class="tags-xs" href="<?= url('favorites.folder.id', ['id' => $tag['id']]); ?>"><?= $tag['value']; ?></a>
       <sup class="del-folder gray-600 mr15" data-id="<?= $tag['id']; ?>" data-type="favorite">x</sup>
     <?php } ?>
   </div>
 <?php } ?>
 
-<form class="max-w780" action="<?= getUrlByName('folder.content.create'); ?>" method="post" enctype="multipart/form-data">
+<form class="max-w780" action="<?= url('folder.content.create'); ?>" method="post" enctype="multipart/form-data">
   <?php csrf_field(); ?>
   <input name='cat-outside' class='tagify' placeholder='<?= __('add'); ?>...'>
   <fieldset>

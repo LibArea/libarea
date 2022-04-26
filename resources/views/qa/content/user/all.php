@@ -12,16 +12,15 @@
         '/_block/navigation/nav',
         [
           'type' => $data['sheet'],
-          'user' => $user,
           'list' => [
             [
               'id'    => $data['type'] . 's.all',
-              'url'   => getUrlByName($data['type'] . 's.all'),
+              'url'   => url($data['type'] . 's.all'),
               'title' => __('all'),
               'icon'  => 'bi bi-app'
             ], [
               'id'    => $data['type'] . 's.new',
-              'url'   => getUrlByName($data['type'] . 's.new'),
+              'url'   => url($data['type'] . 's.new'),
               'title' => __('new.ones'),
               'icon'  => 'bi bi-sort-up'
             ],
@@ -35,7 +34,7 @@
     <div class="flex flex-wrap">
       <?php foreach ($data['users'] as $user) : ?>
       <div class="w-20 mb20 mb-w-33 center">
-        <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+        <a href="<?= url('profile', ['login' => $user['login']]); ?>">
           <?= Html::image($user['avatar'], $user['login'], 'ava-lg', 'avatar', 'max'); ?>
           <div class="block mt5">
             <?= $user['login']; ?>
@@ -47,5 +46,5 @@
         </div>
       <?php endforeach; ?>
     </div>
-  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName($data['sheet'])); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>
 </main>

@@ -1,5 +1,5 @@
 <div class="w-100">
-  <?= Tpl::insert('/content/user/profile/header', ['user' => $user, 'data' => $data]); ?>
+  <?= Tpl::insert('/content/user/profile/header', ['data' => $data]); ?>
   <div class="flex gap">
     <main class="col-two">
       <div class="box-flex">
@@ -7,7 +7,7 @@
       </div>
       <?php if (!empty($data['comments'])) : ?>
         <div class="box">
-          <?= Tpl::insert('/content/comment/comment', ['answer' => $data['comments'], 'user' => $user]); ?>
+          <?= Tpl::insert('/content/comment/comment', ['answer' => $data['comments']]); ?>
         </div>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/comments'); ?>
       <?php else : ?>
@@ -15,8 +15,8 @@
       <?php endif; ?>
     </main>
     <aside>
-      <?= Tpl::insert('/content/user/profile/sidebar', ['user' => $user, 'data' => $data]); ?>
+      <?= Tpl::insert('/content/user/profile/sidebar', ['data' => $data]); ?>
     </aside>
   </div>
 </div>
-<?= Tpl::insert('/_block/js-msg-flag', ['uid' => $user['id']]); ?>
+<?= Tpl::insert('/_block/js-msg-flag'); ?>

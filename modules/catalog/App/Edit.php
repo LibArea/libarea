@@ -25,8 +25,8 @@ class Edit
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (!Html::accessСheck($domain, 'item', $this->user, false, false) === true) {
-            redirect(getUrlByName('web'));
+        if (!Html::accessСheck($domain, 'item', false, false) === true) {
+            redirect(url('web'));
         }
 
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
@@ -57,7 +57,7 @@ class Edit
 
     public function edit()
     {
-        $redirect   = getUrlByName('web');
+        $redirect   = url('web');
         $item_id    = Request::getPostInt('item_id');
         if (!$item  = WebModel::getItemId($item_id)) {
             redirect($redirect);
@@ -85,8 +85,8 @@ class Edit
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (!Html::accessСheck($item, 'item', $this->user, false, false) === true) {
-            redirect(getUrlByName('web'));
+        if (!Html::accessСheck($item, 'item', false, false) === true) {
+            redirect(url('web'));
         }
 
         // Связанные посты
@@ -146,7 +146,7 @@ class Edit
                     'sender_id'    => $this->user['id'],
                     'recipient_id' => UserData::checkAdmin() ? $owner_uid : 1,
                     'action_type'  => UserData::checkAdmin() ? NotificationModel::WEBSITE_APPROVED : NotificationModel::TYPE_EDIT_WEBSITE,
-                    'url'          => getUrlByName('web'),
+                    'url'          => url('web'),
                 ]
             );
         }

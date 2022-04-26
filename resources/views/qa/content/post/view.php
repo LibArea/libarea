@@ -1,9 +1,9 @@
 <?php $post = $data['post']; ?>
 <div class="w110 mb-none center">
   <div class="sticky top-xl">
-    <?= Html::votes($user['id'], $post, 'post', 'ps', 'text-2xl middle mt15', 'block'); ?>
+    <?= Html::votes($post, 'post', 'ps', 'text-2xl middle mt15', 'block'); ?>
     <div class="pt20">
-      <?= Html::favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl'); ?>
+      <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
 </div>
@@ -22,7 +22,7 @@
           <?php if (!empty($data['facets'])) : ?>
             <div class="lowercase">
               <?php foreach ($data['facets'] as $topic) : ?>
-                <a class="tags" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+                <a class="tags" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
                   <?= $topic['facet_title']; ?>
                 </a>
               <?php endforeach; ?>
@@ -39,13 +39,13 @@
             (<?= __('ed'); ?>)
           <?php endif; ?>
 
-          <?php if ($user['id']) : ?>
-            <?php if ($user['login'] == $post['login']  || UserData::checkAdmin()) : ?>
-              <a class="gray-600 mr10 ml10" href="<?= getUrlByName('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
+          <?php if (UserData::checkActiveUser()) : ?>
+            <?php if (UserData::getUserLogin() == $post['login']  || UserData::checkAdmin()) : ?>
+              <a class="gray-600 mr10 ml10" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
                 <?= __('edit'); ?>
               </a>
             <?php endif; ?>
-            <?php if ($user['login'] == $post['login']) : ?>
+            <?php if (UserData::getUserLogin() == $post['login']) : ?>
               <?php if ($post['my_post'] == $post['post_id']) : ?>
                 <span class="add-profile active mr10 ml10" data-post="<?= $post['post_id']; ?>">
                   + <?= __('in.profile'); ?>
@@ -72,7 +72,7 @@
                 <?php endif; ?>
               </a>
             <?php endif; ?>
-            <?= Tpl::insert('/_block/show-ip', ['ip' => $post['post_ip'], 'user' => $user, 'publ' => $post['post_published']]); ?>
+            <?= Tpl::insert('/_block/show-ip', ['ip' => $post['post_ip'], 'publ' => $post['post_published']]); ?>
           <?php endif; ?>
         </div>
       </div>
@@ -98,7 +98,7 @@
           <div class="italic m15 mb15 p10 text-sm bg-lightgray table gray">
             <div>
               <i class="bi-link-45deg"></i>
-              <a class="gray" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
+              <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <?= $post['post_url_domain']; ?>
               </a>
             </div>
@@ -109,7 +109,7 @@
 
       <div class="br-gray flex items-center mb5">
         <div class="left p10 none mb-block">
-          <?= Html::votes($user['id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
+          <?= Html::votes($post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
         </div>
 
         <ul class="list-none w-100 lowercase">
@@ -118,7 +118,7 @@
               <?= __('created.by'); ?>
             </div>
             <div class="center">
-              <a title="<?= $post['login']; ?>" href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+              <a title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
                 <?= Html::image($post['avatar'], $post['login'], 'ava-base', 'avatar', 'small'); ?>
               </a>
             </div>
@@ -129,7 +129,7 @@
             </div>
             <div class="center">
               <?php if (!empty($data['last_user']['answer_id'])) : ?>
-                <a title="<?= $data['last_user']['login']; ?>" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
+                <a title="<?= $data['last_user']['login']; ?>" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
                   <?= Html::image($data['last_user']['avatar'], $data['last_user']['login'], 'ava-base', 'avatar', 'small'); ?>
                 </a>
               <?php else : ?>
@@ -175,21 +175,21 @@
               </div>
             <?php endif; ?>
           <?php else : ?>
-            <a class="right mt5 focus-id no" href="<?= getUrlByName('login'); ?>">
+            <a class="right mt5 focus-id no" href="<?= url('login'); ?>">
               + <?= __('read'); ?>
             </a>
           <?php endif; ?>
         </div>
 
         <div class="right ml15 p10 none mb-block">
-          <?= Html::favorite($user['id'], $post['post_id'], 'post', $post['tid'], 'mob', 'text-2xl'); ?>
+          <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'mob', 'text-2xl'); ?>
         </div>
       </div>
 
       <?php if (UserData::checkActiveUser()) : ?>
         <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
-          <form action="<?= getUrlByName('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+          <form action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
 
             <?= Tpl::insert('/_block/editor/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
@@ -213,12 +213,12 @@
   <div id="comment"></div>
   <?php if ($post['post_draft'] == 0) :
     if ($post['post_feature'] == 0) :
-      Tpl::insert('/_block/comments-view', ['data' => $data, 'post' => $post, 'user' => $user]);
+      Tpl::insert('/_block/comments-view', ['data' => $data, 'post' => $post]);
       if ($post['post_closed'] == 1) :
         echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('post.closed'), 'icon' => 'bi-door-closed']);
       endif;
     else :
-      Tpl::insert('/_block/questions-view', ['data' => $data, 'post' => $post, 'user' => $user]);
+      Tpl::insert('/_block/questions-view', ['data' => $data, 'post' => $post]);
       if ($post['post_closed'] == 1) :
         echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('question.closed'), 'icon' => 'bi-door-closed']);
       endif;
@@ -234,13 +234,13 @@
       <?php foreach ($data['facets'] as $topic) : ?>
         <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
 
-        <?php if (!$topic['signed_facet_id'] && $user['id']) : ?>
+        <?php if (!$topic['signed_facet_id'] && UserData::getUserId()) : ?>
           <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm sky center mt5 mr5">
             <i class="bi-plus"></i> <?= __('read'); ?>
           </div>
         <?php endif; ?>
 
-        <a title="<?= $topic['facet_title']; ?>" class="black inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+        <a title="<?= $topic['facet_title']; ?>" class="black inline text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
           <?= $topic['facet_title']; ?>
         </a>
 
@@ -265,7 +265,7 @@
       <?php foreach ($data['recommend'] as  $rec_post) : ?>
         <div class="mb15 hidden flex text-sm">
           <?php if ($rec_post['post_type'] == 'post') : ?>
-            <a class="gray" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
+            <a class="gray" href="<?= url('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
               <?php if ($rec_post['post_answers_count'] > 0) : ?>
                 <div class="p5 pr10 pb5 pl10 bg-green br-rd3 white center mr15">
                   <?= $rec_post['post_answers_count'] ?>
@@ -277,7 +277,7 @@
           <?php else : ?>
             <i class="bi-intersect gray-600 middle mr15 text-2xl"></i>
           <?php endif; ?>
-          <a class="black" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
+          <a class="black" href="<?= url('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>
           </a>
         </div>
@@ -316,4 +316,4 @@
     }
   });
 </script>
-<?= Tpl::insert('/_block/js-msg-flag', ['uid' => $user['id']]); ?>
+<?= Tpl::insert('/_block/js-msg-flag'); ?>

@@ -6,7 +6,7 @@
     'menus' => [
       [
         'id' => 'add',
-        'url' => getUrlByName($data['type'] . '.add'),
+        'url' => url($data['type'] . '.add'),
         'name' => __('add'),
         'icon' => 'bi-plus-lg'
       ]
@@ -37,7 +37,7 @@
             <?= $bg['badge_description']; ?>
           </td>
           <td class="center">
-            <a title="<?= __('edit'); ?>" href="<?= getUrlByName('admin.badges.edit', ['id' => $bg['badge_id']]); ?>">
+            <a title="<?= __('edit'); ?>" href="<?= url('admin.badges.edit', ['id' => $bg['badge_id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
           </td>

@@ -25,8 +25,8 @@ class UserArea
 
         $m = [
             'og'         => true,
-            'imgurl'     => Config::get('meta.img_path_web'),
-            'url'        => getUrlByName($sheet),
+            'imgurl'     => config('meta.img_path_web'),
+            'url'        => url($sheet),
         ];
 
         return view(

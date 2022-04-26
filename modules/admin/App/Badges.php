@@ -70,7 +70,7 @@ class Badges
         $description   = Request::getPost('badge_description');
         $icon          = $_POST['badge_icon']; // для Markdown
 
-        $redirect = getUrlByName('admin.badges');
+        $redirect = url('admin.badges');
         Validation::Length($title, 'title', '4', '25', $redirect);
         Validation::Length($description, 'description', '12', '250', $redirect);
         Validation::Length($icon, 'icon', '12', '250', $redirect);
@@ -119,7 +119,7 @@ class Badges
             ]
         );
 
-        Validation::ComeBack('successfully', 'success', getUrlByName('admin.user.edit', ['id' => $uid]));
+        Validation::ComeBack('successfully', 'success', url('admin.user.edit', ['id' => $uid]));
     }
 
     public function edit()
@@ -127,7 +127,7 @@ class Badges
         $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getId($badge_id);
 
-        $redirect = getUrlByName('admin.badges');
+        $redirect = url('admin.badges');
         if (!$badge['badge_id']) {
             redirect($redirect);
         }

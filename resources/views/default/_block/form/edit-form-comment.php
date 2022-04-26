@@ -1,6 +1,6 @@
 <div class="cm_addentry max-w780 mt10">
   <?php if (UserData::checkActiveUser()) : ?>
-    <form id="add_comm" class="new_comment" action="<?= getUrlByName('content.change', ['type' => 'comment']); ?>" accept-charset="UTF-8" method="post">
+    <form id="add_comm" class="new_comment" action="<?= url('content.change', ['type' => 'comment']); ?>" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
       <textarea rows="5" minlength="6" name="comment" id="comment"><?= $data['comment_content']; ?></textarea>
       <fieldset>

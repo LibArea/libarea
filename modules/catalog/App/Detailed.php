@@ -45,7 +45,7 @@ class Detailed
         $m = [
             'og'         => true,
             'imgurl'     => $content_img,
-            'url'        => getUrlByName('web.website', ['slug' => $item['item_domain']]),
+            'url'        => url('web.website', ['slug' => $item['item_domain']]),
         ];
         $title = __('website') . ': ' . $item['item_title'];
         $description  = $item['item_title'] . '. ' . $item['item_content'];

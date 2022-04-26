@@ -4,7 +4,7 @@
   <div class="box-flex justify-between">
     <p class="m0"><?= __('teams'); ?></p>
     <?php if ($data['count'] < $data['limit']) : ?>
-      <a href="<?= getUrlByName('team.add'); ?>" class="btn btn-primary"><?= __('add'); ?></a>
+      <a href="<?= url('team.add'); ?>" class="btn btn-primary"><?= __('add'); ?></a>
     <?php endif; ?>
   </div>
   <div class="box">
@@ -13,7 +13,7 @@
       <?php foreach ($data['teams'] as $team) : ?>
         <div class="mb15">
           <?php if ($team['is_deleted'] == 0) : ?>
-            <h2><a class="mr15" href="<?= getUrlByName('team.view', ['id' => $team['id']]); ?>"><?= $team['name']; ?></a></h2>
+            <h2><a class="mr15" href="<?= url('team.view', ['id' => $team['id']]); ?>"><?= $team['name']; ?></a></h2>
             <div class="content-body">
               <?= Content::text($team['content'], 'line'); ?>
             </div>
@@ -24,7 +24,7 @@
                 <?= __('no.users'); ?>...
               <?php endif; ?>
             </blockquote>
-            <a class="mr15 gray-600" href="<?= getUrlByName('team.edit', ['id' => $team['id']]); ?>">
+            <a class="mr15 gray-600" href="<?= url('team.edit', ['id' => $team['id']]); ?>">
               <?= __('edit'); ?>
             </a>
             <span class="action-team gray-600" data-id="<?= $team['id']; ?>"><?= __('remove'); ?></span>
@@ -51,7 +51,7 @@
     <h3 class="uppercase-box mt15"><?= __('owner'); ?></h3>
     <div class="mb15">
       <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
-      <a href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
+      <a href="<?= url('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
     </div>
   </div>
   <aside>

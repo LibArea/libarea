@@ -8,7 +8,7 @@ $sw = $sw ?? '?';
 <main class="main-search col-two">
 
   <?php foreach ($data['tags'] as $tag) : ?>
-    <a class="mr20 tags" href="<?= getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $tag['facet_slug']]); ?>">
+    <a class="mr20 tags" href="<?= url('web.dir', ['cat' => 'cat', 'slug' => $tag['facet_slug']]); ?>">
       <?= $tag['facet_title']; ?>
     </a>
   <?php endforeach; ?>
@@ -45,7 +45,7 @@ $sw = $sw ?? '?';
               <?= Html::websiteImage($result['domain'], 'favicon', $result['domain'], 'favicons mr5'); ?>
               <?= $result['domain']; ?>
             </span>
-            <a class="gray-600 ml15" href="<?= getUrlByName('web.website', ['slug' => $result['domain']]); ?>"><?= __('more.detailed'); ?></a>
+            <a class="gray-600 ml15" href="<?= url('web.website', ['slug' => $result['domain']]); ?>"><?= __('more.detailed'); ?></a>
             <span class="gray-600">~ <?= $result['_score']; ?></span>
           </div>
         <?php endif; ?>

@@ -3,7 +3,7 @@
 
 <main>
   <div class="box">
-    <a href="<?= getUrlByName('teams'); ?>"><?= __('teams'); ?></a> /
+    <a href="<?= url('teams'); ?>"><?= __('teams'); ?></a> /
     <span class="red"><?= $team['name']; ?></span>
 
     <div class="content-body">
@@ -17,7 +17,7 @@
     <h2><?= __('owner'); ?></h2>
     <div class="mb15 mt5">
       <?= Html::image($team['avatar'], $team['login'], 'ava-base', 'avatar', 'small'); ?>
-      <a href="<?= getUrlByName('profile', ['login' => $team['login']]); ?>"><?= $team['login']; ?></a>
+      <a href="<?= url('profile', ['login' => $team['login']]); ?>"><?= $team['login']; ?></a>
     </div>
 
     <h2><?= __('users'); ?></h2>
@@ -25,12 +25,12 @@
       <?php foreach ($data['team_users'] as $usr) : ?>
         <div class="mb15">
           <?= Html::image($usr['avatar'], $usr['login'], 'ava-base', 'avatar', 'small'); ?>
-          <a href="<?= getUrlByName('profile', ['login' => $usr['login']]); ?>"><?= $usr['login']; ?></a>
+          <a href="<?= url('profile', ['login' => $usr['login']]); ?>"><?= $usr['login']; ?></a>
         </div>
       <?php endforeach; ?>
     </div>
 
-    <a href="<?= getUrlByName('team.edit', ['id' => $team['id']]); ?>" class="btn btn-primary"><?= __('edit'); ?></a>
+    <a href="<?= url('team.edit', ['id' => $team['id']]); ?>" class="btn btn-primary"><?= __('edit'); ?></a>
   </div>
 </main>
 

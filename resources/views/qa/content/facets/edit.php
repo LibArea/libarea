@@ -1,6 +1,6 @@
 <?php 
 $fs = $data['facet'];
-$url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]);
+$url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : url($fs['facet_type'], ['slug' => $fs['facet_slug']]);
 ?>
 
 <main class="w-100">
@@ -13,7 +13,6 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
         '/_block/navigation/nav',
         [
           'type' => $data['sheet'],
-          'user' => $user,
           'list' => [
             [
               'id'        => 'all',
@@ -29,7 +28,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
   </div>
 
   <div class="box max-w780">
-    <form action="<?= getUrlByName('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <div class="file-upload mb10" id="file-drag">
@@ -115,7 +114,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
         <div class="box">
           <h3 class="uppercase-box"><?= __('parents'); ?></h3>
           <?php foreach ($data['high_arr'] as $high) : ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $high['facet_slug']]); ?>">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= url('topic', ['slug' => $high['facet_slug']]); ?>">
               <?= Html::image($high['facet_img'], $high['facet_title'], 'img-base', 'logo', 'max'); ?>
               <?= $high['facet_title']; ?>
             </a>
@@ -127,7 +126,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
         <div class="box">
           <h3 class="uppercase-box"><?= __('children'); ?></h3>
           <?php foreach ($data['low_arr'] as $sub) : ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $sub['facet_slug']]); ?>">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= url('topic', ['slug' => $sub['facet_slug']]); ?>">
               <?= Html::image($sub['facet_img'], $sub['facet_title'], 'img-base', 'logo', 'max'); ?>
               <?= $sub['facet_title']; ?>
             </a>
@@ -175,7 +174,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           <div class="box max-w780">
             <h3 class="uppercase-box"><?= __('bound.parents'); ?></h3>
             <?php foreach ($data['high_matching'] as $low_mat) : ?>
-              <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $low_mat['facet_slug']]); ?>">
+              <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= url('topic', ['slug' => $low_mat['facet_slug']]); ?>">
                 <?= Html::image($low_mat['facet_img'], $low_mat['facet_title'], 'img-base', 'logo', 'max'); ?>
                 <?= $low_mat['facet_title']; ?>
               </a>
@@ -185,7 +184,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
       <?php endif; ?>
 
       <?php if (UserData::checkAdmin()) : ?>
-        <?= Tpl::insert('/_block/form/select/content-tl', ['user' => $user, 'data' => $fs['facet_tl']]); ?>
+        <?= Tpl::insert('/_block/form/select/content-tl', ['data' => $fs['facet_tl']]); ?>
         <?= Tpl::insert('/_block/form/select/user', [
           'uid'     => $user,
           'user'    => $data['user'],
@@ -195,7 +194,7 @@ $url = $fs['facet_type'] == 'category' ? getUrlByName('web.dir', ['cat' => 'cat'
           'help'    => __('necessarily'),
         ]); ?>
  
-        <?= Tpl::insert('/_block/facet/facet-type', ['type' => $fs['facet_type'], 'tl' => $user['trust_level']]); ?>
+        <?= Tpl::insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
       <?php endif; ?>
       <fieldset>
         <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">

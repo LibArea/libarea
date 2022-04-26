@@ -9,12 +9,12 @@
       </fieldset>
       <fieldset>
         <?= Html::sumbit(__('sign.in')); ?>
-        <span class="ml15 text-sm"><a href="<?= getUrlByName('recover'); ?>">
+        <span class="ml15 text-sm"><a href="<?= url('recover'); ?>">
             <?= __('forgot.password'); ?>?</a>
         </span>
       </fieldset>
     </form>
-    <?php if (Config::get('general.invite') == true) : ?>
+    <?php if (config('general.invite') == true) : ?>
       <?= __('invate.text'); ?>
     <?php endif; ?>
   </div>

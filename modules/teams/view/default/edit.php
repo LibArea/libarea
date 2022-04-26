@@ -3,10 +3,10 @@
 
 <main>
   <div class="box">
-    <a href="<?= getUrlByName('teams'); ?>"><?= __('teams'); ?></a> /
+    <a href="<?= url('teams'); ?>"><?= __('teams'); ?></a> /
     <span class="red"><?= sprintf(__('edit.option'), __('team')); ?></span>
 
-    <form class="max-w780" action="<?= getUrlByName('team.change'); ?>" method="post">
+    <form class="max-w780" action="<?= url('team.change'); ?>" method="post">
       <?= csrf_field() ?>
       <fieldset>
         <label for="name"><?= __('heading'); ?></label>

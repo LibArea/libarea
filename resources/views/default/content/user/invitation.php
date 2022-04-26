@@ -3,8 +3,8 @@
     <p class="m0"><?= __($data['sheet']); ?></p>
   </div>
   <div class="box">
-    <?php if ($user['trust_level'] > 1) : ?>
-      <form method="post" action="<?= getUrlByName('invit.create'); ?>">
+    <?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
+      <form method="post" action="<?= url('invit.create'); ?>">
         <?php csrf_field(); ?>
 
         <fieldset>
@@ -31,7 +31,7 @@
               <?= __('link.used'); ?>:
               <?= $invite['invitation_email']; ?>
               <code class="block w-90">
-                <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
+                <?= config('meta.url'); ?><?= url('invite.reg', ['code' => $invite['invitation_code']]); ?>
               </code>
             <?php endif; ?>
 
@@ -40,7 +40,7 @@
             <?= __('for'); ?> (<?= $invite['invitation_email']; ?>)
             <?= __('can.send.this.link'); ?>:
             <code class="block w-90">
-              <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
+              <?= config('meta.url'); ?><?= url('invite.reg', ['code' => $invite['invitation_code']]); ?>
             </code>
           <?php endif; ?>
 

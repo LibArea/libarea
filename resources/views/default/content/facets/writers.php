@@ -1,6 +1,6 @@
 <?php $topic = $data['facet']; ?>
 <main>
-  <?= Tpl::insert('/content/facets/topic-header', ['topic' => $topic, 'user' => $user, 'data' => $data]); ?>
+  <?= Tpl::insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
   <div class="box">
     <?php if (!empty($data['writers'])) : ?>
       <div class="flex items-center mb20 mt10">
@@ -14,7 +14,7 @@
             <?= $row['hits_count']; ?>
           </div>
           <div class="flex">
-            <a class="flex items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
+            <a class="flex items-center hidden gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">
               <?= Html::image($row['avatar'], $row['login'], 'ava-base', 'avatar', 'max'); ?>
               <div class="ml5">
                 <div class="gray-600"><?= $row['login']; ?></div>

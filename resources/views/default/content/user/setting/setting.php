@@ -1,13 +1,13 @@
 <main>
-  <?= Tpl::insert('/content/user/setting/nav', ['data' => $data, 'user'  => $user]); ?>
+  <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
-    <form class="max-w780" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= url('setting.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
       <?= Html::image($data['user']['avatar'], $data['user']['login'], 'mr5 ml5 ava', 'avatar', 'small'); ?>
       <span class="mr5 ml5">
-        <a title="<?= __('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $user['login']]); ?>">
+        <a title="<?= __('profile'); ?>" href="<?= url('profile', ['login' => $user['login']]); ?>">
           <?= $data['user']['login']; ?>
         </a>
       </span>
@@ -31,7 +31,6 @@
         'min'       => 0,
         'max'       => 255,
         'help'      => '0 - 255 ' . __('characters'),
-        'user'       => $user
       ]); ?>
 
       <fieldset id="box" class="max-w300">
@@ -43,7 +42,7 @@
       <fieldset class="max-w300">
         <label for="template"><?= __('template'); ?></label>
         <select name="template">
-          <?php foreach (Config::get('general.templates') as $tpl) { ?>
+          <?php foreach (config('general.templates') as $tpl) { ?>
             <option <?php if ($data['user']['template'] == $tpl) { ?>selected<?php } ?> value="<?= $tpl; ?>">
               <?= __($tpl); ?>
             </option>
@@ -54,7 +53,7 @@
       <fieldset class="max-w300">
         <label for="post_content"><?= __('language'); ?></label>
         <select name="lang">
-          <?php foreach (Config::get('general.languages') as $lang) {  ?>
+          <?php foreach (config('general.languages') as $lang) {  ?>
             <option <?php if ($data['user']['lang'] == $lang) { ?>selected<?php } ?> value="<?= $lang; ?>">
               <?= __($lang . '.language'); ?>
             </option>
@@ -73,7 +72,7 @@
       ]); ?>
 
       <h3 class="mt15 mb15"><?= __('contacts'); ?></h3>
-      <?php foreach (Config::get('form/user-setting') as $block) : ?>
+      <?php foreach (config('form/user-setting') as $block) : ?>
         <fieldset class="max-w300">
           <label for="post_title"><?= $block['lang']; ?></label>
           <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">

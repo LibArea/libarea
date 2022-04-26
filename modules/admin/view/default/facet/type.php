@@ -6,13 +6,13 @@
     'menus' => [
       [
         'id'    => $data['type'],
-        'url'   => getUrlByName('admin.facets.type', ['type' => $data['type']]),
+        'url'   => url('admin.facets.type', ['type' => $data['type']]),
         'name'  => __('all'),
         'icon'  => 'bi-x-circle'
       ],
       [
         'id'    => 'ban.facet',
-        'url'   => getUrlByName('admin.facets.ban.type', ['type' => $data['type']]),
+        'url'   => url('admin.facets.ban.type', ['type' => $data['type']]),
         'name'  => __('deleted'),
         'icon'  => 'bi-x-circle'
       ]
@@ -28,10 +28,10 @@
       <?php
       switch ($topic['facet_type']) :
         case 'category':
-          $url    = getUrlByName('web.dir', ['grouping' => 'all', 'slug' =>$topic['facet_slug']]);
+          $url    = url('web.dir', ['grouping' => 'all', 'slug' =>$topic['facet_slug']]);
           break;
         default:
-          $url = getUrlByName($topic['facet_type'], ['slug' => $topic['facet_slug']]);
+          $url = url($topic['facet_type'], ['slug' => $topic['facet_slug']]);
           break;
         endswitch;
       ?>
@@ -49,7 +49,7 @@
           <?= $topic['facet_title']; ?>
         </a>
 
-        <a class="ml15 mr15" href="<?= getUrlByName('content.edit', ['type' => $data['type'], 'id' => $topic['facet_id']]); ?>">
+        <a class="ml15 mr15" href="<?= url('content.edit', ['type' => $data['type'], 'id' => $topic['facet_id']]); ?>">
           <sup><i class="bi-pencil gray-600"></i></sup>
         </a>
 
@@ -83,7 +83,7 @@
     <h3 class="mb5"><?= __('pages'); ?></h3>
       <?php foreach ($data['pages'] as $page) : ?>
         <div class="mb5">
-          <a href="<?= getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => $page['post_slug']]); ?>">
+          <a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $page['post_slug']]); ?>">
             <i class="bi-info-square middle mr5"></i> <?= $page['post_title']; ?> <sup class="gray-600">id:<?= $page['post_id']; ?></sup>
           </a>
           <a class="gray-600 ml10" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]) ?>">

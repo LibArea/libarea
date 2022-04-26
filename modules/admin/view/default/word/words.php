@@ -6,7 +6,7 @@
     'menus' => [
       [
         'id'    => 'add',
-        'url'   => getUrlByName($data['type'] . '.add'),
+        'url'   => url($data['type'] . '.add'),
         'name'  => __('add'),
         'icon'  => 'bi bi-plus-lg'
       ]

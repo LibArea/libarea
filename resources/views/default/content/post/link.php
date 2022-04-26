@@ -2,11 +2,11 @@
   <div class="box">
     <?php if ($data['site']['item_title']) : ?>
       <div class="right mt15">
-        <?= Html::votes($user['id'], $data['site'], 'item', 'ps', 'mr10'); ?>
+        <?= Html::votes($data['site'], 'item', 'ps', 'mr10'); ?>
       </div>
       <h1><?= $data['site']['item_title']; ?>
-        <?php if ($user['trust_level'] > 4) : ?>
-          <a class="text-sm ml5" title="<?= __('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['site']['item_id']]); ?>">
+        <?php if (UserData::checkAdmin()) : ?>
+          <a class="text-sm ml5" title="<?= __('edit'); ?>" href="<?= url('web.edit', ['id' => $data['site']['item_id']]); ?>">
             <i class="bi-pencil"></i>
           </a>
         <?php endif; ?>
@@ -26,8 +26,8 @@
     <?php endif; ?>
   </div>
 
-  <?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>
-  <?= Html::pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('domain', ['domain' => $data['site']['item_domain']])); ?>
+  <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], null, url('domain', ['domain' => $data['site']['item_domain']])); ?>
 </main>
 <aside>
   <div class="sticky top-sm">

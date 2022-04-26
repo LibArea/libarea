@@ -2,13 +2,13 @@
 
 <script src="/assets/js/common.js"></script>
 <script src="/assets/js/notiflix/notiflix-aio-3.2.5.min.js"></script>
-<?php if ($uid) : ?><script src="/assets/js/app.js"></script><?php endif; ?>
+<?php if (UserData::checkActiveUser()) : ?><script src="/assets/js/app.js"></script><?php endif; ?>
 
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  <?php if (!$uid) : ?>
+  <?php if (!UserData::checkActiveUser()) : ?>
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
         Notiflix.Report.info(
@@ -21,7 +21,7 @@
 
   <?= Html::getMsg(); ?>
 
-  <?php if ($scroll) : ?>
+  <?php if (UserData::getUserScroll()) : ?>
     // Что будет смотреть
     const coolDiv = document.getElementById("scroll");
 

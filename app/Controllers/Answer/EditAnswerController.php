@@ -21,7 +21,7 @@ class EditAnswerController extends MainController
     {
         $answer_id  = Request::getInt('id');
         $answer = AnswerModel::getAnswerId($answer_id);
-        if (!Html::accessСheck($answer, 'answer', $this->user, 0, 0)) {
+        if (!Html::accessСheck($answer, 'answer', 0, 0)) {
             redirect('/');
         }
 
@@ -59,7 +59,7 @@ class EditAnswerController extends MainController
         // Access check
         // Проверка доступа
         $answer = AnswerModel::getAnswerId($answer_id);
-        if (!Html::accessСheck($answer, 'answer', $this->user, 0, 0)) {
+        if (!Html::accessСheck($answer, 'answer', 0, 0)) {
             redirect('/');
         }
 

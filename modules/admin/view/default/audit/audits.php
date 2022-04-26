@@ -6,17 +6,17 @@
     'menus' => [
       [
         'id'    => 'audits.all',
-        'url'   => getUrlByName('admin.audits'),
+        'url'   => url('admin.audits'),
         'name'  => __('all'),
         'icon'  => 'bi-record-circle',
       ], [
         'id'    => 'audits.ban',
-        'url'   => getUrlByName('admin.audits.ban'),
+        'url'   => url('admin.audits.ban'),
         'name'  => __('approved'),
         'icon'  => 'bi-x-circle',
       ], [
         'id'    => 'reports.all',
-        'url'   => getUrlByName('admin.reports'),
+        'url'   => url('admin.reports'),
         'name'  => __('reports'),
         'icon'  => 'bi-record-circle',
       ] 
@@ -46,14 +46,14 @@
             </div>
 
             (id:<?= $audit['id']; ?>)
-            <a href="<?= getUrlByName('profile', ['login' => $audit['login']]); ?>">
+            <a href="<?= url('profile', ['login' => $audit['login']]); ?>">
               <?= $audit['login']; ?>
             </a>
             <?php if ($audit['limiting_mode'] == 1) : ?>
               <span class="mr5 ml5 red"> audit </span>
             <?php endif; ?>
             <span class="mr5 ml5"> &#183; </span>
-            <a class="mr5 ml5" href="<?= getUrlByName('admin.user.edit', ['id' => $audit['id']]); ?>">
+            <a class="mr5 ml5" href="<?= url('admin.user.edit', ['id' => $audit['id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
             <span class="mr5 ml5"> &#183; </span>
@@ -67,7 +67,7 @@
 
             <?php if (!empty($audit['post'])) : ?>
               <?php if ($audit['post']['post_slug']) : ?>
-                <a class="block" href="<?= getUrlByName('post', ['id' => $audit['post']['post_id'], 'slug' => $audit['post']['post_slug']]); ?>">
+                <a class="block" href="<?= url('post', ['id' => $audit['post']['post_id'], 'slug' => $audit['post']['post_slug']]); ?>">
                   <?= $audit['post']['post_title']; ?>
                 </a>
               <?php endif; ?>
@@ -92,7 +92,7 @@
             <?php if ($audit['type_belonging'] == 'audit') : ?>
                 <?php if ($audit['read_flag'] == 1) : ?>
                   id:
-                  <a href="<?= getUrlByName('admin.user.edit', ['id' => $audit['audit_id']]); ?>">
+                  <a href="<?= url('admin.user.edit', ['id' => $audit['audit_id']]); ?>">
                     <?= $audit['user_id']; ?>
                   </a>
                 <?php else : ?>
@@ -116,6 +116,6 @@
     <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 </div>
-<?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.audits')); ?>
+<?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('admin.audits')); ?>
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

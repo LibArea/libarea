@@ -1,9 +1,9 @@
 <?php $topic = $data['facet']; ?>
 <main>
   <?php if ($topic['facet_is_deleted'] == 0) : ?>
-    <?= Tpl::insert('/content/facets/topic-header', ['topic' => $topic, 'user' => $user, 'data' => $data]); ?>
-    <?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
+    <?= Tpl::insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
+    <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('topic', ['slug' => $topic['facet_slug']])); ?>
 
   <?php else : ?>
     <div class="center">
@@ -49,7 +49,7 @@
           <ul>
             <?php foreach ($data['writers'] as $ind => $row) : ?>
               <li class="mb10">
-                <a class="gray-600" href="<?= getUrlByName('profile', ['login' => $row['login']]); ?>">
+                <a class="gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">
                   <?= Html::image($row['avatar'], $row['login'], 'ava-sm', 'avatar', 'max'); ?>
                   <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
                 </a>

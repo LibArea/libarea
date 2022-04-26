@@ -1,6 +1,6 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
 
-<?php if ($user['id'] == 0) : ?>
+<?php if (!UserData::checkActiveUser()) : ?>
   <div class="mb-none">
     <center>
       <h1><?= __('web.home.title'); ?></h1>
@@ -9,14 +9,14 @@
   </div>
 <?php endif; ?>
 <div class="item-categories">
-  <?php foreach (Config::get('catalog/home-categories') as $cat) : ?>
+  <?php foreach (config('catalog/home-categories') as $cat) : ?>
     <div class="categories-telo">
-      <a class="text-2xl block" href="<?= getUrlByName('web.dir', ['grouping' => 'all', 'slug' => $cat['url']]); ?>">
+      <a class="text-2xl block" href="<?= url('web.dir', ['grouping' => 'all', 'slug' => $cat['url']]); ?>">
         <?= $cat['title']; ?>
       </a>
       <?php if (!empty($cat['sub'])) : ?>
         <?php foreach ($cat['sub'] as $sub) : ?>
-          <a class="pr10 text-sm black mb-none" href="<?= getUrlByName('web.dir', ['grouping' => 'all', 'slug' => $sub['url']]); ?>">
+          <a class="pr10 text-sm black mb-none" href="<?= url('web.dir', ['grouping' => 'all', 'slug' => $sub['url']]); ?>">
             <?= $sub['title']; ?>
           </a>
         <?php endforeach; ?>
@@ -43,8 +43,8 @@
       <div class="box text-sm bg-violet mt15">
         <h3 class="uppercase-box"><?= __('menu'); ?></h3>
         <ul class="menu">
-          <?= includeTemplate('/view/default/_block/add-site', ['user' => $user, 'data' => $data]); ?>
-          <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'user' => $user, 'list' => Config::get('catalog/menu.user')]); ?>
+          <?= includeTemplate('/view/default/_block/add-site', ['data' => $data]); ?>
+          <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'list' => config('catalog/menu.user')]); ?>
         </ul>
       </div>
     <?php endif; ?>

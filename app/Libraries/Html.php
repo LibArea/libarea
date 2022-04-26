@@ -28,11 +28,11 @@ class Html
     }
 
     // Blog, topic or category
-    public static function addPost($facet, $user_id)
+    public static function addPost($facet)
     {
         $url_add = getUrlByName('content.add', ['type' => 'post']);
         if (!empty($facet)) {
-            if ($facet['facet_user_id'] == $user_id || $facet['facet_type'] == 'topic') {
+            if ($facet['facet_user_id'] == UserData::getUserId() || $facet['facet_type'] == 'topic') {
                 $url_add = $url_add . '/' . $facet['facet_id'];
             }
         }
@@ -118,7 +118,7 @@ class Html
     }
 
     // Voting for posts, replies, comments and sites
-    public static function votes($user_id, $content, $type, $ind, $css = '', $block = '')
+    public static function votes($content, $type, $ind, $css = '', $block = '')
     {
         $html  = '';
         $count = '';
@@ -126,8 +126,8 @@ class Html
             $count = $content[$type . '_votes'];
         }
 
-        if ($user_id > 0) {
-            if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
+        if (UserData::getAccount()) {
+            if ($content['votes_' . $type . '_user_id'] || UserData::getUserId() == $content[$type . '_user_id']) {
                 $html .= '<div class="voters sky flex ' . $block . ' center">
                             <div class="up-id bi-heart ' . $css . '"></div>
                             <div class="score">
@@ -153,10 +153,10 @@ class Html
     }
 
     // Add/remove from favorites
-    public static function favorite($user_id, $content_id, $type, $tid, $ind, $css = '')
+    public static function favorite($content_id, $type, $tid, $ind, $css = '')
     {
         $html  = '';
-        if ($user_id > 0) {
+        if (UserData::getAccount()) {
             $blue = $tid ? 'sky' : 'gray-600';
             $my   = $tid ? 'bi-bookmark-dash' : 'bi-bookmark-plus';
             $html .= '<span id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . ' middle"></i></span>';
@@ -173,8 +173,8 @@ class Html
     public static function signed($arr)
     {
         $html  = '';
-        if ($arr['user_id'] > 0) {
-            if ($arr['content_user_id'] != $arr['user_id']) {
+        if (UserData::getAccount()) {
+            if ($arr['content_user_id'] != UserData::getUserId()) {
                 if ($arr['state']) {
                     $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id yes">' . Translate::get('unsubscribe') . '</div>';
                 } else {
@@ -315,14 +315,14 @@ class Html
     // $type -  post / answer / comment
     // $after - есть ли ответы
     // $stop_time - разрешенное время
-    public static function accessСheck($content, $type, $user, $after, $stop_time)
+    public static function accessСheck($content, $type, $after, $stop_time)
     {
         if (!$content) {
             return false;
         }
 
         // Доступ получает только автор и админ
-        if ($content[$type . '_user_id'] != $user['id'] && !UserData::checkAdmin()) {
+        if ($content[$type . '_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) {
             return false;
         }
 

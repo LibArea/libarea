@@ -86,7 +86,7 @@ class Users
     public function userEditPage($sheet, $type)
     {
         $user_id    = Request::getInt('id');
-        if (!$user = UserModel::getUser($user_id, 'id')) redirect(getUrlByName('admin'));
+        if (!$user = UserModel::getUser($user_id, 'id')) redirect(url('admin'));
 
         $user['isBan']              = BanUserModel::isBan($user_id);
         $user['duplicat_ip_reg']    = UserModel::duplicatesRegistrationCount($user_id);
@@ -117,12 +117,12 @@ class Users
         $user_name      = Request::getPost('name');
         $trust_level    = Request::getPostInt('trust_level');
 
-        $redirect = getUrlByName('admin.users');
+        $redirect = url('admin.users');
         if (!$user = UserModel::getUser($user_id, 'id')) {
             redirect($redirect);
         }
 
-        $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
+        $redirect = url('admin.user.edit', ['id' => $user_id]);
         Validation::Length($login, 'login', '3', '11', $redirect);
 
         if ($email) {

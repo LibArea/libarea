@@ -6,7 +6,7 @@
     'menus' => [
       [
         'id' => 'add',
-        'url' => getUrlByName($data['type'] . '.add'),
+        'url' => url($data['type'] . '.add'),
         'name' => __('add'),
         'icon' => 'bi-plus-lg'
       ]
@@ -15,7 +15,7 @@
 ); ?>
 
 <div class="box bg-white max-w780">
-  <form action="<?= getUrlByName('admin.badge.create'); ?>" method="post">
+  <form action="<?= url('admin.badge.create'); ?>" method="post">
     <?= csrf_field() ?>
     <fieldset>
       <label for="badge_title"><?= __('title'); ?></label>

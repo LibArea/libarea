@@ -2,7 +2,7 @@
   <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="bg-white box">
-    <form method="POST" action="<?= getUrlByName('setting.avatar.edit'); ?>" enctype="multipart/form-data">
+    <form method="POST" action="<?= url('setting.avatar.edit'); ?>" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <div class="file-upload mb10" id="file-drag">
@@ -29,7 +29,7 @@
           <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
             <div class="relative mr15">
               <img class="block br-gray max-w-100" src="<?= Html::coverUrl($data['user']['cover_art'], 'user'); ?>">
-              <a class="right text-sm" href="<?= getUrlByName('delete.cover', ['login' => $user['login']]); ?>">
+              <a class="right text-sm" href="<?= url('delete.cover', ['login' => $user['login']]); ?>">
                 <?= __('remove'); ?>
               </a>
             </div>

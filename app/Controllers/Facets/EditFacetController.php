@@ -53,7 +53,7 @@ class EditFacetController extends MainController
     }
 
     public function edit()
-    {
+    { 
         $facet_id                   = Request::getPostInt('facet_id');
         $facet_title                = Request::getPost('facet_title');
         $facet_description          = Request::getPost('facet_description');
@@ -67,7 +67,7 @@ class EditFacetController extends MainController
 
         $facet = FacetModel::uniqueById($facet_id);
         Html::pageError404($facet);
-
+ 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
             redirect('/');

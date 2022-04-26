@@ -4,7 +4,7 @@
   <?php if (!empty($data['tags'])) : ?>
     <div class="mb15">
       <?php foreach ($data['tags'] as $tag) : ?>
-        <a class="tags-xs" href="<?= getUrlByName('favorites.folder.id', ['id' => $tag['id']]); ?>"><?= $tag['value']; ?></a>
+        <a class="tags-xs" href="<?= url('favorites.folder.id', ['id' => $tag['id']]); ?>"><?= $tag['value']; ?></a>
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
@@ -32,11 +32,11 @@
         <?php endif; ?>
 
         <?php if ($fav['action_type'] == 'post') : ?>
-          <a class="font-normal" href="<?= getUrlByName('post', ['id' => $fav['post_id'], 'slug' => $fav['post_slug']]); ?>">
+          <a class="font-normal" href="<?= url('post', ['id' => $fav['post_id'], 'slug' => $fav['post_slug']]); ?>">
             <?= $fav['post_title']; ?>
           </a>
         <?php elseif ($fav['action_type'] == 'website') : ?>
-          <a class="block" href="<?= getUrlByName('web.website', ['slug' => $fav['item_domain']]); ?>">
+          <a class="block" href="<?= url('web.website', ['slug' => $fav['item_domain']]); ?>">
             <?= $fav['item_title']; ?>
           </a>
           <span class="green text-sm">
@@ -48,7 +48,7 @@
             </a>
           </span>
         <?php else : ?>
-          <a href="<?= getUrlByName('post', ['id' => $fav['post']['post_id'], 'slug' => $fav['post']['post_slug']]); ?>#answer_<?= $fav['answer_id']; ?>">
+          <a href="<?= url('post', ['id' => $fav['post']['post_id'], 'slug' => $fav['post']['post_slug']]); ?>#answer_<?= $fav['answer_id']; ?>">
             <?= $fav['post']['post_title']; ?>
           </a>
         <?php endif; ?>
@@ -59,7 +59,7 @@
 
         <?php if ($fav['tag_id']) : ?>
           <div>
-            <a class="tags-xs mr15" href="<?= getUrlByName('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">
+            <a class="tags-xs mr15" href="<?= url('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">
               <?= $fav['tag_title']; ?>
             </a>
             <sup class="del-folder-content gray-600" data-tid="<?= $fav['tid']; ?>" data-type="favorite">x</sup>

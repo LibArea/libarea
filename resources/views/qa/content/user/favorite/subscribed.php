@@ -3,7 +3,7 @@
     <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
   </div>
   <div class="mt10">
-    <?= Tpl::insert('/content/post/post', ['data' => $data, 'user' => $user]); ?>
+    <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
   </div>
 </main>
 <aside>
