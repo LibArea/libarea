@@ -38,7 +38,7 @@ class ProfileController extends MainController
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/profile/index',
             [
                 'meta'  => self::metadata($sheet, $profile),
@@ -70,7 +70,7 @@ class ProfileController extends MainController
         $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $profile['id']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $profile['id']);
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/profile/post',
             [
                 'meta'  => self::metadata($sheet . '.all', $profile),
@@ -100,7 +100,7 @@ class ProfileController extends MainController
         $answers    = AnswerModel::userAnswers($pageNumber, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = AnswerModel::userAnswersCount($profile['id']);
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/profile/answer',
             [
                 'meta'  => self::metadata($sheet, $profile),
@@ -131,7 +131,7 @@ class ProfileController extends MainController
         $comments   = CommentModel::userComments($pageNumber, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = CommentModel::userCommentsCount($profile['id']);
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/profile/comment',
             [
                 'meta'  => self::metadata($sheet, $profile),

@@ -55,7 +55,7 @@ class MessagesController extends MainController
             }
         }
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/messages/messages',
             [
                 'meta'  => Meta::get(__('private.messages')),
@@ -108,7 +108,7 @@ class MessagesController extends MainController
             }
         }
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/messages/dialog',
             [
                 'meta'  => Meta::get(__('dialogue')),
@@ -139,7 +139,7 @@ class MessagesController extends MainController
             redirect('/');
         }
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/messages/user-add-messages',
             [
                 'meta'  => Meta::get(__('send.message')),

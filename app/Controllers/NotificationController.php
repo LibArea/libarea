@@ -18,7 +18,7 @@ class NotificationController extends MainController
 
     public function index()
     {
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/notification/index',
             [
                 'meta'  => Meta::get(__('notifications')),

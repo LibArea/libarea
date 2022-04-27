@@ -15,7 +15,7 @@
       </fieldset>
       <fieldset>
         <label for="name"><?= __('description'); ?></label>
-        <?= Tpl::insert('/_block/editor/editor', ['height'  => '250px', 'type' => 'content', 'id' => 0]); ?>
+        <?= Tpl::insert('/_block/form/editor', ['height'  => '250px', 'type' => 'content', 'id' => 0]); ?>
       </fieldset>
       <p><?= Html::sumbit(__('add')); ?></p>
     </form>

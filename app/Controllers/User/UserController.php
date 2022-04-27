@@ -34,7 +34,7 @@ class UserController extends MainController
             'url'   => getUrlByName($sheet),
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/all',
             [
                 'meta'  => Meta::get(__($type . 's'), __($sheet . '.desc'), $m),
@@ -65,7 +65,7 @@ class UserController extends MainController
             $result[$ind]   = $row;
         }
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/favorite/all',
             [
                 'meta'  => Meta::get(__('favorites')),
@@ -89,7 +89,7 @@ class UserController extends MainController
 
         $folders = FolderModel::get('favorite', $this->user['id']);
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/favorite/folders',
             [
                 'meta'  => Meta::get(__('folders')),
@@ -105,7 +105,7 @@ class UserController extends MainController
 
     public function foldersFavorite()
     {
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/favorite/all',
             [
                 'meta'  => Meta::get(__('favorites')),
@@ -122,7 +122,7 @@ class UserController extends MainController
     // Страница черновиков участника
     function drafts()
     {
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/draft',
             [
                 'meta'  => Meta::get(__('drafts')),
@@ -139,7 +139,7 @@ class UserController extends MainController
     // Страница предпочтений пользователя
     public function subscribed()
     {
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/favorite/subscribed',
             [
                 'meta'  => Meta::get(__('subscribed')),
@@ -161,7 +161,7 @@ class UserController extends MainController
         $post       = PostModel::getPost($user['my_post'], 'id', $this->user);
         $badges     = BadgeModel::getBadgeUserAll($user_id);
 
-        Tpl::agIncludeTemplate(
+        Tpl::insert(
             '/content/user/card',
             [
                 'user'      => $user,

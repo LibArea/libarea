@@ -23,7 +23,7 @@
         <div class="help">0 - 11 <?= __('characters'); ?></div>
       </fieldset>
 
-      <?php Tpl::insert('/_block/editor/textarea', [
+      <?php Tpl::insert('/_block/form/textarea', [
         'title'     => __('about.me'),
         'type'      => 'text',
         'name'      => 'about',

@@ -16,7 +16,7 @@ class RecoverController extends MainController
             'url'   => getUrlByName('recover'),
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/auth/recover',
             [
                 'meta'  => Meta::get(__('password.recovery'), __('recover.info'), $m),
@@ -80,7 +80,7 @@ class RecoverController extends MainController
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
         Html::pageError404($user);
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/auth/newrecover',
             [
                 'meta'  => Meta::get(__('password recovery'), __('recover.info')),

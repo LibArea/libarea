@@ -1,6 +1,6 @@
 <main class="col-two">
   <div class="bg-violet">
-     <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
+     <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data]); ?>
   </div>
   <?php if (!empty($data['tags'])) : ?>
     <div class="mb15">

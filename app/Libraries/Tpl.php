@@ -4,7 +4,7 @@ use Hleb\Constructor\Handlers\Request;
 
 class Tpl
 {
-    public static function agTheme($file)
+    public static function LaTheme($file)
     {
         $tpl_puth = UserData::getUserTheme() . DIRECTORY_SEPARATOR . $file;
 
@@ -15,7 +15,7 @@ class Tpl
         return $tpl_puth;
     }
 
-    public static function agRender($name, $data = [])
+    public static function LaRender($name, $data = [])
     {
         if (Config::get('general.site_disabled')  && !UserData::checkAdmin()) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
@@ -24,22 +24,17 @@ class Tpl
 
         return render(
             [
-                self::agTheme('/header'),
-                self::agTheme('/content' . $name),
-                self::agTheme('/footer')
+                self::LaTheme('/header'),
+                self::LaTheme('/content' . $name),
+                self::LaTheme('/footer')
             ],
             $data
         );
     }
 
-    public static function agIncludeCachedTemplate(string $template, array $params = [])
+    public static function LaIncludeCachedTemplate(string $template, array $params = [])
     {
-        hleb_include_cached_template(self::agTheme($template), $params);
-    }
-
-    public static function agIncludeTemplate(string $template, array $params = [])
-    {
-        return hleb_include_template(self::agTheme($template), $params);
+        hleb_include_cached_template(self::LaTheme($template), $params);
     }
 
     public static function insert(string $hlTemplatePath, array $params = [])

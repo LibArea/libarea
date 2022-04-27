@@ -70,7 +70,7 @@ $item = $data['item'];
         <form class="max-w780" action="<?= url('reply.create'); ?>" accept-charset="UTF-8" method="post">
           <?= csrf_field() ?>
 
-          <?php Tpl::insert('/_block/editor/textarea', [
+          <?php Tpl::insert('/_block/form/textarea', [
             'title'     => __('reply'),
             'type'      => 'text',
             'name'      => 'content',

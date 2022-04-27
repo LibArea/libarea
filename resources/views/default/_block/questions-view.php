@@ -136,7 +136,7 @@
 
       <form class="mb15" action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
-        <?= Tpl::insert('/_block/editor/editor', [
+        <?= Tpl::insert('/_block/form/editor', [
           'height'  => '250px',
           'id'      => $post['post_id'],
           'type'    => 'answer',

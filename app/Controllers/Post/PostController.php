@@ -116,7 +116,7 @@ class PostController extends MainController
         ];
 
         if ($type == 'post') {
-            return Tpl::agRender(
+            return Tpl::LaRender(
                 '/post/view',
                 [
                     'meta'  => Meta::get(strip_tags($content['post_title']), $description, $m),
@@ -146,7 +146,7 @@ class PostController extends MainController
         ];
 
         $title = $content['post_title'] . ' - ' . __('page');
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/post/page-view',
             [
                 'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . __('page') . ')', $m),
@@ -219,7 +219,7 @@ class PostController extends MainController
 
         $post['post_content'] = Content::text($post['post_content'], 'text');
 
-        Tpl::agIncludeTemplate('/content/post/postcode', ['post' => $post, 'user'   => $this->user]);
+        Tpl::insert('/content/post/postcode', ['post' => $post, 'user'   => $this->user]);
     }
 
     // Posts by domain
@@ -242,7 +242,7 @@ class PostController extends MainController
             'url'   => getUrlByName('domain', ['domain' => $domain]),
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/post/link',
             [
                 'meta'  => Meta::get(__('domain') . ': ' . $domain, __('domain.desc') . ': ' . $domain, $m),

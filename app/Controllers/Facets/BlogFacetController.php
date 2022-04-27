@@ -47,7 +47,7 @@ class BlogFacetController extends MainController
             'url'       => $url,
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/facets/blog',
             [
                 'meta'  => Meta::get($title, $description, $m),

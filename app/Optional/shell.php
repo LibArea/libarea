@@ -8,4 +8,4 @@ declare(strict_types=1);
  * Глобальные «вспомогательные» функции.
  */
 
-hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Helpers.php');
+hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/helpers.php');

@@ -52,7 +52,7 @@ class TopicFacetController extends MainController
             'url'        => $url,
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/facets/topic',
             [
                 'meta'  => Meta::get($title, $description, $m),
@@ -92,7 +92,7 @@ class TopicFacetController extends MainController
             'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/facets/info',
             [
                 'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('info'), $facet['facet_description'], $m),
@@ -127,7 +127,7 @@ class TopicFacetController extends MainController
             'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/facets/writers',
             [
                 'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('info'), $facet['facet_description'], $m),
@@ -155,6 +155,6 @@ class TopicFacetController extends MainController
 
         $users      = FacetModel::getFocusUsers($topic_id, 15);
 
-        return Tpl::agIncludeTemplate('/content/facets/followers', ['users' => $users]);
+        return Tpl::insert('/content/facets/followers', ['users' => $users]);
     }
 }

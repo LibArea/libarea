@@ -30,7 +30,7 @@ class RegisterController extends MainController
             'url'   => getUrlByName('register'),
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/auth/register',
             [
                 'meta'  => Meta::get(__('registration'), __('security.info'), $m),
@@ -172,7 +172,7 @@ class RegisterController extends MainController
             Validation::ComeBack('code.incorrect', 'error', '/');
         }
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/auth/register-invate',
             [
                 'meta'  => Meta::get(__('registration.invite')),

@@ -42,7 +42,7 @@ class AddPostController extends MainController
 
         $puth = $type == 'page' ? '/page/add' : '/post/add';
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             $puth,
             [
                 'meta'      => Meta::get(__('add.option', ['name' => __('post')])),

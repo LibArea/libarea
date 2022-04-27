@@ -31,7 +31,7 @@ class AllFacetController extends MainController
             'url'   => getUrlByName($sheet),
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/facets/all',
             [
                 'meta'  => Meta::get(__($sheet), __($sheet . '.desc'), $m),

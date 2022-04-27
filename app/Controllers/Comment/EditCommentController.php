@@ -26,7 +26,7 @@ class EditCommentController extends MainController
         $comment    = CommentModel::getCommentsId($comment_id);
         if (!Html::accessСheck($comment, 'comment', 0, 0)) return false;
 
-        Tpl::agIncludeTemplate(
+        Tpl::insert(
             '/_block/form/edit-form-comment',
             [
                 'data'  => [

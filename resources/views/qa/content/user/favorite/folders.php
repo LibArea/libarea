@@ -1,5 +1,7 @@
 <main class="col-two">
-  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
+  <div class="bg-violet">
+    <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data]); ?>
+  </div>
   <div class="box">
     <h3 class="uppercase-box"><?= __('folders.s'); ?>: <?= $data['count']; ?></h3>
     
@@ -8,7 +10,7 @@
   </div>
 </main>
 <aside>
-  <div class="box text-sm sticky top-sm">
+  <div class="box bg-violet text-sm sticky top-sm">
     <?= __('favorite.info'); ?>...
   </div>
 </aside>

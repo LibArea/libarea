@@ -40,7 +40,7 @@ class EditPostController extends MainController
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/post/edit',
             [
                 'meta'  => Meta::get(__('edit.option', ['name' => __('post')])),

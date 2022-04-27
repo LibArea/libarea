@@ -14,7 +14,7 @@
         <div class="help">6 - 250 <?= __('characters'); ?></div>
       </fieldset>
 
-      <?php Tpl::insert('/_block/editor/textarea', [
+      <?php Tpl::insert('/_block/form/textarea', [
         'title'     => __('description'),
         'type'      => 'text',
         'name'      => 'content',

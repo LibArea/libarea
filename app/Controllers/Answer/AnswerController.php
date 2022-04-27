@@ -31,7 +31,7 @@ class AnswerController extends MainController
             'url'   => getUrlByName('answers'),
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/answer/answers',
             [
                 'meta'  => Meta::get(__('all.answers'), __('answers.desc'), $m),

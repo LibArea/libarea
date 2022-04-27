@@ -85,7 +85,7 @@
         </div>
       <?php endif; ?>
 
-      <?= Tpl::insert('/_block/editor/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
+      <?= Tpl::insert('/_block/form/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
       <?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
         <?php if ($post['post_draft'] == 1) : ?>

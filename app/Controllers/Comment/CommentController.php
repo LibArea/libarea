@@ -30,7 +30,7 @@ class CommentController extends MainController
             'url'   => getUrlByName('comments'),
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/comment/comments',
             [
                 'meta'  => Meta::get(__('all.comments'), __('comments.desc'), $m),

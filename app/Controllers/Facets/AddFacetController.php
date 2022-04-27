@@ -21,7 +21,7 @@ class AddFacetController extends MainController
     {
         self::limitFacer($type, 'redirect');
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/facets/add',
             [
                 'meta'  => Meta::get(sprintf(__('add.option'), __('topics'))),

@@ -33,7 +33,7 @@ class EditFacetController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/facets/edit',
             [
                 'meta'  => Meta::get(__('edit') . ' | ' . $facet['facet_title']),
@@ -183,7 +183,7 @@ class EditFacetController extends MainController
             redirect('/');
         }
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/facets/edit-pages',
             [
                 'meta'  => Meta::get(__('edit') . ' | ' . $facet['facet_title']),

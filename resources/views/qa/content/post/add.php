@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <?= Tpl::insert('/_block/editor/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
+      <?= Tpl::insert('/_block/form/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
 
       <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL))) : ?>
         <?= Tpl::insert('/_block/form/radio',  [

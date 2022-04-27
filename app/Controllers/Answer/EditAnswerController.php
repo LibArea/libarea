@@ -31,8 +31,8 @@ class EditAnswerController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
         Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
 
-        return Tpl::agRender(
-            '/answer/edit-form-answer',
+        return Tpl::LaRender(
+            '/answer/edit-answer',
             [
                 'meta'  => Meta::get(__('edit.answer')),
                 'data'  => [

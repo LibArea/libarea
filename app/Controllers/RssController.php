@@ -18,7 +18,7 @@ class RssController extends MainController
             'posts'     => RssModel::getPostsSitemap(),
         ];
 
-        Tpl::agIncludeCachedTemplate('/content/rss/sitemap', ['data' => $data]);
+        Tpl::LaIncludeCachedTemplate('/content/rss/sitemap', ['data' => $data]);
     }
 
     // Route::get('/turbo-feed/topic/{slug}')
@@ -41,7 +41,7 @@ class RssController extends MainController
             'posts' => $result,
         ];
 
-        Tpl::agIncludeCachedTemplate(
+        Tpl::LaIncludeCachedTemplate(
             '/content/rss/turbo-feed',
             [
                 'data' => $data,
@@ -65,7 +65,7 @@ class RssController extends MainController
             $result[$ind]         = $row;
         }
 
-        Tpl::agIncludeCachedTemplate(
+        Tpl::LaIncludeCachedTemplate(
             '/content/rss/rss-feed',
             [
                 'data'  => [

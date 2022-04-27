@@ -19,7 +19,7 @@ class InvitationsController extends MainController
     // Показ формы создания инвайта
     public function inviteForm()
     {
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/invite',
             [
                 'meta'  => Meta::get(__('invite')),
@@ -34,7 +34,7 @@ class InvitationsController extends MainController
     // Страница инвайтов пользователя
     function invitationForm()
     {
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/invitation',
             [
                 'meta'  => Meta::get(__('invites')),

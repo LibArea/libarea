@@ -45,7 +45,7 @@ class HomeController extends MainController
             'url'       => $sheet == 'top' ? '/top' : '/',
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/home',
             [
                 'meta'  => Meta::get($title, $description, $m),
@@ -71,7 +71,7 @@ class HomeController extends MainController
         $topics_user    = HomeModel::subscription($this->user['id']);
         $posts          = HomeModel::feed($pageNumber, $this->limit, $topics_user, $this->user, 'main.feed');
 
-        Tpl::agIncludeTemplate(
+        Tpl::insert(
             '/content/post/postscroll',
             [
                 'user'  => $this->user,

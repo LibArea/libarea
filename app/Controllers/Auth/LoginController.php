@@ -61,7 +61,7 @@ class LoginController extends MainController
             'url'   => getUrlByName('login'),
         ];
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/auth/login',
             [
                 'meta'  => Meta::get(__('sign.in'), __('login.info'), $m),

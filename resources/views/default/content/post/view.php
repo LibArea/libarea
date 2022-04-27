@@ -192,7 +192,7 @@
           <form action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
 
-            <?= Tpl::insert('/_block/editor/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
+            <?= Tpl::insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
 
             <div class="clear pt5">
               <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">

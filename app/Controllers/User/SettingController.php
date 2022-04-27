@@ -40,7 +40,7 @@ class SettingController extends MainController
     {
         $user   = UserModel::getUser($this->user['login'], 'slug');
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/setting/setting',
             [
                 'meta'  => Meta::get(__('setting')),
@@ -105,7 +105,7 @@ class SettingController extends MainController
     {
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
 
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/setting/avatar',
             [
                 'meta'  => Meta::get(__('edit')),
@@ -139,7 +139,7 @@ class SettingController extends MainController
     // Форма изменение пароля
     function securityForm()
     {
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/setting/security',
             [
                 'meta'  => Meta::get(sprintf(__('edit.option'), __('password'))),
@@ -220,7 +220,7 @@ class SettingController extends MainController
     // Форма настройки предпочтений участника
     function notificationForm()
     {
-        return Tpl::agRender(
+        return Tpl::LaRender(
             '/user/setting/notifications',
             [
                 'meta'  => Meta::get(__('notifications')),

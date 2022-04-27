@@ -20,7 +20,7 @@ class AddCommentController extends MainController
     // Покажем форму добавление комментария
     public function index()
     {
-        Tpl::agIncludeTemplate(
+        Tpl::insert(
             '/_block/form/add-form-comment',
             [
                 'data'  => [
