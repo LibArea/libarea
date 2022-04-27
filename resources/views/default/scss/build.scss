@@ -1,0 +1,21 @@
+/*
+ * List of resources to build
+ *
+ * Перечень ресурсов для сборки
+ */
+ 
+/* Resources used for LibArea design */
+@import "./components/components.scss";
+@import "./components/menu.scss";
+@import "./components/basic.scss";
+@import "./components/images.scss";
+@import "./components/inputs.scss";
+@import "./components/table.scss";
+@import "./components/button.scss";
+@import "./components/tags.scss";
+@import "./components/modal.scss";
+
+@import "./components/media.scss";
+@import "./components/icons.scss";
+
+@import "custom.scss";
