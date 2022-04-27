@@ -1,0 +1,51 @@
+/*
+ * Additional styles
+ *
+ * Дополнительные стили
+ */
+ 
+body {
+  max-width: 900px;
+  padding-bottom: 2em;
+  background-color: var(--color-bg);
+  margin: 0 auto;
+} 
+ 
+ a { color: #1c59d1; }
+ 
+.text-header {
+  top: 0;
+  z-index: 50;
+  position: sticky;
+  background-color: var(--white);
+  backface-visibility: hidden;
+  height: 3.5em;
+  margin-bottom: 15px;
+}
+
+.ava-sm-min {
+   height: 16px;
+   width: 16px;
+   margin-right: 4px;
+   border-radius: 50%;
+}
+
+.mt3 { margin-top: 3px; }
+.bi-arrow-up-short::before { content: "\f145"; }
+
+.test-tag {
+  background-color: #fffcd7;
+  border: 1px solid #d5d458;
+  border-radius: 5px;
+  color: #333333;
+  font-size: 8pt;
+  margin-left: 0.25em;
+  padding: 0px 0.4em 1px 0.4em;
+  text-decoration: none;
+}
+
+.test-blog {
+  background-color: #ddebf9;
+  border-color: #b2ccf0;
+  color: #333333;
+}

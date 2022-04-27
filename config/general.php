@@ -21,7 +21,7 @@ return [
     
     // Какие шаблоны доступны для выбора участникам
     // Which templates are available for users to choose from
-    'templates'         => ['default', 'qa'],
+    'templates'         => ['default', 'qa', 'test'],
 
     // Локализация по умолчанию (+ какие языки есть в системе)
     // Default localization (+ languages represented)

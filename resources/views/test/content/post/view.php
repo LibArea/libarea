@@ -1,13 +1,5 @@
 <?php $post = $data['post']; ?>
-<div class="w110 mb-none center">
-  <div class="sticky top-xl">
-    <?= Html::votes($post, 'post', 'ps', 'bi-heart text-2xl middle mt15', 'block'); ?>
-    <div class="pt20">
-      <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl'); ?>
-    </div>
-  </div>
-</div>
-<main>
+<main class="w-100">
   <article class="post-full box<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
       <div class="post-body">
@@ -108,8 +100,8 @@
       </div>
 
       <div class="br-gray flex items-center mb5">
-        <div class="left p10 none mb-block">
-          <?= Html::votes($post, 'post', 'mob', 'bi-heart text-2xl mr5 middle'); ?>
+        <div class="left p10 block">
+          <?= Html::votes($post, 'post', 'ps', 'bi-arrow-up-short text-2xl mr5 middle'); ?>
         </div>
 
         <ul class="list-none w-100 lowercase">
@@ -227,64 +219,6 @@
     echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('this.draft'), 'icon' => 'bi-door-closed']);
   endif; ?>
 </main>
-<aside>
-  <?php if (!empty($data['facets'])) : ?>
-    <div class="box">
-      <h3 class="uppercase-box"><?= __('topics'); ?></h3>
-      <?php foreach ($data['facets'] as $topic) : ?>
-        <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
-
-        <?php if (!$topic['signed_facet_id'] && UserData::getUserId()) : ?>
-          <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm sky center mt5 mr5">
-            <i class="bi-plus"></i> <?= __('read'); ?>
-          </div>
-        <?php endif; ?>
-
-        <a title="<?= $topic['facet_title']; ?>" class="black inline text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-          <?= $topic['facet_title']; ?>
-        </a>
-
-        <div class="text-sm mt5 pr15 mb-pr0 gray-600">
-          <?= $topic['facet_short_description']; ?>
-        </div>
-      <?php endforeach; ?>
-    </div>
-  <?php endif; ?>
-
-  <?php if ($post['post_content_img']) : ?>
-    <div class="box">
-      <img class="preview w-100 br-rd5" src="<?= PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
-    </div>
-  <?php endif; ?>
-  <div class="center box">
-    <?= Tpl::insert('/share'); ?>
-  </div>
-  <?php if ($data['recommend']) : ?>
-    <div class="box sticky top-sm">
-      <h3 class="uppercase-box"><?= __('recommended'); ?></h3>
-      <?php foreach ($data['recommend'] as  $rec_post) : ?>
-        <div class="mb15 hidden flex text-sm">
-          <?php if ($rec_post['post_type'] == 'post') : ?>
-            <a class="gray" href="<?= url('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
-              <?php if ($rec_post['post_answers_count'] > 0) : ?>
-                <div class="p5 pr10 pb5 pl10 bg-green br-rd3 white center mr15">
-                  <?= $rec_post['post_answers_count'] ?>
-                </div>
-              <?php else : ?>
-                <div class="p5 pr10 pb5 pl10 bg-lightgray br-rd3 gray center mr15">0</div>
-              <?php endif; ?>
-            </a>
-          <?php else : ?>
-            <i class="bi-intersect gray-600 middle mr15 text-2xl"></i>
-          <?php endif; ?>
-          <a class="black" href="<?= url('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
-            <?= $rec_post['post_title']; ?>
-          </a>
-        </div>
-      <?php endforeach; ?>
-    </div>
-  <?php endif; ?>
-</aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
     mediumZoom(document.querySelectorAll('.post-body.full .post img:not(.emoji), img.preview, .content-body p img:not(.emoji)'))

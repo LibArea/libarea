@@ -28,7 +28,7 @@
                 </DIV>
               </div>
               <div class="flex text-sm">
-                <?= Html::votes($answer, 'answer', 'ps', 'mr5'); ?>
+                <?= Html::votes($answer, 'answer', 'ps', 'bi-heart mr5'); ?>
  
                 <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                   <?php if ($post['post_closed'] == 0) : ?>

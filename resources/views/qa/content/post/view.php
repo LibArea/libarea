@@ -1,7 +1,7 @@
 <?php $post = $data['post']; ?>
 <div class="w110 mb-none center">
   <div class="sticky top-xl">
-    <?= Html::votes($post, 'post', 'ps', 'text-2xl middle mt15', 'block'); ?>
+    <?= Html::votes($post, 'post', 'ps', 'bi-heart text-2xl middle mt15', 'block'); ?>
     <div class="pt20">
       <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl'); ?>
     </div>
@@ -109,7 +109,7 @@
 
       <div class="br-gray flex items-center mb5">
         <div class="left p10 none mb-block">
-          <?= Html::votes($post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
+          <?= Html::votes($post, 'post', 'mob', 'bi-heart text-2xl mr5 middle'); ?>
         </div>
 
         <ul class="list-none w-100 lowercase">

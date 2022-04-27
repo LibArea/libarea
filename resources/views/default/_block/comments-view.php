@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="flex text-sm">
-                <?= Html::votes($answer, 'answer', 'ps', 'mr5'); ?>
+                <?= Html::votes($answer, 'answer', 'ps', 'bi-heart mr5'); ?>
 
                 <?php if ($post['post_closed'] == 0) : ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
@@ -150,7 +150,7 @@
                 <?= Content::text($comment['comment_content'], 'text'); ?>
               </div>
               <div class="text-sm flex">
-                <?= Html::votes($comment, 'comment', 'ps', 'mr5'); ?>
+                <?= Html::votes($comment, 'comment', 'ps', 'bi-heart mr5'); ?>
 
                 <?php if ($post['post_closed'] == 0) : ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>

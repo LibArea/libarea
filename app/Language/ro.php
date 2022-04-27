@@ -4,6 +4,7 @@ $data = [
     'to.the.website'    => 'Pe site',
     'catalog'           => 'Catalog',
     'feed'              => 'Panglică',
+    'test'              => 'Testare',
     'top'               => 'TOP',
     'well'              => 'Ei bine',
     'news'              => 'Știri',

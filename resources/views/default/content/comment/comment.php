@@ -45,7 +45,7 @@ foreach ($answer as  $comment) :
           </div>
         </div>
         <div class="text-sm flex">
-          <?= Html::votes($comment, 'comment', 'ps', 'mr5'); ?>
+          <?= Html::votes($comment, 'comment', 'ps', 'bi-heart mr5'); ?>
 
           <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 mr10 ml10">

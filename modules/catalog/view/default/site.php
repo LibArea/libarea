@@ -47,7 +47,7 @@
             </div>
             <div class="flex right gray-600">
               <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'mr20'); ?>
-              <?= Html::votes($item, 'item', 'ps', 'mr5'); ?>
+              <?= Html::votes($item, 'item', 'ps', 'bi-heart mr5'); ?>
             </div>
           </div>
         </div>

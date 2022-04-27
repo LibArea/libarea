@@ -4,6 +4,7 @@ $data = [
     'to.the.website'    => '到网站',
     'catalog'           => '目錄',
     'feed'              => '饲料',
+    'test'              => '測試',
     'hi'                => '你好',
     'news'              => '新闻',
     'team'              => '團隊',

@@ -27,7 +27,7 @@
             }
 
             echo '<div class="max-w780 text-base ind-first-p">' . Content::text($node['content'], 'text') . '</div>
-                    <div class="flex">' . Html::votes($node, 'reply', 'ps', 'mr5');
+                    <div class="flex">' . Html::votes($node, 'reply', 'ps', 'bi-heart mr5');
             
             if ($tl >= config('trust-levels.tl_add_reply')) { 
                echo '<a data-item_id="' . $node['reply_item_id'] . '" data-type="addform" data-id="' . $node['reply_id'] . '" class="actreply gray-600 mr15 ml10">' . __('reply') . '</a>';

@@ -118,7 +118,7 @@ class Html
     }
 
     // Voting for posts, replies, comments and sites
-    public static function votes($content, $type, $ind, $css = '', $block = '')
+    public static function votes($content, $type, $ind, $css = 'bi-heart', $block = '')
     {
         $html  = '';
         $count = '';
@@ -129,21 +129,21 @@ class Html
         if (UserData::getAccount()) {
             if ($content['votes_' . $type . '_user_id'] || UserData::getUserId() == $content[$type . '_user_id']) {
                 $html .= '<div class="voters sky flex ' . $block . ' center">
-                            <div class="up-id bi-heart ' . $css . '"></div>
+                            <div class="up-id ' . $css . '"></div>
                             <div class="score">
                                 ' . $count . '
                             </div></div>';
             } else {
                 $num_count = empty($count) ? 0 : $count;
                 $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . '  flex ' . $block . ' center gray-600">
-                            <div data-ind="' . $ind . '" data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi-heart ' . $css . '"></div>
+                            <div data-ind="' . $ind . '" data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id ' . $css . '"></div>
                             <div class="score">
                                 ' . $count . '
                             </div></div>';
             }
         } else {
             $html .= '<div class="voters flex ' . $block . ' center gray-600">
-                        <div class="up-id bi-heart ' . $css . ' click-no-auth"></div>
+                        <div class="up-id ' . $css . ' click-no-auth"></div>
                         <div class="score">
                              ' . $count . '                
                         </div></div>';

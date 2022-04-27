@@ -5,6 +5,7 @@ $data = [
     'to.the.website'    => 'Zur Webseite',
     'catalog'           => 'Katalog',
     'feed'              => 'Futter',
+    'test'              => 'Testen',
     'hi'                => 'Hallo',
     'news'              => 'Nachrichten',
     'team'              => 'Team',

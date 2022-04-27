@@ -65,7 +65,7 @@
       </div>
       <div class="flex flex-row items-center justify-between pt10">
         <div class="flex flex-row">
-          <?= Html::votes($post, 'post', 'ps', 'mr5'); ?>
+          <?= Html::votes($post, 'post', 'ps', 'bi-heart mr5'); ?>
           <?php if ($post['post_answers_count'] != 0) : ?>
             <a class="flex gray-600 ml15" href="<?= $post_url; ?>#comment">
               <i class="bi-chat-text mr5"></i>
