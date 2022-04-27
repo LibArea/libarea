@@ -8,7 +8,7 @@ declare(strict_types=1);
  * Глобальные «вспомогательные» функции.
  */
 
-if (! function_exists('__')) 
+if (! function_exists('__'))
 {
     // @param  string|null $key
     function __(string $key = null, array $params = []) {

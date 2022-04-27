@@ -1,8 +1,8 @@
 <main class="col-two">
   <div class="box">
     <h1 class="mt0 mb10 text-2xl font-normal">
-      <?= __('send.message'); ?>  <?= $user['login']; ?> / <?= $data['login']; ?>
-      <a class="right text-sm" href="<?= url('send.messages', ['login' => $user['login']]); ?>">
+      <?= __('send.message'); ?> <?= UserData::getUserLogin(); ?> / <?= $data['login']; ?>
+      <a class="right text-sm" href="<?= url('send.messages', ['login' => UserData::getUserLogin()]); ?>">
         <?= __('all.messages'); ?>
       </a>
     </h1>
