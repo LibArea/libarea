@@ -1,4 +1,4 @@
-<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
+<?= includeTemplate('/view/default/header', ['data' => $data, 'meta' => $meta]);
 $domain = $data['domain'];
 $form = new Forms();
 
@@ -56,7 +56,6 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
         
          <?php if (UserData::checkAdmin()) { ?>
             <?= Tpl::insert('/_block/form/select/user', [
-              'uid'           => $user,
               'user'          => $data['user'],
               'action'        => 'user',
               'type'          => 'user',
@@ -78,4 +77,4 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
       <div>
   </aside>
 </div>
-<?= includeTemplate('/view/default/footer', ['user' => $user]); ?>
+<?= includeTemplate('/view/default/footer'); ?>

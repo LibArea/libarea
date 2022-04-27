@@ -4,7 +4,6 @@ namespace Modules\Search\App;
 
 use Modules\Search\App\Query\QueryBuilder;
 use Modules\Search\App\Services\Index;
-use Config;
 
 class Engine
 {

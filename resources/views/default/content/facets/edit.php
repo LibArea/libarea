@@ -186,7 +186,6 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
     <?php if (UserData::checkAdmin()) : ?>
       <?= Tpl::insert('/_block/form/select/content-tl', ['data' => $fs['facet_tl']]); ?>
       <?= Tpl::insert('/_block/form/select/user', [
-        'uid'     => $user,
         'user'    => $data['user'],
         'action'  => 'user',
         'type'    => 'user',

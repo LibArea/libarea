@@ -51,7 +51,7 @@ $q = $data['q'];
             <?php else : ?>
               <div class="mr15 m relative">
                 <div class="trigger">
-                  <?= $user['login']; ?>
+                  <?= UserData::getUserLogin(); ?>
                 </div>
                 <ul class="dropdown">
                   <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>

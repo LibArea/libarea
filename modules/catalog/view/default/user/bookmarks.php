@@ -1,4 +1,4 @@
-<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+<?= includeTemplate('/view/default/header', ['data' => $data, 'meta' => $meta]); ?>
 <div id="contentWrapper">
   <main>
     <h2 class="mb20">
@@ -27,4 +27,4 @@
     <?php endif; ?>
   </aside>
 </div>
-<?= includeTemplate('/view/default/footer', ['user' => $user]); ?>
+<?= includeTemplate('/view/default/footer'); ?>

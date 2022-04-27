@@ -1,4 +1,4 @@
-<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
+<?= includeTemplate('/view/default/header', ['data' => $data, 'meta' => $meta]);
 $item = $data['item'];
 ?>
 <div id="contentWrapper">

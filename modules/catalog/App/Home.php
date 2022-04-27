@@ -3,7 +3,7 @@
 namespace Modules\Catalog\App;
 
 use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
-use Config, UserData, Meta;
+use UserData, Meta;
 
 class Home
 {
@@ -30,7 +30,6 @@ class Home
             '/view/default/home',
             [
                 'meta'  => Meta::get(__($sheet . '.home.title'), __($sheet . '.home.desc'), $m),
-                'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'all',
                     'items'             => WebModel::getItemsAll(1, $this->limit, $this->user, $sheet),

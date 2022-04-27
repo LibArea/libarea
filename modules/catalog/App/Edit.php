@@ -42,7 +42,6 @@ class Edit
             '/view/default/edit',
             [
                 'meta'  => Meta::get(__('site.edit')),
-                'user'  => $this->user,
                 'data'  => [
                     'domain'        => $domain,
                     'sheet'         => 'domains',

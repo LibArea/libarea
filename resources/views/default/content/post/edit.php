@@ -145,7 +145,6 @@
 
       <?php if (UserData::checkAdmin()) : ?>
         <?= Tpl::insert('/_block/form/select/user', [
-          'uid'           => $user,
           'user'          => $data['user'],
           'action'        => 'user',
           'type'          => 'user',

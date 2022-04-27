@@ -1,4 +1,4 @@
-<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+<?= includeTemplate('/view/default/header', ['data' => $data, 'meta' => $meta]); ?>
 
 <?php if (!UserData::checkActiveUser()) : ?>
   <div class="mb-none">
@@ -50,4 +50,4 @@
     <?php endif; ?>
   </aside>
 </div>
-<?= includeTemplate('/view/default/footer', ['user' => $user]); ?>
+<?= includeTemplate('/view/default/footer'); ?>

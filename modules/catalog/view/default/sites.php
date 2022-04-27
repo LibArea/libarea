@@ -1,4 +1,4 @@
-<?= includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+<?= includeTemplate('/view/default/header', ['data' => $data, 'meta' => $meta]); ?>
 <div class="item-cat">
   <?= Tpl::insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]); ?>
 
@@ -55,7 +55,7 @@
     <?= includeTemplate('/view/default/_block/nav', ['data' => $data]); ?>
 
     <?php if (!empty($data['items'])) : ?>
-      <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
+      <?= includeTemplate('/view/default/site', ['data' => $data, 'screening' => $data['screening']]); ?>
     <?php else : ?>
       <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
@@ -75,4 +75,4 @@
     <?php endif; ?>
   </aside>
 </div>
-<?= includeTemplate('/view/default/footer', ['user' => $user]); ?>
+<?= includeTemplate('/view/default/footer'); ?>

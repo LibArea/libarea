@@ -53,7 +53,6 @@ class Catalog
             '/view/default/sites',
             [
                 'meta'  => Meta::get($title, $description, $m),
-                'user'  => $this->user,
                 'data'  => [
                     'screening'         => $screening,
                     'sheet'             => $sheet,

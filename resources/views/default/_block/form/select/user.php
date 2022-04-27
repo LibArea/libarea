@@ -1,4 +1,4 @@
-<?php if ($uid['trust_level'] > 4) { ?>
+<?php if (UserData::checkAdmin()) { ?>
   <fieldset>
     <label><?= __('author'); ?></label>
     <input name='user_id' id="user_id">

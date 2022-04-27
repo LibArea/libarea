@@ -3,7 +3,6 @@
 namespace Modules\Admin\App\Search;
 
 use Modules\Search\App\Services\Index;
-use Config;
 
 class Actions
 {

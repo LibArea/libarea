@@ -3,7 +3,7 @@
 namespace Modules\Catalog\App;
 
 use Modules\Catalog\App\Models\UserAreaModel;
-use Config, UserData, Meta, Tpl;
+use UserData, Meta, Tpl;
 
 class UserArea
 {

@@ -61,7 +61,6 @@ class Detailed
             '/view/default/website',
             [
                 'meta'  => Meta::get($title, $description, $m),
-                'user'  => $this->user,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => 'web',

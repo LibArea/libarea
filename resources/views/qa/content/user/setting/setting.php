@@ -7,7 +7,7 @@
 
       <?= Html::image($data['user']['avatar'], $data['user']['login'], 'mr5 ml5 ava', 'avatar', 'small'); ?>
       <span class="mr5 ml5">
-        <a title="<?= __('profile'); ?>" href="<?= url('profile', ['login' => $user['login']]); ?>">
+        <a title="<?= __('profile'); ?>" href="<?= url('profile', ['login' => UserData::getUserLogin()]]); ?>">
           <?= $data['user']['login']; ?>
         </a>
       </span>

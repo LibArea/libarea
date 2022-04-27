@@ -7,17 +7,14 @@ use Modules\Search\App\Models\SearchModel;
 use Modules\Search\App\Query\QueryBuilder;
 use Modules\Search\App\Query\QuerySegment;
 use Modules\Search\App\Engine;
-use UserData, Meta, Config;
+use UserData, Meta;
 
 class Search
 {
     protected $limit = 10;
 
-    private $user;
-
     public function __construct()
     {
-        $this->user  = UserData::get();
         $this->engine = new Engine();
     }
 
@@ -27,7 +24,6 @@ class Search
             '/view/default/home',
             [
                 'meta'  => Meta::get(__('search.title'), __('search.desc', ['name' => config('meta.name')])),
-                'user'  => $this->user,
                 'data'  => [
                     'type' => 'search',
 
@@ -98,7 +94,7 @@ class Search
                     'request'       => $q,
                     'action_type'   => $cat,
                     'add_ip'        => Request::getRemoteAddress(),
-                    'user_id'       => $this->user['id'],
+                    'user_id'       => UserData::getUserId(),
                     'count_results' => $count ?? 0,
                 ]
             );
@@ -110,7 +106,6 @@ class Search
             '/view/default/search',
             [
                 'meta'  => Meta::get(__('search')),
-                'user'  => $this->user,
                 'data'  => [
                     'results'       => $results ?? false,
                     'type'          => $cat,

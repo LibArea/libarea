@@ -26,6 +26,7 @@ class Translate
         static::checkLoaded();
 
         if (is_string($localeKey) && !empty(static::$loadedLocales[static::$currentLang][$localeKey])) {
+            
             $text = static::$loadedLocales[static::$currentLang][$localeKey];
 
             if (!empty($parameters) && is_array($parameters)) {

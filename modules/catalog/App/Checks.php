@@ -3,7 +3,7 @@
 namespace Modules\Catalog\App;
 
 use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
-use Domain, UserData, Config, Html;
+use Domain, UserData, Html;
 
 class Checks
 {

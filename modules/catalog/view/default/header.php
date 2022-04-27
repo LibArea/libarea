@@ -46,10 +46,10 @@ Request::getHead()->addStyles('/assets/css/catalog.css?12');
               </a>
               <div class="mr15 m relative">
                 <div class="trigger">
-                  <?= $user['login']; ?>
+                  <?= UserData::getUserLogin(); ?>
                 </div>
                 <ul class="dropdown">
-                  <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'user' => $user, 'list' => config('navigation/menu.user')]); ?>
+                  <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>
                 </ul>
               </div>
             <?php endif; ?>

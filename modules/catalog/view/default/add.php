@@ -1,5 +1,5 @@
 <?php
-echo includeTemplate('/view/default/header', ['data' => $data, 'user' => $user, 'meta' => $meta]);
+echo includeTemplate('/view/default/header', ['data' => $data, 'meta' => $meta]);
 $form = new Forms();
 $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
 ?>
@@ -39,4 +39,4 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
 <?php $url = UserData::checkAdmin() ? 'web' : 'web.user.sites'; ?>
 <?= includeTemplate('/view/default/_block/ajax', ['url' => 'web.create', 'redirect' => $url, 'id' => 'form#addUrl']); ?>
 
-<?= includeTemplate('/view/default/footer', ['user' => $user]); ?>
+<?= includeTemplate('/view/default/footer'); ?>
