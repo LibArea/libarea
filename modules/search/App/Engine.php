@@ -4,6 +4,7 @@ namespace Modules\Search\App;
 
 use Modules\Search\App\Query\QueryBuilder;
 use Modules\Search\App\Services\Index;
+use Config;
 
 class Engine
 {
@@ -24,7 +25,7 @@ class Engine
      */
     public function __construct($config = [])
     {
-        $defaultConfig = config('search/config');
+        $defaultConfig = Config::get('search/config');
         $this->config = array_replace_recursive($defaultConfig, $config);
         $this->index = new Index($this->config['config'], $this->config['schemas'], $this->config['types']);
     }

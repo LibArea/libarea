@@ -5,7 +5,7 @@
     <?php if (UserData::getUserId() == 0 && $n == 6) : ?>
       <?= Tpl::insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
-    <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
+    <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="flex br-bottom p10 article_<?= $post['post_id']; ?>">
       <div class="flex mb-inline mr15">
         <div class="box-answer block bg-lightgray gray mt5 br-rd3 lowercase mr15">
@@ -40,7 +40,7 @@
             <?= Html::facets($post['facet_list'], 'blog', 'blog', 'gray text-xs mr15'); ?>
             <?= Html::facets($post['facet_list'], 'topic', 'topic', 'tags-xs'); ?>
             <?php if ($post['post_url_domain']) : ?>
-              <a class="gray-600 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
+              <a class="gray-600 text-sm ml10" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
               </a>
             <?php endif; ?>
@@ -49,7 +49,7 @@
           <div class="gray-600 text-xs">
             <?= $post['post_date'] ?> ·
             <?= Html::numWord($post['post_hits_count'], __('num.view'), true); ?> ·
-            <a href="<?= getUrlByName('profile', ['login' => $post['login']]); ?>">
+            <a href="<?= url('profile', ['login' => $post['login']]); ?>">
               <?= $post['login']; ?>
             </a>
           </div>
