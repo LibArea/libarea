@@ -34,4 +34,4 @@
   </div>
 </main>
 
-<?= Tpl::insert('/footer', ['user' => $user]); ?>
+<?= Tpl::insert('/footer'); ?>

@@ -1,5 +1,5 @@
 <main>
-  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
+  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data]); ?>
 
   <?php if (!empty($data['tags'])) : ?>
     <div class="mb15">

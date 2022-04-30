@@ -88,7 +88,7 @@ $item = $data['item'];
     <?php if ($data['tree']) : ?>
       <h2 class="mt10"><?= __('answers'); ?></h2>
       <ul class="list-none mt20">
-        <?= includeTemplate('/view/default/replys', ['data' => $data, 'user' => $user]); ?>
+        <?= includeTemplate('/view/default/replys', ['data' => $data]); ?>
       </ul>
     <?php else : ?>
       <?php if ($item['item_close_replies'] == 0) : ?>

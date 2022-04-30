@@ -32,7 +32,7 @@
   <main class="col-two">
     <h2 class="inline"><?= __('web.view'); ?></h2>
     <?php if (!empty($data['items'])) : ?>
-      <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'screening' => $data['screening']]); ?>
+      <?= includeTemplate('/view/default/site', ['data' => $data, 'screening' => $data['screening']]); ?>
     <?php else : ?>
       <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>

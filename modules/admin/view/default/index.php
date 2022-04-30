@@ -74,4 +74,4 @@
     <?php endif; ?>
   </div>
 </aside>
-<?= includeTemplate('/view/default/footer', ['user' => $user]); ?>
+<?= includeTemplate('/view/default/footer'); ?>

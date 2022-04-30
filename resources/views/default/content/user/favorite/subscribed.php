@@ -1,5 +1,5 @@
 <main>
-  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
+  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data]); ?>
   <div class="mt10">
     <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
   </div>

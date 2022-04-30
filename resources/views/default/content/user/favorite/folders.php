@@ -1,5 +1,5 @@
 <main>
-  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data, 'user' => $user]); ?>
+  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data]); ?>
   <div class="box">
     <h3 class="uppercase-box"><?= __('folders.s'); ?>: <?= $data['count']; ?></h3>
 
