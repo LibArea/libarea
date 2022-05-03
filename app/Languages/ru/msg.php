@@ -40,7 +40,7 @@ return [
     'enter_content'         => 'Введите содержание',
     'code_error'            => 'Введенный код неверен',
     'new_password_email'    => 'Ссылка на сброс пароля отправлена на e-mail',
-    'went_wrong'            => 'Что-то пошело не так',
+    'went_wrong'            => 'Что-то пошло не так',
     'code_incorrect'        => 'Код неверен, или он уже использовался',
     'yes_email_pass'        => 'Теперь вы можете использовать свой e-mail и пароль.',
     'email_replay'          => 'Такой e-mail уже есть на сайте',
@@ -56,7 +56,7 @@ return [
     'invite_created'        => 'Инвайт создан',
     'url_reserved'          => 'Этот URL блога зарезервирован',
     
-    'string_length'         => 'Не корректная длина {name}',
+    'string_length'         => 'Некорректная длина {name}',
     'slug_correctness'      => '{name} должен содержать только латиницу, цифры',
     'email_correctness'     => 'Недопустимый e-mail',
     

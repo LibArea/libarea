@@ -1,5 +1,11 @@
 <?php
 
+/*
+* The following language strings are used for meta descriptions and explanations for pages.
+*
+* Следующие языковые строки используются для мета- описаний и пояснений к страницам.
+*/
+
 return [
     'profile.posts.title'       => '{name} — профиль участника ',
     'profile.posts.all.title'   => '{name} — список постов ',

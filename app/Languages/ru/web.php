@@ -15,7 +15,6 @@ return [
     'website'           => 'Сайт',
     'websites'          => 'Сайты',
     'on_website'        => 'На сайт',
-    'sites'             => 'Сайты',
     'deleted'           => 'Удаленные',
     'facets'            => 'Фасеты',
     'favorites'         => 'Закладки',
@@ -43,7 +42,7 @@ return [
     'audits_view'       => 'Требуют рассмотрения',
     'deleted_view'      => 'Удалены',
     'my_website'        => 'Мои сайты',
-    'no_website'        => 'Cайтов пока нет',
+    'no_website'        => 'Сайтов пока нет',
     'bookmarks'         => 'Мои закладки по сайтам',
     'bookmarks_view'    => 'Мои закладки',
     'no_bookmarks'      => 'Закладок пока нет',
@@ -76,7 +75,7 @@ return [
     'life_help'         => 'Детям, животные, хобби...',
     'security'          => 'Безопасность...',
     
-    'string_length'         => 'Не корректная длина {name}',
+    'string_length'         => 'Некорректная длина {name}',
     'website_correctness'   => 'Адрес (URL) сайта не является корректным',
     'site_replay'           => 'Такой сайт уже есть в системе',
 

@@ -1,5 +1,13 @@
 <?php
 
+/*
+* The following language strings are used for the meta description 
+* of the central (main) page, site feed.
+*
+* Следующие языковые строки используются для мета- описания 
+* центральной (главной) странице, ленты сайта.
+*/
+
 return [
     'main.feed.title'           => '{name} — сообщество (темы, блоги по интересам)',
     'main.top.title'            => '{name} — популярные посты',
