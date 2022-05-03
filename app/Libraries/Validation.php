@@ -5,7 +5,7 @@ class Validation
     public static function Email($email, $redirect)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            self::Returns(__('email.correctness'), 'error', $redirect);
+            self::Returns(__('msg.email_correctness'), 'error', $redirect);
         }
         return true;
     }
@@ -14,7 +14,7 @@ class Validation
     {
         $name = str_replace(" ", '', $name);
         if (Html::getStrlen($name) < $min || Html::getStrlen($name) > $max) {
-            $text = __('string.length', ['name' => '«' . __($content) . '»', 'min' => $min, 'max' => $max]);
+            $text = __('msg.string_length', ['name' => '«' . __($content) . '»']);
             self::Returns($text, 'error', $redirect);
         }
         return true;
@@ -23,7 +23,7 @@ class Validation
     public static function Slug($slug, $text, $redirect)
     {
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $slug)) {
-            $text = __('slug.correctness', ['name' => '«' . $text . '»']);
+            $text = __('msg.slug_correctness', ['name' => '«' . $text . '»']);
             self::Returns($text, 'error', $redirect);
         }
         return true;

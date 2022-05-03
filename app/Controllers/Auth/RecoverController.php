@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, UserModel};
-use Config, Integration, Validation, SendEmail, Tpl, Meta, Html, UserData;
+use Integration, Validation, SendEmail, Tpl, Meta, Html, UserData;
 
 class RecoverController extends MainController
 {
@@ -13,13 +13,13 @@ class RecoverController extends MainController
     {
         $m = [
             'og'    => false,
-            'url'   => getUrlByName('recover'),
+            'url'   => url('recover'),
         ];
 
         return Tpl::LaRender(
             '/auth/recover',
             [
-                'meta'  => Meta::get(__('password.recovery'), __('recover.info'), $m),
+                'meta'  => Meta::get(__('app.password_recovery'), __('app.recover_info'), $m),
                 'data'  => [
                     'sheet' => 'recover',
                     'type'  => 'recover',
@@ -31,11 +31,11 @@ class RecoverController extends MainController
     public function index()
     {
         $email          = Request::getPost('email');
-        $recover_uri    = getUrlByName('recover');
+        $recover_uri    = url('recover');
 
-        if (Config::get('general.captcha')) {
+        if (config('general.captcha')) {
             if (!Integration::checkCaptchaCode()) {
-                Validation::ComeBack('code.error', 'error', $recover_uri);
+                Validation::ComeBack('msg.code_error', 'error', $recover_uri);
             }
         }
 
@@ -44,12 +44,12 @@ class RecoverController extends MainController
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['email'])) {
-            Validation::ComeBack('email.no.site', 'error', $recover_uri);
+            Validation::ComeBack('msg.no_user', 'error', $recover_uri);
         }
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['ban_list'] == UserData::BANNED_USER) {
-            Validation::ComeBack('account.being.verified', 'error', $recover_uri);
+            Validation::ComeBack('account_verified', 'error', $recover_uri);
         }
 
         $code = $uInfo['id'] . '-' . Html::randomString('crypto', 25);
@@ -62,9 +62,9 @@ class RecoverController extends MainController
         );
 
         // Отправка e-mail
-        SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => getUrlByName('recover.code', ['code' => $code])]);
+        SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => url('recover.code', ['code' => $code])]);
 
-        Validation::ComeBack('new.password.email', 'success', getUrlByName('login'));
+        Validation::ComeBack('msg.new_password_email', 'success', url('login'));
     }
 
     // Страница установки нового пароля
@@ -74,7 +74,7 @@ class RecoverController extends MainController
         $user_id    = UserModel::getPasswordActivate($code);
 
         if (!$user_id) {
-            Validation::ComeBack('recover', 'error', getUrlByName('recover'));
+            Validation::ComeBack('msg.went_wrong', 'error', url('recover'));
         }
 
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
@@ -83,7 +83,7 @@ class RecoverController extends MainController
         return Tpl::LaRender(
             '/auth/newrecover',
             [
-                'meta'  => Meta::get(__('password recovery'), __('recover.info')),
+                'meta'  => Meta::get(__('app.password recovery'), __('app.recover_info')),
                 'data'  => [
                     'code'      => $code,
                     'user_id'   => $user_id['activate_user_id'],
@@ -104,7 +104,7 @@ class RecoverController extends MainController
             return false;
         }
 
-        Validation::Length($password, 'password', '8', '32', getUrlByName('recover.code', ['code' => $code]));
+        Validation::Length($password, 'password', '8', '32', url('recover.code', ['code' => $code]));
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         $news     = SettingModel::editPassword(['id' => $user_id, 'password' => $newpass]);
@@ -115,7 +115,7 @@ class RecoverController extends MainController
 
         UserModel::editRecoverFlag($user_id);
 
-        Validation::ComeBack('password.changed', 'success', getUrlByName('login'));
+        Validation::ComeBack('msg.password_changed', 'success', url('login'));
     }
 
     // Проверка корректности E-mail
@@ -125,11 +125,11 @@ class RecoverController extends MainController
         $activate_email = UserModel::getEmailActivate($code);
 
         if (!$activate_email) {
-            Validation::ComeBack('code.used', 'error', '/');
+            Validation::ComeBack('msg.code_incorrect', 'error', '/');
         }
 
         UserModel::EmailActivate($activate_email['user_id']);
 
-        Validation::ComeBack('yes.email.pass', 'success', getUrlByName('login'));
+        Validation::ComeBack('msg.yes_email_pass', 'success', url('login'));
     }
 }

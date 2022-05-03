@@ -1,86 +1,151 @@
 <?php
 
-// localization class
+/**
+ * Upgraded version localization CodeIgniter 4 (MIT License)
+ * https://codeigniter.com/user_guide/outgoing/localization.html
+ * https://github.com/codeigniter4/CodeIgniter4/tree/develop/system/Language
+ * modification for libarea.ru as a temporary solution
+ */
+
 class Translate
 {
-    protected static $localesDir =  HLEB_GLOBAL_DIRECTORY . '/app/Language/';
+    protected static $language = [];
 
-    protected static $defaultLang = 'ru';
+    protected static $locale;
 
-    protected static $loadedLocales = [];
-
-    protected static $currentLang = '';
+    protected static $loadedFiles = [];
 
     protected static $replacementPattern = ['{', '}'];
 
-    // Get the language used
+    // Получим текущую локаль
     public static function getLang()
     {
-        return self::$defaultLang;
+        return static::$locale;
+    }
+    
+    // Установим текущую локаль
+    public static function setLang($locale)
+    {
+        static::$locale = $locale;
     }
 
-    // Returns the translation of a specific key from the current language locale.
-    // Возвращает перевод определенного ключа из текущей языковой локали.
-    public static function get($localeKey, $parameters = [])
+    // Получаем перевод
+    public static function get(string $line, array $args = [])
     {
-        static::checkLoaded();
+        if (strpos($line, '.') === false) {
+            return 'no';
+        }
 
-        if (is_string($localeKey) && !empty(static::$loadedLocales[static::$currentLang][$localeKey])) {
-            
-            $text = static::$loadedLocales[static::$currentLang][$localeKey];
+        // Разбираем имя файла и псевдоним.
+        [$file, $parsedLine] = self::analyze($line, static::$locale);
 
-            if (!empty($parameters) && is_array($parameters)) {
-                foreach ($parameters as $parameter => $replacement) {
-                    $text = str_replace(static::$replacementPattern[0] . $parameter . static::$replacementPattern[1], $replacement, $text);
-                }
-            }
+        $output = self::receiving(static::$locale, $file, $parsedLine);
  
-            return $text;
+        // если все еще не нашел, попробуйте английский
+        if ($output === null) { 
+            [$file, $parsedLine] = self::analyze($line, 'en');
+            $output = self::receiving('en', $file, $parsedLine);
+        }
+        
+        $output ??= $line;
+ 
+        if (!empty($args) && is_array($args)) {
+            foreach ($args as $parameter => $replacement) {
+               $output = str_replace(static::$replacementPattern[0] . $parameter . static::$replacementPattern[1], $replacement, $output);
+            }
         }
 
-        return null;
+        return $output; 
     }
 
-    // Set by default, and after authorization of the participant
-    public static function setLang($language)
+    public static function receiving($locale, $file, $parsedLine)
     {
-        static::$currentLang = (!empty($language) && is_string($language)) ? $language : static::getClientLang();
-        static::checkLoaded();
-    }
-
-    // Define the user agent
-    protected static function getClientLang()
-    {
-        return !empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 5) : null;
-    }
-
-    // Next, checking and loading...
-    protected static function checkLoaded()
-    {
-        if (empty(static::$loadedLocales[static::$currentLang])) {
-            static::checkLang();
-            static::$loadedLocales[static::$currentLang] = require(static::$localesDir . '/' . static::$currentLang . '.php');
+        $output = static::$language[$locale][$file][$parsedLine] ?? null;
+        if ($output !== null) {
+            return $output;
         }
+
+        foreach (explode('.', $parsedLine) as $row) {
+            if (! isset($current)) {
+                $current = static::$language[$locale][$file] ?? null;
+            }
+
+            $output = $current[$row] ?? null;
+            if (is_array($output)) {
+                $current = $output;
+            }
+        }
+
+        if ($output !== null) {
+            return $output;
+        }
+
+        $row = current(explode('.', $parsedLine));
+        $key = substr($parsedLine, strlen($row) + 1);
+
+        static::$language[$locale][$file][$row][$key] ?? null;
     }
 
-    protected static function checkDir()
+    public static function analyze($line, $locale)
     {
-        if (!is_dir(static::$localesDir)) {
-            throw new \Exception('Directory "' . static::$localesDir . '" not found!');
+        $file = substr($line, 0, strpos($line, '.'));
+        $line = substr($line, strlen($file) + 1);
+
+        if (! isset(static::$language[$locale][$file]) || ! array_key_exists($line, static::$language[$locale][$file])) {
+            self::lines($file, $locale);
         }
+
+        return [$file, $line];
     }
 
-    protected static function checkLocale()
+    public static function lines($file, $locale, bool $return = false)
     {
-        if (!file_exists(static::$localesDir . '/' . static::$defaultLang . '.php')) {
-            throw new \Exception('Default language locale not found!');
+        if (! array_key_exists($locale, static::$loadedFiles)) {
+            static::$loadedFiles[$locale] = [];
         }
+
+        if (in_array($file, static::$loadedFiles[$locale], true)) {
+            // Не загружаем более 1 раза
+            return [];
+        }
+
+        if (! array_key_exists($locale, static::$language)) {
+            static::$language[$locale] = [];
+        }
+
+        if (! array_key_exists($file, static::$language[$locale])) {
+            static::$language[$locale][$file] = [];
+        }
+
+        $path = HLEB_GLOBAL_DIRECTORY . '/app/' . "Languages/{$locale}/{$file}.php";
+
+        $lang = self::requireFile($path);
+
+        if ($return) {
+            return $lang;
+        }
+
+        static::$loadedFiles[$locale][] = $file;
+
+        // Объединить нашу строку
+        static::$language[$locale][$file] = $lang;
     }
 
-    protected static function checkLang()
+    // Загрузка файла
+    public static function requireFile(string $path): array
     {
-        if (!file_exists(static::$localesDir . '/' . static::$currentLang . '.php')) {
-            static::$currentLang = static::$defaultLang;
+        $strings = [];
+        if (file_exists($path)) {
+            $strings[] = require $path;
+        } 
+        
+        if (isset($strings[1])) {
+            $strings = array_replace_recursive(...$strings);
+        } elseif (isset($strings[0])) {
+            $strings = $strings[0];
         }
+
+        return $strings;
     }
+    
 }

@@ -36,6 +36,7 @@ More details: https://libarea.ru/post/777/dev-sozdanie-novogo-sablona-test
 
 ### For testing
 
+*   Installation Via Composer
 *   Set up the web server configuration: `public/` (The Public Directory)
 *   dev.sql
 *   settings: config/dbase.config.php and other files in the directory

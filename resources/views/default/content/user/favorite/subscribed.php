@@ -6,6 +6,6 @@
 </main>
 <aside>
   <div class="box text-sm sticky top-sm">
-    <?= __('preferences.info'); ?>
+    <?= __('app.preferences_info'); ?>
   </div>
 </aside>

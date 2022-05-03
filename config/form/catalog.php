@@ -9,7 +9,7 @@ return [
   // Поля для добавления и редактирования сайта в каталоге
   'site' =>  [
     [
-      'title'   => __('title'),
+      'title'   => __('web.title'),
       'tl'      => 1,
       'arr'     => ['min' => 14, 'max' => 250, 'required' => true],
       'name'    => 'title'
@@ -19,47 +19,47 @@ return [
       'arr'     => ['required' => true],
       'name'    => 'url',
     ],  [
-      'title'   => __('status'),
+      'title'   => __('web.status'),
       'tl'      => UserData::REGISTERED_ADMIN,
       'arr'     => ['required' => false],
       'name'    => 'status',
     ], [
-      'title'   => __('description'),
+      'title'   => __('web.description'),
       'tl'      => 1,
       'arr'     => ['type' => 'textarea', 'required' => true],
       'name'    => 'content',
     ],  [
-      'title'   => __('deny.replies'),
+      'title'   => __('web.deny_replies'),
       'tl'      => 1,
-      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select'],
+      'arr'     => ['options' => ['0' => __('web.no'), '1' => __('web.yes')], 'type' => 'select'],
       'name'    => 'close_replies',
     ], [
-      'title'   => __('posted'),
+      'title'   => __('web.posted'),
       'tl'      => UserData::REGISTERED_ADMIN,
-      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select'],
+      'arr'     => ['options' => ['0' => __('web.no'), '1' => __('web.yes')], 'type' => 'select'],
       'name'    => 'published',
     ], [
-      'title'   => __('there.program'),
+      'title'   => __('web.there_program'),
       'tl'      => UserData::REGISTERED_ADMIN,
-      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select', 'before_html' => '<h2>Soft</h2>'],
+      'arr'     => ['options' => ['0' => __('web.no'), '1' => __('web.yes')], 'type' => 'select', 'before_html' => '<h2>Soft</h2>'],
       'name'    => 'soft',
     ], [
-      'title'   => __('hosted.github'),
+      'title'   => __('web.hosted_github'),
       'tl'      => UserData::REGISTERED_ADMIN,
-      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select'],
+      'arr'     => ['options' => ['0' => __('web.no'), '1' => __('web.yes')], 'type' => 'select'],
       'name'    => 'github',
     ], [
-      'title'   => __('url.address.github'),
+      'title'   => __('web.url_github'),
       'tl'      => UserData::REGISTERED_ADMIN,
       'arr'     => ['required' => false],
       'name'    => 'github_url',
     ], [
-      'title'   => __('title'),
+      'title'   => __('web.title'),
       'tl'      => UserData::REGISTERED_ADMIN,
       'arr'     => ['required' => false],
       'name'    => 'title_soft',
     ], [
-      'title'   => __('description'),
+      'title'   => __('web.description'),
       'tl'      => UserData::REGISTERED_ADMIN,
       'arr'     => ['type' => 'textarea', 'required' => false],
       'name'    => 'content_soft',

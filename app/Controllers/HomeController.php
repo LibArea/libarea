@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\HomeModel;
-use Config, Tpl, UserData, Meta;
+use Config, Tpl, UserData, Meta, Language, Translate;
 
 class HomeController extends MainController
 {
@@ -35,13 +35,13 @@ class HomeController extends MainController
             $topics = \App\Models\FacetModel::advice($this->user['id']);
         }
 
-        $title = __($sheet . '.title', ['name' => Config::get('meta.name')]);
-        $description = __($sheet . '.desc', ['name' => Config::get('meta.name')]);
+        $title = __('meta.' . $sheet . '.title', ['name' => config('meta.name')]);
+        $description = __('meta.' . $sheet . '.desc', ['name' => config('meta.name')]);
 
         $m = [
             'main'      => 'main',
             'og'        => true,
-            'imgurl'    => Config::get('meta.img_path'),
+            'imgurl'    => config('meta.img_path'),
             'url'       => $sheet == 'top' ? '/top' : '/',
         ];
 

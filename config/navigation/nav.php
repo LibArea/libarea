@@ -10,24 +10,24 @@ return [
   // Навигация раздела Настройки участника
   'settings' => [
     [
-      'url'   => getUrlByName('setting'),
-      'title' => __('settings'),
-      'icon'  => 'bi bi-gear',
+      'url'   => url('setting'),
+      'title' => __('app.settings'),
+      'icon'  => 'bi-gear',
       'id'    => 'settings',
     ], [
       'url'   => '/setting/avatar',
-      'title' => __('avatar'),
-      'icon'  => 'bi bi-emoji-smile',
+      'title' => __('app.avatar'),
+      'icon'  => 'bi-emoji-smile',
       'id'    => 'avatar',
     ], [
       'url'   => '/setting/security',
-      'title' => __('password'),
-      'icon'  => 'bi bi-lock',
+      'title' => __('app.password'),
+      'icon'  => 'bi-lock',
       'id'    => 'security',
     ], [
       'url'   => '/setting/notifications',
-      'title' => __('notifications'),
-      'icon'  => 'bi bi-app-indicator',
+      'title' => __('app.notifications'),
+      'icon'  => 'bi-app-indicator',
       'id'    => 'notifications',
     ],
   ],
@@ -37,18 +37,18 @@ return [
   'favorites' => [
     [
       'id'    => 'drafts',
-      'url'   => getUrlByName('drafts'),
-      'title' => __('drafts'),
+      'url'   => url('drafts'),
+      'title' => __('app.drafts'),
       'icon'  => 'bi-journal-richtext'
     ], [
       'id'    => 'favorites',
-      'url'   => getUrlByName('favorites'),
-      'title' => __('favorites'),
+      'url'   => url('favorites'),
+      'title' => __('app.favorites'),
       'icon'  => 'bi-bookmark'
     ], [
       'id'    => 'subscribed',
-      'url'   => getUrlByName('subscribed'),
-      'title' => __('subscribed'),
+      'url'   => url('subscribed'),
+      'title' => __('app.subscribed'),
       'icon'  => 'bi-bookmark-plus'
     ],
   ],
@@ -59,24 +59,24 @@ return [
     [
       'id'    => 'main.feed',
       'url'   => '/',
-      'title' => __('feed'),
+      'title' => __('app.feed'),
       'icon'  => 'bi-sort-down'
     ], [
       'tl'    => UserData::USER_FIRST_LEVEL,
       'id'    => 'main.all',
-      'url'   => getUrlByName('main.all'),
-      'title' => __('all'),
+      'url'   => url('main.all'),
+      'title' => __('app.all'),
       'icon'  => 'bi-app'
     ], [
       'id'    => 'main.top',
-      'url'   => getUrlByName('main.top'),
-      'title' => __('top'),
+      'url'   => url('main.top'),
+      'title' => __('app.top'),
       'icon'  => 'bi-bar-chart'
     ], [
       'tl'    => UserData::REGISTERED_ADMIN,
       'id'    => 'main.deleted',
-      'url'   => getUrlByName('main.deleted'),
-      'title' => __('deleted'),
+      'url'   => url('main.deleted'),
+      'title' => __('app.deleted'),
       'icon'  => 'bi-bar-chart'
     ],
   ],
@@ -88,14 +88,14 @@ return [
       'tl'    => UserData::USER_ZERO_LEVEL,
       'id'    => 'answers.all',
       'url'   => '/answers',
-      'title' => __('answers'),
+      'title' => __('app.answers'),
       'icon'  => 'bi-sort-down'
     ],
     [
       'tl'    => UserData::REGISTERED_ADMIN,
       'id'    => 'answers.deleted',
-      'url'   => getUrlByName('answers.deleted'),
-      'title' => __('deleted'),
+      'url'   => url('answers.deleted'),
+      'title' => __('app.deleted'),
       'icon'  => 'bi-app'
     ],
   ],
@@ -107,14 +107,14 @@ return [
       'tl'    => UserData::USER_ZERO_LEVEL,
       'id'    => 'comments.all',
       'url'   => '/comments',
-      'title' => __('comments'),
+      'title' => __('app.comments'),
       'icon'  => 'bi-sort-down'
     ],
     [
       'tl'    => UserData::REGISTERED_ADMIN,
       'id'    => 'comments.deleted',
-      'url'   => getUrlByName('comments.deleted'),
-      'title' => __('deleted'),
+      'url'   => url('comments.deleted'),
+      'title' => __('app.deleted'),
       'icon'  => 'bi-app'
     ],
   ]

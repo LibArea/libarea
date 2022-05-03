@@ -29,7 +29,7 @@ class Users
         return view(
             '/view/default/user/users',
             [
-                'meta'  => Meta::get(__('users')),
+                'meta'  => Meta::get(__('admin.users')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
@@ -61,7 +61,7 @@ class Users
         return view(
             '/view/default/user/logip',
             [
-                'meta'  => Meta::get(__('search')),
+                'meta'  => Meta::get(__('admin.search')),
                 'data'  => [
                     'results'   => $results,
                     'option'    => $option,
@@ -96,7 +96,7 @@ class Users
         return view(
             '/view/default/user/edit',
             [
-                'meta'  => Meta::get(__('edit')),
+                'meta'  => Meta::get(__('admin.edit')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,

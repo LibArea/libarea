@@ -24,8 +24,8 @@ class AddAnswerController extends MainController
 
         $content = $_POST['content']; // для Markdown
 
-        $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Length($content, 'bodies', '6', '5000', $url_post);
+        $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+        Validation::Length($content, 'content', '6', '5000', $url_post);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
@@ -49,7 +49,7 @@ class AddAnswerController extends MainController
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            (new \App\Controllers\AuditController())->create('answer', $last_id, getUrlByName('admin.audits'));
+            (new \App\Controllers\AuditController())->create('answer', $last_id, url('admin.audits'));
         }
 
         // Notification (@login). 11 - mentions in answers 
@@ -79,7 +79,7 @@ class AddAnswerController extends MainController
                 'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
                 'action_type'   => 'answer',
-                'action_name'   => 'content.added',
+                'action_name'   => 'content_added',
                 'url_content'   => $url,
             ]
         );

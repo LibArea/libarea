@@ -14,7 +14,7 @@
         <div>
           <?php if ($data['sheet'] == 'subscribed') : ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet text-sm right">
-              <?= __('unsubscribe'); ?>
+              <?= __('app.unsubscribe'); ?>
             </div>
           <?php endif; ?>
           <a href="<?= $post_url; ?>">
@@ -36,7 +36,7 @@
           <?php if ($post['post_answers_count'] != 0) : ?>
             <span class="mr10 ml10 gray-600">&#183;</span>
             <a class="flex lowercase gray-600" href="<?= $post_url; ?>#comment">
-              <?= Html::numWord($post['post_answers_count'] + $post['post_comments_count'], __('num.answer'), true); ?>
+              <?= Html::numWord($post['post_answers_count'] + $post['post_comments_count'], __('app.num_answer'), true); ?>
             </a>
           <?php endif; ?>
         </div>
@@ -47,5 +47,5 @@
   <?php if (UserData::checkActiveUser()) : ?>
     <?= Tpl::insert('/_block/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>
-  <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.posts'), 'icon' => 'bi-journal-richtext']); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_posts'), 'icon' => 'bi-journal-richtext']); ?>
 <?php endif; ?>

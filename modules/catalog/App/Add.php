@@ -31,7 +31,7 @@ class Add
         return view(
             '/view/default/add',
             [
-                'meta'  => Meta::get(__('site.add')),
+                'meta'  => Meta::get(__('web.add_website')),
                 'user'  => $this->user,
                 'data'  => [
                     'sheet'      => 'add',
@@ -46,7 +46,7 @@ class Add
     {
         $url = Request::getPost('url');
         if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
-            return json_encode(['error' => 'error', 'text' => __('url.site.correctness')]);
+            return json_encode(['error' => 'error', 'text' => __('web.website_correctness')]);
         }
 
         // Access rights by the trust level of the participant
@@ -56,7 +56,7 @@ class Add
         // Check if the domain exists in the system  
         // Проверим наличие домена в системе
         if ($domain = (new \Modules\Catalog\App\Checks())->getDomain(Request::getPost('url'))) {
-            return json_encode(['error' => 'error', 'text' => __('site.replay')]);
+            return json_encode(['error' => 'error', 'text' => __('web.site_replay')]);
         }
 
         // Get a first level domain       
@@ -66,13 +66,13 @@ class Add
         // Check the length of the site name
         // Проверим длину названия сайта
         if (!$title = (new \Modules\Catalog\App\Checks())->length(Request::getPost('title'), 14, 250)) {
-            $msg = __('string.length', ['name' => '«' . __('title') . '»', 'min' => 14, 'max' => 250]);
+            $msg = __('web.string_length', ['name' => '«' . __('title') . '»']);
             return json_encode(['error' => 'error', 'text' => $msg]);
         }
 
         // Make the description optional for publication (it will still be rewritten) 
         // Сделать описание необязательным для публикации (оно все равно будет переписано) 
-        $content = Request::getPost('content') ?? __('desc.formed');
+        $content = Request::getPost('content') ?? __('web.desc_formed');
 
         // Instant accommodation for staff only
         // Мгновенное размещение только для персонала
@@ -116,7 +116,7 @@ class Add
                 'user_login'    => $this->user['login'],
                 'id_content'    => $item_last['item_id'],
                 'action_type'   => 'website',
-                'action_name'   => 'content.added',
+                'action_name'   => 'content_added',
                 'url_content'   => url('web.audits'),
             ]
         );

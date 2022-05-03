@@ -6,16 +6,16 @@ class Meta
     {
         $output = '';
         if ($title == '') {
-            $title = Config::get('meta.title');
+            $title = config('meta.title');
         }
         if ($description == '') {
-            $description = Config::get('meta.name');
+            $description = config('meta.name');
         }
 
         if (!empty($m['main'])) {
             $output .= '<title>' . $title . '</title>';
         } else {
-            $output .= '<title>' . $title . ' | ' . Config::get('meta.name') . '</title>';
+            $output .= '<title>' . $title . ' | ' . config('meta.name') . '</title>';
         }
 
         $output .= '<meta name="description" content="' . $description . '">';
@@ -27,16 +27,16 @@ class Meta
 
         if (!empty($m)) {
             if ($m['url']) {
-                $output .= '<link rel="canonical" href="' . Config::get('meta.url') . $m['url'] . '">';
+                $output .= '<link rel="canonical" href="' . config('meta.url') . $m['url'] . '">';
             }
 
             if (!empty($m['og'])) {
                 $output .= '<meta property="og:title" content="' . $title . '"/>'
                     . '<meta property="og:description" content="' . $description . '"/>'
-                    . '<meta property="og:url" content="' . Config::get('meta.url') . $m['url'] . '"/>';
+                    . '<meta property="og:url" content="' . config('meta.url') . $m['url'] . '"/>';
 
                 if (!empty($m['imgurl'])) {
-                    $output .= '<meta property="og:image" content="' . Config::get('meta.url') . $m['imgurl'] . '"/>'
+                    $output .= '<meta property="og:image" content="' . config('meta.url') . $m['imgurl'] . '"/>'
                         . '<meta property="og:image:width" content="820" />'
                         . '<meta property="og:image:height" content="320" />';
                 }

@@ -5,7 +5,7 @@ namespace App\Controllers\Facets;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{FacetModel, SubscriptionModel};
-use Validation, Config, Tpl, Meta, UserData;
+use Validation, Tpl, Meta, UserData;
 
 class AddFacetController extends MainController
 {
@@ -24,7 +24,7 @@ class AddFacetController extends MainController
         return Tpl::LaRender(
             '/facets/add',
             [
-                'meta'  => Meta::get(sprintf(__('add.option'), __('topics'))),
+                'meta'  => Meta::get(__('app.add_option', ['name' => __('app.topics')])),
                 'data'  => [
                     'type' => $type,
                 ]
@@ -43,28 +43,28 @@ class AddFacetController extends MainController
         $facet_slug                 = Request::getPost('facet_slug');
         $facet_seo_title            = Request::getPost('facet_seo_title');
 
-        $redirect = ($facet_type == 'category') ? getUrlByName('web') : getUrlByName($facet_type . '.add');
+        $redirect = ($facet_type == 'category') ? url('web') : url($facet_type . '.add');
         if ($facet_type == 'blog') {
             if (!UserData::checkAdmin()) {
-                if (in_array($facet_slug, Config::get('stop-blog'))) {
-                    Validation::ComeBack('url.reserved', 'error', $redirect);
+                if (in_array($facet_slug, config('stop-blog'))) {
+                    Validation::ComeBack('msg.url_reserved', 'error', $redirect);
                 }
             }
         }
 
-        Validation::Slug($facet_slug, 'Slug (url)', $redirect);
+        Validation::Slug($facet_slug, 'slug', $redirect);
         Validation::Length($facet_title, 'title', '3', '64', $redirect);
-        Validation::Length($facet_description, 'meta.description', '34', '225', $redirect);
-        Validation::Length($facet_short_description, 'short.description', '9', '160', $redirect);
+        Validation::Length($facet_description, 'meta_description', '34', '225', $redirect);
+        Validation::Length($facet_short_description, 'short_description', '9', '160', $redirect);
         Validation::Length($facet_slug, 'slug', '3', '43', $redirect);
         Validation::Length($facet_seo_title, 'slug', '4', '225', $redirect);
 
         if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
-            Validation::ComeBack('repeat.url', 'error', $redirect);
+            Validation::ComeBack('msg.repeat_url', 'error', $redirect);
         }
 
         if (preg_match('/\s/', $facet_slug) || strpos($facet_slug, ' ')) {
-            Validation::ComeBack('url.gaps', 'error', $redirect);
+            Validation::ComeBack('msg.url_gaps', 'error', $redirect);
         }
 
         $type = $facet_type ?? 'topic';
@@ -85,7 +85,7 @@ class AddFacetController extends MainController
 
         SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'facet');
 
-        $redirect = $facet_type == 'category' ? getUrlByName('web') : '/' . $facet_type . '/' . $facet_slug;
+        $redirect = $facet_type == 'category' ? url('web') : '/' . $facet_type . '/' . $facet_slug;
         redirect($redirect);
     }
 
@@ -93,7 +93,7 @@ class AddFacetController extends MainController
     {
         $count      = FacetModel::countFacetsUser($this->user['id'], $type);
 
-        $count_add  = UserData::checkAdmin() ? 999 : Config::get('trust-levels.count_add_' . $type);
+        $count_add  = UserData::checkAdmin() ? 999 : config('trust-levels.count_add_' . $type);
 
         $in_total   = $count_add - $count;
 
@@ -101,7 +101,7 @@ class AddFacetController extends MainController
             return $in_total;
         }
 
-        self::tl($this->user['trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
+        self::tl($this->user['trust_level'], config('trust-levels.tl_add_' . $type), $count, $count_add);
 
         if (!$in_total > 0) {
             redirect('/');

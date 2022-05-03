@@ -9,9 +9,9 @@
 
 <form class="max-w780" action="<?= url('folder.content.create'); ?>" method="post" enctype="multipart/form-data">
   <?php csrf_field(); ?>
-  <input name='cat-outside' class='tagify' placeholder='<?= __('add'); ?>...'>
+  <input name='cat-outside' class='tagify' placeholder='<?= __('app.add'); ?>...'>
   <fieldset>
-    <?= Html::sumbit(__('add')); ?>
+    <?= Html::sumbit(__('app.add')); ?>
   </fieldset>
 </form>
 <script nonce="<?= $_SERVER['nonce']; ?>">

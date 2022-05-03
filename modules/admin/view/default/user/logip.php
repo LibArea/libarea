@@ -11,18 +11,18 @@
   <table>
     <thead>
       <th>N</th>
-      <th><?= __('information'); ?></th>
+      <th><?= __('admin.information'); ?></th>
       <th>E-mail</th>
-      <th><?= __('registration'); ?></th>
+      <th><?= __('admin.registration'); ?></th>
       <th>
         <?php if ($data['option'] == 'logs') : ?>
-          <?= __('last'); ?>
+          <?= __('admin.last'); ?>
         <?php else : ?>
           IP
         <?php endif; ?>
       </th>
       <th>Ban</th>
-      <th><?= __('action'); ?></th>
+      <th><?= __('admin.action'); ?></th>
     </thead>
     <?php foreach ($data['results'] as $user) :  ?>
       <tr>
@@ -62,11 +62,11 @@
           <?php else : ?>
             <?php if ($user['ban_list']) : ?>
               <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                <span class="red"><?= __('unban'); ?></span>
+                <span class="red"><?= __('admin.unban'); ?></span>
               </div>
             <?php else : ?>
               <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                <?= __('ban.it'); ?>
+                <?= __('admin.ban'); ?>
               </div>
             <?php endif; ?>
           <?php endif; ?>
@@ -75,7 +75,7 @@
           <?php if (UserData::checkAdmin()) : ?>
             ---
           <?php else : ?>
-            <a title="<?= __('edit'); ?>" href="<?= url('admin.user.edit', ['id' => $user['id']]); ?>">
+            <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.user.edit', ['id' => $user['id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
           <?php endif; ?>

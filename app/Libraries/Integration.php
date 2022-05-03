@@ -51,7 +51,7 @@ class Integration
         }
 
         return self::callApi(array(
-            'secret'   => Config::get('general.private_key'),
+            'secret'   => config('general.private_key'),
             'response' => $response,
             'remoteip' => $_SERVER['REMOTE_ADDR']
         ));
@@ -64,14 +64,14 @@ class Integration
         $text = preg_replace(array('/(<p>)/', '(<\/p>)'), array('', '\n'), $text);
 
         // Проверяем имя бота и YOUR_WEBHOOK_URL
-        if (!$webhookurl = Config::get('general.webhook_url')) {
+        if (!$webhookurl = config('general.webhook_url')) {
             return false;
         }
-        if (!$usernamebot = Config::get('general.name_bot')) {
+        if (!$usernamebot = config('general.name_bot')) {
             return false;
         }
 
-        $content    = sprintf(Translate::get('content.added'), Translate::get('post'));
+        $content    = __('app.content_added', ['name' => __('app.post')]);
         $color      = hexdec("3366ff");
 
         // Формируем даты
@@ -87,7 +87,7 @@ class Integration
 
             // URL Аватара.
             // Можно использовать аватар загруженный при создании бота
-            "avatar_url" => Config::get('general.icon_url'),
+            "avatar_url" => config('general.icon_url'),
 
             // Преобразование текста в речь
             "tts" => false,
@@ -108,7 +108,7 @@ class Integration
                     "description" => $text,
 
                     // Ссылка в заголовке url
-                    "url" => Config::get('meta.url') . $url,
+                    "url" => config('meta.url') . $url,
 
                     // Таймштамп, обязательно в формате ISO8601
                     "timestamp" => $timestamp,
@@ -118,8 +118,8 @@ class Integration
 
                     // Подпись и аватар в подвале sitename
                     "footer" => [
-                        "text" => Config::get('general.name_bot'),
-                        "icon_url" => Config::get('general.icon_url'),
+                        "text" => config('general.name_bot'),
+                        "icon_url" => config('general.icon_url'),
                     ],
                 ]
             ]

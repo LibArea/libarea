@@ -2,25 +2,25 @@
 <main class="col-two">
   <div class="box">
 
-    <a href="/"><?= __('home'); ?></a> / <span class="red"><?= __('edit.option', ['name' => __($post['post_type'])]); ?></span>
+    <a href="/"><?= __('app.home'); ?></a> / <span class="red"><?= __('app.edit_option', ['name' => __('app.' . $post['post_type'])]); ?></span>
 
     <form class="max-w780" action="<?= url('content.change', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <fieldset>
-        <label for="post_title"><?= __('heading'); ?></label>
+        <label for="post_title"><?= __('app.heading'); ?></label>
         <input minlength="6" maxlength="250" id="title" value="<?= $post['post_title']; ?>" type="text" required="" name="post_title">
-        <div class="help">6 - 250 <?= __('characters'); ?></div>
+        <div class="help">6 - 250 <?= __('app.characters'); ?></div>
       </fieldset>
 
       <?= Tpl::insert('/_block/form/select/select', [
         'data'          => $data,
         'action'        => 'edit',
         'type'          => 'topic',
-        'title'         => __('topics'),
+        'title'         => __('app.topics'),
         'required'      => false,
         'maximum'       => 3,
-        'help'          => __('necessarily'),
+        'help'          => __('app.necessarily'),
         'red'           => 'red'
       ]); ?>
 
@@ -29,7 +29,7 @@
           'data'        => $data,
           'action'      => 'edit',
           'type'        => 'blog',
-          'title'       => __('blogs'),
+          'title'       => __('app.blogs'),
         ]); ?>
       <?php endif; ?>
 
@@ -38,10 +38,10 @@
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'section',
-          'title'         => __('section'),
+          'title'         => __('app.section'),
           'required'      => false,
           'maximum'       => 1,
-          'help'          => __('if.fill.then.page'),
+          'help'          => __('app.post_page'),
         ]); ?>
       <?php endif; ?>
 
@@ -68,7 +68,7 @@
                 <?= Html::image($post['post_content_img'], $post['post_title'], 'w160', 'post', 'cover'); ?>
                 <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
                 <a class="img-remove text-sm" href="/post/img/<?= $post['post_id']; ?>/remove">
-                  <?= __('remove'); ?>
+                  <?= __('app.remove'); ?>
                 </a>
               </div>
             <?php endif; ?>
@@ -76,7 +76,7 @@
             <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-gray">
             <div id="start">
               <input id="file-upload" type="file" name="images" accept="image/*" />
-              <div id="notimage" class="none"><?= __('select.image'); ?></div>
+              <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
             </div>
           </div>
           <div id="response" class="hidden">
@@ -92,7 +92,7 @@
           <?= Tpl::insert('/_block/form/radio', [
             'data' => [
               [
-                'title' => __('draft'),
+                'title' => __('app.draft'),
                 'name' => 'post_draft',
                 'checked' => $post['post_draft']
               ],
@@ -107,12 +107,12 @@
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
-              'title' => __('format.Q&A'),
+              'title' => __('app.format_Q&A'),
               'name' => 'post_feature',
               'checked' => $post['post_feature']
             ],
             [
-              'title' => __('close?'),
+              'title' => __('app.close?'),
               'name' => 'closed',
               'checked' => $post['post_closed']
             ],
@@ -122,7 +122,7 @@
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
-              'title'     => __('translation'),
+              'title'     => __('app.translation'),
               'name'      => 'translation',
               'checked'   => $post['post_translation']
             ],
@@ -134,7 +134,7 @@
           <?= Tpl::insert('/_block/form/radio', [
             'data' => [
               [
-                'title'   => __('pin'),
+                'title'   => __('app.pin'),
                 'name'    => 'top',
                 'checked' => $post['post_top']
               ],
@@ -150,8 +150,8 @@
           'user'          => $data['user'],
           'action'        => 'user',
           'type'          => 'user',
-          'title'         => __('author'),
-          'help'          => __('necessarily'),
+          'title'         => __('app.author'),
+          'help'          => __('app.necessarily'),
         ]); ?>
       <?php endif; ?>
 
@@ -160,8 +160,8 @@
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'post',
-          'title'         => __('related posts'),
-          'help'          => __('necessarily'),
+          'title'         => __('app.related_posts'),
+          'help'          => __('app.necessarily'),
         ]); ?>
       <?php endif; ?>
 
@@ -172,7 +172,7 @@
           <input type="hidden" name="draft" value="1">
         <?php endif; ?>
         <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
-        <?= Html::sumbit(__('edit')); ?>
+        <?= Html::sumbit(__('app.edit')); ?>
       </p>
     </form>
   </div>

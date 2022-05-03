@@ -7,7 +7,7 @@
       [
         'id' => 'add',
         'url' => url($data['type'] . '.add'),
-        'name' => __('add'),
+        'name' => __('admin.add'),
         'icon' => 'bi bi-plus-lg'
       ]
     ]
@@ -18,10 +18,10 @@
   <form action="<?= url('admin.word.create'); ?>" method="post">
     <?= csrf_field() ?>
     <fieldset>
-      <label for="word"><?= __('word'); ?></label>
+      <label for="word"><?= __('admin.word'); ?></label>
       <input type="text" name="word">
     </fieldset>
-    <?= Html::sumbit(__('add')); ?>
+    <?= Html::sumbit(__('admin.add')); ?>
   </form>
 </div>
 </main>

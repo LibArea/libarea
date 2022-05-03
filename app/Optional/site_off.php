@@ -19,7 +19,7 @@
         <label for="email"><?= __('off.email'); ?></label>
         <input type="text" placeholder="<?= __('off.enter'); ?>  e-mail" name="email">
       </fieldset>
-      <fieldset>      
+      <fieldset>
         <label for="password"><?= __('off.password'); ?></label>
         <input type="password" placeholder="<?= __('off.enter_password'); ?>" name="password">
       </fieldset>

@@ -1,9 +1,9 @@
 <fieldset>
   <label>
-    <?= __('category'); ?> <sup class="red">*</sup>
+    <?= __('web.category'); ?> <sup class="red">*</sup>
   </label>
   <input name="facet_select" id="category_id" required>
-  <div class="help"><?= __('necessarily'); ?>...</div>
+  <div class="help"><?= __('web.necessarily'); ?>...</div>
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">

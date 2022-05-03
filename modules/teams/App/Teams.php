@@ -28,7 +28,7 @@ class Teams
         return view(
             '/view/default/user',
             [
-                'meta'  => Meta::get(__('teams')),
+                'meta'  => Meta::get(__('team.home')),
                 'user'  => $this->user,
                 'data'  => [
                     'type'  => 'teams',
@@ -53,7 +53,7 @@ class Teams
         return view(
             '/view/default/view',
             [
-                'meta'  => Meta::get(__('team')),
+                'meta'  => Meta::get(__('team.home')),
                 'user'  => $this->user,
                 'data'  => [
                     'type'          => 'view',
@@ -71,7 +71,7 @@ class Teams
         return view(
             '/view/default/add',
             [
-                'meta'  => Meta::get(__('add') . ' ' . __('teams')),
+                'meta'  => Meta::get(__('team.add')),
                 'user'  => $this->user,
                 'data'  => [
                     'type'      => 'add',
@@ -98,7 +98,7 @@ class Teams
         return view(
             '/view/default/edit',
             [
-                'meta'  => Meta::get(__('edit') . ' ' . __('teams')),
+                'meta'  => Meta::get(__('team.edit')),
                 'user'  => $this->user,
                 'data'  => [
                     'type'  => 'edit',
@@ -122,7 +122,7 @@ class Teams
         $content = Request::getPost('content');
 
         Validation::Length($name, 'title', '6', '250', url('team.add'));
-        Validation::Length($content, 'the.post', '6', '5000', url('team.add'));
+        Validation::Length($content, 'content', '6', '5000', url('team.add'));
 
         TeamModel::create(
             [
@@ -148,7 +148,7 @@ class Teams
         $content = Request::getPost('content');
 
         Validation::Length($name, 'title', '6', '250', url('team.add'));
-        Validation::Length($content, 'the.post', '6', '5000', url('team.add'));
+        Validation::Length($content, 'content', '6', '5000', url('team.add'));
 
         TeamModel::edit(
             [

@@ -15,7 +15,7 @@ class Facets
         return view(
             '/view/default/facet/all',
             [
-                'meta'  => Meta::get(__('facets'), __('facets')),
+                'meta'  => Meta::get(__('admin.facets')),
                 'data'  => [
                     'count'         => StatsModel::getCount(),
                     'sheet'         => 'all',
@@ -37,7 +37,7 @@ class Facets
         return view(
             '/view/default/facet/type',
             [
-                'meta'  => Meta::get(__($type), __('facets')),
+                'meta'  => Meta::get('admin.' . __($type)),
                 'data'  => [
                     'count'     => StatsModel::getCount(),
                     'sheet'     => $type,
@@ -73,7 +73,7 @@ class Facets
         return view(
             '/view/default/facet/type',
             [
-                'meta'  => Meta::get(__('ban'), __('ban')),
+                'meta'  => Meta::get(__('admin.ban')),
                 'data'  => [
                     'sheet'     => 'ban.facet',
                     'type'      => $type,

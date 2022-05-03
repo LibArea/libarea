@@ -11,7 +11,7 @@
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
           <div id="start" class="mt15">
             <input id="file-upload" type="file" name="images" accept="image/*" />
-            <div id="notimage" class="none"><?= __('select.image');?></div>
+            <div id="notimage" class="none"><?= __('app.select_image');?></div>
           </div>
         </div>
         <div id="response" class="hidden">
@@ -20,8 +20,8 @@
       </div>
 
       <div class="clear gray mb10">
-        <div class="mb5 text-sm"><?= __('recommended.size'); ?>: 240x240px (jpg, jpeg, png)</div>
-        <?= Html::sumbit(__('download')); ?>
+        <div class="mb5 text-sm"><?= __('app.recommended_size'); ?>: 240x240px (jpg, jpeg, png)</div>
+        <?= Html::sumbit(__('app.download')); ?>
       </div>
 
       <div class="file-upload mt20 mb10" id="file-drag">
@@ -30,12 +30,12 @@
             <div class="relative mr15">
               <img class="block br-gray max-w-100" src="<?= Html::coverUrl($data['user']['cover_art'], 'user'); ?>">
               <a class="right text-sm" href="<?= url('delete.cover', ['login' => $user['login']]); ?>">
-                <?= __('remove'); ?>
+                <?= __('app.remove'); ?>
               </a>
             </div>
           <?php else : ?>
             <div class="block br-gray max-w-100 text-sm gray p20 mr15">
-              <?= __('no.cover'); ?>...
+              <?= __('app.no_cover'); ?>...
             </div>
           <?php endif; ?>
           <div id="start">
@@ -51,14 +51,14 @@
       </div>
 
       <div class="clear gray mb10">
-        <div class="mb5 text-sm"><?= __('recommended.size'); ?>: 1920x240px (jpg, jpeg, png)</div>
-        <?= Html::sumbit(__('download')); ?>
+        <div class="mb5 text-sm"><?= __('app.recommended.size'); ?>: 1920x240px (jpg, jpeg, png)</div>
+        <?= Html::sumbit(__('app.download')); ?>
       </div>
     </form>
   </div>
 </main>
 <aside>
   <div class="box bg-violet text-sm">
-    <?= __('avatar.info'); ?>
+    <?= __('app.avatar_info'); ?>
   </div>
 </aside>

@@ -1,8 +1,8 @@
 <main>
   <div class="box-flex bg-violet justify-between">
-    <p class="m0"><?= __($data['sheet']); ?></p>
+    <p class="m0"><?= __('app.' . $data['sheet']); ?></p>
     <form action="<?= url('notif.remove'); ?>" class="right">
-      <?= Html::sumbit(__('i.read')); ?>
+      <?= Html::sumbit(__('app.i_read')); ?>
     </form>
   </div>
 
@@ -19,7 +19,7 @@
               <i class="<?= $n['icon']; ?> middle"></i>
               <a class="black ml5" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
               <span class="lowercase gray-600">
-                <?= __($n['lang'], ['url' => '<a href="' . $url . '">', 'a' => '</a>']); ?>
+                <?= __('app.' . $n['lang'], ['url' => '<a href="' . $url . '">', 'a' => '</a>']); ?>
                 — <?= Html::langDate($notif['time']); ?>
               </span>
               <?php if ($notif['flag'] == 0) : ?><sup class="ml5 red">✔</sup><?php endif; ?>
@@ -29,14 +29,14 @@
 
       <?php endforeach; ?>
 
-      <div class="p15 center gray-600"><?= __('notifications.limit'); ?></div>
+      <div class="p15 center gray-600"><?= __('app.notifications_limit'); ?></div>
     <?php else : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.content'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
   </div>
 </main>
 <aside>
   <div class="box bg-violet text-sm sticky top-sm">
-    <?= __('notifications.info'); ?>
+    <?= __('app.notifications_info'); ?>
   </div>
 </aside>

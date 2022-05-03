@@ -3,6 +3,6 @@
     <?= $ip; ?>
   </a> 
   <?php if ($publ == 0) : ?>
-     <span class="ml15 red lowercase"><?= __('audits'); ?></span>
+     <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
   <?php endif; ?>
 <?php endif; ?>

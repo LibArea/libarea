@@ -15,7 +15,7 @@ class Home
         return view(
             '/view/default/index',
             [
-                'meta'  => Meta::get(__('admin')),
+                'meta'  => Meta::get(__('admin.home')),
                 'data'  => [
                     'count'             => StatsModel::getCount(),
                     'posts_no_topic'    => FacetModel::getNoTopic(),
@@ -36,7 +36,7 @@ class Home
         return view(
             '/view/default/css',
             [
-                'meta'  => Meta::get(__('Css')),
+                'meta'  => Meta::get(__('admin.css')),
                 'data'  => [
                     'type'  => 'css',
                     'sheet' => 'css',

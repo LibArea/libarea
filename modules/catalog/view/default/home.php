@@ -4,7 +4,7 @@
   <div class="mb-none">
     <center>
       <h1><?= __('web.home.title'); ?></h1>
-      <p class="max-w780"><?= __('web.banner.info'); ?>.</p>
+      <p class="max-w780"><?= __('web.banner_info'); ?>.</p>
     </center>
   </div>
 <?php endif; ?>
@@ -34,14 +34,14 @@
     <?php if (!empty($data['items'])) : ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'screening' => $data['screening']]); ?>
     <?php else : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no_website'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
   </main>
   <aside>
-    <div class="box bg-yellow text-sm max-w300"><?= __('directory.info'); ?></div>
+    <div class="box bg-yellow text-sm max-w300"><?= __('web.sidebar_info'); ?></div>
     <?php if (UserData::checkActiveUser()) : ?>
       <div class="box text-sm bg-violet mt15">
-        <h3 class="uppercase-box"><?= __('menu'); ?></h3>
+        <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>
         <ul class="menu">
           <?= includeTemplate('/view/default/_block/add-site', ['data' => $data]); ?>
           <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'list' => config('catalog/menu.user')]); ?>

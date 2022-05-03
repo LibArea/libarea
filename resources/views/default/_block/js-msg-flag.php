@@ -6,10 +6,10 @@
         let content_id = el.dataset.content_id;
         let type = el.dataset.type;
         Notiflix.Confirm.show(
-          '<?= __('report'); ?>',
-          '<?= __('breaking.rules'); ?>?',
-          '<?= __('yes'); ?>',
-          '<?= __('no'); ?>',
+          '<?= __('app.report'); ?>',
+          '<?= __('app.breaking_rules'); ?>?',
+          '<?= __('app.yes'); ?>',
+          '<?= __('app.no'); ?>',
           function okCb() {
             fetch("/flag/repost", {
                 method: "POST",

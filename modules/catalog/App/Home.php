@@ -29,7 +29,7 @@ class Home
         return view(
             '/view/default/home',
             [
-                'meta'  => Meta::get(__($sheet . '.home.title'), __($sheet . '.home.desc'), $m),
+                'meta'  => Meta::get(__('web.' . $sheet . '_title'), __('web.' . $sheet . '_desc'), $m),
                 'data'  => [
                     'screening'         => 'all',
                     'items'             => WebModel::getItemsAll(1, $this->limit, $this->user, $sheet),

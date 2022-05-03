@@ -7,7 +7,7 @@
       [
         'id' => 'add',
         'url' => url($data['type'] . '.add'),
-        'name' => __('add'),
+        'name' => __('admin.add'),
         'icon' => 'bi-plus-lg'
       ]
     ]
@@ -19,9 +19,9 @@
     <table class="mt20">
       <thead>
         <th>Id</th>
-        <th><?= __('icon'); ?></th>
-        <th><?= __('title'); ?>&nbsp;/&nbsp;<?= __('description'); ?></th>
-        <th><?= __('action'); ?></th>
+        <th><?= __('admin.icon'); ?></th>
+        <th><?= __('admin.title'); ?>&nbsp;/&nbsp;<?= __('admin.description'); ?></th>
+        <th><?= __('admin.action'); ?></th>
       </thead>
       <?php foreach ($data['badges'] as $key => $bg) : ?>
         <tr>
@@ -37,7 +37,7 @@
             <?= $bg['badge_description']; ?>
           </td>
           <td class="center">
-            <a title="<?= __('edit'); ?>" href="<?= url('admin.badges.edit', ['id' => $bg['badge_id']]); ?>">
+            <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.badges.edit', ['id' => $bg['badge_id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
           </td>
@@ -45,7 +45,7 @@
       <?php endforeach; ?>
     </table>
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 </div>
 </div>

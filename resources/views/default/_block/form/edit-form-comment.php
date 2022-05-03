@@ -5,8 +5,8 @@
       <textarea rows="5" minlength="6" name="comment" id="comment"><?= $data['comment_content']; ?></textarea>
       <fieldset>
         <input type="hidden" name="comment_id" id="comment_id" value="<?= $data['comment_id']; ?>">
-        <?= Html::sumbit(__('edit')); ?>
-        <span id="cancel_comment" class="text-sm inline ml5 gray"><?= __('cancel'); ?></span>
+        <?= Html::sumbit(__('app.edit')); ?>
+        <span id="cancel_comment" class="text-sm inline ml5 gray"><?= __('app.cancel'); ?></span>
       </fieldset>
       <div class="v-otsr"></div>
     </form>

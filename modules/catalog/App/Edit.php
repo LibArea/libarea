@@ -41,7 +41,7 @@ class Edit
         return view(
             '/view/default/edit',
             [
-                'meta'  => Meta::get(__('site.edit')),
+                'meta'  => Meta::get(__('web.edit_website')),
                 'data'  => [
                     'domain'        => $domain,
                     'sheet'         => 'domains',
@@ -79,7 +79,6 @@ class Edit
 
         if (filter_var($item_url, FILTER_VALIDATE_URL) === FALSE) {
             redirect($redirect);
-            // return json_encode(['error' => 'error', 'text' => __('url.site.correctness')]);
         }
 
         // Only the site author and staff can edit

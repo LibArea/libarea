@@ -7,7 +7,7 @@
       [
         'id'    => 'logssearch.all',
         'url'   => url('admin.logs.search'),
-        'name'  => __('search'),
+        'name'  => __('admin.search'),
         'icon'  => 'bi-search',
       ]
     ]
@@ -18,9 +18,9 @@
   <?php if ($data['logs']) : ?>
     <table>
       <thead>
-        <th><?= __('request'); ?></th>
-        <th><?= __('time'); ?></th>
-        <th class="w60"><?= __('results'); ?></th>
+        <th><?= __('admin.request'); ?></th>
+        <th><?= __('admin.time'); ?></th>
+        <th class="w60"><?= __('admin.results'); ?></th>
       </thead>
       <?php foreach ($data['logs'] as $log) : ?> 
         <tr>
@@ -29,7 +29,7 @@
               <?= $log['request']; ?>
             </a>
           </td>
-          <td class="gray-600"> <?= __($log['action_type']); ?> | <?= Html::langDate($log['add_date']); ?></td>
+          <td class="gray-600"> <?= __('admin.' . $log['action_type']); ?> | <?= Html::langDate($log['add_date']); ?></td>
           <td class="center">
             <?= $log['count_results']; ?>
           </td>
@@ -37,7 +37,7 @@
       <?php endforeach; ?>
     </table>
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 </div>
 </main>

@@ -21,7 +21,7 @@ class NotificationController extends MainController
         return Tpl::LaRender(
             '/notification/index',
             [
-                'meta'  => Meta::get(__('notifications')),
+                'meta'  => Meta::get(__('app.notifications')),
                 'data'  => [
                     'sheet'         => 'notifications',
                     'type'          => 'notifications',
@@ -51,7 +51,7 @@ class NotificationController extends MainController
     {
         NotificationModel::setRemove($this->user['id']);
 
-        redirect(getUrlByName('notifications'));
+        redirect(url('notifications'));
     }
 
     public static function setBell($user_id)

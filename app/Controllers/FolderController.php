@@ -26,9 +26,9 @@ class FolderController extends MainController
         $cat    = Request::getPost() ?? [];
         $arr    = $cat['cat-outside'] ?? [];
 
-        $url    = getUrlByName('favorites.folders');
+        $url    = url('favorites.folders');
         if (empty($arr)) {
-            Validation::ComeBack('necessarily', 'success', $url);
+            Validation::ComeBack('app.necessarily', 'success', $url);
         }
 
         $folders = json_decode($arr, true);

@@ -43,7 +43,7 @@ class EditPostController extends MainController
         return Tpl::LaRender(
             '/post/edit',
             [
-                'meta'  => Meta::get(__('edit.option', ['name' => __('post')])),
+                'meta'  => Meta::get(__('app.edit_option', ['name' => __('app.post')])),
                 'data'  => [
                     'sheet'         => 'edit-post',
                     'type'          => 'edit',
@@ -95,7 +95,7 @@ class EditPostController extends MainController
             $post_related = implode(',', $id ?? []);
         }
 
-        $redirect   = getUrlByName('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
+        $redirect   = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
         // If there is a change in post_user_id (owner) and who changes staff
         // Если есть смена post_user_id (владельца) и кто меняет персонал
@@ -116,7 +116,7 @@ class EditPostController extends MainController
         if ($content == '') {
             $content = $post['post_content'];
         }
-        Validation::Length($content, 'the.post', '6', '25000', $redirect);
+        Validation::Length($content, 'content', '6', '25000', $redirect);
 
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
@@ -158,7 +158,7 @@ class EditPostController extends MainController
 
 
 
-        Validation::ComeBack('change.saved', 'success', '/post/' . $post_id);
+        Validation::ComeBack('msg.change_saved', 'success', '/post/' . $post_id);
     }
 
     // Add fastes (blogs, topics) to the post 
@@ -168,7 +168,7 @@ class EditPostController extends MainController
         $new_type = 'post';
         $facets = $fields['facet_select'] ?? false;
         if (!$facets) {
-            Validation::ComeBack('select.topic', 'error', $redirect);
+            Validation::ComeBack('msg.select_topic', 'error', $redirect);
         }
         $topics = json_decode($facets, true);
 
@@ -202,7 +202,7 @@ class EditPostController extends MainController
         PostModel::setPostImgRemove($post['post_id']);
         UploadImage::cover_post_remove($post['post_content_img'], $this->user['id']);
 
-        Validation::ComeBack('cover.removed', 'success', getUrlByName('content.edit', ['type' => 'post', 'id' => $post['post_id']]));
+        Validation::ComeBack('msg.cover_removed', 'success', url('content.edit', ['type' => 'post', 'id' => $post['post_id']]));
     }
 
     public function uploadContentImage()

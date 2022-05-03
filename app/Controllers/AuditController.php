@@ -42,7 +42,7 @@ class AuditController extends MainController
     public static function stopContentQuietМode($user_limiting_mode)
     {
         if ($user_limiting_mode == 1) {
-            Validation::ComeBack('silent.mode', 'error', '/');
+            Validation::ComeBack('msg.silent_mode', 'error', '/');
         }
         return true;
     }
@@ -52,12 +52,12 @@ class AuditController extends MainController
     public static function stopLimit($user_trust_level, $number, $type)
     {
         if ($user_trust_level >= 0 && $user_trust_level <= 2) {
-            if ($number >= Config::get('trust-levels.tl_' . $user_trust_level . '_add_' . $type)) {
+            if ($number >= config('trust-levels.tl_' . $user_trust_level . '_add_' . $type)) {
                 self::infoMsg($user_trust_level, $type . 's');
             }
         }
 
-        if ($number > Config::get('trust-levels.all_limit')) {
+        if ($number > config('trust-levels.all_limit')) {
             self::infoMsg($user_trust_level, 'messages');
         }
         return true;
@@ -71,7 +71,7 @@ class AuditController extends MainController
             $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                Html::addMsg(__('content.audit'), 'error');
+                Html::addMsg(__('validation.content_audit'), 'error');
                 return false;
             }
         }
@@ -86,7 +86,7 @@ class AuditController extends MainController
             $all_count = AuditModel::ceneralContributionCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                Html::addMsg(__('content-audit'), 'error');
+                Html::addMsg(__('validation.content_audit'), 'error');
                 return false;
             }
         }
@@ -95,7 +95,7 @@ class AuditController extends MainController
 
     public static function infoMsg($tl, $content)
     {
-        Validation::Returns(__('limit.day', ['tl' => '«'.  __('trust.level') .'» '. $tl, 'name' => __($content)]), 'error', '/');
+        Validation::Returns(__('validation.limit_day', ['tl' => '«'.  __('app.trust_level') .'» '. $tl, 'name' => __('app.' . $content)]), 'error', '/');
     }
 
     // For URL trigger 
@@ -170,10 +170,10 @@ class AuditController extends MainController
         $content_id     = Request::getPostInt('content_id');
 
         // Limit the flags
-        if ($this->user['trust_level'] == Config::get('trust-levels.tl_stop_report')) return 1;
+        if ($this->user['trust_level'] == config('trust-levels.tl_stop_report')) return 1;
 
         $num_report =  AuditModel::getSpeedReport($this->user['id']);
-        if ($num_report > Config::get('trust-levels.all_stop_report')) return 1;
+        if ($num_report > config('trust-levels.all_stop_report')) return 1;
 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
         Html::pageError404($post);
@@ -185,7 +185,7 @@ class AuditController extends MainController
 
         $type_id = $content_type == 'answer' ? 'answer_' . $content_id : 'comment_' . $content_id;
 
-        $slug   = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+        $slug   = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         $url    = $slug . '#' . $type_id;
 
         // Admin notification 

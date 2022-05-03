@@ -81,8 +81,8 @@ class UserData
             'id'           => self::USER_ZERO_LEVEL,
             'trust_level'  => self::USER_ZERO_LEVEL,
             'scroll'       => self::USER_ZERO_LEVEL,
-            'template'     => Config::get('general.template'),
-            'lang'         => Config::get('general.lang'),
+            'template'     => config('general.template'),
+            'lang'         => config('general.lang'),
         ];
 
         $t = self::getAccount();
@@ -115,7 +115,7 @@ class UserData
             }
         }
 
-        $lang = $user['lang'] ?? Config::get('general.lang');
+        $lang = $user['lang'] ?? config('general.lang');
         Translate::setLang($lang);
 
         self::$myAccount = $user ?? null;
@@ -201,7 +201,7 @@ class UserData
      */
     static public function getUserTheme()
     {
-        return self::$myAccount['template'] ?? Config::get('general.template');
+        return self::$myAccount['template'] ?? config('general.template');
     }
 
     /**

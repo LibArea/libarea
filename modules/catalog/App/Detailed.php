@@ -47,7 +47,7 @@ class Detailed
             'imgurl'     => $content_img,
             'url'        => url('web.website', ['slug' => $item['item_domain']]),
         ];
-        $title = __('website') . ': ' . $item['item_title'];
+        $title = __('web.website') . ': ' . $item['item_title'];
         $description  = $item['item_title'] . '. ' . $item['item_content'];
 
         if ($item['item_post_related']) {

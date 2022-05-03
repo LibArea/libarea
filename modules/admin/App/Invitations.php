@@ -21,7 +21,7 @@ class Invitations
         return view(
             '/view/default/invitation/invitations',
             [
-                'meta'  => Meta::get(__('invites')),
+                'meta'  => Meta::get(__('admin.invites')),
                 'data'  => [
                     'type'          => 'invitations',
                     'sheet'         => 'invitations',

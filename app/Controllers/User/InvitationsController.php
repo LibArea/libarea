@@ -22,7 +22,7 @@ class InvitationsController extends MainController
         return Tpl::LaRender(
             '/user/invite',
             [
-                'meta'  => Meta::get(__('invite')),
+                'meta'  => Meta::get(__('app.invite')),
                 'data'  => [
                     'sheet' => 'invite',
                     'type'  => 'user',
@@ -37,7 +37,7 @@ class InvitationsController extends MainController
         return Tpl::LaRender(
             '/user/invitation',
             [
-                'meta'  => Meta::get(__('invites')),
+                'meta'  => Meta::get(__('app.invites')),
                 'data'  => [
                     'invitations'   => InvitationModel::userResult($this->user['id']),
                     'count_invites' => $this->user['invitation_available'],
@@ -53,22 +53,22 @@ class InvitationsController extends MainController
     {
         $invitation_email = Request::getPost('email');
 
-        $redirect = getUrlByName('invitations');
+        $redirect = url('invitations');
 
         Validation::Email($invitation_email, $redirect);
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['email'])) {
-            Validation::ComeBack('user.already', 'error', $redirect);
+            Validation::ComeBack('msg.user_already', 'error', $redirect);
         }
 
         $inv_user = InvitationModel::duplicate($invitation_email);
         if ($inv_user['invitation_email'] == $invitation_email) {
-            Validation::ComeBack('invate.to.replay', 'error', $redirect);
+            Validation::ComeBack('msg.invate_replay', 'error', $redirect);
         }
 
-        if ($this->user['invitation_available'] >= Config::get('general.invite_limit')) {
-            Validation::ComeBack('invate.limit.stop', 'error', $redirect);
+        if ($this->user['invitation_available'] >= config('general.invite_limit')) {
+            Validation::ComeBack('msg.invate_limit_stop', 'error', $redirect);
         }
 
         $invitation_code = Html::randomString('crypto', 25);
@@ -84,9 +84,9 @@ class InvitationsController extends MainController
         );
 
         // Отправка e-mail
-        $link = getUrlByName('invite.reg', ['code' => $invitation_code]);
+        $link = url('invite.reg', ['code' => $invitation_code]);
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
-        Validation::ComeBack('invite.created', 'success', $redirect);
+        Validation::ComeBack('msg.invite_created', 'success', $redirect);
     }
 }

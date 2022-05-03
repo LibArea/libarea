@@ -16,8 +16,6 @@ class SendEmail
         $u_data = UserData::get();
         $user   = UserModel::getUser($uid, 'id');
 
-        require_once __DIR__ . '/../Language/mail/' . $u_data['lang'] . '.php';
-
         if ($type == 'appealed') {
             $setting = SettingModel::getNotifications($uid);
             $appealed = $setting['setting_email_appealed'] ?? 0;
@@ -26,32 +24,32 @@ class SendEmail
             }
         }
 
-        $text_footer    = sprintf($data['footer'], Config::get('meta.url'));
+        $text_footer    = __('mail.footer', ['name' => config('meta.url')]);
         $user_email     = $user['email'];
-        $url            = Config::get('meta.url');
+        $url            = config('meta.url');
 
         switch ($type) {
             case 'changing.password':
-                $subject    = sprintf($data['changing.password.subject'], Config::get('meta.name'));
-                $message    = sprintf($data['changing.password.message'], $url . $variables['newpass_link']);
+                $subject    = __('mail.changing_password_subject', ['name' => config('meta.name')]);
+                $message    = __('mail.changing_password_message', ['url' => $url . $variables['newpass_link']]);
                 break;
             case 'appealed':
-                $subject    = sprintf($data['appealed.subject'], Config::get('meta.name'));
-                $message    = sprintf($data['appealed.message'], $url . getUrlByName('notifications'));
+                $subject    = __('mail.appealed_subject', ['name' => config('meta.name')]);
+                $message    = __('mail.appealed_message', ['url' => $url . url('notifications')]);
                 break;
             case 'activate.email':
-                $subject    = sprintf($data['activate.email.subject'], Config::get('meta.name'));
-                $message    = sprintf($data['activate.email.message'], $url . $variables['link']);
+                $subject    = __('mail.activate_email_subject', ['name' => config('meta.name')]);
+                $message    = __('mail.activate_email_message', ['url' => $url . $variables['link']]);
                 break;
             case 'invite.reg':
                 $user_email = $variables['invitation_email'];
-                $subject    = sprintf($data['invite.reg.subject'], Config::get('meta.name'));
-                $message    = sprintf($data['invite.reg.message'], $url . $variables['link']);
+                $subject    = __('mail.invite_reg_subject', ['name' => config('meta.name')]);
+                $message    = __('mail.invite_reg_message', ['url' => $url . $variables['link']]);
                 break;
             default:
                 $user_email = $variables['email'];
-                $subject    = sprintf($data['test.subject'], Config::get('meta.name'));
-                $message    = $data['test.message'];
+                $subject    = __('mail.test_subject', ['name' => config('meta.name')]);
+                $message    = __('mail.test_message');
                 break;
         }
 
@@ -62,22 +60,22 @@ class SendEmail
 
     public static function send($email, $subject = '', $message = '')
     {
-        if (Config::get('general.smtp')) {
+        if (config('general.smtp')) {
             $mail = new Mail('smtp', [
-                'host'      => 'ssl://' . Config::get('general.smtphost'),
-                'port'      => Config::get('general.smtpport'),
-                'username'  => Config::get('general.smtpuser'),
-                'password'  => Config::get('general.smtppass')
+                'host'      => 'ssl://' . config('general.smtphost'),
+                'port'      => config('general.smtpport'),
+                'username'  => config('general.smtpuser'),
+                'password'  => config('general.smtppass')
             ]);
 
-            $mail->setFrom(Config::get('general.smtpuser'))
+            $mail->setFrom(config('general.smtpuser'))
                 ->setTo($email)
                 ->setSubject($subject)
                 ->setHTML($message, true)
                 ->send();
         } else {
             $mail = new Mail();
-            $mail->setFrom(Config::get('general.email'), Config::get('meta.title'));
+            $mail->setFrom(config('general.email'), config('meta.title'));
 
             $mail->to($email)
                 ->setSubject($subject)

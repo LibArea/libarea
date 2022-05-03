@@ -12,7 +12,7 @@
   <?php if (!empty($data['favorites'])) : ?>
     <?php foreach ($data['favorites'] as $fav) : ?>
       <div class="box relative">
-        <div class="left gray-600 mr5"> <?= __($fav['action_type']); ?>:</div>
+        <div class="left gray-600 mr5"> <?= __('app.' . $fav['action_type']); ?>:</div>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
           <i class="bi-trash red"></i>
@@ -26,7 +26,7 @@
                 <div class="save-folder gray-600 text-sm p5" data-id="<?= $tag['id']; ?>" data-tid="<?= $fav['tid']; ?>" data-type="favorite"><?= $tag['value']; ?></div>
               <?php endforeach; ?>
             <?php else : ?>
-              <?= __('no'); ?>...
+              <?= __('app.no'); ?>...
             <?php endif;  ?>
           </span>
         <?php endif; ?>
@@ -69,11 +69,11 @@
       </div>
     <?php endforeach; ?>
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.favorites'), 'icon' => 'bi-bookmark']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_favorites'), 'icon' => 'bi-bookmark']); ?>
   <?php endif; ?>
 </main>
 <aside>
   <div class="box text-sm sticky top-sm">
-    <?= __('favorite.info'); ?>
+    <?= __('app.favorite_info'); ?>
   </div>
 </aside>

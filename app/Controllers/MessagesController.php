@@ -49,8 +49,8 @@ class MessagesController extends MainController
                 $row['msg_to_user'] = UserModel::getUser($row['dialog_recipient_id'], 'id');
                 $row['message']     = MessagesModel::getMessageOne($row['dialog_id']);
 
-                $row['unread_num']  = Html::numWord($row['count'], __('num.message'), false);
-                $row['count_num']   = Html::numWord($row['count'], __('num.message'), false);
+                $row['unread_num']  = Html::numWord($row['count'], __('app.num_message'), false);
+                $row['count_num']   = Html::numWord($row['count'], __('app.num_message'), false);
                 $result[$ind]       = $row;
             }
         }
@@ -58,7 +58,7 @@ class MessagesController extends MainController
         return Tpl::LaRender(
             '/messages/messages',
             [
-                'meta'  => Meta::get(__('private.messages')),
+                'meta'  => Meta::get(__('app.private_messages')),
                 'data'  => [
                     'sheet'     => 'messages',
                     'type'      => 'messages',
@@ -72,11 +72,11 @@ class MessagesController extends MainController
     {
         $id = Request::getInt('id');
         if (!$dialog = MessagesModel::getDialogById($id)) {
-            Validation::ComeBack('no.dialogue', 'error', getUrlByName('messages', ['login' => $this->user['login']]));
+            Validation::ComeBack('msg.no_dialogue', 'error', url('messages', ['login' => $this->user['login']]));
         }
 
         if ($dialog['dialog_recipient_id'] != $this->user['id'] and $dialog['dialog_sender_id'] != $this->user['id']) {
-            Validation::ComeBack('no.topic', 'error', getUrlByName('messages', ['login' => $this->user['login']]));
+            Validation::ComeBack('msg.no_topic', 'error', url('messages', ['login' => $this->user['login']]));
         }
 
         // update views, etc. 
@@ -111,10 +111,10 @@ class MessagesController extends MainController
         return Tpl::LaRender(
             '/messages/dialog',
             [
-                'meta'  => Meta::get(__('dialogue')),
+                'meta'  => Meta::get(__('app.dialogue')),
                 'data'  => [
-                    'h1'                => __('dialogue') . ' - ' . $list[$key]['login'],
-                    'sheet'             => __('dialogue') . ' - ' . $list[$key]['login'],
+                    'h1'                => __('app.dialogue') . ' - ' . $list[$key]['login'],
+                    'sheet'             => __('app.dialogue') . ' - ' . $list[$key]['login'],
                     'type'              => 'type',
                     'list'              => $list,
                     'recipient_user'    => $recipient_user,
@@ -130,19 +130,19 @@ class MessagesController extends MainController
     {
         $login      = Request::get('login');
         if (!$user  = UserModel::getUser($login, 'slug')) {
-            Validation::ComeBack('no.user', 'error', '/');
+            Validation::ComeBack('msg.no_user', 'error', '/');
         }
 
         // We will limit the sending of PMs if the level of trust is low
         // Ограничим отправк ЛС, если уровень доверия низок
-        if (Config::get('general.tl_add_pm') > $this->user['trust_level']) {
+        if (config('general.tl_add_pm') > $this->user['trust_level']) {
             redirect('/');
         }
 
         return Tpl::LaRender(
             '/messages/user-add-messages',
             [
-                'meta'  => Meta::get(__('send.message')),
+                'meta'  => Meta::get(__('app.send_message')),
                 'data'  => [
                     'recipient_uid' => $user['id'],
                     'login'         => $user['login'],
@@ -163,17 +163,17 @@ class MessagesController extends MainController
         // Если пользователь заморожен и если личное сообщение пустое
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
         if ($content == '') {
-            Validation::ComeBack('enter.content', 'error', getUrlByName('messages', ['login' => $this->user['login']]));
+            Validation::ComeBack('msg.enter_content', 'error', url('messages', ['login' => $this->user['login']]));
         }
 
         // If the user does not exist 
         // Если пользователя не существует
         $user  = UserModel::getUser($this->user['id'], 'id');
-        Html::pageRedirection($user, getUrlByName('messages', ['login' => $this->user['login']]));
+        Html::pageRedirection($user, url('messages', ['login' => $this->user['login']]));
 
         // We will limit the sending of PMs if the level of trust is low
         // Ограничим отправк ЛС, если уровень доверия низок
-        if (Config::get('general.tl_add_pm') > $this->user['trust_level']) {
+        if (config('general.tl_add_pm') > $this->user['trust_level']) {
             redirect('/');
         }
 
@@ -190,6 +190,6 @@ class MessagesController extends MainController
             ]
         );
 
-        redirect(getUrlByName('messages'));
+        redirect(url('messages'));
     }
 }

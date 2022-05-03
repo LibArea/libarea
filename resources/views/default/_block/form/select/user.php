@@ -1,6 +1,6 @@
 <?php if (UserData::checkAdmin()) { ?>
   <fieldset>
-    <label><?= __('author'); ?></label>
+    <label><?= __('app.author'); ?></label>
     <input name='user_id' id="user_id">
   </fieldset>
 
@@ -41,8 +41,8 @@
 
             tagify = new Tagify(input, options);
             tagify.addTags([{
-                id: '<?= $user['id']; ?>',
-                value: '<?= $user['login']; ?>'
+                id: '<?= UserData::getUserId(); ?>',
+                value: '<?= UserData::getUserLogin(); ?>'
             }])
 
         });

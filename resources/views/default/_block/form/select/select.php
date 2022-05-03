@@ -5,7 +5,7 @@
 
 <fieldset>
   <label>
-    <?= __($type); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
+    <?= __('app.' . $type); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
   </label>
 
   <?php if ($action == 'edit' || $action == 'add') { ?>

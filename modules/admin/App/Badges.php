@@ -15,7 +15,7 @@ class Badges
         return view(
             '/view/default/badge/badges',
             [
-                'meta'  => Meta::get(__('badges')),
+                'meta'  => Meta::get(__('admin.badges')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -32,7 +32,7 @@ class Badges
         return view(
             '/view/default/badge/add',
             [
-                'meta'  => Meta::get(__('badges')),
+                'meta'  => Meta::get(__('admin.badges')),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,
@@ -52,7 +52,7 @@ class Badges
         return view(
             '/view/default/badge/edit',
             [
-                'meta'  => Meta::get(__('edit')),
+                'meta'  => Meta::get(__('admin.edit')),
                 'data'  => [
                     'badge' => $badge,
                     'sheet' => $sheet,
@@ -98,7 +98,7 @@ class Badges
         return view(
             '/view/default/badge/user-add',
             [
-                'meta'  => Meta::get(__('reward.user')),
+                'meta'  => Meta::get(__('admin.badges')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -149,7 +149,7 @@ class Badges
             ]
         );
 
-        Validation::ComeBack('change.saved', 'success', $redirect);
+        Validation::ComeBack('msg.change_saved', 'success', $redirect);
     }
 
     public function remove()
@@ -162,6 +162,6 @@ class Badges
             ]
         );
 
-        Validation::ComeBack('command.executed', 'success', '/admin/users/' . $uid . '/edit');
+        Validation::ComeBack('msg.command_executed', 'success', '/admin/users/' . $uid . '/edit');
     }
 }

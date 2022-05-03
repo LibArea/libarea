@@ -12,7 +12,7 @@ $item = $data['item'];
     <div class="box hidden pr15 mb20">
       <h1><?= $item['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
-          <a class="text-sm ml5" href="<?= url('web.edit', ['id' => $item['item_id']]); ?>">
+          <a class="text-sm ml5" title="<?= __('web.edit'); ?>" href="<?= url('web.edit', ['id' => $item['item_id']]); ?>">
             <i class="bi-pencil"></i>
           </a>
         <?php endif; ?>
@@ -44,7 +44,7 @@ $item = $data['item'];
         </div>
       </div>
       <?php if ($item['item_is_soft'] == 1) : ?>
-        <h2><?= __('soft'); ?></h2>
+        <h2><?= __('web.soft'); ?></h2>
         <h3><?= $item['item_title_soft']; ?></h3>
         <div class="gray-600">
           <?= Content::text($item['item_content_soft'], 'text'); ?>
@@ -71,22 +71,22 @@ $item = $data['item'];
           <?= csrf_field() ?>
 
           <?php Tpl::insert('/_block/form/textarea', [
-            'title'     => __('reply'),
+            'title'     => __('web.reply'),
             'type'      => 'text',
             'name'      => 'content',
             'min'       => 5,
             'max'       => 555,
-            'help'      => '5 - 555 ' . __('characters'),
+            'help'      => '5 - 555 ' . __('web.characters'),
           ]); ?>
 
           <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>">
-          <?= Html::sumbit(__('reply')); ?>
+          <?= Html::sumbit(__('web.reply')); ?>
         </form>
       <?php endif; ?>
     <?php endif; ?>
 
     <?php if ($data['tree']) : ?>
-      <h2 class="mt10"><?= __('answers'); ?></h2>
+      <h2 class="mt10"><?= __('web.answers'); ?></h2>
       <ul class="list-none mt20">
         <?= includeTemplate('/view/default/replys', ['data' => $data]); ?>
       </ul>
@@ -94,21 +94,21 @@ $item = $data['item'];
       <?php if ($item['item_close_replies'] == 0) : ?>
         <div class="p20 center gray-600">
           <i class="bi-chat-dots block text-8xl"></i>
-          <?= __('no.answers'); ?>
+          <?= __('web.no_answers'); ?>
         </div>
       <?php endif; ?>
     <?php endif; ?>
 
     <?php if ($item['item_close_replies'] == 1) : ?>
       <div class="mt20">
-        <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('discussions.closed'), 'icon' => 'bi-door-closed']); ?>
+        <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('web.closed'), 'icon' => 'bi-door-closed']); ?>
       </div>
     <?php endif; ?>
   </main>
   <aside class="mr20">
     <div class="box box-shadow-all">
       <?php if ($data['similar']) : ?>
-        <h3 class="uppercase-box"><?= __('recommended'); ?></h3>
+        <h3 class="uppercase-box"><?= __('web.recommended'); ?></h3>
         <?php foreach ($data['similar'] as $link) : ?>
           <?= Html::websiteImage($link['item_domain'], 'thumbs', $link['item_title'], 'mr5 w200 box-shadow'); ?>
           <a class="inline mr20 mb15 block text-sm" href="<?= url('web.website', ['slug' => $link['item_domain']]); ?>">

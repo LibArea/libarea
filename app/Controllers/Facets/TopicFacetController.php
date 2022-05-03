@@ -37,13 +37,13 @@ class TopicFacetController extends MainController
         $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
-        $url    = getUrlByName('topic', ['slug' => $facet['facet_slug']]);
-        $title  = $facet['facet_seo_title'] . ' — ' .  __('topic');
+        $url    = url('topic', ['slug' => $facet['facet_slug']]);
+        $title  = $facet['facet_seo_title'] . ' — ' .  __('app.topic');
         $description   = $facet['facet_description'];
         if ($sheet == 'facet.recommend') {
-            $url    =  getUrlByName('recommend', ['slug' => $facet['facet_slug']]);
-            $title  = $facet['facet_seo_title'] . ' — ' .  __('recommended.posts');
-            $description  = __('recommended.posts.desc', ['name' => $facet['facet_seo_title']]) . $facet['facet_description'];
+            $url    =  url('recommend', ['slug' => $facet['facet_slug']]);
+            $title  = $facet['facet_seo_title'] . ' — ' .  __('app.rec_posts');
+            $description  = __('app.rec_posts_desc', ['name' => $facet['facet_seo_title']]) . $facet['facet_description'];
         }
 
         $m = [
@@ -89,13 +89,13 @@ class TopicFacetController extends MainController
         $m = [
             'og'         => true,
             'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
-            'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
+            'url'        => url('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
         return Tpl::LaRender(
             '/facets/info',
             [
-                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('info'), $facet['facet_description'], $m),
+                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
                 'data'  => [
                     'sheet'         => 'info',
                     'type'          => 'info',
@@ -124,13 +124,13 @@ class TopicFacetController extends MainController
         $m = [
             'og'         => true,
             'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
-            'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
+            'url'        => url('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
         return Tpl::LaRender(
             '/facets/writers',
             [
-                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('info'), $facet['facet_description'], $m),
+                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
                 'data'  => [
                     'sheet'         => 'writers',
                     'type'          => 'writers',

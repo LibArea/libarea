@@ -1,14 +1,16 @@
 <?php
 
+namespace Modules\Admin\App;
+
+use \ScssPhp\ScssPhp\Compiler;
+
 class Sass
 {
     public static function collect()
     {
-        require HLEB_GLOBAL_DIRECTORY . "/app/ThirdParty/scssphp/scss.inc.php";
+        $compiler = new Compiler();
 
-        $compiler = new ScssPhp\ScssPhp\Compiler();
-
-        $compiler->setOutputStyle(ScssPhp\ScssPhp\OutputStyle::COMPRESSED);
+        $compiler->setOutputStyle(\ScssPhp\ScssPhp\OutputStyle::COMPRESSED);
 
         foreach (config('scss') as $key => $putch) {
             self::build($compiler, $putch, $key);

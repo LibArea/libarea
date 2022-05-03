@@ -45,9 +45,9 @@ class AddCommentController extends MainController
         $post   = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
         Html::pageRedirection($post);
 
-        $url_post = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+        $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
-        Validation::Length($content, 'comments', '6', '2024', $url_post);
+        Validation::Length($content, 'content', '6', '2024', $url_post);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
@@ -69,7 +69,7 @@ class AddCommentController extends MainController
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            (new \App\Controllers\AuditController())->create('comment', $last_id, getUrlByName('admin.audits'));
+            (new \App\Controllers\AuditController())->create('comment', $last_id, url('admin.audits'));
         }
 
         // Add the number of comments for the post + 1
@@ -114,7 +114,7 @@ class AddCommentController extends MainController
                 'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
                 'action_type'   => 'comment',
-                'action_name'   => 'content.added',
+                'action_name'   => 'content_added',
                 'url_content'   => $url,
             ]
         );

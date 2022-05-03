@@ -7,38 +7,38 @@
 return [
     'admin' => [
         [
-            'url'   => getUrlByName('admin.logs'),
-            'title' => __('logs'),
+            'url'   => url('admin.logs'),
+            'title' => __('admin.logs'),
             'icon'  => 'bi-receipt',
             'id'    => 'logs',
         ], [
-            'url'   => getUrlByName('admin.audits'),
-            'title' => __('audits'),
+            'url'   => url('admin.audits'),
+            'title' => __('admin.audits'),
             'icon'  => 'bi-exclamation-diamond',
             'id'    => 'audits',
         ], [
-            'url'   => getUrlByName('admin.words'),
-            'title' => __('words'),
+            'url'   => url('admin.words'),
+            'title' => __('admin.words'),
             'icon'  => 'bi-badge-ad',
             'id'    => 'words',
         ], [
-            'url'   => getUrlByName('admin.invitations'),
-            'title' => __('invites'),
+            'url'   => url('admin.invitations'),
+            'title' => __('admin.invites'),
             'icon'  => 'bi-person-plus',
             'id'    => 'invitations',
         ], [
-            'url'   => getUrlByName('admin.badges'),
-            'title' => __('badges'),
+            'url'   => url('admin.badges'),
+            'title' => __('admin.badges'),
             'icon'  => 'bi-award',
             'id'    => 'badges',
         ], [
-            'url'   => getUrlByName('admin.search'),
-            'title' => __('search'),
+            'url'   => url('admin.search'),
+            'title' => __('admin.search'),
             'icon'  => 'bi-search',
             'id'    => 'search',
         ], [
-            'url'   => getUrlByName('admin.css'),
-            'title' => __('css'),
+            'url'   => url('admin.css'),
+            'title' => __('admin.css'),
             'icon'  => 'bi-brush',
             'id'    => 'css',
         ], 

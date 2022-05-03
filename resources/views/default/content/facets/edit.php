@@ -5,7 +5,7 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
 
 <main class="col-two">
   <div class="box-flex justify-between">
-    <p class="m0 text-xl"><?= __($fs['facet_type']); ?></p>
+    <p class="m0 text-xl"><?= __('app.' . $fs['facet_type']); ?></p>
     <ul class="nav">
 
       <?= Tpl::insert(
@@ -16,7 +16,7 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
             [
               'id'        => 'all',
               'url'       => $url,
-              'title'     => __('go.to'),
+              'title'     => __('app.go_to'),
               'icon'      => 'bi bi-arrow-up-right-square'
             ]
           ]
@@ -29,7 +29,7 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
   <div class="box">
     <form class="max-w780" action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
-      <i><?= __('edit'); ?></i>
+      <i><?= __('app.edit'); ?></i>
       <?= Tpl::insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
 
       <div class="file-upload mb10 mt15" id="file-drag">
@@ -38,7 +38,7 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
           <div id="start" class="mt15">
             <input class="text-xs" id="file-upload" type="file" name="images" accept="image/*" />
-            <div id="notimage" class="none"><?= __('select.image'); ?></div>
+            <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
           </div>
         </div>
         <div id="response" class="hidden">
@@ -65,25 +65,25 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
         </div>
       <?php endif; ?>
       <div class="mb20">
-        <?= Html::sumbit(__('download')); ?>
+        <?= Html::sumbit(__('app.download')); ?>
       </div>
 
       <fieldset>
-        <label for="facet_title"><?= __('title'); ?><sup class="red">*</sup></label>
+        <label for="facet_title"><?= __('app.title'); ?><sup class="red">*</sup></label>
         <input minlength="3" maxlength="64" type="text" name="facet_title" value="<?= $fs['facet_title']; ?>">
-        <div class="help">3 - 64 <?= __('characters'); ?></div>
+        <div class="help">3 - 64 <?= __('app.characters'); ?></div>
       </fieldset>
 
       <fieldset>
-        <label for="facet_seo_title"><?= __('title'); ?> (SEO)<sup class="red">*</sup></label>
+        <label for="facet_seo_title"><?= __('app.title'); ?> (SEO)<sup class="red">*</sup></label>
         <input minlength="4" maxlength="255" type="text" name="facet_seo_title" value="<?= $fs['facet_seo_title']; ?>">
-        <div class="help">4 - 255 <?= __('characters'); ?></div>
+        <div class="help">4 - 255 <?= __('app.characters'); ?></div>
       </fieldset>
 
       <fieldset>
-        <label for="facet_slug"><?= __('slug'); ?><sup class="red">*</sup></label>
+        <label for="facet_slug"><?= __('app.slug'); ?><sup class="red">*</sup></label>
         <input minlength="3" maxlength="32" type="text" name="facet_slug" value="<?= $fs['facet_slug']; ?>">
-        <div class="help">3 - 32 <?= __('characters'); ?> (a-z-0-9)</div>
+        <div class="help">3 - 32 <?= __('app.characters'); ?> (a-z-0-9)</div>
       </fieldset>
 
       <?php if ($fs['facet_type'] != 'blog' && UserData::checkAdmin()) : ?>
@@ -91,10 +91,10 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
-              'title' => __('root'),
+              'title' => __('app.root'),
               'name' => 'facet_top_level',
               'checked' => $fs['facet_top_level'],
-              'help' => __('root.help')
+              'help' => __('app.root_help')
             ],
           ]
         ]); ?>
@@ -103,8 +103,8 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
           'data'          => $data,
           'action'        => 'edit',
           'type'          => $fs['facet_type'],
-          'title'         => __('children'),
-          'help'          => __('necessarily'),
+          'title'         => __('app.children'),
+          'help'          => __('app.necessarily'),
           'red'           => 'red'
         ]); ?>
 
@@ -112,7 +112,7 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
 
       <?php if (!empty($data['high_arr'])) : ?>
         <div class="box">
-          <h3 class="uppercase-box"><?= __('parents'); ?></h3>
+          <h3 class="uppercase-box"><?= __('app.parents'); ?></h3>
           <?php foreach ($data['high_arr'] as $high) : ?>
             <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
               <?= Html::image($high['facet_img'], $high['facet_title'], 'img-base', 'logo', 'max'); ?>
@@ -124,7 +124,7 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
 
       <?php if (!empty($data['low_arr'])) : ?>
         <div class="box">
-          <h3 class="uppercase-box"><?= __('children'); ?></h3>
+          <h3 class="uppercase-box"><?= __('app.children'); ?></h3>
           <?php foreach ($data['low_arr'] as $sub) : ?>
             <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
               <?= Html::image($sub['facet_img'], $sub['facet_title'], 'img-base', 'logo', 'max'); ?>
@@ -135,44 +135,44 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
       <?php endif; ?>
 
       <fieldset>
-        <label for="facet_description"><?= __('meta.description'); ?><sup class="red">*</sup></label>
+        <label for="facet_description"><?= __('app.meta_description'); ?><sup class="red">*</sup></label>
         <textarea class="add max-w780" rows="6" minlength="44" name="facet_description"><?= $fs['facet_description']; ?></textarea>
-        <div class="help">> 44 <?= __('characters'); ?></div>
+        <div class="help">> 44 <?= __('app.characters'); ?></div>
       </fieldset>
 
       <fieldset>
-        <label for="facet_short_description"><?= __('short.description'); ?><sup class="red">*</sup></label>
+        <label for="facet_short_description"><?= __('app.short_description'); ?><sup class="red">*</sup></label>
         <input minlength="11" maxlength="120" value="<?= $fs['facet_short_description']; ?>" type="text" required="" name="facet_short_description">
-        <div class="help">11 - 120 <?= __('characters'); ?></div>
+        <div class="help">11 - 120 <?= __('app.characters'); ?></div>
       </fieldset>
 
       <fieldset>
-        <?= __('info'); ?> (sidebar / info)<sup class="red">*</sup>
+        <?= __('app.info'); ?> (sidebar / info)<sup class="red">*</sup>
         <textarea class="add max-w780 block" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
-        <div class="mb20 help">Markdown, > 14 <?= __('characters'); ?></div>
+        <div class="mb20 help">Markdown, > 14 <?= __('app.characters'); ?></div>
 
         <?php if ($fs['facet_type'] != 'blog') : ?>
           <?= Tpl::insert('/_block/form/select/related-posts', [
             'data'          => $data,
             'action'        => 'edit',
             'type'          => 'post',
-            'title'         => __('related posts'),
-            'help'          => __('necessarily'),
+            'title'         => __('app.related_posts'),
+            'help'          => __('app.necessarily'),
           ]); ?>
 
           <?= Tpl::insert('/_block/form/select/low-matching-facets', [
             'data'          => $data,
             'action'        => 'edit',
             'type'          => $fs['facet_type'],
-            'title'         => __('bound.children'),
-            'help'          => __('necessarily'),
+            'title'         => __('app.bound_children'),
+            'help'          => __('app.necessarily'),
             'red'           => 'red'
           ]); ?>
       </fieldset>
 
       <?php if (!empty($data['high_matching'])) : ?>
         <div class="box max-w780">
-          <h3 class="uppercase-box"><?= __('bound.parents'); ?></h3>
+          <h3 class="uppercase-box"><?= __('app.bound_parents'); ?></h3>
           <?php foreach ($data['high_matching'] as $low_mat) : ?>
             <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
               <?= Html::image($low_mat['facet_img'], $low_mat['facet_title'], 'img-base', 'logo', 'max'); ?>
@@ -189,13 +189,13 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
         'user'    => $data['user'],
         'action'  => 'user',
         'type'    => 'user',
-        'title'   => __('author'),
-        'help'    => __('necessarily'),
+        'title'   => __('app.author'),
+        'help'    => __('app.necessarily'),
       ]); ?>
     <?php endif; ?>
     <fieldset>
       <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">
-      <?= Html::sumbit(__('edit')); ?>
+      <?= Html::sumbit(__('app.edit')); ?>
     </fieldset>
     </form>
   </div>

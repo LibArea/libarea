@@ -17,9 +17,9 @@ class Html
         foreach (array_chunk($facet, 3) as $row) {
             if ($row[0] == $type) {
                 if ($type == 'category') {
-                    $result[] = '<a class="' . $css . '" href="' . getUrlByName($url, ['grouping' => $choice, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
+                    $result[] = '<a class="' . $css . '" href="' . url($url, ['grouping' => $choice, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
                 } else {
-                    $result[] = '<a class="' . $css . '" href="' . getUrlByName($url, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+                    $result[] = '<a class="' . $css . '" href="' . url($url, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
                 }
             }
         }
@@ -30,14 +30,14 @@ class Html
     // Blog, topic or category
     public static function addPost($facet)
     {
-        $url_add = getUrlByName('content.add', ['type' => 'post']);
+        $url_add = url('content.add', ['type' => 'post']);
         if (!empty($facet)) {
             if ($facet['facet_user_id'] == UserData::getUserId() || $facet['facet_type'] == 'topic') {
                 $url_add = $url_add . '/' . $facet['facet_id'];
             }
         }
 
-        $html  = '<a title="' . sprintf(Translate::get('add.option'), Translate::get('post')) . '" 
+        $html  = '<a title="' . __('app.add_option', ['name' => __('app.post')]) . '" 
                     href="' . $url_add . '" class="sky">
                     <i class="bi-plus-lg text-xl"></i>
                   </a>';
@@ -94,7 +94,7 @@ class Html
     // Localization of dates and events....
     public static function langDate($string)
     {
-        $months = Translate::get('months');
+        $months = __('app.months');
 
         //Разбиваем дату в массив
         $a = preg_split('/[^\d]/', $string);
@@ -102,13 +102,13 @@ class Html
 
         if (($a[0] . $a[1] . $a[2]) == $today) {
             //Если сегодня
-            return (Translate::get('today') . ' ' . $a[3] . ':' . $a[4]);
+            return (__('app.today') . ' ' . $a[3] . ':' . $a[4]);
         } else {
             $b = explode('-', date("Y-m-d"));
             $tom = date('Ymd', mktime(0, 0, 0, $b[1], $b[2] - 1, $b[0]));
             if (($a[0] . $a[1] . $a[2]) == $tom) {
                 //Если вчера
-                return (Translate::get('yesterday') . ' ' . $a[3] . ':' . $a[4]);
+                return (__('app.yesterday') . ' ' . $a[3] . ':' . $a[4]);
             } else {
                 //Если позже
                 $mm = intval($a[1]);
@@ -176,13 +176,13 @@ class Html
         if (UserData::getAccount()) {
             if ($arr['content_user_id'] != UserData::getUserId()) {
                 if ($arr['state']) {
-                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id yes">' . Translate::get('unsubscribe') . '</div>';
+                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id yes">' . __('app.unsubscribe') . '</div>';
                 } else {
-                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id no">+ ' . Translate::get('read') . '</div>';
+                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id no">+ ' . __('app.read') . '</div>';
                 }
             }
         } else {
-            $html .= '<a href="' . getUrlByName('login') . '"><div class="focus-id no">+ ' . Translate::get('read') . '</div></a>';
+            $html .= '<a href="' . url('login') . '"><div class="focus-id no">+ ' . __('app.read') . '</div></a>';
         }
 
         return $html;
@@ -232,7 +232,7 @@ class Html
                 $html .= '...';
             }
 
-            $html .= '<a class="p5 ml5 lowercase gray-600" href="' . $page . '/' . ($pNum + 1) . '.html">' . Translate::get('page') . ' ' . ($pNum + 1) . ' >></a>';
+            $html .= '<a class="p5 ml5 lowercase gray-600" href="' . $page . '/' . ($pNum + 1) . '.html">' . __('app.page') . ' ' . ($pNum + 1) . ' >></a>';
         }
 
         $html .= '</p>';

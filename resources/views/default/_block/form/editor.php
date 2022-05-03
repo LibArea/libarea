@@ -10,15 +10,15 @@
       maxHeight: '<?= $height; ?>',
       element: document.getElementById('editor'),
       imagePathAbsolute: true,
-      placeholder: "<?= __('supports.markdown'); ?>...",
+      placeholder: "<?= __('app.markdown'); ?>...",
       imageUploadEndpoint: "/backend/upload/<?= $type; ?>/<?= $id; ?>",
       previewImagesInEditor: true,
       uploadImage: true,
       spellChecker: false,
 
       imageTexts: {
-        sbInit: '<?= __('attach.files'); ?>',
-        sbOnDragEnter: '<?= __('drop.image'); ?>',
+        sbInit: '<?= __('app.attach_files'); ?>',
+        sbOnDragEnter: '<?= __('app.drop_image'); ?>',
       },
 
       toolbar: [
@@ -33,7 +33,7 @@
           <?php endif; ?>
         <?php endforeach; ?> {
           className: "bi-unlock",
-          title: "<?= __('spoiler'); ?>",
+          title: "<?= __('app.spoiler'); ?>",
           children: [{
             className: "bi-eye-slash",
             action: (e) => {
@@ -42,7 +42,7 @@
             },
           }, {
             className: "bi-unlock",
-            title: "<?= __('spoiler.auth'); ?>",
+            title: "<?= __('app.spoiler_auth'); ?>",
             action: (e) => {
               e.codemirror.replaceSelection('{auth} *** {/auth}');
               e.codemirror.focus();

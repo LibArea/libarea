@@ -43,7 +43,7 @@ class SettingController extends MainController
         return Tpl::LaRender(
             '/user/setting/setting',
             [
-                'meta'  => Meta::get(__('setting')),
+                'meta'  => Meta::get(__('app.setting')),
                 'data'  => [
                     'sheet'         => 'settings',
                     'type'          => 'user',
@@ -61,9 +61,9 @@ class SettingController extends MainController
         $template       = Request::getPost('template');
         $lang           = Request::getPost('lang');
 
-        $redirect   = getUrlByName('setting');
+        $redirect   = url('setting');
         Validation::Length($name, 'name', '0', '11', $redirect);
-        Validation::Length($about, 'about.me', '0', '255', $redirect);
+        Validation::Length($about, 'about', '0', '255', $redirect);
 
         if ($public_email) {
             Validation::Email($public_email, $redirect);
@@ -96,7 +96,7 @@ class SettingController extends MainController
             ]
         );
 
-        Validation::ComeBack('change.saved', 'success', $redirect);
+        Validation::ComeBack('msg.change_saved', 'success', $redirect);
     }
 
     // Avatar and cover upload form
@@ -108,7 +108,7 @@ class SettingController extends MainController
         return Tpl::LaRender(
             '/user/setting/avatar',
             [
-                'meta'  => Meta::get(__('edit')),
+                'meta'  => Meta::get(__('app.edit')),
                 'data'  => [
                     'sheet' => 'avatar',
                     'type'  => 'user',
@@ -132,7 +132,7 @@ class SettingController extends MainController
             UploadImage::cover($cover, $this->user['id'], 'user');
         }
 
-        Validation::ComeBack('change.saved', 'success', '/setting/avatar');
+        Validation::ComeBack('msg.change_saved', 'success', '/setting/avatar');
     }
 
     // Change password form
@@ -142,7 +142,7 @@ class SettingController extends MainController
         return Tpl::LaRender(
             '/user/setting/security',
             [
-                'meta'  => Meta::get(sprintf(__('edit.option'), __('password'))),
+                'meta'  => Meta::get(__('app.edit_option', ['name' => __('app.password')])),
                 'data'  => [
                     'password'      => '',
                     'password2'     => '',
@@ -162,25 +162,25 @@ class SettingController extends MainController
 
         $redirect   = '/setting/security';
         if ($password2 != $password3) {
-            Validation::ComeBack('pass.match.err', 'success', $redirect);
+            Validation::ComeBack('msg.pass_match_err', 'success', $redirect);
         }
 
         if (substr_count($password2, ' ') > 0) {
-            Validation::ComeBack('password.spaces', 'error', $redirect);
+            Validation::ComeBack('msg.password_spaces', 'error', $redirect);
         }
 
         Validation::Length($password2, 'password', 8, 32, $redirect);
 
         $userInfo   = UserModel::userInfo($this->user['email']);
         if (!password_verify($password, $userInfo['password'])) {
-            Validation::ComeBack('old.password.err', 'error', $redirect);
+            Validation::ComeBack('msg.old_error', 'error', $redirect);
         }
 
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
 
         SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
 
-        Validation::ComeBack('password.changed', 'error', $redirect);
+        Validation::ComeBack('msg.password_changed', 'error', $redirect);
     }
 
     // Cover Removal
@@ -223,7 +223,7 @@ class SettingController extends MainController
         return Tpl::LaRender(
             '/user/setting/notifications',
             [
-                'meta'  => Meta::get(__('notifications')),
+                'meta'  => Meta::get(__('app.notifications')),
                 'data'  => [
                     'sheet'     => 'notifications',
                     'type'      => 'user',
@@ -246,6 +246,6 @@ class SettingController extends MainController
             ]
         );
 
-        Validation::ComeBack('password.changed', 'success', '/setting/notifications');
+        Validation::ComeBack('msg.password_changed', 'success', '/setting/notifications');
     }
 }

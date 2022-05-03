@@ -13,7 +13,7 @@ class RssController extends MainController
     public function index()
     {
         $data = [
-            'url'       => Config::get('meta.url'),
+            'url'       => config('meta.url'),
             'topics'    => RssModel::getTopicsSitemap(),
             'posts'     => RssModel::getPostsSitemap(),
         ];
@@ -37,7 +37,7 @@ class RssController extends MainController
         }
 
         $data = [
-            'url'   => Config::get('meta.url'),
+            'url'   => config('meta.url'),
             'posts' => $result,
         ];
 
@@ -69,7 +69,7 @@ class RssController extends MainController
             '/content/rss/rss-feed',
             [
                 'data'  => [
-                    'url'       => Config::get('meta.url'),
+                    'url'       => config('meta.url'),
                     'posts'     => $result,
                 ],
                 'topic' => $topic,

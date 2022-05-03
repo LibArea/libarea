@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\App\Models\ConsoleModel;
-use SendEmail, Sass, Html;
+use SendEmail, Html;
 
 class Console
 {
@@ -62,14 +62,14 @@ class Console
         $email  = Request::getPost('mail');
         SendEmail::mailText(1, 'admin.test', ['email' => $email]);
 
-        Html::addMsg(__('command.executed'), 'success');
+        Html::addMsg(__('admin.completed'), 'success');
 
         redirect(url('admin.tools'));
     }
 
     public static function css()
     {
-        Sass::collect();
+        (new \Modules\Admin\App\Sass)->collect();
 
         self::consoleRedirect();
     }
@@ -77,7 +77,7 @@ class Console
     public static function consoleRedirect()
     { 
         if (PHP_SAPI != 'cli') {
-            Html::addMsg(__('command.executed'), 'success');
+            Html::addMsg(__('admin.completed'), 'success');
         }
         return true;
     }

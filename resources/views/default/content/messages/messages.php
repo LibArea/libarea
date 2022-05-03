@@ -1,6 +1,6 @@
 <main>
   <div class="box-flex">
-    <p class="m0"><?= __($data['sheet']); ?></p>
+    <p class="m0"><?= __('app.' . $data['sheet']); ?></p>
   </div>
   <?php if (!empty($data['messages'])) : ?>
     <div class="box">
@@ -27,9 +27,9 @@
           </div>
           <a class="lowercase text-sm right" href="<?= url('dialogues', ['id' => $msg['dialog_id']]); ?>">
             <?php if ($msg['unread']) : ?>
-              <?= __('there.are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
+              <?= __('app.there_are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
             <?php else : ?>
-              <span class="red"><?= __('view'); ?></span>
+              <span class="red"><?= __('app.view'); ?></span>
               <?php if ($msg['count'] != 0) : ?>
                 <?= $msg['count']; ?> <?= $msg['count_num']; ?>
               <?php endif; ?>
@@ -39,11 +39,11 @@
       <?php endforeach; ?>
     </div>
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.dialogs'), 'icon' => 'bi-envelope']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_dialogs'), 'icon' => 'bi-envelope']); ?>
   <?php endif; ?>
 </main>
 <aside>
   <div class="box text-sm sticky top-sm">
-    <?= __('messages.info'); ?>
+    <?= __('app.messages_info'); ?>
   </div>
 </aside>

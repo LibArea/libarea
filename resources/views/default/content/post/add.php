@@ -1,23 +1,23 @@
 <main class="col-two">
   <div class="box">
 
-    <a href="/"><?= __('home'); ?></a> /
-    <span class="red"><?= __('add.option', ['name' => __('post')]); ?></span>
+    <a href="/"><?= __('app.home'); ?></a> /
+    <span class="red"><?= __('app.add_option', ['name' => __('app.post')]); ?></span>
 
     <form class="max-w780" action="<?= url('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <fieldset>
-        <label for="post_title"><?= __('heading'); ?></label>
+        <label for="post_title"><?= __('app.heading'); ?></label>
         <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
-        <div class="help">6 - 250 <?= __('characters'); ?></div>
+        <div class="help">6 - 250 <?= __('app.characters'); ?></div>
       </fieldset>
 
       <?= Tpl::insert('/_block/form/select/select', [
         'data'          => $data['facets'],
         'type'          => 'topic',
         'action'        => 'add',
-        'title'         => __('facets'),
-        'help'          => __('necessarily'),
+        'title'         => __('app.facets'),
+        'help'          => __('app.necessarily'),
         'red'           => 'red'
       ]); ?>
 
@@ -26,7 +26,7 @@
           'data'        => $data,
           'action'      => 'add',
           'type'        => 'blog',
-          'title'       => __('blogs'),
+          'title'       => __('app.blogs'),
         ]); ?>
       <?php endif; ?>
 
@@ -36,7 +36,7 @@
             <input id="link" placeholder="URL" class="post_url" type="text" name="post_url" />
           </div>
           <div class="left w-30 pl5">
-            <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= __('to.extract'); ?>" />
+            <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= __('app.to_extract'); ?>" />
           </div>
         </fieldset>
       <?php endif; ?>
@@ -47,10 +47,10 @@
           <div id="start">
             <input id="file-upload" type="file" name="images" accept="image/*" />
             <div class="text-sm gray-600 mt5">
-              <?= __('format.cover.post'); ?>.
+              <?= __('app.format_cover_post'); ?>.
             </div>
             <i class="fa fa-download" aria-hidden="true"></i>
-            <div id="notimage" class="none"><?= __('select.image'); ?></div>
+            <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
           </div>
         </div>
         <div id="response" class="hidden">
@@ -64,7 +64,7 @@
         <?= Tpl::insert('/_block/form/radio',  [
           'data' => [
             [
-              'title' => __('draft'),
+              'title' => __('app.draft'),
               'name'  => 'post_draft',
             ]
           ],
@@ -75,11 +75,11 @@
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
-              'title' => __('format.Q&A'),
+              'title' => __('app.format_Q&A'),
               'name' => 'post_feature',
             ],
             [
-              'title' => __('close?'),
+              'title' => __('app.close?'),
               'name' => 'closed',
             ],
           ]
@@ -89,7 +89,7 @@
       <?= Tpl::insert('/_block/form/radio',  [
         'data' => [
           [
-            'title' => __('translation'),
+            'title' => __('app.translation'),
             'name'  => 'translation',
           ],
         ]
@@ -99,7 +99,7 @@
         <?= Tpl::insert('/_block/form/radio', [
           'data' => [
             [
-              'title'   => __('pin'),
+              'title'   => __('app.pin'),
               'name'    => 'top',
             ],
           ]
@@ -110,11 +110,11 @@
         'data'          => [],
         'action'        => 'add',
         'type'          => 'post',
-        'title'         => __('related'),
-        'help'          => __('necessarily'),
+        'title'         => __('app.related'),
+        'help'          => __('app.necessarily'),
       ]); ?>
 
-      <p><?= Html::sumbit(__('create')); ?></p>
+      <p><?= Html::sumbit(__('app.create')); ?></p>
     </form>
   </div>
 </main>

@@ -24,10 +24,10 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
     <?= Tpl::insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
-            'name' => __('home'),
+            'name' => __('web.catalog'),
             'link' => url('web')
           ], [
-            'name' => __('site.edit'),
+            'name' => __('web.edit_website'),
             'link' => 'red'
           ],
         ]
@@ -50,8 +50,8 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
           'data'      => $data,
           'action'    => 'edit',
           'type'      => 'post',
-          'title'     => __('related posts'),
-          'help'      => __('necessarily'),
+          'title'     => __('web.related_posts'),
+          'help'      => __('web.necessarily'),
         ]); ?>
         
          <?php if (UserData::checkAdmin()) { ?>
@@ -59,21 +59,21 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
               'user'          => $data['user'],
               'action'        => 'user',
               'type'          => 'user',
-              'title'         => __('author'),
-              'help'          => __('necessarily'),
+              'title'         => __('web.author'),
+              'help'          => __('web.necessarily'),
             ]); ?>
         <?php } ?>
 
         <input type="hidden" name="item_id" value="<?= $domain['item_id']; ?>">
 
-        <?= $form->sumbit(__('edit')); ?>
+        <?= $form->sumbit(__('web.edit')); ?>
       </form>
     </div>
   </main>
   <aside>
     <div class="box box-shadow-all text-sm">
-      <h3 class="uppercase-box"><?= __('help'); ?></h3>
-      <?= __('add.site.help'); ?>
+      <h3 class="uppercase-box"><?= __('web.help'); ?></h3>
+      <?= __('web.data_help'); ?>
       <div>
   </aside>
 </div>

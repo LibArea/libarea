@@ -13,7 +13,7 @@ class Words
         return view(
             '/view/default/word/words',
             [
-                'meta'  => Meta::get(__('words')),
+                'meta'  => Meta::get(__('admin.words')),
                 'data'  => [
                     'words' => ContentModel::getStopWords(),
                     'sheet' => $sheet,
@@ -29,7 +29,7 @@ class Words
         return view(
             '/view/default/word/add',
             [
-                'meta'  => Meta::get(__('word')),
+                'meta'  => Meta::get(__('admin.word')),
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,
@@ -49,7 +49,7 @@ class Words
 
         ContentModel::setStopWord($data);
 
-        Validation::ComeBack('change.saved', 'success', url('admin.words'));
+        Validation::ComeBack('msg.change_saved', 'success', url('admin.words'));
     }
 
     // Удаление стоп-слова

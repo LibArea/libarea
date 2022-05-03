@@ -27,13 +27,13 @@ class CommentController extends MainController
 
         $m = [
             'og'    => false,
-            'url'   => getUrlByName('comments'),
+            'url'   => url('comments'),
         ];
 
         return Tpl::LaRender(
             '/comment/comments',
             [
-                'meta'  => Meta::get(__('all.comments'), __('comments.desc'), $m),
+                'meta'  => Meta::get(__('app.all_comments'), __('app.comments.desc'), $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,

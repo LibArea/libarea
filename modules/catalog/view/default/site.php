@@ -41,7 +41,7 @@
               <div>
                 <i class="bi-arrow-return-right gray-600 ml10"></i>
                 <a class="black" href="<?= url('web.website', ['slug' => $item['item_domain']]); ?>">
-                  <?= __('more.detailed'); ?>
+                  <?= __('web.more'); ?>
                 </a>
               </div>
             </div>

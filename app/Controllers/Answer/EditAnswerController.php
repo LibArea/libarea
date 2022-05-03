@@ -34,7 +34,7 @@ class EditAnswerController extends MainController
         return Tpl::LaRender(
             '/answer/edit-answer',
             [
-                'meta'  => Meta::get(__('edit.answer')),
+                'meta'  => Meta::get(__('app.edit_answer')),
                 'data'  => [
                     'answer_id' => $answer['answer_id'],
                     'post_id'   => $post['post_id'],
@@ -64,8 +64,8 @@ class EditAnswerController extends MainController
         }
 
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
-        $url = getUrlByName('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
-        Validation::Length($content, 'bodies', '6', '5000', '/' . $url);
+        $url = url('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
+        Validation::Length($content, 'content', '6', '5000', '/' . $url);
 
         AnswerModel::edit(
             [

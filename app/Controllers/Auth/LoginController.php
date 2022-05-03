@@ -16,28 +16,28 @@ class LoginController extends MainController
         $password   = Request::getPost('password');
         $rememberMe = Request::getPostInt('rememberme');
 
-        $redirect   = getUrlByName('login');
+        $redirect   = url('login');
 
         Validation::Email($email, $redirect);
 
         $user = UserModel::userInfo($email);
 
         if (empty($user['id'])) {
-            Validation::ComeBack('no.user', 'error', $redirect);
+            Validation::ComeBack('msg.no_user', 'error', $redirect);
         }
 
         // Находится ли в бан- листе
         if (UserModel::isBan($user['id'])) {
-            Validation::ComeBack('account.being.verified', 'error', $redirect);
+            Validation::ComeBack('msg.account_verified', 'error', $redirect);
         }
 
         // Активирован ли E-mail
         if (!UserModel::isActivated($user['id'])) {
-            Validation::ComeBack('account.not.activated', 'error', $redirect);
+            Validation::ComeBack('msg.not_activated', 'error', $redirect);
         }
 
         if (!password_verify($password, $user['password'])) {
-            Validation::ComeBack('email.password.not.correct', 'error', $redirect);
+            Validation::ComeBack('msg.not_correct', 'error', $redirect);
         }
 
         // Если нажал "Запомнить" 
@@ -58,13 +58,13 @@ class LoginController extends MainController
     {
         $m = [
             'og'    => false,
-            'url'   => getUrlByName('login'),
+            'url'   => url('login'),
         ];
 
         return Tpl::LaRender(
             '/auth/login',
             [
-                'meta'  => Meta::get(__('sign.in'), __('login.info'), $m),
+                'meta'  => Meta::get(__('app.sign_in'), __('app.login_info'), $m),
                 'data'  => [
                     'sheet' => 'sign.in',
                     'type'  => 'login',

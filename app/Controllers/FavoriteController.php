@@ -36,7 +36,7 @@ class FavoriteController extends MainController
             ]
         );
 
-        return __('successfully');
+        return __('app.successfully');
     }
 
     public static function redirectItem($content_id, $type, $user)

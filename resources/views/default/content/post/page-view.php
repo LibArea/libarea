@@ -10,7 +10,7 @@
       </div>
     <?php else : ?>
       <div class="bg-red-200 p15 center mr10">
-        <?= sprintf(__('content.deleted'), __('post')); ?>...
+        <?= __('app.content_deleted', ['name' => __('app.post')]); ?>...
       </div>
     <?php endif; ?>
   </article>
@@ -19,7 +19,7 @@
     <div class="gray-600 italic ml15">
       <?= $page['post_modified']; ?>
       <?php if (UserData::checkAdmin() || $page['post_user_id'] == UserData::getUserId()) : ?>
-        <a class="gray-600 ml5" title="<?= __('edit'); ?>" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
+        <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
           <i class="bi-pencil"></i>
         </a>
       <?php endif; ?>
@@ -39,7 +39,7 @@
       </div>
     <?php endforeach; ?>
     <?php if (UserData::checkAdmin()) : ?>
-      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><i class="bi-pencil"></i> <?=  __('edit'); ?></a>
+      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><i class="bi-pencil"></i> <?=  __('app.edit'); ?></a>
     <?php endif; ?>
   </div>
 </aside>

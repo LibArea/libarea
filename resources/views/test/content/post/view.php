@@ -28,23 +28,23 @@
         <div class="text-sm lowercase flex gray-600">
           <?= Html::langDate($post['post_date']); ?>
           <?php if ($post['modified']) : ?>
-            (<?= __('ed'); ?>)
+            (<?= __('app.ed'); ?>)
           <?php endif; ?>
 
           <?php if (UserData::checkActiveUser()) : ?>
             <?php if (UserData::getUserLogin() == $post['login']  || UserData::checkAdmin()) : ?>
               <a class="gray-600 mr10 ml10" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
-                <?= __('edit'); ?>
+                <?= __('app.edit'); ?>
               </a>
             <?php endif; ?>
             <?php if (UserData::getUserLogin() == $post['login']) : ?>
               <?php if ($post['my_post'] == $post['post_id']) : ?>
                 <span class="add-profile active mr10 ml10" data-post="<?= $post['post_id']; ?>">
-                  + <?= __('in.profile'); ?>
+                  + <?= __('app.in_profile'); ?>
                 </span>
               <?php else : ?>
                 <span class="add-profile mr10 ml10" data-post="<?= $post['post_id']; ?>">
-                  <?= __('in.profile'); ?>
+                  <?= __('app.in_profile'); ?>
                 </span>
               <?php endif; ?>
             <?php endif; ?>
@@ -80,13 +80,13 @@
         <?php if ($post['post_url_domain']) : ?>
           <div class="mb15">
             <a rel="nofollow noreferrer ugc" target="_blank" class="btn btn-primary" href="<?= $post['post_url']; ?>">
-              <?= __('details.here'); ?>
+              <?= __('app.details_here'); ?>
               <i class="bi-folder-symlink middle ml5"></i>
             </a>
           </div>
         <?php endif; ?>
         <?php if ($post['post_url_domain']) : ?>
-          <h3 class="uppercase-box"><?= __('source'); ?></h3>
+          <h3 class="uppercase-box"><?= __('app.source'); ?></h3>
           <div class="italic m15 mb15 p10 text-sm bg-lightgray table gray">
             <div>
               <i class="bi-link-45deg"></i>
@@ -107,7 +107,7 @@
         <ul class="list-none w-100 lowercase">
           <li class="left p10">
             <div class="text-sm gray-600 mb5">
-              <?= __('created.by'); ?>
+              <?= __('app.created_by'); ?>
             </div>
             <div class="center">
               <a title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
@@ -117,7 +117,7 @@
           </li>
           <li class="left p10 mb-none">
             <div class="text-sm gray-600 mb5">
-              <?= __('last.answer'); ?>
+              <?= __('app.last_answer'); ?>
             </div>
             <div class="center">
               <?php if (!empty($data['last_user']['answer_id'])) : ?>
@@ -138,7 +138,7 @@
               <?php endif; ?>
             </div>
             <div class="center text-sm">
-              <?= Html::numWord($post['post_hits_count'], __('num.view'), false); ?>
+              <?= Html::numWord($post['post_hits_count'], __('app.num_view'), false); ?>
             </div>
           </li>
           <li class="left p10 mb-none gray-600 text-sm">
@@ -150,7 +150,7 @@
               <?php endif; ?>
             </div>
             <div class="center">
-              <?= Html::numWord($post['amount_content'], __('num.answer'), false); ?>
+              <?= Html::numWord($post['amount_content'], __('app.num_answer'), false); ?>
             </div>
           </li>
         </ul>
@@ -159,16 +159,16 @@
           <?php if (UserData::checkActiveUser()) : ?>
             <?php if (is_array($data['post_signed'])) : ?>
               <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 yes">
-                <?= __('unsubscribe'); ?>
+                <?= __('app.unsubscribe'); ?>
               </div>
             <?php else : ?>
               <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 no">
-                + <?= __('read'); ?>
+                + <?= __('app.read'); ?>
               </div>
             <?php endif; ?>
           <?php else : ?>
             <a class="right mt5 focus-id no" href="<?= url('login'); ?>">
-              + <?= __('read'); ?>
+              + <?= __('app.read'); ?>
             </a>
           <?php endif; ?>
         </div>
@@ -189,7 +189,7 @@
             <div class="clear pt5">
               <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
               <input type="hidden" name="answer_id" value="0">
-              <?= Html::sumbit(__('reply')); ?>
+              <?= Html::sumbit(__('app.reply')); ?>
             </div>
           </form>
 
@@ -198,7 +198,7 @@
 
     <?php else : ?>
       <div class="bg-red-200 p15 center mr10">
-        <?= sprintf(__('content.deleted'), __('post')); ?>...
+        <?= __('app.content_deleted', ['name' => __('app.post')]); ?>...
       </div>
     <?php endif; ?>
   </article>
@@ -207,16 +207,16 @@
     if ($post['post_feature'] == 0) :
       Tpl::insert('/_block/comments-view', ['data' => $data, 'post' => $post]);
       if ($post['post_closed'] == 1) :
-        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('post.closed'), 'icon' => 'bi-door-closed']);
+        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.post_closed'), 'icon' => 'bi-door-closed']);
       endif;
     else :
       Tpl::insert('/_block/questions-view', ['data' => $data, 'post' => $post]);
       if ($post['post_closed'] == 1) :
-        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('question.closed'), 'icon' => 'bi-door-closed']);
+        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'bi-door-closed']);
       endif;
     endif;
   else :
-    echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('this.draft'), 'icon' => 'bi-door-closed']);
+    echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'bi-door-closed']);
   endif; ?>
 </main>
 <script nonce="<?= $_SERVER['nonce']; ?>">

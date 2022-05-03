@@ -40,15 +40,15 @@ class Content
     {
         $regexpSp = '/\{spoiler(?!.*\{spoiler)(\s?)(?(1)(.*?))\}(.*?)\{\/spoiler\}/is';
         while (preg_match($regexpSp, $content)) {
-            $content = preg_replace($regexpSp, "<details><summary>" . Translate::get('see more') . "</summary>$2$3</details>", $content);
+            $content = preg_replace($regexpSp, "<details><summary>" . __('app.see_more') . "</summary>$2$3</details>", $content);
         }
 
         $regexpAu = '/\{auth(?!.*\{auth)(\s?)(?(1)(.*?))\}(.*?)\{\/auth\}/is';
         while (preg_match($regexpAu, $content)) {
             if (UserData::checkActiveUser()) {
-                $content = preg_replace($regexpAu, "<dev class=\"txt-closed\"><i class=\"bi bi-unlock gray-600 mr5\"></i> $2$3</dev>", $content);
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed\"><i class=\"bi-unlock gray-600 mr5\"></i> $2$3</dev>", $content);
             } else {
-                $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-600\"><i class=\"bi bi-lock mr5 red-200\"></i>" . Translate::get('text.closed') . "...</dev>", $content);
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-600\"><i class=\"bi-lock mr5 red-200\"></i>" . __('app.text_closed') . "...</dev>", $content);
             }
         }
 
@@ -115,7 +115,7 @@ class Content
     public static function stopContentQuietМode($user_limiting_mode)
     {
         if ($user_limiting_mode == 1) {
-            Validation::ComeBack('silent.mode', 'error', '/');
+            Validation::ComeBack('msg.silent_mode', 'error', '/');
         }
 
         return true;

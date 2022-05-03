@@ -35,7 +35,7 @@ function displayConfigArray($array, $prefix = '')
 ?>
 
 <div class="box bg-white">
-    <h2><?= __('statistics'); ?></h2>
+    <h2><?= __('admin.statistics'); ?></h2>
     <table style="width:100%">
         <tbody>
             <tr>

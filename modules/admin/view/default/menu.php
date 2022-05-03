@@ -12,10 +12,10 @@
       <?= Tpl::insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
-            'name' => __('admin'),
+            'name' => __('admin.home'),
             'link' => url('admin')
           ], [
-            'name' => __($data['type']),
+            'name' => __('admin.' . $data['type']),
             'link' => $data['type']
           ],
         ]

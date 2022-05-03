@@ -7,12 +7,12 @@
       [
         'id' => $data['type'] . '.all',
         'url' => url('admin.' . $data['type']),
-        'name' => __('all'),
+        'name' => __('admin.all'),
         'icon' => 'bi-record-circle'
       ], [
         'id' => $data['type'] . '.ban',
         'url' => url('admin.' . $data['type'] . '.ban'),
-        'name' => __('deleted'),
+        'name' => __('admin.deleted'),
         'icon' => 'bi-x-circle'
       ]
     ]
@@ -24,12 +24,12 @@
     <table>
       <thead>
         <th>id</th>
-        <th><?= __('avatar'); ?></th>
-        <th><?= __('information'); ?></th>
-        <th>IP <?= __('registrations'); ?></th>
-        <th><?= __('last'); ?></th>
+        <th><?= __('admin.avatar'); ?></th>
+        <th><?= __('admin.information'); ?></th>
+        <th>IP <?= __('admin.registrations'); ?></th>
+        <th><?= __('admin.last'); ?></th>
         <th>Ban</th>
-        <th><?= __('edit'); ?></th>
+        <th><?= __('admin.edit'); ?></th>
       </thead>
       <?php foreach ($data['alluser'] as $user) :  ?>
         <tr>
@@ -54,13 +54,13 @@
             <div class="text-sm">
               <?= $user['email']; ?>
               <?php if ($user['activated'] == 1) : ?>
-                <div class="gray-600"><?= __('email.activated'); ?></div>
+                <div class="gray-600"><?= __('admin.activated'); ?></div>
               <?php else : ?>
-                <div class="red"><?= __('not.activated'); ?> e-mail</div>
+                <div class="red"><?= __('admin.not_activated'); ?> e-mail</div>
               <?php endif; ?>
             </div>
             <?php if ($user['limiting_mode'] == 1) : ?>
-              <div class="red"><?= __('dumb.mode'); ?></div>
+              <div class="red"><?= __('admin.dumb_mode'); ?></div>
             <?php endif; ?>
             <?php if (!empty($user['banlist_int_num'])) : ?>
               <div class="red">bans: <?= $user['banlist_int_num']; ?></div>
@@ -91,11 +91,11 @@
             <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) : ?>
               <?php if ($user['ban_list']) : ?>
                 <span class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                  <span class="red"><?= __('unban'); ?></span>
+                  <span class="red"><?= __('admin.unban'); ?></span>
                 </span>
               <?php else : ?>
                 <span class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-                  <?= __('ban.it'); ?>
+                  <?= __('admin.ban'); ?>
                 </span>
               <?php endif; ?>
             <?php else : ?>
@@ -103,7 +103,7 @@
             <?php endif; ?>
           </td>
           <td class="center">
-            <a title="<?= __('edit'); ?>" href="<?= url('admin.user.edit', ['id' => $user['id']]); ?>">
+            <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.user.edit', ['id' => $user['id']]); ?>">
               <i class="bi-pencil"></i>
             </a>
           </td>
@@ -111,7 +111,7 @@
       <?php endforeach; ?>
     </table>
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], null, url('admin.users')); ?>
 </div>

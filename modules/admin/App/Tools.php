@@ -11,7 +11,7 @@ class Tools
         return view(
             '/view/default/tools/tools',
             [
-                'meta'  => Meta::get(__('tools')),
+                'meta'  => Meta::get(__('admin.tools')),
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,

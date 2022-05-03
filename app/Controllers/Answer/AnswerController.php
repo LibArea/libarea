@@ -28,13 +28,13 @@ class AnswerController extends MainController
 
         $m = [
             'og'    => false,
-            'url'   => getUrlByName('answers'),
+            'url'   => url('answers'),
         ];
 
         return Tpl::LaRender(
             '/answer/answers',
             [
-                'meta'  => Meta::get(__('all.answers'), __('answers.desc'), $m),
+                'meta'  => Meta::get(__('app.all_answers'), __('app.answers.desc'), $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,

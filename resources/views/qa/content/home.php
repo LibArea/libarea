@@ -24,7 +24,7 @@
 
   <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) : ?>
     <div class="box bg-violet text-sm">
-      <h3 class="uppercase-box"><?= __('reading'); ?></h3>
+      <h3 class="uppercase-box"><?= __('app.app.reading'); ?></h3>
 
       <?php
       $my = [];
@@ -54,22 +54,22 @@
             <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if (UserData::getUserId() == $topic['facet_user_id']) : ?>
-            <a class="right gray-600 mt5" title="<?= sprintf(__('add.option'), __('post')); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+            <a class="right gray-600 mt5" title="<?= __('app.add_option', ['name' => __('app.post')]); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
               <i class="bi-plus-lg text-sm"></i>
             </a>
           <?php endif; ?>
         </div>
       <?php endforeach; ?>
       <?php if (count($data['topics_user']) > config('facets.quantity_home')) : ?>
-        <a class="gray block mt5" title="<?= __('topics'); ?>" href="<?= url('topics.my'); ?>">
-          <?= __('see more'); ?> <i class="bi-chevron-double-right middle"></i>
+        <a class="gray block mt5" title="<?= __('app.topics'); ?>" href="<?= url('topics.my'); ?>">
+          <?= __('app.see_more'); ?> <i class="bi-chevron-double-right middle"></i>
         </a>
       <?php endif; ?>
     </div>
   <?php else : ?>
     <div class="box bg-violet text-sm">
       <div class="uppercase gray mt5 mb5">
-        <?= __('topics'); ?>
+        <?= __('app.topics'); ?>
       </div>
       <?php foreach (config('facets.default') as $key => $topic) : ?>
         <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $topic['url']; ?>">

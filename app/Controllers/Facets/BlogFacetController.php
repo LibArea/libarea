@@ -37,8 +37,8 @@ class BlogFacetController extends MainController
         $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
-        $url    = getUrlByName('blog', ['slug' => $facet['facet_slug']]);
-        $title  = $facet['facet_seo_title'] . ' — ' .  __('blog');
+        $url    = url('blog', ['slug' => $facet['facet_slug']]);
+        $title  = $facet['facet_seo_title'] . ' — ' .  __('app.blog');
         $description  = $facet['facet_description'];
 
         $m = [

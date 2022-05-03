@@ -17,7 +17,7 @@ class Tpl
 
     public static function LaRender($name, $data = [])
     {
-        if (Config::get('general.site_disabled')  && !UserData::checkAdmin()) {
+        if (config('general.site_disabled')  && !UserData::checkAdmin()) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
             hl_preliminary_exit();
         }

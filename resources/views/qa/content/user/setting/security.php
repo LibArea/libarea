@@ -13,13 +13,13 @@ $form->html_form(UserData::getUserTl(), config('form/user-security'));
 
       <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
-        <?= Html::sumbit(__('edit')); ?>
+        <?= Html::sumbit(__('app.edit')); ?>
       </fieldset>
     </form>
   </div>
 </main>
 <aside>
   <div class="box bg-violet text-sm">
-    <?= __('security.info'); ?>
+    <?= __('app.security_info'); ?>
   </div>
 </aside>

@@ -6,12 +6,12 @@
 
 return [
     [
-      'title'   => __('message.PM'),
-      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select', 'before_html' => '<h3>' . __('notification.email') . '</h3>'],
+      'title'   => __('app.message_PM'),
+      'arr'     => ['options' => ['0' => __('app.no'), '1' => __('app.yes')], 'type' => 'select', 'before_html' => '<h3>' . __('app.notification_email') . '</h3>'],
       'name'    => 'setting_email_pm',
     ], [
-      'title'   => __('appeal.@'),
-      'arr'     => ['options' => ['0' => __('no'), '1' => __('yes')], 'type' => 'select'],
+      'title'   => __('app.appeal_@'),
+      'arr'     => ['options' => ['0' => __('app.no'), '1' => __('app.yes')], 'type' => 'select'],
       'name'    => 'setting_email_appealed',
     ]
 ];

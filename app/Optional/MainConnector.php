@@ -29,26 +29,25 @@ class MainConnector implements Connector
             "Config"                        => "app/Libraries/Config.php",
             "Translate"                     => "app/Libraries/Translate.php",
 
-            "Sass"                          => "app/Libraries/Sass.php",
             "Content"                       => "app/Libraries/Content.php",
             "UploadImage"                   => "app/Libraries/UploadImage.php",
             "Integration"                   => "app/Libraries/Integration.php",
             "Validation"                    => "app/Libraries/Validation.php",
-            "SendEmail"                     => "app/Libraries/SendEmail.php",
             "Tpl"                           => "app/Libraries/Tpl.php",
             "Html"                          => "app/Libraries/Html.php",
             "Meta"                          => "app/Libraries/Meta.php",
             "UserData"                      => "app/Libraries/UserData.php",
             "Forms"                         => "app/Libraries/Forms.php",
 
-            "Slug"                          => "app/ThirdParty/Slug/Slug.php",
-            "Parsedown"                     => "app/ThirdParty/Parsedown/Parsedown.php",
-            "MyParsedown"                   => "app/ThirdParty/Parsedown/MyParsedown.php",
-            "SimpleImage"                   => "app/ThirdParty/SimpleImage.php",
-            "URLScraper"                    => "app/ThirdParty/URLScraper.php",
-            "JacksonJeans\MailException"    => "app/ThirdParty/php-mail/MailException.class.php",
-            "JacksonJeans\Mail"             => "app/ThirdParty/php-mail/Mail.class.php",
-            "Domain"                        => "app/ThirdParty/Domain/Domain.php",
+            // TODO: заменить
+            "Parsedown"                     => "app/Libraries/Parsedown/Parsedown.php",
+            "MyParsedown"                   => "app/Libraries/Parsedown/MyParsedown.php",
+            "SimpleImage"                   => "app/Libraries/SimpleImage.php",
+            "URLScraper"                    => "app/Libraries/URLScraper.php",
+
+            "SendEmail"                     => "app/Libraries/SendEmail.php",
+            "JacksonJeans\MailException"    => "app/Libraries/php-mail/MailException.class.php",
+            "JacksonJeans\Mail"             => "app/Libraries/php-mail/Mail.class.php",
         ];
     }
 }

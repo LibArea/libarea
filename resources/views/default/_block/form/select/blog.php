@@ -1,5 +1,5 @@
 <fieldset>
-  <label><?= __('blog'); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?></label>
+  <label><?= __('app.blog'); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?></label>
   <input name="blog_select" id="blog_id">
 </fieldset>
 

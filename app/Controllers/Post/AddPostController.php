@@ -6,7 +6,10 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
-use Content, UploadImage, Integration, Validation, Slug, URLScraper, Config, Domain, Tpl, Meta, Html, UserData;
+use Content, UploadImage, Integration, Validation, URLScraper, Tpl, Meta, Html, UserData;
+
+use Cocur\Slugify\Slugify;
+use Utopia\Domains\Domain;
 
 class AddPostController extends MainController
 {
@@ -45,7 +48,7 @@ class AddPostController extends MainController
         return Tpl::LaRender(
             $puth,
             [
-                'meta'      => Meta::get(__('add.option', ['name' => __('post')])),
+                'meta'      => Meta::get(__('app.add_option', ['name' => __('app.post')])),
                 'data'  => [
                     'facets'    => ['topic' => $topic],
                     'blog'      => FacetModel::getFacetsUser($this->user['id'], 'blog'),
@@ -92,9 +95,9 @@ class AddPostController extends MainController
         }
 
         // Используем для возврата
-        $redirect = getUrlByName('post.add');
+        $redirect = url('post.add');
         if ($blog_id > 0) {
-            $redirect = getUrlByName('post.add') . '/' . $blog_id;
+            $redirect = url('post.add') . '/' . $blog_id;
         }
 
         // We will check for freezing, stop words, the frequency of posting content per day 
@@ -103,7 +106,7 @@ class AddPostController extends MainController
 
         $post_title = str_replace("&nbsp;", '', $post_title);
         Validation::Length($post_title, 'title', '6', '250', $redirect);
-        Validation::Length($content, 'the.post', '6', '25000', $redirect);
+        Validation::Length($content, 'content', '6', '25000', $redirect);
 
         if ($post_url) {
             $site = $this->addUrl($post_url, $post_title);
@@ -142,12 +145,12 @@ class AddPostController extends MainController
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            (new \App\Controllers\AuditController())->create('post', $last_id, getUrlByName('admin.audits'));
+            (new \App\Controllers\AuditController())->create('post', $last_id, url('admin.audits'));
         }
 
-        $redirect = getUrlByName('post', ['id' => $last_id, 'slug' => $slug]);
+        $redirect = url('post', ['id' => $last_id, 'slug' => $slug]);
         if ($type == 'page') {
-            $redirect = getUrlByName('info.page', ['slug' => $slug]);
+            $redirect = url('info.page', ['slug' => $slug]);
         }
 
         // Add fastes (blogs, topics) to the post 
@@ -158,7 +161,7 @@ class AddPostController extends MainController
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $redirect);
         }
 
-        if (Config::get('general.discord')) {
+        if (config('general.discord')) {
             if ($post_tl == 0 && $post_draft == 0) {
                 Integration::AddWebhook($content, $post_title, $redirect);
             }
@@ -172,7 +175,7 @@ class AddPostController extends MainController
                 'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
                 'action_type'   => $type,
-                'action_name'   => 'content.added',
+                'action_name'   => 'content_added',
                 'url_content'   => $redirect,
             ]
         );
@@ -182,11 +185,9 @@ class AddPostController extends MainController
 
     public static function slug($title)
     {
-        Slug::rule('«', '');
-        Slug::rule('»', '');
-        Slug::rule('—', '');
-        Slug::rule('’', '');
-        $uri    = Slug::get($title);
+        $slugify = new Slugify();
+        $uri = $slugify->slugify($title);
+
         $result = PostModel::getSlug($new_slug = substr($uri, 0, 90));
         if ($result) {
             return $new_slug . "-";
@@ -212,7 +213,7 @@ class AddPostController extends MainController
                     'item_url'          => $item_url,
                     'item_domain'       => $post_url_domain,
                     'item_title'        => $post_title,
-                    'item_content'      => __('description.formed'),
+                    'item_content'      => __('app.description.formed'),
                     'item_published'    => 0,
                     'item_user_id'      => $this->user['id'],
                     'item_type_url'     => 0,

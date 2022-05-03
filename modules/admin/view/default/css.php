@@ -7,17 +7,17 @@
   ]
 ); ?>
 <div class="box bg-white">
-  <h4><?= __('topics'); ?>:</h4>
+  <h4><?= __('admin.topics'); ?>:</h4>
   <a href="#" class="tags">.tags</a>
   <a href="#" class="tags-xs">.tags-xs</a>
 
-  <h4 class="mt15"><?= __('buttons'); ?>:</h4>
+  <h4 class="mt15"><?= __('admin.buttons'); ?>:</h4>
   <p><i class="btn btn-outline-primary">btn btn-outline-primary</i></p>
   <p><i class="btn btn-small btn-outline-primary">btn btn-small btn-outline-primary</i></p>
   <p><i class="btn btn-primary">btn btn-primary</i></p>
   <p><i class="btn btn-small btn-primary">btn btn-small btn-primary</i></p>
 
-   <h4><?= __('other'); ?>:</h4> 
+   <h4><?= __('admin.other'); ?>:</h4> 
    <div class="box-flex flex-wrap">
      <div class="box mr5">.box</div>
      <div class="box bg-yellow mr5">.box .bg-yellow</div>
@@ -32,7 +32,7 @@
      <div class="box bg-red-200">.box .bg-red-200</div>
    </div>  
   <p>
-    <?= __('being.developed'); ?>...
+    <?= __('admin.being_developed'); ?>...
   </p>
 
 </div>

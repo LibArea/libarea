@@ -42,8 +42,9 @@ class Catalog
             'url'   => url('web.dir', ['grouping' => 'all', 'slug' => $category['facet_slug']]),
         ];
 
-        $title = __($sheet . '.cat.title', ['name' => $category['facet_title']]);
-        $description  = __($sheet . '.cat.desc', ['name' => $category['facet_title'], 'desc' => $category['facet_description']]);
+        $title = __('web.' . $sheet . '_title', ['name' => $category['facet_title']]);
+        $description_info = $category['facet_title'] . '. ' . $category['facet_description'];
+        $description  = __('web.' . $sheet . '_desc', ['description_info' => $description_info]);
 
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
@@ -75,7 +76,7 @@ class Catalog
     public static function breadcrumb($tree, $screening)
     {
         $arr = [
-            ['name' => __('catalog'), 'link' => url('web')]
+            ['name' => __('web.catalog'), 'link' => url('web')]
         ];
 
         $result = [];

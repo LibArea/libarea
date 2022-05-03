@@ -14,13 +14,13 @@ $form->html_form(UserData::getUserTl(), config('form/user-notifications'));
       <?= $form->build_form(); ?>
       <fieldset>
         <input type="hidden" name="nickname" id="nickname" value="">
-        <?= Html::sumbit(__('edit')); ?>
+        <?= Html::sumbit(__('app.edit')); ?>
       </fieldset>
     </form>
   </div>
 </main>
 <aside>
   <div class="box text-sm">
-    <?= __('notification.info'); ?>
+    <?= __('app.notification_info'); ?>
   </div>
 </aside>

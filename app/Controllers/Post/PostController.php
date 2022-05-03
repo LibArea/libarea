@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
-use Content, Config, Tpl, Html, Meta, UserData;
+use Content, Tpl, Html, Meta, UserData;
 
 class PostController extends MainController
 {
@@ -53,7 +53,7 @@ class PostController extends MainController
         // If the post type is a page, then depending on the conditions we make a redirect
         // Если тип поста страница, то в зависимости от условий делаем редирект
         if ($content['post_type'] == 'page' && $id > 0) {
-            redirect(getUrlByName('facet.article', ['facet_slug' => 'info', 'slug' => $content['post_slug']]));
+            redirect(url('facet.article', ['facet_slug' => 'info', 'slug' => $content['post_slug']]));
         }
 
         // Q&A (post_feature == 1) or Discussiona
@@ -76,7 +76,7 @@ class PostController extends MainController
             $answers[$ind]   = $row;
         }
 
-        $content_img  = Config::get('meta.img_path');
+        $content_img  = config('meta.img_path');
         if ($content['post_content_img']) {
             $content_img  = PATH_POSTS_COVER . $content['post_content_img'];
         } elseif ($content['post_thumb_img']) {
@@ -112,7 +112,7 @@ class PostController extends MainController
             'date'      => $content['post_date'],
             'og'        => true,
             'imgurl'    => $content_img,
-            'url'       => getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
+            'url'       => url('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
         ];
 
         if ($type == 'post') {
@@ -142,14 +142,14 @@ class PostController extends MainController
 
         $m = [
             'og'    => false,
-            'url'   => getUrlByName('facet.article', ['facet_slug' => $facet['facet_slug'], 'slug' => $content['post_slug']]),
+            'url'   => url('facet.article', ['facet_slug' => $facet['facet_slug'], 'slug' => $content['post_slug']]),
         ];
 
-        $title = $content['post_title'] . ' - ' . __('page');
+        $title = $content['post_title'] . ' - ' . __('app.page');
         return Tpl::LaRender(
             '/post/page-view',
             [
-                'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . __('page') . ')', $m),
+                'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . __('app.page') . ')', $m),
                 'data'  => [
                     'sheet' => 'page',
                     'type'  => $type,
@@ -171,7 +171,7 @@ class PostController extends MainController
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
             if ($slug != $content['post_slug']) {
-                redirect(getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]));
+                redirect(url('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]));
             }
 
             // Redirect when merging a post
@@ -239,13 +239,13 @@ class PostController extends MainController
 
         $m = [
             'og'    => false,
-            'url'   => getUrlByName('domain', ['domain' => $domain]),
+            'url'   => url('domain', ['domain' => $domain]),
         ];
 
         return Tpl::LaRender(
             '/post/link',
             [
-                'meta'  => Meta::get(__('domain') . ': ' . $domain, __('domain.desc') . ': ' . $domain, $m),
+                'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('app.domain.desc') . ': ' . $domain, $m),
                 'data'  => [
                     'sheet'         => 'domain',
                     'pagesCount'    => ceil($pagesCount / $this->limit),

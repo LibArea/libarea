@@ -108,8 +108,8 @@ class Reply
                 'user_id'       => $this->user['id'],
                 'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
-                'action_type'   => 'reply.web',
-                'action_name'   => 'content.added',
+                'action_type'   => 'reply_web',
+                'action_name'   => 'content_added',
                 'url_content'   => $url,
             ]
         );

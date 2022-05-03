@@ -30,7 +30,7 @@
 </div>
 
 <div class="box-flex justify-between">
-  <p class="m0 text-xl mb-none"><?= __($data['type']); ?></p>
+  <p class="m0 text-xl mb-none"><?= __('app.' . $data['type']); ?></p>
   <ul class="nav">
 
     <?= Tpl::insert(
@@ -41,17 +41,17 @@
           [
             'id'      => 'facet.feed',
             'url'     => url('topic', ['slug' => $topic['facet_slug']]),
-            'title'   => __('feed'),
+            'title'   => __('app.feed'),
             'icon'    => 'bi-sort-down'
           ], [
             'id'      => 'facet.recommend',
             'url'     => url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
-            'title'   => __('recommended'),
+            'title'   => __('app.recommended'),
             'icon'    => 'bi-lightning'
           ],  [
             'id'      => 'writers',
             'url'     => url('topic.writers', ['slug' => $topic['facet_slug']]),
-            'title'   => __('writers'),
+            'title'   => __('app.writers'),
             'icon'    => 'bi-award'
           ], [
             'id'      => 'info',

@@ -43,7 +43,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
       <aside>
         <?php if ($blog['facet_is_deleted'] == 0) : ?>
           <div class="bg-violet box text-sm">
-            <h3 class="uppercase-box"><?= __('created.by'); ?></h3>
+            <h3 class="uppercase-box"><?= __('app.created_by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= url('profile', ['login' => $data['user']['login']]); ?>">
               <?= Html::image($data['user']['avatar'], $data['user']['login'], 'ava-base', 'avatar', 'max'); ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>
@@ -62,14 +62,14 @@ if ($blog['facet_is_deleted'] == 0) : ?>
           <?php if (!empty($data['pages'])) : ?>
             <div class="sticky top0 top-sm">
               <div class="bg-violet box text-sm">
-                <h3 class="uppercase-box"><?= __('pages'); ?></h3>
+                <h3 class="uppercase-box"><?= __('app.pages'); ?></h3>
                 <?php foreach ($data['pages'] as $ind => $row) : ?>
                   <div class="mb5">
                     <a class="relative pt5 pb5 hidden" href="<?= url('blog.article', ['slug' => $blog['facet_slug'], 'post_slug' => $row['post_slug']]); ?>">
                       <?= $row['post_title']; ?>
                     </a>
                     <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == UserData::getUserId()) : ?>
-                      <a class="text-sm gray-600" title="<?= __('edit'); ?>" href="<?= url('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
+                      <a class="text-sm gray-600" title="<?= __('app.edit'); ?>" href="<?= url('content.edit', ['type' => 'page', 'id' => $row['post_id']]); ?>">
                         <i class="bi-pencil"></i>
                       </a>
                     <?php endif; ?>
@@ -85,7 +85,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
 <?php else : ?>
   <div class="center">
     <i class="bi-x-octagon text-8xl"></i>
-    <div class="mt5 gray"><?= __('remote'); ?></div>
+    <div class="mt5 gray"><?= __('app.remote'); ?></div>
   </div>
 <?php endif; ?>
 

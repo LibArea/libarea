@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\AuthModel;
-use Config, Integration, Validation, SendEmail, Tpl, Meta, Html, UserData;
+use Integration, Validation, SendEmail, Tpl, Meta, Html, UserData;
 
 class RegisterController extends MainController
 {
@@ -21,19 +21,19 @@ class RegisterController extends MainController
     public function showRegisterForm()
     {
         // Если включена инвайт система
-        if (Config::get('general.invite') == true) {
+        if (config('general.invite') == true) {
             redirect('/invite');
         }
 
         $m = [
             'og'    => false,
-            'url'   => getUrlByName('register'),
+            'url'   => url('register'),
         ];
 
         return Tpl::LaRender(
             '/auth/register',
             [
-                'meta'  => Meta::get(__('registration'), __('security.info'), $m),
+                'meta'  => Meta::get(__('app.registration'), __('app.security_info'), $m),
                 'data'  => [
                     'sheet' => 'registration',
                     'type'  => 'register'
@@ -58,49 +58,49 @@ class RegisterController extends MainController
         Validation::Email($email, $redirect);
 
         if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
-            Validation::ComeBack('email.replay', 'error', $redirect);
+            Validation::ComeBack('msg.email_replay', 'error', $redirect);
         }
 
         # Если домен указанной почты содержится в списке недопустимых
         $arr = explode('@', $email);
         $domain = array_pop($arr);
-        if (in_array($domain, Config::get('stop-email'))) {
+        if (in_array($domain, config('stop-email'))) {
             redirect($redirect);
         }
 
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
-            Validation::ComeBack('multiple.accounts', 'error', $redirect);
+            Validation::ComeBack('msg.multiple_accounts', 'error', $redirect);
         }
 
         Validation::Slug($login, 'nickname', '/register');
         Validation::Length($login, 'nickname', '3', '10', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
-            Validation::ComeBack('nick.character.repetitions', 'error', $redirect);
+            Validation::ComeBack('msg.nick_character', 'error', $redirect);
         }
 
         // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
-        if (in_array($login, Config::get('stop-nickname'))) {
-            Validation::ComeBack('nickname.replay', 'error', $redirect);
+        if (in_array($login, config('stop-nickname'))) {
+            Validation::ComeBack('msg.nickname_replay', 'error', $redirect);
         }
 
         if (is_array(AuthModel::checkRepetitions($login, 'login'))) {
-            Validation::ComeBack('nickname-replay', 'error', $redirect);
+            Validation::ComeBack('msg.nickname_replay', 'error', $redirect);
         }
 
         Validation::Length($password, 'password', '8', '32', $redirect);
         if (substr_count($password, ' ') > 0) {
-            Validation::ComeBack('password.spaces', 'error', $redirect);
+            Validation::ComeBack('msg.password_spaces', 'error', $redirect);
         }
 
         if ($password != $password_confirm) {
-            Validation::ComeBack('pass.match.err', 'error', $redirect);
+            Validation::ComeBack('msg.pass_match_err', 'error', $redirect);
         }
 
         if (!$inv_code) {
-            if (Config::get('general.captcha')) {
+            if (config('general.captcha')) {
                 if (!Integration::checkCaptchaCode()) {
-                    Validation::ComeBack('code.error', 'error', '/register');
+                    Validation::ComeBack('msg.code_error', 'error', '/register');
                 }
             }
             // Если хакинг формы
@@ -110,7 +110,7 @@ class RegisterController extends MainController
         $count =  UserModel::getUsersAllCount();
         // Для "режима запуска" первые 50 участников получают trust_level = 1 
         $tl = UserData::USER_FIRST_LEVEL;
-        if ($count < 50 && Config::get('general.mode') == true) {
+        if ($count < 50 && config('general.mode') == true) {
             $tl = UserData::USER_SECOND_LEVEL;
         }
 
@@ -119,8 +119,8 @@ class RegisterController extends MainController
             [
                 'login'                => $login,
                 'email'                => $email,
-                'template'             => Config::get('general.template'),
-                'lang'                 => Config::get('general.lang'),
+                'template'             => config('general.template'),
+                'lang'                 => config('general.lang'),
                 'whisper'              => '',
                 'password'             => password_hash($password, PASSWORD_BCRYPT),
                 'limiting_mode'        => 0, // Режим заморозки выключен
@@ -144,7 +144,7 @@ class RegisterController extends MainController
                 ]
             );
 
-            Validation::ComeBack('successfully.login', 'success', getUrlByName('login'));
+            Validation::ComeBack('msg.successfully_login', 'success', url('login'));
         }
 
         // Email Activation
@@ -157,9 +157,9 @@ class RegisterController extends MainController
         );
 
         // Sending email
-        SendEmail::mailText($active_uid, 'activate.email', ['link' => getUrlByName('activate.code', ['code' => $email_code])]);
+        SendEmail::mailText($active_uid, 'activate.email', ['link' => url('activate.code', ['code' => $email_code])]);
 
-        Validation::ComeBack('check.your.email', 'success', getUrlByName('login'));
+        Validation::ComeBack('msg.check_your_email', 'success', url('login'));
     }
 
     // Показ формы регистрации с инвайтом
@@ -169,13 +169,13 @@ class RegisterController extends MainController
         $invate = InvitationModel::available($code);
 
         if (!$invate) {
-            Validation::ComeBack('code.incorrect', 'error', '/');
+            Validation::ComeBack('msg.code_incorrect', 'error', '/');
         }
 
         return Tpl::LaRender(
             '/auth/register-invate',
             [
-                'meta'  => Meta::get(__('registration.invite')),
+                'meta'  => Meta::get(__('app.reg_invite')),
                 'data'  => [
                     'invate' => $invate,
                     'type'  => 'invite'

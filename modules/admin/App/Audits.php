@@ -44,7 +44,7 @@ class Audits
         return view(
             '/view/default/audit/audits',
             [
-                'meta'  => Meta::get(__($type)),
+                'meta'  => Meta::get('admin.' . __($type)),
                 'data' => [
                     'sheet'         => $sheet,
                     'type'          => $type,
@@ -68,7 +68,7 @@ class Audits
         return view(
             '/view/default/audit/logs',
             [
-                'meta'  => Meta::get(__('logs')),
+                'meta'  => Meta::get(__('admin.logs')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
@@ -87,7 +87,7 @@ class Audits
         return view(
             '/view/default/audit/logs-search',
             [
-                'meta'  => Meta::get(__('logs')),
+                'meta'  => Meta::get(__('admin.logs')),
                 'data'  => [
                     'type'          => $type,
                     'sheet'         => $sheet,

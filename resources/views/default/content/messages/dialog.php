@@ -6,8 +6,8 @@
     <form action="<?= url('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />
-      <textarea rows="3" id="message" class="mess" placeholder="<?= __('write'); ?>..." type="text" name="content" /></textarea>
-      <span class="right"><?= Html::sumbit(__('reply')); ?></span>
+      <textarea rows="3" id="message" class="mess" placeholder="<?= __('app.write'); ?>..." type="text" name="content" /></textarea>
+      <span class="right"><?= Html::sumbit(__('app.reply')); ?></span>
     </form>
   </div>
 
@@ -44,7 +44,7 @@
           </div>
           <?php if ($val['unread'] == 1 and $val['message_sender_id'] == UserData::getUserId()) : ?>
             <div class="right gray-600 lowercase text-sm hidden mb5 pb5">
-              <?= __('it.was.read'); ?> (<?= Html::langDate($val['message_receipt']); ?>)
+              <?= __('app.it_read'); ?> (<?= Html::langDate($val['message_receipt']); ?>)
             </div>
           <?php endif; ?>
         </div>
@@ -56,7 +56,7 @@
 
 <aside>
   <div class="box text-sm">
-    <h3 class="uppercase-box"><?= __('dialogues'); ?></h3>
+    <h3 class="uppercase-box"><?= __('app.dialogues'); ?></h3>
     <?php foreach ($data['dialog'] as $key => $val) : ?>
       <?php if ($val['id'] != UserData::getUserId()) : ?>
         <div class="flex relative pt5 pb5 items-center hidden">

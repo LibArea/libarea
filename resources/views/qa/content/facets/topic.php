@@ -9,7 +9,7 @@
   <?php else : ?>
     <div class="center">
       <i class="bi-x-octagon text-8xl"></i>
-      <div class="mt5 gray"><?= __('remote'); ?></div>
+      <div class="mt5 gray"><?= __('app.remote'); ?></div>
     </div>
   <?php endif; ?>
 </main>
@@ -17,11 +17,11 @@
   <?php if ($topic['facet_is_deleted'] == 0) : ?>
     <div class="box-flex justify-between bg-violet">
       <div class="center">
-        <div class="uppercase text-sm gray-600"><?= __('posts'); ?></div>
+        <div class="uppercase text-sm gray-600"><?= __('app.posts'); ?></div>
         <?= $topic['facet_count']; ?>
       </div>
       <div class="center relative">
-        <div class="uppercase text-sm gray-600"><?= __('reads'); ?></div>
+        <div class="uppercase text-sm gray-600"><?= __('app.reads'); ?></div>
         <div class="focus-user sky">
           <?= $topic['facet_focus_count']; ?>
         </div>
@@ -32,7 +32,7 @@
     <?php if (!empty($data['pages'])) : ?>
       <div class="sticky top0 top-sm">
         <div class="box bg-violet text-sm">
-          <h3 class="uppercase-box"><?= __('pages'); ?></h3>
+          <h3 class="uppercase-box"><?= __('app.pages'); ?></h3>
           <?php foreach ($data['pages'] as $ind => $row) : ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="">
               <?= $row['post_title']; ?>
@@ -46,7 +46,7 @@
     <?php if (!empty($data['writers'])) : ?>
       <div class="sticky top0 top-sm">
         <div class="box bg-violet text-sm">
-          <h3 class="uppercase-box"><?= __('writers'); ?></h3>
+          <h3 class="uppercase-box"><?= __('app.writers'); ?></h3>
           <ul>
           <?php foreach ($data['writers'] as $ind => $row) : ?>
             <li class="mb10">

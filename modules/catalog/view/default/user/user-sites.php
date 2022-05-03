@@ -2,7 +2,7 @@
 <div id="contentWrapper">
   <main>
     <h2 class="mb20">
-      <?= __($data['sheet'] . '.view'); ?>
+      <?= __('web.my_website'); ?>
       <?php if ($data['count'] != 0) : ?><sup class="gray-600 text-sm"><?= $data['count']; ?></sup><?php endif; ?>
     </h2>
 
@@ -20,7 +20,7 @@
               </a>
               <?php if ($item['item_published'] == 0) : ?>
                 <span class="focus-id bg-violet text-sm">
-                  <?= __('moderation'); ?>
+                  <?= __('web.moderation'); ?>
                 </span>
               <?php endif; ?>
               <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'all'); ?>
@@ -48,7 +48,7 @@
                     <div>
                       <i class="bi-arrow-return-right gray-600 ml10"></i>
                       <a class="black" href="<?= url('web.website', ['slug' => $item['item_domain']]); ?>">
-                        <?= __('more.detailed'); ?>
+                        <?= __('web.more'); ?>
                       </a>
                     </div>
                   <?php endif; ?>
@@ -59,16 +59,16 @@
         <?php endforeach; ?>
       </ol>
     <?php else : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'bi-info-lg']); ?>
     <?php endif ?>
 
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>
   </main>
   <aside>
-    <div class="box bg-yellow text-sm mt15"><?= __('user.sites.info'); ?>.</div>
+    <div class="box bg-yellow text-sm mt15"><?= __('web.my_website_info'); ?>.</div>
     <?php if (UserData::checkActiveUser()) : ?>
       <div class="box text-sm bg-violet mt15">
-        <h3 class="uppercase-box"><?= __('menu'); ?></h3>
+        <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>
         <ul class="menu">
           <?= includeTemplate('/view/default/_block/add-site', ['data' => $data]); ?>
           <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'list' => config('catalog/menu.user')]); ?>

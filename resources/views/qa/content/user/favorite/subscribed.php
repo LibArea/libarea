@@ -8,6 +8,6 @@
 </main>
 <aside>
   <div class="box bg-violet text-sm sticky top-sm">
-    <?= __('preferences.info'); ?>
+    <?= __('app.preferences_info'); ?>
   </div>
 </aside>

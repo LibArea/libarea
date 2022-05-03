@@ -3,7 +3,7 @@
 
 <main>
   <div class="box">
-    <a href="<?= url('teams'); ?>"><?= __('teams'); ?></a> /
+    <a href="<?= url('teams'); ?>"><?= __('team.home'); ?></a> /
     <span class="red"><?= $team['name']; ?></span>
 
     <div class="content-body">
@@ -14,13 +14,13 @@
       <i class="bi-calendar-week mr5"></i> <?= Html::langDate($team['created_at']); ?> / <?= Html::langDate($team['updated_at']); ?>
     </div>
 
-    <h2><?= __('owner'); ?></h2>
+    <h2><?= __('team.owner'); ?></h2>
     <div class="mb15 mt5">
       <?= Html::image($team['avatar'], $team['login'], 'ava-base', 'avatar', 'small'); ?>
       <a href="<?= url('profile', ['login' => $team['login']]); ?>"><?= $team['login']; ?></a>
     </div>
 
-    <h2><?= __('users'); ?></h2>
+    <h2><?= __('team.users'); ?></h2>
     <div class="mb15 mt5">
       <?php foreach ($data['team_users'] as $usr) : ?>
         <div class="mb15">
@@ -30,7 +30,7 @@
       <?php endforeach; ?>
     </div>
 
-    <a href="<?= url('team.edit', ['id' => $team['id']]); ?>" class="btn btn-primary"><?= __('edit'); ?></a>
+    <a href="<?= url('team.edit', ['id' => $team['id']]); ?>" class="btn btn-primary"><?= __('team.edit'); ?></a>
   </div>
 </main>
 

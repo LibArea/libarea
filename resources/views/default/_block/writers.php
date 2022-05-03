@@ -4,7 +4,7 @@
       <div class="flex br-bottom">
         <div class="mr15 mt10">
           <?= $writer['sum']; ?>
-          <span class="block gray lowercase"><?= __('views'); ?></span>
+          <span class="block gray lowercase"><?= __('app.views'); ?></span>
         </div>
         <div class="p15">
           <?= Html::image($writer['avatar'], $writer['login'], 'w50 h50', 'avatar', 'small'); ?>
@@ -23,5 +23,5 @@
     <?php endforeach; ?>
   </div>
 <?php else : ?>
-  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no'), 'icon' => 'bi-info-lg']); ?>
 <?php endif; ?>

@@ -7,13 +7,13 @@
       [
         'id'    => $data['type'],
         'url'   => url('admin.facets.type', ['type' => $data['type']]),
-        'name'  => __('all'),
+        'name'  => __('admin.all'),
         'icon'  => 'bi-x-circle'
       ],
       [
         'id'    => 'ban.facet',
         'url'   => url('admin.facets.ban.type', ['type' => $data['type']]),
-        'name'  => __('deleted'),
+        'name'  => __('admin.deleted'),
         'icon'  => 'bi-x-circle'
       ]
     ]
@@ -73,14 +73,14 @@
     <?php endforeach; ?>
   <?php else : ?>
     <?php if ($data['type'] != 'all') : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
   <?php endif; ?>
   
   <?php if ($data['type'] == 'section') : ?>
   
     <?php if (!empty($data['pages'])) :?>
-    <h3 class="mb5"><?= __('pages'); ?></h3>
+    <h3 class="mb5"><?= __('admin.pages'); ?></h3>
       <?php foreach ($data['pages'] as $page) : ?>
         <div class="mb5">
           <a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $page['post_slug']]); ?>">

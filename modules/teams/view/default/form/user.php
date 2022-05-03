@@ -1,5 +1,5 @@
 <fieldset>
-    <label for="name"><?= __('users'); ?></label>
+    <label for="name"><?= __('team.users'); ?></label>
     <input name='user_id' id="user_id">
 </fieldset>
 

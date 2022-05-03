@@ -31,13 +31,13 @@ class UserController extends MainController
 
         $m = [
             'og'    => false,
-            'url'   => getUrlByName($sheet),
+            'url'   => url($sheet),
         ];
 
         return Tpl::LaRender(
             '/user/all',
             [
-                'meta'  => Meta::get(__($type . 's'), __($sheet . '.desc'), $m),
+                'meta'  => Meta::get(__('meta.' . $sheet), __('meta.' . $sheet . '.desc'), $m),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,
@@ -68,7 +68,7 @@ class UserController extends MainController
         return Tpl::LaRender(
             '/user/favorite/all',
             [
-                'meta'  => Meta::get(__('favorites')),
+                'meta'  => Meta::get(__('app.favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
@@ -92,7 +92,7 @@ class UserController extends MainController
         return Tpl::LaRender(
             '/user/favorite/folders',
             [
-                'meta'  => Meta::get(__('folders')),
+                'meta'  => Meta::get(__('app.folders')),
                 'data'  => [
                     'sheet'     => 'folders',
                     'type'      => 'folders',
@@ -108,7 +108,7 @@ class UserController extends MainController
         return Tpl::LaRender(
             '/user/favorite/all',
             [
-                'meta'  => Meta::get(__('favorites')),
+                'meta'  => Meta::get(__('app.favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
@@ -125,7 +125,7 @@ class UserController extends MainController
         return Tpl::LaRender(
             '/user/draft',
             [
-                'meta'  => Meta::get(__('drafts')),
+                'meta'  => Meta::get(__('app.drafts')),
                 'data'  => [
                     'drafts'    => UserModel::userDraftPosts($this->user['id']),
                     'sheet'     => 'drafts',
@@ -142,9 +142,9 @@ class UserController extends MainController
         return Tpl::LaRender(
             '/user/favorite/subscribed',
             [
-                'meta'  => Meta::get(__('subscribed')),
+                'meta'  => Meta::get(__('app.subscribed')),
                 'data'  => [
-                    'h1'    => __('subscribed') . ' ' . $this->user['login'],
+                    'h1'    => __('app.subscribed') . ' ' . $this->user['login'],
                     'sheet' => 'subscribed',
                     'type'  => 'favorites',
                     'posts' => PostModel::getFocusPostsListUser($this->user['id'])

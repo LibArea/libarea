@@ -16,7 +16,7 @@ $sw = $sw ?? '?';
   <?php if (!empty($results['documents'])) : ?>
 
     <p>
-      <?= __('results.search'); ?> <?= $results['numFound']; ?>
+      <?= __('search.results_search'); ?> <?= $results['numFound']; ?>
       <?php if ($data['sw'] != 0) : ?>
         <span class="ml30 gray-600">
           <?= $data['sw']; ?> ms
@@ -45,7 +45,7 @@ $sw = $sw ?? '?';
               <?= Html::websiteImage($result['domain'], 'favicon', $result['domain'], 'favicons mr5'); ?>
               <?= $result['domain']; ?>
             </span>
-            <a class="gray-600 ml15" href="<?= url('web.website', ['slug' => $result['domain']]); ?>"><?= __('more.detailed'); ?></a>
+            <a class="gray-600 ml15" href="<?= url('web.website', ['slug' => $result['domain']]); ?>"><?= __('web.more'); ?></a>
             <span class="gray-600">~ <?= $result['_score']; ?></span>
           </div>
         <?php endif; ?>

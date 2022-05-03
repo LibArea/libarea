@@ -28,13 +28,13 @@ class AllFacetController extends MainController
 
         $m = [
             'og'    => true,
-            'url'   => getUrlByName($sheet),
+            'url'   => url($sheet),
         ];
 
         return Tpl::LaRender(
             '/facets/all',
             [
-                'meta'  => Meta::get(__($sheet), __($sheet . '.desc'), $m),
+                'meta'  => Meta::get(__('meta.' . $sheet), __('meta.' . $sheet . '.desc'), $m),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

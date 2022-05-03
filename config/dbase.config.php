@@ -12,10 +12,10 @@ define("HLEB_TYPE_DB", "mysql.myname");
 define("HLEB_PARAMETERS_FOR_DB", [
 
     "mysql.myname" => [
-        "mysql:host=127.0.0.1",
-        // "port=3360",
-        "dbname=test", //dev
-        "charset=utf8mb4", // таблица и база в этой кодировки.
+        "mysql:host=localhost",
+        "port=3306",
+        "dbname=lib",
+        "charset=utf8mb4",
         "user" => "root",
         "pass" => ""
     ],

@@ -3,7 +3,7 @@
   <div class="flex gap">
     <main class="col-two">
       <div class="box-flex">
-        <p class="m0"><?= __('answers'); ?> <b><?= $data['profile']['login']; ?></b></p>
+        <p class="m0"><?= __('app.answers'); ?> <b><?= $data['profile']['login']; ?></b></p>
       </div>
       <?php if (!empty($data['answers'])) : ?>
         <div class="box">
@@ -11,7 +11,7 @@
         </div>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/answers'); ?>
       <?php else : ?>
-        <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.answers'), 'icon' => 'bi-info-lg']); ?>
+        <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_answers'), 'icon' => 'bi-info-lg']); ?>
       <?php endif; ?>
     </main>
     <aside>

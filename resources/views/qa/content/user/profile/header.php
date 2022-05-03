@@ -21,12 +21,12 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
       <?php if (UserData::checkActiveUser()) : ?>
         <div class="right m20">
           <?php if ($profile['id'] == UserData::getUserId()) : ?>
-            <a class="btn btn-primary" title="<?= __('settings'); ?>" href="<?= url('setting'); ?>">
+            <a class="btn btn-primary" title="<?= __('app.settings'); ?>" href="<?= url('setting'); ?>">
               <i class="bi-gear"></i>
             </a>
           <?php else : ?>
             <?php if ($data['button_pm'] === true) : ?>
-              <a class="btn btn-primary" title="<?= __('write.message'); ?>" href="<?= url('send.messages', ['login' => $profile['login']]); ?>">
+              <a class="btn btn-primary" title="<?= __('app.write_message'); ?>" href="<?= url('send.messages', ['login' => $profile['login']]); ?>">
                 <i class="bi-envelope"></i>
               </a>
             <?php endif; ?>
@@ -51,7 +51,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
                 <a class="focus-user sky" href="<?= url('profile.posts', ['login' => $profile['login']]); ?>">
                   <?= $data['count']['count_posts']; ?>
                 </a>
-                <div class="uppercase mt5 text-sm gray-600"><?= __('posts'); ?></div>
+                <div class="uppercase mt5 text-sm gray-600"><?= __('app.posts'); ?></div>
               </div>
             <?php endif; ?>
 
@@ -60,7 +60,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
                 <a class="focus-user sky" href="<?= url('profile.answers', ['login' => $profile['login']]); ?>">
                   <?= $data['count']['count_answers']; ?>
                 </a>
-                <div class="uppercase mt5 text-sm gray-600"><?= __('answers'); ?></div>
+                <div class="uppercase mt5 text-sm gray-600"><?= __('app.answers'); ?></div>
               </div>
             <?php endif; ?>
 
@@ -69,7 +69,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') {
                 <a class="focus-user sky" href="<?= url('profile.comments', ['login' => $profile['login']]); ?>">
                   <?= $data['count']['count_comments']; ?>
                 </a>
-                <div class="uppercase mt5 text-sm gray-600"><?= __('comments'); ?></div>
+                <div class="uppercase mt5 text-sm gray-600"><?= __('app.comments'); ?></div>
               </div>
             <?php endif; ?>
           </div>

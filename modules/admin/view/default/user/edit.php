@@ -12,7 +12,7 @@
     <?= csrf_field() ?>
     <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
       <a class="right text-sm" href="<?= url('delete.cover', ['login' => $data['user']['login']]); ?>">
-        <?= __('remove'); ?>
+        <?= __('admin.remove'); ?>
       </a>
       <br>
     <?php endif; ?>
@@ -29,11 +29,11 @@
       <?php if ($data['user']['trust_level'] != UserData::REGISTERED_ADMIN) : ?>
         <?php if ($data['user']['ban_list']) : ?>
           <span class="type-ban" data-id="<?= $data['user']['id']; ?>" data-type="user">
-            <span class="red"><?= __('unban'); ?></span>
+            <span class="red"><?= __('admin.unban'); ?></span>
           </span>
         <?php else : ?>
           <span class="type-ban" data-id="<?= $data['user']['id']; ?>" data-type="user">
-            <span class="green">+ <?= __('ban.it'); ?></span>
+            <span class="green">+ <?= __('admin.ban'); ?></span>
           </span>
         <?php endif; ?>
       <?php else : ?>
@@ -44,53 +44,53 @@
       <i class="bi-eye"></i> <?= $data['user']['hits_count']; ?>
     </fieldset>
     <fieldset>
-      <label for="post_title"><?= __('registration'); ?></label>
+      <label for="post_title"><?= __('admin.registration'); ?></label>
       <?= $data['user']['created_at']; ?> |
       <?= $data['user']['reg_ip']; ?>
       <?php if ($data['user']['duplicat_ip_reg'] > 1) : ?>
         <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
       <?php endif; ?>
-      (<?= __('ed') ?>. <?= $data['user']['updated_at']; ?>)
+      (<?= __('admin.ed') ?>. <?= $data['user']['updated_at']; ?>)
     </fieldset>
     <hr>
    <fieldset>
       <?php if ($data['user']['limiting_mode'] == 1) : ?>
-        <span class="red"><?= __('dumb.mode'); ?>!</span><br>
+        <span class="red"><?= __('admin.dumb_mode'); ?>!</span><br>
       <?php endif; ?>
       <label for="limiting_mode">
-        <?= __('dumb.mode'); ?>?
+        <?= __('admin.dumb_mode'); ?>?
       </label>
-      <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('no'); ?>
-      <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('yes'); ?>
+      <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('admin.no'); ?>
+      <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('admin.yes'); ?>
     </fieldset>
     
     <fieldset>
       <label for="scroll">
-        <?= __('endless.scroll'); ?>
+        <?= __('admin.scroll'); ?>
       </label>
-      <input type="radio" name="scroll" <?php if ($data['user']['scroll'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('no'); ?>
-      <input type="radio" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('yes'); ?>
+      <input type="radio" name="scroll" <?php if ($data['user']['scroll'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('admin.no'); ?>
+      <input type="radio" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('admin.yes'); ?>
     </fieldset>
 
     <hr>
     <fieldset>
       <?php if ($data['count']['count_posts'] != 0) : ?>
-        <label class="required"><?= __('posts'); ?>:</label>
-        <a target="_blank" rel="noopener noreferrer" title="<?= __('posts'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.posts', ['login' => $data['user']['login']]); ?>">
+        <label class="required"><?= __('admin.posts'); ?>:</label>
+        <a target="_blank" rel="noopener noreferrer" title="<?= __('admin.posts'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.posts', ['login' => $data['user']['login']]); ?>">
           <?= $data['count']['count_posts']; ?>
         </a> <br>
       <?php endif; ?>
       <?php if ($data['count']['count_answers'] != 0) : ?>
-        <label class="required"><?= __('answers'); ?>:</label>
-        <a target="_blank" rel="noopener noreferrer" title="<?= __('answers'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.answers', ['login' => $data['user']['login']]); ?>">
+        <label class="required"><?= __('admin.answers'); ?>:</label>
+        <a target="_blank" rel="noopener noreferrer" title="<?= __('admin.answers'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.answers', ['login' => $data['user']['login']]); ?>">
           <?= $data['count']['count_answers']; ?>
         </a> <br>
       <?php else : ?>
         ---
       <?php endif; ?>
       <?php if ($data['count']['count_comments'] != 0) : ?>
-        <label class="required"><?= __('comments'); ?>:</label>
-        <a target="_blank" rel="noopener noreferrer" title="<?= __('comments'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.comments', ['login' => $data['user']['login']]); ?>">
+        <label class="required"><?= __('admin.comments'); ?>:</label>
+        <a target="_blank" rel="noopener noreferrer" title="<?= __('admin.comments'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.comments', ['login' => $data['user']['login']]); ?>">
           <?= $data['count']['count_comments']; ?>
         </a> <br>
       <?php else : ?>
@@ -100,18 +100,18 @@
     <hr>
     <fieldset>
       <a class="text-sm" href="<?= url('admin.badges.user.add', ['id' => $data['user']['id']]); ?>">
-        + <?= __('reward.user'); ?>
+        + <?= __('admin.reward_user'); ?>
       </a>
     </fieldset>
     <fieldset>
-      <label for="badge_icon"><?= __('badges'); ?></label>
+      <label for="badge_icon"><?= __('admin.badges'); ?></label>
       <?php if ($data['user']['badges']) : ?>
         <div class="text-2xl">
           <?php foreach ($data['user']['badges'] as $badge) : ?>
             <div class="mb5">
               <?= $badge['badge_icon']; ?>
               <span class="remove-badge text-sm lowercase" data-id="<?= $badge['bu_id']; ?>" data-uid="<?= $data['user']['id']; ?>">
-                - <?= __('remove'); ?>
+                - <?= __('admin.remove'); ?>
               </span>
             </div>
           <?php endforeach; ?>
@@ -121,7 +121,7 @@
       <?php endif; ?>
     </fieldset>
     <fieldset>
-      <label for="whisper"><?= __('whisper'); ?></label>
+      <label for="whisper"><?= __('admin.whisper'); ?></label>
       <input type="text" name="whisper" value="<?= $data['user']['whisper']; ?>">
     </fieldset>
     <hr>
@@ -130,9 +130,9 @@
       <input type="text" name="email" value="<?= $data['user']['email']; ?>" required>
     </fieldset>
     <fieldset>
-      <label for="activated"><?= __('email.activated'); ?>?</label>
-      <input type="radio" name="activated" <?php if ($data['user']['activated'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('no'); ?>
-      <input type="radio" name="activated" <?php if ($data['user']['activated'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('yes'); ?>
+      <label for="activated"><?= __('admin.activated'); ?>?</label>
+      <input type="radio" name="activated" <?php if ($data['user']['activated'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('admin.no'); ?>
+      <input type="radio" name="activated" <?php if ($data['user']['activated'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('admin.yes'); ?>
     </fieldset>
     <hr>
     <?php if (UserData::REGISTERED_ADMIN != $data['user']['trust_level']) : ?>
@@ -152,19 +152,19 @@
       <input type="hidden" name="trust_level" value="10">
     <?php endif; ?>
     <fieldset>
-      <label for="login"><?= __('nickname'); ?>: /u/**<sup class="red">*</sup></label>
+      <label for="login"><?= __('admin.nickname'); ?>: /u/**<sup class="red">*</sup></label>
       <input type="text" name="login" value="<?= $data['user']['login']; ?>" required>
     </fieldset>
     <fieldset>
-      <label for="name"><?= __('name'); ?></label>
+      <label for="name"><?= __('admin.name'); ?></label>
       <input type="text" name="name" value="<?= $data['user']['name']; ?>">
     </fieldset>
     <fieldset>
-      <label for="about"><?= __('about.me'); ?></label>
+      <label for="about"><?= __('admin.about'); ?></label>
       <textarea class="add" name="about"><?= $data['user']['about']; ?></textarea>
     </fieldset>
 
-    <h3><?= __('contacts'); ?></h3>
+    <h3><?= __('admin.contacts'); ?></h3>
     <?php foreach (config('/form/user-setting') as $block) : ?>
       <fieldset>
         <label for="title"><?= $block['lang']; ?></label>
@@ -175,7 +175,7 @@
       </fieldset>
     <?php endforeach; ?>
 
-    <?= Html::sumbit(__('edit')); ?>
+    <?= Html::sumbit(__('admin.edit')); ?>
   </form>
 </div>
 </main>

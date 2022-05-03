@@ -36,28 +36,28 @@ class ActionController extends MainController
 
         switch ($type) {
             case 'post':
-                $url  = getUrlByName('post', ['id' => $info_type['post_id'], 'slug' => $info_type['post_slug']]);
+                $url  = url('post', ['id' => $info_type['post_id'], 'slug' => $info_type['post_slug']]);
                 $action_type = 'post';
                 break;
             case 'comment':
                 $post = PostModel::getPost($info_type['comment_post_id'], 'id', $this->user);
-                $url  = getUrlByName('post', ['id' => $info_type['comment_post_id'], 'slug' => $post['post_slug']]) . '#comment_' . $info_type['comment_id'];
+                $url  = url('post', ['id' => $info_type['comment_post_id'], 'slug' => $post['post_slug']]) . '#comment_' . $info_type['comment_id'];
                 $action_type = 'comment';
                 break;
             case 'answer':
                 $post = PostModel::getPost($info_type['answer_post_id'], 'id', $this->user);
-                $url  = getUrlByName('post', ['id' => $info_type['answer_post_id'], 'slug' => $post['post_slug']]) . '#answer_' . $info_type['answer_id'];
+                $url  = url('post', ['id' => $info_type['answer_post_id'], 'slug' => $post['post_slug']]) . '#answer_' . $info_type['answer_id'];
                 $action_type = 'answer';
                 break;
             case 'reply':
                 $url  = '/';
-                $action_type = 'reply.web';
+                $action_type = 'reply_web';
                 break;
         }
 
         ActionModel::setDeletingAndRestoring($type, $info_type[$type . '_id'], $info_type[$type . '_is_deleted']);
 
-        $log_action_name = $info_type[$type . '_is_deleted'] == 1 ? 'content.restored' : 'content.deleted';
+        $log_action_name = $info_type[$type . '_is_deleted'] == 1 ? 'content_restored' : 'content_deleted';
 
         ActionModel::addLogs(
             [

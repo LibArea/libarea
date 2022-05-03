@@ -9,7 +9,7 @@
     <div class="box article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') : ?>
         <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet text-sm right">
-          <?= __('unsubscribe'); ?>
+          <?= __('app.unsubscribe'); ?>
         </div>
       <?php endif; ?>
       <div class="flex mb10 relative items-center">
@@ -83,5 +83,5 @@
   <?php if (UserData::checkActiveUser()) : ?>
     <?= Tpl::insert('/_block/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>
-  <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('no.posts'), 'icon' => 'bi-journal-richtext']); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_posts'), 'icon' => 'bi-journal-richtext']); ?>
 <?php endif; ?>

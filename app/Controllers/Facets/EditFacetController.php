@@ -36,7 +36,7 @@ class EditFacetController extends MainController
         return Tpl::LaRender(
             '/facets/edit',
             [
-                'meta'  => Meta::get(__('edit') . ' | ' . $facet['facet_title']),
+                'meta'  => Meta::get(__('app.edit') . ' | ' . $facet['facet_title']),
                 'data'  => [
                     'facet'             => $facet,
                     'low_matching'      => FacetModel::getLowMatching($facet['facet_id']),
@@ -79,14 +79,14 @@ class EditFacetController extends MainController
             if (UserData::checkAdmin()) $new_type = $facet_type;
         }
 
-        $redirect = getUrlByName('content.edit', ['type' => $new_type, 'id' => $facet['facet_id']]);
+        $redirect = url('content.edit', ['type' => $new_type, 'id' => $facet['facet_id']]);
 
-        Validation::Slug($facet_slug, 'Slug (url)', $redirect);
+        Validation::Slug($facet_slug, 'slug', $redirect);
         Validation::Length($facet_title, 'title', '3', '64', $redirect);
         Validation::Length($facet_slug, 'slug', '3', '43', $redirect);
-        Validation::Length($facet_seo_title, 'name SEO', '4', '225', $redirect);
-        Validation::Length($facet_description, 'meta.description', '44', '225', $redirect);
-        Validation::Length($facet_short_description, 'short.description', '11', '160', $redirect);
+        Validation::Length($facet_seo_title, 'name_seo', '4', '225', $redirect);
+        Validation::Length($facet_description, 'meta_description', '44', '225', $redirect);
+        Validation::Length($facet_short_description, 'short_description', '11', '160', $redirect);
         Validation::Length($facet_info, 'info', '14', '5000', $redirect);
 
         // Запишем img
@@ -116,7 +116,7 @@ class EditFacetController extends MainController
         // Проверим повтор URL                       
         if ($facet_slug != $facet['facet_slug']) {
             if (FacetModel::uniqueSlug($facet_slug, $new_type)) {
-                Validation::ComeBack('repeat.url', 'error', getUrlByName($new_type  . '.edit', ['id' => $facet['facet_id']]));
+                Validation::ComeBack('msg.repeat_url', 'error', url($new_type  . '.edit', ['id' => $facet['facet_id']]));
             }
         }
 
@@ -168,7 +168,7 @@ class EditFacetController extends MainController
             FacetModel::addLowFacetMatching($match_arr, $facet_id);
         }
 
-        Validation::ComeBack('change.saved', 'success', getUrlByName($new_type, ['slug' => $facet_slug]));
+        Validation::ComeBack('msg.change_saved', 'success', url($new_type, ['slug' => $facet_slug]));
     }
 
     public function pages()
@@ -186,7 +186,7 @@ class EditFacetController extends MainController
         return Tpl::LaRender(
             '/facets/edit-pages',
             [
-                'meta'  => Meta::get(__('edit') . ' | ' . $facet['facet_title']),
+                'meta'  => Meta::get(__('app.edit') . ' | ' . $facet['facet_title']),
                 'data'  => [
                     'facet' => $facet,
                     'pages' => (new \App\Controllers\Post\PostController())->last($facet['facet_id']),

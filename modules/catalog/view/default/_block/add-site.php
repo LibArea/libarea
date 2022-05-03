@@ -2,16 +2,15 @@
     <li>
       <a href="<?= url('web.audits'); ?>">
         <i class="bi bi-exclamation-diamond"></i>
-        <?= __('audits'); ?>
+        <?= __('web.audits'); ?>
          <?php if (!empty($data['audit_count'])) : ?><span class="red ml5">(<?= $data['audit_count']; ?>)</span><?php endif; ?>
       </a>
     </li>
 <?php endif; ?>
-
 <li>
   <a href="<?= url('web.user.sites'); ?>">
     <i class="bi-plus-lg"></i>
-    <?= __('web.user.sites.view'); ?>
+    <?= __('web.my_website'); ?>
     <?php if ($data['user_count_site'] != 0) : ?>
       (<?= $data['user_count_site']; ?>)
     <?php endif; ?>
@@ -22,7 +21,7 @@
     <li>
       <a href="<?= url('web.add'); ?>">
         <i class="bi-plus-lg"></i>
-          <?= __('add.option', ['name' => __('website')]); ?>
+          <?= __('web.add_website'); ?>
       </a>
     </li>
   <?php endif; ?>

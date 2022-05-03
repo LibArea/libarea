@@ -32,7 +32,7 @@ class Search
         return view(
             '/view/default/search/admin',
             [
-                'meta'  => Meta::get(__('search')),
+                'meta'  => Meta::get(__('admin.search')),
                 'user'  => $this->user,
                 'data'  => [
                     'type'          => 'statistics',
@@ -66,7 +66,7 @@ class Search
         return view(
             '/view/default/search/edit',
             [
-                'meta'  => Meta::get(__('search')),
+                'meta'  => Meta::get(__('admin.search')),
                 'user'  => $this->user,
                 'data'  => [
                     'type'          => 'edit',
@@ -203,7 +203,7 @@ class Search
         return view(
             '/view/default/search/query',
             [
-                'meta'  => Meta::get(__('search')),
+                'meta'  => Meta::get(__('admin.search')),
                 'user'  => $this->user,
                 'data'  => [
                     'type'      => 'query',
@@ -222,7 +222,7 @@ class Search
         return view(
             '/view/default/search/schemas',
             [
-                'meta'  => Meta::get(__('search')),
+                'meta'  => Meta::get(__('admin.search')),
                 'user'  => $this->user,
                 'data'  => [
                     'type'      => 'schemas',

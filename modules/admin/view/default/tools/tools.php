@@ -7,38 +7,38 @@
   ]
 ); ?>
 <div class="box bg-white">
-  <label><?= __('build'); ?> CSS</label>
-  <div class="update btn btn-primary" data-type="css"><?= __('build'); ?></div>
+  <label><?= __('admin.build'); ?> CSS</label>
+  <div class="update btn btn-primary" data-type="css"><?= __('admin.build'); ?></div>
   <fieldset>
-    <label><?= __('topics'); ?> / <?= __('posts'); ?></label>
-    <div class="update btn btn-primary" data-type="topic"><?= __('update.data'); ?></div>
+    <label><?= __('admin.topics'); ?> / <?= __('admin.posts'); ?></label>
+    <div class="update btn btn-primary" data-type="topic"><?= __('admin.update'); ?></div>
   </fieldset>
   <fieldset>
-    <label><?= __('like'); ?></label>
-    <div class="update btn btn-primary" data-type="up"><?= __('update.data'); ?></div>
+    <label><?= __('admin.like'); ?></label>
+    <div class="update btn btn-primary" data-type="up"><?= __('admin.update'); ?></div>
   </fieldset>
   <fieldset>
-    <label><?= __('trust.level'); ?></label>
-    <div class="update btn btn-primary" data-type="tl"><?= __('update.data'); ?></div>
+    <label><?= __('admin.trust_level'); ?></label>
+    <div class="update btn btn-primary" data-type="tl"><?= __('admin.update'); ?></div>
   </fieldset>
   <fieldset>
-    <label><?= __('search'); ?></label>
-    <div class="update update-index btn btn-primary" data-type="indexer"><?= __('rebuild.index'); ?></div>
+    <label><?= __('admin.search'); ?></label>
+    <div class="update update-index btn btn-primary" data-type="indexer"><?= __('admin.rebuild'); ?></div>
   </fieldset>
   <fieldset class="max-w300">
-    <label for="mail"><?= __('Email'); ?></label>
+    <label for="mail"><?= __('admin.email'); ?></label>
     <form action="<?= url('admin.test.mail'); ?>" method="post">
       <input type="mail" name="mail" value="" required>
-      <div class="help"><?= __('test.email'); ?>...</div>
+      <div class="help"><?= __('admin.test_email'); ?>...</div>
   </fieldset>    
-      <?= Html::sumbit(__('send')); ?>
+      <?= Html::sumbit(__('admin.send')); ?>
   </form>
 </div>
 </main>
 <script nonce="<?= $_SERVER['nonce']; ?>">
 document.querySelectorAll(".update-index")
   .forEach(el => el.addEventListener("click", function (e) {
-      Notiflix.Loading.standard('<?= __('end.window.close'); ?>...');
+      Notiflix.Loading.standard('<?= __('admin.window_close'); ?>...');
 }));       
 </script>
 

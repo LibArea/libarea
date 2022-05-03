@@ -32,7 +32,7 @@ class UserArea
         return view(
             '/view/default/user/user-sites',
             [
-                'meta'  => Meta::get(__('my.site'), __('my.site'), $m),
+                'meta'  => Meta::get(__('web.my_website'), __('web.my_website'), $m),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'all',
@@ -62,7 +62,7 @@ class UserArea
         return view(
             '/view/default/user/bookmarks',
             [
-                'meta'  => Meta::get(__('favorites'), __('favorites')),
+                'meta'  => Meta::get(__('web.favorites'), __('web.favorites')),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'cat',

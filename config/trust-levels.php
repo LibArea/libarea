@@ -44,7 +44,7 @@ return [
     // Установите на 10, если вы хотите запретить участникам создавать их
     // From what level of TL is it possible to answers (in catalog)
     // Set to 10 if you want to prevent members from creating them 
-    'tl_add_reply'    => 10,
+    'tl_add_reply'    => 2,
 
     // С какого уровня TL возможна отправка личных сообщений
     'tl_add_pm'         => 2,
@@ -79,7 +79,7 @@ return [
     // How many replys, depending on TL, can be added per day
     'tl_0_add_reply'  => 0,
     'tl_1_add_reply'  => 0,
-    'tl_2_add_reply'  => 0,
+    'tl_2_add_reply'  => 5,
     
     // Уровень TL, до которого (включая) отправка жалоб невозможна
     // TL level, up to which (including) sending complaints is not possible

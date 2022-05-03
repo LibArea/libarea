@@ -25,7 +25,7 @@ function url(string $key = null, array $params = []) {
         return $key;
     }
 
-    return getUrlByName($key, $params);
+    return hleb_get_by_name($key, $params);
 }
 
 function config(string $key = null) {

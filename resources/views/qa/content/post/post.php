@@ -10,7 +10,7 @@
       <div class="flex mb-inline mr15">
         <div class="box-answer block bg-lightgray gray mt5 br-rd3 lowercase mr15">
           <?= $post['post_votes']; ?>
-          <div class="text-xs"> <?= Html::numWord($post['post_votes'], __('num.up'), false); ?></div>
+          <div class="text-xs"> <?= Html::numWord($post['post_votes'], __('app.num_up'), false); ?></div>
         </div>
         <?php $bg = $post['post_feature'] == 0 ? ' bg-green' : ' bg-pink'; ?>
         <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
@@ -19,14 +19,14 @@
             <?php $anw = $post['post_answers_count'] + $post['post_comments_count'];
             echo $anw; ?>
           </a>
-          <div class="text-xs white"> <?= Html::numWord($anw, __('num.answer'), false); ?></div>
+          <div class="text-xs white"> <?= Html::numWord($anw, __('app.num_answer'), false); ?></div>
         </div>
       </div>
 
       <div class="w-100 mr15">
         <div class="mt0 mb0">
         <?php if ($bg_url) : ?>
-          <span><?= __('news'); ?>:</span>
+          <span><?= __('app.news'); ?>:</span>
         <?php endif; ?>
         <a href="<?= $post_url; ?>">
           <span class="font-normal text-xl">
@@ -48,7 +48,7 @@
 
           <div class="gray-600 text-xs">
             <?= $post['post_date'] ?> ·
-            <?= Html::numWord($post['post_hits_count'], __('num.view'), true); ?> ·
+            <?= Html::numWord($post['post_hits_count'], __('app.num_view'), true); ?> ·
             <a href="<?= url('profile', ['login' => $post['login']]); ?>">
               <?= $post['login']; ?>
             </a>
@@ -57,7 +57,7 @@
 
         <?php if ($data['sheet'] == 'subscribed') : ?>
           <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet text-sm right">
-            <?= __('unsubscribe'); ?>
+            <?= __('app.unsubscribe'); ?>
           </div>
         <?php endif; ?>
       </div>
@@ -69,6 +69,6 @@
   <?php endif; ?>  
   <div class="m10 p15 center gray-600">
     <i class="bi-journal-richtext block text-8xl"></i>
-    <?= __('no.posts'); ?>
+    <?= __('app.no_posts'); ?>
   </div>
 <?php endif; ?>

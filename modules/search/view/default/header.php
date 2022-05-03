@@ -13,26 +13,26 @@ $q = $data['q'];
   <header>
     <div class="page-search mb-p10">
       <a class="logo mt30 mb-none" href="<?= url('search'); ?>">
-        <?= __('search'); ?>
+        <?= __('search.name'); ?>
       </a>
       <div class="page-search-right mb-ml0">
         <div data-template="one" id="find tippy">
 
           <a class="tabs black mr15" href="/">
             <i class="bi-house"></i>
-            <?= __('to.the.website'); ?>
+            <?= __('search.to_website'); ?>
           </a>
 
           <a class="tabs<?php if ($uri == 'all') : ?> active<?php endif; ?>" href="<?= url('search.go'); ?>?q=<?= $q; ?>">
-            <?= __('all'); ?>
+            <?= __('search.all'); ?>
           </a>
 
           <a class="tabs<?php if ($uri == 'post') : ?> active<?php endif; ?>" href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=post">
-            <?= __('posts'); ?>
+            <?= __('search.posts'); ?>
           </a>
 
           <a class="tabs<?php if ($uri == 'website') : ?> active<?php endif; ?>" href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=website">
-            <?= __('websites'); ?>
+            <?= __('search.websites'); ?>
           </a>
 
           <div class="flex right items-center">
@@ -42,11 +42,11 @@ $q = $data['q'];
             <?php if (!UserData::checkActiveUser()) : ?>
               <?php if (config('general.invite') == false) : ?>
                 <a class="register gray-600 mr15 mb-ml10 mb-mr5 block" href="<?= url('register'); ?>">
-                  <?= __('registration'); ?>
+                  <?= __('search.registration'); ?>
                 </a>
               <?php endif; ?>
               <a class="gray-600 mr10 ml10" href="<?= url('login'); ?>">
-                <?= __('sign.in'); ?>
+                <?= __('search.sign_in'); ?>
               </a>
             <?php else : ?>
               <div class="mr15 m relative">
@@ -61,7 +61,7 @@ $q = $data['q'];
           </div>
         </div>
         <form method="get" action="<?= url('search.go'); ?>">
-          <input type="text" name="q" value="<?= $q; ?>" placeholder="<?= __('to.find'); ?>" class="page-search__input">
+          <input type="text" name="q" value="<?= $q; ?>" placeholder="<?= __('search.find'); ?>" class="page-search__input">
           <input name="cat" value="<?= $uri; ?>" type="hidden">
           <?= csrf_field() ?>
         </form>

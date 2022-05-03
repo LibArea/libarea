@@ -1,8 +1,8 @@
 <main class="w-100">
   <div class="bg-violet box center">
-    <h1 class="text-xl"><?= __($data['sheet']); ?></h1>
+    <h1 class="text-xl"><?= __('meta.' . $data['sheet']); ?></h1>
     <span class="text-sm gray-600">
-      <?= __($data['sheet'] . '.info'); ?>.
+      <?= __('meta.' . $data['sheet'] . '.info'); ?>.
     </span>
   </div>
 
@@ -17,20 +17,20 @@
             [
               'id'    => $data['type'] . 's.all',
               'url'   => url($data['type'] . 's.all'),
-              'title' => __('all'),
+              'title' => __('app.all'),
               'icon'  => 'bi-app'
             ],
             [
               'id'    => $data['type'] . 's.new',
               'url'   => url($data['type'] . 's.new'),
-              'title' => __('new.ones'),
+              'title' => __('app.new_ones'),
               'icon'  => 'bi-sort-up'
             ],
             [
               'tl'    => 1,
               'id'    => $data['type'] . 's.my',
               'url'   => url($data['type'] . 's.my'),
-              'title' => __('reading'),
+              'title' => __('app.reading'),
               'icon'  => 'bi-check2-square'
             ],
           ]
@@ -43,13 +43,13 @@
       <p class="m0 text-xl">
         <?php if ($data['type'] == 'blog') : ?>
           <?php if ($data['limit']) : ?>
-            <a class="ml15" title="<?= __('add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
+            <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
               <i class="bi-plus-lg middle"></i>
             </a>
           <?php endif; ?>
         <?php else : ?>
           <?php if (UserData::checkAdmin()) : ?>
-            <a class="ml15" title="<?= __('add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
+            <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
               <i class="bi-plus-lg middle"></i>
             </a>
           <?php endif; ?>
@@ -68,7 +68,7 @@
         </div>
       <?php endif; ?>
     <?php else : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.content'), 'icon' => 'bi-info-lg']); ?>
+      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
   </div>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>

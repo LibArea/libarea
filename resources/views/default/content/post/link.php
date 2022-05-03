@@ -6,7 +6,7 @@
       </div>
       <h1><?= $data['site']['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
-          <a class="text-sm ml5" title="<?= __('edit'); ?>" href="<?= url('web.edit', ['id' => $data['site']['item_id']]); ?>">
+          <a class="text-sm ml5" title="<?= __('app.edit'); ?>" href="<?= url('web.edit', ['id' => $data['site']['item_id']]); ?>">
             <i class="bi-pencil"></i>
           </a>
         <?php endif; ?>
@@ -22,7 +22,7 @@
         <span class="right gray-600"><i class="bi-journal mr5"></i> <?= $data['site']['item_count']; ?></span>
       </div>
     <?php else : ?>
-      <h1><?= __('domain') . ': ' . $data['domain']; ?></h1>
+      <h1><?= __('app.domain') . ': ' . $data['domain']; ?></h1>
     <?php endif; ?>
   </div>
 

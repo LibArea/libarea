@@ -7,11 +7,11 @@ $form->html_form(UserData::getUserTl(), config('form/auth.login'));
     <?php csrf_field(); ?>
     <?= $form->build_form(); ?>
     <fieldset>
-      <?= Html::sumbit(__('sign.in')); ?>
+      <?= Html::sumbit(__('app.sign_in')); ?>
     </fieldset>
     <fieldset class="gray-600 center">
-      <?= __('login.use.condition'); ?>
-      <a href="<?= url('recover'); ?>"><?= __('forgot.password'); ?>?</a>
+      <?= __('app.agree_rules'); ?>
+      <a href="<?= url('recover'); ?>"><?= __('app.forgot_password'); ?>?</a>
     </fieldset>
   </form>
 </div>

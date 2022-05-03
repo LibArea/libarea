@@ -7,7 +7,7 @@ use Modules\Search\App\Models\SearchModel;
 use Modules\Search\App\Query\QueryBuilder;
 use Modules\Search\App\Query\QuerySegment;
 use Modules\Search\App\Engine;
-use UserData, Meta;
+use UserData, Meta, Translate;
 
 class Search
 {
@@ -20,10 +20,14 @@ class Search
 
     public function index()
     {
+        // print_r(__('title'));
+        $title =  __('search.title');
+        $desc =   __('search.desc', ['name' => config('meta.name')]);
+
         return view(
             '/view/default/home',
             [
-                'meta'  => Meta::get(__('search.title'), __('search.desc', ['name' => config('meta.name')])),
+                'meta'  => Meta::get($title, $desc),
                 'data'  => [
                     'type' => 'search',
 

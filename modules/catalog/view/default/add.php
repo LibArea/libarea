@@ -9,10 +9,10 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
     <?= Tpl::insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
-            'name' => __('home'),
+            'name' => __('web.catalog'),
             'link' => url('web')
           ], [
-            'name' => __('site.add'),
+            'name' => __('web.edit_website'),
             'link' => 'red'
           ],
         ]
@@ -25,13 +25,13 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
 
       <?= $form->build_form(); ?>
 
-      <?= $form->sumbit(__('add')); ?>
+      <?= $form->sumbit(__('web.add')); ?>
     </form>
   </main>
   <aside>
     <div class="box box-shadow-all text-sm">
-      <h3 class="uppercase-box"><?= __('help'); ?></h3>
-      <?= __('add.site.help'); ?>
+      <h3 class="uppercase-box"><?= __('web.help'); ?></h3>
+      <?= __('web.data_help'); ?>
       <div>
   </aside>
 </div>

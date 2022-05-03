@@ -27,7 +27,7 @@ class ProfileController extends MainController
         $profile    = self::profile();
 
         if (!$profile['about']) {
-            $profile['about'] = __('riddle') . '...';
+            $profile['about'] = __('app.riddle') . '...';
         }
 
         $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $profile['id']);
@@ -190,13 +190,13 @@ class ProfileController extends MainController
             $name = $user['name'] . ' (' . $user['login'] . ') ';
         }
 
-        $title = __($sheet . '.title', ['name' => $name]);
-        $description  = __($sheet . '.desc', ['name' => $name, 'information' => $information ?? '...']);
+        $title = __('meta' . $sheet . '.title', ['name' => $name]);
+        $description  = __('meta' . $sheet . '.desc', ['name' => $name, 'information' => $information ?? '...']);
 
         $m = [
             'og'        => true,
             'imgurl'    => '/uploads/users/avatars/' . $user['avatar'],
-            'url'       => getUrlByName('profile', ['login' => $user['login']]),
+            'url'       => url('profile', ['login' => $user['login']]),
         ];
 
         return Meta::get($title, $description, $m);
@@ -211,7 +211,7 @@ class ProfileController extends MainController
         }
 
         // If the trust level is less than the established one
-        if ($this->user['trust_level'] < Config::get('trust-levels.tl_add_pm')) {
+        if ($this->user['trust_level'] < config('trust-levels.tl_add_pm')) {
             return false;
         }
 

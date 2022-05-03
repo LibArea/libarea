@@ -9,15 +9,15 @@ return [
         'url'       => 'website',
         'addition'  => false,
         'title'     => 'website',
-        'lang'      => __('url'),
+        'lang'      => __('app.url'),
         'help'      => 'https://site.ru',
         'name'      => 'website'
     ], [
         'url'       => false,
         'addition'  => false,
         'title'     => 'location',
-        'lang'      => __('city'),
-        'help'      => __('for.example') . ': Moscow',
+        'lang'      => __('app.city'),
+        'help'      => __('app.for_example') . ': Moscow',
         'name'      => 'location'
     ], [
         'url'       => 'public_email',

@@ -13,7 +13,7 @@ $facet  = $data['facet'] ?? false; ?>
   <header class="text-header">
     <div class="d-header_contents justify-between">
       <div class="flex items-center">
-        <a title="<?= __('home'); ?>" class="logo" href="/">
+        <a title="<?= __('app.home'); ?>" class="logo" href="/">
           <?= config('meta.name'); ?>
         </a>
 
@@ -31,11 +31,11 @@ $facet  = $data['facet'] ?? false; ?>
           </div>
           <?php if (config('general.invite') == false) : ?>
             <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 block" href="<?= url('register'); ?>">
-              <?= __('registration'); ?>
+              <?= __('app.registration'); ?>
             </a>
           <?php endif; ?>
           <a class="w94 btn btn-outline-primary ml20" href="<?= url('login'); ?>">
-            <?= __('sign.in'); ?>
+            <?= __('app.sign_in'); ?>
           </a>
         </div>
       <?php else : ?>

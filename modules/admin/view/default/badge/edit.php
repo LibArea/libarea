@@ -15,31 +15,31 @@
       <?= $data['badge']['badge_id']; ?>
     </fieldset>
     <fieldset>
-      <label for="badge_title"><?= __('title'); ?></label>
+      <label for="badge_title"><?= __('admin.title'); ?></label>
       <input minlength="4" type="text" name="badge_title" value="<?= $data['badge']['badge_title']; ?>" required>
-      <div class="help">4 - 25 <?= __('characters'); ?></div>
+      <div class="help">4 - 25 <?= __('admin.characters'); ?></div>
     </fieldset>
     <fieldset>
-      <label for="badge_icon"><?= __('icon'); ?></label>
+      <label for="badge_icon"><?= __('admin.icon'); ?></label>
       <textarea class="add" name="badge_icon" required><?= $data['badge']['badge_icon']; ?></textarea>
-      <div class="help"><?= __('for.example'); ?>: &lt;i title="<?= __('title'); ?>" class="bi-trophy"&gt;&lt;/i&gt; </div>
+      <div class="help"><?= __('admin.example'); ?>: &lt;i title="<?= __('admin.title'); ?>" class="bi-trophy"&gt;&lt;/i&gt; </div>
     </fieldset>
     <fieldset>
       <label for="badge_tl">Tl</label>
       <input type="text" name="badge_tl" value="<?= $data['badge']['badge_tl']; ?>" required>
-      <div class="help"><?= __('for'); ?> TL (0 <?= __('by.default'); ?>)</div>
+      <div class="help"><?= __('admin.for'); ?> TL (0 <?= __('admin.default'); ?>)</div>
     </fieldset>
     <fieldset>
       <label for="badge_score">Score</label>
       <input type="text" name="badge_score" value="<?= $data['badge']['badge_score']; ?>" required>
-      <div class="help"><?= __('reward.weight'); ?></div>
+      <div class="help"><?= __('admin.reward_weight'); ?></div>
     </fieldset>
     <fieldset>
-      <label for="badge_description"><?= __('description'); ?></label>
+      <label for="badge_description"><?= __('admin.description'); ?></label>
       <textarea class="add" minlength="12" name="badge_description" required><?= $data['badge']['badge_description']; ?></textarea>
-      <div class="help">12 - 250 <?= __('characters'); ?></div>
+      <div class="help">12 - 250 <?= __('admin.characters'); ?></div>
     </fieldset>
-    <?= Html::sumbit(__('edit')); ?>
+    <?= Html::sumbit(__('admin.edit')); ?>
   </form>
 </div>
 </main>

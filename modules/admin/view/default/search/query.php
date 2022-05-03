@@ -22,7 +22,7 @@ function getFields($fields, $id = 0, $isDocument = false)
 {
     $title = $fields['title'] ?? $fields['name'] ?? '';
     if (empty($title)) $title = (isset($fields['id']) ? 'Document ID = ' . $fields['id'] : '');
-    if ($isDocument && !empty($title)) $title = '<a title="' . __('edit') . '" href="' . url('admin.search.edit.form', ['id' => $id]) . '">' . $title . '</a>';
+    if ($isDocument && !empty($title)) $title = '<a title="' . __('admin.edit') . '" href="' . url('admin.search.edit.form', ['id' => $id]) . '">' . $title . '</a>';
     $html = '<table class="mb0">' . $title . '<tbody>';
     foreach ($fields as $field => $value) {
         $html .= '<tr><td>';
@@ -43,7 +43,7 @@ function getFields($fields, $id = 0, $isDocument = false)
 
 <form action="">
     <div class="box bg-white">
-        <h2><?= __('search'); ?></h2>
+        <h2><?= __('admin.search'); ?></h2>
         <div class="box-flex justify-between">
             <div class="container-v">
                 <label for="q">query</label>
@@ -65,10 +65,10 @@ function getFields($fields, $id = 0, $isDocument = false)
         <div class="box-flex justify-between">
             <div>
                 <input id="connex" type="checkbox" name="connex" value="1" <?= (Request::getGet('connex') ?? false) ? 'checked' : '' ?>>
-                <label for="connex">Enable Connex <?= __('search'); ?></label>
+                <label for="connex">Enable Connex <?= __('admin.search'); ?></label>
             </div>
             <div class="container-v">
-                <input class="btn btn-primary" type="submit" value="<?= __('search'); ?>" style="">
+                <input class="btn btn-primary" type="submit" value="<?= __('admin.search'); ?>" style="">
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@ function getFields($fields, $id = 0, $isDocument = false)
             </div>
             <?php if (!empty($results['connex'])) : ?>
                 <div class="flex-delimiter">
-                    <h3>Connex <?= __('search'); ?></h3>
+                    <h3>Connex <?= __('admin.search'); ?></h3>
                 </div>
                 <div>
                     <div class="container">

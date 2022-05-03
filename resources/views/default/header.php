@@ -21,13 +21,13 @@ $facet  = $data['facet'] ?? false; ?>
           <i class="bi-list gray-600 text-xl"></i>
         </div>
 
-        <a title="<?= __('home'); ?>" class="logo" href="/">
+        <a title="<?= __('app.home'); ?>" class="logo" href="/">
           <?= config('meta.name'); ?>
         </a>
 
         <div class="ml45 mb-ml10 relative w-100">
           <form class="form mb-none" method="get" action="<?= url('search.go'); ?>">
-            <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('to.find'); ?>" class="search">
+            <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
           </form>
           <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
         </div>
@@ -39,11 +39,11 @@ $facet  = $data['facet'] ?? false; ?>
             </div>
             <?php if (config('general.invite') == false) : ?>
               <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 block" href="<?= url('register'); ?>">
-                <?= __('registration'); ?>
+                <?= __('app.registration'); ?>
               </a>
             <?php endif; ?>
             <a class="w94 btn btn-outline-primary ml20" href="<?= url('login'); ?>">
-              <?= __('sign.in'); ?>
+              <?= __('app.sign_in'); ?>
             </a>
           </div>
         <?php else : ?>

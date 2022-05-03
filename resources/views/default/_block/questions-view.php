@@ -1,7 +1,7 @@
 <?php if (!empty($data['answers'])) : ?>
   <div class="box">
     <h2 class="lowercase m0 text-2xl">
-      <?= Html::numWord($post['amount_content'], __('num.answer'), true); ?>
+      <?= Html::numWord($post['amount_content'], __('app.num_answer'), true); ?>
     </h2>
 
     <?php foreach ($data['answers'] as  $answer) : ?>
@@ -17,7 +17,7 @@
                   <div class="text-sm gray">
                     <?= Html::langDate($answer['date']); ?>
                     <?php if (empty($answer['edit'])) : ?>
-                      (<?= __('ed'); ?>.)
+                      (<?= __('app.ed'); ?>.)
                     <?php endif; ?>
                     <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
                   </div>
@@ -33,7 +33,7 @@
                 <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                   <?php if ($post['post_closed'] == 0) : ?>
                     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                      <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10 mr10"><?= __('reply'); ?></a>
+                      <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10 mr10"><?= __('app.reply'); ?></a>
                     <?php endif; ?>
                   <?php endif; ?>
                 <?php endif; ?>
@@ -41,14 +41,14 @@
                 <?php if (Html::accessСheck($answer, 'answer', 1, 30) === true) : ?>
                   <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
                     <a class="editansw gray ml15 mr10" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                      <?= __('edit'); ?>
+                      <?= __('app.edit'); ?>
                     </a>
                   <?php endif; ?>
                 <?php endif; ?>
 
                 <?php if (UserData::checkAdmin()) : ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr10">
-                    <i title="<?= __('remove'); ?>" class="bi-trash"></i>
+                    <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                   </a>
                 <?php endif; ?>
 
@@ -56,7 +56,7 @@
  
                 <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_stop_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
-                    <i title="<?= __('report'); ?>" class="bi-flag"></i>
+                    <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
                   </a>
                 <?php endif; ?>
               </div>
@@ -88,7 +88,7 @@
                     <?php if ($post['post_closed'] == 0) : ?>
                       <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
                         <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600 ml5 mr5">
-                          <?= __('reply'); ?>
+                          <?= __('app.reply'); ?>
                         </a>
                       <?php endif; ?>
                     <?php endif; ?>
@@ -97,19 +97,19 @@
                   <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
                     <?php if (UserData::getUserId() == $comment['comment_user_id'] || UserData::checkAdmin()) : ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 ml10 mr5">
-                        <i title="<?= __('edit'); ?>" class="bi-pencil-square"></i>
+                        <i title="<?= __('app.edit'); ?>" class="bi-pencil-square"></i>
                       </a>
                     <?php endif; ?>
                   <?php endif; ?>
 
                   <?php if (UserData::checkAdmin()) : ?>
                     <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600 ml10">
-                      <i title="<?= __('remove'); ?>" class="bi-trash"></i>
+                      <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                     </a>
                   <?php endif; ?>
                   <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml5">
-                      <?= __('report'); ?>
+                      <?= __('app.report'); ?>
                     </a>
                   <?php endif; ?>
                 </div>
@@ -124,12 +124,12 @@
   </div>
 <?php else : ?>
   <?php if ($post['post_closed'] != 1) : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no.answers'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_answers'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 <?php endif; ?>
 
 <?php if (!empty($otvet)) : ?>
-  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('you.answered'), 'icon' => 'bi-info-lg']); ?>
+  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.you_answered'), 'icon' => 'bi-info-lg']); ?>
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
@@ -145,7 +145,7 @@
         <div class="clear pt5">
           <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
           <input type="hidden" name="answer_id" value="0">
-          <?= Html::sumbit(__('reply')); ?>
+          <?= Html::sumbit(__('app.reply')); ?>
         </div>
       </form>
 

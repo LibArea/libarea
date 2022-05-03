@@ -64,7 +64,7 @@ define('HLEB_TEMPLATE_CACHE', true);
  | Изначально: true
  |
  */
-define('HLEB_PROJECT_CLASSES_AUTOLOAD', true);
+define('HLEB_PROJECT_CLASSES_AUTOLOAD', false);
 
 /*
  |-----------------------------------------------------------------------------

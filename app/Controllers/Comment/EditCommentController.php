@@ -55,7 +55,7 @@ class EditCommentController extends MainController
         $post       = PostModel::getPost($comment['comment_post_id'], 'id', $this->user);
         Html::pageRedirection($post, '/');
 
-        $slug = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+        $slug = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         $redirect   = $slug . '#comment_' . $comment['comment_id'];
 
         CommentModel::edit(

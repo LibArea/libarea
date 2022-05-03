@@ -134,7 +134,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function display($type, $trust_level)
     {
-        $countLike = Config::get('feed.countLike');
+        $countLike = config('feed.countLike');
         
         if ($trust_level == 10) {
             $display = "AND post_is_deleted = 0";

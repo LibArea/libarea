@@ -1,8 +1,8 @@
 <main class="col-two">
   <div class="box center">
-    <h1 class="m0 text-xl font-normal"><?= __($data['sheet']); ?></h1>
+    <h1 class="m0 text-xl font-normal"><?= __('meta.' . $data['sheet']); ?></h1>
     <span class="text-sm gray-600">
-      <?= __($data['sheet'] . '.info'); ?>.
+      <?= __('meta.' . $data['sheet'] . '.info'); ?>.
     </span>
   </div>
 
@@ -17,13 +17,13 @@
             [
               'id'    => $data['type'] . 's.all',
               'url'   => url($data['type'] . 's.all'),
-              'title' => __('all'),
-              'icon'  => 'bi bi-app'
+              'title' => __('app.all'),
+              'icon'  => 'bi-app'
             ], [
               'id'    => $data['type'] . 's.new',
               'url'   => url($data['type'] . 's.new'),
-              'title' => __('new.ones'),
-              'icon'  => 'bi bi-sort-up'
+              'title' => __('app.new_ones'),
+              'icon'  => 'bi-sort-up'
             ],
           ]
         ]

@@ -7,17 +7,17 @@
       [
         'id'    => 'audits.all',
         'url'   => url('admin.audits'),
-        'name'  => __('all'),
+        'name'  => __('admin.all'),
         'icon'  => 'bi-record-circle',
       ], [
         'id'    => 'audits.ban',
         'url'   => url('admin.audits.ban'),
-        'name'  => __('approved'),
+        'name'  => __('admin.approved'),
         'icon'  => 'bi-x-circle',
       ], [
         'id'    => 'reports.all',
         'url'   => url('admin.reports'),
-        'name'  => __('reports'),
+        'name'  => __('admin.reports'),
         'icon'  => 'bi-record-circle',
       ] 
     ]
@@ -29,10 +29,10 @@
     <table>
       <thead>
         <th class="w50">id</th>
-        <th><?= __('info'); ?></th>
-        <th><?= __('type'); ?></th>
-        <th><?= __('action'); ?></th>
-        <th><?= __('action'); ?></th>
+        <th><?= __('admin.info'); ?></th>
+        <th><?= __('admin.type'); ?></th>
+        <th><?= __('admin.action'); ?></th>
+        <th><?= __('admin.action'); ?></th>
       </thead>
       <?php foreach ($data['audits'] as $key => $audit) : ?>
         <tr>
@@ -60,9 +60,9 @@
              <?= $audit['content'][$audit['action_type'] . '_date']; ?>
             <span class="mr5 ml5"> &#183; </span>
 
-            <?= __('type'); ?>: <i><?= $audit['action_type']; ?></i>
+            <?= __('admin.type'); ?>: <i><?= $audit['action_type']; ?></i>
             <?php if ($audit['content'][$audit['action_type'] . '_is_deleted'] == 1) : ?>
-              <span class="red"><?= __('deleted'); ?> </span>
+              <span class="red"><?= __('admin.deleted'); ?> </span>
             <?php endif; ?>
 
             <?php if (!empty($audit['post'])) : ?>
@@ -73,19 +73,19 @@
               <?php endif; ?>
             <?php endif; ?>
           </td>
-          <th><?= __($audit['type_belonging']); ?></th>
+          <th><?= __('admin.' . $audit['type_belonging']); ?></th>
           <td class="center">
             <a data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" data-type="<?= $audit['action_type']; ?>" class="type-action text-sm">
               <?php if ($audit['content'][$audit['action_type'] . '_is_deleted'] == 1) : ?>
                 <span class="red">
-                  <?= __('recover'); ?>
+                  <?= __('admin.recover'); ?>
                 </span>
               <?php else : ?>
-                <?= __('remove'); ?>
+                <?= __('admin.remove'); ?>
               <?php endif; ?>
             </a>
             <div class="lowercase text-xs">
-              <?= __('content'); ?>
+              <?= __('admin.content'); ?>
             </div>
           </td>
           <td class="center">
@@ -97,9 +97,9 @@
                   </a>
                 <?php else : ?>
                   <a data-status="<?= $audit['action_type']; ?>" data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" class="audit-status text-sm">
-                    <?= __('to.approve'); ?>
+                    <?= __('admin.approve'); ?>
                   </a>
-                  <div class="text-xs"><?= __('off.mute.mode'); ?></div>
+                  <div class="text-xs"><?= __('admin.off_mode'); ?></div>
                 <?php endif; ?>
             <?php else : ?>
               <div class="<?php if ($audit['read_flag'] == 0) : ?> bg-red-200<?php endif; ?>">
@@ -113,7 +113,7 @@
       <?php endforeach; ?>
     </table>
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no'), 'icon' => 'bi-info-lg']); ?>
+    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 </div>
 <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('admin.audits')); ?>
