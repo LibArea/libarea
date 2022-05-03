@@ -3,7 +3,7 @@
 /*
 * The following language strings are used by the site directory.
 *
-* Следующие языковые строки используются каталога сайтов.
+* Следующие языковые строки используются Каталога сайтов.
 */
 
 return [
@@ -36,6 +36,7 @@ return [
     'hosted_github'     => 'Программа размещена на GitHub?',
     'url_github'        => 'URL адрес репозитория на GitHub',
     'related_posts'     => 'Связанные посты',
+    'desc.formed'       => 'Описание формируется',
     'by_date'           => 'По дате',
     'top_view'          => 'По рейтингу',
     'view'              => 'Новые сайты',
@@ -75,7 +76,9 @@ return [
     'life_help'         => 'Детям, животные, хобби...',
     'security'          => 'Безопасность...',
     
-  //  'url.site.correctness'  => 'Адрес (URL) сайта не является корректным',
+    'string_length'         => 'Не корректная длина {name}',
+    'website_correctness'   => 'Адрес (URL) сайта не является корректным',
+    'site_replay'           => 'Такой сайт уже есть в системе',
 
     'data_help'         => '<i class="gray-600">Формат заголовка:</i><br> «LibArea» — сообщество<br><br><i class="gray-600">Описание (без рекламы):</i><br> ...что есть на сайте?<i>',
     
