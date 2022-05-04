@@ -56,6 +56,8 @@ return [
     'recommended'       => 'Recommended',
     'my_website_info'   => 'List of sites added by me',
     'moderation'        => 'Moderation',
+    'sign_in'           => 'Sign in',
+    'registration'      => 'Registration',
 
     'closed'            => 'Discussion of the site is prohibited. Author or staff closed discussion.',
  
@@ -72,6 +74,7 @@ return [
     'science'           => 'Science and education',
     'goods'             => 'Goods and services',
     'life'              => 'Home',
+    'cms'               => 'CMS',
     'life_help'         => 'Children, animals, hobbies...',
     'security'          => 'Security...',
     

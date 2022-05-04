@@ -11,7 +11,7 @@ return [
   'appealed_message' => '<p>On the site you were contacted (@). Look:<p><p>{url}/p>',
 
   'changing_password_subject' => '{name} — password recovery',
-  'changing.password_message'  => '<p>Your password reset link:</p><p>{url}</p>',
+  'changing_password_message'  => '<p>Your password reset link:</p><p>{url}</p>',
   
   'test_subject' => '{name} — mail testing (admin panel)',
   'test_message' => '<p>This email is a test email sent through the admin panel.</p>',
@@ -22,5 +22,5 @@ return [
   'invite_reg_subject' => '{name} — invitation to join (invite)',
   'invite_reg_message' => '<p>You have been invited to join the community. If you agree. then follow the link:</p><p>{url}</p>',
    
-  'footer' => '<p>This email was generated automatically.<br>You don\'t need to reply to it.<br>Administration.<br>{name}</p>',
+  'footer' => '<p>This email was generated automatically.<br>You don\'t need to reply to it.</p><p>Administration.<br>{name}</p>',
 ];

@@ -1,12 +1,13 @@
 <?php
 
 use App\Models\User\{SettingModel, UserModel};
-use JacksonJeans\Mail;
-use JacksonJeans\MailException;
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class SendEmail
 {
-    // https://github.com/JacksonJeans/php-mail
     public static function mailText($uid, $type, array $variables = [])
     {
         if (is_null($uid)) {
@@ -60,27 +61,48 @@ class SendEmail
 
     public static function send($email, $subject = '', $message = '')
     {
+        $mail = new PHPMailer();
+
         if (config('general.smtp')) {
-            $mail = new Mail('smtp', [
-                'host'      => 'ssl://' . config('general.smtphost'),
-                'port'      => config('general.smtpport'),
-                'username'  => config('general.smtpuser'),
-                'password'  => config('general.smtppass')
-            ]);
 
-            $mail->setFrom(config('general.smtpuser'))
-                ->setTo($email)
-                ->setSubject($subject)
-                ->setHTML($message, true)
-                ->send();
+            try {
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->isSMTP();
+                $mail->Host       = config('general.smtphost');
+                $mail->SMTPAuth   = true;
+                $mail->Username   = config('general.smtpuser');
+                $mail->Password   = config('general.smtppass');
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
+                $mail->Port       = config('general.smtpport');
+
+                //Recipients
+                $mail->setFrom(config('general.smtpuser'), config('meta.name'));
+                $mail->addAddress($email, '');
+
+                //Content
+                $mail->isHTML(true);
+                $mail->Subject = $subject;
+                $mail->Body    = $message;
+
+                $mail->send();
+
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+
         } else {
-            $mail = new Mail();
+            $mail->isSendmail();
             $mail->setFrom(config('general.email'), config('meta.title'));
+            $mail->addAddress($email, '');
+            $mail->Subject = $subject;
+            $mail->msgHTML($message);
 
-            $mail->to($email)
-                ->setSubject($subject)
-                ->setHTML($message, true)
-                ->send();
+            //send the message, check for errors
+            if (!$mail->send()) {
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } 
+            
         }
     }
 }

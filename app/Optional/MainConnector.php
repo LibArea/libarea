@@ -44,10 +44,7 @@ class MainConnector implements Connector
             "MyParsedown"                   => "app/Libraries/Parsedown/MyParsedown.php",
             "SimpleImage"                   => "app/Libraries/SimpleImage.php",
             "URLScraper"                    => "app/Libraries/URLScraper.php",
-
             "SendEmail"                     => "app/Libraries/SendEmail.php",
-            "JacksonJeans\MailException"    => "app/Libraries/php-mail/MailException.class.php",
-            "JacksonJeans\Mail"             => "app/Libraries/php-mail/Mail.class.php",
         ];
     }
 }

@@ -10,6 +10,7 @@
 
 return [
     'home'              => 'Home',
+    'email'             => 'Email',
     'catalog'           => 'Catalog',
     'feed'              => 'Feed',
     'test'              => 'Testing',

@@ -8,6 +8,7 @@
 
 return [
     'home'              => 'Главная',
+    'email'             => 'Email',
     'catalog'           => 'Каталог',
     'feed'              => 'Лента',
     'test'              => 'Тестирование',
