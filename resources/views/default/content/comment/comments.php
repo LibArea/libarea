@@ -20,7 +20,7 @@
 </main>
 <aside>
   <div class="box text-sm sticky top-sm">
-    <?= __('app.comments.desc'); ?>
+    <?= __('meta.comments.desc'); ?>
   </div>
 </aside>
 <?= Tpl::insert('/_block/js-msg-flag'); ?>
