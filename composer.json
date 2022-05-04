@@ -45,7 +45,10 @@
       "Phphleb\\": "vendor/phphleb/",
       "Hleb\\": "vendor/phphleb/framework/",
       "Modules\\": "modules/"
-    }
+    },
+    "files": [
+        "app/helpers.php"
+    ]
   },
   "minimum-stability": "dev",
   "prefer-stable": true

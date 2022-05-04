@@ -93,12 +93,13 @@ class Search
             }
 
             $count = $results['numFound'] ?? 0;
+            $user_id = UserData::getUserId();
             self::setLogs(
                 [
                     'request'       => $q,
                     'action_type'   => $cat,
                     'add_ip'        => Request::getRemoteAddress(),
-                    'user_id'       => UserData::getUserId(),
+                    'user_id'       => $user_id > 0 ? $user_id : 1,
                     'count_results' => $count ?? 0,
                 ]
             );
