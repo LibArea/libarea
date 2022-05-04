@@ -55,6 +55,6 @@
   "config": {
     "optimize-autoloader": true
   },
-  "minimum-stability": "dev-main@dev",
+  "minimum-stability": "dev",
   "prefer-stable": true
 }
