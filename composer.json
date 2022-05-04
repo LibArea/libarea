@@ -55,6 +55,9 @@
   "config": {
     "optimize-autoloader": true
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  "extra": {
+      "branch-alias": {
+          "dev-main": "0.3.x"
+      }
+  }
 }
