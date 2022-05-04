@@ -15,12 +15,13 @@
     "mvc",
     "php"
   ],
-  "homepage": "https://libarea.ru",
+  "homepage": "https://github.com/libarea/libarea",
   "license": "MIT",
   "authors": [
     {
       "name": "Evgeny Konchik",
-      "email": "dev@libarea.ru"
+      "email": "dev@libarea.ru",
+      "homepage": "https://libarea.ru",
     }
   ],
   "require": {
@@ -54,6 +55,6 @@
   "config": {
     "optimize-autoloader": true
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "dev-main@dev",
   "prefer-stable": true
 }
