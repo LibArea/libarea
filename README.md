@@ -34,16 +34,24 @@ More details: https://libarea.ru/post/777/dev-sozdanie-novogo-sablona-test
 
 **Demo:** https://libarea.ru/
 
-### For testing
+### For testing (Installation)
 
-*   Installation Via Composer
-*   Set up the web server configuration: `public/` (The Public Directory)
-*   dev.sql
+Install the package through [Composer](http://getcomposer.org/). 
+
+Run the Composer require command from the Terminal:
+
+    composer create-project libarea/libarea
+
+Further:
+
+*   migrate: dev.sql
 *   settings: config/dbase.config.php and other files in the directory
 *   Log in to your account using administrator credentials: `ss@sdf.ru` / `qwer14qwer14`
 *   Or user: `test@test.ru` / `test@test.ru`
 
 PHP 7.4+, MySQL 8+ or > MariaDB 10.2.2
+
+Fully assembled releases can be downloaded at the office. support site: https://libarea.com/
 
 **The Public Directory**
 

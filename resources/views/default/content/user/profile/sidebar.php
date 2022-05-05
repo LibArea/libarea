@@ -4,7 +4,7 @@
 
   <div class="box">
     <blockquote class="ml0 mb10 gray break-all">
-      <?= $profile['about']; ?>... user
+      <?= $profile['about']; ?>...
     </blockquote>
     <div class="gray-600">
       <i class="bi-calendar-week middle"></i>

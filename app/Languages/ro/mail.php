@@ -7,21 +7,20 @@
 */
 
 return [
-  'appealed_subject' => '{name} — к вам обратились (@)',
-  'appealed_message' => '<p>На сайте, к вам обратились (@). Посмотреть:<p><p>{url}/p>',
+  'appealed_subject' => '{name} — ai fost contactat (@)',
+  'appealed_message' => '<p>Pe site, ați fost contactat (@). Uite:<p><p>{url}/p>',
 
-  'changing_password_subject' => '{name} — восстановление пароля',
-  'changing_password_message'  => '<p>Ваша ссылка для изменения пароля:</p><p>{url}</p>',
+  'changing_password_subject' => '{name} — recuperare parola',
+  'changing_password_message'  => '<p>Link pentru resetarea parolei:</p><p>{url}</p>',
 
-  'test_subject' => '{name} — тестирование почты (админ-панель)',
-  'test_message' => '<p>Это письмо является тестовым, отправленным через админ-панель.</p>',
+  'test_subject' => '{name} — testare e-mail (panoul de administrare)',
+  'test_message' => '<p>Acest e-mail este un e-mail de testare trimis prin panoul de administrare.</p>',
    
-  'activate_email_subject' => '{name} — активация email',
-  'activate_email_message' => '<p>Для продолжения регистрации активируйте свой E-mail. Перейдите по ссылке:</p><p>{url}</p>',
+  'activate_email_subject' => '{name} — activare prin e-mail',
+  'activate_email_message' => '<p>Pentru a continua înregistrarea, activați-vă adresa de e-mail. Urmați acest link:</p><p>{url}</p>',
    
-  'invite_reg_subject' => '{name} — приглашение присоединиться (инвайт)',
-  'invite_reg_message' => '<p>Вас пригласили присоединиться к сообществу. Если вы согласны. то перейдите по ссылке:</p><p>{url}</p>',
+  'invite_reg_subject' => '{name} — invitație de a se alătura (invitație)',
+  'invite_reg_message' => '<p>Ați fost invitat să vă alăturați comunității. Dacă sunteți de acord. apoi urmați linkul:</p><p>{url}</p>',
    
-  'footer' => '<p>Это письмо создано автоматически.<br>Отвечать на него не надо.</p><p>Администрация.<br>{name}</p>',
-
+  'footer' => '<p>Acest e-mail a fost generat automat.<br>Nu trebuie să răspundeți la el.</p><p>Administrare.<br>{name}</p>',
 ];
