@@ -245,7 +245,7 @@ class PostController extends MainController
         return Tpl::LaRender(
             '/post/link',
             [
-                'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('app.domain.desc') . ': ' . $domain, $m),
+                'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('meta.domain.desc') . ': ' . $domain, $m),
                 'data'  => [
                     'sheet'         => 'domain',
                     'pagesCount'    => ceil($pagesCount / $this->limit),

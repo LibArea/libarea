@@ -32,7 +32,7 @@
         <th><?= __('admin.info'); ?></th>
         <th><?= __('admin.type'); ?></th>
         <th><?= __('admin.action'); ?></th>
-        <th><?= __('admin.action'); ?></th>
+        <th>#</th>
       </thead>
       <?php foreach ($data['audits'] as $key => $audit) : ?>
         <tr>

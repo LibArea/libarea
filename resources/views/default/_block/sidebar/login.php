@@ -3,6 +3,7 @@ $form = new Forms();
 $form->html_form(UserData::getUserTl(), config('form/auth.login'));
 ?>
 <div class="box text-sm">
+  <h3 class="uppercase-box"><?= __('app.authorization'); ?></h3>
   <form action="<?= url('login'); ?>" method="post">
     <?php csrf_field(); ?>
     <?= $form->build_form(); ?>

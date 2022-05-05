@@ -10,6 +10,8 @@ return [
     'home'              => 'Admin panel',
     'all'               => 'All',
     'deleted'           => 'Remote',
+    'other'             => 'Other',
+    'being_developed'   => 'Being developed',
     'schemas'           => 'Scheme',
     'facets'            => 'Facets',
     'users'             => 'Members',

@@ -7,12 +7,12 @@
 return [
   'login' =>  [
     [
-      'title'   => 'Email',
-      'arr'     => [],
+    //  'title'   => 'Email',
+      'arr'     => ['placeholder' => 'Email'],
       'name'    => 'email'
     ], [
-      'title'   => __('app.password'),
-      'arr'     => ['type' => 'password', 'after_html' => '<span class="showPassword absolute gray-600 right5 mt5"><i class="bi-eye"></i></span>'],
+    //  'title'   => __('app.password'),
+      'arr'     => ['placeholder' => __('app.password'), 'type' => 'password', 'after_html' => '<span class="showPassword absolute gray-600 right5 mt5"><i class="bi-eye"></i></span>'],
       'name'    => 'password',
     ], [
       'title'   => __('app.remember_me'),

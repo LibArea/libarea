@@ -1,14 +1,15 @@
 <?php
 
 /*
-* The following language strings are used to translate the site core (controllers and templates).
+* The following language strings are used to translate the site core 
+* (controllers and templates).
 *
-* Следующие языковые строки используются для переводя ядра сайта (контроллеры и шаблоны).
+* Следующие языковые строки используются для переводя ядра сайта 
+* (контроллеры и шаблоны).
 */
 
 return [
     'home'              => 'Главная',
-    'email'             => 'Email',
     'catalog'           => 'Каталог',
     'feed'              => 'Лента',
     'test'              => 'Тестирование',
@@ -41,7 +42,6 @@ return [
     'by_deposit'        => 'По вкладу',
     'welcome'           => 'Добро пожаловать',
     'create_account'    => 'Создать аккаунт',
-    'not_registered'    => 'Публикуйте, отвечайте, комментируйте... <br>Вы еще не зарегистрировались',
     'saw'               => 'Видел',
     'bodies'            => 'Тела',
     'thanks'            => 'Спасибо',
@@ -233,7 +233,6 @@ return [
     'author'            => 'Автор',
     'characters'        => 'символов',
     'last_answer'       => 'Последний ответ',
-    'auth_comm'         => 'Вы должны войти в систему, чтобы оставить комментарий',
     'markdown'          => 'Поддерживает Markdown',
     'write'             => 'Напишите',
     'in_profile'        => 'в профиль',
@@ -260,7 +259,6 @@ return [
     'num_answer'    => ['Ответ', 'Ответа', 'Ответов'],
     'num_post'      => ['Пост', 'Поста', 'Постов'],
     'num_view'      => ['Просмотр', 'Просмотра', 'Просмотров'],
-
     'num_up'        => ['Голос', 'Голоса', 'Голосов'],
 
     'comment'       => 'Комментарий',
@@ -288,6 +286,8 @@ return [
     'you_answered'      => 'Вы уже ответили на этот вопрос',
     'need_login'        => 'Необходимо авторизоваться',
     'no_auth'           => 'Для ответа вы можете <a href="/login">авторизоваться</a>',
+    'auth_comm'         => 'Вы должны войти в систему, чтобы оставить комментарий',
+    'not_registered'    => 'Публикуйте, отвечайте, комментируйте... <br>Вы еще не зарегистрировались',
     'invalid'           => 'Недопустимый',
     'agree_rules'       => 'Продолжая, вы соглашаетесь с <a href="/info/article/privacy">Условиями использования</a> сайта',
     'limit_content'     => 'Вы исчерпали лимит на добавление установленный на сайте',
@@ -306,6 +306,8 @@ return [
     'seo'               => 'SEO',
     'url'               => 'URL',
     'slug'              => 'SLUG',
+    'email'             => 'Email',
+    'wiki'              => 'Wiki',
     'edit_answer'       => 'Изменим ответ',
     'enter'             => 'Введите',
     'enter_password'    => 'Введите пароль',
