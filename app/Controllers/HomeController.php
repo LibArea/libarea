@@ -35,8 +35,8 @@ class HomeController extends MainController
             $topics = \App\Models\FacetModel::advice($this->user['id']);
         }
 
-        $title = __('meta.' . $sheet . '.title', ['name' => config('meta.name')]);
-        $description = __('meta.' . $sheet . '.desc', ['name' => config('meta.name')]);
+        $title = __('meta-main.' . $sheet . '.title', ['name' => config('meta.name')]);
+        $description = __('meta-main.' . $sheet . '.desc', ['name' => config('meta.name')]);
 
         $m = [
             'main'      => 'main',
