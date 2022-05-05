@@ -19,7 +19,7 @@ class Catalog
 
     // List of sites by topic (sites by "category")
     // Лист сайтов по темам (сайты по "категориям")
-    public function index($sheet, $type)
+    public function index($sheet)
     {
         $pageNumber = Tpl::pageNumber();
 
@@ -57,7 +57,6 @@ class Catalog
                 'data'  => [
                     'screening'         => $screening,
                     'sheet'             => $sheet,
-                    'type'              => $type,
                     'count'             => $pagesCount,
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $pageNumber,

@@ -63,16 +63,16 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     public static function sorts($sheet)
     {
         switch ($sheet) {
-            case 'web':
+            case 'main':
                 $sort     = "WHERE item_is_deleted = 0 AND item_published = 1 ORDER BY item_id DESC";
                 break;
-            case 'web.top':
+            case 'top':
                 $sort     = "WHERE item_is_deleted = 0 ORDER BY item_votes DESC";
                 break;
-            case 'web.deleted':
+            case 'deleted':
                 $sort     = "WHERE item_is_deleted = 1 ORDER BY item_id DESC";
                 break;
-            case 'web.audits':
+            case 'audits':
                 $sort     = "WHERE item_is_deleted = 0 AND item_published = 0 ORDER BY item_id DESC";
                 break;
         }

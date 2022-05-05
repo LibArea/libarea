@@ -16,7 +16,7 @@ class Home
         $this->user  = UserData::get();
     }
 
-    public function index($sheet, $type)
+    public function index($sheet)
     {
         $m = [
             'og'         => true,
@@ -29,13 +29,12 @@ class Home
         return view(
             '/view/default/home',
             [
-                'meta'  => Meta::get(__('web.' . $sheet . '_title'), __('web.' . $sheet . '_desc'), $m),
+                'meta'  => Meta::get(__('web.' . $sheet. '_title'), __('web.' . $sheet . '_desc'), $m),
                 'data'  => [
                     'screening'         => 'all',
                     'items'             => WebModel::getItemsAll(1, $this->limit, $this->user, $sheet),
                     'user_count_site'   => $count_site,
-                    'type'              => $type,
-                    'sheet'             => $sheet == 'web' ? 'web.new_sites' : $sheet,
+                    'sheet'             => $sheet == 'main' ? 'new_sites' : $sheet,
                     'audit_count'       => UserAreaModel::auditCount(),
                 ]
             ]

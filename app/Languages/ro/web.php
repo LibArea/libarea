@@ -91,13 +91,13 @@ return [
     'sidebar_info'      => 'Catalog de site-uri sistematizate pe rubrici tematice.',
     'banner_info'       => 'Catalog de site-uri cu adnotări și capturi de ecran. Rubricare fațetă, căutare. Marcaje pe resurse cu posibilitatea de a vota site-uri, programe, rating',
     
-    'web_title'         => 'Director de site-uri',
-    'web_desc'          => 'Lista site-urilor din director plasate în ordine cronologică. Abilitatea de a căuta, marca, sorta după popularitate',
+    'main_title'         => 'Director de site-uri',
+    'main_desc'          => 'Lista site-urilor din director plasate în ordine cronologică. Abilitatea de a căuta, marca, sorta după popularitate',
     
-    'web.deleted_title' => 'Site-uri la distanță',
-    'web.deleted_desc'  => '...',
-    'web.audits_title'  => 'Auditul site-ului',
-    'web.audits_desc'   => '...',
+    'deleted_title' => 'Site-uri la distanță',
+    'deleted_desc'  => '...',
+    'audits_title'  => 'Auditul site-ului',
+    'audits_desc'   => '...',
     
     'top_title'         => '{name} — site-uri după popularitate',
     'top_desc'          => 'Anunțată listă de site-uri pe subiect {description_info}',

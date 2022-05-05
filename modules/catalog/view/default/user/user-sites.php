@@ -47,7 +47,7 @@
                   <?php if ($item['item_published'] == 1) : ?>
                     <div>
                       <i class="bi-arrow-return-right gray-600 ml10"></i>
-                      <a class="black" href="<?= url('web.website', ['slug' => $item['item_domain']]); ?>">
+                      <a class="black" href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
                         <?= __('web.more'); ?>
                       </a>
                     </div>

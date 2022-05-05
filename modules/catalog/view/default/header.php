@@ -41,7 +41,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?12');
                   </ul>
                 </div>
               <?php endif; ?>
-              <a class="<?php if ($data['sheet'] == 'web.bookmarks') { ?>sky <?php } ?>mr30 green" href="<?= url('web.bookmarks'); ?>">
+              <a class="mr30 green" href="<?= url('web.bookmarks'); ?>">
                 <?= __('web.favorites'); ?>
               </a>
               <div class="mr15 m relative">

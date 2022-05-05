@@ -73,6 +73,7 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                     item_votes,
                     item_following_link,
                     item_published,
+                    item_is_deleted,
                     votes_item_user_id, votes_item_item_id
                         FROM favorites fav
                         LEFT JOIN

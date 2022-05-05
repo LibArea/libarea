@@ -20,7 +20,7 @@ class Detailed
 
     // Detailed site page
     // Детальная страница сайта
-    public function index($sheet)
+    public function index()
     {
         $slug   = Request::get('slug');
 
@@ -45,7 +45,7 @@ class Detailed
         $m = [
             'og'         => true,
             'imgurl'     => $content_img,
-            'url'        => url('web.website', ['slug' => $item['item_domain']]),
+            'url'        => url('website', ['slug' => $item['item_domain']]),
         ];
         $title = __('web.website') . ': ' . $item['item_title'];
         $description  = $item['item_title'] . '. ' . $item['item_content'];
@@ -62,7 +62,6 @@ class Detailed
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
-                    'sheet'         => $sheet,
                     'type'          => 'web',
                     'item'          => $item,
                     'tree'          => $tree,

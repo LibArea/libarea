@@ -155,11 +155,11 @@ Route::get('/blog/{slug}/{page?}')->controller('Facets\BlogFacetController', ['f
 
 Route::get('/domain/{domain}/{page?}')->controller('Post\PostController@domain', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 
-Route::get('/web')->module('catalog', 'App\Home', ['web', 'web'])->name('web');
-Route::get('/web/website/{slug}')->module('catalog', 'App\Detailed', ['feed'])->name('web.website');
-Route::get('/web/dir/{grouping}/{slug}')->module('catalog', 'App\Catalog', ['web.top', 'web'])->name('web.dir');
-Route::get('/web/dir/{grouping}/{slug}/all')->module('catalog', 'App\Catalog', ['web.all', 'web'])->name('web.dir.all');
-Route::get('/web/dir/{grouping}/{slug}/top')->module('catalog', 'App\Catalog', ['web.top', 'web'])->name('web.dir.top');
+Route::get('/web')->module('catalog', 'App\Home', ['main'])->name('web');
+Route::get('/web/website/{slug}')->module('catalog', 'App\Detailed')->name('website');
+Route::get('/web/dir/{grouping}/{slug}')->module('catalog', 'App\Catalog', ['top'])->name('web.dir');
+Route::get('/web/dir/{grouping}/{slug}/all')->module('catalog', 'App\Catalog', ['all'])->name('web.dir.all');
+Route::get('/web/dir/{grouping}/{slug}/top')->module('catalog', 'App\Catalog', ['top'])->name('web.dir.top');
 
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
 

@@ -30,7 +30,7 @@
 
 <div id="contentWrapper">
   <main class="col-two">
-    <h2 class="inline mb10"><?= __($data['sheet']); ?></h2>
+    <h2 class="inline mb10"><?= __('web.' . $data['sheet']); ?></h2>
     <?php if (!empty($data['items'])) : ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'screening' => $data['screening']]); ?>
     <?php else : ?>

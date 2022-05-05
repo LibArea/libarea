@@ -91,13 +91,13 @@ return [
     'sidebar_info'      => 'Catalog of sites systematized by thematic headings.',
     'banner_info'       => 'Catalog of sites with annotations and screenshots. Faceted rubrication, search. Bookmarks on resources with the ability to vote for sites, programs, rating',
     
-    'web_title'         => 'Website directory',
-    'web_desc'          => 'List of sites in the directory placed in chronological order. Ability to search, bookmark, sort by popularity',
+    'main_title'         => 'Website directory',
+    'main_desc'          => 'List of sites in the directory placed in chronological order. Ability to search, bookmark, sort by popularity',
     
-    'web.deleted_title' => 'Remote Sites',
-    'web.deleted_desc'  => '...',
-    'web.audits_title'  => 'Website audit',
-    'web.audits_desc'   => '...',
+    'deleted_title' => 'Remote Sites',
+    'deleted_desc'  => '...',
+    'audits_title'  => 'Website audit',
+    'audits_desc'   => '...',
 
     'top_title'         => '{name} — sites by popularity',
     'top_desc'          => 'Announced list of sites by subject {description_info}',

@@ -20,6 +20,10 @@
             </a> - <?= $item['item_following_link']; ?>
           <?php endif; ?>
 
+          <?php if ($item['item_is_deleted'] == 1 && UserData::checkAdmin()) : ?>
+             <i class="red ml15"><?= __('app.remote'); ?></i>
+          <?php endif; ?>
+
           <?php if (!empty($delete_fav)) : ?>
             <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="website">
               <i class="bi-trash red"></i>
@@ -40,7 +44,7 @@
               <?php endif; ?>
               <div>
                 <i class="bi-arrow-return-right gray-600 ml10"></i>
-                <a class="black" href="<?= url('web.website', ['slug' => $item['item_domain']]); ?>">
+                <a class="black" href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
                   <?= __('web.more'); ?>
                 </a>
               </div>

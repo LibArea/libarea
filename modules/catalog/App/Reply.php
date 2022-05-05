@@ -48,7 +48,7 @@ class Reply
         $item = WebModel::getItemId($item_id);
         Html::pageRedirection($item, '/');
 
-        $url = url('web.website', ['slug' => $item['item_domain']]);
+        $url = url('website', ['slug' => $item['item_domain']]);
         Validation::Length($content, 'content', '6', '555', $url);
 
         // Access verification 
@@ -60,7 +60,7 @@ class Reply
         // If the user is frozen
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
 
-        $redirect  = url('web.website', ['slug' => $item['item_domain']]) . '#reply_' . $reply['reply_id'];
+        $redirect  = url('website', ['slug' => $item['item_domain']]) . '#reply_' . $reply['reply_id'];
 
         ReplyModel::edit(
             [
@@ -84,7 +84,7 @@ class Reply
         $item = WebModel::getItemId($item_id);
         Html::pageError404($item);
 
-        $url = url('web.website', ['slug' => $item['item_domain']]);
+        $url = url('website', ['slug' => $item['item_domain']]);
         Validation::Length($content, 'content', '6', '555', $url);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
@@ -114,7 +114,7 @@ class Reply
             ]
         );
 
-        $url = url('web.website', ['slug' => $item['item_domain']]) . '#reply_' . $last_id;
+        $url = url('website', ['slug' => $item['item_domain']]) . '#reply_' . $last_id;
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
