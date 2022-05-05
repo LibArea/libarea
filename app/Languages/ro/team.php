@@ -10,6 +10,7 @@ return [
     'home'          => 'Echipe',
     'add'           => 'Adăuga',
     'edit'          => 'Schimbare',
+    'remove'        => 'Elimina',
     'add_team'      => 'Adaugă o echipă',
     'edit_team'     => 'Schimba echipa',
     'no_teams'      => 'Din păcate, nu există încă comenzi',

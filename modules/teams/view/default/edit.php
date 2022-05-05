@@ -1,10 +1,10 @@
-<?= Tpl::insert('/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+<?= Tpl::insert('/header', ['data' => $data, 'meta' => $meta]); ?>
 <?php $team = $data['team']; ?>
 
 <main>
   <div class="box">
     <a href="<?= url('teams'); ?>"><?= __('team.home'); ?></a> /
-    <span class="red"><?= ('team.edit_team')); ?></span>
+    <span class="red"><?= __('team.edit'); ?></span>
 
     <form class="max-w780" action="<?= url('team.change'); ?>" method="post">
       <?= csrf_field() ?>

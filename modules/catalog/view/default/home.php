@@ -3,7 +3,7 @@
 <?php if (!UserData::checkActiveUser()) : ?>
   <div class="mb-none">
     <center>
-      <h1><?= __('web.home.title'); ?></h1>
+      <h1><?= __('web.main_title'); ?></h1>
       <p class="max-w780"><?= __('web.banner_info'); ?>.</p>
     </center>
   </div>

@@ -1,4 +1,4 @@
-<?= Tpl::insert('/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+<?= Tpl::insert('/header', ['data' => $data, 'meta' => $meta]); ?>
 
 <main>
   <div class="box-flex justify-between">

@@ -1,4 +1,4 @@
-<?= includeTemplate('/view/default/search/nav', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+<?= includeTemplate('/view/default/search/nav', ['data' => $data, 'meta' => $meta]); ?>
 
 <?php
 

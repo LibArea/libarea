@@ -1,4 +1,4 @@
-<?= Tpl::insert('/header', ['data' => $data, 'user' => $user, 'meta' => $meta]); ?>
+<?= Tpl::insert('/header', ['data' => $data, 'meta' => $meta]); ?>
 
 <main class="col-two">
   <div class="box">
