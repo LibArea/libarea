@@ -38,7 +38,7 @@ return [
     'desc.formed'       => 'Se formează descrierea',
     'by_date'           => 'După dată',
     'top_view'          => 'Prin rating',
-    'view'              => 'Site-uri noi',
+    'new_sites'         => 'Site-uri noi',
     'audits_view'       => 'Necesită luare în considerare',
     'deleted_view'      => 'Îndepărtat',
     'my_website'        => 'Site-urile mele',
@@ -93,9 +93,12 @@ return [
     
     'web_title'         => 'Director de site-uri',
     'web_desc'          => 'Lista site-urilor din director plasate în ordine cronologică. Abilitatea de a căuta, marca, sorta după popularitate',
-    'top_home'          => 'Site-uri după rating în director',
-    'top_home_title'    => 'Director de site-uri (după rating)',
-    'top_home_desc'     => 'Site-uri sortate după rating. Capturi de ecran și descrierea resurselor, capacitatea de a căuta și de a adăuga la marcaje',
+    
+    'web.deleted_title' => 'Site-uri la distanță',
+    'web.deleted_desc'  => '...',
+    'web.audits_title'  => 'Auditul site-ului',
+    'web.audits_desc'   => '...',
+    
     'top_title'         => '{name} — site-uri după popularitate',
     'top_desc'          => 'Anunțată listă de site-uri pe subiect {description_info}',
     'all_title'         => '{name} — rubrică, site-uri după dată',

@@ -38,7 +38,7 @@ return [
     'desc.formed'       => 'Description is formed',
     'by_date'           => 'By date',
     'top_view'          => 'By rating',
-    'view'              => 'New sites',
+    'new_sites'         => 'New sites',
     'audits_view'       => 'Require consideration',
     'deleted_view'      => 'Removed',
     'my_website'        => 'My sites',
@@ -93,9 +93,12 @@ return [
     
     'web_title'         => 'Website directory',
     'web_desc'          => 'List of sites in the directory placed in chronological order. Ability to search, bookmark, sort by popularity',
-    'top_home'          => 'Sites by rating in the directory',
-    'top_home_title'    => 'Website directory (by rating)',
-    'top_home_desc'     => 'Sites sorted by rating. Screenshots and description of resources, the ability to search and add to bookmarks',
+    
+    'web.deleted_title' => 'Remote Sites',
+    'web.deleted_desc'  => '...',
+    'web.audits_title'  => 'Website audit',
+    'web.audits_desc'   => '...',
+
     'top_title'         => '{name} — sites by popularity',
     'top_desc'          => 'Announced list of sites by subject {description_info}',
     'all_title'         => '{name} — rubric, sites by date',

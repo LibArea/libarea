@@ -60,7 +60,7 @@ main { margin-left: 30px; }
 .item-categories {
   display: flex;
   flex-wrap: wrap;
-  background-color: var(--violet-50);
+  background-color: #f3f1ed;
   padding: 20px 20px 20px 30px;
   margin-bottom: 25px;
 }
@@ -79,6 +79,8 @@ body.dark .categories-telo a {
 body.dark .box {
   background-color: #d0d0d0;
 }
+
+.dropdown { min-width: 220px; }
 
 @media (max-width: 890px) {
   aside,  

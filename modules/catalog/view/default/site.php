@@ -46,6 +46,12 @@
               </div>
             </div>
             <div class="flex right gray-600">
+              <?php if (UserData::checkAdmin()) : ?>
+                <a data-type="item" data-id="<?= $item['item_id']; ?>" class="type-action gray-600 mr30">
+                  <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
+                </a>
+              <?php endif; ?>
+            
               <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'mr20'); ?>
               <?= Html::votes($item, 'item', 'ps', 'bi-heart mr5'); ?>
             </div>

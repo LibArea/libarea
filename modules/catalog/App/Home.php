@@ -35,7 +35,7 @@ class Home
                     'items'             => WebModel::getItemsAll(1, $this->limit, $this->user, $sheet),
                     'user_count_site'   => $count_site,
                     'type'              => $type,
-                    'sheet'             => $sheet,
+                    'sheet'             => $sheet == 'web' ? 'web.new_sites' : $sheet,
                     'audit_count'       => UserAreaModel::auditCount(),
                 ]
             ]

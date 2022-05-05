@@ -23,7 +23,7 @@ class ActionController extends MainController
         $content_id = Request::getPostInt('content_id');
         $type       = Request::getPost('type');
 
-        $allowed = ['post', 'comment', 'answer', 'reply'];
+        $allowed = ['post', 'comment', 'answer', 'reply', 'item'];
         if (!in_array($type, $allowed)) {
             return false;
         }
@@ -51,6 +51,10 @@ class ActionController extends MainController
                 break;
             case 'reply':
                 $url  = '/';
+                $action_type = 'reply_web';
+                break;
+            case 'item':
+                $url  = url('web.deleted');
                 $action_type = 'reply_web';
                 break;
         }

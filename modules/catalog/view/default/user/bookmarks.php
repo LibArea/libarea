@@ -2,7 +2,7 @@
 <div id="contentWrapper">
   <main>
     <h2 class="mb20">
-      <?= __($data['sheet'] . '.view'); ?>
+      <?= __($data['sheet'] . '_view'); ?>
       <?php if ($data['count'] != 0) : ?><sup class="gray-600 text-sm"><?= $data['count']; ?></sup><?php endif; ?>
     </h2>
 

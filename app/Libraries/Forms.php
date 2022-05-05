@@ -447,7 +447,7 @@ class Forms
 					}
 				}
 
-				$result[] = $this->add_input($opt['title'], $opt['arr'], $opt['name']);
+				$result[] = $this->add_input($opt['title'] ?? '', $opt['arr'], $opt['name']);
 			}
 		}
 		return $result;

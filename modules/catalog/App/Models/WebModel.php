@@ -96,9 +96,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         $string = "relation_facet_id IN($topic_id)";
         if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
 
-        $go = '';
+        $go = 'item_is_deleted = 0 AND';
         if ($screening == 'github') {
-            $go = 'item_is_github = 1 AND';
+            $go = 'item_is_github = 1 AND item_is_deleted = 0 AND';
         }
 
         $start  = ($page - 1) * $limit;
