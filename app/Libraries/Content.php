@@ -31,13 +31,12 @@ class Content
                 return [];
             };
 
-            // с новой строки
+            // C новой строки
+            // TODO: просто проверим парсер
             $Parsedown->setBreaksEnabled(true);
-
             $text   = $Parsedown->text($content);
-            $text   = self::parseVideo($text);
-            $text   = self::parseRed($text);
-            $text   = self::parseSpoiler($text);
+            $text   = self::parseVideo(self::parseRed($text));
+            $text   = self::parseSpoiler(self::inlineEmoji($text));
 
         return self::parseUser($text);
     }
@@ -49,6 +48,28 @@ class Content
             $url = "https://www.youtube.com/embed/" . basename($id);
             $bodyvideo = "<object class='video-object mb-video-object' data='$url'></object>";
             return str_replace($matches[0], $bodyvideo, $content);
+        }
+
+
+        return  $content;
+    }
+    
+    public static function inlineEmoji($content)
+    {
+        if (preg_match('/\:(\w+)\:/mUs', $content, $matches)) {
+            print_r($matches);
+        
+            $path =  HLEB_PUBLIC_DIR . "/assets/images/emoji/" . $matches[1];
+            $file_ext = "";
+            if (file_exists($path . ".png"))
+                $file_ext = ".png";
+            else if (file_exists($path . ".gif"))
+                $file_ext = ".gif";
+            if ($file_ext === "")
+                return;
+           
+           $img = '/assets/images/emoji/' . $matches[1] . $file_ext;
+           return str_replace($matches[0], '<img class="emoji" src="' . $img . '">', $content);
         }
 
         return  $content;
@@ -83,7 +104,6 @@ class Content
         return $content;
     }
 
-    // Парсинг user login / uid
     public static function parseUser($content, $with_user = false, $to_uid = false)
     {
         preg_match_all('/@([^@,:\s,]+)/i', strip_tags($content), $matchs);

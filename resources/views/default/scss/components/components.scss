@@ -309,8 +309,8 @@ a:hover > img { opacity: 0.8; }
   display: block;
 }
 
-.emoji,
-.content-body .emoji {
+.post-body.full img.emoji,
+.content-body img.emoji {
   height: 16px;
   width: 16px;
   display: inline-block;
@@ -380,4 +380,5 @@ a:hover > img { opacity: 0.8; }
   font-family: bootstrap-icons;
   color: var(--gray-600);
   vertical-align: middle;
+  margin-left: 3px;
 }

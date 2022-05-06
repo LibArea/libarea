@@ -69,6 +69,7 @@ class SendEmail
                 //Server settings
                 $mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->isSMTP();
+                $mail->CharSet    = "utf-8";
                 $mail->Host       = config('general.smtphost');
                 $mail->SMTPAuth   = true;
                 $mail->Username   = config('general.smtpuser');
@@ -93,6 +94,7 @@ class SendEmail
 
         } else {
             $mail->isSendmail();
+            $mail->CharSet = "utf-8";
             $mail->setFrom(config('general.email'), config('meta.title'));
             $mail->addAddress($email, '');
             $mail->Subject = $subject;
