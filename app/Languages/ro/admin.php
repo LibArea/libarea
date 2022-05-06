@@ -11,6 +11,7 @@ return [
     'all'               => 'Toate',
     'deleted'           => 'la distanta',
     'other'             => 'Alte',
+    'website'           => 'Site-ul web',
     'being_developed'   => 'In dezvoltare',
     'schemas'           => 'Sistem',
     'facets'            => 'Fațete',

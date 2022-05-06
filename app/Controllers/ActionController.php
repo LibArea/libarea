@@ -55,7 +55,7 @@ class ActionController extends MainController
                 break;
             case 'item':
                 $url  = url('web.deleted');
-                $action_type = 'reply_web';
+                $action_type = 'website';
                 break;
         }
 
