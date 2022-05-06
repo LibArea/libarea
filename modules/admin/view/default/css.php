@@ -25,11 +25,14 @@
      <div class="box bg-lightyellow mr5">.box .bg-lightyellow</div>
      <div class="box bg-lightgray mr5">.box .bg-lightgray</div>
      <div class="box bg-purple mr5">.box .bg-purple</div> 
+     <div class="box bg-red-200 mr5">.box .bg-red-200</div>
      <div class="box bg-green white mr5">.box .bg-green</div>
      <div class="box bg-black white mr5">.box .bg-black</div>
      <div class="box bg-blue white mr5">.box .bg-blue</div>
      <div class="box bg-blue-100 mr5">.box .bg-blue-100</div>
-     <div class="box bg-red-200">.box .bg-red-200</div>
+     <div class="box bg-blue-200 mr5">.box .bg-blue-200</div>
+     <div class="box bg-beige">.box .bg-beige</div>
+     
    </div>  
   <p>
     <?= __('admin.being_developed'); ?>...

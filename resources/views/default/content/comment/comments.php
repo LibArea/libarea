@@ -6,7 +6,7 @@
     <div class="trigger">
       <i class="bi-info-square gray-600"></i>
     </div>
-    <div class="dropdown tooltip"><?= __('app.' . $data['sheet'] . '.info'); ?></div>
+    <div class="dropdown tooltip"><?= __('meta.' . $data['sheet'] . '.info'); ?></div>
   </div>
 
   <?php if (!empty($data['comments'])) : ?>
