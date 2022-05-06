@@ -40,8 +40,6 @@ class MainConnector implements Connector
             "Forms"                         => "app/Libraries/Forms.php",
 
             // TODO: заменить
-            "Parsedown"                     => "app/Libraries/Parsedown/Parsedown.php",
-            "MyParsedown"                   => "app/Libraries/Parsedown/MyParsedown.php",
             "SimpleImage"                   => "app/Libraries/SimpleImage.php",
             "URLScraper"                    => "app/Libraries/URLScraper.php",
             "SendEmail"                     => "app/Libraries/SendEmail.php",

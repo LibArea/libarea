@@ -4,38 +4,66 @@ use App\Models\ContentModel;
 
 class Content
 {
+   private static $regexYoutube  = '/(?:(?:https?:)?(?:\/\/)?)(?:(?:www)?\.)?youtube\.(?:.+?)\/(?:(?:watch\?v=)|(?:embed\/))([a-zA-Z0-9_-]{11})/';
+     
     // Работа с контентом (Parsedown)
     public static function text($content, $type)
     {
-        $Parsedown = new MyParsedown();
-        $Parsedown->setSafeMode(true); //безопасность
+        if ($type  == 'line') {
+            $Parsedown = new Parsedown();
+            $Parsedown->setSafeMode(true);
+            
+            return $Parsedown->line($content);
+        }  
 
-        if ($type  == 'text') {
+            $Parsedown = new ParsedownExtraPlugin;
+            $Parsedown->setSafeMode(true);
+            
+            $Parsedown->linkAttributes = function($Text, $Attributes, &$Element, $Internal) {
+                if (!$Internal) {
+                    return [
+                        'rel' => 'noopener nofollow ugc',
+                        'target' => '_blank',
+                        'class' => 'external-url',
+                    ];
+                }
+
+                return [];
+            };
+
+            // с новой строки
+            $Parsedown->setBreaksEnabled(true);
+
             $text   = $Parsedown->text($content);
             $text   = self::parseVideo($text);
+            $text   = self::parseRed($text);
             $text   = self::parseSpoiler($text);
-        } else {
-            $text   = $Parsedown->line($content);
-        }
 
         return self::parseUser($text);
     }
 
     public static function parseVideo($content)
     {
-        $regex  = '/(?:(?:https?:)?(?:\/\/)?)(?:(?:www)?\.)?youtube\.(?:.+?)\/(?:(?:watch\?v=)|(?:embed\/))([a-zA-Z0-9_-]{11})/';
-        $info   = preg_match($regex, $content, $matches);
-        if ($info) {
+        if (preg_match(static::$regexYoutube, $content, $matches)) {
             $id  = $matches[1];
             $url = "https://www.youtube.com/embed/" . basename($id);
             $bodyvideo = "<object class='video-object mb-video-object' data='$url'></object>";
-
             return str_replace($matches[0], $bodyvideo, $content);
         }
 
         return  $content;
     }
+    
+    public static function parseRed($content)
+    {
+        $regexpRed = '/\{red(?!.*\{red)(\s?)(?(1)(.*?))\}(.*?)\{\/red\}/is';
+        if (preg_match($regexpRed, $content, $matches)) {
+            $content = preg_replace($regexpRed, "<span class=\"red\">$2$3</span>", $content);
+        }
 
+        return  $content;
+    }
+    
     public static function parseSpoiler($content)
     {
         $regexpSp = '/\{spoiler(?!.*\{spoiler)(\s?)(?(1)(.*?))\}(.*?)\{\/spoiler\}/is';
@@ -46,9 +74,9 @@ class Content
         $regexpAu = '/\{auth(?!.*\{auth)(\s?)(?(1)(.*?))\}(.*?)\{\/auth\}/is';
         while (preg_match($regexpAu, $content)) {
             if (UserData::checkActiveUser()) {
-                $content = preg_replace($regexpAu, "<dev class=\"txt-closed\"><i class=\"bi-unlock gray-600 mr5\"></i> $2$3</dev>", $content);
+                $content = preg_replace($regexpAu, "<div class=\"txt-closed\"><i class=\"bi-unlock gray-600 mr5\"></i> $2$3</div>", $content);
             } else {
-                $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-600\"><i class=\"bi-lock mr5 red-200\"></i>" . __('app.text_closed') . "...</dev>", $content);
+                $content = preg_replace($regexpAu, "<div class=\"txt-closed gray-600\"><i class=\"bi-lock mr5 red-200\"></i>" . __('app.text_closed') . "...</div>", $content);
             }
         }
 
@@ -137,11 +165,4 @@ class Content
         return $content;
     }
 
-    public static function noMarkdown($content)
-    {
-        $md = '/(?:__|[*#])|\[(.*?)\]\(.*?\)/';
-        $content = preg_replace($md, "", $content);
-
-        return $content;
-    }
 }
