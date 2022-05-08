@@ -14,6 +14,7 @@ return [
     'website'           => 'Site-ul web',
     'being_developed'   => 'In dezvoltare',
     'schemas'           => 'Sistem',
+    'pages'             => 'Pagini',
     'facets'            => 'Fațete',
     'users'             => 'Membrii',
     'time'              => 'Timp',

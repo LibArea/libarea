@@ -14,6 +14,7 @@ return [
     'website'           => 'Website',
     'being_developed'   => 'Being developed',
     'schemas'           => 'Scheme',
+    'pages'             => 'Pages',
     'facets'            => 'Facets',
     'users'             => 'Members',
     'time'              => 'Time',

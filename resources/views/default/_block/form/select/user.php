@@ -41,8 +41,8 @@
 
             tagify = new Tagify(input, options);
             tagify.addTags([{
-                id: '<?= UserData::getUserId(); ?>',
-                value: '<?= UserData::getUserLogin(); ?>'
+                id: '<?= $user['id']; ?>',
+                value: '<?= $user['login']; ?>'
             }])
 
         });

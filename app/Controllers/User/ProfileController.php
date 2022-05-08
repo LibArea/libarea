@@ -190,8 +190,8 @@ class ProfileController extends MainController
             $name = $user['name'] . ' (' . $user['login'] . ') ';
         }
 
-        $title = __('meta' . $sheet . '.title', ['name' => $name]);
-        $description  = __('meta' . $sheet . '.desc', ['name' => $name, 'information' => $information ?? '...']);
+        $title = __('meta.' . $sheet . '.title', ['name' => $name]);
+        $description  = __('meta.' . $sheet . '.desc', ['name' => $name, 'information' => $information ?? '...']);
 
         $m = [
             'og'        => true,

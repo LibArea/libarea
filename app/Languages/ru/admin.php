@@ -14,6 +14,7 @@ return [
     'website'           => 'Сайт',
     'being_developed'   => 'В стадии разработки',
     'schemas'           => 'Схемы',
+    'pages'             => 'Страницы',
     'facets'            => 'Фасеты',
     'users'             => 'Участники',
     'time'              => 'Время',

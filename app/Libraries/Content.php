@@ -50,7 +50,6 @@ class Content
             return str_replace($matches[0], $bodyvideo, $content);
         }
 
-
         return  $content;
     }
     
