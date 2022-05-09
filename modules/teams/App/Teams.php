@@ -121,8 +121,8 @@ class Teams
         $name = Request::getPost('name');
         $content = Request::getPost('content');
 
-        Validation::Length($name, 'title', '6', '250', url('team.add'));
-        Validation::Length($content, 'content', '6', '5000', url('team.add'));
+        Validation::Length($name, 'msg.title', '6', '250', url('team.add'));
+        Validation::Length($content, 'msg.content', '6', '5000', url('team.add'));
 
         TeamModel::create(
             [
@@ -147,8 +147,8 @@ class Teams
         $name = Request::getPost('name');
         $content = Request::getPost('content');
 
-        Validation::Length($name, 'title', '6', '250', url('team.add'));
-        Validation::Length($content, 'content', '6', '5000', url('team.add'));
+        Validation::Length($name, 'msg.title', '6', '250', url('team.add'));
+        Validation::Length($content, 'msg.content', '6', '5000', url('team.add'));
 
         TeamModel::edit(
             [

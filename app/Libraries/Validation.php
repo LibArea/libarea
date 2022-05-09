@@ -23,7 +23,7 @@ class Validation
     public static function Slug($slug, $text, $redirect)
     {
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $slug)) {
-            $text = __('msg.slug_correctness', ['name' => '«' . $text . '»']);
+            $text = __('msg.slug_correctness', ['name' => '«' . __($text) . '»']);
             self::Returns($text, 'error', $redirect);
         }
         return true;

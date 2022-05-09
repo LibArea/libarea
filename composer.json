@@ -36,8 +36,7 @@
     "cocur/slugify": "^4.1",
     "phpmailer/phpmailer": "^6.5",
     "erusev/parsedown": "^1.8.0@beta",
-    "erusev/parsedown-extra": "0.8.0",
-    "taufik-nurrohman/parsedown-extra-plugin": "dev-main"
+    "kadet/keylighter": "dev-master"
   },
   "autoload": {
     "classmap": [

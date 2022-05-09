@@ -52,12 +52,12 @@ class AddFacetController extends MainController
             }
         }
 
-        Validation::Slug($facet_slug, 'slug', $redirect);
-        Validation::Length($facet_title, 'title', '3', '64', $redirect);
-        Validation::Length($facet_description, 'meta_description', '34', '225', $redirect);
-        Validation::Length($facet_short_description, 'short_description', '9', '160', $redirect);
-        Validation::Length($facet_slug, 'slug', '3', '43', $redirect);
-        Validation::Length($facet_seo_title, 'slug', '4', '225', $redirect);
+        Validation::Slug($facet_slug, 'msg.slug', $redirect);
+        Validation::Length($facet_title, 'msg.title', '3', '64', $redirect);
+        Validation::Length($facet_description, 'msg.meta_description', '34', '225', $redirect);
+        Validation::Length($facet_short_description, 'msg.short_description', '9', '160', $redirect);
+        Validation::Length($facet_slug, 'msg.slug', '3', '43', $redirect);
+        Validation::Length($facet_seo_title, 'msg.slug', '4', '225', $redirect);
 
         if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
             Validation::ComeBack('msg.repeat_url', 'error', $redirect);

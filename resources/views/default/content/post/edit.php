@@ -142,7 +142,6 @@
 
       <?php endif; ?>
 
-
       <?php if (UserData::checkAdmin()) : ?>
         <?= Tpl::insert('/_block/form/select/user', [
           'user'          => $data['user'],

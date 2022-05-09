@@ -61,7 +61,7 @@ class EditCommentController extends MainController
         CommentModel::edit(
             [
                 'comment_id'        => $comment_id,
-                'comment_content'   => Content::change($content),
+                'comment_content'   => $content,
                 'comment_modified'  => date("Y-m-d H:i:s"),
             ]
         );

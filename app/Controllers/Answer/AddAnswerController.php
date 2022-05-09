@@ -25,7 +25,7 @@ class AddAnswerController extends MainController
         $content = $_POST['content']; // для Markdown
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Length($content, 'content', '6', '5000', $url_post);
+        Validation::Length($content, 'msg.content', '6', '5000', $url_post);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
@@ -34,7 +34,7 @@ class AddAnswerController extends MainController
         $last_id = AnswerModel::add(
             [
                 'answer_post_id'    => $post_id,
-                'answer_content'    => Content::change($content),
+                'answer_content'    => $content,
                 'answer_published'  => ($trigger === false) ? 0 : 1,
                 'answer_ip'         => Request::getRemoteAddress(),
                 'answer_user_id'    => $this->user['id'],

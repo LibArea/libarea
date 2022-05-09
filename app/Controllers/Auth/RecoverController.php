@@ -49,7 +49,7 @@ class RecoverController extends MainController
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['ban_list'] == UserData::BANNED_USER) {
-            Validation::ComeBack('account_verified', 'error', $recover_uri);
+            Validation::ComeBack('msg.account_verified', 'error', $recover_uri);
         }
 
         $code = $uInfo['id'] . '-' . Html::randomString('crypto', 25);
@@ -104,7 +104,7 @@ class RecoverController extends MainController
             return false;
         }
 
-        Validation::Length($password, 'password', '8', '32', url('recover.code', ['code' => $code]));
+        Validation::Length($password, 'msg.password', '8', '32', url('recover.code', ['code' => $code]));
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         $news     = SettingModel::editPassword(['id' => $user_id, 'password' => $newpass]);

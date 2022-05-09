@@ -44,14 +44,14 @@ class Tpl
         unset($params);
 
         $tpl_puth = UserData::getUserTheme() . DIRECTORY_SEPARATOR . trim($hlTemplatePath, '/\\');
- 
+
         if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php')) {
             $tpl_puth = 'default' . $hlTemplatePath;
         }
 
         require TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php';
     }
-    
+
     public static function pageNumber()
     {
         $string = Request::get();
@@ -60,20 +60,19 @@ class Tpl
 
         if ($arr) {
             $arr = explode('.', $string['page']);
-        
+
             $attr = $arr[1] ?? null;
             if ($attr != 'html') {
                 include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
                 hl_preliminary_exit();
             }
-          
-           if ($arr[0] < 0) {
-               include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-               hl_preliminary_exit();
-           }
-           $pageNumber = (int)$arr[0];  
-       }        
-       return $pageNumber <= 1 ? 1 : $pageNumber;
+
+            if ($arr[0] < 0) {
+                include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+                hl_preliminary_exit();
+            }
+            $pageNumber = (int)$arr[0];
+        }
+        return $pageNumber <= 1 ? 1 : $pageNumber;
     }
-    
 }

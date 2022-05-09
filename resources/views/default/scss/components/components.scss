@@ -30,7 +30,7 @@ h5 {
   z-index: 50;
   position: sticky;
   background-color: var(--white);
-  box-shadow: 0 2px 4px -1px rgb(0 0 0 / 25%);
+  box-shadow: 0 1px 2px -1px rgb(0 0 0 / 25%);
   backface-visibility: hidden;
   height: 3.5em;
   margin-bottom: 15px;
@@ -309,6 +309,7 @@ a:hover > img { opacity: 0.8; }
   display: block;
 }
 
+.shown_post img.emoji,
 .post-body.full img.emoji,
 .content-body img.emoji {
   height: 16px;
@@ -323,13 +324,12 @@ a:hover > img { opacity: 0.8; }
   margin-top: -70px;
   padding-top: 70px;
 }
-
-/* Markdown */
+ 
 .ind-first-p p:first-child { margin-top: 3px; }
 
-.video-object {
-  max-width: 640px;
-  max-height: 360px;
+iframe {
+  max-width: 560px;
+  max-height: 320px;
 }
 
 .home-img,
@@ -375,7 +375,9 @@ a:hover > img { opacity: 0.8; }
   text-align: center;
 }
 
-.external-url:after {
+/* Сделаем внешние ссылки с иконкой */
+.ind-first-p a[rel~="nofollow"]:after,
+.post-body a[rel~="nofollow"]:after {
   content: "\f470";
   font-family: bootstrap-icons;
   color: var(--gray-600);

@@ -1,0 +1,35 @@
+pre.lb { background: #181818; padding: 15px; }
+pre.lb span.kl-language, pre.lb span.kl-expression { color: white; }
+pre.lb span.kl-keyword { color: #FF9700; }
+pre.lb span.kl-operator { color: #c17200; }
+pre.lb span.kl-delimiter { color: #c17200; }
+pre.lb span.kl-string { color: #b7e388; }
+pre.lb span.kl-comment { color: #555; }
+pre.lb span.kl-number { color: #E26F90; }
+pre.lb span.kl-constant { color: #F5A2B7; }
+pre.lb span.kl-call { color: #F4BD8C; }
+pre.lb span.kl-call.kl-preprocessor { color: #99764b; }
+pre.lb span.kl-preprocessor { color: #ad916f; }
+pre.lb span.kl-symbol { color: #ffdebb; }
+pre.lb span.kl-variable { color: #AD83E2; }
+pre.lb span.kl-annotation { color: #FF9700; }
+pre.lb span.kl-parameter { color: #6691C2; }
+pre.lb span.kl-annotation.kl-arguments { color: white; }
+pre.lb span.kl-variable.kl-splat { color: #BD9CE0; }
+pre.lb span.kl-variable.kl-property { color: #BD9CE0; }
+pre.lb span.kl-symbol.kl-dotnet { color: #ffdebb; }
+pre.lb span.kl-comment.kl-docblock { color: #666; }
+pre.lb span.kl-tag { color: #c17200; }
+pre.lb span.kl-symbol.kl-tag { font-weight: bold; }
+pre.lb span.kl-attribute { color: #F4BD8C; }
+pre.lb span.kl-format.kl-bold { font-weight: bold; }
+pre.lb span.kl-format.kl-italics { font-style: italic; }
+pre.lb span.kl-format.kl-strike { text-decoration: line-through; }
+pre.lb span.kl-format.kl-underline { text-decoration: underline; }
+pre.lb span.kl-format.kl-monospace, pre.lb span.kl-format.kl-block.kl-code { color: #666; }
+pre.lb span.kl-format.kl-header { color: #6691C2; }
+pre.lb span.kl-symbol.kl-type { color: #F5A2B7; }
+pre.lb span.kl-tag.kl-namespace { color: #FF9700; font-weight: normal; }
+pre.lb span.kl-attribute.kl-namespace { color: #ffdebb; }
+pre.lb span.kl-diff.kl-add, pre.lb span.kl-annotation.kl-diff.kl-add { color: #89B366; }
+pre.lb span.kl-diff.kl-remove, pre.lb span.kl-annotation.kl-diff.kl-remove { color: #E26F90; }

@@ -18,7 +18,12 @@ main { width: calc(100% - 390px); }
     width: 160px;
     height: auto;
   }
-  
+
+  iframe {
+    max-width: 300px;
+    max-height: 180px;
+  }
+
   .menu__left { min-width: 160px; }
   aside { width: 250px; }
 }
@@ -90,11 +95,6 @@ main { width: calc(100% - 390px); }
 
   .home-img { width: 100%; }
 
-  .mb-video-object {
-    max-width: 280px;
-    max-height: 155px;
-  }
-  
   .flex-auto {
     flex-wrap: wrap;
     flex: 1 1 auto;

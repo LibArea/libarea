@@ -72,8 +72,8 @@ class RegisterController extends MainController
             Validation::ComeBack('msg.multiple_accounts', 'error', $redirect);
         }
 
-        Validation::Slug($login, 'nickname', '/register');
-        Validation::Length($login, 'nickname', '3', '10', $redirect);
+        Validation::Slug($login, 'msg.nickname', '/register');
+        Validation::Length($login, 'msg.nickname', '3', '10', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
             Validation::ComeBack('msg.nick_character', 'error', $redirect);
@@ -88,7 +88,7 @@ class RegisterController extends MainController
             Validation::ComeBack('msg.nickname_replay', 'error', $redirect);
         }
 
-        Validation::Length($password, 'password', '8', '32', $redirect);
+        Validation::Length($password, 'msg.password', '8', '32', $redirect);
         if (substr_count($password, ' ') > 0) {
             Validation::ComeBack('msg.password_spaces', 'error', $redirect);
         }

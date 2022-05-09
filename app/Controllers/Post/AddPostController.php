@@ -105,8 +105,8 @@ class AddPostController extends MainController
         $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'post');
 
         $post_title = str_replace("&nbsp;", '', $post_title);
-        Validation::Length($post_title, 'title', '6', '250', $redirect);
-        Validation::Length($content, 'content', '6', '25000', $redirect);
+        Validation::Length($post_title, 'msg.title', '6', '250', $redirect);
+        Validation::Length($content, 'msg.content', '6', '25000', $redirect);
 
         if ($post_url) {
             $site = $this->addUrl($post_url, $post_title);
@@ -123,7 +123,7 @@ class AddPostController extends MainController
         $last_id = PostModel::create(
             [
                 'post_title'            => $post_title,
-                'post_content'          => Content::change($content),
+                'post_content'          => $content,
                 'post_content_img'      => $post_img ?? '',
                 'post_thumb_img'        => $site['og_img'] ?? '',
                 'post_related'          => $post_related  ?? false,

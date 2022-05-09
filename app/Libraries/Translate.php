@@ -22,7 +22,7 @@ class Translate
     {
         return static::$locale;
     }
-    
+
     // Установим текущую локаль
     public static function setLang($locale)
     {
@@ -40,22 +40,22 @@ class Translate
         [$file, $parsedLine] = self::analyze($line, static::$locale);
 
         $output = self::receiving(static::$locale, $file, $parsedLine);
- 
+
         // если все еще не нашел, попробуйте английский
-        if ($output === null) { 
+        if ($output === null) {
             [$file, $parsedLine] = self::analyze($line, 'en');
             $output = self::receiving('en', $file, $parsedLine);
         }
-        
+
         $output ??= $line;
- 
+
         if (!empty($args) && is_array($args)) {
             foreach ($args as $parameter => $replacement) {
-               $output = str_replace(static::$replacementPattern[0] . $parameter . static::$replacementPattern[1], $replacement, $output);
+                $output = str_replace(static::$replacementPattern[0] . $parameter . static::$replacementPattern[1], $replacement, $output);
             }
         }
 
-        return $output; 
+        return $output;
     }
 
     public static function receiving($locale, $file, $parsedLine)
@@ -66,7 +66,7 @@ class Translate
         }
 
         foreach (explode('.', $parsedLine) as $row) {
-            if (! isset($current)) {
+            if (!isset($current)) {
                 $current = static::$language[$locale][$file] ?? null;
             }
 
@@ -91,7 +91,7 @@ class Translate
         $file = substr($line, 0, strpos($line, '.'));
         $line = substr($line, strlen($file) + 1);
 
-        if (! isset(static::$language[$locale][$file]) || ! array_key_exists($line, static::$language[$locale][$file])) {
+        if (!isset(static::$language[$locale][$file]) || !array_key_exists($line, static::$language[$locale][$file])) {
             self::lines($file, $locale);
         }
 
@@ -100,7 +100,7 @@ class Translate
 
     public static function lines($file, $locale, bool $return = false)
     {
-        if (! array_key_exists($locale, static::$loadedFiles)) {
+        if (!array_key_exists($locale, static::$loadedFiles)) {
             static::$loadedFiles[$locale] = [];
         }
 
@@ -109,11 +109,11 @@ class Translate
             return [];
         }
 
-        if (! array_key_exists($locale, static::$language)) {
+        if (!array_key_exists($locale, static::$language)) {
             static::$language[$locale] = [];
         }
 
-        if (! array_key_exists($file, static::$language[$locale])) {
+        if (!array_key_exists($file, static::$language[$locale])) {
             static::$language[$locale][$file] = [];
         }
 
@@ -137,8 +137,8 @@ class Translate
         $strings = [];
         if (file_exists($path)) {
             $strings[] = require $path;
-        } 
-        
+        }
+
         if (isset($strings[1])) {
             $strings = array_replace_recursive(...$strings);
         } elseif (isset($strings[0])) {
@@ -147,5 +147,4 @@ class Translate
 
         return $strings;
     }
-    
 }

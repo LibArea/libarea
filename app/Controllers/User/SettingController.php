@@ -62,8 +62,8 @@ class SettingController extends MainController
         $lang           = Request::getPost('lang');
 
         $redirect   = url('setting');
-        Validation::Length($name, 'name', '0', '11', $redirect);
-        Validation::Length($about, 'about', '0', '255', $redirect);
+        Validation::Length($name, 'msg.name', '0', '11', $redirect);
+        Validation::Length($about, 'msg.about', '0', '255', $redirect);
 
         if ($public_email) {
             Validation::Email($public_email, $redirect);

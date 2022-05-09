@@ -161,7 +161,7 @@ return [
     'preview'           => 'Предпросмотр',
     'toggle_two'        => 'Два окна',
     'fullscreen'        => 'Во весь экран',
-    'spoiler'           => 'Cпойлер',
+    'spoiler'           => 'Спойлер',
     'spoiler_auth'      => 'Только для авторизованных',
     'select_image'      => 'Please select an image',
     'drop_image'        => 'Перетащите изображение чтобы загрузить его.',

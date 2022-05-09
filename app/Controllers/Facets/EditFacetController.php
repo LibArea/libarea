@@ -81,13 +81,13 @@ class EditFacetController extends MainController
 
         $redirect = url('content.edit', ['type' => $new_type, 'id' => $facet['facet_id']]);
 
-        Validation::Slug($facet_slug, 'slug', $redirect);
-        Validation::Length($facet_title, 'title', '3', '64', $redirect);
-        Validation::Length($facet_slug, 'slug', '3', '43', $redirect);
-        Validation::Length($facet_seo_title, 'name_seo', '4', '225', $redirect);
-        Validation::Length($facet_description, 'meta_description', '44', '225', $redirect);
-        Validation::Length($facet_short_description, 'short_description', '11', '160', $redirect);
-        Validation::Length($facet_info, 'info', '14', '5000', $redirect);
+        Validation::Slug($facet_slug, 'msg.slug', $redirect);
+        Validation::Length($facet_title, 'msg.title', '3', '64', $redirect);
+        Validation::Length($facet_slug, 'msg.slug', '3', '43', $redirect);
+        Validation::Length($facet_seo_title, 'msg.name_seo', '4', '225', $redirect);
+        Validation::Length($facet_description, 'msg.meta_description', '44', '225', $redirect);
+        Validation::Length($facet_short_description, 'msg.short_description', '11', '160', $redirect);
+        Validation::Length($facet_info, 'msg.info', '14', '5000', $redirect);
 
         // Запишем img
         $check_img  = $_FILES['images']['name'] ?? null;

@@ -7,4 +7,4 @@
   <?php if ($post['post_merged_id']) : ?><i class="bi-link-45deg sky"></i><?php endif; ?>
   <span class="pt5 pr10 pb5 pl10 gray-600 bg-violet br-rd3 text-sm italic lowercase"><?= __('app.translation'); ?></span>
 <?php endif; ?>
-<?php if ($post['post_tl']) : ?><span class="yellow italic text-sm">tl<?= $post['post_tl']; ?></span><?php endif; ?>
+<?php if ($post['post_tl']) : ?><span class="green italic text-sm">tl<?= $post['post_tl']; ?></span><?php endif; ?>

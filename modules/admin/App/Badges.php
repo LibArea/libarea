@@ -71,9 +71,9 @@ class Badges
         $icon          = $_POST['badge_icon']; // для Markdown
 
         $redirect = url('admin.badges');
-        Validation::Length($title, 'title', '4', '25', $redirect);
-        Validation::Length($description, 'description', '12', '250', $redirect);
-        Validation::Length($icon, 'icon', '12', '250', $redirect);
+        Validation::Length($title, 'msg.title', '4', '25', $redirect);
+        Validation::Length($description, 'msg.description', '12', '250', $redirect);
+        Validation::Length($icon, 'msg.icon', '12', '250', $redirect);
 
         BadgeModel::add(
             [
@@ -119,7 +119,7 @@ class Badges
             ]
         );
 
-        Validation::ComeBack('successfully', 'success', url('admin.user.edit', ['id' => $uid]));
+        Validation::ComeBack('msg.successfully', 'success', url('admin.user.edit', ['id' => $uid]));
     }
 
     public function edit()
@@ -136,9 +136,9 @@ class Badges
         $description   = Request::getPost('badge_description');
         $icon          = $_POST['badge_icon']; // для Markdown
 
-        Validation::Length($title, 'title', '4', '25', $redirect);
-        Validation::Length($description, 'description', '12', '250', $redirect);
-        Validation::Length($icon, 'icon', '12', '250', $redirect);
+        Validation::Length($title, 'msg.title', '4', '25', $redirect);
+        Validation::Length($description, 'msg.description', '12', '250', $redirect);
+        Validation::Length($icon, 'msg.icon', '12', '250', $redirect);
 
         BadgeModel::edit(
             [

@@ -39,6 +39,9 @@ class MainConnector implements Connector
             "UserData"                      => "app/Libraries/UserData.php",
             "Forms"                         => "app/Libraries/Forms.php",
 
+            "Jevix"                         => "app/Libraries/Jevix/Jevix.php",
+            "Parser"                        => "app/Libraries/Jevix/Parser.php",
+
             // TODO: заменить
             "SimpleImage"                   => "app/Libraries/SimpleImage.php",
             "URLScraper"                    => "app/Libraries/URLScraper.php",

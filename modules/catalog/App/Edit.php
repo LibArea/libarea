@@ -74,8 +74,8 @@ class Edit
         $item_is_github     = Request::getPostInt('github');
         $item_github_url    = Request::getPost('github_url');
 
-        Validation::Length($item_title, 'title', '14', '250', $redirect);
-        Validation::Length($item_content, 'description', '24', '1500', $redirect);
+        Validation::Length($item_title, 'msg.title', '14', '250', $redirect);
+        Validation::Length($item_content, 'msg.description', '24', '1500', $redirect);
 
         if (filter_var($item_url, FILTER_VALIDATE_URL) === FALSE) {
             redirect($redirect);

@@ -2,8 +2,9 @@
 
 <textarea id="editor" name="content"><?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?></textarea>
 
+<div id="editor"></div>
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     let content = '';
     const easyMDE = new EasyMDE({
       autoDownloadFontAwesome: false,
@@ -37,14 +38,14 @@
           children: [{
             className: "bi-eye-slash",
             action: (e) => {
-              e.codemirror.replaceSelection('{spoiler} *** {/spoiler} ');
+              e.codemirror.replaceSelection('<details title="<?= __('app.spoiler'); ?>"> *** </details> ');
               e.codemirror.focus();
             },
           }, {
             className: "bi-unlock",
             title: "<?= __('app.spoiler_auth'); ?>",
             action: (e) => {
-              e.codemirror.replaceSelection('{auth} *** {/auth}');
+              e.codemirror.replaceSelection('<details tl> *** </details>');
               e.codemirror.focus();
             },
           }],

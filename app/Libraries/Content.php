@@ -4,60 +4,23 @@ use App\Models\ContentModel;
 
 class Content
 {
-   private static $regexYoutube  = '/(?:(?:https?:)?(?:\/\/)?)(?:(?:www)?\.)?youtube\.(?:.+?)\/(?:(?:watch\?v=)|(?:embed\/))([a-zA-Z0-9_-]{11})/';
-     
-    // Работа с контентом (Parsedown)
+    // Работа с контентом (Parsedown and HTMLPurifier)
     public static function text($content, $type)
     {
-        if ($type  == 'line') {
-            $Parsedown = new Parsedown();
-            $Parsedown->setSafeMode(true);
-            
-            return $Parsedown->line($content);
-        }  
+        $res    = Parser::content($content, $type);
+        $text   = self::parseRed($res);
 
-            $Parsedown = new ParsedownExtraPlugin;
-            $Parsedown->setSafeMode(true);
-            
-            $Parsedown->linkAttributes = function($Text, $Attributes, &$Element, $Internal) {
-                if (!$Internal) {
-                    return [
-                        'rel' => 'noopener nofollow ugc',
-                        'target' => '_blank',
-                        'class' => 'external-url',
-                    ];
-                }
-
-                return [];
-            };
-
-            // C новой строки
-            // TODO: просто проверим парсер
-            $Parsedown->setBreaksEnabled(true);
-            $text   = $Parsedown->text($content);
-            $text   = self::parseVideo(self::parseRed($text));
-            $text   = self::parseSpoiler(self::inlineEmoji($text));
-
-        return self::parseUser($text);
+        return self::parseUser(self::inlineEmoji($text));
     }
 
-    public static function parseVideo($content)
-    {
-        if (preg_match(static::$regexYoutube, $content, $matches)) {
-            $id  = $matches[1];
-            $url = "https://www.youtube.com/embed/" . basename($id);
-            $bodyvideo = "<object class='video-object mb-video-object' data='$url'></object>";
-            return str_replace($matches[0], $bodyvideo, $content);
-        }
-
-        return  $content;
-    }
-    
     public static function inlineEmoji($content)
     {
+        $pathEmoji =  '/assets/images/emoji/';
+
+        $smiles = array(':)', ':-)');
+        $content = str_replace($smiles, '<img class="emoji" src="' . $pathEmoji . 'smile.png">', $content);
+
         if (preg_match('/\:(\w+)\:/mUs', $content, $matches)) {
-            print_r($matches);
-        
             $path =  HLEB_PUBLIC_DIR . "/assets/images/emoji/" . $matches[1];
             $file_ext = "";
             if (file_exists($path . ".png"))
@@ -65,15 +28,15 @@ class Content
             else if (file_exists($path . ".gif"))
                 $file_ext = ".gif";
             if ($file_ext === "")
-                return;
-           
-           $img = '/assets/images/emoji/' . $matches[1] . $file_ext;
-           return str_replace($matches[0], '<img class="emoji" src="' . $img . '">', $content);
+                return $content;
+
+            $img = $pathEmoji . $matches[1] . $file_ext;
+            return str_replace($matches[0], '<img class="emoji" src="' . $img . '">', $content);
         }
 
         return  $content;
     }
-    
+
     public static function parseRed($content)
     {
         $regexpRed = '/\{red(?!.*\{red)(\s?)(?(1)(.*?))\}(.*?)\{\/red\}/is';
@@ -82,25 +45,6 @@ class Content
         }
 
         return  $content;
-    }
-    
-    public static function parseSpoiler($content)
-    {
-        $regexpSp = '/\{spoiler(?!.*\{spoiler)(\s?)(?(1)(.*?))\}(.*?)\{\/spoiler\}/is';
-        while (preg_match($regexpSp, $content)) {
-            $content = preg_replace($regexpSp, "<details><summary>" . __('app.see_more') . "</summary>$2$3</details>", $content);
-        }
-
-        $regexpAu = '/\{auth(?!.*\{auth)(\s?)(?(1)(.*?))\}(.*?)\{\/auth\}/is';
-        while (preg_match($regexpAu, $content)) {
-            if (UserData::checkActiveUser()) {
-                $content = preg_replace($regexpAu, "<div class=\"txt-closed\"><i class=\"bi-unlock gray-600 mr5\"></i> $2$3</div>", $content);
-            } else {
-                $content = preg_replace($regexpAu, "<div class=\"txt-closed gray-600\"><i class=\"bi-lock mr5 red-200\"></i>" . __('app.text_closed') . "...</div>", $content);
-            }
-        }
-
-        return $content;
     }
 
     public static function parseUser($content, $with_user = false, $to_uid = false)
@@ -167,21 +111,4 @@ class Content
 
         return true;
     }
-
-    public static function change($content)
-    {
-        $StringArray = [
-            '(c)' => '©',
-            '(r)' => '®',
-            ' - ' => ' — ',
-            '+/-' => '±'
-        ];
-
-        foreach ($StringArray as $Key => $Val) {
-            $content = str_replace($Key, $Val, $content);
-        }
-
-        return $content;
-    }
-
 }

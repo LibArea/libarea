@@ -111,12 +111,12 @@ class EditPostController extends MainController
         }
 
         $post_title = str_replace("&nbsp;", '', $post_title);
-        Validation::Length($post_title, 'title', '6', '250', $redirect);
+        Validation::Length($post_title, 'msg.title', '6', '250', $redirect);
 
         if ($content == '') {
             $content = $post['post_content'];
         }
-        Validation::Length($content, 'content', '6', '25000', $redirect);
+        Validation::Length($content, 'msg.content', '6', '25000', $redirect);
 
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
@@ -147,7 +147,7 @@ class EditPostController extends MainController
                 'post_date'             => $post_date,
                 'post_user_id'          => $post_user_id ?? 1,
                 'post_draft'            => $post_draft,
-                'post_content'          => Content::change($content),
+                'post_content'          => $content,
                 'post_content_img'      => $post_img ?? '',
                 'post_related'          => $post_related ?? '',
                 'post_tl'               => Request::getPostInt('content_tl'),

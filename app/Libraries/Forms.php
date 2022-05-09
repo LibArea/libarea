@@ -333,7 +333,7 @@ class Forms
 					$element = 'input';
 					$end .= ' type="' . $val['type'] . '" value="' . $val['value'] . '"';
 					$end .= $val['checked'] ? ' checked' : '';
-                    $end .= $val['placeholder'] ? ' placeholder="'.$val['placeholder'].'"' : '';
+					$end .= $val['placeholder'] ? ' placeholder="' . $val['placeholder'] . '"' : '';
 					$end .= $this->field_close();
 					break;
 			}

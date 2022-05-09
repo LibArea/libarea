@@ -47,7 +47,7 @@ class AddCommentController extends MainController
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
-        Validation::Length($content, 'content', '6', '2024', $url_post);
+        Validation::Length($content, 'msg.content', '6', '2024', $url_post);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
@@ -58,7 +58,7 @@ class AddCommentController extends MainController
                 'comment_post_id'       => $post['post_id'],
                 'comment_answer_id'     => $answer_id,
                 'comment_comment_id'    => $comment_id,
-                'comment_content'       => Content::change($content),
+                'comment_content'       => $content,
                 'comment_published'     => ($trigger === false) ? 0 : 1,
                 'comment_ip'            => Request::getRemoteAddress(),
                 'comment_user_id'       => $this->user['id'],

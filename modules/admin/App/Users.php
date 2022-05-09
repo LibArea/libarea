@@ -123,7 +123,7 @@ class Users
         }
 
         $redirect = url('admin.user.edit', ['id' => $user_id]);
-        Validation::Length($login, 'login', '3', '11', $redirect);
+        Validation::Length($login, 'msg.login', '3', '11', $redirect);
 
         if ($email) {
             Validation::Email($email, $redirect);

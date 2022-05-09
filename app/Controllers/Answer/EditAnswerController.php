@@ -65,12 +65,12 @@ class EditAnswerController extends MainController
 
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
         $url = url('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
-        Validation::Length($content, 'content', '6', '5000', '/' . $url);
+        Validation::Length($content, 'msg.content', '6', '5000', '/' . $url);
 
         AnswerModel::edit(
             [
                 'answer_id'         => $answer_id,
-                'answer_content'    => Content::change($content),
+                'answer_content'    => $content,
                 'answer_modified'   => date("Y-m-d H:i:s"),
             ]
         );

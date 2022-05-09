@@ -55,8 +55,8 @@ class UserData
     static protected $id = null;
 
     static protected $user = null;
- 
- 
+
+
     static public function checkAccordance($type, $compare)
     {
         $check = self::getRegType($type, $compare);
@@ -88,7 +88,7 @@ class UserData
         $t = self::getAccount();
 
         self::$user = $t ? $t : $noAuth;
- 
+
         return self::$user;
     }
 
@@ -137,7 +137,7 @@ class UserData
     static public function getRegType($type, $cp = '>='): bool
     {
         $t = self::getUserTl();
-        
+
         if ((is_integer($type) && (
                 ($cp == '=' && $t == $type) ||
                 ($cp == '>=' && $t >= $type) ||
@@ -180,7 +180,7 @@ class UserData
     static public function getUserTl(): int
     {
         $t = self::getAccount();
-        
+
         return  $t['trust_level'] ?? false;
     }
 
@@ -191,7 +191,7 @@ class UserData
     static public function getUserId()
     {
         $t = self::getAccount();
-        
+
         return self::$myAccount['id'] ?? false;
     }
 
