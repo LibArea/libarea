@@ -50,7 +50,7 @@
             <?php foreach ($data['writers'] as $ind => $row) : ?>
               <li class="mb10">
                 <a class="gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">
-                  <?= Html::image($row['avatar'], $row['login'], 'ava-sm', 'avatar', 'max'); ?>
+                  <?= Html::image($row['avatar'], $row['login'], 'img-sm', 'avatar', 'max'); ?>
                   <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
                 </a>
               </li>

@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?12');
+Request::getHead()->addStyles('/assets/css/style.css?09');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -77,7 +77,7 @@ $facet  = $data['facet'] ?? false; ?>
 
             <div class="ml45 mb-ml20 relative">
               <div class="trigger">
-                <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'ava-base', 'avatar', 'small'); ?>
+                <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mb-pr0', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
                 <?= Tpl::insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>

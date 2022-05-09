@@ -9,12 +9,12 @@
           <div class="text-sm flex">
             <?php if ($msg['dialog_sender_id'] == UserData::getUserId()) : ?>
               <a href="<?= url('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
-                <?= Html::image($msg['msg_to_user']['avatar'], $msg['msg_to_user']['login'], 'ava-sm', 'avatar', 'small'); ?>
+                <?= Html::image($msg['msg_to_user']['avatar'], $msg['msg_to_user']['login'], 'img-sm', 'avatar', 'small'); ?>
                 <?= $msg['msg_to_user']['login']; ?>
               </a>
             <?php else : ?>
               <a class="mr5" href="<?= url('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
-                <?= Html::image($msg['msg_user']['avatar'], $msg['msg_user']['login'], 'ava-sm', 'avatar', 'small'); ?>
+                <?= Html::image($msg['msg_user']['avatar'], $msg['msg_user']['login'], 'img-sm', 'avatar', 'small'); ?>
                 <?= $msg['msg_user']['login']; ?>
               </a>
             <?php endif; ?>

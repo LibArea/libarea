@@ -27,7 +27,7 @@
         </div>
         <div class="flex text-sm mt3">
           <a class="items-center gray-600 mr10" href="<?= url('profile', ['login' => $post['login']]); ?>">
-            <?= Html::image($post['avatar'], $post['login'], 'ava-sm-min', 'avatar', 'small'); ?>
+            <?= Html::image($post['avatar'], $post['login'], 'img-sm-min', 'avatar', 'small'); ?>
             <?= $post['login']; ?>
           </a>
           <div class="gray-600 lowercase text-sm">

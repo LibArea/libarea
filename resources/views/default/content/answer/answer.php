@@ -11,7 +11,7 @@ foreach ($data['answers'] as $answer) :
         <div class="content-body">
           <div class="flex text-sm">
             <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">
-              <?= Html::image($answer['avatar'],  $answer['login'], 'ava-sm', 'avatar', 'small'); ?>
+              <?= Html::image($answer['avatar'],  $answer['login'], 'img-sm', 'avatar', 'small'); ?>
               <span class="mr5 ml5">
                 <?= $answer['login']; ?>
               </span>

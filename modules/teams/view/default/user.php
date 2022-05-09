@@ -50,7 +50,7 @@
     <span class="gray-600"><?= __('team.info'); ?></span>
     <h3 class="uppercase-box mt15"><?= __('team.owner'); ?></h3>
     <div class="mb15">
-      <?= Html::image($user['avatar'], $user['login'], 'ava-base', 'avatar', 'small'); ?>
+      <?= Html::image($user['avatar'], $user['login'], 'img-base', 'avatar', 'small'); ?>
       <a href="<?= url('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>
     </div>
   </div>

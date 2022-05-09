@@ -131,12 +131,12 @@ Route::get('/{facet_slug}/article/{slug}')->controller('Post\PostController', ['
 Route::get('/users/new/{page?}')->controller('User\UserController', ['users.new', 'user'])->name('users.new');
 Route::get('/users/{page?}')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
 
-Route::get('/@{login}')->controller('User\ProfileController', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile');
-Route::get('/@{login}/posts/{page?}')->controller('User\ProfileController@posts', ['profile.posts', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
+Route::get('/@{login}')->controller('User\ProfileController', ['profile.posts', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('profile');
+Route::get('/@{login}/posts/{page?}')->controller('User\ProfileController@posts', ['profile.posts', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
 
-Route::get('/@{login}/answers/{page?}')->controller('User\ProfileController@answers', ['profile.answers', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.answers');
+Route::get('/@{login}/answers/{page?}')->controller('User\ProfileController@answers', ['profile.answers', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.answers');
 
-Route::get('/@{login}/comments/{page?}')->controller('User\ProfileController@comments', ['profile.comments', 'profile'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.comments');
+Route::get('/@{login}/comments/{page?}')->controller('User\ProfileController@comments', ['profile.comments', 'users'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.comments');
 
 Route::get('/comments/{page?}')->controller('Comment\CommentController', ['comments.all', 'comments'])->name('comments');
 Route::get('/answers/{page?}')->controller('Answer\AnswerController', ['answers.all', 'answers'])->name('answers');

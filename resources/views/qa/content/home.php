@@ -87,7 +87,7 @@
           <?php foreach ($data['latest_answers'] as $answer) : ?>
             <li>
               <a title="<?= $answer['login']; ?>" href="<?= url('profile', ['login' => $answer['login']]); ?>">
-                <?= Html::image($answer['avatar'], $answer['login'], 'ava-sm', 'avatar', 'small'); ?>
+                <?= Html::image($answer['avatar'], $answer['login'], 'img-sm', 'avatar', 'small'); ?>
               </a>
               <span class="middle lowercase gray-600"><?= Html::langDate($answer['answer_date']); ?></span>
               <a class="last-content_telo" href="<?= url('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">

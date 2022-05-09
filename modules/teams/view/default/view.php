@@ -16,7 +16,7 @@
 
     <h2><?= __('team.owner'); ?></h2>
     <div class="mb15 mt5">
-      <?= Html::image($team['avatar'], $team['login'], 'ava-base', 'avatar', 'small'); ?>
+      <?= Html::image($team['avatar'], $team['login'], 'img-base', 'avatar', 'small'); ?>
       <a href="<?= url('profile', ['login' => $team['login']]); ?>"><?= $team['login']; ?></a>
     </div>
 
@@ -24,7 +24,7 @@
     <div class="mb15 mt5">
       <?php foreach ($data['team_users'] as $usr) : ?>
         <div class="mb15">
-          <?= Html::image($usr['avatar'], $usr['login'], 'ava-base', 'avatar', 'small'); ?>
+          <?= Html::image($usr['avatar'], $usr['login'], 'img-base', 'avatar', 'small'); ?>
           <a href="<?= url('profile', ['login' => $usr['login']]); ?>"><?= $usr['login']; ?></a>
         </div>
       <?php endforeach; ?>

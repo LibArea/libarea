@@ -2,7 +2,7 @@
   <div class="box">
     <h3 class="uppercase-box"><?= __('app.created_by'); ?></h3>
     <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= url('profile', ['login' => $data['user']['login']]); ?>">
-      <?= Html::image($data['user']['avatar'], $data['user']['login'], 'ava-base', 'avatar', 'max'); ?>
+      <?= Html::image($data['user']['avatar'], $data['user']['login'], 'img-base', 'avatar', 'max'); ?>
       <?= $data['user']['login']; ?>
     </a>
   </div>

@@ -41,7 +41,7 @@ class Console
     public static function tl()
     { 
         $users = ConsoleModel::getTrustLevel(0);
-        foreach ($users as $ind => $row) {  
+        foreach ($users as $row) {  
             if ($row['up_count'] > 2) {
                 ConsoleModel::setTrustLevel($row['id'], 1);
             }

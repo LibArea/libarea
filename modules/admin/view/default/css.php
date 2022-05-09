@@ -18,6 +18,13 @@
   <p><i class="btn btn-small btn-primary">btn btn-small btn-primary</i></p>
 
    <h4><?= __('admin.other'); ?>:</h4> 
+   <div class="box-flex flex-wrap mb20">
+     <div class="mr30"><div class="box bg-green img-sm"></div>.img-sm</div>
+     <div class="mr30"><div class="box bg-green img-base"></div>.img-base</div>
+     <div class="mr30"><div class="box bg-green img-lg"></div>.img-lg</div>
+     <div><div class="box bg-green img-xl"></div>.img-xl</div>
+   </div> 
+   
    <div class="box-flex flex-wrap">
      <div class="box mr5">.box</div>
      <div class="box bg-yellow mr5">.box .bg-yellow</div>
@@ -32,11 +39,7 @@
      <div class="box bg-blue-100 mr5">.box .bg-blue-100</div>
      <div class="box bg-blue-200 mr5">.box .bg-blue-200</div>
      <div class="box bg-beige">.box .bg-beige</div>
-     
    </div>  
-  <p>
-    <?= __('admin.being_developed'); ?>...
-  </p>
 
 </div>
 </main>

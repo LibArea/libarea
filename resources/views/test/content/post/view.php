@@ -111,7 +111,7 @@
             </div>
             <div class="center">
               <a title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
-                <?= Html::image($post['avatar'], $post['login'], 'ava-base', 'avatar', 'small'); ?>
+                <?= Html::image($post['avatar'], $post['login'], 'img-base', 'avatar', 'small'); ?>
               </a>
             </div>
           </li>
@@ -122,7 +122,7 @@
             <div class="center">
               <?php if (!empty($data['last_user']['answer_id'])) : ?>
                 <a title="<?= $data['last_user']['login']; ?>" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
-                  <?= Html::image($data['last_user']['avatar'], $data['last_user']['login'], 'ava-base', 'avatar', 'small'); ?>
+                  <?= Html::image($data['last_user']['avatar'], $data['last_user']['login'], 'img-base', 'avatar', 'small'); ?>
                 </a>
               <?php else : ?>
                 <span class="gray-600 text-sm">—</span>

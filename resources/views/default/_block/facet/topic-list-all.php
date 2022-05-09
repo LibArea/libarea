@@ -15,19 +15,19 @@
           ]); ?>
         </div>
 
-        <a class="black" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
+        <a class="black text-xl" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
           <?= $facet['facet_title']; ?>
         </a>
 
         <?php if (UserData::getUserId() == $facet['facet_user_id']) : ?>
           <i class="bi-mic sky text-sm"></i>
         <?php endif; ?>
-        <div class="text-sm mt10 pr20 mb-pr0 gray">
+        <div class="mt10 pr20 mb-pr0 gray">
           <?= $facet['facet_short_description']; ?>
-          <sup class="flex justify-center right">
+          <span class="right gray-600">
             <i class="bi-journal mr5"></i>
             <?= $facet['facet_count']; ?>
-          </sup>
+          </span>
         </div>
       </div>
     </div>

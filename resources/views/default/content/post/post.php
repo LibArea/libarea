@@ -12,17 +12,17 @@
           <?= __('app.unsubscribe'); ?>
         </div>
       <?php endif; ?>
-      <div class="flex mb10 relative items-center">
+      <div class="flex text-sm relative items-center">
         <div class="user-card" data-content_id="<?= $post['post_id']; ?>" data-user_id="<?= $post['id']; ?>">
-          <?= Html::image($post['avatar'], $post['login'], 'ava-base', 'avatar', 'max'); ?>
+          <?= Html::image($post['avatar'], $post['login'], 'img-sm', 'avatar', 'max'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
         <a class="flex black" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <div class="ml5">
             <?= $post['login']; ?>
-            <div class="gray-600 lowercase text-sm">
+            <span class="gray-600 ml5 lowercase text-sm">
               <?= Html::langDate($post['post_date']); ?>
-            </div>
+            </span>
           </div>
         </a>
       </div>

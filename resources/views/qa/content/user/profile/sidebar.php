@@ -83,7 +83,7 @@
         <?php endif; ?>
         <div class="text-sm lowercase">
           <a class="gray" href="<?= url('profile', ['login' => $profile['login']]); ?>">
-            <?= Html::image($profile['avatar'], $profile['login'], 'ava-sm', 'avatar', 'small'); ?>
+            <?= Html::image($profile['avatar'], $profile['login'], 'img-sm', 'avatar', 'small'); ?>
             <?= $profile['login']; ?>
           </a>
           <span class="gray-600 ml5"><?= $post['post_date'] ?></span>

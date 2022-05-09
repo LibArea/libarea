@@ -11,7 +11,7 @@
             echo '<li class="mt20' . $minus . $delete . '">
                     <div id="reply_' . $node['reply_id'] . '" class="content_tree text-sm">' 
                     
-                    . Html::image($node['avatar'], $node['login'], 'ava-sm', 'avatar', 'small') . 
+                    . Html::image($node['avatar'], $node['login'], 'img-sm', 'avatar', 'small') . 
             
                     '<span class="mr5 ml5 gray-600">' . $node['login'] . '</span>
                     

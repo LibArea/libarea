@@ -5,7 +5,7 @@
     foreach ($focus_users as $user) :
       $n++; ?>
       <a class="-mr-1" href="<?= url('profile', ['login' => $user['login']]); ?>">
-        <?= Html::image($user['avatar'], $user['login'], 'ava-sm', 'avatar', 'max'); ?>
+        <?= Html::image($user['avatar'], $user['login'], 'img-sm', 'avatar', 'max'); ?>
       </a>
     <?php endforeach; ?>
     <?php if ($n > 5) : ?><span class="ml10">...</span><?php endif; ?>

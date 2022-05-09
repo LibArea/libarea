@@ -24,7 +24,7 @@ foreach ($answer as  $comment) :
         <div class="max-w780">
           <div class="text-sm flex">
             <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>">
-              <?= Html::image($comment['avatar'], $comment['login'], 'ava-sm', 'avatar', 'small'); ?>
+              <?= Html::image($comment['avatar'], $comment['login'], 'img-sm', 'avatar', 'small'); ?>
               <span class="mr5 ml5">
                 <?= $comment['login']; ?>
               </span>
