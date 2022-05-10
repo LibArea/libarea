@@ -44,6 +44,6 @@
 </main>
 <aside>
   <div class="box text-sm sticky top-sm">
-    <?= __('app.messages_info'); ?>
+    <?= __('help.messages_info'); ?>
   </div>
 </aside>

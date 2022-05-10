@@ -3,10 +3,9 @@ $fs = $data['facet'];
 $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : url($fs['facet_type'], ['slug' => $fs['facet_slug']]);
 ?>
 
-<main class="w-100">
-
+<main class="col-two">
   <div class="box-flex bg-violet justify-between">
-    <p class="m0 text-xl"><?= __('app.' . $fs['facet_type']); ?></p>
+    <p class="m0 text-xl"><?= __('app.edit_' . $data['type']); ?></p>
     <ul class="nav">
 
       <?= Tpl::insert(
@@ -202,3 +201,9 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
     </form>
   </div>
 </main>
+<aside>
+   <div class="box text-sm bg-violet">
+    <h3 class="uppercase-box"><?= __('app.help'); ?></h3>
+    <?= __('help.edit_' . $data['type']); ?>
+  </div>
+</aside>

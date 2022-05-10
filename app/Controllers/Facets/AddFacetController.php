@@ -24,7 +24,7 @@ class AddFacetController extends MainController
         return Tpl::LaRender(
             '/facets/add',
             [
-                'meta'  => Meta::get(__('app.add_option', ['name' => __('app.topics')])),
+                'meta'  => Meta::get(__('app.add_' . $type)),
                 'data'  => [
                     'type' => $type,
                 ]

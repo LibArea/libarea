@@ -1,4 +1,4 @@
-<main>
+<main class="col-two">
   <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
@@ -91,6 +91,6 @@
 </main>
 <aside>
   <div class="box text-sm bg-violet">
-    <?= __('app.setting_info'); ?>
+    <?= __('help.setting_info'); ?>
   </div>
 </aside>

@@ -3,9 +3,9 @@ $fs = $data['facet'];
 $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : url($fs['facet_type'], ['slug' => $fs['facet_slug']]);
 ?>
 
-<main class="col-two">
+<main>
   <div class="box-flex justify-between">
-    <p class="m0 text-xl"><?= __('app.' . $fs['facet_type']); ?></p>
+    <p class="m0 text-xl"><?= __('app.edit_' . $data['type']); ?></p>
     <ul class="nav">
 
       <?= Tpl::insert(
@@ -29,7 +29,6 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
   <div class="box">
     <form class="max-w780" action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
-      <i><?= __('app.edit'); ?></i>
       <?= Tpl::insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
 
       <div class="file-upload mb10 mt15" id="file-drag">
@@ -200,3 +199,9 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
     </form>
   </div>
 </main>
+<aside>
+  <div class="box">
+    <h3 class="uppercase-box"><?= __('app.help'); ?></h3>
+    <?= __('help.edit_' . $data['type']); ?>
+  </div>
+</aside>

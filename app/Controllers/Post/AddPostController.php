@@ -43,10 +43,8 @@ class AddPostController extends MainController
         $topic_id   = Request::getInt('topic_id');
         $topic      = FacetModel::getFacet($topic_id, 'id', 'topic');
 
-        $puth = $type == 'page' ? '/page/add' : '/post/add';
-
         return Tpl::LaRender(
-            $puth,
+            '/post/add',
             [
                 'meta'      => Meta::get(__('app.add_option', ['name' => __('app.post')])),
                 'data'  => [

@@ -21,6 +21,6 @@ $form->html_form(UserData::getUserTl(), config('form/user-notifications'));
 </main>
 <aside>
   <div class="box text-sm">
-    <?= __('app.notification_info'); ?>
+    <?= __('help.notification_info'); ?>
   </div>
 </aside>

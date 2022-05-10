@@ -1,8 +1,6 @@
 <main class="col-two">
-  <div class="box">
-
-    <a href="/"><?= __('app.home'); ?></a> /
-    <span class="red"><?= __('app.add_option', ['name' => __('app.post')]); ?></span>
+  <div class="box pt0">
+    <h2><?= __('app.add_post'); ?></h2>
 
     <form class="max-w780" action="<?= url('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
@@ -60,7 +58,7 @@
 
       <?= Tpl::insert('/_block/form/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
 
-      <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL))) : ?>
+      <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL)) : ?>
         <?= Tpl::insert('/_block/form/radio',  [
           'data' => [
             [
@@ -118,3 +116,9 @@
     </form>
   </div>
 </main>
+<aside>
+   <div class="box text-sm bg-violet">
+    <h3 class="uppercase-box"><?= __('app.help'); ?></h3>
+    <?= __('help.add_post'); ?>
+  </div>
+</aside>

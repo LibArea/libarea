@@ -46,7 +46,7 @@ class EditFacetController extends MainController
                     'low_arr'           => FacetModel::getLowLevelList($facet['facet_id']),
                     'user'              => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'sheet'             => $facet['facet_type'] . 's',
-                    'type'              => 'edit',
+                    'type'              => $type,
                 ]
             ]
         );

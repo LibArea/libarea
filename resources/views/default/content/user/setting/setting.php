@@ -91,6 +91,6 @@
 </main>
 <aside>
   <div class="box text-sm">
-    <?= __('app.setting_info'); ?>
+    <?= __('help.setting_info'); ?>
   </div>
 </aside>

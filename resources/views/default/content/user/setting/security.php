@@ -22,6 +22,6 @@ $form->html_form(UserData::getUserTl(), config('form/user-security'));
 </main>
 <aside>
   <div class="box text-sm">
-    <?= __('app.security_info'); ?>
+    <?= __('help.security_info'); ?>
   </div>
 </aside>

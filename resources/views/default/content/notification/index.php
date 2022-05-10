@@ -37,6 +37,6 @@
 </main>
 <aside>
   <div class="box text-sm sticky top-sm">
-    <?= __('app.notifications_info'); ?>
+    <?= __('help.notifications_info'); ?>
   </div>
 </aside>

@@ -1,5 +1,5 @@
 <main class="col-two">
-  <div class="box-flex">
+  <div class="box-flex bg-violet justify-between">
     <p class="m0"><?= __('app.' . $data['sheet']); ?></p>
   </div>
   <div class="box">
@@ -44,6 +44,6 @@
 </main>
 <aside>
   <div class="box bg-violet text-sm">
-    <?= __('app.messages_info'); ?>
+    <?= __('help.messages_info'); ?>
   </div>
 </aside>

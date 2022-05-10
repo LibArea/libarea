@@ -171,8 +171,13 @@ return [
     'edit'              => 'Schimbare',
     'save'              => 'Salva',
     'add'               => 'Adăuga',
-    'add_option'        => 'Adăuga ({name})',
-    'edit_option'       => 'Schimbare ({name})',
+    'add_post'          => 'Adaugă postare',
+    'add_topic'         => 'Adaugă subiect',
+    'add_blog'          => 'Adaugă blog',
+    'edit_post'         => 'Editează postarea',
+    'edit_topic'        => 'Editați subiectul',
+    'edit_blog'         => 'Editează blogul',
+    'edit_page'         => 'Editați pagina',
 
     'being_developed'   => 'In dezvoltare',
     'activity'          => 'Activitate',
@@ -338,22 +343,11 @@ return [
     'view_post_tl'      => 'Cine poate vizualiza postarea (din care TL)',
     'invited_you'       => 'Ai fost invitat de un membru de pe acest site. Introdu invitația',
     'invite_features'   => 'Puteți invita prieteni',
-    'messages_info'     => 'Mesaje private cu membrii site-ului',
 
     'content_deleted'   => '{name} îndepărtat',
 
-    /* Setare */
-    'setting_info'          => 'Completează-ți numele, acest lucru îi va ajuta pe participanți să se refere la tine prin prenumele tău. <br><br> Spune-ne ceva despre tine. Ai o oportunitate grozavă să te deschizi pentru a le mulțumi altora și să pari o persoană interesantă.',
-    'avatar_info'           => 'Încarcă un avatar și o fotografie de copertă pentru profilul tău. <br><br> Când fiecare utilizator are un avatar unic, devine mult mai ușor să urmărești discuțiile!',
-    'security_info'         => 'Asigurați-vă că toate parolele dvs. au 8 caractere sau mai mult, în mod ideal, mult mai multe.',
-    'login_info'            => 'Autorizarea vă oferă posibilitatea de a publica postări, de a răspunde, de a comenta și de a vota.',
-    'recover_info'          => 'După ce faceți clic pe butonul „Resetare”, verificați-vă e-mailul...',
-    'favorite_info'         => 'Postări, comentarii și întrebări în marcajele dvs',
-    'preferences_info'      => 'Postări pe care le urmăriți. Veți fi notificat cu privire la toate răspunsurile noi',
     'endless_scroll'        => 'Activați derularea infinită?',
     'notification_email'    => 'Notificare prin e-mail',
-    'notifications_info'    => 'Puteți marca toate anunțurile ca citite făcând clic pe linkul: „Am citit”.',
-    'notification_info'     => 'Vă puteți dezabona de la toate notificările prin e-mail din această secțiune',
     'notifications_limit'   => 'Se afișează ultimele 100 de notificări',
 
     /* Уведомления и логи */

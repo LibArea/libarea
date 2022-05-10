@@ -171,8 +171,13 @@ return [
     'edit'              => 'Change',
     'save'              => 'Save',
     'add'               => 'Add',
-    'add_option'        => 'Add ({name})',
-    'edit_option'       => 'Change ({name})',
+    'add_post'          => 'Add post',
+    'add_topic'         => 'Add Topic',
+    'add_blog'          => 'Add blog',
+    'edit_post'         => 'Edit post',
+    'edit_topic'        => 'Edit Topic',
+    'edit_blog'         => 'Edit blog',
+    'edit_page'         => 'Edit page',
 
     'being_developed'   => 'Under development',
     'activity'          => 'Activity',
@@ -338,22 +343,11 @@ return [
     'view_post_tl'          => 'Who can view the post (from which TL)',
     'invited_you'           => 'You were invited by a member from this site. Enter invite',
     'invite_features'       => 'You can invite friends',
-    'messages_info'         => 'Private messages with site members',
 
     'content_deleted'   => '{name} deleted',
 
-    /* Setting */
-    'setting_info'          => 'Fill in your name, this will help the participants to refer to you by your first name. <br><br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person..',
-    'avatar_info'           => 'Upload an avatar and cover photo for your profile. <br><br> When each user has a unique avatar, it becomes much easier to follow discussions!',
-    'security_info'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more.',
-    'login_info'            => 'Authorization gives you the ability to publish posts, reply, comment and vote.',
-    'recover_info'          => 'After you click the "Reset" button, check your email...',
-    'favorite_info'         => 'Posts, comments and questions in your bookmarks',
-    'preferences_info'      => 'Posts you follow. You will be notified of all new replies',
     'endless_scroll'        => 'Enable infinite scroll?',
     'notification_email'    => 'Notify by email',
-    'notifications_info'    => 'You can mark all ads as read by clicking on the link: "I have read".',
-    'notification_info'     => 'You can unsubscribe from all email notifications in this section',
     'notifications_limit'   => 'Showing last 100 notifications',
 
     /* Notifications and logs */

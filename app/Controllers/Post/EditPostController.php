@@ -43,7 +43,7 @@ class EditPostController extends MainController
         return Tpl::LaRender(
             '/post/edit',
             [
-                'meta'  => Meta::get(__('app.edit_option', ['name' => __('app.post')])),
+                'meta'  => Meta::get(__('app.edit_' . $post['post_type'])),
                 'data'  => [
                     'sheet'         => 'edit-post',
                     'type'          => 'edit',

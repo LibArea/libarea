@@ -59,6 +59,6 @@
 </main>
 <aside>
   <div class="box text-sm">
-    <?= __('app.avatar_info'); ?>
+    <?= __('help.avatar_info'); ?>
   </div>
 </aside>
