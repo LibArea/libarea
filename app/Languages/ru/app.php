@@ -52,8 +52,6 @@ return [
     'deleted'           => 'Удаленные',
     'remote'            => 'Удаленный',
     'like'              => 'Нравится',
-    'all_comments'      => 'Все комментарии',
-    'all_answers'       => 'Все ответы',
     'recommended'       => 'Рекомендовано',
     'notification'      => 'уведомление',
     'notifications'     => 'Уведомления',

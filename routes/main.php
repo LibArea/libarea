@@ -74,11 +74,11 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     Route::get('/logout')->controller('Auth\LogoutController')->name('logout');
 
-    Route::get('/topics/my/{page?}')->controller('Facets\AllFacetController', ['topics.my', 'topic'])->name('topics.my');
+    Route::get('/topics/my/{page?}')->controller('Facets\AllFacetController', ['my.topics', 'topics'])->name('topics.my');
  
     Route::get('/post/scroll/{page?}')->controller('HomeController@scroll'); 
  
-    Route::get('/blogs/my')->controller('Facets\AllFacetController', ['blogs.my', 'blog'])->name('blogs.my');
+    Route::get('/blogs/my')->controller('Facets\AllFacetController', ['my.blogs', 'blogs'])->name('blogs.my');
  
     Route::get('/all/{page?}')->controller('HomeController', ['all'])->name('main.all');
     
@@ -127,8 +127,8 @@ Route::get('/post/{id}/{slug}')->controller('Post\PostController', ['post'])->wh
 // Страницы info
 Route::get('/{facet_slug}/article/{slug}')->controller('Post\PostController', ['info.page'])->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('facet.article'); 
 
-Route::get('/users/new/{page?}')->controller('User\UserController', ['users.new', 'user'])->name('users.new');
-Route::get('/users/{page?}')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
+Route::get('/users/new/{page?}')->controller('User\UserController', ['new'])->name('users.new');
+Route::get('/users/{page?}')->controller('User\UserController', ['all'])->name('users.all');
 
 Route::get('/@{login}')->controller('User\ProfileController')->where(['login' => '[A-Za-z0-9]+'])->name('profile');
 Route::get('/@{login}/posts/{page?}')->controller('User\ProfileController@posts')->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
@@ -138,19 +138,19 @@ Route::get('/@{login}/comments/{page?}')->controller('User\ProfileController@com
 Route::get('/comments/{page?}')->controller('Comment\CommentController', ['all'])->name('comments');
 Route::get('/answers/{page?}')->controller('Answer\AnswerController', ['all'])->name('answers');
 
-Route::get('/topics/new/{page?}')->controller('Facets\AllFacetController', ['topics.new', 'topic'])->name('topics.new');
-Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['facet.recommend', 'topic'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
+Route::get('/topics/new/{page?}')->controller('Facets\AllFacetController', ['new.topics', 'topics'])->name('topics.new');
+Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['recommend', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
 Route::get('/topic/{slug}/info')->controller('Facets\TopicFacetController@info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 Route::get('/topic/{slug}/writers')->controller('Facets\TopicFacetController@writers')->where(['slug' => '[a-z0-9-]+'])->name('topic.writers');
-Route::get('/topics/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'topic'])->name('topics.all');
+Route::get('/topics/{page?}')->controller('Facets\AllFacetController', ['all.topics', 'topics'])->name('topics.all');
 
-Route::get('/topic/{slug}/{page?}')->controller('Facets\TopicFacetController', ['facet.feed', 'topic'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('topic');
-Route::get('/blogs/new/{page?}')->controller('Facets\AllFacetController', ['blogs.new', 'blog'])->name('blogs.new');
-Route::get('/blogs/{page?}')->controller('Facets\AllFacetController', ['blogs.all', 'blog'])->name('blogs.all');
+Route::get('/topic/{slug}/{page?}')->controller('Facets\TopicFacetController', ['facet.feed', 'topics'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('topic');
+Route::get('/blogs/new/{page?}')->controller('Facets\AllFacetController', ['new.blogs', 'blogs'])->name('blogs.new');
+Route::get('/blogs/{page?}')->controller('Facets\AllFacetController', ['all.blogs', 'blogs'])->name('blogs.all');
 
 Route::get('/blog/{slug}/{page?}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog.user'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('blog');
 
-Route::get('/domain/{domain}/{page?}')->controller('Post\PostController@domain', ['web.feed', 'domain'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
+Route::get('/domain/{domain}/{page?}')->controller('Post\PostController@domain', ['web.feed'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 
 Route::get('/web')->module('catalog', 'App\Home', ['main'])->name('web');
 Route::get('/web/website/{slug}')->module('catalog', 'App\Detailed')->name('website');

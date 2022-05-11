@@ -116,6 +116,6 @@
     <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 </div>
-<?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('admin.audits')); ?>
+<?= Html::pagination($data['pNum'], $data['pagesCount'], false, url('admin.audits')); ?>
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

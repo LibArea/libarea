@@ -50,7 +50,7 @@
     <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 
-  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('admin.logs')); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url('admin.logs')); ?>
 </div>
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

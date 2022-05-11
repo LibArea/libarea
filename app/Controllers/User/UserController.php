@@ -21,7 +21,7 @@ class UserController extends MainController
 
     // All users
     // Все пользователи
-    function index($sheet, $type)
+    function index($sheet)
     {
         $pageNumber = Tpl::pageNumber();
 
@@ -37,10 +37,10 @@ class UserController extends MainController
         return Tpl::LaRender(
             '/user/all',
             [
-                'meta'  => Meta::get(__('meta.' . $sheet), __('meta.' . $sheet . '.desc'), $m),
+                'meta'  => Meta::get(__('meta.' . $sheet . '_users'), __('meta.' . $sheet . 'users_desc'), $m),
                 'data'  => [
                     'sheet'         => $sheet,
-                    'type'          => $type,
+                    'type'          => 'users',
                     'pagesCount'    => ceil($usersCount / $this->limit),
                     'pNum'          => $pageNumber,
                     'users'         => $users

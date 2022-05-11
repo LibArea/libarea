@@ -33,7 +33,7 @@ class CommentController extends MainController
         return Tpl::LaRender(
             '/comment/comments',
             [
-                'meta'  => Meta::get(__('app.all_comments'), __('app.comments.desc'), $m),
+                'meta'  => Meta::get(__('meta.all_comments'), __('meta.comments_desc'), $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,

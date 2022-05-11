@@ -34,7 +34,7 @@ class AllFacetController extends MainController
         return Tpl::LaRender(
             '/facets/all',
             [
-                'meta'  => Meta::get(__('meta.' . $sheet), __('meta.' . $sheet . '.desc'), $m),
+                'meta'  => Meta::get(__('meta.' . $sheet), __('meta.' . $sheet . '_desc'), $m),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

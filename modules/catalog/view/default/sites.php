@@ -63,7 +63,7 @@
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/' . $data['screening']); ?>
   </main>
   <aside>
-    <div class="box-yellow mt15 text-sm"><?= Content::text($data['category']['facet_info'], 'line'); ?></div>
+    <div class="box bg-yellow mt15 text-sm"><?= Content::text($data['category']['facet_info'] ?? '', 'line'); ?></div>
     <?php if (UserData::checkActiveUser()) : ?>
       <div class="box text-sm bg-violet mt15">
         <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>

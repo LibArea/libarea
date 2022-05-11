@@ -221,7 +221,7 @@ class PostController extends MainController
 
     // Posts by domain
     // Посты по домену
-    public function domain($sheet, $type)
+    public function domain($sheet)
     {
         $domain     = Request::get('domain');
         $pageNumber = Tpl::pageNumber();
@@ -242,15 +242,14 @@ class PostController extends MainController
         return Tpl::LaRender(
             '/post/link',
             [
-                'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('meta.domain.desc') . ': ' . $domain, $m),
+                'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('meta.domain_desc') . ': ' . $domain, $m),
                 'data'  => [
-                    'sheet'         => 'domain',
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
                     'posts'         => $posts,
                     'domains'       => PostModel::getDomainTop($domain),
                     'site'          => $site,
-                    'type'          => $type,
+                    'type'          => 'domain',
                 ]
             ]
         );

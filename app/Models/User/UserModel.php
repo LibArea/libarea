@@ -44,7 +44,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getUsersAll($page, $limit, $uid, $type)
     {
         $sort = "ORDER BY id = $uid DESC, trust_level DESC";
-        if ($type == 'users.new') {
+        if ($type == 'new') {
             $sort = "ORDER BY created_at DESC";
         }
 

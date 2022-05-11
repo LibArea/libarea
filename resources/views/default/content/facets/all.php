@@ -2,7 +2,7 @@
   <div class="box center">
     <h1 class="text-xl"><?= __('meta.' . $data['sheet']); ?></h1>
     <span class="text-sm gray-600">
-      <?= __('meta.' . $data['sheet'] . '.info'); ?>.
+      <?= __('meta.' . $data['sheet'] . '_info'); ?>.
     </span>
   </div>
 
@@ -14,21 +14,21 @@
         [
           'list' => [
             [
-              'id'    => $data['type'] . 's.all',
-              'url'   => url($data['type'] . 's.all'),
+              'id'    => $data['type'] . '_all',
+              'url'   => url($data['type'] . '.all'),
               'title' => __('app.all'),
               'icon'  => 'bi-app'
             ],
             [
-              'id'    => $data['type'] . 's.new',
-              'url'   => url($data['type'] . 's.new'),
+              'id'    => $data['type'] . '_new',
+              'url'   => url($data['type'] . '.new'),
               'title' => __('app.new_ones'),
               'icon'  => 'bi-sort-up'
             ],
             [
               'tl'    => 1,
-              'id'    => $data['type'] . 's.my',
-              'url'   => url($data['type'] . 's.my'),
+              'id'    => $data['type'] . '_my',
+              'url'   => url($data['type'] . '.my'),
               'title' => __('app.reading'),
               'icon'  => 'bi-check2-square'
             ],

@@ -52,8 +52,6 @@ return [
     'deleted'           => 'Deleted',
     'remote'            => 'Remote',
     'like'              => 'like',
-    'all_comments'      => 'All comments',
-    'all_answers'       => 'All answers',
     'recommended'       => 'Recommended',
     'notification'      => 'notification',
     'notifications'     => 'Notifications',

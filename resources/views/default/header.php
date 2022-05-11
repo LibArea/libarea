@@ -82,7 +82,7 @@ $facet  = $data['facet'] ?? false; ?>
       </div>
     </div>
   </header> 
-  <?php if (!UserData::checkActiveUser() && $data['type'] == 'main') : ?>
+  <?php if (!UserData::checkActiveUser() && $type == 'main') : ?>
     <div class="box mb-none center">
       <h1><?= config('meta.banner_title'); ?></h1>
       <p><?= config('meta.banner_desc'); ?>...</p>

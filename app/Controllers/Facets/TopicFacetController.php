@@ -40,7 +40,7 @@ class TopicFacetController extends MainController
         $url    = url('topic', ['slug' => $facet['facet_slug']]);
         $title  = $facet['facet_seo_title'] . ' — ' .  __('app.topic');
         $description   = $facet['facet_description'];
-        if ($sheet == 'facet.recommend') {
+        if ($sheet == 'recommend') {
             $url    =  url('recommend', ['slug' => $facet['facet_slug']]);
             $title  = $facet['facet_seo_title'] . ' — ' .  __('app.rec_posts');
             $description  = __('app.rec_posts_desc', ['name' => $facet['facet_seo_title']]) . $facet['facet_description'];

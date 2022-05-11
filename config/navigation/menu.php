@@ -19,17 +19,17 @@ return [
             'url'   => url('topics.all'),
             'title' => __('app.topics'),
             'icon'  => 'bi-columns-gap',
-            'id'    => 'topic',
+            'id'    => 'topics',
         ], [
             'url'   => url('blogs.all'),
             'title' => __('app.blogs'),
             'icon'  => 'bi-journals',
-            'id'    => 'blog',
+            'id'    => 'blogs',
         ], [
             'url'   => url('users.all'),
             'title' => __('app.users'),
             'icon'  => 'bi-people',
-            'id'    => 'user',
+            'id'    => 'users',
         ], [
             'url'   => url('answers'),
             'title' => __('app.answers'),

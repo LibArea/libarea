@@ -52,8 +52,6 @@ return [
     'deleted'           => 'la distanta',
     'remote'            => 'la distanta',
     'like'              => 'Ca',
-    'all_comments'      => 'Toate comentariile',
-    'all_answers'       => 'Toate răspunsurile',
     'recommended'       => 'Recomandat',
     'notification'      => 'notificare',
     'notifications'     => 'Notificări',

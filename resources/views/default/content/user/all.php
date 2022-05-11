@@ -1,8 +1,8 @@
 <main class="col-two">
   <div class="box center">
-    <h1 class="m0 text-xl font-normal"><?= __('meta.' . $data['sheet']); ?></h1>
+    <h1 class="m0 text-xl font-normal"><?= __('meta.' . $data['sheet'] . '_users'); ?></h1>
     <span class="text-sm gray-600">
-      <?= __('meta.' . $data['sheet'] . '.info'); ?>.
+      <?= __('meta.' . $data['sheet'] . '_users_info'); ?>.
     </span>
   </div>
 
@@ -14,13 +14,13 @@
         [
           'list' => [
             [
-              'id'    => $data['type'] . 's.all',
-              'url'   => url($data['type'] . 's.all'),
+              'id'    => $data['sheet'] . '_users_all',
+              'url'   => url('users.all'),
               'title' => __('app.all'),
               'icon'  => 'bi-app'
             ], [
-              'id'    => $data['type'] . 's.new',
-              'url'   => url($data['type'] . 's.new'),
+              'id'    => $data['sheet'] . '_users_new',
+              'url'   => url('users.new'),
               'title' => __('app.new_ones'),
               'icon'  => 'bi-sort-up'
             ],

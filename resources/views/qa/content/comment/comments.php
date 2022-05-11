@@ -13,7 +13,7 @@
 </main>
 <aside>
   <div class="box bg-violet text-sm">
-    <?= __('meta.comments.desc'); ?>
+    <?= __('meta.comments_desc'); ?>
   </div>
 </aside>
 <?= Tpl::insert('/_block/js-msg-flag'); ?>
