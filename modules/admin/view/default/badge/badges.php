@@ -6,7 +6,7 @@
     'menus' => [
       [
         'id' => 'add',
-        'url' => url($data['type'] . '.add'),
+        'url' => url('admin.badges.add'),
         'name' => __('admin.add'),
         'icon' => 'bi-plus-lg'
       ]

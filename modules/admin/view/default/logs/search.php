@@ -5,6 +5,11 @@
     'meta'  => $meta,
     'menus' => [
       [
+        'id'    => 'audits.all',
+        'url'   => url('admin.logs'),
+        'name'  => __('admin.logs'),
+        'icon'  => 'bi-record-circle',
+      ], [
         'id'    => 'logssearch.all',
         'url'   => url('admin.logs.search'),
         'name'  => __('admin.search'),
@@ -18,9 +23,9 @@
   <?php if ($data['logs']) : ?>
     <table>
       <thead>
-        <th><?= __('admin.request'); ?></th>
+        <th><?= __('admin.query'); ?></th>
         <th><?= __('admin.time'); ?></th>
-        <th class="w60"><?= __('admin.results'); ?></th>
+        <th class="w60"><?= __('admin.number'); ?></th>
       </thead>
       <?php foreach ($data['logs'] as $log) : ?> 
         <tr>

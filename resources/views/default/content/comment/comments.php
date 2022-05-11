@@ -1,7 +1,7 @@
 <main>
   <div class="box-flex justify-between">
     <ul class="nav">
-      <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'list' => config('navigation/nav.comments')]); ?>
+      <?= Tpl::insert('/_block/navigation/nav', ['list' => config('navigation/nav.comments')]); ?>
     </ul>
     <div class="trigger">
       <i class="bi-info-square gray-600"></i>

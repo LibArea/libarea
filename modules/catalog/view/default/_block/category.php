@@ -23,7 +23,7 @@
     try {
       const fetchResponse = await fetch('/search/category', settings);
       return await fetchResponse.json();
-    } catch (e) { 
+    } catch (e) {
       return e;
     }
   };
@@ -70,6 +70,6 @@
       <?php else : ?>
         tagify.addTags([])
       <?php endif; ?>
-    <?php endif;  ?> 
+    <?php endif;  ?>
   });
 </script>

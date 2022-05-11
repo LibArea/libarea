@@ -9,9 +9,11 @@ use Validation, Meta, Html, Tpl;
 
 class Users
 {
+    protected $type = 'users';
+
     protected $limit = 50;
 
-    public function index($sheet, $type)
+    public function index($sheet)
     {
         $pageNumber = Tpl::pageNumber();
         $pagesCount = UserModel::getUsersCount($sheet);
@@ -34,8 +36,7 @@ class Users
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
                     'alluser'       => $result,
-                    'sheet'         => $sheet,
-                    'type'          => $type,
+                    'type'          => $this->type,
                     'users_count'   => $pagesCount,
                 ]
             ]
@@ -65,8 +66,7 @@ class Users
                 'data'  => [
                     'results'   => $results,
                     'option'    => $option,
-                    'type'      => 'users',
-                    'sheet'     => ''
+                    'type'      => $this->type,
                 ]
             ]
         );
@@ -83,7 +83,7 @@ class Users
     }
 
     // Страница редактирование участника
-    public function userEditPage($sheet, $type)
+    public function edit()
     {
         $user_id    = Request::getInt('id');
         if (!$user = UserModel::getUser($user_id, 'id')) redirect(url('admin'));
@@ -98,8 +98,7 @@ class Users
             [
                 'meta'  => Meta::get(__('admin.edit')),
                 'data'  => [
-                    'type'      => $type,
-                    'sheet'     => $sheet,
+                    'type'      => $this->type,
                     'count'     => UserModel::contentCount($user_id),
                     'user'      => $user,
                 ]
@@ -108,7 +107,7 @@ class Users
     }
 
     // Редактировать участника
-    public function edit()
+    public function change()
     {
         $login          = Request::getPost('login');
         $user_id        = Request::getInt('id');

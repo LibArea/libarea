@@ -20,15 +20,15 @@ Request::getHead()->addStyles('/assets/css/style.css?09');
           </a>
         </div>
         <div class="relative w-90">
-          <a class="gray-600" href="<?= url('admin.users'); ?>">
+          <a class="ml0<?= is_current(url('admin.users')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.users'); ?>">
             <i class="bi-people middle mr5"></i>
             <span class="mb-none middle"><?= __('admin.users'); ?></span>
           </a>
-          <a class="gray-600 ml30" href="<?= url('admin.facets.all'); ?>">
+          <a class="ml30<?= is_current(url('admin.facets.all')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.facets.all'); ?>">
             <i class="bi-columns-gap middle mr5"></i>
             <span class="mb-none middle text-sm"><?= __('admin.facets'); ?></span>
           </a>
-          <a class="gray-600 ml30" href="<?= url('admin.tools'); ?>">
+          <a class="ml30<?= is_current(url('admin.tools')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.tools'); ?>">
             <i class="bi-tools middle mr5"></i>
             <span class="mb-none middle text-sm"><?= __('admin.tools'); ?></span>
           </a>

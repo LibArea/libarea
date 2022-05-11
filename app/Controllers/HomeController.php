@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\HomeModel;
-use Config, Tpl, UserData, Meta, Language, Translate;
+use Tpl, UserData, Meta;
 
 class HomeController extends MainController
 {
@@ -17,8 +17,8 @@ class HomeController extends MainController
         $this->user  = UserData::get();
     }
 
-    public function index($sheet, $type)
-    { 
+    public function index($sheet)
+    {
         $pageNumber   = Tpl::pageNumber();
 
         if ($sheet == 'main.deleted' && !UserData::checkAdmin()) {
@@ -35,8 +35,8 @@ class HomeController extends MainController
             $topics = \App\Models\FacetModel::advice($this->user['id']);
         }
 
-        $title = __('meta-main.' . $sheet . '.title', ['name' => config('meta.name')]);
-        $description = __('meta-main.' . $sheet . '.desc', ['name' => config('meta.name')]);
+        $title = __('meta-main.' . $sheet . '_title', ['name' => config('meta.name')]);
+        $description = __('meta-main.' . $sheet . '_desc', ['name' => config('meta.name')]);
 
         $m = [
             'main'      => 'main',
@@ -53,7 +53,7 @@ class HomeController extends MainController
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $pageNumber,
                     'sheet'             => $sheet,
-                    'type'              => $type,
+                    'type'              => 'main',
                     'latest_answers'    => $latest_answers,
                     'topics_user'       => $topics_user,
                     'posts'             => $posts,

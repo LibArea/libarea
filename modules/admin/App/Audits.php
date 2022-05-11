@@ -46,52 +46,10 @@ class Audits
             [
                 'meta'  => Meta::get('admin.' . __($type)),
                 'data' => [
-                    'sheet'         => $sheet,
                     'type'          => $type,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
                     'audits'        => $result,
-                ]
-            ]
-        );
-    }
-
-    // Member activity log
-    // Журнал логов действий участников
-    public function logs($sheet, $type)
-    {
-        $pageNumber = Tpl::pageNumber();
-
-        $logs       = LogModel::getLogs($pageNumber, $this->limit);
-        $pagesCount = LogModel::getLogsCount();
-
-        return view(
-            '/view/default/audit/logs',
-            [
-                'meta'  => Meta::get(__('admin.logs')),
-                'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
-                    'type'          => $type,
-                    'sheet'         => $sheet,
-                    'logs'          => $logs,
-                ]
-            ]
-        );
-    }
-    
-    // Search log
-    // Журнал логов поиска
-    public function logsSearch($sheet, $type)
-    {
-        return view(
-            '/view/default/audit/logs-search',
-            [
-                'meta'  => Meta::get(__('admin.logs')),
-                'data'  => [
-                    'type'          => $type,
-                    'sheet'         => $sheet,
-                    'logs'          => (new \Modules\Search\App\Search())->getLogs(100),
                 ]
             ]
         );

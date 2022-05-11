@@ -19,7 +19,7 @@
         'url'   => url('admin.reports'),
         'name'  => __('admin.reports'),
         'icon'  => 'bi-record-circle',
-      ] 
+      ]
     ]
   ]
 ); ?>
@@ -57,7 +57,7 @@
               <i class="bi-pencil"></i>
             </a>
             <span class="mr5 ml5"> &#183; </span>
-             <?= $audit['content'][$audit['action_type'] . '_date']; ?>
+            <?= $audit['content'][$audit['action_type'] . '_date']; ?>
             <span class="mr5 ml5"> &#183; </span>
 
             <?= __('admin.type'); ?>: <i><?= $audit['action_type']; ?></i>
@@ -90,23 +90,23 @@
           </td>
           <td class="center">
             <?php if ($audit['type_belonging'] == 'audit') : ?>
-                <?php if ($audit['read_flag'] == 1) : ?>
-                  id:
-                  <a href="<?= url('admin.user.edit', ['id' => $audit['audit_id']]); ?>">
-                    <?= $audit['user_id']; ?>
-                  </a>
-                <?php else : ?>
-                  <a data-status="<?= $audit['action_type']; ?>" data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" class="audit-status text-sm">
-                    <?= __('admin.approve'); ?>
-                  </a>
-                  <div class="text-xs"><?= __('admin.off_mode'); ?></div>
-                <?php endif; ?>
+              <?php if ($audit['read_flag'] == 1) : ?>
+                id:
+                <a href="<?= url('admin.user.edit', ['id' => $audit['audit_id']]); ?>">
+                  <?= $audit['user_id']; ?>
+                </a>
+              <?php else : ?>
+                <a data-status="<?= $audit['action_type']; ?>" data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" class="audit-status text-sm">
+                  <?= __('admin.approve'); ?>
+                </a>
+                <div class="text-xs"><?= __('admin.off_mode'); ?></div>
+              <?php endif; ?>
             <?php else : ?>
               <div class="<?php if ($audit['read_flag'] == 0) : ?> bg-red-200<?php endif; ?>">
                 <span class="report-saw" data-id="<?= $audit['audit_id']; ?>">
                   <i class="bi-record-circle gray text-2xl"></i>
                 </span>
-              </div>  
+              </div>
             <?php endif; ?>
           </td>
         </tr>

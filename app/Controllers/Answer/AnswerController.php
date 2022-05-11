@@ -19,7 +19,7 @@ class AnswerController extends MainController
 
     // All answers
     // Все ответы
-    public function index($sheet, $type)
+    public function index($sheet)
     {
         $pageNumber = Tpl::pageNumber();
 
@@ -39,7 +39,7 @@ class AnswerController extends MainController
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
                     'sheet'         => $sheet,
-                    'type'          => $type,
+                    'type'          => 'answers',
                     'answers'       => $answers,
                 ]
             ]

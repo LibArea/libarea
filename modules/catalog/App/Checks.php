@@ -3,7 +3,8 @@
 namespace Modules\Catalog\App;
 
 use Modules\Catalog\App\Models\{WebModel, UserAreaModel};
-use Domain, UserData, Html;
+use Utopia\Domains\Domain;
+use UserData, Html;
 
 class Checks
 {

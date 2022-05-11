@@ -11,7 +11,6 @@ $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' 
       <?= Tpl::insert(
         '/_block/navigation/nav',
         [
-          'type' => $data['sheet'],
           'list' => [
             [
               'id'        => 'all',

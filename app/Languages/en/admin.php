@@ -11,6 +11,7 @@ return [
     'all'               => 'All',
     'deleted'           => 'Remote',
     'other'             => 'Other',
+    'number'            => 'Quantity',
     'website'           => 'Website',
     'being_developed'   => 'Being developed',
     'schemas'           => 'Scheme',

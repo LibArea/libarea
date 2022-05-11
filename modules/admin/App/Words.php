@@ -8,7 +8,9 @@ use Meta, Validation;
 
 class Words
 {
-    public function index($sheet, $type)
+    protected $type = 'words';
+
+    public function index()
     {
         return view(
             '/view/default/word/words',
@@ -16,23 +18,21 @@ class Words
                 'meta'  => Meta::get(__('admin.words')),
                 'data'  => [
                     'words' => ContentModel::getStopWords(),
-                    'sheet' => $sheet,
-                    'type'  => $type,
+                    'type'  => $this->type,
                 ]
             ]
         );
     }
 
     // Форма добавления стоп-слова
-    public function addPage($sheet, $type)
+    public function add()
     {
         return view(
             '/view/default/word/add',
             [
                 'meta'  => Meta::get(__('admin.word')),
                 'data'  => [
-                    'type'  => $type,
-                    'sheet' => $sheet,
+                    'type'  => $this->type,
                 ]
             ]
         );

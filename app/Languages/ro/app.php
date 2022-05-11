@@ -174,6 +174,7 @@ return [
     'add_post'          => 'Adaugă postare',
     'add_topic'         => 'Adaugă subiect',
     'add_blog'          => 'Adaugă blog',
+    'add_category'      => 'Adăugați o categorie',
     'edit_post'         => 'Editează postarea',
     'edit_topic'        => 'Editați subiectul',
     'edit_blog'         => 'Editează blogul',

@@ -11,7 +11,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getUsers($page, $limit, $sheet)
     {
         $string = "ORDER BY id DESC LIMIT";
-        if ($sheet == 'users.ban') {
+        if ($sheet == 'ban') {
             $string = "WHERE ban_list > 0 ORDER BY id DESC LIMIT";
         }
 
@@ -47,7 +47,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getUsersCount($sheet)
     {
         $string = "";
-        if ($sheet == 'users.ban') {
+        if ($sheet == 'ban') {
             $string = "WHERE ban_list > 0";
         }
 

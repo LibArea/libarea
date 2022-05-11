@@ -16,17 +16,17 @@ class UserArea
         $this->user  = UserData::get();
     }
 
-    public function index($sheet, $type)
+    public function index()
     {
         $pageNumber = Tpl::pageNumber();
 
         $pagesCount = UserAreaModel::getUserSitesCount($this->user['id']);
         $items  = UserAreaModel::getUserSites($pageNumber, $this->limit, $this->user['id']);
+        $count_site = UserData::checkAdmin() ? 0 : $pagesCount;
 
         $m = [
             'og'         => true,
             'imgurl'     => config('meta.img_path_web'),
-            'url'        => url($sheet),
         ];
 
         return view(
@@ -40,9 +40,8 @@ class UserArea
                     'count'             => $pagesCount,
                     'pNum'              => $pageNumber,
                     'items'             => $items,
-                    'user_count_site'   => $pagesCount,
-                    'type'              => $type,
-                    'sheet'             => $sheet,
+                    'user_count_site'   => $count_site,
+                    'sheet'             => 'sites',
                 ]
             ]
         );
@@ -50,7 +49,7 @@ class UserArea
 
     // Bookmarks by sites
     // Закладки по сайтам
-    public function bookmarks($sheet, $type)
+    public function bookmarks()
     {
         $pageNumber = Tpl::pageNumber();
 
@@ -66,8 +65,7 @@ class UserArea
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'cat',
-                    'sheet'             => $sheet,
-                    'type'              => $type,
+                    'sheet'             => 'web.bookmarks',
                     'count'             => $pagesCount,
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'user_count_site'   => $count_site,

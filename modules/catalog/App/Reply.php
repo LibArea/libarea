@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, ReplyModel};
 use App\Models\{ActionModel, NotificationModel};
-use UserData, Html, Validation, Content;
+use UserData, Html, Validation;
 
 class Reply
 {

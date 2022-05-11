@@ -1,5 +1,5 @@
 <?php
-
+$type = $type ?? '';
 foreach ($list as $key => $item) :
   $tl = $item['tl'] ?? 0; ?>
   <?php if (!empty($item['hr'])) : ?>

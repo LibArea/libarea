@@ -50,8 +50,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/@{login}/delete/cover')->controller('User\SettingController@coverRemove')->where(['login' => '[A-Za-z0-9]+'])->name('delete.cover'); 
     Route::get('/@{login}/messages')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
 
-    Route::get('/web/bookmarks')->module('catalog', 'App\UserArea@bookmarks', ['web.bookmarks', 'web'])->name('web.bookmarks');
-    Route::get('/web/my/{page?}')->module('catalog', 'App\UserArea', ['web.user.sites', 'sites'])->name('web.user.sites');
+    Route::get('/web/bookmarks')->module('catalog', 'App\UserArea@bookmarks')->name('web.bookmarks');
+    Route::get('/web/my/{page?}')->module('catalog', 'App\UserArea')->name('web.user.sites');
 
     Route::get('/teams')->module('teams', 'App\Teams')->name('teams');
     Route::get('/team/add')->module('teams', 'App\Teams@add')->name('team.add');
@@ -80,9 +80,9 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
  
     Route::get('/blogs/my')->controller('Facets\AllFacetController', ['blogs.my', 'blog'])->name('blogs.my');
  
-    Route::get('/all/{page?}')->controller('HomeController', ['main.all', 'main'])->name('main.all');
+    Route::get('/all/{page?}')->controller('HomeController', ['all'])->name('main.all');
     
-    Route::get('/deleted/{page?}')->controller('HomeController', ['main.deleted', 'main'])->name('main.deleted');
+    Route::get('/deleted/{page?}')->controller('HomeController', ['deleted'])->name('main.deleted');
 Route::endGroup();
 
 Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();
@@ -130,15 +130,13 @@ Route::get('/{facet_slug}/article/{slug}')->controller('Post\PostController', ['
 Route::get('/users/new/{page?}')->controller('User\UserController', ['users.new', 'user'])->name('users.new');
 Route::get('/users/{page?}')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
 
-Route::get('/@{login}')->controller('User\ProfileController', ['profile.posts', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('profile');
-Route::get('/@{login}/posts/{page?}')->controller('User\ProfileController@posts', ['profile.posts', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
+Route::get('/@{login}')->controller('User\ProfileController')->where(['login' => '[A-Za-z0-9]+'])->name('profile');
+Route::get('/@{login}/posts/{page?}')->controller('User\ProfileController@posts')->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
+Route::get('/@{login}/answers/{page?}')->controller('User\ProfileController@answers')->where(['login' => '[A-Za-z0-9]+'])->name('profile.answers');
+Route::get('/@{login}/comments/{page?}')->controller('User\ProfileController@comments')->where(['login' => '[A-Za-z0-9]+'])->name('profile.comments');
 
-Route::get('/@{login}/answers/{page?}')->controller('User\ProfileController@answers', ['profile.answers', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.answers');
-
-Route::get('/@{login}/comments/{page?}')->controller('User\ProfileController@comments', ['profile.comments', 'users'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.comments');
-
-Route::get('/comments/{page?}')->controller('Comment\CommentController', ['comments.all', 'comments'])->name('comments');
-Route::get('/answers/{page?}')->controller('Answer\AnswerController', ['answers.all', 'answers'])->name('answers');
+Route::get('/comments/{page?}')->controller('Comment\CommentController', ['all'])->name('comments');
+Route::get('/answers/{page?}')->controller('Answer\AnswerController', ['all'])->name('answers');
 
 Route::get('/topics/new/{page?}')->controller('Facets\AllFacetController', ['topics.new', 'topic'])->name('topics.new');
 Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['facet.recommend', 'topic'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
@@ -162,12 +160,12 @@ Route::get('/web/dir/{grouping}/{slug}/top')->module('catalog', 'App\Catalog', [
 
 Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
 
-Route::get('/top/{page?}')->controller('HomeController', ['main.top', 'main'])->name('main.top');
+Route::get('/top/{page?}')->controller('HomeController', ['top'])->name('main.top');
 
 Route::get('/sitemap.xml')->controller('RssController');
 Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 
-Route::get('/{page?}')->controller('HomeController', ['main.feed', 'main'])->name('main'); 
+Route::get('/{page?}')->controller('HomeController', ['feed'])->name('main'); 
 
 require 'admin.php';

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{ContentModel, ActionModel, AuditModel, NotificationModel, PostModel};
-use Config, UserData, Html, Validation;
+use UserData, Html, Validation;
 
 class AuditController extends MainController
 {
@@ -95,7 +95,7 @@ class AuditController extends MainController
 
     public static function infoMsg($tl, $content)
     {
-        Validation::Returns(__('validation.limit_day', ['tl' => '«'.  __('app.trust_level') .'» '. $tl, 'name' => __('app.' . $content)]), 'error', '/');
+        Validation::Returns(__('validation.limit_day', ['tl' => '«' .  __('app.trust_level') . '» ' . $tl, 'name' => __('app.' . $content)]), 'error', '/');
     }
 
     // For URL trigger 

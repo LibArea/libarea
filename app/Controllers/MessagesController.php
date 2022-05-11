@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{MessagesModel, NotificationModel};
-use Content, Config, Validation, Tpl, Html, Meta, UserData;
+use Content, Validation, Tpl, Html, Meta, UserData;
 
 class MessagesController extends MainController
 {
@@ -27,7 +27,7 @@ class MessagesController extends MainController
         } else {
             $dialog_ids = null;
         }
- 
+
         $result = [];
         if ($messages_dialog) {
 

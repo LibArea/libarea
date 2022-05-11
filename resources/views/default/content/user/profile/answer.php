@@ -9,7 +9,7 @@
         <div class="box">
           <?= Tpl::insert('/content/answer/answer', ['data' => $data]); ?>
         </div>
-        <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/answers'); ?>
+        <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/answers'); ?>
       <?php else : ?>
         <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_answers'), 'icon' => 'bi-info-lg']); ?>
       <?php endif; ?>

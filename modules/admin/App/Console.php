@@ -17,7 +17,7 @@ class Console
         }
         self::$choice();
     }
-    
+
     public static function topic()
     {
         ConsoleModel::recalculateTopic();
@@ -39,9 +39,9 @@ class Console
     // Если пользователь имеет нулевой уровень доверия (tl) но ему UP >=3, то повышаем до 1
     // If the user has a zero level of trust (tl) but he has UP >=3, then we raise it to 1
     public static function tl()
-    { 
+    {
         $users = ConsoleModel::getTrustLevel(0);
-        foreach ($users as $row) {  
+        foreach ($users as $row) {
             if ($row['up_count'] > 2) {
                 ConsoleModel::setTrustLevel($row['id'], 1);
             }
@@ -51,7 +51,7 @@ class Console
     }
 
     public static function indexer()
-    {    
+    {
         (new \Modules\Admin\App\Search\Indexer)->indexerAll();
 
         self::consoleRedirect();
@@ -75,7 +75,7 @@ class Console
     }
 
     public static function consoleRedirect()
-    { 
+    {
         if (PHP_SAPI != 'cli') {
             Html::addMsg(__('admin.completed'), 'success');
         }

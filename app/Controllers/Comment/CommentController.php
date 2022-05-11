@@ -18,7 +18,7 @@ class CommentController extends MainController
     }
 
     // Все комментарии
-    public function index($sheet, $type)
+    public function index($sheet)
     {
         $pageNumber = Tpl::pageNumber();
 
@@ -38,7 +38,7 @@ class CommentController extends MainController
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
                     'sheet'         => $sheet,
-                    'type'          => $type,
+                    'type'          => 'comments',
                     'comments'      => $comments,
                 ]
             ]

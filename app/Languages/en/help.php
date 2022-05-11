@@ -27,6 +27,7 @@ return [
 
     'add_topic'             => 'A topic is a node (for navigation) used by the system to organize content. The theme is a single point of view, the interpretation of various things, phenomena and other concepts.',
     'add_blog'              => 'Add a blog (in development).',
+    'add_category'          => 'Add category (in development).',
     'edit_topic'            => 'Change theme (in development).',
     'edit_blog'             => 'Edit blog (in development).',
 ];

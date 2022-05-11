@@ -37,3 +37,15 @@ function config(string $key = null)
 
     return Config::get($key);
 }
+
+function is_current($url)
+{
+    if ($url == Request::getUri()) return true;
+
+    /* $segments = explode('/', Request::getUri());
+    foreach ($segments as $key => $segment) {
+      if ($url == '/' . $segment) return 'active';
+    } */
+    
+    return false;
+}

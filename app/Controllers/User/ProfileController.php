@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, PostModel, FeedModel, AnswerModel, CommentModel};
-use Config, Tpl, Meta, Html, UserData;
+use Tpl, Meta, Html, UserData;
 
 class ProfileController extends MainController
 {
@@ -21,7 +21,7 @@ class ProfileController extends MainController
 
     // Member page (profile) 
     // Страница участника (профиль)
-    function index($sheet, $type)
+    function index()
     {
         $pageNumber = Tpl::pageNumber();
         $profile    = self::profile();
@@ -30,8 +30,8 @@ class ProfileController extends MainController
             $profile['about'] = __('app.riddle') . '...';
         }
 
-        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $profile['id']);
-        $pagesCount = FeedModel::feedCount($this->user, $sheet, $profile['id']);
+        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
+        $pagesCount = FeedModel::feedCount($this->user, 'profile.posts', $profile['id']);
 
         $count = UserModel::contentCount($profile['id']);
         if (($count['count_answers'] + $count['count_comments']) < 3) {
@@ -41,7 +41,7 @@ class ProfileController extends MainController
         return Tpl::LaRender(
             '/user/profile/index',
             [
-                'meta'  => self::metadata($sheet, $profile),
+                'meta'  => self::metadata('profile.posts', $profile),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $pageNumber,
@@ -51,9 +51,7 @@ class ProfileController extends MainController
                     'blogs'             => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'            => BadgeModel::getBadgeUserAll($profile['id']),
                     'profile'           => $profile,
-                    'type'              => $type,
                     'posts'             => $posts,
-                    'sheet'             => $sheet,
                     'participation'     => FacetModel::participation($profile['id']),
                     'post'              => PostModel::getPost($profile['my_post'], 'id', $this->user),
                     'button_pm'         => $this->accessPm($profile['id']),
@@ -62,23 +60,21 @@ class ProfileController extends MainController
         );
     }
 
-    public function posts($sheet, $type)
+    public function posts()
     {
         $pageNumber = Tpl::pageNumber();
         $profile    = self::profile();
 
-        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $profile['id']);
-        $pagesCount = FeedModel::feedCount($this->user, $sheet, $profile['id']);
+        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
+        $pagesCount = FeedModel::feedCount($this->user, 'profile.posts', $profile['id']);
 
         return Tpl::LaRender(
             '/user/profile/post',
             [
-                'meta'  => self::metadata($sheet . '.all', $profile),
+                'meta'  => self::metadata('profile.posts.all', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
-                    'sheet'         => $sheet,
-                    'type'          => $type,
                     'posts'         => $posts,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),
@@ -92,7 +88,7 @@ class ProfileController extends MainController
         );
     }
 
-    public function answers($sheet, $type)
+    public function answers()
     {
         $pageNumber = Tpl::pageNumber();
         $profile    = self::profile();
@@ -103,12 +99,10 @@ class ProfileController extends MainController
         return Tpl::LaRender(
             '/user/profile/answer',
             [
-                'meta'  => self::metadata($sheet, $profile),
+                'meta'  => self::metadata('profile.answers', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
-                    'sheet'         => $sheet,
-                    'type'          => $type,
                     'answers'       => $answers,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),
@@ -123,7 +117,7 @@ class ProfileController extends MainController
     }
 
     // Комментарии участника
-    public function comments($sheet, $type)
+    public function comments()
     {
         $pageNumber = Tpl::pageNumber();
         $profile   = self::profile();
@@ -134,12 +128,10 @@ class ProfileController extends MainController
         return Tpl::LaRender(
             '/user/profile/comment',
             [
-                'meta'  => self::metadata($sheet, $profile),
+                'meta'  => self::metadata('profile.comments', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
-                    'sheet'         => $sheet,
-                    'type'          => $type,
                     'comments'      => $comments,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),

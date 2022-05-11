@@ -20,7 +20,7 @@ $facet  = $data['facet'] ?? false; ?>
 
         <ul class="nav ml30">
           <?php $sheet = $data['sheet'] ?? false; ?>
-          <?= Tpl::insert('/_block/navigation/nav', ['type' => $sheet, 'list' => config('navigation/nav.home')]); ?>
+          <?= Tpl::insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
         </ul>
       </div>
 

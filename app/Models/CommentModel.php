@@ -135,10 +135,10 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     public static function sorts($user, $sheet)
     {
         switch ($sheet) {
-            case 'comments.all':
+            case 'all':
                 $sort     = "WHERE comment_is_deleted = 0";
                 break;
-            case 'comments.deleted':
+            case 'deleted':
                 $sort     = "WHERE comment_is_deleted = 1";
                 break;
         }

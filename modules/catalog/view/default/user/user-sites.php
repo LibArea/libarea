@@ -70,8 +70,7 @@
       <div class="box text-sm bg-violet mt15">
         <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>
         <ul class="menu">
-          <?= includeTemplate('/view/default/_block/add-site', ['data' => $data]); ?>
-          <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['sheet'], 'list' => config('catalog/menu.user')]); ?>
+          <?= includeTemplate('/view/default/_block/menu', ['data' => $data]); ?>
         </ul>
       </div>
     <?php endif; ?>

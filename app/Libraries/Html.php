@@ -159,10 +159,10 @@ class Html
         if (UserData::getAccount()) {
             $blue = $tid ? 'sky' : 'gray-600';
             $my   = $tid ? 'bi-bookmark-dash' : 'bi-bookmark-plus';
-            $html .= '<span id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . ' middle"></i></span>';
+            $html .= '<span id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . '"></i></span>';
         } else {
             $html .= '<span class="click-no-auth gray-600 ' . $css . '">
-                        <i class="bi-bookmark-plus middle"></i>
+                        <i class="bi-bookmark-plus"></i>
                             </span>';
         }
 

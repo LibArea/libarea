@@ -27,6 +27,7 @@ return [
 
     'add_topic'             => 'Un subiect este un nod (pentru navigare) folosit de sistem pentru a organiza conținutul. Tema este un singur punct de vedere, interpretarea diferitelor lucruri, fenomene și alte concepte.',
     'add_blog'              => 'Adăugați un blog (în dezvoltare).',
+    'add_category'          => 'Adăugați categorie (în dezvoltare).',
     'edit_topic'            => 'Schimbați tema (în dezvoltare).',
     'edit_blog'             => 'Изменить блог (в разработке).',
 ];

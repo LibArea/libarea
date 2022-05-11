@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Content, UploadImage, Validation, Tpl, Meta, Html, UserData;
+use UploadImage, Validation, Tpl, Meta, Html, UserData;
 
 class EditPostController extends MainController
 {

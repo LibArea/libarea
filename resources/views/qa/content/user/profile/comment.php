@@ -8,7 +8,7 @@
       </div>
       <?php if (!empty($data['comments'])) : ?>
         <?= Tpl::insert('/content/comment/comment', ['answer' => $data['comments']]); ?>
-        <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/@' . $data['profile']['login'] . '/comments'); ?>
+        <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/comments'); ?>
       <?php else : ?>
         <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'bi-info-lg']); ?>
       <?php endif; ?>

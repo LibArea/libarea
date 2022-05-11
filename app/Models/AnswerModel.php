@@ -104,10 +104,10 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
     public static function sorts($sheet)
     {
         switch ($sheet) {
-            case 'answers.all':
+            case 'all':
                 $sort     = "WHERE answer_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0";
                 break;
-            case 'answers.deleted':
+            case 'deleted':
                 $sort     = "WHERE answer_is_deleted = 1";
                 break;
         }

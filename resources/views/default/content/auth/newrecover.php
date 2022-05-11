@@ -1,6 +1,6 @@
-<main class="max-w780 mr-auto box">
-  <h1 class="center"><?= __('app.password_recovery'); ?></h1>
-  <div class="box wide">
+<main class="box w-100">
+  <div class="pl20">
+    <h1><?= __('app.password_recovery'); ?></h1>
     <form action="<?= url('recover'); ?>/send/pass" method="post">
       <?php csrf_field(); ?>
       <fieldset>

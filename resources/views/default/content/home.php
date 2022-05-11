@@ -1,13 +1,13 @@
 <main>
   <div class="box-flex justify-between">
     <ul class="nav">
-      <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'list' => config('navigation/nav.home')]); ?>
+      <?= Tpl::insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
 
     <div class="trigger">
       <i class="bi-info-square gray-600"></i>
     </div>
-    <div class="dropdown tooltip"><?= __('meta-main.' . $data['sheet'] . '.info'); ?></div>
+    <div class="dropdown tooltip"><?= __('meta-main.' . $data['sheet'] . '_info'); ?></div>
   </div>
 
   <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>

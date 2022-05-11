@@ -5,7 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{CommentModel, PostModel};
-use Content, Tpl, Html, UserData;
+use Tpl, Html, UserData;
 
 class EditCommentController extends MainController
 {
@@ -51,7 +51,7 @@ class EditCommentController extends MainController
 
         // If the user is frozen
         (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
-        
+
         $post       = PostModel::getPost($comment['comment_post_id'], 'id', $this->user);
         Html::pageRedirection($post, '/');
 

@@ -17,7 +17,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         $string = "";
-        if ($type != 'main.all' && $type != 'main.top') {
+        if ($type != 'all' && $type != 'top') {
             if (!$user['id']) {
                 $string = "";
             } else {
@@ -29,7 +29,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         $display = self::display($type, $user['trust_level']);
 
         $sort = "ORDER BY post_top DESC, post_date DESC";
-        if ($type == 'main.top') $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
+        if ($type == 'top') $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
 
         $start  = ($page - 1) * $limit;
         $sql = "SELECT DISTINCT
@@ -139,7 +139,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         if ($trust_level == 10) {
             $display = "AND post_is_deleted = 0";
 
-            if ($type == 'main.deleted') {
+            if ($type == 'deleted') {
                 $display = "AND post_is_deleted = 1";
             }
         } elseif ($trust_level > 0) {

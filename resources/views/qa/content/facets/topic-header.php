@@ -36,7 +36,6 @@
     <?= Tpl::insert(
       '/_block/navigation/nav',
       [
-        'type' => $data['sheet'],
         'list' =>  [
           [
             'id'      => 'facet.feed',

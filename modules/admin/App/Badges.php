@@ -8,17 +8,18 @@ use Validation, Meta, Html;
 
 class Badges
 {
+    protected $type = 'badges';
+
     // All awards
     // Все награды
-    public function index($sheet, $type)
+    public function index()
     {
         return view(
             '/view/default/badge/badges',
             [
                 'meta'  => Meta::get(__('admin.badges')),
                 'data'  => [
-                    'type'      => $type,
-                    'sheet'     => $sheet,
+                    'type'      => $this->type,
                     'badges'    => BadgeModel::getAll(),
                 ]
             ]
@@ -27,15 +28,14 @@ class Badges
 
     // Form for adding an award
     // Форма добавления награды
-    public function addPage($sheet, $type)
+    public function add()
     {
         return view(
             '/view/default/badge/add',
             [
                 'meta'  => Meta::get(__('admin.badges')),
                 'data'  => [
-                    'type'  => $type,
-                    'sheet' => $sheet,
+                    'type'  => $this->type,
                 ]
             ]
         );
@@ -43,7 +43,7 @@ class Badges
 
     // Reward change form 
     // Форма изменения награды
-    public function editPage($sheet, $type)
+    public function edit()
     {
         $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getId($badge_id);
@@ -55,8 +55,7 @@ class Badges
                 'meta'  => Meta::get(__('admin.edit')),
                 'data'  => [
                     'badge' => $badge,
-                    'sheet' => $sheet,
-                    'type'  => $type,
+                    'type'  => $this->type,
                 ]
             ]
         );
@@ -90,7 +89,7 @@ class Badges
 
     // Participant award form
     // Форма награждения участника
-    public function addUserPage($sheet, $type)
+    public function addUser()
     {
         $user_id    = Request::getInt('id');
         $user       = UserModel::getUser($user_id, 'id');
@@ -100,8 +99,7 @@ class Badges
             [
                 'meta'  => Meta::get(__('admin.badges')),
                 'data'  => [
-                    'type'      => $type,
-                    'sheet'     => $sheet,
+                    'type'      => $this->type,
                     'user'      => $user ?? null,
                     'badges'    => BadgeModel::getAll(),
                 ]
@@ -109,7 +107,7 @@ class Badges
         );
     }
 
-    public function addUser()
+    public function rewarding()
     {
         $uid = Request::getPostInt('user_id');
         BadgeModel::badgeUserAdd(
@@ -122,7 +120,7 @@ class Badges
         Validation::ComeBack('msg.successfully', 'success', url('admin.user.edit', ['id' => $uid]));
     }
 
-    public function edit()
+    public function change()
     {
         $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getId($badge_id);

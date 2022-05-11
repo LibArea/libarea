@@ -1,7 +1,7 @@
 <main class="col-two">
   <div class="box-flex ml10">
     <ul class="nav">
-      <?= Tpl::insert('/_block/navigation/nav', ['type' => $data['sheet'], 'list' => config('navigation/nav.home')]); ?>
+      <?= Tpl::insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
   </div>
 

@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{InvitationModel, UserModel};
-use Validation, SendEmail, Tpl, Meta, Html, Config, UserData;
+use Validation, SendEmail, Tpl, Meta, Html, UserData;
 
 class InvitationsController extends MainController
 {

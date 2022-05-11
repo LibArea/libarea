@@ -11,6 +11,7 @@ return [
     'all'               => 'Все',
     'deleted'           => 'Удаленные',
     'other'             => 'Другое',
+    'number'            => 'Количество',
     'website'           => 'Сайт',
     'being_developed'   => 'В стадии разработки',
     'schemas'           => 'Схемы',
