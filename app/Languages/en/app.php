@@ -177,6 +177,7 @@ return [
     'edit_topic'        => 'Edit Topic',
     'edit_blog'         => 'Edit blog',
     'edit_page'         => 'Edit page',
+    'edit_section'      => 'Edit Section',
 
     'being_developed'   => 'Under development',
     'activity'          => 'Activity',

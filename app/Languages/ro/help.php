@@ -25,8 +25,14 @@ return [
     'edit_post'             => 'Vezi cum arată postarea pe pagina de feed și în versiunea completă. Îmbunătățiți-l aici.',
 
     'add_topic'             => 'Un subiect este un nod (pentru navigare) folosit de sistem pentru a organiza conținutul. Tema este un singur punct de vedere, interpretarea diferitelor lucruri, fenomene și alte concepte.',
-    'add_blog'              => 'Adăugați un blog (în dezvoltare).',
-    'add_category'          => 'Adăugați categorie (în dezvoltare).',
-    'edit_topic'            => 'Schimbați tema (în dezvoltare).',
-    'edit_blog'             => 'Изменить блог (в разработке).',
+    'edit_page'             => 'Официальная документация должна быть без ошибок и написана больше в официальной манере.',
+    'edit_post'             => 'Посмотрите, как выглядит пост на странице ленты и в полной версии. Улучшите его тут.',
+
+    'add_topic'             => 'Тема — то узел (для навигации), используемый системой для организации контента. Тема является единой точкой взода, интерпретацией различных вещей, явлений и других понятий.',
+    'add_blog'              => 'Categoriile se referă la director (site-uri, programe). Creați-le numai când există suficiente site-uri de completat.',
+    'add_category'          => 'Editați categoria pentru a reflecta site-urile din ea. Scrieți o descriere corectă și alegeți un titlu scurt.',
+    'add_section'           => 'Secțiunile sunt folosite pentru gruparea (navigarea) pe articole de serviciu.',
+    'edit_topic'            => 'Subiectele sunt folosite pentru a grupa (naviga) postări. Această navigare, ia-o în serios.',
+    'edit_blog'             => 'Blogurile sunt de obicei create de colaboratori. Blogul este atribuit unui anumit utilizator.',
+    'edit_section'          => 'Aceasta este editarea navigației pentru paginile de servicii (documentație). Ia in serios.',
 ];

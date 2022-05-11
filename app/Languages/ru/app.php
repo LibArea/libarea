@@ -177,6 +177,7 @@ return [
     'edit_topic'        => 'Изменить тему',
     'edit_blog'         => 'Изменить блог',
     'edit_page'         => 'Изменить страницу',
+    'edit_section'      => 'Изменить раздел',
 
     'being_developed'   => 'В стадии разработки',
     'activity'          => 'Активность',

@@ -1,6 +1,7 @@
 <?php 
 $fs = $data['facet'];
 $url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : url($fs['facet_type'], ['slug' => $fs['facet_slug']]);
+$url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
 ?>
 
 <main class="col-two">

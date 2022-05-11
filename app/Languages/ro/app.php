@@ -177,6 +177,7 @@ return [
     'edit_topic'        => 'Editați subiectul',
     'edit_blog'         => 'Editează blogul',
     'edit_page'         => 'Editați pagina',
+    'edit_section'      => 'Editează secțiunea',
 
     'being_developed'   => 'In dezvoltare',
     'activity'          => 'Activitate',

@@ -25,8 +25,14 @@ return [
     'edit_post'             => 'See what the post looks like on the feed page and in the full version. Improve it here.',
 
     'add_topic'             => 'A topic is a node (for navigation) used by the system to organize content. The theme is a single point of view, the interpretation of various things, phenomena and other concepts.',
-    'add_blog'              => 'Add a blog (in development).',
-    'add_category'          => 'Add category (in development).',
-    'edit_topic'            => 'Change theme (in development).',
-    'edit_blog'             => 'Edit blog (in development).',
+    'edit_page'             => 'Официальная документация должна быть без ошибок и написана больше в официальной манере.',
+    'edit_post'             => 'Посмотрите, как выглядит пост на странице ленты и в полной версии. Улучшите его тут.',
+
+    'add_topic'             => 'Тема — то узел (для навигации), используемый системой для организации контента. Тема является единой точкой взода, интерпретацией различных вещей, явлений и других понятий.',
+    'add_blog'              => 'Categories refer to the directory (sites, programs). Create them only when there are enough sites to fill.',
+    'add_category'          => 'Edit the category to reflect the sites in it. Write a correct description and choose a short title.',
+    'add_section'           => 'Sections are used for grouping (navigation) by service articles.',
+    'edit_topic'            => 'Topics are used to group (navigate) posts. This navigation, take it seriously.',
+    'edit_blog'             => 'Blogs are usually created by contributors. The blog is assigned to a specific user.',
+    'edit_section'          => 'This is navigation editing for service pages (documentation). Take it seriously.',
 ];
