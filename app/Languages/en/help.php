@@ -12,7 +12,6 @@ return [
     'setting_info'          => 'Fill in your name, this will help the participants to refer to you by your first name. <br><br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
     'avatar_info'           => 'Upload an avatar and cover photo for your profile. <br><br> When each user has a unique avatar, it becomes much easier to follow discussions!',
     'security_info'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more.',
-    'login_info'            => 'Authorization gives you the ability to publish posts, reply, comment and vote.',
     'recover_info'          => 'After you click the "Reset" button, check your e-mail.',
     'favorite_info'         => 'Posts, comments and questions in your bookmarks.',
     'preferences_info'      => 'Posts you follow. You will be notified of all new replies.',

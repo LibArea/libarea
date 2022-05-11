@@ -6,6 +6,11 @@ $form->html_form(UserData::getUserTl(), config('form/auth.login'));
 <main class="box w-100">
   <div class="pl20">
     <h1><?= __('app.authorization'); ?></h1>
+    
+    <div class="p15 bg-violet max-w300 mb-none right">
+       <?= __('auth.login_info'); ?>
+    </div>
+    
     <form class="max-w300" action="<?= url('login'); ?>" method="post">
       <?php csrf_field(); ?>
 
@@ -23,6 +28,5 @@ $form->html_form(UserData::getUserTl(), config('form/auth.login'));
       <?= __('app.invate_text'); ?>
     <?php endif; ?>
     <p><?= __('app.agree_rules'); ?>.</p>
-    <p><?= __('help.login_info'); ?></p>
   </div>
 </main>

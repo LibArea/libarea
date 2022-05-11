@@ -12,7 +12,6 @@ return [
     'setting_info'          => 'Completează-ți numele, acest lucru îi va ajuta pe participanți să se refere la tine prin prenumele tău. <br><br> Spune-ne ceva despre tine. Ai o oportunitate grozavă să te deschizi pentru a le mulțumi altora și să pari o persoană interesantă.',
     'avatar_info'           => 'Încarcă un avatar și o fotografie de copertă pentru profilul tău. <br><br> Când fiecare utilizator are un avatar unic, devine mult mai ușor să urmărești discuțiile!',
     'security_info'         => 'Asigurați-vă că toate parolele dvs. au 8 caractere sau mai mult, în mod ideal, mult mai multe.',
-    'login_info'            => 'Autorizarea vă oferă posibilitatea de a publica postări, de a răspunde, de a comenta și de a vota.',
     'recover_info'          => 'După ce faceți clic pe butonul „Resetare”, verificați-vă e-mailul.',
     'favorite_info'         => 'Postări, comentarii și întrebări în marcajele dvs.',
     'preferences_info'      => 'Postări pe care le urmăriți. Veți fi notificat cu privire la toate răspunsurile noi.',

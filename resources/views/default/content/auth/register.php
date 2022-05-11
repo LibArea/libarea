@@ -5,6 +5,11 @@ $form->html_form(UserData::getUserTl(), config('form/auth.register'));
 <main class="box w-100">
   <div class="pl20">
     <h1><?= __('app.' . $data['sheet']); ?></h1>
+    
+    <div class="p15 bg-violet max-w300 mb-none right">
+       <?= __('auth.mail_confirm'); ?>
+    </div>
+    
     <form class="max-w300" action="<?= url('register.add'); ?>" method="post">
       <?php csrf_field(); ?>
 
