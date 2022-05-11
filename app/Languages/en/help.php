@@ -23,12 +23,7 @@ return [
     'add_post'              => 'The first paragraph will be the text preview for the feed page. <br><br>Try not to include photos and videos in it. If you need to add a photo, then add it for Overview.',
     'edit_page'             => 'Official documentation should be error-free and written more in a formal manner.',
     'edit_post'             => 'See what the post looks like on the feed page and in the full version. Improve it here.',
-
     'add_topic'             => 'A topic is a node (for navigation) used by the system to organize content. The theme is a single point of view, the interpretation of various things, phenomena and other concepts.',
-    'edit_page'             => 'Официальная документация должна быть без ошибок и написана больше в официальной манере.',
-    'edit_post'             => 'Посмотрите, как выглядит пост на странице ленты и в полной версии. Улучшите его тут.',
-
-    'add_topic'             => 'Тема — то узел (для навигации), используемый системой для организации контента. Тема является единой точкой взода, интерпретацией различных вещей, явлений и других понятий.',
     'add_blog'              => 'Categories refer to the directory (sites, programs). Create them only when there are enough sites to fill.',
     'add_category'          => 'Edit the category to reflect the sites in it. Write a correct description and choose a short title.',
     'add_section'           => 'Sections are used for grouping (navigation) by service articles.',

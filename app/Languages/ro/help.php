@@ -23,12 +23,7 @@ return [
     'add_post'              => 'Primul paragraf va fi previzualizarea textului pentru pagina de feed. <br><br>Încercați să nu includeți fotografii și videoclipuri în el. Dacă trebuie să adăugați o fotografie, adăugați-o pentru Prezentare generală.',
     'edit_page'             => 'Documentația oficială ar trebui să nu aibă erori și să fie scrisă mai mult într-o manieră formală.',
     'edit_post'             => 'Vezi cum arată postarea pe pagina de feed și în versiunea completă. Îmbunătățiți-l aici.',
-
     'add_topic'             => 'Un subiect este un nod (pentru navigare) folosit de sistem pentru a organiza conținutul. Tema este un singur punct de vedere, interpretarea diferitelor lucruri, fenomene și alte concepte.',
-    'edit_page'             => 'Официальная документация должна быть без ошибок и написана больше в официальной манере.',
-    'edit_post'             => 'Посмотрите, как выглядит пост на странице ленты и в полной версии. Улучшите его тут.',
-
-    'add_topic'             => 'Тема — то узел (для навигации), используемый системой для организации контента. Тема является единой точкой взода, интерпретацией различных вещей, явлений и других понятий.',
     'add_blog'              => 'Categoriile se referă la director (site-uri, programe). Creați-le numai când există suficiente site-uri de completat.',
     'add_category'          => 'Editați categoria pentru a reflecta site-urile din ea. Scrieți o descriere corectă și alegeți un titlu scurt.',
     'add_section'           => 'Secțiunile sunt folosite pentru gruparea (navigarea) pe articole de serviciu.',
