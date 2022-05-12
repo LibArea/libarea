@@ -46,7 +46,7 @@ class AddPostController extends MainController
         return Tpl::LaRender(
             '/post/add',
             [
-                'meta'      => Meta::get(__('app.add_option', ['name' => __('app.post')])),
+                'meta'      => Meta::get(__('app.add_' . $type)),
                 'data'  => [
                     'facets'    => ['topic' => $topic],
                     'blog'      => FacetModel::getFacetsUser($this->user['id'], 'blog'),
