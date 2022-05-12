@@ -9,5 +9,6 @@
 return [
     'mail_confirm'  => 'După ce ați trimis formularul completat, vi se va cere să vă verificați adresa de e-mail. Este important să rețineți că nu veți putea trece prin restul procesului de îmbarcare până când nu veți face acest lucru.',
     'login_info'    => 'Autorizarea vă oferă posibilitatea de a publica postări, de a răspunde, de a comenta și de a vota.',
+    'invate_text'   => 'Nu sunteți încă utilizator? Înregistrarea se face doar pe bază de invitație pentru a lupta împotriva spamului și pentru a crește responsabilitatea. Dacă cunoașteți <a href="/users">utilizatorul actual</a> al site-ului, cereți-i o invitație.',
 ];
 

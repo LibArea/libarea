@@ -251,7 +251,6 @@ return [
     'forgot_password'   => 'Ați uitat parola',
     'rules'             => 'Regulile site-ului',
     'restriction'       => 'Restricții',
-    'invate_text'       => 'Nu sunteți încă utilizator? Înregistrarea se face doar pe bază de invitație pentru a lupta împotriva spamului și pentru a crește responsabilitatea. Dacă cunoașteți <a href="/users">utilizatorul actual</a> al site-ului, cereți-i o invitație.',
     
     'text_closed'       => 'Fără autorizație este interzisă vizualizarea acestui text ascuns',
 

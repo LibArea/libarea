@@ -45,5 +45,5 @@
         </div>
       <?php endforeach; ?>
     </div>
-  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url('users.' . $data['sheet'])); ?>
 </main>

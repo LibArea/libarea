@@ -41,13 +41,13 @@ class ProfileController extends MainController
         return Tpl::LaRender(
             '/user/profile/index',
             [
-                'meta'  => self::metadata('profile.posts', $profile),
+                'meta'  => self::metadata('profile_posts', $profile),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $pageNumber,
                     'created_at'        => $profile['created_at'],
                     'count'             => $count,
-                    'topics'            => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
+                    'topics'            => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
                     'blogs'             => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'            => BadgeModel::getBadgeUserAll($profile['id']),
                     'profile'           => $profile,
@@ -71,14 +71,14 @@ class ProfileController extends MainController
         return Tpl::LaRender(
             '/user/profile/post',
             [
-                'meta'  => self::metadata('profile.posts.all', $profile),
+                'meta'  => self::metadata('profile_posts_all', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
                     'posts'         => $posts,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),
-                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
+                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
                     'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
                     'post'          => PostModel::getPost($profile['my_post'], 'id', $this->user),
@@ -99,14 +99,14 @@ class ProfileController extends MainController
         return Tpl::LaRender(
             '/user/profile/answer',
             [
-                'meta'  => self::metadata('profile.answers', $profile),
+                'meta'  => self::metadata('profile_answers', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
                     'answers'       => $answers,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),
-                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
+                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
                     'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
                     'post'          => PostModel::getPost($profile['my_post'], 'id', $this->user),
@@ -128,14 +128,14 @@ class ProfileController extends MainController
         return Tpl::LaRender(
             '/user/profile/comment',
             [
-                'meta'  => self::metadata('profile.comments', $profile),
+                'meta'  => self::metadata('profile_comments', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $pageNumber,
                     'comments'      => $comments,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),
-                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'topics.my'),
+                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
                     'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
                     'post'          => PostModel::getPost($profile['my_post'], 'id', $this->user),
@@ -173,7 +173,7 @@ class ProfileController extends MainController
 
     public static function metadata($sheet, $user)
     {
-        if ($sheet == 'profile.posts') {
+        if ($sheet == 'profile_posts') {
             $information = $user['about'];
         }
 
@@ -182,8 +182,8 @@ class ProfileController extends MainController
             $name = $user['name'] . ' (' . $user['login'] . ') ';
         }
 
-        $title = __('meta.' . $sheet . '.title', ['name' => $name]);
-        $description  = __('meta.' . $sheet . '.desc', ['name' => $name, 'information' => $information ?? '...']);
+        $title = __('meta.' . $sheet . '_title', ['name' => $name]);
+        $description  = __('meta.' . $sheet . '_desc', ['name' => $name, 'information' => $information ?? '...']);
 
         $m = [
             'og'        => true,

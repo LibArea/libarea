@@ -21,20 +21,23 @@ class AllFacetController extends MainController
     {
         $pageNumber = Tpl::pageNumber();
 
-        $pagesCount = FacetModel::getFacetsAllCount($this->user['id'], $sheet);
-        $facets     = FacetModel::getFacetsAll($pageNumber, $this->limit, $this->user['id'], $sheet);
+        $pagesCount = FacetModel::getFacetsAllCount($this->user['id'], $sheet, $type);
+        $facets     = FacetModel::getFacetsAll($pageNumber, $this->limit, $this->user['id'], $sheet, $type);
 
         $Flimit = (new \App\Controllers\Facets\AddFacetController())->limitFacer($type, 'no.redirect');
 
         $m = [
             'og'    => true,
-            'url'   => url($sheet),
+            'url'   => url($type . 's.' . $sheet),
         ];
+
+        $title = __('meta.' . $sheet . '_' . $type . 's');
+        $desc = __('meta.' . $sheet . '_' . $type . 's_desc');
 
         return Tpl::LaRender(
             '/facets/all',
             [
-                'meta'  => Meta::get(__('meta.' . $sheet), __('meta.' . $sheet . '_desc'), $m),
+                'meta'  => Meta::get($title, $desc, $m),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,

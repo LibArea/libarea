@@ -1,5 +1,5 @@
 </div>
-<footer class="box-shadow-top">
+<footer class="box-shadow-top" itemtype="http://schema.org/WPFooter">
   <div class="wrap">
     <div class="left">
       <div class="mb5">

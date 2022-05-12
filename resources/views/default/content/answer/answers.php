@@ -6,14 +6,16 @@
     <div class="trigger">
       <i class="bi-info-square gray-600"></i>
     </div>
-    <div class="dropdown tooltip"><?= __('meta.' . $data['sheet'] . '.info'); ?></div>
+    <div class="dropdown tooltip">
+      <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . '_info'); ?>
+    </div>
   </div>
 
   <?php if (!empty($data['answers'])) : ?>
     <div class="box">
       <?= Tpl::insert('/content/answer/answer', ['data' => $data]); ?>
     </div>
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/answers'); ?>
   <?php else : ?>
     <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>

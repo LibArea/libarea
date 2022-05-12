@@ -1,8 +1,8 @@
 <main class="col-two">
   <div class="box center">
-    <h1 class="text-xl"><?= __('meta.' . $data['sheet']); ?></h1>
+    <h1 class="text-xl"><?= __('meta.' . $data['sheet'] . '_' . $data['type']. 's'); ?></h1>
     <span class="text-sm gray-600">
-      <?= __('meta.' . $data['sheet'] . '_info'); ?>.
+      <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>.
     </span>
   </div>
 
@@ -15,20 +15,20 @@
           'list' => [
             [
               'id'    => $data['type'] . '_all',
-              'url'   => url($data['type'] . '.all'),
+              'url'   => url($data['type'] . 's.all'),
               'title' => __('app.all'),
               'icon'  => 'bi-app'
             ],
             [
               'id'    => $data['type'] . '_new',
-              'url'   => url($data['type'] . '.new'),
+              'url'   => url($data['type'] . 's.new'),
               'title' => __('app.new_ones'),
               'icon'  => 'bi-sort-up'
             ],
             [
               'tl'    => 1,
               'id'    => $data['type'] . '_my',
-              'url'   => url($data['type'] . '.my'),
+              'url'   => url($data['type'] . 's.my'),
               'title' => __('app.reading'),
               'icon'  => 'bi-check2-square'
             ],
@@ -70,6 +70,6 @@
     <?php else : ?>
       <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
-  </div>
-  <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>
+  </div>   
+  <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url($data['type'] . 's.' . $data['sheet'])); ?>
 </main>

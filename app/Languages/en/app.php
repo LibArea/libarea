@@ -251,7 +251,6 @@ return [
     'forgot_password'   => 'Forgot your password',
     'rules'             => 'Site rules',
     'restriction'       => 'Restrictions',
-    'invate_text'       => 'Not a user yet? Registration is by invitation only to fight spam and increase accountability. If you know the <a href="/users">current user</a> of the site, ask them for an invite.',
     
     'text_closed'       => 'Without authorization it is forbidden to view this hidden text',
 

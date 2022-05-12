@@ -41,7 +41,7 @@ class Parser
 
         $jevix->cfgSetTagIsEmpty(['a', 'iframe']);
 
-        // Разрешённые параметры тегов. Также можно устанавливать допустимые значения этих параметров.
+        // Разрешённые параметры тегов. 
         $jevix->cfgAllowTagParams('a', ['href' => '#link', 'name' => '#text', 'target' => '#text', 'class' => '#text']);
 
         $jevix->cfgAllowTagParams('iframe', ['width' => '#int', 'height' => '#int', 'style' => '#text', 'frameborder' => '#int', 'allowfullscreen' => '#text', 'src' => ['#domain' => ['youtube.com', 'yandex.ru', 'rutube.ru', 'vk.com']]]);

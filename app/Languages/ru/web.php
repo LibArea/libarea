@@ -100,7 +100,7 @@ return [
     'audits_desc'       => '...',
     
     'top_title'         => '{name} — сайты по популярности',
-    'top_desc'          => 'Анонсированные список сайтов по тематики {description_info}',
+    'top_desc'          => 'Анонсированные список сайтов по тематике {description_info}',
     'all_title'         => '{name} — рубрика, сайты по дате',
     'all_desc'          => 'Сайты в хронологическом порядке в рубрике {description_info}',
 ];

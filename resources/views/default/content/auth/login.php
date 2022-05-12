@@ -25,7 +25,7 @@ $form->html_form(UserData::getUserTl(), config('form/auth.login'));
       </fieldset>
     </form>
     <?php if (config('general.invite') == 1) : ?>
-      <?= __('app.invate_text'); ?>
+      <div class="max-w780"><?= __('auth.invate_text'); ?></div>
     <?php endif; ?>
     <p><?= __('app.agree_rules'); ?>.</p>
   </div>

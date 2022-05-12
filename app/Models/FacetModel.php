@@ -8,9 +8,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // All facets
     // Все фасеты
-    public static function getFacetsAll($page, $limit, $uid, $sort)
+    public static function getFacetsAll($page, $limit, $uid, $sort, $type)
     {
-        $signet = self::sorts($sort, $uid);
+        $signet = self::sorts($sort, $uid, $type);
 
         $start  = ($page - 1) * $limit;
         $sql    = "SELECT 
@@ -36,9 +36,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getFacetsAllCount($uid, $sort)
+    public static function getFacetsAllCount($uid, $sort, $type)
     {
-        $signet = self::sorts($sort, $uid);
+        $signet = self::sorts($sort, $uid, $type);
 
         $sql    = "SELECT 
                     facet_id,
@@ -53,35 +53,20 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->rowCount();
     }
 
-    public static function sorts($sort, $uid)
+    public static function sorts($sort, $uid, $type)
     {
         switch ($sort) {
-            case 'my.topics':
-                $signet = "WHERE facet_type = 'topic' AND signed_user_id = $uid ORDER BY facet_count DESC";
+            case 'my':
+                $signet = "WHERE facet_type = '$type' AND signed_user_id = $uid ORDER BY facet_count DESC";
                 break;
-            case 'new.topics':
-                $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
+            case 'new':
+                $signet = "WHERE facet_type = '$type' ORDER BY facet_id DESC";
                 break;
-            case 'all.topics':
-                $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
+            case 'all':
+                $signet = "WHERE facet_type = '$type' ORDER BY facet_id DESC";
                 break;
-            case 'ban.topics':
-                $signet = "WHERE facet_type = 'topic' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
-                break;
-            case 'all.blogs':
-                $signet = "WHERE facet_type = 'blog' ORDER BY facet_count DESC";
-                break;
-            case 'new.blogs':
-                $signet = "WHERE facet_type = 'blog' ORDER BY facet_id DESC";
-                break;
-            case 'my.blogs':
-                $signet = "WHERE facet_type = 'blog' AND signed_user_id = $uid ORDER BY facet_count DESC";
-                break;
-            case 'ban.blogs':
-                $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
-                break;
-            case 'all.sections':
-                $signet = "WHERE facet_type = 'section' ORDER BY facet_count DESC";
+            case 'ban':
+                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
                 break;
             default:
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_count DESC";

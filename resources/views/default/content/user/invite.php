@@ -15,7 +15,7 @@
       </fieldset>
     </form>
     <?php if (config('general.invite') == true) : ?>
-      <?= __('app.invate_text'); ?>
+      <?= __('auth.invate_text'); ?>
     <?php endif; ?>
   </div>
 </main>

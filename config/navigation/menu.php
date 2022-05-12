@@ -19,12 +19,12 @@ return [
             'url'   => url('topics.all'),
             'title' => __('app.topics'),
             'icon'  => 'bi-columns-gap',
-            'id'    => 'topics',
+            'id'    => 'topic',
         ], [
             'url'   => url('blogs.all'),
             'title' => __('app.blogs'),
             'icon'  => 'bi-journals',
-            'id'    => 'blogs',
+            'id'    => 'blog',
         ], [
             'url'   => url('users.all'),
             'title' => __('app.users'),
