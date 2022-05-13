@@ -173,6 +173,7 @@ return [
     'add_topic'         => '添加主题',
     'add_blog'          => '添加博客',
     'add_category'      => '添加类别',
+    'edit_category'     => '更改類別',
     'edit_post'         => '编辑帖子',
     'edit_topic'        => '更改主题',
     'edit_blog'         => '编辑博客',

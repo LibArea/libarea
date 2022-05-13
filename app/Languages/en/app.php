@@ -173,6 +173,7 @@ return [
     'add_topic'         => 'Add Topic',
     'add_blog'          => 'Add blog',
     'add_category'      => 'Add category',
+    'edit_category'     => 'Change category',
     'edit_post'         => 'Edit post',
     'edit_topic'        => 'Edit Topic',
     'edit_blog'         => 'Edit blog',

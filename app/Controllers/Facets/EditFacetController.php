@@ -167,6 +167,10 @@ class EditFacetController extends MainController
 
             FacetModel::addLowFacetMatching($match_arr, $facet_id);
         }
+        
+        if ($new_type == 'category') {
+            Validation::ComeBack('msg.change_saved', 'success', url('web.dir', ['grouping' =>'all', 'slug' => $facet_slug]));
+        }
 
         Validation::ComeBack('msg.change_saved', 'success', url($new_type, ['slug' => $facet_slug]));
     }

@@ -173,6 +173,7 @@ return [
     'add_topic'         => 'Adaugă subiect',
     'add_blog'          => 'Adaugă blog',
     'add_category'      => 'Adăugați o categorie',
+    'edit_category'     => 'Schimbați categoria',
     'edit_post'         => 'Editează postarea',
     'edit_topic'        => 'Editați subiectul',
     'edit_blog'         => 'Editează blogul',
