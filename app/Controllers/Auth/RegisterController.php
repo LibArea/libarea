@@ -2,21 +2,14 @@
 
 namespace App\Controllers\Auth;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\AuthModel;
-use Integration, Validation, SendEmail, Tpl, Meta, Html, UserData;
+use Integration, Validation, SendEmail, Meta, Html, UserData;
 
-class RegisterController extends MainController
+class RegisterController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = UserData::get();
-    }
-
     // Показ формы регистрации
     public function showRegisterForm()
     {
@@ -30,7 +23,7 @@ class RegisterController extends MainController
             'url'   => url('register'),
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/auth/register',
             [
                 'meta'  => Meta::get(__('app.registration'), __('app.security_info'), $m),
@@ -172,7 +165,7 @@ class RegisterController extends MainController
             Validation::ComeBack('msg.code_incorrect', 'error', '/');
         }
 
-        return Tpl::LaRender(
+        return $this->render(
             '/auth/register-invate',
             [
                 'meta'  => Meta::get(__('app.reg_invite')),

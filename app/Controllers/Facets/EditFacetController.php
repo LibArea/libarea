@@ -2,21 +2,14 @@
 
 namespace App\Controllers\Facets;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Validation, UploadImage, Tpl, Meta, Html, UserData;
+use Validation, UploadImage, Meta, Html, UserData;
 
-class EditFacetController extends MainController
+class EditFacetController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // Форма редактирования Topic or Blog
     public function index($type)
     {
@@ -33,7 +26,7 @@ class EditFacetController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
-        return Tpl::LaRender(
+        return $this->render(
             '/facets/edit',
             [
                 'meta'  => Meta::get(__('app.edit') . ' | ' . $facet['facet_title']),
@@ -53,7 +46,7 @@ class EditFacetController extends MainController
     }
 
     public function edit()
-    { 
+    {
         $facet_id                   = Request::getPostInt('facet_id');
         $facet_title                = Request::getPost('facet_title');
         $facet_description          = Request::getPost('facet_description');
@@ -67,7 +60,7 @@ class EditFacetController extends MainController
 
         $facet = FacetModel::uniqueById($facet_id);
         Html::pageError404($facet);
- 
+
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
             redirect('/');
@@ -167,9 +160,9 @@ class EditFacetController extends MainController
 
             FacetModel::addLowFacetMatching($match_arr, $facet_id);
         }
-        
+
         if ($new_type == 'category') {
-            Validation::ComeBack('msg.change_saved', 'success', url('web.dir', ['grouping' =>'all', 'slug' => $facet_slug]));
+            Validation::ComeBack('msg.change_saved', 'success', url('web.dir', ['grouping' => 'all', 'slug' => $facet_slug]));
         }
 
         Validation::ComeBack('msg.change_saved', 'success', url($new_type, ['slug' => $facet_slug]));
@@ -187,7 +180,7 @@ class EditFacetController extends MainController
             redirect('/');
         }
 
-        return Tpl::LaRender(
+        return $this->render(
             '/facets/edit-pages',
             [
                 'meta'  => Meta::get(__('app.edit') . ' | ' . $facet['facet_title']),

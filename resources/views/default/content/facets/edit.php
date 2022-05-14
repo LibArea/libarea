@@ -9,7 +9,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
     <p class="m0 text-xl"><?= __('app.edit_' . $data['type']); ?></p>
     <ul class="nav">
 
-      <?= Tpl::insert(
+      <?= insert(
         '/_block/navigation/nav',
         [
           'list' => [
@@ -29,7 +29,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
   <div class="box">
     <form class="max-w780" action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
-      <?= Tpl::insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
+      <?= insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
 
       <div class="file-upload mb10 mt15" id="file-drag">
         <div class="flex">
@@ -87,7 +87,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
 
       <?php if ($fs['facet_type'] != 'blog' && UserData::checkAdmin()) : ?>
 
-        <?= Tpl::insert('/_block/form/radio', [
+        <?= insert('/_block/form/radio', [
           'data' => [
             [
               'title' => __('app.root'),
@@ -98,7 +98,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
           ]
         ]); ?>
 
-        <?= Tpl::insert('/_block/form/select/low-facets', [
+        <?= insert('/_block/form/select/low-facets', [
           'data'          => $data,
           'action'        => 'edit',
           'type'          => $fs['facet_type'],
@@ -151,7 +151,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
         <div class="mb20 help">Markdown, > 14 <?= __('app.characters'); ?></div>
 
         <?php if ($fs['facet_type'] != 'blog') : ?>
-          <?= Tpl::insert('/_block/form/select/related-posts', [
+          <?= insert('/_block/form/select/related-posts', [
             'data'          => $data,
             'action'        => 'edit',
             'type'          => 'post',
@@ -159,7 +159,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
             'help'          => __('app.necessarily'),
           ]); ?>
 
-          <?= Tpl::insert('/_block/form/select/low-matching-facets', [
+          <?= insert('/_block/form/select/low-matching-facets', [
             'data'          => $data,
             'action'        => 'edit',
             'type'          => $fs['facet_type'],
@@ -183,8 +183,8 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
     <?php endif; ?>
 
     <?php if (UserData::checkAdmin()) : ?>
-      <?= Tpl::insert('/_block/form/select/content-tl', ['data' => $fs['facet_tl']]); ?>
-      <?= Tpl::insert('/_block/form/select/user', [
+      <?= insert('/_block/form/select/content-tl', ['data' => $fs['facet_tl']]); ?>
+      <?= insert('/_block/form/select/user', [
         'user'    => $data['user'],
         'action'  => 'user',
         'type'    => 'user',

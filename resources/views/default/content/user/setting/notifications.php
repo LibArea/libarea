@@ -6,7 +6,7 @@ $form->html_form(UserData::getUserTl(), config('form/user-notifications'));
 ?>
 
 <main>
-  <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
+  <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
     <form action="<?= url('setting.notif.edit'); ?>" method="post">

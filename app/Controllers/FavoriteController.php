@@ -2,20 +2,11 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{FavoriteModel, PostModel, AnswerModel};
-use UserData;
 
-class FavoriteController extends MainController
+class FavoriteController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = UserData::get();
-    }
-
     public function index()
     {
         $content_id = Request::getPostInt('content_id');

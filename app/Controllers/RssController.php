@@ -2,12 +2,11 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\RssModel;
-use Content, Tpl, Html;
+use Content, Html;
 
-class RssController extends MainController
+class RssController extends Controller
 {
     // Route::get('/sitemap.xml')
     public function index()
@@ -18,7 +17,7 @@ class RssController extends MainController
             'posts'     => RssModel::getPostsSitemap(),
         ];
 
-        Tpl::LaIncludeCachedTemplate('/content/rss/sitemap', ['data' => $data]);
+        includeCachedTemplate('default/content/rss/sitemap', ['data' => $data]);
     }
 
     // Route::get('/turbo-feed/topic/{slug}')
@@ -41,8 +40,8 @@ class RssController extends MainController
             'posts' => $result,
         ];
 
-        Tpl::LaIncludeCachedTemplate(
-            '/content/rss/turbo-feed',
+        includeCachedTemplate(
+            'default/content/rss/turbo-feed',
             [
                 'data' => $data,
                 'topic' => $topic,
@@ -65,8 +64,8 @@ class RssController extends MainController
             $result[$ind]         = $row;
         }
 
-        Tpl::LaIncludeCachedTemplate(
-            '/content/rss/rss-feed',
+        includeCachedTemplate(
+            'default/content/rss/rss-feed',
             [
                 'data'  => [
                     'url'       => config('meta.url'),

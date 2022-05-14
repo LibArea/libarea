@@ -59,7 +59,7 @@
         <?php endforeach; ?>
       </ol>
     <?php else : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'bi-info-lg']); ?>
     <?php endif ?>
 
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>

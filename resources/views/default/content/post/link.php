@@ -26,13 +26,13 @@
     <?php endif; ?>
   </div>
 
-  <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
+  <?= insert('/content/post/post', ['data' => $data]); ?>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], null, url('domain', ['domain' => $data['site']['item_domain']])); ?>
 </main>
 <aside>
   <div class="sticky top-sm">
     <div class="box">
-      <?= Tpl::insert('/_block/domains', ['data' => $data['domains']]); ?>
+      <?= insert('/_block/domains', ['data' => $data['domains']]); ?>
     </div>
   </div>
 </aside>

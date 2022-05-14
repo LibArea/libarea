@@ -34,7 +34,6 @@ class Reply
                     'item_id'   => Request::getPostInt('item_id'),
                     'content'   => $reply['content'],
                 ],
-                'user' => $this->user
             ]
         );
     }

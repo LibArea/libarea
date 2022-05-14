@@ -26,6 +26,6 @@
     <?php endif; ?>
   </div>
 
-  <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
+  <?= insert('/content/post/post', ['data' => $data]); ?>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], null, url('domain', ['domain' => $data['site']['item_domain']])); ?>
 </main>

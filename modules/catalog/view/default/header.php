@@ -3,7 +3,7 @@ Request::getHead()->addStyles('/assets/css/style.css?09');
 Request::getHead()->addStyles('/assets/css/catalog.css?09');
 ?>
 
-<?= Tpl::insert('/meta', ['meta' => $meta]); ?>
+<?= insert('/meta', ['meta' => $meta]); ?>
 
 <body<?php if (Request::getCookie('dayNight') == 'dark') : ?> class="dark"<?php endif; ?>>
   <header>
@@ -37,7 +37,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?09');
                     <?= __('web.menu'); ?>
                   </div>
                   <ul class="dropdown">
-                    <?= Tpl::insert('/_block/navigation/menu', ['type' => 'admin', 'list' => config('catalog/menu.user')]); ?>
+                    <?= insert('/_block/navigation/menu', ['type' => 'admin', 'list' => config('catalog/menu.user')]); ?>
                   </ul>
                 </div>
               <?php endif; ?>
@@ -49,7 +49,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?09');
                   <?= UserData::getUserLogin(); ?>
                 </div>
                 <ul class="dropdown">
-                  <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>
+                  <?= insert('/_block/navigation/menu', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>
                 </ul>
               </div>
             <?php endif; ?>

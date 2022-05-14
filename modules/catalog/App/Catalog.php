@@ -3,26 +3,18 @@
 namespace Modules\Catalog\App;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use Modules\Catalog\App\Models\{WebModel, FacetModel, UserAreaModel};
-use UserData, Meta, Html, Tpl;
+use UserData, Meta, Html;
 
-class Catalog
+class Catalog extends Controller
 {
-    private $user;
-
     protected $limit = 25;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
 
     // List of sites by topic (sites by "category")
     // Лист сайтов по темам (сайты по "категориям")
     public function index($sheet)
     {
-        $pageNumber = Tpl::pageNumber();
-
         $os = ['all', 'github', 'wap'];
         if (!in_array($screening = Request::get('grouping'), $os)) {
             Html::pageError404([]);
@@ -34,7 +26,7 @@ class Catalog
         // We will get children
         $childrens =  FacetModel::getChildrens($category['facet_id'], $screening);
 
-        $items      = WebModel::feedItem($pageNumber, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening);
+        $items      = WebModel::feedItem($this->pageNumber, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening);
         $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'], $screening);
 
         $m = [
@@ -59,7 +51,7 @@ class Catalog
                     'sheet'             => $sheet,
                     'count'             => $pagesCount,
                     'pagesCount'        => ceil($pagesCount / $this->limit),
-                    'pNum'              => $pageNumber,
+                    'pNum'              => $this->pageNumber,
                     'items'             => $items,
                     'category'          => $category,
                     'childrens'         => $childrens,

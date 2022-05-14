@@ -4,7 +4,7 @@ use Hleb\Constructor\Handlers\Request;
 
 Request::getHead()->addStyles('/assets/css/style.css?09'); ?>
 
-<?= Tpl::insert('/meta', ['meta' => $meta]); ?>
+<?= insert('/meta', ['meta' => $meta]); ?>
 
 <body>
 

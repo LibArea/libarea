@@ -2,12 +2,12 @@
 
 namespace App\Controllers\Auth;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
-use Integration, Validation, SendEmail, Tpl, Meta, Html, UserData;
+use Integration, Validation, SendEmail, Meta, Html, UserData;
 
-class RecoverController extends MainController
+class RecoverController extends Controller
 {
     public function showPasswordForm()
     {
@@ -16,7 +16,7 @@ class RecoverController extends MainController
             'url'   => url('recover'),
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/auth/recover',
             [
                 'meta'  => Meta::get(__('app.password_recovery'), __('app.recover_info'), $m),
@@ -80,7 +80,7 @@ class RecoverController extends MainController
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
         Html::pageError404($user);
 
-        return Tpl::LaRender(
+        return $this->render(
             '/auth/newrecover',
             [
                 'meta'  => Meta::get(__('app.password recovery'), __('app.recover_info')),

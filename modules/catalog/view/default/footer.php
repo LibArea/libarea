@@ -10,4 +10,4 @@
   });
 </script>
 
-<?= Tpl::insert('/scripts'); ?>
+<?= insert('/scripts'); ?>

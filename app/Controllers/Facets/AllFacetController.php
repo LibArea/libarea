@@ -2,27 +2,18 @@
 
 namespace App\Controllers\Facets;
 
-use Hleb\Scheme\App\Controllers\MainController;
+use App\Controllers\Controller;
 use App\Models\FacetModel;
-use Tpl, Meta, UserData;
+use Meta;
 
-class AllFacetController extends MainController
+class AllFacetController extends Controller
 {
-    private $user;
-
     protected $limit = 40;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
 
     public function index($sheet, $type)
     {
-        $pageNumber = Tpl::pageNumber();
-
         $pagesCount = FacetModel::getFacetsAllCount($this->user['id'], $sheet, $type);
-        $facets     = FacetModel::getFacetsAll($pageNumber, $this->limit, $this->user['id'], $sheet, $type);
+        $facets     = FacetModel::getFacetsAll($this->pageNumber, $this->limit, $this->user['id'], $sheet, $type);
 
         $Flimit = (new \App\Controllers\Facets\AddFacetController())->limitFacer($type, 'no.redirect');
 
@@ -34,7 +25,7 @@ class AllFacetController extends MainController
         $title = __('meta.' . $sheet . '_' . $type . 's');
         $desc = __('meta.' . $sheet . '_' . $type . 's_desc');
 
-        return Tpl::LaRender(
+        return $this->render(
             '/facets/all',
             [
                 'meta'  => Meta::get($title, $desc, $m),
@@ -43,7 +34,7 @@ class AllFacetController extends MainController
                     'type'          => $type,
                     'facets'        => $facets,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'limit'         => $Flimit,
                 ]
             ]

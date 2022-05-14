@@ -1,5 +1,5 @@
 <main>
-  <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
+  <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
     <form method="POST" action="<?= url('setting.avatar.edit'); ?>" enctype="multipart/form-data">

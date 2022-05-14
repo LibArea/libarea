@@ -5,7 +5,7 @@ $form->adding(['name' => 'setting_email_appealed', 'type' => 'selected', 'var' =
 $form->html_form(UserData::getUserTl(), config('form/user-notifications'));
 ?>
 <main class="col-two">
-  <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
+  <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
     <form action="<?= url('setting.notif.edit'); ?>" method="post">

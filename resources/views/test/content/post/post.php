@@ -3,7 +3,7 @@
   foreach ($data['posts'] as $post) :
     $n++; ?>
     <?php if (!UserData::checkActiveUser() && $n == 6) : ?>
-      <?= Tpl::insert('/_block/no-login-screensaver'); ?>
+      <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="flex mb20 article_<?= $post['post_id']; ?>">
@@ -19,7 +19,7 @@
           <?php endif; ?>
           <a href="<?= $post_url; ?>">
             <h3 class="inline"><?= $post['post_title']; ?>
-              <?= Tpl::insert('/content/post/post-title', ['post' => $post]); ?>
+              <?= insert('/content/post/post-title', ['post' => $post]); ?>
             </h3>
           </a>
           <?= Html::facets($post['facet_list'], 'blog', 'blog', 'test-tag test-blog ml15'); ?>
@@ -45,7 +45,7 @@
   <?php endforeach; ?>
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
-    <?= Tpl::insert('/_block/recommended-topics', ['data' => $data]); ?>
+    <?= insert('/_block/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>
-  <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_posts'), 'icon' => 'bi-journal-richtext']); ?>
+  <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_posts'), 'icon' => 'bi-journal-richtext']); ?>
 <?php endif; ?>

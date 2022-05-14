@@ -9,7 +9,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
     <p class="m0 text-xl"><?= __('app.edit_' . $data['type']); ?></p>
     <ul class="nav">
 
-      <?= Tpl::insert(
+      <?= insert(
         '/_block/navigation/nav',
         [
           'list' => [
@@ -86,7 +86,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
 
       <?php if ($fs['facet_type'] == 'topic' && UserData::checkAdmin()) : ?>
 
-        <?= Tpl::insert('/_block/form/radio', [
+        <?= insert('/_block/form/radio', [
           'data' => [
             [
               'title' => __('app.root'),
@@ -97,7 +97,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
           ]
         ]); ?>
 
-        <?= Tpl::insert('/_block/form/select/low-facets', [
+        <?= insert('/_block/form/select/low-facets', [
           'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
@@ -150,7 +150,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
       <div class="mb20 help">Markdown, > 14 <?= __('app.characters'); ?></div>
 
       <?php if ($fs['facet_type'] == 'topic') : ?>
-        <?= Tpl::insert('/_block/form/select/related-posts', [
+        <?= insert('/_block/form/select/related-posts', [
           'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
@@ -159,7 +159,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
           'help'          => __('app.necessarily'),
         ]); ?>
 
-        <?= Tpl::insert('/_block/form/select/low-matching-facets', [
+        <?= insert('/_block/form/select/low-matching-facets', [
           'user'           => $user,
           'data'          => $data,
           'action'        => 'edit',
@@ -183,8 +183,8 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
       <?php endif; ?>
 
       <?php if (UserData::checkAdmin()) : ?>
-        <?= Tpl::insert('/_block/form/select/content-tl', ['data' => $fs['facet_tl']]); ?>
-        <?= Tpl::insert('/_block/form/select/user', [
+        <?= insert('/_block/form/select/content-tl', ['data' => $fs['facet_tl']]); ?>
+        <?= insert('/_block/form/select/user', [
           'user'    => $data['user'],
           'action'  => 'user',
           'type'    => 'user',
@@ -192,7 +192,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
           'help'    => __('app.necessarily'),
         ]); ?>
  
-        <?= Tpl::insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
+        <?= insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
       <?php endif; ?>
       <fieldset>
         <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">

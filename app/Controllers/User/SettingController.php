@@ -2,20 +2,16 @@
 
 namespace App\Controllers\User;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
-use UploadImage, Validation, Tpl, Meta, UserData;
+use UploadImage, Validation, Meta, UserData;
 
-class SettingController extends MainController
+use Noodlehaus\Config;
+use Noodlehaus\Parser\PHP;
+
+class SettingController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     function index()
     {
         switch (Request::get('type')) {
@@ -40,7 +36,7 @@ class SettingController extends MainController
     {
         $user   = UserModel::getUser($this->user['login'], 'slug');
 
-        return Tpl::LaRender(
+        return $this->render(
             '/user/setting/setting',
             [
                 'meta'  => Meta::get(__('app.setting')),
@@ -105,7 +101,7 @@ class SettingController extends MainController
     {
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
 
-        return Tpl::LaRender(
+        return $this->render(
             '/user/setting/avatar',
             [
                 'meta'  => Meta::get(__('app.edit')),
@@ -139,7 +135,7 @@ class SettingController extends MainController
     // Форма изменение пароля
     function securityForm()
     {
-        return Tpl::LaRender(
+        return $this->render(
             '/user/setting/security',
             [
                 'meta'  => Meta::get(__('app.edit_option', ['name' => __('app.password')])),
@@ -220,7 +216,7 @@ class SettingController extends MainController
     // Форма настройки предпочтений участника
     function notificationForm()
     {
-        return Tpl::LaRender(
+        return $this->render(
             '/user/setting/notifications',
             [
                 'meta'  => Meta::get(__('app.notifications')),

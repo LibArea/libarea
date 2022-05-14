@@ -9,6 +9,6 @@ if (in_array($type, $arr)) {
 
 <nav class="menu__left<?= $css; ?> mb-none">
   <ul class="menu sticky top-sm">
-    <?= Tpl::insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.left')]); ?>
+    <?= insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.left')]); ?>
   </ul>
 </nav>

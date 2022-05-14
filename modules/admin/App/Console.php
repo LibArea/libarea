@@ -50,13 +50,6 @@ class Console
         self::consoleRedirect();
     }
 
-    public static function indexer()
-    {
-        (new \Modules\Admin\App\Search\Indexer)->indexerAll();
-
-        self::consoleRedirect();
-    }
-
     public static function testMail()
     {
         $email  = Request::getPost('mail');

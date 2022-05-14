@@ -2,24 +2,17 @@
 
 namespace App\Controllers\Post;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
-use Content, UploadImage, Integration, Validation, URLScraper, Tpl, Meta, Html, UserData;
+use Content, UploadImage, Integration, Validation, URLScraper, Meta, Html, UserData;
 
 use Cocur\Slugify\Slugify;
 use Utopia\Domains\Domain;
 
-class AddPostController extends MainController
+class AddPostController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // Form adding a post / page
     // Форма добавление поста / страницы
     public function index($type)
@@ -43,7 +36,7 @@ class AddPostController extends MainController
         $topic_id   = Request::getInt('topic_id');
         $topic      = FacetModel::getFacet($topic_id, 'id', 'topic');
 
-        return Tpl::LaRender(
+        return $this->render(
             '/post/add',
             [
                 'meta'      => Meta::get(__('app.add_' . $type)),

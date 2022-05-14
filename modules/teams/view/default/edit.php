@@ -1,4 +1,4 @@
-<?= Tpl::insert('/header', ['data' => $data, 'meta' => $meta]); ?>
+<?= insert('/header', ['data' => $data, 'meta' => $meta]); ?>
 <?php $team = $data['team']; ?>
 
 <main>
@@ -14,7 +14,7 @@
         <div class="help">6 - 250 <?= __('team.characters'); ?></div>
       </fieldset>
 
-      <?php Tpl::insert('/_block/form/textarea', [
+      <?php insert('/_block/form/textarea', [
         'title'     => __('team.description'),
         'type'      => 'text',
         'name'      => 'content',
@@ -34,4 +34,4 @@
   </div>
 </main>
 
-<?= Tpl::insert('/footer'); ?>
+<?= insert('/footer'); ?>

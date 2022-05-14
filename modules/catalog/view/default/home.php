@@ -34,7 +34,7 @@
     <?php if (!empty($data['items'])) : ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'screening' => $data['screening']]); ?>
     <?php else : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no_website'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no_website'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
   </main>
   <aside>

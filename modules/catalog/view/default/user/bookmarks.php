@@ -9,7 +9,7 @@
     <?php if (!empty($data['items'])) : ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'user' => $user, 'delete_fav' => 'yes', 'screening' => $data['screening']]); ?>
     <?php else : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('no_bookmarks'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('no_bookmarks'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
 
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>

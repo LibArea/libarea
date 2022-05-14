@@ -35,7 +35,7 @@ function config(string $key = null)
         return $key;
     }
 
-    return Config::get($key);
+    return Configuration::get($key);
 }
 
 function is_current($url)
@@ -48,4 +48,9 @@ function is_current($url)
     } */
     
     return false;
+}
+
+function insert(string $name, array $params = [])
+{
+    return App\Controllers\Controller::insert($name, $params);
 }

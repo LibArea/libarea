@@ -2,20 +2,13 @@
 
 namespace App\Controllers\Comment;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\{CommentModel, PostModel};
-use Tpl, Html, UserData;
+use Html;
 
-class EditCommentController extends MainController
+class EditCommentController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // Comment Editing Form
     // Форма редактирования комментария
     public function index()
@@ -26,7 +19,7 @@ class EditCommentController extends MainController
         $comment    = CommentModel::getCommentsId($comment_id);
         if (!Html::accessСheck($comment, 'comment', 0, 0)) return false;
 
-        Tpl::insert(
+        insert(
             '/_block/form/edit-form-comment',
             [
                 'data'  => [

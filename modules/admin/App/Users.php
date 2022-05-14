@@ -3,11 +3,12 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\{SettingModel, BadgeModel};
 use Modules\Admin\App\Models\{BanUserModel, UserModel};
-use Validation, Meta, Html, Tpl;
+use Validation, Meta, Html;
 
-class Users
+class Users extends Controller
 {
     protected $type = 'users';
 
@@ -15,9 +16,8 @@ class Users
 
     public function index($sheet)
     {
-        $pageNumber = Tpl::pageNumber();
         $pagesCount = UserModel::getUsersCount($sheet);
-        $user_all   = UserModel::getUsers($pageNumber, $this->limit, $sheet);
+        $user_all   = UserModel::getUsers($this->pageNumber, $this->limit, $sheet);
 
         $result = [];
         foreach ($user_all as $ind => $row) {
@@ -34,7 +34,7 @@ class Users
                 'meta'  => Meta::get(__('admin.users')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'alluser'       => $result,
                     'type'          => $this->type,
                     'users_count'   => $pagesCount,

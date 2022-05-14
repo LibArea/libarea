@@ -1,9 +1,9 @@
 <?php $topic = $data['facet']; ?>
 <main class="col-two">
   <?php if ($topic['facet_is_deleted'] == 0) : ?>
-    <?= Tpl::insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
+    <?= insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
 
-    <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
+    <?= insert('/content/post/post', ['data' => $data]); ?>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('topic', ['slug' => $topic['facet_slug']])); ?>
 
   <?php else : ?>
@@ -42,7 +42,7 @@
       </div>
     <?php endif; ?>
 
-    <?= Tpl::insert('/_block/sidebar/topic', ['data' => $data]); ?>
+    <?= insert('/_block/sidebar/topic', ['data' => $data]); ?>
     <?php if (!empty($data['writers'])) : ?>
       <div class="sticky top0 top-sm">
         <div class="box bg-violet text-sm">

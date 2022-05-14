@@ -23,7 +23,7 @@
         </div>
 
         <h1><?= $post['post_title']; ?>
-          <?= Tpl::insert('/content/post/post-title', ['post' => $post]); ?>
+          <?= insert('/content/post/post-title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm lowercase flex gray-600">
           <?= Html::langDate($post['post_date']); ?>
@@ -64,7 +64,7 @@
                 <?php endif; ?>
               </a>
             <?php endif; ?>
-            <?= Tpl::insert('/_block/show-ip', ['ip' => $post['post_ip'], 'publ' => $post['post_published']]); ?>
+            <?= insert('/_block/show-ip', ['ip' => $post['post_ip'], 'publ' => $post['post_published']]); ?>
           <?php endif; ?>
         </div>
       </div>
@@ -96,7 +96,7 @@
             </div>
           </div>
         <?php endif; ?>
-        <?= Tpl::insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
+        <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
       </div>
 
       <div class="br-gray flex items-center mb5">
@@ -184,7 +184,7 @@
           <form action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
 
-            <?= Tpl::insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
+            <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
 
             <div class="clear pt5">
               <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
@@ -205,18 +205,18 @@
   <div id="comment"></div>
   <?php if ($post['post_draft'] == 0) :
     if ($post['post_feature'] == 0) :
-      Tpl::insert('/_block/comments-view', ['data' => $data, 'post' => $post]);
+      insert('/_block/comments-view', ['data' => $data, 'post' => $post]);
       if ($post['post_closed'] == 1) :
-        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.post_closed'), 'icon' => 'bi-door-closed']);
+        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.post_closed'), 'icon' => 'bi-door-closed']);
       endif;
     else :
-      Tpl::insert('/_block/questions-view', ['data' => $data, 'post' => $post]);
+      insert('/_block/questions-view', ['data' => $data, 'post' => $post]);
       if ($post['post_closed'] == 1) :
-        echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'bi-door-closed']);
+        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'bi-door-closed']);
       endif;
     endif;
   else :
-    echo Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'bi-door-closed']);
+    echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'bi-door-closed']);
   endif; ?>
 </main>
 <script nonce="<?= $_SERVER['nonce']; ?>">
@@ -250,4 +250,4 @@
     }
   });
 </script>
-<?= Tpl::insert('/_block/js-msg-flag'); ?>
+<?= insert('/_block/js-msg-flag'); ?>

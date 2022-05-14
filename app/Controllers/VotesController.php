@@ -2,20 +2,11 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\VotesModel;
-use UserData;
 
-class VotesController extends MainController
+class VotesController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = UserData::get();
-    }
-
     public function index()
     {
         $up_id  = Request::getPostInt('content_id');

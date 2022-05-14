@@ -2,20 +2,12 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{ActionModel, PostModel};
-use UserData, Html;
+use Html;
 
-class ActionController extends MainController
+class ActionController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // Deleting and restoring content 
     // Удаление и восстановление контента
     public function deletingAndRestoring()

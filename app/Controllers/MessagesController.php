@@ -2,21 +2,13 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{MessagesModel, NotificationModel};
-use Content, Validation, Tpl, Html, Meta, UserData;
+use Content, Validation, Html, Meta;
 
-class MessagesController extends MainController
+class MessagesController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = UserData::get();
-    }
-
     public function index()
     {
         if ($messages_dialog = MessagesModel::getMessages($this->user['id'])) {
@@ -55,7 +47,7 @@ class MessagesController extends MainController
             }
         }
 
-        return Tpl::LaRender(
+        return $this->render(
             '/messages/messages',
             [
                 'meta'  => Meta::get(__('app.private_messages')),
@@ -108,7 +100,7 @@ class MessagesController extends MainController
             }
         }
 
-        return Tpl::LaRender(
+        return $this->render(
             '/messages/dialog',
             [
                 'meta'  => Meta::get(__('app.dialogue')),
@@ -139,7 +131,7 @@ class MessagesController extends MainController
             redirect('/');
         }
 
-        return Tpl::LaRender(
+        return $this->render(
             '/messages/user-add-messages',
             [
                 'meta'  => Meta::get(__('app.send_message')),

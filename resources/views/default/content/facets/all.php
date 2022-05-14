@@ -9,7 +9,7 @@
   <div class="box-flex justify-between">
     <ul class="nav">
 
-      <?= Tpl::insert(
+      <?= insert(
         '/_block/navigation/nav',
         [
           'list' => [
@@ -61,14 +61,14 @@
   <div class="box">
     <?php if (!empty($data['facets'])) : ?>
       <?php if ($data['type'] == 'blog') : ?>
-        <?= Tpl::insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
+        <?= insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
       <?php else : ?>
         <div class="flex flex-wrap">
-          <?= Tpl::insert('/_block/facet/topic-list-all', ['facets' => $data['facets']]); ?>
+          <?= insert('/_block/facet/topic-list-all', ['facets' => $data['facets']]); ?>
         </div>
       <?php endif; ?>
     <?php else : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
   </div>   
   <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url($data['type'] . 's.' . $data['sheet'])); ?>

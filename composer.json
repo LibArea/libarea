@@ -36,7 +36,8 @@
     "cocur/slugify": "^4.1",
     "phpmailer/phpmailer": "^6.5",
     "erusev/parsedown": "^1.8.0@beta",
-    "kadet/keylighter": "dev-master"
+    "kadet/keylighter": "dev-master",
+    "wamania/php-stemmer": "^3.0"
   },
   "autoload": {
     "classmap": [

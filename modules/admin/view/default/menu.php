@@ -1,7 +1,7 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
 <div class="menu__left">
   <ul class="menu">
-    <?= Tpl::insert('/_block/navigation/menu', ['type' => $data['type'], 'list' => config('admin/menu.admin')]); ?>
+    <?= insert('/_block/navigation/menu', ['type' => $data['type'], 'list' => config('admin/menu.admin')]); ?>
   </ul>
 </div>
 
@@ -9,7 +9,7 @@
   <?php if ($data['type'] != 'admin') : ?>
     <div class="box-flex justify-between bg-white">
 
-      <?= Tpl::insert('/_block/navigation/breadcrumbs', [
+      <?= insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
             'name' => __('admin.home'),

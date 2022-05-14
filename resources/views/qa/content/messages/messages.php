@@ -39,7 +39,7 @@
       <?php endforeach; ?>
   </div>
 <?php else : ?>
-  <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_dialogs'), 'icon' => 'bi-envelope']); ?>
+  <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_dialogs'), 'icon' => 'bi-envelope']); ?>
 <?php endif; ?>
 </main>
 <aside>

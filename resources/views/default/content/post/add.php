@@ -10,7 +10,7 @@
         <div class="help">6 - 250 <?= __('app.characters'); ?></div>
       </fieldset>
 
-      <?= Tpl::insert('/_block/form/select/select', [
+      <?= insert('/_block/form/select/select', [
         'data'          => $data['facets'],
         'type'          => 'topic',
         'action'        => 'add',
@@ -20,7 +20,7 @@
       ]); ?>
 
       <?php if (!empty($data['blog'])) : ?>
-        <?= Tpl::insert('/_block/form/select/blog', [
+        <?= insert('/_block/form/select/blog', [
           'data'        => $data,
           'action'      => 'add',
           'type'        => 'blog',
@@ -56,10 +56,10 @@
         </div>
       </div>
 
-      <?= Tpl::insert('/_block/form/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
+      <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
 
       <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL)) : ?>
-        <?= Tpl::insert('/_block/form/radio',  [
+        <?= insert('/_block/form/radio',  [
           'data' => [
             [
               'title' => __('app.draft'),
@@ -68,9 +68,9 @@
           ],
         ]); ?>
 
-        <?= Tpl::insert('/_block/form/select/content-tl', ['data' => null]); ?>
+        <?= insert('/_block/form/select/content-tl', ['data' => null]); ?>
 
-        <?= Tpl::insert('/_block/form/radio', [
+        <?= insert('/_block/form/radio', [
           'data' => [
             [
               'title' => __('app.format_Q&A'),
@@ -84,7 +84,7 @@
         ]); ?>
       <?php endif; ?>
 
-      <?= Tpl::insert('/_block/form/radio',  [
+      <?= insert('/_block/form/radio',  [
         'data' => [
           [
             'title' => __('app.translation'),
@@ -94,7 +94,7 @@
       ]); ?>
 
       <?php if (UserData::checkAdmin()) : ?>
-        <?= Tpl::insert('/_block/form/radio', [
+        <?= insert('/_block/form/radio', [
           'data' => [
             [
               'title'   => __('app.pin'),
@@ -104,7 +104,7 @@
         ]); ?>
       <?php endif; ?>
 
-      <?= Tpl::insert('/_block/form/select/related-posts', [
+      <?= insert('/_block/form/select/related-posts', [
         'data'          => [],
         'action'        => 'add',
         'type'          => 'post',

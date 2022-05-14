@@ -2,35 +2,27 @@
 
 namespace App\Controllers\User;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, PostModel, FeedModel, AnswerModel, CommentModel};
-use Tpl, Meta, Html, UserData;
+use Meta, Html, UserData;
 
-class ProfileController extends MainController
+class ProfileController extends Controller
 {
-    private $user;
-
     protected $limit = 20;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
 
     // Member page (profile) 
     // Страница участника (профиль)
     function index()
     {
-        $pageNumber = Tpl::pageNumber();
         $profile    = self::profile();
 
         if (!$profile['about']) {
             $profile['about'] = __('app.riddle') . '...';
         }
 
-        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount($this->user, 'profile.posts', $profile['id']);
 
         $count = UserModel::contentCount($profile['id']);
@@ -38,13 +30,13 @@ class ProfileController extends MainController
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
-        return Tpl::LaRender(
+        return $this->render(
             '/user/profile/index',
             [
                 'meta'  => self::metadata('profile_posts', $profile),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
-                    'pNum'              => $pageNumber,
+                    'pNum'              => $this->pageNumber,
                     'created_at'        => $profile['created_at'],
                     'count'             => $count,
                     'topics'            => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
@@ -62,19 +54,18 @@ class ProfileController extends MainController
 
     public function posts()
     {
-        $pageNumber = Tpl::pageNumber();
         $profile    = self::profile();
 
-        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount($this->user, 'profile.posts', $profile['id']);
 
-        return Tpl::LaRender(
+        return $this->render(
             '/user/profile/post',
             [
                 'meta'  => self::metadata('profile_posts_all', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'posts'         => $posts,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),
@@ -90,19 +81,18 @@ class ProfileController extends MainController
 
     public function answers()
     {
-        $pageNumber = Tpl::pageNumber();
         $profile    = self::profile();
 
-        $answers    = AnswerModel::userAnswers($pageNumber, $this->limit, $profile['id'], $this->user['id']);
+        $answers    = AnswerModel::userAnswers($this->pageNumber, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = AnswerModel::userAnswersCount($profile['id']);
 
-        return Tpl::LaRender(
+        return $this->render(
             '/user/profile/answer',
             [
                 'meta'  => self::metadata('profile_answers', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'answers'       => $answers,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),
@@ -119,19 +109,18 @@ class ProfileController extends MainController
     // Комментарии участника
     public function comments()
     {
-        $pageNumber = Tpl::pageNumber();
         $profile   = self::profile();
 
-        $comments   = CommentModel::userComments($pageNumber, $this->limit, $profile['id'], $this->user['id']);
+        $comments   = CommentModel::userComments($this->pageNumber, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = CommentModel::userCommentsCount($profile['id']);
 
-        return Tpl::LaRender(
+        return $this->render(
             '/user/profile/comment',
             [
                 'meta'  => self::metadata('profile_comments', $profile),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'comments'      => $comments,
                     'profile'       => $profile,
                     'count'         => UserModel::contentCount($profile['id']),

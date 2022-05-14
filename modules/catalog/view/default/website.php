@@ -60,7 +60,7 @@ $item = $data['item'];
 
       <?php if ($data['related_posts']) : ?>
         <p>
-          <?= Tpl::insert('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => true]); ?>
+          <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => true]); ?>
         </p>
       <?php endif; ?>
     </div>
@@ -70,7 +70,7 @@ $item = $data['item'];
         <form class="max-w780" action="<?= url('reply.create'); ?>" accept-charset="UTF-8" method="post">
           <?= csrf_field() ?>
 
-          <?php Tpl::insert('/_block/form/textarea', [
+          <?php insert('/_block/form/textarea', [
             'title'     => __('web.reply'),
             'type'      => 'text',
             'name'      => 'content',
@@ -101,7 +101,7 @@ $item = $data['item'];
 
     <?php if ($item['item_close_replies'] == 1) : ?>
       <div class="mt20">
-        <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('web.closed'), 'icon' => 'bi-door-closed']); ?>
+        <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.closed'), 'icon' => 'bi-door-closed']); ?>
       </div>
     <?php endif; ?>
   </main>

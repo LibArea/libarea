@@ -2,11 +2,11 @@
 
 namespace App\Controllers\Auth;
 
-use Hleb\Scheme\App\Controllers\MainController;
+use App\Controllers\Controller;
 use App\Models\AuthModel;
 use Validation;
 
-class SessionController extends MainController
+class SessionController extends Controller
 {
     public static function set($user)
     {

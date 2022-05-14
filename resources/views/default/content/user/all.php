@@ -9,7 +9,7 @@
   <div class="box-flex">
     <ul class="nav">
 
-      <?= Tpl::insert(
+      <?= insert(
         '/_block/navigation/nav',
         [
           'list' => [

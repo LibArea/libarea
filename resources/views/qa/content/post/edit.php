@@ -12,7 +12,7 @@
         <div class="help">6 - 250 <?= __('app.characters'); ?></div>
       </fieldset>
 
-      <?= Tpl::insert('/_block/form/select/select', [
+      <?= insert('/_block/form/select/select', [
         'data'          => $data,
         'action'        => 'edit',
         'type'          => 'topic',
@@ -24,7 +24,7 @@
       ]); ?>
 
       <?php if (!empty($data['blog'])) : ?>
-        <?= Tpl::insert('/_block/form/select/blog', [
+        <?= insert('/_block/form/select/blog', [
           'data'        => $data,
           'action'      => 'edit',
           'type'        => 'blog',
@@ -33,7 +33,7 @@
       <?php endif; ?>
 
       <?php if (UserData::checkAdmin()) : ?>
-        <?= Tpl::insert('/_block/form/select/section', [
+        <?= insert('/_block/form/select/section', [
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'section',
@@ -84,11 +84,11 @@
         </div>
       <?php endif; ?>
 
-      <?= Tpl::insert('/_block/form/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
+      <?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
       <?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
         <?php if ($post['post_draft'] == 1) : ?>
-          <?= Tpl::insert('/_block/form/radio', [
+          <?= insert('/_block/form/radio', [
             'data' => [
               [
                 'title' => __('app.draft'),
@@ -101,9 +101,9 @@
       <?php endif; ?>
 
       <?php if ($post['post_type'] == 'post') : ?>
-        <?= Tpl::insert('/_block/form/select/content-tl', ['data' => $post['post_tl']]); ?>
+        <?= insert('/_block/form/select/content-tl', ['data' => $post['post_tl']]); ?>
 
-        <?= Tpl::insert('/_block/form/radio', [
+        <?= insert('/_block/form/radio', [
           'data' => [
             [
               'title' => __('app.format_Q&A'),
@@ -118,7 +118,7 @@
           ]
         ]); ?>
 
-        <?= Tpl::insert('/_block/form/radio', [
+        <?= insert('/_block/form/radio', [
           'data' => [
             [
               'title'     => __('app.translation'),
@@ -130,7 +130,7 @@
 
 
         <?php if (UserData::checkAdmin()) : ?>
-          <?= Tpl::insert('/_block/form/radio', [
+          <?= insert('/_block/form/radio', [
             'data' => [
               [
                 'title'   => __('app.pin'),
@@ -145,7 +145,7 @@
 
 
       <?php if (UserData::checkAdmin()) : ?>
-        <?= Tpl::insert('/_block/form/select/user', [
+        <?= insert('/_block/form/select/user', [
           'user'          => $data['user'],
           'action'        => 'user',
           'type'          => 'user',
@@ -155,7 +155,7 @@
       <?php endif; ?>
 
       <?php if ($post['post_type'] == 'post') : ?>
-        <?= Tpl::insert('/_block/form/select/related-posts', [
+        <?= insert('/_block/form/select/related-posts', [
           'data'          => $data,
           'action'        => 'edit',
           'type'          => 'post',

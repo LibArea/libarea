@@ -2,23 +2,15 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\NotificationModel;
-use SendEmail, Tpl, Meta, UserData;
+use SendEmail, Meta;
 
-class NotificationController extends MainController
+class NotificationController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = UserData::get();
-    }
-
     public function index()
     {
-        return Tpl::LaRender(
+        return $this->render(
             '/notification/index',
             [
                 'meta'  => Meta::get(__('app.notifications')),

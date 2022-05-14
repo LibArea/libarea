@@ -1,6 +1,6 @@
 <?php
 
-class Config
+class Configuration
 {
     private static $path  = HLEB_SEARCH_DBASE_CONFIG_FILE;
 

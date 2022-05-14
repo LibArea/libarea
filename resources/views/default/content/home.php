@@ -1,7 +1,7 @@
 <main>
   <div class="box-flex justify-between">
     <ul class="nav">
-      <?= Tpl::insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
+      <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
 
     <div class="trigger">
@@ -10,7 +10,7 @@
     <div class="dropdown tooltip"><?= __('meta-main.' . $data['sheet'] . '_info'); ?></div>
   </div>
 
-  <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
+  <?= insert('/content/post/post', ['data' => $data]); ?>
   <?php if (UserData::getUserScroll()) : ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>
@@ -23,7 +23,7 @@
 
 <aside>
   <?php if (!UserData::checkActiveUser()) : ?>
-    <?= Tpl::insert('/_block/sidebar/login'); ?>
+    <?= insert('/_block/sidebar/login'); ?>
   <?php endif; ?>
 
   <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) : ?>

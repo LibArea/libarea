@@ -1,6 +1,6 @@
 <div class="box-flex justify-between">
   <ul class="nav">
-    <?= Tpl::insert('/_block/navigation/nav', ['list' => config('navigation/nav.favorites')]); ?>
+    <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.favorites')]); ?>
   </ul>
 
   <div class="text-sm">

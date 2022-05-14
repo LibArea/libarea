@@ -2,29 +2,20 @@
 
 namespace App\Controllers\Facets;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel};
-use Content, Tpl, Meta, Html, UserData;
+use Content, Meta, Html;
 
-class BlogFacetController extends MainController
+class BlogFacetController extends Controller
 {
     protected $limit = 25;
-
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
 
     // Blog posts
     // Посты в блоге
     public function index($sheet, $type)
     {
-        $pageNumber = Tpl::pageNumber();
-
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'blog');
         Html::pageError404($facet);
@@ -34,7 +25,7 @@ class BlogFacetController extends MainController
             hl_preliminary_exit();
         }
 
-        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $facet['facet_slug']);
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
         $url    = url('blog', ['slug' => $facet['facet_slug']]);
@@ -47,13 +38,13 @@ class BlogFacetController extends MainController
             'url'       => $url,
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/facets/blog',
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pagesCount'    => ceil($this->pagesCount / $this->limit),
+                    'pNum'          => $this->pageNumber,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'facet'         => $facet,

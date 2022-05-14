@@ -2,24 +2,17 @@
 
 namespace App\Controllers\User;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\{InvitationModel, UserModel};
-use Validation, SendEmail, Tpl, Meta, Html, UserData;
+use Validation, SendEmail, Meta, Html;
 
-class InvitationsController extends MainController
+class InvitationsController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // Показ формы создания инвайта
     public function inviteForm()
     {
-        return Tpl::LaRender(
+        return $this->render(
             '/user/invite',
             [
                 'meta'  => Meta::get(__('app.invite')),
@@ -34,7 +27,7 @@ class InvitationsController extends MainController
     // Страница инвайтов пользователя
     function invitationForm()
     {
-        return Tpl::LaRender(
+        return $this->render(
             '/user/invitation',
             [
                 'meta'  => Meta::get(__('app.invites')),

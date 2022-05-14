@@ -2,20 +2,13 @@
 
 namespace App\Controllers\Answer;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\{AnswerModel, PostModel};
-use Validation, Tpl, Meta, Html, UserData;
+use Validation, Meta, Html;
 
-class EditAnswerController extends MainController
+class EditAnswerController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // Форма редактирования answer
     public function index()
     {
@@ -31,7 +24,7 @@ class EditAnswerController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
         Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
 
-        return Tpl::LaRender(
+        return $this->render(
             '/answer/edit-answer',
             [
                 'meta'  => Meta::get(__('app.edit_answer')),

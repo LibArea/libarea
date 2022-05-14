@@ -21,10 +21,6 @@
     <label><?= __('admin.trust_level'); ?></label>
     <div class="update btn btn-primary" data-type="tl"><?= __('admin.update'); ?></div>
   </fieldset>
-  <fieldset>
-    <label><?= __('admin.search'); ?></label>
-    <div class="update update-index btn btn-primary" data-type="indexer"><?= __('admin.rebuild'); ?></div>
-  </fieldset>
   <fieldset class="max-w300">
     <label for="mail"><?= __('admin.email'); ?></label>
     <form action="<?= url('admin.test.mail'); ?>" method="post">
@@ -35,11 +31,5 @@
   </form>
 </div>
 </main>
-<script nonce="<?= $_SERVER['nonce']; ?>">
-document.querySelectorAll(".update-index")
-  .forEach(el => el.addEventListener("click", function (e) {
-      Notiflix.Loading.standard('<?= __('admin.window_close'); ?>...');
-}));       
-</script>
 
 <?= includeTemplate('/view/default/footer'); ?>

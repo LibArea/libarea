@@ -2,21 +2,15 @@
 
 namespace App\Controllers\Post;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
-use Content, Tpl, Html, Meta, UserData;
+use Content, Html, Meta, UserData;
 
-class PostController extends MainController
+class PostController extends Controller
 {
-    private $user;
 
     protected $limit = 25;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
 
     // Full post
     // Полный пост
@@ -26,7 +20,6 @@ class PostController extends MainController
         $id    = Request::getInt('id');
 
         $content = self::presence($type, $id, $slug, $this->user);
-
 
         // Let's record views 
         // Запишем просмотры
@@ -113,7 +106,7 @@ class PostController extends MainController
         ];
 
         if ($type == 'post') {
-            return Tpl::LaRender(
+            return $this->render(
                 '/post/view',
                 [
                     'meta'  => Meta::get(strip_tags($content['post_title']), $description, $m),
@@ -143,7 +136,7 @@ class PostController extends MainController
         ];
 
         $title = $content['post_title'] . ' - ' . __('app.page');
-        return Tpl::LaRender(
+        return $this->render(
             '/post/page-view',
             [
                 'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . __('app.page') . ')', $m),
@@ -216,7 +209,7 @@ class PostController extends MainController
 
         $post['post_content'] = Content::text($post['post_content'], 'text');
 
-        Tpl::insert('/content/post/postcode', ['post' => $post, 'user'   => $this->user]);
+        insert('/content/post/postcode', ['post' => $post, 'user'   => $this->user]);
     }
 
     // Posts by domain
@@ -224,14 +217,13 @@ class PostController extends MainController
     public function domain($sheet)
     {
         $domain     = Request::get('domain');
-        $pageNumber = Tpl::pageNumber();
 
         $site       = PostModel::getDomain($domain, $this->user['id']);
         Html::pageError404($site);
 
         $site['item_content'] = Content::text($site['item_content'], 'line');
 
-        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $site['item_domain']);
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, $sheet, $site['item_domain']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $site['item_domain']);
 
         $m = [
@@ -239,13 +231,13 @@ class PostController extends MainController
             'url'   => url('domain', ['domain' => $domain]),
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/post/link',
             [
                 'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('meta.domain_desc') . ': ' . $domain, $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'posts'         => $posts,
                     'domains'       => PostModel::getDomainTop($domain),
                     'site'          => $site,
@@ -254,7 +246,7 @@ class PostController extends MainController
             ]
         );
     }
-    
+
     // Last 5 pages by content id
     // Последние 5 страниц по id контенту
     public function last($content_id)

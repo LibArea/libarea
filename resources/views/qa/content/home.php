@@ -1,11 +1,11 @@
 <main class="col-two">
   <div class="box-flex ml10">
     <ul class="nav">
-      <?= Tpl::insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
+      <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
   </div>
 
-  <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
+  <?= insert('/content/post/post', ['data' => $data]); ?>
 
   <?php if (UserData::getUserScroll()) : ?>
     <div id="scrollArea"></div>
@@ -19,7 +19,7 @@
 
 <aside>
   <?php if (!UserData::checkActiveUser()) : ?>
-    <?= Tpl::insert('/_block/sidebar/login'); ?>
+    <?= insert('/_block/sidebar/login'); ?>
   <?php endif; ?>
 
   <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) : ?>

@@ -73,7 +73,7 @@
     <?php endforeach; ?>
   <?php else : ?>
     <?php if ($data['type'] != 'all') : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
   <?php endif; ?>
   

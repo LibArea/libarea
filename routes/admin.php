@@ -17,10 +17,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
         Route::get('/manual/update')->module('admin', 'App\Console'); 
         
         Route::getProtect();
-            Route::get('/search/remove')->module('admin', 'App\Search\Search@remove')->name('admin.search.remove');
-            Route::get('/search/search')->module('admin', 'App\Search\Search@search')->name('admin.search.search');
-            Route::get('/search/edit')->module('admin', 'App\Search\Search@edit')->name('admin.search.edit');
-            
             Route::get('/badge/user/create')->module('admin', 'App\Badges@addUser')->name('admin.user.badge.create');
             Route::get('/badge/create')->module('admin', 'App\Badges@create')->name('admin.badge.create');
             Route::get('/badge/edit/{id}')->module('admin', 'App\Badges@change')->name('admin.badge.change');
@@ -30,11 +26,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::endType();
   
     Route::get('/tools')->module('admin', 'App\Tools')->name('admin.tools');
-
-    Route::get('/search')->module('admin', 'App\Search\Search')->name('admin.search');
-    Route::get('/search/query')->module('admin', 'App\Search\Search@query')->name('admin.search.query');
-    Route::get('/search/edit/{id}')->module('admin', 'App\Search\Search@editForm')->where(['ip' => '[0-9].+'])->name('admin.search.edit.form');
-    Route::get('/search/schemas')->module('admin', 'App\Search\Search@schemas')->name('admin.search.schemas');
 
     Route::get('/users/ban')->module('admin', 'App\Users', ['ban'])->name('admin.users.ban');
     Route::get('/users/{id}/edit')->module('admin', 'App\Users@edit', ['edit'])->name('admin.user.edit');
@@ -68,5 +59,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/css')->module('admin', 'App\Home@css')->name('admin.css');
     Route::get('/logs/search')->module('admin', 'App\Logs@logsSearch')->name('admin.logs.search');
     Route::get('/logs/{page?}')->module('admin', 'App\Logs')->name('admin.logs');
+ 
+    Route::get('/deleted/{page?}')->controller('HomeController', ['deleted'])->name('main.deleted'); 
  
 Route::endGroup();

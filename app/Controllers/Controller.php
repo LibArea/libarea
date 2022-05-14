@@ -1,10 +1,21 @@
 <?php
 
-use Hleb\Constructor\Handlers\Request;
+namespace App\Controllers;
 
-class Tpl
+use Hleb\Constructor\Handlers\Request;
+use Hleb\Scheme\App\Controllers\MainController;
+use UserData;
+
+class Controller extends MainController
 {
-    public static function LaTheme($file)
+    public function __construct()
+    {
+        $this->user = UserData::get();
+        $this->render = self::render($name = '', $params = []);
+        $this->pageNumber = self::pageNumber();
+    }
+
+    public static  function theme($file)
     {
         $tpl_puth = UserData::getUserTheme() . DIRECTORY_SEPARATOR . $file;
 
@@ -15,7 +26,7 @@ class Tpl
         return $tpl_puth;
     }
 
-    public static function LaRender($name, $data = [])
+    public static function render($name, $data = [])
     {
         if (config('general.site_disabled')  && !UserData::checkAdmin()) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
@@ -24,17 +35,12 @@ class Tpl
 
         return render(
             [
-                self::LaTheme('/header'),
-                self::LaTheme('/content' . $name),
-                self::LaTheme('/footer')
+                self::theme('/header'),
+                self::theme('/content' . $name),
+                self::theme('/footer')
             ],
             $data
         );
-    }
-
-    public static function LaIncludeCachedTemplate(string $template, array $params = [])
-    {
-        hleb_include_cached_template(self::LaTheme($template), $params);
     }
 
     public static function insert(string $hlTemplatePath, array $params = [])

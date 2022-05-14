@@ -1,5 +1,5 @@
 <main>
-  <?= Tpl::insert('/content/user/favorite/nav', ['data' => $data]); ?>
+  <?= insert('/content/user/favorite/nav', ['data' => $data]); ?>
 
   <?php if (!empty($data['tags'])) : ?>
     <div class="mb15">
@@ -69,7 +69,7 @@
       </div>
     <?php endforeach; ?>
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_favorites'), 'icon' => 'bi-bookmark']); ?>
+    <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_favorites'), 'icon' => 'bi-bookmark']); ?>
   <?php endif; ?>
 </main>
 <aside>

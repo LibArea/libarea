@@ -6,7 +6,7 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
 
 <div id="contentWrapper">
   <main>
-    <?= Tpl::insert('/_block/navigation/breadcrumbs', [
+    <?= insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
             'name' => __('web.catalog'),

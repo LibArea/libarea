@@ -9,13 +9,13 @@
 <?php endif; ?>
 
 <?php if (!empty($data['high_topics'])) : ?>
-  <?= Tpl::insert('/_block/sidebar/topic_block', ['data' => $data['high_topics'], 'lang' => 'upper']); ?>
+  <?= insert('/_block/sidebar/topic_block', ['data' => $data['high_topics'], 'lang' => 'upper']); ?>
 <?php endif; ?>
 
 <?php if (!empty($data['low_topics'])) : ?>
-  <?= Tpl::insert('/_block/sidebar/topic_block', ['data' => $data['low_topics'], 'lang' => 'subtopics']); ?>
+  <?= insert('/_block/sidebar/topic_block', ['data' => $data['low_topics'], 'lang' => 'subtopics']); ?>
 <?php endif; ?>
 
 <?php if (!empty($data['low_matching'])) : ?>
-  <?= Tpl::insert('/_block/sidebar/topic_block', ['data' => $data['low_matching'], 'lang' => 'related']); ?>
+  <?= insert('/_block/sidebar/topic_block', ['data' => $data['low_matching'], 'lang' => 'related']); ?>
 <?php endif; ?>

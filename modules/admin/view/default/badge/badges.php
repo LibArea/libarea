@@ -45,7 +45,7 @@
       <?php endforeach; ?>
     </table>
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 </div>
 </div>

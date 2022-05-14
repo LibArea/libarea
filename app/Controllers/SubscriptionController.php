@@ -2,20 +2,11 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SubscriptionModel;
-use UserData;
 
-class SubscriptionController extends MainController
+class SubscriptionController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = UserData::get();
-    }
-
     public function index()
     {
         $content_id = Request::getPostInt('content_id');

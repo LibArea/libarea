@@ -8,7 +8,7 @@
 
   <div class="box-flex justify-between">
     <ul class="nav">
-      <?= Tpl::insert(
+      <?= insert(
         '/_block/navigation/nav',
         [
           'list' => [

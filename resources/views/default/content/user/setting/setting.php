@@ -1,5 +1,5 @@
 <main>
-  <?= Tpl::insert('/content/user/setting/nav', ['data' => $data]); ?>
+  <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
     <form class="max-w780" action="<?= url('setting.edit'); ?>" method="post" enctype="multipart/form-data">
@@ -23,7 +23,7 @@
         <div class="help">0 - 11 <?= __('app.characters'); ?></div>
       </fieldset>
 
-      <?php Tpl::insert('/_block/form/textarea', [
+      <?php insert('/_block/form/textarea', [
         'title'     => __('app.about_me'),
         'type'      => 'text',
         'name'      => 'about',
@@ -61,7 +61,7 @@
         </select>
       </fieldset>
 
-      <?= Tpl::insert('/_block/form/radio', [
+      <?= insert('/_block/form/radio', [
         'data' => [
           [
             'title'     => __('app.endless_scroll'),

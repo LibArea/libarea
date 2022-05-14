@@ -2,12 +2,12 @@
 
 namespace App\Controllers\Auth;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\UserModel;
-use Validation, Tpl, Meta;
+use Validation, Meta;
 
-class LoginController extends MainController
+class LoginController extends Controller
 {
     // Отправка запроса авторизации
     public function index()
@@ -61,7 +61,7 @@ class LoginController extends MainController
             'url'   => url('login'),
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/auth/login',
             [
                 'meta'  => Meta::get(__('app.sign_in'), __('app.login_info'), $m),

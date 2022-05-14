@@ -2,11 +2,10 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 
-class AgentController extends MainController
+class AgentController extends Controller
 {
     public function set($uid)
     {

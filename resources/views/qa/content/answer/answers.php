@@ -3,12 +3,12 @@
 
   <?php if (!empty($data['answers'])) : ?>
     <div class="box">
-      <?= Tpl::insert('/content/answer/answer', ['data' => $data]); ?>
+      <?= insert('/content/answer/answer', ['data' => $data]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/answers'); ?>
 
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'bi-info-lg']); ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 </main>
 <aside>
@@ -16,4 +16,4 @@
     <?= __('meta.answers_desc'); ?>
   </div>
 </aside>
-<?= Tpl::insert('/_block/js-msg-flag'); ?>
+<?= insert('/_block/js-msg-flag'); ?>

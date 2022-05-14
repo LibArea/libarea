@@ -2,21 +2,14 @@
 
 namespace App\Controllers\Post;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use UploadImage, Validation, Tpl, Meta, Html, UserData;
+use UploadImage, Validation, Meta, Html, UserData;
 
-class EditPostController extends MainController
+class EditPostController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // Форма редактирования post
     public function index()
     {
@@ -40,7 +33,7 @@ class EditPostController extends MainController
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
-        return Tpl::LaRender(
+        return $this->render(
             '/post/edit',
             [
                 'meta'  => Meta::get(__('app.edit_' . $post['post_type'])),

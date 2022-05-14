@@ -26,7 +26,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
         </div>
 
         <div class="relative max-w300">
-          <?= Tpl::insert('/_block/facet/focus-users', [
+          <?= insert('/_block/facet/focus-users', [
             'topic_focus_count' => $blog['facet_focus_count'],
             'focus_users'       => $data['focus_users'] ?? '',
           ]); ?>
@@ -37,7 +37,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
 
     <div class="flex gap">
       <main class="col-two">
-        <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
+        <?= insert('/content/post/post', ['data' => $data]); ?>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>
       <aside>

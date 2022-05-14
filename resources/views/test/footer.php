@@ -10,4 +10,4 @@
   </div>
 </footer>
 
-<?= Tpl::insert('/scripts'); ?>
+<?= insert('/scripts'); ?>

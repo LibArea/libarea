@@ -19,7 +19,7 @@
                     <?php if (empty($answer['edit'])) : ?>
                       (<?= __('app.ed'); ?>.)
                     <?php endif; ?>
-                    <?= Tpl::insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
+                    <?= insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
                   </div>
                   <a class="qa-login" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
                 </div>
@@ -81,7 +81,7 @@
                     <span class="lowercase gray-600">
                       &nbsp; <?= Html::langDate($comment['date']); ?>
                     </span>
-                    <?= Tpl::insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
+                    <?= insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
                   </span>
 
                   <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
@@ -124,19 +124,19 @@
   </div>
 <?php else : ?>
   <?php if ($post['post_closed'] != 1) : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_answers'), 'icon' => 'bi-info-lg']); ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_answers'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 <?php endif; ?>
 
 <?php if (!empty($otvet)) : ?>
-  <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.you_answered'), 'icon' => 'bi-info-lg']); ?>
+  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.you_answered'), 'icon' => 'bi-info-lg']); ?>
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
       <form class="mb15" action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
-        <?= Tpl::insert('/_block/form/editor', [
+        <?= insert('/_block/form/editor', [
           'height'  => '250px',
           'id'      => $post['post_id'],
           'type'    => 'answer',

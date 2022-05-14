@@ -2,26 +2,19 @@
 
 namespace App\Controllers\Facets;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\{FacetModel, SubscriptionModel};
-use Validation, Tpl, Meta, UserData;
+use Validation, Meta, UserData;
 
-class AddFacetController extends MainController
+class AddFacetController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // Add form topic | blog | category
     public function index($type)
     {
         self::limitFacer($type, 'redirect');
 
-        return Tpl::LaRender(
+        return $this->render(
             '/facets/add',
             [
                 'meta'  => Meta::get(__('app.add_' . $type)),

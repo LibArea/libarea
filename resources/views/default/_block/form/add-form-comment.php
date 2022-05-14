@@ -2,7 +2,7 @@
   <?php if (UserData::checkActiveUser()) : ?>
     <form action="<?= url('content.create', ['type' => 'comment']); ?>" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
-      <textarea rows="5" minlength="6" placeholder="<?= __('app.markdown'); ?>..." name="comment"></textarea>
+      <textarea id="qcomment" rows="5" minlength="6" placeholder="<?= __('app.markdown'); ?>..." name="comment"></textarea>
       <fieldset>
         <input type="hidden" name="answer_id" id="answer_id" value="<?= $data['answer_id']; ?>">
         <input type="hidden" name="comment_id" id="comment_id" value="<?= $data['comment_id']; ?>">

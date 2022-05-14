@@ -2,20 +2,12 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{ContentModel, ActionModel, AuditModel, NotificationModel, PostModel};
 use UserData, Html, Validation;
 
-class AuditController extends MainController
+class AuditController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // Check the freeze and the amount of content per day 
     // Проверим заморозку и количество контента в день
     public function placementSpeed($content, $type)

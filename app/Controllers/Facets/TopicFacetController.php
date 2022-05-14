@@ -2,29 +2,20 @@
 
 namespace App\Controllers\Facets;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
-use Tpl, Meta, Html, UserData;
+use Meta, Html;
 
-class TopicFacetController extends MainController
+class TopicFacetController extends Controller
 {
     protected $limit = 25;
-
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = UserData::get();
-    }
 
     // Posts in the topic 
     // Посты по теме
     public function index($sheet, $type)
     {
-        $pageNumber = Tpl::pageNumber();
-
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
         Html::pageError404($facet);
@@ -34,7 +25,7 @@ class TopicFacetController extends MainController
             hl_preliminary_exit();
         }
 
-        $posts      = FeedModel::feed($pageNumber, $this->limit, $this->user, $sheet, $facet['facet_slug']);
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
         $url    = url('topic', ['slug' => $facet['facet_slug']]);
@@ -52,13 +43,13 @@ class TopicFacetController extends MainController
             'url'        => $url,
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/facets/topic',
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'facet'         => $facet,
@@ -92,7 +83,7 @@ class TopicFacetController extends MainController
             'url'        => url('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/facets/info',
             [
                 'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
@@ -127,7 +118,7 @@ class TopicFacetController extends MainController
             'url'        => url('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/facets/writers',
             [
                 'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
@@ -155,6 +146,6 @@ class TopicFacetController extends MainController
 
         $users      = FacetModel::getFocusUsers($topic_id, 15);
 
-        return Tpl::insert('/content/facets/followers', ['users' => $users]);
+        return insert('/content/facets/followers', ['users' => $users]);
     }
 }

@@ -2,20 +2,12 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\FolderModel;
-use UserData, Validation;
+use Validation;
 
-class FolderController extends MainController
+class FolderController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = UserData::get();
-    }
-
     public function get($type)
     {
         FolderModel::get($type, $this->user['id']);

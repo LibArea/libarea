@@ -2,31 +2,22 @@
 
 namespace App\Controllers\User;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{PostModel, FolderModel};
-use Tpl, Meta, Html, UserData;
+use Meta, Html;
 
-class UserController extends MainController
+class UserController extends Controller
 {
-    private $user;
-
     protected $limit = 40;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
 
     // All users
     // Все пользователи
     function index($sheet)
     {
-        $pageNumber = Tpl::pageNumber();
-
         $usersCount = UserModel::getUsersAllCount();
-        $users      = UserModel::getUsersAll($pageNumber, $this->limit, $this->user['id'], $sheet);
+        $users      = UserModel::getUsersAll($this->pageNumber, $this->limit, $this->user['id'], $sheet);
         Html::pageError404($users);
 
         $m = [
@@ -34,7 +25,7 @@ class UserController extends MainController
             'url'   => url($sheet),
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/user/all',
             [
                 'meta'  => Meta::get(__('meta.' . $sheet . '_users'), __('meta.' . $sheet . 'users_desc'), $m),
@@ -42,7 +33,7 @@ class UserController extends MainController
                     'sheet'         => $sheet,
                     'type'          => 'users',
                     'pagesCount'    => ceil($usersCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'users'         => $users
                 ]
             ]
@@ -65,7 +56,7 @@ class UserController extends MainController
             $result[$ind]   = $row;
         }
 
-        return Tpl::LaRender(
+        return $this->render(
             '/user/favorite/all',
             [
                 'meta'  => Meta::get(__('app.favorites')),
@@ -89,7 +80,7 @@ class UserController extends MainController
 
         $folders = FolderModel::get('favorite', $this->user['id']);
 
-        return Tpl::LaRender(
+        return $this->render(
             '/user/favorite/folders',
             [
                 'meta'  => Meta::get(__('app.folders')),
@@ -105,7 +96,7 @@ class UserController extends MainController
 
     public function foldersFavorite()
     {
-        return Tpl::LaRender(
+        return $this->render(
             '/user/favorite/all',
             [
                 'meta'  => Meta::get(__('app.favorites')),
@@ -122,7 +113,7 @@ class UserController extends MainController
     // Страница черновиков участника
     function drafts()
     {
-        return Tpl::LaRender(
+        return $this->render(
             '/user/draft',
             [
                 'meta'  => Meta::get(__('app.drafts')),
@@ -139,7 +130,7 @@ class UserController extends MainController
     // Страница предпочтений пользователя
     public function subscribed()
     {
-        return Tpl::LaRender(
+        return $this->render(
             '/user/favorite/subscribed',
             [
                 'meta'  => Meta::get(__('app.subscribed')),
@@ -161,7 +152,7 @@ class UserController extends MainController
         $post       = PostModel::getPost($user['my_post'], 'id', $this->user);
         $badges     = BadgeModel::getBadgeUserAll($user_id);
 
-        Tpl::insert(
+        insert(
             '/content/user/card',
             [
                 'user'      => $user,

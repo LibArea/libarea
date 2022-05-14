@@ -3,27 +3,19 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\{PostModel, AnswerModel, CommentModel};
 use Modules\Admin\App\Models\LogModel;
-use UserData, Meta, Tpl;
+use Meta;
 
-class Audits
+class Audits extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = UserData::get();
-    }
-
     protected $limit = 55;
 
     public function index($sheet, $type)
     {
-        $pageNumber = Tpl::pageNumber();
-
         $pagesCount = LogModel::getAuditsAllCount($sheet, $type);
-        $audits     = LogModel::getAuditsAll($pageNumber, $this->limit, $sheet, $type);
+        $audits     = LogModel::getAuditsAll($this->pageNumber, $this->limit, $sheet, $type);
 
         $result = [];
         foreach ($audits  as $ind => $row) {
@@ -48,7 +40,7 @@ class Audits
                 'data' => [
                     'type'          => $type,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'audits'        => $result,
                 ]
             ]

@@ -1,4 +1,4 @@
-<?= Tpl::insert('/header', ['data' => $data, 'meta' => $meta]); ?>
+<?= insert('/header', ['data' => $data, 'meta' => $meta]); ?>
 
 <main>
   <div class="box-flex justify-between">
@@ -39,7 +39,7 @@
 
     <?php else : ?>
       <div class="mt15">
-        <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('team.no_teams'), 'icon' => 'bi-info-lg']); ?>
+        <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('team.no_teams'), 'icon' => 'bi-info-lg']); ?>
       </div>
     <?php endif; ?>
   </div>
@@ -56,4 +56,4 @@
   </div>
   <aside>
 
-  <?= Tpl::insert('/footer'); ?>
+  <?= insert('/footer'); ?>

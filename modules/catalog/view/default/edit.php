@@ -21,7 +21,7 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
   <main>
     <div class="max-w640">
 
-    <?= Tpl::insert('/_block/navigation/breadcrumbs', [
+    <?= insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
             'name' => __('web.catalog'),
@@ -46,7 +46,7 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
 
         <?= $form->build_form(); ?>
 
-        <?= Tpl::insert('/_block/form/select/related-posts', [
+        <?= insert('/_block/form/select/related-posts', [
           'data'      => $data,
           'action'    => 'edit',
           'type'      => 'post',
@@ -55,7 +55,7 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
         ]); ?>
         
          <?php if (UserData::checkAdmin()) { ?>
-            <?= Tpl::insert('/_block/form/select/user', [
+            <?= insert('/_block/form/select/user', [
               'user'          => $data['user'],
               'action'        => 'user',
               'type'          => 'user',

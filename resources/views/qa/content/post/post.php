@@ -3,7 +3,7 @@
   foreach ($data['posts'] as $post) :
     $n++; ?>
     <?php if (UserData::getUserId() == 0 && $n == 6) : ?>
-      <?= Tpl::insert('/_block/no-login-screensaver'); ?>
+      <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="flex br-bottom p10 article_<?= $post['post_id']; ?>">
@@ -31,7 +31,7 @@
         <a href="<?= $post_url; ?>">
           <span class="font-normal text-xl">
             <?= $post['post_title']; ?>
-            <?= Tpl::insert('/content/post/post-title', ['post' => $post]); ?>
+            <?= insert('/content/post/post-title', ['post' => $post]); ?>
           </span>
         </a>
         </div>
@@ -65,7 +65,7 @@
   <?php endforeach; ?>
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
-    <?= Tpl::insert('/_block/recommended-topics', ['data' => $data]); ?>
+    <?= insert('/_block/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>  
   <div class="m10 p15 center gray-600">
     <i class="bi-journal-richtext block text-8xl"></i>

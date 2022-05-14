@@ -11,7 +11,7 @@
   <form action="<?= url('content.change', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
     <?= csrf_field() ?>
 
-    <?= Tpl::insert('/_block/form/editor', ['height'  => '300px', 'content' => $data['content'], 'type' => 'answer', 'id' => $data['post']['post_id']]); ?>
+    <?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $data['content'], 'type' => 'answer', 'id' => $data['post']['post_id']]); ?>
 
     <div class="pt5 clear">
       <input type="hidden" name="answer_id" value="<?= $data['answer_id']; ?>">

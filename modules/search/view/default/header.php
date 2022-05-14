@@ -3,11 +3,11 @@
 use Hleb\Constructor\Handlers\Request;
 
 Request::getHead()->addStyles('/assets/css/style.css?09');
-$uri = $data['type'] ?? 'all';
+$uri = $data['type'] ?? 'post';
 $q = $data['q'];
 ?>
 
-<?= Tpl::insert('/meta', ['meta' => $meta]); ?>
+<?= insert('/meta', ['meta' => $meta]); ?>
 
 <body <?php if (Request::getCookie('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
   <header>
@@ -21,10 +21,6 @@ $q = $data['q'];
           <a class="tabs black mr15" href="/">
             <i class="bi-house"></i>
             <?= __('search.to_website'); ?>
-          </a>
-
-          <a class="tabs<?php if ($uri == 'all') : ?> active<?php endif; ?>" href="<?= url('search.go'); ?>?q=<?= $q; ?>">
-            <?= __('search.all'); ?>
           </a>
 
           <a class="tabs<?php if ($uri == 'post') : ?> active<?php endif; ?>" href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=post">
@@ -54,7 +50,7 @@ $q = $data['q'];
                   <?= UserData::getUserLogin(); ?>
                 </div>
                 <ul class="dropdown">
-                  <?= Tpl::insert('/_block/navigation/menu', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>
+                  <?= insert('/_block/navigation/menu', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>
                 </ul>
               </div>
             <?php endif; ?>

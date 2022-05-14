@@ -1,4 +1,4 @@
-<?= Tpl::insert('/header', ['data' => $data, 'meta' => $meta]); ?>
+<?= insert('/header', ['data' => $data, 'meta' => $meta]); ?>
 <?php $team = $data['team']; ?>
 
 <main>
@@ -34,4 +34,4 @@
   </div>
 </main>
 
-<?= Tpl::insert('/footer'); ?>
+<?= insert('/footer'); ?>

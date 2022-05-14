@@ -1,7 +1,7 @@
 <main>
   <div class="box-flex justify-between">
     <ul class="nav">
-      <?= Tpl::insert('/_block/navigation/nav', ['list' => config('navigation/nav.answers')]); ?>
+      <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.answers')]); ?>
     </ul>
     <div class="trigger">
       <i class="bi-info-square gray-600"></i>
@@ -13,11 +13,11 @@
 
   <?php if (!empty($data['answers'])) : ?>
     <div class="box">
-      <?= Tpl::insert('/content/answer/answer', ['data' => $data]); ?>
+      <?= insert('/content/answer/answer', ['data' => $data]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/answers'); ?>
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'bi-info-lg']); ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'bi-info-lg']); ?>
   <?php endif; ?>
 </main>
 <aside>
@@ -25,4 +25,4 @@
     <?= __('meta.answers_desc'); ?>
   </div>
 </aside>
-<?= Tpl::insert('/_block/js-msg-flag'); ?>
+<?= insert('/_block/js-msg-flag'); ?>

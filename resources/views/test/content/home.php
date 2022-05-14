@@ -1,5 +1,5 @@
 <main class="w-100">
-  <?= Tpl::insert('/content/post/post', ['data' => $data]); ?>
+  <?= insert('/content/post/post', ['data' => $data]); ?>
   <?php if (UserData::getUserScroll()) : ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>

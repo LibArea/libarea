@@ -3,7 +3,7 @@
 namespace Modules\Admin\App;
 
 use Modules\Admin\App\Models\LogModel;
-use Meta, Tpl;
+use Meta;
 
 class Logs
 {
@@ -15,9 +15,7 @@ class Logs
     // Журнал логов действий участников
     public function index()
     {
-        $pageNumber = Tpl::pageNumber();
-
-        $logs       = LogModel::getLogs($pageNumber, $this->limit);
+        $logs       = LogModel::getLogs($this->pageNumber, $this->limit);
         $pagesCount = LogModel::getLogsCount();
 
         return view(
@@ -26,7 +24,7 @@ class Logs
                 'meta'  => Meta::get(__('admin.logs')),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'type'          => 'logs',
                     'logs'          => $logs,
                 ]

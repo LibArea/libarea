@@ -2,33 +2,19 @@
 
 namespace App\Controllers;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\HomeModel;
-use Tpl, UserData, Meta;
+use Meta;
 
-class HomeController extends MainController
+class HomeController extends Controller
 {
     protected $limit = 25;
 
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     public function index($sheet)
     {
-        $pageNumber   = Tpl::pageNumber();
-
-        if ($sheet == 'main.deleted' && !UserData::checkAdmin()) {
-            redirect('/');
-        }
-
         $latest_answers = HomeModel::latestAnswers($this->user);
         $topics_user    = HomeModel::subscription($this->user['id']);
         $pagesCount     = HomeModel::feedCount($topics_user, $this->user, $sheet);
-        $posts          = HomeModel::feed($pageNumber, $this->limit, $topics_user, $this->user, $sheet);
+        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $this->user, $sheet);
 
         $topics = [];
         if (count($topics_user) == 0) {
@@ -45,13 +31,13 @@ class HomeController extends MainController
             'url'       => $sheet == 'top' ? '/top' : '/',
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/home',
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
-                    'pNum'              => $pageNumber,
+                    'pNum'              => $this->pageNumber,
                     'sheet'             => $sheet,
                     'type'              => 'main',
                     'latest_answers'    => $latest_answers,
@@ -67,16 +53,14 @@ class HomeController extends MainController
     // Бесконечный скролл
     public function scroll()
     {
-        $pageNumber = Tpl::pageNumber();
         $topics_user    = HomeModel::subscription($this->user['id']);
-        $posts          = HomeModel::feed($pageNumber, $this->limit, $topics_user, $this->user, 'main.feed');
+        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $this->user, 'main.feed');
 
-        Tpl::insert(
+        $this->insert(
             '/content/post/postscroll',
             [
-                'user'  => $this->user,
                 'data'  => [
-                    'pages' => $pageNumber,
+                    'pages' => $this->pageNumber,
                     'sheet' => 'main.feed',
                     'posts' => $posts,
 

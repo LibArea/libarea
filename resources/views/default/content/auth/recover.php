@@ -9,7 +9,7 @@
         <input type="email" required="" name="email">
       </fieldset>
 
-      <?= Tpl::insert('/_block/captcha'); ?>
+      <?= insert('/_block/captcha'); ?>
 
       <fieldset>
         <?= Html::sumbit(__('app.reset')); ?>

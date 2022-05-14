@@ -82,7 +82,6 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
  
     Route::get('/all/{page?}')->controller('HomeController', ['all'])->name('main.all');
     
-    Route::get('/deleted/{page?}')->controller('HomeController', ['deleted'])->name('main.deleted');
 Route::endGroup();
 
 Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();

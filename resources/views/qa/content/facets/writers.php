@@ -1,6 +1,6 @@
 <?php $topic = $data['facet']; ?>
 <main class="col-two">
-  <?= Tpl::insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
+  <?= insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
   <div class="box">
     <?php if (!empty($data['writers'])) : ?>
       <div class="flex items-center m10">
@@ -36,5 +36,5 @@
     <i class="bi-calendar-week mr5 middle"></i>
     <span class="middle"><?= Html::langDate($topic['facet_add_date']); ?></span>
   </div>
-  <?= Tpl::insert('/_block/sidebar/topic', ['data' => $data]); ?>
+  <?= insert('/_block/sidebar/topic', ['data' => $data]); ?>
 </aside>

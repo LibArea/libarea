@@ -15,7 +15,7 @@ $form->html_form(UserData::getUserTl(), config('form/auth.register'));
 
       <?= $form->build_form(); ?>
 
-      <?= Tpl::insert('/_block/captcha'); ?>
+      <?= insert('/_block/captcha'); ?>
 
       <fieldset>
         <?= Html::sumbit(__('app.registration')); ?>

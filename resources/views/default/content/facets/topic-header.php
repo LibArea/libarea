@@ -22,7 +22,7 @@
       ]); ?>
     </div>
 
-    <?= Tpl::insert('/_block/facet/focus-users', [
+    <?= insert('/_block/facet/focus-users', [
       'topic_focus_count' => $topic['facet_focus_count'],
       'focus_users'       => $data['focus_users'] ?? '',
     ]); ?>
@@ -33,7 +33,7 @@
   <p class="m0 text-xl mb-none"><?= __('app.' . $data['type']); ?></p>
   <ul class="nav">
 
-    <?= Tpl::insert(
+    <?= insert(
       '/_block/navigation/nav',
       [
         'list' =>  [

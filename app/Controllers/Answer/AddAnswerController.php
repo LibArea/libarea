@@ -2,20 +2,13 @@
 
 namespace App\Controllers\Answer;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, PostModel};
-use Content, Validation, UserData, Html;
+use Content, Validation, Html;
 
-class AddAnswerController extends MainController
+class AddAnswerController extends Controller
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     public function create()
     {
         $post_id = Request::getPostInt('post_id');

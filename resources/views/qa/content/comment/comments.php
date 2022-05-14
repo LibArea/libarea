@@ -3,12 +3,12 @@
 
   <?php if (!empty($data['comments'])) : ?>
     <div class="box">
-      <?= Tpl::insert('/content/comment/comment', ['answer' => $data['comments']]); ?>
+      <?= insert('/content/comment/comment', ['answer' => $data['comments']]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/comments'); ?>
 
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'bi bi-info-lg']); ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'bi bi-info-lg']); ?>
   <?php endif; ?>
 </main>
 <aside>
@@ -16,4 +16,4 @@
     <?= __('meta.comments_desc'); ?>
   </div>
 </aside>
-<?= Tpl::insert('/_block/js-msg-flag'); ?>
+<?= insert('/_block/js-msg-flag'); ?>

@@ -1,4 +1,4 @@
-<?= Tpl::insert('/header', ['data' => $data, 'meta' => $meta]); ?>
+<?= insert('/header', ['data' => $data, 'meta' => $meta]); ?>
 
 <main class="col-two">
   <div class="box">
@@ -15,7 +15,7 @@
       </fieldset>
       <fieldset>
         <label for="name"><?= __('team.description'); ?></label>
-        <?= Tpl::insert('/_block/form/editor', ['height'  => '250px', 'type' => 'content', 'id' => 0]); ?>
+        <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'content', 'id' => 0]); ?>
       </fieldset>
       <p><?= Html::sumbit(__('team.add')); ?></p>
     </form>
@@ -23,4 +23,4 @@
   </div>
 </main>
 
-<?= Tpl::insert('/footer'); ?>
+<?= insert('/footer'); ?>

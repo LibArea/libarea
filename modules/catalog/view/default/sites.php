@@ -1,6 +1,6 @@
 <?= includeTemplate('/view/default/header', ['data' => $data, 'meta' => $meta]); ?>
 <div class="item-cat">
-  <?= Tpl::insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]); ?>
+  <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]); ?>
 
   <h1>
     <?= $data['category']['facet_title']; ?>
@@ -77,7 +77,7 @@
     <?php if (!empty($data['items'])) : ?>
       <?= includeTemplate('/view/default/site', ['data' => $data, 'screening' => $data['screening']]); ?>
     <?php else : ?>
-      <?= Tpl::insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
 
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/' . $data['screening']); ?>

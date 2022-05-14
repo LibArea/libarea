@@ -1,7 +1,7 @@
 <main>
   <div class="box-flex">
     <ul class="nav">
-      <?= Tpl::insert('/_block/navigation/nav', ['list' => config('navigation/nav.favorites')]); ?>
+      <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.favorites')]); ?>
     </ul>
   </div>
 
@@ -18,7 +18,7 @@
       <?php endforeach; ?>
     </div>
   <?php else : ?>
-    <?= Tpl::insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'bi-journal-richtext']); ?>
+    <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'bi-journal-richtext']); ?>
   <?php endif; ?>
 
 </main>

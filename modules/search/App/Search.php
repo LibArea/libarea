@@ -4,30 +4,20 @@ namespace Modules\Search\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Search\App\Models\SearchModel;
-use Modules\Search\App\Query\QueryBuilder;
-use Modules\Search\App\Query\QuerySegment;
-use Modules\Search\App\Engine;
-use UserData, Meta, Translate;
+use Wamania\Snowball\StemmerFactory;
+use UserData, Meta;
 
 class Search
 {
     protected $limit = 10;
 
-    public function __construct()
-    {
-        $this->engine = new Engine();
-    }
-
     public function index()
     {
-        // print_r(__('title'));
-        $title =  __('search.title');
-        $desc =   __('search.desc', ['name' => config('meta.name')]);
-
+        $desc  = __('search.desc', ['name' => config('meta.name')]);
         return view(
             '/view/default/home',
             [
-                'meta'  => Meta::get($title, $desc),
+                'meta'  => Meta::get(__('search.title'), $desc),
                 'data'  => [
                     'type' => 'search',
 
@@ -41,63 +31,40 @@ class Search
         $pageNumber = self::pageNumber(Request::getGetInt('page'));
 
         $q      = Request::getGet('q');
-        $cat    = Request::getGet('cat');
+        $type   = Request::getGet('cat');
 
-        $allowed = ['post', 'website', 'all'];
-        if (!in_array($cat, $allowed)) {
-            $cat = 'all';
+        if (!in_array($type, ['post', 'website'])) {
+            $type = 'post';
         }
 
         $sw = microtime(true);
 
         if ($q) {
-            $segments = [];
-            $isFacetSearching = false;
 
-            /* TODO: If we introduce facets
-           foreach (Request::getGet() as $field => $value) {
-                if (strpos($field, 'facet-') === 0) {
-                    $isFacetSearching = true;
-                    $facetField = substr($field, 6);
-                    $subSeg = [];
-                    foreach ($value as $v) {
-                        $subSeg[] = QuerySegment::exactSearch($facetField, $v);
-                    }
-                    $segments[] = QuerySegment::or($subSeg);
-                }
-            } */
-
-            if ($cat != 'all') {
-                $isFacetSearching = false;
-                $segments =  QuerySegment::or(QuerySegment::exactSearch('cat', $cat));
+            $lang = config('general.lang');
+            if (!in_array($lang, ['ru', 'en', 'ro', 'fr', 'de'])) {
+                $lang = 'en';
             }
 
-            $query = new QueryBuilder(QuerySegment::search($q, QuerySegment::and($segments)));
-            $query->setLimit(Request::getGetInt('limit') == 0 ? 10 : Request::getGetInt('limit'));
+            $stemmer = StemmerFactory::create($lang);
+            $stem = $stemmer->stem($q);
 
-            $start  = ($pageNumber - 1) * $this->limit;
-            $query->setOffset($start);
-
-            if (Request::getGet('connex') ?? false) $query->enableConnex();
-            $facets = Request::getGet('facets');
-            if (!empty($facets)) {
-                foreach (explode(',', $facets) as $facet) {
-                    $query->addFacet($facet);
+            /* $words = explode(' ', $q);
+            foreach($words as $key => $word) {
+                if(strlen($word) >= 3) {
+                    $words[$key] = '+' . $word . '*';
                 }
             }
+            $q = implode(' ', $words); */
 
-            if ($isFacetSearching) {
-                $results = $this->engine->search($q, $query->getFilters());
-            } else {
-                $results = $this->engine->search($query);
-            }
+            $results = self::search($pageNumber, $this->limit, $stem, $type);
+            $count =  SearchModel::getSearchCount($stem, $type);
 
-            $count = $results['numFound'] ?? 0;
             $user_id = UserData::getUserId();
             self::setLogs(
                 [
                     'request'       => $q,
-                    'action_type'   => $cat,
+                    'action_type'   => $type,
                     'add_ip'        => Request::getRemoteAddress(),
                     'user_id'       => $user_id > 0 ? $user_id : 1,
                     'count_results' => $count ?? 0,
@@ -105,19 +72,19 @@ class Search
             );
         }
 
-        $count = $results['numFound'] ?? 0;
-        $facet = $cat == 'post' ? 'topic' : 'category';
+        $facet = $type == 'post' ? 'topic' : 'category';
         return view(
             '/view/default/search',
             [
-                'meta'  => Meta::get(__('search')),
+                'meta'  => Meta::get(__('search.title')),
                 'data'  => [
                     'results'       => $results ?? false,
-                    'type'          => $cat,
+                    'type'          => $type,
                     'sheet'         => 'admin',
                     'q'             => $q,
                     'tags'          => self::searchTags($q, $facet, 4),
                     'sw'            => (microtime(true) - $sw ?? 0) * 1000,
+                    'count'         => $count,
                     'pagesCount'    => ceil($count / $this->limit),
                     'pNum'          => $pageNumber,
                 ]

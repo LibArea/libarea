@@ -2,32 +2,24 @@
 
 namespace App\Controllers\Comment;
 
-use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, CommentModel, PostModel};
-use Content, Validation, Tpl, Html, UserData;
+use Content, Validation, Html;
 
-class AddCommentController extends MainController
+class AddCommentController extends Controller
 {
-    protected $user;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
-
     // Show the form for adding a comment
     // Покажем форму добавление комментария
     public function index()
     {
-        Tpl::insert(
+        insert(
             '/_block/form/add-form-comment',
             [
                 'data'  => [
                     'answer_id'  => Request::getPostInt('answer_id'),
                     'comment_id' => Request::getPostInt('comment_id'),
                 ],
-                'user' => $this->user
             ]
         );
     }

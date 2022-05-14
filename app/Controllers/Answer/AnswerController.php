@@ -2,42 +2,33 @@
 
 namespace App\Controllers\Answer;
 
-use Hleb\Scheme\App\Controllers\MainController;
+use App\Controllers\Controller;
 use App\Models\AnswerModel;
-use Tpl, Meta, UserData;
+use Meta;
 
-class AnswerController extends MainController
+class AnswerController extends Controller
 {
-    private $user;
-
     protected $limit = 25;
-
-    public function __construct()
-    {
-        $this->user  = UserData::get();
-    }
 
     // All answers
     // Все ответы
     public function index($sheet)
     {
-        $pageNumber = Tpl::pageNumber();
-
         $pagesCount = AnswerModel::getAnswersCount($sheet);
-        $answers    = AnswerModel::getAnswers($pageNumber, $this->limit, $this->user, $sheet);
+        $answers    = AnswerModel::getAnswers($this->pageNumber, $this->limit, $this->user, $sheet);
 
         $m = [
             'og'    => false,
             'url'   => url('answers'),
         ];
 
-        return Tpl::LaRender(
+        return $this->render(
             '/answer/answers',
             [
                 'meta'  => Meta::get(__('meta.all_answers'), __('meta.answers_desc'), $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                     'sheet'         => $sheet,
                     'type'          => 'answers',
                     'answers'       => $answers,

@@ -6,7 +6,7 @@ Request::getHead()->addStyles('/assets/css/style.css?09');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
-<?= Tpl::insert('/meta', ['meta' => $meta]); ?>
+<?= insert('/meta', ['meta' => $meta]); ?>
 
 <body<?php if (Request::getCookie('dayNight') == 'dark') : ?> class="dark" <?php endif; ?>>
 
@@ -80,7 +80,7 @@ $facet  = $data['facet'] ?? false; ?>
                 <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mb-pr0', 'avatar', 'small'); ?>
               </div>
               <ul class="dropdown">
-                <?= Tpl::insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
+                <?= insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
               </ul>
             </div>
 
