@@ -11,7 +11,6 @@ class Controller extends MainController
     public function __construct()
     {
         $this->user = UserData::get();
-        $this->render = self::render($name = '', $params = []);
         $this->pageNumber = self::pageNumber();
     }
 

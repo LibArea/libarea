@@ -49,14 +49,6 @@ class Search
             $stemmer = StemmerFactory::create($lang);
             $stem = $stemmer->stem($q);
 
-            /* $words = explode(' ', $q);
-            foreach($words as $key => $word) {
-                if(strlen($word) >= 3) {
-                    $words[$key] = '+' . $word . '*';
-                }
-            }
-            $q = implode(' ', $words); */
-
             $results = self::search($pageNumber, $this->limit, $stem, $type);
             $count =  SearchModel::getSearchCount($stem, $type);
 

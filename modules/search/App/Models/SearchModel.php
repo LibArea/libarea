@@ -66,32 +66,16 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getSearchCount($query, $type)
     {
-
-        $sql = "SELECT DISTINCT 
+        $sql = "SELECT
                 post_id 
                     FROM posts  
                         WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 and post_type = 'post'
                             AND MATCH(post_title, post_content) AGAINST (:qa)";
 
         if ($type == 'website') {
-            $sql = "SELECT DISTINCT 
-                item_id, 
-                item_title as title, 
-                item_content as content,
-                item_url,
-                item_domain,
-                item_votes as votes,
-                item_count as count,
-                rel.*
-                    FROM facets_items_relation  
-                    LEFT JOIN items ON relation_item_id = item_id 
-                    LEFT JOIN ( SELECT  
-                            relation_item_id,  
-                            GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list  
-                            FROM facets  
-                            LEFT JOIN facets_items_relation on facet_id = relation_facet_id  
-                                GROUP BY relation_item_id  
-                    ) AS rel ON rel.relation_item_id = item_id  
+            $sql = "SELECT
+                item_id 
+                    FROM items 
                             WHERE item_is_deleted = 0
                                 AND MATCH(item_title, item_content, item_domain) AGAINST (:qa)";
         }

@@ -71,13 +71,15 @@
         </a>
       <?php endif; ?>
     </div>
-  <?php else : ?>
+  <?php endif; ?>
+  
+  <?php if (is_array($data['topics'])) : ?>
     <div class="box">
-      <h3 class="uppercase-box"><?= __('app.topics'); ?></h3>
-      <?php foreach (config('facets.default') as $key => $topic) : ?>
-        <a class="flex items-center relative pb10 gray-600" href="<?= $topic['url']; ?>">
-          <img class="img-base" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
-          <?= $topic['name']; ?>
+      <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
+      <?php foreach ($data['topics'] as $key => $recomm) : ?>
+        <a class="flex items-center relative pb10 gray-600" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
+          <?= Html::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+          <?= $recomm['facet_title']; ?>
         </a>
       <?php endforeach; ?>
     </div>
@@ -85,7 +87,8 @@
 
   <div class="sticky top-sm">
     <?php if (!empty($data['latest_answers'])) : ?>
-      <div class="box">
+      <div class="p15">
+        <h3 class="uppercase-box"><?= __('app.answers'); ?></h3>
         <ul class="last-content">
           <?php foreach ($data['latest_answers'] as $answer) : ?>
             <li>

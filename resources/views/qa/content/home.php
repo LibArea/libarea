@@ -23,58 +23,59 @@
   <?php endif; ?>
 
   <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) : ?>
-    <div class="box bg-violet text-sm">
-      <h3 class="uppercase-box"><?= __('app.app.reading'); ?></h3>
-
-      <?php
-      $my = [];
-      $other = [];
-      foreach ($data['topics_user'] as $topic) {
-        if ($topic['facet_user_id'] == UserData::getUserId()) {
-          $my[] = $topic;
-        } else {
-          $other[] = $topic;
-        }
-      }
-      $topics = array_merge($my, $other);
-      $n = 0;
-      foreach ($topics as $key => $topic) :
-        $n++;
-        if ($n > config('facets.quantity_home')) break;
-        $url = url('topic', ['slug' => $topic['facet_slug']]);
-        $blog = '';
-        if ($topic['facet_type'] == 'blog') {
-          $blog = '<sup class="red">b</span>';
-          $url = url('blog', ['slug' => $topic['facet_slug']]);
-        }
-      ?>
-        <div class="flex relative pt5 pb5 items-center justify-between hidden">
-          <a class="gray-600" href="<?= $url; ?>">
-            <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
-            <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
-          </a>
-          <?php if (UserData::getUserId() == $topic['facet_user_id']) : ?>
-            <a class="right gray-600 mt5" title="<?= __('app.add_option', ['name' => __('app.post')]); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
-              <i class="bi-plus-lg text-sm"></i>
+    <div class="box bg-violet">
+      <h3 class="uppercase-box"><?= __('app.reading'); ?></h3>
+      <ul>
+        <?php
+        $my = [];
+        $other = [];
+        foreach ($data['topics_user'] as $topic) :
+          if ($topic['facet_user_id'] == UserData::getUserId()) :
+            $my[] = $topic;
+          else :
+            $other[] = $topic;
+          endif;
+        endforeach;
+        $topics = array_merge($my, $other);
+        $n = 0;
+        foreach ($topics as $key => $topic) :
+          $n++;
+          if ($n > config('facets.quantity_home')) break;
+          $url = url('topic', ['slug' => $topic['facet_slug']]);
+          $blog = '';
+          if ($topic['facet_type'] == 'blog') :
+            $blog = '<sup class="red">b</span>';
+            $url = url('blog', ['slug' => $topic['facet_slug']]);
+          endif;
+        ?>
+          <li class="mb20">
+            <a href="<?= $url; ?>">
+              <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+              <span class="middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
             </a>
-          <?php endif; ?>
-        </div>
-      <?php endforeach; ?>
+            <?php if (UserData::getUserId() == $topic['facet_user_id']) : ?>
+              <a class="right gray-600 mt5" title="<?= __('app.add_option', ['name' => __('app.post')]); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+                <i class="bi-plus-lg text-sm"></i>
+              </a>
+            <?php endif; ?>
+          </li>
+        <?php endforeach; ?>
+      </ul>
       <?php if (count($data['topics_user']) > config('facets.quantity_home')) : ?>
-        <a class="gray block mt5" title="<?= __('app.topics'); ?>" href="<?= url('topics.my'); ?>">
+        <a class="gray-600 block mt5" title="<?= __('app.topics'); ?>" href="<?= url('topics.my'); ?>">
           <?= __('app.see_more'); ?> <i class="bi-chevron-double-right middle"></i>
         </a>
       <?php endif; ?>
     </div>
-  <?php else : ?>
-    <div class="box bg-violet text-sm">
-      <div class="uppercase gray mt5 mb5">
-        <?= __('app.topics'); ?>
-      </div>
-      <?php foreach (config('facets.default') as $key => $topic) : ?>
-        <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $topic['url']; ?>">
-          <img class="img-base" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
-          <span class="ml5"><?= $topic['name']; ?></span>
+  <?php endif; ?>
+  
+  <?php if (is_array($data['topics'])) : ?>
+    <div class="box bg-violet">
+      <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
+      <?php foreach ($data['topics'] as $key => $recomm) : ?>
+        <a class="flex items-center relative pb10 gray-600" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
+          <?= Html::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+          <?= $recomm['facet_title']; ?>
         </a>
       <?php endforeach; ?>
     </div>

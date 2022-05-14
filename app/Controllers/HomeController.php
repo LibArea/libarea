@@ -16,10 +16,9 @@ class HomeController extends Controller
         $pagesCount     = HomeModel::feedCount($topics_user, $this->user, $sheet);
         $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $this->user, $sheet);
 
-        $topics = [];
-        if (count($topics_user) == 0) {
-            $topics = \App\Models\FacetModel::advice($this->user['id']);
-        }
+        // If guest, show default topics      
+        // Если гость, то покажим темы по умолчанию
+        $topics = \App\Models\FacetModel::advice($this->user['id']);
 
         $title = __('meta-main.' . $sheet . '_title', ['name' => config('meta.name')]);
         $description = __('meta-main.' . $sheet . '_desc', ['name' => config('meta.name')]);
@@ -30,6 +29,7 @@ class HomeController extends Controller
             'imgurl'    => config('meta.img_path'),
             'url'       => $sheet == 'top' ? '/top' : '/',
         ];
+
 
         return $this->render(
             '/home',
@@ -43,7 +43,7 @@ class HomeController extends Controller
                     'latest_answers'    => $latest_answers,
                     'topics_user'       => $topics_user,
                     'posts'             => $posts,
-                    'topics'            => $topics,
+                    'topics'            => $topics ?? false,
                 ],
             ],
         );
