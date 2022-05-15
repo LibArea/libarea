@@ -33,6 +33,24 @@
   background-color: #fff;
 }
 
+.tags-xs-yellow {
+  background-color: #fffcd7;
+  border: 1px solid #d5d458;
+  border-radius: 5px;
+  color: #333333;
+  font-size: 8pt;
+  margin-left: 0.25em;
+  padding: 0px 0.4em 1px 0.4em;
+  text-decoration: none;
+}
+
+.tags-xs-blue {
+  background-color: #ddebf9;
+  border-color: #b2ccf0;
+  color: #333333;
+}
+
+/* Для tagify */
 .tags-look .tagify__dropdown__item {
   display: inline-block;
   border-radius: 3px;

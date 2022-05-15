@@ -328,7 +328,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                 facet_count
                     FROM facets
                         WHERE facet_id NOT IN(" . implode(',', $result ?? []) . ")
-                        ORDER BY facet_count DESC LIMIT 6";
+                            AND facet_type = 'topic'
+                                ORDER BY facet_count DESC LIMIT 6";
 
         return DB::run($sql)->fetchAll();
     }

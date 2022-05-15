@@ -47,8 +47,6 @@ return [
     'scroll'            => 'Sul',
     'content'           => 'Conţinut',
     'remove'            => 'Șterge',
-    'rebuild'           => 'Reconstruiți indexul',
-    'window_close'      => 'Fereastra se va închide după reconstrucție',
     'completed'         => 'Comanda finalizată',
     'reward_user'       => 'Recompensați participantul',
     

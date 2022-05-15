@@ -30,7 +30,6 @@ class HomeController extends Controller
             'url'       => $sheet == 'top' ? '/top' : '/',
         ];
 
-
         return $this->render(
             '/home',
             [
@@ -43,7 +42,7 @@ class HomeController extends Controller
                     'latest_answers'    => $latest_answers,
                     'topics_user'       => $topics_user,
                     'posts'             => $posts,
-                    'topics'            => $topics ?? false,
+                    'topics'            => $topics,
                 ],
             ],
         );

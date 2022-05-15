@@ -74,6 +74,7 @@
   <?php endif; ?>
   
   <?php if (is_array($data['topics'])) : ?>
+    <?php if (count($data['topics']) > 0) : ?>
     <div class="box">
       <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
       <?php foreach ($data['topics'] as $key => $recomm) : ?>
@@ -83,6 +84,7 @@
         </a>
       <?php endforeach; ?>
     </div>
+    <?php endif; ?>
   <?php endif; ?>
 
   <div class="sticky top-sm">

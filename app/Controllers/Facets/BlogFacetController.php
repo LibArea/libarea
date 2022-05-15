@@ -43,7 +43,7 @@ class BlogFacetController extends Controller
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
-                    'pagesCount'    => ceil($this->pagesCount / $this->limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,
                     'sheet'         => $sheet,
                     'type'          => $type,

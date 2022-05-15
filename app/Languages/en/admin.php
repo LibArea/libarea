@@ -47,8 +47,6 @@ return [
     'scroll'            => 'Scroll',
     'content'           => 'Content',
     'remove'            => 'Delete',
-    'rebuild'           => 'Rebuild Index',
-    'window_close'      => 'The window will close after rebuilding.',
     'completed'         => 'Command completed',
     'reward_user'       => 'Reward the participant',
     

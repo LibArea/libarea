@@ -47,8 +47,6 @@ return [
     'scroll'            => '滚动',
     'content'           => '内容',
     'remove'            => '移走',
-    'rebuild'           => '重建索引',
-    'window_close'      => '重建后，窗口将关闭',
     'completed'         => '命令被执行',
     'reward_user'       => '奖励参加者',
     
