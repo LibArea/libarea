@@ -42,7 +42,7 @@ class Parser
         $jevix->cfgSetTagIsEmpty(['a', 'iframe']);
 
         // Разрешённые параметры тегов. 
-        $jevix->cfgAllowTagParams('a', ['href' => '#link', 'name' => '#text', 'target' => '#text', 'class' => '#text']);
+        $jevix->cfgAllowTagParams('a', ['href' => '#link']);
 
         $jevix->cfgAllowTagParams('iframe', ['width' => '#int', 'height' => '#int', 'style' => '#text', 'frameborder' => '#int', 'allowfullscreen' => '#text', 'src' => ['#domain' => ['youtube.com', 'yandex.ru', 'rutube.ru', 'vk.com']]]);
 
@@ -78,12 +78,13 @@ class Parser
     {
         $rel = '';
         $url = parse_url($params['href']);
+        
         $host = $url['host'] ?? false;
         if (!in_array($host, config('meta.white_list_hosts'))) {
             $rel = 'rel="nofollow noreferrer noopener" target="_blank"';
         }
 
-        return  '<a href="' . $content . '" ' . $rel . '>' . $content . '</a>';
+        return  '<a href="' . $params['href'] . '" ' . $rel . '>' . $content . '</a>';
     }
 
 
