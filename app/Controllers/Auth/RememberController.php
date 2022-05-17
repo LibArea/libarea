@@ -2,12 +2,12 @@
 
 namespace App\Controllers\Auth;
 
-use App\Controllers\Controller;
+use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\User\UserModel;
 use App\Models\AuthModel;
 use Html;
 
-class RememberController extends Controller
+class RememberController extends MainController
 {
     // Проверяет, устанавливался ли когда-либо файл cookie «запомнить меня»
     // Если мы найдем, проверьте его по нашей таблице users_auth_tokens и  
@@ -94,7 +94,7 @@ class RememberController extends Controller
             ]
         );
 
-        setcookie("remember", $token, $expires);
+        setcookie("remember", $token, $expires, '/');
     }
 
     // Запомнить меня
@@ -124,6 +124,6 @@ class RememberController extends Controller
 
         // Установим токен
         $token = $selector . ':' . $validator;
-        setcookie("remember", $token, $expires);
+        setcookie("remember", $token, $expires, '/');
     }
 }
