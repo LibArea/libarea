@@ -6,7 +6,7 @@
         <?= __('app.all_messages'); ?>
       </a>
     </h1>
-    <form action="<?= url('messages.send'); ?>" method="post">
+    <form action="<?= url('content.create', ['type' => 'message']); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_uid']; ?>" />
       <textarea rows="3" id="message" class="mess" placeholder="<?= __('app.write'); ?>..." type="text" name="content" /></textarea>

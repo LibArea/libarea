@@ -17,7 +17,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
         Route::get('/manual/update')->module('admin', 'App\Console'); 
         
         Route::getProtect();
-            Route::get('/badge/user/create')->module('admin', 'App\Badges@addUser')->name('admin.user.badge.create');
+            Route::get('/badge/user/create')->module('admin', 'App\Badges@rewarding')->name('admin.user.badge.create');
             Route::get('/badge/create')->module('admin', 'App\Badges@create')->name('admin.badge.create');
             Route::get('/badge/edit/{id}')->module('admin', 'App\Badges@change')->name('admin.badge.change');
             Route::get('/word/create')->module('admin', 'App\Words@create')->name('admin.word.create');

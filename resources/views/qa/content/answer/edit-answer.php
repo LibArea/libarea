@@ -1,14 +1,15 @@
+<?php $url = url('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>
 <main class="w-100">
   <div class="box justify-between">
 
     <a href="/"><?= __('app.home'); ?></a> /
     <span class="red"><?= __('app.edit_answer'); ?></span>
 
-  <a class="mb5 block" href="<?= url('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>">
+  <a class="mb5 block" href="<?= $url; ?>">
     <?= $data['post']['post_title']; ?>
   </a>
 
-  <form action="<?= url('content.change', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+  <form id="editAnswer" accept-charset="UTF-8" method="post">
     <?= csrf_field() ?>
 
     <?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $data['content'], 'type' => 'answer', 'id' => $data['post']['post_id']]); ?>
@@ -19,3 +20,12 @@
     </div>
   </form>
 </main>
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('content.change', ['type' => 'answer']),
+    'redirect'  => $url . '#answer_' . $data['answer_id'],
+    'success'   => __('msg.successfully'),
+    'id'        => 'form#editAnswer'
+  ]
+); ?>

@@ -1,13 +1,12 @@
 <main class="box w-100">
   <div class="pl20">
     <h1><?= __('app.password_recovery'); ?></h1>
-    <form action="<?= url('recover'); ?>/send/pass" method="post">
+    <form class="max-w300" id="newPass" method="post">
       <?php csrf_field(); ?>
       <fieldset>
-        <label for="password">
-          <?= __('app.new_password'); ?>
-        </label>
-        <input type="password" name="password" id="password">
+        <label for="password"><?= __('app.new_password'); ?></label>
+        <input id="password" type="password" name="password">
+        <span class="showPassword absolute gray-600 right5 mt5"><i class="bi-eye"></i></span>
       </fieldset>
       <p>
         <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">
@@ -21,3 +20,13 @@
     </form>
   </div>
 </main>
+
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('new.pass'),
+    'redirect'  => url('login'),
+    'success'   => __('msg.password_changed'),
+    'id'        => 'form#newPass'
+  ]
+); ?>

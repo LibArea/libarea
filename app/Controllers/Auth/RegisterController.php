@@ -38,76 +38,92 @@ class RegisterController extends Controller
     // Отправка запроса для регистрации
     public function index()
     {
-        $email              = Request::getPost('email');
-        $login              = Request::getPost('login');
         $inv_code           = Request::getPost('invitation_code');
         $inv_uid            = Request::getPostInt('invitation_id');
-        $password           = Request::getPost('password');
         $password_confirm   = Request::getPost('password_confirm');
-        $reg_ip             = Request::getRemoteAddress();
 
         $redirect = $inv_code ? '/register/invite/' . $inv_code : '/register';
 
-        Validation::Email($email, $redirect);
-
-        if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
-            Validation::ComeBack('msg.email_replay', 'error', $redirect);
+        // Проверим login
+        $login = Request::getPost('login');
+        if (!preg_match('/^[a-zA-Z0-9-]+$/u', $login)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.slug_correctness', ['name' => '«' . __('msg.nickname') . '»'])]);
         }
-
-        # Если домен указанной почты содержится в списке недопустимых
-        $arr = explode('@', $email);
-        $domain = array_pop($arr);
-        if (in_array($domain, config('stop-email'))) {
-            redirect($redirect);
+        
+        if (!Validation::length($login, 3, 12)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.nickname') . '»'])]);
         }
-
-        if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
-            Validation::ComeBack('msg.multiple_accounts', 'error', $redirect);
-        }
-
-        Validation::Slug($login, 'msg.nickname', '/register');
-        Validation::Length($login, 'msg.nickname', '3', '10', $redirect);
-
+        
         if (preg_match('/(\w)\1{3,}/', $login)) {
-            Validation::ComeBack('msg.nick_character', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.nick_character')]);
         }
 
-        // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
         if (in_array($login, config('stop-nickname'))) {
-            Validation::ComeBack('msg.nickname_replay', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.nick_exist')]);
         }
 
         if (is_array(AuthModel::checkRepetitions($login, 'login'))) {
-            Validation::ComeBack('msg.nickname_replay', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.nick_exist')]);
         }
 
-        Validation::Length($password, 'msg.password', '8', '32', $redirect);
+        // Check Email
+        // Проверим Email
+        if (!filter_var($email  = Request::getPost('email'), FILTER_VALIDATE_EMAIL)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
+        }
+
+        if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
+            return json_encode(['error' => 'error', 'text' => __('msg.email_replay')]);
+        }
+
+        $arr = explode('@', $email);
+        $domain = array_pop($arr);
+        if (in_array($domain, config('stop-email'))) {
+            return json_encode(['error' => 'error', 'text' => __('msg.email_replay')]);
+        }
+
+        // Check ip for ban
+        // Запрет Ip на бан
+        $reg_ip = Request::getRemoteAddress();
+        if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
+            return json_encode(['error' => 'error', 'text' => __('msg.multiple_accounts')]);
+        }
+
+        // Let's check the password
+        // Проверим пароль
+        $password = Request::getPost('password');
+        if (!Validation::length($password, 8, 32)) {
+            $msg = __('msg.string_length', ['name' => '«' . __('msg.password') . '»']);
+            return json_encode(['error' => 'error', 'text' => $msg]);
+        }
+        
         if (substr_count($password, ' ') > 0) {
-            Validation::ComeBack('msg.password_spaces', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.password_spaces')]);
         }
 
         if ($password != $password_confirm) {
-            Validation::ComeBack('msg.pass_match_err', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.pass_match_err')]);
         }
 
+        // Let's check the verification code
+        // Проверим код проверки
         if (!$inv_code) {
             if (config('general.captcha')) {
                 if (!Integration::checkCaptchaCode()) {
-                    Validation::ComeBack('msg.code_error', 'error', '/register');
+                    return json_encode(['error' => 'error', 'text' => __('msg.code_error')]);
                 }
             }
-            // Если хакинг формы
+            // Если хакинг формы (If form hacking)
             $inv_uid = 0;
         }
 
-        $count =  UserModel::getUsersAllCount();
-        // Для "режима запуска" первые 50 участников получают trust_level = 1 
+        // For "launch mode", the first 50 members get trust_level = 2
+        // Для "режима запуска" первые 50 участников получают trust_level = 2 
         $tl = UserData::USER_FIRST_LEVEL;
-        if ($count < 50 && config('general.mode') == true) {
+        if (UserModel::getUsersAllCount() < 50 && config('general.mode') == true) {
             $tl = UserData::USER_SECOND_LEVEL;
         }
 
-        // id участника после регистрации
         $active_uid = UserModel::create(
             [
                 'login'                => $login,
@@ -116,7 +132,7 @@ class RegisterController extends Controller
                 'lang'                 => config('general.lang'),
                 'whisper'              => '',
                 'password'             => password_hash($password, PASSWORD_BCRYPT),
-                'limiting_mode'        => 0, // Режим заморозки выключен
+                'limiting_mode'        => 0, // режим заморозки выключен
                 'activated'            => $inv_uid > 0 ? 1 : 0, // если инвайта нет, то активация
                 'reg_ip'               => $reg_ip,
                 'trust_level'          => $tl,
@@ -125,6 +141,7 @@ class RegisterController extends Controller
         );
 
         if ($inv_uid > 0) {
+            // If registration by invite, activate the email
             // Если регистрация по инвайту, активируем емайл
             InvitationModel::activate(
                 [
@@ -137,7 +154,7 @@ class RegisterController extends Controller
                 ]
             );
 
-            Validation::ComeBack('msg.successfully_login', 'success', url('login'));
+            return true;
         }
 
         // Email Activation
@@ -152,9 +169,10 @@ class RegisterController extends Controller
         // Sending email
         SendEmail::mailText($active_uid, 'activate.email', ['link' => url('activate.code', ['code' => $email_code])]);
 
-        Validation::ComeBack('msg.check_your_email', 'success', url('login'));
+        return true;
     }
 
+    // Show registration form with invite
     // Показ формы регистрации с инвайтом
     public function showInviteForm()
     {
@@ -176,4 +194,5 @@ class RegisterController extends Controller
             ]
         );
     }
+    
 }

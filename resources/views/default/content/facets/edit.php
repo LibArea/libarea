@@ -27,7 +27,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
   </div>
 
   <div class="box">
-    <form class="max-w780" action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" id="editFacet" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <?= insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
 
@@ -205,3 +205,22 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
     <?= __('help.edit_' . $data['type']); ?>
   </div>
 </aside>
+
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('content.change', ['type' => $fs['facet_type']]),
+    'redirect'  => $url,
+    'success'   => __('msg.successfully'),
+    'id'        => 'form#editFacet'
+  ]
+); ?>
+
+<!--
+
+if ($new_type == 'category') {
+     Validation::ComeBack('msg.change_saved', 'success', url('web.dir', ['grouping' => 'all', 'slug' => $facet_slug]));
+}
+
+Validation::ComeBack('msg.change_saved', 'success', url($new_type, ['slug' => $facet_slug]));
+-->

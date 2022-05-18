@@ -33,7 +33,7 @@ class Translate
     public static function get(string $line, array $args = [])
     {
         if (strpos($line, '.') === false) {
-            return 'no';
+            return 'app.?';
         }
 
         // Разбираем имя файла и псевдоним.

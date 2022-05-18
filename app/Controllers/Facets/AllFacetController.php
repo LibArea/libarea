@@ -4,7 +4,7 @@ namespace App\Controllers\Facets;
 
 use App\Controllers\Controller;
 use App\Models\FacetModel;
-use Meta;
+use Meta, Access;
 
 class AllFacetController extends Controller
 {
@@ -14,8 +14,6 @@ class AllFacetController extends Controller
     {
         $pagesCount = FacetModel::getFacetsAllCount($this->user['id'], $sheet, $type);
         $facets     = FacetModel::getFacetsAll($this->pageNumber, $this->limit, $this->user['id'], $sheet, $type);
-
-        $Flimit = (new \App\Controllers\Facets\AddFacetController())->limitFacer($type, 'no.redirect');
 
         $m = [
             'og'    => true,
@@ -35,7 +33,7 @@ class AllFacetController extends Controller
                     'facets'        => $facets,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,
-                    'limit'         => $Flimit,
+                    'access'        => Access::limitFacet($type),
                 ]
             ]
         );
@@ -44,5 +42,6 @@ class AllFacetController extends Controller
     public static function types()
     {
         return FacetModel::types();
-    }
+    }   
+    
 }

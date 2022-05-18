@@ -65,8 +65,8 @@ class Add
 
         // Check the length of the site name
         // Проверим длину названия сайта
-        if (!$title = (new \Modules\Catalog\App\Checks())->length(Request::getPost('title'), 14, 250)) {
-            $msg = __('web.string_length', ['name' => '«' . __('title') . '»']);
+        if (!Validation::length(Request::getPost('title'), 14, 250)) {
+            $msg = __('web.string_length', ['name' => '«' . __('web.title') . '»']);
             return json_encode(['error' => 'error', 'text' => $msg]);
         }
 

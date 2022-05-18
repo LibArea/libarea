@@ -116,16 +116,18 @@ class Users extends Controller
         $user_name      = Request::getPost('name');
         $trust_level    = Request::getPostInt('trust_level');
 
-        $redirect = url('admin.users');
         if (!$user = UserModel::getUser($user_id, 'id')) {
-            redirect($redirect);
+            return true;
+        }
+        
+        if (!Validation::length($login, 3, 11)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.login') . '»'])]);
         }
 
-        $redirect = url('admin.user.edit', ['id' => $user_id]);
-        Validation::Length($login, 'msg.login', '3', '11', $redirect);
-
         if ($email) {
-            Validation::Email($email, $redirect);
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
+            }
         }
 
         SettingModel::edit(
@@ -153,6 +155,6 @@ class Users extends Controller
             ]
         );
 
-        redirect($redirect);
+        return true;
     }
 }

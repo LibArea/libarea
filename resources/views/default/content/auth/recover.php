@@ -1,7 +1,7 @@
 <main class="box w-100">
   <div class="pl20">
-    <h1><?= __('app.' . $data['sheet']); ?></h1>
-    <form class="form max-w300" action="<?= url('recover.send'); ?>" method="post">
+    <h1><?= __('app.password_recovery'); ?></h1>
+    <form class="form max-w300" id="recover" method="post">
       <?php csrf_field(); ?>
 
       <fieldset>
@@ -9,7 +9,7 @@
         <input type="email" required="" name="email">
       </fieldset>
 
-      <?= insert('/_block/captcha'); ?>
+      <?= component('captcha'); ?>
 
       <fieldset>
         <?= Html::sumbit(__('app.reset')); ?>
@@ -23,3 +23,13 @@
     <p><?= __('help.recover_info'); ?></p>
   </div>
 </main>
+
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('recover.send'),
+    'redirect'  => url('login'),
+    'success'   => __('msg.new_password_email'),
+    'id'        => 'form#recover'
+  ]
+); ?>

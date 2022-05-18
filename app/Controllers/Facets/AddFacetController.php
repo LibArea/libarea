@@ -5,14 +5,16 @@ namespace App\Controllers\Facets;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{FacetModel, SubscriptionModel};
-use Validation, Meta, UserData;
+use Validation, Meta, UserData, Access;
 
 class AddFacetController extends Controller
 {
     // Add form topic | blog | category
     public function index($type)
     {
-        self::limitFacer($type, 'redirect');
+        if (Access::limitFacet($facet_type) == false) {
+            redirect('/');
+        }
 
         return $this->render(
             '/facets/add',
@@ -28,7 +30,9 @@ class AddFacetController extends Controller
     // Add topic | blog | category
     public function create($facet_type)
     {
-        $this->limitFacer($facet_type, 'redirect');
+        if (Access::limitFacet($facet_type) == false) {
+            return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
+        }
 
         $facet_title                = Request::getPost('facet_title');
         $facet_description          = Request::getPost('facet_description');
@@ -40,24 +44,44 @@ class AddFacetController extends Controller
         if ($facet_type == 'blog') {
             if (!UserData::checkAdmin()) {
                 if (in_array($facet_slug, config('stop-blog'))) {
-                    Validation::ComeBack('msg.url_reserved', 'error', $redirect);
+                    return json_encode(['error' => 'error', 'text' => __('msg.url_reserved')]);
+                    //Validation::ComeBack('msg.url_reserved', 'error', $redirect);
                 }
             }
         }
 
-        Validation::Slug($facet_slug, 'msg.slug', $redirect);
-        Validation::Length($facet_title, 'msg.title', '3', '64', $redirect);
-        Validation::Length($facet_description, 'msg.meta_description', '34', '225', $redirect);
-        Validation::Length($facet_short_description, 'msg.short_description', '9', '160', $redirect);
-        Validation::Length($facet_slug, 'msg.slug', '3', '43', $redirect);
-        Validation::Length($facet_seo_title, 'msg.slug', '4', '225', $redirect);
+        if (!Validation::length($facet_title, 3, 64)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
+        }
+        
+        if (!Validation::length($facet_description, 34, 225)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.meta_description') . '»'])]);
+        }
+        
+        if (!Validation::length($facet_short_description, 9, 160)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.short_description') . '»'])]);
+        }
+        
+        if (!Validation::length($facet_seo_title, 4, 225)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
+        }   
+
+
+        // Slug
+        if (!Validation::length($facet_slug, 3, 43)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
+        }   
+
+        if (!preg_match('/^[a-zA-Z0-9-]+$/u', $facet_slug)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»'])]);
+        }
 
         if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
-            Validation::ComeBack('msg.repeat_url', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.repeat_url')]);
         }
 
         if (preg_match('/\s/', $facet_slug) || strpos($facet_slug, ' ')) {
-            Validation::ComeBack('msg.url_gaps', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.url_gaps')]);
         }
 
         $type = $facet_type ?? 'topic';
@@ -78,41 +102,7 @@ class AddFacetController extends Controller
 
         SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'facet');
 
-        $redirect = $facet_type == 'category' ? url('web') : '/' . $facet_type . '/' . $facet_slug;
-        redirect($redirect);
-    }
-
-    public function limitFacer($type, $action)
-    {
-        $count      = FacetModel::countFacetsUser($this->user['id'], $type);
-
-        $count_add  = UserData::checkAdmin() ? 999 : config('trust-levels.count_add_' . $type);
-
-        $in_total   = $count_add - $count;
-
-        if ($action == 'no.redirect') {
-            return $in_total;
-        }
-
-        self::tl($this->user['trust_level'], config('trust-levels.tl_add_' . $type), $count, $count_add);
-
-        if (!$in_total > 0) {
-            redirect('/');
-        }
-
-        return $in_total;
-    }
-
-    public static function tl($trust_level, $allowed_tl, $count_content, $count_total)
-    {
-        if ($trust_level < $allowed_tl) {
-            redirect('/');
-        }
-
-        if ($count_content >= $count_total) {
-            redirect('/');
-        }
-
         return true;
     }
+
 }

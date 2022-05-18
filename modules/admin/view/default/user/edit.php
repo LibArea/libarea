@@ -8,7 +8,7 @@
 ); ?>
 
 <div class="box bg-white">
-  <form action="<?= url('admin.user.change', ['id' => $data['user']['id']]); ?>" method="post">
+  <form id="editUser" method="post">
     <?= csrf_field() ?>
     <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
       <a class="right text-sm" href="<?= url('delete.cover', ['login' => $data['user']['login']]); ?>">
@@ -50,7 +50,7 @@
       <?php if ($data['user']['duplicat_ip_reg'] > 1) : ?>
         <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
       <?php endif; ?>
-      (<?= __('admin.ed') ?>. <?= $data['user']['updated_at']; ?>)
+      (ed. <?= $data['user']['updated_at']; ?>)
     </fieldset>
     <hr>
    <fieldset>
@@ -165,18 +165,85 @@
     </fieldset>
 
     <h3><?= __('admin.contacts'); ?></h3>
-    <?php foreach (config('/form/user-setting') as $block) : ?>
-      <fieldset>
-        <label for="title"><?= $block['lang']; ?></label>
-        <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
-        <?php if ($block['help']) : ?>
-          <div class="help"><?= $block['help']; ?></div>
-        <?php endif; ?>
-      </fieldset>
-    <?php endforeach; ?>
+    
+<?php
+$setting = [
+  [
+    'url'       => 'website',
+    'addition'  => false,
+    'title'     => 'website',
+    'lang'      => __('app.url'),
+    'help'      => 'https://site.ru',
+    'name'      => 'website'
+  ], [
+    'url'       => false,
+    'addition'  => false,
+    'title'     => 'location',
+    'lang'      => __('app.city'),
+    'help'      => __('app.for_example') . ': Moscow',
+    'name'      => 'location'
+  ], [
+    'url'       => 'public_email',
+    'addition'  => 'mailto:',
+    'title'     => 'public_email',
+    'lang'      => 'Email',
+    'help'      => '**@**.ru',
+    'name'      => 'public_email'
+  ], [
+    'url'       => 'skype',
+    'addition'  => 'skype:',
+    'title'     => 'skype',
+    'lang'      => 'Skype',
+    'help'      => 'skype:<b>NICK</b>',
+    'name'      => 'skype'
+  ], [
+    'url'       => 'telegram',
+    'addition'  => 'tg://resolve?domain=',
+    'title'     => 'telegram',
+    'lang'      => 'Telegram',
+    'help'      => 'tg://resolve?domain=<b>NICK</b>',
+    'name'      => 'telegram'
+  ], [
+    'url'       => 'vk',
+    'addition'  => 'https://vk.com/',
+    'title'     => 'vk',
+    'lang'      => 'Vk',
+    'help'      => 'https://vk.com/<b>NICK / id</b>',
+    'name'      => 'vk'
+  ],
+];
 
-    <?= Html::sumbit(__('admin.edit')); ?>
+?>
+
+<?php foreach ($setting as $block) : ?>
+  <fieldset class="max-w300">
+    <label for="post_title"><?= $block['lang']; ?></label>
+    <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
+    <?php if ($block['help']) : ?>
+      <div class="help"><?= $block['help']; ?></div>
+    <?php endif; ?>
+  </fieldset>
+<?php endforeach; ?>
+
+<fieldset>
+  <input type="hidden" name="nickname" id="nickname" value="">
+  <?= Html::sumbit(__('app.edit')); ?>
+</fieldset>
+    
+
   </form>
 </div>
 </main>
+
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('admin.user.change', ['id' => $data['user']['id']]),
+    'redirect'  => url('admin.user.edit', ['id' => $data['user']['id']]),
+    'success'   => __('msg.change_saved'),
+    'id'        => 'form#editUser'
+  ]
+); ?>
+
+
 <?= includeTemplate('/view/default/footer'); ?>

@@ -97,18 +97,49 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Режим заморозки
-    public static function addLimitingMode($uid)
+    public static function addLimitingMode($user_id)
     {
-        $sql = "UPDATE users SET limiting_mode = 1 where id = :uid";
+        $sql = "UPDATE users SET limiting_mode = 1 where id = :user_id";
 
-        return DB::run($sql, ['uid' => $uid]);
+        return DB::run($sql, ['user_id' => $user_id]);
+    } 
+
+    // Весь контент участника (вклад)
+    public static function allContentUserCount($user_id)
+    {
+        $sql = "SELECT
+                (SELECT COUNT(*) FROM 
+                    posts WHERE post_user_id = $user_id and post_is_deleted = 0) AS t1Count,
+                (SELECT COUNT(*) FROM 
+                    answers WHERE answer_user_id = $user_id and answer_is_deleted = 0) AS t2Count,
+                (SELECT COUNT(*) FROM 
+                    comments WHERE comment_user_id = $user_id and comment_is_deleted = 0) AS t3Count";
+
+        $lists  = DB::run($sql)->fetch();
+
+        return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];
     }
 
-    public static function deleteLimitingMode($uid)
+    // Member Content Posting Frequency 
+    // Частота размещения контента участника в день 
+    public static function getSpeedDay($user_id, $type)
     {
-        $sql = "UPDATE users SET limiting_mode = 0 where id = :uid";
+        $sql = "SELECT 
+                    " . $type . "_id, 
+                    " . $type . "_user_id, 
+                    " . $type . "_date
+                    FROM " . $type . "s 
+                        WHERE " . $type . "_user_id = :user_id
+                        AND " . $type . "_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
-        return DB::run($sql, ['uid' => $uid]);
+        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
+    }
+
+    public static function deleteLimitingMode($user_id)
+    {
+        $sql = "UPDATE users SET limiting_mode = 0 where id = :user_id";
+
+        return DB::run($sql, ['user_id' => $user_id]);
     }
 
     // Let's write the logs

@@ -234,7 +234,12 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     (SELECT COUNT(comment_id) 
                         FROM comments 
                         WHERE comment_user_id = $uid and comment_is_deleted = 0) 
-                            AS count_comments";
+                            AS count_comments,
+                            
+                    (SELECT COUNT(item_id) 
+                        FROM items 
+                        WHERE item_user_id = $uid and item_is_deleted = 0) 
+                            AS count_items";
 
         return DB::run($sql)->fetch();
     }

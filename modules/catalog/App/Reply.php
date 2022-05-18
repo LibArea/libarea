@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\{WebModel, ReplyModel};
 use App\Models\{ActionModel, NotificationModel};
-use UserData, Html, Validation;
+use UserData, Html, Validation, Access;
 
 class Reply
 {
@@ -24,7 +24,9 @@ class Reply
         // Проверка доступа
         $id  = Request::getPostInt('id');
         $reply = ReplyModel::getId($id);
-        if (!Html::accessСheck($reply, 'reply', 0, 0)) return false;
+        if (Access::author('item', $reply['item_user_id'], $reply['item_date'], 0) === true) {
+            return true;
+        }
 
         includeTemplate(
             '/view/default/_block/edit-form-reply',
@@ -38,7 +40,7 @@ class Reply
         );
     }
 
-    public function edit()
+    public function change()
     {
         $id         = Request::getPostInt('id');
         $item_id    = Request::getPostInt('item_id');
@@ -52,7 +54,7 @@ class Reply
 
         // Access verification 
         $reply = ReplyModel::getId($id);
-        if (!Html::accessСheck($reply, 'reply', 0, 0)) {
+        if (Access::author('item', $reply['item_user_id'], $reply['item_date'], 0) === true) {
             redirect('/');
         }
 
@@ -88,7 +90,7 @@ class Reply
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'reply');
+        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content, 'reply');
 
         $last_id = ReplyModel::add(
             [

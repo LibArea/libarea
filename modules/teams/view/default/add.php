@@ -6,7 +6,7 @@
     <a href="<?= url('teams'); ?>"><?= __('team.home'); ?></a> /
     <span class="red"><?= __('team.add_team'); ?></span>
 
-    <form class="max-w780" action="<?= url('team.create'); ?>" method="post">
+    <form class="max-w780" action="<?= url('content.create', ['type' => 'team']); ?>" method="post">
       <?= csrf_field() ?>
       <fieldset>
         <label for="name"><?= __('team.heading'); ?></label>

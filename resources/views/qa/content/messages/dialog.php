@@ -1,7 +1,7 @@
 <main class="col-two">
   <p class="m0"><?= $data['sheet']; ?></p>
   <div class="mb15 mb-ml0 hidden">
-    <form action="<?= url('messages.send'); ?>" method="post">
+    <form action="<?= url('content.create', ['type' => 'message']); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />
       <textarea rows="3" id="message" class="mess" placeholder="<?= __('app.write'); ?>..." type="text" name="content" /></textarea>

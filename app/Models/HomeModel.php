@@ -175,6 +175,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                     post_id,
                     post_tl,
                     post_slug,
+                    post_type,
                     post_is_deleted,
                     id,
                     login,
@@ -183,7 +184,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                         LEFT JOIN posts ON post_id = answer_post_id
                         LEFT JOIN users ON id = answer_user_id
                         WHERE answer_is_deleted = 0 AND post_is_deleted = 0 
-                        $user_answer 
+                        $user_answer AND post_type = 'post'
                         ORDER BY answer_id DESC LIMIT 5";
 
         return DB::run($sql)->fetchAll();

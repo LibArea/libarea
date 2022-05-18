@@ -54,3 +54,8 @@ function insert(string $name, array $params = [])
 {
     return App\Controllers\Controller::insert($name, $params);
 }
+
+function component(string $name, array $params = [])
+{
+    return App\Controllers\Controller::insert('/_block/form/components/' . $name, $params);
+}

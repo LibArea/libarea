@@ -3,20 +3,15 @@
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{ContentModel, ActionModel, AuditModel, NotificationModel, PostModel};
+use App\Models\{ActionModel, AuditModel, NotificationModel, PostModel};
 use UserData, Html, Validation;
 
 class AuditController extends Controller
 {
-    // Check the freeze and the amount of content per day 
-    // Проверим заморозку и количество контента в день
-    public function placementSpeed($content, $type)
+    // Let's check the stop words, url
+    // Проверим стоп слова, url
+    public function prohibitedContent($content, $type)
     {
-        self::stopContentQuietМode($this->user['limiting_mode']);
-
-        $number =  ContentModel::getSpeed($this->user['id'], $type);
-
-        self::stopLimit($this->user['trust_level'], $number, $type);
 
         if (!self::stopUrl($content, $this->user['id'])) {
             return false;
@@ -29,41 +24,15 @@ class AuditController extends Controller
         return true;
     }
 
-    // Stop changing (adding) content if the user is "frozen"    
-    // Остановим изменение (добавление) контента если пользователь "заморожен"
-    public static function stopContentQuietМode($user_limiting_mode)
-    {
-        if ($user_limiting_mode == 1) {
-            Validation::ComeBack('msg.silent_mode', 'error', '/');
-        }
-        return true;
-    }
-
-    // Checking limits on the level of trust of a participant 
-    // Проверка лимитов по уровню доверия участника
-    public static function stopLimit($user_trust_level, $number, $type)
-    {
-        if ($user_trust_level >= 0 && $user_trust_level <= 2) {
-            if ($number >= config('trust-levels.tl_' . $user_trust_level . '_add_' . $type)) {
-                self::infoMsg($user_trust_level, $type . 's');
-            }
-        }
-
-        if ($number > config('trust-levels.all_limit')) {
-            self::infoMsg($user_trust_level, 'messages');
-        }
-        return true;
-    }
-
     // If there is a link and the total contribution (adding posts, replies and comments) is less than N 
     // Если есть ссылка и общий вклад (добавления постов, ответов и комментариев) меньше N
     public static function stopUrl($content, $uid)
     {
         if (self::estimationUrl($content)) {
-            $all_count = AuditModel::ceneralContributionCount($uid);
+            $all_count = ActionModel::allContentUserCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                Html::addMsg(__('validation.content_audit'), 'error');
+                Html::addMsg(__('msg.content_audit'), 'error');
                 return false;
             }
         }
@@ -75,21 +44,16 @@ class AuditController extends Controller
     public static function stopWords($content, $uid)
     {
         if (self::stopWordsExists($content)) {
-            $all_count = AuditModel::ceneralContributionCount($uid);
+            $all_count = ActionModel::allContentUserCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                Html::addMsg(__('validation.content_audit'), 'error');
+                Html::addMsg(__('msg.content_audit'), 'error');
                 return false;
             }
         }
         return true;
     }
-
-    public static function infoMsg($tl, $content)
-    {
-        Validation::Returns(__('validation.limit_day', ['tl' => '«' .  __('app.trust_level') . '» ' . $tl, 'name' => __('app.' . $content)]), 'error', '/');
-    }
-
+    
     // For URL trigger 
     // Для триггера URL
     public static function estimationUrl($content)
@@ -105,7 +69,7 @@ class AuditController extends Controller
     // Проверим наличия слова в стоп листе (аудит в админ-панели)
     public static function stopWordsExists($content)
     {
-        $stop_words = ContentModel::getStopWords();
+        $stop_words = AuditModel::getStopWords();
 
         foreach ($stop_words as $word) {
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\ContentModel;
+use App\Models\AuditModel;
 
 class Content
 {
@@ -72,9 +72,9 @@ class Content
             foreach ($match_name as $key => $login) {
 
                 if (preg_match('/^[0-9]+$/', $login)) {
-                    $user_info = ContentModel::getUsers($login, 'id');
+                    $user_info = AuditModel::getUsers($login, 'id');
                 } else {
-                    $user_info = ContentModel::getUsers($login, 'slug');
+                    $user_info = AuditModel::getUsers($login, 'slug');
                 }
 
                 if ($user_info) {
@@ -102,13 +102,4 @@ class Content
         return $content;
     }
 
-    // Остановим изменение (добавление) контента
-    public static function stopContentQuietМode($user_limiting_mode)
-    {
-        if ($user_limiting_mode == 1) {
-            Validation::ComeBack('msg.silent_mode', 'error', '/');
-        }
-
-        return true;
-    }
 }

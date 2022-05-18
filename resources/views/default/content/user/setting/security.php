@@ -1,27 +1,26 @@
-<?php
-$form = new Forms();
-$form->html_form(UserData::getUserTl(), config('form/user-security'));
-?>
-
 <main>
-
   <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
-    <form action="<?= url('setting.security.edit'); ?>" method="post">
+    <form class="max-w300" id="security" method="post">
       <?php csrf_field(); ?>
-
-      <?= $form->build_form(); ?>
-
-      <fieldset>
-        <input type="hidden" name="nickname" id="nickname" value="">
-        <?= Html::sumbit(__('app.edit')); ?>
-      </fieldset>
+      <?= component('setting-security'); ?>
     </form>
   </div>
 </main>
+
 <aside>
   <div class="box text-sm">
     <?= __('help.security_info'); ?>
   </div>
 </aside>
+
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('setting.security.edit'),
+    'redirect'  => url('setting', ['type' => 'security']),
+    'success'   => __('msg.successfully'),
+    'id'        => 'form#security'
+  ]
+); ?>

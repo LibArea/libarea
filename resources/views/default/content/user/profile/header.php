@@ -40,7 +40,7 @@ endif;
           <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
             <?php if ($profile['up_count'] > 0) : ?>
               <i class="up-id bi-heart red mr10 ml20 mb-ml5 text-sm inline"></i>
-              <sup class="text-sm gray-600 inline"><?= $profile['up_count']; ?></sup>
+              <sup class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></sup>
             <?php endif; ?>
         </h1>
 

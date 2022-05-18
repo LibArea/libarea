@@ -91,13 +91,19 @@ class AddPostController extends Controller
             $redirect = url('post.add') . '/' . $blog_id;
         }
 
-        // We will check for freezing, stop words, the frequency of posting content per day 
-        // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'post');
+        // Let's check the stop words, url
+        // Проверим стоп слова, url
+        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content, 'post');
 
         $post_title = str_replace("&nbsp;", '', $post_title);
-        Validation::Length($post_title, 'msg.title', '6', '250', $redirect);
-        Validation::Length($content, 'msg.content', '6', '25000', $redirect);
+        
+        if (!Validation::length($post_title, 6, 250)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
+        }
+        
+        if (!Validation::length($content, 6, 25000)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.content') . '»'])]);
+        }
 
         if ($post_url) {
             $site = $this->addUrl($post_url, $post_title);
@@ -171,7 +177,7 @@ class AddPostController extends Controller
             ]
         );
 
-        redirect($redirect);
+        return true;
     }
 
     public static function slug($title)

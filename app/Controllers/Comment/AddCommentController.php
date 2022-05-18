@@ -41,9 +41,9 @@ class AddCommentController extends Controller
 
         Validation::Length($content, 'msg.content', '6', '2024', $url_post);
 
-        // We will check for freezing, stop words, the frequency of posting content per day 
-        // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'comment');
+        // Let's check the stop words, url
+        // Проверим стоп слова, url
+        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content, 'comment');
 
         $last_id = CommentModel::add(
             [

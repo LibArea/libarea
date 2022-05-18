@@ -146,14 +146,13 @@ class MessagesController extends Controller
 
     // Sending a private message to a user 
     // Отправка сообщения участнику
-    public function send()
+    public function create()
     {
         $content        = $_POST['content']; // для Markdown
         $recipient_id   = Request::getPost('recipient');
 
-        // If the user is frozen and if the private message is empty
-        // Если пользователь заморожен и если личное сообщение пустое
-        (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
+        // Private message is empty
+        // Если личное сообщение пустое
         if ($content == '') {
             Validation::ComeBack('msg.enter_content', 'error', url('messages', ['login' => $this->user['login']]));
         }

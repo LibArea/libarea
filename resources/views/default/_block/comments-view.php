@@ -49,12 +49,11 @@
                   <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if (Html::accessСheck($answer, 'answer', 1, 30) === true) : ?>
-                  <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) : ?>
-                    <a class="editansw gray-600 mr10 ml10" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                      <?= __('app.edit'); ?>
-                    </a>
-                  <?php endif; ?>
+
+                <?php if (Access::author('answer', $answer['answer_user_id'], $answer['date'], 30) === true) : ?>
+                  <a class="editansw gray-600 mr10 ml10" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                    <?= __('app.edit'); ?>
+                  </a>
                 <?php endif; ?>
 
                 <?php if (UserData::checkAdmin()) : ?>
@@ -104,7 +103,7 @@
       <?php foreach ($answer['comments'] as  $comment) : ?>
 
         <?php if ($comment['comment_is_deleted'] == 1) : ?>
-          <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
+          <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
             <ol class="bg-red-200 text-sm list-none max-w780 <?php if ($comment['comment_comment_id'] > 0) : ?> ml30<?php endif; ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
@@ -160,10 +159,12 @@
                   <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
+                <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray mr10 ml10">
                     <?= __('app.edit'); ?>
                   </a>
+                <?php endif; ?>  
+                <?php if (UserData::checkAdmin()) : ?>   
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray mr5 ml5">
                     <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                   </a>

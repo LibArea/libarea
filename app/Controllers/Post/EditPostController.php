@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use UploadImage, Validation, Meta, Html, UserData;
+use UploadImage, Validation, Meta, Html, UserData, Access;
 
 class EditPostController extends Controller
 {
@@ -15,7 +15,7 @@ class EditPostController extends Controller
     {
         $post_id    = Request::getInt('id');
         $post       = PostModel::getPost($post_id, 'id', $this->user);
-        if (!Html::accessСheck($post, 'post', 0, 0)) {
+        if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
             redirect('/');
         }
 
@@ -66,16 +66,12 @@ class EditPostController extends Controller
 
         // Проверка доступа 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
-        if (!Html::accessСheck($post, 'post', 0, 0)) {
-            redirect('/');
+        if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
+            return json_encode(['error' => 'error', 'text' => __('msg.went_wrong')]);
         }
-
-        // Если пользователь заморожен
-        (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
 
         // Связанные посты и темы
         $fields    = Request::getPost() ?? [];
-
 
         if ($post['post_type'] == 'post') {
             $json_post  = $fields['post_select'] ?? [];
@@ -102,14 +98,15 @@ class EditPostController extends Controller
                 }
             }
         }
-
+        
         $post_title = str_replace("&nbsp;", '', $post_title);
-        Validation::Length($post_title, 'msg.title', '6', '250', $redirect);
-
-        if ($content == '') {
-            $content = $post['post_content'];
+        if (!Validation::length($post_title, 6, 250)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
         }
-        Validation::Length($content, 'msg.content', '6', '25000', $redirect);
+        
+        if (!Validation::length($content, 6, 25000)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.content') . '»'])]);
+        }
 
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
@@ -149,9 +146,7 @@ class EditPostController extends Controller
             ]
         );
 
-
-
-        Validation::ComeBack('msg.change_saved', 'success', '/post/' . $post_id);
+        return true;
     }
 
     // Add fastes (blogs, topics) to the post 
@@ -188,7 +183,7 @@ class EditPostController extends Controller
     {
         $post_id    = Request::getInt('id');
         $post = PostModel::getPost($post_id, 'id', $this->user);
-        if (!Html::accessСheck($post, 'post', 0, 0)) {
+        if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == true) {
             redirect('/');
         }
 

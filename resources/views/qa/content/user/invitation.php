@@ -4,7 +4,7 @@
   </div>
   <div class="p15">
     <?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
-      <form method="post" action="<?= url('invit.create'); ?>">
+      <form method="post" action="<?= url('content.create', ['type' => 'invitation']); ?>">
         <?php csrf_field(); ?>
         <fieldset>
           <input type="email" name="email">

@@ -3,7 +3,7 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\ContentModel;
+use Modules\Admin\App\Models\WordModel;
 use Meta, Validation;
 
 class Words
@@ -17,7 +17,7 @@ class Words
             [
                 'meta'  => Meta::get(__('admin.words')),
                 'data'  => [
-                    'words' => ContentModel::getStopWords(),
+                    'words' => WordModel::getStopWords(),
                     'type'  => $this->type,
                 ]
             ]
@@ -47,7 +47,7 @@ class Words
             'stop_space_id' => 0, // Глобально
         ];
 
-        ContentModel::setStopWord($data);
+        WordModel::setStopWord($data);
 
         Validation::ComeBack('msg.change_saved', 'success', url('admin.words'));
     }
@@ -57,6 +57,6 @@ class Words
     {
         $word_id = Request::getPostInt('id');
 
-        ContentModel::deleteStopWord($word_id);
+        WordModel::deleteStopWord($word_id);
     }
 }

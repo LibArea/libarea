@@ -4,7 +4,8 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{ActionModel, PostModel};
-use Html;
+use App\Models\User\UserModel;
+use Html, Access, UserData;
 
 class ActionController extends Controller
 {
@@ -22,7 +23,7 @@ class ActionController extends Controller
 
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($content_id, $type);
-        if (!Html::accessСheck($info_type, $type, 1, 30)) {
+        if (Access::author($type, $info_type[$type . '_user_id'], $info_type[$type . '_date'], 30) == false) {
             redirect('/');
         }
 
@@ -91,13 +92,16 @@ class ActionController extends Controller
     {
         $type = Request::get('type');
 
-        if ($type == 'post' || $type == 'page') {
-            return (new Post\AddPostController)->index($type);
-        } elseif ($type == 'topic' || $type == 'blog' || $type == 'category' || $type == 'section') {
-            return (new Facets\AddFacetController)->index($type);
-        } else {
-            return false;
+        if (in_array($type, ['post', 'page'])) {
+           return (new Post\AddPostController)->index($type);
         }
+
+        if (in_array($type, ['topic', 'blog', 'category', 'section'])) {
+           return (new Facets\AddFacetController)->index($type);
+        }
+
+        return false;
+     
     }
 
     // Pages (forms) change content and facets (navigation)
@@ -106,52 +110,146 @@ class ActionController extends Controller
     {
         $type = Request::get('type');
 
-        if ($type == 'post' || $type == 'page') {
-            return (new Post\EditPostController)->index($type);
-        } elseif ($type == 'topic' || $type == 'blog' || $type == 'category'  || $type == 'section') {
-            return (new Facets\EditFacetController)->index($type);
-        } elseif ($type == 'answer') {
-            return (new Answer\EditAnswerController)->index($type);
-        } else {
-            return false;
+        if (in_array($type, ['post', 'page'])) {
+           return (new Post\EditPostController)->index($type);
         }
+
+        if (in_array($type, ['topic', 'blog', 'category', 'section'])) {
+           return (new Facets\EditFacetController)->index($type);
+        }
+        
+        if ($type === 'answer') {
+           return (new Answer\EditAnswerController)->index($type);
+        }
+
+        return false;
     }
 
     // Creating Content and Adding Facets (Navigation)
     // Создание контента и добавление фасетов (навигация)
     public function create()
     {
+        $this->limitingMode();
+        
         $type = Request::get('type');
+        
+        $this->limitContentDay($type);
 
-        if ($type == 'post' || $type == 'page') {
-            return (new Post\AddPostController)->create($type);
-        } elseif ($type == 'topic' || $type == 'blog' || $type == 'category'  || $type == 'section') {
-            return (new Facets\AddFacetController)->create($type);
-        } elseif ($type == 'answer') {
-            return (new Answer\AddAnswerController)->create();
-        } elseif ($type == 'comment') {
-            return (new Comment\AddCommentController)->create();
-        } else {
-            return false;
+        if (in_array($type, ['post', 'page'])) {
+           return (new Post\AddPostController)->create($type);
         }
+
+        if (in_array($type, ['topic', 'blog', 'category', 'section'])) {
+           return (new Facets\AddFacetController)->create($type);
+        }
+        
+        if ($type === 'answer') {
+           return (new Answer\AddAnswerController)->create($type);
+        }
+        
+        if ($type === 'comment') {
+           return (new Comment\AddCommentController)->create($type);
+        }
+        
+        if ($type === 'invitation') {
+           return (new User\InvitationsController)->create($type);
+        }
+        
+        if ($type === 'message') {
+           return (new MessagesController)->create($type);
+        }
+        
+        if ($type === 'folder') {
+           return (new FolderController)->create($type);
+        }
+        
+        if ($type === 'team') {
+           return (new \Modules\Teams\App\Add)->create($type);
+        }
+
+        if ($type === 'reply') {
+           return (new \Modules\Catalog\App\Reply)->create($type);
+        }
+
+        if ($type === 'web') {
+           return (new \Modules\Catalog\App\Add)->create($type);
+        }
+        
+        return false;
     }
 
     // Content and facet changes (navigation)
     // Изменения контента и фасетов (навигация)
     public function change()
     {
+        $this->limitingMode();
+        
         $type = Request::get('type');
 
-        if ($type == 'post' || $type == 'page') {
-            return (new Post\EditPostController)->edit($type);
-        } elseif ($type == 'topic' || $type == 'blog' || $type == 'category'  || $type == 'section') {
-            return (new Facets\EditFacetController)->edit($type);
-        } elseif ($type == 'answer') {
-            return (new Answer\EditAnswerController)->edit();
-        } elseif ($type == 'comment') {
-            return (new Comment\EditCommentController)->edit();
-        } else {
-            return false;
+        if (in_array($type, ['post', 'page'])) {
+           return (new Post\EditPostController)->edit($type);
         }
+
+        if (in_array($type, ['topic', 'blog', 'category', 'section'])) {
+           return (new Facets\EditFacetController)->edit($type);
+        }
+        
+        if ($type === 'answer') {
+           return (new Answer\EditAnswerController)->edit();
+        }
+
+        if ($type === 'comment') {
+           return (new Comment\EditCommentController)->edit();
+        }
+
+        if ($type === 'team') {
+           return (new \Modules\Teams\App\Edit)->edit($type);
+        }
+
+        if ($type === 'reply') {
+           return (new \Modules\Catalog\App\Reply)->edit($type);
+        }
+
+        if ($type === 'web') {
+           return (new \Modules\Catalog\App\Edit)->edit($type);
+        }
+
+        return false;
     }
+    
+    // Stop changing (adding) content if the user is "frozen"    
+    // Остановим изменение (добавление) контента если пользователь "заморожен"
+    public function limitingMode()
+    {
+        if ($this->user['limiting_mode'] == 1) {
+            Html::addMsg(__('msg.silent_mode',), 'error');
+            redirect('/');
+        } 
+    }
+    
+    public function limitContentDay($type)
+    {
+        if (UserData::checkAdmin()) {
+            return true;
+        }
+         
+        // Лимит за день для ВСЕХ уровней доверия
+        $сount = ActionModel::getSpeedDay($this->user['id'], $type);
+        if ($сount >= config('trust-levels.all_limit')) {
+            Html::addMsg(__('msg.limit_day', ['tl' => UserData::getUserTl()]), 'error');
+            redirect('/');
+        }
+        
+        // Если TL меньше 2 (начальный уровень после регистрации)
+        if (UserData::getUserTl() < UserData::USER_SECOND_LEVEL) {
+            $сount = ActionModel::allContentUserCount($this->user['id']);
+            if ($сount >= config('trust-levels.perDay_' . $type)) {
+                Html::addMsg(__('msg.limit_day', ['tl' => UserData::getUserTl()]), 'error');
+                redirect('/');
+            }
+        } 
+        
+        return true;
+    }
+    
 }

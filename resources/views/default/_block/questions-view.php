@@ -38,7 +38,7 @@
                   <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if (Html::accessСheck($answer, 'answer', 1, 30) === true) : ?>
+                <?php if (Access::author('answer', $answer['answer_user_id'], $answer['date'], 30) === true) : ?>
                   <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
                     <a class="editansw gray ml15 mr10" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                       <?= __('app.edit'); ?>
@@ -94,12 +94,10 @@
                     <?php endif; ?>
                   <?php endif; ?>
 
-                  <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
-                    <?php if (UserData::getUserId() == $comment['comment_user_id'] || UserData::checkAdmin()) : ?>
+                  <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 ml10 mr5">
                         <i title="<?= __('app.edit'); ?>" class="bi-pencil-square"></i>
                       </a>
-                    <?php endif; ?>
                   <?php endif; ?>
 
                   <?php if (UserData::checkAdmin()) : ?>
@@ -107,6 +105,7 @@
                       <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                     </a>
                   <?php endif; ?>
+
                   <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml5">
                       <?= __('app.report'); ?>

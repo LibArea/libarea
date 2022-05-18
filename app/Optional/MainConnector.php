@@ -28,6 +28,8 @@ class MainConnector implements Connector
             "DB"                            => "app/Libraries/DB.php",
             "Configuration"                 => "app/Libraries/Configuration.php",
             "Translate"                     => "app/Libraries/Translate.php",
+            
+            "Access"                        => "app/Libraries/Access.php",
 
             "Content"                       => "app/Libraries/Content.php",
             "UploadImage"                   => "app/Libraries/UploadImage.php",
@@ -36,7 +38,6 @@ class MainConnector implements Connector
             "Html"                          => "app/Libraries/Html.php",
             "Meta"                          => "app/Libraries/Meta.php",
             "UserData"                      => "app/Libraries/UserData.php",
-            "Forms"                         => "app/Libraries/Forms.php",
 
             "Jevix"                         => "app/Libraries/Jevix/Jevix.php",
             "Parser"                        => "app/Libraries/Jevix/Parser.php",

@@ -110,10 +110,12 @@ class Badges
     public function rewarding()
     {
         $uid = Request::getPostInt('user_id');
+        $badge_id = Request::getPostInt('badge_id');
+
         BadgeModel::badgeUserAdd(
             [
                 'user_id'   => $uid,
-                'badge_id'  => Request::getPostInt('badge_id')
+                'badge_id'  => $badge_id
             ]
         );
 

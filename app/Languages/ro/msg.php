@@ -48,7 +48,7 @@ return [
     'five_width'            => 'Lățimea copertei mai mică de 500 px',
     'silent_mode'           => 'Nu poți posta conținut, contul tău este în curs de verificare',
     'nick_character'        => 'Există prea multe caractere repetate în porecla',
-    'successfully_login'    => 'Succes, conectează-te',
+    'nick_exist'            => 'Această poreclă există deja',
     'check_your_email'      => 'Verificați e-mailul pentru a vă activa contul',
     'user_already'          => 'Utilizatorul este deja pe site',
     'invate_replay'         => 'Ați trimis deja o invitație acestui utilizator',
@@ -60,6 +60,6 @@ return [
     'slug_correctness'      => '{name} trebuie să conțină numai caractere latine, numere',
     'email_correctness'     => 'E-mail invalid',
     
-    'limit_day'             => 'Pentru {tl} ați atins limita „{name}” pentru astăzi',
+    'limit_day'             => 'Pentru „{tl}” ați atins limita pentru astăzi',
     'content_audit'         => 'Mesajul dvs. a fost trimis spre examinare',
 ];

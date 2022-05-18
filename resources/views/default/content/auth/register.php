@@ -1,7 +1,3 @@
-<?php
-$form = new Forms();
-$form->html_form(UserData::getUserTl(), config('form/auth.register'));
-?>
 <main class="box w-100">
   <div class="pl20">
     <h1><?= __('app.' . $data['sheet']); ?></h1>
@@ -10,19 +6,22 @@ $form->html_form(UserData::getUserTl(), config('form/auth.register'));
        <?= __('auth.mail_confirm'); ?>
     </div>
     
-    <form class="max-w300" action="<?= url('register.add'); ?>" method="post">
+    <form class="max-w300" id="registration">
       <?php csrf_field(); ?>
-
-      <?= $form->build_form(); ?>
-
-      <?= insert('/_block/captcha'); ?>
-
-      <fieldset>
-        <?= Html::sumbit(__('app.registration')); ?>
-        <a class="ml15 text-sm" href="<?= url('login'); ?>"><?= __('app.sign_in'); ?></a>
-      </fieldset>
+      <?= component('registration'); ?>
     </form>
+
     <p><?= __('app.agree_rules'); ?>.</p>
     <p><?= __('help.security_info'); ?></p>
   </div>
 </main>
+
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('register.add'),
+    'redirect'  => url('login'),
+    'success'   => __('msg.check_your_email'),
+    'id'        => 'form#registration'
+  ]
+); ?>

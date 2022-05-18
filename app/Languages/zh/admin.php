@@ -97,6 +97,7 @@ return [
     'statistics'        => '统计数字',
     'query'             => '请求',
     'test_email'        => '测试消息系统',
+    'not_activ_email'   => '電子郵件未激活',
     
     'tl0_title'         => '访港旅客',
     'tl1_title'         => '用户',

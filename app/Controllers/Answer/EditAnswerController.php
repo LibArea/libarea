@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{AnswerModel, PostModel};
-use Validation, Meta, Html;
+use Validation, Meta, Html, Access;
 
 class EditAnswerController extends Controller
 {
@@ -14,8 +14,8 @@ class EditAnswerController extends Controller
     {
         $answer_id  = Request::getInt('id');
         $answer = AnswerModel::getAnswerId($answer_id);
-        if (!Html::accessСheck($answer, 'answer', 0, 0)) {
-            redirect('/');
+        if (Access::author('answer', $answer['answer_user_id'], $answer['answer_date'], 30) == false) {
+            return false;
         }
 
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
@@ -45,21 +45,20 @@ class EditAnswerController extends Controller
         $answer_id  = Request::getPostInt('answer_id');
         $content    = $_POST['content']; // для Markdown
 
-        // If the user is frozen
-        // Если пользователь заморожен
-        (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
-
         // Access check
         // Проверка доступа
         $answer = AnswerModel::getAnswerId($answer_id);
-        if (!Html::accessСheck($answer, 'answer', 0, 0)) {
-            redirect('/');
+        if (Access::author('answer', $answer['answer_user_id'], $answer['answer_date'], 30) == false) {
+            return false;
         }
-
+        
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
         $url = url('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
-        Validation::Length($content, 'msg.content', '6', '5000', '/' . $url);
-
+        
+        if (!Validation::length($content, 6, 5000)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.content') . '»'])]);
+        }
+        
         AnswerModel::edit(
             [
                 'answer_id'         => $answer_id,
@@ -68,6 +67,6 @@ class EditAnswerController extends Controller
             ]
         );
 
-        redirect('/' . $url . '#answer_' . $answer_id);
+        return true;
     }
 }

@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{FacetModel, PostModel, NotificationModel};
 use App\Models\User\UserModel;
-use Validation, UserData, Meta, Html;
+use Validation, UserData, Meta, Html, Access;
 
 class Edit
 {
@@ -25,9 +25,10 @@ class Edit
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (!Html::accessСheck($domain, 'item', false, false) === true) {
+        if (Access::author('item', $domain['item_user_id'], $domain['item_date'], 0) === true) {
             redirect(url('web'));
         }
+ 
 
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
@@ -56,10 +57,15 @@ class Edit
 
     public function edit()
     {
-        $redirect   = url('web');
+        // Only the site author and staff can edit
+        // Редактировать может только автор сайта и персонал
+        if (Access::author('item', $domain['item_user_id'], $domain['item_date'], 0) === true) {
+            return true;
+        }
+        
         $item_id    = Request::getPostInt('item_id');
         if (!$item  = WebModel::getItemId($item_id)) {
-            redirect($redirect);
+            return true;
         }
 
         $item_url           = Request::getPost('url');
@@ -74,17 +80,18 @@ class Edit
         $item_is_github     = Request::getPostInt('github');
         $item_github_url    = Request::getPost('github_url');
 
-        Validation::Length($item_title, 'msg.title', '14', '250', $redirect);
-        Validation::Length($item_content, 'msg.description', '24', '1500', $redirect);
-
-        if (filter_var($item_url, FILTER_VALIDATE_URL) === FALSE) {
-            redirect($redirect);
+        // Check the length
+        // Проверим длину
+        if (!Validation::length($item_title, 14, 250)) {
+            return json_encode(['error' => 'error', 'text' => __('web.string_length', ['name' => '«' . __('web.title') . '»'])]);
         }
 
-        // Only the site author and staff can edit
-        // Редактировать может только автор сайта и персонал
-        if (!Html::accessСheck($item, 'item', false, false) === true) {
-            redirect(url('web'));
+        if (!Validation::length($item_content, 24, 1500)) {
+            return json_encode(['error' => 'error', 'text' => __('web.string_length', ['name' => '«' . __('web.description') . '»'])]);
+        }
+
+        if (filter_var($item_url, FILTER_VALIDATE_URL) === false) {
+            return true;
         }
 
         // Связанные посты
@@ -162,6 +169,6 @@ class Edit
             FacetModel::addItemFacets($arr, $item['item_id']);
         }
 
-        redirect($redirect);
+        return true;
     }
 }

@@ -20,7 +20,7 @@
           <option value="<?= $badge['badge_id']; ?>"> <?= $badge['badge_title']; ?></option>
         <?php } ?>
       </select>
-      <input type="hidden" name="user_id" id="post_id" value="<?= $data['user']['id']; ?>">
+      <input type="hidden" name="user_id" value="<?= $data['user']['id']; ?>">
     </fieldset>
     <?= Html::sumbit(__('admin.add')); ?>
   </form>

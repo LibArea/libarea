@@ -295,7 +295,6 @@ return [
     'not_registered'    => 'Postează, răspunde, comentează... <br>Nu te-ai înregistrat încă',
     'invalid'           => 'Invalid',
     'agree_rules'       => 'Continuând, sunteți de acord cu <a href="/info/article/privacy">Termenii de utilizare</a> ai site-ului',
-    'limit_content'     => 'Ați epuizat limita de adăugare setată pe site',
     'reg_invite'        => 'Înregistrare prin invitație',
     'details_here'      => 'Detalii aici',
     'breaking_rules'    => 'Încălcând regulile',

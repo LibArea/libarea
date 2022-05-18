@@ -47,40 +47,64 @@ class EditFacetController extends Controller
 
     public function edit()
     {
-        $facet_id                   = Request::getPostInt('facet_id');
-        $facet_title                = Request::getPost('facet_title');
-        $facet_description          = Request::getPost('facet_description');
-        $facet_short_description    = Request::getPost('facet_short_description');
-        $facet_info                 = Request::getPost('facet_info');
-        $facet_slug                 = Request::getPost('facet_slug');
-        $facet_seo_title            = Request::getPost('facet_seo_title');
-        $facet_top_level            = Request::getPostInt('facet_top_level');
-        $facet_tl                   = Request::getPostInt('content_tl');
-        $facet_type                 = Request::getPost('facet_type');
+        $data = Request::getPost();
+ 
+        // Хакинг формы (тип фасета)
+        // ['topic', 'blog', 'category', 'section']
+        if (!in_array($data['facet_type'], config('facets.permitted'))) {
+            return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
+        }
 
-        $facet = FacetModel::uniqueById($facet_id);
-        Html::pageError404($facet);
+        // Получим массив данных существующего фасета и проверим его наличие
+        $facet = FacetModel::uniqueById((int)$data['facet_id'] ?? 0);
+        if ($facet == false) {
+             return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
+        }
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
-            redirect('/');
+            return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
         }
 
         // Изменять тип темы может только персонал
         $new_type = $facet['facet_type'];
-        if ($facet_type != $facet['facet_type']) {
-            if (UserData::checkAdmin()) $new_type = $facet_type;
+        if ($data['facet_type'] != $facet['facet_type']) {
+            if (UserData::checkAdmin()) $new_type = $data['facet_type'];
         }
 
-        $redirect = url('content.edit', ['type' => $new_type, 'id' => $facet['facet_id']]);
+        // Проверка длины
+        if (!Validation::length($data['facet_title'], 3, 64)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
+        }
+        
+        if (!Validation::length($data['facet_description'], 34, 225)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.meta_description') . '»'])]);
+        }
+        
+        if (!Validation::length($data['facet_short_description'], 9, 225)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.short_description') . '»'])]);
+        }
+        
+        if (!Validation::length($data['facet_seo_title'], 4, 225)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
+        }  
 
-        Validation::Slug($facet_slug, 'msg.slug', $redirect);
-        Validation::Length($facet_title, 'msg.title', '3', '64', $redirect);
-        Validation::Length($facet_slug, 'msg.slug', '3', '43', $redirect);
-        Validation::Length($facet_seo_title, 'msg.name_seo', '4', '225', $redirect);
-        Validation::Length($facet_description, 'msg.meta_description', '44', '225', $redirect);
-        Validation::Length($facet_short_description, 'msg.short_description', '11', '160', $redirect);
-        Validation::Length($facet_info, 'msg.info', '14', '5000', $redirect);
+        if (!Validation::length($data['facet_info'], 14, 5000)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.info') . '»'])]);
+        }  
+
+        // Slug
+        if (!Validation::length($data['facet_slug'], 3, 43)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
+        }   
+
+        if (!preg_match('/^[a-zA-Z0-9-]+$/u', $data['facet_slug'])) {
+            return json_encode(['error' => 'error', 'text' => __('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»'])]);
+        }
+
+        if (preg_match('/\s/', $data['facet_slug']) || strpos($data['facet_slug'], ' ')) {
+            return json_encode(['error' => 'error', 'text' => __('msg.url_gaps')]);
+        }
 
         // Запишем img
         $check_img  = $_FILES['images']['name'] ?? null;
@@ -107,9 +131,9 @@ class EditFacetController extends Controller
         }
 
         // Проверим повтор URL                       
-        if ($facet_slug != $facet['facet_slug']) {
-            if (FacetModel::uniqueSlug($facet_slug, $new_type)) {
-                Validation::ComeBack('msg.repeat_url', 'error', url($new_type  . '.edit', ['id' => $facet['facet_id']]));
+        if ($data['facet_slug'] != $facet['facet_slug']) {
+            if (FacetModel::uniqueSlug($data['facet_slug'], $new_type)) {
+                return json_encode(['error' => 'error', 'text' => __('msg.repeat_url')]);
             }
         }
 
@@ -124,20 +148,20 @@ class EditFacetController extends Controller
             }
         }
         $post_related = implode(',', $id ?? []);
-        $facet_slug = strtolower($facet_slug);
+        $facet_slug = strtolower($data['facet_slug']);
 
         FacetModel::edit(
             [
-                'facet_id'                  => $facet_id,
-                'facet_title'               => $facet_title,
-                'facet_description'         => $facet_description,
-                'facet_short_description'   => $facet_short_description,
-                'facet_info'                => $facet_info,
+                'facet_id'                  => $data['facet_id'],
+                'facet_title'               => $data['facet_title'],
+                'facet_description'         => $data['facet_description'],
+                'facet_short_description'   => $data['facet_short_description'],
+                'facet_info'                => $data['facet_info'],
                 'facet_slug'                => $facet_slug,
-                'facet_seo_title'           => $facet_seo_title,
-                'facet_user_id'             => $facet_user_id ?? 1,
-                'facet_tl'                  => $facet_tl,
-                'facet_top_level'           => $facet_top_level,
+                'facet_seo_title'           => $data['facet_seo_title'],
+                'facet_user_id'             => $facet_user_id,
+                'facet_tl'                  => $data['facet_tl'] ?? 0,
+                'facet_top_level'           => $data['facet_top_level'] ?? 0,
                 'facet_post_related'        => $post_related,
                 'facet_type'                => $new_type,
             ]
@@ -147,25 +171,21 @@ class EditFacetController extends Controller
         $highs  = $fields['high_facet_id'] ?? [];
         if ($highs) {
             $high_facet = json_decode($highs, true);
-            $high_arr   = $high_facet ?? [];
+            $high_arr = $high_facet ?? [];
 
-            FacetModel::addLowFacetRelation($high_arr, $facet_id);
+            FacetModel::addLowFacetRelation($high_arr, $data['facet_id']);
         }
 
         // Связанные темы, дети 
-        $matching   = $fields['facet_matching'] ?? [];
+        $matching = $fields['facet_matching'] ?? [];
         if ($matching) {
             $match_facet    = json_decode($matching, true);
             $match_arr      = $match_facet ?? [];
 
-            FacetModel::addLowFacetMatching($match_arr, $facet_id);
+            FacetModel::addLowFacetMatching($match_arr, $data['facet_id']);
         }
 
-        if ($new_type == 'category') {
-            Validation::ComeBack('msg.change_saved', 'success', url('web.dir', ['grouping' => 'all', 'slug' => $facet_slug]));
-        }
-
-        Validation::ComeBack('msg.change_saved', 'success', url($new_type, ['slug' => $facet_slug]));
+        return true;
     }
 
     public function pages()

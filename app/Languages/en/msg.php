@@ -48,7 +48,7 @@ return [
     'five_width'            => 'Cover width less than 500px',
     'silent_mode'           => 'You cannot post content, your account is being verified',
     'nick_character'        => 'There are too many repeated characters in the nickname',
-    'successfully_login'    => 'Success, log in',
+    'nick_exist'            => 'This nickname already exists',
     'check_your_email'      => 'Check your email to activate your account',
     'user_already'          => 'The user is already on the site',
     'invate_replay'         => 'You have already sent an invitation to this user',
@@ -60,6 +60,6 @@ return [
     'slug_correctness'      => '{name} must contain only Latin characters, numbers',
     'email_correctness'     => 'Invalid email',
     
-    'limit_day'             => 'For {tl} you have reached the limit "{name}" for today',
+    'limit_day'             => 'For "TL{tl}" you have reached the limit for today',
     'content_audit'         => 'Your message has been sent for review',
 ];

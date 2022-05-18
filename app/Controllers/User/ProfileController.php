@@ -25,7 +25,9 @@ class ProfileController extends Controller
         $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount($this->user, 'profile.posts', $profile['id']);
 
+        //[count_posts] => 244 [count_answers] => 408 [count_comments] => 580 [count_items] => 65 ) 
         $count = UserModel::contentCount($profile['id']);
+        
         if (($count['count_answers'] + $count['count_comments']) < 3) {
             Request::getHead()->addMeta('robots', 'noindex');
         }

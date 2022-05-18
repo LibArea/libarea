@@ -97,6 +97,7 @@ return [
     'statistics'        => 'Statistics',
     'query'             => 'Query',
     'test_email'        => 'Testing the messaging system',
+    'not_activ_email'   => 'Email not activated',
     
     'tl0_title'         => 'Visitor',
     'tl1_title'         => 'User',

@@ -310,45 +310,6 @@ class Html
         return true;
     }
 
-    // Проверка доступа
-    // $content
-    // $type -  post / answer / comment
-    // $after - есть ли ответы
-    // $stop_time - разрешенное время
-    public static function accessСheck($content, $type, $after, $stop_time)
-    {
-        if (!$content) {
-            return false;
-        }
-
-        // Доступ получает только автор и админ
-        if ($content[$type . '_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) {
-            return false;
-        }
-
-        // Запретим удаление если есть ответ
-        // И если прошло 30 минут
-        if (!UserData::checkAdmin()) {
-
-            if ($after > 0) {
-                if ($content[$type . '_after'] > 0) {
-                    return false;
-                }
-            }
-
-            if ($stop_time > 0) {
-                $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($content['date']);
-                $time = floor($diff / 60);
-
-                if ($time > $stop_time) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
     // @param array $words: array('пост', 'поста', 'постов')
     public static function numWord($value, $words, $show = true)
     {
@@ -374,6 +335,31 @@ class Html
 
         return $out;
     }
+
+    public static function formatToHuman($number)
+    {        
+            if ($number < 1000) {
+                 return sprintf('%d', $number);
+            }
+
+            if ($number < 1000000) {
+                $number = $number / 1000;
+                return $newVal = number_format($number,1) . 'k';
+            }
+
+            if ($number >= 1000000 && $number < 1000000000) {
+                $number = $number / 1000000;
+                return $newVal = number_format($number,1) . 'M';
+            }
+
+            if ($number >= 1000000000 && $number < 1000000000000) {
+                $number = $number / 1000000000;
+                return $newVal = number_format($number,1) . 'B';
+            }
+
+            return sprintf('%d%s', floor($number / 1000000000000), 'T+');        
+    }
+
 
     // Line length
     public static function getStrlen($str)

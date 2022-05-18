@@ -1,90 +1,100 @@
 <?php
-/*
- * Настройка уровней доверия пользователей (TL) и ограничений
- * Configuring User Trust Levels (TL) and Restrictions
- */
 
 return [
-    // С какого уровня TL возможно создавать темы
-    // Установите на 10, если вы хотите запретить участникам создавать их
-    // From what level of TL it is possible to create Topics
-    // Set to 10 if you want to prevent members from creating them 
-    'tl_add_topic'      => 10,
-    'count_add_topic'   => 0,
 
-    // С какого уровня TL возможно создавать блоги
-    // Установите на 10, если вы хотите запретить участникам создавать их
-    // From what level of TL is it possible to create blogs
-    // Set to 10 if you want to prevent members from creating them 
+    /*
+    |--------------------------------------------------------------------------
+    | Content Creation
+    |--------------------------------------------------------------------------
+    |
+    | From what TL level is it possible to create content.
+    | С какого уровня TL возможно создавать контент.
+    |
+    */
+
     'tl_add_blog'       => 2,
-    'count_add_blog'    => 1,
-    
-    // С какого уровня TL возможно добавлять сайты
-    // Установите на 10, если вы хотите запретить участникам добавлять их
-    // From what TL level is it possible to add sites
-    // Set to 10 if you want to prevent participants from adding them
-    'tl_add_site'       => 2,
-    'count_add_site'    => 5,
-    
-    // С какого уровня TL возможно создавать категории
-    // Установите на 10, если вы хотите запретить участникам создавать их
-    // From what level of TL is it possible to create categories
-    // Set to 10 if you want to prevent members from creating them 
-    'tl_add_category'   => 10,
-    'count_add_category'=> 1,
+    'tl_add_topic'      => 10,
+    'tl_add_category'   => 10, // Catalog (каталог)
+    'tl_add_section'    => 10, // Service pages (служебные страницы)
 
-    // С какого уровня TL возможно создавать секции
-    // Установите на 10, если вы хотите запретить участникам создавать их
-    // From what level of TL is it possible to create sections
-    // Set to 10 if you want to prevent members from creating them 
-    'tl_add_section'    => 10,
-    'count_add_section' => 1,
-    
-    // С какого уровня TL возможно создавать ответы (в каталоге)
-    // Установите на 10, если вы хотите запретить участникам создавать их
-    // From what level of TL is it possible to answers (in catalog)
-    // Set to 10 if you want to prevent members from creating them 
-    'tl_add_reply'    => 2,
+    'tl_add_post'       => 1,  
+    'tl_add_answer'     => 1,    
+    'tl_add_comment'    => 1,   
+    'tl_add_item'       => 2, // Catalog (каталог)
+    'tl_add_reply'      => 1, // Catalog (каталог)
 
-    // С какого уровня TL возможна отправка личных сообщений
-    'tl_add_pm'         => 2,
+    'tl_add_pm'         => 1, // Private messages (личные сообщения)
+
+
     // С какого TL можно комментировать ответы в QA модели
     'tl_add_comm_qa'    => 2,
     // С какого TL можно размещать ссылки: Reddit
     'tl_add_url'        => 3,
 
-    // Общий лимит для TL >2 в день - отдельно по постам, комментариям, ответам
-    // Total limit for TL >2 per day - separately by posts, comments, responses
-    'all_limit'         => 30,
-
-    // Сколько постов в зависимости от TL можно добавлять в день
-    // How many posts, depending on TL, can be added per day
-    'tl_0_add_post'     => 0,
-    'tl_1_add_post'     => 3,
-    'tl_2_add_post'     => 5,
-
-    // Сколько ответов в зависимости от TL можно добавлять в день
-    // How many responses, depending on TL, can be added per day
-    'tl_0_add_answer'   => 0,
-    'tl_1_add_answer'   => 5,
-    'tl_2_add_answer'   => 10,
-
-    // Сколько комментариев в зависимости от TL можно добавлять в день
-    // How many comments, depending on TL, can be added per day
-    'tl_0_add_comment'  => 0,
-    'tl_1_add_comment'  => 10,
-    'tl_2_add_comment'  => 20,
-    
-    // Сколько ответов в зависимости от TL можно добавлять в день
-    // How many replys, depending on TL, can be added per day
-    'tl_0_add_reply'  => 0,
-    'tl_1_add_reply'  => 0,
-    'tl_2_add_reply'  => 5,
-    
     // Уровень TL, до которого (включая) отправка жалоб невозможна
     // TL level, up to which (including) sending complaints is not possible
     'tl_stop_report'    => 1,
     // Общее количество жалоб в сутки (общие ограничения)
     // Total number of complaints per day (general restrictions)
     'all_stop_report'   => 3,
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Content Creation
+    |--------------------------------------------------------------------------
+    |
+    | The maximum amount of content ever. true - do not limit
+    | Максимальное количество контента за всё время. true - не ограничивать
+    |
+    */
+    
+    'count_add_blog'       => 1,
+    'count_add_topic'      => 0,
+    'count_add_category'   => 0, // Catalog (каталог)
+    'count_add_section'    => 0, // Service pages (служебные страницы)
+
+    'count_add_post'       => true,  
+    'count_add_answer'     => true,    
+    'count_add_comment'    => true,   
+    'count_add_item'       => true, // Catalog (каталог)
+    'count_add_reply'      => true, // Catalog (каталог)
+
+    'count_add_pm'         => true, // Private messages (личные сообщения)
+    
+
+    /*
+    |--------------------------------------------------------------------------
+    | Daily limit for everyone
+    |--------------------------------------------------------------------------
+    |
+    | Limit per day for all levels of trust (except for staff)
+    | Лимит за сутки для всех уровней доверия (кроме персонала)
+    |
+    */
+
+    'all_limit'         => 30,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Limit per day for trust level 1
+    |--------------------------------------------------------------------------
+    |
+    | Limit per day for trust level 1 (initial)
+    | Лимит за сутки для уровня доверия 1 (начальный)
+    |
+    */
+    
+    'perDay_blog'       => 1,
+    'perDay_topic'      => 1,
+    'perDay_category'   => 1, // Catalog (каталог)
+    'perDay_section'    => 1, // Service pages (служебные страницы)
+
+    'perDay_post'       => 3,  
+    'perDay_answer'     => 5,    
+    'perDay_comment'    => 8,   
+    'perDay_item'       => 0, // Catalog (каталог)
+    'perDay_reply'      => 0, // Catalog (каталог)
+
+    'perDay_pm'         => 0, // Private messages (личные сообщения)
+
 ];

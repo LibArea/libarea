@@ -1,23 +1,10 @@
-<?php
-$form = new Forms();
-$form->html_form(UserData::getUserTl(), config('form/facet.forma'));
-?>
-
 <main>
   <div class="box">
     <h2 class="text-xl"><?= __('app.add_' . $data['type']); ?></h2>
-
-    <?php if (UserData::getRegType(config('trust-levels.tl_add_blog'))) : ?>
-      <form class="max-w780" action="<?= url('content.create', ['type' => $data['type']]); ?>" method="post" enctype="multipart/form-data">
-        <?= csrf_field() ?>
-
-        <?= $form->build_form(); ?>
-
-        <?= $form->sumbit(__('app.add')); ?>
-      </form>
-    <?php else : ?>
-      <?= __('app.limit_content'); ?>
-    <?php endif; ?>
+    <form class="max-w780" id="addFacet" method="post" enctype="multipart/form-data">
+      <?= csrf_field() ?>
+      <?= component('add-facet'); ?>
+    </form>
   </div>
 </main>
 
@@ -27,3 +14,13 @@ $form->html_form(UserData::getUserTl(), config('form/facet.forma'));
     <?= __('help.add_' . $data['type']); ?>
   </div>
 </aside>
+
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('content.create', ['type' => $data['type']]),
+    'redirect'  => $data['type'] == 'category' ? url('web') : '/' . $data['type'] . 's',
+    'success'   => __('msg.successfully'),
+    'id'        => 'form#addFacet'
+  ]
+); ?>

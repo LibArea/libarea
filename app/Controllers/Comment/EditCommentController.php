@@ -5,7 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{CommentModel, PostModel};
-use Html;
+use Html, Access;
 
 class EditCommentController extends Controller
 {
@@ -17,8 +17,11 @@ class EditCommentController extends Controller
         // Проверка доступа 
         $comment_id = Request::getPostInt('comment_id');
         $comment    = CommentModel::getCommentsId($comment_id);
-        if (!Html::accessСheck($comment, 'comment', 0, 0)) return false;
-
+        
+        if (Access::author('comment', $comment['comment_user_id'], $comment['comment_date'], 30) == false) {
+            return false;
+        }
+        
         insert(
             '/_block/form/edit-form-comment',
             [
@@ -38,12 +41,9 @@ class EditCommentController extends Controller
 
         // Access verification 
         $comment = CommentModel::getCommentsId($comment_id);
-        if (!Html::accessСheck($comment, 'comment', 0, 0)) {
+        if (Access::author('comment', $comment['comment_user_id'], $comment['comment_date'], 30) == false) {
             redirect('/');
         }
-
-        // If the user is frozen
-        (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
 
         $post       = PostModel::getPost($comment['comment_post_id'], 'id', $this->user);
         Html::pageRedirection($post, '/');

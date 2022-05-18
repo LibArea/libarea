@@ -13,7 +13,7 @@ class FolderController extends Controller
         FolderModel::get($type, $this->user['id']);
     }
 
-    public function set()
+    public function create()
     {
         $cat    = Request::getPost() ?? [];
         $arr    = $cat['cat-outside'] ?? [];

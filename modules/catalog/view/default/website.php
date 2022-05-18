@@ -67,7 +67,7 @@ $item = $data['item'];
 
     <?php if ($item['item_close_replies'] == 0) : ?>
       <?php if (UserData::getRegType(config('trust-levels.tl_add_reply'))) : ?>
-        <form class="max-w780" action="<?= url('reply.create'); ?>" accept-charset="UTF-8" method="post">
+        <form class="max-w780" action="<?= url('content.create', ['type' => 'reply']); ?>" accept-charset="UTF-8" method="post">
           <?= csrf_field() ?>
 
           <?php insert('/_block/form/textarea', [

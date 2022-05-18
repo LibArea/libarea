@@ -48,7 +48,10 @@ class InvitationsController extends Controller
 
         $redirect = url('invitations');
 
-        Validation::Email($invitation_email, $redirect);
+        if (!filter_var($invitation_email, FILTER_VALIDATE_EMAIL)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
+        }
+        
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['email'])) {

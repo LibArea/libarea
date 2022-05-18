@@ -48,7 +48,7 @@ return [
     'five_width'            => '封面寬度小於 500px',
     'silent_mode'           => '您無法發佈內容，您的帳戶正在驗證中',
     'nick_character'        => '暱稱中重複字符過多',
-    'successfully_login'    => '成功，登錄',
+    'nick_exist'            => '此暱稱已存在',
     'check_your_email'      => '檢查您的電子郵件以激活您的帳戶',
     'user_already'          => '用戶已經在網站上',
     'invate_replay'         => '您已經向該用戶發送了邀請',
@@ -60,6 +60,6 @@ return [
     'slug_correctness'      => '{name} 必須只包含拉丁字符、數字',
     'email_correctness'     => '不合規電郵',
     
-    'limit_day'             => '對於 {tl}，您已達到今天的限制“{name}”',
+    'limit_day'             => '對於“TL{tl}”，您已達到今天的限制',
     'content_audit'         => '您的消息已發送以供審核',
 ];

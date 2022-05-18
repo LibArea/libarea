@@ -1,31 +1,24 @@
-<?php
-echo includeTemplate('/view/default/header', ['data' => $data, 'meta' => $meta]);
-$form = new Forms();
-$form->html_form(UserData::getUserTl(), config('form/catalog.site'));
-?>
+<?= includeTemplate('/view/default/header', ['data' => $data, 'meta' => $meta]); ?>
 
 <div id="contentWrapper">
   <main>
     <?= insert('/_block/navigation/breadcrumbs', [
-        'list' => [
-          [
-            'name' => __('web.catalog'),
-            'link' => url('web')
-          ], [
-            'name' => __('web.edit_website'),
-            'link' => 'red'
-          ],
-        ]
-      ]); ?>
+      'list' => [
+        [
+          'name' => __('web.catalog'),
+          'link' => url('web')
+        ], [
+          'name' => __('web.edit_website'),
+          'link' => 'red'
+        ],
+      ]
+    ]); ?>
 
-    <form id="addUrl" class="max-w640">
+    <form id="addWebsite" class="max-w640">
       <?= csrf_field() ?>
-
-      <?= includeTemplate('/view/default/_block/category', ['data' => ['topic' => false], 'action' => 'add']); ?>
-
-      <?= $form->build_form(); ?>
-
-      <?= $form->sumbit(__('web.add')); ?>
+      <?= includeTemplate('/view/default/_block/category', ['data' => ['topic' => false], 'action' => 'add']); ?>   
+      <?= includeTemplate('/view/default/_block/add-website'); ?>
+      <?= Html::sumbit(__('web.add')); ?>
     </form>
   </main>
   <aside>
@@ -36,7 +29,14 @@ $form->html_form(UserData::getUserTl(), config('form/catalog.site'));
   </aside>
 </div>
 
-<?php $url = UserData::checkAdmin() ? 'web' : 'web.user.sites'; ?>
-<?= includeTemplate('/view/default/_block/ajax', ['url' => 'web.create', 'redirect' => $url, 'id' => 'form#addUrl']); ?>
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('content.create', ['type' => 'web']),
+    'redirect'  => UserData::checkAdmin() ? url('web') : url('web.user.sites'),
+    'success'   => __('msg.successfully'),
+    'id'        => 'form#addWebsite'
+  ]
+); ?>
 
 <?= includeTemplate('/view/default/footer'); ?>

@@ -3,7 +3,7 @@ foreach ($answer as  $comment) :
   $n++; ?>
   <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
   <?php if ($comment['comment_is_deleted'] == 1) : ?>
-    <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
+    <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
       <ol class="bg-red-200 text-sm list-none max-w780">
         <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
           <span class="comm-deletes gray">
@@ -47,7 +47,7 @@ foreach ($answer as  $comment) :
         <div class="text-sm flex">
           <?= Html::votes($comment, 'comment', 'ps', 'bi-heart mr5'); ?>
 
-          <?php if (Html::accessСheck($comment, 'comment', 1, 30) === true) : ?>
+          <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 mr10 ml10">
               <?= __('app.edit'); ?>
             </a>

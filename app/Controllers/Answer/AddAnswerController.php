@@ -18,11 +18,15 @@ class AddAnswerController extends Controller
         $content = $_POST['content']; // для Markdown
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Length($content, 'msg.content', '6', '5000', $url_post);
+        
+        if (!Validation::length($content, 6, 5000)) {
+            Html::addMsg(__('msg.string_length', ['name' => '«' . __('msg.content') . '»']), 'error');
+            redirect($url_post);
+        }
 
-        // We will check for freezing, stop words, the frequency of posting content per day 
-        // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->placementSpeed($content, 'answer');
+        // Let's check the stop words, url
+        // Проверим стоп слова, url
+        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content, 'answer');
 
         $last_id = AnswerModel::add(
             [

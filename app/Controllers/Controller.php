@@ -8,6 +8,10 @@ use UserData;
 
 class Controller extends MainController
 {
+    protected $user;
+    
+    protected $pageNumber;
+    
     public function __construct()
     {
         $this->user = UserData::get();

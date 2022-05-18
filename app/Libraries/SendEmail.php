@@ -55,8 +55,6 @@ class SendEmail
         }
 
         self::send($user_email, $subject, $message . $text_footer);
-
-        return true;
     }
 
     public static function send($email, $subject = '', $message = '')
@@ -67,7 +65,7 @@ class SendEmail
 
             try {
                 //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->isSMTP();
                 $mail->CharSet    = "utf-8";
                 $mail->Host       = config('general.smtphost');
@@ -106,5 +104,6 @@ class SendEmail
             } 
             
         }
+        return true;
     }
 }

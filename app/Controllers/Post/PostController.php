@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
-use Content, Html, Meta, UserData;
+use Content, Html, Meta, UserData, Access;
 
 class PostController extends Controller
 {
@@ -187,7 +187,7 @@ class PostController extends Controller
 
         // Access check
         // Проверка доступа
-        if (!Html::accessСheck($post, 'post', 0, 0)) {
+        if (Access::author('post', $post['post_user_id'], $post['post_date'], 0) == false) {
             redirect('/');
         }
 

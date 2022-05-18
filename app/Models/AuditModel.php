@@ -16,23 +16,6 @@ class AuditModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $params);
     }
 
-    // Total contribution of the participant
-    // Общий вклад участника
-    public static function ceneralContributionCount($uid)
-    {
-        $sql = "SELECT
-                (SELECT COUNT(*) FROM 
-                    posts WHERE post_user_id = $uid and post_is_deleted = 0) AS t1Count,
-                (SELECT COUNT(*) FROM 
-                    answers WHERE answer_user_id = $uid and answer_is_deleted = 0) AS t2Count,
-                (SELECT COUNT(*) FROM 
-                    comments WHERE comment_user_id = $uid and comment_is_deleted = 0) AS t3Count";
-
-        $lists  = DB::run($sql)->fetch();
-
-        return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];
-    }
-
     // Let's limit How many complaints are filed today (for frequency limitation)
     // Сколько жалоб подано сегодня (для ограничение частоты)
     public static function getSpeedReport($uid)
@@ -42,5 +25,33 @@ class AuditModel extends \Hleb\Scheme\App\Models\MainModel
                         AND add_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
         return  DB::run($sql, ['uid' => $uid])->rowCount();
+    }
+    
+    // Get a list of forbidden stop words
+    // Получим список запрещенных стоп-слов
+    public static function getStopWords()
+    {
+        $sql = "SELECT stop_id, stop_word FROM stop_words";
+
+        return DB::run($sql)->fetchAll();
+    }
+    
+    // Member information (id, slug) 
+    // Информация по участнику (id, slug)
+    public static function getUsers($params, $type)
+    {
+        $sort = "id = :params";
+        if ($type == 'slug') {
+            $sort = "login = :params";
+        }
+
+        $sql = "SELECT 
+                    id,
+                    login,
+                    activated,
+                    is_deleted 
+                        FROM users WHERE $sort AND activated = 1 AND is_deleted = 0";
+
+        return DB::run($sql, ['params' => $params])->fetch();
     }
 }

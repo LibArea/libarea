@@ -16,28 +16,28 @@ class LoginController extends Controller
         $password   = Request::getPost('password');
         $rememberMe = Request::getPostInt('rememberme');
 
-        $redirect   = url('login');
-
-        Validation::Email($email, $redirect);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
+        }
 
         $user = UserModel::userInfo($email);
 
         if (empty($user['id'])) {
-            Validation::ComeBack('msg.no_user', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.no_user')]);
         }
 
         // Находится ли в бан- листе
         if (UserModel::isBan($user['id'])) {
-            Validation::ComeBack('msg.account_verified', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.account_verified')]);
         }
 
         // Активирован ли E-mail
         if (!UserModel::isActivated($user['id'])) {
-            Validation::ComeBack('msg.not_activated', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.not_activated')]);
         }
 
         if (!password_verify($password, $user['password'])) {
-            Validation::ComeBack('msg.not_correct', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.not_correct')]);
         }
 
         // Если нажал "Запомнить" 
@@ -50,7 +50,7 @@ class LoginController extends Controller
 
         (new \App\Controllers\AgentController())->set($user['id']);
 
-        redirect('/');
+        return true;
     }
 
     // Страница авторизации

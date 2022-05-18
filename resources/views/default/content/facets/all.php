@@ -38,21 +38,20 @@
       ?>
 
     </ul>
-
-    <?php if (UserData::getRegType(config('trust-levels.tl_add_blog'))) : ?>
+    <?php var_dump($data['access']) ?>
+    
+    
+    
+    <?php if ($data['access']) : ?>
       <p class="m0 text-xl">
         <?php if ($data['type'] == 'blog') : ?>
-          <?php if ($data['limit']) : ?>
             <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
               <i class="bi-plus-lg middle"></i>
             </a>
-          <?php endif; ?>
         <?php else : ?>
-          <?php if (UserData::checkAdmin()) : ?>
             <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
               <i class="bi-plus-lg middle"></i>
             </a>
-          <?php endif; ?>
         <?php endif; ?>
       </p>
     <?php endif; ?>

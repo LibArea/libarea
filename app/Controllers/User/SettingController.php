@@ -57,12 +57,18 @@ class SettingController extends Controller
         $template       = Request::getPost('template');
         $lang           = Request::getPost('lang');
 
-        $redirect   = url('setting');
-        Validation::Length($name, 'msg.name', '0', '11', $redirect);
-        Validation::Length($about, 'msg.about', '0', '255', $redirect);
+        if (!Validation::length($name, 0, 11)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.name') . '»'])]);
+        }
+
+        if (!Validation::length($about, 0, 255)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.about') . '»'])]);
+        }
 
         if ($public_email) {
-            Validation::Email($public_email, $redirect);
+            if (!filter_var($public_email, FILTER_VALIDATE_EMAIL)) {
+                return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
+            }
         }
 
         $user   = UserModel::getUser($this->user['id'], 'id');
@@ -92,7 +98,7 @@ class SettingController extends Controller
             ]
         );
 
-        Validation::ComeBack('msg.change_saved', 'success', $redirect);
+        return true;
     }
 
     // Avatar and cover upload form
@@ -158,25 +164,27 @@ class SettingController extends Controller
 
         $redirect   = '/setting/security';
         if ($password2 != $password3) {
-            Validation::ComeBack('msg.pass_match_err', 'success', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.pass_match_err')]);
         }
 
         if (substr_count($password2, ' ') > 0) {
-            Validation::ComeBack('msg.password_spaces', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.password_spaces')]);
         }
 
-        Validation::Length($password2, 'password', 8, 32, $redirect);
+        if (!Validation::length($password2, 8, 32)) {
+            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.password') . '»'])]);
+        }
 
         $userInfo   = UserModel::userInfo($this->user['email']);
         if (!password_verify($password, $userInfo['password'])) {
-            Validation::ComeBack('msg.old_error', 'error', $redirect);
+            return json_encode(['error' => 'error', 'text' => __('msg.old_error')]);
         }
 
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
 
         SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
 
-        Validation::ComeBack('msg.password_changed', 'error', $redirect);
+        return true;
     }
 
     // Cover Removal
@@ -215,15 +223,15 @@ class SettingController extends Controller
     // Member preference setting form
     // Форма настройки предпочтений участника
     function notificationForm()
-    {
+    {//print_r(SettingModel::getNotifications($this->user['id']));
         return $this->render(
             '/user/setting/notifications',
             [
                 'meta'  => Meta::get(__('app.notifications')),
                 'data'  => [
-                    'sheet'     => 'notifications',
-                    'type'      => 'user',
-                    'setting'   => SettingModel::getNotifications($this->user['id']),
+                    'sheet' => 'notifications',
+                    'type'  => 'user',
+                    'notif' => SettingModel::getNotifications($this->user['id']),
                 ]
             ]
         );
@@ -242,6 +250,6 @@ class SettingController extends Controller
             ]
         );
 
-        Validation::ComeBack('msg.password_changed', 'success', '/setting/notifications');
+        return true;
     }
 }

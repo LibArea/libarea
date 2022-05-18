@@ -97,6 +97,7 @@ return [
     'statistics'        => 'Statistici',
     'query'             => 'Cerere',
     'test_email'        => 'Testarea sistemului de mesagerie',
+    'not_activ_email'   => 'E-mail nu este activat',
     
     'tl0_title'         => 'Vizitator',
     'tl1_title'         => 'Utilizator',

@@ -56,7 +56,7 @@
               <?php if ($user['activated'] == 1) : ?>
                 <div class="gray-600"><?= __('admin.activated'); ?></div>
               <?php else : ?>
-                <div class="red"><?= __('admin.not_activated'); ?> e-mail</div>
+                <div class="red"><?= __('admin.not_activ_email'); ?></div>
               <?php endif; ?>
             </div>
             <?php if ($user['limiting_mode'] == 1) : ?>

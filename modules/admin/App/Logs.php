@@ -3,9 +3,10 @@
 namespace Modules\Admin\App;
 
 use Modules\Admin\App\Models\LogModel;
+use App\Controllers\Controller;
 use Meta;
 
-class Logs
+class Logs extends Controller
 {
     protected $type = 'logs';
 

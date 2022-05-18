@@ -106,23 +106,6 @@ class LogModel extends \Hleb\Scheme\App\Models\MainModel
         return  DB::run($usql, ['uid' => $user['user_id']]);
     }
 
-    // Total contribution of the participant
-    // Общий вклад участника
-    public static function ceneralContributionCount($uid)
-    {
-        $sql = "SELECT
-                (SELECT COUNT(*) FROM 
-                    posts WHERE post_user_id = $uid and post_is_deleted = 0) AS t1Count,
-                (SELECT COUNT(*) FROM 
-                    answers WHERE answer_user_id = $uid and answer_is_deleted = 0) AS t2Count,
-                (SELECT COUNT(*) FROM 
-                    comments WHERE comment_user_id = $uid and comment_is_deleted = 0) AS t3Count";
-
-        $lists  = DB::run($sql)->fetch();
-
-        return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];
-    }
-
     // Частота размещения флагов
     public static function getSpeedReport($uid)
     {

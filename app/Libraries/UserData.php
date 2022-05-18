@@ -110,7 +110,7 @@ class UserData
         } else {
 
             $remember = Request::getCookie('remember');
-            if ($remember) {
+            if ($remember ?? false) {
                 (new \App\Controllers\Auth\RememberController())->check($remember);
             }
         }

@@ -25,7 +25,7 @@
               <?php endif; ?>
               <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'all'); ?>
 
-              <?php if (Html::accessСheck($item, 'item', false, false) === true) : ?>
+              <?php if (Access::author('item', $item['item_user_id'], $item['item_date'], 30) === true) : ?>
                 <a href="<?= url('web.edit', ['id' => $item['item_id']]); ?>">
                   <i class="bi-pencil text-sm"></i>
                 </a> - <?= $item['item_following_link']; ?>

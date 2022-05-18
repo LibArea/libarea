@@ -36,7 +36,7 @@ class Audits extends Controller
         return view(
             '/view/default/audit/audits',
             [
-                'meta'  => Meta::get('admin.' . __($type)),
+                'meta'  => Meta::get(__('admin.' . $type)),
                 'data' => [
                     'type'          => $type,
                     'pagesCount'    => ceil($pagesCount / $this->limit),

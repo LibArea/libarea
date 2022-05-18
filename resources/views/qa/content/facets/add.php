@@ -1,28 +1,26 @@
-<?php
-$form = new Forms();
-$form->html_form(UserData::getUserTl(), config('form/facet.forma'));
-?>
-
 <main class="col-two">
   <div class="box pt0">
     <h2 class="text-xl"><?= __('app.add_' . $data['type']); ?></h2>
-    <?php if (UserData::getRegType(config('trust-levels.tl_add_blog'))) : ?>
-      <form class="max-w780" action="<?= url('content.create', ['type' => $data['type']]); ?>" method="post" enctype="multipart/form-data">
-        <?= csrf_field() ?>
-
-        <?= $form->build_form(); ?>
-        
-        <?= $form->sumbit(__('app.add')); ?>
-      </form>  
-    <?php else : ?>
-      <?= __('app.limit_content'); ?>
-    <?php endif; ?>
-  </div>  
+    <form class="max-w780" id="addFacet" method="post" enctype="multipart/form-data">
+      <?= csrf_field() ?>
+      <?= component('add-facet'); ?>
+    </form>
+  </div>
 </main>
 
 <aside>
-  <div class="box text-sm bg-violet">
+  <div class="box">
     <h3 class="uppercase-box"><?= __('app.help'); ?></h3>
     <?= __('help.add_' . $data['type']); ?>
   </div>
 </aside>
+
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('content.create', ['type' => $data['type']]),
+    'redirect'  => $data['type'] == 'category' ? url('web') : '/' . $data['type'] . 's',
+    'success'   => __('msg.successfully'),
+    'id'        => 'form#addFacet'
+  ]
+); ?>

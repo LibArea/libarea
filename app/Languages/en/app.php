@@ -295,7 +295,6 @@ return [
     'not_registered'    => 'Post, reply, comment... <br>You have not registered yet',
     'invalid'           => 'Invalid',
     'agree_rules'       => 'By continuing, you agree to <a href="/info/article/privacy">Terms of Use</a> site',
-    'limit_content'     => 'You have exhausted the limit on adding set on the site',
     'reg_invite'        => 'Registration by invite',
     'details_here'      => 'Details here',
     'breaking_rules'    => 'Breaking the rules',

@@ -295,7 +295,6 @@ return [
     'not_registered'    => '发布，回复，评论。.. <br>您还没有注册',
     'invalid'           => '无效',
     'agree_rules'       => '继续，即表示您同意<a href="/info/article/privacy">网站使用条款</a>',
-    'limit_content'     => '您已达到在网站上添加集的限制',
     'reg_invite'        => '邀请登记',
     'details_here'      => '详情如下',
     'breaking_rules'    => '违反规则',

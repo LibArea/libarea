@@ -29,7 +29,7 @@
           <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
             <div class="relative mr15">
               <img class="block br-gray max-w-100" src="<?= Html::coverUrl($data['user']['cover_art'], 'user'); ?>">
-              <a class="right text-sm" href="<?= url('delete.cover', ['login' => $user['login']]); ?>">
+              <a class="right text-sm" href="<?= url('delete.cover', ['login' => $data['user']['login']]); ?>">
                 <?= __('app.remove'); ?>
               </a>
             </div>

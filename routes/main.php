@@ -14,24 +14,13 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
          
             Route::getProtect();
-                Route::get('/invitation/create')->controller('User\InvitationsController@create')->name('invit.create');
-                Route::get('/messages/send')->controller('MessagesController@send')->name('messages.send');
                 Route::get('/users/setting/edit')->controller('User\SettingController@edit')->name('setting.edit');
-                Route::get('/folder/content/add')->controller('FolderController@set')->name('folder.content.create');
                 Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit')->name('setting.avatar.edit');
                 Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit')->name('setting.security.edit');
                 Route::get('/users/setting/notification/edit')->controller('User\SettingController@notificationEdit')->name('setting.notif.edit');
-                
-                // Add / Edit: post | comment | answer | facet | web | team
-                Route::get('/web/create')->module('catalog', 'App\Add@create')->name('web.create');
-                Route::get('/web/reply/create')->module('catalog', 'App\Reply@create')->name('reply.create');
-                Route::get('/web/reply/edit')->module('catalog', 'App\Reply@edit')->name('reply.edit');
-                Route::get('/web/change')->module('catalog', 'App\Edit@edit')->name('web.change');
-                Route::get('/team/create')->module('teams', 'App\Teams@create')->name('team.create');
-                Route::get('/team/change')->module('teams', 'App\Teams@change')->name('team.change');
-                
-                Route::get('/create/{type}')->controller('ActionController@create')->where(['type' => '[a-z]+'])->name('content.create');
-                Route::get('/change/{type}')->controller('ActionController@change')->where(['type' => '[a-z]+'])->name('content.change');
+                // Отправка / изменение контента
+                Route::get('/create/{type}')->controller('ActionController@create')->name('content.create');
+                Route::get('/change/{type}')->controller('ActionController@change')->name('content.change');
             Route::endProtect();
     Route::endType();
 
@@ -54,8 +43,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/web/my/{page?}')->module('catalog', 'App\UserArea')->name('web.user.sites');
 
     Route::get('/teams')->module('teams', 'App\Teams')->name('teams');
-    Route::get('/team/add')->module('teams', 'App\Teams@add')->name('team.add');
-    Route::get('/team/edit/{id}')->module('teams', 'App\Teams@edit')->where(['id' => '[0-9]+'])->name('team.edit');
+    Route::get('/team/add')->module('teams', 'App\Add')->name('team.add');
+    Route::get('/team/edit/{id}')->module('teams', 'App\Edit')->where(['id' => '[0-9]+'])->name('team.edit');
     Route::get('/team/view/{id}')->module('teams', 'App\Teams@view')->where(['id' => '[0-9]+'])->name('team.view');
 
     Route::get('/setting/{type?}')->controller('User\SettingController')->where(['section' => '[a-z]+'])->name('setting'); 
@@ -88,9 +77,9 @@ Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();
     Route::getType('post');
         Route::getProtect();
             Route::get('/recover/send')->controller('Auth\RecoverController')->name('recover.send'); 
-            Route::get('/recover/send/pass')->controller('Auth\RecoverController@remindNew'); 
+            Route::get('/recover/send/pass')->controller('Auth\RecoverController@remindNew')->name('new.pass'); 
             Route::get('/register/add')->controller('Auth\RegisterController')->name('register.add');
-            Route::get('/login')->controller('Auth\LoginController');
+            Route::get('/login')->controller('Auth\LoginController')->name('enterLogin');
         Route::endProtect();
     Route::endType();
 
