@@ -33,7 +33,7 @@ class AllFacetController extends Controller
                     'facets'        => $facets,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,
-                    'access'        => Access::limitFacet($type),
+                    'access'        => Access::limit($type),
                 ]
             ]
         );

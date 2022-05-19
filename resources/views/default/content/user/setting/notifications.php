@@ -18,7 +18,7 @@
 <?= insert(
   '/_block/form/ajax',
   [
-    'url'       => url('setting.notif.edit'),
+    'url'       => url('setting.change', ['type' => 'notification']),
     'redirect'  => url('setting', ['type' => 'notifications']),
     'success'   => __('msg.password_changed'),
     'id'        => 'form#notif'

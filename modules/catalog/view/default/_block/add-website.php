@@ -11,7 +11,7 @@
 
 <fieldset>
   <label for="content"><?= __('web.description'); ?> <strong class="red">*</strong></label>
-  <textarea id="content" name="content" required=""></textarea>
+  <textarea id="content" name="content" rows="5" required=""></textarea>
   <div class="help">> 24 <?= __('app.characters'); ?></div>
 </fieldset>
 

@@ -7,7 +7,7 @@
   </a>
 </li>
 
-<?php if (UserData::getRegType(config('trust-levels.tl_add_item'))) : ?>
+<?php if (Access::limitTl(config('trust-levels.tl_add_item'))) : ?>
   <?php if (config('trust-levels.count_add_item') > $data['user_count_site']) : ?>
     <li>
       <a href="<?= url('web.add'); ?>">

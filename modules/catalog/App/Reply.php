@@ -58,9 +58,6 @@ class Reply
             redirect('/');
         }
 
-        // If the user is frozen
-        (new \App\Controllers\AuditController())->stopContentQuietМode($this->user['limiting_mode']);
-
         $redirect  = url('website', ['slug' => $item['item_domain']]) . '#reply_' . $reply['reply_id'];
 
         ReplyModel::edit(

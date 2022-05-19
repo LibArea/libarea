@@ -30,7 +30,7 @@ class Access
 
     // Добавление тем и блогов
     // $type_content: topic | blog 
-    public static function limitFacet($type_content)
+    public static function limit($type_content)
     {
         if (UserData::checkAdmin()) {
             return true;
@@ -54,7 +54,7 @@ class Access
     // TL автора и разрешенный TL
     public static function limitTl($allowed_tl)
     {
-        if ($allowed_tl == true) {
+        if ($allowed_tl === true) {
             return true;
         }
 

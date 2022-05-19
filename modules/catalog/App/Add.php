@@ -5,7 +5,8 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, FacetModel, NotificationModel};
-use UserData, Meta, Validation;
+use Utopia\Domains\Domain;
+use UserData, Meta, Validation, Access;
 
 class Add
 {
@@ -22,7 +23,9 @@ class Add
     {
         // Access rights by the trust level of the participant
         // Права доступа по уровню доверия участника
-        (new \Modules\Catalog\App\Checks())->limit();
+        if (Access::limitTl(config('trust-levels.tl_add_item')) == false) {
+            redirect(url('web'));
+        }
 
         // Plugin for selecting facets
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
@@ -51,17 +54,19 @@ class Add
 
         // Access rights by the trust level of the participant
         // Права доступа по уровню доверия участника
-        (new \Modules\Catalog\App\Checks())->limit();
+        if (Access::limitTl(config('trust-levels.tl_add_item')) == false) {
+            return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
+        }
 
         // Check if the domain exists in the system  
         // Проверим наличие домена в системе
-        if ($domain = (new \Modules\Catalog\App\Checks())->getDomain(Request::getPost('url'))) {
+        if ($domain = self::getDomain(Request::getPost('url'))) {
             return json_encode(['error' => 'error', 'text' => __('web.site_replay')]);
         }
 
         // Get a first level domain       
         // Получим данные домена первого уровня
-        $basic_host =  (new \Modules\Catalog\App\Checks())->domain(Request::getPost('url'));
+        $basic_host =  self::domain(Request::getPost('url'));
 
         // Check the length of the site name
         // Проверим длину названия сайта
@@ -137,5 +142,20 @@ class Add
         SubscriptionModel::focus($item_last['item_id'], $this->user['id'], 'item');
 
         return true;
+    }
+
+    public static function getDomain($url)
+    {
+        $basic_host = self::domain($url);
+
+        return WebModel::getItemOne($basic_host, 1);
+    }
+
+    public static function domain($url)
+    {
+        $parse  = parse_url($url);
+        $domain = new Domain($parse['host']);
+
+        return $domain->getRegisterable();
     }
 }

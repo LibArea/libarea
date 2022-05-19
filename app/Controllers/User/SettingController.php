@@ -14,7 +14,7 @@ class SettingController extends Controller
 {
     function index()
     {
-        switch (Request::get('type')) {
+      switch (Request::get('type')) {
             case 'avatar':
                 return $this->avatarForm();
                 break;
@@ -24,8 +24,30 @@ class SettingController extends Controller
             case 'notifications':
                 return $this->notificationForm();
                 break;
+            case 'cover_remove':
+                return $this->coverRemove();
+                break;
             default:
                 return $this->settingForm();
+                break;
+        } 
+    }
+
+
+    function change()
+    {
+        switch (Request::get('type')) {
+            case 'avatar':
+                return $this->avatarEdit();
+                break;
+            case 'security':
+                return $this->securityEdit();
+                break;
+            case 'notification':
+                return $this->notificationEdit();
+                break;
+            default:
+                return $this->edit();
                 break;
         }
     }
@@ -106,7 +128,7 @@ class SettingController extends Controller
         return $this->render(
             '/user/setting/avatar',
             [
-                'meta'  => Meta::get(__('app.edit')),
+                'meta'  => Meta::get(__('app.avatar')),
                 'data'  => [
                     'sheet' => 'avatar',
                     'type'  => 'user',
@@ -140,7 +162,7 @@ class SettingController extends Controller
         return $this->render(
             '/user/setting/security',
             [
-                'meta'  => Meta::get(__('app.edit_option', ['name' => __('app.password')])),
+                'meta'  => Meta::get(__('app.security')),
                 'data'  => [
                     'password'      => '',
                     'password2'     => '',

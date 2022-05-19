@@ -65,7 +65,7 @@ $domain = $data['domain'];
 <?= insert(
   '/_block/form/ajax',
   [
-    'url'       => url('content.change', ['type' => 'web']),
+    'url'       => url('content.change', ['type' => 'item']),
     'redirect'  => UserData::checkAdmin() ? url('web') : url('web.user.sites'),
     'success'   => __('msg.successfully'),
     'id'        => 'form#editWebsite'

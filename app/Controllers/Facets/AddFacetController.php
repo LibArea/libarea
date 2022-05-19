@@ -12,7 +12,7 @@ class AddFacetController extends Controller
     // Add form topic | blog | category
     public function index($type)
     {
-        if (Access::limitFacet($facet_type) == false) {
+        if (Access::limit($facet_type) == false) {
             redirect('/');
         }
 
@@ -30,7 +30,7 @@ class AddFacetController extends Controller
     // Add topic | blog | category
     public function create($facet_type)
     {
-        if (Access::limitFacet($facet_type) == false) {
+        if (Access::limit($facet_type) == false) {
             return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
         }
 

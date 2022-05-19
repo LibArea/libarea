@@ -14,10 +14,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
          
             Route::getProtect();
-                Route::get('/users/setting/edit')->controller('User\SettingController@edit')->name('setting.edit');
-                Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit')->name('setting.avatar.edit');
-                Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit')->name('setting.security.edit');
-                Route::get('/users/setting/notification/edit')->controller('User\SettingController@notificationEdit')->name('setting.notif.edit');
+                Route::get('/user/edit/{type}')->controller('User\SettingController@change')->where(['type' => '[a-z]+'])->name('setting.change');
                 // Отправка / изменение контента
                 Route::get('/create/{type}')->controller('ActionController@create')->name('content.create');
                 Route::get('/change/{type}')->controller('ActionController@change')->name('content.change');
@@ -36,7 +33,6 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/add/post/{topic_id}')->controller('Post\AddPostController', ['post'])->where(['topic_id' => '[0-9]+']);
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
-    Route::get('/@{login}/delete/cover')->controller('User\SettingController@coverRemove')->where(['login' => '[A-Za-z0-9]+'])->name('delete.cover'); 
 
     Route::get('/web/bookmarks')->module('catalog', 'App\UserArea@bookmarks')->name('web.bookmarks');
     Route::get('/web/my/{page?}')->module('catalog', 'App\UserArea')->name('web.user.sites');
@@ -46,7 +42,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/team/edit/{id}')->module('teams', 'App\Edit')->where(['id' => '[0-9]+'])->name('team.edit');
     Route::get('/team/view/{id}')->module('teams', 'App\Teams@view')->where(['id' => '[0-9]+'])->name('team.view');
 
-    Route::get('/setting/{type?}')->controller('User\SettingController')->where(['section' => '[a-z]+'])->name('setting'); 
+    Route::get('/setting/{type?}')->controller('User\SettingController')->where(['type' => '[a-z_]+'])->name('setting'); 
 
     Route::get('/messages')->controller('MessagesController')->name('messages');   
     Route::get('/messages/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 

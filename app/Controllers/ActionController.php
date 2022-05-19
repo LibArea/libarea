@@ -133,7 +133,10 @@ class ActionController extends Controller
         
         $type = Request::get('type');
         
-        $this->limitContentDay($type);
+        // TODO: Изменим поля в DB для: 
+        if (!in_array($type, ['message', 'item'])) {        
+            $this->limitContentDay($type);
+        }
 
         if (in_array($type, ['post', 'page'])) {
            return (new Post\AddPostController)->create($type);
@@ -171,7 +174,7 @@ class ActionController extends Controller
            return (new \Modules\Catalog\App\Reply)->create($type);
         }
 
-        if ($type === 'web') {
+        if ($type === 'item') {
            return (new \Modules\Catalog\App\Add)->create($type);
         }
         
@@ -227,17 +230,13 @@ class ActionController extends Controller
         } 
     }
     
+    // Лимит: за сутки для всех TL и лимит за день
     public function limitContentDay($type)
     {
         if (UserData::checkAdmin()) {
             return true;
         }
          
-        // TODO: Изменим поля в DB для: 
-        if ($type == 'message')  {
-             return true;
-        }
-        
         // Лимит за день для ВСЕХ уровней доверия
         $сount = ActionModel::getSpeedDay($this->user['id'], $type);
 

@@ -18,7 +18,7 @@
 <?= insert(
   '/_block/form/ajax',
   [
-    'url'       => url('setting.edit'),
+    'url'       => url('setting.change', ['type' => 'setting']),
     'redirect'  => url('setting', ['type' => 'security']),
     'success'   => __('msg.password_changed'),
     'id'        => 'form#setting'

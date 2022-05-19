@@ -66,7 +66,7 @@ $item = $data['item'];
     </div>
 
     <?php if ($item['item_close_replies'] == 0) : ?>
-      <?php if (UserData::getRegType(config('trust-levels.tl_add_reply'))) : ?>
+      <?php if (Access::limitTl(config('trust-levels.tl_add_reply'))) : ?>
         <form class="max-w780" action="<?= url('content.create', ['type' => 'reply']); ?>" accept-charset="UTF-8" method="post">
           <?= csrf_field() ?>
 

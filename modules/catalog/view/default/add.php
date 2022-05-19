@@ -32,7 +32,7 @@
 <?= insert(
   '/_block/form/ajax',
   [
-    'url'       => url('content.create', ['type' => 'web']),
+    'url'       => url('content.create', ['type' => 'item']),
     'redirect'  => UserData::checkAdmin() ? url('web') : url('web.user.sites'),
     'success'   => __('msg.successfully'),
     'id'        => 'form#addWebsite'

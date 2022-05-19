@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{FacetModel, PostModel, NotificationModel};
 use App\Models\User\UserModel;
-use Validation, UserData, Meta, Html, Access;
+use Validation, UserData, Meta, Access;
 
 class Edit
 {
@@ -28,7 +28,7 @@ class Edit
         if (Access::author('item', $domain['item_user_id'], $domain['item_date'], 0) === true) {
             redirect(url('web'));
         }
- 
+
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomScript('/assets/js/admin.js');
@@ -56,16 +56,15 @@ class Edit
 
     public function edit()
     {
-        // Only the site author and staff can edit
-        // Редактировать может только автор сайта и персонал
-        if (Access::author('item', $domain['item_user_id'], $domain['item_date'], 0) === true) {
+        $data = Request::getPost();
+
+        if (!$item  = WebModel::getItemId($data['item_id'])) {
             return true;
         }
-        
-        $data = Request::getPost();
-        
-        //$item_id    = Request::getPostInt('item_id');
-        if (!$item  = WebModel::getItemId($data['item_id'])) {
+
+        // Only the site author and staff can edit
+        // Редактировать может только автор сайта и персонал
+        if (Access::author('item', $item['item_user_id'], $item['item_date'], 0) === true) {
             return true;
         }
 
