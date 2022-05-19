@@ -227,6 +227,7 @@ $setting = [
 
 <fieldset>
   <input type="hidden" name="nickname" id="nickname" value="">
+  <input type="hidden" name="user_id" value="<?= $data['user']['id']; ?>">
   <?= Html::sumbit(__('app.edit')); ?>
 </fieldset>
     

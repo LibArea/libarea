@@ -5,7 +5,7 @@ namespace Modules\Catalog\App;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Catalog\App\Models\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, FacetModel, NotificationModel};
-use UserData, Meta;
+use UserData, Meta, Validation;
 
 class Add
 {

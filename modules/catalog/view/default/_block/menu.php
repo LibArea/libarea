@@ -7,8 +7,8 @@
   </a>
 </li>
 
-<?php if (UserData::getRegType(config('trust-levels.tl_add_site'))) : ?>
-  <?php if (config('trust-levels.count_add_site') > $data['user_count_site']) : ?>
+<?php if (UserData::getRegType(config('trust-levels.tl_add_item'))) : ?>
+  <?php if (config('trust-levels.count_add_item') > $data['user_count_site']) : ?>
     <li>
       <a href="<?= url('web.add'); ?>">
         <i class="bi-plus-lg"></i> <?= __('web.add_website'); ?>

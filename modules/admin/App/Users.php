@@ -109,40 +109,35 @@ class Users extends Controller
     // Редактировать участника
     public function change()
     {
-        $login          = Request::getPost('login');
-        $user_id        = Request::getInt('id');
-        $email          = Request::getPost('email');
-        $user_whisper   = Request::getPost('whisper');
-        $user_name      = Request::getPost('name');
-        $trust_level    = Request::getPostInt('trust_level');
+        $data = Request::getPost();
 
-        if (!$user = UserModel::getUser($user_id, 'id')) {
+        if (!$user = UserModel::getUser($data['user_id'], 'id')) {
             return true;
         }
         
-        if (!Validation::length($login, 3, 11)) {
+        if (!Validation::length($data['login'], 3, 11)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.login') . '»'])]);
         }
 
-        if ($email) {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if ($data['email']) {
+            if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
                 return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
             }
         }
 
         SettingModel::edit(
             [
-                'id'            => $user_id,
-                'login'         => $login,
-                'email'         => $email,
-                'whisper'       => $user_whisper ?? '',
-                'name'          => $user_name ?? '',
+                'id'            => $data['user_id'],
+                'login'         => $data['login'],
+                'email'         => $data['email'],
+                'whisper'       => $data['whisper'],
+                'name'          => $data['user_name'],
                 'activated'     => Request::getPostInt('activated'),
                 'limiting_mode' => Request::getPostInt('limiting_mode'),
                 'template'      => $user['template'] ?? 'default',
                 'lang'          => $user['lang'] ?? 'ru',
                 'scroll'        => $user['scroll'] ?? 0,
-                'trust_level'   => Request::getPostInt('trust_level'),
+                'trust_level'   => $data['trust_level'] ?? 1,
                 'updated_at'    => date('Y-m-d H:i:s'),
                 'color'         => Request::getPostString('color', '#339900'),
                 'about'         => Request::getPost('about', null),

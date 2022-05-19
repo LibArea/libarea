@@ -51,22 +51,18 @@ class SettingController extends Controller
 
     function edit()
     {
-        $name           = Request::getPost('name');
-        $about          = Request::getPost('about');
-        $public_email   = Request::getPost('public_email');
-        $template       = Request::getPost('template');
-        $lang           = Request::getPost('lang');
+        $data = Request::getPost();
 
-        if (!Validation::length($name, 0, 11)) {
+        if (!Validation::length($data['name'], 0, 11)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.name') . '»'])]);
         }
 
-        if (!Validation::length($about, 0, 255)) {
+        if (!Validation::length($data['about'], 0, 255)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.about') . '»'])]);
         }
 
-        if ($public_email) {
-            if (!filter_var($public_email, FILTER_VALIDATE_EMAIL)) {
+        if ($data['public_email']) {
+            if (!filter_var($data['public_email'], FILTER_VALIDATE_EMAIL)) {
                 return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
             }
         }
@@ -78,20 +74,20 @@ class SettingController extends Controller
                 'id'                   => $this->user['id'],
                 'email'                => $user['email'],
                 'login'                => $user['login'],
-                'name'                 => $name,
+                'name'                 => $data['name'],
                 'activated'            => $user['activated'],
                 'limiting_mode'        => $user['limiting_mode'],
                 'scroll'               => Request::getPostInt('scroll'),
                 'trust_level'          => $user['trust_level'],
                 'updated_at'           => date('Y-m-d H:i:s'),
                 'color'                => Request::getPostString('color', '#339900'),
-                'about'                => $about,
-                'template'             => $template ?? 'default',
-                'lang'                 => $lang ?? 'ru',
+                'about'                => $data['about'],
+                'template'             => $data['template'] ?? 'default',
+                'lang'                 => $data['lang'] ?? 'ru',
                 'whisper'              => $user['whisper'] ?? '',
                 'website'              => Request::getPostString('website', null),
                 'location'             => Request::getPostString('location', null),
-                'public_email'         => $public_email ?? null,
+                'public_email'         => $data['public_email'] ?? null,
                 'skype'                => Request::getPostString('skype', null),
                 'telegram'             => Request::getPostString('telegram', null),
                 'vk'                   => Request::getPostString('vk', null),

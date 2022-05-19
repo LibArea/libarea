@@ -29,7 +29,6 @@ class Edit
             redirect(url('web'));
         }
  
-
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomScript('/assets/js/admin.js');
@@ -63,34 +62,24 @@ class Edit
             return true;
         }
         
-        $item_id    = Request::getPostInt('item_id');
-        if (!$item  = WebModel::getItemId($item_id)) {
+        $data = Request::getPost();
+        
+        //$item_id    = Request::getPostInt('item_id');
+        if (!$item  = WebModel::getItemId($data['item_id'])) {
             return true;
         }
 
-        $item_url           = Request::getPost('url');
-        $item_title         = Request::getPost('title');
-        $item_content       = Request::getPost('content');
-        $item_published     = Request::getPostInt('published');
-        $item_status_url    = Request::getPostInt('status');
-        // soft
-        $item_is_soft       = Request::getPostInt('soft');
-        $item_title_soft    = Request::getPost('title_soft');
-        $item_content_soft  = Request::getPost('content_soft');
-        $item_is_github     = Request::getPostInt('github');
-        $item_github_url    = Request::getPost('github_url');
-
         // Check the length
         // Проверим длину
-        if (!Validation::length($item_title, 14, 250)) {
+        if (!Validation::length($data['title'], 14, 250)) {
             return json_encode(['error' => 'error', 'text' => __('web.string_length', ['name' => '«' . __('web.title') . '»'])]);
         }
 
-        if (!Validation::length($item_content, 24, 1500)) {
+        if (!Validation::length($data['content'], 24, 1500)) {
             return json_encode(['error' => 'error', 'text' => __('web.string_length', ['name' => '«' . __('web.description') . '»'])]);
         }
 
-        if (filter_var($item_url, FILTER_VALIDATE_URL) === false) {
+        if (filter_var($data['url'], FILTER_VALIDATE_URL) === false) {
             return true;
         }
 
@@ -107,7 +96,7 @@ class Edit
 
         // If not staff, then we make the site inactive 
         // Если не персонал, то делаем сайт не активным
-        $published = UserData::checkAdmin() ? $item_published : 0;
+        $published = UserData::checkAdmin() ? $data['published'] : 0;
 
         // If the staff, then we save the author of the site 
         // Если персонал, то сохраняем автора сайта
@@ -126,20 +115,20 @@ class Edit
         WebModel::edit(
             [
                 'item_id'               => $item['item_id'],
-                'item_url'              => $item_url,
-                'item_title'            => $item_title,
-                'item_content'          => $item_content,
-                'item_title_soft'       => $item_title_soft ?? '',
-                'item_content_soft'     => $item_content_soft ?? '',
+                'item_url'              => $data['url'],
+                'item_title'            => $data['title'],
+                'item_content'          => $data['content'],
+                'item_title_soft'       => $data['title_soft'] ?? '',
+                'item_content_soft'     => $data['content_soft'] ?? '',
                 'item_published'        => $published,
-                'item_close_replies'    => Request::getPostInt('close_replies'),
+                'item_close_replies'    => (int)($data['close_replies'] ?? 0),
                 'item_user_id'          => $owner_uid ?? 1,
                 'item_type_url'         => 0,
-                'item_status_url'       => $item_status_url,
-                'item_is_soft'          => $item_is_soft,
-                'item_is_github'        => $item_is_github,
+                'item_status_url'       => $data['status'] ?? 404,
+                'item_is_soft'          => (int)($data['soft'] ?? 0),
+                'item_is_github'        => (int)($data['github'] ?? 0),
                 'item_post_related'     => $post_related ?? '',
-                'item_github_url'       => $item_github_url ?? '',
+                'item_github_url'       => $data['item_github_url'] ?? '',
             ]
         );
 
