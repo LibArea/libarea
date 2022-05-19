@@ -28,13 +28,13 @@
               Notiflix.Notify.failure(is_valid.text);
                 setTimeout(function () {
                     window.location.replace('/');
-                }, 2000);
+                }, 1200);
                 return;
             }
             Notiflix.Notify.success('<?= $success; ?>');
             setTimeout(function () {
                window.location.replace('<?= $redirect; ?>');
-            }, 2000);
+            }, 1200);
           })
           .catch((err) => console.error(err))
       });

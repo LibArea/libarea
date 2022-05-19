@@ -11,12 +11,12 @@ class Access
         if (UserData::checkAdmin()) {
             return true;
         }
-        
+
         // Ограничение по уровню доверия на создание
         if (self::limitTl(config('trust-levels.tl_add_' . $type_content)) == false) {
             return false;
         }
-        
+
         // Доступ получает только автор
         if ($author_id != UserData::getUserId()) {
             return false;
@@ -35,7 +35,7 @@ class Access
         if (UserData::checkAdmin()) {
             return true;
         }
-        
+
         // Ограничение по уровню доверия на создание
         if (self::limitTl(config('trust-levels.tl_add_' . $type_content)) == false) {
             return false;
@@ -57,7 +57,7 @@ class Access
         if ($allowed_tl == true) {
             return true;
         }
-    
+
         if (UserData::getUserTl() < $allowed_tl) {
             return false;
         }
@@ -89,5 +89,4 @@ class Access
 
         return true;
     }
-
 }

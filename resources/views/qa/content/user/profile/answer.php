@@ -6,8 +6,10 @@
         <p class="m0"><?= __('app.answers'); ?> <b><?= $data['profile']['login']; ?></b></p>
       </div>
       <?php if (!empty($data['answers'])) : ?>
-        <?= insert('/content/answer/answer', ['data' => $data]); ?>
-        <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/answers'); ?>
+        <div class="ml15">
+          <?= insert('/content/answer/answer', ['data' => $data]); ?>
+          <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/answers'); ?>
+        </div>
       <?php else : ?>
         <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_answers'), 'icon' => 'bi-info-lg']); ?>
       <?php endif; ?>

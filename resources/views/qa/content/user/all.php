@@ -1,8 +1,8 @@
 <main class="w-100">
   <div class="bg-violet box center">
-    <h1 class="m0 text-xl font-normal"><?= __('meta.' . $data['sheet']); ?></h1>
+    <h1 class="m0 text-xl font-normal"><?= __('meta.' . $data['sheet'] . '_users'); ?></h1>
     <span class="text-sm gray-600">
-      <?= __('meta.' . $data['sheet'] . '.info'); ?>.
+      <?= __('meta.' . $data['sheet'] . '_users_info'); ?>.
     </span>
   </div>
 

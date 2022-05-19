@@ -29,9 +29,11 @@
             </a>
             <span class="action-team gray-600" data-id="<?= $team['id']; ?>"><?= __('team.remove'); ?></span>
           <?php else : ?>
-            <?= $team['name']; ?>
-            <div class="gray-600">
-              <?= __('team.reestablish'); ?>. <span class="action-team" data-id="<?= $team['id']; ?>"><?= __('team.recover'); ?></span>
+            <div class="bg-red-200 p5">
+              <?= $team['name']; ?>
+              <div class="gray-600 bg-red-200">
+                <?= __('team.reestablish'); ?>. <span class="action-team" data-id="<?= $team['id']; ?>"><?= __('team.recover'); ?>  </span>
+              </div>
             </div>
           <?php endif; ?>
         </div>

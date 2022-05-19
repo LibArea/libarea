@@ -37,7 +37,6 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
     Route::get('/@{login}/delete/cover')->controller('User\SettingController@coverRemove')->where(['login' => '[A-Za-z0-9]+'])->name('delete.cover'); 
-    Route::get('/@{login}/messages')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
 
     Route::get('/web/bookmarks')->module('catalog', 'App\UserArea@bookmarks')->name('web.bookmarks');
     Route::get('/web/my/{page?}')->module('catalog', 'App\UserArea')->name('web.user.sites');
@@ -51,6 +50,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     Route::get('/messages')->controller('MessagesController')->name('messages');   
     Route::get('/messages/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 
+    Route::get('/messages/@{login}')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
+    
 	Route::get('/notifications')->controller('NotificationController')->name('notifications'); 
     Route::get('/notification/{id}')->controller('NotificationController@read')->where(['id' => '[0-9]+'])->name('notif.read');  
     Route::get('/notifications/delete')->controller('NotificationController@remove')->name('notif.remove');  

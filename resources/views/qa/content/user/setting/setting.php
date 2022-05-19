@@ -4,7 +4,7 @@
   <div class="box">
     <form class="max-w780" id="setting" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
-      <?= component('setting-security', ['data' => $data]); ?>
+      <?= component('setting', ['data' => $data]); ?>
     </form>
   </div>
 </main>

@@ -105,8 +105,7 @@ class MessagesController extends Controller
             [
                 'meta'  => Meta::get(__('app.dialogue')),
                 'data'  => [
-                    'h1'                => __('app.dialogue') . ' - ' . $list[$key]['login'],
-                    'sheet'             => __('app.dialogue') . ' - ' . $list[$key]['login'],
+                    'sheet'             => __('app.dialogue') . ' — <b>' . $list[$key]['login'] . '</b>',
                     'type'              => 'type',
                     'list'              => $list,
                     'recipient_user'    => $recipient_user,

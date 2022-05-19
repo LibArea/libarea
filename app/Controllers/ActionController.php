@@ -233,8 +233,14 @@ class ActionController extends Controller
             return true;
         }
          
+        // TODO: Изменим поля в DB для: 
+        if ($type == 'message')  {
+             return true;
+        }
+        
         // Лимит за день для ВСЕХ уровней доверия
         $сount = ActionModel::getSpeedDay($this->user['id'], $type);
+
         if ($сount >= config('trust-levels.all_limit')) {
             Html::addMsg(__('msg.limit_day', ['tl' => UserData::getUserTl()]), 'error');
             redirect('/');

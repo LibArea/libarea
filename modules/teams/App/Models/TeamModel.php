@@ -56,7 +56,7 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
                                         GROUP BY team_id
                             ) AS rel
                                 ON rel.team_id= t.id
-                                        WHERE u.id = :uid LIMIT :limit";
+                                        WHERE u.id = :uid ORDER BY t.is_deleted LIMIT :limit";
                             
         return DB::run($sql, ['uid' => $uid, 'limit' => $limit])->fetchAll(); 
     }

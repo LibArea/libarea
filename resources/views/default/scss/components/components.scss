@@ -91,6 +91,16 @@ h5 {
   color: var(--gray-700);
 }
 
+.tabs {
+  padding: 3px 6px 3px 6px;
+  margin-right: 15px;
+}
+
+.tabs.active {
+  background-color: var(--gray-100);
+  color: var(--gray-600);
+}
+
 aside {
   min-width: 260px;
   max-width: 310px;

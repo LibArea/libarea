@@ -7,8 +7,6 @@
   </a>
 </li>
 
-<?= var_dump(Access::limitFacet('web'))?>
-
 <?php if (UserData::getRegType(config('trust-levels.tl_add_site'))) : ?>
   <?php if (config('trust-levels.count_add_site') > $data['user_count_site']) : ?>
     <li>

@@ -17,7 +17,7 @@
 
   <div class="box bg-violet">
     <h3 class="uppercase-box"><?= __('app.contacts'); ?></h3>
-    <?php foreach (config('user-setting') as $block) : ?>
+    <?php foreach (config('user-profile') as $block) : ?>
       <?php if ($profile[$block['title']]) : ?>
         <div class="mt5">
           <?= $block['lang']; ?>:
