@@ -28,7 +28,7 @@ $sw = $sw ?? '?';
       if ($type == 'website') {
         $url_content = $result['item_url'];
       } else {
-        $url_content = '/post/' . $result['id'];
+        $url_content = '/post/' . $result['post_id'];
       }
     ?>
 
