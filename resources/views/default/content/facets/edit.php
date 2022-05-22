@@ -1,7 +1,6 @@
 <?php
 $fs = $data['facet'];
-$url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : url($fs['facet_type'], ['slug' => $fs['facet_slug']]);
-$url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
+$url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
 <main>
@@ -215,12 +214,3 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
     'id'        => 'form#editFacet'
   ]
 ); ?>
-
-<!--
-
-if ($new_type == 'category') {
-     Validation::ComeBack('msg.change_saved', 'success', url('web.dir', ['grouping' => 'all', 'slug' => $facet_slug]));
-}
-
-Validation::ComeBack('msg.change_saved', 'success', url($new_type, ['slug' => $facet_slug]));
--->

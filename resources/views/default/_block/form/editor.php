@@ -23,7 +23,11 @@ document.addEventListener('DOMContentLoaded', function() {
       },
 
       toolbar: [
-        <?php foreach (config('editor/buttons') as $row) : ?>
+        <?php 
+          $conf_editor = config('editor/buttons');
+          if (!empty($message)) $conf_editor = config('editor/message');
+        ?>
+        <?php foreach ($conf_editor as $row) : ?>
           <?php if (!empty($row['separator']) == 'separator') : ?> '|',
           <?php else : ?> {
               name: '<?= $row['name']; ?>',

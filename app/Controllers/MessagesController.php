@@ -100,6 +100,9 @@ class MessagesController extends Controller
             }
         }
 
+        Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
+
         return $this->render(
             '/messages/dialog',
             [

@@ -139,6 +139,8 @@ Route::get('/blogs/{page?}')->controller('Facets\AllFacetController', ['all', 'b
 
 Route::get('/blog/{slug}/{page?}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog.user'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('blog');
 
+Route::get('/redirect/facet/{id}')->controller('Facets\RedirectController')->where(['id' => '[0-9]+'])->name('redirect.facet');
+
 Route::get('/domain/{domain}/{page?}')->controller('Post\PostController@domain', ['web.feed'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 
 Route::get('/web')->module('catalog', 'App\Home', ['main'])->name('web');

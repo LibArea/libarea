@@ -1,7 +1,6 @@
-<?php 
+<?php
 $fs = $data['facet'];
-$url = $fs['facet_type'] == 'category' ? url('web.dir', ['cat' => 'cat', 'slug' => $fs['facet_slug']]) : url($fs['facet_type'], ['slug' => $fs['facet_slug']]);
-$url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
+$url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
 <main class="col-two">
@@ -27,7 +26,7 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
   </div>
 
   <div class="box max-w780">
-    <form action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w780" id="editFacet" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <div class="file-upload mb10" id="file-drag">
@@ -207,3 +206,12 @@ $url = $fs['facet_type'] == 'section' ? '/mod/admin/facets/section' : $url;
     <?= __('help.edit_' . $data['type']); ?>
   </div>
 </aside>
+<?= insert(
+  '/_block/form/ajax',
+  [
+    'url'       => url('content.change', ['type' => $fs['facet_type']]),
+    'redirect'  => $url,
+    'success'   => __('msg.successfully'),
+    'id'        => 'form#editFacet'
+  ]
+); ?>
