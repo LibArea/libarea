@@ -15,6 +15,10 @@ return [
     // URL должен совпадать с SLUG постов прикрепленного с фасету Информация
     'page-one'      => 'information',
     'page-two'      => 'privacy',
+    
+    // To check existing facet types
+    // Для проверки существующих типов фасетов
+    'permitted'     => ['topic', 'blog', 'category', 'section'],
 
     // Types of faces
     // Типы граней
