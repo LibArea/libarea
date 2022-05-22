@@ -2,9 +2,11 @@
 
 use App\Models\{FacetModel, FileModel};
 use App\Models\User\{UserModel, SettingModel};
+use Phphleb\Imageresizer\SimpleImage;
 
 class UploadImage
 {
+ 
     public static function img($img, $content_id, $type)
     {
         switch ($type) {
@@ -27,15 +29,16 @@ class UploadImage
             $filename =  $pref . $content_id . '-' . time();
             $file = $img['tmp_name'];
 
-            $image = new  SimpleImage();
-            $image
-                ->fromFile($file)  // load image.jpg
-                ->autoOrient()     // adjust orientation based on exif data
-                ->resize(160, 160)
-                ->toFile($path_img . $filename . '.jpeg', 'image/jpeg')
-                ->resize(48, 48)
-                ->toFile($path_img_small . $filename . '.jpeg', 'image/jpeg');
+            // https://github.com/phphleb/imageresizer
+            $image = new SimpleImage();
 
+            $image->load($file);
+            $image->resize(160, 160);
+            $image->save($path_img . $filename . '.jpeg', "jpeg");   
+            
+            $image->resize(48, 48);
+            $image->save($path_img_small . $filename . '.jpeg', "jpeg");  
+            
             $new_img    = $filename . '.jpeg';
 
             if ($type == 'topic') {
@@ -76,20 +79,17 @@ class UploadImage
 
         self::createDir($path_img . $year . $month);
 
-        $image = new  SimpleImage();
+        $image = new SimpleImage();
 
         $width_h  = getimagesize($file);
         if ($width_h[0] > 850) {
-            $image
-                ->fromFile($file)  // load image.jpg
-                ->autoOrient()     // adjust orientation based on exif data
-                ->resize(850, null)
-                ->toFile($path_img . $year . $month . $filename . '.jpeg', 'image/jpeg');
+            $image->load($file);
+            $image->resizeToWidth(850);
+            $image->save($path_img . $year . $month . $filename . '.jpeg', "jpeg");
+                
         } else {
-            $image
-                ->fromFile($file)
-                ->autoOrient()
-                ->toFile($path_img . $year . $month . $filename . '.jpeg', 'image/jpeg');
+            $image->load($file);
+            $image->save($path_img . $year . $month . $filename . '.jpeg', "jpeg");
         }
 
         $img_post = PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
@@ -128,14 +128,13 @@ class UploadImage
             $filename =  $pref . $content_id . '-' . time();
             $file_cover = $cover['tmp_name'];
 
-            $image = new  SimpleImage();
-            $image
-                ->fromFile($file_cover)  // load image.jpg
-                ->autoOrient()     // adjust orientation based on exif data
-                ->resize(1720, 350)
-                ->toFile($path_cover_img . $filename . '.jpeg', 'image/jpeg')
-                ->resize(390, 124)
-                ->toFile($path_cover_small . $filename . '.jpeg', 'image/jpeg');
+            $image = new SimpleImage();
+            $image->load($file_cover);
+            $image->resize(1720, 350);
+            $image->save($path_cover_img . $filename . '.jpeg', "jpeg");   
+            
+            $image->resize(48, 48);
+            $image->save($path_cover_small . $filename . '.jpeg', "jpeg");  
 
             $new_cover  = $filename . '.jpeg';
 
@@ -176,7 +175,6 @@ class UploadImage
             Validation::ComeBack('msg.five_width', 'error', $redirect);
         }
 
-        $image = new  SimpleImage();
         $path = HLEB_PUBLIC_DIR . PATH_POSTS_COVER;
         $year = date('Y') . '/';
         $file = $cover['tmp_name'];
@@ -184,13 +182,11 @@ class UploadImage
 
         self::createDir($path . $year);
 
-        // https://github.com/claviska/SimpleImage
-        $image
-            ->fromFile($file)  // load image.jpg
-            ->autoOrient()     // adjust orientation based on exif data
-            ->resize(820, null)
-            ->toFile($path . $year . $filename . '.webp', 'image/webp');
-
+        $image = new SimpleImage();
+        $image->load($file);
+        $image->resizeToWidth(850);
+        $image->save($path . $year . $filename . '.webp', "webp");
+        
         $post_img = $year . $filename . '.webp';
 
         // Delete if there is an old one
@@ -198,7 +194,7 @@ class UploadImage
         if ($post_content_img != $post_img) {
             @unlink($path . $post_content_img);
             FileModel::removal($post_content_img, $user_id);
-        }
+        } 
 
         FileModel::set(
             [
@@ -240,12 +236,10 @@ class UploadImage
             }
 
             $image = new SimpleImage();
-            $image
-                ->fromFile($local)  // load image.jpg
-                ->autoOrient()      // adjust orientation based on exif data
-                ->resize(260, null)
-                ->toFile($path . $year . $file . '.webp', 'image/webp');
-
+            $image->load($file);
+            $image->resizeToWidth(260);
+            $image->save($path . $year . $filename . '.webp', "webp");
+            
             if (file_exists($local)) {
                 @unlink($local);
             }

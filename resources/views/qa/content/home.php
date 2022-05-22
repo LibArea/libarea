@@ -54,7 +54,7 @@
               <span class="middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
             </a>
             <?php if (UserData::getUserId() == $topic['facet_user_id']) : ?>
-              <a class="right gray-600 mt5" title="<?= __('app.add_option', ['name' => __('app.post')]); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+              <a class="right gray-600 mt5" title="<?= __('app.add_post'); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
                 <i class="bi-plus-lg text-sm"></i>
               </a>
             <?php endif; ?>

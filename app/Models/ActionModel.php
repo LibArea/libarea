@@ -122,15 +122,20 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Member Content Posting Frequency 
     // Частота размещения контента участника в день 
-    public static function getSpeedDay($user_id, $type)
+    public static function getSpeedTime($user_id, $type, $time = 'all')
     {
+        $sorting = 'AND " . $type . "_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)';
+        if ($time == 'all') {
+            $sorting = '';
+        }
+        
         $sql = "SELECT 
                     " . $type . "_id, 
                     " . $type . "_user_id, 
                     " . $type . "_date
                     FROM " . $type . "s 
                         WHERE " . $type . "_user_id = :user_id
-                        AND " . $type . "_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
+                        $sorting";
 
         return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }

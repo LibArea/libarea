@@ -25,7 +25,7 @@ class Edit
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (Access::author('item', $domain['item_user_id'], $domain['item_date'], 0) === true) {
+        if (Access::author('item', $domain['item_user_id'], $domain['item_date'], 0) === false) {
             redirect(url('web'));
         }
 
@@ -54,17 +54,17 @@ class Edit
         );
     }
 
-    public function edit()
+    public function change()
     {
         $data = Request::getPost();
-
-        if (!$item  = WebModel::getItemId($data['item_id'])) {
+        $item = WebModel::getItemId($data['item_id']);
+        if (!$item) {
             return true;
         }
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (Access::author('item', $item['item_user_id'], $item['item_date'], 0) === true) {
+        if (Access::author('item', $item['item_user_id'], $item['item_date'], 0) === false) {
             return true;
         }
 

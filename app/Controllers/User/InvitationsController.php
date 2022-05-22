@@ -59,9 +59,11 @@ class InvitationsController extends Controller
         }
 
         $inv_user = InvitationModel::duplicate($invitation_email);
-        if ($inv_user['invitation_email'] == $invitation_email) {
-            Validation::ComeBack('msg.invate_replay', 'error', $redirect);
-        }
+        if (!empty($inv_user['invitation_email'])) {
+            if ($inv_user['invitation_email'] == $invitation_email) {
+                Validation::ComeBack('msg.invate_replay', 'error', $redirect);
+            }
+        }    
 
         if ($this->user['invitation_available'] >= config('general.invite_limit')) {
             Validation::ComeBack('msg.invate_limit_stop', 'error', $redirect);

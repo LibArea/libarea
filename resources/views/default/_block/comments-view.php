@@ -64,7 +64,7 @@
 
                 <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml5'); ?>
 
-                <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_stop_report'))) : ?>
+                <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
                     <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
                   </a>
@@ -170,7 +170,7 @@
                   </a>
                 <?php endif; ?>
 
-                <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_stop_report'))) : ?>
+                <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml15">
                     <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
                   </a>

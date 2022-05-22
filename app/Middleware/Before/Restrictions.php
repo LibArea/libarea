@@ -16,5 +16,4 @@ class Restrictions extends MainMiddleware
     {
         Access::limitForMiddleware();
     }
-
 }

@@ -10,4 +10,4 @@ class UserAuth extends MainMiddleware
     {
         return (new \UserData)->checkActiveUser();
     }
-} 
+}

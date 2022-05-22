@@ -37,7 +37,7 @@ class Html
             }
         }
 
-        $html  = '<a title="' . __('app.add_option', ['name' => __('app.post')]) . '" 
+        $html  = '<a title="' . __('app.add_post') . '" 
                     href="' . $url_add . '" class="sky">
                     <i class="bi-plus-lg text-xl"></i>
                   </a>';
@@ -337,27 +337,27 @@ class Html
     }
 
     public static function formatToHuman($number)
-    {        
-            if ($number < 1000) {
-                 return sprintf('%d', $number);
-            }
+    {
+        if ($number < 1000) {
+            return sprintf('%d', $number);
+        }
 
-            if ($number < 1000000) {
-                $number = $number / 1000;
-                return $newVal = number_format($number,1) . 'k';
-            }
+        if ($number < 1000000) {
+            $number = $number / 1000;
+            return $newVal = number_format($number, 1) . 'k';
+        }
 
-            if ($number >= 1000000 && $number < 1000000000) {
-                $number = $number / 1000000;
-                return $newVal = number_format($number,1) . 'M';
-            }
+        if ($number >= 1000000 && $number < 1000000000) {
+            $number = $number / 1000000;
+            return $newVal = number_format($number, 1) . 'M';
+        }
 
-            if ($number >= 1000000000 && $number < 1000000000000) {
-                $number = $number / 1000000000;
-                return $newVal = number_format($number,1) . 'B';
-            }
+        if ($number >= 1000000000 && $number < 1000000000000) {
+            $number = $number / 1000000000;
+            return $newVal = number_format($number, 1) . 'B';
+        }
 
-            return sprintf('%d%s', floor($number / 1000000000000), 'T+');        
+        return sprintf('%d%s', floor($number / 1000000000000), 'T+');
     }
 
 

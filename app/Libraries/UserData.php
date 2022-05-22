@@ -205,6 +205,15 @@ class UserData
     }
 
     /**
+     * Returns the member template.
+     * Возвращает шаблон участника.
+     */
+    static public function getLimitingMode()
+    {
+        return self::$myAccount['limiting_mode'];
+    }
+
+    /**
      * Returns the member's avatar file (default).
      * Возвращает файл аватара участника (по умолчанию дефолтный).
      */

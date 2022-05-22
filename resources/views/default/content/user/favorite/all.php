@@ -74,6 +74,6 @@
 </main>
 <aside>
   <div class="box text-sm sticky top-sm">
-    <?= __('app.favorite_info'); ?>
+    <?= __('help.favorite_info'); ?>
   </div>
 </aside>

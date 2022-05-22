@@ -45,7 +45,7 @@ class EditFacetController extends Controller
         );
     }
 
-    public function edit()
+    public function change()
     {
         $data = Request::getPost();
  

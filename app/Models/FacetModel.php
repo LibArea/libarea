@@ -404,13 +404,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      */
     public static function countFacetsUser($uid, $type)
     {
-        $sql = "SELECT 
-                    facet_id, 
-                    facet_title, 
-                    facet_slug, 
-                    facet_user_id,
-                    facet_type
-                        FROM facets WHERE facet_user_id = :uid AND facet_type = :type";
+        $sql = "SELECT facet_id FROM facets WHERE facet_user_id = :uid AND facet_type = :type";
 
         return DB::run($sql, ['uid' => $uid, 'type' => $type])->rowCount();
     }

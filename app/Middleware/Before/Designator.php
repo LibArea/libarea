@@ -10,4 +10,4 @@ class Designator extends MainMiddleware
     {
         (new \UserData())->checkAccordance($type, $compare);
     }
-} 
+}

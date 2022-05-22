@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{ActionModel, AuditModel, NotificationModel, PostModel};
-use UserData, Html, Validation;
+use UserData, Html;
 
 class AuditController extends Controller
 {
@@ -53,7 +53,7 @@ class AuditController extends Controller
         }
         return true;
     }
-    
+
     // For URL trigger 
     // Для триггера URL
     public static function estimationUrl($content)
@@ -126,10 +126,10 @@ class AuditController extends Controller
         $content_id     = Request::getPostInt('content_id');
 
         // Limit the flags
-        if ($this->user['trust_level'] == config('trust-levels.tl_stop_report')) return 1;
+        if ($this->user['trust_level'] == config('trust-levels.tl_фвв_report')) return 1;
 
         $num_report =  AuditModel::getSpeedReport($this->user['id']);
-        if ($num_report > config('trust-levels.all_stop_report')) return 1;
+        if ($num_report > config('trust-levels.perDay_report')) return 1;
 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
         Html::pageError404($post);

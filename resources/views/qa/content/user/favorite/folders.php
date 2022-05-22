@@ -11,6 +11,6 @@
 </main>
 <aside>
   <div class="box bg-violet text-sm sticky top-sm">
-    <?= __('app.favorite_info'); ?>...
+    <?= __('help.favorite_info'); ?>...
   </div>
 </aside>

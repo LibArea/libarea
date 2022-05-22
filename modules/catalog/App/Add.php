@@ -21,12 +21,10 @@ class Add
     // Форма добавление домена
     public function index()
     {
-        // Access rights by the trust level of the participant
-        // Права доступа по уровню доверия участника
-        if (Access::limitTl(config('trust-levels.tl_add_item')) == false) {
-            redirect(url('web'));
+        if (Access::trustLevels(config('trust-levels.tl_add_item')) == false) {
+            redirect('/web');
         }
-
+        
         // Plugin for selecting facets
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
@@ -50,12 +48,6 @@ class Add
         $url = Request::getPost('url');
         if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
             return json_encode(['error' => 'error', 'text' => __('web.website_correctness')]);
-        }
-
-        // Access rights by the trust level of the participant
-        // Права доступа по уровню доверия участника
-        if (Access::limitTl(config('trust-levels.tl_add_item')) == false) {
-            return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
         }
 
         // Check if the domain exists in the system  

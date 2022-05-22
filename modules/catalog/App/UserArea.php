@@ -16,15 +16,10 @@ class UserArea extends Controller
         $items  = UserAreaModel::getUserSites($this->pageNumber, $this->limit, $this->user['id']);
         $count_site = UserData::checkAdmin() ? 0 : $pagesCount;
 
-        $m = [
-            'og'         => true,
-            'imgurl'     => config('meta.img_path_web'),
-        ];
-
         return view(
             '/view/default/user/user-sites',
             [
-                'meta'  => Meta::get(__('web.my_website'), __('web.my_website'), $m),
+                'meta'  => Meta::get(__('web.my_website')),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'all',
@@ -51,7 +46,7 @@ class UserArea extends Controller
         return view(
             '/view/default/user/bookmarks',
             [
-                'meta'  => Meta::get(__('web.favorites'), __('web.favorites')),
+                'meta'  => Meta::get(__('web.favorites')),
                 'user'  => $this->user,
                 'data'  => [
                     'screening'         => 'cat',

@@ -56,7 +56,7 @@ foreach ($answer as  $comment) :
             </a>
           <?php endif; ?>
 
-          <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_stop_report'))) : ?>
+          <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml15">
               <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
             </a>

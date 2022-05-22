@@ -28,6 +28,7 @@
     "php": ">=7.4.0",
     "ext-pdo": "*",
     "phphleb/framework": ">=1.6.61",
+    "phphleb/imageresizer": "dev-master",
     "phphleb/debugpan": "1.*",
     "phphleb/radjax": "dev-master",
     "donatj/phpuseragentparser": "^1.6",

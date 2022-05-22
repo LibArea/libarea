@@ -40,7 +40,7 @@ class EditAnswerController extends Controller
         );
     }
 
-    public function edit()
+    public function change()
     {
         $answer_id  = Request::getPostInt('answer_id');
         $content    = $_POST['content']; // для Markdown

@@ -72,7 +72,7 @@ class SendEmail
                 $mail->SMTPAuth   = true;
                 $mail->Username   = config('general.smtpuser');
                 $mail->Password   = config('general.smtppass');
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $mail->Port       = config('general.smtpport');
 
                 //Recipients
@@ -85,11 +85,9 @@ class SendEmail
                 $mail->Body    = $message;
 
                 $mail->send();
-
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
-
         } else {
             $mail->isSendmail();
             $mail->CharSet = "utf-8";
@@ -101,8 +99,7 @@ class SendEmail
             //send the message, check for errors
             if (!$mail->send()) {
                 echo 'Mailer Error: ' . $mail->ErrorInfo;
-            } 
-            
+            }
         }
         return true;
     }

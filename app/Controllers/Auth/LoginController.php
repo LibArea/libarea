@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
-use Validation, Meta;
+use Meta;
 
 class LoginController extends Controller
 {

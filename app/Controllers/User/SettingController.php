@@ -7,14 +7,11 @@ use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
 use UploadImage, Validation, Meta, UserData;
 
-use Noodlehaus\Config;
-use Noodlehaus\Parser\PHP;
-
 class SettingController extends Controller
 {
     function index()
     {
-      switch (Request::get('type')) {
+        switch (Request::get('type')) {
             case 'avatar':
                 return $this->avatarForm();
                 break;
@@ -30,7 +27,7 @@ class SettingController extends Controller
             default:
                 return $this->settingForm();
                 break;
-        } 
+        }
     }
 
 
@@ -232,7 +229,7 @@ class SettingController extends Controller
 
         // Если удаляет администрация
         if (UserData::checkAdmin()) {
-            redirect('/admin/users/' . $user['id'] . '/edit');
+            redirect('/mod/admin/users/' . $user['id'] . '/edit');
         }
 
         redirect('/setting/avatar');
@@ -241,7 +238,7 @@ class SettingController extends Controller
     // Member preference setting form
     // Форма настройки предпочтений участника
     function notificationForm()
-    {//print_r(SettingModel::getNotifications($this->user['id']));
+    { //print_r(SettingModel::getNotifications($this->user['id']));
         return $this->render(
             '/user/setting/notifications',
             [

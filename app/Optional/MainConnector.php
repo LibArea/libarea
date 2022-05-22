@@ -23,7 +23,7 @@ class MainConnector implements Connector
             "App\Commands\*"                => "app/Commands/",
 
             // ... or, if a specific class is added,
-            "Phphleb\Debugpan\DPanel"      => "app/ThirdParty/phphleb/debugpan/DPanel.php",
+            // "Phphleb\Debugpan\DPanel"      => "app/ThirdParty/phphleb/debugpan/DPanel.php",
 
             "DB"                            => "app/Libraries/DB.php",
             "Configuration"                 => "app/Libraries/Configuration.php",
@@ -43,7 +43,6 @@ class MainConnector implements Connector
             "Parser"                        => "app/Libraries/Jevix/Parser.php",
 
             // TODO: заменить
-            "SimpleImage"                   => "app/Libraries/SimpleImage.php",
             "URLScraper"                    => "app/Libraries/URLScraper.php",
             "SendEmail"                     => "app/Libraries/SendEmail.php",
         ];

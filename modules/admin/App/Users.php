@@ -131,7 +131,7 @@ class Users extends Controller
                 'login'         => $data['login'],
                 'email'         => $data['email'],
                 'whisper'       => $data['whisper'],
-                'name'          => $data['user_name'],
+                'name'          => $data['name'],
                 'activated'     => Request::getPostInt('activated'),
                 'limiting_mode' => Request::getPostInt('limiting_mode'),
                 'template'      => $user['template'] ?? 'default',

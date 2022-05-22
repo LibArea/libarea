@@ -1,3 +1,5 @@
+<?php $access = Access::trustLevels(config('trust-levels.tl_add_' . $data['type'])); ?>
+
 <main class="w-100">
   <div class="bg-violet box center">
     <h1 class="text-xl"><?= __('meta.' . $data['sheet'] . '_' . $data['type']. 's'); ?></h1>
@@ -38,22 +40,15 @@
       ?>
 
     </ul>
-    <?php if (UserData::getRegType(config('trust-levels.tl_add_blog'))) : ?>
+
+    <?php if ($access) : ?>
+      <?php if ($data['countUserFacet'] == 0 || UserData::checkAdmin()) : ?>
       <p class="m0 text-xl">
-        <?php if ($data['type'] == 'blog') : ?>
-          <?php if ($data['limit']) : ?>
-            <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
-              <i class="bi-plus-lg middle"></i>
-            </a>
-          <?php endif; ?>
-        <?php else : ?>
-          <?php if (UserData::checkAdmin()) : ?>
-            <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
-              <i class="bi-plus-lg middle"></i>
-            </a>
-          <?php endif; ?>
-        <?php endif; ?>
+        <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
+          <i class="bi-plus-lg middle"></i>
+        </a>
       </p>
+      <?php endif; ?>
     <?php endif; ?>
   </div>
 

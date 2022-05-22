@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Teams\App;
+namespace Modules\Team\App;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Teams\App\Models\TeamModel;
+use Modules\Team\App\Models\TeamModel;
 use UserData, Meta, Html, Validation;
 
 class Edit
@@ -27,7 +27,7 @@ class Edit
         $id = Request::getInt('id');
 
         $team = TeamModel::get($id);
-        if ($team['user_id'] != $this->user['id']) {
+        if ($team['team_user_id'] != $this->user['id']) {
             return;
         }
 
@@ -39,7 +39,7 @@ class Edit
                 'data'  => [
                     'type'  => 'edit',
                     'team'  => $team,
-                    'users' => TeamModel::getUsersTeam($team['id']),
+                    'users' => TeamModel::getUsersTeam($team['team_id']),
                 ]
             ]
         );
@@ -50,7 +50,8 @@ class Edit
     public function change()
     {
         $team = TeamModel::get(Request::getPostInt('id'));
-        if ($team['user_id'] != $this->user['id']) {
+
+        if ($team['team_user_id'] != $this->user['id']) {
             return true;
         }
 
@@ -67,18 +68,18 @@ class Edit
 
         TeamModel::edit(
             [
-                'id'            => $team['id'],
-                'name'          => $name,
-                'content'       => $content,
-                'action_type'   => 'post',
-                'updated_at'    => date("Y-m-d H:i:s"),
+                'team_id'       => $team['id'],
+                'team_name'     => $name,
+                'team_content'  => $content,
+                'team_type'     => 'post',
+                'team_modified' => date("Y-m-d H:i:s"),
             ]
         );
 
         $users    = Request::getPost() ?? [];
-        self::editUser($users, $team['id']);
+        self::editUser($users, $team['team_id']);
 
-        Validation::ComeBack('team.change', 'success', url('teams'));
+        Validation::ComeBack('team.change', 'success', url('team'));
     }
 
     // Add fastes (blogs, topics) to the post 

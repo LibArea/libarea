@@ -17,7 +17,6 @@ class EditCommentController extends Controller
         // Проверка доступа 
         $comment_id = Request::getPostInt('comment_id');
         $comment    = CommentModel::getCommentsId($comment_id);
-        
         if (Access::author('comment', $comment['comment_user_id'], $comment['comment_date'], 30) == false) {
             return false;
         }
@@ -34,7 +33,7 @@ class EditCommentController extends Controller
         );
     }
 
-    public function edit()
+    public function change()
     {
         $comment_id = Request::getPostInt('comment_id');
         $content    = $_POST['comment']; // для Markdown

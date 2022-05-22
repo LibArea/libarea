@@ -57,7 +57,7 @@ foreach ($data['answers'] as $answer) :
             </a>
           <?php endif; ?>
 
-          <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_stop_report'))) : ?>
+          <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
             <a data-post_id="<?= $answer['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
               <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
             </a>

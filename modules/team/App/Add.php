@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Teams\App;
+namespace Modules\Team\App;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Teams\App\Models\TeamModel;
+use Modules\Team\App\Models\TeamModel;
 use UserData, Meta, Html, Validation;
 
 class Add
@@ -38,10 +38,10 @@ class Add
     // Добавление команды
     public function create()
     {
-        $count = TeamModel::allCount($this->user['id']);
-        if ($count > $this->limit) {
-            return;
-        }
+        //$count = TeamModel::allCount($this->user['id']);
+        //if ($count > $this->limit) {
+          //  return;
+       // }
 
         $name = Request::getPost('name');
         $content = Request::getPost('content');
@@ -51,12 +51,12 @@ class Add
 
         TeamModel::create(
             [
-                'name'      => $name,
-                'content'   => $content,
-                'user_id'   => $this->user['id'],
-                'action_type' => 'post',
+                'team_name'     => $name,
+                'team_content'  => $content,
+                'team_user_id'  => $this->user['id'],
+                'team_type'     => 'post',
             ]
         );
-        Validation::ComeBack('team.created', 'success', url('teams'));
+        Validation::ComeBack('team.created', 'success', url('team'));
     }
 }

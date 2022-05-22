@@ -4,14 +4,14 @@
 <main>
   <div class="box">
     <a href="<?= url('teams'); ?>"><?= __('team.home'); ?></a> /
-    <span class="red"><?= $team['name']; ?></span>
+    <span class="red"><?= $team['team_name']; ?></span>
 
     <div class="content-body">
-      <?= Content::text($team['content'], 'text'); ?>
+      <?= Content::text($team['team_content'], 'text'); ?>
     </div>
 
     <div class="mb15 gray-600">
-      <i class="bi-calendar-week mr5"></i> <?= Html::langDate($team['created_at']); ?> / <?= Html::langDate($team['updated_at']); ?>
+      <i class="bi-calendar-week mr5"></i> <?= Html::langDate($team['team_date']); ?> / <?= Html::langDate($team['team_modified']); ?>
     </div>
 
     <h2><?= __('team.owner'); ?></h2>
@@ -30,7 +30,7 @@
       <?php endforeach; ?>
     </div>
 
-    <a href="<?= url('team.edit', ['id' => $team['id']]); ?>" class="btn btn-primary"><?= __('team.edit'); ?></a>
+    <a href="<?= url('team.edit', ['id' => $team['team_id']]); ?>" class="btn btn-primary"><?= __('team.edit'); ?></a>
   </div>
 </main>
 

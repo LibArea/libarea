@@ -26,10 +26,7 @@ class AddPostController extends Controller
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
         Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
-
-        if ($type != 'page') {
-            Request::getResources()->addBottomScript('/assets/js/uploads.js');
-        }
+        Request::getResources()->addBottomScript('/assets/js/uploads.js');
 
         // Adding from page topic 
         // Добавление со странице темы

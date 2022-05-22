@@ -9,19 +9,15 @@ use Validation, Meta, UserData, Access;
 
 class AddFacetController extends Controller
 {
-    // Add form topic | blog | category
-    public function index($type)
+    // Add form: topic | blog | category
+    public function index($facet_type)
     {
-        if (Access::limit($facet_type) == false) {
-            redirect('/');
-        }
-
         return $this->render(
             '/facets/add',
             [
-                'meta'  => Meta::get(__('app.add_' . $type)),
+                'meta'  => Meta::get(__('app.add_' . $facet_type)),
                 'data'  => [
-                    'type' => $type,
+                    'type' => $facet_type,
                 ]
             ]
         );
@@ -30,10 +26,6 @@ class AddFacetController extends Controller
     // Add topic | blog | category
     public function create($facet_type)
     {
-        if (Access::limit($facet_type) == false) {
-            return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
-        }
-
         $facet_title                = Request::getPost('facet_title');
         $facet_description          = Request::getPost('facet_description');
         $facet_short_description    = Request::getPost('facet_short_description');
@@ -53,24 +45,24 @@ class AddFacetController extends Controller
         if (!Validation::length($facet_title, 3, 64)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
         }
-        
+
         if (!Validation::length($facet_description, 34, 225)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.meta_description') . '»'])]);
         }
-        
+
         if (!Validation::length($facet_short_description, 9, 160)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.short_description') . '»'])]);
         }
-        
+
         if (!Validation::length($facet_seo_title, 4, 225)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
-        }   
+        }
 
 
         // Slug
         if (!Validation::length($facet_slug, 3, 43)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
-        }   
+        }
 
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $facet_slug)) {
             return json_encode(['error' => 'error', 'text' => __('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»'])]);
@@ -104,5 +96,4 @@ class AddFacetController extends Controller
 
         return true;
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Teams\App\Models;
+namespace Modules\Team\App\Models;
 
 use DB;
 
@@ -11,19 +11,19 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
     public static function get($id)
     {
         $sql = "SELECT 
-                    t.id,
-                    t.name,
-                    t.content,
-                    t.user_id,
-                    t.created_at,
-                    t.updated_at,
-                    t.is_deleted,
-                    u.id as uid,
-                    u.login,
-                    u.avatar
-                        FROM teams t
-                        LEFT JOIN users u ON t.user_id = u.id
-                            WHERE t.id = :id";
+                    team_id,
+                    team_name,
+                    team_content,
+                    team_user_id,
+                    team_date,
+                    team_modified,
+                    team_is_deleted,
+                    id as uid,
+                    login,
+                    avatar
+                        FROM teams 
+                        LEFT JOIN users u ON team_user_id = id
+                            WHERE team_id = :id";
 
         return  DB::run($sql, ['id' => $id])->fetch();
     }
@@ -33,30 +33,30 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
      public static function all($uid, $limit)
      {
          $sql = "SELECT 
-                    t.id,
-                    t.name,
-                    t.content,
-                    t.user_id,
-                    t.created_at,
-                    t.updated_at,
-                    t.is_deleted,
+                    t.team_id as id,
+                    t.team_name,
+                    t.team_content,
+                    t.team_user_id,
+                    t.team_date,
+                    t.team_modified,
+                    t.team_is_deleted,
                     u.id as uid,
                     u.login,
                     u.avatar,
                     rel.*
                      FROM teams t
-                        LEFT JOIN users u ON t.user_id = u.id
+                        LEFT JOIN users u ON t.team_user_id = u.id
                          LEFT JOIN (
                             SELECT 
                                 team_id,
                                 GROUP_CONCAT(id, '@', login, '@', avatar SEPARATOR '@') AS users_list
                                 FROM users
-                                LEFT JOIN teams_users_relation 
-                                    on user_id = id
-                                        GROUP BY team_id
+                                LEFT JOIN teams_users_relation r
+                                    on r.team_user_id = team_id
+                                        GROUP BY r.team_id
                             ) AS rel
-                                ON rel.team_id= t.id
-                                        WHERE u.id = :uid ORDER BY t.is_deleted LIMIT :limit";
+                                ON rel.team_id= t.team_id
+                                        WHERE u.id = :uid ORDER BY t.team_is_deleted LIMIT :limit";
                             
         return DB::run($sql, ['uid' => $uid, 'limit' => $limit])->fetchAll(); 
     }
@@ -65,14 +65,15 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
     // Количество команд
     public static function allCount($uid)
     {
-        return  DB::run("SELECT id FROM teams WHERE user_id = :uid", ['uid' => $uid])->rowCount();
+        return  DB::run("SELECT team_id FROM teams WHERE team_user_id = :uid", ['uid' => $uid])->rowCount();
     }
 
     // Creation of a team
     // Добавление команды
     public static function create($params)
     {
-        $sql    = "INSERT INTO teams (name, content, user_id, action_type) VALUES (:name, :content, :user_id, :action_type)";
+        $sql    = "INSERT INTO teams (team_name, team_content, team_user_id, team_type) 
+                        VALUES (:team_name, :team_content, :team_user_id, :team_type)";
 
         return DB::run($sql, $params);
     }
@@ -82,11 +83,11 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
     public static function edit($params)
     {
         $sql_two = "UPDATE teams 
-                        SET name = :name, 
-                            content = :content, 
-                            action_type = :action_type, 
-                            updated_at = :updated_at 
-                                WHERE id = :id";
+                        SET team_name       = :team_name, 
+                            team_content    = :team_content, 
+                            team_type       = :team_type, 
+                            team_modified   = :team_modified 
+                                WHERE team_id   = :team_id";
 
         return DB::run($sql_two, $params);
     }
@@ -95,9 +96,9 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
     // Удаление и восстановление команды
     public static function action($id, $status)
     {
-        $sql = "UPDATE teams SET is_deleted = 1 where id = :id";
+        $sql = "UPDATE teams SET team_is_deleted = 1 where team_id = :id";
         if ($status == 1) {
-            $sql = "UPDATE teams SET is_deleted = 0 where id = :id";
+            $sql = "UPDATE teams SET team_is_deleted = 0 where team_id = :id";
         }
 
         DB::run($sql, ['id' => $id]);
@@ -111,7 +112,7 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
 
         foreach ($rows as $row) {
             $user_id   = $row['id'];
-            $sql        = "INSERT INTO teams_users_relation (team_id, user_id) 
+            $sql        = "INSERT INTO teams_users_relation (team_id, team_user_id) 
                                 VALUES (:team_id, :user_id)";
 
             DB::run($sql, ['team_id' => $team_id, 'user_id' => $user_id]);
@@ -136,7 +137,7 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
                     u.login,
                     u.avatar
                         FROM teams_users_relation t
-                        LEFT JOIN users u ON t.user_id = u.id
+                        LEFT JOIN users u ON t.team_user_id = u.id
                             WHERE t.team_id = :team_id";
 
         return DB::run($sql, ['team_id' => $team_id])->fetchAll();

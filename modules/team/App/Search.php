@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Teams\App;
+namespace Modules\Team\App;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Teams\App\Models\SearchModel;
+use Modules\Team\App\Models\SearchModel;
 use UserData;
 
 class Search
@@ -15,7 +15,7 @@ class Search
         $this->user  = UserData::get();
     }
 
-    // Request, search for members for teams
+    // Request, search for members for team
     // Запрос, поиска участников для команд
     public function select()
     {

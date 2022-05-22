@@ -28,12 +28,12 @@ class AllFacetController extends Controller
             [
                 'meta'  => Meta::get($title, $desc, $m),
                 'data'  => [
-                    'sheet'         => $sheet,
-                    'type'          => $type,
-                    'facets'        => $facets,
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $this->pageNumber,
-                    'access'        => Access::limit($type),
+                    'sheet'             => $sheet,
+                    'type'              => $type,
+                    'facets'            => $facets,
+                    'pagesCount'        => ceil($pagesCount / $this->limit),
+                    'pNum'              => $this->pageNumber,
+                    'countUserFacet'    => FacetModel::countFacetsUser($this->user['id'], $type)
                 ]
             ]
         );
@@ -42,6 +42,5 @@ class AllFacetController extends Controller
     public static function types()
     {
         return FacetModel::types();
-    }   
-    
+    }
 }

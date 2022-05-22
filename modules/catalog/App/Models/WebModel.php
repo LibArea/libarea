@@ -322,6 +322,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_domain,
                     item_votes,
                     item_count,
+                    item_date,
                     item_status_url,
                     item_is_soft,
                     item_is_github,

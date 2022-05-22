@@ -7,9 +7,9 @@
 class URLScraper
 {
 	private static $STATUS = array(
-		"initialized"=>0,
-		"success"=>1,
-		"fail"=>2
+		"initialized" => 0,
+		"success" => 1,
+		"fail" => 2
 	);
 	private $metaData;
 	private $url;
@@ -25,7 +25,8 @@ class URLScraper
 	 * @access public
 	 * @param  string $url
 	 */
-	public function __construct($url) {
+	public function __construct($url)
+	{
 		$this->url = $url;
 		$this->metaData = new StdClass;
 		$this->metaData->title = "";
@@ -42,25 +43,26 @@ class URLScraper
 	 * @access public
 	 * @return integer
 	 */
-	public function parse() {
+	public function parse()
+	{
 		// load HTML as DOMDocument object for parsing
 		$this->html = new DOMDocument;
 		libxml_use_internal_errors(true);
-        // Recoding
-        $source = mb_convert_encoding(file_get_contents($this->url), 'HTML-ENTITIES', 'utf-8');
+		// Recoding
+		$source = mb_convert_encoding(file_get_contents($this->url), 'HTML-ENTITIES', 'utf-8');
 		$this->html->loadHTML($source);
 
 		// php built-in get_meta_tags() only read those with name "title", "description" and so on
 		// so I wrote my own version supporting twitter:title, og:title, etc.
 		$this->meta = $this->my_get_meta_tags($this->url);
-		
+
 		$this->success(); // assume successful
 
 		// possible to add more method such as getAuthor()
 		$this->getTitle();
 		$this->getDescription();
 		$this->getImage();
-	
+
 		return $this->status;
 	}
 
@@ -73,7 +75,8 @@ class URLScraper
 	 * @access public
 	 * @return StdClass
 	 */
-	public function finalize() {
+	public function finalize()
+	{
 		$tmp = new StdClass;
 		$tmp->url = $this->url;
 		$tmp->title = $this->metaData->title;
@@ -82,7 +85,7 @@ class URLScraper
 		$tmp->status = $this->status;
 		return $tmp;
 	}
-	
+
 	/**
 	 * my_get_meta_tags
 	 * 
@@ -92,25 +95,25 @@ class URLScraper
 	 * @param  string $url
 	 * @return array
 	 */
-	private function my_get_meta_tags($url) {
+	private function my_get_meta_tags($url)
+	{
 		$metatags = $this->html->getElementsByTagName("meta");
 		$tmeta = array();
-		for ($i=0; $i<$metatags->length; ++$i) {
+		for ($i = 0; $i < $metatags->length; ++$i) {
 			$item = $metatags->item($i);
 			$name = $item->getAttribute('name');
-			
+
 			if (empty($name)) {
 				// og meta tags, or twitter meta tags
 				$tmeta[$item->getAttribute('property')] = $item->getAttribute('content');
-			}
-			else {
+			} else {
 				// conventional meta tags
 				$tmeta[$name] = $item->getAttribute('content');
 			}
 		}
 		return $tmeta;
 	}
-	
+
 	/**
 	 * initizlized
 	 * 
@@ -118,10 +121,11 @@ class URLScraper
 	 *
 	 * @access private
 	 */
-	private function initialized() {
+	private function initialized()
+	{
 		$this->status = self::$STATUS["initialized"];
 	}
-	
+
 	/**
 	 * success
 	 * 
@@ -129,10 +133,11 @@ class URLScraper
 	 *
 	 * @access private
 	 */
-	private function success() {
+	private function success()
+	{
 		$this->status = self::$STATUS["success"];
 	}
-	
+
 	/**
 	 * fail
 	 * 
@@ -140,7 +145,8 @@ class URLScraper
 	 *
 	 * @access private
 	 */
-	private function fail() {
+	private function fail()
+	{
 		$this->status = self::$STATUS["fail"];
 	}
 
@@ -152,12 +158,13 @@ class URLScraper
 	 *
 	 * @access private
 	 */
-	private function getTitle() {
+	private function getTitle()
+	{
 		if (isset($this->meta["og:title"])) {
 			$this->metaData->title = $this->meta["og:title"];
 			return;
 		}
-		
+
 		if (isset($this->meta["twitter:title"])) {
 			$this->metaData->title = $this->meta["twitter:title"];
 			return;
@@ -167,19 +174,18 @@ class URLScraper
 			$this->metaData->title = $this->meta["title"];
 			return;
 		}
-		
+
 		$title = $this->html->getElementsByTagName("title") or $title = $this->html->getElementsByTagName("h1");
 		// taking either the title or h1 tag
 		if (!$title->length) {
 			// if no h1 tag, nothing good enough to be the site title
 			$this->fail();
 			return;
-		}
-		else {
+		} else {
 			$this->metaData->title = ($title->length) ? $title->item(0)->nodeValue : "";
 		}
 	}
-	
+
 	/**
 	 * getDescription
 	 * 
@@ -188,17 +194,18 @@ class URLScraper
 	 *
 	 * @access private
 	 */
-	private function getDescription() {
+	private function getDescription()
+	{
 		if (isset($this->meta["og:description"])) {
 			$this->metaData->description = $this->meta["og:description"];
 			return;
 		}
-		
+
 		if (isset($this->meta["twitter:description"])) {
 			$this->metaData->description = $this->meta["twitter:description"];
 			return;
 		}
-		
+
 		if (isset($this->meta["description"])) {
 			$this->metaData->description = $this->meta["description"];
 			return;
@@ -207,7 +214,7 @@ class URLScraper
 		$this->fail();
 		return;
 	}
-	
+
 	/**
 	 * getImage
 	 * 
@@ -216,17 +223,18 @@ class URLScraper
 	 *
 	 * @access private
 	 */
-	private function getImage() {
+	private function getImage()
+	{
 		if (isset($this->meta["og:image"])) {
 			$this->metaData->image = $this->meta["og:image"];
 			return;
 		}
-		
+
 		if (isset($this->meta["twitter:image"])) {
 			$this->metaData->image = $this->meta["twitter:image"];
 			return;
 		}
-		
+
 		if (isset($this->meta["image"])) {
 			$this->metaData->image = $this->meta["image"];
 			return;

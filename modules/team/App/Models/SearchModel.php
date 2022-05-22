@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Teams\App\Models;
+namespace Modules\Team\App\Models;
 
 use DB;
 

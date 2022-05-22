@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Teams\App;
+namespace Modules\Team\App;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Teams\App\Models\TeamModel;
+use Modules\Team\App\Models\TeamModel;
 use UserData, Meta, Html, Validation;
 
-class Teams
+class Team
 {
     protected $limit = 5;
 
@@ -70,11 +70,11 @@ class Teams
     {
         $id     = Request::getPostInt('id');
         $team   = TeamModel::get($id);
-        if ($team['user_id'] != $this->user['id']) {
+        if ($team['team_user_id'] != $this->user['id']) {
             return;
         }
 
-        TeamModel::action($id, $team['is_deleted']);
+        TeamModel::action($id, $team['team_is_deleted']);
     }
     
    // Formation of team members

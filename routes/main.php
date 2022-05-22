@@ -8,27 +8,33 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController');
-        Route::get('/team/search/user')->module('teams', 'App\Search@select');
+        Route::get('/team/search/user')->module('team', 'App\Search@select');
         Route::get('/reply/editform')->module('catalog', 'App\Reply@index');
         // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
          
             Route::getProtect();
-                Route::get('/user/edit/{type}')->controller('User\SettingController@change')->where(['type' => '[a-z]+'])->name('setting.change');
-                // Отправка / изменение контента
-                Route::get('/create/{type}')->controller('ActionController@create')->name('content.create');
-                Route::get('/change/{type}')->controller('ActionController@change')->name('content.change');
-            Route::endProtect();
+                Route::before('Restrictions')->getGroup();
+                    Route::get('/user/edit/{type}')->controller('User\SettingController@change')->where(['type' => '[a-z]+'])->name('setting.change');
+                    // Отправка / изменение контента
+                    Route::get('/create/{type}')->controller('FormController@create')->name('content.create');
+                    Route::get('/change/{type}')->controller('FormController@change')->name('content.change');
+                Route::endProtect();
+           Route::endGroup();       
     Route::endType();
 
-    Route::type(['get', 'post'])->get('/folder/content/save')->controller('FolderController@addFolderContent');
+    // Формы добавления и изменения
+    Route::before('Restrictions')->getGroup();
+        Route::get('/my/web/add')->module('catalog', 'App\Add')->name('web.add');    
+        Route::get('/my/{type}/add')->module('team', 'App\Add')->where(['type' => '[team]+'])->name('team.add');
+        Route::get('/add/{type}')->controller('FormController@add')->where(['type' => '[a-z]+'])->name('content.add');
+        Route::get('/my/web/edit/{id}')->module('catalog', 'App\Edit')->where(['id' => '[0-9]+'])->name('web.edit');
+        Route::get('/my/{type}/edit/{id}')->module('team', 'App\Edit')->where(['type' => '[team]+','id' => '[0-9]+'])->name('team.edit');
+        Route::get('/edit/{type}/{id}')->controller('FormController@edit')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('content.edit');
+        Route::get('/setting/{type?}')->controller('User\SettingController')->where(['type' => '[a-z_]+'])->name('setting'); 
+    Route::endGroup();    
 
-    // Pages (forms) for adding and changing: (post | page | answer), (topic | category | blog | sections) and site
-    Route::get('/web/add')->module('catalog', 'App\Add')->name('web.add');    
-    Route::get('/add/{type}')->controller('ActionController@add')->where(['type' => '[a-z]+'])->name('content.add');
-    Route::get('/web/edit/{id}')->module('catalog', 'App\Edit')->where(['id' => '[0-9]+'])->name('web.edit');
-    Route::get('/edit/{type}/{id}')->controller('ActionController@edit')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('content.edit');
-    // end
+    Route::type(['get', 'post'])->get('/folder/content/save')->controller('FolderController@addFolderContent');
  
     Route::get('/add/post/{topic_id}')->controller('Post\AddPostController', ['post'])->where(['topic_id' => '[0-9]+']);
 
@@ -37,12 +43,10 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/web/bookmarks')->module('catalog', 'App\UserArea@bookmarks')->name('web.bookmarks');
     Route::get('/web/my/{page?}')->module('catalog', 'App\UserArea')->name('web.user.sites');
 
-    Route::get('/teams')->module('teams', 'App\Teams')->name('teams');
-    Route::get('/team/add')->module('teams', 'App\Add')->name('team.add');
-    Route::get('/team/edit/{id}')->module('teams', 'App\Edit')->where(['id' => '[0-9]+'])->name('team.edit');
-    Route::get('/team/view/{id}')->module('teams', 'App\Teams@view')->where(['id' => '[0-9]+'])->name('team.view');
+    Route::get('/team')->module('team', 'App\Team')->name('teams');
+    Route::get('/team/view/{id}')->module('team', 'App\Team@view')->where(['id' => '[0-9]+'])->name('team.view');
 
-    Route::get('/setting/{type?}')->controller('User\SettingController')->where(['type' => '[a-z_]+'])->name('setting'); 
+    
 
     Route::get('/messages')->controller('MessagesController')->name('messages');   
     Route::get('/messages/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 

@@ -7,8 +7,8 @@
   </a>
 </li>
 
-<?php if (Access::limitTl(config('trust-levels.tl_add_item'))) : ?>
-  <?php if (config('trust-levels.count_add_item') > $data['user_count_site']) : ?>
+<?php if (Access::trustLevels(config('trust-levels.tl_add_item'))) : ?>
+  <?php if ($data['user_count_site'] == 0 || UserData::checkAdmin()) : ?>
     <li>
       <a href="<?= url('web.add'); ?>">
         <i class="bi-plus-lg"></i> <?= __('web.add_website'); ?>
