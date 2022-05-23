@@ -65,7 +65,7 @@ class Access
          *
          * In config: perDay_post
          */
-        $сount = ActionModel::getSpeedTime(UserData::getUserId(), $type);
+        $сount = ActionModel::getSpeedDay(UserData::getUserId(), $type);
 
         $total = config('trust-levels.perDay_' . $type) * config('trust-levels.multiplier_' . UserData::getUserTl());
 
