@@ -83,8 +83,7 @@ class Edit
         }
 
         // Связанные посты
-        $post_fields = Request::getPost() ?? [];
-        $json_post  = $post_fields['post_select'] ?? [];
+        $json_post  = $data['post_select'] ?? [];
         $arr_post   = json_decode($json_post, true);
         if ($arr_post) {
             foreach ($arr_post as $value) {
@@ -104,8 +103,7 @@ class Edit
         // If there is a change in item_user_id (owner) and who changes staff
         // Если есть смена item_user_id (владельца) и кто меняет персонал
         if (UserData::checkAdmin()) {
-            $user_new  = Request::getPost('user_id');
-            $item_user_new = json_decode($user_new, true);
+            $item_user_new = json_decode($data['user_id'], true);
             if ($item['item_user_id'] != $item_user_new[0]['id']) {
                 $owner_uid = $item_user_new[0]['id'];
             }
@@ -144,11 +142,8 @@ class Edit
             );
         }
 
-        // Фасеты для сайте
-        $post_fields    = Request::getPost() ?? [];
-        $facet_post     = $post_fields['facet_select'] ?? [];
-        $topics         = json_decode($facet_post, true);
-
+        $facet_post = $data['facet_select'] ?? [];
+        $topics     = json_decode($facet_post, true);
         if (!empty($topics)) {
             $arr = [];
             foreach ($topics as $row) {

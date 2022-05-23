@@ -22,6 +22,7 @@ $domain = $data['domain'];
         <?= $domain['item_id']; ?>. <?= $domain['item_domain']; ?>
         <?= Html::websiteImage($domain['item_domain'], 'favicon', $domain['item_domain'], ' ml10'); ?>
         <span class="add-favicon text-sm" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
+        <span class="text-sm ml15"><?= Html::langDate($domain['item_date']); ?></span>
       </fieldset>
 
       <form id="editWebsite" method="post">

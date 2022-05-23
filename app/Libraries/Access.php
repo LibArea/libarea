@@ -13,12 +13,15 @@ class Access
             return true;
         }
 
-        self::limitingMode();
+        if (self::limitingMode() === false) {
+            Html::addMsg(__('msg.silent_mode',), 'error');
+            redirect('/');
+        }
 
         // TODO: Изменим поля в DB, чтобы использовать limitContent для messages и invites: 
         if (in_array($type, ['post', 'amswer', 'comment', 'item', 'team'])) {
             if (self::limitContent($type) === false) {
-                Html::addMsg(__('msg.limit_day', ['tl' => UserData::getUserTl()]), 'error');
+                Html::addMsg(__('msg.limit_day'), 'error');
                 redirect('/');
             }
         }
@@ -32,8 +35,7 @@ class Access
     public static function limitingMode()
     {
         if (UserData::getLimitingMode() == 1) {
-            Html::addMsg(__('msg.silent_mode',), 'error');
-            redirect('/');
+            return false;
         }
         return true;
     }
@@ -45,7 +47,6 @@ class Access
      */
     public static function limitContent($type)
     { 
-
         /**
          * From what TL level is it possible to create content.
          *
@@ -90,27 +91,6 @@ class Access
     }
 
     /**
-     * Content type, content author, time added and how much time can be edited.
-     *
-     * Тип контента, автор контента, время добавления и сколько времени можно редактировать.
-     */
-    public static function author($type_content, $author_id, $adding_time, $limit_time = false)
-    {
-        if (UserData::checkAdmin()) {
-            return true;
-        }
-
-        // Доступ получает только автор
-        if ($author_id != UserData::getUserId()) {
-            return false;
-        }
-
-        self::limiTime($adding_time, $limit_time);
-
-        return true;
-    }
-
-    /**
      * Time limits after posting.
      *
      * Лимиты на время после публикации.
@@ -128,4 +108,41 @@ class Access
 
         return true;
     }
+
+    /**
+     * Content type, content author, time added and how much time can be edited.
+     *
+     * Тип контента, автор контента, время добавления и сколько времени можно редактировать.
+     */
+    public static function author($type_content, $author_id, $adding_time, $limit_time = false)
+    {
+        if (UserData::checkAdmin()) {
+            return true;
+        }
+
+        /**
+         * If the author's Tl has been downgraded.
+         *
+         * Если Tl автора было изменено на понижение.
+         *
+         * In config: tl_add_post
+         */
+        if (self::trustLevels(config('trust-levels.tl_add_' . $type_content)) == false) {
+            return false;
+        }
+
+        /**
+         * Only the author has access.
+         *
+         * Доступ получает только автор.
+         */
+        if ($author_id != UserData::getUserId()) {
+            return false;
+        }
+
+        self::limiTime($adding_time, $limit_time);
+
+        return true;
+    }
+
 }

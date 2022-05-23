@@ -60,6 +60,7 @@ return [
     'slug_correctness'      => '{name} 必須只包含拉丁字符、數字',
     'email_correctness'     => '不合規電郵',
     
-    'limit_day'             => '對於“TL{tl}”，您已達到今天的限制',
+    'limit_day'             => '您已達到今天的限額',
     'content_audit'         => '您的消息已發送以供審核',
+    'access_denied'         => '您被拒絕訪問',
 ];

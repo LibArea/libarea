@@ -35,7 +35,7 @@ return [
     'hosted_github'     => 'The program is hosted on GitHub?',
     'url_github'        => 'GitHub repository URL',
     'related_posts'     => 'Related posts',
-    'desc.formed'       => 'Description is formed',
+    'desc_formed'       => 'Description is formed',
     'by_date'           => 'By date',
     'top_view'          => 'By rating',
     'new_sites'         => 'New sites',

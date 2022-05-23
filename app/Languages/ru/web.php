@@ -35,7 +35,7 @@ return [
     'hosted_github'     => 'Программа размещена на GitHub?',
     'url_github'        => 'URL адрес репозитория на GitHub',
     'related_posts'     => 'Связанные посты',
-    'desc.formed'       => 'Описание формируется',
+    'desc_formed'       => 'Описание формируется',
     'by_date'           => 'По дате',
     'top_view'          => 'По рейтингу',
     'new_sites'         => 'Новые сайты',

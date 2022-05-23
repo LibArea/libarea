@@ -10,12 +10,6 @@ class Validation
         return true;
     }
 
-    public static function Returns($text, $status, $redirect = '/')
-    {
-        Html::addMsg($text, $status);
-        redirect($redirect);
-    }
-
     public static function ComeBack($text, $status, $redirect = '/')
     {
         Html::addMsg(__($text), $status);

@@ -60,6 +60,7 @@ return [
     'slug_correctness'      => '{name} must contain only Latin characters, numbers',
     'email_correctness'     => 'Invalid email',
     
-    'limit_day'             => 'For "TL{tl}" you have reached the limit for today',
+    'limit_day'             => 'You have reached the limit for today',
     'content_audit'         => 'Your message has been sent for review',
+    'access_denied'         => 'You are denied access',
 ];

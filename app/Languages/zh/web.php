@@ -35,7 +35,7 @@ return [
     'hosted_github'     => '程序是否托管在GitHub上？',
     'url_github'        => 'GitHub上存储库的URL',
     'related_posts'     => '相关职位',
-    'desc.formed'       => '描述正在形成',
+    'desc_formed'       => '描述正在形成',
     'by_date'           => '按日期计算',
     'top_view'          => '按评级划分',
     'new_sites'         => '新网站',

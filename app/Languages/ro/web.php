@@ -35,7 +35,7 @@ return [
     'hosted_github'     => 'Programul este găzduit pe GitHub?',
     'url_github'        => 'Adresa URL a depozitului GitHub',
     'related_posts'     => 'Postări asemănatoare',
-    'desc.formed'       => 'Se formează descrierea',
+    'desc_formed'       => 'Se formează descrierea',
     'by_date'           => 'După dată',
     'top_view'          => 'Prin rating',
     'new_sites'         => 'Site-uri noi',

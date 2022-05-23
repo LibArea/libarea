@@ -60,6 +60,7 @@ return [
     'slug_correctness'      => '{name} trebuie să conțină numai caractere latine, numere',
     'email_correctness'     => 'E-mail invalid',
     
-    'limit_day'             => 'Pentru „{tl}” ați atins limita pentru astăzi',
+    'limit_day'             => 'Ai atins limita pentru azi',
     'content_audit'         => 'Mesajul dvs. a fost trimis spre examinare',
+    'access_denied'         => 'Vi se interzice accesul',
 ];
