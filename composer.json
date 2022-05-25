@@ -27,7 +27,7 @@
   "require": {
     "php": ">=7.4.0",
     "ext-pdo": "*",
-    "phphleb/framework": ">=1.6.62",
+    "phphleb/framework": ">=1.6.63",
     "phphleb/imageresizer": "dev-master",
     "phphleb/debugpan": "1.*",
     "phphleb/radjax": "dev-master",
