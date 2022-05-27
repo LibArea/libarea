@@ -1,0 +1,105 @@
+/*
+ * Styles for the catalog
+ *
+ * Стили для каталога
+ */
+
+.item main { margin-left: 30px; }
+
+.item-logo {
+  margin-top: 30px;
+  font-size: 21px;
+}
+
+.item-cat { padding: 0 0 10px 30px; }
+
+.list-items {
+  margin: 0;
+  max-width: 926px;
+  padding: 0 30px 0 0;
+  list-style: none;
+}
+
+.list-items li {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 28px
+}
+
+.list-items__thumb {
+  width: 200px;
+  margin: 5px 20px 0 0;
+}
+
+.list-items__description {
+  color: var(--gray-600);
+  width: 100%;
+}
+
+.list-items__thumb-image {
+  box-sizing: border-box;
+  width: 200px;
+  height: 140px;
+  box-shadow: 0 2px 4px -1px rgb(0 0 0 / 15%);
+}
+
+.list-items__text { color: var(--gray-600); }
+
+.list-items__footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-top: 10px;
+  text-transform: lowercase;
+}
+
+.item-categories {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f3f1ed;
+  padding: 20px 20px 20px 30px;
+  margin-bottom: 25px;
+}
+
+.categories-telo,
+.item-categories > div {
+  width: 33%;
+  margin-bottom: 10px;
+}
+
+body.item.dark h2,
+body.item.dark .categories-telo a {
+  color: #111;
+}
+
+body.item.dark .box {
+  background-color: #d0d0d0;
+}
+
+.dropdown { min-width: 220px; }
+
+@media (max-width: 890px) {
+  aside,  
+  .logo {
+    display: none;
+  }
+  
+  .item-categories,
+  .item-cat {
+    padding: 20px 20px 20px 15px;
+  }
+  
+  .categories-telo,
+  .item-categories > div {
+    width: 99%;
+    margin-bottom: 10px;
+  }  
+
+  .item main { margin-left: 15px; }  
+  .item-search { padding: 10px; }
+  .item-search-right { margin-left: 0; }
+}

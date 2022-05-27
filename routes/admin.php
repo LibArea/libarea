@@ -41,8 +41,10 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
    
     Route::get('/answers/deleted/{page?}')->controller('Answer\AnswerController', ['deleted'])->name('answers.deleted');
     Route::get('/comments/deleted/{page?}')->controller('Comment\CommentController', ['deleted'])->name('comments.deleted');
-    Route::get('/web/deleted/{page?}')->module('catalog', 'App\Home', ['deleted'])->name('web.deleted');
-    Route::get('/web/audits/{page?}')->module('catalog', 'App\Home', ['audits'])->name('web.audits');
+    
+    
+    Route::get('/web/deleted/{page?}')->controller('Item\HomeController', ['deleted'])->name('web.deleted');
+    Route::get('/web/audits/{page?}')->controller('Item\HomeController', ['audits'])->name('web.audits');
 
     Route::get('/badges')->module('admin', 'App\Badges')->name('admin.badges');
     Route::get('/badges/add')->module('admin', 'App\Badges@add')->name('admin.badges.add');

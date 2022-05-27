@@ -5,7 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{CommentModel, PostModel};
-use Html, Access;
+use Access;
 
 class EditCommentController extends Controller
 {
@@ -20,7 +20,7 @@ class EditCommentController extends Controller
         if (Access::author('comment', $comment['comment_user_id'], $comment['comment_date'], 30) == false) {
             return false;
         }
-        
+
         insert(
             '/_block/form/edit-form-comment',
             [
@@ -44,8 +44,8 @@ class EditCommentController extends Controller
             redirect('/');
         }
 
-        $post       = PostModel::getPost($comment['comment_post_id'], 'id', $this->user);
-        Html::pageRedirection($post, '/');
+        $post = PostModel::getPost($comment['comment_post_id'], 'id', $this->user);
+        self::redirection($post, '/');
 
         $slug = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         $redirect   = $slug . '#comment_' . $comment['comment_id'];

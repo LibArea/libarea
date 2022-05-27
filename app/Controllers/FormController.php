@@ -29,6 +29,14 @@ class FormController extends Controller
             return (new Facets\AddFacetController)->index($this->type);
         }
 
+        if ($this->type === 'item') {
+            return (new Item\AddItemController)->index();
+        }
+
+        if ($this->type === 'team') {
+            return (new Team\AddTeamController)->index();
+        }
+
         return false;
     }
 
@@ -47,6 +55,14 @@ class FormController extends Controller
 
         if ($this->type === 'answer') {
             return (new Answer\EditAnswerController)->index();
+        }
+
+        if ($this->type === 'item') {
+            return (new Item\EditItemController)->index();
+        }
+
+        if ($this->type === 'team') {
+            return (new Team\EditTeamController)->index();
         }
 
         return false;
@@ -86,15 +102,15 @@ class FormController extends Controller
         }
 
         if ($this->type === 'team') {
-            return (new \Modules\Team\App\Add)->create();
+            return (new Team\AddTeamController)->create();
         }
 
         if ($this->type === 'reply') {
-            return (new \Modules\Catalog\App\Reply)->create();
+            return (new Item\ReplyController)->create();
         }
 
         if ($this->type === 'item') {
-            return (new \Modules\Catalog\App\Add)->create();
+            return (new Item\AddItemController)->create();
         }
 
         return false;
@@ -122,15 +138,15 @@ class FormController extends Controller
         }
 
         if ($this->type === 'team') {
-            return (new \Modules\Team\App\Edit)->change();
+            return (new Team\EditTeamController)->change();
         }
 
         if ($this->type === 'reply') {
-            return (new \Modules\Catalog\App\Reply)->change();
+            return (new Item\ReplyController)->change();
         }
 
         if ($this->type === 'item') {
-            return (new \Modules\Catalog\App\Edit)->change();
+            return (new Item\EditItemController)->change();
         }
 
         return false;

@@ -15,6 +15,8 @@ class EditPostController extends Controller
     {
         $post_id    = Request::getInt('id');
         $post       = PostModel::getPost($post_id, 'id', $this->user);
+        self::error404($post);
+
         if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
             redirect('/');
         }
@@ -32,6 +34,7 @@ class EditPostController extends Controller
 
         return $this->render(
             '/post/edit',
+            'base',
             [
                 'meta'  => Meta::get(__('app.edit_' . $post['post_type'])),
                 'data'  => [

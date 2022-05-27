@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Models\Item\WebModel;
 use App\Models\{FavoriteModel, PostModel, AnswerModel};
 
 class FavoriteController extends Controller
@@ -37,7 +38,7 @@ class FavoriteController extends Controller
                 $content  = PostModel::getPost($content_id, 'id', $user);
                 break;
             case 'website':
-                $content  = (new \Modules\Catalog\App\Catalog())->getItemId($content_id);
+                $content  = WebModel::getItemId($content_id);
                 break;
             case 'answer':
                 $content  = AnswerModel::getAnswerId($content_id);

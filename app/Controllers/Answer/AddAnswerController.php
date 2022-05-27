@@ -13,12 +13,12 @@ class AddAnswerController extends Controller
     {
         $post_id = Request::getPostInt('post_id');
         $post    = PostModel::getPost($post_id, 'id', $this->user);
-        Html::pageError404($post);
+        self::error404($post);
 
         $content = $_POST['content']; // для Markdown
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        
+
         if (!Validation::length($content, 6, 5000)) {
             Html::addMsg(__('msg.string_length', ['name' => '«' . __('msg.content') . '»']), 'error');
             redirect($url_post);

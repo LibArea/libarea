@@ -25,6 +25,7 @@ class RegisterController extends Controller
 
         return $this->render(
             '/auth/register',
+            'base',
             [
                 'meta'  => Meta::get(__('app.registration'), __('app.security_info'), $m),
                 'data'  => [
@@ -49,11 +50,11 @@ class RegisterController extends Controller
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $login)) {
             return json_encode(['error' => 'error', 'text' => __('msg.slug_correctness', ['name' => '«' . __('msg.nickname') . '»'])]);
         }
-        
+
         if (!Validation::length($login, 3, 12)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.nickname') . '»'])]);
         }
-        
+
         if (preg_match('/(\w)\1{3,}/', $login)) {
             return json_encode(['error' => 'error', 'text' => __('msg.nick_character')]);
         }
@@ -96,7 +97,7 @@ class RegisterController extends Controller
             $msg = __('msg.string_length', ['name' => '«' . __('msg.password') . '»']);
             return json_encode(['error' => 'error', 'text' => $msg]);
         }
-        
+
         if (substr_count($password, ' ') > 0) {
             return json_encode(['error' => 'error', 'text' => __('msg.password_spaces')]);
         }
@@ -185,6 +186,7 @@ class RegisterController extends Controller
 
         return $this->render(
             '/auth/register-invate',
+            'base',
             [
                 'meta'  => Meta::get(__('app.reg_invite')),
                 'data'  => [
@@ -194,5 +196,4 @@ class RegisterController extends Controller
             ]
         );
     }
-    
 }

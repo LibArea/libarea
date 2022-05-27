@@ -9,7 +9,6 @@ use Content, Html, Meta, UserData, Access;
 
 class PostController extends Controller
 {
-
     protected $limit = 25;
 
     // Full post
@@ -108,6 +107,7 @@ class PostController extends Controller
         if ($type == 'post') {
             return $this->render(
                 '/post/view',
+                'base',
                 [
                     'meta'  => Meta::get(strip_tags($content['post_title']), $description, $m),
                     'data'  => [
@@ -128,7 +128,7 @@ class PostController extends Controller
 
         $slug_facet = Request::get('facet_slug');
         $facet  = FacetModel::getFacet($slug_facet, 'slug', 'section');
-        Html::pageError404($facet);
+        self::error404($facet);
 
         $m = [
             'og'    => false,
@@ -138,6 +138,7 @@ class PostController extends Controller
         $title = $content['post_title'] . ' - ' . __('app.page');
         return $this->render(
             '/post/page-view',
+            'base',
             [
                 'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . __('app.page') . ')', $m),
                 'data'  => [
@@ -173,7 +174,7 @@ class PostController extends Controller
             $content  = PostModel::getPost($slug, 'slug', $user);
         }
 
-        Html::pageError404($content);
+        self::error404($content);
 
         return $content;
     }
@@ -219,7 +220,7 @@ class PostController extends Controller
         $domain     = Request::get('domain');
 
         $site       = PostModel::getDomain($domain, $this->user['id']);
-        Html::pageError404($site);
+        self::error404($site);
 
         $site['item_content'] = Content::text($site['item_content'], 'line');
 
@@ -233,6 +234,7 @@ class PostController extends Controller
 
         return $this->render(
             '/post/link',
+            'base',
             [
                 'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('meta.domain_desc') . ': ' . $domain, $m),
                 'data'  => [

@@ -132,7 +132,7 @@ class AuditController extends Controller
         if ($num_report > config('trust-levels.perDay_report')) return 1;
 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
-        Html::pageError404($post);
+        self::error404($post);
 
         $arr = ['post', 'answer', 'comment'];
         if (!in_array($content_type, $arr)) {

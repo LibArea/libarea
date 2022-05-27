@@ -32,6 +32,7 @@ class HomeController extends Controller
 
         return $this->render(
             '/home',
+            'base',
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [

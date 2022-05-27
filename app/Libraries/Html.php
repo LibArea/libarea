@@ -281,23 +281,6 @@ class Html
         $_SESSION['msg'] = ['msg' => $msg, 'status' =>  $status ?? 'error'];
     }
 
-    public static function pageError404($variable)
-    {
-        if (!$variable) {
-            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-            hl_preliminary_exit();
-        }
-        return true;
-    }
-
-    public static function pageRedirection($variable, $redirect = '/')
-    {
-        if (!$variable) {
-            redirect($redirect);
-        }
-        return true;
-    }
-
     // If 2 weeks have not passed since registration, then the nickname is green
     public static function loginColor($time)
     {

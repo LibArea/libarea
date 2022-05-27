@@ -15,7 +15,7 @@ class ActionController extends Controller
         $content_id = Request::getPostInt('content_id');
         $type       = Request::getPost('type');
 
-        $allowed = ['post', 'comment', 'answer', 'reply', 'item'];
+        $allowed = ['post', 'comment', 'answer', 'reply', 'item', 'team'];
         if (!in_array($type, $allowed)) {
             return false;
         }
@@ -48,6 +48,10 @@ class ActionController extends Controller
             case 'item':
                 $url  = url('web.deleted');
                 $action_type = 'website';
+                break;
+            case 'team':
+                $url  = url('team.deleted');
+                $action_type = 'team';
                 break;
         }
 

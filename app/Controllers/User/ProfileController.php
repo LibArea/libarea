@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, PostModel, FeedModel, AnswerModel, CommentModel};
-use Meta, Html, UserData;
+use Meta, UserData;
 
 class ProfileController extends Controller
 {
@@ -27,13 +27,14 @@ class ProfileController extends Controller
 
         //[count_posts] => 244 [count_answers] => 408 [count_comments] => 580 [count_items] => 65 ) 
         $count = UserModel::contentCount($profile['id']);
-        
+
         if (($count['count_answers'] + $count['count_comments']) < 3) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
         return $this->render(
             '/user/profile/index',
+            'base',
             [
                 'meta'  => self::metadata('profile_posts', $profile),
                 'data'  => [
@@ -63,6 +64,7 @@ class ProfileController extends Controller
 
         return $this->render(
             '/user/profile/post',
+            'base',
             [
                 'meta'  => self::metadata('profile_posts_all', $profile),
                 'data'  => [
@@ -90,6 +92,7 @@ class ProfileController extends Controller
 
         return $this->render(
             '/user/profile/answer',
+            'base',
             [
                 'meta'  => self::metadata('profile_answers', $profile),
                 'data'  => [
@@ -118,6 +121,7 @@ class ProfileController extends Controller
 
         return $this->render(
             '/user/profile/comment',
+            'base',
             [
                 'meta'  => self::metadata('profile_comments', $profile),
                 'data'  => [
@@ -140,7 +144,7 @@ class ProfileController extends Controller
     public static function profile()
     {
         $result = Request::get('login');
-        Html::pageError404($profile = UserModel::getUser($result, 'slug'));
+        self::error404($profile = UserModel::getUser($result, 'slug'));
 
         if ($profile['ban_list'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');

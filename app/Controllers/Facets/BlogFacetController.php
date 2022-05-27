@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel};
-use Content, Meta, Html;
+use Content, Meta;
 
 class BlogFacetController extends Controller
 {
@@ -18,7 +18,7 @@ class BlogFacetController extends Controller
     {
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'blog');
-        Html::pageError404($facet);
+        self::error404($facet);
 
         if ($facet['facet_type'] == 'topic') {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
@@ -40,6 +40,7 @@ class BlogFacetController extends Controller
 
         return $this->render(
             '/facets/blog',
+            'base',
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [

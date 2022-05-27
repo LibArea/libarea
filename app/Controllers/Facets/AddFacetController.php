@@ -5,7 +5,7 @@ namespace App\Controllers\Facets;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{FacetModel, SubscriptionModel};
-use Validation, Meta, UserData, Access;
+use Validation, Meta, UserData;
 
 class AddFacetController extends Controller
 {
@@ -14,6 +14,7 @@ class AddFacetController extends Controller
     {
         return $this->render(
             '/facets/add',
+            'base',
             [
                 'meta'  => Meta::get(__('app.add_' . $facet_type)),
                 'data'  => [

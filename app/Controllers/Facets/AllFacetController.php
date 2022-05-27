@@ -4,7 +4,7 @@ namespace App\Controllers\Facets;
 
 use App\Controllers\Controller;
 use App\Models\FacetModel;
-use Meta, Access;
+use Meta;
 
 class AllFacetController extends Controller
 {
@@ -25,6 +25,7 @@ class AllFacetController extends Controller
 
         return $this->render(
             '/facets/all',
+            'base',
             [
                 'meta'  => Meta::get($title, $desc, $m),
                 'data'  => [

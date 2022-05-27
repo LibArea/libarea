@@ -236,15 +236,15 @@ class UploadImage
             }
 
             $image = new SimpleImage();
-            $image->load($file);
+            $image->load($local);
             $image->resizeToWidth(260);
             $image->save($path . $year . $filename . '.webp', "webp");
             
             if (file_exists($local)) {
                 @unlink($local);
-            }
+           }
 
-            return $year . $file . '.webp';
+            return $year . $filename . '.webp';
         }
 
         return false;

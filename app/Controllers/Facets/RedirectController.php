@@ -12,7 +12,7 @@ class RedirectController extends Controller
     {
         $facet_id  = Request::getInt('id');
         $facet = FacetModel::uniqueById($facet_id);
-        
+
         switch ($facet['facet_type']) {
             case 'topic':
                 $utl = url('topic', ['slug' => $facet['facet_slug']]);
@@ -30,7 +30,7 @@ class RedirectController extends Controller
                 $utl = '/';
                 break;
         }
-        
+
         redirect($utl);
     }
 }

@@ -19,7 +19,7 @@
   '/_block/form/ajax',
   [
     'url'       => url('setting.change', ['type' => 'setting']),
-    'redirect'  => url('setting', ['type' => 'security']),
+    'redirect'  => url('setting'),
     'success'   => __('msg.password_changed'),
     'id'        => 'form#setting'
   ]

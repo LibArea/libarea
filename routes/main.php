@@ -8,8 +8,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController');
-        Route::get('/team/search/user')->module('team', 'App\Search@select');
-        Route::get('/reply/editform')->module('catalog', 'App\Reply@index');
+        Route::get('/reply/editform')->controller('Item\ReplyController');
         // @ users | posts | topics | category
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
          
@@ -25,11 +24,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     // Формы добавления и изменения
     Route::before('Restrictions')->getGroup();
-        Route::get('/my/web/add')->module('catalog', 'App\Add')->name('web.add');    
-        Route::get('/my/{type}/add')->module('team', 'App\Add')->where(['type' => '[team]+'])->name('team.add');
         Route::get('/add/{type}')->controller('FormController@add')->where(['type' => '[a-z]+'])->name('content.add');
-        Route::get('/my/web/edit/{id}')->module('catalog', 'App\Edit')->where(['id' => '[0-9]+'])->name('web.edit');
-        Route::get('/my/{type}/edit/{id}')->module('team', 'App\Edit')->where(['type' => '[team]+','id' => '[0-9]+'])->name('team.edit');
         Route::get('/edit/{type}/{id}')->controller('FormController@edit')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('content.edit');
         Route::get('/setting/{type?}')->controller('User\SettingController')->where(['type' => '[a-z_]+'])->name('setting'); 
     Route::endGroup();    
@@ -40,13 +35,11 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
 
-    Route::get('/web/bookmarks')->module('catalog', 'App\UserArea@bookmarks')->name('web.bookmarks');
-    Route::get('/web/my/{page?}')->module('catalog', 'App\UserArea')->name('web.user.sites');
+    Route::get('/web/bookmarks')->controller('Item\UserAreaController@bookmarks')->name('web.bookmarks');
+    Route::get('/web/my/{page?}')->controller('Item\UserAreaController')->name('web.user.sites');
 
-    Route::get('/team')->module('team', 'App\Team')->name('teams');
-    Route::get('/team/view/{id}')->module('team', 'App\Team@view')->where(['id' => '[0-9]+'])->name('team.view');
-
-    
+    Route::get('/team')->controller('Team\TeamController')->name('teams');
+    Route::get('/team/view/{id}')->controller('Team\TeamController@view')->where(['id' => '[0-9]+'])->name('team.view');
 
     Route::get('/messages')->controller('MessagesController')->name('messages');   
     Route::get('/messages/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 
@@ -101,7 +94,7 @@ Route::getType('post');
     Route::get('/user/card')->controller('User\UserController@card');
     Route::get('/msg/go')->controller('Post\AddPostController@msg');
     Route::get('/comments/addform')->controller('Comment\AddCommentController');
-    Route::get('/reply/addform')->module('catalog', 'App\Reply@addForma');
+    Route::get('/reply/addform')->controller('Item\ReplyController@addForma');
 Route::endType();
   
 Route::get('/search')->module('search', 'App\Search')->name('search'); 
@@ -143,13 +136,13 @@ Route::get('/redirect/facet/{id}')->controller('Facets\RedirectController')->whe
 
 Route::get('/domain/{domain}/{page?}')->controller('Post\PostController@domain', ['web.feed'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 
-Route::get('/web')->module('catalog', 'App\Home', ['main'])->name('web');
-Route::get('/web/website/{slug}')->module('catalog', 'App\Detailed')->name('website');
-Route::get('/web/dir/{grouping}/{slug}')->module('catalog', 'App\Catalog', ['top'])->name('web.dir');
-Route::get('/web/dir/{grouping}/{slug}/all')->module('catalog', 'App\Catalog', ['all'])->name('web.dir.all');
-Route::get('/web/dir/{grouping}/{slug}/top')->module('catalog', 'App\Catalog', ['top'])->name('web.dir.top');
+Route::get('/web')->controller('Item\HomeController', ['main'])->name('web');
+Route::get('/web/website/{slug}')->controller('Item\DetailedController')->name('website');
+Route::get('/web/dir/{grouping}/{slug}')->controller('Item\DirController', ['top'])->name('web.dir');
+Route::get('/web/dir/{grouping}/{slug}/all')->controller('Item\DirController', ['all'])->name('web.dir.all');
+Route::get('/web/dir/{grouping}/{slug}/top')->controller('Item\DirController', ['top'])->name('web.dir.top');
 
-Route::type(['get', 'post'])->get('/cleek')->module('catalog', 'App\Catalog@cleek');
+Route::type(['get', 'post'])->get('/cleek')->controller('Item\DirController@cleek');
 
 Route::get('/top/{page?}')->controller('HomeController', ['top'])->name('main.top');
 

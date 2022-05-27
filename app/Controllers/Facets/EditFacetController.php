@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Validation, UploadImage, Meta, Html, UserData;
+use Validation, UploadImage, Meta, UserData;
 
 class EditFacetController extends Controller
 {
@@ -15,7 +15,7 @@ class EditFacetController extends Controller
     {
         $facet_id   = Request::getInt('id');
         $facet      = FacetModel::getFacet($facet_id, 'id', $type);
-        Html::pageError404($facet);
+        self::error404($facet);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
@@ -28,6 +28,7 @@ class EditFacetController extends Controller
 
         return $this->render(
             '/facets/edit',
+            'base',
             [
                 'meta'  => Meta::get(__('app.edit') . ' | ' . $facet['facet_title']),
                 'data'  => [
@@ -48,7 +49,7 @@ class EditFacetController extends Controller
     public function change()
     {
         $data = Request::getPost();
- 
+
         // Хакинг формы (тип фасета)
         // ['topic', 'blog', 'category', 'section']
         if (!in_array($data['facet_type'], config('facets.permitted'))) {
@@ -58,7 +59,7 @@ class EditFacetController extends Controller
         // Получим массив данных существующего фасета и проверим его наличие
         $facet = FacetModel::uniqueById((int)$data['facet_id'] ?? 0);
         if ($facet == false) {
-             return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
+            return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
         }
 
         // Доступ получает только автор и админ
@@ -76,27 +77,27 @@ class EditFacetController extends Controller
         if (!Validation::length($data['facet_title'], 3, 64)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
         }
-        
+
         if (!Validation::length($data['facet_description'], 34, 225)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.meta_description') . '»'])]);
         }
-        
+
         if (!Validation::length($data['facet_short_description'], 9, 225)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.short_description') . '»'])]);
         }
-        
+
         if (!Validation::length($data['facet_seo_title'], 4, 225)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
-        }  
+        }
 
         if (!Validation::length($data['facet_info'], 14, 5000)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.info') . '»'])]);
-        }  
+        }
 
         // Slug
         if (!Validation::length($data['facet_slug'], 3, 43)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
-        }   
+        }
 
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $data['facet_slug'])) {
             return json_encode(['error' => 'error', 'text' => __('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»'])]);
@@ -192,8 +193,8 @@ class EditFacetController extends Controller
     {
         $facet_id   = Request::getInt('id');
 
-        $facet      = FacetModel::getFacet($facet_id, 'id', 'blog');
-        Html::pageError404($facet);
+        $facet  = FacetModel::getFacet($facet_id, 'id', 'blog');
+        self::error404($facet);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
@@ -202,6 +203,7 @@ class EditFacetController extends Controller
 
         return $this->render(
             '/facets/edit-pages',
+            'base',
             [
                 'meta'  => Meta::get(__('app.edit') . ' | ' . $facet['facet_title']),
                 'data'  => [

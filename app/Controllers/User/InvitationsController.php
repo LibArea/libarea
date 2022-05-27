@@ -14,6 +14,7 @@ class InvitationsController extends Controller
     {
         return $this->render(
             '/user/invite',
+            'base',
             [
                 'meta'  => Meta::get(__('app.invite')),
                 'data'  => [
@@ -29,6 +30,7 @@ class InvitationsController extends Controller
     {
         return $this->render(
             '/user/invitation',
+            'base',
             [
                 'meta'  => Meta::get(__('app.invites')),
                 'data'  => [
@@ -51,7 +53,7 @@ class InvitationsController extends Controller
         if (!filter_var($invitation_email, FILTER_VALIDATE_EMAIL)) {
             return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
         }
-        
+
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['email'])) {
@@ -63,7 +65,7 @@ class InvitationsController extends Controller
             if ($inv_user['invitation_email'] == $invitation_email) {
                 Validation::ComeBack('msg.invate_replay', 'error', $redirect);
             }
-        }    
+        }
 
         if ($this->user['invitation_available'] >= config('general.invite_limit')) {
             Validation::ComeBack('msg.invate_limit_stop', 'error', $redirect);

@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{PostModel, FolderModel};
-use Meta, Html;
+use Meta;
 
 class UserController extends Controller
 {
@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $usersCount = UserModel::getUsersAllCount();
         $users      = UserModel::getUsersAll($this->pageNumber, $this->limit, $this->user['id'], $sheet);
-        Html::pageError404($users);
+        self::error404($users);
 
         $m = [
             'og'    => false,
@@ -27,6 +27,7 @@ class UserController extends Controller
 
         return $this->render(
             '/user/all',
+            'base',
             [
                 'meta'  => Meta::get(__('meta.' . $sheet . '_users'), __('meta.' . $sheet . 'users_desc'), $m),
                 'data'  => [
@@ -58,6 +59,7 @@ class UserController extends Controller
 
         return $this->render(
             '/user/favorite/all',
+            'base',
             [
                 'meta'  => Meta::get(__('app.favorites')),
                 'data'  => [
@@ -82,6 +84,7 @@ class UserController extends Controller
 
         return $this->render(
             '/user/favorite/folders',
+            'base',
             [
                 'meta'  => Meta::get(__('app.folders')),
                 'data'  => [
@@ -98,6 +101,7 @@ class UserController extends Controller
     {
         return $this->render(
             '/user/favorite/all',
+            'base',
             [
                 'meta'  => Meta::get(__('app.favorites')),
                 'data'  => [
@@ -115,6 +119,7 @@ class UserController extends Controller
     {
         return $this->render(
             '/user/draft',
+            'base',
             [
                 'meta'  => Meta::get(__('app.drafts')),
                 'data'  => [
@@ -132,6 +137,7 @@ class UserController extends Controller
     {
         return $this->render(
             '/user/favorite/subscribed',
+            'base',
             [
                 'meta'  => Meta::get(__('app.subscribed')),
                 'data'  => [

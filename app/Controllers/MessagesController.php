@@ -49,6 +49,7 @@ class MessagesController extends Controller
 
         return $this->render(
             '/messages/messages',
+            'base',
             [
                 'meta'  => Meta::get(__('app.private_messages')),
                 'data'  => [
@@ -105,6 +106,7 @@ class MessagesController extends Controller
 
         return $this->render(
             '/messages/dialog',
+            'base',
             [
                 'meta'  => Meta::get(__('app.dialogue')),
                 'data'  => [
@@ -135,6 +137,7 @@ class MessagesController extends Controller
 
         return $this->render(
             '/messages/user-add-messages',
+            'base',
             [
                 'meta'  => Meta::get(__('app.send_message')),
                 'data'  => [
@@ -162,7 +165,7 @@ class MessagesController extends Controller
         // If the user does not exist 
         // Если пользователя не существует
         $user  = UserModel::getUser($this->user['id'], 'id');
-        Html::pageRedirection($user, url('messages', ['login' => $this->user['login']]));
+        self::redirection($user, url('messages', ['login' => $this->user['login']]));
 
         // We will limit the sending of PMs if the level of trust is low
         // Ограничим отправк ЛС, если уровень доверия низок

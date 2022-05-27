@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{AnswerModel, PostModel};
-use Validation, Meta, Html, Access;
+use Validation, Meta, Access;
 
 class EditAnswerController extends Controller
 {
@@ -19,13 +19,14 @@ class EditAnswerController extends Controller
         }
 
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
-        Html::pageError404($post);
+        self::error404($post);
 
         Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
         Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
 
         return $this->render(
             '/answer/edit-answer',
+            'base',
             [
                 'meta'  => Meta::get(__('app.edit_answer')),
                 'data'  => [
@@ -51,14 +52,14 @@ class EditAnswerController extends Controller
         if (Access::author('answer', $answer['answer_user_id'], $answer['answer_date'], 30) == false) {
             return false;
         }
-        
+
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
         $url = url('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
-        
+
         if (!Validation::length($content, 6, 5000)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.content') . '»'])]);
         }
-        
+
         AnswerModel::edit(
             [
                 'answer_id'         => $answer_id,

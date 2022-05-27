@@ -4,9 +4,9 @@ namespace App\Controllers\Post;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use Modules\Catalog\App\Models\WebModel;
+use App\Models\Item\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
-use Content, UploadImage, Integration, Validation, URLScraper, Meta, Html, UserData;
+use Content, UploadImage, Integration, Validation, URLScraper, Meta, UserData;
 
 use Cocur\Slugify\Slugify;
 use Utopia\Domains\Domain;
@@ -19,7 +19,7 @@ class AddPostController extends Controller
     {
         if ($type == 'page') {
             $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
-            Html::pageError404($count);
+            self::error404($count);
         }
 
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
@@ -35,6 +35,7 @@ class AddPostController extends Controller
 
         return $this->render(
             '/post/add',
+            'base',
             [
                 'meta'      => Meta::get(__('app.add_' . $type)),
                 'data'  => [
@@ -66,7 +67,7 @@ class AddPostController extends Controller
 
         if ($type == 'page') {
             $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
-            Html::pageError404($count);
+            self::error404($count);
         }
 
         // Related posts 
@@ -93,24 +94,24 @@ class AddPostController extends Controller
         $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content, 'post');
 
         $post_title = str_replace("&nbsp;", '', $post_title);
-        
+
         if (!Validation::length($post_title, 6, 250)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
         }
-        
+
         if (!Validation::length($content, 6, 25000)) {
             return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.content') . '»'])]);
         }
-
+ 
         if ($post_url) {
             $site = $this->addUrl($post_url, $post_title);
         }
 
         // Обложка поста
-        if (!empty($_FILES['images']['name'])) {
+        if (!empty($_FILES['images']['name'])) {  
             $post_img = UploadImage::cover_post($_FILES['images'], 0, $redirect, $this->user['id']);
         }
-
+ 
         // Получаем SEO поста
         $slug = self::slug($post_title);
 
@@ -263,7 +264,7 @@ class AddPostController extends Controller
         }
 
         $post = PostModel::getPost($post_id, 'id', $this->user);
-        Html::pageError404($post);
+        self::error404($post);
 
         ActionModel::setRecommend($post_id, $post['post_is_recommend']);
 

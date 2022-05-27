@@ -9,7 +9,6 @@ return [
     // Base path to css files
     // Базовый путь к css файлам
     'style'     => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/scss/', 
-    'catalog'   => HLEB_GLOBAL_DIRECTORY . '/modules/catalog/view/default/scss/',
     
     // Test template to test custom layout creation
     // Тестовый шаблон для проверки создания произвольного макета

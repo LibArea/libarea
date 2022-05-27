@@ -18,6 +18,7 @@ class RecoverController extends Controller
 
         return $this->render(
             '/auth/recover',
+            'base',
             [
                 'meta'  => Meta::get(__('app.password_recovery'), __('app.recover_info'), $m),
                 'data'  => [
@@ -81,10 +82,11 @@ class RecoverController extends Controller
         }
 
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
-        Html::pageError404($user);
+        self::error404($user);
 
         return $this->render(
             '/auth/newrecover',
+            'base',
             [
                 'meta'  => Meta::get(__('app.password recovery'), __('app.recover_info')),
                 'data'  => [

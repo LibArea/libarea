@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
-use Meta, Html;
+use Meta;
 
 class TopicFacetController extends Controller
 {
@@ -18,7 +18,7 @@ class TopicFacetController extends Controller
     {
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
-        Html::pageError404($facet);
+        self::error404($facet);
 
         if ($facet['facet_type'] == 'blog' || $facet['facet_type'] == 'section') {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
@@ -45,6 +45,7 @@ class TopicFacetController extends Controller
 
         return $this->render(
             '/facets/topic',
+            'base',
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
@@ -73,7 +74,7 @@ class TopicFacetController extends Controller
     {
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
-        Html::pageError404($facet);
+        self::error404($facet);
 
         $facet_related = $facet['facet_post_related'] ?? null;
 
@@ -85,6 +86,7 @@ class TopicFacetController extends Controller
 
         return $this->render(
             '/facets/info',
+            'base',
             [
                 'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
                 'data'  => [
@@ -108,7 +110,7 @@ class TopicFacetController extends Controller
     {
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
-        Html::pageError404($facet);
+        self::error404($facet);
 
         $facet_related = $facet['facet_post_related'] ?? null;
 
@@ -120,6 +122,7 @@ class TopicFacetController extends Controller
 
         return $this->render(
             '/facets/writers',
+            'base',
             [
                 'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
                 'data'  => [
