@@ -55,6 +55,7 @@ return [
     'invate_limit_stop'     => '您已用盡邀請數量',
     'invite_created'        => '邀請已創建',
     'url_reserved'          => '此博客網址已保留',
+    'url_correctness'       => '网址不正确',
     
     'string_length'         => '長度不正確 {name}',
     'slug_correctness'      => '{name} 必須只包含拉丁字符、數字',

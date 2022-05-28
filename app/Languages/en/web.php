@@ -60,6 +60,7 @@ return [
     'moderation'        => 'Moderation',
     'sign_in'           => 'Sign in',
     'registration'      => 'Registration',
+    'site_added'        => 'Site added',
 
     'closed'            => 'Discussion of the site is prohibited. Author or staff closed discussion.',
  

@@ -60,6 +60,7 @@ return [
     'moderation'        => '适度',
     'sign_in'           => '登录',
     'registration'      => '注册',
+    'site_added'        => '已添加網站',
 
     'closed'            => '禁止讨论该网站。作者或工作人员不公开讨论。',
  

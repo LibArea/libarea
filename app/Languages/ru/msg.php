@@ -55,6 +55,7 @@ return [
     'invate_limit_stop'     => 'Вы исчерпали количество инвайтов',
     'invite_created'        => 'Инвайт создан',
     'url_reserved'          => 'Этот URL блога зарезервирован',
+    'url_correctness'       => 'URL не является корректным',
     
     'string_length'         => 'Некорректная длина {name}',
     'slug_correctness'      => '{name} должен содержать только латиницу, цифры',

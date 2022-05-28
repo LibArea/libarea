@@ -55,6 +55,7 @@ return [
     'invate_limit_stop'     => 'You have exhausted the number of invites',
     'invite_created'        => 'Invite created',
     'url_reserved'          => 'This blog URL is reserved',
+    'url_correctness'       => 'URL is not correct',
     
     'string_length'         => 'Incorrect length {name}',
     'slug_correctness'      => '{name} must contain only Latin characters, numbers',

@@ -55,6 +55,7 @@ return [
     'invate_limit_stop'     => 'Ați epuizat numărul de invitații',
     'invite_created'        => 'Invitație creată',
     'url_reserved'          => 'URL-ul acestui blog este rezervat',
+    'url_correctness'       => 'URL-ul nu este corect',
     
     'string_length'         => 'Lungime incorectă {name}',
     'slug_correctness'      => '{name} trebuie să conțină numai caractere latine, numere',

@@ -60,6 +60,7 @@ return [
     'moderation'        => 'Moderare',
     'sign_in'           => 'Conectare',
     'registration'      => 'înregistrare',
+    'site_added'        => 'Site adăugat',
 
     'closed'            => 'Discuțiile despre site sunt interzise. Autorul sau personalul a închis discuția.',
  
