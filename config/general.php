@@ -26,7 +26,7 @@ return [
     // Локализация по умолчанию (+ какие языки есть в системе)
     // Default localization (+ languages represented)
     'lang'              => 'ru',
-    'languages'         => ['ru', 'en', 'ro', 'fr', 'zh', 'de'],
+    'languages'         => ['ru', 'en', 'ro', 'fr', 'zh_TW', 'zh_CN', 'de'],
 
     // Режим запуска: true - включить
     // Для первых 50 участников TL будет 1

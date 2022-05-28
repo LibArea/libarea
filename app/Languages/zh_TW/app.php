@@ -280,7 +280,8 @@ return [
     'en_language'       => '英语(EN)',
     'de_language'       => '德语(DE)',
     'fr_language'       => '法语(FR)',
-    'zh_language'       => '中文(ZH)',
+    'zh_TW_language'    => '繁体中文(ZH_TW)',
+    'zh_CN_language'    => '简体中文(ZH_CN)',
     'ro_language'       => '罗马尼亚语(RO)',
 
     'type'              => '类型',

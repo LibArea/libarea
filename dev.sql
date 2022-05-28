@@ -575,7 +575,7 @@ CREATE TABLE `users` (
   `invitation_available` int(11) NOT NULL DEFAULT '0',
   `invitation_id` int(11) NOT NULL DEFAULT '0',
   `template` varchar(12) NOT NULL DEFAULT 'default',
-  `lang` varchar(2) NOT NULL DEFAULT 'ru',
+  `lang` varchar(20) NOT NULL DEFAULT 'ru',
   `scroll` tinyint(1) NOT NULL DEFAULT '0',
   `whisper` varchar(255) NOT NULL,
   `avatar` varchar(255) NOT NULL DEFAULT 'noavatar.png',

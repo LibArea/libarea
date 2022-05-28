@@ -63,6 +63,7 @@ return [
     'comments'          => '評論',
     'like'              => '像',
     'category'          => '類別',
+    'team'              => '團隊',
     'reply_web'         => '答案在目录中',
     
     'submenu'           => '子菜单',

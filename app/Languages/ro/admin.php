@@ -63,6 +63,7 @@ return [
     'comments'          => 'Comentarii',
     'like'              => 'ca',
     'category'          => 'Categorie',
+    'team'              => 'Echipă',
     'reply_web'         => 'Răspunsul este în catalog',
     
     'submenu'           => 'submeniu',

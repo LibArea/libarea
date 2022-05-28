@@ -63,6 +63,7 @@ return [
     'comments'          => 'Comments',
     'like'              => 'Like',
     'category'          => 'Category',
+    'team'              => 'Team',
     'reply_web'         => 'The answer is in the catalog',
     
     'submenu'           => 'Submenu',

@@ -280,7 +280,8 @@ return [
     'en_language'       => 'Engleză (EN)',
     'de_language'       => 'Deutsch (DE)',
     'fr_language'       => 'Franceza (FR)',
-    'zh_language'       => 'Chinez (ZH)',
+    'zh_TW_language'    => 'Chineză tradițională (ZH_TW)',
+    'zh_CN_language'    => 'Chineză simplificată (ZH_CN)',
     'ro_language'       => 'Română (RO)',
 
     'type'              => 'Tip',
