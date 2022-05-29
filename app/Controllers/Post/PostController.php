@@ -158,6 +158,7 @@ class PostController extends Controller
         // Проверим id и получим данные контента
         if ($type == 'post') {
             $content = PostModel::getPost($id, 'id', $user);
+            self::error404($content);
 
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
@@ -170,10 +171,11 @@ class PostController extends Controller
             if ($content['post_merged_id'] > 0 && !UserData::checkAdmin()) {
                 redirect('/post/' . $content['post_merged_id']);
             }
-        } else {
-            $content  = PostModel::getPost($slug, 'slug', $user);
-        }
-
+            
+            return $content;
+        } 
+        
+        $content  = PostModel::getPost($slug, 'slug', $user);
         self::error404($content);
 
         return $content;

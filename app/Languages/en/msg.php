@@ -22,6 +22,7 @@ return [
     'icon'                  => 'Icons',
     'change_saved'          => 'Change saved',
     'successfully'          => 'Successfully!',
+    'blog_added'            => 'Blog added!',
     'command_executed'      => 'Command completed',
     'cover_removed'         => 'Cover removed',
     'select_topic'          => 'Choose a theme',

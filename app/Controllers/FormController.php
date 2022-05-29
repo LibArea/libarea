@@ -19,7 +19,7 @@ class FormController extends Controller
     // Страницы (формы) добавления контента (фасетов)
     public function add()
     {
-        if (in_array($this->type, ['post', 'page'])) {
+        if (in_array($this->type, ['post'])) {
             return (new Post\AddPostController)->index($this->type);
         }
 
@@ -35,7 +35,7 @@ class FormController extends Controller
             return (new Team\AddTeamController)->index();
         }
 
-        return false;
+        self::error404();
     }
 
     // GET
@@ -63,7 +63,7 @@ class FormController extends Controller
             return (new Team\EditTeamController)->index();
         }
 
-        return false;
+        self::error404();
     }
 
     // POST

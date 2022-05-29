@@ -17,11 +17,6 @@ class AddPostController extends Controller
     // Форма добавление поста / страницы
     public function index($type)
     {
-        if ($type == 'page') {
-            $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
-            self::error404($count);
-        }
-
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');

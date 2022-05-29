@@ -17,7 +17,7 @@ class DirController extends Controller
     {
         $os = ['all', 'github', 'wap'];
         if (!in_array($screening = Request::get('grouping'), $os)) {
-            self::error404([]);
+            self::error404();
         }
 
         $category  = FacetModel::get(Request::get('slug'), 'slug', $this->user['trust_level']);

@@ -5,17 +5,14 @@
     </ul>
   </div>
     <?php if (!empty($data['drafts'])) : ?>
-      <div class="box bg-violet">
+      <div class="box">
       <?php foreach ($data['drafts'] as $draft) : ?>
-
         <a href="<?= url('post', ['id' => $draft['post_id'], 'slug' => $draft['post_slug']]); ?>">
           <h3 class="m0 text-2xl"><?= $draft['post_title']; ?></h3>
         </a>
         <div class="mr5 text-sm gray-600 lowercase">
-          <?= $draft['post_date']; ?> |
-          <a href="<?= url('post.edit', ['id' => $draft['post_id']]); ?>"><?= __('app.edit'); ?></a>
+          <?= Html::langDate($draft['post_date']); ?>
         </div>
-
       <?php endforeach; ?>
     </div>
     <?php else : ?>

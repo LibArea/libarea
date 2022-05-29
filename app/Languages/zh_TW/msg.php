@@ -22,6 +22,7 @@ return [
     'icon'                  => '圖標',
     'change_saved'          => '更改已保存',
     'successfully'          => '成功地！',
+    'blog_added'            => '博客添加了！',
     'command_executed'      => '命令完成',
     'cover_removed'         => '取下蓋子',
     'select_topic'          => '選擇一個主題',

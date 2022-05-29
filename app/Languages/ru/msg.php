@@ -22,6 +22,7 @@ return [
     'icon'                  => 'Иконки',
     'change_saved'          => 'Изменение сохранено',
     'successfully'          => 'Успешно!',
+    'blog_added'            => 'Блог добавлен!',
     'command_executed'      => 'Команда выполнена',
     'cover_removed'         => 'Обложка удалена',
     'select_topic'          => 'Выберите тему',

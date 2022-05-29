@@ -22,7 +22,7 @@ class DetailedController extends Controller
         self::error404($item);
 
         if ($item['item_published'] == 0) {
-            self::error404([]);
+            self::error404();
         }
 
         if ($item['item_content_soft']) {

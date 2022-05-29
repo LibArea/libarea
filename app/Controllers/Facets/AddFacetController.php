@@ -69,7 +69,7 @@ class AddFacetController extends Controller
 
         $new_facet_id = FacetModel::add(
             [
-                'facet_title'                => $facet_title,
+                'facet_title'               => $facet_title,
                 'facet_description'         => $facet_description,
                 'facet_short_description'   => $facet_short_description,
                 'facet_slug'                => $facet_slug,
@@ -82,6 +82,7 @@ class AddFacetController extends Controller
 
         SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'facet');
 
-        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
+        $msg = $type == 'blog' ? __('msg.blog_added') : __('msg.change_saved');
+        Validation::comingBack($msg, 'success', $redirect);
     }
 }

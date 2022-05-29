@@ -1,5 +1,7 @@
 <?php
 
+// declare(strict_types=1);
+
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
@@ -83,9 +85,9 @@ class Controller extends MainController
         require TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php';
     }
 
-    public static function error404($values)
+    public static function error404($arr = [])
     {
-        if (!$values) {
+        if (empty($arr)) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
