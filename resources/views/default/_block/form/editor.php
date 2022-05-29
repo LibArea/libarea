@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
             uniqueId: '<?= $autosave; ?>',
             delay: 1000,
             submit_delay: 5000,
-        }, 
+            text: "&nbsp;"
+        },
       <?php endif; ?>  
       imageTexts: {
         sbInit: '<?= __('app.attach_files'); ?>',
