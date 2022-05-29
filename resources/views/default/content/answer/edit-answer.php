@@ -9,7 +9,7 @@
       <?= $data['post']['post_title']; ?>
     </a>
 
-    <form id="editAnswer" accept-charset="UTF-8" method="post">
+    <form action="<?= url('content.change', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
 
       <?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $data['content'], 'type' => 'answer', 'id' => $data['post']['post_id']]); ?>
@@ -20,13 +20,3 @@
       </div>
     </form>
 </main>
-
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('content.change', ['type' => 'answer']),
-    'redirect'  => $url . '#answer_' . $data['answer_id'],
-    'success'   => __('msg.successfully'),
-    'id'        => 'form#editAnswer'
-  ]
-); ?>

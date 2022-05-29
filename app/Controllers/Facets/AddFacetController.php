@@ -33,48 +33,35 @@ class AddFacetController extends Controller
         $facet_slug                 = Request::getPost('facet_slug');
         $facet_seo_title            = Request::getPost('facet_seo_title');
 
+        $data = Request::getPost();
+
         $redirect = ($facet_type == 'category') ? url('web') : url($facet_type . '.add');
         if ($facet_type == 'blog') {
             if (!UserData::checkAdmin()) {
                 if (in_array($facet_slug, config('stop-blog'))) {
-                    return json_encode(['error' => 'error', 'text' => __('msg.url_reserved')]);
-                    //Validation::ComeBack('msg.url_reserved', 'error', $redirect);
+                    Validation::comingBack(__('msg.went_wrong'), 'error', $redirect);
                 }
             }
         }
 
-        if (!Validation::length($facet_title, 3, 64)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
-        }
-
-        if (!Validation::length($facet_description, 34, 225)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.meta_description') . '»'])]);
-        }
-
-        if (!Validation::length($facet_short_description, 9, 160)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.short_description') . '»'])]);
-        }
-
-        if (!Validation::length($facet_seo_title, 4, 225)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
-        }
-
+        Validation::Length($facet_title, 3, 64, 'title', $redirect);
+        Validation::Length($facet_description, 34, 225, 'meta_description', $redirect);
+        Validation::Length($facet_short_description, 9, 160, 'short_description', $redirect);
+        Validation::Length($facet_seo_title, 4, 225, 'slug', $redirect);
 
         // Slug
-        if (!Validation::length($facet_slug, 3, 43)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
-        }
+        Validation::Length($facet_slug, 3, 43, 'slug', $redirect);
 
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $facet_slug)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»'])]);
+            Validation::comingBack(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
         }
 
         if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.repeat_url')]);
+            Validation::comingBack(__('msg.repeat_url'), 'error', $redirect);
         }
 
         if (preg_match('/\s/', $facet_slug) || strpos($facet_slug, ' ')) {
-            return json_encode(['error' => 'error', 'text' => __('msg.url_gaps')]);
+            Validation::comingBack(__('msg.url_gaps'), 'error', $redirect);
         }
 
         $type = $facet_type ?? 'topic';
@@ -95,6 +82,6 @@ class AddFacetController extends Controller
 
         SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'facet');
 
-        return true;
+        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
     }
 }

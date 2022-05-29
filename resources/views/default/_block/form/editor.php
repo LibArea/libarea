@@ -16,7 +16,14 @@ document.addEventListener('DOMContentLoaded', function() {
       previewImagesInEditor: true,
       uploadImage: true,
       spellChecker: false,
-
+      <?php  if (!empty($autosave)) : ?>
+        autosave: {
+            enabled: true,
+            uniqueId: '<?= $autosave; ?>',
+            delay: 1000,
+            submit_delay: 5000,
+        }, 
+      <?php endif; ?>  
       imageTexts: {
         sbInit: '<?= __('app.attach_files'); ?>',
         sbOnDragEnter: '<?= __('app.drop_image'); ?>',

@@ -4,7 +4,7 @@
   <main>
     <div class="max-w640">
 
-    <?= insert('/_block/navigation/breadcrumbs', [
+      <?= insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
             'name' => __('web.catalog'),
@@ -23,7 +23,7 @@
         <span class="text-sm ml15"><?= Html::langDate($domain['item_date']); ?></span>
       </fieldset>
 
-      <form id="editWebsite" method="post">
+      <form action="<?= url('content.change', ['type' => 'item']); ?>" method="post">
         <?= csrf_field() ?>
 
         <?= insert('/_block/form/select/category', ['data' => $data, 'action' => 'edit']); ?>
@@ -37,15 +37,15 @@
           'title'     => __('web.related_posts'),
           'help'      => __('web.necessarily'),
         ]); ?>
-        
-         <?php if (UserData::checkAdmin()) { ?>
-            <?= insert('/_block/form/select/user', [
-              'user'          => $data['user'],
-              'action'        => 'user',
-              'type'          => 'user',
-              'title'         => __('web.author'),
-              'help'          => __('web.necessarily'),
-            ]); ?>
+
+        <?php if (UserData::checkAdmin()) { ?>
+          <?= insert('/_block/form/select/user', [
+            'user'          => $data['user'],
+            'action'        => 'user',
+            'type'          => 'user',
+            'title'         => __('web.author'),
+            'help'          => __('web.necessarily'),
+          ]); ?>
         <?php } ?>
 
         <input type="hidden" name="item_id" value="<?= $domain['item_id']; ?>">
@@ -60,13 +60,3 @@
       <div>
   </aside>
 </div>
-
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('content.change', ['type' => 'item']),
-    'redirect'  => UserData::checkAdmin() ? url('web') : url('web.user.sites'),
-    'success'   => __('msg.successfully'),
-    'id'        => 'form#editWebsite'
-  ]
-); ?>

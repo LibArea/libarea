@@ -33,16 +33,14 @@ class AddTeamController extends Controller
     // Добавление команды
     public function create()
     {
-        //$count = TeamModel::allCount($this->user['id']);
-        //if ($count > $this->limit) {
-        //  return;
-        // }
+        $count = TeamModel::allCount($this->user['id']);
+        if ($count > $this->limit) return;
 
         $name = Request::getPost('name');
         $content = Request::getPost('content');
 
-        Validation::Length($name, 'msg.title', '6', '250', url('team.add'));
-        Validation::Length($content, 'msg.content', '6', '5000', url('team.add'));
+        Validation::Length($name, 6, 250, 'title', url('team.add'));
+        Validation::Length($content, 6, 5000, 'content', url('team.add'));
 
         TeamModel::create(
             [
@@ -52,6 +50,6 @@ class AddTeamController extends Controller
                 'team_type'     => 'post',
             ]
         );
-        Validation::ComeBack('team.created', 'success', url('teams'));
+        Validation::comingBack('team.created', 'success', url('teams'));
     }
 }

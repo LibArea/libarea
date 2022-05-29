@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
-use Integration, Validation, SendEmail, Meta, Html, UserData;
+use Integration, Validation, SendEmail, Meta, Html, Msg, UserData;
 
 class RecoverController extends Controller
 {
@@ -31,28 +31,26 @@ class RecoverController extends Controller
 
     public function index()
     {
-        $email          = Request::getPost('email');
-        $recover_uri    = url('recover');
+        $email      = Request::getPost('email');
+        $redirect   = url('recover');
 
         if (config('general.captcha')) {
             if (!Integration::checkCaptchaCode()) {
-                return json_encode(['error' => 'error', 'text' => __('msg.code_error')]);
+                Validation::comingBack('msg.code_error', 'error', $redirect);
             }
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
-        }
+        Validation::email($email = Request::getPost('email'), $redirect);
 
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['email'])) {
-            return json_encode(['error' => 'error', 'text' => __('msg.no_user')]);
+            Validation::comingBack('msg.no_user', 'error', $redirect);
         }
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['ban_list'] == UserData::BANNED_USER) {
-            return json_encode(['error' => 'error', 'text' => __('msg.account_verified')]);
+            Validation::comingBack('msg.account_verified', 'error', $redirect);
         }
 
         $code = $uInfo['id'] . '-' . Html::randomString('crypto', 25);
@@ -67,7 +65,7 @@ class RecoverController extends Controller
         // Отправка e-mail
         SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => url('recover.code', ['code' => $code])]);
 
-        return true;
+        Validation::comingBack(__('msg.successfully'), url('login'));
     }
 
     // Страница установки нового пароля
@@ -77,7 +75,7 @@ class RecoverController extends Controller
         $user_id    = UserModel::getPasswordActivate($code);
 
         if (!$user_id) {
-            Html::addMsg(__('msg.went_wrong'), 'error');
+            Msg::add(__('msg.went_wrong'), 'error');
             redirect(url('login'));
         }
 
@@ -109,16 +107,14 @@ class RecoverController extends Controller
             return false;
         }
 
-        if (!Validation::length($password, 8, 32)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.password') . '»'])]);
-        }
+        Validation::length($password, 8, 32, 'password', url('recover.code', ['code' => $code]));
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         SettingModel::editPassword(['id' => $user_id, 'password' => $newpass]);
 
         UserModel::editRecoverFlag($user_id);
 
-        return true;
+        Validation::comingBack(__('msg.change_saved'), 'success', url('login'));
     }
 
     // Проверка корректности E-mail
@@ -128,13 +124,13 @@ class RecoverController extends Controller
         $activate_email = UserModel::getEmailActivate($code);
 
         if (!$activate_email) {
-            Html::addMsg(__('msg.code_incorrect'), 'error');
+            Msg::add(__('msg.code_incorrect'), 'error');
             redirect('/');
         }
 
         UserModel::EmailActivate($activate_email['user_id']);
 
-        Html::addMsg(__('msg.yes_email_pass'), 'success');
+        Msg::add(__('msg.yes_email_pass'), 'success');
         redirect(url('login'));
     }
 }

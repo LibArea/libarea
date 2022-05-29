@@ -43,67 +43,60 @@ class RegisterController extends Controller
         $inv_uid            = Request::getPostInt('invitation_id');
         $password_confirm   = Request::getPost('password_confirm');
 
-        $redirect = $inv_code ? '/register/invite/' . $inv_code : '/register';
+        $redirect = $inv_code ? '/register/invite/' . $inv_code : url('register');
 
         // Проверим login
         $login = Request::getPost('login');
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $login)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.slug_correctness', ['name' => '«' . __('msg.nickname') . '»'])]);
+            Validation::comingBack('msg.slug_correctness', 'error', $redirect);
         }
 
-        if (!Validation::length($login, 3, 12)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.nickname') . '»'])]);
-        }
+        Validation::length($login, 3, 12, 'nickname', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.nick_character')]);
+            Validation::comingBack('msg.nick_character', 'error', $redirect);
         }
 
         if (in_array($login, config('stop-nickname'))) {
-            return json_encode(['error' => 'error', 'text' => __('msg.nick_exist')]);
+            Validation::comingBack('msg.nick_exist', 'error', $redirect);
         }
 
         if (is_array(AuthModel::checkRepetitions($login, 'login'))) {
-            return json_encode(['error' => 'error', 'text' => __('msg.nick_exist')]);
+            Validation::comingBack('msg.nick_exist', 'error', $redirect);
         }
 
         // Check Email
         // Проверим Email
-        if (!filter_var($email  = Request::getPost('email'), FILTER_VALIDATE_EMAIL)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
-        }
+        Validation::email($email = Request::getPost('email'), $redirect);
 
         if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
-            return json_encode(['error' => 'error', 'text' => __('msg.email_replay')]);
+            Validation::comingBack('msg.email_replay', 'error', $redirect);
         }
 
         $arr = explode('@', $email);
         $domain = array_pop($arr);
         if (in_array($domain, config('stop-email'))) {
-            return json_encode(['error' => 'error', 'text' => __('msg.email_replay')]);
+            Validation::comingBack('msg.email_replay', 'error', $redirect);
         }
 
         // Check ip for ban
         // Запрет Ip на бан
         $reg_ip = Request::getRemoteAddress();
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
-            return json_encode(['error' => 'error', 'text' => __('msg.multiple_accounts')]);
+            Validation::comingBack('msg.multiple_accounts', 'error', $redirect);
         }
 
         // Let's check the password
         // Проверим пароль
         $password = Request::getPost('password');
-        if (!Validation::length($password, 8, 32)) {
-            $msg = __('msg.string_length', ['name' => '«' . __('msg.password') . '»']);
-            return json_encode(['error' => 'error', 'text' => $msg]);
-        }
+        Validation::length($password, 8, 32, 'password', $redirect);
 
         if (substr_count($password, ' ') > 0) {
-            return json_encode(['error' => 'error', 'text' => __('msg.password_spaces')]);
+            Validation::comingBack('msg.password_spaces', 'error', $redirect);
         }
 
         if ($password != $password_confirm) {
-            return json_encode(['error' => 'error', 'text' => __('msg.pass_match_err')]);
+            Validation::comingBack('msg.pass_match_err', 'error', $redirect);
         }
 
         // Let's check the verification code
@@ -111,7 +104,7 @@ class RegisterController extends Controller
         if (!$inv_code) {
             if (config('general.captcha')) {
                 if (!Integration::checkCaptchaCode()) {
-                    return json_encode(['error' => 'error', 'text' => __('msg.code_error')]);
+                    Validation::comingBack('msg.code_error', 'error', $redirect);
                 }
             }
             // Если хакинг формы (If form hacking)
@@ -155,7 +148,7 @@ class RegisterController extends Controller
                 ]
             );
 
-            return true;
+            Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
         }
 
         // Email Activation
@@ -170,7 +163,7 @@ class RegisterController extends Controller
         // Sending email
         SendEmail::mailText($active_uid, 'activate.email', ['link' => url('activate.code', ['code' => $email_code])]);
 
-        return true;
+        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
     }
 
     // Show registration form with invite
@@ -181,7 +174,7 @@ class RegisterController extends Controller
         $invate = InvitationModel::available($code);
 
         if (!$invate) {
-            Validation::ComeBack('msg.code_incorrect', 'error', '/');
+            Validation::comingBack('msg.code_incorrect', 'error', '/');
         }
 
         return $this->render(

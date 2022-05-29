@@ -53,6 +53,8 @@ class EditItemController extends Controller
     public function change()
     {
         $data = Request::getPost();
+        $redirect = url('content.add', ['type' => 'item']);
+        
         $item = WebModel::getItemId($data['item_id']);
         if (!$item) {
             return true;
@@ -66,17 +68,10 @@ class EditItemController extends Controller
 
         // Check the length
         // Проверим длину
-        if (!Validation::length($data['title'], 14, 250)) {
-            return json_encode(['error' => 'error', 'text' => __('web.string_length', ['name' => '«' . __('web.title') . '»'])]);
-        }
+        Validation::length($data['title'], 14, 250, 'title', $redirect);
+        Validation::length($data['content'], 24, 1500, 'description', $redirect);
 
-        if (!Validation::length($data['content'], 24, 1500)) {
-            return json_encode(['error' => 'error', 'text' => __('web.string_length', ['name' => '«' . __('web.description') . '»'])]);
-        }
-
-        if (filter_var($data['url'], FILTER_VALIDATE_URL) === false) {
-            return true;
-        }
+        Validation::url($data['url'], $redirect);
 
         // Связанные посты
         $json_post  = $data['post_select'] ?? [];
@@ -148,6 +143,6 @@ class EditItemController extends Controller
             FacetModel::addItemFacets($arr, $item['item_id']);
         }
 
-        return true;
+        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
     }
 }

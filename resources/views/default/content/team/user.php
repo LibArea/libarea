@@ -17,7 +17,7 @@
             </div>
             <blockquote class="box">
               <?php if ($team['users_list']) : ?>
-                 <?= \App\Controllers\Team\TeamController::users($team['users_list']); ?>
+                <?= \App\Controllers\Team\TeamController::users($team['users_list']); ?>
               <?php else : ?>
                 <?= __('team.no_users'); ?>...
               <?php endif; ?>
@@ -30,7 +30,7 @@
             <div class="bg-red-200 p5">
               <?= $team['team_name']; ?>
               <div class="gray-600 bg-red-200">
-                <?= __('team.reestablish'); ?>. <span class="type-action" data-type="team" data-id="<?= $team['id']; ?>"><?= __('team.recover'); ?>  </span>
+                <?= __('team.reestablish'); ?>. <span class="type-action" data-type="team" data-id="<?= $team['id']; ?>"><?= __('team.recover'); ?> </span>
               </div>
             </div>
           <?php endif; ?>

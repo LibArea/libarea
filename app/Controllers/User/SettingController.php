@@ -73,18 +73,13 @@ class SettingController extends Controller
     {
         $data = Request::getPost();
 
-        if (!Validation::length($data['name'], 0, 11)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.name') . '»'])]);
-        }
+        $redirect = url('setting');
 
-        if (!Validation::length($data['about'], 0, 255)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.about') . '»'])]);
-        }
+        Validation::length($data['name'], 0, 11, 'name', $redirect);
+        Validation::length($data['about'], 0, 255, 'about', $redirect);
 
         if ($data['public_email']) {
-            if (!filter_var($data['public_email'], FILTER_VALIDATE_EMAIL)) {
-                return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
-            }
+            Validation::email($data['public_email'], $redirect);
         }
 
         $user   = UserModel::getUser($this->user['id'], 'id');
@@ -114,7 +109,7 @@ class SettingController extends Controller
             ]
         );
 
-        return true;
+        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
     }
 
     // Avatar and cover upload form
@@ -151,7 +146,7 @@ class SettingController extends Controller
             UploadImage::cover($cover, $this->user['id'], 'user');
         }
 
-        Validation::ComeBack('msg.change_saved', 'success', '/setting/avatar');
+        Validation::comingBack('msg.change_saved', 'success', '/setting/avatar');
     }
 
     // Change password form
@@ -182,27 +177,25 @@ class SettingController extends Controller
 
         $redirect   = '/setting/security';
         if ($password2 != $password3) {
-            return json_encode(['error' => 'error', 'text' => __('msg.pass_match_err')]);
+            Validation::comingBack('msg.pass_match_err', 'error', $redirect);
         }
 
         if (substr_count($password2, ' ') > 0) {
-            return json_encode(['error' => 'error', 'text' => __('msg.password_spaces')]);
+            Validation::comingBack('msg.password_spaces', 'error', $redirect);
         }
 
-        if (!Validation::length($password2, 8, 32)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.password') . '»'])]);
-        }
+        Validation::length($password2, 8, 32, 'password', $redirect);
 
         $userInfo   = UserModel::userInfo($this->user['email']);
         if (!password_verify($password, $userInfo['password'])) {
-            return json_encode(['error' => 'error', 'text' => __('msg.old_error')]);
+            Validation::comingBack('msg.old_error', 'error', $redirect);
         }
 
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
 
         SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
 
-        return true;
+        Validation::comingBack(__('msg.successfully'), 'success');
     }
 
     // Cover Removal

@@ -41,14 +41,14 @@ class AddItemController extends Controller
     public function create()
     {
         $url = Request::getPost('url');
-        if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
-            return json_encode(['error' => 'error', 'text' => __('web.website_correctness')]);
-        }
+        $redirect = url('content.add', ['type' => 'item']);
+        
+        Validation::url($url, $redirect);
 
         // Check if the domain exists in the system  
         // Проверим наличие домена в системе
         if ($domain = self::getDomain(Request::getPost('url'))) {
-            return json_encode(['error' => 'error', 'text' => __('web.site_replay')]);
+            Validation::comingBack(__('web.site_replay'), 'error', $redirect);
         }
 
         // Get a first level domain       
@@ -57,10 +57,7 @@ class AddItemController extends Controller
 
         // Check the length of the site name
         // Проверим длину названия сайта
-        if (!Validation::length(Request::getPost('title'), 14, 250)) {
-            $msg = __('web.string_length', ['name' => '«' . __('web.title') . '»']);
-            return json_encode(['error' => 'error', 'text' => $msg]);
-        }
+        Validation::length(Request::getPost('title'), 14, 250, 'title', $redirect);
 
         // Make the description optional for publication (it will still be rewritten) 
         // Сделать описание необязательным для публикации (оно все равно будет переписано) 
@@ -128,7 +125,7 @@ class AddItemController extends Controller
 
         SubscriptionModel::focus($item_last['item_id'], $this->user['id'], 'item');
 
-        return true;
+        Validation::comingBack(__('web.site_added'), 'success', url('web'));
     }
 
     public static function getDomain($url)

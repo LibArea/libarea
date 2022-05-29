@@ -253,34 +253,6 @@ class Html
         }
     }
 
-
-    public static function getMsg()
-    {
-        if (isset($_SESSION['msg'])) {
-            $msg = $_SESSION['msg'];
-        } else {
-            $msg = false;
-        }
-
-        unset($_SESSION['msg']);
-
-        $html = '';
-        if ($msg) {
-            if ($msg['status'] == 'error') :
-                $html .= "Notiflix.Notify.failure('" . $msg['msg'] . "')";
-            else :
-                $html .= "Notiflix.Notify.info('" . $msg['msg'] . "')";
-            endif;
-        }
-
-        return $html;
-    }
-
-    public static function addMsg($msg, $status)
-    {
-        $_SESSION['msg'] = ['msg' => $msg, 'status' =>  $status ?? 'error'];
-    }
-
     // If 2 weeks have not passed since registration, then the nickname is green
     public static function loginColor($time)
     {
@@ -341,13 +313,6 @@ class Html
         }
 
         return sprintf('%d%s', floor($number / 1000000000000), 'T+');
-    }
-
-
-    // Line length
-    public static function getStrlen($str)
-    {
-        return mb_strlen($str, "utf-8");
     }
 
     // Create random string

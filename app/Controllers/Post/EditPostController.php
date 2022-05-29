@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use UploadImage, Validation, Meta, UserData, Access;
+use UploadImage, Meta, Validation, UserData, Access;
 
 class EditPostController extends Controller
 {
@@ -18,7 +18,7 @@ class EditPostController extends Controller
         self::error404($post);
 
         if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
-            redirect('/');
+            Validation::comingBack(__('msg.access_denied'), 'error');
         }
 
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
@@ -67,7 +67,7 @@ class EditPostController extends Controller
         // Проверка доступа 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
         if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
-            return json_encode(['error' => 'error', 'text' => __('msg.went_wrong')]);
+            Validation::comingBack(__('msg.went_wrong'), 'error');
         }
 
         // Связанные посты и темы
@@ -84,7 +84,7 @@ class EditPostController extends Controller
             $post_related = implode(',', $id ?? []);
         }
 
-        $redirect   = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
+        $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
         // If there is a change in post_user_id (owner) and who changes staff
         // Если есть смена post_user_id (владельца) и кто меняет персонал
@@ -100,14 +100,9 @@ class EditPostController extends Controller
         }
 
         $post_title = str_replace("&nbsp;", '', $post_title);
-        if (!Validation::length($post_title, 6, 250)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
-        }
-
-        if (!Validation::length($content, 6, 25000)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.content') . '»'])]);
-        }
-
+        Validation::length($post_title, 6, 250, 'title', $redirect);
+        Validation::length($content, 6, 25000, 'content', $redirect);
+        
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
             $draft = 0;
@@ -120,7 +115,7 @@ class EditPostController extends Controller
 
         // Обложка поста
         if (!empty($_FILES['images']['name'])) {
-            $post_img = UploadImage::cover_post($_FILES['images'], $post, $redirect, $this->user['id']);
+            $post_img = UploadImage::coverPost($_FILES['images'], $post, $redirect, $this->user['id']);
         }
         $post_img = $post_img ?? $post['post_content_img'];
 
@@ -146,7 +141,7 @@ class EditPostController extends Controller
             ]
         );
 
-        return true;
+        Validation::comingBack(__('msg.change_saved'), 'success', '/post/' . $post['post_id']);
     }
 
     // Add fastes (blogs, topics) to the post 
@@ -156,7 +151,7 @@ class EditPostController extends Controller
         $new_type = 'post';
         $facets = $fields['facet_select'] ?? false;
         if (!$facets) {
-            Validation::ComeBack('msg.select_topic', 'error', $redirect);
+            Validation::comingBack(__('msg.select_topic'), 'error', $redirect);
         }
         $topics = json_decode($facets, true);
 
@@ -183,14 +178,15 @@ class EditPostController extends Controller
     {
         $post_id    = Request::getInt('id');
         $post = PostModel::getPost($post_id, 'id', $this->user);
+        
         if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
-            redirect('/');
+            Validation::comingBack(__('msg.went_wrong'), 'error');
         }
 
         PostModel::setPostImgRemove($post['post_id']);
-        UploadImage::cover_post_remove($post['post_content_img'], $this->user['id']);
+        UploadImage::coverPostRemove($post['post_content_img'], $this->user['id']);
 
-        Validation::ComeBack('msg.cover_removed', 'success', url('content.edit', ['type' => 'post', 'id' => $post['post_id']]));
+        Validation::comingBack(__('msg.cover_removed'), 'success', url('content.edit', ['type' => 'post', 'id' => $post['post_id']]));
     }
 
     public function uploadContentImage()
@@ -206,7 +202,7 @@ class EditPostController extends Controller
 
         $img = $_FILES['image'];
         if ($_FILES['image']['name']) {
-            return json_encode(array('data' => array('filePath' => UploadImage::post_img($img, $user_id, $type, $id))));
+            return json_encode(array('data' => array('filePath' => UploadImage::postImg($img, $user_id, $type, $id))));
         }
 
         return false;

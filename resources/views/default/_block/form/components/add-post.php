@@ -1,5 +1,5 @@
 <fieldset>
-  <label for="post_title"><?= __('app.heading'); ?></label>
+  <label for="post_title"><?= __('app.heading'); ?> <sup class="red">*</sup></label>
   <input minlength="6" maxlength="250" id="title" type="text" required="" name="post_title">
   <div class="help">6 - 250 <?= __('app.characters'); ?></div>
 </fieldset>
@@ -33,7 +33,7 @@
   </fieldset>
 <?php endif; ?>
 
-<div class="file-upload mb20" id="file-drag">
+<div class="file-upload" id="file-drag">
   <div class="flex">
     <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-gray">
     <div id="start">
@@ -50,7 +50,13 @@
   </div>
 </div>
 
-<?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'post-telo', 'id' => 0]); ?>
+<?= insert('/_block/form/editor', [
+    'autosave'  => 'addPostId',
+    'title'     => __('app.post'),
+    'height'    => '250px',
+     'type'     => 'post-telo',
+     'id'       => 0
+     ]); ?>
 
 <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL)) : ?>
   <?= insert('/_block/form/radio',  [

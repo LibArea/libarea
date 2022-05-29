@@ -8,7 +8,7 @@
 ); ?>
 
 <div class="box bg-white">
-  <form id="editUser" method="post">
+  <form action="<?= url('admin.user.change', ['id' => $data['user']['id']]); ?>" method="post">
     <?= csrf_field() ?>
     <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
       <a class="right text-sm" href="<?= url('delete.cover', ['login' => $data['user']['login']]); ?>">
@@ -235,16 +235,5 @@ $setting = [
   </form>
 </div>
 </main>
-
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('admin.user.change', ['id' => $data['user']['id']]),
-    'redirect'  => url('admin.user.edit', ['id' => $data['user']['id']]),
-    'success'   => __('msg.change_saved'),
-    'id'        => 'form#editUser'
-  ]
-); ?>
-
 
 <?= includeTemplate('/view/default/footer'); ?>

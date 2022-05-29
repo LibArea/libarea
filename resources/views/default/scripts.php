@@ -19,7 +19,7 @@
       }));
   <?php endif; ?>
 
-  <?= Html::getMsg(); ?>
+  <?= Msg::get(); ?>
 
   <?php if (UserData::getUserScroll()) : ?>
     // Что будет смотреть

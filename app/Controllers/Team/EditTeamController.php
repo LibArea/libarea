@@ -53,13 +53,10 @@ class EditTeamController extends Controller
         $name = Request::getPost('name');
         $content = Request::getPost('content');
 
-        if (!Validation::length($name, 6, 250)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
-        }
+        $redirect = url('teams');
 
-        if (!Validation::length($content, 6, 5000)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.content') . '»'])]);
-        }
+        Validation::length($name, 6, 250, 'title', $redirect);
+        Validation::length($content, 6, 5000, 'content', $redirect);
 
         TeamModel::edit(
             [
@@ -74,7 +71,7 @@ class EditTeamController extends Controller
         $users    = Request::getPost() ?? [];
         self::editUser($users, $team['team_id']);
 
-        Validation::ComeBack('team.change', 'success', url('teams'));
+        Validation::comingBack('team.change', 'success', url('teams'));
     }
 
     // Add fastes (blogs, topics) to the post 

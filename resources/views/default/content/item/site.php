@@ -21,7 +21,7 @@
           <?php endif; ?>
 
           <?php if ($item['item_is_deleted'] == 1 && UserData::checkAdmin()) : ?>
-             <i class="red ml15"><?= __('app.remote'); ?></i>
+            <i class="red ml15"><?= __('app.remote'); ?></i>
           <?php endif; ?>
 
           <?php if (!empty($delete_fav)) : ?>
@@ -55,7 +55,7 @@
                   <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                 </a>
               <?php endif; ?>
-            
+
               <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'mr20'); ?>
               <?= Html::votes($item, 'item', 'ps', 'bi-heart mr5'); ?>
             </div>

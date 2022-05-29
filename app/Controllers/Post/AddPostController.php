@@ -95,13 +95,8 @@ class AddPostController extends Controller
 
         $post_title = str_replace("&nbsp;", '', $post_title);
 
-        if (!Validation::length($post_title, 6, 250)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
-        }
-
-        if (!Validation::length($content, 6, 25000)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.content') . '»'])]);
-        }
+        Validation::length($post_title, 6, 250, 'title', $redirect);
+        Validation::length($content, 6, 25000, 'content', $redirect);
  
         if ($post_url) {
             $site = $this->addUrl($post_url, $post_title);
@@ -109,7 +104,7 @@ class AddPostController extends Controller
 
         // Обложка поста
         if (!empty($_FILES['images']['name'])) {  
-            $post_img = UploadImage::cover_post($_FILES['images'], 0, $redirect, $this->user['id']);
+            $post_img = UploadImage::coverPost($_FILES['images'], 0, $redirect, $this->user['id']);
         }
  
         // Получаем SEO поста
@@ -175,7 +170,7 @@ class AddPostController extends Controller
             ]
         );
 
-        return true;
+        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
     }
 
     public static function slug($title)
@@ -251,7 +246,7 @@ class AddPostController extends Controller
         $meta->parse();
         $metaData = $meta->finalize();
 
-        return UploadImage::thumb_post($metaData->image);
+        return UploadImage::thumbPost($metaData->image);
     }
 
     // Рекомендовать пост

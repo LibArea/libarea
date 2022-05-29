@@ -68,7 +68,7 @@ class UploadImage
         return false;
     }
 
-    public static function post_img($img, $user_id, $type, $content_id)
+    public static function postImg($img, $user_id, $type, $content_id)
     {
         $path_img   = HLEB_PUBLIC_DIR . PATH_POSTS_CONTENT;
         $year       = date('Y') . '/';
@@ -167,12 +167,12 @@ class UploadImage
     }
 
     // Post cover
-    public static function cover_post($cover, $post, $redirect, $user_id)
+    public static function coverPost($cover, $post, $redirect, $user_id)
     {
         // Width check
         $width_h  = getimagesize($cover['tmp_name']);
         if ($width_h < 500) {
-            Validation::ComeBack('msg.five_width', 'error', $redirect);
+            Validation::comingBack('msg.five_width', 'error', $redirect);
         }
 
         $path = HLEB_PUBLIC_DIR . PATH_POSTS_COVER;
@@ -210,7 +210,7 @@ class UploadImage
     }
 
     // Удаление обложка поста
-    public static function cover_post_remove($path_img, $user_id)
+    public static function coverPostRemove($path_img, $user_id)
     {
         unlink(HLEB_PUBLIC_DIR . PATH_POSTS_COVER . $path_img);
 
@@ -218,7 +218,7 @@ class UploadImage
     }
 
     // Thumb for post
-    public static function thumb_post($image)
+    public static function thumbPost($image)
     {
         $ext = pathinfo(parse_url($image, PHP_URL_PATH), PATHINFO_EXTENSION);
         if (in_array($ext, array('jpg', 'jpeg', 'png'))) {

@@ -54,11 +54,9 @@ class EditAnswerController extends Controller
         }
 
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
-        $url = url('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
+        $url_post = url('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
 
-        if (!Validation::length($content, 6, 5000)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.content') . '»'])]);
-        }
+        Validation::Length($content, 6, 5000, 'content', url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]));
 
         AnswerModel::edit(
             [
@@ -67,7 +65,7 @@ class EditAnswerController extends Controller
                 'answer_modified'   => date("Y-m-d H:i:s"),
             ]
         );
-
-        return true;
+             
+        Validation::comingBack(__('msg.change_saved'), 'success', $url_post . '#answer_' . $answer['answer_id']);
     }
 }

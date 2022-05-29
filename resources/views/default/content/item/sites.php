@@ -31,42 +31,42 @@
       </div>
     <?php endforeach; ?>
   </div>
-  
-    <?php if ($data['low_matching']) : ?>
-      <div class="ml20 mb20 mb-block">
-        <?php foreach ($data['low_matching'] as $rl) : ?>
-          <div class="inline mr20">
-            <a class="text-2xl" href="<?= url('web.dir', ['grouping' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
-              @<?= $rl['facet_title']; ?>
+
+  <?php if ($data['low_matching']) : ?>
+    <div class="ml20 mb20 mb-block">
+      <?php foreach ($data['low_matching'] as $rl) : ?>
+        <div class="inline mr20">
+          <a class="text-2xl" href="<?= url('web.dir', ['grouping' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
+            @<?= $rl['facet_title']; ?>
+          </a>
+          <?php if (UserData::checkAdmin()) : ?>
+            <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
+              <sup class="gray-600"><i class="bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
             </a>
-            <?php if (UserData::checkAdmin()) : ?>
-              <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
-                <sup class="gray-600"><i class="bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
-              </a>
-            <?php endif; ?>
-          </div>
-        <?php endforeach; ?>
-      </div>
-    <?php endif; ?>
-    
+          <?php endif; ?>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
+
 <?php else : ?>
 
-    <?php if ($data['low_matching']) : ?>
-      <div class="item-categories mb-block">
-        <?php foreach ($data['low_matching'] as $rl) : ?>
-          <div class="inline mr20">
-            <a class="text-2xl" href="<?= url('web.dir', ['grouping' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
-              @<?= $rl['facet_title']; ?>
+  <?php if ($data['low_matching']) : ?>
+    <div class="item-categories mb-block">
+      <?php foreach ($data['low_matching'] as $rl) : ?>
+        <div class="inline mr20">
+          <a class="text-2xl" href="<?= url('web.dir', ['grouping' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
+            @<?= $rl['facet_title']; ?>
+          </a>
+          <?php if (UserData::checkAdmin()) : ?>
+            <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
+              <sup class="gray-600"><i class="bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
             </a>
-            <?php if (UserData::checkAdmin()) : ?>
-              <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
-                <sup class="gray-600"><i class="bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
-              </a>
-            <?php endif; ?>
-          </div>
-        <?php endforeach; ?>
-      </div>
-    <?php endif; ?>
+          <?php endif; ?>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
 <?php endif; ?>
 
 <div id="contentWrapper">

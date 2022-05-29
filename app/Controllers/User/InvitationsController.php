@@ -50,25 +50,22 @@ class InvitationsController extends Controller
 
         $redirect = url('invitations');
 
-        if (!filter_var($invitation_email, FILTER_VALIDATE_EMAIL)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
-        }
-
+        Validation::email($email = Request::getPost('email'), $redirect);
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['email'])) {
-            Validation::ComeBack('msg.user_already', 'error', $redirect);
+            Validation::comingBack('msg.user_already', 'error', $redirect);
         }
 
         $inv_user = InvitationModel::duplicate($invitation_email);
         if (!empty($inv_user['invitation_email'])) {
             if ($inv_user['invitation_email'] == $invitation_email) {
-                Validation::ComeBack('msg.invate_replay', 'error', $redirect);
+                Validation::comingBack('msg.invate_replay', 'error', $redirect);
             }
         }
 
         if ($this->user['invitation_available'] >= config('general.invite_limit')) {
-            Validation::ComeBack('msg.invate_limit_stop', 'error', $redirect);
+            Validation::comingBack('msg.invate_limit_stop', 'error', $redirect);
         }
 
         $invitation_code = Html::randomString('crypto', 25);
@@ -87,6 +84,6 @@ class InvitationsController extends Controller
         $link = url('invite.reg', ['code' => $invitation_code]);
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
-        Validation::ComeBack('msg.invite_created', 'success', $redirect);
+        Validation::comingBack('msg.invite_created', 'success', $redirect);
     }
 }

@@ -39,7 +39,7 @@
       </div>
     <?php endforeach; ?>
     <?php if (UserData::checkAdmin()) : ?>
-      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><i class="bi-pencil"></i> <?=  __('app.edit'); ?></a>
+      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><i class="bi-pencil"></i> <?= __('app.edit'); ?></a>
     <?php endif; ?>
   </div>
 </aside>

@@ -2,7 +2,7 @@
   <div class="box">
     <h2><?= __('app.add_post'); ?></h2>
 
-    <form class="max-w780" id="addPost" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= url('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <?= component('add-post', ['data' => $data]); ?>
     </form>
@@ -15,13 +15,3 @@
     <?= __('help.add_post'); ?>
   </div>
 </aside>
-
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('content.create', ['type' => 'post']),
-    'redirect'  => '/',
-    'success'   => __('msg.successfully'),
-    'id'        => 'form#addPost'
-  ]
-); ?>

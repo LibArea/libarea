@@ -2,7 +2,7 @@
   <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
-    <form class="max-w780" id="setting" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= url('setting.change', ['type' => 'setting']); ?>" method="post">
       <?php csrf_field(); ?>
       <?= component('setting', ['data' => $data]); ?>
     </form>
@@ -14,13 +14,3 @@
     <?= __('help.setting_info'); ?>
   </div>
 </aside>
-
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('setting.change', ['type' => 'setting']),
-    'redirect'  => url('setting'),
-    'success'   => __('msg.change_saved'),
-    'id'        => 'form#setting'
-  ]
-); ?>

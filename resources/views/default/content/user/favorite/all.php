@@ -54,7 +54,7 @@
         <?php endif; ?>
 
         <?php if ($fav['action_type'] == 'answer') : ?>
-         <div> <?= Content::text($fav['answer_content'], 'text'); ?></div>
+          <div> <?= Content::text($fav['answer_content'], 'text'); ?></div>
         <?php endif; ?>
 
         <?php if ($fav['tag_id']) : ?>

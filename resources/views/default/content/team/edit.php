@@ -13,16 +13,19 @@
         <div class="help">6 - 250 <?= __('team.characters'); ?></div>
       </fieldset>
 
-      <?php insert('/_block/form/textarea', [
-        'title'     => __('team.description'),
-        'type'      => 'text',
-        'name'      => 'content',
-        'content'   => $team['team_content'],
-        'min'       => 6,
-        'max'       => 555,
-        'help'      => '5 - 555 ' . __('team.characters'),
-        'user'       => $user
-      ]); ?>
+      <?php insert(
+        '/_block/form/textarea',
+        [
+          'title'     => __('team.description'),
+          'type'      => 'text',
+          'name'      => 'content',
+          'content'   => $team['team_content'],
+          'min'       => 6,
+          'max'       => 555,
+          'help'      => '5 - 555 ' . __('team.characters'),
+          'user'       => $user
+        ]
+      ); ?>
 
       <?= insert('/_block/form/select/users-team', ['users' => $data['users']]); ?>
 

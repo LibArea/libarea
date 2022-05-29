@@ -26,7 +26,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
   </div>
 
   <div class="box max-w780">
-    <form class="max-w780" id="editFacet" method="post" enctype="multipart/form-data">
+    <form class="max-w780" action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <div class="file-upload mb10" id="file-drag">
@@ -35,7 +35,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
           <div id="start" class="mt15">
             <input id="file-upload" type="file" name="images" accept="image/*" />
-            <div id="notimage" class="none"><?= __('app.select_image');?></div>
+            <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
           </div>
         </div>
         <div id="response" class="hidden">
@@ -67,19 +67,19 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
       <fieldset>
         <label for="facet_title"><?= __('app.title'); ?><sup class="red">*</sup></label>
-        <input  minlength="3" maxlength="64" type="text" name="facet_title" value="<?= $fs['facet_title']; ?>">
+        <input minlength="3" maxlength="64" type="text" name="facet_title" value="<?= $fs['facet_title']; ?>">
         <div class="help">3 - 64 <?= __('app.characters'); ?></div>
       </fieldset>
 
       <fieldset>
         <label for="facet_seo_title"><?= __('app.title'); ?> (SEO)<sup class="red">*</sup></label>
-        <input  minlength="4" maxlength="255" type="text" name="facet_seo_title" value="<?= $fs['facet_seo_title']; ?>">
+        <input minlength="4" maxlength="255" type="text" name="facet_seo_title" value="<?= $fs['facet_seo_title']; ?>">
         <div class="help">4 - 255 <?= __('app.characters'); ?></div>
       </fieldset>
 
       <fieldset>
         <label for="facet_slug"><?= __('app.slug'); ?><sup class="red">*</sup></label>
-        <input  minlength="3" maxlength="32" type="text" name="facet_slug" value="<?= $fs['facet_slug']; ?>">
+        <input minlength="3" maxlength="32" type="text" name="facet_slug" value="<?= $fs['facet_slug']; ?>">
         <div class="help">3 - 32 <?= __('app.characters'); ?> (a-z-0-9)</div>
       </fieldset>
 
@@ -141,7 +141,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <fieldset>
         <label for="facet_short_description"><?= __('app.short_description'); ?><sup class="red">*</sup></label>
         <input minlength="11" maxlength="120" value="<?= $fs['facet_short_description']; ?>" type="text" required="" name="facet_short_description">
-        <div class="help">11 - 120 <?= __('app.characters'); ?></div>  
+        <div class="help">11 - 120 <?= __('app.characters'); ?></div>
       </fieldset>
 
       <div for="mb5"><?= __('app.info'); ?><sup class="red">*</sup></div>
@@ -190,7 +190,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
           'title'   => __('app.author'),
           'help'    => __('app.necessarily'),
         ]); ?>
- 
+
         <?= insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
       <?php endif; ?>
       <fieldset>
@@ -201,17 +201,8 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
   </div>
 </main>
 <aside>
-   <div class="box text-sm bg-violet">
+  <div class="box text-sm bg-violet">
     <h3 class="uppercase-box"><?= __('app.help'); ?></h3>
     <?= __('help.edit_' . $data['type']); ?>
   </div>
 </aside>
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('content.change', ['type' => $fs['facet_type']]),
-    'redirect'  => $url,
-    'success'   => __('msg.successfully'),
-    'id'        => 'form#editFacet'
-  ]
-); ?>

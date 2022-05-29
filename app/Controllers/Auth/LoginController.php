@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
-use Meta;
+use Meta, Validation;
 
 class LoginController extends Controller
 {
@@ -15,29 +15,28 @@ class LoginController extends Controller
         $email      = Request::getPost('email');
         $password   = Request::getPost('password');
         $rememberMe = Request::getPostInt('rememberme');
+        $redirect   = url('login');
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.email_correctness')]);
-        }
+        Validation::email($email = Request::getPost('email'), $redirect);
 
         $user = UserModel::userInfo($email);
 
         if (empty($user['id'])) {
-            return json_encode(['error' => 'error', 'text' => __('msg.no_user')]);
+            Validation::comingBack(__('msg.no_user'), 'error', $redirect);
         }
 
         // Находится ли в бан- листе
         if (UserModel::isBan($user['id'])) {
-            return json_encode(['error' => 'error', 'text' => __('msg.account_verified')]);
+            Validation::comingBack(__('msg.account_verified'), 'error', $redirect);
         }
 
         // Активирован ли E-mail
         if (!UserModel::isActivated($user['id'])) {
-            return json_encode(['error' => 'error', 'text' => __('msg.not_activated')]);
+            Validation::comingBack(__('msg.not_activated'), 'error', $redirect);
         }
 
         if (!password_verify($password, $user['password'])) {
-            return json_encode(['error' => 'error', 'text' => __('msg.not_correct')]);
+            Validation::comingBack(__('msg.not_correct'), 'error', $redirect);
         }
 
         // Если нажал "Запомнить" 
@@ -50,7 +49,7 @@ class LoginController extends Controller
 
         (new \App\Controllers\AgentController())->set($user['id']);
 
-        return true;
+        Validation::comingBack(__('msg.successfully'), 'success');
     }
 
     // Страница авторизации

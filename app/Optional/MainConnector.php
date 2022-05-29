@@ -30,6 +30,7 @@ class MainConnector implements Connector
             "Translate"                     => "app/Libraries/Translate.php",
             
             "Access"                        => "app/Libraries/Access.php",
+            "Msg"                           => "app/Libraries/Msg.php",
 
             "Content"                       => "app/Libraries/Content.php",
             "UploadImage"                   => "app/Libraries/UploadImage.php",

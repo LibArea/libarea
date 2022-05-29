@@ -1,3 +1,4 @@
+<?php use Hleb\Constructor\Handlers\Request; ?>
 <?php if (!empty($data['posts'])) : ?>
   <?php $n = 0;
   foreach ($data['posts'] as $post) :

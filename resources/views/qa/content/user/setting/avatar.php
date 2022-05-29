@@ -11,7 +11,7 @@
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
           <div id="start" class="mt15">
             <input id="file-upload" type="file" name="images" accept="image/*" />
-            <div id="notimage" class="none"><?= __('app.select_image');?></div>
+            <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
           </div>
         </div>
         <div id="response" class="hidden">

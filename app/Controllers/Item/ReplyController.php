@@ -45,7 +45,7 @@ class ReplyController extends Controller
         self::error404($item);
 
         $url = url('website', ['slug' => $item['item_domain']]);
-        Validation::Length($content, 'msg.content', '6', '555', $url);
+        Validation::Length($content, 6, 555, 'content', $url);
 
         // Access verification 
         $reply = ReplyModel::getId($id);
@@ -78,7 +78,7 @@ class ReplyController extends Controller
         self::error404($item);
 
         $url = url('website', ['slug' => $item['item_domain']]);
-        Validation::Length($content, 'msg.content', '6', '555', $url);
+        Validation::Length($content, 6, 555, 'content', $url);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день

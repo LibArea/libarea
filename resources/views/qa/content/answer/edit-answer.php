@@ -5,27 +5,18 @@
     <a href="/"><?= __('app.home'); ?></a> /
     <span class="red"><?= __('app.edit_answer'); ?></span>
 
-  <a class="mb5 block" href="<?= $url; ?>">
-    <?= $data['post']['post_title']; ?>
-  </a>
+    <a class="mb5 block" href="<?= $url; ?>">
+      <?= $data['post']['post_title']; ?>
+    </a>
 
-  <form id="editAnswer" accept-charset="UTF-8" method="post">
-    <?= csrf_field() ?>
+    <form action="<?= url('content.change', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+      <?= csrf_field() ?>
 
-    <?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $data['content'], 'type' => 'answer', 'id' => $data['post']['post_id']]); ?>
+      <?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $data['content'], 'type' => 'answer', 'id' => $data['post']['post_id']]); ?>
 
-    <div class="pt5 clear">
-      <input type="hidden" name="answer_id" value="<?= $data['answer_id']; ?>">
-      <?= Html::sumbit(__('app.edit')); ?>
-    </div>
-  </form>
+      <div class="pt5 clear">
+        <input type="hidden" name="answer_id" value="<?= $data['answer_id']; ?>">
+        <?= Html::sumbit(__('app.edit')); ?>
+      </div>
+    </form>
 </main>
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('content.change', ['type' => 'answer']),
-    'redirect'  => $url . '#answer_' . $data['answer_id'],
-    'success'   => __('msg.successfully'),
-    'id'        => 'form#editAnswer'
-  ]
-); ?>

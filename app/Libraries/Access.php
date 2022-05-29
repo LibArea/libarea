@@ -14,14 +14,14 @@ class Access
         }
 
         if (self::limitingMode() === false) {
-            Html::addMsg(__('msg.silent_mode',), 'error');
+            Msg::add(__('msg.silent_mode',), 'error');
             redirect('/');
         }
 
         // TODO: Изменим поля в DB, чтобы использовать limitContent для messages и invites: 
         if (in_array($type, ['post', 'amswer', 'comment', 'item', 'team'])) {
             if (self::limitContent($type) === false) {
-                Html::addMsg(__('msg.limit_day'), 'error');
+                Msg::add(__('msg.limit_day'), 'error');
                 redirect('/');
             }
         }
@@ -46,7 +46,7 @@ class Access
      * In config: tl_add_post
      */
     public static function limitContent($type)
-    { 
+    {
         /**
          * From what TL level is it possible to create content.
          *
@@ -144,5 +144,4 @@ class Access
 
         return true;
     }
-
 }

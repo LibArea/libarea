@@ -65,11 +65,11 @@ class MessagesController extends Controller
     {
         $id = Request::getInt('id');
         if (!$dialog = MessagesModel::getDialogById($id)) {
-            Validation::ComeBack('msg.no_dialogue', 'error', url('messages', ['login' => $this->user['login']]));
+            Validation::comingBack('msg.no_dialogue', 'error', url('messages', ['login' => $this->user['login']]));
         }
 
         if ($dialog['dialog_recipient_id'] != $this->user['id'] and $dialog['dialog_sender_id'] != $this->user['id']) {
-            Validation::ComeBack('msg.no_topic', 'error', url('messages', ['login' => $this->user['login']]));
+            Validation::comingBack('msg.no_topic', 'error', url('messages', ['login' => $this->user['login']]));
         }
 
         // update views, etc. 
@@ -126,7 +126,7 @@ class MessagesController extends Controller
     {
         $login      = Request::get('login');
         if (!$user  = UserModel::getUser($login, 'slug')) {
-            Validation::ComeBack('msg.no_user', 'error', '/');
+            Validation::comingBack('msg.no_user', 'error', '/');
         }
 
         // We will limit the sending of PMs if the level of trust is low
@@ -159,7 +159,7 @@ class MessagesController extends Controller
         // Private message is empty
         // Если личное сообщение пустое
         if ($content == '') {
-            Validation::ComeBack('msg.enter_content', 'error', url('messages', ['login' => $this->user['login']]));
+            Validation::comingBack('msg.enter_content', 'error', url('messages', ['login' => $this->user['login']]));
         }
 
         // If the user does not exist 

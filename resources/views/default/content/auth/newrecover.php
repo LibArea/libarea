@@ -1,7 +1,7 @@
 <main class="box w-100">
   <div class="pl20">
     <h1><?= __('app.password_recovery'); ?></h1>
-    <form class="max-w300" id="newPass" method="post">
+    <form class="max-w300" action="<?= url('new.pass'); ?>" method="post">
       <?php csrf_field(); ?>
       <fieldset>
         <label for="password"><?= __('app.new_password'); ?></label>
@@ -20,13 +20,3 @@
     </form>
   </div>
 </main>
-
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('new.pass'),
-    'redirect'  => url('login'),
-    'success'   => __('msg.password_changed'),
-    'id'        => 'form#newPass'
-  ]
-); ?>

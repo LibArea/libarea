@@ -12,9 +12,9 @@
       ]
     ]); ?>
 
-    <form id="addWebsite" class="max-w640">
+    <form action="<?= url('content.create', ['type' => 'item']); ?>" class="max-w640">
       <?= csrf_field() ?>
-      <?= insert('/_block/form/select/category', ['data' => ['topic' => false], 'action' => 'add']); ?>   
+      <?= insert('/_block/form/select/category', ['data' => ['topic' => false], 'action' => 'add']); ?>
       <?= insert('/_block/form/components/add-website'); ?>
       <?= Html::sumbit(__('web.add')); ?>
     </form>
@@ -26,13 +26,3 @@
       <div>
   </aside>
 </div>
-
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('content.create', ['type' => 'item']),
-    'redirect'  => UserData::checkAdmin() ? url('web') : url('web.user.sites'),
-    'success'   => __('msg.successfully'),
-    'id'        => 'form#addWebsite'
-  ]
-); ?>

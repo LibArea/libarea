@@ -12,15 +12,18 @@
         <div class="help">6 - 250 <?= __('team.characters'); ?></div>
       </fieldset>
       <fieldset>
-      
-        <?= insert('/_block/form/textarea', [
-        'title'     => __('team.description'),
-        'height'  => '250px', 
-        'name' => 'content', 
-        'type' => 'content', 
-        'id' => 0]
+
+        <?= insert(
+          '/_block/form/textarea',
+          [
+            'title'     => __('team.description'),
+            'height'  => '250px',
+            'name' => 'content',
+            'type' => 'content',
+            'id' => 0
+          ]
         ); ?>
-        
+
       </fieldset>
       <p><?= Html::sumbit(__('team.add')); ?></p>
     </form>

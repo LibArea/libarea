@@ -119,7 +119,7 @@ class Badges
             ]
         );
 
-        Validation::ComeBack('msg.successfully', 'success', url('admin.user.edit', ['id' => $uid]));
+        Validation::comingBack('msg.successfully', 'success', url('admin.user.edit', ['id' => $uid]));
     }
 
     public function change()
@@ -149,7 +149,7 @@ class Badges
             ]
         );
 
-        Validation::ComeBack('msg.change_saved', 'success', $redirect);
+        Validation::comingBack('msg.change_saved', 'success', $redirect);
     }
 
     public function remove()
@@ -162,6 +162,6 @@ class Badges
             ]
         );
 
-        Validation::ComeBack('msg.command_executed', 'success', '/admin/users/' . $uid . '/edit');
+        Validation::comingBack('msg.command_executed', 'success', '/admin/users/' . $uid . '/edit');
     }
 }

@@ -72,18 +72,18 @@
       <?php endif; ?>
     </div>
   <?php endif; ?>
-  
+
   <?php if (is_array($data['topics'])) : ?>
     <?php if (count($data['topics']) > 0) : ?>
-    <div class="box">
-      <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
-      <?php foreach ($data['topics'] as $key => $recomm) : ?>
-        <a class="flex items-center relative pb10 gray-600" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
-          <?= Html::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
-          <?= $recomm['facet_title']; ?>
-        </a>
-      <?php endforeach; ?>
-    </div>
+      <div class="box">
+        <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
+        <?php foreach ($data['topics'] as $key => $recomm) : ?>
+          <a class="flex items-center relative pb10 gray-600" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
+            <?= Html::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+            <?= $recomm['facet_title']; ?>
+          </a>
+        <?php endforeach; ?>
+      </div>
     <?php endif; ?>
   <?php endif; ?>
 

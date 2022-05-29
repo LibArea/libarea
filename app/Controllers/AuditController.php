@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{ActionModel, AuditModel, NotificationModel, PostModel};
-use UserData, Html;
+use UserData, Msg;
 
 class AuditController extends Controller
 {
@@ -32,7 +32,7 @@ class AuditController extends Controller
             $all_count = ActionModel::allContentUserCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                Html::addMsg(__('msg.content_audit'), 'error');
+                Msg::add(__('msg.content_audit'), 'error');
                 return false;
             }
         }
@@ -47,7 +47,7 @@ class AuditController extends Controller
             $all_count = ActionModel::allContentUserCount($uid);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid);
-                Html::addMsg(__('msg.content_audit'), 'error');
+                Msg::add(__('msg.content_audit'), 'error');
                 return false;
             }
         }

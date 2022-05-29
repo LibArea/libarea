@@ -1,3 +1,7 @@
+<?php
+
+use Hleb\Constructor\Handlers\Request; ?>
+
 <?php if (!empty($data['posts'])) : ?>
   <?php $n = 0;
   foreach ($data['posts'] as $post) :
@@ -25,15 +29,15 @@
 
       <div class="w-100 mr15">
         <div class="mt0 mb0">
-        <?php if ($bg_url) : ?>
-          <span><?= __('app.news'); ?>:</span>
-        <?php endif; ?>
-        <a href="<?= $post_url; ?>">
-          <span class="font-normal text-xl">
-            <?= $post['post_title']; ?>
-            <?= insert('/content/post/post-title', ['post' => $post]); ?>
-          </span>
-        </a>
+          <?php if ($bg_url) : ?>
+            <span><?= __('app.news'); ?>:</span>
+          <?php endif; ?>
+          <a href="<?= $post_url; ?>">
+            <span class="font-normal text-xl">
+              <?= $post['post_title']; ?>
+              <?= insert('/content/post/post-title', ['post' => $post]); ?>
+            </span>
+          </a>
         </div>
         <div class="flex flex-row flex-auto items-center justify-between lowercase">
           <div class="flex-auto">
@@ -66,7 +70,7 @@
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?= insert('/_block/recommended-topics', ['data' => $data]); ?>
-  <?php endif; ?>  
+  <?php endif; ?>
   <div class="m10 p15 center gray-600">
     <i class="bi-journal-richtext block text-8xl"></i>
     <?= __('app.no_posts'); ?>

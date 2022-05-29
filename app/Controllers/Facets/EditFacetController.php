@@ -49,22 +49,24 @@ class EditFacetController extends Controller
     public function change()
     {
         $data = Request::getPost();
-
+        
         // Хакинг формы (тип фасета)
         // ['topic', 'blog', 'category', 'section']
         if (!in_array($data['facet_type'], config('facets.permitted'))) {
-            return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
+            Validation::comingBack(__('msg.went_wrong'), 'error');
         }
 
         // Получим массив данных существующего фасета и проверим его наличие
         $facet = FacetModel::uniqueById((int)$data['facet_id'] ?? 0);
         if ($facet == false) {
-            return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
+            Validation::comingBack(__('msg.went_wrong'), 'error');
         }
+
+        $redirect = url('content.edit', ['type' => $facet['facet_type'], 'id' => $facet['facet_id']]);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
-            return json_encode(['error' => 'redirect', 'text' => __('msg.went_wrong')]);
+            Validation::comingBack(__('msg.went_wrong'), 'error', $redirect);
         }
 
         // Изменять тип темы может только персонал
@@ -74,37 +76,21 @@ class EditFacetController extends Controller
         }
 
         // Проверка длины
-        if (!Validation::length($data['facet_title'], 3, 64)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.title') . '»'])]);
-        }
-
-        if (!Validation::length($data['facet_description'], 34, 225)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.meta_description') . '»'])]);
-        }
-
-        if (!Validation::length($data['facet_short_description'], 9, 225)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.short_description') . '»'])]);
-        }
-
-        if (!Validation::length($data['facet_seo_title'], 4, 225)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
-        }
-
-        if (!Validation::length($data['facet_info'], 14, 5000)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.info') . '»'])]);
-        }
+        Validation::Length($data['facet_title'], 3, 64, 'title', $redirect);
+        Validation::Length($data['facet_description'], 34, 225, 'meta_description', $redirect);
+        Validation::Length($data['facet_short_description'], 9, 160, 'short_description', $redirect);
+        Validation::Length($data['facet_seo_title'], 4, 225, 'slug', $redirect);
+        Validation::Length($data['facet_seo_title'], 0, 225, 'info', $redirect);
 
         // Slug
-        if (!Validation::length($data['facet_slug'], 3, 43)) {
-            return json_encode(['error' => 'error', 'text' => __('msg.string_length', ['name' => '«' . __('msg.slug') . '»'])]);
-        }
+        Validation::Length($data['facet_slug'], 3, 43, 'slug', $redirect);
 
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $data['facet_slug'])) {
-            return json_encode(['error' => 'error', 'text' => __('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»'])]);
+            Validation::comingBack(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
         }
 
         if (preg_match('/\s/', $data['facet_slug']) || strpos($data['facet_slug'], ' ')) {
-            return json_encode(['error' => 'error', 'text' => __('msg.url_gaps')]);
+            Validation::comingBack(__('msg.url_gaps'), 'error', $redirect);
         }
 
         // Запишем img
@@ -134,7 +120,7 @@ class EditFacetController extends Controller
         // Проверим повтор URL                       
         if ($data['facet_slug'] != $facet['facet_slug']) {
             if (FacetModel::uniqueSlug($data['facet_slug'], $new_type)) {
-                return json_encode(['error' => 'error', 'text' => __('msg.repeat_url')]);
+                Validation::comingBack(__('msg.repeat_url'), 'error', $redirect);
             }
         }
 
@@ -186,7 +172,7 @@ class EditFacetController extends Controller
             FacetModel::addLowFacetMatching($match_arr, $data['facet_id']);
         }
 
-        return true;
+        Validation::comingBack(__('msg.change_saved'), 'success', url('redirect.facet', ['id' => $data['facet_id']]));
     }
 
     public function pages()

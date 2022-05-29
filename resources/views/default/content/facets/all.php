@@ -2,7 +2,7 @@
 
 <main class="col-two">
   <div class="box center">
-    <h1 class="text-xl"><?= __('meta.' . $data['sheet'] . '_' . $data['type']. 's'); ?></h1>
+    <h1 class="text-xl"><?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's'); ?></h1>
     <span class="text-sm gray-600">
       <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>.
     </span>
@@ -40,14 +40,14 @@
       ?>
 
     </ul>
-    
+
     <?php if ($access) : ?>
       <?php if ($data['countUserFacet'] == 0 || UserData::checkAdmin()) : ?>
-      <p class="m0 text-xl">
-        <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
-          <i class="bi-plus-lg middle"></i>
-        </a>
-      </p>
+        <p class="m0 text-xl">
+          <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
+            <i class="bi-plus-lg middle"></i>
+          </a>
+        </p>
       <?php endif; ?>
     <?php endif; ?>
   </div>
@@ -64,6 +64,6 @@
     <?php else : ?>
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
-  </div>   
+  </div>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url($data['type'] . 's.' . $data['sheet'])); ?>
 </main>

@@ -2,7 +2,7 @@
   <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
-    <form id="notif" method="post">
+    <form action="<?= url('setting.change', ['type' => 'notification']); ?>" method="post">
       <?php csrf_field(); ?>
       <?= component('setting-notifications', ['data' => $data]); ?>
     </form>
@@ -14,13 +14,3 @@
     <?= __('help.notification_info'); ?>
   </div>
 </aside>
-
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('setting.change', ['type' => 'notification']),
-    'redirect'  => url('setting', ['type' => 'notifications']),
-    'success'   => __('msg.password_changed'),
-    'id'        => 'form#notif'
-  ]
-); ?>

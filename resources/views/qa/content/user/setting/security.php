@@ -2,7 +2,7 @@
   <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="box">
-    <form class="max-w300" id="security" method="post">
+    <form class="max-w300" action="<?= url('setting.change', ['type' => 'security']); ?>" method="post">
       <?php csrf_field(); ?>
       <?= component('setting-security'); ?>
     </form>
@@ -14,13 +14,3 @@
     <?= __('help.security_info'); ?>
   </div>
 </aside>
-
-<?= insert(
-  '/_block/form/ajax',
-  [
-    'url'       => url('setting.change', ['type' => 'security']),
-    'redirect'  => url('setting', ['type' => 'security']),
-    'success'   => __('msg.password_changed'),
-    'id'        => 'form#security'
-  ]
-); ?>

@@ -2,7 +2,7 @@
 
 <main class="w-100">
   <div class="bg-violet box center">
-    <h1 class="text-xl"><?= __('meta.' . $data['sheet'] . '_' . $data['type']. 's'); ?></h1>
+    <h1 class="text-xl"><?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's'); ?></h1>
     <span class="text-sm gray-600">
       <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>.
     </span>
@@ -43,11 +43,11 @@
 
     <?php if ($access) : ?>
       <?php if ($data['countUserFacet'] == 0 || UserData::checkAdmin()) : ?>
-      <p class="m0 text-xl">
-        <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
-          <i class="bi-plus-lg middle"></i>
-        </a>
-      </p>
+        <p class="m0 text-xl">
+          <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
+            <i class="bi-plus-lg middle"></i>
+          </a>
+        </p>
       <?php endif; ?>
     <?php endif; ?>
   </div>
