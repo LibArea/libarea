@@ -39,7 +39,7 @@ class AddCommentController extends Controller
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
-        Validation::Length($content, 'msg.content', '6', '2024', $url_post);
+        Validation::Length($content, 6, 2024, 'content', $url_post);
 
         // Let's check the stop words, url
         // Проверим стоп слова, url

@@ -54,7 +54,7 @@ class EditItemController extends Controller
     {
         $data = Request::getPost();
         $redirect = url('content.add', ['type' => 'item']);
-        
+
         $item = WebModel::getItemId($data['item_id']);
         if (!$item) {
             return true;

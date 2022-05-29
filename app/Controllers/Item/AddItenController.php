@@ -42,7 +42,7 @@ class AddItemController extends Controller
     {
         $url = Request::getPost('url');
         $redirect = url('content.add', ['type' => 'item']);
-        
+
         Validation::url($url, $redirect);
 
         // Check if the domain exists in the system  

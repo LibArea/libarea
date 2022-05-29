@@ -36,7 +36,7 @@ class RecoverController extends Controller
 
         if (config('general.captcha')) {
             if (!Integration::checkCaptchaCode()) {
-                Validation::comingBack('msg.code_error', 'error', $redirect);
+                Validation::comingBack(__('msg.code_error'), 'error', $redirect);
             }
         }
 
@@ -45,12 +45,12 @@ class RecoverController extends Controller
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['email'])) {
-            Validation::comingBack('msg.no_user', 'error', $redirect);
+            Validation::comingBack(__('msg.no_user'), 'error', $redirect);
         }
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['ban_list'] == UserData::BANNED_USER) {
-            Validation::comingBack('msg.account_verified', 'error', $redirect);
+            Validation::comingBack(__('msg.account_verified'), 'error', $redirect);
         }
 
         $code = $uInfo['id'] . '-' . Html::randomString('crypto', 25);

@@ -148,6 +148,6 @@ class Users extends Controller
             ]
         );
 
-        return true;
+        Validation::comingBack(__('msg.change_saved'), 'success', url('admin.user.edit', ['id' => $data['user_id']]));
     }
 }

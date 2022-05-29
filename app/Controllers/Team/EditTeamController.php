@@ -71,7 +71,7 @@ class EditTeamController extends Controller
         $users    = Request::getPost() ?? [];
         self::editUser($users, $team['team_id']);
 
-        Validation::comingBack('team.change', 'success', url('teams'));
+        Validation::comingBack(__('team.change'), 'success', url('teams'));
     }
 
     // Add fastes (blogs, topics) to the post 

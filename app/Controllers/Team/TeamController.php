@@ -5,7 +5,7 @@ namespace App\Controllers\Team;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\TeamModel;
-use UserData, Meta, Html, Validation;
+use Meta, Html;
 
 class TeamController extends Controller
 {
@@ -16,7 +16,8 @@ class TeamController extends Controller
     public function index()
     {
         return $this->render(
-            '/team/user', 'base',
+            '/team/user',
+            'base',
             [
                 'meta'  => Meta::get(__('team.home')),
                 'user'  => $this->user,
@@ -41,7 +42,8 @@ class TeamController extends Controller
         }
 
         return $this->render(
-            '/team/view', 'base',
+            '/team/view',
+            'base',
             [
                 'meta'  => Meta::get(__('team.home')),
                 'user'  => $this->user,
@@ -54,7 +56,7 @@ class TeamController extends Controller
         );
     }
 
-   // Formation of team members
+    // Formation of team members
     public static function users($users)
     {
         if (!$users) {
@@ -74,5 +76,4 @@ class TeamController extends Controller
 
         return implode($result);
     }
-
 }

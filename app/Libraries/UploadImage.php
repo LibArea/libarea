@@ -172,7 +172,7 @@ class UploadImage
         // Width check
         $width_h  = getimagesize($cover['tmp_name']);
         if ($width_h < 500) {
-            Validation::comingBack('msg.five_width', 'error', $redirect);
+            Validation::comingBack(__('msg.five_width'), 'error', $redirect);
         }
 
         $path = HLEB_PUBLIC_DIR . PATH_POSTS_COVER;

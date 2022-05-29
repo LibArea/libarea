@@ -10,7 +10,7 @@
 <?php if (Access::trustLevels(config('trust-levels.tl_add_item'))) : ?>
   <?php if ($data['user_count_site'] == 0 || UserData::checkAdmin()) : ?>
     <li>
-      <a href="<?= url('web.add'); ?>">
+      <a href="<?= url('content.add', ['type' => 'item']); ?>">
         <i class="bi-plus-lg"></i> <?= __('web.add_website'); ?>
       </a>
     </li>

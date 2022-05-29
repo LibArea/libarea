@@ -20,7 +20,7 @@ class FolderController extends Controller
 
         $url    = url('favorites.folders');
         if (empty($arr)) {
-            Validation::comingBack('app.necessarily', 'success', $url);
+            Validation::comingBack(__('app.necessarily'), 'success', $url);
         }
 
         $folders = json_decode($arr, true);

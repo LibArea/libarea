@@ -146,7 +146,7 @@ class SettingController extends Controller
             UploadImage::cover($cover, $this->user['id'], 'user');
         }
 
-        Validation::comingBack('msg.change_saved', 'success', '/setting/avatar');
+        Validation::comingBack(__('msg.change_saved'), 'success', '/setting/avatar');
     }
 
     // Change password form
@@ -177,18 +177,18 @@ class SettingController extends Controller
 
         $redirect   = '/setting/security';
         if ($password2 != $password3) {
-            Validation::comingBack('msg.pass_match_err', 'error', $redirect);
+            Validation::comingBack(__('msg.pass_match_err'), 'error', $redirect);
         }
 
         if (substr_count($password2, ' ') > 0) {
-            Validation::comingBack('msg.password_spaces', 'error', $redirect);
+            Validation::comingBack(__('msg.password_spaces'), 'error', $redirect);
         }
 
         Validation::length($password2, 8, 32, 'password', $redirect);
 
         $userInfo   = UserModel::userInfo($this->user['email']);
         if (!password_verify($password, $userInfo['password'])) {
-            Validation::comingBack('msg.old_error', 'error', $redirect);
+            Validation::comingBack(__('msg.old_error'), 'error', $redirect);
         }
 
         $newpass = password_hash($password2, PASSWORD_BCRYPT);

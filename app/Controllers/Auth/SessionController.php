@@ -25,6 +25,6 @@ class SessionController extends MainController
 
         AuthModel::deleteTokenByUserId($uid);
 
-        Validation::comingBack('msg.account_verified', 'success', '/');
+        Validation::comingBack(__('msg.account_verified'), 'success', '/');
     }
 }
