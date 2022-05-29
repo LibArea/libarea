@@ -63,7 +63,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                 $signet = "WHERE facet_type = '$type' ORDER BY facet_id DESC";
                 break;
             case 'all':
-                $signet = "WHERE facet_type = '$type' ORDER BY facet_id DESC";
+                $signet = "WHERE facet_type = '$type' ORDER BY facet_count DESC";
                 break;
             case 'ban':
                 $signet = "WHERE facet_type = '$type' AND facet_is_deleted = 1 ORDER BY facet_id DESC";

@@ -11,9 +11,9 @@
         </a>
       <?php endif; ?>
     </h1>
-    <div class="text-sm gray-600"><?= $topic['facet_short_description']; ?></div>
+    <div class="text-sm gray-600 mt10"><?= $topic['facet_short_description']; ?></div>
 
-    <div class="mt15 right">
+    <div class="mt10 right">
       <?= Html::signed([
         'type'            => 'facet',
         'id'              => $topic['facet_id'],
@@ -21,11 +21,6 @@
         'state'           => is_array($data['facet_signed']),
       ]); ?>
     </div>
-
-    <?= insert('/_block/facet/focus-users', [
-      'topic_focus_count' => $topic['facet_focus_count'],
-      'focus_users'       => $data['focus_users'] ?? '',
-    ]); ?>
   </div>
 </div>
 

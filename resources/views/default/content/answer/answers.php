@@ -26,3 +26,8 @@
   </div>
 </aside>
 <?= insert('/_block/js-msg-flag'); ?>
+<script nonce="<?= $_SERVER['nonce']; ?>">
+  document.addEventListener('DOMContentLoaded', () => {
+    mediumZoom(document.querySelectorAll('.content-body p img:not(.emoji)'));
+  });
+</script>

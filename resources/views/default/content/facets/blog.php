@@ -14,23 +14,14 @@ if ($blog['facet_is_deleted'] == 0) : ?>
             </a>
           <?php endif; ?>
         </h1>
-        <div class="text-sm"><?= $blog['facet_short_description']; ?></div>
-
-        <div class="mt15 right">
+        <div class="text-sm mt10"><?= $blog['facet_short_description']; ?></div>
+        <div class="right">
           <?= Html::signed([
             'type'            => 'facet',
             'id'              => $blog['facet_id'],
             'content_user_id' => $blog['facet_user_id'],
             'state'           => is_array($data['facet_signed']),
           ]); ?>
-        </div>
-
-        <div class="relative max-w300">
-          <?= insert('/_block/facet/focus-users', [
-            'topic_focus_count' => $blog['facet_focus_count'],
-            'focus_users'       => $data['focus_users'] ?? '',
-          ]); ?>
-          <div class="content_<?= $blog['facet_id']; ?> absolute bg-white box-shadow-all z-10 right0"></div>
         </div>
       </div>
     </div>
@@ -51,6 +42,13 @@ if ($blog['facet_is_deleted'] == 0) : ?>
             <div class="gray-600 text-sm mt5">
               <i class="bi-calendar-week mr5 ml5 middle"></i>
               <span class="middle lowercase"><?= Html::langDate($blog['facet_add_date']); ?></span>
+            </div>
+            <div class="relative max-w300 mt15">
+              <?= insert('/_block/facet/focus-users', [
+                'topic_focus_count' => $blog['facet_focus_count'],
+                'focus_users'       => $data['focus_users'] ?? '',
+              ]); ?>
+              <div class="content_<?= $blog['facet_id']; ?> absolute bg-white box-shadow-all z-10 right0"></div>
             </div>
           </div>
           <?php if ($data['info']) : ?>

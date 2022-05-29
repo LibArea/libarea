@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Answer;
 
+use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\AnswerModel;
 use Meta;
@@ -16,6 +17,8 @@ class AnswerController extends Controller
     {
         $pagesCount = AnswerModel::getAnswersCount($sheet);
         $answers    = AnswerModel::getAnswers($this->pageNumber, $this->limit, $this->user, $sheet);
+
+        Request::getResources()->addBottomScript('/assets/js/zoom/medium-zoom.min.js');
 
         $m = [
             'og'    => false,

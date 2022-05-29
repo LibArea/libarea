@@ -152,7 +152,10 @@ code {
   font-size: 14px;
 }
 
-pre { white-space: pre-wrap; }
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 
 blockquote {
   margin-left: 15px;
