@@ -25,7 +25,6 @@
 </div>
 
 <div class="box-flex bg-violet justify-between">
-  <p class="m0 text-xl mb-none"><?= __('app.' . $data['type']); ?></p>
   <ul class="nav">
 
     <?= insert(
@@ -42,20 +41,18 @@
             'url'     => url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
             'title'   => __('app.recommended'),
             'icon'    => 'bi-lightning'
-          ],  [
+          ], [
             'id'      => 'writers',
             'url'     => url('topic.writers', ['slug' => $topic['facet_slug']]),
             'title'   => __('app.writers'),
             'icon'    => 'bi-award'
-          ], [
-            'id'      => 'info',
-            'url'     => url('topic.info', ['slug' => $topic['facet_slug']]),
-            'title'   => '',
-            'icon'    => 'bi-info-lg'
           ],
         ]
       ]
     ); ?>
 
   </ul>
+  <a class="m0 gray-600" href="<?= url('topic.info', ['slug' => $topic['facet_slug']]); ?>">
+    <i class="bi-info-lg"></i>
+  </a>
 </div>
