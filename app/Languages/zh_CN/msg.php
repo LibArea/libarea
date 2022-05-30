@@ -22,6 +22,8 @@ return [
     'icon'                  => '图标',
     'change_saved'          => '更改已保存',
     'successfully'          => '成功',
+    'yes_repost'            => '投诉已发送！',
+    'post_added'            => '已添加帖子！',
     'blog_added'            => '博客添加了！',
     'command_executed'      => '命令完成',
     'cover_removed'         => '封面已移除',

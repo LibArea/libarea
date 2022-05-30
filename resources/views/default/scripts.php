@@ -1,7 +1,6 @@
 <a class="up_down_btn none mb-none" title="<?= __('app.up'); ?>">&uarr;</a>
 
 <script src="/assets/js/common.js"></script>
-<script src="/assets/js/notiflix/notiflix-aio-3.2.5.min.js"></script>
 <?php if (UserData::checkActiveUser()) : ?><script src="/assets/js/app.js"></script><?php endif; ?>
 
 <?= getRequestResources()->getBottomStyles(); ?>
@@ -11,11 +10,7 @@
   <?php if (!UserData::checkActiveUser()) : ?>
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
-        Notiflix.Report.info(
-          '<?= __('app.need_login'); ?>',
-          '<?= __('app.login_info'); ?>',
-          '<?= __('app.well'); ?>',
-        );
+          Notice('<?= __('app.need_login'); ?>', 3500, { valign: 'bottom',align: 'center'});
       }));
   <?php endif; ?>
 

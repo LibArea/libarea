@@ -22,6 +22,8 @@ return [
     'icon'                  => 'Icons',
     'change_saved'          => 'Change saved',
     'successfully'          => 'Successfully!',
+    'yes_repost'            => 'Complaint sent!',
+    'post_added'            => 'Post added!',
     'blog_added'            => 'Blog added!',
     'command_executed'      => 'Command completed',
     'cover_removed'         => 'Cover removed',

@@ -7,7 +7,7 @@ use Meta;
 
 class HomeController extends Controller
 {
-    protected $limit = 25;
+    protected $limit = 15;
 
     public function index($sheet)
     {

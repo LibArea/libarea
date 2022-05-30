@@ -15,9 +15,9 @@ class Msg
         $html = '';
         if ($msg) {
             if ($msg['status'] == 'error') :
-                $html .= "Notiflix.Notify.failure('" . $msg['msg'] . "')";
+                $html .= "Notice('" . $msg['msg'] . "', 3500, { valign: 'bottom',align: 'right', styles : {backgroundColor: 'red',fontSize: '18px'}});";
             else :
-                $html .= "Notiflix.Notify.info('" . $msg['msg'] . "')";
+                $html .= "Notice('" . $msg['msg'] . "', 3500, { valign: 'bottom',align: 'right'});";
             endif;
         }
 

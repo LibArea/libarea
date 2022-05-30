@@ -22,6 +22,8 @@ return [
     'icon'                  => 'Icoane',
     'change_saved'          => 'Modificare salvată',
     'successfully'          => 'Cu succes!',
+    'yes_repost'            => 'Reclamație trimisă!',
+    'post_added'            => 'Postare adăugată!',
     'blog_added'            => 'Blog adăugat!',
     'command_executed'      => 'Comanda finalizată',
     'cover_removed'         => 'Capacul îndepărtat',

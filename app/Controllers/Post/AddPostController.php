@@ -165,7 +165,7 @@ class AddPostController extends Controller
             ]
         );
 
-        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
+        Validation::comingBack(__('msg.post_added'), 'success', $redirect);
     }
 
     public static function slug($title)
