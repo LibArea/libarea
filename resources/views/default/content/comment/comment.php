@@ -35,7 +35,7 @@ foreach ($answer as  $comment) :
             <span class="mr5 ml5 gray-600 lowercase">
               <?= Html::langDate($comment['date']); ?>
             </span>
-            <?= insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
+            <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
           </div>
           <a href="<?= url('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>#comment_<?= $comment['comment_id']; ?>">
             <?= $comment['post_title']; ?>

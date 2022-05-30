@@ -19,7 +19,7 @@
                     <?php if (empty($answer['edit'])) : ?>
                       (<?= __('app.ed'); ?>.)
                     <?php endif; ?>
-                    <?= insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
+                    <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
                   </div>
                   <a class="qa-login" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
                 </div>
@@ -81,7 +81,7 @@
                     <span class="lowercase gray-600">
                       &nbsp; <?= Html::langDate($comment['date']); ?>
                     </span>
-                    <?= insert('/_block/show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
+                    <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
                   </span>
 
                   <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>

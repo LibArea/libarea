@@ -19,16 +19,18 @@
         </span>
 
         <?php if (!$fav['tag_id']) : ?>
-          <span class="trigger right lowercase gray-600 text-sm"> <i class="bi-plus-lg gray-600 mr5"></i></span>
-          <span class="dropdown right">
-            <?php if ($data['tags']) : ?>
-              <?php foreach ($data['tags'] as $tag) : ?>
-                <div class="save-folder gray-600 text-sm p5" data-id="<?= $tag['id']; ?>" data-tid="<?= $fav['tid']; ?>" data-type="favorite"><?= $tag['value']; ?></div>
-              <?php endforeach; ?>
-            <?php else : ?>
-              <?= __('app.no'); ?>...
-            <?php endif;  ?>
-          </span>
+          <div class="relative right">
+            <span class="trigger lowercase gray-600 text-sm"> <i class="bi-plus-lg gray-600 mr5"></i></span>
+            <span class="dropdown">
+              <?php if ($data['tags']) : ?>
+                <?php foreach ($data['tags'] as $tag) : ?>
+                  <div class="save-folder gray-600 text-sm p5" data-id="<?= $tag['id']; ?>" data-tid="<?= $fav['tid']; ?>" data-type="favorite"><?= $tag['value']; ?></div>
+                <?php endforeach; ?>
+              <?php else : ?>
+                <?= __('app.no'); ?>...
+              <?php endif;  ?>
+            </span>
+          </div>
         <?php endif; ?>
 
         <?php if ($fav['action_type'] == 'post') : ?>

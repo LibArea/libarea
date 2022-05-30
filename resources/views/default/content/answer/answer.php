@@ -28,7 +28,7 @@ foreach ($data['answers'] as $answer) :
               </span>
             <?php endif; ?>
             <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
-            <?= insert('/_block/show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
+            <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
           </div>
           <div class="content-body">
             <?= Content::text($answer['content'], 'text'); ?>

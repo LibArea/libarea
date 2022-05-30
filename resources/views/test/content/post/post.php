@@ -10,7 +10,7 @@
       <div class="w40">
         <?= Html::votes($post, 'post', 'ps', 'bi-arrow-up-short text-xl font-semibold', 'block'); ?>
       </div>
-      <div class="ml10">
+      <div>
         <div>
           <?php if ($data['sheet'] == 'subscribed') : ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet text-sm right">
@@ -18,7 +18,7 @@
             </div>
           <?php endif; ?>
           <a href="<?= $post_url; ?>">
-            <h3 class="inline"><?= $post['post_title']; ?>
+            <h3 class=""><?= $post['post_title']; ?>
               <?= insert('/content/post/post-title', ['post' => $post]); ?>
             </h3>
           </a>

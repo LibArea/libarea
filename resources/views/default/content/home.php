@@ -4,10 +4,12 @@
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
 
-    <div class="trigger">
-      <i class="bi-info-square gray-600"></i>
+    <div class="relative">
+      <div class="trigger">
+        <i class="bi-info-square gray-600"></i>
+      </div>
+      <div class="dropdown tooltip"><?= __('meta-main.' . $data['sheet'] . '_info'); ?></div>
     </div>
-    <div class="dropdown tooltip"><?= __('meta-main.' . $data['sheet'] . '_info'); ?></div>
   </div>
 
   <?= insert('/content/post/post', ['data' => $data]); ?>

@@ -33,13 +33,14 @@
         <h1><?= $post['post_title']; ?>
           <?= insert('/content/post/post-title', ['post' => $post]); ?>
         </h1>
-        <div class="text-sm lowercase flex gray-600">
+        <div class="text-sm lowercase3 flex gray-600">
           <?= Html::langDate($post['post_date']); ?>
           <?php if ($post['modified']) : ?>
             (<?= __('app.ed'); ?>)
           <?php endif; ?>
 
           <?php if (UserData::checkActiveUser()) : ?>
+
             <?php if (UserData::getUserLogin() == $post['login']  || UserData::checkAdmin()) : ?>
               <a class="gray-600 mr10 ml10" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
                 <?= __('app.edit'); ?>
@@ -56,24 +57,10 @@
                 </span>
               <?php endif; ?>
             <?php endif; ?>
-            <?php if (UserData::checkAdmin()) : ?>
-              <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-600 mr10 ml10">
-                <?php if ($post['post_is_deleted'] == 1) : ?>
-                  <i class="bi-trash red"></i>
-                <?php else : ?>
-                  <i class="bi-trash"></i>
-                <?php endif; ?>
-              </a>
-              <a data-id="<?= $post['post_id']; ?>" class="post-recommend gray-600 mr10 ml10">
-                <?php if ($post['post_is_recommend'] == 1) : ?>
-                  <i class="bi-lightning sky"></i>
-                <?php else : ?>
-                  <i class="bi-lightning"></i>
-                <?php endif; ?>
-              </a>
-            <?php endif; ?>
-            <?= insert('/_block/show-ip', ['ip' => $post['post_ip'], 'publ' => $post['post_published']]); ?>
+
+            <?= insert('/_block/admin-dropdown-post', ['post' => $post]); ?>
           <?php endif; ?>
+
         </div>
       </div>
 
