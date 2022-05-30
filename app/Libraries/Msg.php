@@ -15,9 +15,9 @@ class Msg
         $html = '';
         if ($msg) {
             if ($msg['status'] == 'error') :
-                $html .= "Notice('" . $msg['msg'] . "', 3500, { valign: 'bottom',align: 'right', styles : {backgroundColor: 'red',fontSize: '18px'}});";
+                $html .= "Notice('" . $msg['msg'] . "', 3500, { valign: 'top',align: 'right', styles : {backgroundColor: 'red',fontSize: '18px'}});";
             else :
-                $html .= "Notice('" . $msg['msg'] . "', 3500, { valign: 'bottom',align: 'right'});";
+                $html .= "Notice('" . $msg['msg'] . "', 3500, { valign: 'top',align: 'right'});";
             endif;
         }
 

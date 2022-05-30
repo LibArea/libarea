@@ -3,10 +3,11 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
-use Validation, Meta, Html;
+use Validation, Meta;
 
-class Badges
+class Badges extends Controller
 {
     protected $type = 'badges';
 
@@ -47,7 +48,7 @@ class Badges
     {
         $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getId($badge_id);
-        Html::pageError404($badge);
+        self::error404($badge);
 
         return view(
             '/view/default/badge/edit',
@@ -136,9 +137,9 @@ class Badges
         $description   = Request::getPost('badge_description');
         $icon          = $_POST['badge_icon']; // для Markdown
 
-        Validation::Length($title, 'msg.title', '4', '25', $redirect);
-        Validation::Length($description, 'msg.description', '12', '250', $redirect);
-        Validation::Length($icon, 'msg.icon', '12', '250', $redirect);
+        Validation::Length($title, 4, 25, 'title', $redirect);
+        Validation::Length($description, 12, 250, 'description', $redirect);
+        Validation::Length($icon, 6, 250, 'icon', $redirect);
 
         BadgeModel::edit(
             [

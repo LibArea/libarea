@@ -3,16 +3,16 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Catalog\App\Models\WebModel;
-use Html;
+use App\Controllers\Controller;
+use App\Models\Item\WebModel;
 
-class Webs
+class Webs extends Controller
 {
     public function favicon()
     {
         $item_id    = Request::getPostInt('id');
         $item       = WebModel::getItemId($item_id);
-        Html::pageError404($item);
+        self::error404($item);
 
         $puth = HLEB_PUBLIC_DIR . PATH_FAVICONS . $item["item_domain"] . '.png';
 
