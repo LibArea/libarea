@@ -104,8 +104,8 @@ class AddItemController extends Controller
                 'user_id'       => $this->user['id'],
                 'user_login'    => $this->user['login'],
                 'id_content'    => $item_last['item_id'],
-                'action_type'   => 'website',
-                'action_name'   => 'content_added',
+                'action_type'   => 'item',
+                'action_name'   => 'added',
                 'url_content'   => url('web.audits'),
             ]
         );

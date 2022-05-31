@@ -9,7 +9,7 @@
 return [
     'home'              => 'Админка',
     'all'               => 'Все',
-    'deleted'           => 'Удаленные',
+    'remote'            => 'Удаленные',
     'other'             => 'Другое',
     'number'            => 'Количество',
     'website'           => 'Сайт',
@@ -64,7 +64,10 @@ return [
     'like'              => 'Лайки',
     'category'          => 'Категория',
     'team'              => 'Команда',
-    'reply_web'         => 'Ответ в каталоге',
+    'reply'             => 'Ответ в каталоге',
+    'item'              => 'Сайт',
+    'invite'            => 'Инвайт',
+    'report'            => 'Жалоба',
     
     'submenu'           => 'субменю',
     'update'            => 'Обновить',
@@ -108,7 +111,7 @@ return [
     'tl5_title'         => 'Лидер',
     'tl10_title'        => 'Персонал',
     
-    'content_deleted'   => '{name} удален',
-    'content_added'     => '{name} добавлен',
-    'content_restored'  => '{name} восстановлен',
+    'deleted'           => 'Удален',
+    'added'             => 'Добавлен',
+    'restored'          => 'Восстановлен',
 ];

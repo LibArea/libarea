@@ -43,11 +43,11 @@ class ActionController extends Controller
                 break;
             case 'reply':
                 $url  = '/';
-                $action_type = 'reply_web';
+                $action_type = 'reply';
                 break;
             case 'item':
                 $url  = url('web.deleted');
-                $action_type = 'website';
+                $action_type = 'item';
                 break;
             case 'team':
                 $url  = url('team.deleted');
@@ -57,7 +57,7 @@ class ActionController extends Controller
 
         ActionModel::setDeletingAndRestoring($type, $info_type[$type . '_id'], $info_type[$type . '_is_deleted']);
 
-        $log_action_name = $info_type[$type . '_is_deleted'] == 1 ? 'content_restored' : 'content_deleted';
+        $log_action_name = $info_type[$type . '_is_deleted'] == 1 ? 'restored' : 'deleted';
 
         ActionModel::addLogs(
             [

@@ -31,7 +31,7 @@
     </div>
   <?php endforeach; ?>
 
-  <h3 class="uppercase-box mt15"><?= __('admin.reply_web'); ?></h3>
+  <h3 class="uppercase-box mt15"><?= __('admin.reply'); ?></h3>
   <?php foreach ($data['replys'] as $reply) : ?>
     <div class="gray">
       <a class="gray-600" href="<?= url('profile', ['login' => $reply['login']]); ?>">

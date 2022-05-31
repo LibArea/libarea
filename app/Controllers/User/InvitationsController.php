@@ -4,6 +4,7 @@ namespace App\Controllers\User;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Models\ActionModel;
 use App\Models\User\{InvitationModel, UserModel};
 use Validation, SendEmail, Meta, Html;
 
@@ -83,6 +84,17 @@ class InvitationsController extends Controller
         // Отправка e-mail
         $link = url('invite.reg', ['code' => $invitation_code]);
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
+
+        ActionModel::addLogs(
+            [
+                'user_id'       => $this->user['id'],
+                'user_login'    => $this->user['login'],
+                'id_content'    => $invitation_email,
+                'action_type'   => 'invite',
+                'action_name'   => 'added',
+                'url_content'   => $link,
+            ]
+        );
 
         Validation::comingBack(__('msg.invite_created'), 'success', $redirect);
     }

@@ -9,7 +9,7 @@
 return [
     'home'              => 'Admin panel',
     'all'               => 'All',
-    'deleted'           => 'Remote',
+    'remote'            => 'Remote',
     'other'             => 'Other',
     'number'            => 'Quantity',
     'website'           => 'Website',
@@ -64,7 +64,10 @@ return [
     'like'              => 'Like',
     'category'          => 'Category',
     'team'              => 'Team',
-    'reply_web'         => 'The answer is in the catalog',
+    'reply'             => 'The answer is in the catalog',
+    'item'              => 'Website',
+    'invite'            => 'Invite',
+    'report'            => 'A complaint',
     
     'submenu'           => 'Submenu',
     'update'            => 'Update',
@@ -108,7 +111,7 @@ return [
     'tl5_title'         => 'Leader',
     'tl10_title'        => 'Staff',
     
-    'content_deleted'   => '{name} deleted',
-    'content_added'     => '{name} added',
-    'content_restored'  => '{name} restored',
+    'deleted'           => 'Removed',
+    'added'             => 'Added',
+    'restored'          => 'Restored',
 ];

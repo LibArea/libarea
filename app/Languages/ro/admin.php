@@ -9,7 +9,7 @@
 return [
     'home'              => 'Admin',
     'all'               => 'Toate',
-    'deleted'           => 'la distanta',
+    'remote'            => 'la distanta',
     'other'             => 'Alte',
     'number'            => 'Cantitate',
     'website'           => 'Site-ul web',
@@ -64,7 +64,10 @@ return [
     'like'              => 'ca',
     'category'          => 'Categorie',
     'team'              => 'Echipă',
-    'reply_web'         => 'Răspunsul este în catalog',
+    'reply'             => 'Răspunsul este în catalog',
+    'item'              => 'Site-ul web',
+    'invite'            => 'A invita',
+    'report'            => 'O plangere',
     
     'submenu'           => 'submeniu',
     'update'            => 'Reîmprospăta',
@@ -108,7 +111,7 @@ return [
     'tl5_title'         => 'Lider',
     'tl10_title'        => 'Personal',
     
-    'content_deleted'   => '{name} îndepărtat',
-    'content_added'     => '{name} adăugat',
-    'content_restored'  => '{name} restaurat',
+    'deleted'           => 'Îndepărtat',
+    'added'             => 'Adăugat',
+    'restored'          => 'Restaurat',
 ];

@@ -9,7 +9,7 @@
 return [
     'home'              => '管理面板',
     'all'               => '全部',
-    'deleted'           => '已删除',
+    'remote'            => '已删除',
     'other'             => '其他',
     'number'            => '数量',
     'website'           => '网站',
@@ -64,7 +64,10 @@ return [
     'like'              => '喜欢',
     'category'          => '类别',
     'team'              => '團隊',
-    'reply_web'         => '答复在目录中',
+    'reply'             => '答复在目录中',
+    'item'              => '网站',
+    'invite'            => '邀请',
+    'report'            => '投诉',
     
     'submenu'           => '子菜单',
     'update'            => '更新资料',
@@ -108,7 +111,7 @@ return [
     'tl5_title'         => '领袖',
     'tl10_title'        => '员工',
     
-    'content_deleted'   => '{name} 已删除',
-    'content_added'     => '{name} 已添加',
-    'content_restored'  => '{name} 已恢复',
+    'deleted'           => '已移除',
+    'added'             => '添加',
+    'restored'          => '已恢复',
 ];

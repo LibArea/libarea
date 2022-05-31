@@ -7,7 +7,8 @@ $sw = $sw ?? '?';
 <main class="main-search col-two">
 
   <?php foreach ($data['tags'] as $tag) : ?>
-    <a class="mr20 tags" href="<?= url('web.dir', ['cat' => 'cat', 'slug' => $tag['facet_slug']]); ?>">
+    <?php $url = $type == 'post' ? url('topic', ['slug' => $tag['facet_slug']]) : url('web.dir', ['grouping' => 'all', 'slug' => $tag['facet_slug']]);?>
+    <a class="mr20 tags" href="<?= $url; ?>">
       <?= $tag['facet_title']; ?>
     </a>
   <?php endforeach; ?>

@@ -160,7 +160,7 @@ class AddPostController extends Controller
                 'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
                 'action_type'   => $type,
-                'action_name'   => 'content_added',
+                'action_name'   => 'added',
                 'url_content'   => $redirect,
             ]
         );

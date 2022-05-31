@@ -26,10 +26,10 @@
         <th>id</th>
         <th><?= __('admin.avatar'); ?></th>
         <th><?= __('admin.information'); ?></th>
-        <th>IP <?= __('admin.registrations'); ?></th>
-        <th><?= __('admin.last'); ?></th>
-        <th>Ban</th>
-        <th><?= __('admin.edit'); ?></th>
+        <th class="center">IP <?= __('admin.registrations'); ?></th>
+        <th class="right"><?= __('admin.last'); ?></th>
+        <th class="center">Ban</th>
+        <th class="center"><?= __('admin.edit'); ?></th>
       </thead>
       <?php foreach ($data['alluser'] as $user) :  ?>
         <tr>

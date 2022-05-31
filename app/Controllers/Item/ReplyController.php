@@ -101,8 +101,8 @@ class ReplyController extends Controller
                 'user_id'       => $this->user['id'],
                 'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
-                'action_type'   => 'reply_web',
-                'action_name'   => 'content_added',
+                'action_type'   => 'reply',
+                'action_name'   => 'added',
                 'url_content'   => $url,
             ]
         );

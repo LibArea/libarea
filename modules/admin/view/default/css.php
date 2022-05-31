@@ -27,6 +27,11 @@
      <div><div class="box bg-green img-xl"></div>.img-xl</div>
    </div> 
    
+   <div class="box-flex flex-wrap mb20">
+     <div class="label-grey mr5">.label-grey</div>
+     <div class="label-orange">.label-orange</div>
+   </div> 
+   
    <div class="box-flex flex-wrap">
      <div class="box mr5">.box</div>
      <div class="box bg-yellow mr5">.box .bg-yellow</div>

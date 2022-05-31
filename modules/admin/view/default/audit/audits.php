@@ -32,7 +32,7 @@
         <th><?= __('admin.info'); ?></th>
         <th><?= __('admin.type'); ?></th>
         <th><?= __('admin.action'); ?></th>
-        <th>#</th>
+        <th class="center">#</th>
       </thead>
       <?php foreach ($data['audits'] as $key => $audit) : ?>
         <tr>
@@ -73,8 +73,8 @@
               <?php endif; ?>
             <?php endif; ?>
           </td>
-          <th><?= __('admin.' . $audit['type_belonging']); ?></th>
-          <td class="center">
+          <td><?= __('admin.' . $audit['type_belonging']); ?></td>
+          <td>
             <a data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" data-type="<?= $audit['action_type']; ?>" class="type-action text-sm">
               <?php if ($audit['content'][$audit['action_type'] . '_is_deleted'] == 1) : ?>
                 <span class="red">

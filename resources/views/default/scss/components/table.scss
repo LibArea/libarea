@@ -17,5 +17,9 @@ table th {
   padding: 5px;
 }
 
+table thead th {
+  border-bottom: 2px solid rgba(222, 226, 230, 0.5);
+  text-align: left;
+}
+
 table tr:nth-of-type(2n) { background-color: var(--slate-100); }
-table thead th { border-bottom: 2px solid rgba(222, 226, 230, 0.5); }
