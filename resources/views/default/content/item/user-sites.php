@@ -18,7 +18,7 @@
                 <h2><?= $item['item_title']; ?></h2>
               </a>
               <?php if ($item['item_published'] == 0) : ?>
-                <span class="focus-id bg-violet text-sm">
+                <span class="label-orange mr15">
                   <?= __('web.moderation'); ?>
                 </span>
               <?php endif; ?>

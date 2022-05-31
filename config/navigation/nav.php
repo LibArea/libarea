@@ -77,7 +77,7 @@ return [
       'id'    => 'main.deleted',
       'url'   => url('main.deleted'),
       'title' => __('app.deleted'),
-      'icon'  => 'bi-bar-chart'
+      'icon'  => 'bi-trash'
     ],
   ],
 
@@ -96,7 +96,7 @@ return [
       'id'    => 'answers.deleted',
       'url'   => url('answers.deleted'),
       'title' => __('app.deleted'),
-      'icon'  => 'bi-app'
+      'icon'  => 'bi-trash'
     ],
   ],
 
@@ -115,7 +115,7 @@ return [
       'id'    => 'comments.deleted',
       'url'   => url('comments.deleted'),
       'title' => __('app.deleted'),
-      'icon'  => 'bi-app'
+      'icon'  => 'bi-trash'
     ],
   ]
 

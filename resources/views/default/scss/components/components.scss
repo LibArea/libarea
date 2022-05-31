@@ -385,3 +385,22 @@ iframe {
   vertical-align: middle;
   margin-left: 3px;
 }
+
+/* Этикетки */
+.label-grey {
+  font-style: italic;
+  text-transform: lowercase;
+  font-size: 0.875rem;
+  background-color: var(--violet);
+  color: var(--gray-600);
+  padding: 3px 10px;
+}
+
+.label-orange {
+  font-style: italic;
+  text-transform: lowercase;
+  font-size: 0.875rem;
+  background-color: #f9ddde;
+  color: var(--gray);
+  padding: 3px 10px;
+}

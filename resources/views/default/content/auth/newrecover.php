@@ -1,5 +1,5 @@
 <main class="box w-100">
-  <div class="pl20">
+  <div class="ml20 mb-ml0">
     <h1><?= __('app.password_recovery'); ?></h1>
     <form class="max-w300" action="<?= url('new.pass'); ?>" method="post">
       <?php csrf_field(); ?>

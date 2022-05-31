@@ -1,5 +1,5 @@
 <main class="box w-100">
-  <div class="pl20">
+  <div class="ml20 mb-ml0">
     <h1><?= __('app.authorization'); ?></h1>
 
     <div class="p15 bg-violet max-w300 mb-none right">
