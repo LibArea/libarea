@@ -49,7 +49,7 @@ class LoginController extends Controller
 
         (new \App\Controllers\AgentController())->set($user['id']);
 
-        Validation::comingBack(__('msg.successfully'), 'success');
+        redirect('/');
     }
 
     // Страница авторизации

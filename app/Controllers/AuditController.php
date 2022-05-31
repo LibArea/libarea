@@ -126,7 +126,7 @@ class AuditController extends Controller
         $content_id     = Request::getPostInt('content_id');
 
         // Limit the flags
-        if ($this->user['trust_level'] == config('trust-levels.tl_фвв_report')) return 1;
+        if ($this->user['trust_level'] >= config('trust-levels.tl_add_report')) return 1;
 
         $num_report =  AuditModel::getSpeedReport($this->user['id']);
         if ($num_report > config('trust-levels.perDay_report')) return 1;

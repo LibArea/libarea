@@ -33,7 +33,7 @@
         <h1><?= $post['post_title']; ?>
           <?= insert('/content/post/post-title', ['post' => $post]); ?>
         </h1>
-        <div class="text-sm lowercase3 flex gray-600">
+        <div class="text-sm flex gray-600">
           <?= Html::langDate($post['post_date']); ?>
           <?php if ($post['modified']) : ?>
             (<?= __('app.ed'); ?>)
