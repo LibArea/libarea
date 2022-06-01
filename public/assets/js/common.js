@@ -154,10 +154,14 @@ document.querySelectorAll(".user-card")
     });
   }));
 
+function isIdEmpty(elmId) {
+  var elem = document.getElementById(elmId);
+  if(typeof elem !== 'undefined' && elem !== null) return elem;
+  return false;
+}
+
 // Toggle dark mode
-let toggledark = document.querySelector('#toggledark');
-if (toggledark) {
-  toggledark.addEventListener('click', function () {
+isIdEmpty('toggledark').onclick = function() {
     let mode = getCookie("dayNight");
     let d = new Date();
     d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
@@ -169,13 +173,10 @@ if (toggledark) {
       document.cookie = "dayNight" + "=" + "dark" + "; " + expires + ";path=/";
       document.getElementsByTagName('body')[0].classList.add('dark');
     }
-  });
-}
+} 
 
 // Navigation menu on/off
-let togglemenu = document.querySelector('#togglemenu');
-if (togglemenu) {
-  togglemenu.addEventListener('click', function () {
+isIdEmpty('togglemenu').onclick = function() {
     let mode = getCookie("menuYesNo");
     let d = new Date();
     d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
@@ -187,7 +188,6 @@ if (togglemenu) {
       document.cookie = "menuYesNo" + "=" + "menuno" + "; " + expires + ";path=/";
       document.getElementsByTagName('body')[0].classList.add('menuno');
     }
-  });
 }
 
 // TODO: move to util
@@ -207,9 +207,8 @@ function getCookie(cname) {
 }
 
 // search
-let find = document.getElementById('find');
-if (find) {
-  find.addEventListener('keydown', function () {
+isIdEmpty('find').onclick = function() {
+  document.getElementById('find').addEventListener('keydown', function () {
     fetch_search();
   });
 }

@@ -25,7 +25,7 @@ $facet  = $data['facet'] ?? false; ?>
           <?= config('meta.name'); ?>
         </a>
 
-        <div class="ml45 mb-ml10 relative w-100">
+        <div class="ml45 mb-ml10 relative w-100 mr30">
           <form class="form mb-none" method="get" action="<?= url('search.go'); ?>">
             <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
           </form>
@@ -34,11 +34,11 @@ $facet  = $data['facet'] ?? false; ?>
 
         <?php if (!UserData::checkActiveUser()) : ?>
           <div class="flex right items-center">
-            <div id="toggledark" class="header-menu-item mb-none ml45">
+            <div id="toggledark" class="header-menu-item mr20">
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
             <?php if (config('general.invite') == false) : ?>
-              <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 block" href="<?= url('register'); ?>">
+              <a class="w94 gray ml45 mr15 mb-mr5 mb-ml5 mb-none block" href="<?= url('register'); ?>">
                 <?= __('app.registration'); ?>
               </a>
             <?php endif; ?>

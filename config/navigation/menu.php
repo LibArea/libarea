@@ -59,12 +59,6 @@ return [
             'title' => __('app.admin'),
             'icon'  => 'bi-person-x',
             'id'    => 'admin',
-        ], [
-            'tl'    => UserData::REGISTERED_ADMIN,
-            'url'   => url('admin.facets.all'),
-            'title' => __('app.facets'),
-            'icon'  => 'bi-bezier2',
-            'id'    => 'admin',
         ],
     ],
 

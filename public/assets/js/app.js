@@ -1,6 +1,5 @@
 // Profile Cover Color
-let colorPicker = document.getElementById("colorPicker");
-if (colorPicker) {
+isIdEmpty('colorPicker').onclick = function() {    
   let box = document.getElementById("box");
   let color = document.getElementById("color");
 
@@ -72,7 +71,7 @@ document.querySelectorAll(".add-favorite")
             dom.classList.toggle("sky");
         }
     });
-  }));   
+  }));
 
 // Add or remove your post to your profile 
 document.querySelectorAll(".add-profile")

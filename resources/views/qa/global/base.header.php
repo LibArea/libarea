@@ -58,7 +58,7 @@ $facet  = $data['facet'] ?? false; ?>
 
             <?= Html::addPost($facet); ?>
 
-            <div id="toggledark" class="only-icon p10 ml20 mb-ml10">
+            <div id="toggledark" class="only-icon p10 ml30 mb-ml10">
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
 
