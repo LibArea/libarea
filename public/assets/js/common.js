@@ -127,7 +127,6 @@ document.querySelectorAll(".showpost")
 // User card
 document.querySelectorAll(".user-card")
   .forEach(el => el.addEventListener("click", function (e) {
-    let user_id = this.dataset.user_id;
     let content_id = this.dataset.content_id;
     let content = document.querySelector('.content_' + content_id);
     let div = document.querySelector("#content_" + content_id);
@@ -136,7 +135,7 @@ document.querySelectorAll(".user-card")
 
     fetch("/user/card", {
       method: "POST",
-      body: "user_id=" + user_id,
+      body: "user_id=" + el.dataset.user_id,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then(

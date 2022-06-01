@@ -1,7 +1,5 @@
 <div class="box-flex bg-violet">
-  <div class="mb-none">
-    <?= Html::image($topic['facet_img'], $topic['facet_title'], 'w94 br-gray mr15', 'logo', 'max'); ?>
-  </div>
+  <?= Html::image($topic['facet_img'], $topic['facet_title'], 'w94 br-gray mr15', 'logo', 'max'); ?>
   <div class="flex-auto">
     <h1 class="text-2xl">
       <?= $topic['facet_seo_title']; ?>
@@ -11,7 +9,7 @@
         </a>
       <?php endif; ?>
     </h1>
-    <div class="help mt10"><?= $topic['facet_short_description']; ?></div>
+    <div class="help mt10 mb-none"><?= $topic['facet_short_description']; ?></div>
 
     <div class="mt10 right">
       <?= Html::signed([

@@ -17,11 +17,9 @@ isIdEmpty('colorPicker').onclick = function() {
 // Subscribe to a topic / post
 document.querySelectorAll(".focus-id")
   .forEach(el => el.addEventListener("click", function (e) {
-    let content_id = el.dataset.id;
-    let content_type = el.dataset.type;
     fetch("/focus", {
       method: "POST",
-      body: "content_id=" + content_id + "&type=" + content_type + "&_token=" + token,
+      body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -34,20 +32,16 @@ document.querySelectorAll(".focus-id")
 // Up
 document.querySelectorAll(".up-id")
   .forEach(el => el.addEventListener("click", function (e) {
-    let content_id = el.dataset.id;
-    let content_type = el.dataset.type;
-    let count = el.dataset.count;
-    let ind = el.dataset.ind;
     fetch("/votes", {
       method: "POST",
-      body: "content_id=" + content_id + "&type=" + content_type + "&_token=" + token,
+      body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
         return;
       }).then((text) => {
-        let new_cont = (parseInt(count) + parseInt(1));
-        let upVot = document.querySelector('#up' + content_id + '.voters-' + ind);
+        let new_cont = (parseInt(el.dataset.count) + parseInt(1));
+        let upVot = document.querySelector('#up' + el.dataset.id + '.voters-' + el.dataset.ind);
         let upScr = upVot.querySelector('.score');
         upVot.classList.add('sky');
         upScr.replaceWith(new_cont);
@@ -89,13 +83,9 @@ document.querySelectorAll(".add-profile")
 // Adding Folders
 document.querySelectorAll(".save-folder")
   .forEach(el => el.addEventListener("click", function (e) {
-
-    let id = el.dataset.id;
-    let type = el.dataset.type;
-    let tid = el.dataset.tid;
     fetch("/folder/content/save", {
       method: "POST",
-      body: "id=" + id  + "&type=" + type + "&tid=" + tid,
+      body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -108,12 +98,9 @@ document.querySelectorAll(".save-folder")
 // Deleting a linked content folder 
 document.querySelectorAll(".del-folder-content")
   .forEach(el => el.addEventListener("click", function (e) {
-    let id = el.dataset.id;
-    let type = el.dataset.type;
-    let tid = el.dataset.tid;
     fetch("/folder/content/del", {
       method: "POST",
-      body: "id=" + id  + "&type=" + type + "&tid=" + tid + "&_token=" + token,
+      body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -126,11 +113,9 @@ document.querySelectorAll(".del-folder-content")
 // Removing a tag
 document.querySelectorAll(".del-folder")
   .forEach(el => el.addEventListener("click", function (e) {
-    let id = el.dataset.id;
-    let type = el.dataset.type;
     fetch("/folder/del", {
       method: "POST",
-      body: "id=" + id  + "&type=" + type + "&_token=" + token,
+      body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -143,10 +128,9 @@ document.querySelectorAll(".del-folder")
 // Recommend a post
 document.querySelectorAll(".post-recommend")
   .forEach(el => el.addEventListener("click", function (e) {
-    let post_id = el.dataset.id;
     fetch("/post/recommend", {
       method: "POST",
-      body: "post_id=" + post_id + "&_token=" + token,
+      body: "post_id=" + el.dataset.id + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -159,11 +143,9 @@ document.querySelectorAll(".post-recommend")
 // Deleting / restoring content
 document.querySelectorAll(".type-action")
   .forEach(el => el.addEventListener("click", function (e) {
-    let content_id = el.dataset.id;
-    let type = el.dataset.type;
     fetch("/status/action", {
       method: "POST",
-      body: "content_id=" + content_id + "&type=" + type + "&_token=" + token,
+      body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then((response) => {
@@ -175,7 +157,6 @@ document.querySelectorAll(".type-action")
 document.querySelectorAll("#graburl")
   .forEach(el => el.addEventListener("click", function (e) {
     let uri = document.getElementById('link').value;
-
     if (uri === '') {
       return;
     }
