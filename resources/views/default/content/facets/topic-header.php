@@ -33,17 +33,17 @@
             'id'      => 'facet.feed',
             'url'     => url('topic', ['slug' => $topic['facet_slug']]),
             'title'   => __('app.feed'),
-            'icon'    => 'bi-sort-down'
+            'icon'    => 'bi-sort-down mb-none'
           ], [
             'id'      => 'facet.recommend',
             'url'     => url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
             'title'   => __('app.recommended'),
-            'icon'    => 'bi-lightning'
+            'icon'    => 'bi-lightning mb-none'
           ], [
             'id'      => 'writers',
             'url'     => url('topic.writers', ['slug' => $topic['facet_slug']]),
             'title'   => __('app.writers'),
-            'icon'    => 'bi-award'
+            'icon'    => 'bi-award mb-none'
           ]
         ]
       ]

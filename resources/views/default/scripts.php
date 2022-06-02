@@ -1,5 +1,3 @@
-<a class="up_down_btn none mb-none" title="<?= __('app.up'); ?>">&uarr;</a>
-
 <script src="/assets/js/common.js"></script>
 <?php if (UserData::checkActiveUser()) : ?><script src="/assets/js/app.js"></script><?php endif; ?>
 

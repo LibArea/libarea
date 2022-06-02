@@ -53,8 +53,10 @@ h5 {
   height: 100%;
   padding: 0 15px;
   position: relative;
+  justify-content: space-between;
 }
 
+/* Search */
 .search {
   height: 30px;
   width: 100%;
@@ -76,6 +78,34 @@ h5 {
 .main-search {
   margin-left: 30px;
 }
+
+.box-search {
+  position: relative;
+  width: 100%;
+  margin: 0 45px 0 80px;
+}
+
+.d-header.show .d-header-post.none,
+.d-header.show .d-header-facet.none {
+  display: block;
+  position: relative;
+  width: 100%;
+  font-size: 18px;
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+}
+
+.v-line {
+  border-left: 1px solid var(--gray-600);
+  height: 20px;
+  display: inline-block;
+  margin: 0 10px 0 15px;
+  vertical-align: middle;
+}
+
+.d-header.choices.show .box-search { display: none; }
+/* end */
 
 .page-search-right {
   width: 100%;
@@ -342,31 +372,6 @@ iframe {
 }
 
 .preview .home-img { display: none; }
-
-.up_down_btn {
-  bottom: 40px;
-  right: 10px;
-  line-height: 30px;
-  cursor: pointer;
-  background-color: #f3f4f6;
-  text-align: center;
-  position: fixed;
-  z-index: 50;
-  height: 30px;
-  width: 30px;
-  color: #374151;
-  border-radius: 3px;
-}
-
-.up_down_btn:hover {
-  text-decoration: none;
-  background-color: #e9ebec;
-}
-
-.up_down_btn-disabled {
-  cursor: default;
-  opacity: 0;
-}
 
 .box-answer {
   line-height: 1.3;

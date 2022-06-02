@@ -15,65 +15,22 @@ function fetcherPost(url, options = {}) {
     })
 }
 
+let scrolled;
+let dHeader = document.querySelector(".d-header");
+if (dHeader) {
+  window.onscroll = function() {
+    scrolled = window.pageYOffset || document.documentElement.scrollTop;
+    if(scrolled > 70){
+        document.querySelector(".d-header").classList.add('show'); 
+    }
+    if(70 > scrolled){
+        document.querySelector(".d-header").classList.remove('show');         
+    }
+  }
+}
+
 let token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
-(function () {
-  'use strict';
 
-  let upDownBtn = document.querySelector('.up_down_btn');
-  let check;
-
-  function trackScroll() {
-    let scrolled = window.pageYOffset;
-    let coords = document.documentElement.clientHeight;
-
-    if (scrolled > coords) {
-      upDownBtn.classList.add('block');
-      upDownBtn.innerHTML = '&uarr;';
-      upDownBtn.setAttribute('title', 'Наверх');
-      check = false;
-    }
-    if (scrolled === 0) {
-      upDownBtn.innerHTML = '&darr;';
-      upDownBtn.setAttribute('title', 'Вниз');
-      check = true;
-    }
-  }
-
-  function backToTop() {
-    upDownBtn.classList.add('up_down_btn-disabled');
-    if (!check) {
-      (function goTop() {
-
-        if (window.pageYOffset !== 0) {
-          window.scrollBy(0, -80);
-          setTimeout(goTop, 0);
-        } else {
-          upDownBtn.classList.remove('up_down_btn-disabled');
-        }
-
-      })();
-      return;
-
-    } else if (check) {
-      (function goBottom() {
-        let match = Math.ceil(window.pageYOffset + document.documentElement.clientHeight);
-
-        if (match != document.documentElement.scrollHeight) {
-          window.scrollBy(0, 80);
-          setTimeout(goBottom, 0);
-        } else {
-          upDownBtn.classList.remove('up_down_btn-disabled');
-        }
-
-      })();
-      return;
-    }
-
-  }
-
-  window.addEventListener('scroll', trackScroll);
-  upDownBtn.addEventListener('click', backToTop);
-})();
 
 // Call the form for adding a comment
 document.querySelectorAll(".add-comment")
@@ -219,7 +176,7 @@ isIdEmpty('find').onclick = function() {
   });
 }
 
-function fetcShearch() {
+function fetchSearch() {
    let query = document.getElementById("find").value;
    if (query.length < 2) return;
     fetch("/search/api", {

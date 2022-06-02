@@ -12,22 +12,22 @@ return [
     [
       'url'   => url('setting'),
       'title' => __('app.settings'),
-      'icon'  => 'bi-gear',
+      'icon'  => 'bi-gear mb-none',
       'id'    => 'settings',
     ], [
       'url'   => '/setting/avatar',
       'title' => __('app.avatar'),
-      'icon'  => 'bi-emoji-smile',
+      'icon'  => 'bi-emoji-smile mb-none',
       'id'    => 'avatar',
     ], [
       'url'   => '/setting/security',
       'title' => __('app.password'),
-      'icon'  => 'bi-lock',
+      'icon'  => 'bi-lock mb-none',
       'id'    => 'security',
     ], [
       'url'   => '/setting/notifications',
       'title' => __('app.notifications'),
-      'icon'  => 'bi-app-indicator',
+      'icon'  => 'bi-app-indicator mb-none',
       'id'    => 'notifications',
     ],
   ],

@@ -74,9 +74,8 @@
         </div>
         <?php if ($post['post_url_domain']) : ?>
           <div class="mb15">
-            <a rel="nofollow noreferrer ugc" target="_blank" class="btn btn-primary" href="<?= $post['post_url']; ?>">
+            <a rel="nofollow noreferrer ugc" target="_blank" class="btn btn-outline-primary" href="<?= $post['post_url']; ?>">
               <?= __('app.details_here'); ?>
-              <i class="bi-folder-symlink middle ml5"></i>
             </a>
           </div>
         <?php endif; ?>
