@@ -1,3 +1,20 @@
+function isIdEmpty(elmId) {
+  var elem = document.getElementById(elmId);
+  if(typeof elem !== 'undefined' && elem !== null) return elem;
+  return false;
+}
+
+function fetcherPost(url, options = {}) {
+  return fetch(url, {
+    ...options,
+    method: "POST",
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  })
+    .then((response) => {
+      location.reload();
+    })
+}
+
 let token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 (function () {
   'use strict';
@@ -62,10 +79,8 @@ let token = document.querySelector("meta[name='csrf-token']").getAttribute("cont
 document.querySelectorAll(".add-comment")
   .forEach(el => el.addEventListener("click", function (e) {
 
-    let answer_id = el.dataset.answer_id;
+    let answer_id, insert_id = el.dataset.answer_id;
     let comment_id = el.dataset.comment_id;
-   
-    let insert_id = answer_id;
     if(comment_id) {
         insert_id = el.dataset.comment_id;
     }
@@ -97,9 +112,8 @@ document.querySelectorAll(".add-comment")
 document.querySelectorAll(".showpost")
   .forEach(el => el.addEventListener("click", function (e) {
 
-    let post_id = this.dataset.post_id;
-    let post = document.querySelector('.s_' + post_id);
-    let article = document.querySelector('.article_' + post_id);
+    let post = el.querySelector('.s_' + el.dataset.post_id);
+    let article = document.querySelector('.article_' + el.dataset.post_id);
     post.classList.remove("none");
     article.classList.add("preview");
 
@@ -110,7 +124,7 @@ document.querySelectorAll(".showpost")
 
     fetch("/post/shown", {
       method: "POST",
-      body: "post_id=" + post_id,
+      body: "post_id=" + el.dataset.post_id,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then(
@@ -127,10 +141,9 @@ document.querySelectorAll(".showpost")
 // User card
 document.querySelectorAll(".user-card")
   .forEach(el => el.addEventListener("click", function (e) {
-    let content_id = this.dataset.content_id;
-    let content = document.querySelector('.content_' + content_id);
-    let div = document.querySelector("#content_" + content_id);
 
+    let content = document.querySelector('.content_' + el.dataset.content_id);
+    let div = document.querySelector("#content_" + el.dataset.content_id);
     div.classList.remove("none");
 
     fetch("/user/card", {
@@ -152,12 +165,6 @@ document.querySelectorAll(".user-card")
       div.classList.add("none");
     });
   }));
-
-function isIdEmpty(elmId) {
-  var elem = document.getElementById(elmId);
-  if(typeof elem !== 'undefined' && elem !== null) return elem;
-  return false;
-}
 
 // Toggle dark mode
 isIdEmpty('toggledark').onclick = function() {
@@ -208,11 +215,11 @@ function getCookie(cname) {
 // search
 isIdEmpty('find').onclick = function() {
   document.getElementById('find').addEventListener('keydown', function () {
-    fetch_search();
+    fetchSearch();
   });
 }
 
-function fetch_search() {
+function fetcShearch() {
    let query = document.getElementById("find").value;
    if (query.length < 2) return;
     fetch("/search/api", {
@@ -351,8 +358,7 @@ if (button) {
 }
 
 window.addEventListener('click', e => {
-const target = e.target
-if (!target.closest('.menu__active') && !target.closest('.menu__button')) {
+if (!e.target.closest('.menu__active') && !e.target.closest('.menu__button')) {
   if (nav) {
     nav.classList.remove('menu__active')
   }

@@ -1,3 +1,46 @@
+const focusId = document.querySelectorAll('.focus-id'),
+      saveFolder = document.querySelectorAll(".save-folder"),
+      delFolderContent = document.querySelectorAll(".del-folder-content"),
+      delFolder = document.querySelectorAll(".del-folder"),
+      addProfile = document.querySelectorAll(".add-profile"),
+      postRecommend = document.querySelectorAll(".post-recommend"),
+      typeAction = document.querySelectorAll(".type-action");
+
+// Subscribe to a topic / post
+focusId.forEach(el => el.addEventListener("click", function (e) {
+    fetcherPost("/focus", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
+  }));
+
+// Adding Folders
+saveFolder.forEach(el => el.addEventListener("click", function (e) {
+    fetcherPost("/folder/content/save", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid })
+  }));
+
+// Add or remove your post to your profile 
+addProfile.forEach(el => el.addEventListener("click", function (e) {
+    fetcherPost("/post/profile", options = { body:  "post_id=" + el.dataset.post + "&_token=" + token })
+  }));
+
+// Deleting a linked content folder 
+delFolderContent.forEach(el => el.addEventListener("click", function (e) {
+    fetcherPost("/folder/content/del", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token })
+  }));
+
+// Removing a tag
+delFolder.forEach(el => el.addEventListener("click", function (e) {
+    fetcherPost("/folder/del", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&_token=" + token })
+  }));
+
+// Recommend a post
+postRecommend.forEach(el => el.addEventListener("click", function (e) {
+    fetcherPost("/post/recommend", options = { body: "post_id=" + el.dataset.id + "&_token=" + token })
+  }));
+  
+// Deleting / restoring content
+typeAction.forEach(el => el.addEventListener("click", function (e) {
+    fetcherPost("/status/action", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
+  }));
+
 // Profile Cover Color
 isIdEmpty('colorPicker').onclick = function() {    
   let box = document.getElementById("box");
@@ -13,21 +56,6 @@ isIdEmpty('colorPicker').onclick = function() {
     color.value = colorPicker.value;
   }, false);
 }
-
-// Subscribe to a topic / post
-document.querySelectorAll(".focus-id")
-  .forEach(el => el.addEventListener("click", function (e) {
-    fetch("/focus", {
-      method: "POST",
-      body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then((response) => {
-        return;
-      }).then((text) => {
-        location.reload();
-      });
-  }));
 
 // Up
 document.querySelectorAll(".up-id")
@@ -67,91 +95,6 @@ document.querySelectorAll(".add-favorite")
     });
   }));
 
-// Add or remove your post to your profile 
-document.querySelectorAll(".add-profile")
-  .forEach(el => el.addEventListener("click", function (e) {
-    fetch("/post/profile", {
-      method: "POST",
-      headers: { 'Content-Type':'application/x-www-form-urlencoded'},
-      body:  "post_id=" + el.dataset.post + "&_token=" + token, 
-    })
-    .then( (response) => { 
-       location.reload();
-    });
-  }));  
-
-// Adding Folders
-document.querySelectorAll(".save-folder")
-  .forEach(el => el.addEventListener("click", function (e) {
-    fetch("/folder/content/save", {
-      method: "POST",
-      body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then((response) => {
-        return;
-      }).then((text) => {
-        location.reload();
-      });
-  }));
-
-// Deleting a linked content folder 
-document.querySelectorAll(".del-folder-content")
-  .forEach(el => el.addEventListener("click", function (e) {
-    fetch("/folder/content/del", {
-      method: "POST",
-      body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then((response) => {
-        return;
-      }).then((text) => {
-        location.reload();
-      });
-  }));
- 
-// Removing a tag
-document.querySelectorAll(".del-folder")
-  .forEach(el => el.addEventListener("click", function (e) {
-    fetch("/folder/del", {
-      method: "POST",
-      body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&_token=" + token,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then((response) => {
-        return;
-      }).then((text) => {
-        location.reload();
-      });
-  }));
-
-// Recommend a post
-document.querySelectorAll(".post-recommend")
-  .forEach(el => el.addEventListener("click", function (e) {
-    fetch("/post/recommend", {
-      method: "POST",
-      body: "post_id=" + el.dataset.id + "&_token=" + token,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then((response) => {
-        return;
-      }).then((text) => {
-        location.reload();
-      });
-  }));
-
-// Deleting / restoring content
-document.querySelectorAll(".type-action")
-  .forEach(el => el.addEventListener("click", function (e) {
-    fetch("/status/action", {
-      method: "POST",
-      body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then((response) => {
-        location.reload();
-      })
-  }));
 
 // Parsing the title from the site for > TL1
 document.querySelectorAll("#graburl")
