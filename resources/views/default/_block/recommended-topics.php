@@ -1,11 +1,10 @@
 <?php if (Request::getUri() == '/') : ?>
   <center>
-    <a class="tags center" href="/topics">
-      <i class="bi-lightbulb middle mr5"></i>
-      <?= __('app.topic_subs'); ?>
+    <a class="btn btn-outline-primary center" href="/topics">
+      <i class="bi-columns-gap mr5"></i> <?= __('app.topic_subs'); ?>!
     </a>
   </center>
-  <div class="grid-cols-2 pt20">
+  <div class="grid-cols-2 mt15">
     <?php foreach ($data['topics'] as $topic) : ?>
       <div class="box">
         <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id bg-violet gray-600 text-sm right">

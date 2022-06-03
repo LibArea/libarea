@@ -4,7 +4,7 @@
     <span class="middle"><?= $text; ?>...</span>
   </div>
 <?php else : ?>   
-  <div class="p20 center gray-600">
+  <div class="box center gray-600">
     <i class="<?= $icon; ?> block text-8xl"></i>
     <?= $text; ?>
   </div>

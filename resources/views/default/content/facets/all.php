@@ -57,7 +57,7 @@
       <?php if ($data['type'] == 'blog') : ?>
         <?= insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
       <?php else : ?>
-        <div class="flex flex-wrap">
+        <div class="flex justify-between gap-max flex-wrap">
           <?= insert('/_block/facet/topic-list-all', ['facets' => $data['facets']]); ?>
         </div>
       <?php endif; ?>

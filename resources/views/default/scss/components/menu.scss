@@ -4,7 +4,7 @@
  * Выпадающее меню и навигация слева
  */
 
-.menu__left { min-width: 180px; }
+.menu__left { min-width: 160px; }
 .menuno .menu__left { display: none; }
 
 .dropdown,
@@ -18,8 +18,8 @@
 
 .dropdown a i,
 .menu a i {
-  margin-right: 10px;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
 }
 
 .dropdown {

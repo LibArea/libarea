@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?09');
+Request::getHead()->addStyles('/assets/css/style.css?12');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;
 $post   = $data['post'] ?? false;
@@ -17,8 +17,8 @@ $post   = $data['post'] ?? false;
       <div class="d-header_contents">
       
         <div class="flex">
-          <div id="togglemenu" class="mb-none mr10"><i class="bi-list gray-600 text-xl"></i></div>
-          <div class="menu__button none mb-block mr10"><i class="bi-list gray-600 text-xl"></i></div>
+          <div id="togglemenu" class="mr10"><i class="bi-list gray-600 text-xl"></i></div>
+          <div class="menu__button none mr10"><i class="bi-list gray-600 text-xl"></i></div>
           <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>
         </div>
 

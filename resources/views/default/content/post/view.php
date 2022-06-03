@@ -2,9 +2,7 @@
 <div class="w94 mb-none center">
   <div class="sticky top-xl">
     <?= Html::votes($post, 'post', 'ps', 'bi-heart text-2xl middle mt15', 'block'); ?>
-    <div class="pt20">
-      <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl'); ?>
-    </div>
+    <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl block mt20'); ?>
   </div>
 </div>
 <main>
@@ -93,14 +91,14 @@
         <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
       </div>
 
-      <div class="br-gray flex items-center mb5">
-        <div class="left p10 none mb-block">
+      <div class="br-gray flex p10 items-center mb5">
+        <div class="left m10 none mb-block mb-mr5">
           <?= Html::votes($post, 'post', 'mob', 'bi-heart text-2xl mr5 middle'); ?>
         </div>
 
-        <ul class="list-none w-100 lowercase">
+        <ul class="list-none flex p15 gap w-100 lowercase">
           <li class="left p10">
-            <div class="text-sm gray-600 mb5">
+            <div class="text-sm gray-600 mb-ml10 mb5">
               <?= __('app.created_by'); ?>
             </div>
             <div class="center">
@@ -167,7 +165,7 @@
           <?php endif; ?>
         </div>
 
-        <div class="right ml15 p10 none mb-block">
+        <div class="right m10 none mb-block">
           <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'mob', 'text-2xl'); ?>
         </div>
       </div>
@@ -191,7 +189,7 @@
       <?php endif; ?>
 
     <?php else : ?>
-      <div class="bg-red-200 p15 center mr10">
+      <div class="box center bg-red-200">
         <?= __('app.content_deleted', ['name' => __('app.post')]); ?>...
       </div>
     <?php endif; ?>
@@ -226,11 +224,11 @@
           </div>
         <?php endif; ?>
 
-        <a title="<?= $topic['facet_title']; ?>" class="black inline text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
+        <a title="<?= $topic['facet_title']; ?>" class="black text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
           <?= $topic['facet_title']; ?>
         </a>
 
-        <div class="text-sm mt5 pr15 mb-pr0 gray-600">
+        <div class="text-sm gray-600">
           <?= $topic['facet_short_description']; ?>
         </div>
       <?php endforeach; ?>

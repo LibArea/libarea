@@ -1,10 +1,8 @@
 <?php $item = $data['item']; ?>
 <div id="contentWrapper">
   <div class="mb-none center w94">
-    <?= Html::votes($item, 'item', 'ps', 'bi-heart text-2xl mt30 middle', 'block'); ?>
-    <div class="pt20">
-      <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'text-2xl'); ?>
-    </div>
+    <?= Html::votes($item, 'item', 'ps', 'bi-heart text-2xl mt30 mb15 middle', 'block'); ?>
+    <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'text-2xl'); ?>
   </div>
   <main>
     <div class="box hidden pr15 mb20">
@@ -16,22 +14,21 @@
         <?php endif; ?>
       </h1>
 
-      <div class="w-100">
-        <div class="w-40 mt10 left mb-w-100">
+      <div class="flex justify-between gap-max">
+        <div class="w-40">
           <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'preview w-100 box-shadow'); ?>
         </div>
-        <div class="w-60 left pl20 mb-w-100 max-w780 mb-p10">
+        <div class="w-60">
           <?= Content::text($item['item_content'], 'text'); ?>
-          <div class="gray mt20 mb15">
-            <a class="green" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
-              <?= Html::websiteImage($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
-              <?= $item['item_url']; ?>
-            </a>
-          </div>
+          
+          <a class="gree block" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
+            <?= Html::websiteImage($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
+            <?= $item['item_url']; ?>
+          </a>
 
-          <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15', 'all'); ?>
+          <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15 mt15', 'all'); ?>
 
-          <div class="right mr20">
+          <div class="right">
             <?= Html::signed([
               'type'            => 'item',
               'id'              => $item['item_id'],
@@ -92,7 +89,7 @@
       </div>
     <?php else : ?>
       <?php if ($item['item_close_replies'] == 0) : ?>
-        <div class="p20 center gray-600">
+        <div class="box center gray-600">
           <i class="bi-chat-dots block text-8xl"></i>
           <?= __('web.no_answers'); ?>
         </div>

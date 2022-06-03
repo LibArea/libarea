@@ -5,7 +5,7 @@
     <form method="POST" action="<?= url('setting.change', ['type' => 'avatar']); ?>" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
-      <div class="file-upload mb10" id="file-drag">
+      <div class="file-upload" id="file-drag">
         <div class="flex">
           <?= Html::image($data['user']['avatar'], $data['user']['login'], 'img-xl', 'avatar', 'max'); ?>
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
@@ -19,12 +19,12 @@
         </div>
       </div>
 
-      <div class="clear gray mb10">
+      <fieldset class="clear gray">
         <div class="mb5 text-sm"><?= __('app.recommended_size'); ?>: 240x240px (jpg, jpeg, png)</div>
         <?= Html::sumbit(__('app.download')); ?>
-      </div>
+      </fieldset>
 
-      <div class="file-upload mt20 mb10" id="file-drag">
+      <fieldset class="file-upload" id="file-drag">
         <div class="flex">
           <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
             <div class="relative mr15">
@@ -34,7 +34,7 @@
               </a>
             </div>
           <?php else : ?>
-            <div class="block br-gray max-w-100 text-sm gray p20 mr15">
+            <div class="block br-gray max-w-100 text-sm gray">
               <?= __('app.no_cover'); ?>...
             </div>
           <?php endif; ?>
@@ -48,12 +48,12 @@
         <div id="response" class="hidden">
           <div id="messages"></div>
         </div>
-      </div>
+      </fieldset>
 
-      <div class="clear gray mb10">
-        <div class="mb5 text-sm"><?= __('app.recommended_size'); ?>: 1920x240px (jpg, jpeg, png)</div>
+       <fieldset>
+        <div class="text-sm gray mb15"><?= __('app.recommended_size'); ?>: 1920x240px (jpg, jpeg, png)</div>
         <?= Html::sumbit(__('app.download')); ?>
-      </div>
+       </fieldset>
     </form>
   </div>
 </main>

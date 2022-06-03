@@ -2,9 +2,7 @@
 <div class="w94 mb-none center">
   <div class="sticky top-xl">
     <?= Html::votes($post, 'post', 'ps', 'bi-heart text-2xl middle mt15', 'block'); ?>
-    <div class="pt20">
-      <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl'); ?>
-    </div>
+    <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl block mt20'); ?>
   </div>
 </div>
 <main>
@@ -190,7 +188,7 @@
       <?php endif; ?>
 
     <?php else : ?>
-      <div class="bg-red-200 p15 center mr10">
+      <div class="box center bg-red-200">
         <?= __('app.content_deleted', ['name' => __('app.post')]); ?>...
       </div>
     <?php endif; ?>
@@ -229,7 +227,7 @@
           <?= $topic['facet_title']; ?>
         </a>
 
-        <div class="text-sm mt5 pr15 mb-pr0 gray-600">
+        <div class="text-sm gray-600">
           <?= $topic['facet_short_description']; ?>
         </div>
       <?php endforeach; ?>

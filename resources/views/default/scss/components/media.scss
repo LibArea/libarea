@@ -4,11 +4,8 @@
  * Медиа-запросы
  */
 
-
-main { width: calc(100% - 390px); }
 .col-two { width: calc(100% - 160px); }
 .article { width: calc(100% - 320px); }
-.menuno main { width: calc(100% - 230px); }
 .menuno .col-two { width: 100%; }
 
 @media (max-width: 1050px) {
@@ -22,19 +19,15 @@ main { width: calc(100% - 390px); }
     max-width: 270px;
     max-height: 170px;
   }
-
-  aside { width: 250px; }
-}
-
-@media (max-width: 890px) {
-  aside { display: none; }
+  .menu__left, #togglemenu { display: none; }
+  aside { min-width: 240px; }
   main { width: 100%; }
   .menuno main { width: 100%; }
-}
-
-@media (max-width: 780px) {
-
-  .menu__button { transition: 0.3s ease; }
+  
+  .menu__button {
+    transition: 0.3s ease;
+    display: block;
+  }
 
   .menu__left {
     opacity: 0;
@@ -58,15 +51,20 @@ main { width: calc(100% - 390px); }
     transition: 0.25s;
     position: fixed;
     display: block;
-    margin-left: 10px;
   }
   
   .menu__left.menu__active ul.top-sm { top: 0; }
-  .menu__left.menu__active .menu li { background-color: #fff; }  
 
+  .menu__left.menu__active .menu li {
+    background-color: #fff;
+    padding-left: 10px;
+  }  
+  
+}
+
+@media (max-width: 780px) {
   .mb-w100 { width: 100px; }
   .mb-ml10 { margin-left: 10px; }
-  .mb-ml20 { margin-left: 20px; }
   .mb-mr5 { margin-right: 5px; }
   .mb-ml5 { margin-left: 5px; }
   .mb-mt5 { margin-top: 5px; }
@@ -74,9 +72,9 @@ main { width: calc(100% - 390px); }
   .mb-pl0 { padding-left: 0; }
   .mb-pr0 { padding-right: 0; }
   .mb-p10 { padding: 10px; }
-  .mb-text-xl { font-size: 1.25rem; }
   .mb-inline { display: inline; }
   .mb-block { display: block; }
+  .mb-text-xl { font-size: 1.25rem; }
   .logo { font-size: 18px; }
 
   .wrap {
@@ -85,11 +83,12 @@ main { width: calc(100% - 390px); }
   }
 
   .mb-w-100,
-  main.col-two { width: 100%; }
+  main.col-two,
+  .home-img  { width: 100%; }
 
-  .mb-none { display: none; }
+  aside,
+  .mb-none,
   ul.setting > li > a > i { display: none; }
-  .home-img { width: 100%; }
 
   .flex-auto {
     flex-wrap: wrap;
