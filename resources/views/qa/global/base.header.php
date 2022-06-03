@@ -39,30 +39,30 @@ $facet  = $data['facet'] ?? false; ?>
       </div>
 
       <?php if (!UserData::checkActiveUser()) : ?>
-        <div class="flex right items-center">
-          <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml10">
+        <div class="flex gap-max items-center">
+          <div id="toggledark" class="header-menu-item mb-none only-icon">
             <i class="bi-brightness-high gray-600 text-xl"></i>
           </div>
           <?php if (config('general.invite') == false) : ?>
-            <a class="w94 gray ml30 mr15 mb-ml10 mb-mr5 block" href="<?= url('register'); ?>">
+            <a class="w94 gray block" href="<?= url('register'); ?>">
               <?= __('app.registration'); ?>
             </a>
           <?php endif; ?>
-          <a class="w94 btn btn-outline-primary ml20" href="<?= url('login'); ?>">
+          <a class="w94 btn btn-outline-primary" href="<?= url('login'); ?>">
             <?= __('app.sign_in'); ?>
           </a>
         </div>
       <?php else : ?>
         <div>
-          <div class="flex right ml30 mb-ml10 items-center">
+          <div class="flex gap-max items-center">
 
             <?= Html::addPost($facet); ?>
 
-            <div id="toggledark" class="only-icon p10 ml30 mb-ml10">
+            <div id="toggledark" class="only-icon">
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
 
-            <a class="gray-600 p10 text-xl ml20 mb-ml10" href="<?= url('notifications'); ?>">
+            <a class="gray-600 p10 text-xl" href="<?= url('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
               <?php if (!empty($notif)) : ?>
                 <?php if ($notif['action_type'] == 1) : ?>
@@ -75,7 +75,7 @@ $facet  = $data['facet'] ?? false; ?>
               <?php endif; ?>
             </a>
 
-            <div class="ml45 mb-ml20 relative">
+            <div class="relative">
               <div class="trigger">
                 <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mb-pr0', 'avatar', 'small'); ?>
               </div>

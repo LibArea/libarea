@@ -50,30 +50,30 @@ $post   = $data['post'] ?? false;
         </div>
 
         <?php if (!UserData::checkActiveUser()) : ?>
-          <div class="flex right items-center">
+          <div class="flex gap-max items-center">
             <div id="toggledark" class="header-menu-item">
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
             <?php if (config('general.invite') == false) : ?>
-              <a class=" gray ml45 mr15 mb-mr5 mb-ml5 mb-none block" href="<?= url('register'); ?>">
+              <a class="gray  mb-none block" href="<?= url('register'); ?>">
                 <?= __('app.registration'); ?>
               </a>
             <?php endif; ?>
-            <a class=" btn btn-outline-primary ml20 pl10 pr10" href="<?= url('login'); ?>">
+            <a class=" btn btn-outline-primary" href="<?= url('login'); ?>">
               <?= __('app.sign_in'); ?>
             </a>
           </div>
         <?php else : ?>
 
-          <div class="flex right ml45 mb-ml0 items-center">
+          <div class="flex gap-max items-center">
 
             <?= Html::addPost($facet); ?>
 
-            <div id="toggledark" class="only-icon ml45 mb-ml20">
+            <div id="toggledark" class="only-icon">
               <i class="bi-brightness-high gray-600"></i>
             </div>
 
-            <a class="gray-600 ml45 mb-ml20" href="<?= url('notifications'); ?>">
+            <a class="gray-600" href="<?= url('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
               <?php if (!empty($notif)) : ?>
                 <?php if ($notif['action_type'] == 1) : ?>
@@ -86,7 +86,7 @@ $post   = $data['post'] ?? false;
               <?php endif; ?>
             </a>
 
-            <div class="ml45 mb-ml20">
+            <div class="relative">
               <div class="trigger">
                 <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mb-pr0', 'avatar', 'small'); ?>
               </div>

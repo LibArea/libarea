@@ -5,12 +5,12 @@ if ($blog['facet_is_deleted'] == 0) : ?>
       <?= Html::image($blog['facet_img'], $blog['facet_title'], 'img-xl', 'logo', 'max'); ?>
       <div class="mb-ml0 flex-auto">
         <h1 class="mb0 mt10 text-2xl">
-          <?= $blog['facet_seo_title']; ?>
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == UserData::getUserId()) : ?>
-            <a class="right white fon-rgba -mt20" href="<?= url('content.edit', ['type' => 'blog', 'id' => $blog['facet_id']]); ?>">
+            <a class="right white fon-rgba" href="<?= url('content.edit', ['type' => 'blog', 'id' => $blog['facet_id']]); ?>">
               <i class="bi-pencil bold"></i>
             </a>
           <?php endif; ?>
+          <?= $blog['facet_seo_title']; ?>
         </h1>
         <div class="text-sm mt10 mb-none"><?= $blog['facet_short_description']; ?></div>
         <div class="right">

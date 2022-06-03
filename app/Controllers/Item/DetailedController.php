@@ -29,8 +29,6 @@ class DetailedController extends Controller
             $item['item_content_soft'] = Content::text($item['item_content_soft'], 'text');
         }
 
-        Request::getResources()->addBottomScript('/assets/js/web.js');
-
         $content_img = PATH_THUMBS . 'default.png';
         if (file_exists(HLEB_PUBLIC_DIR . PATH_THUMBS . $item['item_domain'] . '.png')) {
             $content_img =  PATH_THUMBS . $item['item_domain'] . '.png';

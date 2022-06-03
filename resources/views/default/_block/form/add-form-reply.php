@@ -6,7 +6,7 @@
       <fieldset>
         <input type="hidden" name="id" value="<?= $data['id']; ?>">
         <input type="hidden" name="item_id" value="<?= $data['item_id']; ?>">
-        <?= Html::sumbit(__('web.comment')); ?>
+        <?= Html::sumbit(__('web.reply')); ?>
         <span id="cancel_comment" class="text-sm inline ml5 gray"><?= __('web.cancel'); ?></span>
       </fieldset>
     </form>

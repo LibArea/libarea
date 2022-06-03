@@ -31,22 +31,22 @@ $q = $data['q'];
             <?= __('search.websites'); ?>
           </a>
 
-          <div class="flex right items-center">
-            <div id="toggledark" class="header-menu-item mb-none only-icon mr30 mb-ml10">
+          <div class="flex right gap-max items-center">
+            <div id="toggledark" class="header-menu-item mb-none only-icon">
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
             <?php if (!UserData::checkActiveUser()) : ?>
               <?php if (config('general.invite') == false) : ?>
-                <a class="register gray-600 mr15 mb-ml10 mb-mr5 block" href="<?= url('register'); ?>">
+                <a class="register gray-600 block" href="<?= url('register'); ?>">
                   <?= __('search.registration'); ?>
                 </a>
               <?php endif; ?>
-              <a class="gray-600 mr10 ml10" href="<?= url('login'); ?>">
+              <a class="gray-600" href="<?= url('login'); ?>">
                 <?= __('search.sign_in'); ?>
               </a>
             <?php else : ?>
-              <div class="mr15 m relative">
-                <div class="trigger">
+              <div class="relative">
+                <div class="trigger mr5">
                   <?= UserData::getUserLogin(); ?>
                 </div>
                 <ul class="dropdown">
