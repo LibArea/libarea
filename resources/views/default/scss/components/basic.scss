@@ -230,9 +230,6 @@ img {
 .max-width { max-width: 1636px; }
 .min-h100 { min-height: 100px;}
 
-.z-10 { z-index: 10; }
-.z-40 { z-index: 40; }
-
 .text-xs { font-size: 0.75rem; }
 .text-sm { font-size: 0.875rem; }
 .text-base { font-size: 1rem; }
@@ -256,7 +253,7 @@ img {
 .gap-min { gap: 0.25rem; }
 .flex { display: flex; }
 .fixed { position: fixed; }
-.flex-row { flex-direction:row; }
+.flex-row { flex-direction: row; }
 .flex-col { flex-direction: column; }
 .flex-wrap { flex-wrap: wrap; }
 .flex-nowrap { flex-wrap: nowrap }

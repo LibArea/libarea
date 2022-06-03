@@ -380,6 +380,11 @@ iframe {
   text-align: center;
 }
 
+.profile-header-footer {
+  z-index: 10;
+  width: 100%;
+}
+
 /* Сделаем внешние ссылки с иконкой */
 .ind-first-p a[rel~="nofollow"]:after,
 .post-body a[rel~="nofollow"]:after {

@@ -1,8 +1,8 @@
 <?php
 $profile = $data['profile'];
-$css = 'w110 mb-w100 ml15 z-10 -mt90 br-rd5';
+$css = 'w110 mb-w100 ml15 -mt90 br-rd5';
 if ($profile['cover_art'] != 'cover_art.jpeg') :
-  $css = 'w160 mb-w100 z-10 -mt90 ml15 br-rd5';
+  $css = 'w160 mb-w100 -mt90 ml15 br-rd5';
 endif;
 ?>
 
@@ -12,10 +12,10 @@ endif;
       <img class="w-100 min-h100" src="<?= Html::coverUrl($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
     </div>
   <?php else : ?>
-    <div class="profile-box w-100 relative" style="background: <?= $profile['color']; ?>;min-height: 90px;"></div>
+    <div class="w-100 relative" style="background: <?= $profile['color']; ?>;min-height: 90px;"></div>
   <?php endif; ?>
   <div class="flex justify-between">
-    <div class="z-10 w-100">
+    <div class="profile-header-footer">
       <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
 
       <?php if (UserData::checkActiveUser()) : ?>

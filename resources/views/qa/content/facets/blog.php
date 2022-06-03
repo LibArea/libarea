@@ -47,7 +47,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
                 'topic_focus_count' => $blog['facet_focus_count'],
                 'focus_users'       => $data['focus_users'] ?? '',
               ]); ?>
-              <div class="content_<?= $blog['facet_id']; ?> absolute bg-white box-shadow-all z-10 right0"></div>
+              <div class="content_<?= $blog['facet_id']; ?> absolute bg-white box-shadow-all right0"></div>
             </div>
           </div>
           <?php if ($data['info']) : ?>

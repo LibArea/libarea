@@ -25,7 +25,7 @@
         <div class="focus-user sky">
           <?= $topic['facet_focus_count']; ?>
         </div>
-        <div class="content_<?= $topic['facet_id']; ?> absolute bg-white box-shadow-all z-10 right0"></div>
+        <div class="content_<?= $topic['facet_id']; ?> absolute bg-white box-shadow-all right0"></div>
       </div>
     </div>
 
