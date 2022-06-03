@@ -33,7 +33,7 @@
         <h1><?= $post['post_title']; ?>
           <?= insert('/content/post/post-title', ['post' => $post]); ?>
         </h1>
-        <div class="text-sm flex gray-600">
+        <div class="text-sm flex gray-600 gap">
           <?= Html::langDate($post['post_date']); ?>
           <?php if ($post['modified']) : ?>
             (<?= __('app.ed'); ?>)
@@ -42,17 +42,17 @@
           <?php if (UserData::checkActiveUser()) : ?>
 
             <?php if (UserData::getUserLogin() == $post['login']  || UserData::checkAdmin()) : ?>
-              <a class="gray-600 mr10 ml10" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
+              <a class="gray-600 lowercase" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
                 <?= __('app.edit'); ?>
               </a>
             <?php endif; ?>
             <?php if (UserData::getUserLogin() == $post['login']) : ?>
               <?php if ($post['my_post'] == $post['post_id']) : ?>
-                <span class="add-profile active mr10 ml10" data-post="<?= $post['post_id']; ?>">
+                <span class="add-profile active" data-post="<?= $post['post_id']; ?>">
                   + <?= __('app.in_profile'); ?>
                 </span>
               <?php else : ?>
-                <span class="add-profile mr10 ml10" data-post="<?= $post['post_id']; ?>">
+                <span class="add-profile" data-post="<?= $post['post_id']; ?>">
                   <?= __('app.in_profile'); ?>
                 </span>
               <?php endif; ?>
@@ -110,7 +110,7 @@
             </div>
           </li>
           <li class="left p10 mb-none">
-            <div class="text-sm gray-600 mb5">
+            <div class="text-sm gray-600">
               <?= __('app.last_answer'); ?>
             </div>
             <div class="center">
@@ -124,7 +124,7 @@
             </div>
           </li>
           <li class="left p10 mb-none gray-600 text-2xl">
-            <div class="text-2xl center mb5">
+            <div class="text-2xl center">
               <?php if ($post['post_hits_count'] == 0) : ?>
                 —
               <?php else : ?>
@@ -136,7 +136,7 @@
             </div>
           </li>
           <li class="left p10 mb-none gray-600 text-sm">
-            <div class="text-2xl center mb5">
+            <div class="text-2xl center">
               <?php if ($post['amount_content'] == 0) : ?>
                 —
               <?php else : ?>

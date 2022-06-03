@@ -1,5 +1,5 @@
 <?php if (UserData::checkAdmin()) : ?>
-  <div class="gray-600 ml10 relative">
+  <div class="gray-600 relative">
     <span class="trigger gray-600 text-sm">ip</span>
     <ul class="dropdown">
       <li><a class="gray-600" href="<?= url('admin.logip', ['ip' => $ip]); ?>">&#183;  <?= $ip; ?></a><li>

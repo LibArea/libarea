@@ -15,57 +15,56 @@
           <ol class="list-none">
             <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="content-body">
-                <div class="flex text-sm">
+                <div class="flex text-sm gap">
                   <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">
                     <?= Html::image($answer['avatar'], $answer['login'], 'img-sm', 'avatar', 'small'); ?>
-                    <span class="mr5<?php if (Html::loginColor($answer['created_at'])) : ?> green<?php endif; ?>">
+                    <span class="<?php if (Html::loginColor($answer['created_at'])) : ?> green<?php endif; ?>">
                       <?= $answer['login']; ?>
                     </span>
                   </a>
                   <?php if ($post['post_user_id'] == $answer['answer_user_id']) : ?>
-                    <span class="sky mr5 ml0"><i class="bi-mic text-sm"></i></span>
+                    <span class="sky"><i class="bi-mic text-sm"></i></span>
                   <?php endif; ?>
-                  <span class="mr5 ml5 gray-600 lowercase">
+                  <span class="gray-600 lowercase">
                     <?= Html::langDate($answer['date']); ?>
                   </span>
                   <?php if (empty($answer['edit'])) : ?>
-                    <span class="mr5 ml10 gray-600">
+                    <span class="gray-600">
                       (<?= __('app.ed'); ?>.)
                     </span>
                   <?php endif; ?>
-                  <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
+                  <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
                   <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
                 </div>
                 <div class="max-w780 ind-first-p">
                   <?= Content::text($answer['answer_content'], 'text'); ?>
                 </div>
               </div>
-              <div class="flex text-sm">
-                <?= Html::votes($answer, 'answer', 'ps', 'bi-heart mr5'); ?>
+              <div class="flex text-sm gap">
+                <?= Html::votes($answer, 'answer', 'ps', 'bi-heart'); ?>
 
                 <?php if ($post['post_closed'] == 0) : ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                    <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray-600 mr5 ml10"><?= __('app.reply'); ?></a>
+                    <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray-600"><?= __('app.reply'); ?></a>
                   <?php endif; ?>
                 <?php endif; ?>
 
-
                 <?php if (Access::author('answer', $answer['answer_user_id'], $answer['date'], 30) === true) : ?>
-                  <a class="editansw gray-600 mr10 ml10" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                  <a class="editansw gray-600" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                     <?= __('app.edit'); ?>
                   </a>
                 <?php endif; ?>
 
                 <?php if (UserData::checkAdmin()) : ?>
-                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600 ml10 mr10">
+                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
                     <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                   </a>
                 <?php endif; ?>
 
-                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml5'); ?>
+                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps'); ?>
 
                 <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
                     <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
                   </a>
                 <?php endif; ?>
@@ -124,54 +123,54 @@
         <?php if ($comment['comment_is_deleted'] == 0) : ?>
           <ol class="list-none">
             <li class="content_tree mb20 pl15<?php if ($comment['comment_comment_id'] > 0) : ?> ml30<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
-              <div class="text-sm flex">
+              <div class="text-sm flex gap">
                 <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>">
                   <?= Html::image($comment['avatar'], $comment['login'], 'img-sm', 'avatar', 'small'); ?>
-                  <span class="mr5<?php if (Html::loginColor($comment['created_at'])) : ?> green<?php endif; ?>">
+                  <span class="<?php if (Html::loginColor($comment['created_at'])) : ?> green<?php endif; ?>">
                     <?= $comment['login']; ?>
                   </span>
                 </a>
                 <?php if ($post['post_user_id'] == $comment['comment_user_id']) : ?>
-                  <span class="sky mr5"><i class="bi-mic text-sm"></i></span>
+                  <span class="sky"><i class="bi-mic text-sm"></i></span>
                 <?php endif; ?>
-                <span class="mr5 ml5 gray-600 lowercase">
+                <span class="gray-600 lowercase">
                   <?= Html::langDate($comment['date']); ?>
                 </span>
                 <?php if ($comment['comment_comment_id'] > 0) : ?>
-                  <a class="gray-600 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><i class="bi-arrow-up"></i></a>
+                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><i class="bi-arrow-up"></i></a>
                 <?php else : ?>
-                  <a class="gray-600 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi-arrow-up"></i></a>
+                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi-arrow-up"></i></a>
                 <?php endif; ?>
-                <a class="gray-600 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi-hash"></i></a>
+                <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi-hash"></i></a>
                 <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
               </div>
               <div class="max-w780 ind-first-p">
                 <?= Content::text($comment['comment_content'], 'text'); ?>
               </div>
-              <div class="text-sm flex">
-                <?= Html::votes($comment, 'comment', 'ps', 'bi-heart mr5'); ?>
+              <div class="text-sm flex gap">
+                <?= Html::votes($comment, 'comment', 'ps', 'bi-heart'); ?>
 
                 <?php if ($post['post_closed'] == 0) : ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                    <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray mr5 ml10">
+                    <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray">
                       <?= __('app.reply'); ?>
                     </a>
                   <?php endif; ?>
                 <?php endif; ?>
 
                 <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray mr10 ml10">
+                  <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
                     <?= __('app.edit'); ?>
                   </a>
                 <?php endif; ?>  
                 <?php if (UserData::checkAdmin()) : ?>   
-                  <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray mr5 ml5">
+                  <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
                     <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                   </a>
                 <?php endif; ?>
 
                 <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml15">
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
                     <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
                   </a>
                 <?php endif; ?>

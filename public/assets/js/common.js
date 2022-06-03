@@ -36,8 +36,9 @@ let token = document.querySelector("meta[name='csrf-token']").getAttribute("cont
 document.querySelectorAll(".add-comment")
   .forEach(el => el.addEventListener("click", function (e) {
 
-    let answer_id, insert_id = el.dataset.answer_id;
+    let answer_id = insert_id = el.dataset.answer_id;
     let comment_id = el.dataset.comment_id;
+
     if(comment_id) {
         insert_id = el.dataset.comment_id;
     }

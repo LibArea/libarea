@@ -27,35 +27,35 @@
                   <?= Content::text($answer['answer_content'], 'text'); ?>
                 </DIV>
               </div>
-              <div class="flex text-sm">
-                <?= Html::votes($answer, 'answer', 'ps', 'bi-heart mr5'); ?>
+              <div class="flex text-sm gap">
+                <?= Html::votes($answer, 'answer', 'ps', 'bi-heart'); ?>
  
                 <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                   <?php if ($post['post_closed'] == 0) : ?>
                     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                      <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10 mr10"><?= __('app.reply'); ?></a>
+                      <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= __('app.reply'); ?></a>
                     <?php endif; ?>
                   <?php endif; ?>
                 <?php endif; ?>
 
                 <?php if (Access::author('answer', $answer['answer_user_id'], $answer['date'], 30) === true) : ?>
                   <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
-                    <a class="editansw gray ml15 mr10" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                    <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                       <?= __('app.edit'); ?>
                     </a>
                   <?php endif; ?>
                 <?php endif; ?>
 
                 <?php if (UserData::checkAdmin()) : ?>
-                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr10">
+                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
                     <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                   </a>
                 <?php endif; ?>
 
-                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps', 'ml10'); ?>
+                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps'); ?>
  
                 <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600 ml15">
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
                     <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
                   </a>
                 <?php endif; ?>
@@ -75,19 +75,18 @@
             <li class="content_tree" id="comment_<?= $comment['comment_id']; ?>">
               <div class="text-sm ml30">
                 <?= Content::text($comment['comment_content'], 'line'); ?>
-                <div class="mb5 mt5">
+                <div class="text-sm flex gap">
                   <span class="gray-600">
                     <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
                     <span class="lowercase gray-600">
                       &nbsp; <?= Html::langDate($comment['date']); ?>
                     </span>
-                    <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
                   </span>
 
                   <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                     <?php if ($post['post_closed'] == 0) : ?>
                       <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                        <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600 ml5 mr5">
+                        <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment lowercase gray-600">
                           <?= __('app.reply'); ?>
                         </a>
                       <?php endif; ?>
@@ -95,22 +94,23 @@
                   <?php endif; ?>
 
                   <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
-                      <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 ml10 mr5">
+                      <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
                         <i title="<?= __('app.edit'); ?>" class="bi-pencil-square"></i>
                       </a>
                   <?php endif; ?>
 
                   <?php if (UserData::checkAdmin()) : ?>
-                    <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600 ml10">
+                    <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
                       <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                     </a>
                   <?php endif; ?>
 
                   <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
-                    <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml5">
+                    <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
                       <?= __('app.report'); ?>
                     </a>
                   <?php endif; ?>
+                  <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
                 </div>
               </div>
               <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>

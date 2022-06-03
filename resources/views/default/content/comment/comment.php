@@ -22,17 +22,15 @@ foreach ($answer as  $comment) :
     <ol class="p0 m0 mb15 list-none">
       <li class="content_tree" id="comment_<?= $comment['comment_id']; ?>">
         <div class="max-w780">
-          <div class="text-sm flex">
+          <div class="text-sm flex gap">
             <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>">
               <?= Html::image($comment['avatar'], $comment['login'], 'img-sm', 'avatar', 'small'); ?>
-              <span class="mr5 ml5">
-                <?= $comment['login']; ?>
-              </span>
+              <?= $comment['login']; ?>
             </a>
             <?php if ($comment['post_user_id'] == $comment['comment_user_id']) : ?>
-              <span class="sky mr5"><i class="bi-mic text-sm"></i></span>
+              <span class="sky"><i class="bi-mic text-sm"></i></span>
             <?php endif; ?>
-            <span class="mr5 ml5 gray-600 lowercase">
+            <span class="gray-600 lowercase">
               <?= Html::langDate($comment['date']); ?>
             </span>
             <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
@@ -44,20 +42,20 @@ foreach ($answer as  $comment) :
             <?= Content::text($comment['content'], 'text'); ?>
           </div>
         </div>
-        <div class="text-sm flex">
+        <div class="text-sm flex gap">
           <?= Html::votes($comment, 'comment', 'ps', 'bi-heart mr5'); ?>
 
           <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
-            <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 mr10 ml10">
+            <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
               <?= __('app.edit'); ?>
             </a>
-            <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600 mr5 ml5">
+            <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
               <?= __('app.remove'); ?>
             </a>
           <?php endif; ?>
 
           <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-            <a data-post_id="<?= $comment['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600 ml15">
+            <a data-post_id="<?= $comment['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
               <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
             </a>
           <?php endif; ?>
