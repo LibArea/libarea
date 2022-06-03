@@ -1,7 +1,7 @@
 <main class="col-two">
   <div class="box center">
     <h1 class="m0 text-xl font-normal"><?= __('meta.' . $data['sheet'] . '_users'); ?></h1>
-    <span class="text-sm gray-600">
+    <span class="gray-600">
       <?= __('meta.' . $data['sheet'] . '_users_info'); ?>.
     </span>
   </div>
@@ -33,9 +33,9 @@
   </div>
 
   <div class="box">
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap justify-between">
       <?php foreach ($data['users'] as $user) : ?>
-        <div class="w-20 mb20 mb-w-33 center">
+        <div class="w160 mb-w100 mb20 center">
           <a href="<?= url('profile', ['login' => $user['login']]); ?>">
             <?= Html::image($user['avatar'], $user['login'], 'img-lg', 'avatar', 'max'); ?>
             <div class="block mt5">

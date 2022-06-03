@@ -10,7 +10,7 @@ use Meta;
 
 class UserController extends Controller
 {
-    protected $limit = 40;
+    protected $limit = 35;
 
     // All users
     // Все пользователи

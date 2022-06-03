@@ -40,7 +40,7 @@ $facet  = $data['facet'] ?? false; ?>
         </div>
       <?php else : ?>
 
-        <div class="flex right ml45 mb-ml0 items-center text-xl">
+        <div class="flex right ml45 mb-ml0 items-center">
 
           <?= Html::addPost($facet); ?>
 

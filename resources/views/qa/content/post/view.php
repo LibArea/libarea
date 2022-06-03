@@ -1,5 +1,5 @@
 <?php $post = $data['post']; ?>
-<div class="w110 mb-none center">
+<div class="w94 mb-none center">
   <div class="sticky top-xl">
     <?= Html::votes($post, 'post', 'ps', 'bi-heart text-2xl middle mt15', 'block'); ?>
     <div class="pt20">

@@ -1,6 +1,6 @@
 <?php $item = $data['item']; ?>
 <div id="contentWrapper">
-  <div class="mb-none center mt30 w110">
+  <div class="mb-none center mt30 w94">
     <?= Html::votes($item, 'item', 'ps', 'bi-heart text-2xl middle', 'block'); ?>
     <div class="pt20">
       <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'text-2xl'); ?>

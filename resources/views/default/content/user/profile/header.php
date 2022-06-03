@@ -1,6 +1,6 @@
 <?php
 $profile = $data['profile'];
-$css = 'w110 mb-w100 ml15 -mt90 br-rd5';
+$css = 'w94 mb-w100 ml15 -mt50 br-rd5';
 if ($profile['cover_art'] != 'cover_art.jpeg') :
   $css = 'w160 mb-w100 -mt90 ml15 br-rd5';
 endif;

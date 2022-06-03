@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?07');
+Request::getHead()->addStyles('/assets/css/style.css?09');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;
 $post   = $data['post'] ?? false;
@@ -65,7 +65,7 @@ $post   = $data['post'] ?? false;
           </div>
         <?php else : ?>
 
-          <div class="flex right ml45 mb-ml0 items-center text-xl">
+          <div class="flex right ml45 mb-ml0 items-center">
 
             <?= Html::addPost($facet); ?>
 

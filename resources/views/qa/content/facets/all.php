@@ -3,7 +3,7 @@
 <main class="w-100">
   <div class="bg-violet box center">
     <h1 class="text-xl"><?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's'); ?></h1>
-    <span class="text-sm gray-600">
+    <span class="gray-600">
       <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>.
     </span>
   </div>

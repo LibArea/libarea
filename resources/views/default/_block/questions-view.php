@@ -12,7 +12,7 @@
           <ol class="list-none">
             <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="hidden">
-                <div class="br-gray w110 box right hidden center">
+                <div class="br-gray w94 box right hidden center">
                   <?= Html::image($answer['avatar'], $answer['login'], 'img-lg', 'avatar', 'max'); ?>
                   <div class="text-sm gray">
                     <?= Html::langDate($answer['date']); ?>

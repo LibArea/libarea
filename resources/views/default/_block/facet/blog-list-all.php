@@ -20,9 +20,9 @@
       <?php if (UserData::getUserId() == $facet['facet_user_id']) : ?>
         <i class="bi-mic sky text-sm"></i>
       <?php endif; ?>
-      <div class="pr15 mt10 mb-pr0 gray">
+      <div class="pr10 mt5 mb-pr0 gray">
         <?= $facet['facet_short_description']; ?>
-        <span class="flex mt5 right gray-600 text-sm">
+        <span class="flex right gray-600 text-sm">
           <i class="bi-journal mr5"></i>
           <?= $facet['facet_count']; ?>
           <?php if ($facet['facet_focus_count'] > 0) : ?>
