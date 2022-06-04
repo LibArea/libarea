@@ -20,8 +20,6 @@ main { flex: 1; }
 
   .menu__left, #togglemenu { display: none; }
   aside { min-width: 240px; }
-  main { width: 100%; }
-  .menuno main { width: 100%; }
 
   .menu__button {
     transition: 0.3s ease;
@@ -57,7 +55,7 @@ main { flex: 1; }
   .menu__left.menu__active .menu li {
     background-color: #fff;
     padding-left: 10px;
-  }  
+  }
 
 }
 
@@ -82,7 +80,7 @@ main { flex: 1; }
   }
 
   .mb-w-100,
-  .home-img  { width: 100%; }
+  .home-img { width: 100%; }
 
   aside,
   .mb-none,

@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
-use Integration, Validation, SendEmail, Meta, Html, Msg, UserData;
+use Google, Validation, SendEmail, Meta, Html, Msg, UserData;
 
 class RecoverController extends Controller
 {
@@ -35,7 +35,7 @@ class RecoverController extends Controller
         $redirect   = url('recover');
 
         if (config('general.captcha')) {
-            if (!Integration::checkCaptchaCode()) {
+            if (!Google::checkCaptchaCode()) {
                 Validation::comingBack(__('msg.code_error'), 'error', $redirect);
             }
         }

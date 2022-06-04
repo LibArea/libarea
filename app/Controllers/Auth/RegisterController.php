@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\AuthModel;
-use Integration, Validation, SendEmail, Meta, Html, UserData;
+use Google, Validation, SendEmail, Meta, Html, UserData;
 
 class RegisterController extends Controller
 {
@@ -103,7 +103,7 @@ class RegisterController extends Controller
         // Проверим код проверки
         if (!$inv_code) {
             if (config('general.captcha')) {
-                if (!Integration::checkCaptchaCode()) {
+                if (!Google::checkCaptchaCode()) {
                     Validation::comingBack(__('msg.code_error'), 'error', $redirect);
                 }
             }

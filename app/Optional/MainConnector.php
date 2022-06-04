@@ -32,9 +32,14 @@ class MainConnector implements Connector
             "Access"                        => "app/Libraries/Access.php",
             "Msg"                           => "app/Libraries/Msg.php",
 
+            "Curl"                          => "app/Libraries/Curl.php",
+            "Google"                        => "app/Libraries/Integration/Google.php",
+            "Discord"                       => "app/Libraries/Integration/Discord.php",
+            "Yandex"                        => "app/Libraries/Integration/Yandex.php",
+            "GitHub"                        => "app/Libraries/Integration/GitHub.php",
+
             "Content"                       => "app/Libraries/Content.php",
             "UploadImage"                   => "app/Libraries/UploadImage.php",
-            "Integration"                   => "app/Libraries/Integration.php",
             "Validation"                    => "app/Libraries/Validation.php",
             "Html"                          => "app/Libraries/Html.php",
             "Meta"                          => "app/Libraries/Meta.php",

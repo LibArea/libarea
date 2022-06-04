@@ -1,64 +1,8 @@
 <?php
 
-use Hleb\Constructor\Handlers\Request;
-
-class Integration
+class Discord
 {
-    // Captcha v2
-    private static function callApi($params)
-    {
-        $api_url = 'https://www.google.com/recaptcha/api/siteverify';
-
-        // https://github.com/php-mod/curl
-        if (!function_exists('curl_init')) {
-
-            $data = @file_get_contents($api_url . '?' . http_build_query($params));
-        } else {
-
-            $curl = curl_init();
-
-            if (strpos($api_url, 'https') !== false) {
-                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            }
-            curl_setopt($curl, CURLOPT_URL, $api_url);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_HEADER, false);
-            curl_setopt($curl, CURLOPT_TIMEOUT, 5);
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-
-            $data = curl_exec($curl);
-
-            curl_close($curl);
-        }
-
-        if (!$data) {
-            return false;
-        }
-        $data = json_decode($data, true);
-
-        return !empty($data['success']);
-    }
-
-    // Проверка в AuthControllerе
-    public static function checkCaptchaCode()
-    {
-        $response = Request::getPost('g-recaptcha-response');
-
-        if (!$response) {
-            return false;
-        }
-
-        return self::callApi(array(
-            'secret'   => config('general.private_key'),
-            'response' => $response,
-            'remoteip' => $_SERVER['REMOTE_ADDR']
-        ));
-    }
-
-    // Discord
-    public static function AddWebhook($text, $title, $url)
+    public static function addWebhook($text, $title, $url)
     {
         $text = strip_tags($text, '<p>');
         $text = preg_replace(array('/(<p>)/', '(<\/p>)'), array('', '\n'), $text);
@@ -71,7 +15,7 @@ class Integration
             return false;
         }
 
-        $content    = __('app.content_added', ['name' => __('app.post')]);
+        $content    = __('app.post');
         $color      = hexdec("3366ff");
 
         // Формируем даты
@@ -126,16 +70,6 @@ class Integration
 
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-        $ch = curl_init($webhookurl);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        $response = curl_exec($ch);
-        // echo $response;
-        curl_close($ch);
+        Curl::index($webhookurl, $json_data, ['Content-type: application/json']);
     }
 }

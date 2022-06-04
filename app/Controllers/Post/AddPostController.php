@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\Item\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
-use Content, UploadImage, Integration, Validation, URLScraper, Meta, UserData;
+use Content, UploadImage, Discord, Validation, URLScraper, Meta, UserData;
 
 use Cocur\Slugify\Slugify;
 use Utopia\Domains\Domain;
@@ -148,7 +148,7 @@ class AddPostController extends Controller
 
         if (config('general.discord')) {
             if ($post_tl == 0 && $post_draft == 0) {
-                Integration::AddWebhook($content, $post_title, $redirect);
+                Discord::AddWebhook($content, $post_title, $redirect);
             }
         }
 
