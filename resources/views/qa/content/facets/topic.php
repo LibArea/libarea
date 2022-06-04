@@ -1,5 +1,5 @@
 <?php $topic = $data['facet']; ?>
-<main class="col-two">
+<main>
   <?php if ($topic['facet_is_deleted'] == 0) : ?>
     <?= insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
 

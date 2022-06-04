@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?09');
+Request::getHead()->addStyles('/assets/css/style.css?04');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -11,7 +11,7 @@ $facet  = $data['facet'] ?? false; ?>
 <body<?php if (Request::getCookie('dayNight') == 'dark') : ?> class="dark" <?php endif; ?>>
 
   <header class="bg-white mt0 mb15">
-    <div class="br-bottom wrap p5 mb-none items-center flex">
+    <div class="br-bottom wrap p5 mb15 mb-none items-center flex">
       <a class="mr20 black text-xs" href="/topics">
         <i class="bi-columns-gap mr5"></i> <?= __('app.topics'); ?>
       </a>

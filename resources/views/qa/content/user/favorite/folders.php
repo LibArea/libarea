@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <div class="bg-violet">
     <?= insert('/content/user/favorite/nav', ['data' => $data]); ?>
   </div>

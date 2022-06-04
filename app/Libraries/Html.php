@@ -142,7 +142,7 @@ class Html
                             </div></div>';
             }
         } else {
-            $html .= '<div class="voters flex ' . $block . ' center gray-600">
+            $html .= '<div class="voters flex ' . $block . ' center gap-min gray-600">
                         <div class="up-id ' . $css . ' click-no-auth"></div>
                         <div class="score">
                              ' . $count . '                

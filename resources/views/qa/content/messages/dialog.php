@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <p class="m0"><?= $data['sheet']; ?></p>
   <div class="mb15 mb-ml0 hidden">
     <form action="<?= url('content.create', ['type' => 'message']); ?>" method="post">

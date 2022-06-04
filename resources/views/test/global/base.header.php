@@ -2,8 +2,8 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?09');
-Request::getHead()->addStyles('/assets/css/test.css?09');
+Request::getHead()->addStyles('/assets/css/style.css?04');
+Request::getHead()->addStyles('/assets/css/test.css?04');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -74,4 +74,4 @@ $facet  = $data['facet'] ?? false; ?>
     </div>
   </header>
 
-  <div class="telo">
+  <div id="contentWrapper">

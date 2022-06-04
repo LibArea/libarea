@@ -3,7 +3,7 @@ $fs = $data['facet'];
 $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
-<main class="col-two">
+<main>
   <div class="box-flex bg-violet justify-between">
     <p class="m0 text-xl"><?= __('app.edit_' . $data['type']); ?></p>
     <ul class="nav">

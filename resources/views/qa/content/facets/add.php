@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <div class="box pt0">
     <h2 class="text-xl"><?= __('app.add_' . $data['type']); ?></h2>
     <form class="max-w780" action="<?= url('content.create', ['type' => $data['type']]); ?>" method="post" enctype="multipart/form-data">

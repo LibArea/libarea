@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <div class="box-flex bg-violet">
     <p class="m0"><?= __('app.' . $data['sheet']); ?></p>
   </div>

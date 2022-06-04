@@ -27,7 +27,7 @@
 </div>
 
 <div id="contentWrapper">
-  <main class="col-two">
+  <main>
     <h2 class="inline mb10"><?= __('web.' . $data['sheet']); ?></h2>
     <?php if (!empty($data['items'])) : ?>
       <?= insert('/content/item/site', ['data' => $data, 'screening' => $data['screening']]); ?>

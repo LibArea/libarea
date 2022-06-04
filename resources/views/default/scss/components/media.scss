@@ -4,9 +4,7 @@
  * Медиа-запросы
  */
 
-.col-two { width: calc(100% - 160px); }
-.article { width: calc(100% - 320px); }
-.menuno .col-two { width: 100%; }
+main { flex: 1; }
 
 @media (max-width: 1050px) {
   .home-img,
@@ -19,11 +17,12 @@
     max-width: 270px;
     max-height: 170px;
   }
+
   .menu__left, #togglemenu { display: none; }
   aside { min-width: 240px; }
   main { width: 100%; }
   .menuno main { width: 100%; }
-  
+
   .menu__button {
     transition: 0.3s ease;
     display: block;
@@ -43,7 +42,7 @@
     overflow-x: hidden;
     position: absolute;
   }
-  
+
   .menu__left.menu__active,
   .menu__left.menu-none.menu__active  {
     opacity: 1;
@@ -52,14 +51,14 @@
     position: fixed;
     display: block;
   }
-  
+
   .menu__left.menu__active ul.top-sm { top: 0; }
 
   .menu__left.menu__active .menu li {
     background-color: #fff;
     padding-left: 10px;
   }  
-  
+
 }
 
 @media (max-width: 780px) {
@@ -83,7 +82,6 @@
   }
 
   .mb-w-100,
-  main.col-two,
   .home-img  { width: 100%; }
 
   aside,

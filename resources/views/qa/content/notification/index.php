@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <div class="box-flex bg-violet justify-between">
     <p class="m0"><?= __('app.' . $data['sheet']); ?></p>
     <form action="<?= url('notif.remove'); ?>" class="right">

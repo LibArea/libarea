@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <h1 class="ml15"><?= __('app.answers'); ?></h1>
 
   <?php if (!empty($data['answers'])) : ?>

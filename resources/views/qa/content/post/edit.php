@@ -1,5 +1,5 @@
 <?php $post = $data['post']; ?>
-<main class="col-two">
+<main>
   <div class="box pt0">
     <h2><?= __('app.edit_' . $post['post_type']); ?></h2>
 

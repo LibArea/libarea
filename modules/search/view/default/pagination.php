@@ -34,7 +34,7 @@ if ($pagesCount > $pNum) {
         $html .= '...';
     }
 
-    $html .= '<a class="p5 ml5 lowercase gray-600" href="' . $url . '&page=' . ($pNum + 1) . '">' . __('page') . ' ' . ($pNum + 1) . ' >></a>';
+    $html .= '<a class="p5 ml5 lowercase gray-600" href="' . $url . '&page=' . ($pNum + 1) . '">' . __('app.page') . ' ' . ($pNum + 1) . ' >></a>';
 }
 
 $html .= '</p>';

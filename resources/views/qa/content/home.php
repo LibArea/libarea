@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <div class="box-flex ml10">
     <ul class="nav">
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>

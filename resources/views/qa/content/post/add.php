@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <div class="box pt0">
     <h2><?= __('app.add_post'); ?></h2>
 

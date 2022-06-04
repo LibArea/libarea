@@ -25,7 +25,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
     </div>
 
     <div class="flex gap">
-      <main class="col-two">
+      <main>
         <?= insert('/content/post/post', ['data' => $data]); ?>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>

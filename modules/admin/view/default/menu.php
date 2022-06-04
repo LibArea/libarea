@@ -5,7 +5,7 @@
   </ul>
 </div>
 
-<main class="col-two">
+<main>
   <?php if ($data['type'] != 'admin') : ?>
     <div class="box-flex justify-between bg-white">
 

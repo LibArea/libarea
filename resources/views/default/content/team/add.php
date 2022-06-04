@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <div class="box">
 
     <a href="<?= url('teams'); ?>"><?= __('team.home'); ?></a> /

@@ -1,5 +1,5 @@
 <?php
-Request::getHead()->addStyles('/assets/css/style.css?09');
+Request::getHead()->addStyles('/assets/css/style.css?04');
 ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>

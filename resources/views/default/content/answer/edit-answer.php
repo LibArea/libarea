@@ -1,5 +1,5 @@
 <?php $url = url('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>
-<main class="col-two">
+<main>
   <div class="bg-white items-center justify-between br-gray br-rd5 p15 mb15">
 
     <a href="/"><?= __('app.home'); ?></a> /

@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
 
   <div class="bg-white box">

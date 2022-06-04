@@ -1,5 +1,5 @@
 <?php $topic = $data['facet']; ?>
-<main class="col-two">
+<main>
   <?= insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
   <div class="box">
     <h2 class="mt5 mb5"><?= __('app.wiki'); ?></h2>

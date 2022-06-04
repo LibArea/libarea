@@ -10,7 +10,7 @@ use Hleb\Constructor\Handlers\Request; ?>
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
-    <div class="flex br-bottom p10 article_<?= $post['post_id']; ?>">
+    <div class="flex br-bottom pt10 pb10 article_<?= $post['post_id']; ?>">
       <div class="flex mb-inline mr15">
         <div class="box-answer block bg-lightgray gray mt5 br-rd3 lowercase mr15">
           <?= $post['post_votes']; ?>

@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <div class="box">
     <h1 class="mt0 mb10 text-2xl font-normal"><?= __('app.invite'); ?></h1>
     <form class="" action="/invite" method="post">

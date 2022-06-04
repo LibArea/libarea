@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?09');
+Request::getHead()->addStyles('/assets/css/style.css?04');
 $uri = $data['type'] ?? 'post';
 $q = $data['q'];
 ?>

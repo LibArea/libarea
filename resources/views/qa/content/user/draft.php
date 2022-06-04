@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <div class="box bg-violet">
     <ul class="nav">
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.favorites')]); ?>

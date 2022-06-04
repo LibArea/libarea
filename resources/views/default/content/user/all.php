@@ -1,4 +1,4 @@
-<main class="col-two">
+<main>
   <div class="box center">
     <h1 class="m0 text-xl font-normal"><?= __('meta.' . $data['sheet'] . '_users'); ?></h1>
     <span class="gray-600">
