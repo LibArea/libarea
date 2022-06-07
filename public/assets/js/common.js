@@ -4,7 +4,10 @@ function isIdEmpty(elmId) {
   return false;
 }
 
-function fetcherPost(url, options = {}) {
+// TODO: мы должны написать функционал для работы с исключениями..
+// И во всех функция, завернуть туда, например:
+// Notice('error', 1500, { valign: 'top',align: 'right', styles : {backgroundColor: 'red',fontSize: '18px'}})
+function makeRequest(url, options = {}) {
   return fetch(url, {
     ...options,
     method: "POST",

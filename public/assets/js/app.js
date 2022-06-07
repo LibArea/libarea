@@ -9,37 +9,37 @@ const focusId = document.querySelectorAll('.focus-id'),
 
 // Subscribe to a topic / post
 focusId.forEach(el => el.addEventListener("click", function (e) {
-    fetcherPost("/focus", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
+    makeRequest("/focus", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
   }));
 
 // Adding Folders
 saveFolder.forEach(el => el.addEventListener("click", function (e) {
-    fetcherPost("/folder/content/save", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid })
+    makeRequest("/folder/content/save", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid })
   }));
 
 // Add or remove your post to your profile 
 addProfile.forEach(el => el.addEventListener("click", function (e) {
-    fetcherPost("/post/profile", options = { body:  "post_id=" + el.dataset.post + "&_token=" + token })
+    makeRequest("/post/profile", options = { body:  "post_id=" + el.dataset.post + "&_token=" + token })
   }));
 
 // Deleting a linked content folder 
 delFolderContent.forEach(el => el.addEventListener("click", function (e) {
-    fetcherPost("/folder/content/del", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token })
+    makeRequest("/folder/content/del", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token })
   }));
 
 // Removing a tag
 delFolder.forEach(el => el.addEventListener("click", function (e) {
-    fetcherPost("/folder/del", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&_token=" + token })
+    makeRequest("/folder/del", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&_token=" + token })
   }));
 
 // Recommend a post
 postRecommend.forEach(el => el.addEventListener("click", function (e) {
-    fetcherPost("/post/recommend", options = { body: "post_id=" + el.dataset.id + "&_token=" + token })
+    makeRequest("/post/recommend", options = { body: "post_id=" + el.dataset.id + "&_token=" + token })
   }));
   
 // Deleting / restoring content
 typeAction.forEach(el => el.addEventListener("click", function (e) {
-    fetcherPost("/status/action", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
+    makeRequest("/status/action", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
   }));
 
 // Profile Cover Color
