@@ -27,7 +27,7 @@
   </div>
 </main>
 <aside>
-  <div class="box sticky top-sm text-sm">
+  <div class="box sticky top-sm bg-beige">
     <?php foreach ($data['pages'] as $ind => $row) : ?>
       <div class=" pt5 pb5">
         <a class="gray" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">

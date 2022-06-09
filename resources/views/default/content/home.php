@@ -1,15 +1,8 @@
 <main>
-  <div class="box-flex justify-between">
+  <div class="flex justify-between mb20">
     <ul class="nav">
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
-
-    <div class="relative">
-      <div class="trigger">
-        <i class="bi-info-square gray-600"></i>
-      </div>
-      <div class="dropdown tooltip"><?= __('meta-main.' . $data['sheet'] . '_info'); ?></div>
-    </div>
   </div>
 
   <?= insert('/content/post/post', ['data' => $data]); ?>
@@ -29,7 +22,7 @@
   <?php endif; ?>
 
   <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) : ?>
-    <div class="box">
+    <div class="box bg-lightgray">
       <h3 class="uppercase-box"><?= __('app.reading'); ?></h3>
       <ul>
         <?php
@@ -77,7 +70,7 @@
 
   <?php if (is_array($data['topics'])) : ?>
     <?php if (count($data['topics']) > 0) : ?>
-      <div class="box">
+      <div class="box bg-lightgray">
         <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
         <?php foreach ($data['topics'] as $key => $recomm) : ?>
           <a class="flex items-center relative pb10 gray-600" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">

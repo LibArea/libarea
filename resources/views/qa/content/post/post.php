@@ -42,7 +42,7 @@ use Hleb\Constructor\Handlers\Request; ?>
         <div class="flex flex-row flex-auto items-center justify-between lowercase">
           <div class="flex-auto">
             <?= Html::facets($post['facet_list'], 'blog', 'blog', 'gray text-xs mr15'); ?>
-            <?= Html::facets($post['facet_list'], 'topic', 'topic', 'tags-xs'); ?>
+            <?= Html::facets($post['facet_list'], 'topic', 'topic', 'tag-grey'); ?>
             <?php if ($post['post_url_domain']) : ?>
               <a class="gray-600 text-sm ml10" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>

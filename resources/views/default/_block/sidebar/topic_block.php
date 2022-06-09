@@ -1,4 +1,4 @@
-<div class="box text-sm">
+<div class="box bg-lightgray text-sm">
   <h3 class="uppercase-box"><?= __('app.' . $lang); ?></h3>
   <ul>
     <?php foreach ($data as $sub) : ?>

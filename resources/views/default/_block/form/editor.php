@@ -4,7 +4,7 @@
 
 <div id="editor"></div>
 <script nonce="<?= $_SERVER['nonce']; ?>">
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     let content = '';
     const easyMDE = new EasyMDE({
       autoDownloadFontAwesome: false,
@@ -16,24 +16,24 @@ document.addEventListener('DOMContentLoaded', function() {
       previewImagesInEditor: true,
       uploadImage: true,
       spellChecker: false,
-      <?php  if (!empty($autosave)) : ?>
+      <?php if (!empty($autosave)) : ?>
         autosave: {
-            enabled: true,
-            uniqueId: '<?= $autosave; ?>',
-            delay: 1000,
-            submit_delay: 5000,
-            text: "&nbsp;"
+          enabled: true,
+          uniqueId: '<?= $autosave; ?>',
+          delay: 1000,
+          submit_delay: 5000,
+          text: "&nbsp;"
         },
-      <?php endif; ?>  
+      <?php endif; ?>
       imageTexts: {
         sbInit: '<?= __('app.attach_files'); ?>',
         sbOnDragEnter: '<?= __('app.drop_image'); ?>',
       },
 
       toolbar: [
-        <?php 
-          $conf_editor = config('editor/buttons');
-          if (!empty($message)) $conf_editor = config('editor/message');
+        <?php
+        $conf_editor = config('editor/buttons');
+        if (!empty($message)) $conf_editor = config('editor/message');
         ?>
         <?php foreach ($conf_editor as $row) : ?>
           <?php if (!empty($row['separator']) == 'separator') : ?> '|',

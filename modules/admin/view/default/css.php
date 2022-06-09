@@ -8,10 +8,10 @@
 ); ?>
 <div class="box bg-white">
   <h4><?= __('admin.topics'); ?>:</h4>
-  <a href="#" class="tags">.tags</a>
-  <a href="#" class="tags-xs">.tags-xs</a>
-  <a href="#" class="tags-xs-yellow">.tags-yellow</a>
-  <a href="#" class="tags-xs-yellow tags-xs-blue">.tags-xs-yellow .tags-xs-blue</a>
+  <a href="#" class="tag">.tag</a>
+  <a href="#" class="tag-grey">.tag-grey</a>
+  <a href="#" class="tag-yellow">.tag-yellow</a>
+  <a href="#" class="tag-violet">.tag-violet</a>
 
   <h4 class="mt15"><?= __('admin.buttons'); ?>:</h4>
   <p><i class="btn btn-outline-primary">btn btn-outline-primary</i></p>

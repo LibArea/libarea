@@ -45,7 +45,7 @@ class LoginController extends Controller
             (new \App\Controllers\Auth\RememberController())->rememberMe($user['id']);
         }
 
-        (new \App\Controllers\Auth\SessionController())->set($user);
+        (new \App\Controllers\Auth\SessionController())->set($user['id']);
 
         (new \App\Controllers\AgentController())->set($user['id']);
 

@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="box">
+  <div class="box bg-lightgray">
     <h3 class="uppercase-box"><?= __('app.contacts'); ?></h3>
     <?php foreach (config('user-profile') as $block) : ?>
       <?php if ($profile[$block['title']]) : ?>
@@ -40,7 +40,7 @@
   </div>
 
   <?php if ($data['blogs']) : ?>
-    <div class="box">
+    <div class="box bg-lightgray">
       <h3 class="uppercase-box"><?= __('app.created_by'); ?></h3>
       <?php foreach ($data['blogs'] as $blog) : ?>
         <div class="w-100 mb-w100 mb15 flex flex-row">
@@ -70,7 +70,7 @@
 
   <?php if ($profile['my_post'] != 0) : ?>
     <?php $post = $data['post']; ?>
-    <div class="box">
+    <div class="box bg-lightgray">
       <h3 class="uppercase-box"><?= __('app.selected_post'); ?></h3>
       <div class="mt5">
         <a href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
@@ -99,7 +99,7 @@
   <?php endif; ?>
 
   <?php if ($data['topics']) : ?>
-    <div class="box">
+    <div class="box bg-lightgray">
       <h3 class="uppercase-box"><?= __('app.is_reading'); ?></h3>
       <?php foreach ($data['topics'] as  $topic) : ?>
         <div class="mt5 mb5">
@@ -113,7 +113,7 @@
   <?php endif; ?>
 
   <?php if (!empty($data['participation'][0]['facet_id'])) : ?>
-    <div class="box">
+    <div class="box bg-lightgray">
       <h3 class="uppercase-box"><?= __('app.understands'); ?></h3>
       <?php foreach ($data['participation'] as $part) : ?>
         <a class="tags" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
@@ -123,7 +123,7 @@
     </div>
   <?php endif; ?>
 
-  <div class="box">
+  <div class="box bg-lightgray">
     <h3 class="uppercase-box"><?= __('app.badges'); ?></h3>
     <div class="m0 text-3xl">
       <i title="<?= __('app.medal_reg'); ?>" class="bi-gift sky"></i>
@@ -137,7 +137,7 @@
   </div>
 
   <?php if (UserData::checkAdmin()) : ?>
-    <div class="box">
+    <div class="box bg-lightgray">
       <h3 class="uppercase-box"><?= __('app.admin'); ?></h3>
       <div class="mt5">
         <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) : ?>

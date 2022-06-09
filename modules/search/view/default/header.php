@@ -16,21 +16,18 @@ $q = $data['q'];
         <?= __('search.name'); ?>
       </a>
       <div class="page-search-right mb-ml0">
-        <div data-template="one" id="find tippy">
+        <div data-template="one" class="flex justify-between" id="find tippy">
 
-          <a class="tabs black mr15" href="/">
-            <i class="bi-house"></i>
-            <?= __('search.to_website'); ?>
-          </a>
-
-          <a class="tabs<?php if ($uri == 'post') : ?> active<?php endif; ?>" href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=post">
-            <?= __('search.posts'); ?>
-          </a>
-
-          <a class="tabs<?php if ($uri == 'website') : ?> active<?php endif; ?>" href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=website">
-            <?= __('search.websites'); ?>
-          </a>
-
+          <ul class="nav inline">
+          <li><a href="/"><i class="bi-house"></i> <?= __('search.to_website'); ?></a></li>
+         <li<?php if ($uri == 'post') : ?> class="active"<?php endif; ?>>
+           <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=post"><?= __('search.posts'); ?></a>
+         </li>
+         <li<?php if ($uri == 'website') : ?> class="active"<?php endif; ?>>
+           <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=website"><?= __('search.websites'); ?></a>
+         </li>
+          </ul>
+          
           <div class="flex right gap-max items-center">
             <div id="toggledark" class="header-menu-item mb-none only-icon">
               <i class="bi-brightness-high gray-600 text-xl"></i>

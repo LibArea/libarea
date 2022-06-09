@@ -1,7 +1,7 @@
 <?php if (!empty($data['folders'])) { ?>
   <div class="mb15">
     <?php foreach ($data['folders'] as $tag) { ?>
-      <a class="tags-xs" href="<?= url('favorites.folder.id', ['id' => $tag['id']]); ?>"><?= $tag['value']; ?></a>
+      <a class="tag-grey" href="<?= url('favorites.folder.id', ['id' => $tag['id']]); ?>"><?= $tag['value']; ?></a>
       <sup class="del-folder gray-600 mr15" data-id="<?= $tag['id']; ?>" data-type="favorite">x</sup>
     <?php } ?>
   </div>

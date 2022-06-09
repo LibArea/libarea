@@ -1,5 +1,5 @@
 <main>
-  <div class="box-flex justify-between">
+  <div class="flex justify-between mb20">
     <ul class="nav">
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.answers')]); ?>
     </ul>
@@ -10,7 +10,7 @@
   </div>
 
   <?php if (!empty($data['answers'])) : ?>
-    <div class="box">
+    <div class="mb15">
       <?= insert('/content/answer/answer', ['data' => $data]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/answers'); ?>
@@ -19,7 +19,7 @@
   <?php endif; ?>
 </main>
 <aside>
-  <div class="box text-sm sticky top-sm">
+  <div class="box bg-beige sticky top-sm">
     <?= __('meta.answers_desc'); ?>
   </div>
 </aside>

@@ -13,5 +13,9 @@ return [
     // Test template to test custom layout creation
     // Тестовый шаблон для проверки создания произвольного макета
     'test'      => HLEB_GLOBAL_DIRECTORY . '/resources/views/test/scss/',
+    
+    // Design Template
+    // Шаблон для разработки
+    'la'      => HLEB_GLOBAL_DIRECTORY . '/resources/views/la/scss/',
 
 ];

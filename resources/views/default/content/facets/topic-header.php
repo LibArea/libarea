@@ -1,5 +1,5 @@
-<div class="box-flex">
-  <?= Html::image($topic['facet_img'], $topic['facet_title'], 'w94 br-gray mr15', 'logo', 'max'); ?>
+<div class="flex box br-gray">
+  <?= Html::image($topic['facet_img'], $topic['facet_title'], 'w94 mr15', 'logo', 'max'); ?>
   <div class="flex-auto">
     <h1 class="text-2xl">
       <?= $topic['facet_seo_title']; ?>
@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div class="box-flex justify-between">
+<div class="flex justify-between mb20">
   <ul class="nav">
 
     <?= insert(
@@ -33,17 +33,14 @@
             'id'      => 'facet.feed',
             'url'     => url('topic', ['slug' => $topic['facet_slug']]),
             'title'   => __('app.feed'),
-            'icon'    => 'bi-sort-down mb-none'
           ], [
             'id'      => 'facet.recommend',
             'url'     => url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
             'title'   => __('app.recommended'),
-            'icon'    => 'bi-lightning mb-none'
           ], [
             'id'      => 'writers',
             'url'     => url('topic.writers', ['slug' => $topic['facet_slug']]),
             'title'   => __('app.writers'),
-            'icon'    => 'bi-award mb-none'
           ]
         ]
       ]

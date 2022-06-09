@@ -14,7 +14,7 @@
 </main>
 <aside>
   <?php if ($topic['facet_is_deleted'] == 0) : ?>
-    <div class="box-flex justify-between">
+    <div class="box-flex bg-beige justify-between">
       <div class="center">
         <div class="uppercase text-sm gray-600"><?= __('app.posts'); ?></div>
         <?= $topic['facet_count']; ?>
@@ -30,7 +30,7 @@
 
     <?php if (!empty($data['pages'])) : ?>
       <div class="sticky top0 top-sm">
-        <div class="box text-sm">
+        <div class="box bg-lightgray text-sm">
           <h3 class="uppercase-box"><?= __('app.pages'); ?></h3>
           <?php foreach ($data['pages'] as $ind => $row) : ?>
             <a class="flex pb10 items-center gray-600" href="">
@@ -44,7 +44,7 @@
     <?= insert('/_block/sidebar/topic', ['data' => $data]); ?>
     <?php if (!empty($data['writers'])) : ?>
       <div class="sticky top0 top-sm">
-        <div class="box text-sm">
+        <div class="box bg-lightgray text-sm">
           <h3 class="uppercase-box"><?= __('app.writers'); ?></h3>
           <ul>
             <?php foreach ($data['writers'] as $ind => $row) : ?>

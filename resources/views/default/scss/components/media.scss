@@ -7,12 +7,6 @@
 main { flex: 1; }
 
 @media (max-width: 1050px) {
-  .home-img,
-  img.thumb {
-    width: 160px;
-    height: auto;
-  }
-
   iframe {
     max-width: 270px;
     max-height: 170px;
@@ -79,8 +73,7 @@ main { flex: 1; }
     padding-right: 0.25rem;
   }
 
-  .mb-w-100,
-  .home-img { width: 100%; }
+  .mb-w-100 { width: 100%; }
 
   aside,
   .mb-none,

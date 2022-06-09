@@ -55,7 +55,7 @@
 </main>
 
 <aside>
-  <div class="box text-sm">
+  <div class="box bg-beige">
     <h3 class="uppercase-box"><?= __('app.dialogues'); ?></h3>
     <?php foreach ($data['dialog'] as $key => $val) : ?>
       <?php if ($val['id'] != UserData::getUserId()) : ?>

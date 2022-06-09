@@ -22,8 +22,8 @@
               <?= insert('/content/post/post-title', ['post' => $post]); ?>
             </h3>
           </a>
-          <?= Html::facets($post['facet_list'], 'blog', 'blog', 'tags-xs-yellow tags-xs-blue ml15'); ?>
-          <?= Html::facets($post['facet_list'], 'topic', 'topic', 'tags-xs-yellow ml15'); ?>
+          <?= Html::facets($post['facet_list'], 'blog', 'blog', 'tag'); ?>
+          <?= Html::facets($post['facet_list'], 'topic', 'topic', 'tag-yellow'); ?>
         </div>
         <div class="flex text-sm mt3">
           <a class="items-center gray-600 mr10" href="<?= url('profile', ['login' => $post['login']]); ?>">

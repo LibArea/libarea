@@ -6,7 +6,7 @@
 
 #contentWrapper {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
   margin: 0 auto;
 }
 
@@ -37,6 +37,16 @@ h5 {
 }
 
 .medium-zoom--opened .d-header,
+
+.banner {
+  background-color: #fff4e8;
+  text-align: center;
+  border-radius: 5px;
+  padding: 1.25rem;
+  margin-top: -1rem;
+  margin-bottom: 1.25rem;
+  color: #333;
+}
 
 .wrap {
   margin: 0 auto;
@@ -76,7 +86,7 @@ h5 {
 .box-search {
   position: relative;
   width: 100%;
-  margin: 0 45px 0 80px;
+  margin: 0 45px 0 97px;
 }
 
 .d-header.show .d-header-post.none,
@@ -115,19 +125,8 @@ h5 {
   color: var(--gray-700);
 }
 
-.tabs {
-  padding: 3px 6px 3px 6px;
-  margin-right: 15px;
-}
-
-.tabs.active {
-  background-color: var(--gray-100);
-  color: var(--gray-600);
-}
-
 aside {
-  min-width: 260px;
-  max-width: 310px;
+  flex-basis: 310px;
 }
 
 aside ul {
@@ -275,17 +274,7 @@ details[open] > summary {
   border-radius: 3px;
 }
 
-.body-bg-fon .box-flex,
-.body-bg-fon .box {
-  border: 1px solid var(--gray-300);
-  background-color: var(--white);
-}
-
-.body-bg-fon.dark .box-flex,
-.body-bg-fon.dark .box {
-  border: 1px solid #d0d0d0;
-  background-color: #d0d0d0;
-}
+.box-fon { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
 
 ul.last-content {
   list-style: none;
@@ -325,8 +314,7 @@ a:hover > img { opacity: 0.8; }
 }
 
 .content-body { max-width: 780px; }
-.body-bg-fon .box.bg-red-200 { background-color: var(--red-200); }
-.body-bg-fon .bg-blue-100 { background-color: var(--blue-100); }
+
 
 .content-body p img {
   max-width: 99%;
@@ -357,16 +345,6 @@ iframe {
   max-height: 320px;
 }
 
-.home-img,
-.thumb {
-  width: 260px;
-  height: 130px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.preview .home-img { display: none; }
-
 .box-answer {
   line-height: 1.3;
   padding: 5px;
@@ -388,23 +366,4 @@ iframe {
   color: var(--gray-600);
   vertical-align: middle;
   margin-left: 3px;
-}
-
-/* Этикетки */
-.label-grey {
-  font-style: italic;
-  text-transform: lowercase;
-  font-size: 0.875rem;
-  background-color: var(--violet);
-  color: var(--gray-600);
-  padding: 3px 10px;
-}
-
-.label-orange {
-  font-style: italic;
-  text-transform: lowercase;
-  font-size: 0.875rem;
-  background-color: #f9ddde;
-  color: var(--gray);
-  padding: 3px 10px;
 }

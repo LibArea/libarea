@@ -15,9 +15,4 @@ return [
     'feed_desc'            => 'Interest topics, feed, blogs. Conversations, questions and answers, interesting facts. Scripts CMS and social networks, Frameworks. Script {name}.',
     'top_desc'             => 'List of popular posts in the community feed (by number of replies). Topics by interest. Conversations, questions and answers, comments. Script {name}.',
     'all_desc'             => 'List of all posts in the community feed. Script {name}.',
- 
-    'feed_info'            => 'Posts in chronological order...',
-    'all_info'             => 'All posts in the community feed...',
-    'top_info'             => 'Recently active posts...',
-    'deleted_title'        => 'Deleted posts',
 ];

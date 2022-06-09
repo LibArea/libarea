@@ -8,14 +8,14 @@ use Validation;
 
 class SessionController extends MainController
 {
-    public static function set($user)
+    public static function set($user_id)
     {
-        $_SESSION['account'] = ['id' => (int) $user['id']];
+        $_SESSION['account'] = ['id' => (int) $user_id];
 
         return true;
     }
 
-    public static function annul($uid)
+    public static function annul($user_id)
     {
         if (!isset($_SESSION)) {
             session_start();
@@ -23,7 +23,7 @@ class SessionController extends MainController
 
         session_destroy();
 
-        AuthModel::deleteTokenByUserId($uid);
+        AuthModel::deleteTokenByUserId($user_id);
 
         Validation::comingBack(__('msg.account_verified'), 'success', '/');
     }

@@ -43,7 +43,7 @@
   <?php endif; ?>
 </main>
 <aside>
-  <div class="box text-sm sticky top-sm">
+  <div class="box bg-beige sticky top-sm">
     <?= __('help.messages_info'); ?>
   </div>
 </aside>

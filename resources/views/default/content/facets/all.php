@@ -1,14 +1,14 @@
 <?php $access = Access::trustLevels(config('trust-levels.tl_add_' . $data['type'])); ?>
 
 <main>
-  <div class="box center">
+  <div class="box bg-violet center">
     <h1 class="text-xl"><?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's'); ?></h1>
     <span class="gray-600">
       <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>.
     </span>
   </div>
 
-  <div class="box-flex justify-between">
+  <div class="flex justify-between mb20">
     <ul class="nav">
 
       <?= insert(
@@ -19,20 +19,17 @@
               'id'    => $data['type'] . '_all',
               'url'   => url($data['type'] . 's.all'),
               'title' => __('app.all'),
-              'icon'  => 'bi-app'
             ],
             [
               'id'    => $data['type'] . '_new',
               'url'   => url($data['type'] . 's.new'),
               'title' => __('app.new_ones'),
-              'icon'  => 'bi-sort-up'
             ],
             [
               'tl'    => 1,
               'id'    => $data['type'] . '_my',
               'url'   => url($data['type'] . 's.my'),
               'title' => __('app.reading'),
-              'icon'  => 'bi-check2-square'
             ],
           ]
         ]
@@ -52,7 +49,6 @@
     <?php endif; ?>
   </div>
 
-  <div class="box">
     <?php if (!empty($data['facets'])) : ?>
       <?php if ($data['type'] == 'blog') : ?>
         <?= insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
@@ -64,6 +60,6 @@
     <?php else : ?>
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'bi-info-lg']); ?>
     <?php endif; ?>
-  </div>
+
   <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url($data['type'] . 's.' . $data['sheet'])); ?>
 </main>

@@ -58,7 +58,7 @@
   </div>
 </main>
 <aside>
-  <div class="box text-sm">
+  <div class="box bg-beige">
     <?= __('help.avatar_info'); ?>
   </div>
 </aside>

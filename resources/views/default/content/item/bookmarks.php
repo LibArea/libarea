@@ -14,9 +14,9 @@
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>
   </main>
   <aside>
-    <div class="box bg-yellow text-sm mt15"><?= __('web.bookmarks'); ?>.</div>
+    <div class="box bg-beige mt15"><?= __('web.bookmarks'); ?>.</div>
     <?php if (UserData::checkActiveUser()) : ?>
-      <div class="box text-sm bg-violet mt15">
+      <div class="box text-sm bg-lightgray mt15">
         <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>
         <ul class="menu">
           <?= insert('/_block/navigation/item/menu', ['data' => $data]); ?>

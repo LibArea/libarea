@@ -2,11 +2,16 @@
 
 foreach ($list as $key => $item) :
   $tl = $item['tl'] ?? 0; ?>
-  <?php if (UserData::getRegType($tl)) :
-    $isActive = is_current($item['url']) ? ' aria-current="page" class="active" ' : ''; ?>
-
-    <li><a <?= $isActive; ?> href="<?= $item['url']; ?>">
-        <i class="text-sm <?= $item['icon']; ?>"></i>
+  <?php if (UserData::getRegType($tl)) : ?>
+    <?php if (is_current($item['url'])) : ?>
+     <li class="active">
+        <?php if (!empty($item['icon'])) : ?><i class="text-sm <?= $item['icon']; ?>"></i><?php endif; ?>
+        <?= $item['title']; ?>
+     </li>
+    <?php else : ?>
+      <li><a href="<?= $item['url']; ?>">
+        <?php if (!empty($item['icon'])) : ?><i class="text-sm <?= $item['icon']; ?>"></i><?php endif; ?>
         <?= $item['title']; ?></a></li>
+    <?php endif; ?>
   <?php endif; ?>
 <?php endforeach; ?>

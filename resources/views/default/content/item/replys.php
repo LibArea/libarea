@@ -3,7 +3,7 @@ $tl = UserData::getUserTl();
 $user_id = UserData::getUserId();
 function internalRender($nodes, $tl, $user_id)
 {
-    echo '<ul class="list-none-one mb20 mt10">';
+    echo '<ul class="list-none mb20 mt10">';
     foreach ($nodes as $node) {
         $minus = $node['reply_parent_id'] == 0 ? ' ml-40' : '';
         $delete = $node['reply_is_deleted'] == 1 ? ' bg-red-200' : '';

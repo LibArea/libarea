@@ -1,4 +1,4 @@
-<div class="box text-sm">
+<div class="box bg-lightgray text-sm">
   <h3 class="uppercase-box"><?= __('app.authorization'); ?></h3>
   <form class="max-w300" action="<?= url('enterLogin'); ?>" method="post">
     <?php csrf_field(); ?>

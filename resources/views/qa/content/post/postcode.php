@@ -1,1 +1,0 @@
-<div class="shown_post p5 bg-lightgray black"><?= $post['post_content']; ?></div>

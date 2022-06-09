@@ -7,7 +7,7 @@
 return [
     // The number of topics and blogs that the participant reads on the sidebar
     // Количество тем и блогов которые читает участник на боковой панели
-    'quantity_home' => 10,
+    'quantity_home' => 5,
 
     // Pages with information about the site (link in the footer of the site) 
     // The URL must match the SLUG of the posts attached to the Info facet

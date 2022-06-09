@@ -128,7 +128,7 @@ class Html
 
         if (UserData::getAccount()) {
             if ($content['votes_' . $type . '_user_id'] || UserData::getUserId() == $content[$type . '_user_id']) {
-                $html .= '<div class="voters sky flex gap-min ' . $block . ' center">
+                $html .= '<div class="voters active flex gap-min ' . $block . ' center">
                             <div class="up-id ' . $css . '"></div>
                             <div class="score">
                                 ' . $count . '
@@ -157,7 +157,7 @@ class Html
     {
         $html  = '';
         if (UserData::getAccount()) {
-            $blue = $tid ? 'sky' : 'gray-600';
+            $blue = $tid ? 'active' : 'gray-600';
             $my   = $tid ? 'bi-bookmark-dash' : 'bi-bookmark-plus';
             $html .= '<span id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . '"></i></span>';
         } else {

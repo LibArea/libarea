@@ -1,15 +1,14 @@
 /*
- * Drop-down menu and left nav
+ * Dropdown menu and navigation
  *
- * Выпадающее меню и навигация слева
+ * Выпадающее меню и навигация
  */
 
-.menu__left { min-width: 160px; }
+.menu__left { flex-basis: 180px; }
 .menuno .menu__left { display: none; }
 
 .dropdown,
 .menu,
-.nav,
 .breadcrumbs {
   list-style: none;
   margin: 0;
@@ -27,11 +26,53 @@
   position: absolute;
   right: 0;
   background-color: #fff;
-  box-shadow: 0 12px 12px rgba(0,0,0,0.15);
-  padding: 0 0 0 1rem;
+  box-shadow: 0 6px 18px 0 rgba(14,21,47,.13),0 -2px 6px rgba(14,21,47,.03);
+  padding: 0.5rem;
   z-index: 5;
-  min-width: 180px;
+  min-width: 210px;
 }
+
+/* right user menu */
+.dropdown.user {
+  top: 0;
+  padding: 1rem 0 0.7rem 0;
+}
+
+.right-close {
+  color: #666;
+  padding: 3px 8px 0 0;
+  margin-top: -20px;
+  float: right;
+  display: block;
+}
+
+.user-box {
+  padding: 0 0 0.7rem 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.975rem;
+}
+
+.user-box-nav {
+  list-style: none;
+  font-size: 0.875rem;
+  margin: 0;
+  padding: 0;
+}
+
+.user-box-nav li a {
+  margin-left: 56px;
+  font-weight: 500;
+}
+
+.user-box-nav li:hover {
+  background-color: var(--gray-100);
+  color: #222;
+}
+
+.user-box-nav li:hover > a { color: #222; }
+/* end */
+
 
 .dropdown.left {
   left: 0;
@@ -47,24 +88,10 @@
   align-items: center;
 }
 
-.nav { display: flex; }
-
-.nav a {
-  padding-right: 20px;
-  color: var(--gray);
-}
-
-.nav a i { margin-right: 4px; }
-
 .active,
-a.active,
-a.active > i,
-.nav a:hover,
-.menu a:hover,
-.menu a:hover > i,
-.nav a:hover > i,
-.dropdown a:hover,
-.dropdown a:hover > i { color: #0ea5e9; }
+li.active > a,
+li > a:hover,
+li > a:hover > i { color: #0ea5e9; }
 
 .breadcrumbs li {
   display: inline;
@@ -74,3 +101,27 @@ a.active > i,
 .breadcrumbs li:not(:last-child):after {
   content: " / ";
 }
+
+/* Navigation */
+ul.nav {
+  list-style: none;
+  align-items: center;
+  display: flex;
+  gap: 0.7rem;
+  font-size: 0.95rem;
+  margin: 0;
+  padding: 0;
+}
+
+ul.nav > li { padding: 4px 12px 5px 12px; }
+
+ul.nav > li > a { color: rgba(0, 0, 0, 0.5); }
+
+ul.nav > li.active {
+  background: #fff4e8;
+  color: #222;
+}
+
+ul.nav > li.active > a { color: #000; }
+ul.nav > li a:hover { color: #0ea5e9; }
+ul.nav > li.active a:hover { color: #000; }

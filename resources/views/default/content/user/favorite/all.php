@@ -4,14 +4,14 @@
   <?php if (!empty($data['tags'])) : ?>
     <div class="mb15">
       <?php foreach ($data['tags'] as $tag) : ?>
-        <a class="tags-xs" href="<?= url('favorites.folder.id', ['id' => $tag['id']]); ?>"><?= $tag['value']; ?></a>
+        <a class="tag-grey" href="<?= url('favorites.folder.id', ['id' => $tag['id']]); ?>"><?= $tag['value']; ?></a>
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
 
   <?php if (!empty($data['favorites'])) : ?>
     <?php foreach ($data['favorites'] as $fav) : ?>
-      <div class="box relative">
+      <div class="box bg-lightgray relative">
         <div class="left gray-600 mr5"> <?= __('app.' . $fav['action_type']); ?>:</div>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
@@ -61,7 +61,7 @@
 
         <?php if ($fav['tag_id']) : ?>
           <div>
-            <a class="tags-xs mr15" href="<?= url('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">
+            <a class="tag-grey mr15" href="<?= url('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">
               <?= $fav['tag_title']; ?>
             </a>
             <sup class="del-folder-content gray-600" data-tid="<?= $fav['tid']; ?>" data-type="favorite">x</sup>

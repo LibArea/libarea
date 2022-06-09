@@ -11,7 +11,7 @@
   </div>
 </main>
 <aside>
-  <div class="box">
+  <div class="box bg-beige">
     <h3 class="uppercase-box"><?= __('app.help'); ?></h3>
     <?= __('help.edit_' . $post['post_type']); ?>
   </div>

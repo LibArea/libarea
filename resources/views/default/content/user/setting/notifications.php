@@ -10,7 +10,7 @@
 </main>
 
 <aside>
-  <div class="box text-sm">
+  <div class="box bg-beige">
     <?= __('help.notification_info'); ?>
   </div>
 </aside>

@@ -82,9 +82,9 @@ class UploadImage
         $image = new SimpleImage();
 
         $width_h  = getimagesize($file);
-        if ($width_h[0] > 850) {
+        if ($width_h[0] > 950) {
             $image->load($file);
-            $image->resizeToWidth(850);
+            $image->resizeToWidth(950);
             $image->save($path_img . $year . $month . $filename . '.jpeg', "jpeg");
                 
         } else {
@@ -184,7 +184,7 @@ class UploadImage
 
         $image = new SimpleImage();
         $image->load($file);
-        $image->resizeToWidth(850);
+        $image->resizeToWidth(950);
         $image->save($path . $year . $filename . '.webp', "webp");
         
         $post_img = $year . $filename . '.webp';
@@ -237,7 +237,7 @@ class UploadImage
 
             $image = new SimpleImage();
             $image->load($local);
-            $image->resizeToWidth(260);
+            $image->resizeToWidth(960);
             $image->save($path . $year . $filename . '.webp', "webp");
             
             if (file_exists($local)) {

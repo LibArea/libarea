@@ -8,9 +8,9 @@ foreach ($list as $key => $item) :
       </li><?php endif; ?>
   <?php else : ?>
     <?php if (UserData::getRegType($tl)) :
-      $isActive = $item['id'] == $type ? ' aria-current="page" class="active" ' : ''; ?>
+      $isActive = $item['id'] == $type ? ' class="active" ' : ''; ?>
 
-      <li><a <?= $isActive; ?> href="<?= $item['url']; ?>">
+      <li<?= $isActive; ?>><a href="<?= $item['url']; ?>">
           <i class="<?= $item['icon']; ?>"></i>
           <?= $item['title']; ?></a></li>
     <?php endif; ?>

@@ -10,7 +10,7 @@
   </div>
 </main>
 <aside>
-  <div class="box">
+  <div class="box bg-beige">
     <h3 class="uppercase-box"><?= __('app.help'); ?></h3>
     <?= __('help.add_post'); ?>
   </div>

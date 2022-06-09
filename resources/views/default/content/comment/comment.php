@@ -19,7 +19,7 @@ foreach ($answer as  $comment) :
   <?php endif; ?>
 
   <?php if ($comment['comment_is_deleted'] == 0) : ?>
-    <ol class="p0 m0 mb15 list-none">
+    <ol class="list-none box box-fon">
       <li class="content_tree" id="comment_<?= $comment['comment_id']; ?>">
         <div class="max-w780">
           <div class="text-sm flex gap">

@@ -12,19 +12,15 @@
 
         <div class="flex flex-row items-center">
           <?php if (!empty($data['blog'])) : ?>
-            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
+            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="tag-violet" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
               <?= $data['blog'][0]['facet_title']; ?>
             </a>
           <?php endif; ?>
 
           <?php if (!empty($data['facets'])) : ?>
-            <div class="lowercase">
-              <?php foreach ($data['facets'] as $topic) : ?>
-                <a class="tags" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-                  <?= $topic['facet_title']; ?>
-                </a>
-              <?php endforeach; ?>
-            </div>
+            <?php foreach ($data['facets'] as $topic) : ?>
+              <a class="tag" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>"><?= $topic['facet_title']; ?></a>
+            <?php endforeach; ?>
           <?php endif; ?>
         </div>
 
@@ -213,7 +209,7 @@
 </main>
 <aside>
   <?php if (!empty($data['facets'])) : ?>
-    <div class="box">
+    <div class="box bg-lightgray">
       <h3 class="uppercase-box"><?= __('app.topics'); ?></h3>
       <?php foreach ($data['facets'] as $topic) : ?>
         <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
@@ -236,11 +232,11 @@
   <?php endif; ?>
 
   <?php if ($post['post_content_img']) : ?>
-    <div class="box">
+    <div class="box bg-lightgray">
       <img class="preview w-100 br-rd5" src="<?= PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php endif; ?>
-  <div class="center box">
+  <div class="center box bg-lightgray">
     <?= insert('/share'); ?>
   </div>
   <?php if ($data['recommend']) : ?>

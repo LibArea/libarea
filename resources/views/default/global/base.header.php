@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?04');
+Request::getHead()->addStyles('/assets/css/style.css?01');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;
 $post   = $data['post'] ?? false;
@@ -10,7 +10,7 @@ $post   = $data['post'] ?? false;
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
-<body class="body-bg-fon<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if (Request::getCookie('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
+<body class="general<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if (Request::getCookie('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
   <header class="d-header<?php if($post || $facet) : ?> choices<?php endif; ?>">
 
     <div class="wrap">
@@ -90,9 +90,9 @@ $post   = $data['post'] ?? false;
               <div class="trigger">
                 <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mb-pr0', 'avatar', 'small'); ?>
               </div>
-              <ul class="dropdown">
-                <?= insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
-              </ul>
+              <div class="dropdown user">
+                <?= insert('/_block/navigation/menu-user', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
+              </div>
             </div>
           </div>
         <?php endif; ?>
@@ -101,7 +101,7 @@ $post   = $data['post'] ?? false;
     </div>
   </header>
   <?php if (!UserData::checkActiveUser() && $type == 'main') : ?>
-    <div class="box mb-none center">
+    <div class="banner mb-none">
       <h1><?= config('meta.banner_title'); ?></h1>
       <p><?= config('meta.banner_desc'); ?>...</p>
     </div>

@@ -4,50 +4,65 @@
  * Теги (фасеты)
  */
 
-.tags {
-  padding: 0.15rem 0.35rem;
-  font-size: 0.775rem;
-  color: #0ea5e9;
-  background-color: #dbeafe;
-  border-radius: 5px;
-  display: inline-block;
-}
-
-.tags:hover {
-  color: #fff;
-  background-color: #5fb878;
-}
-
-.tags-xs {
-  margin-right: 5px;
-  padding: 2px 6px 2px 6px;
-  border-bottom: 1px solid #bbbbbb;
-  background-color: #ececec;
-  color: #6b3e4a;
+.tag,
+.tag-grey,
+.tag-yellow,
+.tag-violet {
+  font-size: 0.9rem;
   border-radius: 3px;
-  font-size: 0.75rem;
-}
-
-.tags-xs:hover {
-  color: #444;
-  background-color: #fff;
-}
-
-.tags-xs-yellow {
-  background-color: #fffcd7;
-  border: 1px solid #d5d458;
-  border-radius: 5px;
-  color: #333333;
-  font-size: 8pt;
   margin-left: 0.25em;
-  padding: 0px 0.4em 1px 0.4em;
+  padding: 0.08rem 0.35rem 0.15rem 0.35rem;
+  text-transform: lowercase;
   text-decoration: none;
 }
 
-.tags-xs-blue {
+.tag {
   background-color: #ddebf9;
-  border-color: #b2ccf0;
-  color: #333333;
+  color: #4596de;
+}
+
+.tag:hover {
+  background-color: #5fb878;
+  color: #fff;
+}
+
+.tag-grey {
+  background-color: #ececec;
+  color: #6b3e4a;
+}
+
+.tag-grey:hover {
+  background-color: #fff;
+  color: #444;
+}
+
+.tag-yellow {
+  background-color: #fffcd7;
+  color: #7b5d5d;
+}
+
+.tag-violet {
+  background-color: var(--violet);
+  color: #544e4e;
+}
+
+/* Этикетки */
+.label-grey {
+  font-style: italic;
+  text-transform: lowercase;
+  font-size: 0.875rem;
+  background-color: var(--violet);
+  color: var(--gray-600);
+  padding: 3px 10px;
+}
+
+.label-orange {
+  font-style: italic;
+  text-transform: lowercase;
+  font-size: 0.875rem;
+  background-color: #f9ddde;
+  color: var(--gray);
+  padding: 3px 10px;
 }
 
 /* Для tagify */

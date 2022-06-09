@@ -50,8 +50,6 @@ body {
   margin: 0;
 }
 
-.body-bg-fon { background-color: var(--gray-100); }
-
 body.dark {
   filter: invert(100%) hue-rotate(180deg);
   background-color: #222;
@@ -69,7 +67,7 @@ a {
 a:hover,
 a:focus,
 a:active {
-  color: #1e70bf;
+  color: #f00;
 }
 
 img {
@@ -266,5 +264,5 @@ img {
 .block { display: block; }
 .table { display: table; }
 .inline { display: inline-block; }
-.list-none-one { list-style: none; }
+.list-none { list-style: none; }
 .break-all { word-break:break-all; }

@@ -10,9 +10,9 @@
     <?php endforeach; ?>
     <?php if ($n > 5) : ?><span class="ml10">...</span><?php endif; ?>
     <?php if (!empty($topic_focus_count)) : ?>
-    <span class="focus-user ml10 sky">
-      <?= $topic_focus_count; ?>
-    </span>
+      <span class="focus-user ml10 sky">
+        <?= $topic_focus_count; ?>
+      </span>
     <?php endif; ?>
   </span>
 <?php endif; ?>

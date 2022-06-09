@@ -7,7 +7,7 @@ foreach ($data['answers'] as $answer) :
   <?php if ($answer['answer_is_deleted'] == 0) : ?>
     <?php if ($n != 1) : ?><div class="br-top-dotted mt10 mb10"></div><?php endif; ?>
     <ol class="list-none">
-      <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
+      <li class="content_tree box box-fon" id="answer_<?= $answer['answer_id']; ?>">
         <div class="content-body">
           <div class="flex text-sm gap">
             <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">

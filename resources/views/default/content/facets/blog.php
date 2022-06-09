@@ -31,7 +31,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
       </main>
       <aside>
         <?php if ($blog['facet_is_deleted'] == 0) : ?>
-          <div class="box text-sm">
+          <div class="box bg-beige">
             <h3 class="uppercase-box"><?= __('app.created_by'); ?></h3>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= url('profile', ['login' => $data['user']['login']]); ?>">
               <?= Html::image($data['user']['avatar'], $data['user']['login'], 'img-base', 'avatar', 'small'); ?>
@@ -50,7 +50,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
             </div>
           </div>
           <?php if ($data['info']) : ?>
-            <div class="box text-sm shown_post">
+            <div class="box bg-lightgray shown_post">
               <?= $data['info']; ?>
             </div>
           <?php endif; ?>

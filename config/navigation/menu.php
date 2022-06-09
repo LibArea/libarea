@@ -66,42 +66,31 @@ return [
     // Правое выпадающее меню в шапке сайта
     'user' => [
         [
-            'url'   => '/@' . $login,
-            'title' => __('app.profile'),
-            'icon'  => 'bi-person',
-            'id'    => '',
-        ], [
             'url'   => url('setting'),
             'title' => __('app.settings'),
-            'icon'  => 'bi-gear',
             'id'    => '',
         ], [
             'tl'    => 2,
             'url'   => url('drafts'),
             'title' => __('app.drafts'),
-            'icon'  => 'bi-pencil-square',
             'id'    => '',
         ], [
             'url'   => url('notifications'),
             'title' => __('app.notifications'),
-            'icon'  => 'bi-app-indicator',
             'id'    => '',
         ], [
             'tl'    => 2,
             'url'   => url('messages'),
             'title' => __('app.messages'),
-            'icon'  => 'bi-envelope',
             'id'    => '',
         ], [
             'url'   => url('favorites'),
             'title' => __('app.favorites'),
-            'icon'  => 'bi-bookmark',
             'id'    => '',
         ], [
             'tl'    => 2,
             'url'   => url('invitations'),
             'title' => __('app.invites'),
-            'icon'  => 'bi-person-plus',
             'id'    => '',
         ], [
             'hr'    => 'hr',
@@ -109,12 +98,10 @@ return [
             'tl'    => UserData::REGISTERED_ADMIN,
             'url'   => url('admin'),
             'title' => __('app.admin'),
-            'icon'  => 'bi-shield-exclamation',
             'id'    => '',
         ], [
             'url'   => url('logout'),
             'title' => __('app.sign_out'),
-            'icon'  => 'bi-box-arrow-right',
             'id'    => '',
         ],
     ],

@@ -64,7 +64,7 @@
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>
   </main>
   <aside>
-    <div class="box bg-yellow text-sm mt15"><?= __('web.my_website_info'); ?>.</div>
+    <div class="box bg-lightgray text-sm mt15"><?= __('web.my_website_info'); ?>.</div>
     <?php if (UserData::checkActiveUser()) : ?>
       <div class="box text-sm bg-violet mt15">
         <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>
