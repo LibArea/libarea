@@ -20,7 +20,7 @@
         </div>
         <div class="w-60">
           <?= Content::text($item['item_content'], 'text'); ?>
-          
+
           <a class="gree block" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
             <?= Html::websiteImage($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
             <?= $item['item_url']; ?>

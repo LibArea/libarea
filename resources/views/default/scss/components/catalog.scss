@@ -22,10 +22,12 @@
 
 .list-items li {
   position: relative;
-  display: flex;
-  box-sizing: border-box;
   width: 100%;
   margin-bottom: 28px
+}
+
+.list-items li .content {
+  display: flex;
 }
 
 .list-items__thumb {
@@ -35,6 +37,7 @@
 
 .list-items__description {
   color: var(--gray-600);
+  margin-top: 5px;
   width: 100%;
 }
 

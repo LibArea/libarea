@@ -13,7 +13,6 @@ return [
     'catalog'           => 'Catalog',
     'feed'              => 'Feed',
     'test'              => 'Testing',
-    'la'                => 'Development (La)',
     'hi'                => 'Hey',
     'news'              => 'News',
     'team'              => 'Team',

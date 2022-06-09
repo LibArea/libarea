@@ -8,7 +8,6 @@
     <?php if (!empty($data['items'])) : ?>
       <ol class="list-items">
         <?php foreach ($data['items'] as $key => $item) : ?>
-
           <li>
             <div class="list-items__thumb mb-none">
               <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'list-items__thumb-image'); ?>
