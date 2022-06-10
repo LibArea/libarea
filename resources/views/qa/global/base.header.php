@@ -62,7 +62,7 @@ $facet  = $data['facet'] ?? false; ?>
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
 
-            <a class="gray-600 p10 text-xl" href="<?= url('notifications'); ?>">
+            <a class="gray-600 p15 text-xl" href="<?= url('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
               <?php if (!empty($notif)) : ?>
                 <?php if ($notif['action_type'] == 1) : ?>
@@ -79,8 +79,8 @@ $facet  = $data['facet'] ?? false; ?>
               <div class="trigger">
                 <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mb-pr0', 'avatar', 'small'); ?>
               </div>
-              <ul class="dropdown">
-                <?= insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
+              <ul class="dropdown user">
+                <?= insert('/_block/navigation/menu-user', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
               </ul>
             </div>
 

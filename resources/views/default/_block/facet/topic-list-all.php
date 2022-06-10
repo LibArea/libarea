@@ -21,7 +21,7 @@
         <i class="bi-mic sky text-sm"></i>
       <?php endif; ?>
       <div class="mt10 gray">
-        <?= $facet['facet_short_description']; ?>
+        <?= Html::fragment(Content::text($facet['facet_short_description'], 'line'), 32); ?>
         <span class="right gray-600">
           <i class="bi-journal mr5"></i>
           <?= $facet['facet_count']; ?>

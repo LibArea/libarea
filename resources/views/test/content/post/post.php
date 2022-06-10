@@ -18,7 +18,7 @@
             </div>
           <?php endif; ?>
           <a href="<?= $post_url; ?>">
-            <h3 class=""><?= $post['post_title']; ?>
+            <h3 class="inline"><?= $post['post_title']; ?>
               <?= insert('/content/post/post-title', ['post' => $post]); ?>
             </h3>
           </a>

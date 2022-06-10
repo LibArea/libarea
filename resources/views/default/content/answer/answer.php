@@ -78,7 +78,7 @@ foreach ($data['answers'] as $answer) :
         </li>
       </ol>
     <?php else : ?>
-      <div class="gray-600 p10 text-sm">
+      <div class="gray-600 p15 text-sm">
         ~ <?= __('app.content_deleted', ['name' => __('app.comment')]); ?>...
       </div>
     <?php endif; ?>

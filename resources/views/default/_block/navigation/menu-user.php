@@ -1,7 +1,7 @@
 <?php $user = UserData::get(); ?>
 <span class="right-close">x</span>
 <div class="user-box">
-  <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mb-pr0', 'avatar', 'small'); ?>
+  <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mt5 mr5', 'avatar', 'small'); ?>
   <div>
     <a class="gray" href="/@<?= $user['login']; ?>"><?= $user['login']; ?> </a>
     <div class="text-xs gray-600"><?= $user['email']; ?></div>

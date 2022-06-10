@@ -87,13 +87,13 @@
         <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
       </div>
 
-      <div class="br-gray p10 items-center flex justify-between mb5">
+      <div class="br-gray p15 items-center flex justify-between mb5">
         <div class="items-center flex">
           <div class="left m10 none mb-block mb-mr5">
             <?= Html::votes($post, 'post', 'mob', 'bi-heart text-2xl mr5 middle'); ?>
           </div>
 
-          <ul class="list-none flex p15 gap lowercase">
+          <ul class="list-none flex gap lowercase">
             <li class="center">
               <div class="text-sm gray-600 mb5">
                 <?= __('app.created_by'); ?>

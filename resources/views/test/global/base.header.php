@@ -65,8 +65,8 @@ $facet  = $data['facet'] ?? false; ?>
             <div class="trigger">
               <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mb-pr0', 'avatar', 'small'); ?>
             </div>
-            <ul class="dropdown">
-              <?= insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
+            <ul class="dropdown user">
+              <?= insert('/_block/navigation/menu-user', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
             </ul>
           </div>
         </div>

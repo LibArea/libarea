@@ -52,15 +52,7 @@
               <?= $blog['facet_title']; ?>
             </a>
             <div class="text-sm pr15 mb-pr0 gray-600">
-              <?= $blog['facet_short_description']; ?>
-              <div class="flex mt5 text-sm">
-                <i class="bi-journal mr5"></i>
-                <?= $blog['facet_count']; ?>
-                <?php if ($blog['facet_focus_count'] > 0) : ?>
-                  <i class="bi-people ml15 mr5"></i>
-                  <?= $blog['facet_focus_count']; ?>
-                <?php endif; ?>
-              </div>
+              <?= Html::fragment(Content::text($blog['facet_short_description'], 'line'), 68); ?>
             </div>
           </div>
         </div>
@@ -104,7 +96,7 @@
       <?php foreach ($data['topics'] as  $topic) : ?>
         <div class="mt5 mb5">
           <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-            <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'small'); ?>
+            <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'small'); ?>
             <span class="bar-name text-sm"><?= $topic['facet_title']; ?></span>
           </a>
         </div>

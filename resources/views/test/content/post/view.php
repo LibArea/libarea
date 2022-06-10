@@ -84,82 +84,80 @@
         <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
       </div>
 
-      <div class="br-gray flex items-center mb5">
-        <div class="left p10 block">
-          <?= Html::votes($post, 'post', 'ps', 'bi-arrow-up-short text-2xl mr5 middle'); ?>
-        </div>
+      <div class="br-gray p15 items-center flex justify-between mb5">
+        <div class="items-center flex">
+          <div class="left m10 mb-mr5">
+            <?= Html::votes($post, 'post', 'mob', 'bi-heart text-2xl mr5 middle'); ?>
+          </div>
 
-        <ul class="list-none w-100 lowercase">
-          <li class="left p10">
-            <div class="text-sm gray-600 mb5">
-              <?= __('app.created_by'); ?>
-            </div>
-            <div class="center">
+          <ul class="list-none flex gap lowercase">
+            <li class="center">
+              <div class="text-sm gray-600 mb5">
+                <?= __('app.created_by'); ?>
+              </div>
               <a title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
                 <?= Html::image($post['avatar'], $post['login'], 'img-base', 'avatar', 'small'); ?>
               </a>
-            </div>
-          </li>
-          <li class="left p10 mb-none">
-            <div class="text-sm gray-600 mb5">
-              <?= __('app.last_answer'); ?>
-            </div>
-            <div class="center">
-              <?php if (!empty($data['last_user']['answer_id'])) : ?>
-                <a title="<?= $data['last_user']['login']; ?>" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
-                  <?= Html::image($data['last_user']['avatar'], $data['last_user']['login'], 'img-base', 'avatar', 'small'); ?>
-                </a>
-              <?php else : ?>
-                <span class="gray-600 text-sm">—</span>
-              <?php endif; ?>
-            </div>
-          </li>
-          <li class="left p10 mb-none gray-600 text-2xl">
-            <div class="text-2xl center mb5">
-              <?php if ($post['post_hits_count'] == 0) : ?>
-                —
-              <?php else : ?>
-                <?= $post['post_hits_count']; ?>
-              <?php endif; ?>
-            </div>
-            <div class="center text-sm">
-              <?= Html::numWord($post['post_hits_count'], __('app.num_view'), false); ?>
-            </div>
-          </li>
-          <li class="left p10 mb-none gray-600 text-sm">
-            <div class="text-2xl center mb5">
-              <?php if ($post['amount_content'] == 0) : ?>
-                —
-              <?php else : ?>
-                <?= $post['amount_content']; ?>
-              <?php endif; ?>
-            </div>
-            <div class="center">
-              <?= Html::numWord($post['amount_content'], __('app.num_answer'), false); ?>
-            </div>
-          </li>
-        </ul>
-
-        <div class="mr15">
+            </li>
+            <li class="mb-none">
+              <div class="text-sm gray-600">
+                <?= __('app.last_answer'); ?>
+              </div>
+              <div class="center">
+                <?php if (!empty($data['last_user']['answer_id'])) : ?>
+                  <a title="<?= $data['last_user']['login']; ?>" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
+                    <?= Html::image($data['last_user']['avatar'], $data['last_user']['login'], 'img-base', 'avatar', 'small'); ?>
+                  </a>
+                <?php else : ?>
+                  <span class="gray-600 text-sm">—</span>
+                <?php endif; ?>
+              </div>
+            </li>
+            <li class="mb-none gray-600 text-2xl">
+              <div class="text-2xl center">
+                <?php if ($post['post_hits_count'] == 0) : ?>
+                  —
+                <?php else : ?>
+                  <?= $post['post_hits_count']; ?>
+                <?php endif; ?>
+              </div>
+              <div class="center text-sm">
+                <?= Html::numWord($post['post_hits_count'], __('app.num_view'), false); ?>
+              </div>
+            </li>
+            <li class="mb-none gray-600 text-sm">
+              <div class="text-2xl center">
+                <?php if ($post['amount_content'] == 0) : ?>
+                  —
+                <?php else : ?>
+                  <?= $post['amount_content']; ?>
+                <?php endif; ?>
+              </div>
+              <div class="center">
+                <?= Html::numWord($post['amount_content'], __('app.num_answer'), false); ?>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="items-center flex">
           <?php if (UserData::checkActiveUser()) : ?>
             <?php if (is_array($data['post_signed'])) : ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 yes">
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 gray-600">
                 <?= __('app.unsubscribe'); ?>
               </div>
             <?php else : ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 no">
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 red">
                 + <?= __('app.read'); ?>
               </div>
             <?php endif; ?>
           <?php else : ?>
-            <a class="right mt5 focus-id no" href="<?= url('login'); ?>">
+            <a class="right mt5 focus-id red" href="<?= url('login'); ?>">
               + <?= __('app.read'); ?>
             </a>
           <?php endif; ?>
-        </div>
-
-        <div class="right ml15 p10 none mb-block">
-          <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'mob', 'text-2xl'); ?>
+          <div class="right3 m10 none mb-block">
+            <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'mob', 'text-2xl ml5'); ?>
+          </div>
         </div>
       </div>
 
