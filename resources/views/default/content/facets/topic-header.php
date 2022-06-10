@@ -1,5 +1,5 @@
 <div class="flex box br-gray">
-  <?= Html::image($topic['facet_img'], $topic['facet_title'], 'w94 mr15', 'logo', 'max'); ?>
+  <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-xl mr15', 'logo', 'max'); ?>
   <div class="flex-auto">
     <h1 class="text-2xl">
       <?= $topic['facet_seo_title']; ?>

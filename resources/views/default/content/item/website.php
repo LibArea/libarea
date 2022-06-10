@@ -26,7 +26,7 @@
             <?= $item['item_url']; ?>
           </a>
 
-          <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tags mr15 mt15', 'all'); ?>
+          <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tag mr15 mt15', 'all'); ?>
 
           <div class="right">
             <?= Html::signed([

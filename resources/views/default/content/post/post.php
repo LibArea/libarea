@@ -18,9 +18,7 @@ use Hleb\Constructor\Handlers\Request; ?>
         </div>
       <?php endif; ?>
 
-      <div class="flex1 flex-row1 flex-auto1">
-
-
+      <div>
         <a class="black" href="<?= $post_url; ?>">
           <h2><?= $post['post_title']; ?>
             <?= insert('/content/post/post-title', ['post' => $post]); ?>
@@ -55,7 +53,6 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?= Html::fragment(Content::text($post['post_content'], 'line'), 200); ?>
           <span class="s_<?= $post['post_id']; ?> show_detail"></span>
         </div>
-
       </div>
 
       <div class="flex flex-row items-center justify-between pt15">

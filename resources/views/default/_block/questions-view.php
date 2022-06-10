@@ -11,54 +11,57 @@
           <div class="br-top-dotted mb20"></div>
           <ol class="list-none">
             <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
-              <div class="hidden">
-                <div class="br-gray w94 box right hidden center">
+              <div>
+                <div class="bg-lightgray w94 p5 right hidden center">
                   <?= Html::image($answer['avatar'], $answer['login'], 'img-lg', 'avatar', 'max'); ?>
-                  <div class="text-sm gray">
-                    <?= Html::langDate($answer['date']); ?>
-                    <?php if (empty($answer['edit'])) : ?>
-                      (<?= __('app.ed'); ?>.)
-                    <?php endif; ?>
-                    <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
-                  </div>
                   <a class="qa-login" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
                 </div>
                 <div class="max-w780">
                   <?= Content::text($answer['answer_content'], 'text'); ?>
-                </DIV>
+                </div>
               </div>
-              <div class="flex text-sm gap">
-                <?= Html::votes($answer, 'answer', 'ps', 'bi-heart'); ?>
- 
-                <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
-                  <?php if ($post['post_closed'] == 0) : ?>
-                    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                      <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= __('app.reply'); ?></a>
+              <div class="flex text-sm justify-between">
+                <div class="flex gap">
+                  <?= Html::votes($answer, 'answer', 'ps', 'bi-heart'); ?>
+
+                  <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
+                    <?php if ($post['post_closed'] == 0) : ?>
+                      <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+                        <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= __('app.reply'); ?></a>
+                      <?php endif; ?>
                     <?php endif; ?>
                   <?php endif; ?>
-                <?php endif; ?>
 
-                <?php if (Access::author('answer', $answer['answer_user_id'], $answer['date'], 30) === true) : ?>
-                  <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
-                    <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                      <?= __('app.edit'); ?>
+                  <?php if (Access::author('answer', $answer['answer_user_id'], $answer['date'], 30) === true) : ?>
+                    <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
+                      <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                        <?= __('app.edit'); ?>
+                      </a>
+                    <?php endif; ?>
+                  <?php endif; ?>
+
+                  <?php if (UserData::checkAdmin()) : ?>
+                    <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
+                      <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                     </a>
                   <?php endif; ?>
-                <?php endif; ?>
 
-                <?php if (UserData::checkAdmin()) : ?>
-                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
-                    <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
-                  </a>
-                <?php endif; ?>
+                  <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps'); ?>
 
-                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps'); ?>
- 
-                <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
-                    <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
-                  </a>
-                <?php endif; ?>
+                  <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
+                    <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
+                      <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
+                    </a>
+                  <?php endif; ?>
+
+                </div>
+                <div class="text-sm gray right">
+                  <?= Html::langDate($answer['date']); ?>
+                  <?php if (empty($answer['edit'])) : ?>
+                    (<?= __('app.ed'); ?>.)
+                  <?php endif; ?>
+                  <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
+                </div>
               </div>
               <div data-insert="<?= $answer['answer_id']; ?>" id="insert_id_<?= $answer['answer_id']; ?>" class="none"></div>
             </li>
@@ -94,9 +97,9 @@
                   <?php endif; ?>
 
                   <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
-                      <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
-                        <i title="<?= __('app.edit'); ?>" class="bi-pencil-square"></i>
-                      </a>
+                    <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
+                      <i title="<?= __('app.edit'); ?>" class="bi-pencil-square"></i>
+                    </a>
                   <?php endif; ?>
 
                   <?php if (UserData::checkAdmin()) : ?>

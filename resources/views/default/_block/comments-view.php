@@ -162,8 +162,8 @@
                   <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
                     <?= __('app.edit'); ?>
                   </a>
-                <?php endif; ?>  
-                <?php if (UserData::checkAdmin()) : ?>   
+                <?php endif; ?>
+                <?php if (UserData::checkAdmin()) : ?>
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
                     <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                   </a>

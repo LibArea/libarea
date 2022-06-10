@@ -116,7 +116,7 @@
     <div class="box bg-lightgray">
       <h3 class="uppercase-box"><?= __('app.understands'); ?></h3>
       <?php foreach ($data['participation'] as $part) : ?>
-        <a class="tags" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
+        <a class="tag" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
           <?= $part['facet_title']; ?>
         </a>
       <?php endforeach; ?>

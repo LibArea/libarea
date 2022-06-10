@@ -176,13 +176,13 @@ class Html
         if (UserData::getAccount()) {
             if ($arr['content_user_id'] != UserData::getUserId()) {
                 if ($arr['state']) {
-                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id yes">' . __('app.unsubscribe') . '</div>';
+                    $html .= '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id gray-600">' . __('app.unsubscribe') . '</span>';
                 } else {
-                    $html .= '<div data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id no">+ ' . __('app.read') . '</div>';
+                    $html .= '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id red">+ ' . __('app.read') . '</span>';
                 }
             }
         } else {
-            $html .= '<a href="' . url('login') . '"><div class="focus-id no">+ ' . __('app.read') . '</div></a>';
+            $html .= '<a href="' . url('login') . '"><span class="focus-id red">+ ' . __('app.read') . '</span></a>';
         }
 
         return $html;
