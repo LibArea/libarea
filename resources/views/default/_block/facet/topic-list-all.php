@@ -6,10 +6,10 @@
     </a>
 
     <div class="w-100">
-      <a class="black text-xl mr5" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
+      <a class="black text-xl" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
         <?= $facet['facet_title']; ?>
       </a>
-
+      <span class="gray">•</span>
       <?= Html::signed([
         'type'            => 'facet',
         'id'              => $facet['facet_id'],
@@ -21,7 +21,7 @@
         <i class="bi-mic sky text-sm"></i>
       <?php endif; ?>
       <div class="mt10 gray">
-        <?= Html::fragment(Content::text($facet['facet_short_description'], 'line'), 32); ?>
+        <?= Content::fragment(Content::text($facet['facet_short_description'], 'line'), 32); ?>
         <span class="right gray-600">
           <i class="bi-journal mr5"></i>
           <?= $facet['facet_count']; ?>

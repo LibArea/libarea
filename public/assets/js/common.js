@@ -69,36 +69,6 @@ document.querySelectorAll(".add-comment")
       );
 }));
 
-// We will show a preview of the post on the central page
-document.querySelectorAll(".showpost")
-  .forEach(el => el.addEventListener("click", function (e) {
-
-    let post = el.querySelector('.s_' + el.dataset.post_id);
-    let article = document.querySelector('.article_' + el.dataset.post_id);
-    post.classList.remove("none");
-    article.classList.add("preview");
-
-    if (!e.target.classList.contains('showpost')) {
-      post.classList.add("none");
-      article.classList.remove("preview");
-    }
-
-    fetch("/post/shown", {
-      method: "POST",
-      body: "post_id=" + el.dataset.post_id,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(
-        response => {
-          return response.text();
-        }
-      ).then(
-        text => {
-          post.innerHTML = text;
-        }
-      );
-  }));
-
 // User card
 document.querySelectorAll(".user-card")
   .forEach(el => el.addEventListener("click", function (e) {

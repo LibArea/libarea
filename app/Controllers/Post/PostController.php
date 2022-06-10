@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
-use Content, Html, Meta, UserData, Access;
+use Content, Meta, UserData, Access;
 
 class PostController extends Controller
 {
@@ -75,7 +75,7 @@ class PostController extends Controller
             $content_img  = PATH_POSTS_THUMB . $content['post_thumb_img'];
         }
 
-        $description  = Html::fragment(Content::text($content['post_content'], 'line'), 250);
+        $description  = Content::fragment(Content::text($content['post_content'], 'line'), 250);
         if ($description == '') {
             $description = strip_tags($content['post_title']);
         }
@@ -201,18 +201,6 @@ class PostController extends Controller
         }
 
         return PostModel::setPostProfile($id, $this->user['id']);
-    }
-
-    // View post from cover page
-    // Просмотр поста с титульной страницы
-    public function shownPost()
-    {
-        $post_id = Request::getPostInt('post_id');
-        $post    = PostModel::getPost($post_id, 'id', $this->user);
-
-        $post['post_content'] = Content::text($post['post_content'], 'text');
-
-        insert('/content/post/postcode', ['post' => $post, 'user'   => $this->user]);
     }
 
     // Posts by domain

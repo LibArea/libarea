@@ -121,6 +121,8 @@ return [
     'info'              => '信息',
     'more'              => '更多',
     'see_more'          => '查看更多',
+    'read_more'         => '阅读更多',
+    'crop_post'         => '作物柱',
     'other'             => '其他',
     'official'          => '关闭',
     'community'         => '社区',

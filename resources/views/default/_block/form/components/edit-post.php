@@ -74,7 +74,7 @@
   </div>
 <?php endif; ?>
 
-<?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $post['post_content'], 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
+<?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $post['post_content'], 'cut' => true, 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
 <?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
   <?php if ($post['post_draft'] == 1) : ?>

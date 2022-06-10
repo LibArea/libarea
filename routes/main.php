@@ -90,7 +90,6 @@ Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();
 Route::endGroup();
 
 Route::getType('post');
-    Route::get('/post/shown')->controller('Post\PostController@shownPost');
     Route::get('/user/card')->controller('User\UserController@card');
     Route::get('/msg/go')->controller('Post\AddPostController@msg');
     Route::get('/comments/addform')->controller('Comment\AddCommentController');

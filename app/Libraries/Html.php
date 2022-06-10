@@ -178,11 +178,11 @@ class Html
                 if ($arr['state']) {
                     $html .= '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id gray-600">' . __('app.unsubscribe') . '</span>';
                 } else {
-                    $html .= '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id red">+ ' . __('app.read') . '</span>';
+                    $html .= '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id red">' . __('app.read') . '</span>';
                 }
             }
         } else {
-            $html .= '<a href="' . url('login') . '"><span class="focus-id red">+ ' . __('app.read') . '</span></a>';
+            $html .= '<a href="' . url('login') . '"><span class="focus-id red">' . __('app.read') . '</span></a>';
         }
 
         return $html;
@@ -238,19 +238,6 @@ class Html
         $html .= '</p>';
 
         return $html;
-    }
-
-    // Getting a piece of text
-    public static function fragment($str, $lenght = 100, $end = '...', $charset = 'UTF-8', $token = '~')
-    {
-        $str = strip_tags($str);
-        if (mb_strlen($str, $charset) >= $lenght) {
-            $wrap = wordwrap($str, $lenght, $token);
-            $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, $token, 0, $charset), $charset);
-            return $str_cut .= $end;
-        } else {
-            return $str;
-        }
     }
 
     // If 2 weeks have not passed since registration, then the nickname is green

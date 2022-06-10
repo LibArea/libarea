@@ -52,7 +52,7 @@ $sw = $sw ?? '?';
             <?= Html::facets($result['facet_list'], 'topic', 'topic', 'tags text-sm mr15'); ?>
           </div>
         <?php endif; ?>
-        <?= Html::fragment(Content::text($result['content'], 'line'), 250); ?>
+        <?= Content::fragment(Content::text($result['content'], 'line'), 250); ?>
       </div>
     <?php endforeach; ?>
 

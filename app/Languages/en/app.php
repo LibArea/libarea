@@ -121,6 +121,8 @@ return [
     'info'              => 'Information',
     'more'              => 'More',
     'see_more'          => 'See more',
+    'read_more'         => 'Read more',
+    'crop_post'         => 'Crop post',
     'other'             => 'Other',
     'official'          => 'off',
     'community'         => 'community',

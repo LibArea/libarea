@@ -44,7 +44,18 @@
               title: '<?= $row['title']; ?>',
             },
           <?php endif; ?>
-        <?php endforeach; ?> {
+        <?php endforeach; ?>
+        <?php if (!empty($cut)) : ?>
+          {
+            className: "bi-scissors",
+            title: "<?= __('app.crop_post'); ?>",
+            action: (e) => {
+              e.codemirror.replaceSelection('<cut>');
+              e.codemirror.focus();
+            },
+          },
+        <?php endif; ?>
+        {
           className: "bi-unlock",
           title: "<?= __('app.spoiler'); ?>",
           children: [{

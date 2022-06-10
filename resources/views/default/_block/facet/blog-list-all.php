@@ -4,10 +4,10 @@
       <?= Html::image($facet['facet_img'], $facet['facet_title'], 'img-lg mr10', 'logo', 'max'); ?>
     </a>
     <div class="w-100">
-      <a class="black text-2xl" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
+      <a class="black text-xl" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
         <?= $facet['facet_title']; ?>
       </a>
-
+      <span class="gray">•</span>
       <?= Html::signed([
         'type'            => 'facet',
         'id'              => $facet['facet_id'],
@@ -19,7 +19,7 @@
         <i class="bi-mic sky text-sm"></i>
       <?php endif; ?>
       <div class="pr10 mt5 mb-pr0 gray">
-        <?= Html::fragment(Content::text($facet['facet_short_description'], 'line'), 68); ?>
+        <?= Content::fragment(Content::text($facet['facet_short_description'], 'line'), 68); ?>
         <span class="flex right gray-600 text-sm">
           <i class="bi-journal mr5"></i>
           <?= $facet['facet_count']; ?>

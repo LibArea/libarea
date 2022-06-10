@@ -121,6 +121,8 @@ return [
     'info'              => 'Informație',
     'more'              => 'Mai departe',
     'see_more'          => 'Vezi mai mult',
+    'read_more'         => 'Citeste mai mult',
+    'crop_post'         => 'Decupați post',
     'other'             => 'Alte',
     'official'          => 'Oficial',
     'community'         => 'comunitate',

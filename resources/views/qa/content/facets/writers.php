@@ -20,7 +20,7 @@
                 <div class="gray-600"><?= $row['login']; ?></div>
                 <?php if ($row['about']) : ?>
                   <div class="mb-none text-sm">
-                    <?= Html::fragment(Content::text($row['about'], 'line'), 88); ?>
+                    <?= Content::fragment(Content::text($row['about'], 'line'), 88); ?>
                   </div>
                 <?php endif; ?>
               </div>

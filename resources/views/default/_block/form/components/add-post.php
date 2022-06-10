@@ -55,7 +55,8 @@
     'title'     => __('app.post'),
     'height'    => '250px',
      'type'     => 'post-telo',
-     'id'       => 0
+     'id'       => 0,
+     'cut'      => true
      ]); ?>
 
 <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL)) : ?>

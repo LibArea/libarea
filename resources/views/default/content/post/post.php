@@ -26,7 +26,7 @@ use Hleb\Constructor\Handlers\Request; ?>
         </a>
 
         <div class="flex gap lowercase">
-          <?= Html::facets($post['facet_list'], 'blog', 'blog', 'text-sm'); ?>
+          <?= Html::facets($post['facet_list'], 'blog', 'blog', 'gray text-sm'); ?>
           <?= Html::facets($post['facet_list'], 'topic', 'topic', 'gray-600 text-sm'); ?>
           <?php if ($post['post_url_domain']) : ?>
             <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
@@ -49,10 +49,15 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?php endif; ?>
         <?php endif; ?>
 
-        <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 gray">
-          <?= Html::fragment(Content::text($post['post_content'], 'line'), 200); ?>
-          <span class="s_<?= $post['post_id']; ?> show_detail"></span>
+        <div class="cut-post">
+          <?php $arr = Content::cut($post['post_content']);
+             echo Content::text($arr['content'], 'text'); ?>
         </div>
+        <?php if($arr['button']) : ?>
+          <a class="btn btn-outline-primary" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+            <?= __('app.read_more'); ?>
+          </a>
+        <?php endif; ?>
       </div>
 
       <div class="flex flex-row items-center justify-between pt15">

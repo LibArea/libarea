@@ -190,6 +190,8 @@ blockquote {
 
 blockquote p { margin: 2px; }
 
+.cut-post img { max-width: 100%; }
+
 hr {
   border: none;
   clear: both;
@@ -304,7 +306,6 @@ ul.last-content a.last-content_telo { display: block; }
 a:hover > img { opacity: 0.8; }
 .underline-hover:hover { text-decoration: underline; }
 
-.shown_post img { width: 100%; }
 .post-body.full img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
 .post-body .post-img img { margin-top: 5px; }
 
@@ -315,14 +316,12 @@ a:hover > img { opacity: 0.8; }
 
 .content-body { max-width: 780px; }
 
-
 .content-body p img {
   max-width: 99%;
   max-height: 500px;
   display: block;
 }
 
-.shown_post img.emoji,
 .post-body.full img.emoji,
 .content-body img.emoji {
   height: 16px;

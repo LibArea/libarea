@@ -47,6 +47,42 @@ class Content
         return  $content;
     }
 
+    // TODO: Let's check the simple version for now.
+    public static function cut($text, $length = 600, $charset = 'UTF-8')
+    {
+        $beforeCut = $text;
+        $afterCut = false;
+        if (preg_match("#^(.*)<cut([^>]*+)>(.*)$#Usi", $text, $match)) {
+            $beforeCut  = $match[1];
+            $afterCut   = $match[3];
+                
+        }
+        
+        if(!$afterCut) {
+            $beforeCut = self::fragment($text, $length);
+        }
+        
+        $button = false;
+        if ($afterCut || mb_strlen($text, $charset) > $length) {
+            $button = true;
+        }
+
+        return ['content' => $beforeCut, 'button' => $button];
+    }
+
+    // Getting a piece of text
+    public static function fragment($str, $lenght = 100, $end = '...', $charset = 'UTF-8', $token = '~')
+    {
+        $str = strip_tags($str);
+        if (mb_strlen($str, $charset) >= $lenght) {
+            $wrap = wordwrap($str, $lenght, $token);
+            $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, $token, 0, $charset), $charset);
+            return $str_cut .= $end;
+        } else {
+            return $str;
+        }
+    }
+
     public static function parseUser($content, $with_user = false, $to_uid = false)
     {
         preg_match_all('/@([^@,:\s,]+)/i', strip_tags($content), $matchs);

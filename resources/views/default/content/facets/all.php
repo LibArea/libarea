@@ -1,9 +1,9 @@
 <?php $access = Access::trustLevels(config('trust-levels.tl_add_' . $data['type'])); ?>
 
 <main>
-  <div class="box bg-violet center">
+  <div class="mb15">
     <h1 class="text-xl"><?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's'); ?></h1>
-    <span class="gray-600">
+    <span class="gray-600 text-xs">
       <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>.
     </span>
   </div>

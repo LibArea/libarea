@@ -31,7 +31,7 @@
               </span>
             <?php endif; ?>
             <div class="list-items__text">
-              <?= Html::fragment(Content::text($item['item_content'], 'line'), 200); ?>
+              <?= Content::fragment(Content::text($item['item_content'], 'line'), 200); ?>
             </div>
             <div class="list-items__footer">
               <div class="green">

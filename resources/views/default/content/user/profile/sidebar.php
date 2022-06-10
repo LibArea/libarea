@@ -52,7 +52,7 @@
               <?= $blog['facet_title']; ?>
             </a>
             <div class="text-sm pr15 mb-pr0 gray-600">
-              <?= Html::fragment(Content::text($blog['facet_short_description'], 'line'), 68); ?>
+              <?= Content::fragment(Content::text($blog['facet_short_description'], 'line'), 68); ?>
             </div>
           </div>
         </div>
