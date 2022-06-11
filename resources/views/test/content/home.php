@@ -4,8 +4,6 @@
     <div id="scrollArea"></div>
     <div id="scroll"></div>
   <?php else : ?>
-    <div class="mb15">
-      <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
-    </div>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
   <?php endif; ?>
 </main>

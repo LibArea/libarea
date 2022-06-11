@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?02');
+Request::getHead()->addStyles('/assets/css/style.css?03');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;
 $post   = $data['post'] ?? false;
@@ -46,14 +46,14 @@ $post   = $data['post'] ?? false;
           <form class="form" method="get" action="<?= url('search.go'); ?>">
             <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
           </form>
-          <div class="absolute box-shadow bg-white p15 pt0 mt5 br-rd3 none" id="search_items"></div>
+          <div class="absolute box-shadow bg-white p15 br-rd3 none" id="search_items"></div>
         </div>
 
         <?php if (!UserData::checkActiveUser()) : ?>
           <div class="flex gap-max items-center">
-            <div id="toggledark" class="header-menu-item">
-              <i class="bi-brightness-high gray-600 text-xl"></i>
-            </div>
+            <a id="toggledark" class="header-menu-item gray-600">
+              <i class="bi-brightness-high text-xl"></i>
+            </a>
             <?php if (config('general.invite') == false) : ?>
               <a class="gray  mb-none block" href="<?= url('register'); ?>">
                 <?= __('app.registration'); ?>
@@ -69,9 +69,7 @@ $post   = $data['post'] ?? false;
 
             <?= Html::addPost($facet); ?>
 
-            <div id="toggledark" class="only-icon">
-              <i class="bi-brightness-high gray-600"></i>
-            </div>
+            <a id="toggledark" class="gray-600"><i class="bi-brightness-high"></i></a>
 
             <a class="gray-600" href="<?= url('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>

@@ -14,7 +14,7 @@
       </a>
       <?php if (!empty($cat['sub'])) : ?>
         <?php foreach ($cat['sub'] as $sub) : ?>
-          <a class="pr10 text-sm black mb-none" href="<?= url('web.dir', ['grouping' => 'all', 'slug' => $sub['url']]); ?>">
+          <a class="mr10 text-sm black mb-none" href="<?= url('web.dir', ['grouping' => 'all', 'slug' => $sub['url']]); ?>">
             <?= $sub['title']; ?>
           </a>
         <?php endforeach; ?>

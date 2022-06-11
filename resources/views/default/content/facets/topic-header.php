@@ -1,4 +1,4 @@
-<div class="flex box br-gray">
+<div class="flex box box-fon">
   <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-xl mr15', 'logo', 'max'); ?>
   <div class="flex-auto">
     <h1 class="text-2xl">

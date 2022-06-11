@@ -2,8 +2,8 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?04');
-Request::getHead()->addStyles('/assets/css/test.css?04');
+Request::getHead()->addStyles('/assets/css/style.css?03');
+Request::getHead()->addStyles('/assets/css/test.css?03');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -44,8 +44,8 @@ $facet  = $data['facet'] ?? false; ?>
 
           <?= Html::addPost($facet); ?>
 
-          <div id="toggledark" class="only-icon">
-            <i class="bi-brightness-high gray-600"></i>
+          <div id="toggledark">
+            <i class="bi-brightness-high active gray-600"></i>
           </div>
 
           <a class="gray-600" href="<?= url('notifications'); ?>">

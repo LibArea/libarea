@@ -67,7 +67,7 @@ a {
 a:hover,
 a:focus,
 a:active {
-  color: #f00;
+  color: var(--red);
 }
 
 img {
@@ -119,28 +119,13 @@ img {
 .ml30 { margin-left: 30px; }
 .ml-40 { margin-left: -40px; }
 
-.p0 { padding: 0; }
-.pt0 { padding-top: 0; }
-.pr0 { padding-right: 0; }
-.pb0 { padding-bottom: 0; }
-.pl0 { padding-left: 0; }
-
 .p5 { padding: 5px; }
 .pt5 { padding-top: 5px; }
 .pr5 { padding-right: 5px; }
 .pb5 { padding-bottom: 5px; }
 .pl5 { padding-left: 5px; }
-
-.pt10 { padding-top: 10px; }
-.pr10 { padding-right: 10px; }
-.pb10 { padding-bottom: 10px; }
-.pl10 { padding-left: 10px; }
-
 .p15 { padding: 15px; }
-.pt15 { padding-top: 15px; }
-.pr15 { padding-right: 15px; }
-.pb15 { padding-bottom: 15px; }
-.pl15 { padding-left: 15px; }
+.p5-10 { padding: 5px 10px 5px 10px; }
 
 /*
  * Used colors (and background) in LibArea project
@@ -172,6 +157,8 @@ img {
 .bg-blue-200 { background-color: #f0f6f3; }
 .bg-red-200 { background-color: var(--red-200); }
 .bg-beige { background-color: #fff4e8; } 
+
+.active { color: var(--red); }
 
 /*
  * Other
@@ -212,7 +199,6 @@ img {
 .max-w-100 { max-width: 100%; }
 .max-w300 { max-width: 300px; }
 .max-w780 { max-width: 780px; }
-.max-width { max-width: 1636px; }
 
 .text-xs { font-size: 0.75rem; }
 .text-sm { font-size: 0.875rem; }
@@ -264,5 +250,5 @@ img {
 .block { display: block; }
 .table { display: table; }
 .inline { display: inline-block; }
-.list-none { list-style: none; }
+.list-style-none { list-style: none; }
 .break-all { word-break:break-all; }

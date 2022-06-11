@@ -49,7 +49,7 @@ $sw = $sw ?? '?';
           </div>
         <?php else : ?>
           <div>
-            <?= Html::facets($result['facet_list'], 'topic', 'topic', 'tags text-sm mr15'); ?>
+            <?= Html::facets($result['facet_list'], 'topic', 'topic', 'tag mr15'); ?>
           </div>
         <?php endif; ?>
         <?= Content::fragment(Content::text($result['content'], 'line'), 250); ?>

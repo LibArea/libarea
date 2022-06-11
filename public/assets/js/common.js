@@ -51,7 +51,7 @@ document.querySelectorAll(".add-comment")
 
     fetch("/comments/addform", {
       method: "POST",
-      body: "answer_id=" + answer_id + "&comment_id=" + comment_id,
+      body: "answer_id=" + answer_id + "&comment_id=" + comment_id + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then(
@@ -68,34 +68,6 @@ document.querySelectorAll(".add-comment")
         }
       );
 }));
-
-// User card
-document.querySelectorAll(".user-card")
-  .forEach(el => el.addEventListener("click", function (e) {
-
-    let content = document.querySelector('.content_' + el.dataset.content_id);
-    let div = document.querySelector("#content_" + el.dataset.content_id);
-    div.classList.remove("none");
-
-    fetch("/user/card", {
-      method: "POST",
-      body: "user_id=" + el.dataset.user_id,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(
-        response => {
-          return response.text();
-        }
-      ).then(
-        text => {
-          content.innerHTML = text;
-        }
-      );
-
-    window.addEventListener('mouseup', e => {   
-      div.classList.add("none");
-    });
-  }));
 
 // Toggle dark mode
 isIdEmpty('toggledark').onclick = function() {

@@ -33,7 +33,7 @@
         <div class="box bg-lightgray text-sm">
           <h3 class="uppercase-box"><?= __('app.pages'); ?></h3>
           <?php foreach ($data['pages'] as $ind => $row) : ?>
-            <a class="flex pb10 items-center gray-600" href="">
+            <a class="flex mb10 items-center gray-600" href="">
               <?= $row['post_title']; ?>
             </a>
           <?php endforeach; ?>

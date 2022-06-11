@@ -67,7 +67,7 @@
             <?php endif; ?>
           </td>
           <td class="text-sm align-right">
-            <a class="gray-600 ml10" href="<?= url('admin.regip', ['ip' => $user['reg_ip']]); ?>">
+            <a class="gray-600" href="<?= url('admin.regip', ['ip' => $user['reg_ip']]); ?>">
               <?= $user['reg_ip']; ?>
             </a>
             <?php if ($user['duplicat_ip_reg'] > 1) : ?>
@@ -78,7 +78,7 @@
           </td>
           <td class="text-sm align-right">
             <?php if (!empty($user['last_visit_logs']['latest_ip'])) : ?>
-              <a class="gray-600 ml10" href="<?= url('admin.logip', ['ip' => $user['last_visit_logs']['latest_ip']]); ?>">
+              <a class="gray-600" href="<?= url('admin.logip', ['ip' => $user['last_visit_logs']['latest_ip']]); ?>">
                 <?= $user['last_visit_logs']['latest_ip']; ?>
               </a>
               <br>

@@ -18,7 +18,7 @@ use Hleb\Constructor\Handlers\Request; ?>
         </div>
       <?php endif; ?>
 
-      <div>
+      <div class="mb15">
         <a class="black" href="<?= $post_url; ?>">
           <h2><?= $post['post_title']; ?>
             <?= insert('/content/post/post-title', ['post' => $post]); ?>
@@ -60,7 +60,7 @@ use Hleb\Constructor\Handlers\Request; ?>
         <?php endif; ?>
       </div>
 
-      <div class="flex flex-row items-center justify-between pt15">
+      <div class="flex flex-row items-center justify-between">
         <div class="flex gap text-sm flex-row">
           <a class="black" href="<?= url('profile', ['login' => $post['login']]); ?>">
             <?= Html::image($post['avatar'], $post['login'], 'img-sm mr5', 'avatar', 'max'); ?>

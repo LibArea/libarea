@@ -63,7 +63,7 @@ reply.forEach(el => el.addEventListener("click", function (e) {
     let reply = document.querySelector('#reply_addentry' + el.dataset.id);  
     fetch("/reply/" + el.dataset.type, {
       method: "POST",
-      body: "id=" + el.dataset.id  + "&item_id=" + el.dataset.item_id,
+      body: "id=" + el.dataset.id  + "&item_id=" + el.dataset.item_id + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .then(response => response.text())
@@ -91,7 +91,7 @@ document.querySelectorAll(".up-id")
         let new_cont = (parseInt(el.dataset.count) + parseInt(1));
         let upVot = document.querySelector('#up' + el.dataset.id + '.voters-' + el.dataset.ind);
         let upScr = upVot.querySelector('.score');
-        upVot.classList.add('sky');
+        upVot.classList.add('active');
         upScr.replaceWith(new_cont);
       });
   }));
@@ -110,7 +110,7 @@ document.querySelectorAll(".add-favorite")
           location.reload();
         } else {
             let dom = document.querySelector("#favorite_" + el.dataset.id + '.fav-' + el.dataset.ind);
-            dom.classList.toggle("sky");
+            dom.classList.toggle("active");
         }
     });
   }));

@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request; ?>
 
-<?php Request::getHead()->addStyles('/assets/css/style.css?02'); ?>
+<?php Request::getHead()->addStyles('/assets/css/style.css?03'); ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
@@ -18,22 +18,22 @@ use Hleb\Constructor\Handlers\Request; ?>
             <i class="bi-house"></i>
             <?= __('web.on_website'); ?>
           </a>
-          <div class="flex right items-center">
-            <div id="toggledark" class="header-menu-item mb-none only-icon mr30 mb-ml10">
-              <i class="bi-brightness-high gray-600 text-xl"></i>
-            </div>
+          <div class="flex right items-center gap-max">
+            <a id="toggledark" class="header-menu-item gray-600 mb-none">
+              <i class="bi-brightness-high text-xl"></i>
+            </a>
             <?php if (!UserData::checkActiveUser()) : ?>
               <?php if (config('general.invite') == false) : ?>
-                <a class="register gray-600 mr15 mb-ml10 mb-mr5 block" href="<?= url('register'); ?>">
+                <a class="register gray-600 block" href="<?= url('register'); ?>">
                   <?= __('web.registration'); ?>
                 </a>
               <?php endif; ?>
-              <a class="gray-600 mr10 ml10" href="<?= url('login'); ?>">
+              <a class="gray-600" href="<?= url('login'); ?>">
                 <?= __('web.sign_in'); ?>
               </a>
             <?php else : ?>
               <?php if (UserData::checkAdmin()) : ?>
-                <div class="relative mr30 gray-600">
+                <div class="relative gray-600">
                   <div class="trigger">
                     <?= __('web.menu'); ?>
                   </div>
@@ -42,15 +42,15 @@ use Hleb\Constructor\Handlers\Request; ?>
                   </ul>
                 </div>
               <?php endif; ?>
-              <a class="mr30 green" href="<?= url('web.bookmarks'); ?>">
+              <a class="green" href="<?= url('web.bookmarks'); ?>">
                 <?= __('web.favorites'); ?>
               </a>
-              <div class="mr15 m relative">
+              <div class="relative">
                 <div class="trigger">
                   <?= UserData::getUserLogin(); ?>
                 </div>
-                <ul class="dropdown">
-                  <?= insert('/_block/navigation/menu', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>
+                <ul class="dropdown user">
+                  <?= insert('/_block/navigation/menu-user', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>
                 </ul>
               </div>
             <?php endif; ?>

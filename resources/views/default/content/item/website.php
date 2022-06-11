@@ -1,11 +1,11 @@
 <?php $item = $data['item']; ?>
 <div id="contentWrapper">
   <div class="mb-none center w94">
-    <?= Html::votes($item, 'item', 'ps', 'bi-heart text-2xl mt30 mb15 middle', 'block'); ?>
-    <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'text-2xl'); ?>
+    <?= Html::votes($item, 'item', 'ps', 'bi-heart text-2xl mt30 middle', 'block'); ?>
+    <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'text-2xl block mt20'); ?>
   </div>
   <main>
-    <div class="box hidden pr15 mb20">
+    <div class="hidden">
       <h1><?= $item['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
@@ -107,7 +107,7 @@
       <?php if ($data['similar']) : ?>
         <h3 class="uppercase-box"><?= __('web.recommended'); ?></h3>
         <?php foreach ($data['similar'] as $link) : ?>
-          <?= Html::websiteImage($link['item_domain'], 'thumbs', $link['item_title'], 'mr5 w200 box-shadow'); ?>
+          <?= Html::websiteImage($link['item_domain'], 'thumbs', $link['item_title'], 'w-100 box-shadow'); ?>
           <a class="inline mr20 mb15 block text-sm" href="<?= url('website', ['slug' => $link['item_domain']]); ?>">
             <?= $link['item_title']; ?>
           </a>

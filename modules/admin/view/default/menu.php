@@ -22,10 +22,10 @@
       ]); ?>
 
       <?php if (!empty($data['users_count'])) : ?><?= $data['users_count'] ?><?php endif; ?>
-      <ul class="flex flex-row list-none m0 p0 center">
+      <ul class="flex flex-row list-none gap">
         <?php foreach ($menus as $menu) : ?>
-          <a class="ml30 mb-mr5 mb-ml10<?= is_current($menu['url']) ? ' active' : ' gray'; ?>" href="<?= $menu['url']; ?>">
-            <i class="<?= $menu['icon']; ?> mr5"></i>
+          <a class="<?= is_current($menu['url']) ? ' active' : ' gray'; ?>" href="<?= $menu['url']; ?>">
+            <i class="<?= $menu['icon']; ?>"></i>
             <span><?= $menu['name']; ?></span>
           </a>
         <?php endforeach; ?>

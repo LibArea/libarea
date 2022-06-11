@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?04');
+Request::getHead()->addStyles('/assets/css/style.css?03');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
@@ -40,9 +40,9 @@ $facet  = $data['facet'] ?? false; ?>
 
       <?php if (!UserData::checkActiveUser()) : ?>
         <div class="flex gap-max items-center">
-          <div id="toggledark" class="header-menu-item mb-none only-icon">
-            <i class="bi-brightness-high gray-600 text-xl"></i>
-          </div>
+          <a id="toggledark" class="header-menu-item gray-600 mb-none">
+            <i class="bi-brightness-high text-xl"></i>
+          </a>
           <?php if (config('general.invite') == false) : ?>
             <a class="w94 gray block" href="<?= url('register'); ?>">
               <?= __('app.registration'); ?>

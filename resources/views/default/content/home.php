@@ -10,9 +10,7 @@
     <div id="scrollArea"></div>
     <div id="scroll"></div>
   <?php else : ?>
-    <div class="mb15">
-      <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
-    </div>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
   <?php endif; ?>
 </main>
 
@@ -73,7 +71,7 @@
       <div class="box bg-lightgray">
         <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
         <?php foreach ($data['topics'] as $key => $recomm) : ?>
-          <a class="flex items-center relative pb10 gray-600" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
+          <a class="flex items-center relative mb10 gray-600" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
             <?= Html::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
             <?= $recomm['facet_title']; ?>
           </a>

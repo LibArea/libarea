@@ -149,22 +149,4 @@ class UserController extends Controller
             ]
         );
     }
-
-    // User card when hovering over the avatar in the post feed
-    public function card()
-    {
-        $user_id    = Request::getPostInt('user_id');
-        $user       = UserModel::getUser($user_id, 'id');
-        $post       = PostModel::getPost($user['my_post'], 'id', $this->user);
-        $badges     = BadgeModel::getBadgeUserAll($user_id);
-
-        insert(
-            '/content/user/card',
-            [
-                'user'      => $user,
-                'post'      => $post,
-                'badges'    => $badges
-            ]
-        );
-    }
 }

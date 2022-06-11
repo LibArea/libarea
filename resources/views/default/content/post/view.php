@@ -245,11 +245,11 @@
           <?php if ($rec_post['post_type'] == 'post') : ?>
             <a class="gray" href="<?= url('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
               <?php if ($rec_post['post_answers_count'] > 0) : ?>
-                <div class="p5 pr10 pb5 pl10 bg-green br-rd3 white center mr15">
+                <div class="p5-10 bg-green br-rd3 white center mr15">
                   <?= $rec_post['post_answers_count'] ?>
                 </div>
               <?php else : ?>
-                <div class="p5 pr10 pb5 pl10 bg-lightgray br-rd3 gray center mr15">0</div>
+                <div class="p5-10 bg-lightgray br-rd3 gray center mr15">0</div>
               <?php endif; ?>
             </a>
           <?php else : ?>

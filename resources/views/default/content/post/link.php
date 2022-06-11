@@ -1,5 +1,5 @@
 <main>
-  <div class="box">
+  <div class="box box-fon">
     <?php if ($data['site']['item_title']) : ?>
       <div class="right mt15">
         <?= Html::votes($data['site'], 'item', 'ps', 'bi-heart mr10'); ?>

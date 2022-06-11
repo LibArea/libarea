@@ -68,9 +68,10 @@ h5 {
 .search {
   height: 30px;
   width: 100%;
-  border-radius: 20px;
+  border-radius: 5px;
   background-color: var(--gray-100);
   padding-left: 15px;
+  border-color: transparent;
 }
 
 .page-search {
@@ -118,9 +119,9 @@ h5 {
 
 .page-search__input {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 3px;
   height: 50px;
-  border: 9px solid #eee;
+  border: 9px solid #fcebd9;
   padding-left: 15px;
   color: var(--gray-700);
 }
@@ -303,9 +304,10 @@ ul.last-content a.last-content_telo { display: block; }
   letter-spacing: 1.5px;
 }
 
-a:hover > img { opacity: 0.8; }
-.underline-hover:hover { text-decoration: underline; }
+a:hover > img,
+.trigger img { opacity: 0.8; }
 
+.underline-hover:hover { text-decoration: underline; }
 .post-body.full img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
 .post-body .post-img img { margin-top: 5px; }
 
@@ -356,6 +358,8 @@ iframe {
   z-index: 10;
   width: 100%;
 }
+
+.voters.active .score { color: #bb6619; }
 
 /* Сделаем внешние ссылки с иконкой */
 .ind-first-p a[rel~="nofollow"]:after,

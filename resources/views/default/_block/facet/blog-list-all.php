@@ -18,7 +18,7 @@
       <?php if (UserData::getUserId() == $facet['facet_user_id']) : ?>
         <i class="bi-mic sky text-sm"></i>
       <?php endif; ?>
-      <div class="pr10 mt5 mb-pr0 gray">
+      <div class="mr10 mt5 mb-pr0 gray">
         <?= Content::fragment(Content::text($facet['facet_short_description'], 'line'), 68); ?>
         <span class="flex right gray-600 text-sm">
           <i class="bi-journal mr5"></i>

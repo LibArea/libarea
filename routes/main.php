@@ -90,10 +90,10 @@ Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();
 Route::endGroup();
 
 Route::getType('post');
-    Route::get('/user/card')->controller('User\UserController@card');
-    Route::get('/msg/go')->controller('Post\AddPostController@msg');
-    Route::get('/comments/addform')->controller('Comment\AddCommentController');
-    Route::get('/reply/addform')->controller('Item\ReplyController@addForma');
+    Route::getProtect();
+        Route::get('/comments/addform')->controller('Comment\AddCommentController');
+        Route::get('/reply/addform')->controller('Item\ReplyController@addForma');
+    Route::endProtect();    
 Route::endType();
   
 Route::get('/search')->module('search', 'App\Search')->name('search'); 

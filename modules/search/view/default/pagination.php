@@ -7,18 +7,18 @@ if ($pNum > $pagesCount) {
 $url = empty($url) ? '' : $url;
 $first = empty($url) ? '/' : $url;
 
-$html = '<p class="gray">';
+$html = '<div class="flex gap">';
 
 if ($pNum != 1) {
     if (($pNum - 1) == 1) {
-        $html .= '<a class="pr5 mr5" href="' . $first . '"><< ' . ($pNum - 1) . '</a>';
+        $html .= '<a class="pr5" href="' . $first . '"><< ' . ($pNum - 1) . '</a>';
     } else {
-        $html .= '<a class="pr5 mr5" href="' . $url . '&page=' . ($pNum - 1) . '"><< ' . ($pNum - 1) . '</a>';
+        $html .= '<a class="pr5" href="' . $url . '&page=' . ($pNum - 1) . '"><< ' . ($pNum - 1) . '</a>';
     }
 }
 
 if ($pagesCount > $pNum) {
-    $html .= '<span class="bg-green pt5 pr10 pb5 pl10 white ml5 mr5">' . ($pNum) . '</span>';
+    $html .= '<div class="bg-green p5-10 white">' . ($pNum) . '</div>';
 }
 
 if ($pagesCount > $pNum) {
@@ -34,9 +34,9 @@ if ($pagesCount > $pNum) {
         $html .= '...';
     }
 
-    $html .= '<a class="p5 ml5 lowercase gray-600" href="' . $url . '&page=' . ($pNum + 1) . '">' . __('app.page') . ' ' . ($pNum + 1) . ' >></a>';
+    $html .= '<a class="p5 lowercase gray-600" href="' . $url . '&page=' . ($pNum + 1) . '">' . __('app.page') . ' ' . ($pNum + 1) . ' >></a>';
 }
 
-$html .= '</p>';
+$html .= '</div>';
 
 echo $html;

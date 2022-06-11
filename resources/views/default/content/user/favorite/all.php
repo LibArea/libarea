@@ -61,7 +61,7 @@
 
         <?php if ($fav['tag_id']) : ?>
           <div>
-            <a class="tag-grey mr15" href="<?= url('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">
+            <a class="tag-grey mr5" href="<?= url('favorites.folder.id', ['id' => $fav['tag_id']]); ?>">
               <?= $fav['tag_title']; ?>
             </a>
             <sup class="del-folder-content gray-600" data-tid="<?= $fav['tid']; ?>" data-type="favorite">x</sup>

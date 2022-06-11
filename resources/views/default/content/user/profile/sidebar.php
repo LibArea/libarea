@@ -51,7 +51,7 @@
             <a class="black" href="<?= url($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
               <?= $blog['facet_title']; ?>
             </a>
-            <div class="text-sm pr15 mb-pr0 gray-600">
+            <div class="text-sm gray-600">
               <?= Content::fragment(Content::text($blog['facet_short_description'], 'line'), 68); ?>
             </div>
           </div>
@@ -154,7 +154,7 @@
           <span class="middle"><?= __('app.reward_user'); ?></span>
         </a>
         <?php if ($profile['whisper']) : ?>
-          <div class="tips text-sm pt15 pb10 gray-600">
+          <div class="tips text-sm gray-600">
             <i class="bi-info-square green mr5"></i>
             <?= $profile['whisper']; ?>
           </div>

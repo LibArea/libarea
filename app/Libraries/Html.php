@@ -159,11 +159,11 @@ class Html
         if (UserData::getAccount()) {
             $blue = $tid ? 'active' : 'gray-600';
             $my   = $tid ? 'bi-bookmark-dash' : 'bi-bookmark-plus';
-            $html .= '<span id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . '"></i></span>';
+            $html .= '<a id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . '"></i></a>';
         } else {
-            $html .= '<span class="click-no-auth gray-600 ' . $css . '">
+            $html .= '<a class="click-no-auth gray-600 ' . $css . '">
                         <i class="bi-bookmark-plus"></i>
-                            </span>';
+                            </a>';
         }
 
         return $html;
@@ -205,18 +205,18 @@ class Html
             $page = $other . '';
         }
 
-        $html = '<p class="gray">';
+        $html = '<div class="flex gap">';
 
         if ($pNum != 1) {
             if (($pNum - 1) == 1) {
-                $html .= '<a class="pr5 mr5" href="' . $first . '"><< ' . ($pNum - 1) . '</a>';
+                $html .= '<a href="' . $first . '"><< ' . ($pNum - 1) . '</a>';
             } else {
-                $html .= '<a class="pr5 mr5" href="' . $page . '/' . ($pNum - 1) . '.html"><< ' . ($pNum - 1) . '</a>';
+                $html .= '<a href="' . $page . '/' . ($pNum - 1) . '.html"><< ' . ($pNum - 1) . '</a>';
             }
         }
 
         if ($pagesCount > $pNum) {
-            $html .= '<span class="bg-green pt5 pr10 pb5 pl10 white ml5 mr5">' . ($pNum) . '</span>';
+            $html .= '<div class="bg-green p5-10 white">' . ($pNum) . '</div>';
         }
 
         if ($pagesCount > $pNum) {
@@ -232,10 +232,10 @@ class Html
                 $html .= '...';
             }
 
-            $html .= '<a class="p5 ml5 lowercase gray-600" href="' . $page . '/' . ($pNum + 1) . '.html">' . __('app.page') . ' ' . ($pNum + 1) . ' >></a>';
+            $html .= '<a class="p5 lowercase gray-600" href="' . $page . '/' . ($pNum + 1) . '.html">' . __('app.page') . ' ' . ($pNum + 1) . ' >></a>';
         }
 
-        $html .= '</p>';
+        $html .= '</div>';
 
         return $html;
     }
