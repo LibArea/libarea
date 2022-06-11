@@ -7,35 +7,34 @@
   ]
 ); ?>
 
-<div class="box bg-white">
-  <?php if (!empty($data['invitations'])) : ?>
-    <?php foreach ($data['invitations'] as $key => $inv) : ?>
-      <div>
-        <a href="<?= url('profile', ['login' => $inv['uid']['login']]); ?>">
-          <?= $inv['uid']['login']; ?>
+<?php if (!empty($data['invitations'])) : ?>
+  <?php foreach ($data['invitations'] as $key => $inv) : ?>
+    <div>
+      <a href="<?= url('profile', ['login' => $inv['uid']['login']]); ?>">
+        <?= $inv['uid']['login']; ?>
+      </a>
+      <sup>id<?= $inv['uid']['id']; ?></sup>
+      =>
+      <?php if ($inv['login']) : ?>
+        <a href="<?= url('profile', ['login' => $inv['login']]); ?>">
+          <?= $inv['login']; ?>
         </a>
-        <sup>id<?= $inv['uid']['id']; ?></sup>
-        =>
-        <?php if ($inv['login']) : ?>
-          <a href="<?= url('profile', ['login' => $inv['login']]); ?>">
-            <?= $inv['login']; ?>
-          </a>
-          <span class="lowercase text-sm">
-            <?= $inv['invitation_email']; ?>
-          </span>
+        <span class="lowercase gray-600 text-sm">
+          <?= $inv['invitation_email']; ?>
           <sup>id<?= $inv['active_uid']; ?></sup>
-          <span class="text-sm"> - <?= Html::langDate($inv['active_time']); ?>
-          <?php else : ?>
-            <span class="gray-600 lowercase text-sm">
-              <?= $inv['invitation_email']; ?> &nbsp; <?= Html::langDate($inv['add_time']); ?>
-            </span>
-          <?php endif; ?>
+          — <?= Html::langDate($inv['active_time']); ?>
+        </span>
+        <?php else : ?>
+          <span class="gray-600 lowercase text-sm">
+            <?= $inv['invitation_email']; ?> — <?= Html::langDate($inv['add_time']); ?>
           </span>
-      </div>
-    <?php endforeach; ?>
-  <?php else : ?>
-    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
-  <?php endif; ?>
-</div>
+        <?php endif; ?>
+        </span>
+    </div>
+  <?php endforeach; ?>
+<?php else : ?>
+  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
+<?php endif; ?>
+
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

@@ -52,19 +52,12 @@
   font-size: 0.975rem;
 }
 
-.user-box-nav {
-  list-style: none;
-  font-size: 0.875rem;
-  margin: 0;
-  padding: 0;
-}
-
-.user-box-nav li a {
+.user-nav li a {
   margin-left: 56px;
   font-weight: 500;
 }
 
-.user-box-nav li:hover {
+.user-nav li:hover {
   background-color: var(--gray-100);
   color: #222;
 }

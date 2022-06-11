@@ -7,8 +7,7 @@
 
 <main>
   <?php if ($data['type'] != 'admin') : ?>
-    <div class="box-flex justify-between bg-white">
-
+    <div class="mb15">
       <?= insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [
@@ -20,15 +19,16 @@
           ],
         ]
       ]); ?>
+    </div>
 
-      <?php if (!empty($data['users_count'])) : ?><?= $data['users_count'] ?><?php endif; ?>
-      <ul class="flex flex-row list-none gap">
-        <?php foreach ($menus as $menu) : ?>
-          <a class="<?= is_current($menu['url']) ? ' active' : ' gray'; ?>" href="<?= $menu['url']; ?>">
-            <i class="<?= $menu['icon']; ?>"></i>
+    <ul class="nav">
+      <?php foreach ($menus as $menu) : ?>
+        <li<?= is_current($menu['url']) ? ' class="active"' : ''; ?>>
+          <a class="gray" href="<?= $menu['url']; ?>">
             <span><?= $menu['name']; ?></span>
           </a>
+          </li>
         <?php endforeach; ?>
-      </ul>
-    </div>
+    </ul>
+    <div class="mb15"></div>
   <?php endif; ?>

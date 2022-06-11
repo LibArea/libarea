@@ -1,10 +1,13 @@
 <?php
+
+use Hleb\Constructor\Handlers\Request;
+
 Request::getHead()->addStyles('/assets/css/style.css?04');
 ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
-<body class="bg-lightgray<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?>">
+<body class="admin<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?>">
 
   <header class="d-header sticky top0">
     <div class="wrap">

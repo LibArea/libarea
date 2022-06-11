@@ -32,6 +32,11 @@ return [
             'icon'  => 'bi-award',
             'id'    => 'badges',
         ], [
+            'url'   => url('admin.logs.search'),
+            'title' => __('admin.search'),
+            'icon'  => 'bi-search',
+            'id'    => 'search',
+        ], [
             'url'   => url('admin.css'),
             'title' => __('admin.css'),
             'icon'  => 'bi-brush',

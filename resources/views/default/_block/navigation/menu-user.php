@@ -7,7 +7,7 @@
     <div class="text-xs gray-600"><?= $user['email']; ?></div>
   </div>
 </div>
-<ul class="user-box-nav">
+<ul class="list-none user-nav">
   <?php foreach ($list as $key => $item) :
     $tl = $item['tl'] ?? 0; ?>
 

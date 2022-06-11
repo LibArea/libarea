@@ -8,12 +8,10 @@
         'id'    => 'audits.all',
         'url'   => url('admin.logs'),
         'name'  => __('admin.logs'),
-        'icon'  => 'bi-record-circle',
       ], [
         'id'    => 'audits.all',
         'url'   => url('admin.logs.search'),
         'name'  => __('admin.search'),
-        'icon'  => 'bi-search',
       ]
     ]
   ]
