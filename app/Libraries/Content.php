@@ -48,20 +48,19 @@ class Content
     }
 
     // TODO: Let's check the simple version for now.
-    public static function cut($text, $length = 600, $charset = 'UTF-8')
+    public static function cut($text, $length = 800, $charset = 'UTF-8')
     {
         $beforeCut = $text;
         $afterCut = false;
         if (preg_match("#^(.*)<cut([^>]*+)>(.*)$#Usi", $text, $match)) {
             $beforeCut  = $match[1];
             $afterCut   = $match[3];
-                
         }
-        
-        if(!$afterCut) {
+
+        if (!$afterCut) {
             $beforeCut = self::fragment($text, $length);
         }
-        
+
         $button = false;
         if ($afterCut || mb_strlen($text, $charset) > $length) {
             $button = true;

@@ -1,8 +1,5 @@
 <main>
-  <div class="box-flex">
-    <p class="m0"><?= __('app.' . $data['sheet']); ?></p>
-  </div>
-  <div class="box">
+    <h2><?= __('app.invites'); ?></h2>
     <?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
       <form method="post" action="<?= url('content.create', ['type' => 'invitation']); ?>">
         <?php csrf_field(); ?>
@@ -54,10 +51,9 @@
     <?php else : ?>
       <span class="gray"><?= __('app.limits_invitation'); ?>.</span>
     <?php endif; ?>
-  </div>
 </main>
 <aside>
-  <div class="box text-sm sticky top-sm">
+  <div class="box bg-beige sticky top-sm">
     <?= __('app.invite_features'); ?>
   </div>
 </aside>

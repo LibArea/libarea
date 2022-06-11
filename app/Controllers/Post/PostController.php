@@ -171,10 +171,10 @@ class PostController extends Controller
             if ($content['post_merged_id'] > 0 && !UserData::checkAdmin()) {
                 redirect('/post/' . $content['post_merged_id']);
             }
-            
+
             return $content;
-        } 
-        
+        }
+
         $content  = PostModel::getPost($slug, 'slug', $user);
         self::error404($content);
 

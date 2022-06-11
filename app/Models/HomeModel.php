@@ -57,7 +57,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 post_is_deleted,
                 rel.*,
                 votes_post_item_id, votes_post_user_id,
-                u.id, u.login, u.avatar, 
+                u.id, u.login, u.avatar, u.created_at, 
                 fav.tid, fav.user_id, fav.action_type 
   
             FROM facets_posts_relation 

@@ -63,8 +63,10 @@ use Hleb\Constructor\Handlers\Request; ?>
       <div class="flex flex-row items-center justify-between pt15">
         <div class="flex gap text-sm flex-row">
           <a class="black" href="<?= url('profile', ['login' => $post['login']]); ?>">
-            <?= Html::image($post['avatar'], $post['login'], 'img-sm', 'avatar', 'max'); ?>
-            <?= $post['login']; ?>
+            <?= Html::image($post['avatar'], $post['login'], 'img-sm mr5', 'avatar', 'max'); ?>
+            <span<?php if (Html::loginColor($post['created_at'])) : ?> class="green"<?php endif; ?>>
+              <?= $post['login']; ?>
+            </span>  
           </a>
 
           <div class="gray-600 mb-none lowercase"><?= Html::langDate($post['post_date']); ?></div>

@@ -21,7 +21,7 @@ class Parser
         // Разрешённые теги. (все не разрешенные теги считаются запрещенными.)
         $jevix->cfgAllowTags([
             'p', 'del', 'em', 'strong', 'sup', 'img', 'hr', 'font', 'a',
-            'ul', 'ol', 'li', 'del', 'details',
+            'ul', 'ol', 'li', 'del', 'details', 'cut',
             'table', 'tbody', 'thead', 'tfoot', 'tr', 'td', 'th',
             'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
             'pre', 'code', 'blockquote', 'iframe'

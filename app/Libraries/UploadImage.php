@@ -85,14 +85,14 @@ class UploadImage
         if ($width_h[0] > 1050) {
             $image->load($file);
             $image->resizeToWidth(1050);
-            $image->save($path_img . $year . $month . $filename . '.jpeg', "jpeg");
+            $image->save($path_img . $year . $month . $filename . '.webp', "webp");
                 
         } else {
             $image->load($file);
-            $image->save($path_img . $year . $month . $filename . '.jpeg', "jpeg");
+            $image->save($path_img . $year . $month . $filename . '.webp', "webp");
         }
 
-        $img_post = PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
+        $img_post = PATH_POSTS_CONTENT . $year . $month . $filename . '.webp';
         FileModel::set(
             [
                 'file_path'         => $img_post,
