@@ -6,10 +6,14 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use UploadImage, Meta, Validation, UserData, Access;
+use UploadImage, Meta, Validation, Access;
+
+use App\Traits\Author;
 
 class EditPostController extends Controller
 {
+    use Author;
+
     // Форма редактирования post
     public function index()
     {
@@ -86,17 +90,6 @@ class EditPostController extends Controller
 
         $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
-        // If there is a change in post_user_id (owner) and who changes staff
-        // Если есть смена post_user_id (владельца) и кто меняет персонал
-        $post_user_id = $post['post_user_id'];
-        if (UserData::checkAdmin()) {
-            $user_new  = Request::getPost('user_id');
-            if ($user_new) {
-                $post_user_new = json_decode($user_new, true);
-                $post_user_id = $post_user_new[0]['id'];
-            }
-        }
-
         $post_title = str_replace("&nbsp;", '', $post_title);
         Validation::length($post_title, 6, 250, 'title', $redirect);
         Validation::length($content, 6, 25000, 'content', $redirect);
@@ -128,7 +121,7 @@ class EditPostController extends Controller
                 'post_type'             => $new_type,
                 'post_translation'      => $post_translation,
                 'post_date'             => $post_date,
-                'post_user_id'          => $post_user_id ?? 1,
+                'post_user_id'          => $this->edit($post['post_user_id'], Request::getPost('user_id')),
                 'post_draft'            => $post_draft,
                 'post_content'          => $content,
                 'post_content_img'      => $post_img ?? '',

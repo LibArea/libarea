@@ -9,8 +9,12 @@ use App\Models\{FacetModel, PostModel, NotificationModel};
 use App\Models\User\UserModel;
 use Validation, UserData, Meta, Access;
 
+use App\Traits\Author;
+
 class EditItemController extends Controller
 {
+    use Author;
+
     // Форма редактирование домена
     public function index()
     {
@@ -87,19 +91,6 @@ class EditItemController extends Controller
         // Если не персонал, то делаем сайт не активным
         $published = UserData::checkAdmin() ? $data['published'] : 0;
 
-        // If the staff, then we save the author of the site 
-        // Если персонал, то сохраняем автора сайта
-        $owner_uid = UserData::checkAdmin() ? $item['item_user_id'] : $this->user['id'];
-
-        // If there is a change in item_user_id (owner) and who changes staff
-        // Если есть смена item_user_id (владельца) и кто меняет персонал
-        if (UserData::checkAdmin()) {
-            $item_user_new = json_decode($data['user_id'], true);
-            if ($item['item_user_id'] != $item_user_new[0]['id']) {
-                $owner_uid = $item_user_new[0]['id'];
-            }
-        }
-
         WebModel::edit(
             [
                 'item_id'               => $item['item_id'],
@@ -110,7 +101,7 @@ class EditItemController extends Controller
                 'item_content_soft'     => $data['content_soft'] ?? '',
                 'item_published'        => $published,
                 'item_close_replies'    => (int)($data['close_replies'] ?? 0),
-                'item_user_id'          => $owner_uid ?? 1,
+                'item_user_id'          => $this->edit($item['item_user_id'], Request::getPost('user_id')),
                 'item_type_url'         => 0,
                 'item_status_url'       => $data['status'] ?? 404,
                 'item_is_soft'          => (int)($data['soft'] ?? 0),
@@ -143,6 +134,6 @@ class EditItemController extends Controller
             FacetModel::addItemFacets($arr, $item['item_id']);
         }
 
-        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
+        Validation::comingBack(__('msg.change_saved'), 'success', url('web'));
     }
 }
