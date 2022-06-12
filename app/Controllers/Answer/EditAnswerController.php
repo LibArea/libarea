@@ -6,11 +6,15 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{AnswerModel, PostModel};
 use App\Models\User\UserModel;
-use Validation, Meta, Access, UserData;
+use Validation, Meta, Access;
+
+use App\Traits\Author;
 
 class EditAnswerController extends Controller
 {
-    // Форма редактирования answer
+    use Author;
+    
+    // Edit form answer
     public function index()
     {
         $answer_id  = Request::getInt('id');
@@ -49,7 +53,6 @@ class EditAnswerController extends Controller
         $content    = $_POST['content']; // для Markdown
 
         // Access check
-        // Проверка доступа
         $answer = AnswerModel::getAnswerId($answer_id);
         if (Access::author('answer', $answer['answer_user_id'], $answer['answer_date'], 30) == false) {
             return false;
@@ -60,20 +63,11 @@ class EditAnswerController extends Controller
 
         Validation::Length($content, 6, 5000, 'content', url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]));
 
-        $user_id = $answer['answer_user_id'];
-        if (UserData::checkAdmin()) {
-            $user_new  = Request::getPost('user_id');
-            if ($user_new) {
-                $answer_user_new = json_decode($user_new, true);
-                $user_id = $answer_user_new[0]['id'];
-            }
-        }
-
         AnswerModel::edit(
             [
                 'answer_id'         => $answer_id,
                 'answer_content'    => $content,
-                'answer_user_id'    => $user_id,
+                'answer_user_id'    => $this->edit($answer['answer_user_id'], Request::getPost('user_id')),
                 'answer_modified'   => date("Y-m-d H:i:s"),
             ]
         );
