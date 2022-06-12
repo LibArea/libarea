@@ -1,6 +1,6 @@
 <?php $post = $data['post']; ?>
-<main class="w-100">
-  <article class="post-full box<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
+<main class="wrap">
+  <article class="post-full<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
       <div class="post-body">
 
@@ -169,7 +169,7 @@
 
             <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
 
-            <div class="clear pt5">
+            <div class="clear mb15">
               <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
               <input type="hidden" name="answer_id" value="0">
               <?= Html::sumbit(__('app.reply')); ?>
@@ -186,6 +186,7 @@
     <?php endif; ?>
   </article>
   <div id="comment"></div>
+  <div class="ml10">
   <?php if ($post['post_draft'] == 0) :
     if ($post['post_feature'] == 0) :
       insert('/_block/comments-view', ['data' => $data, 'post' => $post]);
@@ -201,6 +202,7 @@
   else :
     echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'bi-door-closed']);
   endif; ?>
+  </div>
 </main>
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {

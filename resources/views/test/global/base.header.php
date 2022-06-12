@@ -10,15 +10,14 @@ $facet  = $data['facet'] ?? false; ?>
 <?= insert('/meta', ['meta' => $meta]); ?>
 
 <body class="body-test<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if (Request::getCookie('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
-  <header class="text-header">
+  <header class="text-header wrap">
     <div class="d-header_contents justify-between">
-      <div class="flex items-center">
+
+      <div class="flex gap-max items-center">
         <a title="<?= __('app.home'); ?>" class="logo" href="/">
           <?= config('meta.name'); ?>
         </a>
-
-
-        <ul class="nav ml30">
+        <ul class="nav">
           <?php $sheet = $data['sheet'] ?? false; ?>
           <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
         </ul>
@@ -44,9 +43,7 @@ $facet  = $data['facet'] ?? false; ?>
 
           <?= Html::addPost($facet); ?>
 
-          <div id="toggledark">
-            <i class="bi-brightness-high active gray-600"></i>
-          </div>
+          <div id="toggledark"><i class="bi-brightness-high gray-600"></i></div>
 
           <a class="gray-600" href="<?= url('notifications'); ?>">
             <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>

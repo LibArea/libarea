@@ -1,4 +1,4 @@
-<main class="w-100">
+<main class="wrap">
   <?= insert('/content/post/post', ['data' => $data]); ?>
   <?php if (UserData::getUserScroll()) : ?>
     <div id="scrollArea"></div>

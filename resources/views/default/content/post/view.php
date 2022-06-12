@@ -63,7 +63,7 @@
       <?php endif; ?>
 
       <div class="post-body max-w780 full">
-        <div class="post">
+        <div class="post mb15">
           <?= Content::text($post['post_content'], 'text'); ?>
         </div>
         <?php if ($post['post_url_domain']) : ?>
