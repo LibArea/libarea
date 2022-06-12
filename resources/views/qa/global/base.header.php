@@ -10,32 +10,30 @@ $facet  = $data['facet'] ?? false; ?>
 
 <body<?php if (Request::getCookie('dayNight') == 'dark') : ?> class="dark" <?php endif; ?>>
 
-  <header class="bg-white mt0 mb15">
-    <div class="br-bottom wrap p5 mb15 mb-none items-center flex">
-      <a class="mr20 black text-xs" href="/topics">
+  <header class="bg-white mt0 mb10">
+    <div class="br-bottom wrap mb10 mb-none items-center flex gap">
+      <a class="p5 black text-xs" href="/topics">
         <i class="bi-columns-gap mr5"></i> <?= __('app.topics'); ?>
       </a>
-      <a class="mr20 black text-xs" href="/blogs">
+      <a class="black text-xs" href="/blogs">
         <i class="bi-journals mr5"></i> <?= __('app.blogs'); ?>
       </a>
-      <a class="mr20 black text-xs" href="/users">
+      <a class="black text-xs" href="/users">
         <i class="bi-people mr5"></i> <?= __('app.users'); ?>
       </a>
-      <a class="mr20 black text-xs" href="/web">
+      <a class="black text-xs" href="/web">
         <i class="bi-link-45deg mr5"></i> <?= __('app.catalog'); ?>
       </a>
-      <a class="mr20 black text-xs" href="/search">
+      <a class="black text-xs" href="/search">
         <i class="bi-search mr5"></i> <?= __('app.search'); ?>
       </a>
     </div>
 
     <div class="wrap items-center flex justify-between">
       <div class="flex items-center" id="find">
-        <div class="ml20 flex items-center">
-          <a title="<?= __('app.home'); ?>" class="logo ml5" href="/">
-            <?= config('meta.name'); ?>
-          </a>
-        </div>
+        <a title="<?= __('app.home'); ?>" class="logo ml5" href="/">
+          <?= config('meta.name'); ?>
+        </a>
       </div>
 
       <?php if (!UserData::checkActiveUser()) : ?>
@@ -62,7 +60,7 @@ $facet  = $data['facet'] ?? false; ?>
               <i class="bi-brightness-high gray-600 text-xl"></i>
             </div>
 
-            <a class="gray-600 p15 text-xl" href="<?= url('notifications'); ?>">
+            <a class="gray-600 text-xl" href="<?= url('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
               <?php if (!empty($notif)) : ?>
                 <?php if ($notif['action_type'] == 1) : ?>

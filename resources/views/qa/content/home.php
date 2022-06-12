@@ -1,9 +1,8 @@
 <main>
-  <div class="box-flex ml10">
-    <ul class="nav">
-      <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
-    </ul>
-  </div>
+
+  <ul class="nav">
+    <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
+  </ul>
 
   <?= insert('/content/post/post', ['data' => $data]); ?>
 
@@ -66,7 +65,7 @@
       <?php endif; ?>
     </div>
   <?php endif; ?>
-  
+
   <?php if (is_array($data['topics'])) : ?>
     <?php if (count($data['topics']) > 0) : ?>
       <div class="box bg-lightgray">
