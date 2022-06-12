@@ -93,9 +93,7 @@ class EditPostController extends Controller
             $user_new  = Request::getPost('user_id');
             if ($user_new) {
                 $post_user_new = json_decode($user_new, true);
-                if ($post['post_user_id'] != $post_user_new[0]['id']) {
-                    $post_user_id = $post_user_new[0]['id'];
-                }
+                $post_user_id = $post_user_new[0]['id'];
             }
         }
 

@@ -33,7 +33,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
     public static function edit($params)
     {
         $sql_two = "UPDATE answers SET answer_content = :answer_content, 
-                        answer_modified = :answer_modified 
+                        answer_modified = :answer_modified, answer_user_id = :answer_user_id
                             WHERE answer_id = :answer_id";
 
         return DB::run($sql_two, $params);
