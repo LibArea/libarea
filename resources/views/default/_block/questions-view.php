@@ -53,9 +53,8 @@
                       <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
                     </a>
                   <?php endif; ?>
-
                 </div>
-                <div class="text-sm gray right">
+                <div class="text-sm gray flex gap">
                   <?= Html::langDate($answer['date']); ?>
                   <?php if (empty($answer['edit'])) : ?>
                     (<?= __('app.ed'); ?>.)

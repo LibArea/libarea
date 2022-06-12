@@ -34,12 +34,12 @@ class UploadImage
 
             $image->load($file);
             $image->resize(160, 160);
-            $image->save($path_img . $filename . '.jpeg', "jpeg");   
+            $image->save($path_img . $filename . '.webp', "webp");   
             
             $image->resize(48, 48);
-            $image->save($path_img_small . $filename . '.jpeg', "jpeg");  
+            $image->save($path_img_small . $filename . '.webp', "webp");  
             
-            $new_img    = $filename . '.jpeg';
+            $new_img    = $filename . '.webp';
 
             if ($type == 'topic') {
                 $images     = FacetModel::getFacet($content_id, 'id', $type);
@@ -131,12 +131,12 @@ class UploadImage
             $image = new SimpleImage();
             $image->load($file_cover);
             $image->resize(1720, 350);
-            $image->save($path_cover_img . $filename . '.jpeg', "jpeg");   
+            $image->save($path_cover_img . $filename . '.webp', "webp");   
             
             $image->resize(48, 48);
-            $image->save($path_cover_small . $filename . '.jpeg', "jpeg");  
+            $image->save($path_cover_small . $filename . '.webp', "webp");  
 
-            $new_cover  = $filename . '.jpeg';
+            $new_cover  = $filename . '.webp';
 
             if ($type == 'user') {
                 $user       = UserModel::getUser($content_id, 'id');
