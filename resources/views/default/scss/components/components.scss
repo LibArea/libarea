@@ -36,13 +36,13 @@ h5 {
   margin-bottom: 15px;
 }
 
-.medium-zoom--opened .d-header,
+.medium-zoom--opened .d-header { display: none; }
 
 .banner {
   background-color: #fff4e8;
   text-align: center;
   border-radius: 5px;
-  padding: 1.25rem;
+  padding: 1.25rem 0;
   margin-top: -1rem;
   margin-bottom: 1.25rem;
   color: #333;
@@ -359,7 +359,14 @@ iframe {
   width: 100%;
 }
 
-.voters.active .score { color: #bb6619; }
+.voters.active .score { color: var(--brown); }
+
+.qa-comment {
+  font-size: 0.875rem;
+  margin-left: 30px;
+  padding: 0.24rem 0;
+  display: flex;
+}
 
 /* Сделаем внешние ссылки с иконкой */
 .ind-first-p a[rel~="nofollow"]:after,

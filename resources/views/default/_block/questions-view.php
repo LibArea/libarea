@@ -11,14 +11,8 @@
           <div class="br-top-dotted mb20"></div>
           <ol class="list-none">
             <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
-              <div>
-                <div class="bg-lightgray w94 p5 right hidden center">
-                  <?= Html::image($answer['avatar'], $answer['login'], 'img-lg', 'avatar', 'max'); ?>
-                  <a class="qa-login" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
-                </div>
-                <div class="max-w780">
-                  <?= Content::text($answer['answer_content'], 'text'); ?>
-                </div>
+              <div class="max-w780">
+                <?= Content::text($answer['answer_content'], 'text'); ?>
               </div>
               <div class="flex text-sm justify-between">
                 <div class="flex gap">
@@ -41,7 +35,7 @@
                   <?php endif; ?>
 
                   <?php if (UserData::checkAdmin()) : ?>
-                    <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
+                    <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
                       <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
                     </a>
                   <?php endif; ?>
@@ -54,7 +48,8 @@
                     </a>
                   <?php endif; ?>
                 </div>
-                <div class="text-sm gray flex gap">
+                <div class="text-sm gray-600 flex gap">
+                  <a class="brown" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
                   <?= Html::langDate($answer['date']); ?>
                   <?php if (empty($answer['edit'])) : ?>
                     (<?= __('app.ed'); ?>.)
@@ -73,17 +68,14 @@
         $n++; ?>
         <?php if ($comment['comment_is_deleted'] == 0) : ?>
           <div class="br-bottom<?php if ($n > 1) : ?> ml30<?php endif; ?>"></div>
-          <ol class="max-w780 list-none mb0 mt0">
+          <ol class="max-w780 list-none">
             <li class="content_tree" id="comment_<?= $comment['comment_id']; ?>">
-              <div class="text-sm ml30">
-                <?= Content::text($comment['comment_content'], 'line'); ?>
-                <div class="text-sm flex gap">
-                  <span class="gray-600">
-                    <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
-                    <span class="lowercase gray-600">
-                      &nbsp; <?= Html::langDate($comment['date']); ?>
-                    </span>
-                  </span>
+              <div class="qa-comment">
+                <div class="mr15"><?= Content::text($comment['comment_content'], 'line'); ?></div>
+                <div class="text-sm flex gap gray-600">
+                  —
+                  <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
+                  <span class="lowercase"><?= Html::langDate($comment['date']); ?></span>
 
                   <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                     <?php if ($post['post_closed'] == 0) : ?>

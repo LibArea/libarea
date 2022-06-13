@@ -27,7 +27,11 @@ html {
   --white: #fff;
   --yellow: #f7f7eb;
   --purple: #f3e8ff;
+  --brown: #bb6619;
   --green: #16a34a;
+  --pink: #9d174d;
+  --sky: #0ea5e9;
+  --violet: #f3f1ed;
   --red: #ef4444;
   --red-200: #fecaca;
   --gray-100: #f3f4f6;
@@ -36,16 +40,13 @@ html {
   --gray: #4b5563;
   --blue: #3b82f6;
   --blue-100: #dbeafe;
+  --slate: #cbd5e1;
   --slate-100: #f1f5f9;
-  --slate-300: #cbd5e1;
-  --pink-800: #9d174d;
-  --sky: #0ea5e9;
-  --violet: #f3f1ed;
 }
 
 body {
   line-height: 1.5;
-  font-family:  BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-sans;
+  font-family: -apple-system,BlinkMacSystemFont,Arial,sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -143,6 +144,8 @@ img {
 .sky { color: var(--sky); }
 .red { color: var(--red); }
 .red-200 { color: var(--red-200); }
+
+.brown { color: var(--brown ); }
 
 .bg-black { background-color: var(--black); }
 .bg-white { background-color: var(--white); }
