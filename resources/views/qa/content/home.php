@@ -80,7 +80,7 @@
     <?php endif; ?>
   <?php endif; ?>
 
-  <div class="sticky top0">
+  <div class="sticky top-sm">
     <?php if (!empty($data['latest_answers'])) : ?>
       <div class="box bg-violet">
         <ul class="last-content">

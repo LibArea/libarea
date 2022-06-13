@@ -29,7 +29,7 @@
     </div>
 
     <?php if (!empty($data['pages'])) : ?>
-      <div class="sticky top0 top-sm">
+      <div class="sticky top-sm">
         <div class="box bg-lightgray text-sm">
           <h3 class="uppercase-box"><?= __('app.pages'); ?></h3>
           <?php foreach ($data['pages'] as $ind => $row) : ?>
@@ -43,7 +43,7 @@
 
     <?= insert('/_block/sidebar/topic', ['data' => $data]); ?>
     <?php if (!empty($data['writers'])) : ?>
-      <div class="sticky top0 top-sm">
+      <div class="sticky top-sm">
         <div class="box bg-lightgray text-sm">
           <h3 class="uppercase-box"><?= __('app.writers'); ?></h3>
           <ul>

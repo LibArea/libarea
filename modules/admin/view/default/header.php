@@ -9,7 +9,7 @@ Request::getHead()->addStyles('/assets/css/style.css?012');
 
 <body class="admin<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?>">
 
-  <header class="d-header sticky top0">
+  <header class="d-header">
     <div class="wrap">
       <div class="d-header_contents">
         <div class="none mb-block">

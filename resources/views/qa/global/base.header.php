@@ -10,7 +10,7 @@ $facet  = $data['facet'] ?? false; ?>
 
 <body<?php if (Request::getCookie('dayNight') == 'dark') : ?> class="dark" <?php endif; ?>>
 
-  <header class="bg-white mt0 mb10">
+  <header class="bg-white mb10">
     <div class="br-bottom wrap mb10 mb-none items-center flex gap">
       <a class="p5 black text-xs" href="/topics">
         <i class="bi-columns-gap mr5"></i> <?= __('app.topics'); ?>

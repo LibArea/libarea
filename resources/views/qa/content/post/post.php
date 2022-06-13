@@ -28,17 +28,15 @@ use Hleb\Constructor\Handlers\Request; ?>
       </div>
 
       <div class="w-100 mr15">
-        <div class="mt0 mb0">
-          <?php if ($bg_url) : ?>
-            <span><?= __('app.news'); ?>:</span>
-          <?php endif; ?>
-          <a href="<?= $post_url; ?>">
-            <span class="font-normal text-xl">
-              <?= $post['post_title']; ?>
-              <?= insert('/content/post/post-title', ['post' => $post]); ?>
-            </span>
-          </a>
-        </div>
+        <?php if ($bg_url) : ?>
+          <span><?= __('app.news'); ?>:</span>
+        <?php endif; ?>
+        <a href="<?= $post_url; ?>">
+          <span class="font-normal text-xl">
+            <?= $post['post_title']; ?>
+            <?= insert('/content/post/post-title', ['post' => $post]); ?>
+          </span>
+        </a>
         <div class="flex flex-row flex-auto items-center justify-between lowercase">
           <div class="flex-auto">
             <?= Html::facets($post['facet_list'], 'blog', 'blog', 'gray text-xs mr15'); ?>

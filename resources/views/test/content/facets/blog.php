@@ -4,7 +4,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
     <div class="box-flex" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= Html::coverUrl($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
       <?= Html::image($blog['facet_img'], $blog['facet_title'], 'img-xl mr15', 'logo', 'max'); ?>
       <div class="mb-ml0 flex-auto">
-        <h1 class="mb0 mt10 text-2xl">
+        <h1 class="text-2xl">
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == UserData::getUserId()) : ?>
             <a class="right white fon-rgba" href="<?= url('content.edit', ['type' => 'blog', 'id' => $blog['facet_id']]); ?>">
               <i class="bi-pencil bold"></i>
