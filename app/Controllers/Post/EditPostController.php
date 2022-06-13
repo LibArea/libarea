@@ -9,10 +9,12 @@ use App\Models\{FacetModel, PostModel};
 use UploadImage, Meta, Validation, Access;
 
 use App\Traits\Author;
+use App\Traits\Related;
 
 class EditPostController extends Controller
 {
     use Author;
+    use Related;
 
     // Форма редактирования post
     public function index()
@@ -74,20 +76,6 @@ class EditPostController extends Controller
             Validation::comingBack(__('msg.went_wrong'), 'error');
         }
 
-        // Связанные посты и темы
-        $fields    = Request::getPost() ?? [];
-
-        if ($post['post_type'] == 'post') {
-            $json_post  = $fields['post_select'] ?? [];
-            $arr_post   = json_decode($json_post, true);
-            if ($arr_post) {
-                foreach ($arr_post as $value) {
-                    $id[]   = $value['id'];
-                }
-            }
-            $post_related = implode(',', $id ?? []);
-        }
-
         $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
         $post_title = str_replace("&nbsp;", '', $post_title);
@@ -110,7 +98,11 @@ class EditPostController extends Controller
         }
         $post_img = $post_img ?? $post['post_content_img'];
 
+        // Связанные темы
+        $fields    = Request::getPost() ?? [];
         $new_type = self::addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
+
+        $post_related = $this->relatedPost();
 
         PostModel::editPost(
             [

@@ -8,8 +8,12 @@ use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
 use Validation, UploadImage, Meta, UserData;
 
+use App\Traits\Related;
+
 class EditFacetController extends Controller
 {
+    use Related;
+
     // Форма редактирования Topic or Blog
     public function index($type)
     {
@@ -124,17 +128,7 @@ class EditFacetController extends Controller
             }
         }
 
-        $fields = Request::getPost() ?? [];
-
-        // Связанные посты
-        $arr_post  = $fields['post_select'] ?? [];
-        if (!empty($arr_post)) {
-            $arr_post   = json_decode($arr_post, true);
-            foreach ($arr_post as $value) {
-                $id[]   = $value['id'];
-            }
-        }
-        $post_related = implode(',', $id ?? []);
+        $post_related = $this->relatedPost();
         $facet_slug = strtolower($data['facet_slug']);
 
         FacetModel::edit(
@@ -155,6 +149,7 @@ class EditFacetController extends Controller
         );
 
         // Тема, выбор детей в дереве
+        $fields = Request::getPost() ?? [];
         $highs  = $fields['high_facet_id'] ?? [];
         if ($highs) {
             $high_facet = json_decode($highs, true);

@@ -48,7 +48,7 @@
                     </a>
                   <?php endif; ?>
                 </div>
-                <div class="text-sm gray-600 flex gap">
+                <div class="text-sm gray-600 flex gap lowercase">
                   <a class="brown" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
                   <?= Html::langDate($answer['date']); ?>
                   <?php if (empty($answer['edit'])) : ?>
@@ -71,41 +71,40 @@
           <ol class="max-w780 list-none">
             <li class="content_tree" id="comment_<?= $comment['comment_id']; ?>">
               <div class="qa-comment">
-                <div class="mr15"><?= Content::text($comment['comment_content'], 'line'); ?></div>
-                <div class="text-sm flex gap gray-600">
-                  —
-                  <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
-                  <span class="lowercase"><?= Html::langDate($comment['date']); ?></span>
+                <?= Content::text($comment['comment_content'], 'line'); ?>
+                <span class="qa-comment-footer">
+                  — <a class="brown" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
+                  <span class="qa-comment-ml">
+                      <?= Html::langDate($comment['date']); ?>
 
-                  <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
-                    <?php if ($post['post_closed'] == 0) : ?>
-                      <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                        <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment lowercase gray-600">
-                          <?= __('app.reply'); ?>
+                      <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
+                        <?php if ($post['post_closed'] == 0) : ?>
+                          <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+                            <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600">
+                              <?= __('app.reply'); ?>
+                            </a>
+                          <?php endif; ?>
+                        <?php endif; ?>
+                      <?php endif; ?>
+
+                      <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
+                        <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
+                          <i title="<?= __('app.edit'); ?>" class="bi-pencil-square"></i>
                         </a>
                       <?php endif; ?>
-                    <?php endif; ?>
-                  <?php endif; ?>
 
-                  <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
-                    <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
-                      <i title="<?= __('app.edit'); ?>" class="bi-pencil-square"></i>
-                    </a>
-                  <?php endif; ?>
+                      <?php if (UserData::checkAdmin()) : ?>
+                        <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
+                          <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
+                        </a>
+                      <?php endif; ?>
 
-                  <?php if (UserData::checkAdmin()) : ?>
-                    <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
-                      <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
-                    </a>
-                  <?php endif; ?>
-
-                  <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
-                    <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
-                      <?= __('app.report'); ?>
-                    </a>
-                  <?php endif; ?>
-                  <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
-                </div>
+                      <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
+                        <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
+                          <?= __('app.report'); ?>
+                        </a>
+                      <?php endif; ?>
+                 </span>     
               </div>
               <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>
             </li>

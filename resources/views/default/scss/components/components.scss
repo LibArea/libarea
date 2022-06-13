@@ -365,8 +365,14 @@ iframe {
   font-size: 0.875rem;
   margin-left: 30px;
   padding: 0.24rem 0;
-  display: flex;
 }
+
+.qa-comment-ml {
+  color: var(--gray-600);
+  text-transform: lowercase;
+}
+
+.qa-comment-ml > a { padding: 0 0 0 0.8rem; }
 
 /* Сделаем внешние ссылки с иконкой */
 .ind-first-p a[rel~="nofollow"]:after,

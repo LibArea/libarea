@@ -11,7 +11,7 @@ foreach ($list as $key => $item) :
       $isActive = $item['id'] == $type ? ' class="active" ' : ''; ?>
 
       <li<?= $isActive; ?>><a href="<?= $item['url']; ?>">
-          <i class="<?= $item['icon']; ?>"></i>
+          <?php if (!empty($item['icon'])) : ?><i class="<?= $item['icon']; ?>"></i><?php endif; ?>
           <?= $item['title']; ?></a></li>
     <?php endif; ?>
 

@@ -11,8 +11,12 @@ use Content, UploadImage, Discord, Validation, URLScraper, Meta, UserData;
 use Cocur\Slugify\Slugify;
 use Utopia\Domains\Domain;
 
+use App\Traits\Related;
+
 class AddPostController extends Controller
 {
+    use Related;
+
     // Form adding a post / page
     // Форма добавление поста / страницы
     public function index($type)
@@ -65,19 +69,6 @@ class AddPostController extends Controller
             self::error404($count);
         }
 
-        // Related posts 
-        // Связанные посты
-        $json_post  = $fields['post_select'] ?? null;
-        if ($json_post) {
-            $arr_post   = json_decode($json_post, true);
-            if ($arr_post) {
-                foreach ($arr_post as $value) {
-                    $id[]   = $value['id'];
-                }
-            }
-            $post_related = implode(',', $id ?? []);
-        }
-
         // Используем для возврата
         $redirect = url('post.add');
         if ($blog_id > 0) {
@@ -102,8 +93,9 @@ class AddPostController extends Controller
             $post_img = UploadImage::coverPost($_FILES['images'], 0, $redirect, $this->user['id']);
         }
  
-        // Получаем SEO поста
         $slug = self::slug($post_title);
+
+        $post_related = $this->relatedPost();
 
         $last_id = PostModel::create(
             [
@@ -111,7 +103,7 @@ class AddPostController extends Controller
                 'post_content'          => $content,
                 'post_content_img'      => $post_img ?? '',
                 'post_thumb_img'        => $site['og_img'] ?? '',
-                'post_related'          => $post_related  ?? false,
+                'post_related'          => $post_related  ?? '',
                 'post_tl'               => $post_tl ?? 0,
                 'post_slug'             => $slug,
                 'post_feature'          => $post_feature,

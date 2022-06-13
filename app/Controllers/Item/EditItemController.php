@@ -10,10 +10,12 @@ use App\Models\User\UserModel;
 use Validation, UserData, Meta, Access;
 
 use App\Traits\Author;
+use App\Traits\Related;
 
 class EditItemController extends Controller
 {
     use Author;
+    use Related;
 
     // Форма редактирование домена
     public function index()
