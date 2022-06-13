@@ -1,9 +1,7 @@
 <?php if (!UserData::checkActiveUser()) : ?>
-  <div class="mb-none">
-    <center>
-      <h1><?= __('web.main_title'); ?></h1>
-      <p class="max-w780"><?= __('web.banner_info'); ?>.</p>
-    </center>
+  <div class="banner mt5 mb-none">
+    <h1><?= __('web.main_title'); ?></h1>
+    <p><?= __('web.banner_info'); ?>.</p>
   </div>
 <?php endif; ?>
 <div class="item-categories">

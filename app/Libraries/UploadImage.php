@@ -29,14 +29,13 @@ class UploadImage
             $filename =  $pref . $content_id . '-' . time();
             $file = $img['tmp_name'];
 
-            // https://github.com/phphleb/imageresizer
             $image = new SimpleImage();
 
             $image->load($file);
-            $image->resize(160, 160);
-            $image->save($path_img . $filename . '.webp', "webp");   
+            $image->resizeAllInCenter(160, 160, "#ffffff");
+            $image->save($path_img . $filename . '.webp', "webp");
             
-            $image->resize(48, 48);
+            $image->resizeAllInCenter(48, 48, "#ffffff");
             $image->save($path_img_small . $filename . '.webp', "webp");  
             
             $new_img    = $filename . '.webp';

@@ -39,7 +39,8 @@ h5 {
 .medium-zoom--opened .d-header { display: none; }
 
 .banner {
-  background-color: #fff4e8;
+  background-image: url(/assets/images/banner-fon.jpg);
+  filter: brightness(1.1);
   text-align: center;
   border-radius: 5px;
   padding: 1.25rem 0;

@@ -2,11 +2,11 @@
 
 <div class="mb-none">
 
-  <div class="box">
-    <blockquote class="ml0 mb10 gray break-all">
+  <div class="mb15">
+    <blockquote class="gray break-all">
       <?= $profile['about']; ?>...
     </blockquote>
-    <div class="gray-600">
+    <div class="gray-600 m15">
       <i class="bi-calendar-week middle"></i>
       <span class="middle lowercase text-sm">
         <?= Html::langDate($profile['created_at']); ?>

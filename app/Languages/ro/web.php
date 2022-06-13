@@ -92,7 +92,7 @@ return [
     'edit_website'      => 'Editați site-ul',
     
     'sidebar_info'      => 'Catalog de site-uri sistematizate pe rubrici tematice.',
-    'banner_info'       => 'Catalog de site-uri cu adnotări și capturi de ecran. Rubricare fațetă, căutare. Marcaje pe resurse cu posibilitatea de a vota site-uri, programe, rating',
+    'banner_info'       => 'Catalog de site-uri cu adnotări și capturi de ecran. <br> Rubricare fațetă, căutare. Marcaje pe resurse cu posibilitatea de a vota site-uri, programe, rating',
     
     'main_title'         => 'Director de site-uri',
     'main_desc'          => 'Lista site-urilor din director plasate în ordine cronologică. Abilitatea de a căuta, marca, sorta după popularitate',
