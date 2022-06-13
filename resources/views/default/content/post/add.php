@@ -1,3 +1,4 @@
+<?= component('add-js-css'); ?>
 <main>
   <div class="box">
     <h2><?= __('app.add_post'); ?></h2>

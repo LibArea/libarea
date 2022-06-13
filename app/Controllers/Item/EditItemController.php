@@ -30,10 +30,6 @@ class EditItemController extends Controller
             redirect(url('web'));
         }
 
-        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
-        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
-        Request::getResources()->addBottomScript('/assets/js/admin.js');
-
         $item_post_related = [];
         if ($domain['item_post_related']) {
             $item_post_related = PostModel::postRelated($domain['item_post_related']);
@@ -93,6 +89,8 @@ class EditItemController extends Controller
         // Если не персонал, то делаем сайт не активным
         $published = UserData::checkAdmin() ? $data['published'] : 0;
 
+        $new_user_id = $this->edit($item['item_user_id'], Request::getPost('user_id'));
+
         WebModel::edit(
             [
                 'item_id'               => $item['item_id'],
@@ -103,7 +101,7 @@ class EditItemController extends Controller
                 'item_content_soft'     => $data['content_soft'] ?? '',
                 'item_published'        => $published,
                 'item_close_replies'    => (int)($data['close_replies'] ?? 0),
-                'item_user_id'          => $this->edit($item['item_user_id'], Request::getPost('user_id')),
+                'item_user_id'          => $new_user_id,
                 'item_type_url'         => 0,
                 'item_status_url'       => $data['status'] ?? 404,
                 'item_is_soft'          => (int)($data['soft'] ?? 0),
@@ -119,7 +117,7 @@ class EditItemController extends Controller
             NotificationModel::send(
                 [
                     'sender_id'    => $this->user['id'],
-                    'recipient_id' => UserData::checkAdmin() ? $owner_uid : 1,
+                    'recipient_id' => UserData::checkAdmin() ? $new_user_id : 1,
                     'action_type'  => UserData::checkAdmin() ? NotificationModel::WEBSITE_APPROVED : NotificationModel::TYPE_EDIT_WEBSITE,
                     'url'          => url('web'),
                 ]

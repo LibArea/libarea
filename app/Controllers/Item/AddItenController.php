@@ -19,10 +19,6 @@ class AddItemController extends Controller
             redirect('/web');
         }
 
-        // Plugin for selecting facets
-        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
-        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
-
         return $this->render(
             '/item/add',
             'item',

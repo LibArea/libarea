@@ -1,4 +1,5 @@
-<?php $post = $data['post'];
+<?= component('add-js-css');  
+$post = $data['post'];
 $url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 $content = preg_replace('/</', '', $data['answer']['answer_content']); ?>
 

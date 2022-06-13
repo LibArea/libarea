@@ -13,7 +13,7 @@ use App\Traits\Author;
 class EditAnswerController extends Controller
 {
     use Author;
-    
+
     // Edit form answer
     public function index()
     {
@@ -25,11 +25,6 @@ class EditAnswerController extends Controller
 
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
         self::error404($post);
-
-        Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
-        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
-        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
         return $this->render(
             '/answer/edit-answer',
@@ -71,7 +66,7 @@ class EditAnswerController extends Controller
                 'answer_modified'   => date("Y-m-d H:i:s"),
             ]
         );
-             
+
         Validation::comingBack(__('msg.change_saved'), 'success', $url_post . '#answer_' . $answer['answer_id']);
     }
 }

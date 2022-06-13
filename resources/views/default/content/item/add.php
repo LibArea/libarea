@@ -1,3 +1,4 @@
+<?= component('add-js-css'); ?>
 <div id="contentWrapper">
   <main>
     <?= insert('/_block/navigation/breadcrumbs', [

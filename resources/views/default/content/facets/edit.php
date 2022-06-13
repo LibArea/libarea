@@ -1,4 +1,4 @@
-<?php
+<?= component('add-js-css'); 
 $fs = $data['facet'];
 $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>

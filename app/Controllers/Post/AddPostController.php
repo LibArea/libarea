@@ -21,12 +21,6 @@ class AddPostController extends Controller
     // Форма добавление поста / страницы
     public function index($type)
     {
-        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
-        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
-        Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
-        Request::getResources()->addBottomScript('/assets/js/uploads.js');
-
         // Adding from page topic 
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');

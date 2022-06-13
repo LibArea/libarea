@@ -1,4 +1,5 @@
-<?php $post = $data['post']; ?>
+<?= component('add-js-css'); 
+ $post = $data['post']; ?>
 <main>
   <div class="box">
     <h2><?= __('app.edit_' . $post['post_type']); ?></h2>

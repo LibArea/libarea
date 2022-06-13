@@ -1,4 +1,5 @@
-<?php $domain = $data['domain']; ?>
+<?= component('add-js-css'); 
+$domain = $data['domain']; ?>
 
 <div id="contentWrapper">
   <main>
