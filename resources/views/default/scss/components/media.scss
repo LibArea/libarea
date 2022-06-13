@@ -55,32 +55,17 @@ main { flex: 1; }
 
 @media (max-width: 780px) {
   .mb-w100 { width: 100px; }
-  .mb-ml10 { margin-left: 10px; }
-  .mb-mr5 { margin-right: 5px; }
-  .mb-ml5 { margin-left: 5px; }
-  .mb-mt5 { margin-top: 5px; }
   .mb-ml0 { margin-left: 0; }
-  .mb-pl0 { padding-left: 0; }
   .mb-pr0 { padding-right: 0; }
   .mb-p10 { padding: 10px; }
-  .mb-inline { display: inline; }
   .mb-block { display: block; }
   .mb-text-xl { font-size: 1.25rem; }
   .logo { font-size: 18px; }
-
-  .wrap {
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-  }
-
   .mb-w-100 { width: 100%; }
 
   aside,
   .mb-none,
   ul.setting > li > a > i { display: none; }
 
-  .flex-auto {
-    flex-wrap: wrap;
-    flex: 1 1 auto;
-  }
+ .-mt90 { margin-top: -41px; }
 }

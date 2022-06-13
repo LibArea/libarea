@@ -11,8 +11,8 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?php endif; ?>
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="flex br-bottom p15 article_<?= $post['post_id']; ?>">
-      <div class="flex mb-inline mr15">
-        <div class="box-answer block bg-lightgray gray mt5 br-rd3 lowercase mr15">
+      <div class="flex mr15">
+        <div class="box-answer block bg-lightgray gray mt5 br-rd3 mb-none lowercase mr15">
           <?= $post['post_votes']; ?>
           <div class="text-xs"> <?= Html::numWord($post['post_votes'], __('app.num_up'), false); ?></div>
         </div>
@@ -51,8 +51,10 @@ use Hleb\Constructor\Handlers\Request; ?>
           </div>
 
           <div class="gray-600 text-xs">
-            <?= $post['post_date'] ?> ·
-            <?= Html::numWord($post['post_hits_count'], __('app.num_view'), true); ?> ·
+            <span class="mb-none">            
+              <?= $post['post_date'] ?> ·
+              <?= Html::numWord($post['post_hits_count'], __('app.num_view'), true); ?> ·
+            </span>
             <a href="<?= url('profile', ['login' => $post['login']]); ?>">
               <?= $post['login']; ?>
             </a>

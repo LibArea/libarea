@@ -89,7 +89,7 @@
 
       <div class="br-gray p15 items-center flex justify-between mb5">
         <div class="items-center flex">
-          <div class="left m10 none mb-block mb-mr5">
+          <div class="left m10 none mb-block">
             <?= Html::votes($post, 'post', 'mob', 'bi-heart text-2xl mr5 middle'); ?>
           </div>
 

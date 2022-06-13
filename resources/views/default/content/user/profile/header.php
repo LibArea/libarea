@@ -35,11 +35,11 @@ endif;
       <?php endif; ?>
 
       <div class="flex">
-        <h1 class="mb-block mb-text-xl m15 mb-mt5 flex flex-auto">
+        <h1 class="mb-block mb-text-xl m15 flex flex-auto">
           <?= $profile['login']; ?>
           <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
             <?php if ($profile['up_count'] > 0) : ?>
-              <i class="up-id bi-heart red mr10 ml20 mb-ml5 text-sm inline"></i>
+              <i class="up-id bi-heart red mr10 ml20 text-sm inline"></i>
               <sup class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></sup>
             <?php endif; ?>
         </h1>

@@ -21,7 +21,7 @@
         <li><a href="<?= url('answers'); ?>"><?= __('app.answers'); ?></a></li>
         <li><a href="<?= url('comments'); ?>"><?= __('app.comments'); ?></a></li>
       </ul>
-      <ul class="mb-pl0">
+      <ul>
         <li><a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => config('facets.page-one')]); ?>"><?= __('app.info'); ?></a></li>
         <li><a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => config('facets.page-two')]); ?>"><?= __('app.privacy'); ?></a></li>
       </ul>
