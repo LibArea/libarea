@@ -10,7 +10,7 @@
   <span class="mr5 ml5"><?= $data['user']['email']; ?></span>
 </fieldset>
 
-<fieldset class="max-w300">
+<fieldset>
   <label for="name"><?= __('app.name'); ?></label>
   <input maxlength="11" value="<?= $data['user']['name']; ?>" type="text" name="name">
   <div class="help">0 - 11 <?= __('app.characters'); ?></div>
@@ -26,13 +26,13 @@
   'help'      => '0 - 255 ' . __('app.characters'),
 ]); ?>
 
-<fieldset id="box" class="max-w300">
+<fieldset id="box">
   <label for="post_content"><?= __('app.color'); ?></label>
   <input type="color" value="<?= $data['user']['color']; ?>" id="colorPicker">
   <input type="hidden" name="color" value="<?= $data['user']['color']; ?>" id="color">
 </fieldset>
 
-<fieldset class="max-w300">
+<fieldset>
   <label for="template"><?= __('app.template'); ?></label>
   <select name="template">
     <?php foreach (config('general.templates') as $tpl) { ?>
@@ -43,7 +43,7 @@
   </select>
 </fieldset>
 
-<fieldset class="max-w300">
+<fieldset>
   <label for="post_content"><?= __('app.language'); ?></label>
   <select name="lang">
     <?php foreach (config('general.languages') as $lang) {  ?>
@@ -115,7 +115,7 @@ $setting = [
 
 <h3 class="mt15 mb15"><?= __('app.contacts'); ?></h3>
 <?php foreach ($setting as $block) : ?>
-  <fieldset class="max-w300">
+  <fieldset>
     <label for="post_title"><?= $block['lang']; ?></label>
     <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
     <?php if ($block['help']) : ?>

@@ -1,11 +1,11 @@
 <main>
-  <div class="box-flex justify-between">
+  <div class="flex justify-between">
     <p class="m0"><?= __('team.home'); ?></p>
     <?php if ($data['count'] < $data['limit']) : ?>
       <a href="<?= url('content.add', ['type' => 'team']); ?>" class="btn btn-primary"><?= __('team.add_team'); ?></a>
     <?php endif; ?>
   </div>
-  <div class="box">
+  <div class="mb5">
     <?php if (!empty($data['teams'])) : ?>
 
       <?php foreach ($data['teams'] as $team) : ?>

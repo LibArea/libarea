@@ -4,7 +4,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
 <main>
-  <div class="box-flex justify-between">
+  <div class="flex justify-between">
     <p class="m0 text-xl"><?= __('app.edit_' . $data['type']); ?></p>
     <ul class="nav">
 
@@ -16,7 +16,6 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
               'id'        => 'all',
               'url'       => $url,
               'title'     => __('app.go_to'),
-              'icon'      => 'bi bi-arrow-up-right-square'
             ]
           ]
         ]
@@ -25,19 +24,16 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     </ul>
   </div>
 
-  <div class="box">
     <form class="max-w780" action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
       <?= insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
 
       <div class="file-upload mb10 mt15" id="file-drag">
-        <div class="flex">
-          <?= Html::image($fs['facet_img'], $fs['facet_title'], 'img-xl', 'logo', 'max'); ?>
-          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
-          <div id="start" class="mt15">
-            <input class="text-xs" id="file-upload" type="file" name="images" accept="image/*" />
-            <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
-          </div>
+        <?= Html::image($fs['facet_img'], $fs['facet_title'], 'img-xl', 'logo', 'max'); ?>
+        <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
+        <div id="start" class="mt15">
+          <input class="text-xs" id="file-upload" type="file" name="images" accept="image/*" />
+          <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
         </div>
         <div id="response" class="hidden">
           <div id="messages"></div>
@@ -196,10 +192,9 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <?= Html::sumbit(__('app.edit')); ?>
     </fieldset>
     </form>
-  </div>
 </main>
 <aside>
-  <div class="box">
+  <div class="box bg-beige">
     <h3 class="uppercase-box"><?= __('app.help'); ?></h3>
     <?= __('help.edit_' . $data['type']); ?>
   </div>

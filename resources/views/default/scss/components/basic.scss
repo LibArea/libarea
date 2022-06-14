@@ -82,6 +82,7 @@ img {
 .right5 { right: 5px; }
 .mr-auto { margin: 0 auto; }
 .-mr-1 { margin-right: -0.5rem; }
+.-ml40 { margin-left: -40px; }
 .-mt50 { margin-top: -50px; }
 .-mt90 { margin-top: -90px; }
 .m0 { margin: 0; }
@@ -113,7 +114,6 @@ img {
 .mt30 { margin-top: 30px; }
 .mr30 { margin-right: 30px; }
 .ml30 { margin-left: 30px; }
-.ml-40 { margin-left: -40px; }
 
 .p5 { padding: 5px; }
 .pt5 { padding-top: 5px; }
@@ -195,8 +195,8 @@ img {
 .w200 { width: 200px; }
 
 .max-w-100 { max-width: 100%; }
-.max-w300 { max-width: 300px; }
 .max-w780 { max-width: 780px; }
+.max-w300 { max-width: 300px; }
 
 .text-xs { font-size: 0.75rem; }
 .text-sm { font-size: 0.875rem; }

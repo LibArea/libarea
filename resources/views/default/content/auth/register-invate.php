@@ -1,4 +1,4 @@
-<main class="box w-100">
+<main">
   <h1><?= __('app.reg_invite'); ?></h1>
   <form class="max-w300" action="<?= url('register.add'); ?>" method="post">
     <?php csrf_field(); ?>
@@ -33,4 +33,4 @@
       <?= Html::sumbit(__('app.registration')); ?>
     </fieldset>
   </form>
-</main>
+  </main>

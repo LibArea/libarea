@@ -5,14 +5,14 @@ function internalRender($nodes, $tl, $user_id)
 {
     echo '<ul class="list-style-none mb20 mt10">';
     foreach ($nodes as $node) {
-        $minus = $node['reply_parent_id'] == 0 ? ' ml-40' : '';
+        $minus = $node['reply_parent_id'] == 0 ? ' -ml40' : '';
         $delete = $node['reply_is_deleted'] == 1 ? ' bg-red-200' : '';
 
         echo '<li class="hidden  mt20' . $minus . $delete . '">
                     <div id="reply_' . $node['reply_id'] . '" class="text-sm">';
 
         echo '<div class="flex gap">'
-        
+
             . Html::image($node['avatar'], $node['login'], 'img-sm', 'avatar', 'small') .
 
             '<span class="gray-600">' . $node['login'] . '</span>
@@ -29,7 +29,7 @@ function internalRender($nodes, $tl, $user_id)
         }
 
         echo '</div>';
-        
+
         echo '<div class="max-w780 text-base ind-first-p">' . Content::text($node['content'], 'text') . '</div>
                     <div class="flex gap">' . Html::votes($node, 'reply', 'ps', 'bi-heart mr5');
 

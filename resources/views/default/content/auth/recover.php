@@ -1,4 +1,4 @@
-<main class="box w-100">
+<main>
   <h1><?= __('app.password_recovery'); ?></h1>
   <form class="form max-w300" action="<?= url('recover.send'); ?>" method="post">
     <?php csrf_field(); ?>

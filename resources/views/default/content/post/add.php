@@ -1,14 +1,11 @@
 <?= component('add-js-css'); ?>
 <main>
-  <div class="box">
-    <h2><?= __('app.add_post'); ?></h2>
+  <h2><?= __('app.add_post'); ?></h2>
 
-    <form class="max-w780" action="<?= url('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
-      <?= csrf_field() ?>
-      <?= component('add-post', ['data' => $data]); ?>
-    </form>
-
-  </div>
+  <form class="max-w780" action="<?= url('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
+    <?= csrf_field() ?>
+    <?= component('add-post', ['data' => $data]); ?>
+  </form>
 </main>
 <aside>
   <div class="box bg-beige">

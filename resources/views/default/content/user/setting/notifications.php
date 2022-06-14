@@ -1,12 +1,9 @@
 <main>
   <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
-
-  <div class="box">
-    <form action="<?= url('setting.change', ['type' => 'notification']); ?>" method="post">
-      <?php csrf_field(); ?>
-      <?= component('setting-notifications', ['data' => $data]); ?>
-    </form>
-  </div>
+  <form class="max-w780" action="<?= url('setting.change', ['type' => 'notification']); ?>" method="post">
+    <?php csrf_field(); ?>
+    <?= component('setting-notifications', ['data' => $data]); ?>
+  </form>
 </main>
 
 <aside>

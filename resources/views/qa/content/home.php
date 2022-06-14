@@ -21,7 +21,10 @@
 
   <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) : ?>
     <div class="box bg-violet">
-      <h3 class="uppercase-box"><?= __('app.reading'); ?></h3>
+      <h3 class="uppercase-box"><?= __('app.reading'); ?>
+      <?php if (count($data['topics_user']) > config('facets.quantity_home')) : ?>
+          <a class="gray-600 text-sm" title="<?= __('app.topics'); ?>" href="<?= url('topics.my'); ?>">...</a>
+      <?php endif; ?></h3>
       <ul>
         <?php
         $my = [];
@@ -58,11 +61,6 @@
           </li>
         <?php endforeach; ?>
       </ul>
-      <?php if (count($data['topics_user']) > config('facets.quantity_home')) : ?>
-        <a class="gray-600 block mt5" title="<?= __('app.topics'); ?>" href="<?= url('topics.my'); ?>">
-          <?= __('app.see_more'); ?> <i class="bi-chevron-double-right middle"></i>
-        </a>
-      <?php endif; ?>
     </div>
   <?php endif; ?>
 

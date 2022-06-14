@@ -1,4 +1,4 @@
-<main class="box w-100">
+<main>
   <h1><?= __('app.' . $data['sheet']); ?></h1>
 
   <div class="p15 bg-violet max-w300 mb-none right">

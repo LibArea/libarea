@@ -37,6 +37,8 @@
 <div class="box-flex flex-wrap mb20">
   <div class="label-grey mr5">.label-grey</div>
   <div class="label-orange">.label-orange</div>
+  <div class="label-green">.label-green</div>
+  <div class="label-red">.label-red</div>
 </div>
 
 <div class="box-flex flex-wrap">

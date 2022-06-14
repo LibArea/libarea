@@ -1,6 +1,6 @@
 <?php $page = $data['page']; ?>
 <main>
-  <article class="box <?php if ($page['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
+  <article<?php if ($page['post_is_deleted'] == 1) { ?> class="bg-red-200" <?php } ?>>
     <?php if ($page['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
       <h1>
         <?= $page['post_title']; ?>
@@ -13,18 +13,18 @@
         <?= __('app.content_deleted', ['name' => __('app.post')]); ?>...
       </div>
     <?php endif; ?>
-  </article>
-  <div class="box-flex justify-between text-2xl">
-    <?= Html::votes($page, 'post', 'ps', 'bi-heart middle mr15'); ?>
-    <div class="gray-600 italic ml15">
-      <?= $page['post_modified']; ?>
-      <?php if (UserData::checkAdmin() || $page['post_user_id'] == UserData::getUserId()) : ?>
-        <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
-          <i class="bi-pencil"></i>
-        </a>
-      <?php endif; ?>
+    </article>
+    <div class="box-flex justify-between text-2xl">
+      <?= Html::votes($page, 'post', 'ps', 'bi-heart middle mr15'); ?>
+      <div class="gray-600 italic ml15">
+        <?= $page['post_modified']; ?>
+        <?php if (UserData::checkAdmin() || $page['post_user_id'] == UserData::getUserId()) : ?>
+          <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
+            <i class="bi-pencil"></i>
+          </a>
+        <?php endif; ?>
+      </div>
     </div>
-  </div>
 </main>
 <aside>
   <div class="box sticky top-sm bg-beige">

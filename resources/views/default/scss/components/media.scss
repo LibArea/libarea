@@ -58,10 +58,14 @@ main { flex: 1; }
   .mb-ml0 { margin-left: 0; }
   .mb-pr0 { padding-right: 0; }
   .mb-p10 { padding: 10px; }
-  .mb-block { display: block; }
   .mb-text-xl { font-size: 1.25rem; }
   .logo { font-size: 18px; }
   .mb-w-100 { width: 100%; }
+  .gap-max { gap: 1.5rem; }
+  footer ul { padding-left: 0; }
+
+  .mb-block,
+  #contentWrapper { display: block; }
 
   aside,
   .mb-none,

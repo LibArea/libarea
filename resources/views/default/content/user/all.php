@@ -30,21 +30,21 @@
     </ul>
   </div>
 
-    <div class="flex flex-wrap justify-between">
-      <?php foreach ($data['users'] as $user) : ?>
-        <div class="w160 mb-w100 mb20 center">
-          <a href="<?= url('profile', ['login' => $user['login']]); ?>">
-            <?= Html::image($user['avatar'], $user['login'], 'img-lg', 'avatar', 'max'); ?>
-            <div class="block mt5">
-              <?= $user['login']; ?>
-            </div>
-            <?php if ($user['name']) : ?>
-              <span class="gray text-sm"><?= $user['name']; ?></span>
-            <?php endif; ?>
-          </a>
-        </div>
-      <?php endforeach; ?>
-    </div>
+  <div class="flex flex-wrap justify-between">
+    <?php foreach ($data['users'] as $user) : ?>
+      <div class="w160 mb-w100 mb20 center">
+        <a href="<?= url('profile', ['login' => $user['login']]); ?>">
+          <?= Html::image($user['avatar'], $user['login'], 'img-lg', 'avatar', 'max'); ?>
+          <div class="block mt5">
+            <?= $user['login']; ?>
+          </div>
+          <?php if ($user['name']) : ?>
+            <span class="gray text-sm"><?= $user['name']; ?></span>
+          <?php endif; ?>
+        </a>
+      </div>
+    <?php endforeach; ?>
+  </div>
 
   <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url('users.' . $data['sheet'])); ?>
 </main>

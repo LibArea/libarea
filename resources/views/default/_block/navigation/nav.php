@@ -9,7 +9,8 @@ foreach ($list as $key => $item) :
         <?= $item['title']; ?>
      </li>
     <?php else : ?>
-      <li><a href="<?= $item['url']; ?>">
+      <li<?php if (!empty($item['css'])) : ?> class="<?= $item['css']; ?>"<?php endif; ?>>
+        <a href="<?= $item['url']; ?>">
         <?php if (!empty($item['icon'])) : ?><i class="text-sm <?= $item['icon']; ?>"></i><?php endif; ?>
         <?= $item['title']; ?></a></li>
     <?php endif; ?>
