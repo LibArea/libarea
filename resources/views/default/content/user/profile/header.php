@@ -6,13 +6,15 @@ if ($profile['cover_art'] != 'cover_art.jpeg') :
 endif;
 ?>
 
+<style nonce="<?= $_SERVER['nonce']; ?>">.bg-profile {background: <?= $profile['color']; ?>;min-height: 90px;}</style>
+
 <div class="br-gray bg-white mb15">
   <?php if ($profile['cover_art'] != 'cover_art.jpeg') : ?>
     <div class="profile-box-cover relative">
       <img class="w-100" src="<?= Html::coverUrl($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
     </div>
   <?php else : ?>
-    <div class="w-100 relative" style="background: <?= $profile['color']; ?>;min-height: 90px;"></div>
+    <div class="w-100 relative bg-profile"></div>
   <?php endif; ?>
   <div class="flex justify-between">
     <div class="profile-header-footer">
