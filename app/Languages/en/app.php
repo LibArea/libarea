@@ -184,6 +184,7 @@ return [
 
     'being_developed'   => 'Under development',
     'activity'          => 'Activity',
+    'question'          => 'Question',
     'question_closed'   => 'The question is closed',
     'this_draft'        => 'This post is a draft',
     'no_cover'          => 'No covers yet',

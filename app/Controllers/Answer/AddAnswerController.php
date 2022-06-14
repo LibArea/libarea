@@ -23,7 +23,7 @@ class AddAnswerController extends Controller
 
         // Let's check the stop words, url
         // Проверим стоп слова, url
-        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content, 'answer');
+        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
 
         $last_id = AnswerModel::add(
             [

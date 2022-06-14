@@ -14,7 +14,6 @@ class SendEmail
             return false;
         }
 
-        $u_data = UserData::get();
         $user   = UserModel::getUser($uid, 'id');
 
         if ($type == 'appealed') {

@@ -71,7 +71,7 @@ class AddPostController extends Controller
 
         // Let's check the stop words, url
         // Проверим стоп слова, url
-        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content, 'post');
+        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
 
         $post_title = str_replace("&nbsp;", '', $post_title);
 

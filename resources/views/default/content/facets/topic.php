@@ -21,10 +21,10 @@
       </div>
       <div class="center relative">
         <div class="uppercase text-sm gray-600"><?= __('app.reads'); ?></div>
-        <div class="focus-user sky">
+        <div data-id="<?= $topic['facet_id']; ?>" data-slug="<?= $topic['facet_slug']; ?>"  class="focus-user trigger sky">
           <?= $topic['facet_focus_count']; ?>
         </div>
-        <div class="content_<?= $topic['facet_id']; ?> absolute bg-white box-shadow-all right0"></div>
+        <div class="list_<?= $topic['facet_id']; ?> dropdown"></div>
       </div>
     </div>
 
@@ -62,30 +62,3 @@
 
   <?php endif; ?>
 </aside>
-
-<script nonce="<?= $_SERVER['nonce']; ?>">
-  document.querySelectorAll(".focus-user")
-    .forEach(el => el.addEventListener("click", function(e) {
-      let content = document.querySelector('.content_<?= $topic['facet_id']; ?>');
-      let div = document.querySelector(".content_<?= $topic['facet_id']; ?>");
-      div.classList.remove("none");
-      fetch("/topic/<?= $topic['facet_slug']; ?>/followers/<?= $topic['facet_id']; ?>", {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        })
-        .then(
-          response => {
-            return response.text();
-          }
-        ).then(
-          text => {
-            content.innerHTML = text;
-          }
-        );
-      window.addEventListener('mouseup', e => {
-        div.classList.add("none");
-      });
-    }));
-</script>

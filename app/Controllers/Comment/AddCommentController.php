@@ -43,7 +43,7 @@ class AddCommentController extends Controller
 
         // Let's check the stop words, url
         // Проверим стоп слова, url
-        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content, 'comment');
+        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
 
         $last_id = CommentModel::add(
             [

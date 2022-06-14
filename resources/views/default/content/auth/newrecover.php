@@ -5,7 +5,7 @@
     <fieldset>
       <label for="password"><?= __('app.new_password'); ?></label>
       <input id="password" type="password" name="password">
-      <span class="showPassword absolute gray-600 right5 mt5"><i class="bi-eye"></i></span>
+      <span class="showPassword"><i class="bi-eye"></i></span>
     </fieldset>
     <p>
       <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">

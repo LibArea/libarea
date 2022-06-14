@@ -37,6 +37,8 @@ class TopicFacetController extends Controller
             $description  = __('app.rec_posts_desc', ['name' => $facet['facet_seo_title']]) . $facet['facet_description'];
         }
 
+        Request::getResources()->addBottomScript('/assets/js/facet-focus-user.js');
+
         $m = [
             'og'         => true,
             'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],

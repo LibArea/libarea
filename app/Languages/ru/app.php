@@ -184,6 +184,7 @@ return [
 
     'being_developed'   => 'В стадии разработки',
     'activity'          => 'Активность',
+    'question'          => 'Вопрос',
     'question_closed'   => 'Вопрос закрыт',
     'this_draft'        => 'Этот пост, черновик',
     'no_cover'          => 'Обложки пока нет',

@@ -14,7 +14,7 @@ class Audits extends Controller
 
     public function index($sheet, $type)
     {
-        $pagesCount = LogModel::getAuditsAllCount($sheet, $type);
+        $pagesCount = LogModel::getAuditsAllCount($sheet);
         $audits     = LogModel::getAuditsAll($this->pageNumber, $this->limit, $sheet, $type);
 
         $result = [];

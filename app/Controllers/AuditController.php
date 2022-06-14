@@ -10,7 +10,7 @@ class AuditController extends Controller
 {
     // Let's check the stop words, url
     // Проверим стоп слова, url
-    public function prohibitedContent($content, $type)
+    public function prohibitedContent($content)
     {
 
         if (!self::stopUrl($content, $this->user['id'])) {

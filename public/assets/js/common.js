@@ -1,5 +1,5 @@
 function isIdEmpty(elmId) {
-  var elem = document.getElementById(elmId);
+  let elem = document.getElementById(elmId);
   if(typeof elem !== 'undefined' && elem !== null) return elem;
   return false;
 }

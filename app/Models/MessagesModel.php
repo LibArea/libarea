@@ -136,7 +136,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
         $query = DB::run($sql, ['dialog_id' => $dialog_id])->fetchAll();
 
         if ($query) {
-            foreach ($query as $key => $val) {
+            foreach ($query as $val) {
                 $message[$val['message_id']] = $val;
             }
         }

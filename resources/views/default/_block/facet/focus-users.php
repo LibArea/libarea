@@ -1,6 +1,5 @@
 <?php if ($focus_users) : ?>
-  <span class="text-sm mt20">
-    <div class="uppercase inline  gray-600 mr5"><?= __('app.reads'); ?>:</div>
+    <div class="uppercase inline gray-600 mr5"><?= __('app.reads'); ?>:</div>
     <?php $n = 0;
     foreach ($focus_users as $user) :
       $n++; ?>
@@ -9,10 +8,10 @@
       </a>
     <?php endforeach; ?>
     <?php if ($n > 5) : ?><span class="ml10">...</span><?php endif; ?>
-    <?php if (!empty($topic_focus_count)) : ?>
-      <span class="focus-user ml10 sky">
-        <?= $topic_focus_count; ?>
+    <?php if (!empty($facet['facet_focus_count'])) : ?>
+      <span data-id="<?= $facet['facet_id']; ?>" data-slug="<?= $facet['facet_slug']; ?>" class="focus-user trigger ml10 sky">
+        <?= $facet['facet_focus_count']; ?>
       </span>
+      <div class="dropdown list_<?= $facet['facet_id']; ?>"></div>
     <?php endif; ?>
-  </span>
 <?php endif; ?>

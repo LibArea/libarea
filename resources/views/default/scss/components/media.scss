@@ -7,11 +7,6 @@
 main { flex: 1; }
 
 @media (max-width: 1050px) {
-  iframe {
-    max-width: 270px;
-    max-height: 170px;
-  }
-
   .menu__left, #togglemenu { display: none; }
   aside { min-width: 240px; }
 
@@ -60,12 +55,14 @@ main { flex: 1; }
   .mb-p10 { padding: 10px; }
   .mb-text-xl { font-size: 1.25rem; }
   .logo { font-size: 18px; }
-  .mb-w-100 { width: 100%; }
   .gap-max { gap: 1.5rem; }
   footer ul { padding-left: 0; }
 
   .mb-block,
   #contentWrapper { display: block; }
+
+  .mb-w-100,
+  iframe { width: 100%; }
 
   aside,
   .mb-none,

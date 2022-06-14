@@ -184,6 +184,7 @@ return [
 
     'being_developed'   => '开发中',
     'activity'          => '活动',
+    'question'          => '问题',
     'question_closed'   => '问题已结束',
     'this_draft'        => '这篇文章是草稿',
     'no_cover'          => '还没有封面',

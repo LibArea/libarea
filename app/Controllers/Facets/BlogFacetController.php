@@ -32,6 +32,8 @@ class BlogFacetController extends Controller
         $title  = $facet['facet_seo_title'] . ' — ' .  __('app.blog');
         $description  = $facet['facet_description'];
 
+        Request::getResources()->addBottomScript('/assets/js/facet-focus-user.js');
+
         $m = [
             'og'        => true,
             'imgurl'    => PATH_FACETS_LOGOS . $facet['facet_img'],

@@ -43,10 +43,9 @@ if ($blog['facet_is_deleted'] == 0) : ?>
             </div>
             <div class="relative max-w300 mt15">
               <?= insert('/_block/facet/focus-users', [
-                'topic_focus_count' => $blog['facet_focus_count'],
-                'focus_users'       => $data['focus_users'] ?? '',
+                'facet'         => $blog,
+                'focus_users'   => $data['focus_users'] ?? '',
               ]); ?>
-              <div class="content_<?= $blog['facet_id']; ?> absolute bg-white box-shadow-all right0"></div>
             </div>
           </div>
           <?php if ($data['info']) : ?>
@@ -66,30 +65,3 @@ if ($blog['facet_is_deleted'] == 0) : ?>
     <div class="mt5 gray"><?= __('app.remote'); ?></div>
   </div>
 <?php endif; ?>
-
-<script nonce="<?= $_SERVER['nonce']; ?>">
-  document.querySelectorAll(".focus-user")
-    .forEach(el => el.addEventListener("click", function(e) {
-      let content = document.querySelector('.content_<?= $blog['facet_id']; ?>');
-      let div = document.querySelector(".content_<?= $blog['facet_id']; ?>");
-      div.classList.remove("none");
-      fetch("/topic/<?= $blog['facet_slug']; ?>/followers/<?= $blog['facet_id']; ?>", {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        })
-        .then(
-          response => {
-            return response.text();
-          }
-        ).then(
-          text => {
-            content.innerHTML = text;
-          }
-        );
-      window.addEventListener('mouseup', e => {
-        div.classList.add("none");
-      });
-    }));
-</script>

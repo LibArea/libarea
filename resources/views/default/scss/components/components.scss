@@ -375,6 +375,13 @@ iframe {
 
 .qa-comment-ml > a { padding: 0 0 0 0.8rem; }
 
+.showPassword {
+  position: absolute;
+  color: var(--gray-600);
+  right: 5px;
+  margin: 5px;
+}
+
 /* Сделаем внешние ссылки с иконкой */
 .ind-first-p a[rel~="nofollow"]:after,
 .post-body a[rel~="nofollow"]:after {

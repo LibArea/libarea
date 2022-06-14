@@ -57,7 +57,7 @@ class LogModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['type' => $type, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getAuditsAllCount($sheet, $type)
+    public static function getAuditsAllCount($sheet)
     {
         $sort = "read_flag = 0";
         if ($sheet == 'ban') {

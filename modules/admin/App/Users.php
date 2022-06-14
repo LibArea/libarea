@@ -110,17 +110,17 @@ class Users extends Controller
     public function change()
     {
         $data = Request::getPost();
-        
+
         if (!$user = UserModel::getUser($data['user_id'], 'id')) {
             return false;
         }
-        
+
         $redirect = url('admin.user.edit', ['id' => $user['id']]);
-        
+
         Validation::length($data['login'], 3, 11, 'login', $redirect);
 
         if ($data['email']) {
-            Validation::email($email = Request::getPost('email'), $redirect);
+            Validation::email(Request::getPost('email'), $redirect);
         }
 
         SettingModel::edit(
