@@ -3,10 +3,6 @@
     <ul class="nav">
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.answers')]); ?>
     </ul>
-    <div class="relative">
-      <div class="trigger"><i class="bi-info-square gray-600"></i></div>
-      <div class="dropdown tooltip"><?= __('meta.' . $data['sheet'] . '_' . $data['type'] . '_info'); ?></div>
-    </div>
   </div>
 
   <?php if (!empty($data['answers'])) : ?>

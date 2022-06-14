@@ -40,7 +40,7 @@
 
     <?php if ($access) : ?>
       <?php if ($data['countUserFacet'] == 0 || UserData::checkAdmin()) : ?>
-        <p class="m0 text-xl">
+        <p class="text-xl">
           <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
             <i class="bi-plus-lg middle"></i>
           </a>

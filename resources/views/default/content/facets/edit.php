@@ -5,7 +5,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
 <main>
   <div class="flex justify-between">
-    <p class="m0 text-xl"><?= __('app.edit_' . $data['type']); ?></p>
+    <?= __('app.edit_' . $data['type']); ?>
     <ul class="nav">
 
       <?= insert(

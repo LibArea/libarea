@@ -226,18 +226,6 @@ details[open] > summary {
   display: inherit;
 }
 
-.tooltip {
-  position: absolute;
-  right: 0;
-  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.15);
-  background-color: #fff;
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 5px;
-  color: var(--gray-600);
-  text-align: center;
-}
-
 .box {
   border-radius: 5px;
   padding: 1.25rem;

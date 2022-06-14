@@ -31,7 +31,7 @@
     <?php foreach ($data['pages'] as $ind => $row) : ?>
       <div class=" pt5 pb5">
         <a class="gray" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
-          <i class="bi-info-square mr5"></i> <?= $row['post_title']; ?>
+          <i class="bi-info-lg mr5"></i> <?= $row['post_title']; ?>
         </a>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm gray-600" href="<?= url('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><i class="bi-pencil"></i></a>

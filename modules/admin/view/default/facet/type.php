@@ -81,7 +81,7 @@
     <?php foreach ($data['pages'] as $page) : ?>
       <div class="mb5">
         <a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $page['post_slug']]); ?>">
-          <i class="bi-info-square middle mr5"></i> <?= $page['post_title']; ?> <sup class="gray-600">id:<?= $page['post_id']; ?></sup>
+          <i class="bi-info-lg middle mr5"></i> <?= $page['post_title']; ?> <sup class="gray-600">id:<?= $page['post_id']; ?></sup>
         </a>
         <a class="gray-600 ml10" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]) ?>">
           <i class="bi-pencil"></i>

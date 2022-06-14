@@ -1,6 +1,6 @@
 <main>
   <div class="flex justify-between">
-    <p class="m0"><?= __('team.home'); ?></p>
+    <?= __('team.home'); ?>
     <?php if ($data['count'] < $data['limit']) : ?>
       <a href="<?= url('content.add', ['type' => 'team']); ?>" class="btn btn-primary"><?= __('team.add_team'); ?></a>
     <?php endif; ?>

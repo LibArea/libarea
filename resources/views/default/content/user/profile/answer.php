@@ -3,7 +3,7 @@
   <div class="flex gap">
     <main>
       <div class="box-flex">
-        <p class="m0"><?= __('app.answers'); ?> <b><?= $data['profile']['login']; ?></b></p>
+        <?= __('app.answers'); ?> <b><?= $data['profile']['login']; ?></b>
       </div>
       <?php if (!empty($data['answers'])) : ?>
         <div class="box">

@@ -117,7 +117,7 @@
 
   <div class="box bg-lightgray">
     <h3 class="uppercase-box"><?= __('app.badges'); ?></h3>
-    <div class="m0 text-3xl">
+    <div class="text-3xl">
       <i title="<?= __('app.medal_reg'); ?>" class="bi-gift sky"></i>
       <?php if ($profile['id'] < 50) : ?>
         <i title="<?= __('app.first_days'); ?>" class="bi-award green"></i>
@@ -155,7 +155,7 @@
         </a>
         <?php if ($profile['whisper']) : ?>
           <div class="tips text-sm gray-600">
-            <i class="bi-info-square green mr5"></i>
+            <i class="bi-info-lg green mr5"></i>
             <?= $profile['whisper']; ?>
           </div>
         <?php endif; ?>

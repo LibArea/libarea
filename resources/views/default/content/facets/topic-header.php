@@ -47,7 +47,7 @@
     ); ?>
 
   </ul>
-  <a class="m0 gray-600" href="<?= url('topic.info', ['slug' => $topic['facet_slug']]); ?>">
+  <a class="gray-600" href="<?= url('topic.info', ['slug' => $topic['facet_slug']]); ?>">
     <i class="bi-info-lg"></i>
   </a>
 </div>

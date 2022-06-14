@@ -1,6 +1,6 @@
 <?php if (!empty($data['answers'])) : ?>
   <div class="box">
-    <h2 class="lowercase m0 text-2xl">
+    <h2 class="lowercase text-2xl">
       <?= Html::numWord($post['amount_content'], __('app.num_answer'), true); ?>
     </h2>
 

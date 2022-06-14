@@ -68,7 +68,7 @@ class TeamController extends Controller
         }
 
         $result = [];
-        foreach (array_chunk($users, 3) as $ind => $row) {
+        foreach (array_chunk($users, 3) as $row) {
             $result[] = '<a class="mr15 gray-600" href="' . url('profile', ['login' => $row[1]]) . '">
             ' . Html::image($row[2], $row[1], 'img-sm', 'avatar', 'small') . '
             ' . $row[1] . '</a>';

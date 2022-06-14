@@ -1,6 +1,6 @@
 <main>
   <div class="box-flex bg-violet justify-between">
-    <p class="m0"><?= __('app.' . $data['sheet']); ?></p>
+    <?= __('app.' . $data['sheet']); ?>
     <form action="<?= url('notif.remove'); ?>" class="right">
       <?= Html::sumbit(__('app.i_read')); ?>
     </form>

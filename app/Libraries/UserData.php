@@ -190,8 +190,6 @@ class UserData
      */
     static public function getUserId()
     {
-        $t = self::getAccount();
-
         return self::$myAccount['id'] ?? false;
     }
 

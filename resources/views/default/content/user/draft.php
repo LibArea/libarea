@@ -8,7 +8,7 @@
     <?php foreach ($data['drafts'] as $draft) : ?>
       <div class="box bg-lightgray">
         <a href="<?= url('post', ['id' => $draft['post_id'], 'slug' => $draft['post_slug']]); ?>">
-          <h3 class="m0 text-2xl"><?= $draft['post_title']; ?></h3>
+          <h3 class="text-2xl"><?= $draft['post_title']; ?></h3>
         </a>
         <div class="mr5 text-sm gray-600 lowercase">
           <?= Html::langDate($draft['post_date']); ?>

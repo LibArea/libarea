@@ -45,7 +45,7 @@
           <?php if ($user['invitation_id'] != 0) : ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php endif; ?>
           <?php if ($user['whisper']) : ?>
             <span title="<?= $user['whisper']; ?>" class="tips text-sm gray-600">
-              <i class="bi-info-square green"></i>
+              <i class="bi-info-lg green"></i>
             </span>
           <?php endif; ?>
           <div class="text-sm">
@@ -91,7 +91,7 @@
                 <span class="red"><?= __('admin.unban'); ?></span>
               </span>
             <?php else : ?>
-              <span class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
+              <span class="type-ban sky" data-id="<?= $user['id']; ?>" data-type="user">
                 <?= __('admin.ban'); ?>
               </span>
             <?php endif; ?>
