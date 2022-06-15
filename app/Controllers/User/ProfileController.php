@@ -90,7 +90,7 @@ class ProfileController extends Controller
         $answers    = AnswerModel::userAnswers($this->pageNumber, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = AnswerModel::userAnswersCount($profile['id']);
 
-        Request::getResources()->addBottomScript('/assets/js/zoom/medium-zoom.min.js');
+        Request::getResources()->addBottomScript('/assets/js/medium-zoom.js');
 
         return $this->render(
             '/user/profile/answer',

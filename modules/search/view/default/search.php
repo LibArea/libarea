@@ -8,7 +8,7 @@ $sw = $sw ?? '?';
 
   <?php foreach ($data['tags'] as $tag) : ?>
     <?php $url = $type == 'post' ? url('topic', ['slug' => $tag['facet_slug']]) : url('web.dir', ['grouping' => 'all', 'slug' => $tag['facet_slug']]);?>
-    <a class="mr20 tags" href="<?= $url; ?>">
+    <a class="mr20 tag" href="<?= $url; ?>">
       <?= $tag['facet_title']; ?>
     </a>
   <?php endforeach; ?>

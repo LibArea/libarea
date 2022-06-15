@@ -15,7 +15,7 @@ $post   = $data['post'] ?? false;
 
     <div class="wrap">
       <div class="d-header_contents">
-      
+
         <div class="flex items-center">
           <div id="togglemenu" class="mr10"><i class="bi-list gray-600 text-xl"></i></div>
           <div class="menu__button none mr10"><i class="bi-list gray-600 text-xl"></i></div>
