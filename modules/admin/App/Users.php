@@ -142,6 +142,7 @@ class Users extends Controller
                 'website'       => Request::getPost('website', null),
                 'location'      => Request::getPost('location', null),
                 'public_email'  => Request::getPost('public_email', null),
+                'github'        => Request::getPost('github', null),
                 'skype'         => Request::getPost('skype', null),
                 'telegram'      => Request::getPost('telegram', null),
                 'vk'            => Request::getPost('vk', null),

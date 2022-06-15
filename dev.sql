@@ -1381,3 +1381,5 @@ ALTER TABLE `votes_post`
   
 ALTER TABLE `items` ADD `item_focus_count` INT(11) NULL DEFAULT '0' AFTER `item_post_related`;  
 ALTER TABLE `items` ADD `item_close_replies` TINYINT(1) NULL DEFAULT '0' AFTER `item_focus_count`;
+
+ALTER TABLE `users` ADD `github` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL AFTER `public_email`;

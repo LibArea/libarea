@@ -88,6 +88,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     website,
                     location,
                     public_email,
+                    github,
                     skype,
                     telegram,
                     vk,

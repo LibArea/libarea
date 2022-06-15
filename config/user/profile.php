@@ -1,7 +1,7 @@
 <?php
 /*
- * Profile Fields (Contacts)
- * Поля профиля (Контакты)
+ * Показ полей на странице профиля
+ * Показ полей на странице профиля
  */
 
 return [
@@ -10,42 +10,35 @@ return [
         'addition'  => false,
         'title'     => 'website',
         'lang'      => __('app.url'),
-        'help'      => 'https://site.ru',
-        'name'      => 'website'
     ], [
         'url'       => false,
         'addition'  => false,
         'title'     => 'location',
         'lang'      => __('app.city'),
-        'help'      => __('app.for_example') . ': Moscow',
-        'name'      => 'location'
     ], [
         'url'       => 'public_email',
         'addition'  => 'mailto:',
         'title'     => 'public_email',
         'lang'      => 'Email',
-        'help'      => '**@**.ru',
-        'name'      => 'public_email'
+    ], [
+        'url'       => 'github',
+        'addition'  => 'mailto:',
+        'title'     => 'github',
+        'lang'      => 'GitHub',
     ], [
         'url'       => 'skype',
         'addition'  => 'skype:',
         'title'     => 'skype',
         'lang'      => 'Skype',
-        'help'      => 'skype:<b>NICK</b>',
-        'name'      => 'skype'
     ], [
         'url'       => 'telegram',
         'addition'  => 'tg://resolve?domain=',
         'title'     => 'telegram',
         'lang'      => 'Telegram',
-        'help'      => 'tg://resolve?domain=<b>NICK</b>',
-        'name'      => 'telegram'
     ], [
         'url'       => 'vk',
         'addition'  => 'https://vk.com/',
         'title'     => 'vk',
         'lang'      => 'Vk',
-        'help'      => 'https://vk.com/<b>NICK / id</b>',
-        'name'      => 'vk'
     ],
 ];

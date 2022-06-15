@@ -103,6 +103,7 @@ class SettingController extends Controller
                 'website'              => Request::getPostString('website', null),
                 'location'             => Request::getPostString('location', null),
                 'public_email'         => $data['public_email'] ?? null,
+                'github'               => Request::getPostString('github', null),
                 'skype'                => Request::getPostString('skype', null),
                 'telegram'             => Request::getPostString('telegram', null),
                 'vk'                   => Request::getPostString('vk', null),

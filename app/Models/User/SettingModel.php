@@ -27,6 +27,7 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
                     website         = :website,
                     location        = :location,
                     public_email    = :public_email,
+                    github          = :github,
                     skype           = :skype,
                     telegram        = :telegram,
                     vk              = :vk
