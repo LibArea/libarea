@@ -6,15 +6,17 @@ function ekUpload(){
         fileDrag      = document.getElementById('file-drag'),
         submitButton  = document.getElementById('submit-button');
 
-    fileSelect.addEventListener('change', fileSelectHandler, false);
+    if (fileSelect) {
+      fileSelect.addEventListener('change', fileSelectHandler, false);
 
-    // Is XHR2 available?
-    let xhr = new XMLHttpRequest();
-    if (xhr.upload) {
-      // File Drop
-      fileDrag.addEventListener('dragover', fileDragHover, false);
-      fileDrag.addEventListener('dragleave', fileDragHover, false);
-      fileDrag.addEventListener('drop', fileSelectHandler, false);
+      // Is XHR2 available?
+      let xhr = new XMLHttpRequest();
+      if (xhr.upload) {
+        // File Drop
+        fileDrag.addEventListener('dragover', fileDragHover, false);
+        fileDrag.addEventListener('dragleave', fileDragHover, false);
+        fileDrag.addEventListener('drop', fileSelectHandler, false);
+      }
     }
   }
 
