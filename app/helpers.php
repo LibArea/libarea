@@ -8,16 +8,14 @@ declare(strict_types=1);
  * Глобальные «вспомогательные» функции.
  */
 
-if (!function_exists('__')) {
-    // @param  string|null $key
-    function __(string $key = null, array $params = [])
-    {
-        if (is_null($key)) {
-            return $key;
-        }
-
-        return Translate::get($key, $params);
+// @param  string|null $key
+function __(string $key = null, array $params = [])
+{
+    if (is_null($key)) {
+        return $key;
     }
+
+    return Translate::get($key, $params);
 }
 
 function url(string $key = null, array $params = [])

@@ -16,11 +16,10 @@ class Html
         $result = [];
         foreach (array_chunk($facet, 3) as $row) {
             if ($row[0] == $type) {
+                $result[] = '<a class="' . $css . '" href="' . url($url, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
                 if ($type == 'category') {
                     $result[] = '<a class="' . $css . '" href="' . url($url, ['grouping' => $choice, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
-                } else {
-                    $result[] = '<a class="' . $css . '" href="' . url($url, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
-                }
+                } 
             }
         }
 
@@ -37,58 +36,38 @@ class Html
             }
         }
 
-        $html  = '<a title="' . __('app.add_post') . '" 
-                    href="' . $url_add . '" class="sky">
-                    <i class="bi-plus-lg text-xl"></i>
-                  </a>';
-
-        return $html;
+        return '<a title="' . __('app.add_post') . '" href="' . $url_add . '" class="sky"><i class="bi-plus-lg text-xl"></i></a>';
     }
 
     // User's Cover art or thumbnails
     public static function image($file, $alt, $style, $type, $size)
     {
+        $img = $size == 'small' ? PATH_USERS_SMALL_AVATARS . $file : PATH_USERS_AVATARS . $file;
         if ($type == 'post') {
             $img = $size == 'thumbnails' ? PATH_POSTS_THUMB . $file : PATH_POSTS_COVER . $file;
         } elseif ($type == 'logo') {
             $img = $size == 'small' ? PATH_FACETS_SMALL_LOGOS . $file : PATH_FACETS_LOGOS . $file;
-        } else {
-            $img = $size == 'small' ? PATH_USERS_SMALL_AVATARS . $file : PATH_USERS_AVATARS . $file;
-        }
+        } 
 
-        $img = '<img class="' . $style . '" src="' . $img . '" title="' . $alt . '" alt="' . $alt . '">';
-
-        return $img;
+        return '<img class="' . $style . '" src="' . $img . '" title="' . $alt . '" alt="' . $alt . '">';
     }
 
     // Icons, screenshots associated with the site
     public static function websiteImage($domain, $type, $alt, $css = '')
     {
-        $path = PATH_FAVICONS;
-        $w_h = 'favicons';
-        if ($type == 'thumbs') {
-            $path  = PATH_THUMBS;
-            $w_h = 'w200 h200';
-        }
-
+        $path = $type == 'thumbs' ? PATH_THUMBS : PATH_FAVICONS;
+           
         if (file_exists(HLEB_PUBLIC_DIR . $path . $domain . '.png')) {
-            $img = '<img class="' . $css . '" src="' . $path . $domain . '.png" title="' . $alt . '" alt="' . $alt . '">';
-            return $img;
+            return '<img class="' . $css . '" src="' . $path . $domain . '.png" title="' . $alt . '" alt="' . $alt . '">';
         }
 
-        $img = '<img class="mr5 ' . $w_h . $css . '" src="' . $path . 'no-link.png" title="' . $alt . '" alt="' . $alt . '">';
-
-        return $img;
+        return '<img class="mr5 ' . $css . '" src="' . $path . 'no-link.png" title="' . $alt . '" alt="' . $alt . '">';
     }
 
     // Cover of users, blog 
     public static function coverUrl($file, $type)
     {
-        if ($type == 'blog') {
-            return PATH_BLOGS_COVER . $file;
-        }
-
-        return PATH_USERS_COVER . $file;
+        return $type == 'blog' ? PATH_BLOGS_COVER . $file : PATH_USERS_COVER . $file;
     }
 
     // Localization of dates and events....
@@ -120,33 +99,20 @@ class Html
     // Voting for posts, replies, comments and sites
     public static function votes($content, $type, $ind, $css = 'bi-heart', $block = '')
     {
-        $html  = '';
-        $count = '';
-        if ($content[$type . '_votes'] > 0) {
-            $count = $content[$type . '_votes'];
-        }
+        $count = $content[$type . '_votes'] > 0 ?  $content[$type . '_votes'] : '';
 
+        $html = '<div class="voters flex ' . $block . ' center gap-min gray-600"><div class="up-id ' . $css . ' click-no-auth"></div>
+                        <div class="score"> ' . $count . '</div></div>';
+                        
         if (UserData::getAccount()) {
             if ($content['votes_' . $type . '_user_id'] || UserData::getUserId() == $content[$type . '_user_id']) {
-                $html .= '<div class="voters active flex gap-min ' . $block . ' center">
-                            <div class="up-id ' . $css . '"></div>
-                            <div class="score">
-                                ' . $count . '
-                            </div></div>';
+                $html = '<div class="voters active flex gap-min ' . $block . ' center">
+                            <div class="up-id ' . $css . '"></div><div class="score">' . $count . '</div></div>';
             } else {
                 $num_count = empty($count) ? 0 : $count;
-                $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . '  flex gap-min ' . $block . ' center gray-600">
-                            <div data-ind="' . $ind . '" data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id ' . $css . '"></div>
-                            <div class="score">
-                                ' . $count . '
-                            </div></div>';
+                $html = '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . '  flex gap-min ' . $block . ' center gray-600">
+                            <div data-ind="' . $ind . '" data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id ' . $css . '"></div><div class="score">' . $count . '</div></div>';
             }
-        } else {
-            $html .= '<div class="voters flex ' . $block . ' center gap-min gray-600">
-                        <div class="up-id ' . $css . ' click-no-auth"></div>
-                        <div class="score">
-                             ' . $count . '                
-                        </div></div>';
         }
 
         return $html;
@@ -155,15 +121,11 @@ class Html
     // Add/remove from favorites
     public static function favorite($content_id, $type, $tid, $ind, $css = '')
     {
-        $html  = '';
+        $html = '<a class="click-no-auth gray-600 ' . $css . '"><i class="bi-bookmark-plus"></i></a>';
         if (UserData::getAccount()) {
             $blue = $tid ? 'active' : 'gray-600';
             $my   = $tid ? 'bi-bookmark-dash' : 'bi-bookmark-plus';
-            $html .= '<a id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . '"></i></a>';
-        } else {
-            $html .= '<a class="click-no-auth gray-600 ' . $css . '">
-                        <i class="bi-bookmark-plus"></i>
-                            </a>';
+            $html = '<a id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . '"></i></a>';
         }
 
         return $html;
@@ -172,17 +134,14 @@ class Html
     // Subscription: groups, blogs, posts, directory
     public static function signed($arr)
     {
-        $html  = '';
+        $html = '<a href="' . url('login') . '"><span class="focus-id red">' . __('app.read') . '</span></a>';
         if (UserData::getAccount()) {
             if ($arr['content_user_id'] != UserData::getUserId()) {
+                $html = '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id red">' . __('app.read') . '</span>';
                 if ($arr['state']) {
-                    $html .= '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id gray-600">' . __('app.unsubscribe') . '</span>';
-                } else {
-                    $html .= '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id red">' . __('app.read') . '</span>';
+                    $html = '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id gray-600">' . __('app.unsubscribe') . '</span>';
                 }
             }
-        } else {
-            $html .= '<a href="' . url('login') . '"><span class="focus-id red">' . __('app.read') . '</span></a>';
         }
 
         return $html;
