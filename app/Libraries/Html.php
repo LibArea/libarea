@@ -209,9 +209,9 @@ class Html
 
         if ($pNum != 1) {
             if (($pNum - 1) == 1) {
-                $html .= '<a href="' . $first . '"><< ' . ($pNum - 1) . '</a>';
+                $html .= '<a class="p5" href="' . $first . '"><< ' . ($pNum - 1) . '</a>';
             } else {
-                $html .= '<a href="' . $page . '/' . ($pNum - 1) . '.html"><< ' . ($pNum - 1) . '</a>';
+                $html .= '<a class="p5" href="' . $page . '/' . ($pNum - 1) . '.html"><< ' . ($pNum - 1) . '</a>';
             }
         }
 
