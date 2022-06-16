@@ -24,5 +24,6 @@ $content = preg_replace('/</', '', $data['answer']['answer_content']); ?>
 
     <input type="hidden" name="answer_id" value="<?= $data['answer']['answer_id']; ?>">
     <?= Html::sumbit(__('app.edit')); ?>
+    <a href="<?= $url; ?>#answer_<?= $data['answer']['answer_id']; ?>" class="text-sm inline ml15 gray"><?= __('app.cancel'); ?></a>
   </form>
 </main>
