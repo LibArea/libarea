@@ -1,5 +1,5 @@
 <main>
-  <?= insert('/content/user/setting/nav', ['data' => $data]); ?>
+  <?= insert('/content/user/setting/nav'); ?>
 
   <form method="post" action="<?= url('setting.change', ['type' => 'avatar']); ?>" enctype="multipart/form-data">
     <?= csrf_field() ?>

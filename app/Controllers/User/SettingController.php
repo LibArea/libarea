@@ -30,7 +30,6 @@ class SettingController extends Controller
         }
     }
 
-
     function change()
     {
         switch (Request::get('type')) {
@@ -53,17 +52,13 @@ class SettingController extends Controller
     // Форма настройки профиля
     function settingForm()
     {
-        $user   = UserModel::getUser($this->user['login'], 'slug');
-
         return $this->render(
             '/user/setting/setting',
             'base',
             [
                 'meta'  => Meta::get(__('app.setting')),
                 'data'  => [
-                    'sheet'         => 'settings',
-                    'type'          => 'user',
-                    'user'          => $user,
+                    'user' => UserModel::getUser($this->user['login'], 'slug'),
                 ]
             ]
         );
@@ -125,8 +120,6 @@ class SettingController extends Controller
             [
                 'meta'  => Meta::get(__('app.avatar')),
                 'data'  => [
-                    'sheet' => 'avatar',
-                    'type'  => 'user',
                     'user'  => UserModel::getUser($this->user['login'], 'slug'),
                 ]
             ]
@@ -149,13 +142,7 @@ class SettingController extends Controller
             'base',
             [
                 'meta'  => Meta::get(__('app.security')),
-                'data'  => [
-                    'password'      => '',
-                    'password2'     => '',
-                    'password3'     => '',
-                    'sheet'         => 'security',
-                    'type'          => 'user',
-                ]
+                'data'  => []
             ]
         );
     }
@@ -225,15 +212,13 @@ class SettingController extends Controller
     // Member preference setting form
     // Форма настройки предпочтений участника
     function notificationForm()
-    { //print_r(SettingModel::getNotifications($this->user['id']));
+    {
         return $this->render(
             '/user/setting/notifications',
             'base',
             [
                 'meta'  => Meta::get(__('app.notifications')),
                 'data'  => [
-                    'sheet' => 'notifications',
-                    'type'  => 'user',
                     'notif' => SettingModel::getNotifications($this->user['id']),
                 ]
             ]
@@ -253,6 +238,6 @@ class SettingController extends Controller
             ]
         );
 
-        return true;
+        redirect('/setting/notifications');
     }
 }
