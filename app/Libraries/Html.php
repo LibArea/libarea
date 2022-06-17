@@ -134,14 +134,15 @@ class Html
     // Subscription: groups, blogs, posts, directory
     public static function signed($arr)
     {
-        $html = '<a href="' . url('login') . '"><span class="focus-id red">' . __('app.read') . '</span></a>';
         if (UserData::getAccount()) {
             if ($arr['content_user_id'] != UserData::getUserId()) {
                 $html = '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id red">' . __('app.read') . '</span>';
                 if ($arr['state']) {
-                    $html = '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id gray-600">' . __('app.unsubscribe') . '</span>';
+                    $html = '<spanv data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id gray-600">' . __('app.unsubscribe') . '</span>';
                 }
             }
+        } else {
+            $html = '<a href="' . url('login') . '"><span class="focus-id red">' . __('app.read') . '</span></a>';
         }
 
         return $html;

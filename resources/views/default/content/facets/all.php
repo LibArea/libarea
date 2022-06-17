@@ -51,9 +51,11 @@
 
     <?php if (!empty($data['facets'])) : ?>
       <?php if ($data['type'] == 'blog') : ?>
-        <?= insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
+        <div class="mb20">
+          <?= insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
+        </div>  
       <?php else : ?>
-        <div class="flex justify-between gap-max flex-wrap">
+        <div class="flex justify-between gap-max flex-wrap mb20">
           <?= insert('/_block/facet/topic-list-all', ['facets' => $data['facets']]); ?>
         </div>
       <?php endif; ?>
