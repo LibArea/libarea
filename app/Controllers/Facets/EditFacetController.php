@@ -8,10 +8,12 @@ use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
 use Validation, UploadImage, Meta, UserData;
 
+use App\Traits\Author;
 use App\Traits\Related;
 
 class EditFacetController extends Controller
 {
+    use Author;
     use Related;
 
     // Форма редактирования Topic or Blog
@@ -107,15 +109,7 @@ class EditFacetController extends Controller
             UploadImage::cover($cover, $facet['facet_id'], 'blog');
         }
 
-        // Если есть смена post_user_id и это TL5
-        $user_new  = Request::getPost('user_id');
-        $facet_user_new = json_decode($user_new, true);
-        $facet_user_id = $facet['facet_user_id'];
-        if ($facet['facet_user_id'] != $facet_user_new[0]['id']) {
-            if (UserData::checkAdmin()) {
-                $facet_user_id = $facet_user_new[0]['id'];
-            }
-        }
+        $facet_user_id = $this->edit($facet['facet_user_id'], Request::getPost('user_id'));
 
         // Проверим повтор URL                       
         if ($data['facet_slug'] != $facet['facet_slug']) {
