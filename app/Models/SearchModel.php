@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Search\App\Models;
+namespace App\Models;
 
 use DB;
 

@@ -4,7 +4,6 @@
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.comments')]); ?>
     </ul>
   </div>
-
   <?php if (!empty($data['comments'])) : ?>
     <div class="mb15">
       <?= insert('/content/comment/comment', ['answer' => $data['comments']]); ?>

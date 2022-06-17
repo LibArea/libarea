@@ -1,34 +1,29 @@
 <?php
 
-namespace Modules\Search\App;
+namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Search\App\Models\SearchModel;
+use App\Models\SearchModel;
 use Wamania\Snowball\StemmerFactory;
 use UserData, Meta;
 
-class Search
+class SearchController extends Controller
 {
     protected $limit = 10;
 
     public function index()
     {
-        $desc  = __('search.desc', ['name' => config('meta.name')]);
         return view(
-            '/view/default/home',
+            '/default/content/search/home',
             [
-                'meta'  => Meta::get(__('search.title'), $desc),
-                'data'  => [
-                    'type' => 'search',
-
-                ]
+                'meta'  => Meta::get(__('search.title'), __('search.desc', ['name' => config('meta.name')])),
             ]
         );
     }
 
     public function go()
     {
-        $pageNumber = self::pageNumber(Request::getGetInt('page'));
+        $pageNumber = self::number(Request::getGetInt('page'));
 
         $q      = Request::getGet('q');
         $type   = Request::getGet('cat');
@@ -49,11 +44,11 @@ class Search
             $stemmer = StemmerFactory::create($lang);
             $stem = $stemmer->stem($q);
 
-            $results = self::search($pageNumber, $this->limit, $stem, $type);
+            $results = SearchModel::getSearch($pageNumber, $this->limit, $stem, $type);
             $count =  SearchModel::getSearchCount($stem, $type);
 
             $user_id = UserData::getUserId();
-            self::setLogs(
+            SearchModel::setSearchLogs(
                 [
                     'request'       => $q,
                     'action_type'   => $type,
@@ -65,8 +60,9 @@ class Search
         }
 
         $facet = $type == 'post' ? 'topic' : 'category';
-        return view(
-            '/view/default/search',
+        return $this->render(
+            '/search/search',
+            'search',
             [
                 'meta'  => Meta::get(__('search.title')),
                 'data'  => [
@@ -74,7 +70,7 @@ class Search
                     'type'          => $type,
                     'sheet'         => 'admin',
                     'q'             => $q,
-                    'tags'          => self::searchTags($q, $facet, 4),
+                    'tags'          => SearchModel::getSearchTags($q, $facet, 4),
                     'sw'            => (microtime(true) - $sw ?? 0) * 1000,
                     'count'         => $count,
                     'pagesCount'    => ceil($count / $this->limit),
@@ -82,26 +78,6 @@ class Search
                 ]
             ]
         );
-    }
-
-    public static function setLogs($params)
-    {
-        return SearchModel::setSearchLogs($params);
-    }
-
-    public static function getLogs($limit)
-    {
-        return SearchModel::getSearchLogs($limit);
-    }
-
-    public static function search($pageNumber, $limit, $query, $type)
-    {
-        return SearchModel::getSearch($pageNumber, $limit, $query, $type);
-    }
-
-    public static function searchTags($query, $type, $limit)
-    {
-        return SearchModel::getSearchTags($query,  $type, $limit);
     }
 
     public function api()
@@ -116,8 +92,8 @@ class Search
         return json_encode($result, JSON_PRETTY_PRINT);
     }
 
-    public static function pageNumber($num)
+    public static function number($num)
     {
         return $num <= 1 ? 1 : $num;
-    }
+    } 
 }

@@ -1,5 +1,3 @@
-<?= includeTemplate('/view/default/header', ['data' => $data, 'meta' => $meta]); ?>
-
 <?php
 $type = $data['type'];
 $sw = $sw ?? '?';
@@ -57,11 +55,9 @@ $sw = $sw ?? '?';
     <?php endforeach; ?>
 
     <?php $url = 'go?q=' . $data['q'] . '&cat=' . $data['type'] . ''; ?>
-    <?= includeTemplate('/view/default/pagination', ['pNum' => $data['pNum'], 'pagesCount' => $data['pagesCount'] - 1, 'url' => $url]); ?>
+    <?= insert('/content/search/pagination', ['pNum' => $data['pNum'], 'pagesCount' => $data['pagesCount'] - 1, 'url' => $url]); ?>
   <?php else : ?>
-    <?= includeTemplate('/view/default/no-result', ['query' => $data['q']]); ?>
+    <?= insert('/content/search/no-result', ['query' => $data['q']]); ?>
   <?php endif; ?>
 
 </main>
-
-<?= includeTemplate('/view/default/footer'); ?>

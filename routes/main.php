@@ -96,8 +96,8 @@ Route::getType('post');
     Route::endProtect();    
 Route::endType();
   
-Route::get('/search')->module('search', 'App\Search')->name('search'); 
-Route::get('/search/go')->module('search', 'App\Search@go')->name('search.go');
+Route::get('/search')->controller('SearchController', ['post'])->name('search');
+Route::get('/search/go')->controller('SearchController@go', ['post'])->name('search.go');
  
 Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+', 'id' => '[0-9]+'])->name('topic.followers');  
   

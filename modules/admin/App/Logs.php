@@ -3,6 +3,7 @@
 namespace Modules\Admin\App;
 
 use Modules\Admin\App\Models\LogModel;
+use App\Models\SearchModel;
 use App\Controllers\Controller;
 use Meta;
 
@@ -43,9 +44,10 @@ class Logs extends Controller
                 'meta'  => Meta::get(__('admin.logs')),
                 'data'  => [
                     'type' => $this->type,
-                    'logs' => (new \Modules\Search\App\Search())->getLogs(100),
+                    'logs' => SearchModel::getSearchLogs(100),
                 ]
             ]
         );
     }
+    
 }

@@ -5,9 +5,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') :
   $css = 'w160 mb-w100 -mt90 ml15 br-rd5';
 endif;
 ?>
-
 <style nonce="<?= $_SERVER['nonce']; ?>">.bg-profile {background: <?= $profile['color']; ?>;min-height: 90px;}</style>
-
 <div class="br-gray bg-white mb15">
   <?php if ($profile['cover_art'] != 'cover_art.jpeg') : ?>
     <div class="profile-box-cover relative">

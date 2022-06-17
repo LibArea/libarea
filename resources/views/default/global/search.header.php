@@ -2,9 +2,6 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-$user = UserData::get();
-Translate::setLang($user['lang']);
-
 Request::getHead()->addStyles('/assets/css/style.css?014');
 $uri = $data['type'] ?? 'post';
 $q = $data['q'];

@@ -101,16 +101,16 @@ class Html
     {
         $count = $content[$type . '_votes'] > 0 ?  $content[$type . '_votes'] : '';
 
-        $html = '<div class="voters flex ' . $block . ' center gap-min gray-600"><div class="up-id ' . $css . ' click-no-auth"></div>
+        $html = '<div class="flex ' . $block . ' gap-min gray-600"><div class="up-id ' . $css . ' click-no-auth"></div>
                         <div class="score"> ' . $count . '</div></div>';
                         
         if (UserData::getAccount()) {
             if ($content['votes_' . $type . '_user_id'] || UserData::getUserId() == $content[$type . '_user_id']) {
-                $html = '<div class="voters active flex gap-min ' . $block . ' center">
+                $html = '<div class="active flex gap-min ' . $block . '">
                             <div class="up-id ' . $css . '"></div><div class="score">' . $count . '</div></div>';
             } else {
                 $num_count = empty($count) ? 0 : $count;
-                $html = '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . '  flex gap-min ' . $block . ' center gray-600">
+                $html = '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . '  flex gap-min ' . $block . ' gray-600">
                             <div data-ind="' . $ind . '" data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id ' . $css . '"></div><div class="score">' . $count . '</div></div>';
             }
         }

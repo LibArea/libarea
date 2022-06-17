@@ -1,6 +1,6 @@
 <?php
 
-Radjax\Route::get("/search/api", ["post"], "Modules\Search\App\Search@api", ["protected" => true, "session_saved" => false]);
+Radjax\Route::get("/search/api", ["post"], "App\Controllers\SearchController@api", ["protected" => true, "session_saved" => false]);
  
 $access = 'App\Middleware\Before\UserAuth@index'; 
 Radjax\Route::get("/favorite", ["post"], "App\Controllers\FavoriteController@index", ["protected" => true, "before" => $access]);
