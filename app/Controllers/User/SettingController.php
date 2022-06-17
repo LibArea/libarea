@@ -201,12 +201,7 @@ class SettingController extends Controller
             ]
         );
 
-        // Если удаляет администрация
-        if (UserData::checkAdmin()) {
-            redirect('/mod/admin/users/' . $user['id'] . '/edit');
-        }
-
-        redirect('/setting/avatar');
+        Validation::comingBack(__('msg.change_saved'), 'success', '/setting/avatar');
     }
 
     // Member preference setting form
@@ -238,6 +233,6 @@ class SettingController extends Controller
             ]
         );
 
-        redirect('/setting/notifications');
+        Validation::comingBack(__('msg.change_saved'), 'success', '/setting/notifications');
     }
 }

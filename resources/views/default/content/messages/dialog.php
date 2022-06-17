@@ -1,5 +1,5 @@
 <main>
-  <p><?= $data['sheet']; ?></p>
+  <p><?= $data['sheet']; ?> <a href="<?= url('messages'); ?>">(<?= __('app.all'); ?>)</a></p>
   <div class="mb15 mb-ml0 hidden">
     <form action="<?= url('content.create', ['type' => 'message']); ?>" method="post">
       <?= csrf_field() ?>
@@ -56,7 +56,7 @@
     <?php foreach ($data['dialog'] as $key => $val) : ?>
       <?php if ($val['id'] != UserData::getUserId()) : ?>
         <div class="flex relative pt5 pb5 items-center hidden">
-          <?= Html::image($val['avatar'], $val['login'], 'img-base', 'avatar', 'max'); ?>
+          <?= Html::image($val['avatar'], $val['login'], 'img-base mr5', 'avatar', 'max'); ?>
           <a href="<?= url('dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['login']; ?></a>
         </div>
       <?php endif; ?>

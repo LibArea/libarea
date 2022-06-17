@@ -16,8 +16,6 @@ class NotificationController extends Controller
             [
                 'meta'  => Meta::get(__('app.notifications')),
                 'data'  => [
-                    'sheet'         => 'notifications',
-                    'type'          => 'notifications',
                     'notifications' => NotificationModel::listNotification($this->user['id']),
                 ]
             ]

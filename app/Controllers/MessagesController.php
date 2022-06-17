@@ -53,8 +53,6 @@ class MessagesController extends Controller
             [
                 'meta'  => Meta::get(__('app.private_messages')),
                 'data'  => [
-                    'sheet'     => 'messages',
-                    'type'      => 'messages',
                     'messages'  => $result,
                 ]
             ]
@@ -111,7 +109,6 @@ class MessagesController extends Controller
                 'meta'  => Meta::get(__('app.dialogue')),
                 'data'  => [
                     'sheet'             => __('app.dialogue') . ' — <b>' . $list[$key]['login'] . '</b>',
-                    'type'              => 'type',
                     'list'              => $list,
                     'recipient_user'    => $recipient_user,
                     'dialog'            => MessagesModel::lastBranches($this->user['id']),
@@ -143,7 +140,6 @@ class MessagesController extends Controller
                 'data'  => [
                     'recipient_uid' => $user['id'],
                     'login'         => $user['login'],
-                    'type'          => 'type',
                 ]
             ]
         );
