@@ -135,17 +135,7 @@ class SettingController extends Controller
 
     function avatarEdit()
     {
-        $img        = $_FILES['images'];
-        $check_img  = $_FILES['images']['name'];
-        if ($check_img) {
-            UploadImage::img($img, $this->user['id'], 'user');
-        }
-
-        $cover          = $_FILES['cover'];
-        $check_cover    = $_FILES['cover']['name'];
-        if ($check_cover) {
-            UploadImage::cover($cover, $this->user['id'], 'user');
-        }
+        UploadImage::set($_FILES, $this->user['id'], 'user');
 
         Validation::comingBack(__('msg.change_saved'), 'success', '/setting/avatar');
     }

@@ -95,19 +95,7 @@ class EditFacetController extends Controller
             Validation::comingBack(__('msg.url_gaps'), 'error', $redirect);
         }
 
-        // Запишем img
-        $check_img  = $_FILES['images']['name'] ?? null;
-        if ($check_img) {
-            $img = $_FILES['images'];
-            UploadImage::img($img, $facet['facet_id'], 'topic');
-        }
-
-        // Баннер
-        $check_cover    = $_FILES['cover']['name'] ?? null;
-        if ($check_cover) {
-            $cover      = $_FILES['cover'];
-            UploadImage::cover($cover, $facet['facet_id'], 'blog');
-        }
+        UploadImage::set($_FILES, $facet['facet_id'], 'facet');
 
         $facet_user_id = $this->edit($facet['facet_user_id'], Request::getPost('user_id'));
 

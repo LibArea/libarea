@@ -4,13 +4,25 @@ use App\Models\{FacetModel, FileModel};
 use App\Models\User\{UserModel, SettingModel};
 use Phphleb\Imageresizer\SimpleImage;
 
+// TODO: We need to rewrite this entire class
 class UploadImage
 {
+    public static function set($file, $content_id, $type)
+    {
+        if (!empty($file['images']['name'])) {
+            self::img($file['images'], $content_id, $type);
+        }
+        
+        if (!empty($file['cover']['name'])) {
+            self::cover($file['cover'], $content_id, $type);
+        }
+        return false;
+    } 
  
     public static function img($img, $content_id, $type)
     {
         switch ($type) {
-            case 'topic':
+            case 'facet':
                 $path_img       = HLEB_PUBLIC_DIR . PATH_FACETS_LOGOS;
                 $path_img_small = HLEB_PUBLIC_DIR . PATH_FACETS_SMALL_LOGOS;
                 $pref = 't-';
@@ -40,7 +52,7 @@ class UploadImage
             
             $new_img    = $filename . '.webp';
 
-            if ($type == 'topic') {
+            if ($type == 'facet') {
                 $images     = FacetModel::getFacet($content_id, 'id', $type);
                 $foto       = $images['topic_img'] ?? false;
             } else {
@@ -55,7 +67,7 @@ class UploadImage
                 @unlink($path_img_small . $foto);
             }
 
-            if ($type == 'topic') {
+            if ($type == 'facet') {
                 FacetModel::setImg(['facet_id' => $content_id, 'facet_img' => $new_img]);
             } else {
                 SettingModel::setImg(['id' => $content_id, 'avatar' => $new_img, 'updated_at' => date('Y-m-d H:i:s')]);
