@@ -20,13 +20,13 @@
 
 <h4><?= __('admin.other'); ?>:</h4>
 <div class="box-flex flex-wrap mb20">
-  <div class="mr30">
+  <div class="mr20">
     <div class="box bg-green img-sm"></div>.img-sm
   </div>
-  <div class="mr30">
+  <div class="mr20">
     <div class="box bg-green img-base"></div>.img-base
   </div>
-  <div class="mr30">
+  <div class="mr20">
     <div class="box bg-green img-lg"></div>.img-lg
   </div>
   <div>

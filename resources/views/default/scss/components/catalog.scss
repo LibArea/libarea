@@ -9,6 +9,7 @@
 .item-logo {
   margin-top: 30px;
   font-size: 21px;
+  color: #333;
 }
 
 .item-cat { padding: 0 0 10px 30px; }
@@ -86,10 +87,6 @@ body.item.dark .box {
 .item.dropdown { min-width: 220px; }
 
 @media (max-width: 890px) {
-  .item-logo {
-    display: none;
-  }
-  
   .item-categories,
   .item-cat {
     padding: 20px 20px 20px 15px;

@@ -12,7 +12,7 @@ $q = $data['q'];
 <body <?php if (Request::getCookie('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
   <header>
     <div class="page-search mb-p10">
-      <a class="logo mt30 mb-none" href="<?= url('search'); ?>">
+      <a class="item-logo mb-none" href="<?= url('search'); ?>">
         <?= __('search.name'); ?>
       </a>
       <div class="page-search-right mb-ml0">

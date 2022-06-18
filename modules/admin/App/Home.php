@@ -3,6 +3,7 @@
 namespace Modules\Admin\App;
 
 use Modules\Admin\App\Models\{UserModel, StatsModel, FacetModel};
+use App\Models\SearchModel;
 use Meta;
 
 class Home
@@ -21,7 +22,7 @@ class Home
                     'posts_no_topic'    => FacetModel::getNoTopic(),
                     'users_count'       => UserModel::getUsersCount('all'),
                     'last_visit'        => UserModel::getLastVisit(),
-                    'logs'              => (new \Modules\Search\App\Search())->getLogs(10),
+                    'logs'              => SearchModel::getSearchLogs(10),
                     'replys'            => StatsModel::getReplys(10),
                     'bytes'             => $bytes,
                     'type'              => 'admin',
