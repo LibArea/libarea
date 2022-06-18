@@ -1,9 +1,9 @@
-<div class="box bg-blue-100 gray center relative">
+<div class="box bg-blue-200 gray center">
   <?= __('app.not_registered'); ?>?
-  <form action="<?= url('register'); ?>" class="mt15 mb15 block">
+  <form action="<?= url('register'); ?>" class="m15 block">
     <?= Html::sumbit(__('app.create_account')); ?>
   </form>
-  <a class="mt15 red lowercase block text-sm" href="<?= url('login'); ?>">
+  <a class="red lowercase block" href="<?= url('login'); ?>">
     <?= __('app.sign_in'); ?>
   </a>
 </div>

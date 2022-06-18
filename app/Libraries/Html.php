@@ -146,7 +146,7 @@ class Html
             $html = '<a href="' . url('login') . '"><span class="focus-id red">' . __('app.read') . '</span></a>';
         }
 
-        return $html;
+        return $html ?? false;
     }
 
     // Page pagination
