@@ -9,7 +9,6 @@ use Meta, Validation;
 
 class LoginController extends Controller
 {
-    // Отправка запроса авторизации
     public function index()
     {
         $email      = Request::getPost('email');
@@ -52,6 +51,7 @@ class LoginController extends Controller
         redirect('/');
     }
 
+    // Login page
     // Страница авторизации
     public function showLoginForm()
     {

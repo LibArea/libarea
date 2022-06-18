@@ -9,9 +9,8 @@ use Html;
 
 class RememberController extends MainController
 {
-    // Проверяет, устанавливался ли когда-либо файл cookie «запомнить меня»
-    // Если мы найдем, проверьте его по нашей таблице users_auth_tokens и  
-    // если мы найдем совпадение, и оно все ещё в силе.
+    // Есть cookie «запомнить меня»?
+    // Если есть, то проверим по таблице `users_auth_tokens`...
     public static function check($remember)
     {
         // Нет
@@ -42,15 +41,10 @@ class RememberController extends MainController
             return false;
         }
 
-        // ПРОСТО ПЕРЕД УСТАНОВКОЙ ДАННЫХ СЕССИИ И ВХОДОМ ПОЛЬЗОВАТЕЛЯ
-        // ДАВАЙТЕ ПРОВЕРИМ, НУЖЕН ЛИ ИХ ПРИНУДИТЕЛЬНЫЙ ВХОД
-        // Перенесем в конфиг?
+        // Forced login (disabled for now)
+        // Принудительный вход (пока выключен)
         $forceLogin = 0;
         if ($forceLogin > 1) {
-
-            // ПОЛУЧАЕТ СЛУЧАЙНОЕ ЧИСЛО ОТ 1 до 100
-            // ЕСЛИ ЭТО НОМЕР МЕНЬШЕ ЧЕМ НОМЕР В НАСТРОЙКАХ ПРИНУДИТЕЛЬНОГО ВХОДА
-            // УДАЛИТЬ ТОКЕН ИЗ БД
             if (rand(1, 100) < $forceLogin) {
 
                 AuthModel::deleteTokenByUserId($token['auth_user_id']);
@@ -59,7 +53,6 @@ class RememberController extends MainController
             }
         }
 
-        // Сессия участника
         (new \App\Controllers\Auth\SessionController())->set($user['id']);
 
         self::rememberMeReset($token['auth_user_id'], $selector);

@@ -10,6 +10,7 @@ class CommentController extends Controller
 {
     protected $limit = 25;
 
+    // All comments
     // Все комментарии
     public function index($sheet)
     {

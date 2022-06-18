@@ -10,10 +10,11 @@ use Google, Validation, SendEmail, Meta, Html, UserData;
 
 class RegisterController extends Controller
 {
+    // Show registration form
     // Показ формы регистрации
     public function showRegisterForm()
     {
-        // Если включена инвайт система
+        // If the invite system is enabled
         if (config('general.invite') == true) {
             redirect('/invite');
         }
@@ -36,7 +37,6 @@ class RegisterController extends Controller
         );
     }
 
-    // Отправка запроса для регистрации
     public function index()
     {
         $inv_code           = Request::getPost('invitation_code');
@@ -45,6 +45,7 @@ class RegisterController extends Controller
 
         $redirect = $inv_code ? '/register/invite/' . $inv_code : url('register');
 
+        // Check login
         // Проверим login
         $login = Request::getPost('login');
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $login)) {

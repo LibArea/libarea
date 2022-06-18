@@ -12,7 +12,6 @@ class LogoutController extends Controller
             session_start();
         }
         session_destroy();
-        // Возможно, что нужно очистить все или некоторые cookies
         setcookie("remember", "", time() - 3600, "/");
         redirect('/');
     }

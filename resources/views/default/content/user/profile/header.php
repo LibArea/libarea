@@ -19,7 +19,7 @@ endif;
       <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
 
       <?php if (UserData::checkActiveUser()) : ?>
-        <div class="right m20">
+        <div class="right m15">
           <?php if ($profile['id'] == UserData::getUserId()) : ?>
             <a class="btn btn-primary" title="<?= __('app.settings'); ?>" href="<?= url('setting'); ?>">
               <i class="bi-gear"></i>
