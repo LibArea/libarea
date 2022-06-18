@@ -68,12 +68,16 @@
     <?php if (count($data['topics']) > 0) : ?>
       <div class="box bg-lightgray">
         <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
-        <?php foreach ($data['topics'] as $key => $recomm) : ?>
-          <a class="flex items-center relative mb10 gray-600" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
-            <?= Html::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
-            <?= $recomm['facet_title']; ?>
-          </a>
-        <?php endforeach; ?>
+        <ul>
+          <?php foreach ($data['topics'] as $key => $recomm) : ?>
+            <li class="mb20">
+              <a href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
+                <?= Html::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+                <?= $recomm['facet_title']; ?>
+              </a>
+            </li>
+          <?php endforeach; ?>
+        </ul>
       </div>
     <?php endif; ?>
   <?php endif; ?>
