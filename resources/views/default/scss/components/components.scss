@@ -67,11 +67,10 @@ h5 {
 
 /* Search */
 .search {
-  height: 30px;
   width: 100%;
   border-radius: 5px;
   background-color: var(--gray-100);
-  padding-left: 15px;
+  padding: 9px 0 9px 10px;
   border-color: transparent;
 }
 
@@ -88,7 +87,7 @@ h5 {
 .box-search {
   position: relative;
   width: 100%;
-  margin: 0 45px 0 97px;
+  margin: 10px 45px 10px 97px;
 }
 
 .d-header.show .d-header-post.none,

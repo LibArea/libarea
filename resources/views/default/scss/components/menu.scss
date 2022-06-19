@@ -54,11 +54,6 @@
 
 .user-nav li a { margin-left: 56px; }
 
-.user-nav li:hover {
-  background-color: var(--gray-100);
-  color: #222;
-}
-
 .user-box-nav li:hover > a { color: #222; }
 /* end */
 
@@ -77,9 +72,12 @@
   align-items: center;
 }
 
-
+.user-nav li:hover,
 .menu li.active,
-.menu li:hover { background-color: var(--gray-100); }
+.menu li:hover {
+  background-color: var(--gray-100);
+  border-radius: 3px;
+}
 
 .menu li:hover > a { color: var(--gray); }
 
@@ -98,12 +96,11 @@ ul.nav {
   align-items: center;
   display: flex;
   gap: 0.7rem;
-  font-size: 0.95rem;
   margin: 0;
   padding: 0;
 }
 
-ul.nav > li { padding: 4px 12px 5px 12px; }
+ul.nav > li { padding: 6px 12px; }
 
 ul.nav > li > a { color: rgba(0, 0, 0, 0.5); }
 
