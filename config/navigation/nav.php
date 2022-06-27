@@ -33,10 +33,6 @@ return [
   // Навигация раздела Закладки
   'favorites' => [
     [
-      'id'    => 'drafts',
-      'url'   => url('drafts'),
-      'title' => __('app.drafts'),
-    ], [
       'id'    => 'favorites',
       'url'   => url('favorites'),
       'title' => __('app.favorites'),
@@ -44,6 +40,10 @@ return [
       'id'    => 'subscribed',
       'url'   => url('subscribed'),
       'title' => __('app.subscribed'),
+    ], [
+      'id'    => 'folders',
+      'url'   => url('favorites.folders'),
+      'title' => __('app.folders'),
     ],
   ],
 

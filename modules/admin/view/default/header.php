@@ -18,7 +18,7 @@ Request::getHead()->addStyles('/assets/css/style.css?014');
           </div>
         </div>
         <div class="flex gap-max items-center">
-          <a class="w160" href="<?= url('admin'); ?>">
+          <a class="w94" href="<?= url('admin'); ?>">
             <span class="black"><?= __('admin.home'); ?></span>
           </a>
           <a class="<?= is_current(url('admin.users')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.users'); ?>">
@@ -34,10 +34,10 @@ Request::getHead()->addStyles('/assets/css/style.css?014');
             <span class="mb-none middle text-sm"><?= __('admin.tools'); ?></span>
           </a>
         </div>
-        <div class="gray-600 mb-none">
-          <?= Request::getRemoteAddress(); ?>
-          <a class="ml5 sky" href="/"><i class="bi-house"></i></a>
-        </div>
+        <div class="mb-block">
+          <span class="mb-none"><?= Request::getRemoteAddress(); ?></span>
+          <a class="ml15 sky" href="/"><i class="bi-house"></i></a>
+        </div> 
       </div>
     </div>
   </header>

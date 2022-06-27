@@ -5,7 +5,7 @@
   </div>
 </main>
 <aside>
-  <div class="box text-sm sticky top-sm">
+  <div class="box bg-beige sticky top-sm">
     <?= __('help.preferences_info'); ?>
   </div>
 </aside>
