@@ -29,7 +29,7 @@ $domain = $data['domain']; ?>
 
         <?= insert('/_block/form/select/category', ['data' => $data, 'action' => 'edit']); ?>
 
-        <?= insert('/_block/form/components/edit-website', ['domain' => $domain]); ?>
+        <?= component('edit-website', ['domain' => $domain]); ?>
 
         <?= insert('/_block/form/select/related-posts', [
           'data'      => $data,

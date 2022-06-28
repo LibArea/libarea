@@ -78,57 +78,31 @@
 
 <?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
   <?php if ($post['post_draft'] == 1) : ?>
-    <?= insert('/_block/form/radio', [
-      'data' => [
-        [
-          'title' => __('app.draft'),
-          'name' => 'post_draft',
-          'checked' => $post['post_draft']
-        ],
-      ]
-    ]); ?>
+    <fieldset>
+      <input type="checkbox" name="post_draft" <?php if ($post['post_draft'] == 1) : ?>checked <?php endif; ?>> <?= __('app.draft_post'); ?>?
+    </fieldset>
   <?php endif; ?>
 <?php endif; ?>
 
 <?php if ($post['post_type'] == 'post') : ?>
   <?= insert('/_block/form/select/content-tl', ['data' => $post['post_tl']]); ?>
 
-  <?= insert('/_block/form/radio', [
-    'data' => [
-      [
-        'title' => __('app.format_Q&A'),
-        'name' => 'post_feature',
-        'checked' => $post['post_feature']
-      ],
-      [
-        'title' => __('app.close?'),
-        'name' => 'closed',
-        'checked' => $post['post_closed']
-      ],
-    ]
-  ]); ?>
+  <fieldset>
+    <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>?
+  </fieldset>
 
-  <?= insert('/_block/form/radio', [
-    'data' => [
-      [
-        'title'     => __('app.translation'),
-        'name'      => 'translation',
-        'checked'   => $post['post_translation']
-      ],
-    ]
-  ]); ?>
+  <fieldset>
+    <input type="checkbox" name="closed" <?php if ($post['post_closed'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_closed'); ?>?
+  </fieldset>
 
+  <fieldset>
+    <input type="checkbox" name="translation" <?php if ($post['post_translation'] == 1) : ?>checked <?php endif; ?>> <?= __('app.translation'); ?>?
+  </fieldset>
 
   <?php if (UserData::checkAdmin()) : ?>
-    <?= insert('/_block/form/radio', [
-      'data' => [
-        [
-          'title'   => __('app.pin'),
-          'name'    => 'top',
-          'checked' => $post['post_top']
-        ],
-      ]
-    ]); ?>
+    <fieldset>
+      <input type="checkbox" name="top" <?php if ($post['post_top'] == 1) : ?>checked <?php endif; ?>> <?= __('app.pin'); ?>?
+    </fieldset>
   <?php endif; ?>
 
 <?php endif; ?>

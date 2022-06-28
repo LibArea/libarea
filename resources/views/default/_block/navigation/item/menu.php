@@ -1,6 +1,6 @@
 <li>
   <a <?= is_current(url('web.user.sites')) ? 'class="active"' : ''; ?> href="<?= url('web.user.sites'); ?>">
-    <i class="bi-plus-lg"></i> <?= __('web.my_website'); ?>
+    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg> <?= __('web.my_website'); ?>
     <?php if ($data['user_count_site'] != 0) : ?>
       (<?= $data['user_count_site']; ?>)
     <?php endif; ?>

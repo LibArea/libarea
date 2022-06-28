@@ -14,7 +14,7 @@ return [
     'sign_in'           => '登录',
     'find'              => '查找...',
     'results_search'    => '结果:大约',
-    'to_website'        => '转到网站',
+    'on_website'        => '转到网站',
     'name'              => '搜索',
     'no_results'        => '搜索没有返回任何结果。<br>搜索关键词太短/太长',
     'empty_request'     => '关键词不能为空',

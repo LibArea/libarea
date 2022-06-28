@@ -32,14 +32,14 @@
         </td>
         <td class="center">
           <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.badges.edit', ['id' => $bg['badge_id']]); ?>">
-            <i class="bi-pencil"></i>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
           </a>
         </td>
       </tr>
     <?php endforeach; ?>
   </table>
 <?php else : ?>
-  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
+  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'info']); ?>
 <?php endif; ?>
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

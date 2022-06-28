@@ -14,7 +14,7 @@ return [
     'sign_in'           => '進來',
     'find'              => '要找到...',
     'results_search'    => '結果：大約。',
-    'to_website'        => '前往網站',
+    'on_website'        => '前往網站',
     'name'              => '搜索',
     'no_results'        => '搜索沒有返回任何結果。 <br>搜索查詢太短/太長',
     'empty_request'     => '空搜索詞',

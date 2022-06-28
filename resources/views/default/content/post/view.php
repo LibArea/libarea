@@ -1,8 +1,10 @@
 <?php $post = $data['post']; ?>
 <div class="w94 mb-none center">
   <div class="sticky top-xl">
-    <?= Html::votes($post, 'post', 'ps', 'bi-heart text-2xl middle mt15', 'block'); ?>
-    <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl block mt20'); ?>
+    <div class="no-flex">
+      <?= Html::votes($post, 'post', 'ps'); ?>
+      <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl block mt10'); ?>
+    </div>
   </div>
 </div>
 <main>
@@ -90,12 +92,12 @@
       <div class="br-gray p15 items-center flex justify-between mb5">
         <div class="items-center flex">
           <div class="left m10 none mb-block">
-            <?= Html::votes($post, 'post', 'mob', 'bi-heart text-2xl mr5 middle'); ?>
+            <?= Html::votes($post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
           </div>
 
           <ul class="list-none flex gap lowercase">
             <li class="center">
-              <div class="text-sm gray-600 mb5">
+              <div class="text-sm mb-none gray-600 mb5">
                 <?= __('app.created_by'); ?>
               </div>
               <a title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">

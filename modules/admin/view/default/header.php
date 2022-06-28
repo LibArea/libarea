@@ -14,7 +14,7 @@ Request::getHead()->addStyles('/assets/css/style.css?014');
       <div class="d-header_contents">
         <div class="none mb-block">
           <div class="menu__button mr10">
-            <i class="bi-list gray-600 text-xl"></i>
+            <svg class="icons mr5"><use xlink:href="/assets/svg/icons.svg#menu"></use></svg>
           </div>
         </div>
         <div class="flex gap-max items-center">
@@ -22,21 +22,21 @@ Request::getHead()->addStyles('/assets/css/style.css?014');
             <span class="black"><?= __('admin.home'); ?></span>
           </a>
           <a class="<?= is_current(url('admin.users')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.users'); ?>">
-            <i class="bi-people middle mr5"></i>
+            <svg class="icons mr5"><use xlink:href="/assets/svg/icons.svg#users"></use></svg>
             <span class="mb-none middle"><?= __('admin.users'); ?></span>
           </a>
           <a class="<?= is_current(url('admin.facets.all')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.facets.all'); ?>">
-            <i class="bi-columns-gap middle mr5"></i>
+            <svg class="icons mr5"><use xlink:href="/assets/svg/icons.svg#facets"></use></svg>
             <span class="mb-none middle text-sm"><?= __('admin.facets'); ?></span>
           </a>
           <a class="<?= is_current(url('admin.tools')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.tools'); ?>">
-            <i class="bi-tools middle mr5"></i>
+            <svg class="icons mr5"><use xlink:href="/assets/svg/icons.svg#tool"></use></svg>
             <span class="mb-none middle text-sm"><?= __('admin.tools'); ?></span>
           </a>
         </div>
         <div class="mb-block">
-          <span class="mb-none"><?= Request::getRemoteAddress(); ?></span>
-          <a class="ml15 sky" href="/"><i class="bi-house"></i></a>
+          <span class="mb-none gray-600"><?= Request::getRemoteAddress(); ?></span>
+          <a class="ml15 sky" href="/"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#home"></use></svg></a>
         </div> 
       </div>
     </div>

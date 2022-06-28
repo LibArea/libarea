@@ -120,7 +120,7 @@ class EditFacetController extends Controller
                 'facet_seo_title'           => $data['facet_seo_title'],
                 'facet_user_id'             => $facet_user_id,
                 'facet_tl'                  => $data['facet_tl'] ?? 0,
-                'facet_top_level'           => $data['facet_top_level'] ?? 0,
+                'facet_top_level'           => $data['facet_top_level'] == 'on' ? 1 : 0,
                 'facet_post_related'        => $post_related,
                 'facet_type'                => $new_type,
             ]

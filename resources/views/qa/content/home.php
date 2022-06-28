@@ -55,7 +55,7 @@
             </a>
             <?php if (UserData::getUserId() == $topic['facet_user_id']) : ?>
               <a class="right gray-600 mt5" title="<?= __('app.add_post'); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
-                <i class="bi-plus-lg text-sm"></i>
+                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg>
               </a>
             <?php endif; ?>
           </li>

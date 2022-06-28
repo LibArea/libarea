@@ -26,7 +26,7 @@
 
                 <?php if (Access::author('item', $item['item_user_id'], $item['item_date'], 30) === true) : ?>
                   <a href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
-                    <i class="bi-pencil text-sm"></i>
+                    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
                   </a> - <?= $item['item_following_link']; ?>
                 <?php endif; ?>
 
@@ -59,7 +59,7 @@
         <?php endforeach; ?>
       </ol>
     <?php else : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'info']); ?>
     <?php endif ?>
 
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>

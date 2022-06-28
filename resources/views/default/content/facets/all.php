@@ -42,7 +42,7 @@
       <?php if ($data['countUserFacet'] == 0 || UserData::checkAdmin()) : ?>
         <p class="text-xl">
           <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
-            <i class="bi-plus-lg middle"></i>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg>
           </a>
         </p>
       <?php endif; ?>
@@ -60,7 +60,7 @@
         </div>
       <?php endif; ?>
     <?php else : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'info']); ?>
     <?php endif; ?>
 
   <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url($data['type'] . 's.' . $data['sheet'])); ?>

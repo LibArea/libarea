@@ -45,7 +45,7 @@
       <?php endforeach; ?>
     </table>
   <?php else : ?>
-    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'info']); ?>
   <?php endif; ?>
 
   <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url('admin.logs')); ?>

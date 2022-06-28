@@ -19,7 +19,7 @@ $q = $data['q'];
         <div data-template="one" class="flex justify-between" id="find tippy">
 
           <ul class="nav inline">
-          <li><a href="/"><i class="bi-house"></i> <?= __('search.to_website'); ?></a></li>
+          <li><a href="/"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#home"></use></svg> <?= __('search.on_website'); ?></a></li>
          <li<?php if ($uri == 'post') : ?> class="active"<?php endif; ?>>
            <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=post"><?= __('search.posts'); ?></a>
          </li>

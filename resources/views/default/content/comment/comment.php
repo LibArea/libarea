@@ -43,7 +43,7 @@ foreach ($answer as  $comment) :
           </div>
         </div>
         <div class="text-sm flex gap">
-          <?= Html::votes($comment, 'comment', 'ps', 'bi-heart mr5'); ?>
+          <?= Html::votes($comment, 'comment', 'ps', 'mr5'); ?>
 
           <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">

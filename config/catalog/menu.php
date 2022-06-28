@@ -26,6 +26,11 @@ return [
             'url'   => url('admin.facets.type', ['type' => 'category']),
             'title' => __('web.facets'),
             'id'    => 'official',
+        ], [
+            'tl'    => UserData::REGISTERED_ADMIN,
+            'url'   => url('web.audits'),
+            'title' => __('web.audits'),
+            'id'    => 'web.audits',
         ],
     ],
 ];

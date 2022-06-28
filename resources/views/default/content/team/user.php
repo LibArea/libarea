@@ -39,7 +39,7 @@
 
     <?php else : ?>
       <div class="mt15">
-        <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('team.no_teams'), 'icon' => 'bi-info-lg']); ?>
+        <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('team.no_teams'), 'icon' => 'info']); ?>
       </div>
     <?php endif; ?>
   </div>

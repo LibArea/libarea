@@ -5,7 +5,7 @@
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) : ?>
       <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
-        <sup><i class="bi-pencil gray"></i></sup>
+        <sup><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></sup>
       </a>
       <a class="text-sm ml15" href="<?= url('admin.category.structure'); ?>">
         <sup class="gray-600"><i class="bi-columns-gap mr5"></i></sup>
@@ -24,7 +24,7 @@
         </a> <sup class="gray-600"><?= $lt['counts']; ?></sup>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="ml5" href="<?= url('content.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
-            <sup><i class="bi-pencil"></i>
+            <sup><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></i>
           </a>
           <small class="text-sm gray-600"><sup><?= $lt['facet_type']; ?></sup></small>
         <?php endif; ?>
@@ -41,7 +41,7 @@
           </a>
           <?php if (UserData::checkAdmin()) : ?>
             <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
-              <sup class="gray-600"><i class="bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
+              <sup class="gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg> <small><?= $rl['facet_type']; ?></small></sup>
             </a>
           <?php endif; ?>
         </div>
@@ -60,7 +60,7 @@
           </a>
           <?php if (UserData::checkAdmin()) : ?>
             <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
-              <sup class="gray-600"><i class="bi-pencil"></i> <small><?= $rl['facet_type']; ?></small></sup>
+              <sup class="gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg> <small><?= $rl['facet_type']; ?></small></sup>
             </a>
           <?php endif; ?>
         </div>
@@ -76,7 +76,7 @@
     <?php if (!empty($data['items'])) : ?>
       <?= insert('/content/item/site', ['data' => $data, 'screening' => $data['screening']]); ?>
     <?php else : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'info']); ?>
     <?php endif; ?>
 
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/' . $data['screening']); ?>

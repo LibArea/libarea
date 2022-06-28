@@ -45,7 +45,7 @@
           <?php if ($user['invitation_id'] != 0) : ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php endif; ?>
           <?php if ($user['whisper']) : ?>
             <span title="<?= $user['whisper']; ?>" class="tips text-sm gray-600">
-              <i class="bi-info-lg green"></i>
+              <svg class="icons green"><use xlink:href="/assets/svg/icons.svg#info"></use></svg>
             </span>
           <?php endif; ?>
           <div class="text-sm">
@@ -101,14 +101,14 @@
         </td>
         <td class="center">
           <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.user.edit', ['id' => $user['id']]); ?>">
-            <i class="bi-pencil"></i>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
           </a>
         </td>
       </tr>
     <?php endforeach; ?>
   </table>
 <?php else : ?>
-  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
+  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'info']); ?>
 <?php endif; ?>
 <?= Html::pagination($data['pNum'], $data['pagesCount'], null, url('admin.users')); ?>
 

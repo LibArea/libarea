@@ -5,7 +5,7 @@
   </div>
 <?php else : ?>   
   <div class="box center gray-600">
-    <i class="<?= $icon; ?> block text-8xl"></i>
-    <?= $text; ?>
+    <svg class="icons icon-max"><use xlink:href="/assets/svg/icons.svg#<?= $icon; ?>"></use></svg>
+    <div><?= $text; ?></div>
   </div>
 <?php endif; ?>

@@ -61,7 +61,8 @@ class AddItemController extends Controller
 
         // Instant accommodation for staff only
         // Мгновенное размещение только для персонала
-        $published = $this->user['trust_level'] == UserData::REGISTERED_ADMIN ? 1 : 0;
+        $published = Request::getPost('published') == 'on' ? 1 : 0;
+        $published = UserData::checkAdmin() ? $published : 0;
 
         $item_last = WebModel::add(
             [
@@ -71,7 +72,7 @@ class AddItemController extends Controller
                 'item_content'          => $content,
                 'item_published'        => $published,
                 'item_user_id'          => $this->user['id'],
-                'item_close_replies'    => Request::getPostInt('close_replies'),
+                'item_close_replies'    => Request::getPost('close_replies') == 'on' ? 1 : 0,
                 'item_type_url'         => 0,
                 'item_status_url'       => 200,
                 'item_is_soft'          => 0,

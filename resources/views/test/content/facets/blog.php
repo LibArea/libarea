@@ -10,7 +10,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
         <h1 class="text-2xl">
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == UserData::getUserId()) : ?>
             <a class="right white fon-rgba" href="<?= url('content.edit', ['type' => 'blog', 'id' => $blog['facet_id']]); ?>">
-              <i class="bi-pencil bold"></i>
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
             </a>
           <?php endif; ?>
           <?= $blog['facet_seo_title']; ?>

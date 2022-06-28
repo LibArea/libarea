@@ -1,7 +1,7 @@
 <fieldset>
   <label for="email"><?= __('app.old'); ?></label>
   <input id="password" name="password" type="password" required="">
-  <span class="showPassword"><i class="bi-eye"></i></span>
+  <span class="showPassword"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#eye"></use></svg></span>
 </fieldset>
 
 <fieldset>

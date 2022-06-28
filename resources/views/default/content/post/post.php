@@ -70,17 +70,17 @@ use Hleb\Constructor\Handlers\Request; ?>
           </a>
 
           <div class="gray-600 mb-none lowercase"><?= Html::langDate($post['post_date']); ?></div>
-          <?= Html::votes($post, 'post', 'ps', 'bi-heart mr5'); ?>
+          <?= Html::votes($post, 'post', 'ps', 'mr5'); ?>
 
           <?php if ($post['post_answers_count'] != 0) : ?>
             <a class="flex gray-600" href="<?= $post_url; ?>#comment">
-              <i class="bi-chat-text mr5"></i>
+              <svg class="icons mr5"><use xlink:href="/assets/svg/icons.svg#comments"></use></svg>
               <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
             </a>
           <?php endif; ?>
         </div>
         <div class="flex flex-row items-center">
-          <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', ''); ?>
+          <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps'); ?>
         </div>
       </div>
     </div>
@@ -89,5 +89,5 @@ use Hleb\Constructor\Handlers\Request; ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?= insert('/_block/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>
-  <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_posts'), 'icon' => 'bi-journal-richtext']); ?>
+  <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>
 <?php endif; ?>

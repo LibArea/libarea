@@ -60,56 +60,38 @@
      ]); ?>
 
 <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL)) : ?>
-  <?= insert('/_block/form/radio',  [
-    'data' => [
-      [
-        'title' => __('app.draft'),
-        'name'  => 'post_draft',
-      ]
-    ],
-  ]); ?>
+  <fieldset>
+    <input type="checkbox" name="post_draft"> <?= __('app.draft_post'); ?>?
+  </fieldset>
+
 
   <?= insert('/_block/form/select/content-tl', ['data' => null]); ?>
 
-  <?= insert('/_block/form/radio', [
-    'data' => [
-      [
-        'title' => __('app.format_Q&A'),
-        'name' => 'post_feature',
-      ],
-      [
-        'title' => __('app.close?'),
-        'name' => 'closed',
-      ],
-    ]
-  ]); ?>
+  <fieldset>
+    <input type="checkbox" name="post_feature"> <?= __('app.format_Q&A'); ?>?
+  </fieldset>
+
+  <fieldset>
+    <input type="checkbox" name="closed"> <?= __('app.post_closed'); ?>?
+  </fieldset>
+
 <?php endif; ?>
 
-<?= insert('/_block/form/radio',  [
-  'data' => [
-    [
-      'title' => __('app.translation'),
-      'name'  => 'translation',
-    ],
-  ]
-]); ?>
+<fieldset>
+  <input type="checkbox" name="translation"> <?= __('app.translation'); ?>?
+</fieldset>
 
 <?php if (UserData::checkAdmin()) : ?>
-  <?= insert('/_block/form/radio', [
-    'data' => [
-      [
-        'title'   => __('app.pin'),
-        'name'    => 'top',
-      ],
-    ]
-  ]); ?>
+   <fieldset>
+    <input type="checkbox" name="top"> <?= __('app.pin'); ?>?
+   </fieldset>
 <?php endif; ?>
 
 <?= insert('/_block/form/select/related-posts', [
   'data'          => [],
   'action'        => 'add',
   'type'          => 'post',
-  'title'         => __('app.related'),
+  'title'         => __('app.related_posts'),
   'help'          => __('app.necessarily'),
 ]); ?>
 

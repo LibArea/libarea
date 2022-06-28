@@ -47,5 +47,5 @@
   <?php if (UserData::checkActiveUser()) : ?>
     <?= insert('/_block/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>
-  <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_posts'), 'icon' => 'bi-journal-richtext']); ?>
+  <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>
 <?php endif; ?>

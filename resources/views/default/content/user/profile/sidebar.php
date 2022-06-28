@@ -7,7 +7,7 @@
       <?= $profile['about']; ?>...
     </blockquote>
     <div class="gray-600 m15">
-      <i class="bi-calendar-week middle"></i>
+      <svg class="icons"><use xlink:href="/assets/svg/icons.svg#calendar"></use></svg>
       <span class="middle lowercase text-sm">
         <?= Html::langDate($profile['created_at']); ?>
         <sup class="ml5"><?= __('app.tl' . $profile['trust_level'] . '.title'); ?></sup>
@@ -155,7 +155,7 @@
         </a>
         <?php if ($profile['whisper']) : ?>
           <div class="tips text-sm gray-600">
-            <i class="bi-info-lg green mr5"></i>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#info"></use></svg>
             <?= $profile['whisper']; ?>
           </div>
         <?php endif; ?>

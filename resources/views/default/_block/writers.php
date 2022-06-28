@@ -23,5 +23,5 @@
     <?php endforeach; ?>
   </div>
 <?php else : ?>
-  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no'), 'icon' => 'bi-info-lg']); ?>
+  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no'), 'icon' => 'info']); ?>
 <?php endif; ?>

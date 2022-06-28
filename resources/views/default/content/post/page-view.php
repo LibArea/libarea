@@ -14,13 +14,13 @@
       </div>
     <?php endif; ?>
     </article>
-    <div class="box-flex justify-between text-2xl">
-      <?= Html::votes($page, 'post', 'ps', 'bi-heart middle mr15'); ?>
+    <div class="flex justify-between">
+      <?= Html::votes($page, 'post', 'ps'); ?>
       <div class="gray-600 italic ml15">
         <?= $page['post_modified']; ?>
         <?php if (UserData::checkAdmin() || $page['post_user_id'] == UserData::getUserId()) : ?>
           <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
-            <i class="bi-pencil"></i>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
           </a>
         <?php endif; ?>
       </div>
@@ -29,17 +29,17 @@
 <aside>
   <div class="box sticky top-sm bg-beige">
     <?php foreach ($data['pages'] as $ind => $row) : ?>
-      <div class=" pt5 pb5">
+      <div class="pt5 pb5">
         <a class="gray" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
-          <i class="bi-info-lg mr5"></i> <?= $row['post_title']; ?>
+          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#info"></use></svg> <?= $row['post_title']; ?>
         </a>
         <?php if (UserData::checkAdmin()) : ?>
-          <a class="text-sm gray-600" href="<?= url('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><i class="bi-pencil"></i></a>
+          <a class="text-sm gray-600" href="<?= url('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></a>
         <?php endif; ?>
       </div>
     <?php endforeach; ?>
     <?php if (UserData::checkAdmin()) : ?>
-      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><i class="bi-pencil"></i> <?= __('app.edit'); ?></a>
+      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg> <?= __('app.edit'); ?></a>
     <?php endif; ?>
   </div>
 </aside>

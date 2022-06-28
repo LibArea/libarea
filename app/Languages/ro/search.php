@@ -14,7 +14,7 @@ return [
     'sign_in'           => 'Conectare',
     'find'              => 'A găsi...',
     'results_search'    => 'Rezultate: aprox',
-    'to_website'        => 'Accesați site-ul web',
+    'on_website'        => 'Spre site-ul web',
     'name'              => 'Căutare',
     'no_results'        => 'Căutarea nu a dat rezultate. <br>Interogare de căutare prea scurtă/lungă',
     'empty_request'     => 'Termen de căutare gol',

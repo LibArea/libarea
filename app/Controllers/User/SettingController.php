@@ -87,7 +87,7 @@ class SettingController extends Controller
                 'name'                 => $data['name'],
                 'activated'            => $user['activated'],
                 'limiting_mode'        => $user['limiting_mode'],
-                'scroll'               => Request::getPostInt('scroll'),
+                'scroll'               => Request::getPost('scroll') == 'on' ? 1 : 0,
                 'trust_level'          => $user['trust_level'],
                 'updated_at'           => date('Y-m-d H:i:s'),
                 'color'                => Request::getPostString('color', '#339900'),

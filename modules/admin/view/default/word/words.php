@@ -18,7 +18,7 @@
     </p>
   <?php endforeach; ?>
 <?php else : ?>
-  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
+  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'info']); ?>
 <?php endif; ?>
 </div>
 </main>

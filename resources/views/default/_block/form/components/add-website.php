@@ -16,19 +16,11 @@
 </fieldset>
 
 <fieldset>
-  <label for="close_replies"><?= __('web.deny_replies'); ?></label>
-  <select id="close_replies" name="close_replies">
-    <option value="0"><?= __('web.no'); ?></option>
-    <option value="1"><?= __('web.yes'); ?></option>
-  </select>
+  <input type="checkbox" name="close_replies"> <?= __('web.deny_replies'); ?>
 </fieldset>
 
 <?php if (UserData::checkAdmin()) : ?>
   <fieldset>
-    <label for="published"><?= __('web.posted'); ?></label>
-    <select id="published" name="published">
-      <option value="0"><?= __('web.no'); ?></option>
-      <option value="1"><?= __('web.yes'); ?></option>
-    </select>
+    <input type="checkbox" name="published"> <?= __('web.posted'); ?>
   </fieldset>
 <?php endif; ?>

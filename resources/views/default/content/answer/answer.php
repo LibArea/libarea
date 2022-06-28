@@ -33,7 +33,7 @@ foreach ($data['answers'] as $answer) :
           </div>
         </div>
         <div class="flex text-sm gap">
-          <?= Html::votes($answer, 'answer', 'ps', 'bi-heart'); ?>
+          <?= Html::votes($answer, 'answer', 'ps'); ?>
 
           <?php if ($answer['post_closed'] == 0) : ?>
             <?php if ($answer['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>

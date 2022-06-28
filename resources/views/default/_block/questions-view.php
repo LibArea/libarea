@@ -16,7 +16,7 @@
               </div>
               <div class="flex text-sm justify-between">
                 <div class="flex gap">
-                  <?= Html::votes($answer, 'answer', 'ps', 'bi-heart'); ?>
+                  <?= Html::votes($answer, 'answer', 'ps'); ?>
 
                   <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                     <?php if ($post['post_closed'] == 0) : ?>
@@ -89,7 +89,7 @@
 
                       <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
                         <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
-                          <i title="<?= __('app.edit'); ?>" class="bi-pencil-square"></i>
+                          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
                         </a>
                       <?php endif; ?>
 
@@ -116,12 +116,12 @@
   </div>
 <?php else : ?>
   <?php if ($post['post_closed'] != 1) : ?>
-    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_answers'), 'icon' => 'bi-info-lg']); ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_answers'), 'icon' => 'info']); ?>
   <?php endif; ?>
 <?php endif; ?>
 
 <?php if (!empty($otvet)) : ?>
-  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.you_answered'), 'icon' => 'bi-info-lg']); ?>
+  <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.you_answered'), 'icon' => 'info']); ?>
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>

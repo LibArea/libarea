@@ -20,7 +20,7 @@
 
         <?php if (!$fav['tag_id']) : ?>
           <div class="relative right">
-            <span class="trigger lowercase gray-600 text-sm"> <i class="bi-plus-lg gray-600 mr5"></i></span>
+            <span class="trigger lowercase gray-600 text-sm"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg></span>
             <span class="dropdown">
               <?php if ($data['tags']) : ?>
                 <?php foreach ($data['tags'] as $tag) : ?>

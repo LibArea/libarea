@@ -8,7 +8,7 @@
     <?php if (!empty($data['items'])) : ?>
       <?= insert('/content/item/site', ['data' => $data, 'user' => $user, 'delete_fav' => 'yes', 'screening' => $data['screening']]); ?>
     <?php else : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('no_bookmarks'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('no_bookmarks'), 'icon' => 'info']); ?>
     <?php endif; ?>
 
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>

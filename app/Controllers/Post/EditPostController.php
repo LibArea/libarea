@@ -54,17 +54,12 @@ class EditPostController extends Controller
 
     public function change()
     {
-        $post_id            = Request::getPostInt('post_id');
-        $post_title         = Request::getPost('post_title');
-        $content            = $_POST['content']; // для Markdown
-        $post_feature       = Request::getPostInt('post_feature');
-        $post_translation   = Request::getPostInt('translation');
-        $post_draft         = Request::getPostInt('post_draft');
-        $post_closed        = Request::getPostInt('closed');
-        $post_top           = Request::getPostInt('top');
-        $draft              = Request::getPost('draft');
+        $post_id    = Request::getPostInt('post_id');
+        $content    = $_POST['content']; // for Markdown
+        $post_draft = Request::getPost('post_draft') == 'on' ? 1 : 0;
+        $draft      = Request::getPost('draft');
 
-        // Проверка доступа 
+        // Access check 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
         if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
             Validation::comingBack(__('msg.went_wrong'), 'error');
@@ -72,11 +67,11 @@ class EditPostController extends Controller
 
         $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
-        $post_title = str_replace("&nbsp;", '', $post_title);
+        $post_title = str_replace("&nbsp;", '', Request::getPost('post_title'));
         Validation::length($post_title, 6, 250, 'title', $redirect);
         Validation::length($content, 6, 25000, 'content', $redirect);
         
-        // Проверим хакинг формы
+        // Form hacking
         if ($post['post_draft'] == 0) {
             $draft = 0;
         }
@@ -86,13 +81,13 @@ class EditPostController extends Controller
             $post_date = date("Y-m-d H:i:s");
         }
 
-        // Обложка поста
+        // Post cover
         if (!empty($_FILES['images']['name'])) {
             $post_img = UploadImage::coverPost($_FILES['images'], $post, $redirect, $this->user['id']);
         }
         $post_img = $post_img ?? $post['post_content_img'];
 
-        // Связанные темы
+        // Related topics
         $fields    = Request::getPost() ?? [];
         $new_type = self::addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
 
@@ -103,9 +98,9 @@ class EditPostController extends Controller
                 'post_id'               => $post_id,
                 'post_title'            => $post_title,
                 'post_slug'             => $post['post_slug'],
-                'post_feature'          => $post_feature,
+                'post_feature'          => Request::getPost('post_feature') == 'on' ? 1 : 0,
                 'post_type'             => $new_type,
-                'post_translation'      => $post_translation,
+                'post_translation'      => Request::getPost('translation') == 'on' ? 1 : 0,
                 'post_date'             => $post_date,
                 'post_user_id'          => $this->edit($post['post_user_id'], Request::getPost('user_id')),
                 'post_draft'            => $post_draft,
@@ -113,8 +108,8 @@ class EditPostController extends Controller
                 'post_content_img'      => $post_img ?? '',
                 'post_related'          => $post_related ?? '',
                 'post_tl'               => Request::getPostInt('content_tl'),
-                'post_closed'           => $post_closed,
-                'post_top'              => $post_top,
+                'post_closed'           => Request::getPost('closed') == 'on' ? 1 : 0,
+                'post_top'              => Request::getPost('top') == 'on' ? 1 : 0,
             ]
         );
 
@@ -124,7 +119,6 @@ class EditPostController extends Controller
     // Add fastes (blogs, topics) to the post 
     public static function addFacetsPost($fields, $content_id, $redirect)
     {
-        // topic
         $new_type = 'post';
         $facets = $fields['facet_select'] ?? false;
         if (!$facets) {
@@ -150,7 +144,7 @@ class EditPostController extends Controller
         return $new_type;
     }
 
-    // Удаление обложки
+    // Cover Removal
     function imgPostRemove()
     {
         $post_id    = Request::getInt('id');

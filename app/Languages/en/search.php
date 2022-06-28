@@ -14,7 +14,7 @@ return [
     'sign_in'           => 'To come in',
     'find'              => 'To find...',
     'results_search'    => 'Results: approximately',
-    'to_website'        => 'Go to website',
+    'on_website'        => 'To the website',
     'name'              => 'Search',
     'no_results'        => 'The search returned no results. <br>Too short / long search query',
     'empty_request'     => 'Empty search term',

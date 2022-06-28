@@ -16,10 +16,10 @@ $facet  = $data['facet'] ?? false; ?>
         <i class="bi-columns-gap mr5"></i> <?= __('app.topics'); ?>
       </a>
       <a class="black text-xs" href="/blogs">
-        <i class="bi-journals mr5"></i> <?= __('app.blogs'); ?>
+        <svg class="icons"><use xlink:href="/assets/svg/icons.svg#post"></use></svg> <?= __('app.blogs'); ?>
       </a>
       <a class="black text-xs" href="/users">
-        <i class="bi-people mr5"></i> <?= __('app.users'); ?>
+        <svg class="icons"><use xlink:href="/assets/svg/icons.svg#users"></use></svg> <?= __('app.users'); ?>
       </a>
       <a class="black text-xs" href="/web">
         <i class="bi-link-45deg mr5"></i> <?= __('app.catalog'); ?>

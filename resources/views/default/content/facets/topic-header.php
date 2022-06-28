@@ -5,7 +5,7 @@
       <?= $topic['facet_seo_title']; ?>
       <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == UserData::getUserId()) : ?>
         <a class="right gray-600" href="<?= url('content.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
-          <i class="bi-pencil"></i>
+          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
         </a>
       <?php endif; ?>
     </h1>
@@ -48,6 +48,6 @@
 
   </ul>
   <a class="gray-600" href="<?= url('topic.info', ['slug' => $topic['facet_slug']]); ?>">
-    <i class="bi-info-lg"></i>
+    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#info"></use></svg>
   </a>
 </div>

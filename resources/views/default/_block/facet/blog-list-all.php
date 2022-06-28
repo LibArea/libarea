@@ -21,10 +21,10 @@
       <div class="mr10 mt5 mb-pr0 gray">
         <?= Content::fragment(Content::text($facet['facet_short_description'], 'line'), 68); ?>
         <span class="flex right gray-600 text-sm">
-          <i class="bi-journal mr5"></i>
+          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#post"></use></svg>
           <?= $facet['facet_count']; ?>
           <?php if ($facet['facet_focus_count'] > 0) : ?>
-            <i class="bi-people ml15 mr5"></i>
+            <svg class="icons ml15"><use xlink:href="/assets/svg/icons.svg#users"></use></svg>
             <?= $facet['facet_focus_count']; ?>
           <?php endif; ?>
         </span>

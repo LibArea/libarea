@@ -17,7 +17,7 @@
 
             <?php if (Access::author('item', $item['item_user_id'], $item['item_date'], 30) === true) : ?>
               <a href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
-                <i class="bi-pencil text-sm"></i>
+                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
               </a> - <?= $item['item_following_link']; ?>
             <?php endif; ?>
 
@@ -58,7 +58,7 @@
                 <?php endif; ?>
 
                 <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps'); ?>
-                <?= Html::votes($item, 'item', 'ps', 'bi-heart'); ?>
+                <?= Html::votes($item, 'item', 'ps'); ?>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@
           <i class="bi-link-45deg red mr5 text-2xl"></i>
           <?= $item['item_title']; ?> (<?= $item['item_domain']; ?>)
           <a class="ml15" href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
-            <i class="bi-pencil"></i>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
           </a>
         </div>
       <?php endif; ?>

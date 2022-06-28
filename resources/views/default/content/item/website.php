@@ -1,15 +1,15 @@
 <?php $item = $data['item']; ?>
 <div id="contentWrapper">
-  <div class="mb-none center w94">
-    <?= Html::votes($item, 'item', 'ps', 'bi-heart text-2xl mt20 middle', 'block'); ?>
-    <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'text-2xl block mt20'); ?>
+  <div class="mb-none no-flex center w94">
+    <?= Html::votes($item, 'item', 'ps'); ?>
+    <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'block mt20'); ?>
   </div>
   <main>
     <div class="hidden">
       <h1><?= $item['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
-            <i class="bi-pencil"></i>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
           </a>
         <?php endif; ?>
       </h1>
@@ -20,21 +20,19 @@
         </div>
         <div class="w-60">
           <?= Content::text($item['item_content'], 'text'); ?>
-
-          <a class="gree block" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
+          <a class="gree" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
             <?= Html::websiteImage($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
             <?= $item['item_url']; ?>
           </a>
-
-          <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tag mr15 mt15', 'all'); ?>
-
-          <div class="right">
+          <span class="gray">•</span>
             <?= Html::signed([
               'type'            => 'item',
               'id'              => $item['item_id'],
               'content_user_id' => false, // allow subscription and unsubscribe to the owner 
               'state'           => is_array($data['item_signed']),
             ]); ?>
+          <div class="mt15">
+            <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tag', 'all'); ?>
           </div>
         </div>
       </div>

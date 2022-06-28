@@ -82,18 +82,11 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
       <?php if ($fs['facet_type'] != 'blog' && UserData::checkAdmin()) : ?>
 
-        <?= insert('/_block/form/radio', [
-          'data' => [
-            [
-              'title' => __('app.root'),
-              'name' => 'facet_top_level',
-              'checked' => $fs['facet_top_level'],
-              'help' => __('app.root_help')
-            ],
-          ]
-        ]); ?>
+      <fieldset>
+        <input type="checkbox" name="facet_top_level" <?php if ($fs['facet_top_level'] == 1) : ?>checked <?php endif; ?>> <?= __('app.root_help'); ?>?
+      </fieldset>
 
-        <?= insert('/_block/form/select/low-facets', [
+       <?= insert('/_block/form/select/low-facets', [
           'data'          => $data,
           'action'        => 'edit',
           'type'          => $fs['facet_type'],

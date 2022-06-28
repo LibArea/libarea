@@ -87,7 +87,8 @@ class EditItemController extends Controller
 
         // If not staff, then we make the site inactive 
         // Если не персонал, то делаем сайт не активным
-        $published = UserData::checkAdmin() ? $data['published'] : 0;
+        $published = $data['published'] == 'on' ? 1 : 0;
+        $published = UserData::checkAdmin() ? $published : 0;
 
         $new_user_id = $this->edit($item['item_user_id'], Request::getPost('user_id'));
 
@@ -100,12 +101,12 @@ class EditItemController extends Controller
                 'item_title_soft'       => $data['title_soft'] ?? '',
                 'item_content_soft'     => $data['content_soft'] ?? '',
                 'item_published'        => $published,
-                'item_close_replies'    => (int)($data['close_replies'] ?? 0),
+                'item_close_replies'    => $data['close_replies'] == 'on' ? 1 : 0,
                 'item_user_id'          => $new_user_id,
                 'item_type_url'         => 0,
                 'item_status_url'       => $data['status'] ?? 404,
-                'item_is_soft'          => (int)($data['soft'] ?? 0),
-                'item_is_github'        => (int)($data['github'] ?? 0),
+                'item_is_soft'          => $data['soft'] == 'on' ? 1 : 0,
+                'item_is_github'        => $data['github'] == 'on' ? 1 : 0,
                 'item_post_related'     => $post_related ?? '',
                 'item_github_url'       => $data['item_github_url'] ?? '',
             ]

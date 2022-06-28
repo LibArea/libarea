@@ -16,7 +16,7 @@
       </div>
     <?php endforeach; ?>
   <?php else : ?>
-    <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'bi-journal-richtext']); ?>
+    <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>
   <?php endif; ?>
 </main>
 <aside>

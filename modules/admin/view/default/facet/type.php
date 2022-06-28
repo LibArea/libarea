@@ -47,7 +47,7 @@
       </a>
 
       <a class="ml15 mr15" href="<?= url('content.edit', ['type' => $data['type'], 'id' => $topic['facet_id']]); ?>">
-        <sup><i class="bi-pencil gray-600"></i></sup>
+        <sup><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></sup>
       </a>
 
       <?php if ($topic['facet_is_deleted'] == 1) : ?>
@@ -70,7 +70,7 @@
   <?php endforeach; ?>
 <?php else : ?>
   <?php if ($data['type'] != 'all') : ?>
-    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'bi-info-lg']); ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'info']); ?>
   <?php endif; ?>
 <?php endif; ?>
 
@@ -81,10 +81,10 @@
     <?php foreach ($data['pages'] as $page) : ?>
       <div class="mb5">
         <a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $page['post_slug']]); ?>">
-          <i class="bi-info-lg middle mr5"></i> <?= $page['post_title']; ?> <sup class="gray-600">id:<?= $page['post_id']; ?></sup>
+          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#info"></use></svg> <?= $page['post_title']; ?> <sup class="gray-600">id:<?= $page['post_id']; ?></sup>
         </a>
         <a class="gray-600 ml10" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]) ?>">
-          <i class="bi-pencil"></i>
+          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
         </a>
         <a data-type="post" data-id="<?= $page['post_id']; ?>" class="type-action gray-600 mr10 ml10">
           <?php if ($page['post_is_deleted'] == 1) : ?>

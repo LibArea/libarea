@@ -9,7 +9,7 @@
   </div>
 
   <div class="mb15 gray-600">
-    <i class="bi-calendar-week mr5"></i> <?= Html::langDate($team['team_date']); ?> / <?= Html::langDate($team['team_modified']); ?>
+    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#calendar"></use></svg> <?= Html::langDate($team['team_date']); ?> / <?= Html::langDate($team['team_modified']); ?>
   </div>
 
   <h2><?= __('team.owner'); ?></h2>

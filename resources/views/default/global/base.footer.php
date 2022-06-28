@@ -6,9 +6,9 @@
         <?= config('meta.name'); ?> &copy; <?= date('Y'); ?>
         <span class="mb-none">— <?= __('app.community'); ?></span>
       </div>
-      <a rel="nofollow noopener" class="icon" title="DISCORD" href="https://discord.gg/dw47aNx5nU"><i class="bi-discord text-2xl"></i></a>
-      <a rel="nofollow noopener" class="icon" title="VK" href="https://vk.com/libarea">VK</a>
-      <a rel="nofollow noopener" class="icon" title="GitHub" href="https://github.com/libarea/agouti"><i class="bi-github text-2xl"></i></a>
+      <a rel="nofollow noopener" class="icon" title="DISCORD" href="https://discord.gg/dw47aNx5nU"><svg class="icons max"><use xlink:href="/assets/svg/icons.svg#discord"></use></svg></a>
+      <a rel="nofollow noopener" class="icon" title="VK" href="https://vk.com/libarea"><svg class="icons max"><use xlink:href="/assets/svg/icons.svg#vk"></use></svg></a>
+      <a rel="nofollow noopener" class="icon" title="GitHub" href="https://github.com/LibArea/libarea"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#github"></use></svg></a>
     </div>
     <div class="flex right">
       <ul class="mb-none">

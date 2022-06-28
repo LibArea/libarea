@@ -17,8 +17,8 @@ $post   = $data['post'] ?? false;
       <div class="d-header_contents">
 
         <div class="flex items-center">
-          <div id="togglemenu" class="mr10"><i class="bi-list gray-600 text-xl"></i></div>
-          <div class="menu__button none mr10"><i class="bi-list gray-600 text-xl"></i></div>
+          <div id="togglemenu" class="mr10"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#menu"></use></svg></div>
+          <div class="menu__button none mr10"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#menu"></use></svg></div>
           <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>
         </div>
 
@@ -59,7 +59,7 @@ $post   = $data['post'] ?? false;
                 <?= __('app.registration'); ?>
               </a>
             <?php endif; ?>
-            <a class=" btn btn-outline-primary" href="<?= url('login'); ?>">
+            <a class="btn btn-outline-primary" href="<?= url('login'); ?>">
               <?= __('app.sign_in'); ?>
             </a>
           </div>
@@ -69,7 +69,7 @@ $post   = $data['post'] ?? false;
 
             <?= Html::addPost($facet); ?>
 
-            <a id="toggledark" class="gray-600"><i class="bi-brightness-high"></i></a>
+            <a id="toggledark" class="gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg></a>
 
             <a class="gray-600" href="<?= url('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
@@ -77,10 +77,10 @@ $post   = $data['post'] ?? false;
                 <?php if ($notif['action_type'] == 1) : ?>
                   <i class="bi-envelope red"></i>
                 <?php else : ?>
-                  <i class="bi-bell-fill red"></i>
+                  <svg class="icons red"><use xlink:href="/assets/svg/icons.svg#bell"></use></svg>
                 <?php endif; ?>
               <?php else : ?>
-                <i class="bi-bell"></i>
+                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#bell"></use></svg>
               <?php endif; ?>
             </a>
 

@@ -49,14 +49,14 @@
             $url = url('blog', ['slug' => $topic['facet_slug']]);
           endif;
         ?>
-          <li class="mb20">
+          <li class="mb20 flex items-center justify-between">
             <a href="<?= $url; ?>">
               <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
               <span class="middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
             </a>
             <?php if (UserData::getUserId() == $topic['facet_user_id']) : ?>
-              <a class="right gray-600 mt5" title="<?= __('app.add_post'); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
-                <i class="bi-plus-lg text-sm"></i>
+              <a class="gray-600 bg-white mt5" title="<?= __('app.add_post'); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg>
               </a>
             <?php endif; ?>
           </li>

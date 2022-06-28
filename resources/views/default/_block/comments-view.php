@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="flex text-sm gap">
-                <?= Html::votes($answer, 'answer', 'ps', 'bi-heart'); ?>
+                <?= Html::votes($answer, 'answer', 'ps'); ?>
 
                 <?php if ($post['post_closed'] == 0) : ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
@@ -148,7 +148,7 @@
                 <?= Content::text($comment['comment_content'], 'text'); ?>
               </div>
               <div class="text-sm flex gap">
-                <?= Html::votes($comment, 'comment', 'ps', 'bi-heart'); ?>
+                <?= Html::votes($comment, 'comment', 'ps'); ?>
 
                 <?php if ($post['post_closed'] == 0) : ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
@@ -185,9 +185,9 @@
 <?php else : ?>
   <?php if ($post['post_closed'] != 1) : ?>
     <?php if (UserData::checkActiveUser()) : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'info']); ?>
     <?php else : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_auth'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_auth'), 'icon' => 'info']); ?>
     <?php endif; ?>
   <?php endif; ?>
 <?php endif; ?>

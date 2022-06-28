@@ -4,7 +4,7 @@
 
 <fieldset class="max-w300" >
   <input id="password" name="password" type="password" placeholder="<?= __('app.password'); ?>" required="">
-  <span class="showPassword"><i class="bi-eye"></i></span>
+  <span class="showPassword"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#eye"></use></svg></span>
 </fieldset>
 
 <?= component('rememberme'); ?>

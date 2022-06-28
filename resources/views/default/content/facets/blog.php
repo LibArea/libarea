@@ -10,7 +10,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
         <h1 class="mt10 text-2xl">
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == UserData::getUserId()) : ?>
             <a class="right white fon-rgba" href="<?= url('content.edit', ['type' => 'blog', 'id' => $blog['facet_id']]); ?>">
-              <i class="bi-pencil bold"></i>
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
             </a>
           <?php endif; ?>
           <?= $blog['facet_seo_title']; ?>
@@ -41,7 +41,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>
             </a>
             <div class="gray-600 text-sm mt5">
-              <i class="bi-calendar-week mr5 ml5 middle"></i>
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#calendar"></use></svg>
               <span class="middle lowercase"><?= Html::langDate($blog['facet_add_date']); ?></span>
             </div>
             <div class="relative max-w300 mt15">

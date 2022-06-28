@@ -30,7 +30,7 @@
     <?php if (!empty($data['items'])) : ?>
       <?= insert('/content/item/site', ['data' => $data, 'screening' => $data['screening']]); ?>
     <?php else : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no_website'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no_website'), 'icon' => 'info']); ?>
     <?php endif; ?>
   </main>
   <aside>

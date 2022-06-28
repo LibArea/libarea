@@ -16,7 +16,7 @@
         <?php foreach (config('notification') as $key => $n) : ?>
           <?php if ($n['id'] == $notif['type']) : ?>
             <div class="br-bottom p5<?php if ($notif['flag'] == 0) { ?> bg-lightyellow<?php } ?>">
-              <i class="<?= $n['icon']; ?> middle"></i>
+              <svg class="icons <?= $n['css']; ?>"><use xlink:href="/assets/svg/icons.svg#<?= $n['icon']; ?>"></use></svg>
               <a class="black ml5" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
               <span class="lowercase gray-600">
                 <?= __('app.' . $n['lang'], ['url' => '<a href="' . $url . '">', 'a' => '</a>']); ?>
@@ -31,7 +31,7 @@
 
       <div class="p15 center gray-600"><?= __('app.notifications_limit'); ?></div>
     <?php else : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'bi-info-lg']); ?>
+      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'info']); ?>
     <?php endif; ?>
   </div>
 </main>

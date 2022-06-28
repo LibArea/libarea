@@ -54,15 +54,10 @@
   </select>
 </fieldset>
 
-<?= insert('/_block/form/radio', [
-  'data' => [
-    [
-      'title'     => __('app.endless_scroll'),
-      'name'      => 'scroll',
-      'checked'   => $data['user']['scroll']
-    ],
-  ]
-]); ?>
+<fieldset>
+  <input type="checkbox" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked <?php endif; ?>>
+  <?= __('app.endless_scroll'); ?>
+</fieldset>
 
 <h3 class="mt15 mb15"><?= __('app.contacts'); ?></h3>
 <?php foreach (config('user/setting') as $block) : ?>

@@ -175,15 +175,13 @@ showPassword.forEach(item =>
 
 function toggleType() {
   let input = document.getElementById('password');
-  let icon = this.querySelector('i');
-  if (icon.classList.contains('bi-eye')) {
-    icon.classList.remove('bi-eye');
-    icon.classList.add('bi-eye-slash');
-    input.type = 'text';
-  } else {
-    icon.classList.remove('bi-eye-slash');
-    icon.classList.add('bi-eye');
+  let icon = this.querySelector('svg');
+  if (icon.classList.contains('red-200')) {
+    icon.classList.remove('red-200');
     input.type = 'password';
+  } else {
+    icon.classList.add('red-200');
+    input.type = 'text';
   }
 }
 
