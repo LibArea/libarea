@@ -40,14 +40,14 @@
           <?php else : ?> {
               name: '<?= $row['name']; ?>',
               action: <?= $row['action']; ?>,
-              className: '<?= $row['className']; ?>',
+              icon: '<?= $row['icon']; ?>',
               title: '<?= $row['title']; ?>',
             },
           <?php endif; ?>
         <?php endforeach; ?>
         <?php if (!empty($cut)) : ?>
           {
-            className: "bi-scissors",
+            icon: '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>',
             title: "<?= __('app.crop_post'); ?>",
             action: (e) => {
               e.codemirror.replaceSelection('<cut>');
@@ -56,16 +56,16 @@
           },
         <?php endif; ?>
         {
-          className: "bi-unlock",
+          icon: '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#lock"></use></svg>',
           title: "<?= __('app.spoiler'); ?>",
           children: [{
-            className: "bi-eye-slash",
+            icon: '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#eyeglass"></use></svg>',
             action: (e) => {
               e.codemirror.replaceSelection('<details title="<?= __('app.spoiler'); ?>"> *** </details> ');
               e.codemirror.focus();
             },
           }, {
-            className: "bi-unlock",
+            icon: '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#lock"></use></svg>',
             title: "<?= __('app.spoiler_auth'); ?>",
             action: (e) => {
               e.codemirror.replaceSelection('<details tl> *** </details>');
