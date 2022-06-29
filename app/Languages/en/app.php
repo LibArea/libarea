@@ -198,7 +198,8 @@ return [
     'default'           => 'Default',
     'qa'                => 'Questions and answers',
     'answered'          => 'Answered',
-    'translation'       => 'Post is translations',
+    'post_translation'  => 'Post is translations',
+    'translation'       => 'Translation',
     'format_Q&A'        => 'This is a question (will become a Q&A format)',
     'pin'               => 'Pin this post',
     

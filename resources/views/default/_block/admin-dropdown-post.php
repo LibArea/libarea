@@ -1,6 +1,6 @@
 <?php if (UserData::checkAdmin()) : ?>
   <div class="relative">
-    <span class="trigger gray-600 text-sm"> <svg class="icons"><use xlink:href="/assets/svg/icons.svg#menu"></use></svg></span>
+    <span class="trigger gray-600 text-sm">...</span>
     <ul class="dropdown">
       <li>
         <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action text-sm gray-600">

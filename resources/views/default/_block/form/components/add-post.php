@@ -78,7 +78,7 @@
 <?php endif; ?>
 
 <fieldset>
-  <input type="checkbox" name="translation"> <?= __('app.translation'); ?>?
+  <input type="checkbox" name="translation"> <?= __('app.post_translation'); ?>?
 </fieldset>
 
 <?php if (UserData::checkAdmin()) : ?>

@@ -44,12 +44,12 @@
             <?php endif; ?>
             <?php if (UserData::getUserLogin() == $post['login']) : ?>
               <?php if ($post['my_post'] == $post['post_id']) : ?>
-                <span class="add-profile active" data-post="<?= $post['post_id']; ?>">
-                  + <?= __('app.in_profile'); ?>
+                <span class="add-profile" data-post="<?= $post['post_id']; ?>">
+                  - <?= __('app.in_profile'); ?>
                 </span>
               <?php else : ?>
-                <span class="add-profile" data-post="<?= $post['post_id']; ?>">
-                  <?= __('app.in_profile'); ?>
+                <span class="add-profile active" data-post="<?= $post['post_id']; ?>">
+                  + <?= __('app.in_profile'); ?>
                 </span>
               <?php endif; ?>
             <?php endif; ?>

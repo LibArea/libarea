@@ -63,27 +63,23 @@
   <?php if ($profile['my_post'] != 0) : ?>
     <?php $post = $data['post']; ?>
     <div class="box bg-lightgray">
-      <h3 class="uppercase-box"><?= __('app.selected_post'); ?></h3>
-      <div class="mt5">
-        <a href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
-          <?= $post['post_title']; ?>
-        </a>
+      <h3 class="uppercase-box"><?= __('app.selected_post'); ?>
         <?php if ($profile['id'] == UserData::getUserId()) : ?>
           <a class="add-profile ml10" data-post="<?= $post['post_id']; ?>">
             <svg class="icons gray-600"><use xlink:href="/assets/svg/icons.svg#trash"></use></svg>
           </a>
         <?php endif; ?>
-        <div class="text-sm lowercase">
-          <a class="gray" href="<?= url('profile', ['login' => $profile['login']]); ?>">
-            <?= Html::image($profile['avatar'], $profile['login'], 'img-sm', 'avatar', 'small'); ?>
-            <?= $profile['login']; ?>
-          </a>
-          <span class="gray-600 ml5"><?= $post['post_date'] ?></span>
+      </h3>
+      <div class="mt5">
+        <a href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+          <?= $post['post_title']; ?>
+        </a>
+        <div class="text-sm gray-600 lowercase">
+          <?= $post['post_date'] ?>
           <?php if ($post['post_answers_count'] != 0) : ?>
-            <a class="gray-600 right" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#comments"></use></svg>
-              <?= $post['post_answers_count']; ?>
-            </a>
+            <span class="right">
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#comments"></use></svg> <?= $post['post_answers_count']; ?>
+            </span>  
           <?php endif; ?>
         </div>
       </div>

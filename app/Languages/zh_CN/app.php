@@ -198,7 +198,8 @@ return [
     'default'           => '默认',
     'qa'                => '问答',
     'answered'          => '已回答',
-    'translation'       => '帖子是翻译',
+    'post_translation'  => '帖子是翻译',
+    'translation'       => '翻译',
     'format_Q&A'        => '这是一个问题（将成为问答形式）',
     'pin'               => '置顶此帖',
     

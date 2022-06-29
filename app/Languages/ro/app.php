@@ -198,7 +198,8 @@ return [
     'default'           => 'Mod implicit',
     'qa'                => 'Intrebari si raspunsuri',
     'answered'          => 'Răspuns',
-    'translation'       => 'Postarea este traduceri',
+    'post_translation'  => 'Postarea este traduceri',
+    'translation'       => 'Traducere',
     'format_Q&A'        => 'Aceasta este o întrebare (Q&A)',
     'pin'               => 'Fixați această postare',
     

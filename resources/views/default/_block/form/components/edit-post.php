@@ -96,7 +96,7 @@
   </fieldset>
 
   <fieldset>
-    <input type="checkbox" name="translation" <?php if ($post['post_translation'] == 1) : ?>checked <?php endif; ?>> <?= __('app.translation'); ?>?
+    <input type="checkbox" name="translation" <?php if ($post['post_translation'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_translation'); ?>?
   </fieldset>
 
   <?php if (UserData::checkAdmin()) : ?>
