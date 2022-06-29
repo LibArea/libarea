@@ -35,7 +35,7 @@
       </div>
     <?php endforeach; ?>
   <?php else : ?>
-    <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_dialogs'), 'icon' => 'bi-envelope']); ?>
+    <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_dialogs'), 'icon' => 'mail']); ?>
   <?php endif; ?>
 </main>
 <aside>

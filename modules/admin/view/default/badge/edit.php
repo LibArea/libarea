@@ -20,7 +20,7 @@
   <fieldset>
     <label for="badge_icon"><?= __('admin.icon'); ?></label>
     <textarea class="add" name="badge_icon" required><?= $data['badge']['badge_icon']; ?></textarea>
-    <div class="help"><?= __('admin.example'); ?>: &lt;i title="<?= __('admin.title'); ?>" class="bi-trophy"&gt;&lt;/i&gt; </div>
+    <div class="help"><?= __('admin.example'); ?>: &lt;svg class="icons"&gt;&lt;use xlink:href="/assets/svg/icons.svg#eyeglass"&gt;&lt;/use&gt;&lt;/svg&gt; </div>
   </fieldset>
   <fieldset>
     <label for="badge_tl">Tl</label>

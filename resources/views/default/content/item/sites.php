@@ -8,7 +8,7 @@
         <sup><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></sup>
       </a>
       <a class="text-sm ml15" href="<?= url('admin.category.structure'); ?>">
-        <sup class="gray-600"><i class="bi-columns-gap mr5"></i></sup>
+        <sup class="gray-600">fs</sup>
       </a>
       <small class="text-sm gray-600"><sup><?= $data['category']['facet_type']; ?></sup></small>
     <?php endif; ?>

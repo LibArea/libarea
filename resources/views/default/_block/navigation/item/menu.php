@@ -1,6 +1,6 @@
 <li>
   <a <?= is_current(url('web.user.sites')) ? 'class="active"' : ''; ?> href="<?= url('web.user.sites'); ?>">
-    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg> <?= __('web.my_website'); ?>
+    <?= __('web.my_website'); ?>
     <?php if ($data['user_count_site'] != 0) : ?>
       (<?= $data['user_count_site']; ?>)
     <?php endif; ?>
@@ -11,7 +11,7 @@
   <?php if ($data['user_count_site'] == 0 || UserData::checkAdmin()) : ?>
     <li>
       <a href="<?= url('content.add', ['type' => 'item']); ?>">
-        <i class="bi-plus-lg"></i> <?= __('web.add_website'); ?>
+        <?= __('web.add_website'); ?>
       </a>
     </li>
   <?php endif; ?>
@@ -19,7 +19,7 @@
 
 <li>
   <a <?= is_current(url('web.bookmarks')) ? 'class="active"' : ''; ?> href="<?= url('web.bookmarks'); ?>">
-    <i class="bi-bookmark"></i> <?= __('web.bookmarks'); ?>
+    <?= __('web.bookmarks'); ?>
   </a>
 </li>
 
@@ -28,26 +28,26 @@
 
   <li>
     <a href="<?= url('content.add', ['type' => 'category']); ?>">
-      <i class="bi-plus-lg"></i> <?= __('web.add_category'); ?>
+      <?= __('web.add_category'); ?>
     </a>
   </li>
 
   <li>
     <a <?= is_current(url('web.audits')) ? 'class="active"' : ''; ?> href="<?= url('web.audits'); ?>">
-      <i class="bi bi-exclamation-diamond"></i> <?= __('web.audits'); ?>
+      <?= __('web.audits'); ?>
       <?php if (!empty($data['audit_count'])) : ?><span class="red ml5">(<?= $data['audit_count']; ?>)</span><?php endif; ?>
     </a>
   </li>
 
   <li>
     <a <?= is_current(url('web.deleted')) ? 'class="active"' : ''; ?> href="<?= url('web.deleted'); ?>">
-      <i class="bi-circle"></i> <?= __('web.deleted'); ?>
+      <?= __('web.deleted'); ?>
     </a>
   </li>
 
   <li>
     <a href="<?= url('admin.facets.type', ['type' => 'category']); ?>">
-      <i class="bi-columns-gap"></i> <?= __('web.facets'); ?>
+      <?= __('web.facets'); ?>
     </a>
   </li>
 <?php endif; ?>

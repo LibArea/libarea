@@ -15,7 +15,7 @@
         <div class="left gray-600 mr5"> <?= __('app.' . $fav['action_type']); ?>:</div>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
-          <i class="bi-trash red"></i>
+          <svg class="icons gray-600"><use xlink:href="/assets/svg/icons.svg#trash"></use></svg>
         </span>
 
         <?php if (!$fav['tag_id']) : ?>
@@ -45,7 +45,7 @@
             <?= Html::websiteImage($fav['item_domain'], 'favicon', $fav['item_domain'], 'favicons'); ?>
             <?= $fav['item_domain']; ?>
             <a target="_blank" href="<?= $fav['item_url']; ?>" class="item_cleek" data-id="<?= $fav['item_id']; ?>" rel="nofollow noreferrer ugc">
-              <i class="bi-folder-symlink middle ml15 mr5"></i>
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#folder"></use></svg>
               <?= $fav['item_url']; ?>
             </a>
           </span>
@@ -71,7 +71,7 @@
       </div>
     <?php endforeach; ?>
   <?php else : ?>
-    <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_favorites'), 'icon' => 'bi-bookmark']); ?>
+    <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_favorites'), 'icon' => 'bookmark']); ?>
   <?php endif; ?>
 </main>
 <aside>

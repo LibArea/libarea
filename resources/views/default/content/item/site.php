@@ -27,7 +27,7 @@
 
             <?php if (!empty($delete_fav)) : ?>
               <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="website">
-                <i class="bi-trash red"></i>
+                <svg class="icons gray-600"><use xlink:href="/assets/svg/icons.svg#trash"></use></svg>
               </span>
             <?php endif; ?>
             <div class="list-items__text">
@@ -39,13 +39,13 @@
                 <?= $item['item_domain']; ?>
                 <?php if ($item['item_github_url']) : ?>
                   <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                    <i class="bi-github text-sm mr5"></i>
+                    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#github"></use></svg>
                     <?= $item['item_title_soft']; ?>
                   </a>
                 <?php endif; ?>
                 <div>
-                  <i class="bi-arrow-return-right gray-600 ml10"></i>
-                  <a class="black" href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
+                  <svg class="icons gray ml5"><use xlink:href="/assets/svg/icons.svg#corner-down-right"></use></svg>
+                  <a class="black " href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
                     <?= __('web.more'); ?>
                   </a>
                 </div>
@@ -53,12 +53,12 @@
               <div class="flex gap right gray-600">
                 <?php if (UserData::checkAdmin()) : ?>
                   <a data-type="item" data-id="<?= $item['item_id']; ?>" class="type-action gray-600">
-                    <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
+                    <?= __('app.remove'); ?>
                   </a>
                 <?php endif; ?>
 
                 <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps'); ?>
-                <?= Html::votes($item, 'item', 'ps'); ?>
+                <?= Html::votes($item, 'item'); ?>
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@
     <?php else : ?>
       <?php if (UserData::checkAdmin()) : ?>
         <div class="mt15 mb15">
-          <i class="bi-link-45deg red mr5 text-2xl"></i>
+          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg>
           <?= $item['item_title']; ?> (<?= $item['item_domain']; ?>)
           <a class="ml15" href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
             <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>

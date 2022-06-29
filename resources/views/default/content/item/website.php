@@ -1,7 +1,7 @@
 <?php $item = $data['item']; ?>
 <div id="contentWrapper">
   <div class="mb-none no-flex center w94">
-    <?= Html::votes($item, 'item', 'ps'); ?>
+    <?= Html::votes($item, 'item'); ?>
     <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'block mt20'); ?>
   </div>
   <main>
@@ -43,7 +43,7 @@
           <?= Content::text($item['item_content_soft'], 'text'); ?>
         </div>
         <p>
-          <i class="bi-github mr5"></i>
+          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#github"></use></svg>
           <a target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
             <a target="_blank" href="<?= $item['item_url']; ?>" class="item_cleek" data-id="<?= $item['item_id']; ?>" rel="nofollow noreferrer ugc">
               <?= $item['item_github_url']; ?>
@@ -87,16 +87,15 @@
       </div>
     <?php else : ?>
       <?php if ($item['item_close_replies'] == 0) : ?>
-        <div class="box center gray-600">
-          <i class="bi-chat-dots block text-8xl"></i>
-          <?= __('web.no_answers'); ?>
+        <div class="mt20">
+          <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no_answers'), 'icon' => 'closed']); ?>
         </div>
       <?php endif; ?>
     <?php endif; ?>
 
     <?php if ($item['item_close_replies'] == 1) : ?>
       <div class="mt20">
-        <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.closed'), 'icon' => 'bi-door-closed']); ?>
+        <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.closed'), 'icon' => 'closed']); ?>
       </div>
     <?php endif; ?>
   </main>

@@ -15,7 +15,7 @@
     <?php endif; ?>
     </article>
     <div class="flex justify-between">
-      <?= Html::votes($page, 'post', 'ps'); ?>
+      <?= Html::votes($page, 'post'); ?>
       <div class="gray-600 italic ml15">
         <?= $page['post_modified']; ?>
         <?php if (UserData::checkAdmin() || $page['post_user_id'] == UserData::getUserId()) : ?>

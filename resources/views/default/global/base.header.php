@@ -52,7 +52,7 @@ $post   = $data['post'] ?? false;
         <?php if (!UserData::checkActiveUser()) : ?>
           <div class="flex gap-max items-center">
             <a id="toggledark" class="header-menu-item gray-600">
-              <i class="bi-brightness-high text-xl"></i>
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg>
             </a>
             <?php if (config('general.invite') == false) : ?>
               <a class="gray  mb-none block" href="<?= url('register'); ?>">
@@ -75,7 +75,7 @@ $post   = $data['post'] ?? false;
               <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
               <?php if (!empty($notif)) : ?>
                 <?php if ($notif['action_type'] == 1) : ?>
-                  <i class="bi-envelope red"></i>
+                  <svg class="icons red"><use xlink:href="/assets/svg/icons.svg#mail"></use></svg>
                 <?php else : ?>
                   <svg class="icons red"><use xlink:href="/assets/svg/icons.svg#bell"></use></svg>
                 <?php endif; ?>

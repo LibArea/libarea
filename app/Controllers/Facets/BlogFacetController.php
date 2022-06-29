@@ -34,6 +34,10 @@ class BlogFacetController extends Controller
 
         Request::getResources()->addBottomScript('/assets/js/facet-focus-user.js');
 
+        if ($facet['facet_is_deleted'] == 1) {
+            Request::getHead()->addMeta('robots', 'noindex');
+        }
+
         $m = [
             'og'        => true,
             'imgurl'    => PATH_FACETS_LOGOS . $facet['facet_img'],

@@ -2,7 +2,7 @@
 <div class="w94 mb-none center">
   <div class="sticky top-xl">
     <div class="no-flex">
-      <?= Html::votes($post, 'post', 'ps'); ?>
+      <?= Html::votes($post, 'post'); ?>
       <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl block mt10'); ?>
     </div>
   </div>
@@ -26,7 +26,7 @@
           <?php endif; ?>
         </div>
 
-        <h1><?= $post['post_title']; ?>
+        <h1 class="m0"><?= $post['post_title']; ?>
           <?= insert('/content/post/post-title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm flex gray-600 gap">
@@ -79,7 +79,7 @@
           <h3 class="uppercase-box"><?= __('app.source'); ?></h3>
           <div class="italic m15 mb15 p10 text-sm bg-lightgray table gray">
             <div>
-              <i class="bi-link-45deg"></i>
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg>
               <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <?= $post['post_url_domain']; ?>
               </a>
@@ -92,7 +92,7 @@
       <div class="br-gray p15 items-center flex justify-between mb5">
         <div class="items-center flex">
           <div class="left m10 none mb-block">
-            <?= Html::votes($post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
+            <?= Html::votes($post, 'post', 'mob'); ?>
           </div>
 
           <ul class="list-none flex gap lowercase">
@@ -195,16 +195,16 @@
     if ($post['post_feature'] == 0) :
       insert('/_block/comments-view', ['data' => $data, 'post' => $post]);
       if ($post['post_closed'] == 1) :
-        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.post_closed'), 'icon' => 'bi-door-closed']);
+        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.post_closed'), 'icon' => 'closed']);
       endif;
     else :
       insert('/_block/questions-view', ['data' => $data, 'post' => $post]);
       if ($post['post_closed'] == 1) :
-        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'bi-door-closed']);
+        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'closed']);
       endif;
     endif;
   else :
-    echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'bi-door-closed']);
+    echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);
   endif; ?>
 </main>
 <aside>
@@ -216,7 +216,7 @@
 
         <?php if (!$topic['signed_facet_id'] && UserData::getUserId()) : ?>
           <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm sky center mt5 mr5">
-            <i class="bi-plus"></i> <?= __('app.read'); ?>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg> <?= __('app.read'); ?>
           </div>
         <?php endif; ?>
 
@@ -255,7 +255,7 @@
               <?php endif; ?>
             </a>
           <?php else : ?>
-            <i class="bi-intersect gray-600 middle mr15 text-2xl"></i>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#closed"></use></svg>
           <?php endif; ?>
           <a class="black" href="<?= url('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>

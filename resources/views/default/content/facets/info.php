@@ -2,7 +2,7 @@
 <main>
   <?= insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
   <div class="box">
-    <h2 class="mt5 mb5"><?= __('app.wiki'); ?></h2>
+    <h2 class="m0"><?= __('app.wiki'); ?></h2>
     <?= Content::text($topic['facet_info'] ?? '', 'text'); ?>
   </div>
   <div class="box">

@@ -1,7 +1,7 @@
 <?php if (Request::getUri() == '/') : ?>
   <center>
     <a class="btn btn-outline-primary center" href="/topics">
-      <i class="bi-columns-gap mr5"></i> <?= __('app.topic_subs'); ?>!
+       <?= __('app.topic_subs'); ?>!
     </a>
   </center>
   <div class="grid-cols-2 mt15">

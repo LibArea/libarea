@@ -16,7 +16,7 @@
               </div>
               <div class="flex text-sm justify-between">
                 <div class="flex gap">
-                  <?= Html::votes($answer, 'answer', 'ps'); ?>
+                  <?= Html::votes($answer, 'answer'); ?>
 
                   <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                     <?php if ($post['post_closed'] == 0) : ?>
@@ -36,7 +36,7 @@
 
                   <?php if (UserData::checkAdmin()) : ?>
                     <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
-                      <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
+                      <?= __('app.remove'); ?>
                     </a>
                   <?php endif; ?>
 
@@ -44,7 +44,7 @@
 
                   <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
-                      <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
+                      <svg class="icons"><use xlink:href="/assets/svg/icons.svg#flag"></use></svg>
                     </a>
                   <?php endif; ?>
                 </div>
@@ -95,7 +95,7 @@
 
                       <?php if (UserData::checkAdmin()) : ?>
                         <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
-                          <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
+                          <?= __('app.remove'); ?>
                         </a>
                       <?php endif; ?>
 

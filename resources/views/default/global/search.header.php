@@ -30,7 +30,7 @@ $q = $data['q'];
           
           <div class="flex right gap-max items-center">
             <div id="toggledark" class="header-menu-item mb-none only-icon">
-              <i class="bi-brightness-high gray-600 text-xl"></i>
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg>
             </div>
             <?php if (!UserData::checkActiveUser()) : ?>
               <?php if (config('general.invite') == false) : ?>

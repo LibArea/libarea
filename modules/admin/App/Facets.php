@@ -37,7 +37,7 @@ class Facets
         return view(
             '/view/default/facet/type',
             [
-                'meta'  => Meta::get('admin.' . __($type)),
+                'meta'  => Meta::get(__('admin.' . $type)),
                 'data'  => [
                     'count'     => StatsModel::getCount(),
                     'sheet'     => $type,

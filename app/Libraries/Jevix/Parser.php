@@ -102,9 +102,9 @@ class Parser
 
         if ($tl) {
             if (UserData::checkActiveUser()) {
-                $spoiler = '<details><summary><i class="bi-unlock gray-600 mr5"></i> ' . $title . '</summary>' . $content . '</details>';
+                $spoiler = '<details><summary><svg class="icons gray-600 mr5"><use xlink:href="/assets/svg/icons.svg#lock"></use></svg> ' . $title . '</summary>' . $content . '</details>';
             } else {
-                $spoiler = '<details class="gray"><summary><i class="bi-unlock green mr5"></i> ' . __('app.text_closed') . '.</summary>...</details>';
+                $spoiler = '<details class="gray"><summary><svg class="icons gray-600 mr5"><use xlink:href="/assets/svg/icons.svg#lock"></use></svg> ' . __('app.text_closed') . '.</summary>...</details>';
             }
         }
 

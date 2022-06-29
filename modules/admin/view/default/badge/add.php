@@ -17,12 +17,12 @@
   <fieldset>
     <label for="badge_icon"><?= __('admin.icon'); ?></label>
     <textarea class="add" name="badge_icon" required></textarea>
-    <div class="help"><?= __('admin.example'); ?>: &lt;i title="<?= __('admin.title'); ?>" class="bi-trophy"&gt;&lt;/i&gt;</div>
+    <div class="help"><?= __('admin.example'); ?>: &lt;svg class="icons"&gt;&lt;use xlink:href="/assets/svg/icons.svg#eyeglass"&gt;&lt;/use&gt;&lt;/svg&gt;</div>
   </fieldset>
   <fieldset>
     <label for="badge_tl">Tl</label>
     <input type="text" name="badge_tl" value="0" required>
-    <div class="help"><?= __('admin.for'); ?> TL (0 <?= __('admin.default'); ?>)</div>
+    <div class="help"><?= __('admin.for'); ?> TL (0 - <?= __('admin.default'); ?>)</div>
   </fieldset>
   <fieldset>
     <label for="badge_score">Score</label>

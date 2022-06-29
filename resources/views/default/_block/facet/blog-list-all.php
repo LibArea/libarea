@@ -16,7 +16,7 @@
       ]); ?>
 
       <?php if (UserData::getUserId() == $facet['facet_user_id']) : ?>
-        <i class="bi-mic sky text-sm"></i>
+        <svg class="icons icon-small sky"><use xlink:href="/assets/svg/icons.svg#mic"></use></svg>
       <?php endif; ?>
       <div class="mr10 mt5 mb-pr0 gray">
         <?= Content::fragment(Content::text($facet['facet_short_description'], 'line'), 68); ?>

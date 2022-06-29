@@ -4,8 +4,8 @@
   <div class="box">
     <?php if (!empty($data['writers'])) : ?>
       <div class="flex items-center mb20 mt10">
-        <i class="bi-award red text-3xl mr10"></i>
-        <h2 class="gray-600"><?= __('app.by_deposit'); ?></h2>
+        <svg class="icons red icon-base"><use xlink:href="/assets/svg/icons.svg#award"></use></svg>
+        <h2 class="gray-600 m0"><?= __('app.by_deposit'); ?></h2>
       </div>
       <hr class="mb20">
       <?php foreach ($data['writers'] as $ind => $row) : ?>

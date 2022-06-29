@@ -20,7 +20,7 @@ use Hleb\Constructor\Handlers\Request; ?>
 
       <div class="mb15">
         <a class="black" href="<?= $post_url; ?>">
-          <h2><?= $post['post_title']; ?>
+          <h2 class="m0"><?= $post['post_title']; ?>
             <?= insert('/content/post/post-title', ['post' => $post]); ?>
           </h2>
         </a>
@@ -30,7 +30,7 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?= Html::facets($post['facet_list'], 'topic', 'topic', 'gray-600 text-sm'); ?>
           <?php if ($post['post_url_domain']) : ?>
             <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-              <i class="bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg> <?= $post['post_url_domain']; ?>
             </a>
           <?php endif; ?>
         </div>
@@ -70,7 +70,7 @@ use Hleb\Constructor\Handlers\Request; ?>
           </a>
 
           <div class="gray-600 mb-none lowercase"><?= Html::langDate($post['post_date']); ?></div>
-          <?= Html::votes($post, 'post', 'ps', 'mr5'); ?>
+          <?= Html::votes($post, 'post'); ?>
 
           <?php if ($post['post_answers_count'] != 0) : ?>
             <a class="flex gray-600" href="<?= $post_url; ?>#comment">

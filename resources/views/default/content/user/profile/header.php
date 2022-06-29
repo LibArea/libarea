@@ -22,12 +22,12 @@ endif;
         <div class="right m15">
           <?php if ($profile['id'] == UserData::getUserId()) : ?>
             <a class="btn btn-primary" title="<?= __('app.settings'); ?>" href="<?= url('setting'); ?>">
-              <i class="bi-gear"></i>
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#settings"></use></svg>
             </a>
           <?php else : ?>
             <?php if ($data['button_pm'] === true) : ?>
               <a class="btn btn-primary" title="<?= __('app.write_message'); ?>" href="<?= url('send.messages', ['login' => $profile['login']]); ?>">
-                <i class="bi-envelope"></i>
+                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#mail"></use></svg>
               </a>
             <?php endif; ?>
           <?php endif; ?>

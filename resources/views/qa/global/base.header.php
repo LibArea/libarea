@@ -13,7 +13,7 @@ $facet  = $data['facet'] ?? false; ?>
   <header class="bg-white mb10">
     <div class="br-bottom wrap mb10 mb-none items-center flex gap">
       <a class="p5 black text-xs" href="/topics">
-        <i class="bi-columns-gap mr5"></i> <?= __('app.topics'); ?>
+        <svg class="icons"><use xlink:href="/assets/svg/icons.svg#hash"></use></svg> <?= __('app.topics'); ?>
       </a>
       <a class="black text-xs" href="/blogs">
         <svg class="icons"><use xlink:href="/assets/svg/icons.svg#post"></use></svg> <?= __('app.blogs'); ?>
@@ -22,10 +22,10 @@ $facet  = $data['facet'] ?? false; ?>
         <svg class="icons"><use xlink:href="/assets/svg/icons.svg#users"></use></svg> <?= __('app.users'); ?>
       </a>
       <a class="black text-xs" href="/web">
-        <i class="bi-link-45deg mr5"></i> <?= __('app.catalog'); ?>
+        <svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg> <?= __('app.search'); ?> <?= __('app.catalog'); ?>
       </a>
       <a class="black text-xs" href="/search">
-        <i class="bi-search mr5"></i> <?= __('app.search'); ?>
+        <svg class="icons"><use xlink:href="/assets/svg/icons.svg#search"></use></svg> <?= __('app.search'); ?>
       </a>
     </div>
 
@@ -39,7 +39,7 @@ $facet  = $data['facet'] ?? false; ?>
       <?php if (!UserData::checkActiveUser()) : ?>
         <div class="flex gap-max items-center">
           <a id="toggledark" class="header-menu-item gray-600 mb-none">
-            <i class="bi-brightness-high text-xl"></i>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg>
           </a>
           <?php if (config('general.invite') == false) : ?>
             <a class="w94 gray block" href="<?= url('register'); ?>">
@@ -57,19 +57,19 @@ $facet  = $data['facet'] ?? false; ?>
             <?= Html::addPost($facet); ?>
 
             <div id="toggledark" class="only-icon">
-              <i class="bi-brightness-high gray-600 text-xl"></i>
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg>
             </div>
 
-            <a class="gray-600 text-xl" href="<?= url('notifications'); ?>">
+            <a class="gray-600" href="<?= url('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
               <?php if (!empty($notif)) : ?>
                 <?php if ($notif['action_type'] == 1) : ?>
-                  <i class="bi-envelope red"></i>
+                  <svg class="icons red"><use xlink:href="/assets/svg/icons.svg#mail"></use></svg>
                 <?php else : ?>
-                  <i class="bi-bell-fill red"></i>
+                  <svg class="icons red"><use xlink:href="/assets/svg/icons.svg#bell"></use></svg>
                 <?php endif; ?>
               <?php else : ?>
-                <i class="bi-bell"></i>
+                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#bell"></use></svg>
               <?php endif; ?>
             </a>
 

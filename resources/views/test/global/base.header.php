@@ -26,7 +26,7 @@ $facet  = $data['facet'] ?? false; ?>
       <?php if (!UserData::checkActiveUser()) : ?>
         <div class="flex gap-max items-center">
           <div id="toggledark" class="header-menu-item mb-none">
-            <i class="bi-brightness-high gray-600 text-xl"></i>
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg>
           </div>
           <?php if (config('general.invite') == false) : ?>
             <a class="w94 gray block" href="<?= url('register'); ?>">
@@ -43,20 +43,20 @@ $facet  = $data['facet'] ?? false; ?>
 
           <?= Html::addPost($facet); ?>
 
-          <div id="toggledark"><i class="bi-brightness-high gray-600"></i></div>
+          <div id="toggledark"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg></div>
 
-          <a class="gray-600" href="<?= url('notifications'); ?>">
-            <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
-            <?php if (!empty($notif)) : ?>
-              <?php if ($notif['action_type'] == 1) : ?>
-                <i class="bi-envelope red"></i>
+            <a class="gray-600" href="<?= url('notifications'); ?>">
+              <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
+              <?php if (!empty($notif)) : ?>
+                <?php if ($notif['action_type'] == 1) : ?>
+                  <svg class="icons red"><use xlink:href="/assets/svg/icons.svg#mail"></use></svg>
+                <?php else : ?>
+                  <svg class="icons red"><use xlink:href="/assets/svg/icons.svg#bell"></use></svg>
+                <?php endif; ?>
               <?php else : ?>
-                <i class="bi-bell-fill red"></i>
+                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#bell"></use></svg>
               <?php endif; ?>
-            <?php else : ?>
-              <i class="bi-bell"></i>
-            <?php endif; ?>
-          </a>
+            </a>
 
           <div class="relative">
             <div class="trigger">

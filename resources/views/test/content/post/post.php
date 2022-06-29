@@ -7,8 +7,8 @@
     <?php endif; ?>
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="flex mb20 article_<?= $post['post_id']; ?>">
-      <div class="w40">
-        <?= Html::votes($post, 'post', 'ps', 'bi-arrow-up-short text-xl font-semibold', 'block'); ?>
+      <div class="w40 no-flex center pt20">
+        <?= Html::votes($post, 'post', 'ps', 'arrow-up'); ?>
       </div>
       <div>
         <div>

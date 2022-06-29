@@ -20,18 +20,18 @@ function internalRender($nodes, $tl, $user_id)
                     <span class=" gray-600 lowercase">' . Html::langDate($node['date']) . '</span>';
 
         if ($node['reply_parent_id'] != $node['reply_item_id'] && $node['reply_parent_id'] != 0) {
-            echo '<a rel="nofollow" class="gray-600" href="#reply_' . $node['reply_parent_id'] . '"><i class="bi-arrow-up"></i></a>';
+            echo '<a rel="nofollow" class="gray-600" href="#reply_' . $node['reply_parent_id'] . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#arrow-up"></use></svg></a>';
         }
 
         if (UserData::checkAdmin()) {
             echo '<span data-id="' . $node['reply_id'] . '" data-type="reply" class="type-action gray-600">
-                  <i title="' . __('web.remove') . '" class="bi-trash"></i></span>';
+                  ' . __('web.remove') . '</span>';
         }
 
         echo '</div>';
 
         echo '<div class="max-w780 text-base ind-first-p">' . Content::text($node['content'], 'text') . '</div>
-                    <div class="flex gap">' . Html::votes($node, 'reply', 'ps', 'mr5');
+                    <div class="flex gap">' . Html::votes($node, 'reply');
 
         if ($tl >= config('trust-levels.tl_add_reply')) {
             echo '<a data-item_id="' . $node['reply_item_id'] . '" data-type="addform" data-id="' . $node['reply_id'] . '" class="actreply gray-600">' . __('web.reply') . '</a>';

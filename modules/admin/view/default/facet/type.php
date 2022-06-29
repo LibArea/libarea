@@ -37,7 +37,7 @@
       <?php $topic['level'] = $topic['level'] ?? null; ?>
       <?php if ($topic['level'] > 0) : ?>
         <?php $color = true; ?>
-        <i class="bi-arrow-return-right gray ml<?= $topic['level'] * 10; ?>"></i>
+        <svg class="icons gray ml<?= $topic['level'] * 10; ?>"><use xlink:href="/assets/svg/icons.svg#corner-down-right"></use></svg>
       <?php endif; ?>
       <a class="<?php if ($topic['level'] == 0) : ?>relative pt5 text-xl items-center hidden<?php endif; ?> <?php if ($topic['level'] > 0) : ?> black<?php endif; ?>" href="<?= $url; ?>">
         <?php if ($topic['level'] == 0) : ?>
@@ -52,17 +52,17 @@
 
       <?php if ($topic['facet_is_deleted'] == 1) : ?>
         <span class="type-ban" data-id="<?= $topic['facet_id']; ?>" data-type="topic">
-          <sup><i class="bi-trash red"></i></sup>
+          <sup><svg class="icons red"><use xlink:href="/assets/svg/icons.svg#trash-2"></use></svg></sup>
         </span>
       <?php else : ?>
         <span class="type-ban" data-id="<?= $topic['facet_id']; ?>" data-type="topic">
-          <sup><i class="bi-trash gray-600"></i></sup>
+          <sup><svg class="icons gray-600"><use xlink:href="/assets/svg/icons.svg#trash"></use></svg></sup>
         </span>
       <?php endif; ?>
 
       <?php if ($topic['matching_list']) : ?>
         <div class="ml<?= $topic['level'] * 10; ?>">
-          <i class="bi-bezier2 gray-600 text-sm mr5 ml5"></i>
+          <svg class="icons gray-600 text-sm mr5 ml5"><use xlink:href="/assets/svg/icons.svg#git-merge"></use></svg>
           <?= Html::facets($topic['matching_list'], $topic['facet_type'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
         </div>
       <?php endif; ?>
@@ -88,9 +88,9 @@
         </a>
         <a data-type="post" data-id="<?= $page['post_id']; ?>" class="type-action gray-600 mr10 ml10">
           <?php if ($page['post_is_deleted'] == 1) : ?>
-            <i class="bi-trash red"></i>
+            <svg class="icons red"><use xlink:href="/assets/svg/icons.svg#trash-2"></use></svg>
           <?php else : ?>
-            <i class="bi-trash"></i>
+            <svg class="icons gray-600"><use xlink:href="/assets/svg/icons.svg#trash"></use></svg>
           <?php endif; ?>
         </a>
       </div>

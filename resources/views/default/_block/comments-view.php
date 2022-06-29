@@ -23,7 +23,7 @@
                     </span>
                   </a>
                   <?php if ($post['post_user_id'] == $answer['answer_user_id']) : ?>
-                    <span class="sky"><i class="bi-mic text-sm"></i></span>
+                    <svg class="icons icon-small sky"><use xlink:href="/assets/svg/icons.svg#mic"></use></svg>
                   <?php endif; ?>
                   <span class="gray-600 lowercase">
                     <?= Html::langDate($answer['date']); ?>
@@ -33,7 +33,7 @@
                       (<?= __('app.ed'); ?>.)
                     </span>
                   <?php endif; ?>
-                  <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
+                  <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#anchor"></use></svg></a>
                   <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
                 </div>
                 <div class="max-w780 ind-first-p">
@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="flex text-sm gap">
-                <?= Html::votes($answer, 'answer', 'ps'); ?>
+                <?= Html::votes($answer, 'answer'); ?>
 
                 <?php if ($post['post_closed'] == 0) : ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
@@ -57,7 +57,7 @@
 
                 <?php if (UserData::checkAdmin()) : ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
-                    <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
+                    <?= __('app.remove'); ?>
                   </a>
                 <?php endif; ?>
 
@@ -65,7 +65,7 @@
 
                 <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
-                    <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
+                    <svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#flag"></use></svg>
                   </a>
                 <?php endif; ?>
               </div>
@@ -85,7 +85,7 @@
                     <?= $answer['login']; ?>
                   </span>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action right">
-                    <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
+                    <?= __('app.remove'); ?>
                   </a>
                 </span>
               </li>
@@ -131,24 +131,24 @@
                   </span>
                 </a>
                 <?php if ($post['post_user_id'] == $comment['comment_user_id']) : ?>
-                  <span class="sky"><i class="bi-mic text-sm"></i></span>
+                  <svg class="icons icon-small sky"><use xlink:href="/assets/svg/icons.svg#mic"></use></svg>
                 <?php endif; ?>
                 <span class="gray-600 lowercase">
                   <?= Html::langDate($comment['date']); ?>
                 </span>
                 <?php if ($comment['comment_comment_id'] > 0) : ?>
-                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><i class="bi-arrow-up"></i></a>
+                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#arrow-up"></use></svg></a>
                 <?php else : ?>
-                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi-arrow-up"></i></a>
+                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#arrow-up"></use></svg></a>
                 <?php endif; ?>
-                <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi-hash"></i></a>
+                <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#anchor"></use></svg></a>
                 <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
               </div>
               <div class="max-w780 ind-first-p">
                 <?= Content::text($comment['comment_content'], 'text'); ?>
               </div>
               <div class="text-sm flex gap">
-                <?= Html::votes($comment, 'comment', 'ps'); ?>
+                <?= Html::votes($comment, 'comment'); ?>
 
                 <?php if ($post['post_closed'] == 0) : ?>
                   <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
@@ -165,13 +165,13 @@
                 <?php endif; ?>
                 <?php if (UserData::checkAdmin()) : ?>
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
-                    <i title="<?= __('app.remove'); ?>" class="bi-trash"></i>
+                    <?= __('app.remove'); ?>
                   </a>
                 <?php endif; ?>
 
                 <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
-                    <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
+                    <svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#flag"></use></svg>
                   </a>
                 <?php endif; ?>
               </div>

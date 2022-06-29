@@ -8,10 +8,10 @@
 ); ?>
 
 <?php foreach ($data['types_facets'] as $type) : ?>
-  <a class="block mb10" href="<?= url('admin.facets.type', ['type' => $type['type_code']]); ?>">
-    <i class="bi-circle green middle mr5"></i>
+  <a class="flex gap-min items-center mb10" href="<?= url('admin.facets.type', ['type' => $type['type_code']]); ?>">
+    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#circle"></use></svg>
     <?= __('admin.' . $type['type_lang']); ?>
-    <sup class="gray-600"><?= $data['count']['count_' . $type['type_code']]; ?></sup>
+    <span class="gray-600">(<?= $data['count']['count_' . $type['type_code']]; ?>)</span>
   </a>
 <?php endforeach; ?>
 

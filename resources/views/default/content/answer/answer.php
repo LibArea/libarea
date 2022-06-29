@@ -15,7 +15,7 @@ foreach ($data['answers'] as $answer) :
               <?= $answer['login']; ?>
             </a>
             <?php if ($answer['post_user_id'] == $answer['answer_user_id']) : ?>
-              <span class="sky"><i class="bi-mic text-sm"></i></span>
+              <svg class="icons icon-small sky"><use xlink:href="/assets/svg/icons.svg#mic"></use></svg>
             <?php endif; ?>
             <span class="gray-600 lowercase">
               <?= Html::langDate($answer['date']); ?>
@@ -25,7 +25,7 @@ foreach ($data['answers'] as $answer) :
                 (<?= __('app.ed'); ?>.)
               </span>
             <?php endif; ?>
-            <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi-hash"></i></a>
+            <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#anchor"></use></svg></a>
             <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
           </div>
           <div class="content-body">
@@ -33,7 +33,7 @@ foreach ($data['answers'] as $answer) :
           </div>
         </div>
         <div class="flex text-sm gap">
-          <?= Html::votes($answer, 'answer', 'ps'); ?>
+          <?= Html::votes($answer, 'answer'); ?>
 
           <?php if ($answer['post_closed'] == 0) : ?>
             <?php if ($answer['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
@@ -57,7 +57,7 @@ foreach ($data['answers'] as $answer) :
 
           <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
             <a data-post_id="<?= $answer['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
-              <i title="<?= __('app.report'); ?>" class="bi-flag"></i>
+              <svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#flag"></use></svg>
             </a>
           <?php endif; ?>
         </div>

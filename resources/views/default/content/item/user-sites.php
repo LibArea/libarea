@@ -39,13 +39,13 @@
                     <?= $item['item_domain']; ?>
                     <?php if ($item['item_github_url']) : ?>
                       <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                        <i class="bi-github text-sm mr5"></i>
+                        <svg class="icons"><use xlink:href="/assets/svg/icons.svg#github"></use></svg>
                         <?= $item['item_title_soft']; ?>
                       </a>
                     <?php endif; ?>
                     <?php if ($item['item_published'] == 1) : ?>
                       <div>
-                        <i class="bi-arrow-return-right gray-600 ml10"></i>
+                        <svg class="icons"><use xlink:href="/assets/svg/icons.svg#corner-down-right"></use></svg>
                         <a class="black" href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
                           <?= __('web.more'); ?>
                         </a>

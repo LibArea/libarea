@@ -43,7 +43,7 @@ use Hleb\Constructor\Handlers\Request; ?>
             <?= Html::facets($post['facet_list'], 'topic', 'topic', 'tag-grey'); ?>
             <?php if ($post['post_url_domain']) : ?>
               <a class="gray-600 text-sm ml10" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-                <i class="bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
+                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg> <?= $post['post_url_domain']; ?>
               </a>
             <?php endif; ?>
           </div>

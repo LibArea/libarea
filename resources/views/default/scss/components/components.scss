@@ -16,10 +16,9 @@ h3,
 h4,
 h5 {
   font-weight: 500;
-  margin: 0;
 }
 
-/* https://feathericons.com/ */
+/* См. https://feathericons.com/ и https://tabler-icons.io/ */
 .icons {
   width: 21px;
   height: 21px;
@@ -31,6 +30,11 @@ h5 {
 .icon-max {
   width: 121px;
   height: 121px;
+}
+
+.icon-base {
+  width: 48px;
+  height: 48px;
 }
 
 .icon-small {
@@ -306,7 +310,7 @@ ul.last-content a.last-content_telo { display: block; }
 .uppercase-box {
   font-size: 0.75rem;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
   letter-spacing: 1.5px;
 }
 
@@ -317,7 +321,8 @@ a:hover > img,
 .post-body.full img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
 .post-body .post-img img { margin-top: 5px; }
 
-.post-body.full img {
+.post-body.full img,
+.max-w780 img {
   max-width: 100%;
   display: block;
 }

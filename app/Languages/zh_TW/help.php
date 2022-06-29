@@ -20,7 +20,7 @@ return [
 
     'messages_info'         => '與網站成員的私人消息。 拒絕垃圾郵件，尊重他人！',
 
-    'add_post'              => '使用标签<b>cut</b> (<i class="bi-scissors"></i>).<br><br>它隐藏在标签后面的文本的 cat 部分下（它将被写成“阅读更多”）。',
+    'add_post'              => '使用标签<b>cut</b> (<svg class="icons"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br>它隐藏在标签后面的文本的 cat 部分下（它将被写成“阅读更多”）。',
     'edit_page'             => '官方文檔應該沒有錯誤並且以正式的方式編寫。',
     'edit_post'             => '在提要頁面和完整版中查看帖子的外觀。 在這裡改進一下。',
     'add_topic'             => '主題是系統用來組織內容的節點（用於導航）。 主題是單一的觀點，對各種事物、現象和其他概念的解釋。',
