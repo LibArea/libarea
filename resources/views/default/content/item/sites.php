@@ -82,9 +82,9 @@
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/' . $data['screening']); ?>
   </main>
   <aside>
-    <div class="box bg-beige mt15"><?= Content::text($data['category']['facet_info'] ?? '', 'line'); ?></div>
+    <div class="box bg-beige max-w300"><?= Content::text($data['category']['facet_info'] ?? '', 'line'); ?></div>
     <?php if (UserData::checkActiveUser()) : ?>
-      <div class="box text-sm bg-lightgray mt15">
+      <div class="box bg-lightgray max-w300">
         <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>
         <ul class="menu">
           <?= insert('/_block/navigation/item/menu', ['data' => $data]); ?>

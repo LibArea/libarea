@@ -21,6 +21,10 @@
               </a> - <?= $item['item_following_link']; ?>
             <?php endif; ?>
 
+            <?php if (UserData::checkAdmin()) : ?>
+              <a data-type="item" data-id="<?= $item['item_id']; ?>" class="type-action gray-600 ml15"><?= __('app.remove'); ?></a>
+            <?php endif; ?>
+
             <?php if ($item['item_is_deleted'] == 1 && UserData::checkAdmin()) : ?>
               <i class="red ml15"><?= __('app.remote'); ?></i>
             <?php endif; ?>
@@ -51,12 +55,6 @@
                 </div>
               </div>
               <div class="flex gap right gray-600">
-                <?php if (UserData::checkAdmin()) : ?>
-                  <a data-type="item" data-id="<?= $item['item_id']; ?>" class="type-action gray-600">
-                    <?= __('app.remove'); ?>
-                  </a>
-                <?php endif; ?>
-
                 <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps'); ?>
                 <?= Html::votes($item, 'item'); ?>
               </div>

@@ -66,13 +66,13 @@
 .menu a,
 .dropdown li > a {
   color: var(--gray);
-  padding: 3px 0 3px 3px;
+  padding: 5px 0 5px 3px;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.menu li { margin-bottom: 3px; }
+.menu__left:not(.menu__active) li { margin-bottom: 3px; }
 
 .user-nav li:hover,
 .menu li.active,
@@ -88,9 +88,7 @@
   color: var(--gray-600); 
 }
 
-.breadcrumbs li:not(:last-child):after {
-  content: " / ";
-}
+.breadcrumbs li:not(:last-child):after { content: " / "; }
 
 /* Navigation */
 ul.nav {

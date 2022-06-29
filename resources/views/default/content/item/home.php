@@ -36,7 +36,7 @@
   <aside>
     <div class="box bg-beige max-w300"><?= __('web.sidebar_info'); ?></div>
     <?php if (UserData::checkActiveUser()) : ?>
-      <div class="box text-sm bg-lightgray mt15">
+      <div class="box bg-lightgray max-w300">
         <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>
         <ul class="menu">
           <?= insert('/_block/navigation/item/menu', ['data' => $data]); ?>

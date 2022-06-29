@@ -1,8 +1,8 @@
 <?php
 $category = $data['category'] ?? null;
 if ($category) : ?>
-  <div class="w-70 flex justify-between">
-  <h2 class="inline mb10"><?= Html::numWord($data['count'], __('web.num_website'), false); ?>: <?= $data['count']; ?></h2>
+  <div class="flex justify-between tems-center  mr20">
+  <h2 class="inline m0"><?= Html::numWord($data['count'], __('web.num_website'), false); ?>: <?= $data['count']; ?></h2>
   <ul class="nav">
     <li<?php if ($data['sheet'] == 'all') { ?> class="active" <?php } ?>>
       <a href="<?= url('web.dir.all', ['grouping' => 'all', 'slug' => $category['facet_slug']]); ?>">
