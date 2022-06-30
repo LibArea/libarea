@@ -28,7 +28,9 @@ foreach ($answer as  $comment) :
               <?= $comment['login']; ?>
             </a>
             <?php if ($comment['post_user_id'] == $comment['comment_user_id']) : ?>
-              <svg class="icons sky"><use xlink:href="/assets/svg/icons.svg#mic"></use></svg>
+              <svg class="icons sky">
+                <use xlink:href="/assets/svg/icons.svg#mic"></use>
+              </svg>
             <?php endif; ?>
             <span class="gray-600 lowercase">
               <?= Html::langDate($comment['date']); ?>
@@ -56,7 +58,9 @@ foreach ($answer as  $comment) :
 
           <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
             <a data-post_id="<?= $comment['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#flag"></use></svg>
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#flag"></use>
+              </svg>
             </a>
           <?php endif; ?>
         </div>

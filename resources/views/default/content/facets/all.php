@@ -42,26 +42,28 @@
       <?php if ($data['countUserFacet'] == 0 || UserData::checkAdmin()) : ?>
         <p class="text-xl">
           <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg>
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#plus"></use>
+            </svg>
           </a>
         </p>
       <?php endif; ?>
     <?php endif; ?>
   </div>
 
-    <?php if (!empty($data['facets'])) : ?>
-      <?php if ($data['type'] == 'blog') : ?>
-        <div class="mb20">
-          <?= insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
-        </div>  
-      <?php else : ?>
-        <div class="flex justify-between gap-max flex-wrap mb20">
-          <?= insert('/_block/facet/topic-list-all', ['facets' => $data['facets']]); ?>
-        </div>
-      <?php endif; ?>
+  <?php if (!empty($data['facets'])) : ?>
+    <?php if ($data['type'] == 'blog') : ?>
+      <div class="mb20">
+        <?= insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
+      </div>
     <?php else : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'info']); ?>
+      <div class="flex justify-between gap-max flex-wrap mb20">
+        <?= insert('/_block/facet/topic-list-all', ['facets' => $data['facets']]); ?>
+      </div>
     <?php endif; ?>
+  <?php else : ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'info']); ?>
+  <?php endif; ?>
 
   <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url($data['type'] . 's.' . $data['sheet'])); ?>
 </main>

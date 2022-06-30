@@ -19,18 +19,22 @@ $q = $data['q'];
         <div data-template="one" class="flex justify-between" id="find tippy">
 
           <ul class="nav inline">
-          <li><a href="/"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#home"></use></svg> <?= __('search.on_website'); ?></a></li>
-         <li<?php if ($uri == 'post') : ?> class="active"<?php endif; ?>>
-           <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=post"><?= __('search.posts'); ?></a>
-         </li>
-         <li<?php if ($uri == 'website') : ?> class="active"<?php endif; ?>>
-           <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=website"><?= __('search.websites'); ?></a>
-         </li>
+            <li><a href="/"><svg class="icons">
+                  <use xlink:href="/assets/svg/icons.svg#home"></use>
+                </svg> <?= __('search.on_website'); ?></a></li>
+            <li<?php if ($uri == 'post') : ?> class="active" <?php endif; ?>>
+              <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=post"><?= __('search.posts'); ?></a>
+              </li>
+              <li<?php if ($uri == 'website') : ?> class="active" <?php endif; ?>>
+                <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=website"><?= __('search.websites'); ?></a>
+                </li>
           </ul>
-          
+
           <div class="flex right gap-max items-center">
             <div id="toggledark" class="header-menu-item mb-none only-icon">
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg>
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#sun"></use>
+              </svg>
             </div>
             <?php if (!UserData::checkActiveUser()) : ?>
               <?php if (config('general.invite') == false) : ?>

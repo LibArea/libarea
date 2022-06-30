@@ -11,7 +11,9 @@ Request::getHead()->addStyles('/assets/css/style.css?09'); ?>
   <div class="box-center">
     <form action="<?= url('search.go'); ?>">
       <input class="search-input br5" placeholder="<?= __('search.name'); ?>..." name="q">
-      <button class="search-button-icon br5"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#search"></use></svg></button>
+      <button class="search-button-icon br5"><svg class="icons">
+          <use xlink:href="/assets/svg/icons.svg#search"></use>
+        </svg></button>
       <?= csrf_field() ?>
     </form>
     <div class="center">

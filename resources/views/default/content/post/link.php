@@ -7,7 +7,9 @@
       <h1><?= $data['site']['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm ml5" title="<?= __('app.edit'); ?>" href="<?= url('web.edit', ['id' => $data['site']['item_id']]); ?>">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+            </svg>
           </a>
         <?php endif; ?>
       </h1>
@@ -19,7 +21,9 @@
           <?= Html::websiteImage($data['site']['item_id'], 'favicon', $data['site']['item_domain'], 'favicons'); ?>
           <?= $data['site']['item_url']; ?>
         </a>
-        <span class="right gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#post"></use></svg> <?= $data['site']['item_count']; ?></span>
+        <span class="right gray-600"><svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#post"></use>
+          </svg> <?= $data['site']['item_count']; ?></span>
       </div>
     <?php else : ?>
       <h1><?= __('app.domain') . ': ' . $data['domain']; ?></h1>

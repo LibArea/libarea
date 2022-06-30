@@ -17,12 +17,14 @@
 
             <?php if (Access::author('item', $item['item_user_id'], $item['item_date'], 30) === true) : ?>
               <a href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
-                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
+                <svg class="icons">
+                  <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                </svg>
               </a> - <?= $item['item_following_link']; ?>
             <?php endif; ?>
 
             <?php if (UserData::checkAdmin()) : ?>
-              <a data-type="item" data-id="<?= $item['item_id']; ?>" class="type-action gray-600 ml15"><?= __('app.remove'); ?></a>
+              <a data-type="item" data-id="<?= $item['item_id']; ?>" class="type-action gray-600 lowercase ml15"><?= __('app.remove'); ?> (<?= __('app.website'); ?>)</a>
             <?php endif; ?>
 
             <?php if ($item['item_is_deleted'] == 1 && UserData::checkAdmin()) : ?>
@@ -31,7 +33,9 @@
 
             <?php if (!empty($delete_fav)) : ?>
               <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="website">
-                <svg class="icons gray-600"><use xlink:href="/assets/svg/icons.svg#trash"></use></svg>
+                <svg class="icons gray-600">
+                  <use xlink:href="/assets/svg/icons.svg#trash"></use>
+                </svg>
               </span>
             <?php endif; ?>
             <div class="list-items__text">
@@ -43,12 +47,16 @@
                 <?= $item['item_domain']; ?>
                 <?php if ($item['item_github_url']) : ?>
                   <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#github"></use></svg>
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#github"></use>
+                    </svg>
                     <?= $item['item_title_soft']; ?>
                   </a>
                 <?php endif; ?>
                 <div>
-                  <svg class="icons gray ml5"><use xlink:href="/assets/svg/icons.svg#corner-down-right"></use></svg>
+                  <svg class="icons gray ml5">
+                    <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
+                  </svg>
                   <a class="black " href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
                     <?= __('web.more'); ?>
                   </a>
@@ -65,10 +73,14 @@
     <?php else : ?>
       <?php if (UserData::checkAdmin()) : ?>
         <div class="mt15 mb15">
-          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg>
+          <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#link"></use>
+          </svg>
           <?= $item['item_title']; ?> (<?= $item['item_domain']; ?>)
           <a class="ml15" href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+            </svg>
           </a>
         </div>
       <?php endif; ?>

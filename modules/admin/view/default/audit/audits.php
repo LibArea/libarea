@@ -50,7 +50,9 @@
           <?php endif; ?>
           <span class="mr5 ml5"> &#183; </span>
           <a class="mr5 ml5" href="<?= url('admin.user.edit', ['id' => $audit['id']]); ?>">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+            </svg>
           </a>
           <span class="mr5 ml5"> &#183; </span>
           <?= $audit['content'][$audit['action_type'] . '_date']; ?>
@@ -100,7 +102,9 @@
           <?php else : ?>
             <div class="<?php if ($audit['read_flag'] == 0) : ?> bg-red-200<?php endif; ?>">
               <span class="report-saw" data-id="<?= $audit['audit_id']; ?>">
-                <svg class="icons icon-max gray"><use xlink:href="/assets/svg/icons.svg#circle"></use></svg>
+                <svg class="icons icon-max gray">
+                  <use xlink:href="/assets/svg/icons.svg#circle"></use>
+                </svg>
               </span>
             </div>
           <?php endif; ?>

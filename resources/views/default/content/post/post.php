@@ -30,7 +30,9 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?= Html::facets($post['facet_list'], 'topic', 'topic', 'gray-600 text-sm'); ?>
           <?php if ($post['post_url_domain']) : ?>
             <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg> <?= $post['post_url_domain']; ?>
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#link"></use>
+              </svg> <?= $post['post_url_domain']; ?>
             </a>
           <?php endif; ?>
         </div>
@@ -51,9 +53,9 @@ use Hleb\Constructor\Handlers\Request; ?>
 
         <div class="cut-post">
           <?php $arr = Content::cut($post['post_content']);
-             echo Content::text($arr['content'], 'text'); ?>
+          echo Content::text($arr['content'], 'text'); ?>
         </div>
-        <?php if($arr['button']) : ?>
+        <?php if ($arr['button']) : ?>
           <a class="btn btn-outline-primary" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
             <?= __('app.read_more'); ?>
           </a>
@@ -64,9 +66,9 @@ use Hleb\Constructor\Handlers\Request; ?>
         <div class="flex gap text-sm flex-row">
           <a class="black" href="<?= url('profile', ['login' => $post['login']]); ?>">
             <?= Html::image($post['avatar'], $post['login'], 'img-sm mr5', 'avatar', 'max'); ?>
-            <span<?php if (Html::loginColor($post['created_at'])) : ?> class="green"<?php endif; ?>>
+            <span<?php if (Html::loginColor($post['created_at'])) : ?> class="green" <?php endif; ?>>
               <?= $post['login']; ?>
-            </span>  
+              </span>
           </a>
 
           <div class="gray-600 mb-none lowercase"><?= Html::langDate($post['post_date']); ?></div>
@@ -74,7 +76,9 @@ use Hleb\Constructor\Handlers\Request; ?>
 
           <?php if ($post['post_answers_count'] != 0) : ?>
             <a class="flex gray-600" href="<?= $post_url; ?>#comment">
-              <svg class="icons mr5"><use xlink:href="/assets/svg/icons.svg#comments"></use></svg>
+              <svg class="icons mr5">
+                <use xlink:href="/assets/svg/icons.svg#comments"></use>
+              </svg>
               <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
             </a>
           <?php endif; ?>

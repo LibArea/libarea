@@ -5,7 +5,12 @@ if ($profile['cover_art'] != 'cover_art.jpeg') :
   $css = 'w160 mb-w100 -mt90 ml15 br-rd5';
 endif;
 ?>
-<style nonce="<?= $_SERVER['nonce']; ?>">.bg-profile {background: <?= $profile['color']; ?>;min-height: 90px;}</style>
+<style nonce="<?= $_SERVER['nonce']; ?>">
+  .bg-profile {
+    background: <?= $profile['color']; ?>;
+    min-height: 90px;
+  }
+</style>
 <div class="br-gray bg-white mb15">
   <?php if ($profile['cover_art'] != 'cover_art.jpeg') : ?>
     <div class="profile-box-cover relative">
@@ -22,12 +27,16 @@ endif;
         <div class="right m15">
           <?php if ($profile['id'] == UserData::getUserId()) : ?>
             <a class="btn btn-primary" title="<?= __('app.settings'); ?>" href="<?= url('setting'); ?>">
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#settings"></use></svg>
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#settings"></use>
+              </svg>
             </a>
           <?php else : ?>
             <?php if ($data['button_pm'] === true) : ?>
               <a class="btn btn-primary" title="<?= __('app.write_message'); ?>" href="<?= url('send.messages', ['login' => $profile['login']]); ?>">
-                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#mail"></use></svg>
+                <svg class="icons">
+                  <use xlink:href="/assets/svg/icons.svg#mail"></use>
+                </svg>
               </a>
             <?php endif; ?>
           <?php endif; ?>
@@ -39,7 +48,9 @@ endif;
           <?= $profile['login']; ?>
           <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
             <?php if ($profile['up_count'] > 0) : ?>
-              <svg class="icons red mr5 ml20"><use xlink:href="/assets/svg/icons.svg#heart"></use></svg>
+              <svg class="icons red mr5 ml20">
+                <use xlink:href="/assets/svg/icons.svg#heart"></use>
+              </svg>
               <sup class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></sup>
             <?php endif; ?>
         </h1>

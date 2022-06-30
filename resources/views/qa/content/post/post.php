@@ -43,13 +43,15 @@ use Hleb\Constructor\Handlers\Request; ?>
             <?= Html::facets($post['facet_list'], 'topic', 'topic', 'tag-grey'); ?>
             <?php if ($post['post_url_domain']) : ?>
               <a class="gray-600 text-sm ml10" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg> <?= $post['post_url_domain']; ?>
+                <svg class="icons">
+                  <use xlink:href="/assets/svg/icons.svg#link"></use>
+                </svg> <?= $post['post_url_domain']; ?>
               </a>
             <?php endif; ?>
           </div>
 
           <div class="gray-600 text-xs">
-            <span class="mb-none">            
+            <span class="mb-none">
               <?= $post['post_date'] ?> ·
               <?= Html::numWord($post['post_hits_count'], __('app.num_view'), true); ?> ·
             </span>
@@ -71,5 +73,5 @@ use Hleb\Constructor\Handlers\Request; ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?= insert('/_block/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>
-    <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>
+  <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>
 <?php endif; ?>

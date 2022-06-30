@@ -7,7 +7,9 @@
       <?= $profile['about']; ?>...
     </blockquote>
     <div class="gray-600 m15">
-      <svg class="icons"><use xlink:href="/assets/svg/icons.svg#calendar"></use></svg>
+      <svg class="icons">
+        <use xlink:href="/assets/svg/icons.svg#calendar"></use>
+      </svg>
       <span class="middle lowercase text-sm">
         <?= Html::langDate($profile['created_at']); ?>
         <sup class="ml5"><?= __('app.tl' . $profile['trust_level'] . '.title'); ?></sup>
@@ -66,7 +68,9 @@
       <h3 class="uppercase-box"><?= __('app.selected_post'); ?>
         <?php if ($profile['id'] == UserData::getUserId()) : ?>
           <a class="add-profile ml10" data-post="<?= $post['post_id']; ?>">
-            <svg class="icons gray-600"><use xlink:href="/assets/svg/icons.svg#trash"></use></svg>
+            <svg class="icons gray-600">
+              <use xlink:href="/assets/svg/icons.svg#trash"></use>
+            </svg>
           </a>
         <?php endif; ?>
       </h3>
@@ -78,8 +82,10 @@
           <?= $post['post_date'] ?>
           <?php if ($post['post_answers_count'] != 0) : ?>
             <span class="right">
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#comments"></use></svg> <?= $post['post_answers_count']; ?>
-            </span>  
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#comments"></use>
+              </svg> <?= $post['post_answers_count']; ?>
+            </span>
           <?php endif; ?>
         </div>
       </div>
@@ -114,9 +120,13 @@
   <div class="box bg-lightgray">
     <h3 class="uppercase-box"><?= __('app.badges'); ?></h3>
     <div class="text-3xl">
-      <span title="<?= __('app.medal_reg'); ?>"><svg class="icons icon-base sky"><use xlink:href="/assets/svg/icons.svg#gift"></use></svg></span>
+      <span title="<?= __('app.medal_reg'); ?>"><svg class="icons icon-base sky">
+          <use xlink:href="/assets/svg/icons.svg#gift"></use>
+        </svg></span>
       <?php if ($profile['id'] < 50) : ?>
-        <span title="<?= __('app.first_days'); ?>"><svg class="icons icon-base green"><use xlink:href="/assets/svg/icons.svg#award"></use></svg></span>
+        <span title="<?= __('app.first_days'); ?>"><svg class="icons icon-base green">
+            <use xlink:href="/assets/svg/icons.svg#award"></use>
+          </svg></span>
       <?php endif; ?>
       <?php foreach ($data['badges'] as $badge) : ?>
         <?= $badge['badge_icon']; ?>
@@ -131,27 +141,37 @@
         <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) : ?>
           <?php if ($profile['ban_list'] == 1) : ?>
             <span class="type-ban gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#user"></use></svg>
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#user"></use>
+              </svg>
               <span class="red text-sm"><?= __('app.unban'); ?></span>
             </span>
           <?php else : ?>
             <span class="type-ban text-sm gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#flag"></use></svg>
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#flag"></use>
+              </svg>
               <?= __('app.ban_it'); ?>
             </span>
           <?php endif; ?>
         <?php endif; ?>
         <a class="gray mb5 block" href="<?= url('admin.user.edit', ['id' => $profile['id']]); ?>">
-          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#settings"></use></svg>
+          <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#settings"></use>
+          </svg>
           <span class="middle"><?= __('app.edit'); ?></span>
         </a>
         <a class="gray block" href="<?= url('admin.badges.user.add', ['id' => $profile['id']]); ?>">
-          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#award"></use></svg>
+          <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#award"></use>
+          </svg>
           <span class="middle"><?= __('app.reward_user'); ?></span>
         </a>
         <?php if ($profile['whisper']) : ?>
           <div class="tips text-sm gray-600">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#info"></use></svg>
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#info"></use>
+            </svg>
             <?= $profile['whisper']; ?>
           </div>
         <?php endif; ?>

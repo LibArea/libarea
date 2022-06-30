@@ -22,9 +22,10 @@
   <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) : ?>
     <div class="box bg-violet">
       <h3 class="uppercase-box"><?= __('app.reading'); ?>
-      <?php if (count($data['topics_user']) > config('facets.quantity_home')) : ?>
+        <?php if (count($data['topics_user']) > config('facets.quantity_home')) : ?>
           <a class="gray-600 text-sm" title="<?= __('app.topics'); ?>" href="<?= url('topics.my'); ?>">...</a>
-      <?php endif; ?></h3>
+        <?php endif; ?>
+      </h3>
       <ul>
         <?php
         $my = [];
@@ -55,7 +56,9 @@
             </a>
             <?php if (UserData::getUserId() == $topic['facet_user_id']) : ?>
               <a class="right gray-600 mt5" title="<?= __('app.add_post'); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
-                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg>
+                <svg class="icons">
+                  <use xlink:href="/assets/svg/icons.svg#plus"></use>
+                </svg>
               </a>
             <?php endif; ?>
           </li>

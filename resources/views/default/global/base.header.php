@@ -6,42 +6,46 @@ Request::getHead()->addStyles('/assets/css/style.css?014');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;
 $post   = $data['post'] ?? false;
- ?>
+?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
 <body class="general<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if (Request::getCookie('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
-  <header class="d-header<?php if($post || $facet) : ?> choices<?php endif; ?>">
+  <header class="d-header<?php if ($post || $facet) : ?> choices<?php endif; ?>">
 
     <div class="wrap">
       <div class="d-header_contents">
 
         <div class="flex items-center">
-          <div id="togglemenu" class="mr10"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#menu"></use></svg></div>
-          <div class="menu__button none mr10"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#menu"></use></svg></div>
+          <div id="togglemenu" class="mr10"><svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#menu"></use>
+            </svg></div>
+          <div class="menu__button none mr10"><svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#menu"></use>
+            </svg></div>
           <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>
         </div>
 
-        <?php if($post) : ?>
+        <?php if ($post) : ?>
           <div class="d-header-post none">
             <span class="v-line mb-none"></span>
-            <a class="mb-none" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']])?>">
+            <a class="mb-none" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]) ?>">
               <?= $data['post']['post_title'] ?>
             </a>
           </div>
         <?php endif; ?>
-         
-        <?php if($facet) : ?>
-         <div class="d-header-facet none">
-           <span class="v-line mb-none"></span>
-           <a class="mb-none" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']])?>">
-             <?= Html::image($facet['facet_img'], $facet['facet_title'], 'img-base mr15', 'logo', 'max'); ?>
-             <?= $facet['facet_title'];?>
-           </a>
-           <span class="gray-600 text-sm lowercase mb-none"> - <?= $facet['facet_short_description'];?></span>
-         </div>
-        <?php endif; ?> 
-         
+
+        <?php if ($facet) : ?>
+          <div class="d-header-facet none">
+            <span class="v-line mb-none"></span>
+            <a class="mb-none" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]) ?>">
+              <?= Html::image($facet['facet_img'], $facet['facet_title'], 'img-base mr15', 'logo', 'max'); ?>
+              <?= $facet['facet_title']; ?>
+            </a>
+            <span class="gray-600 text-sm lowercase mb-none"> - <?= $facet['facet_short_description']; ?></span>
+          </div>
+        <?php endif; ?>
+
         <div class="box-search mb-none">
           <form class="form" method="get" action="<?= url('search.go'); ?>">
             <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
@@ -52,7 +56,9 @@ $post   = $data['post'] ?? false;
         <?php if (!UserData::checkActiveUser()) : ?>
           <div class="flex gap-max items-center">
             <a id="toggledark" class="header-menu-item gray-600">
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg>
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#sun"></use>
+              </svg>
             </a>
             <?php if (config('general.invite') == false) : ?>
               <a class="gray  mb-none block" href="<?= url('register'); ?>">
@@ -69,18 +75,26 @@ $post   = $data['post'] ?? false;
 
             <?= Html::addPost($facet); ?>
 
-            <a id="toggledark" class="gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg></a>
+            <a id="toggledark" class="gray-600"><svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#sun"></use>
+              </svg></a>
 
             <a class="gray-600" href="<?= url('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
               <?php if (!empty($notif)) : ?>
                 <?php if ($notif['action_type'] == 1) : ?>
-                  <svg class="icons red"><use xlink:href="/assets/svg/icons.svg#mail"></use></svg>
+                  <svg class="icons red">
+                    <use xlink:href="/assets/svg/icons.svg#mail"></use>
+                  </svg>
                 <?php else : ?>
-                  <svg class="icons red"><use xlink:href="/assets/svg/icons.svg#bell"></use></svg>
+                  <svg class="icons red">
+                    <use xlink:href="/assets/svg/icons.svg#bell"></use>
+                  </svg>
                 <?php endif; ?>
               <?php else : ?>
-                <svg class="icons"><use xlink:href="/assets/svg/icons.svg#bell"></use></svg>
+                <svg class="icons">
+                  <use xlink:href="/assets/svg/icons.svg#bell"></use>
+                </svg>
               <?php endif; ?>
             </a>
 
@@ -94,7 +108,7 @@ $post   = $data['post'] ?? false;
             </div>
           </div>
         <?php endif; ?>
-        
+
       </div>
     </div>
   </header>

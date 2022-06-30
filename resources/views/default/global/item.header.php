@@ -14,13 +14,17 @@ use Hleb\Constructor\Handlers\Request; ?>
       </a>
       <div class="page-search-right mb-ml0">
         <div data-template="one" id="find tippy">
-          <a class="flex left items-center gap-min gray" href="/">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#home"></use></svg>
+          <a class="flex left items-center gap-min gray mb5" href="/">
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#home"></use>
+            </svg>
             <?= __('web.on_website'); ?>
           </a>
           <div class="flex right items-center gap-max">
             <a id="toggledark" class="header-menu-item gray-600 mb-none">
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#sun"></use></svg>
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#sun"></use>
+              </svg>
             </a>
             <?php if (!UserData::checkActiveUser()) : ?>
               <?php if (config('general.invite') == false) : ?>

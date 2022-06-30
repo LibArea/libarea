@@ -9,7 +9,9 @@
       <h1><?= $item['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+            </svg>
           </a>
         <?php endif; ?>
       </h1>
@@ -25,12 +27,12 @@
             <?= $item['item_url']; ?>
           </a>
           <span class="gray">•</span>
-            <?= Html::signed([
-              'type'            => 'item',
-              'id'              => $item['item_id'],
-              'content_user_id' => false, // allow subscription and unsubscribe to the owner 
-              'state'           => is_array($data['item_signed']),
-            ]); ?>
+          <?= Html::signed([
+            'type'            => 'item',
+            'id'              => $item['item_id'],
+            'content_user_id' => false, // allow subscription and unsubscribe to the owner 
+            'state'           => is_array($data['item_signed']),
+          ]); ?>
           <div class="mt15">
             <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tag', 'all'); ?>
           </div>
@@ -43,7 +45,9 @@
           <?= Content::text($item['item_content_soft'], 'text'); ?>
         </div>
         <p>
-          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#github"></use></svg>
+          <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#github"></use>
+          </svg>
           <a target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
             <a target="_blank" href="<?= $item['item_url']; ?>" class="item_cleek" data-id="<?= $item['item_id']; ?>" rel="nofollow noreferrer ugc">
               <?= $item['item_github_url']; ?>

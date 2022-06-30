@@ -5,7 +5,9 @@
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) : ?>
       <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
-        <sup><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></sup>
+        <sup><svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#edit"></use>
+          </svg></sup>
       </a>
       <a class="text-sm ml15" href="<?= url('admin.category.structure'); ?>">
         <sup class="gray-600">fs</sup>
@@ -24,7 +26,9 @@
         </a> <sup class="gray-600"><?= $lt['counts']; ?></sup>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="ml5" href="<?= url('content.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
-            <sup><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></i>
+            <sup><svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#edit"></use>
+              </svg></i>
           </a>
           <small class="text-sm gray-600"><sup><?= $lt['facet_type']; ?></sup></small>
         <?php endif; ?>
@@ -41,7 +45,9 @@
           </a>
           <?php if (UserData::checkAdmin()) : ?>
             <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
-              <sup class="gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg> <small><?= $rl['facet_type']; ?></small></sup>
+              <sup class="gray-600"><svg class="icons">
+                  <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                </svg> <small><?= $rl['facet_type']; ?></small></sup>
             </a>
           <?php endif; ?>
         </div>
@@ -60,7 +66,9 @@
           </a>
           <?php if (UserData::checkAdmin()) : ?>
             <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
-              <sup class="gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg> <small><?= $rl['facet_type']; ?></small></sup>
+              <sup class="gray-600"><svg class="icons">
+                  <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                </svg> <small><?= $rl['facet_type']; ?></small></sup>
             </a>
           <?php endif; ?>
         </div>

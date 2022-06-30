@@ -10,8 +10,10 @@
   </div>
 </main>
 <aside>
-  <div class="box gray-600">
-    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#calendar"></use></svg>
+  <div class="box gray-600 bg-beige">
+    <svg class="icons">
+      <use xlink:href="/assets/svg/icons.svg#calendar"></use>
+    </svg>
     <span class="middle"><?= Html::langDate($topic['facet_add_date']); ?></span>
   </div>
   <?= insert('/_block/sidebar/topic', ['data' => $data]); ?>

@@ -73,7 +73,9 @@
           <h3 class="uppercase-box"><?= __('app.source'); ?></h3>
           <div class="italic m15 mb15 p10 text-sm bg-lightgray table gray">
             <div>
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg>
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#link"></use>
+              </svg>
               <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <?= $post['post_url_domain']; ?>
               </a>
@@ -186,21 +188,21 @@
   </article>
   <div id="comment"></div>
   <div class="ml10">
-  <?php if ($post['post_draft'] == 0) :
-    if ($post['post_feature'] == 0) :
-      insert('/_block/comments-view', ['data' => $data, 'post' => $post]);
-      if ($post['post_closed'] == 1) :
-        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.post_closed'), 'icon' => 'closed']);
+    <?php if ($post['post_draft'] == 0) :
+      if ($post['post_feature'] == 0) :
+        insert('/_block/comments-view', ['data' => $data, 'post' => $post]);
+        if ($post['post_closed'] == 1) :
+          echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.post_closed'), 'icon' => 'closed']);
+        endif;
+      else :
+        insert('/_block/questions-view', ['data' => $data, 'post' => $post]);
+        if ($post['post_closed'] == 1) :
+          echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'closed']);
+        endif;
       endif;
     else :
-      insert('/_block/questions-view', ['data' => $data, 'post' => $post]);
-      if ($post['post_closed'] == 1) :
-        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'closed']);
-      endif;
-    endif;
-  else :
-    echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);
-  endif; ?>
+      echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);
+    endif; ?>
   </div>
 </main>
 <script nonce="<?= $_SERVER['nonce']; ?>">

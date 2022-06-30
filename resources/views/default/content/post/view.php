@@ -79,7 +79,9 @@
           <h3 class="uppercase-box"><?= __('app.source'); ?></h3>
           <div class="italic m15 mb15 p10 text-sm bg-lightgray table gray">
             <div>
-              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg>
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#link"></use>
+              </svg>
               <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <?= $post['post_url_domain']; ?>
               </a>
@@ -216,7 +218,9 @@
 
         <?php if (!$topic['signed_facet_id'] && UserData::getUserId()) : ?>
           <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm sky center mt5 mr5">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg> <?= __('app.read'); ?>
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#plus"></use>
+            </svg> <?= __('app.read'); ?>
           </div>
         <?php endif; ?>
 
@@ -255,7 +259,9 @@
               <?php endif; ?>
             </a>
           <?php else : ?>
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#closed"></use></svg>
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#closed"></use>
+            </svg>
           <?php endif; ?>
           <a class="black" href="<?= url('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>
@@ -267,7 +273,7 @@
 </aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    mediumZoom(document.querySelectorAll('.post-body.full .post img:not(.emoji), img.preview, .content-body p img:not(.emoji)'))
+    mediumZoom(document.querySelectorAll('.post-body.full .post img:not(.emoji), img.preview, .max-w780 p img:not(.emoji)'))
 
     // Добавим цитирование    
     function get_text() {

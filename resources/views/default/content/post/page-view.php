@@ -20,7 +20,9 @@
         <?= $page['post_modified']; ?>
         <?php if (UserData::checkAdmin() || $page['post_user_id'] == UserData::getUserId()) : ?>
           <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+            </svg>
           </a>
         <?php endif; ?>
       </div>
@@ -31,15 +33,21 @@
     <?php foreach ($data['pages'] as $ind => $row) : ?>
       <div class="pt5 pb5">
         <a class="gray" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
-          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#info"></use></svg> <?= $row['post_title']; ?>
+          <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#info"></use>
+          </svg> <?= $row['post_title']; ?>
         </a>
         <?php if (UserData::checkAdmin()) : ?>
-          <a class="text-sm gray-600" href="<?= url('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></a>
+          <a class="text-sm gray-600" href="<?= url('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+            </svg></a>
         <?php endif; ?>
       </div>
     <?php endforeach; ?>
     <?php if (UserData::checkAdmin()) : ?>
-      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg> <?= __('app.edit'); ?></a>
+      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icons">
+          <use xlink:href="/assets/svg/icons.svg#edit"></use>
+        </svg> <?= __('app.edit'); ?></a>
     <?php endif; ?>
   </div>
 </aside>

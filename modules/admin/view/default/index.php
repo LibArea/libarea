@@ -42,7 +42,9 @@
       <?= Html::langDate($reply['date']); ?>
     </span>
     <a class="black" href="<?= url('web.website', ['slug' => $reply['item_domain']]); ?>">
-      <svg class="icons"><use xlink:href="/assets/svg/icons.svg#eye"></use></svg>
+      <svg class="icons">
+        <use xlink:href="/assets/svg/icons.svg#eye"></use>
+      </svg>
     </a>
     <div class="gray-600 text-sm mb15"><?= Content::text($reply['content'], 'line'); ?></div>
   </div>
@@ -52,8 +54,12 @@
 <aside>
   <div class="box bg-white">
     <h3 class="uppercase-box"><?= __('admin.useful_resources'); ?></h3>
-    <p><svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg> <a href="https://libarea.ru">LibArea.ru</a></p>
-    <p><svg class="icons"><use xlink:href="/assets/svg/icons.svg#github"></use></svg> <a href="https://discord.gg/dw47aNx5nU">Discord</a></p>
+    <p><svg class="icons">
+        <use xlink:href="/assets/svg/icons.svg#link"></use>
+      </svg> <a href="https://libarea.ru">LibArea.ru</a></p>
+    <p><svg class="icons">
+        <use xlink:href="/assets/svg/icons.svg#github"></use>
+      </svg> <a href="https://discord.gg/dw47aNx5nU">Discord</a></p>
     <hr>
     <p>PC: <?= php_uname('s'); ?> <?php echo php_uname('r'); ?></p>
     <p>PHP: <?= PHP_VERSION; ?></p>

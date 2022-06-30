@@ -5,5 +5,7 @@
 <?php endif; ?>
 
 <a class="mb20" href="/">
-  <svg class="icons"><use xlink:href="/assets/svg/icons.svg#home"></use></svg> <?= __('search.to_website'); ?>
+  <svg class="icons">
+    <use xlink:href="/assets/svg/icons.svg#home"></use>
+  </svg> <?= __('search.to_website'); ?>
 </a>...

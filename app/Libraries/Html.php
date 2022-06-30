@@ -137,7 +137,7 @@ class Html
             if ($arr['content_user_id'] != UserData::getUserId()) {
                 $html = '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id red">' . __('app.read') . '</span>';
                 if ($arr['state']) {
-                    $html = '<spanv data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id gray-600">' . __('app.unsubscribe') . '</span>';
+                    $html = '<span data-id="' . $arr['id'] . '" data-type="' . $arr['type'] . '" class="focus-id">' . __('app.unsubscribe') . '</span>';
                 }
             }
         } else {

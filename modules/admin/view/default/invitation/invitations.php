@@ -24,12 +24,12 @@
           <sup>id<?= $inv['active_uid']; ?></sup>
           — <?= Html::langDate($inv['active_time']); ?>
         </span>
-        <?php else : ?>
-          <span class="gray-600 lowercase text-sm">
-            <?= $inv['invitation_email']; ?> — <?= Html::langDate($inv['add_time']); ?>
-          </span>
-        <?php endif; ?>
+      <?php else : ?>
+        <span class="gray-600 lowercase text-sm">
+          <?= $inv['invitation_email']; ?> — <?= Html::langDate($inv['add_time']); ?>
         </span>
+      <?php endif; ?>
+      </span>
     </div>
   <?php endforeach; ?>
 <?php else : ?>

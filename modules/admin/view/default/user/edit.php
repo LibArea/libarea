@@ -40,7 +40,9 @@
     <?php endif; ?>
   </fieldset>
   <fieldset>
-    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#eye"></use></svg> <?= $data['user']['hits_count']; ?>
+    <svg class="icons">
+      <use xlink:href="/assets/svg/icons.svg#eye"></use>
+    </svg> <?= $data['user']['hits_count']; ?>
   </fieldset>
   <fieldset>
     <label for="post_title"><?= __('admin.registration'); ?></label>

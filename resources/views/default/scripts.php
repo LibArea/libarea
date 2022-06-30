@@ -8,7 +8,10 @@
   <?php if (!UserData::checkActiveUser()) : ?>
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
-          Notice('<?= __('app.need_login'); ?>', 3500, { valign: 'bottom',align: 'center'});
+        Notice('<?= __('app.need_login'); ?>', 3500, {
+          valign: 'bottom',
+          align: 'center'
+        });
       }));
   <?php endif; ?>
 

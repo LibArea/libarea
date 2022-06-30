@@ -26,7 +26,9 @@
 
                 <?php if (Access::author('item', $item['item_user_id'], $item['item_date'], 30) === true) : ?>
                   <a href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
-                    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg>
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                    </svg>
                   </a> - <?= $item['item_following_link']; ?>
                 <?php endif; ?>
 
@@ -39,13 +41,17 @@
                     <?= $item['item_domain']; ?>
                     <?php if ($item['item_github_url']) : ?>
                       <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                        <svg class="icons"><use xlink:href="/assets/svg/icons.svg#github"></use></svg>
+                        <svg class="icons">
+                          <use xlink:href="/assets/svg/icons.svg#github"></use>
+                        </svg>
                         <?= $item['item_title_soft']; ?>
                       </a>
                     <?php endif; ?>
                     <?php if ($item['item_published'] == 1) : ?>
                       <div>
-                        <svg class="icons"><use xlink:href="/assets/svg/icons.svg#corner-down-right"></use></svg>
+                        <svg class="icons">
+                          <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
+                        </svg>
                         <a class="black" href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
                           <?= __('web.more'); ?>
                         </a>

@@ -7,7 +7,9 @@
 
   <?php else : ?>
     <div class="box center gray-600">
-      <svg class="icons icon-max"><use xlink:href="/assets/svg/icons.svg#x-octagon"></use></svg>
+      <svg class="icons icon-max">
+        <use xlink:href="/assets/svg/icons.svg#x-octagon"></use>
+      </svg>
       <div class="mt5 gray"><?= __('app.remote'); ?></div>
     </div>
   <?php endif; ?>

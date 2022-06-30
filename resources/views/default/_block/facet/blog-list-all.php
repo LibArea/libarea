@@ -7,14 +7,14 @@
       <a class="black text-xl" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
         <?= $facet['facet_title']; ?>
       </a>
-      <span class="gray">•</span>
-      <?= Html::signed([
-        'type'            => 'facet',
-        'id'              => $facet['facet_id'],
-        'content_user_id' => $facet['facet_user_id'],
-        'state'           => $facet['signed_facet_id'],
-      ]); ?>
-
+      <span class="gray-600">•
+        <?= Html::signed([
+          'type'            => 'facet',
+          'id'              => $facet['facet_id'],
+          'content_user_id' => $facet['facet_user_id'],
+          'state'           => $facet['signed_facet_id'],
+        ]); ?>
+      </span>
       <?php if (UserData::getUserId() == $facet['facet_user_id']) : ?>
         <svg class="icons icon-small sky"><use xlink:href="/assets/svg/icons.svg#mic"></use></svg>
       <?php endif; ?>
