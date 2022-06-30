@@ -48,7 +48,7 @@ class ProfileController extends Controller
                     'profile'           => $profile,
                     'posts'             => $posts,
                     'participation'     => FacetModel::participation($profile['id']),
-                    'post'              => PostModel::getPost($profile['my_post'], 'id', $this->user),
+                    'my_post'           => PostModel::getPost($profile['my_post'], 'id', $this->user),
                     'button_pm'         => $this->accessPm($profile['id']),
                 ]
             ]
@@ -76,7 +76,6 @@ class ProfileController extends Controller
                     'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
                     'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
-                    'post'          => PostModel::getPost($profile['my_post'], 'id', $this->user),
                     'button_pm'     => $this->accessPm($profile['id']),
                 ]
             ]
@@ -106,7 +105,6 @@ class ProfileController extends Controller
                     'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
                     'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
-                    'post'          => PostModel::getPost($profile['my_post'], 'id', $this->user),
                     'button_pm'     => $this->accessPm($profile['id']),
                 ]
             ]
@@ -135,7 +133,6 @@ class ProfileController extends Controller
                     'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
                     'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
-                    'post'          => PostModel::getPost($profile['my_post'], 'id', $this->user),
                     'button_pm'     => $this->accessPm($profile['id']),
                     'login'         => $profile['login'],
                 ]

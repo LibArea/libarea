@@ -1,20 +1,18 @@
 <?php $profile = $data['profile']; ?>
 
 <div class="mb-none">
+  <blockquote class="gray break-all m0 mb15">
+    <?= $profile['about']; ?>...
+  </blockquote>
 
-  <div class="mb15">
-    <blockquote class="gray break-all">
-      <?= $profile['about']; ?>...
-    </blockquote>
-    <div class="gray-600 m15">
-      <svg class="icons">
-        <use xlink:href="/assets/svg/icons.svg#calendar"></use>
-      </svg>
-      <span class="middle lowercase text-sm">
-        <?= Html::langDate($profile['created_at']); ?>
-        <sup class="ml5"><?= __('app.tl' . $profile['trust_level'] . '.title'); ?></sup>
-      </span>
-    </div>
+  <div class="gray-600 mb15">
+    <svg class="icons">
+      <use xlink:href="/assets/svg/icons.svg#calendar"></use>
+    </svg>
+    <span class="middle lowercase text-sm">
+      <?= Html::langDate($profile['created_at']); ?>
+      <sup class="ml5"><?= __('app.tl' . $profile['trust_level'] . '.title'); ?></sup>
+    </span>
   </div>
 
   <div class="box bg-lightgray">
@@ -59,36 +57,6 @@
           </div>
         </div>
       <?php endforeach; ?>
-    </div>
-  <?php endif; ?>
-
-  <?php if ($profile['my_post'] != 0) : ?>
-    <?php $post = $data['post']; ?>
-    <div class="box bg-lightgray">
-      <h3 class="uppercase-box"><?= __('app.selected_post'); ?>
-        <?php if ($profile['id'] == UserData::getUserId()) : ?>
-          <a class="add-profile ml10" data-post="<?= $post['post_id']; ?>">
-            <svg class="icons gray-600">
-              <use xlink:href="/assets/svg/icons.svg#trash"></use>
-            </svg>
-          </a>
-        <?php endif; ?>
-      </h3>
-      <div class="mt5">
-        <a href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
-          <?= $post['post_title']; ?>
-        </a>
-        <div class="text-sm gray-600 lowercase">
-          <?= $post['post_date'] ?>
-          <?php if ($post['post_answers_count'] != 0) : ?>
-            <span class="right">
-              <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#comments"></use>
-              </svg> <?= $post['post_answers_count']; ?>
-            </span>
-          <?php endif; ?>
-        </div>
-      </div>
     </div>
   <?php endif; ?>
 
