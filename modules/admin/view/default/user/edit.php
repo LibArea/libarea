@@ -151,7 +151,7 @@
     <input type="hidden" name="trust_level" value="10">
   <?php endif; ?>
   <fieldset>
-    <label for="login"><?= __('admin.nickname'); ?>: /u/**<sup class="red">*</sup></label>
+    <label for="login"><?= __('admin.nickname'); ?>: /@***<sup class="red">*</sup></label>
     <input type="text" name="login" value="<?= $data['user']['login']; ?>" required>
   </fieldset>
   <fieldset>

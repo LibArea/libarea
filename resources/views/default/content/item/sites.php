@@ -1,7 +1,7 @@
 <div class="item-cat">
   <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]); ?>
 
-  <h1>
+  <h1 class="m0">
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) : ?>
       <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">

@@ -90,7 +90,7 @@ class EditItemController extends Controller
         $published = $data['published'] == 'on' ? 1 : 0;
         $published = UserData::checkAdmin() ? $published : 0;
 
-        $new_user_id = $this->edit($item['item_user_id'], Request::getPost('user_id'));
+        $new_user_id = $this->editAuthor($item['item_user_id'], Request::getPost('user_id'));
 
         WebModel::edit(
             [

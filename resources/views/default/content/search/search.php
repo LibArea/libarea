@@ -31,7 +31,7 @@ $sw = $sw ?? '?';
       }
     ?>
 
-      <div class="mb20 gray max-w780">
+      <div class="max-w880 mb20">
         <div>
           <a class="text-xl" target="_blank" rel="nofollow noreferrer" href="<?= $url_content; ?>">
             <?= $result['title']; ?>

@@ -15,7 +15,7 @@
             <?php endif; ?>
           </h3>
           <div class="mt5">
-            <a href="<?= url('post', ['id' => $data['my_post']['post_id'], 'slug' => $data['my_post']['post_slug']]); ?>">
+            <a class="text-2xl" href="<?= url('post', ['id' => $data['my_post']['post_id'], 'slug' => $data['my_post']['post_slug']]); ?>">
               <?= $data['my_post']['post_title']; ?>
             </a>
             <div class="text-sm mt5 gray-600 lowercase">

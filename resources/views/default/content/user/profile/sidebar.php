@@ -1,10 +1,7 @@
 <?php $profile = $data['profile']; ?>
 
 <div class="mb-none">
-  <blockquote class="gray break-all m0 mb15">
-    <?= $profile['about']; ?>...
-  </blockquote>
-
+  <?= $profile['about']; ?>
   <div class="gray-600 mb15">
     <svg class="icons">
       <use xlink:href="/assets/svg/icons.svg#calendar"></use>
