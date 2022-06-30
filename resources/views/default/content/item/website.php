@@ -1,11 +1,6 @@
 <?php $item = $data['item']; ?>
 <div id="contentWrapper">
-  <div class="mb-none no-flex center w94">
-    <?= Html::votes($item, 'item'); ?>
-    <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps', 'block mt20'); ?>
-  </div>
   <main>
-    <div class="hidden">
       <h1><?= $item['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
@@ -16,11 +11,11 @@
         <?php endif; ?>
       </h1>
 
-      <div class="flex justify-between gap-max">
-        <div class="w-40">
+      <div class="flex justify-between gap-max mb-block">
+        <div class="w-40 mb-w-100">
           <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'preview w-100 box-shadow'); ?>
         </div>
-        <div class="w-60">
+        <div class="w-60 mb-w-100">
           <?= Content::text($item['item_content'], 'text'); ?>
           <a class="gree" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
             <?= Html::websiteImage($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
@@ -36,6 +31,10 @@
           <div class="mt15">
             <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tag', 'all'); ?>
           </div>
+          <div class="tems-center flex gap mt15">
+                 <?= Html::votes($item, 'item'); ?>
+            <?= Html::favorite($item['item_id'], 'website', $item['tid']); ?>
+          </div>  
         </div>
       </div>
       <?php if ($item['item_is_soft'] == 1) : ?>
@@ -60,8 +59,7 @@
           <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => true]); ?>
         </p>
       <?php endif; ?>
-    </div>
-
+      
     <?php if ($item['item_close_replies'] == 0) : ?>
       <?php if (Access::trustLevels(config('trust-levels.tl_add_reply'))) : ?>
         <form class="max-w780" action="<?= url('content.create', ['type' => 'reply']); ?>" accept-charset="UTF-8" method="post">

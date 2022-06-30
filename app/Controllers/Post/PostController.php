@@ -51,9 +51,8 @@ class PostController extends Controller
         // Q&A (post_feature == 1) or Discussiona
         $content['amount_content'] = $content['post_answers_count'];
         if ($content['post_feature'] == 0) {
-            $comment_n = $content['post_comments_count'] + $content['post_answers_count'];
-            $content['amount_content'] = $comment_n;
-        }
+            $content['amount_content'] = $content['post_comments_count'] + $content['post_answers_count'];
+        } 
 
         $post_answers = AnswerModel::getAnswersPost($content['post_id'], $this->user['id'], $content['post_feature']);
 
@@ -118,7 +117,6 @@ class PostController extends Controller
                         'post_signed'   => SubscriptionModel::getFocus($content['post_id'], $this->user['id'], 'post'),
                         'facets'        => $facets,
                         'blog'          => $blog ?? null,
-                        'last_user'     => PostModel::getPostLastUser($content['post_id']),
                         'sheet'         => 'article',
                         'type'          => 'post',
                     ]

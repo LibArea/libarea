@@ -1,12 +1,4 @@
 <?php $post = $data['post']; ?>
-<div class="w94 mb-none center">
-  <div class="sticky top-xl">
-    <div class="no-flex">
-      <?= Html::votes($post, 'post'); ?>
-      <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps', 'text-2xl block mt10'); ?>
-    </div>
-  </div>
-</div>
 <main>
   <article class="post-full mb15<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
@@ -88,65 +80,17 @@
             </div>
           </div>
         <?php endif; ?>
-        <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
       </div>
 
-      <div class="br-gray p15 items-center flex justify-between mb5">
-        <div class="items-center flex">
-          <div class="left m10 none mb-block">
-            <?= Html::votes($post, 'post', 'mob'); ?>
-          </div>
-
-          <ul class="list-none flex gap lowercase">
-            <li class="center">
-              <div class="text-sm mb-none gray-600 mb5">
-                <?= __('app.created_by'); ?>
-              </div>
-              <a title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
-                <?= Html::image($post['avatar'], $post['login'], 'img-base', 'avatar', 'small'); ?>
-              </a>
-            </li>
-            <li class="mb-none">
-              <div class="text-sm gray-600">
-                <?= __('app.last_answer'); ?>
-              </div>
-              <div class="center">
-                <?php if (!empty($data['last_user']['answer_id'])) : ?>
-                  <a title="<?= $data['last_user']['login']; ?>" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
-                    <?= Html::image($data['last_user']['avatar'], $data['last_user']['login'], 'img-base', 'avatar', 'small'); ?>
-                  </a>
-                <?php else : ?>
-                  <span class="gray-600 text-sm">—</span>
-                <?php endif; ?>
-              </div>
-            </li>
-            <li class="mb-none gray-600 text-2xl">
-              <div class="text-2xl center">
-                <?php if ($post['post_hits_count'] == 0) : ?>
-                  —
-                <?php else : ?>
-                  <?= $post['post_hits_count']; ?>
-                <?php endif; ?>
-              </div>
-              <div class="center text-sm">
-                <?= Html::numWord($post['post_hits_count'], __('app.num_view'), false); ?>
-              </div>
-            </li>
-            <li class="mb-none gray-600 text-sm">
-              <div class="text-2xl center">
-                <?php if ($post['amount_content'] == 0) : ?>
-                  —
-                <?php else : ?>
-                  <?= $post['amount_content']; ?>
-                <?php endif; ?>
-              </div>
-              <div class="center">
-                <?= Html::numWord($post['amount_content'], __('app.num_answer'), false); ?>
-              </div>
-            </li>
-          </ul>
+      <div class="p15 br-gray items-center flex justify-between">
+        <div class="items-center flex gap gray-600">
+          <?= Html::votes($post, 'post'); ?>
+          <div class="items-center flex gap-min">
+            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#eye"></use></svg> 
+            <?= $post['post_hits_count'] == 0 ? 1 : $post['post_hits_count']; ?>
+          </div>  
         </div>
-        <div class="items-center flex">
+        <div class="items-center flex gap-max">
           <?php if (UserData::checkActiveUser()) : ?>
             <?php if (is_array($data['post_signed'])) : ?>
               <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 gray-600">
@@ -162,11 +106,23 @@
               + <?= __('app.read'); ?>
             </a>
           <?php endif; ?>
-          <div class="right3 m10 none mb-block">
-            <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'mob', 'text-2xl ml5'); ?>
-          </div>
+          <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'text-2xl ml5'); ?>
         </div>
       </div>
+      <div class="box bg-lightgray">
+        <a class="black" title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
+          <?= Html::image($post['avatar'], $post['login'], 'img-base mr5', 'avatar', 'small'); ?>
+          <?= $post['login']; ?>
+        </a>  
+        <?php if ($post['up_count'] > 0) : ?>
+          <svg class="icons red mr5 ml20">
+            <use xlink:href="/assets/svg/icons.svg#heart"></use>
+          </svg>
+          <sup class="text-sm gray-600 inline"><?= Html::formatToHuman($post['up_count']); ?></sup>
+        <?php endif; ?>
+      </div>
+      
+      <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
 
       <?php if (UserData::checkActiveUser()) : ?>
         <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
@@ -196,14 +152,8 @@
   <?php if ($post['post_draft'] == 0) :
     if ($post['post_feature'] == 0) :
       insert('/_block/comments-view', ['data' => $data, 'post' => $post]);
-      if ($post['post_closed'] == 1) :
-        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.post_closed'), 'icon' => 'closed']);
-      endif;
     else :
       insert('/_block/questions-view', ['data' => $data, 'post' => $post]);
-      if ($post['post_closed'] == 1) :
-        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'closed']);
-      endif;
     endif;
   else :
     echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);

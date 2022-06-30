@@ -98,20 +98,20 @@ class Html
     }
 
     // Voting for posts, replies, comments and sites
-    public static function votes($content, $type, $ind = 'ps', $icon = 'heart', $css = '')
+    public static function votes($content, $type, $icon = 'heart')
     {
         $count = $content[$type . '_votes'] > 0 ?  $content[$type . '_votes'] : '';
 
-        $html = '<div class="flex gap-min gray-600"><div class="up-id ' . $css . ' click-no-auth"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score"> ' . $count . '</div></div>';
+        $html = '<div class="flex gap-min gray-600"><div class="up-id click-no-auth"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score"> ' . $count . '</div></div>';
                         
         if (UserData::getAccount()) {
             if ($content['votes_' . $type . '_user_id'] || UserData::getUserId() == $content[$type . '_user_id']) {
                 $html = '<div class="active flex gap-min">
-                            <div class="up-id ' . $css . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
+                            <div class="up-id"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
             } else {
                 $num_count = empty($count) ? 0 : $count;
-                $html = '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . '  flex gap-min gray-600">
-                            <div data-ind="' . $ind . '" data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id ' . $css . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
+                $html = '<div id="up' . $content[$type . '_id'] . '" class="flex gap-min gray-600">
+                            <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
             }
         }
 
@@ -119,12 +119,12 @@ class Html
     }
 
     // Add/remove from favorites
-    public static function favorite($content_id, $type, $tid, $ind, $css = '')
+    public static function favorite($content_id, $type, $tid)
     {
-        $html = '<a class="click-no-auth gray-600 ' . $css . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg></a>';
+        $html = '<a class="click-no-auth gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg></a>';
         if (UserData::getAccount()) {
-            $blue = $tid ? 'active' : 'gray-600';
-            $html = '<a id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . '" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg></i></a>';
+            $active = $tid ? 'active' : 'gray-600';
+            $html = '<a id="favorite_' . $content_id . '" class="add-favorite ' . $active . '" data-id="' . $content_id . '" data-type="' . $type . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg></i></a>';
         }
 
         return $html;

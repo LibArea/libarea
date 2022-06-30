@@ -7,8 +7,8 @@
     <?php endif; ?>
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="flex mb20 article_<?= $post['post_id']; ?>">
-      <div class="w40 no-flex center pt20">
-        <?= Html::votes($post, 'post', 'ps', 'arrow-up'); ?>
+      <div class="w40 no-flex center">
+        <?= Html::votes($post, 'post', 'arrow-up'); ?>
       </div>
       <div>
         <div>
@@ -18,7 +18,7 @@
             </div>
           <?php endif; ?>
           <a href="<?= $post_url; ?>">
-            <h3 class="inline"><?= $post['post_title']; ?>
+            <h3 class="inline m0"><?= $post['post_title']; ?>
               <?= insert('/content/post/post-title', ['post' => $post]); ?>
             </h3>
           </a>

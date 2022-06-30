@@ -1,6 +1,6 @@
 <?php if (!empty($data['answers'])) : ?>
-  <div class="box">
-    <h2 class="lowercase text-2xl">
+  <div>
+    <h2 class="lowercase m0 text-2xl">
       <?= Html::numWord($post['amount_content'], __('app.num_answer'), true); ?>
     </h2>
 
@@ -40,7 +40,7 @@
                     </a>
                   <?php endif; ?>
 
-                  <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps'); ?>
+                  <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid']); ?>
 
                   <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
@@ -50,10 +50,10 @@
                 </div>
                 <div class="text-sm gray-600 flex gap lowercase">
                   <a class="brown" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
-                  <?= Html::langDate($answer['date']); ?>
+                  <span class="mb-none"><?= Html::langDate($answer['date']); ?>
                   <?php if (empty($answer['edit'])) : ?>
                     (<?= __('app.ed'); ?>.)
-                  <?php endif; ?>
+                  <?php endif; ?></span>
                   <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
                 </div>
               </div>
@@ -144,3 +144,7 @@
     <?php endif; ?>
   <?php endif; ?>
 <?php endif;  ?>
+
+<?php if ($post['post_closed'] == 1) :
+  echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'closed']);
+endif; ?>

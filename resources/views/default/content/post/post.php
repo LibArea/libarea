@@ -84,7 +84,7 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?php endif; ?>
         </div>
         <div class="flex flex-row items-center">
-          <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'ps'); ?>
+          <?= Html::favorite($post['post_id'], 'post', $post['tid']); ?>
         </div>
       </div>
     </div>

@@ -242,7 +242,6 @@ return [
     'text'              => 'Text',
     'author'            => 'Author',
     'characters'        => 'characters',
-    'last_answer'       => 'Last reply',
     'markdown'          => 'Supports Markdown',
     'write'             => 'Write',
     'in_profile'        => 'in profile',

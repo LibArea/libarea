@@ -4,7 +4,7 @@
  * Стили для каталога
  */
 
-.item main { margin-left: 30px; }
+.item main { margin: 30px; }
 
 .item-logo {
   margin-top: 30px;
@@ -98,7 +98,7 @@ body.item.dark .box {
     margin-bottom: 10px;
   }  
 
-  .item main { margin-left: 15px; }  
+  .item main { margin: 0.5rem; }  
   .item-search { padding: 10px; }
   .item-search-right { margin-left: 0; }
 }

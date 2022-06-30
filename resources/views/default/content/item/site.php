@@ -63,7 +63,7 @@
                 </div>
               </div>
               <div class="flex gap right gray-600">
-                <?= Html::favorite($item['item_id'], 'website', $item['tid'], 'ps'); ?>
+                <?= Html::favorite($item['item_id'], 'website', $item['tid']); ?>
                 <?= Html::votes($item, 'item'); ?>
               </div>
             </div>

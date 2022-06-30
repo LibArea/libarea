@@ -57,11 +57,11 @@
 
                 <?php if (UserData::checkAdmin()) : ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
-                    <?= __('app.remove'); ?>
+                    <svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#trash"></use></svg>
                   </a>
                 <?php endif; ?>
 
-                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'ps'); ?>
+                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid']); ?>
 
                 <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
@@ -191,3 +191,7 @@
     <?php endif; ?>
   <?php endif; ?>
 <?php endif; ?>
+
+<?php if ($post['post_closed'] == 1) :
+  echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.post_closed'), 'icon' => 'closed']);
+endif; ?>

@@ -242,7 +242,6 @@ return [
     'text'              => '文本',
     'author'            => '作者',
     'characters'        => '个字符',
-    'last_answer'       => '最后回复',
     'markdown'          => '支持Markdown',
     'write'             => '撰写',
     'in_profile'        => '在个人资料中',

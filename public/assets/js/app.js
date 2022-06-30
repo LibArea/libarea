@@ -89,7 +89,7 @@ document.querySelectorAll(".up-id")
         return;
       }).then((text) => {
         let new_cont = (parseInt(el.dataset.count) + parseInt(1));
-        let upVot = document.querySelector('#up' + el.dataset.id + '.voters-' + el.dataset.ind);
+        let upVot = document.querySelector('#up' + el.dataset.id);
         let upScr = upVot.querySelector('.score');
         upVot.classList.add('active');
         upScr.replaceWith(new_cont);
@@ -109,7 +109,7 @@ document.querySelectorAll(".add-favorite")
        if (el.dataset.front == 'personal') {
           location.reload();
         } else {
-            let dom = document.querySelector("#favorite_" + el.dataset.id + '.fav-' + el.dataset.ind);
+            let dom = document.querySelector("#favorite_" + el.dataset.id);
             dom.classList.toggle("active");
         }
     });

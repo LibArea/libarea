@@ -242,7 +242,6 @@ return [
     'text'              => 'Текст',
     'author'            => 'Автор',
     'characters'        => 'символов',
-    'last_answer'       => 'Последний ответ',
     'markdown'          => 'Поддерживает Markdown',
     'write'             => 'Напишите',
     'in_profile'        => 'в профиль',

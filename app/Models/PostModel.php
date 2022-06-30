@@ -105,6 +105,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     u.id,
                     u.login,
                     u.avatar,
+                    up_count,
                     my_post,
                     votes_post_item_id,
                     votes_post_user_id,
@@ -323,25 +324,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                             WHERE relation_post_id  = :post_id AND facet_type = :type";
 
         return DB::run($sql, ['post_id' => $post_id, 'type' => $type])->fetchAll();
-    }
-
-    public static function getPostLastUser($post_id)
-    {
-        $sql = "SELECT
-                    answer_id,
-                    answer_post_id,
-                    answer_user_id,
-                    answer_date,
-                    answer_id,
-                    id,
-                    login,
-                    avatar
-                        FROM answers 
-                        LEFT JOIN users ON id = answer_user_id                        
-                            WHERE answer_post_id = :post_id
-                            ORDER BY answer_date DESC";
-
-        return DB::run($sql, ['post_id' => $post_id])->fetch();
     }
 
     // Check if the domain exists 

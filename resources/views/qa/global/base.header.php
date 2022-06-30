@@ -13,27 +13,27 @@ $facet  = $data['facet'] ?? false; ?>
   <header class="bg-white mb10">
     <div class="br-bottom wrap mb10 mb-none items-center flex gap">
       <a class="p5 black text-xs" href="/topics">
-        <svg class="icons">
+        <svg class="icons icon-small">
           <use xlink:href="/assets/svg/icons.svg#hash"></use>
         </svg> <?= __('app.topics'); ?>
       </a>
       <a class="black text-xs" href="/blogs">
-        <svg class="icons">
+        <svg class="icons icon-small">
           <use xlink:href="/assets/svg/icons.svg#post"></use>
         </svg> <?= __('app.blogs'); ?>
       </a>
       <a class="black text-xs" href="/users">
-        <svg class="icons">
+        <svg class="icons icon-small">
           <use xlink:href="/assets/svg/icons.svg#users"></use>
         </svg> <?= __('app.users'); ?>
       </a>
       <a class="black text-xs" href="/web">
-        <svg class="icons">
+        <svg class="icons icon-small">
           <use xlink:href="/assets/svg/icons.svg#link"></use>
         </svg> <?= __('app.search'); ?> <?= __('app.catalog'); ?>
       </a>
       <a class="black text-xs" href="/search">
-        <svg class="icons">
+        <svg class="icons icon-small">
           <use xlink:href="/assets/svg/icons.svg#search"></use>
         </svg> <?= __('app.search'); ?>
       </a>

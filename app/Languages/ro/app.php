@@ -242,7 +242,6 @@ return [
     'text'              => 'Text',
     'author'            => 'Autor',
     'characters'        => 'personaje',
-    'last_answer'       => 'Ultimul răspuns',
     'markdown'          => 'Acceptă Markdown',
     'write'             => 'Scrie',
     'in_profile'        => 'în profil',
