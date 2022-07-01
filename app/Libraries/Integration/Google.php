@@ -30,7 +30,7 @@ class Google
         if (!$response) return false;
 
         return self::callApi(array(
-            'secret'   => config('general.private_key'),
+            'secret'   => config('integration.captcha_private_key'),
             'response' => $response,
             'remoteip' => $_SERVER['REMOTE_ADDR']
         ));

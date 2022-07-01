@@ -8,10 +8,10 @@ class Discord
         $text = preg_replace(array('/(<p>)/', '(<\/p>)'), array('', '\n'), $text);
 
         // Проверяем имя бота и YOUR_WEBHOOK_URL
-        if (!$webhookurl = config('general.webhook_url')) {
+        if (!$webhookurl = config('integration.discord_webhook_url')) {
             return false;
         }
-        if (!$usernamebot = config('general.name_bot')) {
+        if (!$usernamebot = config('integration.discord_name_bot')) {
             return false;
         }
 
@@ -31,7 +31,7 @@ class Discord
 
             // URL Аватара.
             // Можно использовать аватар загруженный при создании бота
-            "avatar_url" => config('general.icon_url'),
+            "avatar_url" => config('integration.discord_icon_url'),
 
             // Преобразование текста в речь
             "tts" => false,
@@ -62,8 +62,8 @@ class Discord
 
                     // Подпись и аватар в подвале sitename
                     "footer" => [
-                        "text" => config('general.name_bot'),
-                        "icon_url" => config('general.icon_url'),
+                        "text" => config('integration.discord_name_bot'),
+                        "icon_url" => config('integration.discord_icon_url'),
                     ],
                 ]
             ]

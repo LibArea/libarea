@@ -35,31 +35,8 @@ return [
     // If you set it to false, then when registering it will be TL0
     'mode'              => true, 
         
-    // Капча. Если вкл. - true, то прописываем ключи ниже
-    // Captcha. If incl. - true, then we register the keys below
-    'captcha'           => false, 
-    'public_key'        => '***',
-    'private_key'       => '***',
-    
-    // Discord: true - включить
-    // Discord WEBHOOK URL и имя бота: изменить на своё
-    // icon_url - урл. аватарки сайта
-    // Для настроек сервера Discord зайти в раздел Вебхуки, создать новый 
-    'discord'           => false,
-    'webhook_url'       => 'https://discord.com/api/webhooks/***',
-    'name_bot'          => 'PostBot',
-    'icon_url'          => 'https://cdn.discordapp.com/avatars/***.png',
-    
     // Email администрации сайта
     // Email of the site administration
-    'email'             => '***',
-     
-    // SMTP
-    // If smtp is enabled - true, then fill in the settings at the bottom
-    // Если smtp включен - true, то заполните настройки вниэу
-    'smtp'              => false,
-    'smtpuser'          => '***',
-    'smtppass'          => '***',
-    'smtphost'          => '***',
-    'smtpport'          => 465,
+    'email'             => '***@site.ru',
+
 ];

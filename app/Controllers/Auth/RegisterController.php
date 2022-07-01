@@ -103,7 +103,7 @@ class RegisterController extends Controller
         // Let's check the verification code
         // Проверим код проверки
         if (!$inv_code) {
-            if (config('general.captcha')) {
+            if (config('integration.captcha')) {
                 if (!Google::checkCaptchaCode()) {
                     Validation::comingBack(__('msg.code_error'), 'error', $redirect);
                 }

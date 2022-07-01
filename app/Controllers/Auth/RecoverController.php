@@ -34,7 +34,7 @@ class RecoverController extends Controller
         $email      = Request::getPost('email');
         $redirect   = url('recover');
 
-        if (config('general.captcha')) {
+        if (config('integration.captcha')) {
             if (!Google::checkCaptchaCode()) {
                 Validation::comingBack(__('msg.code_error'), 'error', $redirect);
             }

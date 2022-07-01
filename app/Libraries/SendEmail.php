@@ -60,22 +60,22 @@ class SendEmail
     {
         $mail = new PHPMailer();
 
-        if (config('general.smtp')) {
+        if (config('integration.smtp')) {
 
             try {
                 //Server settings
                 // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->isSMTP();
                 $mail->CharSet    = "utf-8";
-                $mail->Host       = config('general.smtphost');
+                $mail->Host       = config('integration.smtp_host');
                 $mail->SMTPAuth   = true;
-                $mail->Username   = config('general.smtpuser');
-                $mail->Password   = config('general.smtppass');
+                $mail->Username   = config('integration.smtp_user');
+                $mail->Password   = config('integration.smtp_pass');
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                $mail->Port       = config('general.smtpport');
+                $mail->Port       = config('integration.smtp_port');
 
                 //Recipients
-                $mail->setFrom(config('general.smtpuser'), config('meta.name'));
+                $mail->setFrom(config('integration.smtp_user'), config('meta.name'));
                 $mail->addAddress($email, '');
 
                 //Content
