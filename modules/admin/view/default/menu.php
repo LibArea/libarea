@@ -1,7 +1,7 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
 <div class="menu__left">
   <ul class="menu">
-    <?= insert('/_block/navigation/menu', ['type' => $data['type'], 'list' => config('admin/menu.admin')]); ?>
+    <?= insert('/_block/navigation/menu', ['type' => $data['type'], 'list' => config('navigation/menu.admin')]); ?>
   </ul>
 </div>
 
