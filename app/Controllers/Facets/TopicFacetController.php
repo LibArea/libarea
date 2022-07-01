@@ -37,8 +37,6 @@ class TopicFacetController extends Controller
             $description  = __('app.rec_posts_desc', ['name' => $facet['facet_seo_title']]) . $facet['facet_description'];
         }
 
-        Request::getResources()->addBottomScript('/assets/js/facet-focus-user.js');
-
         $m = [
             'og'         => true,
             'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
@@ -57,7 +55,6 @@ class TopicFacetController extends Controller
                     'type'          => $type,
                     'facet'         => $facet,
                     'posts'         => $posts,
-                    'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
                     'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
@@ -96,7 +93,6 @@ class TopicFacetController extends Controller
                     'type'          => 'info',
                     'facet'         => $facet,
                     'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
-                    'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
                     'related_posts' => PostModel::postRelated($facet_related),
                     'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
                     'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
@@ -132,7 +128,6 @@ class TopicFacetController extends Controller
                     'type'          => 'writers',
                     'facet'         => $facet,
                     'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
-                    'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
                     'related_posts' => PostModel::postRelated($facet_related),
                     'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
                     'writers'       => FacetModel::getWriters($facet['facet_id'], 15),
@@ -141,16 +136,5 @@ class TopicFacetController extends Controller
                 ]
             ]
         );
-    }
-
-    // Subscribed (25) 
-    // Подписаны (25)
-    public function followers()
-    {
-        $topic_id   = Request::getInt('id');
-
-        $users      = FacetModel::getFocusUsers($topic_id, 15);
-
-        return insert('/content/facets/followers', ['users' => $users]);
     }
 }

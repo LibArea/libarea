@@ -1,33 +1,31 @@
 <?php
 /*
- * Индекгация, авторизация через социальные службы (сайты)
- * Indexing, authorization through social services (websites)
+ * Индекгация, авторизация и др., через социальные службы (сайты)...
+ * Indexing, authorization, etc., through social services (websites)...
  */
 
 return [
 
-    // SMTP
-    // If smtp is enabled - 1, then fill in the settings at the bottom
-    // Если smtp включен - 1, то заполните настройки вниэу
+    // If smtp is enabled - true, then fill in the settings at the bottom
+    // Если smtp включен - true, то заполните настройки вниэу
     'smtp'      => false,
     'smtp_user' => 'user@site.ru',
     'smtp_pass' => '******',
     'smtp_host' => 'smtp.yandex.ru',
     'smtp_port' => 465,
 
-    // Капча. Если вкл. - 1, то прописываем ключи ниже
-    // Captcha. If incl. - 1, then we register the keys below
+    // Captcha. If incl. - true, then we register the keys below
+    // Капча. Если вкл. - true, то прописываем ключи ниже
     'captcha'               => false, 
-    'captcha_public_key'    => '***',
-    'captcha_private_key'   => '***',
+    'captcha_public_key'    => '******',
+    'captcha_private_key'   => '******',
     
-    // Discord: 1 - включить
-    // Discord WEBHOOK URL и имя бота: изменить на своё
-    // icon_url - урл. аватарки сайта
-    // Для настроек сервера Discord зайти в раздел Вебхуки, создать новый 
+    // Discord WEBHOOK URL
+    // For Discord server settings, go to the Webhooks section and create a new one 
+    // Для настроек сервера Discord зайти в раздел Вебхуки и создайте новый 
     'discord'               => false,
-    'discord_webhook_url'   => 'https://discord.com/api/webhooks/****',
+    'discord_webhook_url'   => 'https://discord.com/api/webhooks/***',
     'discord_name_bot'      => 'PostBot',
-    'discord_icon_url'      => 'https://cdn.discordapp.com/avatars/****.png',
+    'discord_icon_url'      => 'https://cdn.discordapp.com/avatars/***.png',
     
 ];

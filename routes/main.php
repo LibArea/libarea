@@ -98,9 +98,7 @@ Route::endType();
   
 Route::get('/search')->controller('SearchController', ['post'])->name('search');
 Route::get('/search/go')->controller('SearchController@go', ['post'])->name('search.go');
- 
-Route::type(['get', 'post'])->get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+', 'id' => '[0-9]+'])->name('topic.followers');  
-  
+
 // Other pages without authorization
 Route::get('/post/{id}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
@@ -126,8 +124,11 @@ Route::get('/topic/{slug}/writers')->controller('Facets\TopicFacetController@wri
 Route::get('/topics/{page?}')->controller('Facets\AllFacetController', ['all', 'topic'])->name('topics.all');
 
 Route::get('/topic/{slug}/{page?}')->controller('Facets\TopicFacetController', ['facet.feed', 'topics'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('topic');
+
 Route::get('/blogs/new/{page?}')->controller('Facets\AllFacetController', ['new', 'blog'])->name('blogs.new');
 Route::get('/blogs/{page?}')->controller('Facets\AllFacetController', ['all', 'blog'])->name('blogs.all');
+
+Route::get('/blog/{slug}/read/{page?}')->controller('Facets\ReadController')->where(['slug' => '[a-z0-9-]+'])->name('blog.read');
 
 Route::get('/blog/{slug}/{page?}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog.user'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('blog');
 

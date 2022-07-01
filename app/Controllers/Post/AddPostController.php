@@ -45,18 +45,11 @@ class AddPostController extends Controller
     // Добавим пост
     public function create($type)
     {
-        $post_title             = Request::getPost('post_title');
-        $content                = $_POST['content']; // для Markdown
-        $post_url               = Request::getPost('post_url');
-        $post_closed            = Request::getPostInt('closed');
-        $post_draft             = Request::getPostInt('post_draft');
-        $post_top               = Request::getPostInt('top');
-        $post_feature           = Request::getPostInt('post_feature');
-        $post_translation       = Request::getPostInt('translation');
-        $post_tl                = Request::getPostInt('content_tl');
-        $blog_id                = Request::getPostInt('blog_id');
-
-        $fields = Request::getPost() ?? [];
+        $content    = $_POST['content']; // для Markdown
+        $post_url   = Request::getPost('post_url');
+        $post_draft = Request::getPostInt('post_draft');
+        $blog_id    = Request::getPostInt('blog_id');
+        $fields     = Request::getPost() ?? [];
 
         if ($type == 'page') {
             $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
@@ -73,8 +66,7 @@ class AddPostController extends Controller
         // Проверим стоп слова, url
         $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
 
-        $post_title = str_replace("&nbsp;", '', $post_title);
-
+        $post_title = str_replace("&nbsp;", '', $fields['post_title']);
         Validation::length($post_title, 6, 250, 'title', $redirect);
         Validation::length($content, 6, 25000, 'content', $redirect);
  
@@ -98,19 +90,19 @@ class AddPostController extends Controller
                 'post_content_img'      => $post_img ?? '',
                 'post_thumb_img'        => $site['og_img'] ?? '',
                 'post_related'          => $post_related  ?? '',
-                'post_tl'               => $post_tl ?? 0,
                 'post_slug'             => $slug,
-                'post_feature'          => $post_feature,
+                'post_feature'          => $fields['post_feature'] == 'on' ? 1 : 0,
                 'post_type'             => $type,
-                'post_translation'      => $post_translation,
+                'post_translation'      => $fields['translation'] == 'on' ? 1 : 0,
                 'post_draft'            => $post_draft,
                 'post_ip'               => Request::getRemoteAddress(),
                 'post_published'        => ($trigger === false) ? 0 : 1,
                 'post_user_id'          => $this->user['id'],
-                'post_closed'           => $post_closed,
-                'post_top'              => $post_top,
                 'post_url'              => $post_url ?? '',
                 'post_url_domain'       => $site['post_url_domain'] ?? '',
+                'post_tl'               => $fields['content_tl'],
+                'post_closed'           => $fields['closed'] == 'on' ? 1 : 0,
+                'post_top'              => $fields['top'] == 'on' ? 1 : 0,
             ]
         );
 
@@ -132,7 +124,7 @@ class AddPostController extends Controller
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $redirect);
         }
 
-        if (config('general.discord')) {
+        if (config('integration..discord')) {
             if ($post_tl == 0 && $post_draft == 0) {
                 Discord::AddWebhook($content, $post_title, $redirect);
             }

@@ -412,11 +412,13 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     // Participants subscribed to the topic
     // Участники подписанные на тему
     /** 
+     * @param  int $page
      * @param  int $facet_id
      * @param  int $limit
      */
-    public static function getFocusUsers($facet_id, $limit)
+    public static function getFocusUsers($facet_id, $page, $limit)
     {
+        $start = ($page - 1) * $limit;
         $sql = "SELECT 
                     signed_facet_id, 
                     signed_user_id,
@@ -425,9 +427,19 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     avatar
                       FROM facets_signed 
                         LEFT JOIN users ON id = signed_user_id
-                          WHERE signed_facet_id = :facet_id LIMIT $limit";
+                          WHERE signed_facet_id = :facet_id LIMIT :start, :limit";
 
-        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
+        return DB::run($sql, ['facet_id' => $facet_id, 'start' => $start, 'limit' => $limit])->fetchAll();
+    }
+
+    public static function getFocusUsersCount($facet_id)
+    {
+        $sql = "SELECT 
+                    id
+                      FROM facets_signed 
+                        LEFT JOIN users ON id = signed_user_id WHERE signed_facet_id = :facet_id";
+
+        return DB::run($sql, ['facet_id' => $facet_id])->rowCount();
     }
 
     // Up the structure of connected trees (PARENTS)

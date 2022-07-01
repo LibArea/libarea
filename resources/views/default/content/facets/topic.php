@@ -23,27 +23,12 @@
       </div>
       <div class="center relative">
         <div class="uppercase text-sm gray-600"><?= __('app.reads'); ?></div>
-        <div data-id="<?= $topic['facet_id']; ?>" data-slug="<?= $topic['facet_slug']; ?>" class="focus-user trigger sky">
-          <?= $topic['facet_focus_count']; ?>
-        </div>
-        <div class="list_<?= $topic['facet_id']; ?> dropdown"></div>
+        <?= $topic['facet_focus_count']; ?>
       </div>
     </div>
 
-    <?php if (!empty($data['pages'])) : ?>
-      <div class="sticky top-sm">
-        <div class="box bg-lightgray text-sm">
-          <h3 class="uppercase-box"><?= __('app.pages'); ?></h3>
-          <?php foreach ($data['pages'] as $ind => $row) : ?>
-            <a class="flex mb10 items-center gray-600" href="">
-              <?= $row['post_title']; ?>
-            </a>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    <?php endif; ?>
-
     <?= insert('/_block/sidebar/topic', ['data' => $data]); ?>
+
     <?php if (!empty($data['writers'])) : ?>
       <div class="sticky top-sm">
         <div class="box bg-lightgray text-sm">

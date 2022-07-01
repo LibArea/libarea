@@ -65,7 +65,7 @@ class RecoverController extends Controller
         // Отправка e-mail
         SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => url('recover.code', ['code' => $code])]);
 
-        Validation::comingBack(__('msg.successfully'), url('login'));
+        Validation::comingBack(__('msg.new_password_email'), url('login'));
     }
 
     // Страница установки нового пароля

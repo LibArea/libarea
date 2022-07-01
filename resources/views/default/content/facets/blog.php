@@ -1,38 +1,8 @@
 <?php $blog = $data['facet'];
 if ($blog['facet_is_deleted'] == 0) : ?>
 
-  <style nonce="<?= $_SERVER['nonce']; ?>">
-    .bg-blog {
-      background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= Html::coverUrl($blog['facet_cover_art'], 'blog'); ?>);
-      background-position: 50% 50%;
-    }
-  </style>
-
   <div class="w-100">
-    <div class="box-flex bg-blog">
-      <?= Html::image($blog['facet_img'], $blog['facet_title'], 'img-xl mr15', 'logo', 'max'); ?>
-      <div class="mb-ml0 flex-auto">
-        <h1 class="mt10 text-2xl">
-          <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == UserData::getUserId()) : ?>
-            <a class="right white fon-rgba" href="<?= url('content.edit', ['type' => 'blog', 'id' => $blog['facet_id']]); ?>">
-              <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#edit"></use>
-              </svg>
-            </a>
-          <?php endif; ?>
-          <?= $blog['facet_seo_title']; ?>
-        </h1>
-        <div class="text-sm mt10 mb-none"><?= $blog['facet_short_description']; ?></div>
-        <div class="right fon-rgba white ">
-          <?= Html::signed([
-            'type'            => 'facet',
-            'id'              => $blog['facet_id'],
-            'content_user_id' => $blog['facet_user_id'],
-            'state'           => is_array($data['facet_signed']),
-          ]); ?>
-        </div>
-      </div>
-    </div>
+    <?= insert('/content/facets/blog-header', ['data' => $data]); ?>
 
     <div class="flex gap mb-block">
       <main>
@@ -53,16 +23,29 @@ if ($blog['facet_is_deleted'] == 0) : ?>
               </svg>
               <span class="middle lowercase"><?= Html::langDate($blog['facet_add_date']); ?></span>
             </div>
-            <div class="relative max-w300 mt15">
-              <?= insert('/_block/facet/focus-users', [
-                'facet'         => $blog,
-                'focus_users'   => $data['focus_users'] ?? '',
-              ]); ?>
-            </div>
           </div>
+
+          <?php if ($data['focus_users']) : ?>
+            <div class="box bg-lightgray">
+              <h3 class="uppercase-box"><?= __('app.reads'); ?>
+                <a href="<?= url('blog.read', ['slug' => $blog['facet_slug']]) ?>" title="<?= __('app.more'); ?>" class="gray-600" href="">...</a>
+              </h3>
+              <ul>
+                <?php foreach ($data['focus_users'] as $user) : ?>
+                  <li class="mt15">
+                    <a href="<?= url('profile', ['login' => $user['login']]); ?>">
+                      <?= Html::image($user['avatar'], $user['login'], 'img-sm mr5', 'avatar', 'max'); ?>
+                      <?= $user['login']; ?>
+                    </a>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
+          <?php endif; ?>
+
           <?php if ($data['info']) : ?>
             <div class="sticky top-sm">
-              <div class="box bg-lightgray shown_post">
+              <div class="box bg-lightgray content-body">
                 <?= $data['info']; ?>
               </div>
             </div>

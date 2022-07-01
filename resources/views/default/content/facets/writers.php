@@ -1,9 +1,9 @@
 <?php $topic = $data['facet']; ?>
 <main>
   <?= insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
-  <div class="box">
+
     <?php if (!empty($data['writers'])) : ?>
-      <div class="flex items-center mb20 mt10">
+      <div class="flex gap items-center">
         <svg class="icons red icon-base">
           <use xlink:href="/assets/svg/icons.svg#award"></use>
         </svg>
@@ -31,7 +31,7 @@
         </div>
       <?php endforeach; ?>
     <?php endif; ?>
-  </div>
+
 </main>
 <aside>
   <div class="box gray-600">
