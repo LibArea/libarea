@@ -59,7 +59,7 @@
       </svg> <a href="https://libarea.ru">LibArea.ru</a></p>
     <p><svg class="icons">
         <use xlink:href="/assets/svg/icons.svg#github"></use>
-      </svg> <a href="https://discord.gg/dw47aNx5nU">Discord</a></p>
+      </svg> <a href="https://discord.gg/adJnPEGZZZ">Discord</a></p>
     <hr>
     <p>PC: <?= php_uname('s'); ?> <?php echo php_uname('r'); ?></p>
     <p>PHP: <?= PHP_VERSION; ?></p>
