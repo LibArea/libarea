@@ -18,7 +18,7 @@ class Access
             redirect('/');
         }
 
-        // TODO: Изменим поля в DB, чтобы использовать limitContent для messages и invites: 
+        // TODO: Изменим поля в DB, чтобы использовать limitContent для messages и invitation: 
         if (in_array($type, ['post', 'amswer', 'comment', 'item', 'team'])) {
             if (self::limitContent($type) === false) {
                 Msg::add(__('msg.limit_day'), 'error');

@@ -46,6 +46,11 @@ return [
             'icon'  => 'link',
             'id'    => 'catalog',
         ], [
+            'url'   => url('search'),
+            'title' => __('app.search'),
+            'icon'  => 'search',
+            'id'    => 'search',
+        ], [
             'hr'    => true,
         ], [
             'tl'    => UserData::USER_FIRST_LEVEL,

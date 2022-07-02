@@ -34,10 +34,10 @@ class Parser
         $jevix->cfgSetTagShort(['img', 'hr']);
 
         // Преформатированные теги. (в них все будет заменятся на HTML сущности)
-        $jevix->cfgSetTagPreformatted(['pre', 'code']);
+        // $jevix->cfgSetTagPreformatted(['pre', 'code']);
 
         // Теги, которые необходимо вырезать из текста вместе с контентом.
-        $jevix->cfgSetTagCutWithContent(['script3', 'style', 'br']);
+        $jevix->cfgSetTagCutWithContent(['script', 'style', 'br']);
 
         $jevix->cfgSetTagIsEmpty(['a', 'iframe']);
 
