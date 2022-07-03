@@ -2,9 +2,7 @@
   <?= insert('/content/user/profile/header', ['data' => $data]); ?>
   <div class="flex gap">
     <main>
-      <div class="box-flex">
-        <?= __('app.comments'); ?> <b><?= $data['profile']['login']; ?></b>
-      </div>
+      <?= __('app.comments'); ?> <b><?= $data['profile']['login']; ?></b>
       <?php if (!empty($data['comments'])) : ?>
         <div class="box">
           <?= insert('/content/comment/comment', ['answer' => $data['comments']]); ?>

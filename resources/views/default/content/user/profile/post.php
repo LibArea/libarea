@@ -2,9 +2,7 @@
   <?= insert('/content/user/profile/header', ['data' => $data]); ?>
   <div class="flex gap">
     <main>
-      <div class="box-flex">
-        <?= __('app.posts'); ?> <b><?= $data['profile']['login']; ?></b>
-      </div>
+      <?= __('app.posts'); ?> <b><?= $data['profile']['login']; ?></b>
       <?= insert('/content/post/post', ['data' => $data]); ?>
 
       <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/posts'); ?>
