@@ -189,6 +189,13 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetchAll();
     }
 
+    public static function latestItems($limit)
+    {
+        $sql = "SELECT item_title, item_domain FROM items WHERE item_published = 1 ORDER BY item_id DESC LIMIT :limit";
+        
+        return DB::run($sql, ['limit' => $limit])->fetchAll();
+    }
+
     // Facets (themes, blogs) all / subscribed
     // Фасеты (темы, блоги) все / подписан
     public static function subscription($user_id)

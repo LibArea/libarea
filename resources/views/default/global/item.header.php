@@ -12,7 +12,7 @@ use Hleb\Constructor\Handlers\Request; ?>
       <a class="item-logo mb-none" href="<?= url('web'); ?>">
         <?= __('web.catalog'); ?>
       </a>
-      <div class="page-search-right mb-ml0">
+      <div class="w-100">
         <div data-template="one" id="find tippy">
           <a class="flex left items-center gap-min gray mb5" href="/">
             <svg class="icons">

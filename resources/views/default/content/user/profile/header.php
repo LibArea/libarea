@@ -1,8 +1,8 @@
 <?php
 $profile = $data['profile'];
-$css = 'w94 mb-w100 ml15 -mt50 br-rd5';
+$css = 'w94 mt15 mb-w100 profile-ava';
 if ($profile['cover_art'] != 'cover_art.jpeg') :
-  $css = 'w160 mb-w100 -mt90 ml15 br-rd5';
+  $css = 'w160 mt90 mb-mt5 mb-w80 profile-ava';
 endif;
 ?>
 <style nonce="<?= $_SERVER['nonce']; ?>">
@@ -12,16 +12,17 @@ endif;
   }
 </style>
 <div class="br-gray bg-white mb15">
+  <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
+
   <?php if ($profile['cover_art'] != 'cover_art.jpeg') : ?>
-    <div class="profile-box-cover relative">
+    <div class="relative">
       <img class="w-100" src="<?= Html::coverUrl($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
     </div>
   <?php else : ?>
     <div class="w-100 relative bg-profile"></div>
   <?php endif; ?>
-  <div class="flex justify-between">
-    <div class="profile-header-footer">
-      <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
+    <div class="profile-header-footer mt15">
+       
 
       <?php if (UserData::checkActiveUser()) : ?>
         <div class="right m15">
@@ -88,5 +89,4 @@ endif;
       </div>
 
     </div>
-  </div>
 </div>

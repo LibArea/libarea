@@ -100,7 +100,7 @@ $post   = $data['post'] ?? false;
 
             <div class="relative">
               <div class="trigger">
-                <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mb-pr0', 'avatar', 'small'); ?>
+                <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'avatar', 'small'); ?>
               </div>
               <div class="dropdown user">
                 <?= insert('/_block/navigation/menu-user', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>

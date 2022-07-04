@@ -1,6 +1,6 @@
 <main>
   <p><?= $data['sheet']; ?> <a href="<?= url('messages'); ?>">(<?= __('app.all'); ?>)</a></p>
-  <div class="mb15 mb-ml0 hidden">
+  <div class="mb15 hidden">
     <form action="<?= url('content.create', ['type' => 'message']); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />

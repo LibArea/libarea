@@ -135,11 +135,6 @@ h5 {
 .d-header.choices.show .box-search { display: none; }
 /* end */
 
-.page-search-right {
-  width: 100%;
-  margin-left: 45px;
-}
-
 .page-search__input {
   width: 100%;
   border-radius: 3px;
@@ -368,6 +363,13 @@ iframe {
 .profile-header-footer {
   z-index: 10;
   width: 100%;
+}
+
+.profile-ava {
+  position: absolute;
+  z-index: 15;
+  margin-left: 15px;
+  border-radius: 3px;
 }
 
 .voters.active .score { color: var(--brown); }

@@ -7,7 +7,7 @@
 
 <div class="box-flex bg-blog">
   <?= Html::image($data['facet']['facet_img'], $data['facet']['facet_title'], 'img-xl mr15', 'logo', 'max'); ?>
-  <div class="mb-ml0 flex-auto">
+  <div class="flex-auto">
     <h1 class="mt10 text-2xl">
       <?php if (UserData::checkAdmin() || $data['facet']['facet_user_id'] == UserData::getUserId()) : ?>
         <a class="right white fon-rgba" href="<?= url('content.edit', ['type' => 'blog', 'id' => $data['facet']['facet_id']]); ?>">

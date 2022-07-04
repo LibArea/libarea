@@ -49,7 +49,7 @@
             $url = url('blog', ['slug' => $topic['facet_slug']]);
           endif;
         ?>
-          <li class="mb20 flex items-center justify-between">
+          <li class="mt15 flex items-center justify-between">
             <a href="<?= $url; ?>">
               <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
               <span class="middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
@@ -72,8 +72,8 @@
       <div class="box bg-lightgray">
         <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
         <ul>
-          <?php foreach ($data['topics'] as $key => $recomm) : ?>
-            <li class="mb20">
+          <?php foreach ($data['topics'] as $recomm) : ?>
+            <li class="mt15">
               <a href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
                 <?= Html::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
                 <?= $recomm['facet_title']; ?>
@@ -83,6 +83,21 @@
         </ul>
       </div>
     <?php endif; ?>
+  <?php endif; ?>
+
+  <?php if (is_array($data['items'])) : ?>
+      <div class="box bg-lightgray">
+        <h3 class="uppercase-box"><?= __('app.websites'); ?></h3>
+        <ul>
+          <?php foreach ($data['items'] as $item) : ?>
+            <li class="mt15">
+              <a href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
+                <?= $item['item_title']; ?>  <span class="green"><?= $item['item_domain']; ?></span>
+              </a>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
   <?php endif; ?>
 
   <div class="sticky top-sm">

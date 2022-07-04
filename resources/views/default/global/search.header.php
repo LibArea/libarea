@@ -15,7 +15,7 @@ $q = $data['q'];
       <a class="item-logo mb-none" href="<?= url('search'); ?>">
         <?= __('search.name'); ?>
       </a>
-      <div class="page-search-right mb-ml0">
+      <div class="w-100">
         <div data-template="one" class="flex justify-between" id="find tippy">
 
           <ul class="nav inline">

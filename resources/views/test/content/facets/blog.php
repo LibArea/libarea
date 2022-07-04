@@ -11,7 +11,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
   <div class="w-100">
     <div class="box-flex bg-blog">
       <?= Html::image($blog['facet_img'], $blog['facet_title'], 'img-xl mr15', 'logo', 'max'); ?>
-      <div class="mb-ml0 flex-auto">
+      <div class="flex-auto">
         <h1 class="text-2xl">
           <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == UserData::getUserId()) : ?>
             <a class="right white fon-rgba" href="<?= url('content.edit', ['type' => 'blog', 'id' => $blog['facet_id']]); ?>">

@@ -15,6 +15,7 @@ class HomeController extends Controller
         $topics_user    = HomeModel::subscription($this->user['id']);
         $pagesCount     = HomeModel::feedCount($topics_user, $this->user, $sheet);
         $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $this->user, $sheet);
+        $items          = HomeModel::latestItems(3); // (LIMIT)
 
         // If guest, show default topics      
         // Если гость, то покажим темы по умолчанию
@@ -44,6 +45,7 @@ class HomeController extends Controller
                     'topics_user'       => $topics_user,
                     'posts'             => $posts,
                     'topics'            => $topics,
+                    'items'             => $items,
                 ],
             ],
         );

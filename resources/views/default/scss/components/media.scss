@@ -49,10 +49,9 @@ main { flex: 1; }
 }
 
 @media (max-width: 780px) {
-  .mb-w100 { width: 100px; }
-  .mb-ml0 { margin-left: 0; }
-  .mb-pr0 { padding-right: 0; }
+  .mb-w80 { width: 80px; }
   .mb-p10 { padding: 10px; }
+  .mb-mt5 { margin-top: 5px; }
   .mb-text-xl { font-size: 1.25rem; }
   .logo { font-size: 18px; }
   .gap-max { gap: 1.5rem; }
@@ -67,6 +66,4 @@ main { flex: 1; }
   aside,
   .mb-none,
   ul.setting > li > a > i { display: none; }
-
- .-mt90 { margin-top: -41px; }
 }
