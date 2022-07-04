@@ -49,8 +49,8 @@
             <?= Html::websiteImage($fav['item_domain'], 'favicon', $fav['item_domain'], 'favicons'); ?>
             <?= $fav['item_domain']; ?>
             <a target="_blank" href="<?= $fav['item_url']; ?>" class="item_cleek" data-id="<?= $fav['item_id']; ?>" rel="nofollow noreferrer ugc">
-              <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#folder"></use>
+              <svg class="icons icon-small ml5">
+                <use xlink:href="/assets/svg/icons.svg#link"></use>
               </svg>
               <?= $fav['item_url']; ?>
             </a>

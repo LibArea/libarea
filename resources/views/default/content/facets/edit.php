@@ -79,9 +79,9 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     </fieldset>
 
     <?php if ($fs['facet_type'] != 'blog' && UserData::checkAdmin()) : ?>
-      <fieldset>
+      <!-- fieldset>
         <input type="checkbox" name="facet_top_level" <?php if ($fs['facet_top_level'] == 1) : ?>checked <?php endif; ?>> <?= __('app.root_help'); ?>?
-      </fieldset>
+      </fieldset -->
 
       <?= insert('/_block/form/select/low-facets', [
         'data'          => $data,

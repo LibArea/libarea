@@ -52,7 +52,7 @@ ALTER TABLE `teams_users_relation` ADD INDEX(`team_id`);
 CREATE TABLE IF NOT EXISTS `facets_translation` (
   `translation_id` int(11) NOT NULL AUTO_INCREMENT,
   `translation_facet_id` int(11) NOT NULL,
-  `translation_code` char(2) NOT NULL,
+  `translation_code` varchar(12) NOT NULL,
   `translation_title` varchar(64) NOT NULL,
   `translation_description` varchar(255) NOT NULL,
   `translation_short_description` varchar(160) NOT NULL,
