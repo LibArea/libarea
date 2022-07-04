@@ -11,9 +11,9 @@ $html = '<div class="flex gap">';
 
 if ($pNum != 1) {
     if (($pNum - 1) == 1) {
-        $html .= '<a class="pr5" href="' . $first . '"><< ' . ($pNum - 1) . '</a>';
+        $html .= '<a class="p5" href="' . $first . '"><< ' . ($pNum - 1) . '</a>';
     } else {
-        $html .= '<a class="pr5" href="' . $url . '&page=' . ($pNum - 1) . '"><< ' . ($pNum - 1) . '</a>';
+        $html .= '<a class="p5" href="' . $url . '&page=' . ($pNum - 1) . '"><< ' . ($pNum - 1) . '</a>';
     }
 }
 

@@ -44,3 +44,20 @@ ALTER TABLE `teams_users_relation`
     
 ALTER TABLE `teams_content_relation` ADD INDEX(`team_content_id`); 
 ALTER TABLE `teams_users_relation` ADD INDEX(`team_id`);   
+
+--
+-- TODO: Let's just try the multilingual option
+-- 
+
+CREATE TABLE IF NOT EXISTS `facets_translation` (
+  `translation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `translation_facet_id` int(11) NOT NULL,
+  `translation_code` char(2) NOT NULL,
+  `translation_title` varchar(64) NOT NULL,
+  `translation_description` varchar(255) NOT NULL,
+  `translation_short_description` varchar(160) NOT NULL,
+  `translation_info` text NOT NULL,
+  PRIMARY KEY (`translation_id`),
+  KEY `translation_facet_id` (`translation_facet_id`),
+  KEY `translation_code` (`translation_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

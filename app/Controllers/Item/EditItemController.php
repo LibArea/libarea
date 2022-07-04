@@ -35,6 +35,10 @@ class EditItemController extends Controller
             $item_post_related = PostModel::postRelated($domain['item_post_related']);
         }
 
+        if (UserData::checkAdmin()) {
+            Request::getResources()->addBottomScript('/assets/js/admin.js');
+        }
+
         return $this->render(
             '/item/edit',
             'item',

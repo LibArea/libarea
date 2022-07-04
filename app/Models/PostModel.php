@@ -67,10 +67,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getPost($params, $name, $user)
     {
         $uid = $user['id'];
-        $sort = "post_id = :params";
-        if ($name == 'slug') {
-            $sort = "post_slug = :params";
-        }
+        $sort = $name == 'slug' ?  "post_slug = :params" : "post_id = :params";
 
         $sql = "SELECT 
                     post_id,
@@ -126,11 +123,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     // Рекомендованные посты
     public static function postsSimilar($post_id, $user, $limit)
     {
-
-        $tl = $user['trust_level'];
-        if ($user['trust_level'] == null) {
-            $tl = 0;
-        }
+        $tl = $user['trust_level'] == null ? 0 : $user['trust_level'];
 
         $sql = "SELECT 
                     post_id,
@@ -279,9 +272,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     // Удален пост или нет
     public static function isThePostDeleted($post_id)
     {
-        $sql = "SELECT post_id, post_is_deleted
-                    FROM posts
-                        WHERE post_id = :post_id";
+        $sql = "SELECT post_id, post_is_deleted FROM posts WHERE post_id = :post_id";
 
         $result = DB::run($sql, ['post_id' => $post_id])->fetch();
 
@@ -290,10 +281,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getPostTopic($post_id, $user_id, $type)
     {
-        $condition  = "topic";
-        if ($type == 'blog') {
-            $condition  = "blog";
-        }
+        $condition = $type == 'blog' ? 'blog' : 'topic';
 
         $sql = "SELECT
                     facet_id,
@@ -488,6 +476,5 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
-    
 
 }
