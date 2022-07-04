@@ -7,7 +7,6 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
   <div class="flex justify-between">
     <?= __('app.edit_' . $data['type']); ?>
     <ul class="nav">
-
       <?= insert(
         '/_block/navigation/nav',
         [
@@ -20,7 +19,6 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
           ]
         ]
       ); ?>
-
     </ul>
   </div>
 
@@ -81,7 +79,6 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     </fieldset>
 
     <?php if ($fs['facet_type'] != 'blog' && UserData::checkAdmin()) : ?>
-
       <fieldset>
         <input type="checkbox" name="facet_top_level" <?php if ($fs['facet_top_level'] == 1) : ?>checked <?php endif; ?>> <?= __('app.root_help'); ?>?
       </fieldset>
@@ -94,31 +91,16 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
         'help'          => __('app.necessarily'),
         'red'           => 'red'
       ]); ?>
-
     <?php endif; ?>
 
     <?php if (!empty($data['high_arr'])) : ?>
-      <div class="box">
-        <h3 class="uppercase-box"><?= __('app.parents'); ?></h3>
-        <?php foreach ($data['high_arr'] as $high) : ?>
-          <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
-            <?= Html::image($high['facet_img'], $high['facet_title'], 'img-base', 'logo', 'max'); ?>
-            <?= $high['facet_title']; ?>
-          </a>
-        <?php endforeach; ?>
-      </div>
-    <?php endif; ?>
-
-    <?php if (!empty($data['low_arr'])) : ?>
-      <div class="box">
-        <h3 class="uppercase-box"><?= __('app.children'); ?></h3>
-        <?php foreach ($data['low_arr'] as $sub) : ?>
-          <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
-            <?= Html::image($sub['facet_img'], $sub['facet_title'], 'img-base', 'logo', 'max'); ?>
-            <?= $sub['facet_title']; ?>
-          </a>
-        <?php endforeach; ?>
-      </div>
+      <h3 class="uppercase-box"><?= __('app.parents'); ?></h3>
+      <?php foreach ($data['high_arr'] as $high) : ?>
+        <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
+          <?= Html::image($high['facet_img'], $high['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+          <?= $high['facet_title']; ?>
+        </a>
+      <?php endforeach; ?>
     <?php endif; ?>
 
     <fieldset>
@@ -156,18 +138,6 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
           'red'           => 'red'
         ]); ?>
     </fieldset>
-
-    <?php if (!empty($data['high_matching'])) : ?>
-      <div class="box max-w780">
-        <h3 class="uppercase-box"><?= __('app.bound_parents'); ?></h3>
-        <?php foreach ($data['high_matching'] as $low_mat) : ?>
-          <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
-            <?= Html::image($low_mat['facet_img'], $low_mat['facet_title'], 'img-base', 'logo', 'max'); ?>
-            <?= $low_mat['facet_title']; ?>
-          </a>
-        <?php endforeach; ?>
-      </div>
-    <?php endif; ?>
   <?php endif; ?>
 
   <?php if (UserData::checkAdmin()) : ?>
@@ -180,6 +150,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       'help'    => __('app.necessarily'),
     ]); ?>
   <?php endif; ?>
+
   <fieldset>
     <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">
     <?= Html::sumbit(__('app.edit')); ?>

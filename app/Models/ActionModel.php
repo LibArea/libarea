@@ -45,27 +45,12 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
         $user = UserData::get();
         $field_id   = $type . '_id';
         if ($type == 'post') {
-            $field_tl = 'post_tl';
             $field_name = 'post_title';
-            $sql = "SELECT post_id, post_title, post_tl, post_is_deleted FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 AND post_type = 'post' ORDER BY post_id DESC LIMIT 100";
+            $sql = "SELECT post_id, post_title FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 AND post_type = 'post' ORDER BY post_id DESC LIMIT 100";
         } elseif ($type == 'user') {
-            $field_tl = 'trust_level';
             $field_id = 'id';
             $field_name = 'login';
             $sql = "SELECT id, login, trust_level, activated FROM users WHERE activated = 1 AND login LIKE :login";
-        } elseif ($type == 'section') {
-            $field_id = 'facet_id';
-            $field_tl = 'facet_tl';
-            $field_name = 'facet_title';
-            $condition = 'AND facet_user_id = ' . $user['id'];
-            $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
-                    WHERE facet_title LIKE :facet_title AND facet_type = 'section' $condition ORDER BY facet_count DESC LIMIT 100";
-        } elseif ($type == 'category') {
-            $field_id = 'facet_id';
-            $field_tl = 'facet_tl';
-            $field_name = 'facet_title';
-            $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
-                    WHERE facet_title LIKE :facet_title AND facet_type = 'category' ORDER BY facet_count DESC LIMIT 100";
         } else {
             $condition = '';
             if (!UserData::checkAdmin()) {
@@ -75,9 +60,8 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
             }
 
             $field_id = 'facet_id';
-            $field_tl = 'facet_tl';
-            $field_name = 'facet_title'; // AND facet_type = '$type'
-            $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
+            $field_name = 'facet_title';
+            $sql = "SELECT facet_id, facet_title, facet_type FROM facets 
                     WHERE facet_title LIKE :facet_title AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 200";
         }
 
@@ -89,7 +73,6 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
             $response[] = array(
                 "id"    => $list[$field_id],
                 "value" => $list[$field_name],
-                "tl"    => $list[$field_tl]
             );
         }
 
