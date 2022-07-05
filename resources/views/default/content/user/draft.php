@@ -1,7 +1,7 @@
 <main>
   <div class="mb15">
     <ul class="nav">
-      <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.favorites')]); ?>
+      <li class="active"><?= __('app.drafts'); ?></li>
     </ul>
   </div>
   <?php if (!empty($data['drafts'])) : ?>
