@@ -47,7 +47,6 @@ class AddPostController extends Controller
     {
         $content    = $_POST['content']; // для Markdown
         $post_url   = Request::getPost('post_url');
-        $post_draft = Request::getPostInt('post_draft');
         $blog_id    = Request::getPostInt('blog_id');
         $fields     = Request::getPost() ?? [];
 
@@ -94,7 +93,7 @@ class AddPostController extends Controller
                 'post_feature'          => $fields['post_feature'] == 'on' ? 1 : 0,
                 'post_type'             => $type,
                 'post_translation'      => $fields['translation'] == 'on' ? 1 : 0,
-                'post_draft'            => $post_draft,
+                'post_draft'            => $fields['post_draft'] == 'on' ? 1 : 0,
                 'post_ip'               => Request::getRemoteAddress(),
                 'post_published'        => ($trigger === false) ? 0 : 1,
                 'post_user_id'          => $this->user['id'],
