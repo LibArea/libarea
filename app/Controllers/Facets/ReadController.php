@@ -4,7 +4,7 @@ namespace App\Controllers\Facets;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Models\FacetModel;
+use App\Models\{FacetModel, SubscriptionModel};
 use Meta, Content;
 
 class ReadController extends Controller
@@ -35,6 +35,7 @@ class ReadController extends Controller
                     'facet'         => $facet,
                     'read'          => $read,
                     'info'          => Content::text($facet['facet_info'] ?? false, 'text'),
+                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
                 ]
             ]
         );

@@ -424,7 +424,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     signed_user_id,
                     id,
                     login,
-                    avatar
+                    avatar,
+                    about
                       FROM facets_signed 
                         LEFT JOIN users ON id = signed_user_id
                           WHERE signed_facet_id = :facet_id LIMIT :start, :limit";
