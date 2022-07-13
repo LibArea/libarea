@@ -12,7 +12,7 @@ class Sass
 
         $compiler->setOutputStyle(\ScssPhp\ScssPhp\OutputStyle::COMPRESSED);
 
-        foreach (config('scss') as $key => $putch) {
+        foreach (config('css.path_css') as $key => $putch) {
             self::build($compiler, $putch, $key);
         }
     }

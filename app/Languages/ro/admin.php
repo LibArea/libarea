@@ -29,6 +29,7 @@ return [
     'yes'               => 'da',
     'css'               => 'Css',
     'icon'              => 'Pictogramă',
+    'icons'             => 'Pictograme',
     'title'             => 'Nume',
     'description'       => 'Descriere',
     'action'            => 'Acțiune',

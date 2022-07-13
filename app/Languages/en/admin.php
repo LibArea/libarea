@@ -29,6 +29,7 @@ return [
     'yes'               => 'Yes',
     'css'               => 'Css',
     'icon'              => 'Icon',
+    'icons'             => 'Icons',
     'title'             => 'Title',
     'description'       => 'Description',
     'action'            => 'Action',

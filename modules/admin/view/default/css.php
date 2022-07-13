@@ -57,5 +57,18 @@
   <div class="box bg-blue white mr5">.box .bg-blue</div>
   <div class="box bg-blue-100">.box .bg-blue-100</div>
 </div>
+
+<h4><?= __('admin.icons'); ?>:</h4>
+<div class="flex flex-wrap">
+<?php foreach ($data['lists'] as $topic) : ?>
+    <div class="center box mr5">
+        <svg class="icons">
+          <use xlink:href="/assets/svg/icons.svg#<?= $topic; ?>"></use>
+        </svg>
+        <div class="gray-600"><?= $topic; ?></div>
+    </div>
+<?php endforeach; ?>
+</div>
+
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

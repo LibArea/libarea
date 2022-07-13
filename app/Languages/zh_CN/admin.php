@@ -29,6 +29,7 @@ return [
     'yes'               => '是',
     'css'               => '样式',
     'icon'              => '图标',
+    'icons'             => '图标',
     'title'             => '标题',
     'description'       => '描述',
     'action'            => '动作',

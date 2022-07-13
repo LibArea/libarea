@@ -10,9 +10,6 @@ class Home
 {
     public function index()
     {
-        $size   = disk_total_space(HLEB_GLOBAL_DIRECTORY);
-        $bytes  = number_format($size / 1048576, 2) . ' MB';
-
         return view(
             '/view/default/index',
             [
@@ -24,7 +21,7 @@ class Home
                     'last_visit'        => UserModel::getLastVisit(),
                     'logs'              => SearchModel::getSearchLogs(10),
                     'replys'            => StatsModel::getReplys(10),
-                    'bytes'             => $bytes,
+                    'bytes'             => self::freeDiskSpace(),
                     'type'              => 'admin',
                     'sheet'             => 'admin',
                 ]
@@ -32,17 +29,9 @@ class Home
         );
     }
 
-    public function css()
+    public static function freeDiskSpace()
     {
-        return view(
-            '/view/default/css',
-            [
-                'meta'  => Meta::get(__('admin.css')),
-                'data'  => [
-                    'type'  => 'css',
-                    'sheet' => 'css',
-                ]
-            ]
-        );
+        $size   = disk_total_space(HLEB_GLOBAL_DIRECTORY);
+        return number_format($size / 1048576, 2) . ' MB';
     }
 }

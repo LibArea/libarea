@@ -30,6 +30,7 @@ return [
     'visibility'        => '能見度',
     'number'            => '數字',
     'icon'              => '圖標',
+    'icons'             => '图标',
     'template'          => '樣本',
     'setting'           => '環境',
     'settings'          => '設置',
