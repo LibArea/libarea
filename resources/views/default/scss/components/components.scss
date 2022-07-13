@@ -157,34 +157,6 @@ aside ul {
 
 aside ul a { color: var(--gray); }
 
-footer {
-  background-color: var(--white);
-  color: var(--gray-600);
-  padding: 0.25rem;
-  overflow: hidden;
-  margin-top: 1rem;
-}
-
-footer .icon {
-  color: var(--gray-600);
-  margin-right: 1rem;
-}
-
-footer ul {
-  padding-left: 60px;
-  list-style: none;
-  margin: 0;
-}
-
-footer ul li a {
-  font-size: 14px;
-  color: var(--gray-600);
-  margin-bottom: 5px;
-}
-
-footer ul li a:hover,
-footer .icon:hover { color: #111; }
-
 code {
   color: #9b4f5e;
   background-color: #f5f2f0;
