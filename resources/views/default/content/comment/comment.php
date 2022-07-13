@@ -23,8 +23,8 @@ foreach ($answer as  $comment) :
       <li class="content_tree" id="comment_<?= $comment['comment_id']; ?>">
         <div class="max-w780">
           <div class="text-sm flex gap">
-            <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>">
-              <?= Html::image($comment['avatar'], $comment['login'], 'img-sm', 'avatar', 'small'); ?>
+            <a class="gray-600 flex " href="<?= url('profile', ['login' => $comment['login']]); ?>">
+              <?= Html::image($comment['avatar'], $comment['login'], 'img-sm mr5', 'avatar', 'small'); ?>
               <?= $comment['login']; ?>
             </a>
             <?php if ($comment['post_user_id'] == $comment['comment_user_id']) : ?>
