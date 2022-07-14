@@ -73,7 +73,7 @@ class UserData
      */
     static public function get()
     {
-        if (!is_null(self::$user)) {
+        if (self::$user !== null) {
             return self::$user;
         }
 
@@ -94,7 +94,7 @@ class UserData
 
     static public function getAccount()
     {
-        if (!is_null(self::$myAccount)) {
+        if (self::$myAccount !== null) {
             return self::$myAccount;
         }
 

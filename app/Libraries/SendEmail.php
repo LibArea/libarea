@@ -10,7 +10,7 @@ class SendEmail
 {
     public static function mailText($uid, $type, array $variables = [])
     {
-        if (is_null($uid)) {
+        if ($uid === null) {
             return false;
         }
 

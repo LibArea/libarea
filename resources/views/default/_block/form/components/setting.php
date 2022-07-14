@@ -55,8 +55,7 @@
 </fieldset>
 
 <fieldset>
-  <input type="checkbox" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked <?php endif; ?>>
-  <?= __('app.endless_scroll'); ?>
+  <input type="checkbox" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked <?php endif; ?>> <?= __('app.endless_scroll'); ?>
 </fieldset>
 
 <h3 class="mt15 mb15"><?= __('app.contacts'); ?></h3>

@@ -40,60 +40,54 @@
     <?php endif; ?>
   </fieldset>
   <fieldset>
-    <svg class="icons">
-      <use xlink:href="/assets/svg/icons.svg#eye"></use>
-    </svg> <?= $data['user']['hits_count']; ?>
-  </fieldset>
-  <fieldset>
-    <label for="post_title"><?= __('admin.registration'); ?></label>
+    <label for="post_title"><?= __('admin.registration'); ?>:</label>
+    <span class="gray-600">
     <?= $data['user']['created_at']; ?> |
     <?= $data['user']['reg_ip']; ?>
     <?php if ($data['user']['duplicat_ip_reg'] > 1) : ?>
       <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
     <?php endif; ?>
-    (ed. <?= $data['user']['updated_at']; ?>)
+    (ed. <?= $data['user']['updated_at']; ?>)  | 
+    <svg class="icons">
+      <use xlink:href="/assets/svg/icons.svg#eye"></use>
+    </svg> <?= $data['user']['hits_count']; ?>
+    </span>
   </fieldset>
   <hr>
   <fieldset>
     <?php if ($data['user']['limiting_mode'] == 1) : ?>
       <span class="red"><?= __('admin.dumb_mode'); ?>!</span><br>
     <?php endif; ?>
-    <label for="limiting_mode">
-      <?= __('admin.dumb_mode'); ?>?
-    </label>
-    <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('admin.no'); ?>
-    <input type="radio" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('admin.yes'); ?>
+    <input type="checkbox" name="limiting_mode" <?php if ($data['user']['limiting_mode'] == 1) : ?>checked <?php endif; ?>> <?= __('admin.dumb_mode'); ?>?
   </fieldset>
 
   <fieldset>
-    <label for="scroll">
-      <?= __('admin.scroll'); ?>
-    </label>
-    <input type="radio" name="scroll" <?php if ($data['user']['scroll'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('admin.no'); ?>
-    <input type="radio" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('admin.yes'); ?>
+    <input type="checkbox" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked <?php endif; ?>> <?= __('app.endless_scroll'); ?>
   </fieldset>
 
   <hr>
   <fieldset>
     <?php if ($data['count']['count_posts'] != 0) : ?>
-      <label class="required"><?= __('admin.posts'); ?>:</label>
+      <?= __('admin.posts'); ?>:
       <a target="_blank" rel="noopener noreferrer" title="<?= __('admin.posts'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.posts', ['login' => $data['user']['login']]); ?>">
         <?= $data['count']['count_posts']; ?>
-      </a> <br>
+      </a>
     <?php endif; ?>
+    <br>
     <?php if ($data['count']['count_answers'] != 0) : ?>
-      <label class="required"><?= __('admin.answers'); ?>:</label>
+      <?= __('admin.answers'); ?>:
       <a target="_blank" rel="noopener noreferrer" title="<?= __('admin.answers'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.answers', ['login' => $data['user']['login']]); ?>">
         <?= $data['count']['count_answers']; ?>
-      </a> <br>
+      </a>
     <?php else : ?>
       ---
     <?php endif; ?>
+    <br>
     <?php if ($data['count']['count_comments'] != 0) : ?>
-      <label class="required"><?= __('admin.comments'); ?>:</label>
+      <?= __('admin.comments'); ?>:
       <a target="_blank" rel="noopener noreferrer" title="<?= __('admin.comments'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.comments', ['login' => $data['user']['login']]); ?>">
         <?= $data['count']['count_comments']; ?>
-      </a> <br>
+      </a>
     <?php else : ?>
       ---
     <?php endif; ?>
@@ -131,9 +125,7 @@
     <input type="text" name="email" value="<?= $data['user']['email']; ?>" required>
   </fieldset>
   <fieldset>
-    <label for="activated"><?= __('admin.activated'); ?>?</label>
-    <input type="radio" name="activated" <?php if ($data['user']['activated'] == 0) : ?>checked<?php endif; ?> value="0"> <?= __('admin.no'); ?>
-    <input type="radio" name="activated" <?php if ($data['user']['activated'] == 1) : ?>checked<?php endif; ?> value="1"> <?= __('admin.yes'); ?>
+    <input type="checkbox" name="activated" <?php if ($data['user']['activated'] == 1) : ?>checked <?php endif; ?>> <?= __('admin.activated'); ?>?
   </fieldset>
   <hr>
   <?php if (UserData::REGISTERED_ADMIN != $data['user']['trust_level']) : ?>

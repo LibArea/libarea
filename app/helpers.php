@@ -11,7 +11,7 @@ declare(strict_types=1);
 // @param  string|null $key
 function __(string $key = null, array $params = [])
 {
-    if (is_null($key)) {
+    if ($key === null) {
         return $key;
     }
 
@@ -20,7 +20,7 @@ function __(string $key = null, array $params = [])
 
 function url(string $key = null, array $params = [])
 {
-    if (is_null($key)) {
+    if ($key === null) {
         return $key;
     }
 
@@ -29,7 +29,7 @@ function url(string $key = null, array $params = [])
 
 function config(string $key = null)
 {
-    if (is_null($key)) {
+    if ($key === null) {
         return $key;
     }
 
@@ -40,11 +40,6 @@ function is_current($url)
 {
     if ($url == Request::getUri()) return true;
 
-    /* $segments = explode('/', Request::getUri());
-    foreach ($segments as $key => $segment) {
-      if ($url == '/' . $segment) return 'active';
-    } */
-    
     return false;
 }
 
