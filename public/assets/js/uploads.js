@@ -1,10 +1,10 @@
 // File Upload
-function ekUpload(){
+function ekUpload() {
   function Init() {
 
-    let fileSelect    = document.getElementById('file-upload'),
-        fileDrag      = document.getElementById('file-drag'),
-        submitButton  = document.getElementById('submit-button');
+    let fileSelect = document.getElementById('file-upload'),
+      fileDrag = document.getElementById('file-drag'),
+      submitButton = document.getElementById('submit-button');
 
     if (fileSelect) {
       fileSelect.addEventListener('change', fileSelectHandler, false);
@@ -54,7 +54,7 @@ function ekUpload(){
     output(
       '<strong>' + encodeURI(file.name) + '</strong>'
     );
-    
+
     // var fileType = file.type;
     let imageName = file.name;
     let isGood = (/\.(?=gif|jpg|png|jpeg)/gi).test(imageName);
@@ -83,7 +83,7 @@ function ekUpload(){
     if (xhr.upload) {
       if (file.size <= fileSizeLimit * 1024) {
         // File received / failed
-        xhr.onreadystatechange = function(e) {
+        xhr.onreadystatechange = function (e) {
           if (xhr.readyState == 4) {
             // Everything is good!
           }

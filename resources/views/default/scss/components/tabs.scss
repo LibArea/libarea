@@ -1,0 +1,39 @@
+/*
+ * @tabs styles
+ *
+ * Вкладки
+ */
+
+
+fieldset.tabs {
+  background-color: #eee;
+  padding: 0 1em;
+}
+
+.tabs__btn {
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  flex-shrink: 0;
+  flex-grow: 1;
+  border: 1px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.tabs__btn_active {
+  background-color: #fff;
+  border-radius: 3px;
+  color: #332f2f;
+  cursor: default;
+}
+
+.tabs__btn:not(.tabs__btn_active):hover,
+.tabs__btn:not(.tabs__btn_active):focus {
+  background-color: #fff;
+}
+
+.tabs__content { padding: 1rem 0; }
+.tabs__pane { display: none; }
+.tabs__pane_show { display: block; }

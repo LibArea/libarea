@@ -1,10 +1,10 @@
 /*! medium-zoom 1.0.6 | MIT License | https://github.com/francoischalifour/medium-zoom */
-(function(global, factory) {
-  typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global = global || self, 
-  global.mediumZoom = factory());
-})(this, function() {
+(function (global, factory) {
+  typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global = global || self,
+    global.mediumZoom = factory());
+})(this, function () {
   "use strict";
-  var _extends = Object.assign || function(target) {
+  var _extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -37,7 +37,7 @@
         return [].slice.call(selector).filter(isSupported);
       }
       if (isNode(selector)) {
-        return [ selector ].filter(isSupported);
+        return [selector].filter(isSupported);
       }
       if (typeof selector === "string") {
         return [].slice.call(document.querySelectorAll(selector)).filter(isSupported);
@@ -83,7 +83,7 @@
   var mediumZoom = function mediumZoom(selector) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var Promise = window.Promise || function Promise(fn) {
-      function noop() {}
+      function noop() { }
       fn(noop, noop);
     };
     var _handleClick = function _handleClick(event) {
@@ -128,7 +128,7 @@
         newOptions.template = template;
       }
       zoomOptions = _extends({}, zoomOptions, newOptions);
-      images.forEach(function(image) {
+      images.forEach(function (image) {
         image.dispatchEvent(createCustomEvent("medium-zoom:update", {
           detail: {
             zoom: zoom
@@ -145,18 +145,18 @@
       for (var _len = arguments.length, selectors = Array(_len), _key = 0; _key < _len; _key++) {
         selectors[_key] = arguments[_key];
       }
-      var newImages = selectors.reduce(function(imagesAccumulator, currentSelector) {
+      var newImages = selectors.reduce(function (imagesAccumulator, currentSelector) {
         return [].concat(imagesAccumulator, getImagesFromSelector(currentSelector));
       }, []);
-      newImages.filter(function(newImage) {
+      newImages.filter(function (newImage) {
         return images.indexOf(newImage) === -1;
-      }).forEach(function(newImage) {
+      }).forEach(function (newImage) {
         images.push(newImage);
         newImage.classList.add("medium-zoom-image");
       });
-      eventListeners.forEach(function(_ref) {
+      eventListeners.forEach(function (_ref) {
         var type = _ref.type, listener = _ref.listener, options = _ref.options;
-        newImages.forEach(function(image) {
+        newImages.forEach(function (image) {
           image.addEventListener(type, listener, options);
         });
       });
@@ -169,10 +169,10 @@
       if (active.zoomed) {
         close();
       }
-      var imagesToDetach = selectors.length > 0 ? selectors.reduce(function(imagesAccumulator, currentSelector) {
+      var imagesToDetach = selectors.length > 0 ? selectors.reduce(function (imagesAccumulator, currentSelector) {
         return [].concat(imagesAccumulator, getImagesFromSelector(currentSelector));
       }, []) : images;
-      imagesToDetach.forEach(function(image) {
+      imagesToDetach.forEach(function (image) {
         image.classList.remove("medium-zoom-image");
         image.dispatchEvent(createCustomEvent("medium-zoom:detach", {
           detail: {
@@ -180,14 +180,14 @@
           }
         }));
       });
-      images = images.filter(function(image) {
+      images = images.filter(function (image) {
         return imagesToDetach.indexOf(image) === -1;
       });
       return zoom;
     };
     var on = function on(type, listener) {
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      images.forEach(function(image) {
+      images.forEach(function (image) {
         image.addEventListener("medium-zoom:" + type, listener, options);
       });
       eventListeners.push({
@@ -199,10 +199,10 @@
     };
     var off = function off(type, listener) {
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      images.forEach(function(image) {
+      images.forEach(function (image) {
         image.removeEventListener("medium-zoom:" + type, listener, options);
       });
-      eventListeners = eventListeners.filter(function(eventListener) {
+      eventListeners = eventListeners.filter(function (eventListener) {
         return !(eventListener.type === "medium-zoom:" + type && eventListener.listener.toString() === listener.toString());
       });
       return zoom;
@@ -253,7 +253,7 @@
           active.zoomedHd.style.transform = transform;
         }
       };
-      return new Promise(function(resolve) {
+      return new Promise(function (resolve) {
         if (target && images.indexOf(target) === -1) {
           resolve(zoom);
           return;
@@ -297,7 +297,7 @@
           document.body.appendChild(active.template);
         }
         document.body.appendChild(active.zoomed);
-        window.requestAnimationFrame(function() {
+        window.requestAnimationFrame(function () {
           document.body.classList.add("medium-zoom--opened");
         });
         active.original.classList.add("medium-zoom-image--hidden");
@@ -309,13 +309,13 @@
           active.zoomedHd.removeAttribute("srcset");
           active.zoomedHd.removeAttribute("sizes");
           active.zoomedHd.src = active.zoomed.getAttribute("data-zoom-src");
-          active.zoomedHd.onerror = function() {
+          active.zoomedHd.onerror = function () {
             clearInterval(getZoomTargetSize);
             console.warn("Unable to reach the zoom image target " + active.zoomedHd.src);
             active.zoomedHd = null;
             _animate();
           };
-          var getZoomTargetSize = setInterval(function() {
+          var getZoomTargetSize = setInterval(function () {
             if (active.zoomedHd.complete) {
               clearInterval(getZoomTargetSize);
               active.zoomedHd.classList.add("medium-zoom-image--opened");
@@ -328,7 +328,7 @@
           active.zoomedHd = active.zoomed.cloneNode();
           active.zoomedHd.removeAttribute("sizes");
           active.zoomedHd.removeAttribute("loading");
-          var loadEventListener = active.zoomedHd.addEventListener("load", function() {
+          var loadEventListener = active.zoomedHd.addEventListener("load", function () {
             active.zoomedHd.removeEventListener("load", loadEventListener);
             active.zoomedHd.classList.add("medium-zoom-image--opened");
             active.zoomedHd.addEventListener("click", close);
@@ -341,7 +341,7 @@
       });
     };
     var close = function close() {
-      return new Promise(function(resolve) {
+      return new Promise(function (resolve) {
         if (isAnimating || !active.original) {
           resolve(zoom);
           return;

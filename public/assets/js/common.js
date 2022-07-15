@@ -1,6 +1,6 @@
 function isIdEmpty(elmId) {
   let elem = document.getElementById(elmId);
-  if(typeof elem !== 'undefined' && elem !== null) return elem;
+  if (typeof elem !== 'undefined' && elem !== null) return elem;
   return false;
 }
 
@@ -21,13 +21,13 @@ function makeRequest(url, options = {}) {
 let scrolled;
 let dHeader = document.querySelector(".d-header");
 if (dHeader) {
-  window.onscroll = function() {
+  window.onscroll = function () {
     scrolled = window.pageYOffset || document.documentElement.scrollTop;
-    if(scrolled > 70){
-        document.querySelector(".d-header").classList.add('show'); 
+    if (scrolled > 70) {
+      document.querySelector(".d-header").classList.add('show');
     }
-    if(70 > scrolled){
-        document.querySelector(".d-header").classList.remove('show');         
+    if (70 > scrolled) {
+      document.querySelector(".d-header").classList.remove('show');
     }
   }
 }
@@ -42,8 +42,8 @@ document.querySelectorAll(".add-comment")
     let answer_id = insert_id = el.dataset.answer_id;
     let comment_id = el.dataset.comment_id;
 
-    if(comment_id) {
-        insert_id = el.dataset.comment_id;
+    if (comment_id) {
+      insert_id = el.dataset.comment_id;
     }
 
     let comment = document.querySelector('#insert_id_' + insert_id);
@@ -64,39 +64,39 @@ document.querySelectorAll(".add-comment")
           document.querySelectorAll("#cancel_comment")
             .forEach(el => el.addEventListener("click", function (e) {
               comment.classList.remove("block");
-          }));
+            }));
         }
       );
-}));
+  }));
 
 // Toggle dark mode
-isIdEmpty('toggledark').onclick = function() {
-    let mode = getCookie("dayNight");
-    let d = new Date();
-    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
-    let expires = "expires=" + d.toGMTString();
-    if (mode == "dark") {
-      document.cookie = "dayNight" + "=" + "light" + "; " + expires + ";path=/";
-      document.getElementsByTagName('body')[0].classList.remove('dark');
-    } else {
-      document.cookie = "dayNight" + "=" + "dark" + "; " + expires + ";path=/";
-      document.getElementsByTagName('body')[0].classList.add('dark');
-    }
-} 
+isIdEmpty('toggledark').onclick = function () {
+  let mode = getCookie("dayNight");
+  let d = new Date();
+  d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
+  let expires = "expires=" + d.toGMTString();
+  if (mode == "dark") {
+    document.cookie = "dayNight" + "=" + "light" + "; " + expires + ";path=/";
+    document.getElementsByTagName('body')[0].classList.remove('dark');
+  } else {
+    document.cookie = "dayNight" + "=" + "dark" + "; " + expires + ";path=/";
+    document.getElementsByTagName('body')[0].classList.add('dark');
+  }
+}
 
 // Navigation menu on/off
-isIdEmpty('togglemenu').onclick = function() {
-    let mode = getCookie("menuYesNo");
-    let d = new Date();
-    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
-    let expires = "expires=" + d.toGMTString();
-    if (mode == "menuno") {
-      document.cookie = "menuYesNo" + "=" + "menuyes" + "; " + expires + ";path=/";
-      document.getElementsByTagName('body')[0].classList.remove('menuno');
-    } else {
-      document.cookie = "menuYesNo" + "=" + "menuno" + "; " + expires + ";path=/";
-      document.getElementsByTagName('body')[0].classList.add('menuno');
-    }
+isIdEmpty('togglemenu').onclick = function () {
+  let mode = getCookie("menuYesNo");
+  let d = new Date();
+  d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
+  let expires = "expires=" + d.toGMTString();
+  if (mode == "menuno") {
+    document.cookie = "menuYesNo" + "=" + "menuyes" + "; " + expires + ";path=/";
+    document.getElementsByTagName('body')[0].classList.remove('menuno');
+  } else {
+    document.cookie = "menuYesNo" + "=" + "menuno" + "; " + expires + ";path=/";
+    document.getElementsByTagName('body')[0].classList.add('menuno');
+  }
 }
 
 // TODO: move to util
@@ -116,20 +116,20 @@ function getCookie(cname) {
 }
 
 // search
-isIdEmpty('find').onclick = function() {
+isIdEmpty('find').onclick = function () {
   document.getElementById('find').addEventListener('keydown', function () {
     fetchSearch();
   });
 }
 
 function fetchSearch() {
-   let query = document.getElementById("find").value;
-   if (query.length < 2) return;
-    fetch("/search/api", {
-      method: "POST",
-      headers: { 'Content-Type':'application/x-www-form-urlencoded'},
-      body:  "query=" + query  + "&_token=" + token,
-    })
+  let query = document.getElementById("find").value;
+  if (query.length < 2) return;
+  fetch("/search/api", {
+    method: "POST",
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: "query=" + query + "&_token=" + token,
+  })
     .then(
       response => {
         return response.text();
@@ -153,18 +153,18 @@ function fetchSearch() {
           items.classList.add("block");
           items.innerHTML = html;
         }
-        
+
         let menu = document.querySelector('.none.block');
         if (menu) {
           document.onclick = function (e) {
             if (event.target.className != '.none.block') {
-              let items = document.getElementById("search_items");  
+              let items = document.getElementById("search_items");
               items.classList.remove("block");
             };
           };
-        } 
+        }
       }
-   );  
+    );
 }
 
 // Show / hide password 
@@ -199,18 +199,18 @@ document.querySelectorAll(".item_cleek")
         //...
       });
   }));
-  
+
 /*
  *	Drop-down menus (user) and lists
  *	Выпадающие меню (user) и списки
  */
 let elm = document.querySelectorAll(".trigger");
-elm.forEach(function(elm) {
-  elm.addEventListener("click", function(e) {
+elm.forEach(function (elm) {
+  elm.addEventListener("click", function (e) {
     e.stopPropagation();
     let sibling = elm.nextElementSibling,
-       firstVisible = elm.querySelector('.block'),
-       dropDown;
+      firstVisible = elm.querySelector('.block'),
+      dropDown;
 
     /*
      * Remove the block class if an element is already in the DOM
@@ -224,7 +224,7 @@ elm.forEach(function(elm) {
     if (firstVisible) {
       // fadeOut(firstVisible);
       firstVisible.classList.remove("block");
-    } 
+    }
 
     if (!sibling.classList.contains("block")) {
       // fadeIn(sibling);
@@ -235,15 +235,15 @@ elm.forEach(function(elm) {
     }
   });
 
-  document.addEventListener("click", function() {
+  document.addEventListener("click", function () {
     let block = document.querySelector(".dropdown.block");
     if (block) {
       // fadeOut(block);
       block.classList.remove("block");
     }
-  }); 
+  });
 });
- 
+
 /*
  *	Left drop-down general menu (navigation)
  *	Левое выпадающее общее меню (навигация)
@@ -252,19 +252,93 @@ const button = document.querySelector('.menu__button')
 const nav = document.querySelector('.menu__left')
 if (button) {
   button.addEventListener('click', () => {
-    if (nav) {  
+    if (nav) {
       nav.classList.toggle('menu__active')
     }
   })
 }
 
 window.addEventListener('click', e => {
-if (!e.target.closest('.menu__active') && !e.target.closest('.menu__button')) {
-  if (nav) {
-    nav.classList.remove('menu__active')
+  if (!e.target.closest('.menu__active') && !e.target.closest('.menu__button')) {
+    if (nav) {
+      nav.classList.remove('menu__active')
+    }
   }
-}
+})
+
+// Tabs
+document.addEventListener('DOMContentLoaded', () => {
+  class ItcTabs {
+    constructor(target, config) {
+      const defaultConfig = {};
+      this._config = Object.assign(defaultConfig, config);
+      this._elTabs = typeof target === 'string' ? document.querySelector(target) : target;
+      this._elButtons = this._elTabs.querySelectorAll('.tabs__btn');
+      this._elPanes = this._elTabs.querySelectorAll('.tabs__pane');
+      this._eventShow = new Event('tab.itc.change');
+      this._init();
+      this._events();
+    }
+    _init() {
+      this._elTabs.setAttribute('role', 'tablist');
+      this._elButtons.forEach((el, index) => {
+        el.dataset.index = index;
+        el.setAttribute('role', 'tab');
+        this._elPanes[index].setAttribute('role', 'tabpanel');
+      });
+    }
+    show(elLinkTarget) {
+      const elPaneTarget = this._elPanes[elLinkTarget.dataset.index];
+      const elLinkActive = this._elTabs.querySelector('.tabs__btn_active');
+      const elPaneShow = this._elTabs.querySelector('.tabs__pane_show');
+      if (elLinkTarget === elLinkActive) {
+        return;
+      }
+      elLinkActive ? elLinkActive.classList.remove('tabs__btn_active') : null;
+      elPaneShow ? elPaneShow.classList.remove('tabs__pane_show') : null;
+      elLinkTarget.classList.add('tabs__btn_active');
+      elPaneTarget.classList.add('tabs__pane_show');
+      this._elTabs.dispatchEvent(this._eventShow);
+      elLinkTarget.focus();
+    }
+    showByIndex(index) {
+      const elLinkTarget = this._elButtons[index];
+      elLinkTarget ? this.show(elLinkTarget) : null;
+    };
+    _events() {
+      this._elTabs.addEventListener('click', (e) => {
+        const target = e.target.closest('.tabs__btn');
+        if (target) {
+          e.preventDefault();
+          this.show(target);
+        }
+      });
+    }
+  }
+
+  const tabs = {};
+  const elTabs = document.querySelectorAll('.tabs');
+  const storage = localStorage.getItem('tabs');
+  let storageData = {};
+
+  elTabs.forEach(el => {
+    tabs[el.id] = new ItcTabs(el);
+    el.addEventListener('tab.itc.change', (e) => {
+      const index = +el.querySelector('.tabs__btn_active').dataset.index;
+      storageData[el.id] = index;
+      localStorage.setItem('tabs', JSON.stringify(storageData));
+    })
+  })
+
+  if (storage) {
+    storageData = JSON.parse(storage);
+    for (let key in storageData) {
+      if (tabs.hasOwnProperty(key)) {
+        tabs[key].showByIndex(storageData[key]);
+      }
+    }
+  }
 })
 
 /* MIT license https://github.com/vivekweb2013/toastmaker */
-!function(t,e){"function"==typeof define&&define.amd?define(e):"object"==typeof exports?module.exports=e():t.Notice=e()}(this,function(t){return function(t,e,s){function i(t,e,s,i,n){var a=Array.isArray(t)?"array":typeof t;if(i&&(null==t||""===t))throw"Invalid argument '"+e+"'. Argument is either empty, null or undefined";if(a!==s)throw"Invalid argument '"+e+"'. Type must be "+s+" but found "+a;if(n&&-1==n.indexOf(t))throw"Invalid value "+t+" specified for argument '"+e+"'. Allowed - "+n.join(" | ")}i(t,"text","string",!0),i(s=s||{},"options","object"),i(e=e||3e3,"timeout","number"),s.styles=s.styles||{},i(s.styles,"styles","object"),s.align=s.align||"center",i(s.align,"align","string",!0,["left","center","right"]),s.valign=s.valign||"bottom",i(s.valign,"valign","string",!0,["top","bottom"]),s.classList=s.classList||[],i(s.classList,"classList","array");var n=["notice","notice-"+s.valign,"notice-"+s.align];s.classList=s.classList.concat(n);var a=document.createElement("div");s.classList.forEach(function(t){if("string"!=typeof t)throw"Invalid css class '"+JSON.stringify(t)+"'. CSS class must be of type string";a.classList.add(t)});var o=document.createTextNode(t);for(var r in a.appendChild(o),a.style.animationDuration=e/1e3+"s",s.styles){if("string"!=typeof s.styles[r]&&"number"!=typeof s.styles[r])throw"Invalid value '"+JSON.stringify(s.styles[r])+"' specified for style '"+r+"'. Style value must be of type string or number";a.style[r]=s.styles[r]}document.body.appendChild(a),setTimeout(function(){document.body.removeChild(a)},e)}});
+!function (t, e) { "function" == typeof define && define.amd ? define(e) : "object" == typeof exports ? module.exports = e() : t.Notice = e() }(this, function (t) { return function (t, e, s) { function i(t, e, s, i, n) { var a = Array.isArray(t) ? "array" : typeof t; if (i && (null == t || "" === t)) throw "Invalid argument '" + e + "'. Argument is either empty, null or undefined"; if (a !== s) throw "Invalid argument '" + e + "'. Type must be " + s + " but found " + a; if (n && -1 == n.indexOf(t)) throw "Invalid value " + t + " specified for argument '" + e + "'. Allowed - " + n.join(" | ") } i(t, "text", "string", !0), i(s = s || {}, "options", "object"), i(e = e || 3e3, "timeout", "number"), s.styles = s.styles || {}, i(s.styles, "styles", "object"), s.align = s.align || "center", i(s.align, "align", "string", !0, ["left", "center", "right"]), s.valign = s.valign || "bottom", i(s.valign, "valign", "string", !0, ["top", "bottom"]), s.classList = s.classList || [], i(s.classList, "classList", "array"); var n = ["notice", "notice-" + s.valign, "notice-" + s.align]; s.classList = s.classList.concat(n); var a = document.createElement("div"); s.classList.forEach(function (t) { if ("string" != typeof t) throw "Invalid css class '" + JSON.stringify(t) + "'. CSS class must be of type string"; a.classList.add(t) }); var o = document.createTextNode(t); for (var r in a.appendChild(o), a.style.animationDuration = e / 1e3 + "s", s.styles) { if ("string" != typeof s.styles[r] && "number" != typeof s.styles[r]) throw "Invalid value '" + JSON.stringify(s.styles[r]) + "' specified for style '" + r + "'. Style value must be of type string or number"; a.style[r] = s.styles[r] } document.body.appendChild(a), setTimeout(function () { document.body.removeChild(a) }, e) } });

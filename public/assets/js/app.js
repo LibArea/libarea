@@ -1,49 +1,49 @@
 const focusId = document.querySelectorAll('.focus-id'),
-      saveFolder = document.querySelectorAll(".save-folder"),
-      delFolderContent = document.querySelectorAll(".del-folder-content"),
-      delFolder = document.querySelectorAll(".del-folder"),
-      addProfile = document.querySelectorAll(".add-profile"),
-      postRecommend = document.querySelectorAll(".post-recommend"),
-      typeAction = document.querySelectorAll(".type-action"),
-      reply = document.querySelectorAll(".actreply");
+  saveFolder = document.querySelectorAll(".save-folder"),
+  delFolderContent = document.querySelectorAll(".del-folder-content"),
+  delFolder = document.querySelectorAll(".del-folder"),
+  addProfile = document.querySelectorAll(".add-profile"),
+  postRecommend = document.querySelectorAll(".post-recommend"),
+  typeAction = document.querySelectorAll(".type-action"),
+  reply = document.querySelectorAll(".actreply");
 
 // Subscribe to a topic / post
 focusId.forEach(el => el.addEventListener("click", function (e) {
-    makeRequest("/focus", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
-  }));
+  makeRequest("/focus", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
+}));
 
 // Adding Folders
 saveFolder.forEach(el => el.addEventListener("click", function (e) {
-    makeRequest("/folder/content/save", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid })
-  }));
+  makeRequest("/folder/content/save", options = { body: "id=" + el.dataset.id + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid })
+}));
 
 // Add or remove your post to your profile 
 addProfile.forEach(el => el.addEventListener("click", function (e) {
-    makeRequest("/post/profile", options = { body:  "post_id=" + el.dataset.post + "&_token=" + token })
-  }));
+  makeRequest("/post/profile", options = { body: "post_id=" + el.dataset.post + "&_token=" + token })
+}));
 
 // Deleting a linked content folder 
 delFolderContent.forEach(el => el.addEventListener("click", function (e) {
-    makeRequest("/folder/content/del", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token })
-  }));
+  makeRequest("/folder/content/del", options = { body: "id=" + el.dataset.id + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token })
+}));
 
 // Removing a tag
 delFolder.forEach(el => el.addEventListener("click", function (e) {
-    makeRequest("/folder/del", options = { body: "id=" + el.dataset.id  + "&type=" + el.dataset.type + "&_token=" + token })
-  }));
+  makeRequest("/folder/del", options = { body: "id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
+}));
 
 // Recommend a post
 postRecommend.forEach(el => el.addEventListener("click", function (e) {
-    makeRequest("/post/recommend", options = { body: "post_id=" + el.dataset.id + "&_token=" + token })
-  }));
-  
+  makeRequest("/post/recommend", options = { body: "post_id=" + el.dataset.id + "&_token=" + token })
+}));
+
 // Deleting / restoring content
 typeAction.forEach(el => el.addEventListener("click", function (e) {
-    makeRequest("/status/action", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
-  }));
+  makeRequest("/status/action", options = { body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token })
+}));
 
 // Profile Cover Color
-isIdEmpty('colorPicker').onclick = function() {    
+isIdEmpty('colorPicker').onclick = function () {
   let box = document.getElementById("box");
   let color = document.getElementById("color");
 
@@ -60,22 +60,22 @@ isIdEmpty('colorPicker').onclick = function() {
 
 // Call the form for adding / edit a reply
 reply.forEach(el => el.addEventListener("click", function (e) {
-    let reply = document.querySelector('#reply_addentry' + el.dataset.id);  
-    fetch("/reply/" + el.dataset.type, {
-      method: "POST",
-      body: "id=" + el.dataset.id  + "&item_id=" + el.dataset.item_id + "&_token=" + token,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
+  let reply = document.querySelector('#reply_addentry' + el.dataset.id);
+  fetch("/reply/" + el.dataset.type, {
+    method: "POST",
+    body: "id=" + el.dataset.id + "&item_id=" + el.dataset.item_id + "&_token=" + token,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  })
     .then(response => response.text())
-    .then( text => { 
-        reply.classList.add("block");
-        reply.innerHTML = text;
-        document.querySelectorAll("#cancel_comment")
-          .forEach(el => el.addEventListener("click", function (e) {
-            reply.classList.remove("block");
-      }));
+    .then(text => {
+      reply.classList.add("block");
+      reply.innerHTML = text;
+      document.querySelectorAll("#cancel_comment")
+        .forEach(el => el.addEventListener("click", function (e) {
+          reply.classList.remove("block");
+        }));
     });
-  }));  
+}));
 
 // Up
 document.querySelectorAll(".up-id")
@@ -95,24 +95,24 @@ document.querySelectorAll(".up-id")
         upScr.replaceWith(new_cont);
       });
   }));
-  
+
 // Add / Remove from favorites
 document.querySelectorAll(".add-favorite")
   .forEach(el => el.addEventListener("click", function (e) {
     fetch("/favorite", {
-      method: "POST",  
-      headers: { 'Content-Type':'application/x-www-form-urlencoded'},
-      body:  "content_id=" + el.dataset.id  + "&type=" + el.dataset.type + "&_token=" + token,  
+      method: "POST",
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: "content_id=" + el.dataset.id + "&type=" + el.dataset.type + "&_token=" + token,
     })
-    .then(response => response.text())
-    .then( text => { 
-       if (el.dataset.front == 'personal') {
+      .then(response => response.text())
+      .then(text => {
+        if (el.dataset.front == 'personal') {
           location.reload();
         } else {
-            let dom = document.querySelector("#favorite_" + el.dataset.id);
-            dom.classList.toggle("active");
+          let dom = document.querySelector("#favorite_" + el.dataset.id);
+          dom.classList.toggle("active");
         }
-    });
+      });
   }));
 
 
@@ -172,4 +172,4 @@ document.querySelectorAll(".editcomm")
             }));
         }
       );
-}));  
+  }));  
