@@ -52,12 +52,17 @@ ALTER TABLE `teams_users_relation` ADD INDEX(`team_id`);
 CREATE TABLE IF NOT EXISTS `facets_translation` (
   `translation_id` int(11) NOT NULL AUTO_INCREMENT,
   `translation_facet_id` int(11) NOT NULL,
-  `translation_code` varchar(12) NOT NULL,
-  `translation_title` varchar(64) NOT NULL,
+  `translation_code` varchar(20) NOT NULL,
+  `translation_title`  	varchar(64) NOT NULL,
+  `translation_seo_title`  	varchar(125) NOT NULL,
   `translation_description` varchar(255) NOT NULL,
-  `translation_short_description` varchar(160) NOT NULL,
+  `translation_short_description` varchar(255) NOT NULL,
   `translation_info` text NOT NULL,
   PRIMARY KEY (`translation_id`),
   KEY `translation_facet_id` (`translation_facet_id`),
   KEY `translation_code` (`translation_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+ALTER TABLE `facets_translation`
+  ADD CONSTRAINT facet_id_code UNIQUE (translation_facet_id, translation_code);
