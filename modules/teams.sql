@@ -76,7 +76,7 @@ INSERT INTO `facets_translation` (`translation_facet_id`, `translation_code`, `t
 (2, 'fr', 'Sites intéressants', '', '', '', ''),
 (2, 'de', 'Interessante Seiten', '', '', '', ''),
 (2, 'zh_TW', '有趣的网站', '', '', '', ''),
-(2, 'zh_CN', '有趣的网站', '', '', '', '');
+(2, 'zh_CN', '有趣的网站', '', '', '', ''),
 
 
 (3, 'ru', 'Социальные сети', '', '', '', ''),
