@@ -30,7 +30,7 @@ class AuthModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['ip' => $ip])->fetch();
     }
 
-    public static function getAuthTokenByUserId($uid)
+    public static function getAuthTokenByUserId($user_id)
     {
         $sql = "SELECT
                     auth_id,
@@ -39,9 +39,9 @@ class AuthModel extends \Hleb\Scheme\App\Models\MainModel
                     auth_hashedvalidator,
                     auth_expires
                         FROM users_auth_tokens
-                        WHERE auth_user_id = :uid";
+                        WHERE auth_user_id = :user_id";
 
-        return DB::run($sql, ['uid' => $uid])->fetch();
+        return DB::run($sql, ['user_id' => $user_id])->fetch();
     }
 
     public static function insertToken($params)
@@ -89,10 +89,10 @@ class AuthModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $params);
     }
 
-    public static function deleteTokenByUserId($uid)
+    public static function deleteTokenByUserId($user_id)
     {
-        $sql = "DELETE FROM users_auth_tokens WHERE auth_user_id = :uid";
+        $sql = "DELETE FROM users_auth_tokens WHERE auth_user_id = :user_id";
 
-        return DB::run($sql, ['uid' => $uid]);
+        return DB::run($sql, ['user_id' => $user_id]);
     }
 }

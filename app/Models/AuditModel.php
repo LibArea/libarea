@@ -18,13 +18,13 @@ class AuditModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Let's limit How many complaints are filed today (for frequency limitation)
     // Сколько жалоб подано сегодня (для ограничение частоты)
-    public static function getSpeedReport($uid)
+    public static function getSpeedReport($user_id)
     {
         $sql = "SELECT id FROM audits
-                    WHERE user_id = :uid AND type_belonging = 'report'
+                    WHERE user_id = :user_id AND type_belonging = 'report'
                         AND add_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
-        return  DB::run($sql, ['uid' => $uid])->rowCount();
+        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
     
     // Get a list of forbidden stop words

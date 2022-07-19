@@ -99,7 +99,6 @@ class Users extends Controller
                 'meta'  => Meta::get(__('admin.edit')),
                 'data'  => [
                     'type'      => $this->type,
-                    'count'     => UserModel::contentCount($user_id),
                     'user'      => $user,
                 ]
             ]

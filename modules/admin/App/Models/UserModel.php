@@ -106,28 +106,6 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return $result->fetch();
     }
 
-    // Number of member content
-    public static function contentCount($uid)
-    {
-        $sql = "SELECT 
-                    (SELECT COUNT(post_id) 
-                        FROM posts 
-                        WHERE post_user_id = $uid and post_draft = 0 and post_is_deleted = 0) 
-                            AS count_posts,
-                  
-                    (SELECT COUNT(answer_id) 
-                        FROM answers 
-                        WHERE answer_user_id = $uid and answer_is_deleted = 0) 
-                            AS count_answers,
-                  
-                    (SELECT COUNT(comment_id) 
-                        FROM comments 
-                        WHERE comment_user_id = $uid and comment_is_deleted = 0) 
-                            AS count_comments";
-
-        return DB::run($sql)->fetch();
-    }
-
     // Number of IP duplicates by `user_reg_ip` field
     public static function duplicatesRegistrationCount($ip)
     {

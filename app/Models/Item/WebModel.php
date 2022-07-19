@@ -193,7 +193,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Check if the domain exists 
     // Проверим наличие домена
-    public static function getItemOne($domain, $uid)
+    public static function getItemOne($domain, $user_id)
     {
         $sql = "SELECT
                     item_id,
@@ -230,13 +230,13 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                         GROUP BY relation_item_id
                         ) AS rel
                             ON rel.relation_item_id = item_id 
-                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND votes_item_user_id = :uid
+                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND votes_item_user_id = :user_id
                         LEFT JOIN favorites fav ON fav.tid = item_id 
                                 AND fav.user_id = :uid_two AND fav.action_type = 'website'
                         WHERE item_domain = :domain AND item_is_deleted = 0";
 
 
-        return DB::run($sql, ['domain' => $domain, 'uid' => $uid, 'uid_two' => $uid])->fetch();
+        return DB::run($sql, ['domain' => $domain, 'user_id' => $user_id, 'uid_two' => $user_id])->fetch();
     }
 
     // Add a domain

@@ -77,7 +77,7 @@ class BadgeModel extends \Hleb\Scheme\App\Models\MainModel
 
     // All participant awards
     // Все награды участника
-    public static function getBadgeUserAll($uid)
+    public static function getBadgeUserAll($user_id)
     {
         $sql = "SELECT 
                     bu_id,
@@ -91,9 +91,9 @@ class BadgeModel extends \Hleb\Scheme\App\Models\MainModel
                     badge_description
                         FROM badges_user
                         LEFT JOIN badges ON badge_id = bu_badge_id
-                            WHERE bu_user_id = :uid";
+                            WHERE bu_user_id = :user_id";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
     // Remove member award

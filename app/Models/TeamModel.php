@@ -30,7 +30,7 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Get the full version of teams with participants in them
     // Получим полную версию команд с участниками в них
-     public static function all($uid, $limit)
+     public static function all($user_id, $limit)
      {
          $sql = "SELECT 
                     t.team_id as id,
@@ -56,16 +56,16 @@ class TeamModel extends \Hleb\Scheme\App\Models\MainModel
                                         GROUP BY r.team_id
                             ) AS rel
                                 ON rel.team_id= t.team_id
-                                        WHERE u.id = :uid ORDER BY t.team_is_deleted LIMIT :limit";
+                                        WHERE u.id = :user_id ORDER BY t.team_is_deleted LIMIT :limit";
                             
-        return DB::run($sql, ['uid' => $uid, 'limit' => $limit])->fetchAll(); 
+        return DB::run($sql, ['user_id' => $user_id, 'limit' => $limit])->fetchAll(); 
     }
 
     // Number of folders
     // Количество команд
-    public static function allCount($uid)
+    public static function allCount($user_id)
     {
-        return  DB::run("SELECT team_id FROM teams WHERE team_user_id = :uid", ['uid' => $uid])->rowCount();
+        return  DB::run("SELECT team_id FROM teams WHERE team_user_id = :user_id", ['user_id' => $user_id])->rowCount();
     }
 
     // Creation of a team

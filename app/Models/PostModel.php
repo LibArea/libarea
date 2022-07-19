@@ -66,7 +66,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     // Полная версия поста  
     public static function getPost($params, $name, $user)
     {
-        $uid = $user['id'];
+        $user_id = $user['id'];
         $sort = $name == 'slug' ?  "post_slug = :params" : "post_id = :params";
 
         $sql = "SELECT 
@@ -111,8 +111,8 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     fav.action_type
                         FROM posts
                         LEFT JOIN users u ON u.id = post_user_id
-                        LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $uid AND fav.action_type = 'post' 
-                        LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $uid
+                        LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $user_id AND fav.action_type = 'post' 
+                        LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $user_id
                             WHERE $sort AND post_tl <= :trust_level";
 
         $data = ['params' => $params, 'trust_level' => $user['trust_level']];
@@ -316,7 +316,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Check if the domain exists 
     // Проверим наличие домена
-    public static function getDomain($domain, $uid)
+    public static function getDomain($domain, $user_id)
     {
         $sql = "SELECT
                     item_id,
@@ -338,11 +338,11 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     votes_item_user_id, 
                     votes_item_item_id
                         FROM items 
-                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid
+                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :user_id
                         WHERE item_domain = :domain AND item_is_deleted = 0";
 
 
-        return DB::run($sql, ['domain' => $domain, 'uid' => $uid])->fetch();
+        return DB::run($sql, ['domain' => $domain, 'user_id' => $user_id])->fetch();
     }
 
     // 5 popular domains
@@ -380,20 +380,20 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Список читаемых постов
-    public static function getFocusPostUser($uid)
+    public static function getFocusPostUser($user_id)
     {
         $sql = "SELECT
                     signed_post_id,
                     signed_user_id 
                         FROM posts_signed
-                        WHERE signed_user_id = :uid";
+                        WHERE signed_user_id = :user_id";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
-    public static function getFocusPostsListUser($uid)
+    public static function getFocusPostsListUser($user_id)
     {
-        $focus_posts = self::getFocusPostUser($uid);
+        $focus_posts = self::getFocusPostUser($user_id);
 
         $result = [];
         foreach ($focus_posts as $ind => $row) {
@@ -450,8 +450,8 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                             ON rel.relation_post_id = post_id 
 
             INNER JOIN users u ON u.id = post_user_id
-            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $uid
-            LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $uid AND fav.action_type = 'post'
+            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $user_id
+            LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $user_id AND fav.action_type = 'post'
             $string  LIMIT 100";
 
         return DB::run($sql)->fetchAll();

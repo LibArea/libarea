@@ -58,7 +58,7 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Все инвайты участинка
-    public static function userResult($uid)
+    public static function userResult($user_id)
     {
         $sql = "SELECT 
                    uid, 
@@ -72,10 +72,10 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
                    login
                         FROM invitations
                             LEFT JOIN users ON id = active_uid
-                            WHERE uid = :uid
+                            WHERE uid = :user_id
                             ORDER BY add_time DESC";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
     // Проверим не активированный инвайт

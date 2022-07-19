@@ -67,33 +67,6 @@
 
   <hr>
   <fieldset>
-    <?php if ($data['count']['count_posts'] != 0) : ?>
-      <?= __('admin.posts'); ?>:
-      <a target="_blank" rel="noopener noreferrer" title="<?= __('admin.posts'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.posts', ['login' => $data['user']['login']]); ?>">
-        <?= $data['count']['count_posts']; ?>
-      </a>
-    <?php endif; ?>
-    <br>
-    <?php if ($data['count']['count_answers'] != 0) : ?>
-      <?= __('admin.answers'); ?>:
-      <a target="_blank" rel="noopener noreferrer" title="<?= __('admin.answers'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.answers', ['login' => $data['user']['login']]); ?>">
-        <?= $data['count']['count_answers']; ?>
-      </a>
-    <?php else : ?>
-      ---
-    <?php endif; ?>
-    <br>
-    <?php if ($data['count']['count_comments'] != 0) : ?>
-      <?= __('admin.comments'); ?>:
-      <a target="_blank" rel="noopener noreferrer" title="<?= __('admin.comments'); ?> <?= $data['user']['login']; ?>" href="<?= url('profile.comments', ['login' => $data['user']['login']]); ?>">
-        <?= $data['count']['count_comments']; ?>
-      </a>
-    <?php else : ?>
-      ---
-    <?php endif; ?>
-  </fieldset>
-  <hr>
-  <fieldset>
     <a class="text-sm" href="<?= url('admin.badges.user.add', ['id' => $data['user']['id']]); ?>">
       + <?= __('admin.reward_user'); ?>
     </a>

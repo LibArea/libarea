@@ -8,7 +8,7 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Sites added by the user
     // Сайты добавленные участником
-    public static function getUserSites($page, $limit, $uid)
+    public static function getUserSites($page, $limit, $user_id)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT
@@ -39,22 +39,22 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                                         GROUP BY relation_item_id
                         ) AS rel
                             ON rel.relation_item_id = item_id 
-                                WHERE item_user_id = :uid ORDER BY item_id DESC
+                                WHERE item_user_id = :user_id ORDER BY item_id DESC
                                     LIMIT :start, :limit ";
 
-        return DB::run($sql, ['uid' => $uid, 'start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getUserSitesCount($uid)
+    public static function getUserSitesCount($user_id)
     {
-        $sql = "SELECT item_id, item_is_deleted FROM items WHERE item_user_id = :uid ORDER BY item_id DESC";
+        $sql = "SELECT item_id, item_is_deleted FROM items WHERE item_user_id = :user_id ORDER BY item_id DESC";
 
-        return  DB::run($sql, ['uid' => $uid])->rowCount();
+        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 
     // Bookmarks
     // Закладки
-    public static function bookmarks($page, $limit, $uid)
+    public static function bookmarks($page, $limit, $user_id)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
@@ -91,18 +91,18 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                             ON rel.relation_item_id = fav.tid
                             LEFT JOIN items ON item_id = fav.tid 
                             LEFT JOIN votes_item ON votes_item_item_id = fav.tid 
-                                AND votes_item_user_id = :uid
+                                AND votes_item_user_id = :user_id
                                     WHERE fav.user_id = :uid_two AND fav.action_type = 'website' AND item_published = 1
                                     LIMIT :start, :limit";
 
-        return  DB::run($sql, ['uid' => $uid, 'uid_two' => $uid, 'start' => $start, 'limit' => $limit])->fetchAll();
+        return  DB::run($sql, ['user_id' => $user_id, 'uid_two' => $user_id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function bookmarksCount($uid)
+    public static function bookmarksCount($user_id)
     {
-        $sql = "SELECT user_id FROM favorites WHERE user_id = :uid AND action_type = 'website'";
+        $sql = "SELECT user_id FROM favorites WHERE user_id = :user_id AND action_type = 'website'";
 
-        return  DB::run($sql, ['uid' => $uid])->rowCount();
+        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
     
     public static function auditCount()

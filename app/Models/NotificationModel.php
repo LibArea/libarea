@@ -45,7 +45,7 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
     const TYPE_ADD_REPLY_WEBSITE    = 34; // replica added to the site
 
     // Лист уведомлений
-    public static function listNotification($uid)
+    public static function listNotification($user_id)
     {
         $sql = "SELECT
                     n.id as notif_id,
@@ -61,24 +61,24 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
                     u.avatar
                         FROM notifications n
                         JOIN users u ON u.id = n.sender_id
-                        WHERE n.recipient_id = :uid
-                        ORDER BY n.id DESC LIMIT 100";
+                            WHERE n.recipient_id = :user_id
+                                ORDER BY n.id DESC LIMIT 100";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
     // Уведомления
-    public static function bell($uid)
+    public static function bell($user_id)
     {
         $sql = "SELECT
                     recipient_id,
                     action_type,
                     read_flag
                         FROM notifications
-                        WHERE recipient_id = :uid
-                        AND read_flag = 0";
+                            WHERE recipient_id = :user_id
+                                AND read_flag = 0";
 
-        return DB::run($sql, ['uid' => $uid])->fetch();
+        return DB::run($sql, ['user_id' => $user_id])->fetch();
     }
 
     // Отправка
@@ -97,11 +97,11 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Оповещение просмотрено
-    public static function updateMessagesUnread($uid, $notif_id)
+    public static function updateMessagesUnread($user_id, $notif_id)
     {
-        $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :uid AND id = :notif_id";
+        $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :user_id AND id = :notif_id";
 
-        return DB::run($sql, ['uid' => $uid, 'notif_id' => $notif_id]);
+        return DB::run($sql, ['user_id' => $user_id, 'notif_id' => $notif_id]);
     }
 
     public static function getNotification($id)
@@ -121,10 +121,10 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['id' => $id])->fetch();
     }
 
-    public static function setRemove($uid)
+    public static function setRemove($user_id)
     {
-        $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :uid";
+        $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :user_id";
 
-        return DB::run($sql, ['uid' => $uid]);
+        return DB::run($sql, ['user_id' => $user_id]);
     }
 }

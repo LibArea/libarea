@@ -157,19 +157,6 @@ aside ul {
 
 aside ul a { color: var(--gray); }
 
-code {
-  color: #9b4f5e;
-  background-color: #f5f2f0;
-  padding: 3px;
-  border-radius: 3px;
-  font-size: 14px;
-}
-
-pre {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
 blockquote {
   margin-left: 15px;
   background-color: #f3f3f6;
@@ -180,7 +167,7 @@ blockquote {
 
 blockquote p { margin: 2px; }
 
-.cut-post img { max-width: 100%; }
+.cut-post img { max-width: 780px; }
 
 hr {
   border: none;

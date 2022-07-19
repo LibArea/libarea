@@ -34,7 +34,7 @@ class Parser
         $jevix->cfgSetTagShort(['img', 'hr']);
 
         // Преформатированные теги. (в них все будет заменятся на HTML сущности)
-        // $jevix->cfgSetTagPreformatted(['pre', 'code']);
+        $jevix->cfgSetTagPreformatted(['pre', 'code']);
 
         // Теги, которые необходимо вырезать из текста вместе с контентом.
         $jevix->cfgSetTagCutWithContent(['script', 'style', 'br']);
@@ -115,9 +115,11 @@ class Parser
     {
         $content = htmlspecialchars_decode($content);
         $content = preg_replace('#^<code>(.*)<\/code>$#uis', '$1', $content);
-        $formatter = null;
-        $code = \Kadet\Highlighter\highlight($content, new Kadet\Highlighter\Language\Php(), $formatter);
 
-        return '<pre class="lb">' . $code . '</pre>';
+        $geshi = new GeSHi($content, 'php');
+        // нумер.
+        // $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
+
+        return '<pre class="language-css">' . $geshi->parse_code() . '</pre>';
     }
 }

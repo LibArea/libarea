@@ -24,7 +24,7 @@ class FileModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $params);
     }
 
-    public static function get($file_id, $uid, $type)
+    public static function get($file_id, $user_id, $type)
     {
         $sql = "SELECT 
                     file_id, 
@@ -36,15 +36,15 @@ class FileModel extends \Hleb\Scheme\App\Models\MainModel
                     file_is_deleted
                         FROM files 
                         WHERE file_id = :file_id AND 
-                            file_user_id = :uid AND file_type = :type";
+                            file_user_id = :user_id AND file_type = :type";
 
-        return  DB::run($sql, ['file_id' => $file_id, 'uid' => $uid, 'type' => $type])->fetch();
+        return  DB::run($sql, ['file_id' => $file_id, 'user_id' => $user_id, 'type' => $type])->fetch();
     }
 
-    public static function removal($file_path, $uid)
+    public static function removal($file_path, $user_id)
     {
-        $sql = "UPDATE files SET file_is_deleted = 1 WHERE file_path = :file_path AND file_user_id = :uid";
+        $sql = "UPDATE files SET file_is_deleted = 1 WHERE file_path = :file_path AND file_user_id = :user_id";
 
-        return DB::run($sql, ['file_path' => $file_path, 'uid' => $uid]);
+        return DB::run($sql, ['file_path' => $file_path, 'user_id' => $user_id]);
     }
 }

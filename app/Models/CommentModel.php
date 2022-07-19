@@ -147,7 +147,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Получаем комментарии к ответу
-    public static function getComments($answer_id, $uid)
+    public static function getComments($answer_id, $user_id)
     {
         $sql = "SELECT 
                     comment_id,
@@ -170,14 +170,14 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM comments 
                         LEFT JOIN users  ON id = comment_user_id
                         LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 
-                        AND votes_comment_user_id = :uid
+                        AND votes_comment_user_id = :user_id
                             WHERE comment_answer_id = " . $answer_id;
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
     // Страница комментариев участника
-    public static function userComments($page, $limit, $uid, $id)
+    public static function userComments($page, $limit, $user_id, $id)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
@@ -208,24 +208,24 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                         LEFT JOIN posts  ON comment_post_id = post_id 
                         LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id
                         AND votes_comment_user_id = :id
-                            WHERE comment_user_id = :uid AND comment_is_deleted = 0 
+                            WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
                                 AND post_is_deleted = 0 AND post_tl = 0
                                     ORDER BY comment_id DESC LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $uid, 'id' => $id, 'start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id, 'id' => $id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     // Количество комментариев участника
-    public static function userCommentsCount($uid)
+    public static function userCommentsCount($user_id)
     {
         $sql = "SELECT 
                     comment_id
                         FROM comments 
                         LEFT JOIN posts  ON comment_post_id = post_id 
-                            WHERE comment_user_id = :uid AND comment_is_deleted = 0 
+                            WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
                                 AND post_is_deleted = 0 AND post_tl = 0";
 
-        return DB::run($sql, ['uid' => $uid])->rowCount();
+        return DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 
     // Получаем комментарий по id комментария

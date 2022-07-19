@@ -7,7 +7,7 @@ use DB;
 class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // All dialogs
-    public static function getMessages($uid)
+    public static function getMessages($user_id)
     {
         $sql = "SELECT  
                     dialog_id,
@@ -20,13 +20,13 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
                     dialog_sender_count,
                     dialog_recipient_count
                         FROM messages_dialog 
-                          WHERE dialog_sender_id = $uid OR dialog_recipient_id = :uid
+                          WHERE dialog_sender_id = $user_id OR dialog_recipient_id = $user_id
                             ORDER BY dialog_update_time DESC";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql)->fetchAll();
     }
 
-    public static function lastBranches($uid)
+    public static function lastBranches($user_id)
     {
         $sql = "SELECT  
                     dialog_id,
@@ -39,7 +39,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
                     avatar
                         FROM messages_dialog 
                         LEFT JOIN users ON dialog_sender_id = id OR dialog_recipient_id = id
-                          WHERE dialog_sender_id = $uid OR dialog_recipient_id = $uid
+                          WHERE dialog_sender_id = $user_id OR dialog_recipient_id = $user_id
                             ORDER BY dialog_update_time DESC LIMIT 15";
 
         return DB::run($sql)->fetchAll();
@@ -218,7 +218,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 
 
     // Changing the number of messages
-    public static function updateDialogCount($dialog_id, $uid)
+    public static function updateDialogCount($dialog_id, $user_id)
     {
         if (!$inbox_dialog = self::getDialogById($dialog_id)) {
             return false;
@@ -253,7 +253,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 
         DB::run($sql_dialog, $params);
 
-        if ($inbox_dialog['dialog_sender_id'] == $uid) {
+        if ($inbox_dialog['dialog_sender_id'] == $user_id) {
 
             $recipient_unread = 0;
             $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :recipient 

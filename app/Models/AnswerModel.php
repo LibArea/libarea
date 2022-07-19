@@ -42,7 +42,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
     // Все ответы
     public static function getAnswers($page, $limit, $user, $sheet)
     {
-        $uid = $user['id'];
+        $user_id = $user['id'];
         $sort = self::sorts($sheet);
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
@@ -75,9 +75,9 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                         INNER JOIN users u ON u.id = answer_user_id
                         INNER JOIN posts ON answer_post_id = post_id 
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
-                            AND votes_answer_user_id = $uid
+                            AND votes_answer_user_id = $user_id
                         LEFT JOIN favorites fav ON fav.tid = answer_id
-                            AND fav.user_id  = $uid
+                            AND fav.user_id  = $user_id
                             AND fav.action_type = 'answer'    
                         $sort
                         ORDER BY answer_id DESC LIMIT :start, :limit ";
@@ -117,7 +117,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
 
 
     // Получаем ответы в посте
-    public static function getAnswersPost($post_id, $uid, $type)
+    public static function getAnswersPost($post_id, $user_id, $type)
     {
         $sort = "";
         if ($type == 1) {
@@ -155,9 +155,9 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM answers
                         LEFT JOIN users u ON u.id = answer_user_id
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
-                            AND votes_answer_user_id = $uid
+                            AND votes_answer_user_id = $user_id
                         LEFT JOIN favorites fav ON fav.tid = answer_id
-                            AND fav.user_id  = $uid
+                            AND fav.user_id  = $user_id
                             AND fav.action_type = 'answer'
                             WHERE answer_post_id = $post_id
                             $sort ";
@@ -166,7 +166,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Страница ответов участника
-    public static function userAnswers($page, $limit, $uid, $uid_vote)
+    public static function userAnswers($page, $limit, $user_id, $uid_vote)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
@@ -197,24 +197,24 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                         LEFT JOIN posts ON answer_post_id = post_id
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
                             AND votes_answer_user_id = :uid_vote
-                        WHERE answer_user_id = :uid
+                        WHERE answer_user_id = :user_id
                         AND answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
                         ORDER BY answer_id DESC LIMIT :start, :limit ";
 
-        return DB::run($sql, ['uid' => $uid, 'uid_vote' => $uid_vote, 'start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id, 'uid_vote' => $uid_vote, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     // Количество ответов участника
-    public static function userAnswersCount($uid)
+    public static function userAnswersCount($user_id)
     {
         $sql = "SELECT 
                     answer_id
                         FROM answers
                         LEFT JOIN posts ON answer_post_id = post_id
-                            WHERE answer_user_id = :uid AND answer_is_deleted = 0 
+                            WHERE answer_user_id = :user_id AND answer_is_deleted = 0 
                                 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0";
 
-        return DB::run($sql, ['uid' => $uid])->rowCount();
+        return DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 
     // Информацию по id ответа

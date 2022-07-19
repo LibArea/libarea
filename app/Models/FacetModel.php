@@ -8,9 +8,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // All facets
     // Все фасеты
-    public static function getFacetsAll($page, $limit, $uid, $sort, $type)
+    public static function getFacetsAll($page, $limit, $user_id, $sort, $type)
     {
-        $signet = self::sorts($sort, $uid, $type);
+        $signet = self::sorts($sort, $user_id, $type);
 
         $start  = ($page - 1) * $limit;
         $sql    = "SELECT 
@@ -29,16 +29,16 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_type,
                     facet_is_deleted
                         FROM facets 
-                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = $uid
+                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = $user_id
                         $signet
                         LIMIT :start, :limit";
 
         return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getFacetsAllCount($uid, $sort, $type)
+    public static function getFacetsAllCount($user_id, $sort, $type)
     {
-        $signet = self::sorts($sort, $uid, $type);
+        $signet = self::sorts($sort, $user_id, $type);
 
         $sql    = "SELECT 
                     facet_id,
@@ -47,17 +47,17 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     signed_user_id,
                     facet_is_deleted
                         FROM facets 
-                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = $uid
+                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = $user_id
                         $signet";
 
         return DB::run($sql)->rowCount();
     }
 
-    public static function sorts($sort, $uid, $type)
+    public static function sorts($sort, $user_id, $type)
     {
         switch ($sort) {
             case 'my':
-                $signet = "WHERE facet_type = '$type' AND signed_user_id = $uid ORDER BY facet_count DESC";
+                $signet = "WHERE facet_type = '$type' AND signed_user_id = $user_id ORDER BY facet_count DESC";
                 break;
             case 'new':
                 $signet = "WHERE facet_type = '$type' ORDER BY facet_id DESC";
@@ -130,7 +130,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Facet owner 
     // Собственник фасета
-    public static function getOwnerFacet($uid, $type)
+    public static function getOwnerFacet($user_id, $type)
     {
         $sql = "SELECT 
                     facet_id,
@@ -153,9 +153,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_count,
                     facet_is_deleted
                         FROM facets 
-                            WHERE facet_type = :type AND facet_user_id = :uid AND facet_is_deleted = 0";
+                            WHERE facet_type = :type AND facet_user_id = :user_id AND facet_is_deleted = 0";
 
-        return DB::run($sql, ['uid' => $uid, 'type' => $type])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id, 'type' => $type])->fetchAll();
     }
 
     public static function addPostFacets($rows, $post_id)
@@ -274,7 +274,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Participant contribution
     // Вклад участника
-    public static function participation($uid)
+    public static function participation($user_id)
     {
         $sql = " SELECT 
                     relation_facet_id as count,
@@ -290,28 +290,28 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                                 FROM facets
                         ) AS rel
                             ON rel.facet_id = relation_facet_id
-                                WHERE post_user_id = :uid AND facet_type = 'topic'
+                                WHERE post_user_id = :user_id AND facet_type = 'topic'
                                     GROUP BY relation_facet_id 
                                         ORDER BY count DESC LIMIT 5";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
-    public static function userReads($uid)
+    public static function userReads($user_id)
     {
         $sql = "SELECT 
                     signed_facet_id                  
                         FROM facets_signed 
-                            WHERE signed_user_id = :uid";
+                            WHERE signed_user_id = :user_id";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
     // Topics to which the participant is not subscribed
     // Темы на которые участник не подписан
-    public static function advice($uid)
+    public static function advice($user_id)
     {
-        $userReads = self::userReads($uid);
+        $userReads = self::userReads($user_id);
         
         $result = [];
         foreach ($userReads as $ind => $row) {
@@ -383,7 +383,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $user_id
      * @param  string $type (topic | blog)
      */
-    public static function getFacetsUser($uid, $type)
+    public static function getFacetsUser($user_id, $type)
     {
         $sql = "SELECT 
                     facet_id, 
@@ -391,9 +391,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_slug, 
                     facet_user_id,
                     facet_type
-                        FROM facets WHERE facet_user_id = :uid AND facet_type = :type";
+                        FROM facets WHERE facet_user_id = :user_id AND facet_type = :type";
 
-        return DB::run($sql, ['uid' => $uid, 'type' => $type])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id, 'type' => $type])->fetchAll();
     }
 
     // Number of faces created by the contributor
@@ -402,11 +402,11 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $user_id
      * @param  string $type (topic | blog)
      */
-    public static function countFacetsUser($uid, $type)
+    public static function countFacetsUser($user_id, $type)
     {
-        $sql = "SELECT facet_id FROM facets WHERE facet_user_id = :uid AND facet_type = :type";
+        $sql = "SELECT facet_id FROM facets WHERE facet_user_id = :user_id AND facet_type = :type";
 
-        return DB::run($sql, ['uid' => $uid, 'type' => $type])->rowCount();
+        return DB::run($sql, ['user_id' => $user_id, 'type' => $type])->rowCount();
     }
 
     // Participants subscribed to the topic
