@@ -37,20 +37,17 @@ use Hleb\Constructor\Handlers\Request; ?>
               </a>
             <?php else : ?>
               <?php if (UserData::checkAdmin()) : ?>
-                <div class="relative gray-600">
+                <div class="relative gray-600 none mb-block">
                   <div class="trigger">
                     <?= __('web.menu'); ?>
                   </div>
                   <ul class="dropdown">
-                    <?= insert('/_block/navigation/menu', ['type' => 'admin', 'list' => config('catalog/menu.user')]); ?>
+                    <?= insert('/_block/navigation/item/menu', ['data' => $data]); ?>
                   </ul>
                 </div>
               <?php endif; ?>
-              <a class="green" href="<?= url('web.bookmarks'); ?>">
-                <?= __('web.favorites'); ?>
-              </a>
               <div class="relative">
-                <div class="trigger">
+                <div class="trigger mr5">
                   <?= UserData::getUserLogin(); ?>
                 </div>
                 <ul class="dropdown user">
