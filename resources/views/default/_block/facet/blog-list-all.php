@@ -1,4 +1,4 @@
-<?php foreach ($facets as $key => $facet) : ?> <?= print_r($facet); ?>
+<?php foreach ($facets as $key => $facet) : ?>
   <div class="mb20 items-center flex flex-row">
     <a title="<?= $facet['translation_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
       <?= Html::image($facet['facet_img'], $facet['translation_title'], 'img-lg mr10', 'logo', 'max'); ?>
