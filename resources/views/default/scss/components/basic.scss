@@ -31,6 +31,7 @@ html {
   --green: #16a34a;
   --pink: #9d174d;
   --sky: #0ea5e9;
+  --teal: #68beba;
   --violet: #f3f1ed;
   --red: #ef4444;
   --red-200: #fecaca;
@@ -140,6 +141,7 @@ img {
 .bg-green { background-color: var(--green); }
 .bg-purple { background-color: var(--purple); }
 .bg-yellow { background-color: var(--yellow); }
+.bg-teal { background-color: var(--teal); }
 .bg-lightyellow { background-color: lightyellow; }
 .bg-lightgray { background-color: var(--gray-100); }
 .bg-violet { background-color: var(--violet); } 

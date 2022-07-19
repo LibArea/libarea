@@ -39,7 +39,8 @@
   <div class="label-grey mr5">.label-grey</div>
   <div class="label-green mr5">.label-green</div>
   <div class="label-red mr5">.label-red</div>
-  <div class="label-orange">.label-orange</div>
+  <div class="label-orange mr5">.label-orange</div>
+  <div class="label-teal">.label-teal</div>
 </div>
 
 <div class="box-flex flex-wrap">
@@ -54,6 +55,7 @@
   <div class="box bg-red-200 mr5">.box .bg-red-200</div>
   <div class="box bg-green white mr5">.box .bg-green</div>
   <div class="box bg-black white mr5">.box .bg-black</div>
+  <div class="box bg-teal white mr5">.box .bg-teal</div>
   <div class="box bg-blue white mr5">.box .bg-blue</div>
   <div class="box bg-blue-100">.box .bg-blue-100</div>
 </div>

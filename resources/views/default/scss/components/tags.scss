@@ -78,6 +78,17 @@
   color: var(--red);
 }
 
+.label-teal {
+  @extend .label;
+  background-color: var(--teal);
+  color: var(--white);
+}
+
+.label-teal:hover {
+  background-color: #339a9c;
+  transition: background .2s ease-out;
+}
+
 /* Для tagify */
 .tags-look .tagify__dropdown__item {
   display: inline-block;
