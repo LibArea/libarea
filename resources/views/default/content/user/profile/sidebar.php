@@ -8,7 +8,6 @@
     </svg>
     <span class="middle lowercase text-sm">
       <?= Html::langDate($profile['created_at']); ?>
-      <sup class="ml5"><?= __('app.tl' . $profile['trust_level'] . '.title'); ?></sup>
     </span>
   </div>
 

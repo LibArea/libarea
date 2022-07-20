@@ -41,6 +41,7 @@ class ProfileController extends Controller
                     'pNum'              => $this->pageNumber,
                     'created_at'        => $profile['created_at'],
                     'count'             => $count,
+                    'delet_count'       => UserModel::contentCount($profile['id'], 'remote'),
                     'topics'            => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
                     'blogs'             => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'            => BadgeModel::getBadgeUserAll($profile['id']),
@@ -54,6 +55,7 @@ class ProfileController extends Controller
         );
     }
 
+    // User posts
     public function posts()
     {
         $profile    = self::profile();
@@ -66,21 +68,12 @@ class ProfileController extends Controller
             'base',
             [
                 'meta'  => self::metadata('profile_posts_all', $profile),
-                'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $this->pageNumber,
-                    'posts'         => $posts,
-                    'profile'       => $profile,
-                    'count'         => UserModel::contentCount($profile['id']),
-                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
-                    'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
-                    'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
-                    'button_pm'     => $this->accessPm($profile['id']),
-                ]
+                'data'  => array_merge($this->sidebar($pagesCount, $profile), ['posts' => $posts]),
             ]
         );
     }
 
+    // User answers
     public function answers()
     {
         $profile    = self::profile();
@@ -95,22 +88,12 @@ class ProfileController extends Controller
             'base',
             [
                 'meta'  => self::metadata('profile_answers', $profile),
-                'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $this->pageNumber,
-                    'answers'       => $answers,
-                    'profile'       => $profile,
-                    'count'         => UserModel::contentCount($profile['id']),
-                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
-                    'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
-                    'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
-                    'button_pm'     => $this->accessPm($profile['id']),
-                ]
+                'data'  => array_merge($this->sidebar($pagesCount, $profile), ['answers' => $answers]),
             ]
         );
     }
 
-    // Комментарии участника
+    // User comments
     public function comments()
     {
         $profile   = self::profile();
@@ -123,20 +106,25 @@ class ProfileController extends Controller
             'base',
             [
                 'meta'  => self::metadata('profile_comments', $profile),
-                'data'  => [
+                'data'  => array_merge($this->sidebar($pagesCount, $profile), ['comments' => $comments]),
+            ]
+        );  
+    }
+
+    public function sidebar($pagesCount, $profile)
+    {
+        return [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,
-                    'comments'      => $comments,
                     'profile'       => $profile,
+                    'delet_count'   => UserModel::contentCount($profile['id'], 'remote'),
                     'count'         => UserModel::contentCount($profile['id']),
                     'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
                     'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
                     'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
                     'button_pm'     => $this->accessPm($profile['id']),
                     'login'         => $profile['login'],
-                ]
-            ]
-        );
+         ];
     }
 
     public static function profile()

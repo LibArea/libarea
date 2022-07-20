@@ -2,11 +2,9 @@
   <?= insert('/content/user/profile/header', ['data' => $data]); ?>
   <div class="flex gap">
     <main>
-      <?= __('app.answers'); ?> <b><?= $data['profile']['login']; ?></b>
+      <div class="mb15"><?= __('app.answers'); ?> <b><?= $data['profile']['login']; ?></b></div>
       <?php if (!empty($data['answers'])) : ?>
-        <div class="box">
-          <?= insert('/content/answer/answer', ['data' => $data]); ?>
-        </div>
+        <?= insert('/content/answer/answer', ['data' => $data]); ?>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/answers'); ?>
       <?php else : ?>
         <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_answers'), 'icon' => 'info']); ?>

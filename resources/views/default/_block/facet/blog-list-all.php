@@ -1,7 +1,7 @@
 <?php foreach ($facets as $key => $facet) : ?>
   <div class="mb20 items-center flex flex-row">
-    <a title="<?= $facet['translation_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
-      <?= Html::image($facet['facet_img'], $facet['translation_title'], 'img-lg mr10', 'logo', 'max'); ?>
+    <a title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
+      <?= Html::image($facet['facet_img'], $facet['facet_title'], 'img-lg mr10', 'logo', 'max'); ?>
     </a>
     <div class="w-100">
       <a class="black text-xl" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
@@ -19,7 +19,7 @@
         <svg class="icons icon-small sky"><use xlink:href="/assets/svg/icons.svg#mic"></use></svg>
       <?php endif; ?>
       <div class="mr10 mt5 gray">
-        <?= Content::fragment(Content::text($facet['translation_short_description'], 'line'), 68); ?>
+        <?= Content::fragment(Content::text($facet['facet_short_description'], 'line'), 68); ?>
         <span class="flex right gray-600 text-sm">
           <svg class="icons"><use xlink:href="/assets/svg/icons.svg#post"></use></svg>
           <?= $facet['facet_count']; ?>

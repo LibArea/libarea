@@ -72,7 +72,7 @@ class Content
     // Getting a piece of text
     public static function fragment($str, $lenght = 100, $end = '...', $charset = 'UTF-8', $token = '~')
     {
-        $str = strip_tags($str);
+       // $str = strip_tags($str);
         if (mb_strlen($str, $charset) >= $lenght) {
             $wrap = wordwrap($str, $lenght, $token);
             $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, $token, 0, $charset), $charset);

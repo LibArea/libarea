@@ -360,6 +360,19 @@ iframe {
   height:0
 }
 
+
+.delet-count {
+  z-index: 33;
+  right: 10px;
+  font-size: 0.8em;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1px 6px;
+  position: absolute;
+  display: flex;
+  gap: 1rem;
+}
+
 /* Сделаем внешние ссылки с иконкой */
 .ind-first-p a[rel~="nofollow"]::before,
 .post-body a[rel~="nofollow"]::before {

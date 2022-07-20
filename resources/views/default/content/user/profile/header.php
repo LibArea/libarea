@@ -5,13 +5,20 @@ if ($profile['cover_art'] != 'cover_art.jpeg') :
   $css = 'w160 mt90 mb-mt5 mb-w80 profile-ava';
 endif;
 ?>
-<style nonce="<?= $_SERVER['nonce']; ?>">
+<style>
   .bg-profile {
     background: <?= $profile['color']; ?>;
     min-height: 90px;
   }
 </style>
-<div class="br-gray bg-white mb15">
+
+ 
+
+<div class="br-gray bg-white mb15 relative">
+  <?php if (UserData::checkAdmin()) : ?>
+    <?= insert('/_block/number-removed-content', ['data' => $data['delet_count']]); ?>
+  <?php endif; ?>
+
   <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
 
   <?php if ($profile['cover_art'] != 'cover_art.jpeg') : ?>

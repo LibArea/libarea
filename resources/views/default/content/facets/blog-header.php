@@ -1,4 +1,4 @@
-<style nonce="<?= $_SERVER['nonce']; ?>">
+<style>
   .bg-blog {
     background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= Html::coverUrl($data['facet']['facet_cover_art'], 'blog'); ?>);
     background-position: 50% 50%;

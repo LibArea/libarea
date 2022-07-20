@@ -19,10 +19,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
             case 'web.feed':
                 $string     = "WHERE post_url_domain = :qa AND post_draft = 0";
                 break;
-            case 'admin.posts.all':
-                $string     = "WHERE post_user_id != :qa AND post_is_deleted = 0 AND post_draft = 0 AND post_type = 'post'";
-                break;
-            case 'admin.posts.ban':
+            case 'admin.posts.user.deleted':
                 $string     = "WHERE post_is_deleted = :qa AND post_draft = 0 AND post_type = 'post'";
                 break;
             case 'profile.posts':
@@ -81,24 +78,21 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                     fav.tid, fav.user_id, fav.action_type
                     
                         FROM posts
+                        
                         LEFT JOIN
                         (
                             SELECT 
                                 relation_post_id,
                                 GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                                 FROM facets      
-                                LEFT JOIN facets_posts_relation 
-                                    on facet_id = relation_facet_id 
+                                LEFT JOIN facets_posts_relation on facet_id = relation_facet_id 
                                     
                                 GROUP BY relation_post_id  
-                        ) AS rel
-                            ON rel.relation_post_id = post_id 
+                        ) AS rel ON rel.relation_post_id = post_id 
                             
                             INNER JOIN users u ON u.id = post_user_id
-                            LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = " . $user['id'] . " 
-                                AND fav.action_type = 'post'
-                            LEFT JOIN votes_post ON votes_post_item_id = post_id 
-                                AND votes_post_user_id = " . $user['id'] . "
+                            LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = " . $user['id'] . " AND fav.action_type = 'post'
+                            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = " . $user['id'] . "
                                         
                         $string 
                         $display 
