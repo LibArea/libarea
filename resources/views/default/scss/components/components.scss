@@ -167,7 +167,10 @@ blockquote {
 
 blockquote p { margin: 2px; }
 
-.cut-post img { max-width: 780px; }
+.cut-post img {
+  max-width: 780px;
+  width: 100%;
+}
 
 hr {
   border: none;

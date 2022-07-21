@@ -1,11 +1,11 @@
 <div class="relative items-center flex mb15">
   <img class="w-100" src="<?= Html::coverUrl($data['facet']['facet_cover_art'], 'blog'); ?>">
   <div class="blog-flex-telo">
-    <div class="blog-flex-box">
+    <div class="blog-flex-box mb-p10">
       <div class="flex">
-        <?= Html::image($data['facet']['facet_img'], $data['facet']['facet_title'], 'img-xl mr15', 'logo', 'max'); ?>
+        <?= Html::image($data['facet']['facet_img'], $data['facet']['facet_title'], 'img-xl mr15 mb-none', 'logo', 'max'); ?>
         <div>
-          <h1 class="m0 text-2xl">
+          <h1 class="m0 text-2xl mb-text-xl">
             <?= $data['facet']['facet_seo_title']; ?>
           </h1>
           <div class="text-sm mb-none mt15"><?= $data['facet']['facet_short_description']; ?></div>
