@@ -61,9 +61,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT 
                   facet_id,
                   count(facet_id) as counts, 
-                  facet_title, 
-                  facet_slug, 
-                  facet_type 
+                  MAX(facet_title) as facet_title, 
+                  MAX(facet_slug) as facet_slug
                       FROM facets_relation 
                           LEFT JOIN facets on facet_id = facet_chaid_id 
                           LEFT JOIN facets_items_relation on facet_chaid_id = relation_facet_id 

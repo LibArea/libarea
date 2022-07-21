@@ -119,7 +119,8 @@ class Parser
         $geshi = new GeSHi($content, 'php');
         // нумер.
         // $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
-
+        $geshi->enable_classes();
+        // $geshi->set_overall_class("code php");
         return '<pre class="language-css">' . $geshi->parse_code() . '</pre>';
     }
 }

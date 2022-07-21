@@ -1,6 +1,6 @@
 <?php
 /**
- * @author  Foma Tuturov <fomiash@yandex.ru>
+ * @author  Evgeny Konchik <budo@narod.ru>
  */
 
 // All calls are sent to this file.
@@ -13,8 +13,8 @@ define('HLEB_PUBLIC_DIR', __DIR__);
 // Общие заголовки.
 // Content Security Policy
 $_SERVER['nonce'] = bin2hex(random_bytes((int)'12'));
-header("Content-Security-Policy: default-src 'self' https://www.google.com https://www.youtube.com https://rutube.ru https://rutube.ru/api https://mc.yandex.ru; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.google.com https://www.gstatic.com https://mc.yandex.ru https://yastatic.net 'nonce-".$_SERVER['nonce']."'; img-src 'self' data: blob:;");
-header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload;");
+header("Content-Security-Policy: default-src 'self' https://www.google.com https://www.youtube.com https://rutube.ru https://rutube.ru/api https://mc.yandex.ru; style-src 'self' 'nonce-".$_SERVER['nonce']."'; script-src 'self' https://www.google.com https://www.gstatic.com https://mc.yandex.ru https://yastatic.net 'nonce-".$_SERVER['nonce']."'; img-src 'self' data: blob:;"); //  'unsafe-inline'
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload;"); 
 header("Referrer-Policy: no-referrer-when-downgrade");
 header("X-XSS-Protection: 1; mode=block");
 header("X-Content-Type-Options: nosniff");

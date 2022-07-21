@@ -39,41 +39,47 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 post_translation,
                 post_draft,
                 post_date,
+                post_published,
+                post_user_id,
                 post_votes,
+                post_hits_count,
                 post_answers_count,
                 post_comments_count,
                 post_content,
                 post_content_img,
                 post_thumb_img,
-                post_closed,
-                post_is_deleted,
-                post_user_id,
                 post_merged_id,
+                post_closed,
                 post_tl,
                 post_lo,
                 post_top,
                 post_url_domain,
+                post_is_deleted,
                 rel.*,
                 votes_post_item_id, votes_post_user_id,
                 u.id, u.login, u.avatar, u.created_at, 
-                fav.tid
+                fav.tid, fav.user_id, fav.action_type 
   
-            FROM posts
+            FROM facets_posts_relation 
+            LEFT JOIN posts ON relation_post_id = post_id
             
             LEFT JOIN (
                 SELECT 
-                    relation_facet_id,
                     relation_post_id,
                     GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                     FROM facets
-                    LEFT JOIN facets_posts_relation ON facet_id = relation_facet_id
-                        GROUP BY relation_post_id, relation_facet_id 
-            ) AS rel ON rel.relation_post_id= post_id
-            
+                    LEFT JOIN facets_posts_relation 
+                        on facet_id = relation_facet_id
+                        GROUP BY relation_post_id
+            ) AS rel
+                 ON rel.relation_post_id= post_id
                 LEFT JOIN users u ON u.id = post_user_id
-                LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = :uid AND fav.action_type = 'post'  
-                LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
-                    WHERE post_type = 'post' AND post_draft = 0 $string $display $sort LIMIT :start, :limit";
+                LEFT JOIN favorites fav ON fav.tid = post_id 
+                    AND fav.user_id = :uid AND fav.action_type = 'post'  
+                LEFT JOIN votes_post 
+                    ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
+
+                WHERE post_type != 'page' AND post_draft = 0 $string $display $sort LIMIT :start, :limit";
 
         return DB::run($sql, ['uid' => $user['id'], 'uid2' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }

@@ -360,7 +360,6 @@ iframe {
   height:0
 }
 
-
 .delet-count {
   z-index: 33;
   right: 10px;
@@ -371,6 +370,20 @@ iframe {
   position: absolute;
   display: flex;
   gap: 1rem;
+}
+
+.blog-flex-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.blog-flex-telo {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 
 /* Сделаем внешние ссылки с иконкой */

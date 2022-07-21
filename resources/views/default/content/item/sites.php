@@ -10,9 +10,10 @@
           </svg></sup>
       </a>
       <a class="text-sm ml15" href="<?= url('admin.category.structure'); ?>">
-        <sup class="gray-600">fs</sup>
+        <sup class="gray-600"><svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#tool"></use>
+          </svg></sup>
       </a>
-      <small class="text-sm gray-600"><sup><?= $data['category']['facet_type']; ?></sup></small>
     <?php endif; ?>
   </h1>
 </div>
@@ -30,7 +31,6 @@
                 <use xlink:href="/assets/svg/icons.svg#edit"></use>
               </svg></i>
           </a>
-          <small class="text-sm gray-600"><sup><?= $lt['facet_type']; ?></sup></small>
         <?php endif; ?>
       </div>
     <?php endforeach; ?>

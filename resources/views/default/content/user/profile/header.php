@@ -5,14 +5,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') :
   $css = 'w160 mt90 mb-mt5 mb-w80 profile-ava';
 endif;
 ?>
-<style>
-  .bg-profile {
-    background: <?= $profile['color']; ?>;
-    min-height: 90px;
-  }
-</style>
-
- 
+<style nonce="<?= $_SERVER['nonce']; ?>">.bg-profile {background: <?= $profile['color']; ?>;min-height: 90px;}</style>
 
 <div class="br-gray bg-white mb15 relative">
   <?php if (UserData::checkAdmin()) : ?>
@@ -30,7 +23,6 @@ endif;
   <?php endif; ?>
     <div class="profile-header-footer mt15">
        
-
       <?php if (UserData::checkActiveUser()) : ?>
         <div class="right m15">
           <?php if ($profile['id'] == UserData::getUserId()) : ?>

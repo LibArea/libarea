@@ -72,5 +72,12 @@
 <?php endforeach; ?>
 </div>
 
+<pre><code>&lt;svg class="icons"&gt;
+   &lt;use xlink:href="/assets/svg/icons.svg#ID"&gt;&lt;/use&gt;
+&lt;/svg&gt;</code></pre>
+  
+<li><a rel="nofollow noopener" href="https://feathericons.com/">https://feathericons.com/</a></li>
+<li><a rel="nofollow noopener" href="https://tabler-icons.io/">https://tabler-icons.io/</a></li>
+
 </main>
 <?= includeTemplate('/view/default/footer'); ?>

@@ -1,7 +1,7 @@
 <?php
 $css = '';
 $type =  $data['type'] ?? '';
-$arr = ['register', 'login', 'recover', 'post'];
+$arr = ['register', 'login', 'recover', 'postNO'];
 if (in_array($type, $arr)) {
   $css = ' none';
 }
