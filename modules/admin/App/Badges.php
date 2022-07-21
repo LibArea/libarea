@@ -71,9 +71,9 @@ class Badges extends Controller
         $icon          = $_POST['badge_icon']; // для Markdown
 
         $redirect = url('admin.badges');
-        Validation::Length($title, 'msg.title', '4', '25', $redirect);
-        Validation::Length($description, 'msg.description', '12', '250', $redirect);
-        Validation::Length($icon, 'msg.icon', '12', '250', $redirect);
+        Validation::Length($title, '4', '25', 'msg.title', $redirect);
+        Validation::Length($description, '12', '250', 'msg.description', $redirect);
+        Validation::Length($icon, '12', '250', 'msg.icon', $redirect);
 
         BadgeModel::add(
             [
