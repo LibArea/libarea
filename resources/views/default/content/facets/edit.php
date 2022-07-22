@@ -42,7 +42,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
         <div class="flex">
           <?php if ($fs['facet_cover_art']) : ?>
             <div class="mr20">
-              <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="w160 h94 br-gray">
+              <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="img-2xl br-gray">
               <input type="hidden" name="cover" value="<?= $fs['facet_cover_art']; ?>">
             </div>
           <?php endif; ?>

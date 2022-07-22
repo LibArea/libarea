@@ -322,16 +322,16 @@ iframe {
   text-align: center;
 }
 
-.profile-header-footer {
-  z-index: 10;
-  width: 100%;
-}
-
 .profile-ava {
   position: absolute;
   z-index: 15;
   margin-left: 15px;
   border-radius: 3px;
+}
+
+.blog-cover-img {
+  width: 100%;
+  height: 200px;
 }
 
 .voters.active .score { color: var(--brown); }
@@ -373,20 +373,6 @@ iframe {
   position: absolute;
   display: flex;
   gap: 1rem;
-}
-
-.blog-flex-box {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  background-color: rgba(0, 0, 0, 0.3);
-  color: #fff;
-}
-
-.blog-flex-telo {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
 }
 
 /* Сделаем внешние ссылки с иконкой */

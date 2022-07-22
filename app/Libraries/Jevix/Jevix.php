@@ -9,10 +9,8 @@
  * https://github.com/livestreet/livestreet-framework/blob/master/libs/vendor/Jevix/jevix.class.php
  * https://raw.github.com/bezumkin/modx-jevix/master/core/components/jevix/model/jevix/jevix.core.php
  *
- * @author ur001 <ur001ur001@gmail.com>, http://ur001.habrahabr.ru
- * @author https://github.com/altocms/Jevix
- * @author Agel_Nash <agel-nash@mail.ru>
- *
+ * https://github.com/ur001/Jevix
+ * MIT license
  * @version 1.2.0
  */
 class Jevix

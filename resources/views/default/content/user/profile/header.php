@@ -1,15 +1,15 @@
 <?php
 $profile = $data['profile'];
-$css = 'w94 mt15 mb-w100 profile-ava';
+$css = 'img-xl mt15 mb-w100 profile-ava';
 if ($profile['cover_art'] != 'cover_art.jpeg') :
-  $css = 'w160 mt90 mb-mt5 mb-w80 profile-ava';
+  $css = 'img-2xl mt90 mb-mt5 mb-img-2xl profile-ava';
 endif;
 ?>
 <style nonce="<?= $_SERVER['nonce']; ?>">.bg-profile {background: <?= $profile['color']; ?>;min-height: 90px;}</style>
 
 <div class="br-gray bg-white mb15 relative">
   <?php if (UserData::checkAdmin()) : ?>
-    <?= insert('/_block/number-removed-content', ['data' => $data['delet_count']]); ?>
+    <?= insert('/_block/number-removed-content', ['count' => $data['delet_count']]); ?>
   <?php endif; ?>
 
   <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
@@ -57,28 +57,28 @@ endif;
 
         <div class="m10 mb-none right">
           <div class="flex justify-center">
-            <?php if ($data['count']['count_posts'] > 0) : ?>
+            <?php if ($data['counts']['count_posts'] > 0) : ?>
               <div class="ml15 mr15 center box-number">
                 <a class="focus-user sky" href="<?= url('profile.posts', ['login' => $profile['login']]); ?>">
-                  <?= $data['count']['count_posts']; ?>
+                  <?= $data['counts']['count_posts']; ?>
                 </a>
                 <div class="uppercase mt5 text-sm gray-600"><?= __('app.posts'); ?></div>
               </div>
             <?php endif; ?>
 
-            <?php if ($data['count']['count_answers'] > 0) : ?>
+            <?php if ($data['counts']['count_answers'] > 0) : ?>
               <div class="ml15 mr15 center box-number">
                 <a class="focus-user sky" href="<?= url('profile.answers', ['login' => $profile['login']]); ?>">
-                  <?= $data['count']['count_answers']; ?>
+                  <?= $data['counts']['count_answers']; ?>
                 </a>
                 <div class="uppercase mt5 text-sm gray-600"><?= __('app.answers'); ?></div>
               </div>
             <?php endif; ?>
 
-            <?php if ($data['count']['count_comments'] > 0) : ?>
+            <?php if ($data['counts']['count_comments'] > 0) : ?>
               <div class="ml15 mr15 center box-number">
                 <a class="focus-user sky" href="<?= url('profile.comments', ['login' => $profile['login']]); ?>">
-                  <?= $data['count']['count_comments']; ?>
+                  <?= $data['counts']['count_comments']; ?>
                 </a>
                 <div class="uppercase mt5 text-sm gray-600"><?= __('app.comments'); ?></div>
               </div>

@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
-use App\Models\{FacetModel, PostModel, FeedModel, AnswerModel, CommentModel};
+use App\Models\{FacetModel, FeedModel, AnswerModel, CommentModel};
 use Meta, UserData;
 
 class ProfileController extends Controller
@@ -25,9 +25,8 @@ class ProfileController extends Controller
         $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount($this->user, 'profile.posts', $profile['id']);
 
-
-        $count = UserModel::contentCount($profile['id']);
-        if (($count['count_answers'] + $count['count_comments']) < 3) {
+        $amount = UserModel::contentCount($profile['id'], 'active');
+        if (($amount['count_answers'] + $amount['count_comments']) < 3) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
@@ -36,21 +35,13 @@ class ProfileController extends Controller
             'base',
             [
                 'meta'  => self::metadata('profile_posts', $profile),
-                'data'  => [
-                    'pagesCount'        => ceil($pagesCount / $this->limit),
-                    'pNum'              => $this->pageNumber,
-                    'created_at'        => $profile['created_at'],
-                    'count'             => $count,
-                    'delet_count'       => UserModel::contentCount($profile['id'], 'remote'),
-                    'topics'            => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
-                    'blogs'             => FacetModel::getOwnerFacet($profile['id'], 'blog'),
-                    'badges'            => BadgeModel::getBadgeUserAll($profile['id']),
-                    'profile'           => $profile,
-                    'posts'             => $posts,
-                    'participation'     => FacetModel::participation($profile['id']),
-                    'my_post'           => PostModel::getPost($profile['my_post'], 'id', $this->user),
-                    'button_pm'         => $this->accessPm($profile['id']),
-                ]
+                'data'  => array_merge(
+                    $this->sidebar($pagesCount, $profile),
+                    [
+                        'posts' => $posts,
+                        'participation' => FacetModel::participation($profile['id'])
+                    ]
+                ),
             ]
         );
     }
@@ -108,23 +99,22 @@ class ProfileController extends Controller
                 'meta'  => self::metadata('profile_comments', $profile),
                 'data'  => array_merge($this->sidebar($pagesCount, $profile), ['comments' => $comments]),
             ]
-        );  
+        );
     }
 
     public function sidebar($pagesCount, $profile)
     {
         return [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $this->pageNumber,
-                    'profile'       => $profile,
-                    'delet_count'   => UserModel::contentCount($profile['id'], 'remote'),
-                    'count'         => UserModel::contentCount($profile['id']),
-                    'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
-                    'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
-                    'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
-                    'button_pm'     => $this->accessPm($profile['id']),
-                    'login'         => $profile['login'],
-         ];
+            'pagesCount'    => ceil($pagesCount / $this->limit),
+            'pNum'          => $this->pageNumber,
+            'profile'       => $profile,
+            'delet_count'   => UserModel::contentCount($profile['id'], 'remote'),
+            'counts'        => UserModel::contentCount($profile['id'], 'active'),
+            'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
+            'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
+            'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
+            'button_pm'     => $this->accessPm($profile['id']),
+        ];
     }
 
     public static function profile()

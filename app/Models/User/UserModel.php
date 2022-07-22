@@ -221,27 +221,27 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     // Количество контента участника
     public static function contentCount($user_id, $type = 0)
     {
-        $type = $type == 'remote' ? 1: 0;
+        $condition = $type == 'remote' ? 1: 0;
         
         $sql = "SELECT 
                     (SELECT COUNT(post_id) 
                         FROM posts 
-                        WHERE post_user_id = $user_id and post_draft = 0 and post_is_deleted = $type) 
+                        WHERE post_user_id = $user_id and post_draft = 0 and post_is_deleted = $condition) 
                             AS count_posts,
                   
                     (SELECT COUNT(answer_id) 
                         FROM answers 
-                        WHERE answer_user_id = $user_id and answer_is_deleted = $type) 
+                        WHERE answer_user_id = $user_id and answer_is_deleted = $condition) 
                             AS count_answers,
                   
                     (SELECT COUNT(comment_id) 
                         FROM comments 
-                        WHERE comment_user_id = $user_id and comment_is_deleted = $type) 
+                        WHERE comment_user_id = $user_id and comment_is_deleted = $condition) 
                             AS count_comments,
                             
                     (SELECT COUNT(item_id) 
                         FROM items 
-                        WHERE item_user_id = $user_id and item_is_deleted = $type) 
+                        WHERE item_user_id = $user_id and item_is_deleted = $condition) 
                             AS count_items";
 
         return DB::run($sql)->fetch();

@@ -25,6 +25,14 @@ if ($blog['facet_is_deleted'] == 0) : ?>
             </div>
           </div>
 
+          <?php if ($data['info']) : ?>
+            <div class="sticky top-sm">
+              <div class="box bg-lightgray content-body">
+                <?= $data['info']; ?>
+              </div>
+            </div>
+          <?php endif; ?>
+
           <?php if ($data['focus_users']) : ?>
             <div class="box bg-lightgray">
               <h3 class="uppercase-box"><?= __('app.reads'); ?>
@@ -43,13 +51,6 @@ if ($blog['facet_is_deleted'] == 0) : ?>
             </div>
           <?php endif; ?>
 
-          <?php if ($data['info']) : ?>
-            <div class="sticky top-sm">
-              <div class="box bg-lightgray content-body">
-                <?= $data['info']; ?>
-              </div>
-            </div>
-          <?php endif; ?>
         <?php endif; ?>
       </aside>
     </div>

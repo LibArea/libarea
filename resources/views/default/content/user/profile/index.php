@@ -2,7 +2,6 @@
   <?= insert('/content/user/profile/header', ['data' => $data]); ?>
   <div class="flex gap mb-block">
     <main>
-
       <?php if ($data['profile']['my_post'] != 0) : ?>
         <div class="box bg-violet">
           <h3 class="uppercase-box"><?= __('app.selected_post'); ?>

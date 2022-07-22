@@ -4,7 +4,7 @@ namespace App\Controllers\User;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Models\User\{UserModel, BadgeModel};
+use App\Models\User\UserModel;
 use App\Models\{PostModel, FolderModel};
 use Meta;
 

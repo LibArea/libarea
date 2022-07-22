@@ -34,6 +34,11 @@
   height: 94px;
 }
 
+.img-2xl {
+  width: 160px;
+  height: 160px;
+}
+
 .trigger img.img-base:hover { opacity: 0.7; }
 
 .medium-zoom-overlay {position:fixed;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .3s;will-change:opacity}
