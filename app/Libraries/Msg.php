@@ -4,11 +4,7 @@ class Msg
 {
     public static function get()
     {
-        if (isset($_SESSION['msg'])) {
-            $msg = $_SESSION['msg'];
-        } else {
-            $msg = false;
-        }
+        $msg = isset($_SESSION['msg']) ? $_SESSION['msg'] : false;
 
         unset($_SESSION['msg']);
 

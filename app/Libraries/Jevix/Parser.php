@@ -9,11 +9,23 @@ class Parser
         $jevix = new Jevix();
 
         if ($type  == 'line') {
+
+            $content = str_replace(["\r\n", "\r", "\n"], '', $content);
+            
+            // Получим html с минимальным парсингом (line = без экранирования)
             $content = $Parsedown->line($content);
-            $jevix->cfgAllowTags(['p', 'del', 'em', 'strong', 'sup']);
-            $jevix->cfgSetTagCutWithContent(['script', 'style', 'details', 'style', 'iframe', 'code', 'a', 'table']);
-            $item = [];
-            return $jevix->parse($content, $item);
+            
+            // Разрешим теги
+            $jevix->cfgAllowTags(['p','img']);
+            // Теги, которые необходимо вырезать из текста вместе с контентом.
+            $jevix->cfgSetTagCutWithContent(['script', 'style', 'details', 'style', 'iframe', 'code', 'a', 'img','table']);
+
+            // Ин. Jevix с условиями выше
+            $item = []; 
+            $text = $jevix->parse($content, $item);
+            
+            // Откорректируем конечный результат
+            return str_replace(['/&gt;'], '', $text);
         }
 
         $content = $Parsedown->text($content);
@@ -37,7 +49,7 @@ class Parser
         $jevix->cfgSetTagPreformatted(['pre', 'code']);
 
         // Теги, которые необходимо вырезать из текста вместе с контентом.
-        $jevix->cfgSetTagCutWithContent(['script', 'style', 'br']);
+        $jevix->cfgSetTagCutWithContent(['script', 'style']);
 
         $jevix->cfgSetTagIsEmpty(['a', 'iframe']);
 
@@ -59,7 +71,7 @@ class Parser
         // Автозамена
         $jevix->cfgSetAutoReplace(['+/-', '(c)', '(с)', '(r)', '(C)', '(С)', '(R)'], ['±', '©', '©', '®', '©', '©', '®']);
 
-        // Режим замены переноса строк на тег 
+        // Режим замены переноса строк на тег (пусто)
         $jevix->cfgSetAutoBrMode('');
 
         // Callback

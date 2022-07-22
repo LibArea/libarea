@@ -17,7 +17,7 @@ class Content
     {
         $pathEmoji =  '/assets/images/emoji/';
 
-        $smiles = array(':)', ':-)');
+        $smiles = [':)', ':-)'];
         $content = str_replace($smiles, '<img class="emoji" src="' . $pathEmoji . 'smile.png">', $content);
 
         if (preg_match('/\:(\w+)\:/mUs', $content, $matches)) {
@@ -72,14 +72,14 @@ class Content
     // Getting a piece of text
     public static function fragment($str, $lenght = 100, $end = '...', $charset = 'UTF-8', $token = '~')
     {
-       // $str = strip_tags($str);
+        $str = str_replace('&gt;', '', strip_tags($str));
         if (mb_strlen($str, $charset) >= $lenght) {
             $wrap = wordwrap($str, $lenght, $token);
             $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, $token, 0, $charset), $charset);
             return $str_cut .= $end;
-        } else {
-            return $str;
         }
+        
+        return $str;
     }
 
     public static function parseUser($content, $with_user = false, $to_uid = false)
