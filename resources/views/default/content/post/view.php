@@ -167,10 +167,8 @@
         <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
 
         <?php if (!$topic['signed_facet_id'] && UserData::getUserId()) : ?>
-          <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm sky center mt5 mr5">
-            <svg class="icons">
-              <use xlink:href="/assets/svg/icons.svg#plus"></use>
-            </svg> <?= __('app.read'); ?>
+          <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center mt5 mr5">
+            <?= __('app.read'); ?>
           </div>
         <?php endif; ?>
 

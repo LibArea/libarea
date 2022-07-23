@@ -27,9 +27,11 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     <?= insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
 
     <div class="file-upload mb10 mt15" id="file-drag">
+      <div class="flex">
       <?= Html::image($fs['facet_img'], $fs['facet_title'], 'img-xl', 'logo', 'max'); ?>
-      <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
-      <div id="start" class="mt15">
+      <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl br-gray">
+      </div>
+      <div id="start" class="mt10">
         <input class="text-xs" id="file-upload" type="file" name="images" accept="image/*" />
         <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
       </div>
@@ -39,15 +41,15 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     </div>
     <?php if ($fs['facet_type'] == 'blog') : ?>
       <div class="file-upload mb20" id="file-drag">
-        <div class="flex">
+        <div class="flex3">
           <?php if ($fs['facet_cover_art']) : ?>
             <div class="mr20">
-              <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="img-2xl br-gray">
+              <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="w-160 br-gray">
               <input type="hidden" name="cover" value="<?= $fs['facet_cover_art']; ?>">
             </div>
           <?php endif; ?>
-          <div id="start">
-            <input id="file-upload" type="file" name="cover" accept="image/*" />
+          <div class="mt10" id="start">
+            <input class="text-xs" id="file-upload" type="file" name="cover" accept="image/*" />
             <div id="notimage" class="none">Please select an image</div>
           </div>
         </div>
@@ -59,7 +61,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     <div class="mb20">
       <?= Html::sumbit(__('app.download')); ?>
     </div>
-
+    <hr>
     <fieldset>
       <label for="facet_title"><?= __('app.title'); ?><sup class="red">*</sup></label>
       <input minlength="3" maxlength="64" type="text" name="facet_title" value="<?= $fs['facet_title']; ?>">

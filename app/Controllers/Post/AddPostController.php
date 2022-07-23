@@ -68,16 +68,16 @@ class AddPostController extends Controller
         $post_title = str_replace("&nbsp;", '', $fields['post_title']);
         Validation::length($post_title, 6, 250, 'title', $redirect);
         Validation::length($content, 6, 25000, 'content', $redirect);
- 
+
         if ($post_url) {
             $site = $this->addUrl($post_url, $post_title);
         }
 
         // Обложка поста
-        if (!empty($_FILES['images']['name'])) {  
+        if (!empty($_FILES['images']['name'])) {
             $post_img = UploadImage::coverPost($_FILES['images'], 0, $redirect, $this->user['id']);
         }
- 
+
         $slug = self::slug($post_title);
 
         $post_related = $this->relatedPost();
@@ -123,8 +123,8 @@ class AddPostController extends Controller
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $redirect);
         }
 
-        if (config('integration..discord')) {
-            if ($post_tl == 0 && $post_draft == 0) {
+        if (config('integration.discord')) {
+            if ($fields['content_tl'] == 0 && $fields['post_draft'] == 0) {
                 Discord::AddWebhook($content, $post_title, $redirect);
             }
         }

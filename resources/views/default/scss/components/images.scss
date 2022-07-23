@@ -41,6 +41,18 @@
 
 .trigger img.img-base:hover { opacity: 0.7; }
 
+.profile-ava {
+  position: absolute;
+  z-index: 15;
+  margin-left: 15px;
+  border-radius: 3px;
+}
+
+.blog-cover-img {
+  width: 100%;
+  height: 200px;
+}
+
 .medium-zoom-overlay {position:fixed;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .3s;will-change:opacity}
 .medium-zoom--opened .medium-zoom-overlay{cursor:pointer;cursor:zoom-out;opacity:1}
 .medium-zoom-image{cursor:pointer;cursor:zoom-in;transition:transform .3s cubic-bezier(.2,0,.2,1)!important}

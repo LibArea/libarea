@@ -5,7 +5,7 @@ class Discord
     public static function addWebhook($text, $title, $url)
     {
         $text = strip_tags($text, '<p>');
-        $text = preg_replace(array('/(<p>)/', '(<\/p>)'), array('', '\n'), $text);
+        $text = preg_replace(['/(<p>)/', '(<\/p>)'], ['', '\n'], $text);
 
         // Проверяем имя бота и YOUR_WEBHOOK_URL
         if (!$webhookurl = config('integration.discord_webhook_url')) {

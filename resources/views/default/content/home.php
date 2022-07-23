@@ -78,6 +78,11 @@
                 <?= Html::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
                 <?= $recomm['facet_title']; ?>
               </a>
+              <?php if (UserData::getUserId()) : ?>
+                <div data-id="<?= $recomm['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center mt5 mr5">
+                  <?= __('app.read'); ?>
+                </div>
+              <?php endif; ?>
             </li>
           <?php endforeach; ?>
         </ul>
