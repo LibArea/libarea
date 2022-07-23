@@ -120,9 +120,20 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $data)->fetch();
     }
 
+    public static function postFacets($post_id)
+    {
+        $sql = "SELECT relation_facet_id facet_id FROM posts 
+                    LEFT JOIN facets_posts_relation on post_id = relation_post_id
+                        WHERE post_id = :post_id";
+                            
+       return DB::run($sql, ['post_id' => $post_id])->fetch();
+    }
+
     // Рекомендованные посты
+    // Это должен быть не свой пост, у которого TL не выше участника, пост не черновик и не удален и т.д.
     public static function postsSimilar($post_id, $user, $limit)
     {
+        $fs = self::postFacets($post_id);
         $tl = $user['trust_level'] == null ? 0 : $user['trust_level'];
 
         $sql = "SELECT 
@@ -130,21 +141,19 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_title,
                     post_slug,
                     post_feature,
-                    post_tl,
                     post_answers_count,
-                    post_type,
-                    post_draft,
-                    post_user_id,
-                    post_is_deleted
+                    post_type
                         FROM posts
-                            WHERE post_id < :post_id 
+                        LEFT JOIN facets_posts_relation on post_id = relation_post_id
+                            WHERE post_id != :post_id 
                                 AND post_is_deleted = 0
                                 AND post_draft = 0
                                 AND post_tl <= :tl 
                                 AND post_user_id != :id
-                                ORDER BY post_id DESC LIMIT $limit";
+                                AND relation_facet_id = :facet_id
+                                    ORDER BY post_id DESC LIMIT :limit";
 
-        return DB::run($sql, ['post_id' => $post_id, 'id' => $user['id'], 'tl' => $tl])->fetchall();
+        return DB::run($sql, ['post_id' => $post_id, 'id' => $user['id'], 'tl' => $tl, 'limit' => $limit, 'facet_id' => $fs['facet_id']])->fetchAll();
     }
 
     // Пересчитываем количество
