@@ -28,9 +28,9 @@ class TopicFacetController extends Controller
         $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
 
-        $url    = url('topic', ['slug' => $facet['facet_slug']]);
         $title  = $facet['facet_seo_title'] . ' — ' .  __('app.topic');
         $description   = $facet['facet_description'];
+
         if ($sheet == 'recommend') {
             $url    =  url('recommend', ['slug' => $facet['facet_slug']]);
             $title  = $facet['facet_seo_title'] . ' — ' .  __('app.rec_posts');
@@ -40,7 +40,7 @@ class TopicFacetController extends Controller
         $m = [
             'og'         => true,
             'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
-            'url'        => $url,
+            'url'        => url('topic', ['slug' => $facet['facet_slug']]),
         ];
 
         return $this->render(
@@ -48,20 +48,16 @@ class TopicFacetController extends Controller
             'base',
             [
                 'meta'  => Meta::get($title, $description, $m),
-                'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $this->pageNumber,
-                    'sheet'         => $sheet,
-                    'type'          => $type,
-                    'facet'         => $facet,
-                    'posts'         => $posts,
-                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
-                    'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
-                    'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
-                    'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
-                    'low_matching'  => FacetModel::getLowMatching($facet['facet_id']),
-                    'writers'       => FacetModel::getWriters($facet['facet_id'], 5),
-                ],
+                'data'  => array_merge(
+                    $this->sidebar($facet),
+                    [
+                        'pagesCount'    => ceil($pagesCount / $this->limit),
+                        'pNum'          => $this->pageNumber,
+                        'posts'         => $posts,
+                        'sheet'         => $sheet,
+                        'type'          => $type,
+                    ]
+                ),
                 'facet'   => ['facet_id' => $facet['facet_id'], 'facet_type' => $facet['facet_type'], 'facet_user_id' => $facet['facet_user_id']],
             ]
         );
@@ -75,8 +71,6 @@ class TopicFacetController extends Controller
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
         self::error404($facet);
 
-        $facet_related = $facet['facet_post_related'] ?? null;
-
         $m = [
             'og'         => true,
             'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
@@ -88,16 +82,13 @@ class TopicFacetController extends Controller
             'base',
             [
                 'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
-                'data'  => [
-                    'sheet'         => 'info',
-                    'type'          => 'info',
-                    'facet'         => $facet,
-                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
-                    'related_posts' => PostModel::postRelated($facet_related),
-                    'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
-                    'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
-                    'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
-                ]
+                'data'  => array_merge(
+                    $this->sidebar($facet),
+                    [
+                        'sheet' => 'info',
+                        'type'  => 'info',
+                    ]
+                ),
             ]
         );
     }
@@ -110,12 +101,10 @@ class TopicFacetController extends Controller
         $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
         self::error404($facet);
 
-        $facet_related = $facet['facet_post_related'] ?? null;
-
         $m = [
             'og'         => true,
             'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
-            'url'        => url('topic.info', ['slug' => $facet['facet_slug']]),
+            'url'        => url('topic.writers', ['slug' => $facet['facet_slug']]),
         ];
 
         return $this->render(
@@ -123,18 +112,28 @@ class TopicFacetController extends Controller
             'base',
             [
                 'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
-                'data'  => [
-                    'sheet'         => 'writers',
-                    'type'          => 'writers',
-                    'facet'         => $facet,
-                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
-                    'related_posts' => PostModel::postRelated($facet_related),
-                    'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
-                    'writers'       => FacetModel::getWriters($facet['facet_id'], 15),
-                    'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
-                    'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
-                ]
+
+                'data'  => array_merge(
+                    $this->sidebar($facet),
+                    [
+                        'sheet' => 'writers',
+                        'type'  => 'writers',
+                    ]
+                ),
             ]
         );
+    }
+
+    public function sidebar($facet)
+    {
+        return [
+            'facet'         => $facet,
+            'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
+            'related_posts' => PostModel::postRelated($facet['facet_post_related'] ?? null),
+            'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
+            'writers'       => FacetModel::getWriters($facet['facet_id'], 15),
+            'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
+            'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
+        ];
     }
 }

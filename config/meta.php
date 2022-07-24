@@ -13,13 +13,13 @@ return [
     
     // SEO
     'name'              => 'LibArea',
-    'title'             => 'LibArea — сообщество (темы, блоги по интересам)',
+    'title'             => 'LibArea — сообщество (скрипт мультиблога)',
     'img_path'          => '/assets/images/libarea.jpg',
     
     // For the main page - the banner title and text
     // Для главной - заголовок и текст баннера
     'banner_title'      => 'LibArea — сообщество',
-    'banner_desc'       => 'Темы по интересам. Беседы, вопросы и ответы, комментарии',
+    'banner_desc'       => 'Темы по интересам. Беседы, вопросы и ответы, комментарии. Скрипт мультиблога',
    
    // For site directory
    // Для каталог сайтов

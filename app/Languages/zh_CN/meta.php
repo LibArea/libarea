@@ -7,14 +7,21 @@
 */
 
 return [
-    'profile_posts_title'       => '{name} -成员资料',
-    'profile_posts_all_title'   => '{name} -帖子列表',
-    'profile_answers_title'     => '{name} -参与者回复',
-    'profile_comments_title'    => '{name} -参与者评论',
-    'profile_posts_desc'        => '{name} -成员资料页面。职位、奖项和联系方式。{information}',
-    'profile_posts_all_desc'    => '{name} -帖子列表，参与者的文章按时间顺序排列。网站上的所有出版物。',
-    'profile_answers_desc'      => '{name} -成员对主题和博客帖子的回复页面。{information}',
-    'profile_comments_desc'     => '{name} -参与者的评论按时间排序。{information}',
+
+     // Member profile
+     // Профиль участника
+    'profile_title'       => '{name} -参加者简介 ',
+    'profile_desc'        => '{name} -参加者的个人资料页。 职位，奖项和联系人。 {information}',
+    
+    'profile_posts_title'   => '{name} -职位一览表 ',
+    'profile_posts_all_desc'    => '{name} -帖子列表，参与者的文章按时间顺序排列。 网站上的所有出版物。',
+    
+    'profile_answers_title'     => '{name} -参加者的答案 ',
+    'profile_answers_desc'      => '{name} -参与者对主题和博客帖子的回复页面 {information}',
+    
+    'profile_comments_title'    => '{name} -参加者的意见 ',
+    'profile_comments_desc'     => '{name} -参加者的意见按时间顺序排列。 {information}',
+    // end
 
     'all_users'                 => '参与者名单',
     'all_users_info'            => '参加者名单，按Ta们在网站上的活动顺序排列',

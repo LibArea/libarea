@@ -77,8 +77,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     // Все комментарии
     public static function getCommentsAll($page, $limit, $user, $sheet)
     {
-        $sort = self::sorts($user, $sheet);
-        $tl = $user['trust_level'];
+        $sort = self::sorts($sheet);
         $start  = ($page - 1) * $limit;
 
         $sql = "SELECT
@@ -108,42 +107,33 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     avatar
                         FROM comments 
                             JOIN users ON id = comment_user_id
-                            JOIN posts ON comment_post_id = post_id AND post_tl <= $tl
+                            JOIN posts ON comment_post_id = post_id AND post_tl <= :tl
                             LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
                                 AND votes_comment_user_id = :uid
-                                $sort
-                                    ORDER BY comment_id DESC LIMIT :start, :limit";
+                                    WHERE $sort
+                                        ORDER BY comment_id DESC LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['uid' => $user['id'], 'start' => $start, 'limit' => $limit, 'tl' => $user['trust_level']])->fetchAll();
     }
 
     // Количество комментариев 
     public static function getCommentsAllCount($user, $sheet)
     {
-        $tl = $user['trust_level'];
-        $sort = self::sorts($user, $sheet);
+        $sort = self::sorts($sheet);
+
         $sql = "SELECT 
                     comment_id, 
                     comment_is_deleted 
                         FROM comments 
-                            JOIN posts ON comment_post_id = post_id AND post_tl <= $tl
-                                $sort";
+                            JOIN posts ON comment_post_id = post_id AND post_tl <= :tl
+                                WHERE $sort";
 
-        return DB::run($sql)->rowCount();
+        return DB::run($sql, ['tl' => $user['trust_level']])->rowCount();
     }
 
-    public static function sorts($user, $sheet)
-    {
-        switch ($sheet) {
-            case 'all':
-                $sort     = "WHERE comment_is_deleted = 0";
-                break;
-            case 'deleted':
-                $sort     = "WHERE comment_is_deleted = 1";
-                break;
-        }
-
-        return $sort;
+    public static function sorts($sheet)
+    { 
+        return $sheet == 'all' ? "comment_is_deleted = 0" : "comment_is_deleted = 1";
     }
 
     // Получаем комментарии к ответу
@@ -168,12 +158,12 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     avatar,
                     created_at
                         FROM comments 
-                        LEFT JOIN users  ON id = comment_user_id
-                        LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 
-                        AND votes_comment_user_id = :user_id
-                            WHERE comment_answer_id = " . $answer_id;
+                            LEFT JOIN users  ON id = comment_user_id
+                            LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 
+                            AND votes_comment_user_id = :user_id
+                                WHERE comment_answer_id = :answer_id";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id, 'uanswer_id' => $answer_id])->fetchAll();
     }
 
     // Страница комментариев участника
@@ -204,13 +194,13 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     login, 
                     avatar
                         FROM comments 
-                        LEFT JOIN users  ON id = comment_user_id
-                        LEFT JOIN posts  ON comment_post_id = post_id 
-                        LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id
-                        AND votes_comment_user_id = :id
-                            WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
-                                AND post_is_deleted = 0 AND post_tl = 0
-                                    ORDER BY comment_id DESC LIMIT :start, :limit";
+                            LEFT JOIN users  ON id = comment_user_id
+                            LEFT JOIN posts  ON comment_post_id = post_id 
+                            LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id
+                            AND votes_comment_user_id = :id
+                                WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
+                                    AND post_is_deleted = 0 AND post_tl = 0
+                                        ORDER BY comment_id DESC LIMIT :start, :limit";
 
         return DB::run($sql, ['user_id' => $user_id, 'id' => $id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }

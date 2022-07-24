@@ -93,7 +93,7 @@ class AddItemController extends Controller
 
         if (!empty($topics)) {
             $arr = [];
-            foreach ($topics as $ket => $row) {
+            foreach ($topics as $row) {
                 $arr[] = $row;
             }
             FacetModel::addItemFacets($arr, $item_last['item_id']);

@@ -34,7 +34,7 @@ class ProfileController extends Controller
             '/user/profile/index',
             'base',
             [
-                'meta'  => self::metadata('profile_posts', $profile),
+                'meta'  => self::metadata('profile', $profile),
                 'data'  => array_merge(
                     $this->sidebar($pagesCount, $profile),
                     [
@@ -58,7 +58,7 @@ class ProfileController extends Controller
             '/user/profile/post',
             'base',
             [
-                'meta'  => self::metadata('profile_posts_all', $profile),
+                'meta'  => self::metadata('profile_posts', $profile),
                 'data'  => array_merge($this->sidebar($pagesCount, $profile), ['posts' => $posts]),
             ]
         );
@@ -145,7 +145,7 @@ class ProfileController extends Controller
 
     public static function metadata($sheet, $user)
     {
-        if ($sheet == 'profile_posts') {
+        if ($sheet == 'profile') {
             $information = $user['about'];
         }
 

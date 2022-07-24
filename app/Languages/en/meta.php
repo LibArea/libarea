@@ -7,14 +7,21 @@
 */
 
 return [
-    'profile_posts_title'       => '{name} — member profile ',
-    'profile_posts_all_title'   => '{name} — post list ',
-    'profile_answers_title'     => '{name} — participant responses ',
-    'profile_comments_title'    => '{name} — participant\'s comments ',
-    'profile_posts_desc'        => '{name} — member profile page. Posts, awards and contacts. {information}',
+
+     // Member profile
+     // Профиль участника
+    'profile_title'       => '{name} — member profile ',
+    'profile_desc'        => '{name} — member profile page. Posts, awards and contacts. {information}',
+    
+    'profile_posts_title'   => '{name} — post list ',
     'profile_posts_all_desc'    => '{name} — list of posts, articles of the participant in chronological order. All publications on the site.',
+    
+    'profile_answers_title'     => '{name} — participant responses ',
     'profile_answers_desc'      => '{name} — member\'s replies page to posts in topics and blogs. {information}',
+    
+    'profile_comments_title'    => '{name} — participant\'s comments ',
     'profile_comments_desc'     => '{name} — participant\'s comments in chronological order. {information}',
+    // end
 
     'all_users'                 => 'List of participants',
     'all_users_info'            => 'List of participants in the order of their activity on the site',

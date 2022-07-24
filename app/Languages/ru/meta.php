@@ -7,14 +7,21 @@
 */
 
 return [
-    'profile_posts_title'       => '{name} — профиль участника ',
-    'profile_posts_all_title'   => '{name} — список постов ',
-    'profile_answers_title'     => '{name} — ответы участника ',
+
+     // Member profile
+     // Профиль участника
+    'profile_title' => '{name} — профиль участника ',
+    'profile_desc'  => '{name} — страница профиля участника. Посты, награды и контакты. {information}',
+    
+    'profile_posts_title'   => '{name} — список постов ',
+    'profile_posts_desc'    => '{name} — список постов, статей участника в хронологическом порядке. Все публикации на сайте.', 
+    
+    'profile_answers_title' => '{name} — ответы участника ',
+    'profile_answers_desc'  => '{name} — страница ответов участника на посты в темах и блогах. {information}',
+    
     'profile_comments_title'    => '{name} — комментарии участника ',
-    'profile_posts_desc'        => '{name} — страница профиля участника. Посты, награды и контакты. {information}',
-    'profile_posts_all_desc'    => '{name} — список постов, статей участника в хронологическом порядке. Все публикации на сайте.',
-    'profile_answers_desc'      => '{name} — страница ответов участника на посты в темах и блогах. {information}',
     'profile_comments_desc'     => '{name} — комментарии участника в хронологическом порядке. {information}',
+    // end
 
     'all_users'                 => 'Список участников',
     'all_users_info'            => 'Список участников в порядке их активности на сайте',

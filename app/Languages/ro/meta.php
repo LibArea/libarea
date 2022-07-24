@@ -7,14 +7,21 @@
 */
 
 return [
-    'profile_posts_title'       => '{name} — profilul membrului ',
-    'profile_posts_all_title'   => '{name} — lista de postări ',
-    'profile_answers_title'     => '{name} — răspunsurile participanților ',
+
+     // Member profile
+     // Профиль участника
+    'profile_title'       => '{name} — profilul membrului ',
+    'profile_desc'        => '{name} — pagina de profil de membru. Postări, premii și contacte. {information}',
+
+    'profile_posts_title'   => '{name} — lista de postări ',
+    'profile_posts_desc'    => '{name} — lista de postări, articole ale participantului în ordine cronologică. Toate publicațiile de pe site.',
+    
+    'profile_answers_title' => '{name} — răspunsurile participanților ',
+    'profile_answers_desc'  => '{name} — pagina de răspunsuri a membrilor la postările din subiecte și bloguri. {information}',
+    
     'profile_comments_title'    => '{name} — comentariile participantului ',
-    'profile_posts_desc'        => '{name} — pagina de profil de membru. Postări, premii și contacte. {information}',
-    'profile_posts_all_desc'    => '{name} — lista de postări, articole ale participantului în ordine cronologică. Toate publicațiile de pe site.',
-    'profile_answers_desc'      => '{name} — pagina de răspunsuri a membrilor la postările din subiecte și bloguri. {information}',
     'profile_comments_desc'     => '{name} — comentariile participantului în ordine cronologică. {information}',
+    // end
 
     'all_users'                 => 'Lista participanților',
     'all_users_info'            => 'Lista participanților în ordinea activității lor pe site',
