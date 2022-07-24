@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
-use App\Models\{FacetModel, FeedModel, AnswerModel, CommentModel};
+use App\Models\{FacetModel, FeedModel, AnswerModel, CommentModel, PostModel};
 use Meta, UserData;
 
 class ProfileController extends Controller
@@ -113,6 +113,7 @@ class ProfileController extends Controller
             'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
             'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
             'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
+            'my_post'       => PostModel::getPost($profile['my_post'], 'id', $this->user),
             'button_pm'     => $this->accessPm($profile['id']),
         ];
     }

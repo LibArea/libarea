@@ -217,6 +217,8 @@
         </div>
       <?php endforeach; ?>
     </div>
+  <?php else : ?>
+    <!-- мой блог -->
   <?php endif; ?>
 </aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">

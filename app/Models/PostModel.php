@@ -120,22 +120,11 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $data)->fetch();
     }
 
-    public static function postFacets($post_id)
-    {
-        $sql = "SELECT relation_facet_id facet_id FROM posts 
-                    LEFT JOIN facets_posts_relation on post_id = relation_post_id
-                        WHERE post_id = :post_id";
-                            
-       return DB::run($sql, ['post_id' => $post_id])->fetch();
-    }
-
     // Рекомендованные посты
-    // Это должен быть не свой пост, у которого TL не выше участника, пост не черновик и не удален и т.д.
-    public static function postsSimilar($post_id, $user, $limit)
+    // Это должен быть не свой пост, у которого TL не выше участника, пост не черновик, не удален и т.д.
+    public static function postSimilars($post_id, $user, $facet_id, $limit = 5)
     {
-        $fs = self::postFacets($post_id);
         $tl = $user['trust_level'] == null ? 0 : $user['trust_level'];
-
         $sql = "SELECT 
                     post_id,
                     post_title,
@@ -144,16 +133,16 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_answers_count,
                     post_type
                         FROM posts
-                        LEFT JOIN facets_posts_relation on post_id = relation_post_id
-                            WHERE post_id != :post_id 
-                                AND post_is_deleted = 0
-                                AND post_draft = 0
-                                AND post_tl <= :tl 
-                                AND post_user_id != :id
-                                AND relation_facet_id = :facet_id
-                                    ORDER BY post_id DESC LIMIT :limit";
+                            LEFT JOIN facets_posts_relation on post_id = relation_post_id
+                                WHERE post_id != :post_id 
+                                    AND post_is_deleted = 0
+                                    AND post_draft = 0
+                                    AND post_tl <= :tl 
+                                    AND post_user_id != :id
+                                    AND relation_facet_id = :facet_id
+                                        ORDER BY post_id DESC LIMIT :limit";
 
-        return DB::run($sql, ['post_id' => $post_id, 'id' => $user['id'], 'tl' => $tl, 'limit' => $limit, 'facet_id' => $fs['facet_id']])->fetchAll();
+        return DB::run($sql, ['post_id' => $post_id, 'id' => $user['id'], 'tl' => $tl, 'limit' => $limit, 'facet_id' => $facet_id])->fetchAll();
     }
 
     // Пересчитываем количество

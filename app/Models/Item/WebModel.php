@@ -354,20 +354,21 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['item_id' => $item_id])->fetchAll();
     }
 
-    // More... 
-    // Еще...
-    public static function itemSimilar($item_id, $limit)
+    // Recommended content by terms 
+    // Рекомендованный контент по условиям
+    public static function itemSimilars($item_id, $facet_id, $limit = 3)
     {
         $sql = "SELECT 
                     item_id,
                     item_title,
                     item_domain
-                        FROM items 
-                            WHERE item_id < :item_id 
-                                AND item_published = 1 AND item_is_deleted = 0
-                                    ORDER BY item_id DESC LIMIT $limit";
+                        FROM items
+                            LEFT JOIN facets_items_relation on item_id = relation_item_id                        
+                                WHERE item_id < :item_id 
+                                    AND item_published = 1 AND item_is_deleted = 0 AND relation_facet_id = :facet_id
+                                        ORDER BY item_id DESC LIMIT :limit";
 
-        return DB::run($sql, ['item_id' => $item_id])->fetchall();
+        return DB::run($sql, ['item_id' => $item_id, 'facet_id' => $facet_id, 'limit' => $limit])->fetchall();
     }
 
     public static function setCleek($id)

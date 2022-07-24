@@ -4,9 +4,9 @@ namespace App\Controllers\Item;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Models\Item\{WebModel, ReplyModel};
+use App\Models\Item\{WebModel, ReplyModel, UserAreaModel};
 use App\Models\{PostModel, SubscriptionModel};
-use Content, Meta;
+use Content, Meta, UserData;
 
 class DetailedController extends Controller
 {
@@ -48,6 +48,13 @@ class DetailedController extends Controller
 
         $flat = ReplyModel::get($item['item_id'], $this->user);
         $tree = !empty($flat) ? self::buildTree(0, $flat) : false;
+        
+        // Featured Content
+        // Рекомендованный контент       
+        $facets = WebModel::getItemTopic($item['item_id']);
+        $similar = WebModel::itemSimilars($item['item_id'], $facets[0]['value']);
+
+        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
         return $this->render(
             '/item/website',
@@ -55,12 +62,13 @@ class DetailedController extends Controller
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
-                    'type'          => 'web',
-                    'item'          => $item,
-                    'tree'          => $tree,
-                    'item_signed'   => SubscriptionModel::getFocus($item['item_id'], $this->user['id'], 'item'),
-                    'similar'       => WebModel::itemSimilar($item['item_id'], 3),
-                    'related_posts' => $related_posts ?? [],
+                    'type'              => 'web',
+                    'item'              => $item,
+                    'tree'              => $tree,
+                    'item_signed'       => SubscriptionModel::getFocus($item['item_id'], $this->user['id'], 'item'),
+                    'similar'           => $similar,
+                    'user_count_site'   => $count_site,
+                    'related_posts'     => $related_posts ?? [],
                 ]
             ]
         );
