@@ -70,6 +70,7 @@ return [
     'registration'      => 'Регистрация',
     'advertising'       => 'Реклама',
     'private_messages'  => 'Личные сообщения',
+    'post_merged'       => 'Пост объединён',
     'it_read'           => 'Было прочитано',
     'all_messages'      => 'Все сообщения',
     'send_message'      => 'Диалог',

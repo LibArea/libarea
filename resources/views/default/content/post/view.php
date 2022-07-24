@@ -4,6 +4,23 @@
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
       <div class="post-body">
 
+      <?php if (!empty($data['united'])) : ?>
+      <div class="box bg-lightyellow mb15 gray-600">
+        <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
+        </svg>
+        <?= __('app.post_merged'); ?> 
+        <?php foreach ($data['united'] as $merged) : ?>
+           (id <?= $merged['post_id']; ?>): 
+           <?php if (UserData::checkAdmin()) : ?>
+             <a href="/post/<?= $merged['post_id']; ?>"><?= $merged['post_title']; ?></a>
+           <?php else : ?>
+             <?= $merged['post_title']; ?>
+           <?php endif; ?>           
+        <?php endforeach; ?>
+      </div>
+      <?php endif; ?>
+      
         <div class="flex flex-row items-center">
           <?php if (!empty($data['blog'])) : ?>
             <a title="<?= $data['blog'][0]['facet_title']; ?>" class="tag-violet" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">

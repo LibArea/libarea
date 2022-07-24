@@ -70,6 +70,7 @@ return [
     'registration'      => 'Registration',
     'advertising'       => 'Advertising',
     'private_messages'  => 'Private messages',
+    'post_merged'       => 'Post merged',
     'it_read'           => 'Has been read',
     'all_messages'      => 'All messages',
     'send_message'      => 'Dialog',

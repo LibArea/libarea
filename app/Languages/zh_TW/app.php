@@ -71,6 +71,7 @@ return [
     'registration'      => '登記',
     'advertising'       => '廣告',
     'private_messages'  => '私人信息',
+    'post_merged'       => '帖子合并',
     'it_read'           => '已閱讀',
     'all_messages'      => '所有消息',
     'send_message'      => '對話',

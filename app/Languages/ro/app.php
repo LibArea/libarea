@@ -70,6 +70,7 @@ return [
     'registration'      => 'înregistrare',
     'advertising'       => 'Publicitate',
     'private_messages'  => 'Mesaje private',
+    'post_merged'       => 'Postarea a fost îmbinată',
     'it_read'           => 'A fost citită',
     'all_messages'      => 'Toate mesajele',
     'send_message'      => 'Dialog',

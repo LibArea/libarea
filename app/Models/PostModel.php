@@ -277,6 +277,14 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return $result['post_is_deleted'];
     }
 
+    public static function getPostMerged($post_id)
+    {
+        $sql = "SELECT post_id, post_title, post_slug
+                    FROM posts WHERE post_merged_id = :post_id";
+
+        return DB::run($sql, ['post_id' => $post_id])->fetchAll();
+    }
+
     public static function getPostTopic($post_id, $user_id, $type)
     {
         $condition = $type == 'blog' ? 'blog' : 'topic';

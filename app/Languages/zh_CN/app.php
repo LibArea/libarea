@@ -70,6 +70,7 @@ return [
     'registration'      => '注册',
     'advertising'       => '广告',
     'private_messages'  => '私人消息',
+    'post_merged'       => '帖子合并',
     'it_read'           => '已读',
     'all_messages'      => '所有消息',
     'send_message'      => '对话',
