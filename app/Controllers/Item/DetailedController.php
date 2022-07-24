@@ -48,7 +48,7 @@ class DetailedController extends Controller
 
         $flat = ReplyModel::get($item['item_id'], $this->user);
         $tree = !empty($flat) ? self::buildTree(0, $flat) : false;
-        
+
         // Featured Content
         // Рекомендованный контент       
         $facets = WebModel::getItemTopic($item['item_id']);

@@ -1,14 +1,16 @@
+<?php $user_count_site = $data['user_count_site'] ?? 0; ?>
+
 <li>
   <a <?= is_current(url('web.user.sites')) ? 'class="active"' : ''; ?> href="<?= url('web.user.sites'); ?>">
     <?= __('web.my_website'); ?>
-    <?php if ($data['user_count_site'] != 0) : ?>
-      (<?= $data['user_count_site']; ?>)
+    <?php if ($user_count_site != 0) : ?>
+      (<?= $user_count_site; ?>)
     <?php endif; ?>
   </a>
 </li>
 
 <?php if (Access::trustLevels(config('trust-levels.tl_add_item'))) : ?>
-  <?php if ($data['user_count_site'] == 0 || UserData::checkAdmin()) : ?>
+  <?php if ($user_count_site == 0 || UserData::checkAdmin()) : ?>
     <li>
       <a href="<?= url('content.add', ['type' => 'item']); ?>">
         <?= __('web.add_website'); ?>

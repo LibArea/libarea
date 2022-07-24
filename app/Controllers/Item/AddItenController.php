@@ -4,7 +4,7 @@ namespace App\Controllers\Item;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Models\Item\WebModel;
+use App\Models\Item\{WebModel, UserAreaModel};
 use App\Models\{SubscriptionModel, ActionModel, FacetModel, NotificationModel};
 use Utopia\Domains\Domain;
 use UserData, Meta, Validation, Access;
@@ -19,6 +19,8 @@ class AddItemController extends Controller
             redirect('/web');
         }
 
+        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+
         return $this->render(
             '/item/add',
             'item',
@@ -28,6 +30,7 @@ class AddItemController extends Controller
                 'data'  => [
                     'sheet'      => 'add',
                     'type'       => 'web',
+                    'user_count_site'   => $count_site,
                 ]
             ]
         );

@@ -51,7 +51,7 @@ class EditFacetController extends Controller
     public function change()
     {
         $data = Request::getPost();
-        
+
         // Хакинг формы (тип фасета)
         // ['topic', 'blog', 'category', 'section']
         if (!in_array($data['facet_type'], config('facets.permitted'))) {

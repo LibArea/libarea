@@ -364,7 +364,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_domain
                         FROM items
                             LEFT JOIN facets_items_relation on item_id = relation_item_id                        
-                                WHERE item_id < :item_id 
+                                WHERE item_id != :item_id 
                                     AND item_published = 1 AND item_is_deleted = 0 AND relation_facet_id = :facet_id
                                         ORDER BY item_id DESC LIMIT :limit";
 
