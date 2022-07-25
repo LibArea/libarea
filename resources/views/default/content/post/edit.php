@@ -1,7 +1,7 @@
 <?= component('add-js-css');
 $post = $data['post']; ?>
 <main>
-  <h2><?= __('app.edit_' . $post['post_type']); ?></h2>
+  <h2 class="m0"><?= __('app.edit_' . $post['post_type']); ?></h2>
 
   <form class="max-w780" action="<?= url('content.change', ['type' => $post['post_type']]); ?>" method="post" enctype="multipart/form-data">
     <?= csrf_field() ?>

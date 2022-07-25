@@ -69,8 +69,6 @@ class AddAnswerController extends Controller
 
         ActionModel::addLogs(
             [
-                'user_id'       => $this->user['id'],
-                'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
                 'action_type'   => 'answer',
                 'action_name'   => 'added',

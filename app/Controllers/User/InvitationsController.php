@@ -10,7 +10,7 @@ use Validation, SendEmail, Meta, Html;
 
 class InvitationsController extends Controller
 {
-    // Показ формы создания инвайта
+    // Show the form for creating an invite
     public function inviteForm()
     {
         return $this->render(
@@ -26,7 +26,7 @@ class InvitationsController extends Controller
         );
     }
 
-    // Страница инвайтов пользователя
+    // User invite page
     function invitationForm()
     {
         return $this->render(
@@ -44,7 +44,6 @@ class InvitationsController extends Controller
         );
     }
 
-    // Создать инвайт
     function create()
     {
         $invitation_email = Request::getPost('email');
@@ -81,21 +80,25 @@ class InvitationsController extends Controller
             ]
         );
 
-        // Отправка e-mail
+        self::escort($invitation_code, $invitation_email);
+
+        Validation::comingBack(__('msg.invite_created'), 'success', $redirect);
+    }
+    
+    // We will send an email and write logs
+    public static function escort ($invitation_code, $invitation_email)
+    {
         $link = url('invite.reg', ['code' => $invitation_code]);
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
         ActionModel::addLogs(
             [
-                'user_id'       => $this->user['id'],
-                'user_login'    => $this->user['login'],
                 'id_content'    => $invitation_email,
                 'action_type'   => 'invite',
                 'action_name'   => 'added',
                 'url_content'   => $link,
             ]
         );
-
-        Validation::comingBack(__('msg.invite_created'), 'success', $redirect);
     }
+    
 }

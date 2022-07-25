@@ -70,7 +70,7 @@
       </div>
 
       <?php if ($post['post_thumb_img']) : ?>
-        <?= Html::image($post['post_thumb_img'], $post['post_title'],  'thumb right max-w-100', 'post', 'thumbnails'); ?>
+        <?= Html::image($post['post_thumb_img'], $post['post_title'],  'thumb max-w-100', 'post', 'thumbnails'); ?>
       <?php endif; ?>
 
       <div class="post-body max-w780 full">
@@ -132,10 +132,7 @@
           <?= $post['login']; ?>
         </a>  
         <?php if ($post['up_count'] > 0) : ?>
-          <svg class="icons red mr5 ml20">
-            <use xlink:href="/assets/svg/icons.svg#heart"></use>
-          </svg>
-          <sup class="text-sm gray-600 inline"><?= Html::formatToHuman($post['up_count']); ?></sup>
+          <sup class="text-sm gray-600 inline"><span class="red">+</span> <?= Html::formatToHuman($post['up_count']); ?></sup>
         <?php endif; ?>
       </div>
       

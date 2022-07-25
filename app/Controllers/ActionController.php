@@ -61,8 +61,6 @@ class ActionController extends Controller
 
         ActionModel::addLogs(
             [
-                'user_id'       => $this->user['id'],
-                'user_login'    => $this->user['login'],
                 'id_content'    => $info_type[$type . '_id'] ?? 0,
                 'action_type'   => $action_type,
                 'action_name'   => $log_action_name,

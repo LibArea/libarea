@@ -82,6 +82,12 @@ class AddPostController extends Controller
 
         $post_related = $this->relatedPost();
 
+        $post_feature = $fields['post_feature'] ?? false;
+        $translation = $fields['translation'] ?? false;
+        $post_draft = $fields['post_draft'] ?? false;
+        $closed = $fields['closed'] ?? false;
+        $top = $fields['top'] ?? false;
+
         $last_id = PostModel::create(
             [
                 'post_title'            => $post_title,
@@ -90,18 +96,18 @@ class AddPostController extends Controller
                 'post_thumb_img'        => $site['og_img'] ?? '',
                 'post_related'          => $post_related  ?? '',
                 'post_slug'             => $slug,
-                'post_feature'          => $fields['post_feature'] == 'on' ? 1 : 0,
+                'post_feature'          => $post_feature == 'on' ? 1 : 0,
                 'post_type'             => $type,
-                'post_translation'      => $fields['translation'] == 'on' ? 1 : 0,
-                'post_draft'            => $fields['post_draft'] == 'on' ? 1 : 0,
+                'post_translation'      => $translation == 'on' ? 1 : 0,
+                'post_draft'            => $post_draft == 'on' ? 1 : 0,
                 'post_ip'               => Request::getRemoteAddress(),
                 'post_published'        => ($trigger === false) ? 0 : 1,
                 'post_user_id'          => $this->user['id'],
                 'post_url'              => $post_url ?? '',
                 'post_url_domain'       => $site['post_url_domain'] ?? '',
                 'post_tl'               => $fields['content_tl'],
-                'post_closed'           => $fields['closed'] == 'on' ? 1 : 0,
-                'post_top'              => $fields['top'] == 'on' ? 1 : 0,
+                'post_closed'           => $closed == 'on' ? 1 : 0,
+                'post_top'              => $top == 'on' ? 1 : 0,
             ]
         );
 
@@ -133,8 +139,6 @@ class AddPostController extends Controller
 
         ActionModel::addLogs(
             [
-                'user_id'       => $this->user['id'],
-                'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
                 'action_type'   => $type,
                 'action_name'   => 'added',

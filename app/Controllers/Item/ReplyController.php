@@ -98,8 +98,6 @@ class ReplyController extends Controller
 
         ActionModel::addLogs(
             [
-                'user_id'       => $this->user['id'],
-                'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
                 'action_type'   => 'reply',
                 'action_name'   => 'added',

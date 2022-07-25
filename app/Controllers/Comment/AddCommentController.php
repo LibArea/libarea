@@ -102,8 +102,6 @@ class AddCommentController extends Controller
 
         ActionModel::addLogs(
             [
-                'user_id'       => $this->user['id'],
-                'user_login'    => $this->user['login'],
                 'id_content'    => $last_id,
                 'action_type'   => 'comment',
                 'action_name'   => 'added',

@@ -42,7 +42,6 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
     // Поиск контента для форм
     public static function getSearch($search, $type)
     {
-        $user = UserData::get();
         $field_id   = $type . '_id';
         if ($type == 'post') {
             $field_name = 'post_title';
@@ -55,7 +54,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
             $condition = '';
             if (!UserData::checkAdmin()) {
                 if ($type == 'blog') {
-                    $condition = 'AND facet_user_id = ' . $user['id'];
+                    $condition = 'AND facet_user_id = ' . UserData::getUserId();
                 }
             }
 
@@ -127,8 +126,18 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Let's write the logs
     // Запишем логи   
-    public static function addLogs($params)
+    public static function addLogs($data)
     {
+        
+        $params = [
+            'user_id'       => UserData::getUserId(),
+            'user_login'    => UserData::getUserLogin(),
+            'id_content'    => $data['id_content'],
+            'action_type'   => $data['action_type'],
+            'action_name'   => $data['action_name'],
+            'url_content'   => $data['url_content']
+        ];
+        
         $sql = "INSERT INTO users_action_logs(user_id, 
                         user_login, 
                         id_content, 

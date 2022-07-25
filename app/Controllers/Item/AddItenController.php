@@ -101,8 +101,6 @@ class AddItemController extends Controller
 
         ActionModel::addLogs(
             [
-                'user_id'       => $this->user['id'],
-                'user_login'    => $this->user['login'],
                 'id_content'    => $item_last['item_id'],
                 'action_type'   => 'item',
                 'action_name'   => 'added',
