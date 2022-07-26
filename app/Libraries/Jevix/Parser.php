@@ -74,7 +74,7 @@ class Parser
             [
                 ':plus:',
                 ':)',
-                ':/',
+                ':-/',
             ],
             [
                 '<img class="emoji" title="plus" src="/assets/images/emoji/plus.png">',
