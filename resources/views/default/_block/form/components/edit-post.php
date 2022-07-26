@@ -127,6 +127,15 @@
   ]); ?>
 <?php endif; ?>
 
+<?php if (UserData::checkAdmin()) : ?>
+  <fieldset>
+    <label for="post_title"><?= __('app.id_merged_post'); ?></label>
+    <input value="<?= $post['post_merged_id']; ?>" type="text" name="post_merged_id">
+    <div class="help"><?= __('app.post_merged_info'); ?></div>
+  </fieldset>   
+<?php endif; ?>
+
+
 <p>
   <?php if ($post['post_draft'] == 1) : ?>
     <input type="hidden" name="draft" value="1">

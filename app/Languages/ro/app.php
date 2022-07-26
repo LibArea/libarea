@@ -71,6 +71,8 @@ return [
     'advertising'       => 'Publicitate',
     'private_messages'  => 'Mesaje private',
     'post_merged'       => 'Postarea a fost îmbinată',
+    'id_merged_post'    => 'ID-ul postării cu care va fi îmbinată această postare',
+    'post_merged_info'  => 'Acesta este un pas important. Găsiți ID-ul manual sau 0 - anulați îmbinarea',
     'it_read'           => 'A fost citită',
     'all_messages'      => 'Toate mesajele',
     'send_message'      => 'Dialog',

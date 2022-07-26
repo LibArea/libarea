@@ -71,6 +71,8 @@ return [
     'advertising'       => 'Advertising',
     'private_messages'  => 'Private messages',
     'post_merged'       => 'Post merged',
+    'id_merged_post'    => 'The ID of the post that this post will be merged with',
+    'post_merged_info'  => 'This is an important step. Find the ID manually, or 0 - cancel the merge',
     'it_read'           => 'Has been read',
     'all_messages'      => 'All messages',
     'send_message'      => 'Dialog',

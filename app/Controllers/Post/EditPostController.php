@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use UploadImage, Meta, Validation, Access;
+use UploadImage, Meta, Validation, Access, UserData;
 
 use App\Traits\Author;
 use App\Traits\Related;
@@ -90,9 +90,13 @@ class EditPostController extends Controller
         // Related topics
         $fields    = Request::getPost() ?? [];
         $new_type = self::addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
-
+        
         $post_related = $this->relatedPost();
 
+        if (UserData::checkAdmin()) {
+            $post_merged_id = Request::getPostInt('post_merged_id');
+        } 
+        
         PostModel::editPost(
             [
                 'post_id'               => $post_id,
@@ -107,6 +111,7 @@ class EditPostController extends Controller
                 'post_content'          => $content,
                 'post_content_img'      => $post_img ?? '',
                 'post_related'          => $post_related ?? '',
+                'post_merged_id'        => $post_merged_id ?? 0,
                 'post_tl'               => Request::getPostInt('content_tl'),
                 'post_closed'           => Request::getPost('closed') == 'on' ? 1 : 0,
                 'post_top'              => Request::getPost('top') == 'on' ? 1 : 0,

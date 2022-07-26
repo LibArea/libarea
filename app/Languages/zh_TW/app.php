@@ -72,6 +72,8 @@ return [
     'advertising'       => '廣告',
     'private_messages'  => '私人信息',
     'post_merged'       => '帖子合并',
+    'id_merged_post'    => '此帖子将与之合并的帖子的 ID',
+    'post_merged_info'  => '这是重要的一步。手动查找 ID，或 0 - 取消合并',
     'it_read'           => '已閱讀',
     'all_messages'      => '所有消息',
     'send_message'      => '對話',
