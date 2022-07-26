@@ -11,19 +11,19 @@ class Parser
         if ($type  == 'line') {
 
             $content = str_replace(["\r\n", "\r", "\n"], '', $content);
-            
+
             // Получим html с минимальным парсингом (line = без экранирования)
             $content = $Parsedown->line($content);
-            
+
             // Разрешим теги
-            $jevix->cfgAllowTags(['p','img']);
+            $jevix->cfgAllowTags(['p', 'img']);
             // Теги, которые необходимо вырезать из текста вместе с контентом.
-            $jevix->cfgSetTagCutWithContent(['script', 'style', 'details', 'style', 'iframe', 'code', 'a', 'img','table']);
+            $jevix->cfgSetTagCutWithContent(['script', 'style', 'details', 'style', 'iframe', 'code', 'a', 'img', 'table']);
 
             // Ин. Jevix с условиями выше
-            $item = []; 
+            $item = [];
             $text = $jevix->parse($content, $item);
-            
+
             // Откорректируем конечный результат
             return str_replace(['/&gt;'], '', $text);
         }
@@ -36,7 +36,7 @@ class Parser
             'ul', 'ol', 'li', 'del', 'details',
             'table', 'tbody', 'thead', 'tfoot', 'tr', 'td', 'th',
             'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-            'pre', 'code', 'blockquote', 'iframe'
+            'pre', 'code', 'blockquote', 'iframe', 'red'
         ]);
 
         // После тега не нужно добавлять дополнительный <br/>
@@ -70,6 +70,18 @@ class Parser
 
         // Автозамена
         $jevix->cfgSetAutoReplace(['+/-', '(c)', '(с)', '(r)', '(C)', '(С)', '(R)'], ['±', '©', '©', '®', '©', '©', '®']);
+        $jevix->cfgSetAutoReplace(
+            [
+                ':plus:',
+                ':)',
+                ':/',
+            ],
+            [
+                '<img class="emoji" title="plus" src="/assets/images/emoji/plus.png">',
+                '<img class="emoji" title="smile" src="/assets/images/emoji/smile.png">',
+                '<img class="emoji" title="crazy" src="/assets/images/emoji/crazy.gif">'
+            ]
+        );
 
         // Режим замены переноса строк на тег (пусто)
         $jevix->cfgSetAutoBrMode('');
@@ -78,6 +90,8 @@ class Parser
         $jevix->cfgSetTagCallbackFull('a', ['Parser', 'linkNofollow']);
         $jevix->cfgSetTagCallbackFull('details', ['Parser', 'spoiler']);
         $jevix->cfgSetTagCallbackFull('pre', ['Parser', 'pre']);
+
+        $jevix->cfgSetTagCallbackFull('red', ['Parser', 'red']);
 
         // Отключаем типографирование в определеннх тегах
         $jevix->cfgSetTagNoTypography(['pre', 'code', 'iframe']);
@@ -90,7 +104,7 @@ class Parser
     {
         $rel = '';
         $url = parse_url($params['href']);
-        
+
         $host = $url['host'] ?? false;
         if (!in_array($host, config('meta.white_list_hosts'))) {
             $rel = 'rel="nofollow noreferrer noopener" target="_blank"';
@@ -99,6 +113,11 @@ class Parser
         return  '<a href="' . $params['href'] . '" ' . $rel . '>' . $content . '</a>';
     }
 
+
+    public static function red($tag, $params, $content)
+    {
+        return '<span class="red">' . $content . '</span>';
+    }
 
     public static function spoiler($tag, $params, $content)
     {

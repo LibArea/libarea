@@ -109,6 +109,8 @@ class EditFacetController extends Controller
         $post_related = $this->relatedPost();
         $facet_slug = strtolower($data['facet_slug']);
 
+        $facet_top_level = $data['facet_top_level'] ?? false;
+
         FacetModel::edit(
             [
                 'facet_id'                  => $data['facet_id'],
@@ -120,7 +122,7 @@ class EditFacetController extends Controller
                 'facet_seo_title'           => $data['facet_seo_title'],
                 'facet_user_id'             => $facet_user_id,
                 'facet_tl'                  => $data['facet_tl'] ?? 0,
-                'facet_top_level'           => $data['facet_top_level'] == 'on' ? 1 : 0,
+                'facet_top_level'           => $facet_top_level == 'on' ? 1 : 0,
                 'facet_post_related'        => $post_related,
                 'facet_type'                => $new_type,
             ]

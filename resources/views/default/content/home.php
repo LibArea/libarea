@@ -91,38 +91,21 @@
   <?php endif; ?>
 
   <?php if (is_array($data['items'])) : ?>
-      <div class="box bg-lightgray">
-        <h3 class="uppercase-box"><?= __('app.websites'); ?></h3>
-        <ul>
-          <?php foreach ($data['items'] as $item) : ?>
-            <li class="mt15">
-              <a href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
-                <?= $item['item_title']; ?>  <span class="green"><?= $item['item_domain']; ?></span>
-              </a>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      </div>
+    <div class="box bg-lightgray">
+      <h3 class="uppercase-box"><?= __('app.websites'); ?></h3>
+      <ul>
+        <?php foreach ($data['items'] as $item) : ?>
+          <li class="mt15">
+            <a href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
+              <?= $item['item_title']; ?> <span class="green"><?= $item['item_domain']; ?></span>
+            </a>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
   <?php endif; ?>
 
   <div class="sticky top-sm">
-    <?php if (!empty($data['latest_answers'])) : ?>
-      <div class="p15">
-        <h3 class="uppercase-box"><?= __('app.answers'); ?></h3>
-        <ul class="last-content">
-          <?php foreach ($data['latest_answers'] as $answer) : ?>
-            <li>
-              <a title="<?= $answer['login']; ?>" href="<?= url('profile', ['login' => $answer['login']]); ?>">
-                <?= Html::image($answer['avatar'], $answer['login'], 'img-sm mr5', 'avatar', 'small'); ?>
-              </a>
-              <span class="middle lowercase gray-600"><?= Html::langDate($answer['answer_date']); ?></span>
-              <a class="last-content_telo" href="<?= url('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
-                <?= Content::fragment(Content::text($answer['answer_content'], 'line'), 98); ?>
-              </a>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      </div>
-    <?php endif; ?>
+    <?= insert('/_block/sidebar/latest-answers', ['latest_answers' => $data['latest_answers']]); ?>
   </div>
 </aside>

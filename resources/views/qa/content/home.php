@@ -86,22 +86,6 @@
   <?php endif; ?>
 
   <div class="sticky top-sm">
-    <?php if (!empty($data['latest_answers'])) : ?>
-      <div class="box bg-violet">
-        <ul class="last-content">
-          <?php foreach ($data['latest_answers'] as $answer) : ?>
-            <li>
-              <a title="<?= $answer['login']; ?>" href="<?= url('profile', ['login' => $answer['login']]); ?>">
-                <?= Html::image($answer['avatar'], $answer['login'], 'img-sm', 'avatar', 'small'); ?>
-              </a>
-              <span class="middle lowercase gray-600"><?= Html::langDate($answer['answer_date']); ?></span>
-              <a class="last-content_telo" href="<?= url('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
-                <?= Content::fragment(Content::text($answer['answer_content'], 'line'), 98); ?>
-              </a>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      </div>
-    <?php endif; ?>
+    <?= insert('/_block/sidebar/latest-answers', ['latest_answers' => $data['latest_answers']]); ?>
   </div>
 </aside>

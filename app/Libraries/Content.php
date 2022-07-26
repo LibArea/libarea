@@ -7,44 +7,9 @@ class Content
     // Работа с контентом (Parsedown and HTMLPurifier)
     public static function text($content, $type)
     {
-        $res    = Parser::content($content, $type);
-        $text   = self::parseRed($res);
+        $text    = Parser::content($content, $type);
 
-        return self::parseUser(self::inlineEmoji($text));
-    }
-
-    public static function inlineEmoji($content)
-    {
-        $pathEmoji =  '/assets/images/emoji/';
-
-        $smiles = [':)', ':-)'];
-        $content = str_replace($smiles, '<img class="emoji" src="' . $pathEmoji . 'smile.png">', $content);
-
-        if (preg_match('/\:(\w+)\:/mUs', $content, $matches)) {
-            $path =  HLEB_PUBLIC_DIR . "/assets/images/emoji/" . $matches[1];
-            $file_ext = "";
-            if (file_exists($path . ".png"))
-                $file_ext = ".png";
-            else if (file_exists($path . ".gif"))
-                $file_ext = ".gif";
-            if ($file_ext === "")
-                return $content;
-
-            $img = $pathEmoji . $matches[1] . $file_ext;
-            return str_replace($matches[0], '<img class="emoji" src="' . $img . '">', $content);
-        }
-
-        return  $content;
-    }
-
-    public static function parseRed($content)
-    {
-        $regexpRed = '/\{red(?!.*\{red)(\s?)(?(1)(.*?))\}(.*?)\{\/red\}/is';
-        if (preg_match($regexpRed, $content, $matches)) {
-            $content = preg_replace($regexpRed, "<span class=\"red\">$2$3</span>", $content);
-        }
-
-        return  $content;
+        return self::parseUser($text);
     }
 
     // TODO: Let's check the simple version for now.

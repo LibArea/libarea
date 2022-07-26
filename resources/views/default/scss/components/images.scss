@@ -59,11 +59,11 @@
 .medium-zoom-image--hidden{visibility:hidden}
 .medium-zoom-image--opened{position:relative;cursor:pointer;cursor:zoom-out;will-change:transform}
 
-.post-body.full img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
+.post-body.full > img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
 .post-body .post-img img { margin-top: 5px; }
 
-.post-body.full img,
-.max-w780 img {
+.post-body.full > img,
+.max-w780 > img {
   max-width: 100%;
   display: block;
   border: 1px solid #f3f3f3;
@@ -82,7 +82,6 @@
 }
 
 img.emoji {
-  height: 16px;
-  width: 16px;
+  max-width: 20px;
   display: inline-block;
 }

@@ -52,7 +52,7 @@ class DetailedController extends Controller
         // Featured Content
         // Рекомендованный контент       
         $facets = WebModel::getItemTopic($item['item_id']);
-        $similar = WebModel::itemSimilars($item['item_id'], $facets[0]['value']);
+        $similar = WebModel::itemSimilars($item['item_id'], $facets[0]['value'] ?? '');
 
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 

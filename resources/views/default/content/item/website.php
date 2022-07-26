@@ -112,7 +112,7 @@
           </a>
         <?php endforeach; ?>
       <?php else : ?>
-        ....
+        <?= __('web.desc_formed'); ?>...
       <?php endif; ?>
     </div>
   </aside>
