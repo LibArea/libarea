@@ -4,7 +4,7 @@ namespace App\Controllers\Comment;
 
 use App\Controllers\Controller;
 use App\Models\CommentModel;
-use Meta;
+use Meta, Html, Content;
 
 class CommentController extends Controller
 {
@@ -36,5 +36,19 @@ class CommentController extends Controller
                 ]
             ]
         );
+    }
+    
+    public function lastComment()
+    {
+        $comments  = CommentModel::getCommentsAll(1, 5, $this->user, 'all');
+
+        $result = [];
+        foreach ($comments as $ind => $row) {
+            $row['content'] = Content::fragment(Content::text($row['content'], 'line'), 98);
+            $row['date']    = Html::langDate($row['date']);
+            $result[$ind]   = $row;
+        }
+
+        return json_encode($result, JSON_PRETTY_PRINT);
     }
 }

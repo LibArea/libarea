@@ -101,9 +101,7 @@ ul.nav {
 }
 
 ul.nav > li { padding: 6px 12px; }
-
 ul.nav.small > li { padding: 3px 6px; }
-
 ul.nav > li > a { color: rgba(0, 0, 0, 0.5); }
 
 ul.nav > li.active {
@@ -115,3 +113,7 @@ ul.nav > li.active {
 ul.nav > li.active > a { color: #432f2f; }
 ul.nav > li a:hover { color:  var(--red); }
 ul.nav > li.active a:hover { color: #432f2f; }
+
+/* If it's tabs */
+ul.content-tabs { display: none; }
+ul.content-tabs.active { display: block; }

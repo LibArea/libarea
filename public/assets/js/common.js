@@ -34,7 +34,6 @@ if (dHeader) {
 
 let token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
-
 // Call the form for adding a comment
 document.querySelectorAll(".add-comment")
   .forEach(el => el.addEventListener("click", function (e) {
@@ -266,79 +265,53 @@ window.addEventListener('click', e => {
   }
 })
 
-// Tabs
-document.addEventListener('DOMContentLoaded', () => {
-  class ItcTabs {
-    constructor(target, config) {
-      const defaultConfig = {};
-      this._config = Object.assign(defaultConfig, config);
-      this._elTabs = typeof target === 'string' ? document.querySelector(target) : target;
-      this._elButtons = this._elTabs.querySelectorAll('.tabs__btn');
-      this._elPanes = this._elTabs.querySelectorAll('.tabs__pane');
-      this._eventShow = new Event('tab.itc.change');
-      this._init();
-      this._events();
-    }
-    _init() {
-      this._elTabs.setAttribute('role', 'tablist');
-      this._elButtons.forEach((el, index) => {
-        el.dataset.index = index;
-        el.setAttribute('role', 'tab');
-        this._elPanes[index].setAttribute('role', 'tabpanel');
+const tabs = document.querySelector(".wrapper");
+if (tabs) {
+  const tabButton = document.querySelectorAll(".tab-button");
+  const contents = document.querySelectorAll(".content-tabs");
+  const items = document.querySelector(".more_go");
+  tabs.onclick = e => {
+    const id = e.target.dataset.id;
+    if (id) {
+      tabButton.forEach(btn => {
+        btn.classList.remove("active");
       });
-    }
-    show(elLinkTarget) {
-      const elPaneTarget = this._elPanes[elLinkTarget.dataset.index];
-      const elLinkActive = this._elTabs.querySelector('.tabs__btn_active');
-      const elPaneShow = this._elTabs.querySelector('.tabs__pane_show');
-      if (elLinkTarget === elLinkActive) {
-        return;
+      e.target.classList.add("active");
+
+      if (id == 'more_comment') {
+        fetch("/more/comments", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: "query=all&_token=" + token,
+        })
+          .then(
+            response => {
+              return response.text();
+            }
+          ).then(
+            text => {
+              let obj = JSON.parse(text);
+              let html = '';
+              for (let key in obj) {
+                html += '<li><a href="/@' + obj[key].login + '"><img class="img-sm mr5" src="/uploads/users/avatars/small/' + obj[key].avatar + '"></a>';
+                html += '<span class="middle lowercase gray-600">' + obj[key].date + '</span>';
+                html += '<a class="last-content_telo" href="/post/' + obj[key].post_id + '/' + obj[key].post_slug + '#comment_' + obj[key].comment_id + '">' + obj[key].content + '</a></li>';
+              }
+              if (!Object.keys(obj).length == 0) {
+                items.innerHTML = html;
+              }
+            }
+          );
       }
-      elLinkActive ? elLinkActive.classList.remove('tabs__btn_active') : null;
-      elPaneShow ? elPaneShow.classList.remove('tabs__pane_show') : null;
-      elLinkTarget.classList.add('tabs__btn_active');
-      elPaneTarget.classList.add('tabs__pane_show');
-      this._elTabs.dispatchEvent(this._eventShow);
-      elLinkTarget.focus();
-    }
-    showByIndex(index) {
-      const elLinkTarget = this._elButtons[index];
-      elLinkTarget ? this.show(elLinkTarget) : null;
-    };
-    _events() {
-      this._elTabs.addEventListener('click', (e) => {
-        const target = e.target.closest('.tabs__btn');
-        if (target) {
-          e.preventDefault();
-          this.show(target);
-        }
+      contents.forEach(content => {
+        content.classList.remove("active");
       });
+
+      const element = document.getElementById(id);
+      element.classList.add("active");
     }
   }
-
-  const tabs = {};
-  const elTabs = document.querySelectorAll('.tabs');
-  const storage = localStorage.getItem('tabs');
-  let storageData = {};
-
-  elTabs.forEach(el => {
-    tabs[el.id] = new ItcTabs(el);
-    el.addEventListener('tab.itc.change', (e) => {
-      const index = +el.querySelector('.tabs__btn_active').dataset.index;
-      storageData[el.id] = index;
-      localStorage.setItem('tabs', JSON.stringify(storageData));
-    })
-  })
-
-  if (storage) {
-    storageData = JSON.parse(storage);
-    for (let key in storageData) {
-      if (tabs.hasOwnProperty(key)) {
-        tabs[key].showByIndex(storageData[key]);
-      }
-    }
-  }
-})
+}
 
 /* MIT license https://github.com/vivekweb2013/toastmaker */
 !function (t, e) { "function" == typeof define && define.amd ? define(e) : "object" == typeof exports ? module.exports = e() : t.Notice = e() }(this, function (t) { return function (t, e, s) { function i(t, e, s, i, n) { var a = Array.isArray(t) ? "array" : typeof t; if (i && (null == t || "" === t)) throw "Invalid argument '" + e + "'. Argument is either empty, null or undefined"; if (a !== s) throw "Invalid argument '" + e + "'. Type must be " + s + " but found " + a; if (n && -1 == n.indexOf(t)) throw "Invalid value " + t + " specified for argument '" + e + "'. Allowed - " + n.join(" | ") } i(t, "text", "string", !0), i(s = s || {}, "options", "object"), i(e = e || 3e3, "timeout", "number"), s.styles = s.styles || {}, i(s.styles, "styles", "object"), s.align = s.align || "center", i(s.align, "align", "string", !0, ["left", "center", "right"]), s.valign = s.valign || "bottom", i(s.valign, "valign", "string", !0, ["top", "bottom"]), s.classList = s.classList || [], i(s.classList, "classList", "array"); var n = ["notice", "notice-" + s.valign, "notice-" + s.align]; s.classList = s.classList.concat(n); var a = document.createElement("div"); s.classList.forEach(function (t) { if ("string" != typeof t) throw "Invalid css class '" + JSON.stringify(t) + "'. CSS class must be of type string"; a.classList.add(t) }); var o = document.createTextNode(t); for (var r in a.appendChild(o), a.style.animationDuration = e / 1e3 + "s", s.styles) { if ("string" != typeof s.styles[r] && "number" != typeof s.styles[r]) throw "Invalid value '" + JSON.stringify(s.styles[r]) + "' specified for style '" + r + "'. Style value must be of type string or number"; a.style[r] = s.styles[r] } document.body.appendChild(a), setTimeout(function () { document.body.removeChild(a) }, e) } });

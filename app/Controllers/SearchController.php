@@ -95,5 +95,5 @@ class SearchController extends Controller
     public static function number($num)
     {
         return $num <= 1 ? 1 : $num;
-    } 
+    }
 }

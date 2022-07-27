@@ -86,6 +86,6 @@
   <?php endif; ?>
 
   <div class="sticky top-sm">
-    <?= insert('/_block/sidebar/latest-answers', ['latest_answers' => $data['latest_answers']]); ?>
+    <?= insert('/_block/sidebar/latest-answers-tabs', ['latest_answers' => $data['latest_answers']]); ?>
   </div>
 </aside>
