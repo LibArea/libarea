@@ -9,8 +9,8 @@
             <?php if ($date < 3) : ?><sup class="red text-sm">new</sup><?php endif; ?></h2>
         </a>
         <div class="content">
-          <div class="list-items__thumb mb-none">
-            <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'preview list-items__thumb-image'); ?>
+          <div class="list-items__thumb mb-none img-preview">
+            <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'list-items__thumb-image'); ?>
           </div>
           <div class="list-items__description">
             <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tag mr15', $screening); ?>

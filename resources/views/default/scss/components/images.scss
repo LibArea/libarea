@@ -59,26 +59,11 @@
 .medium-zoom-image--hidden{visibility:hidden}
 .medium-zoom-image--opened{position:relative;cursor:pointer;cursor:zoom-out;will-change:transform}
 
-.post-body.full > img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
-.post-body .post-img img { margin-top: 5px; }
-
-.medium-zoom-image {
+.img-preview img {
   max-width: 780px;
-  display: block;
   border: 1px solid #f3f3f3;
 }
-
-.cut-post img {
-  max-width: 780px;
-  width: 100%;
-  border: 1px solid #f3f3f3;
-}
-
-.content-body p img {
-  max-width: 99%;
-  max-height: 500px;
-  display: block;
-}
+.img-preview img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
 
 img.emoji {
   max-width: 20px;

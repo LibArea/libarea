@@ -18,8 +18,6 @@ class AnswerController extends Controller
         $pagesCount = AnswerModel::getAnswersCount($sheet);
         $answers    = AnswerModel::getAnswers($this->pageNumber, $this->limit, $this->user, $sheet);
 
-        Request::getResources()->addBottomScript('/assets/js/medium-zoom.js');
-
         $m = [
             'og'    => false,
             'url'   => url('answers'),

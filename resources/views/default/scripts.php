@@ -1,10 +1,15 @@
+
 <script src="/assets/js/common.js"></script>
+<script src="/assets/js/medium-zoom.js"></script>
 <?php if (UserData::checkActiveUser()) : ?><script src="/assets/js/app.js"></script><?php endif; ?>
 
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
+  document.addEventListener('DOMContentLoaded', () => {
+     mediumZoom(document.querySelectorAll('.img-preview img'));
+  });
   <?php if (!UserData::checkActiveUser()) : ?>
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {

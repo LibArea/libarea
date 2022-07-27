@@ -12,8 +12,8 @@
       </h1>
 
       <div class="flex justify-between gap-max mb-block">
-        <div class="w-40 mb-w-100">
-          <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'preview w-100 box-shadow'); ?>
+        <div class="w-40 mb-w-100 img-preview">
+          <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'w-100 box-shadow'); ?>
         </div>
         <div class="w-60 mb-w-100">
           <?= Content::text($item['item_content'], 'text'); ?>

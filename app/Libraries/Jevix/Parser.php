@@ -92,6 +92,8 @@ class Parser
         $jevix->cfgSetTagCallbackFull('pre', ['Parser', 'pre']);
 
         $jevix->cfgSetTagCallbackFull('red', ['Parser', 'red']);
+        
+        $jevix->cfgSetTagCallbackFull('img', ['Parser', 'imgContent']);
 
         // Отключаем типографирование в определеннх тегах
         $jevix->cfgSetTagNoTypography(['pre', 'code', 'iframe']);
@@ -113,10 +115,14 @@ class Parser
         return  '<a href="' . $params['href'] . '" ' . $rel . '>' . $content . '</a>';
     }
 
-
     public static function red($tag, $params, $content)
     {
         return '<span class="red">' . $content . '</span>';
+    }
+
+    public static function imgContent($tag, $params, $content)
+    {
+        return '<div class="img-preview"><img src="' . $params['src'] . '"></div>';
     }
 
     public static function spoiler($tag, $params, $content)
