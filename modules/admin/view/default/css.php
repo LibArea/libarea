@@ -62,20 +62,20 @@
 
 <h4><?= __('admin.icons'); ?>:</h4>
 <div class="flex flex-wrap">
-<?php foreach ($data['lists'] as $topic) : ?>
+  <?php foreach ($data['lists'] as $topic) : ?>
     <div class="center box mr5">
-        <svg class="icons">
-          <use xlink:href="/assets/svg/icons.svg#<?= $topic; ?>"></use>
-        </svg>
-        <div class="gray-600"><?= $topic; ?></div>
+      <svg class="icons">
+        <use xlink:href="/assets/svg/icons.svg#<?= $topic; ?>"></use>
+      </svg>
+      <div class="gray-600"><?= $topic; ?></div>
     </div>
-<?php endforeach; ?>
+  <?php endforeach; ?>
 </div>
 
 <pre><code>&lt;svg class="icons"&gt;
    &lt;use xlink:href="/assets/svg/icons.svg#ID"&gt;&lt;/use&gt;
 &lt;/svg&gt;</code></pre>
-  
+
 <li><a rel="nofollow noopener" href="https://feathericons.com/">https://feathericons.com/</a></li>
 <li><a rel="nofollow noopener" href="https://tabler-icons.io/">https://tabler-icons.io/</a></li>
 

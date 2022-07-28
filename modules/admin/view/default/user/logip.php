@@ -56,7 +56,7 @@
         <?php endif; ?>
       </td>
       <td class="center">
-        <?php if (UserData::checkAdmin()) : ?>
+        <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) : ?>
           ---
         <?php else : ?>
           <?php if ($user['ban_list']) : ?>
@@ -71,7 +71,7 @@
         <?php endif; ?>
       </td>
       <td class="center">
-        <?php if (UserData::checkAdmin()) : ?>
+        <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) : ?>
           ---
         <?php else : ?>
           <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.user.edit', ['id' => $user['id']]); ?>">

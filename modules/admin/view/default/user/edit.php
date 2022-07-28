@@ -42,15 +42,15 @@
   <fieldset>
     <label for="post_title"><?= __('admin.registration'); ?>:</label>
     <span class="gray-600">
-    <?= $data['user']['created_at']; ?> |
-    <?= $data['user']['reg_ip']; ?>
-    <?php if ($data['user']['duplicat_ip_reg'] > 1) : ?>
-      <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
-    <?php endif; ?>
-    (ed. <?= $data['user']['updated_at']; ?>)  | 
-    <svg class="icons">
-      <use xlink:href="/assets/svg/icons.svg#eye"></use>
-    </svg> <?= $data['user']['hits_count']; ?>
+      <?= $data['user']['created_at']; ?> |
+      <?= $data['user']['reg_ip']; ?>
+      <?php if ($data['user']['duplicat_ip_reg'] > 1) : ?>
+        <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
+      <?php endif; ?>
+      (ed. <?= $data['user']['updated_at']; ?>) |
+      <svg class="icons">
+        <use xlink:href="/assets/svg/icons.svg#eye"></use>
+      </svg> <?= $data['user']['hits_count']; ?>
     </span>
   </fieldset>
   <hr>

@@ -7,7 +7,13 @@
   ]
 ); ?>
 
-<h3 class="uppercase-box"><?= __('admin.users'); ?></h3>
+<h3 class="uppercase-box">
+  <?= __('admin.users'); ?>
+  <a href="<?= url('admin.users'); ?>"><svg class="icons">
+      <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
+    </svg>
+  </a>
+</h3>
 <?php foreach ($data['last_visit'] as $user) : ?>
   <div class="gray">
     <span class="gray-600 text-sm">id<?= $user['id']; ?></span>
@@ -16,7 +22,13 @@
   </div>
 <?php endforeach; ?>
 
-<h3 class="uppercase-box mt15"><?= __('admin.search'); ?></h3>
+<h3 class="uppercase-box mt15">
+  <?= __('admin.search'); ?>
+  <a href="<?= url('admin.logs.search'); ?>"><svg class="icons">
+      <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
+    </svg>
+  </a>
+</h3>
 <?php foreach ($data['logs'] as $log) : ?>
   <div class="gray">
     <span class="gray-600 text-sm"><?= $log['count_results']; ?></span>
@@ -31,7 +43,7 @@
 
 <h3 class="uppercase-box mt15"><?= __('admin.reply'); ?></h3>
 <?php foreach ($data['replys'] as $reply) : ?>
-  <div class="gray">
+  <div class="gray text-sm">
     <a class="gray-600" href="<?= url('profile', ['login' => $reply['login']]); ?>">
       <?= Html::image($reply['avatar'], $reply['login'], 'img-sm', 'avatar', 'small'); ?>
       <span class="mr5">
@@ -46,7 +58,7 @@
         <use xlink:href="/assets/svg/icons.svg#eye"></use>
       </svg>
     </a>
-    <div class="gray-600 text-sm mb15"><?= Content::text($reply['content'], 'line'); ?></div>
+    <div class="gray-600 mb15"><?= Content::text($reply['content'], 'line'); ?></div>
   </div>
 <?php endforeach; ?>
 </main>
