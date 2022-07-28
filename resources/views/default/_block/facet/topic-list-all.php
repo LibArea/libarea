@@ -18,12 +18,16 @@
         ]); ?>
       </span>
       <?php if (UserData::getUserId() == $facet['facet_user_id']) : ?>
-        <svg class="icons icon-small sky"><use xlink:href="/assets/svg/icons.svg#mic"></use></svg>
+        <svg class="icons icon-small sky">
+          <use xlink:href="/assets/svg/icons.svg#mic"></use>
+        </svg>
       <?php endif; ?>
       <div class="mt10 gray">
         <?= Content::fragment(Content::text($facet['facet_short_description'], 'line'), 32); ?>
         <span class="right gray-600">
-          <svg class="icons"><use xlink:href="/assets/svg/icons.svg#post"></use></svg>
+          <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#post"></use>
+          </svg>
           <?= $facet['facet_count']; ?>
         </span>
       </div>

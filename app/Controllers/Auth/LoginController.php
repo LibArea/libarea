@@ -21,21 +21,21 @@ class LoginController extends Controller
         $user = UserModel::userInfo($email);
 
         if (empty($user['id'])) {
-            Validation::comingBack(__('msg.no_user'), 'error', $redirect);
+            is_return(__('msg.no_user'), 'error', $redirect);
         }
 
         // Находится ли в бан- листе
         if (UserModel::isBan($user['id'])) {
-            Validation::comingBack(__('msg.account_verified'), 'error', $redirect);
+            is_return(__('msg.account_verified'), 'error', $redirect);
         }
 
         // Активирован ли E-mail
         if (!UserModel::isActivated($user['id'])) {
-            Validation::comingBack(__('msg.not_activated'), 'error', $redirect);
+            is_return(__('msg.not_activated'), 'error', $redirect);
         }
 
         if (!password_verify($password, $user['password'])) {
-            Validation::comingBack(__('msg.not_correct'), 'error', $redirect);
+            is_return(__('msg.not_correct'), 'error', $redirect);
         }
 
         // Если нажал "Запомнить" 

@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\FolderModel;
-use Validation;
 
 class FolderController extends Controller
 {
@@ -20,7 +19,7 @@ class FolderController extends Controller
 
         $url    = url('favorites.folders');
         if (empty($arr)) {
-            Validation::comingBack(__('app.necessarily'), 'success', $url);
+            is_return(__('app.necessarily'), 'success', $url);
         }
 
         $folders = json_decode($arr, true);

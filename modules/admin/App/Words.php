@@ -49,7 +49,7 @@ class Words
 
         WordModel::setStopWord($data);
 
-        Validation::comingBack(__('msg.change_saved'), 'success', url('admin.words'));
+        is_return(__('msg.change_saved'), 'success', url('admin.words'));
     }
 
     // Удаление стоп-слова

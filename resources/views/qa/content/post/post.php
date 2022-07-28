@@ -3,6 +3,7 @@
 use Hleb\Constructor\Handlers\Request; ?>
 
 <?php if (!empty($data['posts'])) : ?>
+  <ul class="list-none">
   <?php $n = 0;
   foreach ($data['posts'] as $post) :
     $n++; ?>
@@ -10,13 +11,13 @@ use Hleb\Constructor\Handlers\Request; ?>
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
-    <div class="flex br-bottom p15 article_<?= $post['post_id']; ?>">
+    <li class="list-post br-top-zebra article_<?= $post['post_id']; ?>">
       <div class="flex mr15">
         <div class="box-answer block bg-lightgray gray mt5 br-rd3 mb-none lowercase mr15">
           <?= $post['post_votes']; ?>
           <div class="text-xs"> <?= Html::numWord($post['post_votes'], __('app.num_up'), false); ?></div>
         </div>
-        <?php $bg = $post['post_feature'] == 0 ? ' bg-green' : ' bg-pink'; ?>
+        <?php $bg = $post['post_feature'] == 0 ? ' bg-green' : ' bg-teal'; ?>
         <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
         <div class="box-answer mt5 br-rd3 lowercase <?= $bg; ?> <?= $bg_url; ?>">
           <a class="block white" href="<?= $post_url; ?>#comment">
@@ -31,11 +32,9 @@ use Hleb\Constructor\Handlers\Request; ?>
         <?php if ($bg_url) : ?>
           <span><?= __('app.news'); ?>:</span>
         <?php endif; ?>
-        <a href="<?= $post_url; ?>">
-          <span class="font-normal text-xl">
-            <?= $post['post_title']; ?>
-            <?= insert('/content/post/post-title', ['post' => $post]); ?>
-          </span>
+        <a class="font-normal text-xl" href="<?= $post_url; ?>">
+          <?= $post['post_title']; ?>
+          <?= insert('/content/post/post-title', ['post' => $post]); ?>
         </a>
         <div class="flex flex-row flex-auto items-center justify-between lowercase">
           <div class="flex-auto">
@@ -67,8 +66,9 @@ use Hleb\Constructor\Handlers\Request; ?>
           </div>
         <?php endif; ?>
       </div>
-    </div>
+    </li>
   <?php endforeach; ?>
+  </ul>
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?= insert('/_block/recommended-topics', ['data' => $data]); ?>

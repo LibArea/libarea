@@ -4,7 +4,6 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\AuthModel;
-use Validation;
 
 class SessionController extends MainController
 {
@@ -25,6 +24,6 @@ class SessionController extends MainController
 
         AuthModel::deleteTokenByUserId($user_id);
 
-        Validation::comingBack(__('msg.account_verified'), 'success', '/');
+        is_return(__('msg.account_verified'), 'success', '/');
     }
 }

@@ -49,21 +49,21 @@ class RegisterController extends Controller
         // Проверим login
         $login = Request::getPost('login');
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $login)) {
-            Validation::comingBack(__('msg.slug_correctness'), 'error', $redirect);
+            is_return(__('msg.slug_correctness'), 'error', $redirect);
         }
 
         Validation::length($login, 3, 12, 'nickname', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
-            Validation::comingBack(__('msg.nick_character'), 'error', $redirect);
+            is_return(__('msg.nick_character'), 'error', $redirect);
         }
 
         if (in_array($login, config('stop-nickname'))) {
-            Validation::comingBack(__('msg.nick_exist'), 'error', $redirect);
+            is_return(__('msg.nick_exist'), 'error', $redirect);
         }
 
         if (is_array(AuthModel::checkRepetitions($login, 'login'))) {
-            Validation::comingBack(__('msg.nick_exist'), 'error', $redirect);
+            is_return(__('msg.nick_exist'), 'error', $redirect);
         }
 
         // Check Email
@@ -71,20 +71,20 @@ class RegisterController extends Controller
         Validation::email($email = Request::getPost('email'), $redirect);
 
         if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
-            Validation::comingBack(__('msg.email_replay'), 'error', $redirect);
+            is_return(__('msg.email_replay'), 'error', $redirect);
         }
 
         $arr = explode('@', $email);
         $domain = array_pop($arr);
         if (in_array($domain, config('stop-email'))) {
-            Validation::comingBack(__('msg.email_replay'), 'error', $redirect);
+            is_return(__('msg.email_replay'), 'error', $redirect);
         }
 
         // Check ip for ban
         // Запрет Ip на бан
         $reg_ip = Request::getRemoteAddress();
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
-            Validation::comingBack(__('msg.multiple_accounts'), 'error', $redirect);
+            is_return(__('msg.multiple_accounts'), 'error', $redirect);
         }
 
         // Let's check the password
@@ -93,11 +93,11 @@ class RegisterController extends Controller
         Validation::length($password, 8, 32, 'password', $redirect);
 
         if (substr_count($password, ' ') > 0) {
-            Validation::comingBack(__('msg.password_spaces'), 'error', $redirect);
+            is_return(__('msg.password_spaces'), 'error', $redirect);
         }
 
         if ($password != $password_confirm) {
-            Validation::comingBack(__('msg.pass_match_err'), 'error', $redirect);
+            is_return(__('msg.pass_match_err'), 'error', $redirect);
         }
 
         // Let's check the verification code
@@ -105,7 +105,7 @@ class RegisterController extends Controller
         if (!$inv_code) {
             if (config('integration.captcha')) {
                 if (!Google::checkCaptchaCode()) {
-                    Validation::comingBack(__('msg.code_error'), 'error', $redirect);
+                    is_return(__('msg.code_error'), 'error', $redirect);
                 }
             }
             // Если хакинг формы (If form hacking)
@@ -149,7 +149,7 @@ class RegisterController extends Controller
                 ]
             );
 
-            Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
+            is_return(__('msg.change_saved'), 'success', $redirect);
         }
 
         // Email Activation
@@ -164,7 +164,7 @@ class RegisterController extends Controller
         // Sending email
         SendEmail::mailText($active_uid, 'activate.email', ['link' => url('activate.code', ['code' => $email_code])]);
 
-        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
+        is_return(__('msg.change_saved'), 'success', $redirect);
     }
 
     // Show registration form with invite
@@ -175,7 +175,7 @@ class RegisterController extends Controller
         $invate = InvitationModel::available($code);
 
         if (!$invate) {
-            Validation::comingBack(__('msg.code_incorrect'), 'error', '/');
+            is_return(__('msg.code_incorrect'), 'error', '/');
         }
 
         return $this->render(

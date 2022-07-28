@@ -39,7 +39,7 @@ class AddFacetController extends Controller
         if ($facet_type == 'blog') {
             if (!UserData::checkAdmin()) {
                 if (in_array($facet_slug, config('stop-blog'))) {
-                    Validation::comingBack(__('msg.went_wrong'), 'error', $redirect);
+                    is_return(__('msg.went_wrong'), 'error', $redirect);
                 }
             }
         }
@@ -53,15 +53,15 @@ class AddFacetController extends Controller
         Validation::Length($facet_slug, 3, 43, 'slug', $redirect);
 
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $facet_slug)) {
-            Validation::comingBack(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
+            is_return(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
         }
 
         if (FacetModel::uniqueSlug($facet_slug, $facet_type)) {
-            Validation::comingBack(__('msg.repeat_url'), 'error', $redirect);
+            is_return(__('msg.repeat_url'), 'error', $redirect);
         }
 
         if (preg_match('/\s/', $facet_slug) || strpos($facet_slug, ' ')) {
-            Validation::comingBack(__('msg.url_gaps'), 'error', $redirect);
+            is_return(__('msg.url_gaps'), 'error', $redirect);
         }
 
         $type = $facet_type ?? 'topic';
@@ -83,6 +83,6 @@ class AddFacetController extends Controller
         SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'facet');
 
         $msg = $type == 'blog' ? __('msg.blog_added') : __('msg.change_saved');
-        Validation::comingBack($msg, 'success', $redirect);
+        is_return($msg, 'success', $redirect);
     }
 }

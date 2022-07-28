@@ -148,6 +148,6 @@ class Users extends Controller
             ]
         );
 
-        Validation::comingBack(__('msg.change_saved'), 'success', url('admin.user.edit', ['id' => $data['user_id']]));
+        is_return(__('msg.change_saved'), 'success', url('admin.user.edit', ['id' => $data['user_id']]));
     }
 }

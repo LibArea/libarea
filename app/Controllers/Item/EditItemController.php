@@ -139,6 +139,6 @@ class EditItemController extends Controller
             FacetModel::addItemFacets($arr, $item['item_id']);
         }
 
-        Validation::comingBack(__('msg.change_saved'), 'success', url('web'));
+        is_return(__('msg.change_saved'), 'success', url('web'));
     }
 }

@@ -67,6 +67,6 @@ class EditAnswerController extends Controller
             ]
         );
 
-        Validation::comingBack(__('msg.change_saved'), 'success', $url_post . '#answer_' . $answer['answer_id']);
+        is_return(__('msg.change_saved'), 'success', $url_post . '#answer_' . $answer['answer_id']);
     }
 }

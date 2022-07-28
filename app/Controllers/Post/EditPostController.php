@@ -24,7 +24,7 @@ class EditPostController extends Controller
         self::error404($post);
 
         if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
-            Validation::comingBack(__('msg.access_denied'), 'error');
+            is_return(__('msg.access_denied'), 'error');
         }
 
         $post_related = [];
@@ -62,7 +62,7 @@ class EditPostController extends Controller
         // Access check 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
         if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
-            Validation::comingBack(__('msg.went_wrong'), 'error');
+            is_return(__('msg.went_wrong'), 'error');
         }
 
         $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
@@ -70,7 +70,7 @@ class EditPostController extends Controller
         $post_title = str_replace("&nbsp;", '', Request::getPost('post_title'));
         Validation::length($post_title, 6, 250, 'title', $redirect);
         Validation::length($content, 6, 25000, 'content', $redirect);
-        
+
         // Form hacking
         if ($post['post_draft'] == 0) {
             $draft = 0;
@@ -90,13 +90,13 @@ class EditPostController extends Controller
         // Related topics
         $fields    = Request::getPost() ?? [];
         $new_type = self::addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
-        
+
         $post_related = $this->relatedPost();
 
         if (UserData::checkAdmin()) {
             $post_merged_id = Request::getPostInt('post_merged_id');
-        } 
-        
+        }
+
         PostModel::editPost(
             [
                 'post_id'               => $post_id,
@@ -118,7 +118,7 @@ class EditPostController extends Controller
             ]
         );
 
-        Validation::comingBack(__('msg.change_saved'), 'success', '/post/' . $post['post_id']);
+        is_return(__('msg.change_saved'), 'success', '/post/' . $post['post_id']);
     }
 
     // Add fastes (blogs, topics) to the post 
@@ -127,7 +127,7 @@ class EditPostController extends Controller
         $new_type = 'post';
         $facets = $fields['facet_select'] ?? false;
         if (!$facets) {
-            Validation::comingBack(__('msg.select_topic'), 'error', $redirect);
+            is_return(__('msg.select_topic'), 'error', $redirect);
         }
         $topics = json_decode($facets, true);
 
@@ -154,15 +154,15 @@ class EditPostController extends Controller
     {
         $post_id    = Request::getInt('id');
         $post = PostModel::getPost($post_id, 'id', $this->user);
-        
+
         if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
-            Validation::comingBack(__('msg.went_wrong'), 'error');
+            is_return(__('msg.went_wrong'), 'error');
         }
 
         PostModel::setPostImgRemove($post['post_id']);
         UploadImage::coverPostRemove($post['post_content_img'], $this->user['id']);
 
-        Validation::comingBack(__('msg.cover_removed'), 'success', url('content.edit', ['type' => 'post', 'id' => $post['post_id']]));
+        is_return(__('msg.cover_removed'), 'success', url('content.edit', ['type' => 'post', 'id' => $post['post_id']]));
     }
 
     public function uploadContentImage()

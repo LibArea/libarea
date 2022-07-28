@@ -40,5 +40,5 @@
     </svg>
     <span class="middle"><?= Html::langDate($topic['facet_add_date']); ?></span>
   </div>
-  <?= insert('/_block/sidebar/topic', ['data' => $data]); ?>
+  <?= insert('/_block/facet/topic', ['data' => $data]); ?>
 </aside>

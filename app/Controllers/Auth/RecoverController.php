@@ -36,7 +36,7 @@ class RecoverController extends Controller
 
         if (config('integration.captcha')) {
             if (!Google::checkCaptchaCode()) {
-                Validation::comingBack(__('msg.code_error'), 'error', $redirect);
+                is_return(__('msg.code_error'), 'error', $redirect);
             }
         }
 
@@ -45,12 +45,12 @@ class RecoverController extends Controller
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['email'])) {
-            Validation::comingBack(__('msg.no_user'), 'error', $redirect);
+            is_return(__('msg.no_user'), 'error', $redirect);
         }
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['ban_list'] == UserData::BANNED_USER) {
-            Validation::comingBack(__('msg.account_verified'), 'error', $redirect);
+            is_return(__('msg.account_verified'), 'error', $redirect);
         }
 
         $code = $uInfo['id'] . '-' . Html::randomString('crypto', 25);
@@ -65,7 +65,7 @@ class RecoverController extends Controller
         // Отправка e-mail
         SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => url('recover.code', ['code' => $code])]);
 
-        Validation::comingBack(__('msg.new_password_email'), url('login'));
+        is_return(__('msg.new_password_email'), url('login'));
     }
 
     // Страница установки нового пароля
@@ -114,7 +114,7 @@ class RecoverController extends Controller
 
         UserModel::editRecoverFlag($user_id);
 
-        Validation::comingBack(__('msg.change_saved'), 'success', url('login'));
+        is_return(__('msg.change_saved'), 'success', url('login'));
     }
 
     // Проверка корректности E-mail

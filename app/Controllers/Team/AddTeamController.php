@@ -50,6 +50,6 @@ class AddTeamController extends Controller
                 'team_type'     => 'post',
             ]
         );
-        Validation::comingBack(__('team.created'), 'success', url('teams'));
+        is_return(__('team.created'), 'success', url('teams'));
     }
 }

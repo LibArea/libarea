@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <?= insert('/_block/sidebar/topic', ['data' => $data]); ?>
+    <?= insert('/_block/facet/topic', ['data' => $data]); ?>
 
     <?php if (!empty($data['writers'])) : ?>
       <div class="sticky top-sm">

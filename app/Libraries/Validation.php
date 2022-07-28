@@ -33,10 +33,4 @@ class Validation
     {
         return mb_strlen($str, "utf-8");
     }
-
-    public static function comingBack($text, $status, $redirect = '/')
-    {
-        Msg::add($text, $status);
-        redirect($redirect);
-    }
 }

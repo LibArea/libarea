@@ -120,7 +120,7 @@ class Badges extends Controller
             ]
         );
 
-        Validation::comingBack(__('msg.successfully'), 'success', url('admin.user.edit', ['id' => $uid]));
+        is_return(__('msg.successfully'), 'success', url('admin.user.edit', ['id' => $uid]));
     }
 
     public function change()
@@ -150,7 +150,7 @@ class Badges extends Controller
             ]
         );
 
-        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
+        is_return(__('msg.change_saved'), 'success', $redirect);
     }
 
     public function remove()
@@ -163,6 +163,6 @@ class Badges extends Controller
             ]
         );
 
-        Validation::comingBack(__('msg.command_executed'), 'success', '/admin/users/' . $uid . '/edit');
+        is_return(__('msg.command_executed'), 'success', '/admin/users/' . $uid . '/edit');
     }
 }

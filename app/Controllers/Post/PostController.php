@@ -52,7 +52,7 @@ class PostController extends Controller
         $content['amount_content'] = $content['post_answers_count'];
         if ($content['post_feature'] == 0) {
             $content['amount_content'] = $content['post_comments_count'] + $content['post_answers_count'];
-        } 
+        }
 
         $post_answers = AnswerModel::getAnswersPost($content['post_id'], $this->user['id'], $content['post_feature']);
 

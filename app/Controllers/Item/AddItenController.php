@@ -47,7 +47,7 @@ class AddItemController extends Controller
         // Check if the domain exists in the system  
         // Проверим наличие домена в системе
         if ($domain = self::getDomain(Request::getPost('url'))) {
-            Validation::comingBack(__('web.site_replay'), 'error', $redirect);
+            is_return(__('web.site_replay'), 'error', $redirect);
         }
 
         // Get a first level domain       
@@ -123,7 +123,7 @@ class AddItemController extends Controller
 
         SubscriptionModel::focus($item_last['item_id'], $this->user['id'], 'item');
 
-        Validation::comingBack(__('web.site_added'), 'success', url('web'));
+        is_return(__('web.site_added'), 'success', url('web'));
     }
 
     public static function getDomain($url)

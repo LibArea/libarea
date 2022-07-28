@@ -16,7 +16,7 @@
 
 <aside>
   <?php if (!UserData::checkActiveUser()) : ?>
-    <?= insert('/_block/sidebar/login'); ?>
+    <?= insert('/_block/login'); ?>
   <?php endif; ?>
 
   <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) : ?>
@@ -86,6 +86,6 @@
   <?php endif; ?>
 
   <div class="sticky top-sm">
-    <?= insert('/_block/sidebar/latest-answers-tabs', ['latest_answers' => $data['latest_answers']]); ?>
+    <?= insert('/_block/latest-answers-tabs', ['latest_answers' => $data['latest_answers']]); ?>
   </div>
 </aside>

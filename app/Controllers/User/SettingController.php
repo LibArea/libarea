@@ -105,7 +105,7 @@ class SettingController extends Controller
             ]
         );
 
-        Validation::comingBack(__('msg.change_saved'), 'success', $redirect);
+        is_return(__('msg.change_saved'), 'success', $redirect);
     }
 
     // Avatar and cover upload form
@@ -130,7 +130,7 @@ class SettingController extends Controller
     {
         UploadImage::set($_FILES, $this->user['id'], 'user');
 
-        Validation::comingBack(__('msg.change_saved'), 'success', '/setting/avatar');
+        is_return(__('msg.change_saved'), 'success', '/setting/avatar');
     }
 
     // Change password form
@@ -155,25 +155,25 @@ class SettingController extends Controller
 
         $redirect   = '/setting/security';
         if ($password2 != $password3) {
-            Validation::comingBack(__('msg.pass_match_err'), 'error', $redirect);
+            is_return(__('msg.pass_match_err'), 'error', $redirect);
         }
 
         if (substr_count($password2, ' ') > 0) {
-            Validation::comingBack(__('msg.password_spaces'), 'error', $redirect);
+            is_return(__('msg.password_spaces'), 'error', $redirect);
         }
 
         Validation::length($password2, 8, 32, 'password', $redirect);
 
         $userInfo   = UserModel::userInfo($this->user['email']);
         if (!password_verify($password, $userInfo['password'])) {
-            Validation::comingBack(__('msg.old_error'), 'error', $redirect);
+            is_return(__('msg.old_error'), 'error', $redirect);
         }
 
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
 
         SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
 
-        Validation::comingBack(__('msg.successfully'), 'success');
+        is_return(__('msg.successfully'), 'success');
     }
 
     // Cover Removal
@@ -201,7 +201,7 @@ class SettingController extends Controller
             ]
         );
 
-        Validation::comingBack(__('msg.change_saved'), 'success', '/setting/avatar');
+        is_return(__('msg.change_saved'), 'success', '/setting/avatar');
     }
 
     // Member preference setting form
@@ -233,6 +233,6 @@ class SettingController extends Controller
             ]
         );
 
-        Validation::comingBack(__('msg.change_saved'), 'success', '/setting/notifications');
+        is_return(__('msg.change_saved'), 'success', '/setting/notifications');
     }
 }

@@ -1,4 +1,5 @@
 <?php if (!empty($data['posts'])) : ?>
+<div class="list-none">
   <?php $n = 0;
   foreach ($data['posts'] as $post) :
     $n++; ?>
@@ -6,7 +7,7 @@
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
-    <div class="flex mb20 article_<?= $post['post_id']; ?>">
+    <li class="list-post br-top-zebra article_<?= $post['post_id']; ?>">
       <div class="w40 no-flex center">
         <?= Html::votes($post, 'post', 'arrow-up'); ?>
       </div>
@@ -17,10 +18,9 @@
               <?= __('app.unsubscribe'); ?>
             </div>
           <?php endif; ?>
-          <a href="<?= $post_url; ?>">
-            <h3 class="inline m0"><?= $post['post_title']; ?>
+          <a class="text-xl" href="<?= $post_url; ?>">
+              <?= $post['post_title']; ?>
               <?= insert('/content/post/post-title', ['post' => $post]); ?>
-            </h3>
           </a>
           <?= Html::facets($post['facet_list'], 'blog', 'blog', 'tag'); ?>
           <?= Html::facets($post['facet_list'], 'topic', 'topic', 'tag-yellow'); ?>
@@ -41,8 +41,9 @@
           <?php endif; ?>
         </div>
       </div>
-    </div>
+    </li>
   <?php endforeach; ?>
+  </ul>
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?= insert('/_block/recommended-topics', ['data' => $data]); ?>

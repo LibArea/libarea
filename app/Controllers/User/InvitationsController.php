@@ -54,18 +54,18 @@ class InvitationsController extends Controller
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['email'])) {
-            Validation::comingBack(__('msg.user_already'), 'error', $redirect);
+            is_return(__('msg.user_already'), 'error', $redirect);
         }
 
         $inv_user = InvitationModel::duplicate($invitation_email);
         if (!empty($inv_user['invitation_email'])) {
             if ($inv_user['invitation_email'] == $invitation_email) {
-                Validation::comingBack(__('msg.invate_replay'), 'error', $redirect);
+                is_return(__('msg.invate_replay'), 'error', $redirect);
             }
         }
 
         if ($this->user['invitation_available'] >= config('general.invite_limit')) {
-            Validation::comingBack(__('msg.invate_limit_stop'), 'error', $redirect);
+            is_return(__('msg.invate_limit_stop'), 'error', $redirect);
         }
 
         $invitation_code = Html::randomString('crypto', 25);
@@ -80,15 +80,16 @@ class InvitationsController extends Controller
             ]
         );
 
-        self::escort($invitation_code, $invitation_email);
+        $this->escort($invitation_code, $invitation_email);
 
-        Validation::comingBack(__('msg.invite_created'), 'success', $redirect);
+        is_return(__('msg.invite_created'), 'success', $redirect);
     }
     
     // We will send an email and write logs
-    public static function escort ($invitation_code, $invitation_email)
+    function escort ($invitation_code, $invitation_email)
     {
         $link = url('invite.reg', ['code' => $invitation_code]);
+
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
         ActionModel::addLogs(

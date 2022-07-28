@@ -52,3 +52,9 @@ function component(string $name, array $params = [])
 {
     return App\Controllers\Controller::insert('/_block/form/components/' . $name, $params);
 }
+
+function is_return(string $text, string $status, $redirect = '/')
+{
+    Msg::add($text, $status);
+    redirect($redirect);
+}

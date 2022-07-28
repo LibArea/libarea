@@ -18,12 +18,14 @@
                 <div class="flex text-sm gap">
                   <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">
                     <?= Html::image($answer['avatar'], $answer['login'], 'img-sm mr5', 'avatar', 'small'); ?>
-                    <span <?php if (Html::loginColor($answer['created_at'])) : ?> class="green"<?php endif; ?>>
+                    <span <?php if (Html::loginColor($answer['created_at'])) : ?> class="green" <?php endif; ?>>
                       <?= $answer['login']; ?>
                     </span>
                   </a>
                   <?php if ($post['post_user_id'] == $answer['answer_user_id']) : ?>
-                    <svg class="icons icon-small sky"><use xlink:href="/assets/svg/icons.svg#mic"></use></svg>
+                    <svg class="icons icon-small sky">
+                      <use xlink:href="/assets/svg/icons.svg#mic"></use>
+                    </svg>
                   <?php endif; ?>
                   <span class="gray-600 lowercase">
                     <?= Html::langDate($answer['date']); ?>
@@ -33,7 +35,9 @@
                       (<?= __('app.ed'); ?>.)
                     </span>
                   <?php endif; ?>
-                  <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#anchor"></use></svg></a>
+                  <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><svg class="icons icon-small">
+                      <use xlink:href="/assets/svg/icons.svg#anchor"></use>
+                    </svg></a>
                   <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
                 </div>
                 <div class="max-w780 ind-first-p">
@@ -57,7 +61,9 @@
 
                 <?php if (UserData::checkAdmin()) : ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
-                    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#trash"></use></svg>
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#trash"></use>
+                    </svg>
                   </a>
                 <?php endif; ?>
 
@@ -65,7 +71,9 @@
 
                 <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
-                    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#flag"></use></svg>
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#flag"></use>
+                    </svg>
                   </a>
                 <?php endif; ?>
               </div>
@@ -131,17 +139,25 @@
                   </span>
                 </a>
                 <?php if ($post['post_user_id'] == $comment['comment_user_id']) : ?>
-                  <svg class="icons icon-small sky"><use xlink:href="/assets/svg/icons.svg#mic"></use></svg>
+                  <svg class="icons icon-small sky">
+                    <use xlink:href="/assets/svg/icons.svg#mic"></use>
+                  </svg>
                 <?php endif; ?>
                 <span class="gray-600 lowercase">
                   <?= Html::langDate($comment['date']); ?>
                 </span>
                 <?php if ($comment['comment_comment_id'] > 0) : ?>
-                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#arrow-up"></use></svg></a>
+                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><svg class="icons icon-small">
+                      <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
+                    </svg></a>
                 <?php else : ?>
-                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#arrow-up"></use></svg></a>
+                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><svg class="icons icon-small">
+                      <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
+                    </svg></a>
                 <?php endif; ?>
-                <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><svg class="icons icon-small"><use xlink:href="/assets/svg/icons.svg#anchor"></use></svg></a>
+                <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><svg class="icons icon-small">
+                    <use xlink:href="/assets/svg/icons.svg#anchor"></use>
+                  </svg></a>
                 <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
               </div>
               <div class="max-w780 ind-first-p">
@@ -171,7 +187,9 @@
 
                 <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
-                    <svg class="icons"><use xlink:href="/assets/svg/icons.svg#flag"></use></svg>
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#flag"></use>
+                    </svg>
                   </a>
                 <?php endif; ?>
               </div>

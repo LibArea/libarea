@@ -45,8 +45,7 @@
             },
           <?php endif; ?>
         <?php endforeach; ?>
-        <?php if (!empty($cut)) : ?>
-          {
+        <?php if (!empty($cut)) : ?> {
             icon: '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>',
             title: "<?= __('app.crop_post'); ?>",
             action: (e) => {
@@ -54,8 +53,7 @@
               e.codemirror.focus();
             },
           },
-        <?php endif; ?>
-        {
+        <?php endif; ?> {
           icon: '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#lock"></use></svg>',
           title: "<?= __('app.spoiler'); ?>",
           children: [{
