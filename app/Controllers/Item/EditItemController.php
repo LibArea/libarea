@@ -107,7 +107,6 @@ class EditItemController extends Controller
                 'item_published'        => $published,
                 'item_close_replies'    => $data['close_replies'] == 'on' ? 1 : 0,
                 'item_user_id'          => $new_user_id,
-                'item_type_url'         => 0,
                 'item_status_url'       => $data['status'] ?? 404,
                 'item_is_soft'          => $data['soft'] == 'on' ? 1 : 0,
                 'item_is_github'        => $data['github'] == 'on' ? 1 : 0,
