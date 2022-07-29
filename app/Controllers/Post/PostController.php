@@ -111,7 +111,7 @@ class PostController extends Controller
                     'data'  => [
                         'post'          => $content,
                         'answers'       => $answers,
-                        'recommend'     => PostModel::postSimilars($content['post_id'], $this->user, $facets[0]['facet_id']),
+                        'recommend'     => PostModel::postSimilars($content['post_id'], $this->user, $facets[0]['facet_id'] ?? null),
                         'related_posts' => $related_posts ?? '',
                         'post_signed'   => SubscriptionModel::getFocus($content['post_id'], $this->user['id'], 'post'),
                         'facets'        => $facets,

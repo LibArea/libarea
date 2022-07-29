@@ -63,7 +63,7 @@ class SendEmail
         if (config('integration.smtp')) {
 
             try {
-                //Server settings
+                // Server settings
                 // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->isSMTP();
                 $mail->CharSet    = "utf-8";
@@ -88,7 +88,9 @@ class SendEmail
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
         } else {
-            $mail->isSendmail();
+            // При включенной возможно варианты (if enabled, options are possible)
+            // https://github.com/PHPMailer/PHPMailer/issues/2465?ysclid=l665mmji6w128130571#issuecomment-897547946
+            // $mail->isSendmail();
             $mail->CharSet = "utf-8";
             $mail->setFrom(config('general.email'), config('meta.title'));
             $mail->addAddress($email, '');
