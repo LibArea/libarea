@@ -22,7 +22,7 @@ return [
         'lang'      => 'Email',
     ], [
         'url'       => 'github',
-        'addition'  => 'mailto:',
+        'addition'  => false,
         'title'     => 'github',
         'lang'      => 'GitHub',
     ], [
