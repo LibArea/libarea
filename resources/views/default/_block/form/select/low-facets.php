@@ -1,10 +1,6 @@
-<?
-// Выбор детей в основной структуре
-?>
-
 <fieldset>
   <label><?= $title; ?></label>
-  <input name="high_facet_id" id="high_facet_id">
+  <input name="low_facet_id" id="low_facet_id">
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
@@ -33,9 +29,8 @@
   document.addEventListener("DOMContentLoaded", async () => {
 
     var search_facet = await facet_search();
-    var input = document.querySelector('#high_facet_id');
+    var input = document.querySelector('#low_facet_id');
     var options_post = {
-      tagTextProp: "facet_title",
       // userInput: false,        // <- отключим пользовательский ввод
       skipInvalid: true, // <- не добавлять повтороно не допускаемые теги
       enforceWhitelist: true, // <- добавлять только из белого списка

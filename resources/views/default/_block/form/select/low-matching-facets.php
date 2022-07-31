@@ -1,7 +1,3 @@
-<?
-// Связанные темы
-?>
-
 <fieldset>
   <label><?= $title; ?></label>
   <input name="facet_matching" id="facet_id_matching">
@@ -30,11 +26,9 @@
   };
 
   document.addEventListener("DOMContentLoaded", async () => {
-
     var search_facet = await facet_search();
     var input = document.querySelector('#facet_id_matching');
     var options_post = {
-      tagTextProp: "facet_title",
       // userInput: false,        // <- отключим пользовательский ввод
       skipInvalid: true, // <- не добавлять повтороно не допускаемые теги
       enforceWhitelist: true, // <- добавлять только из белого списка
@@ -42,15 +36,13 @@
       callbacks: {
         "dropdown:show": async (e) => await facet_search(),
       },
-
       whitelist: search_facet,
     };
 
     var tagify_post = new Tagify(input, options_post);
 
-    <?php if ($action == 'edit') {   ?>
+    <?php if ($action == 'edit') { ?>
       tagify_post.addTags(JSON.parse('<?= json_encode($data['low_matching']) ?>'))
     <?php } ?>
-
   });
 </script>

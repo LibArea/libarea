@@ -75,12 +75,7 @@ class AddItemController extends Controller
                 'item_content'          => $content,
                 'item_published'        => $published,
                 'item_user_id'          => $this->user['id'],
-                'item_close_replies'    => Request::getPost('close_replies') == 'on' ? 1 : 0,
-                'item_status_url'       => 200,
-                'item_is_soft'          => 0,
-                'item_is_github'        => 0,
-                'item_votes'            => 0,
-                'item_count'            => 1,
+                'item_close_replies'    => Request::getPost('close_replies') == 'on' ? 1 : null,
             ]
         );
 

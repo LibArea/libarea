@@ -7,13 +7,13 @@
           'name' => __('web.catalog'),
           'link' => url('web')
         ], [
-          'name' => __('web.edit_website'),
+          'name' => __('web.add_website'),
           'link' => 'red'
         ],
       ]
     ]); ?>
 
-    <form action="<?= url('content.create', ['type' => 'item']); ?>" class="max-w640" method="post">
+    <form action="<?= url('content.create', ['type' => 'item']); ?>" class="max-w780" method="post">
       <?= csrf_field() ?>
       <?= insert('/_block/form/select/category', ['data' => ['topic' => false], 'action' => 'add']); ?>
       <?= component('add-website'); ?>

@@ -3,7 +3,7 @@ $domain = $data['domain']; ?>
 
 <div id="contentWrapper">
   <main>
-    <div class="max-w640">
+    <div class="max-w780">
 
       <?= insert('/_block/navigation/breadcrumbs', [
         'list' => [

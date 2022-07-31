@@ -1,8 +1,3 @@
-<?
-// $type (topic | blog | user | trust level | category)
-// $action (edit)
-?>
-
 <fieldset>
   <label>
     <?= __('app.' . $type); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
@@ -11,7 +6,6 @@
   <?php if ($action == 'edit' || $action == 'add') { ?>
     <input name="facet_select" id="topic_id" required>
   <?php } ?>
-
   <?php if (!empty($help)) { ?><div class="help"><?= $help; ?>...</div><?php } ?>
 </fieldset>
 
@@ -43,7 +37,6 @@
     let input = document.querySelector('#topic_id');
 
     let options = {
-      tagTextProp: "facet_title", // <- чтобы не переопределять title в запросах
       // userInput: false,        // <- отключим пользовательский ввод
       skipInvalid: true, // <- не добавлять повтороно не допускаемые теги
       enforceWhitelist: true, // <- добавлять только из белого списка
@@ -63,8 +56,8 @@
     let tagify = new Tagify(input, options);
 
     <?php if ($action == 'edit') { ?>
-      // tagify.addTags([{id:'20', value:'Веб-разработка'},{id:'43', value:'Новости и СМИ'},])
-      tagify.addTags(JSON.parse('<?= json_encode($data['topic_arr']) ?>'))
+       //tagify.addTags([{id:'20', value:'Веб-разработка'},{id:'43', value:'Новости и СМИ'},])
+       tagify.addTags(JSON.parse('<?= json_encode($data['topic_arr']) ?>'))
     <?php } else { ?>
       <?php if (!empty($data['topic'])) { ?>
         <?php if ($data['topic']) {
@@ -72,8 +65,8 @@
           $title  = $data['topic']['facet_title'];
         ?>
           tagify.addTags([{
-            value: '<?= $id; ?>',
-            facet_title: '<?= $title; ?>'
+            id: '<?= $id; ?>',
+            value: '<?= $title; ?>'
           }])
         <?php } else { ?>
           tagify.addTags([])

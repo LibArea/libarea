@@ -95,7 +95,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_slug,
                     facet_img,
                     facet_cover_art,
-                    facet_add_date,
+                    facet_date,
                     facet_seo_title,
                     facet_merged_id,
                     facet_top_level,
@@ -142,7 +142,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_slug,
                     facet_img,
                     facet_cover_art,
-                    facet_add_date,
+                    facet_date,
                     facet_seo_title,
                     facet_merged_id,
                     facet_top_level,
@@ -452,8 +452,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getHighMatching($facet_id)
     {
         $sql = "SELECT 
-                    facet_id as value,
-                    facet_title,
+                    facet_id id,
+                    facet_title value,
                     facet_slug,
                     facet_img,
                     facet_type,
@@ -475,8 +475,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getLowMatching($facet_id)
     {
         $sql = "SELECT 
-                    facet_id as value,
-                    facet_title,
+                    facet_id,
+                    facet_title as value,
                     facet_slug,
                     facet_img,
                     facet_type,
@@ -498,8 +498,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getHighLevelList($facet_id)
     {
         $sql = "SELECT 
-                    facet_id as value,
-                    facet_title,
+                    facet_id id,
+                    facet_title value,
                     facet_slug,
                     facet_img,
                     facet_type,
@@ -521,8 +521,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getLowLevelList($facet_id)
     {
         $sql = "SELECT 
-                    facet_id as value,
-                    facet_title,
+                    facet_id id,
+                    facet_title value,
                     facet_slug,
                     facet_img,
                     facet_type,

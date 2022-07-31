@@ -89,43 +89,7 @@
   transition: background .2s ease-out;
 }
 
-/* Для tagify */
-.tags-look .tagify__dropdown__item {
-  display: inline-block;
-  border-radius: 3px;
-  padding: 0.3em 0.5em;
-  border: 1px solid #ccc;
-  background-color: #f3f3f3;
-  margin: 0.2em;
-  font-size: 0.85em;
-  color: black;
-  transition: 0s;
-}
-
-.tags-look .tagify__dropdown__item--active {
-  color: black;
-}
-
-.tags-look .tagify__dropdown__item:hover {
-  background-color: lightyellow;
-  border-color: gold;
-}
-
-/* Открытые теги */
-.tagify--outside{
-    border: 0;
-}
-
-.tagify--outside .tagify__input{
-  order: -1;
-  flex: 100%;
-  border: 1px solid var(--tags-border-color);
-  margin-bottom: 1em;
-  transition: .1s;
-}
-
-.tagify--outside .tagify__input:hover{ border-color:var(--tags-hover-border-color); }
-.tagify--outside.tagify--focus .tagify__input{
-  transition:0s;
-  border-color: var(--tags-focus-border-color);
+.tagify {
+  width: 100%;
+  max-width: 780px;
 }

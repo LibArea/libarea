@@ -1,21 +1,17 @@
---
--- Структура таблицы `answers`
---
-
 CREATE TABLE `answers` (
   `answer_id` int(11) NOT NULL,
-  `answer_post_id` int(11) NOT NULL DEFAULT '0',
-  `answer_user_id` int(11) NOT NULL DEFAULT '0',
-  `answer_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `answer_modified` timestamp NOT NULL DEFAULT '2020-12-29 15:00:00',
-  `answer_published` tinyint(1) NOT NULL DEFAULT '1',
+  `answer_post_id` int(11) NOT NULL DEFAULT 0,
+  `answer_user_id` int(11) NOT NULL DEFAULT 0,
+  `answer_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `answer_modified` timestamp NOT NULL DEFAULT '2020-12-29 12:00:00',
+  `answer_published` tinyint(1) NOT NULL DEFAULT 1,
   `answer_ip` varbinary(16) DEFAULT NULL,
-  `answer_order` smallint(6) NOT NULL DEFAULT '0',
-  `answer_after` smallint(6) NOT NULL DEFAULT '0',
-  `answer_votes` smallint(6) NOT NULL DEFAULT '0',
+  `answer_order` smallint(6) NOT NULL DEFAULT 0,
+  `answer_after` smallint(6) NOT NULL DEFAULT 0,
+  `answer_votes` smallint(6) NOT NULL DEFAULT 0,
   `answer_content` text NOT NULL,
-  `answer_lo` int(11) NOT NULL DEFAULT '0',
-  `answer_is_deleted` tinyint(1) NOT NULL DEFAULT '0'
+  `answer_lo` int(11) NOT NULL DEFAULT 0,
+  `answer_is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -23,8 +19,8 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`answer_id`, `answer_post_id`, `answer_user_id`, `answer_date`, `answer_modified`, `answer_published`, `answer_ip`, `answer_order`, `answer_after`, `answer_votes`, `answer_content`, `answer_lo`, `answer_is_deleted`) VALUES
-(1, 3, 1, '2021-04-28 10:41:27', '2020-12-29 15:00:00', 1, 0x3132372e302e302e31, 0, 0, 0, 'Первый ответ в теме', 0, 0),
-(2, 1, 2, '2021-06-30 13:34:52', '2021-08-15 04:50:53', 1, 0x3132372e302e302e31, 0, 0, 0, 'Интересно, спасибо. Вы забыли указать, что можно задавать вопросы в чате (ссылка в footer) этого сайта.', 0, 0);
+(1, 3, 1, '2021-04-28 07:41:27', '2020-12-29 12:00:00', 1, 0x3132372e302e302e31, 0, 0, 0, 'Первый ответ в теме', 0, 0),
+(2, 1, 2, '2021-06-30 10:34:52', '2021-08-15 01:50:53', 1, 0x3132372e302e302e31, 0, 0, 0, 'Интересно, спасибо. Вы забыли указать, что можно задавать вопросы в чате (ссылка в footer) этого сайта.', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -36,10 +32,10 @@ CREATE TABLE `audits` (
   `id` int(11) NOT NULL,
   `action_type` varchar(32) DEFAULT NULL,
   `type_belonging` varchar(16) NOT NULL DEFAULT 'audit' COMMENT 'audit or repost)',
-  `content_id` int(11) NOT NULL DEFAULT '0',
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `add_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `read_flag` tinyint(1) DEFAULT '0' COMMENT 'Состояние прочтения'
+  `content_id` int(11) NOT NULL DEFAULT 0,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `add_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `read_flag` tinyint(1) DEFAULT 0 COMMENT 'Состояние прочтения'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -84,18 +80,18 @@ CREATE TABLE `badges_user` (
 
 CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
-  `comment_post_id` int(11) NOT NULL DEFAULT '0',
-  `comment_answer_id` int(11) NOT NULL DEFAULT '0',
-  `comment_comment_id` int(11) NOT NULL DEFAULT '0',
-  `comment_user_id` int(11) NOT NULL DEFAULT '0',
-  `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `comment_modified` timestamp NOT NULL DEFAULT '2020-12-29 15:00:00',
-  `comment_published` tinyint(1) NOT NULL DEFAULT '1',
+  `comment_post_id` int(11) NOT NULL DEFAULT 0,
+  `comment_answer_id` int(11) NOT NULL DEFAULT 0,
+  `comment_comment_id` int(11) NOT NULL DEFAULT 0,
+  `comment_user_id` int(11) NOT NULL DEFAULT 0,
+  `comment_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `comment_modified` timestamp NOT NULL DEFAULT '2020-12-29 12:00:00',
+  `comment_published` tinyint(1) NOT NULL DEFAULT 1,
   `comment_ip` varbinary(16) DEFAULT NULL,
-  `comment_after` smallint(6) NOT NULL DEFAULT '0',
-  `comment_votes` smallint(6) NOT NULL DEFAULT '0',
+  `comment_after` smallint(6) NOT NULL DEFAULT 0,
+  `comment_votes` smallint(6) NOT NULL DEFAULT 0,
   `comment_content` text NOT NULL,
-  `comment_is_deleted` tinyint(1) NOT NULL DEFAULT '0'
+  `comment_is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -109,37 +105,37 @@ CREATE TABLE `facets` (
   `facet_title` varchar(64) DEFAULT NULL,
   `facet_description` varchar(255) DEFAULT NULL,
   `facet_short_description` varchar(160) DEFAULT NULL,
-  `facet_info` text,
+  `facet_info` text DEFAULT NULL,
   `facet_slug` varchar(32) DEFAULT NULL,
   `facet_img` varchar(255) DEFAULT 'facet-default.png',
   `facet_cover_art` varchar(255) DEFAULT 'cover_art.jpeg',
-  `facet_add_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `facet_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `facet_seo_title` varchar(255) DEFAULT NULL,
-  `facet_merged_id` int(11) DEFAULT '0' COMMENT 'с кем слита',
-  `facet_top_level` tinyint(1) NOT NULL DEFAULT '0',
-  `facet_user_id` int(11) NOT NULL DEFAULT '1',
-  `facet_tl` tinyint(1) DEFAULT '0',
+  `facet_merged_id` int(11) DEFAULT 0 COMMENT 'с кем слита',
+  `facet_top_level` tinyint(1) NOT NULL DEFAULT 0,
+  `facet_user_id` int(11) NOT NULL DEFAULT 1,
+  `facet_tl` tinyint(1) DEFAULT 0,
   `facet_post_related` varchar(255) DEFAULT NULL,
-  `facet_the_day` tinyint(1) NOT NULL DEFAULT '0',
-  `facet_focus_count` int(11) DEFAULT '0',
-  `facet_count` int(11) DEFAULT '0',
-  `facet_sort` int(11) NOT NULL DEFAULT '0',
+  `facet_the_day` tinyint(1) NOT NULL DEFAULT 0,
+  `facet_focus_count` int(11) DEFAULT 0,
+  `facet_count` int(11) DEFAULT 0,
+  `facet_sort` int(11) NOT NULL DEFAULT 0,
   `facet_type` varchar(32) NOT NULL DEFAULT 'topic' COMMENT 'Topic, Group or Blog...',
-  `facet_is_deleted` tinyint(1) NOT NULL DEFAULT '0'
+  `facet_is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `facets`
 --
 
-INSERT INTO `facets` (`facet_id`, `facet_title`, `facet_description`, `facet_short_description`, `facet_info`, `facet_slug`, `facet_img`, `facet_cover_art`, `facet_add_date`, `facet_seo_title`, `facet_merged_id`, `facet_top_level`, `facet_user_id`, `facet_tl`, `facet_post_related`, `facet_the_day`, `facet_focus_count`, `facet_count`, `facet_sort`, `facet_type`, `facet_is_deleted`) VALUES
-(1, 'SEO', 'Поисковая оптимизация — это комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем.', 'Краткое описание темы...', 'Комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем по определённым запросам пользователей.\r\n\r\n**Поисковая оптимизация** — это способ использования правил поиска поисковых систем для улучшения текущего естественного ранжирования веб-сайтов в соответствующих поисковых системах. \r\n\r\nЦелью SEO является предоставление экологического решения для саморекламы для веб-сайта, позволяющего веб-сайту занимать лидирующие позиции в отрасли, чтобы получить преимущества бренда. \r\n\r\nSEO включает как внешнее, так и внутреннее SEO. \r\n\r\nSEO средства получить от поисковых систем больше бесплатного трафика, разумное планирование с точки зрения структуры веб-сайта, плана построения контента, взаимодействия с пользователем и общения, страниц и т.д., чтобы сделать веб-сайт более подходящим для принципов индексации поисковых систем. \r\n\r\nПовышение пригодности веб-сайтов для поисковых систем также называется Оптимизацией для поисковых систем, может не только улучшить эффект SEO, но и сделать информацию, относящуюся к веб-сайту, отображаемую в поисковой системе, более привлекательной для пользователей.', 'seo', 't-1-1625149922.jpeg', 'cover_art.jpeg', '2021-06-27 15:29:20', 'Поисковая оптимизация (SEO)', 0, 0, 1, 0, '1,2,3', 0, 1, 2, 0, 'topic', 0),
-(2, 'Интересные сайты', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.', 'Краткое описание темы...', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.\r\n\r\nПросто вводная страница... В разработке...', 'sites', 't-2-1625149821.jpeg', 'cover_art.jpeg', '2021-06-27 15:29:20', 'Интересные сайты', 0, 0, 1, 0, '3', 0, 1, 2, 0, 'topic', 0),
-(3, 'Веб-разработка', 'Веб-разработка — это работа, связанная с разработкой веб-сайта для Интернета (World Wide Web) или интрасети (частной сети).', 'Веб-разработка', 'Веб-разработка — это работа, связанная с разработкой веб-сайта для Интернета (World Wide Web) или интрасети (частной сети). Веб-разработка может варьироваться от разработки простой статической страницы с открытым текстом до сложных веб-приложений, электронного бизнеса и социальных сетей.', 'web-development', 'topic-default.png', 'cover_art.jpeg', '2021-11-04 17:04:41', 'Веб-разработка', 0, 0, 1, 0, '1,2,3', 0, 1, 1, 0, 'topic', 0),
-(4, 'Информация', 'Информация (помощь). Этот раздел содержит справочную информацию.', 'Информация ', 'Информация (помощь). Этот раздел содержит справочную информацию.', 'info', 'facet-default.png', 'cover_art.jpeg', '2021-12-22 08:07:54', 'Информация', 0, 0, 1, 0, '', 0, 1, 0, 0, 'section', 0),
-(5, 'Интернет', 'Internet - всемирная паутина. Каталог сайтов, полезные ресурсы.', 'Internet - это всё', 'Internet - всемирная паутина. Каталог сайтов, полезные ресурсы.', 'internet', 'facet-default.png', 'cover_art.jpeg', '2022-02-10 02:52:33', 'Internet - это всё', 0, 0, 1, 0, '', 0, 1, 0, 0, 'category', 0),
-(6, 'Справочная информация', 'Словари и энциклопедии, справочная информация. Информационные сайты.', 'Справочная информация', NULL, 'reference', 'facet-default.png', 'cover_art.jpeg', '2022-02-10 02:58:47', 'Справочная информация', 0, 0, 1, 0, NULL, 0, 1, 0, 0, 'category', 0),
-(7, 'Безопасность', 'Сайты посвященные безопасности в сети. Вирусы и антивирусы и т.д.', 'Безопасность', NULL, 'security', 'facet-default.png', 'cover_art.jpeg', '2022-02-10 03:02:11', 'Безопасность', 0, 0, 1, 0, NULL, 0, 1, 0, 0, 'category', 0);
+INSERT INTO `facets` (`facet_id`, `facet_title`, `facet_description`, `facet_short_description`, `facet_info`, `facet_slug`, `facet_img`, `facet_cover_art`, `facet_date`, `facet_seo_title`, `facet_merged_id`, `facet_top_level`, `facet_user_id`, `facet_tl`, `facet_post_related`, `facet_the_day`, `facet_focus_count`, `facet_count`, `facet_sort`, `facet_type`, `facet_is_deleted`) VALUES
+(1, 'SEO', 'Поисковая оптимизация — это комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем.', 'Краткое описание темы...', 'Комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем по определённым запросам пользователей.\r\n\r\n**Поисковая оптимизация** — это способ использования правил поиска поисковых систем для улучшения текущего естественного ранжирования веб-сайтов в соответствующих поисковых системах. \r\n\r\nЦелью SEO является предоставление экологического решения для саморекламы для веб-сайта, позволяющего веб-сайту занимать лидирующие позиции в отрасли, чтобы получить преимущества бренда. \r\n\r\nSEO включает как внешнее, так и внутреннее SEO. \r\n\r\nSEO средства получить от поисковых систем больше бесплатного трафика, разумное планирование с точки зрения структуры веб-сайта, плана построения контента, взаимодействия с пользователем и общения, страниц и т.д., чтобы сделать веб-сайт более подходящим для принципов индексации поисковых систем. \r\n\r\nПовышение пригодности веб-сайтов для поисковых систем также называется Оптимизацией для поисковых систем, может не только улучшить эффект SEO, но и сделать информацию, относящуюся к веб-сайту, отображаемую в поисковой системе, более привлекательной для пользователей.', 'seo', 't-1-1625149922.jpeg', 'cover_art.jpeg', '2021-06-27 12:29:20', 'Поисковая оптимизация (SEO)', 0, 0, 1, 0, '1,2,3', 0, 1, 2, 0, 'topic', 0),
+(2, 'Интересные сайты', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.', 'Краткое описание темы...', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.\r\n\r\nПросто вводная страница... В разработке...', 'sites', 't-2-1625149821.jpeg', 'cover_art.jpeg', '2021-06-27 12:29:20', 'Интересные сайты', 0, 0, 1, 0, '3', 0, 1, 2, 0, 'topic', 0),
+(3, 'Веб-разработка', 'Веб-разработка — это работа, связанная с разработкой веб-сайта для Интернета (World Wide Web) или интрасети (частной сети).', 'Веб-разработка', 'Веб-разработка — это работа, связанная с разработкой веб-сайта для Интернета (World Wide Web) или интрасети (частной сети). Веб-разработка может варьироваться от разработки простой статической страницы с открытым текстом до сложных веб-приложений, электронного бизнеса и социальных сетей.', 'web-development', 'topic-default.png', 'cover_art.jpeg', '2021-11-04 14:04:41', 'Веб-разработка', 0, 0, 1, 0, '1,2,3', 0, 1, 1, 0, 'topic', 0),
+(4, 'Информация', 'Информация (помощь). Этот раздел содержит справочную информацию.', 'Информация ', 'Информация (помощь). Этот раздел содержит справочную информацию.', 'info', 'facet-default.png', 'cover_art.jpeg', '2021-12-22 05:07:54', 'Информация', 0, 0, 1, 0, '', 0, 1, 0, 0, 'section', 0),
+(5, 'Интернет', 'Internet - всемирная паутина. Каталог сайтов, полезные ресурсы.', 'Internet - это всё', 'Internet - всемирная паутина. Каталог сайтов, полезные ресурсы.', 'internet', 'facet-default.png', 'cover_art.jpeg', '2022-02-09 23:52:33', 'Internet - это всё', 0, 0, 1, 0, '', 0, 1, 0, 0, 'category', 0),
+(6, 'Справочная информация', 'Словари и энциклопедии, справочная информация. Информационные сайты.', 'Справочная информация', NULL, 'reference', 'facet-default.png', 'cover_art.jpeg', '2022-02-09 23:58:47', 'Справочная информация', 0, 0, 1, 0, NULL, 0, 1, 0, 0, 'category', 0),
+(7, 'Безопасность', 'Сайты посвященные безопасности в сети. Вирусы и антивирусы и т.д.', 'Безопасность', NULL, 'security', 'facet-default.png', 'cover_art.jpeg', '2022-02-10 00:02:11', 'Безопасность', 0, 0, 1, 0, NULL, 0, 1, 0, 0, 'category', 0);
 
 -- --------------------------------------------------------
 
@@ -148,8 +144,8 @@ INSERT INTO `facets` (`facet_id`, `facet_title`, `facet_description`, `facet_sho
 --
 
 CREATE TABLE `facets_items_relation` (
-  `relation_facet_id` int(11) DEFAULT '0',
-  `relation_item_id` int(11) DEFAULT '0'
+  `relation_facet_id` int(11) DEFAULT 0,
+  `relation_item_id` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -192,10 +188,10 @@ INSERT INTO `facets_matching` (`matching_parent_id`, `matching_chaid_id`) VALUES
 
 CREATE TABLE `facets_merge` (
   `merge_id` int(11) NOT NULL,
-  `merge_add_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `merge_source_id` int(11) NOT NULL DEFAULT '0',
-  `merge_target_id` int(11) NOT NULL DEFAULT '0',
-  `merge_user_id` int(11) DEFAULT '0'
+  `merge_add_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `merge_source_id` int(11) NOT NULL DEFAULT 0,
+  `merge_target_id` int(11) NOT NULL DEFAULT 0,
+  `merge_user_id` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -205,8 +201,8 @@ CREATE TABLE `facets_merge` (
 --
 
 CREATE TABLE `facets_posts_relation` (
-  `relation_facet_id` int(11) DEFAULT '0',
-  `relation_post_id` int(11) DEFAULT '0'
+  `relation_facet_id` int(11) DEFAULT 0,
+  `relation_post_id` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -314,8 +310,8 @@ CREATE TABLE `files` (
   `file_type` varchar(32) DEFAULT NULL,
   `file_content_id` int(11) UNSIGNED DEFAULT NULL,
   `file_user_id` int(11) UNSIGNED DEFAULT NULL,
-  `file_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `file_is_deleted` tinyint(1) NOT NULL DEFAULT '0'
+  `file_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `file_is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -323,7 +319,35 @@ CREATE TABLE `files` (
 --
 
 INSERT INTO `files` (`file_id`, `file_path`, `file_type`, `file_content_id`, `file_user_id`, `file_date`, `file_is_deleted`) VALUES
-(1, '2021/c-1638777119.webp', 'post', 0, 1, '2021-12-05 19:52:00', 0);
+(1, '2021/c-1638777119.webp', 'post', 0, 1, '2021-12-05 16:52:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `folders`
+--
+
+CREATE TABLE `folders` (
+  `id` int(11) NOT NULL,
+  `title` varchar(64) NOT NULL,
+  `action_type` varchar(32) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `item_count` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `folders_relation`
+--
+
+CREATE TABLE `folders_relation` (
+  `id` int(11) NOT NULL,
+  `folder_id` int(11) NOT NULL COMMENT 'ID папки (folders)',
+  `action_type` varchar(32) NOT NULL COMMENT 'Тип контента',
+  `tid` int(11) NOT NULL COMMENT 'id контента',
+  `user_id` int(11) NOT NULL COMMENT 'id кто добавил'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -333,15 +357,15 @@ INSERT INTO `files` (`file_id`, `file_path`, `file_type`, `file_content_id`, `fi
 
 CREATE TABLE `invitations` (
   `invitation_id` int(10) UNSIGNED NOT NULL,
-  `uid` int(11) DEFAULT '0',
+  `uid` int(11) DEFAULT 0,
   `invitation_code` varchar(32) DEFAULT NULL,
   `invitation_email` varchar(100) DEFAULT NULL,
-  `add_time` datetime NOT NULL,
+  `invitation_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `add_ip` varchar(45) DEFAULT NULL,
-  `active_expire` tinyint(1) DEFAULT '0',
+  `active_expire` tinyint(1) DEFAULT 0,
   `active_time` datetime DEFAULT NULL,
   `active_ip` varchar(45) DEFAULT NULL,
-  `active_status` tinyint(4) DEFAULT '0',
+  `active_status` tinyint(4) DEFAULT 0,
   `active_uid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -356,35 +380,38 @@ CREATE TABLE `items` (
   `item_url` varchar(255) DEFAULT NULL,
   `item_domain` varchar(255) DEFAULT NULL,
   `item_title` varchar(255) DEFAULT NULL,
-  `item_content` text,
+  `item_content` text DEFAULT NULL,
   `item_title_soft` varchar(255) DEFAULT NULL,
-  `item_content_soft` text,
-  `item_published` tinyint(1) NOT NULL DEFAULT '1',
-  `item_user_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Who added',
-  `item_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `item_type_url` int(11) NOT NULL DEFAULT '0' COMMENT 'Site Type (0 - common, 1 - the blog, 2 - encyclopedia)',
-  `item_status_url` int(11) NOT NULL DEFAULT '200' COMMENT 'Site status (200, 403, 404)',
-  `item_status_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'When was the status check',
-  `item_is_soft` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'There is a program (script)',
-  `item_is_github` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'The site is on GitHub',
+  `item_content_soft` text DEFAULT NULL,
+  `item_published` tinyint(1) NOT NULL DEFAULT 1,
+  `item_user_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Who added',
+  `item_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `item_is_forum` tinyint(1) DEFAULT NULL COMMENT 'The site has a forum',
+  `item_is_portal` tinyint(1) DEFAULT NULL COMMENT 'This is a portal',
+  `item_is_blog` tinyint(1) DEFAULT NULL COMMENT 'This is a blog',
+  `item_is_reference` tinyint(1) DEFAULT NULL COMMENT 'Is this a reference site',
+  `item_is_soft` tinyint(1) DEFAULT NULL COMMENT 'There is a program (script)',
+  `item_is_github` tinyint(1) DEFAULT NULL COMMENT 'The site is on GitHub',
   `item_github_url` varchar(255) DEFAULT NULL COMMENT 'URL on GitHub',
   `item_post_related` varchar(255) DEFAULT NULL,
-  `item_votes` int(11) DEFAULT '0',
-  `item_count` int(11) DEFAULT '1',
-  `item_following_link` int(11) NOT NULL DEFAULT '1',
-  `item_is_deleted` tinyint(1) DEFAULT '0'
+  `item_focus_count` int(11) DEFAULT NULL,
+  `item_close_replies` tinyint(1) DEFAULT NULL,
+  `item_votes` int(11) NOT NULL DEFAULT 0,
+  `item_count` int(11) NOT NULL DEFAULT 1,
+  `item_following_link` int(11) NOT NULL DEFAULT 1,
+  `item_is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `items`
 --
 
-INSERT INTO `items` (`item_id`, `item_url`, `item_domain`, `item_title`, `item_content`, `item_title_soft`, `item_content_soft`, `item_published`, `item_user_id`, `item_date`, `item_type_url`, `item_status_url`, `item_status_date`, `item_is_soft`, `item_is_github`, `item_github_url`, `item_post_related`, `item_votes`, `item_count`, `item_following_link`, `item_is_deleted`) VALUES
-(1, 'https://libarea.ru', 'libarea.ru', '«LibArea» — сообщество по интересам', 'Лучшие публикации за сутки. Темы, личные дневники, группы. Каталог сайтов и программ, поиск..', 'LibArea', 'Discussion (forum) and Q&A platform. Community based on PHP Micro-Framework HLEB. (Zhihu, Quora clone)', 1, 1, '2021-06-20 19:35:02', 0, 200, '2021-06-20 19:35:02', 1, 1, 'https://github.com/LibArea/libarea', '2', 1, 1, 1, 0),
-(2, 'https://github.com', 'github.com', '«GitHub» — веб-сервис для хостинга IT-проектов', 'Веб-сервис, хостинговая платформа  для программистов основанная на системе контроля версий Git. Бесплатные, платные версии репозитория.', '', '', 1, 1, '2021-11-02 23:30:40', 0, 200, '2021-11-02 23:30:40', 0, 0, '', '', 1, 1, 1, 0),
-(3, 'https://phphleb.ru', 'phphleb.ru', '«HLEB» — микрофреймворк', 'Документация и описание Micro-Framework(а) использующий базовую реализацию MVC на PHP. Установить, настройка, структура проекта. Маршрутизация, контроллеры и модели.', 'HLEB', 'Отличительной особенностью микропрограммы HLEB является минимализм кода и скорость работы. Выбор данного фреймворка позволяет запустить полноценный продукт с минимальными временными затратами и обращениями к документации; это легко, просто и быстро. \r\n\r\nВ то же время он решает типовые задачи, такие как маршрутизация, перенос действий на контроллеры, поддержка модели, то есть базовая реализация MVC. Это самый минимум, необходимый для быстрого запуска приложения.', 1, 1, '2021-11-08 08:02:24', 0, 200, '2021-11-08 08:02:24', 1, 1, 'https://github.com/phphleb/hleb', '', 1, 1, 1, 0),
-(4, 'https://ispserver.ru', 'ispserver.ru', '«ISPserveru» — хостинг-провайдер', 'Веб-хостинг, VPS и выделенные серверы в трёх дата-центрах в Москве и Германии. Информация по панели управления ISPmanager. Контакты, обратная связь.', '', '', 1, 1, '2021-11-12 06:50:54', 0, 200, '2021-11-12 06:50:54', 0, 0, '', '', 1, 1, 1, 0),
-(5, 'https://sourceforge.net', 'sourceforge.net', '«Sourceforge» — проекты с открытым исходным кодом', 'Список проектов с открытым исходным кодом. Перечень проектов, нуждающиеся в помощи. Возможность загрузить различные материалы. Информация на английском языке.', '', '', 1, 1, '2021-11-12 07:12:18', 0, 200, '2021-11-12 07:12:18', 0, 0, '', '', 1, 1, 1, 0);
+INSERT INTO `items` (`item_id`, `item_url`, `item_domain`, `item_title`, `item_content`, `item_title_soft`, `item_content_soft`, `item_published`, `item_user_id`, `item_date`, `item_is_forum`, `item_is_portal`, `item_is_blog`, `item_is_reference`, `item_is_soft`, `item_is_github`, `item_github_url`, `item_post_related`, `item_focus_count`, `item_close_replies`, `item_votes`, `item_count`, `item_following_link`, `item_is_deleted`) VALUES
+(1, 'https://libarea.ru', 'libarea.ru', '«LibArea» — сообщество по интересам', 'Лучшие публикации за сутки. Темы, личные дневники, группы. Каталог сайтов и программ, поиск..', 'LibArea', 'Discussion (forum) and Q&A platform. Community based on PHP Micro-Framework HLEB. (Zhihu, Quora clone)', 1, 1, '2021-06-20 19:35:02', NULL, NULL, NULL, NULL, 1, 1, 'https://github.com/LibArea/libarea', '2', 0, 0, 1, 1, 1, 0),
+(2, 'https://github.com', 'github.com', '«GitHub» — веб-сервис для хостинга IT-проектов', 'Веб-сервис, хостинговая платформа  для программистов основанная на системе контроля версий Git. Бесплатные, платные версии репозитория.', '', '', 1, 1, '2021-11-02 23:30:40', NULL, NULL, NULL, NULL, NULL, NULL, '', '', 0, 0, 1, 1, 1, 0),
+(3, 'https://phphleb.ru', 'phphleb.ru', '«HLEB» — микрофреймворк', 'Документация и описание Micro-Framework(а) использующий базовую реализацию MVC на PHP. Установить, настройка, структура проекта. Маршрутизация, контроллеры и модели.', 'HLEB', 'Отличительной особенностью микропрограммы HLEB является минимализм кода и скорость работы. Выбор данного фреймворка позволяет запустить полноценный продукт с минимальными временными затратами и обращениями к документации; это легко, просто и быстро. \r\n\r\nВ то же время он решает типовые задачи, такие как маршрутизация, перенос действий на контроллеры, поддержка модели, то есть базовая реализация MVC. Это самый минимум, необходимый для быстрого запуска приложения.', 1, 1, '2021-11-08 08:02:24', NULL, NULL, NULL, NULL, 1, 1, 'https://github.com/phphleb/hleb', '', 0, 0, 1, 1, 1, 0),
+(4, 'https://ispserver.ru', 'ispserver.ru', '«ISPserveru» — хостинг-провайдер', 'Веб-хостинг, VPS и выделенные серверы в трёх дата-центрах в Москве и Германии. Информация по панели управления ISPmanager. Контакты, обратная связь.', '', '', 1, 1, '2021-11-12 06:50:54', NULL, NULL, NULL, NULL, NULL, NULL, '', '', 0, 0, 1, 1, 1, 0),
+(5, 'https://sourceforge.net', 'sourceforge.net', '«Sourceforge» — проекты с открытым исходным кодом', 'Список проектов с открытым исходным кодом. Перечень проектов, нуждающиеся в помощи. Возможность загрузить различные материалы. Информация на английском языке.', '', '', 1, 1, '2021-11-12 07:12:18', NULL, NULL, NULL, NULL, NULL, NULL, '', '', 0, 0, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -408,11 +435,11 @@ CREATE TABLE `messages` (
   `message_id` int(11) NOT NULL,
   `message_sender_id` int(11) DEFAULT NULL COMMENT 'Отправитель',
   `message_dialog_id` int(11) DEFAULT NULL,
-  `message_content` text,
-  `message_add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `message_sender_remove` tinyint(1) DEFAULT '0',
-  `message_recipient_remove` tinyint(1) DEFAULT '0',
-  `message_receipt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `message_content` text DEFAULT NULL,
+  `message_add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `message_sender_remove` tinyint(1) DEFAULT 0,
+  `message_recipient_remove` tinyint(1) DEFAULT 0,
+  `message_receipt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -427,8 +454,8 @@ CREATE TABLE `messages_dialog` (
   `dialog_sender_unread` int(11) DEFAULT NULL COMMENT 'Отправитель, 0 непрочитано',
   `dialog_recipient_id` int(11) DEFAULT NULL COMMENT 'Получатель',
   `dialog_recipient_unread` int(11) DEFAULT NULL COMMENT 'Получатель, 0 непрочитано',
-  `dialog_add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `dialog_update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dialog_add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `dialog_update_time` timestamp NOT NULL DEFAULT current_timestamp(),
   `dialog_sender_count` int(11) DEFAULT NULL COMMENT 'Отправитель кол.',
   `dialog_recipient_count` int(11) DEFAULT NULL COMMENT 'Получатель кол.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -442,12 +469,12 @@ CREATE TABLE `messages_dialog` (
 CREATE TABLE `notifications` (
   `id` int(11) NOT NULL,
   `sender_id` int(11) DEFAULT NULL COMMENT 'Отправитель',
-  `recipient_id` int(11) DEFAULT '0' COMMENT 'Получает ID',
+  `recipient_id` int(11) DEFAULT 0 COMMENT 'Получает ID',
   `action_type` int(4) DEFAULT NULL COMMENT 'Тип оповещения',
   `url` varchar(255) DEFAULT NULL COMMENT 'URL источника',
-  `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `read_flag` tinyint(1) DEFAULT '0' COMMENT 'Состояние прочтения',
-  `is_deleted` tinyint(1) UNSIGNED DEFAULT '0' COMMENT 'Удаление'
+  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `read_flag` tinyint(1) DEFAULT 0 COMMENT 'Состояние прочтения',
+  `is_deleted` tinyint(1) UNSIGNED DEFAULT 0 COMMENT 'Удаление'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -460,35 +487,35 @@ CREATE TABLE `posts` (
   `post_id` int(10) UNSIGNED NOT NULL,
   `post_title` varchar(255) NOT NULL,
   `post_slug` varchar(128) NOT NULL,
-  `post_feature` smallint(6) NOT NULL DEFAULT '0' COMMENT '0 - discussion, 1 - question...',
+  `post_feature` smallint(6) NOT NULL DEFAULT 0 COMMENT '0 - discussion, 1 - question...',
   `post_type` varchar(32) NOT NULL DEFAULT 'post' COMMENT 'Post, page...',
-  `post_translation` smallint(1) NOT NULL DEFAULT '0',
-  `post_draft` smallint(1) NOT NULL DEFAULT '0',
-  `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `post_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `post_published` tinyint(1) NOT NULL DEFAULT '1',
+  `post_translation` smallint(1) NOT NULL DEFAULT 0,
+  `post_draft` smallint(1) NOT NULL DEFAULT 0,
+  `post_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `post_modified` timestamp NOT NULL DEFAULT current_timestamp(),
+  `post_published` tinyint(1) NOT NULL DEFAULT 1,
   `post_user_id` int(10) UNSIGNED NOT NULL,
   `post_ip` varbinary(16) DEFAULT NULL,
-  `post_after` smallint(6) NOT NULL DEFAULT '0' COMMENT 'id первого ответа',
-  `post_votes` smallint(6) NOT NULL DEFAULT '0',
-  `post_karma` smallint(6) NOT NULL DEFAULT '0',
-  `post_answers_count` int(11) DEFAULT '0',
-  `post_comments_count` int(11) DEFAULT '0',
-  `post_hits_count` int(11) DEFAULT '0',
+  `post_after` smallint(6) NOT NULL DEFAULT 0 COMMENT 'id первого ответа',
+  `post_votes` smallint(6) NOT NULL DEFAULT 0,
+  `post_karma` smallint(6) NOT NULL DEFAULT 0,
+  `post_answers_count` int(11) DEFAULT 0,
+  `post_comments_count` int(11) DEFAULT 0,
+  `post_hits_count` int(11) DEFAULT 0,
   `post_content` text NOT NULL,
   `post_content_img` varchar(255) DEFAULT NULL,
   `post_thumb_img` varchar(255) DEFAULT NULL,
   `post_related` varchar(255) DEFAULT NULL,
-  `post_merged_id` int(11) NOT NULL DEFAULT '0' COMMENT 'id с чем объединен',
-  `post_is_recommend` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Рекомендованные посты',
-  `post_closed` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1 - пост закрыт',
-  `post_tl` smallint(1) NOT NULL DEFAULT '0' COMMENT 'Видимость по уровню доверия',
-  `post_lo` int(11) NOT NULL DEFAULT '0' COMMENT 'Id лучшего ответа',
-  `post_top` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1 - пост поднят',
+  `post_merged_id` int(11) NOT NULL DEFAULT 0 COMMENT 'id с чем объединен',
+  `post_is_recommend` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Рекомендованные посты',
+  `post_closed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост закрыт',
+  `post_tl` smallint(1) NOT NULL DEFAULT 0 COMMENT 'Видимость по уровню доверия',
+  `post_lo` int(11) NOT NULL DEFAULT 0 COMMENT 'Id лучшего ответа',
+  `post_top` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост поднят',
   `post_url` varchar(255) DEFAULT NULL,
   `post_url_domain` varchar(255) DEFAULT NULL,
-  `post_focus_count` int(11) DEFAULT '0',
-  `post_is_deleted` tinyint(1) DEFAULT '0'
+  `post_focus_count` int(11) DEFAULT 0,
+  `post_is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -496,13 +523,13 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_feature`, `post_type`, `post_translation`, `post_draft`, `post_date`, `post_modified`, `post_published`, `post_user_id`, `post_ip`, `post_after`, `post_votes`, `post_karma`, `post_answers_count`, `post_comments_count`, `post_hits_count`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_is_recommend`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_focus_count`, `post_is_deleted`) VALUES
-(1, 'Ответы на некоторые вопросы (FAQ)', 'answer-qa', 0, 'post', 0, 0, '2021-02-26 18:08:09', '2021-10-26 06:26:06', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 7, 'Превью поста на главной странице сайта формируется из первого абзаца текста. Мы забираем первый абзац и делаем превью. Сайт испольлзует MVC модель, если кто знаком с ней, то не особо трудно будет разобраться.\r\n\r\n### Где находятся конфиг сайта?\r\n\r\nЕсть 3 основополагающих файла конфигурации (There are 3 configuration files):\r\n\r\n* *dbase.config.php* — подключение к базе данных (connecting to the database)\r\n\r\n* *config.ini* — основные настройки (basic settings)\r\n\r\n* *start.hleb.php* — константы (constants)\r\n\r\n### Где находятся шаблоны сайта?\r\n\r\n```\r\n/resources/views/default\r\n```### Как мне поменять язык сайта?\r\n\r\nПо умолчанию на сайте используется русский язык.\r\n\r\nПереводы находится в папке:  `/app/Language/`\r\n\r\nВы можете переключать языки, в файле: `general.php` \r\n\r\nНайти:\r\n```php\r\n\'lang\' => \'ru\',\r\n```\r\n\r\n---\r\n\r\nBy default, the site uses Russian.\r\n\r\nThe translations are located in the folder: `general.php` find:\r\n\r\n```php\r\n\'lang\' => \'ru\',\r\n```\r\n\r\nThe transfers themselves are stored: `/app/Language/`', '', NULL, '2', 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(2, 'Где можно почитать документацию?', 'docs-post', 0, 'post', 0, 0, '2021-02-26 18:15:58', '2021-11-04 17:26:31', 1, 2, 0x3132372e302e302e31, 0, 1, 0, 0, 0, 8, 'Страница документации LibArea находится в стадии разработки... \r\n\r\n[https://libarea.com/](https://libarea.com/)\r\n\r\nКак она будет завершена, об этом будет сообщено дополнительно. Сам сайт создан на PHP Микрофреймворк HLEB. Все основные настройки,  можно найти на этом сайте:\r\n\r\n[https://phphleb.ru/ru/v1/](https://phphleb.ru/ru/v1/)\r\n\r\n', '', NULL, '1', 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 'post', 0, 0, '2021-04-28 10:35:13', '2021-04-28 10:35:13', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(4, 'Bee Network 🥳 — Криптовалюта Pi-Network', 'bee-network-e-mdash-kriptovalyuta-pi-network', 0, 'post', 0, 0, '2021-12-05 19:52:00', '2021-12-07 15:43:51', 1, 1, 0x3132372e302e302e31, 0, 2, 0, 0, 0, 3, 'Bee Network 🥳 &mdash; Криптовалюта Pi-Network', '2021/c-1638777119.webp', '', '', 0, 0, 0, 0, 0, 0, '', '', 1, 0),
-(5, 'Скрытые возможности в настройках профиля', 'skrytye-vozmozhnosti-v-nastrojkah-profilya', 0, 'post', 0, 0, '2021-12-07 22:44:23', '2021-12-07 22:44:23', 1, 1, 0x3132372e302e302e31, 0, 2, 0, 0, 0, 1, 'Если мы посмотрим в базу данных, в таблицу пользователей (users) то можем увидеть два поля которые пока не используются...\r\n\r\nПервое поле предполагает выбор дизайна. В планах сделать ещё один дизайн, который будет кардинально отличаться от существующего.\r\n\r\nИ второе поле `user_scroll`, которое будет служить, чтобы включить бесконечную прокрутку в ленте. Это иногда имеет смысл, хотя разбивка на страницы останется по дефолту.\r\n\r\n*Вообще, просто тестовый пост., чтобы заполнить одну тему.*', '', '', '', 0, 0, 0, 0, 0, 0, '', '', 1, 0),
-(6, 'Информация', 'information', 0, 'page', 0, 0, '2021-12-22 08:39:35', '2021-12-22 08:44:50', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 0, 0, 0, 'Этот раздел содержит справочную информацию.  \r\n\r\n### Где мне можно скачать архив сайта?\r\n\r\nСкачайте архив *libarea с GitHub:* [github.com/LibArea/libarea](https://github.com/LibArea/libarea)\r\n\r\nКод сайта имеет лицензию [MIT](https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F_MIT).  \r\n\r\n### Какие технологии используются на сайте?\r\n\r\nВ разделе документация есть статья: [Какие технологии использует сайт?](https://libarea.com/ru/)\r\n\r\n### Где можно подробней ознакомится с документацией?\r\n\r\nВ разделе документация: [libarea.com](https://libarea.com)\r\n\r\n### Как я могу помочь сайту?\r\n\r\n1. Порекомендовать друзьям наш сайт.\r\n2. Оставить ссылку на наш сайт в своем блоге, сайте, «Твиттере», на своей странице в социальной сети или на форуме, где Вас хорошо знают.\r\n3. Сделать денежный взнос удобным для Вас способом. \r\n\r\n\r\nСпособы оплаты: *ЮMoney — * 4100140143763\r\n\r\n### Как с вами связаться?\r\n\r\nПо e-mail: *dev@libarea.ru*\r\n\r\n*Мы в Discord:* [discord.gg/adJnPEGZZZ](https://discord.gg/adJnPEGZZZ)\r\n\r\n###  🙏  Спасибо\r\n\r\nСпасибо за спонсорство и поддержку!', '', '', '', 0, 0, 0, 0, 0, 0, '', '', 0, 0),
-(7, 'Политика конфиденциальности', 'privacy', 0, 'page', 0, 0, '2021-12-22 08:46:43', '2021-12-22 08:47:18', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 0, 0, 0, 'Политика конфиденциальности\r\n\r\nТут пишем про конфиденциальность! \r\n\r\nОбе эти статьи жестко закреплены в настройках и должны быть обязательны. Имя их URL изменению не подлежит. ', '', '', '', 0, 0, 0, 0, 0, 0, '', '', 0, 0);
+(1, 'Ответы на некоторые вопросы (FAQ)', 'answer-qa', 0, 'post', 0, 0, '2021-02-26 15:08:09', '2021-10-26 03:26:06', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 7, 'Превью поста на главной странице сайта формируется из первого абзаца текста. Мы забираем первый абзац и делаем превью. Сайт испольлзует MVC модель, если кто знаком с ней, то не особо трудно будет разобраться.\r\n\r\n### Где находятся конфиг сайта?\r\n\r\nЕсть 3 основополагающих файла конфигурации (There are 3 configuration files):\r\n\r\n* *dbase.config.php* — подключение к базе данных (connecting to the database)\r\n\r\n* *config.ini* — основные настройки (basic settings)\r\n\r\n* *start.hleb.php* — константы (constants)\r\n\r\n### Где находятся шаблоны сайта?\r\n\r\n```\r\n/resources/views/default\r\n```### Как мне поменять язык сайта?\r\n\r\nПо умолчанию на сайте используется русский язык.\r\n\r\nПереводы находится в папке:  `/app/Language/`\r\n\r\nВы можете переключать языки, в файле: `general.php` \r\n\r\nНайти:\r\n```php\r\n\'lang\' => \'ru\',\r\n```\r\n\r\n---\r\n\r\nBy default, the site uses Russian.\r\n\r\nThe translations are located in the folder: `general.php` find:\r\n\r\n```php\r\n\'lang\' => \'ru\',\r\n```\r\n\r\nThe transfers themselves are stored: `/app/Language/`', '', NULL, '2', 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(2, 'Где можно почитать документацию?', 'docs-post', 0, 'post', 0, 0, '2021-02-26 15:15:58', '2021-11-04 14:26:31', 1, 2, 0x3132372e302e302e31, 0, 1, 0, 0, 0, 8, 'Страница документации LibArea находится в стадии разработки... \r\n\r\n[https://libarea.com/](https://libarea.com/)\r\n\r\nКак она будет завершена, об этом будет сообщено дополнительно. Сам сайт создан на PHP Микрофреймворк HLEB. Все основные настройки,  можно найти на этом сайте:\r\n\r\n[https://phphleb.ru/ru/v1/](https://phphleb.ru/ru/v1/)\r\n\r\n', '', NULL, '1', 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 'post', 0, 0, '2021-04-28 07:35:13', '2021-04-28 07:35:13', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(4, 'Bee Network 🥳 — Криптовалюта Pi-Network', 'bee-network-e-mdash-kriptovalyuta-pi-network', 0, 'post', 0, 0, '2021-12-05 16:52:00', '2021-12-07 12:43:51', 1, 1, 0x3132372e302e302e31, 0, 2, 0, 0, 0, 3, 'Bee Network 🥳 &mdash; Криптовалюта Pi-Network', '2021/c-1638777119.webp', '', '', 0, 0, 0, 0, 0, 0, '', '', 1, 0),
+(5, 'Скрытые возможности в настройках профиля', 'skrytye-vozmozhnosti-v-nastrojkah-profilya', 0, 'post', 0, 0, '2021-12-07 19:44:23', '2021-12-07 19:44:23', 1, 1, 0x3132372e302e302e31, 0, 2, 0, 0, 0, 1, 'Если мы посмотрим в базу данных, в таблицу пользователей (users) то можем увидеть два поля которые пока не используются...\r\n\r\nПервое поле предполагает выбор дизайна. В планах сделать ещё один дизайн, который будет кардинально отличаться от существующего.\r\n\r\nИ второе поле `user_scroll`, которое будет служить, чтобы включить бесконечную прокрутку в ленте. Это иногда имеет смысл, хотя разбивка на страницы останется по дефолту.\r\n\r\n*Вообще, просто тестовый пост., чтобы заполнить одну тему.*', '', '', '', 0, 0, 0, 0, 0, 0, '', '', 1, 0),
+(6, 'Информация', 'information', 0, 'page', 0, 0, '2021-12-22 05:39:35', '2021-12-22 05:44:50', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 0, 0, 0, 'Этот раздел содержит справочную информацию.  \r\n\r\n### Где мне можно скачать архив сайта?\r\n\r\nСкачайте архив *libarea с GitHub:* [github.com/LibArea/libarea](https://github.com/LibArea/libarea)\r\n\r\nКод сайта имеет лицензию [MIT](https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F_MIT).  \r\n\r\n### Какие технологии используются на сайте?\r\n\r\nВ разделе документация есть статья: [Какие технологии использует сайт?](https://libarea.com/ru/)\r\n\r\n### Где можно подробней ознакомится с документацией?\r\n\r\nВ разделе документация: [libarea.com](https://libarea.com)\r\n\r\n### Как я могу помочь сайту?\r\n\r\n1. Порекомендовать друзьям наш сайт.\r\n2. Оставить ссылку на наш сайт в своем блоге, сайте, «Твиттере», на своей странице в социальной сети или на форуме, где Вас хорошо знают.\r\n3. Сделать денежный взнос удобным для Вас способом. \r\n\r\n\r\nСпособы оплаты: *ЮMoney — * 4100140143763\r\n\r\n### Как с вами связаться?\r\n\r\nПо e-mail: *dev@libarea.ru*\r\n\r\n*Мы в Discord:* [discord.gg/adJnPEGZZZ](https://discord.gg/adJnPEGZZZ)\r\n\r\n###  🙏  Спасибо\r\n\r\nСпасибо за спонсорство и поддержку!', '', '', '', 0, 0, 0, 0, 0, 0, '', '', 0, 0),
+(7, 'Политика конфиденциальности', 'privacy', 0, 'page', 0, 0, '2021-12-22 05:46:43', '2021-12-22 05:47:18', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 0, 0, 0, 'Политика конфиденциальности\r\n\r\nТут пишем про конфиденциальность! \r\n\r\nОбе эти статьи жестко закреплены в настройках и должны быть обязательны. Имя их URL изменению не подлежит. ', '', '', '', 0, 0, 0, 0, 0, 0, '', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -527,6 +554,28 @@ INSERT INTO `posts_signed` (`signed_id`, `signed_post_id`, `signed_user_id`) VAL
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `replys`
+--
+
+CREATE TABLE `replys` (
+  `reply_id` int(11) NOT NULL,
+  `reply_parent_id` int(11) NOT NULL,
+  `reply_item_id` int(11) NOT NULL,
+  `reply_content` text NOT NULL,
+  `reply_type` varchar(32) NOT NULL DEFAULT 'web' COMMENT 'web, soft...',
+  `reply_user_id` int(11) NOT NULL,
+  `reply_ip` varchar(64) NOT NULL,
+  `reply_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `reply_modified` datetime NOT NULL DEFAULT current_timestamp(),
+  `reply_count` int(7) NOT NULL DEFAULT 0,
+  `reply_votes` int(7) NOT NULL DEFAULT 0,
+  `reply_published` tinyint(1) NOT NULL DEFAULT 1,
+  `reply_is_deleted` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `search_logs`
 --
 
@@ -534,9 +583,9 @@ CREATE TABLE `search_logs` (
   `id` int(11) NOT NULL,
   `request` text NOT NULL,
   `action_type` varchar(32) NOT NULL COMMENT 'Catalog, site...',
-  `add_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `add_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `add_ip` varchar(45) NOT NULL,
-  `user_id` int(11) NOT NULL DEFAULT '0',
+  `user_id` int(11) NOT NULL DEFAULT 0,
   `count_results` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -549,9 +598,9 @@ CREATE TABLE `search_logs` (
 CREATE TABLE `stop_words` (
   `stop_id` int(11) NOT NULL,
   `stop_word` varchar(50) DEFAULT NULL,
-  `stop_add_uid` int(11) NOT NULL DEFAULT '0' COMMENT 'Кто добавил',
-  `stop_space_id` int(11) NOT NULL DEFAULT '0' COMMENT '0 - глобально',
-  `stop_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `stop_add_uid` int(11) NOT NULL DEFAULT 0 COMMENT 'Кто добавил',
+  `stop_space_id` int(11) NOT NULL DEFAULT 0 COMMENT '0 - глобально',
+  `stop_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -566,17 +615,17 @@ CREATE TABLE `users` (
   `name` varchar(50) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `activated` tinyint(1) DEFAULT '0',
-  `limiting_mode` tinyint(1) DEFAULT '0',
+  `activated` tinyint(1) DEFAULT 0,
+  `limiting_mode` tinyint(1) DEFAULT 0,
   `reg_ip` varchar(45) DEFAULT NULL,
   `trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `invitation_available` int(11) NOT NULL DEFAULT '0',
-  `invitation_id` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `invitation_available` int(11) NOT NULL DEFAULT 0,
+  `invitation_id` int(11) NOT NULL DEFAULT 0,
   `template` varchar(12) NOT NULL DEFAULT 'default',
   `lang` varchar(20) NOT NULL DEFAULT 'ru',
-  `scroll` tinyint(1) NOT NULL DEFAULT '0',
+  `scroll` tinyint(1) NOT NULL DEFAULT 0,
   `whisper` varchar(255) NOT NULL,
   `avatar` varchar(255) NOT NULL DEFAULT 'noavatar.png',
   `cover_art` varchar(255) NOT NULL DEFAULT 'cover_art.jpeg',
@@ -585,25 +634,26 @@ CREATE TABLE `users` (
   `website` varchar(50) DEFAULT NULL,
   `location` varchar(50) DEFAULT NULL,
   `public_email` varchar(50) DEFAULT NULL,
+  `github` varchar(50) DEFAULT NULL,
   `skype` varchar(50) DEFAULT NULL,
   `twitter` varchar(50) DEFAULT NULL,
   `telegram` varchar(50) DEFAULT NULL,
   `vk` varchar(50) DEFAULT NULL,
-  `rating` int(11) DEFAULT '0',
-  `my_post` int(11) DEFAULT '0' COMMENT 'Пост выведенный в профиль',
-  `ban_list` tinyint(1) DEFAULT '0',
-  `hits_count` int(11) DEFAULT '0',
-  `up_count` int(11) DEFAULT '0',
-  `is_deleted` tinyint(1) DEFAULT '0'
+  `rating` int(11) DEFAULT 0,
+  `my_post` int(11) DEFAULT 0 COMMENT 'Пост выведенный в профиль',
+  `ban_list` tinyint(1) DEFAULT 0,
+  `hits_count` int(11) DEFAULT 0,
+  `up_count` int(11) DEFAULT 0,
+  `is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `limiting_mode`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `template`, `lang`, `scroll`, `whisper`, `avatar`, `cover_art`, `color`, `about`, `website`, `location`, `public_email`, `skype`, `twitter`, `telegram`, `vk`, `rating`, `my_post`, `ban_list`, `hits_count`, `up_count`, `is_deleted`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, 0, '127.0.0.1', 10, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 'default', 'ru', 0, '', 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0),
-(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, 0, '127.0.0.1', 2, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 'default', 'ru', 0, '', 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 1, 0, 0);
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `limiting_mode`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `template`, `lang`, `scroll`, `whisper`, `avatar`, `cover_art`, `color`, `about`, `website`, `location`, `public_email`, `github`, `skype`, `twitter`, `telegram`, `vk`, `rating`, `my_post`, `ban_list`, `hits_count`, `up_count`, `is_deleted`) VALUES
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, 0, '127.0.0.1', 10, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 'default', 'ru', 0, '', 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0),
+(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, 0, '127.0.0.1', 2, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 'default', 'ru', 0, '', 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -619,7 +669,7 @@ CREATE TABLE `users_action_logs` (
   `action_type` varchar(32) NOT NULL,
   `action_name` varchar(124) NOT NULL COMMENT 'Action name',
   `url_content` varchar(250) NOT NULL COMMENT 'URL content',
-  `add_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Date added'
+  `add_date` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Date added'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -633,7 +683,7 @@ CREATE TABLE `users_activate` (
   `activate_date` datetime NOT NULL,
   `activate_user_id` int(11) NOT NULL,
   `activate_code` varchar(50) NOT NULL,
-  `activate_flag` tinyint(1) DEFAULT '0'
+  `activate_flag` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -644,33 +694,33 @@ CREATE TABLE `users_activate` (
 
 CREATE TABLE `users_agent_logs` (
   `id` int(10) UNSIGNED NOT NULL,
-  `add_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `add_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_id` int(10) UNSIGNED NOT NULL,
   `user_browser` varchar(64) NOT NULL,
   `user_os` varchar(64) NOT NULL,
   `user_ip` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Дамп данных таблицы `users_agent_logs`
 --
 
 INSERT INTO `users_agent_logs` (`id`, `add_date`, `user_id`, `user_browser`, `user_os`, `user_ip`) VALUES
-(1, '2021-09-20 07:09:38', 1, 'Firefox 92.0', 'Windows', '127.0.0.1'),
-(2, '2021-09-20 07:57:57', 2, 'Chrome 93.0.4577.82', 'Windows', '127.0.0.1'),
-(3, '2021-10-18 01:43:05', 1, 'Firefox 93.0', 'Windows', '127.0.0.1'),
-(4, '2021-10-26 06:24:03', 1, 'Firefox 93.0', 'Windows', '127.0.0.1'),
-(5, '2021-11-04 17:01:34', 1, 'Firefox 94.0', 'Windows', '127.0.0.1'),
-(6, '2021-12-05 09:38:15', 1, 'Firefox 94.0', 'Windows', '127.0.0.1'),
-(7, '2021-12-05 19:51:36', 1, 'Firefox 94.0', 'Windows', '127.0.0.1'),
-(8, '2021-12-07 15:25:29', 1, 'Firefox 95.0', 'Windows', '127.0.0.1'),
-(9, '2021-12-07 16:15:41', 2, 'Firefox 95.0', 'Windows', '127.0.0.1'),
-(10, '2021-12-07 22:40:13', 1, 'Firefox 95.0', 'Windows', '127.0.0.1'),
-(11, '2021-12-07 22:49:18', 2, 'Firefox 95.0', 'Windows', '127.0.0.1'),
-(12, '2021-12-22 08:03:39', 1, 'Firefox 95.0', 'Windows', '127.0.0.1'),
-(13, '2021-12-22 08:08:44', 1, 'Firefox 95.0', 'Windows', '127.0.0.1'),
-(14, '2021-12-22 08:09:08', 1, 'Firefox 95.0', 'Windows', '127.0.0.1'),
-(15, '2022-02-10 02:50:18', 1, 'Firefox 96.0', 'Windows', '127.0.0.1');
+(1, '2021-09-20 04:09:38', 1, 'Firefox 92.0', 'Windows', '127.0.0.1'),
+(2, '2021-09-20 04:57:57', 2, 'Chrome 93.0.4577.82', 'Windows', '127.0.0.1'),
+(3, '2021-10-17 22:43:05', 1, 'Firefox 93.0', 'Windows', '127.0.0.1'),
+(4, '2021-10-26 03:24:03', 1, 'Firefox 93.0', 'Windows', '127.0.0.1'),
+(5, '2021-11-04 14:01:34', 1, 'Firefox 94.0', 'Windows', '127.0.0.1'),
+(6, '2021-12-05 06:38:15', 1, 'Firefox 94.0', 'Windows', '127.0.0.1'),
+(7, '2021-12-05 16:51:36', 1, 'Firefox 94.0', 'Windows', '127.0.0.1'),
+(8, '2021-12-07 12:25:29', 1, 'Firefox 95.0', 'Windows', '127.0.0.1'),
+(9, '2021-12-07 13:15:41', 2, 'Firefox 95.0', 'Windows', '127.0.0.1'),
+(10, '2021-12-07 19:40:13', 1, 'Firefox 95.0', 'Windows', '127.0.0.1'),
+(11, '2021-12-07 19:49:18', 2, 'Firefox 95.0', 'Windows', '127.0.0.1'),
+(12, '2021-12-22 05:03:39', 1, 'Firefox 95.0', 'Windows', '127.0.0.1'),
+(13, '2021-12-22 05:08:44', 1, 'Firefox 95.0', 'Windows', '127.0.0.1'),
+(14, '2021-12-22 05:09:08', 1, 'Firefox 95.0', 'Windows', '127.0.0.1'),
+(15, '2022-02-09 23:50:18', 1, 'Firefox 96.0', 'Windows', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -696,11 +746,11 @@ CREATE TABLE `users_banlist` (
   `banlist_id` int(11) NOT NULL,
   `banlist_user_id` int(11) NOT NULL,
   `banlist_ip` varchar(45) NOT NULL,
-  `banlist_bandate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `banlist_bandate` timestamp NOT NULL DEFAULT current_timestamp(),
   `banlist_int_num` int(11) NOT NULL,
   `banlist_int_period` varchar(20) NOT NULL,
-  `banlist_status` tinyint(1) NOT NULL DEFAULT '1',
-  `banlist_autodelete` tinyint(1) NOT NULL DEFAULT '0',
+  `banlist_status` tinyint(1) NOT NULL DEFAULT 1,
+  `banlist_autodelete` tinyint(1) NOT NULL DEFAULT 0,
   `banlist_cause` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -712,10 +762,10 @@ CREATE TABLE `users_banlist` (
 
 CREATE TABLE `users_email_activate` (
   `id` int(11) NOT NULL,
-  `pubdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `pubdate` timestamp NOT NULL DEFAULT current_timestamp(),
   `user_id` int(11) NOT NULL,
   `email_code` varchar(50) NOT NULL,
-  `email_activate_flag` tinyint(1) DEFAULT '0'
+  `email_activate_flag` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -745,8 +795,8 @@ CREATE TABLE `votes_answer` (
   `votes_answer_item_id` int(11) NOT NULL,
   `votes_answer_points` int(11) NOT NULL,
   `votes_answer_ip` varchar(45) NOT NULL,
-  `votes_answer_user_id` int(11) NOT NULL DEFAULT '1',
-  `votes_answer_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `votes_answer_user_id` int(11) NOT NULL DEFAULT 1,
+  `votes_answer_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -760,8 +810,8 @@ CREATE TABLE `votes_comment` (
   `votes_comment_item_id` int(11) NOT NULL,
   `votes_comment_points` int(11) NOT NULL,
   `votes_comment_ip` varchar(45) NOT NULL,
-  `votes_comment_user_id` int(11) NOT NULL DEFAULT '1',
-  `votes_comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `votes_comment_user_id` int(11) NOT NULL DEFAULT 1,
+  `votes_comment_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -775,8 +825,8 @@ CREATE TABLE `votes_item` (
   `votes_item_item_id` int(11) NOT NULL,
   `votes_item_points` int(11) NOT NULL,
   `votes_item_ip` varchar(45) NOT NULL,
-  `votes_item_user_id` int(11) NOT NULL DEFAULT '1',
-  `votes_item_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `votes_item_user_id` int(11) NOT NULL DEFAULT 1,
+  `votes_item_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -790,8 +840,8 @@ CREATE TABLE `votes_post` (
   `votes_post_item_id` int(11) NOT NULL,
   `votes_post_points` int(11) NOT NULL,
   `votes_post_ip` varchar(45) NOT NULL,
-  `votes_post_user_id` int(11) NOT NULL DEFAULT '1',
-  `votes_post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `votes_post_user_id` int(11) NOT NULL DEFAULT 1,
+  `votes_post_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -799,72 +849,12 @@ CREATE TABLE `votes_post` (
 --
 
 INSERT INTO `votes_post` (`votes_post_id`, `votes_post_item_id`, `votes_post_points`, `votes_post_ip`, `votes_post_user_id`, `votes_post_date`) VALUES
-(1, 2, 1, '127.0.0.1', 1, '2021-08-16 16:29:32');
+(1, 2, 1, '127.0.0.1', 1, '2021-08-16 13:29:32');
+
+-- --------------------------------------------------------
 
 --
--- Дамп данных и индексы таблиц `folders` и `folders_relation`
---
-
-CREATE TABLE `folders` (
-  `id` int(11) NOT NULL,
-  `title` varchar(64) NOT NULL,
-  `action_type` varchar(32) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `item_count` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-CREATE TABLE `folders_relation` (
-  `id` int(11) NOT NULL,
-  `folder_id` int(11) NOT NULL COMMENT 'ID папки (folders)',
-  `action_type` varchar(32) NOT NULL  COMMENT 'Тип контента',
-  `tid` int(11) NOT NULL COMMENT 'id контента',
-  `user_id` int(11) NOT NULL COMMENT 'id кто добавил'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `folders`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `folders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `folders_relation`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `folders_relation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `folders_relation` ADD UNIQUE(`action_type`, `tid`, `user_id`);
-
-
---
--- Структура и индексы таблицы `replys`
---
-
-CREATE TABLE `replys` (
-  `reply_id` int(11) NOT NULL,
-  `reply_parent_id` int(11) NOT NULL,
-  `reply_item_id` int(11) NOT NULL,
-  `reply_content` text NOT NULL,
-  `reply_type` varchar(32) NOT NULL DEFAULT 'web' COMMENT 'web, soft...',
-  `reply_user_id` int(11) NOT NULL,
-  `reply_ip` varchar(64) NOT NULL,
-  `reply_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `reply_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `reply_count` int(7) NOT NULL DEFAULT '0',
-  `reply_votes` int(7) NOT NULL DEFAULT '0',
-  `reply_published` tinyint(1) NOT NULL DEFAULT '1',
-  `reply_is_deleted` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
-ALTER TABLE `replys`
-  ADD PRIMARY KEY (`reply_id`);
-  
-ALTER TABLE `replys`
-  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT;  
-
-
---
--- Структура и индексы таблицы `votes_reply`
+-- Структура таблицы `votes_reply`
 --
 
 CREATE TABLE `votes_reply` (
@@ -872,18 +862,9 @@ CREATE TABLE `votes_reply` (
   `votes_reply_item_id` int(11) NOT NULL,
   `votes_reply_points` int(11) NOT NULL,
   `votes_reply_ip` varchar(45) NOT NULL,
-  `votes_reply_user_id` int(11) NOT NULL DEFAULT '1',
-  `votes_reply_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `votes_reply_user_id` int(11) NOT NULL DEFAULT 1,
+  `votes_reply_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `votes_reply`
-  ADD PRIMARY KEY (`votes_reply_id`),
-  ADD KEY `votes_reply_item_id` (`votes_reply_item_id`,`votes_reply_user_id`) USING BTREE,
-  ADD KEY `votes_reply_user_id` (`votes_reply_user_id`) USING BTREE,
-  ADD KEY `votes_reply_ip` (`votes_reply_item_id`,`votes_reply_ip`) USING BTREE;
-
-ALTER TABLE `votes_reply`
-  MODIFY `votes_reply_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Индексы сохранённых таблиц
@@ -1006,6 +987,19 @@ ALTER TABLE `files`
   ADD KEY `file_user_id` (`file_user_id`);
 
 --
+-- Индексы таблицы `folders`
+--
+ALTER TABLE `folders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `folders_relation`
+--
+ALTER TABLE `folders_relation`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `action_type` (`action_type`,`tid`,`user_id`);
+
+--
 -- Индексы таблицы `invitations`
 --
 ALTER TABLE `invitations`
@@ -1075,6 +1069,12 @@ ALTER TABLE `posts` ADD FULLTEXT KEY `post_title` (`post_title`,`post_content`);
 --
 ALTER TABLE `posts_signed`
   ADD PRIMARY KEY (`signed_id`);
+
+--
+-- Индексы таблицы `replys`
+--
+ALTER TABLE `replys`
+  ADD PRIMARY KEY (`reply_id`);
 
 --
 -- Индексы таблицы `search_logs`
@@ -1178,6 +1178,15 @@ ALTER TABLE `votes_post`
   ADD KEY `votes_post_user_id` (`votes_post_user_id`);
 
 --
+-- Индексы таблицы `votes_reply`
+--
+ALTER TABLE `votes_reply`
+  ADD PRIMARY KEY (`votes_reply_id`),
+  ADD KEY `votes_reply_item_id` (`votes_reply_item_id`,`votes_reply_user_id`) USING BTREE,
+  ADD KEY `votes_reply_user_id` (`votes_reply_user_id`) USING BTREE,
+  ADD KEY `votes_reply_ip` (`votes_reply_item_id`,`votes_reply_ip`) USING BTREE;
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -1248,6 +1257,18 @@ ALTER TABLE `files`
   MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT для таблицы `folders`
+--
+ALTER TABLE `folders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `folders_relation`
+--
+ALTER TABLE `folders_relation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `invitations`
 --
 ALTER TABLE `invitations`
@@ -1294,6 +1315,12 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `posts_signed`
   MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `replys`
+--
+ALTER TABLE `replys`
+  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `search_logs`
@@ -1378,8 +1405,10 @@ ALTER TABLE `votes_item`
 --
 ALTER TABLE `votes_post`
   MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-  
-ALTER TABLE `items` ADD `item_focus_count` INT(11) NULL DEFAULT '0' AFTER `item_post_related`;  
-ALTER TABLE `items` ADD `item_close_replies` TINYINT(1) NULL DEFAULT '0' AFTER `item_focus_count`;
 
-ALTER TABLE `users` ADD `github` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL AFTER `public_email`;
+--
+-- AUTO_INCREMENT для таблицы `votes_reply`
+--
+ALTER TABLE `votes_reply`
+  MODIFY `votes_reply_id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;

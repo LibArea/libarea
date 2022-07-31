@@ -29,7 +29,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_slug,
                     facet_img,
                     facet_cover_art,
-                    facet_add_date,
+                    facet_date,
                     facet_seo_title,
                     facet_merged_id,
                     facet_top_level,
@@ -53,11 +53,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      */
     public static function getChildrens($facet_id, $screening)
     {
-        $sort = '';
-        if ($screening == 'github') {
-            $sort = 'AND item_is_github = 1';
-        }
-
+        $sort = $screening == 'github' ? 'AND item_is_github = 1' : '';
         $sql = "SELECT 
                   facet_id,
                   count(facet_id) as counts, 
@@ -96,31 +92,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
-    // Up the structure of the main trees (PARENTS)
-    // Вверх по структуре основных деревьев (РОДИТЕЛИ)
-    /**
-     * @param  int $facet_id
-     * @return
-     */
-    public static function getHighLevelList($facet_id)
-    {
-        $sql = "SELECT 
-                    facet_id as value,
-                    facet_title,
-                    facet_slug,
-                    facet_img,
-                    facet_type,
-                    facet_chaid_id,
-                    facet_parent_id
-                        FROM facets  
-                        LEFT JOIN facets_relation on facet_id = facet_parent_id
-                        WHERE facet_chaid_id  = :facet_id";
-
-        return DB::run($sql, ['facet_id' => $facet_id])->fetch();
-    }
-
     public static function breadcrumb($facet_id)
-    { 
+    {
         $sql = "with recursive
             n (facet_id, facet_slug, facet_title, lvl) as (
                 select facet_id, facet_slug, facet_title, 1 from facets where facet_id = :id
@@ -133,6 +106,6 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         )
         select facet_slug link, facet_title name from n where lvl <= 5 ORDER BY lvl DESC";
 
-       return DB::run($sql, ['id' => $facet_id])->fetchAll();
+        return DB::run($sql, ['id' => $facet_id])->fetchAll();
     }
 }

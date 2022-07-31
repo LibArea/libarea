@@ -313,8 +313,8 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getPostFacet($post_id, $type)
     {
         $sql = "SELECT
-                    facet_id as value,
-                    facet_title 
+                    facet_id id,
+                    facet_title value
                         FROM facets  
                         INNER JOIN facets_posts_relation ON relation_facet_id = facet_id
                             WHERE relation_post_id  = :post_id AND facet_type = :type";

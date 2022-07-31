@@ -21,7 +21,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#calendar"></use>
               </svg>
-              <span class="middle lowercase"><?= Html::langDate($blog['facet_add_date']); ?></span>
+              <span class="middle lowercase"><?= Html::langDate($blog['facet_date']); ?></span>
             </div>
           </div>
 

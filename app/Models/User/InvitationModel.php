@@ -14,7 +14,7 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
                     avatar,
                     uid,
                     invitation_email,
-                    add_time,
+                    invitation_date,
                     active_uid,
                     active_time
                         FROM invitations 
@@ -29,12 +29,12 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "INSERT INTO invitations(uid, 
                     invitation_code, 
                     invitation_email, 
-                    add_time, 
+                    invitation_date, 
                     add_ip) 
                        VALUES(:uid, 
                            :invitation_code, 
                            :invitation_email, 
-                           :add_time, 
+                           :invitation_date, 
                            :add_ip)";
 
         DB::run($sql, $params);
@@ -64,7 +64,7 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
                    uid, 
                    active_uid,
                    active_status,
-                   add_time,
+                   invitation_date,
                    invitation_email,
                    invitation_code,                  
                    id,
@@ -73,7 +73,7 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM invitations
                             LEFT JOIN users ON id = active_uid
                             WHERE uid = :user_id
-                            ORDER BY add_time DESC";
+                            ORDER BY invitation_date DESC";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }

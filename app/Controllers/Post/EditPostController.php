@@ -88,7 +88,7 @@ class EditPostController extends Controller
         $post_img = $post_img ?? $post['post_content_img'];
 
         // Related topics
-        $fields    = Request::getPost() ?? [];
+        $fields = Request::getPost() ?? [];
         $new_type = self::addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
 
         $post_related = $this->relatedPost();

@@ -14,7 +14,7 @@
     <svg class="icons">
       <use xlink:href="/assets/svg/icons.svg#calendar"></use>
     </svg>
-    <span class="middle"><?= Html::langDate($topic['facet_add_date']); ?></span>
+    <span class="middle"><?= Html::langDate($topic['facet_date']); ?></span>
   </div>
   <?= insert('/_block/facet/topic', ['data' => $data]); ?>
 </aside>

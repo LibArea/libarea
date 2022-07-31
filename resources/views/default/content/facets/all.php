@@ -41,10 +41,11 @@
     <?php if ($access) : ?>
       <?php if ($data['countUserFacet'] == 0 || UserData::checkAdmin()) : ?>
         <p class="text-xl">
-          <a class="ml15" title="<?= __('app.add'); ?>" href="<?= url('content.add', ['type' => $data['type']]); ?>">
+          <a class="btn btn-outline-primary btn-small" href="<?= url('content.add', ['type' => $data['type']]); ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#plus"></use>
             </svg>
+            <?= __('app.add'); ?>
           </a>
         </p>
       <?php endif; ?>

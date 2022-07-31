@@ -63,10 +63,10 @@
       <?php endif; ?>
 
       <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-gray">
-      <div id="start">
-        <input id="file-upload" type="file" name="images" accept="image/*" />
-        <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
-      </div>
+    </div>
+    <div id="start" class="mt10">
+      <input id="file-upload" type="file" name="images" accept="image/*" />
+      <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
     </div>
     <div id="response" class="hidden">
       <div id="messages"></div>

@@ -105,13 +105,16 @@ class EditItemController extends Controller
                 'item_title_soft'       => $data['title_soft'] ?? '',
                 'item_content_soft'     => $data['content_soft'] ?? '',
                 'item_published'        => $published,
-                'item_close_replies'    => $data['close_replies'] == 'on' ? 1 : 0,
+                'item_close_replies'    => $data['close_replies'] == 'on' ? 1 : null,
                 'item_user_id'          => $new_user_id,
-                'item_status_url'       => $data['status'] ?? 404,
-                'item_is_soft'          => $data['soft'] == 'on' ? 1 : 0,
-                'item_is_github'        => $data['github'] == 'on' ? 1 : 0,
-                'item_post_related'     => $post_related ?? '',
-                'item_github_url'       => $data['item_github_url'] ?? '',
+                'item_is_forum'         => $data['forum'] == 'on' ? 1 : null,
+                'item_is_portal'        => $data['portal'] == 'on' ? 1 : null,
+                'item_is_blog'          => $data['blog'] == 'on' ? 1 : null,
+                'item_is_reference'     => $data['reference'] == 'on' ? 1 : null,
+                'item_is_soft'          => $data['soft'] == 'on' ? 1 : null,
+                'item_is_github'        => $data['github'] == 'on' ? 1 : null,
+                'item_post_related'     => $post_related ?? null,
+                'item_github_url'       => $data['item_github_url'] ?? null,
             ]
         );
 

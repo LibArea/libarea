@@ -249,12 +249,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                             item_content, 
                             item_published,
                             item_user_id, 
-                            item_status_url, 
                             item_is_soft,
                             item_is_github,
-                            item_close_replies,
-                            item_votes,
-                            item_count) 
+                            item_close_replies) 
                             
                        VALUES(:item_url, 
                        :item_domain, 
@@ -262,12 +259,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                        :item_content, 
                        :item_published,
                        :item_user_id, 
-                       :item_status_url, 
                        :item_is_soft,
                        :item_is_github,
-                       :item_close_replies,
-                       :item_votes,
-                       :item_count)";
+                       :item_close_replies)";
 
         DB::run($sql, $params);
 
@@ -292,7 +286,10 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_content_soft   = :item_content_soft,
                     item_published      = :item_published,
                     item_user_id        = :item_user_id,
-                    item_status_url     = :item_status_url,
+                    item_is_forum       = :item_is_forum,
+                    item_is_portal      = :item_is_portal,
+                    item_is_blog        = :item_is_blog,
+                    item_is_reference   = :item_is_reference,
                     item_is_soft        = :item_is_soft,
                     item_is_github      = :item_is_github,
                     item_post_related   = :item_post_related,
@@ -320,7 +317,10 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_votes,
                     item_count,
                     item_date,
-                    item_status_url,
+                    item_is_forum,
+                    item_is_portal,
+                    item_is_blog,
+                    item_is_reference,
                     item_is_soft,
                     item_is_github,
                     item_github_url,
@@ -340,8 +340,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getItemTopic($item_id)
     {
         $sql = "SELECT
-                    facet_id as value,
-                    facet_title,
+                    facet_id id,
+                    facet_title as value,
                     facet_type,
                     facet_slug
                         FROM facets  
@@ -374,7 +374,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['id' => $id]);
     }
-    
+
     // Кто подписан на данный сайт
     public static function getFocusUsersItem($item_id)
     {
@@ -386,5 +386,4 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['item_id' => $item_id])->fetchAll();
     }
-    
 }

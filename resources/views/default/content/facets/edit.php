@@ -44,7 +44,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
         <div class="flex3">
           <?php if ($fs['facet_cover_art']) : ?>
             <div class="mr20">
-              <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="w-160 br-gray">
+              <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="w-100 br-gray">
               <input type="hidden" name="cover" value="<?= $fs['facet_cover_art']; ?>">
             </div>
           <?php endif; ?>
@@ -81,9 +81,6 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     </fieldset>
 
     <?php if ($fs['facet_type'] != 'blog' && UserData::checkAdmin()) : ?>
-      <!-- fieldset>
-        <input type="checkbox" name="facet_top_level" <?php if ($fs['facet_top_level'] == 1) : ?>checked <?php endif; ?>> <?= __('app.root_help'); ?>?
-      </fieldset -->
 
       <?= insert('/_block/form/select/low-facets', [
         'data'          => $data,

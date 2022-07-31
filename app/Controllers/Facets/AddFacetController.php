@@ -35,7 +35,8 @@ class AddFacetController extends Controller
 
         $data = Request::getPost();
 
-        $redirect = ($facet_type == 'category') ? url('web') : url($facet_type . '.add');
+        $redirect = ($facet_type == 'category') ? url('web') : url('content.add', ['type' => $facet_type]);
+
         if ($facet_type == 'blog') {
             if (!UserData::checkAdmin()) {
                 if (in_array($facet_slug, config('stop-blog'))) {
@@ -83,6 +84,6 @@ class AddFacetController extends Controller
         SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'facet');
 
         $msg = $type == 'blog' ? __('msg.blog_added') : __('msg.change_saved');
-        is_return($msg, 'success', $redirect);
+        is_return($msg, 'success', '/' . $facet_type . '/' . $facet_slug);
     }
 }

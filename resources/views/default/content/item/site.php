@@ -4,9 +4,9 @@
     <?php if ($item['item_published'] == 1) : ?>
       <li>
         <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
-          <h2 class="m0"><?= $item['item_title']; ?>
+          <h3 class="m0"><?= $item['item_title']; ?>
             <?php $date = date_diff(new DateTime(), new DateTime($item['item_date']))->days; ?>
-            <?php if ($date < 3) : ?><sup class="red text-sm">new</sup><?php endif; ?></h2>
+            <?php if ($date < 3) : ?><sup class="red text-sm">new</sup><?php endif; ?></h3>
         </a>
         <div class="content">
           <div class="list-items__thumb mb-none img-preview">

@@ -30,7 +30,6 @@
     let search_blog = await blog_search();
     let input = document.querySelector('#blog_id');
     let options = {
-      tagTextProp: "facet_title",
       mode: "select",
       maxTags: 1,
       callbacks: {
@@ -51,8 +50,8 @@
         $title = $data['facets']['blog']['facet_title'];
         ?>
         tagify.addTags([{
-          value: '<?= $id; ?>',
-          facet_title: '<?= $title; ?>'
+          id: '<?= $id; ?>',
+          value: '<?= $title; ?>'
         }])
       <?php } else { ?>
         tagify.addTags([])

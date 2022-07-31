@@ -63,6 +63,7 @@ h5 {
 
 .banner {
   background-image: url(/assets/images/banner-fon.jpg);
+  background-size: cover;
   filter: brightness(1.1);
   text-align: center;
   border-radius: 5px;
@@ -274,6 +275,8 @@ ul.last-content a.last-content_telo { display: block; }
 a:hover > img,
 .trigger img { opacity: 0.8; }
 
+.focus-id:hover { cursor: pointer } 
+
 .underline-hover:hover { text-decoration: underline; }
 
 .content-body { max-width: 780px; }
@@ -288,7 +291,7 @@ a:hover > img,
  
 .ind-first-p p:first-child { margin-top: 3px; }
 
-iframe {
+article iframe {
   max-width: 560px;
   max-height: 320px;
 }

@@ -128,28 +128,34 @@ class EditFacetController extends Controller
             ]
         );
 
-        // Тема, выбор детей в дереве
-        $fields = Request::getPost() ?? [];
-        $highs  = $fields['high_facet_id'] ?? [];
-        if ($highs) {
-            $high_facet = json_decode($highs, true);
-            $high_arr = $high_facet ?? [];
+        self::setModification($data);
 
-            FacetModel::addLowFacetRelation($high_arr, $data['facet_id']);
+        is_return(__('msg.change_saved'), 'success', url('redirect.facet', ['id' => $data['facet_id']]));
+    }
+
+    public static function setModification($data)
+    {
+        // Выбор детей в дереве
+        $lows  = $data['low_facet_id'] ?? false;
+        if ($lows) {
+            $low_facet = json_decode($lows, true);
+            $low_arr = $low_facet ?? [];
+
+            FacetModel::addLowFacetRelation($low_arr, $data['facet_id']);
         }
 
         // Связанные темы, дети 
-        $matching = $fields['facet_matching'] ?? [];
+        $matching = $data['facet_matching'] ?? false;
         if ($matching) {
             $match_facet    = json_decode($matching, true);
             $match_arr      = $match_facet ?? [];
 
             FacetModel::addLowFacetMatching($match_arr, $data['facet_id']);
         }
-
-        is_return(__('msg.change_saved'), 'success', url('redirect.facet', ['id' => $data['facet_id']]));
+        
+        return true;        
     }
-
+    
     public function pages()
     {
         $facet_id   = Request::getInt('id');

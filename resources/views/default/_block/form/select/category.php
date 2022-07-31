@@ -34,7 +34,6 @@
     let input = document.querySelector('#category_id');
 
     let options = {
-      tagTextProp: "facet_title", // <- чтобы не переопределять title в запросах
       skipInvalid: true, // <- не добавлять повтороно не допускаемые теги
       enforceWhitelist: true, // <- добавлять только из белого списка
       dropdown: {

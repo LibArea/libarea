@@ -75,7 +75,6 @@ class InvitationsController extends Controller
                 'uid'               => $this->user['id'],
                 'invitation_code'   => $invitation_code,
                 'invitation_email'  => $invitation_email,
-                'add_time'          => date('Y-m-d H:i:s'),
                 'add_ip'            => Request::getRemoteAddress(),
             ]
         );

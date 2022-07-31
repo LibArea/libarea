@@ -23,10 +23,21 @@
   <fieldset>
     <input type="checkbox" name="published" <?php if ($domain['item_published'] == 1) : ?>checked <?php endif; ?>> <span class="red"><?= __('web.posted'); ?></span>
   </fieldset>
+  <br>
+  <fieldset>
+    <input type="checkbox" name="forum" <?php if ($domain['item_is_forum'] == 1) : ?>checked <?php endif; ?>> <?= __('web.there_forum'); ?>
+  </fieldset>
+  
+  <fieldset>
+    <input type="checkbox" name="portal" <?php if ($domain['item_is_portal'] == 1) : ?>checked <?php endif; ?>> <?= __('web.there_portal'); ?>
+  </fieldset>
+  
+  <fieldset>
+    <input type="checkbox" name="blog" <?php if ($domain['item_is_blog'] == 1) : ?>checked <?php endif; ?>> <?= __('web.there_blog'); ?>
+  </fieldset>
 
   <fieldset>
-    <label for="status"><?= __('web.status'); ?></label>
-    <input id="status" name="status" type="text" value="<?= $domain['item_status_url']; ?>">
+    <input type="checkbox" name="reference" <?php if ($domain['item_is_reference'] == 1) : ?>checked <?php endif; ?>> <?= __('web.there_reference'); ?>
   </fieldset>
 
   <h2><?= __('web.soft'); ?></h2>

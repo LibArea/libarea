@@ -182,12 +182,6 @@ class AddPostController extends Controller
                     'item_content'      => __('web.desc_formed'),
                     'item_published'    => 0,
                     'item_user_id'      => $this->user['id'],
-                    'item_status_url'   => 200,
-                    'item_is_soft'      => 0,
-                    'item_is_github'    => 0,
-                    'item_votes'        => 0,
-                    'item_close_replies' => 0,
-                    'item_count'        => 1,
                 ]
             );
         } else {

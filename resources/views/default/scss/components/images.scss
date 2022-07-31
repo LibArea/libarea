@@ -59,8 +59,13 @@
 .medium-zoom-image--hidden{visibility:hidden}
 .medium-zoom-image--opened{position:relative;cursor:pointer;cursor:zoom-out;will-change:transform}
 
-.img-preview img {
+.img-preview {
   max-width: 780px;
+  position: relative;
+}
+
+.img-preview img {
+  max-width: 100%;
   border: 1px solid #f3f3f3;
 }
 .img-preview img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
