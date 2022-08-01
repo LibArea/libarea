@@ -31,14 +31,14 @@
     "phphleb/imageresizer": "dev-master",
     "phphleb/debugpan": "1.*",
     "phphleb/radjax": "dev-master",
-    "scssphp/scssphp": "^1.10.5",
     "cocur/slugify": "^4.1",
     "phpmailer/phpmailer": "^6.6.3",
     "erusev/parsedown": "^1.8.0@beta",
     "wamania/php-stemmer": "^3.0",
     "donatj/phpuseragentparser": "dev-master",
     "utopia-php/domains": "dev-master",
-    "geshi/geshi": "dev-master"
+    "geshi/geshi": "dev-master",
+    "matthiasmullie/minify": "dev-master"
   },
   "autoload": {
     "classmap": [

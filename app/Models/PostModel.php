@@ -154,6 +154,24 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['post_id' => $post_id]);
     }
 
+
+    public static function updateViews($post_id, $user_id)
+    {
+        if(!self::checkViews($post_id, $user_id)) {
+            $sql = "INSERT INTO posts_view(view_post_id, view_user_id) VALUES(:post_id, :user_id)";
+            DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id]);
+        }
+        
+        return true;
+    }
+    
+    public static function checkViews($post_id, $user_id)
+    {
+        $sql = "SELECT view_post_id FROM posts_view WHERE view_post_id = :post_id AND view_user_id = :user_id";
+
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetch();
+    }
+
     // Редактирование поста
     public static function editPost($data)
     {

@@ -7,8 +7,12 @@ use App\Controllers\Controller;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
 use Content, Meta, UserData, Access;
 
+use App\Traits\Views;
+
 class PostController extends Controller
 {
+    use Views;
+    
     protected $limit = 25;
 
     // Full post
@@ -20,16 +24,7 @@ class PostController extends Controller
 
         $content = self::presence($type, $id, $slug, $this->user);
 
-        // Let's record views 
-        // Запишем просмотры
-        if (!isset($_SESSION['pagenumbers'])) {
-            $_SESSION['pagenumbers'] = [];
-        }
-
-        if (!isset($_SESSION['pagenumbers'][$content['post_id']])) {
-            PostModel::updateCount($content['post_id'], 'hits');
-            $_SESSION['pagenumbers'][$content['post_id']] = $content['post_id'];
-        }
+        $this->postView($content['post_id'], $this->user['id']);
 
         $content['modified'] = $content['post_date'] != $content['post_modified'] ? true : false;
 

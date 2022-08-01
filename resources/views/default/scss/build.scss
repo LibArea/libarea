@@ -5,21 +5,21 @@
  */
 
 /* Resources used for LibArea design */
-@import './components/components.scss',
-'./components/menu.scss',
-'./components/basic.scss',
-'./components/images.scss',
-'./components/inputs.scss',
-'./components/table.scss',
-'./components/button.scss',
-'./components/tags.scss',
-'./components/modal.scss',
-'./components/footer.scss',
-'./components/notifications.scss',
+@import './components/components.scss';
+@import './components/menu.scss';
+@import './components/basic.scss';
+@import './components/images.scss';
+@import './components/inputs.scss';
+@import './components/table.scss';
+@import './components/button.scss';
+@import './components/tags.scss';
+@import './components/modal.scss';
+@import './components/footer.scss';
+@import './components/notifications.scss';
 
-'./components/media.scss',
-'./components/code.scss',
+@import './components/media.scss';
+@import './components/code.scss';
 
-'./components/catalog.scss',
+@import './components/catalog.scss';
 
-'custom.scss';
+@import 'custom.scss';

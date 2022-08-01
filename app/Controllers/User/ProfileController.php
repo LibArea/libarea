@@ -8,15 +8,19 @@ use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, FeedModel, AnswerModel, CommentModel, PostModel};
 use Meta, UserData;
 
+use App\Traits\Views;
+
 class ProfileController extends Controller
 {
+    use Views;
+    
     protected $limit = 20;
 
     // Member page (profile) 
     // Страница участника (профиль)
     function index()
     {
-        $profile    = self::profile();
+        $profile    = $this->profile();
 
         if (!$profile['about']) {
             $profile['about'] = __('app.riddle') . '...';
@@ -49,7 +53,7 @@ class ProfileController extends Controller
     // User posts
     public function posts()
     {
-        $profile    = self::profile();
+        $profile    = $this->profile();
 
         $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount($this->user, 'profile.posts', $profile['id']);
@@ -67,7 +71,7 @@ class ProfileController extends Controller
     // User answers
     public function answers()
     {
-        $profile    = self::profile();
+        $profile    = $this->profile();
 
         $answers    = AnswerModel::userAnswers($this->pageNumber, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = AnswerModel::userAnswersCount($profile['id']);
@@ -85,7 +89,7 @@ class ProfileController extends Controller
     // User comments
     public function comments()
     {
-        $profile   = self::profile();
+        $profile   = $this->profile();
 
         $comments   = CommentModel::userComments($this->pageNumber, $this->limit, $profile['id'], $this->user['id']);
         $pagesCount = CommentModel::userCommentsCount($profile['id']);
@@ -116,7 +120,7 @@ class ProfileController extends Controller
         ];
     }
 
-    public static function profile()
+    public function profile()
     {
         $result = Request::get('login');
         self::error404($profile = UserModel::getUser($result, 'slug'));
@@ -125,14 +129,7 @@ class ProfileController extends Controller
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
-        if (!isset($_SESSION['usernumbers'])) {
-            $_SESSION['usernumbers'] = [];
-        }
-
-        if (!isset($_SESSION['usernumbers'][$profile['id']])) {
-            UserModel::userHits($profile['id']);
-            $_SESSION['usernumbers'][$profile['id']] = $profile['id'];
-        }
+        $this->profileView($profile['id']);
 
         if (UserData::checkAdmin()) {
             Request::getResources()->addBottomScript('/assets/js/admin.js');

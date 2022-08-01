@@ -866,6 +866,25 @@ CREATE TABLE `votes_reply` (
   `votes_reply_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+--
+-- Структура и индексы таблицы `posts_view`
+--
+CREATE TABLE `posts_view` (
+  `view_id` int(11) NOT NULL,
+  `view_post_id` int(11) DEFAULT NULL,
+  `view_user_id` int(11) DEFAULT NULL,
+  `view_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `posts_view`
+  ADD PRIMARY KEY (`view_id`),
+  ADD KEY `view_user_id` (`view_user_id`),
+  ADD KEY `view_post_id` (`view_post_id`);
+
+ALTER TABLE `posts_view`
+  MODIFY `view_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Индексы сохранённых таблиц
 --
