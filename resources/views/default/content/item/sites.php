@@ -91,6 +91,20 @@
   </main>
   <aside>
     <div class="box bg-beige max-w300"><?= Content::text($data['category']['facet_info'] ?? '', 'line'); ?></div>
+
+    <?php if ($data['related_posts']) : ?>
+      <div class="box bg-blue-200 max-w300">
+        <h3 class="uppercase-box"><?= __('web.related_posts'); ?></h3>
+        <ul>
+        <?php foreach ($data['related_posts'] as $rp) : ?>
+          <li class="mb15">
+            <a href="<?= url('post', ['id' => $rp['id'], 'slug' => $rp['post_slug']]); ?>"><?= $rp['value']; ?></a>
+          </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
+
     <?php if (UserData::checkActiveUser()) : ?>
       <div class="box bg-lightgray max-w300">
         <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>

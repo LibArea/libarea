@@ -56,9 +56,9 @@ class AddPostController extends Controller
         }
 
         // Используем для возврата
-        $redirect = url('post.add');
+        $redirect = url('content.add', ['type' => 'post']);
         if ($blog_id > 0) {
-            $redirect = url('post.add') . '/' . $blog_id;
+            $redirect = url('content.add', ['type' => 'post']) . '/' . $blog_id;
         }
 
         // Let's check the stop words, url

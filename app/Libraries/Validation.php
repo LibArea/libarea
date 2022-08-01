@@ -6,7 +6,7 @@ class Validation
     public static function email($email, $redirect)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            self::comingBack(__('msg.email_correctness'), 'error', $redirect);
+            is_return(__('msg.email_correctness'), 'error', $redirect);
         }
         return true;
     }
@@ -15,7 +15,7 @@ class Validation
     public static function url($url, $redirect)
     {
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-            self::comingBack(__('msg.url_correctness'), 'error', $redirect);
+            is_return(__('msg.url_correctness'), 'error', $redirect);
         }
         return true;
     }
@@ -24,7 +24,7 @@ class Validation
     public static function length($content, $min, $max, $name, $redirect = '/')
     {
         if (self::getStrlen($content) < $min || self::getStrlen($content) > $max) {
-            self::comingBack(__('msg.string_length', ['name' => '«' . __('msg.' . $name) . '»']), 'error', $redirect);
+            is_return(__('msg.string_length', ['name' => '«' . __('msg.' . $name) . '»']), 'error', $redirect);
         }
         return true;
     }
