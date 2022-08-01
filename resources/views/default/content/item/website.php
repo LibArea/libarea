@@ -106,8 +106,8 @@
       <?php if ($data['similar']) : ?>
         <h3 class="uppercase-box"><?= __('web.recommended'); ?></h3>
         <?php foreach ($data['similar'] as $link) : ?>
-          <?= Html::websiteImage($link['item_domain'], 'thumbs', $link['item_title'], 'w-100 box-shadow'); ?>
           <a class="inline mr20 mb15 block text-sm" href="<?= url('website', ['slug' => $link['item_domain']]); ?>">
+            <?= Html::websiteImage($link['item_domain'], 'thumbs', $link['item_title'], 'w-100 box-shadow'); ?>          
             <?= $link['item_title']; ?>
           </a>
         <?php endforeach; ?>

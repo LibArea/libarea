@@ -19,10 +19,17 @@ $domain = $data['domain']; ?>
 
       <fieldset class="gray-600">
         <?= $domain['item_id']; ?>. <?= $domain['item_domain']; ?>
-        <?= Html::websiteImage($domain['item_domain'], 'favicon', $domain['item_domain'], ' ml10'); ?>
-        <span class="add-favicon text-sm" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
         <span class="text-sm ml15"><?= Html::langDate($domain['item_date']); ?></span>
       </fieldset>
+
+      <?php if (UserData::checkAdmin()) { ?>
+        <div class="list-items__thumb mb-none img-preview">
+          <?= Html::websiteImage($domain['item_domain'], 'thumbs', $domain['item_title'], 'list-items__thumb-image'); ?>
+        </div>
+        <div class="add-screenshot text-sm sky" data-id="<?= $domain['item_id']; ?>">+ screenshot</div>
+        <?= Html::websiteImage($domain['item_domain'], 'favicon', $domain['item_domain'], ' mr5'); ?>
+        <span class="add-favicon text-sm sky" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
+      <?php } ?>
 
       <form action="<?= url('content.change', ['type' => 'item']); ?>" method="post">
         <?= csrf_field() ?>

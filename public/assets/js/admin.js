@@ -1,6 +1,7 @@
 const ban = document.querySelectorAll('.type-ban'),
   report = document.querySelectorAll(".report-saw"),
   favicon = document.querySelectorAll(".add-favicon"),
+  screenshot = document.querySelectorAll(".add-screenshot"),
   badge = document.querySelectorAll(".remove-badge"),
   audit = document.querySelectorAll(".audit-status"),
   update = document.querySelectorAll(".update");
@@ -18,6 +19,11 @@ report.forEach(el => el.addEventListener("click", function (e) {
 // Write down a Favicon
 favicon.forEach(el => el.addEventListener("click", function (e) {
   makeRequest("/mod/admin/favicon/add", options = { body: "id=" + el.dataset.id })
+}));
+
+// Write down a Screenshot
+screenshot.forEach(el => el.addEventListener("click", function (e) {
+  makeRequest("/mod/admin/screenshot/add", options = { body: "id=" + el.dataset.id })
 }));
 
 // Remove reward

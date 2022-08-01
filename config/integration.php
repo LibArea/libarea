@@ -28,4 +28,9 @@ return [
     'discord_name_bot'      => 'PostBot',
     'discord_icon_url'      => 'https://cdn.discordapp.com/avatars/***.png',
     
+    // Screenshots of the service https://screenshotone.com/
+    // Скриншоты сервиса https://screenshotone.com/
+    'sc_access_key' => '***',
+    'sc_secret_key' => '***',
+    
 ];

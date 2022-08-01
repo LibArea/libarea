@@ -9,6 +9,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
         Route::get('/test/mail')->module('admin', 'App\Console@testMail')->name('admin.test.mail');
         Route::get('/user/ban')->module('admin', 'App\Users@banUser');
         Route::get('/favicon/add')->module('admin', 'App\Webs@favicon');
+        Route::get('/screenshot/add')->module('admin', 'App\Webs@screenshot');
         Route::get('/word/ban')->module('admin', 'App\Words@deletes');
         Route::get('/audit/status')->module('admin', 'App\Audits@status');
         Route::get('/reports/saw')->module('admin', 'App\Audits@saw');

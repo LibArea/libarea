@@ -79,15 +79,18 @@
 
 <div id="contentWrapper">
   <main>
-    <?= insert('/_block/navigation/item/nav', ['data' => $data]); ?>
+    <div class="mb15">
+      <?= insert('/_block/navigation/item/nav', ['data' => $data]); ?>
+    </div>
 
     <?php if (!empty($data['items'])) : ?>
       <?= insert('/content/item/site', ['data' => $data, 'screening' => $data['screening']]); ?>
     <?php else : ?>
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'info']); ?>
     <?php endif; ?>
-
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/' . $data['screening']); ?>
+    
+    <?php $url = url('web.dir', ['grouping' => 'all', 'slug' => $data['category']['facet_slug']]); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $url); ?>
   </main>
   <aside>
     <div class="box bg-beige max-w300"><?= Content::text($data['category']['facet_info'] ?? '', 'line'); ?></div>
