@@ -24,7 +24,7 @@ class PostController extends Controller
 
         $content = self::presence($type, $id, $slug, $this->user);
 
-        $this->postView($content['post_id'], $this->user['id']);
+        $this->setPostView($content['post_id'], $this->user['id']);
 
         $content['modified'] = $content['post_date'] != $content['post_modified'] ? true : false;
 

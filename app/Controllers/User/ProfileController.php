@@ -129,7 +129,7 @@ class ProfileController extends Controller
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
-        $this->profileView($profile['id']);
+        $this->setProfileView($profile['id']);
 
         if (UserData::checkAdmin()) {
             Request::getResources()->addBottomScript('/assets/js/admin.js');

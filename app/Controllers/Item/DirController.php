@@ -4,6 +4,7 @@ namespace App\Controllers\Item;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Models\PostModel;
 use App\Models\Item\{WebModel, UserAreaModel, FacetModel};
 use UserData, Meta;
 
@@ -25,6 +26,10 @@ class DirController extends Controller
 
         // We will get children
         $childrens =  FacetModel::getChildrens($category['facet_id'], $screening);
+
+        if ($category['facet_post_related']) {
+            $related_posts = PostModel::postRelated($category['facet_post_related']);
+        }
 
         $items      = WebModel::feedItem($this->pageNumber, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening);
         $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'], $screening);
@@ -53,6 +58,7 @@ class DirController extends Controller
                     'count'             => $pagesCount,
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $this->pageNumber,
+                    'related_posts'     => $related_posts ?? false,
                     'items'             => $items,
                     'category'          => $category,
                     'childrens'         => $childrens,

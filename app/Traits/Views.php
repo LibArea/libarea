@@ -7,7 +7,7 @@ use App\Models\User\UserModel;
 
 trait Views
 {
-    public function postView($post_id, $user_id)
+    public function setPostView($post_id, $user_id)
     {
         if (!isset($_SESSION['pagenumbers'])) {
             $_SESSION['pagenumbers'] = [];
@@ -23,7 +23,7 @@ trait Views
         return true;
     }
     
-    public function profileView($user_id)
+    public function setProfileView($user_id)
     {
         if (!isset($_SESSION['usernumbers'])) {
             $_SESSION['usernumbers'] = [];
