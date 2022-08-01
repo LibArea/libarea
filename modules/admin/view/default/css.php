@@ -36,11 +36,11 @@
 </div>
 
 <div class="box-flex flex-wrap mb20">
-  <div class="label-grey mr5">.label-grey</div>
-  <div class="label-green mr5">.label-green</div>
-  <div class="label-red mr5">.label-red</div>
-  <div class="label-orange mr5">.label-orange</div>
-  <div class="label-teal">.label-teal</div>
+  <div class="label label-grey mr5">.label .label-grey</div>
+  <div class="label label-green mr5">.label .label-green</div>
+  <div class="label label-red mr5">.label .label-red</div>
+  <div class="label label-orange mr5">.label .label-orange</div>
+  <div class="label label-teal">.label .label-teal</div>
 </div>
 
 <div class="box-flex flex-wrap">

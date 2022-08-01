@@ -14,10 +14,10 @@ return [
     'path_css' => [
         // Base path to css files
         // Базовый путь к css файлам
-        'style'     => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/scss/', 
+        'style'     => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/css/', 
         
         // Test template to test custom layout creation
         // Тестовый шаблон для проверки создания произвольного макета
-        'test'      => HLEB_GLOBAL_DIRECTORY . '/resources/views/test/scss/',
+        'test'      => HLEB_GLOBAL_DIRECTORY . '/resources/views/test/css/',
     ],
 ];

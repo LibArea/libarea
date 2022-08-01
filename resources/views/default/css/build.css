@@ -1,0 +1,25 @@
+/*
+ * List of resources to build
+ *
+ * Перечень ресурсов для сборки
+ */
+
+/* Resources used for LibArea design */
+@import './components/components.css';
+@import './components/menu.css';
+@import './components/basic.css';
+@import './components/images.css';
+@import './components/inputs.css';
+@import './components/table.css';
+@import './components/button.css';
+@import './components/tags.css';
+@import './components/modal.css';
+@import './components/footer.css';
+@import './components/notifications.css';
+
+@import './components/media.css';
+@import './components/code.css';
+
+@import './components/catalog.css';
+
+@import 'custom.css';

@@ -126,8 +126,8 @@
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
-
-      <form class="mb15" action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+      <hr>  
+      <form class="mb15 mt15" action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
         <?= insert('/_block/form/editor', [
           'height'  => '250px',

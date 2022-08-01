@@ -52,34 +52,30 @@
   text-transform: lowercase;
   font-size: 0.875rem;
   padding: 3px 10px;
+  font-weight: 400;
 }
 
 .label-grey {
-  @extend .label;
   background-color: var(--violet);
   color: var(--gray-600);
 }
 
 .label-orange {
-  @extend .label;
   background-color: #f9ddde;
   color: var(--gray);
 }
 
 .label-green {
-  @extend .label;
   background-color: #f0f6f3;
   color: var(--green);
 }
 
 .label-red {
-  @extend .label;
   background-color: #fff4e8;
   color: var(--red);
 }
 
 .label-teal {
-  @extend .label;
   background-color: var(--teal);
   color: var(--white);
 }

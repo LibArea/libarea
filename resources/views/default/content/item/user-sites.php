@@ -18,7 +18,7 @@
               </div>
               <div class="list-items__description">
                 <?php if ($item['item_published'] == 0) : ?>
-                  <span class="label-orange mr15">
+                  <span class="label label-orange mr15">
                     <?= __('web.moderation'); ?>
                   </span>
                 <?php endif; ?>
