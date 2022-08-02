@@ -90,7 +90,7 @@
     <?php endif; ?>
     
     <?php $url = url('web.dir', ['grouping' => 'all', 'slug' => $data['category']['facet_slug']]); ?>
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $url); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $url . '/page'); ?>
   </main>
   <aside>
     <div class="box bg-beige max-w300"><?= Content::text($data['category']['facet_info'] ?? '', 'line'); ?></div>

@@ -138,9 +138,11 @@ Route::get('/domain/{domain}/{page?}')->controller('Post\PostController@domain',
 
 Route::get('/web')->controller('Item\HomeController', ['main'])->name('web');
 Route::get('/web/website/{slug}')->controller('Item\DetailedController')->name('website');
-Route::get('/web/dir/{grouping}/{slug}/all/{page?}')->controller('Item\DirController', ['all'])->name('web.dir.all');
-Route::get('/web/dir/{grouping}/{slug}/top/{page?}')->controller('Item\DirController', ['top'])->name('web.dir.top');
-Route::get('/web/dir/{grouping}/{slug}/{page?}')->controller('Item\DirController', ['top'])->name('web.dir');
+Route::get('/web/dir/{grouping}/{slug}/all')->controller('Item\DirController', ['all'])->name('web.dir.all');
+Route::get('/web/dir/{grouping}/{slug}/top')->controller('Item\DirController', ['top'])->name('web.dir.top');
+Route::get('/web/dir/{grouping}/{slug}')->controller('Item\DirController', ['top'])->name('web.dir');
+
+Route::get('/web/dir/{grouping}/{slug}/page/{page?}')->controller('Item\DirController', ['top']);
 
 Route::type(['get', 'post'])->get('/cleek')->controller('Item\DirController@cleek');
 
