@@ -249,8 +249,6 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                             item_content, 
                             item_published,
                             item_user_id, 
-                            item_is_soft,
-                            item_is_github,
                             item_close_replies) 
                             
                        VALUES(:item_url, 
@@ -259,8 +257,6 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                        :item_content, 
                        :item_published,
                        :item_user_id, 
-                       :item_is_soft,
-                       :item_is_github,
                        :item_close_replies)";
 
         DB::run($sql, $params);

@@ -176,12 +176,13 @@ class AddPostController extends Controller
         if (!PostModel::getDomain($post_url_domain, $this->user['id'])) {
             WebModel::add(
                 [
-                    'item_url'          => $item_url,
-                    'item_domain'       => $post_url_domain,
-                    'item_title'        => $post_title,
-                    'item_content'      => __('web.desc_formed'),
-                    'item_published'    => 0,
-                    'item_user_id'      => $this->user['id'],
+                    'item_url'              => $item_url,
+                    'item_domain'           => $post_url_domain,
+                    'item_title'            => $post_title,
+                    'item_content'          => __('web.desc_formed'),
+                    'item_published'        => 0,
+                    'item_user_id'          => $this->user['id'],
+                    'item_close_replies'    => 1,
                 ]
             );
         } else {

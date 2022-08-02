@@ -46,13 +46,13 @@ class AddItemController extends Controller
 
         // Check if the domain exists in the system  
         // Проверим наличие домена в системе
-        if ($domain = self::getDomain(Request::getPost('url'))) {
+        if ($domain = self::getDomain($url)) {
             is_return(__('web.site_replay'), 'error', $redirect);
         }
 
         // Get a first level domain       
         // Получим данные домена первого уровня
-        $basic_host =  self::domain(Request::getPost('url'));
+        $basic_host =  self::domain($url);
 
         // Check the length of the site name
         // Проверим длину названия сайта
