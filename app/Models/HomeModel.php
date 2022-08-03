@@ -135,6 +135,10 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $countLike = config('feed.countLike');
 
+        if ($type == 'questions') {
+           return "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 1";
+        }
+            
         if ($trust_level == 10) {
             $display = "AND post_is_deleted = 0";
 

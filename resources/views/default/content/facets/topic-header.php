@@ -41,6 +41,10 @@
             'url'     => url('topic', ['slug' => $topic['facet_slug']]),
             'title'   => __('app.feed'),
           ], [
+              'id'    => 'facet.questions',
+              'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/questions',
+              'title' => __('app.questions'),
+            ], [
             'id'      => 'facet.recommend',
             'url'     => url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
             'title'   => __('app.recommended'),

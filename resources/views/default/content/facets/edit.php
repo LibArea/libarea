@@ -96,8 +96,8 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <h3 class="uppercase-box"><?= __('app.parents'); ?></h3>
       <?php foreach ($data['high_arr'] as $high) : ?>
         <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
-          <?= Html::image($high['facet_img'], $high['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
-          <?= $high['facet_title']; ?>
+          <?= Html::image($high['facet_img'], $high['value'], 'img-base mr5', 'logo', 'max'); ?>
+          <?= $high['value']; ?>
         </a>
       <?php endforeach; ?>
     <?php endif; ?>

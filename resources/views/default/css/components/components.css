@@ -343,16 +343,3 @@ article iframe {
   display: flex;
   gap: 1rem;
 }
-
-/* Сделаем внешние ссылки с иконкой */
-.ind-first-p a[rel~="nofollow"]::before,
-.post-body a[rel~="nofollow"]::before {
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>');
-  color: var(--gray-600);
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 3px;
-  width: 15px;
-  height: 15px;
-}

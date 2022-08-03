@@ -6,6 +6,31 @@ if ($blog['facet_is_deleted'] == 0) : ?>
 
     <div class="flex gap mb-block">
       <main>
+        <div class="flex justify-between mb20">
+          <ul class="nav">
+          
+            <?php  $list =  [    
+            [
+              'id'    => 'main.feed',
+              'url'   => url('blog', ['slug' => $blog['facet_slug']]),
+              'title' => __('app.feed'),
+            ], [
+
+              'id'    => 'main.all',
+              'url'   => url('blog.questions', ['slug' => $blog['facet_slug']]),
+              'title' => __('app.questions'),
+            ], 
+            ];
+            ?>
+          
+          
+          <?= insert('/_block/navigation/nav', ['list' => $list]); ?>
+          
+ 
+ 
+          </ul>
+
+        </div>
         <?= insert('/content/post/post', ['data' => $data]); ?>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>

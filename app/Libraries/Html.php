@@ -157,7 +157,7 @@ class Html
         $other = empty($other) ? '' : $other;
         $first = empty($other) ? '/' : $other;
 
-        if ($sheet == 'all' || $sheet == 'top') {
+        if (in_array($sheet, ['all', 'top', 'questions'])) {
             $page  = $other . '/' . $sheet;
             $first = $other . '/' . $sheet;
         } else {

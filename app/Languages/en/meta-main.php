@@ -15,4 +15,7 @@ return [
     'feed_desc'            => 'Interest topics, feed, blogs. Conversations, questions and answers, interesting facts. Scripts CMS and social networks, Frameworks. Script {name}.',
     'top_desc'             => 'List of popular posts in the community feed (by number of replies). Topics by interest. Conversations, questions and answers, comments. Script {name}.',
     'all_desc'             => 'List of all posts in the community feed. Script {name}.',
+    
+    'questions_title'      => '{name} — questions and answers',
+    'questions_desc'       => 'A list of all questions and answers in the community in chronological order. Q&A Service {name}.', 
 ];

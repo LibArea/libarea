@@ -189,6 +189,7 @@ return [
     'being_developed'   => 'In dezvoltare',
     'activity'          => 'Activitate',
     'question'          => 'Întrebare',
+    'questions'         => 'Întrebări',
     'question_closed'   => 'Întrebarea este închisă',
     'this_draft'        => 'Această postare este o schiță',
     'no_cover'          => 'Nicio copertă încă',

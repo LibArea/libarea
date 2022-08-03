@@ -13,6 +13,9 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
             case 'facet.feed':
                 $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = 'post'";
                 break;
+            case 'questions':
+                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 1";
+                break;
             case 'recommend':
                 $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = 'post'";
                 break;
@@ -30,10 +33,8 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
         $display = '';
         if ($user['trust_level'] != 5) {
-            $trust_level = "AND post_tl <= " . $user['trust_level'];
-            if ($user['id'] == 0) {
-                $trust_level = "AND post_tl = 0";
-            }
+
+            $trust_level =  ($user['id'] == 0) ? "AND post_tl = 0" : "AND post_tl <= " . $user['trust_level'];
 
             $display = "AND post_is_deleted = 0 $trust_level";
         }
@@ -42,7 +43,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
         $sort = "ORDER BY post_answers_count DESC";
         if ($sheet == 'facet.feed') {
             $sort = "ORDER BY post_top DESC, post_date DESC";
-        } elseif ($sheet == 'admin.posts.all' || $sheet == 'admin.posts.ban' || $sheet == 'profile.posts') {
+        } elseif (in_array($sheet, ['admin.posts.all', 'admin.posts.ban', 'profile.posts'])) {
             $sort = "ORDER BY post_date DESC";
         }
 
@@ -100,7 +101,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
 
 
         $request = ['qa' => $slug, 'start' => $start, 'limit' => $limit];
-        if ($sheet == 'facet.feed' || $sheet == 'recommend') {
+        if (in_array($sheet, ['facet.feed', 'recommend', 'questions'])) {
             $request = ['qa' => "%" . $slug . "@%", 'start' => $start, 'limit' => $limit];
         }
 
@@ -113,6 +114,9 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
         switch ($sheet) {
             case 'facet.feed':
                 $string     = "WHERE facet_slug = :qa AND post_type != 'page'";
+                break;
+            case 'questions':
+                $string     = "WHERE facet_slug = :qa AND post_type != 'page' AND post_feature = 1";
                 break;
             case 'recommend':
                 $string     = "WHERE facet_slug = :qa AND post_is_recommend = 1 AND post_type != 'page'";
@@ -134,10 +138,8 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
         $display = '';
         if ($user['trust_level'] != 5) {
-            $trust_level = "AND post_tl <= " . $user['trust_level'];
-            if ($user['id'] == 0) {
-                $trust_level = "AND post_tl = 0";
-            }
+
+            $trust_level = ($user['id'] == 0) ? "AND post_tl = 0" : "AND post_tl <= " . $user['trust_level'];
 
             $display = "AND post_is_deleted = 0 $trust_level";
         }

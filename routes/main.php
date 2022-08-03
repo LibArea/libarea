@@ -119,22 +119,25 @@ Route::get('/answers/{page?}')->controller('Answer\AnswerController', ['all'])->
 
 Route::get('/topics/new/{page?}')->controller('Facets\AllFacetController', ['new', 'topic'])->name('topics.new');
 Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['recommend', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
+Route::get('/topic/{slug}/questions')->controller('Facets\TopicFacetController', ['questions', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('questions');
 Route::get('/topic/{slug}/info')->controller('Facets\TopicFacetController@info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 Route::get('/topic/{slug}/writers')->controller('Facets\TopicFacetController@writers')->where(['slug' => '[a-z0-9-]+'])->name('topic.writers');
 Route::get('/topics/{page?}')->controller('Facets\AllFacetController', ['all', 'topic'])->name('topics.all');
 
-Route::get('/topic/{slug}/{page?}')->controller('Facets\TopicFacetController', ['facet.feed', 'topics'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('topic');
+Route::get('/topic/{slug}/{page?}')->controller('Facets\TopicFacetController', ['facet.feed', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('topic');
 
 Route::get('/blogs/new/{page?}')->controller('Facets\AllFacetController', ['new', 'blog'])->name('blogs.new');
 Route::get('/blogs/{page?}')->controller('Facets\AllFacetController', ['all', 'blog'])->name('blogs.all');
 
 Route::get('/blog/{slug}/read/{page?}')->controller('Facets\ReadController')->where(['slug' => '[a-z0-9-]+'])->name('blog.read');
 
-Route::get('/blog/{slug}/{page?}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog.user'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('blog');
+Route::get('/blog/{slug}/questions/{page?}')->controller('Facets\BlogFacetController', ['questions', 'blog'])->where(['slug' => '[a-z0-9-]+'])->name('blog.questions');
+
+Route::get('/blog/{slug}/{page?}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog.user'])->where(['slug' => '[a-z0-9-]+'])->name('blog');
 
 Route::get('/redirect/facet/{id}')->controller('Facets\RedirectController')->where(['id' => '[0-9]+'])->name('redirect.facet');
 
-Route::get('/domain/{domain}/{page?}')->controller('Post\PostController@domain', ['web.feed'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
+Route::get('/domain/{domain}/{page?}')->controller('Post\PostController@domain', ['web.feed'])->where(['domain' => '[a-z0-9-.]+'])->name('domain');
 
 Route::get('/web')->controller('Item\HomeController', ['main'])->name('web');
 Route::get('/web/website/{slug}')->controller('Item\DetailedController')->name('website');
@@ -147,6 +150,7 @@ Route::get('/web/dir/{grouping}/{slug}/page/{page?}')->controller('Item\DirContr
 Route::type(['get', 'post'])->get('/cleek')->controller('Item\DirController@cleek');
 
 Route::get('/top/{page?}')->controller('HomeController', ['top'])->name('main.top');
+Route::get('/questions/{page?}')->controller('HomeController', ['questions'])->name('main.questions');
 
 Route::get('/sitemap.xml')->controller('RssController');
 Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);

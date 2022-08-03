@@ -190,6 +190,7 @@ return [
     'being_developed'   => '正在开发中',
     'activity'          => '活动',
     'question'          => '问题',
+    'questions'         => '问题',
     'question_closed'   => '问题结束了',
     'this_draft'        => '这篇文章，草稿',
     'no_cover'          => '还没有封面',
