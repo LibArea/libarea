@@ -18,4 +18,6 @@ return [
     
     'questions_title'      => '{name} — întrebări și răspunsuri',
     'questions_desc'       => 'O listă a tuturor întrebărilor și răspunsurilor din comunitate în ordine cronologică. Serviciu De Întrebări Și Răspunsuri {name}.', 
+    'posts_title'       => '{name} — postări, articole în feed',
+    'posts_desc'        => 'Postări, articole în feedul comunității. Publicații de subiect, selecție de articole interesante. Scenariul {name}.', 
 ];

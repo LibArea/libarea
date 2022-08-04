@@ -8,26 +8,24 @@ if ($blog['facet_is_deleted'] == 0) : ?>
       <main>
         <div class="flex justify-between mb20">
           <ul class="nav">
-          
-            <?php  $list =  [    
-            [
-              'id'    => 'main.feed',
-              'url'   => url('blog', ['slug' => $blog['facet_slug']]),
-              'title' => __('app.feed'),
-            ], [
+            <?php $list =  [
+              [
+                'id'    => 'main.feed',
+                'url'   => url('blog', ['slug' => $blog['facet_slug']]),
+                'title' => __('app.feed'),
+              ], [
 
-              'id'    => 'main.all',
-              'url'   => url('blog.questions', ['slug' => $blog['facet_slug']]),
-              'title' => __('app.questions'),
-            ], 
-            ];
-            ?>
-          
-          
-          <?= insert('/_block/navigation/nav', ['list' => $list]); ?>
-          
- 
- 
+                'id'    => 'main.all',
+                'url'   => url('blog.posts', ['slug' => $blog['facet_slug']]),
+                'title' => __('app.posts'),
+              ], [
+
+                'id'    => 'main.all',
+                'url'   => url('blog.questions', ['slug' => $blog['facet_slug']]),
+                'title' => __('app.questions'),
+              ],
+            ]; ?>
+            <?= insert('/_block/navigation/nav', ['list' => $list]); ?>
           </ul>
 
         </div>

@@ -1,4 +1,3 @@
-
 <script src="/assets/js/common.js"></script>
 <script src="/assets/js/medium-zoom.js"></script>
 <?php if (UserData::checkActiveUser()) : ?><script src="/assets/js/app.js"></script><?php endif; ?>
@@ -8,7 +7,7 @@
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
-     mediumZoom(document.querySelectorAll('.img-preview img'));
+    mediumZoom(document.querySelectorAll('.img-preview img'));
   });
   <?php if (!UserData::checkActiveUser()) : ?>
     document.querySelectorAll(".click-no-auth")

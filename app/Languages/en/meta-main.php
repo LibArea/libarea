@@ -17,5 +17,7 @@ return [
     'all_desc'             => 'List of all posts in the community feed. Script {name}.',
     
     'questions_title'      => '{name} — questions and answers',
-    'questions_desc'       => 'A list of all questions and answers in the community in chronological order. Q&A Service {name}.', 
+    'questions_desc'       => 'A list of all questions and answers in the community in chronological order. Q&A Service {name}.',
+    'posts_title'       => '{name} — posts, articles in the feed',
+    'posts_desc'        => 'Posts, articles in the community feed. Subject publications, selection of interesting articles. Script {name}.', 
 ];

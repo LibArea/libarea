@@ -12,7 +12,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $result = [];
         foreach ($topics_user as $ind => $row) {
-            $result[$ind] = $row['signed_facet_id'];
+            $result[$ind] = $row['facet_id'];
         }
 
         $string = "";
@@ -88,7 +88,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $result = [];
         foreach ($topics_user as $ind => $row) {
-            $result[$ind] = $row['signed_facet_id'];
+            $result[$ind] = $row['facet_id'];
         }
 
         $string = "";
@@ -138,7 +138,11 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         if ($type == 'questions') {
            return "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 1";
         }
-            
+        
+        if ($type == 'posts') {
+           return "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 0";
+        }
+        
         if ($trust_level == 10) {
             $display = "AND post_is_deleted = 0";
 
@@ -196,7 +200,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
 
-    // Facets (themes, blogs) all / subscribed
+    // Facets (topic, blogs) all / subscribed
     // Фасеты (темы, блоги) все / подписан
     public static function subscription($user_id)
     {
@@ -206,13 +210,10 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_title,
                     facet_user_id,
                     facet_img,
-                    facet_type,
-                    signed_facet_id, 
-                    signed_user_id                    
+                    facet_type                   
                         FROM facets 
-                        JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :id  
-                            AND facet_type != 'section'  AND facet_type != 'category'
-                                ORDER BY facet_id DESC";
+                            LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :id  
+                                AND facet_type = 'topic' AND facet_type = 'blog'";
 
         return DB::run($sql, ['id' => $user_id])->fetchAll();
     }

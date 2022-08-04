@@ -28,7 +28,7 @@ class HomeController extends Controller
             'main'      => 'main',
             'og'        => true,
             'imgurl'    => config('meta.img_path'),
-            'url'       => $sheet == 'top' ? '/top' : '/',
+            'url'       => self::canonical($sheet),
         ];
 
         return $this->render(
@@ -51,6 +51,25 @@ class HomeController extends Controller
         );
     }
 
+    public static function canonical($url)
+    {
+        switch ($url) {
+            case 'questions':
+                $url    = '/questions';
+                break;
+            case 'posts':
+                $url    = '/posts';
+                break;
+            case 'top':
+                $url    = '/top';
+                break;
+            default:
+                $url    = '/';
+        }
+        
+        return $url;
+    }
+    
     // Infinite scroll
     // Бесконечный скролл
     public function scroll()

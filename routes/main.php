@@ -120,6 +120,7 @@ Route::get('/answers/{page?}')->controller('Answer\AnswerController', ['all'])->
 Route::get('/topics/new/{page?}')->controller('Facets\AllFacetController', ['new', 'topic'])->name('topics.new');
 Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['recommend', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
 Route::get('/topic/{slug}/questions')->controller('Facets\TopicFacetController', ['questions', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('questions');
+Route::get('/topic/{slug}/posts')->controller('Facets\TopicFacetController', ['posts', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('posts');
 Route::get('/topic/{slug}/info')->controller('Facets\TopicFacetController@info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 Route::get('/topic/{slug}/writers')->controller('Facets\TopicFacetController@writers')->where(['slug' => '[a-z0-9-]+'])->name('topic.writers');
 Route::get('/topics/{page?}')->controller('Facets\AllFacetController', ['all', 'topic'])->name('topics.all');
@@ -130,8 +131,9 @@ Route::get('/blogs/new/{page?}')->controller('Facets\AllFacetController', ['new'
 Route::get('/blogs/{page?}')->controller('Facets\AllFacetController', ['all', 'blog'])->name('blogs.all');
 
 Route::get('/blog/{slug}/read/{page?}')->controller('Facets\ReadController')->where(['slug' => '[a-z0-9-]+'])->name('blog.read');
-
+Route::get('/blog/{slug}/posts/{page?}')->controller('Facets\BlogFacetController', ['posts', 'blog'])->where(['slug' => '[a-z0-9-]+'])->name('blog.posts');
 Route::get('/blog/{slug}/questions/{page?}')->controller('Facets\BlogFacetController', ['questions', 'blog'])->where(['slug' => '[a-z0-9-]+'])->name('blog.questions');
+ 
 
 Route::get('/blog/{slug}/{page?}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog.user'])->where(['slug' => '[a-z0-9-]+'])->name('blog');
 
@@ -151,6 +153,7 @@ Route::type(['get', 'post'])->get('/cleek')->controller('Item\DirController@clee
 
 Route::get('/top/{page?}')->controller('HomeController', ['top'])->name('main.top');
 Route::get('/questions/{page?}')->controller('HomeController', ['questions'])->name('main.questions');
+Route::get('/posts/{page?}')->controller('HomeController', ['posts'])->name('main.posts');
 
 Route::get('/sitemap.xml')->controller('RssController');
 Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);

@@ -16,6 +16,9 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
             case 'questions':
                 $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 1";
                 break;
+            case 'posts':
+                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 0";
+                break;
             case 'recommend':
                 $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = 'post'";
                 break;
@@ -101,7 +104,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
 
 
         $request = ['qa' => $slug, 'start' => $start, 'limit' => $limit];
-        if (in_array($sheet, ['facet.feed', 'recommend', 'questions'])) {
+        if (in_array($sheet, ['facet.feed', 'recommend', 'questions', 'posts'])) {
             $request = ['qa' => "%" . $slug . "@%", 'start' => $start, 'limit' => $limit];
         }
 
@@ -117,6 +120,9 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                 break;
             case 'questions':
                 $string     = "WHERE facet_slug = :qa AND post_type != 'page' AND post_feature = 1";
+                break;
+            case 'posts':
+                $string     = "WHERE facet_slug = :qa AND post_type != 'page' AND post_feature = 0";
                 break;
             case 'recommend':
                 $string     = "WHERE facet_slug = :qa AND post_is_recommend = 1 AND post_type != 'page'";
