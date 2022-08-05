@@ -371,24 +371,17 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['domain' => $domain, 'user_id' => $user_id])->fetch();
     }
 
-    // 5 popular domains
-    // 5 популярных доменов
+    // 10 popular domains
+    // 10 популярных доменов
     public static function getDomainTop($domain)
     {
         $sql = "SELECT
-                    item_id,
                     item_title,
-                    item_content,
-                    item_published,
-                    item_user_id,
-                    item_url,
                     item_domain,
-                    item_votes,
-                    item_count,
-                    item_is_deleted
+                    item_count
                         FROM items 
-                        WHERE item_domain != :domain AND item_published = 1 AND item_is_deleted = 0
-                        ORDER BY item_count DESC LIMIT 10";
+                            WHERE item_domain != :domain AND item_published = 1 AND item_is_deleted = 0
+                                ORDER BY item_count DESC LIMIT 10";
 
         return DB::run($sql, ['domain' => $domain])->fetchAll();
     }
@@ -396,41 +389,42 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     // Кто подписан на данный вопрос / пост
     public static function getFocusUsersPost($post_id)
     {
-        $sql = "SELECT
-                    signed_post_id,
-                    signed_user_id
-                        FROM posts_signed
-                        WHERE signed_post_id = :post_id";
+        $sql = "SELECT signed_post_id, signed_user_id FROM posts_signed WHERE signed_post_id = :post_id";
 
         return DB::run($sql, ['post_id' => $post_id])->fetchAll();
+    }
+
+    // Список просмотренных постов
+    public static function getViewPostUser($user_id)
+    {
+        $sql = "SELECT view_post_id FROM posts_view WHERE view_user_id = :user_id ORDER BY view_date DESC LIMIT 25";
+
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
     // Список читаемых постов
     public static function getFocusPostUser($user_id)
     {
-        $sql = "SELECT
-                    signed_post_id,
-                    signed_user_id 
-                        FROM posts_signed
-                        WHERE signed_user_id = :user_id";
+        $sql = "SELECT signed_post_id, signed_user_id FROM posts_signed WHERE signed_user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
-    public static function getFocusPostsListUser($user_id)
+    public static function getPostsListUser($user_id, $type)
     {
-        $focus_posts = self::getFocusPostUser($user_id);
-
-        $result = [];
-        foreach ($focus_posts as $ind => $row) {
-            $result[$ind] = $row['signed_post_id'];
-        }
-
-        if ($result) {
-            $string = "WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0";
+        if ($type = 'subscribed') {
+            $result = [];
+            foreach (self::getFocusPostUser($user_id) as $ind => $row) {
+                $result[$ind] = $row['signed_post_id'];
+            }
         } else {
-            $string = "WHERE post_id IN(0) AND post_draft = 0";
+            $result = [];
+            foreach (self::getViewPostUser($user_id) as $ind => $row) {
+                $result[$ind] = $row['view_post_id'];
+            }
         }
+
+        if (empty($result)) return false;
 
         $sql = "SELECT 
                     post_id,
@@ -463,22 +457,19 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     
                         FROM posts
                         LEFT JOIN
-                        (
-                            SELECT 
+                        ( SELECT 
                                 relation_post_id,
-
                                 GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                                 FROM facets  
-                                LEFT JOIN facets_posts_relation 
-                                    on facet_id = relation_facet_id
-                                GROUP BY relation_post_id
+                                    LEFT JOIN facets_posts_relation on facet_id = relation_facet_id
+                                        GROUP BY relation_post_id
                         ) AS rel
                             ON rel.relation_post_id = post_id 
 
             INNER JOIN users u ON u.id = post_user_id
             LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $user_id
             LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $user_id AND fav.action_type = 'post'
-            $string  LIMIT 100";
+                WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0 AND post_is_deleted = 0 LIMIT 50";
 
         return DB::run($sql)->fetchAll();
     }
@@ -486,9 +477,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     // Последние 5 страниц по фасету
     public static function recent($facet_id, $post_id)
     {
-        $and = '';
-        if ($post_id > 0) $and = 'AND post_id != ' . $post_id;
-
+        $sort = ($post_id > 0) ? 'AND post_id != ' . $post_id : '';
         $sql = "SELECT 
                     post_id,
                     post_slug,
@@ -497,8 +486,8 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM facets_posts_relation 
                             LEFT JOIN posts on post_id = relation_post_id
                                 WHERE relation_facet_id = :facet_id AND post_type = 'page'
-                                    $and
-                                    ORDER BY post_id DESC LIMIT 5";
+                                    $sort
+                                        ORDER BY post_id DESC LIMIT 5";
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }

@@ -14,7 +14,8 @@ return [
     'security_info'         => '確保您的所有密碼都是 8 個字符或更多，最好是更多。',
     'recover_info'          => '單擊“重置”按鈕後，檢查您的電子郵件。',
     'favorite_info'         => '書籤中的帖子、評論和問題。',
-    'preferences_info'      => '您關注的帖子。 您將收到所有新回复的通知。',
+    'subscribed_info'       => '您關注的帖子。 您將收到所有新回复的通知。',
+    'read_info'             => '阅读帖子。最近 50 次查看的历史记录。',
     'notifications_info'    => '您可以通過單擊鏈接將所有廣告標記為已讀：“我已閱讀”。',
     'notification_info'     => '您可以在此部分取消訂閱所有電子郵件通知。',
 

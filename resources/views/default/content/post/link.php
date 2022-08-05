@@ -4,7 +4,7 @@
       <div class="right mt15">
         <?= Html::votes($data['site'], 'item'); ?>
       </div>
-      <h1><?= $data['site']['item_title']; ?>
+      <h1 class="text-2xl gray mb-text-xl m0"><?= $data['site']['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm ml5" title="<?= __('app.edit'); ?>" href="<?= url('web.edit', ['id' => $data['site']['item_id']]); ?>">
             <svg class="icons">

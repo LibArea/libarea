@@ -14,7 +14,7 @@
       <div>
         <div>
           <?php if ($data['sheet'] == 'subscribed') : ?>
-            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id bg-violet text-sm right">
+            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id tag-violet right">
               <?= __('app.unsubscribe'); ?>
             </div>
           <?php endif; ?>

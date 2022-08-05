@@ -52,6 +52,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/favorites/folders')->controller('User\UserController@folders')->name('favorites.folders');
     Route::get('/favorites/folders/{id}')->controller('User\UserController@foldersFavorite')->where(['id' => '[0-9]+'])->name('favorites.folder.id');
     Route::get('/subscribed')->controller('User\UserController@subscribed')->name('subscribed');
+    Route::get('/read')->controller('User\UserController@read')->name('read');
     Route::get('/drafts')->controller('User\UserController@drafts')->name('drafts');
     Route::get('/invitations')->controller('User\InvitationsController@invitationForm')->name('invitations');
 
@@ -120,7 +121,7 @@ Route::get('/answers/{page?}')->controller('Answer\AnswerController', ['all'])->
 Route::get('/topics/new/{page?}')->controller('Facets\AllFacetController', ['new', 'topic'])->name('topics.new');
 Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['recommend', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
 Route::get('/topic/{slug}/questions')->controller('Facets\TopicFacetController', ['questions', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('questions');
-Route::get('/topic/{slug}/posts')->controller('Facets\TopicFacetController', ['posts', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('posts');
+Route::get('/topic/{slug}/posts/{page?}')->controller('Facets\TopicFacetController', ['posts', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('posts');
 Route::get('/topic/{slug}/info')->controller('Facets\TopicFacetController@info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 Route::get('/topic/{slug}/writers')->controller('Facets\TopicFacetController@writers')->where(['slug' => '[a-z0-9-]+'])->name('topic.writers');
 Route::get('/topics/{page?}')->controller('Facets\AllFacetController', ['all', 'topic'])->name('topics.all');

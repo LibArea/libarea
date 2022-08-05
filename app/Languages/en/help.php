@@ -14,7 +14,8 @@ return [
     'security_info'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more.',
     'recover_info'          => 'After you click the "Reset" button, check your e-mail.',
     'favorite_info'         => 'Posts, comments and questions in your bookmarks.',
-    'preferences_info'      => 'Posts you follow. You will be notified of all new replies.',
+    'subscribed_info'       => 'Posts you follow. You will be notified of all new replies.',
+    'read_info'             => 'Read posts. History of the last 50 views.',
     'notifications_info'    => 'You can mark all ads as read by clicking on the link: "I have read".',
     'notification_info'     => 'You can unsubscribe from all email notifications in this section.',
 

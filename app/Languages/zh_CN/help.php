@@ -14,7 +14,8 @@ return [
     'security_info'         => '确保你的所有密码都是8个字符或以上，建议更多。',
     'recover_info'          => '点击“重置”按钮后，检查您的电子邮件。',
     'favorite_info'         => '书签中的帖子、评论和问题。',
-    'preferences_info'      => '您关注的帖子。您将收到所有新回复的通知。',
+    'subscribed_info'       => '您关注的帖子。您将收到所有新回复的通知。',
+    'read_info'             => '阅读帖子。最近 50 次查看的历史记录。',
     'notifications_info'    => '您可以通过点击链接将所有广告标记为已读：“我已阅读”。',
     'notification_info'     => '您可以在此部分取消订阅所有电子邮件通知。',
 

@@ -136,7 +136,7 @@ class UserController extends Controller
     public function subscribed()
     {
         return $this->render(
-            '/user/favorite/subscribed',
+            '/user/favorite/read-subscribed',
             'base',
             [
                 'meta'  => Meta::get(__('app.subscribed')),
@@ -144,7 +144,26 @@ class UserController extends Controller
                     'h1'    => __('app.subscribed') . ' ' . $this->user['login'],
                     'sheet' => 'subscribed',
                     'type'  => 'favorites',
-                    'posts' => PostModel::getFocusPostsListUser($this->user['id'])
+                    'posts' => PostModel::getPostsListUser($this->user['id'], 'subscribed')
+                ]
+            ]
+        );
+    }
+    
+    // User preferences page
+    // Страница предпочтений пользователя
+    public function read()
+    {
+        return $this->render(
+            '/user/favorite/read-subscribed',
+            'base',
+            [
+                'meta'  => Meta::get(__('app.i_read')),
+                'data'  => [
+                    'h1'    => __('app.i_read') . ' ' . $this->user['login'],
+                    'sheet' => 'read',
+                    'type'  => 'favorites',
+                    'posts' => PostModel::getPostsListUser($this->user['id'], 'read')
                 ]
             ]
         );

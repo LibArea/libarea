@@ -14,7 +14,8 @@ return [
     'security_info'         => 'Asigurați-vă că toate parolele dvs. au 8 caractere sau mai mult, în mod ideal, mult mai multe.',
     'recover_info'          => 'După ce faceți clic pe butonul „Resetare”, verificați-vă e-mailul.',
     'favorite_info'         => 'Postări, comentarii și întrebări în marcajele dvs.',
-    'preferences_info'      => 'Postări pe care le urmăriți. Veți fi notificat cu privire la toate răspunsurile noi.',
+    'subscribed_info'       => 'Postări pe care le urmăriți. Veți fi notificat cu privire la toate răspunsurile noi.',
+    'read_info'             => 'Citiți postări. Istoria ultimelor 50 de vizualizări.',
     'notifications_info'    => 'Puteți marca toate anunțurile ca citite făcând clic pe linkul: „Am citit”.',
     'notification_info'     => 'Vă puteți dezabona de la toate notificările prin e-mail din această secțiune.',
 

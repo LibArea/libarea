@@ -6,6 +6,6 @@
 </main>
 <aside>
   <div class="box bg-beige sticky top-sm">
-    <?= __('help.preferences_info'); ?>
+    <?= __('help.' . $data['sheet'] . '_info'); ?>
   </div>
 </aside>
