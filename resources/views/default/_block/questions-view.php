@@ -5,9 +5,10 @@
     </h2>
 
     <?php foreach ($data['answers'] as  $answer) : ?>
-      <div class="block-answer mb10 br-bottom">
+      <div class="block-answer br-bottom">
         <?php if ($answer['answer_is_deleted'] == 0) : ?>
           <?php if (UserData::getUserId() == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
+          <div class="br-top-dotted mb5"></div>
           <ol class="list-none">
             <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="max-w780">
@@ -67,7 +68,7 @@
       <ol class="max-w780 list-none">
         <?php foreach ($answer['comments'] as  $comment) : ?>
           <?php if ($comment['comment_is_deleted'] == 0) : ?>
-            <li class="content_tree br-top-zebra2 br-bottom ml15" id="comment_<?= $comment['comment_id']; ?>">
+            <li class="content_tree br-li-bottom-no br-bottom ml15" id="comment_<?= $comment['comment_id']; ?>">
               <div class="qa-comment">
                 <?= Content::text($comment['comment_content'], 'line'); ?>
                 <span class="qa-comment-footer">

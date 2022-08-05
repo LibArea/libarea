@@ -1,6 +1,6 @@
 <main>
 
-  <ul class="nav">
+  <ul class="nav scroll">
     <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
   </ul>
 

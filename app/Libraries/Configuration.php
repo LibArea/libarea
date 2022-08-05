@@ -20,7 +20,7 @@ class Configuration
         }
 
         if (!is_file(self::$path . '/' . $file . '.php')) {
-            echo 'The file does not exist:' . $file;
+            echo 'Configuration file does not exist:' . $file;
             exit;
         }
 

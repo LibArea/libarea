@@ -7,7 +7,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
     <div class="flex gap mb-block">
       <main>
         <div class="flex justify-between mb20">
-          <ul class="nav">
+          <ul class="nav scroll">
             <?php $list =  [
               [
                 'id'    => 'main.feed',
