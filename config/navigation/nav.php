@@ -25,7 +25,7 @@ return [
       'url'   => '/setting/notifications',
       'title' => __('app.notifications'),
       'id'    => 'notifications',
-      'css'    => 'mb-none',
+      // 'css'    => 'mb-none',
     ],
   ],
 
@@ -36,6 +36,10 @@ return [
       'id'    => 'favorites',
       'url'   => url('favorites'),
       'title' => __('app.favorites'),
+    ], [
+      'id'    => 'read',
+      'url'   => url('read'),
+      'title' => __('app.i_read'),
     ], [
       'id'    => 'subscribed',
       'url'   => url('subscribed'),
@@ -54,6 +58,14 @@ return [
       'id'    => 'main.feed',
       'url'   => '/',
       'title' => __('app.feed'),
+    ], [
+      'id'    => 'main.posts',
+      'url'   => url('main.posts'),
+      'title' => __('app.posts'),
+    ], [
+      'id'    => 'main.questions',
+      'url'   => url('main.questions'),
+      'title' => __('app.questions'),
     ], [
       'tl'    => UserData::USER_FIRST_LEVEL,
       'id'    => 'main.all',

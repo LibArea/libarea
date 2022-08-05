@@ -6,7 +6,6 @@ use DB;
 
 class PostModel extends \Hleb\Scheme\App\Models\MainModel
 {
-    // Добавляем пост
     public static function create($params)
     {
         $sql = "INSERT INTO posts(post_title, 
@@ -56,13 +55,12 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getSlug($slug)
     {
-        $sql = "SELECT 
-                    post_slug 
-                        FROM posts WHERE post_slug = :slug";
+        $sql = "SELECT post_slug FROM posts WHERE post_slug = :slug";
 
         return DB::run($sql, ['slug' => $slug])->fetch();
     }
 
+    // Full post 
     // Полная версия поста  
     public static function getPost($params, $name, $user)
     {
@@ -120,6 +118,8 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $data)->fetch();
     }
 
+    // Recommended posts
+    // This should not be your own post, whose TL is not higher than the participant, the post is not a draft, not deleted, etc.
     // Рекомендованные посты
     // Это должен быть не свой пост, у которого TL не выше участника, пост не черновик, не удален и т.д.
     public static function postSimilars($post_id, $user, $facet_id, $limit = 5)
@@ -145,7 +145,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['post_id' => $post_id, 'id' => $user['id'], 'tl' => $tl, 'limit' => $limit, 'facet_id' => $facet_id])->fetchAll();
     }
 
-    // Пересчитываем количество
     // $type (comments / answers / hits)
     public static function updateCount($post_id, $type)
     {
@@ -157,14 +156,14 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function updateViews($post_id, $user_id)
     {
-        if(!self::checkViews($post_id, $user_id)) {
+        if (!self::checkViews($post_id, $user_id)) {
             $sql = "INSERT INTO posts_view(view_post_id, view_user_id) VALUES(:post_id, :user_id)";
             DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id]);
         }
-        
+
         return true;
     }
-    
+
     public static function checkViews($post_id, $user_id)
     {
         $sql = "SELECT view_post_id FROM posts_view WHERE view_post_id = :post_id AND view_user_id = :user_id";
@@ -172,7 +171,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetch();
     }
 
-    // Редактирование поста
     public static function editPost($data)
     {
         $params = [
@@ -217,13 +215,11 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $params);
     }
 
+    // Related posts
     // Связанные посты
     public static function postRelated($post_related)
     {
-        $in = "post_id IN(0) AND";
-        if ($post_related) {
-            $in = "post_id IN(0, " . $post_related . ") AND";
-        }
+        if (empty($post_related)) return false;
 
         $sql = "SELECT 
                     post_id as id, 
@@ -231,25 +227,19 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_slug,
                     post_content_img
                         FROM posts 
-                           WHERE $in post_is_deleted = 0 AND post_tl = 0";
+                           WHERE post_id IN(0, " . $post_related . ") AND post_is_deleted = 0 AND post_tl = 0";
 
         return DB::run($sql)->fetchAll();
     }
 
-
-    // Связанные посты All
     public static function postRelatedAll()
     {
-        $sql = "SELECT 
-                    post_id, 
-                    post_title, 
-                    post_slug as slug
-                        FROM posts 
-                            WHERE post_is_deleted = 0 AND post_tl = 0";
+        $sql = "SELECT post_id, post_title, post_slug as slug FROM posts WHERE post_is_deleted = 0 AND post_tl = 0";
 
         return DB::run($sql)->fetchAll();
     }
 
+    // Removing the cover
     // Удаление обложки
     public static function setPostImgRemove($post_id)
     {
@@ -258,7 +248,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql_two, ['post_id' => $post_id]);
     }
 
-
+    // Add post to profile
     // Добавить пост в профиль
     public static function setPostProfile($post_id, $user_id)
     {
@@ -287,20 +277,9 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return  DB::run($sql, ['post_id' => $post_id, 'id' => $user_id])->fetch();
     }
 
-    // Удален пост или нет
-    public static function isThePostDeleted($post_id)
-    {
-        $sql = "SELECT post_id, post_is_deleted FROM posts WHERE post_id = :post_id";
-
-        $result = DB::run($sql, ['post_id' => $post_id])->fetch();
-
-        return $result['post_is_deleted'];
-    }
-
     public static function getPostMerged($post_id)
     {
-        $sql = "SELECT post_id, post_title, post_slug
-                    FROM posts WHERE post_merged_id = :post_id";
+        $sql = "SELECT post_id, post_title, post_slug FROM posts WHERE post_merged_id = :post_id";
 
         return DB::run($sql, ['post_id' => $post_id])->fetchAll();
     }
@@ -386,6 +365,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['domain' => $domain])->fetchAll();
     }
 
+    // Who is following this question/post
     // Кто подписан на данный вопрос / пост
     public static function getFocusUsersPost($post_id)
     {
@@ -394,6 +374,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['post_id' => $post_id])->fetchAll();
     }
 
+    // List of viewed posts
     // Список просмотренных постов
     public static function getViewPostUser($user_id)
     {
@@ -402,23 +383,23 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
-    // Список читаемых постов
+    // List of posts to which the participant has subscribed
+    // Список постов на которые подписался участник
     public static function getFocusPostUser($user_id)
     {
-        $sql = "SELECT signed_post_id, signed_user_id FROM posts_signed WHERE signed_user_id = :user_id";
+        $sql = "SELECT signed_post_id FROM posts_signed WHERE signed_user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
     public static function getPostsListUser($user_id, $type)
     {
-        if ($type = 'subscribed') {
-            $result = [];
+        $result = [];
+        if ($type == 'subscribed') {
             foreach (self::getFocusPostUser($user_id) as $ind => $row) {
                 $result[$ind] = $row['signed_post_id'];
             }
         } else {
-            $result = [];
             foreach (self::getViewPostUser($user_id) as $ind => $row) {
                 $result[$ind] = $row['view_post_id'];
             }
@@ -473,7 +454,8 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql)->fetchAll();
     }
-    
+
+    // Last 5 pages by facet 
     // Последние 5 страниц по фасету
     public static function recent($facet_id, $post_id)
     {
@@ -491,5 +473,4 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
-
 }
