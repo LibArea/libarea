@@ -1,7 +1,7 @@
 <?php
 $category = $data['category'] ?? null;
 if ($category) : ?>
-  <div class="flex justify-between tems-center  mr20">
+  <div class="flex justify-between tems-center mr20 mb15">
   <h2 class="inline m0"><?= Html::numWord($data['count'], __('web.num_website'), false); ?>: <?= $data['count']; ?></h2>
   <ul class="nav">
     <li<?php if ($data['sheet'] == 'all') { ?> class="active" <?php } ?>>

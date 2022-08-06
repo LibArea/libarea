@@ -1,5 +1,5 @@
 <?php if (!empty($data)) : ?>
-  <h3 class="uppercase-box"><?= __('app.domains'); ?></h3>
+  <h4 class="uppercase-box"><?= __('app.domains'); ?></h4>
   <?php foreach ($data as  $domain) : ?>
     <a class="text-sm gray" href="<?= url('domain', ['domain' => $domain['item_domain']]); ?>">
       <svg class="icons">

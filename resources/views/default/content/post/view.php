@@ -85,7 +85,7 @@
           </div>
         <?php endif; ?>
         <?php if ($post['post_url_domain']) : ?>
-          <h3 class="uppercase-box"><?= __('app.source'); ?></h3>
+          <h4 class="uppercase-box"><?= __('app.source'); ?></h4>
           <div class="italic m15 mb15 p10 text-sm bg-lightgray table gray">
             <div>
               <svg class="icons">
@@ -176,7 +176,7 @@
 <aside>
   <?php if (!empty($data['facets'])) : ?>
     <div class="box bg-lightgray">
-      <h3 class="uppercase-box"><?= __('app.topics'); ?></h3>
+      <h4 class="uppercase-box"><?= __('app.topics'); ?></h4>
       <?php foreach ($data['facets'] as $topic) : ?>
         <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
 
@@ -207,7 +207,7 @@
   </div>
   <?php if ($data['recommend']) : ?>
     <div class="box sticky top-sm">
-      <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
+      <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
       <?php foreach ($data['recommend'] as  $rec_post) : ?>
         <div class="mb15 hidden flex text-sm">
           <?php if ($rec_post['post_type'] == 'post') : ?>

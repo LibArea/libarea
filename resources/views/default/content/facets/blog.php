@@ -35,7 +35,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
       <aside>
         <?php if ($blog['facet_is_deleted'] == 0) : ?>
           <div class="box bg-beige">
-            <h3 class="uppercase-box"><?= __('app.created_by'); ?></h3>
+            <h4 class="uppercase-box"><?= __('app.created_by'); ?></h4>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= url('profile', ['login' => $data['user']['login']]); ?>">
               <?= Html::image($data['user']['avatar'], $data['user']['login'], 'img-base', 'avatar', 'small'); ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>
@@ -50,9 +50,9 @@ if ($blog['facet_is_deleted'] == 0) : ?>
 
           <?php if ($data['focus_users']) : ?>
             <div class="box bg-lightgray">
-              <h3 class="uppercase-box"><?= __('app.reads'); ?>
+              <h4 class="uppercase-box"><?= __('app.reads'); ?>
                 <a href="<?= url('blog.read', ['slug' => $blog['facet_slug']]) ?>" title="<?= __('app.more'); ?>" class="gray-600" href="">...</a>
-              </h3>
+              </h4>
               <ul>
                 <?php foreach ($data['focus_users'] as $user) : ?>
                   <li class="mt15">

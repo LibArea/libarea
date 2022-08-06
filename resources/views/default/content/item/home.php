@@ -26,7 +26,7 @@
 
 <div id="contentWrapper">
   <main>
-    <h2 class="inline mb10"><?= __('web.' . $data['sheet']); ?></h2>
+    <h2 class="m0 mb10"><?= __('web.' . $data['sheet']); ?></h2>
     <?php if (!empty($data['items'])) : ?>
       <?= insert('/content/item/site', ['data' => $data, 'screening' => $data['screening']]); ?>
     <?php else : ?>
@@ -37,7 +37,7 @@
     <div class="box bg-beige max-w300"><?= __('web.sidebar_info'); ?></div>
     <?php if (UserData::checkActiveUser()) : ?>
       <div class="box bg-lightgray max-w300">
-        <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>
+        <h4 class="uppercase-box"><?= __('web.menu'); ?></h4>
         <ul class="menu">
           <?= insert('/_block/navigation/item/menu', ['data' => $data]); ?>
         </ul>

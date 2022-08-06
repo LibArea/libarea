@@ -32,7 +32,7 @@
     <?php if (!empty($data['writers'])) : ?>
       <div class="sticky top-sm">
         <div class="box bg-lightgray text-sm">
-          <h3 class="uppercase-box"><?= __('app.writers'); ?></h3>
+          <h4 class="uppercase-box"><?= __('app.writers'); ?></h4>
           <ul>
             <?php foreach ($data['writers'] as $ind => $row) : ?>
               <li class="mb10">

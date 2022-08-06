@@ -4,7 +4,7 @@
     <main>
       <?php if ($data['profile']['my_post'] != 0) : ?>
         <div class="box bg-violet">
-          <h3 class="uppercase-box"><?= __('app.selected_post'); ?>
+          <h4 class="uppercase-box"><?= __('app.selected_post'); ?>
             <?php if ($data['profile']['id'] == UserData::getUserId()) : ?>
               <a class="add-profile right" data-post="<?= $data['my_post']['post_id']; ?>">
                 <svg class="icons gray-600">
@@ -12,7 +12,7 @@
                 </svg>
               </a>
             <?php endif; ?>
-          </h3>
+          </h4>
           <div class="mt5">
             <a class="text-2xl" href="<?= url('post', ['id' => $data['my_post']['post_id'], 'slug' => $data['my_post']['post_slug']]); ?>">
               <?= $data['my_post']['post_title']; ?>

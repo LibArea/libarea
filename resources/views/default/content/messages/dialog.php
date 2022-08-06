@@ -52,7 +52,7 @@
 
 <aside>
   <div class="box bg-beige">
-    <h3 class="uppercase-box"><?= __('app.dialogues'); ?></h3>
+    <h4 class="uppercase-box"><?= __('app.dialogues'); ?></h4>
     <?php foreach ($data['dialog'] as $key => $val) : ?>
       <?php if ($val['id'] != UserData::getUserId()) : ?>
         <div class="flex relative pt5 pb5 items-center hidden">

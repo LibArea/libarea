@@ -70,7 +70,7 @@
           </div>
         <?php endif; ?>
         <?php if ($post['post_url_domain']) : ?>
-          <h3 class="uppercase-box"><?= __('app.source'); ?></h3>
+          <h4 class="uppercase-box"><?= __('app.source'); ?></h4>
           <div class="italic m15 mb15 p10 text-sm bg-lightgray table gray">
             <div>
               <svg class="icons">

@@ -46,9 +46,9 @@
 </main>
 <aside>
   <div class="box">
-    <h3 class="uppercase-box"><?= __('team.clue'); ?></h3>
+    <h4 class="uppercase-box"><?= __('team.clue'); ?></h4>
     <span class="gray-600"><?= __('team.info'); ?></span>
-    <h3 class="uppercase-box mt15"><?= __('team.owner'); ?></h3>
+    <h4 class="uppercase-box mt15"><?= __('team.owner'); ?></h4>
     <div class="mb15">
       <?= Html::image($user['avatar'], $user['login'], 'img-base', 'avatar', 'small'); ?>
       <a href="<?= url('profile', ['login' => $user['login']]); ?>"><?= $user['login']; ?></a>

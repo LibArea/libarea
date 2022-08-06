@@ -1,5 +1,5 @@
 <div class="box bg-lightgray text-sm">
-  <h3 class="uppercase-box"><?= __('app.' . $lang); ?></h3>
+  <h4 class="uppercase-box"><?= __('app.' . $lang); ?></h4>
   <ul>
     <?php foreach ($data as $sub) : ?>
       <li class="mb10">

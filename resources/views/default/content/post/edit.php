@@ -10,7 +10,7 @@ $post = $data['post']; ?>
 </main>
 <aside>
   <div class="box bg-beige">
-    <h3 class="uppercase-box"><?= __('app.help'); ?></h3>
+    <h4 class="uppercase-box"><?= __('app.help'); ?></h4>
     <?= __('help.edit_' . $post['post_type']); ?>
   </div>
 </aside>

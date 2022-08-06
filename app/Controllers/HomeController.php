@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Exception\NotFoundException;
 use App\Models\HomeModel;
 use Meta;
 

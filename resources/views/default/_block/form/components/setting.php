@@ -26,6 +26,18 @@
   'help'      => '0 - 255 ' . __('app.characters'),
 ]); ?>
 
+<h3 class="m0 mt15"><?= __('app.contacts'); ?></h3>
+<?php foreach (config('user/setting') as $block) : ?>
+  <fieldset>
+    <label for="post_title"><?= $block['lang']; ?></label>
+    <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
+    <?php if ($block['help']) : ?>
+      <div class="help"><?= $block['help']; ?></div>
+    <?php endif; ?>
+  </fieldset>
+<?php endforeach; ?>
+
+<h3 class="m0 mt15"><?= __('app.other'); ?></h3>
 <fieldset id="box">
   <label for="post_content"><?= __('app.color'); ?></label>
   <input type="color" value="<?= $data['user']['color']; ?>" id="colorPicker">
@@ -58,16 +70,6 @@
   <input type="checkbox" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked <?php endif; ?>> <?= __('app.endless_scroll'); ?>
 </fieldset>
 
-<h3 class="mt15 mb15"><?= __('app.contacts'); ?></h3>
-<?php foreach (config('user/setting') as $block) : ?>
-  <fieldset>
-    <label for="post_title"><?= $block['lang']; ?></label>
-    <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
-    <?php if ($block['help']) : ?>
-      <div class="help"><?= $block['help']; ?></div>
-    <?php endif; ?>
-  </fieldset>
-<?php endforeach; ?>
 
 <fieldset>
   <input type="hidden" name="nickname" id="nickname" value="">

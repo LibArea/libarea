@@ -7,13 +7,13 @@
   ]
 ); ?>
 
-<h3 class="uppercase-box">
+<h4 class="uppercase-box">
   <?= __('admin.users'); ?>
   <a href="<?= url('admin.users'); ?>"><svg class="icons">
       <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
     </svg>
   </a>
-</h3>
+</h4>
 <?php foreach ($data['last_visit'] as $user) : ?>
   <div class="gray">
     <span class="gray-600 text-sm">id<?= $user['id']; ?></span>
@@ -22,13 +22,13 @@
   </div>
 <?php endforeach; ?>
 
-<h3 class="uppercase-box mt15">
+<h4 class="uppercase-box mt15">
   <?= __('admin.search'); ?>
   <a href="<?= url('admin.logs.search'); ?>"><svg class="icons">
       <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
     </svg>
   </a>
-</h3>
+</h4>
 <?php foreach ($data['logs'] as $log) : ?>
   <div class="gray">
     <span class="gray-600 text-sm"><?= $log['count_results']; ?></span>
@@ -41,7 +41,7 @@
   </div>
 <?php endforeach; ?>
 
-<h3 class="uppercase-box mt15"><?= __('admin.reply'); ?></h3>
+<h4 class="uppercase-box mt15"><?= __('admin.reply'); ?></h4>
 <?php foreach ($data['replys'] as $reply) : ?>
   <div class="gray text-sm">
     <a class="gray-600" href="<?= url('profile', ['login' => $reply['login']]); ?>">

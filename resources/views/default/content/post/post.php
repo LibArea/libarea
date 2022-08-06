@@ -20,9 +20,9 @@ use Hleb\Constructor\Handlers\Request; ?>
 
       <div class="mb15">
         <a class="black" href="<?= $post_url; ?>">
-          <h2 class="m0"><?= $post['post_title']; ?>
+          <h3 class="title"><?= $post['post_title']; ?>
             <?= insert('/content/post/post-title', ['post' => $post]); ?>
-          </h2>
+          </h3>
         </a>
 
         <div class="flex gap lowercase">

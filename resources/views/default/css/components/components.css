@@ -193,6 +193,12 @@ details[open] > summary {
   color: #666;
 }
 
+.title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.3125rem;
+}
+
 .txt-closed {
   padding: 10px;
   background-color: lightyellow;
@@ -270,6 +276,7 @@ ul.last-content a.last-content_telo { display: block; }
   text-transform: uppercase;
   margin: 0 0 10px 0;
   letter-spacing: 1.5px;
+  font-weight: 500;
 }
 
 a:hover > img,

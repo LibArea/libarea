@@ -22,7 +22,7 @@
   </main>
   <aside>
     <div class="box box-shadow-all text-sm">
-      <h3 class="uppercase-box"><?= __('web.help'); ?></h3>
+      <h4 class="uppercase-box"><?= __('web.help'); ?></h4>
       <?= __('web.data_help'); ?>
       <div>
   </aside>

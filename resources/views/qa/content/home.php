@@ -21,11 +21,11 @@
 
   <?php if (UserData::checkActiveUser() && !empty($data['topics_user'])) : ?>
     <div class="box bg-violet">
-      <h3 class="uppercase-box"><?= __('app.reading'); ?>
+      <h4 class="uppercase-box"><?= __('app.reading'); ?>
         <?php if (count($data['topics_user']) > config('facets.quantity_home')) : ?>
           <a class="gray-600 text-sm" title="<?= __('app.topics'); ?>" href="<?= url('topics.my'); ?>">...</a>
         <?php endif; ?>
-      </h3>
+      </h4>
       <ul>
         <?php
         $my = [];
@@ -70,7 +70,7 @@
   <?php if (is_array($data['topics'])) : ?>
     <?php if (count($data['topics']) > 0) : ?>
       <div class="box bg-lightgray">
-        <h3 class="uppercase-box"><?= __('app.recommended'); ?></h3>
+        <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
         <ul>
           <?php foreach ($data['topics'] as $key => $recomm) : ?>
             <li class="mb20">

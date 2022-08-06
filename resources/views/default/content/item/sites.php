@@ -79,9 +79,7 @@
 
 <div id="contentWrapper">
   <main>
-    <div class="mb15">
-      <?= insert('/_block/navigation/item/nav', ['data' => $data]); ?>
-    </div>
+    <?= insert('/_block/navigation/item/nav', ['data' => $data]); ?>
 
     <?php if (!empty($data['items'])) : ?>
       <?= insert('/content/item/site', ['data' => $data, 'screening' => $data['screening']]); ?>
@@ -97,7 +95,7 @@
 
     <?php if ($data['related_posts']) : ?>
       <div class="box bg-blue-200 max-w300">
-        <h3 class="uppercase-box"><?= __('web.related_posts'); ?></h3>
+        <h4 class="uppercase-box"><?= __('web.related_posts'); ?></h4>
         <ul>
         <?php foreach ($data['related_posts'] as $rp) : ?>
           <li class="mb15">
@@ -110,7 +108,7 @@
 
     <?php if (UserData::checkActiveUser()) : ?>
       <div class="box bg-lightgray max-w300">
-        <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>
+        <h4 class="uppercase-box"><?= __('web.menu'); ?></h4>
         <ul class="menu">
           <?= insert('/_block/navigation/item/menu', ['data' => $data]); ?>
         </ul>

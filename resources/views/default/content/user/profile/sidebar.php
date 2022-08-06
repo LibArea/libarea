@@ -12,7 +12,7 @@
   </div>
 
   <div class="box bg-lightgray">
-    <h3 class="uppercase-box"><?= __('app.contacts'); ?></h3>
+    <h4 class="uppercase-box"><?= __('app.contacts'); ?></h4>
     <?php foreach (config('user/profile') as $block) : ?>
       <?php if ($profile[$block['title']]) : ?>
         <div class="mt5">
@@ -37,7 +37,7 @@
 
   <?php if ($data['blogs']) : ?>
     <div class="box bg-lightgray">
-      <h3 class="uppercase-box"><?= __('app.created_by'); ?></h3>
+      <h4 class="uppercase-box"><?= __('app.created_by'); ?></h4>
       <?php foreach ($data['blogs'] as $blog) : ?>
         <div class="w-100 mb-w100 mb15 flex flex-row">
           <a class="mr10" href="<?= url($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
@@ -58,7 +58,7 @@
 
   <?php if ($data['topics']) : ?>
     <div class="box bg-lightgray">
-      <h3 class="uppercase-box"><?= __('app.is_reading'); ?></h3>
+      <h4 class="uppercase-box"><?= __('app.is_reading'); ?></h4>
       <?php foreach ($data['topics'] as  $topic) : ?>
         <div class="mt5 mb5">
           <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
@@ -72,7 +72,7 @@
 
   <?php if (!empty($data['participation'][0]['facet_id'])) : ?>
     <div class="box bg-lightgray">
-      <h3 class="uppercase-box"><?= __('app.understands'); ?></h3>
+      <h4 class="uppercase-box"><?= __('app.understands'); ?></h4>
       <?php foreach ($data['participation'] as $part) : ?>
         <a class="tag" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
           <?= $part['facet_title']; ?>
@@ -82,7 +82,7 @@
   <?php endif; ?>
 
   <div class="box bg-lightgray">
-    <h3 class="uppercase-box"><?= __('app.badges'); ?></h3>
+    <h4 class="uppercase-box"><?= __('app.badges'); ?></h4>
     <div class="text-3xl">
       <span title="<?= __('app.medal_reg'); ?>"><svg class="icons icon-base sky">
           <use xlink:href="/assets/svg/icons.svg#gift"></use>
@@ -100,7 +100,7 @@
 
   <?php if (UserData::checkAdmin()) : ?>
     <div class="box bg-lightgray">
-      <h3 class="uppercase-box"><?= __('app.admin'); ?></h3>
+      <h4 class="uppercase-box"><?= __('app.admin'); ?></h4>
       <div class="mt5">
         <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) : ?>
           <?php if ($profile['ban_list'] == 1) : ?>

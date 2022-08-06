@@ -93,7 +93,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     <?php endif; ?>
 
     <?php if (!empty($data['high_arr'])) : ?>
-      <h3 class="uppercase-box"><?= __('app.parents'); ?></h3>
+      <h4 class="uppercase-box"><?= __('app.parents'); ?></h4>
       <?php foreach ($data['high_arr'] as $high) : ?>
         <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
           <?= Html::image($high['facet_img'], $high['value'], 'img-base mr5', 'logo', 'max'); ?>
@@ -158,7 +158,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 </main>
 <aside>
   <div class="box bg-beige">
-    <h3 class="uppercase-box"><?= __('app.help'); ?></h3>
+    <h4 class="uppercase-box"><?= __('app.help'); ?></h4>
     <?= __('help.edit_' . $data['type']); ?>
   </div>
 </aside>

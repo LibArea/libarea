@@ -74,7 +74,7 @@
     <div class="box bg-beige text-sm mt15"><?= __('web.my_website_info'); ?>.</div>
     <?php if (UserData::checkActiveUser()) : ?>
       <div class="box text-sm bg-lightgray mt15">
-        <h3 class="uppercase-box"><?= __('web.menu'); ?></h3>
+        <h4 class="uppercase-box"><?= __('web.menu'); ?></h4>
         <ul class="menu">
           <?= insert('/_block/navigation/item/menu', ['data' => $data]); ?>
         </ul>
