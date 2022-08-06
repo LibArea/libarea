@@ -50,8 +50,7 @@
       "App\\": "app/",
       "Phphleb\\": "vendor/phphleb/",
       "Hleb\\": "vendor/phphleb/framework/",
-      "Modules\\": "modules/",
-      "App\\Traits\\": "app/traits"
+      "Modules\\": "modules/"
     },
     "files": [
         "app/helpers.php"
