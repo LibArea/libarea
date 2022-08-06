@@ -22,9 +22,6 @@ class HomeController extends Controller
         // Если гость, то покажим темы по умолчанию
         $topics = \App\Models\FacetModel::advice($this->user['id']);
 
-        $title = __('meta-main.' . $sheet . '_title', ['name' => config('meta.name')]);
-        $description = __('meta-main.' . $sheet . '_desc', ['name' => config('meta.name')]);
-
         $m = [
             'main'      => 'main',
             'og'        => true,
@@ -36,7 +33,7 @@ class HomeController extends Controller
             '/home',
             'base',
             [
-                'meta'  => Meta::get($title, $description, $m),
+                'meta'  => Meta::get(config('meta.' . $sheet . '_title'), config('meta.' . $sheet . '_desc'), $m),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $this->pageNumber,
