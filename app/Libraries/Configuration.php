@@ -1,5 +1,7 @@
 <?php
 
+use App\Exception\ConfigException;
+
 class Configuration
 {
     private static $path  = HLEB_SEARCH_DBASE_CONFIG_FILE;
@@ -20,8 +22,7 @@ class Configuration
         }
 
         if (!is_file(self::$path . '/' . $file . '.php')) {
-            echo 'Configuration file does not exist:' . $file;
-            exit;
+            throw ConfigException::NotFoundException($file);
         }
 
         if (!array_key_exists(self::$path . '/' . $file . '.php', self::$cache)) {

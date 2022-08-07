@@ -58,3 +58,13 @@ function is_return(string $text, string $status, string $redirect = '/')
     Msg::add($text, $status);
     redirect($redirect);
 }
+
+function hook_action(string $name, array $params = [])
+{
+    Hook::action($name, $params);
+}
+
+function hook_filter(string $name, string $data, array $params = [])
+{
+    return Hook::filter($name, $data, $params);
+}
