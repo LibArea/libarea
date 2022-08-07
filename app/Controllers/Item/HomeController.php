@@ -27,7 +27,7 @@ class HomeController extends Controller
                 'meta'  => Meta::get(__('web.' . $sheet . '_title'), __('web.' . $sheet . '_desc'), $m),
                 'data'  => [
                     'screening'         => 'all',
-                    'items'             => WebModel::getItemsAll(1, $this->limit, $this->user, $sheet),
+                    'items'             => WebModel::feedItem(1, $this->limit, false, $this->user, false, $sheet, false),
                     'user_count_site'   => $count_site,
                     'sheet'             => $sheet == 'main' ? 'new_sites' : $sheet,
                     'audit_count'       => UserAreaModel::auditCount(),

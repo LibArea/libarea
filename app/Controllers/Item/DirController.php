@@ -32,7 +32,7 @@ class DirController extends Controller
         }
 
         $items      = WebModel::feedItem($this->pageNumber, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening);
-        $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'], $screening);
+        $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'],  $sheet, $screening);
 
         $m = [
             'og'    => false,

@@ -10,7 +10,7 @@
         <?php foreach ($data['items'] as $key => $item) : ?>
           <li>
             <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
-              <h2><?= $item['item_title']; ?></h2>
+              <h3 class="title"><?= $item['item_title']; ?></h3>
             </a>
             <div class="content">
               <div class="list-items__thumb mb-none">
@@ -68,7 +68,7 @@
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'info']); ?>
     <?php endif ?>
 
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url($data['sheet'])); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/web/my'); ?>
   </main>
   <aside>
     <div class="box bg-beige text-sm mt15"><?= __('web.my_website_info'); ?>.</div>

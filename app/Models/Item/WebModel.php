@@ -6,103 +6,62 @@ use DB;
 
 class WebModel extends \Hleb\Scheme\App\Models\MainModel
 {
-    // All sites
-    // Все сайты
-    public static function getItemsAll($page, $limit, $user, $sheet)
-    {
-        $sort   = self::sorts($sheet);
-        $start  = ($page - 1) * $limit;
-        $sql = "SELECT
-                    item_id, 
-                    item_title,
-                    item_content,
-                    item_published,
-                    item_user_id,
-                    item_url,
-                    item_domain,
-                    item_date,
-                    item_votes,
-                    item_count,
-                    item_title_soft,
-                    item_github_url,
-                    item_following_link,
-                    item_is_deleted,
-                    rel.*,
-                    votes_item_user_id, votes_item_item_id,
-                    fav.tid, fav.user_id, fav.action_type 
-                        FROM items
-                        LEFT JOIN
-                        (
-                            SELECT 
-                                relation_item_id,
-                                GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
-                                FROM facets  
-                                LEFT JOIN facets_items_relation 
-                                    on facet_id = relation_facet_id
-
-                                        GROUP BY relation_item_id
-                        ) AS rel
-                            ON rel.relation_item_id = item_id 
-                        LEFT JOIN favorites fav ON fav.tid = item_id 
-                           AND fav.user_id = :uid AND fav.action_type = 'website'
-                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :uid_two
-                        $sort
-                        LIMIT :start, :limit ";
-
-        return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
-    }
-
-    public static function getItemsAllCount($sheet)
-    {
-        $sort = self::sorts($sheet);
-        $sql = "SELECT item_id, item_is_deleted FROM items $sort";
-
-        return DB::run($sql)->rowCount();
-    }
-
     public static function sorts($sheet)
     {
         switch ($sheet) {
             case 'main':
-                $sort     = "WHERE item_is_deleted = 0 AND item_published = 1 ORDER BY item_id DESC";
+                $sort     = "item_is_deleted = 0 AND item_published = 1 ORDER BY item_id DESC";
                 break;
             case 'top':
-                $sort     = "WHERE item_is_deleted = 0 ORDER BY item_votes DESC";
+                $sort     = "item_is_deleted = 0 ORDER BY item_votes DESC";
+                break;
+            case 'all':
+                $sort     = "item_is_deleted = 0 ORDER BY item_date DESC";
                 break;
             case 'deleted':
-                $sort     = "WHERE item_is_deleted = 1 ORDER BY item_id DESC";
+                $sort     = "item_is_deleted = 1 ORDER BY item_id DESC";
                 break;
             case 'audits':
-                $sort     = "WHERE item_is_deleted = 0 AND item_published = 0 ORDER BY item_id DESC";
+                $sort     = "item_is_deleted = 0 AND item_published = 0 ORDER BY item_id DESC";
                 break;
         }
 
         return $sort;
     }
 
-    // Получаем сайты по условиям
-    // https://systemrequest.net/index.php/123/
-    public static function feedItem($page, $limit, $facets, $user, $topic_id, $sheet, $screening)
+    public static function facets($facets, $topic_id)
     {
+        if ($facets === false) {
+            return '';
+        }
+        
+        if ($topic_id === false) {
+            return '';
+        }
+        
         $result = [];
         foreach ($facets as $ind => $row) {
             $result['9999'] = $topic_id;
             $result[$ind] = $row['facet_id'];
         }
 
-        $sort = "ORDER BY item_votes DESC";
-        if ($sheet == 'web.all') $sort = "ORDER BY item_date DESC";
-
-        $string = "relation_facet_id IN($topic_id)";
-        if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
-
-        $go = 'item_is_deleted = 0 AND';
-        if ($screening == 'github') {
-            $go = 'item_is_github = 1 AND item_is_deleted = 0 AND';
+        $enumeration = "relation_facet_id IN($topic_id) AND";
+        if ($result) {
+            $enumeration = "relation_facet_id IN(" . implode(',', $result ?? []) . ") AND";
         }
+        
+        return $enumeration;
+    }
 
+    // Получаем сайты по условиям
+    // https://systemrequest.net/index.php/123/
+    public static function feedItem($page, $limit, $facets, $user, $topic_id, $sheet, $screening)
+    {
+        $go     = ($screening == 'github') ? 'item_is_github = 1 AND' : '';
+        $facets = self::facets($facets, $topic_id);
+        $sort   = self::sorts($sheet);
+        
         $start  = ($page - 1) * $limit;
-
         $sql = "SELECT DISTINCT
                     item_id,
                     item_title,
@@ -131,62 +90,40 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                 relation_item_id,
                                 GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                                 FROM facets
-                                LEFT JOIN facets_items_relation 
-                                    on facet_id = relation_facet_id
-
+                                LEFT JOIN facets_items_relation on facet_id = relation_facet_id
                                     GROUP BY relation_item_id
                         ) AS rel
-                             ON rel.relation_item_id = item_id
-                            LEFT JOIN users u ON u.id = item_user_id
-                            LEFT JOIN favorites fav ON fav.tid = item_id 
-                                AND fav.user_id = :uid AND fav.action_type = 'website'
-                            LEFT JOIN votes_item 
-                                ON votes_item_item_id = item_id AND votes_item_user_id = :uid_two
-
-                                WHERE $go $string $sort LIMIT :start, :limit";
+                            ON rel.relation_item_id = item_id
+                                LEFT JOIN users u ON u.id = item_user_id
+                                LEFT JOIN favorites fav ON fav.tid = item_id AND fav.user_id = :uid AND fav.action_type = 'website'
+                                LEFT JOIN votes_item ON votes_item_item_id = item_id AND votes_item_user_id = :uid_two
+                                    WHERE $go $facets $sort LIMIT :start, :limit";
 
         return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function feedItemCount($facets, $topic_id, $screening)
+    public static function feedItemCount($facets, $topic_id, $sheet, $screening)
     {
-        $result = [];
-        foreach ($facets as $ind => $row) {
-            $result['9999'] = $topic_id;
-            $result[$ind] = $row['facet_id'];
-        }
-
-        $go = '';
-        if ($screening == 'github') {
-            $go = 'item_is_github = 1 AND';
-        }
-
-        $string = "relation_facet_id IN($topic_id)";
-        if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
-
+        $go     = ($screening == 'github') ? 'item_is_github = 1 AND' : '';
+        $facets = self::facets($facets, $topic_id);
+        $sort   = self::sorts($sheet);
+        
         $sql = "SELECT DISTINCT
                     item_id,
-                    item_published,
-                    item_is_github,
-                    item_url,
-                    item_is_deleted,
-                    rel.*
+                    item_votes,
+                    item_date
                         FROM facets_items_relation 
-                        LEFT JOIN items ON relation_item_id = item_id
-            
-                        LEFT JOIN (
-                            SELECT 
-                                relation_item_id,
-                                GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
-                                FROM facets
-                                LEFT JOIN facets_items_relation 
-                                    on facet_id = relation_facet_id
-
-                                    GROUP BY relation_item_id
-                        ) AS rel
-                             ON rel.relation_item_id = item_id
-                             
-                                WHERE $go $string";
+                            LEFT JOIN items ON relation_item_id = item_id
+                            LEFT JOIN (
+                                SELECT 
+                                    relation_item_id,
+                                    GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                    FROM facets
+                                    LEFT JOIN facets_items_relation on facet_id = relation_facet_id
+                                        GROUP BY relation_item_id
+                            ) AS rel
+                                 ON rel.relation_item_id = item_id
+                                    WHERE $go $facets $sort";
 
         return DB::run($sql)->rowCount();
     }
