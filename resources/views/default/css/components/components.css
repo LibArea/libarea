@@ -37,10 +37,7 @@ h5 {
   height: 48px;
 }
 
-.icon-small {
-  width: 15px;
-  height: 15px;
-}
+.icon-small { width: 15px; }
 
 .list-none {
   list-style: none;

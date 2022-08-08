@@ -170,6 +170,9 @@ return [
     'select_image'      => 'Please select an image',
     'drop_image'        => 'Drag an image to upload it.',
     'attach_files'      => 'Files can be pasted from clipboard.',
+
+    'view_policy'       => 'Only members can see the content',
+    'entry_policy'      => 'Approve new members',
     
     'back'              => 'Back',
     'edit'              => 'Change',

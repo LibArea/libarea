@@ -170,7 +170,10 @@ return [
     'select_image'      => 'Please select an image',
     'drop_image'        => 'Trageți o imagine pentru a o încărca.',
     'attach_files'      => 'Fișierele pot fi lipite din clipboard.',
-    
+
+    'view_policy'       => 'Numai membrii pot vedea conținutul',
+    'entry_policy'      => 'Aprobați noi membri',
+
     'back'              => 'Înapoi',
     'edit'              => 'Schimbare',
     'save'              => 'Salva',

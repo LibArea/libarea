@@ -61,7 +61,7 @@ foreach ($data['answers'] as $answer) :
 
           <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
             <a data-post_id="<?= $answer['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
-              <svg class="icons icon-small">
+              <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#flag"></use>
               </svg>
             </a>

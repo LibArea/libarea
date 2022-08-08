@@ -97,6 +97,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_cover_art,
                     facet_date,
                     facet_seo_title,
+                    facet_view_policy,
                     facet_merged_id,
                     facet_top_level,
                     facet_user_id,
@@ -366,10 +367,10 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_short_description = :facet_short_description, 
                     facet_info              = :facet_info, 
                     facet_slug              = :facet_slug, 
-                    facet_seo_title         = :facet_seo_title, 
+                    facet_seo_title         = :facet_seo_title,
+                    facet_view_policy       = :facet_view_policy,                    
                     facet_user_id           = :facet_user_id, 
                     facet_top_level         = :facet_top_level, 
-                    facet_tl                = :facet_tl,                    
                     facet_post_related      = :facet_post_related, 
                     facet_type              = :facet_type
                         WHERE facet_id      = :facet_id";

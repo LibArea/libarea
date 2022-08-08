@@ -890,6 +890,16 @@ ALTER TABLE `posts_view`
 --
 
 --
+-- Поля для условий присоединения к фасету (теме, категории, блогу) и условия просмотра 
+-- + изменим тип полей
+--
+ALTER TABLE `facets` ADD `facet_entry_policy` TINYINT(1) NOT NULL DEFAULT '0' COMMENT 'Политика вступления' AFTER `facet_seo_title`;
+ALTER TABLE `facets` ADD `facet_view_policy` TINYINT(1) NOT NULL DEFAULT '0' COMMENT 'Политика просмотра (1 - после подписки)' AFTER `facet_entry_policy`;
+
+
+ALTER TABLE `facets` CHANGE `facet_merged_id` `facet_merged_id` INT(11) NOT NULL DEFAULT '0' COMMENT 'С кем слит', CHANGE `facet_tl` `facet_tl` TINYINT(1) NOT NULL DEFAULT '0', CHANGE `facet_focus_count` `facet_focus_count` INT(11) NOT NULL DEFAULT '0', CHANGE `facet_count` `facet_count` INT(11) NOT NULL DEFAULT '0';
+
+--
 -- Индексы таблицы `answers`
 --
 ALTER TABLE `answers`

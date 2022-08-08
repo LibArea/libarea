@@ -170,7 +170,10 @@ return [
     'select_image'      => '请选择图像',
     'drop_image'        => '拖放图像上传',
     'attach_files'      => '可从剪贴板粘贴文件',
-    
+
+    'view_policy'       => '只有会员才能看到内容',
+    'entry_policy'      => '批准新成员',
+ 
     'back'              => '返回',
     'edit'              => '更改',
     'save'              => '保存',

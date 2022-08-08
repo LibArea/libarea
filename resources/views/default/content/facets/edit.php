@@ -139,8 +139,11 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     </fieldset>
   <?php endif; ?>
 
+  <fieldset>
+    <input type="checkbox" name="facet_view_policy" <?php if ($fs['facet_view_policy'] == 1) : ?>checked <?php endif; ?>> <?= __('app.view_policy'); ?>?
+  </fieldset>
+
   <?php if (UserData::checkAdmin()) : ?>
-    <?= insert('/_block/form/select/content-tl', ['data' => $fs['facet_tl']]); ?>
     <?= insert('/_block/form/select/user', [
       'user'    => $data['user'],
       'action'  => 'user',

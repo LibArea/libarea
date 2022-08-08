@@ -171,6 +171,9 @@ return [
     'select_image'      => '请选择图像',
     'drop_image'        => '拖放图像以上传它。',
     'attach_files'      => '可以从缓冲区插入文件',
+
+    'view_policy'       => '只有会员才能看到内容',
+    'entry_policy'      => '批准新成员',
     
     'back'              => '返回',
     'edit'              => '要改变',
