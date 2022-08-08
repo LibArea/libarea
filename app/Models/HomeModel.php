@@ -212,8 +212,9 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_img,
                     facet_type                   
                         FROM facets 
-                            LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :id  
-                                AND facet_type = 'topic' AND facet_type = 'blog'";
+                           LEFT JOIN facets_signed ON signed_facet_id = facet_id 
+                                WHERE signed_user_id = :id AND (facet_type = 'topic' OR facet_type = 'blog')
+                                    ORDER BY facet_id DESC";
 
         return DB::run($sql, ['id' => $user_id])->fetchAll();
     }

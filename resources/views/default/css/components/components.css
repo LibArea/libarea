@@ -347,3 +347,10 @@ article iframe {
   display: flex;
   gap: 1rem;
 }
+
+.profile-bg-img {
+  width: 100%;
+  height: 225px;
+}
+
+.profile-bg-img.bg-profile { height: 90px; }

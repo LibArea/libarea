@@ -16,10 +16,10 @@ endif;
 
   <?php if ($profile['cover_art'] != 'cover_art.jpeg') : ?>
     <div class="relative">
-      <img class="w-100" src="<?= Html::coverUrl($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
+      <img class="profile-bg-img" src="<?= Html::coverUrl($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
     </div>
   <?php else : ?>
-    <div class="w-100 relative bg-profile"></div>
+    <div class="profile-bg-img relative bg-profile"></div>
   <?php endif; ?>
     <div class="profile-header-footer mt15">
        

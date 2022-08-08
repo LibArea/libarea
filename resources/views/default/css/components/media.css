@@ -63,6 +63,8 @@ main { flex: 1; }
     height: 80px;
     width: 80px;
   }
+  
+  .profile-bg-img { height: 75px; }
 
   .mb-block,
   #contentWrapper { display: block; }

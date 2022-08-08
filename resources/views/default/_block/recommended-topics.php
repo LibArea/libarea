@@ -16,7 +16,7 @@
           <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
           <?= $topic['facet_title']; ?>
         </a>
-        <div class="mt5 text-sm gray-600">
+        <div class="mt5 text-sm max-w780 gray">
           <?= $topic['facet_description']; ?>
         </div>
       </div>
