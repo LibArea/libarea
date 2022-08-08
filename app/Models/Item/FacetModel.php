@@ -53,7 +53,12 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      */
     public static function getChildrens($facet_id, $screening)
     {
-        $sort = $screening == 'github' ? 'AND item_is_github = 1' : '';
+        $go = '';
+        $os = ['github', 'blog', 'forum', 'portal', 'reference'];
+        if (in_array($screening, $os)) {
+            $go = "AND item_is_" . $screening . " = 1";
+        }
+        
         $sql = "SELECT 
                   facet_id,
                   count(facet_id) as counts, 
@@ -63,7 +68,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                           LEFT JOIN facets on facet_id = facet_chaid_id 
                           LEFT JOIN facets_items_relation on facet_chaid_id = relation_facet_id 
                           LEFT JOIN items on item_id = relation_item_id 
-                              WHERE facet_parent_id = :facet_id  $sort
+                              WHERE facet_parent_id = :facet_id  $go
                                  GROUP BY facet_id";
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();

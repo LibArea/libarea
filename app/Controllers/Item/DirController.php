@@ -16,7 +16,7 @@ class DirController extends Controller
     // Лист сайтов по темам (сайты по "категориям")
     public function index($sheet)
     {
-        $os = ['all', 'github', 'wap'];
+        $os = ['all', 'github', 'blog', 'forum', 'portal', 'reference'];
         if (!in_array($screening = Request::get('grouping'), $os)) {
             self::error404();
         }

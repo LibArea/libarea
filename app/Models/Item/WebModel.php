@@ -52,12 +52,23 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         
         return $enumeration;
     }
+    
+    public static function go($screening)
+    {
+        $go = '';
+        $os = ['github', 'blog', 'forum', 'portal', 'reference'];
+        if (in_array($screening, $os)) {
+            $go = "item_is_" . $screening . " = 1 AND ";
+        }
+        
+        return $go;
+    }    
 
     // Получаем сайты по условиям
     // https://systemrequest.net/index.php/123/
     public static function feedItem($page, $limit, $facets, $user, $topic_id, $sheet, $screening)
     {
-        $go     = ($screening == 'github') ? 'item_is_github = 1 AND' : '';
+        $go     = self::go($screening);
         $facets = self::facets($facets, $topic_id);
         $sort   = self::sorts($sheet);
         
@@ -104,26 +115,11 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function feedItemCount($facets, $topic_id, $sheet, $screening)
     {
-        $go     = ($screening == 'github') ? 'item_is_github = 1 AND' : '';
+        $go     = self::go($screening);
         $facets = self::facets($facets, $topic_id);
         $sort   = self::sorts($sheet);
         
-        $sql = "SELECT DISTINCT
-                    item_id,
-                    item_votes,
-                    item_date
-                        FROM facets_items_relation 
-                            LEFT JOIN items ON relation_item_id = item_id
-                            LEFT JOIN (
-                                SELECT 
-                                    relation_item_id,
-                                    GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
-                                    FROM facets
-                                    LEFT JOIN facets_items_relation on facet_id = relation_facet_id
-                                        GROUP BY relation_item_id
-                            ) AS rel
-                                 ON rel.relation_item_id = item_id
-                                    WHERE $go $facets $sort";
+        $sql = "SELECT item_id FROM facets_items_relation LEFT JOIN items ON relation_item_id = item_id WHERE $go $facets $sort";
 
         return DB::run($sql)->rowCount();
     }
