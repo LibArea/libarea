@@ -24,6 +24,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
             case 'audits':
                 $sort     = "item_is_deleted = 0 AND item_published = 0 ORDER BY item_id DESC";
                 break;
+            default: 
+                $sort = 'item_published = 1 ORDER BY item_id DESC';    
         }
 
         return $sort;
@@ -45,32 +47,34 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
             $result[$ind] = $row['facet_id'];
         }
 
-        $enumeration = "relation_facet_id IN($topic_id) AND";
+        $enumeration = "relation_facet_id IN($topic_id) AND ";
         if ($result) {
-            $enumeration = "relation_facet_id IN(" . implode(',', $result ?? []) . ") AND";
+            $enumeration = "relation_facet_id IN(" . implode(',', $result ?? []) . ") AND ";
         }
         
         return $enumeration;
     }
-    
-    public static function go($screening)
+
+    // Grouping by conditions   
+    // Группировка по условиям
+    public static function group($grouping)
     {
-        $go = '';
+        $gr = ' ';
         $os = ['github', 'blog', 'forum', 'portal', 'reference'];
-        if (in_array($screening, $os)) {
-            $go = "item_is_" . $screening . " = 1 AND ";
+        if (in_array($grouping, $os)) {
+            $gr = "item_is_" . $grouping . " = 1 AND ";
         }
         
-        return $go;
+        return $gr;
     }    
 
     // Получаем сайты по условиям
     // https://systemrequest.net/index.php/123/
-    public static function feedItem($page, $limit, $facets, $user, $topic_id, $sheet, $screening)
-    {
-        $go     = self::go($screening);
+    public static function feedItem($page, $limit, $facets, $user, $topic_id, $sort, $grouping)
+    { 
+        $group  = self::group($grouping);
         $facets = self::facets($facets, $topic_id);
-        $sort   = self::sorts($sheet);
+        $sort   = $facets . self::sorts($sort);
         
         $start  = ($page - 1) * $limit;
         $sql = "SELECT DISTINCT
@@ -108,18 +112,17 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                 LEFT JOIN users u ON u.id = item_user_id
                                 LEFT JOIN favorites fav ON fav.tid = item_id AND fav.user_id = :uid AND fav.action_type = 'website'
                                 LEFT JOIN votes_item ON votes_item_item_id = item_id AND votes_item_user_id = :uid_two
-                                    WHERE $go $facets $sort LIMIT :start, :limit";
+                                    WHERE $group $sort LIMIT :start, :limit";
 
         return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function feedItemCount($facets, $topic_id, $sheet, $screening)
+    public static function feedItemCount($facets, $topic_id, $grouping)
     {
-        $go     = self::go($screening);
         $facets = self::facets($facets, $topic_id);
-        $sort   = self::sorts($sheet);
+        $sort   = $facets . self::sorts($sort);
         
-        $sql = "SELECT item_id FROM facets_items_relation LEFT JOIN items ON relation_item_id = item_id WHERE $go $facets $sort";
+        $sql = "SELECT item_id FROM facets_items_relation LEFT JOIN items ON relation_item_id = item_id WHERE $sort  ";
 
         return DB::run($sql)->rowCount();
     }

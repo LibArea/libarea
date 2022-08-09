@@ -9,7 +9,7 @@
             <use xlink:href="/assets/svg/icons.svg#edit"></use>
           </svg></sup>
       </a>
-      <a class="text-sm ml15" href="<?= url('admin.category.structure'); ?>">
+      <a class="text-sm ml15" href="<?= url('admin.facets.type', ['type' => 'category']); ?>">
         <sup class="gray-600"><svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#tool"></use>
           </svg></sup>
@@ -22,7 +22,7 @@
   <div class="item-categories">
     <?php foreach ($data['childrens'] as $lt) : ?>
       <div>
-        <a class="text-2xl" href="<?= url('web.dir', ['grouping' => $data['screening'], 'slug' => $lt['facet_slug']]); ?>">
+        <a class="text-2xl" href="<?= url('web.dir', ['sort' => $data['sheet'], 'slug' => $lt['facet_slug']]); ?>">
           <?= $lt['facet_title']; ?>
         </a> <sup class="gray-600"><?= $lt['counts']; ?></sup>
         <?php if (UserData::checkAdmin()) : ?>
@@ -40,7 +40,7 @@
     <div class="ml20 mb20 mb-block">
       <?php foreach ($data['low_matching'] as $rl) : ?>
         <div class="inline mr20">
-          <a class="text-2xl" href="<?= url('web.dir', ['grouping' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
+          <a class="text-2xl" href="<?= url('web.dir', ['sort' => $data['sheet'], 'slug' => $rl['facet_slug']]); ?>">
             @<?= $rl['facet_title']; ?>
           </a>
           <?php if (UserData::checkAdmin()) : ?>
@@ -61,7 +61,7 @@
     <div class="item-categories mb-block">
       <?php foreach ($data['low_matching'] as $rl) : ?>
         <div class="inline mr20">
-          <a class="text-2xl" href="<?= url('web.dir', ['grouping' => $data['screening'], 'slug' => $rl['facet_slug']]); ?>">
+          <a class="text-2xl" href="<?= url('web.dir', ['sort' => $data['sheet'], 'slug' => $rl['facet_slug']]); ?>">
             @<?= $rl['facet_title']; ?>
           </a>
           <?php if (UserData::checkAdmin()) : ?>
@@ -87,7 +87,7 @@
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'info']); ?>
     <?php endif; ?>
     
-    <?php $url = url('web.dir', ['grouping' => 'all', 'slug' => $data['category']['facet_slug']]); ?>
+    <?php $url = url('web.dir', ['sort' => 'all', 'slug' => $data['category']['facet_slug']]); ?>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $url . '/page'); ?>
   </main>
   <aside>

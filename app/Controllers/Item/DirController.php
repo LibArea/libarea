@@ -14,34 +14,43 @@ class DirController extends Controller
 
     // List of sites by topic (sites by "category")
     // Лист сайтов по темам (сайты по "категориям")
-    public function index($sheet)
+    public function index()
     {
-        $os = ['all', 'github', 'blog', 'forum', 'portal', 'reference'];
-        if (!in_array($screening = Request::get('grouping'), $os)) {
-            self::error404();
-        }
+        if ($grouping = Request::get('grouping')) {
+            $os = ['github', 'blog', 'forum', 'portal', 'reference'];
+            if (!in_array($grouping, $os)) {
+                self::error404();
+            }
+        }    
+        
+        if ($sort = Request::get('sort')) {
+            $os = ['top', 'all'];
+            if (!in_array($sort, $os)) {
+                self::error404();
+            }
+        }    
 
         $category  = FacetModel::get(Request::get('slug'), 'slug', $this->user['trust_level']);
         self::error404($category);
 
         // We will get children
-        $childrens =  FacetModel::getChildrens($category['facet_id'], $screening);
+        $childrens =  FacetModel::getChildrens($category['facet_id'], $grouping);
 
         if ($category['facet_post_related']) {
             $related_posts = PostModel::postRelated($category['facet_post_related']);
         }
 
-        $items      = WebModel::feedItem($this->pageNumber, $this->limit, $childrens, $this->user, $category['facet_id'], $sheet, $screening);
-        $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'],  $sheet, $screening);
+        $items      = WebModel::feedItem($this->pageNumber, $this->limit, $childrens, $this->user, $category['facet_id'], $sort, $grouping);
+        $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'],  $grouping);
 
         $m = [
             'og'    => false,
-            'url'   => url('web.dir', ['grouping' => 'all', 'slug' => $category['facet_slug']]),
+            'url'   => url('web.dir', ['sort' => 'all', 'slug' => $category['facet_slug']]),
         ];
 
-        $title = __('web.' . $sheet . '_title', ['name' => $category['facet_title']]);
+        $title = __('web.' . $sort . '_title', ['name' => $category['facet_title']]);
         $description_info = $category['facet_title'] . '. ' . $category['facet_description'];
-        $description  = __('web.' . $sheet . '_desc', ['description_info' => $description_info]);
+        $description  = __('web.' . $sort . '_desc', ['description_info' => $description_info]);
 
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
@@ -54,7 +63,7 @@ class DirController extends Controller
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
                     'screening'         => $screening,
-                    'sheet'             => $sheet,
+                    'sheet'             => $sort,
                     'count'             => $pagesCount,
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $this->pageNumber,
@@ -63,7 +72,7 @@ class DirController extends Controller
                     'category'          => $category,
                     'childrens'         => $childrens,
                     'user_count_site'   => $count_site,
-                    'breadcrumb'        => self::breadcrumb($tree, $screening),
+                    'breadcrumb'        => self::breadcrumb($tree, $sort),
                     'low_matching'      => FacetModel::getLowMatching($category['facet_id']),
                 ]
             ]
@@ -71,7 +80,7 @@ class DirController extends Controller
     }
 
     // Bread crumbs
-    public static function breadcrumb($tree, $screening)
+    public static function breadcrumb($tree, $sort)
     {
         $arr = [
             ['name' => __('web.catalog'), 'link' => url('web')]
@@ -79,7 +88,7 @@ class DirController extends Controller
 
         $result = [];
         foreach ($tree as $row) {
-            $result[] = ["name" => $row['name'], "link" => url('web.dir', ['grouping' => $screening, 'slug' => $row['link']])];
+            $result[] = ["name" => $row['name'], "link" => url('web.dir', ['sort' => $sort, 'slug' => $row['link']])];
         }
 
         return array_merge($arr, $result);

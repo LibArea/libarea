@@ -7,12 +7,12 @@
 <div class="item-categories">
   <?php foreach (config('catalog/home-categories') as $cat) : ?>
     <div class="categories-telo">
-      <a class="text-2xl block" href="<?= url('web.dir', ['grouping' => 'all', 'slug' => $cat['url']]); ?>">
+      <a class="text-2xl block" href="<?= url('web.dir', ['sort' => 'all', 'slug' => $cat['url']]); ?>">
         <?= $cat['title']; ?>
       </a>
       <?php if (!empty($cat['sub'])) : ?>
         <?php foreach ($cat['sub'] as $sub) : ?>
-          <a class="mr10 text-sm black mb-none" href="<?= url('web.dir', ['grouping' => 'all', 'slug' => $sub['url']]); ?>">
+          <a class="mr10 text-sm black mb-none" href="<?= url('web.dir', ['sort' => 'all', 'slug' => $sub['url']]); ?>">
             <?= $sub['title']; ?>
           </a>
         <?php endforeach; ?>
