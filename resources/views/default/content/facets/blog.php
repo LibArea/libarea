@@ -29,7 +29,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
           </ul>
 
         </div>
-        <?= insert('/content/post/post', ['data' => $data]); ?>
+        <?= insert('/content/post/post-card', ['data' => $data]); ?>
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>
       <aside>

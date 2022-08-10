@@ -117,7 +117,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function feedItemCount($facets, $topic_id, $grouping)
+    public static function feedItemCount($facets, $topic_id, $sort)
     {
         $facets = self::facets($facets, $topic_id);
         $sort   = $facets . self::sorts($sort);
@@ -160,9 +160,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                 relation_item_id,
                                 GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                                 FROM facets  
-                                LEFT JOIN facets_items_relation 
-                                    on facet_id = relation_facet_id
-
+                                LEFT JOIN facets_items_relation on facet_id = relation_facet_id
                                         GROUP BY relation_item_id
                         ) AS rel
                             ON rel.relation_item_id = item_id 

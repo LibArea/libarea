@@ -13,7 +13,7 @@
             <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'list-items__thumb-image'); ?>
           </div>
           <div class="list-items__description">
-            <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tag mr15', $screening); ?>
+            <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tag mr15', $sort); ?>
 
             <?php if (Access::author('item', $item['item_user_id'], $item['item_date'], 30) === true) : ?>
               <a href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">

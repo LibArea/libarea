@@ -31,7 +31,7 @@
         </div>
       <?php endif; ?>
 
-      <?= insert('/content/post/post', ['data' => $data]); ?>
+      <?= insert('/content/post/post-card', ['data' => $data]); ?>
       <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/posts'); ?>
     </main>
     <aside>

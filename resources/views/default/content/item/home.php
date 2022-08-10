@@ -26,9 +26,9 @@
 
 <div id="contentWrapper">
   <main>
-    <h2 class="m0 mb10"><?= __('web.' . $data['sheet']); ?></h2>
+    <h2 class="m0 mb10"><?= __('web.new_sites'); ?></h2>
     <?php if (!empty($data['items'])) : ?>
-      <?= insert('/content/item/site', ['data' => $data, 'screening' => $data['screening']]); ?>
+      <?= insert('/content/item/item-card', ['data' => $data, 'sort' => 'all']); ?>
     <?php else : ?>
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no_website'), 'icon' => 'info']); ?>
     <?php endif; ?>

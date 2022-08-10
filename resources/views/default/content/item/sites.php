@@ -22,7 +22,7 @@
   <div class="item-categories">
     <?php foreach ($data['childrens'] as $lt) : ?>
       <div>
-        <a class="text-2xl" href="<?= url('web.dir', ['sort' => $data['sheet'], 'slug' => $lt['facet_slug']]); ?>">
+        <a class="text-2xl" href="<?= url('web.dir', ['sort' => $data['sort'], 'slug' => $lt['facet_slug']]); ?>">
           <?= $lt['facet_title']; ?>
         </a> <sup class="gray-600"><?= $lt['counts']; ?></sup>
         <?php if (UserData::checkAdmin()) : ?>
@@ -40,7 +40,7 @@
     <div class="ml20 mb20 mb-block">
       <?php foreach ($data['low_matching'] as $rl) : ?>
         <div class="inline mr20">
-          <a class="text-2xl" href="<?= url('web.dir', ['sort' => $data['sheet'], 'slug' => $rl['facet_slug']]); ?>">
+          <a class="text-2xl" href="<?= url('web.dir', ['sort' => $data['sort'], 'slug' => $rl['facet_slug']]); ?>">
             @<?= $rl['facet_title']; ?>
           </a>
           <?php if (UserData::checkAdmin()) : ?>
@@ -61,7 +61,7 @@
     <div class="item-categories mb-block">
       <?php foreach ($data['low_matching'] as $rl) : ?>
         <div class="inline mr20">
-          <a class="text-2xl" href="<?= url('web.dir', ['sort' => $data['sheet'], 'slug' => $rl['facet_slug']]); ?>">
+          <a class="text-2xl" href="<?= url('web.dir', ['sort' => $data['sort'], 'slug' => $rl['facet_slug']]); ?>">
             @<?= $rl['facet_title']; ?>
           </a>
           <?php if (UserData::checkAdmin()) : ?>
@@ -82,7 +82,7 @@
     <?= insert('/_block/navigation/item/nav', ['data' => $data]); ?>
 
     <?php if (!empty($data['items'])) : ?>
-      <?= insert('/content/item/site', ['data' => $data, 'screening' => $data['screening']]); ?>
+      <?= insert('/content/item/item-card', ['data' => $data, 'sort' => $data['sort']]); ?>
     <?php else : ?>
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'info']); ?>
     <?php endif; ?>

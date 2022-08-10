@@ -142,10 +142,11 @@ Route::get('/redirect/facet/{id}')->controller('Facets\RedirectController')->whe
 
 Route::get('/domain/{domain}/{page?}')->controller('Post\PostController@domain', ['web.feed'])->where(['domain' => '[a-z0-9-.]+'])->name('domain');
 
-Route::get('/web')->controller('Item\HomeController', ['main'])->name('web');
+Route::get('/web')->controller('Item\HomeController')->name('web');
 Route::get('/web/website/{slug}')->controller('Item\DetailedController')->name('website');
-Route::get('/web/dir/{sort}/{slug}/{page?}')->controller('Item\DirController')->name('web.dir');
-Route::get('/web/{grouping}/dir/{sort}/{slug}/{page?}')->controller('Item\DirController')->name('web.dir.gr');
+Route::get('/web/dir/{sort}/{slug}')->controller('Item\DirController')->name('web.dir');
+Route::get('/web/dir/{sort}/{slug}/page/{page?}')->controller('Item\DirController');
+Route::get('/web/{grouping}/dir/{sort}/{slug}')->controller('Item\DirController')->name('web.dir.gr');
 
 Route::type(['get', 'post'])->get('/cleek')->controller('Item\DirController@cleek');
 

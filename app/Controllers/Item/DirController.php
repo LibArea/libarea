@@ -62,8 +62,7 @@ class DirController extends Controller
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
-                    'screening'         => $screening,
-                    'sheet'             => $sort,
+                    'sort'              => $sort,
                     'count'             => $pagesCount,
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $this->pageNumber,

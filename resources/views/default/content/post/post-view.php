@@ -4,23 +4,23 @@
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
       <div class="post-body">
 
-      <?php if (!empty($data['united'])) : ?>
-      <div class="box bg-lightyellow mb15 gray-600">
-        <svg class="icons">
-            <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
-        </svg>
-        <?= __('app.post_merged'); ?> 
-        <?php foreach ($data['united'] as $merged) : ?>
-           (id <?= $merged['post_id']; ?>): 
-           <?php if (UserData::checkAdmin()) : ?>
-             <a href="/post/<?= $merged['post_id']; ?>"><?= $merged['post_title']; ?></a>
-           <?php else : ?>
-             <?= $merged['post_title']; ?>
-           <?php endif; ?>           
-        <?php endforeach; ?>
-      </div>
-      <?php endif; ?>
-      
+        <?php if (!empty($data['united'])) : ?>
+          <div class="box bg-lightyellow mb15 gray-600">
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
+            </svg>
+            <?= __('app.post_merged'); ?>
+            <?php foreach ($data['united'] as $merged) : ?>
+              (id <?= $merged['post_id']; ?>):
+              <?php if (UserData::checkAdmin()) : ?>
+                <a href="/post/<?= $merged['post_id']; ?>"><?= $merged['post_title']; ?></a>
+              <?php else : ?>
+                <?= $merged['post_title']; ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
+
         <div class="flex flex-row items-center">
           <?php if (!empty($data['blog'])) : ?>
             <a title="<?= $data['blog'][0]['facet_title']; ?>" class="tag-violet" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
@@ -103,9 +103,11 @@
         <div class="items-center flex gap gray-600">
           <?= Html::votes($post, 'post'); ?>
           <div class="items-center flex gap-min">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#eye"></use></svg> 
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#eye"></use>
+            </svg>
             <?= $post['post_hits_count'] == 0 ? 1 : $post['post_hits_count']; ?>
-          </div>  
+          </div>
         </div>
         <div class="items-center flex gap-max">
           <?php if (UserData::checkActiveUser()) : ?>
@@ -130,12 +132,12 @@
         <a class="black" title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Html::image($post['avatar'], $post['login'], 'img-base mr5', 'avatar', 'small'); ?>
           <?= $post['login']; ?>
-        </a>  
+        </a>
         <?php if ($post['up_count'] > 0) : ?>
           <sup class="text-sm gray-600 inline"><span class="red">+</span> <?= Html::formatToHuman($post['up_count']); ?></sup>
         <?php endif; ?>
       </div>
-      
+
       <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
 
       <?php if (UserData::checkActiveUser()) : ?>

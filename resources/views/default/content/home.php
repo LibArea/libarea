@@ -4,8 +4,7 @@
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
   </div>
-
-  <?= insert('/content/post/post', ['data' => $data]); ?>
+  <?= insert('/content/post/post-card', ['data' => $data]); ?>
   <?php if (UserData::getUserScroll()) : ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>

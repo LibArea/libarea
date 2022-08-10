@@ -9,27 +9,24 @@ use UserData, Meta;
 class HomeController extends Controller
 {
     protected $limit = 15;
+    protected $first_page = 1;
 
-    public function index($sheet)
+    public function index()
     {
         $m = [
             'og'         => true,
             'imgurl'     => config('meta.img_path_web'),
-            'url'        => url($sheet),
+            'url'        => url('main'),
         ];
-
-        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
         return $this->render(
             '/item/home',
             'item',
             [
-                'meta'  => Meta::get(__('web.' . $sheet . '_title'), __('web.' . $sheet . '_desc'), $m),
+                'meta'  => Meta::get(__('web.main_title'), __('web.main_desc'), $m),
                 'data'  => [
-                    'screening'         => 'all',
-                    'items'             => WebModel::feedItem(1, $this->limit, false, $this->user, false, $sheet, false),
-                    'user_count_site'   => $count_site,
-                    'sheet'             => $sheet == 'main' ? 'new_sites' : $sheet,
+                    'items'             => WebModel::feedItem($this->first_page, $this->limit, false, $this->user, false, 'main', false),
+                    'user_count_site'   => UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']),
                     'audit_count'       => UserAreaModel::auditCount(),
                 ]
             ]

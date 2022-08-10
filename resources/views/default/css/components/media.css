@@ -57,14 +57,14 @@ main { flex: 1; }
   .gap-max { gap: 1.5rem; }
   footer ul { padding-left: 0; }
 
-  .blog-cover-img { height: 88px; }
-
   .mb-img-2xl {
     height: 80px;
     width: 80px;
   }
   
+  .blog-cover-img { height: 88px; }
   .profile-bg-img { height: 75px; }
+  .title { font-size: 1.2125rem; }
 
   .mb-block,
   #contentWrapper { display: block; }
@@ -75,4 +75,10 @@ main { flex: 1; }
   aside,
   .mb-none,
   ul.setting > li > a > i { display: none; }
+  
+  .wrap {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
 }

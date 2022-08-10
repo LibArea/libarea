@@ -99,7 +99,7 @@ class PostController extends Controller
 
         if ($type == 'post') {
             return $this->render(
-                '/post/view',
+                '/post/post-view',
                 'base',
                 [
                     'meta'  => Meta::get(strip_tags($content['post_title']), $description, $m),

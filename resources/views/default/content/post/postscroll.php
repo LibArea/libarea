@@ -1,1 +1,1 @@
-<?= insert('/content/post/post', ['data' => $data]); ?>
+<?= insert('/content/post/post-card', ['data' => $data]); ?>

@@ -3,7 +3,7 @@
 class Html
 {
     // Blog, topic or category
-    public static function facets($facet, $type, $url, $css, $choice = true)
+    public static function facets($facet, $type, $url, $css, $sort = 'all')
     {
         if (!$facet) {
             return '';
@@ -17,7 +17,7 @@ class Html
         foreach (array_chunk($facet, 3) as $row) {
             if ($row[0] == $type) {
                 if ($type == 'category') {
-                    $result[] = '<a class="' . $css . '" href="' . url($url, ['grouping' => $choice, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
+                    $result[] = '<a class="' . $css . '" href="' . url($url, ['sort' => $sort, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
                 } else {
                     $result[] = '<a class="' . $css . '" href="' . url($url, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
                 }

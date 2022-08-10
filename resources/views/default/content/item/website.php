@@ -40,7 +40,7 @@
       <?php if ($item['item_is_soft'] == 1) : ?>
         <h2><?= __('web.soft'); ?></h2>
         <h3><?= $item['item_title_soft']; ?></h3>
-        <div class="gray-600">
+        <div class="gray-600 max-w780">
           <?= Content::text($item['item_content_soft'], 'text'); ?>
         </div>
         <p>

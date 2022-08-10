@@ -12,12 +12,6 @@ use Hleb\Constructor\Handlers\Request; ?>
 
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="box box-fon article_<?= $post['post_id']; ?>">
-      <?php if (Request::getMainUrl() == '/subscribed') : ?>
-        <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id tag-violet right">
-          <?= __('app.unsubscribe'); ?>
-        </div>
-      <?php endif; ?>
-
       <div class="mb15">
         <a class="black" href="<?= $post_url; ?>">
           <h3 class="title"><?= $post['post_title']; ?>

@@ -114,7 +114,7 @@ class EditItemController extends Controller
                 'item_is_soft'          => $data['soft'] == 'on' ? 1 : null,
                 'item_is_github'        => $data['github'] == 'on' ? 1 : null,
                 'item_post_related'     => $post_related ?? null,
-                'item_github_url'       => $data['item_github_url'] ?? null,
+                'item_github_url'       => $data['github_url'] ?? null,
             ]
         );
 

@@ -30,6 +30,6 @@
     <?php endif; ?>
   </div>
 
-  <?= insert('/content/post/post', ['data' => $data]); ?>
+  <?= insert('/content/post/post-card', ['data' => $data]); ?>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], null, url('domain', ['domain' => $data['site']['item_domain']])); ?>
 </main>
