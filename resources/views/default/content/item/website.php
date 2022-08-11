@@ -13,12 +13,12 @@
 
       <div class="flex justify-between gap-max mb-block">
         <div class="w-40 mb-w-100 img-preview">
-          <?= Html::websiteImage($item['item_domain'], 'thumbs', $item['item_title'], 'w-100 box-shadow'); ?>
+          <?= Img::website($item['item_domain'], 'thumbs', $item['item_title'], 'w-100 box-shadow'); ?>
         </div>
         <div class="w-60 mb-w-100">
           <?= Content::text($item['item_content'], 'text'); ?>
           <a class="gree" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
-            <?= Html::websiteImage($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
+            <?= Img::website($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
             <?= $item['item_url']; ?>
           </a>
           <span class="gray">•</span>
@@ -29,10 +29,10 @@
             'state'           => is_array($data['item_signed']),
           ]); ?>
           <div class="mt15">
-            <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tag', 'all'); ?>
+            <?= Img::facets($item['facet_list'], 'category', 'web.dir', 'tag', 'all'); ?>
           </div>
           <div class="tems-center flex gap mt15">
-                 <?= Html::votes($item, 'item'); ?>
+            <?= Html::votes($item, 'item'); ?>
             <?= Html::favorite($item['item_id'], 'website', $item['tid']); ?>
           </div>  
         </div>
@@ -107,7 +107,7 @@
         <h4 class="uppercase-box"><?= __('web.recommended'); ?></h4>
         <?php foreach ($data['similar'] as $link) : ?>
           <a class="inline mr20 mb15 block text-sm" href="<?= url('website', ['slug' => $link['item_domain']]); ?>">
-            <?= Html::websiteImage($link['item_domain'], 'thumbs', $link['item_title'], 'w-100 box-shadow'); ?>          
+            <?= Img::website($link['item_domain'], 'thumbs', $link['item_title'], 'w-100 box-shadow'); ?>          
             <?= $link['item_title']; ?>
           </a>
         <?php endforeach; ?>

@@ -12,11 +12,11 @@ endif;
     <?= insert('/_block/number-removed-content', ['count' => $data['delet_count']]); ?>
   <?php endif; ?>
 
-  <?= Html::image($profile['avatar'], $profile['login'], $css, 'avatar', 'max'); ?>
+  <?= Img::avatar($profile['avatar'], $profile['login'], $css, 'max'); ?>
 
   <?php if ($profile['cover_art'] != 'cover_art.jpeg') : ?>
     <div class="relative">
-      <img class="profile-bg-img" src="<?= Html::coverUrl($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
+      <img class="profile-bg-img" src="<?= Img::cover($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
     </div>
   <?php else : ?>
     <div class="profile-bg-img relative bg-profile"></div>

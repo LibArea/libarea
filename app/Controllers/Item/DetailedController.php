@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\Item\{WebModel, ReplyModel, UserAreaModel};
 use App\Models\{PostModel, SubscriptionModel};
-use Content, Meta, UserData;
+use Content, Meta, UserData, Img;
 
 class DetailedController extends Controller
 {
@@ -29,9 +29,9 @@ class DetailedController extends Controller
             $item['item_content_soft'] = Content::text($item['item_content_soft'], 'text');
         }
 
-        $content_img = PATH_THUMBS . 'default.png';
-        if (file_exists(HLEB_PUBLIC_DIR . PATH_THUMBS . $item['item_domain'] . '.png')) {
-            $content_img =  PATH_THUMBS . $item['item_domain'] . '.png';
+        $content_img = Img::PATH['thumbs'] . 'default.png';
+        if (file_exists(HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $item['item_domain'] . '.png')) {
+            $content_img =  Img::PATH['thumbs'] . $item['item_domain'] . '.png';
         }
 
         $m = [

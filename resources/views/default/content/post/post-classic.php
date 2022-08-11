@@ -24,8 +24,8 @@ use Hleb\Constructor\Handlers\Request; ?>
               </h3>
             </a>
             <div class="flex gap lowercase">
-              <?= Html::facets($post['facet_list'], 'blog', 'blog', 'gray text-sm'); ?>
-              <?= Html::facets($post['facet_list'], 'topic', 'topic', 'gray-600 text-sm'); ?>
+              <?= Img::facets($post['facet_list'], 'blog', 'blog', 'gray text-sm'); ?>
+              <?= Img::facets($post['facet_list'], 'topic', 'topic', 'gray-600 text-sm'); ?>
               <?php if ($post['post_url_domain']) : ?>
                 <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                   <svg class="icons">
@@ -42,7 +42,7 @@ use Hleb\Constructor\Handlers\Request; ?>
           <div class="flex flex-row items-center justify-between">
             <div class="flex gap text-sm flex-row">
               <a class="black" href="<?= url('profile', ['login' => $post['login']]); ?>">
-                <?= Html::image($post['avatar'], $post['login'], 'img-sm mr5', 'avatar', 'max'); ?>
+                <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'max'); ?>
                 <span<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> class="green" <?php endif; ?>>
                   <?= $post['login']; ?>
                   </span>
@@ -76,12 +76,12 @@ use Hleb\Constructor\Handlers\Request; ?>
           <div class="w200">
             <?php if ($post['post_content_img']) : ?>
               <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                <?= Html::image($post['post_content_img'], $post['post_title'], 'w160 m15 right mb-w-100', 'post', 'cover'); ?>
+                <?= Img::image($post['post_content_img'], $post['post_title'], 'w160 m15 right mb-w-100', 'post', 'cover'); ?>
               </a>
             <?php else : ?>
               <?php if ($post['post_thumb_img']) : ?>
                 <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                  <?= Html::image($post['post_thumb_img'], $post['post_title'],  'w160 m15 right mb-w-100', 'post', 'thumbnails'); ?>
+                  <?= Img::image($post['post_thumb_img'], $post['post_title'],  'w160 m15 right mb-w-100', 'post', 'thumbnails'); ?>
                 </a>
               <?php endif; ?>
             <?php endif; ?>

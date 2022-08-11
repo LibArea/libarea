@@ -50,7 +50,7 @@
         ?>
           <li class="mt15 flex items-center justify-between">
             <a href="<?= $url; ?>">
-              <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+              <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
               <span class="middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
             </a>
             <?php if (UserData::getUserId() == $topic['facet_user_id']) : ?>
@@ -74,7 +74,7 @@
           <?php foreach ($data['topics'] as $recomm) : ?>
             <li class="mt15">
               <a href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
-                <?= Html::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+                <?= Img::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
                 <?= $recomm['facet_title']; ?>
               </a>
               <?php if (UserData::getUserId()) : ?>

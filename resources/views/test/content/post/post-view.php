@@ -55,7 +55,7 @@
       </div>
 
       <?php if ($post['post_thumb_img']) : ?>
-        <?= Html::image($post['post_thumb_img'], $post['post_title'],  'thumb right ml15', 'post', 'thumbnails'); ?>
+        <?= Img::image($post['post_thumb_img'], $post['post_title'],  'thumb right ml15', 'post', 'thumbnails'); ?>
       <?php endif; ?>
 
       <div class="post-body max-w780 full">

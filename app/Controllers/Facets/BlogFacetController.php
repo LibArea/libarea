@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel};
-use Content, Meta;
+use Content, Meta, Img;
 
 class BlogFacetController extends Controller
 {
@@ -38,7 +38,7 @@ class BlogFacetController extends Controller
 
         $m = [
             'og'        => true,
-            'imgurl'    => PATH_FACETS_LOGOS . $facet['facet_img'],
+            'imgurl'    => Img::PATH['facets_logo'] . $facet['facet_img'],
             'url'       => $url,
         ];
 

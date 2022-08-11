@@ -44,7 +44,7 @@
       </a>
     </div>
     <?php if ($post['post_thumb_img']) : ?>
-      <?= Html::image($post['post_thumb_img'], $post['post_title'], 'w94', 'post', 'thumbnails'); ?>
+      <?= Img::image($post['post_thumb_img'], $post['post_title'], 'w94', 'post', 'thumbnails'); ?>
     <?php endif; ?>
   </div>
 <?php endif; ?>
@@ -54,7 +54,7 @@
     <div class="flex">
       <?php if ($post['post_content_img']) : ?>
         <div class="mr20">
-          <?= Html::image($post['post_content_img'], $post['post_title'], 'w160', 'post', 'cover'); ?>
+          <?= Img::image($post['post_content_img'], $post['post_title'], 'w160', 'post', 'cover'); ?>
           <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
           <a class="img-remove text-sm" href="/post/img/<?= $post['post_id']; ?>/remove">
             <?= __('app.remove'); ?>

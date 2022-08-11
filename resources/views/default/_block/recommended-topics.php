@@ -13,7 +13,7 @@
           </svg> <?= __('app.read'); ?>
         </div>
         <a class="" title="<?= $topic['facet_title']; ?>" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-          <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
+          <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
           <?= $topic['facet_title']; ?>
         </a>
         <div class="mt5 text-sm max-w780 gray">

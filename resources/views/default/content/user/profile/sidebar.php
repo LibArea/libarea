@@ -41,7 +41,7 @@
       <?php foreach ($data['blogs'] as $blog) : ?>
         <div class="w-100 mb-w100 mb15 flex flex-row">
           <a class="mr10" href="<?= url($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
-            <?= Html::image($blog['facet_img'], $blog['facet_title'], 'img-lg', 'logo', 'max'); ?>
+            <?= Img::image($blog['facet_img'], $blog['facet_title'], 'img-lg', 'logo', 'max'); ?>
           </a>
           <div class="ml5 w-100">
             <a class="black" href="<?= url($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
@@ -62,7 +62,7 @@
       <?php foreach ($data['topics'] as  $topic) : ?>
         <div class="mt5 mb5">
           <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-            <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'small'); ?>
+            <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'small'); ?>
             <span class="bar-name text-sm"><?= $topic['facet_title']; ?></span>
           </a>
         </div>

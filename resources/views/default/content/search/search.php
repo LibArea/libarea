@@ -40,14 +40,14 @@ $sw = $sw ?? '?';
         <?php if ($type == 'website') : ?>
           <div class="text-sm mb5 lowercase">
             <span class="green">
-              <?= Html::websiteImage($result['item_domain'], 'favicon', $result['item_domain'], 'favicons mr5'); ?>
+              <?= Img::website($result['item_domain'], 'favicon', $result['item_domain'], 'favicons mr5'); ?>
               <?= $result['item_domain']; ?>
             </span>
             <a class="gray-600 ml15" href="<?= url('website', ['slug' => $result['item_domain']]); ?>"><?= __('web.more'); ?></a>
           </div>
         <?php else : ?>
           <div>
-            <?= Html::facets($result['facet_list'], 'topic', 'topic', 'tag mr15'); ?>
+            <?= Img::facets($result['facet_list'], 'topic', 'topic', 'tag mr15'); ?>
           </div>
         <?php endif; ?>
         <?= Content::fragment(Content::text($result['content'], 'line'), 250); ?>

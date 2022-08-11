@@ -1,4 +1,4 @@
-<?= Html::image($data['user']['avatar'], $data['user']['login'], 'mr5 ml5 ava', 'avatar', 'small'); ?>
+<?= Img::avatar($data['user']['avatar'], $data['user']['login'], 'mr5 ml5 ava', 'small'); ?>
 <span class="mr5 ml5">
   <a title="<?= __('app.profile'); ?>" href="<?= url('profile', ['login' => UserData::getUserLogin()]); ?>">
     <?= $data['user']['login']; ?>

@@ -18,7 +18,7 @@
       </div>
       <div class="gray mt5 mb5">
         <a class="green" rel="nofollow noreferrer ugc" href="<?= $data['site']['item_url']; ?>">
-          <?= Html::websiteImage($data['site']['item_id'], 'favicon', $data['site']['item_domain'], 'favicons'); ?>
+          <?= Img::website($data['site']['item_id'], 'favicon', $data['site']['item_domain'], 'favicons'); ?>
           <?= $data['site']['item_url']; ?>
         </a>
         <span class="right gray-600"><svg class="icons">

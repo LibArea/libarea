@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
-use UploadImage, Validation, Meta, UserData;
+use UploadImage, Validation, Meta, UserData, Img;
 
 class SettingController extends Controller
 {
@@ -189,8 +189,8 @@ class SettingController extends Controller
 
         // Удалим, кроме дефолтной
         if ($user['cover_art'] != 'cover_art.jpeg') {
-            unlink(HLEB_PUBLIC_DIR . PATH_USERS_COVER . $user['cover_art']);
-            unlink(HLEB_PUBLIC_DIR . PATH_USERS_SMALL_COVER . $user['cover_art']);
+            unlink(HLEB_PUBLIC_DIR . Img::PATH['users_cover'] . $user['cover_art']);
+            unlink(HLEB_PUBLIC_DIR . Img::PATH['users_cover_small'] . $user['cover_art']);
         }
 
         SettingModel::coverRemove(

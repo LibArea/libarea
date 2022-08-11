@@ -5,14 +5,14 @@ namespace App\Controllers\Post;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
-use Content, Meta, UserData, Access;
+use Content, Meta, UserData, Access, Img;
 
 use App\Traits\Views;
 
 class PostController extends Controller
 {
     use Views;
-    
+
     protected $limit = 25;
 
     // Full post
@@ -64,9 +64,9 @@ class PostController extends Controller
 
         $content_img  = config('meta.img_path');
         if ($content['post_content_img']) {
-            $content_img  = PATH_POSTS_COVER . $content['post_content_img'];
+            $content_img  = Img::PATH['posts_cover'] . $content['post_content_img'];
         } elseif ($content['post_thumb_img']) {
-            $content_img  = PATH_POSTS_THUMB . $content['post_thumb_img'];
+            $content_img  = Img::PATH['posts_thumb'] . $content['post_thumb_img'];
         }
 
         $description  = Content::fragment(Content::text($content['post_content'], 'line'), 250);

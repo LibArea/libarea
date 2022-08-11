@@ -24,10 +24,10 @@ $domain = $data['domain']; ?>
 
       <?php if (UserData::checkAdmin()) { ?>
         <div class="list-items__thumb mb-none img-preview">
-          <?= Html::websiteImage($domain['item_domain'], 'thumbs', $domain['item_title'], 'list-items__thumb-image'); ?>
+          <?= Img::website($domain['item_domain'], 'thumbs', $domain['item_title'], 'list-items__thumb-image'); ?>
         </div>
         <div class="add-screenshot text-sm sky" data-id="<?= $domain['item_id']; ?>">+ screenshot</div>
-        <?= Html::websiteImage($domain['item_domain'], 'favicon', $domain['item_domain'], ' mr5'); ?>
+        <?= Img::website($domain['item_domain'], 'favicon', $domain['item_domain'], ' mr5'); ?>
         <span class="add-favicon text-sm sky" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
       <?php } ?>
 

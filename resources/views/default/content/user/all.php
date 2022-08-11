@@ -34,7 +34,7 @@
     <?php foreach ($data['users'] as $user) : ?>
       <div class="w160 mb-w100 mb20 center">
         <a href="<?= url('profile', ['login' => $user['login']]); ?>">
-          <?= Html::image($user['avatar'], $user['login'], 'img-lg', 'avatar', 'max'); ?>
+          <?= Img::avatar($user['avatar'], $user['login'], 'img-lg', 'max'); ?>
           <div class="block mt5">
             <?= $user['login']; ?>
           </div>

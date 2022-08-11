@@ -7,7 +7,7 @@
           <span class="block gray lowercase"><?= __('app.views'); ?></span>
         </div>
         <div class="p15">
-          <?= Html::image($writer['avatar'], $writer['login'], 'w50 h50', 'avatar', 'small'); ?>
+          <?= Img::avatar($writer['avatar'], $writer['login'], 'w50 h50', 'small'); ?>
         </div>
         <div class="mt10">
           <a href="<?= url('profile', ['login' => $writer['login']]); ?>"><?= $writer['login']; ?></a>

@@ -70,7 +70,7 @@
       </div>
 
       <?php if ($post['post_thumb_img']) : ?>
-        <?= Html::image($post['post_thumb_img'], $post['post_title'],  'thumb max-w-100', 'post', 'thumbnails'); ?>
+        <?= Img::image($post['post_thumb_img'], $post['post_title'],  'thumb max-w-100', 'post', 'thumbnails'); ?>
       <?php endif; ?>
 
       <div class="post-body max-w780 full">
@@ -130,7 +130,7 @@
       </div>
       <div class="box bg-lightgray">
         <a class="black" title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
-          <?= Html::image($post['avatar'], $post['login'], 'img-base mr5', 'avatar', 'small'); ?>
+          <?= Img::avatar($post['avatar'], $post['login'], 'img-base mr5', 'small'); ?>
           <?= $post['login']; ?>
         </a>
         <?php if ($post['up_count'] > 0) : ?>
@@ -180,7 +180,7 @@
     <div class="box bg-lightgray">
       <h4 class="uppercase-box"><?= __('app.topics'); ?></h4>
       <?php foreach ($data['facets'] as $topic) : ?>
-        <?= Html::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+        <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
 
         <?php if (!$topic['signed_facet_id'] && UserData::getUserId()) : ?>
           <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center mt5 mr5">
@@ -201,7 +201,7 @@
 
   <?php if ($post['post_content_img']) : ?>
     <div class="box bg-lightgray img-preview">
-      <img class="w-100 br-rd5" src="<?= PATH_POSTS_COVER . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
+      <img class="w-100 br-rd5" src="<?= Img::PATH['posts_cover'] . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php endif; ?>
   <div class="center box bg-lightgray">

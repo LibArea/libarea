@@ -17,7 +17,7 @@
               <div class="content-body">
                 <div class="flex text-sm gap">
                   <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">
-                    <?= Html::image($answer['avatar'], $answer['login'], 'img-sm mr5', 'avatar', 'small'); ?>
+                    <?= Img::avatar($answer['avatar'], $answer['login'], 'img-sm mr5', 'small'); ?>
                     <span <?php if (Html::loginColor($answer['created_at'])) : ?> class="green" <?php endif; ?>>
                       <?= $answer['login']; ?>
                     </span>
@@ -133,7 +133,7 @@
             <li class="content_tree mb20 ml15<?php if ($comment['comment_comment_id'] > 0) : ?> ml30<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
               <div class="text-sm flex gap">
                 <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>">
-                  <?= Html::image($comment['avatar'], $comment['login'], 'img-sm', 'avatar', 'small'); ?>
+                  <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm', 'small'); ?>
                   <span class="<?php if (Html::loginColor($comment['created_at'])) : ?> green<?php endif; ?>">
                     <?= $comment['login']; ?>
                   </span>

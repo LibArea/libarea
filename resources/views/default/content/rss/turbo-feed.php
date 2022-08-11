@@ -16,7 +16,7 @@
              </header>
               <?php if ($post['post_content_img']) { ?>
                   <figure>
-                      <?= Html::image($post['post_content_img'], $post['post_title'], 'img-post', 'post', 'cover'); ?>
+                      <?= Img::image($post['post_content_img'], $post['post_title'], 'img-post', 'post', 'cover'); ?>
                   </figure>
               <?php } ?>    
               <?= $post['post_content']; ?>

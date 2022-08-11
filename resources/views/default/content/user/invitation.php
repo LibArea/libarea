@@ -19,7 +19,7 @@
       <?php foreach ($data['invitations'] as $invite) : ?>
         <?php if ($invite['active_status'] == 1) : ?>
           <div class="text-sm gray">
-            <?= Html::image($invite['avatar'], $invite['login'], 'ava', 'avatar', 'small'); ?>
+            <?= Img::avatar($invite['avatar'], $invite['login'], 'ava', 'small'); ?>
             <a href="<?= $invite['login']; ?>"><?= $invite['login']; ?></a>
             - <?= __('app.registered'); ?>
           </div>

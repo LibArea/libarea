@@ -7,7 +7,7 @@
           <h3 class="title"><?= $item['item_title']; ?>
             <?php $date = date_diff(new DateTime(), new DateTime($item['item_date']))->days; ?>
             <?php if ($date < 3) : ?><sup class="red text-sm">new</sup><?php endif; ?>
-            <?= Html::facets($item['facet_list'], 'category', 'web.dir', 'tag mr15', $screening); ?>
+            <?= Img::facets($item['facet_list'], 'category', 'web.dir', 'tag mr15', $screening); ?>
           </h3>
         </a>
         <div class="content">
@@ -24,7 +24,7 @@
             </div>
             <div class="list-items__footer">
               <div class="green">
-                <?= Html::websiteImage($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
+                <?= Img::website($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
                 <?= $item['item_domain']; ?>
                 <?php if ($item['item_github_url']) : ?>
                   <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">

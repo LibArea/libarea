@@ -37,7 +37,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
           <div class="box bg-beige">
             <h4 class="uppercase-box"><?= __('app.created_by'); ?></h4>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= url('profile', ['login' => $data['user']['login']]); ?>">
-              <?= Html::image($data['user']['avatar'], $data['user']['login'], 'img-base', 'avatar', 'small'); ?>
+              <?= Img::avatar($data['user']['avatar'], $data['user']['login'], 'img-base', 'small'); ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>
             </a>
             <div class="gray-600 text-sm mt5">
@@ -57,7 +57,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
                 <?php foreach ($data['focus_users'] as $user) : ?>
                   <li class="mt15">
                     <a href="<?= url('profile', ['login' => $user['login']]); ?>">
-                      <?= Html::image($user['avatar'], $user['login'], 'img-sm mr5', 'avatar', 'max'); ?>
+                      <?= Img::avatar($user['avatar'], $user['login'], 'img-sm mr5', 'max'); ?>
                       <?= $user['login']; ?>
                     </a>
                   </li>

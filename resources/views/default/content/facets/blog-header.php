@@ -1,7 +1,7 @@
 <div class="br-gray bg-white mb15 relative">
-  <?= Html::image($data['facet']['facet_img'], $data['facet']['facet_title'], 'img-2xl mt20 mb-mt5 mb-img-2xl profile-ava', 'logo', 'max'); ?>
+  <?= Img::image($data['facet']['facet_img'], $data['facet']['facet_title'], 'img-2xl mt20 mb-mt5 mb-img-2xl profile-ava', 'logo', 'max'); ?>
   <div class="relative">
-    <img class="blog-cover-img" src="<?= Html::coverUrl($data['facet']['facet_cover_art'], 'blog'); ?>" alt="<?= $data['facet']['facet_title']; ?>">
+    <img class="blog-cover-img" src="<?= Img::cover($data['facet']['facet_cover_art'], 'blog'); ?>" alt="<?= $data['facet']['facet_title']; ?>">
   </div>
   <div class="mt20">
     <div class="right m15 mb-mt5">

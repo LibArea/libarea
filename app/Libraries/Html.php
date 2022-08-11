@@ -3,31 +3,6 @@
 class Html
 {
     // Blog, topic or category
-    public static function facets($facet, $type, $url, $css, $sort = 'all')
-    {
-        if (!$facet) {
-            return '';
-        }
-
-        if (!is_array($facet)) {
-            $facet = preg_split('/(@)/', $facet);
-        }
-
-        $result = [];
-        foreach (array_chunk($facet, 3) as $row) {
-            if ($row[0] == $type) {
-                if ($type == 'category') {
-                    $result[] = '<a class="' . $css . '" href="' . url($url, ['sort' => $sort, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
-                } else {
-                    $result[] = '<a class="' . $css . '" href="' . url($url, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
-                }
-            }
-        }
-
-        return implode($result);
-    }
-
-    // Blog, topic or category
     public static function addPost($facet)
     {
         $url_add = url('content.add', ['type' => 'post']);
@@ -38,37 +13,6 @@ class Html
         }
 
         return '<a title="' . __('app.add_post') . '" href="' . $url_add . '" class="sky"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg></a>';
-    }
-
-    // User's Cover art or thumbnails
-    public static function image($file, $alt, $style, $type, $size)
-    {
-        $img = $size == 'small' ? PATH_USERS_SMALL_AVATARS . $file : PATH_USERS_AVATARS . $file;
-        if ($type == 'post') {
-            $img = $size == 'thumbnails' ? PATH_POSTS_THUMB . $file : PATH_POSTS_COVER . $file;
-        } elseif ($type == 'logo') {
-            $img = $size == 'small' ? PATH_FACETS_SMALL_LOGOS . $file : PATH_FACETS_LOGOS . $file;
-        } 
-
-        return '<img class="' . $style . '" src="' . $img . '" title="' . $alt . '" alt="' . $alt . '">';
-    }
-
-    // Icons, screenshots associated with the site
-    public static function websiteImage($domain, $type, $alt, $css = '')
-    {
-        $path = $type == 'thumbs' ? PATH_THUMBS : PATH_FAVICONS;
-           
-        if (file_exists(HLEB_PUBLIC_DIR . $path . $domain . '.png')) {
-            return '<img class="' . $css . '" src="' . $path . $domain . '.png" title="' . $alt . '" alt="' . $alt . '">';
-        }
-
-        return '<img class="mr5 ' . $css . '" src="' . $path . 'no-link.png" title="' . $alt . '" alt="' . $alt . '">';
-    }
-
-    // Cover of users, blog 
-    public static function coverUrl($file, $type)
-    {
-        return $type == 'blog' ? PATH_BLOGS_COVER . $file : PATH_USERS_COVER . $file;
     }
 
     // Localization of dates and events....

@@ -6,7 +6,7 @@
 
     <div class="file-upload" id="file-drag">
       <div class="mb-block">
-        <?= Html::image($data['user']['avatar'], $data['user']['login'], 'img-xl', 'avatar', 'max'); ?>
+        <?= Img::avatar($data['user']['avatar'], $data['user']['login'], 'img-xl', 'max'); ?>
         <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl">
         <div id="start" class="mt15">
           <input id="file-upload" type="file" name="images" accept="image/*" />
@@ -27,7 +27,7 @@
       <div class="mb-block">
         <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
           <div class="relative mr15">
-            <img class="block br-gray max-w-100" src="<?= Html::coverUrl($data['user']['cover_art'], 'user'); ?>">
+            <img class="block br-gray max-w-100" src="<?= Img::cover($data['user']['cover_art'], 'user'); ?>">
             <a class="right text-sm" href="<?= url('setting', ['type' => 'cover_remove']); ?>">
               <?= __('app.remove'); ?>
             </a>

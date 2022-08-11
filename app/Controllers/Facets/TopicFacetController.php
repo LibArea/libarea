@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
-use Meta;
+use Meta, Img;
 
 class TopicFacetController extends Controller
 {
@@ -39,7 +39,7 @@ class TopicFacetController extends Controller
 
         $m = [
             'og'         => true,
-            'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
+            'imgurl'     => Img::PATH['facets_logo'] . $facet['facet_img'],
             'url'        => url('topic', ['slug' => $facet['facet_slug']]),
         ];
 
@@ -73,7 +73,7 @@ class TopicFacetController extends Controller
 
         $m = [
             'og'         => true,
-            'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
+            'imgurl'     => Img::PATH['facets_logo'] . $facet['facet_img'],
             'url'        => url('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
@@ -103,7 +103,7 @@ class TopicFacetController extends Controller
 
         $m = [
             'og'         => true,
-            'imgurl'     => PATH_FACETS_LOGOS . $facet['facet_img'],
+            'imgurl'     => Img::PATH['facets_logo'] . $facet['facet_img'],
             'url'        => url('topic.writers', ['slug' => $facet['facet_slug']]),
         ];
 

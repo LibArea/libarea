@@ -153,10 +153,10 @@ class EditFacetController extends Controller
 
             FacetModel::addLowFacetMatching($match_arr, $data['facet_id']);
         }
-        
-        return true;        
+
+        return true;
     }
-    
+
     public function pages()
     {
         $facet_id   = Request::getInt('id');

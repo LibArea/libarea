@@ -45,7 +45,7 @@
 <?php foreach ($data['replys'] as $reply) : ?>
   <div class="gray text-sm">
     <a class="gray-600" href="<?= url('profile', ['login' => $reply['login']]); ?>">
-      <?= Html::image($reply['avatar'], $reply['login'], 'img-sm', 'avatar', 'small'); ?>
+      <?= Img::avatar($reply['avatar'], $reply['login'], 'img-sm', 'small'); ?>
       <span class="mr5">
         <?= $reply['login']; ?>
       </span>

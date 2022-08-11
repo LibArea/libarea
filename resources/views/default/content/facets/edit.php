@@ -28,7 +28,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
     <div class="file-upload mb10 mt15" id="file-drag">
       <div class="flex">
-      <?= Html::image($fs['facet_img'], $fs['facet_title'], 'img-xl', 'logo', 'max'); ?>
+      <?= Img::image($fs['facet_img'], $fs['facet_title'], 'img-xl', 'logo', 'max'); ?>
       <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl br-gray">
       </div>
       <div id="start" class="mt10">
@@ -44,7 +44,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
         <div class="flex3">
           <?php if ($fs['facet_cover_art']) : ?>
             <div class="mr20">
-              <img src="<?= Html::coverUrl($fs['facet_cover_art'], 'blog'); ?>" class="w-100 br-gray">
+              <img src="<?= Img::cover($fs['facet_cover_art'], 'blog'); ?>" class="w-100 br-gray">
               <input type="hidden" name="cover" value="<?= $fs['facet_cover_art']; ?>">
             </div>
           <?php endif; ?>
@@ -96,7 +96,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <h4 class="uppercase-box"><?= __('app.parents'); ?></h4>
       <?php foreach ($data['high_arr'] as $high) : ?>
         <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= $url; ?>">
-          <?= Html::image($high['facet_img'], $high['value'], 'img-base mr5', 'logo', 'max'); ?>
+          <?= Img::image($high['facet_img'], $high['value'], 'img-base mr5', 'logo', 'max'); ?>
           <?= $high['value']; ?>
         </a>
       <?php endforeach; ?>

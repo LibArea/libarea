@@ -13,7 +13,7 @@ function internalRender($nodes, $tl, $user_id)
 
         echo '<div class="flex gap">'
 
-            . Html::image($node['avatar'], $node['login'], 'img-sm', 'avatar', 'small') .
+            . Img::avatar($node['avatar'], $node['login'], 'img-sm', 'small') .
 
             '<span class="gray-600">' . $node['login'] . '</span>
                     

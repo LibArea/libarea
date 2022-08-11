@@ -5,7 +5,7 @@ namespace App\Controllers\Team;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\TeamModel;
-use Meta, Html;
+use Meta, Img;
 
 class TeamController extends Controller
 {
@@ -70,7 +70,7 @@ class TeamController extends Controller
         $result = [];
         foreach (array_chunk($users, 3) as $row) {
             $result[] = '<a class="mr15 gray-600" href="' . url('profile', ['login' => $row[1]]) . '">
-            ' . Html::image($row[2], $row[1], 'img-sm', 'avatar', 'small') . '
+            ' . Img::avatar($row[2], $row[1], 'img-sm', 'small') . '
             ' . $row[1] . '</a>';
         }
 

@@ -24,7 +24,7 @@
         ?>
         <div class="flex relative">
           <div id="user-card" data-content_id="<?= $key; ?>" data-user_id="<?= $id; ?>">
-            <?= Html::image($ava, $login, 'img-base', 'avatar', 'max'); ?>
+            <?= Img::avatar($ava, $login, 'img-base', 'max'); ?>
             <div id="content_<?= $key; ?>" class="content_<?= $key; ?>"></div>
           </div>
           <a class="flex black" href="<?= url('profile', ['login' => $login]); ?>">
@@ -56,7 +56,7 @@
     <?php foreach ($data['dialog'] as $key => $val) : ?>
       <?php if ($val['id'] != UserData::getUserId()) : ?>
         <div class="flex relative pt5 pb5 items-center hidden">
-          <?= Html::image($val['avatar'], $val['login'], 'img-base mr5', 'avatar', 'max'); ?>
+          <?= Img::avatar($val['avatar'], $val['login'], 'img-base mr5', 'max'); ?>
           <a href="<?= url('dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['login']; ?></a>
         </div>
       <?php endif; ?>

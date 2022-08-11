@@ -14,7 +14,7 @@
         <?php foreach ($data['read'] as $row) : ?>
           <div class="flex flex-auto items-center mb20">
             <a class="flex items-center hidden gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">
-              <?= Html::image($row['avatar'], $row['login'], 'img-base', 'avatar', 'max'); ?>
+              <?= Img::avatar($row['avatar'], $row['login'], 'img-base', 'max'); ?>
               <div class="ml5">
                 <div class="gray-600"><?= $row['login']; ?></div>
                 <?php if ($row['about']) : ?>

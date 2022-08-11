@@ -39,7 +39,7 @@ $post   = $data['post'] ?? false;
           <div class="d-header-facet none">
             <span class="v-line mb-none"></span>
             <a class="mb-none" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]) ?>">
-              <?= Html::image($facet['facet_img'], $facet['facet_title'], 'img-base mr15', 'logo', 'max'); ?>
+              <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-base mr15', 'logo', 'max'); ?>
               <?= $facet['facet_title']; ?>
             </a>
             <span class="gray-600 text-sm lowercase mb-none"> - <?= $facet['facet_short_description']; ?></span>
@@ -100,7 +100,7 @@ $post   = $data['post'] ?? false;
 
             <div class="relative">
               <div class="trigger">
-                <?= Html::image(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'avatar', 'small'); ?>
+                <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
               </div>
               <div class="dropdown user">
                 <?= insert('/_block/navigation/menu-user', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>

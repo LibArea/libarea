@@ -11,7 +11,7 @@ foreach ($data['answers'] as $answer) :
         <div class="content-body">
           <div class="flex text-sm gap">
             <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">
-              <?= Html::image($answer['avatar'],  $answer['login'], 'img-sm', 'avatar', 'small'); ?>
+              <?= Img::avatar($answer['avatar'],  $answer['login'], 'img-sm', 'small'); ?>
               <?= $answer['login']; ?>
             </a>
             <?php if ($answer['post_user_id'] == $answer['answer_user_id']) : ?>

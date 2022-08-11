@@ -24,7 +24,7 @@ foreach ($answer as  $comment) :
         <div class="max-w780">
           <div class="text-sm flex gap">
             <a class="gray-600 flex " href="<?= url('profile', ['login' => $comment['login']]); ?>">
-              <?= Html::image($comment['avatar'], $comment['login'], 'img-sm mr5', 'avatar', 'small'); ?>
+              <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm mr5', 'small'); ?>
               <?= $comment['login']; ?>
             </a>
             <?php if ($comment['post_user_id'] == $comment['comment_user_id']) : ?>

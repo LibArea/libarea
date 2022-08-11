@@ -5,6 +5,7 @@ namespace Modules\Admin\App;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\Item\WebModel;
+use Img;
 
 class Webs extends Controller
 {
@@ -14,7 +15,7 @@ class Webs extends Controller
         $item       = WebModel::getItemId($item_id);
         self::error404($item);
 
-        $puth = HLEB_PUBLIC_DIR . PATH_FAVICONS . $item["item_domain"] . '.png';
+        $puth = HLEB_PUBLIC_DIR . Img::PATH['favicons'] . $item["item_domain"] . '.png';
 
         if (!file_exists($puth)) {
             $urls = self::getFavicon($item['item_domain']);
@@ -37,7 +38,7 @@ class Webs extends Controller
         $item       = WebModel::getItemId($item_id);
         self::error404($item);
 
-        $puth = HLEB_PUBLIC_DIR . PATH_THUMBS . $item["item_domain"] . '.png';
+        $puth = HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $item["item_domain"] . '.png';
 
         if (!file_exists($puth)) {
             $urls = self::getScreenshot($item['item_url']);

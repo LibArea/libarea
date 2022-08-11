@@ -32,6 +32,7 @@ class MainConnector implements Connector
             
             "Access"                        => "app/Libraries/Access.php",
             "Msg"                           => "app/Libraries/Msg.php",
+            "Img"                           => "app/Libraries/Img.php",
 
             "Curl"                          => "app/Libraries/Curl.php",
             "Google"                        => "app/Libraries/Integration/Google.php",

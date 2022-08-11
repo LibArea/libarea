@@ -43,7 +43,7 @@
       <?php endif; ?>
       <a class="<?php if ($topic['level'] == 0) : ?>relative pt5 text-xl items-center hidden<?php endif; ?> <?php if ($topic['level'] > 0) : ?> black<?php endif; ?>" href="<?= $url; ?>">
         <?php if ($topic['level'] == 0) : ?>
-          <?= Html::image($topic['facet_img'], $topic['facet_title'], 'w20 h20 mr5 br-gray', 'logo', 'max'); ?>
+          <?= Img::image($topic['facet_img'], $topic['facet_title'], 'w20 h20 mr5 br-gray', 'logo', 'max'); ?>
         <?php endif; ?>
         <?= $topic['facet_title']; ?>
       </a>
@@ -73,7 +73,7 @@
           <svg class="icons gray-600 text-sm mr5 ml5">
             <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
           </svg>
-          <?= Html::facets($topic['matching_list'], $topic['facet_type'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
+          <?= Img::facets($topic['matching_list'], $topic['facet_type'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
         </div>
       <?php endif; ?>
     </div>
