@@ -11,7 +11,7 @@ class Img
         'users_cover'           => '/uploads/users/cover/',
         'users_cover_small'     => '/uploads/users/cover/small/',
 
-        'facets_logo'           => '/uploads/posts/cover/',     
+        'facets_logo'           => '/uploads/facets/logos/',     
         'facets_logo_small'     => '/uploads/facets/logos/small/',
         'facets_cover'          => '/uploads/facets/cover/',
         'facets_cover_small'    => '/uploads/facets/cover/small/',
