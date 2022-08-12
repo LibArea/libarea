@@ -52,7 +52,7 @@ class DetailedController extends Controller
         // Featured Content
         // Рекомендованный контент       
         $facets = WebModel::getItemTopic($item['item_id']);
-        $similar = WebModel::itemSimilars($item['item_id'], $facets[0]['id'], 3);
+        $similar = WebModel::itemSimilars($item['item_id'], $facets[0]['id'] ?? false, 3);
 
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
@@ -66,7 +66,7 @@ class DetailedController extends Controller
                     'item'              => $item,
                     'tree'              => $tree,
                     'item_signed'       => SubscriptionModel::getFocus($item['item_id'], $this->user['id'], 'item'),
-                    'similar'           => $similar,
+                    'similar'           => $similar ?? [],
                     'user_count_site'   => $count_site,
                     'related_posts'     => $related_posts ?? [],
                 ]

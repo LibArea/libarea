@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<label><?= __('admin.build'); ?> CSS</label>
+<label><?= __('admin.build'); ?> JS / CSS</label>
 <div class="update btn btn-primary" data-type="css"><?= __('admin.build'); ?></div>
 <fieldset>
   <label><?= __('admin.topics'); ?> / <?= __('admin.posts'); ?></label>
