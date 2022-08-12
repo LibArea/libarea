@@ -5,26 +5,24 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
 
     Route::get('/')->module('admin', 'App\Home')->name('admin');
 
-    Route::getType('post');
-        Route::get('/test/mail')->module('admin', 'App\Console@testMail')->name('admin.test.mail');
-        Route::get('/user/ban')->module('admin', 'App\Users@banUser');
-        Route::get('/favicon/add')->module('admin', 'App\Webs@favicon');
-        Route::get('/screenshot/add')->module('admin', 'App\Webs@screenshot');
-        Route::get('/word/ban')->module('admin', 'App\Words@deletes');
-        Route::get('/audit/status')->module('admin', 'App\Audits@status');
-        Route::get('/reports/saw')->module('admin', 'App\Audits@saw');
-        Route::get('/topic/ban')->module('admin', 'App\Facets@deletes');
-        Route::get('/badge/remove')->module('admin', 'App\Badges@remove');
-        Route::get('/manual/update')->module('admin', 'App\Console'); 
-        
-        Route::getProtect();
-            Route::get('/badge/user/create')->module('admin', 'App\Badges@rewarding')->name('admin.user.badge.create');
-            Route::get('/badge/create')->module('admin', 'App\Badges@create')->name('admin.badge.create');
-            Route::get('/badge/edit/{id}')->module('admin', 'App\Badges@change')->name('admin.badge.change');
-            Route::get('/word/create')->module('admin', 'App\Words@create')->name('admin.word.create');
-            Route::get('/user/edit/{id}')->module('admin', 'App\Users@change')->name('admin.user.change');
-        Route::endProtect();
-    Route::endType();
+    Route::post('/test/mail')->module('admin', 'App\Console@testMail')->name('admin.test.mail');
+    Route::post('/user/ban')->module('admin', 'App\Users@banUser');
+    Route::post('/favicon/add')->module('admin', 'App\Webs@favicon');
+    Route::post('/screenshot/add')->module('admin', 'App\Webs@screenshot');
+    Route::post('/word/ban')->module('admin', 'App\Words@deletes');
+    Route::post('/audit/status')->module('admin', 'App\Audits@status');
+    Route::post('/reports/saw')->module('admin', 'App\Audits@saw');
+    Route::post('/topic/ban')->module('admin', 'App\Facets@deletes');
+    Route::post('/badge/remove')->module('admin', 'App\Badges@remove');
+    Route::post('/manual/update')->module('admin', 'App\Console'); 
+    
+    Route::getProtect();
+        Route::post('/badge/user/create')->module('admin', 'App\Badges@rewarding')->name('admin.user.badge.create');
+        Route::post('/badge/create')->module('admin', 'App\Badges@create')->name('admin.badge.create');
+        Route::post('/badge/edit/{id}')->module('admin', 'App\Badges@change')->name('admin.badge.change');
+        Route::post('/word/create')->module('admin', 'App\Words@create')->name('admin.word.create');
+        Route::post('/user/edit/{id}')->module('admin', 'App\Users@change')->name('admin.user.change');
+    Route::endProtect();
   
     Route::get('/tools')->module('admin', 'App\Tools')->name('admin.tools');
 
@@ -42,7 +40,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
    
     Route::get('/answers/deleted/{page?}')->controller('Answer\AnswerController', ['deleted'])->name('answers.deleted');
     Route::get('/comments/deleted/{page?}')->controller('Comment\CommentController', ['deleted'])->name('comments.deleted');
-    
     
     Route::get('/web/deleted/{page?}')->controller('Item\HomeController', ['deleted'])->name('web.deleted');
     Route::get('/web/audits/{page?}')->controller('Item\HomeController', ['audits'])->name('web.audits');

@@ -1,26 +1,24 @@
 <?php
 
-// https://phphleb.ru/ru/v1/groups/
+// https://phphleb.ru/ru/v1/types/
 Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
-    Route::getType('post');
-        Route::get('/flag/repost')->controller('AuditController@report');
-        Route::get('/backend/upload/{type}/{id}')->controller('Post\EditPostController@uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
-        Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
-        Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
-        Route::get('/comment/editform')->controller('Comment\EditCommentController');
-        Route::get('/reply/editform')->controller('Item\ReplyController');
-        // @ users | posts | topics | category
-        Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
-         
-            Route::getProtect();
-                Route::before('Restrictions')->getGroup();
-                    Route::get('/user/edit/{type}')->controller('User\SettingController@change')->where(['type' => '[a-z]+'])->name('setting.change');
-                    // Отправка / изменение контента
-                    Route::get('/create/{type}')->controller('FormController@create')->name('content.create');
-                    Route::get('/change/{type}')->controller('FormController@change')->name('content.change');
-                Route::endProtect();
-           Route::endGroup();       
-    Route::endType();
+    Route::post('/flag/repost')->controller('AuditController@report');
+    Route::post('/backend/upload/{type}/{id}')->controller('Post\EditPostController@uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
+    Route::post('/status/action')->controller('ActionController@deletingAndRestoring');
+    Route::post('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
+    Route::post('/comment/editform')->controller('Comment\EditCommentController');
+    Route::post('/reply/editform')->controller('Item\ReplyController');
+    // @ users | posts | topics | category
+    Route::post('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
+     
+    Route::getProtect();
+        Route::before('Restrictions')->getGroup();
+            Route::post('/user/edit/{type}')->controller('User\SettingController@change')->where(['type' => '[a-z]+'])->name('setting.change');
+            // Отправка / изменение контента
+            Route::post('/create/{type}')->controller('FormController@create')->name('content.create');
+            Route::post('/change/{type}')->controller('FormController@change')->name('content.change');
+        Route::endProtect();
+    Route::endGroup();       
 
     // Формы добавления и изменения
     Route::before('Restrictions')->getGroup();
@@ -57,45 +55,34 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/invitations')->controller('User\InvitationsController@invitationForm')->name('invitations');
 
     Route::get('/logout')->controller('Auth\LogoutController')->name('logout');
-
     Route::get('/topics/my/{page?}')->controller('Facets\AllFacetController', ['my', 'topic'])->name('topics.my');
- 
     Route::get('/post/scroll/{page?}')->controller('HomeController@scroll'); 
- 
     Route::get('/blogs/my')->controller('Facets\AllFacetController', ['my', 'blog'])->name('blogs.my');
- 
     Route::get('/all/{page?}')->controller('HomeController', ['all'])->name('main.all');
-    
 Route::endGroup();
 
 Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();
-    Route::getType('post');
-        Route::getProtect();
-            Route::get('/recover/send')->controller('Auth\RecoverController')->name('recover.send'); 
-            Route::get('/recover/send/pass')->controller('Auth\RecoverController@remindNew')->name('new.pass'); 
-            Route::get('/register/add')->controller('Auth\RegisterController')->name('register.add');
-            Route::get('/login')->controller('Auth\LoginController')->name('enterLogin');
-        Route::endProtect();
-    Route::endType();
+    Route::getProtect();
+        Route::post('/recover/send')->controller('Auth\RecoverController')->name('recover.send'); 
+        Route::post('/recover/send/pass')->controller('Auth\RecoverController@remindNew')->name('new.pass'); 
+        Route::post('/register/add')->controller('Auth\RegisterController')->name('register.add');
+        Route::post('/login')->controller('Auth\LoginController')->name('enterLogin');
+    Route::endProtect();
 
     Route::get('/invite')->controller('User\InvitationsController@inviteForm')->name('invite');
 	Route::get('/register')->controller('Auth\RegisterController@showRegisterForm')->name('register');
     
-    Route::getType('get');
-        Route::get('/register/invite/{code}')->controller('Auth\RegisterController@showInviteForm')->where(['code' => '[a-z0-9-]+'])->name('invite.reg');
-        Route::get('/recover')->controller('Auth\RecoverController@showPasswordForm')->name('recover');  
-        Route::get('/recover/remind/{code}')->controller('Auth\RecoverController@showRemindForm')->where(['code' => '[A-Za-z0-9-]+'])->name('recover.code');
-        Route::get('/email/activate/{code}')->controller('Auth\RecoverController@ActivateEmail')->where(['code' => '[A-Za-z0-9-]+'])->name('activate.code');
-        Route::get('/login')->controller('Auth\LoginController@showLoginForm')->name('login');
-    Route::endType();
+    Route::get('/register/invite/{code}')->controller('Auth\RegisterController@showInviteForm')->where(['code' => '[a-z0-9-]+'])->name('invite.reg');
+    Route::get('/recover')->controller('Auth\RecoverController@showPasswordForm')->name('recover');  
+    Route::get('/recover/remind/{code}')->controller('Auth\RecoverController@showRemindForm')->where(['code' => '[A-Za-z0-9-]+'])->name('recover.code');
+    Route::get('/email/activate/{code}')->controller('Auth\RecoverController@ActivateEmail')->where(['code' => '[A-Za-z0-9-]+'])->name('activate.code');
+    Route::get('/login')->controller('Auth\LoginController@showLoginForm')->name('login');
 Route::endGroup();
 
-Route::getType('post');
-    Route::getProtect();
-        Route::get('/comments/addform')->controller('Comment\AddCommentController');
-        Route::get('/reply/addform')->controller('Item\ReplyController@addForma');
-    Route::endProtect();    
-Route::endType();
+Route::getProtect();
+    Route::post('/comments/addform')->controller('Comment\AddCommentController');
+    Route::post('/reply/addform')->controller('Item\ReplyController@addForma');
+Route::endProtect();    
   
 Route::get('/search')->controller('SearchController', ['post'])->name('search');
 Route::get('/search/go')->controller('SearchController@go', ['post'])->name('search.go');
