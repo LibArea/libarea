@@ -150,7 +150,7 @@ aside ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
 }
 
 aside ul a { color: var(--gray); }
@@ -250,16 +250,7 @@ details[open] > summary {
   padding: 0.5rem 0;
 }
 
-ul.last-content {
-  list-style: none;
-  font-size: 0.875rem;
-  padding: 0;
-  margin: 0;
-}
-
-ul.last-content li {
-  margin-bottom: 15px;
-}
+ul.last-content li { margin-bottom: 15px; }
 
 ul.last-content li a {
   display: inline;
