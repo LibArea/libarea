@@ -24,7 +24,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
   <form class="max-w780" action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
     <?= csrf_field() ?>
-    <?= insert('/_block/facet/facet-type', ['type' => $fs['facet_type']]); ?>
+    <?= insert('/_block/form/facet-type', ['type' => $fs['facet_type']]); ?>
 
     <div class="file-upload mb10 mt15" id="file-drag">
       <div class="flex">
