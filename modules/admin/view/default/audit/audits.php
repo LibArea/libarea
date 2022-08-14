@@ -102,7 +102,7 @@
           <?php else : ?>
             <div class="<?php if ($audit['read_flag'] == 0) : ?> bg-red-200<?php endif; ?>">
               <span class="report-saw" data-id="<?= $audit['audit_id']; ?>">
-                <svg class="icons icon-max gray">
+                <svg class="icons gray">
                   <use xlink:href="/assets/svg/icons.svg#circle"></use>
                 </svg>
               </span>
