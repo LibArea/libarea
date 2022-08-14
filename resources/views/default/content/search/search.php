@@ -5,7 +5,7 @@ $sw = $sw ?? '?';
 <main class="box">
 
   <?php foreach ($data['tags'] as $tag) : ?>
-    <?php $url = $type == 'post' ? url('topic', ['slug' => $tag['facet_slug']]) : url('web.dir', ['grouping' => 'all', 'slug' => $tag['facet_slug']]);?>
+    <?php $url = $type == 'post' ? url('topic', ['slug' => $tag['facet_slug']]) : url('category', ['sort' => 'all', 'slug' => $tag['facet_slug']]);?>
     <a class="mr20 tag" href="<?= $url; ?>">
       <?= $tag['facet_title']; ?>
     </a>
@@ -47,7 +47,7 @@ $sw = $sw ?? '?';
           </div>
         <?php else : ?>
           <div>
-            <?= Img::facets($result['facet_list'], 'topic', 'topic', 'tag mr15'); ?>
+            <?= Img::facets($result['facet_list'], 'topic', 'tag mr15'); ?>
           </div>
         <?php endif; ?>
         <?= Content::fragment(Content::text($result['content'], 'line'), 250); ?>

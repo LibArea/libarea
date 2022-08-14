@@ -21,7 +21,7 @@ class RedirectController extends Controller
                 $utl = url('blog', ['slug' => $facet['facet_slug']]);
                 break;
             case 'category':
-                $utl = url('web.dir', ['grouping' => 'all', 'slug' => $facet['facet_slug']]);
+                $utl = url('category', ['sort' => 'all', 'slug' => $facet['facet_slug']]);
                 break;
             case 'section':
                 $utl = url('admin.facets.type', ['type' => 'section']);

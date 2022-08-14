@@ -24,8 +24,8 @@ use Hleb\Constructor\Handlers\Request; ?>
               </h3>
             </a>
             <div class="flex gap lowercase">
-              <?= Img::facets($post['facet_list'], 'blog', 'blog', 'gray text-sm'); ?>
-              <?= Img::facets($post['facet_list'], 'topic', 'topic', 'gray-600 text-sm'); ?>
+              <?= Img::facets($post['facet_list'], 'blog', 'gray text-sm'); ?>
+              <?= Img::facets($post['facet_list'], 'topic', 'gray-600 text-sm'); ?>
               <?php if ($post['post_url_domain']) : ?>
                 <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                   <svg class="icons">

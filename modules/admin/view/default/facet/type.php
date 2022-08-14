@@ -25,7 +25,7 @@
     <?php
     switch ($topic['facet_type']):
       case 'category':
-        $url    = url('web.dir', ['grouping' => 'all', 'slug' => $topic['facet_slug']]);
+        $url    = url('category', ['sort' => 'all', 'slug' => $topic['facet_slug']]);
         break;
       default:
         $url = url($topic['facet_type'], ['slug' => $topic['facet_slug']]);
@@ -73,7 +73,7 @@
           <svg class="icons gray-600 text-sm mr5 ml5">
             <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
           </svg>
-          <?= Img::facets($topic['matching_list'], $topic['facet_type'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
+          <?= Img::facets($topic['matching_list'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
         </div>
       <?php endif; ?>
     </div>

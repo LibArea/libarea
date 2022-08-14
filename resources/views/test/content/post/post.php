@@ -22,8 +22,8 @@
               <?= $post['post_title']; ?>
               <?= insert('/content/post/post-title', ['post' => $post]); ?>
           </a>
-          <?= Img::facets($post['facet_list'], 'blog', 'blog', 'tag'); ?>
-          <?= Img::facets($post['facet_list'], 'topic', 'topic', 'tag-yellow'); ?>
+          <?= Img::facets($post['facet_list'], 'blog', 'tag'); ?>
+          <?= Img::facets($post['facet_list'], 'topic', 'tag-yellow'); ?>
         </div>
         <div class="flex text-sm mt3">
           <a class="items-center gray-600 mr10" href="<?= url('profile', ['login' => $post['login']]); ?>">

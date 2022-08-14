@@ -45,7 +45,7 @@ class DirController extends Controller
 
         $m = [
             'og'    => false,
-            'url'   => url('web.dir', ['sort' => 'all', 'slug' => $category['facet_slug']]),
+            'url'   => url('category', ['sort' => 'all', 'slug' => $category['facet_slug']]),
         ];
 
         $title = __('web.' . $sort . '_title', ['name' => $category['facet_title']]);
@@ -87,7 +87,7 @@ class DirController extends Controller
 
         $result = [];
         foreach ($tree as $row) {
-            $result[] = ["name" => $row['name'], "link" => url('web.dir', ['sort' => $sort, 'slug' => $row['link']])];
+            $result[] = ["name" => $row['name'], "link" => url('category', ['sort' => $sort, 'slug' => $row['link']])];
         }
 
         return array_merge($arr, $result);

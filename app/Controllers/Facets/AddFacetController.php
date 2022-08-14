@@ -84,6 +84,7 @@ class AddFacetController extends Controller
         SubscriptionModel::focus($new_facet_id['facet_id'], $this->user['id'], 'facet');
 
         $msg = $type == 'blog' ? __('msg.blog_added') : __('msg.change_saved');
-        is_return($msg, 'success', '/' . $facet_type . '/' . $facet_slug);
+
+        is_return($msg, 'success', url('redirect.facet', ['id' => $new_facet_id['facet_id']]));
     }
 }

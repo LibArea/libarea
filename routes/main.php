@@ -131,9 +131,9 @@ Route::get('/domain/{domain}/{page?}')->controller('Post\PostController@domain',
 
 Route::get('/web')->controller('Item\HomeController')->name('web');
 Route::get('/web/website/{slug}')->controller('Item\DetailedController')->name('website');
-Route::get('/web/dir/{sort}/{slug}')->controller('Item\DirController')->name('web.dir');
+Route::get('/web/dir/{sort}/{slug}')->controller('Item\DirController')->name('category');
 Route::get('/web/dir/{sort}/{slug}/page/{page?}')->controller('Item\DirController');
-Route::get('/web/{grouping}/dir/{sort}/{slug}')->controller('Item\DirController')->name('web.dir.gr');
+Route::get('/web/{grouping}/dir/{sort}/{slug}')->controller('Item\DirController');
 
 Route::type(['get', 'post'])->get('/cleek')->controller('Item\DirController@cleek');
 
