@@ -53,7 +53,7 @@ class RecoverController extends Controller
             is_return(__('msg.account_verified'), 'error', $redirect);
         }
 
-        $code = $uInfo['id'] . '-' . Html::randomString('crypto', 25);
+        $code = $uInfo['id'] . '-' . Html::randomString('crypto', 24);
         UserModel::initRecover(
             [
                 'activate_date'     => date('Y-m-d H:i:s'),

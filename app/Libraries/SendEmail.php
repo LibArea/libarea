@@ -2,9 +2,8 @@
 
 use App\Models\User\{SettingModel, UserModel};
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+use Phphleb\Muller\StandardMail;
+use Phphleb\Muller\Src\DefaultMail;
 
 class SendEmail
 {
@@ -58,49 +57,37 @@ class SendEmail
 
     public static function send($email, $subject = '', $message = '')
     {
-        $mail = new PHPMailer();
-
         if (config('integration.smtp')) {
+                
+            $mailSMTP = new SendMailSmtpClass(config('integration.smtp_user'), config('integration.smtp_pass'), 'ssl://' . config('integration.smtp_host'), config('integration.smtp_port'), "UTF-8");
+            
+            $from = array(
+                config('meta.name'), // Имя отправителя
+                config('integration.smtp_user') // почта отправителя
+            );
 
-            try {
-                // Server settings
-                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                $mail->isSMTP();
-                $mail->CharSet    = "utf-8";
-                $mail->Host       = config('integration.smtp_host');
-                $mail->SMTPAuth   = true;
-                $mail->Username   = config('integration.smtp_user');
-                $mail->Password   = config('integration.smtp_pass');
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                $mail->Port       = config('integration.smtp_port');
+            $result =  $mailSMTP->send($email, $subject, $message, $from); 
 
-                //Recipients
-                $mail->setFrom(config('integration.smtp_user'), config('meta.name'));
-                $mail->addAddress($email, '');
-
-                //Content
-                $mail->isHTML(true);
-                $mail->Subject = $subject;
-                $mail->Body    = $message;
-
-                $mail->send();
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            if($result === true){
+                echo "Done";
+            }else{
+                echo "Error: " . $result;
             }
+
         } else {
-            // При включенной возможно варианты (if enabled, options are possible)
-            // https://github.com/PHPMailer/PHPMailer/issues/2465?ysclid=l665mmji6w128130571#issuecomment-897547946
-            // $mail->isSendmail();
-            $mail->CharSet = "utf-8";
-            $mail->setFrom(config('general.email'), config('meta.title'));
-            $mail->addAddress($email, '');
-            $mail->Subject = $subject;
-            $mail->msgHTML($message);
+            $mail = new \Phphleb\Muller\StandardMail(false);
+            $mail->setNameFrom(config('meta.name')); // вот тут было длинное
+            $mail->setAddressFrom(config('general.email'));
 
-            //send the message, check for errors
-            if (!$mail->send()) {
-                echo 'Mailer Error: ' . $mail->ErrorInfo;
-            }
+            $mail->setTo($email);
+
+            $mail->setTitle($subject);
+            $mail->setContent($message);
+
+            $mail->setDebug(true);
+            $mail->setDebugPath(HLEB_GLOBAL_DIRECTORY . DIRECTORY_SEPARATOR . 'storage/logs');
+
+            $mail->send();
         }
         return true;
     }

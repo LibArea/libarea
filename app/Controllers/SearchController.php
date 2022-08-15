@@ -4,8 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
-use Wamania\Snowball\StemmerFactory;
-use UserData, Meta;
+use UserData, Meta, LinguaStem;
 
 class SearchController extends Controller
 {
@@ -37,12 +36,11 @@ class SearchController extends Controller
         if ($q) {
 
             $lang = config('general.lang');
-            if (!in_array($lang, ['ru', 'en', 'ro', 'fr', 'de'])) {
+            if (!in_array($lang, ['ru', 'en'])) {
                 $lang = 'en';
             }
-
-            $stemmer = StemmerFactory::create($lang);
-            $stem = $stemmer->stem($q);
+            $stem = new LinguaStem($lang);
+            $stem = $stem->text($q);
 
             $results = SearchModel::getSearch($pageNumber, $this->limit, $stem, $type);
             $count =  SearchModel::getSearchCount($stem, $type);

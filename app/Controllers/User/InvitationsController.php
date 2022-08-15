@@ -68,7 +68,7 @@ class InvitationsController extends Controller
             is_return(__('msg.invate_limit_stop'), 'error', $redirect);
         }
 
-        $invitation_code = Html::randomString('crypto', 25);
+        $invitation_code = Html::randomString('crypto', 24);
 
         InvitationModel::create(
             [
