@@ -74,4 +74,10 @@ class Console
         }
         return true;
     }
+    
+    public static function migrations()
+    {
+       return true; 
+    }
+    
 }
