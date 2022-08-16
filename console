@@ -20,4 +20,4 @@ define('TEMPLATES', realpath(HLEB_GLOBAL_DIRECTORY . '/resources/views'));
 */
 define('HLEB_SEARCH_DBASE_CONFIG_FILE', realpath(HLEB_GLOBAL_DIRECTORY . '/config'));
 
-require realpath(__DIR__ . '/app/ThirdParty/phphleb/framework/console.php');
+require realpath(__DIR__ . '/vendor/phphleb/framework/console.php');
