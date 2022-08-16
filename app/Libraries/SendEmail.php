@@ -2,9 +2,6 @@
 
 use App\Models\User\{SettingModel, UserModel};
 
-use Phphleb\Muller\StandardMail;
-use Phphleb\Muller\Src\DefaultMail;
-
 class SendEmail
 {
     public static function mailText($uid, $type, array $variables = [])
@@ -58,22 +55,21 @@ class SendEmail
     public static function send($email, $subject = '', $message = '')
     {
         if (config('integration.smtp')) {
-                
-            $mailSMTP = new SendMailSmtpClass(config('integration.smtp_user'), config('integration.smtp_pass'), 'ssl://' . config('integration.smtp_host'), config('integration.smtp_port'), "UTF-8");
-            
+
+            $mailSMTP = new \SmtpMail\SendMailSmtpClass(config('integration.smtp_user'), config('integration.smtp_pass'), 'ssl://' . config('integration.smtp_host'), config('integration.smtp_port'), "UTF-8");
+
             $from = array(
                 config('meta.name'), // Имя отправителя
                 config('integration.smtp_user') // почта отправителя
             );
 
-            $result =  $mailSMTP->send($email, $subject, $message, $from); 
+            $result =  $mailSMTP->send($email, $subject, $message, $from);
 
-            if($result === true){
+            if ($result === true) {
                 echo "Done";
-            }else{
+            } else {
                 echo "Error: " . $result;
             }
-
         } else {
             $mail = new \Phphleb\Muller\StandardMail(false);
             $mail->setNameFrom(config('meta.name')); // вот тут было длинное
