@@ -1,8 +1,16 @@
 <fieldset>
   <label for="post_title"><?= __('app.heading'); ?></label>
-  <input minlength="6" maxlength="250" id="title" value="<?= $post['post_title']; ?>" type="text" required="" name="post_title">
+  <input minlength="6" maxlength="250" id="title" value="<?= $post['post_title']; ?>" type="text" required name="post_title">
   <div class="help">6 - 250 <?= __('app.characters'); ?></div>
 </fieldset>
+
+<?php if (UserData::checkAdmin()) : ?>
+  <fieldset>
+    <label for="post_slug">SLUG (URL)</label>
+    <input minlength="6" maxlength="250" value="<?= $post['post_slug']; ?>" type="text" required name="post_slug">
+    <div class="help">> 6 <?= __('app.characters'); ?></div>
+  </fieldset>
+<?php endif; ?>
 
 <?= insert('/_block/form/select/select', [
   'data'          => $data,

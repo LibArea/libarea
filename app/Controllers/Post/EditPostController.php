@@ -95,13 +95,14 @@ class EditPostController extends Controller
 
         if (UserData::checkAdmin()) {
             $post_merged_id = Request::getPostInt('post_merged_id');
+            $post_slug = Request::getPost('post_slug');
         }
 
         PostModel::editPost(
             [
                 'post_id'               => $post_id,
                 'post_title'            => $post_title,
-                'post_slug'             => $post['post_slug'],
+                'post_slug'             => $post_slug ?? $post['post_slug'],
                 'post_feature'          => Request::getPost('post_feature') == 'on' ? 1 : 0,
                 'post_type'             => $new_type,
                 'post_translation'      => Request::getPost('translation') == 'on' ? 1 : 0,
