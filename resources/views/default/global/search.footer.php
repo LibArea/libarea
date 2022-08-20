@@ -1,5 +1,5 @@
 </div>
-<footer class="box-shadow-top">
+<footer class="footer box-shadow-top">
   <?= config('meta.name'); ?> &copy; <?= date('Y'); ?> — <span class="lowercase"><?= __('search.name'); ?></span>
 </footer>
 

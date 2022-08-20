@@ -37,11 +37,6 @@
             <use xlink:href="/assets/svg/icons.svg#info"></use>
           </svg> <?= $row['post_title']; ?>
         </a>
-        <?php if (UserData::checkAdmin()) : ?>
-          <a class="text-sm gray-600" href="<?= url('content.edit', ['type' => $row['post_type'], 'id' => $row['post_id']]) ?>"><svg class="icons">
-              <use xlink:href="/assets/svg/icons.svg#edit"></use>
-            </svg></a>
-        <?php endif; ?>
       </div>
     <?php endforeach; ?>
     <?php if (UserData::checkAdmin()) : ?>

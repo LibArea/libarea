@@ -8,10 +8,12 @@ use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedMod
 use Content, Meta, UserData, Access, Img;
 
 use App\Traits\Views;
+use App\Traits\LastDataModified;
 
 class PostController extends Controller
 {
     use Views;
+    use LastDataModified;
 
     protected $limit = 25;
 
@@ -96,6 +98,9 @@ class PostController extends Controller
             'imgurl'    => $content_img,
             'url'       => url('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
         ];
+
+        // Отправка Last-Modified и обработка HTTP_IF_MODIFIED_SINCE
+        LastDataModified::get($content['post_modified']);
 
         if ($type == 'post') {
             return $this->render(
@@ -238,4 +243,5 @@ class PostController extends Controller
     {
         return PostModel::recent($content_id, null);
     }
+    
 }

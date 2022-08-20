@@ -1,5 +1,5 @@
 <?php if ($post['post_is_deleted'] == 1) : ?><span class="label label-orange"><?= __('app.remote'); ?></span><?php endif; ?>
-<?php if ($post['post_closed'] == 1) : ?>&#128274;<?php endif; ?>
+<?php if ($post['post_closed'] == 1) : ?><span class="gray-600">&#128274;</span><?php endif; ?>
 <?php if ($post['post_top'] == 1) : ?> <span class="label label-red">&#8593;</span> <?php endif; ?>
 <?php if ($post['post_lo']) : ?><span class="red">✓</span><?php endif; ?>
 <?php if ($post['post_feature'] == 1) : ?> <span class="label label-green"><?= __('app.question'); ?></span> <?php endif; ?>

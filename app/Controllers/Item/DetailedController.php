@@ -8,8 +8,12 @@ use App\Models\Item\{WebModel, ReplyModel, UserAreaModel};
 use App\Models\{PostModel, SubscriptionModel};
 use Content, Meta, UserData, Img;
 
+use App\Traits\LastDataModified;
+
 class DetailedController extends Controller
 {
+    use LastDataModified;
+    
     protected $limit = 25;
 
     // Detailed site page
@@ -55,6 +59,9 @@ class DetailedController extends Controller
         $similar = WebModel::itemSimilars($item['item_id'], $facets[0]['id'] ?? false, 3);
 
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+
+        // Отправка Last-Modified и обработка HTTP_IF_MODIFIED_SINCE
+        LastDataModified::get($item['item_modified']);
 
         return $this->render(
             '/item/website',

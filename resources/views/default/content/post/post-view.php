@@ -223,7 +223,7 @@
               <?php endif; ?>
             </a>
           <?php else : ?>
-            <svg class="icons">
+            <svg class="icons gray-600 mr15">
               <use xlink:href="/assets/svg/icons.svg#closed"></use>
             </svg>
           <?php endif; ?>

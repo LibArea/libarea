@@ -115,7 +115,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     </fieldset>
 
     <fieldset>
-      <?= __('app.info'); ?> (sidebar / info)<sup class="red">*</sup>
+      <?= __('app.information'); ?> (sidebar / info)<sup class="red">*</sup>
       <textarea class="add max-w780 block" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
       <div class="mb20 help">Markdown, > 14 <?= __('app.characters'); ?></div>
 

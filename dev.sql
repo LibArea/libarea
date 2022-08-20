@@ -1440,4 +1440,24 @@ ALTER TABLE `votes_post`
 --
 ALTER TABLE `votes_reply`
   MODIFY `votes_reply_id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `items` CHANGE `item_date` `item_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `items` ADD `item_modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `item_date`;
+
+CREATE TABLE `phinx_log` (
+  `version` bigint(20) NOT NULL,
+  `migration_name` varchar(100) DEFAULT NULL,
+  `start_time` timestamp NULL DEFAULT NULL,
+  `end_time` timestamp NULL DEFAULT NULL,
+  `breakpoint` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `phinx_log` (`version`, `migration_name`, `start_time`, `end_time`, `breakpoint`) VALUES
+(20220820063736, 'InitSchemaMigration', '2022-08-20 17:11:31', '2022-08-20 17:13:12', 0),
+(20220820144747, 'EditFieldItemDate', '2022-08-20 17:13:12', '2022-08-20 17:13:15', 0),
+(20220820145740, 'AddFieldItemModifiedDate', '2022-08-20 17:13:15', '2022-08-20 17:13:18', 0);
+
+ALTER TABLE `phinx_log`
+  ADD PRIMARY KEY (`version`);
 COMMIT;

@@ -1,4 +1,4 @@
-footer {
+.footer {
   background-color: var(--white);
   color: var(--gray-600);
   padding: 0.25rem;
@@ -6,22 +6,22 @@ footer {
   margin-top: 1rem;
 }
 
-footer .icon {
+.footer .icon {
   color: var(--gray-600);
   margin-right: 1rem;
 }
 
-footer ul {
+.footer ul {
   padding-left: 60px;
   list-style: none;
   margin: 0;
 }
 
-footer ul li a {
+.footer ul li a {
   font-size: 14px;
   color: var(--gray-600);
   margin-bottom: 5px;
 }
 
-footer ul li a:hover,
-footer .icon:hover { color: #111; }
+.footer ul li a:hover,
+.footer .icon:hover { color: #111; }

@@ -1,5 +1,5 @@
 <main class="wrap">
-  <?= insert('/content/post/post-card', ['data' => $data]); ?>
+  <?= insert('/content/post/post', ['data' => $data]); ?>
   <?php if (UserData::getUserScroll()) : ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>

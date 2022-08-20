@@ -1,5 +1,6 @@
 </div>
-<footer class="box-shadow-top" itemtype="http://schema.org/WPFooter">
+<?php if (!UserData::getUserScroll()) : ?>
+<footer class="footer box-shadow-top" itemtype="http://schema.org/WPFooter">
   <div class="wrap">
     <div class="left">
       <div class="mb5">
@@ -28,11 +29,13 @@
         <li><a href="<?= url('comments'); ?>"><?= __('app.comments'); ?></a></li>
       </ul>
       <ul>
-        <li><a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => config('facets.page-one')]); ?>"><?= __('app.info'); ?></a></li>
-        <li><a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => config('facets.page-two')]); ?>"><?= __('app.privacy'); ?></a></li>
+        <?php foreach (config('facets.page') as $page) : ?>
+          <li><a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $page]); ?>"><?= __('app.' . $page); ?></a></li>
+        <?php endforeach; ?>
       </ul>
     </div>
   </div>
 </footer>
+<?php endif; ?>
 
 <?= insert('/scripts'); ?>

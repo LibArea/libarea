@@ -12,6 +12,16 @@ use Hleb\Constructor\Handlers\Request; ?>
 
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="box box-fon article_<?= $post['post_id']; ?>">
+      <div class="flex items-center text-sm mb5">
+          <a class="black flex items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
+            <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'max'); ?>
+            <span<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> class="green" <?php endif; ?>>
+              <?= $post['login']; ?>
+              </span>
+          </a>
+          <div class="gray-600 ml5 lowercase"><?= Html::langDate($post['post_date']); ?></div>
+          <?= Img::facets($post['facet_list'], 'blog', 'brown ml10'); ?>
+      </div>
       <div class="mb15">
         <a class="black" href="<?= $post_url; ?>">
           <h3 class="title"><?= $post['post_title']; ?>
@@ -20,7 +30,6 @@ use Hleb\Constructor\Handlers\Request; ?>
         </a>
 
         <div class="flex gap lowercase">
-          <?= Img::facets($post['facet_list'], 'blog', 'gray text-sm'); ?>
           <?= Img::facets($post['facet_list'], 'topic', 'gray-600 text-sm'); ?>
           <?php if ($post['post_url_domain']) : ?>
             <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
@@ -58,14 +67,6 @@ use Hleb\Constructor\Handlers\Request; ?>
 
       <div class="flex flex-row items-center justify-between">
         <div class="flex gap text-sm flex-row">
-          <a class="black" href="<?= url('profile', ['login' => $post['login']]); ?>">
-            <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'max'); ?>
-            <span<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> class="green" <?php endif; ?>>
-              <?= $post['login']; ?>
-              </span>
-          </a>
-
-          <div class="gray-600 mb-none lowercase"><?= Html::langDate($post['post_date']); ?></div>
           <?= Html::votes($post, 'post'); ?>
 
           <?php if ($post['post_answers_count'] != 0) : ?>

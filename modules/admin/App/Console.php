@@ -77,7 +77,7 @@ class Console
     
     public static function migrations()
     {
-       return true; 
+        return true;
     }
     
 }
