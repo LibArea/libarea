@@ -22,12 +22,6 @@
         <?php endif; ?>
 
         <div class="flex flex-row items-center">
-          <?php if (!empty($data['blog'])) : ?>
-            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="tag-violet" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
-              <?= $data['blog'][0]['facet_title']; ?>
-            </a>
-          <?php endif; ?>
-
           <?php if (!empty($data['facets'])) : ?>
             <?php foreach ($data['facets'] as $topic) : ?>
               <a class="tag" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>"><?= $topic['facet_title']; ?></a>
@@ -128,14 +122,25 @@
           <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'text-2xl ml5'); ?>
         </div>
       </div>
-      <div class="box bg-lightgray">
-        <a class="black" title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
-          <?= Img::avatar($post['avatar'], $post['login'], 'img-base mr5', 'small'); ?>
-          <?= $post['login']; ?>
-        </a>
-        <?php if ($post['up_count'] > 0) : ?>
-          <sup class="text-sm gray-600 inline"><span class="red">+</span> <?= Html::formatToHuman($post['up_count']); ?></sup>
-        <?php endif; ?>
+      <div class="box-flex justify-between bg-lightgray ">
+        <div>
+          <a class="black" title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
+            <?= Img::avatar($post['avatar'], $post['login'], 'img-base mr5', 'small'); ?>
+            <?= $post['login']; ?>
+          </a>
+          <?php if ($post['up_count'] > 0) : ?>
+            <sup class="text-sm gray-600 inline"><span class="red">+</span> <?= Html::formatToHuman($post['up_count']); ?></sup>
+          <?php endif; ?>
+        </div>
+
+        <div>
+          <?php if (!empty($data['blog'])) : ?>
+            <span class="gray-600 mr5 mb-none"><?= __('app.published'); ?> </span>
+            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="bg-white p5 brown" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
+              <?= $data['blog'][0]['facet_title']; ?>
+            </a>
+          <?php endif; ?>
+        </div>
       </div>
 
       <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>

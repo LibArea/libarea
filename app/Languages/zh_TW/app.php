@@ -190,6 +190,8 @@ return [
     'edit_page'         => '编辑页面',
     'edit_section'      => '编辑部分',
 
+    'published'         => '發表於',
+
     'being_developed'   => '正在开发中',
     'activity'          => '活动',
     'question'          => '问题',

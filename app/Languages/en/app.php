@@ -188,6 +188,8 @@ return [
     'edit_blog'         => 'Edit blog',
     'edit_page'         => 'Edit page',
     'edit_section'      => 'Edit Section',
+    
+    'published'         => 'Published in',
 
     'being_developed'   => 'Under development',
     'activity'          => 'Activity',

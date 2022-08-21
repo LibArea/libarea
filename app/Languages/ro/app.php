@@ -189,6 +189,8 @@ return [
     'edit_page'         => 'Editați pagina',
     'edit_section'      => 'Editează secțiunea',
 
+    'published'         => 'Publicat în',
+
     'being_developed'   => 'In dezvoltare',
     'activity'          => 'Activitate',
     'question'          => 'Întrebare',

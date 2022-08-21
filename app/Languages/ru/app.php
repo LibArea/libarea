@@ -188,6 +188,8 @@ return [
     'edit_blog'         => 'Изменить блог',
     'edit_page'         => 'Изменить страницу',
     'edit_section'      => 'Изменить раздел',
+    
+    'published'         => 'Опубликовано в',
 
     'being_developed'   => 'В стадии разработки',
     'activity'          => 'Активность',
