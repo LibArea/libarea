@@ -139,6 +139,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                                     AND post_draft = 0
                                     AND post_tl <= :tl 
                                     AND post_user_id != :id
+                                    AND post_type = 'post'
                                     AND relation_facet_id = :facet_id
                                         ORDER BY post_id DESC LIMIT :limit";
 
