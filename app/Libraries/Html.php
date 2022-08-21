@@ -27,18 +27,21 @@ class Html
         if (($a[0] . $a[1] . $a[2]) == $today) {
             //Если сегодня
             return (__('app.today') . ' ' . $a[3] . ':' . $a[4]);
-        } else {
-            $b = explode('-', date("Y-m-d"));
-            $tom = date('Ymd', mktime(0, 0, 0, $b[1], $b[2] - 1, $b[0]));
-            if (($a[0] . $a[1] . $a[2]) == $tom) {
-                //Если вчера
-                return (__('app.yesterday') . ' ' . $a[3] . ':' . $a[4]);
-            } else {
-                //Если позже
-                $mm = intval($a[1]);
-                return ($a[2] . " " . $months[$mm] . " " . $a[0] . " " . $a[3] . ":" . $a[4]);
-            }
+        } 
+
+        $b = explode('-', date("Y-m-d"));
+        $tom = date('Ymd', mktime(0, 0, 0, $b[1], $b[2] - 1, $b[0]));
+        if (($a[0] . $a[1] . $a[2]) == $tom) {
+            //Если вчера
+            return (__('app.yesterday') . ' ' . $a[3] . ':' . $a[4]);
+        } 
+
+        //Если позже
+        $mm = intval($a[1]);
+        if (date("Y") == $a[0]) {
+            return ($a[2] . " " . $months[$mm]); // без года
         }
+        return ($a[2] . " " . $months[$mm] . " " . $a[0]);
     }
 
     // Voting for posts, replies, comments and sites

@@ -9,12 +9,11 @@ return [
     // Количество тем и блогов которые читает участник на боковой панели
     'quantity_home' => 5,
 
-    // Pages with information about the site (link in the footer of the site) 
-    // The URL must match the SLUG of the posts attached to the Info facet
-    // Страницы с информацией про сайт (ссылка в подвале сайта)
-    // URL должен совпадать с SLUG постов прикрепленного с фасету Информация
-    'page-one'      => 'information',
-    'page-two'      => 'privacy',
+    // Pages with information about the site (links in the footer of the site)
+    // Note that the data is not only the SLUG of the page, but also has a translation
+    // Страницы с информацией про сайт (ссылки в подвале сайта)
+    // Обратите внимание, что данные является не только SLUG страницы, но имеют ещё и перевод
+    'page' => ['information', 'privacy', 'donate'],
     
     // To check existing facet types
     // Для проверки существующих типов фасетов
