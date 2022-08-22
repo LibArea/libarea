@@ -1,7 +1,7 @@
 <fieldset>
-  <label><?= __('app.section'); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?></label>
+  <label><?= __('app.section'); ?></label>
   <input name="section_select" id="section_id">
-  <?php if (!empty($help)) { ?><div class="help"><?= $help; ?>...</div><?php } ?>
+  <div class="help"><?= __('app.post_page'); ?>...</div>
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
@@ -42,12 +42,10 @@
 
     let tagify = new Tagify(input, options);
 
-    <?php if ($action == 'edit') { ?>
-      <?php if (!empty($data['section_arr'])) { ?>
-        tagify.addTags(JSON.parse('<?= json_encode($data['section_arr']) ?>'))
-      <?php } ?>
+    <?php if (!empty($data['section_arr'])) { ?>
+      tagify.addTags(JSON.parse('<?= json_encode($data['section_arr']) ?>'))
     <?php } else { ?>
-        tagify.addTags([])
+      tagify.addTags([])
     <?php }  ?>
   });
 </script>

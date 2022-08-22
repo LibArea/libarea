@@ -38,20 +38,10 @@ $domain = $data['domain']; ?>
 
         <?= component('edit-website', ['domain' => $domain]); ?>
 
-        <?= insert('/_block/form/select/related-posts', [
-          'data'      => $data,
-          'title'     => __('web.related_posts'),
-          'help'      => __('web.necessarily'),
-        ]); ?>
+        <?= insert('/_block/form/select/related-posts', ['data' => $data]); ?>
 
         <?php if (UserData::checkAdmin()) { ?>
-          <?= insert('/_block/form/select/user', [
-            'user'          => $data['user'],
-            'action'        => 'user',
-            'type'          => 'user',
-            'title'         => __('web.author'),
-            'help'          => __('web.necessarily'),
-          ]); ?>
+          <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
         <?php } ?>
 
         <input type="hidden" name="item_id" value="<?= $domain['item_id']; ?>">

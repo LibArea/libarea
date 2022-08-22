@@ -4,20 +4,12 @@
   <div class="help">6 - 250 <?= __('app.characters'); ?></div>
 </fieldset>
 
-<?= insert('/_block/form/select/select', [
-  'data'          => $data['facets'],
-  'type'          => 'topic',
-  'action'        => 'add',
-  'title'         => __('app.facets'),
-  'help'          => __('app.necessarily'),
-  'red'           => 'red'
-]); ?>
+<?= insert('/_block/form/select/topic', ['data'  => $data['facets'], 'action' => 'add']); ?>
 
 <?php if (!empty($data['blog'])) : ?>
   <?= insert('/_block/form/select/blog', [
     'data'        => $data,
     'action'      => 'add',
-    'type'        => 'blog',
     'title'       => __('app.blogs'),
   ]); ?>
 <?php endif; ?>
@@ -87,9 +79,6 @@
    </fieldset>
 <?php endif; ?>
 
-<?= insert('/_block/form/select/related-posts', [
-  'title'         => __('app.related_posts'),
-  'help'          => __('app.necessarily'),
-]); ?>
+<?= insert('/_block/form/select/related-posts'); ?>
 
 <p><?= Html::sumbit(__('app.create')); ?></p>

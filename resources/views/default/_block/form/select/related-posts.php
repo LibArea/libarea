@@ -3,8 +3,9 @@
 // Related posts
 ?>
 <fieldset>
-  <label><?= $title; ?></label>
+  <label><?= __('app.related_posts'); ?></label>
   <input name="post_select" id="post_id">
+  <div class="help"><?= __('app.necessarily'); ?></div>
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">

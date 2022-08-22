@@ -55,7 +55,7 @@
         }])
       <?php } else { ?>
         tagify.addTags([])
-      <?php }  ?>
-    <?php }  ?>
+      <?php } ?>
+    <?php } ?>
   });
 </script>

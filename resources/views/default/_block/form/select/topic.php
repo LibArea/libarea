@@ -1,12 +1,12 @@
 <fieldset>
   <label>
-    <?= __('app.' . $type); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
+    <?= __('app.topics'); ?> <sup class="red">*</sup>
   </label>
 
   <?php if ($action == 'edit' || $action == 'add') { ?>
     <input name="facet_select" id="topic_id" required>
   <?php } ?>
-  <?php if (!empty($help)) { ?><div class="help"><?= $help; ?>...</div><?php } ?>
+  <div class="help"><?= __('app.necessarily'); ?>...</div>
 </fieldset>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
@@ -24,7 +24,7 @@
       body: JSON.stringify(props)
     };
     try {
-      const fetchResponse = await fetch('/search/<?= $type; ?>', settings);
+      const fetchResponse = await fetch('/search/topic', settings);
       return await fetchResponse.json();
     } catch (e) {
       return e;

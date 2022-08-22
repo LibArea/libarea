@@ -12,36 +12,18 @@
   </fieldset>
 <?php endif; ?>
 
-<?= insert('/_block/form/select/select', [
-  'data'          => $data,
-  'action'        => 'edit',
-  'type'          => 'topic',
-  'title'         => __('app.topics'),
-  'required'      => false,
-  'maximum'       => 3,
-  'help'          => __('app.necessarily'),
-  'red'           => 'red'
-]); ?>
+<?= insert('/_block/form/select/topic', ['data' => $data, 'action' => 'edit']); ?>
 
 <?php if (!empty($data['blog'])) : ?>
   <?= insert('/_block/form/select/blog', [
     'data'        => $data,
     'action'      => 'edit',
-    'type'        => 'blog',
     'title'       => __('app.blogs'),
   ]); ?>
 <?php endif; ?>
 
 <?php if (UserData::checkAdmin()) : ?>
-  <?= insert('/_block/form/select/section', [
-    'data'          => $data,
-    'action'        => 'edit',
-    'type'          => 'section',
-    'title'         => __('app.section'),
-    'required'      => false,
-    'maximum'       => 1,
-    'help'          => __('app.post_page'),
-  ]); ?>
+  <?= insert('/_block/form/select/section', ['data' => $data]); ?>
 <?php endif; ?>
 
 <?php if ($post['post_url']) : ?>
@@ -116,21 +98,11 @@
 <?php endif; ?>
 
 <?php if (UserData::checkAdmin()) : ?>
-  <?= insert('/_block/form/select/user', [
-    'user'          => $data['user'],
-    'action'        => 'user',
-    'type'          => 'user',
-    'title'         => __('app.author'),
-    'help'          => __('app.necessarily'),
-  ]); ?>
+  <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
 <?php endif; ?>
 
 <?php if ($post['post_type'] == 'post') : ?>
-  <?= insert('/_block/form/select/related-posts', [
-    'data'          => $data,
-    'title'         => __('app.related_posts'),
-    'help'          => __('app.necessarily'),
-  ]); ?>
+  <?= insert('/_block/form/select/related-posts', ['data' => $data]); ?>
 <?php endif; ?>
 
 <?php if (UserData::checkAdmin()) : ?>

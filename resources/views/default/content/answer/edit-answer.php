@@ -12,13 +12,7 @@ $url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $data['answer']['answer_content'], 'type' => 'answer', 'id' => $post['post_id']]); ?>
 
     <?php if (UserData::checkAdmin()) : ?>
-      <?= insert('/_block/form/select/user', [
-        'user'      => $data['user'],
-        'action'    => 'user',
-        'type'      => 'user',
-        'title'     => __('app.author'),
-        'help'      => __('app.necessarily'),
-      ]); ?>
+      <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
     <?php endif; ?>
 
     <input type="hidden" name="answer_id" value="<?= $data['answer']['answer_id']; ?>">

@@ -120,11 +120,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <div class="mb20 help">Markdown, > 14 <?= __('app.characters'); ?></div>
 
       <?php if ($fs['facet_type'] != 'blog') : ?>
-        <?= insert('/_block/form/select/related-posts', [
-          'data'          => $data,
-          'title'         => __('app.related_posts'),
-          'help'          => __('app.necessarily'),
-        ]); ?>
+        <?= insert('/_block/form/select/related-posts', ['data' => $data]); ?>
 
         <?= insert('/_block/form/select/low-matching-facets', [
           'data'          => $data,
@@ -142,13 +138,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
   </fieldset>
 
   <?php if (UserData::checkAdmin()) : ?>
-    <?= insert('/_block/form/select/user', [
-      'user'    => $data['user'],
-      'action'  => 'user',
-      'type'    => 'user',
-      'title'   => __('app.author'),
-      'help'    => __('app.necessarily'),
-    ]); ?>
+    <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
   <?php endif; ?>
 
   <fieldset>
