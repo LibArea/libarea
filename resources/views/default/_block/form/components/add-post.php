@@ -88,9 +88,6 @@
 <?php endif; ?>
 
 <?= insert('/_block/form/select/related-posts', [
-  'data'          => [],
-  'action'        => 'add',
-  'type'          => 'post',
   'title'         => __('app.related_posts'),
   'help'          => __('app.necessarily'),
 ]); ?>

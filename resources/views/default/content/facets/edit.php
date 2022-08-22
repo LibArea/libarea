@@ -122,8 +122,6 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <?php if ($fs['facet_type'] != 'blog') : ?>
         <?= insert('/_block/form/select/related-posts', [
           'data'          => $data,
-          'action'        => 'edit',
-          'type'          => 'post',
           'title'         => __('app.related_posts'),
           'help'          => __('app.necessarily'),
         ]); ?>

@@ -40,8 +40,6 @@ $domain = $data['domain']; ?>
 
         <?= insert('/_block/form/select/related-posts', [
           'data'      => $data,
-          'action'    => 'edit',
-          'type'      => 'post',
           'title'     => __('web.related_posts'),
           'help'      => __('web.necessarily'),
         ]); ?>

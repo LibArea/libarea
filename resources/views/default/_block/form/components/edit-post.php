@@ -128,8 +128,6 @@
 <?php if ($post['post_type'] == 'post') : ?>
   <?= insert('/_block/form/select/related-posts', [
     'data'          => $data,
-    'action'        => 'edit',
-    'type'          => 'post',
     'title'         => __('app.related_posts'),
     'help'          => __('app.necessarily'),
   ]); ?>
