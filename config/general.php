@@ -6,37 +6,34 @@
 
 return [
 
-    // TRUE - сайт выключен
+    // TRUE - site is disabled
     // TRUE - сайт выключен
     'site_disabled'     => false,
 
-    // TRUE - только по приглашению
     // TRUE - by invitation only
+    // TRUE - только по приглашению
     'invite'            => false,
     'invite_limit'      => 5,
     
-    // Шаблон по умолчанию (default).
     // Default template (default).
+    // Шаблон по умолчанию (default).
     'template'          => 'default',
     
-    // Какие шаблоны доступны для выбора участникам
     // Which templates are available for users to choose from
+    // Какие шаблоны доступны для выбора участникам
     'templates'         => ['default', 'qa', 'test'],
 
-    // Локализация по умолчанию (+ какие языки есть в системе)
     // Default localization (+ languages represented)
+    // Локализация по умолчанию (+ какие языки есть в системе)
     'lang'              => 'ru',
     'languages'         => ['ru', 'de', 'en', 'fr', 'ro', 'zh_CN', 'zh_TW'],
 
-    // Режим запуска: true - включить
-    // Для первых 50 участников TL будет 1
-    // Если устновить на false, то при регистрации будет TL0
-    // Launch mode: true - enable
-    // If you set it to false, then when registering it will be TL0
+    // If TRUE, then the first 50 participants will have TL2 upon registration (otherwise TL1)
+    // Если TRUE, то при регистрации первые 50 участников будет иметь TL2 (в противном случае TL1)
     'mode'              => true, 
         
-    // Email администрации сайта
     // Email of the site administration
+    // Email администрации сайта
     'email'             => '***@site.ru',
 
 ];
