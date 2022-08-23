@@ -8,11 +8,13 @@ use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
 use UploadImage, Meta, Validation, Access, UserData;
 
+use App\Traits\Slug;
 use App\Traits\Author;
 use App\Traits\Related;
 
 class EditPostController extends Controller
 {
+    use Slug;
     use Author;
     use Related;
 
@@ -67,8 +69,8 @@ class EditPostController extends Controller
 
         $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
-        $post_title = str_replace("&nbsp;", '', Request::getPost('post_title'));
-        Validation::length($post_title, 6, 250, 'title', $redirect);
+        $title = str_replace("&nbsp;", '', Request::getPost('post_title'));
+        Validation::length($title, 6, 250, 'title', $redirect);
         Validation::length($content, 6, 25000, 'content', $redirect);
 
         // Form hacking
@@ -95,14 +97,16 @@ class EditPostController extends Controller
 
         if (UserData::checkAdmin()) {
             $post_merged_id = Request::getPostInt('post_merged_id');
-            $post_slug = Request::getPost('post_slug');
+            if (PostModel::getSlug($slug = $this->getSlug(Request::getPost('post_slug')))) {
+                $slug = $slug . "-";
+            }
         }
 
         PostModel::editPost(
             [
                 'post_id'               => $post_id,
-                'post_title'            => $post_title,
-                'post_slug'             => $post_slug ?? $post['post_slug'],
+                'post_title'            => $title,
+                'post_slug'             => $slug ?? $post['post_slug'],
                 'post_feature'          => Request::getPost('post_feature') == 'on' ? 1 : 0,
                 'post_type'             => $new_type,
                 'post_translation'      => Request::getPost('translation') == 'on' ? 1 : 0,

@@ -6,11 +6,12 @@
 // FIX: UTF (test: https://lenta.ru/news/2021/09/09/fantastic_russians/)
 class URLScraper
 {
-	private static $STATUS = array(
+	private static $STATUS = [
 		"initialized" => 0,
 		"success" => 1,
 		"fail" => 2
-	);
+	];
+
 	private $metaData;
 	private $url;
 	private $html;

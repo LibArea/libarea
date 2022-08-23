@@ -17,7 +17,7 @@
     skipInvalid: true, // <- не добавлять повтороно не допускаемые теги
     enforceWhitelist: true, // <- добавлять только из белого списка
     tagTextProp: "post_title",
-    <?php if (empty($data['post_arr'])) { ?>
+    <?php if (!empty($data['post_arr'])) { ?>
       whitelist: JSON.parse('<?= json_encode($data['post_arr']); ?>'),
     <?php } ?>
     maxTags: 3, // <- ограничим выбор фасетов
@@ -45,7 +45,7 @@
       });
   });
 
-  <?php if (empty($data['post_arr'])) { ?>
+  <?php if (!empty($data['post_arr'])) { ?>
     tagify_post.addTags(JSON.parse('<?= json_encode($data['post_arr']); ?>'));
   <?php } ?>
 

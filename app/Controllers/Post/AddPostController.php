@@ -8,13 +8,14 @@ use App\Models\Item\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
 use Content, UploadImage, Discord, Validation, URLScraper, Meta, UserData;
 
-use Cocur\Slugify\Slugify;
 use Utopia\Domains\Domain;
 
+use App\Traits\Slug;
 use App\Traits\Related;
 
 class AddPostController extends Controller
 {
+    use Slug;
     use Related;
 
     // Form adding a post / page
@@ -78,7 +79,9 @@ class AddPostController extends Controller
             $post_img = UploadImage::coverPost($_FILES['images'], 0, $redirect, $this->user['id']);
         }
 
-        $slug = self::slug($post_title);
+        if (PostModel::getSlug($slug = $this->getSlug($post_title))) {
+            $slug = $slug . "-";
+        }
 
         $post_related = $this->relatedPost();
 
@@ -147,19 +150,6 @@ class AddPostController extends Controller
         );
 
         is_return(__('msg.post_added'), 'success', $redirect);
-    }
-
-    public static function slug($title)
-    {
-        $slugify = new Slugify();
-        $uri = $slugify->slugify($title);
-
-        $result = PostModel::getSlug($new_slug = substr($uri, 0, 90));
-        if ($result) {
-            return $new_slug . "-";
-        }
-
-        return $new_slug;
     }
 
     public function addUrl($post_url, $post_title)
