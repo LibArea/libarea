@@ -46,7 +46,7 @@ class LoginController extends Controller
 
         (new \App\Controllers\Auth\SessionController())->set($user['id']);
 
-        (new \App\Controllers\AgentController())->set($user['id']);
+        self::setUserLog($user['id']);
 
         redirect('/');
     }
@@ -69,6 +69,21 @@ class LoginController extends Controller
                     'sheet' => 'sign.in',
                     'type'  => 'login',
                 ]
+            ]
+        );
+    }
+
+    // Let's record the participant's data: browser, platform...
+    // Запишем данные участника: браузера, платформы...
+    public static function setUserLog($user_id)
+    {
+        $info = parse_user_agent();
+        UserModel::setLogAgent(
+            [
+                'user_id'       => $user_id,
+                'user_browser'  => $info['browser'] . ' ' . $info['version'],
+                'user_os'       => $info['platform'],
+                'user_ip'       => Request::getRemoteAddress(),
             ]
         );
     }

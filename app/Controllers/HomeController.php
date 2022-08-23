@@ -63,10 +63,10 @@ class HomeController extends Controller
             default:
                 $url    = '/';
         }
-        
+
         return $url;
     }
-    
+
     // Infinite scroll
     // Бесконечный скролл
     public function scroll()

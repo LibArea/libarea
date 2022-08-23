@@ -32,7 +32,7 @@ class BadgeModel extends \Hleb\Scheme\App\Models\MainModel
                     badge_title,
                     badge_description
                         FROM badges 
-                        WHERE badge_id = :badge_id";
+                            WHERE badge_id = :badge_id";
 
         return DB::run($sql, ['badge_id' => $badge_id])->fetch();
     }

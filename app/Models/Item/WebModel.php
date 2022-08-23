@@ -24,8 +24,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
             case 'audits':
                 $sort     = "item_is_deleted = 0 AND item_published = 0 ORDER BY item_id DESC";
                 break;
-            default: 
-                $sort = 'item_published = 1 ORDER BY item_id DESC';    
+            default:
+                $sort = 'item_published = 1 ORDER BY item_id DESC';
         }
 
         return $sort;
@@ -36,11 +36,11 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         if ($facets === false) {
             return '';
         }
-        
+
         if ($topic_id === false) {
             return '';
         }
-        
+
         $result = [];
         foreach ($facets as $ind => $row) {
             $result['9999'] = $topic_id;
@@ -51,7 +51,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         if ($result) {
             $enumeration = "relation_facet_id IN(" . implode(',', $result ?? []) . ") AND ";
         }
-        
+
         return $enumeration;
     }
 
@@ -64,18 +64,18 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         if (in_array($grouping, $os)) {
             $gr = "item_is_" . $grouping . " = 1 AND ";
         }
-        
+
         return $gr;
-    }    
+    }
 
     // Получаем сайты по условиям
     // https://systemrequest.net/index.php/123/
     public static function feedItem($page, $limit, $facets, $user, $topic_id, $sort, $grouping)
-    { 
+    {
         $group  = self::group($grouping);
         $facets = self::facets($facets, $topic_id);
         $sort   = $facets . self::sorts($sort);
-        
+
         $start  = ($page - 1) * $limit;
         $sql = "SELECT DISTINCT
                     item_id,
@@ -121,7 +121,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $facets = self::facets($facets, $topic_id);
         $sort   = $facets . self::sorts($sort);
-        
+
         $sql = "SELECT item_id FROM facets_items_relation LEFT JOIN items ON relation_item_id = item_id WHERE $sort  ";
 
         return DB::run($sql)->rowCount();
@@ -139,6 +139,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_content_soft,
                     item_published,
                     item_user_id,
+                    item_modified,
                     item_url,
                     item_domain,
                     item_votes,

@@ -13,7 +13,7 @@ use App\Traits\LastDataModified;
 class DetailedController extends Controller
 {
     use LastDataModified;
-    
+
     protected $limit = 25;
 
     // Detailed site page
@@ -61,7 +61,7 @@ class DetailedController extends Controller
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
         // Отправка Last-Modified и обработка HTTP_IF_MODIFIED_SINCE
-        LastDataModified::get($item['item_modified']);
+        $this->getDataModified($item['item_modified']);
 
         return $this->render(
             '/item/website',

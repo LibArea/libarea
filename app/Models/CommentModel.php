@@ -132,7 +132,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     public static function sorts($sheet)
-    { 
+    {
         return $sheet == 'all' ? "comment_is_deleted = 0" : "comment_is_deleted = 1";
     }
 

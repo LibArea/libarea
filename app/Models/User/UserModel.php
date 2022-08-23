@@ -6,7 +6,6 @@ use DB;
 
 class UserModel extends \Hleb\Scheme\App\Models\MainModel
 {
-    // Регистрация участника
     public static function create($params)
     {
         $sql = "INSERT INTO users(login, 
@@ -40,14 +39,9 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return $sql_last_id['last_id'];
     }
 
-    // Страница участников
     public static function getUsersAll($page, $limit, $user_id, $type)
     {
-        $sort = "ORDER BY id = $user_id DESC, trust_level DESC";
-        if ($type == 'new') {
-            $sort = "ORDER BY created_at DESC";
-        }
-
+        $sort = ($type == 'new') ? "ORDER BY created_at DESC" : "ORDER BY id = $user_id DESC, trust_level DESC";
 
         $start  = ($page - 1) * $limit;
         $sql = "SELECT  
@@ -68,32 +62,21 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     ban_list,
                     is_deleted
                         FROM users 
-                        WHERE is_deleted != 1 and ban_list != 1
-                            $sort
-                            LIMIT :start, :limit";
+                            WHERE is_deleted != 1 and ban_list != 1
+                                $sort
+                                    LIMIT :start, :limit";
 
         return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    // Количество
     public static function getUsersAllCount()
     {
-        $sql = "SELECT 
-                    id,
-                    is_deleted
-                        FROM users WHERE ban_list = 0";
-
-        return  DB::run($sql)->rowCount();
+        return  DB::run("SELECT id, is_deleted FROM users WHERE ban_list = 0")->rowCount();
     }
 
-    // Информация по участнику (id, slug)
     public static function getUser($params, $name)
     {
-        $sort = "id = :params";
-        if ($name == 'slug') {
-            $sort = "login = :params";
-        }
-
+        $sort = ($name == 'slug') ? "login = :params" : "id = :params";
         $sql = "SELECT 
                     id,
                     login,
@@ -131,7 +114,8 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['params' => $params])->fetch();
     }
 
-    // Просмотры  
+    // Profile views
+    // Просмотры профиля
     public static function userHits($user_id)
     {
         $sql = "UPDATE users SET hits_count = (hits_count + 1) WHERE id = :user_id";
@@ -139,12 +123,13 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return  DB::run($sql, ['user_id' => $user_id]);
     }
 
-    // Страница закладок участника (комментарии и посты)
+    // For bookmarks: posts, comments and sites
+    // Для закладок: посты, комментарии и сайты
     public static function userFavorite($user_id, $tag_id = null)
     {
         $tag = '';
         if ($tag_id) $tag = 'AND fol.id = ' . $tag_id;
-        
+
         $sql = "SELECT 
                     fav.id,
                     fav.user_id, 
@@ -173,6 +158,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['user_id' => $user_id, 'uid2' => $user_id])->fetchAll();
     }
 
+    // Draft page
     // Страница черновиков
     public static function userDraftPosts($user_id)
     {
@@ -189,15 +175,14 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                    name,
                    avatar
                        FROM posts
-                       LEFT JOIN users ON id = post_user_id
+                        LEFT JOIN users ON id = post_user_id
                            WHERE id = :user_id 
-                           AND post_draft = 1 AND post_is_deleted = 0
-                           ORDER BY post_id DESC";
+                            AND post_draft = 1 AND post_is_deleted = 0
+                                ORDER BY post_id DESC";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
-    // Информация участника
     public static function userInfo($email)
     {
         $sql = "SELECT 
@@ -213,16 +198,17 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                    ban_list,
                    limiting_mode
                         FROM users 
-                        WHERE email = :email";
+                            WHERE email = :email";
 
         return DB::run($sql, ['email' => $email])->fetch();
     }
 
+    // Amount of member content
     // Количество контента участника
     public static function contentCount($user_id, $type = 0)
     {
-        $condition = $type == 'remote' ? 1: 0;
-        
+        $condition = $type == 'remote' ? 1 : 0;
+
         $sql = "SELECT 
                     (SELECT COUNT(post_id) 
                         FROM posts 
@@ -247,6 +233,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetch();
     }
 
+    // Does the user find in the ban list
     // Находит ли пользователь в бан- листе
     public static function isBan($user_id)
     {
@@ -254,31 +241,25 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     banlist_user_id,
                     banlist_status
                         FROM users_banlist
-                        WHERE banlist_user_id = :user_id AND banlist_status = 1";
+                            WHERE banlist_user_id = :user_id AND banlist_status = 1";
 
         return DB::run($sql, ['user_id' => $user_id])->fetch();
     }
 
+    // Whether the user is in silent mode
     // Находит ли пользователь в бесшумном режиме
     public static function isLimitingMode($user_id)
     {
-        $sql = "SELECT
-                    id,
-                    limiting_mode
-                        FROM users
-                        WHERE id = :user_id AND limiting_mode = 1";
+        $sql = "SELECT id, limiting_mode FROM users WHERE id = :user_id AND limiting_mode = 1";
 
         return DB::run($sql, ['user_id' => $user_id])->fetch();
     }
 
+    // Is the user activated (e-mail)
     // Активирован ли пользователь (e-mail)
     public static function isActivated($user_id)
     {
-        $sql = "SELECT
-                    id,
-                    activated
-                        FROM users
-                        WHERE id = :user_id AND activated = 1";
+        $sql = "SELECT id, activated FROM users WHERE id = :user_id AND activated = 1";
 
         return DB::run($sql, ['user_id' => $user_id])->fetch();
     }
@@ -292,6 +273,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $params);
     }
 
+    // For a one-time use of the recovery code
     // Для одноразового использования кода восстановления
     public static function editRecoverFlag($user_id)
     {
@@ -300,6 +282,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['user_id' => $user_id]);
     }
 
+    // Check the password change code (whether it was used or not)
     // Проверяем код смены пароля (использовали его или нет)
     public static function getPasswordActivate($code)
     {
@@ -310,7 +293,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     activate_code,
                     activate_flag
                         FROM users_activate
-                        WHERE activate_code = :code AND activate_flag != 1";
+                            WHERE activate_code = :code AND activate_flag != 1";
 
         return DB::run($sql, ['code' => $code])->fetch();
     }
@@ -323,6 +306,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $params);
     }
 
+    // Check activation code e-mail
     // Проверяем код активации e-mail
     public static function getEmailActivate($code)
     {
@@ -331,11 +315,12 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     email_code,
                     email_activate_flag
                         FROM users_email_activate
-                        WHERE email_code = :code AND email_activate_flag != :flag";
+                            WHERE email_code = :code AND email_activate_flag != :flag";
 
         return DB::run($sql, ['code' => $code, 'flag' => 1])->fetch();
     }
 
+    // Activate email
     // Активируем e-mail
     public static function EmailActivate($user_id)
     {
@@ -347,18 +332,11 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['user_id' => $user_id, 'flag' => 1]);
     }
-    
+
     public static function setLogAgent($params)
     {
-        $sql = "INSERT INTO users_agent_logs(user_id, 
-                                user_browser, 
-                                user_os, 
-                                user_ip) 
-                                
-                            VALUES(:user_id, 
-                                :user_browser, 
-                                :user_os, 
-                                :user_ip)";
+        $sql = "INSERT INTO users_agent_logs(user_id, user_browser, user_os, user_ip) 
+                    VALUES(:user_id, :user_browser, :user_os, :user_ip)";
 
         return DB::run($sql, $params);
     }

@@ -21,14 +21,14 @@ class DirController extends Controller
             if (!in_array($grouping, $os)) {
                 self::error404();
             }
-        }    
-        
+        }
+
         if ($sort = Request::get('sort')) {
             $os = ['top', 'all'];
             if (!in_array($sort, $os)) {
                 self::error404();
             }
-        }    
+        }
 
         $category  = FacetModel::get(Request::get('slug'), 'slug', $this->user['trust_level']);
         self::error404($category);

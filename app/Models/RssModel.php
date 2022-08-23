@@ -6,6 +6,7 @@ use DB;
 
 class RssModel extends \Hleb\Scheme\App\Models\MainModel
 {
+    // All posts for Sitemap
     // Все посты для Sitemap
     public static function getPostsSitemap()
     {
@@ -16,15 +17,17 @@ class RssModel extends \Hleb\Scheme\App\Models\MainModel
         return  DB::run($sql)->fetchAll();
     }
 
-    // Все пространства для Sitemap
+    // All Topics for Sitemap
+    // Все Темы для Sitemap
     public static function getTopicsSitemap()
     {
-        $sql = "SELECT facet_slug FROM facets";
+        $sql = "SELECT facet_slug FROM facets WHERE facet_type = 'topic'";
 
         return  DB::run($sql)->fetchAll();
     }
 
-    // Посты по id пространства для rss
+    // Posts by id Topics for rss
+    // Посты по id Темы для rss
     public static function getPostsFeed($facet_slug)
     {
         $sql = "SELECT 

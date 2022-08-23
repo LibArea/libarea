@@ -26,7 +26,7 @@ class AuditModel extends \Hleb\Scheme\App\Models\MainModel
 
         return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
-    
+
     // Get a list of forbidden stop words
     // Получим список запрещенных стоп-слов
     public static function getStopWords()
@@ -35,7 +35,7 @@ class AuditModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql)->fetchAll();
     }
-    
+
     // Member information (id, slug) 
     // Информация по участнику (id, slug)
     public static function getUsers($params, $type)

@@ -58,7 +58,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         if (in_array($screening, $os)) {
             $go = "AND item_is_" . $screening . " = 1";
         }
-        
+
         $sql = "SELECT 
                   facet_id,
                   count(facet_id) as counts, 

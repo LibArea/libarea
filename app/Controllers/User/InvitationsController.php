@@ -83,9 +83,9 @@ class InvitationsController extends Controller
 
         is_return(__('msg.invite_created'), 'success', $redirect);
     }
-    
+
     // We will send an email and write logs
-    function escort ($invitation_code, $invitation_email)
+    function escort($invitation_code, $invitation_email)
     {
         $link = url('invite.reg', ['code' => $invitation_code]);
 
@@ -100,5 +100,4 @@ class InvitationsController extends Controller
             ]
         );
     }
-    
 }

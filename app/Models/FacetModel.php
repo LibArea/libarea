@@ -72,7 +72,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_count DESC";
                 break;
         }
-        
+
         return $signet;
     }
 
@@ -313,7 +313,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     public static function advice($user_id)
     {
         $userReads = self::userReads($user_id);
-        
+
         $result = [];
         foreach ($userReads as $ind => $row) {
             $result[$ind] = $row['signed_facet_id'];

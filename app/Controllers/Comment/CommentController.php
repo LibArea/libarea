@@ -37,7 +37,7 @@ class CommentController extends Controller
             ]
         );
     }
-    
+
     public function lastComment()
     {
         $comments  = CommentModel::getCommentsAll(1, 5, $this->user, 'all');

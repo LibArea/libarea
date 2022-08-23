@@ -6,7 +6,6 @@ use DB;
 
 class VotesModel extends \Hleb\Scheme\App\Models\MainModel
 {
-    // Информация по контенту
     public static function authorId($content_id, $type)
     {
         // $type = post / comment / answer / item
@@ -17,6 +16,7 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
         return $result[$type . '_user_id'];
     }
 
+    // Checking if the user has voted
     // Проверяем, голосовал ли пользователь
     public static function voteStatus($content_id, $author_id, $type)
     {
@@ -27,7 +27,6 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
         return  DB::run($sql, ['content_id' => $content_id, 'author_id' => $author_id])->fetch();
     }
 
-    // Записываем лайк
     public static function saveVote($content_id, $ip, $user_id, $type)
     {
         $params = [
@@ -46,6 +45,7 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $params);
     }
 
+    // Recording the vote in the content table
     // Записываем голосование в таблицу конктена
     public static function saveVoteContent($content_id, $type)
     {

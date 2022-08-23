@@ -7,6 +7,7 @@ use DB;
 
 class ActionModel extends \Hleb\Scheme\App\Models\MainModel
 {
+    // Get information on the content depending on the type
     // Получим информацию по контенту в зависимости от типа
     public static function getInfoTypeContent($type_id, $type)
     {
@@ -15,6 +16,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetch();
     }
 
+    // Deleting / restoring content
     // Удаление / восстановление контента
     public static function setDeletingAndRestoring($type, $type_id, $status)
     {
@@ -27,7 +29,6 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
         DB::run($sql, ['type_id' => $type_id]);
     }
 
-    // Рекомендованно
     public static function setRecommend($post_id, $status)
     {
         if ($status == 1) {
@@ -39,6 +40,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
         DB::run($sql, ['post_id' => $post_id]);
     }
 
+    // Find content for forms
     // Поиск контента для форм
     public static function getSearch($search, $type)
     {
@@ -78,14 +80,16 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
         return json_encode($response);
     }
 
+    // Freeze Mode
     // Режим заморозки
     public static function addLimitingMode($user_id)
     {
         $sql = "UPDATE users SET limiting_mode = 1 where id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id]);
-    } 
+    }
 
+    // All member content (contribution)
     // Весь контент участника (вклад)
     public static function allContentUserCount($user_id)
     {
@@ -128,7 +132,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
     // Запишем логи   
     public static function addLogs($data)
     {
-        
+
         $params = [
             'user_id'       => UserData::getUserId(),
             'user_login'    => UserData::getUserLogin(),
@@ -137,7 +141,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
             'action_name'   => $data['action_name'],
             'url_content'   => $data['url_content']
         ];
-        
+
         $sql = "INSERT INTO users_action_logs(user_id, 
                         user_login, 
                         id_content, 

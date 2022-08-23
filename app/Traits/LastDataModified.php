@@ -5,7 +5,7 @@ namespace App\Traits;
 trait LastDataModified
 {
     // Отправка Last-Modified и обработка HTTP_IF_MODIFIED_SINCE
-    public static function get($data)
+    public function getDataModified($data)
     {
         // время последнего изменения страницы в формате unix time
         $lastModified = strtotime($data);

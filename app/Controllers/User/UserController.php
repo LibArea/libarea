@@ -149,7 +149,7 @@ class UserController extends Controller
             ]
         );
     }
-    
+
     // User preferences page
     // Страница предпочтений пользователя
     public function read()

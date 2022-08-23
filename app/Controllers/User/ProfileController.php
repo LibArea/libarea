@@ -13,7 +13,7 @@ use App\Traits\Views;
 class ProfileController extends Controller
 {
     use Views;
-    
+
     protected $limit = 20;
 
     // Member page (profile) 

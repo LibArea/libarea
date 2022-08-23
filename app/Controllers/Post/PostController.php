@@ -100,7 +100,7 @@ class PostController extends Controller
         ];
 
         // Отправка Last-Modified и обработка HTTP_IF_MODIFIED_SINCE
-        LastDataModified::get($content['post_modified']);
+        $this->getDataModified($content['post_modified']);
 
         if ($type == 'post') {
             return $this->render(
@@ -243,5 +243,4 @@ class PostController extends Controller
     {
         return PostModel::recent($content_id, null);
     }
-    
 }

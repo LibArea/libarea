@@ -136,13 +136,13 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         $countLike = config('feed.countLike');
 
         if ($type == 'questions') {
-           return "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 1";
+            return "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 1";
         }
-        
+
         if ($type == 'posts') {
-           return "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 0";
+            return "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 0";
         }
-        
+
         if ($trust_level == 10) {
             $display = "AND post_is_deleted = 0";
 
@@ -196,7 +196,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
     public static function latestItems($limit)
     {
         $sql = "SELECT item_title, item_domain FROM items WHERE item_published = 1 ORDER BY item_id DESC LIMIT :limit";
-        
+
         return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
 
