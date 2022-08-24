@@ -1,6 +1,6 @@
 </div>
-<?php if (!UserData::getUserScroll()) : ?>
 <footer class="footer box-shadow-top" itemtype="http://schema.org/WPFooter">
+  <?php if (UserData::getUserScroll() === false || $data['type'] != 'main') : ?> 
   <div class="wrap">
     <div class="left">
       <div class="mb5">
@@ -35,7 +35,7 @@
       </ul>
     </div>
   </div>
+  <?php endif; ?>
 </footer>
-<?php endif; ?>
 
 <?= insert('/scripts'); ?>

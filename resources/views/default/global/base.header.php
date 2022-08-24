@@ -121,4 +121,4 @@ $post   = $data['post'] ?? false;
 
   <div id="contentWrapper" class="wrap">
 
-    <?= insert('/menu', ['data' => $data]); ?>
+    <?= insert('/_block/navigation/menu-left', ['data' => $data]); ?>
