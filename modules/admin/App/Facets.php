@@ -3,7 +3,7 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
-use Modules\Admin\App\Models\{FacetModel, StatsModel, PageModel};
+use Modules\Admin\App\Models\{FacetModel, StatsModel};
 use Meta;
 
 class Facets
@@ -32,7 +32,7 @@ class Facets
     {
         $type = self::faceTypes(Request::get('type'));
 
-        $pages = $type == 'section' ? PageModel::get() : false;
+        $pages = $type == 'section' ? FacetModel::getPostsTheSection() : false;
 
         return view(
             '/view/default/facet/type',

@@ -35,7 +35,6 @@ class LogModel extends \Hleb\Scheme\App\Models\MainModel
     // Страница аудита
     public static function getAuditsAll($page, $limit, $sheet, $type)
     {
-
         $sort   = $sheet == 'ban' ? 'AND a.read_flag = 1' : 'AND a.read_flag = 0';
         $type   = $type == 'audits' ? 'audit' : 'report';
         $sort   = $type == 'report' ? '' : $sort;
@@ -59,10 +58,7 @@ class LogModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getAuditsAllCount($sheet)
     {
-        $sort = "read_flag = 0";
-        if ($sheet == 'ban') {
-            $sort = "read_flag = 1";
-        }
+        $sort = ($sheet == 'ban') ? "read_flag = 1" : "read_flag = 0";
 
         $sql = "SELECT id, read_flag FROM audits WHERE $sort";
 

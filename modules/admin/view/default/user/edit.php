@@ -15,7 +15,7 @@
     </a>
     <br>
   <?php endif; ?>
-  <img width="325" class="right" src="<?= Img::cover($data['user']['cover_art'], 'user'); ?>">
+  <img width="325" height="115" class="right" src="<?= Img::cover($data['user']['cover_art'], 'user'); ?>">
   <?= Img::avatar($data['user']['avatar'], $data['user']['login'], 'avatar', 'max'); ?>
 
   <fieldset>

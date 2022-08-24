@@ -76,7 +76,7 @@
           <a data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" data-type="<?= $audit['action_type']; ?>" class="type-action text-sm">
             <?php if ($audit['content'][$audit['action_type'] . '_is_deleted'] == 1) : ?>
               <span class="red">
-                <?= __('admin.recover'); ?>
+                <?= __('admin.deleted'); ?>
               </span>
             <?php else : ?>
               <?= __('admin.remove'); ?>

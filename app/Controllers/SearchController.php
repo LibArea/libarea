@@ -27,7 +27,7 @@ class SearchController extends Controller
         $q      = Request::getGet('q');
         $type   = Request::getGet('cat');
 
-        if (!in_array($type, ['post', 'website'])) {
+        if (!in_array($type, ['post', 'website', 'answer'])) {
             $type = 'post';
         }
 

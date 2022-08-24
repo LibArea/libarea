@@ -10,10 +10,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     // Страница участников
     public static function getUsers($page, $limit, $sheet)
     {
-        $string = "ORDER BY id DESC LIMIT";
-        if ($sheet == 'ban') {
-            $string = "WHERE ban_list > 0 ORDER BY id DESC LIMIT";
-        }
+        $string = ($sheet == 'ban') ? "WHERE ban_list > 0 ORDER BY id DESC LIMIT" : "ORDER BY id DESC LIMIT";
 
         $start  = ($page - 1) * $limit;
         $sql = "SELECT  
@@ -46,15 +43,9 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getUsersCount($sheet)
     {
-        $string = "";
-        if ($sheet == 'ban') {
-            $string = "WHERE ban_list > 0";
-        }
+        $string = ($sheet == 'ban') ? 'WHERE ban_list > 0' : '';
 
-        $sql = "SELECT 
-                    id,
-                    is_deleted
-                        FROM users $string";
+        $sql = "SELECT id, is_deleted FROM users $string";
 
         return  DB::run($sql)->rowCount();
     }
@@ -62,10 +53,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     // Member information (id, slug)
     public static function getUser($params, $name)
     {
-        $sort = "id = :params";
-        if ($name == 'slug') {
-            $sort = "login = :params";
-        }
+        $sort = ($name == 'slug') ? "login = :params" : "id = :params";
 
         $sql = "SELECT 
                     id,
@@ -109,10 +97,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     // Number of IP duplicates by `user_reg_ip` field
     public static function duplicatesRegistrationCount($ip)
     {
-        $sql = "SELECT 
-                    id, 
-                    reg_ip 
-                        FROM users WHERE reg_ip = :ip";
+        $sql = "SELECT id, reg_ip FROM users WHERE reg_ip = :ip";
 
         return DB::run($sql, ['ip' => $ip])->rowCount();
     }
@@ -124,8 +109,8 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     MAX(add_date) as latest_date,
                     MAX(user_ip) as latest_ip,
                     user_id
-                    FROM users_agent_logs 
-                    WHERE user_id = :uid GROUP BY user_id";
+                        FROM users_agent_logs 
+                            WHERE user_id = :uid GROUP BY user_id";
 
         return DB::run($sql, ['uid' => $uid])->fetch();
     }
@@ -164,14 +149,14 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     ban_list,
                     latest_date
                         FROM users
-                        JOIN 
-                        ( SELECT 
-                            MAX(add_date) as latest_date,
-                            user_id
-                            FROM users_agent_logs 
-                            WHERE user_ip = :ip GROUP BY user_id
-                        ) as latest_date
-                        ON latest_date.user_id = id";
+                            JOIN 
+                            ( SELECT 
+                                MAX(add_date) as latest_date,
+                                user_id
+                                FROM users_agent_logs 
+                                WHERE user_ip = :ip GROUP BY user_id
+                            ) as latest_date ON latest_date.user_id = id";
+                            
         return DB::run($sql, ['ip' => $ip])->fetchAll();
     }
 
@@ -191,16 +176,14 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     latest_date,
                     os
                         FROM users
-                        JOIN 
-                        ( SELECT 
-                            MAX(user_os) as os,
-                            MAX(add_date) as latest_date,
-                            user_id
-                            FROM users_agent_logs 
-                            GROUP BY user_id
-                        ) as latest_date
-                        ON latest_date.user_id = id
-                        ORDER BY latest_date DESC LIMIT 10 ";
+                            JOIN 
+                            ( SELECT 
+                                MAX(user_os) as os,
+                                MAX(add_date) as latest_date,
+                                user_id
+                                FROM users_agent_logs 
+                                GROUP BY user_id
+                            ) as latest_date ON latest_date.user_id = id ORDER BY latest_date DESC LIMIT 10 ";
 
         return DB::run($sql)->fetchAll();
     }

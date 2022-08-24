@@ -10,6 +10,17 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $start  = ($page - 1) * $limit;
 
+        if ($type == 'answer') {
+            $sql = "SELECT answer_id, answer_content as content, post_id, post_slug, post_title
+                        FROM answers  
+                        LEFT JOIN posts ON answer_post_id = post_id 
+                            WHERE post_is_deleted = 0
+                                AND answer_content LIKE :qa LIMIT :start, :limit";
+                                
+           return DB::run($sql, ['qa' => "%" . $query, 'start' => $start, 'limit' => $limit])->fetchAll();                     
+        }
+
+
         $sql = "SELECT DISTINCT 
                 post_id, 
                 post_title as title, 
@@ -55,10 +66,8 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                                 GROUP BY relation_item_id  
                     ) AS rel ON rel.relation_item_id = item_id  
                             WHERE item_is_deleted = 0
-                                AND MATCH(item_title, item_content, item_domain) AGAINST (:qa)
-                                       LIMIT :start, :limit";
+                                AND MATCH(item_title, item_content, item_domain) AGAINST (:qa) LIMIT :start, :limit";
         }
-
 
         return DB::run($sql, ['qa' => $query, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
@@ -66,20 +75,17 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getSearchCount($query, $type)
     {
-        $sql = "SELECT
-                post_id 
-                    FROM posts  
-                        WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 and post_type = 'post'
-                            AND MATCH(post_title, post_content) AGAINST (:qa)";
-
-        if ($type == 'website') {
-            $sql = "SELECT
-                item_id 
-                    FROM items 
-                            WHERE item_is_deleted = 0
-                                AND MATCH(item_title, item_content, item_domain) AGAINST (:qa)";
+        if ($type == 'answer') {
+           $sql = "SELECT answer_id FROM answers LEFT JOIN posts ON answer_post_id = post_id WHERE post_is_deleted = 0 AND answer_content LIKE :qa";
+                                
+           return DB::run($sql, ['qa' => "%" . $query])->rowCount();                     
         }
 
+        $sql = "SELECT post_id FROM posts WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 and post_type = 'post' AND MATCH(post_title, post_content) AGAINST (:qa)";
+
+        if ($type == 'website') {
+            $sql = "SELECT item_id FROM items WHERE item_is_deleted = 0 AND MATCH(item_title, item_content, item_domain) AGAINST (:qa)";
+        }
 
         return DB::run($sql, ['qa' => $query])->rowCount();
     }
