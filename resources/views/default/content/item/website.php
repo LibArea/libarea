@@ -19,7 +19,7 @@
           <?= Content::text($item['item_content'], 'text'); ?>
           <a class="gree" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
             <?= Img::website($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
-            <?= $item['item_url']; ?>
+            <?= $item['item_domain']; ?>
           </a>
           <span class="gray">•</span>
           <?= Html::signed([

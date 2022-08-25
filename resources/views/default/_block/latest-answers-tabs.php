@@ -13,10 +13,13 @@
     <ul class="last-content content-tabs active" id="home">
       <?php foreach ($latest_answers as $answer) : ?>
         <li>
-          <a title="<?= $answer['login']; ?>" href="<?= url('profile', ['login' => $answer['login']]); ?>">
-            <?= Img::avatar($answer['avatar'], $answer['login'], 'img-sm mr5', 'small'); ?>
-          </a>
-          <span class="middle lowercase gray-600"><?= Html::langDate($answer['answer_date']); ?></span>
+          <div class="gray-600 text-sm">
+            <a class="flex gray items-center" title="<?= $answer['login']; ?>" href="<?= url('profile', ['login' => $answer['login']]); ?>">
+              <?= Img::avatar($answer['avatar'], $answer['login'], 'img-sm mr5', 'small'); ?>
+              <span class="mr5"><?= $answer['login']; ?></span>
+            </a>
+            <span class="lowercase"><?= Html::langDate($answer['answer_date']); ?></span>
+          </div>
           <a class="last-content_telo" href="<?= url('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
             <?= Content::fragment(Content::text($answer['answer_content'], 'line'), 98); ?>
           </a>
