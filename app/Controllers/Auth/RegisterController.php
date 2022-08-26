@@ -149,7 +149,7 @@ class RegisterController extends Controller
                 ]
             );
 
-            is_return(__('msg.change_saved'), 'success', $redirect);
+            is_return(__('msg.change_saved'), 'success', url('login'));
         }
 
         // Email Activation
@@ -164,7 +164,7 @@ class RegisterController extends Controller
         // Sending email
         SendEmail::mailText($active_uid, 'activate.email', ['link' => url('activate.code', ['code' => $email_code])]);
 
-        is_return(__('msg.change_saved'), 'success', $redirect);
+        is_return(__('msg.check_your_email'), 'success', url('login'));
     }
 
     // Show registration form with invite

@@ -97,8 +97,11 @@ class EditPostController extends Controller
 
         if (UserData::checkAdmin()) {
             $post_merged_id = Request::getPostInt('post_merged_id');
-            if (PostModel::getSlug($slug = $this->getSlug(Request::getPost('post_slug')))) {
-                $slug = $slug . "-";
+            $post_slug = Request::getPost('post_slug');
+            if ($post_slug != $post['post_slug']) {
+                if (PostModel::getSlug($slug = $this->getSlug($post_slug))) {
+                    $slug = $slug . "-";
+                }
             }
         }
 

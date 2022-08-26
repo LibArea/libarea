@@ -106,13 +106,13 @@ class EditItemController extends Controller
                 'item_content_soft'     => $data['content_soft'] ?? '',
                 'item_published'        => $published,
                 'item_user_id'          => $new_user_id,
-                'item_close_replies'    => $data['close_replies'] == 'on' ? 1 : null,
-                'item_is_forum'         => $data['forum'] == 'on' ? 1 : null,
-                'item_is_portal'        => $data['portal'] == 'on' ? 1 : null,
-                'item_is_blog'          => $data['blog'] == 'on' ? 1 : null,
-                'item_is_reference'     => $data['reference'] == 'on' ? 1 : null,
-                'item_is_soft'          => $data['soft'] == 'on' ? 1 : null,
-                'item_is_github'        => $data['github'] == 'on' ? 1 : null,
+                'item_close_replies'    => self::toggle($data['close_replies']),
+                'item_is_forum'         => self::toggle($data['forum']),
+                'item_is_portal'        => self::toggle($data['portal']),
+                'item_is_blog'          => self::toggle($data['blog']),
+                'item_is_reference'     => self::toggle($data['reference']),
+                'item_is_soft'          => self::toggle($data['soft']),
+                'item_is_github'        => self::toggle($data['github']),
                 'item_post_related'     => $post_related ?? null,
                 'item_github_url'       => $data['github_url'] ?? null,
             ]
@@ -138,9 +138,18 @@ class EditItemController extends Controller
             foreach ($topics as $row) {
                 $arr[] = $row;
             }
+            
             FacetModel::addItemFacets($arr, $item['item_id']);
         }
 
         is_return(__('msg.change_saved'), 'success', url('web'));
     }
+    
+    public static function toggle($value)
+    {
+        $data = $value ?? false;
+        
+        return $data == 'on' ? 1 : null;
+    }
+
 }
