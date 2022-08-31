@@ -23,8 +23,6 @@ class ModController extends Controller
             [
                 'meta'  => Meta::get(__('app.setting')),
                 'data'  => [
-                    'sheet' => 'settings',
-                    'type'  => 'user',
                     'user'  => UserModel::getUser(Request::getInt('id'), 'id'),
                 ]
             ]

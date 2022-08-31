@@ -5,8 +5,10 @@ namespace App\Controllers\User;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\ActionModel;
-use App\Models\User\{InvitationModel, UserModel};
-use Validation, SendEmail, Meta, Html;
+use App\Models\User\InvitationModel;
+use SendEmail, Meta, Html;
+
+use App\Validate\RulesUserInvitation;
 
 class InvitationsController extends Controller
 {
@@ -18,10 +20,7 @@ class InvitationsController extends Controller
             'base',
             [
                 'meta'  => Meta::get(__('app.invite')),
-                'data'  => [
-                    'sheet' => 'invite',
-                    'type'  => 'user',
-                ]
+                'data'  => []
             ]
         );
     }
@@ -37,8 +36,6 @@ class InvitationsController extends Controller
                 'data'  => [
                     'invitations'   => InvitationModel::userResult($this->user['id']),
                     'count_invites' => $this->user['invitation_available'],
-                    'sheet' => 'invites',
-                    'type'  => 'user',
                 ]
             ]
         );
@@ -48,25 +45,7 @@ class InvitationsController extends Controller
     {
         $invitation_email = Request::getPost('email');
 
-        $redirect = url('invitations');
-
-        Validation::email(Request::getPost('email'), $redirect);
-
-        $user = UserModel::userInfo($invitation_email);
-        if (!empty($user['email'])) {
-            is_return(__('msg.user_already'), 'error', $redirect);
-        }
-
-        $inv_user = InvitationModel::duplicate($invitation_email);
-        if (!empty($inv_user['invitation_email'])) {
-            if ($inv_user['invitation_email'] == $invitation_email) {
-                is_return(__('msg.invate_replay'), 'error', $redirect);
-            }
-        }
-
-        if ($this->user['invitation_available'] >= config('general.invite_limit')) {
-            is_return(__('msg.invate_limit_stop'), 'error', $redirect);
-        }
+        RulesUserInvitation::rulesInvite($invitation_email, $this->user['invitation_available']);
 
         $invitation_code = Html::randomString('crypto', 24);
 
@@ -81,7 +60,7 @@ class InvitationsController extends Controller
 
         $this->escort($invitation_code, $invitation_email);
 
-        is_return(__('msg.invite_created'), 'success', $redirect);
+        is_return(__('msg.invite_created'), 'success', url('invitations'));
     }
 
     // We will send an email and write logs

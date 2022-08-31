@@ -53,7 +53,7 @@ class SettingController extends Controller
     // Profile setup form
     // Форма настройки профиля
     function settingForm()
-    { 
+    {
         return $this->render(
             '/user/setting/setting',
             'base',
@@ -145,7 +145,7 @@ class SettingController extends Controller
     function securityEdit()
     {
         $data = Request::getPost();
-        
+
         RulesUserSetting::rulesSecurity($data, $this->user['email']);
 
         $newpass = password_hash($data['password2'], PASSWORD_BCRYPT);

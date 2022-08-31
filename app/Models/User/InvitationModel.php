@@ -29,12 +29,10 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "INSERT INTO invitations(uid, 
                     invitation_code, 
                     invitation_email, 
-                    invitation_date, 
                     add_ip) 
                        VALUES(:uid, 
                            :invitation_code, 
                            :invitation_email, 
-                           :invitation_date, 
                            :add_ip)";
 
         DB::run($sql, $params);
