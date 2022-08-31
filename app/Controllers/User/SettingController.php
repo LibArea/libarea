@@ -7,6 +7,8 @@ use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
 use UploadImage, Validation, Meta, UserData, Img;
 
+use App\Validation\RulesEditSetting;
+
 class SettingController extends Controller
 {
     function index()
@@ -68,14 +70,7 @@ class SettingController extends Controller
     {
         $data = Request::getPost();
 
-        $redirect = url('setting');
-
-        Validation::length($data['name'], 0, 11, 'name', $redirect);
-        Validation::length($data['about'], 0, 255, 'about', $redirect);
-
-        if ($data['public_email']) {
-            Validation::email($data['public_email'], $redirect);
-        }
+        RulesEditSetting::rules($data);
 
         $user   = UserModel::getUser($this->user['id'], 'id');
 
@@ -105,7 +100,7 @@ class SettingController extends Controller
             ]
         );
 
-        is_return(__('msg.change_saved'), 'success', $redirect);
+        is_return(__('msg.change_saved'), 'success', url('setting'));
     }
 
     // Avatar and cover upload form
