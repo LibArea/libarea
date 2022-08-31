@@ -6,7 +6,7 @@
 // All calls are sent to this file.
 // Все вызовы направляются в этот файл.
 define('HLEB_START', microtime(true));
-define('HLEB_FRAME_VERSION', "1.6.70");
+define('HLEB_FRAME_VERSION', "1.6.71");
 define('HLEB_PUBLIC_DIR', __DIR__);
 
 // General headers.
