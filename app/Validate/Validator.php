@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Validation;
+namespace App\Validate;
 
-class Validation
+class Validator
 {
-    // Validation::email
     public static function email($email, $redirect)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
@@ -13,7 +12,6 @@ class Validation
         return true;
     }
 
-    // Validation::url
     public static function url($url, $redirect)
     {
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
@@ -22,7 +20,6 @@ class Validation
         return true;
     }
 
-    // Validation::length
     public static function length($content, $min, $max, $name, $redirect = '/')
     {
         if (self::getStrlen($content) < $min || self::getStrlen($content) > $max) {

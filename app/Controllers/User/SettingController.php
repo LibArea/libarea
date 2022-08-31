@@ -5,9 +5,9 @@ namespace App\Controllers\User;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
-use UploadImage, Validation, Meta, UserData, Img;
+use UploadImage, Meta, UserData, Img;
 
-use App\Validation\RulesEditSetting;
+use App\Validate\RulesUserSetting;
 
 class SettingController extends Controller
 {
@@ -53,7 +53,7 @@ class SettingController extends Controller
     // Profile setup form
     // Форма настройки профиля
     function settingForm()
-    {
+    { 
         return $this->render(
             '/user/setting/setting',
             'base',
@@ -70,7 +70,7 @@ class SettingController extends Controller
     {
         $data = Request::getPost();
 
-        RulesEditSetting::rules($data);
+        RulesUserSetting::rulesSetting($data);
 
         $user   = UserModel::getUser($this->user['id'], 'id');
 
@@ -144,27 +144,11 @@ class SettingController extends Controller
 
     function securityEdit()
     {
-        $password    = Request::getPost('password');
-        $password2   = Request::getPost('password2');
-        $password3   = Request::getPost('password3');
+        $data = Request::getPost();
+        
+        RulesUserSetting::rulesSecurity($data, $this->user['email']);
 
-        $redirect   = '/setting/security';
-        if ($password2 != $password3) {
-            is_return(__('msg.pass_match_err'), 'error', $redirect);
-        }
-
-        if (substr_count($password2, ' ') > 0) {
-            is_return(__('msg.password_spaces'), 'error', $redirect);
-        }
-
-        Validation::length($password2, 8, 32, 'password', $redirect);
-
-        $userInfo   = UserModel::userInfo($this->user['email']);
-        if (!password_verify($password, $userInfo['password'])) {
-            is_return(__('msg.old_error'), 'error', $redirect);
-        }
-
-        $newpass = password_hash($password2, PASSWORD_BCRYPT);
+        $newpass = password_hash($data['password2'], PASSWORD_BCRYPT);
 
         SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
 

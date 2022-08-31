@@ -39,15 +39,15 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                                         GROUP BY relation_item_id
                         ) AS rel
                             ON rel.relation_item_id = item_id 
-                                WHERE item_user_id = :user_id ORDER BY item_id DESC
-                                    LIMIT :start, :limit ";
+                                WHERE item_user_id = :user_id AND item_is_deleted = 0
+                                    ORDER BY item_id DESC LIMIT :start, :limit ";
 
         return DB::run($sql, ['user_id' => $user_id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function getUserSitesCount($user_id)
     {
-        $sql = "SELECT item_id, item_is_deleted FROM items WHERE item_user_id = :user_id ORDER BY item_id DESC";
+        $sql = "SELECT item_id, item_is_deleted FROM items WHERE item_user_id = :user_id AND item_is_deleted = 0 ORDER BY item_id DESC";
 
         return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
