@@ -6,11 +6,13 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use UploadImage, Meta, Validation, Access, UserData;
+use UploadImage, Meta, Access, UserData;
 
 use App\Traits\Slug;
 use App\Traits\Author;
 use App\Traits\Related;
+
+use App\Validate\RulesPost;
 
 class EditPostController extends Controller
 {
@@ -69,9 +71,7 @@ class EditPostController extends Controller
 
         $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
-        $title = str_replace("&nbsp;", '', Request::getPost('post_title'));
-        Validation::length($title, 6, 250, 'title', $redirect);
-        Validation::length($content, 6, 25000, 'content', $redirect);
+        RulesPost::rules($title = Request::getPost('post_title'), $content, $redirect);
 
         // Form hacking
         if ($post['post_draft'] == 0) {

@@ -7,10 +7,12 @@ use App\Controllers\Controller;
 use App\Models\Item\WebModel;
 use App\Models\{FacetModel, PostModel, NotificationModel};
 use App\Models\User\UserModel;
-use Validation, UserData, Meta, Access;
+use UserData, Meta, Access;
 
 use App\Traits\Author;
 use App\Traits\Related;
+
+use App\Validate\RulesItem;
 
 class EditItemController extends Controller
 {
@@ -59,25 +61,14 @@ class EditItemController extends Controller
     public function change()
     {
         $data = Request::getPost();
-        $redirect = url('content.add', ['type' => 'item']);
 
-        $item = WebModel::getItemId($data['item_id']);
-        if (!$item) {
-            return true;
-        }
+        $item = RulesItem::rulesEdit($data);
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
         if (Access::author('item', $item['item_user_id'], $item['item_date'], 0) === false) {
             return true;
         }
-
-        // Check the length
-        // Проверим длину
-        Validation::length($data['title'], 14, 250, 'title', $redirect);
-        Validation::length($data['content'], 24, 1500, 'description', $redirect);
-
-        Validation::url($data['url'], $redirect);
 
         // Связанные посты
         $json_post  = $data['post_select'] ?? [];
@@ -91,7 +82,8 @@ class EditItemController extends Controller
 
         // If not staff, then we make the site inactive 
         // Если не персонал, то делаем сайт не активным
-        $published = $data['published'] == 'on' ? 1 : 0;
+        $published = $data['published'] ?? false;
+        $published = $published == 'on' ? 1 : 0;
         $published = UserData::checkAdmin() ? $published : 0;
 
         $new_user_id = $this->editAuthor($item['item_user_id'], Request::getPost('user_id'));
@@ -106,13 +98,13 @@ class EditItemController extends Controller
                 'item_content_soft'     => $data['content_soft'] ?? '',
                 'item_published'        => $published,
                 'item_user_id'          => $new_user_id,
-                'item_close_replies'    => self::toggle($data['close_replies']),
-                'item_is_forum'         => self::toggle($data['forum']),
-                'item_is_portal'        => self::toggle($data['portal']),
-                'item_is_blog'          => self::toggle($data['blog']),
-                'item_is_reference'     => self::toggle($data['reference']),
-                'item_is_soft'          => self::toggle($data['soft']),
-                'item_is_github'        => self::toggle($data['github']),
+                'item_close_replies'    => self::toggle($data['close_replies'] ?? false),
+                'item_is_forum'         => self::toggle($data['forum'] ?? false),
+                'item_is_portal'        => self::toggle($data['portal'] ?? false),
+                'item_is_blog'          => self::toggle($data['blog'] ?? false),
+                'item_is_reference'     => self::toggle($data['reference'] ?? false),
+                'item_is_soft'          => self::toggle($data['soft'] ?? false),
+                'item_is_github'        => self::toggle($data['github'] ?? false),
                 'item_post_related'     => $post_related ?? null,
                 'item_github_url'       => $data['github_url'] ?? null,
             ]
@@ -138,18 +130,15 @@ class EditItemController extends Controller
             foreach ($topics as $row) {
                 $arr[] = $row;
             }
-            
+
             FacetModel::addItemFacets($arr, $item['item_id']);
         }
 
         is_return(__('msg.change_saved'), 'success', url('web'));
     }
-    
+
     public static function toggle($value)
     {
-        $data = $value ?? false;
-        
-        return $data == 'on' ? 1 : null;
+        return $value == 'on' ? 1 : null;
     }
-
 }

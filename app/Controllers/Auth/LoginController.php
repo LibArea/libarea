@@ -5,41 +5,21 @@ namespace App\Controllers\Auth;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\UserModel;
-use Meta, Validation;
+use Meta;
+
+use App\Validate\RulesLogin;
 
 class LoginController extends Controller
 {
     public function index()
     {
-        $email      = Request::getPost('email');
-        $password   = Request::getPost('password');
-        $rememberMe = Request::getPostInt('rememberme');
-        $redirect   = url('login');
+        $data = Request::getPost();
 
-        Validation::email($email = Request::getPost('email'), $redirect);
+        $user = RulesLogin::rules($data);
 
-        $user = UserModel::userInfo($email);
-
-        if (empty($user['id'])) {
-            is_return(__('msg.no_user'), 'error', $redirect);
-        }
-
-        // Находится ли в бан- листе
-        if (UserModel::isBan($user['id'])) {
-            is_return(__('msg.account_verified'), 'error', $redirect);
-        }
-
-        // Активирован ли E-mail
-        if (!UserModel::isActivated($user['id'])) {
-            is_return(__('msg.not_activated'), 'error', $redirect);
-        }
-
-        if (!password_verify($password, $user['password'])) {
-            is_return(__('msg.not_correct'), 'error', $redirect);
-        }
-
-        // Если нажал "Запомнить" 
-        // Устанавливает сеанс пользователя и регистрирует его
+        // If you clicked "Remember", it establishes a user session and registers it
+        // Если нажал "Запомнить", то устанавливает сеанс пользователя и регистрирует его
+        $rememberMe = $data['rememberMe'] ?? false;
         if ($rememberMe == 1) {
             (new \App\Controllers\Auth\RememberController())->rememberMe($user['id']);
         }

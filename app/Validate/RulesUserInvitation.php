@@ -30,5 +30,4 @@ class RulesUserInvitation extends Validator
 
         return true;
     }
-
 }

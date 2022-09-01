@@ -64,7 +64,9 @@
       </div>
 
       <?php if ($post['post_thumb_img']) : ?>
-        <?= Img::image($post['post_thumb_img'], $post['post_title'],  'thumb max-w-100', 'post', 'thumbnails'); ?>
+        <div class="img-preview">
+          <?= Img::image($post['post_thumb_img'], $post['post_title'],  'medium-zoom-image', 'post', 'thumbnails'); ?>
+        </div>
       <?php endif; ?>
 
       <div class="post-body max-w780 full">

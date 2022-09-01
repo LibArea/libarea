@@ -1,7 +1,7 @@
 <main>
   <div class="box">
     <h1 class="mb10 text-2xl font-normal"><?= __('app.invite'); ?></h1>
-    <form class="" action="/invite" method="post">
+    <form action="/invite" method="post">
       <?php csrf_field(); ?>
       <fieldset>
         <label for="invite"><?= __('app.code'); ?></label>

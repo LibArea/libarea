@@ -9,7 +9,7 @@ class RulesUserSetting extends Validator
     public static function rulesSetting($data)
     {
         $redirect = url('setting');
-        
+
         self::length($data['name'], 5, 11, 'name', $redirect);
         self::length($data['about'], 5, 255, 'about', $redirect);
 
@@ -19,11 +19,11 @@ class RulesUserSetting extends Validator
 
         return true;
     }
-    
+
     public static function rulesSecurity($data, $email)
     {
         $redirect   = '/setting/security';
-        
+
         if ($data['password2'] != $data['password3']) {
             is_return(__('msg.pass_match_err'), 'error', $redirect);
         }

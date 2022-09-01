@@ -6,9 +6,10 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\Item\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
-use Content, UploadImage, Discord, Validation, URLScraper, Meta, UserData;
+use Content, UploadImage, Discord, URLScraper, Meta, UserData;
 
 use Utopia\Domains\Domain;
+use App\Validate\RulesPost;
 
 use App\Traits\Slug;
 use App\Traits\Related;
@@ -66,12 +67,10 @@ class AddPostController extends Controller
         // Проверим стоп слова, url
         $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
 
-        $post_title = str_replace("&nbsp;", '', $fields['post_title']);
-        Validation::length($post_title, 6, 250, 'title', $redirect);
-        Validation::length($content, 6, 25000, 'content', $redirect);
+        RulesPost::rules($fields['post_title'], $content, $redirect);
 
         if ($post_url) {
-            $site = $this->addUrl($post_url, $post_title);
+            $site = $this->addUrl($post_url, $fields['post_title']);
         }
 
         // Обложка поста
@@ -79,7 +78,7 @@ class AddPostController extends Controller
             $post_img = UploadImage::coverPost($_FILES['images'], 0, $redirect, $this->user['id']);
         }
 
-        if (PostModel::getSlug($slug = $this->getSlug($post_title))) {
+        if (PostModel::getSlug($slug = $this->getSlug($fields['post_title']))) {
             $slug = $slug . "-";
         }
 
@@ -93,7 +92,7 @@ class AddPostController extends Controller
 
         $last_id = PostModel::create(
             [
-                'post_title'            => $post_title,
+                'post_title'            => $fields['post_title'],
                 'post_content'          => $content,
                 'post_content_img'      => $post_img ?? '',
                 'post_thumb_img'        => $site['og_img'] ?? '',
@@ -134,7 +133,7 @@ class AddPostController extends Controller
 
         if (config('integration.discord')) {
             if ($fields['content_tl'] == 0 && $fields['post_draft'] == 0) {
-                Discord::AddWebhook($content, $post_title, $redirect);
+                Discord::AddWebhook($content, $fields['post_title'], $redirect);
             }
         }
 

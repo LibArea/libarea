@@ -6,8 +6,9 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\Item\{WebModel, UserAreaModel};
 use App\Models\{SubscriptionModel, ActionModel, FacetModel, NotificationModel};
-use Utopia\Domains\Domain;
-use UserData, Meta, Validation, Access;
+use UserData, Meta, Access;
+
+use App\Validate\RulesItem;
 
 class AddItemController extends Controller
 {
@@ -39,28 +40,9 @@ class AddItemController extends Controller
     // Checks and directly adding 
     public function create()
     {
-        $url = Request::getPost('url');
-        $redirect = url('content.add', ['type' => 'item']);
+        $data = Request::getPost();
 
-        Validation::url($url, $redirect);
-
-        // Check if the domain exists in the system  
-        // Проверим наличие домена в системе
-        if ($domain = self::getDomain($url)) {
-            is_return(__('web.site_replay'), 'error', $redirect);
-        }
-
-        // Get a first level domain       
-        // Получим данные домена первого уровня
-        $basic_host =  self::domain($url);
-
-        // Check the length of the site name
-        // Проверим длину названия сайта
-        Validation::length(Request::getPost('title'), 14, 250, 'title', $redirect);
-
-        // Make the description optional for publication (it will still be rewritten) 
-        // Сделать описание необязательным для публикации (оно все равно будет переписано) 
-        $content = Request::getPost('content') ?? __('web.desc_formed');
+        $basic_host = RulesItem::rulesAdd($data);
 
         // Instant accommodation for staff only
         // Мгновенное размещение только для персонала
@@ -69,10 +51,10 @@ class AddItemController extends Controller
 
         $item_last = WebModel::add(
             [
-                'item_url'              => $url,
+                'item_url'              => $data['url'],
                 'item_domain'           => $basic_host,
-                'item_title'            => Request::getPost('title'),
-                'item_content'          => $content,
+                'item_title'            => $data['title'],
+                'item_content'          => $data['content'] ?? __('web.desc_formed'),
                 'item_published'        => $published,
                 'item_user_id'          => $this->user['id'],
                 'item_close_replies'    => Request::getPost('close_replies') == 'on' ? 1 : null,
@@ -118,20 +100,5 @@ class AddItemController extends Controller
         SubscriptionModel::focus($item_last['item_id'], $this->user['id'], 'item');
 
         is_return(__('web.site_added'), 'success', url('web'));
-    }
-
-    public static function getDomain($url)
-    {
-        $basic_host = self::domain($url);
-
-        return WebModel::getItemOne($basic_host, 1);
-    }
-
-    public static function domain($url)
-    {
-        $parse  = parse_url($url);
-        $domain = new Domain($parse['host']);
-
-        return $domain->getRegisterable();
     }
 }
