@@ -5,7 +5,8 @@ namespace App\Controllers\Answer;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, PostModel};
-use Content, Validation;
+use App\Validate\Validator;
+use Content;
 
 class AddAnswerController extends Controller
 {
@@ -19,7 +20,7 @@ class AddAnswerController extends Controller
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
-        Validation::Length($content, 6, 5000, 'content', $url_post);
+        Validator::Length($content, 6, 5000, 'content', $url_post);
 
         // Let's check the stop words, url
         // Проверим стоп слова, url

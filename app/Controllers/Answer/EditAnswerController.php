@@ -6,7 +6,8 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{AnswerModel, PostModel};
 use App\Models\User\UserModel;
-use Validation, Meta, Access;
+use App\Validate\Validator;
+use Meta, Access;
 
 use App\Traits\Author;
 
@@ -56,7 +57,7 @@ class EditAnswerController extends Controller
         $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
         $url_post = url('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
 
-        Validation::Length($content, 6, 5000, 'content', url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]));
+        Validator::Length($content, 6, 5000, 'content', url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]));
 
         AnswerModel::edit(
             [

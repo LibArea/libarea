@@ -1,10 +1,10 @@
-<ol class="list-items">
+<ol itemscope itemtype = "https://schema.org/ItemList https://schema.org/WebSite" class="list-items">
   <?php foreach ($data['items'] as $item) : ?>
 
     <?php if ($item['item_published'] == 1) : ?>
       <li>
         <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
-          <h3 class="title"><?= $item['item_title']; ?>
+          <h3 class="title" itemprop="name"><?= $item['item_title']; ?>
             <?php $date = date_diff(new DateTime(), new DateTime($item['item_date']))->days; ?>
             <?php if ($date < 3) : ?><sup class="red text-sm">new</sup><?php endif; ?></h3>
         </a>
@@ -38,7 +38,7 @@
                 </svg>
               </span>
             <?php endif; ?>
-            <div class="list-items__text">
+            <div class="list-items__text" itemprop="description">
               <?= Content::fragment(Content::text($item['item_content'], 'line'), 200); ?>
             </div>
             <div class="list-items__footer">

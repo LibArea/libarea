@@ -5,7 +5,8 @@ namespace App\Controllers\Team;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\TeamModel;
-use Meta, Validation;
+use App\Validate\RulesTeam;
+use Meta;
 
 class EditTeamController extends Controller
 {
@@ -50,19 +51,14 @@ class EditTeamController extends Controller
             return true;
         }
 
-        $name = Request::getPost('name');
-        $content = Request::getPost('content');
-
-        $redirect = url('teams');
-
-        Validation::length($name, 6, 250, 'title', $redirect);
-        Validation::length($content, 6, 5000, 'content', $redirect);
+        $data = Request::getPost();
+        RulesTeam::rules($data, url('teams'));
 
         TeamModel::edit(
             [
                 'team_id'       => $team['id'],
-                'team_name'     => $name,
-                'team_content'  => $content,
+                'team_name'     => $data['name'],
+                'team_content'  => $data['content'],
                 'team_type'     => 'post',
                 'team_modified' => date("Y-m-d H:i:s"),
             ]

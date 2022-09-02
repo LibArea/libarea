@@ -5,7 +5,8 @@ namespace App\Controllers\Comment;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{CommentModel, PostModel};
-use Access, Validation;
+use App\Validate\Validator;
+use Access;
 
 class EditCommentController extends Controller
 {
@@ -50,7 +51,7 @@ class EditCommentController extends Controller
         $slug = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         $redirect = $slug . '#comment_' . $comment['comment_id'];
 
-        Validation::length($content, 3, 5500, 'content', $redirect);
+        Validator::length($content, 3, 5500, 'content', $redirect);
 
         CommentModel::edit(
             [

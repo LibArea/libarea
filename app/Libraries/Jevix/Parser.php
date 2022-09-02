@@ -56,7 +56,7 @@ class Parser
         // Разрешённые параметры тегов. 
         $jevix->cfgAllowTagParams('a', ['href' => '#link']);
 
-        $jevix->cfgAllowTagParams('iframe', ['width' => '#int', 'height' => '#int', 'style' => '#text', 'frameborder' => '#int', 'allowfullscreen' => '#text', 'src' => ['#domain' => ['youtube.com', 'yandex.ru', 'rutube.ru', 'vk.com']]]);
+        $jevix->cfgAllowTagParams('iframe', ['width' => '#int', 'height' => '#int', 'style' => '#text', 'frameborder' => '#int', 'allowfullscreen' => '#text', 'src' => ['#domain' => ['youtube.com', 'yandex.ru', 'rutube.ru', 'vk.com', 'vgtrk.com', 'player.vgtrk.com', 'smotrim.ru']]]);
 
         $jevix->cfgAllowTagParams('img', ['src', 'style' => '#text', 'alt' => '#text', 'title' => '#text', 'width' => '#int', 'height' => '#int', 'class' => '#text']);
 

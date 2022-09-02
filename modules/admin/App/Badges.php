@@ -5,7 +5,8 @@ namespace Modules\Admin\App;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
-use Validation, Meta;
+use App\Validate\RulesBadge;
+use Meta;
 
 class Badges extends Controller
 {
@@ -66,26 +67,22 @@ class Badges extends Controller
     // Добавляем награду
     public function create()
     {
-        $title         = Request::getPost('badge_title');
-        $description   = Request::getPost('badge_description');
-        $icon          = $_POST['badge_icon']; // для Markdown
+        $data   = Request::getPost();
+        $icon   = $_POST['badge_icon']; // для Markdown
 
-        $redirect = url('admin.badges');
-        Validation::Length($title, '4', '25', 'msg.title', $redirect);
-        Validation::Length($description, '12', '250', 'msg.description', $redirect);
-        Validation::Length($icon, '12', '250', 'msg.icon', $redirect);
+        RulesBadge::rules($data, $icon);
 
         BadgeModel::add(
             [
-                'badge_title'       => $title,
-                'badge_description' => $description,
+                'badge_title'       => $data['badge_title'],
+                'badge_description' => $data['badge_description'],
                 'badge_icon'        => $icon,
                 'badge_tl'          => 0,
                 'badge_score'       => 0,
             ]
         );
 
-        redirect($redirect);
+        redirect(url('admin.badges'));
     }
 
     // Participant award form
@@ -127,25 +124,22 @@ class Badges extends Controller
     {
         $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getId($badge_id);
-
-        $redirect = url('admin.badges');
+        $data       = Request::getPost();
+        $redirect   = url('admin.badges');
+        
         if (!$badge['badge_id']) {
             redirect($redirect);
         }
 
-        $title         = Request::getPost('badge_title');
-        $description   = Request::getPost('badge_description');
-        $icon          = $_POST['badge_icon']; // для Markdown
+        $icon   = $_POST['badge_icon']; // для Markdown
 
-        Validation::Length($title, 4, 25, 'title', $redirect);
-        Validation::Length($description, 12, 250, 'description', $redirect);
-        Validation::Length($icon, 6, 250, 'icon', $redirect);
+        RulesBadge::rules($data, $icon);
 
         BadgeModel::edit(
             [
-                'badge_id'          => $badge_id,
-                'badge_title'       => $title,
-                'badge_description' => $description,
+                'badge_id'          => Request::getInt('id'),
+                'badge_title'       => $data['badge_title'],
+                'badge_description' => $data['badge_description'],
                 'badge_icon'        => $icon,
             ]
         );

@@ -5,7 +5,8 @@ namespace App\Controllers\Comment;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, CommentModel, PostModel};
-use Content, Validation;
+use App\Validate\Validator;
+use Content;
 
 class AddCommentController extends Controller
 {
@@ -39,7 +40,7 @@ class AddCommentController extends Controller
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
-        Validation::Length($content, 6, 2024, 'content', $url_post);
+        Validator::Length($content, 6, 2024, 'content', $url_post);
 
         // Let's check the stop words, url
         // Проверим стоп слова, url

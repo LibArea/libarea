@@ -42,7 +42,6 @@ class MainConnector implements Connector
 
             "Content"                       => "app/Libraries/Content.php",
             "UploadImage"                   => "app/Libraries/UploadImage.php",
-            "Validation"                    => "app/Libraries/Validation.php",
             "Html"                          => "app/Libraries/Html.php",
             "Meta"                          => "app/Libraries/Meta.php",
             "UserData"                      => "app/Libraries/UserData.php",

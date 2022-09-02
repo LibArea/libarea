@@ -5,7 +5,8 @@ namespace App\Controllers\Auth;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
-use Google, Validation, SendEmail, Meta, Html, Msg, UserData;
+use App\Validate\Validator;
+use Google, SendEmail, Meta, Html, Msg, UserData;
 
 class RecoverController extends Controller
 {
@@ -40,7 +41,7 @@ class RecoverController extends Controller
             }
         }
 
-        Validation::email($email = Request::getPost('email'), $redirect);
+        Validator::email($email = Request::getPost('email'), $redirect);
 
         $uInfo = UserModel::userInfo($email);
 
@@ -107,7 +108,7 @@ class RecoverController extends Controller
             return false;
         }
 
-        Validation::length($password, 8, 32, 'password', url('recover.code', ['code' => $code]));
+        Validator::length($password, 8, 32, 'password', url('recover.code', ['code' => $code]));
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         SettingModel::editPassword(['id' => $user_id, 'password' => $newpass]);

@@ -6,7 +6,8 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\Item\{WebModel, ReplyModel};
 use App\Models\{ActionModel, NotificationModel};
-use Validation, Access;
+use App\Validate\Validator;
+use Access;
 
 class ReplyController extends Controller
 {
@@ -45,7 +46,7 @@ class ReplyController extends Controller
         self::error404($item);
 
         $url = url('website', ['slug' => $item['item_domain']]);
-        Validation::Length($content, 6, 555, 'content', $url);
+        Validator::Length($content, 6, 555, 'content', $url);
 
         // Access verification 
         $reply = ReplyModel::getId($id);
@@ -78,7 +79,7 @@ class ReplyController extends Controller
         self::error404($item);
 
         $url = url('website', ['slug' => $item['item_domain']]);
-        Validation::Length($content, 6, 555, 'content', $url);
+        Validator::Length($content, 6, 555, 'content', $url);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день

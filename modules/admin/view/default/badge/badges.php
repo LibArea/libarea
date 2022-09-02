@@ -3,11 +3,19 @@
   [
     'data'  => $data,
     'meta'  => $meta,
-    'menus' => []
+    'menus' => [
+      [
+        'id' => $data['type'] . '.all',
+        'url' => url('admin.' . $data['type']),
+        'name' => __('admin.all'),
+      ], [
+        'id' => $data['type'] . '.all',
+        'url' => url('admin.badges.add'),
+        'name' => __('admin.add'),
+      ]
+    ]
   ]
 ); ?>
-
-<a class="sky mb15" href="<?= url('admin.badges.add'); ?>"><?= __('admin.add'); ?></a>
 
 <?php if (!empty($data['badges'])) : ?>
   <table class="mt20">
