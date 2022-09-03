@@ -16,7 +16,7 @@ $q = $data['q'];
         <?= __('search.name'); ?>
       </a>
       <div class="w-100">
-        <div data-template="one" class="flex justify-between" id="find tippy">
+        <div data-template="one" class="flex justify-between" id="find">
 
           <ul class="nav inline">
             <li><a href="/"><svg class="icons">

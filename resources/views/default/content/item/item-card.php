@@ -1,8 +1,8 @@
-<ol itemscope itemtype = "https://schema.org/ItemList https://schema.org/WebSite" class="list-items">
+<ol itemscope itemtype = "https://schema.org/ItemList" class="list-items">
   <?php foreach ($data['items'] as $item) : ?>
 
     <?php if ($item['item_published'] == 1) : ?>
-      <li>
+      <li itemscope itemprop="itemListElement" itemtype="https://schema.org/Organization">
         <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
           <h3 class="title" itemprop="name"><?= $item['item_title']; ?>
             <?php $date = date_diff(new DateTime(), new DateTime($item['item_date']))->days; ?>
@@ -57,7 +57,7 @@
                   <svg class="icons gray ml5">
                     <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
                   </svg>
-                  <a class="black " href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
+                  <a itemprop="url" class="black " href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
                     <?= __('web.more'); ?>
                   </a>
                 </div>

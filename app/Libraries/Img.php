@@ -66,10 +66,12 @@ class Img
     // Icons, screenshots associated with the site
     public static function website($domain, $type, $alt, $css = '')
     {
-        $path = $type == 'thumbs' ? self::PATH['thumbs'] : self::PATH['favicons'];
+        $path = ($type == 'thumbs') ? self::PATH['thumbs'] : self::PATH['favicons'];
+           
+        $itemprop = ($type == 'thumbs') ? 'itemprop="image"' : '';
            
         if (file_exists(HLEB_PUBLIC_DIR . $path . $domain . '.png')) {
-            return '<img class="' . $css . '" src="' . $path . $domain . '.png" title="' . $alt . '" alt="' . $alt . '">';
+            return '<img ' . $itemprop . ' class="' . $css . '" src="' . $path . $domain . '.png" title="' . $alt . '" alt="' . $alt . '">';
         }
 
         return '<img class="mr5 ' . $css . '" src="' . $path . 'no-link.png" title="' . $alt . '" alt="' . $alt . '">';

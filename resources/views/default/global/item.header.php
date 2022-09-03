@@ -13,7 +13,7 @@ use Hleb\Constructor\Handlers\Request; ?>
         <?= __('web.catalog'); ?>
       </a>
       <div class="w-100">
-        <div data-template="one" id="find tippy">
+        <div data-template="one" id="fing">
           <a class="flex left items-center gap-min gray mb5" href="/">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#home"></use>
