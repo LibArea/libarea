@@ -6,7 +6,8 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, BadgeModel};
 use Modules\Admin\App\Models\{BanUserModel, UserModel};
-use Validation, Meta, Html;
+use App\Validate\Validator;
+use Meta, Html;
 
 class Users extends Controller
 {
@@ -116,10 +117,10 @@ class Users extends Controller
 
         $redirect = url('admin.user.edit', ['id' => $user['id']]);
 
-        Validation::length($data['login'], 3, 11, 'login', $redirect);
+        Validator::length($data['login'], 3, 11, 'login', $redirect);
 
         if ($data['email']) {
-            Validation::email(Request::getPost('email'), $redirect);
+            Validator::email(Request::getPost('email'), $redirect);
         }
 
         SettingModel::edit(

@@ -93,7 +93,8 @@ class PostController extends Controller
         }
 
         $m = [
-            'date'      => $content['post_date'],
+            'published_time' => $content['post_date'],
+            'type'      => 'article',
             'og'        => true,
             'imgurl'    => $content_img,
             'url'       => url('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),

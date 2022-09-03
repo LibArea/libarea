@@ -2,7 +2,7 @@
   <?php foreach ($data['items'] as $item) : ?>
 
     <?php if ($item['item_published'] == 1) : ?>
-      <li itemscope itemprop="itemListElement" itemtype="https://schema.org/Organization">
+      <li itemscope itemprop="itemListElement" itemtype="https://schema.org/WebSite">
         <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
           <h3 class="title" itemprop="name"><?= $item['item_title']; ?>
             <?php $date = date_diff(new DateTime(), new DateTime($item['item_date']))->days; ?>

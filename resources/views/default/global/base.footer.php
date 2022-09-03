@@ -1,6 +1,6 @@
 </div>
 
-<footer class="footer box-shadow-top" itemtype="http://schema.org/WPFooter">
+<footer class="footer box-shadow-top" itemscope itemtype="http://schema.org/WPFooter">
   <?php $type = $data['type'] ?? false; ?> 
   <?php if (UserData::getUserScroll() == false || $type != 'main') : ?>  
     <div class="wrap">
@@ -21,18 +21,18 @@
       </div>
       <div class="flex right mb5">
         <ul class="mb-none">
-          <li><a href="<?= url('blogs.all'); ?>"><?= __('app.blogs'); ?></a></li>
-          <li><a href="<?= url('topics.all'); ?>"><?= __('app.topics'); ?></a></li>
-          <li><a href="<?= url('web'); ?>"><?= __('app.catalog'); ?></a></li>
+          <li><a itemprop="url" href="<?= url('blogs.all'); ?>"><?= __('app.blogs'); ?></a></li>
+          <li><a itemprop="url" href="<?= url('topics.all'); ?>"><?= __('app.topics'); ?></a></li>
+          <li><a itemprop="url" href="<?= url('web'); ?>"><?= __('app.catalog'); ?></a></li>
         </ul>
         <ul class="mb-none">
-          <li><a href="<?= url('users.all'); ?>"><?= __('app.users'); ?></a></li>
-          <li><a href="<?= url('answers'); ?>"><?= __('app.answers'); ?></a></li>
-          <li><a href="<?= url('comments'); ?>"><?= __('app.comments'); ?></a></li>
+          <li><a itemprop="url" href="<?= url('users.all'); ?>"><?= __('app.users'); ?></a></li>
+          <li><a itemprop="url" href="<?= url('answers'); ?>"><?= __('app.answers'); ?></a></li>
+          <li><a itemprop="url" href="<?= url('comments'); ?>"><?= __('app.comments'); ?></a></li>
         </ul>
         <ul>
           <?php foreach (config('facets.page') as $page) : ?>
-            <li><a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $page]); ?>"><?= __('app.' . $page); ?></a></li>
+            <li><a itemprop="url" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $page]); ?>"><?= __('app.' . $page); ?></a></li>
           <?php endforeach; ?>
         </ul>
       </div>

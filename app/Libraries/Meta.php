@@ -20,9 +20,14 @@ class Meta
 
         $output .= '<meta name="description" content="' . $description . '">';
 
-        if (!empty($m['date'])) {
-            $output .= '<meta property="og:type" content="article" />'
-                . '<meta property="article:published_time" content="' . $m['date'] . '" />';
+        if (!empty($m['published_time'])) {
+            $output .= '<meta property="article:published_time" content="' . $m['published_time'] . '" />';
+        } 
+       
+        if (!empty($m['type'])) {
+            $output .= '<meta property="og:type" content="' . $m['type'] . '" />';
+        }  else {
+            $output .= '<meta property="og:type" content="website" />';
         }
 
         if (!empty($m)) {
