@@ -195,7 +195,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function latestItems($limit)
     {
-        $sql = "SELECT item_title, item_domain FROM items WHERE item_published = 1 ORDER BY item_id DESC LIMIT :limit";
+        $sql = "SELECT item_title, item_domain FROM items WHERE item_published = 1 AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :limit";
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
