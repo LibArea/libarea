@@ -196,6 +196,12 @@ details[open] > summary {
   font-size: 1.3125rem;
 }
 
+.title-max {
+  margin: 0 0 20px 0;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
 .txt-closed {
   padding: 10px;
   background-color: lightyellow;
