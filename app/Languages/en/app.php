@@ -290,6 +290,7 @@ return [
 
     'language'          => 'Localization',
     'ru_language'       => 'Russian',
+    'ua_language'       => 'Ukrainian',
     'en_language'       => 'English',
     'de_language'       => 'Deutsch',
     'fr_language'       => 'French',

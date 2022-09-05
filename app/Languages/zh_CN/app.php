@@ -290,6 +290,7 @@ return [
 
     'language'          => '语言',
     'ru_language'       => '俄语',
+    'ua_language'       => '乌克兰',
     'en_language'       => '英语',
     'de_language'       => '德语',
     'fr_language'       => '法语',

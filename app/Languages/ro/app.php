@@ -290,6 +290,7 @@ return [
 
     'language'          => 'Localizare',
     'ru_language'       => 'Rusă',
+    'ua_language'       => 'Ucrainean',
     'en_language'       => 'Engleză',
     'de_language'       => 'Deutsch',
     'fr_language'       => 'Franceza',
