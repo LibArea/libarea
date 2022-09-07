@@ -42,8 +42,8 @@ class SearchController extends Controller
             $stem = new LinguaStem($lang);
             $stem = $stem->text($q);
 
-            $results = SearchModel::getSearch($pageNumber, $this->limit, $stem, $type);
-            $count =  SearchModel::getSearchCount($stem, $type);
+            $results = SearchModel::getSearch($pageNumber, $this->limit, $q, $type);
+            $count =  SearchModel::getSearchCount($q, $type);
 
             $user_id = UserData::getUserId();
             SearchModel::setSearchLogs(
@@ -68,7 +68,7 @@ class SearchController extends Controller
                     'type'          => $type,
                     'sheet'         => 'admin',
                     'q'             => $q,
-                    'tags'          => SearchModel::getSearchTags($q, $facet, 4),
+                    'tags'          => SearchModel::getSearchTags($stem, $facet, 4),
                     'sw'            => (microtime(true) - $sw ?? 0) * 1000,
                     'count'         => $count,
                     'pagesCount'    => ceil($count / $this->limit),

@@ -30,7 +30,7 @@ $facet  = $data['facet'] ?? false; ?>
       <a class="black text-xs" href="/web">
         <svg class="icons icon-small">
           <use xlink:href="/assets/svg/icons.svg#link"></use>
-        </svg> <?= __('app.search'); ?> <?= __('app.catalog'); ?>
+        </svg> <?= __('app.catalog'); ?>
       </a>
       <a class="black text-xs" href="/search">
         <svg class="icons icon-small">

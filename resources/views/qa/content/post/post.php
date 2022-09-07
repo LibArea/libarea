@@ -38,7 +38,7 @@ use Hleb\Constructor\Handlers\Request; ?>
         </a>
         <div class="flex flex-row flex-auto items-center justify-between lowercase">
           <div class="flex-auto">
-            <?= Img::facets($post['facet_list'], 'blog', 'gray text-xs mr15'); ?>
+            <?= Img::facets($post['facet_list'], 'blog', 'tag-yellow'); ?>
             <?= Img::facets($post['facet_list'], 'topic', 'tag-grey'); ?>
             <?php if ($post['post_url_domain']) : ?>
               <a class="gray-600 text-sm ml10" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
