@@ -63,7 +63,7 @@ class EditAnswerController extends Controller
             [
                 'answer_id'         => $answer_id,
                 'answer_content'    => $content,
-                'answer_user_id'    => $this->editAuthor($answer['answer_user_id'], Request::getPost('user_id')),
+                'answer_user_id'    => $this->selectAuthor($answer['answer_user_id'], Request::getPost('user_id')),
                 'answer_modified'   => date("Y-m-d H:i:s"),
             ]
         );

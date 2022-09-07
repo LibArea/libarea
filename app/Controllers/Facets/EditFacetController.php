@@ -61,7 +61,7 @@ class EditFacetController extends Controller
 
         UploadImage::set($_FILES, $facet['facet_id'], 'facet');
 
-        $facet_user_id = $this->editAuthor($facet['facet_user_id'], Request::getPost('user_id'));
+        $facet_user_id = $this->selectAuthor($facet['facet_user_id'], Request::getPost('user_id'));
 
         $post_related = $this->relatedPost();
         $facet_top_level = $data['facet_top_level'] ?? false;

@@ -6,7 +6,7 @@ use UserData;
 
 trait Author
 {
-    private function editAuthor($user_id, $user_new)
+    private function selectAuthor($user_id, $user_new)
     {
         if (!$user_new) {
             return $user_id;
