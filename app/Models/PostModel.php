@@ -60,6 +60,13 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['slug' => $slug])->fetch();
     }
 
+    public static function getPostId($post_id)
+    {
+        $sql = "SELECT post_id, post_title, post_slug FROM posts WHERE post_id = :post_id";
+
+        return DB::run($sql, ['post_id' => $post_id])->fetchAll();
+    }
+
     // Full post 
     // Полная версия поста  
     public static function getPost($params, $name, $user)

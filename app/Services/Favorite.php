@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Services;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\Item\WebModel;
 use App\Models\{FavoriteModel, PostModel, AnswerModel};
 
-class FavoriteController extends Controller
+class Favorite
 {
     public function index()
     {
@@ -18,24 +18,18 @@ class FavoriteController extends Controller
             return false;
         }
 
-        self::redirectItem($content_id, $type, $this->user);
+        self::redirectItem($content_id, $type);
 
-        FavoriteModel::setFavorite(
-            [
-                'tid'           => $content_id,
-                'user_id'       => $this->user['id'],
-                'action_type'   => $type,
-            ]
-        );
+        FavoriteModel::setFavorite($content_id, $type);
 
         return __('app.successfully');
     }
 
-    public static function redirectItem($content_id, $type, $user)
+    public static function redirectItem($content_id, $type)
     {
         switch ($type) {
             case 'post':
-                $content  = PostModel::getPost($content_id, 'id', $user);
+                $content  = PostModel::getPostId($content_id);
                 break;
             case 'website':
                 $content  = WebModel::getItemId($content_id);

@@ -97,7 +97,7 @@ class AddItemController extends Controller
             );
         }
 
-        SubscriptionModel::focus($item_last['item_id'], $this->user['id'], 'item');
+        SubscriptionModel::focus($item_last['item_id'], 'item');
 
         is_return(__('web.site_added'), 'success', url('web'));
     }

@@ -31,6 +31,7 @@ class TopicFacetController extends Controller
         $title  = $facet['facet_seo_title'] . ' — ' .  __('app.topic');
         $description   = $facet['facet_description'];
 
+        $url = url('topic', ['slug' => $facet['facet_slug']]);
         if ($sheet == 'recommend') {
             $url    =  url('recommend', ['slug' => $facet['facet_slug']]);
             $title  = $facet['facet_seo_title'] . ' — ' .  __('app.rec_posts');
@@ -40,7 +41,7 @@ class TopicFacetController extends Controller
         $m = [
             'og'         => true,
             'imgurl'     => Img::PATH['facets_logo'] . $facet['facet_img'],
-            'url'        => url('topic', ['slug' => $facet['facet_slug']]),
+            'url'        => $url,
         ];
 
         return $this->render(
@@ -128,7 +129,7 @@ class TopicFacetController extends Controller
     {
         return [
             'facet'         => $facet,
-            'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
+            'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], 'facet'),
             'related_posts' => PostModel::postRelated($facet['facet_post_related'] ?? null),
             'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
             'writers'       => FacetModel::getWriters($facet['facet_id'], 15),

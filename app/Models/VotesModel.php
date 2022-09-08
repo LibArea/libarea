@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use DB;
+use UserData;
 
 class VotesModel extends \Hleb\Scheme\App\Models\MainModel
 {
@@ -18,22 +19,22 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Checking if the user has voted
     // Проверяем, голосовал ли пользователь
-    public static function voteStatus($content_id, $author_id, $type)
+    public static function voteStatus($content_id, $type)
     {
         $sql = "SELECT votes_" . $type . "_item_id,  votes_" . $type . "_user_id
                     FROM votes_" . $type . "  
                         WHERE votes_" . $type . "_item_id = :content_id AND votes_" . $type . "_user_id = :author_id";
 
-        return  DB::run($sql, ['content_id' => $content_id, 'author_id' => $author_id])->fetch();
+        return  DB::run($sql, ['content_id' => $content_id, 'author_id' => UserData::getUserId()])->fetch();
     }
 
-    public static function saveVote($content_id, $ip, $user_id, $type)
+    public static function saveVote($content_id, $ip, $type)
     {
         $params = [
             'item_id'   => $content_id,
             'points'    => 1,
             'ip'        => $ip,
-            'user_id'   => $user_id,
+            'user_id'   => UserData::getUserId(),
         ];
 
         $sql = "INSERT INTO votes_" . $type . "(votes_" . $type . "_item_id, 

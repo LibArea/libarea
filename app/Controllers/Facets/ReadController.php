@@ -35,7 +35,7 @@ class ReadController extends Controller
                     'facet'         => $facet,
                     'read'          => $read,
                     'info'          => Content::text($facet['facet_info'] ?? false, 'text'),
-                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], $this->user['id'], 'facet'),
+                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], 'facet'),
                 ]
             ]
         );

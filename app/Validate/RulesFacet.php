@@ -20,9 +20,9 @@ class RulesFacet extends Validator
         }
 
         self::Length($data['facet_title'], 3, 64, 'title', $redirect);
-        self::Length($data['facet_description'], 34, 225, 'meta_description', $redirect);
+        self::Length($data['facet_description'], 3, 225, 'meta_description', $redirect);
         self::Length($data['facet_short_description'], 9, 160, 'short_description', $redirect);
-        self::Length($data['facet_seo_title'], 4, 225, 'slug', $redirect);
+        self::Length($data['facet_seo_title'], 3, 225, 'slug', $redirect);
 
         // Slug
         self::Length($data['facet_slug'], 3, 43, 'slug', $redirect);
@@ -67,13 +67,12 @@ class RulesFacet extends Validator
 
         // Проверка длины
         self::Length($data['facet_title'], 3, 64, 'title', $redirect);
-        self::Length($data['facet_description'], 34, 225, 'meta_description', $redirect);
+        self::Length($data['facet_description'], 3, 225, 'meta_description', $redirect);
         self::Length($data['facet_short_description'], 9, 160, 'short_description', $redirect);
-        self::Length($data['facet_seo_title'], 4, 225, 'slug', $redirect);
-        self::Length($data['facet_seo_title'], 0, 225, 'info', $redirect); // ??????????????????????????????????
+        self::Length($data['facet_seo_title'], 3, 225, 'slug', $redirect);
 
         // Slug
-        self::Length($data['facet_slug'], 3, 43, 'slug', $redirect);
+        self::Length($data['facet_slug'], 3, 32, 'slug', $redirect);
 
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $data['facet_slug'])) {
             is_return(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);

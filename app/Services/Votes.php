@@ -1,36 +1,36 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Services;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\VotesModel;
 
-class VotesController extends Controller
+class Votes
 {
     public function index()
     {
-        $up_id  = Request::getPostInt('content_id');
         $type   = Request::getPost('type');
-
         $allowed = ['post', 'comment', 'answer', 'item', 'reply'];
         if (!in_array($type, $allowed)) return false;
-        if ($up_id <= 0) return false;
+        
+        $content_id  = Request::getPostInt('content_id');        
+        if ($content_id <= 0) return false;
 
-        // Проверяем, чтобы участник не голосовал за свой контент
         // We check that the participant does not vote for their content
+        // Проверяем, чтобы участник не голосовал за свой контент
         // $type = post / answer / comment / item
-        $author_id = VotesModel::authorId($up_id, $type);
+        $author_id = VotesModel::authorId($content_id, $type);
         if ($this->user['id'] == $author_id) return false;
 
-        // Проверяем, голосовал ли пользователь
         // We check whether the user voted
-        $info = VotesModel::voteStatus($up_id, $this->user['id'], $type);
+        // Проверяем, голосовал ли пользователь
+        $info = VotesModel::voteStatus($content_id, $type);
         if ($info) return false;
 
         $ip = Request::getRemoteAddress();
 
-        VotesModel::saveVote($up_id, $ip, $this->user['id'], $type);
-        VotesModel::saveVoteContent($up_id, $type);
+        VotesModel::saveVote($content_id, $ip, $type);
+        VotesModel::saveVoteContent($content_id, $type);
 
         return true;
     }

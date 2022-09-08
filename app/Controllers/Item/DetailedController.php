@@ -72,7 +72,7 @@ class DetailedController extends Controller
                     'type'              => 'web',
                     'item'              => $item,
                     'tree'              => $tree,
-                    'item_signed'       => SubscriptionModel::getFocus($item['item_id'], $this->user['id'], 'item'),
+                    'item_signed'       => SubscriptionModel::getFocus($item['item_id'], 'item'),
                     'similar'           => $similar ?? [],
                     'user_count_site'   => $count_site,
                     'related_posts'     => $related_posts ?? [],

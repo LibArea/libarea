@@ -137,7 +137,7 @@ class AddPostController extends Controller
             }
         }
 
-        SubscriptionModel::focus($last_id, $this->user['id'], 'post');
+        SubscriptionModel::focus($last_id, 'post');
 
         ActionModel::addLogs(
             [

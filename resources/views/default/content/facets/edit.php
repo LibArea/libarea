@@ -71,7 +71,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     <fieldset>
       <label for="facet_seo_title"><?= __('app.title'); ?> (SEO)<sup class="red">*</sup></label>
       <input minlength="4" maxlength="255" type="text" name="facet_seo_title" value="<?= $fs['facet_seo_title']; ?>">
-      <div class="help">4 - 255 <?= __('app.characters'); ?></div>
+      <div class="help">> 3 <?= __('app.characters'); ?></div>
     </fieldset>
 
     <fieldset>
@@ -104,14 +104,14 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
     <fieldset>
       <label for="facet_description"><?= __('app.meta_description'); ?><sup class="red">*</sup></label>
-      <textarea class="add max-w780" rows="6" minlength="44" name="facet_description"><?= $fs['facet_description']; ?></textarea>
-      <div class="help">> 44 <?= __('app.characters'); ?></div>
+      <textarea class="add max-w780" rows="6" minlength="3" name="facet_description"><?= $fs['facet_description']; ?></textarea>
+      <div class="help">> 3 <?= __('app.characters'); ?></div>
     </fieldset>
 
     <fieldset>
       <label for="facet_short_description"><?= __('app.short_description'); ?><sup class="red">*</sup></label>
       <input minlength="11" maxlength="120" value="<?= $fs['facet_short_description']; ?>" type="text" required="" name="facet_short_description">
-      <div class="help">11 - 120 <?= __('app.characters'); ?></div>
+      <div class="help">> 3 <?= __('app.characters'); ?></div>
     </fieldset>
 
     <fieldset>

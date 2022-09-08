@@ -17,8 +17,8 @@ class HomeController extends Controller
         $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $this->user, $sheet);
         $items          = HomeModel::latestItems(3); // (LIMIT)
 
-        // If guest, show default topics      
-        // Если гость, то покажим темы по умолчанию
+        // Topics signed by the participant. If a guest, then default.    
+        // Темы на которые подписан участник. Если гость, то дефолтные.
         $topics = \App\Models\FacetModel::advice($this->user['id']);
 
         $m = [
