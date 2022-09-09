@@ -1,0 +1,1 @@
+<?= insert('/content/post/post', ['data' => $data]); ?>
