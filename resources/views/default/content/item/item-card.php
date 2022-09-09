@@ -57,7 +57,7 @@
                   <svg class="icons gray ml5">
                     <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
                   </svg>
-                  <a itemprop="url" class="black " href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
+                  <a itemprop="url" class="black lowercase" href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
                     <?= __('web.more'); ?>
                   </a>
                 </div>

@@ -16,7 +16,7 @@ class AddAnswerController extends Controller
         $post    = PostModel::getPost($post_id, 'id', $this->user);
         self::error404($post);
 
-        $content = $_POST['content']; // для Markdown
+        $content = $_POST['content']; // Markdown
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
@@ -47,7 +47,7 @@ class AddAnswerController extends Controller
             (new \App\Controllers\AuditController())->create('answer', $last_id, url('admin.audits'));
         }
 
-        // Notification (@login). 11 - mentions in answers 
+        // Notification (@login).
         if ($message = Content::parseUser($content, true, true)) {
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_ANSWER, $message, $url, $post['post_user_id']);
         }

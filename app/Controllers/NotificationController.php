@@ -68,8 +68,8 @@ class NotificationController extends Controller
                 }
             }
 
+            // Admin notification
             // Оповещение админу
-            // Admin notification 
             NotificationModel::send(
                 [
                     'sender_id'    => $this->user['id'],

@@ -13,7 +13,7 @@ class Subscription
         $allowed = ['post', 'facet', 'category', 'item'];
         if (!in_array($type, $allowed)) return false;
 
-        $content_id = Request::getPostInt('content_id');        
+        $content_id = Request::getPostInt('content_id');
         if ($content_id <= 0) return false;
 
         SubscriptionModel::focus($content_id, $type);

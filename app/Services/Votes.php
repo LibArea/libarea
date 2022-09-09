@@ -12,8 +12,8 @@ class Votes
         $type   = Request::getPost('type');
         $allowed = ['post', 'comment', 'answer', 'item', 'reply'];
         if (!in_array($type, $allowed)) return false;
-        
-        $content_id  = Request::getPostInt('content_id');        
+
+        $content_id  = Request::getPostInt('content_id');
         if ($content_id <= 0) return false;
 
         // We check that the participant does not vote for their content

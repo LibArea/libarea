@@ -68,11 +68,9 @@ class SettingController extends Controller
 
     function edit()
     {
-        $data = Request::getPost();
+        RulesUserSetting::rulesSetting($data = Request::getPost());
 
-        RulesUserSetting::rulesSetting($data);
-
-        $user   = UserModel::getUser($this->user['id'], 'id');
+        $user = UserModel::getUser($this->user['id'], 'id');
 
         SettingModel::edit(
             [

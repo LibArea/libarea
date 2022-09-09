@@ -20,6 +20,7 @@ class ActionController extends Controller
             return false;
         }
 
+        // Access check 
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($content_id, $type);
         if (Access::author($type, $info_type[$type . '_user_id'], $info_type[$type . '_date'], 30) == false) {
