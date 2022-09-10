@@ -476,7 +476,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getLowMatching($facet_id)
     {
         $sql = "SELECT 
-                    facet_id,
+                    facet_id id,
                     facet_title as value,
                     facet_slug,
                     facet_img,

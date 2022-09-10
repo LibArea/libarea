@@ -134,6 +134,7 @@ class TopicFacetController extends Controller
             'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
             'writers'       => FacetModel::getWriters($facet['facet_id'], 15),
             'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
+            'low_matching'  => FacetModel::getLowMatching($facet['facet_id']),
             'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
         ];
     }
