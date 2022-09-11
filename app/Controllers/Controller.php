@@ -52,19 +52,19 @@ class Controller extends MainController
             $body =  'default';
         }
 
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $header . '/global/' . $component . '.header.php')) {
+        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $header . '/global/' . $component . '-header.php')) {
             $header =  'default';
         }
 
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $footer . '/global/' . $component . '.footer.php')) {
+        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $footer . '/global/' . $component . '-footer.php')) {
             $footer =  'default';
         }
 
         return render(
             [
-                $header . '/global/' . $component . '.header',
+                $header . '/global/' . $component . '-header',
                 $body . '/content' . $name,
-                $footer . '/global/' . $component . '.footer'
+                $footer . '/global/' . $component . '-footer'
             ],
             $data
         );
