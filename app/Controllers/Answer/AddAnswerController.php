@@ -12,46 +12,51 @@ class AddAnswerController extends Controller
 {
     public function create()
     {
-        $post_id = Request::getPostInt('post_id');
-        $post    = PostModel::getPost($post_id, 'id', $this->user);
-        self::error404($post);
-
-        $content = $_POST['content']; // Markdown
+        $post = self::getPost($this->user);
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
-        Validator::Length($content, 6, 5000, 'content', $url_post);
+        Validator::Length($content = $_POST['content'], 6, 5000, 'content', $url_post);
 
         // Let's check the stop words, url
         // Проверим стоп слова, url
         $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
 
-        $last_id = AnswerModel::add(
-            [
-                'answer_post_id'    => $post_id,
-                'answer_content'    => $content,
-                'answer_published'  => ($trigger === false) ? 0 : 1,
-                'answer_ip'         => Request::getRemoteAddress(),
-                'answer_user_id'    => $this->user['id'],
-            ]
-        );
-
-        // Recalculating the number of responses for the post + 1
-        // Пересчитываем количество ответов для поста + 1
-        PostModel::updateCount($post_id, 'answers');
-
-        $url = $url_post . '#answer_' . $last_id;
+        $last_id = AnswerModel::add($post['post_id'], $content, $trigger);
 
         // Add an audit entry and an alert to the admin
+        // Аудит и оповещение персоналу
         if ($trigger === false) {
             (new \App\Controllers\AuditController())->create('answer', $last_id, url('admin.audits'));
         }
 
-        // Notification (@login).
+        $url = $url_post . '#answer_' . $last_id;
+
+        $this->notif($content, $post, $url);
+
+        ActionModel::addLogs(
+            [
+                'id_content'    => $last_id,
+                'action_type'   => 'answer',
+                'action_name'   => 'added',
+                'url_content'   => $url,
+            ]
+        );
+
+        redirect($url);
+    }
+
+    // Notifications when adding a answer
+    // Уведомления при добавлении ответа
+    public function notif($content, $post, $url)
+    {
+        // Contact via @
+        // Обращение через @
         if ($message = Content::parseUser($content, true, true)) {
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_ANSWER, $message, $url, $post['post_user_id']);
         }
 
+        // Who is following this question/post
         // Кто подписан на данный вопрос / пост
         if ($focus_all = PostModel::getFocusUsersPost($post['post_id'])) {
             foreach ($focus_all as $focus_user) {
@@ -67,16 +72,15 @@ class AddAnswerController extends Controller
                 }
             }
         }
+    }
 
-        ActionModel::addLogs(
-            [
-                'id_content'    => $last_id,
-                'action_type'   => 'answer',
-                'action_name'   => 'added',
-                'url_content'   => $url,
-            ]
-        );
+    public static function getPost($user)
+    {
+        $post_id = Request::getPostInt('post_id');
 
-        redirect($url);
+        $post    = PostModel::getPost($post_id, 'id', $user);
+        self::error404($post);
+
+        return $post;
     }
 }

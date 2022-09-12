@@ -28,9 +28,8 @@ class AddCommentController extends Controller
     // Adding a comment
     public function create()
     {
-        $content    = $_POST['comment']; // для Markdown
         $answer_id  = Request::getPostInt('answer_id');   // на какой ответ
-        $comment_id = Request::getPostInt('comment_id');   // на какой комментарий
+        $comment_id = Request::getPostInt('comment_id');  // на какой комментарий
 
         $answer = AnswerModel::getAnswerId($answer_id);
         self::error404($answer);
@@ -40,34 +39,40 @@ class AddCommentController extends Controller
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
-        Validator::Length($content, 6, 2024, 'content', $url_post);
+        Validator::Length($content = $_POST['comment'], 6, 2024, 'content', $url_post);
 
         // Let's check the stop words, url
         // Проверим стоп слова, url
         $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
 
-        $last_id = CommentModel::add(
-            [
-                'comment_post_id'       => $post['post_id'],
-                'comment_answer_id'     => $answer_id,
-                'comment_comment_id'    => $comment_id,
-                'comment_content'       => $content,
-                'comment_published'     => ($trigger === false) ? 0 : 1,
-                'comment_ip'            => Request::getRemoteAddress(),
-                'comment_user_id'       => $this->user['id'],
-            ]
-        );
-
-        $url = $url_post . '#comment_' . $last_id;
+        $last_id = CommentModel::add($post['post_id'], $answer_id, $comment_id, $content, $trigger);
 
         // Add an audit entry and an alert to the admin
+        // Аудит и оповещение персоналу
         if ($trigger === false) {
             (new \App\Controllers\AuditController())->create('comment', $last_id, url('admin.audits'));
         }
 
-        // Add the number of comments for the post + 1
-        PostModel::updateCount($post['post_id'], 'comments');
+        $url = $url_post . '#comment_' . $last_id;
 
+        $this->notif($answer_id, $comment_id, $content, $url);
+
+        ActionModel::addLogs(
+            [
+                'id_content'    => $last_id,
+                'action_type'   => 'comment',
+                'action_name'   => 'added',
+                'url_content'   => $url,
+            ]
+        );
+
+        redirect($url);
+    }
+
+    // Notifications when adding a comment
+    // Уведомления при добавлении комментария
+    public function notif($answer_id, $comment_id, $content, $url)
+    {
         // Notification to the author of the answer that there is a comment (do not write to ourselves) 
         // Оповещение автору ответа, что есть комментарий (себе не записываем)
         $answ = AnswerModel::getAnswerId($answer_id);
@@ -96,20 +101,10 @@ class AddCommentController extends Controller
             }
         }
 
-        // Notification (@login). 12 - mentions in comments 
+        // Contact via @
+        // Обращение через @
         if ($message = Content::parseUser($content, true, true)) {
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_COMMENT, $message, $url, $comment['comment_user_id']);
         }
-
-        ActionModel::addLogs(
-            [
-                'id_content'    => $last_id,
-                'action_type'   => 'comment',
-                'action_name'   => 'added',
-                'url_content'   => $url,
-            ]
-        );
-
-        redirect($url);
     }
 }

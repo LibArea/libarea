@@ -2,14 +2,25 @@
 
 namespace App\Models;
 
+use Hleb\Constructor\Handlers\Request;
+use App\Models\PostModel;
+use UserData;
 use DB;
 
 class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Add an answer
     // Добавим ответ
-    public static function add($params)
+    public static function add($post_id, $content, $trigger)
     {
+        $params = [
+            'answer_post_id'    => $post_id,
+            'answer_content'    => $content,
+            'answer_published'  => ($trigger === false) ? 0 : 1,
+            'answer_ip'         => Request::getRemoteAddress(),
+            'answer_user_id'    => UserData::getUserId(),
+        ];
+
         $sql = "INSERT INTO answers(answer_post_id, 
                     answer_content, 
                     answer_published, 
@@ -24,6 +35,10 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
         DB::run($sql, $params);
 
         $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch();
+
+        // Recalculating the number of responses for the post + 1
+        // Пересчитываем количество ответов для поста + 1
+        PostModel::updateCount($post_id, 'answers');
 
         return $sql_last_id['last_id'];
     }

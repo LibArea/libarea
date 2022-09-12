@@ -2,14 +2,28 @@
 
 namespace App\Models;
 
+use Hleb\Constructor\Handlers\Request;
+use App\Models\PostModel;
+use UserData;
 use DB;
 
 class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Adding a comment
     // Добавляем комментарий
-    public static function add($params)
+    public static function add($post_id, $answer_id, $comment_id, $content, $trigger)
     {
+
+        $params = [
+            'comment_post_id'       => $post_id,
+            'comment_answer_id'     => $answer_id,
+            'comment_comment_id'    => $comment_id,
+            'comment_content'       => $content,
+            'comment_published'     => ($trigger === false) ? 0 : 1,
+            'comment_ip'            => Request::getRemoteAddress(),
+            'comment_user_id'       => UserData::getUserId(),
+        ];
+
         $sql = "INSERT INTO comments(comment_post_id, 
                                         comment_answer_id, 
                                         comment_comment_id, 
@@ -38,9 +52,11 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
         $answer  = DB::run($sql, ['comment_answer_id' => $params['comment_answer_id']])->fetch();
 
         if ($answer['answer_after'] == 0) {
-
             self::setThereAnswer($last_id, $params['comment_answer_id']);
         }
+
+        // Add the number of comments for the post + 1
+        PostModel::updateCount($post_id, 'comments');
 
         return $last_id;
     }
