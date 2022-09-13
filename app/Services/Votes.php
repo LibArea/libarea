@@ -20,7 +20,7 @@ class Votes extends Base
         // Проверяем, чтобы участник не голосовал за свой контент
         // $type = post / answer / comment / item
         $author_id = VotesModel::authorId($content_id, $type);
-        if ($this->user['id'] == $author_id) return false;
+        if (UserData::getUserId() == $author_id) return false;
 
         // We check whether the user voted
         // Проверяем, голосовал ли пользователь

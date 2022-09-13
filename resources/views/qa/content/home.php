@@ -43,7 +43,7 @@
     <?= insert('/_block/latest-answers-tabs', ['latest_answers' => $data['latest_answers']]); ?>
     
     <?php if (UserData::getUserScroll()) : ?>
-      <?= insert('/global/sidebar.footer'); ?>
+      <?= insert('/global/sidebar-footer'); ?>
     <?php endif; ?>
   </div>
 </aside>
