@@ -151,13 +151,7 @@ class Parser
     public static function pre($tag, $params, $content)
     {
         $content = htmlspecialchars_decode($content);
-        $content = preg_replace('#^<code>(.*)<\/code>$#uis', '$1', $content);
 
-        $geshi = new GeSHi($content, 'php');
-        // нумер.
-        // $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
-        $geshi->enable_classes();
-        // $geshi->set_overall_class("code php");
-        return '<pre class="language-css">' . $geshi->parse_code() . '</pre>';
+        return '<pre class="language-css">' . $content . '</pre>';
     }
 }

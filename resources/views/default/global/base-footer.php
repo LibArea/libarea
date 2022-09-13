@@ -40,5 +40,4 @@
   <?php endif; ?>
 </footer>
  
-
 <?= insert('/scripts'); ?>
