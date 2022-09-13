@@ -325,6 +325,7 @@ return [
     'go_to'             => '转到',
     'seo'               => 'SEO',
     'url'               => '网址',
+    'url_parsing'       => '文章 URL（用于解析）',
     'slug'              => '别名',
     'email'             => '邮箱',
     'wiki'              => 'Wiki',

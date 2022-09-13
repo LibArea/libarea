@@ -324,6 +324,7 @@ return [
     'go_to'             => 'Go',
     'seo'               => 'SEO',
     'url'               => 'URL',
+    'url_parsing'       => 'Article URL (for parsing)',
     'slug'              => 'SLUG',
     'email'             => 'Email',
     'wiki'              => 'Wiki',

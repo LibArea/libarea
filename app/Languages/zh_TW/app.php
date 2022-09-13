@@ -325,6 +325,7 @@ return [
     'go_to'             => '过去',
     'seo'               => 'SEO',
     'url'               => 'URL',
+    'url_parsing'       => '文章 URL（用于解析）',
     'slug'              => 'SLUG',
     'email'             => 'Email',
     'wiki'              => 'Wiki',

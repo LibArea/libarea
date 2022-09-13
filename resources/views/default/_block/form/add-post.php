@@ -17,7 +17,7 @@
 <?php if (UserData::getRegType(config('trust-levels.tl_add_url'))) : ?>
   <fieldset>
     <div class="left w-70">
-      <input id="link" placeholder="URL" class="post_url" type="text" name="post_url" />
+      <input id="link" placeholder="<?= __('app.url_parsing'); ?>" class="post_url" type="text" name="post_url" />
     </div>
     <div class="left w-30 pl5">
       <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= __('app.to_extract'); ?>" />

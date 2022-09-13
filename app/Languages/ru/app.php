@@ -324,6 +324,7 @@ return [
     'go_to'             => 'Перейти',
     'seo'               => 'SEO',
     'url'               => 'URL',
+    'url_parsing'       => 'URL статьи (для парсинга)',
     'slug'              => 'SLUG',
     'email'             => 'Email',
     'wiki'              => 'Wiki',

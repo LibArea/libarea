@@ -324,6 +324,7 @@ return [
     'go_to'             => 'Merge',
     'seo'               => 'SEO',
     'url'               => 'URL',
+    'url_parsing'       => 'Adresa URL a articolului (pentru analizare)',
     'slug'              => 'SLUG',
     'email'             => 'Email',
     'wiki'              => 'Wiki',
