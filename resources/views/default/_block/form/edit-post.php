@@ -75,7 +75,7 @@
 <?php endif; ?>
 
 <?php if ($post['post_type'] == 'post') : ?>
-  <?= insert('/_block/form/select/content-tl', ['data' => $post['post_tl']]); ?>
+  <?= insert('/_block/form/content-tl', ['data' => $post['post_tl']]); ?>
 
   <fieldset>
     <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>?
@@ -94,7 +94,6 @@
       <input type="checkbox" name="top" <?php if ($post['post_top'] == 1) : ?>checked <?php endif; ?>> <?= __('app.pin'); ?>?
     </fieldset>
   <?php endif; ?>
-
 <?php endif; ?>
 
 <?php if (UserData::checkAdmin()) : ?>

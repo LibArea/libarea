@@ -7,7 +7,7 @@
 
   <form action="<?= url('enterLogin'); ?>" method="post">
     <?php csrf_field(); ?>
-    <?= component('login'); ?>
+    <?= insert('/_block/form/login'); ?>
 
     <?php if (config('general.invite') == false) : ?>
       <a class="ml20 text-sm" href="<?= url('register'); ?>"><?= __('app.registration'); ?></a>

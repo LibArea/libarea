@@ -8,7 +8,7 @@
       <input type="email" required="" name="email">
     </fieldset>
 
-    <?= component('captcha'); ?>
+    <?= insert('/_block/form/captcha'); ?>
 
     <fieldset>
       <?= Html::sumbit(__('app.reset')); ?>

@@ -56,8 +56,7 @@
     <input type="checkbox" name="post_draft"> <?= __('app.draft_post'); ?>?
   </fieldset>
 
-
-  <?= insert('/_block/form/select/content-tl', ['data' => null]); ?>
+  <?= insert('/_block/form/content-tl', ['data' => null]); ?>
 
   <fieldset>
     <input type="checkbox" name="post_feature"> <?= __('app.format_Q&A'); ?>?

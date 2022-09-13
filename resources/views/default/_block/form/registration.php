@@ -22,7 +22,7 @@
   <input name="password_confirm" type="password" required>
 </fieldset>
 
-<?= component('captcha'); ?>
+<?= insert('/_block/form/captcha'); ?>
 
 <fieldset>
   <?= Html::sumbit(__('app.registration')); ?>

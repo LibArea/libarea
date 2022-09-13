@@ -7,6 +7,10 @@
   <span class="showPassword"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#eye"></use></svg></span>
 </fieldset>
 
-<?= component('rememberme'); ?>
+<fieldset class="rememberme ">
+  <input id="rememberme" name="rememberme" type="checkbox" value="1">
+  <label for="rememberme"><?= __('app.remember_me'); ?></label>
+  <div class="text-sm gray-600"></div>
+</fieldset>
 
 <?= Html::sumbit(__('app.sign_in')); ?>

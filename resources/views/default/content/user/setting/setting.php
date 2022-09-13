@@ -3,7 +3,7 @@
 
   <form class="max-w780" action="<?= url('setting.change', ['type' => 'setting']); ?>" method="post">
     <?php csrf_field(); ?>
-    <?= component('setting', ['data' => $data]); ?>
+    <?= insert('/_block/form/setting', ['data' => $data]); ?>
   </form>
 </main>
 

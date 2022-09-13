@@ -1,4 +1,4 @@
-<?= component('add-js-css');
+<?= insert('/_block/add-js-css');
 $domain = $data['domain']; ?>
 
 <div id="contentWrapper">
@@ -36,7 +36,7 @@ $domain = $data['domain']; ?>
 
         <?= insert('/_block/form/select/category', ['data' => $data, 'action' => 'edit']); ?>
 
-        <?= component('edit-website', ['domain' => $domain]); ?>
+        <?= insert('/_block/form/edit-website', ['domain' => $domain]); ?>
 
         <?= insert('/_block/form/select/related-posts', ['data' => $data]); ?>
 

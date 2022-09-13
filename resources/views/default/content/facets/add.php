@@ -2,7 +2,7 @@
   <h2 class="text-xl"><?= __('app.add_' . $data['type']); ?></h2>
   <form class="max-w780" action="<?= url('content.create', ['type' => $data['type']]); ?>" method="post" enctype="multipart/form-data">
     <?= csrf_field() ?>
-    <?= component('add-facet'); ?>
+    <?= insert('/_block/form/add-facet'); ?>
   </form>
 </main>
 

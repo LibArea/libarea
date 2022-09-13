@@ -7,7 +7,7 @@
 
   <form class="max-w300" action="<?= url('register.add'); ?>" method="post">
     <?php csrf_field(); ?>
-    <?= component('registration'); ?>
+    <?= insert('/_block/form/registration'); ?>
   </form>
 
   <p><?= __('app.agree_rules'); ?>.</p>
