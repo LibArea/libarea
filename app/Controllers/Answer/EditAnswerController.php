@@ -29,7 +29,6 @@ class EditAnswerController extends Controller
 
         return $this->render(
             '/answer/edit-answer',
-            'base',
             [
                 'meta'  => Meta::get(__('app.edit_answer')),
                 'data'  => [

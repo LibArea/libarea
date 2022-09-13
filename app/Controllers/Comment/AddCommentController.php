@@ -43,14 +43,14 @@ class AddCommentController extends Controller
 
         // Let's check the stop words, url
         // Проверим стоп слова, url
-        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
+        $trigger = (new \App\Services\Audit())->prohibitedContent($content);
 
         $last_id = CommentModel::add($post['post_id'], $answer_id, $comment_id, $content, $trigger);
 
         // Add an audit entry and an alert to the admin
         // Аудит и оповещение персоналу
         if ($trigger === false) {
-            (new \App\Controllers\AuditController())->create('comment', $last_id, url('admin.audits'));
+            (new \App\Services\Audit())->create('comment', $last_id, url('admin.audits'));
         }
 
         $url = $url_post . '#comment_' . $last_id;

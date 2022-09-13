@@ -12,7 +12,6 @@ class NotificationController extends Controller
     {
         return $this->render(
             '/notification/index',
-            'base',
             [
                 'meta'  => Meta::get(__('app.notifications')),
                 'data'  => [

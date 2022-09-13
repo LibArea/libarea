@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\Item\WebModel;
 use App\Models\{FavoriteModel, PostModel, AnswerModel};
 
-class Favorite
+class Favorite extends Base
 {
     public function index()
     {

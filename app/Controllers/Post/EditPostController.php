@@ -38,7 +38,6 @@ class EditPostController extends Controller
 
         return $this->render(
             '/post/edit',
-            'base',
             [
                 'meta'  => Meta::get(__('app.edit_' . $post['post_type'])),
                 'data'  => [

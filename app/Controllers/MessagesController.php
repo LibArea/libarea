@@ -49,7 +49,6 @@ class MessagesController extends Controller
 
         return $this->render(
             '/messages/messages',
-            'base',
             [
                 'meta'  => Meta::get(__('app.private_messages')),
                 'data'  => [
@@ -104,7 +103,6 @@ class MessagesController extends Controller
 
         return $this->render(
             '/messages/dialog',
-            'base',
             [
                 'meta'  => Meta::get(__('app.dialogue')),
                 'data'  => [
@@ -134,7 +132,6 @@ class MessagesController extends Controller
 
         return $this->render(
             '/messages/user-add-messages',
-            'base',
             [
                 'meta'  => Meta::get(__('app.send_message')),
                 'data'  => [

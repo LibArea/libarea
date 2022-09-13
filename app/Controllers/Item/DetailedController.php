@@ -65,7 +65,6 @@ class DetailedController extends Controller
 
         return $this->render(
             '/item/website',
-            'item',
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
@@ -77,7 +76,7 @@ class DetailedController extends Controller
                     'user_count_site'   => $count_site,
                     'related_posts'     => $related_posts ?? [],
                 ]
-            ]
+            ], 'item',
         );
     }
 

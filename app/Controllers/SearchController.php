@@ -60,7 +60,6 @@ class SearchController extends Controller
         $facet = $type == 'post' ? 'topic' : 'category';
         return $this->render(
             '/search/search',
-            'search',
             [
                 'meta'  => Meta::get(__('search.title')),
                 'data'  => [
@@ -74,7 +73,7 @@ class SearchController extends Controller
                     'pagesCount'    => ceil($count / $this->limit),
                     'pNum'          => $pageNumber,
                 ]
-            ]
+            ], 'search',
         );
     }
 

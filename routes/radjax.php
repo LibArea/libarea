@@ -12,3 +12,4 @@ Radjax\Route::get("/folder/del", ["post"], "App\Controllers\FolderController@del
 Radjax\Route::get("/focus", ["post"], "App\Services\Subscription", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/votes", ["post"], "App\Services\Votes", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/favorite", ["post"], "App\Services\Favorite", ["protected" => true, "before" => $access]);
+Radjax\Route::get("/flag/repost", ["post"], "App\Services\Audit", ["protected" => true, "before" => $access]);

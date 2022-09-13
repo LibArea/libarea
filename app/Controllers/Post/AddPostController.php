@@ -30,7 +30,6 @@ class AddPostController extends Controller
 
         return $this->render(
             '/post/add',
-            'base',
             [
                 'meta'      => Meta::get(__('app.add_' . $type)),
                 'data'  => [
@@ -57,6 +56,7 @@ class AddPostController extends Controller
             self::error404($count);
         }
 
+        // Use to return
         // Используем для возврата
         $redirect = url('content.add', ['type' => 'post']);
         if ($blog_id > 0) {
@@ -64,8 +64,8 @@ class AddPostController extends Controller
         }
 
         // Let's check the stop words, url
-        // Проверим стоп слова, url
-        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
+        // Проверим стоп слова и url
+        $trigger = (new \App\Services\Audit())->prohibitedContent($content);
 
         RulesPost::rules($fields['post_title'], $content, $redirect);
 
@@ -73,6 +73,7 @@ class AddPostController extends Controller
             $site = $this->addUrl($post_url, $fields['post_title']);
         }
 
+        // Post cover
         // Обложка поста
         if (!empty($_FILES['images']['name'])) {
             $post_img = UploadImage::coverPost($_FILES['images'], 0, $redirect, $this->user['id']);
@@ -115,7 +116,7 @@ class AddPostController extends Controller
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            (new \App\Controllers\AuditController())->create('post', $last_id, url('admin.audits'));
+            (new \App\Services\Audit())->create('post', $last_id, url('admin.audits'));
         }
 
         $redirect = url('post', ['id' => $last_id, 'slug' => $slug]);
@@ -126,7 +127,8 @@ class AddPostController extends Controller
         // Add fastes (blogs, topics) to the post 
         $type = (new \App\Controllers\Post\EditPostController())->addFacetsPost($fields, $last_id, $redirect);
 
-        // Notification (@login). 10 - mentions in post 
+        // Contact via @
+        // Обращение через @
         if ($message = Content::parseUser($content, true, true)) {
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $redirect);
         }

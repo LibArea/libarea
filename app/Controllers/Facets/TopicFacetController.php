@@ -46,7 +46,6 @@ class TopicFacetController extends Controller
 
         return $this->render(
             '/facets/topic',
-            'base',
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => array_merge(
@@ -80,7 +79,6 @@ class TopicFacetController extends Controller
 
         return $this->render(
             '/facets/info',
-            'base',
             [
                 'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
                 'data'  => array_merge(
@@ -110,7 +108,6 @@ class TopicFacetController extends Controller
 
         return $this->render(
             '/facets/writers',
-            'base',
             [
                 'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
 

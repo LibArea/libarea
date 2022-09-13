@@ -16,7 +16,6 @@ class AddFacetController extends Controller
     {
         return $this->render(
             '/facets/add',
-            'base',
             [
                 'meta'  => Meta::get(__('app.add_' . $facet_type)),
                 'data'  => [

@@ -26,7 +26,6 @@ class RegisterController extends Controller
 
         return $this->render(
             '/auth/register',
-            'base',
             [
                 'meta'  => Meta::get(__('app.registration'), __('app.security_info'), $m),
                 'data'  => [
@@ -112,7 +111,6 @@ class RegisterController extends Controller
 
         return $this->render(
             '/auth/register-invate',
-            'base',
             [
                 'meta'  => Meta::get(__('app.reg_invite')),
                 'data'  => [

@@ -27,7 +27,6 @@ class UserController extends Controller
 
         return $this->render(
             '/user/all',
-            'base',
             [
                 'meta'  => Meta::get(__('meta.' . $sheet . '_users'), __('meta.' . $sheet . 'users_desc'), $m),
                 'data'  => [
@@ -59,7 +58,6 @@ class UserController extends Controller
 
         return $this->render(
             '/user/favorite/all',
-            'base',
             [
                 'meta'  => Meta::get(__('app.favorites')),
                 'data'  => [
@@ -84,7 +82,6 @@ class UserController extends Controller
 
         return $this->render(
             '/user/favorite/folders',
-            'base',
             [
                 'meta'  => Meta::get(__('app.folders')),
                 'data'  => [
@@ -101,7 +98,6 @@ class UserController extends Controller
     {
         return $this->render(
             '/user/favorite/all',
-            'base',
             [
                 'meta'  => Meta::get(__('app.favorites')),
                 'data'  => [
@@ -119,7 +115,6 @@ class UserController extends Controller
     {
         return $this->render(
             '/user/draft',
-            'base',
             [
                 'meta'  => Meta::get(__('app.drafts')),
                 'data'  => [
@@ -137,7 +132,6 @@ class UserController extends Controller
     {
         return $this->render(
             '/user/favorite/read-subscribed',
-            'base',
             [
                 'meta'  => Meta::get(__('app.subscribed')),
                 'data'  => [
@@ -156,7 +150,6 @@ class UserController extends Controller
     {
         return $this->render(
             '/user/favorite/read-subscribed',
-            'base',
             [
                 'meta'  => Meta::get(__('app.i_read')),
                 'data'  => [

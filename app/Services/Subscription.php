@@ -5,7 +5,7 @@ namespace App\Services;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SubscriptionModel;
 
-class Subscription
+class Subscription extends Base
 {
     public function index()
     {

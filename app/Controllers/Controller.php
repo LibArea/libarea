@@ -40,7 +40,7 @@ class Controller extends MainController
         return $pageNumber <= 1 ? 1 : $pageNumber;
     }
 
-    public static function render($name, $component, $data = [])
+    public static function render(string $name, array $data = [], $component = false)
     {
         if (config('general.site_disabled')  && !UserData::checkAdmin()) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
@@ -52,19 +52,21 @@ class Controller extends MainController
             $body =  'default';
         }
 
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $header . '/global/' . $component . '-header.php')) {
+        $file = ($component == false) ? 'base' : $component;
+
+        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $header . '/global/' . $file . '-header.php')) {
             $header =  'default';
         }
 
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $footer . '/global/' . $component . '-footer.php')) {
+        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $footer . '/global/' . $file . '-footer.php')) {
             $footer =  'default';
         }
 
         return render(
             [
-                $header . '/global/' . $component . '-header',
+                $header . '/global/' . $file . '-header',
                 $body . '/content' . $name,
-                $footer . '/global/' . $component . '-footer'
+                $footer . '/global/' . $file . '-footer'
             ],
             $data
         );

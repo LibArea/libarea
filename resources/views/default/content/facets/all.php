@@ -1,5 +1,3 @@
-<?php $access = Access::trustLevels(config('trust-levels.tl_add_' . $data['type'])); ?>
-
 <main>
   <div class="mb15">
     <h1 class="text-xl"><?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's'); ?></h1>
@@ -38,7 +36,7 @@
 
     </ul>
 
-    <?php if ($access) : ?>
+    <?php if (Access::trustLevels(config('trust-levels.tl_add_' . $data['type']))) : ?>
       <?php if ($data['countUserFacet'] == 0 || UserData::checkAdmin()) : ?>
         <p class="text-xl">
           <a class="btn btn-outline-primary btn-small" href="<?= url('content.add', ['type' => $data['type']]); ?>">

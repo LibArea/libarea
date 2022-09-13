@@ -25,7 +25,6 @@ class ReadController extends Controller
 
         return $this->render(
             '/facets/read',
-            'base',
             [
                 'meta'  => Meta::get(__('app.read') . ' | ' . $facet['facet_title']),
                 'data'  => [

@@ -6,7 +6,7 @@
   </center>
   <div class="grid-cols-2 mt15">
     <?php foreach ($data['topics'] as $topic) : ?>
-      <div class="box">
+      <div class="box box-fon">
         <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id red right">
           <svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#plus"></use>

@@ -28,7 +28,6 @@ class EditTeamController extends Controller
 
         return $this->render(
             '/team/edit',
-            'base',
             [
                 'meta'  => Meta::get(__('team.edit')),
                 'user'  => $this->user,

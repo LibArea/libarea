@@ -58,7 +58,6 @@ class DirController extends Controller
 
         return $this->render(
             '/item/sites',
-            'item',
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [
@@ -74,7 +73,7 @@ class DirController extends Controller
                     'breadcrumb'        => self::breadcrumb($tree, $sort),
                     'low_matching'      => FacetModel::getLowMatching($category['facet_id']),
                 ]
-            ]
+            ], 'item',
         );
     }
 

@@ -18,7 +18,6 @@ class AddTeamController extends Controller
     {
         return $this->render(
             '/team/add',
-            'base',
             [
                 'meta'  => Meta::get(__('team.add')),
                 'user'  => $this->user,

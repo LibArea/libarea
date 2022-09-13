@@ -83,7 +83,7 @@ class ReplyController extends Controller
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
-        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
+        $trigger = (new \App\Services\Audit())->prohibitedContent($content);
 
         $last_id = ReplyModel::add(
             [
@@ -110,7 +110,7 @@ class ReplyController extends Controller
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            (new \App\Controllers\AuditController())->create('reply', $last_id, $url);
+            (new \App\Services\Audit())->create('reply', $last_id, $url);
         }
 
         // Кто подписан на данный вопрос / пост

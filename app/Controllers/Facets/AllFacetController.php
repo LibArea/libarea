@@ -25,7 +25,6 @@ class AllFacetController extends Controller
 
         return $this->render(
             '/facets/all',
-            'base',
             [
                 'meta'  => Meta::get($title, $desc, $m),
                 'data'  => [

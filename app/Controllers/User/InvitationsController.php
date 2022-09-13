@@ -17,7 +17,6 @@ class InvitationsController extends Controller
     {
         return $this->render(
             '/user/invite',
-            'base',
             [
                 'meta'  => Meta::get(__('app.invite')),
                 'data'  => []
@@ -30,7 +29,6 @@ class InvitationsController extends Controller
     {
         return $this->render(
             '/user/invitation',
-            'base',
             [
                 'meta'  => Meta::get(__('app.invites')),
                 'data'  => [

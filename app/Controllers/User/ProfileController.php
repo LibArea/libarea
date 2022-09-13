@@ -36,7 +36,6 @@ class ProfileController extends Controller
 
         return $this->render(
             '/user/profile/index',
-            'base',
             [
                 'meta'  => self::metadata('profile', $profile),
                 'data'  => array_merge(
@@ -60,7 +59,6 @@ class ProfileController extends Controller
 
         return $this->render(
             '/user/profile/post',
-            'base',
             [
                 'meta'  => self::metadata('profile_posts', $profile),
                 'data'  => array_merge($this->sidebar($pagesCount, $profile), ['posts' => $posts]),
@@ -78,7 +76,6 @@ class ProfileController extends Controller
 
         return $this->render(
             '/user/profile/answer',
-            'base',
             [
                 'meta'  => self::metadata('profile_answers', $profile),
                 'data'  => array_merge($this->sidebar($pagesCount, $profile), ['answers' => $answers]),
@@ -96,7 +93,6 @@ class ProfileController extends Controller
 
         return $this->render(
             '/user/profile/comment',
-            'base',
             [
                 'meta'  => self::metadata('profile_comments', $profile),
                 'data'  => array_merge($this->sidebar($pagesCount, $profile), ['comments' => $comments]),

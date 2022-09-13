@@ -17,7 +17,6 @@ class TeamController extends Controller
     {
         return $this->render(
             '/team/user',
-            'base',
             [
                 'meta'  => Meta::get(__('team.home')),
                 'user'  => $this->user,
@@ -43,7 +42,6 @@ class TeamController extends Controller
 
         return $this->render(
             '/team/view',
-            'base',
             [
                 'meta'  => Meta::get(__('team.home')),
                 'user'  => $this->user,

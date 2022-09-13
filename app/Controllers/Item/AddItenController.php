@@ -24,7 +24,6 @@ class AddItemController extends Controller
 
         return $this->render(
             '/item/add',
-            'item',
             [
                 'meta'  => Meta::get(__('web.add_website')),
                 'user'  => $this->user,
@@ -33,7 +32,7 @@ class AddItemController extends Controller
                     'type'       => 'web',
                     'user_count_site'   => $count_site,
                 ]
-            ]
+            ], 'item',
         );
     }
 
@@ -84,9 +83,18 @@ class AddItemController extends Controller
             ]
         );
 
-        // Notification to staff
-        // Оповещение персоналу
-        if ($this->user['trust_level'] != UserData::REGISTERED_ADMIN) {
+        $this->notif($this->user['trust_level']);
+
+        SubscriptionModel::focus($item_last['item_id'], 'item');
+
+        is_return(__('web.site_added'), 'success', url('web'));
+    }
+    
+    // Notification to staff
+    // Оповещение персоналу
+    public function notif($trust_level)
+    {
+        if ($trust_level != UserData::REGISTERED_ADMIN) {
             NotificationModel::send(
                 [
                     'sender_id'    => $this->user['id'],
@@ -96,9 +104,8 @@ class AddItemController extends Controller
                 ]
             );
         }
-
-        SubscriptionModel::focus($item_last['item_id'], 'item');
-
-        is_return(__('web.site_added'), 'success', url('web'));
+        
+        return true;
     }
+
 }

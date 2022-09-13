@@ -5,7 +5,7 @@ namespace App\Services;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\VotesModel;
 
-class Votes
+class Votes extends Base
 {
     public function index()
     {

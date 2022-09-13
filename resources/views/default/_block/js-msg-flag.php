@@ -7,7 +7,7 @@
         let type = el.dataset.type;
         fetch("/flag/repost", {
             method: "POST",
-            body: "type=" + type + "&post_id=" + post_id + "&content_id=" + content_id,
+            body: "type=" + type + "&post_id=" + post_id + "&content_id=" + content_id + "&_token=" + token,
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
             }

@@ -106,7 +106,6 @@ class PostController extends Controller
         if ($type == 'post') {
             return $this->render(
                 '/post/post-view',
-                'base',
                 [
                     'meta'  => Meta::get(strip_tags($content['post_title']), $description, $m),
                     'data'  => [
@@ -137,7 +136,6 @@ class PostController extends Controller
         $title = $content['post_title'] . ' - ' . __('app.page');
         return $this->render(
             '/post/page-view',
-            'base',
             [
                 'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . __('app.page') . ')', $m),
                 'data'  => [
@@ -223,7 +221,6 @@ class PostController extends Controller
 
         return $this->render(
             '/post/link',
-            'base',
             [
                 'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('meta.domain_desc') . ': ' . $domain, $m),
                 'data'  => [

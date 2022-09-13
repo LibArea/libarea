@@ -24,7 +24,6 @@ class AnswerController extends Controller
 
         return $this->render(
             '/answer/answers',
-            'base',
             [
                 'meta'  => Meta::get(__('meta.all_answers'), __('meta.answers_desc'), $m),
                 'data'  => [

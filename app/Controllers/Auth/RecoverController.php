@@ -19,7 +19,6 @@ class RecoverController extends Controller
 
         return $this->render(
             '/auth/recover',
-            'base',
             [
                 'meta'  => Meta::get(__('app.password_recovery'), __('app.recover_info'), $m),
                 'data'  => [
@@ -85,7 +84,6 @@ class RecoverController extends Controller
 
         return $this->render(
             '/auth/newrecover',
-            'base',
             [
                 'meta'  => Meta::get(__('app.password recovery'), __('app.recover_info')),
                 'data'  => [

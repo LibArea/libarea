@@ -56,7 +56,6 @@ class SettingController extends Controller
     {
         return $this->render(
             '/user/setting/setting',
-            'base',
             [
                 'meta'  => Meta::get(__('app.setting')),
                 'data'  => [
@@ -109,7 +108,6 @@ class SettingController extends Controller
 
         return $this->render(
             '/user/setting/avatar',
-            'base',
             [
                 'meta'  => Meta::get(__('app.avatar')),
                 'data'  => [
@@ -132,7 +130,6 @@ class SettingController extends Controller
     {
         return $this->render(
             '/user/setting/security',
-            'base',
             [
                 'meta'  => Meta::get(__('app.security')),
                 'data'  => []
@@ -187,7 +184,6 @@ class SettingController extends Controller
     {
         return $this->render(
             '/user/setting/notifications',
-            'base',
             [
                 'meta'  => Meta::get(__('app.notifications')),
                 'data'  => [

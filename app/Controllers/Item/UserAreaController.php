@@ -18,7 +18,6 @@ class UserAreaController extends Controller
 
         return $this->render(
             '/item/user-sites',
-            'item',
             [
                 'meta'  => Meta::get(__('web.my_website')),
                 'user'  => $this->user,
@@ -31,7 +30,7 @@ class UserAreaController extends Controller
                     'user_count_site'   => $count_site,
                     'sheet'             => 'sites',
                 ]
-            ]
+            ], 'item',
         );
     }
 

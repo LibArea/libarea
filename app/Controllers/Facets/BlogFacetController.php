@@ -44,7 +44,6 @@ class BlogFacetController extends Controller
 
         return $this->render(
             '/facets/blog',
-            'base',
             [
                 'meta'  => Meta::get($title, $description, $m),
                 'data'  => [

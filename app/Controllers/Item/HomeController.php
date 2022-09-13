@@ -21,7 +21,6 @@ class HomeController extends Controller
 
         return $this->render(
             '/item/home',
-            'item',
             [
                 'meta'  => Meta::get(__('web.main_title'), __('web.main_desc'), $m),
                 'data'  => [
@@ -30,7 +29,7 @@ class HomeController extends Controller
                     'user_count_site'   => UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']),
                     'audit_count'       => UserAreaModel::auditCount(),
                 ]
-            ]
+            ], 'item',
         );
     }
 }

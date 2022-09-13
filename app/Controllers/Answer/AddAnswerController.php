@@ -19,15 +19,15 @@ class AddAnswerController extends Controller
         Validator::Length($content = $_POST['content'], 6, 5000, 'content', $url_post);
 
         // Let's check the stop words, url
-        // Проверим стоп слова, url
-        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
+        // Проверим стоп слова и url
+        $trigger = (new \App\Services\Audit())->prohibitedContent($content);
 
         $last_id = AnswerModel::add($post['post_id'], $content, $trigger);
 
         // Add an audit entry and an alert to the admin
         // Аудит и оповещение персоналу
         if ($trigger === false) {
-            (new \App\Controllers\AuditController())->create('answer', $last_id, url('admin.audits'));
+            (new \App\Services\Audit())->create('answer', $last_id, url('admin.audits'));
         }
 
         $url = $url_post . '#answer_' . $last_id;

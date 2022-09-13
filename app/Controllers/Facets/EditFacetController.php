@@ -32,7 +32,6 @@ class EditFacetController extends Controller
 
         return $this->render(
             '/facets/edit',
-            'base',
             [
                 'meta'  => Meta::get(__('app.edit') . ' | ' . $facet['facet_title']),
                 'data'  => [
@@ -126,7 +125,6 @@ class EditFacetController extends Controller
 
         return $this->render(
             '/facets/edit-pages',
-            'base',
             [
                 'meta'  => Meta::get(__('app.edit') . ' | ' . $facet['facet_title']),
                 'data'  => [

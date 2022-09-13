@@ -24,7 +24,6 @@ class CommentController extends Controller
 
         return $this->render(
             '/comment/comments',
-            'base',
             [
                 'meta'  => Meta::get(__('meta.all_comments'), __('meta.comments_desc'), $m),
                 'data'  => [

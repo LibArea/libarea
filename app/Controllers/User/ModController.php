@@ -19,7 +19,6 @@ class ModController extends Controller
 
         return $this->render(
             '/user/setting/setting',
-            'base',
             [
                 'meta'  => Meta::get(__('app.setting')),
                 'data'  => [

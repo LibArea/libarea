@@ -2,7 +2,6 @@
 
 // https://phphleb.ru/ru/v1/types/
 Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
-    Route::post('/flag/repost')->controller('AuditController@report');
     Route::post('/backend/upload/{type}/{id}')->controller('Post\EditPostController@uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
     Route::post('/status/action')->controller('ActionController@deletingAndRestoring');
     Route::post('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
