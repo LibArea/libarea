@@ -37,8 +37,7 @@
     "erusev/parsedown": "^1.8.0@beta",
     "donatj/phpuseragentparser": "dev-master",
     "utopia-php/domains": "dev-master",
-    "matthiasmullie/minify": "dev-master",
-    "robmorgan/phinx": "0.x-dev"
+    "matthiasmullie/minify": "dev-master"
   },
   "autoload": {
     "classmap": [
