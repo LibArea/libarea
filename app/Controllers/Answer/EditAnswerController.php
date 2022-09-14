@@ -20,7 +20,7 @@ class EditAnswerController extends Controller
     {
         $answer_id  = Request::getInt('id');
         $answer = AnswerModel::getAnswerId($answer_id);
-        if (Access::author('answer', $answer['answer_user_id'], $answer['answer_date'], 30) == false) {
+        if (Access::author('answer', $answer, 30) == false) {
             return false;
         }
 
@@ -49,7 +49,7 @@ class EditAnswerController extends Controller
 
         // Access check
         $answer = AnswerModel::getAnswerId($answer_id);
-        if (Access::author('answer', $answer['answer_user_id'], $answer['answer_date'], 30) == false) {
+        if (Access::author('answer', $answer, 30) == false) {
             return false;
         }
 

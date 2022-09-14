@@ -13,6 +13,8 @@
 
 declare(strict_types=1);
 
+namespace App\Hook;
+
 class Hook
 {
     protected static $hookActions = [];

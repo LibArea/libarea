@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Hleb\Constructor\Handlers\Request;
 use App\Models\ActionModel;
 
@@ -32,7 +34,7 @@ class Access
      *
      * Остановим изменение (добавление) контента если пользователь заморожен (немой режим)
      */
-    public static function limitingMode()
+    public static function limitingMode(): bool
     {
         if (UserData::getLimitingMode() == 1) {
             return false;
@@ -45,7 +47,7 @@ class Access
      *
      * In config: tl_add_post
      */
-    public static function limitContent($type)
+    public static function limitContent(string $type): bool
     {
         /**
          * From what TL level is it possible to create content.
@@ -81,7 +83,7 @@ class Access
      *
      * Общий доступ для уровня доверия.
      */
-    public static function trustLevels($trust_level)
+    public static function trustLevels(int $trust_level): bool
     {
         if (UserData::getUserTl() < $trust_level) {
             return false;
@@ -95,7 +97,7 @@ class Access
      *
      * Лимиты на время после публикации.
      */
-    public static function limiTime($adding_time, $limit_time = false)
+    public static function limiTime(string $adding_time, int $limit_time = null): bool
     {
         if ($limit_time == true) {
             $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($adding_time);
@@ -110,11 +112,11 @@ class Access
     }
 
     /**
-     * Content type, content author, time added and how much time can be edited.
+     * Content type, data array and how much time can be edited.
      *
-     * Тип контента, автор контента, время добавления и сколько времени можно редактировать.
+     * Тип контента, массив данных и сколько времени можно редактировать.
      */
-    public static function author($type_content, $author_id, $adding_time, $limit_time = false)
+    public static function author(string $type_content, array $info_type, int $limit_time = 30): bool
     {
         if (UserData::checkAdmin()) {
             return true;
@@ -127,7 +129,7 @@ class Access
          *
          * In config: tl_add_post
          */
-        if (self::trustLevels(config('trust-levels.tl_add_' . $type_content)) == false) {
+        if (self::trustLevels(config('trust-levels.tl_add_' . $type_content)) === false) {
             return false;
         }
 
@@ -136,11 +138,13 @@ class Access
          *
          * Доступ получает только автор.
          */
-        if ($author_id != UserData::getUserId()) {
+        if ($info_type[$type_content . '_user_id'] != UserData::getUserId()) {
             return false;
         }
 
-        self::limiTime($adding_time, $limit_time);
+        if (self::limiTime($info_type[$type_content . '_date'], $limit_time) === false) {
+            return false;
+        }
 
         return true;
     }

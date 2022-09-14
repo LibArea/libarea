@@ -27,7 +27,7 @@ class EditPostController extends Controller
         $post       = PostModel::getPost($post_id, 'id', $this->user);
         self::error404($post);
 
-        if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
+        if (Access::author('post', $post, 30) == false) {
             is_return(__('msg.access_denied'), 'error');
         }
 
@@ -64,7 +64,7 @@ class EditPostController extends Controller
 
         // Access check 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
-        if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
+        if (Access::author('post', $post, 30) == false) {
             is_return(__('msg.went_wrong'), 'error');
         }
 
@@ -162,7 +162,7 @@ class EditPostController extends Controller
         $post_id    = Request::getInt('id');
         $post = PostModel::getPost($post_id, 'id', $this->user);
 
-        if (Access::author('post', $post['post_user_id'], $post['post_date'], 30) == false) {
+        if (Access::author('post', $post, 30) == false) {
             is_return(__('msg.went_wrong'), 'error');
         }
 

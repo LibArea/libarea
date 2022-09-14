@@ -28,7 +28,7 @@ class EditItemController extends Controller
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (Access::author('item', $domain['item_user_id'], $domain['item_date'], 0) === false) {
+        if (Access::author('item', $domain, 0) === false) {
             redirect(url('web'));
         }
 
@@ -65,7 +65,7 @@ class EditItemController extends Controller
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (Access::author('item', $item['item_user_id'], $item['item_date'], 0) === false) {
+        if (Access::author('item', $item, 0) === false) {
             return true;
         }
 

@@ -20,7 +20,7 @@ foreach ($data['answers'] as $answer) :
               </svg>
             <?php endif; ?>
             <span class="gray-600 lowercase">
-              <?= Html::langDate($answer['date']); ?>
+              <?= Html::langDate($answer['answer_date']); ?>
             </span>
             <?php if (empty($answer['edit'])) : ?>
               <span class="gray-600">
@@ -45,7 +45,7 @@ foreach ($data['answers'] as $answer) :
             <?php endif; ?>
           <?php endif; ?>
 
-          <?php if (Access::author('answer', $answer['answer_user_id'], $answer['date'], 30) === true) : ?>
+          <?php if (Access::author('answer', $answer, 30) === true) : ?>
             <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) : ?>
               <a class="editansw gray-600" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                 <?= __('app.edit'); ?>

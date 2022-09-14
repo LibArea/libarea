@@ -42,7 +42,7 @@
                     <?= __('web.more'); ?>
                   </a>
 
-                  <?php if (Access::author('item', $item['item_user_id'], $item['item_date'], 30) === true) : ?>
+                  <?php if (Access::author('item', $item, 30) === true) : ?>
                     <a class="ml10" href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
                       <svg class="icons">
                         <use xlink:href="/assets/svg/icons.svg#edit"></use>

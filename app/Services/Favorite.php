@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Hleb\Constructor\Handlers\Request;
@@ -25,7 +27,7 @@ class Favorite extends Base
         return __('app.successfully');
     }
 
-    public static function redirectItem($content_id, $type)
+    public static function redirectItem(int $content_id, string $type)
     {
         switch ($type) {
             case 'post':

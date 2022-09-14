@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Hleb\Constructor\Handlers\Request;
@@ -9,12 +11,12 @@ use UserData, Msg;
 class Audit extends Base
 {
     protected $user;
-    
+
     public function __construct()
     {
         $this->user = UserData::get();
     }
-    
+
     public function index()
     {
         $content_type   = Request::getPost('type');
@@ -62,10 +64,10 @@ class Audit extends Base
             ]
         );
     }
-    
+
     // Let's check the stop words, url
     // Проверим стоп слова, url
-    public function prohibitedContent($content)
+    public function prohibitedContent(string $content)
     {
 
         if (!self::stopUrl($content, $this->user['id'])) {
@@ -81,7 +83,7 @@ class Audit extends Base
 
     // If there is a link and the total contribution (adding posts, replies and comments) is less than N 
     // Если есть ссылка и общий вклад (добавления постов, ответов и комментариев) меньше N
-    public static function stopUrl($content, $uid)
+    public static function stopUrl(string $content, int $uid)
     {
         if (self::estimationUrl($content)) {
             $all_count = ActionModel::allContentUserCount($uid);
@@ -96,7 +98,7 @@ class Audit extends Base
 
     // If the word is on the stop list and the total contribution is minimal (less than 2)
     // Если слово в стоп листе и общий вклад минимальный (меньше 2)
-    public static function stopWords($content, $uid)
+    public static function stopWords(string $content, int $uid)
     {
         if (self::stopWordsExists($content)) {
             $all_count = ActionModel::allContentUserCount($uid);
@@ -111,7 +113,7 @@ class Audit extends Base
 
     // For URL trigger 
     // Для триггера URL
-    public static function estimationUrl($content)
+    public static function estimationUrl(string $content)
     {
         $regex = '/(?<!!!\[\]\(|"|\'|\=|\)|>)(https?:\/\/[-a-zA-Z0-9@:;%_\+.~#?\&\/\/=!]+)(?!"|\'|\)|>)/i';
         if (preg_match($regex, $content, $matches)) {
@@ -122,7 +124,7 @@ class Audit extends Base
 
     /// Check the presence of the word in the stop list (audit in the admin panel) 
     // Проверим наличия слова в стоп листе (аудит в админ-панели)
-    public static function stopWordsExists($content)
+    public static function stopWordsExists(string $content)
     {
         $stop_words = AuditModel::getStopWords();
 
@@ -149,7 +151,7 @@ class Audit extends Base
         return false;
     }
 
-    public function create($type, $last_content_id, $url)
+    public function create(string $type, int $last_content_id, string $url)
     {
         AuditModel::add(
             [
@@ -173,5 +175,4 @@ class Audit extends Base
 
         return true;
     }
-
 }

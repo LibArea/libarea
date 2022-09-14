@@ -22,7 +22,7 @@ class ReplyModel extends \Hleb\Scheme\App\Models\MainModel
                     reply_item_id,
                     reply_parent_id,
                     reply_content as content,
-                    reply_date as date,
+                    reply_date,
                     reply_votes,
                     reply_published,
                     reply_ip,
@@ -48,7 +48,7 @@ class ReplyModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT 
                     reply_id,
                     reply_content as content,
-                    reply_date as date,
+                    reply_date,
                     reply_user_id,
                     reply_published,
                     reply_is_deleted

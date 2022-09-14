@@ -28,7 +28,7 @@
                     </svg>
                   <?php endif; ?>
                   <span class="gray-600 lowercase">
-                    <?= Html::langDate($answer['date']); ?>
+                    <?= Html::langDate($answer['answer_date']); ?>
                   </span>
                   <?php if (empty($answer['edit'])) : ?>
                     <span class="gray-600">
@@ -53,7 +53,7 @@
                   <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if (Access::author('answer', $answer['answer_user_id'], $answer['date'], 30) === true) : ?>
+                <?php if (Access::author('answer', $answer, 30) === true) : ?>
                   <a class="editansw gray-600" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                     <?= __('app.edit'); ?>
                   </a>
@@ -110,7 +110,7 @@
       <?php foreach ($answer['comments'] as  $comment) : ?>
 
         <?php if ($comment['comment_is_deleted'] == 1) : ?>
-          <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
+          <?php if (Access::author('comment', $comment, 30) === true) : ?>
             <ol class="bg-red-200 text-sm list-none max-w780 <?php if ($comment['comment_comment_id'] > 0) : ?> ml30<?php endif; ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
@@ -144,7 +144,7 @@
                   </svg>
                 <?php endif; ?>
                 <span class="gray-600 lowercase">
-                  <?= Html::langDate($comment['date']); ?>
+                  <?= Html::langDate($comment['comment_date']); ?>
                 </span>
                 <?php if ($comment['comment_comment_id'] > 0) : ?>
                   <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><svg class="icons icon-small">
@@ -174,9 +174,9 @@
                   <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
+                <?php if (Access::author('comment', $comment, 30) === true) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
-                    <?= __('app.edit'); ?>
+                    <?= __('app.edit'); ?> 
                   </a>
                 <?php endif; ?>
                 <?php if (UserData::checkAdmin()) : ?>

@@ -17,7 +17,7 @@ function internalRender($nodes, $tl, $user_id)
 
             '<span class="gray-600">' . $node['login'] . '</span>
                     
-                    <span class=" gray-600 lowercase">' . Html::langDate($node['date']) . '</span>';
+                    <span class=" gray-600 lowercase">' . Html::langDate($node['reply_date']) . '</span>';
 
         if ($node['reply_parent_id'] != $node['reply_item_id'] && $node['reply_parent_id'] != 0) {
             echo '<a rel="nofollow" class="gray-600" href="#reply_' . $node['reply_parent_id'] . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#arrow-up"></use></svg></a>';

@@ -20,7 +20,7 @@ class ReplyController extends Controller
         $id  = Request::getPostInt('id');
         $reply = ReplyModel::getId($id);
 
-        if (Access::author('item', $reply['reply_user_id'], $reply['date'], 0) === false) {
+        if (Access::author('item', $reply, 0) === false) {
             return true;
         }
 
@@ -50,7 +50,7 @@ class ReplyController extends Controller
 
         // Access verification 
         $reply = ReplyModel::getId($id);
-        if (Access::author('item', $reply['item_user_id'], $reply['item_date'], 0) === false) {
+        if (Access::author('item', $reply, 0) === false) {
             redirect('/');
         }
 

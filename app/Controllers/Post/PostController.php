@@ -56,7 +56,7 @@ class PostController extends Controller
         $answers = [];
         foreach ($post_answers as $ind => $row) {
 
-            if (strtotime($row['answer_modified']) < strtotime($row['date'])) {
+            if (strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
                 $row['edit'] = 1;
             }
             // TODO: N+1 см. AnswerModel()
@@ -187,7 +187,7 @@ class PostController extends Controller
 
         // Access check
         // Проверка доступа
-        if (Access::author('post', $post['post_user_id'], $post['post_date'], 0) == false) {
+        if (Access::author('post', $post, 0) == false) {
             redirect('/');
         }
 

@@ -26,7 +26,7 @@
                     <?php endif; ?>
                   <?php endif; ?>
 
-                  <?php if (Access::author('answer', $answer['answer_user_id'], $answer['date'], 30) === true) : ?>
+                  <?php if (Access::author('answer', $answer, 30) === true) : ?>
                     <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
                       <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                         <?= __('app.edit'); ?>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="text-sm gray-600 flex gap lowercase mb10">
                   <a class="brown" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
-                  <span class="mb-none"><?= Html::langDate($answer['date']); ?>
+                  <span class="mb-none"><?= Html::langDate($answer['answer_date']); ?>
                     <?php if (empty($answer['edit'])) : ?>
                       (<?= __('app.ed'); ?>.)
                     <?php endif; ?></span>
@@ -74,7 +74,7 @@
                 <span class="qa-comment-footer">
                   — <a class="brown" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
                   <span class="qa-comment-ml">
-                    <?= Html::langDate($comment['date']); ?>
+                    <?= Html::langDate($comment['comment_date']); ?>
 
                     <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                       <?php if ($post['post_closed'] == 0) : ?>
@@ -86,7 +86,7 @@
                       <?php endif; ?>
                     <?php endif; ?>
 
-                    <?php if (Access::author('comment', $comment['comment_user_id'], $comment['date'], 30) === true) : ?>
+                    <?php if (Access::author('comment', $comment, 30) === true) : ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
                         <svg class="icons">
                           <use xlink:href="/assets/svg/icons.svg#edit"></use>
