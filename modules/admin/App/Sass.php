@@ -21,7 +21,7 @@ class Sass
     public static function buildCss($putch, $key)
     {
         $minifier = new Minify\CSS($putch . 'build.css');
-        $minifier->minify(HLEB_GLOBAL_DIRECTORY . '/public/assets/css/' . $key . '.css');
+        $minifier->minify(HLEB_PUBLIC_DIR . '/assets/css/' . $key . '.css');
 
         return true;
     }
@@ -29,7 +29,7 @@ class Sass
     public static function buildJs($putch, $key)
     {
         $minifier = new Minify\JS($putch . $key . '.js');
-        $minifier->minify(HLEB_GLOBAL_DIRECTORY . '/public/assets/js/' . $key . '.js');
+        $minifier->minify(HLEB_PUBLIC_DIR . '/assets/js/' . $key . '.js');
 
         return true;
     }
