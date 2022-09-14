@@ -48,13 +48,12 @@
   border-radius: 3px;
 }
 
-.blog-cover-img {
+.box-cover-img {
   height: 200px;
+  width: 100%;
 }
 
-.over-image-transform {
-  overflow: hidden;
-}
+.profile-bg-img.bg-profile { height: 90px; }
 
 .medium-zoom-overlay {position:fixed;top:0;right:0;bottom:0;left:0;opacity:0;transition:opacity .3s;will-change:opacity}
 .medium-zoom--opened .medium-zoom-overlay{cursor:pointer;cursor:zoom-out;opacity:1}

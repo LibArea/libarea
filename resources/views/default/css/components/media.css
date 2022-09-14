@@ -62,8 +62,7 @@ main { flex: 1; }
     width: 80px;
   }
   
-  .blog-cover-img { height: 88px; }
-  .profile-bg-img { height: 75px; }
+  .box-cover-img { height: 75px; }
   .title { font-size: 1.2125rem; }
 
   .mb-block,

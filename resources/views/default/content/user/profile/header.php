@@ -2,7 +2,7 @@
 $profile = $data['profile'];
 $css = 'img-xl mt15 mb-w100 profile-ava';
 if ($profile['cover_art'] != 'cover_art.jpeg') :
-  $css = 'img-2xl mt90 mb-mt5 mb-img-2xl profile-ava';
+  $css = 'img-2xl mt60 mb-mt5 mb-img-2xl profile-ava';
 endif;
 ?>
 <style nonce="<?= $_SERVER['nonce']; ?>">.bg-profile {background: <?= $profile['color']; ?>;min-height: 90px;}</style>
@@ -15,11 +15,11 @@ endif;
   <?= Img::avatar($profile['avatar'], $profile['login'], $css, 'max'); ?>
 
   <?php if ($profile['cover_art'] != 'cover_art.jpeg') : ?>
-    <div class="relative">
-      <img class="profile-bg-img" src="<?= Img::cover($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
+    <div class="relative hidden">
+      <img class="box-cover-img" src="<?= Img::cover($profile['cover_art'], 'user'); ?>" alt="<?= $profile['login']; ?>">
     </div>
   <?php else : ?>
-    <div class="profile-bg-img relative bg-profile"></div>
+    <div class="box-cover-img relative bg-profile"></div>
   <?php endif; ?>
     <div class="profile-header-footer mt15">
        
