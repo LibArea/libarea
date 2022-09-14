@@ -1,6 +1,6 @@
 <div class="br-gray bg-white mb15 relative">
   <?= Img::image($data['facet']['facet_img'], $data['facet']['facet_title'], 'img-2xl mt20 mb-mt5 mb-img-2xl profile-ava', 'logo', 'max'); ?>
-  <div class="relative">
+  <div class="relative over-image-transform">
     <img class="blog-cover-img" src="<?= Img::cover($data['facet']['facet_cover_art'], 'blog'); ?>" alt="<?= $data['facet']['facet_title']; ?>">
   </div>
   <div class="mt20">
