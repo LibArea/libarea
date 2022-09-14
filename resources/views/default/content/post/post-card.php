@@ -54,7 +54,7 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?php endif; ?>
         <?php endif; ?>
 
-        <div class="cut-post">
+        <div class="cut-post max-w780">
           <?php $arr = Content::cut($post['post_content']);
           echo Content::text($arr['content'], 'text'); ?>
         </div>
