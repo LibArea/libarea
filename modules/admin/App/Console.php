@@ -36,14 +36,14 @@ class Console
         self::consoleRedirect();
     }
 
-    // Если пользователь имеет нулевой уровень доверия (tl) но ему UP >=3, то повышаем до 1
-    // If the user has a zero level of trust (tl) but he has UP >=3, then we raise it to 1
+    // Если пользователь имеет 1 уровень доверия (tl) но ему UP > 2, то повышаем до 2
+    // If the user has a 1 level of trust (tl) but he has UP > 2, then we raise it to 2
     public static function tl()
     {
-        $users = ConsoleModel::getTrustLevel(0);
+        $users = ConsoleModel::getTrustLevel(1);
         foreach ($users as $row) {
             if ($row['up_count'] > 2) {
-                ConsoleModel::setTrustLevel($row['id'], 1);
+                ConsoleModel::setTrustLevel($row['id'], 2);
             }
         }
 
