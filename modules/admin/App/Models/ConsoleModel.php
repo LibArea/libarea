@@ -50,7 +50,7 @@ class ConsoleModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function setTrustLevel($uid, $tl)
     {
-        $sql = "UPDATE users SET trust_level = :tl WHERE id = :id";
+        $sql = "UPDATE users SET trust_level = :tl WHERE id = :uid";
 
         return DB::run($sql, ['uid' => $uid, 'tl' => $tl]);
     }

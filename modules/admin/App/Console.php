@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\App\Models\ConsoleModel;
-use SendEmail, Msg;
+use SendEmail, Msg, UserData;
 
 class Console
 {
@@ -40,10 +40,10 @@ class Console
     // If the user has a 1 level of trust (tl) but he has UP > 2, then we raise it to 2
     public static function tl()
     {
-        $users = ConsoleModel::getTrustLevel(1);
+        $users = ConsoleModel::getTrustLevel(UserData::USER_FIRST_LEVEL);
         foreach ($users as $row) {
             if ($row['up_count'] > 2) {
-                ConsoleModel::setTrustLevel($row['id'], 2);
+                ConsoleModel::setTrustLevel($row['id'], UserData::USER_SECOND_LEVEL);
             }
         }
 
