@@ -35,5 +35,9 @@ return [
     // Email of the site administration
     // Email администрации сайта
     'email'             => '***@site.ru',
+    // Confirm sender (email must be configured on the server).
+    // Подтвердить отправителя (email должен быть настроен на сервере).
+    'confirm_sender'    =>  true,
+
 
 ];
