@@ -75,6 +75,10 @@ class SendEmail
             $mail->setNameFrom(config('meta.name')); // вот тут было длинное
             $mail->setAddressFrom(config('general.email'));
 
+            if (config('general.confirm_sender')) {
+                $mail->setParameters('-f' . config('general.email'));
+            }
+
             $mail->setTo($email);
 
             $mail->setTitle($subject);
