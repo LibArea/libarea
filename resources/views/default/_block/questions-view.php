@@ -96,13 +96,17 @@
 
                     <?php if (UserData::checkAdmin()) : ?>
                       <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
-                        <?= __('app.remove'); ?>
+                        <svg class="icons">
+                          <use xlink:href="/assets/svg/icons.svg#trash"></use>
+                        </svg>
                       </a>
                     <?php endif; ?>
 
                     <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
-                        <?= __('app.report'); ?>
+                        <svg class="icons">
+                          <use xlink:href="/assets/svg/icons.svg#flag"></use>
+                        </svg>
                       </a>
                     <?php endif; ?>
                   </span>
