@@ -97,6 +97,8 @@ class EditFacetController extends Controller
             $low_arr = $low_facet ?? [];
 
             FacetModel::addLowFacetRelation($low_arr, $data['facet_id']);
+        } else {
+            FacetModel::deleteRelation($data['facet_id'], 'topic');
         }
 
         // Связанные темы, дети 
@@ -106,6 +108,8 @@ class EditFacetController extends Controller
             $match_arr      = $match_facet ?? [];
 
             FacetModel::addLowFacetMatching($match_arr, $data['facet_id']);
+        } else {
+            FacetModel::deleteRelation($data['facet_id'], 'matching');
         }
 
         return true;

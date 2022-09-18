@@ -89,6 +89,7 @@ class SendEmail
 
             $mail->send();
         }
+
         return true;
     }
 }

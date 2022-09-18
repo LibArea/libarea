@@ -83,6 +83,7 @@ return [
     'cms'               => 'CMS',
     'life_help'         => 'Children, animals, hobbies...',
     'security'          => 'Security...',
+    'society'           => 'Society and politics',
     
     'string_length'         => 'Incorrect length {name}',
     'website_correctness'   => 'The address (URL) of the site is not correct',

@@ -83,6 +83,7 @@ return [
     'cms'               => 'CMS系统',
     'life_help'         => '儿童、动物、爱好...',
     'security'          => '安全...',
+    'society'           => '社会与政治',
     
     'string_length'         => '长度不正确 {name}',
     'website_correctness'   => '网站的地址（URL）不正确',

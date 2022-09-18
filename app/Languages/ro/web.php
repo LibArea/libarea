@@ -82,7 +82,8 @@ return [
     'life'              => 'Acasă',
     'cms'               => 'CMS',
     'life_help'         => 'Copii, animale, hobby-uri...',
-    'security'          => 'Безопасность...',
+    'security'          => 'Siguranță...',
+    'society'           => 'Societatea si politica',
     
     'string_length'         => 'Lungime incorectă {name}',
     'website_correctness'   => 'Adresa (URL) site-ului nu este corectă',
