@@ -34,7 +34,7 @@
     "phphleb/muller": "dev-main",
     "ipatov/smtp-mail": "dev-master",
     "cocur/slugify": "^4.1",
-    "erusev/parsedown": "^1.8.0@beta",
+    "taufik-nurrohman/parsedown-extra-plugin": "dev-main",
     "donatj/phpuseragentparser": "dev-master",
     "utopia-php/domains": "dev-master",
     "matthiasmullie/minify": "dev-master"
