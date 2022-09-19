@@ -4,47 +4,57 @@ declare(strict_types=1);
 
 namespace App\Services\Markdown;
 
-use App\Models\AuditModel;
 use App\Services\Markdown\Parser;
+use App\Models\AuditModel;
+use UserData;
 
 class Content
 {
     // Content management (Parsedown)
-    public static function text($content, $type)
+    public static function text(string $content, string $type)
     {
+        // простой случай замены на «»
+        $content = preg_replace('#"(.*?)"#', '«$1»', $content);
+
         $text = self::parse($content, $type);
 
         return self::parseUser($text);
     }
-    
-    public static function parse($content, $type)
-    {   
-        $content = str_replace('<cut>', '', $content); 
-    
+
+    public static function parse(string $content, string $type)
+    {
+        $content = str_replace('<cut>', '', $content);
+
         $Parsedown = new Parser();
-        
+
         // !!! Enable by default
         $Parsedown->setSafeMode(true);
-        
+
         // New line
         $Parsedown->setBreaksEnabled(true);
-        
+
         // Configure
         $Parsedown->voidElementSuffix = '>'; // HTML5
 
         $Parsedown->linkAttributes = function ($Text, $Attributes, &$Element, $Internal) {
             if (!$Internal) {
                 return [
-                    'rel' => 'nofollow',
+                    'rel' => 'noopener nofollow ugc',
                     'target' => '_blank',
                 ];
             }
             return [];
-        }; 
- 
+        };
+
+        $Parsedown->abbreviationData = [
+            'CSS' => 'Cascading Style Sheet',
+            'HTML' => 'Hyper Text Markup Language',
+            'JS' => 'JavaScript'
+        ];
+
         // Use
-        return $Parsedown->text($content);  
-    }  
+        return $Parsedown->text($content);
+    }
 
     public static function spoiler($content, $params)
     {
@@ -55,7 +65,7 @@ class Content
         if (preg_match("#^(.*)<details([^>]*+)>(.*)$#Usi", $content, $match)) {
             $beforeCut  = $match[1];
             $afterCut   = $match[3];
-            
+
             print_r($match);
         }
 
@@ -74,7 +84,7 @@ class Content
         }
 
         return $spoiler;
-    }    
+    }
 
     // TODO: Let's check the simple version for now.
     public static function cut($text, $length = 800)
@@ -106,17 +116,17 @@ class Content
         $charset = 'UTF-8';
         $token = '~';
         $end = '...';
-        
-        if($strip) {
+
+        if ($strip) {
             $str = str_replace('&gt;', '', strip_tags($str));
         }
-        
+
         if (mb_strlen($str, $charset) >= $lenght) {
             $wrap = wordwrap($str, $lenght, $token);
             $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, $token, 0, $charset), $charset);
             return $str_cut .= $end;
         }
-        
+
         return $str;
     }
 
