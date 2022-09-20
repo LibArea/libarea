@@ -55,6 +55,11 @@ return [
   // Навигация на центральной странице в ленте
   'home' => [
     [
+      'tl'    => UserData::USER_FIRST_LEVEL,
+      'id'    => 'main.all',
+      'url'   => url('main.all'),
+      'title' => __('app.all'),
+    ], [
       'id'    => 'main.feed',
       'url'   => '/',
       'title' => __('app.feed'),
@@ -66,11 +71,6 @@ return [
       'id'    => 'main.questions',
       'url'   => url('main.questions'),
       'title' => __('app.questions'),
-    ], [
-      'tl'    => UserData::USER_FIRST_LEVEL,
-      'id'    => 'main.all',
-      'url'   => url('main.all'),
-      'title' => __('app.all'),
     ], [
       'id'    => 'main.top',
       'url'   => url('main.top'),

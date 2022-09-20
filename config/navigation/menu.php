@@ -149,6 +149,6 @@ return [
             'title' => __('admin.css'),
             'icon'  => 'css',
             'id'    => 'css',
-        ], 
-    ], 
+        ],
+    ],
 ];
