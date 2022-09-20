@@ -43,7 +43,7 @@ class CommentController extends Controller
 
         $result = [];
         foreach ($comments as $ind => $row) {
-            $row['content'] = Content::fragment(Content::text($row['content'], 'line'), 98);
+            $row['content'] = fragment($row['content'], 98);
             $row['date']    = Html::langDate($row['date']);
             $result[$ind]   = $row;
         }

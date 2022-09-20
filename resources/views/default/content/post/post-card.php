@@ -55,8 +55,8 @@ use Hleb\Constructor\Handlers\Request; ?>
         <?php endif; ?>
 
         <div class="cut-post max-w780">
-          <?php $arr = Content::cut($post['post_content']);
-          echo Content::text($arr['content'], 'text'); ?>
+          <?php $arr = \App\Services\Parser\Content::cut($post['post_content']);
+          echo markdown($arr['content']); ?>
         </div>
 
         <?php if ($arr['button']) : ?>

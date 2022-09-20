@@ -35,7 +35,7 @@ use Hleb\Constructor\Handlers\Request; ?>
               <?php endif; ?>
             </div>
             <div class="cut-post mb-none">
-              <?= Content::fragment(Content::text($post['post_content'], 'line'), 250); ?>
+              <?= fragment($post['post_content'], 250); ?>
             </div>
           </div>
 

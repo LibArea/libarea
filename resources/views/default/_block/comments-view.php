@@ -41,7 +41,7 @@
                   <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
                 </div>
                 <div class="max-w780 ind-first-p">
-                  <?= Content::text($answer['answer_content'], 'text'); ?>
+                  <?= markdown($answer['answer_content'], 'text'); ?>
                 </div>
               </div>
               <div class="flex text-sm gap">
@@ -87,7 +87,7 @@
             <ol class="bg-red-200 text-sm pr5 list-none">
               <li class="content_tree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">
-                  <?= Content::text($answer['answer_content'], 'text'); ?>
+                  <?= markdown($answer['answer_content'], 'text'); ?>
                   <?= __('app.answer'); ?> —
                   <span class="u<?php if (Html::loginColor($answer['created_at'])) : ?> green<?php endif; ?>">
                     <?= $answer['login']; ?>
@@ -114,7 +114,7 @@
             <ol class="bg-red-200 text-sm list-none max-w780 <?php if ($comment['comment_comment_id'] > 0) : ?> ml30<?php endif; ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
-                  <?= Content::text($comment['comment_content'], 'line'); ?>
+                  <?= markdown($comment['comment_content'], 'line'); ?>
                   —
                   <span class="u<?php if (Html::loginColor($comment['created_at'])) : ?> green<?php endif; ?>">
                     <?= $comment['login']; ?>
@@ -161,7 +161,7 @@
                 <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
               </div>
               <div class="max-w780 ind-first-p">
-                <?= Content::text($comment['comment_content'], 'text'); ?>
+                <?= markdown($comment['comment_content'], 'text'); ?>
               </div>
               <div class="text-sm flex gap">
                 <?= Html::votes($comment, 'comment'); ?>

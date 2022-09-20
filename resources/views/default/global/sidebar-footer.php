@@ -1,4 +1,4 @@
-<div class="footer text-sm ml15 mr15">
+<div class="footer small-sidebar">
   <hr>
   <a rel="nofollow noopener" class="icon" title="DISCORD" href="https://discord.gg/adJnPEGZZZ"><svg class="icons max">
       <use xlink:href="/assets/svg/icons.svg#discord"></use>

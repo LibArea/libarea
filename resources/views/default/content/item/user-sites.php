@@ -33,7 +33,7 @@
                 <?php endif; ?>
 
                 <div class="list-items__text">
-                  <?= Content::fragment(Content::text($item['item_content'], 'line'), 200); ?>
+                  <?= fragment($item['item_content'], 200); ?>
                 </div>
                 <div class="list-items__footer">
                   <div class="green">

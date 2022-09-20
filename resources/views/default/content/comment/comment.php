@@ -7,7 +7,7 @@ foreach ($answer as  $comment) :
       <ol class="bg-red-200 text-sm list-none max-w780">
         <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
           <span class="comm-deletes gray">
-            <?= Content::text($comment['content'], 'text'); ?>
+            <?= markdown($comment['content'], 'text'); ?>
             — <?= $comment['login']; ?>
             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action right text-sm">
               <?= __('app.recover'); ?>
@@ -41,7 +41,7 @@ foreach ($answer as  $comment) :
             <?= $comment['post_title']; ?>
           </a>
           <div class="content-body">
-            <?= Content::text($comment['content'], 'text'); ?>
+            <?= markdown($comment['content'], 'text'); ?>
           </div>
         </div>
         <div class="text-sm flex gap">

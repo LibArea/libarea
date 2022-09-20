@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Markdown;
+namespace App\Services\Parser;
 
-use App\Services\Markdown\Parser;
+use App\Services\Parser\Convert;
 use App\Models\AuditModel;
-use UserData;
 
 class Content
 {
@@ -17,6 +16,8 @@ class Content
         $content = preg_replace('#"(.*?)"#', '«$1»', $content);
 
         $text = self::parse($content, $type);
+        $text = self::spoiler($text);
+        $text = self::emoji($text);
 
         return self::parseUser($text);
     }
@@ -25,7 +26,7 @@ class Content
     {
         $content = str_replace('<cut>', '', $content);
 
-        $Parsedown = new Parser();
+        $Parsedown = new Convert();
 
         // !!! Enable by default
         $Parsedown->setSafeMode(true);
@@ -56,34 +57,57 @@ class Content
         return $Parsedown->text($content);
     }
 
-    public static function spoiler($content, $params)
+    public static function red($content)
     {
-        if (empty($content)) {
-            return '';
+        $regexpRed = '/\{red(?!.*\{red)(\s?)(?(1)(.*?))\}(.*?)\{\/red\}/is';
+        if (preg_match($regexpRed, $content, $matches)) {
+            $content = preg_replace($regexpRed, "<span class=\"red\">$2$3</span>", $content);
         }
 
-        if (preg_match("#^(.*)<details([^>]*+)>(.*)$#Usi", $content, $match)) {
-            $beforeCut  = $match[1];
-            $afterCut   = $match[3];
+        return  $content;
+    }
 
-            print_r($match);
+    public static function emoji($content)
+    {
+        $pathEmoji =  '/assets/images/emoji/';
+
+        $smiles = array(':)', ':-)');
+        $content = str_replace($smiles, '<img class="emoji" src="' . $pathEmoji . 'smile.png">', $content);
+
+        if (preg_match('/\:(\w+)\:/mUs', $content, $matches)) {
+            $path =  HLEB_PUBLIC_DIR . "/assets/images/emoji/" . $matches[1];
+            $file_ext = "";
+            if (file_exists($path . ".png"))
+                $file_ext = ".png";
+            else if (file_exists($path . ".gif"))
+                $file_ext = ".gif";
+            if ($file_ext === "")
+                return $content;
+
+            $img = $pathEmoji . $matches[1] . $file_ext;
+            return str_replace($matches[0], '<img class="emoji" src="' . $img . '">', $content);
         }
 
-        $title = $params['title'] ?? __('app.see_more');
+        return  $content;
+    }
 
-        $tl = $params['tl'] ?? false;
+    public static function spoiler($content)
+    {
+        $regexpSp = '/\{spoiler(?!.*\{spoiler)(\s?)(?(1)(.*?))\}(.*?)\{\/spoiler\}/is';
+        while (preg_match($regexpSp, $content)) {
+            $content = preg_replace($regexpSp, "<details><summary>" . __('app.see_more') . "</summary>$2$3</details>", $content);
+        }
 
-        $spoiler = '<details><summary>' . $title . '</summary>' . $content . '</details>';
-
-        if ($tl) {
+        $regexpAu = '/\{auth(?!.*\{auth)(\s?)(?(1)(.*?))\}(.*?)\{\/auth\}/is';
+        while (preg_match($regexpAu, $content)) {
             if (UserData::checkActiveUser()) {
-                $spoiler = '<details><summary><svg class="icons gray-600 mr5"><use xlink:href="/assets/svg/icons.svg#lock"></use></svg> ' . $title . '</summary>' . $content . '</details>';
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed\"><i class=\"bi bi-unlock gray-400 mr5\"></i> $2$3</dev>", $content);
             } else {
-                $spoiler = '<details class="gray"><summary><svg class="icons gray-600 mr5"><use xlink:href="/assets/svg/icons.svg#lock"></use></svg> ' . __('app.text_closed') . '.</summary>...</details>';
-            }
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-400\"><i class=\"bi bi-lock mr5 red-200\"></i>" . __('text.closed') . "...</dev>", $content);
+            }   
         }
 
-        return $spoiler;
+        return $content;
     }
 
     // TODO: Let's check the simple version for now.
@@ -111,23 +135,23 @@ class Content
     }
 
     // Getting a piece of text
-    public static function fragment($str, $lenght = 100, $strip = false)
+    public static function fragment($text, $lenght = 100, $strip = false)
     {
         $charset = 'UTF-8';
         $token = '~';
         $end = '...';
 
         if ($strip) {
-            $str = str_replace('&gt;', '', strip_tags($str));
+            $text = str_replace('&gt;', '', strip_tags($text));
         }
 
-        if (mb_strlen($str, $charset) >= $lenght) {
-            $wrap = wordwrap($str, $lenght, $token);
+        if (mb_strlen($text, $charset) >= $lenght) {
+            $wrap = wordwrap($text, $lenght, $token);
             $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, $token, 0, $charset), $charset);
             return $str_cut .= $end;
         }
 
-        return $str;
+        return $text;
     }
 
     public static function parseUser($content, $with_user = false, $to_uid = false)

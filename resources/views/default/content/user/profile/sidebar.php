@@ -48,7 +48,7 @@
               <?= $blog['facet_title']; ?>
             </a>
             <div class="text-sm gray-600">
-              <?= Content::fragment(Content::text($blog['facet_short_description'], 'line'), 68); ?>
+              <?= fragment($blog['facet_short_description'], 68); ?>
             </div>
           </div>
         </div>

@@ -13,6 +13,9 @@
  * MIT license
  * @version 1.2.0
  */
+
+namespace App\Services\Parser;
+
 class Jevix
 {
 	const PRINATABLE  = 0x1;
@@ -125,7 +128,7 @@ class Jevix
 				if ($createIfNoExists) {
 					$this->tagsRules[$tag] = array();
 				} else {
-					throw new Exception("Тег $tag отсутствует в списке разрешённых тегов");
+					throw new \Exception("Тег $tag отсутствует в списке разрешённых тегов");
 				}
 			}
 			$this->tagsRules[$tag][$flag] = $value;
@@ -212,7 +215,7 @@ class Jevix
 	 */
 	function cfgAllowTagParams($tag, $params)
 	{
-		if (!isset($this->tagsRules[$tag])) throw new Exception("Тег $tag отсутствует в списке разрешённых тегов");
+		if (!isset($this->tagsRules[$tag])) throw new \Exception("Тег $tag отсутствует в списке разрешённых тегов");
 		if (!is_array($params)) $params = array($params);
 		// Если ключа со списком разрешенных параметров не существует - создаём его
 		if (!isset($this->tagsRules[$tag][self::TR_PARAM_ALLOWED])) {
@@ -234,7 +237,7 @@ class Jevix
 	 */
 	function cfgSetTagParamsRequired($tag, $params)
 	{
-		if (!isset($this->tagsRules[$tag])) throw new Exception("Тег $tag отсутствует в списке разрешённых тегов");
+		if (!isset($this->tagsRules[$tag])) throw new \Exception("Тег $tag отсутствует в списке разрешённых тегов");
 		if (!is_array($params)) $params = array($params);
 		// Если ключа со списком разрешенных параметров не существует - создаём ео
 		if (!isset($this->tagsRules[$tag][self::TR_PARAM_REQUIRED])) {
@@ -253,7 +256,7 @@ class Jevix
 	 */
 	function cfgSetTagChilds($tag, $childs, $isContainerOnly = false, $isChildOnly = false)
 	{
-		if (!isset($this->tagsRules[$tag])) throw new Exception("Тег $tag отсутствует в списке разрешённых тегов");
+		if (!isset($this->tagsRules[$tag])) throw new \Exception("Тег $tag отсутствует в списке разрешённых тегов");
 		if (!is_array($childs)) $childs = array($childs);
 		// Тег является контейнером и не может содержать текст
 		if ($isContainerOnly) $this->tagsRules[$tag][self::TR_TAG_CONTAINER] = true;
@@ -264,7 +267,7 @@ class Jevix
 		foreach ($childs as $child) {
 			$this->tagsRules[$tag][self::TR_TAG_CHILD_TAGS][$child] = true;
 			//  Указанный тег должен сущеаствовать в списке тегов
-			if (!isset($this->tagsRules[$child])) throw new Exception("Тег $child отсутствует в списке разрешённых тегов");
+			if (!isset($this->tagsRules[$child])) throw new \Exception("Тег $child отсутствует в списке разрешённых тегов");
 			if (!isset($this->tagsRules[$child][self::TR_TAG_PARENT])) $this->tagsRules[$child][self::TR_TAG_PARENT] = array();
 			$this->tagsRules[$child][self::TR_TAG_PARENT][$tag] = true;
 			// Указанные разрешённые теги могут находиться только внтутри тега-контейнера
@@ -280,7 +283,7 @@ class Jevix
 	 */
 	function cfgSetTagParamsAutoAdd($tag, $params)
 	{
-		throw new Exception("cfgSetTagParamsAutoAdd() is Deprecated. Use cfgSetTagParamDefault() instead");
+		throw new \Exception("cfgSetTagParamsAutoAdd() is Deprecated. Use cfgSetTagParamDefault() instead");
 	}
 
 	/**
@@ -292,7 +295,7 @@ class Jevix
 	 */
 	function cfgSetTagParamDefault($tag, $param, $value, $isRewrite = false)
 	{
-		if (!isset($this->tagsRules[$tag])) throw new Exception("Tag $tag is missing in allowed tags list");
+		if (!isset($this->tagsRules[$tag])) throw new \Exception("Tag $tag is missing in allowed tags list");
 
 		if (!isset($this->tagsRules[$tag][self::TR_PARAM_AUTO_ADD])) {
 			$this->tagsRules[$tag][self::TR_PARAM_AUTO_ADD] = array();
@@ -308,7 +311,7 @@ class Jevix
 	 */
 	function cfgSetTagCallback($tag, $callback = null)
 	{
-		if (!isset($this->tagsRules[$tag])) throw new Exception("Тег $tag отсутствует в списке разрешённых тегов");
+		if (!isset($this->tagsRules[$tag])) throw new \Exception("Тег $tag отсутствует в списке разрешённых тегов");
 		$this->tagsRules[$tag][self::TR_TAG_CALLBACK] = $callback;
 	}
 
@@ -319,7 +322,7 @@ class Jevix
 	 */
 	function cfgSetTagCallbackFull($tag, $callback = null)
 	{
-		if (!isset($this->tagsRules[$tag])) throw new Exception("Тег $tag отсутствует в списке разрешённых тегов");
+		if (!isset($this->tagsRules[$tag])) throw new \Exception("Тег $tag отсутствует в списке разрешённых тегов");
 		$this->tagsRules[$tag][self::TR_TAG_CALLBACK_FULL] = $callback;
 	}
 
@@ -333,7 +336,7 @@ class Jevix
 	 */
 	function cfgSetTagParamCombination($tag, $param, $aCombinations, $bRemove = false)
 	{
-		if (!isset($this->tagsRules[$tag])) throw new Exception("Tag $tag is missing in allowed tags list");
+		if (!isset($this->tagsRules[$tag])) throw new \Exception("Tag $tag is missing in allowed tags list");
 
 		if (!isset($this->tagsRules[$tag][self::TR_PARAM_COMBINATION])) {
 			$this->tagsRules[$tag][self::TR_PARAM_COMBINATION] = array();
@@ -510,15 +513,14 @@ class Jevix
 
 	/**
 	 * Восстановить
-	 *
 	 */
 	protected function restoreState($index = null)
 	{
-		if (!count($this->states)) throw new Exception('Конец стека');
+		if (!count($this->states)) throw new \Exception('Конец стека');
 		if ($index == null) {
 			$state = array_pop($this->states);
 		} else {
-			if (!isset($this->states[$index])) throw new Exception('Неверный индекс стека');
+			if (!isset($this->states[$index])) throw new \Exception('Неверный индекс стека');
 			$state = $this->states[$index];
 			$this->states = array_slice($this->states, 0, $index);
 		}

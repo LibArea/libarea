@@ -3,7 +3,7 @@
   <?= insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
   <div class="box">
     <h2 class="m0"><?= __('app.wiki'); ?></h2>
-    <?= Content::text($topic['facet_info'] ?? '', 'text'); ?>
+    <?= markdown($topic['facet_info'] ?? '', 'text'); ?>
   </div>
   <div class="box">
     <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>

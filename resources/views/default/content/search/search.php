@@ -50,7 +50,7 @@ $sw = $sw ?? '?';
             <?= Img::facets($result['facet_list'], 'topic', 'tag mr15'); ?>
           </div>
         <?php endif; ?>
-        <?= Content::fragment(Content::text($result['content'], 'line'), 250); ?>
+        <?= fragment($result['content'], 250); ?>
       </div>
     <?php endforeach; ?>
 

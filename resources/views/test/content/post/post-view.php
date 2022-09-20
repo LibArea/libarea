@@ -60,7 +60,7 @@
 
       <div class="post-body max-w780 full">
         <div class="post">
-          <?= Content::text($post['post_content'], 'text'); ?>
+          <?= markdown($post['post_content'], 'text'); ?>
         </div>
         <?php if ($post['post_url_domain']) : ?>
           <div class="mb15">

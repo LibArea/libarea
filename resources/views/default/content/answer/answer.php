@@ -33,7 +33,7 @@ foreach ($data['answers'] as $answer) :
             <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
           </div>
           <div class="content-body">
-            <?= Content::text($answer['content'], 'text'); ?>
+            <?= markdown($answer['content'], 'text'); ?>
           </div>
         </div>
         <div class="flex text-sm gap">
@@ -76,7 +76,7 @@ foreach ($data['answers'] as $answer) :
     <?php if (UserData::checkAdmin()) : ?>
       <ol class="bg-red-200 text-sm hidden p15 mb10 list-none">
         <li class="content_tree" id="comment_<?= $answer['answer_id']; ?>">
-          <?= Content::text($answer['content'], 'text'); ?>
+          <?= markdown($answer['content'], 'text'); ?>
           <?= __('app.answer'); ?> — <?= $answer['login']; ?>
           <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action right">
             <span><?= __('app.recover'); ?></span>

@@ -21,7 +21,7 @@
             <span class="lowercase"><?= Html::langDate($answer['answer_date']); ?></span>
           </div>
           <a class="last-content_telo" href="<?= url('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
-            <?= Content::fragment(Content::text($answer['answer_content'], 'line'), 98); ?>
+            <?= fragment($answer['answer_content'], 98); ?>
           </a>
         </li>
       <?php endforeach; ?>

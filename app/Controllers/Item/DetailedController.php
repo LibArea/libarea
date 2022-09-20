@@ -29,10 +29,6 @@ class DetailedController extends Controller
             self::error404();
         }
 
-        if ($item['item_content_soft']) {
-            $item['item_content_soft'] = Content::text($item['item_content_soft'], 'text');
-        }
-
         $content_img = Img::PATH['thumbs'] . 'default.png';
         if (file_exists(HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $item['item_domain'] . '.png')) {
             $content_img =  Img::PATH['thumbs'] . $item['item_domain'] . '.png';

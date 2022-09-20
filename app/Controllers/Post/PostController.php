@@ -71,7 +71,7 @@ class PostController extends Controller
             $content_img  = Img::PATH['posts_thumb'] . $content['post_thumb_img'];
         }
 
-        $description  = Content::fragment(Content::text($content['post_content'], 'line'), 250);
+        $description  = fragment($content['post_content'], 250);
         if ($description == '') {
             $description = strip_tags($content['post_title']);
         }
@@ -209,7 +209,7 @@ class PostController extends Controller
         $site       = PostModel::getDomain($domain, $this->user['id']);
         self::error404($site);
 
-        $site['item_content'] = Content::text($site['item_content'], 'line');
+        $site['item_content'] = markdown($site['item_content'], 'line');
 
         $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, $sheet, $site['item_domain']);
         $pagesCount = FeedModel::feedCount($this->user, $sheet, $site['item_domain']);

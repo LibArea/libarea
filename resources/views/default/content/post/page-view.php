@@ -6,7 +6,7 @@
         <?= $page['post_title']; ?>
       </h1>
       <div class="post-body max-w780 full">
-        <?= Content::text($page['post_content'], 'text'); ?>
+        <?= markdown($page['post_content'], 'text'); ?>
       </div>
     <?php else : ?>
       <div class="bg-red-200 p15 center mr10">

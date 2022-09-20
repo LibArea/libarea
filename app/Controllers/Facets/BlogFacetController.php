@@ -56,7 +56,7 @@ class BlogFacetController extends Controller
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 1, 5),
                     'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], 'facet'),
-                    'info'          => Content::text($facet['facet_info'] ?? false, 'text'),
+                    'info'          => markdown($facet['facet_info'] ?? false, 'text'),
                 ],
                 'facet'   => [
                     'facet_id' => $facet['facet_id'],

@@ -2,10 +2,33 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Markdown;
+namespace App\Services\Parser;
 
-class Parser extends \ParsedownExtraPlugin
+// https://github.com/erusev/parsedown/wiki/Tutorial:-Create-Extensions
+class Convert extends \ParsedownExtraPlugin
 {
+    function __construct()
+    {
+        $this->InlineTypes['['][] = 'Spoiler';
+    }
+
+    protected function inlineSpoiler($Excerpt)
+    {
+        if (preg_match('/\[spoiler\](.+)\[\/spoiler]/mUs', $Excerpt['text'], $matches)) {
+            return [
+                'extent' => strlen($matches[0]),
+                'element' => [
+                    'name' => 'span',
+                    'handler' => 'line',
+                    'text' => $matches[1],
+                    'attributes' => [
+                        'class' => 'spoiler'
+                    ],
+                ]
+            ];
+        }
+    }
+
     protected function convertYouTube($Element)
     {
         if (!$Element) return $Element;

@@ -12,7 +12,7 @@
           <ol class="list-none">
             <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="max-w780">
-                <?= Content::text($answer['answer_content'], 'text'); ?>
+                <?= markdown($answer['answer_content'], 'text'); ?>
               </div>
               <div class="flex text-sm justify-between">
                 <div class="flex gap">
@@ -70,7 +70,7 @@
           <?php if ($comment['comment_is_deleted'] == 0) : ?>
             <li class="content_tree br-li-bottom-no br-bottom ml15" id="comment_<?= $comment['comment_id']; ?>">
               <div class="qa-comment">
-                <?= Content::text($comment['comment_content'], 'line'); ?>
+                <?= fragment($comment['comment_content']); ?>
                 <span class="qa-comment-footer">
                   — <a class="brown" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
                   <span class="qa-comment-ml">

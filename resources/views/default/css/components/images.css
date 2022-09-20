@@ -77,3 +77,6 @@ img.emoji {
   display: inline-block;
   border-color: transparent;
 }
+
+.post img,
+.cut-post img { max-width: 780px; }

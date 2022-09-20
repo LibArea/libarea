@@ -16,7 +16,7 @@
           <?= Img::website($item['item_domain'], 'thumbs', $item['item_title'], 'w-100 box-shadow'); ?>
         </div>
         <div class="w-60 mb-w-100">
-          <?= Content::text($item['item_content'], 'text'); ?>
+          <?= markdown($item['item_content'], 'text'); ?>
           <a class="gree" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
             <?= Img::website($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
             <?= $item['item_domain']; ?>
@@ -41,7 +41,7 @@
         <h2><?= __('web.soft'); ?></h2>
         <h3><?= $item['item_title_soft']; ?></h3>
         <div class="gray-600 max-w780">
-          <?= Content::text($item['item_content_soft'], 'text'); ?>
+           <?= markdown($item['item_content_soft'], 'text'); ?>
         </div>
         <p>
           <svg class="icons">

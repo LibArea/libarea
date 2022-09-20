@@ -13,7 +13,7 @@
           <?php if ($team['team_is_deleted'] == 0) : ?>
             <h2><a class="mr15" href="<?= url('team.view', ['id' => $team['id']]); ?>"><?= $team['team_name']; ?></a></h2>
             <div class="content-body">
-              <?= Content::text($team['team_content'], 'line'); ?>
+              <?= markdown($team['team_content'], 'line'); ?>
             </div>
             <blockquote class="box">
               <?php if ($team['users_list']) : ?>

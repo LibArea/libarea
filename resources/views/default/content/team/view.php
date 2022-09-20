@@ -5,7 +5,7 @@
   <span class="red"><?= $team['team_name']; ?></span>
 
   <div class="content-body">
-    <?= Content::text($team['team_content'], 'text'); ?>
+    <?= markdown($team['team_content'], 'text'); ?>
   </div>
 
   <div class="mb15 gray-600">

@@ -19,7 +19,7 @@
                 <div class="gray-600"><?= $row['login']; ?></div>
                 <?php if ($row['about']) : ?>
                   <div class="gray-600 mb-none text-sm">
-                    <?= Content::fragment(Content::text($row['about'], 'line'), 80); ?>
+                    <?= fragment($row['about'], 80); ?>
                   </div>
                 <?php endif; ?>
               </div>

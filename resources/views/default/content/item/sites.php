@@ -91,7 +91,7 @@
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $url . '/page'); ?>
   </main>
   <aside>
-    <div class="box bg-beige max-w300"><?= Content::text($data['category']['facet_info'] ?? '', 'line'); ?></div>
+    <div class="box bg-beige max-w300"><?= markdown($data['category']['facet_info'] ?? '', 'line'); ?></div>
 
     <?php if ($data['related_posts']) : ?>
       <div class="box bg-blue-200 max-w300">

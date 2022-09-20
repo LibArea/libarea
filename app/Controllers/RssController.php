@@ -31,7 +31,7 @@ class RssController extends Controller
         $result = [];
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
-            $row['post_content']  = Content::text($text[0], 'line');
+            $row['post_content']  = markdown($text[0], 'line');
             $result[$ind]         = $row;
         }
 
@@ -60,7 +60,7 @@ class RssController extends Controller
         $result = [];
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
-            $row['post_content']  = Content::text($text[0], 'line');
+            $row['post_content']  = markdown($text[0], 'line');
             $result[$ind]         = $row;
         }
 

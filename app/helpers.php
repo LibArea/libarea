@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Hleb\Constructor\Handlers\Request;
+
 /*
  * Global "helper" functions.
  *
@@ -45,7 +47,17 @@ function is_current($url)
 
 function insert(string $name, array $params = [])
 {
-    return App\Controllers\Controller::insert($name, $params);
+    return \App\Controllers\Controller::insert($name, $params);
+}
+
+function markdown(string $content, string $type = 'text')
+{
+    return \App\Services\Parser\Content::text($content, $type);
+}
+
+function fragment(string $content, int $limit = 0)
+{
+    return \App\Services\Parser\Filter::noHTML($content, $limit);
 }
 
 function is_return(string $text, string $status, string $redirect = '/')
@@ -56,10 +68,10 @@ function is_return(string $text, string $status, string $redirect = '/')
 
 function hook_action(string $name, array $params = [])
 {
-    Hook::action($name, $params);
+    return App\Hook\Hook::action($name, $params);
 }
 
 function hook_filter(string $name, string $data, array $params = [])
 {
-    return Hook::filter($name, $data, $params);
+    return App\Hook\Hook::filter($name, $data, $params);
 }
