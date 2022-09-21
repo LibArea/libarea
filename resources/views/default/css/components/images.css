@@ -78,7 +78,5 @@ img.emoji {
   border-color: transparent;
 }
 
-.medium-zoom-image {
-  max-width: 780px;
-  width: 100%;
-}
+.post img,
+.medium-zoom-image { max-width: 100%; }

@@ -9,7 +9,7 @@ use App\Models\AuditModel;
 
 class Content
 {
-    // Content management (Parsedown)
+    // Content management (Parsedown, Typograf)
     public static function text(string $content, string $type)
     {
         // простой случай замены на «»
@@ -55,7 +55,11 @@ class Content
         ];
 
         // Use
-        return $Parsedown->text($content);
+        $text = $Parsedown->text($content);
+        
+        $t = new \Akh\Typograf\Typograf();
+
+        return $t->apply($text);
     }
 
     public static function red($content)
