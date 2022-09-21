@@ -43,13 +43,13 @@ use Hleb\Constructor\Handlers\Request; ?>
         <?php if ($post['post_content_img']) : ?>
           <div class="w-100">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= Img::image($post['post_content_img'], $post['post_title'], 'max-w780 mt10 w-100', 'post', 'cover'); ?>
+              <?= Img::image($post['post_content_img'], $post['post_title'], 'medium-zoom-image mt10', 'post', 'cover'); ?>
             </a>
           </div>
         <?php else : ?>
           <?php if ($post['post_thumb_img']) : ?>
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= Img::image($post['post_thumb_img'], $post['post_title'],  'max-w780 mt10 w-100', 'post', 'thumbnails'); ?>
+              <?= Img::image($post['post_thumb_img'], $post['post_title'],  'medium-zoom-image mt10', 'post', 'thumbnails'); ?>
             </a>
           <?php endif; ?>
         <?php endif; ?>

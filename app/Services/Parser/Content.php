@@ -13,7 +13,7 @@ class Content
     public static function text(string $content, string $type)
     {
         // простой случай замены на «»
-        $content = preg_replace('#"(.*?)"#', '«$1»', $content);
+        // $content = preg_replace('#"(.*?)"#', '«$1»', $content);
 
         $text = self::parse($content, $type);
         $text = self::spoiler($text);
@@ -50,7 +50,8 @@ class Content
         $Parsedown->abbreviationData = [
             'CSS' => 'Cascading Style Sheet',
             'HTML' => 'Hyper Text Markup Language',
-            'JS' => 'JavaScript'
+            'JS' => 'JavaScript',
+            'HLEB' => 'PHP Framework',
         ];
 
         // Use
