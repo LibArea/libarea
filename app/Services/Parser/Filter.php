@@ -9,7 +9,7 @@ use Parsedown;
 
 class Filter
 {
-    // Работа с контентом (Parsedown and Jevix)
+    // Content management (Parsedown and Jevix)
     public static function noHTML(string $content, int $lenght)
     {
         $Parsedown = new Parsedown();
@@ -17,17 +17,17 @@ class Filter
 
         $content = str_replace(["\r\n", "\r", "\n"], '', $content);
 
-        // Получим html с минимальным парсингом (line = без экранирования)
+        // Get html with minimal parsing (line = no formatting)
+        // Получим html с минимальным парсингом (line = без форматирования)
         $content = $Parsedown->line($content);
 
+        // Tags to be stripped from the text along with the content.
         // Теги, которые необходимо вырезать из текста вместе с контентом.
         $jevix->cfgSetTagCutWithContent(['script', 'style', 'details', 'style', 'iframe', 'code', 'a', 'p', 'br', 'img', 'table']);
 
-        // Ин. Jevix с условиями выше
         $item = [];
         $text = $jevix->parse($content, $item);
 
-        // Откорректируем конечный результат
         $str =  str_replace(['&gt;'], '', $text);
 
         return self::fragment($str, $lenght);
