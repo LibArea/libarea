@@ -117,12 +117,13 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function feedItemCount($facets, $facet_id, $sort)
+    public static function feedItemCount($facets, $facet_id, $sort, $grouping)
     {
+        $group  = self::group($grouping);
         $facets = self::facets($facets, $facet_id);
         $sort   = $facets . self::sorts($sort);
 
-        $sql = "SELECT item_id FROM facets_items_relation LEFT JOIN items ON relation_item_id = item_id WHERE $sort  ";
+        $sql = "SELECT item_id FROM facets_items_relation LEFT JOIN items ON relation_item_id = item_id WHERE $group $sort ";
 
         return DB::run($sql)->rowCount();
     }
@@ -134,14 +135,11 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getTypesWidget($facet_id)
     {
         $sql = "SELECT 
-                    relation_facet_id,
-                    relation_item_id,
-
-                    item_is_github,
-                    item_is_forum,
-                    item_is_portal,
-                    item_is_reference,
-                    item_is_blog
+                    SUM(item_is_github) as github,
+                    SUM(item_is_forum) as forum,
+                    SUM(item_is_portal) as portal,
+                    SUM(item_is_reference) as reference,
+                    SUM(item_is_blog) as blog
                        FROM facets_items_relation 
                            LEFT JOIN items ON relation_item_id = item_id 
                                 WHERE relation_facet_id = :facet_id";

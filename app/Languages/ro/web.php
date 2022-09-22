@@ -105,7 +105,14 @@ return [
     'deleted_desc'  => '...',
     'audits_title'  => 'Auditul site-ului',
     'audits_desc'   => '...',
-    
+
+    'all'               => 'Toate',
+    'github'            => 'GitHub',
+    'forum'             => 'Forumuri',
+    'blog'              => 'Bloguri',
+    'portal'            => 'Portaluri',
+    'reference'         => 'Enciclopedii',
+
     'top_title'         => '{name} — site-uri după popularitate',
     'top_desc'          => 'Anunțată listă de site-uri pe subiect {description_info}',
     'all_title'         => '{name} — rubrică, site-uri după dată',

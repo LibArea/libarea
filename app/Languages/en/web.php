@@ -106,6 +106,13 @@ return [
     'audits_title'  => 'Website audit',
     'audits_desc'   => '...',
 
+    'all'               => 'All',
+    'github'            => 'GitHub',
+    'forum'             => 'Forums',
+    'blog'              => 'Blogs',
+    'portal'            => 'Portals',
+    'reference'         => 'Encyclopedias',
+
     'top_title'         => '{name} — sites by popularity',
     'top_desc'          => 'Announced list of sites by subject {description_info}',
     'all_title'         => '{name} — rubric, sites by date',

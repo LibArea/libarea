@@ -16,19 +16,7 @@ class DirController extends Controller
     // Лист сайтов по темам (сайты по "категориям")
     public function index()
     {
-        if ($grouping = Request::get('grouping')) {
-            $os = ['github', 'blog', 'forum', 'portal', 'reference'];
-            if (!in_array($grouping, $os)) {
-                self::error404();
-            }
-        }
-
-        if ($sort = Request::get('sort')) {
-            $os = ['top', 'all'];
-            if (!in_array($sort, $os)) {
-                self::error404();
-            }
-        }
+        self::filter($grouping = Request::get('grouping'), $sort = Request::get('sort'));
 
         $category  = FacetModel::get(Request::get('slug'), 'slug', $this->user['trust_level']);
         self::error404($category);
@@ -41,7 +29,7 @@ class DirController extends Controller
         }
 
         $items      = WebModel::feedItem($this->pageNumber, $this->limit, $childrens, $this->user, $category['facet_id'], $sort, $grouping);
-        $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'],  $grouping);
+        $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'],  $sort, $grouping);
 
         $m = [
             'og'    => false,
@@ -71,10 +59,29 @@ class DirController extends Controller
                     'childrens'         => $childrens,
                     'user_count_site'   => $count_site,
                     'breadcrumb'        => self::breadcrumb($tree, $sort),
+                    'characteristics'   => WebModel::getTypesWidget($category['facet_id']),
                     'low_matching'      => FacetModel::getLowMatching($category['facet_id']),
                 ]
             ], 'item',
         );
+    }
+
+    // Route::get('/web/{grouping}/dir/{sort}/{slug}')
+    public static function filter($grouping, $sort)
+    {
+        if ($grouping) {
+            $os = ['github', 'blog', 'forum', 'portal', 'reference'];
+            if (!in_array($grouping, $os)) {
+                self::error404();
+            }
+        }
+
+        if ($sort) {
+            $os = ['top', 'all'];
+            if (!in_array($sort, $os)) {
+                self::error404();
+            }
+        }
     }
 
     // Bread crumbs

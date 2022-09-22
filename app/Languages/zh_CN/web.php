@@ -106,6 +106,13 @@ return [
     'audits_title'      => '站点审核',
     'audits_desc'       => '...',
     
+    'all'               => '全部',
+    'github'            => 'GitHub',
+    'forum'             => '论坛',
+    'blog'              => '博客',
+    'portal'            => '门户网站',
+    'reference'         => '百科全书',
+    
     'top_title'         => '{name} -按受欢迎程度',
     'top_desc'          => '按主题公布的网站列表 {description_info}',
     'all_title'         => '{name} -专栏，按日期划分的网站',

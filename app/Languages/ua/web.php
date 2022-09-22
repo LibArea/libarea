@@ -105,7 +105,14 @@ return [
     'deleted_desc'      => '...',
     'audits_title'      => 'Аудит сайтов',
     'audits_desc'       => '...',
-    
+
+    'all'               => 'Всі',
+    'github'            => 'GitHub',
+    'forum'             => 'Форуми',
+    'blog'              => 'Блоги',
+    'portal'            => 'Портали',
+    'reference'         => 'Енциклопедії',
+
     'top_title'         => '{name} — сайты по популярности',
     'top_desc'          => 'Анонсированные список сайтов по тематике {description_info}',
     'all_title'         => '{name} — рубрика, сайты по дате',

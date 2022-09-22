@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /search
+Disallow: /oauth
 Disallow: /recover
 Disallow: /top
 Disallow: /s/*/top*
@@ -9,3 +10,8 @@ Disallow: /*/page/*
 Disallow: /page
 Disallow: *.html
 Disallow: /web/edit/*
+Disallow: /web/github/*
+Disallow: /web/forum/*
+Disallow: /web/portal/*
+Disallow: /web/reference/*
+Disallow: /web/blog/*

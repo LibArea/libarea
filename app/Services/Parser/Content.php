@@ -6,6 +6,7 @@ namespace App\Services\Parser;
 
 use App\Services\Parser\Convert;
 use App\Models\AuditModel;
+use UserData;
 
 class Content
 {
@@ -56,7 +57,7 @@ class Content
 
         // Use
         $text = $Parsedown->text($content);
-        
+
         $t = new \Akh\Typograf\Typograf();
 
         return $t->apply($text);
@@ -109,7 +110,7 @@ class Content
                 $content = preg_replace($regexpAu, "<dev class=\"txt-closed\"><i class=\"bi bi-unlock gray-400 mr5\"></i> $2$3</dev>", $content);
             } else {
                 $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-400\"><i class=\"bi bi-lock mr5 red-200\"></i>" . __('text.closed') . "...</dev>", $content);
-            }   
+            }
         }
 
         return $content;

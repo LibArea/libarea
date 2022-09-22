@@ -1,6 +1,6 @@
 <div class="item-cat">
   <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]); ?>
-
+  <div class="right mr20"><?= insert('/content/item/characteristics', ['data' => $data, 'grouping' => Request::get('grouping')]); ?></div>
   <h1 class="m0">
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) : ?>
@@ -16,6 +16,7 @@
       </a>
     <?php endif; ?>
   </h1>
+  
 </div>
 
 <?php if ($data['childrens']) : ?>
