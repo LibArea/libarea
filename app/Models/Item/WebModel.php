@@ -117,14 +117,36 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function feedItemCount($facets, $topic_id, $sort)
+    public static function feedItemCount($facets, $facet_id, $sort)
     {
-        $facets = self::facets($facets, $topic_id);
+        $facets = self::facets($facets, $facet_id);
         $sort   = $facets . self::sorts($sort);
 
         $sql = "SELECT item_id FROM facets_items_relation LEFT JOIN items ON relation_item_id = item_id WHERE $sort  ";
 
         return DB::run($sql)->rowCount();
+    }
+
+    // Get a list of sites by facet id. We will get characteristic features for each site.
+    // It makes no sense to show a label for sorting (by attribute) if there is not at least 1 site in this facet
+    // Получим список сайтов по id фасету. У каждого сайта получим характерные признаки.
+    // Нет смысла показывать метку для сортировки (по признаку), если в данном фасете нет хотя бы 1 сайта
+    public static function getTypesWidget($facet_id)
+    {
+        $sql = "SELECT 
+                    relation_facet_id,
+                    relation_item_id,
+
+                    item_is_github,
+                    item_is_forum,
+                    item_is_portal,
+                    item_is_reference,
+                    item_is_blog
+                       FROM facets_items_relation 
+                           LEFT JOIN items ON relation_item_id = item_id 
+                                WHERE relation_facet_id = :facet_id";
+
+        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
     // Check if the domain exists 
