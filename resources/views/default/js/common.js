@@ -294,7 +294,7 @@ if (tabs) {
               let html = '';
               for (let key in obj) {
                 html += '<li><a href="/@' + obj[key].login + '"><img class="img-sm mr5" src="/uploads/users/avatars/small/' + obj[key].avatar + '"></a>';
-                html += '<span class="middle lowercase gray-600">' + obj[key].date + '</span>';
+                html += '<span class="middle text-sm lowercase gray-600">' + obj[key].date + '</span>';
                 html += '<a class="last-content_telo" href="/post/' + obj[key].post_id + '/' + obj[key].post_slug + '#comment_' + obj[key].comment_id + '">' + obj[key].content + '</a></li>';
               }
               if (!Object.keys(obj).length == 0) {

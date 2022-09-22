@@ -10,7 +10,7 @@ use Parsedown;
 class Filter
 {
     // Content management (Parsedown and Jevix)
-    public static function noHTML(string $content, int $lenght)
+    public static function noHTML(string $content, int $lenght = 150)
     {
         $Parsedown = new Parsedown();
         $jevix = new Jevix();
@@ -33,7 +33,7 @@ class Filter
         return self::fragment($str, $lenght);
     }
 
-    public static function fragment(string $text, int $lenght = 100, string $charset = 'UTF-8')
+    public static function fragment(string $text, int $lenght = 150, string $charset = 'UTF-8')
     {
         if (mb_strlen($text, $charset) >= $lenght) {
             $wrap = wordwrap($text, $lenght, '~');
