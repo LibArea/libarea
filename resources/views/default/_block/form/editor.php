@@ -59,14 +59,14 @@
           children: [{
             icon: '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#eyeglass"></use></svg>',
             action: (e) => {
-              e.codemirror.replaceSelection('<details title="<?= __('app.spoiler'); ?>"> *** </details> ');
+              e.codemirror.replaceSelection('{details title="<?= __('app.spoiler'); ?>"} *** {/details} ');
               e.codemirror.focus();
             },
           }, {
             icon: '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#lock"></use></svg>',
             title: "<?= __('app.spoiler_auth'); ?>",
             action: (e) => {
-              e.codemirror.replaceSelection('<details tl> *** </details>');
+              e.codemirror.replaceSelection('{auth} *** {/auth}');
               e.codemirror.focus();
             },
           }],

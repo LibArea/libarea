@@ -13,11 +13,8 @@ class Content
     // Content management (Parsedown, Typograf)
     public static function text(string $content, string $type)
     {
-        // простой случай замены на «»
-        // $content = preg_replace('#"(.*?)"#', '«$1»', $content);
-
         $text = self::parse($content, $type);
-        $text = self::spoiler($text);
+        $text = self::details($text);
         $text = self::emoji($text);
 
         return self::parseUser($text);
@@ -97,9 +94,9 @@ class Content
         return  $content;
     }
 
-    public static function spoiler($content)
+    public static function details($content)
     {
-        $regexpSp = '/\{spoiler(?!.*\{spoiler)(\s?)(?(1)(.*?))\}(.*?)\{\/spoiler\}/is';
+        $regexpSp = '/\{details(?!.*\{details)(\s?)(?(1)(.*?))\}(.*?)\{\/details\}/is';
         while (preg_match($regexpSp, $content)) {
             $content = preg_replace($regexpSp, "<details><summary>" . __('app.see_more') . "</summary>$2$3</details>", $content);
         }
@@ -107,9 +104,9 @@ class Content
         $regexpAu = '/\{auth(?!.*\{auth)(\s?)(?(1)(.*?))\}(.*?)\{\/auth\}/is';
         while (preg_match($regexpAu, $content)) {
             if (UserData::checkActiveUser()) {
-                $content = preg_replace($regexpAu, "<dev class=\"txt-closed\"><i class=\"bi bi-unlock gray-400 mr5\"></i> $2$3</dev>", $content);
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed\">$2$3</dev>", $content);
             } else {
-                $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-400\"><i class=\"bi bi-lock mr5 red-200\"></i>" . __('text.closed') . "...</dev>", $content);
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-400\">" . __('app.text_closed') . "...</dev>", $content);
             }
         }
 
