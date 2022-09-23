@@ -1,6 +1,8 @@
 <div class="item-cat">
-  <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]); ?>
-  <div class="right mr20"><?= insert('/content/item/characteristics', ['data' => $data, 'grouping' => Request::get('grouping')]); ?></div>
+  <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]); 
+      $grouping = Request::get('grouping');
+  ?>
+  <div class="right mr20"><?= insert('/content/item/characteristics', ['data' => $data, 'grouping' => $grouping]); ?></div>
   <h1 class="m0">
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) : ?>
@@ -22,8 +24,9 @@
 <?php if ($data['childrens']) : ?>
   <div class="item-categories">
     <?php foreach ($data['childrens'] as $lt) : ?>
+       <?php $url_cat = $grouping ? url('grouping.category', ['grouping' => 'github', 'sort' => $data['sort'], 'slug' => $lt['facet_slug']]) : url('category', ['sort' => $data['sort'], 'slug' => $lt['facet_slug']]); ?>
       <div>
-        <a class="text-2xl" href="<?= url('category', ['sort' => $data['sort'], 'slug' => $lt['facet_slug']]); ?>">
+        <a class="text-2xl" href="<?= $url_cat; ?>">
           <?= $lt['facet_title']; ?>
         </a> <sup class="gray-600"><?= $lt['counts']; ?></sup>
         <?php if (UserData::checkAdmin()) : ?>

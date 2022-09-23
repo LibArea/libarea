@@ -17,7 +17,7 @@
       <?php endif; ?>
 
       <?php if ($tp['reference']) : ?>
-         <a class="ml5 gray<?= $grouping == 'reference' ? ' active' : '' ?>" href="<?= url('grouping.category', ['grouping' => 'reference', 'sort' => $data['sort'], 'slug' => $data['category']['facet_slug']]); ?>"><?= __('web.category'); ?></a>
+         <a class="ml5 gray<?= $grouping == 'reference' ? ' active' : '' ?>" href="<?= url('grouping.category', ['grouping' => 'reference', 'sort' => $data['sort'], 'slug' => $data['category']['facet_slug']]); ?>"><?= __('web.reference'); ?></a>
       <?php endif; ?>
 
       <?php if ($tp['blog']) : ?>
