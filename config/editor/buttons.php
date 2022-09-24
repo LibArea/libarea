@@ -36,6 +36,11 @@ return [
             'action'    => 'EasyMDE.drawLink',
             'icon'      => '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#link"></use></svg>',
             'title'     => __('app.link'),
+       ],  [
+            'name'      => 'table',
+            'action'    => 'EasyMDE.drawTable',
+            'icon'      => '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#table"></use></svg>',
+            'title'     => __('app.table'),
        ], [
             'separator' => 'separator',
        ], [

@@ -18,7 +18,6 @@
       </a>
     <?php endif; ?>
   </h1>
-  
 </div>
 
 <?php if ($data['childrens']) : ?>

@@ -1,7 +1,7 @@
 <?php foreach ($data['characteristics'] as $tp) : ?>
    <div class="text-xs">
       <?php if ($grouping) : ?>
-         <a class="ml5 gray " href="<?= url('category', ['sort' => $data['sort'], 'slug' => $data['category']['facet_slug']]); ?>"><?= __('web.all'); ?></a>
+         <a class="ml5 green" href="<?= url('category', ['sort' => $data['sort'], 'slug' => $data['category']['facet_slug']]); ?>"><?= __('web.all'); ?></a>
       <?php endif; ?>
 
       <?php if ($tp['github']) : ?>
