@@ -45,7 +45,6 @@ main { flex: 1; }
     background-color: #fff;
     padding-left: 10px;
   }
-
 }
 
 @media (max-width: 780px) {
@@ -75,6 +74,7 @@ main { flex: 1; }
   .mb-none,
   ul.setting > li > a > i { display: none; }
   
+  .wrap-item,
   .wrap {
     padding-left: 0.5rem;
     padding-right: 0.5rem;

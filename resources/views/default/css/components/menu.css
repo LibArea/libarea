@@ -4,7 +4,11 @@
  * Выпадающее меню и навигация
  */
 
-.menu__left { flex-basis: 180px; }
+.menu__left {
+  width: 210px;
+  padding-right: 20px;
+}
+
 .menuno .menu__left { display: none; }
 
 .dropdown,
@@ -53,7 +57,6 @@
 }
 
 .user-nav li a { margin-left: 56px; }
-
 .user-box-nav li:hover > a { color: #222; }
 /* end */
 

@@ -1,7 +1,7 @@
 <?= insert('/_block/add-js-css');
 $domain = $data['domain']; ?>
 
-<div id="contentWrapper">
+<div id="contentWrapper" class="wrap-item">
   <main>
     <div class="max-w780">
 

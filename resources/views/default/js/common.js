@@ -71,9 +71,7 @@ document.querySelectorAll(".add-comment")
 // Toggle dark mode
 isIdEmpty('toggledark').onclick = function () {
   let mode = getCookie("dayNight");
-  let d = new Date();
-  d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
-  let expires = "expires=" + d.toGMTString();
+  let expires = defTime();
   if (mode == "dark") {
     document.cookie = "dayNight" + "=" + "light" + "; " + expires + ";path=/";
     document.getElementsByTagName('body')[0].classList.remove('dark');
@@ -86,9 +84,7 @@ isIdEmpty('toggledark').onclick = function () {
 // Navigation menu on/off
 isIdEmpty('togglemenu').onclick = function () {
   let mode = getCookie("menuYesNo");
-  let d = new Date();
-  d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
-  let expires = "expires=" + d.toGMTString();
+  let expires = defTime();
   if (mode == "menuno") {
     document.cookie = "menuYesNo" + "=" + "menuyes" + "; " + expires + ";path=/";
     document.getElementsByTagName('body')[0].classList.remove('menuno');
@@ -96,6 +92,25 @@ isIdEmpty('togglemenu').onclick = function () {
     document.cookie = "menuYesNo" + "=" + "menuno" + "; " + expires + ";path=/";
     document.getElementsByTagName('body')[0].classList.add('menuno');
   }
+}
+
+// Post appearance
+isIdEmpty('postmenu').onclick = function () {
+  let mode = getCookie("postAppearance");
+  let expires = defTime();
+  if (mode == "classic") {
+    document.cookie = "postAppearance" + "=" + "card" + "; " + expires + ";path=/";
+    location.reload();
+  } else {
+    document.cookie = "postAppearance" + "=" + "classic" + "; " + expires + ";path=/";
+    location.reload();
+  }
+}
+
+function defTime() {
+  let d = new Date();
+  d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
+  return "expires=" + d.toGMTString();
 }
 
 // TODO: move to util

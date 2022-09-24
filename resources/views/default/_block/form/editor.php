@@ -20,8 +20,8 @@
         autosave: {
           enabled: true,
           uniqueId: '<?= $autosave; ?>',
-          delay: 1000,
-          submit_delay: 5000,
+          delay: 500,
+          submit_delay: 1000,
           text: "&nbsp;"
         },
       <?php endif; ?>

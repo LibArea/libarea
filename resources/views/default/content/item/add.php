@@ -1,5 +1,5 @@
 <?= insert('/_block/add-js-css'); ?>
-<div id="contentWrapper">
+<div id="contentWrapper" class="wrap-item">
   <main>
     <?= insert('/_block/navigation/breadcrumbs', [
       'list' => [

@@ -23,7 +23,7 @@
 <?php if ($data['childrens']) : ?>
   <div class="item-categories">
     <?php foreach ($data['childrens'] as $lt) : ?>
-       <?php $url_cat = $grouping ? url('grouping.category', ['grouping' => 'github', 'sort' => $data['sort'], 'slug' => $lt['facet_slug']]) : url('category', ['sort' => $data['sort'], 'slug' => $lt['facet_slug']]); ?>
+       <?php $url_cat = $grouping ? url('grouping.category', ['grouping' => $grouping, 'sort' => $data['sort'], 'slug' => $lt['facet_slug']]) : url('category', ['sort' => $data['sort'], 'slug' => $lt['facet_slug']]); ?>
       <div>
         <a class="text-2xl" href="<?= $url_cat; ?>">
           <?= $lt['facet_title']; ?>
@@ -80,7 +80,7 @@
   <?php endif; ?>
 <?php endif; ?>
 
-<div id="contentWrapper">
+<div id="contentWrapper" class="wrap-item">
   <main>
     <?= insert('/_block/navigation/item/nav', ['data' => $data]); ?>
 

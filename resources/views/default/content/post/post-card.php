@@ -40,13 +40,12 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?php endif; ?>
         </div>
 
+        <div class="cut-post max-w780">
         <?php if ($post['post_content_img']) : ?>
-          <div class="w-100">
-            <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= Img::image($post['post_content_img'], $post['post_title'], 'medium-zoom-image mt10', 'post', 'cover'); ?>
-            </a>
-          </div>
-        <?php else : ?>
+          <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
+           <?= Img::image($post['post_content_img'], $post['post_title'], 'medium-zoom-image mt10', 'post', 'cover'); ?>
+          </a>
+         <?php else : ?>
           <?php if ($post['post_thumb_img']) : ?>
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
               <?= Img::image($post['post_thumb_img'], $post['post_title'],  'medium-zoom-image mt10', 'post', 'thumbnails'); ?>
@@ -54,7 +53,6 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?php endif; ?>
         <?php endif; ?>
 
-        <div class="cut-post max-w780">
           <?php $arr = \App\Services\Parser\Content::cut($post['post_content']);
           echo markdown($arr['content']); ?>
         </div>

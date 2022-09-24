@@ -1,5 +1,5 @@
 <?php $item = $data['item']; ?>
-<div id="contentWrapper">
+<div id="contentWrapper" class="wrap-item">
   <main itemscope itemtype="https://schema.org/WebSite">
       <h1 itemprop="name" class="m0"><?= $item['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
@@ -101,8 +101,8 @@
       </div>
     <?php endif; ?>
   </main>
-  <aside class="mr20">
-    <div class="box box-shadow-all">
+  <aside>
+    <div class="box box-shadow-all mt15">
       <?php if ($data['similar']) : ?>
         <h4 class="uppercase-box"><?= __('web.recommended'); ?></h4>
         <?php foreach ($data['similar'] as $link) : ?>

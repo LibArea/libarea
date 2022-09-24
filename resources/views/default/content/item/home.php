@@ -24,7 +24,7 @@
   <?php endforeach; ?>
 </div>
 
-<div id="contentWrapper">
+<div id="contentWrapper" class="wrap-item">
   <main>
     <?php $title = ($data['sheet'] == 'main') ? __('web.new_sites') : __('web.' . $data['sheet']);  ?>
     <h2 class="m0 mb10"><?= $title; ?></h2>

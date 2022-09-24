@@ -3,8 +3,18 @@
     <ul class="nav scroll">
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
+    <div title="<?= __('app.post_appearance'); ?>" id="postmenu" class="m5">
+      <svg class="icons gray-600"><use xlink:href="/assets/svg/icons.svg#grid"></use></svg>
+    </div>
   </div>
-  <?= insert('/content/post/post-card', ['data' => $data]); ?>
+  
+  <?php if (Request::getCookie('postAppearance') == 'classic') : ?>
+    <?= insert('/content/post/post-classic', ['data' => $data]); ?>
+  <?php else : ?>
+    <?= insert('/content/post/post-card', ['data' => $data]); ?>
+  <?php endif; ?>
+  
+   
   <?php if (UserData::getUserScroll()) : ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>

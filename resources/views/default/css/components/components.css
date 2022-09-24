@@ -78,6 +78,11 @@ h5 {
   padding-right: 1rem;
 }
 
+.wrap-item {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .d-header_contents {
   display: flex;
   align-items: center;
@@ -142,9 +147,7 @@ h5 {
   color: var(--gray-700);
 }
 
-aside {
-  flex-basis: 310px;
-}
+aside { width: 340px; }
 
 aside ul {
   list-style: none;

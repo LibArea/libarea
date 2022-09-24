@@ -1,4 +1,4 @@
-<div id="contentWrapper">
+<div id="contentWrapper" class="wrap-item">
   <main>
     <h2 class="mb20">
       <?= __($data['sheet'] . '_view'); ?>
