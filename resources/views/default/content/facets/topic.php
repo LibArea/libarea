@@ -2,7 +2,13 @@
 <main>
   <?php if ($topic['facet_is_deleted'] == 0) : ?>
     <?= insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
-    <?= insert('/content/post/post-card', ['data' => $data]); ?>
+
+    <?php if (Request::getCookie('postAppearance') == 'classic') : ?>
+      <?= insert('/content/post/post-classic', ['data' => $data]); ?>
+    <?php else : ?>
+      <?= insert('/content/post/post-card', ['data' => $data]); ?>
+    <?php endif; ?>
+
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('topic', ['slug' => $topic['facet_slug']])); ?>
 
   <?php else : ?>

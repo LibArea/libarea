@@ -29,7 +29,13 @@ if ($blog['facet_is_deleted'] == 0) : ?>
           </ul>
 
         </div>
-        <?= insert('/content/post/post-card', ['data' => $data]); ?>
+
+        <?php if (Request::getCookie('postAppearance') == 'classic') : ?>
+          <?= insert('/content/post/post-classic', ['data' => $data]); ?>
+        <?php else : ?>
+          <?= insert('/content/post/post-card', ['data' => $data]); ?>
+        <?php endif; ?>
+
         <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>
       <aside>

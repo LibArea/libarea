@@ -31,7 +31,11 @@
         </div>
       <?php endif; ?>
 
-      <?= insert('/content/post/post-card', ['data' => $data]); ?>
+      <?php if (Request::getCookie('postAppearance') == 'classic') : ?>
+        <?= insert('/content/post/post-classic', ['data' => $data]); ?>
+      <?php else : ?>
+        <?= insert('/content/post/post-card', ['data' => $data]); ?>
+      <?php endif; ?>
       <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/posts'); ?>
     </main>
     <aside>

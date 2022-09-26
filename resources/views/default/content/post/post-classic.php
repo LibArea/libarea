@@ -14,7 +14,7 @@ use Hleb\Constructor\Handlers\Request; ?>
     <div class="box box-fon article_<?= $post['post_id']; ?>">
       <?php if ($post['post_content_img'] || $post['post_thumb_img']) : ?>
         <div class="flex">
-          <div class="mr20">
+          <div class="mr20 flex-auto">
           <?php endif; ?>
 
           <div class="mb15">
@@ -41,15 +41,15 @@ use Hleb\Constructor\Handlers\Request; ?>
 
           <div class="flex flex-row items-center justify-between">
             <div class="flex gap text-sm flex-row">
-              <a class="black" href="<?= url('profile', ['login' => $post['login']]); ?>">
-                <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'max'); ?>
+              <?= Html::votes($post, 'post'); ?>
+
+              <a class="gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
                 <span<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> class="green" <?php endif; ?>>
                   <?= $post['login']; ?>
                   </span>
               </a>
 
               <div class="gray-600 mb-none lowercase"><?= Html::langDate($post['post_date']); ?></div>
-              <?= Html::votes($post, 'post'); ?>
 
               <?php if ($post['post_answers_count'] != 0) : ?>
                 <a class="flex gray-600" href="<?= $post_url; ?>#comment">

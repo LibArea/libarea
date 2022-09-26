@@ -13,7 +13,6 @@
   <?php else : ?>
     <?= insert('/content/post/post-card', ['data' => $data]); ?>
   <?php endif; ?>
-  
    
   <?php if (UserData::getUserScroll()) : ?>
     <div id="scrollArea"></div>
