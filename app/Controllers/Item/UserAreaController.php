@@ -45,7 +45,6 @@ class UserAreaController extends Controller
 
         return $this->render(
             '/item/bookmarks',
-            'item',
             [
                 'meta'  => Meta::get(__('web.favorites')),
                 'user'  => $this->user,
@@ -58,7 +57,7 @@ class UserAreaController extends Controller
                     'pNum'              => $this->pageNumber,
                     'items'             => $items,
                 ]
-            ]
+            ], 'item',
         );
     }
 }
