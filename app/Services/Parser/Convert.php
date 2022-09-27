@@ -29,7 +29,7 @@ class Convert extends \ParsedownExtraPlugin
         }
     }
 
-    protected function convertYouTube($Element)
+    protected function convertVideo($Element)
     {
         if (!$Element) return $Element;
 
@@ -62,12 +62,12 @@ class Convert extends \ParsedownExtraPlugin
     protected function inlineLink($Excerpt)
     {
         $url = parent::inlineLink($Excerpt);
-        return $this->convertYouTube($url);
+        return $this->convertVideo($url);
     }
 
     protected function inlineUrl($Excerpt)
     {
         $url = parent::inlineUrl($Excerpt);
-        return $this->convertYouTube($url);
+        return $this->convertVideo($url);
     }
 }
