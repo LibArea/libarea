@@ -32,19 +32,30 @@ class Convert extends \ParsedownExtraPlugin
     protected function convertYouTube($Element)
     {
         if (!$Element) return $Element;
-        preg_match('/^(?:https?\:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.?be)\/(?:watch\?v=)?(.+)$/i', $Element['element']['attributes']['href'], $id);
+
+        if (preg_match('/^(?:https?\:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.?be)\/(?:watch\?v=)?(.+)$/i', $Element['element']['attributes']['href'], $id)) {
+   
+            $src = 'https://www.youtube.com/embed/' . $id[1];
+
+        } elseif (preg_match('/[http|https]+:\/\/(?:www\.|)rutube\.ru\/video\/([a-zA-Z0-9_\-]+)\//i', $Element['element']['attributes']['href'], $id)) {
+            
+            $src = 'https://rutube.ru/video/embed/' . $id[1];
+
+        }
+
         if (count($id)) {
             $Element['element']['name'] = 'iframe';
             $Element['element']['text'] = '';
             $Element['element']['attributes'] = [
                 'width' => '576',
                 'height' => '324',
-                'src' => 'https://www.youtube.com/embed/' . $id[1],
+                'src' => $src,
                 'frameborder' => '0',
                 'allow' => 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture',
                 'allowfullscreen' => '1'
             ];
         }
+
         return $Element;
     }
 
