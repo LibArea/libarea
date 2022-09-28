@@ -1,0 +1,14 @@
+/*
+ * Dark (night) theme
+ *
+ * Тёмная (ночная) тема
+ */
+
+body.dark {
+  filter: invert(100%) hue-rotate(180deg);
+  background-color: #222;
+}
+
+body.dark .bg-white { background-color: var(--gray-300); }
+body.dark img { filter: invert(100%); }
+body.dark iframe { filter: invert(100%); }

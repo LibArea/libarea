@@ -52,14 +52,6 @@ body {
   margin: 0;
 }
 
-body.dark {
-  filter: invert(100%) hue-rotate(180deg);
-  background-color: #222;
-}
-
-body.dark .bg-white { background-color: var(--gray-300); }
-body.dark img { filter: invert(100%); }
-
 a {
   color: #1c59d1;
   cursor: pointer;
