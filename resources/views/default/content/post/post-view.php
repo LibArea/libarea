@@ -82,7 +82,7 @@
         <?php endif; ?>
         <?php if ($post['post_url_domain']) : ?>
           <h4 class="uppercase-box"><?= __('app.source'); ?></h4>
-          <div class="italic m15 mb15 p10 text-sm bg-lightgray table gray">
+          <div class="italic p5 mb15 text-sm bg-lightgray table gray">
             <div>
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#link"></use>

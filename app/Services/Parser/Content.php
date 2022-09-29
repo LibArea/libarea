@@ -22,7 +22,7 @@ class Content
 
     public static function parse(string $content, string $type)
     {
-        $content = str_replace('<cut>', '', $content);
+        $content = str_replace('{cut}', '', $content);
 
         $Parsedown = new Convert();
 
@@ -120,7 +120,7 @@ class Content
         $beforeCut = $text;
         $afterCut = false;
 
-        if (preg_match("#^(.*)<cut([^>]*+)>(.*)$#Usi", $text, $match)) {
+        if (preg_match("#^(.*){cut([^}]*+)}(.*)$#Usi", $text, $match)) {
             $beforeCut  = $match[1];
             $afterCut   = $match[3];
         }
