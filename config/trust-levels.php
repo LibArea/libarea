@@ -18,7 +18,7 @@ return [
     'tl_add_topic'      => 10,
     'tl_add_category'   => 10, // Catalog (каталог)
     'tl_add_section'    => 10, // Service pages (служебные страницы)
-    'tl_add_team'       => 1,
+    'tl_add_team'       => 2,
 
     'tl_add_post'       => 1,
     'tl_add_answer'     => 1,
@@ -27,6 +27,8 @@ return [
     'tl_add_reply'      => 2, // Catalog (каталог)
 
     'tl_add_pm'         => 1, // Private messages (личные сообщения)
+    
+    'tl_add_draft'      => 2, // Drafts (черновики) invite_limit
 
     // С какого TL можно комментировать ответы в QA модели
     'tl_add_comm_qa'    => 2,
@@ -64,6 +66,7 @@ return [
 
     'perDay_report'     => 3,
 
+    'perDay_invite'     => 5,
 
     /*
     |--------------------------------------------------------------------------

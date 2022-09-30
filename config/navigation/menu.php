@@ -3,8 +3,7 @@
  * Файл конфигурации меню
  * Menu configuration file
  */
-$account = \UserData::get();
-$login = $account['login'] ?? null;
+
 return [
 
     // Left general menu
@@ -75,7 +74,7 @@ return [
             'title' => __('app.settings'),
             'id'    => '',
         ], [
-            'tl'    => 2,
+            'tl'    => config('trust-levels.tl_add_draft'),
             'url'   => url('drafts'),
             'title' => __('app.drafts'),
             'id'    => '',
@@ -84,7 +83,7 @@ return [
             'title' => __('app.notifications'),
             'id'    => '',
         ], [
-            'tl'    => 1,
+            'tl'    => config('trust-levels.tl_add_pm'),
             'url'   => url('messages'),
             'title' => __('app.messages'),
             'id'    => '',

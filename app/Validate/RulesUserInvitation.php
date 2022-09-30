@@ -24,7 +24,7 @@ class RulesUserInvitation extends Validator
             }
         }
 
-        if ($quantity >= config('general.invite_limit')) {
+        if ($quantity >= config('trust-levels.perDay_invite')) {
             is_return(__('msg.invate_limit_stop'), 'error', $redirect);
         }
 
