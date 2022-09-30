@@ -62,7 +62,7 @@ return [
     'badge'             => 'Răsplată',
     'comment'           => 'Cometariu',
     'comments'          => 'Comentarii',
-    'like'              => 'ca',
+    'like'              => 'Aprecieri',
     'category'          => 'Categorie',
     'team'              => 'Echipă',
     'reply'             => 'Răspunsul este în catalog',
