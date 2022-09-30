@@ -9,7 +9,7 @@
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    mediumZoom(document.querySelectorAll('.img-preview img, .cut-post img'));
+    mediumZoom(document.querySelectorAll('.img-preview img'));
   });
   <?php if (!UserData::checkActiveUser()) : ?>
     document.querySelectorAll(".click-no-auth")

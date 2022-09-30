@@ -42,10 +42,14 @@ use Hleb\Constructor\Handlers\Request; ?>
 
         <div class="cut-post max-w780">
         <?php if ($post['post_content_img']) : ?>
-           <?= Img::image($post['post_content_img'], $post['post_title'], 'mt10', 'post', 'cover'); ?>
+           <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
+             <?= Img::image($post['post_content_img'], $post['post_title'], 'mt10', 'post', 'cover'); ?>
+           </a>
          <?php else : ?>
           <?php if ($post['post_thumb_img']) : ?>
-            <?= Img::image($post['post_thumb_img'], $post['post_title'],  'mt10', 'post', 'thumbnails'); ?>
+            <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
+              <?= Img::image($post['post_thumb_img'], $post['post_title'],  'mt10', 'post', 'thumbnails'); ?>
+            </a>
           <?php endif; ?>
         <?php endif; ?>
 
