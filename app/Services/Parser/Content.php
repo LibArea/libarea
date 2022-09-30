@@ -16,6 +16,7 @@ class Content
         $text = self::parse($content, $type);
         $text = self::details($text);
         $text = self::emoji($text);
+        $text = self::red($text);
 
         return self::parseUser($text);
     }
