@@ -84,7 +84,7 @@ return [
             'title' => __('app.notifications'),
             'id'    => '',
         ], [
-            'tl'    => 2,
+            'tl'    => 1,
             'url'   => url('messages'),
             'title' => __('app.messages'),
             'id'    => '',

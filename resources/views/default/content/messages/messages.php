@@ -1,5 +1,5 @@
 <main>
-  <h2 class="mb15"><?= __('app.private_messages'); ?></h2>
+  <h2 class="m0 mb20"><?= __('app.private_messages'); ?></h2>
   <?php if (!empty($data['messages'])) : ?>
     <?php foreach ($data['messages'] as  $msg) : ?>
       <div class="hidden mb15<?php if (!$msg['unread'] > 0) : ?> bg-purple<?php endif; ?>">

@@ -26,7 +26,7 @@ return [
     'tl_add_item'       => 2, // Catalog (каталог)
     'tl_add_reply'      => 2, // Catalog (каталог)
 
-    'tl_add_pm'         => 2, // Private messages (личные сообщения)
+    'tl_add_pm'         => 1, // Private messages (личные сообщения)
 
     // С какого TL можно комментировать ответы в QA модели
     'tl_add_comm_qa'    => 2,
