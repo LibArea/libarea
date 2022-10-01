@@ -13,14 +13,14 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="box box-fon article_<?= $post['post_id']; ?>">
       <div class="flex items-center text-sm mb5">
-          <a class="black flex items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
-            <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'max'); ?>
-            <span<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> class="green" <?php endif; ?>>
-              <?= $post['login']; ?>
-              </span>
-          </a>
-          <div class="gray-600 ml5 lowercase"><?= Html::langDate($post['post_date']); ?></div>
-          <?= Img::facets($post['facet_list'], 'blog', 'brown ml10'); ?>
+        <a class="black flex items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
+          <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'max'); ?>
+          <span<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> class="green" <?php endif; ?>>
+            <?= $post['login']; ?>
+            </span>
+        </a>
+        <div class="gray-600 ml5 lowercase"><?= Html::langDate($post['post_date']); ?></div>
+        <?= Img::facets($post['facet_list'], 'blog', 'brown ml10'); ?>
       </div>
       <div class="mb15">
         <a class="black" href="<?= $post_url; ?>">
@@ -41,17 +41,17 @@ use Hleb\Constructor\Handlers\Request; ?>
         </div>
 
         <div class="cut-post max-w780">
-        <?php if ($post['post_content_img']) : ?>
-           <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-             <?= Img::image($post['post_content_img'], $post['post_title'], 'mt10', 'post', 'cover'); ?>
-           </a>
-         <?php else : ?>
-          <?php if ($post['post_thumb_img']) : ?>
+          <?php if ($post['post_content_img']) : ?>
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= Img::image($post['post_thumb_img'], $post['post_title'],  'mt10', 'post', 'thumbnails'); ?>
+              <?= Img::image($post['post_content_img'], $post['post_title'], 'mt10', 'post', 'cover'); ?>
             </a>
+          <?php else : ?>
+            <?php if ($post['post_thumb_img']) : ?>
+              <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
+                <?= Img::image($post['post_thumb_img'], $post['post_title'],  'mt10', 'post', 'thumbnails'); ?>
+              </a>
+            <?php endif; ?>
           <?php endif; ?>
-        <?php endif; ?>
 
           <?php $arr = \App\Services\Parser\Content::cut($post['post_content']);
           echo markdown($arr['content']); ?>

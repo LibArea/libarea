@@ -52,6 +52,7 @@ main { flex: 1; }
   .mb-w80 { width: 80px; }
   .mb-p10 { padding: 10px; }
   .mb-mt5 { margin-top: 5px; }
+  .mb-ml15 { margin-left: 15px; }
   .mb-text-xl { font-size: 1.25rem; }
   .logo { font-size: 18px; }
   .gap-max { gap: 1.5rem; }
