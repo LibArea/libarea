@@ -70,11 +70,11 @@ class Audit extends Base
     public function prohibitedContent(string $content)
     {
 
-        if (!self::stopUrl($content, $this->user['id'])) {
+        if (!self::stopUrl($content, (int)$this->user['id'])) {
             return false;
         }
 
-        if (!self::stopWords($content, $this->user['id'])) {
+        if (!self::stopWords($content, (int)$this->user['id'])) {
             return false;
         }
 
@@ -83,12 +83,12 @@ class Audit extends Base
 
     // If there is a link and the total contribution (adding posts, replies and comments) is less than N 
     // Если есть ссылка и общий вклад (добавления постов, ответов и комментариев) меньше N
-    public static function stopUrl(string $content, int $uid)
+    public static function stopUrl(string $content, int $user_id)
     {
         if (self::estimationUrl($content)) {
-            $all_count = ActionModel::allContentUserCount($uid);
+            $all_count = ActionModel::allContentUserCount($user_id);
             if ($all_count < 2) {
-                ActionModel::addLimitingMode($uid);
+                ActionModel::addLimitingMode($user_id);
                 Msg::add(__('msg.content_audit'), 'error');
                 return false;
             }
@@ -98,12 +98,12 @@ class Audit extends Base
 
     // If the word is on the stop list and the total contribution is minimal (less than 2)
     // Если слово в стоп листе и общий вклад минимальный (меньше 2)
-    public static function stopWords(string $content, int $uid)
+    public static function stopWords(string $content, int $user_id)
     {
         if (self::stopWordsExists($content)) {
-            $all_count = ActionModel::allContentUserCount($uid);
+            $all_count = ActionModel::allContentUserCount($user_id);
             if ($all_count < 2) {
-                ActionModel::addLimitingMode($uid);
+                ActionModel::addLimitingMode($user_id);
                 Msg::add(__('msg.content_audit'), 'error');
                 return false;
             }

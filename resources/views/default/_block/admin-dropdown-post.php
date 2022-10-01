@@ -1,5 +1,5 @@
 <?php if (UserData::checkAdmin()) : ?>
-  <div class="relative">
+  <div class="relative ml10">
     <span class="trigger gray-600 text-sm">
       <svg class="icons">
         <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
