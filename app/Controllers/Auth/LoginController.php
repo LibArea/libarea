@@ -19,7 +19,7 @@ class LoginController extends Controller
 
         // If you clicked "Remember", it establishes a user session and registers it
         // Если нажал "Запомнить", то устанавливает сеанс пользователя и регистрирует его
-        $rememberMe = $data['rememberMe'] ?? false;
+        $rememberMe = $data['rememberme'] ?? false;
         if ($rememberMe == 1) {
             (new \App\Controllers\Auth\RememberController())->rememberMe($user['id']);
         }
