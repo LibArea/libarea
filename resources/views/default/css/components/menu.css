@@ -94,6 +94,7 @@
 .breadcrumbs li:not(:last-child):after { content: " / "; }
 
 /* Navigation */
+
 ul.nav {
   list-style: none;
   align-items: center;
@@ -120,3 +121,4 @@ ul.nav > li.active a:hover { color: #432f2f; }
 /* If it's tabs */
 .content-tabs { display: none; }
 .content-tabs.active { display: block; }
+.content-tabs.active { color: #432f2f; }

@@ -70,16 +70,13 @@
           </div>
         <?php endif; ?>
         <?php if ($post['post_url_domain']) : ?>
-          <h4 class="uppercase-box"><?= __('app.source'); ?></h4>
-          <div class="italic p5 mb15 text-sm bg-lightgray table gray">
-            <div>
-              <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#link"></use>
-              </svg>
-              <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-                <?= $post['post_url_domain']; ?>
-              </a>
-            </div>
+          <?= __('app.source'); ?>: 
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#link"></use>
+            </svg>
+            <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
+              <?= $post['post_url_domain']; ?>
+            </a>
           </div>
         <?php endif; ?>
         <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>

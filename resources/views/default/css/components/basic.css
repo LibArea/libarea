@@ -144,6 +144,7 @@ img {
 .bg-beige { background-color: #fff4e8; } 
 
 .black-hover:hover  { color: var(--black); }
+.active { color: var(--red); }
 
 /*
  * Other

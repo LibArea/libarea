@@ -81,16 +81,14 @@
           </div>
         <?php endif; ?>
         <?php if ($post['post_url_domain']) : ?>
-          <h4 class="uppercase-box"><?= __('app.source'); ?></h4>
-          <div class="italic p5 mb15 text-sm bg-lightgray table gray">
-            <div>
+          <div class="italic mb15 text-sm table gray">
+            <?= __('app.source'); ?>: 
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#link"></use>
               </svg>
               <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <?= $post['post_url_domain']; ?>
               </a>
-            </div>
           </div>
         <?php endif; ?>
       </div>
