@@ -2,9 +2,11 @@
   <input name="email" type="email" placeholder="<?= __('app.email'); ?>" required="">
 </fieldset>
 
-<fieldset class="max-w300" >
+<fieldset class="max-w300">
   <input id="password" name="password" type="password" placeholder="<?= __('app.password'); ?>" required="">
-  <span class="showPassword"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#eye"></use></svg></span>
+  <span class="showPassword"><svg class="icons">
+      <use xlink:href="/assets/svg/icons.svg#eye"></use>
+    </svg></span>
 </fieldset>
 
 <fieldset class="rememberme ">

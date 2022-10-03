@@ -143,7 +143,6 @@ img {
 .bg-red-200 { background-color: var(--red-200); }
 .bg-beige { background-color: #fff4e8; } 
 
-.active { color: var(--red); }
 .black-hover:hover  { color: var(--black); }
 
 /*

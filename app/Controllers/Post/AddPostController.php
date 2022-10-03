@@ -46,10 +46,12 @@ class AddPostController extends Controller
     // Добавим пост
     public function create($type)
     {
-        $content    = $_POST['content']; // для Markdown
         $post_url   = Request::getPost('post_url');
         $blog_id    = Request::getPostInt('blog_id');
         $fields     = Request::getPost() ?? [];
+ 
+        $content = $_POST['content'] == '' ? $_POST['content_qa'] : $_POST['content'];
+        $content = $content == '' ? $_POST['content_url'] : $content;
 
         if ($type == 'page') {
             $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
@@ -85,7 +87,6 @@ class AddPostController extends Controller
 
         $post_related = $this->relatedPost();
 
-        $post_feature = $fields['post_feature'] ?? false;
         $translation = $fields['translation'] ?? false;
         $post_draft = $fields['post_draft'] ?? false;
         $closed = $fields['closed'] ?? false;
@@ -99,7 +100,7 @@ class AddPostController extends Controller
                 'post_thumb_img'        => $site['og_img'] ?? '',
                 'post_related'          => $post_related  ?? '',
                 'post_slug'             => $slug,
-                'post_feature'          => $post_feature == 'on' ? 1 : 0,
+                'post_feature'          => Request::getPostInt('post_feature'),
                 'post_type'             => $type,
                 'post_translation'      => $translation == 'on' ? 1 : 0,
                 'post_draft'            => $post_draft == 'on' ? 1 : 0,

@@ -137,9 +137,9 @@ document.querySelectorAll("#graburl")
           ));
         }
         return response.json();
-      }).then(function (data) {
-        document.querySelector('input[name=post_title]').value = data.title;
-        // document.querySelector('.EasyMDEContainer textarea').insertAdjacentHTML('afterBegin', data.description);
+      }).then(function (data) { //https://habr.com/ru/post/691088/
+        document.querySelector('input[name=post_title]').value = data.title; console.log(data);
+        document.querySelector('textarea.url').insertAdjacentHTML('afterBegin', data.description);
       }).catch(function (error) {
         // error
       })
@@ -172,4 +172,33 @@ document.querySelectorAll(".editcomm")
             }));
         }
       );
-  }));  
+  })); 
+
+// Add post tab
+const tabs_post = document.querySelector(".tabs-post");
+if (tabs_post) {
+  const tabButton = document.querySelectorAll(".tab-button");
+  const contents = document.querySelectorAll(".content-tabs");
+  tabs_post.onclick = e => {
+    const id = e.target.dataset.id;
+    if (id) {
+      tabButton.forEach(btn => {
+        btn.classList.remove("active");
+      });
+      e.target.classList.add("active");
+
+      contents.forEach(content => {
+        content.classList.remove("active");
+      });
+
+      document.getElementById('inputQa').value = 0;
+      if (id == 'qa') { 
+        document.getElementById('inputQa').value = 1;
+      }
+      
+      const element = document.getElementById(id);
+      element.classList.add("active");
+    }
+  }
+}
+  

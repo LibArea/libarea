@@ -118,5 +118,5 @@ ul.nav > li a:hover { color:  var(--red); }
 ul.nav > li.active a:hover { color: #432f2f; }
 
 /* If it's tabs */
-ul.content-tabs { display: none; }
-ul.content-tabs.active { display: block; }
+.content-tabs { display: none; }
+.content-tabs.active { display: block; }
