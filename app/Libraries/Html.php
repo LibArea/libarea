@@ -58,7 +58,7 @@ class Html
             } else {
                 $num_count = empty($count) ? 0 : $count;
                 $html = '<div id="up' . $content[$type . '_id'] . '" class="flex gap-min gray-600">
-                            <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
+                            <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id pointer"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
             }
         }
 

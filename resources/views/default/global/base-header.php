@@ -99,7 +99,7 @@ $post   = $data['post'] ?? false;
             </a>
 
             <div class="relative">
-              <div class="trigger">
+              <div class="trigger pointer">
                 <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
               </div>
               <div class="dropdown user">
