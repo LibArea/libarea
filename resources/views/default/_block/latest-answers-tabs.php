@@ -5,7 +5,7 @@
         <li class="tab-button active" data-id="home">
           <?= __('app.answers'); ?>
         </li>
-        <li class="tab-button" data-id="more_comment">
+        <li class="tab-button pointer" data-id="more_comment">
           <?= __('app.comments'); ?>
         </li>
       </ul>

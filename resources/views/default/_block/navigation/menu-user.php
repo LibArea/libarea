@@ -1,5 +1,5 @@
 <?php $user = UserData::get(); ?>
-<span class="right-close">x</span>
+<span class="right-close pointer">x</span>
 <div class="user-box">
   <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mt5 mr5', 'small'); ?>
   <div>

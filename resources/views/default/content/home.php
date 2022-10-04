@@ -4,7 +4,7 @@
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
     <div title="<?= __('app.post_appearance'); ?>" id="postmenu" class="m5">
-      <svg class="icons gray-600"><use xlink:href="/assets/svg/icons.svg#grid"></use></svg>
+      <svg class="icons pointer gray-600"><use xlink:href="/assets/svg/icons.svg#grid"></use></svg>
     </div>
   </div>
   

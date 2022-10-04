@@ -298,6 +298,7 @@ return [
     'zh_TW_language'    => 'Traditional Chinese',
     'zh_CN_language'    => 'Simplified Chinese',
     'ro_language'       => 'Romanian',
+    'ar_language'       => 'Arabic',
 
     'type'              => 'Type',
     'logo'              => 'logo',

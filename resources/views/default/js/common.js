@@ -290,8 +290,10 @@ if (tabs) {
     if (id) {
       tabButton.forEach(btn => {
         btn.classList.remove("active");
+        btn.classList.add("pointer");
       });
       e.target.classList.add("active");
+      e.target.classList.remove("pointer");
 
       if (id == 'more_comment') {
         fetch("/more/comments", {
@@ -320,10 +322,12 @@ if (tabs) {
       }
       contents.forEach(content => {
         content.classList.remove("active");
+        content.classList.add("pointer");
       });
 
       const element = document.getElementById(id);
       element.classList.add("active");
+      element.classList.remove("pointer");
     }
   }
 }

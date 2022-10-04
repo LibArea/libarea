@@ -298,6 +298,7 @@ return [
     'zh_TW_language'    => 'Традиционный китайский',
     'zh_CN_language'    => 'Упрощенный китайский',
     'ro_language'       => 'Румынский',
+    'ar_language'       => 'Арабский',
 
     'type'              => 'Тип',
     'logo'              => 'Логотип',

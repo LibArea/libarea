@@ -25,7 +25,7 @@ return [
     // Default localization (+ languages represented)
     // Локализация по умолчанию (+ какие языки есть в системе)
     'lang'              => 'ru',
-    'languages'         => ['ru', 'ua', 'de', 'en', 'fr', 'ro', 'zh_CN', 'zh_TW'],
+    'languages'         => ['ru', 'ua', 'de', 'en', 'fr', 'ro', 'ar', 'zh_CN', 'zh_TW'],
 
     // If TRUE, then the first 50 participants will have TL2 upon registration (otherwise TL1)
     // Если TRUE, то при регистрации первые 50 участников будет иметь TL2 (в противном случае TL1)

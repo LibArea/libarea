@@ -299,6 +299,7 @@ return [
     'zh_TW_language'    => '繁体中文',
     'zh_CN_language'    => '简体中文',
     'ro_language'       => '罗马尼亚语',
+    'ar_language'       => '阿拉伯',
 
     'type'              => '类型',
     'logo'              => '标志',

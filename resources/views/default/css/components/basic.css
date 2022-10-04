@@ -240,3 +240,4 @@ li.br-li-bottom-no:last-child { border-bottom: 1px solid transparent; }
 .inline { display: inline-block; }
 .list-style-none { list-style: none; }
 .break-all { word-break:break-all; }
+.pointer { cursor: pointer; }
