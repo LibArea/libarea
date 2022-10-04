@@ -74,7 +74,7 @@ class HomeController extends Controller
         $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $this->user, 'main.feed');
 
         $this->insert(
-            '/content/post/postscroll',
+            '/content/post/type-post',
             [
                 'data'  => [
                     'pages' => $this->pageNumber,
