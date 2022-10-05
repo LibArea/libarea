@@ -15,6 +15,7 @@
       imageUploadEndpoint: "/backend/upload/<?= $type; ?>/<?= $id; ?>",
       previewImagesInEditor: true,
       uploadImage: true,
+      <?php if (Translate::getLang() == 'ar') : ?>direction: 'rtl',<?php endif; ?>
       spellChecker: false,
       <?php if (!empty($autosave)) : ?>
         autosave: {
