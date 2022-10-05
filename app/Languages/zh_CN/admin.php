@@ -103,7 +103,11 @@ return [
     'query'             => '请求',
     'test_email'        => '测试系统消息',
     'not_activ_email'   => '電子郵件未激活',
-    
+
+    'settings'          => '设置',
+    'interface'         => '界面',
+    'functions'         => '功能',
+
     'tl0_title'         => '访客',
     'tl1_title'         => '用户',
     'tl2_title'         => '参与者',

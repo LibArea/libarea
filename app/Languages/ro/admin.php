@@ -103,7 +103,11 @@ return [
     'query'             => 'Cerere',
     'test_email'        => 'Testarea sistemului de mesagerie',
     'not_activ_email'   => 'E-mail nu este activat',
-    
+
+    'settings'          => 'Setări',
+    'interface'         => 'Interfață',
+    'functions'         => 'Funcții',
+
     'tl0_title'         => 'Vizitator',
     'tl1_title'         => 'Utilizator',
     'tl2_title'         => 'Participant',

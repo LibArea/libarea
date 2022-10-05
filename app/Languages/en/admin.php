@@ -103,7 +103,11 @@ return [
     'query'             => 'Query',
     'test_email'        => 'Testing the messaging system',
     'not_activ_email'   => 'Email not activated',
-    
+
+    'settings'          => 'Settings',
+    'interface'         => 'Interface',
+    'functions'         => 'Functions',
+
     'tl0_title'         => 'Visitor',
     'tl1_title'         => 'User',
     'tl2_title'         => 'Participant',

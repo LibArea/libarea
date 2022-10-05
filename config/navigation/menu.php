@@ -114,6 +114,11 @@ return [
     // Меню в админ-панели    
     'admin' => [
         [
+            'url'   => url('admin.settings.general'),
+            'title' => __('admin.settings'),
+            'icon'  => 'settings',
+            'id'    => 'settings',
+        ], [
             'url'   => url('admin.logs'),
             'title' => __('admin.logs'),
             'icon'  => 'activity',

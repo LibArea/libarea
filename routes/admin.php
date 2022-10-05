@@ -37,6 +37,9 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/report')->module('admin', 'App\Audits', ['all', 'reports'])->name('admin.reports');
 
     Route::get('/invitations')->module('admin', 'App\Invitations')->name('admin.invitations');
+    
+    Route::get('/setting')->module('admin', 'App\Setting')->name('admin.settings.general');
+    Route::get('/setting/interface')->module('admin', 'App\Setting@interface')->name('admin.settings.interface');
    
     Route::get('/answers/deleted/{page?}')->controller('Answer\AnswerController', ['deleted'])->name('answers.deleted');
     Route::get('/comments/deleted/{page?}')->controller('Comment\CommentController', ['deleted'])->name('comments.deleted');

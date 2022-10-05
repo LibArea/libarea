@@ -29,6 +29,7 @@ return [
     'yes'               => '是的',
     'css'               => '样式(css)',
     'icon'              => '图标',
+    'icons'             => '图标',                                
     'title'             => '标题',
     'description'       => '资料描述',
     'action'            => '开始',
@@ -102,7 +103,11 @@ return [
     'query'             => '请求',
     'test_email'        => '测试消息系统',
     'not_activ_email'   => '電子郵件未激活',
-    
+
+    'settings'          => '设置',
+    'interface'         => '界面',
+    'functions'         => '功能',
+
     'tl0_title'         => '访港旅客',
     'tl1_title'         => '用户',
     'tl2_title'         => '参加者',
