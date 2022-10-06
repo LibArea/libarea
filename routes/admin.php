@@ -22,6 +22,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
         Route::post('/badge/edit/{id}')->module('admin', 'App\Badges@change')->name('admin.badge.change');
         Route::post('/word/create')->module('admin', 'App\Words@create')->name('admin.word.create');
         Route::post('/user/edit/{id}')->module('admin', 'App\Users@change')->name('admin.user.change');
+        Route::post('/setting/edit')->module('admin', 'App\Setting@change')->name('admin.setting.change');
     Route::endProtect();
   
     Route::get('/tools')->module('admin', 'App\Tools')->name('admin.tools');
@@ -38,8 +39,8 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
 
     Route::get('/invitations')->module('admin', 'App\Invitations')->name('admin.invitations');
     
-    Route::get('/setting')->module('admin', 'App\Setting')->name('admin.settings.general');
-    Route::get('/setting/interface')->module('admin', 'App\Setting@interface')->name('admin.settings.interface');
+    Route::get('/setting')->module('admin', 'App\Setting', ['settings'])->name('admin.settings.general');
+    Route::get('/setting/interface')->module('admin', 'App\Setting', ['interface'])->name('admin.settings.interface');
    
     Route::get('/answers/deleted/{page?}')->controller('Answer\AnswerController', ['deleted'])->name('answers.deleted');
     Route::get('/comments/deleted/{page?}')->controller('Comment\CommentController', ['deleted'])->name('comments.deleted');
