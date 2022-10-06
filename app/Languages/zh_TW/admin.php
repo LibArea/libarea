@@ -104,10 +104,6 @@ return [
     'test_email'        => '测试消息系统',
     'not_activ_email'   => '電子郵件未激活',
 
-    'settings'          => '设置',
-    'interface'         => '界面',
-    'functions'         => '功能',
-
     'tl0_title'         => '访港旅客',
     'tl1_title'         => '用户',
     'tl2_title'         => '参加者',
@@ -119,4 +115,29 @@ return [
     'deleted'           => '已移除',
     'added'             => '添加',
     'restored'          => '已恢复',
+    
+    // Settings section
+    // Раздел настройки
+    'settings'              => '设置',
+    'interface'             => '界面',
+    'functions'             => '功能',
+    
+    'url_help'              => '站点 URL（带有 https）',
+    'email_help'            => '用于交流的公共电子邮件',
+    'name_help'             => '网站简称',
+    'title_help'            => '完整的站点名称',
+    
+    'img_path'              => '照片的路径（网站介绍）',
+    'img_path_help'         => '用于 og:image 和其他帖子中没有介绍的地方，例如',
+    'img_path_web'          => '照片路径（目录介绍）',
+    'img_path_web_help'     => '在 og:image 中用于站点目录',
+    
+    'banner_title'          => '横幅标题',
+    'banner_title_help'     => '网站主页上的横幅标题，如果参与者未经授权',
+    'banner_desc'           => '横幅正文',
+
+    'count_like_feed'       => '饲料的点赞数',
+    'count_like_feed_help'  => '一个帖子应该在网站的中心页面上显示多少个赞',
+    'type_post_feed'        => '帖子在提要中的外观',
+    'type_post_feed_help'   => '经典或卡片。 如果经典，那么这是一个最小的设计',
 ];

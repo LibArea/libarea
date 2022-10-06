@@ -104,10 +104,6 @@ return [
     'test_email'        => 'Testarea sistemului de mesagerie',
     'not_activ_email'   => 'E-mail nu este activat',
 
-    'settings'          => 'Setări',
-    'interface'         => 'Interfață',
-    'functions'         => 'Funcții',
-
     'tl0_title'         => 'Vizitator',
     'tl1_title'         => 'Utilizator',
     'tl2_title'         => 'Participant',
@@ -119,4 +115,29 @@ return [
     'deleted'           => 'Îndepărtat',
     'added'             => 'Adăugat',
     'restored'          => 'Restaurat',
+    
+    // Settings section
+    // Раздел настройки
+    'settings'              => 'Setări',
+    'interface'             => 'Interfață',
+    'functions'             => 'Funcții',
+    
+    'url_help'              => 'Adresa URL a site-ului (cu https)',
+    'email_help'            => 'E-mail public pentru comunicare',
+    'name_help'             => 'Numele scurt al site-ului',
+    'title_help'            => 'Numele complet al site-ului',
+    
+    'img_path'              => 'Calea către fotografie (intro pentru site)',
+    'img_path_help'         => 'Folosit în og:image și în alte locuri când nu există o introducere în postare, de ex.',
+    'img_path_web'          => 'Calea către fotografie (introducere pentru catalog)',
+    'img_path_web_help'     => 'Folosit în og:image pentru directorul site-ului',
+    
+    'banner_title'          => 'Antet banner',
+    'banner_title_help'     => 'Titlul bannerului pe pagina principală a site-ului, dacă participantul nu este autorizat',
+    'banner_desc'           => 'Corpul bannerului',
+
+    'count_like_feed'       => 'Numărul de aprecieri pentru feed',
+    'count_like_feed_help'  => 'Câte aprecieri ar trebui să fie vizibile o postare pe pagina centrală a site-ului',
+    'type_post_feed'        => 'Apariția postării în feed',
+    'type_post_feed_help'   => 'Clasic sau Card. Dacă este clasic, atunci acesta este un design minimal',
 ];
