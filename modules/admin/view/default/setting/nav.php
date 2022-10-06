@@ -15,10 +15,5 @@
       ]
     ]
   ]
-); ?>
-
-<div class="box bg-white">
-  general
-</div>
-</main>
-<?= includeTemplate('/view/default/footer'); ?>
+); 
+?>

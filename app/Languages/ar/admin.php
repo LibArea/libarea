@@ -103,7 +103,11 @@ return [
     'query'             => 'استعلام',
     'test_email'        => 'اختيار نظام الرسائل',
     'not_activ_email'   => 'البريد غير مفعل',
-    
+
+    'settings'          => 'إعدادات',
+    'interface'         => 'واجهه المستخدم',
+    'functions'         => 'المهام',
+
     'tl0_title'         => 'زائر',
     'tl1_title'         => 'مستخدم',
     'tl2_title'         => 'مشارك',

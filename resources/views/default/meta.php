@@ -1,7 +1,7 @@
 <?php $lang = Translate::getLang(); ?>
 
 <!DOCTYPE html>
-<html lang="<?= $lang; ?>" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<html lang="<?= $lang; ?>" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#"<?php if($lang == 'ar') : ?> dir="rtl"<?php endif; ?>>
 
 <head>
   <meta charset="UTF-8">
