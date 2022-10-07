@@ -1,0 +1,21 @@
+.dropdown {
+  right: unset;
+  left: 0;
+}
+
+.dropdown.user { padding: 1rem .7rem .7rem 0; }
+
+.mr5 {
+  margin-right: 0;
+  margin-left: 5px;
+}
+
+.mr10 {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.ml5 {
+  margin-left: 0;
+  margin-right: 5px;
+}
