@@ -136,7 +136,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sort = "";
         if ($type == 1) {
-            $sort = 'ORDER BY answer_votes DESC ';
+            $sort = 'ORDER BY answer_lo DESC, answer_votes DESC ';
         }
 
         // TODO: Сгруппировать комментарии по ответу (избавимся N+1)
@@ -157,6 +157,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                     answer_ip,
                     answer_votes,
                     answer_after,
+                    answer_lo,
                     answer_is_deleted,
                     votes_answer_item_id, 
                     votes_answer_user_id,
@@ -254,4 +255,39 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
 
         return  DB::run($sql, ['answer_id' => $answer_id])->fetch();
     }
+    
+    /* 
+     *  Best answer
+     */
+ 
+    // Choice of the best answer
+    // Выбор лучшего ответа
+    public static function setBest($post_id, $answer_id, $selected_best_answer)
+    {
+        if ($selected_best_answer) {
+            DB::run("UPDATE answers SET answer_lo = 0 WHERE answer_id = :id", ['id' => $selected_best_answer]);
+        }
+        
+        self::setAnswerBest($answer_id);
+ 
+        self::answerPostBest($post_id, $answer_id);
+    }
+
+    // Let's write down the id of the participant who chose the best answer
+    // Запишем id участника выбравший лучший ответ
+    public static function setAnswerBest($answer_id)
+    {
+        $sql = "UPDATE answers SET answer_lo = :user_id WHERE answer_id = :answer_id";
+        
+        return  DB::run($sql, ['answer_id' => $answer_id, 'user_id' => UserData::getUserId()]);
+    }
+
+    // Rewriting the number of the selected best answer in the post
+    // Переписываем номер выбранного лучший ответ в посте
+    public static function answerPostBest($post_id, $answer_id)
+    {
+        $sql_two = "UPDATE posts SET post_lo = :answer_id WHERE post_id = :post_id";
+
+        return DB::run($sql_two, ['post_id' => $post_id, 'answer_id' => $answer_id]);
+    }   
 }

@@ -6,6 +6,14 @@
 
     <?php foreach ($data['answers'] as  $answer) : ?>
       <div class="block-answer br-bottom">
+        <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
+          <div id="best_<?= $answer['answer_id']; ?>" data-id="<?= $answer['answer_id']; ?>" class="answer-best right gray-600 p5">+!</div>
+        <?php endif; ?>
+
+        <?php if($answer['answer_lo']) : ?>
+          <div class="red right text-2xl p5">✓</div>
+        <?php endif; ?>
+
         <?php if ($answer['answer_is_deleted'] == 0) : ?>
           <?php if (UserData::getUserId() == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
           <div class="br-top-dotted mb5"></div>

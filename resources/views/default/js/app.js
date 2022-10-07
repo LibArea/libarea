@@ -115,6 +115,21 @@ document.querySelectorAll(".add-favorite")
       });
   }));
 
+// Choice of Best Answer  
+document.querySelectorAll(".answer-best")
+  .forEach(el => el.addEventListener("click", function (e) {
+    fetch("/best", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: "answer_id=" + el.dataset.id + "&_token=" + token,
+    })
+      .then(response => response.text())
+      .then(text => {
+        let dom = document.querySelector("#best_" + el.dataset.id);
+        dom.classList.toggle("active");
+        location.reload();
+      });
+  }));
 
 // Parsing the title from the site for > TL1
 document.querySelectorAll("#graburl")

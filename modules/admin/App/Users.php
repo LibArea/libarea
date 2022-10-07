@@ -117,7 +117,7 @@ class Users extends Controller
 
         $redirect = url('admin.user.edit', ['id' => $user['id']]);
 
-        Validator::length($data['login'], 3, 11, 'login', $redirect);
+        Validator::length($data['login'], 3, 15, 'login', $redirect);
 
         if ($data['email']) {
             Validator::email(Request::getPost('email'), $redirect);
