@@ -19,3 +19,8 @@
   margin-left: 0;
   margin-right: 5px;
 }
+
+.right-close {
+  padding: 5px;
+  float: left;
+}

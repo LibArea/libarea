@@ -25,8 +25,8 @@
           <?= Img::facets($post['facet_list'], 'blog', 'tag'); ?>
           <?= Img::facets($post['facet_list'], 'topic', 'tag-yellow'); ?>
         </div>
-        <div class="flex text-sm mt3">
-          <a class="items-center gray-600 mr10" href="<?= url('profile', ['login' => $post['login']]); ?>">
+        <div class="flex text-sm gap mt3">
+          <a class="items-center gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
             <?= Img::avatar($post['avatar'], $post['login'], 'img-sm-min', 'small'); ?>
             <?= $post['login']; ?>
           </a>
@@ -34,7 +34,7 @@
             <?= Html::langDate($post['post_date']); ?>
           </div>
           <?php if ($post['post_answers_count'] != 0) : ?>
-            <span class="mr10 ml10 gray-600">&#183;</span>
+            <span class="gray-600">&#183;</span>
             <a class="flex lowercase gray-600" href="<?= $post_url; ?>#comment">
               <?= Html::numWord($post['post_answers_count'] + $post['post_comments_count'], __('app.num_answer'), true); ?>
             </a>

@@ -1,8 +1,7 @@
 <?php foreach ($facets as $key => $facet) : ?>
-  <div class="flex w-40 mb-w-100">
-
+  <div class="flex gap w-40 mb-w-100">
     <a title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
-      <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-lg mr10', 'logo', 'max'); ?>
+      <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-lg', 'logo', 'max'); ?>
     </a>
 
     <div class="w-100">

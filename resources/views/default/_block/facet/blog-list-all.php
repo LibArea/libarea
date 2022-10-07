@@ -1,7 +1,7 @@
 <?php foreach ($facets as $key => $facet) : ?>
-  <div class="mb20 items-center flex flex-row">
+  <div class="mb20 items-center flex gap flex-row">
     <a title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
-      <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-lg mr10', 'logo', 'max'); ?>
+      <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-lg', 'logo', 'max'); ?>
     </a>
     <div class="w-100">
       <a class="black text-xl" title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">
@@ -20,7 +20,7 @@
           <use xlink:href="/assets/svg/icons.svg#mic"></use>
         </svg>
       <?php endif; ?>
-      <div class="mr10 mt5 gray">
+      <div class="mt5 gray">
         <?= fragment($facet['facet_short_description'], 68); ?>
         <span class="flex right gray-600 text-sm">
           <svg class="icons">

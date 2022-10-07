@@ -9,7 +9,7 @@
         <?= markdown($page['post_content'], 'text'); ?>
       </div>
     <?php else : ?>
-      <div class="bg-red-200 p15 center mr10">
+      <div class="bg-red-200 p15 center">
         <?= __('app.content_deleted', ['name' => __('app.post')]); ?>...
       </div>
     <?php endif; ?>

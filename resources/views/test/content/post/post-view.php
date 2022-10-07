@@ -4,9 +4,9 @@
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
       <div class="post-body">
 
-        <div class="flex flex-row items-center">
+        <div class="flex flex-row gap items-center">
           <?php if (!empty($data['blog'])) : ?>
-            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
+            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
               <?= $data['blog'][0]['facet_title']; ?>
             </a>
           <?php endif; ?>
@@ -25,7 +25,7 @@
         <h1 class="m0"><?= $post['post_title']; ?>
           <?= insert('/content/post/post-title', ['post' => $post]); ?>
         </h1>
-        <div class="text-sm lowercase flex gray-600">
+        <div class="text-sm lowercase flex gap gray-600">
           <?= Html::langDate($post['post_date']); ?>
           <?php if ($post['modified']) : ?>
             (<?= __('app.ed'); ?>)
@@ -33,17 +33,17 @@
 
           <?php if (UserData::checkActiveUser()) : ?>
             <?php if (UserData::getUserLogin() == $post['login']  || UserData::checkAdmin()) : ?>
-              <a class="gray-600 mr10 ml10" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
+              <a class="gray-600" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
                 <?= __('app.edit'); ?>
               </a>
             <?php endif; ?>
             <?php if (UserData::getUserLogin() == $post['login']) : ?>
               <?php if ($post['my_post'] == $post['post_id']) : ?>
-                <span class="add-profile active mr10 ml10" data-post="<?= $post['post_id']; ?>">
+                <span class="add-profile active" data-post="<?= $post['post_id']; ?>">
                   + <?= __('app.in_profile'); ?>
                 </span>
               <?php else : ?>
-                <span class="add-profile mr10 ml10" data-post="<?= $post['post_id']; ?>">
+                <span class="add-profile" data-post="<?= $post['post_id']; ?>">
                   <?= __('app.in_profile'); ?>
                 </span>
               <?php endif; ?>

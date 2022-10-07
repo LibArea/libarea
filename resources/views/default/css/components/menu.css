@@ -69,10 +69,11 @@
 .menu a,
 .dropdown li > a {
   color: var(--gray);
-  padding: 5px 0 5px 3px;
+  padding: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: .7rem;
 }
 
 .menu__left:not(.menu__active) li { margin-bottom: 3px; }

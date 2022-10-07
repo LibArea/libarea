@@ -11,11 +11,13 @@
         <?= $cat['title']; ?>
       </a>
       <?php if (!empty($cat['sub'])) : ?>
-        <?php foreach ($cat['sub'] as $sub) : ?>
-          <a class="mr10 text-sm black mb-none" href="<?= url('category', ['sort' => 'all', 'slug' => $sub['url']]); ?>">
-            <?= $sub['title']; ?>
-          </a>
-        <?php endforeach; ?>
+        <div class="flex gap">
+          <?php foreach ($cat['sub'] as $sub) : ?>
+            <a class="text-sm black mb-none" href="<?= url('category', ['sort' => 'all', 'slug' => $sub['url']]); ?>">
+              <?= $sub['title']; ?>
+            </a>
+          <?php endforeach; ?>
+        </div>  
       <?php endif; ?>
       <?php if (!empty($cat['help'])) : ?>
         <div class="text-sm gray-600 mb-none"><?= $cat['help']; ?>...</div>
