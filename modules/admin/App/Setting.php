@@ -8,6 +8,8 @@ use Meta;
 
 class Setting
 {
+    private static $cache = [];
+    
     public function index($type)
     {   
         return view(
@@ -15,8 +17,8 @@ class Setting
             [
                 'meta'  => Meta::get(__('admin.' . $type)),
                 'data'  => [
-                    'type'  => $type,
-                    'settings' => SettingModel::get(),
+                    'type'      => $type,
+                    'settings'  => SettingModel::get(),
                 ]
             ]
         );
@@ -35,5 +37,20 @@ class Setting
 		}
 
 		is_return(__('msg.change_saved'), 'success', url('admin.settings.general'));
+    }
+    
+    public function get($key)
+    {
+        if (self::$cache) {
+       
+            foreach (self::$cache as $val)
+            {
+              $settings[$val['val']] = $val['value'];
+            }
+
+            return $settings[$key];
+        }
+
+        self::$cache = SettingModel::get();
     }
 }
