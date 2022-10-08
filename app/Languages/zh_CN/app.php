@@ -208,6 +208,7 @@ return [
     'no_answers'        => '不幸的是，还没有回复',
     'default'           => '默认',
     'qa'                => '问答',
+    'best_answer'       => '最佳答案',
     'answered'          => '已回答',
     'post_translation'  => '帖子是翻译',
     'translation'       => '翻译',

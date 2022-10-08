@@ -208,6 +208,7 @@ return [
     'no_answers'        => 'Sorry, no answers yet',
     'default'           => 'Default',
     'qa'                => 'Questions and answers',
+    'best_answer'       => 'Best Answer',
     'answered'          => 'Answered',
     'post_translation'  => 'Post is translations',
     'translation'       => 'Translation',

@@ -208,6 +208,7 @@ return [
     'no_answers'        => 'Ne pare rău, încă nu există răspunsuri',
     'default'           => 'Mod implicit',
     'qa'                => 'Intrebari si raspunsuri',
+    'best_answer'       => 'Cel mai bun răspuns',
     'answered'          => 'Răspuns',
     'post_translation'  => 'Postarea este traduceri',
     'translation'       => 'Traducere',
