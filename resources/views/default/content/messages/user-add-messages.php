@@ -1,7 +1,7 @@
 <main>
   <h1 class="mb10 text-2xl font-normal">
     <?= __('app.send_message'); ?> <?= UserData::getUserLogin(); ?> / <?= $data['login']; ?>
-    <a class="right text-sm" href="<?= url('send.messages', ['login' => UserData::getUserLogin()]); ?>">
+    <a class="right text-sm" href="<?= url('messages'); ?>">
       <?= __('app.all_messages'); ?>
     </a>
   </h1>

@@ -28,7 +28,7 @@ class EditItemController extends Controller
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (Access::author('item', $domain, 0) === false) {
+        if (Access::author('item', $domain, config('trust-levels.edit_time_item')) === false) {
             redirect(url('web'));
         }
 
@@ -65,7 +65,7 @@ class EditItemController extends Controller
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (Access::author('item', $item, 0) === false) {
+        if (Access::author('item', $item, config('trust-levels.edit_time_item')) === false) {
             return true;
         }
 
