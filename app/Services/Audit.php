@@ -87,7 +87,7 @@ class Audit extends Base
     {
         if (self::estimationUrl($content)) {
             $all_count = ActionModel::allContentUserCount($user_id);
-            if ($all_count < 2) {
+            if ($all_count < config('trust-levels.total_contribution')) {
                 ActionModel::addLimitingMode($user_id);
                 Msg::add(__('msg.content_audit'), 'error');
                 return false;
@@ -102,7 +102,7 @@ class Audit extends Base
     {
         if (self::stopWordsExists($content)) {
             $all_count = ActionModel::allContentUserCount($user_id);
-            if ($all_count < 2) {
+            if ($all_count < config('trust-levels.total_contribution')) {
                 ActionModel::addLimitingMode($user_id);
                 Msg::add(__('msg.content_audit'), 'error');
                 return false;
