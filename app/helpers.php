@@ -38,6 +38,15 @@ function config(string $key = null)
     return Configuration::get($key);
 }
 
+function setting(string $key = null)
+{
+    if ($key === null) {
+        return $key;
+    }
+    
+    return \Modules\Admin\App\Setting::get($key);
+}
+
 function is_current($url)
 {
     if ($url == Request::getUri()) return true;

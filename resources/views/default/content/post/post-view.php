@@ -40,7 +40,7 @@
 
           <?php if (UserData::checkActiveUser()) : ?>
 
-            <?php if (UserData::getUserLogin() == $post['login']  || UserData::checkAdmin()) : ?>
+            <?php if (Access::author('post', $post, config('trust-levels.edit_time_post')) == true) : ?>
               <a class="gray-600 lowercase" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
                 <?= __('app.edit'); ?>
               </a>
