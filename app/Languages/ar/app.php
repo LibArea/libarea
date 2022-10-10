@@ -208,7 +208,7 @@ return [
     'no_answers'        => 'للاسف, لايوجد اجابات بعد',
     'default'           => 'افتراضي',
     'qa'                => 'الاسئلة و الاجوبة',
-    'best_answer'       => 'أفضل إجابة'
+    'best_answer'       => 'أفضل إجابة',
     'answered'          => 'تمت الاجابة عليه',
     'post_translation'  => 'المنشور عبارة عن ترجمة',
     'translation'       => 'الترجمة',
