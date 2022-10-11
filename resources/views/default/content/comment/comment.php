@@ -3,7 +3,7 @@ foreach ($comments as $comment) :
   $n++; ?>
   <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
 
-  <?php if ($comment['answer_id']) : ?>
+  <?php if (!empty($comment['answer_id'])) : ?>
 
     <div class="flex gap-min items-center text-sm mb5 gray-600">
       <a class="gray-600 flex items-center" href="<?= url('profile', ['login' => $comment['login']]); ?>">
