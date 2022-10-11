@@ -16,6 +16,8 @@ foreach ($comments as $comment) :
         <?= $comment['post_title']; ?>
       </a>
     </div>
+       
+    <div class="right"><?= Html::votes($comment, 'answer'); ?></div>
     <?= markdown($comment['answer_content']); ?>
 
   <?php else : ?>
@@ -31,6 +33,8 @@ foreach ($comments as $comment) :
         <?= $comment['post_title']; ?>
       </a>
     </div>
+
+    <div class="right"><?= Html::votes($comment, 'comment'); ?></div>
     <?= markdown($comment['comment_content']); ?>
 
   <?php endif; ?>

@@ -80,31 +80,8 @@ class ProfileController extends Controller
         $pagesCount = $answerCount + $commentCount;
 
         $mergedArr = array_merge($comments, $answers);    
-
-        $orderBy = [
-            'comment_date' => 'desc',
-            'answer_date' => 'desc',
-        ];
-         
-        uasort($mergedArr, function ($a, $b) use ($orderBy) {
-            $result = 0;
-         
-            foreach ($orderBy as $key => $value) {
-         
-                if ($a[$key] == $b[$key]) {
-                    continue;
-                }
-         
-                $result = ($a[$key] < $b[$key]) ? -1 : 1;
-         
-                if ($value == 'desc') {
-                    $result = -$result;
-                }
-         
-                break;
-            }
-         
-            return $result;
+        usort($mergedArr, function($a, $b){
+            return   ($b['comment_date'] ?? $b['answer_date']) <=> ($a['comment_date'] ?? $a['answer_date']);   
         });
 
         return $this->render(
