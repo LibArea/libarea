@@ -14,7 +14,7 @@ class ProfileController extends Controller
 {
     use Views;
 
-    protected $limit = 20;
+    protected $limit = 15;
 
     // Member page (profile) 
     // Страница участника (профиль)
@@ -66,30 +66,46 @@ class ProfileController extends Controller
         );
     }
 
-    // User answers
-    public function answers()
-    {
-        $profile    = $this->profile();
-
-        $answers    = AnswerModel::userAnswers($this->pageNumber, $this->limit, $profile['id'], $this->user['id']);
-        $pagesCount = AnswerModel::userAnswersCount($profile['id']);
-
-        return $this->render(
-            '/user/profile/answer',
-            [
-                'meta'  => self::metadata('profile_answers', $profile),
-                'data'  => array_merge($this->sidebar($pagesCount, $profile), ['answers' => $answers]),
-            ]
-        );
-    }
-
     // User comments
     public function comments()
     {
         $profile   = $this->profile();
 
+        $answers    = AnswerModel::userAnswers($this->pageNumber, $this->limit, $profile['id'], $this->user['id']);
+        $answerCount = AnswerModel::userAnswersCount($profile['id']);
+
         $comments   = CommentModel::userComments($this->pageNumber, $this->limit, $profile['id'], $this->user['id']);
-        $pagesCount = CommentModel::userCommentsCount($profile['id']);
+        $commentCount = CommentModel::userCommentsCount($profile['id']);
+
+        $pagesCount = $answerCount + $commentCount;
+
+        $mergedArr = array_merge($comments, $answers);    
+
+        $orderBy = [
+            'comment_date' => 'desc',
+            'answer_date' => 'desc',
+        ];
+         
+        uasort($mergedArr, function ($a, $b) use ($orderBy) {
+            $result = 0;
+         
+            foreach ($orderBy as $key => $value) {
+         
+                if ($a[$key] == $b[$key]) {
+                    continue;
+                }
+         
+                $result = ($a[$key] < $b[$key]) ? -1 : 1;
+         
+                if ($value == 'desc') {
+                    $result = -$result;
+                }
+         
+                break;
+            }
+         
+            return $result;
+        });
 
         return $this->render(
             '/user/profile/comment',

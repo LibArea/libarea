@@ -16,9 +16,6 @@ return [
     'profile_posts_title'   => '{name} -职位一览表 ',
     'profile_posts_all_desc'    => '{name} -帖子列表，参与者的文章按时间顺序排列。 网站上的所有出版物。',
     
-    'profile_answers_title'     => '{name} -参加者的答案 ',
-    'profile_answers_desc'      => '{name} -参与者对主题和博客帖子的回复页面 {information}',
-    
     'profile_comments_title'    => '{name} -参加者的意见 ',
     'profile_comments_desc'     => '{name} -参加者的意见按时间顺序排列。 {information}',
     // end
@@ -61,10 +58,7 @@ return [
     'answers.deleted_info'      => '已删除回复...',
     
     'comments_desc'     => '所有评论(每条回复)按社区优先顺序排列',
-    'answers_desc'      => '所有回复(对帖子)按社区优先顺序排列',
     'domain_desc'       => '按领域对社区中的帖子进行分组',
 
     'all_comments'      => '所有评论',
-    'all_answers'       => '所有回复',
-
 ];

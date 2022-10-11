@@ -30,11 +30,6 @@ return [
             'icon'  => 'users',
             'id'    => 'users',
         ], [
-            'url'   => url('answers'),
-            'title' => __('app.answers'),
-            'icon'  => 'answers',
-            'id'    => 'answers',
-        ], [
             'url'   => url('comments'),
             'title' => __('app.comments'),
             'icon'  => 'comments',

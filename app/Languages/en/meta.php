@@ -16,9 +16,6 @@ return [
     'profile_posts_title'   => '{name} — post list ',
     'profile_posts_all_desc'    => '{name} — list of posts, articles of the participant in chronological order. All publications on the site.',
     
-    'profile_answers_title'     => '{name} — participant responses ',
-    'profile_answers_desc'      => '{name} — member\'s replies page to posts in topics and blogs. {information}',
-    
     'profile_comments_title'    => '{name} — participant\'s comments ',
     'profile_comments_desc'     => '{name} — participant\'s comments in chronological order. {information}',
     // end
@@ -61,9 +58,7 @@ return [
     'answers_deleted_info'      => 'Deleted responses...',
     
     'comments_desc'     => 'All comments (per replies) in order of priority in the community',
-    'answers_desc'      => 'All replies (to posts) in order of priority in the community',
     'domain_desc'       => 'Grouping posts in the community by domain',
     
     'all_comments'      => 'All comments',
-    'all_answers'       => 'All answers',
 ];

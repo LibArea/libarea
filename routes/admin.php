@@ -42,7 +42,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/setting')->module('admin', 'App\Setting', ['settings'])->name('admin.settings.general');
     Route::get('/setting/interface')->module('admin', 'App\Setting', ['interface'])->name('admin.settings.interface');
    
-    Route::get('/answers/deleted/{page?}')->controller('Answer\AnswerController', ['deleted'])->name('answers.deleted');
     Route::get('/comments/deleted/{page?}')->controller('Comment\CommentController', ['deleted'])->name('comments.deleted');
     
     Route::get('/web/deleted/{page?}')->controller('Item\HomeController', ['deleted'])->name('web.deleted');

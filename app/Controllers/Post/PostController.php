@@ -60,7 +60,7 @@ class PostController extends Controller
                 $row['edit'] = 1;
             }
             // TODO: N+1 см. AnswerModel()
-            $row['comments'] = CommentModel::getComments($row['answer_id'], $this->user['id']);
+            $row['comments'] = CommentModel::getCommentsAnswer($row['answer_id'], $this->user['id']);
             $answers[$ind]   = $row;
         }
 

@@ -69,7 +69,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                     post_feature,
                     post_is_deleted,
                     answer_id,
-                    answer_content as content,
+                    answer_content,
                     answer_date,
                     answer_after,
                     answer_user_id,
@@ -103,7 +103,6 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
     // Количество ответов
     public static function getAnswersCount($sheet)
     {
-
         $sort = self::sorts($sheet);
         $sql = "SELECT 
                     answer_id, 
@@ -190,7 +189,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                     answer_user_id,
                     answer_post_id,
                     answer_date,
-                    answer_content as content,
+                    answer_content,
                     answer_modified,
                     answer_published,
                     answer_ip,

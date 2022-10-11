@@ -23,12 +23,12 @@
         <ul class="mb-none">
           <li><a itemprop="url" href="<?= url('blogs.all'); ?>"><?= __('app.blogs'); ?></a></li>
           <li><a itemprop="url" href="<?= url('topics.all'); ?>"><?= __('app.topics'); ?></a></li>
-          <li><a itemprop="url" href="<?= url('web'); ?>"><?= __('app.catalog'); ?></a></li>
+          <li><a itemprop="url" href="<?= url('search'); ?>"><?= __('app.search'); ?></a></li>
         </ul>
         <ul class="mb-none">
           <li><a itemprop="url" href="<?= url('users.all'); ?>"><?= __('app.users'); ?></a></li>
-          <li><a itemprop="url" href="<?= url('answers'); ?>"><?= __('app.answers'); ?></a></li>
           <li><a itemprop="url" href="<?= url('comments'); ?>"><?= __('app.comments'); ?></a></li>
+          <li><a itemprop="url" href="<?= url('web'); ?>"><?= __('app.catalog'); ?></a></li>
         </ul>
         <ul>
           <?php foreach (config('facets.page') as $page) : ?>

@@ -16,9 +16,6 @@ return [
     'profile_posts_title'   => '{name} — قائمة المنشورات ',
     'profile_posts_all_desc'    => '{name} — قائمة المنشورات, مقالات المشارك بترتيب زمني. جميع المنشورات على الموقع.',
     
-    'profile_answers_title'     => '{name} — ردود المشارك',
-    'profile_answers_desc'      => '{name} — صفحة ردود العضو\الاعضاء على المنشورات في المواضيع و المدونات {information}',
-    
     'profile_comments_title'    => '{name} — تعليقات المشارك \المشاركين',
     'profile_comments_desc'     => '{name} — تعليقات المشارك \ المشاركين بالترتيب الزمني. {information}',
     // end
@@ -61,9 +58,7 @@ return [
     'answers_deleted_info'      => 'الردود المحذوفة...',
     
     'comments_desc'     => 'كل التعليقات (لكل ردود) مرتبة حسب الأولوية في المجتمع',
-    'answers_desc'      => 'كل الردود (على المشاركات) مرتبة حسب الأولوية في المجتمع',
     'domain_desc'       => 'تجميع المشاركات في المجتمع حسب النطاق',
     
     'all_comments'      => 'كل التعليقات',
-    'all_answers'       => 'كل الاجابات',
 ];

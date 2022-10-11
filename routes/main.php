@@ -98,11 +98,9 @@ Route::get('/users/{page?}')->controller('User\UserController', ['all'])->name('
 
 Route::get('/@{login}')->controller('User\ProfileController')->where(['login' => '[A-Za-z0-9]+'])->name('profile');
 Route::get('/@{login}/posts/{page?}')->controller('User\ProfileController@posts')->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
-Route::get('/@{login}/answers/{page?}')->controller('User\ProfileController@answers')->where(['login' => '[A-Za-z0-9]+'])->name('profile.answers');
 Route::get('/@{login}/comments/{page?}')->controller('User\ProfileController@comments')->where(['login' => '[A-Za-z0-9]+'])->name('profile.comments');
 
 Route::get('/comments/{page?}')->controller('Comment\CommentController', ['all'])->name('comments');
-Route::get('/answers/{page?}')->controller('Answer\AnswerController', ['all'])->name('answers');
 
 Route::get('/topics/new/{page?}')->controller('Facets\AllFacetController', ['new', 'topic'])->name('topics.new');
 Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['recommend', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');

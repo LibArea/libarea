@@ -6,7 +6,7 @@
   </div>
   <?php if (!empty($data['comments'])) : ?>
     <div class="mb15">
-      <?= insert('/content/comment/comment', ['answer' => $data['comments']]); ?>
+      <?= insert('/content/comment/comment', ['comments' => $data['comments']]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/comments'); ?>
   <?php else : ?>

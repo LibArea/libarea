@@ -91,7 +91,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Все комментарии
-    public static function getCommentsAll($page, $limit, $user, $sheet)
+    public static function getComments($page, $limit, $user, $sheet)
     {
         $sort = self::sorts($sheet);
         $start  = ($page - 1) * $limit;
@@ -108,7 +108,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     comment_id,
                     comment_ip,
                     comment_date,
-                    comment_content as content,
+                    comment_content,
                     comment_post_id,
                     comment_user_id,
                     comment_comment_id,
@@ -133,7 +133,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Количество комментариев 
-    public static function getCommentsAllCount($user, $sheet)
+    public static function getCommentsCount($user, $sheet)
     {
         $sort = self::sorts($sheet);
 
@@ -153,7 +153,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Получаем комментарии к ответу
-    public static function getComments($answer_id, $user_id)
+    public static function getCommentsAnswer($answer_id, $user_id)
     {
         $sql = "SELECT 
                     comment_id,
@@ -191,7 +191,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     comment_user_id,                
                     comment_answer_id,
                     comment_comment_id,
-                    comment_content as content,
+                    comment_content,
                     comment_date,
                     comment_published,
                     comment_votes,

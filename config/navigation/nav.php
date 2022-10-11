@@ -83,23 +83,6 @@ return [
     ],
   ],
 
-  // All answers
-  // Все ответы
-  'answers' => [
-    [
-      'tl'    => UserData::USER_ZERO_LEVEL,
-      'id'    => 'answers.all',
-      'url'   => '/answers',
-      'title' => __('app.answers'),
-    ],
-    [
-      'tl'    => UserData::REGISTERED_ADMIN,
-      'id'    => 'answers.deleted',
-      'url'   => url('answers.deleted'),
-      'title' => __('app.deleted'),
-    ],
-  ],
-
   // All comments
   // Все комментарии
   'comments' => [

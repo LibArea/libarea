@@ -66,19 +66,12 @@ endif;
               </div>
             <?php endif; ?>
 
-            <?php if ($data['counts']['count_answers'] > 0) : ?>
-              <div class="ml15 mr15 center box-number">
-                <a class="focus-user sky" href="<?= url('profile.answers', ['login' => $profile['login']]); ?>">
-                  <?= $data['counts']['count_answers']; ?>
-                </a>
-                <div class="uppercase mt5 text-sm gray-600"><?= __('app.answers'); ?></div>
-              </div>
-            <?php endif; ?>
-
-            <?php if ($data['counts']['count_comments'] > 0) : ?>
+        
+            <?php $comentsCount = $data['counts']['count_comments'] + $data['counts']['count_answers']; ?>
+            <?php if ($comentsCount > 0) : ?>
               <div class="ml15 mr15 center box-number">
                 <a class="focus-user sky" href="<?= url('profile.comments', ['login' => $profile['login']]); ?>">
-                  <?= $data['counts']['count_comments']; ?>
+                  <?= $comentsCount; ?>
                 </a>
                 <div class="uppercase mt5 text-sm gray-600"><?= __('app.comments'); ?></div>
               </div>

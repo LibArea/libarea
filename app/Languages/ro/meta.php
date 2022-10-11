@@ -16,9 +16,6 @@ return [
     'profile_posts_title'   => '{name} — lista de postări ',
     'profile_posts_desc'    => '{name} — lista de postări, articole ale participantului în ordine cronologică. Toate publicațiile de pe site.',
     
-    'profile_answers_title' => '{name} — răspunsurile participanților ',
-    'profile_answers_desc'  => '{name} — pagina de răspunsuri a membrilor la postările din subiecte și bloguri. {information}',
-    
     'profile_comments_title'    => '{name} — comentariile participantului ',
     'profile_comments_desc'     => '{name} — comentariile participantului în ordine cronologică. {information}',
     // end
@@ -61,9 +58,7 @@ return [
     'answers_deleted_info'      => 'Răspunsuri șterse...',
     
     'comments_desc'     => 'Toate comentariile (pe răspunsuri) în ordinea priorității în comunitate',
-    'answers_desc'      => 'Toate răspunsurile (la postări) în ordinea priorității în comunitate',
     'domain_desc'       => 'Gruparea postărilor din comunitate după domeniu',
     
     'all_comments'      => 'Toate comentariile',
-    'all_answers'       => 'Toate răspunsurile',
 ];
