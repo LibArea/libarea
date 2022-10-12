@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Admin\App\Models;
 
 use DB;
 

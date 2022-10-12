@@ -24,7 +24,7 @@ class MainConnector implements Connector
             "App\Exception\*"               => "app/Libraries/",
 
             // ... or, if a specific class is added,
-            // "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
+            "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
 
             "DB"                            => "app/Libraries/DB.php",
             "Configuration"                 => "app/Libraries/Configuration.php",

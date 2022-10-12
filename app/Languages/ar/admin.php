@@ -136,6 +136,13 @@ return [
     'banner_title_help'     => 'عنوان البانر على الصفحة الرئيسية للموقع ، إذا لم يكن المشارك مخولاً',
     'banner_desc'           => 'هيئة لافتة',
 
+    'feed_title'            => 'Feed title (feed)',
+    'feed_desc'             => 'Description (feed)',
+    'top_title'             => 'Title TOP (top)',
+    'top_desc'              => 'Description TOP (top)',
+    'all_title'             => 'Title ALL (all)',
+    'all_desc'              => 'Description ALL (all)',
+
     'count_like_feed'       => 'عدد الإعجابات للتغذية',
     'count_like_feed_help'  => 'كم عدد الإعجابات التي يجب أن تظهر على المنشور في الصفحة المركزية للموقع',
     'type_post_feed'        => 'ظهور المنشور في الخلاصة',

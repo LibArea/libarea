@@ -136,6 +136,13 @@ return [
     'banner_title_help'     => '网站主页上的横幅标题，如果参与者未经授权',
     'banner_desc'           => '横幅正文',
 
+    'feed_title'            => '磁带头 (feed)',
+    'feed_desc'             => '磁带说明 (feed)',
+    'top_title'             => '顶部标题 (top)',
+    'top_desc'              => '说明顶部 (top)',
+    'all_title'             => '标题全部 (all)',
+    'all_desc'              => '描述 全部 (all)',
+
     'count_like_feed'       => '饲料的点赞数',
     'count_like_feed_help'  => '一个帖子应该在网站的中心页面上显示多少个赞',
     'type_post_feed'        => '帖子在提要中的外观',

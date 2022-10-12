@@ -3,7 +3,7 @@
 namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\SettingModel;
+use Modules\Admin\App\Models\SettingModel;
 use Meta;
 
 class Setting

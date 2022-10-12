@@ -136,6 +136,13 @@ return [
     'banner_title_help'     => 'Titlul bannerului pe pagina principală a site-ului, dacă participantul nu este autorizat',
     'banner_desc'           => 'Corpul bannerului',
 
+    'feed_title'            => 'Titlu (feed)',
+    'feed_desc'             => 'Descriere (feed)',
+    'top_title'             => 'Titlu TOP (top)',
+    'top_desc'              => 'Descriere TOP (top)',
+    'all_title'             => 'Titlu ALL (all)',
+    'all_desc'              => 'Descriere ALL (all)',
+
     'count_like_feed'       => 'Numărul de aprecieri pentru feed',
     'count_like_feed_help'  => 'Câte aprecieri ar trebui să fie vizibile o postare pe pagina centrală a site-ului',
     'type_post_feed'        => 'Apariția postării în feed',

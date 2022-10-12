@@ -136,6 +136,13 @@ return [
     'banner_title_help'     => 'Banner title on the main page of the site, if the participant is not authorized',
     'banner_desc'           => 'Banner Body',
 
+    'feed_title'            => 'Feed title (feed)',
+    'feed_desc'             => 'Description (feed)',
+    'top_title'             => 'Title TOP (top)',
+    'top_desc'              => 'Description TOP (top)',
+    'all_title'             => 'Title ALL (all)',
+    'all_desc'              => 'Description ALL (all)',
+
     'count_like_feed'       => 'Number of likes for feed',
     'count_like_feed_help'  => 'How many likes should a post get to be visible on the central page of the site',
     'type_post_feed'        => 'Appearance of the post in the feed',

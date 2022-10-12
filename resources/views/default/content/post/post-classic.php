@@ -25,7 +25,7 @@ use Hleb\Constructor\Handlers\Request; ?>
             <?= Img::facets($post['facet_list'], 'topic', 'gray-600 text-sm'); ?>
             <?php if ($post['post_url_domain']) : ?>
               <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-                <svg class="icons">
+                <svg class="icons mb-none">
                   <use xlink:href="/assets/svg/icons.svg#link"></use>
                 </svg> <?= $post['post_url_domain']; ?>
               </a>
@@ -64,7 +64,7 @@ use Hleb\Constructor\Handlers\Request; ?>
               </span>
           </a>
 
-          <div class="gray-600 mb-none lowercase"><?= Html::langDate($post['post_date']); ?></div>
+          <div class="gray-600 lowercase"><?= Html::langDate($post['post_date']); ?></div>
 
           <?php if ($post['post_answers_count'] != 0) : ?>
             <a class="flex gray-600" href="<?= $post_url; ?>#comment">
