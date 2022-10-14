@@ -10,7 +10,7 @@ return [
     'more'              => 'المزيد',
     'category'          => 'التصنيف',
     'categories'        => 'التصنيفات',
-    'audits'            => 'التدقيق',
+    'audits'            => 'الابلاغ',
     'soft'              => 'لين',
     'website'           => 'موقع الكتروني',
     'websites'          => 'مواقع',
