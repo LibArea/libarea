@@ -21,13 +21,16 @@ $q = $data['q'];
           <ul class="nav inline">
             <li><a href="/"><svg class="icons">
                   <use xlink:href="/assets/svg/icons.svg#home"></use>
-                </svg> <?= __('search.on_website'); ?></a></li>
+                </svg> <span class="mb-none"><?= __('search.on_website'); ?></span></a></li>
             <li<?php if ($uri == 'post') : ?> class="active" <?php endif; ?>>
               <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=post"><?= __('search.posts'); ?></a>
               </li>
-              <li<?php if ($uri == 'website') : ?> class="active" <?php endif; ?>>
-                <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=website"><?= __('search.websites'); ?></a>
+              <li<?php if ($uri == 'answer') : ?> class="active" <?php endif; ?>>
+                <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=answer"><?= __('search.answers'); ?></a>
                 </li>
+                <li<?php if ($uri == 'website') : ?> class="active" <?php endif; ?>>
+                  <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=website"><?= __('search.websites'); ?></a>
+                  </li>
           </ul>
 
           <div class="flex right gap-max items-center">
@@ -38,11 +41,11 @@ $q = $data['q'];
             </div>
             <?php if (!UserData::checkActiveUser()) : ?>
               <?php if (config('general.invite') == false) : ?>
-                <a class="register gray-600 block" href="<?= url('register'); ?>">
+                <a class="register gray-600 block mb-none" href="<?= url('register'); ?>">
                   <?= __('search.registration'); ?>
                 </a>
               <?php endif; ?>
-              <a class="gray-600" href="<?= url('login'); ?>">
+              <a class="gray-600 mb-none" href="<?= url('login'); ?>">
                 <?= __('search.sign_in'); ?>
               </a>
             <?php else : ?>

@@ -9,6 +9,7 @@
 return [
     'all'               => '全部',
     'posts'             => '帖子',
+    'answers'           => '答案',
     'websites'          => '网站',
     'registration'      => '注册',
     'sign_in'           => '登录',

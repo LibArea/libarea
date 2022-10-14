@@ -68,7 +68,7 @@ class SearchController extends Controller
                     'sheet'         => 'admin',
                     'q'             => $q,
                     'tags'          => SearchModel::getSearchTags($stem, $facet, 4),
-                    'sw'            => (microtime(true) - $sw ?? 0) * 1000,
+                    'sw'            => round((microtime(true) - $sw ?? 0) * 1000, 4),
                     'count'         => $count,
                     'pagesCount'    => ceil($count / $this->limit),
                     'pNum'          => $pageNumber,

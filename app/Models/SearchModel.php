@@ -8,19 +8,20 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
 {
     public static function getSearch($page, $limit, $query, $type)
     {
-        $start  = ($page - 1) * $limit;
-
-        if ($type == 'answer') {
-            $sql = "SELECT answer_id, answer_content as content, post_id, post_slug, post_title
-                        FROM answers  
-                        LEFT JOIN posts ON answer_post_id = post_id 
-                            WHERE post_is_deleted = 0
-                                AND answer_content LIKE :qa LIMIT :start, :limit";
-                                
-           return DB::run($sql, ['qa' => "%" . $query, 'start' => $start, 'limit' => $limit])->fetchAll();                     
+        if ($type == 'website') {
+            return self::getWebsite($page, $limit, $query);
         }
 
+        if ($type == 'answer') {
+            return self::getAnswers($page, $limit, $query);
+        }
 
+        return self::getPosts($page, $limit, $query);
+    }
+
+    public static function getPosts($page, $limit, $query)
+    {
+        $start  = ($page - 1) * $limit;
         $sql = "SELECT DISTINCT 
                 post_id, 
                 post_title as title, 
@@ -46,39 +47,54 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                                 AND MATCH(post_title, post_content) AGAINST (:qa)
                                           LIMIT :start, :limit";
 
-        if ($type == 'website') {
-            $sql = "SELECT DISTINCT 
-                item_id, 
-                item_title as title, 
-                item_content as content,
-                item_url,
-                item_domain,
-                item_votes as votes,
-                item_count as count,
-                rel.*
-                    FROM facets_items_relation  
-                    LEFT JOIN items ON relation_item_id = item_id 
-                    LEFT JOIN ( SELECT  
-                            relation_item_id,  
-                            GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list  
-                            FROM facets  
-                            LEFT JOIN facets_items_relation on facet_id = relation_facet_id  
-                                GROUP BY relation_item_id  
-                    ) AS rel ON rel.relation_item_id = item_id  
-                            WHERE item_is_deleted = 0
-                                AND MATCH(item_title, item_content, item_domain) AGAINST (:qa) LIMIT :start, :limit";
-        }
+        return DB::run($sql, ['qa' => $query, 'start' => $start, 'limit' => $limit])->fetchAll();
+    }
+
+    public static function getAnswers($page, $limit, $query)
+    {
+        $start  = ($page - 1) * $limit;
+        $sql = "SELECT answer_id, answer_content, post_id, post_slug, post_title as title
+                    FROM answers  
+                    LEFT JOIN posts ON answer_post_id = post_id 
+                        WHERE post_is_deleted = 0
+                            AND answer_content LIKE :qa LIMIT :start, :limit";
+
+        return DB::run($sql, ['qa' => "%" . $query . "%", 'start' => $start, 'limit' => $limit])->fetchAll();
+    }
+
+    public static function getWebsite($page, $limit, $query)
+    {
+        $start  = ($page - 1) * $limit;
+        $sql = "SELECT DISTINCT 
+            item_id, 
+            item_title as title, 
+            item_content as content,
+            item_url,
+            item_domain,
+            item_votes as votes,
+            item_count as count,
+            rel.*
+                FROM facets_items_relation  
+                LEFT JOIN items ON relation_item_id = item_id 
+                LEFT JOIN ( SELECT  
+                        relation_item_id,  
+                        GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list  
+                        FROM facets  
+                        LEFT JOIN facets_items_relation on facet_id = relation_facet_id  
+                            GROUP BY relation_item_id  
+                ) AS rel ON rel.relation_item_id = item_id  
+                        WHERE item_is_deleted = 0
+                            AND MATCH(item_title, item_content, item_domain) AGAINST (:qa) LIMIT :start, :limit";
 
         return DB::run($sql, ['qa' => $query, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-
     public static function getSearchCount($query, $type)
     {
         if ($type == 'answer') {
-           $sql = "SELECT answer_id FROM answers LEFT JOIN posts ON answer_post_id = post_id WHERE post_is_deleted = 0 AND answer_content LIKE :qa";
-                                
-           return DB::run($sql, ['qa' => "%" . $query])->rowCount();                     
+            $sql = "SELECT answer_id FROM answers LEFT JOIN posts ON answer_post_id = post_id WHERE post_is_deleted = 0 AND answer_content LIKE :qa";
+
+            return DB::run($sql, ['qa' => "%" . $query . "%"])->rowCount();
         }
 
         $sql = "SELECT post_id FROM posts WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 and post_type = 'post' AND MATCH(post_title, post_content) AGAINST (:qa)";

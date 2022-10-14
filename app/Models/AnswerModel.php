@@ -54,6 +54,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql_two, $params);
     }
 
+    // All answers    
     // Все ответы
     public static function getAnswers($page, $limit, $user, $sheet)
     {
@@ -100,7 +101,6 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    // Количество ответов
     public static function getAnswersCount($sheet)
     {
         $sort = self::sorts($sheet);
@@ -113,7 +113,6 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql)->rowCount();
     }
-
 
     public static function sorts($sheet)
     {
@@ -129,7 +128,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
         return $sort;
     }
 
-
+    // Getting answers in a post
     // Получаем ответы в посте
     public static function getAnswersPost($post_id, $user_id, $type)
     {
@@ -180,7 +179,8 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetchAll();
     }
 
-    // Страница ответов участника
+    // User responses
+    // Ответы участника
     public static function userAnswers($page, $limit, $user_id, $uid_vote)
     {
         $start  = ($page - 1) * $limit;
@@ -219,7 +219,6 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['user_id' => $user_id, 'uid_vote' => $uid_vote, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    // Количество ответов участника
     public static function userAnswersCount($user_id)
     {
         $sql = "SELECT 
@@ -232,6 +231,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 
+    // Information on the id of the answer
     // Информацию по id ответа
     public static function getAnswerId($answer_id)
     {
@@ -254,11 +254,11 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
 
         return  DB::run($sql, ['answer_id' => $answer_id])->fetch();
     }
-    
+
     /* 
      *  Best answer
      */
- 
+
     // Choice of the best answer
     // Выбор лучшего ответа
     public static function setBest($post_id, $answer_id, $selected_best_answer)
@@ -266,9 +266,9 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
         if ($selected_best_answer) {
             DB::run("UPDATE answers SET answer_lo = 0 WHERE answer_id = :id", ['id' => $selected_best_answer]);
         }
-        
+
         self::setAnswerBest($answer_id);
- 
+
         self::answerPostBest($post_id, $answer_id);
     }
 
@@ -277,7 +277,7 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
     public static function setAnswerBest($answer_id)
     {
         $sql = "UPDATE answers SET answer_lo = :user_id WHERE answer_id = :answer_id";
-        
+
         return  DB::run($sql, ['answer_id' => $answer_id, 'user_id' => UserData::getUserId()]);
     }
 
@@ -288,5 +288,5 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
         $sql_two = "UPDATE posts SET post_lo = :answer_id WHERE post_id = :post_id";
 
         return DB::run($sql_two, ['post_id' => $post_id, 'answer_id' => $answer_id]);
-    }   
+    }
 }

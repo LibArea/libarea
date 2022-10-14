@@ -9,6 +9,7 @@
 return [
     'all'               => 'All',
     'posts'             => 'Posts',
+    'answers'           => 'Answers',
     'websites'          => 'Sites',
     'registration'      => 'Registration',
     'sign_in'           => 'To come in',

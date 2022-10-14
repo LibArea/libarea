@@ -9,6 +9,7 @@
 return [
     'all'               => 'Все',
     'posts'             => 'Посты',
+    'answers'           => 'Відповіді',
     'websites'          => 'Сайты',
     'registration'      => 'Регистрация',
     'sign_in'           => 'Войти',
