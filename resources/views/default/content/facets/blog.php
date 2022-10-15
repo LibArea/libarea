@@ -70,7 +70,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
 
           <?php if ($data['info']) : ?>
             <div class="sticky top-sm">
-              <div class="box bg-lightgray content-body">
+              <div class="box bg-lightgray img-preview">
                 <?= $data['info']; ?>
               </div>
             </div>

@@ -1,5 +1,5 @@
-<div class="flex box box-fon">
-  <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-xl mr15', 'logo', 'max'); ?>
+<div class="flex box box-fon gap">
+  <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-xl', 'logo', 'max'); ?>
   <div class="flex-auto">
     <h1 class="text-2xl mb-text-xl m0">
       <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == UserData::getUserId()) : ?>
