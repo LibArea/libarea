@@ -55,7 +55,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     Route::get('/logout')->controller('Auth\LogoutController')->name('logout');
     Route::get('/topics/my/{page?}')->controller('Facets\AllFacetController', ['my', 'topic'])->name('topics.my');
-    Route::get('/post/scroll/{page?}')->controller('HomeController@scroll'); 
+    Route::get('/post/scroll/{type}/{page?}')->controller('HomeController@scroll'); 
     Route::get('/blogs/my')->controller('Facets\AllFacetController', ['my', 'blog'])->name('blogs.my');
     Route::get('/all/{page?}')->controller('HomeController', ['all'])->name('main.all');
 Route::endGroup();

@@ -67,10 +67,15 @@ use Hleb\Constructor\Handlers\Request; ?>
       <div class="flex flex-row items-center justify-between">
         <div class="flex gap text-sm flex-row">
           <?= Html::votes($post, 'post'); ?>
-
+          <div class="flex gray-600 gap-min">
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#eye"></use>
+            </svg>
+            <?= $post['post_hits_count'] == 0 ? 1 : $post['post_hits_count']; ?>
+          </div>
           <?php if ($post['post_answers_count'] != 0) : ?>
-            <a class="flex gray-600" href="<?= $post_url; ?>#comment">
-              <svg class="icons mr5">
+            <a class="flex gray-600 gap-min" href="<?= $post_url; ?>#comment">
+              <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#comments"></use>
               </svg>
               <?= $post['post_answers_count'] + $post['post_comments_count']; ?>

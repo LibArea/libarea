@@ -33,6 +33,11 @@
     // Начальная загрузка (первая страница загружается статически)
     let postPage = 2;
 
+    var type = 'no';
+    <?php if ($sheet == 'all') : ?>
+        var type = 'all';
+    <?php endif; ?>
+
     function getPosts(path) {
       fetch(path)
         .then(res => res.text()).then((res) => {
@@ -46,7 +51,7 @@
       const firstEntry = entries[0];
       if (firstEntry.isIntersecting) {
         if (`${postPage}` > 25) return;
-        getPosts(`/post/scroll/${postPage}.html`);
+        getPosts(`/post/scroll/${type}/${postPage}.html`);
       }
     });
     if (coolDiv) {

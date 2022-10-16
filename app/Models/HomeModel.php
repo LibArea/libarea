@@ -24,7 +24,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 if ($result) $string = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")";
             }
         }
-
+ 
         $display = self::display($type, $user['trust_level']);
 
         $sort = "ORDER BY post_top DESC, post_date DESC";

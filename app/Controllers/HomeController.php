@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Hleb\Constructor\Handlers\Request;
 use App\Models\HomeModel;
 use Meta;
 
@@ -70,8 +71,10 @@ class HomeController extends Controller
     // Бесконечный скролл
     public function scroll()
     {
+        $type = Request::get('type') == 'all' ? 'all' : 'main.feed';
+        
         $topics_user    = HomeModel::subscription($this->user['id']);
-        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $this->user, 'main.feed');
+        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $this->user, $type);
 
         $this->insert(
             '/content/post/type-post',

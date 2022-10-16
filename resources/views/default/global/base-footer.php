@@ -39,5 +39,5 @@
     </div>
   <?php endif; ?>
 </footer>
- 
-<?= insert('/scripts'); ?>
+
+<?= insert('/scripts', ['sheet' => $data['sheet']]); ?>
