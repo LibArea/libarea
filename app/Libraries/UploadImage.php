@@ -87,6 +87,9 @@ class UploadImage
         $file       = $img['tmp_name'];
         $filename   = 'post-' . time();
 
+        // For the body of the post, if png then we will not change the file extension
+        // Для тела поста, если png то не будем менять расширение файла
+        $file_type = ($img['type'] == 'image/png') ? 'png' : 'webp';
 
         self::createDir($path_img . $year . $month);
 
@@ -96,14 +99,14 @@ class UploadImage
         if ($width_h[0] > 1050) {
             $image->load($file);
             $image->resizeToWidth(1050);
-            $image->save($path_img . $year . $month . $filename . '.webp', "webp");
+            $image->save($path_img . $year . $month . $filename . '.' . $file_type, $file_type, 100);
                 
         } else {
             $image->load($file);
-            $image->save($path_img . $year . $month . $filename . '.webp', "webp");
+            $image->save($path_img . $year . $month . $filename . '.' . $file_type, $file_type, 100);
         }
 
-        $img_post = Img::PATH['posts_content'] . $year . $month . $filename . '.webp';
+        $img_post = Img::PATH['posts_content'] . $year . $month . $filename . '.' . $file_type;
         FileModel::set(
             [
                 'file_path'         => $img_post,
