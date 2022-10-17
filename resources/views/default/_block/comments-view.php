@@ -211,5 +211,5 @@
 <?php endif; ?>
 
 <?php if ($post['post_closed'] == 1) :
-  echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.post_closed'), 'icon' => 'closed']);
+  echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.close'), 'icon' => 'closed']);
 endif; ?>

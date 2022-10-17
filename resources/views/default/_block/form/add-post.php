@@ -60,24 +60,24 @@
 
       <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL)) : ?>
         <fieldset>
-          <input type="checkbox" name="post_draft"> <?= __('app.draft_post'); ?>?
+          <input type="checkbox" name="post_draft"> <?= __('app.draft_post'); ?>
         </fieldset>
 
         <?= insert('/_block/form/content-tl', ['data' => null]); ?>
 
         <fieldset>
-          <input type="checkbox" name="closed"> <?= __('app.post_closed'); ?>?
+          <input type="checkbox" name="closed"> <?= __('app.post_closed'); ?> -  проверить еще!"
         </fieldset>
 
       <?php endif; ?>
 
       <fieldset>
-        <input type="checkbox" name="translation"> <?= __('app.post_translation'); ?>?
+        <input type="checkbox" name="translation"> <?= __('app.post_translation'); ?>
       </fieldset>
 
       <?php if (UserData::checkAdmin()) : ?>
         <fieldset>
-          <input type="checkbox" name="top"> <?= __('app.pin'); ?>?
+          <input type="checkbox" name="top"> <?= __('app.pin'); ?>
         </fieldset>
       <?php endif; ?>
     </div>

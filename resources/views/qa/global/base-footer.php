@@ -39,4 +39,4 @@
   <?php endif; ?>
 </footer>
 
-<?= insert('/scripts', ['sheet' => $data['sheet']]); ?>
+<?= insert('/scripts', ['sheet' => $data['sheet'] ?? false]); ?>

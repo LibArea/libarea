@@ -69,7 +69,7 @@
 <?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
   <?php if ($post['post_draft'] == 1) : ?>
     <fieldset>
-      <input type="checkbox" name="post_draft" <?php if ($post['post_draft'] == 1) : ?>checked <?php endif; ?>> <?= __('app.draft_post'); ?>?
+      <input type="checkbox" name="post_draft" <?php if ($post['post_draft'] == 1) : ?>checked <?php endif; ?>> <?= __('app.draft_post'); ?>
     </fieldset>
   <?php endif; ?>
 <?php endif; ?>
@@ -78,20 +78,20 @@
   <?= insert('/_block/form/content-tl', ['data' => $post['post_tl']]); ?>
 
   <fieldset>
-    <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>?
+    <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>
   </fieldset>
 
   <fieldset>
-    <input type="checkbox" name="closed" <?php if ($post['post_closed'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_closed'); ?>?
+    <input type="checkbox" name="closed" <?php if ($post['post_closed'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_closed'); ?>
   </fieldset>
 
   <fieldset>
-    <input type="checkbox" name="translation" <?php if ($post['post_translation'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_translation'); ?>?
+    <input type="checkbox" name="translation" <?php if ($post['post_translation'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_translation'); ?>
   </fieldset>
 
   <?php if (UserData::checkAdmin()) : ?>
     <fieldset>
-      <input type="checkbox" name="top" <?php if ($post['post_top'] == 1) : ?>checked <?php endif; ?>> <?= __('app.pin'); ?>?
+      <input type="checkbox" name="top" <?php if ($post['post_top'] == 1) : ?>checked <?php endif; ?>> <?= __('app.pin'); ?>
     </fieldset>
   <?php endif; ?>
 <?php endif; ?>
