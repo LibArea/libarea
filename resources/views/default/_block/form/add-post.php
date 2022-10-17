@@ -66,7 +66,7 @@
         <?= insert('/_block/form/content-tl', ['data' => null]); ?>
 
         <fieldset>
-          <input type="checkbox" name="closed"> <?= __('app.post_closed'); ?> -  проверить еще!"
+          <input type="checkbox" name="closed"> <?= __('app.post_closed'); ?>
         </fieldset>
 
       <?php endif; ?>
