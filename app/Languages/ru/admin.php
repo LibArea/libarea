@@ -16,6 +16,7 @@ return [
     'being_developed'   => 'В стадии разработки',
     'schemas'           => 'Схемы',
     'pages'             => 'Страницы',
+    'advertising'       => 'Реклама',
     'facets'            => 'Фасеты',
     'users'             => 'Участники',
     'time'              => 'Время',

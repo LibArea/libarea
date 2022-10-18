@@ -39,9 +39,9 @@ class Html
         //Если позже
         $mm = intval($a[1]);
         if (date("Y") == $a[0]) {
-            return ($a[2] . " " . $months[$mm]); // без года
+            return ((int)$a[2] . " " . $months[$mm]); // без года
         }
-        return ($a[2] . " " . $months[$mm] . " " . $a[0]);
+        return ((int)$a[2] . " " . $months[$mm] . " " . $a[0]);
     }
 
     // Voting for posts, replies, comments and sites

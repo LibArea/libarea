@@ -33,8 +33,8 @@
 
     <div class="last-content content-tabs active" id="post">
       <div class="file-upload" id="file-drag">
-        <div class="flex">
-          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-gray">
+        <div class="flex gap mb15">
+          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="w94 h94 br-gray">
           <div id="start">
             <input id="file-upload" type="file" name="images" accept="image/*" />
             <div class="text-sm gray-600 mt5">

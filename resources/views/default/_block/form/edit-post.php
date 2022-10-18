@@ -41,9 +41,9 @@
 
 <?php if ($post['post_type'] == 'post') : ?>
   <div class="file-upload mb20" id="file-drag">
-    <div class="flex">
+    <div class="flex gap">
       <?php if ($post['post_content_img']) : ?>
-        <div class="mr20">
+        <div>
           <?= Img::image($post['post_content_img'], $post['post_title'], 'w160', 'post', 'cover'); ?>
           <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
           <a class="img-remove text-sm" href="/post/img/<?= $post['post_id']; ?>/remove">
@@ -52,7 +52,7 @@
         </div>
       <?php endif; ?>
 
-      <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-gray">
+      <img id="file-image" src="/assets/images/1px.jpg" alt="" class="w94 h94 br-gray">
     </div>
     <div id="start" class="mt10">
       <input id="file-upload" type="file" name="images" accept="image/*" />

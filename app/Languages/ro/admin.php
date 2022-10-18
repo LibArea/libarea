@@ -16,6 +16,7 @@ return [
     'being_developed'   => 'In dezvoltare',
     'schemas'           => 'Sistem',
     'pages'             => 'Pagini',
+    'advertising'       => 'Publicitate',
     'facets'            => 'Fațete',
     'users'             => 'Membrii',
     'time'              => 'Timp',

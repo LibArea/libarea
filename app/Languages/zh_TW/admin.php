@@ -16,6 +16,7 @@ return [
     'being_developed'   => '正在开发中',
     'schemas'           => '计划',
     'pages'             => '网页',
+    'advertising'       => '廣告',
     'facets'            => '方面',
     'users'             => '参加者',
     'time'              => '时间',

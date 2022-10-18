@@ -16,6 +16,7 @@ return [
     'being_developed'   => 'قيد التطوير',
     'schemas'           => 'مخطط',
     'pages'             => 'صفحات',
+    'advertising'       => 'أعلانات',
     'facets'            => 'جوانب',
     'users'             => 'الاعضاء',
     'time'              => 'الوقت',
