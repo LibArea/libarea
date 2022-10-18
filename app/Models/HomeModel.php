@@ -15,13 +15,20 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             $result[$ind] = $row['facet_id'];
         }
 
+        $resultNotUser = [];
+
+        $ignoring = "";
         $string = "";
         if ($type != 'all' && $type != 'top') {
             if (!$user['id']) {
                 $string = "";
+                $ignoring = "";
             } else {
                 $string = "AND relation_facet_id IN(0)";
                 if ($result) $string = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")";
+                
+                $ignoring = "post_user_id NOT IN(0) AND";
+                if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $result ?? []) . ") AND";
             }
         }
  
@@ -79,7 +86,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 LEFT JOIN votes_post 
                     ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
 
-                WHERE post_type != 'page' AND post_draft = 0 $string $display $sort LIMIT :start, :limit";
+                WHERE $ignoring post_type != 'page' AND post_draft = 0 $string $display $sort LIMIT :start, :limit";
 
         return DB::run($sql, ['uid' => $user['id'], 'uid2' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
@@ -91,13 +98,20 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             $result[$ind] = $row['facet_id'];
         }
 
+        $resultNotUser = [];
+
+        $ignoring = "";
         $string = "";
         if ($type != 'all' && $type != 'top') {
             if (!$user['id']) {
                 $string = "";
+                $ignoring = "";
             } else {
                 $string = "AND f_id IN(0)";
                 if ($result) $string = "AND f_id IN(" . implode(',', $result ?? []) . ")";
+                
+                $ignoring = "post_user_id NOT IN(0) AND ";
+                if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $result ?? []) . ") AND";
             }
         }
 
@@ -125,7 +139,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                             ON rel.relation_post_id = post_id 
 
             INNER JOIN users ON id = post_user_id
-                WHERE post_draft = 0       
+                WHERE $ignoring post_draft = 0       
                     $string $display";
 
         return DB::run($sql)->rowCount();
@@ -175,20 +189,18 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT 
                     answer_id,
                     answer_post_id,
-                    answer_user_id,
                     answer_content,
                     answer_date,
                     post_id,
-                    post_tl,
                     post_slug,
                     login,
                     avatar
                         FROM answers 
-                        LEFT JOIN posts ON post_id = answer_post_id
                         LEFT JOIN users ON id = answer_user_id
-                        WHERE answer_is_deleted = 0 AND post_is_deleted = 0 
-                        $user_answer AND post_type = 'post'
-                        ORDER BY answer_id DESC LIMIT 5";
+                        RIGHT JOIN posts ON post_id = answer_post_id
+                            WHERE answer_is_deleted = 0 AND post_is_deleted = 0 
+                                $user_answer AND post_type = 'post'
+                                    ORDER BY answer_id DESC LIMIT 5";
 
         return DB::run($sql)->fetchAll();
     }
