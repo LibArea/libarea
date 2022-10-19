@@ -32,7 +32,6 @@
     "phphleb/debugpan": "1.*",
     "phphleb/radjax": "dev-master",
     "phphleb/muller": "dev-main",
-    "ipatov/smtp-mail": "dev-master",
     "cocur/slugify": "^4.1",
     "taufik-nurrohman/parsedown-extra-plugin": "dev-main",
     "donatj/phpuseragentparser": "dev-master",

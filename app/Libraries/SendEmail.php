@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User\{SettingModel, UserModel};
+use App\Exception\AutorizationException;
 
 class SendEmail
 {
@@ -56,7 +57,7 @@ class SendEmail
     {
         if (config('integration.smtp')) {
 
-            $mailSMTP = new \SmtpMail\SendMailSmtpClass(config('integration.smtp_user'), config('integration.smtp_pass'), 'ssl://' . config('integration.smtp_host'), config('integration.smtp_port'), "UTF-8");
+            $mailSMTP = new SendMailSmtpClass(config('integration.smtp_user'), config('integration.smtp_pass'), 'ssl://' . config('integration.smtp_host'), config('integration.smtp_port'), "UTF-8");
 
             $from = array(
                 config('meta.name'), // Имя отправителя
@@ -68,7 +69,7 @@ class SendEmail
             if ($result === true) {
                 echo "Done";
             } else {
-                echo "Error: " . $result;
+               throw AutorizationException::Smtp("Error - " . $result);
             }
         } else {
             $mail = new \Phphleb\Muller\StandardMail(false);
