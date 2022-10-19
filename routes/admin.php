@@ -41,6 +41,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     
     Route::get('/setting')->module('admin', 'App\Setting', ['settings'])->name('admin.settings.general');
     Route::get('/setting/interface')->module('admin', 'App\Setting', ['interface'])->name('admin.settings.interface');
+    Route::get('/setting/advertising')->module('admin', 'App\Setting', ['advertising'])->name('admin.settings.advertising');
    
     Route::get('/comments/deleted/{page?}')->controller('Comment\CommentController', ['deleted'])->name('comments.deleted');
     

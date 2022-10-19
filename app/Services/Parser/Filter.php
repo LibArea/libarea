@@ -34,6 +34,19 @@ class Filter
         return self::fragment($str, $lenght);
     }
 
+
+    // Content management (Parsedown and Jevix)
+    public static function typograf(string $content)
+    {
+        $jevix = new Jevix();
+
+        // Автозамена
+        $jevix->cfgSetAutoReplace(['+/-', '(c)', '(с)', '(r)', '(C)', '(С)', '(R)'], ['±', '©', '©', '®', '©', '©', '®']);
+
+        $item = [];
+        return $jevix->parse($content, $item);
+    }
+
     public static function fragment(string $text, int $lenght = 150, string $charset = 'UTF-8')
     {
         if (mb_strlen($text, $charset) >= $lenght) {

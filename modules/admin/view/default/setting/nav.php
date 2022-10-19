@@ -12,6 +12,10 @@
         'id'    => 'audits.all',
         'url'   => url('admin.settings.interface'),
         'name'  => __('admin.interface'),
+      ], [
+        'id'    => 'audits.all',
+        'url'   => url('admin.settings.advertising'),
+        'name'  => __('admin.advertising'),
       ]
     ]
   ]

@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace App\Services\Parser;
 
 use App\Services\Parser\Convert;
+use App\Services\Parser\Filter;
 use App\Models\AuditModel;
 use UserData;
 
 class Content
 {
-    // Content management (Parsedown, Typograf)
+    // Content management (Parsedown)
     public static function text(string $content, string $type)
     {
         $text = self::parse($content, $type);
@@ -56,9 +57,7 @@ class Content
         // Use
         $text = $Parsedown->text($content);
 
-        $t = new \Akh\Typograf\Typograf();
-
-        return $t->apply($text);
+        return Filter::Typograf($text);
     }
 
     public static function red($content)

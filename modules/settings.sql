@@ -28,5 +28,14 @@ INSERT INTO `settings` (`val`, `value`) VALUES
 ('all_title', 'LibArea — все посты'),
 ('all_desc', 'Список всех постов в ленте сообщества. Скрипт сообщества LibArea'),
 
+('ads_home_post', ''),
+('ads_home_sidebar', ''),
+('ads_home_menu', ''),
+('ads_post_sidebar', ''),
+('ads_post_footer', ''),
+('ads_post_comment', ''),
+('ads_catalog_home', ''),
+('ads_catalog_cat_sidebar', ''),
+
 ('count_like_feed', 1),
 ('type_post_feed', 'classic');

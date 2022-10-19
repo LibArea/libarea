@@ -58,7 +58,7 @@
         <use xlink:href="/assets/svg/icons.svg#eye"></use>
       </svg>
     </a>
-    <div class="gray-600 mb15"><?= markdown($reply['content'], 'line'); ?></div>
+    <div class="gray-600 mb15 ind-first-p"><?= markdown($reply['content'], 'line'); ?></div>
   </div>
 <?php endforeach; ?>
 </main>
