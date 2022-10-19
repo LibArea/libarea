@@ -329,8 +329,11 @@ article iframe {
   margin: 5px;
 }
 
-.scroll{ overflow-x:auto; }
-.scroll{ scrollbar-width:none; }
+.scroll{
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
 .scroll::-webkit-scrollbar {
   width:0;
   height:0
