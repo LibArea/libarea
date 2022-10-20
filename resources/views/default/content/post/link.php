@@ -1,7 +1,7 @@
 <main>
   <div class="box box-fon">
     <?php if ($data['site']['item_title']) : ?>
-      <div class="right mt15">
+      <div class="right">
         <?= Html::votes($data['site'], 'item'); ?>
       </div>
       <h1 class="text-2xl gray mb-text-xl m0"><?= $data['site']['item_title']; ?>
@@ -18,7 +18,7 @@
       </div>
       <div class="gray mt5 mb5">
         <a class="green" rel="nofollow noreferrer ugc" href="<?= $data['site']['item_url']; ?>">
-          <?= Img::website($data['site']['item_id'], 'favicon', $data['site']['item_domain'], 'favicons'); ?>
+          <?= Img::website($data['site']['item_domain'], 'favicon', $data['site']['item_domain'], 'favicons'); ?>
           <?= $data['site']['item_url']; ?>
         </a>
         <span class="right gray-600"><svg class="icons">
