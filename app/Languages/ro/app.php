@@ -368,6 +368,11 @@ return [
     'notification_email'    => 'Notificare prin e-mail',
     'notifications_limit'   => 'Se afișează ultimele 100 de notificări',
 
+    'ignored'               => 'Ignorat',    
+    'ignored_users'         => 'Utilizatori ignorați',
+    'ignored_users_help'    => 'Utilizatori ale căror postări nu le vei vedea în feed.',
+    'ignored_no'            => 'Nu aveți utilizatori pe care să-i ignorați.', 
+
     /* Уведомления и логи */
     'notif_add_pm'              => 'написал вам {url}личное сообщение{a}',
     'notif_add_comment'         => 'прокомментировал {url}ваш ответ{a}',

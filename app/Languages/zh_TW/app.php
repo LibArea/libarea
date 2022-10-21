@@ -369,6 +369,11 @@ return [
     'notification_email'    => '以电邮通知',
     'notifications_limit'   => '最后100个通知显示',
 
+    'ignored'               => '忽略',  
+    'ignored_users'         => '忽略的用户',
+    'ignored_users_help'    => '您不会在提要中看到其帖子的用户。',
+    'ignored_no'            => '您没有忽略的用户。', 
+
     /* 通知和日志 */
     'notif_add_pm'              => '给你写了一个{url}私信{a}',
     'notif_add_comment'         => '在您的响应{a}上注释{url}',

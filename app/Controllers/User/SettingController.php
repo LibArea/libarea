@@ -5,12 +5,15 @@ namespace App\Controllers\User;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
+use App\Models\IgnoredModel;
 use UploadImage, Meta, UserData, Img;
 
 use App\Validate\RulesUserSetting;
 
 class SettingController extends Controller
 {
+    protected $limit = 25;
+    
     function index()
     {
         switch (Request::get('type')) {
@@ -25,6 +28,9 @@ class SettingController extends Controller
                 break;
             case 'cover_remove':
                 return $this->coverRemove();
+                break;
+            case 'ignored':
+                return $this->ignored();
                 break;
             default:
                 return $this->settingForm();
@@ -188,6 +194,20 @@ class SettingController extends Controller
                 'meta'  => Meta::get(__('app.notifications')),
                 'data'  => [
                     'notif' => SettingModel::getNotifications($this->user['id']),
+                ]
+            ]
+        );
+    }
+
+
+    function ignored()
+    {
+        return $this->render(
+            '/user/setting/ignored',
+            [
+                'meta'  => Meta::get(__('app.ignored')),
+                'data'  => [
+                    'ignored' => IgnoredModel::getIgnoredUsers($this->limit),
                 ]
             ]
         );

@@ -368,6 +368,11 @@ return [
     'notification_email'    => 'Notify by email',
     'notifications_limit'   => 'Showing last 100 notifications',
 
+    'ignored'               => 'Ignored',    
+    'ignored_users'         => 'Ignored users',
+    'ignored_users_help'    => 'Users whose posts you will not see in the feed.',
+    'ignored_no'            => 'You don\'t have users that you ignore.', 
+
     /* Notifications and logs */
     'notif_add_pm'              => 'wrote to you {url}private message{a}',
     'notif_add_comment'         => 'commented {url}your answer{a}',

@@ -33,7 +33,7 @@ INSERT INTO `settings` (`val`, `value`) VALUES
 ('ads_home_menu', ''),
 ('ads_post_sidebar', ''),
 ('ads_post_footer', ''),
-('ads_post_comment', ''),
+('ads_post_answer', ''),
 ('ads_catalog_home', ''),
 ('ads_catalog_cat_sidebar', ''),
 

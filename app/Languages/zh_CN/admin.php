@@ -148,4 +148,13 @@ return [
     'count_like_feed_help'  => '一个帖子应该在网站的中心页面上显示多少个赞',
     'type_post_feed'        => '帖子在提要中的外观',
     'type_post_feed_help'   => '经典或卡片。 如果经典，那么这是一个最小的设计',
+    
+    'ads_home_post'         => '主页，提要，4 个帖子后',
+    'ads_home_sidebar'      => '主页、侧边栏',
+    'ads_home_menu'         => '主页，左侧菜单',
+    'ads_post_sidebar'      => '帖子，侧边栏',
+    'ads_post_footer'       => '发布页脚帖子',
+    'ads_post_answer'       => '发帖，2 次回复后',
+    'ads_catalog_home'      => '目录的主页，在横幅下',
+    'ads_catalog_sidebar'   => '目录侧边栏',
 ];

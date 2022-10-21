@@ -148,4 +148,14 @@ return [
     'count_like_feed_help'  => 'How many likes should a post get to be visible on the central page of the site',
     'type_post_feed'        => 'Appearance of the post in the feed',
     'type_post_feed_help'   => 'Classic or Card. If Classic, then this is a minimal design',
+    
+    'ads_home_post'         => 'Home page, feed, after 4 posts',
+    'ads_home_sidebar'      => 'Home page, sidebar',
+    'ads_home_menu'         => 'Home page, under the left menu',
+    'ads_post_sidebar'      => 'Full post, sidebar',
+    'ads_post_footer'       => 'Full post, post footer',
+    'ads_post_answer'       => 'Full post, after 2 replies',
+    'ads_catalog_home'      => 'Main page of the catalog, under the banner',
+    'ads_catalog_sidebar'   => 'Catalog sidebar',
+    
 ];

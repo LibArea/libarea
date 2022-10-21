@@ -11,7 +11,7 @@ use UserData;
 
 class Content
 {
-    // Content management (Parsedown)
+    // Content management (Parsedown, Typograf)
     public static function text(string $content, string $type)
     {
         $text = self::parse($content, $type);
@@ -57,7 +57,9 @@ class Content
         // Use
         $text = $Parsedown->text($content);
 
-        return Filter::Typograf($text);
+        $t = new \Akh\Typograf\Typograf();
+
+        return $t->apply($text);
     }
 
     public static function red($content)

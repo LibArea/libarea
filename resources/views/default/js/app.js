@@ -115,6 +115,22 @@ document.querySelectorAll(".add-favorite")
       });
   }));
 
+
+// Ignoring members
+document.querySelectorAll(".add-ignore")
+  .forEach(el => el.addEventListener("click", function (e) {
+    fetch("/ignored", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: "user_id=" + el.dataset.id + "&_token=" + token,
+    })
+      .then(response => response.text())
+      .then(text => {
+          location.reload();
+      });
+  }));
+
+
 // Choice of Best Answer  
 document.querySelectorAll(".answer-best")
   .forEach(el => el.addEventListener("click", function (e) {

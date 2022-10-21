@@ -8,7 +8,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Posts on the central page
     // Посты на центральной странице
-    public static function feed($page, $limit, $topics_user, $user, $type)
+    public static function feed($page, $limit, $topics_user, $ignored, $user, $type)
     {
         $result = [];
         foreach ($topics_user as $ind => $row) {
@@ -16,19 +16,20 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         $resultNotUser = [];
+        foreach ($ignored as $ind => $row) {
+            $resultNotUser[$ind] = $row['ignored_id'];
+        }
 
-        $ignoring = "";
+        $ignoring = "post_user_id NOT IN(0) AND";
+        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ") AND";
+
         $string = "";
         if ($type != 'all' && $type != 'top') {
             if (!$user['id']) {
                 $string = "";
-                $ignoring = "";
             } else {
                 $string = "AND relation_facet_id IN(0)";
                 if ($result) $string = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")";
-                
-                $ignoring = "post_user_id NOT IN(0) AND";
-                if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $result ?? []) . ") AND";
             }
         }
  
@@ -88,7 +89,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['uid' => $user['id'], 'uid2' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function feedCount($topics_user, $user, $type)
+    public static function feedCount($topics_user, $ignored, $user, $type)
     {
         $result = [];
         foreach ($topics_user as $ind => $row) {
@@ -96,19 +97,20 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         $resultNotUser = [];
+        foreach ($ignored as $ind => $row) {
+            $resultNotUser[$ind] = $row['ignored_id'];
+        }
 
-        $ignoring = "";
+        $ignoring = "post_user_id NOT IN(0) AND";
+        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ") AND";
+
         $string = "";
         if ($type != 'all' && $type != 'top') {
             if (!$user['id']) {
                 $string = "";
-                $ignoring = "";
             } else {
                 $string = "AND f_id IN(0)";
                 if ($result) $string = "AND f_id IN(" . implode(',', $result ?? []) . ")";
-                
-                $ignoring = "post_user_id NOT IN(0) AND ";
-                if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $result ?? []) . ") AND";
             }
         }
 
@@ -129,8 +131,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                             ON rel.relation_post_id = post_id 
 
             INNER JOIN users ON id = post_user_id
-                WHERE $ignoring post_draft = 0       
-                    $string $display";
+                WHERE $ignoring post_draft = 0 $string $display";
 
         return DB::run($sql)->rowCount();
     }

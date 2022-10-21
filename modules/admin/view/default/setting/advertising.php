@@ -33,8 +33,8 @@ foreach ($data['settings'] as $val)
         <textarea type="ads_post_footer" rows="3" name="ads_post_footer"><?= $settings['ads_post_footer']; ?></textarea>
       </fieldset>
       <fieldset>
-        <label for="ads_post_comment"><?= __('admin.ads_post_comment'); ?></label>
-        <textarea type="ads_post_comment" rows="3" name="ads_post_comment"><?= $settings['ads_post_comment']; ?></textarea>
+        <label for="ads_post_answer"><?= __('admin.ads_post_answer'); ?></label>
+        <textarea type="ads_post_answer" rows="3" name="ads_post_answer"><?= $settings['ads_post_answer']; ?></textarea>
       </fieldset>
 
       <h2><?= __('admin.catalog'); ?></h2>
@@ -43,8 +43,8 @@ foreach ($data['settings'] as $val)
         <textarea type="ads_catalog_home" rows="3" name="ads_catalog_home"><?= $settings['ads_catalog_home']; ?></textarea>
       </fieldset>
       <fieldset>
-        <label for="ads_catalog_cat_sidebar"><?= __('admin.ads_catalog_cat_sidebar'); ?></label>
-        <textarea type="ads_catalog_cat_sidebar" rows="3" name="ads_catalog_cat_sidebar"><?= $settings['ads_catalog_cat_sidebar']; ?></textarea>
+        <label for="ads_catalog_sidebar"><?= __('admin.ads_catalog_sidebar'); ?></label>
+        <textarea type="ads_catalog_sidebar" rows="3" name="ads_catalog_sidebar"><?= $settings['ads_catalog_sidebar']; ?></textarea>
       </fieldset>
 
       <?= Html::sumbit(__('admin.edit')); ?>

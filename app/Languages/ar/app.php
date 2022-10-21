@@ -362,11 +362,16 @@ return [
     'invited_you'           => 'تمت دعوتك بواسطة عضو في هذا الموقع. ادخل الدعوة',
     'invite_features'       => 'يمكنك دعوة الاصدقاء',
 
-    'content_deleted'   => '{name} محذوف',
+    'content_deleted'       => '{name} محذوف',
 
     'endless_scroll'        => 'تفعيل التمرير الى لا نهاية؟',
     'notification_email'    => 'تنبيه بواسطة البريد الالكتروني',
     'notifications_limit'   => 'اظهار 100 اشعار على الاقل',
+
+    'ignored'               => 'تم تجاهله',    
+    'ignored_users'         => 'مستخدمين تم تجاهلهم',
+    'ignored_users_help'    => 'Users whose posts you will not see in the feed.',
+    'ignored_no'            => 'You don\'t have users that you ignore.', 
 
     /* Notifications and logs */
     'notif_add_pm'              => 'ارسل لك {url}رسالة خاصة{a}',

@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
-use App\Models\{FacetModel, FeedModel, AnswerModel, CommentModel, PostModel};
+use App\Models\{FacetModel, FeedModel, AnswerModel, CommentModel, PostModel, IgnoredModel};
 use Meta, UserData;
 
 use App\Traits\Views;
@@ -106,6 +106,7 @@ class ProfileController extends Controller
             'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
             'my_post'       => PostModel::getPost($profile['my_post'], 'id', $this->user),
             'button_pm'     => $this->accessPm($profile['id']),
+            'ignored'       => IgnoredModel::getUserIgnored($profile['id']),
         ];
     }
 

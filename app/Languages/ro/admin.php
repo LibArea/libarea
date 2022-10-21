@@ -148,4 +148,13 @@ return [
     'count_like_feed_help'  => 'Câte aprecieri ar trebui să fie vizibile o postare pe pagina centrală a site-ului',
     'type_post_feed'        => 'Apariția postării în feed',
     'type_post_feed_help'   => 'Clasic sau Card. Dacă este clasic, atunci acesta este un design minimal',
+    
+    'ads_home_post'         => 'Pagina principală, feed, după 4 postări',
+    'ads_home_sidebar'      => 'Pagina de pornire, bară laterală',
+    'ads_home_menu'         => 'Pagina principală, meniul din stânga',
+    'ads_post_sidebar'      => 'Postare, bară laterală',
+    'ads_post_footer'       => 'Postează post de subsol',
+    'ads_post_answer'       => 'Posteaza, dupa 2 raspunsuri',
+    'ads_catalog_home'      => 'Pagina principală a catalogului, sub banner',
+    'ads_catalog_sidebar'   => 'Bara laterală a catalogului',
 ];

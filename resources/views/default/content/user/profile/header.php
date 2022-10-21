@@ -32,6 +32,12 @@ endif;
               </svg>
             </a>
           <?php else : ?>
+            <div class="flex gap-max items-center">
+            <?php $active = $data['ignored'] ? ' red' : ' gray-600'; ?>
+            <a id="ignore_<?= $profile['id']; ?>" class="add-ignore<?= $active; ?>" data-id="<?= $profile['id']; ?>">
+              <svg class="icons"><use xlink:href="/assets/svg/icons.svg#lock"></use></svg></i>
+            </a>    
+
             <?php if ($data['button_pm'] === true) : ?>
               <a class="btn btn-primary" title="<?= __('app.write_message'); ?>" href="<?= url('send.messages', ['login' => $profile['login']]); ?>">
                 <svg class="icons">
@@ -39,6 +45,8 @@ endif;
                 </svg>
               </a>
             <?php endif; ?>
+            </div>
+            
           <?php endif; ?>
         </div>
       <?php endif; ?>

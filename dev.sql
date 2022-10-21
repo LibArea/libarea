@@ -885,6 +885,25 @@ ALTER TABLE `posts_view`
 ALTER TABLE `posts_view`
   MODIFY `view_id` int(11) NOT NULL AUTO_INCREMENT;
 
+
+--
+-- Структура и индексы таблицы `users_ignored`
+--
+
+CREATE TABLE `users_ignored` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `ignored_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `users_ignored`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ignored_id` (`ignored_id`),
+  ADD KEY `user_id` (`user_id`);
+
+ALTER TABLE `users_ignored`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Индексы сохранённых таблиц
 --

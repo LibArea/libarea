@@ -34,17 +34,12 @@ class Filter
         return self::fragment($str, $lenght);
     }
 
-
-    // Content management (Parsedown and Jevix)
-    public static function typograf(string $content)
+    public static function pre($tag, $params, $content)
     {
-        $jevix = new Jevix();
+        $content = htmlspecialchars_decode($content);
 
-        // Автозамена
-        $jevix->cfgSetAutoReplace(['+/-', '(c)', '(с)', '(r)', '(C)', '(С)', '(R)'], ['±', '©', '©', '®', '©', '©', '®']);
 
-        $item = [];
-        return $jevix->parse($content, $item);
+        return '<pre class="lb">' . $content . '</pre>';
     }
 
     public static function fragment(string $text, int $lenght = 150, string $charset = 'UTF-8')
