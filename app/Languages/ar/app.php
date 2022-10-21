@@ -368,10 +368,10 @@ return [
     'notification_email'    => 'تنبيه بواسطة البريد الالكتروني',
     'notifications_limit'   => 'اظهار 100 اشعار على الاقل',
 
-    'ignored'               => 'تم تجاهله',    
+    'ignored'               => 'تم تجاهلهم',    
     'ignored_users'         => 'مستخدمين تم تجاهلهم',
-    'ignored_users_help'    => 'Users whose posts you will not see in the feed.',
-    'ignored_no'            => 'You don\'t have users that you ignore.', 
+    'ignored_users_help'    => '.الاعضاء الذين يقومون بالنشر لن يتم مشاهدة منشوراتهم في التدفق',
+    'ignored_no'            => 'ليس هناك اي اعضاء تم تجاهلهم.', 
 
     /* Notifications and logs */
     'notif_add_pm'              => 'ارسل لك {url}رسالة خاصة{a}',

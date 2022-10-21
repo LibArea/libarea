@@ -26,6 +26,10 @@ return [
       'title' => __('app.notifications'),
       'id'    => 'notifications',
       // 'css'    => 'mb-none',
+    ], [
+      'url'   => '/setting/ignored',
+      'title' => __('app.ignored'),
+      'id'    => 'ignored',
     ],
   ],
 
