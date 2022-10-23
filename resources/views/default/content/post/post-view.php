@@ -172,9 +172,9 @@
   <div id="comment"></div>
   <?php if ($post['post_draft'] == 0) :
     if ($post['post_feature'] == 0) :
-      insert('/_block/comments-view', ['data' => $data, 'post' => $post]);
+      insert('/content/post/tree-view', ['data' => $data, 'post' => $post]);
     else :
-      insert('/_block/questions-view', ['data' => $data, 'post' => $post]);
+      insert('/content/post/tape-view', ['data' => $data, 'post' => $post]);
     endif;
   else :
     echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);

@@ -28,7 +28,7 @@ class EditAnswerController extends Controller
         self::error404($post);
 
         return $this->render(
-            '/answer/edit-answer',
+            '/answer/edit',
             [
                 'meta'  => Meta::get(__('app.edit_answer')),
                 'data'  => [
