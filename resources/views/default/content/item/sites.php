@@ -2,20 +2,22 @@
   <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]); 
       $grouping = Request::get('grouping');
   ?>
-  <div class="right mr20"><?= insert('/content/item/characteristics', ['data' => $data, 'grouping' => $grouping]); ?></div>
-  <h1 class="m0">
+  <div class="right"><?= insert('/content/item/characteristics', ['data' => $data, 'grouping' => $grouping]); ?></div>
+  <h1 class="m0 flex gap">
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) : ?>
-      <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
+      <div class="flex gap">
+      <a class="text-sm" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
         <sup><svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#edit"></use>
           </svg></sup>
       </a>
-      <a class="text-sm ml15" href="<?= url('admin.facets.type', ['type' => 'category']); ?>">
+      <a class="text-sm" href="<?= url('admin.facets.type', ['type' => 'category']); ?>">
         <sup class="gray-600"><svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#tool"></use>
           </svg></sup>
       </a>
+      </div>
     <?php endif; ?>
   </h1>
 </div>

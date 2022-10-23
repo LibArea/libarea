@@ -12,8 +12,8 @@
             <a target="_blank" class="item_cleek" rel="nofollow noreferrer ugc" data-id="<?= $item['item_id']; ?>" href="<?= $item['item_url']; ?>">
               <h3 class="title"><?= $item['item_title']; ?></h3>
             </a>
-            <div class="content">
-              <div class="list-items__thumb mb-none">
+            <div class="flex gap">
+              <div class="mb-none">
                 <?= Img::website($item['item_domain'], 'thumbs', $item['item_title'], 'list-items__thumb-image'); ?>
               </div>
               <div class="list-items__description">

@@ -8,7 +8,7 @@ use Hleb\Constructor\Handlers\Request; ?>
 
 <body class="item<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?>">
   <header>
-    <div class="page-search mb-p10">
+    <div class="page-search gap mb-p10">
       <a class="item-logo mb-none" href="<?= url('web'); ?>">
         <?= __('web.catalog'); ?>
       </a>

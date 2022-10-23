@@ -23,7 +23,7 @@ $domain = $data['domain']; ?>
       </fieldset>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <div class="list-items__thumb mb-none img-preview">
+        <div class="mb-none img-preview">
           <?= Img::website($domain['item_domain'], 'thumbs', $domain['item_title'], 'list-items__thumb-image'); ?>
         </div>
         <div class="add-screenshot text-sm sky" data-id="<?= $domain['item_id']; ?>">+ screenshot</div>

@@ -216,14 +216,14 @@
     <div class="box sticky top-sm">
       <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
       <?php foreach ($data['recommend'] as  $rec_post) : ?>
-        <div class="mb15 hidden flex text-sm">
+        <div class="mb15 hidden flex gap text-sm">
           <a class="gray" href="<?= url('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?php if ($rec_post['post_answers_count'] > 0) : ?>
-              <div class="p5-10 bg-green br-rd3 white center mr15">
+              <div class="p5-10 bg-green br-rd3 white center">
                 <?= $rec_post['post_answers_count'] ?>
               </div>
             <?php else : ?>
-              <div class="p5-10 bg-lightgray br-rd3 gray center mr15">0</div>
+              <div class="p5-10 bg-lightgray br-rd3 gray center">0</div>
             <?php endif; ?>
           </a>
           <a class="black" href="<?= url('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">

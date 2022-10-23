@@ -8,8 +8,8 @@
             <?php $date = date_diff(new DateTime(), new DateTime($item['item_date']))->days; ?>
             <?php if ($date < 3) : ?><sup class="red text-sm">new</sup><?php endif; ?></h3>
         </a>
-        <div class="content">
-          <div class="list-items__thumb mb-none img-preview">
+        <div class="flex gap">
+          <div class="mb-none img-preview">
             <?= Img::website($item['item_domain'], 'thumbs', $item['item_title'], 'list-items__thumb-image'); ?>
           </div>
           <div class="list-items__description">

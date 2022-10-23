@@ -10,7 +10,7 @@
             <?= Img::facets($item['facet_list'], 'category', 'tag mr15', $screening); ?>
           </h3>
         </a>
-        <div class="content">
+        <div class="flex gap">
           <div class="list-items__description">
             <?php if (!empty($delete_fav)) : ?>
               <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="website">

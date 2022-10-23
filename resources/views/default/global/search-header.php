@@ -11,7 +11,7 @@ $q = $data['q'];
 
 <body <?php if (Request::getCookie('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
   <header>
-    <div class="page-search mb-p10">
+    <div class="page-search gap mb-p10">
       <a class="item-logo mb-none" href="<?= url('search'); ?>">
         <?= __('search.name'); ?>
       </a>
