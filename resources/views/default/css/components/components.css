@@ -138,6 +138,14 @@ h5 {
 .d-header.choices.show .box-search { display: none; }
 /* end */
 
+.cut-off {
+  width: 55%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 .page-search__input {
   width: 100%;
   border-radius: 3px;
@@ -323,8 +331,8 @@ article iframe {
 }
 
 .scroll{
-  overflow-x:auto;
-  scrollbar-width:none;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
 .scroll::-webkit-scrollbar {
