@@ -4,12 +4,14 @@
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
     <div title="<?= __('app.post_appearance'); ?>" id="postmenu" class="m5">
-      <svg class="icons pointer gray-600"><use xlink:href="/assets/svg/icons.svg#grid"></use></svg>
+      <svg class="icons pointer gray-600">
+        <use xlink:href="/assets/svg/icons.svg#grid"></use>
+      </svg>
     </div>
   </div>
-  
+
   <?= insert('/content/post/type-post', ['data' => $data]); ?>
-  
+
   <?php if (UserData::getUserScroll()) : ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>
@@ -29,21 +31,19 @@
     <?php if (count($data['topics']) > 0) : ?>
       <div class="box bg-lightgray">
         <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
-        <ul>
-          <?php foreach ($data['topics'] as $recomm) : ?>
-            <li class="mt15">
-              <a href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
-                <?= Img::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
-                <?= $recomm['facet_title']; ?>
-              </a>
-              <?php if (UserData::getUserId()) : ?>
-                <div data-id="<?= $recomm['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center mt5 mr5">
-                  <?= __('app.read'); ?>
-                </div>
-              <?php endif; ?>
-            </li>
-          <?php endforeach; ?>
-        </ul>
+        <?php foreach ($data['topics'] as $recomm) : ?>
+          <div class="flex justify-between items-center mb10">
+            <a href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
+              <?= Img::image($recomm['facet_img'], $recomm['facet_title'], 'img-base', 'logo', 'max'); ?>
+              <?= $recomm['facet_title']; ?>
+            </a>
+            <?php if (UserData::getUserId()) : ?>
+              <div data-id="<?= $recomm['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center">
+                <?= __('app.read'); ?>
+              </div>
+            <?php endif; ?>
+          </div>
+        <?php endforeach; ?>
       </div>
     <?php endif; ?>
   <?php endif; ?>

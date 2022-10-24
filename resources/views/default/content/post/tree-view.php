@@ -176,7 +176,7 @@
 
                 <?php if (Access::author('comment', $comment, 30) === true) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
-                    <?= __('app.edit'); ?> 
+                    <?= __('app.edit'); ?>
                   </a>
                 <?php endif; ?>
                 <?php if (UserData::checkAdmin()) : ?>

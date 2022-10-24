@@ -315,13 +315,6 @@ article iframe {
   padding: 0.24rem 0;
 }
 
-.qa-comment-ml {
-  color: var(--gray-600);
-  text-transform: lowercase;
-}
-
-.qa-comment-ml > a { padding: 0 0 0 0.8rem; }
-
 .showPassword {
   position: absolute;
   color: var(--gray-600);

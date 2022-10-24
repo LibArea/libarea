@@ -185,17 +185,20 @@
     <div class="box bg-lightgray">
       <h4 class="uppercase-box"><?= __('app.topics'); ?></h4>
       <?php foreach ($data['facets'] as $topic) : ?>
-        <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+        <div class="flex justify-between items-center">
+           <div>
+           <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+          <a title="<?= $topic['facet_title']; ?>" class="black text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
+            <?= $topic['facet_title']; ?>
+          </a>
+            </div>
+          <?php if (!$topic['signed_facet_id'] && UserData::getUserId()) : ?>
+            <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red">
+              <?= __('app.read'); ?>
+            </div>
+          <?php endif; ?>
+        </div>  
 
-        <?php if (!$topic['signed_facet_id'] && UserData::getUserId()) : ?>
-          <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center mt5 mr5">
-            <?= __('app.read'); ?>
-          </div>
-        <?php endif; ?>
-
-        <a title="<?= $topic['facet_title']; ?>" class="black text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-          <?= $topic['facet_title']; ?>
-        </a>
 
         <div class="text-sm gray-600">
           <?= $topic['facet_short_description']; ?>

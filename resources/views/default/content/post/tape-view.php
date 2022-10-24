@@ -12,7 +12,7 @@
           <?php endif; ?>
         <?php endif; ?>
 
-        <?php if($answer['answer_lo']) : ?>
+        <?php if ($answer['answer_lo']) : ?>
           <div title="<?= __('app.best_answer'); ?>" class="red right text-2xl p5">✓</div>
         <?php endif; ?>
 
@@ -81,45 +81,44 @@
             <li class="content_tree br-li-bottom-no br-bottom ml15" id="comment_<?= $comment['comment_id']; ?>">
               <div class="qa-comment">
                 <?= fragment($comment['comment_content'], 1500); ?>
-                <span class="qa-comment-footer">
+                <span class="flex gap">
                   — <a class="brown" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
-                  <span class="qa-comment-ml">
-                    <?= Html::langDate($comment['comment_date']); ?>
 
-                    <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
-                      <?php if ($post['post_closed'] == 0) : ?>
-                        <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                          <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600">
-                            <?= __('app.reply'); ?>
-                          </a>
-                        <?php endif; ?>
+                  <span class="lowercase gray-600"><?= Html::langDate($comment['comment_date']); ?></span>
+
+                  <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
+                    <?php if ($post['post_closed'] == 0) : ?>
+                      <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+                        <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600">
+                          <?= __('app.reply'); ?>
+                        </a>
                       <?php endif; ?>
                     <?php endif; ?>
+                  <?php endif; ?>
 
-                    <?php if (Access::author('comment', $comment, 30) === true) : ?>
-                      <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
-                        <svg class="icons">
-                          <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                        </svg>
-                      </a>
-                    <?php endif; ?>
+                  <?php if (Access::author('comment', $comment, 30) === true) : ?>
+                    <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
+                      <svg class="icons">
+                        <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                      </svg>
+                    </a>
+                  <?php endif; ?>
 
-                    <?php if (UserData::checkAdmin()) : ?>
-                      <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
-                        <svg class="icons">
-                          <use xlink:href="/assets/svg/icons.svg#trash"></use>
-                        </svg>
-                      </a>
-                    <?php endif; ?>
+                  <?php if (UserData::checkAdmin()) : ?>
+                    <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
+                      <svg class="icons">
+                        <use xlink:href="/assets/svg/icons.svg#trash"></use>
+                      </svg>
+                    </a>
+                  <?php endif; ?>
 
-                    <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
-                      <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
-                        <svg class="icons">
-                          <use xlink:href="/assets/svg/icons.svg#flag"></use>
-                        </svg>
-                      </a>
-                    <?php endif; ?>
-                  </span>
+                  <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
+                    <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
+                      <svg class="icons">
+                        <use xlink:href="/assets/svg/icons.svg#flag"></use>
+                      </svg>
+                    </a>
+                  <?php endif; ?>
               </div>
               <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>
             </li>
@@ -140,7 +139,7 @@
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
-      <hr>  
+      <hr>
       <form class="mb15 mt15" action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
         <?= insert('/_block/form/editor', [
