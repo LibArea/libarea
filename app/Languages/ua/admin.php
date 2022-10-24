@@ -104,7 +104,7 @@ return [
     'query'             => 'Запрос',
     'test_email'        => 'Тестирование системы обмена сообщениями',
     'not_activ_email'   => 'Не активирован Email',
-    
+
     'tl0_title'         => 'Посетитель',
     'tl1_title'         => 'Пользователь',
     'tl2_title'         => 'Участник',
@@ -116,12 +116,12 @@ return [
     'deleted'           => 'Удален',
     'added'             => 'Добавлен',
     'restored'          => 'Восстановлен',
-    
+
     // Settings section
     // Раздел настройки
-    'settings'              => 'Налаштування',
-    'interface'             => 'Інтерфейс',
-    'functions'             => 'Функції',
+    'settings'              => 'Настройки',
+    'interface'             => 'Интерфейс',
+    'functions'             => 'Функции',
     
     'url_help'              => 'URL сайта (с https)',
     'email_help'            => 'Публичный Email для связи',
@@ -147,7 +147,7 @@ return [
     'count_like_feed'       => 'Количество лайков для feed',
     'count_like_feed_help'  => 'Сколько лайков должен набрать пост, чтобы был виден на центральной странице сайта',
     'type_post_feed'        => 'Внешний вид поста в ленте',
-    'type_post_feed_help'   => 'classic или card. Если classic, то это минимальный дизайн',
+    'type_post_feed_help'   => 'Classic или Card. Если Classic, то это минимальный дизайн',
     
     'ads_home_post'         => 'Главная страница, лента, после 4 поста',
     'ads_home_sidebar'      => 'Главная страница, боковая колонка',

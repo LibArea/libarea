@@ -10,10 +10,10 @@
 
 return [
     'opss'                  => 'Opss',
-    'enter'                 => 'Введите',
+    'enter'                 => 'Введіть',
     'email'                 => 'Email',
     'password'              => 'Пароль',
-    'sign_in'               => 'Войти',
-    'enter_password'        => 'Введите пароль',
-    'under_reconstruction'  => 'Сайт на реконструкции. Вход только для персонала.',
+    'sign_in'               => 'Увійти',
+    'enter_password'        => 'Введіть пароль',
+    'under_reconstruction'  => 'Сайт на реконструкції. Вхід лише для персоналу.',
 ];
