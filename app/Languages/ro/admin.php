@@ -14,7 +14,6 @@ return [
     'number'            => 'Cantitate',
     'website'           => 'Site-ul web',
     'being_developed'   => 'In dezvoltare',
-    'schemas'           => 'Sistem',
     'pages'             => 'Pagini',
     'advertising'       => 'Publicitate',
     'facets'            => 'Fațete',

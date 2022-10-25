@@ -14,7 +14,6 @@ return [
     'number'            => 'Quantity',
     'website'           => 'Website',
     'being_developed'   => 'Being developed',
-    'schemas'           => 'Scheme',
     'pages'             => 'Pages',
     'advertising'       => 'Advertising',
     'facets'            => 'Facets',

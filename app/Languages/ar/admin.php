@@ -14,7 +14,6 @@ return [
     'number'            => 'الكمية',
     'website'           => 'الموقع الالكتروني',
     'being_developed'   => 'قيد التطوير',
-    'schemas'           => 'مخطط',
     'pages'             => 'صفحات',
     'advertising'       => 'أعلانات',
     'facets'            => 'جوانب',

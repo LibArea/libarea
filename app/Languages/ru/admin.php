@@ -14,7 +14,6 @@ return [
     'number'            => 'Количество',
     'website'           => 'Сайт',
     'being_developed'   => 'В стадии разработки',
-    'schemas'           => 'Схемы',
     'pages'             => 'Страницы',
     'advertising'       => 'Реклама',
     'facets'            => 'Фасеты',
