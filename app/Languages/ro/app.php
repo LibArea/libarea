@@ -373,19 +373,19 @@ return [
     'ignored_users_help'    => 'Utilizatori ale căror postări nu le vei vedea în feed.',
     'ignored_no'            => 'Nu aveți utilizatori pe care să-i ignorați.', 
 
-    /* Уведомления и логи */
-    'notif_add_pm'              => 'написал вам {url}личное сообщение{a}',
-    'notif_add_comment'         => 'прокомментировал {url}ваш ответ{a}',
-    'notif_add_comment_comment' => 'ответил на {url}ваш комментарий{a}',
-    'notif_add_answer'          => 'ответил на {url}ваш пост{a}',
-    'notif_add_flag'            => 'поступила {url}жалоба{a}',
-    'notif_add_audit'           => 'требуется {url}аудит контента{a}',
-    'notif_references_post'     => 'упомянул вас в {url}посте{a}',
-    'notif_references_amswer'   => 'упомянул вас в {url}ответе{a}',
-    'notif_references_comment'  => 'упомянул вас в {url}комментарии{a}',
-    'notif_add_website'         => 'добавил сайт {url}посмотрите его{a}',
-    'notif_edit_website'        => 'изменил сайт, {url}проверьте его{a}',
-    'notif_approved_website'    => '(модератор) {url}изменил (утвердил) ваш сайт{a}',
-    'notif_add_website_comment' => '{url}прокомментировал сайт{a} на который вы подписались',
+    /* Notificări */
+    'notif_add_pm'              => 'ți-a trimis un {url}mesaj privat{a}',
+    'notif_add_comment'         => 'a comentat {url}răspunsul tău{a}',
+    'notif_add_comment_comment' => 'a răspuns la {url}comentarul tău{a}',
+    'notif_add_answer'          => 'a răspuns la {url}postarea ta{a}',
+    'notif_add_flag'            => 'a primit {url}reclamație{a}',
+    'notif_add_audit'           => '{url}auditul de conținut este necesar{a}',
+    'notif_references_post'     => 'te-a menționat în {url}postare{a}',
+    'notif_references_amswer'   => 'te-a menționat în {url}răspuns{a}',
+    'notif_references_comment'  => 'te-a menționat în {url}comentarii{a}',
+    'notif_add_website'         => 'site adăugat {url}vezi-l{a}',
+    'notif_edit_website'        => 'site-ul schimbat, {url}verificați-l{a}',
+    'notif_approved_website'    => '(moderator) {url}a schimbat (a aprobat) site-ul dvs. web{a}',
+    'notif_add_website_comment' => '{url}a comentat pe site-ul{a} la care v-ați abonat',
 
 ];
