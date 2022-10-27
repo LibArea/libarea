@@ -1,10 +1,13 @@
   <div class="mt5 tabs-post">
     <div class="mb15">
       <ul class="nav small">
-        <li class="tab-button active" data-id="post"><?= __('app.post'); ?></li>
+       
+        <?php if (config('general.qa_site_format') == false) : ?>
+          <li class="tab-button active" data-id="post"><?= __('app.post'); ?></li>
+        <?php endif; ?>
 
         <?php if (UserData::getUserTl() >= config('trust-levels.tl_add_comm_qa')) : ?>
-          <li class="tab-button" data-id="qa"><?= __('app.qa'); ?></li>
+          <li class="tab-button<?php if (config('general.qa_site_format') == true) : ?> active<?php endif; ?>" data-id="qa"><?= __('app.qa'); ?></li>
         <?php endif; ?>
 
         <?php if (UserData::getUserTl() >= config('trust-levels.tl_add_url')) : ?>
@@ -31,6 +34,7 @@
       ]); ?>
     <?php endif; ?>
 
+    <?php if (config('general.qa_site_format') == false) : ?>
     <div class="last-content content-tabs active" id="post">
       <div class="file-upload" id="file-drag">
         <div class="flex gap mb15">
@@ -81,8 +85,10 @@
         </fieldset>
       <?php endif; ?>
     </div>
+    <?php endif; ?>
 
-    <div class="last-content content-tabs" id="qa">
+
+    <div class="last-content content-tabs<?php if (config('general.qa_site_format') == true) : ?> active<?php endif; ?>" id="qa">
       <div class="mb5"><?= __('app.text'); ?> Q&A <sup class="red">*</sup></div>
       <textarea name="content_qa"></textarea>
       <div class="help"><?= __('app.necessarily'); ?></div>

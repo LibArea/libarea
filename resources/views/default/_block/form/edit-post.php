@@ -77,9 +77,17 @@
 <?php if ($post['post_type'] == 'post') : ?>
   <?= insert('/_block/form/content-tl', ['data' => $post['post_tl']]); ?>
 
-  <fieldset>
-    <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>
-  </fieldset>
+    <?php if (config('general.qa_site_format') == true) : ?>
+        <?php if (UserData::checkAdmin()) : ?>
+          <fieldset>
+            <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>
+          </fieldset>
+        <?php endif; ?>
+    <?php else : ?>
+      <fieldset>
+        <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>
+      </fieldset>
+    <?php endif; ?>
 
   <fieldset>
     <input type="checkbox" name="closed" <?php if ($post['post_closed'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_closed'); ?>

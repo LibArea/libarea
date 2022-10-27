@@ -104,12 +104,14 @@ class EditPostController extends Controller
             }
         }
 
+        $post_feature = config('general.qa_site_format') === true ? 'on' : Request::getPost('post_feature');
+
         PostModel::editPost(
             [
                 'post_id'               => $post_id,
                 'post_title'            => $title,
                 'post_slug'             => $slug ?? $post['post_slug'],
-                'post_feature'          => Request::getPost('post_feature') == 'on' ? 1 : 0,
+                'post_feature'          => $post_feature == 'on' ? 1 : 0,
                 'post_type'             => $new_type,
                 'post_translation'      => Request::getPost('translation') == 'on' ? 1 : 0,
                 'post_date'             => $post_date,

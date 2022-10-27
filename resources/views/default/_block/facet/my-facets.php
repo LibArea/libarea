@@ -28,20 +28,20 @@
             $url = url('blog', ['slug' => $topic['facet_slug']]);
           endif;
         ?>
-          <li class="mt15 flex items-center justify-between">
-            <a href="<?= $url; ?>">
-              <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+          <li class="mt15 flex gap items-center justify-between">
+            <a class="flex gap-min items-center" href="<?= $url; ?>">
+              <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
               <span class="middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
             </a>
             <?php if ($topic['facet_type'] == 'topic') : ?>
-              <a class="gray-600 bg-white mt5" title="<?= __('app.add_post'); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+              <a class="gray-600 bg-white" title="<?= __('app.add_post'); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
                 <svg class="icons">
                   <use xlink:href="/assets/svg/icons.svg#plus"></use>
                 </svg>
               </a>
             <?php else : ?>
               <?php if (UserData::getUserId() == $topic['facet_user_id']) : ?>
-                <a class="gray-600 bg-white mt5" title="<?= __('app.add_post'); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
+                <a class="gray-600 bg-white" title="<?= __('app.add_post'); ?>" href="<?= url('content.add', ['type' => 'post']); ?>/<?= $topic['facet_id']; ?>">
                   <svg class="icons">
                     <use xlink:href="/assets/svg/icons.svg#plus"></use>
                   </svg>
