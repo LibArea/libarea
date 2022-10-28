@@ -81,7 +81,7 @@
             <li class="content_tree br-li-bottom-no br-bottom ml15" id="comment_<?= $comment['comment_id']; ?>">
               <div class="qa-comment">
                 <?= fragment($comment['comment_content'], 1500); ?>
-                <span class="flex gap">
+                <span class="flex inline gap">
                   — <a class="brown" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
 
                   <span class="lowercase gray-600"><?= Html::langDate($comment['comment_date']); ?></span>
