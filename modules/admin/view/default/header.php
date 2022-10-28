@@ -41,12 +41,13 @@ Request::getHead()->addStyles('/assets/css/style.css?21');
             </svg>
             <span class="mb-none middle text-sm"><?= __('admin.tools'); ?></span>
           </a>
+          <!-- Hide so as not to embarrass
           <a class="<?= is_current(url('admin.settings.general')) ? ' active' : ' gray-600'; ?> mb-none" href="<?= url('admin.settings.general'); ?>">
             <svg class="icons mr5">
               <use xlink:href="/assets/svg/icons.svg#settings"></use>
             </svg>
             <span class="mb-none middle text-sm"><?= __('admin.settings'); ?></span>
-          </a>
+          </a> -->
         </div>
         <div class="mb-block">
           <span class="mb-none gray-600"><?= Request::getRemoteAddress(); ?></span>

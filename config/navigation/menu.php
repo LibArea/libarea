@@ -108,12 +108,14 @@ return [
     // Menu in the admin panel    
     // Меню в админ-панели    
     'admin' => [
+      /* Hide so as not to embarrass
         [
             'url'   => url('admin.settings.general'),
             'title' => __('admin.settings'),
             'icon'  => 'settings',
             'id'    => 'settings',
-        ], [
+        ], */
+        [
             'url'   => url('admin.logs'),
             'title' => __('admin.logs'),
             'icon'  => 'activity',
