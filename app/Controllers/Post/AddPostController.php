@@ -92,6 +92,8 @@ class AddPostController extends Controller
         $closed = $fields['closed'] ?? false;
         $top = $fields['top'] ?? false;
 
+        $post_feature = config('general.qa_site_format') === true ? 1 : Request::getPostInt('post_feature');
+
         $last_id = PostModel::create(
             [
                 'post_title'            => $fields['post_title'],
@@ -100,7 +102,7 @@ class AddPostController extends Controller
                 'post_thumb_img'        => $site['og_img'] ?? '',
                 'post_related'          => $post_related  ?? '',
                 'post_slug'             => $slug,
-                'post_feature'          => Request::getPostInt('post_feature'),
+                'post_feature'          => $post_feature,
                 'post_type'             => $type,
                 'post_translation'      => $translation == 'on' ? 1 : 0,
                 'post_draft'            => $post_draft == 'on' ? 1 : 0,
@@ -109,7 +111,7 @@ class AddPostController extends Controller
                 'post_user_id'          => $this->user['id'],
                 'post_url'              => $post_url ?? '',
                 'post_url_domain'       => $site['post_url_domain'] ?? '',
-                'post_tl'               => $fields['content_tl'],
+                'post_tl'               => $fields['content_tl'] ?? 0,
                 'post_closed'           => $closed == 'on' ? 1 : 0,
                 'post_top'              => $top == 'on' ? 1 : 0,
             ]
