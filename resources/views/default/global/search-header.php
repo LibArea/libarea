@@ -33,7 +33,7 @@ $q = $data['q'];
                   </li>
           </ul>
 
-          <div class="flex right gap-max items-center">
+          <div class="flex right gap-max items-center mb5">
             <div id="toggledark" class="header-menu-item mb-none only-icon">
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
@@ -50,11 +50,11 @@ $q = $data['q'];
               </a>
             <?php else : ?>
               <div class="relative">
-                <div class="trigger mr5">
-                  <?= UserData::getUserLogin(); ?>
+                <div class="trigger pointer">
+                  <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
                 </div>
-                <ul class="dropdown">
-                  <?= insert('/_block/navigation/menu', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>
+                <ul class="dropdown user">
+                  <?= insert('/_block/navigation/menu-user', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>
                 </ul>
               </div>
             <?php endif; ?>

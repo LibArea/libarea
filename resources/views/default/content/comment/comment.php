@@ -4,7 +4,6 @@ foreach ($comments as $comment) :
   <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
 
   <?php if (!empty($comment['answer_id'])) : ?>
-
     <div class="gray-600">
       <div class="flex justify-between gap">
         <div class="flex gap">
@@ -22,8 +21,7 @@ foreach ($comments as $comment) :
       <div class="cut-post black"><?= markdown($comment['answer_content']); ?></div>
     </div>
   <?php else : ?>
-
-    <div class="gray">
+    <div class="gray-600">
       <div class="flex justify-between gap">
         <div class="flex gap">
           <a class="gray-600 flex gap-min" href="<?= url('profile', ['login' => $comment['login']]); ?>">

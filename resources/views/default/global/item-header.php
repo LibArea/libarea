@@ -13,14 +13,14 @@ use Hleb\Constructor\Handlers\Request; ?>
         <?= __('web.catalog'); ?>
       </a>
       <div class="w-100">
-        <div data-template="one" id="fing">
-          <a class="flex left items-center gap-min gray mb5" href="/">
+        <div class="flex justify-between items-center" data-template="one" id="fing">
+          <a class="flex left items-center gap-min gray" href="/">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#home"></use>
             </svg>
             <?= __('web.on_website'); ?>
           </a>
-          <div class="flex right items-center gap-max">
+          <div class="flex right items-center gap-max mb5">
             <a id="toggledark" class="header-menu-item gray-600 mb-none">
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
@@ -47,8 +47,8 @@ use Hleb\Constructor\Handlers\Request; ?>
                 </div>
               <?php endif; ?>
               <div class="relative">
-                <div class="trigger mr5">
-                  <?= UserData::getUserLogin(); ?>
+                <div class="trigger pointer">
+                  <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
                 </div>
                 <ul class="dropdown user">
                   <?= insert('/_block/navigation/menu-user', ['type' => 'dir', 'list' => config('navigation/menu.user')]); ?>

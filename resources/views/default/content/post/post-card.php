@@ -12,15 +12,15 @@ use Hleb\Constructor\Handlers\Request; ?>
 
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="box box-fon article_<?= $post['post_id']; ?>">
-      <div class="flex items-center text-sm mb5">
-        <a class="black flex items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
+      <div class="flex items-center gap-min text-sm mb5">
+        <a class="gray-600 flex items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'max'); ?>
           <span<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> class="green" <?php endif; ?>>
             <?= $post['login']; ?>
             </span>
         </a>
-        <div class="gray-600 ml5 lowercase"><?= Html::langDate($post['post_date']); ?></div>
-        <?= Img::facets($post['facet_list'], 'blog', 'brown ml10'); ?>
+        <div class="gray-600 lowercase"><?= Html::langDate($post['post_date']); ?></div>
+        <?= Img::facets($post['facet_list'], 'blog', 'brown'); ?>
       </div>
       <div class="mb15">
         <a class="black" href="<?= $post_url; ?>">
