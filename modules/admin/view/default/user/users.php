@@ -25,7 +25,7 @@
       <th><?= __('admin.information'); ?></th>
       <th class="center">IP <?= __('admin.registrations'); ?></th>
       <th class="right"><?= __('admin.last'); ?></th>
-      <th class="center">Ban</th>
+      <th class="center"><?= __('admin.action'); ?></th>
       <th class="center"><?= __('admin.edit'); ?></th>
     </thead>
     <?php foreach ($data['alluser'] as $user) :  ?>
