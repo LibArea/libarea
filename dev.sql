@@ -618,7 +618,7 @@ CREATE TABLE `users` (
   `activated` tinyint(1) DEFAULT 0,
   `limiting_mode` tinyint(1) DEFAULT 0,
   `reg_ip` varchar(45) DEFAULT NULL,
-  `trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
+  `trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 1 (10 - админ)',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
   `invitation_available` int(11) NOT NULL DEFAULT 0,
