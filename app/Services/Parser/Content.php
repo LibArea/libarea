@@ -47,15 +47,7 @@ class Content
             return [];
         };
 
-        $Parsedown->abbreviationData = [
-            'CSS' => 'Cascading Style Sheet',
-            'HTML' => 'Hyper Text Markup Language',
-            'JS' => 'JavaScript',
-            'HLEB' => 'PHP Framework',
-            'JavaScript' => 'Programming language',
-            'SEO' => 'Search engine optimization',
-            'Markdown' => 'Lightweight markup language',
-        ];
+        $Parsedown->abbreviationData = __('abbreviations.words');
 
         // Use
         $text = $Parsedown->text($content);
