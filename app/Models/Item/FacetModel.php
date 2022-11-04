@@ -12,8 +12,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     {
         // Except for the staff and if it is not allowed in the catalog
         // Кроме персонала и если он не разрешен в каталоге
-        $display = "facet_is_deleted = 0 AND";
-        if ($trust_level == 10) $display = "";
+        $display = 'facet_is_deleted = 0 AND';
+        if ($trust_level == 10) $display = '';
 
         $sort = "facet_id = :params";
         if ($name == 'slug') $sort = "facet_slug = :params";
@@ -39,7 +39,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_focus_count,
                     facet_count,
                     facet_is_deleted
-                        FROM facets WHERE $display $sort";
+                        FROM facets WHERE facet_type='category' AND $display $sort";
 
         return DB::run($sql, ['params' => $params])->fetch();
     }

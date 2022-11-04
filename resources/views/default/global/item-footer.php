@@ -1,5 +1,7 @@
 <footer class="footer box-shadow-top bg-lightgray">
-  <?= config('meta.name'); ?> &copy; <?= date('Y'); ?> — <span class="lowercase"><?= __('web.main_title'); ?></span>
+  <div class="m10">
+    <?= config('meta.name'); ?> &copy; <?= date('Y'); ?> — <span class="lowercase"><?= __('web.main_title'); ?></span>
+  </div>
 </footer>
 
 <?= insert('/scripts'); ?>
