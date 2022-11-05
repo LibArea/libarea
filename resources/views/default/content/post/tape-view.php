@@ -37,11 +37,9 @@
                   <?php endif; ?>
 
                   <?php if (Access::author('answer', $answer, 30) === true) : ?>
-                    <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
-                      <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                        <?= __('app.edit'); ?>
-                      </a>
-                    <?php endif; ?>
+                    <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                      <?= __('app.edit'); ?>
+                    </a>
                   <?php endif; ?>
 
                   <?php if (UserData::checkAdmin()) : ?>
@@ -80,9 +78,11 @@
           <?php if ($comment['comment_is_deleted'] == 0) : ?>
             <li class="content_tree br-li-bottom-no br-bottom ml15" id="comment_<?= $comment['comment_id']; ?>">
               <div class="qa-comment">
-                <?= fragment($comment['comment_content'], 1500); ?>
-                <span class="flex inline gap">
-                  — <a class="brown" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
+               <div class="flex gap-min">
+                <?= fragment($comment['comment_content'], 1500); ?> 
+                <div class="gray-600"> — </div>
+                <div class="flex gap">
+                  <a class="brown" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
 
                   <span class="lowercase gray-600"><?= Html::langDate($comment['comment_date']); ?></span>
 
@@ -119,6 +119,7 @@
                       </svg>
                     </a>
                   <?php endif; ?>
+              </div>
               </div>
               <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>
             </li>
