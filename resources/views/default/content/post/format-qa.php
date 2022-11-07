@@ -5,7 +5,10 @@
     </h2>
 
     <?php foreach ($data['answers'] as  $answer) : ?>
-      <div class="block-answer br-bottom">
+    
+      <?php if ($answer['answer_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
+    
+      <div class="block-answer br-bottom<?php if ($answer['answer_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
         <?php if ($post['amount_content'] > 1) : ?>
           <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
             <div id="best_<?= $answer['answer_id']; ?>" data-id="<?= $answer['answer_id']; ?>" class="answer-best right gray-600 p5">+!</div>
@@ -16,7 +19,6 @@
           <div title="<?= __('app.best_answer'); ?>" class="red right text-2xl p5">✓</div>
         <?php endif; ?>
 
-        <?php if ($answer['answer_is_deleted'] == 0) : ?>
           <?php if (UserData::getUserId() == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
           <div class="br-top-dotted mb5"></div>
           <ol class="list-none">
@@ -44,7 +46,7 @@
 
                   <?php if (UserData::checkAdmin()) : ?>
                     <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
-                      <?= __('app.remove'); ?>
+                      <?= $answer['answer_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
                     </a>
                   <?php endif; ?>
 
@@ -70,13 +72,14 @@
               <div data-insert="<?= $answer['answer_id']; ?>" id="insert_id_<?= $answer['answer_id']; ?>" class="none"></div>
             </li>
           </ol>
-        <?php endif; ?>
       </div>
 
-      <ol class="max-w780 list-none">
+      <ol class="list-none">
         <?php foreach ($answer['comments'] as  $comment) : ?>
-          <?php if ($comment['comment_is_deleted'] == 0) : ?>
-            <li class="content_tree br-li-bottom-no br-bottom ml15" id="comment_<?= $comment['comment_id']; ?>">
+        
+          <?php if ($comment['comment_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
+        
+            <li class="content_tree br-li-bottom-no br-bottom ml15<?php if ($comment['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
               <div class="qa-comment">
                <div class="flex gap-min">
                 <?= fragment($comment['comment_content'], 1500); ?> 
@@ -123,7 +126,6 @@
               </div>
               <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>
             </li>
-          <?php endif; ?>
         <?php endforeach; ?>
       </ol>
 

@@ -82,13 +82,13 @@
         <?php endif; ?>
         <?php if ($post['post_url_domain']) : ?>
           <div class="italic mb15 text-sm table gray">
-            <?= __('app.source'); ?>: 
-              <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#link"></use>
-              </svg>
-              <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-                <?= $post['post_url_domain']; ?>
-              </a>
+            <?= __('app.source'); ?>:
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#link"></use>
+            </svg>
+            <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
+              <?= $post['post_url_domain']; ?>
+            </a>
           </div>
         <?php endif; ?>
       </div>
@@ -172,9 +172,9 @@
   <div id="comment"></div>
   <?php if ($post['post_draft'] == 0) :
     if ($post['post_feature'] == 0) :
-      insert('/content/post/tree-view', ['data' => $data, 'post' => $post]);
+      insert('/content/post/format-discussion', ['data' => $data, 'post' => $post]);
     else :
-      insert('/content/post/tape-view', ['data' => $data, 'post' => $post]);
+      insert('/content/post/format-qa', ['data' => $data, 'post' => $post]);
     endif;
   else :
     echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);
@@ -186,18 +186,18 @@
       <h4 class="uppercase-box"><?= __('app.topics'); ?></h4>
       <?php foreach ($data['facets'] as $topic) : ?>
         <div class="flex justify-between items-center">
-           <div>
-           <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
-          <a title="<?= $topic['facet_title']; ?>" class="black text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
-            <?= $topic['facet_title']; ?>
-          </a>
-            </div>
+          <div>
+            <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+            <a title="<?= $topic['facet_title']; ?>" class="black text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
+              <?= $topic['facet_title']; ?>
+            </a>
+          </div>
           <?php if (!$topic['signed_facet_id'] && UserData::getUserId()) : ?>
             <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red">
               <?= __('app.read'); ?>
             </div>
           <?php endif; ?>
-        </div>  
+        </div>
 
 
         <div class="text-sm gray-600">
@@ -242,7 +242,7 @@
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
     mediumZoom(document.querySelectorAll('.content_tree img:not(.emoji), .post img:not(.emoji), .content-body p img:not(.emoji)'));
-  
+
     // Добавим цитирование    
     function get_text() {
       var text;

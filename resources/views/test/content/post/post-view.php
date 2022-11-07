@@ -138,9 +138,9 @@
   <div class="ml10">
     <?php if ($post['post_draft'] == 0) :
       if ($post['post_feature'] == 0) :
-        insert('/content/post/tree-view', ['data' => $data, 'post' => $post]);
+        insert('/content/post/format-discussion', ['data' => $data, 'post' => $post]);
       else :
-        insert('/content/post/tape-view', ['data' => $data, 'post' => $post]);
+        insert('/content/post/format-qa', ['data' => $data, 'post' => $post]);
       endif;
     else :
       echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);
