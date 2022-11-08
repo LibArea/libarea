@@ -7,6 +7,7 @@
     <?php foreach ($data['answers'] as  $answer) : ?>
     
       <?php if ($answer['answer_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
+      <?php if ($answer['answer_published'] == 0 && $answer['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
     
       <div class="block-answer br-bottom<?php if ($answer['answer_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
         <?php if ($post['amount_content'] > 1) : ?>
@@ -78,7 +79,8 @@
         <?php foreach ($answer['comments'] as  $comment) : ?>
         
           <?php if ($comment['comment_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
-        
+          <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
+
             <li class="content_tree br-li-bottom-no br-bottom ml15<?php if ($comment['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
               <div class="qa-comment">
                <div class="flex gap-min">

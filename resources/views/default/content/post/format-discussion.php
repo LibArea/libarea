@@ -13,6 +13,7 @@
         <?php if ($n != 1) : ?><div class="br-top-dotted mt10 mb10"></div><?php endif; ?>
 
         <?php if ($answer['answer_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
+        <?php if ($answer['answer_published'] == 0 && $answer['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
         <ol class="list-none<?php if ($answer['answer_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
           <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
@@ -85,6 +86,7 @@
       <?php foreach ($answer['comments'] as  $comment) : ?>
 
         <?php if ($comment['comment_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
+        <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
         <ol class="list-none<?php if ($comment['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
           <li class="content_tree mb20 ml15<?php if ($comment['comment_comment_id'] > 0) : ?> ml30<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
