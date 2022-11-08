@@ -113,7 +113,7 @@
           <?php else : ?>
             <span class="type-ban text-sm gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
               <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#flag"></use>
+                <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
               </svg>
               <?= __('app.ban_it'); ?>
             </span>

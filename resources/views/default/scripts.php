@@ -34,7 +34,8 @@
     let postPage = 2;
 
     var type = 'no';
-    <?php if ($sheet == 'all') : ?>
+    <?php $sheet = $sheet ?? null;
+      if ($sheet == 'all') : ?>
         var type = 'all';
     <?php endif; ?>
 
