@@ -18,17 +18,20 @@ $domain = $data['domain']; ?>
       ]); ?>
 
       <fieldset class="gray-600">
-        <?= $domain['item_id']; ?>. <?= $domain['item_domain']; ?>
-        <span class="text-sm ml15"><?= Html::langDate($domain['item_date']); ?></span>
+        id: <?= $domain['item_id']; ?> <span class="gray"><?= $domain['item_domain']; ?></span> 
+        - <span class="lowercase"><?= Html::langDate($domain['item_date']); ?></span>
       </fieldset>
 
       <?php if (UserData::checkAdmin()) { ?>
-        <div class="mb-none img-preview">
-          <?= Img::website($domain['item_domain'], 'thumbs', $domain['item_title'], 'list-items__thumb-image'); ?>
+        <div class="flex gap items-center mb15 mb-none">
+          <div class="img-preview">
+            <?= Img::website($domain['item_domain'], 'thumbs', $domain['item_title'], 'list-items__thumb-image'); ?>
+          </div>
+          <div class="add-screenshot btn btn-small btn-primary" data-id="<?= $domain['item_id']; ?>">+ screenshot</div>
+          <div class="gray-600 text-sm"><?= __('web.screenshot_time'); ?></div>
         </div>
-        <div class="add-screenshot text-sm sky" data-id="<?= $domain['item_id']; ?>">+ screenshot</div>
         <?= Img::website($domain['item_domain'], 'favicon', $domain['item_domain'], ' mr5'); ?>
-        <span class="add-favicon text-sm sky" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
+        <span class="add-favicon btn btn-small btn-primary" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
       <?php } ?>
 
       <form action="<?= url('content.change', ['type' => 'item']); ?>" method="post">

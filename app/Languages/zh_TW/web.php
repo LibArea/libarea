@@ -66,6 +66,8 @@ return [
     'site_added'        => '已添加網站',
 
     'closed'            => '禁止讨论该网站。 作者或工作人员结束了讨论。',
+
+    'screenshot_time'   => '截屏可能需要一些時間。',
  
     'audits_home_title' => '现场审核',
     'audits_home_desc'  => '正在考虑的地点',

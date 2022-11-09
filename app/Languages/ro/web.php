@@ -66,6 +66,8 @@ return [
     'site_added'        => 'Site adăugat',
 
     'closed'            => 'Discuțiile despre site sunt interzise. Autorul sau personalul a închis discuția.',
+
+    'screenshot_time'   => 'Realizarea unei capturi de ecran poate dura ceva timp.',
  
     'audits_home_title' => 'Auditul site-ului',
     'audits_home_desc'  => 'Site-uri luate în considerare',

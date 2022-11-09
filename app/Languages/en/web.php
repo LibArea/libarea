@@ -66,7 +66,9 @@ return [
     'site_added'        => 'Site added',
 
     'closed'            => 'Discussion of the site is prohibited. Author or staff closed discussion.',
- 
+
+    'screenshot_time'   => 'Taking a screenshot may take some time.',
+
     'audits_home_title' => 'Website audit',
     'audits_home_desc'  => 'Sites under consideration',
     'num_website'       => ['Site', 'Sites', 'Sites'],
