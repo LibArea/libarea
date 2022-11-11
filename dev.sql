@@ -1465,3 +1465,6 @@ ALTER TABLE `items` CHANGE `item_date` `item_date` TIMESTAMP NOT NULL DEFAULT CU
 ALTER TABLE `items` ADD `item_modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `item_date`;
 
 ALTER TABLE `files` DROP INDEX `file_path`;
+
+ALTER TABLE `users` ADD INDEX(`reg_ip`);
+ALTER TABLE `users_agent_logs` ADD INDEX(`user_id`);
