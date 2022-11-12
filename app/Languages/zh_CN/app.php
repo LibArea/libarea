@@ -191,6 +191,7 @@ return [
     'edit_section'      => '编辑部分',
     
     'published'         => '發表於',
+    'subscribers_only'  => '只有订阅者才能阅读此博客...',
 
     'being_developed'   => '开发中',
     'activity'          => '活动',

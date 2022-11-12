@@ -13,7 +13,7 @@ class Users extends Controller
 {
     protected $type = 'users';
 
-    protected $limit = 50;
+    protected $limit = 20;
 
     public function index($sheet)
     {

@@ -191,6 +191,7 @@ return [
     'edit_section'      => 'Editează secțiunea',
 
     'published'         => 'Publicat în',
+    'subscribers_only'  => 'Doar abonații pot citi acest blog...',
 
     'being_developed'   => 'In dezvoltare',
     'activity'          => 'Activitate',

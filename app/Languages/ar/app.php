@@ -191,6 +191,7 @@ return [
     'edit_section'      => 'تعديل القسم',
     
     'published'         => 'منشور في',
+    'subscribers_only'  => 'يمكن للمشتركين فقط قراءة هذه المدونة ...',
 
     'being_developed'   => 'تحت التطوير',
     'activity'          => 'النشاط',

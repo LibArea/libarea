@@ -4,7 +4,7 @@
     <img class="box-cover-img" src="<?= Img::cover($data['facet']['facet_cover_art'], 'blog'); ?>" alt="<?= $data['facet']['facet_title']; ?>">
   </div>
   <div class="mt20">
-    <div class="right m15 mb-mt5">
+    <div class="right m15 mb-mt5 gray-600">
       <?= Html::signed([
         'type'            => 'facet',
         'id'              => $data['facet']['facet_id'],

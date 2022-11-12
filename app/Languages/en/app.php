@@ -191,6 +191,7 @@ return [
     'edit_section'      => 'Edit Section',
     
     'published'         => 'Published in',
+    'subscribers_only'  => 'Only subscribers can read this blog...',
 
     'being_developed'   => 'Under development',
     'activity'          => 'Activity',
