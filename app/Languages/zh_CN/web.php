@@ -35,6 +35,7 @@ return [
     'there_portal'      => '这是传送门吗？',
     'there_blog'        => '这是个人博客吗？',
     'there_reference'   => '这是一个参考网站（百科全书）吗？',
+    'there_goods'       => '该网站是否提供产品和服务？',
     'hosted_github'     => '程序托管在GitHub上？',
     'url_github'        => 'GitHub存储库URL',
     'related_posts'     => '相关帖子',
@@ -80,7 +81,7 @@ return [
     'reference_info'    => '参考资料',
     'reference_help'    => '百科全书、参考书籍',
     'science'           => '科学教育',
-    'goods'             => '商品服务',
+    'business'          => '商业',
     'life'              => '生活家居',
     'cms'               => 'CMS系统',
     'life_help'         => '儿童、动物、爱好...',
@@ -100,8 +101,8 @@ return [
     'sidebar_info'      => '按主题标题系统化的网站目录。',
     'banner_info'       => '带注释和截图的网站目录。分面评分，搜索。可以为网站、程序、评级投票的资源上的书签',
     
-    'main_title'         => '网站目录',
-    'main_desc'          => '目录中的站点列表按时间顺序排列。能够搜索、添加书签、按受欢迎程度排序',
+    'main_title'        => '网站目录',
+    'main_desc'         => '目录中的站点列表按时间顺序排列。能够搜索、添加书签、按受欢迎程度排序',
     
     'deleted_title'     => '远程站点',
     'deleted_desc'      => '...',
@@ -114,6 +115,7 @@ return [
     'blog'              => '博客',
     'portal'            => '门户网站',
     'reference'         => '百科全书',
+    'goods'             => '商品服务',
     
     'top_title'         => '{name} -按受欢迎程度',
     'top_desc'          => '按主题公布的网站列表 {description_info}',

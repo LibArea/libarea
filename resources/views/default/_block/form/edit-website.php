@@ -40,6 +40,10 @@
     <input type="checkbox" name="reference" <?php if ($domain['item_is_reference'] == 1) : ?>checked <?php endif; ?>> <?= __('web.there_reference'); ?>
   </fieldset>
 
+  <fieldset>
+    <input type="checkbox" name="goods" <?php if ($domain['item_is_goods'] == 1) : ?>checked <?php endif; ?>> <?= __('web.there_goods'); ?>
+  </fieldset>
+
   <h2><?= __('web.soft'); ?></h2>
 
   <fieldset>

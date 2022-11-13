@@ -1460,7 +1460,6 @@ ALTER TABLE `votes_post`
 ALTER TABLE `votes_reply`
   MODIFY `votes_reply_id` int(11) NOT NULL AUTO_INCREMENT;
 
-
 ALTER TABLE `items` CHANGE `item_date` `item_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE `items` ADD `item_modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `item_date`;
 
@@ -1468,3 +1467,5 @@ ALTER TABLE `files` DROP INDEX `file_path`;
 
 ALTER TABLE `users` ADD INDEX(`reg_ip`);
 ALTER TABLE `users_agent_logs` ADD INDEX(`user_id`);
+
+ALTER TABLE `items` ADD `item_is_goods` TINYINT(1) NULL COMMENT 'The site contains goods and services' AFTER `item_is_reference`;

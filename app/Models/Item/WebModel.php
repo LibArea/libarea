@@ -60,7 +60,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     public static function group($grouping)
     {
         $gr = ' ';
-        $os = ['github', 'blog', 'forum', 'portal', 'reference'];
+        $os = ['github', 'blog', 'forum', 'portal', 'reference', 'goods'];
         if (in_array($grouping, $os)) {
             $gr = "item_is_" . $grouping . " = 1 AND ";
         }
@@ -139,6 +139,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     SUM(item_is_forum) as forum,
                     SUM(item_is_portal) as portal,
                     SUM(item_is_reference) as reference,
+                    SUM(item_is_goods) as goods,
                     SUM(item_is_blog) as blog
                        FROM facets_items_relation 
                            LEFT JOIN items ON relation_item_id = item_id 
@@ -241,6 +242,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_is_portal      = :item_is_portal,
                     item_is_blog        = :item_is_blog,
                     item_is_reference   = :item_is_reference,
+                    item_is_goods       = :item_is_goods,
                     item_is_soft        = :item_is_soft,
                     item_is_github      = :item_is_github,
                     item_post_related   = :item_post_related,
@@ -272,6 +274,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_is_portal,
                     item_is_blog,
                     item_is_reference,
+                    item_is_goods,
                     item_is_soft,
                     item_is_github,
                     item_github_url,

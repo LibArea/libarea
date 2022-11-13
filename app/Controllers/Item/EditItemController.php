@@ -102,6 +102,7 @@ class EditItemController extends Controller
                 'item_is_portal'        => self::toggle($data['portal'] ?? false),
                 'item_is_blog'          => self::toggle($data['blog'] ?? false),
                 'item_is_reference'     => self::toggle($data['reference'] ?? false),
+                'item_is_goods'         => self::toggle($data['goods'] ?? false),
                 'item_is_soft'          => self::toggle($data['soft'] ?? false),
                 'item_is_github'        => self::toggle($data['github'] ?? false),
                 'item_post_related'     => $post_related ?? null,
