@@ -54,7 +54,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getChildrens($facet_id, $screening)
     {
         $go = '';
-        $os = ['github', 'blog', 'forum', 'portal', 'reference'];
+        $os = config('catalog/items.type');
         if (in_array($screening, $os)) {
             $go = "AND item_is_" . $screening . " = 1";
         }

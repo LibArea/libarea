@@ -60,7 +60,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     public static function group($grouping)
     {
         $gr = ' ';
-        $os = ['github', 'blog', 'forum', 'portal', 'reference', 'goods'];
+        $os = config('catalog/items.type');
         if (in_array($grouping, $os)) {
             $gr = "item_is_" . $grouping . " = 1 AND ";
         }

@@ -70,7 +70,7 @@ class DirController extends Controller
     public static function filter($grouping, $sort)
     {
         if ($grouping) {
-            $os = ['github', 'blog', 'forum', 'portal', 'reference', 'goods'];
+            $os = config('catalog/items.type');
             if (!in_array($grouping, $os)) {
                 self::error404();
             }
