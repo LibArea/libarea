@@ -12,7 +12,7 @@ return [
     'home'              => 'Acasă',
     'catalog'           => 'Catalog',
     'feed'              => 'Flux',
-    'test'              => 'Testare',
+    'minimum'           => 'Minim',
     'hi'                => 'Hei',
     'news'              => 'Știri',
     'team'              => 'Echipă',

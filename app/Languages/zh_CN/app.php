@@ -12,7 +12,7 @@ return [
     'home'              => '主页',
     'catalog'           => '目录',
     'feed'              => '主题',
-    'test'              => '测试',
+    'minimum'           => '最低限度',
     'hi'                => '嗨',
     'news'              => '新闻',
     'team'              => '团队',

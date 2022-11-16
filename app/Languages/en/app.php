@@ -12,7 +12,7 @@ return [
     'home'              => 'Home',
     'catalog'           => 'Catalog',
     'feed'              => 'Feed',
-    'test'              => 'Testing',
+    'minimum'           => 'Minimum',
     'hi'                => 'Hey',
     'news'              => 'News',
     'team'              => 'Team',
