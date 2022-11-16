@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\NotificationModel;
-use SendEmail, Meta;
+use SendEmail, Meta, UserData;
 
 class NotificationController extends Controller
 {
@@ -44,9 +44,9 @@ class NotificationController extends Controller
         redirect(url('notifications'));
     }
 
-    public static function setBell($user_id)
+    public static function get()
     {
-        return NotificationModel::bell($user_id);
+        return NotificationModel::get(UserData::getUserId());
     }
 
     // Appeal (@)

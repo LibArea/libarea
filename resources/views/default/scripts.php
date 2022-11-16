@@ -11,7 +11,34 @@
   document.addEventListener('DOMContentLoaded', () => {
     mediumZoom(document.querySelectorAll('.img-preview img'));
   });
-  <?php if (!UserData::checkActiveUser()) : ?>
+  <?php if (UserData::checkActiveUser()) : ?>
+        const update_time =  <?= config('general.notif_update_time'); ?>;
+        function load_notification()
+        {
+          fetch("/notif", {
+              method: "POST",
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+              .then(function (response) {
+                if (!response.ok) {
+                  return Promise.reject(new Error(
+                    'Response failed: ' + response.status + ' (' + response.statusText + ')'
+                  ));
+                }
+                return response.json();
+              }).then(function (data) { 
+                if (data != false) {
+                  let notif = document.getElementById('notif');
+                  notif.firstElementChild.classList.add("active");
+                }
+              }).catch(function (error) {
+                // error
+              }); 
+        }
+        setInterval(function(){
+          load_notification();
+        }, update_time);
+  <?php else : ?>
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
         Notice('<?= __('app.need_login'); ?>', 3500, {

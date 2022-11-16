@@ -74,23 +74,10 @@ $facet  = $data['facet'] ?? false; ?>
               </svg>
             </div>
 
-            <a class="gray-600" href="<?= url('notifications'); ?>">
-              <?php $notif = \App\Controllers\NotificationController::setBell(UserData::getUserId()); ?>
-              <?php if (!empty($notif)) : ?>
-                <?php if ($notif['action_type'] == 1) : ?>
-                  <svg class="icons red">
-                    <use xlink:href="/assets/svg/icons.svg#mail"></use>
-                  </svg>
-                <?php else : ?>
-                  <svg class="icons red">
-                    <use xlink:href="/assets/svg/icons.svg#bell"></use>
-                  </svg>
-                <?php endif; ?>
-              <?php else : ?>
-                <svg class="icons">
-                  <use xlink:href="/assets/svg/icons.svg#bell"></use>
-                </svg>
-              <?php endif; ?>
+            <a id="notif" class="gray-600" href="<?= url('notifications'); ?>">
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#bell"></use>
+              </svg>
             </a>
 
             <div class="relative">

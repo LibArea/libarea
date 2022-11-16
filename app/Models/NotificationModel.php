@@ -68,7 +68,7 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Уведомления
-    public static function bell($user_id)
+    public static function get($user_id)
     {
         $sql = "SELECT
                     recipient_id,

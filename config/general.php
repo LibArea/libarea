@@ -42,5 +42,7 @@ return [
     // Подтвердить отправителя (email должен быть настроен на сервере).
     'confirm_sender'    =>  false,
 
-
+    // Real time notifications. Update: 15 seconds
+    // Уведомления в реальном времени. Обновление: 15 секунд
+    'notif_update_time' =>  15000,
 ];
