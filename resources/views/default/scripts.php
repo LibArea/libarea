@@ -28,8 +28,15 @@
                 return response.json();
               }).then(function (data) { 
                 if (data != false) {
+               
                   let notif = document.getElementById('notif');
+                  let number = notif.querySelector('.number');
+                
                   notif.firstElementChild.classList.add("active");
+                  
+                  number.classList.add("show");
+                  
+                  number.innerHTML = data.length;
                 }
               }).catch(function (error) {
                 // error

@@ -78,7 +78,7 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
                             WHERE recipient_id = :user_id
                                 AND read_flag = 0";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetch();
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
     // Отправка

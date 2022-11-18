@@ -18,6 +18,20 @@ h5 {
   font-weight: 600;
 }
 
+.number {
+  display: none;  
+  font-size: .72rem;
+  color: #fff;
+  background-color: red;
+  padding: 1px 6px;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
+
+.number.show { display: block; }
+
 /* См. https://feathericons.com/ и https://tabler-icons.io/ */
 .icons {
   width: 21px;
