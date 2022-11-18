@@ -48,6 +48,7 @@ return [
     'whisper'           => 'Whisper',
     'report'            => 'Rreport',
     'reports'           => 'Rreports',
+    'report_info'       => 'This content uses <i>site rules</i>...',
     'time'              => 'Time',
     'deleted'           => 'Deleted',
     'remote'            => 'Remote',

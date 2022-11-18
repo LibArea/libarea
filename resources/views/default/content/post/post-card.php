@@ -10,8 +10,8 @@
     <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="box box-fon article_<?= $post['post_id']; ?>">
       <div class="flex items-center gap-min text-sm mb5">
-        <a class="gray-600 flex items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
-          <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'max'); ?>
+        <a class="gray-600 flex gap-min items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
+          <?= Img::avatar($post['avatar'], $post['login'], 'img-sm', 'max'); ?>
           <span<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> class="green" <?php endif; ?>>
             <?= $post['login']; ?>
             </span>

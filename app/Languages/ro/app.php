@@ -48,6 +48,7 @@ return [
     'whisper'           => 'Şoaptă',
     'report'            => 'Steag',
     'reports'           => 'Steaguri',
+    'report_info'       => 'Acest conținut încalcă <i>regulile site-ului</i>...',
     'time'              => 'Timp',
     'deleted'           => 'Sterse',
     'remote'            => 'la distanta',

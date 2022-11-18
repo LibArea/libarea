@@ -49,6 +49,7 @@ return [
     'whisper'           => '耳語',
     'report'            => '報告',
     'reports'           => '報告',
+    'report_info'       => '此内容违反了<i>网站规则</i>...',
     'time'              => '時間',
     'deleted'           => '偏僻的',
     'remote'            => '偏僻的',

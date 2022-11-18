@@ -48,6 +48,7 @@ return [
     'whisper'           => '悄悄话',
     'report'            => '举报',
     'reports'           => '举报',
+    'report_info'       => '此内容违反了<i>网站规则</i>...',
     'time'              => '时间',
     'deleted'           => '已删除',
     'remote'            => '冷门',

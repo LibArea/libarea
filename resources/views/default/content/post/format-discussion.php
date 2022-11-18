@@ -71,7 +71,8 @@
               <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid']); ?>
 
               <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-                <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-600">
+                <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" 
+                data-a11y-dialog-show="my-dialog" class="gray-600">
                   <svg class="icons">
                     <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
                   </svg>
@@ -145,7 +146,7 @@
               <?php endif; ?>
 
               <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-                <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray-600">
+                <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" data-a11y-dialog-show="my-dialog" class="gray-600">
                   <svg class="icons">
                     <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
                   </svg>

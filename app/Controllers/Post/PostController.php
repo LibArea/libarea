@@ -86,6 +86,7 @@ class PostController extends Controller
         if ($this->user['id'] > 0 && $content['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
             Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
+            Request::getResources()->addBottomScript('/assets/js/dialog.js');
         }
 
         if ($content['post_related']) {
