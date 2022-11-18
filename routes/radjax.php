@@ -15,3 +15,4 @@ Radjax\Route::get("/favorite", ["post"], "App\Services\Favorite", ["protected" =
 Radjax\Route::get("/ignored", ["post"], "App\Services\Ignored", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/best", ["post"], "App\Services\AnswerBest", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/flag/repost", ["post"], "App\Services\Audit", ["protected" => true, "before" => $access]);
+Radjax\Route::get("/notif", ["post"], "App\Controllers\NotificationController@get", ["protected" => false, "before" => $access]);
