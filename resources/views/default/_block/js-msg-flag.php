@@ -55,7 +55,6 @@
 
         <button id="flag" class="btn btn-primary mr5" type="submit" name="button"><?= __('app.report'); ?></button>
         <span data-a11y-dialog-hide class="text-sm inline gray"><?= __('app.cancel'); ?></span>
-
     </div>
   </div>
 <?php endif; ?>

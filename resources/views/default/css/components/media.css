@@ -50,6 +50,7 @@ main { flex: 1; }
 
 @media (max-width: 780px) {
   .mb-w80 { width: 80px; }
+  .mb-w150 { width: 150px; }
   .mb-p10 { padding: 10px; }
   .mb-mt5 { margin-top: 5px; }
   .mb-ml15 { margin-left: 15px; }

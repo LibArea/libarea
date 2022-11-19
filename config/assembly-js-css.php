@@ -16,11 +16,10 @@ return [
         // Базовый путь к css файлам
         'style'     => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/css/', 
         
-        // Test template to test custom layout creation
-        // Тестовый шаблон для проверки создания произвольного макета
-        'test'      => HLEB_GLOBAL_DIRECTORY . '/resources/views/test/css/',
+        // Template for minimum style
+        // Шаблон для стиля minimum
+        'minimum'   => HLEB_GLOBAL_DIRECTORY . '/resources/views/minimum/css/',
     ],
-    
     
     'path_js' => [
         // Base path to js files
@@ -29,7 +28,6 @@ return [
         'admin'         => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/', 
         'medium-zoom'   => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/',
         'app'           => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/', 
-        'uploads'       => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/', 
-    ], 
-    
+        'uploads'       => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/',
+     ],  
 ];
