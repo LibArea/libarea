@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?21');
+Request::getHead()->addStyles('/assets/css/style.css?7');
 ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>

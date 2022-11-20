@@ -26,8 +26,8 @@
     <thead>
       <th class="w50">id</th>
       <th><?= __('admin.info'); ?></th>
-      <th><?= __('admin.type'); ?></th>
-      <th><?= __('admin.action'); ?></th>
+      <th class="center"><?= __('admin.type'); ?></th>
+      <th class="center"><?= __('admin.action'); ?></th>
       <th class="center">#</th>
     </thead>
     <?php foreach ($data['audits'] as $key => $audit) : ?>
@@ -71,8 +71,8 @@
             <?php endif; ?>
           <?php endif; ?>
         </td>
-        <td><?= __('admin.' . $audit['type_belonging']); ?></td>
-        <td>
+        <td class="center"><?= __('admin.' . $audit['type_belonging']); ?></td>
+        <td class="center">
           <a data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" data-type="<?= $audit['action_type']; ?>" class="type-action text-sm">
             <?php if ($audit['content'][$audit['action_type'] . '_is_deleted'] == 1) : ?>
               <span class="red">
