@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\Item\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
-use Content, UploadImage, Discord, URLScraper, Meta, UserData;
+use Content, UploadImage, Discord, Telegram, URLScraper, Meta, UserData;
 
 use Utopia\Domains\Domain;
 use App\Validate\RulesPost;
@@ -122,25 +122,21 @@ class AddPostController extends Controller
             (new \App\Services\Audit())->create('post', $last_id, url('admin.audits'));
         }
 
-        $redirect = url('post', ['id' => $last_id, 'slug' => $slug]);
+        $url_content = url('post', ['id' => $last_id, 'slug' => $slug]);
         if ($type == 'page') {
-            $redirect = url('info.page', ['slug' => $slug]);
+            $url_content = url('info.page', ['slug' => $slug]);
         }
 
         // Add fastes (blogs, topics) to the post 
-        $type = (new \App\Controllers\Post\EditPostController())->addFacetsPost($fields, $last_id, $redirect);
+        $type = (new \App\Controllers\Post\EditPostController())->addFacetsPost($fields, $last_id, $url_content);
 
         // Contact via @
         // Обращение через @
         if ($message = \App\Services\Parser\Content::parseUser($content, true, true)) {
-            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $redirect);
+            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $url_content);
         }
 
-        if (config('integration.discord')) {
-            if ($fields['content_tl'] == 0 && $fields['post_draft'] == 0) {
-                Discord::AddWebhook($content, $fields['post_title'], $redirect);
-            }
-        }
+        $this->addIntegration($content, $url_content, $fields);
 
         SubscriptionModel::focus($last_id, 'post');
 
@@ -149,11 +145,11 @@ class AddPostController extends Controller
                 'id_content'    => $last_id,
                 'action_type'   => $type,
                 'action_name'   => 'added',
-                'url_content'   => $redirect,
+                'url_content'   => $url_content,
             ]
         );
 
-        is_return(__('msg.post_added'), 'success', $redirect);
+        is_return(__('msg.post_added'), 'success', $url_content);
     }
 
     public function addUrl($post_url, $post_title)
@@ -191,6 +187,7 @@ class AddPostController extends Controller
         return $site;
     }
 
+    // Parsing
     // Парсинг
     public function grabMeta()
     {
@@ -203,6 +200,7 @@ class AddPostController extends Controller
         return json_encode($metaData);
     }
 
+    // Getting Open Graph Protocol Data 
     // Получаем данные Open Graph Protocol 
     public static function grabOgImg($post_url)
     {
@@ -213,6 +211,7 @@ class AddPostController extends Controller
         return UploadImage::thumbPost($metaData->image);
     }
 
+    // Recommend post
     // Рекомендовать пост
     public function recommend()
     {
@@ -229,4 +228,24 @@ class AddPostController extends Controller
 
         return true;
     }
+    
+    public function addIntegration($content, $url_content, $fields)
+    {
+        $post_draft = $fields['post_draft'] ?? false;
+        
+        if ($fields['content_tl'] == 0 && $post_draft == 0) {
+        
+            // Discord
+            if (config('integration.discord')) {
+               Discord::AddWebhook($content, $fields['post_title'], $url_content);
+            }
+            
+            // Telegram
+            if (config('integration.telegram')) {
+               Telegram::AddWebhook($content, $fields['post_title'], $url_content);
+            }
+            
+        }    
+    }
+
 }

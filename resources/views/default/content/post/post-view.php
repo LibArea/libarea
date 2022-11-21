@@ -198,11 +198,6 @@
             </div>
           <?php endif; ?>
         </div>
-
-
-        <div class="text-sm gray-600">
-          <?= $topic['facet_short_description']; ?>
-        </div>
       <?php endforeach; ?>
     </div>
   <?php endif; ?>

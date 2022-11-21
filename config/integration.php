@@ -27,7 +27,13 @@ return [
     'discord_webhook_url'   => 'https://discord.com/api/webhooks/***',
     'discord_name_bot'      => 'PostBot',
     'discord_icon_url'      => 'https://cdn.discordapp.com/avatars/***.png',
-    
+
+    // For sending settings to Telegram
+    // Для настроек отправки в Telegram 
+    'telegram'              => false,
+    'telegram_token'        => '******:******',
+    'telegram_chat_id'      => '******',
+
     // Screenshots of the service https://screenshotone.com/
     // Скриншоты сервиса https://screenshotone.com/
     'sc_access_key' => '***',

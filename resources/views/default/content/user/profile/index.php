@@ -2,7 +2,7 @@
   <?= insert('/content/user/profile/header', ['data' => $data]); ?>
   <div class="flex gap mb-block">
     <main>
-      <?php if ($data['profile']['my_post'] != 0) : ?>
+      <?php if ($data['profile']['my_post'] != false && $data['my_post']['post_is_deleted'] != true) : ?>
         <div class="box bg-violet">
           <h4 class="uppercase-box"><?= __('app.selected_post'); ?>
             <?php if ($data['profile']['id'] == UserData::getUserId()) : ?>
