@@ -15,8 +15,8 @@ class FormController extends Controller
     }
 
     // GET
-    // Pages (forms) adding content (facets) 
-    // Страницы (формы) добавления контента (фасетов)
+    // Pages (forms) adding content / facets
+    // Страницы (формы) добавления контента / фасетов
     public function add()
     {
         if (in_array($this->type, ['post'])) {
@@ -29,10 +29,6 @@ class FormController extends Controller
 
         if ($this->type === 'item') {
             return (new Item\AddItemController)->index();
-        }
-
-        if ($this->type === 'team') {
-            return (new Team\AddTeamController)->index();
         }
 
         self::error404();
@@ -57,10 +53,6 @@ class FormController extends Controller
 
         if ($this->type === 'item') {
             return (new Item\EditItemController)->index();
-        }
-
-        if ($this->type === 'team') {
-            return (new Team\EditTeamController)->index();
         }
 
         self::error404();
@@ -99,10 +91,6 @@ class FormController extends Controller
             return (new FolderController)->create();
         }
 
-        if ($this->type === 'team') {
-            return (new Team\AddTeamController)->create();
-        }
-
         if ($this->type === 'reply') {
             return (new Item\ReplyController)->create();
         }
@@ -133,10 +121,6 @@ class FormController extends Controller
 
         if ($this->type === 'comment') {
             return (new Comment\EditCommentController)->change();
-        }
-
-        if ($this->type === 'team') {
-            return (new Team\EditTeamController)->change();
         }
 
         if ($this->type === 'reply') {

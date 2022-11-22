@@ -35,9 +35,6 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/web/bookmarks')->controller('Item\UserAreaController@bookmarks')->name('web.bookmarks');
     Route::get('/web/my/{page?}')->controller('Item\UserAreaController')->name('web.user.sites');
 
-    Route::get('/team')->controller('Team\TeamController')->name('teams');
-    Route::get('/team/view/{id}')->controller('Team\TeamController@view')->where(['id' => '[0-9]+'])->name('team.view');
-
     Route::get('/messages')->controller('MessagesController')->name('messages');   
     Route::get('/messages/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 
     Route::get('/messages/@{login}')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
