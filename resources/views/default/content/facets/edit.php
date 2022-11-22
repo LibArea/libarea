@@ -5,21 +5,25 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
 <main>
   <div class="flex justify-between">
-    <?= __('app.edit_' . $data['type']); ?>
     <ul class="nav">
       <?= insert(
         '/_block/navigation/nav',
         [
           'list' => [
             [
-              'id'        => 'all',
-              'url'       => $url,
-              'title'     => __('app.go_to'),
+              'id'        => 'topic',
+              'url'       => url('content.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
+              'title'     => __('app.edit_' . $data['type']),
+            ], [
+              'id'        => 'team',
+              'url'       => url('team.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
+              'title'     => __('app.team'),
             ]
           ]
         ]
-      ); ?>
+      ); ?> 
     </ul>
+    <a class="gray-600" href="<?= $url; ?>"><?= __('app.go_to'); ?></a>
   </div>
 
   <form class="max-w780" action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">

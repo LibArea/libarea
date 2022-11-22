@@ -23,6 +23,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::before('Restrictions')->getGroup();
         Route::get('/add/{type}')->controller('FormController@add')->where(['type' => '[a-z]+'])->name('content.add');
         Route::get('/edit/{type}/{id}')->controller('FormController@edit')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('content.edit');
+        Route::get('/team/edit/{type}/{id}')->controller('Facets\TeamFacetController')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('team.edit');
         Route::get('/setting/{type?}')->controller('User\SettingController')->where(['type' => '[a-z_]+'])->name('setting'); 
     Route::endGroup();    
 
