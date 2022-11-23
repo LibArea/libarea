@@ -186,7 +186,7 @@
       <h4 class="uppercase-box"><?= __('app.topics'); ?></h4>
       <?php foreach ($data['facets'] as $topic) : ?>
         <div class="flex justify-between items-center">
-          <div>
+          <div class="mt5 mb5">
             <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
             <a title="<?= $topic['facet_title']; ?>" class="black text-sm" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
               <?= $topic['facet_title']; ?>

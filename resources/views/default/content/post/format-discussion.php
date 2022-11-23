@@ -128,19 +128,19 @@
 
               <?php if ($post['post_closed'] == 0) : ?>
                 <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                  <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray">
+                  <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600">
                     <?= __('app.reply'); ?>
                   </a>
                 <?php endif; ?>
               <?php endif; ?>
 
               <?php if (Access::author('comment', $comment, 30) === true) : ?>
-                <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
+                <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
                   <?= __('app.edit'); ?>
                 </a>
               <?php endif; ?>
               <?php if (UserData::checkAdmin()) : ?>
-                <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
+                <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
                   <?= $comment['comment_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
                 </a>
               <?php endif; ?>
