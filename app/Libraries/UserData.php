@@ -87,7 +87,7 @@ class UserData
 
         $t = self::getAccount();
 
-        self::$user = $t ? $t : $noAuth;
+        self::$user = $t ?? $noAuth;
 
         return self::$user;
     }
@@ -110,6 +110,7 @@ class UserData
         } else {
 
             $remember = Request::getCookie('remember');
+
             if ($remember ?? false) {
                 (new \App\Controllers\Auth\RememberController())->check($remember);
             }

@@ -566,4 +566,20 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     {
         return  DB::run('SELECT type_id, type_code, type_lang FROM facets_types');
     }
+    
+    // Team Members
+    // Участники в команде
+    public static function getUsersTeam($facet_id)
+    {
+        $sql = "SELECT 
+                    id,
+                    login,
+                    avatar
+                        FROM facets_users_team
+                            LEFT JOIN users ON team_user_id = id
+                                WHERE team_facet_id = :facet_id";
+
+        return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
+    }
+    
 }

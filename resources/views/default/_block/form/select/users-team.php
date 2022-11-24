@@ -1,5 +1,4 @@
 <fieldset>
-    <label for="name"><?= __('team.users'); ?></label>
     <input name='user_id' id="user_id">
 </fieldset>
 
@@ -39,7 +38,7 @@
         };
 
         tagify = new Tagify(input, options);
-        tagify.addTags(JSON.parse('<?= json_encode($users) ?>'))
+        tagify.addTags([])
 
     });
 </script>
