@@ -905,6 +905,27 @@ ALTER TABLE `users_ignored`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- Структура и индексы таблицы `facets_users_team`
+--
+
+CREATE TABLE `facets_users_team` (
+  `team_id` int(11) NOT NULL,
+  `team_facet_id` int(11) NOT NULL,
+  `team_user_id` int(11) NOT NULL,
+  `team_user_access` int(4) NOT NULL DEFAULT 0,
+  `team_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
+
+ALTER TABLE `facets_users_team`
+  ADD PRIMARY KEY (`team_id`);
+
+ALTER TABLE `facets_users_team`
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `facets_users_team` ADD INDEX(`team_facet_id`); 
+ALTER TABLE `facets_users_team` ADD INDEX(`team_user_id`);
+
+--
 -- Индексы сохранённых таблиц
 --
 

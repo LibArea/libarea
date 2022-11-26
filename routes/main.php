@@ -16,6 +16,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
             // Отправка / изменение контента
             Route::post('/create/{type}')->controller('FormController@create')->name('content.create');
             Route::post('/change/{type}')->controller('FormController@change')->name('content.change');
+            Route::post('/team/change/{type}/{id}')->controller('Facets\TeamFacetController@change')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('team.change');
         Route::endProtect();
     Route::endGroup();       
 
@@ -141,5 +142,7 @@ Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->w
 Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 
 Route::get('/{page?}')->controller('HomeController', ['feed'])->name('main'); 
+
+// Route::bottleneck('/attention', true, "TECHNICAL WORKS ON THE SERVER");
 
 require 'admin.php';
