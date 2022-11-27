@@ -52,6 +52,10 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
             $field_id = 'id';
             $field_name = 'login';
             $sql = "SELECT id, login, trust_level, activated FROM users WHERE activated = 1 AND login LIKE :login";
+        } elseif ($type == 'team') {
+            $field_id = 'id';
+            $field_name = 'login';
+            $sql = "SELECT id, login, trust_level, activated FROM users WHERE activated = 1 AND login LIKE :login AND id !=" . UserData::getUserId();
         } else {
             $condition = '';
             if (!UserData::checkAdmin()) {

@@ -573,7 +573,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT 
                     id,
-                    login,
+                    login as value,
                     avatar
                         FROM facets_users_team
                             LEFT JOIN users ON team_user_id = id
@@ -581,5 +581,37 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
-    
+  
+    // Add, change users in the team
+    // Добавим, изменим пользователей в команде
+    public static function editUsersTeam($rows, $facet_id)
+    {
+        self::deleteUsersTeam($facet_id);
+
+        foreach ($rows as $row) {
+            $user_id   = $row['id'];
+            $sql        = "INSERT INTO facets_users_team (team_facet_id, team_user_id) 
+                                VALUES (:facet_id, :user_id)";
+
+            DB::run($sql, ['facet_id' => $facet_id, 'user_id' => $user_id]);
+        }
+
+        return true;
+    }
+
+    public static function deleteUsersTeam($facet_id)
+    {
+        $sql = "DELETE FROM facets_users_team WHERE team_facet_id = :facet_id";
+
+        return DB::run($sql, ['facet_id' => $facet_id]);
+    }
+
+    public static function editUser($users, $content_id)
+    {
+        $arr = $users['user_id'] ?? [];
+        $arr_user = json_decode($arr, true);
+
+        return TeamModel::editUsersRelation($arr_user, $content_id);
+    }
+
 }

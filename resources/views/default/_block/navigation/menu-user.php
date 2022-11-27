@@ -1,11 +1,15 @@
-<?php $user = UserData::get(); ?>
+<?php $user = UserData::get(); 
+$login = $user['login'] ?? false;
+?>
 <span class="right-close pointer">x</span>
 <div class="user-box">
   <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mt5 mr5', 'small'); ?>
-  <div>
-    <a class="gray" href="/@<?= $user['login']; ?>"><?= $user['login']; ?> </a>
-    <div class="text-xs gray-600"><?= $user['email']; ?></div>
-  </div>
+  <?php if ($login) : ?>
+    <div>
+      <a class="gray" href="/@<?= $login; ?>"><?= $login; ?> </a>
+      <div class="text-xs gray-600"><?= $user['email']; ?></div>
+    </div>
+  <?php endif; ?>
 </div>
 <ul class="list-none user-nav">
   <?php foreach ($list as $key => $item) :

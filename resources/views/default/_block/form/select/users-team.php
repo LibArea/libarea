@@ -1,4 +1,5 @@
 <fieldset>
+    <label for="name"><?= __('app.users'); ?></label>
     <input name='user_id' id="user_id">
 </fieldset>
 
@@ -17,7 +18,7 @@
             body: JSON.stringify(props)
         };
         try {
-            const fetchResponse = await fetch('/search/user', settings);
+            const fetchResponse = await fetch('/search/team', settings);
             return await fetchResponse.json();
         } catch (e) {
             return e;
@@ -28,8 +29,7 @@
         let search_user = await user_search();
         let input = document.querySelector('#user_id');
         let options = {
-            tagTextProp: "login",
-            maxTags: 8,
+            maxTags: 5,
             enforceWhitelist: true, // <- добавлять только из белого списка
             callbacks: {
                 "dropdown:show": async (e) => await focus_search(),
@@ -38,7 +38,7 @@
         };
 
         tagify = new Tagify(input, options);
-        tagify.addTags([])
+        tagify.addTags(JSON.parse('<?= json_encode($users) ?>'))
 
     });
 </script>

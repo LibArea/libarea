@@ -78,7 +78,7 @@ class ActionController extends Controller
             $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
         }
 
-        $allowed = ['post', 'user', 'blog',  'section', 'category', 'topic'];
+        $allowed = ['post', 'user', 'team', 'blog', 'section', 'category', 'topic'];
         if (!in_array($type, $allowed)) return false;
 
         return ActionModel::getSearch($search, $type);

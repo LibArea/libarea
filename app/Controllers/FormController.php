@@ -23,7 +23,7 @@ class FormController extends Controller
             return (new Post\AddPostController)->index($this->type);
         }
 
-        if (in_array($this->type, ['topic', 'blog', 'category', 'section'])) {
+        if (in_array($this->type, config('facets.permitted'))) {
             return (new Facets\AddFacetController)->index($this->type);
         }
 
