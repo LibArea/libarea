@@ -61,11 +61,11 @@ $post   = $data['post'] ?? false;
               </svg>
             </a>
             <?php if (config('general.invite') == false) : ?>
-              <a class="gray  mb-none block" href="<?= url('register'); ?>">
+              <a class="gray min-w75 center mb-none block" href="<?= url('register'); ?>">
                 <?= __('app.registration'); ?>
               </a>
             <?php endif; ?>
-            <a class="btn btn-outline-primary" href="<?= url('login'); ?>">
+            <a class="btn btn-outline-primary min-w75" href="<?= url('login'); ?>">
               <?= __('app.sign_in'); ?>
             </a>
           </div>

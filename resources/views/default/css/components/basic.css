@@ -187,6 +187,7 @@ li.br-li-bottom-no:last-child { border-bottom: 1px solid transparent; }
 .max-w-100 { max-width: 100%; }
 .max-w780 { max-width: 780px; }
 .max-w300 { max-width: 300px; }
+.min-w75 { min-width: 75px; }
 
 .text-xs { font-size: 0.75rem; }
 .text-sm { font-size: 0.875rem; }

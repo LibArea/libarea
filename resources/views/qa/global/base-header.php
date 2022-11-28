@@ -54,11 +54,11 @@ $facet  = $data['facet'] ?? false; ?>
             </svg>
           </a>
           <?php if (config('general.invite') == false) : ?>
-            <a class="w94 gray block" href="<?= url('register'); ?>">
+            <a class="gray min-w75 center block" href="<?= url('register'); ?>">
               <?= __('app.registration'); ?>
             </a>
           <?php endif; ?>
-          <a class="w94 btn btn-outline-primary" href="<?= url('login'); ?>">
+          <a class="btn min-w75 btn-outline-primary" href="<?= url('login'); ?>">
             <?= __('app.sign_in'); ?>
           </a>
         </div>
