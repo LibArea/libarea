@@ -298,6 +298,7 @@ return [
     'ua_language'       => 'Український',
     'en_language'       => 'English',
     'de_language'       => 'Deutsch',
+    'sk_language'       => 'Slovenský',
     'fr_language'       => 'Français',
     'zh_TW_language'    => '简体中文',
     'zh_CN_language'    => '繁体中文',
