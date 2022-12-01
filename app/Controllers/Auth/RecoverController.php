@@ -6,7 +6,8 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
 use App\Validate\Validator;
-use Google, SendEmail, Meta, Html, Msg, UserData;
+use App\Services\Integration\Google;
+use SendEmail, Meta, Html, Msg, UserData;
 
 class RecoverController extends Controller
 {

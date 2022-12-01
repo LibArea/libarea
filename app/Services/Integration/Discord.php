@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services\Integration;
+
 class Discord
 {
     public static function addWebhook($text, $title, $url)

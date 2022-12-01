@@ -581,7 +581,19 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
-  
+
+    public static function getTeamFacets($user_id, $type)
+    {
+        $sql = "SELECT
+                    team_facet_id as facet_id,
+                    facet_title
+                        FROM facets_users_team 
+                            LEFT JOIN facets ON team_facet_id = facet_id
+                                WHERE team_user_id = :user_id AND facet_type = :type";
+
+        return DB::run($sql, ['user_id' => $user_id, 'type' => $type])->fetchAll();
+    }
+
     // Add, change users in the team
     // Добавим, изменим пользователей в команде
     public static function editUsersTeam($rows, $facet_id)

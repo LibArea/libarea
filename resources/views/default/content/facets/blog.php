@@ -51,6 +51,19 @@ if ($blog['facet_is_deleted'] == 0) : ?>
               </div>
             </div>
 
+            <?php if ($data['users_team']) : ?>
+              <div class="box bg-lightgray">
+                <h4 class="uppercase-box"><?= __('app.team'); ?></h4>
+                <?php foreach ($data['users_team'] as $usr) : ?>
+                  <div class="mb15">
+                    <?= Img::avatar($usr['avatar'], $usr['value'], 'img-base', 'small'); ?>
+                    <a class="gray-600" href="<?= url('profile', ['login' => $usr['value']]); ?>"><?= $usr['value']; ?></a>
+                  </div>
+                <?php endforeach; ?>
+               </div> 
+            <?php endif; ?>
+
+
             <?php if ($data['focus_users']) : ?>
               <div class="box bg-lightgray">
                 <h4 class="uppercase-box"><?= __('app.reads'); ?>

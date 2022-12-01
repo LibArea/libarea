@@ -4,7 +4,7 @@ namespace App\Validate;
 
 use App\Models\User\UserModel;
 use App\Models\AuthModel;
-use Google;
+use App\Services\Integration\Google;
 
 class RulesRegistration extends Validator
 {

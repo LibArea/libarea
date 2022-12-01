@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\FacetModel;
 use UserData;
 use DB;
 
@@ -60,7 +61,16 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
             $condition = '';
             if (!UserData::checkAdmin()) {
                 if ($type == 'blog') {
-                    $condition = 'AND facet_user_id = ' . UserData::getUserId();
+                    
+                    $blog = FacetModel::getFacetsUser(UserData::getUserId(), 'blog');
+                    $teams = FacetModel::getTeamFacets(UserData::getUserId(), 'blog');
+
+                    $resultUsers = [];                    
+                    foreach (array_merge($teams, $blog) as $ind => $row) {
+                        $resultUsers[$ind] = $row['facet_id'];
+                    }
+
+                    $condition =  "AND facet_id IN(" . implode(',', $resultUsers ?? []) . ")";
                 }
             }
 

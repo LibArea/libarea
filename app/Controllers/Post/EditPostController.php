@@ -36,6 +36,8 @@ class EditPostController extends Controller
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
+        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
+
         return $this->render(
             '/post/edit',
             [
@@ -45,7 +47,7 @@ class EditPostController extends Controller
                     'type'          => 'edit',
                     'post'          => $post,
                     'user'          => UserModel::getUser($post['post_user_id'], 'id'),
-                    'blog'          => FacetModel::getFacetsUser($this->user['id'], 'blog'),
+                    'blog'          => $blog,
                     'post_arr'      => $post_related,
                     'topic_arr'     => PostModel::getPostFacet($post['post_id'], 'topic'),
                     'blog_arr'      => PostModel::getPostFacet($post['post_id'], 'blog'),

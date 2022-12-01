@@ -53,6 +53,7 @@ class BlogFacetController extends Controller
                     'type'          => $type,
                     'facet'         => $facet,
                     'posts'         => $posts,
+                    'users_team'    => FacetModel::getUsersTeam($facet['facet_id']),
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 1, 5),
                     'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], 'facet'),

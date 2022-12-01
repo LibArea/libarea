@@ -29,27 +29,16 @@ class MainConnector implements Connector
             "DB"                            => "app/Libraries/DB.php",
             "Configuration"                 => "app/Libraries/Configuration.php",
             "Translate"                     => "app/Libraries/Translate.php",
-            
             "Access"                        => "app/Libraries/Access.php",
             "Msg"                           => "app/Libraries/Msg.php",
             "Img"                           => "app/Libraries/Img.php",
-
             "Curl"                          => "app/Libraries/Curl.php",
-            "Google"                        => "app/Libraries/Integration/Google.php",
-            "Discord"                       => "app/Libraries/Integration/Discord.php",
-            "Yandex"                        => "app/Libraries/Integration/Yandex.php",
-            "GitHub"                        => "app/Libraries/Integration/GitHub.php",
-
             "Content"                       => "app/Libraries/Content.php",
             "UploadImage"                   => "app/Libraries/UploadImage.php",
             "Html"                          => "app/Libraries/Html.php",
             "Meta"                          => "app/Libraries/Meta.php",
             "UserData"                      => "app/Libraries/UserData.php",
 
-            "Jevix"                         => "app/Libraries/Jevix/Jevix.php",
-            "Parser"                        => "app/Libraries/Jevix/Parser.php",
-
-            // TODO: заменить
             "URLScraper"                    => "app/Libraries/URLScraper.php",
             "SendEmail"                     => "app/Libraries/SendEmail.php",
         ];

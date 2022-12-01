@@ -39,12 +39,10 @@ class SearchController extends Controller
             if (!in_array($lang, ['ru', 'en'])) {
                 $lang = 'en';
             }
-            $stem = new LinguaStem($lang);
-            $stem = $stem->text($q);
 
             $results = SearchModel::getSearch($pageNumber, $this->limit, $q, $type);
-            $count =  SearchModel::getSearchCount($q, $type);
-
+            $count_results =  SearchModel::getSearchCount($q, $type);
+            
             $user_id = UserData::getUserId();
             SearchModel::setSearchLogs(
                 [
@@ -52,10 +50,12 @@ class SearchController extends Controller
                     'action_type'   => $type,
                     'add_ip'        => Request::getRemoteAddress(),
                     'user_id'       => $user_id > 0 ? $user_id : 1,
-                    'count_results' => $count ?? 0,
+                    'count_results' => $count_results,
                 ]
             );
         }
+
+        $count = $count_results ?? 0;
 
         $facet = $type == 'post' ? 'topic' : 'category';
         return $this->render(
@@ -66,8 +66,8 @@ class SearchController extends Controller
                     'results'       => $results ?? false,
                     'type'          => $type,
                     'sheet'         => 'admin',
-                    'q'             => $q,
-                    'tags'          => SearchModel::getSearchTags($stem, $facet, 4),
+                    'q'             => $q ?? null,
+                    'tags'          => SearchModel::getSearchTags($q ?? null, $facet, 4),
                     'sw'            => round((microtime(true) - $sw ?? 0) * 1000, 4),
                     'count'         => $count,
                     'pagesCount'    => ceil($count / $this->limit),

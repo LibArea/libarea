@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services\Integration;
+
 use Hleb\Constructor\Handlers\Request;
 
 class Google

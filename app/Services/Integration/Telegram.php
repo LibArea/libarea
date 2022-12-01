@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services\Integration;
+
 class Telegram
 {
     // PHP Telegram Bot based on the official Telegram Bot API

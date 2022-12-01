@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use DB;
-use App\Traits\Post;
 
 class PostModel extends \Hleb\Scheme\App\Models\MainModel
 {   
-    use Post;
-    
     public static function create($params)
     {
         $sql = "INSERT INTO posts(post_title, 
@@ -48,8 +45,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                                     :post_top,
                                     :post_url,
                                     :post_url_domain)";
-
-     //   self::convertingToSpecialChar($params, ['post_content', 'post_title']);
 
         DB::run($sql, $params);
 
@@ -224,8 +219,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_closed           = :post_closed,
                     post_top              = :post_top
                          WHERE post_id = :post_id";
-
-     //   self::convertingToSpecialChar($params, ['post_content', 'post_title']);
 
         return DB::run($sql, $params);
     }

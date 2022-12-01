@@ -6,7 +6,9 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\Item\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
-use Content, UploadImage, Discord, Telegram, URLScraper, Meta, UserData;
+use App\Services\Integration\Discord;
+use App\Services\Integration\Telegram;
+use Content, UploadImage, URLScraper, Meta, UserData;
 
 use Utopia\Domains\Domain;
 use App\Validate\RulesPost;
@@ -27,6 +29,9 @@ class AddPostController extends Controller
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
         $topic      = FacetModel::getFacet($topic_id, 'id', 'topic');
+        
+        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
+        $facets = FacetModel::getTeamFacets($this->user['id'], 'blog');
 
         return $this->render(
             '/post/add',
@@ -34,7 +39,7 @@ class AddPostController extends Controller
                 'meta'      => Meta::get(__('app.add_' . $type)),
                 'data'  => [
                     'facets'    => ['topic' => $topic],
-                    'blog'      => FacetModel::getFacetsUser($this->user['id'], 'blog'),
+                    'blog'      => array_merge($facets, $blog),
                     'post_arr'  => PostModel::postRelatedAll(),
                     'type'      => 'add',
                 ]
