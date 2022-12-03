@@ -11,15 +11,6 @@ class Access
     {
         $type = Request::get('type');
 
-        if (UserData::checkAdmin()) {
-            return true;
-        }
-
-        if (self::limitingMode() === false) {
-            Msg::add(__('msg.silent_mode',), 'error');
-            redirect('/');
-        }
-
         // TODO: Изменим поля в DB, чтобы использовать limitContent для messages и invitation: 
         if (in_array($type, ['post', 'amswer', 'comment', 'item'])) {
             if (self::limitContent($type) === false) {
@@ -27,19 +18,6 @@ class Access
                 redirect('/');
             }
         }
-    }
-
-    /**
-     * Stop changing (adding) content if the user is frozen (silent mode)
-     *
-     * Остановим изменение (добавление) контента если пользователь заморожен (немой режим)
-     */
-    public static function limitingMode(): bool
-    {
-        if (UserData::getLimitingMode() == 1) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -138,11 +116,54 @@ class Access
          *
          * Доступ получает только автор.
          */
-        if ($info_type[$type_content . '_user_id'] != UserData::getUserId()) {
+         if ($info_type[$type_content . '_user_id'] != UserData::getUserId()) {
+             return false;
+         }
+
+        /**
+         * Time limit.
+         *
+         * Лимит по времени.
+         */
+        if (self::limiTime($info_type[$type_content . '_date'], $limit_time) === false) {
             return false;
         }
 
-        if (self::limiTime($info_type[$type_content . '_date'], $limit_time) === false) {
+        return true;
+    }
+    
+    public static function postAuthorAndTeam(array $info_type, int $blog_user_id): bool
+    {
+        if (UserData::checkAdmin()) {
+            return true;
+        }
+
+        /**
+         * If the author's Tl has been downgraded.
+         *
+         * Если Tl автора было изменено на понижение.
+         *
+         * In config: tl_add_post
+         */
+        if (self::trustLevels(config('trust-levels.tl_add_post')) === false) {
+            return false;
+        }
+        
+        /**
+         * Allow the author or blog owner to edit the article.
+         *
+         * Разрешить редактировать статью автору или владельцу блога.
+         */
+         if ($info_type['post_user_id'] != UserData::getUserId() && UserData::getUserId() != $blog_user_id) {
+             return false;
+         }
+
+        /**
+         * Time limit.
+         *
+         * Лимит по времени.
+         */
+        if (self::limiTime($info_type['post_date'], config('trust-levels.edit_time_post')) === false) {
             return false;
         }
 

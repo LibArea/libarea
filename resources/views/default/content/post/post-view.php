@@ -39,12 +39,12 @@
           <?php endif; ?>
 
           <?php if (UserData::checkActiveUser()) : ?>
-
-            <?php if (Access::author('post', $post, config('trust-levels.edit_time_post')) == true) : ?>
+            <?php if (Access::postAuthorAndTeam($post, $data['blog'][0]['facet_user_id'] ?? 0) == true) : ?> 
               <a class="gray-600 lowercase" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
                 <?= __('app.edit'); ?>
               </a>
             <?php endif; ?>
+            
             <?php if (UserData::getUserLogin() == $post['login']) : ?>
               <?php if ($post['my_post'] == $post['post_id']) : ?>
                 <span class="add-profile" data-post="<?= $post['post_id']; ?>">

@@ -27,16 +27,16 @@ class EditPostController extends Controller
         $post       = PostModel::getPost($post_id, 'id', $this->user);
         self::error404($post);
 
-        if (Access::author('post', $post, config('trust-levels.edit_time_post')) == false) {
-            is_return(__('msg.access_denied'), 'error');
-        }
-
         $post_related = [];
         if ($post['post_related']) {
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
         $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
+
+        if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id']) == false) {
+            is_return(__('msg.access_denied'), 'error');
+        }
 
         return $this->render(
             '/post/edit',
@@ -66,8 +66,11 @@ class EditPostController extends Controller
 
         // Access check 
         $post   = PostModel::getPost($post_id, 'id', $this->user);
-        if (Access::author('post', $post, config('trust-levels.edit_time_post')) == false) {
-            return false;
+
+        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
+
+        if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id']) == false) {
+            is_return(__('msg.access_denied'), 'error');
         }
 
         $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
