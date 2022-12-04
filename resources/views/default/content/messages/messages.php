@@ -10,7 +10,7 @@
               <?= $msg['msg_to_user']['login']; ?>
             </a>
           <?php else : ?>
-            <a class="black mr5" href="<?= url('profile', ['login' => $msg['msg_to_user']['login']]); ?>">
+            <a class="black mr5" href="<?= url('profile', ['login' => $msg['msg_user']['login']]); ?>">
               <?= Img::avatar($msg['msg_user']['avatar'], $msg['msg_user']['login'], 'img-sm', 'small'); ?>
               <?= $msg['msg_user']['login']; ?>
             </a>
