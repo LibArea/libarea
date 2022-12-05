@@ -33,7 +33,12 @@ class Convert extends \ParsedownExtraPlugin
     {
         if (!$Element) return $Element;
 
-        if (preg_match('/^(?:https?\:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.?be)\/(?:watch\?v=)?(.+)$/i', $Element['element']['attributes']['href'], $id)) {
+        // Using YouTube on different types of links
+        // https://www.youtube.com/shorts/bcXZ88y3Po0
+        // https://www.youtube.com/watch?v=Fydyy-ypavU
+        // https://youtu.be/Fydyy-ypavU
+        // https://rutube.ru/video/17eecf937aa7d9eb19edbb7aec6679b4/
+        if (preg_match('/^(?:https?\:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.?be)\/(?:shorts|watch\?v=)?(.+)$/i', $Element['element']['attributes']['href'], $id)) {
    
             $src = 'https://www.youtube.com/embed/' . $id[1];
 
