@@ -32,4 +32,6 @@ return [
     'edit_topic'            => 'Subiectele sunt folosite pentru a grupa (naviga) postări. Această navigare, ia-o în serios.',
     'edit_blog'             => 'Blogurile sunt de obicei create de colaboratori. Blogul este atribuit unui anumit utilizator.',
     'edit_section'          => 'Aceasta este editarea navigației pentru paginile de servicii (documentație). Ia in serios.',
+
+    'team_info'             => 'Puteți partaja blogul dvs. cu alți utilizatori, acordându-le acces.',
 ];

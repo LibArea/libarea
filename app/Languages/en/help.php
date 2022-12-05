@@ -32,4 +32,6 @@ return [
     'edit_topic'            => 'Topics are used to group (navigate) posts. This navigation, take it seriously.',
     'edit_blog'             => 'Blogs are usually created by contributors. The blog is assigned to a specific user.',
     'edit_section'          => 'This is navigation editing for service pages (documentation). Take it seriously.',
+
+    'team_info'             => 'Other participants can also post articles to your Blog — for this you need to grant them access.',
 ];

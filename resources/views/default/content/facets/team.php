@@ -49,6 +49,6 @@
 <aside>
   <div class="box bg-beige">
     <h4 class="uppercase-box"><?= __('app.help'); ?></h4>
-    <?= __('app.being_developed'); ?>
+    <?= __('help.team_info'); ?>
   </div>
 </aside>
