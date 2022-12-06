@@ -20,7 +20,7 @@ class EditAnswerController extends Controller
     // Edit form answer
     public function index()
     {
-        $answer = AnswerPresence::getAnswerId(Request::getInt('id'));
+        $answer = AnswerPresence::index(Request::getInt('id'));
         if (Access::author('answer', $answer, config('trust-levels.edit_time_answer')) == false) {
             return false;
         }
