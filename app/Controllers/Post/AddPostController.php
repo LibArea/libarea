@@ -8,6 +8,8 @@ use App\Models\Item\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
 use App\Services\Integration\Discord;
 use App\Services\Integration\Telegram;
+use App\Services\Сheck\PostPresence;
+use App\Services\Сheck\FacetPresence;
 use Content, UploadImage, URLScraper, Meta, UserData;
 
 use Utopia\Domains\Domain;
@@ -28,8 +30,10 @@ class AddPostController extends Controller
         // Adding from page topic 
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
-        $topic      = FacetModel::getFacet($topic_id, 'id', 'topic');
-        
+        if ($topic_id) {
+            $topic  = FacetPresence::index($topic_id, 'id', 'topic');
+        }
+
         $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
         $facets = FacetModel::getTeamFacets($this->user['id'], 'blog');
 
@@ -60,7 +64,7 @@ class AddPostController extends Controller
 
         if ($type == 'page') {
             $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
-            self::error404($count);
+            notEmptyOrView404($count);
         }
 
         // Use to return
@@ -226,8 +230,7 @@ class AddPostController extends Controller
             return false;
         }
 
-        $post = PostModel::getPost($post_id, 'id', $this->user);
-        self::error404($post);
+        $post = PostPresence::index($post_id);
 
         ActionModel::setRecommend($post_id, $post['post_is_recommend']);
 

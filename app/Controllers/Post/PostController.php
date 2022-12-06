@@ -4,6 +4,8 @@ namespace App\Controllers\Post;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\PostPresence;
+use App\Services\Сheck\FacetPresence;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
 use Content, Meta, UserData, Access, Img;
 
@@ -126,8 +128,8 @@ class PostController extends Controller
         }
 
         $slug_facet = Request::get('facet_slug');
-        $facet  = FacetModel::getFacet($slug_facet, 'slug', 'section');
-        self::error404($facet);
+        
+        $facet  = FacetPresence::index($slug_facet, 'slug', 'section');
 
         $m = [
             'og'    => false,
@@ -155,8 +157,7 @@ class PostController extends Controller
         // Check id and get content data
         // Проверим id и получим данные контента
         if ($type == 'post') {
-            $content = PostModel::getPost($id, 'id', $user);
-            self::error404($content);
+            $content = PostPresence::index($id, 'id');
 
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
@@ -172,19 +173,15 @@ class PostController extends Controller
 
             return $content;
         }
-
-        $content  = PostModel::getPost($slug, 'slug', $user);
-        self::error404($content);
-
-        return $content;
+        
+        return PostPresence::index($slug, 'slug');
     }
 
     // Posting your post on your profile
     // Размещение своего поста у себя в профиле
     public function postProfile()
     {
-        $id     = Request::getPostInt('post_id');
-        $post   = PostModel::getPost($id, 'id', $this->user);
+        $post   = PostPresence::index($post_id = Request::getPostInt('post_id'), 'id');
 
         // Access check
         // Проверка доступа
@@ -198,7 +195,7 @@ class PostController extends Controller
             return false;
         }
 
-        return PostModel::setPostProfile($id, $this->user['id']);
+        return PostModel::setPostProfile($post_id, $this->user['id']);
     }
 
     // Posts by domain
@@ -208,7 +205,7 @@ class PostController extends Controller
         $domain     = Request::get('domain');
 
         $site       = PostModel::getDomain($domain, $this->user['id']);
-        self::error404($site);
+        notEmptyOrView404($site);
 
         $site['item_content'] = markdown($site['item_content'], 'line');
 

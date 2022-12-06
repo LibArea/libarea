@@ -13,7 +13,7 @@ class Webs extends Controller
     {
         $item_id    = Request::getPostInt('id');
         $item       = WebModel::getItemId($item_id);
-        self::error404($item);
+        notEmptyOrView404($item);
 
         $puth = HLEB_PUBLIC_DIR . Img::PATH['favicons'] . $item["item_domain"] . '.png';
 
@@ -36,7 +36,7 @@ class Webs extends Controller
     {
         $item_id    = Request::getPostInt('id');
         $item       = WebModel::getItemId($item_id);
-        self::error404($item);
+        notEmptyOrView404($item);
 
         $puth = HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $item["item_domain"] . '.png';
 

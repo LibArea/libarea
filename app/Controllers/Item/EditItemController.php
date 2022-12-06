@@ -22,10 +22,8 @@ class EditItemController extends Controller
     // Форма редактирование домена
     public function index()
     {
-        $domain_id  = Request::getInt('id');
-        $domain     = WebModel::getItemId($domain_id);
-        self::error404($domain);
-
+        $domain     = ItemPresence::index(Request::getInt('id'));
+        
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
         if (Access::author('item', $domain, config('trust-levels.edit_time_item')) === false) {

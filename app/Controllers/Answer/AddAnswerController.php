@@ -4,6 +4,7 @@ namespace App\Controllers\Answer;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\PostPresence;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, PostModel};
 use App\Validate\Validator;
 use Content;
@@ -12,7 +13,7 @@ class AddAnswerController extends Controller
 {
     public function create()
     {
-        $post = self::getPost($this->user);
+        $post = PostPresence::index($post_id = Request::getPostInt('post_id'), 'id');
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
@@ -72,15 +73,5 @@ class AddAnswerController extends Controller
                 }
             }
         }
-    }
-
-    public static function getPost($user)
-    {
-        $post_id = Request::getPostInt('post_id');
-
-        $post    = PostModel::getPost($post_id, 'id', $user);
-        self::error404($post);
-
-        return $post;
     }
 }

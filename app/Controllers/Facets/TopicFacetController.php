@@ -4,6 +4,7 @@ namespace App\Controllers\Facets;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\FacetPresence;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
 use Meta, Img;
@@ -16,9 +17,7 @@ class TopicFacetController extends Controller
     // Посты по теме
     public function index($sheet, $type)
     {
-        $slug   = Request::get('slug');
-        $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
-        self::error404($facet);
+        $facet  = FacetPresence::index(Request::get('slug'), 'slug', 'topic');
 
         if ($facet['facet_type'] == 'blog' || $facet['facet_type'] == 'section') {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
@@ -67,9 +66,7 @@ class TopicFacetController extends Controller
     // Информация по теме
     public function info()
     {
-        $slug   = Request::get('slug');
-        $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
-        self::error404($facet);
+        $facet  = FacetPresence::index(Request::get('slug'), 'slug', 'topic');
 
         $m = [
             'og'         => true,
@@ -96,9 +93,7 @@ class TopicFacetController extends Controller
     // Информация по теме
     public function writers()
     {
-        $slug   = Request::get('slug');
-        $facet  = FacetModel::getFacet($slug, 'slug', 'topic');
-        self::error404($facet);
+        $facet  = FacetPresence::index(Request::get('slug'), 'slug', 'topic');
 
         $m = [
             'og'         => true,

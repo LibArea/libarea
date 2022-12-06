@@ -87,15 +87,6 @@ class Controller extends MainController
         require TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php';
     }
 
-    public static function error404($arr = [])
-    {
-        if (empty($arr)) {
-            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-            hl_preliminary_exit();
-        }
-        return true;
-    }
-
     public static function redirection($variable, $redirect = '/')
     {
         if (!$variable) {

@@ -84,3 +84,13 @@ function hook_filter(string $name, string $data, array $params = [])
 {
     return App\Hook\Hook::filter($name, $data, $params);
 }
+
+// mixed $params (c PHP 8.0)
+function notEmptyOrView404($params)
+{
+    if (empty($params)) {
+        include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+        hl_preliminary_exit();
+    }
+    return true;
+}

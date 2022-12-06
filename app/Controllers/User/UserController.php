@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $usersCount = UserModel::getUsersAllCount();
         $users      = UserModel::getUsersAll($this->pageNumber, $this->limit, $this->user['id'], $sheet);
-        self::error404($users);
+        notEmptyOrView404($users);
 
         $m = [
             'og'    => false,

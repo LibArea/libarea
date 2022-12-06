@@ -4,6 +4,7 @@ namespace App\Controllers\Facets;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\FacetPresence;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
 use UploadImage, Meta, UserData;
@@ -21,9 +22,7 @@ class EditFacetController extends Controller
     // Форма редактирования Topic or Blog
     public function index($type)
     {
-        $facet_id   = Request::getInt('id');
-        $facet      = FacetModel::getFacet($facet_id, 'id', $type);
-        self::error404($facet);
+        $facet  = FacetPresence::index(Request::getInt('id'), 'id', $type);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {
@@ -119,8 +118,7 @@ class EditFacetController extends Controller
     {
         $facet_id   = Request::getInt('id');
 
-        $facet  = FacetModel::getFacet($facet_id, 'id', 'blog');
-        self::error404($facet);
+        $facet  = FacetPresence::index(Request::getInt('id'), 'id', 'blog');
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->user['id'] && !UserData::checkAdmin()) {

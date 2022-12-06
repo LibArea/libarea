@@ -81,7 +81,7 @@ class RecoverController extends Controller
         }
 
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
-        self::error404($user);
+        notEmptyOrView404($user);
 
         return $this->render(
             '/auth/newrecover',

@@ -113,7 +113,7 @@ class ProfileController extends Controller
     public function profile()
     {
         $result = Request::get('login');
-        self::error404($profile = UserModel::getUser($result, 'slug'));
+        notEmptyOrView404($profile = UserModel::getUser($result, 'slug'));
 
         if ($profile['ban_list'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');

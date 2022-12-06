@@ -4,6 +4,7 @@ namespace App\Controllers\Item;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\ItemPresence;
 use App\Models\Item\{WebModel, ReplyModel};
 use App\Models\{ActionModel, NotificationModel};
 use App\Validate\Validator;
@@ -42,8 +43,7 @@ class ReplyController extends Controller
         $item_id    = Request::getPostInt('item_id');
         $content    = $_POST['content']; // для Markdown
 
-        $item = WebModel::getItemId($item_id);
-        self::error404($item);
+        $item = ItemPresence::index($item_id);
 
         $url = url('website', ['slug' => $item['item_domain']]);
         Validator::Length($content, 6, 555, 'content', $url);
@@ -75,8 +75,7 @@ class ReplyController extends Controller
         $item_id    = Request::getPostInt('item_id');
         $content    = $_POST['content']; // для Markdown
 
-        $item = WebModel::getItemId($item_id);
-        self::error404($item);
+        $item = ItemPresence::index($item_id)
 
         $url = url('website', ['slug' => $item['item_domain']]);
         Validator::Length($content, 6, 555, 'content', $url);

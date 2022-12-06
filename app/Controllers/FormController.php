@@ -31,7 +31,7 @@ class FormController extends Controller
             return (new Item\AddItemController)->index();
         }
 
-        self::error404();
+        notEmptyOrView404([]);
     }
 
     // GET
@@ -55,7 +55,7 @@ class FormController extends Controller
             return (new Item\EditItemController)->index();
         }
 
-        self::error404();
+        notEmptyOrView404([]);
     }
 
     // POST

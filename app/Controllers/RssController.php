@@ -25,7 +25,7 @@ class RssController extends Controller
     {
         $topic_slug = Request::get('slug');
         $topic      = RssModel::getTopicSlug($topic_slug);
-        self::error404($topic);
+        notEmptyOrView404($topic);
 
         $posts  = RssModel::getPostsFeed($topic_slug);
         $result = [];
@@ -54,7 +54,7 @@ class RssController extends Controller
     {
         $topic_slug = Request::get('slug');
         $topic      = RssModel::getTopicSlug($topic_slug);
-        self::error404($topic);
+        notEmptyOrView404($topic);
 
         $posts  = RssModel::getPostsFeed($topic_slug);
         $result = [];

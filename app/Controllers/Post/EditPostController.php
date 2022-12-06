@@ -4,6 +4,7 @@ namespace App\Controllers\Post;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\PostPresence;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
 use UploadImage, Meta, Access, UserData;
@@ -20,23 +21,18 @@ class EditPostController extends Controller
     use Author;
     use Related;
 
+    // Post edit form
     // Форма редактирования post
     public function index()
     {
-        $post_id    = Request::getInt('id');
-        $post       = PostModel::getPost($post_id, 'id', $this->user);
-        self::error404($post);
+        $post = PostPresence::index($post_id = Request::getInt('id'), 'id');
 
         $post_related = [];
         if ($post['post_related']) {
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
-        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
-
-        if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id']) == false) {
-            is_return(__('msg.access_denied'), 'error');
-        }
+        $this->checkingEditPermissions($post);
 
         return $this->render(
             '/post/edit',
@@ -59,19 +55,13 @@ class EditPostController extends Controller
 
     public function change()
     {
-        $post_id    = Request::getPostInt('post_id');
+        $post = PostPresence::index($post_id = Request::getPostInt('post_id'));
+        
         $content    = $_POST['content']; // for Markdown
         $post_draft = Request::getPost('post_draft') == 'on' ? 1 : 0;
         $draft      = Request::getPost('draft');
 
-        // Access check 
-        $post   = PostModel::getPost($post_id, 'id', $this->user);
-
-        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
-
-        if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id']) == false) {
-            is_return(__('msg.access_denied'), 'error');
-        }
+        $this->checkingEditPermissions($post);
 
         $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
@@ -166,8 +156,7 @@ class EditPostController extends Controller
     // Cover Removal
     function imgPostRemove()
     {
-        $post_id    = Request::getInt('id');
-        $post = PostModel::getPost($post_id, 'id', $this->user);
+        $post = PostPresence::index($post_id = Request::getInt('id'), 'id');
 
         if (Access::author('post', $post, 30) == false) {
             is_return(__('msg.went_wrong'), 'error');
@@ -185,8 +174,7 @@ class EditPostController extends Controller
         $type       = Request::get('type');
         $id         = Request::getInt('id');
 
-        $allowed = ['post-telo', 'answer'];
-        if (!in_array($type, $allowed)) {
+        if (!in_array($type, ['post-telo', 'answer'])) {
             return false;
         }
 
@@ -196,5 +184,21 @@ class EditPostController extends Controller
         }
 
         return false;
+    }
+    
+    public function checkingEditPermissions($post)
+    {
+        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
+        if (empty($blog)) {
+            if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id']) == false) {
+                is_return(__('msg.access_denied'), 'error');
+            }
+        } else {
+            if (Access::author('post', $post, config('trust-levels.edit_time_post')) == false) {
+                is_return(__('msg.access_denied'), 'error');
+            }
+        }
+        
+        return true;
     }
 }

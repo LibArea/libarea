@@ -4,6 +4,7 @@ namespace App\Controllers\Facets;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\FacetPresence;
 use App\Models\{FacetModel, getUsersTeam};
 use App\Models\User\UserModel;
 use Meta, UserData;
@@ -12,11 +13,9 @@ class TeamFacetController extends Controller
 {
     public function index()
     {
-        $type = $this->accessType(Request::get('type'));
+        $type   = $this->accessType(Request::get('type'));
+        $facet  = FacetPresence::index(Request::getInt('id'), 'id', $type);
 
-        $facet  = FacetModel::getFacet(Request::getInt('id'), 'id', $type);
-        self::error404($facet);
- 
         $this->access($facet['facet_user_id']);
  
         $users_team = FacetModel::getUsersTeam($facet['facet_id']);
@@ -43,9 +42,7 @@ class TeamFacetController extends Controller
     public function change()
     {
         $type = $this->accessType(Request::get('type'));
-
-        $facet = FacetModel::getFacet(Request::getInt('id'), 'id', $type);
-        self::error404($facet);
+        $facet = FacetPresence::index(Request::getInt('id'), 'id', $type);
 
         $this->access($facet['facet_user_id']);
 
@@ -81,7 +78,7 @@ class TeamFacetController extends Controller
     public function accessType($type)
     {
         if (!in_array($type = Request::get('type'), config('facets.permitted'))) {
-            self::error404($facet);
+            notEmptyOrView404($facet);
         }
         
         return $type;

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Services\Сheck\PostPresence;
+use App\Services\Сheck\AnswerPresence;
 use App\Models\{AnswerModel, PostModel};
 use UserData, Access;
 
@@ -19,21 +21,13 @@ class AnswerBest extends Base
     
     public function index()
     {
-        $answer_id = Request::getPostInt('answer_id');
-     
         // Get the answer data (for which the "best answer" is selected)     
         // Получим данные ответа (на который выбирается "лучший ответ")
-        $answer = AnswerModel::getAnswerId($answer_id);
-        if (empty($answer)) {
-            return false;
-        }
-        
+        $answer = AnswerPresence::index(Request::getPostInt('answer_id'));
+
         // Get the data of the post that has this answer       
         // Получим данные поста в котором есть этот ответ
-        $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
-        if (empty($post)) {
-            return false;
-        } 
+        $post = PostPresence::index($answer['answer_post_id'], 'id');
         
         // Let's check the access. Only the staff and the author of the post can choose the best answer (without regard to time)
         // Проверим доступ. Только персонал и автор поста может выбирать лучший ответ (без учета времени)

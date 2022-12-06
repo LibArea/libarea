@@ -4,6 +4,8 @@ namespace App\Controllers\Comment;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\PostPresence;
+use App\Services\Сheck\AnswerPresence;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, CommentModel, PostModel};
 use App\Validate\Validator;
 use Content;
@@ -31,11 +33,9 @@ class AddCommentController extends Controller
         $answer_id  = Request::getPostInt('answer_id');   // на какой ответ
         $comment_id = Request::getPostInt('comment_id');  // на какой комментарий
 
-        $answer = AnswerModel::getAnswerId($answer_id);
-        self::error404($answer);
+        $answer = AnswerPresence::index($answer_id);
 
-        $post   = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
-        self::error404($post);
+        $post   = PostPresence::index($answer['answer_post_id'], 'id');
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 

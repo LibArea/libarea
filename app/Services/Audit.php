@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Services\Сheck\PostPresence;
 use App\Models\{ActionModel, AuditModel, NotificationModel, PostModel};
 use UserData, Msg;
 
@@ -29,13 +30,9 @@ class Audit extends Base
         $num_report =  AuditModel::getSpeedReport($this->user['id']);
         if ($num_report > config('trust-levels.perDay_report')) return 1;
 
-        $post   = PostModel::getPost($post_id, 'id', $this->user);
-        if (!$post) {
-            return false;
-        }
+        $post = PostPresence::index($post_id, 'id');
 
-        $arr = ['post', 'answer', 'comment'];
-        if (!in_array($content_type, $arr)) {
+        if (!in_array($content_type, ['post', 'answer', 'comment'])) {
             return false;
         }
 

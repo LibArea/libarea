@@ -23,10 +23,10 @@ class DetailedController extends Controller
         $slug   = Request::get('slug');
 
         $item = WebModel::getItemOne($slug, $this->user['id']);
-        self::error404($item);
+        notEmptyOrView404($item);
 
         if ($item['item_published'] == 0) {
-            self::error404();
+            notEmptyOrView404([]);
         }
 
         $content_img = Img::PATH['thumbs'] . 'default.png';

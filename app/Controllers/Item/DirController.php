@@ -4,6 +4,7 @@ namespace App\Controllers\Item;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\ItemPresence;
 use App\Models\PostModel;
 use App\Models\Item\{WebModel, UserAreaModel, FacetModel};
 use UserData, Meta;
@@ -19,7 +20,7 @@ class DirController extends Controller
         self::filter($grouping = Request::get('grouping'), $sort = Request::get('sort'));
 
         $category  = FacetModel::get(Request::get('slug'), 'slug', $this->user['trust_level']);
-        self::error404($category);
+        notEmptyOrView404($category);
 
         // We will get children
         $childrens =  FacetModel::getChildrens($category['facet_id'], $grouping);
@@ -72,14 +73,14 @@ class DirController extends Controller
         if ($grouping) {
             $os = config('catalog/items.type');
             if (!in_array($grouping, $os)) {
-                self::error404();
+                notEmptyOrView404([]);
             }
         }
 
         if ($sort) {
             $os = ['top', 'all'];
             if (!in_array($sort, $os)) {
-                self::error404();
+                notEmptyOrView404([]);
             }
         }
     }
@@ -103,9 +104,7 @@ class DirController extends Controller
     // Переходы
     public function cleek()
     {
-        $id     = Request::getPostInt('id');
-        $item   = WebModel::getItemId($id);
-        self::error404($item);
+        $item   = ItemPresence::index(Request::getPostInt('id'));
 
         WebModel::setCleek($item['item_id']);
 

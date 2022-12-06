@@ -4,6 +4,8 @@ namespace App\Controllers\Answer;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\PostPresence;
+use App\Services\Сheck\AnswerPresence;
 use App\Models\{AnswerModel, PostModel};
 use App\Models\User\UserModel;
 use App\Validate\Validator;
@@ -18,14 +20,12 @@ class EditAnswerController extends Controller
     // Edit form answer
     public function index()
     {
-        $answer_id  = Request::getInt('id');
-        $answer = AnswerModel::getAnswerId($answer_id);
+        $answer = AnswerPresence::getAnswerId(Request::getInt('id'));
         if (Access::author('answer', $answer, config('trust-levels.edit_time_answer')) == false) {
             return false;
         }
 
-        $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
-        self::error404($post);
+        $post = PostPresence::index($answer['answer_post_id'], 'id');
 
         return $this->render(
             '/answer/edit',
@@ -49,18 +49,20 @@ class EditAnswerController extends Controller
 
         // Access check
         $answer = AnswerModel::getAnswerId($answer_id);
+        
         if (Access::author('answer', $answer, config('trust-levels.edit_time_answer')) == false) {
             return false;
         }
 
-        $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->user);
+        $post = PostPresence::index($answer['answer_post_id'], 'id');
+        
         $url_post = url('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
 
         Validator::Length($content, 6, 5000, 'content', url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]));
 
         AnswerModel::edit(
             [
-                'answer_id'         => $answer_id,
+                'answer_id'         => $answer['answer_id'],
                 'answer_content'    => $content,
                 'answer_user_id'    => $this->selectAuthor($answer['answer_user_id'], Request::getPost('user_id')),
                 'answer_modified'   => date("Y-m-d H:i:s"),

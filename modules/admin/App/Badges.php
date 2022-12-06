@@ -49,7 +49,7 @@ class Badges extends Controller
     {
         $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getId($badge_id);
-        self::error404($badge);
+        notEmptyOrView404($badge);
 
         return view(
             '/view/default/badge/edit',
