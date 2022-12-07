@@ -8,7 +8,7 @@ use App\Models\Item\WebModel;
 
 class ItemPresence
 {
-    public function index(int $element) : array
+    public function index(int $id) : array
     {
         $item = WebModel::getItemId($id);
         
