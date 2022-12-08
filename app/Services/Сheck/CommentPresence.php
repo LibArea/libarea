@@ -8,7 +8,7 @@ use App\Models\CommentModel;
 
 class CommentPresence
 {
-    public function index(int $comment_id) : array
+    public static function index(int $comment_id) : array
     {
         $comment = CommentModel::getCommentsId($comment_id);;
         

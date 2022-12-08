@@ -9,7 +9,7 @@ use UserData;
 
 class PostPresence
 {
-    public function index(int $element, string $type_element = 'id') : array
+    public static function index(int $element, string $type_element = 'id') : array
     {
         $post = PostModel::getPost($element, $type_element, UserData::get());
         

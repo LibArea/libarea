@@ -8,7 +8,7 @@ use App\Models\AnswerModel;
 
 class AnswerPresence
 {
-    public function index(int $answer_id) : array
+    public static function index(int $answer_id) : array
     {
         $answer = AnswerModel::getAnswerId($answer_id);
         
