@@ -1490,3 +1490,9 @@ ALTER TABLE `users` ADD INDEX(`reg_ip`);
 ALTER TABLE `users_agent_logs` ADD INDEX(`user_id`);
 
 ALTER TABLE `items` ADD `item_is_goods` TINYINT(1) NULL COMMENT 'The site contains goods and services' AFTER `item_is_reference`;
+
+ALTER TABLE `items` ADD `item_telephone` varchar(55) NULL COMMENT 'Contact phone' AFTER `item_github_url`;
+ALTER TABLE `items` ADD `item_email` varchar(55) NULL COMMENT 'Public email address' AFTER `item_telephone`;
+ALTER TABLE `items` ADD `item_vk` varchar(55) NULL COMMENT 'Page in VKontakte' AFTER `item_email`;
+ALTER TABLE `items` ADD `item_telegram` varchar(55) NULL COMMENT 'Page in Telegram' AFTER `item_vk`;
+
