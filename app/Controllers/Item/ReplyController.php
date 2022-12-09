@@ -75,10 +75,10 @@ class ReplyController extends Controller
         $item_id    = Request::getPostInt('item_id');
         $content    = $_POST['content']; // для Markdown
 
-        $item = ItemPresence::index($item_id)
+        $item = ItemPresence::index($item_id);
 
-        $url = url('website', ['slug' => $item['item_domain']]);
-        Validator::Length($content, 6, 555, 'content', $url);
+        $website_url = url('website', ['slug' => $item['item_domain']]);
+        Validator::Length($content, 6, 555, 'content', $website_url);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
         // Проверим на заморозку, стоп слова, частоту размещения контента в день
@@ -101,11 +101,11 @@ class ReplyController extends Controller
                 'id_content'    => $last_id,
                 'action_type'   => 'reply',
                 'action_name'   => 'added',
-                'url_content'   => $url,
+                'url_content'   => $website_url,
             ]
         );
 
-        $url = url('website', ['slug' => $item['item_domain']]) . '#reply_' . $last_id;
+        $url = $website_url . '#reply_' . $last_id;
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {

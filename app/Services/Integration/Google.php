@@ -3,6 +3,7 @@
 namespace App\Services\Integration;
 
 use Hleb\Constructor\Handlers\Request;
+use Curl;
 
 class Google
 {

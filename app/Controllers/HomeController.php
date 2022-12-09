@@ -73,7 +73,7 @@ class HomeController extends Controller
     public function scroll()
     {
         $type = Request::get('type') == 'all' ? 'all' : 'main.feed';
-        
+
         $ignored        = IgnoredModel::getIgnoredUsers(50);
         $topics_user    = HomeModel::subscription($this->user['id']);
         $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $ignored, $this->user, $type);

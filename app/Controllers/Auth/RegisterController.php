@@ -38,10 +38,10 @@ class RegisterController extends Controller
 
     public function index()
     {
-       $inv_user_id  = Request::getPostInt('invitation_id');
-       $reg_ip  = Request::getRemoteAddress();
-       $data    = Request::getPost();
-       $inv_uid = RulesRegistration::rules($data, $reg_ip, $inv_user_id);
+        $inv_user_id  = Request::getPostInt('invitation_id');
+        $reg_ip  = Request::getRemoteAddress();
+        $data    = Request::getPost();
+        $inv_uid = RulesRegistration::rules($data, $reg_ip, $inv_user_id);
 
         // For "launch mode", the first 50 members get trust_level = 2
         // Для "режима запуска" первые 50 участников получают trust_level = 2 

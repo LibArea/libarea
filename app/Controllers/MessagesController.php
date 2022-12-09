@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{MessagesModel, NotificationModel};
-use Content, Html, Meta;
+use Html, Meta;
 
 class MessagesController extends Controller
 {

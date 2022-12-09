@@ -2,6 +2,8 @@
 
 namespace App\Services\Integration;
 
+use Curl;
+
 class Discord
 {
     public static function addWebhook($text, $title, $url)

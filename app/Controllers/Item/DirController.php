@@ -63,7 +63,8 @@ class DirController extends Controller
                     'characteristics'   => WebModel::getTypesWidget($category['facet_id']),
                     'low_matching'      => FacetModel::getLowMatching($category['facet_id']),
                 ]
-            ], 'item',
+            ],
+            'item',
         );
     }
 

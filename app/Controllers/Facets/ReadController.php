@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\FacetPresence;
 use App\Models\{FacetModel, SubscriptionModel};
-use Meta, Content;
+use Meta;
 
 class ReadController extends Controller
 {

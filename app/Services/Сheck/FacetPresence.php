@@ -10,10 +10,10 @@ use UserData;
 class FacetPresence
 {
     // mixed $element (c PHP 8.0)
-    public static function index($element, string $type_element = 'id', string $type = 'topic') : array
+    public static function index($element, string $type_element = 'id', string $type = 'topic'): array
     {
         $facet = FacetModel::getFacet($element, $type_element, $type);
-        
+
         notEmptyOrView404($facet);
 
         return $facet;

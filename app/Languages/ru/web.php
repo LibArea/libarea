@@ -92,7 +92,7 @@ return [
     'telephone'             => 'Телефон',
     'email'                 => 'E-mail',
     'vk'                    => 'ВКонтакте (URL)',
-    'telegram'              => 'Телеграмм (URL)',
+    'telegram'              => 'Телеграм (URL)',
 
     'string_length'         => 'Некорректная длина {name}',
     'website_correctness'   => 'Адрес (URL) сайта не является корректным',

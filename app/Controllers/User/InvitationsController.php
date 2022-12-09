@@ -65,14 +65,14 @@ class InvitationsController extends Controller
     function escort($invitation_code, $invitation_email)
     {
         $no_content = 0;
-        
+
         $link = url('invite.reg', ['code' => $invitation_code]);
 
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
         ActionModel::addLogs(
             [
-                'id_content'    => $no_content, 
+                'id_content'    => $no_content,
                 'action_type'   => 'invite',
                 'action_name'   => 'added',
                 'url_content'   => $link,

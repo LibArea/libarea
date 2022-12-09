@@ -69,7 +69,7 @@ class SendEmail
             if ($result === true) {
                 echo "Done";
             } else {
-               throw AutorizationException::Smtp("Error - " . $result);
+                throw AutorizationException::Smtp("Error - " . $result);
             }
         } else {
             $mail = new \Phphleb\Muller\StandardMail(false);

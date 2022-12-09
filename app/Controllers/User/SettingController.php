@@ -13,7 +13,7 @@ use App\Validate\RulesUserSetting;
 class SettingController extends Controller
 {
     protected $limit = 25;
-    
+
     function index()
     {
         switch (Request::get('type')) {

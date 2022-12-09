@@ -29,7 +29,8 @@ class HomeController extends Controller
                     'user_count_site'   => UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']),
                     'audit_count'       => UserAreaModel::auditCount(),
                 ]
-            ], 'item',
+            ],
+            'item',
         );
     }
 }

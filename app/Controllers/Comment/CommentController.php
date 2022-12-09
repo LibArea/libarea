@@ -4,7 +4,7 @@ namespace App\Controllers\Comment;
 
 use App\Controllers\Controller;
 use App\Models\{CommentModel, AnswerModel};
-use Meta, Html, Content;
+use Meta, Html;
 
 class CommentController extends Controller
 {
@@ -25,9 +25,9 @@ class CommentController extends Controller
             'url'   => url('comments'),
         ];
 
-        $mergedArr = array_merge($comments, $answers);    
-        usort($mergedArr, function($a, $b){
-            return   ($b['comment_date'] ?? $b['answer_date']) <=> ($a['comment_date'] ?? $a['answer_date']);   
+        $mergedArr = array_merge($comments, $answers);
+        usort($mergedArr, function ($a, $b) {
+            return ($b['comment_date'] ?? $b['answer_date']) <=> ($a['comment_date'] ?? $a['answer_date']);
         });
 
         return $this->render(

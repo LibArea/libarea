@@ -6,8 +6,8 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\PostPresence;
 use App\Services\Сheck\FacetPresence;
-use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel, FacetModel};
-use Content, Meta, UserData, Access, Img;
+use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel};
+use Meta, UserData, Access, Img;
 
 use App\Traits\Views;
 use App\Traits\LastDataModified;
@@ -128,7 +128,7 @@ class PostController extends Controller
         }
 
         $slug_facet = Request::get('facet_slug');
-        
+
         $facet  = FacetPresence::index($slug_facet, 'slug', 'section');
 
         $m = [
@@ -173,7 +173,7 @@ class PostController extends Controller
 
             return $content;
         }
-        
+
         return PostPresence::index($slug, 'slug');
     }
 

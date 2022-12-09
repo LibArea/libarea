@@ -87,7 +87,13 @@ return [
     'life_help'         => 'Дітям, тварини, хобі...',
     'security'          => 'Безпека...',
     'society'           => 'Суспільство та політика',
-    
+
+    'contact_information'   => 'Контактна інформація',
+    'telephone'             => 'Телефон',
+    'email'                 => 'Email',
+    'vk'                    => 'ВКонтакті (URL)',
+    'telegram'              => 'Телеграм (URL)',
+
     'string_length'         => 'Некоректна довжина {name}',
     'website_correctness'   => 'Адреса (URL) сайту не є коректною',
     'site_replay'           => 'Такий сайт вже є у системі',

@@ -5,8 +5,7 @@ namespace App\Controllers\Facets;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\FacetPresence;
-use App\Models\{FacetModel, getUsersTeam};
-use App\Models\User\UserModel;
+use App\Models\FacetModel;
 use Meta, UserData;
 
 class TeamFacetController extends Controller
@@ -17,12 +16,12 @@ class TeamFacetController extends Controller
         $facet  = FacetPresence::index(Request::getInt('id'), 'id', $type);
 
         $this->access($facet['facet_user_id']);
- 
+
         $users_team = FacetModel::getUsersTeam($facet['facet_id']);
- 
+
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
- 
+
         return $this->render(
             '/facets/team',
             [
@@ -34,9 +33,9 @@ class TeamFacetController extends Controller
                     'users_team'    => $users_team,
                 ]
             ]
-        );  
+        );
     }
-    
+
     // Team change
     // Изменение команды
     public function change()
@@ -51,7 +50,7 @@ class TeamFacetController extends Controller
 
         is_return(__('msg.change_saved'), 'success', url('team.edit', ['id' => $facet['facet_id'], 'type' => $type]));
     }
-    
+
     // We will re-register the participantsы
     // Перезапишем участников 
     public static function editUser($users, $content_id)
@@ -61,7 +60,7 @@ class TeamFacetController extends Controller
 
         return FacetModel::editUsersTeam($arr_user, $content_id);
     }
-    
+
     // Only author and admin get accesss
     // Доступ получает только автор и админ
     public function access($facet_user_id)
@@ -69,7 +68,7 @@ class TeamFacetController extends Controller
         if ($facet_user_id != $this->user['id'] && !UserData::checkAdmin()) {
             redirect('/');
         }
-        
+
         return true;
     }
 
@@ -78,9 +77,9 @@ class TeamFacetController extends Controller
     public function accessType($type)
     {
         if (!in_array($type = Request::get('type'), config('facets.permitted'))) {
-            notEmptyOrView404($facet);
+            notEmptyOrView404([]);
         }
-        
+
         return $type;
     }
 }

@@ -88,7 +88,13 @@ return [
     'life_help'         => 'Copii, animale, hobby-uri...',
     'security'          => 'Siguranță...',
     'society'           => 'Societatea si politica',
-    
+
+    'contact_information'   => 'Informatii de contact',
+    'telephone'             => 'Telefon',
+    'email'                 => 'Email',
+    'vk'                    => 'VKontakte (URL)',
+    'telegram'              => 'Telegram (URL)',
+
     'string_length'         => 'Lungime incorectă {name}',
     'website_correctness'   => 'Adresa (URL) site-ului nu este corectă',
     'site_replay'           => 'Un astfel de site există deja în sistem',

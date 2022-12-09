@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\RssModel;
-use Content;
 
 class RssController extends Controller
 {

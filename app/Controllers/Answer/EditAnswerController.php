@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\PostPresence;
 use App\Services\Сheck\AnswerPresence;
-use App\Models\{AnswerModel, PostModel};
+use App\Models\AnswerModel;
 use App\Models\User\UserModel;
 use App\Validate\Validator;
 use Meta, Access;
@@ -49,13 +49,13 @@ class EditAnswerController extends Controller
 
         // Access check
         $answer = AnswerModel::getAnswerId($answer_id);
-        
+
         if (Access::author('answer', $answer, config('trust-levels.edit_time_answer')) == false) {
             return false;
         }
 
         $post = PostPresence::index($answer['answer_post_id'], 'id');
-        
+
         $url_post = url('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
 
         Validator::Length($content, 6, 5000, 'content', url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]));

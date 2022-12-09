@@ -30,7 +30,8 @@ class UserAreaController extends Controller
                     'user_count_site'   => $count_site,
                     'sheet'             => 'sites',
                 ]
-            ], 'item',
+            ],
+            'item',
         );
     }
 
@@ -57,7 +58,8 @@ class UserAreaController extends Controller
                     'pNum'              => $this->pageNumber,
                     'items'             => $items,
                 ]
-            ], 'item',
+            ],
+            'item',
         );
     }
 }

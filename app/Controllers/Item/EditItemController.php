@@ -52,7 +52,8 @@ class EditItemController extends Controller
                     'category_arr'  => WebModel::getItemTopic($domain['item_id']),
                     'post_arr'      => $item_post_related,
                 ]
-            ], 'item',
+            ],
+            'item',
         );
     }
 

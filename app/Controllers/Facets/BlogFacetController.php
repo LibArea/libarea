@@ -7,7 +7,7 @@ use App\Controllers\Controller;
 use App\Services\Сheck\FacetPresence;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel};
-use Content, Meta, Img;
+use Meta, Img;
 
 class BlogFacetController extends Controller
 {

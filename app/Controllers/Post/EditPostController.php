@@ -32,7 +32,8 @@ class EditPostController extends Controller
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
-        $this->checkingEditPermissions($post);
+        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
+        $this->checkingEditPermissions($post, $blog);
 
         return $this->render(
             '/post/edit',
@@ -56,12 +57,13 @@ class EditPostController extends Controller
     public function change()
     {
         $post = PostPresence::index($post_id = Request::getPostInt('post_id'));
-        
+
         $content    = $_POST['content']; // for Markdown
         $post_draft = Request::getPost('post_draft') == 'on' ? 1 : 0;
         $draft      = Request::getPost('draft');
 
-        $this->checkingEditPermissions($post);
+        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
+        $this->checkingEditPermissions($post, $blog);
 
         $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
@@ -185,10 +187,9 @@ class EditPostController extends Controller
 
         return false;
     }
-    
-    public function checkingEditPermissions($post)
+
+    public function checkingEditPermissions($post, $blog)
     {
-        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
         if (empty($blog)) {
             if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id']) == false) {
                 is_return(__('msg.access_denied'), 'error');
@@ -198,7 +199,7 @@ class EditPostController extends Controller
                 is_return(__('msg.access_denied'), 'error');
             }
         }
-        
+
         return true;
     }
 }

@@ -7,7 +7,6 @@ use App\Controllers\Controller;
 use App\Services\Сheck\PostPresence;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, PostModel};
 use App\Validate\Validator;
-use Content;
 
 class AddAnswerController extends Controller
 {

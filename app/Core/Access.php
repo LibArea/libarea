@@ -116,9 +116,9 @@ class Access
          *
          * Доступ получает только автор.
          */
-         if ($info_type[$type_content . '_user_id'] != UserData::getUserId()) {
-             return false;
-         }
+        if ($info_type[$type_content . '_user_id'] != UserData::getUserId()) {
+            return false;
+        }
 
         /**
          * Time limit.
@@ -131,7 +131,7 @@ class Access
 
         return true;
     }
-    
+
     public static function postAuthorAndTeam(array $info_type, int $blog_user_id): bool
     {
         if (UserData::checkAdmin()) {
@@ -148,15 +148,15 @@ class Access
         if (self::trustLevels(config('trust-levels.tl_add_post')) === false) {
             return false;
         }
-        
+
         /**
          * Allow the author or blog owner to edit the article.
          *
          * Разрешить редактировать статью автору или владельцу блога.
          */
-         if ($info_type['post_user_id'] != UserData::getUserId() && UserData::getUserId() != $blog_user_id) {
-             return false;
-         }
+        if ($info_type['post_user_id'] != UserData::getUserId() && UserData::getUserId() != $blog_user_id) {
+            return false;
+        }
 
         /**
          * Time limit.

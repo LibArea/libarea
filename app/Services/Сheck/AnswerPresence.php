@@ -8,10 +8,10 @@ use App\Models\AnswerModel;
 
 class AnswerPresence
 {
-    public static function index(int $answer_id) : array
+    public static function index(int $answer_id): array
     {
         $answer = AnswerModel::getAnswerId($answer_id);
-        
+
         notEmptyOrView404($answer);
 
         return $answer;

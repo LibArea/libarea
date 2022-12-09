@@ -10,7 +10,7 @@ use App\Services\Integration\Discord;
 use App\Services\Integration\Telegram;
 use App\Services\Сheck\PostPresence;
 use App\Services\Сheck\FacetPresence;
-use Content, UploadImage, URLScraper, Meta, UserData;
+use UploadImage, URLScraper, Meta, UserData;
 
 use Utopia\Domains\Domain;
 use App\Validate\RulesPost;
@@ -42,7 +42,7 @@ class AddPostController extends Controller
             [
                 'meta'      => Meta::get(__('app.add_' . $type)),
                 'data'  => [
-                    'facets'    => ['topic' => $topic],
+                    'facets'    => ['topic' => $topic ?? false],
                     'blog'      => array_merge($facets, $blog),
                     'post_arr'  => PostModel::postRelatedAll(),
                     'type'      => 'add',
@@ -58,7 +58,7 @@ class AddPostController extends Controller
         $post_url   = Request::getPost('post_url');
         $blog_id    = Request::getPostInt('blog_id');
         $fields     = Request::getPost() ?? [];
- 
+
         $content = $_POST['content'] == '' ? $_POST['content_qa'] : $_POST['content'];
         $content = $content == '' ? $_POST['content_url'] : $content;
 
@@ -236,24 +236,22 @@ class AddPostController extends Controller
 
         return true;
     }
-    
+
     public function addIntegration($content, $url_content, $fields)
     {
         $post_draft = $fields['post_draft'] ?? false;
-        
+
         if ($fields['content_tl'] == 0 && $post_draft == 0) {
-        
+
             // Discord
             if (config('integration.discord')) {
-               Discord::AddWebhook($content, $fields['post_title'], $url_content);
+                Discord::AddWebhook($content, $fields['post_title'], $url_content);
             }
-            
+
             // Telegram
             if (config('integration.telegram')) {
-               Telegram::AddWebhook($content, $fields['post_title'], $url_content);
+                Telegram::AddWebhook($content, $fields['post_title'], $url_content);
             }
-            
-        }    
+        }
     }
-
 }

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
-use UserData, Meta, LinguaStem;
+use UserData, Meta;
 
 class SearchController extends Controller
 {
@@ -42,7 +42,7 @@ class SearchController extends Controller
 
             $results = SearchModel::getSearch($pageNumber, $this->limit, $q, $type);
             $count_results =  SearchModel::getSearchCount($q, $type);
-            
+
             $user_id = UserData::getUserId();
             SearchModel::setSearchLogs(
                 [
@@ -73,7 +73,8 @@ class SearchController extends Controller
                     'pagesCount'    => ceil($count / $this->limit),
                     'pNum'          => $pageNumber,
                 ]
-            ], 'search',
+            ],
+            'search',
         );
     }
 

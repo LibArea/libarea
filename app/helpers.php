@@ -43,7 +43,7 @@ function setting(string $key = null)
     if ($key === null) {
         return $key;
     }
-    
+
     return \Modules\Admin\App\Setting::get($key);
 }
 

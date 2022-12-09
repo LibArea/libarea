@@ -12,13 +12,13 @@ class UploadImage
         if (!empty($file['images']['name'])) {
             self::img($file['images'], $content_id, $type);
         }
-        
+
         if (!empty($file['cover']['name'])) {
             self::cover($file['cover'], $content_id, $type);
         }
         return false;
-    } 
- 
+    }
+
     public static function img($img, $content_id, $type)
     {
         switch ($type) {
@@ -46,10 +46,10 @@ class UploadImage
             $image->load($file);
             $image->resizeAllInCenter(160, 160, "#ffffff");
             $image->save($path_img . $filename . '.webp', "webp");
-            
+
             $image->resizeAllInCenter(48, 48, "#ffffff");
-            $image->save($path_img_small . $filename . '.webp', "webp");  
-            
+            $image->save($path_img_small . $filename . '.webp', "webp");
+
             $new_img    = $filename . '.webp';
 
             if ($type == 'facet') {
@@ -100,7 +100,6 @@ class UploadImage
             $image->load($file);
             $image->resizeToWidth(1050);
             $image->save($path_img . $year . $month . $filename . '.' . $file_type, $file_type, 100);
-                
         } else {
             $image->load($file);
             $image->save($path_img . $year . $month . $filename . '.' . $file_type, $file_type, 100);
@@ -145,10 +144,10 @@ class UploadImage
             $image = new SimpleImage();
             $image->load($file_cover);
             $image->resize(1720, 350);
-            $image->save($path_cover_img . $filename . '.webp', "webp");   
-            
+            $image->save($path_cover_img . $filename . '.webp', "webp");
+
             $image->resize(48, 48);
-            $image->save($path_cover_small . $filename . '.webp', "webp");  
+            $image->save($path_cover_small . $filename . '.webp', "webp");
 
             $new_cover  = $filename . '.webp';
 
@@ -200,7 +199,7 @@ class UploadImage
         $image->load($file);
         $image->resizeToWidth(1050);
         $image->save($path . $year . $filename . '.webp', "webp");
-        
+
         $post_img = $year . $filename . '.webp';
 
         // Delete if there is an old one
@@ -208,7 +207,7 @@ class UploadImage
         if ($post_content_img != $post_img) {
             @unlink($path . $post_content_img);
             FileModel::removal($post_content_img, $user_id);
-        } 
+        }
 
         FileModel::set(
             [
@@ -253,10 +252,10 @@ class UploadImage
             $image->load($local);
             $image->resizeToWidth(1050);
             $image->save($path . $year . $filename . '.webp', "webp");
-            
+
             if (file_exists($local)) {
                 @unlink($local);
-           }
+            }
 
             return $year . $filename . '.webp';
         }

@@ -86,7 +86,13 @@ return [
     'life_help'         => 'اطفال, حيوانات, هوايات...',
     'security'          => 'امن...',
     'society'           => 'مجتمع و سياسة',
-    
+
+    'contact_information'   => 'معلومات التواصل',
+    'telephone'             => 'هاتف',
+    'email'                 => 'Email',
+    'vk'                    => 'Vkontakte (URL)',
+    'telegram'              => 'Telegram (URL)',
+
     'string_length'         => 'طول خطأ {name}',
     'website_correctness'   => 'العنون (الرابط) لهذا الموقع غير صحيح',
     'site_replay'           => 'موقع مماثل موجود بالفعل',

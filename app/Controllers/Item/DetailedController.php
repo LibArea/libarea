@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\Item\{WebModel, ReplyModel, UserAreaModel};
 use App\Models\{PostModel, SubscriptionModel};
-use Content, Meta, UserData, Img;
+use Meta, UserData, Img;
 
 use App\Traits\LastDataModified;
 
@@ -72,7 +72,8 @@ class DetailedController extends Controller
                     'user_count_site'   => $count_site,
                     'related_posts'     => $related_posts ?? [],
                 ]
-            ], 'item',
+            ],
+            'item',
         );
     }
 

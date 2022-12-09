@@ -87,7 +87,13 @@ return [
     'life_help'         => '儿童、动物、爱好...',
     'security'          => '安全...',
     'society'           => '社会与政治',
-    
+
+    'contact_information'   => '联系信息',
+    'telephone'             => '电话',
+    'email'                 => 'Email',
+    'vk'                    => 'VKontakte (URL)',
+    'telegram'              => 'Telegram (URL)',
+
     'string_length'         => '长度不正确 {name}',
     'website_correctness'   => '网站地址（URL）不正确',
     'site_replay'           => '此网站已存在系统中',

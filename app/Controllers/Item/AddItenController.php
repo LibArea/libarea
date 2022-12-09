@@ -32,7 +32,8 @@ class AddItemController extends Controller
                     'type'       => 'web',
                     'user_count_site'   => $count_site,
                 ]
-            ], 'item',
+            ],
+            'item',
         );
     }
 
@@ -89,7 +90,7 @@ class AddItemController extends Controller
 
         is_return(__('web.site_added'), 'success', url('web'));
     }
-    
+
     // Notification to staff
     // Оповещение персоналу
     public function notif($trust_level)
@@ -104,8 +105,7 @@ class AddItemController extends Controller
                 ]
             );
         }
-        
+
         return true;
     }
-
 }

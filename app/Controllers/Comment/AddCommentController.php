@@ -6,9 +6,8 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\PostPresence;
 use App\Services\Сheck\AnswerPresence;
-use App\Models\{NotificationModel, ActionModel, AnswerModel, CommentModel, PostModel};
+use App\Models\{NotificationModel, ActionModel, AnswerModel, CommentModel};
 use App\Validate\Validator;
-use Content;
 
 class AddCommentController extends Controller
 {

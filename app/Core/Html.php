@@ -27,14 +27,14 @@ class Html
         if (($a[0] . $a[1] . $a[2]) == $today) {
             //Если сегодня
             return (__('app.today') . ' ' . $a[3] . ':' . $a[4]);
-        } 
+        }
 
         $b = explode('-', date("Y-m-d"));
         $tom = date('Ymd', mktime(0, 0, 0, $b[1], $b[2] - 1, $b[0]));
         if (($a[0] . $a[1] . $a[2]) == $tom) {
             //Если вчера
             return (__('app.yesterday') . ' ' . $a[3] . ':' . $a[4]);
-        } 
+        }
 
         //Если позже
         $mm = intval($a[1]);
@@ -50,7 +50,7 @@ class Html
         $count = $content[$type . '_votes'] > 0 ?  $content[$type . '_votes'] : '';
 
         $html = '<div class="flex gap-min gray-600"><div class="up-id click-no-auth"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score"> ' . $count . '</div></div>';
-                        
+
         if (UserData::getAccount()) {
             if ($content['votes_' . $type . '_user_id'] || UserData::getUserId() == $content[$type . '_user_id']) {
                 $html = '<div class="active flex gap-min">
