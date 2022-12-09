@@ -1,6 +1,6 @@
 <?php
-  $fs = $data['facet'];
-  $url = url('redirect.facet', ['id' => $fs['facet_id']]);
+$fs = $data['facet'];
+$url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
 <main>
@@ -21,7 +21,7 @@
             ]
           ]
         ]
-      ); ?> 
+      ); ?>
     </ul>
     <a class="gray-600" href="<?= $url; ?>"><?= __('app.go_to'); ?></a>
   </div>

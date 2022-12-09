@@ -60,7 +60,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
                     <a class="gray-600" href="<?= url('profile', ['login' => $usr['value']]); ?>"><?= $usr['value']; ?></a>
                   </div>
                 <?php endforeach; ?>
-               </div> 
+              </div>
             <?php endif; ?>
 
 

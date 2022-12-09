@@ -41,14 +41,14 @@
             'url'     => url('topic', ['slug' => $topic['facet_slug']]),
             'title'   => __('app.feed'),
           ], [
-              'id'    => 'facet.posts',
-              'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/posts',
-              'title' => __('app.posts'),
-            ], [
-              'id'    => 'facet.questions',
-              'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/questions',
-              'title' => __('app.questions'),
-            ], [
+            'id'    => 'facet.posts',
+            'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/posts',
+            'title' => __('app.posts'),
+          ], [
+            'id'    => 'facet.questions',
+            'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/questions',
+            'title' => __('app.questions'),
+          ], [
             'id'      => 'facet.recommend',
             'url'     => url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
             'title'   => __('app.recommended'),

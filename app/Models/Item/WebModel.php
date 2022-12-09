@@ -90,7 +90,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_count,
                     item_title_soft,
                     item_is_github,
-                    item_github_url,
+                    item_github_url, 
+                    item_telephone,
                     item_following_link,
                     item_is_deleted,
                     rel.*,
@@ -247,7 +248,11 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_is_github      = :item_is_github,
                     item_post_related   = :item_post_related,
                     item_close_replies  = :item_close_replies,
-                    item_github_url     = :item_github_url
+                    item_github_url     = :item_github_url,
+                    item_telephone      = :item_telephone,
+                    item_email          = :item_email,
+                    item_vk             = :item_vk,
+                    item_telegram       = :item_telegram
                         WHERE item_id   = :item_id";
 
         return  DB::run($sql, $params);
@@ -278,6 +283,10 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_is_soft,
                     item_is_github,
                     item_github_url,
+                    item_telephone,
+                    item_email,
+                    item_vk,
+                    item_telegram,
                     item_post_related,
                     item_following_link,
                     item_close_replies,

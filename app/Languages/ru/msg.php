@@ -59,11 +59,11 @@ return [
     'invite_created'        => 'Инвайт создан',
     'url_reserved'          => 'Этот URL блога зарезервирован',
     'url_correctness'       => 'URL не является корректным',
-    
+
     'string_length'         => 'Некорректная длина {name}',
     'slug_correctness'      => '{name} должен содержать только латиницу, цифры',
     'email_correctness'     => 'Недопустимый e-mail',
-    
+
     'limit_day'             => 'Вы исчерпали лимит на сегодня',
     'content_audit'         => 'Ваше сообщение отправлено на проверку',
     'access_denied'         => 'Вам отказано в доступе',

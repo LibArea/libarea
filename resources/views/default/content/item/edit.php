@@ -41,11 +41,11 @@ $domain = $data['domain']; ?>
 
         <?= insert('/_block/form/edit-website', ['domain' => $domain]); ?>
 
-        <?= insert('/_block/form/select/related-posts', ['data' => $data]); ?>
-
         <?php if (UserData::checkAdmin()) { ?>
           <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
         <?php } ?>
+
+        <?= insert('/_block/form/select/related-posts', ['data' => $data]); ?>
 
         <input type="hidden" name="item_id" value="<?= $domain['item_id']; ?>">
         <?= Html::sumbit(__('web.edit')); ?>

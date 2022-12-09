@@ -21,7 +21,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
             ]
           ]
         ]
-      ); ?> 
+      ); ?>
     </ul>
     <a class="gray-600" href="<?= $url; ?>"><?= __('app.go_to'); ?></a>
   </div>
@@ -32,8 +32,8 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
     <div class="file-upload mb10 mt15" id="file-drag">
       <div class="flex">
-      <?= Img::image($fs['facet_img'], $fs['facet_title'], 'img-xl', 'logo', 'max'); ?>
-      <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl br-gray">
+        <?= Img::image($fs['facet_img'], $fs['facet_title'], 'img-xl', 'logo', 'max'); ?>
+        <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl br-gray">
       </div>
       <div id="start" class="mt10">
         <input class="text-xs" id="file-upload" type="file" name="images" accept="image/*" />

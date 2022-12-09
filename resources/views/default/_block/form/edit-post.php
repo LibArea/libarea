@@ -77,17 +77,17 @@
 <?php if ($post['post_type'] == 'post') : ?>
   <?= insert('/_block/form/content-tl', ['data' => $post['post_tl']]); ?>
 
-    <?php if (config('general.qa_site_format') == true) : ?>
-        <?php if (UserData::checkAdmin()) : ?>
-          <fieldset>
-            <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>
-          </fieldset>
-        <?php endif; ?>
-    <?php else : ?>
+  <?php if (config('general.qa_site_format') == true) : ?>
+    <?php if (UserData::checkAdmin()) : ?>
       <fieldset>
         <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>
       </fieldset>
     <?php endif; ?>
+  <?php else : ?>
+    <fieldset>
+      <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>
+    </fieldset>
+  <?php endif; ?>
 
   <fieldset>
     <input type="checkbox" name="closed" <?php if ($post['post_closed'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_closed'); ?>
@@ -117,7 +117,7 @@
     <label for="post_title"><?= __('app.id_merged_post'); ?></label>
     <input value="<?= $post['post_merged_id']; ?>" type="text" name="post_merged_id">
     <div class="help"><?= __('app.post_merged_info'); ?></div>
-  </fieldset>   
+  </fieldset>
 <?php endif; ?>
 
 

@@ -106,6 +106,10 @@ class EditItemController extends Controller
                 'item_is_github'        => self::toggle($data['github'] ?? false),
                 'item_post_related'     => $post_related ?? null,
                 'item_github_url'       => $data['github_url'] ?? null,
+                'item_telephone'        => $data['telephone'] ?? null,
+                'item_email'            => $data['email'] ?? null,
+                'item_vk'               => $data['vk'] ?? null,
+                'item_telegram'         => $data['telegram'] ?? null,
             ]
         );
 

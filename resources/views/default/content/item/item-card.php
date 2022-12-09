@@ -53,6 +53,9 @@
                     <?= $item['item_title_soft']; ?>
                   </a>
                 <?php endif; ?>
+                <?php if ($item['item_telephone']) : ?>
+                  <span class="gray-600 ml5"><?= $item['item_telephone']; ?></span>
+                <?php endif; ?>  
                 <div>
                   <svg class="icons gray ml5">
                     <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>

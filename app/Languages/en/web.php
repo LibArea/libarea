@@ -87,7 +87,13 @@ return [
     'life_help'         => 'Children, animals, hobbies...',
     'security'          => 'Security...',
     'society'           => 'Society and politics',
-    
+
+    'contact_information'   => 'Contact Information',
+    'telephone'             => 'Telephone',
+    'email'                 => 'Email',
+    'vk'                    => 'Vkontakte (URL)',
+    'telegram'              => 'Telegram (URL)',
+
     'string_length'         => 'Incorrect length {name}',
     'website_correctness'   => 'The address (URL) of the site is not correct',
     'site_replay'           => 'Such a site already exists in the system',
