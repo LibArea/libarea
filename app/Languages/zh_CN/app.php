@@ -17,6 +17,7 @@ return [
     'news'              => '新闻',
     'team'              => '团队',
     'teams'             => '团队',
+    'team_not_users'    => '团队中还没有成员...',
     'owner'             => '所有者',
     'top'               => '最佳',
     'admin'             => '管理',

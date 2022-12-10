@@ -43,7 +43,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       </div>
     <?php endforeach; ?>
   <?php else : ?>
-    .....
+    <?= __('app.team_not_users'); ?>
   <?php endif; ?>
 </main>
 <aside>

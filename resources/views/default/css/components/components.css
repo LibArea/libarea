@@ -365,3 +365,5 @@ article iframe {
   display: flex;
   gap: 1rem;
 }
+
+.content_tree { word-wrap: break-word; }

@@ -17,6 +17,7 @@ return [
     'news'              => 'News',
     'team'              => 'Team',
     'teams'             => 'Teams',
+    'team_not_users'    => 'There is no member in the team yet...',
     'owner'             => 'Owner',
     'top'               => 'TOP',
     'admin'             => 'Admin panel',

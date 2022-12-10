@@ -17,6 +17,7 @@ return [
     'news'              => 'Știri',
     'team'              => 'Echipă',
     'teams'             => 'Echipe',
+    'team_not_users'    => 'Întrucât să nu știți...',
     'owner'             => 'Proprietar',
     'top'               => 'Populare',
     'admin'             => 'Admin',
