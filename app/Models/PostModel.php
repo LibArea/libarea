@@ -330,46 +330,19 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Check if the domain exists 
     // Проверим наличие домена
-    public static function getDomain($domain, $user_id)
+    public static function availabilityDomain($domain)
     {
-        $sql = "SELECT
-                    item_id,
-                    item_title,
-                    item_content,
-                    item_title_soft,
-                    item_content_soft,
-                    item_published,
-                    item_user_id,
-                    item_url,
-                    item_domain,
-                    item_votes,
-                    item_count,
-                    item_is_soft,
-                    item_is_github,
-                    item_github_url,
-                    item_post_related,
-                    item_is_deleted,
-                    votes_item_user_id, 
-                    votes_item_item_id
-                        FROM items 
-                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :user_id
-                        WHERE item_domain = :domain AND item_is_deleted = 0";
+        $sql = "SELECT post_url_domain FROM posts WHERE post_url_domain = :domain AND post_is_deleted = 0";
 
-
-        return DB::run($sql, ['domain' => $domain, 'user_id' => $user_id])->fetch();
+        return DB::run($sql, ['domain' => $domain])->fetch();
     }
 
-    // 10 popular domains
-    // 10 популярных доменов
-    public static function getDomainTop($domain)
+    // 10 domains
+    // 10 доменов
+    public static function listDomain($domain)
     {
-        $sql = "SELECT
-                    item_title,
-                    item_domain,
-                    item_count
-                        FROM items 
-                            WHERE item_domain != :domain AND item_published = 1 AND item_is_deleted = 0
-                                ORDER BY item_count DESC LIMIT 10";
+        $sql = "SELECT DISTINCT post_url_domain FROM posts
+                    WHERE post_url_domain != :domain AND post_url_domain != '' AND post_is_deleted = 0 ORDER BY post_id DESC LIMIT 10";
 
         return DB::run($sql, ['domain' => $domain])->fetchAll();
     }

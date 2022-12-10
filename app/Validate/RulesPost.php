@@ -10,7 +10,7 @@ class RulesPost extends Validator
 
         self::length($title, 6, 250, 'title', $redirect);
         self::length($content, 6, 25000, 'content', $redirect);
-        
+
         return true;
     }
 }

@@ -202,15 +202,11 @@ class PostController extends Controller
     // Посты по домену
     public function domain($sheet)
     {
-        $domain     = Request::get('domain');
-
-        $site       = PostModel::getDomain($domain, $this->user['id']);
+        $site = PostModel::availabilityDomain($domain = Request::get('domain'));
         notEmptyOrView404($site);
 
-        $site['item_content'] = markdown($site['item_content'], 'line');
-
-        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, $sheet, $site['item_domain']);
-        $pagesCount = FeedModel::feedCount($this->user, $sheet, $site['item_domain']);
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, $sheet, $domain);
+        $pagesCount = FeedModel::feedCount($this->user, $sheet, $domain);
 
         $m = [
             'og'    => false,
@@ -225,8 +221,9 @@ class PostController extends Controller
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,
                     'posts'         => $posts,
-                    'domains'       => PostModel::getDomainTop($domain),
-                    'site'          => $site,
+                    'count'         => $pagesCount,
+                    'list'          => PostModel::listDomain($domain),
+                    'site'          => $domain,
                     'type'          => 'domain',
                 ]
             ]

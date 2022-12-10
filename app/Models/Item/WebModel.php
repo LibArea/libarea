@@ -223,12 +223,6 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return $item_id;
     }
 
-    public static function addItemCount($domain)
-    {
-        $sql = "UPDATE items SET item_count = (item_count + 1) WHERE item_domain = :domain";
-        DB::run($sql, ['domain' => $domain]);
-    }
-
     public static function edit($params)
     {
         $sql = "UPDATE items 

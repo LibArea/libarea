@@ -4,7 +4,6 @@ namespace App\Controllers\Post;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Models\Item\WebModel;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
 use App\Services\Integration\Discord;
 use App\Services\Integration\Telegram;
@@ -161,36 +160,15 @@ class AddPostController extends Controller
         is_return(__('msg.post_added'), 'success', $url_content);
     }
 
+    // Since this is for the post, we will get a preview and analysis of the domain ...
     public function addUrl($post_url, $post_title)
     {
-        // Поскольку это для поста, то получим превью и разбор домена...
-        $og_img             = self::grabOgImg($post_url);
         $parse              = parse_url($post_url);
-        $url_domain         = $parse['host'];
-        $domain             = new Domain($url_domain);
-        $post_url_domain    = $domain->getRegisterable();
-        $item_url           = $parse['scheme'] . '://' . $parse['host'];
-
-        // Если домена нет, то добавим его 
-        if (!PostModel::getDomain($post_url_domain, $this->user['id'])) {
-            WebModel::add(
-                [
-                    'item_url'              => $item_url,
-                    'item_domain'           => $post_url_domain,
-                    'item_title'            => $post_title,
-                    'item_content'          => __('web.desc_formed'),
-                    'item_published'        => 0,
-                    'item_user_id'          => $this->user['id'],
-                    'item_close_replies'    => 1,
-                ]
-            );
-        } else {
-            WebModel::addItemCount($post_url_domain);
-        }
+        $domain             = new Domain($parse['host']);
 
         $site = [
-            'og_img' => $og_img,
-            'post_url_domain' => $post_url_domain,
+            'og_img'            => self::grabOgImg($post_url),
+            'post_url_domain'   => $domain->getRegisterable(),
         ];
 
         return $site;

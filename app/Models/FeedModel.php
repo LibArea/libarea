@@ -44,7 +44,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
 
         // По времени или по количеству ответов 
         $sort = "ORDER BY post_answers_count DESC";
-        if (in_array($sheet, ['facet.feed', 'questions', 'posts'])) {
+        if (in_array($sheet, ['facet.feed', 'web.feed', 'questions', 'posts'])) {
             $sort = "ORDER BY post_top DESC, post_date DESC";
         } elseif (in_array($sheet, ['admin.posts.all', 'admin.posts.ban', 'profile.posts'])) {
             $sort = "ORDER BY post_date DESC";

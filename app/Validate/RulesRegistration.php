@@ -2,7 +2,6 @@
 
 namespace App\Validate;
 
-use App\Models\User\UserModel;
 use App\Models\AuthModel;
 use App\Services\Integration\Google;
 
@@ -76,7 +75,7 @@ class RulesRegistration extends Validator
         if ($data['password'] != $data['password_confirm']) {
             is_return(__('msg.pass_match_err'), 'error', $redirect);
         }
-        
+
         return $inv_uid;
     }
 }
