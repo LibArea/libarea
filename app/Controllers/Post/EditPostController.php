@@ -191,7 +191,7 @@ class EditPostController extends Controller
     public function checkingEditPermissions($post, $blog)
     {
         if (empty($blog)) {
-            if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id']) == false) {
+            if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id'] ?? 0) == false) {
                 is_return(__('msg.access_denied'), 'error');
             }
         } else {

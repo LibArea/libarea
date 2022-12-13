@@ -5,10 +5,10 @@
     </h2>
 
     <?php foreach ($data['answers'] as  $answer) : ?>
-    
+
       <?php if ($answer['answer_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
       <?php if ($answer['answer_published'] == 0 && $answer['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
-    
+
       <div class="block-answer br-bottom<?php if ($answer['answer_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
         <?php if ($post['amount_content'] > 1) : ?>
           <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
@@ -20,114 +20,113 @@
           <div title="<?= __('app.best_answer'); ?>" class="red right text-2xl p5">✓</div>
         <?php endif; ?>
 
-          <?php if (UserData::getUserId() == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
-          <div class="br-top-dotted mb5"></div>
-          <ol class="list-none">
-            <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
-              <div class="max-w780">
-                <?= markdown($answer['answer_content'], 'text'); ?>
-              </div>
-              <div class="flex text-sm justify-between">
-                <div class="flex gap">
-                  <?= Html::votes($answer, 'answer'); ?>
+        <?php if (UserData::getUserId() == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
+        <div class="br-top-dotted mb5"></div>
+        <ol class="list-none">
+          <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
+            <div class="max-w780">
+              <?= markdown($answer['answer_content'], 'text'); ?>
+            </div>
+            <div class="flex text-sm justify-between">
+              <div class="flex gap">
+                <?= Html::votes($answer, 'answer'); ?>
 
-                  <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
-                    <?php if ($post['post_closed'] == 0) : ?>
-                      <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                        <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= __('app.reply'); ?></a>
-                      <?php endif; ?>
+                <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
+                  <?php if ($post['post_closed'] == 0) : ?>
+                    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+                      <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= __('app.reply'); ?></a>
                     <?php endif; ?>
                   <?php endif; ?>
+                <?php endif; ?>
 
-                  <?php if (Access::author('answer', $answer, 30) === true) : ?>
-                    <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                      <?= __('app.edit'); ?>
-                    </a>
-                  <?php endif; ?>
+                <?php if (Access::author('answer', $answer, 30) === true) : ?>
+                  <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                    <?= __('app.edit'); ?>
+                  </a>
+                <?php endif; ?>
 
-                  <?php if (UserData::checkAdmin()) : ?>
-                    <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
-                      <?= $answer['answer_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
-                    </a>
-                  <?php endif; ?>
+                <?php if (UserData::checkAdmin()) : ?>
+                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
+                    <?= $answer['answer_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
+                  </a>
+                <?php endif; ?>
 
-                  <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid']); ?>
+                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid']); ?>
 
-                  <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-                    <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" data-a11y-dialog-show="my-dialog" class="gray-600">
-                      <svg class="icons">
-                        <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
-                      </svg>
-                    </a>
-                  <?php endif; ?>
-                </div>
-                <div class="text-sm gray-600 flex gap lowercase mb10">
-                  <a class="brown" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
-                  <span class="mb-none"><?= Html::langDate($answer['answer_date']); ?>
-                    <?php if (empty($answer['edit'])) : ?>
-                      (<?= __('app.ed'); ?>.)
-                    <?php endif; ?></span>
-                  <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
-                </div>
+                <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" data-a11y-dialog-show="my-dialog" class="gray-600">
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
+                    </svg>
+                  </a>
+                <?php endif; ?>
               </div>
-              <div data-insert="<?= $answer['answer_id']; ?>" id="insert_id_<?= $answer['answer_id']; ?>" class="none"></div>
-            </li>
-          </ol>
+              <div class="text-sm gray-600 flex gap lowercase mb10">
+                <a class="brown" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
+                <span class="mb-none"><?= Html::langDate($answer['answer_date']); ?>
+                  <?php if (empty($answer['edit'])) : ?>
+                    (<?= __('app.ed'); ?>.)
+                  <?php endif; ?></span>
+                <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
+              </div>
+            </div>
+            <div data-insert="<?= $answer['answer_id']; ?>" id="insert_id_<?= $answer['answer_id']; ?>" class="none"></div>
+          </li>
+        </ol>
       </div>
 
       <ol class="list-none">
         <?php foreach ($answer['comments'] as  $comment) : ?>
-        
+
           <?php if ($comment['comment_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
           <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
-            <li class="content_tree br-li-bottom-no br-bottom ml15<?php if ($comment['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
-              <div class="qa-comment">
-               <div class="flex gap-min">
-                <?= fragment($comment['comment_content'], 1500); ?> 
-                <div class="gray-600"> — </div>
-                <div class="flex gap">
-                  <a class="brown" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
+          <li class="content_tree br-li-bottom-no br-bottom ml15<?php if ($comment['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
+            <div class="qa-comment">
+              <div class="flex3 gap-min">
+                <?= fragment($comment['comment_content'], 1500); ?>
+                <span class="gray-600"> — </span>
 
-                  <span class="lowercase gray-600"><?= Html::langDate($comment['comment_date']); ?></span>
+                <a class="brown" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
 
-                  <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
-                    <?php if ($post['post_closed'] == 0) : ?>
-                      <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                        <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600">
-                          <?= __('app.reply'); ?>
-                        </a>
-                      <?php endif; ?>
+                <span class="lowercase gray-600 ml5 mr5"><?= Html::langDate($comment['comment_date']); ?></span>
+
+                <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
+                  <?php if ($post['post_closed'] == 0) : ?>
+                    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+                      <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600 ml5 mr5">
+                        <?= __('app.reply'); ?>
+                      </a>
                     <?php endif; ?>
                   <?php endif; ?>
+                <?php endif; ?>
 
-                  <?php if (Access::author('comment', $comment, 30) === true) : ?>
-                    <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
-                      <svg class="icons">
-                        <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                      </svg>
-                    </a>
-                  <?php endif; ?>
+                <?php if (Access::author('comment', $comment, 30) === true) : ?>
+                  <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 ml5 mr5">
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                    </svg>
+                  </a>
+                <?php endif; ?>
 
-                  <?php if (UserData::checkAdmin()) : ?>
-                    <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
-                      <svg class="icons">
-                        <use xlink:href="/assets/svg/icons.svg#trash"></use>
-                      </svg>
-                    </a>
-                  <?php endif; ?>
+                <?php if (UserData::checkAdmin()) : ?>
+                  <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600 ml5 mr5">
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#trash"></use>
+                    </svg>
+                  </a>
+                <?php endif; ?>
 
-                  <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
-                    <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" data-a11y-dialog-show="my-dialog" class="gray-600">
-                      <svg class="icons">
-                        <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
-                      </svg>
-                    </a>
-                  <?php endif; ?>
-              </div>
+                <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::checkActiveUser()) : ?>
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" data-a11y-dialog-show="my-dialog" class="gray-600 ml5 mr5">
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
+                    </svg>
+                  </a>
+                <?php endif; ?>
               </div>
               <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>
-            </li>
+          </li>
         <?php endforeach; ?>
       </ol>
 
