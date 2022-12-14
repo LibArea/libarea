@@ -146,6 +146,8 @@ img {
 .black-hover:hover  { color: var(--black); }
 .active { color: var(--red); }
 
+.border-lightgray { border: 5px solid var(--gray-100); }
+
 /*
  * Other
  *
