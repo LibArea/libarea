@@ -102,6 +102,7 @@ return [
     'show'              => '显示',
     'new'               => '新密',
     'new_ones'          => '新的',
+    'by_date'           => '按日期',
     'old'               => '旧密码',
     'code'              => '代码',
     'invite'            => '邀请',

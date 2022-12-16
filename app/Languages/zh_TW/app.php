@@ -103,6 +103,7 @@ return [
     'show'              => '顯示',
     'new'               => '新的',
     'new_ones'          => '新的',
+    'by_date'           => '按日期',
     'old'               => '老的',
     'code'              => '編碼',
     'invite'            => '邀請',

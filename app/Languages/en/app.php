@@ -102,6 +102,7 @@ return [
     'show'              => 'Show',
     'new'               => 'New',
     'new_ones'          => 'New',
+    'by_date'           => 'By date',
     'old'               => 'Old',
     'code'              => 'The code',
     'invite'            => 'Invite',

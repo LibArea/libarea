@@ -102,6 +102,7 @@ return [
     'show'              => 'Spectacol',
     'new'               => 'Nou',
     'new_ones'          => 'Nou',
+    'by_date'           => 'După dată',
     'old'               => 'Vechi',
     'code'              => 'Codul',
     'invite'            => 'A invita',

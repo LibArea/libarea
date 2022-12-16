@@ -36,35 +36,20 @@ class PostController extends Controller
         $blog   = PostModel::getPostTopic($content['post_id'], $this->user['id'], 'blog');
 
         // Show the draft only to the author
-        // Покажем черновик только автору
         if ($content['post_draft'] == 1 && $content['post_user_id'] != $this->user['id']) {
             redirect('/');
         }
 
         // If the post type is a page, then depending on the conditions we make a redirect
-        // Если тип поста страница, то в зависимости от условий делаем редирект
         if ($content['post_type'] == 'page' && $id > 0) {
             redirect(url('facet.article', ['facet_slug' => 'info', 'slug' => $content['post_slug']]));
         }
 
         // Q&A (post_feature == 1) or Discussiona
-        $content['amount_content'] = $content['post_answers_count'];
-        if ($content['post_feature'] == 0) {
-            $content['amount_content'] = $content['post_comments_count'] + $content['post_answers_count'];
-        }
+        $content['amount_content'] = ($content['post_feature'] == 0) ? $content['post_comments_count'] + $content['post_answers_count'] : $content['post_answers_count'];
 
-        $post_answers = AnswerModel::getAnswersPost($content['post_id'], $this->user['id'], $content['post_feature']);
-
-        $answers = [];
-        foreach ($post_answers as $ind => $row) {
-
-            if (strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
-                $row['edit'] = 1;
-            }
-            // TODO: N+1 см. AnswerModel()
-            $row['comments'] = CommentModel::getCommentsAnswer($row['answer_id'], $this->user['id']);
-            $answers[$ind]   = $row;
-        }
+        // Get replies and comments on the post
+        $answers = $this->answersPost($content['post_id'], $content['post_feature'], $sorting  = Request::getGet('sort'));
 
         $content_img  = config('meta.img_path');
         if ($content['post_content_img']) {
@@ -73,10 +58,13 @@ class PostController extends Controller
             $content_img  = Img::PATH['posts_thumb'] . $content['post_thumb_img'];
         }
 
+
         $description  = fragment($content['post_content'], 250);
         if ($description == '') {
             $description = strip_tags($content['post_title']);
         }
+
+        $description  = (fragment($content['post_content'], 250) == '') ? strip_tags($content['post_title']) : fragment($content['post_content'], 250);
 
         if ($content['post_is_deleted'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
@@ -103,7 +91,7 @@ class PostController extends Controller
             'url'       => url('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
         ];
 
-        // Отправка Last-Modified и обработка HTTP_IF_MODIFIED_SINCE
+        // Sending Last-Modified and handling HTTP_IF_MODIFIED_SINCE
         $this->getDataModified($content['post_modified']);
 
         if ($type == 'post') {
@@ -120,6 +108,7 @@ class PostController extends Controller
                         'facets'        => $facets,
                         'united'        => PostModel::getPostMerged($content['post_id']),
                         'blog'          => $blog ?? null,
+                        'sorting'       => $sorting ?? null,
                         'sheet'         => 'article',
                         'type'          => 'post',
                     ]
@@ -136,11 +125,10 @@ class PostController extends Controller
             'url'   => url('facet.article', ['facet_slug' => $facet['facet_slug'], 'slug' => $content['post_slug']]),
         ];
 
-        $title = $content['post_title'] . ' - ' . __('app.page');
         return $this->render(
             '/post/page-view',
             [
-                'meta'  => Meta::get($title, $description . ' (' . $facet['facet_title'] . ' - ' . __('app.page') . ')', $m),
+                'meta'  => Meta::get($content['post_title'] . ' - ' . __('app.page'), $description . ' (' . $facet['facet_title'] . ' - ' . __('app.page') . ')', $m),
                 'data'  => [
                     'sheet' => 'page',
                     'type'  => $type,
@@ -150,6 +138,26 @@ class PostController extends Controller
                 ]
             ]
         );
+    }
+
+    // Get replies and comments on the post
+    // Получим ответы и комментарии на пост
+    public function answersPost($post_id, $post_feature, $sorting)
+    {
+        $post_answers = AnswerModel::getAnswersPost($post_id, $this->user['id'], $post_feature, $sorting);
+
+        $answers = [];
+        foreach ($post_answers as $ind => $row) {
+
+            if (strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
+                $row['edit'] = 1;
+            }
+            // TODO: N+1 см. AnswerModel()
+            $row['comments'] = CommentModel::getCommentsAnswer($row['answer_id'], $this->user['id']);
+            $answers[$ind]   = $row;
+        }
+
+        return $answers;
     }
 
     public static function presence($type, $id, $slug, $user)

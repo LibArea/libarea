@@ -130,13 +130,25 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Getting answers in a post
     // Получаем ответы в посте
-    public static function getAnswersPost($post_id, $user_id, $type)
-    {
-        $sort = "";
+    public static function getAnswersPost($post_id, $user_id, $type, $sorting = 'new')
+    { 
         if ($type == 1) {
-            $sort = 'ORDER BY answer_lo DESC, answer_votes DESC ';
+            $sorting = 'top';  
         }
-
+        
+        switch ($sorting) {
+            case 'top':
+                $sort = 'ORDER BY answer_lo DESC, answer_votes DESC';
+                break;
+            case 'old':
+                $sort = 'ORDER BY answer_id DESC';
+                break;
+            // new    
+            default:
+                $sort = '';
+                break;
+        }
+        
         // TODO: Сгруппировать комментарии по ответу (избавимся N+1)
         // LEFT JOIN comments ON comment_answer_id = answer_id
         // comment_answer_id,
