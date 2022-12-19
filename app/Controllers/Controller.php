@@ -18,25 +18,9 @@ class Controller extends MainController
 
     public static function pageNumber()
     {
-        $string = Request::get();
-        $arr    = $string['page'] ?? null;
-        $pageNumber = 1;
+        $page = Request::getGet('page');
+        $pageNumber = (int)$page ?? null;
 
-        if ($arr) {
-            $arr = explode('.', $string['page']);
-
-            $attr = $arr[1] ?? null;
-            if ($attr != 'html') {
-                include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-                hl_preliminary_exit();
-            }
-
-            if ($arr[0] < 0) {
-                include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-                hl_preliminary_exit();
-            }
-            $pageNumber = (int)$arr[0];
-        }
         return $pageNumber <= 1 ? 1 : $pageNumber;
     }
 

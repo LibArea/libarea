@@ -93,7 +93,7 @@
     <?php endif; ?>
     
     <?php $url = url('category', ['sort' => 'all', 'slug' => $data['category']['facet_slug']]); ?>
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $url . '/page'); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $url); ?>
   </main>
   <aside>
     <div class="box bg-beige max-w300"><?= markdown($data['category']['facet_info'] ?? '', 'line'); ?></div>

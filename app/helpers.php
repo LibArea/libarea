@@ -49,8 +49,12 @@ function setting(string $key = null)
 
 function is_current($url)
 {
-    if ($url == Request::getUri()) return true;
-
+    $uri = Request::getUri();
+    if ($url == $uri) return true;
+    
+    $a = explode('?', $uri);  
+    if ($url == $a[0]) return true;
+ 
     return false;
 }
 

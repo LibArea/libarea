@@ -8,7 +8,6 @@ Disallow: /s/flud/*
 Disallow: /page/*
 Disallow: /*/page/*
 Disallow: /page
-Disallow: *.html
 Disallow: /web/edit/*
 Disallow: /web/github/*
 Disallow: /web/forum/*

@@ -29,7 +29,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
 
     Route::get('/users/ban')->module('admin', 'App\Users', ['ban'])->name('admin.users.ban');
     Route::get('/users/{id}/edit')->module('admin', 'App\Users@edit', ['edit'])->name('admin.user.edit');
-    Route::get('/users/{page?}')->module('admin', 'App\Users', ['all'])->name('admin.users');       
+    Route::get('/users')->module('admin', 'App\Users', ['all'])->name('admin.users');       
     Route::get('/logip/{ip}')->module('admin', 'App\Users@logsIp', ['logip'])->where(['ip' => '[0-9].+'])->name('admin.logip');
     Route::get('/regip/{ip}')->module('admin', 'App\Users@logsIp', ['regip'])->where(['ip' => '[0-9].+'])->name('admin.regip');
     
@@ -43,10 +43,10 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/setting/interface')->module('admin', 'App\Setting', ['interface'])->name('admin.settings.interface');
     Route::get('/setting/advertising')->module('admin', 'App\Setting', ['advertising'])->name('admin.settings.advertising');
    
-    Route::get('/comments/deleted/{page?}')->controller('Comment\CommentController', ['deleted'])->name('comments.deleted');
+    Route::get('/comments/deleted')->controller('Comment\CommentController', ['deleted'])->name('comments.deleted');
     
-    Route::get('/web/deleted/{page?}')->controller('Item\HomeController', ['deleted'])->name('web.deleted');
-    Route::get('/web/audits/{page?}')->controller('Item\HomeController', ['audits'])->name('web.audits');
+    Route::get('/web/deleted')->controller('Item\HomeController', ['deleted'])->name('web.deleted');
+    Route::get('/web/audits')->controller('Item\HomeController', ['audits'])->name('web.audits');
 
     Route::get('/badges')->module('admin', 'App\Badges')->name('admin.badges');
     Route::get('/badges/add')->module('admin', 'App\Badges@add')->name('admin.badges.add');
@@ -62,8 +62,8 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
 
     Route::get('/css')->module('admin', 'App\Css')->name('admin.css');
     Route::get('/logs/search')->module('admin', 'App\Logs@logsSearch')->name('admin.logs.search');
-    Route::get('/logs/{page?}')->module('admin', 'App\Logs')->name('admin.logs');
+    Route::get('/logs')->module('admin', 'App\Logs')->name('admin.logs');
  
-    Route::get('/deleted/{page?}')->controller('HomeController', ['deleted'])->name('main.deleted'); 
+    Route::get('/deleted')->controller('HomeController', ['deleted'])->name('main.deleted'); 
  
 Route::endGroup();
