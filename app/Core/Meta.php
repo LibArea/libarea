@@ -21,13 +21,13 @@ class Meta
         $output .= '<meta name="description" content="' . $description . '">';
 
         if (!empty($m['published_time'])) {
-            $output .= '<meta property="article:published_time" content="' . $m['published_time'] . '" />';
+            $output .= '<meta property="article:published_time" content="' . $m['published_time'] . '">';
         }
 
         if (!empty($m['type'])) {
-            $output .= '<meta property="og:type" content="' . $m['type'] . '" />';
+            $output .= '<meta property="og:type" content="' . $m['type'] . '">';
         } else {
-            $output .= '<meta property="og:type" content="website" />';
+            $output .= '<meta property="og:type" content="website">';
         }
 
         if (!empty($m)) {
@@ -36,14 +36,14 @@ class Meta
             }
 
             if (!empty($m['og'])) {
-                $output .= '<meta property="og:title" content="' . $title . '"/>'
-                    . '<meta property="og:description" content="' . $description . '"/>'
-                    . '<meta property="og:url" content="' . config('meta.url') . $m['url'] . '"/>';
+                $output .= '<meta property="og:title" content="' . $title . '">'
+                    . '<meta property="og:description" content="' . $description . '">'
+                    . '<meta property="og:url" content="' . config('meta.url') . $m['url'] . '">';
 
                 if (!empty($m['imgurl'])) {
-                    $output .= '<meta property="og:image" content="' . config('meta.url') . $m['imgurl'] . '"/>'
-                        . '<meta property="og:image:width" content="820" />'
-                        . '<meta property="og:image:height" content="320" />';
+                    $output .= '<meta property="og:image" content="' . config('meta.url') . $m['imgurl'] . '">'
+                        . '<meta property="og:image:width" content="820">'
+                        . '<meta property="og:image:height" content="320">';
                 }
             }
         }
