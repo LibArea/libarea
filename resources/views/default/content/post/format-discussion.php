@@ -2,7 +2,7 @@
   <div>
     <div class="flex justify-between mb20">
       <h2 class="lowercase mb15 text-2xl"><?= Html::numWord($post['amount_content'], __('app.num_answer'), true); ?></h2>
-      <ul class="nav scroll">
+      <ul class="nav scroll-menu">
         <li<?php if ($data['sorting'] == 'top') : ?> class="active"<?php endif; ?>><a href="?sort=top#comment"><?= __('app.top'); ?></a></li>
         <li<?php if ($data['sorting'] == 'old') : ?> class="active"<?php endif; ?>><a href="?sort=old#comment"><?= __('app.new_ones'); ?></a></li>
         <li<?php if ($data['sorting'] == '') : ?> class="active"<?php endif; ?>><a href="./<?= $post['post_slug']; ?>#comment"><?= __('app.by_date'); ?></a></li>

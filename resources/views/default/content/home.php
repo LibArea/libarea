@@ -1,6 +1,6 @@
 <main>
   <div class="flex justify-between mb20">
-    <ul class="nav scroll">
+    <ul class="nav scroll-menu">
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
     <div title="<?= __('app.post_appearance'); ?>" id="postmenu" class="m5">

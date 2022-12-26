@@ -17,7 +17,7 @@ $facet  = $data['facet'] ?? false; ?>
         <a title="<?= __('app.home'); ?>" class="logo" href="/">
           L
         </a>
-        <ul class="nav scroll mb-w150">
+        <ul class="nav scroll-menu mb-w150">
           <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
         </ul>
       </div>
