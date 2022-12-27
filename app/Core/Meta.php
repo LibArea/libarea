@@ -4,19 +4,11 @@ class Meta
 {
     public static function get($title = '', $description = '', $m = [])
     {
-        $output = '';
-        if ($title == '') {
-            $title = config('meta.title');
-        }
-        if ($description == '') {
-            $description = config('meta.name');
-        }
+        $title = ($title == '') ? config('meta.title') : $title;
+        $description = ($description == '') ? config('meta.name') : $description;
 
-        if (!empty($m['main'])) {
-            $output .= '<title>' . $title . '</title>';
-        } else {
-            $output .= '<title>' . $title . ' | ' . config('meta.name') . '</title>';
-        }
+        $output = '';
+        $output .= (empty($m['main'])) ? '<title>' . $title . ' | ' . config('meta.name') . '</title>' : '<title>' . $title . '</title>';
 
         $output .= '<meta name="description" content="' . $description . '">';
 
@@ -24,11 +16,8 @@ class Meta
             $output .= '<meta property="article:published_time" content="' . $m['published_time'] . '">';
         }
 
-        if (!empty($m['type'])) {
-            $output .= '<meta property="og:type" content="' . $m['type'] . '">';
-        } else {
-            $output .= '<meta property="og:type" content="website">';
-        }
+        $output .= (empty($m['type'])) ? '<meta property="og:type" content="website">' : '<meta property="og:type" content="' . $m['type'] . '">';
+
 
         if (!empty($m)) {
             if ($m['url']) {

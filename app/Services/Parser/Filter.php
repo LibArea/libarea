@@ -15,11 +15,11 @@ class Filter
         $Parsedown = new Parsedown();
         $jevix = new Jevix();
 
-        $content = str_replace(["\r\n", "\r", "\n"], '', $content);
-
         // Get html with minimal parsing (line = no formatting)
         // Получим html с минимальным парсингом (line = без форматирования)
         $content = $Parsedown->line($content);
+
+        $content = str_replace(["\r\n", "\r", "\n", "#"], ' ', $content);
 
         // Tags to be stripped from the text along with the content.
         // Теги, которые необходимо вырезать из текста вместе с контентом.

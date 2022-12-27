@@ -10,5 +10,4 @@ body.dark {
 }
 
 body.dark .bg-white { background-color: var(--gray-300); }
-body.dark img { filter: invert(100%); }
-body.dark iframe { filter: invert(100%); }
+body.dark img, body.dark iframe { filter: invert(100%) hue-rotate(180deg); }
