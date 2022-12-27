@@ -27,7 +27,7 @@
     </form>
 
   </main>
-  <div class="center gray-600 mt5"><?= config('meta.name'); ?></a>
+  <div class="center gray-600 mt5 text-sm">© <?= config('meta.name'); ?></a>
 
 </body>
 

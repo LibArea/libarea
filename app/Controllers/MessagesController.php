@@ -158,7 +158,7 @@ class MessagesController extends Controller
         // If the user does not exist 
         // Если пользователя не существует
         $user  = UserModel::getUser($this->user['id'], 'id');
-        self::redirection($user, url('messages', ['login' => $this->user['login']]));
+        notEmptyOrView404($user);
 
         // We will limit the sending of PMs if the level of trust is low
         // Ограничим отправк ЛС, если уровень доверия низок

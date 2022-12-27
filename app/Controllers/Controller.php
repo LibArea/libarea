@@ -26,10 +26,7 @@ class Controller extends MainController
 
     public static function render(string $name, array $data = [], $component = false)
     {
-        if (config('general.site_disabled')  && !UserData::checkAdmin()) {
-            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
-            hl_preliminary_exit();
-        }
+        self::status($name);
 
         $body = $header = $footer  = UserData::getUserTheme() . DIRECTORY_SEPARATOR;
         if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $body . '/content' . $name . '.php')) {
@@ -56,6 +53,16 @@ class Controller extends MainController
         );
     }
 
+    public static function status(string $name)
+    {
+        if (config('general.site_disabled')  && !UserData::checkAdmin()) {
+            self::insert('/site-off'); 
+            hl_preliminary_exit();
+        }
+ 
+        return true;
+    }
+
     public static function insert(string $hlTemplatePath, array $params = [])
     {
         extract($params);
@@ -69,13 +76,5 @@ class Controller extends MainController
         }
 
         require TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php';
-    }
-
-    public static function redirection($variable, $redirect = '/')
-    {
-        if (!$variable) {
-            redirect($redirect);
-        }
-        return true;
     }
 }
