@@ -210,6 +210,7 @@ return [
     'no_favorites'      => 'Sorry, there are no bookmarks yet',
     'no_comments'       => 'Unfortunately, there are no comments yet',
     'no_answers'        => 'Sorry, no answers yet',
+    'choose_dialogue'   => 'Select a dialogue to view',
     'default'           => 'Default',
     'qa'                => 'Questions and answers',
     'best_answer'       => 'Best Answer',

@@ -210,6 +210,7 @@ return [
     'no_favorites'      => '不幸的是，还没有书签',
     'no_comments'       => '不幸的是，还没有评论',
     'no_answers'        => '不幸的是，还没有回复',
+    'choose_dialogue'   => '选择要查看的对话',
     'default'           => '默认',
     'qa'                => '问答',
     'best_answer'       => '最佳答案',

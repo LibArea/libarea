@@ -43,7 +43,7 @@ class LoginController extends Controller
         return $this->render(
             '/auth/login',
             [
-                'meta'  => Meta::get(__('app.sign_in'), __('app.login_info'), $m),
+                'meta'  => Meta::get(__('app.sign_in'), __('auth.login_info'), $m),
                 'data'  => [
                     'sheet' => 'sign.in',
                     'type'  => 'login',

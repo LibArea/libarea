@@ -1,5 +1,6 @@
 <main>
-  <p><?= $data['sheet']; ?> <a href="<?= url('messages'); ?>">(<?= __('app.all'); ?>)</a></p>
+  <a class="gray" href="<?= url('messages'); ?>">< <?= __('app.all'); ?></a>
+  <div class="gray-600"><?= $data['sheet']; ?></div>
   <div class="mb15 hidden">
     <form action="<?= url('content.create', ['type' => 'message']); ?>" method="post">
       <?= csrf_field() ?>
@@ -22,19 +23,12 @@
           $id     = UserData::getUserId();
         endif;
         ?>
-        <div class="flex relative">
-          <div id="user-card" data-content_id="<?= $key; ?>" data-user_id="<?= $id; ?>">
-            <?= Img::avatar($ava, $login, 'img-base', 'max'); ?>
-            <div id="content_<?= $key; ?>" class="content_<?= $key; ?>"></div>
+        <div class="flex gap-min items-center">
+          <?= Img::avatar($ava, $login, 'img-base', 'max'); ?>
+          <a class="gray-600" href="<?= url('profile', ['login' => $login]); ?>"><?= $login; ?></a>
+          <div class="gray-600 lowercase text-sm">
+            <?= Html::langDate($val['message_add_time']); ?>
           </div>
-          <a class="flex black" href="<?= url('profile', ['login' => $login]); ?>">
-            <div class="ml5">
-              <?= $login; ?>
-              <div class="gray-600 lowercase text-sm">
-                <?= Html::langDate($val['message_add_time']); ?>
-              </div>
-            </div>
-          </a>
         </div>
         <div class="max-w780 ">
           <?= $val['message_content']; ?>
@@ -49,17 +43,3 @@
     <?php endforeach; ?>
   <?php endif; ?>
 </main>
-
-<aside>
-  <div class="box bg-beige">
-    <h4 class="uppercase-box"><?= __('app.dialogues'); ?></h4>
-    <?php foreach ($data['dialog'] as $key => $val) : ?>
-      <?php if ($val['id'] != UserData::getUserId()) : ?>
-        <div class="flex relative pt5 pb5 items-center hidden">
-          <?= Img::avatar($val['avatar'], $val['login'], 'img-base mr5', 'max'); ?>
-          <a href="<?= url('dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['login']; ?></a>
-        </div>
-      <?php endif; ?>
-    <?php endforeach; ?>
-  </div>
-</aside>

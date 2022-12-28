@@ -27,7 +27,7 @@ class RegisterController extends Controller
         return $this->render(
             '/auth/register',
             [
-                'meta'  => Meta::get(__('app.registration'), __('app.security_info'), $m),
+                'meta'  => Meta::get(__('app.registration'), __('help.security_info'), $m),
                 'data'  => [
                     'sheet' => 'registration',
                     'type'  => 'register'

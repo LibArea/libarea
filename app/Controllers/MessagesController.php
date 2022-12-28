@@ -11,19 +11,26 @@ class MessagesController extends Controller
 {
     public function index()
     {
-        if ($messages_dialog = MessagesModel::getMessages($this->user['id'])) {
-
-            foreach ($messages_dialog as $val) {
-                $dialog_ids = $val['dialog_id'];
-            }
-        } else {
-            $dialog_ids = null;
-        }
-
+        return $this->render(
+            '/messages/index',
+            [
+                'meta'  => Meta::get(__('app.private_messages')),
+                'data'  => [
+                    'dialogs'  => $this->dialogs(),
+                ]
+            ]
+        );
+    }
+    
+    // All dialogues
+    // Все диалоги    
+    public function dialogs()
+    {
         $result = [];
+        $messages_dialog = MessagesModel::getMessages($this->user['id']);
+
         if ($messages_dialog) {
 
-            $result = [];
             foreach ($messages_dialog as $ind => $row) {
 
                 // Принимающий  AND $row['dialog_recipient_count']
@@ -46,16 +53,8 @@ class MessagesController extends Controller
                 $result[$ind]       = $row;
             }
         }
-
-        return $this->render(
-            '/messages/messages',
-            [
-                'meta'  => Meta::get(__('app.private_messages')),
-                'data'  => [
-                    'messages'  => $result,
-                ]
-            ]
-        );
+        
+        return $result;
     }
 
     public function dialog()
@@ -109,7 +108,6 @@ class MessagesController extends Controller
                     'sheet'             => __('app.dialogue') . ' — <b>' . $list[$key]['login'] . '</b>',
                     'list'              => $list,
                     'recipient_user'    => $recipient_user,
-                    'dialog'            => MessagesModel::lastBranches($this->user['id']),
                 ]
             ]
         );

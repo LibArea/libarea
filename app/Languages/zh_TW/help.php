@@ -19,8 +19,6 @@ return [
     'notifications_info'    => '您可以通過單擊鏈接將所有廣告標記為已讀：“我已閱讀”。',
     'notification_info'     => '您可以在此部分取消訂閱所有電子郵件通知。',
 
-    'messages_info'         => '與網站成員的私人消息。 拒絕垃圾郵件，尊重他人！',
-
     'add_post'              => '使用标签<b>cut</b> (<svg class="icons"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br>它隐藏在标签后面的文本的 cat 部分下（它将被写成“阅读更多”）。',
     'edit_page'             => '官方文檔應該沒有錯誤並且以正式的方式編寫。',
     'edit_post'             => '在提要頁面和完整版中查看帖子的外觀。 在這裡改進一下。',

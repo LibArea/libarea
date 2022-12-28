@@ -26,25 +26,6 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetchAll();
     }
 
-    public static function lastBranches($user_id)
-    {
-        $sql = "SELECT  
-                    dialog_id,
-                    dialog_recipient_unread,
-                    dialog_add_time,
-                    dialog_sender_count,
-                    dialog_recipient_count,
-                    id,
-                    login,
-                    avatar
-                        FROM messages_dialog 
-                        LEFT JOIN users ON dialog_sender_id = id OR dialog_recipient_id = id
-                          WHERE dialog_sender_id = $user_id OR dialog_recipient_id = $user_id
-                            ORDER BY dialog_update_time DESC LIMIT 15";
-
-        return DB::run($sql)->fetchAll();
-    }
-
     // We get a dialog by id
     public static function getDialogById($dialog_id)
     {

@@ -210,6 +210,7 @@ return [
     'no_favorites'      => 'Ne pare rău, nu există încă marcaje',
     'no_comments'       => 'Din păcate, încă nu există comentarii',
     'no_answers'        => 'Ne pare rău, încă nu există răspunsuri',
+    'choose_dialogue'   => 'Selectați un dialog de vizualizat',
     'default'           => 'Mod implicit',
     'qa'                => 'Intrebari si raspunsuri',
     'best_answer'       => 'Cel mai bun răspuns',
