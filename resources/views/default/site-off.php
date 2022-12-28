@@ -7,7 +7,7 @@
   <link rel="icon" href="/favicon.ico" type="image/png">
 </head>
 
-<body class="body-bg-fon mt20">
+<body>
 
   <main class="box mr-auto max-w780">
     <h1 class="text-3xl gray">Opss</h1>
