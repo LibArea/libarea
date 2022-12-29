@@ -2,7 +2,7 @@
 <?php if (!empty($dialogs)) : ?>
   <ul class="menu">
     <?php foreach ($dialogs as  $msg) : ?>
-      <li class="mb15 p5 <?php if (!$msg['unread'] > 0) : ?> bg-purple<?php endif; ?>">
+      <li class="mb5 p5 br-top-zebra<?php if (!$msg['unread'] > 0) : ?> bg-purple<?php endif; ?>">
         <a class="justify-between" href="<?= url('dialogues', ['id' => $msg['dialog_id']]); ?>">
           <div class="gray-600 text-sm">
             <?php if ($msg['dialog_sender_id'] == UserData::getUserId()) : ?>
@@ -17,11 +17,11 @@
 
           <div class="lowercase text-sm right gray-600">
             <?php if ($msg['unread']) : ?>
-              <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
+              <?= $msg['count']; ?>
             <?php else : ?>
               <span class="red"><?= __('app.view'); ?></span>
               <?php if ($msg['count'] != 0) : ?>
-                <?= $msg['count']; ?> <?= $msg['count_num']; ?>
+                <?= $msg['count']; ?>
               <?php endif; ?>
             <?php endif; ?>
           </div>

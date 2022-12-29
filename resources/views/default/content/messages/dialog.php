@@ -1,4 +1,7 @@
-<main>
+<div class="w-30 mr20 mb-none">
+  <?= insert('/content/messages/dialogue-column', ['dialogs' => $data['dialogs']]); ?>
+</div>
+<div class="w-70 mb-w-100">
   <a class="gray" href="<?= url('messages'); ?>">< <?= __('app.all'); ?></a>
   <div class="gray-600"><?= $data['sheet']; ?></div>
   <div class="mb15 hidden">
@@ -30,7 +33,7 @@
             <?= Html::langDate($val['message_add_time']); ?>
           </div>
         </div>
-        <div class="max-w780 ">
+        <div class="max-w780">
           <?= $val['message_content']; ?>
         </div>
         <?php if ($val['unread'] == 1 and $val['message_sender_id'] == UserData::getUserId()) : ?>
@@ -42,4 +45,4 @@
       <div class="br-bottom mb15"></div>
     <?php endforeach; ?>
   <?php endif; ?>
-</main>
+</div>
