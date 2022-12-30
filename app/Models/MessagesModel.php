@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use UserData;
 use DB;
 
 class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // All dialogs
-    public static function getMessages($user_id)
+    public static function getMessages()
     {
+        $user_id = UserData::getUserId();
         $sql = "SELECT  
                     dialog_id,
                     dialog_sender_id,
@@ -26,8 +28,18 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetchAll();
     }
 
+    // Check if the dialog exists or not
+    public static function availability(int $user_id)
+    {   
+        $id = UserData::getUserId();
+        $sql = "SELECT dialog_id FROM messages_dialog 
+                    WHERE (dialog_sender_id = $id AND dialog_recipient_id = $user_id) OR (dialog_sender_id = $user_id AND dialog_recipient_id = $id)";
+
+        return DB::run($sql)->fetch();
+    }
+
     // We get a dialog by id
-    public static function getDialogById($dialog_id)
+    public static function getDialogById(int $dialog_id)
     {
         $sql = "SELECT  
                     dialog_id,
@@ -81,7 +93,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Последнее сообщение в диалоге
-    public static function getMessageOne($dialog_id)
+    public static function getMessageOne(int $dialog_id)
     {
         $sql = "SELECT  
                     message_id,
@@ -99,7 +111,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['dialog_id' => $dialog_id])->fetch();
     }
 
-    public static function getMessageByDialogId($dialog_id)
+    public static function getMessageByDialogId(int $dialog_id)
     {
         $sql = "SELECT  
                     message_id,
@@ -126,8 +138,10 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Записываем личное сообщение
-    public static function sendMessage($dialog_sender_id, $dialog_recipient_id, $message_content)
+    public static function sendMessage($dialog_recipient_id, $message_content)
     {
+        $dialog_sender_id = UserData::getUserId();
+        
         if (!$dialog_sender_id or !$dialog_recipient_id or !$message_content) {
             return false;
         }
@@ -199,7 +213,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 
 
     // Changing the number of messages
-    public static function updateDialogCount($dialog_id, $user_id)
+    public static function updateDialogCount(int $dialog_id, int $user_id)
     {
         if (!$inbox_dialog = self::getDialogById($dialog_id)) {
             return false;
@@ -252,7 +266,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // User Information
-    public static function getDialogByUser($dialog_sender_id, $dialog_recipient_id)
+    public static function getDialogByUser(int $dialog_sender_id, int $dialog_recipient_id)
     {
         $sql = "SELECT  
                     dialog_id,
@@ -265,7 +279,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
                     dialog_sender_count,
                     dialog_recipient_count
                         FROM messages_dialog 
-                            WHERE dialog_sender_id  = $dialog_sender_id AND 
+                            WHERE dialog_sender_id      = $dialog_sender_id AND 
                                 dialog_recipient_id     = $dialog_recipient_id
                                 OR dialog_recipient_id  = $dialog_sender_id AND 
                                 dialog_sender_id        = $dialog_recipient_id";

@@ -19,9 +19,8 @@
             <?php if ($msg['unread']) : ?>
               <?= $msg['count']; ?>
             <?php else : ?>
-              <span class="red"><?= __('app.view'); ?></span>
               <?php if ($msg['count'] != 0) : ?>
-                <?= $msg['count']; ?>
+                <span class="red"><?= $msg['count']; ?></span>
               <?php endif; ?>
             <?php endif; ?>
           </div>

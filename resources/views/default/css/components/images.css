@@ -43,7 +43,7 @@
 
 .profile-ava {
   position: absolute;
-  z-index: 15;
+  z-index: 5;
   margin-left: 15px;
   border-radius: 3px;
 }

@@ -56,10 +56,10 @@ class Controller extends MainController
     public static function status(string $name)
     {
         if (config('general.site_disabled')  && !UserData::checkAdmin()) {
-            self::insert('/site-off'); 
+            self::insert('/site-off');
             hl_preliminary_exit();
         }
- 
+
         return true;
     }
 

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{MessagesModel, NotificationModel};
-use Html, Meta;
+use Meta;
 
 class MessagesController extends Controller
 {
@@ -21,13 +21,13 @@ class MessagesController extends Controller
             ]
         );
     }
-    
+
     // All dialogues
     // Все диалоги    
     public function dialogs()
     {
         $result = [];
-        $messages_dialog = MessagesModel::getMessages($this->user['id']);
+        $messages_dialog = MessagesModel::getMessages();
 
         if ($messages_dialog) {
 
@@ -50,7 +50,7 @@ class MessagesController extends Controller
                 $result[$ind]       = $row;
             }
         }
-        
+
         return $result;
     }
 
@@ -115,15 +115,15 @@ class MessagesController extends Controller
     // Форма отправки личных сообщений из профиля
     public function messages()
     {
-        $login      = Request::get('login');
-        if (!$user  = UserModel::getUser($login, 'slug')) {
-            is_return(__('msg.no_user'), 'error', '/');
-        }
+        $this->limitTl();
 
-        // We will limit the sending of PMs if the level of trust is low
-        // Ограничим отправк ЛС, если уровень доверия низок
-        if (config('general.tl_add_pm') > $this->user['trust_level']) {
-            redirect('/');
+        $user  = UserModel::getUser(Request::get('login'), 'slug');
+        notEmptyOrView404($user);
+
+        // If the dialog exists, then redirect to it
+        // Если диалог существует, то редирект в него
+        if ($dialog = MessagesModel::availability($user['id'])) {
+            redirect('/messages/' . $dialog['dialog_id']);
         }
 
         return $this->render(
@@ -145,6 +145,8 @@ class MessagesController extends Controller
         $content        = $_POST['content']; // для Markdown
         $recipient_id   = Request::getPost('recipient');
 
+        $this->limitTl();
+
         // Private message is empty
         // Если личное сообщение пустое
         if ($content == '') {
@@ -153,16 +155,11 @@ class MessagesController extends Controller
 
         // If the user does not exist 
         // Если пользователя не существует
-        $user  = UserModel::getUser($this->user['id'], 'id');
+        $user  = UserModel::getUser($recipient_id, 'id');
         notEmptyOrView404($user);
 
-        // We will limit the sending of PMs if the level of trust is low
-        // Ограничим отправк ЛС, если уровень доверия низок
-        if (config('general.tl_add_pm') > $this->user['trust_level']) {
-            redirect('/');
-        }
-
-        $dialog_id = MessagesModel::sendMessage($this->user['id'], $recipient_id, $content);
+        $dialog_id = MessagesModel::sendMessage($recipient_id, $content);
+        $url = '/messages/' . $dialog_id;
 
         // Оповещение админу
         // Admin notification 
@@ -171,10 +168,21 @@ class MessagesController extends Controller
                 'sender_id'    => $this->user['id'],
                 'recipient_id' => $recipient_id,  // admin
                 'action_type'  => 1, // Private messages 
-                'url'          => '/messages/' . $dialog_id,
+                'url'          => $url,
             ]
         );
 
-        redirect(url('messages'));
+        redirect($url);
+    }
+
+    // We will limit the sending of PMs if the level of trust is low
+    // Ограничим отправк ЛС, если уровень доверия низок
+    public function limitTl()
+    {
+        if (config('trust-levels.tl_add_pm') > $this->user['trust_level']) {
+            redirect('/');
+        }
+
+        return true;
     }
 }

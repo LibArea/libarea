@@ -49,7 +49,7 @@ class Audits extends Controller
 
     // Approve audit 
     // Одобрить аудит
-    public function status()
+    public function statusApproved()
     {
         $st     = Request::getPost('status');
         $status = preg_split('/(@)/', $st);
