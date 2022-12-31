@@ -67,20 +67,4 @@ class ActionController extends Controller
 
         return true;
     }
-
-    // Related posts, content author change, facets 
-    // Связанные посты, изменение автора контента, фасеты
-    public function select()
-    {
-        $type       = Request::get('type');
-        $search     = Request::getPost('q');
-        if ($search) {
-            $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
-        }
-
-        $allowed = ['post', 'user', 'team', 'blog', 'section', 'category', 'topic'];
-        if (!in_array($type, $allowed)) return false;
-
-        return ActionModel::getSearch($search, $type);
-    }
 }

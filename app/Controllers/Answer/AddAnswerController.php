@@ -12,7 +12,7 @@ class AddAnswerController extends Controller
 {
     public function create()
     {
-        $post = PostPresence::index($post_id = Request::getPostInt('post_id'), 'id');
+        $post = PostPresence::index(Request::getPostInt('post_id'), 'id');
 
         $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 

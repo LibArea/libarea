@@ -5,10 +5,8 @@ namespace App\Controllers\Post;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
-use App\Services\Integration\Discord;
-use App\Services\Integration\Telegram;
-use App\Services\Сheck\PostPresence;
-use App\Services\Сheck\FacetPresence;
+use App\Services\Integration\{Discord, Telegram};
+use App\Services\Сheck\{PostPresence, FacetPresence};
 use UploadImage, URLScraper, Meta, UserData;
 
 use Utopia\Domains\Domain;

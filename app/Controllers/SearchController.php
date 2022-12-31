@@ -94,4 +94,14 @@ class SearchController extends Controller
     {
         return $num <= 1 ? 1 : $num;
     }
+    
+    // Related posts, content author change, facets 
+    // Связанные посты, изменение автора контента, фасеты
+    public function select()
+    {
+        $type       = Request::get('type');
+        $search     = Request::getPost('q');
+
+        return SearchModel::getSelect($search, $type);
+    }
 }

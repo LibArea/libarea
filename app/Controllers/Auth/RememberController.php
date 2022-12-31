@@ -13,7 +13,6 @@ class RememberController extends MainController
     // Если есть, то проверим по таблице `users_auth_tokens`...
     public static function check($remember)
     {
-        // Нет
         if (empty($remember)) {
             return;
         }

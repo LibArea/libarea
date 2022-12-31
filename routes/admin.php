@@ -10,7 +10,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::post('/favicon/add')->module('admin', 'App\Webs@favicon');
     Route::post('/screenshot/add')->module('admin', 'App\Webs@screenshot');
     Route::post('/word/ban')->module('admin', 'App\Words@deletes');
-    Route::post('/audit/status')->module('admin', 'App\Audits@status');
+    Route::post('/audit/status')->module('admin', 'App\Audits@statusApproved');
     Route::post('/reports/saw')->module('admin', 'App\Audits@saw');
     Route::post('/topic/ban')->module('admin', 'App\Facets@deletes');
     Route::post('/badge/remove')->module('admin', 'App\Badges@remove');

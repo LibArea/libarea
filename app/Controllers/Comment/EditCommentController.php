@@ -4,8 +4,7 @@ namespace App\Controllers\Comment;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Services\Сheck\PostPresence;
-use App\Services\Сheck\CommentPresence;
+use App\Services\Сheck\{PostPresence, CommentPresence};
 use App\Models\CommentModel;
 use App\Validate\Validator;
 use Access;

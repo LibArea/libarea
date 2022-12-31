@@ -8,7 +8,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::post('/comment/editform')->controller('Comment\EditCommentController');
     Route::post('/reply/editform')->controller('Item\ReplyController');
     // @ users | posts | topics | category
-    Route::post('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
+    Route::post('/search/{type}')->controller('SearchController@select')->where(['type' => '[a-z]+']);
      
     Route::getProtect();
         Route::before('Restrictions')->getGroup();
