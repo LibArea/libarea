@@ -27,39 +27,18 @@ class Audit extends Base
         // Limit the flags
         if ($this->user['trust_level'] < config('trust-levels.tl_add_report')) return 1;
 
-        $num_report =  AuditModel::getSpeedReport($this->user['id']);
-        if ($num_report > config('trust-levels.perDay_report')) return 1;
+        if (AuditModel::getSpeedReport($this->user['id']) > config('trust-levels.perDay_report')) return 1;
 
         $post = PostPresence::index($post_id, 'id');
 
-        if (!in_array($content_type, ['post', 'answer', 'comment'])) {
-            return false;
-        }
+        if (!in_array($content_type, ['post', 'answer', 'comment'])) return false;
 
-        $type_id = $content_type == 'answer' ? 'answer_' . $content_id : 'comment_' . $content_id;
+        $type_id    = $content_type == 'answer' ? 'answer_' . $content_id : 'comment_' . $content_id;
+        $url        = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#' . $type_id;
 
-        $slug   = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
-        $url    = $slug . '#' . $type_id;
-
-        // Admin notification 
-        // Оповещение админу
-        NotificationModel::send(
-            [
-                'sender_id'    => $this->user['id'],
-                'recipient_id' => UserData::REGISTERED_ADMIN_ID,
-                'action_type'  => NotificationModel::TYPE_REPORT,
-                'url'          => $url,
-            ]
-        );
-
-        AuditModel::add(
-            [
-                'action_type'       => $content_type,
-                'type_belonging'    => 'report',
-                'user_id'           => $this->user['id'],
-                'content_id'        => $content_id,
-            ]
-        );
+        $this->create($content_type, $content_id, $url, 'report');
+        
+        return true;
     }
 
     // Let's check the stop words, url
@@ -148,12 +127,15 @@ class Audit extends Base
         return false;
     }
 
-    public function create(string $type, int $last_content_id, string $url)
+    public function create(string $type, int $last_content_id, string $url, string $type_notification = 'audit')
     {
+        $action_type = ($type_notification == 'audit') ? NotificationModel::TYPE_AUDIT : NotificationModel::TYPE_REPORT;
+        $type_belonging = ($type_notification == 'audit') ? 'audit' : 'report';
+        
         AuditModel::add(
             [
                 'action_type'       => $type,
-                'type_belonging'    => 'audit',
+                'type_belonging'    => $type_belonging,
                 'user_id'           => $this->user['id'],
                 'content_id'        => $last_content_id,
             ]
@@ -165,7 +147,7 @@ class Audit extends Base
             [
                 'sender_id'    => $this->user['id'],
                 'recipient_id' => UserData::REGISTERED_ADMIN_ID,
-                'action_type'  => NotificationModel::TYPE_AUDIT,
+                'action_type'  => $action_type,
                 'url'          => $url,
             ]
         );

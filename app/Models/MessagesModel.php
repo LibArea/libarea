@@ -250,18 +250,13 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 
         if ($inbox_dialog['dialog_sender_id'] == $user_id) {
 
-            $recipient_unread = 0;
-            $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :recipient 
-                                WHERE dialog_id = :dialog_id";
-
-            return  DB::run($sql, ['recipient' => $recipient_unread, 'dialog_id' => $dialog_id]);
+            $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :recipient WHERE dialog_id = :dialog_id";
+            return  DB::run($sql, ['recipient' => 0, 'dialog_id' => $dialog_id]);
+            
         } else {
 
-            $sender_unread = 0;
-            $sql = "UPDATE messages_dialog SET dialog_sender_unread = :sender 
-                                WHERE dialog_id = :dialog_id";
-
-            return  DB::run($sql, ['sender' => $sender_unread, 'dialog_id' => $dialog_id]);
+            $sql = "UPDATE messages_dialog SET dialog_sender_unread = :sender WHERE dialog_id = :dialog_id";
+            return  DB::run($sql, ['sender' => 0, 'dialog_id' => $dialog_id]);
         }
     }
 
