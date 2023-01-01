@@ -130,12 +130,11 @@ class Audit extends Base
     public function create(string $type, int $last_content_id, string $url, string $type_notification = 'audit')
     {
         $action_type = ($type_notification == 'audit') ? NotificationModel::TYPE_AUDIT : NotificationModel::TYPE_REPORT;
-        $type_belonging = ($type_notification == 'audit') ? 'audit' : 'report';
         
         AuditModel::add(
             [
                 'action_type'       => $type,
-                'type_belonging'    => $type_belonging,
+                'type_belonging'    => $type_notification,
                 'user_id'           => $this->user['id'],
                 'content_id'        => $last_content_id,
             ]

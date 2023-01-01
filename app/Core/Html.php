@@ -225,9 +225,4 @@ class Html
         return '<button type="submit" name="action" class="btn btn-primary" value="submit">' . $text . '</button>';
     }
 
-    // To be deleted
-    public static function remove($text)
-    {
-        return '<button type="submit" name="action" class="btn btn-outline-primary right mr10" value="delete">' . $text . '</button>';
-    }
 }
