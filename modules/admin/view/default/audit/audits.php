@@ -65,7 +65,7 @@
 
           <?php if (!empty($audit['post'])) : ?>
             <?php if ($audit['post']['post_slug']) : ?>
-              <a class="block" href="<?= url('post', ['id' => $audit['post']['post_id'], 'slug' => $audit['post']['post_slug']]); ?>">
+              <a class="block" href="<?= post_slug($audit['post']['post_id'], $audit['post']['post_slug']); ?>">
                 <?= $audit['post']['post_title']; ?>
               </a>
             <?php endif; ?>

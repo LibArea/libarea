@@ -39,4 +39,10 @@ return [
    // For site directory
    // Для каталог сайтов
    'img_path_web'       => '/assets/images/libarea-web.png',
+   
+   // If false, then the URL of the posts will be: /post/id
+   // otherwise: /post/id/slug   
+   // Если false, то URL постов будет: /post/id
+   // в противном случае: /post/id/slug
+   'slug_post'          => true,
 ]; 

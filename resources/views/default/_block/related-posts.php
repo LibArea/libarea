@@ -7,7 +7,7 @@
           <?php if ($related['post_content_img']) : ?>
             <?= Img::image($related['post_content_img'], $related['value'], 'w60 mr20', 'post', 'cover'); ?>
           <?php endif; ?>
-          <a href="<?= url('post', ['id' => $related['id'], 'slug' => $related['post_slug']]); ?>">
+          <a href="<?= post_slug($related['id'], $related['post_slug']); ?>">
             <?= $related['value']; ?>
           </a>
         </li>

@@ -7,7 +7,7 @@
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
 
-    <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
+    <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
     <div class="box box-fon article_<?= $post['post_id']; ?>">
       <div class="flex items-center gap-min text-sm mb5">
         <a class="gray-600 flex gap-min items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
@@ -55,7 +55,7 @@
         </div>
 
         <?php if ($arr['button']) : ?>
-          <a class="btn btn-outline-primary" href="<?= url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+          <a class="btn btn-outline-primary" href="<?= post_slug($post['post_id'], $post['post_slug']); ?>">
             <?= __('app.read_more'); ?>
           </a>
         <?php endif; ?>

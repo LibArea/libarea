@@ -20,7 +20,7 @@
             </a>
             <span class="lowercase"><?= Html::langDate($answer['answer_date']); ?></span>
           </div>
-          <a class="last-content_telo" href="<?= url('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
+          <a class="last-content_telo" href="<?= post_slug($answer['post_id'], $answer['post_slug']); ?>#answer_<?= $answer['answer_id']; ?>">
             <?php if (mb_strlen($fragment = fragment($answer['answer_content'], 98), 'utf-8') < 5) : ?>
                <span class="lowercase">+ <?= __('app.comment'); ?>...</span>
             <?php else : ?>

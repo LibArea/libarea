@@ -29,6 +29,15 @@ function url(string $key = null, array $params = [])
     return hleb_get_by_name($key, $params);
 }
 
+function post_slug(int $id, string $slug = '')
+{   
+    if (config('meta.slug_post') == false) {
+        return hleb_get_by_name('post_id', ['id' => $id]);
+    }
+    
+    return hleb_get_by_name('post', ['id' => $id, 'slug' => $slug]);
+}
+
 function config(string $key = null)
 {
     if ($key === null) {

@@ -44,8 +44,7 @@ class EditCommentController extends Controller
 
         $post = PostPresence::index($comment['comment_post_id'], 'id');
 
-        $slug = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        $redirect = $slug . '#comment_' . $comment['comment_id'];
+        $redirect = post_slug($post['post_id'], $post['post_slug']) . '#comment_' . $comment['comment_id'];
 
         $content = $_POST['comment']; // для Markdown
         Validator::length($content, 3, 5500, 'content', $redirect);

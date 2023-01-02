@@ -5,7 +5,7 @@
     </ul>
   </div>
   <?php if (!empty($data['comments'])) : ?>
-    <div class="mb15">
+    <div class="max-w780">
       <?= insert('/content/comment/comment', ['comments' => $data['comments']]); ?>
     </div>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/comments'); ?>

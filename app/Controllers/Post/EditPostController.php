@@ -124,7 +124,7 @@ class EditPostController extends Controller
             ]
         );
 
-        is_return(__('msg.change_saved'), 'success', '/post/' . $post['post_id']);
+        is_return(__('msg.change_saved'), 'success', url('post_id', ['id' => $post['post_id']]));
     }
 
     // Add fastes (blogs, topics) to the post 

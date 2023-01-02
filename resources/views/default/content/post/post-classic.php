@@ -10,7 +10,7 @@ use Hleb\Constructor\Handlers\Request; ?>
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
 
-    <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
+    <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
     <div class="box box-fon article_<?= $post['post_id']; ?>">
 
       <div class="flex justify-between">

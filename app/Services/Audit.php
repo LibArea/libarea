@@ -34,7 +34,7 @@ class Audit extends Base
         if (!in_array($content_type, ['post', 'answer', 'comment'])) return false;
 
         $type_id    = $content_type == 'answer' ? 'answer_' . $content_id : 'comment_' . $content_id;
-        $url        = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#' . $type_id;
+        $url        = post_slug($post['post_id'], $post['post_slug']) . '#' . $type_id;
 
         $this->create($content_type, $content_id, $url, 'report');
         

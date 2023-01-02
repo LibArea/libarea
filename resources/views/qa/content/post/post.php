@@ -10,7 +10,7 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?php if (UserData::getUserId() == 0 && $n == 6) : ?>
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
-    <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
+    <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
     <li class="list-post br-top-zebra article_<?= $post['post_id']; ?>">
       <div class="flex mr15">
         <div class="box-answer block bg-lightgray gray mt5 br-rd3 mb-none lowercase mr15">

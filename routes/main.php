@@ -86,7 +86,7 @@ Route::get('/search')->controller('SearchController', ['post'])->name('search');
 Route::get('/search/go')->controller('SearchController@go', ['post'])->name('search.go');
 
 // Other pages without authorization
-Route::get('/post/{id}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+']);
+Route::get('/post/{id}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+'])->name('post_id');;
 Route::get('/post/{id}/{slug}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
 // Страницы info

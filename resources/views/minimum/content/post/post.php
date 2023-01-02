@@ -6,7 +6,7 @@
     <?php if (!UserData::checkActiveUser() && $n == 6) : ?>
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
-    <?php $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
+    <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
     <li class="list-post br-top-zebra article_<?= $post['post_id']; ?>">
       <div class="w40 no-flex center">
         <?= Html::votes($post, 'post', 'arrow-up'); ?>

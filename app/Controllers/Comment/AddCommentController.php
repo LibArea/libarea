@@ -36,7 +36,7 @@ class AddCommentController extends Controller
 
         $post   = PostPresence::index($answer['answer_post_id'], 'id');
 
-        $url_post = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+        $url_post = post_slug($post['post_id'], $post['post_slug']);
 
         Validator::Length($content = $_POST['comment'], 6, 2024, 'content', $url_post);
 

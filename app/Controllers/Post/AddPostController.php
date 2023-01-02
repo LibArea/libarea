@@ -128,7 +128,7 @@ class AddPostController extends Controller
             (new \App\Services\Audit())->create('post', $last_id, url('admin.audits'));
         }
 
-        $url_content = url('post', ['id' => $last_id, 'slug' => $slug]);
+        $url_content = post_slug($last_id, $slug);
         if ($type == 'page') {
             $url_content = url('info.page', ['slug' => $slug]);
         }

@@ -56,7 +56,7 @@ class EditAnswerController extends Controller
 
         $post = PostPresence::index($answer['answer_post_id'], 'id');
 
-        $url_post = url('post', ['id' => $answer['answer_post_id'], 'slug' => $post['post_slug']]);
+        $url_post = post_slug($answer['answer_post_id'], $post['post_slug']);
 
         Validator::Length($content, 6, 5000, 'content', url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]));
 

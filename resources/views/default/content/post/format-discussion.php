@@ -11,7 +11,7 @@
     <?php $n = 0;
     foreach ($data['answers'] as  $answer) :
       $n++;
-      $post_url = url('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+      $post_url = post_slug($post['post_id'], $post['post_slug']);
     ?>
 
       <div class="block-answer mb15">

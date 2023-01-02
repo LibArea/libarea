@@ -104,7 +104,7 @@
         <ul>
         <?php foreach ($data['related_posts'] as $rp) : ?>
           <li class="mb15">
-            <a href="<?= url('post', ['id' => $rp['id'], 'slug' => $rp['post_slug']]); ?>"><?= $rp['value']; ?></a>
+            <a href="<?= post_slug($rp['id'], $rp['post_slug']); ?>"><?= $rp['value']; ?></a>
           </li>
           <?php endforeach; ?>
         </ul>

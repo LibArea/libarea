@@ -88,7 +88,7 @@ class PostController extends Controller
             'type'      => 'article',
             'og'        => true,
             'imgurl'    => $content_img,
-            'url'       => url('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]),
+            'url'       => post_slug($content['post_id'], $content['post_slug']),
         ];
 
         // Sending Last-Modified and handling HTTP_IF_MODIFIED_SINCE
@@ -169,14 +169,16 @@ class PostController extends Controller
 
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
-            if ($slug != $content['post_slug']) {
-                redirect(url('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]));
+            if (config('meta.slug_post') == true) {
+                if ($slug != $content['post_slug']) {
+                    redirect(post_slug($content['post_id'], $content['post_slug']));
+                }
             }
 
             // Redirect when merging a post
             // Редирект при слиянии поста
             if ($content['post_merged_id'] > 0 && !UserData::checkAdmin()) {
-                redirect('/post/' . $content['post_merged_id']);
+                redirect(url('post_id', ['id' => $content['post_merged_id']]));
             }
 
             return $content;
@@ -189,7 +191,7 @@ class PostController extends Controller
     // Размещение своего поста у себя в профиле
     public function postProfile()
     {
-        $post   = PostPresence::index($post_id = Request::getPostInt('post_id'), 'id');
+        $post = PostPresence::index($post_id = Request::getPostInt('post_id'), 'id');
 
         // Access check
         // Проверка доступа

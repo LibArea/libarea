@@ -28,7 +28,7 @@ $sw = $sw ?? '?';
         if ($type == 'website') {
           $url_content = $result['item_url'];
         } elseif ($type == 'answer') {
-          $url_content = '/post/' . $result['post_id'] . '/' . $result['post_slug'] . '#answer_' . $result['answer_id'];
+          $url_content = post_slug($result['post_id'], $result['post_slug']) . '#answer_' . $result['answer_id'];
         } else {
           $url_content = '/post/' . $result['post_id'];
         }

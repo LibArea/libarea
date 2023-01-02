@@ -29,17 +29,17 @@ class ActionController extends Controller
 
         switch ($type) {
             case 'post':
-                $url  = url('post', ['id' => $info_type['post_id'], 'slug' => $info_type['post_slug']]);
+                $url  = post_slug($info_type['post_id'], $info_type['post_slug']);
                 $action_type = 'post';
                 break;
             case 'comment':
                 $post = PostModel::getPost($info_type['comment_post_id'], 'id', $this->user);
-                $url  = url('post', ['id' => $info_type['comment_post_id'], 'slug' => $post['post_slug']]) . '#comment_' . $info_type['comment_id'];
+                $url  = post_slug($info_type['comment_post_id'], $post['post_slug']) . '#comment_' . $info_type['comment_id'];
                 $action_type = 'comment';
                 break;
             case 'answer':
                 $post = PostModel::getPost($info_type['answer_post_id'], 'id', $this->user);
-                $url  = url('post', ['id' => $info_type['answer_post_id'], 'slug' => $post['post_slug']]) . '#answer_' . $info_type['answer_id'];
+                $url  = post_slug($info_type['answer_post_id'], $post['post_slug']) . '#answer_' . $info_type['answer_id'];
                 $action_type = 'answer';
                 break;
             case 'reply':

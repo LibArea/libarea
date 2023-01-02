@@ -38,7 +38,7 @@
         <?php endif; ?>
 
         <?php if ($fav['action_type'] == 'post') : ?>
-          <a class="font-normal" href="<?= url('post', ['id' => $fav['post_id'], 'slug' => $fav['post_slug']]); ?>">
+          <a class="font-normal" href="<?= post_slug($fav['post_id'], $fav['post_slug']); ?>">
             <?= $fav['post_title']; ?>
           </a>
         <?php elseif ($fav['action_type'] == 'website') : ?>
@@ -56,7 +56,7 @@
             </a>
           </span>
         <?php else : ?>
-          <a href="<?= url('post', ['id' => $fav['post']['post_id'], 'slug' => $fav['post']['post_slug']]); ?>#answer_<?= $fav['answer_id']; ?>">
+          <a href="<?= post_slug($fav['post']['post_id'], $fav['post']['post_slug']); ?>#answer_<?= $fav['answer_id']; ?>">
             <?= $fav['post']['post_title']; ?>
           </a>
         <?php endif; ?>

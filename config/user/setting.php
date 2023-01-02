@@ -52,7 +52,7 @@ return [
       'addition'  => 'https://vk.com/',
       'title'     => 'vk',
       'lang'      => 'Vk',
-      'help'      => 'https://vk.com/<b>NICK / id</b>',
+      'help'      => 'https://vk.com/<b>NICK</b>',
       'name'      => 'vk'
     ],
   ];
