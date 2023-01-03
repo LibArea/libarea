@@ -23,7 +23,7 @@
   'content'   => $data['user']['about'],
   'min'       => 0,
   'max'       => 255,
-  'help'      => '0 - 255 ' . __('app.characters'),
+  'help'      => '0 - 255 ' . __('app.characters') . ' (Markdown)',
 ]); ?>
 
 <h3 class="m0 mt15"><?= __('app.contacts'); ?></h3>

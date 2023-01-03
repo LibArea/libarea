@@ -89,7 +89,7 @@ class SettingController extends Controller
                 'trust_level'          => $user['trust_level'],
                 'updated_at'           => date('Y-m-d H:i:s'),
                 'color'                => Request::getPostString('color', '#339900'),
-                'about'                => $data['about'],
+                'about'                => $_POST['about'], // for Markdown
                 'template'             => $data['template'] ?? 'default',
                 'lang'                 => $data['lang'] ?? 'ru',
                 'whisper'              => $user['whisper'] ?? '',

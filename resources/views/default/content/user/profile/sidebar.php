@@ -1,18 +1,21 @@
 <?php $profile = $data['profile']; ?>
 
 <div class="mb-none">
-  <?= $profile['about']; ?>
-  <div class="gray-600 mb15">
-    <svg class="icons">
-      <use xlink:href="/assets/svg/icons.svg#calendar"></use>
-    </svg>
-    <span class="middle lowercase text-sm">
-      <?= Html::langDate($profile['created_at']); ?>
-    </span>
+  <div class="m15 mt0">
+    <?= markdown($profile['about']); ?>
   </div>
 
-  <div class="box bg-lightgray">
+  <div class="box">
     <h4 class="uppercase-box"><?= __('app.contacts'); ?></h4>
+    <div class="gray-600 mt5">
+      <svg class="icons">
+        <use xlink:href="/assets/svg/icons.svg#calendar"></use>
+      </svg>
+      <span class="middle lowercase text-sm">
+        <?= Html::langDate($profile['created_at']); ?>
+      </span>
+     </div>
+    
     <?php foreach (config('user/profile') as $block) : ?>
       <?php if ($profile[$block['title']]) : ?>
         <div class="mt5">
