@@ -84,7 +84,7 @@
       const firstEntry = entries[0];
       if (firstEntry.isIntersecting) {
         if (`${postPage}` > 25) return;
-        getPosts(`/post/scroll/${type}/${postPage}.html`);
+        getPosts(`/post/scroll/${type}?page=${postPage}`);
       }
     });
     if (coolDiv) {

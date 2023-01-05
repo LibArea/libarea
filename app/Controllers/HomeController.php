@@ -13,15 +13,15 @@ class HomeController extends Controller
     public function index($sheet)
     {
         $ignored        = IgnoredModel::getIgnoredUsers(50);
-        $latest_answers = HomeModel::latestAnswers($this->user);
-        $topics_user    = HomeModel::subscription($this->user['id']);
-        $pagesCount     = HomeModel::feedCount($topics_user, $ignored, $this->user, $sheet);
-        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $ignored, $this->user, $sheet);
+        $latest_answers = HomeModel::latestAnswers();
+        $topics_user    = HomeModel::subscription();
+        $pagesCount     = HomeModel::feedCount($topics_user, $ignored, $sheet);
+        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $ignored, $sheet);
         $items          = HomeModel::latestItems(3); // (LIMIT)
 
         // Topics signed by the participant. If a guest, then default.    
         // Темы на которые подписан участник. Если гость, то дефолтные.
-        $topics = \App\Models\FacetModel::advice($this->user['id']);
+        $topics = \App\Models\FacetModel::advice();
 
         $m = [
             'main'      => 'main',
@@ -75,8 +75,8 @@ class HomeController extends Controller
         $type = Request::get('type') == 'all' ? 'all' : 'main.feed';
 
         $ignored        = IgnoredModel::getIgnoredUsers(50);
-        $topics_user    = HomeModel::subscription($this->user['id']);
-        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $ignored, $this->user, $type);
+        $topics_user    = HomeModel::subscription();
+        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $ignored, $type);
 
         $this->insert(
             '/content/post/type-post',

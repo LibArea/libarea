@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use UserData;
 use DB;
 
 class FacetModel extends \Hleb\Scheme\App\Models\MainModel
@@ -29,11 +30,10 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_type,
                     facet_is_deleted
                         FROM facets 
-                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = $user_id
-                        $signet
-                        LIMIT :start, :limit";
+                            LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id
+                                $signet LIMIT :start, :limit";
 
-        return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['start' => $start, 'limit' => $limit, 'user_id' => $user_id])->fetchAll();
     }
 
     public static function getFacetsAllCount($user_id, $sort, $type)
@@ -47,10 +47,9 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     signed_user_id,
                     facet_is_deleted
                         FROM facets 
-                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = $user_id
-                        $signet";
+                            LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id $signet";
 
-        return DB::run($sql)->rowCount();
+        return DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 
     public static function sorts($sort, $user_id, $type)
@@ -298,21 +297,21 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
-    public static function userReads($user_id)
+    public static function userReads()
     {
         $sql = "SELECT 
                     signed_facet_id                  
                         FROM facets_signed 
                             WHERE signed_user_id = :user_id";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
+        return DB::run($sql, ['user_id' => UserData::getUserId()])->fetchAll();
     }
 
     // Topics to which the participant is not subscribed
     // Темы на которые участник не подписан
-    public static function advice($user_id)
+    public static function advice()
     {
-        $userReads = self::userReads($user_id);
+        $userReads = self::userReads();
 
         $result = [];
         foreach ($userReads as $ind => $row) {
@@ -617,13 +616,4 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['facet_id' => $facet_id]);
     }
-
-    public static function editUser($users, $content_id)
-    {
-        $arr = $users['user_id'] ?? [];
-        $arr_user = json_decode($arr, true);
-
-        return TeamModel::editUsersRelation($arr_user, $content_id);
-    }
-
 }

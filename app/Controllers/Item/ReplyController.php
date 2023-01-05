@@ -22,7 +22,7 @@ class ReplyController extends Controller
         $reply = ReplyModel::getId($id);
 
         if (Access::author('item', $reply, 0) === false) {
-            return true;
+            return false;
         }
 
         insert(

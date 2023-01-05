@@ -23,8 +23,8 @@
       <th>id</th>
       <th><?= __('admin.avatar'); ?></th>
       <th><?= __('admin.information'); ?></th>
-      <th class="center">IP <?= __('admin.registrations'); ?></th>
-      <th class="right"><?= __('admin.last'); ?></th>
+      <th class="center mb-none">IP <?= __('admin.registrations'); ?></th>
+      <th class="right mb-none"><?= __('admin.last'); ?></th>
       <th class="center"><?= __('admin.action'); ?></th>
       <th class="center"><?= __('admin.edit'); ?></th>
     </thead>
@@ -65,7 +65,7 @@
             <div class="red">bans: <?= $user['banlist_int_num']; ?></div>
           <?php endif; ?>
         </td>
-        <td class="text-sm align-right">
+        <td class="text-sm align-right mb-none">
           <a class="gray-600" href="<?= url('admin.regip', ['ip' => $user['reg_ip']]); ?>">
             <?= $user['reg_ip']; ?>
           </a>
@@ -75,7 +75,7 @@
           <br>
           <?= $user['created_at']; ?>
         </td>
-        <td class="text-sm align-right">
+        <td class="text-sm align-right mb-none">
           <?php if (!empty($user['last_visit_logs']['latest_ip'])) : ?>
             <a class="gray-600" href="<?= url('admin.logip', ['ip' => $user['last_visit_logs']['latest_ip']]); ?>">
               <?= $user['last_visit_logs']['latest_ip']; ?>

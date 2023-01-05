@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use UserData;
 use DB;
 
 class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Posts on the central page
     // Посты на центральной странице
-    public static function feed($page, $limit, $topics_user, $ignored, $user, $type)
+    public static function feed($page, $limit, $topics_user, $ignored, $type)
     {
+        $user_id = UserData::getUserId();
+
         $result = [];
         foreach ($topics_user as $ind => $row) {
             $result[$ind] = $row['facet_id'];
@@ -25,15 +28,15 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
         $string = "";
         if ($type != 'all' && $type != 'top') {
-            if (!$user['id']) {
+            if (!$user_id) {
                 $string = "";
             } else {
                 $string = "AND relation_facet_id IN(0)";
                 if ($result) $string = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")";
             }
         }
- 
-        $display = self::display($type, $user['trust_level']);
+
+        $display = self::display($type);
 
         $sort = "ORDER BY post_top DESC, post_date DESC";
         if ($type == 'top') $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
@@ -86,10 +89,10 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                                 ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
                                     WHERE $ignoring post_type != 'page' AND post_draft = 0 $string $display $sort LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $user['id'], 'uid2' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function feedCount($topics_user, $ignored, $user, $type)
+    public static function feedCount($topics_user, $ignored, $type)
     {
         $result = [];
         foreach ($topics_user as $ind => $row) {
@@ -106,7 +109,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
         $string = "";
         if ($type != 'all' && $type != 'top') {
-            if (!$user['id']) {
+            if (!UserData::getUserId()) {
                 $string = "";
             } else {
                 $string = "AND f_id IN(0)";
@@ -114,7 +117,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             }
         }
 
-        $display = self::display($type, $user['trust_level']);
+        $display = self::display($type);
         $sql = "SELECT 
                     post_id
                         FROM posts
@@ -136,9 +139,10 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->rowCount();
     }
 
-    public static function display($type, $trust_level)
+    public static function display($type)
     {
         $countLike = config('feed.countLike');
+        $trust_level = UserData::getUserTl();
 
         if ($type == 'questions') {
             return "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 1";
@@ -165,16 +169,13 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
     // The last 5 responses on the main page
     // Последние 5 ответа на главной
-    public static function latestAnswers($user)
+    public static function latestAnswers()
     {
-        $tl = $user['trust_level'];
-        $user_id = $user['id'];
+        $trust_level = UserData::getUserTl();
         $user_answer = "AND post_tl = 0";
-        if ($user_id) {
-            $user_answer = "AND answer_user_id != $user_id AND post_tl <= $tl";
-            if ($user['trust_level'] != 5) {
-                $user_answer = "AND answer_user_id != $user_id AND post_tl <= $tl";
-            }
+
+        if ($user_id = UserData::getUserId()) {
+            $user_answer = "AND answer_user_id != $user_id AND post_tl <= $trust_level";
         }
 
         $sql = "SELECT 
@@ -205,7 +206,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Facets (topic, blogs) all / subscribed
     // Фасеты (темы, блоги) все / подписан
-    public static function subscription($user_id)
+    public static function subscription()
     {
         $sql = "SELECT 
                     facet_id, 
@@ -219,6 +220,6 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                                 WHERE signed_user_id = :id AND (facet_type = 'topic' OR facet_type = 'blog')
                                     ORDER BY facet_id DESC";
 
-        return DB::run($sql, ['id' => $user_id])->fetchAll();
+        return DB::run($sql, ['id' => UserData::getUserId()])->fetchAll();
     }
 }
