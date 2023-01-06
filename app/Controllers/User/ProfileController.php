@@ -26,8 +26,8 @@ class ProfileController extends Controller
             $profile['about'] = __('app.riddle') . '...';
         }
 
-        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
-        $pagesCount = FeedModel::feedCount($this->user, 'profile.posts', $profile['id']);
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, 'profile.posts', $profile['id']);
+        $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
 
         $amount = UserModel::contentCount($profile['id'], 'active');
         if (($amount['count_answers'] + $amount['count_comments']) < 3) {
@@ -54,8 +54,8 @@ class ProfileController extends Controller
     {
         $profile    = $this->profile();
 
-        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, 'profile.posts', $profile['id']);
-        $pagesCount = FeedModel::feedCount($this->user, 'profile.posts', $profile['id']);
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, 'profile.posts', $profile['id']);
+        $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
 
         return $this->render(
             '/user/profile/post',
@@ -101,7 +101,7 @@ class ProfileController extends Controller
             'profile'       => $profile,
             'delet_count'   => UserModel::contentCount($profile['id'], 'remote'),
             'counts'        => UserModel::contentCount($profile['id'], 'active'),
-            'topics'        => FacetModel::getFacetsAll(1, 10, $profile['id'], 'my', 'topic'),
+            'topics'        => FacetModel::getFacetsTopicProfile($profile['id']),
             'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
             'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
             'my_post'       => PostModel::getPost($profile['my_post'], 'id', $this->user),

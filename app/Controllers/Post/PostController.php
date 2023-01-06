@@ -210,13 +210,13 @@ class PostController extends Controller
 
     // Posts by domain
     // Посты по домену
-    public function domain($sheet)
+    public function domain()
     {
         $site = PostModel::availabilityDomain($domain = Request::get('domain'));
         notEmptyOrView404($site);
 
-        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, $sheet, $domain);
-        $pagesCount = FeedModel::feedCount($this->user, $sheet, $domain);
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, 'web.feed', $domain);
+        $pagesCount = FeedModel::feedCount('web.feed', $domain);
 
         $m = [
             'og'    => false,

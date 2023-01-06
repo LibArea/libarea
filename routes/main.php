@@ -123,7 +123,7 @@ Route::get('/blog/{slug}')->controller('Facets\BlogFacetController', ['facet.fee
 
 Route::get('/redirect/facet/{id}')->controller('Facets\RedirectController')->where(['id' => '[0-9]+'])->name('redirect.facet');
 
-Route::get('/domain/{domain}')->controller('Post\PostController@domain', ['web.feed'])->where(['domain' => '[a-z0-9-.]+'])->name('domain');
+Route::get('/domain/{domain}')->controller('Post\PostController@domain')->where(['domain' => '[a-z0-9-.]+'])->name('domain');
 
 Route::get('/web')->controller('Item\HomeController', ['main'])->name('web');
 Route::get('/web/website/{slug}')->controller('Item\DetailedController')->name('website');

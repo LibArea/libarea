@@ -12,8 +12,8 @@ class AllFacetController extends Controller
 
     public function index($sheet, $type)
     {
-        $pagesCount = FacetModel::getFacetsAllCount($this->user['id'], $sheet, $type);
-        $facets     = FacetModel::getFacetsAll($this->pageNumber, $this->limit, $this->user['id'], $sheet, $type);
+        $pagesCount = FacetModel::getFacetsAllCount($sheet, $type);
+        $facets     = FacetModel::getFacetsAll($this->pageNumber, $this->limit, $sheet, $type);
 
         $m = [
             'og'    => true,

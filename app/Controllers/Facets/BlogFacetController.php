@@ -24,8 +24,8 @@ class BlogFacetController extends Controller
             hl_preliminary_exit();
         }
 
-        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $this->user, $sheet, $facet['facet_slug']);
-        $pagesCount = FeedModel::feedCount($this->user, $sheet, $facet['facet_slug']);
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, $sheet, $facet['facet_slug']);
+        $pagesCount = FeedModel::feedCount($sheet, $facet['facet_slug']);
 
         $url    = url('blog', ['slug' => $facet['facet_slug']]);
         $title  = $facet['facet_seo_title'] . ' — ' .  __('app.blog');
