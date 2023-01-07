@@ -5,9 +5,7 @@
     </ul>
   </div>
   <?php if (!empty($data['comments'])) : ?>
-    <div class="max-w780">
-      <?= insert('/content/comment/comment', ['comments' => $data['comments']]); ?>
-    </div>
+    <?= insert('/content/comment/comment', ['comments' => $data['comments']]); ?>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/comments'); ?>
   <?php else : ?>
     <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'info']); ?>

@@ -9,7 +9,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
 {
     public static function feed($page, $limit, $sheet, $slug)
     {
-        $user_id    = UserData::getUserId();
+        $user_id    = (int)UserData::getUserId();
         $string     = self::sorting($sheet);
 
         // Deleted post, banned from showing in the feed and limited by TL (trust_level)
@@ -85,9 +85,10 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function feedCount($sheet, $slug)
     {
-        $string = self::sorting($sheet);
+        $string     = self::sorting($sheet);
+        $user_id    = (int)UserData::getUserId();
 
-        $trust_level = (UserData::getUserId() == 0) ? "AND post_tl = 0" : "AND post_tl <= " . UserData::getUserTl();
+        $trust_level = ($user_id == 0) ? "AND post_tl = 0" : "AND post_tl <= " . UserData::getUserTl();
         $display = "AND post_is_deleted = 0 $trust_level";
 
         $sql = "SELECT 

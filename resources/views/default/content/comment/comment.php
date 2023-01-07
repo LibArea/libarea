@@ -5,7 +5,7 @@ foreach ($comments as $comment) :
 
   <?php if (!empty($comment['answer_id'])) : ?>
     <?php if ($comment['answer_published'] == 0 && $comment['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
-    <div class="gray-600">
+    <div class="gray-600 max-w780">
       <div class="flex justify-between gap">
         <div class="flex gap">
           <a class="gray-600 flex gap-min" href="<?= url('profile', ['login' => $comment['login']]); ?>">
@@ -24,7 +24,7 @@ foreach ($comments as $comment) :
     </div>
   <?php else : ?>
     <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
-    <div class="gray-600">
+    <div class="gray-600 max-w780">
       <div class="flex justify-between gap">
         <div class="flex gap">
           <a class="gray-600 flex gap-min" href="<?= url('profile', ['login' => $comment['login']]); ?>">

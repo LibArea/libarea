@@ -2,7 +2,7 @@
 
 <div class="mb-none">
   <div class="m15 mt0">
-    <?= markdown($profile['about']); ?>
+    <?= markdown($profile['about'] ?? __('app.riddle') . '...'); ?>
   </div>
 
   <div class="box">
