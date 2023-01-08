@@ -48,12 +48,12 @@ $facet  = $data['facet'] ?? false; ?>
               <use xlink:href="/assets/svg/icons.svg#sun"></use>
             </svg></div>
 
-            <a id="notif" class="gray-600 relative" href="<?= url('notifications'); ?>">
-              <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#bell"></use>
-              </svg>
-              <span class="number"></span>
-            </a>
+          <a id="notif" class="gray-600 relative" href="<?= url('notifications'); ?>">
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#bell"></use>
+            </svg>
+            <span class="number"></span>
+          </a>
 
           <div class="relative">
             <div class="trigger">

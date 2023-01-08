@@ -12,37 +12,39 @@
     mediumZoom(document.querySelectorAll('.img-preview img'));
   });
   <?php if (UserData::checkActiveUser()) : ?>
-        const update_time =  <?= config('general.notif_update_time'); ?>;
-        function load_notification()
-        {
-          fetch("/notif", {
-              method: "POST",
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-            })
-              .then(function (response) {
-                if (!response.ok) {
-                  return Promise.reject(new Error(
-                    'Response failed: ' + response.status + ' (' + response.statusText + ')'
-                  ));
-                }
-                return response.json();
-              }).then(function (data) { 
-                if (data != false) {
-                  let notif = document.getElementById('notif');
-                  let number = notif.querySelector('.number');
-                
-                  notif.firstElementChild.classList.add("active");
-                  
-                  number.classList.add("show");
-                  number.innerHTML = data.length;
-                }
-              }).catch(function (error) {
-                // error
-              }); 
-        }
-        setInterval(function(){
-          load_notification();
-        }, update_time);
+    const update_time = <?= config('general.notif_update_time'); ?>;
+
+    function load_notification() {
+      fetch("/notif", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        })
+        .then(function(response) {
+          if (!response.ok) {
+            return Promise.reject(new Error(
+              'Response failed: ' + response.status + ' (' + response.statusText + ')'
+            ));
+          }
+          return response.json();
+        }).then(function(data) {
+          if (data != false) {
+            let notif = document.getElementById('notif');
+            let number = notif.querySelector('.number');
+
+            notif.firstElementChild.classList.add("active");
+
+            number.classList.add("show");
+            number.innerHTML = data.length;
+          }
+        }).catch(function(error) {
+          // error
+        });
+    }
+    setInterval(function() {
+      load_notification();
+    }, update_time);
   <?php else : ?>
     document.querySelectorAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
@@ -67,8 +69,8 @@
 
     var type = 'no';
     <?php $sheet = $sheet ?? null;
-      if ($sheet == 'all') : ?>
-        var type = 'all';
+    if ($sheet == 'all') : ?>
+      var type = 'all';
     <?php endif; ?>
 
     function getPosts(path) {

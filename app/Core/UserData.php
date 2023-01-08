@@ -182,16 +182,16 @@ class UserData
     {
         $t = self::getAccount();
 
-        return  $t['trust_level'] ?? false;
+        return  $t['trust_level'] ?? self::USER_ZERO_LEVEL;
     }
 
     /**
      * Returns the trust level if the user is registere.
      * Возвращает уровень доверия, если пользователь зарегистрирован.
      */
-    static public function getUserId()
+    static public function getUserId(): int
     {
-        return self::$myAccount['id'] ?? false;
+        return self::$myAccount['id'] ?? self::USER_ZERO_LEVEL;
     }
 
     /**

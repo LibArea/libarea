@@ -22,7 +22,17 @@
 
 <aside>
   <?php if (!UserData::checkActiveUser()) : ?>
-    <?= insert('/_block/login'); ?>
+    <div class="box bg-lightgray text-sm">
+      <h4 class="uppercase-box"><?= __('app.authorization'); ?></h4>
+      <form class="max-w300" action="<?= url('enterLogin'); ?>" method="post">
+        <?php csrf_field(); ?>
+        <?= insert('/_block/form/login'); ?>
+        <fieldset class="gray-600 center">
+          <?= __('app.agree_rules'); ?>
+          <a href="<?= url('recover'); ?>"><?= __('app.forgot_password'); ?>?</a>
+        </fieldset>
+      </form>
+    </div>
   <?php endif; ?>
 
   <?= insert('/_block/facet/my-facets', ['topics_user' => $data['topics_user']]); ?>

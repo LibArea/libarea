@@ -70,69 +70,71 @@
           </div>
         <?php endif; ?>
         <?php if ($post['post_url_domain']) : ?>
-          <?= __('app.source'); ?>: 
-            <svg class="icons">
-              <use xlink:href="/assets/svg/icons.svg#link"></use>
-            </svg>
-            <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-              <?= $post['post_url_domain']; ?>
-            </a>
-          </div>
-        <?php endif; ?>
-        <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
-      </div>
-
-      <div class="p15 br-gray items-center flex justify-between">
-        <div class="items-center flex gap gray-600">
-          <?= Html::votes($post, 'post'); ?>
-          <div class="items-center flex gap-min">
-            <svg class="icons"><use xlink:href="/assets/svg/icons.svg#eye"></use></svg> 
-            <?= $post['post_hits_count'] == 0 ? 1 : $post['post_hits_count']; ?>
-          </div>  
-        </div>
-        <div class="items-center flex gap-max">
-          <?php if (UserData::checkActiveUser()) : ?>
-            <?php if (is_array($data['post_signed'])) : ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 gray-600">
-                <?= __('app.unsubscribe'); ?>
-              </div>
-            <?php else : ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 red">
-                + <?= __('app.read'); ?>
-              </div>
-            <?php endif; ?>
-          <?php else : ?>
-            <a class="right mt5 focus-id red" href="<?= url('login'); ?>">
-              + <?= __('app.read'); ?>
-            </a>
-          <?php endif; ?>
-          <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'text-2xl ml5'); ?>
-        </div>
-      </div>
-
-      <?php if (UserData::checkActiveUser()) : ?>
-        <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
-
-          <form action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
-            <?= csrf_field() ?>
-
-            <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
-
-            <div class="clear mb15">
-              <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
-              <input type="hidden" name="answer_id" value="0">
-              <?= Html::sumbit(__('app.reply')); ?>
-            </div>
-          </form>
-
-        <?php endif; ?>
-      <?php endif; ?>
-
-    <?php else : ?>
-      <div class="bg-red-200 p15 center mr10">
-        <?= __('app.content_deleted', ['name' => __('app.post')]); ?>...
+          <?= __('app.source'); ?>:
+          <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#link"></use>
+          </svg>
+          <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
+            <?= $post['post_url_domain']; ?>
+          </a>
       </div>
     <?php endif; ?>
+    <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
+    </div>
+
+    <div class="p15 br-gray items-center flex justify-between">
+      <div class="items-center flex gap gray-600">
+        <?= Html::votes($post, 'post'); ?>
+        <div class="items-center flex gap-min">
+          <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#eye"></use>
+          </svg>
+          <?= $post['post_hits_count'] == 0 ? 1 : $post['post_hits_count']; ?>
+        </div>
+      </div>
+      <div class="items-center flex gap-max">
+        <?php if (UserData::checkActiveUser()) : ?>
+          <?php if (is_array($data['post_signed'])) : ?>
+            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 gray-600">
+              <?= __('app.unsubscribe'); ?>
+            </div>
+          <?php else : ?>
+            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 red">
+              + <?= __('app.read'); ?>
+            </div>
+          <?php endif; ?>
+        <?php else : ?>
+          <a class="right mt5 focus-id red" href="<?= url('login'); ?>">
+            + <?= __('app.read'); ?>
+          </a>
+        <?php endif; ?>
+        <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'text-2xl ml5'); ?>
+      </div>
+    </div>
+
+    <?php if (UserData::checkActiveUser()) : ?>
+      <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
+
+        <form action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+          <?= csrf_field() ?>
+
+          <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
+
+          <div class="clear mb15">
+            <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
+            <input type="hidden" name="answer_id" value="0">
+            <?= Html::sumbit(__('app.reply')); ?>
+          </div>
+        </form>
+
+      <?php endif; ?>
+    <?php endif; ?>
+
+  <?php else : ?>
+    <div class="bg-red-200 p15 center mr10">
+      <?= __('app.content_deleted', ['name' => __('app.post')]); ?>...
+    </div>
+  <?php endif; ?>
   </article>
   <div id="comment"></div>
   <div class="ml10">

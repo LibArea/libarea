@@ -14,8 +14,8 @@
       <span class="middle lowercase text-sm">
         <?= Html::langDate($profile['created_at']); ?>
       </span>
-     </div>
-    
+    </div>
+
     <?php foreach (config('user/profile') as $block) : ?>
       <?php if ($profile[$block['title']]) : ?>
         <div class="mt5">
