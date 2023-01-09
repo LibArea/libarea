@@ -310,10 +310,10 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     signed_user_id
                         FROM facets  
                         INNER JOIN facets_posts_relation ON relation_facet_id = facet_id
-                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :id
+                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id
                             WHERE relation_post_id  = :post_id AND facet_type = '$condition'";
 
-        return DB::run($sql, ['post_id' => $post_id, 'id' => $user_id])->fetchAll();
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetchAll();
     }
 
     public static function getPostFacet($post_id, $type)

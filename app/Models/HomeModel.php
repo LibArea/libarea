@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\IgnoredModel;
 use UserData;
 use DB;
 
@@ -9,7 +10,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Posts on the central page
     // Посты на центральной странице
-    public static function feed($page, $limit, $topics_user, $ignored, $type)
+    public static function feed($page, $limit, $topics_user, $type)
     {
         $user_id = UserData::getUserId();
 
@@ -19,6 +20,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         $resultNotUser = [];
+        $ignored = IgnoredModel::getIgnoredUsers(50);
         foreach ($ignored as $ind => $row) {
             $resultNotUser[$ind] = $row['ignored_id'];
         }
@@ -92,7 +94,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function feedCount($topics_user, $ignored, $type)
+    public static function feedCount($topics_user, $type)
     {
         $result = [];
         foreach ($topics_user as $ind => $row) {
@@ -100,6 +102,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         $resultNotUser = [];
+        $ignored = IgnoredModel::getIgnoredUsers(50);
         foreach ($ignored as $ind => $row) {
             $resultNotUser[$ind] = $row['ignored_id'];
         }

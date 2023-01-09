@@ -26,7 +26,7 @@ class PostController extends Controller
         $slug  = Request::get('slug');
         $id    = Request::getInt('id');
 
-        $content = self::presence($type, $id, $slug, $this->user);
+        $content = self::presence($type, $id, $slug);
 
         $this->setPostView($content['post_id'], $this->user['id']);
 
@@ -144,7 +144,7 @@ class PostController extends Controller
     // Получим ответы и комментарии на пост
     public function answersPost($post_id, $post_feature, $sorting)
     {
-        $post_answers = AnswerModel::getAnswersPost($post_id, $this->user['id'], $post_feature, $sorting);
+        $post_answers = AnswerModel::getAnswersPost($post_id, $post_feature, $sorting);
 
         $answers = [];
         foreach ($post_answers as $ind => $row) {
@@ -153,14 +153,14 @@ class PostController extends Controller
                 $row['edit'] = 1;
             }
             // TODO: N+1 см. AnswerModel()
-            $row['comments'] = CommentModel::getCommentsAnswer($row['answer_id'], $this->user['id']);
+            $row['comments'] = CommentModel::getCommentsAnswer($row['answer_id']);
             $answers[$ind]   = $row;
         }
 
         return $answers;
     }
 
-    public static function presence($type, $id, $slug, $user)
+    public static function presence($type, $id, $slug)
     {
         // Check id and get content data
         // Проверим id и получим данные контента

@@ -130,8 +130,10 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Getting answers in a post
     // Получаем ответы в посте
-    public static function getAnswersPost($post_id, $user_id, $type, $sorting = 'new')
+    public static function getAnswersPost($post_id, $type, $sorting = 'new')
     { 
+        $user_id = UserData::getUserId();
+    
         if ($type == 1) {
             $sorting = 'top';  
         }

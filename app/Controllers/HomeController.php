@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{HomeModel, IgnoredModel};
+use App\Models\HomeModel;
 use Meta;
 
 class HomeController extends Controller
@@ -12,11 +12,10 @@ class HomeController extends Controller
 
     public function index($sheet)
     {
-        $ignored        = IgnoredModel::getIgnoredUsers(50);
         $latest_answers = HomeModel::latestAnswers();
         $topics_user    = HomeModel::subscription();
-        $pagesCount     = HomeModel::feedCount($topics_user, $ignored, $sheet);
-        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $ignored, $sheet);
+        $pagesCount     = HomeModel::feedCount($topics_user, $sheet);
+        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $sheet);
         $items          = HomeModel::latestItems(3); // (LIMIT)
 
         // Topics signed by the participant. If a guest, then default.    
@@ -74,9 +73,8 @@ class HomeController extends Controller
     {
         $type = Request::get('type') == 'all' ? 'all' : 'main.feed';
 
-        $ignored        = IgnoredModel::getIgnoredUsers(50);
         $topics_user    = HomeModel::subscription();
-        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $ignored, $type);
+        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $type);
 
         $this->insert(
             '/content/post/type-post',

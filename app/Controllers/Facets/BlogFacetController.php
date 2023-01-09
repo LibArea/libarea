@@ -27,10 +27,6 @@ class BlogFacetController extends Controller
         $posts      = FeedModel::feed($this->pageNumber, $this->limit, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($sheet, $facet['facet_slug']);
 
-        $url    = url('blog', ['slug' => $facet['facet_slug']]);
-        $title  = $facet['facet_seo_title'] . ' — ' .  __('app.blog');
-        $description  = $facet['facet_description'];
-
         if ($facet['facet_is_deleted'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
@@ -38,13 +34,13 @@ class BlogFacetController extends Controller
         $m = [
             'og'        => true,
             'imgurl'    => Img::PATH['facets_logo'] . $facet['facet_img'],
-            'url'       => $url,
+            'url'       => url('blog', ['slug' => $facet['facet_slug']]),
         ];
 
         return $this->render(
             '/facets/blog',
             [
-                'meta'  => Meta::get($title, $description, $m),
+                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.blog'), $facet['facet_description'], $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,

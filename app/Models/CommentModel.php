@@ -153,7 +153,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Получаем комментарии к ответу
-    public static function getCommentsAnswer($answer_id, $user_id)
+    public static function getCommentsAnswer($answer_id)
     {
         $sql = "SELECT 
                     comment_id,
@@ -179,7 +179,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                             AND votes_comment_user_id = :user_id
                                 WHERE comment_answer_id = :answer_id";
 
-        return DB::run($sql, ['user_id' => $user_id, 'answer_id' => $answer_id])->fetchAll();
+        return DB::run($sql, ['user_id' => UserData::getUserId(), 'answer_id' => $answer_id])->fetchAll();
     }
 
     // Страница комментариев участника
