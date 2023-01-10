@@ -17,5 +17,4 @@ class Ignored extends Base
 
         return __('app.successfully');
     }
-
 }

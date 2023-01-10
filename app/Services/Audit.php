@@ -6,7 +6,7 @@ namespace App\Services;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Services\Сheck\PostPresence;
-use App\Models\{ActionModel, AuditModel, NotificationModel, PostModel};
+use App\Models\{ActionModel, AuditModel, NotificationModel};
 use UserData, Msg;
 
 class Audit extends Base
@@ -37,7 +37,7 @@ class Audit extends Base
         $url        = post_slug($post['post_id'], $post['post_slug']) . '#' . $type_id;
 
         $this->create($content_type, $content_id, $url, 'report');
-        
+
         return true;
     }
 
@@ -130,7 +130,7 @@ class Audit extends Base
     public function create(string $type, int $last_content_id, string $url, string $type_notification = 'audit')
     {
         $action_type = ($type_notification == 'audit') ? NotificationModel::TYPE_AUDIT : NotificationModel::TYPE_REPORT;
-        
+
         AuditModel::add(
             [
                 'action_type'       => $type,

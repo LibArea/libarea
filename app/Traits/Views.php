@@ -22,7 +22,7 @@ trait Views
         }
         return true;
     }
-    
+
     public function setProfileView($user_id)
     {
         if (!isset($_SESSION['usernumbers'])) {

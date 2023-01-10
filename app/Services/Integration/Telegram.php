@@ -13,10 +13,8 @@ class Telegram
         $token      = config('integration.telegram_token');
         $chat_id    = config('integration.chat_id');
         $txt        = rawurlencode($title);
-        
+
         // file_get_contents($url . '/bot'. $token .'/sendMessage?chat_id='. $chat_id .'&disable_notification=true&parse_mode=HTML&text=' . $txt);
-        fopen("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&parse_mode=html&text={$txt}", "r");  
-     }
+        fopen("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&parse_mode=html&text={$txt}", "r");
+    }
 }
-
-

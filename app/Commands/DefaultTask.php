@@ -23,7 +23,7 @@ class DefaultTask extends \Hleb\Scheme\App\Commands\MainTask
     /**
      * @param string|int|null $arg - argument description
      */
-    protected function execute($arg = null)
+    protected function execute()
     {
 
         // Your code here.

@@ -12,7 +12,7 @@ class Yandex
         $code = Request::getPost('code');
 
         if (!empty($code)) {
-            
+
             $sending_url = 'https://oauth.yandex.ru/token'; // отправка
             $receiving_url = 'https://login.yandex.ru/info'; // получение
 

@@ -224,5 +224,4 @@ class Html
     {
         return '<button type="submit" name="action" class="btn btn-primary" value="submit">' . $text . '</button>';
     }
-
 }

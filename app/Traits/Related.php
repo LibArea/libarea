@@ -17,6 +17,6 @@ trait Related
             }
             return implode(',', $id ?? []);
         }
-        return false;        
+        return false;
     }
 }

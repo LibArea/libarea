@@ -116,8 +116,6 @@ class EditFacetController extends Controller
 
     public function pages()
     {
-        $facet_id   = Request::getInt('id');
-
         $facet  = FacetPresence::index(Request::getInt('id'), 'id', 'blog');
 
         // Доступ получает только автор и админ

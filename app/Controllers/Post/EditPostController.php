@@ -25,7 +25,7 @@ class EditPostController extends Controller
     // Форма редактирования post
     public function index()
     {
-        $post = PostPresence::index($post_id = Request::getInt('id'), 'id');
+        $post = PostPresence::index(Request::getInt('id'), 'id');
 
         $post_related = [];
         if ($post['post_related']) {

@@ -51,19 +51,6 @@ class PostController extends Controller
         // Get replies and comments on the post
         $answers = $this->answersPost($content['post_id'], $content['post_feature'], $sorting  = Request::getGet('sort'));
 
-        $content_img  = config('meta.img_path');
-        if ($content['post_content_img']) {
-            $content_img  = Img::PATH['posts_cover'] . $content['post_content_img'];
-        } elseif ($content['post_thumb_img']) {
-            $content_img  = Img::PATH['posts_thumb'] . $content['post_thumb_img'];
-        }
-
-
-        $description  = fragment($content['post_content'], 250);
-        if ($description == '') {
-            $description = strip_tags($content['post_title']);
-        }
-
         $description  = (fragment($content['post_content'], 250) == '') ? strip_tags($content['post_title']) : fragment($content['post_content'], 250);
 
         if ($content['post_is_deleted'] == 1) {
@@ -87,7 +74,7 @@ class PostController extends Controller
             'published_time' => $content['post_date'],
             'type'      => 'article',
             'og'        => true,
-            'imgurl'    => $content_img,
+            'imgurl'    => self::images($content),
             'url'       => post_slug($content['post_id'], $content['post_slug']),
         ];
 
@@ -238,6 +225,21 @@ class PostController extends Controller
                 ]
             ]
         );
+    }
+
+    // Define an image for meta tags
+    // Определим изображение для meta- тегов
+    public static function images($content)
+    {
+        $content_img  = config('meta.img_path');
+
+        if ($content['post_content_img']) {
+            $content_img  = Img::PATH['posts_cover'] . $content['post_content_img'];
+        } elseif ($content['post_thumb_img']) {
+            $content_img  = Img::PATH['posts_thumb'] . $content['post_thumb_img'];
+        }
+
+        return $content_img;
     }
 
     // Last 5 pages by content id

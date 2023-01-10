@@ -30,11 +30,11 @@ function url(string $key = null, array $params = [])
 }
 
 function post_slug(int $id, string $slug = '')
-{   
+{
     if (config('meta.slug_post') == false) {
         return hleb_get_by_name('post_id', ['id' => $id]);
     }
-    
+
     return hleb_get_by_name('post', ['id' => $id, 'slug' => $slug]);
 }
 
@@ -60,10 +60,10 @@ function is_current($url)
 {
     $uri = Request::getUri();
     if ($url == $uri) return true;
-    
-    $a = explode('?', $uri);  
+
+    $a = explode('?', $uri);
     if ($url == $a[0]) return true;
- 
+
     return false;
 }
 

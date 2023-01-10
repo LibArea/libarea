@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services\Сheck;
 
 use App\Models\FacetModel;
-use UserData;
 
 class FacetPresence
 {
