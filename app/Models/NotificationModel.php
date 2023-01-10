@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use UserData;
 use DB;
 
 class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
@@ -97,11 +98,11 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Оповещение просмотрено
-    public static function updateMessagesUnread($user_id, $notif_id)
+    public static function updateMessagesUnread($notif_id)
     {
         $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :user_id AND id = :notif_id";
 
-        return DB::run($sql, ['user_id' => $user_id, 'notif_id' => $notif_id]);
+        return DB::run($sql, ['user_id' => UserData::getUserId(), 'notif_id' => $notif_id]);
     }
 
     public static function getNotification($id)

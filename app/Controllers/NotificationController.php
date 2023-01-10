@@ -32,7 +32,7 @@ class NotificationController extends Controller
             return false;
         }
 
-        NotificationModel::updateMessagesUnread($this->user['id'], $notif_id);
+        NotificationModel::updateMessagesUnread($notif_id);
 
         redirect('/' .  $info['url']);
     }

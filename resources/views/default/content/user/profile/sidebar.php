@@ -19,7 +19,7 @@
     <?php foreach (config('user/profile') as $block) : ?>
       <?php if ($profile[$block['title']]) : ?>
         <div class="mt5">
-          <?= $block['lang']; ?>:
+          <span class="gray-600"><?= $block['lang']; ?>:</span>
           <?php if ($block['url']) : ?>
             <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
               <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
@@ -31,7 +31,7 @@
       <?php else : ?>
         <?php if ('location' == $block['title']) : ?>
           <div class="mb20">
-            <?= $block['lang']; ?>: ...
+            <span class="gray-600"><?= $block['lang']; ?>: ...</span>
           </div>
         <?php endif; ?>
       <?php endif; ?>

@@ -66,10 +66,10 @@ class MessagesController extends Controller
         }
 
         // update views, etc. 
-        $dialog_id = MessagesModel::setMessageRead($id, $this->user['id']);
+        $dialog_id = MessagesModel::setMessageRead($id);
 
         // id получателя и индификатор события
-        NotificationModel::updateMessagesUnread($this->user['id'], $dialog_id);
+        NotificationModel::updateMessagesUnread($dialog_id);
 
         // dialog_recipient_unread
         if ($list = MessagesModel::getMessageByDialogId($id)) {

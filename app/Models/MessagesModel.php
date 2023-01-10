@@ -33,7 +33,8 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     {   
         $id = UserData::getUserId();
         $sql = "SELECT dialog_id FROM messages_dialog 
-                    WHERE (dialog_sender_id = $id AND dialog_recipient_id = $user_id) OR (dialog_sender_id = $user_id AND dialog_recipient_id = $id)";
+                    WHERE (dialog_sender_id = $id AND dialog_recipient_id = $user_id) 
+                        OR (dialog_sender_id = $user_id AND dialog_recipient_id = $id)";
 
         return DB::run($sql)->fetch();
     }
@@ -58,35 +59,37 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Recalculation viewed or not
-    public static function setMessageRead($dialog_id, $uid, $receipt = true)
+    public static function setMessageRead($dialog_id, $receipt = true)
     {
+        $user_id = UserData::getUserId(); 
+        
         if (!$messages_dialog = self::getDialogById($dialog_id)) {
             return false;
         }
 
         // Отправитель
-        if ($messages_dialog['dialog_sender_id'] == $uid) {
+        if ($messages_dialog['dialog_sender_id'] == $user_id) {
 
-            $sql = "UPDATE messages_dialog SET dialog_sender_unread = :uid 
+            $sql = "UPDATE messages_dialog SET dialog_sender_unread = :user_id 
             WHERE dialog_sender_unread = 0 AND dialog_id = :dialog_id";
 
-            DB::run($sql, ['uid' => $uid, 'dialog_id' => $dialog_id]);
+            DB::run($sql, ['user_id' => $user_id, 'dialog_id' => $dialog_id]);
 
             if ($receipt) {
 
-                $sql = "UPDATE messages_dialog SET dialog_sender_unread = :uid 
+                $sql = "UPDATE messages_dialog SET dialog_sender_unread = :user_id 
                             WHERE dialog_sender_unread = 0 AND dialog_id = :dialog_id";
 
-                DB::run($sql, ['uid' => $uid, 'dialog_id' => $dialog_id]);
+                DB::run($sql, ['user_id' => $user_id, 'dialog_id' => $dialog_id]);
             }
         }
         // Получатель
-        if ($messages_dialog['dialog_recipient_id'] == $uid) {
+        if ($messages_dialog['dialog_recipient_id'] == $user_id) {
 
-            $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :uid 
+            $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :user_id 
                         WHERE dialog_recipient_unread = 0 AND dialog_id = :dialog_id";
 
-            DB::run($sql, ['uid' => $uid, 'dialog_id' => $dialog_id]);
+            DB::run($sql, ['user_id' => $user_id, 'dialog_id' => $dialog_id]);
         }
 
         return $dialog_id;
