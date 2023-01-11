@@ -28,8 +28,7 @@ class Filter
         $item = [];
         $text = $jevix->parse($content, $item);
 
-        $str =  str_replace(['&gt;'], '', $text);
-        $str = str_replace('{cut}', ' ', $str);
+        $str =  str_replace(['&gt;', '{cut}', '/'], '', $text);
 
         return self::fragment($str, $lenght);
     }

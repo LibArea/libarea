@@ -95,6 +95,8 @@
   <?php endif; ?>
 </script>
 
+<?= insert('/metrika'); ?>
+
 </body>
 
 </html>
