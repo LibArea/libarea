@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use UserData;
 use DB;
 
 class PostModel extends \Hleb\Scheme\App\Models\MainModel
@@ -129,9 +130,9 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     // This should not be your own post, whose TL is not higher than the participant, the post is not a draft, not deleted, etc.
     // Рекомендованные посты
     // Это должен быть не свой пост, у которого TL не выше участника, пост не черновик, не удален и т.д.
-    public static function postSimilars($post_id, $user, $facet_id, $limit = 5)
+    public static function postSimilars($post_id, $facet_id, $limit = 5)
     {
-        $tl = $user['trust_level'] == null ? 0 : $user['trust_level'];
+        $tl = UserData::getUserTl() == null ? 0 : UserData::getUserTl();
         $sql = "SELECT 
                     post_id,
                     post_title,
@@ -145,12 +146,12 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                                     AND post_is_deleted = 0
                                     AND post_draft = 0
                                     AND post_tl <= :tl 
-                                    AND post_user_id != :id
+                                    AND post_user_id != :user_id
                                     AND post_type = 'post'
                                     AND relation_facet_id = :facet_id
                                         ORDER BY post_id DESC LIMIT :limit";
 
-        return DB::run($sql, ['post_id' => $post_id, 'id' => $user['id'], 'tl' => $tl, 'limit' => $limit, 'facet_id' => $facet_id])->fetchAll();
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => UserData::getUserId(), 'tl' => $tl, 'limit' => $limit, 'facet_id' => $facet_id])->fetchAll();
     }
 
     // $type (comments / answers / hits)
@@ -292,7 +293,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['post_id' => $post_id])->fetchAll();
     }
 
-    public static function getPostTopic($post_id, $user_id, $type)
+    public static function getPostTopic($post_id, $type)
     {
         $condition = $type == 'blog' ? 'blog' : 'topic';
 
@@ -313,7 +314,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                         LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id
                             WHERE relation_post_id  = :post_id AND facet_type = '$condition'";
 
-        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetchAll();
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => UserData::getUserId()])->fetchAll();
     }
 
     public static function getPostFacet($post_id, $type)
@@ -358,31 +359,33 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 
     // List of viewed posts
     // Список просмотренных постов
-    public static function getViewPostUser($user_id)
+    public static function getViewPostUser()
     {
         $sql = "SELECT view_post_id FROM posts_view WHERE view_user_id = :user_id ORDER BY view_date DESC LIMIT 25";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
+        return DB::run($sql, ['user_id' => UserData::getUserId()])->fetchAll();
     }
 
     // List of posts to which the participant has subscribed
     // Список постов на которые подписался участник
-    public static function getFocusPostUser($user_id)
+    public static function getFocusPostUser()
     {
         $sql = "SELECT signed_post_id FROM posts_signed WHERE signed_user_id = :user_id";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
+        return DB::run($sql, ['user_id' => UserData::getUserId()])->fetchAll();
     }
 
-    public static function getPostsListUser($user_id, $type)
+    public static function getPostsListUser($type)
     {
+        $user_id = UserData::getUserId();
+        
         $result = [];
         if ($type == 'subscribed') {
-            foreach (self::getFocusPostUser($user_id) as $ind => $row) {
+            foreach (self::getFocusPostUser() as $ind => $row) {
                 $result[$ind] = $row['signed_post_id'];
             }
         } else {
-            foreach (self::getViewPostUser($user_id) as $ind => $row) {
+            foreach (self::getViewPostUser() as $ind => $row) {
                 $result[$ind] = $row['view_post_id'];
             }
         }
@@ -432,7 +435,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
             INNER JOIN users u ON u.id = post_user_id
             LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $user_id
             LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $user_id AND fav.action_type = 'post'
-                WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0 AND post_is_deleted = 0 LIMIT 50";
+                WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0 AND post_is_deleted = 0 ORDER BY post_id DESC LIMIT 50";
 
         return DB::run($sql)->fetchAll();
     }

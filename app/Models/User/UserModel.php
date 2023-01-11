@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use UserData;
 use DB;
 
 class UserModel extends \Hleb\Scheme\App\Models\MainModel
@@ -39,8 +40,9 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return $sql_last_id['last_id'];
     }
 
-    public static function getUsersAll($page, $limit, $user_id, $type)
+    public static function getUsersAll($page, $limit, $type)
     {
+        $user_id = UserData::getUserId();
         $sort = ($type == 'new') ? "ORDER BY created_at DESC" : "ORDER BY id = $user_id DESC, trust_level DESC";
 
         $start  = ($page - 1) * $limit;
@@ -160,7 +162,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Draft page
     // Страница черновиков
-    public static function userDraftPosts($user_id)
+    public static function userDraftPosts()
     {
         $sql = "SELECT
                    post_id,
@@ -180,7 +182,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                             AND post_draft = 1 AND post_is_deleted = 0
                                 ORDER BY post_id DESC";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
+        return DB::run($sql, ['user_id' => UserData::getUserId()])->fetchAll();
     }
 
     public static function userInfo($email)

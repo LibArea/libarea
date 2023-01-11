@@ -32,8 +32,8 @@ class PostController extends Controller
 
         $content['modified'] = $content['post_date'] != $content['post_modified'] ? true : false;
 
-        $facets = PostModel::getPostTopic($content['post_id'], $this->user['id'], 'topic');
-        $blog   = PostModel::getPostTopic($content['post_id'], $this->user['id'], 'blog');
+        $facets = PostModel::getPostTopic($content['post_id'], 'topic');
+        $blog   = PostModel::getPostTopic($content['post_id'], 'blog');
 
         // Show the draft only to the author
         if ($content['post_draft'] == 1 && $content['post_user_id'] != $this->user['id']) {
@@ -89,7 +89,7 @@ class PostController extends Controller
                     'data'  => [
                         'post'          => $content,
                         'answers'       => $answers,
-                        'recommend'     => PostModel::postSimilars($content['post_id'], $this->user, $facets[0]['facet_id'] ?? null),
+                        'recommend'     => PostModel::postSimilars($content['post_id'], $facets[0]['facet_id'] ?? null),
                         'related_posts' => $related_posts ?? '',
                         'post_signed'   => SubscriptionModel::getFocus($content['post_id'], 'post'),
                         'facets'        => $facets,
@@ -104,7 +104,6 @@ class PostController extends Controller
         }
 
         $slug_facet = Request::get('facet_slug');
-
         $facet  = FacetPresence::index($slug_facet, 'slug', 'section');
 
         $m = [

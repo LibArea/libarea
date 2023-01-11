@@ -17,7 +17,7 @@ class UserController extends Controller
     function index($sheet)
     {
         $usersCount = UserModel::getUsersAllCount();
-        $users      = UserModel::getUsersAll($this->pageNumber, $this->limit, $this->user['id'], $sheet);
+        $users      = UserModel::getUsersAll($this->pageNumber, $this->limit, $sheet);
         notEmptyOrView404($users);
 
         $m = [
@@ -118,7 +118,7 @@ class UserController extends Controller
             [
                 'meta'  => Meta::get(__('app.drafts')),
                 'data'  => [
-                    'drafts'    => UserModel::userDraftPosts($this->user['id']),
+                    'drafts'    => UserModel::userDraftPosts(),
                     'sheet'     => 'drafts',
                     'type'      => 'drafts',
                 ]
@@ -138,7 +138,7 @@ class UserController extends Controller
                     'h1'    => __('app.subscribed') . ' ' . $this->user['login'],
                     'sheet' => 'subscribed',
                     'type'  => 'favorites',
-                    'posts' => PostModel::getPostsListUser($this->user['id'], 'subscribed')
+                    'posts' => PostModel::getPostsListUser('subscribed')
                 ]
             ]
         );
@@ -156,7 +156,7 @@ class UserController extends Controller
                     'h1'    => __('app.i_read') . ' ' . $this->user['login'],
                     'sheet' => 'read',
                     'type'  => 'favorites',
-                    'posts' => PostModel::getPostsListUser($this->user['id'], 'read')
+                    'posts' => PostModel::getPostsListUser('read')
                 ]
             ]
         );
