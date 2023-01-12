@@ -53,7 +53,7 @@ main { flex: 1; }
   .mb-w150 { width: 150px; }
   .mb-p10 { padding: 10px; }
   .mb-mt5 { margin-top: 5px; }
-  .mb-ml15 { margin-left: 15px; }
+  .mb-ml10 { margin-left: 10px; }
   .mb-text-xl { font-size: 1.25rem; }
   .logo { font-size: 18px; }
   .gap-max { gap: 1.5rem; }
@@ -72,6 +72,8 @@ main { flex: 1; }
 
   .mb-w-100,
   iframe { width: 100%; }
+
+  .box { padding: 1rem; }
 
   aside,
   .mb-none,

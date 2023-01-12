@@ -41,12 +41,12 @@ use Hleb\Constructor\Handlers\Request; ?>
           <div class="w200 mb-w80">
             <?php if ($post['post_content_img']) : ?>
               <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                <?= Img::image($post['post_content_img'], $post['post_title'], 'w160 mb-w80 mt5 ml15 mb-ml15', 'post', 'cover'); ?>
+                <?= Img::image($post['post_content_img'], $post['post_title'], 'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'cover'); ?>
               </a>
             <?php else : ?>
               <?php if ($post['post_thumb_img']) : ?>
                 <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                  <?= Img::image($post['post_thumb_img'], $post['post_title'],  'w160 mb-w80 mt5 ml15 mb-ml15', 'post', 'thumbnails'); ?>
+                  <?= Img::image($post['post_thumb_img'], $post['post_title'],  'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'thumbnails'); ?>
                 </a>
               <?php endif; ?>
             <?php endif; ?>
