@@ -16,11 +16,11 @@ $post   = $data['post'] ?? false;
     <div class="wrap">
       <div class="d-header_contents">
 
-        <div class="flex items-center">
-          <div id="togglemenu" class="mr10 pointer"><svg class="icons">
+        <div class="flex items-center gray-600 gap-min">
+          <div id="togglemenu" class="pointer"><svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#menu"></use>
             </svg></div>
-          <div class="menu__button none mr10"><svg class="icons">
+          <div class="menu__button none"><svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#menu"></use>
             </svg></div>
           <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>

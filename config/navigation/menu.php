@@ -44,6 +44,7 @@ return [
             'title' => __('app.search'),
             'icon'  => 'search',
             'id'    => 'search',
+            'css'   => 'none mb-block',
         ], [
             'hr'    => true,
         ], [
