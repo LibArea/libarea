@@ -88,6 +88,7 @@ return [
     'donate'            => '支持项目', 
     'review'            => '審查',
     'contacts'          => '聯繫人',
+    'public_data'       => '配置文件中可见的公共数据。',
     'city'              => '城市',
     'remember_me'       => '記住我',
     'banned'            => '禁止',

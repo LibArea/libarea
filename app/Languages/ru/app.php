@@ -87,6 +87,7 @@ return [
     'donate'            => '<span class="red">П</span>оддержите проект',
     'review'            => 'Обзор',
     'contacts'          => 'Контакты',
+    'public_data'       => 'Публичные данные, видимые в профиле.',
     'city'              => 'Город',
     'remember_me'       => 'Запомнить меня',
     'banned'            => 'Забаненные',

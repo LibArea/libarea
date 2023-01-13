@@ -27,6 +27,7 @@
 ]); ?>
 
 <h3 class="m0 mt15"><?= __('app.contacts'); ?></h3>
+<div class="gray-600 text-sm"><?= __('app.public_data'); ?></div>
 <?php foreach (config('user/setting') as $block) : ?>
   <fieldset>
     <label for="post_title"><?= $block['lang']; ?></label>

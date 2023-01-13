@@ -14,7 +14,7 @@
       $post_url = post_slug($post['post_id'], $post['post_slug']);
     ?>
 
-      <div class="block-answer mb15">
+      <div class="block-answer mb20">
         <?php if ($n != 1) : ?><div class="br-top-dotted mt10 mb10"></div><?php endif; ?>
 
         <?php if ($answer['answer_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>

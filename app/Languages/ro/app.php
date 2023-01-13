@@ -87,6 +87,7 @@ return [
     'donate'            => 'Susține proiectul', 
     'review'            => 'Revizuire',
     'contacts'          => 'Contacte',
+    'public_data'       => 'Date publice vizibile în profil.',
     'city'              => 'Oraș',
     'remember_me'       => 'Amintește-ți de mine',
     'banned'            => 'Interzis',

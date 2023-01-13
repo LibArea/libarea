@@ -87,6 +87,7 @@ return [
     'donate'            => 'Support the project', 
     'review'            => 'Review',
     'contacts'          => 'Contacts',
+    'public_data'       => 'Public data visible in the profile.',
     'city'              => 'City',
     'remember_me'       => 'To remember me',
     'banned'            => 'Banned',
