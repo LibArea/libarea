@@ -33,14 +33,6 @@ class Filter
         return self::fragment($str, $lenght);
     }
 
-    public static function pre($tag, $params, $content)
-    {
-        $content = htmlspecialchars_decode($content);
-
-
-        return '<pre class="lb">' . $content . '</pre>';
-    }
-
     public static function fragment(string $text, int $lenght = 150, string $charset = 'UTF-8')
     {
         if (mb_strlen($text, $charset) >= $lenght) {

@@ -15,4 +15,3 @@
     </aside>
   </div>
 </div>
-<?= insert('/_block/js-msg-flag'); ?>

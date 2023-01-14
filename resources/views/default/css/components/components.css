@@ -302,10 +302,12 @@ a:hover > img,
 .trigger img { opacity: 0.8; }
 
 .focus-id:hover { cursor: pointer } 
-
 .underline-hover:hover { text-decoration: underline; }
 
-.content-body { max-width: 780px; }
+.content-body {
+  max-width: 780px;
+  margin-top: 15px;
+}
 
 .content_tree:target,
 .content_tree.edit {

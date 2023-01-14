@@ -16,4 +16,3 @@
     <?= __('meta.comments_desc'); ?>
   </div>
 </aside>
-<?= insert('/_block/js-msg-flag'); ?>

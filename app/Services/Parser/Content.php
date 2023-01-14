@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Parser;
 
-use App\Services\Parser\Convert;
+use App\Services\Parser\{Convert, Filter};
 use App\Models\AuditModel;
 use UserData;
 
@@ -122,7 +122,7 @@ class Content
         }
 
         if (!$afterCut) {
-            $beforeCut = self::fragment($text, $length);
+            $beforeCut = Filter::fragment($text, $length);
         }
 
         $button = false;
@@ -131,26 +131,6 @@ class Content
         }
 
         return ['content' => $beforeCut, 'button' => $button];
-    }
-
-    // Getting a piece of text
-    public static function fragment($text, $lenght = 100, $strip = false)
-    {
-        $charset = 'UTF-8';
-        $token = '~';
-        $end = '...';
-
-        if ($strip) {
-            $text = str_replace('&gt;', '', strip_tags($text));
-        }
-
-        if (mb_strlen($text, $charset) >= $lenght) {
-            $wrap = wordwrap($text, $lenght, $token);
-            $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, $token, 0, $charset), $charset);
-            return $str_cut .= $end;
-        }
-
-        return $text;
     }
 
     public static function parseUser($content, $with_user = false, $to_uid = false)
