@@ -88,11 +88,24 @@ document.querySelectorAll(".up-id")
       .then((response) => {
         return;
       }).then((text) => {
-        let new_cont = (parseInt(el.dataset.count) + parseInt(1));
+
         let upVot = document.querySelector('#up' + el.dataset.id);
+        let act = upVot.classList.contains('active');
         let upScr = upVot.querySelector('.score');
-        upVot.classList.add('active');
-        upScr.replaceWith(new_cont);
+        let number = parseInt(upScr.innerText);
+
+        if (!number) {
+            number = 0;
+        }
+
+        if (act == true) {
+            new_cont = (number - parseInt(1));
+        } else {
+            new_cont = (number + parseInt(1));
+        }
+         
+        upVot.classList.toggle('active');
+        upScr.innerHTML = new_cont;
       });
   }));
 

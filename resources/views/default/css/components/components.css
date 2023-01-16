@@ -367,7 +367,7 @@ article iframe {
 }
 
 .delet-count {
-  z-index: 33;
+  z-index: 3;
   right: 10px;
   font-size: 0.8em;
   color: #fff;
