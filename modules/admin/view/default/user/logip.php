@@ -9,51 +9,33 @@
 
 <table>
   <thead>
-    <th>N</th>
     <th><?= __('admin.information'); ?></th>
-    <th>E-mail</th>
-    <th><?= __('admin.registration'); ?></th>
-    <th>
-      <?php if ($data['option'] == 'logs') : ?>
-        <?= __('admin.last'); ?>
-      <?php else : ?>
-        IP
-      <?php endif; ?>
-    </th>
-    <th>Ban</th>
-    <th><?= __('admin.action'); ?></th>
+    <th class="center">Ban</th>
+    <th class="center"><?= __('admin.action'); ?></th>
   </thead>
   <?php foreach ($data['results'] as $user) :  ?>
     <tr>
-      <td class="center">
-        <?= $user['id']; ?>
-      </td>
       <td>
         <?= Img::avatar($user['avatar'], $user['login'], 'img-sm', 'small'); ?>
         <a href="<?= url('profile', ['login' => $user['login']]); ?>">
           <?= $user['login']; ?>
-        </a>
+        </a> (id <?= $user['id']; ?>)
         <?php if ($user['name']) : ?>
           (<?= $user['name']; ?>)
         <?php endif; ?>
         <sup class="red">TL:<?= $user['trust_level']; ?></sup>
-      </td>
-      <td>
-        <span class="date"><?= $user['email']; ?></span>
-      </td>
-      <td>
-        <?= $user['created_at']; ?>
-      </td>
-      <td>
+        <div class=" gray-600">
+        <?= $user['email']; ?> | 
+        <?= $user['created_at']; ?> | 
         <?php if ($data['option'] == 'logs') : ?>
           <?= $user['latest_date']; ?>
         <?php else : ?>
           <?= $user['reg_ip']; ?>
         <?php endif; ?>
-
         <?php if ($user['duplicat_ip_reg'] > 1) : ?>
           <br> <sup class="red">(<?= $user['duplicat_ip_reg']; ?>)</sup>
         <?php endif; ?>
+        </div>
       </td>
       <td class="center">
         <?php if ($user['trust_level'] == UserData::REGISTERED_ADMIN) : ?>
@@ -65,7 +47,7 @@
             </div>
           <?php else : ?>
             <div class="type-ban" data-id="<?= $user['id']; ?>" data-type="user">
-              <?= __('admin.ban'); ?>
+              <span class="gray-600"><?= __('admin.ban'); ?></span>
             </div>
           <?php endif; ?>
         <?php endif; ?>

@@ -64,7 +64,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Member Content Posting Frequency 
     // Частота размещения контента участника в день 
-    public static function getSpeedDay($user_id, $type)
+    public static function getSpeedDay($type)
     {
         $sql = "SELECT 
                     " . $type . "_id, 
