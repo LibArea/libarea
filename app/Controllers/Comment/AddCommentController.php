@@ -76,27 +76,13 @@ class AddCommentController extends Controller
         // Оповещение автору ответа, что есть комментарий (себе не записываем)
         $answ = AnswerModel::getAnswerId($answer_id);
         if ($this->user['id'] != $answ['answer_user_id']) {
-            NotificationModel::send(
-                [
-                    'sender_id'    => $this->user['id'],
-                    'recipient_id' => $answ['answer_user_id'],
-                    'action_type'  => NotificationModel::TYPE_COMMENT_ANSWER,
-                    'url'          => $url,
-                ]
-            );
+            NotificationModel::send($answ['answer_user_id'], NotificationModel::TYPE_COMMENT_ANSWER, $url);
         }
 
         if ($comment_id) {
             $comment = CommentModel::getCommentsId($comment_id);
             if ($this->user['id'] != $comment['comment_user_id']) {
-                NotificationModel::send(
-                    [
-                        'sender_id'    => $this->user['id'],
-                        'recipient_id' => $comment['comment_user_id'],
-                        'action_type'  => NotificationModel::TYPE_COMMENT_COMMENT,
-                        'url'          => $url,
-                    ]
-                );
+                NotificationModel::send($comment['comment_user_id'], NotificationModel::TYPE_COMMENT_COMMENT, $url);
             }
         }
 

@@ -117,14 +117,11 @@ class EditItemController extends Controller
         // If the site has changed status (for example, after editing)
         // Если сайт сменил статус (например, после редактирования)
         if ($item['item_published'] != $published) {
-            NotificationModel::send(
-                [
-                    'sender_id'    => $this->user['id'],
-                    'recipient_id' => UserData::checkAdmin() ? $new_user_id : 1,
-                    'action_type'  => UserData::checkAdmin() ? NotificationModel::WEBSITE_APPROVED : NotificationModel::TYPE_EDIT_WEBSITE,
-                    'url'          => url('web'),
-                ]
-            );
+
+            $recipient_id = UserData::checkAdmin() ? $new_user_id : 1;
+            $action_type = UserData::checkAdmin() ? NotificationModel::WEBSITE_APPROVED : NotificationModel::TYPE_EDIT_WEBSITE;
+
+            NotificationModel::send($recipient_id, $action_type, url('web'));
         }
 
         $facet_post = $data['facet_select'] ?? [];

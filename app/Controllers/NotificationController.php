@@ -39,7 +39,7 @@ class NotificationController extends Controller
 
     public function remove()
     {
-        NotificationModel::setRemove($this->user['id']);
+        NotificationModel::setRemove();
 
         redirect(url('notifications'));
     }
@@ -69,14 +69,7 @@ class NotificationController extends Controller
 
             // Admin notification
             // Оповещение админу
-            NotificationModel::send(
-                [
-                    'sender_id'    => $this->user['id'],
-                    'recipient_id' => $recipient_id,  // admin
-                    'action_type'  => $action_type, // Система флагов  
-                    'url'          => $url,
-                ]
-            );
+            NotificationModel::send($recipient_id, $action_type, $url);
 
             SendEmail::mailText($recipient_id, 'appealed');
         }

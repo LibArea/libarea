@@ -96,14 +96,7 @@ class AddItemController extends Controller
     public function notif($trust_level)
     {
         if ($trust_level != UserData::REGISTERED_ADMIN) {
-            NotificationModel::send(
-                [
-                    'sender_id'    => $this->user['id'],
-                    'recipient_id' => 1,  // admin
-                    'action_type'  => NotificationModel::TYPE_ADD_WEBSITE,
-                    'url'          => url('web.audits'),
-                ]
-            );
+            NotificationModel::send(UserData::REGISTERED_ADMIN_ID,  NotificationModel::TYPE_ADD_WEBSITE, url('web.audits'));
         }
 
         return true;

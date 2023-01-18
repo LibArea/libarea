@@ -142,14 +142,7 @@ class Audit extends Base
 
         // Send notification type 21 (audit) to administrator (id 1) 
         // Отправим тип уведомления 21 (аудит) администратору (id 1)
-        NotificationModel::send(
-            [
-                'sender_id'    => $this->user['id'],
-                'recipient_id' => UserData::REGISTERED_ADMIN_ID,
-                'action_type'  => $action_type,
-                'url'          => $url,
-            ]
-        );
+        NotificationModel::send(UserData::REGISTERED_ADMIN_ID, $action_type, $url);
 
         return true;
     }

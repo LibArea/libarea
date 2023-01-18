@@ -61,14 +61,7 @@ class AddAnswerController extends Controller
         if ($focus_all = PostModel::getFocusUsersPost($post['post_id'])) {
             foreach ($focus_all as $focus_user) {
                 if ($focus_user['signed_user_id'] != $this->user['id']) {
-                    NotificationModel::send(
-                        [
-                            'sender_id'    => $this->user['id'],
-                            'recipient_id' => $focus_user['signed_user_id'],
-                            'action_type'  => NotificationModel::TYPE_AMSWER_POST,
-                            'url'          => $url,
-                        ]
-                    );
+                    NotificationModel::send($focus_user['signed_user_id'], NotificationModel::TYPE_AMSWER_POST, $url);
                 }
             }
         }

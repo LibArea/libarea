@@ -161,16 +161,7 @@ class MessagesController extends Controller
         $dialog_id = MessagesModel::sendMessage($recipient_id, $content);
         $url = '/messages/' . $dialog_id;
 
-        // Оповещение админу
-        // Admin notification 
-        NotificationModel::send(
-            [
-                'sender_id'    => $this->user['id'],
-                'recipient_id' => $recipient_id,  // admin
-                'action_type'  => 1, // Private messages 
-                'url'          => $url,
-            ]
-        );
+        NotificationModel::send($recipient_id, NotificationModel::TYPE_PRIVATE_MESSAGES, $url);
 
         redirect($url);
     }

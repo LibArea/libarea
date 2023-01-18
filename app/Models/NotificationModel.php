@@ -29,6 +29,8 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
     // 35 - на ваш комментарий был дан ответ
     // 36 - обращение (@) к комментариях на сайт
 
+    const TYPE_PRIVATE_MESSAGES     = 1;  // Private messages
+
     const TYPE_AMSWER_POST          = 3;  // answer to question (post)
     const TYPE_COMMENT_ANSWER       = 4;  // comment on answer
     const TYPE_COMMENT_COMMENT      = 5;  // comment on comment
@@ -83,8 +85,15 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Отправка
-    public static function send($params)
+    public static function send($recipient_id, $action_type, $url)
     {
+        $params = [
+            'sender_id'    => UserData::getUserId(),
+            'recipient_id' => $recipient_id,
+            'action_type'  => $action_type,
+            'url'          => $url,
+        ];
+
         $sql = "INSERT INTO notifications(sender_id, 
                                 recipient_id, 
                                 action_type, 
@@ -122,10 +131,10 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['id' => $id])->fetch();
     }
 
-    public static function setRemove($user_id)
+    public static function setRemove()
     {
         $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :user_id";
 
-        return DB::run($sql, ['user_id' => $user_id]);
+        return DB::run($sql, ['user_id' => UserData::getUserId()]);
     }
 }
