@@ -12,7 +12,7 @@ foreach ($comments as $comment) :
             <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm', 'small'); ?>
             <?= $comment['login']; ?>
           </a>
-          <span class="lowercase"><?= Html::langDate($comment['answer_date']); ?></span>
+          <span class="gray-600 lowercase"><?= Html::langDate($comment['answer_date']); ?></span>
           <?= insert('/_block/admin-show-ip', ['ip' => $comment['answer_ip'], 'publ' => $comment['answer_published']]); ?>
         </div>
         <div><?= Html::votes($comment, 'answer'); ?></div>
@@ -20,7 +20,7 @@ foreach ($comments as $comment) :
       <a class="block cut-off" href="<?= post_slug($comment['post_id'], $comment['post_slug']); ?>#answer_<?= $comment['answer_id']; ?>">
         <?= $comment['post_title']; ?>
       </a>
-      <div class="cut-post black"><?= markdown($comment['answer_content']); ?></div>
+      <div class="ind-first-p"><?= markdown($comment['answer_content']); ?></div>
     </div>
   <?php else : ?>
     <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
@@ -31,7 +31,7 @@ foreach ($comments as $comment) :
             <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm', 'small'); ?>
             <?= $comment['login']; ?>
           </a>
-          <span class="lowercase"><?= Html::langDate($comment['comment_date']); ?></span>
+          <span class="gray-600 lowercase"><?= Html::langDate($comment['comment_date']); ?></span>
           <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
         </div>
         <div><?= Html::votes($comment, 'comment'); ?></div>
@@ -39,7 +39,7 @@ foreach ($comments as $comment) :
       <a class="block cut-off" href="<?= post_slug($comment['post_id'], $comment['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
         <?= $comment['post_title']; ?>
       </a>
-      <div class="cut-post black"><?= markdown($comment['comment_content']); ?></div>
+      <div class="ind-first-p"><?= markdown($comment['comment_content']); ?></div>
     </div>
   <?php endif; ?>
 

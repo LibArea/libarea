@@ -14,7 +14,7 @@
       $post_url = post_slug($post['post_id'], $post['post_slug']);
     ?>
 
-      <div class="block-answer mb20">
+      <div class="block-answer">
         <?php if ($n != 1) : ?><div class="br-top-dotted mt10 mb10"></div><?php endif; ?>
 
         <?php if ($answer['answer_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
@@ -48,11 +48,11 @@
                   </svg></a>
                 <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
               </div>
-              <div class="max-w780 ind-first-p">
+              <div class="ind-first-p">
                 <?= markdown($answer['answer_content'], 'text'); ?>
               </div>
             </div>
-            <div class="flex text-sm gap">
+            <div class="flex text-sm gap mt10">
               <?= Html::votes($answer, 'answer'); ?>
 
               <?php if ($post['post_closed'] == 0) : ?>
@@ -124,7 +124,7 @@
                 </svg></a>
               <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
             </div>
-            <div class="max-w780 ind-first-p">
+            <div class="ind-first-p">
               <?= markdown($comment['comment_content'], 'text'); ?>
             </div>
             <div class="text-sm flex gap">

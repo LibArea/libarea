@@ -316,7 +316,12 @@ a:hover > img,
   margin-top: -70px;
   padding-top: 70px;
 }
- 
+
+.ind-first-p p {
+  margin: 0.5em 0;
+  max-width: 780px;
+}
+
 .ind-first-p p:first-child { margin-top: 3px; }
 
 article iframe {
