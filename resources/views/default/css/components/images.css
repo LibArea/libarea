@@ -80,4 +80,7 @@ img.emoji {
 
 .cut-post img,
 .post img,
+.content-body img,
 .medium-zoom-image { max-width: 100%; }
+
+.CodeMirror-line { max-width: 800px; }

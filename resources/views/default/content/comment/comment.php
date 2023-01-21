@@ -20,7 +20,7 @@ foreach ($comments as $comment) :
       <a class="block cut-off" href="<?= post_slug($comment['post_id'], $comment['post_slug']); ?>#answer_<?= $comment['answer_id']; ?>">
         <?= $comment['post_title']; ?>
       </a>
-      <div class="ind-first-p"><?= markdown($comment['answer_content']); ?></div>
+      <div class="ind-first-p max-w780"><?= markdown($comment['answer_content']); ?></div>
     </div>
   <?php else : ?>
     <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
