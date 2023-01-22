@@ -40,7 +40,7 @@
           <?php if (!empty($row['separator']) == 'separator') : ?> '|',
           <?php else : ?> {
               name: '<?= $row['name']; ?>',
-              action: <?= $row['action']; ?>,
+              action: '<?= $row['action']; ?>',
               icon: '<?= $row['icon']; ?>',
               title: '<?= $row['title']; ?>',
             },

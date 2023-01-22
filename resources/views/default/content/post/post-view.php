@@ -70,7 +70,7 @@
       <?php endif; ?>
 
       <div class="post-body max-w780 full">
-        <div class="post mb15">
+        <div class="content-body mb15">
           <?= markdown($post['post_content'], 'text'); ?>
         </div>
         <?php if ($post['post_url_domain']) : ?>

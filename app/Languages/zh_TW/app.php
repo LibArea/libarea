@@ -17,6 +17,7 @@ return [
     'news'              => '新闻',
     'team'              => '團隊',
     'teams'             => '團隊',
+    'table'             => '桌子',
     'team_not_users'    => '团队中还没有成员...',
     'owner'             => '所有者',
     'top'               => '最佳',
