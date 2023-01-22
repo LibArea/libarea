@@ -238,8 +238,7 @@ class UploadImage
 
             $path = HLEB_PUBLIC_DIR . Img::PATH['posts_thumb'];
             $year = date('Y') . '/';
-            $filename = 'p-' . time() . '.' . $ext;
-            $file = 'p-' . time();
+            $filename = 'p-' . time();
 
             self::createDir($path . $year);
             $local = $path . $year . $filename;
