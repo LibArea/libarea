@@ -13,11 +13,6 @@
         </div>
         <div>
           <div>
-            <?php if ($data['sheet'] == 'subscribed') : ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id tag-violet right">
-                <?= __('app.unsubscribe'); ?>
-              </div>
-            <?php endif; ?>
             <a class="text-xl" href="<?= $post_url; ?>">
               <?= $post['post_title']; ?>
               <?= insert('/content/post/post-title', ['post' => $post]); ?>
