@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hleb\Constructor\Handlers\Request;
 use App\Models\IgnoredModel;
 use UserData;
 use DB;
@@ -39,11 +40,9 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         $display = self::display($type);
+        $sort = self::sortDay($type);
 
-        $sort = "ORDER BY post_top DESC, post_date DESC";
-        if ($type == 'top') $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
-
-        $start  = ($page - 1) * $limit;
+        $start = ($page - 1) * $limit;
         $sql = "SELECT DISTINCT
                 post_id,
                 post_title,
@@ -206,6 +205,32 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
+
+    public static function sortDay($type)
+    {
+        $sort = "ORDER BY post_top DESC, post_date DESC";
+        
+        if ($type == 'top') {
+
+            $sort_day = Request::getGet('sort_day');
+            $sortDay = (int)$sort_day ?? null;
+
+            switch ($sortDay) {
+                case 1:
+                    $sort =  "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 1 WEEK DESC";
+                    break;
+                case 3:
+                    $sort =  "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
+                    break;
+                default:
+                    $sort =  "ORDER BY post_votes DESC";
+                    break;
+            }
+        }
+        
+        return $sort;
+    }
+
 
     // Facets (topic, blogs) all / subscribed
     // Фасеты (темы, блоги) все / подписан

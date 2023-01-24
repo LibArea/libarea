@@ -71,7 +71,7 @@ class Content
         $pathEmoji =  '/assets/images/emoji/';
 
         $smiles = array(':)', ':-)');
-        $content = str_replace($smiles, '<img alt="smile" class="emoji" src="' . $pathEmoji . 'smile.png">', $content);
+        $content = str_replace($smiles, ' <img alt="smile" class="emoji" src="' . $pathEmoji . 'smile.png"> ', $content);
 
         if (preg_match('/\:(\w+)\:/mUs', $content, $matches)) {
             $path =  HLEB_PUBLIC_DIR . "/assets/images/emoji/" . $matches[1];
@@ -84,7 +84,7 @@ class Content
                 return $content;
 
             $img = $pathEmoji . $matches[1] . $file_ext;
-            return str_replace($matches[0], '<img alt="' . $matches[1] . '" class="emoji" src="' . $img . '">', $content);
+            return str_replace($matches[0], ' <img alt="' . $matches[1] . '" class="emoji" src="' . $img . '"> ', $content);
         }
 
         return  $content;
