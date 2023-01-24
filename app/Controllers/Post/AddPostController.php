@@ -31,8 +31,8 @@ class AddPostController extends Controller
             $topic  = FacetPresence::index($topic_id, 'id', 'topic');
         }
 
-        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
-        $facets = FacetModel::getTeamFacets($this->user['id'], 'blog');
+        $blog = FacetModel::getFacetsUser('blog');
+        $facets = FacetModel::getTeamFacets('blog');
 
         return $this->render(
             '/post/add',

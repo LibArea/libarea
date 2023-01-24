@@ -381,7 +381,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $user_id
      * @param  string $type (topic | blog)
      */
-    public static function getFacetsUser($user_id, $type)
+    public static function getFacetsUser($type)
     {
         $sql = "SELECT 
                     facet_id, 
@@ -391,7 +391,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_type
                         FROM facets WHERE facet_user_id = :user_id AND facet_type = :type";
 
-        return DB::run($sql, ['user_id' => $user_id, 'type' => $type])->fetchAll();
+        return DB::run($sql, ['user_id' => UserData::getUserId(), 'type' => $type])->fetchAll();
     }
 
     // Number of faces created by the contributor
@@ -579,7 +579,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
-    public static function getTeamFacets($user_id, $type)
+    public static function getTeamFacets($type)
     {
         $sql = "SELECT
                     team_facet_id as facet_id,
@@ -588,7 +588,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN facets ON team_facet_id = facet_id
                                 WHERE team_user_id = :user_id AND facet_type = :type";
 
-        return DB::run($sql, ['user_id' => $user_id, 'type' => $type])->fetchAll();
+        return DB::run($sql, ['user_id' => UserData::getUserId(), 'type' => $type])->fetchAll();
     }
 
     // Add, change users in the team

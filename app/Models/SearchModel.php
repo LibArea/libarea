@@ -173,8 +173,8 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
             if (!UserData::checkAdmin()) {
                 if ($type == 'blog') {
                     
-                    $blog = FacetModel::getFacetsUser(UserData::getUserId(), 'blog');
-                    $teams = FacetModel::getTeamFacets(UserData::getUserId(), 'blog');
+                    $blog = FacetModel::getFacetsUser('blog');
+                    $teams = FacetModel::getTeamFacets('blog');
 
                     $resultUsers = [];                    
                     foreach (array_merge($teams, $blog) as $ind => $row) {
@@ -187,8 +187,9 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
 
             $field_id = 'facet_id';
             $field_name = 'facet_title';
+            $tl = UserData::getUserTl();
             $sql = "SELECT facet_id, facet_title, facet_type FROM facets 
-                    WHERE facet_title LIKE :facet_title AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 200";
+                    WHERE facet_title LIKE :facet_title AND facet_tl <= $tl AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 200";
         }
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);

@@ -32,7 +32,7 @@ class EditPostController extends Controller
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
-        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
+        $blog = FacetModel::getFacetsUser('blog');
         $this->checkingEditPermissions($post, $blog);
 
         return $this->render(
@@ -62,7 +62,7 @@ class EditPostController extends Controller
         $post_draft = Request::getPost('post_draft') == 'on' ? 1 : 0;
         $draft      = Request::getPost('draft');
 
-        $blog = FacetModel::getFacetsUser($this->user['id'], 'blog');
+        $blog = FacetModel::getFacetsUser('blog');
         $this->checkingEditPermissions($post, $blog);
 
         $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
