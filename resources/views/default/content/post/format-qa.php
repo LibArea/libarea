@@ -160,11 +160,10 @@
                     </svg>
                   </a>
                 <?php endif; ?>
-                
-                
+
               </div>
               <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>
-              </div>
+            </div>
           </li>
         <?php endforeach; ?>
       </ol>

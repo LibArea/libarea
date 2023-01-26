@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Parser;
 
 use App\Services\Parser\{Convert, Filter};
-use App\Models\AuditModel;
+use App\Models\ParserModel;
 use UserData;
 
 class Content
@@ -18,7 +18,7 @@ class Content
         $text = self::emoji($text);
         $text = self::red($text);
 
-        return self::parseUser($text);
+        return self::parseUsers($text);
     }
 
     public static function parse(string $content, string $type)
@@ -133,7 +133,7 @@ class Content
         return ['content' => $beforeCut, 'button' => $button];
     }
 
-    public static function parseUser($content, $with_user = false, $to_uid = false)
+    public static function parseUsers($content, $with_user = false, $to_uid = false)
     {
         preg_match_all('/@([^@,:\s,]+)/i', strip_tags($content), $matchs);
 
@@ -158,9 +158,9 @@ class Content
             foreach ($match_name as $key => $login) {
 
                 if (preg_match('/^[0-9]+$/', $login)) {
-                    $user_info = AuditModel::getUsers($login, 'id');
+                    $user_info = ParserModel::getUser($login, 'id');
                 } else {
-                    $user_info = AuditModel::getUsers($login, 'slug');
+                    $user_info = ParserModel::getUser($login, 'slug');
                 }
 
                 if ($user_info) {

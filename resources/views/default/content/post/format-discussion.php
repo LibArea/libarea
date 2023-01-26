@@ -61,6 +61,17 @@
                     </span>
                     <ul class="dropdown">
 
+                      <?php if (Access::author('answer', $answer, 30) === true) : ?>
+                        <li>
+                          <a class="editansw" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                            <svg class="icons">
+                              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                            </svg>
+                            <?= __('app.edit'); ?>
+                          </a>
+                        </li>
+                      <?php endif; ?>
+
                       <?php if (UserData::checkAdmin()) : ?>
                         <li>
                           <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
@@ -81,18 +92,7 @@
                         <li>
                         <?php endif; ?>
 
-                        <?php if (Access::author('answer', $answer, 30) === true) : ?>
-                        <li>
-                          <a class="editansw" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                            <svg class="icons">
-                              <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                            </svg>
-                            <?= __('app.edit'); ?>
-                          </a>
-                        </li>
-                      <?php endif; ?>
-
-                      <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
+                        <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                         <li>
                           <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" data-a11y-dialog-show="my-dialog">
                             <svg class="icons">

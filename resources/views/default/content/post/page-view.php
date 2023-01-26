@@ -1,6 +1,6 @@
 <?php $page = $data['page']; ?>
 <main>
-  <article<?php if ($page['post_is_deleted'] == 1) { ?> class="bg-red-200" <?php } ?>>
+  <article<?php if ($page['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>
     <?php if ($page['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
       <h1>
         <?= $page['post_title']; ?>
