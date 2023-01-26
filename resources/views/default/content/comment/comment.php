@@ -13,7 +13,6 @@ foreach ($comments as $comment) :
             <?= $comment['login']; ?>
           </a>
           <span class="gray-600 lowercase"><?= Html::langDate($comment['answer_date']); ?></span>
-          <?= insert('/_block/admin-show-ip', ['ip' => $comment['answer_ip'], 'publ' => $comment['answer_published']]); ?>
         </div>
         <div><?= Html::votes($comment, 'answer'); ?></div>
       </div>
@@ -32,7 +31,6 @@ foreach ($comments as $comment) :
             <?= $comment['login']; ?>
           </a>
           <span class="gray-600 lowercase"><?= Html::langDate($comment['comment_date']); ?></span>
-          <?= insert('/_block/admin-show-ip', ['ip' => $comment['comment_ip'], 'publ' => $comment['comment_published']]); ?>
         </div>
         <div><?= Html::votes($comment, 'comment'); ?></div>
       </div>

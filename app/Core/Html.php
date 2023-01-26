@@ -64,12 +64,13 @@ class Html
     }
 
     // Add/remove from favorites
-    public static function favorite($content_id, $type, $tid)
+    public static function favorite($content_id, $type, $tid, $heading = '')
     {
-        $html = '<a class="click-no-auth gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg></a>';
+        $head = ($heading == 'heading') ? __('app.save') : '';
+        $html = '<a class="click-no-auth gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg>' . $head . '</a>';
         if (UserData::getAccount()) {
             $active = $tid ? 'active' : 'gray-600';
-            $html = '<a id="favorite_' . $content_id . '" class="add-favorite ' . $active . '" data-id="' . $content_id . '" data-type="' . $type . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg></i></a>';
+            $html = '<a id="favorite_' . $content_id . '" class="add-favorite ' . $active . '" data-id="' . $content_id . '" data-type="' . $type . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg></i>' . $head . '</a>';
         }
 
         return $html;

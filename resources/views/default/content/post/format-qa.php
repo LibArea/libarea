@@ -10,11 +10,68 @@
       <?php if ($answer['answer_published'] == 0 && $answer['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
       <div class="block-answer br-bottom<?php if ($answer['answer_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
-        <?php if ($post['amount_content'] > 1) : ?>
-          <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
-            <div id="best_<?= $answer['answer_id']; ?>" data-id="<?= $answer['answer_id']; ?>" class="answer-best right gray-600 p5">+!</div>
-          <?php endif; ?>
-        <?php endif; ?>
+        <div class="right inline">
+          <div class="relative ml10">
+            <span class="trigger gray-600 text-sm">
+              <svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
+              </svg>
+            </span>
+            <ul class="dropdown">
+
+              <li>
+                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'heading'); ?>
+              </li>
+
+              <?php if ($post['amount_content'] > 1) : ?>
+                <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
+                  <li>
+                    <a id="best_<?= $answer['answer_id']; ?>" data-id="<?= $answer['answer_id']; ?>" class="answer-best">
+                      <svg class="icons">
+                        <use xlink:href="/assets/svg/icons.svg#award"></use>
+                      </svg>
+                      <?= __('app.best_answer'); ?>
+                    </a>
+                  </li>
+                <?php endif; ?>
+              <?php endif; ?>
+
+              <?php if (Access::author('answer', $answer, 30) === true) : ?>
+                <li>
+                  <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                    </svg>
+                    <?= __('app.edit'); ?>
+                  </a>
+                </li>
+              <?php endif; ?>
+
+              <?php if (UserData::checkAdmin()) : ?>
+                <li>
+                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#trash-2"></use>
+                    </svg>
+                    <?= $answer['answer_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
+                  </a>
+                </li>
+              <?php endif; ?>
+
+              <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
+                <li>
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" data-a11y-dialog-show="my-dialog" class="gray-600">
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
+                    </svg>
+                    <?= __('app.report'); ?>
+                  </a>
+                </li>
+              <?php endif; ?>
+
+            </ul>
+          </div>
+        </div>
 
         <?php if ($answer['answer_lo']) : ?>
           <div title="<?= __('app.best_answer'); ?>" class="red right text-2xl p5">✓</div>
@@ -32,34 +89,11 @@
                 <?= Html::votes($answer, 'answer'); ?>
 
                 <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
-                  <?php if ($post['post_closed'] == 0) : ?>
-                    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                      <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= __('app.reply'); ?></a>
-                    <?php endif; ?>
+                  <?php if ($post['post_closed'] == 0 ?? $post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+                    <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= __('app.reply'); ?></a>
                   <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if (Access::author('answer', $answer, 30) === true) : ?>
-                  <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                    <?= __('app.edit'); ?>
-                  </a>
-                <?php endif; ?>
-
-                <?php if (UserData::checkAdmin()) : ?>
-                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
-                    <?= $answer['answer_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
-                  </a>
-                <?php endif; ?>
-
-                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid']); ?>
-
-                <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" data-a11y-dialog-show="my-dialog" class="gray-600">
-                    <svg class="icons">
-                      <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
-                    </svg>
-                  </a>
-                <?php endif; ?>
               </div>
               <div class="text-sm gray-600 flex gap lowercase mb10">
                 <a class="brown" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
@@ -67,7 +101,9 @@
                   <?php if (empty($answer['edit'])) : ?>
                     (<?= __('app.ed'); ?>.)
                   <?php endif; ?></span>
-                <?= insert('/_block/admin-show-ip', ['ip' => $answer['answer_ip'], 'publ' => $answer['answer_published']]); ?>
+                <?php if ($answer['answer_published'] == 0 && UserData::checkAdmin()) : ?>
+                  <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
+                <?php endif; ?>
               </div>
             </div>
             <div data-insert="<?= $answer['answer_id']; ?>" id="insert_id_<?= $answer['answer_id']; ?>" class="none"></div>
@@ -124,8 +160,11 @@
                     </svg>
                   </a>
                 <?php endif; ?>
+                
+                
               </div>
               <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>
+              </div>
           </li>
         <?php endforeach; ?>
       </ol>
@@ -143,8 +182,8 @@
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
     <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
-      <hr>
-      <form class="mb15 mt15" action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+
+      <form class="mb15 mt20" action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
         <?= insert('/_block/form/editor', [
           'height'  => '250px',

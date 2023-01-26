@@ -5,7 +5,7 @@
     <?= markdown($profile['about'] ?? __('app.riddle') . '...'); ?>
   </div>
 
-  <div class="box">
+  <div class="box border-lightgray">
     <h4 class="uppercase-box"><?= __('app.contacts'); ?></h4>
     <div class="gray-600 mt5">
       <svg class="icons">
@@ -74,17 +74,17 @@
   <?php endif; ?>
 
   <?php if (!empty($data['participation'][0]['facet_id'])) : ?>
-    <div class="box bg-lightgray">
+    <div class="box border-lightgray">
       <h4 class="uppercase-box"><?= __('app.understands'); ?></h4>
       <?php foreach ($data['participation'] as $part) : ?>
-        <a class="tag" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
+        <a class="gray-600 mr15 text-sm" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
           <?= $part['facet_title']; ?>
         </a>
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
 
-  <div class="box bg-lightgray">
+  <div class="box border-lightgray">
     <h4 class="uppercase-box"><?= __('app.badges'); ?></h4>
     <div class="text-3xl">
       <span title="<?= __('app.medal_reg'); ?>"><svg class="icons icon-base sky">
@@ -102,7 +102,7 @@
   </div>
 
   <?php if (UserData::checkAdmin()) : ?>
-    <div class="box bg-lightgray">
+    <div class="box bg-yellow">
       <h4 class="uppercase-box"><?= __('app.admin'); ?></h4>
       <div class="mt5">
         <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) : ?>

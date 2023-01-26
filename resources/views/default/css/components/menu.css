@@ -76,6 +76,9 @@
   gap: .7rem;
 }
 
+.dropdown li:hover > a,
+.dropdown li > a.active { color: var(--red); }
+
 .menu__left:not(.menu__active) li { margin-bottom: 3px; }
 
 .user-nav li:hover,
