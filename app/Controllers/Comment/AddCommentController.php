@@ -88,7 +88,7 @@ class AddCommentController extends Controller
 
         // Contact via @
         // Обращение через @
-        if ($message = \App\Services\Parser\Content::parseUser($content, true, true)) {
+        if ($message = \App\Services\Parser\Content::parseUsers($content, true, true)) {
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_COMMENT, $message, $url, $comment['comment_user_id']);
         }
     }

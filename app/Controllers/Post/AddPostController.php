@@ -138,7 +138,7 @@ class AddPostController extends Controller
 
         // Contact via @
         // Обращение через @
-        if ($message = \App\Services\Parser\Content::parseUser($content, true, true)) {
+        if ($message = \App\Services\Parser\Content::parseUsers($content, true, true)) {
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $url_content);
         }
 
