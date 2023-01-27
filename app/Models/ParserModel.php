@@ -16,4 +16,13 @@ class ParserModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['params' => $params])->fetch();
     }
+
+    // Facet information based on type (topic, category, section)
+    // Информация по фасету с учетом типа (тема, категория, раздел)
+    public static function getFacet($slug, $type = 'topic')
+    {
+        $sql = "SELECT facet_title, facet_slug, facet_img FROM facets WHERE facet_slug = :slug AND facet_type = :type";
+
+        return DB::run($sql, ['slug' => $slug, 'type' => $type])->fetch();
+    }
 }
