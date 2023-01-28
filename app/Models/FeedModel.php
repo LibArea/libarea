@@ -7,7 +7,7 @@ use DB;
 
 class FeedModel extends \Hleb\Scheme\App\Models\MainModel
 {
-    public static function feed($page, $limit, $sheet, $slug)
+    public static function feed($page, $limit, $sheet, $slug, $topic = '')
     {
         $user_id    = UserData::getUserId();
         $string     = self::sorting($sheet);
@@ -75,15 +75,20 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                                         
                                 $string $display $sort LIMIT :start, :limit";
 
-        $request = ['qa' => $slug, 'start' => $start, 'limit' => $limit];
         if (in_array($sheet, ['facet.feed', 'recommend', 'questions', 'posts'])) {
-            $request = ['qa' => "%" . $slug . "@%", 'start' => $start, 'limit' => $limit];
+            return DB::run($sql, ['qa' => "%" . $slug . "@%", 'start' => $start, 'limit' => $limit])->fetchAll();
         }
 
-        return DB::run($sql, $request)->fetchAll();
+        if (in_array($sheet, ['profile.posts', 'web.feed'])) {
+             return DB::run($sql, ['qa' => $slug, 'start' => $start, 'limit' => $limit])->fetchAll();
+        }
+
+        if ($sheet == 'facet.feed.topic') {
+            return DB::run($sql, ['qa' => "%" . $slug . "@%", 'topic' => "%" . $topic . "@%", 'start' => $start, 'limit' => $limit])->fetchAll();
+        }
     }
 
-    public static function feedCount($sheet, $slug)
+    public static function feedCount($sheet, $slug, $topic = '')
     {
         $string     = self::sorting($sheet);
         $user_id    = UserData::getUserId();
@@ -106,12 +111,19 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                         ) AS rel ON rel.relation_post_id = post_id 
                             $string $display";
 
-        $request = ['qa' => $slug];
         if (in_array($sheet, ['facet.feed', 'recommend', 'questions', 'posts'])) {
-            $request = ['qa' => "%" . $slug . "@%"];
+             return DB::run($sql, ['qa' => "%" . $slug . "@%"])->rowCount();
         }
 
-        return DB::run($sql, $request)->rowCount();
+        if (in_array($sheet, ['profile.posts', 'web.feed'])) {
+             return DB::run($sql, ['qa' => $slug])->rowCount() ;
+        }
+
+        if ($sheet == 'facet.feed.topic') {
+            return DB::run($sql, ['qa' => "%" . $slug . "@%", 'topic' => "%" . $topic . "@%"])->rowCount();
+        }
+
+        return;
     }
 
     public static function sorting($sheet)
@@ -119,6 +131,9 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
         switch ($sheet) {
             case 'facet.feed':
                 $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = 'post'";
+                break;
+            case 'facet.feed.topic':
+                $string     = "WHERE facet_list LIKE :qa AND facet_list LIKE :topic AND post_draft = 0 AND post_type = 'post'";
                 break;
             case 'questions':
                 $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 1";

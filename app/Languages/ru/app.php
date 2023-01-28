@@ -135,6 +135,8 @@ return [
     'more'              => 'Далее',
     'see_more'          => 'См. ещё',
     'read_more'         => 'Читать далее',
+    'more_content'      => 'Больше контента',
+    'read_more_posts'   => 'Читайте больше постов на',
     'crop_post'         => 'Обрезать пост',
     'other'             => 'Другое',
     'official'          => 'офф',

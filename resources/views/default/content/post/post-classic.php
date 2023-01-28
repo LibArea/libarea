@@ -21,8 +21,15 @@ use Hleb\Constructor\Handlers\Request; ?>
             </h3>
           </a>
           <div class="flex gap lowercase">
-            <?= Img::facets($post['facet_list'], 'blog', 'brown text-sm'); ?>
-            <?= Img::facets($post['facet_list'], 'topic', 'gray-600 text-sm'); ?>
+
+            <?php $type = $data['type'] ?? 'topic';
+            if ($type == 'blog') : ?>
+              <?= Html::facets_blog($data['facet']['facet_slug'], $post['facet_list'], 'gray-600 text-sm'); ?>
+            <?php else : ?>
+              <?= Html::facets($post['facet_list'], 'blog', 'brown text-sm'); ?>
+              <?= Html::facets($post['facet_list'], 'topic', 'gray-600 text-sm'); ?>
+            <?php endif; ?>
+
             <?php if ($post['post_url_domain']) : ?>
               <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <svg class="icons mb-none">
@@ -35,7 +42,6 @@ use Hleb\Constructor\Handlers\Request; ?>
             <?= fragment($post['post_content'], 250); ?>
           </div>
         </div>
-
 
         <?php if ($post['post_content_img'] || $post['post_thumb_img']) : ?>
           <div class="w200 mb-w80">

@@ -15,7 +15,7 @@ class TopicFacetController extends Controller
 
     // Posts in the topic 
     // Посты по теме
-    public function index($sheet, $type)
+    public function index($sheet)
     {
         $facet  = FacetPresence::index(Request::get('slug'), 'slug', 'topic');
 
@@ -54,7 +54,7 @@ class TopicFacetController extends Controller
                         'pNum'          => $this->pageNumber,
                         'posts'         => $posts,
                         'sheet'         => $sheet,
-                        'type'          => $type,
+                        'type'          => 'topic',
                     ]
                 ),
                 'facet'   => ['facet_id' => $facet['facet_id'], 'facet_type' => $facet['facet_type'], 'facet_user_id' => $facet['facet_user_id']],

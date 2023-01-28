@@ -132,6 +132,8 @@ return [
     'more'              => 'المزيد',
     'see_more'          => 'رؤية المزيد',
     'read_more'         => 'قراءة المزيد',
+    'more_content'      => 'المزيد من المحتوى',
+    'read_more_posts'   => 'اقرأ المزيد من الوظائف على',
     'crop_post'         => 'قص المنشور',
     'other'             => 'اخرى',
     'official'          => 'رسمي',

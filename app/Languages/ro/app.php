@@ -135,6 +135,8 @@ return [
     'more'              => 'Mai departe',
     'see_more'          => 'Vezi mai mult',
     'read_more'         => 'Citeste mai mult',
+    'more_content'      => 'Mai mult conținut',
+    'read_more_posts'   => 'Citiți mai multe postări pe',
     'crop_post'         => 'Decupați post',
     'other'             => 'Alte',
     'official'          => 'Oficial',

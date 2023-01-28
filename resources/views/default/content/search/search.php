@@ -54,7 +54,7 @@ $sw = $sw ?? '?';
             <?= fragment($result['answer_content'], 250); ?>
           <?php else : ?>
             <div>
-              <?= Img::facets($result['facet_list'], 'topic', 'tag mr15'); ?>
+              <?= Html::facets($result['facet_list'], 'topic', 'tag mr15'); ?>
             </div>
             <?= fragment($result['content'], 250); ?>
           <?php endif; ?>

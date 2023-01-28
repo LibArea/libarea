@@ -135,6 +135,8 @@ return [
     'more'              => 'More',
     'see_more'          => 'See more',
     'read_more'         => 'Read more',
+    'more_content'      => 'More content',
+    'read_more_posts'   => 'Read more posts on',
     'crop_post'         => 'Crop post',
     'other'             => 'Other',
     'official'          => 'off',

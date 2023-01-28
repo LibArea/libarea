@@ -135,6 +135,8 @@ return [
     'more'              => '更多',
     'see_more'          => '查看更多',
     'read_more'         => '阅读更多',
+    'more_content'      => '更多內容',
+    'read_more_posts'   => '閱讀更多帖子',
     'crop_post'         => '作物柱',
     'other'             => '其他',
     'official'          => '关闭',

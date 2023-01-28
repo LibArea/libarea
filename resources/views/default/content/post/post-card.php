@@ -17,7 +17,12 @@
             </span>
         </a>
         <div class="gray-600 lowercase"><?= Html::langDate($post['post_date']); ?></div>
-        <?= Img::facets($post['facet_list'], 'blog', 'brown'); ?>
+
+        <?php $type = $data['type'] ?? 'topic';
+        if ($type != 'blog') : ?>
+          <?= Html::facets($post['facet_list'], 'blog', 'brown'); ?>
+        <?php endif; ?>
+
       </div>
       <div class="mb15">
         <a class="black" href="<?= $post_url; ?>">
@@ -27,7 +32,13 @@
         </a>
 
         <div class="flex gap lowercase">
-          <?= Img::facets($post['facet_list'], 'topic', 'gray-600 text-sm'); ?>
+          <?php $type = $data['type'] ?? 'topic';
+          if ($type == 'blog') : ?>
+            <?= Html::facets_blog($data['facet']['facet_slug'], $post['facet_list'], 'gray-600 text-sm'); ?>
+          <?php else : ?>
+            <?= Html::facets($post['facet_list'], 'topic', 'gray-600 text-sm'); ?>
+          <?php endif; ?>
+
           <?php if ($post['post_url_domain']) : ?>
             <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
               <svg class="icons">

@@ -3,6 +3,40 @@
 class Html
 {
     // Blog, topic or category
+    public static function facets($facet, $type, $css, $sort = 'all')
+    {
+        $facets = preg_split('/(@)/', $facet ?? false);
+
+        $result = [];
+        foreach (array_chunk($facets, 3) as $row) {
+            if ($row[0] == $type) {
+                if ($type == 'category') {
+                    $result[] = '<a class="' . $css . '" href="' . url($type, ['sort' => $sort, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
+                } else {
+                    $result[] = '<a class="' . $css . '" href="' . url($type, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+                }
+            }
+        }
+
+        return implode($result);
+    }
+
+    // Blog, topic or category
+    public static function facets_blog($blog_slug, $facet, $css)
+    {
+        $facets = preg_split('/(@)/', $facet ?? false);
+
+        $result = [];
+        foreach (array_chunk($facets, 3) as $row) {
+            if ($row[0] == 'topic') {
+                    $result[] = '<a class="' . $css . '" href="' . url('blog.topic', ['slug' => $blog_slug, 'tslug' => $row[1]]) . '">' . $row[2] . '</a>';
+            }
+        }
+
+        return implode($result);
+    }
+
+    // Blog, topic or category
     public static function addPost($facet)
     {
         $url_add = url('content.add', ['type' => 'post']);

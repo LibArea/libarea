@@ -73,7 +73,7 @@
           <svg class="icons gray-600 text-sm mr5 ml5">
             <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
           </svg>
-          <?= Img::facets($topic['matching_list'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
+          <?= Html::facets($topic['matching_list'], $topic['facet_type'], 'gray-600 text-sm mr15'); ?>
         </div>
       <?php endif; ?>
     </div>

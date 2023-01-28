@@ -54,6 +54,17 @@ class Content
 
         $t = new \Akh\Typograf\Typograf();
 
+        /* $simpleRule = new class extends \Akh\Typograf\Rule\AbstractRule {
+            public $name = 'Пример замены';
+            protected $sort = 1000;
+            public function handler(string $text): string
+            {
+                return str_replace('agouti.ru', '<a href="https://libarea.ru">libarea.ru</a>', $text);
+            }
+        };
+
+        $t->addRule($simpleRule); */
+
         return $t->apply($text);
     }
 

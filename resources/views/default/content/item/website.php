@@ -29,7 +29,7 @@
             'state'           => is_array($data['item_signed']),
           ]); ?>
           <div class="mt15">
-            <?= Img::facets($item['facet_list'], 'category', 'tag', 'all'); ?>
+            <?= Html::facets($item['facet_list'], 'category', 'tag', 'all'); ?>
           </div>
           <div class="tems-center flex gap mt15">
             <?= Html::votes($item, 'item'); ?>

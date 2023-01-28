@@ -15,7 +15,7 @@ class BlogFacetController extends Controller
 
     // Blog posts
     // Посты в блоге
-    public function index($sheet, $type)
+    public function index($sheet)
     {
         $facet  = FacetPresence::index(Request::get('slug'), 'slug', 'blog');
 
@@ -45,7 +45,7 @@ class BlogFacetController extends Controller
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,
                     'sheet'         => $sheet,
-                    'type'          => $type,
+                    'type'          => 'blog',
                     'facet'         => $facet,
                     'posts'         => $posts,
                     'users_team'    => FacetModel::getUsersTeam($facet['facet_id']),
@@ -58,6 +58,42 @@ class BlogFacetController extends Controller
                     'facet_id' => $facet['facet_id'],
                     'facet_type' => $facet['facet_type'],
                     'facet_user_id' => $facet['facet_user_id']
+                ],
+            ]
+        );
+    }
+
+    // Topic page that groups posts for the Blog
+    // Страница Тем, которая группирует посты для Блога
+    public function topic()
+    {
+        $facet  = FacetPresence::index(Request::get('slug'), 'slug', 'blog');
+        $topic  = FacetPresence::index(Request::get('tslug'), 'slug', 'topic');
+
+        $posts      = FeedModel::feed($this->pageNumber, $this->limit, 'facet.feed.topic', $facet['facet_slug'], $topic['facet_slug']);
+        $pagesCount = FeedModel::feedCount('facet.feed.topic', $facet['facet_slug'], $topic['facet_slug']);
+
+        $m = [
+            'og'        => true,
+            'imgurl'    => Img::PATH['facets_logo'] . $facet['facet_img'],
+            'url'       => url('blog', ['slug' => $facet['facet_slug']]),
+        ];
+
+        $description = $topic['facet_seo_title'] . ', ' . $facet['facet_seo_title'] . '.  ' . $facet['facet_description'];
+
+        return $this->render(
+            '/facets/blog-topic',
+            [
+                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  $topic['facet_seo_title'], $description, $m),
+                'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $this->pageNumber,
+                    'sheet'         => 'facet.feed.topic',
+                    'type'          => 'blog',
+                    'posts'         => $posts,
+                    'topic'         => $topic,
+                    'facet'         => $facet,
+                    'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], 'facet'),
                 ],
             ]
         );

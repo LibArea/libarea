@@ -24,25 +24,6 @@ class Img
         'thumbs'                => '/uploads/thumbs/'
     ];
 
-    // Blog, topic or category
-    public static function facets($facet, $type, $css, $sort = 'all')
-    {
-        $facets = preg_split('/(@)/', $facet ?? false);
-
-        $result = [];
-        foreach (array_chunk($facets, 3) as $row) {
-            if ($row[0] == $type) {
-                if ($type == 'category') {
-                    $result[] = '<a class="' . $css . '" href="' . url($type, ['sort' => $sort, 'slug' => $row[1]]) . '">' . $row[2] . '</a>';
-                } else {
-                    $result[] = '<a class="' . $css . '" href="' . url($type, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
-                }
-            }
-        }
-
-        return implode($result);
-    }
-
     // User's Cover art or thumbnails
     public static function image($file, $alt, $style, $type, $size)
     {

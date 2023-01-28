@@ -13,7 +13,7 @@
             <?= Img::website($item['item_domain'], 'thumbs', $item['item_title'], 'list-items__thumb-image'); ?>
           </div>
           <div class="list-items__description">
-            <?= Img::facets($item['facet_list'], 'category', 'tag mr15', $sort); ?>
+            <?= Html::facets($item['facet_list'], 'category', 'tag mr15', $sort); ?>
 
             <?php if (Access::author('item', $item, 30) === true) : ?>
               <a href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
