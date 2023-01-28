@@ -102,24 +102,27 @@ Route::get('/@{login}/comments')->controller('User\ProfileController@comments')-
 Route::get('/comments')->controller('Comment\CommentController', ['all'])->name('comments');
 
 Route::get('/topics/new')->controller('Facets\AllFacetController', ['new', 'topic'])->name('topics.new');
-Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['recommend', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
-Route::get('/topic/{slug}/questions')->controller('Facets\TopicFacetController', ['questions', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('questions');
-Route::get('/topic/{slug}/posts')->controller('Facets\TopicFacetController', ['posts', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('posts');
+Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['recommend'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
+Route::get('/topic/{slug}/questions')->controller('Facets\TopicFacetController', ['questions'])->where(['slug' => '[a-z0-9-]+'])->name('questions');
+Route::get('/topic/{slug}/posts')->controller('Facets\TopicFacetController', ['posts'])->where(['slug' => '[a-z0-9-]+'])->name('posts');
 Route::get('/topic/{slug}/info')->controller('Facets\TopicFacetController@info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 Route::get('/topic/{slug}/writers')->controller('Facets\TopicFacetController@writers')->where(['slug' => '[a-z0-9-]+'])->name('topic.writers');
 Route::get('/topics')->controller('Facets\AllFacetController', ['all', 'topic'])->name('topics.all');
 
-Route::get('/topic/{slug}')->controller('Facets\TopicFacetController', ['facet.feed', 'topics'])->where(['slug' => '[a-z0-9-]+'])->name('topic');
+Route::get('/topic/{slug}')->controller('Facets\TopicFacetController', ['facet.feed'])->where(['slug' => '[a-z0-9-]+'])->name('topic');
 
 Route::get('/blogs/new')->controller('Facets\AllFacetController', ['new', 'blog'])->name('blogs.new');
 Route::get('/blogs')->controller('Facets\AllFacetController', ['all', 'blog'])->name('blogs.all');
 
 Route::get('/blog/{slug}/read')->controller('Facets\ReadController')->where(['slug' => '[a-z0-9-]+'])->name('blog.read');
-Route::get('/blog/{slug}/posts')->controller('Facets\BlogFacetController', ['posts', 'blog'])->where(['slug' => '[a-z0-9-]+'])->name('blog.posts');
-Route::get('/blog/{slug}/questions')->controller('Facets\BlogFacetController', ['questions', 'blog'])->where(['slug' => '[a-z0-9-]+'])->name('blog.questions');
+Route::get('/blog/{slug}/posts')->controller('Facets\BlogFacetController', ['posts'])->where(['slug' => '[a-z0-9-]+'])->name('blog.posts');
+Route::get('/blog/{slug}/questions')->controller('Facets\BlogFacetController', ['questions'])->where(['slug' => '[a-z0-9-]+'])->name('blog.questions');
  
+Route::get('/blog/{slug}')->controller('Facets\BlogFacetController', ['facet.feed'])->where(['slug' => '[a-z0-9-]+'])->name('blog');
 
-Route::get('/blog/{slug}')->controller('Facets\BlogFacetController', ['facet.feed', 'blog.user'])->where(['slug' => '[a-z0-9-]+'])->name('blog');
+
+Route::get('/blog/{slug}/topic/{tslug}')->controller('Facets\BlogFacetController@topic', ['facet.feed.topic'])->where(['slug' => '[a-z0-9-]+', 'tslug' => '[a-z0-9-]+'])->name('blog.topic');
+
 
 Route::get('/redirect/facet/{id}')->controller('Facets\RedirectController')->where(['id' => '[0-9]+'])->name('redirect.facet');
 
