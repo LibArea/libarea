@@ -95,7 +95,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
       </div>
 
     <?php else : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.subscribers_only'), 'icon' => 'closed']); ?>
+      <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.subscribers_only'), 'icon' => 'closed']); ?>
     <?php endif; ?>
 
   </div>

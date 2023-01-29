@@ -305,6 +305,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_type,
                     facet_user_id,
                     facet_short_description,
+                    facet_view_policy,
                     relation_facet_id,
                     relation_post_id,
                     signed_facet_id, 

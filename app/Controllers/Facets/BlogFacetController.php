@@ -84,7 +84,7 @@ class BlogFacetController extends Controller
         return $this->render(
             '/facets/blog-topic',
             [
-                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  $topic['facet_seo_title'], $description, $m),
+                'meta'  => Meta::get($topic['facet_seo_title'] . ' — ' . $facet['facet_seo_title'], $description, $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,
