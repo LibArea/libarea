@@ -13,7 +13,7 @@ class Content
     // Content management (Parsedown, Typograf)
     public static function text(string $content, string $type)
     {
-        $text = self::parse($content, $type);
+        $text = self::parse($content);
         $text = self::details($text);
         $text = self::facets($text);
         $text = self::emoji($text);
@@ -22,7 +22,7 @@ class Content
         return self::parseUsers($text);
     }
 
-    public static function parse(string $content, string $type)
+    public static function parse(string $content)
     {
         $content = str_replace('{cut}', '', $content);
 

@@ -52,7 +52,10 @@ class AddPostController extends Controller
     // Добавим пост
     public function create($type)
     {
-        $post_url   = Request::getPost('post_url');
+        if ($post_url = Request::getPost('post_url')) {
+            $site = $this->addUrl($post_url);
+        }
+
         $blog_id    = Request::getPostInt('blog_id');
         $fields     = Request::getPost() ?? [];
 
@@ -76,10 +79,6 @@ class AddPostController extends Controller
         $trigger = (new \App\Services\Audit())->prohibitedContent($content);
 
         RulesPost::rules($fields['post_title'], $content, $redirect);
-
-        if ($post_url) {
-            $site = $this->addUrl($post_url, $fields['post_title']);
-        }
 
         // Post cover
         // Обложка поста
@@ -159,7 +158,7 @@ class AddPostController extends Controller
     }
 
     // Since this is for the post, we will get a preview and analysis of the domain ...
-    public function addUrl($post_url, $post_title)
+    public function addUrl($post_url)
     {
         $parse              = parse_url($post_url);
         $domain             = new Domain($parse['host']);

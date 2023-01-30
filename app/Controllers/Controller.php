@@ -29,7 +29,7 @@ class Controller extends MainController
 
     public static function render(string $name, array $data = [], $component = false)
     {
-        self::status($name);
+        self::closing();
 
         $body = $header = $footer  = UserData::getUserTheme() . DIRECTORY_SEPARATOR;
         if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $body . '/content' . $name . '.php')) {
@@ -56,7 +56,7 @@ class Controller extends MainController
         );
     }
 
-    public static function status(string $name)
+    public static function closing()
     {
         if (config('general.site_disabled')  && !UserData::checkAdmin()) {
             self::insert('/site-off');

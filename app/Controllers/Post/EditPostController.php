@@ -158,7 +158,7 @@ class EditPostController extends Controller
     // Cover Removal
     function imgPostRemove()
     {
-        $post = PostPresence::index($post_id = Request::getInt('id'), 'id');
+        $post = PostPresence::index(Request::getInt('id'), 'id');
 
         if (Access::author('post', $post, 30) == false) {
             is_return(__('msg.went_wrong'), 'error');

@@ -13,7 +13,7 @@ class RulesItem extends Validator
 
         self::url($data['url'], $redirect);
 
-        if ($domain = self::getDomain($data['url'])) {
+        if (self::getDomain($data['url'])) {
             is_return(__('web.site_replay'), 'error', $redirect);
         }
 

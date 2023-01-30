@@ -37,8 +37,7 @@ class Filter
     {
         if (mb_strlen($text, $charset) >= $lenght) {
             $wrap = wordwrap($text, $lenght, '~');
-            $str_cut = mb_substr($wrap, 0, mb_strpos($wrap, '~', 0, $charset), $charset);
-            return $str_cut .= '...';
+            return mb_substr($wrap, 0, mb_strpos($wrap, '~', 0, $charset), $charset) . '...';
         }
 
         return $text;
