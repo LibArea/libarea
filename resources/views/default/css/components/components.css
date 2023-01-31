@@ -232,6 +232,7 @@ details[open] > summary {
   background-color: lightyellow;
   margin-bottom: 15px;
   display: inherit;
+  color: var(--gray-600); }
 }
 
 .box {

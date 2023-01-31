@@ -114,7 +114,7 @@ class Content
             if (UserData::checkActiveUser()) {
                 $content = preg_replace($regexpAu, "<dev class=\"txt-closed\">$2$3</dev>", $content);
             } else {
-                $content = preg_replace($regexpAu, "<dev class=\"txt-closed gray-400\">" . __('app.text_closed') . "...</dev>", $content);
+                $content = preg_replace($regexpAu, "<dev class=\"txt-closed\">" . __('app.text_closed') . "...</dev>", $content);
             }
         }
 

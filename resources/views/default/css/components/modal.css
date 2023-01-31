@@ -3,10 +3,7 @@
  *
  * всплывающее
  */
- 
-[x-cloak] {
-  display: none;
-}
+
 .modal {
   display: flex;
   align-items: center;
