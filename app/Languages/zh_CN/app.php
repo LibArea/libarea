@@ -350,7 +350,6 @@ return [
     'enter_password'    => '输入密码',
 
     'rec_posts'         => '推荐帖子',
-    'rec_posts_desc'    => '手动选择"{name}"中推荐的帖子',
     'topic_subs'        => '订阅主题并在提要中阅读',
     'i_read'            => '我看过',
  

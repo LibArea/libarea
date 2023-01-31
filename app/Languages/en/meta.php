@@ -59,6 +59,13 @@ return [
     
     'comments_desc'     => 'All comments (per replies) in order of priority in the community',
     'domain_desc'       => 'Grouping posts in the community by domain',
-    
     'all_comments'      => 'All comments',
+    
+    'feed_facet_desc'           => 'General feed. ',
+    'feed_facet_posts_desc'     => 'Post feed. ',
+    'feed_facet_questions_desc' => 'Questions thread. ',
+    'feed_facet_rec_posts_desc' => 'Recommended posts in "{name}" selected manually. ',
+    'facet_info_desc'           => 'Related information: "{name}". Wiki information, topic description. ',
+    'facet_writers_desc'        => 'The best writers in the topic: «{name}». ',
+    'facet_topics_desc'         => 'Grouping posts by topic «{name}». ',
 ];

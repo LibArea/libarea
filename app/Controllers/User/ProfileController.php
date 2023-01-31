@@ -3,10 +3,11 @@
 namespace App\Controllers\User;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Services\Meta\Profile;
 use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, FeedModel, AnswerModel, CommentModel, PostModel, IgnoredModel};
-use Meta, UserData;
+use UserData;
 
 use App\Traits\Views;
 
@@ -37,7 +38,7 @@ class ProfileController extends Controller
         return $this->render(
             '/user/profile/index',
             [
-                'meta'  => self::metadata('profile', $profile),
+                'meta'  => Profile::metadata('profile', $profile),
                 'data'  => array_merge(
                     $this->sidebar($pagesCount, $profile),
                     [
@@ -60,7 +61,7 @@ class ProfileController extends Controller
         return $this->render(
             '/user/profile/post',
             [
-                'meta'  => self::metadata('profile_posts', $profile),
+                'meta'  => Profile::metadata('profile_posts', $profile),
                 'data'  => array_merge($this->sidebar($pagesCount, $profile), ['posts' => $posts]),
             ]
         );
@@ -87,7 +88,7 @@ class ProfileController extends Controller
         return $this->render(
             '/user/profile/comment',
             [
-                'meta'  => self::metadata('profile_comments', $profile),
+                'meta'  => Profile::metadata('profile_comments', $profile),
                 'data'  => array_merge($this->sidebar($pagesCount, $profile), ['comments' => $mergedArr]),
             ]
         );
@@ -126,29 +127,6 @@ class ProfileController extends Controller
         }
 
         return $profile;
-    }
-
-    public static function metadata($sheet, $user)
-    {
-        if ($sheet == 'profile') {
-            $information = $user['about'];
-        }
-
-        $name = $user['login'];
-        if ($user['name']) {
-            $name = $user['name'] . ' (' . $user['login'] . ') ';
-        }
-
-        $title = __('meta.' . $sheet . '_title', ['name' => $name]);
-        $description  = __('meta.' . $sheet . '_desc', ['name' => $name, 'information' => $information ?? '...']);
-
-        $m = [
-            'og'        => true,
-            'imgurl'    => '/uploads/users/avatars/' . $user['avatar'],
-            'url'       => url('profile', ['login' => $user['login']]),
-        ];
-
-        return Meta::get($title, $description, $m);
     }
 
     // Sending personal messages

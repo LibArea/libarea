@@ -59,6 +59,13 @@ return [
     
     'comments_desc'     => 'Усі коментарі, відповіді у порядку черговості у спільноті.',
     'domain_desc'       => 'Угруповання постів у спільноті за доменом.',
-
     'all_comments'      => 'Усі коментарі',
+    
+    'feed_facet_desc'           => 'Загальна стрічка. ',
+    'feed_facet_posts_desc'     => 'Стрічка постів. ',
+    'feed_facet_questions_desc' => 'Стрічка питань. ',
+    'feed_facet_rec_posts_desc' => 'Рекомендовані пости в {name} відібрані вручну. ',
+    'facet_info_desc'           => 'Інформація на тему: «{name}». Wiki інформація, опис теми. ',
+    'facet_writers_desc'        => 'Кращі письменники в темі: «{name}». ',
+    'facet_topics_desc'         => 'Угруповання постів по темі «{name}». ',
 ];

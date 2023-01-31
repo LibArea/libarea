@@ -59,6 +59,13 @@ return [
     
     'comments_desc'     => '所有评论(每条回复)按社区优先顺序排列',
     'domain_desc'       => '按领域对社区中的帖子进行分组',
-
     'all_comments'      => '所有评论',
+    
+    'feed_facet_desc'           => '一般胶带。 ',
+    'feed_facet_posts_desc'     => '发布提要。 ',
+    'feed_facet_questions_desc' => '问题线程。 ',
+    'feed_facet_rec_posts_desc' => '手动选择“{name}”中的推荐帖子。 ',
+    'facet_info_desc'           => '相关信息：“{name}”。 Wiki 信息，主题描述。 ',
+    'facet_writers_desc'        => '主题中最好的作家: “{name}”. ',
+    'facet_topics_desc'         => '按主题分组帖子 “{name}”. ',
 ];

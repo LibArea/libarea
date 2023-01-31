@@ -59,6 +59,13 @@ return [
     
     'comments_desc'     => 'Toate comentariile (pe răspunsuri) în ordinea priorității în comunitate',
     'domain_desc'       => 'Gruparea postărilor din comunitate după domeniu',
-    
     'all_comments'      => 'Toate comentariile',
+    
+    'feed_facet_desc'           => 'Bandă generală. ',
+    'feed_facet_posts_desc'     => 'Postați feedul. ',
+    'feed_facet_questions_desc' => 'Firul de întrebări. ',
+    'feed_facet_rec_posts_desc' => 'Postări recomandate în „{name}” selectate manual. ',
+    'facet_info_desc'           => 'Informații înrudite: „{name}”. Informații Wiki, descrierea subiectului. ',
+    'facet_writers_desc'        => 'Cei mai buni scriitori din subiect: «{name}». ',
+    'facet_topics_desc'         => 'Gruparea postărilor după subiect «{name}». ',
 ];

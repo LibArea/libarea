@@ -57,8 +57,15 @@ return [
     'answers_all_info'          => 'كل الاجابات...',
     'answers_deleted_info'      => 'الردود المحذوفة...',
     
-    'comments_desc'     => 'كل التعليقات (لكل ردود) مرتبة حسب الأولوية في المجتمع',
-    'domain_desc'       => 'تجميع المشاركات في المجتمع حسب النطاق',
+    'comments_desc'             => 'كل التعليقات (لكل ردود) مرتبة حسب الأولوية في المجتمع',
+    'domain_desc'               => 'تجميع المشاركات في المجتمع حسب النطاق',
+    'all_comments'              => 'كل التعليقات',
     
-    'all_comments'      => 'كل التعليقات',
+    'feed_facet_desc'           => 'شريط عام. ',
+    'feed_facet_posts_desc'     => 'تغذية ما بعد. ',
+    'feed_facet_questions_desc' => 'موضوع الأسئلة. ',
+    'feed_facet_rec_posts_desc' => 'تم تحديد المشاركات الموصى بها في "{name}" يدويًا. ',
+    'facet_info_desc'           => 'المعلومات ذات الصلة: "{name}". معلومات ويكي ، وصف الموضوع. ',
+    'facet_writers_desc'        => 'أهم الكتاب في الموضوع: "{name}". ',
+    'facet_topics_desc'         => 'تجميع المشاركات حسب الموضوع "{name}". ',
 ];

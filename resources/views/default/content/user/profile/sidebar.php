@@ -1,7 +1,7 @@
 <?php $profile = $data['profile']; ?>
 
 <div class="mb-none">
-  <div class="m15 mt0">
+  <div class="m15 mt0 hidden">
     <?= markdown($profile['about'] ?? __('app.riddle') . '...'); ?>
   </div>
 

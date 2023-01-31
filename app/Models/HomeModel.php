@@ -31,9 +31,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
         $string = "";
         if ($type != 'all' && $type != 'top') {
-            if (!$user_id) {
-                $string = "";
-            } else {
+            if ($user_id) {
                 $string = "AND relation_facet_id IN(0)";
                 if ($result) $string = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")";
             }
@@ -111,9 +109,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
         $string = "";
         if ($type != 'all' && $type != 'top') {
-            if (!UserData::getUserId()) {
-                $string = "";
-            } else {
+            if (UserData::getUserId()) {
                 $string = "AND f_id IN(0)";
                 if ($result) $string = "AND f_id IN(" . implode(',', $result ?? []) . ")";
             }

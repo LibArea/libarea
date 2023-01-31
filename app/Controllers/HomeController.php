@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Services\Meta\Home;
 use App\Models\HomeModel;
-use Meta;
 
 class HomeController extends Controller
 {
@@ -22,17 +22,10 @@ class HomeController extends Controller
         // Темы на которые подписан участник. Если гость, то дефолтные.
         $topics = \App\Models\FacetModel::advice();
 
-        $m = [
-            'main'      => 'main',
-            'og'        => true,
-            'imgurl'    => config('meta.img_path'),
-            'url'       => self::canonical($sheet),
-        ];
-
         return $this->render(
             '/home',
             [
-                'meta'  => Meta::get(config('meta.' . $sheet . '_title'), config('meta.' . $sheet . '_desc'), $m),
+                'meta'  => Home::metadata($sheet),
                 'data'  => [
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $this->pageNumber,
@@ -46,25 +39,6 @@ class HomeController extends Controller
                 ],
             ],
         );
-    }
-
-    public static function canonical($url)
-    {
-        switch ($url) {
-            case 'questions':
-                $url    = '/questions';
-                break;
-            case 'posts':
-                $url    = '/posts';
-                break;
-            case 'top':
-                $url    = '/top';
-                break;
-            default:
-                $url    = '/';
-        }
-
-        return $url;
     }
 
     // Infinite scroll

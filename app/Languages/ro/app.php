@@ -349,7 +349,6 @@ return [
     'enter_password'    => 'Introdu parola',
 
     'rec_posts'         => 'postări recomandate',
-    'rec_posts_desc'    => 'Postări recomandate în „{name}” selectate manual. ',
     'topic_subs'        => 'Abonați-vă la subiecte și citiți-le în feed',
     'i_read'            => 'Citesc',
  

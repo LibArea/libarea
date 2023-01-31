@@ -5,9 +5,9 @@ namespace App\Controllers\Facets;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\FacetPresence;
+use App\Services\Meta\Facet;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
-use Meta, Img;
 
 class TopicFacetController extends Controller
 {
@@ -27,26 +27,10 @@ class TopicFacetController extends Controller
         $posts      = FeedModel::feed($this->pageNumber, $this->limit, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($sheet, $facet['facet_slug']);
 
-        $title  = $facet['facet_seo_title'] . ' — ' .  __('app.topic');
-        $description   = $facet['facet_description'];
-
-        $url = url('topic', ['slug' => $facet['facet_slug']]);
-        if ($sheet == 'recommend') {
-            $url    =  url('recommend', ['slug' => $facet['facet_slug']]);
-            $title  = $facet['facet_seo_title'] . ' — ' .  __('app.rec_posts');
-            $description  = __('app.rec_posts_desc', ['name' => $facet['facet_seo_title']]) . $facet['facet_description'];
-        }
-
-        $m = [
-            'og'         => true,
-            'imgurl'     => Img::PATH['facets_logo'] . $facet['facet_img'],
-            'url'        => $url,
-        ];
-
         return $this->render(
             '/facets/topic',
             [
-                'meta'  => Meta::get($title, $description, $m),
+                'meta'  => Facet::metadata($sheet, $facet),
                 'data'  => array_merge(
                     $this->sidebar($facet),
                     [
@@ -68,16 +52,10 @@ class TopicFacetController extends Controller
     {
         $facet  = FacetPresence::index(Request::get('slug'), 'slug', 'topic');
 
-        $m = [
-            'og'         => true,
-            'imgurl'     => Img::PATH['facets_logo'] . $facet['facet_img'],
-            'url'        => url('topic.info', ['slug' => $facet['facet_slug']]),
-        ];
-
         return $this->render(
             '/facets/info',
             [
-                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
+                'meta'  => Facet::metadata('info', $facet),
                 'data'  => array_merge(
                     $this->sidebar($facet),
                     [
@@ -89,23 +67,16 @@ class TopicFacetController extends Controller
         );
     }
 
-    // Information on the topic 
-    // Информация по теме
+    // Users who have contributed 
+    // Пользователи внесшие вклад...
     public function writers()
     {
         $facet  = FacetPresence::index(Request::get('slug'), 'slug', 'topic');
 
-        $m = [
-            'og'         => true,
-            'imgurl'     => Img::PATH['facets_logo'] . $facet['facet_img'],
-            'url'        => url('topic.writers', ['slug' => $facet['facet_slug']]),
-        ];
-
         return $this->render(
             '/facets/writers',
             [
-                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.info'), $facet['facet_description'], $m),
-
+                'meta'  => Facet::metadata('writers', $facet),
                 'data'  => array_merge(
                     $this->sidebar($facet),
                     [

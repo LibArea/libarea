@@ -5,9 +5,9 @@ namespace App\Controllers\Facets;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\FacetPresence;
+use App\Services\Meta\Facet;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel};
-use Meta, Img;
 
 class BlogFacetController extends Controller
 {
@@ -31,16 +31,10 @@ class BlogFacetController extends Controller
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
-        $m = [
-            'og'        => true,
-            'imgurl'    => Img::PATH['facets_logo'] . $facet['facet_img'],
-            'url'       => url('blog', ['slug' => $facet['facet_slug']]),
-        ];
-
         return $this->render(
             '/facets/blog',
             [
-                'meta'  => Meta::get($facet['facet_seo_title'] . ' — ' .  __('app.blog'), $facet['facet_description'], $m),
+                'meta'  => Facet::metadata($sheet, $facet),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,
@@ -73,18 +67,10 @@ class BlogFacetController extends Controller
         $posts      = FeedModel::feed($this->pageNumber, $this->limit, 'facet.feed.topic', $facet['facet_slug'], $topic['facet_slug']);
         $pagesCount = FeedModel::feedCount('facet.feed.topic', $facet['facet_slug'], $topic['facet_slug']);
 
-        $m = [
-            'og'        => true,
-            'imgurl'    => Img::PATH['facets_logo'] . $facet['facet_img'],
-            'url'       => url('blog', ['slug' => $facet['facet_slug']]),
-        ];
-
-        $description = $topic['facet_seo_title'] . ', ' . $facet['facet_seo_title'] . '.  ' . $facet['facet_description'];
-
         return $this->render(
             '/facets/blog-topic',
             [
-                'meta'  => Meta::get($topic['facet_seo_title'] . ' — ' . $facet['facet_seo_title'], $description, $m),
+                'meta'  => Facet::metadata('blog.topics', $facet, 'blog', $topic),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,

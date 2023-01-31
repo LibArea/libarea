@@ -349,7 +349,6 @@ return [
     'enter_password'    => 'Enter password',
 
     'rec_posts'         => 'recommended posts',
-    'rec_posts_desc'    => 'Recommended posts in "{name}" selected manually.',
     'topic_subs'        => 'Subscribe to topics and read them in the feed',
     'i_read'            => 'I read',
  
