@@ -34,7 +34,7 @@ class BlogFacetController extends Controller
         return $this->render(
             '/facets/blog',
             [
-                'meta'  => Facet::metadata($sheet, $facet),
+                'meta'  => Facet::metadata($sheet, $facet, 'blog'),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,

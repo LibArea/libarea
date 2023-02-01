@@ -318,6 +318,8 @@ a:hover > img,
   padding-top: 70px;
 }
 
+.content_tree.bg-red-200 { background-color: var(--red-200); }
+
 .ind-first-p p {
   margin: 0.5em 0;
   max-width: 780px;
