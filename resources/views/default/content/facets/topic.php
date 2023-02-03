@@ -18,16 +18,6 @@
 </main>
 <aside>
   <?php if ($topic['facet_is_deleted'] == 0) : ?>
-    <div class="box-flex bg-beige justify-between">
-      <div class="center">
-        <div class="uppercase text-sm gray-600"><?= __('app.posts'); ?></div>
-        <?= $topic['facet_count']; ?>
-      </div>
-      <div class="center relative">
-        <div class="uppercase text-sm gray-600"><?= __('app.reads'); ?></div>
-        <?= $topic['facet_focus_count']; ?>
-      </div>
-    </div>
 
     <?= insert('/_block/facet/topic', ['data' => $data]); ?>
 

@@ -11,6 +11,8 @@ body {
   margin: 0 auto;
 }
 
+main { width: 100%; }
+
 .text-header {
   top: 0;
   z-index: 50;

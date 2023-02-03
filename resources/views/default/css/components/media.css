@@ -4,11 +4,16 @@
  * Медиа-запросы
  */
 
-main { flex: 1; }
+main { width: calc(100% - 590px); }
+.admin main { width: calc(100% - 210px); }
+.menuno main { width: calc(100% - 340px); }
 
 @media (max-width: 1050px) {
   .menu__left, #togglemenu { display: none; }
   aside { min-width: 240px; }
+
+  main { width: calc(100% - 250px); }
+  .admin main { width: 100%; }
 
   .menu__button {
     transition: 0.3s ease;
@@ -78,6 +83,9 @@ main { flex: 1; }
   aside,
   .mb-none,
   ul.setting > li > a > i { display: none; }
+  
+  main,
+  .menuno main  { width: 100%; }
   
   .wrap-item,
   .wrap {

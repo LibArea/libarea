@@ -16,6 +16,10 @@ return [
         // Базовый путь к css файлам
         'style'     => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/css/', 
         
+        // Template for qa style
+        // Шаблон для стиля qa
+        'qa'   => HLEB_GLOBAL_DIRECTORY . '/resources/views/qa/css/',
+        
         // Template for minimum style
         // Шаблон для стиля minimum
         'minimum'   => HLEB_GLOBAL_DIRECTORY . '/resources/views/minimum/css/',

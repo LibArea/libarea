@@ -1,7 +1,7 @@
 <div class="w-100">
   <?= insert('/content/user/profile/header', ['data' => $data]); ?>
   <div class="flex gap mb-block">
-    <main>
+    <div>
       <?php if ($data['profile']['my_post'] != false && $data['my_post']['post_is_deleted'] != true) : ?>
         <div class="box bg-violet">
           <h4 class="uppercase-box"><?= __('app.selected_post'); ?>
@@ -34,7 +34,7 @@
       <?= insert('/content/post/type-post', ['data' => $data]); ?>
 
       <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/posts'); ?>
-    </main>
+    </div>
     <aside>
       <?= insert('/content/user/profile/sidebar', ['data' => $data]); ?>
     </aside>

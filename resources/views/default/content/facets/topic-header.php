@@ -1,28 +1,57 @@
-<div class="flex box box-fon gap">
-  <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-xl', 'logo', 'max'); ?>
-  <div class="flex-auto">
-    <h1 class="text-2xl mb-text-xl m0">
-      <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == UserData::getUserId()) : ?>
-        <a class="right gray-600" href="<?= url('content.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
-          <svg class="icons">
-            <use xlink:href="/assets/svg/icons.svg#edit"></use>
-          </svg>
-        </a>
-      <?php endif; ?>
-      <?= $topic['facet_seo_title']; ?>
-    </h1>
-    <div class="text-sm gray-600 mb-none mt10"><?= $topic['facet_short_description']; ?></div>
+<div class="flex or-width flex-col box box-fon">
+  <div class="flex justify-center gap items-center mb20">
+    <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-lg', 'logo', 'max'); ?>
+    <div>
+      <h1 class="text-2xl mb-text-xl m0">
+        <?= $topic['facet_seo_title']; ?>
+        <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == UserData::getUserId()) : ?>
+          <a class="gray-600" href="<?= url('content.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+            </svg>
+          </a>
+        <?php endif; ?>
+      </h1>
+      <div class="text-sm gray-600"><?= $topic['facet_short_description']; ?></div>
+    </div>
+  </div>
 
-    <div class="mr120 right gray-600">
-      <?= Html::signed([
-        'type'            => 'facet',
-        'id'              => $topic['facet_id'],
-        'content_user_id' => $topic['facet_user_id'],
-        'state'           => is_array($data['facet_signed']),
-      ]); ?>
+  <div class="flex gray-600 justify-center gap mb20">
+    <?= Html::signed([
+      'type'            => 'facet',
+      'id'              => $topic['facet_id'],
+      'content_user_id' => $topic['facet_user_id'],
+      'state'           => is_array($data['facet_signed']),
+    ]); ?>
+  </div>
+
+  <div class="flex justify-center gap text-sm gray-600 lowercase">
+    <div>
+      <svg class="icons">
+        <use xlink:href="/assets/svg/icons.svg#users"></use>
+      </svg>
+      <?= $topic['facet_focus_count']; ?> <span class="mb-none"><?= __('app.reads'); ?></span>
+    </div>
+
+    <div>
+      <svg class="icons">
+        <use xlink:href="/assets/svg/icons.svg#post"></use>
+      </svg>
+      <?= $topic['facet_count']; ?> <span class="mb-none"><?= __('app.posts'); ?></span>
+    </div>
+
+    <div>
       <a class="gray-600 ml30" href="<?= url('topic.info', ['slug' => $topic['facet_slug']]); ?>">
         <svg class="icons">
           <use xlink:href="/assets/svg/icons.svg#info"></use>
+        </svg>
+      </a>
+    </div>
+
+    <div>
+      <a class="gray-600" href="/rss-feed/topic/<?= $topic['facet_slug']; ?>">
+        <svg class="icons">
+          <use xlink:href="/assets/svg/icons.svg#rss"></use>
         </svg>
       </a>
     </div>
