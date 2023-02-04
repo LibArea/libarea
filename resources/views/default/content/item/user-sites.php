@@ -1,5 +1,5 @@
 <div id="contentWrapper" class="wrap-item">
-  <main>
+  <main class="w-100">
     <h2 class="mb20">
       <?= __('web.my_website'); ?>
       <?php if ($data['count'] != 0) : ?><sup class="gray-600 text-sm"><?= $data['count']; ?></sup><?php endif; ?>

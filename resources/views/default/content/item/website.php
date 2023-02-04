@@ -1,6 +1,6 @@
 <?php $item = $data['item']; ?>
 <div id="contentWrapper" class="wrap-item">
-  <main itemscope itemtype="https://schema.org/WebSite">
+  <main class="w-100" itemscope itemtype="https://schema.org/WebSite">
       <h1 itemprop="name" class="m0"><?= $item['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">

@@ -1,10 +1,6 @@
 <main>
   <h1 class="title-max"><?= __('app.authorization'); ?></h1>
 
-  <div class="p15 bg-violet max-w300 mb-none right">
-    <?= __('auth.login_info'); ?>
-  </div>
-
   <form action="<?= url('enterLogin'); ?>" method="post">
     <?php csrf_field(); ?>
     <?= insert('/_block/form/login'); ?>
@@ -20,3 +16,8 @@
   <?php endif; ?>
   <p><?= __('app.agree_rules'); ?>.</p>
 </main>
+<aside>
+  <div class="p15 bg-violet">
+    <?= __('auth.login_info'); ?>
+  </div>
+</aside>

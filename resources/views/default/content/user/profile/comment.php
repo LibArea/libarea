@@ -1,7 +1,7 @@
 <div class="w-100">
   <?= insert('/content/user/profile/header', ['data' => $data]); ?>
   <div class="flex gap mb-block">
-    <div>
+    <div class="w-90">
       <div class="mb15"><?= __('app.comments'); ?> <b><?= $data['profile']['login']; ?></b></div>
       <?php if (!empty($data['comments'])) : ?>
         <?= insert('/content/comment/comment', ['comments' => $data['comments']]); ?>

@@ -37,7 +37,7 @@
       <svg class="icons">
         <use xlink:href="/assets/svg/icons.svg#post"></use>
       </svg>
-      <?= $topic['facet_count']; ?> <span class="mb-none"><?= __('app.posts'); ?></span>
+      <?= $topic['facet_count']; ?> <span class="mb-none"><?= Html::numWord($topic['facet_count'], __('app.num_post'), false); ?></span>
     </div>
 
     <div>
@@ -60,7 +60,6 @@
 
 <div class="flex justify-between mb20">
   <ul class="nav scroll-menu">
-
     <?= insert(
       '/_block/navigation/nav',
       [
@@ -90,4 +89,9 @@
       ]
     ); ?>
   </ul>
+  <div title="<?= __('app.post_appearance'); ?>" id="postmenu" class="m5">
+    <svg class="icons pointer gray-600">
+      <use xlink:href="/assets/svg/icons.svg#grid"></use>
+    </svg>
+  </div>
 </div>

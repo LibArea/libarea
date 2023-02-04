@@ -7,6 +7,7 @@
 main { width: calc(100% - 590px); }
 .admin main { width: calc(100% - 210px); }
 .menuno main { width: calc(100% - 340px); }
+.menuno main.w-100 { width: 100%; }
 
 @media (max-width: 1050px) {
   .menu__left, #togglemenu { display: none; }

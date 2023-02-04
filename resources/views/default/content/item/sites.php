@@ -83,7 +83,7 @@
 <?php endif; ?>
 
 <div id="contentWrapper" class="wrap-item">
-  <main>
+  <main class="w-100">
     <?= insert('/_block/navigation/item/nav', ['data' => $data]); ?>
 
     <?php if (!empty($data['items'])) : ?>

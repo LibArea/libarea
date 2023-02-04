@@ -91,7 +91,7 @@ $post   = $data['post'] ?? false;
                 <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
               </div>
               <div class="dropdown user">
-                <?= insert('/_block/navigation/menu-user', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
+                <?= insert('/_block/navigation/menu-user', ['list' => config('navigation/menu.user')]); ?>
               </div>
             </div>
           </div>
@@ -109,4 +109,16 @@ $post   = $data['post'] ?? false;
 
   <div id="contentWrapper" class="wrap">
 
-    <?= insert('/_block/navigation/menu-left', ['data' => $data]); ?>
+    <?php
+    $css = '';
+    $type =  $data['type'] ?? '';
+    if (in_array($type, ['blogs', 'recover'])) {
+      $css = ' none';
+    }
+    ?>
+
+    <nav class="menu__left<?= $css; ?> mb-none">
+      <ul class="menu sticky top-sm">
+        <?= insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.left')]); ?>
+      </ul>
+    </nav>

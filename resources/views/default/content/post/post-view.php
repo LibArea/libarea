@@ -99,7 +99,7 @@ $facet_view_policy = $blog['facet_view_policy'] ?? null;
           <?php endif; ?>
         </div>
 
-        <div class="p15 br-gray items-center flex justify-between">
+        <div class="p15 items-center flex justify-between">
           <div class="items-center flex gap gray-600">
             <?= Html::votes($post, 'post'); ?>
             <div class="items-center flex gap-min">
@@ -128,7 +128,7 @@ $facet_view_policy = $blog['facet_view_policy'] ?? null;
             <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'text-2xl ml5'); ?>
           </div>
         </div>
-        <div class="box-flex justify-between bg-lightgray ">
+        <div class="box-flex border-lightgray justify-between">
           <div>
             <a class="black" title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
               <?= Img::avatar($post['avatar'], $post['login'], 'img-base mr5', 'small'); ?>

@@ -60,7 +60,7 @@ $facet  = $data['facet'] ?? false; ?>
               <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
             </div>
             <ul class="dropdown user">
-              <?= insert('/_block/navigation/menu-user', ['type' => $type, 'list' => config('navigation/menu.user')]); ?>
+              <?= insert('/_block/navigation/menu-user', ['list' => config('navigation/menu.user')]); ?>
             </ul>
           </div>
         </div>
