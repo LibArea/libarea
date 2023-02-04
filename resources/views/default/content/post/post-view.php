@@ -234,7 +234,7 @@ $facet_view_policy = $blog['facet_view_policy'] ?? null;
       <img class="w-100 br-rd5" src="<?= Img::PATH['posts_cover'] . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php endif; ?>
-  <div class="center box bg-lightgray">
+  <div class="box">
     <?= insert('/share'); ?>
   </div>
   <?php if ($data['recommend']) : ?>

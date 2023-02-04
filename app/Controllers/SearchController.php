@@ -83,8 +83,12 @@ class SearchController extends Controller
         $query  = Request::getPost('query');
         $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $query);
 
-        $topics = SearchModel::getSearchTags($search, 'topic', 3);
-        $posts  = SearchModel::getSearch(1, 5, $search, 'post');
+        $belong  = Request::getPost('type');
+        $type    = $belong == 'post' ? 'topic' : 'category';
+        $content = $type == 'topic' ? 'post' : 'website';
+
+        $topics = SearchModel::getSearchTags($search, $type, 3);
+        $posts  = SearchModel::getSearch(1, 5, $search, $content);
         $result = array_merge($topics, $posts);
 
         return json_encode($result, JSON_PRETTY_PRINT);

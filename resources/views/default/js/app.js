@@ -182,7 +182,7 @@ document.querySelectorAll("#graburl")
         }
         return response.json();
       }).then(function (data) { //https://habr.com/ru/post/691088/
-        document.querySelector('input[name=post_title]').value = data.title; console.log(data);
+        document.querySelector('input[name=post_title]').value = data.title;
         document.querySelector('textarea.url').insertAdjacentHTML('afterBegin', data.description);
       }).catch(function (error) {
         // error

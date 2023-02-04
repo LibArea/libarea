@@ -11,8 +11,9 @@ function getCookie(cname){let name=cname+"=";let ca=document.cookie.split(';');f
 if(c.indexOf(name)===0){return c.substring(name.length,c.length)}}
 return""}
 isIdEmpty('find').onclick=function(){document.getElementById('find').addEventListener('keydown',function(){fetchSearch()})}
-function fetchSearch(){let query=document.getElementById("find").value;if(query.length<2)return;fetch("/search/api",{method:"POST",headers:{'Content-Type':'application/x-www-form-urlencoded'},body:"query="+query+"&_token="+token,}).then(response=>{return response.text()}).then(text=>{let obj=JSON.parse(text);let html='<div class="flex">';for(let key in obj){if(obj[key].facet_slug){html+='<a class="sky block text-sm mb15 mr10" href="/topic/'+obj[key].facet_slug+'">'+obj[key].facet_title+'</a>'}
-if(obj[key].post_id){html+='<a class="block black text-sm mb10" href="/post/'+obj[key].post_id+'">'+obj[key].title+'</a>'}
+function fetchSearch(){let query=document.getElementById("find").value;let type=document.getElementById("find").dataset.id;if(query.length<2)return;let url=type=='category'?'/web/dir/all/':'/topic/';fetch("/search/api",{method:"POST",headers:{'Content-Type':'application/x-www-form-urlencoded'},body:"query="+query+"&type="+type+"&_token="+token,}).then(response=>{return response.text()}).then(text=>{let obj=JSON.parse(text);let html='<div class="flex">';for(let key in obj){if(type=='category'){if(obj[key].facet_slug){html+='<a class="sky block text-sm mb15 mr10" href="/web/dir/all/'+obj[key].facet_slug+'">'+obj[key].facet_title+'</a>'}
+if(obj[key].item_id){html+='<a class="block black text-sm mb10" href="/web/website/'+obj[key].item_domain+'">'+obj[key].title+'</a>'}}else{if(obj[key].facet_slug){html+='<a class="sky block text-sm mb15 mr10" href="/topic/'+obj[key].facet_slug+'">'+obj[key].facet_title+'</a>'}
+if(obj[key].post_id){html+='<a class="block black text-sm mb10" href="/post/'+obj[key].post_id+'">'+obj[key].title+'</a>'}}
 html+='</div>'}
 if(!Object.keys(obj).length==0){let items=document.getElementById("search_items");items.classList.add("block");items.innerHTML=html}
 let menu=document.querySelector('.none.block');if(menu){document.onclick=function(e){if(event.target.className!='.none.block'){let items=document.getElementById("search_items");items.classList.remove("block")}}}})}

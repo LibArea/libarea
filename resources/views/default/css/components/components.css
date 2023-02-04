@@ -113,14 +113,13 @@ h5 {
   border-color: transparent;
 }
 
-.page-search {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px 60px 10px 30px;
-  margin: 0 auto;
+.search-box {
+  position: absolute;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.15);
+  background-color: var(--white);
+  padding: 15px;
+  z-index: 2;
 }
 
 .box-search {
@@ -156,16 +155,6 @@ h5 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-
-.page-search__input {
-  width: 100%;
-  border-radius: 3px;
-  height: 50px;
-  border: 9px solid #fcebd9;
-  padding-left: 1rem;
-  color: var(--gray-700);
 }
 
 aside { width: 340px; }

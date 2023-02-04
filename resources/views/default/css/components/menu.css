@@ -74,6 +74,7 @@
   flex-direction: row;
   align-items: center;
   gap: .7rem;
+  font-size: 0.875rem;
 }
 
 .dropdown li:hover > a,

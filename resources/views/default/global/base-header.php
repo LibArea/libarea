@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?14');
+Request::getHead()->addStyles('/assets/css/style.css?21');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;
 $post   = $data['post'] ?? false;
@@ -48,9 +48,9 @@ $post   = $data['post'] ?? false;
 
         <div class="box-search mb-none">
           <form class="form" method="get" action="<?= url('search.go'); ?>">
-            <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
+            <input data-id="topic" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
           </form>
-          <div class="absolute box-shadow bg-white p15 br-rd3 none" id="search_items"></div>
+          <div class="search-box none" id="search_items"></div>
         </div>
 
         <?php if (!UserData::checkActiveUser()) : ?>

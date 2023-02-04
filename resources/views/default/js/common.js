@@ -138,11 +138,14 @@ isIdEmpty('find').onclick = function () {
 
 function fetchSearch() {
   let query = document.getElementById("find").value;
+  let type = document.getElementById("find").dataset.id;
   if (query.length < 2) return;
+  let url = type == 'category' ? '/web/dir/all/' : '/topic/';
+
   fetch("/search/api", {
     method: "POST",
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: "query=" + query + "&_token=" + token,
+    body: "query=" + query + "&type=" + type + "&_token=" + token,
   })
     .then(
       response => {
@@ -153,11 +156,20 @@ function fetchSearch() {
         let obj = JSON.parse(text);
         let html = '<div class="flex">';
         for (let key in obj) {
-          if (obj[key].facet_slug) {
-            html += '<a class="sky block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">' + obj[key].facet_title + '</a>';
-          }
-          if (obj[key].post_id) {
-            html += '<a class="block black text-sm mb10" href="/post/' + obj[key].post_id + '">' + obj[key].title + '</a>';
+          if (type ==  'category') {
+              if (obj[key].facet_slug) {
+                html += '<a class="sky block text-sm mb15 mr10" href="/web/dir/all/' + obj[key].facet_slug + '">' + obj[key].facet_title + '</a>';
+              }
+              if (obj[key].item_id) {
+                html += '<a class="block black text-sm mb10" href="/web/website/' + obj[key].item_domain + '">' + obj[key].title + '</a>';
+              }  
+          } else {    
+              if (obj[key].facet_slug) {
+                html += '<a class="sky block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">' + obj[key].facet_title + '</a>';
+              }
+              if (obj[key].post_id) {
+                html += '<a class="block black text-sm mb10" href="/post/' + obj[key].post_id + '">' + obj[key].title + '</a>';
+              }
           }
           html += '</div>';
         }

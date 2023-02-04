@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request; ?>
 
-<?php Request::getHead()->addStyles('/assets/css/style.css?14'); ?>
+<?php Request::getHead()->addStyles('/assets/css/style.css?21'); ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
@@ -17,10 +17,10 @@ use Hleb\Constructor\Handlers\Request; ?>
 
         <div class="box-search mb-none">
           <form class="form" method="get" action="<?= url('search.go'); ?>">
-            <input type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
+            <input data-id="category" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
             <input name="cat" value="website" type="hidden">
           </form>
-          <div class="absolute box-shadow bg-white p15 br-rd3 none" id="search_items"></div>
+          <div class="search-box none" id="search_items"></div>
         </div>
 
         <?php if (!UserData::checkActiveUser()) : ?>

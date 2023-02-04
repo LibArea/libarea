@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?14');
+Request::getHead()->addStyles('/assets/css/style.css?21');
 ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
@@ -27,7 +27,7 @@ Request::getHead()->addStyles('/assets/css/style.css?14');
             <svg class="icons mr5">
               <use xlink:href="/assets/svg/icons.svg#users"></use>
             </svg>
-            <span class="mb-none middle"><?= __('admin.users'); ?></span>
+            <span class="mb-none middle text-sm"><?= __('admin.users'); ?></span>
           </a>
           <a class="<?= is_current(url('admin.facets.all')) ? ' active' : ' gray-600'; ?> mb-none" href="<?= url('admin.facets.all'); ?>">
             <svg class="icons mr5">

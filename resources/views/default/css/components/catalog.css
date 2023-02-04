@@ -4,12 +4,6 @@
  * Стили для каталога
  */
 
-.item-logo {
-  margin: 30px 0 0 0;
-  font-size: 21px;
-  color: #333;
-}
-
 .item-cat { padding: 0 30px 10px 30px; }
 
 .list-items {
@@ -86,6 +80,4 @@ body.item.dark .box {
   }  
 
   .item main { margin: 0.5rem; }  
-  .item-search { padding: 10px; }
-  .item-search-right { margin-left: 0; }
 }
