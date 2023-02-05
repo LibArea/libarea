@@ -1,8 +1,8 @@
 </div>
 
 <footer class="footer box-shadow-top" itemscope itemtype="http://schema.org/WPFooter">
-  <?php $type = $data['type'] ?? false; ?> 
-  <?php if (UserData::getUserScroll() == false || $type != 'main') : ?>  
+  <?php $type = $data['type'] ?? false; ?>
+  <?php if (UserData::getUserScroll() == false || $type != 'main') : ?>
     <div class="wrap">
       <div class="left">
         <div class="mb5">

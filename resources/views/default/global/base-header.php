@@ -6,6 +6,12 @@ Request::getHead()->addStyles('/assets/css/style.css?21');
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;
 $post   = $data['post'] ?? false;
+
+// Hide the side menu on the pages
+$left_menu = true;
+if (in_array($type, ['profile', 'recover'])) {
+  $left_menu = false;
+}
 ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
@@ -17,12 +23,16 @@ $post   = $data['post'] ?? false;
       <div class="d-header_contents">
 
         <div class="flex items-center gray-600 gap-min">
-          <div id="togglemenu" class="pointer"><svg class="icons">
-              <use xlink:href="/assets/svg/icons.svg#menu"></use>
-            </svg></div>
+          <?php if ($left_menu === true) : ?>
+            <div id="togglemenu" class="pointer"><svg class="icons">
+                <use xlink:href="/assets/svg/icons.svg#menu"></use>
+              </svg></div>
+          <?php endif; ?>
+
           <div class="menu__button none"><svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#menu"></use>
             </svg></div>
+
           <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>
         </div>
 
@@ -109,16 +119,10 @@ $post   = $data['post'] ?? false;
 
   <div id="contentWrapper" class="wrap">
 
-    <?php
-    $css = '';
-    $type =  $data['type'] ?? '';
-    if (in_array($type, ['blogs', 'recover'])) {
-      $css = ' none';
-    }
-    ?>
-
-    <nav class="menu__left<?= $css; ?> mb-none">
-      <ul class="menu sticky top-sm">
-        <?= insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.left')]); ?>
-      </ul>
-    </nav>
+    <?php if ($left_menu === true) : ?>
+      <nav class="menu__left mb-none">
+        <ul class="menu sticky top-sm">
+          <?= insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.left')]); ?>
+        </ul>
+      </nav>
+    <?php endif; ?>

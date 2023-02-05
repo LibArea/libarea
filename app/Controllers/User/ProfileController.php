@@ -100,6 +100,7 @@ class ProfileController extends Controller
             'pagesCount'    => ceil($pagesCount / $this->limit),
             'pNum'          => $this->pageNumber,
             'profile'       => $profile,
+            'type'          => 'profile',
             'delet_count'   => UserModel::contentCount($profile['id'], 'remote'),
             'counts'        => UserModel::contentCount($profile['id'], 'active'),
             'topics'        => FacetModel::getFacetsTopicProfile($profile['id']),

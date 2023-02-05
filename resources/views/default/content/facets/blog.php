@@ -29,6 +29,11 @@ if ($blog['facet_is_deleted'] == 0) : ?>
               ]; ?>
               <?= insert('/_block/navigation/nav', ['list' => $list]); ?>
             </ul>
+              <div title="<?= __('app.post_appearance'); ?>" id="postmenu" class="m5">
+                <svg class="icons pointer gray-600">
+                  <use xlink:href="/assets/svg/icons.svg#grid"></use>
+                </svg>
+              </div>
           </div>
 
           <?= insert('/content/post/type-post', ['data' => $data]); ?>

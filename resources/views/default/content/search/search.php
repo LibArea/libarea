@@ -61,8 +61,10 @@ $sw = $sw ?? '?';
         </div>
       <?php endforeach; ?>
 
-      <?php $url = 'go?q=' . $data['q'] . '&cat=' . $data['type'] . ''; ?>
-      <?= insert('/content/search/pagination', ['pNum' => $data['pNum'], 'pagesCount' => $data['pagesCount'] - 1, 'url' => $url]); ?>
+      <?php $url = 'go?q=' . $data['q'] . '&cat=' . $data['type'] . '/'; ?>
+      
+      <?= Html::pagination($data['pNum'], $data['pagesCount'], null, $url, '&'); ?>
+      
     <?php else : ?>
       <?= insert('/content/search/no-result', ['query' => $data['q']]); ?>
     <?php endif; ?>

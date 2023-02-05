@@ -22,8 +22,6 @@ class SearchController extends Controller
 
     public function go()
     {
-        $pageNumber = self::number(Request::getGetInt('page'));
-
         $q      = Request::getGet('q');
         $type   = Request::getGet('cat');
 
@@ -40,7 +38,7 @@ class SearchController extends Controller
                 $lang = 'en';
             }
 
-            $results = SearchModel::getSearch($pageNumber, $this->limit, $q, $type);
+            $results = SearchModel::getSearch($this->pageNumber, $this->limit, $q, $type);
             $count_results =  SearchModel::getSearchCount($q, $type);
 
             $user_id = UserData::getUserId();
@@ -71,7 +69,7 @@ class SearchController extends Controller
                     'sw'            => round((microtime(true) - $sw ?? 0) * 1000, 4),
                     'count'         => $count,
                     'pagesCount'    => ceil($count / $this->limit),
-                    'pNum'          => $pageNumber,
+                    'pNum'          => $this->pageNumber,
                 ]
             ],
             'search',
@@ -92,11 +90,6 @@ class SearchController extends Controller
         $result = array_merge($topics, $posts);
 
         return json_encode($result, JSON_PRETTY_PRINT);
-    }
-
-    public static function number($num)
-    {
-        return $num <= 1 ? 1 : $num;
     }
 
     // Related posts, content author change, facets 
