@@ -11,7 +11,7 @@
 <a href="#" class="tag-grey">.tag-grey</a>
 <a href="#" class="tag-violet">.tag-violet</a>
 <a href="#" class="tag-yellow">.tag-yellow</a>
-
+<a href="#" class="tag-clear">.tag-clear</a>
 
 <h4 class="mt15"><?= __('admin.buttons'); ?>:</h4>
 <p><i class="btn btn-outline-primary">btn btn-outline-primary</i></p>

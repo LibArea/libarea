@@ -30,10 +30,7 @@ class ProfileController extends Controller
         $posts      = FeedModel::feed($this->pageNumber, $this->limit, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
 
-        $amount = UserModel::contentCount($profile['id'], 'active');
-        if (($amount['count_answers'] + $amount['count_comments']) < 3) {
-            Request::getHead()->addMeta('robots', 'noindex');
-        }
+        $this->indexing($profile['id']);
 
         return $this->render(
             '/user/profile/index',
@@ -57,6 +54,8 @@ class ProfileController extends Controller
 
         $posts      = FeedModel::feed($this->pageNumber, $this->limit, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
+
+        $this->indexing($profile['id']);
 
         return $this->render(
             '/user/profile/post',
@@ -84,6 +83,8 @@ class ProfileController extends Controller
         usort($mergedArr, function ($a, $b) {
             return ($b['comment_date'] ?? $b['answer_date']) <=> ($a['comment_date'] ?? $a['answer_date']);
         });
+
+        $this->indexing($profile['id']);
 
         return $this->render(
             '/user/profile/comment',
@@ -144,5 +145,14 @@ class ProfileController extends Controller
         }
 
         return true;
+    }
+    
+    // Index profile or not
+    public function indexing($profile_id)
+    {
+        $amount = UserModel::contentCount($profile_id, 'active');
+        if (($amount['count_answers'] + $amount['count_comments']) < 3) {
+            Request::getHead()->addMeta('robots', 'noindex');
+        }
     }
 }

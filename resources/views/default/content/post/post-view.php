@@ -31,7 +31,7 @@ $facet_view_policy = $blog['facet_view_policy'] ?? null;
           <div class="flex flex-row items-center">
             <?php if (!empty($data['facets'])) : ?>
               <?php foreach ($data['facets'] as $topic) : ?>
-                <a class="tag" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>"><?= $topic['facet_title']; ?></a>
+                <a class="tag-clear" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>"><?= $topic['facet_title']; ?></a>
               <?php endforeach; ?>
             <?php endif; ?>
           </div>
@@ -230,7 +230,7 @@ $facet_view_policy = $blog['facet_view_policy'] ?? null;
   <?php endif; ?>
 
   <?php if ($post['post_content_img']) : ?>
-    <div class="box bg-lightgray img-preview">
+    <div class="box border-lightgray img-preview">
       <img class="w-100 br-rd5" src="<?= Img::PATH['posts_cover'] . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php endif; ?>

@@ -1,6 +1,9 @@
  <div class="flex flex-col w-100">
    <?= insert('/content/user/profile/header', ['data' => $data]); ?>
    <div class="flex gap">
+     <aside>
+       <?= insert('/content/user/profile/sidebar', ['data' => $data]); ?>
+     </aside>
      <main class="flex-auto">
        <?php if ($data['profile']['my_post'] != false && $data['my_post']['post_is_deleted'] != true) : ?>
          <div class="box bg-violet">
@@ -35,8 +38,5 @@
 
        <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/posts'); ?>
      </main>
-     <aside>
-       <?= insert('/content/user/profile/sidebar', ['data' => $data]); ?>
-     </aside>
    </div>
  </div>

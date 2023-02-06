@@ -7,7 +7,8 @@
 .tag,
 .tag-grey,
 .tag-yellow,
-.tag-violet {
+.tag-violet,
+.tag-clear {
   font-size: 0.9rem;
   border-radius: 3px;
   margin-left: 0.25em;
@@ -44,6 +45,17 @@
 .tag-violet {
   background-color: var(--violet);
   color: #544e4e;
+}
+
+.tag-clear {
+  color: #707476;
+  background-color: var(--white);
+  border: 1px solid #e8ebed;
+}
+
+.tag-clear:hover {
+  color: #707476;
+  background-color: #f5f7f8;
 }
 
 /* Этикетки */
