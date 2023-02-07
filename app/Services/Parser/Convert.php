@@ -9,22 +9,43 @@ class Convert extends \ParsedownExtraPlugin
 {
     function __construct()
     {
-        $this->InlineTypes['['][] = 'Spoiler';
+        $this->InlineTypes['{'][] = 'Video';
+        $this->InlineTypes['{'][] = 'Red';
+
+        $this->inlineMarkerList .= '{';
     }
 
-    protected function inlineSpoiler($Excerpt)
+    protected function inlineVideo($excerpt)
     {
-        if (preg_match('/\[spoiler\](.+)\[\/spoiler]/mUs', $Excerpt['text'], $matches)) {
+        if (preg_match('/^{video}(.*?){\/video}/', $excerpt['text'], $matches)) {
             return [
-                'extent' => strlen($matches[0]),
+                'extent' => 80,
+                'element' => [
+                    'name' => 'video',
+                    'text' => 'Your browser does not support the video tag.',
+                    'attributes' => [
+                        'src' => $matches[1],
+                        'controls' => true,
+                    ],
+                ],
+
+            ];
+        }
+    }
+
+    protected function inlineRed($excerpt)
+    {
+        if (preg_match('/^{red}(.*?){\/red}/', $excerpt['text'], $matches)) {
+            return [
+                'extent' => 50,
                 'element' => [
                     'name' => 'span',
-                    'handler' => 'line',
                     'text' => $matches[1],
                     'attributes' => [
-                        'class' => 'spoiler'
+                        'class' => 'red',
                     ],
-                ]
+                ],
+
             ];
         }
     }

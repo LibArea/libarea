@@ -178,6 +178,17 @@ blockquote {
 
 blockquote p { margin: 2px; }
 
+.blockquote-profile {
+  margin-bottom: 20px;
+  max-width: 300px;
+  word-wrap: break-word;
+  padding: 0.1rem 1rem;
+  border-left: 3px solid #d2d6dd;
+  font-size:.91rem
+}
+
+.blockquote-profile p { margin: 2px; }
+
 hr {
   border: none;
   clear: both;

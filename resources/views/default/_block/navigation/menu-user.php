@@ -1,4 +1,4 @@
-<?php $user = UserData::get(); 
+<?php $user = UserData::get();
 $login = $user['login'] ?? false;
 ?>
 <span class="right-close pointer">x</span>

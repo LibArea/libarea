@@ -1,11 +1,11 @@
 <?php $profile = $data['profile']; ?>
 
 <div class="mb-none">
-  <div class="m15 mt0 hidden">
+  <div class="blockquote-profile">
     <?= markdown($profile['about'] ?? __('app.riddle') . '...'); ?>
   </div>
 
-  <div class="box border-lightgray">
+  <div class="mb20">
     <h4 class="uppercase-box"><?= __('app.contacts'); ?></h4>
     <div class="gray-600 mt5">
       <svg class="icons">

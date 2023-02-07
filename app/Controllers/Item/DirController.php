@@ -17,7 +17,10 @@ class DirController extends Controller
     // Лист сайтов по темам (сайты по "категориям")
     public function index()
     {
-        self::filter($grouping = Request::get('grouping'), $sort = Request::get('sort'));
+        $grouping = Request::get('grouping');
+        $sort = Request::get('sort');
+        
+        self::filter($grouping, $sort);
 
         $category  = FacetModel::get(Request::get('slug'), 'slug', $this->user['trust_level']);
         notEmptyOrView404($category);

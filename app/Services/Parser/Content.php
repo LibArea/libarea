@@ -17,7 +17,6 @@ class Content
         $text = self::details($text);
         $text = self::facets($text);
         $text = self::emoji($text);
-        $text = self::red($text);
 
         return self::parseUsers($text);
     }
@@ -66,16 +65,6 @@ class Content
         $t->addRule($simpleRule); */
 
         return $t->apply($text);
-    }
-
-    public static function red($content)
-    {
-        $regexpRed = '/\{red(?!.*\{red)(\s?)(?(1)(.*?))\}(.*?)\{\/red\}/is';
-        if (preg_match($regexpRed, $content, $matches)) {
-            $content = preg_replace($regexpRed, "<span class=\"red\">$2$3</span>", $content);
-        }
-
-        return  $content;
     }
 
     public static function emoji($content)
@@ -150,7 +139,7 @@ class Content
         preg_match_all('/#([^#,:\s,]+)/i', strip_tags($content), $matchs);
 
         if (is_array($matchs[1])) {
-   
+
             $match_name = [];
             foreach ($matchs[1] as $key => $slug) {
                 if (in_array($slug, $match_name)) {
@@ -165,13 +154,13 @@ class Content
             arsort($match_name);
 
             foreach ($match_name as $key => $slug) {
-         
+
                 if ($info = ParserModel::getFacet($slug)) {
                     $content = str_replace('#' . $slug, '<img class="img-sm emoji mr5" alt="' . $info['facet_title'] . '" src="' . Img::PATH['facets_logo_small'] . $info['facet_img'] . '"><a href="/topic/' . $info['facet_slug'] . '">' . $info['facet_title'] . '</a>', $content);
                 }
             }
-        
-            return $content; 
+
+            return $content;
         }
     }
 

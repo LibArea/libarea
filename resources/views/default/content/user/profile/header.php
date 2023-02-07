@@ -12,7 +12,7 @@ endif;
   }
 </style>
 
-<div class="br-gray bg-white mb15 relative">
+<div class="mb15 relative">
   <?php if (UserData::checkAdmin()) : ?>
     <?= insert('/content/user/profile/deletion-statistics', ['count' => $data['delet_count']]); ?>
   <?php endif; ?>
