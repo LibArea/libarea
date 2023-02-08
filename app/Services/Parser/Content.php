@@ -13,12 +13,12 @@ class Content
     // Content management (Parsedown, Typograf)
     public static function text(string $content, string $type)
     {
-        $text = self::parse($content);
+        $text = self::parseUsers($content);
+        $text = self::parse($text);
         $text = self::details($text);
         $text = self::facets($text);
-        $text = self::emoji($text);
 
-        return self::parseUsers($text);
+        return self::emoji($text);
     }
 
     public static function parse(string $content)
@@ -166,7 +166,7 @@ class Content
 
     public static function parseUsers($content, $with_user = false, $to_uid = false)
     {
-        preg_match_all('/@([^@,:\s,]+)/i', strip_tags($content), $matchs);
+        preg_match_all('/(?<=^|\s|>)@([a-z0-9_]+)/i', strip_tags($content), $matchs);
 
         if (is_array($matchs[1])) {
             $match_name = [];
@@ -195,10 +195,10 @@ class Content
                 }
 
                 if ($user_info) {
-                    $content = str_replace('@' . $login, '<a href="/@' .  $user_info['login'] . '" class="to-user">@' . $user_info['login'] . '</a>', $content);
-
+                    $content = str_replace('@' . $login, '[@' . $login . '](/@' .  $login . ')', $content);
+ 
                     if ($to_uid) {
-                        $content_uid = str_replace('@' . $login, '@' . $user_info['id'], $content_uid);
+                       $content_uid = str_replace('@' . $login, '@' . $user_info['id'], $content_uid);
                     }
 
                     if ($with_user) {

@@ -107,7 +107,8 @@ img {
 .pb5 { padding-bottom: 5px; }
 .pl5 { padding-left: 5px; }
 .p15 { padding: 15px; }
-.p5-10 { padding: 5px 10px 5px 10px; }
+.p5-10 { padding: 5px 10px; }
+.p10-5 { padding: 10px 5px; }
 
 /*
  * Used colors (and background) in LibArea project
