@@ -46,7 +46,7 @@ $facet_view_policy = $blog['facet_view_policy'] ?? null;
             <?php endif; ?>
 
             <?php if (UserData::checkActiveUser()) : ?>
-              <?php if (Access::postAuthorAndTeam($post, $blog['facet_user_id'] ?? 0) == true) : ?>
+              <?php if (Access::postAuthorAndTeam($post, $blog['facet_user_id'] ?? 0) == true || $post['post_draft'] == true) : ?>
                 <a class="gray-600 lowercase" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
                   <?= __('app.edit'); ?>
                 </a>

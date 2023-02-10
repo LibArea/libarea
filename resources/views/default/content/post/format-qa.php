@@ -19,12 +19,23 @@
             </span>
             <ul class="dropdown">
 
+              <?php if (Access::author('answer', $answer) === true) : ?>
+                <li>
+                  <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                    <svg class="icons">
+                      <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                    </svg>
+                    <?= __('app.edit'); ?>
+                  </a>
+                </li>
+              <?php endif; ?>
+
               <li>
                 <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'heading'); ?>
               </li>
 
               <?php if ($post['amount_content'] > 1) : ?>
-                <?php if (UserData::getUserId() == $answer['answer_user_id'] || UserData::checkAdmin()) : ?>
+                <?php if (UserData::getUserId() == $post['post_user_id'] || UserData::checkAdmin()) : ?>
                   <li>
                     <a id="best_<?= $answer['answer_id']; ?>" data-id="<?= $answer['answer_id']; ?>" class="answer-best">
                       <svg class="icons">
@@ -34,17 +45,6 @@
                     </a>
                   </li>
                 <?php endif; ?>
-              <?php endif; ?>
-
-              <?php if (Access::author('answer', $answer, 30) === true) : ?>
-                <li>
-                  <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                    <svg class="icons">
-                      <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                    </svg>
-                    <?= __('app.edit'); ?>
-                  </a>
-                </li>
               <?php endif; ?>
 
               <?php if (UserData::checkAdmin()) : ?>
@@ -137,7 +137,7 @@
                   <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if (Access::author('comment', $comment, 30) === true) : ?>
+                <?php if (Access::author('comment', $comment) === true) : ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600 ml5 mr5">
                     <svg class="icons">
                       <use xlink:href="/assets/svg/icons.svg#edit"></use>

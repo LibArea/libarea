@@ -94,7 +94,7 @@ class Access
      *
      * Тип контента, массив данных и сколько времени можно редактировать.
      */
-    public static function author(string $type_content, array $info_type, int $limit_time = 30): bool
+    public static function author(string $type_content, array $info_type): bool
     {
         if (UserData::checkAdmin()) {
             return true;
@@ -125,7 +125,13 @@ class Access
          *
          * Лимит по времени.
          */
-        if (self::limiTime($info_type[$type_content . '_date'], $limit_time) === false) {
+         
+         $time_edit = config('trust-levels.edit_time_' . $type_content);
+         if ($type_content == 'post') {
+             $time_edit = $post['post_draft'] == 1 ? 0 : config('trust-levels.edit_time_post'); 
+         }
+         
+        if (self::limiTime($info_type[$type_content . '_date'], $time_edit) === false) {
             return false;
         }
 
@@ -163,7 +169,9 @@ class Access
          *
          * Лимит по времени.
          */
-        if (self::limiTime($info_type['post_date'], config('trust-levels.edit_time_post')) === false) {
+         
+        $time_edit = $info_type['post_draft'] == 1 ? 0 : config('trust-levels.edit_time_post'); 
+        if (self::limiTime($info_type['post_date'], $time_edit) === false) {
             return false;
         }
 

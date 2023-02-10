@@ -18,7 +18,7 @@
       <?= Html::votes($page, 'post'); ?>
       <div class="gray-600 italic ml15">
         <?= $page['post_modified']; ?>
-        <?php if (Access::author('post', $page, 30) === true) : ?>
+        <?php if (Access::author('post', $page) === true) : ?>
           <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>

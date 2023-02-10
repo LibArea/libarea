@@ -21,7 +21,7 @@ class EditAnswerController extends Controller
     public function index()
     {
         $answer = AnswerPresence::index(Request::getInt('id'));
-        if (Access::author('answer', $answer, config('trust-levels.edit_time_answer')) == false) {
+        if (Access::author('answer', $answer) == false) {
             return false;
         }
 
@@ -50,7 +50,7 @@ class EditAnswerController extends Controller
         // Access check
         $answer = AnswerModel::getAnswerId($answer_id);
 
-        if (Access::author('answer', $answer, config('trust-levels.edit_time_answer')) == false) {
+        if (Access::author('answer', $answer) == false) {
             return false;
         }
 

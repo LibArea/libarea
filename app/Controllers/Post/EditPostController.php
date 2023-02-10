@@ -160,7 +160,7 @@ class EditPostController extends Controller
     {
         $post = PostPresence::index(Request::getInt('id'), 'id');
 
-        if (Access::author('post', $post, 30) == false) {
+        if (Access::author('post', $post) == false) {
             is_return(__('msg.went_wrong'), 'error');
         }
 
@@ -191,11 +191,11 @@ class EditPostController extends Controller
     public function checkingEditPermissions($post, $blog)
     {
         if (empty($blog)) {
-            if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id'] ?? 0) == false) {
+            if (Access::author('post', $post) == false) {
                 is_return(__('msg.access_denied'), 'error');
             }
         } else {
-            if (Access::author('post', $post, config('trust-levels.edit_time_post')) == false) {
+            if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id'] ?? 0) == false) {
                 is_return(__('msg.access_denied'), 'error');
             }
         }

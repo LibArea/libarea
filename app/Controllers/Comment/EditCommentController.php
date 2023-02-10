@@ -18,7 +18,7 @@ class EditCommentController extends Controller
         // Access verification
         // Проверка доступа 
         $comment    = CommentPresence::index(Request::getPostInt('comment_id'));
-        if (Access::author('comment', $comment, config('trust-levels.edit_time_comment')) == false) {
+        if (Access::author('comment', $comment) == false) {
             return false;
         }
 
@@ -38,7 +38,7 @@ class EditCommentController extends Controller
     {
         // Access verification 
         $comment = CommentPresence::index(Request::getPostInt('comment_id'));
-        if (Access::author('comment', $comment, config('trust-levels.edit_time_comment')) == false) {
+        if (Access::author('comment', $comment) == false) {
             redirect('/');
         }
 

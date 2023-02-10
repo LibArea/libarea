@@ -188,7 +188,7 @@ class PostController extends Controller
 
         // Access check
         // Проверка доступа
-        if (Access::author('post', $post, 0) == false) {
+        if ($post['post_user_id'] != UserData::getUserId()) {
             redirect('/');
         }
 

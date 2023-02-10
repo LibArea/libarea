@@ -61,7 +61,7 @@
                     </span>
                     <ul class="dropdown">
 
-                      <?php if (Access::author('answer', $answer, 30) === true) : ?>
+                      <?php if (Access::author('answer', $answer) === true) : ?>
                         <li>
                           <a class="editansw" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
                             <svg class="icons">
@@ -178,7 +178,7 @@
                     </span>
                     <ul class="dropdown">
 
-                      <?php if (Access::author('comment', $comment, 30) === true) : ?>
+                      <?php if (Access::author('comment', $comment) === true) : ?>
                         <li>
                           <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
                             <svg class="icons">

@@ -12,13 +12,6 @@ use UserData, Access;
 
 class AnswerBest extends Base
 {
-    protected $user;
-
-    public function __construct()
-    {
-        $this->user = UserData::get();
-    }
-
     public function index()
     {
         // Get the answer data (for which the "best answer" is selected)     
@@ -31,7 +24,7 @@ class AnswerBest extends Base
 
         // Let's check the access. Only the staff and the author of the post can choose the best answer (without regard to time)
         // Проверим доступ. Только персонал и автор поста может выбирать лучший ответ (без учета времени)
-        if (Access::author('post', $post, 0) == false) {
+        if ($post['post_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) {
             return false;
         }
 

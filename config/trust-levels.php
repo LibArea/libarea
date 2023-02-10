@@ -84,6 +84,7 @@ return [
     'edit_time_answer'  => 30,
     'edit_time_comment' => 30,
     'edit_time_item'    => 0,
+    'edit_time_reply'   => 0,
 
     /*
     |--------------------------------------------------------------------------

@@ -15,7 +15,7 @@
           <div class="list-items__description">
             <?= Html::facets($item['facet_list'], 'category', 'tag mr15', $sort); ?>
 
-            <?php if (Access::author('item', $item, 30) === true) : ?>
+            <?php if (Access::author('item', $item) === true) : ?>
               <a href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">
                 <svg class="icons">
                   <use xlink:href="/assets/svg/icons.svg#edit"></use>
