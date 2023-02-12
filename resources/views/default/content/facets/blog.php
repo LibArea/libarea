@@ -6,8 +6,8 @@ if ($blog['facet_is_deleted'] == 0) : ?>
 
     <?php if ($blog['facet_view_policy'] == false || is_array($data['facet_signed']) == true) : ?>
 
-      <div class="flex gap mb-block">
-        <div>
+      <div class="flex gap mt20">
+        <main class="flex-auto">
           <div class="flex justify-between mb20">
             <ul class="nav scroll-menu">
               <?php $list =  [
@@ -39,7 +39,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
           <?= insert('/content/post/type-post', ['data' => $data]); ?>
 
           <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('blog', ['slug' => $blog['facet_slug']])); ?>
-        </div>
+        </main>
         <aside>
           <?php if ($blog['facet_is_deleted'] == 0) : ?>
             <div class="box bg-beige">

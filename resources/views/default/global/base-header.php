@@ -9,7 +9,7 @@ $post   = $data['post'] ?? false;
 
 // Hide the side menu on the pages
 $left_menu = true;
-if (in_array($type, ['profile', 'recover'])) {
+if (in_array($type, ['profile', 'user.blog', 'recover'])) {
   $left_menu = false;
 }
 ?>

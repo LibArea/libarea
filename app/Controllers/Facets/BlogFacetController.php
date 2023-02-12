@@ -39,7 +39,7 @@ class BlogFacetController extends Controller
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,
                     'sheet'         => $sheet,
-                    'type'          => 'blog',
+                    'type'          => 'user.blog',
                     'facet'         => $facet,
                     'posts'         => $posts,
                     'users_team'    => FacetModel::getUsersTeam($facet['facet_id']),
