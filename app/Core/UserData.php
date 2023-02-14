@@ -231,6 +231,15 @@ class UserData
     }
 
     /**
+     * Returns the localization of the participant (otherwise by default)
+     * Возвращает локализацию участника (в противном случае по умолчанию).
+     */
+    static public function getUserLang()
+    {
+        return self::$myAccount['lang'] ?? config('general.lang');
+    }
+
+    /**
      * Returns whether the member has scroll enabled.
      * Возвращает, включен ли скролл у участника.
      */

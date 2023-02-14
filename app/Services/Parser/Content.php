@@ -48,9 +48,17 @@ class Content
 
         $Parsedown->abbreviationData = __('abbreviations.words');
 
-        // Use
         $text = $Parsedown->text($content);
 
+        if (UserData::getUserLang() == 'ru') {
+            return self::typograf($text);
+        }            
+
+        return $text;
+    }
+
+    public static function typograf(string $text)
+    {
         $t = new \Akh\Typograf\Typograf();
 
         /* $simpleRule = new class extends \Akh\Typograf\Rule\AbstractRule {
@@ -64,9 +72,14 @@ class Content
 
         $t->addRule($simpleRule); */
 
+        // https://github.com/akhx/typograf/blob/master/docs/RULES.md
+        $t->disableRule('Nbsp\*'); 
+        $t->disableRule('Space\*');
+        $t->disableRule('Html\*');        
+
         return $t->apply($text);
     }
-
+    
     public static function emoji($content)
     {
         $pathEmoji =  '/assets/images/emoji/';
