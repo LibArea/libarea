@@ -9,7 +9,7 @@ class FolderController extends Controller
 {
     public function get($type)
     {
-        FolderModel::get($type, $this->user['id']);
+        FolderModel::get($type);
     }
 
     public function create()
@@ -24,7 +24,7 @@ class FolderController extends Controller
 
         $folders = json_decode($arr, true);
 
-        FolderModel::create($folders, 'favorite', $this->user['id']);
+        FolderModel::create($folders, 'favorite');
 
         redirect($url);
     }
@@ -36,7 +36,7 @@ class FolderController extends Controller
         $tid    = Request::getPostInt('tid');
         $type   = Request::getPost('type');
 
-        return FolderModel::deletingFolderContent($tid, $type, $this->user['id']);
+        return FolderModel::deletingFolderContent($tid, $type);
     }
 
     // Link folder to content 
@@ -44,13 +44,13 @@ class FolderController extends Controller
     public function addFolderContent()
     {
         $id     = Request::getPostInt('id');
-        $type   = Request::getPost('type');
         $tid    = Request::getPostInt('tid');
+        $type   = Request::getPost('type');
 
         $allowed = ['favorite', 'blog'];
         if (!in_array($type, $allowed)) return false;
 
-        FolderModel::saveFolderContent($id, $tid, $type, $this->user['id']);
+        FolderModel::saveFolderContent($id, $tid, $type);
     }
 
     // Delete the folder itself
@@ -60,6 +60,6 @@ class FolderController extends Controller
         $id     = Request::getPostInt('id');
         $type   = Request::getPost('type');
 
-        return FolderModel::deletingFolder($id, $type, $this->user['id']);
+        return FolderModel::deletingFolder($id, $type);
     }
 }

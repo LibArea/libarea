@@ -128,7 +128,7 @@ class Access
          
          $time_edit = config('trust-levels.edit_time_' . $type_content);
          if ($type_content == 'post') {
-             $time_edit = $post['post_draft'] == 1 ? 0 : config('trust-levels.edit_time_post'); 
+             $time_edit = $info_type['post_draft'] == 1 ? 0 : config('trust-levels.edit_time_post'); 
          }
          
         if (self::limiTime($info_type[$type_content . '_date'], $time_edit) === false) {
