@@ -63,7 +63,6 @@ class EditFacetController extends Controller
 
         $post_related = $this->relatedPost();
         $facet_top_level = $data['facet_top_level'] ?? false;
-        $facet_view_policy = $data['facet_view_policy'] ?? false;
 
         FacetModel::edit(
             [
@@ -74,7 +73,6 @@ class EditFacetController extends Controller
                 'facet_info'                => $data['facet_info'],
                 'facet_slug'                => strtolower($data['facet_slug']),
                 'facet_seo_title'           => $data['facet_seo_title'],
-                'facet_view_policy'         => $facet_view_policy == 'on' ? 1 : 0,
                 'facet_user_id'             => $facet_user_id,
                 'facet_top_level'           => $facet_top_level == 'on' ? 1 : 0,
                 'facet_post_related'        => $post_related,

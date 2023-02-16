@@ -182,7 +182,6 @@ return [
     'drop_image'        => 'Drag an image to upload it.',
     'attach_files'      => 'Files can be pasted from clipboard.',
 
-    'view_policy'       => 'Only members can see the content',
     'entry_policy'      => 'Approve new members',
     
     'back'              => 'Back',
@@ -201,7 +200,6 @@ return [
     'edit_section'      => 'Edit Section',
     
     'published'         => 'Published in',
-    'subscribers_only'  => 'Only subscribers can read this blog...',
 
     'being_developed'   => 'Under development',
     'activity'          => 'Activity',

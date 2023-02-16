@@ -182,7 +182,6 @@ return [
     'drop_image'        => '拖放图像上传',
     'attach_files'      => '可从剪贴板粘贴文件',
 
-    'view_policy'       => '只有会员才能看到内容',
     'entry_policy'      => '批准新成员',
  
     'back'              => '返回',
@@ -201,7 +200,6 @@ return [
     'edit_section'      => '编辑部分',
     
     'published'         => '發表於',
-    'subscribers_only'  => '只有订阅者才能阅读此博客...',
 
     'being_developed'   => '开发中',
     'activity'          => '活动',

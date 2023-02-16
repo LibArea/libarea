@@ -1,34 +1,26 @@
 <?php $blog = $data['facet'];
 if ($blog['facet_is_deleted'] == 0) : ?>
-
-  <?php if ($blog['facet_view_policy'] == false || is_array($data['facet_signed']) == true) : ?>
-
-    <main>
-      <div class="mb20">
-        <div class="flex items-center justify-between">
-          <div>
-            <div class="text-lg gray-600">
-              <a href="<?= url('blog', ['slug' => $blog['facet_slug']]); ?>"><?= $blog['facet_title']; ?></a> / <?= __('app.topic'); ?>
-            </div>
-            <h1 class="m0"><?= $data['topic']['facet_title']; ?></h1>
-            <div class="text-sm gray-600">#<?= $data['topic']['facet_slug']; ?></div>
+  <main>
+    <div class="mb20">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-lg gray-600">
+            <a href="<?= url('blog', ['slug' => $blog['facet_slug']]); ?>"><?= $blog['facet_title']; ?></a> / <?= __('app.topic'); ?>
           </div>
-          <div class="right">
-            <a class="btn btn-outline-primary right" href="<?= url('topic', ['slug' => $data['topic']['facet_slug']]) ?>"><?= __('app.more_content'); ?></a>
-            <div class="text-sm gray-600 clear"><?= __('app.read_more_posts'); ?> <?= config('meta.name'); ?></div>
-          </div>
+          <h1 class="m0"><?= $data['topic']['facet_title']; ?></h1>
+          <div class="text-sm gray-600">#<?= $data['topic']['facet_slug']; ?></div>
+        </div>
+        <div class="right">
+          <a class="btn btn-outline-primary right" href="<?= url('topic', ['slug' => $data['topic']['facet_slug']]) ?>"><?= __('app.more_content'); ?></a>
+          <div class="text-sm gray-600 clear"><?= __('app.read_more_posts'); ?> <?= config('meta.name'); ?></div>
         </div>
       </div>
+    </div>
 
-      <?= insert('/content/post/type-post', ['data' => $data]); ?>
+    <?= insert('/content/post/type-post', ['data' => $data]); ?>
 
-      <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('blog', ['slug' => $blog['facet_slug']])); ?>
-    </main>
-
-  <?php else : ?>
-    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.subscribers_only'), 'icon' => 'closed']); ?>
-  <?php endif; ?>
-
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('blog', ['slug' => $blog['facet_slug']])); ?>
+  </main>
 <?php else : ?>
   <main>
     <div class="box center gray-600">

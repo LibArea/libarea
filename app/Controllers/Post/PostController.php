@@ -118,8 +118,7 @@ class PostController extends Controller
 
     public function stylesHead($content, $blog)
     {
-        $facet_view_policy = $blog[0]['facet_view_policy'] ?? false;
-        if ($content['post_is_deleted'] == 1 || $facet_view_policy == 1) {
+        if ($content['post_is_deleted'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
