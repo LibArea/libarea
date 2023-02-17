@@ -40,7 +40,7 @@ class RulesFacet extends Validator
         }
     }
 
-    public static function rulesEdit($data, $facet, $user_id)
+    public static function rulesEdit($data, $facet)
     {
         // Хакинг формы (тип фасета)
         // ['topic', 'blog', 'category', 'section']
@@ -55,7 +55,7 @@ class RulesFacet extends Validator
         $redirect = url('content.edit', ['type' => $facet['facet_type'], 'id' => $facet['facet_id']]);
 
         // Доступ получает только автор и админ
-        if ($facet['facet_user_id'] != $user_id && !UserData::checkAdmin()) {
+        if ($facet['facet_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) {
             is_return(__('msg.went_wrong'), 'error', $redirect);
         }
 

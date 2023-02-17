@@ -10,13 +10,16 @@ class RssController extends Controller
     // Route::get('/sitemap.xml')
     public function index()
     {
-        $data = [
-            'url'       => config('meta.url'),
-            'topics'    => RssModel::getTopicsSitemap(),
-            'posts'     => RssModel::getPostsSitemap(),
-        ];
-
-        includeCachedTemplate('default/content/rss/sitemap', ['data' => $data]);
+        includeCachedTemplate(
+            'default/content/rss/sitemap',
+            [
+                'data' => [
+                    'url'       => config('meta.url'),
+                    'topics'    => RssModel::getTopicsSitemap(),
+                    'posts'     => RssModel::getPostsSitemap(),
+                ]
+            ]
+        );
     }
 
     // Route::get('/turbo-feed/topic/{slug}')
@@ -26,23 +29,13 @@ class RssController extends Controller
         $topic      = RssModel::getTopicSlug($topic_slug);
         notEmptyOrView404($topic);
 
-        $posts  = RssModel::getPostsFeed($topic_slug);
-        $result = [];
-        foreach ($posts as $ind => $row) {
-            $text = explode("\n", $row['post_content']);
-            $row['post_content']  = markdown($text[0], 'line');
-            $result[$ind]         = $row;
-        }
-
-        $data = [
-            'url'   => config('meta.url'),
-            'posts' => $result,
-        ];
-
         includeCachedTemplate(
             'default/content/rss/turbo-feed',
             [
-                'data' => $data,
+                'data' => [
+                    'url'   => config('meta.url'),
+                    'posts' => self::posts($topic_slug),
+                ],
                 'topic' => $topic,
             ]
         );
@@ -55,7 +48,21 @@ class RssController extends Controller
         $topic      = RssModel::getTopicSlug($topic_slug);
         notEmptyOrView404($topic);
 
-        $posts  = RssModel::getPostsFeed($topic_slug);
+        includeCachedTemplate(
+            'default/content/rss/rss-feed',
+            [
+                'data'  => [
+                    'url'       => config('meta.url'),
+                    'posts'     => self::posts($topic_slug),
+                ],
+                'topic' => $topic,
+            ]
+        );
+    }
+
+    public static function posts($slug)
+    {
+        $posts  = RssModel::getPostsFeed($slug);
         $result = [];
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
@@ -63,15 +70,6 @@ class RssController extends Controller
             $result[$ind]         = $row;
         }
 
-        includeCachedTemplate(
-            'default/content/rss/rss-feed',
-            [
-                'data'  => [
-                    'url'       => config('meta.url'),
-                    'posts'     => $result,
-                ],
-                'topic' => $topic,
-            ]
-        );
+        return $result;
     }
 }
