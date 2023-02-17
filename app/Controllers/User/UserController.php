@@ -44,7 +44,7 @@ class UserController extends Controller
     // Страница закладок участника
     function favorites()
     {
-        $favorites = UserModel::userFavorite($this->user['id']);
+        $favorites = UserModel::userFavorite();
 
         $result = [];
         foreach ($favorites as $ind => $row) {
@@ -103,7 +103,7 @@ class UserController extends Controller
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
-                    'favorites' => UserModel::userFavorite($this->user['id'], Request::getInt('id'))
+                    'favorites' => UserModel::userFavorite(Request::getInt('id'))
                 ]
             ]
         );

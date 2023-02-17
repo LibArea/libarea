@@ -345,4 +345,74 @@ if (tabs) {
 }
 
 /* MIT license https://github.com/vivekweb2013/toastmaker */
-!function (t, e) { "function" == typeof define && define.amd ? define(e) : "object" == typeof exports ? module.exports = e() : t.Notice = e() }(this, function (t) { return function (t, e, s) { function i(t, e, s, i, n) { var a = Array.isArray(t) ? "array" : typeof t; if (i && (null == t || "" === t)) throw "Invalid argument '" + e + "'. Argument is either empty, null or undefined"; if (a !== s) throw "Invalid argument '" + e + "'. Type must be " + s + " but found " + a; if (n && -1 == n.indexOf(t)) throw "Invalid value " + t + " specified for argument '" + e + "'. Allowed - " + n.join(" | ") } i(t, "text", "string", !0), i(s = s || {}, "options", "object"), i(e = e || 3e3, "timeout", "number"), s.styles = s.styles || {}, i(s.styles, "styles", "object"), s.align = s.align || "center", i(s.align, "align", "string", !0, ["left", "center", "right"]), s.valign = s.valign || "bottom", i(s.valign, "valign", "string", !0, ["top", "bottom"]), s.classList = s.classList || [], i(s.classList, "classList", "array"); var n = ["notice", "notice-" + s.valign, "notice-" + s.align]; s.classList = s.classList.concat(n); var a = document.createElement("div"); s.classList.forEach(function (t) { if ("string" != typeof t) throw "Invalid css class '" + JSON.stringify(t) + "'. CSS class must be of type string"; a.classList.add(t) }); var o = document.createTextNode(t); for (var r in a.appendChild(o), a.style.animationDuration = e / 1e3 + "s", s.styles) { if ("string" != typeof s.styles[r] && "number" != typeof s.styles[r]) throw "Invalid value '" + JSON.stringify(s.styles[r]) + "' specified for style '" + r + "'. Style value must be of type string or number"; a.style[r] = s.styles[r] } document.body.appendChild(a), setTimeout(function () { document.body.removeChild(a) }, e) } });
+(function (global, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(factory);
+    } else if (typeof exports === "object") {
+        module.exports = factory();
+    } else {
+        global.Notice = factory();
+    }
+}(this, function (global) {
+
+    var Notice = function (text, timeout, options) {
+        // Validate mandatory options
+        var validate = function (arg, argName, type, isMandatory, allowedValues) {
+            var actualType = Array.isArray(arg) ? "array" : typeof arg;
+            if (isMandatory && (arg == null || arg === ''))
+                throw new Error("Invalid argument '" + argName + "'. Argument is either empty, null or undefined");
+            if (actualType !== type)
+                throw new Error("Invalid argument '" + argName + "'. Type must be " + type + " but found " + actualType);
+            if (allowedValues && allowedValues.indexOf(arg) == -1)
+                throw new Error("Invalid value " + arg + " specified for argument '" + argName + "'. Allowed - " + allowedValues.join(" | "));
+        }
+
+        // Initialize & validate the options
+        validate(text, "text", "string", true);
+        options = options || {};
+        validate(options, "options", "object");
+        timeout = timeout || 3000;
+        validate(timeout, "timeout", "number");
+        options.styles = options.styles || {}; // Object with style properties
+        validate(options.styles, "styles", "object");
+        options.align = options.align || "center" // left | center | right
+        validate(options.align, "align", "string", true, ["left", "center", "right"]);
+        options.valign = options.valign || "bottom"; // top | bottom
+        validate(options.valign, "valign", "string", true, ["top", "bottom"]);
+        options.classList = options.classList || [];
+        validate(options.classList, "classList", "array");
+
+        var alignmentClasses = ["notice", "notice-" + options.valign, "notice-" + options.align];
+        options.classList = options.classList.concat(alignmentClasses) // Array of css class names
+
+        // Create toast element
+        var toast = document.createElement('div');
+
+        // Add css classes to toast element
+        options.classList.forEach(function (c) {
+            if (typeof c != "string") throw new Error("Invalid css class '" + JSON.stringify(c) + "'. CSS class must be of type string");
+            toast.classList.add(c);
+        });
+
+        // Add text message to toast element
+        var content = document.createTextNode(text);
+        toast.appendChild(content);
+
+        // Add styles to the toast element
+        toast.style.animationDuration = timeout / 1000 + "s";
+        for (var prop in options.styles) {
+            if (typeof options.styles[prop] != 'string' && typeof options.styles[prop] != "number")
+                throw new Error("Invalid value '" + JSON.stringify(options.styles[prop]) + "' specified for style '" +
+                prop + "'. Style value must be of type string or number");
+            toast.style[prop] = options.styles[prop];
+        }
+
+        // Inject toast element to DOM
+        document.body.appendChild(toast);
+        setTimeout(function () {
+            document.body.removeChild(toast);
+        }, timeout);
+    }
+
+    return Notice;
+}));

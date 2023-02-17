@@ -127,8 +127,10 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
 
     // For bookmarks: posts, comments and sites
     // Для закладок: посты, комментарии и сайты
-    public static function userFavorite($user_id, $tag_id = null)
+    public static function userFavorite($tag_id = null)
     {
+        $user_id = UserData::getUserId();
+        
         $tag = '';
         if ($tag_id) $tag = 'AND fol.id = ' . $tag_id;
 
