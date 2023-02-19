@@ -32,7 +32,7 @@ class InvitationsController extends Controller
             [
                 'meta'  => Meta::get(__('app.invites')),
                 'data'  => [
-                    'invitations'   => InvitationModel::userResult($this->user['id']),
+                    'invitations'   => InvitationModel::userResult(),
                     'count_invites' => $this->user['invitation_available'],
                 ]
             ]
@@ -47,14 +47,7 @@ class InvitationsController extends Controller
 
         $invitation_code = Html::randomString('crypto', 24);
 
-        InvitationModel::create(
-            [
-                'uid'               => $this->user['id'],
-                'invitation_code'   => $invitation_code,
-                'invitation_email'  => $invitation_email,
-                'add_ip'            => Request::getRemoteAddress(),
-            ]
-        );
+        InvitationModel::create($invitation_code, $invitation_email);
 
         $this->escort($invitation_code, $invitation_email);
 
@@ -64,15 +57,13 @@ class InvitationsController extends Controller
     // We will send an email and write logs
     function escort($invitation_code, $invitation_email)
     {
-        $no_content = 0;
-
         $link = url('invite.reg', ['code' => $invitation_code]);
 
         SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
         ActionModel::addLogs(
             [
-                'id_content'    => $no_content,
+                'id_content'    => 0,
                 'action_type'   => 'invite',
                 'action_name'   => 'added',
                 'url_content'   => $link,

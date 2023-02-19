@@ -82,7 +82,7 @@ class SearchController extends Controller
         $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $query);
 
         $belong  = Request::getPost('type');
-        $type    = $belong == 'post' ? 'topic' : 'category';
+        $type    = $belong == 'topic' ? 'topic' : 'category';
         $content = $type == 'topic' ? 'post' : 'website';
 
         $topics = SearchModel::getSearchTags($search, $type, 3);

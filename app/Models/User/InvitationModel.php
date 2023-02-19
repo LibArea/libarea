@@ -2,6 +2,8 @@
 
 namespace App\Models\User;
 
+use Hleb\Constructor\Handlers\Request;
+use UserData;
 use DB;
 
 class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
@@ -24,8 +26,17 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Создадим инвайт для участника
-    public static function create($params)
+    public static function create($invitation_code, $invitation_email)
     {
+        $user_id = UserData::getUserId();
+
+        $params = [
+            'uid'               => $user_id,
+            'invitation_code'   => $invitation_code,
+            'invitation_email'  => $invitation_email,
+            'add_ip'            => Request::getRemoteAddress(),
+        ];
+
         $sql = "INSERT INTO invitations(uid, 
                     invitation_code, 
                     invitation_email, 
@@ -39,7 +50,7 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
 
         $sql = "UPDATE users SET invitation_available = (invitation_available + 1) WHERE id = :uid";
 
-        DB::run($sql, ['uid' => $params['uid']]);
+        DB::run($sql, ['uid' => $user_id]);
 
         return true;
     }
@@ -56,7 +67,7 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Все инвайты участинка
-    public static function userResult($user_id)
+    public static function userResult()
     {
         $sql = "SELECT 
                    uid, 
@@ -73,7 +84,7 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
                             WHERE uid = :user_id
                             ORDER BY invitation_date DESC";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
+        return DB::run($sql, ['user_id' => UserData::getUserId()])->fetchAll();
     }
 
     // Проверим не активированный инвайт
@@ -91,8 +102,18 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Проверим не активированный инвайт и поменяем статус
-    public static function activate($params)
+    public static function activate($inv_uid, $active_uid, $invitation_code = null)
     {
+        $params = [
+            'uid'               => $inv_uid,
+            'active_status'     => 1,
+            'active_ip'         => Request::getRemoteAddress(),
+            'active_time'       => date('Y-m-d H:i:s'),
+            'active_uid'        => $active_uid,
+            'invitation_code'   => $invitation_code,
+        ];
+
+
         $sql = "UPDATE invitations SET 
                     active_status   = :active_status,
                     active_ip       = :active_ip,

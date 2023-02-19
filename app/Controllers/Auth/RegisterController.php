@@ -16,7 +16,7 @@ class RegisterController extends Controller
     {
         // If the invite system is enabled
         if (config('general.invite') == true) {
-            redirect('/invite');
+            redirect(url('invite'));
         }
 
         $m = [
@@ -43,13 +43,6 @@ class RegisterController extends Controller
         $data    = Request::getPost();
         $inv_uid = RulesRegistration::rules($data, $reg_ip, $inv_user_id);
 
-        // For "launch mode", the first 50 members get trust_level = 2
-        // Для "режима запуска" первые 50 участников получают trust_level = 2 
-        $tl = UserData::USER_FIRST_LEVEL;
-        if (UserModel::getUsersAllCount() < 50 && config('general.mode') == true) {
-            $tl = UserData::USER_SECOND_LEVEL;
-        }
-
         $active_uid = UserModel::create(
             [
                 'login'                => $data['login'],
@@ -59,9 +52,9 @@ class RegisterController extends Controller
                 'whisper'              => '',
                 'password'             => password_hash($data['password'], PASSWORD_BCRYPT),
                 'limiting_mode'        => 0, // режим заморозки выключен
-                'activated'            => $inv_uid > 0 ? 1 : 0, // если инвайта нет, то активация
+                'activated'            => self::activated($inv_uid),
                 'reg_ip'               => $reg_ip,
-                'trust_level'          => $tl,
+                'trust_level'          => self::trustLevel(),
                 'invitation_id'        => $inv_uid,
             ]
         );
@@ -69,16 +62,7 @@ class RegisterController extends Controller
         if ($inv_uid > 0) {
             // If registration by invite, activate the email
             // Если регистрация по инвайту, активируем емайл
-            InvitationModel::activate(
-                [
-                    'uid'               => $inv_uid,
-                    'active_status'     => 1,
-                    'active_ip'         => $reg_ip,
-                    'active_time'       => date('Y-m-d H:i:s'),
-                    'active_uid'        => $active_uid,
-                    'invitation_code'   => $data['invitation_code'],
-                ]
-            );
+            InvitationModel::activate($inv_uid, $active_uid, $data['invitation_code'] ?? null);
 
             is_return(__('msg.change_saved'), 'success', url('login'));
         }
@@ -91,6 +75,15 @@ class RegisterController extends Controller
                 'email_code'    => $email_code,
             ]
         );
+
+        if (config('general.mail_check') === false) {
+
+            InvitationModel::activate($inv_uid, $active_uid, $data['invitation_code'] ?? null);
+
+            (new \App\Controllers\Auth\SessionController())->set($active_uid);
+
+            redirect('/');
+        }
 
         // Sending email
         SendEmail::mailText($active_uid, 'activate.email', ['link' => url('activate.code', ['code' => $email_code])]);
@@ -119,5 +112,28 @@ class RegisterController extends Controller
                 ]
             ]
         );
+    }
+
+    public static function trustLevel()
+    {
+        // For "launch mode", the first 50 members get trust_level = 2
+        // Для "режима запуска" первые 50 участников получают trust_level = 2 
+        $trust_level = UserData::USER_FIRST_LEVEL;
+        if (UserModel::getUsersAllCount() < 50 && config('general.mode') == true) {
+            $trust_level = UserData::USER_SECOND_LEVEL;
+        }
+
+        return $trust_level;
+    }
+
+    public static function activated($inv_uid)
+    {
+        // If there is no invite, then activation
+        // Если инвайта нет, то активация
+        $activ = $inv_uid > 0 ? 1 : 0;
+
+        // If email verification is disabled at all
+        // Если проверка email вообще выключена
+        return (config('general.mail_check') === true) ? $activ : 1;
     }
 }
