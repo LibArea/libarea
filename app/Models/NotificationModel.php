@@ -106,9 +106,19 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $params);
     }
 
-    // Оповещение просмотрено
+    // Notification viewed (change flag)
+    // Оповещение просмотрено (меняем флаг)
     public static function updateMessagesUnread($notif_id)
     {
+        $info = self::getNotification($notif_id);
+
+        if ($info['action_type'] == self::TYPE_PRIVATE_MESSAGES) {
+
+            $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :user_id AND action_type = :type AND sender_id = :sender_id";
+
+            return DB::run($sql, ['user_id' => UserData::getUserId(), 'type' => self::TYPE_PRIVATE_MESSAGES, 'sender_id' => $info['sender_id']]);
+        }
+
         $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :user_id AND id = :notif_id";
 
         return DB::run($sql, ['user_id' => UserData::getUserId(), 'notif_id' => $notif_id]);
