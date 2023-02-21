@@ -16,6 +16,7 @@ return [
     'being_developed'   => 'Being developed',
     'pages'             => 'Pages',
     'advertising'       => 'Advertising',
+    'catalog'           => 'Catalog',
     'facets'            => 'Facets',
     'users'             => 'Members',
     'time'              => 'Time',

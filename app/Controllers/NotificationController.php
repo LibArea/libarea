@@ -67,8 +67,6 @@ class NotificationController extends Controller
                 }
             }
 
-            // Admin notification
-            // Оповещение админу
             NotificationModel::send($recipient_id, $action_type, $url);
 
             SendEmail::mailText($recipient_id, 'appealed');

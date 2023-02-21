@@ -9,7 +9,7 @@ foreach ($data['settings'] as $val)
 <div>
   <form class="max-w780" action="<?= url('admin.setting.change'); ?>" method="post">
     <?= csrf_field() ?>
-      <h2><?= __('admin.feed'); ?></h2>
+      <h2><?= __('admin.advertising'); ?></h2>
       <fieldset>
         <label for="ads_home_post"><?= __('admin.ads_home_post'); ?></label>
         <textarea type="ads_home_post" rows="3" name="ads_home_post"><?= $settings['ads_home_post']; ?></textarea>

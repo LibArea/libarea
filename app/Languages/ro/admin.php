@@ -16,6 +16,7 @@ return [
     'being_developed'   => 'In dezvoltare',
     'pages'             => 'Pagini',
     'advertising'       => 'Publicitate',
+    'catalog'           => 'Catalog',
     'facets'            => 'Fațete',
     'users'             => 'Membrii',
     'time'              => 'Timp',

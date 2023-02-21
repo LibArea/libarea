@@ -16,6 +16,7 @@ return [
     'being_developed'   => '正在开发中',
     'pages'             => '页面',
     'advertising'       => '廣告',
+    'catalog'           => '卡塔洛格',
     'facets'            => '部分',
     'users'             => '用户',
     'time'              => '时间',

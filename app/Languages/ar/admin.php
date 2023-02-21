@@ -16,6 +16,7 @@ return [
     'being_developed'   => 'قيد التطوير',
     'pages'             => 'صفحات',
     'advertising'       => 'أعلانات',
+    'catalog'           => 'فهرس',
     'facets'            => 'جوانب',
     'users'             => 'الاعضاء',
     'time'              => 'الوقت',
