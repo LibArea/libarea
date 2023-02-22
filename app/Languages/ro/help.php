@@ -32,4 +32,5 @@ return [
     'edit_section'          => 'Aceasta este editarea navigației pentru paginile de servicii (documentație). Ia in serios.',
 
     'team_info'             => 'Puteți partaja blogul dvs. cu alți utilizatori, acordându-le acces.',
+    'draft_info'            => 'Doar autorul poate citi schițele.',
 ];

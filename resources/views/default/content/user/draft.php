@@ -21,6 +21,6 @@
 </main>
 <aside>
   <div class="box bg-beige sticky top-sm">
-    <?= __('app.being_developed'); ?>
+    <?= __('help.draft_info'); ?>
   </div>
 </aside>
