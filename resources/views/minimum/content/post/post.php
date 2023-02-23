@@ -7,13 +7,13 @@
         <?= insert('/_block/no-login-screensaver'); ?>
       <?php endif; ?>
       <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
-      <li class="list-post br-top-zebra article_<?= $post['post_id']; ?>">
-        <div class="w40 no-flex center">
+      <li class="list-post article_<?= $post['post_id']; ?>">
+        <div class="w40 mt3 no-flex center">
           <?= Html::votes($post, 'post', 'arrow-up'); ?>
         </div>
         <div>
           <div>
-            <a class="text-xl" href="<?= $post_url; ?>">
+            <a class="text-lg" href="<?= $post_url; ?>">
               <?= $post['post_title']; ?>
               <?= insert('/content/post/post-title', ['post' => $post]); ?>
             </a>
@@ -21,7 +21,7 @@
             <?= Html::facets($post['facet_list'], 'topic', 'tag-yellow'); ?>
           </div>
           <div class="flex text-sm gap mt3">
-            <a class="items-center gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
+            <a class="flex items-center gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
               <?= Img::avatar($post['avatar'], $post['login'], 'img-sm-min', 'small'); ?>
               <?= $post['login']; ?>
             </a>

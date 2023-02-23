@@ -49,7 +49,8 @@ textarea:focus { border: 1px solid #9ccdf8; }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  font-size: 0.875rem;
 }
 
 ::placeholder { color: #919191; }
