@@ -37,6 +37,10 @@ fieldset.rememberme label {
   color: var(--gray);
 }
 
+fieldset.error input {
+  border-color: var(--red);
+}
+
 .help {
   font-size: 0.875rem;
   color: var(--gray-600);
