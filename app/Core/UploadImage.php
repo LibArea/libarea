@@ -44,10 +44,10 @@ class UploadImage
             $image = new SimpleImage();
 
             $image->load($file);
-            $image->resizeAllInCenter(160, 160, "#ffffff");
+            $image->resizeInCenter(160, 160, "#ffffff");
             $image->save($path_img . $filename . '.webp', "webp");
 
-            $image->resizeAllInCenter(48, 48, "#ffffff");
+            $image->resizeInCenter(48, 48, "#ffffff");
             $image->save($path_img_small . $filename . '.webp', "webp");
 
             $new_img    = $filename . '.webp';

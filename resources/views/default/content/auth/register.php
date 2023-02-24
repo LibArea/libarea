@@ -128,24 +128,6 @@
     error.textContent = '';
   }
 
-  form.addEventListener('submit', function(e) {
-
-    e.preventDefault();
-
-    let isUsernameValid = checkNickname(),
-      isEmailValid = checkEmail(),
-      isPasswordValid = checkPassword(),
-      isConfirmPasswordValid = checkConfirmPassword();
-
-    let isFormValid = isUsernameValid &&
-      isEmailValid &&
-      isPasswordValid &&
-      isConfirmPasswordValid;
-
-    // если надо отправить, если форма действительна
-    if (isFormValid) {}
-  });
-
   const debounce = (fn, delay = 500) => {
     let timeoutId;
     return (...args) => {
