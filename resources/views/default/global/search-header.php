@@ -22,6 +22,7 @@ $q = $data['q'];
         <div class="box-search ml20">
           <form method="get" action="<?= url('search.go'); ?>">
             <input type="text" name="q" value="<?= $q; ?>" placeholder="<?= __('search.find'); ?>" class="search">
+            <input name="cat" value="<?= $uri; ?>" type="hidden">
             <?= csrf_field() ?>
           </form>
           <div class="search-box none" id="search_items"></div>
