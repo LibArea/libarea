@@ -6,9 +6,7 @@
           <li class="tab-button active" data-id="post"><?= __('app.post'); ?></li>
         <?php endif; ?>
 
-        <?php if (UserData::getUserTl() >= config('trust-levels.tl_add_comm_qa')) : ?>
-          <li class="tab-button<?php if (config('general.qa_site_format') == true) : ?> active<?php endif; ?>" data-id="qa"><?= __('app.qa'); ?></li>
-        <?php endif; ?>
+        <li class="tab-button<?php if (config('general.qa_site_format') == true) : ?> active<?php endif; ?>" data-id="qa"><?= __('app.qa'); ?></li>
 
         <?php if (UserData::getUserTl() >= config('trust-levels.tl_add_url')) : ?>
           <li class="tab-button" data-id="url">URL</li>
