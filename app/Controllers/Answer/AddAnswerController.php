@@ -7,6 +7,7 @@ use App\Controllers\Controller;
 use App\Services\Сheck\PostPresence;
 use App\Models\{NotificationModel, ActionModel, AnswerModel, PostModel};
 use App\Validate\Validator;
+use UserData;
 
 class AddAnswerController extends Controller
 {
@@ -21,7 +22,9 @@ class AddAnswerController extends Controller
         // Let's check the stop words, url
         // Проверим стоп слова и url
         $trigger = (new \App\Services\Audit())->prohibitedContent($content);
-
+        
+        $this->union($post, $url_post, $content);
+ 
         $last_id = AnswerModel::add($post['post_id'], $content, $trigger);
 
         // Add an audit entry and an alert to the admin
@@ -45,6 +48,31 @@ class AddAnswerController extends Controller
 
         redirect($url);
     }
+
+    public function union($post, $url_post, $content)
+    {
+        if (config('publication.merge_answer_post') == false) {
+            return true;
+        }
+
+        // Staff can write a response under their post
+        // Персонал может писать ответ под своим постом
+        if (UserData::checkAdmin()) {
+            return true;
+        }
+
+        // If there are no replies to the post and the author of the post = the author of the answer, then add the answer to the end of the post
+        // Если ответов на пост нет и автор поста = автора ответа, то дописываем ответ в конец поста
+        if ((AnswerModel::getNumberAnswers($post['post_id']) == null) && ($post['post_user_id'] == $this->user['id'])) {
+            
+            AnswerModel::mergePost($post['post_id'], $content);
+
+            redirect($url_post);
+         }
+
+        return true;
+    }
+
 
     // Notifications when adding a answer
     // Уведомления при добавлении ответа

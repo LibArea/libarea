@@ -104,12 +104,8 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getAnswersCount($sheet)
     {
         $sort = self::sorts($sheet);
-        $sql = "SELECT 
-                    answer_id, 
-                    answer_is_deleted 
-                        FROM answers 
-                            INNER JOIN posts ON answer_post_id = post_id 
-                                $sort";
+
+        $sql = "SELECT answer_id FROM answers INNER JOIN posts ON answer_post_id = post_id $sort";
 
         return DB::run($sql)->rowCount();
     }
@@ -126,6 +122,26 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         return $sort;
+    }
+
+    // Number of replies per post
+    // Количество ответов на пост
+    public static function getNumberAnswers($post_id)
+    {
+        $sql = "SELECT answer_id FROM answers WHERE answer_post_id = :id AND answer_is_deleted = 0";
+
+        return DB::run($sql, ['id' => $post_id])->rowCount();
+    }
+
+    // Add the answer to the end of the post
+    // Добавим ответ в конец поста
+    public static function mergePost($post_id, $content)
+    {
+        $sql = "UPDATE posts SET post_content = CONCAT(post_content, :content) WHERE post_id = :post_id";
+
+        $content = "\n\n `+` " . $content;
+
+        return DB::run($sql, ['post_id' => $post_id, 'content' => $content]); 
     }
 
     // Getting answers in a post

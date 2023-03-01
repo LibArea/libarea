@@ -42,7 +42,6 @@ class RulesFacet extends Validator
 
     public static function rulesEdit($data, $facet)
     {
-        // Хакинг формы (тип фасета)
         // ['topic', 'blog', 'category', 'section']
         if (!in_array($data['facet_type'], config('facets.permitted'))) {
             is_return(__('msg.went_wrong'), 'error');
