@@ -68,7 +68,14 @@
                   </a>
                 </li>
               <?php endif; ?>
-
+              <li>
+                <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>">
+                  <svg class="icons">
+                    <use xlink:href="/assets/svg/icons.svg#anchor"></use>
+                  </svg>
+                  <?= __('app.link'); ?>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
