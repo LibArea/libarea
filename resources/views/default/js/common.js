@@ -1,5 +1,13 @@
+function getById(id) {
+	return document.getElementById(id) || null;
+};
+
+function queryAll(id) {
+	return document.querySelectorAll(id) || null;
+};
+
 function isIdEmpty(elmId) {
-  let elem = document.getElementById(elmId);
+  let elem = getById(elmId);
   if (typeof elem !== 'undefined' && elem !== null) return elem;
   return false;
 }
@@ -35,7 +43,7 @@ if (dHeader) {
 let token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
 // Call the form for adding a comment
-document.querySelectorAll(".add-comment")
+queryAll(".add-comment")
   .forEach(el => el.addEventListener("click", function (e) {
 
     let answer_id = insert_id = el.dataset.answer_id;
@@ -60,7 +68,7 @@ document.querySelectorAll(".add-comment")
       ).then(
         text => {
           comment.innerHTML = text;
-          document.querySelectorAll("#cancel_comment")
+          queryAll("#cancel_comment")
             .forEach(el => el.addEventListener("click", function (e) {
               comment.classList.remove("block");
             }));
@@ -131,14 +139,14 @@ function getCookie(cname) {
 
 // search
 isIdEmpty('find').onclick = function () {
-  document.getElementById('find').addEventListener('keydown', function () {
+  getById('find').addEventListener('keydown', function () {
     fetchSearch();
   });
 }
 
 function fetchSearch() {
-  let query = document.getElementById("find").value;
-  let type = document.getElementById("find").dataset.id;
+  let query = getById("find").value;
+  let type = getById("find").dataset.id;
   if (query.length < 2) return;
   let url = type == 'category' ? '/web/dir/all/' : '/topic/';
 
@@ -175,7 +183,7 @@ function fetchSearch() {
         }
 
         if (!Object.keys(obj).length == 0) {
-          let items = document.getElementById("search_items");
+          let items = getById("search_items");
           items.classList.add("block");
           items.innerHTML = html;
         }
@@ -184,7 +192,7 @@ function fetchSearch() {
         if (menu) {
           document.onclick = function (e) {
             if (event.target.className != '.none.block') {
-              let items = document.getElementById("search_items");
+              let items = getById("search_items");
               items.classList.remove("block");
             };
           };
@@ -194,13 +202,13 @@ function fetchSearch() {
 }
 
 // Show / hide password 
-let showPassword = document.querySelectorAll('.showPassword');
+let showPassword = queryAll('.showPassword');
 showPassword.forEach(item =>
   item.addEventListener('click', toggleType)
 );
 
 function toggleType() {
-  let input = document.getElementById('password');
+  let input = getById('password');
   let icon = this.querySelector('svg');
   if (icon.classList.contains('red-200')) {
     icon.classList.remove('red-200');
@@ -211,7 +219,7 @@ function toggleType() {
   }
 }
 
-document.querySelectorAll(".item_cleek")
+queryAll(".item_cleek")
   .forEach(el => el.addEventListener("click", function (e) {
     let id = el.dataset.id;
     fetch("/cleek", {
@@ -230,7 +238,7 @@ document.querySelectorAll(".item_cleek")
  *	Drop-down menus (user) and lists
  *	Выпадающие меню (user) и списки
  */
-let elm = document.querySelectorAll(".trigger");
+let elm = queryAll(".trigger");
 elm.forEach(function (elm) {
   elm.addEventListener("click", function (e) {
     e.stopPropagation();
@@ -294,8 +302,8 @@ window.addEventListener('click', e => {
 
 const tabs = document.querySelector(".wrapper");
 if (tabs) {
-  const tabButton = document.querySelectorAll(".tab-button");
-  const contents = document.querySelectorAll(".content-tabs");
+  const tabButton = queryAll(".tab-button");
+  const contents = queryAll(".content-tabs");
   const items = document.querySelector(".more_go");
   tabs.onclick = e => {
     const id = e.target.dataset.id;
@@ -337,7 +345,7 @@ if (tabs) {
         content.classList.add("pointer");
       });
 
-      const element = document.getElementById(id);
+      const element = getById(id);
       element.classList.add("active");
       element.classList.remove("pointer");
     }

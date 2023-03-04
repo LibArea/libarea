@@ -2,9 +2,9 @@
 function ekUpload() {
   function Init() {
 
-    let fileSelect = document.getElementById('file-upload'),
-      fileDrag = document.getElementById('file-drag'),
-      submitButton = document.getElementById('submit-button');
+    let fileSelect = getById('file-upload'),
+      fileDrag = getById('file-drag'),
+      submitButton = getById('submit-button');
 
     if (fileSelect) {
       fileSelect.addEventListener('change', fileSelectHandler, false);
@@ -21,7 +21,7 @@ function ekUpload() {
   }
 
   function fileDragHover(e) {
-    let fileDrag = document.getElementById('file-drag');
+    let fileDrag = getById('file-drag');
 
     e.stopPropagation();
     e.preventDefault();
@@ -46,7 +46,7 @@ function ekUpload() {
   // Output
   function output(msg) {
     // Response
-    let m = document.getElementById('messages');
+    let m = getById('messages');
     m.innerHTML = msg;
   }
 
@@ -59,26 +59,26 @@ function ekUpload() {
     let imageName = file.name;
     let isGood = (/\.(?=gif|jpg|png|jpeg)/gi).test(imageName);
     if (isGood) {
-      document.getElementById('start').classList.add("none");
-      document.getElementById('response').classList.remove("none");
-      document.getElementById('notimage').classList.add("none");
+      getById('start').classList.add("none");
+      getById('response').classList.remove("none");
+      getById('notimage').classList.add("none");
       // Thumbnail Preview
-      document.getElementById('file-image').classList.remove("none");
-      document.getElementById('file-image').src = URL.createObjectURL(file);
+      getById('file-image').classList.remove("none");
+      getById('file-image').src = URL.createObjectURL(file);
     }
     else {
-      document.getElementById('file-image').classList.add("none");
-      document.getElementById('notimage').classList.remove("none");
-      document.getElementById('start').classList.remove("none");
-      document.getElementById('response').classList.add("none");
-      document.getElementById("file-upload-form").reset();
+      getById('file-image').classList.add("none");
+      getById('notimage').classList.remove("none");
+      getById('start').classList.remove("none");
+      getById('response').classList.add("none");
+      getById("file-upload-form").reset();
     }
   }
 
   function uploadFile(file) {
     let xhr = new XMLHttpRequest(),
-      fileInput = document.getElementById('class-roster-file'),
-      pBar = document.getElementById('file-progress'),
+      fileInput = getById('class-roster-file'),
+      pBar = getById('file-progress'),
       fileSizeLimit = 2024; // bytes
     if (xhr.upload) {
       if (file.size <= fileSizeLimit * 1024) {
@@ -98,7 +98,7 @@ function ekUpload() {
   if (window.File && window.FileList && window.FileReader) {
     Init();
   } else {
-    document.getElementById('file-drag').style.display = 'none';
+    getById('file-drag').style.display = 'none';
   }
 }
 ekUpload();

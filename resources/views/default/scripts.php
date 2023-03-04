@@ -9,7 +9,7 @@
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    mediumZoom(document.querySelectorAll('.img-preview img'));
+    mediumZoom(queryAll('.img-preview img'));
   });
   <?php if (UserData::checkActiveUser()) : ?>
     const update_time = <?= config('general.notif_update_time'); ?>;
@@ -30,7 +30,7 @@
           return response.json();
         }).then(function(data) {
           if (data != false) {
-            let notif = document.getElementById('notif');
+            let notif = getById('notif');
             let number = notif.querySelector('.number');
 
             notif.firstElementChild.classList.add("active");
@@ -46,7 +46,7 @@
       load_notification();
     }, update_time);
   <?php else : ?>
-    document.querySelectorAll(".click-no-auth")
+    queryAll(".click-no-auth")
       .forEach(el => el.addEventListener("click", function(e) {
         Notice('<?= __('app.need_login'); ?>', 3500, {
           valign: 'bottom',
@@ -59,10 +59,10 @@
 
   <?php if (UserData::getUserScroll()) : ?>
     // Что будет смотреть
-    const coolDiv = document.getElementById("scroll");
+    const coolDiv = getById("scroll");
 
     // Куда будем подгружать
-    const scroll = document.getElementById("scrollArea");
+    const scroll = getById("scrollArea");
 
     // Начальная загрузка (первая страница загружается статически)
     let postPage = 2;

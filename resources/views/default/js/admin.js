@@ -1,10 +1,10 @@
-const ban = document.querySelectorAll('.type-ban'),
-  report = document.querySelectorAll(".report-saw"),
-  favicon = document.querySelectorAll(".add-favicon"),
-  screenshot = document.querySelectorAll(".add-screenshot"),
-  badge = document.querySelectorAll(".remove-badge"),
-  audit = document.querySelectorAll(".audit-status"),
-  update = document.querySelectorAll(".update");
+const ban = queryAll('.type-ban'),
+  report = queryAll(".report-saw"),
+  favicon = queryAll(".add-favicon"),
+  screenshot = queryAll(".add-screenshot"),
+  badge = queryAll(".remove-badge"),
+  audit = queryAll(".audit-status"),
+  update = queryAll(".update");
 
 // Ban / unban: user / word 
 ban.forEach(el => el.addEventListener("click", function (e) {

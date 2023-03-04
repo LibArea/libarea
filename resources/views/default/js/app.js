@@ -1,11 +1,11 @@
-const focusId = document.querySelectorAll('.focus-id'),
-  saveFolder = document.querySelectorAll(".save-folder"),
-  delFolderContent = document.querySelectorAll(".del-folder-content"),
-  delFolder = document.querySelectorAll(".del-folder"),
-  addProfile = document.querySelectorAll(".add-profile"),
-  postRecommend = document.querySelectorAll(".post-recommend"),
-  typeAction = document.querySelectorAll(".type-action"),
-  reply = document.querySelectorAll(".actreply");
+const focusId = queryAll(".focus-id"),
+  saveFolder = queryAll(".save-folder"),
+  delFolderContent = queryAll(".del-folder-content"),
+  delFolder = queryAll(".del-folder"),
+  addProfile = queryAll(".add-profile"),
+  postRecommend = queryAll(".post-recommend"),
+  typeAction = queryAll(".type-action"),
+  reply = queryAll(".actreply");
 
 // Subscribe to a topic / post
 focusId.forEach(el => el.addEventListener("click", function (e) {
@@ -44,8 +44,8 @@ typeAction.forEach(el => el.addEventListener("click", function (e) {
 
 // Profile Cover Color
 isIdEmpty('colorPicker').onclick = function () {
-  let box = document.getElementById("box");
-  let color = document.getElementById("color");
+  let box = getById("box");
+  let color = getById("color");
 
   box.style.borderColor = colorPicker.value;
 
@@ -70,7 +70,7 @@ reply.forEach(el => el.addEventListener("click", function (e) {
     .then(text => {
       reply.classList.add("block");
       reply.innerHTML = text;
-      document.querySelectorAll("#cancel_comment")
+      queryAll("#cancel_comment")
         .forEach(el => el.addEventListener("click", function (e) {
           reply.classList.remove("block");
         }));
@@ -78,7 +78,7 @@ reply.forEach(el => el.addEventListener("click", function (e) {
 }));
 
 // Up
-document.querySelectorAll(".up-id")
+queryAll(".up-id")
   .forEach(el => el.addEventListener("click", function (e) {
     fetch("/votes", {
       method: "POST",
@@ -110,7 +110,7 @@ document.querySelectorAll(".up-id")
   }));
 
 // Add / Remove from favorites
-document.querySelectorAll(".add-favorite")
+queryAll(".add-favorite")
   .forEach(el => el.addEventListener("click", function (e) {
     fetch("/favorite", {
       method: "POST",
@@ -130,7 +130,7 @@ document.querySelectorAll(".add-favorite")
 
 
 // Ignoring members
-document.querySelectorAll(".add-ignore")
+queryAll(".add-ignore")
   .forEach(el => el.addEventListener("click", function (e) {
     fetch("/ignored", {
       method: "POST",
@@ -145,7 +145,7 @@ document.querySelectorAll(".add-ignore")
 
 
 // Choice of Best Answer  
-document.querySelectorAll(".answer-best")
+queryAll(".answer-best")
   .forEach(el => el.addEventListener("click", function (e) {
     fetch("/best", {
       method: "POST",
@@ -161,9 +161,9 @@ document.querySelectorAll(".answer-best")
   }));
 
 // Parsing the title from the site for > TL1
-document.querySelectorAll("#graburl")
+queryAll("#graburl")
   .forEach(el => el.addEventListener("click", function (e) {
-    let uri = document.getElementById('link').value;
+    let uri = getById('link').value;
     if (uri === '') {
       return;
     }
@@ -190,7 +190,7 @@ document.querySelectorAll("#graburl")
   }));
 
 // Edit comment
-document.querySelectorAll(".editcomm")
+queryAll(".editcomm")
   .forEach(el => el.addEventListener("click", function (e) {
     let comment_id = el.dataset.comment_id;
     let comment = document.querySelector('#insert_id_' + el.dataset.comment_id);
@@ -206,11 +206,11 @@ document.querySelectorAll(".editcomm")
         }
       ).then(
         text => {
-          document.getElementById("comment_" + comment_id).classList.add("edit");
+          getById("comment_" + comment_id).classList.add("edit");
           comment.classList.add("block");
           comment.innerHTML = text;
 
-          document.querySelectorAll("#cancel_comment")
+          queryAll("#cancel_comment")
             .forEach(el => el.addEventListener("click", function (e) {
               comment.classList.remove("block");
             }));
@@ -221,8 +221,8 @@ document.querySelectorAll(".editcomm")
 // Add post tab
 const tabs_post = document.querySelector(".tabs-post");
 if (tabs_post) {
-  const tabButton = document.querySelectorAll(".tab-button");
-  const contents = document.querySelectorAll(".content-tabs");
+  const tabButton = queryAll(".tab-button");
+  const contents = queryAll(".content-tabs");
   tabs_post.onclick = e => {
     const id = e.target.dataset.id;
     if (id) {
@@ -235,12 +235,12 @@ if (tabs_post) {
         content.classList.remove("active");
       });
 
-      document.getElementById('inputQa').value = 0;
+      getById('inputQa').value = 0;
       if (id == 'qa') { 
-        document.getElementById('inputQa').value = 1;
+        getById('inputQa').value = 1;
       }
       
-      const element = document.getElementById(id);
+      const element = getById(id);
       element.classList.add("active");
     }
   }

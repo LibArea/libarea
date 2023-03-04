@@ -19,7 +19,7 @@ class Convert extends \ParsedownExtraPlugin
     {
         if (preg_match('/^{video}(.*?){\/video}/', $excerpt['text'], $matches)) {
             return [
-                'extent' => 80,
+                'extent' => 120,
                 'element' => [
                     'name' => 'video',
                     'text' => 'Your browser does not support the video tag.',
@@ -37,7 +37,7 @@ class Convert extends \ParsedownExtraPlugin
     {
         if (preg_match('/^{red}(.*?){\/red}/', $excerpt['text'], $matches)) {
             return [
-                'extent' => 50,
+                'extent' => 250,
                 'element' => [
                     'name' => 'span',
                     'text' => $matches[1],
