@@ -198,6 +198,11 @@ return [
     
     'published'         => 'منشور في',
 
+    'share_post'        => 'آخر حصة',
+    'share_topic'       => 'موضوع المشاركة',
+    'share_blog'        => 'مشاركة المدونة',
+    'share_website'     => 'مشاركة الموقع',
+
     'being_developed'   => 'تحت التطوير',
     'activity'          => 'النشاط',
     'question'          => 'سؤال',

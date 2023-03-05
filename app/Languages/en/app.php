@@ -198,7 +198,12 @@ return [
     'edit_blog'         => 'Edit blog',
     'edit_page'         => 'Edit page',
     'edit_section'      => 'Edit Section',
-    
+
+    'share_post'        => 'Share Post',
+    'share_topic'       => 'Share Topic',
+    'share_blog'        => 'Share Blog',
+    'share_website'     => 'Share Site',
+
     'published'         => 'Published in',
 
     'being_developed'   => 'Under development',

@@ -118,17 +118,16 @@ class PostController extends Controller
 
     public function stylesHead($content, $blog)
     {
+        Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
+        Request::getResources()->addBottomScript('/assets/js/dialog.js');
+        
         if ($content['post_is_deleted'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
-        Request::getResources()->addBottomStyles('/assets/css/share.css');
-        Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
-
         if ($this->user['id'] > 0 && $content['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
             Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
-            Request::getResources()->addBottomScript('/assets/js/dialog.js');
         }
     }
 

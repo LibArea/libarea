@@ -48,6 +48,12 @@
       </a>
     </div>
 
+    <div data-a11y-dialog-show="id-share">
+      <svg class="icons gray-600">
+        <use xlink:href="/assets/svg/icons.svg#share"></use>
+      </svg>
+    </div>
+
     <div>
       <a class="gray-600" href="/rss-feed/topic/<?= $topic['facet_slug']; ?>">
         <svg class="icons">
@@ -95,3 +101,5 @@
     </svg>
   </div>
 </div>
+
+<?= insert('/_block/share', ['title' => __('app.share_topic'), 'url' => config('meta.url') . url('topic', ['slug' => $topic['facet_slug']])]); ?>

@@ -121,6 +121,13 @@ $blog = $data['blog'][0] ?? null;
               + <?= __('app.read'); ?>
             </a>
           <?php endif; ?>
+
+          <div data-a11y-dialog-show="id-share">
+            <svg class="icons gray-600">
+              <use xlink:href="/assets/svg/icons.svg#share"></use>
+            </svg>
+          </div>
+          
           <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'text-2xl ml5'); ?>
         </div>
       </div>
@@ -210,9 +217,7 @@ $blog = $data['blog'][0] ?? null;
       <img class="w-100 br-rd5" src="<?= Img::PATH['posts_cover'] . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php endif; ?>
-  <div class="box">
-    <?= insert('/share'); ?>
-  </div>
+
   <?php if ($data['recommend']) : ?>
     <div class="box sticky top-sm">
       <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
@@ -269,3 +274,4 @@ $blog = $data['blog'][0] ?? null;
   });
 </script>
 <?= insert('/_block/js-msg-flag'); ?>
+<?= insert('/_block/share', ['title' => __('app.share_post'), 'url' => config('meta.url') . post_slug($post['post_id'], $post['post_slug'])]); ?>

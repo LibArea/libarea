@@ -44,7 +44,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 2;
+  z-index: 6;
 }
 
 .dialog-container[aria-hidden='true'] {
@@ -64,7 +64,7 @@
 .dialog-content {
   background-color: rgb(255, 255, 255);
   margin: auto;
-  z-index: 2;
+  z-index: 6;
   position: relative;
   animation: fade-in 400ms 200ms both, slide-up 400ms 200ms both;
   padding: 1em;
@@ -86,18 +86,13 @@
   border: 0;
   padding: 0;
   background-color: transparent;
-  font-weight: bold;
-  font-size: 1.25em;
-  width: 1.2em;
-  height: 1.2em;
+  font-size: 2em;
   text-align: center;
   cursor: pointer;
   transition: 0.15s;
+  color: var(--gray-600);
 }
 
 @media screen and (min-width: 700px) {
-  .dialog-close {
-    top: 1em;
-    right: 1em;
-  }
+  .dialog-close { top: 5px; }
 }

@@ -4,5 +4,5 @@
     <?= config('meta.name'); ?> &copy; <?= date('Y'); ?> — <?= __('admin.home'); ?>
   </div>
 </footer>
-<script src="/assets/js/admin.js"></script>
 <?= insert('/scripts'); ?>
+<script src="/assets/js/admin.js"></script>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Meta;
 
+use Hleb\Constructor\Handlers\Request;
 use Meta, Img;
 
 class Facet
@@ -52,6 +53,9 @@ class Facet
             'imgurl'    => Img::PATH['facets_logo'] . $facet['facet_img'],
             'url'       =>  $url,
         ];
+
+        Request::getResources()->addBottomScript('/assets/js/dialog.js');
+        Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
 
         return Meta::get($title, $description, $meta);
     }

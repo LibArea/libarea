@@ -33,6 +33,13 @@
           </div>
           <div class="tems-center flex gap mt15">
             <?= Html::votes($item, 'item'); ?>
+            
+            <div data-a11y-dialog-show="id-share">
+              <svg class="icons gray-600">
+                <use xlink:href="/assets/svg/icons.svg#share"></use>
+              </svg>
+            </div>
+            
             <?= Html::favorite($item['item_id'], 'website', $item['tid']); ?>
           </div>  
         </div>
@@ -117,3 +124,5 @@
     </div>
   </aside>
 </div>
+
+<?= insert('/_block/share', ['title' => __('app.share_website'), 'url' => config('meta.url') . url('website', ['slug' => $link['item_domain']])]); ?>

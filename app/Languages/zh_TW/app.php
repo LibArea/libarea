@@ -200,6 +200,11 @@ return [
     'edit_page'         => '编辑页面',
     'edit_section'      => '编辑部分',
 
+    'share_post'        => '分享帖子',
+    'share_topic'       => '分享话题',
+    'share_blog'        => '分享博客',
+    'share_website'     => '分享网站',
+
     'published'         => '發表於',
 
     'being_developed'   => '正在开发中',

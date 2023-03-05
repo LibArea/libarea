@@ -199,6 +199,11 @@ return [
     'edit_page'         => 'Editați pagina',
     'edit_section'      => 'Editează secțiunea',
 
+    'share_post'        => 'Distribuie postarea',
+    'share_topic'       => 'ПPartajați tema',
+    'share_blog'        => 'Distribuie blog',
+    'share_website'     => 'Partajați site-ul',
+
     'published'         => 'Publicat în',
 
     'being_developed'   => 'In dezvoltare',
