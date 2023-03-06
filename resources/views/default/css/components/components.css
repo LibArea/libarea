@@ -397,7 +397,7 @@ article iframe {
   color: #fff;
   height: 28px;
   width: 28px;
-  background-size: 48px 48px;
+  margin: 3px;
 }
  
 .bg-vk { background-color: #07f; }

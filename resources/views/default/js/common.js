@@ -1,9 +1,9 @@
 function getById(id) {
-	return document.getElementById(id) || null;
+	return document.getElementById(id);
 };
 
 function queryAll(id) {
-	return document.querySelectorAll(id) || null;
+	return document.querySelectorAll(id);
 };
 
 function isIdEmpty(elmId) {

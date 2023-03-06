@@ -1,4 +1,4 @@
-function getById(id){return document.getElementById(id)||null};function queryAll(id){return document.querySelectorAll(id)||null};function isIdEmpty(elmId){let elem=getById(elmId);if(typeof elem!=='undefined'&&elem!==null)return elem;return!1}
+function getById(id){return document.getElementById(id)};function queryAll(id){return document.querySelectorAll(id)};function isIdEmpty(elmId){let elem=getById(elmId);if(typeof elem!=='undefined'&&elem!==null)return elem;return!1}
 function makeRequest(url,options={}){return fetch(url,{...options,method:"POST",headers:{'Content-Type':'application/x-www-form-urlencoded'}}).then((response)=>{location.reload()})}
 let scrolled;let dHeader=document.querySelector(".d-header");if(dHeader){window.onscroll=function(){scrolled=window.pageYOffset||document.documentElement.scrollTop;if(scrolled>70){document.querySelector(".d-header").classList.add('show')}
 if(70>scrolled){document.querySelector(".d-header").classList.remove('show')}}}
