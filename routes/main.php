@@ -142,6 +142,8 @@ Route::get('/sitemap.xml')->controller('RssController');
 Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 
+Route::get('/search/opensearch')->controller('SearchController@openSearch')->name('opensearch');
+
 // Route::bottleneck('/attention', true, "TECHNICAL WORKS ON THE SERVER");
 
 require 'admin.php';

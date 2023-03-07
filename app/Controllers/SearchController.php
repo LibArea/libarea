@@ -20,6 +20,11 @@ class SearchController extends Controller
         );
     }
 
+    public function openSearch()
+    {
+        return includeCachedTemplate('/default/content/search/open-search');
+    }
+
     public function go()
     {
         $q      = Request::getGet('q');
