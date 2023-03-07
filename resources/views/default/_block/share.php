@@ -7,7 +7,14 @@
 
     <h2 class="uppercase-box"><?= $title; ?></h2>
 
-    <input class="w-100 mb10" value="<?= $url; ?>"> <br>
+    <fieldset class="flex items-center gap">
+      <input class="w-100" id="inputText" value="<?= $url; ?>">    
+      <button class="btn btn-primary" id="copyText">
+        <svg class="icons">
+          <use xlink:href="/assets/svg/icons.svg#copy"></use>
+        </svg>
+      </button>
+    </fieldset>
 
     <div class="flex gap">
 
@@ -47,7 +54,14 @@
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    let dialogEl = document.getElementById('id-share')
-    let dialog = new A11yDialog(dialogEl)
+    let dialogEl = document.getElementById('id-share');
+    let dialog = new A11yDialog(dialogEl);
+    
+    let text = document.getElementById("inputText");
+    let btn = document.getElementById("copyText");
+    btn.onclick = function() {
+      text.select();    
+      document.execCommand("copy");
+    }
   });
 </script>
