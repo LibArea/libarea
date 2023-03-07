@@ -54,7 +54,7 @@ class Facet
             'url'       =>  $url,
         ];
 
-        Request::getResources()->addBottomScript('/assets/js/dialog.js');
+        Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
         Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
 
         return Meta::get($title, $description, $meta);

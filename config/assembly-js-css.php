@@ -28,6 +28,7 @@ return [
     'path_js' => [
         // Base path to js files
         // Базовый путь к js файлам
+        'la'            => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/',
         'common'        => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/', 
         'admin'         => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/', 
         'medium-zoom'   => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/',

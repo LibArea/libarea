@@ -119,7 +119,7 @@ class PostController extends Controller
     public function stylesHead($content, $blog)
     {
         Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
-        Request::getResources()->addBottomScript('/assets/js/dialog.js');
+        Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
         
         if ($content['post_is_deleted'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');

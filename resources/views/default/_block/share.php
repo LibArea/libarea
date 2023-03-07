@@ -54,11 +54,11 @@
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    let dialogEl = document.getElementById('id-share');
+    let dialogEl = getById('id-share');
     let dialog = new A11yDialog(dialogEl);
     
-    let text = document.getElementById("inputText");
-    let btn = document.getElementById("copyText");
+    let text = getById("inputText");
+    let btn = getById("copyText");
     btn.onclick = function() {
       text.select();    
       document.execCommand("copy");

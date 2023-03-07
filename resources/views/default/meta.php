@@ -16,4 +16,5 @@
   <?php if ($lang == 'ar') : ?>
     <link rel="stylesheet" href="/assets/css/rtl.css" type="text/css">
   <?php endif; ?>
+  <script src="/assets/js/la.js"></script>
 </head>

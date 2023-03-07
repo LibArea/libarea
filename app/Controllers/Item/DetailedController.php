@@ -60,7 +60,7 @@ class DetailedController extends Controller
         $this->getDataModified($item['item_modified']);
 
         Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
-        Request::getResources()->addBottomScript('/assets/js/dialog.js');
+        Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
 
         return $this->render(
             '/item/website',
