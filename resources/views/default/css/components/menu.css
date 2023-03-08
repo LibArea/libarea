@@ -56,7 +56,7 @@
   font-size: 0.975rem;
 }
 
-.user-nav li a { margin-left: 56px; }
+.user-nav li a { margin-left: 10px; }
 .user-box-nav li:hover > a { color: #222; }
 /* end */
 

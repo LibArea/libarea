@@ -247,4 +247,9 @@ class UserData
     {
         return self::$myAccount['scroll'] ?? false;
     }
+    
+    static public function getUserBlog()
+    {
+        return MiddlewareModel::getBlog(self::getUserId());
+    }
 }

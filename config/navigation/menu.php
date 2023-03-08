@@ -67,28 +67,34 @@ return [
     'user' => [
         [
             'url'   => url('setting'),
+            'icon'  => 'settings',
             'title' => __('app.settings'),
             'id'    => '',
         ], [
             'tl'    => config('trust-levels.tl_add_draft'),
+            'icon'  => 'post',
             'url'   => url('drafts'),
             'title' => __('app.drafts'),
             'id'    => '',
         ], [
             'url'   => url('notifications'),
+            'icon'  => 'bell',
             'title' => __('app.notifications'),
             'id'    => '',
         ], [
             'tl'    => config('trust-levels.tl_add_pm'),
+            'icon'  => 'mail',
             'url'   => url('messages'),
             'title' => __('app.messages'),
             'id'    => '',
         ], [
             'url'   => url('favorites'),
+            'icon'  => 'bookmark',
             'title' => __('app.favorites'),
             'id'    => '',
         ], [
             'tl'    => 2,
+            'icon'  => 'link',
             'url'   => url('invitations'),
             'title' => __('app.invites'),
             'id'    => '',
@@ -96,11 +102,13 @@ return [
             'hr'    => 'hr',
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,
+            'icon'  => 'users',
             'url'   => url('admin'),
             'title' => __('app.admin'),
             'id'    => '',
         ], [
             'url'   => url('logout'),
+            'icon'  => 'corner-down-right',
             'title' => __('app.sign_out'),
             'id'    => '',
         ],

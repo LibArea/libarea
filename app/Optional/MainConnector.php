@@ -21,7 +21,7 @@ class MainConnector implements Connector
             "App\Middleware\After\*"        => "app/Middleware/After/",
             "Modules\*"                     => "modules/",
             "App\Commands\*"                => "app/Commands/",
-            "App\Exception\*"               => "app/Core/",
+            "App\Exception\*"               => "app/Exception/",
 
             // ... or, if a specific class is added,
             // "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
