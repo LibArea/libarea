@@ -331,6 +331,8 @@ article iframe {
   max-height: 320px;
 }
 
+video {  max-width: 560px; }
+
 .box-answer {
   line-height: 1.3;
   padding: 5px;
