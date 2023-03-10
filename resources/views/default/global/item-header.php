@@ -2,7 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request; ?>
 
-<?php Request::getHead()->addStyles('/assets/css/style.css?11'); ?>
+<?php Request::getHead()->addStyles('/assets/css/style.css?' . config('assembly-js-css.version')); ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 

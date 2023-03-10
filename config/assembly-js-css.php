@@ -6,6 +6,9 @@
 
 return [
 
+    // To force an update
+    'version'     => 12,
+
     // Path to svg sprite
     // Путь к спрайту svg
     'svg_path'     => HLEB_PUBLIC_DIR . '/assets/svg/icons.svg',

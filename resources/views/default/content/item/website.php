@@ -125,4 +125,4 @@
   </aside>
 </div>
 
-<?= insert('/_block/share', ['title' => __('app.share_website'), 'url' => config('meta.url') . url('website', ['slug' => $link['item_domain']])]); ?>
+<?= insert('/_block/share', ['title' => __('app.share_website'), 'url' => config('meta.url') . url('website', ['slug' => $item['item_domain']])]); ?>

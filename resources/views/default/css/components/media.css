@@ -77,7 +77,8 @@ main { width: calc(100% - 590px); }
   #contentWrapper { display: block; }
 
   .mb-w-100,
-  iframe { width: 100%; }
+  iframe,
+  video  { width: 100%; }
 
   .box { padding: 1rem; }
 

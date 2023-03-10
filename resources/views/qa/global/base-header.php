@@ -2,8 +2,8 @@
 
 use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?11');
-Request::getHead()->addStyles('/assets/css/qa.css?11');
+Request::getHead()->addStyles('/assets/css/style.css?' . config('assembly-js-css.version'));
+Request::getHead()->addStyles('/assets/css/qa.css?' . config('assembly-js-css.version'));
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
