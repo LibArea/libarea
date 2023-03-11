@@ -204,6 +204,8 @@ return [
     'share_blog'        => 'Share Blog',
     'share_website'     => 'Share Site',
 
+    'my_blog'           => 'My blog',
+
     'published'         => 'Published in',
 
     'being_developed'   => 'Under development',

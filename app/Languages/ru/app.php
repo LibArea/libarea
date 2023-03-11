@@ -204,6 +204,8 @@ return [
     'share_blog'        => 'Поделиться Блогом',
     'share_website'     => 'Поделиться Сайтом',
 
+    'my_blog'           => 'Мой блог',
+
     'published'         => 'Опубликовано в',
 
     'being_developed'   => 'В стадии разработки',

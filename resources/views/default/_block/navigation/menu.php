@@ -7,11 +7,13 @@ foreach ($list as $key => $item) :
   <?php else : ?>
     <?php if (UserData::getRegType($tl)) :
       $css = empty($item['css']) ? false : $item['css'];
-      $isActive = $item['id'] == $type ? 'active' : false; 
+      $isActive = $item['id'] == $type ? 'active' : false;
       $class = ($css || $isActive) ? ' class="' . $isActive . ' ' .  $css . '"'   : ''; ?>
       <li<?= $class; ?>><a href="<?= $item['url']; ?>">
-          <?php if (!empty($item['icon'])) : ?><svg class="icons"><use xlink:href="/assets/svg/icons.svg#<?= $item['icon']; ?>"></use></svg><?php endif; ?>
+          <?php if (!empty($item['icon'])) : ?><svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#<?= $item['icon']; ?>"></use>
+            </svg><?php endif; ?>
           <?= $item['title']; ?></a></li>
+      <?php endif; ?>
     <?php endif; ?>
-  <?php endif; ?>
-<?php endforeach; ?>
+  <?php endforeach; ?>

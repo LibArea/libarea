@@ -205,6 +205,8 @@ return [
     'share_blog'        => '分享博客',
     'share_website'     => '分享网站',
 
+    'my_blog'           => '我的博客',
+
     'published'         => '發表於',
 
     'being_developed'   => '正在开发中',

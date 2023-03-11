@@ -196,12 +196,14 @@ return [
     'edit_page'         => 'تعديل الصفحة',
     'edit_section'      => 'تعديل القسم',
     
-    'published'         => 'منشور في',
-
     'share_post'        => 'آخر حصة',
     'share_topic'       => 'موضوع المشاركة',
     'share_blog'        => 'مشاركة المدونة',
     'share_website'     => 'مشاركة الموقع',
+
+    'my_blog'           => 'مدونتي',
+
+    'published'         => 'منشور في',
 
     'being_developed'   => 'تحت التطوير',
     'activity'          => 'النشاط',

@@ -204,6 +204,8 @@ return [
     'share_blog'        => 'Distribuie blog',
     'share_website'     => 'Partajați site-ul',
 
+    'my_blog'           => 'Blogul meu',
+
     'published'         => 'Publicat în',
 
     'being_developed'   => 'In dezvoltare',

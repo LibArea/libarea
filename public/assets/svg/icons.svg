@@ -123,6 +123,9 @@
   <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="corner-down-right">
     <polyline points="15 10 20 15 15 20"></polyline><path d="M4 4v7a4 4 0 0 0 4 4h12"></path>
   </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </symbol>
   <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="git-merge">
     <circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M6 21V9a9 9 0 0 0 9 9"></path>
   </symbol>
