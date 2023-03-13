@@ -22,27 +22,32 @@ class AddPostController extends Controller
 
     // Form adding a post / page
     // Форма добавление поста / страницы
-    public function index($type)
+    public function index()
     {
-        // Adding from page topic 
-        // Добавление со странице темы
-        $topic_id   = Request::getInt('topic_id');
-        if ($topic_id) {
-            $topic  = FacetPresence::index($topic_id, 'id', 'topic');
+        // Adding from page topic / blog
+        // Добавление со странице темы / блога
+        $facet_id   = Request::getInt('facet_id');
+        
+        if ($facet_id) {
+             $facet  =  FacetPresence::all($facet_id);
+             
+             if ($facet['facet_type'] == 'topic') {
+                 $topic  = FacetPresence::index($facet_id, 'id', 'topic');
+             } elseif ($facet['facet_type'] == 'blog' && $facet['facet_user_id'] == $this->user['id']) {
+                 $blog  = FacetPresence::index($facet_id, 'id', 'blog');
+             }   
         }
-
-        $blog = FacetModel::getFacetsUser('blog');
-        $facets = FacetModel::getTeamFacets('blog');
 
         return $this->render(
             '/post/add',
             [
-                'meta'      => Meta::get(__('app.add_' . $type)),
+                'meta'      => Meta::get(__('app.add_post')),
                 'data'  => [
-                    'facets'    => ['topic' => $topic ?? false],
-                    'blog'      => array_merge($facets, $blog),
-                    'post_arr'  => PostModel::postRelatedAll(),
-                    'type'      => 'add',
+                    'topic'         => $topic ?? false,
+                    'blog'          => $blog ?? false,
+                    'showing-blog'  => array_merge(FacetModel::getTeamFacets('blog'), FacetModel::getFacetsUser('blog')),
+                    'post_arr'      => PostModel::postRelatedAll(),
+                    'type'          => 'add',
                 ]
             ]
         );

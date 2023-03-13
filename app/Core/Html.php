@@ -37,13 +37,11 @@ class Html
     }
 
     // Blog, topic or category
-    public static function addPost($facet)
+    public static function addPost($facet_id)
     {
         $url_add = url('content.add', ['type' => 'post']);
-        if (!empty($facet)) {
-            if ($facet['facet_user_id'] == UserData::getUserId() || $facet['facet_type'] == 'topic') {
-                $url_add = $url_add . '/' . $facet['facet_id'];
-            }
+        if (!empty($facet_id)) {
+            $url_add = $url_add . '/' . $facet_id;
         }
 
         return '<a title="' . __('app.add_post') . '" href="' . $url_add . '" class="sky"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg></a>';

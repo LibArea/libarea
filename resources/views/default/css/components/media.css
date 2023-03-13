@@ -59,6 +59,7 @@ main { width: calc(100% - 590px); }
   .mb-w150 { width: 150px; }
   .mb-p10 { padding: 10px; }
   .mb-mt5 { margin-top: 5px; }
+  .mb-mt25 { margin-top: 25px; }
   .mb-ml10 { margin-left: 10px; }
   .mb-text-xl { font-size: 1.25rem; }
   .logo { font-size: 18px; }
@@ -66,8 +67,8 @@ main { width: calc(100% - 590px); }
   footer ul { padding-left: 0; }
 
   .mb-img-2xl {
-    height: 80px;
-    width: 80px;
+    height: 65px;
+    width: 65px;
   }
   
   .box-cover-img { height: 75px; }

@@ -45,9 +45,9 @@
         tagify.addTags(JSON.parse('<?= json_encode($data['blog_arr']) ?>'))
       <?php } ?>
     <?php } else { ?>
-      <?php if (!empty($data['facets']['blog'])) {  ?>
-        <?php $id = $data['facets']['blog']['facet_id'];
-        $title = $data['facets']['blog']['facet_title'];
+      <?php if (!empty($blog)) {  ?>
+        <?php $id = $blog['facet_id'];
+        $title = $blog['facet_title'];
         ?>
         tagify.addTags([{
           id: '<?= $id; ?>',

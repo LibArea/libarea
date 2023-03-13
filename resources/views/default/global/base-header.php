@@ -2,6 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 Request::getHead()->addStyles('/assets/css/style.css?' . config('assembly-js-css.version'));
+
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;
 $post   = $data['post'] ?? false;
@@ -16,7 +17,7 @@ if (in_array($type, ['profile', 'user.blog', 'recover'])) {
 <?= insert('/meta', ['meta' => $meta]); ?>
 
 <body class="general<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if (Request::getCookie('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
-  <header class="d-header<?php if ($post || $facet) : ?> choices<?php endif; ?>">
+  <header class="d-header<?php if ($post || $facet) : ?> scroll-hide-search<?php endif; ?>">
 
     <div class="wrap">
       <div class="d-header_contents">
@@ -26,11 +27,11 @@ if (in_array($type, ['profile', 'user.blog', 'recover'])) {
             <div id="togglemenu" class="pointer"><svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#menu"></use>
               </svg></div>
-          <?php endif; ?>
 
-          <div class="menu__button none"><svg class="icons">
-              <use xlink:href="/assets/svg/icons.svg#menu"></use>
-            </svg></div>
+            <div class="menu__button none"><svg class="icons">
+               <use xlink:href="/assets/svg/icons.svg#menu"></use>
+             </svg></div>
+          <?php endif; ?>  
 
           <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>
         </div>
@@ -82,7 +83,7 @@ if (in_array($type, ['profile', 'user.blog', 'recover'])) {
 
           <div class="flex gap-max items-center">
 
-            <?= Html::addPost($facet); ?>
+            <?= Html::addPost($facet['facet_id'] ?? false); ?>
 
             <a id="toggledark" class="gray-600"><svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>

@@ -30,7 +30,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     Route::type(['get', 'post'])->get('/folder/content/save')->controller('FolderController@addFolderContent');
  
-    Route::get('/add/post/{topic_id}')->controller('Post\AddPostController', ['post'])->where(['topic_id' => '[0-9]+']);
+    Route::get('/add/post/{facet_id}')->controller('Post\AddPostController')->where(['facet_id' => '[0-9]+']);
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
 

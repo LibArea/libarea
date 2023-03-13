@@ -48,11 +48,7 @@ class BlogFacetController extends Controller
                     'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], 'facet'),
                     'info'          => markdown($facet['facet_info'] ?? false, 'text'),
                 ],
-                'facet'   => [
-                    'facet_id' => $facet['facet_id'],
-                    'facet_type' => $facet['facet_type'],
-                    'facet_user_id' => $facet['facet_user_id']
-                ],
+                'facet'   => ['facet_id' => $facet['facet_id'], 'facet_type' => $facet['facet_type'], 'facet_user_id' => $facet['facet_user_id']],
             ]
         );
     }

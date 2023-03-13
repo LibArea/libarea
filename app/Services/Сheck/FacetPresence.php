@@ -17,4 +17,13 @@ class FacetPresence
 
         return $facet;
     }
+    
+    public static function all(int $id): array
+    {
+        $facet = FacetModel::uniqueById($id);
+
+        notEmptyOrView404($facet);
+
+        return $facet;
+    }
 }

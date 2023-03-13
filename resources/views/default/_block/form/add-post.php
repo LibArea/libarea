@@ -22,11 +22,11 @@
       <div class="help">6 - 250 <?= __('app.characters'); ?></div>
     </fieldset>
 
-    <?= insert('/_block/form/select/topic', ['data'  => $data['facets'], 'action' => 'add']); ?>
+    <?= insert('/_block/form/select/topic', ['topic'  => $data['topic'], 'action' => 'add']); ?>
 
-    <?php if (!empty($data['blog'])) : ?>
+    <?php if (!empty($data['showing-blog'])) : ?>
       <?= insert('/_block/form/select/blog', [
-        'data'        => $data,
+        'blog'     => $data['blog'],
         'action'      => 'add',
         'title'       => __('app.blogs'),
       ]); ?>

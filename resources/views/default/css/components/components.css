@@ -147,7 +147,7 @@ h5 {
   vertical-align: middle;
 }
 
-.d-header.choices.show .box-search { display: none; }
+.d-header.scroll-hide-search.show .box-search { display: none; }
 /* end */
 
 .cut-off {

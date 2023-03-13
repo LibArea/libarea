@@ -59,10 +59,10 @@
        //tagify.addTags([{id:'20', value:'Веб-разработка'},{id:'43', value:'Новости и СМИ'},])
        tagify.addTags(JSON.parse('<?= json_encode($data['topic_arr']) ?>'))
     <?php } else { ?>
-      <?php if (!empty($data['topic'])) { ?>
-        <?php if ($data['topic']) {
-          $id     = $data['topic']['facet_id'];
-          $title  = $data['topic']['facet_title'];
+      <?php if (!empty($topic)) { ?>
+        <?php if ($topic) {
+          $id     = $topic['facet_id'];
+          $title  = $topic['facet_title'];
         ?>
           tagify.addTags([{
             id: '<?= $id; ?>',
