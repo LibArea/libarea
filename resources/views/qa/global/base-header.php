@@ -9,7 +9,7 @@ $facet  = $data['facet'] ?? false; ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
-<body<?php if (Request::getCookie('dayNight') == 'dark') : ?> class="dark" <?php endif; ?>>
+<body <?php if (Request::getCookie('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
 
   <header class="bg-white mb10">
     <div class="br-bottom wrap mb10 mb-none items-center flex gap">
