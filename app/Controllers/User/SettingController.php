@@ -5,8 +5,8 @@ namespace App\Controllers\User;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
-use App\Models\IgnoredModel;
-use UploadImage, Meta, UserData, Img;
+use App\Models\{IgnoredModel, AuthModel};
+use UploadImage, Meta, UserData, Img, Html, SendEmail;
 
 use App\Validate\RulesUserSetting;
 
@@ -62,12 +62,23 @@ class SettingController extends Controller
     {
         Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
         
+        $new = SettingModel::getNewEmail();
+        
+        if($code = Request::getGet('newemail')) {
+           if (SettingModel::available($code)) {
+               SettingModel::editEmail($new['email']);
+
+               is_return(__('msg.change_saved'), 'success', url('setting'));
+           }
+        }
+        
         return $this->render(
             '/user/setting/setting',
             [
                 'meta'  => Meta::get(__('app.setting')),
                 'data'  => [
-                    'user' => UserModel::getUser($this->user['login'], 'slug'),
+                    'user'  => UserModel::getUser($this->user['login'], 'slug'),
+                    'new_email' => $new['email'],
                 ]
             ]
         );
@@ -238,6 +249,17 @@ class SettingController extends Controller
         if (RulesUserSetting::rulesNewEmail($email) === false) {
             return json_encode('error');
         } 
+        
+        
+        if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
+            return json_encode('repeat');
+        }
+        
+        $code = Html::randomString('crypto', 20);
+        
+        SettingModel::setNewEmail($email, $code);
+
+        SendEmail::mailText($this->user['id'], 'new.email', ['link' => '/setting?newemail=' . $code]);
         
         return json_encode('success');
     }

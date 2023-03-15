@@ -18,6 +18,9 @@ return [
    
   'activate_email_subject' => '{name} — تفعيل البريد',
   'activate_email_message' => '<p>لمتابعة التسجيل ، قم بتفعيل بريدك الإلكتروني. اتبع هذا الرابط:</p><p>{url}</p>',
+
+  'new_email_subject' => '{name} — تغيير الايميل',
+  'new_email_message' => '<p>للمتابعة ، قم بتفعيل بريدك الإلكتروني بالضغط على الرابط:</p><p>{url}</p>',
    
   'invite_reg_subject' => '{name} — دعوة للانظمام (ادعو)',
   'invite_reg_message' => '<p>لقد تمت دعوتك للانضمام إلى المجتمع. إذا وافقت. ثم اتبع الرابط:</p><p>{url}</p>',

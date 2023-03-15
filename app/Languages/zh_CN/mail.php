@@ -19,6 +19,9 @@ return [
   'activate_email_subject' => '{name} — 激活邮箱',
   'activate_email_message' => '<p>要继续注册，请先激活你的邮箱。 按照这个链接：</p><p>{url}</p>',
    
+  'new_email_subject' => '{name} — 更改电子邮件',
+  'new_email_message' => '<p>要继续，请单击以下链接激活您的电子邮件：</p><p>{url}</p>',
+   
   'invite_reg_subject' => '{name} — 邀请加入(邀请)',
   'invite_reg_message' => '<p>你已被邀请加入社区。 如果你同意。请点击链接：</p><p>{url}</p>',
    

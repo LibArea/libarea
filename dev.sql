@@ -1505,4 +1505,24 @@ ALTER TABLE `votes_post`
 --
 ALTER TABLE `votes_reply`
   MODIFY `votes_reply_id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
+
+
+--
+-- Структура таблицы `users_email_story` и индексы
+--
+
+CREATE TABLE `users_email_story` (
+  `id` int(11) NOT NULL,
+  `pubdate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `email_code` varchar(50) NOT NULL,
+  `email_activate_flag` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `users_email_story`
+  ADD PRIMARY KEY (`id`);
+  
+ALTER TABLE `users_email_story`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+

@@ -38,6 +38,10 @@ class SendEmail
                 $subject    = __('mail.activate_email_subject', ['name' => config('meta.name')]);
                 $message    = __('mail.activate_email_message', ['url' => $url . $variables['link']]);
                 break;
+            case 'new.email':
+                $subject    = __('mail.new_email_subject', ['name' => config('meta.name')]);
+                $message    = __('mail.new_email_message', ['url' => $url . $variables['link']]);
+                break;
             case 'invite.reg':
                 $user_email = $variables['invitation_email'];
                 $subject    = __('mail.invite_reg_subject', ['name' => config('meta.name')]);

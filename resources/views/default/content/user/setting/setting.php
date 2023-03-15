@@ -55,30 +55,36 @@
               return response.json();
             }).then((text) => {
                 
-   
-                if (text === 'error') {
-                     Notice('<?= __('msg.email_correctness'); ?>', 3500, {
-                        valign: 'bottom',
-                        align: 'center',
-                        styles: {
-                          backgroundColor: 'red',
-                          fontSize: '18px'
-                        }
-                      });
+                if (text === 'errort') {
+                   var text =  '<?= __('msg.email_correctness'); ?>';
+                   var color =  'red';
+                } else if (text === 'repeat') {  
+                   var text =  '<?= __('msg.email_replay'); ?>';
+                   var color =  'red';
                 } else {
-                    
-                  Notice('<?= __('msg.new_email'); ?>', 3500, {
+                    var text =  '<?= __('msg.new_email'); ?>';
+                    var color =  'green';
+                }  
+           
+                 Notice(text, 3500, {
                     valign: 'bottom',
                     align: 'center',
                     styles: {
-                      backgroundColor: 'green',
+                      backgroundColor: color,
                       fontSize: '18px'
                     }
                   }); 
-                }  
-           
+
+               reload();
             });
         });       
-    })
+    });
+    
+    function reload(){
+      setTimeout(function(){
+        location.reload();
+      }, 1500)
+    }
+
   });
 </script>  

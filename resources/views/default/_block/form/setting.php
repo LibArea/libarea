@@ -11,6 +11,12 @@
   <span class="gray-600 text-sm lowercase" data-a11y-dialog-show="my-email"><?= __('app.edit'); ?></span>
 </fieldset>
 
+<?php if ($data['new_email']) : ?>
+  <code><?= $data['new_email']; ?></code>
+  <span class="red text-sm"><?= __('app.not_confirmed'); ?></span>
+  <span class="gray-600 text-sm"><?= __('app.resend_email'); ?></span>
+<?php endif; ?>
+
 <fieldset>
   <label for="name"><?= __('app.name'); ?></label>
   <input maxlength="11" value="<?= $data['user']['name']; ?>" type="text" name="name">

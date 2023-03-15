@@ -19,6 +19,9 @@ return [
   'activate_email_subject' => '{name} — email activation',
   'activate_email_message' => '<p>To continue registration, activate your E-mail. Follow this link:</p><p>{url}</p>',
    
+  'new_email_subject' => '{name} — change email',
+  'new_email_message' => '<p>To continue, activate your Email by clicking on the link:</p><p>{url}</p>',
+   
   'invite_reg_subject' => '{name} — invitation to join (invite)',
   'invite_reg_message' => '<p>You have been invited to join the community. If you agree. then follow the link:</p><p>{url}</p>',
    

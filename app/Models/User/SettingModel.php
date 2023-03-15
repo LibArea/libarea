@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use UserData;
 use DB;
 
 class SettingModel extends \Hleb\Scheme\App\Models\MainModel
@@ -58,10 +59,7 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
     // Изменение обложки
     public static function setCover($params)
     {
-        $sql = "UPDATE users 
-                    SET cover_art   = :cover_art, 
-                        updated_at  = :updated_at 
-                            WHERE id = :id";
+        $sql = "UPDATE users SET cover_art   = :cover_art, updated_at  = :updated_at WHERE id = :id";
 
         return  DB::run($sql, $params);
     }
@@ -70,20 +68,14 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
     // При удаление обложки запишем дефолтную
     public static function coverRemove($params)
     {
-        $sql = "UPDATE users 
-                    SET cover_art = :cover_art, 
-                        updated_at = :updated_at 
-                            WHERE id = :id";
+        $sql = "UPDATE users SET cover_art = :cover_art, updated_at = :updated_at WHERE id = :id";
 
         return DB::run($sql, $params);
     }
 
     public static function countNotifications($uid)
     {
-        $sql = "SELECT 
-                    setting_id, 
-                    setting_user_id
-                        FROM users_setting WHERE setting_user_id = :uid";
+        $sql = "SELECT setting_id, setting_user_id FROM users_setting WHERE setting_user_id = :uid";
 
         return DB::run($sql, ['uid' => $uid])->rowCount();
     }
@@ -129,5 +121,42 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM users_setting WHERE setting_user_id = :uid";
 
         return DB::run($sql, ['uid' => $uid])->fetch();
+    }
+    
+    // Change of mail
+    public static function getNewEmail()
+    {
+        $sql = "SELECT email FROM users_email_story WHERE user_id = :user_id AND email_activate_flag = :flag";
+
+        return DB::run($sql, ['user_id' => UserData::getUserId(), 'flag' => 0])->fetch();
+    }
+    
+    public static function setNewEmail($email, $code)
+    {
+        $params = [
+            'user_id'               => UserData::getUserId(),
+            'email'                 => $email,
+            'email_code'            => $code,
+        ];
+        
+        $sql = "INSERT INTO users_email_story(user_id, email, email_code) VALUES(:user_id, :email, :email_code)";
+
+        return DB::run($sql, $params);
+    }
+
+    public static function available($code)
+    {
+        $sql = "SELECT email_activate_flag FROM users_email_story WHERE email_code = :code AND user_id = :user_id AND email_activate_flag = :flag";
+
+        return DB::run($sql, ['code' => $code, 'user_id' => UserData::getUserId(), 'flag' => 0])->fetch();
+    }
+
+    public static function editEmail($email)
+    {
+        DB::run("UPDATE users SET email = :email WHERE id = :user_id", ['user_id' => UserData::getUserId(), 'email' => $email]);
+        
+        $sql = "UPDATE users_email_story SET email_activate_flag = :flag WHERE user_id = :user_id AND email = :email";
+
+        return DB::run($sql, ['user_id' => UserData::getUserId(), 'email' => $email, 'flag' => 1]);
     }
 }

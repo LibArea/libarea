@@ -53,6 +53,7 @@ return [
     'nick_character'        => '昵称中有太多重复字符',
     'successfully_login'    => '登录成功',
     'check_your_email'      => '检查你的邮箱以激活你的帐户',
+    'new_email'             => '检查您的电子邮件以激活电子邮件',
     'user_already'          => '用户名已在网站上注册',
     'invate_replay'         => '你已经向该用户发送了邀请',
     'invate_limit_stop'     => '你已用尽邀请次数',

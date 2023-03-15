@@ -387,6 +387,9 @@ return [
     'ignored_users_help'    => '.الاعضاء الذين يقومون بالنشر لن يتم مشاهدة منشوراتهم في التدفق',
     'ignored_no'            => 'ليس هناك اي اعضاء تم تجاهلهم.', 
 
+    'not_confirmed'         => 'غير مؤكد.',
+    'resend_email'          => 'تحقق من صندوق بريدك الإلكتروني أو أعد إرسال بريد إلكتروني جديد.',
+
     /* Notifications and logs */
     'notif_add_pm'              => 'ارسل لك {url}رسالة خاصة{a}',
     'notif_add_comment'         => 'علق على {url}اجابتك{a}',

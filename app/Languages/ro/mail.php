@@ -18,6 +18,9 @@ return [
    
   'activate_email_subject' => '{name} — activare prin e-mail',
   'activate_email_message' => '<p>Pentru a continua înregistrarea, activați-vă adresa de e-mail. Urmați acest link:</p><p>{url}</p>',
+
+  'new_email_subject' => '{name} — schimbă e-mail',
+  'new_email_message' => '<p>Pentru a continua, activați-vă e-mailul făcând clic pe linkul:</p><p>{url}</p>',
    
   'invite_reg_subject' => '{name} — invitație de a se alătura (invitație)',
   'invite_reg_message' => '<p>Ați fost invitat să vă alăturați comunității. Dacă sunteți de acord. apoi urmați linkul:</p><p>{url}</p>',

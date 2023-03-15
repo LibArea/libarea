@@ -53,6 +53,7 @@ return [
     'nick_character'        => 'Există prea multe caractere repetate în porecla',
     'nick_exist'            => 'Această poreclă există deja',
     'check_your_email'      => 'Verificați e-mailul pentru a vă activa contul',
+    'new_email'             => 'Verificați e-mailul pentru a activa e-mailul',
     'user_already'          => 'Utilizatorul este deja pe site',
     'invate_replay'         => 'Ați trimis deja o invitație acestui utilizator',
     'invate_limit_stop'     => 'Ați epuizat numărul de invitații',

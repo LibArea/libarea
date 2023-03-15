@@ -19,6 +19,9 @@ return [
   'activate_email_subject' => '{name} — активация email',
   'activate_email_message' => '<p>Для продолжения регистрации активируйте свой E-mail. Перейдите по ссылке:</p><p>{url}</p>',
 
+  'new_email_subject' => '{name} — смена email',
+  'new_email_message' => '<p>Для продолжения, активируйте свой E-mail перейдя по ссылке:</p><p>{url}</p>',
+
   'invite_reg_subject' => '{name} — приглашение присоединиться (инвайт)',
   'invite_reg_message' => '<p>Вас пригласили присоединиться к сообществу. Если вы согласны. то перейдите по ссылке:</p><p>{url}</p>',
 

@@ -332,4 +332,5 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, $params);
     }
+
 }

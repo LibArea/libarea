@@ -391,6 +391,9 @@ return [
     'ignored_users_help'    => '您不会在提要中看到其帖子的用户。',
     'ignored_no'            => '您没有忽略的用户。', 
 
+    'not_confirmed'         => '还没有确定',
+    'resend_email'          => '检查您的电子邮件收件箱或重新发送新电子邮件',
+
     /* 通知和日志 */
     'notif_add_pm'              => '给你写了一个{url}私信{a}',
     'notif_add_comment'         => '在您的响应{a}上注释{url}',

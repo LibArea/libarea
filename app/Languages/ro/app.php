@@ -390,6 +390,9 @@ return [
     'ignored_users_help'    => 'Utilizatori ale căror postări nu le vei vedea în feed.',
     'ignored_no'            => 'Nu aveți utilizatori pe care să-i ignorați.', 
 
+    'not_confirmed'         => 'neconfirmat.',
+    'resend_email'          => 'Verificați-vă căsuța de e-mail sau retrimiteți un e-mail nou.',
+
     /* Notificări */
     'notif_add_pm'              => 'ți-a trimis un {url}mesaj privat{a}',
     'notif_add_comment'         => 'a comentat {url}răspunsul tău{a}',

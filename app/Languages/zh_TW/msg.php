@@ -53,6 +53,7 @@ return [
     'nick_character'        => '暱稱中重複字符過多',
     'nick_exist'            => '此暱稱已存在',
     'check_your_email'      => '檢查您的電子郵件以激活您的帳戶',
+    'new_email'             => '检查您的电子邮件以激活电子邮件',
     'user_already'          => '用戶已經在網站上',
     'invate_replay'         => '您已經向該用戶發送了邀請',
     'invate_limit_stop'     => '您已用盡邀請數量',
