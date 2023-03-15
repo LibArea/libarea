@@ -78,9 +78,9 @@
         <?php foreach ($data['user']['badges'] as $badge) : ?>
           <div class="mb5">
             <?= $badge['badge_icon']; ?>
-            <span class="remove-badge text-sm lowercase" data-id="<?= $badge['bu_id']; ?>" data-uid="<?= $data['user']['id']; ?>">
+            <a class="remove-badge text-sm lowercase" data-id="<?= $badge['bu_id']; ?>" data-uid="<?= $data['user']['id']; ?>">
               - <?= __('admin.remove'); ?>
-            </span>
+            </a>
           </div>
         <?php endforeach; ?>
       </div>
