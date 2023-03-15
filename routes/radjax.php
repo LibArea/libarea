@@ -8,6 +8,7 @@ Radjax\Route::get("/post/profile", ["post"], "App\Controllers\Post\PostControlle
 Radjax\Route::get("/post/recommend", ["post"], "App\Controllers\Post\AddPostController@recommend", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/folder/content/del", ["post"], "App\Controllers\FolderController@delFolderContent", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/folder/del", ["post"], "App\Controllers\FolderController@delFolder", ["protected" => true, "before" => $access]);
+Radjax\Route::get("/new/email", ["post"], "App\Controllers\User\SettingController@newEmail", ["protected" => true, "before" => $access]);
 
 Radjax\Route::get("/focus", ["post"], "App\Services\Subscription", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/votes", ["post"], "App\Services\Votes", ["protected" => true, "before" => $access]);

@@ -53,6 +53,7 @@ return [
     'nick_character'        => 'There are too many repeated characters in the nickname',
     'nick_exist'            => 'This nickname already exists',
     'check_your_email'      => 'Check your email to activate your account',
+    'new_email'             => 'To activate the email, check the mail',
     'user_already'          => 'The user is already on the site',
     'invate_replay'         => 'You have already sent an invitation to this user',
     'invate_limit_stop'     => 'You have exhausted the number of invites',

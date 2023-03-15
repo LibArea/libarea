@@ -60,6 +60,8 @@ class SettingController extends Controller
     // Форма настройки профиля
     function settingForm()
     {
+        Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
+        
         return $this->render(
             '/user/setting/setting',
             [
@@ -227,5 +229,16 @@ class SettingController extends Controller
         );
 
         is_return(__('msg.change_saved'), 'success', '/setting/notifications');
+    }
+    
+    function newEmail()
+    {
+        $email = Request::getPost('email');
+        
+        if (RulesUserSetting::rulesNewEmail($email) === false) {
+            return json_encode('error');
+        } 
+        
+        return json_encode('success');
     }
 }

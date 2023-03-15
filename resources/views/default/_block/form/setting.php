@@ -7,7 +7,8 @@
 
 <fieldset>
   <span class="name gray">E-mail:</span>
-  <span class="mr5 ml5"><?= $data['user']['email']; ?></span>
+  <span class="mr5 ml5 gray"><?= $data['user']['email']; ?></span>
+  <span class="gray-600 text-sm lowercase" data-a11y-dialog-show="my-email"><?= __('app.edit'); ?></span>
 </fieldset>
 
 <fieldset>

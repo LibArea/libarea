@@ -41,4 +41,13 @@ class RulesUserSetting extends Validator
 
         return true;
     }
+    
+    
+    public static function rulesNewEmail($email)
+    {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            return false;
+        }
+        return true;
+    }
 }
