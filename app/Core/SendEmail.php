@@ -71,7 +71,7 @@ class SendEmail
             $result =  $mailSMTP->send($email, $subject, $message, $from);
 
             if ($result === true) {
-                echo "Done";
+                return true;
             } else {
                 throw AutorizationException::Smtp("Error - " . $result);
             }

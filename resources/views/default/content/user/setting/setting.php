@@ -66,7 +66,7 @@
                     var color =  'green';
                 }  
            
-                 Notice(text, 3500, {
+                 Notice(text, 4500, {
                     valign: 'bottom',
                     align: 'center',
                     styles: {
@@ -75,12 +75,12 @@
                     }
                   }); 
 
-               reload();
+                reload();
             });
         });       
     });
     
-    function reload(){
+   function reload(){
       setTimeout(function(){
         location.reload();
       }, 1500)

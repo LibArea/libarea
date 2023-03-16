@@ -63,10 +63,11 @@ class SettingController extends Controller
         Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
         
         $new = SettingModel::getNewEmail();
+        $email = $new['email'] ?? null;
         
         if($code = Request::getGet('newemail')) {
            if (SettingModel::available($code)) {
-               SettingModel::editEmail($new['email']);
+               SettingModel::editEmail($email);
 
                is_return(__('msg.change_saved'), 'success', url('setting'));
            }
@@ -78,7 +79,7 @@ class SettingController extends Controller
                 'meta'  => Meta::get(__('app.setting')),
                 'data'  => [
                     'user'  => UserModel::getUser($this->user['login'], 'slug'),
-                    'new_email' => $new['email'],
+                    'new_email' => $email,
                 ]
             ]
         );
@@ -212,7 +213,6 @@ class SettingController extends Controller
         );
     }
 
-
     function ignored()
     {
         return $this->render(
@@ -250,7 +250,6 @@ class SettingController extends Controller
             return json_encode('error');
         } 
         
-        
         if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
             return json_encode('repeat');
         }
@@ -260,7 +259,8 @@ class SettingController extends Controller
         SettingModel::setNewEmail($email, $code);
 
         SendEmail::mailText($this->user['id'], 'new.email', ['link' => '/setting?newemail=' . $code]);
-        
+
         return json_encode('success');
     }
+    
 }
