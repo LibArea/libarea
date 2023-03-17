@@ -49,7 +49,7 @@ Further:
 *   Log in to your account using administrator credentials: `ss@sdf.ru` / `qwer14qwer14`
 *   Or user: `test@test.ru` / `test@test.ru`
 
-PHP 7.4+, MySQL 8+ or > MariaDB 10.2.2
+PHP 8+, MySQL 8+ or > MariaDB 10.2.2
 
 Fully assembled releases can be downloaded at the office. support site: https://libarea.com/
 
