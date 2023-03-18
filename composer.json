@@ -27,7 +27,7 @@
   "require": {
     "php": ">=8.0",
     "ext-pdo": "*",
-    "phphleb/framework": ">=1.6.89",
+    "phphleb/framework": ">=1.7.0",
     "phphleb/imageresizer": "dev-master",
     "phphleb/debugpan": "1.*",
     "phphleb/radjax": "dev-master",
@@ -35,7 +35,6 @@
     "phphleb/updater": "^1.0",
     "phphleb/combinator": "dev-main",
     "cocur/slugify": "^4.3",
-    "taufik-nurrohman/parsedown-extra-plugin": "dev-main",
     "donatj/phpuseragentparser": "dev-master",
     "utopia-php/domains": "^0.2.5",
     "matthiasmullie/minify": "dev-master",
