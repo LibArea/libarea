@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use UserData;
 use DB;
 
 class FileModel extends \Hleb\Scheme\App\Models\MainModel
@@ -24,27 +25,26 @@ class FileModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, $params);
     }
 
-    public static function get($file_id, $user_id, $type)
+    public static function getFilesUser($page, $limit)
     {
+        $start = ($page - 1) * $limit;
         $sql = "SELECT 
                     file_id, 
                     file_path, 
                     file_type,
                     file_content_id, 
                     file_user_id, 
-                    file_date, 
-                    file_is_deleted
+                    file_date
                         FROM files 
-                        WHERE file_id = :file_id AND 
-                            file_user_id = :user_id AND file_type = :type";
+                           WHERE file_user_id = :user_id AND file_is_deleted = 0 LIMIT :start, :limit";
 
-        return  DB::run($sql, ['file_id' => $file_id, 'user_id' => $user_id, 'type' => $type])->fetch();
+        return  DB::run($sql, ['user_id' => UserData::getUserId(), 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function removal($file_path, $user_id)
+    public static function removal($file_path)
     {
         $sql = "UPDATE files SET file_is_deleted = 1 WHERE file_path = :file_path AND file_user_id = :user_id";
 
-        return DB::run($sql, ['file_path' => $file_path, 'user_id' => $user_id]);
+        return DB::run($sql, ['file_path' => $file_path, 'user_id' => UserData::getUserId()]);
     }
 }

@@ -79,7 +79,7 @@ class UploadImage
         return false;
     }
 
-    public static function postImg($img, $user_id, $type, $content_id)
+    public static function postImg($img, $type, $content_id)
     {
         $path_img   = HLEB_PUBLIC_DIR . Img::PATH['posts_content'];
         $year       = date('Y') . '/';
@@ -111,7 +111,7 @@ class UploadImage
                 'file_path'         => $img_post,
                 'file_type'         => $type ?? 'none',
                 'file_content_id'   => $content_id ?? 0,
-                'file_user_id'      => $user_id,
+                'file_user_id'      => UserData::getUserId(),
                 'file_is_deleted'   => 0
             ]
         );
@@ -180,7 +180,7 @@ class UploadImage
     }
 
     // Post cover
-    public static function coverPost($cover, $post, $redirect, $user_id)
+    public static function coverPost($cover, $post, $redirect)
     {
         // Width check
         $width_h  = getimagesize($cover['tmp_name']);
@@ -205,8 +205,12 @@ class UploadImage
         // Delete if there is an old one
         $post_content_img  = $post['post_content_img'] ?? false;
         if ($post_content_img != $post_img) {
-            @unlink($path . $post_content_img);
-            FileModel::removal($post_content_img, $user_id);
+
+            if ($post_content_img != false) {
+                @unlink($path . $post_content_img);
+            }
+            
+            FileModel::removal($post_content_img);
         }
 
         FileModel::set(
@@ -214,7 +218,7 @@ class UploadImage
                 'file_path'         => $post_img,
                 'file_type'         => 'post',
                 'file_content_id'   => $post['post_id'] ?? 0,
-                'file_user_id'      => $user_id,
+                'file_user_id'      => UserData::getUserId(),
                 'file_is_deleted'   => 0
             ]
         );
@@ -223,11 +227,11 @@ class UploadImage
     }
 
     // Удаление обложка поста
-    public static function coverPostRemove($path_img, $user_id)
+    public static function coverPostRemove($path_img)
     {
         unlink(HLEB_PUBLIC_DIR . Img::PATH['posts_cover'] . $path_img);
 
-        return FileModel::removal($path_img, $user_id);
+        return FileModel::removal($path_img);
     }
 
     // Thumb for post

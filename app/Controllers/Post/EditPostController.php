@@ -81,7 +81,7 @@ class EditPostController extends Controller
 
         // Post cover
         if (!empty($_FILES['images']['name'])) {
-            $post_img = UploadImage::coverPost($_FILES['images'], $post, $redirect, $this->user['id']);
+            $post_img = UploadImage::coverPost($_FILES['images'], $post, $redirect);
         }
         $post_img = $post_img ?? $post['post_content_img'];
 
@@ -165,7 +165,7 @@ class EditPostController extends Controller
         }
 
         PostModel::setPostImgRemove($post['post_id']);
-        UploadImage::coverPostRemove($post['post_content_img'], $this->user['id']);
+        UploadImage::coverPostRemove($post['post_content_img']);
 
         is_return(__('msg.cover_removed'), 'success', url('content.edit', ['type' => 'post', 'id' => $post['post_id']]));
     }
@@ -182,7 +182,7 @@ class EditPostController extends Controller
 
         $img = $_FILES['image'];
         if ($_FILES['image']['name']) {
-            return json_encode(array('data' => array('filePath' => UploadImage::postImg($img, $user_id, $type, $id))));
+            return json_encode(array('data' => array('filePath' => UploadImage::postImg($img, $type, $id))));
         }
 
         return false;

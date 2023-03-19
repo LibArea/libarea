@@ -88,7 +88,7 @@ class AddPostController extends Controller
         // Post cover
         // Обложка поста
         if (!empty($_FILES['images']['name'])) {
-            $post_img = UploadImage::coverPost($_FILES['images'], 0, $redirect, $this->user['id']);
+            $post_img = UploadImage::coverPost($_FILES['images'], 0, $redirect);
         }
 
         if (PostModel::getSlug($slug = $this->getSlug($fields['post_title']))) {
