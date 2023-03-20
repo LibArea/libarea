@@ -101,3 +101,7 @@
   width: 100%;
   max-width: 780px;
 }
+
+.tagify--noTags[required]{ 
+  --tags-border-color: red;
+}
