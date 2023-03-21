@@ -168,7 +168,7 @@ return [
 
     'delete_profile'    => 'Ștergeți profilul',
     'read_carefully'    => 'Citiți cu atenție, este foarte important!',
-    'read_information'  => 'Sunteți pe cale să vă ștergeți profilul. Pentru a șterge un profil, trebuie să confirmați că sunteți pregătit să ștergeți toate informațiile enumerate. Ștergerea unui profil este o <span class="red">acțiune ireversibilă</span>, nu veți putea recupera datele pierdute.',
+    'read_information'  => 'Sunteți pe cale să vă ștergeți profilul. Pentru a șterge un profil, trebuie să confirmați că sunteți pregătit să ștergeți toate informațiile enumerate. Ștergerea unui profil este o <strong>acțiune ireversibilă</strong>, nu veți putea recupera datele pierdute.',
     
     // Редактор
     'foto'              => 'A photo',

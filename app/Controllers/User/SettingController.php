@@ -32,6 +32,9 @@ class SettingController extends Controller
             case 'ignored':
                 return $this->ignored();
                 break;
+            case 'deletion':
+                return $this->deletion();
+                break;
             default:
                 return $this->settingForm();
                 break;
@@ -225,6 +228,17 @@ class SettingController extends Controller
             ]
         );
     }
+    
+    function deletion()
+    {
+        return $this->render(
+            '/user/setting/deletion',
+            [
+                'meta'  => Meta::get(__('app.delete_profile')),
+                'data'  => []
+            ]
+        );
+    } 
 
     function notificationEdit()
     {

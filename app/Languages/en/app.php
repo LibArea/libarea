@@ -168,7 +168,7 @@ return [
 
     'delete_profile'    => 'Delete profile',
     'read_carefully'    => 'Read carefully, it\'s really important!',
-    'read_information'  => 'You are about to delete your profile. To delete a profile, you must confirm that you are ready to delete all of the information listed. Deleting a profile is a <span class="red">irreversible action</span>, you won\'t be able to get your lost data back.',
+    'read_information'  => 'You are about to delete your profile. To delete a profile, you must confirm that you are ready to delete all of the information listed. Deleting a profile is a <strong>irreversible action</strong>, you won\'t be able to get your lost data back.',
 
     // Editor
     'foto'              => 'Foto',

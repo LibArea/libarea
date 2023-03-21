@@ -213,6 +213,8 @@ class UploadImage
             FileModel::removal($post_content_img);
         }
 
+        // Img::PATH['posts_cover'] добавить после запроса.
+        // UPDATE files SET file_path = CONCAT('/uploads/posts/cover/', file_path) where file_type = 'post';
         FileModel::set(
             [
                 'file_path'         => $post_img,

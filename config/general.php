@@ -38,6 +38,10 @@ return [
     // If TRUE, then the first 50 participants will have TL2 upon registration (otherwise TL1)
     // Если TRUE, то при регистрации первые 50 участников будет иметь TL2 (в противном случае TL1)
     'mode'              => true, 
+
+    // Can a user delete a profile?
+    // Пользователь может удалять профиль?
+    'deleting_profile'  =>  false,
         
     // Email of the site administration
     // Email администрации сайта

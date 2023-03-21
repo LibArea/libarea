@@ -78,8 +78,9 @@
   <input type="checkbox" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked <?php endif; ?>> <?= __('app.endless_scroll'); ?>
 </fieldset>
 
-
-<fieldset>
-  <input type="hidden" name="nickname" id="nickname" value="">
+<div class="flex flex-row items-center justify-between mt20">
   <?= Html::sumbit(__('app.edit')); ?>
-</fieldset>
+  <?php if (config('general.deleting_profile')) : ?>
+    <a href="setting/deletion" class="gray-600"><?= __('app.delete_profile'); ?></a>
+  <?php endif; ?>  
+</div>
