@@ -165,6 +165,10 @@ return [
     'drafts'            => '草稿',
     'cancel'            => '取消',
     'reply'             => '回复',
+
+    'delete_profile'    => '删除配置文件',
+    'read_carefully'    => '仔细阅读，真的很重要！',
+    'read_information'  => '您即将删除您的个人资料。 要删除配置文件，您必须确认您已准备好删除列出的所有信息。 删除配置文件是<span class="red">不可逆操作</span>，您将无法找回丢失的数据。',
     
     // Редактор
     'foto'              => '照片',
