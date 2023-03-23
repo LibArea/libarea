@@ -15,7 +15,7 @@
       </div>
 
       <?php if ($data['list']) : ?>
-        <?php foreach ($data['list'] as $key => $val) : ?>
+        <?php foreach ($data['list'] as $val) : ?>
           <div class="hidden">
             <?php
             $login  = $val['login'];
@@ -37,11 +37,6 @@
             <div class="max-w780">
               <?= $val['message_content']; ?>
             </div>
-            <?php if ($val['unread'] == 1 and $val['message_sender_id'] == UserData::getUserId()) : ?>
-              <div class="right gray-600 lowercase text-sm hidden mb5 pb5">
-                <?= __('app.it_read'); ?> (<?= Html::langDate($val['message_receipt']); ?>)
-              </div>
-            <?php endif; ?>
           </div>
           <div class="br-bottom mb15"></div>
         <?php endforeach; ?>

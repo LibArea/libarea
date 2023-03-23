@@ -64,6 +64,9 @@
           <?php if (!empty($user['banlist_int_num'])) : ?>
             <div class="red">bans: <?= $user['banlist_int_num']; ?></div>
           <?php endif; ?>
+          <?php if ($user['is_deleted'] == 1) : ?>
+            <div class="red"><?= __('admin.deleted'); ?></div>
+          <?php endif; ?>
         </td>
         <td class="text-sm align-right mb-none">
           <a class="gray-600" href="<?= url('admin.regip', ['ip' => $user['reg_ip']]); ?>">

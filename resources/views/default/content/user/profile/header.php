@@ -60,14 +60,18 @@ endif;
 
     <div class="flex">
       <h1 class="mb-block mb-text-xl m15 flex flex-auto">
-        <?= $profile['login']; ?>
-        <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
-          <?php if ($profile['up_count'] > 0) : ?>
-            <svg class="icons red mr5 ml20">
-              <use xlink:href="/assets/svg/icons.svg#heart"></use>
-            </svg>
-            <sup class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></sup>
-          <?php endif; ?>
+        <span class="mr20">
+          <?= $profile['login']; ?>
+          <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
+            <span class="mb-block">
+              <?php if ($profile['up_count'] > 0) : ?>
+                <span class="mb-block">
+                  <svg class="icons red">
+                    <use xlink:href="/assets/svg/icons.svg#heart"></use>
+                  </svg>
+                  <sup class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></sup>
+                </span>
+              <?php endif; ?>
       </h1>
 
       <div class="m10 mb-none right">

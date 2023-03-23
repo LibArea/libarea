@@ -24,6 +24,9 @@
       <a target="_blank" rel="noopener noreferrer" href="<?= url('profile', ['login' => $data['user']['login']]); ?>">
         <?= $data['user']['login']; ?>
       </a>
+      <?php if ($data['user']['is_deleted'] == 1) : ?>
+        (<span class="red"><?= __('admin.deleted'); ?></span>)
+      <?php endif; ?> 
     </label>
     <?php if ($data['user']['trust_level'] != UserData::REGISTERED_ADMIN) : ?>
       <?php if ($data['user']['ban_list']) : ?>
@@ -53,6 +56,7 @@
       </svg> <?= $data['user']['hits_count']; ?>
     </span>
   </fieldset>
+
   <hr>
   <fieldset>
     <?php if ($data['user']['limiting_mode'] == 1) : ?>

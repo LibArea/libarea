@@ -154,5 +154,9 @@ class ProfileController extends Controller
         if (($amount['count_answers'] + $amount['count_comments']) < 3) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
+        
+        if (UserModel::isDeleted($profile_id)) {
+            Request::getHead()->addMeta('robots', 'noindex');
+        }
     }
 }

@@ -28,6 +28,10 @@ class RulesLogin extends Validator
             is_return(__('msg.not_activated'), 'error', $redirect);
         }
 
+        if (UserModel::isDeleted($user['id'])) {
+            is_return(__('msg.no_user'), 'error', '/');
+        }
+
         if (!password_verify($data['password'], $user['password'])) {
             is_return(__('msg.not_correct'), 'error', $redirect);
         }

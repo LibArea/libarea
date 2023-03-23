@@ -159,4 +159,9 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['user_id' => UserData::getUserId(), 'email' => $email, 'flag' => 1]);
     }
+    
+    public static function deletionUser($user_id)
+    {
+        return  DB::run("UPDATE users SET is_deleted = :deleted WHERE id = :user_id", ['user_id' => $user_id, 'deleted' => 1]);
+    }
 }

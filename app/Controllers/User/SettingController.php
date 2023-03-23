@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
-use App\Models\{IgnoredModel, AuthModel};
+use App\Models\{IgnoredModel, AuthModel, ActionModel};
 use UploadImage, Meta, UserData, Img, Html, SendEmail;
 
 use App\Validate\RulesUserSetting;
@@ -275,6 +275,27 @@ class SettingController extends Controller
         SendEmail::mailText($this->user['id'], 'new.email', ['link' => '/setting?newemail=' . $code]);
 
         return json_encode('success');
+    }
+
+    public function deleteActivation()
+    {
+        SettingModel::deletionUser($this->user['id']);
+
+        ActionModel::addLogs(
+            [
+                'id_content'    => $this->user['id'],
+                'action_type'   => 'user',
+                'action_name'   => 'deleted',
+                'url_content'   => url('profile', ['login' => $this->user['login']]),
+            ]
+        );
+
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        session_destroy();
+        setcookie("remember", "", time() - 3600, "/");
+        redirect('/');
     }
     
 }

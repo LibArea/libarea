@@ -256,6 +256,15 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['user_id' => $user_id])->fetch();
     }
 
+    // Has the user been deleted?
+    // Удален ли пользователь?
+    public static function isDeleted($user_id)
+    {
+        $sql = "SELECT id, is_deleted FROM users WHERE id = :user_id AND is_deleted = 1";
+
+        return DB::run($sql, ['user_id' => $user_id])->fetch();
+    }
+
     // Password Recovery
     public static function initRecover($params)
     {

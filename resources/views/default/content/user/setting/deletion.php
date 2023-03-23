@@ -6,7 +6,7 @@
   </div> 
   <div class="flex flex-row items-center justify-between mt60">
     <a class="gray-600" href="<?php url('setting'); ?>">< <?= __('app.back'); ?></a>
-    <a href="#" class="red"><?= __('app.delete_profile'); ?></a>
+    <a href="<?= url('delete.activation'); ?>" class="red"><?= __('app.delete_profile'); ?></a>
   </div>
 </main>
 

@@ -84,12 +84,12 @@ class MessagesController extends Controller
                 if ($dialog['dialog_sender_id'] == $this->user['id'] and $val['message_sender_remove']) {
                     unset($list[$key]);
                 } else if ($dialog['dialog_sender_id'] != $this->user['id'] and $val['message_recipient_remove']) {
-                    unset($list[$key]);
+                    unset($list[$key]); 
                 } else {
                     $list[$key]['message_content']  =  markdown($val['message_content'], 'text');
                     $list[$key]['login']   = $recipient_user['login'];
                     $list[$key]['avatar']  = $recipient_user['avatar'];
-                    $list[$key]['unread']  = $dialog['dialog_recipient_unread'];
+                   // $list[$key]['unread']  = $dialog['dialog_sender_unread'];
                 }
             }
         }
