@@ -38,6 +38,9 @@ class UploadImage
         $name = $img['name'];
 
         if ($name) {
+            
+            self::fileTypeCheck($img['type'], '/');
+            
             $filename =  $pref . $content_id . '-' . time();
             $file = $img['tmp_name'];
 
@@ -120,7 +123,7 @@ class UploadImage
     }
 
     // Member cover
-    public static function cover($cover, $content_id, $type)
+    public static function cover($img, $content_id, $type)
     {
         switch ($type) {
             case 'user':
@@ -136,10 +139,12 @@ class UploadImage
         $pref = 'cover-';
         $default_img = 'cover_art.jpeg';
 
-        if ($cover) {
+        if ($img) {
+
+            self::fileTypeCheck($img['type'], '/');
 
             $filename =  $pref . $content_id . '-' . time();
-            $file_cover = $cover['tmp_name'];
+            $file_cover = $img['tmp_name'];
 
             $image = new SimpleImage();
             $image->load($file_cover);
@@ -180,17 +185,19 @@ class UploadImage
     }
 
     // Post cover
-    public static function coverPost($cover, $post, $redirect)
+    public static function coverPost($img, $post, $redirect)
     {
         // Width check
-        $width_h  = getimagesize($cover['tmp_name']);
+        self::fileTypeCheck($img['type'], $redirect);
+
+        $width_h  = getimagesize($img['tmp_name']);
         if ($width_h < 500) {
             is_return(__('msg.five_width'), 'error', $redirect);
         }
-
+ 
         $path = HLEB_PUBLIC_DIR . Img::PATH['posts_cover'];
         $year = date('Y') . '/';
-        $file = $cover['tmp_name'];
+        $file = $img['tmp_name'];
         $filename = 'c-' . time();
 
         self::createDir($path . $year);
@@ -274,4 +281,13 @@ class UploadImage
             mkdir($path, 0777, true);
         }
     }
+    
+    public static function fileTypeCheck($type, $redirect)
+    {
+        if (($type != 'image/jpeg') OR ($type == 'image/png') OR ($type == 'image/gif') OR ($type == 'image/jpg')) {
+            is_return(__('msg.five_format'), 'error', $redirect);
+        }
+
+        return true;
+    }    
 }

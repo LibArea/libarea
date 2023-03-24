@@ -284,7 +284,7 @@ class SettingController extends Controller
         ActionModel::addLogs(
             [
                 'id_content'    => $this->user['id'],
-                'action_type'   => 'user',
+                'action_type'   => 'profile',
                 'action_name'   => 'deleted',
                 'url_content'   => url('profile', ['login' => $this->user['login']]),
             ]

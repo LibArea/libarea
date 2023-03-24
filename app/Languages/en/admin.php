@@ -18,6 +18,7 @@ return [
     'advertising'       => 'Advertising',
     'catalog'           => 'Catalog',
     'facets'            => 'Facets',
+    'profile'           => 'Profile',
     'users'             => 'Members',
     'time'              => 'Time',
     'avatar'            => 'Avatar',

@@ -18,6 +18,7 @@ return [
     'advertising'       => 'Реклама',
     'catalog'           => 'Каталог',
     'facets'            => 'Фасети',
+    'profile'           => 'Профіль',
     'users'             => 'Учасники',
     'time'              => 'Час',
     'avatar'            => 'Аватар',

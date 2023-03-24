@@ -49,6 +49,7 @@ return [
     'email_replay'          => 'Acest e-mail este deja pe site',
     'multiple_accounts'     => 'Nu înregistrați mai multe conturi',
     'five_width'            => 'Lățimea copertei mai mică de 500 px',
+    'five_format'           => 'Tip de fișier greșit',
     'silent_mode'           => 'Nu poți posta conținut, contul tău este în curs de verificare',
     'nick_character'        => 'Există prea multe caractere repetate în porecla',
     'nick_exist'            => 'Această poreclă există deja',

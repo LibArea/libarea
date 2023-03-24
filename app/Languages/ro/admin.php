@@ -18,6 +18,7 @@ return [
     'advertising'       => 'Publicitate',
     'catalog'           => 'Catalog',
     'facets'            => 'Fațete',
+    'profile'           => 'Profil',
     'users'             => 'Membrii',
     'time'              => 'Timp',
     'avatar'            => 'Avatar',

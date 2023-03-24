@@ -18,6 +18,7 @@ return [
     'advertising'       => '廣告',
     'catalog'           => '卡塔洛格',
     'facets'            => '方面',
+    'profile'           => '轮廓',
     'users'             => '参加者',
     'time'              => '时间',
     'avatar'            => '阿凡达',

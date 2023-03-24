@@ -49,6 +49,7 @@ return [
     'email_replay'          => 'This email is already on the site',
     'multiple_accounts'     => 'Do not register multiple accounts',
     'five_width'            => 'Cover width less than 500px',
+    'five_format'           => 'Wrong file type',
     'silent_mode'           => 'You cannot post content, your account is being verified',
     'nick_character'        => 'There are too many repeated characters in the nickname',
     'nick_exist'            => 'This nickname already exists',

@@ -49,6 +49,7 @@ return [
     'email_replay'          => '此邮箱已在网站上注册',
     'multiple_accounts'     => '不要注册多个帐户',
     'five_width'            => '封面宽度小于500px',
+    'five_format'           => '文件类型错误',
     'silent_mode'           => '你无法发布内容，你的帐户正在验证中',
     'nick_character'        => '昵称中有太多重复字符',
     'successfully_login'    => '登录成功',

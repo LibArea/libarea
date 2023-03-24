@@ -307,6 +307,7 @@ a:hover > img,
 .content-body {
   max-width: 810px;
   margin-top: 15px;
+  overflow-wrap: break-word;
 }
 
 .content_tree:target,

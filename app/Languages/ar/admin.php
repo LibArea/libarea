@@ -18,6 +18,7 @@ return [
     'advertising'       => 'أعلانات',
     'catalog'           => 'فهرس',
     'facets'            => 'جوانب',
+    'profile'           => 'حساب تعريفي',
     'users'             => 'الاعضاء',
     'time'              => 'الوقت',
     'avatar'            => 'الصورة الرمزية',

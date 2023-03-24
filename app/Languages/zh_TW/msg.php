@@ -49,6 +49,7 @@ return [
     'email_replay'          => '此電子郵件已在網站上',
     'multiple_accounts'     => '不要註冊多個帳戶',
     'five_width'            => '封面寬度小於 500px',
+    'five_format'           => '文件类型错误',
     'silent_mode'           => '您無法發佈內容，您的帳戶正在驗證中',
     'nick_character'        => '暱稱中重複字符過多',
     'nick_exist'            => '此暱稱已存在',
