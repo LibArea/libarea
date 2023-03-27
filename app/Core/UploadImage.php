@@ -66,8 +66,10 @@ class UploadImage
             // Delete the old avatar, except for the default one
             // Удалим старую аватарку, кроме дефолтной
             if ($foto != $default_img && $foto != $new_img) {
-                @unlink($path_img . $foto);
-                @unlink($path_img_small . $foto);
+                if ($foto != false) {
+                    @unlink($path_img . $foto);
+                    @unlink($path_img_small . $foto);
+                }
             }
 
             if ($type == 'facet') {
@@ -161,13 +163,15 @@ class UploadImage
                 $cover_art  = $user['cover_art'];
             } else {
                 $facet      = FacetModel::getFacet($content_id, 'id', $type);
-                $cover_art  = $facet['facet_cover_art'];
+                $cover_art  = $facet['facet_cover_art'] ?? false;
             }
 
             // Удалим старую, кроме дефолтной
             if ($cover_art != $default_img && $cover_art != $new_cover) {
-                @unlink($path_cover_img . $cover_art);
-                @unlink($path_cover_small . $cover_art);
+                    @unlink($path_cover_img . $cover_art);
+                if ($cover_art != false) {    
+                    @unlink($path_cover_small . $cover_art);
+                }
             }
 
             // Запишем обложку 

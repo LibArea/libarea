@@ -12,7 +12,7 @@ class ParserModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $field = ($type == 'slug') ? "login" : "id";
 
-        $sql = "SELECT login FROM users WHERE $field = :params AND activated = 1 AND is_deleted = 0";
+        $sql = "SELECT id, login FROM users WHERE $field = :params AND activated = 1 AND is_deleted = 0";
 
         return DB::run($sql, ['params' => $params])->fetch();
     }

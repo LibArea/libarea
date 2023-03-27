@@ -82,7 +82,9 @@ class AddCommentController extends Controller
         if ($comment_id) {
             $comment = CommentModel::getCommentsId($comment_id);
             if ($this->user['id'] != $comment['comment_user_id']) {
-                NotificationModel::send($comment['comment_user_id'], NotificationModel::TYPE_COMMENT_COMMENT, $url);
+                if ($answ['answer_user_id'] != $comment['comment_user_id']) {
+                    NotificationModel::send($comment['comment_user_id'], NotificationModel::TYPE_COMMENT_COMMENT, $url);
+                }
             }
         }
 
