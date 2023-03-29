@@ -91,6 +91,8 @@ class UploadImage
         $month      = date('n') . '/';
         $file       = $img['tmp_name'];
         $filename   = 'post-' . time();
+        
+        self::fileTypeCheck($img['type'], '/');
 
         // For the body of the post, if png then we will not change the file extension
         // Для тела поста, если png то не будем менять расширение файла

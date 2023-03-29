@@ -3,16 +3,12 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
+use Session;
 
 class LogoutController extends Controller
 {
     public function index()
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        session_destroy();
-        setcookie("remember", "", time() - 3600, "/");
-        redirect('/');
+        Session::logout();
     }
 }

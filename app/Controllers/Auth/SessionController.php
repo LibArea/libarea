@@ -4,6 +4,7 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\AuthModel;
+use Session;
 
 class SessionController extends MainController
 {
@@ -16,11 +17,7 @@ class SessionController extends MainController
 
     public static function annul($user_id)
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-
-        session_destroy();
+        Session::logout();
 
         AuthModel::deleteTokenByUserId($user_id);
 

@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\User\{SettingModel, UserModel};
 use App\Models\{IgnoredModel, AuthModel, ActionModel};
-use UploadImage, Meta, UserData, Img, Html, SendEmail;
+use UploadImage, Session, Meta, UserData, Img, Html, SendEmail;
 
 use App\Validate\RulesUserSetting;
 
@@ -290,12 +290,7 @@ class SettingController extends Controller
             ]
         );
 
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        session_destroy();
-        setcookie("remember", "", time() - 3600, "/");
-        redirect('/');
+        Session::logout();
     }
     
 }
