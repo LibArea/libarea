@@ -64,7 +64,7 @@ main { width: calc(100% - 590px); }
   .mb-text-xl { font-size: 1.25rem; }
   .logo { font-size: 18px; }
   .gap-max { gap: 1.5rem; }
-  footer ul { padding-left: 0; }
+  .footer ul { padding-left: 0; }
 
   .mb-img-2xl {
     height: 65px;
