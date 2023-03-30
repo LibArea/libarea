@@ -290,7 +290,9 @@ class UploadImage
     
     public static function fileTypeCheck($type, $redirect)
     {
-        if (($type != 'image/jpeg') OR ($type == 'image/png') OR ($type == 'image/gif') OR ($type == 'image/jpg')) {
+        // permitted
+        $types = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']; 
+        if (!in_array($type, $types)) {
             is_return(__('msg.five_format'), 'error', $redirect);
         }
 
