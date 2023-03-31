@@ -272,7 +272,7 @@ class SettingController extends Controller
         
         SettingModel::setNewEmail($email, $code);
 
-        SendEmail::mailText($this->user['id'], 'new.email', ['link' => '/setting?newemail=' . $code]);
+        SendEmail::mailText($this->user['id'], 'new.email', ['link' => '/setting?newemail=' . $code, 'new_email' =>$email]);
 
         return json_encode('success');
     }

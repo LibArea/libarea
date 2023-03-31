@@ -3,6 +3,10 @@
 use App\Models\User\{SettingModel, UserModel};
 use App\Exception\AutorizationException;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class SendEmail
 {
     public static function mailText($uid, $type, array $variables = [])
@@ -39,6 +43,7 @@ class SendEmail
                 $message    = __('mail.activate_email_message', ['url' => $url . $variables['link']]);
                 break;
             case 'new.email':
+                $user_email = $variables['new_email'];
                 $subject    = __('mail.new_email_subject', ['name' => config('meta.name')]);
                 $message    = __('mail.new_email_message', ['url' => $url . $variables['link']]);
                 break;
@@ -61,20 +66,37 @@ class SendEmail
     {
         if (config('integration.smtp')) {
 
-            $mailSMTP = new SendMailSmtpClass(config('integration.smtp_user'), config('integration.smtp_pass'), 'ssl://' . config('integration.smtp_host'), config('integration.smtp_port'), "UTF-8");
+            $mail = new PHPMailer(true);
 
-            $from = array(
-                config('meta.name'), // Имя отправителя
-                config('integration.smtp_user') // почта отправителя
-            );
+            try {
+                // Server settings
+                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                   //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = config('integration.smtp_host');        //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = config('integration.smtp_user');        //SMTP username
+                $mail->Password   = config('integration.smtp_pass');        //SMTP password
+                $mail->SMTPSecure = 'ssl'; // PHPMailer::ENCRYPTION_SMTPS;  //Enable implicit TLS encryption
+                $mail->Port       = config('integration.smtp_port');        //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-            $result =  $mailSMTP->send($email, $subject, $message, $from);
+                $mail->CharSet    = 'utf-8';
 
-            if ($result === true) {
+                //Recipients
+                $mail->setFrom(config('integration.smtp_user'), config('meta.name'));
+                $mail->addAddress($email);                                  //Name is optional
+
+                //Content
+                $mail->isHTML(true);                                        //Set email format to HTML
+                $mail->Subject = $subject;
+                $mail->Body    = $message;
+
+                $mail->send();
                 return true;
-            } else {
-                throw AutorizationException::Smtp("Error - " . $result);
-            }
+            } catch (Exception $e) {
+                throw AutorizationException::Smtp("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+            }        
+                        
+            
         } else {
             $mail = new \Phphleb\Muller\StandardMail(false);
             $mail->setNameFrom(config('meta.name')); // вот тут было длинное
