@@ -14,123 +14,127 @@
       $post_url = post_slug($post['post_id'], $post['post_slug']);
     ?>
 
-      <div class="block-answer mb20">
-        <?php if ($n != 1) : ?><div class="br-top-dotted mt10 mb10"></div><?php endif; ?>
+      <?php if ($answer['answer_is_deleted'] == 1 && !UserData::checkAdmin()) : ?>
+        <div class="gray-600 text-sm m10"><?= __('app.content_deleted', ['name' => __('app.answer')]); ?>...</div>
+      <?php else : ?>
 
-        <?php if ($answer['answer_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
-        <?php if ($answer['answer_published'] == 0 && $answer['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
+        <div class="block-answer mb20">
+          <?php if ($n != 1) : ?><div class="br-top-dotted mt10 mb10"></div><?php endif; ?>
 
-        <ol class="list-none<?php if ($answer['answer_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
-          <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
-            <div class="content-body">
-              <div class="flex justify-between">
-                <div class="flex text-sm gap">
-                  <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">
-                    <?= Img::avatar($answer['avatar'], $answer['login'], 'img-sm mr5', 'small'); ?>
-                    <span <?php if (Html::loginColor($answer['created_at'])) : ?> class="green" <?php endif; ?>>
-                      <?= $answer['login']; ?>
-                    </span>
-                  </a>
-                  <?php if ($post['post_user_id'] == $answer['answer_user_id']) : ?>
-                    <svg class="icons icon-small sky">
-                      <use xlink:href="/assets/svg/icons.svg#mic"></use>
-                    </svg>
-                  <?php endif; ?>
-                  <span class="gray-600 lowercase">
-                    <?= Html::langDate($answer['answer_date']); ?>
-                  </span>
-                  <?php if (empty($answer['edit'])) : ?>
-                    <span class="gray-600">
-                      (<?= __('app.ed'); ?>.)
-                    </span>
-                  <?php endif; ?>
-                  <?php if ($answer['answer_published'] == 0 && UserData::checkAdmin()) : ?>
-                    <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
-                  <?php endif; ?>
-                </div>
+          <?php if ($answer['answer_published'] == 0 && $answer['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
-                <div class="right inline">
-                  <div class="relative ml10">
-                    <span class="trigger gray-600 text-sm">
-                      <svg class="icons">
-                        <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
+          <ol class="list-none<?php if ($answer['answer_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
+            <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
+              <div class="content-body">
+                <div class="flex justify-between">
+                  <div class="flex text-sm gap">
+                    <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">
+                      <?= Img::avatar($answer['avatar'], $answer['login'], 'img-sm mr5', 'small'); ?>
+                      <span <?php if (Html::loginColor($answer['created_at'])) : ?> class="green" <?php endif; ?>>
+                        <?= $answer['login']; ?>
+                      </span>
+                    </a>
+                    <?php if ($post['post_user_id'] == $answer['answer_user_id']) : ?>
+                      <svg class="icons icon-small sky">
+                        <use xlink:href="/assets/svg/icons.svg#mic"></use>
                       </svg>
+                    <?php endif; ?>
+                    <span class="gray-600 lowercase">
+                      <?= Html::langDate($answer['answer_date']); ?>
                     </span>
-                    <ul class="dropdown">
+                    <?php if (empty($answer['edit'])) : ?>
+                      <span class="gray-600">
+                        (<?= __('app.ed'); ?>.)
+                      </span>
+                    <?php endif; ?>
+                    <?php if ($answer['answer_published'] == 0 && UserData::checkAdmin()) : ?>
+                      <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
+                    <?php endif; ?>
+                  </div>
 
-                      <?php if (Access::author('answer', $answer) === true) : ?>
-                        <li>
-                          <a class="editansw" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                            <svg class="icons">
-                              <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                            </svg>
-                            <?= __('app.edit'); ?>
-                          </a>
-                        </li>
-                      <?php endif; ?>
+                  <div class="right inline">
+                    <div class="relative ml10">
+                      <span class="trigger gray-600 text-sm">
+                        <svg class="icons">
+                          <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
+                        </svg>
+                      </span>
+                      <ul class="dropdown">
 
-                      <?php if (UserData::checkAdmin()) : ?>
-                        <li>
-                          <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
-                            <svg class="icons">
-                              <use xlink:href="/assets/svg/icons.svg#trash-2"></use>
-                            </svg>
-                            <?= $answer['answer_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
-                          </a>
-                        </li>
-
-                        <li>
-                          <a href="<?= url('admin.logip', ['ip' => $answer['answer_ip']]); ?>">
-                            <svg class="icons">
-                              <use xlink:href="/assets/svg/icons.svg#info"></use>
-                            </svg>
-                            <?= $answer['answer_ip']; ?>
-                          </a>
-                        <li>
+                        <?php if (Access::author('answer', $answer) === true) : ?>
+                          <li>
+                            <a class="editansw" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
+                              <svg class="icons">
+                                <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                              </svg>
+                              <?= __('app.edit'); ?>
+                            </a>
+                          </li>
                         <?php endif; ?>
 
-                        <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
+                        <?php if (UserData::checkAdmin()) : ?>
+                          <li>
+                            <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
+                              <svg class="icons">
+                                <use xlink:href="/assets/svg/icons.svg#trash-2"></use>
+                              </svg>
+                              <?= $answer['answer_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
+                            </a>
+                          </li>
+
+                          <li>
+                            <a href="<?= url('admin.logip', ['ip' => $answer['answer_ip']]); ?>">
+                              <svg class="icons">
+                                <use xlink:href="/assets/svg/icons.svg#info"></use>
+                              </svg>
+                              <?= $answer['answer_ip']; ?>
+                            </a>
+                          <li>
+                          <?php endif; ?>
+
+                          <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
+                          <li>
+                            <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" data-a11y-dialog-show="my-dialog">
+                              <svg class="icons">
+                                <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
+                              </svg>
+                              <?= __('app.report'); ?>
+                            </a>
+                          </li>
+                        <?php endif; ?>
                         <li>
-                          <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" data-a11y-dialog-show="my-dialog">
+                          <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'heading'); ?>
+                        </li>
+                        <li>
+                          <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>">
                             <svg class="icons">
-                              <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
+                              <use xlink:href="/assets/svg/icons.svg#anchor"></use>
                             </svg>
-                            <?= __('app.report'); ?>
+                            <?= __('app.link'); ?>
                           </a>
                         </li>
-                      <?php endif; ?>
-                      <li>
-                        <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'heading'); ?>
-                      </li>
-                      <li>
-                        <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>">
-                          <svg class="icons">
-                            <use xlink:href="/assets/svg/icons.svg#anchor"></use>
-                          </svg>
-                          <?= __('app.link'); ?>
-                        </a>
-                      </li>
-                    </ul>
+                      </ul>
+                    </div>
                   </div>
+
                 </div>
+                <div class="ind-first-p">
+                  <?= markdown($answer['answer_content'], 'text'); ?>
+                </div>
+              </div>
+              <div class="flex text-sm gap mt10">
+                <?= Html::votes($answer, 'answer'); ?>
+
+                <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+                  <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray-600"><?= __('app.reply'); ?></a>
+                <?php endif; ?>
 
               </div>
-              <div class="ind-first-p">
-                <?= markdown($answer['answer_content'], 'text'); ?>
-              </div>
-            </div>
-            <div class="flex text-sm gap mt10">
-              <?= Html::votes($answer, 'answer'); ?>
-
-              <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray-600"><?= __('app.reply'); ?></a>
-              <?php endif; ?>
-
-            </div>
-            <div data-insert="<?= $answer['answer_id']; ?>" id="insert_id_<?= $answer['answer_id']; ?>" class="none"></div>
-          </li>
-        </ol>
-      </div>
+              <div data-insert="<?= $answer['answer_id']; ?>" id="insert_id_<?= $answer['answer_id']; ?>" class="none"></div>
+            </li>
+          </ol>
+        </div>
+      <?php endif; ?>
 
       <?php foreach ($answer['comments'] as  $comment) : ?>
 
@@ -207,9 +211,9 @@
                           <?= $comment['comment_ip']; ?>
                         </a>
                       <li>
-                    <?php endif; ?>
+                      <?php endif; ?>
 
-                    <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
+                      <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
                       <li>
                         <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" data-a11y-dialog-show="my-dialog" class="gray-600">
                           <svg class="icons">
