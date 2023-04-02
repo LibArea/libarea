@@ -59,7 +59,7 @@ return [
   // Навигация на центральной странице в ленте
   'home' => [
     [
-      'tl'    => UserData::USER_FIRST_LEVEL,
+     // 'tl'    => UserData::USER_FIRST_LEVEL,
       'id'    => 'main.all',
       'url'   => url('main.all'),
       'title' => __('app.all'),

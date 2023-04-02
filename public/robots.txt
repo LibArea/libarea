@@ -3,6 +3,7 @@ Disallow: /search
 Disallow: /oauth
 Disallow: /recover
 Disallow: /top
+Disallow: /all
 Disallow: /s/*/top*
 Disallow: /s/flud/*
 Disallow: /page/*

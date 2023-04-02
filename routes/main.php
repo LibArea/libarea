@@ -57,7 +57,6 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/topics/my')->controller('Facets\AllFacetController', ['my', 'topic'])->name('topics.my');
     Route::get('/post/scroll/{type}')->controller('HomeController@scroll'); 
     Route::get('/blogs/my')->controller('Facets\AllFacetController', ['my', 'blog'])->name('blogs.my');
-    Route::get('/all')->controller('HomeController', ['all'])->name('main.all');
 Route::endGroup();
 
 Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();
@@ -138,6 +137,7 @@ Route::get('/')->controller('HomeController', ['feed'])->name('main');
 Route::get('/top')->controller('HomeController', ['top'])->name('main.top');
 Route::get('/questions')->controller('HomeController', ['questions'])->name('main.questions');
 Route::get('/posts')->controller('HomeController', ['posts'])->name('main.posts');
+Route::get('/all')->controller('HomeController', ['all'])->name('main.all');
 
 Route::get('/sitemap.xml')->controller('RssController');
 Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);

@@ -119,20 +119,17 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT 
                     post_id
                         FROM posts
-                        LEFT JOIN
-                        (
-                            SELECT 
-                            MAX(facet_id) as f_id,
-                                relation_post_id
-                                FROM facets  
-                                LEFT JOIN facets_posts_relation 
-                                    on facet_id = relation_facet_id
-                                    GROUP BY relation_post_id
-                        ) AS rel
-                            ON rel.relation_post_id = post_id 
-
-            INNER JOIN users ON id = post_user_id
-                WHERE $ignoring post_draft = 0 $string $display";
+                            LEFT JOIN
+                            (
+                                SELECT 
+                                    MAX(facet_id) as f_id,
+                                        relation_post_id
+                                        FROM facets  
+                                            LEFT JOIN facets_posts_relation on facet_id = relation_facet_id GROUP BY relation_post_id
+                            ) AS rel
+                                ON rel.relation_post_id = post_id 
+                                    INNER JOIN users ON id = post_user_id
+                                        WHERE $ignoring post_draft = 0 $string $display";
 
         return DB::run($sql)->rowCount();
     }
@@ -142,24 +139,23 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         $countLike = config('feed.countLike');
         $trust_level = UserData::getUserTl();
 
-        if ($type == 'questions') {
-            return "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 1";
-        }
-
-        if ($type == 'posts') {
-            return "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 0";
-        }
-
-        if ($trust_level == 10) {
-            $display = "AND post_is_deleted = 0";
-
-            if ($type == 'deleted') {
-                $display = "AND post_is_deleted = 1";
-            }
-        } elseif ($trust_level > 0) {
-            $display = "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
-        } else {
-            $display = "AND post_is_deleted = 0 AND post_votes >= $countLike AND post_tl <= " . $trust_level;
+        switch ($type) {
+            case 'questions':
+                $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 1";
+                break;
+            case 'posts':
+                $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 0";
+                break;
+            case 'deleted':
+                $display =  "AND post_is_deleted = 1";
+                break;
+            case 'feed':
+            case 'top':
+                $display =  "AND post_is_deleted = 0 AND post_votes >= $countLike AND post_tl <= " . $trust_level;
+                break;
+            default:
+                $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
+                break;
         }
 
         return $display;
@@ -226,7 +222,6 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         
         return $sort;
     }
-
 
     // Facets (topic, blogs) all / subscribed
     // Фасеты (темы, блоги) все / подписан
