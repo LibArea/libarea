@@ -8,7 +8,7 @@
 
 return [
   'appealed_subject' => '{name} — ai fost contactat (@)',
-  'appealed_message' => '<p>Pe site, ați fost contactat (@). Uite:<p><p>{url}/p>',
+  'appealed_message' => '<p>Pe site, ați fost contactat (@). Uite:<p><p>{url}</p>',
 
   'changing_password_subject' => '{name} — recuperare parola',
   'changing_password_message'  => '<p>Link pentru resetarea parolei:</p><p>{url}</p>',

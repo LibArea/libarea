@@ -8,7 +8,7 @@
 
 return [
   'appealed_subject' => '{name} اتصل بك (@)',
-  'appealed_message' => '<p>تم الاتصال بك (@). انظر:<p><p>{url}/p>',
+  'appealed_message' => '<p>تم الاتصال بك (@). انظر:<p><p>{url}</p>',
 
   'changing_password_subject' => '{name} — استعادة كلمة السر',
   'changing_password_message'  => '<p>رابط اعادة تعين كلمة السر الخاصة بك:</p><p>{url}</p>',

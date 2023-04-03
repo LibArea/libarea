@@ -8,7 +8,7 @@
 
 return [
   'appealed_subject' => '{name} — к вам обратились (@)',
-  'appealed_message' => '<p>На сайте, к вам обратились (@). Посмотреть:<p><p>{url}/p>',
+  'appealed_message' => '<p>На сайте, к вам обратились (@). Посмотреть:<p><p>{url}</p>',
 
   'changing_password_subject' => '{name} — восстановление пароля',
   'changing_password_message'  => '<p>Ваша ссылка для изменения пароля:</p><p>{url}</p>',

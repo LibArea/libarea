@@ -8,7 +8,7 @@
 
 return [
   'appealed_subject' => '{name} contacted you (@)',
-  'appealed_message' => '<p>On the site you were contacted (@). Look:<p><p>{url}/p>',
+  'appealed_message' => '<p>On the site you were contacted (@). Look:<p><p>{url}</p>',
 
   'changing_password_subject' => '{name} — password recovery',
   'changing_password_message'  => '<p>Your password reset link:</p><p>{url}</p>',

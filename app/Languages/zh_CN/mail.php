@@ -8,7 +8,7 @@
 
 return [
   'appealed_subject' => '{name} — 已联系你(@)',
-  'appealed_message' => '<p>在网站上，有人找你谈话(@).查看：<p><p>{url}/p>',
+  'appealed_message' => '<p>在网站上，有人找你谈话(@).查看：<p><p>{url}</p>',
 
   'changing_password_subject' => '{name} — 找回密码',
   'changing_password_message'  => '<p>你的密码重置链接：</p><p>{url}</p>',
