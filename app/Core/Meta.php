@@ -34,7 +34,16 @@ class Meta
                         . '<meta property="og:image:width" content="820">'
                         . '<meta property="og:image:height" content="320">';
                 }
+                
+                $output .= '<meta name="twitter:card" content="summary">'
+                    . '<meta name="twitter:title" content="' . $title . '">'
+                    . '<meta name="twitter:url" content="' . config('meta.url') . $m['url'] . '">'
+                    . '<meta property="twitter:description" content="' . $description . '">';
+                
+                if (!empty($m['imgurl'])) { $output .= '<meta property="twitter:image" content="' . config('meta.url') . $m['imgurl'] . '">'; }
             }
+            
+
         }
 
         return $output;
