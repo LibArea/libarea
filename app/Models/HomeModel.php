@@ -149,13 +149,15 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             case 'deleted':
                 $display =  "AND post_is_deleted = 1";
                 break;
-            case 'feed':
             case 'top':
-                $display =  "AND post_is_deleted = 0 AND post_votes >= $countLike AND post_tl <= " . $trust_level;
-                break;
-            default:
+            case 'all':
                 $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
                 break;
+            default:
+                $display =  "AND post_is_deleted = 0 AND post_votes >= $countLike AND post_tl <= " . $trust_level;
+                if (UserData::checkActiveUser()) {
+                    $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
+                }    
         }
 
         return $display;
