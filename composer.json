@@ -32,7 +32,6 @@
     "phphleb/debugpan": "1.*",
     "phphleb/radjax": "dev-master",
     "phphleb/muller": "dev-main",
-    "phphleb/updater": "^1.0",
     "phphleb/combinator": "dev-main",
     "cocur/slugify": "^4.3",
     "donatj/phpuseragentparser": "dev-master",

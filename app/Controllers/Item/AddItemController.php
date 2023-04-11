@@ -4,6 +4,7 @@ namespace App\Controllers\Item;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\FacetPresence;
 use App\Models\Item\{WebModel, UserAreaModel};
 use App\Models\{SubscriptionModel, ActionModel, FacetModel, NotificationModel};
 use UserData, Meta, Access;
@@ -19,6 +20,14 @@ class AddItemController extends Controller
         if (Access::trustLevels(config('trust-levels.tl_add_item')) == false) {
             redirect('/web');
         }
+        
+        // Adding from page topic / blog
+        // Добавление со странице категории
+        $category_id   = Request::getInt('category_id');
+
+        if ($category_id) {
+             $category  = FacetPresence::index($category_id, 'id', 'category');
+        }
 
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
@@ -28,8 +37,9 @@ class AddItemController extends Controller
                 'meta'  => Meta::get(__('web.add_website')),
                 'user'  => $this->user,
                 'data'  => [
-                    'sheet'      => 'add',
-                    'type'       => 'web',
+                    'sheet'             => 'add',
+                    'type'              => 'web',
+                    'category'          => $category ?? false,
                     'user_count_site'   => $count_site,
                 ]
             ],

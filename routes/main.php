@@ -30,8 +30,11 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::endGroup();    
 
     Route::type(['get', 'post'])->get('/folder/content/save')->controller('FolderController@addFolderContent');
- 
+
+    // Add directly from the Themes / Categories page
+    // Добавление непосредственно со страницы Темы / Категории
     Route::get('/add/post/{facet_id}')->controller('Post\AddPostController')->where(['facet_id' => '[0-9]+']);
+    Route::get('/add/item/{category_id}')->controller('Item\AddItemController@index')->where(['category_id' => '[0-9]+']);
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
 
@@ -146,5 +149,3 @@ Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where
 Route::get('/search/opensearch')->controller('SearchController@openSearch')->name('opensearch');
 
 // Route::bottleneck('/attention', true, "TECHNICAL WORKS ON THE SERVER");
-
-require 'admin.php';

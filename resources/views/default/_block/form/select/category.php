@@ -54,21 +54,17 @@
     <?php if ($action == 'edit') : ?>
       tagify.addTags(JSON.parse('<?= json_encode($data['category_arr']) ?>'))
     <?php else : ?>
-      <?php if (!empty($data['topic'])) : ?>
-        <?php if ($data['topic']) :
-          $id     = $data['topic']['facet_id'];
-          $title  = $data['topic']['facet_title'];
+        <?php if ($category) :
+          $id     = $category['facet_id'];
+          $title  = $category['facet_title'];
         ?>
           tagify.addTags([{
-            value: '<?= $id; ?>',
-            facet_title: '<?= $title; ?>'
+            id: '<?= $id; ?>',
+            value: '<?= $title; ?>'
           }])
         <?php else : ?>
           tagify.addTags([])
         <?php endif; ?>
-      <?php else : ?>
-        tagify.addTags([])
-      <?php endif; ?>
     <?php endif;  ?>
   });
 </script>

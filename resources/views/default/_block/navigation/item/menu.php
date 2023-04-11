@@ -1,22 +1,24 @@
-<?php $user_count_site = $data['user_count_site'] ?? 0; ?>
+<?php 
+$category = $data['category'] ?? false;
+$url = $category ? url('content.add', ['type' => 'item']) . '/' . $category['facet_id'] : url('content.add', ['type' => 'item']);
+$user_count_site = $data['user_count_site'] ?? false; 
+?>
 
 <li>
   <a <?= is_current(url('web.user.sites')) ? 'class="active"' : ''; ?> href="<?= url('web.user.sites'); ?>">
     <?= __('web.my_website'); ?>
-    <?php if ($user_count_site != 0) : ?>
+    <?php if ($user_count_site != false) : ?>
       (<?= $user_count_site; ?>)
     <?php endif; ?>
   </a>
 </li>
 
-<?php if (Access::trustLevels(config('trust-levels.tl_add_item'))) : ?>
-  <?php if ($user_count_site == 0 || UserData::checkAdmin()) : ?>
-    <li>
-      <a href="<?= url('content.add', ['type' => 'item']); ?>">
-        <?= __('web.add_website'); ?>
-      </a>
-    </li>
-  <?php endif; ?>
+<?php if (Access::trustLevels(config('trust-levels.tl_add_item')) || ($user_count_site != false)) : ?>
+  <li>
+    <a href="<?= $url; ?>">
+      <?= __('web.add_website'); ?>
+    </a>
+  </li>
 <?php endif; ?>
 
 <li>
