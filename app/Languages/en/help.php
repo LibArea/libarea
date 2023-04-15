@@ -33,4 +33,6 @@ return [
 
     'team_info'             => 'Other participants can also post articles to your Blog — for this you need to grant them access.',
     'draft_info'            => 'Only the author can read drafts.',
+    
+    'add_poll'              => 'Fill in all the fields. This survey can be used in other parts of the site (for example, in posts).',
 ];

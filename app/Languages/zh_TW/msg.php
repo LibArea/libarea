@@ -69,4 +69,6 @@ return [
     'limit_day'             => '您已達到今天的限額',
     'content_audit'         => '您的消息已發送以供審核',
     'access_denied'         => '您被拒絕訪問',
+    
+    'field_limit'           => '字段数已达到最大值。',
 ];

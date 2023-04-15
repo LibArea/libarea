@@ -68,4 +68,6 @@ return [
     
     'limit_day'             => '对于 {tl}，你已经达到今日限制“{name}”',
     'content_audit'         => '你的消息已发送待审核',
+    
+    'field_limit'           => '字段数已达到最大值。',
 ];

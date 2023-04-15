@@ -188,6 +188,8 @@ return [
 
     'entry_policy'      => 'Aprobați noi membri',
 
+    'option'            => 'Opțiune',
+
     'back'              => 'Înapoi',
     'edit'              => 'Schimbare',
     'save'              => 'Salva',
@@ -196,6 +198,8 @@ return [
     'add_topic'         => 'Adaugă subiect',
     'add_blog'          => 'Adaugă blog',
     'add_category'      => 'Adăugați o categorie',
+    'add_poll'          => 'Adăugați sondaj',
+    'edit_poll'         => 'Editați sondajul',
     'edit_category'     => 'Schimbați categoria',
     'edit_post'         => 'Editează postarea',
     'edit_topic'        => 'Editați subiectul',
