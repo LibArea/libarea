@@ -12,6 +12,8 @@ return [
     'home'              => 'Acasă',
     'catalog'           => 'Catalog',
     'feed'              => 'Flux',
+    'poll'              => 'Sondaj',
+    'polls'             => 'Sondaje',
     'minimum'           => 'Minim',
     'hi'                => 'Hei',
     'news'              => 'Știri',

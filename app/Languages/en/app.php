@@ -12,6 +12,8 @@ return [
     'home'              => 'Home',
     'catalog'           => 'Catalog',
     'feed'              => 'Feed',
+    'poll'              => 'Poll',
+    'polls'             => 'Polls',
     'minimum'           => 'Minimum',
     'hi'                => 'Hey',
     'news'              => 'News',

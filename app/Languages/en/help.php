@@ -35,4 +35,5 @@ return [
     'draft_info'            => 'Only the author can read drafts.',
     
     'add_poll'              => 'Fill in all the fields. This survey can be used in other parts of the site (for example, in posts).',
+    'poll_info'             => 'My votes sorted by time.',
 ];
