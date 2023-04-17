@@ -1,10 +1,15 @@
 <main>
-  <h2 class="title"><?= __('app.polls'); ?></h2>
+  <div class="flex justify-between mb20">
+    <ul class="nav">
+      <li class="active"><?= __('app.polls'); ?></li>
+    </ul>
+    <div><a class="btn btn-outline-primary btn-small" href="<?= url('content.add', ['type' => 'poll']) ?>">+ <?= __('app.add_poll'); ?></a></div>
+  </div>
   <?php if (!empty($data['polls'])) : ?>
 
     <?php foreach ($data['polls'] as $poll) : ?>
       <div class="content-body">
-        <a class="title" href="#"><?= $poll['question']; ?></a>
+        <a class="title" href="<?= url('poll', ['id' => $poll['id']]); ?>"><?= $poll['title']; ?></a>
         <div class="gray-600"><?= $poll['add_date']; ?></div>
       </div>
     <?php endforeach; ?>

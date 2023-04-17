@@ -129,6 +129,20 @@ queryAll(".add-favorite")
   }));
 
 
+// Poll
+queryAll(".add-poll")
+  .forEach(el => el.addEventListener("click", function (e) {
+    fetch("/poll", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: "question_id=" + el.dataset.id + "&answer_id=" + el.dataset.answer + "&_token=" + token,
+    })
+      .then(response => response.text())
+      .then(text => {
+          location.reload();
+      });
+  }));
+
 // Ignoring members
 queryAll(".add-ignore")
   .forEach(el => el.addEventListener("click", function (e) {
