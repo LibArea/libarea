@@ -49,6 +49,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/notification/{id}')->controller('NotificationController@read')->where(['id' => '[0-9]+'])->name('notif.read');  
     Route::get('/notifications/delete')->controller('NotificationController@remove')->name('notif.remove');  
     Route::get('/favorites')->controller('User\UserController@favorites')->name('favorites');
+    Route::get('/polls')->controller('Poll\PollController')->name('polls');
+    Route::get('/poll/{id}')->controller('Poll\PollController@poll')->where(['id' => '[0-9]+'])->name('poll');
     Route::get('/favorites/folders')->controller('User\UserController@folders')->name('favorites.folders');
     Route::get('/favorites/folders/{id}')->controller('User\UserController@foldersFavorite')->where(['id' => '[0-9]+'])->name('favorites.folder.id');
     Route::get('/subscribed')->controller('User\UserController@subscribed')->name('subscribed');

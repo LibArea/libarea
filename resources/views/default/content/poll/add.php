@@ -1,8 +1,11 @@
 <main>
-  <h2 class="title"><?= __('app.add_poll'); ?></h2>
+  <ul class="nav">
+    <li><a href="<?= url('polls'); ?>"><?= __('app.all'); ?></a></li>
+    <li class="active"><?= __('app.add_poll'); ?></li>
+  </ul>
   <form action="<?= url('content.create', ['type' => 'poll']); ?>" id="myform" method="post">
     <?= csrf_field() ?>
-    <fieldset>
+    <fieldset class="max-w780">
       <input type="text" name="title" />
     </fieldset>
     <fieldset class="max-w300">
@@ -32,6 +35,7 @@
   function addEl() {
     let inputs = document.querySelectorAll('input[type="text"]')
     let lastNum = ((inputs[inputs.length - 1]).getAttribute('name'));
+
     let nextNum = Number(lastNum) + 1;
 
     if (nextNum >= maxFieldLimit) {

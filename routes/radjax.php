@@ -12,6 +12,7 @@ Radjax\Route::get("/new/email", ["post"], "App\Controllers\User\SettingControlle
 
 Radjax\Route::get("/focus", ["post"], "App\Services\Subscription", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/votes", ["post"], "App\Services\Votes", ["protected" => true, "before" => $access]);
+Radjax\Route::get("/poll", ["post"], "App\Controllers\Poll\PollController@vote", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/favorite", ["post"], "App\Services\Favorite", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/ignored", ["post"], "App\Services\Ignored", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/best", ["post"], "App\Services\AnswerBest", ["protected" => true, "before" => $access]);

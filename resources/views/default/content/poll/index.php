@@ -7,10 +7,10 @@
   </div>
   <?php if (!empty($data['polls'])) : ?>
 
-    <?php foreach ($data['polls'] as $poll) : ?>
+    <?php foreach ($data['polls'] as $value) : ?>
       <div class="content-body">
-        <a class="title" href="<?= url('poll', ['id' => $poll['id']]); ?>"><?= $poll['title']; ?></a>
-        <div class="gray-600"><?= $poll['add_date']; ?></div>
+        <a class="title" href="<?= url('poll', ['id' => $value['poll_id']]); ?>"><?= $value['poll_title']; ?></a>
+        <div class="gray-600"><?= $value['poll_date']; ?></div>
       </div>
     <?php endforeach; ?>
 
