@@ -57,7 +57,7 @@ class EditPollController extends Controller
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
         if (Access::author('poll', $question) === false) {
-            redirect(url('poll'));
+            is_return(__('msg.access_denied'), 'error');
         }
 
         return true;

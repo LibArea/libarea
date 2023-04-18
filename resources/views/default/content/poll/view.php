@@ -47,7 +47,6 @@
     <?php endforeach; ?>
 
     <div class="gray-600 mt15"><?= $data['question']['poll_date']; ?>. Код: <code>{poll:<?= $data['question']['poll_id']; ?>}</code></div>
-
   </div>
 </main>
 <aside>

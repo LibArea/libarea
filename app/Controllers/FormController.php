@@ -23,6 +23,10 @@ class FormController extends Controller
             return (new Post\AddPostController)->index($this->type);
         }
 
+        if (in_array($this->type, ['poll'])) {
+            return (new Poll\AddPollController)->index($this->type);
+        }
+
         if (in_array($this->type, config('facets.permitted'))) {
             return (new Facets\AddFacetController)->index($this->type);
         }
@@ -47,6 +51,10 @@ class FormController extends Controller
             return (new Facets\EditFacetController)->index($this->type);
         }
 
+        if ($this->type === 'poll') {
+            return (new Poll\EditPollController)->index();
+        }
+
         if ($this->type === 'answer') {
             return (new Answer\EditAnswerController)->index();
         }
@@ -65,6 +73,10 @@ class FormController extends Controller
     {
         if (in_array($this->type, ['post', 'page'])) {
             return (new Post\AddPostController)->create($this->type);
+        }
+
+        if ($this->type === 'poll') {
+            return (new Poll\AddPollController)->create();
         }
 
         if (in_array($this->type, ['topic', 'blog', 'category', 'section'])) {
@@ -113,6 +125,10 @@ class FormController extends Controller
 
         if (in_array($this->type, ['topic', 'blog', 'category', 'section'])) {
             return (new Facets\EditFacetController)->change($this->type);
+        }
+
+        if ($this->type === 'poll') {
+            return (new Poll\EditPollController)->change();
         }
 
         if ($this->type === 'answer') {

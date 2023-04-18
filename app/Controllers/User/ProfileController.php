@@ -58,7 +58,7 @@ class ProfileController extends Controller
         $this->indexing($profile['id']);
 
         return $this->render(
-            '/user/profile/post',
+            '/user/profile/posts',
             [
                 'meta'  => Profile::metadata('profile_posts', $profile),
                 'data'  => array_merge($this->sidebar($pagesCount, $profile), ['posts' => $posts]),
@@ -87,7 +87,7 @@ class ProfileController extends Controller
         $this->indexing($profile['id']);
 
         return $this->render(
-            '/user/profile/comment',
+            '/user/profile/comments',
             [
                 'meta'  => Profile::metadata('profile_comments', $profile),
                 'data'  => array_merge($this->sidebar($pagesCount, $profile), ['comments' => $mergedArr]),

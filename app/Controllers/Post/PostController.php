@@ -10,11 +10,13 @@ use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedMod
 use Meta, UserData, Access, Img;
 
 use App\Traits\Views;
+use App\Traits\Poll;
 use App\Traits\LastDataModified;
 
 class PostController extends Controller
 {
     use Views;
+    use Poll;
     use LastDataModified;
 
     protected $limit = 25;
@@ -88,6 +90,7 @@ class PostController extends Controller
                         'sorting'       => $sorting ?? null,
                         'sheet'         => 'article',
                         'type'          => 'post',
+                        'poll'          => $this->getPoll($content['post_poll']),
                     ]
                 ]
             );

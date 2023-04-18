@@ -95,6 +95,10 @@ $blog = $data['blog'][0] ?? null;
         <?php endif; ?>
       </div>
 
+      <?php if ($post['post_poll']) : ?>
+        <?= insert('/content/poll/poll', ['poll' => $data['poll']]); ?>
+      <?php endif; ?>
+
       <div class="p15 items-center flex justify-between">
         <div class="items-center flex gap gray-600">
           <?= Html::votes($post, 'post'); ?>

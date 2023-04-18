@@ -98,6 +98,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_lo,
                     post_top,
                     post_url,
+                    post_poll,
                     post_modified,
                     post_related,
                     post_merged_id,

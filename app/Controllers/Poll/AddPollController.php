@@ -43,7 +43,7 @@ class AddPollController extends Controller
                 'id_content'    => $last_id,
                 'action_type'   => 'poll',
                 'action_name'   => 'added',
-                'url_content'   => $url_content,
+                'url_content'   => url('poll', ['id' => $last_id]),
             ]
         ); */
 

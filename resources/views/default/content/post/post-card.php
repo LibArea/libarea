@@ -8,7 +8,7 @@
     <?php endif; ?>
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
-    <div class="box box-fon article_<?= $post['post_id']; ?>">
+    <div class="box box-fon">
       <div class="flex items-center gap-min text-sm mb5">
         <a class="gray-600 flex gap-min items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm', 'max'); ?>
