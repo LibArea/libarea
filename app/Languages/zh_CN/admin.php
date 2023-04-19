@@ -19,6 +19,7 @@ return [
     'catalog'           => '卡塔洛格',
     'facets'            => '部分',
     'profile'           => '轮廓',
+    'poll'              => '民意调查',
     'users'             => '用户',
     'time'              => '时间',
     'avatar'            => '头像',

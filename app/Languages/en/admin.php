@@ -19,6 +19,7 @@ return [
     'catalog'           => 'Catalog',
     'facets'            => 'Facets',
     'profile'           => 'Profile',
+    'poll'              => 'Poll',
     'users'             => 'Members',
     'time'              => 'Time',
     'avatar'            => 'Avatar',

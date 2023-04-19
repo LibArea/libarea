@@ -9,10 +9,12 @@ use App\Models\{PostModel, SubscriptionModel};
 use Meta, UserData, Img;
 
 use App\Traits\LastDataModified;
+use App\Traits\Poll;
 
 class DetailedController extends Controller
 {
     use LastDataModified;
+    use Poll;
 
     protected $limit = 25;
 
@@ -74,6 +76,7 @@ class DetailedController extends Controller
                     'similar'           => $similar ?? [],
                     'user_count_site'   => $count_site,
                     'related_posts'     => $related_posts ?? [],
+                    'poll'              => $this->getPoll($item['item_poll']),
                 ]
             ],
             'item',

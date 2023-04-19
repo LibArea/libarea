@@ -26,6 +26,8 @@ return [
     'tl_add_item'       => 2, // Catalog (каталог)
     'tl_add_reply'      => 2, // Catalog (каталог)
 
+    'tl_add_poll'       => 2,
+
     'tl_add_pm'         => 1, // Private messages (личные сообщения)
     
     'tl_add_draft'      => 2, // Drafts (черновики) invite_limit
@@ -62,6 +64,8 @@ return [
     'perDay_item'       => 1, // Catalog (каталог)
     'perDay_reply'      => 3, // Catalog (каталог)
 
+    'perDay_poll'       => 3,
+
     'perDay_pm'         => 10, // Private messages (личные сообщения)
 
     'perDay_report'     => 3,
@@ -85,6 +89,7 @@ return [
     'edit_time_comment' => 30,
     'edit_time_item'    => 0,
     'edit_time_reply'   => 0,
+    'edit_time_poll'    => 0,
 
     /*
     |--------------------------------------------------------------------------

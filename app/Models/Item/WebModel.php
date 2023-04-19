@@ -149,8 +149,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
-    // Check if the domain exists 
-    // Проверим наличие домена
+    // Detailed information on the domain
+    // Детальная информация по домену
     public static function getItemOne($domain, $user_id)
     {
         $sql = "SELECT
@@ -172,6 +172,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_post_related,
                     item_following_link,
                     item_close_replies,
+                    item_poll,
                     item_is_deleted,
                     votes_item_user_id, votes_item_item_id,
                     rel.*,

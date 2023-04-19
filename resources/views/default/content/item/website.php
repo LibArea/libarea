@@ -44,6 +44,11 @@
           </div>  
         </div>
       </div>
+      
+      <?php if ($item['item_poll']) : ?>
+        <?= insert('/content/poll/poll', ['poll' => $data['poll']]); ?>
+      <?php endif; ?>
+      
       <?php if ($item['item_is_soft'] == 1) : ?>
         <h2><?= __('web.soft'); ?></h2>
         <h3><?= $item['item_title_soft']; ?></h3>

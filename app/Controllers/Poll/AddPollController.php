@@ -38,14 +38,14 @@ class AddPollController extends Controller
             PollModel::createAnswers($key, $val, $last_id);
         }
 
-        /* ActionModel::addLogs(
+        ActionModel::addLogs(
             [
                 'id_content'    => $last_id,
                 'action_type'   => 'poll',
                 'action_name'   => 'added',
                 'url_content'   => url('poll', ['id' => $last_id]),
             ]
-        ); */
+        );
 
         is_return(__('msg.post_added'), 'success', url('polls'));
     }

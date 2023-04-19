@@ -19,6 +19,7 @@ return [
     'catalog'           => 'Catalog',
     'facets'            => 'Fațete',
     'profile'           => 'Profil',
+    'poll'              => 'Studiu',
     'users'             => 'Membrii',
     'time'              => 'Timp',
     'avatar'            => 'Avatar',
