@@ -99,6 +99,12 @@ return [
             'title' => __('app.invites'),
             'id'    => '',
         ], [
+            'tl'    => 2,
+            'icon'  => 'chart',
+            'url'   => url('polls'),
+            'title' => __('app.polls'),
+            'id'    => '',
+        ], [
             'hr'    => 'hr',
         ], [
             'tl'    => UserData::REGISTERED_ADMIN,

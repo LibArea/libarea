@@ -6,10 +6,11 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\PostPresence;
 use App\Models\User\UserModel;
-use App\Models\{FacetModel, PostModel};
+use App\Models\{FacetModel, PostModel, PollModel};
 use UploadImage, Meta, Access, UserData;
 
 use App\Traits\Slug;
+use App\Traits\Poll;
 use App\Traits\Author;
 use App\Traits\Related;
 
@@ -18,6 +19,7 @@ use App\Validate\RulesPost;
 class EditPostController extends Controller
 {
     use Slug;
+    use Poll;
     use Author;
     use Related;
 
@@ -49,6 +51,7 @@ class EditPostController extends Controller
                     'topic_arr'     => PostModel::getPostFacet($post['post_id'], 'topic'),
                     'blog_arr'      => PostModel::getPostFacet($post['post_id'], 'blog'),
                     'section_arr'   => PostModel::getPostFacet($post['post_id'], 'section'),
+                    'poll'          => PollModel::getQuestion($post['post_poll']),
                 ]
             ]
         );
@@ -121,6 +124,8 @@ class EditPostController extends Controller
                 'post_tl'               => Request::getPostInt('content_tl'),
                 'post_closed'           => Request::getPost('closed') == 'on' ? 1 : 0,
                 'post_top'              => Request::getPost('top') == 'on' ? 1 : 0,
+                'post_poll'             => $this->selectPoll(Request::getPost('poll_id')),
+                'post_modified'         => date("Y-m-d H:i:s"),
             ]
         );
 

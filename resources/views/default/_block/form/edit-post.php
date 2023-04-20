@@ -120,6 +120,9 @@
   </fieldset>
 <?php endif; ?>
 
+<?php if (UserData::getRegType(config('trust-levels.tl_add_poll'))) : ?>
+  <?= insert('/_block/form/select/poll', ['poll' => false]); ?>
+<?php endif; ?>  
 
 <p>
   <?php if ($post['post_draft'] == 1) : ?>

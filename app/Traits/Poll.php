@@ -17,4 +17,15 @@ trait Poll
             'isVote'    => PollModel::isVote($poll_id)
         ];
     }
+    
+    private function selectPoll($poll_id)
+    {
+        if (!$poll_id) {
+            return 0;
+        }
+
+        $id = json_decode($poll_id, true);
+
+        return $id[0]['id'];
+    }
 }

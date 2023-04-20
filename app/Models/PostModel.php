@@ -26,6 +26,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                                     post_closed,
                                     post_top,
                                     post_url,
+                                    post_poll,
                                     post_url_domain)
                                     
                                 VALUES(:post_title, 
@@ -45,6 +46,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                                     :post_closed,
                                     :post_top,
                                     :post_url,
+                                    :post_poll,
                                     :post_url_domain)";
 
         DB::run($sql, $params);
@@ -181,28 +183,8 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetch();
     }
 
-    public static function editPost($data)
+    public static function editPost($params)
     {
-        $params = [
-            'post_title'            => $data['post_title'],
-            'post_slug'             => $data['post_slug'],
-            'post_feature'          => $data['post_feature'],
-            'post_type'             => $data['post_type'],
-            'post_translation'      => $data['post_translation'],
-            'post_date'             => $data['post_date'],
-            'post_user_id'          => $data['post_user_id'],
-            'post_draft'            => $data['post_draft'],
-            'post_modified'         => date("Y-m-d H:i:s"),
-            'post_content'          => $data['post_content'],
-            'post_content_img'      => $data['post_content_img'],
-            'post_related'          => $data['post_related'],
-            'post_merged_id'        => $data['post_merged_id'],
-            'post_tl'               => $data['post_tl'],
-            'post_closed'           => $data['post_closed'],
-            'post_top'              => $data['post_top'],
-            'post_id'               => $data['post_id'],
-        ];
-
         $sql = "UPDATE posts SET 
                     post_title            = :post_title,
                     post_slug             = :post_slug,
@@ -218,6 +200,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_related          = :post_related,
                     post_merged_id        = :post_merged_id,
                     post_tl               = :post_tl,
+                    post_poll             = :post_poll,
                     post_closed           = :post_closed,
                     post_top              = :post_top
                          WHERE post_id = :post_id";

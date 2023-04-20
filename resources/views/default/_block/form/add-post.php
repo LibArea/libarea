@@ -109,6 +109,10 @@
       <div class="help"><?= __('app.necessarily'); ?></div>
     </div>
 
+    <?php if (UserData::getRegType(config('trust-levels.tl_add_poll'))) : ?>
+      <?= insert('/_block/form/select/poll', ['poll' => false]); ?>
+    <?php endif; ?>  
+
     <?= insert('/_block/form/select/related-posts'); ?>
 
     <input id="inputQa" type="hidden" value="0" name="post_feature">
