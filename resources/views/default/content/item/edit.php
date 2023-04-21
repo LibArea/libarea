@@ -39,7 +39,7 @@ $domain = $data['domain']; ?>
 
         <?= insert('/_block/form/select/category', ['data' => $data, 'action' => 'edit']); ?>
 
-        <?= insert('/_block/form/edit-website', ['domain' => $domain]); ?>
+        <?= insert('/_block/form/edit-website', ['domain' => $domain, 'poll' => $data['poll']]); ?>
 
         <?php if (UserData::checkAdmin()) { ?>
           <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>

@@ -207,6 +207,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                             item_content, 
                             item_published,
                             item_user_id, 
+                            item_poll,
                             item_close_replies) 
                             
                        VALUES(:item_url, 
@@ -214,7 +215,8 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                        :item_title, 
                        :item_content, 
                        :item_published,
-                       :item_user_id, 
+                       :item_user_id,
+                       :item_poll,                        
                        :item_close_replies)";
 
         DB::run($sql, $params);
@@ -247,6 +249,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_telephone      = :item_telephone,
                     item_email          = :item_email,
                     item_vk             = :item_vk,
+                    item_poll           = :item_poll,
                     item_telegram       = :item_telegram
                         WHERE item_id   = :item_id";
 
@@ -285,6 +288,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_post_related,
                     item_following_link,
                     item_close_replies,
+                    item_poll,
                     item_is_deleted
                         FROM items 
                         WHERE item_id = :item_id AND item_is_deleted = 0";

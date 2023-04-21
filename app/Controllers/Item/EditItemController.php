@@ -6,10 +6,11 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\ItemPresence;
 use App\Models\Item\WebModel;
-use App\Models\{FacetModel, PostModel, NotificationModel};
+use App\Models\{FacetModel, PostModel, NotificationModel, PollModel};
 use App\Models\User\UserModel;
 use UserData, Meta, Access;
 
+use App\Traits\Poll;
 use App\Traits\Author;
 use App\Traits\Related;
 
@@ -17,13 +18,14 @@ use App\Validate\RulesItem;
 
 class EditItemController extends Controller
 {
+    use Poll;
     use Author;
     use Related;
 
     // Форма редактирование домена
     public function index()
     {
-        $domain     = ItemPresence::index(Request::getInt('id'));
+        $domain = ItemPresence::index(Request::getInt('id'));
 
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
@@ -51,6 +53,7 @@ class EditItemController extends Controller
                     'user'          => UserModel::getUser($domain['item_user_id'], 'id'),
                     'category_arr'  => WebModel::getItemTopic($domain['item_id']),
                     'post_arr'      => $item_post_related,
+                    'poll'          => PollModel::getQuestion($domain['item_poll']),
                 ]
             ],
             'item',
@@ -110,6 +113,7 @@ class EditItemController extends Controller
                 'item_telephone'        => $data['telephone'] ?? null,
                 'item_email'            => $data['email'] ?? null,
                 'item_vk'               => $data['vk'] ?? null,
+                'item_poll'             => $this->selectPoll(Request::getPost('poll_id')),
                 'item_telegram'         => $data['telegram'] ?? null,
             ]
         );

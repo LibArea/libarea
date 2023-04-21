@@ -97,3 +97,7 @@
     </fieldset>
   </div>
 <?php endif; ?>
+
+<?php if (UserData::getRegType(config('trust-levels.tl_add_poll'))) : ?>
+  <?= insert('/_block/form/select/poll', ['poll' => $poll]); ?>
+<?php endif; ?>  

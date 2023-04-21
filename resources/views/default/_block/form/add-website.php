@@ -24,3 +24,7 @@
     <input type="checkbox" name="published"> <?= __('web.posted'); ?>
   </fieldset>
 <?php endif; ?>
+
+<?php if (UserData::getRegType(config('trust-levels.tl_add_poll'))) : ?>
+  <?= insert('/_block/form/select/poll', ['poll' => false]); ?>
+<?php endif; ?>  

@@ -68,6 +68,7 @@ class AddItemController extends Controller
                 'item_published'        => $published,
                 'item_user_id'          => $this->user['id'],
                 'item_close_replies'    => Request::getPost('close_replies') == 'on' ? 1 : null,
+                'item_poll'             => $this->selectPoll(Request::getPost('poll_id')),
             ]
         );
 
