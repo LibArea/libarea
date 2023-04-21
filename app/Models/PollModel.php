@@ -8,7 +8,7 @@ CREATE TABLE `polls` (
   `poll_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `poll_modified` timestamp NOT NULL DEFAULT current_timestamp(),
   `poll_tl` tinyint(1) NOT NULL DEFAULT 0,
-  `poll_tl_is_deleted` tinyint(1) NOT NULL DEFAULT 0,
+  `poll_is_deleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY  (`poll_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

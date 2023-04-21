@@ -12,11 +12,13 @@ use UploadImage, URLScraper, Meta, UserData;
 use Utopia\Domains\Domain;
 use App\Validate\RulesPost;
 
+use App\Traits\Poll;
 use App\Traits\Slug;
 use App\Traits\Related;
 
 class AddPostController extends Controller
 {
+    use Poll;
     use Slug;
     use Related;
 
@@ -124,6 +126,7 @@ class AddPostController extends Controller
                 'post_tl'               => $fields['content_tl'] ?? 0,
                 'post_closed'           => $closed == 'on' ? 1 : 0,
                 'post_top'              => $top == 'on' ? 1 : 0,
+                'post_poll'             => $this->selectPoll(Request::getPost('poll_id')),
             ]
         );
 
