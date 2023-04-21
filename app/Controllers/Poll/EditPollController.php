@@ -5,7 +5,7 @@ namespace App\Controllers\Poll;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\PollPresence;
-use App\Models\{PollModel, ActionModel};
+use App\Models\PollModel;
 use Access, Meta;
 
 class EditPollController extends Controller

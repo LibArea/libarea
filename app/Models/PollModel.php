@@ -8,6 +8,7 @@ CREATE TABLE `polls` (
   `poll_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `poll_modified` timestamp NOT NULL DEFAULT current_timestamp(),
   `poll_tl` tinyint(1) NOT NULL DEFAULT 0,
+  `poll_is_closed` tinyint(1) NOT NULL DEFAULT 0,
   `poll_is_deleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY  (`poll_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -24,6 +25,7 @@ CREATE TABLE `polls_answers` (
 CREATE TABLE `polls_votes` (
   `vote_id` int(11) NOT NULL auto_increment,
   `vote_question_id` int(11) NOT NULL,
+  `vote_answer_id` int(11) NOT NULL,
   `vote_user_id` int(11) NOT NULL,
   `vote_ip` varchar(15) NOT NULL,
   `vote_date` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -108,7 +110,7 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function isVote($question_id)
     {
-        $sql = "SELECT vote_id FROM polls_votes WHERE vote_question_id = :question_id AND vote_user_id = :user_id";
+        $sql = "SELECT vote_answer_id, vote_date FROM polls_votes WHERE vote_question_id = :question_id AND vote_user_id = :user_id";
 
         return DB::run($sql, ['question_id' => $question_id, 'user_id' => UserData::getUserId()])->fetch();
     }
@@ -123,9 +125,9 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
 
         DB::run($sql, ['question_id' => $question_id, 'id' => $answer_id]);
 
-        $sql = "INSERT INTO polls_votes(vote_question_id, vote_user_id, vote_ip) VALUES(:question_id, :user_id, :ip)";
+        $sql = "INSERT INTO polls_votes(vote_question_id, vote_answer_id, vote_user_id, vote_ip) VALUES(:question_id, :answer_id, :user_id, :ip)";
 
-        return DB::run($sql, ['question_id' => $question_id, 'user_id' => UserData::getUserId(), 'ip' => Request::getRemoteAddress()]);
+        return DB::run($sql, ['question_id' => $question_id, 'answer_id' => $answer_id, 'user_id' => UserData::getUserId(), 'ip' => Request::getRemoteAddress()]);
     }
 
     public static function editTitle($question_id, $title)

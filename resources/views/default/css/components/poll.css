@@ -1,0 +1,45 @@
+/*
+ * Polls
+ *
+ * Голосования, опросы
+ */
+
+.poll {
+  margin: 0;
+  padding: 0 10px;
+  list-style: none;
+}
+
+.poll-count {
+  float: left;
+  padding-right: 10px;
+  width: 48px;
+  font-size: .8em;
+  margin-top: 1px;
+  color: var(--gray-600);
+}
+
+.poll-result {
+  padding-left: 48px;
+}
+
+.poll-label {
+  font-size: .9em;
+  color: var(--gray);
+}
+
+.progress {
+  vertical-align: baseline;
+  display: block;
+  width: 100%;
+  border: 0;
+  margin-bottom: 20px;
+  background-color: #f8f8f8;
+  height: 7px;
+  border-radius: 500px;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-bar,
+progress::-webkit-progress-value,
+progress::-moz-progress-bar { background-color: #0085ee; }

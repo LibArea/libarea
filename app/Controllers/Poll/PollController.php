@@ -7,8 +7,12 @@ use App\Controllers\Controller;
 use App\Models\PollModel;
 use Meta;
 
+use App\Traits\Poll;
+
 class PollController extends Controller
 {
+    use Poll;
+
     protected $limit = 15;
 
     public function index()
@@ -32,21 +36,15 @@ class PollController extends Controller
 
     public function poll()
     {
-        $id         = Request::getInt('id');
-        $question   = PollModel::getQuestion($id);
-        $answers    = PollModel::getAnswers($id);
-        $count      = PollModel::getAllVotesCount($question['poll_id']);
+        $id = Request::getInt('id');
 
         return $this->render(
             '/poll/view',
             [
-                'meta'      => Meta::get(__('app.poll')),
+                'meta'  => Meta::get(__('app.poll')),
                 'data'  => [
                     'type'      => 'poll',
-                    'question'  => $question,
-                    'answers'   => $answers,
-                    'count'     => $count['sum'],
-                    'isVote'    => PollModel::isVote($question['poll_id'])
+                    'poll'      => $this->getPoll($$id),
                 ]
             ]
         );

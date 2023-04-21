@@ -8,7 +8,7 @@ use App\Models\FacetModel;
 
 class FacetPresence
 {
-    // mixed $element (c PHP 8.0)
+    // mixed $element (> PHP 8.0)
     public static function index($element, string $type_element = 'id', string $type = 'topic'): array
     {
         $facet = FacetModel::getFacet($element, $type_element, $type);
