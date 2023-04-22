@@ -21,6 +21,7 @@ return [
     'teams'             => '团队',
     'table'             => '桌子',
     'team_not_users'    => '团队中还没有成员...',
+    'total_votes'       => '总票数',
     'owner'             => '所有者',
     'top'               => '最佳',
     'one_month'         => '一个月',

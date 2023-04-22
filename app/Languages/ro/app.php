@@ -21,6 +21,7 @@ return [
     'teams'             => 'Echipe',
     'table'             => 'Masa',
     'team_not_users'    => 'Întrucât să nu știți...',
+    'total_votes'       => 'Total de voturi',
     'owner'             => 'Proprietar',
     'top'               => 'Populare',
     'one_month'         => 'lună',

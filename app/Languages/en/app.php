@@ -21,6 +21,7 @@ return [
     'teams'             => 'Teams',
     'table'             => 'Table',
     'team_not_users'    => 'There is no member in the team yet...',
+    'total_votes'       => 'Total Votes',
     'owner'             => 'Owner',
     'top'               => 'TOP',
     'one_month'         => 'month',
