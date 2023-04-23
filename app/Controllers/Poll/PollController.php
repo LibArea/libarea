@@ -44,7 +44,7 @@ class PollController extends Controller
                 'meta'  => Meta::get(__('app.poll')),
                 'data'  => [
                     'type'      => 'poll',
-                    'poll'      => $this->getPoll($$id),
+                    'poll'      => $this->getPoll($id),
                 ]
             ]
         );

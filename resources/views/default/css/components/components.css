@@ -318,6 +318,12 @@ a:hover > img,
   padding-top: 70px;
 }
 
+ol.bg-red-200 {
+  display: table;
+  width: 100%;
+}
+
+.bg-red-200 .content_tree,
 .content_tree.bg-red-200 { background-color: var(--red-200); }
 
 .ind-first-p p {

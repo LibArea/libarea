@@ -51,7 +51,7 @@ class LogModel extends \Hleb\Scheme\App\Models\MainModel
                     u.id, u.login, u.avatar, u.limiting_mode
                         FROM audits a
                         LEFT JOIN users u ON u.id = a.user_id
-                        WHERE a.type_belonging = :type $sort ORDER BY a.id DESC LIMIT :start, :limit";
+                            WHERE a.type_belonging = :type $sort ORDER BY a.id DESC LIMIT :start, :limit";
 
         return DB::run($sql, ['type' => $type, 'start' => $start, 'limit' => $limit])->fetchAll();
     }

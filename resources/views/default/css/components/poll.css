@@ -28,18 +28,82 @@
   color: var(--gray);
 }
 
-.progress {
+progress,          /* Все браузеры с поддержкой HTML5. */
+progress[role]     /* polyfill */
+{
+  /* Отключает стилизацию — обычно не требуется, но полезно знать. */
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  /* Должен быть здесь для полифилла Safari, чтобы фоновые изображения работали должным образом. */
+  background-size: auto;
+}
+
+progress {
   vertical-align: baseline;
   display: block;
   width: 100%;
   border: 0;
   margin-bottom: 20px;
-  background-color: #f8f8f8;
+  background: #f8f8f8;
   height: 7px;
   border-radius: 500px;
   overflow: hidden;
 }
 
+::-webkit-progress-bar { background: #f8f8f8; }
+
+/* См. https://libarea.ru/post/1384/dev-protestiruem-opros-prikreplennyy-k-postu
 progress::-webkit-progress-bar,
 progress::-webkit-progress-value,
-progress::-moz-progress-bar { background-color: #0085ee; }
+progress::-moz-progress-bar { background: #0085ee; } */
+
+
+progress[value^="0"]::-webkit-progress-value,
+progress[value^="1"]::-webkit-progress-value,
+progress[value^="2"]::-webkit-progress-value {
+  background-color: #0ea5e9;
+} 
+
+
+progress[value^="0"]::-moz-progress-bar,
+progress[value^="1"]::-moz-progress-bar,
+progress[value^="2"]::-moz-progress-bar {
+  background-color: #0ea5e9;
+} 
+
+
+progress[value^="3"]::-webkit-progress-value,
+progress[value^="4"]::-webkit-progress-value,
+progress[value^="5"]::-webkit-progress-value {
+  background-color: #0085ee;
+}
+
+progress[value^="3"]::-moz-progress-bar,
+progress[value^="4"]::-moz-progress-bar,
+progress[value^="5"]::-moz-progress-bar {
+  background-color: #0085ee;
+}
+
+progress[value^="6"]::-moz-progress-bar,
+progress[value^="7"]::-moz-progress-bar,
+progress[value^="8"]::-moz-progress-bar {
+  background-color: green;
+}
+progress[value^="6"]::-webkit-progress-value,
+progress[value^="7"]::-webkit-progress-value,
+progress[value^="8"]::-webkit-progress-value {
+  background-color: green;
+}
+
+progress[value^="9"]::-moz-progress-bar,
+progress[value="100"]::-moz-progress-bar {
+  background-color: red;
+}
+
+progress[value^="9"]::-webkit-progress-value,
+progress[value="100"]::-webkit-progress-value {
+  background-color: red;
+}
+

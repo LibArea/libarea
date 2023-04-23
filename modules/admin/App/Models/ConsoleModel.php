@@ -8,7 +8,9 @@ class ConsoleModel extends \Hleb\Scheme\App\Models\MainModel
 {
     public static function recalculateTopic()
     {
-        $sql = "UPDATE facets SET facet_count = (SELECT count(relation_post_id) FROM facets_posts_relation where relation_facet_id = facet_id )";
+        $sql = "UPDATE facets SET facet_count = (SELECT count(relation_post_id) FROM facets_posts_relation 
+                       
+                       LEFT JOIN posts ON relation_post_id = post_id WHERE relation_facet_id = facet_id AND post_is_deleted = 0)";
 
         return DB::run($sql);
     }
