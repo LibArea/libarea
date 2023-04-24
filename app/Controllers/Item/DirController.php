@@ -9,8 +9,12 @@ use App\Models\PostModel;
 use App\Models\Item\{WebModel, UserAreaModel, FacetModel};
 use UserData, Meta;
 
+use App\Traits\Breadcrumb;
+
 class DirController extends Controller
 {
+    use Breadcrumb;
+    
     protected $limit = 25;
 
     // List of sites by topic (sites by "category")
@@ -46,8 +50,6 @@ class DirController extends Controller
 
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
 
-        $tree = FacetModel::breadcrumb($category['facet_id']);
-
         return $this->render(
             '/item/sites',
             [
@@ -62,7 +64,7 @@ class DirController extends Controller
                     'category'          => $category,
                     'childrens'         => $childrens,
                     'user_count_site'   => $count_site,
-                    'breadcrumb'        => self::breadcrumb($tree, $sort),
+                    'breadcrumb'        => Breadcrumb::get($category['facet_id'], $sort),
                     'characteristics'   => WebModel::getTypesWidget($category['facet_id']),
                     'low_matching'      => FacetModel::getLowMatching($category['facet_id']),
                 ]
@@ -87,21 +89,6 @@ class DirController extends Controller
                 notEmptyOrView404([]);
             }
         }
-    }
-
-    // Bread crumbs
-    public static function breadcrumb($tree, $sort)
-    {
-        $arr = [
-            ['name' => __('web.catalog'), 'link' => url('web')]
-        ];
-
-        $result = [];
-        foreach ($tree as $row) {
-            $result[] = ["name" => $row['name'], "link" => url('category', ['sort' => $sort, 'slug' => $row['link']])];
-        }
-
-        return array_merge($arr, $result);
     }
 
     // Click-throughs

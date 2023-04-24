@@ -96,21 +96,4 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
-
-    public static function breadcrumb($facet_id)
-    {
-        $sql = "with recursive
-            n (facet_id, facet_slug, facet_title, lvl) as (
-                select facet_id, facet_slug, facet_title, 1 from facets where facet_id = :id
-         
-         union all
-            select c.facet_id, c.facet_slug, c.facet_title, n.lvl + 1
-                from n
-                    join facets_relation r on r.facet_chaid_id = n.facet_id
-                    join facets c on c.facet_id = r.facet_parent_id
-        )
-        select facet_slug link, facet_title name from n where lvl <= 5 ORDER BY lvl DESC";
-
-        return DB::run($sql, ['id' => $facet_id])->fetchAll();
-    }
 }
