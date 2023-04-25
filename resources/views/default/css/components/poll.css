@@ -5,9 +5,10 @@
  */
 
 .poll {
-  margin: 0;
-  padding: 0 10px;
+  padding: 5px 10px;
   list-style: none;
+  box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+  border: 1px solid #f3f4f6;
 }
 
 .poll-count {
@@ -60,6 +61,9 @@ progress::-webkit-progress-value,
 progress::-moz-progress-bar { background: #0085ee; } */
 
 
+progress[value^="0"]::-moz-progress-bar,
+progress[value^="1"]::-moz-progress-bar,
+progress[value^="2"]::-moz-progress-bar, 
 progress[value^="0"]::-webkit-progress-value,
 progress[value^="1"]::-webkit-progress-value,
 progress[value^="2"]::-webkit-progress-value {
@@ -67,30 +71,20 @@ progress[value^="2"]::-webkit-progress-value {
 } 
 
 
-progress[value^="0"]::-moz-progress-bar,
-progress[value^="1"]::-moz-progress-bar,
-progress[value^="2"]::-moz-progress-bar {
-  background-color: #0ea5e9;
-} 
 
-
+progress[value^="3"]::-moz-progress-bar,
+progress[value^="4"]::-moz-progress-bar,
+progress[value^="5"]::-moz-progress-bar,
 progress[value^="3"]::-webkit-progress-value,
 progress[value^="4"]::-webkit-progress-value,
 progress[value^="5"]::-webkit-progress-value {
   background-color: #0085ee;
 }
 
-progress[value^="3"]::-moz-progress-bar,
-progress[value^="4"]::-moz-progress-bar,
-progress[value^="5"]::-moz-progress-bar {
-  background-color: #0085ee;
-}
 
 progress[value^="6"]::-moz-progress-bar,
 progress[value^="7"]::-moz-progress-bar,
-progress[value^="8"]::-moz-progress-bar {
-  background-color: green;
-}
+progress[value^="8"]::-moz-progress-bar,
 progress[value^="6"]::-webkit-progress-value,
 progress[value^="7"]::-webkit-progress-value,
 progress[value^="8"]::-webkit-progress-value {
@@ -98,10 +92,7 @@ progress[value^="8"]::-webkit-progress-value {
 }
 
 progress[value^="9"]::-moz-progress-bar,
-progress[value="100"]::-moz-progress-bar {
-  background-color: red;
-}
-
+progress[value="100"]::-moz-progress-bar,
 progress[value^="9"]::-webkit-progress-value,
 progress[value="100"]::-webkit-progress-value {
   background-color: red;

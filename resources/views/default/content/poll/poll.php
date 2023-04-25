@@ -4,8 +4,8 @@
 ?>
 
 <?php if ($poll['question']) : ?>
-  <div class="content-body">
-    <h2 class="title">
+  <div class="poll">
+    <h2 class="title mb10">
       <?= $poll['question']['poll_title']; ?>
       <?php if (UserData::checkAdmin()) : ?>
         <sup><a href="<?= url('content.edit', ['type' => 'poll', 'id' => $poll['question']['poll_id']]) ?>">
@@ -68,7 +68,7 @@
           </div>
           <div class="poll-result">
             <div class="poll-label"><?= $value['answer_title']; ?>
-              <?php if ($poll['isVote']['vote_answer_id'] == $value['answer_id']) : ?>
+              <?php if ($poll['isVote']['vote_answer_id'] ?? false == $value['answer_id']) : ?>
                 <svg class="icons red right">
                   <use xlink:href="/assets/svg/icons.svg#selected"></use>
                 </svg>
