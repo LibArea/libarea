@@ -35,13 +35,16 @@ class EditPollController extends Controller
 
     public function change()
     {
-        $question   = PollPresence::index($id = Request::getPostInt('poll_id'));
+        $question   = PollPresence::index($id = Request::getPostInt('id'));
 
         $this->checkingEditPermissions($question);
 
         $data = Request::getPost();
 
         PollModel::editTitle($id, $data['title']);
+        
+        $is_closed = Request::getPost('closed') == 'on' ? 1 : 0;
+        PollModel::editClosed($id, $is_closed);
 
         foreach ($data as $key => $title) {
             if (is_int($key)) {

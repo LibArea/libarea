@@ -14,6 +14,11 @@
             </svg>
           </a></sup>
       <?php endif; ?>
+      <?php if ($poll['question']['poll_is_closed']) : ?>
+        <svg class="icons green">
+          <use xlink:href="/assets/svg/icons.svg#closed"></use>
+        </svg>
+      <?php endif; ?>
     </h2>
 
     <?php if (UserData::checkActiveUser()) : ?>
@@ -24,7 +29,7 @@
         $answer_votes += $value['answer_votes'];
       ?>
 
-        <?php if ($poll['isVote']) : ?>
+        <?php if ($poll['isVote'] || $poll['question']['poll_is_closed'] == 1) : ?>
           <div class="mb10 max-w780">
             <div class="poll-count">
               <strong><?= round($num * 100, 1); ?>%</strong>
@@ -79,7 +84,7 @@
     <?php endif; ?>
 
     <div class="gray-600 text-sm mt15">
-      <?= __('app.total_votes'); ?>: <?= $answer_votes;?> • <?= Html::langDate($poll['question']['poll_date']); ?>
+      <?= __('app.total_votes'); ?>: <?= $answer_votes;?> • <span class="lowercase"><?= Html::langDate($poll['question']['poll_date']); ?></span>
     </div>
   </div>
 <?php endif; ?>

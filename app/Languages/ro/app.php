@@ -15,6 +15,7 @@ return [
     'poll'              => 'Sondaj',
     'polls'             => 'Sondaje',
     'minimum'           => 'Minim',
+    'closed'            => 'Închis',
     'hi'                => 'Hei',
     'news'              => 'Știri',
     'team'              => 'Echipă',
@@ -241,6 +242,7 @@ return [
     'post_translation'  => 'Această postare este o traducere',
     'translation'       => 'Traducere',
     'format_Q&A'        => 'Aceasta este o întrebare (Q&A)',
+    'poll_closed'       => 'Acest sondaj este închis?',
     'pin'               => 'Fixați această postare',
     
     'source'            => 'Sursa',

@@ -13,8 +13,11 @@
         <p><input type="text" id="in<?= $value['answer_id']; ?>" name="<?= $value['answer_id']; ?>" value="<?= $value['answer_title']; ?>"></p>
       <?php endforeach; ?>
     </fieldset>
-    <div class="flex gap items-center">
-      <input type="hidden" name="poll_id" value="<?= $data['question']['poll_id']; ?>">
+    <fieldset>
+      <input type="checkbox" name="closed" <?php if ($data['question']['poll_is_closed'] == 1) : ?>checked <?php endif; ?>> <?= __('app.poll_closed'); ?>
+    </fieldset>
+    <div class="flex gap items-center mt20">
+      <input type="hidden" name="id" value="<?= $data['question']['poll_id']; ?>">
       <?= Html::sumbit(__('app.edit_poll')); ?>
     </div>
   </form>

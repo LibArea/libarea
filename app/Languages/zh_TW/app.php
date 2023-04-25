@@ -15,6 +15,7 @@ return [
     'poll'              => '轮询',
     'polls'             => '投票',
     'minimum'           => '最低限度',
+    'closed'            => '关闭',
     'hi'                => '你好',
     'news'              => '新闻',
     'team'              => '團隊',
@@ -242,6 +243,7 @@ return [
     'post_translation'  => '帖子是翻译?',
     'translation'       => '翻译',
     'format_Q&A'        => '这是一个问题（将成为问答形式）?',
+    'poll_closed'       => '这个民意调查结束了吗？',
     'pin'               => '置顶此帖?',
     
     'source'            => '一个来源',

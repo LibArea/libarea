@@ -15,6 +15,7 @@ return [
     'poll'              => 'Poll',
     'polls'             => 'Polls',
     'minimum'           => 'Minimum',
+    'closed'            => 'Сlosed',
     'hi'                => 'Hey',
     'news'              => 'News',
     'team'              => 'Team',
@@ -241,6 +242,7 @@ return [
     'post_translation'  => 'Post is translations ?',
     'translation'       => 'Translation',
     'format_Q&A'        => 'This is a question (will become a Q&A format) ?',
+    'poll_closed'       => 'Is this poll closed?',
     'pin'               => 'Pin this post ?',
     
     'source'            => 'Source',

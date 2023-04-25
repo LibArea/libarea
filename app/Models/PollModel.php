@@ -48,7 +48,7 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
 {
     public static function getQuestion($question_id)
     {
-        $sql = "SELECT poll_id, poll_title, poll_user_id, poll_date FROM polls WHERE poll_id = :question_id";
+        $sql = "SELECT poll_id, poll_title, poll_user_id, poll_date, poll_is_closed FROM polls WHERE poll_id = :question_id";
 
         return DB::run($sql, ['question_id' => $question_id])->fetch();
     }
@@ -135,6 +135,13 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "UPDATE polls SET poll_title = :title WHERE poll_id = :question_id";
 
         DB::run($sql, ['question_id' => $question_id, 'title' => $title]);
+    }
+    
+    public static function editClosed($question_id, $is_closed)
+    {
+        $sql = "UPDATE polls SET poll_is_closed = :is_closed WHERE poll_id = :question_id";
+
+        DB::run($sql, ['question_id' => $question_id, 'is_closed' => $is_closed]);
     }
 
     public static function editAnswers($key, $title, $question_id)
