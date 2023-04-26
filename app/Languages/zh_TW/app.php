@@ -411,7 +411,7 @@ return [
     'notif_add_pm'              => '给你写了一个{url}私信{a}',
     'notif_add_comment'         => '在您的响应{a}上注释{url}',
     'notif_add_comment_comment' => '回复{url}您的评论{a}',
-    'notif_add_answer'          => '回复{url}您的帖子{a}',
+    'notif_add_answer'          => '答复了{url}邮政{a}',
     'notif_add_flag'            => '收到{url}投诉{a}',
     'notif_add_audit'           => '需要{url}内容审计{a}',
     'notif_references_post'     => '在{url}post{a}中提到过你',

@@ -410,7 +410,7 @@ return [
     'notif_add_pm'              => 'wrote to you {url}private message{a}',
     'notif_add_comment'         => 'commented {url}your answer{a}',
     'notif_add_comment_comment' => 'replied to {url}your comment{a}',
-    'notif_add_answer'          => 'replied to {url}your post{a}',
+    'notif_add_answer'          => 'replied to {url}post{a}',
     'notif_add_flag'            => 'enrolled {url}a complaint{a}',
     'notif_add_audit'           => 'required {url}content audit{a}',
     'notif_references_post'     => 'mentioned you in {url}post{a}',

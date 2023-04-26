@@ -410,7 +410,7 @@ return [
     'notif_add_pm'              => 'ți-a trimis un {url}mesaj privat{a}',
     'notif_add_comment'         => 'a comentat {url}răspunsul tău{a}',
     'notif_add_comment_comment' => 'a răspuns la {url}comentarul tău{a}',
-    'notif_add_answer'          => 'a răspuns la {url}postarea ta{a}',
+    'notif_add_answer'          => 'a răspuns la {url}postare{a}',
     'notif_add_flag'            => 'a primit {url}reclamație{a}',
     'notif_add_audit'           => '{url}auditul de conținut este necesar{a}',
     'notif_references_post'     => 'te-a menționat în {url}postare{a}',

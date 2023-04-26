@@ -410,7 +410,7 @@ return [
     'notif_add_pm'              => 'написав вам {url}особисте повідомлення{a}',
     'notif_add_comment'         => 'прокоментував {url}ваша відповідь{a}',
     'notif_add_comment_comment' => 'відповів на {url}ваш коментар{a}',
-    'notif_add_answer'          => 'відповів на {url}ваш пост{a}',
+    'notif_add_answer'          => 'відповів на {url}пост{a}',
     'notif_add_flag'            => 'надійшла {url}скарга{a}',
     'notif_add_audit'           => 'потрібно {url}аудит контенту{a}',
     'notif_references_post'     => 'згадав вас в {url}після{a}',
