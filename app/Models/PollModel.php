@@ -1,48 +1,10 @@
 <?php
 
-/* 
-CREATE TABLE `polls` (
-  `poll_id` int(11) NOT NULL auto_increment,
-  `poll_title` varchar(255) NOT NULL,
-  `poll_user_id` int(11) NOT NULL,
-  `poll_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `poll_modified` timestamp NOT NULL DEFAULT current_timestamp(),
-  `poll_tl` tinyint(1) NOT NULL DEFAULT 0,
-  `poll_is_closed` tinyint(1) NOT NULL DEFAULT 0,
-  `poll_is_deleted` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY  (`poll_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-CREATE TABLE `polls_answers` (
-  `answer_id` int(11) NOT NULL auto_increment,
-  `answer_question_id` int(11) default NULL,
-  `answer_title` varchar(255) NOT NULL,
-  `answer_votes` int(11) default 0,
-  PRIMARY KEY  (`answer_id`),
-  KEY `answer_question_id` (`answer_question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-CREATE TABLE `polls_votes` (
-  `vote_id` int(11) NOT NULL auto_increment,
-  `vote_question_id` int(11) NOT NULL,
-  `vote_answer_id` int(11) NOT NULL,
-  `vote_user_id` int(11) NOT NULL,
-  `vote_ip` varchar(15) NOT NULL,
-  `vote_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY  (`vote_id`),
-  KEY `vote_question_id` (`vote_question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
-
-  ALTER TABLE `posts` ADD `post_poll` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT 'Для опросов' AFTER `post_closed`; 
-  ALTER TABLE `items` ADD `item_poll` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT 'Для опроса' AFTER `item_following_link`;
-*/
-
 namespace App\Models;
 
 use Hleb\Constructor\Handlers\Request;
 use UserData;
 use DB;
-
 
 class PollModel extends \Hleb\Scheme\App\Models\MainModel
 {
@@ -73,7 +35,6 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['question_id' => $question_id])->rowCount();
     }
-
 
     public static function getUserQuestionsPolls($page, $limit)
     {
