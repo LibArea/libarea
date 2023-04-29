@@ -20,6 +20,7 @@ define("HLEB_PARAMETERS_FOR_DB", [
         "pass" => ""
     ],
 
+    /* См. https://github.com/phphleb/hleb/blob/master/database/default.dbase.config.php
     "mysql.sphinx-search" => [
         "mysql:host=127.0.0.1",
         "port=9306",
@@ -27,20 +28,6 @@ define("HLEB_PARAMETERS_FOR_DB", [
         "charset=utf8",
         "user" => "",
         "pass" => ""
-    ],
-
-    "sqlite.myname" => [
-        "sqlite:c:/main.db",
-        "user" => "username",
-        "pass" => "password"
-    ],
-
-    "postgresql.myname" => [
-        "pgsql:host=127.0.0.1",
-        "port=5432",
-        "dbname=databasename",
-        "user" => "username",
-        "pass" => "password"
-    ],
+    ], */
 
 ]);
