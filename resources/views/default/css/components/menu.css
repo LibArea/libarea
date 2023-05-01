@@ -67,7 +67,8 @@
 }
 
 .menu a,
-.dropdown li > a {
+.dropdown li > a,
+.dropdown li > div {
   color: var(--gray);
   padding: 5px;
   display: flex;
@@ -78,7 +79,8 @@
 }
 
 .dropdown li:hover > a,
-.dropdown li > a.active { color: var(--red); }
+.dropdown li > a.active,
+.dropdown li > div.active { color: var(--red); }
 
 .menu__left:not(.menu__active) li { margin-bottom: 3px; }
 

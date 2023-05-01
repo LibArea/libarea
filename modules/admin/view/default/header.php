@@ -20,9 +20,15 @@ Request::getHead()->addStyles('/assets/css/style.css?21');
           </div>
         </div>
         <div class="flex gap-max items-center">
-          <a class="w94" href="<?= url('admin'); ?>">
-            <span class="black"><?= __('admin.home'); ?></span>
-          </a>
+          <div class="flex gap-min justify-between items-center gray-600">
+            <a href="<?= url('admin'); ?>">
+              <span class="black"><?= __('admin.home'); ?></span>
+            </a>
+            <div class="gray-600">/</div>
+            <a class="gray-600" href="/">
+              <?= __('admin.website'); ?>
+            </a>
+          </div>
           <a class="<?= is_current(url('admin.users')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.users'); ?>">
             <svg class="icons mr5">
               <use xlink:href="/assets/svg/icons.svg#users"></use>
@@ -51,9 +57,6 @@ Request::getHead()->addStyles('/assets/css/style.css?21');
         </div>
         <div class="mb-block">
           <span class="mb-none gray-600"><?= Request::getRemoteAddress(); ?></span>
-          <a class="ml15 sky" href="/"><svg class="icons">
-              <use xlink:href="/assets/svg/icons.svg#home"></use>
-            </svg></a>
         </div>
       </div>
     </div>
