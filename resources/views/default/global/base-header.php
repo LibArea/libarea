@@ -59,11 +59,11 @@ $post   = $data['post'] ?? false;
 
         <?php if (!UserData::checkActiveUser()) : ?>
           <div class="flex gap-max items-center">
-            <a id="toggledark" class="header-menu-item gray-600">
+            <div id="toggledark" class="gray-600">
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg>
-            </a>
+            </div>
             <?php if (config('general.invite') == false) : ?>
               <a class="gray min-w75 center mb-none block" href="<?= url('register'); ?>">
                 <?= __('app.registration'); ?>

@@ -24,7 +24,7 @@ $facet  = $data['facet'] ?? false; ?>
 
       <?php if (!UserData::checkActiveUser()) : ?>
         <div class="flex gap-max items-center">
-          <div id="toggledark" class="header-menu-item mb-none">
+          <div id="toggledark" class="mb-none">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#sun"></use>
             </svg>
