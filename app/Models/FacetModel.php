@@ -7,6 +7,9 @@ use DB;
 
 class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 {
+    const NO_REMOVAL = 0;
+    const DELETED = 1;
+    
     // All facets
     // Все фасеты
     public static function getFacetsAll($page, $limit, $sort, $type)
@@ -56,16 +59,16 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
     {
         switch ($sort) {
             case 'my':
-                $signet = "WHERE facet_type = '$type' AND signed_user_id = " .  UserData::getUserId() . " ORDER BY facet_count DESC";
+                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " AND signed_user_id = " .  UserData::getUserId() . " ORDER BY facet_count DESC";
                 break;
             case 'new':
-                $signet = "WHERE facet_type = '$type' ORDER BY facet_id DESC";
+                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " ORDER BY facet_id DESC";
                 break;
             case 'all':
-                $signet = "WHERE facet_type = '$type' ORDER BY facet_count DESC";
+                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " ORDER BY facet_count DESC";
                 break;
             case 'ban':
-                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
+                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::DELETED . " ORDER BY facet_id DESC";
                 break;
             default:
                 $signet = "WHERE facet_type = topic ORDER BY facet_count DESC";
