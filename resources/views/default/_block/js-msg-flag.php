@@ -40,7 +40,7 @@
     });
   </script>
 
-  <div class="dialog-container" id="my-dialog" aria-hidden="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-description">
+  <div class="dialog-container" id="my-dialog" aria-hidden="true">
     <div class="dialog-overlay" data-a11y-dialog-hide></div>
     <div class="dialog-content" role="document">
       <button data-a11y-dialog-hide class="dialog-close" aria-label="Close this dialog window">
