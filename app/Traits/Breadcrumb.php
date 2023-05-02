@@ -6,14 +6,14 @@ use App\Models\FacetModel;
 
 trait Breadcrumb
 {
-    public static function get($facet_id, $sort = [], $type = 'category')
+    public static function getBreadcrumb($facet_id, $sort = [], $type = 'category')
     {
         $facet = FacetModel::breadcrumb($facet_id);
 
-        return self::breadcrumb($facet, $sort, $type);
+        return self::forming($facet, $sort, $type);
     }
 
-    public static function breadcrumb($facet, $sort, $type)
+    public static function forming($facet, $sort, $type)
     {
         // Now we can expand if other types are needed
         $arr = ($type == 'category') ? [['name' => __('web.catalog'), 'link' => url('web')]] : [];
