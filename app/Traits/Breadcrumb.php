@@ -6,7 +6,7 @@ use App\Models\FacetModel;
 
 trait Breadcrumb
 {
-    public static function getBreadcrumb($facet_id, $sort = [], $type = 'category')
+    public function getBreadcrumb($facet_id, $sort = [], $type = 'category')
     {
         $facet = FacetModel::breadcrumb($facet_id);
 

@@ -64,7 +64,7 @@ class DirController extends Controller
                     'category'          => $category,
                     'childrens'         => $childrens,
                     'user_count_site'   => $count_site,
-                    'breadcrumb'        => static::getBreadcrumb($category['facet_id'], $sort),
+                    'breadcrumb'        => $this->getBreadcrumb($category['facet_id'], $sort),
                     'characteristics'   => WebModel::getTypesWidget($category['facet_id']),
                     'low_matching'      => FacetModel::getLowMatching($category['facet_id']),
                 ]
