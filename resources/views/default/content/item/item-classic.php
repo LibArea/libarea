@@ -19,7 +19,7 @@
                 </svg>
               </span>
             <?php endif; ?>
-            <div class="list-items__text">
+            <div class="black">
               <?= fragment($item['item_content'], 200); ?>
             </div>
             <div class="list-items__footer">

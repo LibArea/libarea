@@ -38,7 +38,7 @@
                 </svg>
               </span>
             <?php endif; ?>
-            <div class="list-items__text" itemprop="description">
+            <div class="black" itemprop="description">
               <?= fragment($item['item_content'], 200); ?>
             </div>
             <div class="list-items__footer">

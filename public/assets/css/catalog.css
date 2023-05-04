@@ -31,8 +31,6 @@
   box-shadow: 0 2px 4px -1px rgb(0 0 0 / 15%);
 }
 
-.list-items__text { color: var(--black); }
-
 .list-items__footer {
   display: flex;
   flex-direction: row;
@@ -64,8 +62,6 @@ body.item.dark .categories-telo a {
 body.item.dark .box {
   background-color: #d0d0d0;
 }
-
-.item.dropdown { min-width: 220px; }
 
 .wrap-item {
   padding-left: 2rem;
