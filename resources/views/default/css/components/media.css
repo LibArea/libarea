@@ -90,7 +90,6 @@ main { width: calc(100% - 590px); }
   main,
   .menuno main  { width: 100%; }
   
-  .wrap-item,
   .wrap {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
