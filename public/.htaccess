@@ -6,9 +6,6 @@ php_value session.cookie_secure 1
 RewriteCond %{HTTP_HOST} ^www\.(.*)$
 RewriteRule ^(.*)$ http://%1/$1 [L,R=301]
 
-<IfModule mod_headers.c>
-   Header onsuccess edit Set-Cookie ^(.*) "$1; SameSite=Strict; HttpOnly; Secure"
-</IfModule>
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
           Options +FollowSymLinks -MultiViews -Indexes

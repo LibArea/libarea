@@ -8,7 +8,7 @@ class Session
             session_start();
         }
         session_destroy();
-        setcookie("remember", "", time() - 3600, "/");
+        setcookie("remember", "", time() - 3600, "/", httponly: true);
 
         redirect('/');
     }

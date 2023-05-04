@@ -86,7 +86,7 @@ class RememberController extends MainController
             ]
         );
 
-        setcookie("remember", $token, $expires, '/');
+        setcookie("remember", $token, $expires, '/', httponly: true);
     }
 
     // Запомнить меня
@@ -116,6 +116,6 @@ class RememberController extends MainController
 
         // Установим токен
         $token = $selector . ':' . $validator;
-        setcookie("remember", $token, $expires, '/');
+        setcookie("remember", $token, $expires, '/', httponly: true);
     }
 }
