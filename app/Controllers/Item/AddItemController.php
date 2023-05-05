@@ -10,9 +10,12 @@ use App\Models\{SubscriptionModel, ActionModel, FacetModel, NotificationModel};
 use UserData, Meta, Access;
 
 use App\Validate\RulesItem;
+use App\Traits\Poll;
 
 class AddItemController extends Controller
 {
+    use Poll;
+    
     // Add Domain Form
     // Форма добавление домена
     public function index()

@@ -45,7 +45,7 @@ class RulesItem extends Validator
     {
         $basic_host = self::domain($url);
 
-        return WebModel::getItemOne($basic_host, 1);
+        return WebModel::getDomain($basic_host);
     }
 
     public static function domain($url)

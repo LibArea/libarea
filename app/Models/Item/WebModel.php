@@ -332,20 +332,16 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function setCleek($id)
     {
-        $sql = "UPDATE items SET item_following_link = (item_following_link + 1) WHERE item_id = :id";
-
-        return DB::run($sql, ['id' => $id]);
+        return DB::run("UPDATE items SET item_following_link = (item_following_link + 1) WHERE item_id = :id", ['id' => $id]);
     }
 
-    // Кто подписан на данный сайт
     public static function getFocusUsersItem($item_id)
     {
-        $sql = "SELECT
-                    signed_item_id,
-                    signed_user_id
-                        FROM items_signed
-                        WHERE signed_item_id = :item_id";
-
-        return DB::run($sql, ['item_id' => $item_id])->fetchAll();
+        return DB::run("SELECT signed_item_id, signed_user_id FROM items_signed WHERE signed_item_id = :item_id", ['item_id' => $item_id])->fetchAll();
     }
+    
+    public static function getDomain($url)
+    {
+        return DB::run("SELECT item_domain FROM items WHERE item_domain = :url", ['url' => $url])->fetch();
+    }   
 }
