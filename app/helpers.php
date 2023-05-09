@@ -107,3 +107,9 @@ function notEmptyOrView404($params)
     }
     return true;
 }
+
+function host(string $url)
+{
+    $parse  =  parse_url($url);
+    return $parse['host'] ?? false;
+}

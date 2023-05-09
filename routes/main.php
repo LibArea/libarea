@@ -100,9 +100,9 @@ Route::get('/{facet_slug}/article/{slug}')->controller('Post\PostController', ['
 Route::get('/users/new')->controller('User\UserController', ['new'])->name('users.new');
 Route::get('/users')->controller('User\UserController', ['all'])->name('users.all');
 
-Route::get('/@{login}')->controller('User\ProfileController')->where(['login' => '[A-Za-z0-9]+'])->name('profile');
-Route::get('/@{login}/posts')->controller('User\ProfileController@posts')->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
-Route::get('/@{login}/comments')->controller('User\ProfileController@comments')->where(['login' => '[A-Za-z0-9]+'])->name('profile.comments');
+Route::get('/@{login}')->controller('User\ProfileController')->where(['login' => '[A-Za-z0-9-]+'])->name('profile');
+Route::get('/@{login}/posts')->controller('User\ProfileController@posts')->where(['login' => '[A-Za-z0-9-]+'])->name('profile.posts');
+Route::get('/@{login}/comments')->controller('User\ProfileController@comments')->where(['login' => '[A-Za-z0-9-]+'])->name('profile.comments');
 
 Route::get('/comments')->controller('Comment\CommentController', ['all'])->name('comments');
 
@@ -132,7 +132,7 @@ Route::get('/redirect/facet/{id}')->controller('Facets\RedirectController')->whe
 Route::get('/domain/{domain}')->controller('Post\PostController@domain')->where(['domain' => '[a-z0-9-.]+'])->name('domain');
 
 Route::get('/web')->controller('Item\HomeController', ['main'])->name('web');
-Route::get('/web/website/{slug}')->controller('Item\DetailedController')->name('website');
+Route::get('/web/website/{id}/{slug}')->controller('Item\DetailedController')->where(['id' => '[0-9]+'])->name('website');
 Route::get('/web/dir/{sort}/{slug}')->controller('Item\DirController')->name('category');
 Route::get('/web/{grouping}/dir/{sort}/{slug}')->controller('Item\DirController')->name('grouping.category');
 

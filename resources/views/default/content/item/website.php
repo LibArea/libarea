@@ -46,7 +46,7 @@
       </div>
       
       <?php if ($item['item_poll']) : ?>
-        <?= insert('/content/poll/poll', ['poll' => $data['poll']]); ?>
+        <div class="mt15 max-w780"><?= insert('/content/poll/poll', ['poll' => $data['poll']]); ?></div>
       <?php endif; ?>
       
       <?php if ($item['item_is_soft'] == 1) : ?>

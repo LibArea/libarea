@@ -2,6 +2,7 @@
 
 namespace App\Models\Item;
 
+use UserData;
 use DB;
 
 class WebModel extends \Hleb\Scheme\App\Models\MainModel
@@ -149,10 +150,11 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
-    // Detailed information on the domain
-    // Детальная информация по домену
-    public static function getItemOne($domain, $user_id)
+    // Detailed information on the id
+    // Детальная информация по id
+    public static function getItemOne($id)
     {
+        $user_id = UserData::getUserId();
         $sql = "SELECT
                     item_id,
                     item_title,
@@ -191,10 +193,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                         LEFT JOIN votes_item ON votes_item_item_id = item_id AND votes_item_user_id = :user_id
                         LEFT JOIN favorites fav ON fav.tid = item_id 
                                 AND fav.user_id = :uid_two AND fav.action_type = 'website'
-                        WHERE item_domain = :domain AND item_is_deleted = 0";
+                        WHERE item_id = :id AND item_is_deleted = 0";
 
-
-        return DB::run($sql, ['domain' => $domain, 'user_id' => $user_id, 'uid_two' => $user_id])->fetch();
+        return DB::run($sql, ['id' => $id, 'user_id' => $user_id, 'uid_two' => $user_id])->fetch();
     }
 
     // Add a domain
@@ -230,6 +231,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "UPDATE items 
                     SET item_url        = :item_url,  
+                    item_domain         = :item_domain,
                     item_title          = :item_title, 
                     item_content        = :item_content,
                     item_title_soft     = :item_title_soft, 
@@ -340,8 +342,21 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run("SELECT signed_item_id, signed_user_id FROM items_signed WHERE signed_item_id = :item_id", ['item_id' => $item_id])->fetchAll();
     }
     
-    public static function getDomain($url)
-    {
-        return DB::run("SELECT item_domain FROM items WHERE item_domain = :url", ['url' => $url])->fetch();
+    public static function getDomains($url)
+    {   
+        $sql = "SELECT item_id, item_title, item_url, item_domain, rel.*
+                    FROM items 
+                        LEFT JOIN
+                            (
+                                SELECT 
+                                    relation_item_id,
+                                    GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                    FROM facets  
+                                    LEFT JOIN facets_items_relation on facet_id = relation_facet_id
+                                            GROUP BY relation_item_id
+                            ) AS rel
+                                ON rel.relation_item_id = item_id WHERE item_domain = :url";
+        
+        return DB::run($sql, ['url' => $url])->fetchAll();
     }   
 }

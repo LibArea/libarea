@@ -13,15 +13,13 @@ class RulesItem extends Validator
 
         self::url($data['url'], $redirect);
 
-        if (self::getDomain($data['url'])) {
+        if (host($data['url'])) {
             is_return(__('web.site_replay'), 'error', $redirect);
         }
 
         self::length($data['title'], 14, 250, 'title', $redirect);
 
-        $basic_host =  self::domain($data['url']);
-
-        return $basic_host;
+        return  self::getRegisterable($data['url']);
     }
 
     public static function rulesEdit($data)
@@ -41,17 +39,14 @@ class RulesItem extends Validator
         return $item;
     }
 
-    public static function getDomain($url)
+    public static function getDomains($url)
     {
-        $basic_host = self::domain($url);
-
-        return WebModel::getDomain($basic_host);
+        return WebModel::getDomains($url);
     }
 
-    public static function domain($url)
+    public static function getRegisterable($url)
     {
-        $parse  = parse_url($url);
-        $domain = new Domain($parse['host']);
+        $domain = new Domain(host($url));
 
         return $domain->getRegisterable();
     }

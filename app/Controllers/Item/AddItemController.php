@@ -26,9 +26,7 @@ class AddItemController extends Controller
         
         // Adding from page topic / blog
         // Добавление со странице категории
-        $category_id   = Request::getInt('category_id');
-
-        if ($category_id) {
+        if ($category_id = Request::getInt('category_id')) {
              $category  = FacetPresence::index($category_id, 'id', 'category');
         }
 

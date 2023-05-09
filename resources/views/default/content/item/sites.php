@@ -6,16 +6,16 @@
   <h1 class="m0 flex gap">
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) : ?>
-      <div class="flex gap">
-      <a class="text-sm" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
-        <sup><svg class="icons">
+      <div class="flex gap text-xs">
+      <a class="gray-600" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
+        <svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#edit"></use>
-          </svg></sup>
+          </svg>
       </a>
-      <a class="text-sm" href="<?= url('admin.facets.type', ['type' => 'category']); ?>">
-        <sup class="gray-600"><svg class="icons">
+      <a class="gray-600" href="<?= url('admin.facets.type', ['type' => 'category']); ?>">
+        <svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#tool"></use>
-          </svg></sup>
+          </svg>
       </a>
       </div>
     <?php endif; ?>

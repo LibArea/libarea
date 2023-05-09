@@ -22,9 +22,9 @@ class DetailedController extends Controller
     // Детальная страница сайта
     public function index()
     {
-        $slug   = Request::get('slug');
+        $id   = Request::getInt('id');
 
-        $item = WebModel::getItemOne($slug, $this->user['id']);
+        $item = WebModel::getItemOne($id);
         notEmptyOrView404($item);
 
         if ($item['item_published'] == 0) {

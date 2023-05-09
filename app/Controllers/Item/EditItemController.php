@@ -54,6 +54,7 @@ class EditItemController extends Controller
                     'category_arr'  => WebModel::getItemTopic($domain['item_id']),
                     'post_arr'      => $item_post_related,
                     'poll'          => PollModel::getQuestion($domain['item_poll']),
+                    'assembly'      => RulesItem::getDomains($domain['item_domain']),
                 ]
             ],
             'item',
@@ -96,6 +97,7 @@ class EditItemController extends Controller
                 'item_url'              => $data['url'],
                 'item_title'            => $data['title'],
                 'item_content'          => $data['content'],
+                'item_domain'           => RulesItem::getRegisterable($data['url']),
                 'item_title_soft'       => $data['title_soft'] ?? '',
                 'item_content_soft'     => $data['content_soft'] ?? '',
                 'item_published'        => $published,

@@ -2,7 +2,7 @@
 $domain = $data['domain']; ?>
 
 <div id="contentWrapper" class="wrap-item">
-  <main>
+  <main class="w-100">
     <div class="max-w780">
 
       <?= insert('/_block/navigation/breadcrumbs', [
@@ -33,7 +33,27 @@ $domain = $data['domain']; ?>
         <?= Img::website($domain['item_domain'], 'favicon', $domain['item_domain'], ' mr5'); ?>
         <span class="add-favicon btn btn-small btn-primary" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
       <?php } ?>
-
+      
+      <?php if (count($data['assembly']) > 1) : ?>
+        <div class="p15 bg-beige mt15">
+          <h4 class="uppercase-box">Подборка</h3>
+          <?php foreach ($data['assembly'] as $site) : ?>
+            <div class="mb15<?php if($site['item_id'] == $domain['item_id']) : ?>  bg-white p5-10<?php endif; ?>">
+              <a href="<?= url('website', ['slug' => $site['item_domain']]); ?>"><?= $site['item_title']; ?></a>
+              <?= Html::facets($site['facet_list'], 'category', 'tag mr15'); ?>
+              <?php if($site['item_id'] != $domain['item_id']) : ?>
+                <a href="<?= url('content.edit', ['type' => 'item', 'id' => $site['item_id']]); ?>">
+                  <svg class="icons gray-600">
+                    <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                  </svg>
+                </a>
+              <?php endif; ?>
+              <div class="green"><?= $site['item_url']; ?> <span class="gray-600 ml20">(<?= $site['item_domain']; ?>)</span></div>
+            </div>  
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
+      
       <form action="<?= url('content.change', ['type' => 'item']); ?>" method="post">
         <?= csrf_field() ?>
 

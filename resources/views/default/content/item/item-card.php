@@ -1,5 +1,6 @@
 <ol itemscope itemtype = "https://schema.org/ItemList" class="list-items">
-  <?php foreach ($data['items'] as $item) : ?>
+  <?php foreach ($data['items'] as $item) : 
+    $parse  =  parse_url($item['item_url']); ?>
 
     <?php if ($item['item_published'] == 1) : ?>
       <li itemscope itemprop="itemListElement" itemtype="https://schema.org/WebSite">
@@ -60,7 +61,7 @@
                   <svg class="icons gray ml5">
                     <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
                   </svg>
-                  <a itemprop="url" class="black lowercase" href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
+                  <a itemprop="url" class="black lowercase" href="<?= url('website', ['id' => $item['item_id'],'slug' => host($item['item_url'])]); ?>">
                     <?= __('web.more'); ?>
                   </a>
                 </div>
