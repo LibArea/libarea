@@ -39,7 +39,7 @@ $domain = $data['domain']; ?>
           <h4 class="uppercase-box">Подборка</h3>
           <?php foreach ($data['assembly'] as $site) : ?>
             <div class="mb15<?php if($site['item_id'] == $domain['item_id']) : ?>  bg-white p5-10<?php endif; ?>">
-              <a href="<?= url('website', ['slug' => $site['item_domain']]); ?>"><?= $site['item_title']; ?></a>
+              <a href="<?= url('website', ['id' => $site['item_id'], 'slug' => $site['item_slug']]); ?>"><?= $site['item_title']; ?></a>
               <?= Html::facets($site['facet_list'], 'category', 'tag mr15'); ?>
               <?php if($site['item_id'] != $domain['item_id']) : ?>
                 <a href="<?= url('content.edit', ['type' => 'item', 'id' => $site['item_id']]); ?>">

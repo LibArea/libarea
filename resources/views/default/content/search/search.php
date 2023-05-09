@@ -46,7 +46,7 @@ $sw = $sw ?? '?';
                 <?= Img::website($result['item_domain'], 'favicon', $result['item_domain'], 'favicons mr5'); ?>
                 <?= $result['item_domain']; ?>
               </span>
-              <a class="gray-600 ml15" href="<?= url('website', ['slug' => $result['item_domain']]); ?>"><?= __('web.more'); ?></a>
+              <a class="gray-600 ml15" href="<?= url('website', ['id' => $result['item_id'], 'slug' => $result['item_slug']]); ?>"><?= __('web.more'); ?></a>
             </div>
             <?= fragment($result['content'], 250); ?>
           <?php elseif ($type == 'answer') : ?>

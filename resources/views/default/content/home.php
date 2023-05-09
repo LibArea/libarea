@@ -79,7 +79,7 @@ use Hleb\Constructor\Handlers\Request; ?>
       <ul>
         <?php foreach ($data['items'] as $item) : ?>
           <li class="mt15">
-            <a href="<?= url('website', ['slug' => $item['item_domain']]); ?>">
+            <a href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
               <?= $item['item_title']; ?> <span class="green"><?= $item['item_domain']; ?></span>
             </a>
           </li>

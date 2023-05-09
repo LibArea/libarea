@@ -11,6 +11,7 @@ use App\Models\User\UserModel;
 use UserData, Meta, Access;
 
 use App\Traits\Poll;
+use App\Traits\Slug;
 use App\Traits\Author;
 use App\Traits\Related;
 
@@ -19,6 +20,7 @@ use App\Validate\RulesItem;
 class EditItemController extends Controller
 {
     use Poll;
+    use Slug;
     use Author;
     use Related;
 
@@ -91,12 +93,22 @@ class EditItemController extends Controller
 
         $new_user_id = $this->selectAuthor($item['item_user_id'], Request::getPost('user_id'));
 
+        if (UserData::checkAdmin()) {
+            $item_slug = Request::getPost('item_slug');
+            if ($item_slug != $item['item_slug']) {
+                if (WebModel::getSlug($slug = $this->getSlug($item_slug))) {
+                    $slug = $slug . "-";
+                }
+            }
+        }
+
         WebModel::edit(
             [
                 'item_id'               => $item['item_id'],
                 'item_url'              => $data['url'],
                 'item_title'            => $data['title'],
                 'item_content'          => $data['content'],
+                'item_slug'             => $slug ?? $item['item_slug'],
                 'item_domain'           => RulesItem::getRegisterable($data['url']),
                 'item_title_soft'       => $data['title_soft'] ?? '',
                 'item_content_soft'     => $data['content_soft'] ?? '',

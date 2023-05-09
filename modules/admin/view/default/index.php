@@ -53,7 +53,7 @@
     <span class="mr15 ml5 gray-600 lowercase">
       <?= Html::langDate($reply['date']); ?>
     </span>
-    <a class="black" href="<?= url('website', ['slug' => $reply['item_domain']]); ?>">
+    <a class="black" href="<?= url('website', ['id' => $reply['item_id'], 'slug' => $reply['item_slug']]); ?>">
       <svg class="icons">
         <use xlink:href="/assets/svg/icons.svg#eye"></use>
       </svg>

@@ -6,7 +6,7 @@
     </h2>
 
     <?php if (!empty($data['items'])) : ?>
-      <?= insert('/content/item/item-card', ['data' => $data, 'user' => $user, 'delete_fav' => 'yes', 'screening' => $data['screening']]); ?>
+      <?= insert('/content/item/item-card', ['data' => $data, 'user' => $user, 'delete_fav' => 'yes', 'screening' => $data['screening'], 'sort' => false]); ?>
     <?php else : ?>
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no_bookmarks'), 'icon' => 'info']); ?>
     <?php endif; ?>

@@ -10,10 +10,12 @@ use App\Models\{SubscriptionModel, ActionModel, FacetModel, NotificationModel};
 use UserData, Meta, Access;
 
 use App\Validate\RulesItem;
+use App\Traits\Slug;
 use App\Traits\Poll;
 
 class AddItemController extends Controller
 {
+    use Slug;
     use Poll;
     
     // Add Domain Form
@@ -60,12 +62,17 @@ class AddItemController extends Controller
         $published = Request::getPost('published') == 'on' ? 1 : 0;
         $published = UserData::checkAdmin() ? $published : 0;
 
+        if (WebModel::getSlug($slug = $this->getSlug($data['title']))) {
+            $slug = $slug . "-";
+        }
+
         $item_last = WebModel::add(
             [
                 'item_url'              => $data['url'],
                 'item_domain'           => $basic_host,
                 'item_title'            => $data['title'],
                 'item_content'          => $data['content'] ?? __('web.desc_formed'),
+                'item_slug'             => $slug,
                 'item_published'        => $published,
                 'item_user_id'          => $this->user['id'],
                 'item_close_replies'    => Request::getPost('close_replies') == 'on' ? 1 : null,

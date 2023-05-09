@@ -21,6 +21,12 @@
 
 <?php if (UserData::checkAdmin()) : ?>
   <fieldset>
+    <label for="post_slug">SLUG (URL)</label>
+    <input minlength="6" maxlength="250" value="<?= $domain['item_slug']; ?>" type="text" required name="item_slug">
+    <div class="help">> 6 <?= __('app.characters'); ?></div>
+  </fieldset>
+
+  <fieldset>
     <input type="checkbox" name="published" <?php if ($domain['item_published'] == 1) : ?>checked <?php endif; ?>> <span class="red"><?= __('web.posted'); ?></span>
   </fieldset>
   <br>

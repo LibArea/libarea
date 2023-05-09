@@ -15,6 +15,7 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                     item_id, 
                     item_title,
                     item_content,
+                    item_slug,
                     item_published,
                     item_user_id,
                     item_url,
@@ -66,6 +67,7 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                     item_url,
                     item_title,
                     item_content,
+                    item_slug,
                     item_title_soft,
                     item_domain,
                     item_date,
@@ -74,6 +76,7 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                     item_votes,
                     item_following_link,
                     item_published,
+                    item_telephone,
                     item_is_deleted,
                     votes_item_user_id, votes_item_item_id
                         FROM favorites fav

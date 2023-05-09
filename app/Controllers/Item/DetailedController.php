@@ -40,8 +40,9 @@ class DetailedController extends Controller
         $m = [
             'og'         => true,
             'imgurl'     => $content_img,
-            'url'        => url('website', ['slug' => $item['item_domain']]),
+            'url'        => url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]),
         ];
+
         $title = __('web.website') . ': ' . $item['item_title'];
         $description  = $item['item_title'] . '. ' . $item['item_content'];
 

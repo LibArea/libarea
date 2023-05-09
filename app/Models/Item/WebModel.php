@@ -82,6 +82,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_id,
                     item_title,
                     item_content,
+                    item_slug,
                     item_published,
                     item_user_id,
                     item_url,
@@ -176,6 +177,16 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_following_link,
                     item_close_replies,
                     item_poll,
+                    item_date,
+                    item_is_portal,
+                    item_is_forum,
+                    item_is_blog,
+                    item_is_reference,
+                    item_is_goods,
+                    item_telephone,
+                    item_email,
+                    item_vk,
+                    item_telegram,
                     item_is_deleted,
                     votes_item_user_id, votes_item_item_id,
                     rel.*,
@@ -207,6 +218,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                             item_domain, 
                             item_title, 
                             item_content, 
+                            item_slug,
                             item_published,
                             item_user_id, 
                             item_poll,
@@ -216,6 +228,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                        :item_domain, 
                        :item_title, 
                        :item_content, 
+                       :item_slug,
                        :item_published,
                        :item_user_id,
                        :item_poll,                        
@@ -235,6 +248,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_domain         = :item_domain,
                     item_title          = :item_title, 
                     item_content        = :item_content,
+                    item_slug           = :item_slug,
                     item_title_soft     = :item_title_soft, 
                     item_content_soft   = :item_content_soft,
                     item_published      = :item_published,
@@ -282,6 +296,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT 
                     item_id,
                     item_title,
+                    item_slug,
                     item_domain
                         FROM items
                             LEFT JOIN facets_items_relation on item_id = relation_item_id                        
@@ -319,4 +334,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         
         return DB::run($sql, ['url' => $url])->fetchAll();
     }   
+    
+    public static function getSlug($slug)
+    {
+        return DB::run("SELECT item_slug FROM items WHERE item_slug = :slug", ['slug' => $slug])->fetch();
+    }
 }

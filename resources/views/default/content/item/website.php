@@ -119,7 +119,7 @@
       <?php if ($data['similar']) : ?>
         <h4 class="uppercase-box"><?= __('web.recommended'); ?></h4>
         <?php foreach ($data['similar'] as $link) : ?>
-          <a class="inline mr20 mb15 block text-sm" href="<?= url('website', ['slug' => $link['item_domain']]); ?>">
+          <a class="inline mr20 mb15 block text-sm" href="<?= url('website', ['id' => $link['item_id'],'slug' => $link['item_slug']]); ?>">
             <?= Img::website($link['item_domain'], 'thumbs', $link['item_title'], 'w-100 box-shadow'); ?>          
             <?= $link['item_title']; ?>
           </a>
@@ -131,4 +131,4 @@
   </aside>
 </div>
 
-<?= insert('/_block/share', ['title' => __('app.share_website'), 'url' => config('meta.url') . url('website', ['slug' => $item['item_domain']])]); ?>
+<?= insert('/_block/share', ['title' => __('app.share_website'), 'url' => config('meta.url') . url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']])]); ?>

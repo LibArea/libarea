@@ -45,7 +45,7 @@ class ReplyController extends Controller
 
         $item = ItemPresence::index($item_id);
 
-        $url = url('website', ['slug' => $item['item_domain']]);
+        $url = url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]);
         Validator::Length($content, 6, 555, 'content', $url);
 
         // Access verification 
@@ -54,7 +54,7 @@ class ReplyController extends Controller
             redirect('/');
         }
 
-        $redirect  = url('website', ['slug' => $item['item_domain']]) . '#reply_' . $reply['reply_id'];
+        $redirect  = $url . '#reply_' . $reply['reply_id'];
 
         ReplyModel::edit(
             [
@@ -77,7 +77,7 @@ class ReplyController extends Controller
 
         $item = ItemPresence::index($item_id);
 
-        $website_url = url('website', ['slug' => $item['item_domain']]);
+        $website_url = url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]);
         Validator::Length($content, 6, 555, 'content', $website_url);
 
         // We will check for freezing, stop words, the frequency of posting content per day 
