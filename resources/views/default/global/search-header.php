@@ -12,7 +12,7 @@ $q = $data['q'];
 <body <?php if (Request::getCookie('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
 
   <header class="d-header">
-    <div class="wrap-item">
+    <div class="wrap wrap-max">
       <div class="d-header_contents">
 
         <div class="flex items-center gray-600 gap-min">

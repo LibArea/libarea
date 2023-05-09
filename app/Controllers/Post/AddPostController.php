@@ -168,8 +168,7 @@ class AddPostController extends Controller
     // Since this is for the post, we will get a preview and analysis of the domain ...
     public function addUrl($post_url)
     {
-        $parse              = parse_url($post_url);
-        $domain             = new Domain($parse['host']);
+        $domain             = new Domain(host($parse['host']));
 
         $site = [
             'og_img'            => self::grabOgImg($post_url),

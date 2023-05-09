@@ -91,7 +91,7 @@ Route::get('/search')->controller('SearchController', ['post'])->name('search');
 Route::get('/search/go')->controller('SearchController@go', ['post'])->name('search.go');
 
 // Other pages without authorization
-Route::get('/post/{id}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+'])->name('post_id');;
+Route::get('/post/{id}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+'])->name('post_id');
 Route::get('/post/{id}/{slug}')->controller('Post\PostController', ['post'])->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
 // Страницы info
@@ -132,7 +132,10 @@ Route::get('/redirect/facet/{id}')->controller('Facets\RedirectController')->whe
 Route::get('/domain/{domain}')->controller('Post\PostController@domain')->where(['domain' => '[a-z0-9-.]+'])->name('domain');
 
 Route::get('/web')->controller('Item\HomeController', ['main'])->name('web');
-Route::get('/web/website/{id}/{slug}')->controller('Item\DetailedController')->where(['id' => '[0-9]+'])->name('website');
+
+Route::get('/web/website/{id}')->controller('Item\DetailedController')->where(['id' => '[0-9]+'])->name('website_id');
+Route::get('/web/website/{id}/{slug}')->controller('Item\DetailedController')->where(['id' => '[0-9]+', 'slug' => '[a-z0-9-.]+'])->name('website');
+
 Route::get('/web/dir/{sort}/{slug}')->controller('Item\DirController')->name('category');
 Route::get('/web/{grouping}/dir/{sort}/{slug}')->controller('Item\DirController')->name('grouping.category');
 

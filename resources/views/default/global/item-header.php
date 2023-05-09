@@ -11,7 +11,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?' . config('assembly-js-c
 
 <body class="item<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?>">
   <header>
-    <div class="wrap-item">
+    <div class="wrap wrap-max">
       <div class="d-header_contents">
 
         <div class="flex items-center gray-600 gap-min">

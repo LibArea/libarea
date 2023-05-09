@@ -82,7 +82,7 @@
   <?php endif; ?>
 <?php endif; ?>
 
-<div id="contentWrapper" class="wrap-item">
+<div id="contentWrapper" class="wrap wrap-max">
   <main class="w-100">
     <?= insert('/_block/navigation/item/nav', ['data' => $data]); ?>
 

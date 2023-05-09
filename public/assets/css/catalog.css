@@ -63,11 +63,6 @@ body.item.dark .box {
   background-color: #d0d0d0;
 }
 
-.wrap-item {
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
 @media (max-width: 890px) {
   .item-categories,
   .item-cat {
@@ -81,9 +76,4 @@ body.item.dark .box {
   }  
 
   .item main { margin: 0.5rem; } 
-  
-  .wrap-item {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
 }

@@ -1565,3 +1565,5 @@ CREATE TABLE `polls_votes` (
 
 ALTER TABLE `posts` ADD `post_poll` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT 'Для опросов' AFTER `post_closed`; 
 ALTER TABLE `items` ADD `item_poll` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT 'Для опроса' AFTER `item_following_link`;
+
+ALTER TABLE `items` ADD `item_slug` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL AFTER `item_url`; 

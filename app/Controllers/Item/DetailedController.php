@@ -4,6 +4,7 @@ namespace App\Controllers\Item;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\Сheck\ItemPresence;
 use App\Models\Item\{WebModel, ReplyModel, UserAreaModel};
 use App\Models\{PostModel, SubscriptionModel};
 use Meta, UserData, Img;
@@ -22,10 +23,10 @@ class DetailedController extends Controller
     // Детальная страница сайта
     public function index()
     {
-        $id   = Request::getInt('id');
-
-        $item = WebModel::getItemOne($id);
-        notEmptyOrView404($item);
+        $slug  = Request::get('slug');
+        $id    = Request::getInt('id');
+        
+        $item = self::presence($id, $slug);
 
         if ($item['item_published'] == 0) {
             notEmptyOrView404([]);
@@ -103,5 +104,20 @@ class DetailedController extends Controller
         };
 
         return $fnBuilder($grouped[$group]);
+    }
+    
+    public static function presence($id, $slug)
+    {
+        // Check id and get content data
+        // Проверим id и получим данные контента
+        $content = ItemPresence::index($id, 'id');
+
+        // If the site slug is different from the data in the database
+        // Если slug сайта отличается от данных в базе
+        if ($slug != $content['item_slug']) {
+            redirect(url('website', ['id' => $content['item_id'], 'slug' => $content['item_slug']]));
+        }
+
+        return $content;
     }
 }

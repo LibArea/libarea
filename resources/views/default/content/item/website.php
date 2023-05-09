@@ -1,6 +1,7 @@
 <?php $item = $data['item']; ?>
-<div id="contentWrapper" class="wrap-item">
+<div id="contentWrapper" class="wrap wrap-max">
   <main class="w-100" itemscope itemtype="https://schema.org/WebSite">
+      <a class="text-sm" href="<?= url('web'); ?>"><< <?= __('app.catalog'); ?></a> 
       <h1 itemprop="name" class="m0"><?= $item['item_title']; ?>
         <?php if (UserData::checkAdmin()) : ?>
           <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">

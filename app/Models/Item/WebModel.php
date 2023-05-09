@@ -152,19 +152,20 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Detailed information on the id
     // Детальная информация по id
-    public static function getItemOne($id)
+    public static function getItemId($id)
     {
         $user_id = UserData::getUserId();
         $sql = "SELECT
                     item_id,
                     item_title,
                     item_content,
+                    item_url,
+                    item_slug,
                     item_title_soft,
                     item_content_soft,
                     item_published,
                     item_user_id,
                     item_modified,
-                    item_url,
                     item_domain,
                     item_votes,
                     item_count,
@@ -256,47 +257,6 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                         WHERE item_id   = :item_id";
 
         return  DB::run($sql, $params);
-    }
-
-    // Get data by id
-    // Получим данные по id
-    public static function getItemId($item_id)
-    {
-        $sql = "SELECT
-                    item_id,
-                    item_title,
-                    item_content,
-                    item_title_soft,
-                    item_content_soft,
-                    item_published,
-                    item_user_id,
-                    item_url,
-                    item_domain,
-                    item_votes,
-                    item_count,
-                    item_date,
-                    item_is_forum,
-                    item_is_portal,
-                    item_is_blog,
-                    item_is_reference,
-                    item_is_goods,
-                    item_is_soft,
-                    item_is_github,
-                    item_github_url,
-                    item_telephone,
-                    item_email,
-                    item_vk,
-                    item_telegram,
-                    item_post_related,
-                    item_following_link,
-                    item_close_replies,
-                    item_poll,
-                    item_is_deleted
-                        FROM items 
-                        WHERE item_id = :item_id AND item_is_deleted = 0";
-
-
-        return DB::run($sql, ['item_id' => $item_id])->fetch();
     }
 
     // Topics by reference 

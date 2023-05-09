@@ -91,6 +91,12 @@ h5 {
   padding-right: 1rem;
 }
 
+.wrap.wrap-max {
+  max-width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .d-header_contents {
   display: flex;
   align-items: center;
