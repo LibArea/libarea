@@ -319,7 +319,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     
     public static function getDomains($url)
     {   
-        $sql = "SELECT item_id, item_title, item_url, item_domain, rel.*
+        $sql = "SELECT item_id, item_title, item_url, item_slug, item_domain, rel.*
                     FROM items 
                         LEFT JOIN
                             (

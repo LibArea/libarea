@@ -20,6 +20,7 @@ return [
     'news'              => '新闻',
     'team'              => '团队',
     'teams'             => '团队',
+    'subsections'       => '小节',
     'table'             => '桌子',
     'team_not_users'    => '团队中还没有成员...',
     'total_votes'       => '总票数',

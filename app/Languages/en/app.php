@@ -20,6 +20,7 @@ return [
     'news'              => 'News',
     'team'              => 'Team',
     'teams'             => 'Teams',
+    'subsections'       => 'Subsections',
     'table'             => 'Table',
     'team_not_users'    => 'There is no member in the team yet...',
     'total_votes'       => 'Total Votes',
