@@ -41,7 +41,7 @@ class EditItemController extends Controller
         }
 
         if (UserData::checkAdmin()) {
-            Request::getResources()->addBottomScript('/assets/js/admin.js');
+            Request::getResources()->addBottomScript('/assets/js/catalog.js');
         }
 
         return $this->render(

@@ -7,8 +7,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
 
     Route::post('/test/mail')->module('admin', 'App\Console@testMail')->name('admin.test.mail');
     Route::post('/user/ban')->module('admin', 'App\Users@banUser');
-    Route::post('/favicon/add')->module('admin', 'App\Webs@favicon');
-    Route::post('/screenshot/add')->module('admin', 'App\Webs@screenshot');
     Route::post('/word/ban')->module('admin', 'App\Words@deletes');
     Route::post('/audit/status')->module('admin', 'App\Audits@statusApproved');
     Route::post('/reports/saw')->module('admin', 'App\Audits@saw');

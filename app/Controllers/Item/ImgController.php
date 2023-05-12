@@ -1,16 +1,20 @@
 <?php
 
-namespace Modules\Admin\App;
+namespace App\Controllers\Item;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Models\Item\WebModel;
 use Img;
 
-class Webs extends Controller
+class ImgController extends Controller
 {
     public function favicon()
     {
+        if (!UserData::checkAdmin()) {
+            return false;
+        }
+        
         $item_id    = Request::getPostInt('id');
         $item       = WebModel::getItemId($item_id);
         notEmptyOrView404($item);
@@ -34,6 +38,10 @@ class Webs extends Controller
     
     public function screenshot()
     {
+        if (!UserData::checkAdmin()) {
+            return false;
+        }
+        
         $item_id    = Request::getPostInt('id');
         $item       = WebModel::getItemId($item_id);
         notEmptyOrView404($item);

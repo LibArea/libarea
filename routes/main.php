@@ -38,6 +38,8 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
 
+    Route::post('/web/favicon/add')->controller('Item\ImgController@favicon');
+    Route::post('/web/screenshot/add')->controller('Item\ImgController@screenshot');
     Route::get('/web/bookmarks')->controller('Item\UserAreaController@bookmarks')->name('web.bookmarks');
     Route::get('/web/my')->controller('Item\UserAreaController')->name('web.user.sites');
 
