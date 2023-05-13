@@ -20,7 +20,7 @@
           <?= markdown($item['item_content'], 'text'); ?>
           <a class="gree" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
             <?= Img::website($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
-            <?= $item['item_domain']; ?>
+            <?= host($item['item_url']); ?>
           </a>
           <span class="gray">•</span>
           <?= Html::signed([
@@ -43,6 +43,28 @@
             
             <?= Html::favorite($item['item_id'], 'website', $item['tid']); ?>
           </div>  
+          
+          <?php if (count($data['subsections']) > 1) : ?>
+            <div class="mt20"><br>
+              <h4 class="uppercase-box"><?= __('app.subsections'); ?></h3>
+              <?php foreach ($data['subsections'] as $site) : ?>
+                <?php if($site['item_id'] != $item['item_id']) : ?>
+                <div class="mb15">
+                  <a href="<?= url('website', ['id' => $site['item_id'], 'slug' => $site['item_slug']]); ?>"><?= $site['item_title']; ?></a>
+                  <?= Html::facets($site['facet_list'], 'category', 'tag mr15'); ?>
+                  <?php if(UserData::checkAdmin()) : ?>
+                    <a href="<?= url('content.edit', ['type' => 'item', 'id' => $site['item_id']]); ?>">
+                      <svg class="icons gray-600">
+                        <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                      </svg>
+                    </a>
+                  <?php endif; ?>
+                  <div class="green"><?= host($site['item_url']); ?></div>
+                </div>  
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </div>
+          <?php endif; ?>
         </div>
       </div>
       

@@ -12,6 +12,8 @@ use Meta, UserData, Img;
 use App\Traits\LastDataModified;
 use App\Traits\Poll;
 
+use App\Validate\RulesItem;
+
 class DetailedController extends Controller
 {
     use LastDataModified;
@@ -79,6 +81,7 @@ class DetailedController extends Controller
                     'user_count_site'   => $count_site,
                     'related_posts'     => $related_posts ?? [],
                     'poll'              => $this->getPoll($item['item_poll']),
+                    'subsections'       => RulesItem::getDomains($item['item_domain']),
                 ]
             ],
             'item',

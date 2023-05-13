@@ -7,7 +7,7 @@
 return [
 
     // To force an update
-    'version'     => 12,
+    'version'     => 14,
 
     // Path to svg sprite
     // Путь к спрайту svg
@@ -37,5 +37,6 @@ return [
         'medium-zoom'   => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/',
         'app'           => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/', 
         'uploads'       => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/',
+        'catalog'       => HLEB_GLOBAL_DIRECTORY . '/resources/views/default/js/',
      ],  
 ];
