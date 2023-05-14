@@ -1567,3 +1567,5 @@ ALTER TABLE `posts` ADD `post_poll` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT 'Д
 ALTER TABLE `items` ADD `item_poll` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT 'Для опроса' AFTER `item_following_link`;
 
 ALTER TABLE `items` ADD `item_slug` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL AFTER `item_url`; 
+
+ALTER TABLE `comments` CHANGE `comment_comment_id` `comment_parent_id` INT(11) NOT NULL DEFAULT '0';

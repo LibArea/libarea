@@ -142,7 +142,7 @@
         <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
         <ol class="list-none">
-          <li class="content_tree mb20 ml15<?php if ($comment['comment_comment_id'] > 0) : ?> ml30<?php endif; ?><?php if ($comment['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
+          <li class="content_tree mb20 ml15<?php if ($comment['comment_parent_id'] > 0) : ?> ml30<?php endif; ?><?php if ($comment['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
             <div class="flex justify-between">
               <div class="text-sm flex gap">
                 <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>">
@@ -159,8 +159,8 @@
                 <span class="gray-600 lowercase">
                   <?= Html::langDate($comment['comment_date']); ?>
                 </span>
-                <?php if ($comment['comment_comment_id'] > 0) : ?>
-                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><svg class="icons icon-small">
+                <?php if ($comment['comment_parent_id'] > 0) : ?>
+                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_parent_id']; ?>"><svg class="icons icon-small">
                       <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
                     </svg></a>
                 <?php else : ?>
@@ -234,7 +234,6 @@
                   </ul>
                 </div>
               </div>
-
             </div>
             <div class="ind-first-p">
               <?= markdown($comment['comment_content'], 'text'); ?>

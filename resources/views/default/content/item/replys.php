@@ -1,7 +1,5 @@
 <?php
-$tl = UserData::getUserTl();
-$user_id = UserData::getUserId();
-function internalRender($nodes, $tl, $user_id)
+function internalRender($nodes)
 {
     echo '<ul class="list-style-none mb20 mt10">';
     foreach ($nodes as $node) {
@@ -24,8 +22,7 @@ function internalRender($nodes, $tl, $user_id)
         }
 
         if (UserData::checkAdmin()) {
-            echo '<span data-id="' . $node['reply_id'] . '" data-type="reply" class="type-action gray-600">
-                  ' . __('web.remove') . '</span>';
+            echo '<span data-id="' . $node['reply_id'] . '" data-type="reply" class="type-action gray-600">' . __('web.remove') . '</span>';
         }
 
         echo '</div>';
@@ -33,11 +30,11 @@ function internalRender($nodes, $tl, $user_id)
         echo '<div class="max-w780 text-base ind-first-p">' . markdown($node['content'], 'text') . '</div>
                     <div class="flex gap">' . Html::votes($node, 'reply');
 
-        if ($tl >= config('trust-levels.tl_add_reply')) {
+        if (UserData::getUserTl() >= config('trust-levels.tl_add_reply')) {
             echo '<a data-item_id="' . $node['reply_item_id'] . '" data-type="addform" data-id="' . $node['reply_id'] . '" class="actreply gray-600">' . __('web.reply') . '</a>';
         }
 
-        if ($user_id == $node['reply_user_id']) {
+        if (UserData::getUserId() == $node['reply_user_id']) {
             echo '<a data-item_id="' . $node['reply_item_id'] . '" data-type="editform" data-id="' . $node['reply_id'] . '" class="actreply gray-600">' . __('web.edit') . '</a>';
         }
 
@@ -45,7 +42,7 @@ function internalRender($nodes, $tl, $user_id)
                  <div id="reply_addentry' . $node['reply_id'] . '" class="none"></div>';
 
         if (isset($node['children'])) {
-            internalRender($node['children'], $tl, $user_id);
+            internalRender($node['children']);
         }
 
         echo '</li>';
@@ -53,4 +50,4 @@ function internalRender($nodes, $tl, $user_id)
     echo '</ul>';
 }
 
-echo internalRender($data['tree'], $tl, $user_id);
+echo internalRender($data['tree']);

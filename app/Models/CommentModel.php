@@ -17,7 +17,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
         $params = [
             'comment_post_id'       => $post_id,
             'comment_answer_id'     => $answer_id,
-            'comment_comment_id'    => $comment_id,
+            'comment_parent_id'     => $comment_id,
             'comment_content'       => $content,
             'comment_published'     => ($trigger === false) ? 0 : 1,
             'comment_ip'            => Request::getRemoteAddress(),
@@ -26,7 +26,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 
         $sql = "INSERT INTO comments(comment_post_id, 
                                         comment_answer_id, 
-                                        comment_comment_id, 
+                                        comment_parent_id, 
                                         comment_content, 
                                         comment_published, 
                                         comment_ip, 
@@ -34,7 +34,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
         
                                 VALUES(:comment_post_id, 
                                         :comment_answer_id, 
-                                        :comment_comment_id, 
+                                        :comment_parent_id, 
                                         :comment_content, 
                                         :comment_published, 
                                         :comment_ip, 
@@ -46,7 +46,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
         $last_id        =   $sql_last_id['last_id'];
 
         // Отмечаем комментарий, что за ним есть ответ
-        self::setThereComment($last_id, $params['comment_comment_id']);
+        self::setThereComment($last_id, $params['comment_parent_id']);
 
         $sql     = "SELECT * FROM answers WHERE answer_id = :comment_answer_id";
         $answer  = DB::run($sql, ['comment_answer_id' => $params['comment_answer_id']])->fetch();
@@ -111,7 +111,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     comment_content,
                     comment_post_id,
                     comment_user_id,
-                    comment_comment_id,
+                    comment_parent_id,
                     comment_published,
                     comment_votes,
                     comment_after,
@@ -159,7 +159,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     comment_id,
                     comment_user_id,                
                     comment_answer_id,
-                    comment_comment_id,
+                    comment_parent_id,
                     comment_content,
                     comment_date,
                     comment_votes,
@@ -190,7 +190,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     comment_id,
                     comment_user_id,                
                     comment_answer_id,
-                    comment_comment_id,
+                    comment_parent_id,
                     comment_content,
                     comment_date,
                     comment_published,
