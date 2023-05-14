@@ -134,12 +134,12 @@ Route::get('/redirect/facet/{id}')->controller('Facets\RedirectController')->whe
 Route::get('/domain/{domain}')->controller('Post\PostController@domain')->where(['domain' => '[a-z0-9-.]+'])->name('domain');
 
 Route::get('/web')->controller('Item\HomeController', ['main'])->name('web');
-
 Route::get('/web/website/{id}')->controller('Item\DetailedController')->where(['id' => '[0-9]+'])->name('website_id');
 Route::get('/web/website/{id}/{slug}')->controller('Item\DetailedController')->where(['id' => '[0-9]+', 'slug' => '[a-z0-9-.]+'])->name('website');
-
 Route::get('/web/dir/{sort}/{slug}')->controller('Item\DirController')->name('category');
 Route::get('/web/{grouping}/dir/{sort}/{slug}')->controller('Item\DirController')->name('grouping.category');
+Route::post('/search/web/url')->controller('Item\AddItemController@searchUrl');
+
 
 Route::type(['get', 'post'])->get('/cleek')->controller('Item\DirController@cleek');
 

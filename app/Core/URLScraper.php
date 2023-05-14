@@ -4,6 +4,8 @@
 // Copyright 2018 Bert Maurau
 // https://github.com/tommyku/php-html-meta-parser
 // FIX: UTF (test: https://lenta.ru/news/2021/09/09/fantastic_russians/)
+// TODO: https://github.com/jkphl/micrometa/blob/master/doc/index.md#items
+
 class URLScraper
 {
 	private static $STATUS = [

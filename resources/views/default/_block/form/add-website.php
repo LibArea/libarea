@@ -6,7 +6,8 @@
 
 <fieldset>
   <label for="url">URL <strong class="red">*</strong></label>
-  <input id="url" name="url" required="" type="text" value="">
+  <input id="find-url" name="url" autocomplete="off" required="" type="text" value="">
+  <div class="search-box none" id="search_url"></div>
 </fieldset>
 
 <fieldset>

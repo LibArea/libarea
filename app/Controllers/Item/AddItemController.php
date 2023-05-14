@@ -33,6 +33,8 @@ class AddItemController extends Controller
         }
 
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+        
+        Request::getResources()->addBottomScript('/assets/js/catalog.js');
 
         return $this->render(
             '/item/add',
@@ -119,5 +121,13 @@ class AddItemController extends Controller
         }
 
         return true;
+    }
+    
+    public function searchUrl()
+    {
+        $host = host(Request::getPost('url'));
+        $result = WebModel::getHost($host);
+
+        return json_encode($result, JSON_PRETTY_PRINT);
     }
 }

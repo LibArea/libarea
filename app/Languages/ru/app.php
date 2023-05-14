@@ -25,7 +25,7 @@ return [
     'team_not_users'    => 'В команде пока нет участников...',
     'total_votes'       => 'Всего голосовало',
     'owner'             => 'Владелец',
-    'top'               => 'TOP',
+    'top'               => 'ТОП',
     'one_month'         => 'месяц',
     'three_months'      => '3 месяца',
     'all_time'          => 'всё время',

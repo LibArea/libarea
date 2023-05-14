@@ -41,6 +41,7 @@ return [
     'related_posts'     => 'Пов\'язані пости',
     'desc_formed'       => 'Опис формується',
     'by_date'           => 'За датою',
+    'top'               => 'TOP',
     'top_view'          => 'За рейтингом',
     'new_sites'         => 'Нові сайти',
     'audits_view'       => 'Вимагають розгляду',

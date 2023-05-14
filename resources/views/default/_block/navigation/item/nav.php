@@ -11,7 +11,7 @@ if ($category) : ?>
         </li>
         <li<?php if ($data['sort'] == 'top') { ?> class="active" <?php } ?>>
           <a href="<?= url('category', ['sort' => 'top', 'slug' => $category['facet_slug']]); ?>">
-            TOP
+            <?= __('web.top'); ?>
           </a>
           </li>
     </ul>

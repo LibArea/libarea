@@ -41,6 +41,7 @@ return [
     'related_posts'     => '相关职位',
     'desc_formed'       => '描述正在形成',
     'by_date'           => '按日期计算',
+    'top'               => '最佳',
     'top_view'          => '按评级划分',
     'new_sites'         => '新网站',
     'audits_view'       => '需要考虑',

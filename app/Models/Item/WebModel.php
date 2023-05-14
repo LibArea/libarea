@@ -337,7 +337,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getHost($host)
     {   
-        $sql = "SELECT item_id, item_title, item_url, item_slug, item_domain FROM items WHERE item_url LIKE :host";
+        $sql = "SELECT item_id, item_title, item_url, item_slug, item_domain FROM items WHERE item_url LIKE :host LIMIT 5";
         
         return DB::run($sql, ['host' => "%" . $host . "%"])->fetchAll();
     }

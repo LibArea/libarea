@@ -41,6 +41,7 @@ return [
     'related_posts'     => '相关帖子',
     'desc_.formed'       => '描述已形成',
     'by_date'           => '按日期',
+    'top'               => '最佳',
     'top_view'          => '按评分',
     'new_sites'         => '新网站',
     'audits_view'       => '需要考虑',

@@ -41,6 +41,7 @@ return [
     'related_posts'     => 'Related posts',
     'desc_formed'       => 'Description is formed',
     'by_date'           => 'By date',
+    'top'               => 'TOP',
     'top_view'          => 'By rating',
     'new_sites'         => 'New sites',
     'audits_view'       => 'Require consideration',

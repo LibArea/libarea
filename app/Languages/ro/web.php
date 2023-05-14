@@ -41,6 +41,7 @@ return [
     'related_posts'     => 'Postări asemănatoare',
     'desc_formed'       => 'Se formează descrierea',
     'by_date'           => 'După dată',
+    'top'               => 'TOP',
     'top_view'          => 'Prin rating',
     'new_sites'         => 'Site-uri noi',
     'audits_view'       => 'Necesită luare în considerare',
