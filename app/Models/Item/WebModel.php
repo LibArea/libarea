@@ -334,7 +334,14 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         
         return DB::run($sql, ['url' => $url])->fetchAll();
     }   
-    
+
+    public static function getHost($host)
+    {   
+        $sql = "SELECT item_id, item_title, item_url, item_slug, item_domain FROM items WHERE item_url LIKE :host";
+        
+        return DB::run($sql, ['host' => "%" . $host . "%"])->fetchAll();
+    }
+
     public static function getSlug($slug)
     {
         return DB::run("SELECT item_slug FROM items WHERE item_slug = :slug", ['slug' => $slug])->fetch();

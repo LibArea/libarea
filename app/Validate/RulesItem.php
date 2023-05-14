@@ -13,7 +13,7 @@ class RulesItem extends Validator
 
         self::url($data['url'], $redirect);
 
-        if (host($data['url'])) {
+        if (WebModel::getHost(host($data['url']))) {
             is_return(__('web.site_replay'), 'error', $redirect);
         }
 
