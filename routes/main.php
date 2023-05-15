@@ -38,11 +38,6 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
 
-    Route::post('/web/favicon/add')->controller('Item\ImgController@favicon');
-    Route::post('/web/screenshot/add')->controller('Item\ImgController@screenshot');
-    Route::get('/web/bookmarks')->controller('Item\UserAreaController@bookmarks')->name('web.bookmarks');
-    Route::get('/web/my')->controller('Item\UserAreaController')->name('web.user.sites');
-
     Route::get('/messages')->controller('MessagesController')->name('messages');   
     Route::get('/messages/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 
     Route::get('/messages/@{login}')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
@@ -132,14 +127,6 @@ Route::get('/blog/{slug}/topic/{tslug}')->controller('Facets\BlogFacetController
 Route::get('/redirect/facet/{id}')->controller('Facets\RedirectController')->where(['id' => '[0-9]+'])->name('redirect.facet');
 
 Route::get('/domain/{domain}')->controller('Post\PostController@domain')->where(['domain' => '[a-z0-9-.]+'])->name('domain');
-
-Route::get('/web')->controller('Item\HomeController', ['main'])->name('web');
-Route::get('/web/website/{id}')->controller('Item\DetailedController')->where(['id' => '[0-9]+'])->name('website_id');
-Route::get('/web/website/{id}/{slug}')->controller('Item\DetailedController')->where(['id' => '[0-9]+', 'slug' => '[a-z0-9-.]+'])->name('website');
-Route::get('/web/dir/{sort}/{slug}')->controller('Item\DirController')->name('category');
-Route::get('/web/{grouping}/dir/{sort}/{slug}')->controller('Item\DirController')->name('grouping.category');
-Route::post('/search/web/url')->controller('Item\AddItemController@searchUrl');
-
 
 Route::type(['get', 'post'])->get('/cleek')->controller('Item\DirController@cleek');
 
