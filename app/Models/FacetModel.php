@@ -262,12 +262,13 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                                 id,
                                 login,                                 
                                 avatar,
+                                is_deleted,
                                 about
                                     FROM users 
                         ) AS rel
-                            ON rel.id = post_user_id
-                 WHERE relation_facet_id = :facet_id  GROUP BY post_user_id 
-                 ORDER BY hits_count DESC LIMIT $limit";
+                            ON rel.id = post_user_id 
+                                WHERE relation_facet_id = :facet_id AND rel.is_deleted = 0 GROUP BY post_user_id 
+                                    ORDER BY hits_count DESC LIMIT $limit";
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }

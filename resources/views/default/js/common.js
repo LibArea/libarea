@@ -119,7 +119,7 @@ function fetchSearch() {
                 html += '<a class="sky block text-sm mb15 mr10" href="/web/dir/all/' + obj[key].facet_slug + '">' + obj[key].facet_title + '</a>';
               }
               if (obj[key].item_id) {
-                html += '<a class="block black text-sm mb10" href="/web/website/' + obj[key].item_domain + '">' + obj[key].title + '</a>';
+                html += '<a class="block black text-sm mb10" href="/web/website/' + obj[key].item_id + '">' + obj[key].title + '</a>';
               }  
           } else {    
               if (obj[key].facet_slug) {
