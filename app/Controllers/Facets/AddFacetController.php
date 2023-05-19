@@ -4,7 +4,7 @@ namespace App\Controllers\Facets;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Models\{FacetModel, SubscriptionModel};
+use App\Models\{FacetModel, SubscriptionModel, ActionModel};
 use Meta;
 
 use App\Validate\RulesFacet;
@@ -51,6 +51,17 @@ class AddFacetController extends Controller
 
         $msg = $type == 'blog' ? __('msg.blog_added') : __('msg.change_saved');
 
-        is_return($msg, 'success', url('redirect.facet', ['id' => $new_facet_id['facet_id']]));
+        $url = url('redirect.facet', ['id' => $new_facet_id['facet_id']]);
+
+        ActionModel::addLogs(
+            [
+                'id_content'    => $new_facet_id['facet_id'],
+                'action_type'   => $type,
+                'action_name'   => 'added',
+                'url_content'   => $url,
+            ]
+        );
+
+        is_return($msg, 'success', $url);
     }
 }
