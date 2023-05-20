@@ -42,10 +42,10 @@ return [
       'name'      => 'skype'
     ], [
       'url'       => 'telegram',
-      'addition'  => 'tg://resolve?domain=',
+      'addition'  => 'https://t.me/',
       'title'     => 'telegram',
       'lang'      => 'Telegram',
-      'help'      => 'tg://resolve?domain=<b>NICK</b>',
+      'help'      => 'https://t.me/<b>NICK</b>',
       'name'      => 'telegram'
     ], [
       'url'       => 'vk',

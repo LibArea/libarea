@@ -32,7 +32,7 @@ return [
         'lang'      => 'Skype',
     ], [
         'url'       => 'telegram',
-        'addition'  => 'tg://resolve?domain=',
+        'addition'  => 'https://t.me/',
         'title'     => 'telegram',
         'lang'      => 'Telegram',
     ], [
