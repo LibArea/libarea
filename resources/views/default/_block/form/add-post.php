@@ -94,13 +94,9 @@
 
     <div class="last-content content-tabs" id="url">
       <?php if (UserData::getRegType(config('trust-levels.tl_add_url'))) : ?>
-        <fieldset>
-          <div class="left w-70">
-            <input id="link" placeholder="<?= __('app.url_parsing'); ?>" class="post_url" type="text" name="post_url" />
-          </div>
-          <div class="left w-30 pl5">
-            <input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= __('app.to_extract'); ?>" />
-          </div>
+        <fieldset class="flex items-center gap-min">
+          <input id="link" placeholder="<?= __('app.url_parsing'); ?>" class="post_url" type="text" name="post_url" />
+          <div class="w-30"><input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= __('app.to_extract'); ?>" /></div>
         </fieldset>
       <?php endif; ?>
 

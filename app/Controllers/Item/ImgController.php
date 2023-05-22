@@ -47,11 +47,10 @@ class ImgController extends Controller
         $item       = WebModel::getItemId($item_id);
         notEmptyOrView404($item);
         
-        $host = host($item['item_url']);
-        $puth = HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $host . '.png';
+        $puth = HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . host($item['item_url']) . '.png';
 
         if (!file_exists($puth)) {
-            $urls = self::getScreenshot($host);
+            $urls = self::getScreenshot($item['item_url']);
             copy($urls, $puth);
         }
 

@@ -6,8 +6,8 @@
 
       <fieldset>
         <input type="email" name="email">
-        <div class="right pt5"><?= Html::sumbit(__('app.send')); ?></div>
-        <div class="text-sm pt5 gray-600"><?= __('app.enter'); ?> E-mail</div>
+        <div class="right mt5"><?= Html::sumbit(__('app.send')); ?></div>
+        <div class="text-sm mt5 gray-600"><?= __('app.enter'); ?> E-mail</div>
       </fieldset>
       <?= __('app.invitations_left'); ?> <?= 5 - $data['count_invites']; ?>
     </form>

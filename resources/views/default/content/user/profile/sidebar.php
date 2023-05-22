@@ -63,8 +63,8 @@
     <div class="box bg-lightgray">
       <h4 class="uppercase-box"><?= __('app.is_reading'); ?></h4>
       <?php foreach ($data['topics'] as  $topic) : ?>
-        <div class="mt5 mb5">
-          <a class="flex relative items-center pt5 pb5 hidden gray" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
+        <div class="mt5 mb10">
+          <a class="flex relative items-center hidden gray" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
             <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base mr5', 'logo', 'small'); ?>
             <span class="bar-name text-sm"><?= $topic['facet_title']; ?></span>
           </a>

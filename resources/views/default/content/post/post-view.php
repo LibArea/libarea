@@ -166,7 +166,7 @@ $blog = $data['blog'][0] ?? null;
 
             <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
 
-            <div class="clear pt5">
+            <div class="clear mt5">
               <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
               <input type="hidden" name="answer_id" value="0">
               <?= Html::sumbit(__('app.reply')); ?>

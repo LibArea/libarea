@@ -42,7 +42,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
         <?php if ($blog['facet_is_deleted'] == 0) : ?>
           <div class="box bg-beige">
             <h4 class="uppercase-box"><?= __('app.created_by'); ?></h4>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= url('profile', ['login' => $data['user']['login']]); ?>">
+            <a class="flex relative mt5 mb10 items-center hidden gray-600" href="<?= url('profile', ['login' => $data['user']['login']]); ?>">
               <?= Img::avatar($data['user']['avatar'], $data['user']['login'], 'img-base', 'small'); ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>
             </a>
