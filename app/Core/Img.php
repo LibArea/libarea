@@ -45,17 +45,17 @@ class Img
     }
 
     // Icons, screenshots associated with the site
-    public static function website($domain, $type, $alt, $css = '')
+    public static function website($type, $host, $css = '')
     {
-        $path = ($type == 'thumbs') ? self::PATH['thumbs'] : self::PATH['favicons'];
+        $path = ($type == 'thumb') ? self::PATH['thumbs'] : self::PATH['favicons'];
 
-        $itemprop = ($type == 'thumbs') ? 'itemprop="image"' : '';
+        $itemprop = ($type == 'thumb') ? 'itemprop="image"' : '';
 
-        if (file_exists(HLEB_PUBLIC_DIR . $path . $domain . '.png')) {
-            return '<img ' . $itemprop . ' class="' . $css . '" src="' . $path . $domain . '.png" title="' . $alt . '" alt="' . $alt . '">';
+        if (file_exists(HLEB_PUBLIC_DIR . $path . $host . '.png')) {
+            return '<img ' . $itemprop . ' class="' . $css . '" src="' . $path . $host . '.png" title="' . $host . '" alt="' . $host . '">';
         }
 
-        return '<img class="mr5 ' . $css . '" src="' . $path . 'no-link.png" title="' . $alt . '" alt="' . $alt . '">';
+        return '<img class="mr5 ' . $css . '" src="' . $path . 'no-link.png" title="' . $host . '" alt="' . $host . '">';
     }
 
     // Cover of users, blog 

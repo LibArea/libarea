@@ -35,8 +35,10 @@ class DetailedController extends Controller
         }
 
         $content_img = Img::PATH['thumbs'] . 'default.png';
-        if (file_exists(HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $item['item_domain'] . '.png')) {
-            $content_img =  Img::PATH['thumbs'] . $item['item_domain'] . '.png';
+        $host = host($item['item_url']);
+        
+        if (file_exists(HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $host . '.png')) {
+            $content_img =  Img::PATH['thumbs'] . $host . '.png';
         }
 
         $m = [

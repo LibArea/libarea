@@ -11,7 +11,7 @@
         </a>
         <div class="flex gap">
           <div class="mb-none img-preview">
-            <?= Img::website($item['item_domain'], 'thumbs', $item['item_title'], 'list-items__thumb-image'); ?>
+            <?= Img::website('thumb', host($item['item_url']), 'list-items__thumb-image'); ?>
           </div>
           <div class="list-items__description">
             <?= Html::facets($item['facet_list'], 'category', 'tag mr15', $sort); ?>
@@ -44,8 +44,8 @@
             </div>
             <div class="list-items__footer">
               <div class="green">
-                <?= Img::website($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
-                <?= $item['item_domain']; ?>
+                <?= Img::website('favicon', host($item['item_url']), 'favicons mr5'); ?>
+                <?= host($item['item_url']); ?>
                 <?php if ($item['item_github_url']) : ?>
                   <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
                     <svg class="icons">

@@ -19,10 +19,11 @@ class ImgController extends Controller
         $item       = WebModel::getItemId($item_id);
         notEmptyOrView404($item);
 
-        $puth = HLEB_PUBLIC_DIR . Img::PATH['favicons'] . $item["item_domain"] . '.png';
+        $host = host($item['item_url']);
+        $puth = HLEB_PUBLIC_DIR . Img::PATH['favicons'] . $host . '.png';
 
         if (!file_exists($puth)) {
-            $urls = self::getFavicon($item['item_domain']);
+            $urls = self::getFavicon($host);
             copy($urls, $puth);
         }
 
@@ -32,7 +33,7 @@ class ImgController extends Controller
     public static function getFavicon($url)
     {
         $url = str_replace("https://", '', $url);
-        //return "https://www.google.com/s2/favicons?domain=" . $url;
+        // "https://www.google.com/s2/favicons?domain=" . $url;
         return "https://favicon.yandex.net/favicon/" . $url;
     }
     
@@ -45,11 +46,12 @@ class ImgController extends Controller
         $item_id    = Request::getPostInt('id');
         $item       = WebModel::getItemId($item_id);
         notEmptyOrView404($item);
-
-        $puth = HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $item["item_domain"] . '.png';
+        
+        $host = host($item['item_url']);
+        $puth = HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $host . '.png';
 
         if (!file_exists($puth)) {
-            $urls = self::getScreenshot($item['item_url']);
+            $urls = self::getScreenshot($host);
             copy($urls, $puth);
         }
 

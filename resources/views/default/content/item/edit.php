@@ -25,12 +25,12 @@ $domain = $data['domain']; ?>
       <?php if (UserData::checkAdmin()) { ?>
         <div class="flex gap items-center mb15 mb-none">
           <div class="img-preview">
-            <?= Img::website($domain['item_domain'], 'thumbs', $domain['item_title'], 'list-items__thumb-image'); ?>
+            <?= Img::website('thumb', host($domain['item_url']), 'list-items__thumb-image'); ?>
           </div>
           <div class="add-screenshot btn btn-small btn-primary" data-id="<?= $domain['item_id']; ?>">+ screenshot</div>
           <div class="gray-600 text-sm"><?= __('web.screenshot_time'); ?></div>
         </div>
-        <?= Img::website($domain['item_domain'], 'favicon', $domain['item_domain'], ' mr5'); ?>
+        <?= Img::website('favicon', host($domain['item_url']), ' mr5'); ?>
         <span class="add-favicon btn btn-small btn-primary" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
       <?php } ?>
       

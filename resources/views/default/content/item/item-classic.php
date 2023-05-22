@@ -24,7 +24,7 @@
             </div>
             <div class="list-items__footer">
               <div class="green">
-                <?= Img::website($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
+                <?= Img::website('favicon', host($item['item_url']), 'favicons mr5'); ?>
                 <?= $item['item_domain']; ?>
                 <?php if ($item['item_github_url']) : ?>
                   <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">

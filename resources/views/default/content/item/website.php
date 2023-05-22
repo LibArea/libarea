@@ -14,12 +14,12 @@
 
       <div class="flex justify-between gap-max mb-block">
         <div class="w-40 mb-w-100 img-preview">
-          <?= Img::website($item['item_domain'], 'thumbs', $item['item_title'], 'w-100 box-shadow'); ?>
+          <?= Img::website('thumb', host($item['item_url']), 'w-100 box-shadow'); ?>
         </div>
         <div class="w-60 mb-w-100">
           <?= markdown($item['item_content'], 'text'); ?>
           <a class="gree" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_url']; ?>">
-            <?= Img::website($item['item_domain'], 'favicon', $item['item_domain'], 'favicons mr5'); ?>
+            <?= Img::website('favicon', host($item['item_url']), 'favicons mr5'); ?>
             <?= host($item['item_url']); ?>
           </a>
           <span class="gray">•</span>
@@ -142,7 +142,7 @@
         <h4 class="uppercase-box"><?= __('web.recommended'); ?></h4>
         <?php foreach ($data['similar'] as $link) : ?>
           <a class="inline mr20 mb15 block text-sm" href="<?= url('website', ['id' => $link['item_id'],'slug' => $link['item_slug']]); ?>">
-            <?= Img::website($link['item_domain'], 'thumbs', $link['item_title'], 'w-100 box-shadow'); ?>          
+            <?= Img::website('thumb', host($item['item_url']), 'w-100 box-shadow'); ?>          
             <?= $link['item_title']; ?>
           </a>
         <?php endforeach; ?>
