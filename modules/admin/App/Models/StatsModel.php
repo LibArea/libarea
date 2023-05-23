@@ -39,7 +39,8 @@ class StatsModel extends \Hleb\Scheme\App\Models\MainModel
                     reply_parent_id,
                     reply_content as content,
                     reply_date as date,
-                    item_domain,
+                    item_id,
+                    item_slug,
                     id, 
                     login, 
                     avatar
