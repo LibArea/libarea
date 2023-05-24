@@ -6,11 +6,14 @@
   <form action="<?= url('content.change', ['type' => 'poll']); ?>" id="myform" method="post">
     <?= csrf_field() ?>
     <fieldset class="max-w780">
-      <input type="text" name="title" value="<?= $data['question']['poll_title']; ?>">
+      <input type="text" name="title" value="<?= htmlEncode($data['question']['poll_title']); ?>">
     </fieldset>
-    <fieldset class="max-w300">
+    <fieldset class="max-w780">
       <?php foreach ($data['answers'] as $value) : ?>
-        <p><input type="text" id="in<?= $value['answer_id']; ?>" name="<?= $value['answer_id']; ?>" value="<?= $value['answer_title']; ?>"></p>
+        <div class="flex gap mb10">
+          <input type="text" id="in<?= $value['answer_id']; ?>" name="<?= $value['answer_id']; ?>" value="<?= htmlEncode($value['answer_title']); ?>">
+          <sup class="del-voting-option gray-600" data-id="<?= $value['answer_id']; ?>">x</sup>
+        </div>
       <?php endforeach; ?>
     </fieldset>
     <fieldset>

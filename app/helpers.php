@@ -113,3 +113,8 @@ function host(string $url)
     $parse  =  parse_url($url);
     return $parse['host'] ?? false;
 }
+
+function htmlEncode($text)
+{
+    return htmlspecialchars($text, ENT_QUOTES);
+}

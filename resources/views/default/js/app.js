@@ -2,6 +2,7 @@ const focusId = queryAll(".focus-id"),
   saveFolder = queryAll(".save-folder"),
   delFolderContent = queryAll(".del-folder-content"),
   delFolder = queryAll(".del-folder"),
+  delVotingOption = queryAll(".del-voting-option"),
   addProfile = queryAll(".add-profile"),
   postRecommend = queryAll(".post-recommend"),
   typeAction = queryAll(".type-action"),
@@ -142,6 +143,11 @@ queryAll(".add-poll")
           location.reload();
       });
   }));
+  
+// Deleting a voting option
+delVotingOption.forEach(el => el.addEventListener("click", function (e) {
+  makeRequest("/poll/option/del", options = { body: "id=" + el.dataset.id + "&_token=" + token })
+}));
 
 // Ignoring members
 queryAll(".add-ignore")

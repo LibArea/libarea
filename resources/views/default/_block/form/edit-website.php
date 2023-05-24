@@ -1,12 +1,12 @@
 <fieldset>
   <label for="title"><?= __('web.title'); ?> <strong class="red">*</strong></label>
-  <input id="title" name="title" required="" type="text" value="<?= $domain['item_title']; ?>">
+  <input id="title" name="title" required="" type="text" value="<?=  htmlEncode($domain['item_title']); ?>">
   <div class="help">14 - 250 <?= __('app.characters'); ?></div>
 </fieldset>
 
 <fieldset>
   <label for="url">URL <strong class="red">*</strong></label>
-  <input id="url" name="url" required="" type="text" value="<?= $domain['item_url']; ?>">
+  <input id="url" name="url" required="" type="url" value="<?= htmlEncode($domain['item_url']); ?>">
 </fieldset>
 
 <fieldset>
@@ -56,22 +56,22 @@
 
   <fieldset>
     <label for="telephone"><?= __('web.telephone'); ?></label>
-    <input type="text" name="telephone" value="<?= $domain['item_telephone']; ?>">
+    <input type="text" name="telephone" value="<?= htmlEncode($domain['item_telephone']); ?>">
   </fieldset>
 
   <fieldset>
     <label for="email"><?= __('web.email'); ?></label>
-    <input type="email" name="email" value="<?= $domain['item_email']; ?>">
+    <input type="email" name="email" value="<?= htmlEncode($domain['item_email']); ?>">
   </fieldset>
 
   <fieldset>
     <label for="vk"><?= __('web.vk'); ?></label>
-    <input type="url" name="vk" value="<?= $domain['item_vk']; ?>">
+    <input type="url" name="vk" value="<?= htmlEncode($domain['item_vk']); ?>">
   </fieldset>
 
   <fieldset>
     <label for="telegram"><?= __('web.telegram'); ?></label>
-    <input type="text" name="telegram" value="<?= $domain['item_telegram']; ?>">
+    <input type="text" name="telegram" value="<?= htmlEncode($domain['item_telegram']); ?>">
   </fieldset>
 </div>
 
@@ -89,12 +89,12 @@
 
     <fieldset>
       <label for="github_url"><?= __('web.url_github'); ?></label>
-      <input id="github_url" name="github_url" type="text" value="<?= $domain['item_github_url']; ?>">
+      <input id="github_url" name="github_url" type="url" value="<?= htmlEncode($domain['item_github_url']); ?>">
     </fieldset>
 
     <fieldset>
       <label for="title_soft"><?= __('web.title'); ?></label>
-      <input id="title_soft" name="title_soft" type="text" value="<?= $domain['item_title_soft']; ?>">
+      <input id="title_soft" name="title_soft" type="text" value="<?= htmlEncode($domain['item_title_soft']); ?>">
     </fieldset>
 
     <fieldset>

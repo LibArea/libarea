@@ -1,6 +1,6 @@
 <fieldset>
   <label for="post_title"><?= __('app.heading'); ?></label>
-  <input minlength="6" maxlength="250" id="title" value="<?= $post['post_title']; ?>" type="text" required name="post_title">
+  <input minlength="6" maxlength="250" id="title" value="<?= htmlEncode($post['post_title']); ?>" type="text" required name="post_title">
   <div class="help">6 - 250 <?= __('app.characters'); ?></div>
 </fieldset>
 

@@ -68,7 +68,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     <hr>
     <fieldset>
       <label for="facet_title"><?= __('app.title'); ?><sup class="red">*</sup></label>
-      <input minlength="3" maxlength="64" type="text" name="facet_title" value="<?= $fs['facet_title']; ?>">
+      <input minlength="3" maxlength="64" type="text" name="facet_title" value="<?= htmlEncode($fs['facet_title']); ?>">
       <div class="help">3 - 64 <?= __('app.characters'); ?></div>
     </fieldset>
 

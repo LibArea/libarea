@@ -111,4 +111,23 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
 
         DB::run($sql, ['id' => $key, 'title' => $title, 'question_id' => $question_id]);
     }
+    
+    public static function accordance($answer_id)
+    {
+        $sql = "SELECT poll_user_id 
+                    FROM polls_answers 
+                        LEFT JOIN polls ON poll_id = answer_question_id 
+                            WHERE answer_id = :answer_id  AND poll_user_id = :user_id";
+
+        return DB::run($sql, ['answer_id' => $answer_id, 'user_id' => UserData::getUserId()])->fetch();
+    }
+    
+    public static function delVariant($answer_id)
+    {
+        if (!self::accordance($answer_id)) {
+            return true;
+        }
+        
+        return DB::run("DELETE FROM polls_answers WHERE answer_id = :answer_id", ['answer_id' => $answer_id]);
+    }
 }

@@ -65,4 +65,9 @@ class EditPollController extends Controller
 
         return true;
     }
+    
+    public function deletingVariant()
+    {   
+         return PollModel::delVariant(Request::getPostInt('id'));
+    }
 }
