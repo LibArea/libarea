@@ -142,7 +142,7 @@
         <h4 class="uppercase-box"><?= __('web.recommended'); ?></h4>
         <?php foreach ($data['similar'] as $link) : ?>
           <a class="inline mr20 mb15 block text-sm" href="<?= url('website', ['id' => $link['item_id'],'slug' => $link['item_slug']]); ?>">
-            <?= Img::website('thumb', host($item['item_url']), 'w-100 box-shadow'); ?>          
+            <?= Img::website('thumb', host($link['item_url']), 'w-100 box-shadow'); ?>          
             <?= $link['item_title']; ?>
           </a>
         <?php endforeach; ?>

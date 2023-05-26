@@ -297,7 +297,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                     item_id,
                     item_title,
                     item_slug,
-                    item_domain
+                    item_url
                         FROM items
                             LEFT JOIN facets_items_relation on item_id = relation_item_id                        
                                 WHERE item_id != :item_id 
