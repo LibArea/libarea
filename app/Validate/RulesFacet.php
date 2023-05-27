@@ -20,9 +20,7 @@ class RulesFacet extends Validator
         }
 
         self::Length($data['facet_title'], 3, 64, 'title', $redirect);
-        self::Length($data['facet_description'], 3, 225, 'meta_description', $redirect);
         self::Length($data['facet_short_description'], 9, 160, 'short_description', $redirect);
-        self::Length($data['facet_seo_title'], 3, 225, 'slug', $redirect);
 
         // Slug
         self::Length($data['facet_slug'], 3, 43, 'slug', $redirect);

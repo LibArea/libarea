@@ -16,7 +16,7 @@ class AddCommentController extends Controller
     public function index()
     {
         insert(
-            '/_block/form/add-form-comment',
+            '/_block/form/add-comment',
             [
                 'data'  => [
                     'answer_id'  => Request::getPostInt('answer_id'),

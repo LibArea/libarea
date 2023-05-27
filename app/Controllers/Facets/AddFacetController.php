@@ -37,11 +37,11 @@ class AddFacetController extends Controller
         $new_facet_id = FacetModel::add(
             [
                 'facet_title'               => $data['facet_title'],
-                'facet_description'         => $data['facet_description'],
+                'facet_description'         => __('app.meta_description'),
                 'facet_short_description'   => $data['facet_short_description'],
                 'facet_slug'                => strtolower($data['facet_slug']),
                 'facet_img'                 => 'facet-default.png',
-                'facet_seo_title'           => $data['facet_seo_title'],
+                'facet_seo_title'           => $data['facet_short_description'],
                 'facet_user_id'             => $this->user['id'],
                 'facet_type'                => $type,
             ]

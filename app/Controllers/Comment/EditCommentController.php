@@ -23,7 +23,7 @@ class EditCommentController extends Controller
         }
 
         insert(
-            '/_block/form/edit-form-comment',
+            '/_block/form/edit-comment',
             [
                 'data'  => [
                     'comment_id'        => $comment['comment_id'],

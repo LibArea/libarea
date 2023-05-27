@@ -26,7 +26,7 @@ class ReplyController extends Controller
         }
 
         insert(
-            '/_block/form/edit-form-reply',
+            '/_block/form/edit-reply',
             [
                 'data'  => [
                     'id'        => $id,
@@ -129,7 +129,7 @@ class ReplyController extends Controller
     public function addForma()
     {
         insert(
-            '/_block/form/add-form-reply',
+            '/_block/form/add-reply',
             [
                 'data'  => [
                     'id'        => Request::getPostInt('id'),

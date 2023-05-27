@@ -11,21 +11,11 @@
 </fieldset>
 
 <fieldset>
-  <label for="facet_seo_title"><?= __('app.title'); ?> (SEO) <strong class="red">*</strong></label>
-  <input id="facet_seo_title" minlength="3" name="facet_seo_title" required type="text" value="">
-  <div class="text-sm gray-600">> 3 <?= __('app.characters'); ?></div>
-</fieldset>
-
-<fieldset>
   <label for="facet_slug"><?= __('app.slug'); ?> <strong class="red">*</strong></label>
   <input id="facet_slug" name="facet_slug" minlength="3" maxlength="32" required type="text" value="">
-  <div class="text-sm gray-600">3 - 32 <?= __('app.characters'); ?></div>
+  <div class="text-sm gray-600">3 - 32 <?= __('app.characters'); ?> (a-z-0-9)</div>
 </fieldset>
 
-<fieldset>
-  <label for="facet_description"><?= __('app.meta_description'); ?> <strong class="red">*</strong></label>
-  <textarea id="facet_description" name="facet_description" required></textarea>
-  <div class="text-sm gray-600">> 3 <?= __('app.characters'); ?></div>
-</fieldset>
-
-<?= Html::sumbit(__('app.add')); ?>
+<div class="right mb15">
+  <?= Html::sumbit(__('app.add')); ?>
+</div>
