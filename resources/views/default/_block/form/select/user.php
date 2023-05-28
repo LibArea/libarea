@@ -30,7 +30,6 @@
             let search_user = await user_search();
             let input = document.querySelector('#user_id');
             let options = {
-                mode: "select",
                 maxTags: 1,
                 enforceWhitelist: true, // <- добавлять только из белого списка
                 callbacks: {
