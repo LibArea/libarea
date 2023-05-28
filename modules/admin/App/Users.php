@@ -38,6 +38,7 @@ class Users extends Controller
                     'pNum'          => $this->pageNumber,
                     'alluser'       => $result,
                     'type'          => $this->type,
+                    'sheet'         => $sheet,
                     'users_count'   => $pagesCount,
                 ]
             ]

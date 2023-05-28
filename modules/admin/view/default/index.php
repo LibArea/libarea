@@ -42,6 +42,7 @@
 <?php endforeach; ?>
 
 <h4 class="uppercase-box mt15"><?= __('admin.reply'); ?></h4>
+
 <?php foreach ($data['replys'] as $reply) : ?>
   <div class="gray text-sm">
     <a class="gray-600" href="<?= url('profile', ['login' => $reply['login']]); ?>">

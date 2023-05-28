@@ -5,12 +5,12 @@
     'meta'  => $meta,
     'menus' => [
       [
-        'id' => $data['type'] . '.all',
-        'url' => url('admin.' . $data['type']),
+        'id' => 'users.all',
+        'url' => url('admin.users'),
         'name' => __('admin.all') . ' (' . $data['users_count'] . ')',
       ], [
-        'id' => $data['type'] . '.ban',
-        'url' => url('admin.' . $data['type'] . '.ban'),
+        'id' => 'users.ban',
+        'url' => url('admin.users.ban'),
         'name' => __('admin.deleted'),
       ]
     ]
@@ -117,7 +117,8 @@
 <?php else : ?>
   <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('admin.no'), 'icon' => 'info']); ?>
 <?php endif; ?>
-<?= Html::pagination($data['pNum'], $data['pagesCount'], null, url('admin.users')); ?>
+
+<?= Html::pagination($data['pNum'], $data['pagesCount'], null, $data['sheet'] == 'ban' ? url('admin.users.ban') : url('admin.users')); ?>
 
 </main>
 <?= includeTemplate('/view/default/footer'); ?>
