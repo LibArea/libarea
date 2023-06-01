@@ -171,6 +171,11 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         } elseif ($type == 'poll') {
             $field_name = 'poll_title';
             $sql = "SELECT poll_id, poll_title FROM polls WHERE poll_title LIKE :poll_title AND poll_is_deleted = 0 AND poll_user_id = " . UserData::getUserId();
+            
+            if (UserData::checkAdmin()) {
+                $sql = "SELECT poll_id, poll_title FROM polls WHERE poll_title LIKE :poll_title AND poll_is_deleted = 0";
+            }
+            
         } else {
             $condition = '';
             if (!UserData::checkAdmin()) {
