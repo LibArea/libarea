@@ -6,8 +6,9 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\PostPresence;
 use App\Services\Сheck\FacetPresence;
+use App\Services\Meta\Post;
 use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel};
-use Meta, UserData, Access, Img;
+use Meta, UserData;
 
 use App\Traits\Views;
 use App\Traits\Poll;
@@ -53,21 +54,9 @@ class PostController extends Controller
         // Get replies and comments on the post
         $answers = $this->answersPost($content['post_id'], $content['post_feature'], $sorting  = Request::getGet('sort'));
 
-        $description  = (fragment($content['post_content'], 250) == '') ? strip_tags($content['post_title']) : fragment($content['post_content'], 250);
-
-        $this->stylesHead($content['post_is_deleted']);
-
         if ($content['post_related']) {
             $related_posts = PostModel::postRelated($content['post_related']);
         }
-
-        $m = [
-            'published_time' => $content['post_date'],
-            'type'      => 'article',
-            'og'        => true,
-            'imgurl'    => self::images($content),
-            'url'       => post_slug($content['post_id'], $content['post_slug']),
-        ];
 
         // Sending Last-Modified and handling HTTP_IF_MODIFIED_SINCE
         $this->getDataModified($content['post_modified']);
@@ -76,7 +65,7 @@ class PostController extends Controller
             return $this->render(
                 '/post/post-view',
                 [
-                    'meta'  => Meta::get(strip_tags($content['post_title']), $description, $m),
+                    'meta'  => Post::metadata($content),
                     'data'  => [
                         'post'          => $content,
                         'answers'       => $answers,
@@ -99,15 +88,10 @@ class PostController extends Controller
         $slug_facet = Request::get('facet_slug');
         $facet  = FacetPresence::index($slug_facet, 'slug', 'section');
 
-        $m = [
-            'og'    => false,
-            'url'   => url('facet.article', ['facet_slug' => $facet['facet_slug'], 'slug' => $content['post_slug']]),
-        ];
-
         return $this->render(
             '/post/page-view',
             [
-                'meta'  => Meta::get($content['post_title'] . ' - ' . __('app.page'), $description . ' (' . $facet['facet_title'] . ' - ' . __('app.page') . ')', $m),
+                'meta'  => Post::metadata($content),
                 'data'  => [
                     'sheet' => 'page',
                     'type'  => $type,
@@ -117,16 +101,6 @@ class PostController extends Controller
                 ]
             ]
         );
-    }
-
-    public function stylesHead($post_is_deleted)
-    {
-        Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
-        Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
-        
-        if ($post_is_deleted == 1) {
-            Request::getHead()->addMeta('robots', 'noindex');
-        }
     }
 
     // Get replies and comments on the post
@@ -227,21 +201,6 @@ class PostController extends Controller
                 ]
             ]
         );
-    }
-
-    // Define an image for meta tags
-    // Определим изображение для meta- тегов
-    public static function images($content)
-    {
-        $content_img  = config('meta.img_path');
-
-        if ($content['post_content_img']) {
-            $content_img  = Img::PATH['posts_cover'] . $content['post_content_img'];
-        } elseif ($content['post_thumb_img']) {
-            $content_img  = Img::PATH['posts_thumb'] . $content['post_thumb_img'];
-        }
-
-        return $content_img;
     }
 
     // Last 5 pages by content id

@@ -39,6 +39,6 @@ class Profile
             'url'       => $url,
         ];
 
-        return Meta::get($title, $description, $meta);
+        return Meta::get(htmlEncode($title), htmlEncode($description), $meta);
     }
 }

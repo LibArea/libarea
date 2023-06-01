@@ -67,9 +67,6 @@ class DetailedController extends Controller
         // Отправка Last-Modified и обработка HTTP_IF_MODIFIED_SINCE
         $this->getDataModified($item['item_modified']);
 
-        Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
-        Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
-
         return $this->render(
             '/item/website',
             [
