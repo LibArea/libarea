@@ -116,5 +116,5 @@ function host(string $url)
 
 function htmlEncode($text)
 {
-    return htmlspecialchars($text, ENT_QUOTES);
+    return htmlspecialchars($text ?? '', ENT_QUOTES);
 }
