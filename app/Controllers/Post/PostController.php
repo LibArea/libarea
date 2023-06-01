@@ -55,7 +55,7 @@ class PostController extends Controller
 
         $description  = (fragment($content['post_content'], 250) == '') ? strip_tags($content['post_title']) : fragment($content['post_content'], 250);
 
-        $this->stylesHead($content, $blog);
+        $this->stylesHead($content['post_is_deleted']);
 
         if ($content['post_related']) {
             $related_posts = PostModel::postRelated($content['post_related']);
@@ -119,18 +119,13 @@ class PostController extends Controller
         );
     }
 
-    public function stylesHead($content, $blog)
+    public function stylesHead($post_is_deleted)
     {
         Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
         Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
         
-        if ($content['post_is_deleted'] == 1) {
+        if ($post_is_deleted == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
-        }
-
-        if ($this->user['id'] > 0 && $content['post_closed'] == 0) {
-            Request::getResources()->addBottomStyles('/assets/js/editor/easymde.min.css');
-            Request::getResources()->addBottomScript('/assets/js/editor/easymde.min.js');
         }
     }
 

@@ -27,7 +27,7 @@ class Controller extends MainController
         return $pageNumber <= 1 ? 1 : $pageNumber;
     }
 
-    public static function render(string $name, array $data = [], $component = false)
+    public static function render(string $name, array $data = [], string $part = 'base')
     {
         self::closing();
 
@@ -36,21 +36,19 @@ class Controller extends MainController
             $body =  'default';
         }
 
-        $file = ($component == false) ? 'base' : $component;
-
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $header . '/global/' . $file . '-header.php')) {
+        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $header . '/global/' . $part . '-header.php')) {
             $header =  'default';
         }
 
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $footer . '/global/' . $file . '-footer.php')) {
+        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $footer . '/global/' . $part . '-footer.php')) {
             $footer =  'default';
         }
 
         return render(
             [
-                $header . '/global/' . $file . '-header',
+                $header . '/global/' . $part . '-header',
                 $body . '/content' . $name,
-                $footer . '/global/' . $file . '-footer'
+                $footer . '/global/' . $part . '-footer'
             ],
             $data
         );

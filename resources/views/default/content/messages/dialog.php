@@ -1,3 +1,5 @@
+<?php insert('/_block/add-js-css'); ?>
+
 <div class="w-30 mr20 mb-none">
   <?= insert('/content/messages/dialogue-column', ['dialogs' => $data['dialogs']]); ?>
 </div>

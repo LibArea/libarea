@@ -1,4 +1,5 @@
 <?php
+insert('/_block/add-js-css');
 $post = $data['post'];
 $blog = $data['blog'][0] ?? null;
 ?>
