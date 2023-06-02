@@ -1,4 +1,8 @@
-<?php $post = $data['post']; ?>
+<?php 
+insert('/_block/add-js-css');
+$post = $data['post']; 
+?>
+
 <main class="wrap">
   <article class="post-full<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
