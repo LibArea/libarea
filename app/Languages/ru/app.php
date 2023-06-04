@@ -239,6 +239,7 @@ return [
     'default'           => 'По умолчанию',
     'qa'                => 'Вопросы и ответы',
     'best_answer'       => 'Лучший ответ',
+    'raise_answer'      => 'Поднять ответ',
     'answered'          => 'Ответили',
     'post_translation'  => 'Пост является переводом?',
     'translation'       => 'Перевод',

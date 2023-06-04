@@ -239,6 +239,7 @@ return [
     'default'           => 'Mod implicit',
     'qa'                => 'Întrebări și răspunsuri',
     'best_answer'       => 'Cel mai bun răspuns',
+    'raise_answer'      => 'Ridicați răspunsul',
     'answered'          => 'Răspuns',
     'post_translation'  => 'Această postare este o traducere',
     'translation'       => 'Traducere',

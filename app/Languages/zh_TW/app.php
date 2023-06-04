@@ -240,6 +240,7 @@ return [
     'default'           => '默认情况下',
     'qa'                => '问题及答案',
     'best_answer'       => '最佳答案',
+    'raise_answer'      => 'Л提出答案',
     'answered'          => '回答说',
     'post_translation'  => '帖子是翻译?',
     'translation'       => '翻译',

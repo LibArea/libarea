@@ -236,6 +236,7 @@ return [
     'default'           => 'افتراضي',
     'qa'                => 'الاسئلة و الاجوبة',
     'best_answer'       => 'أفضل إجابة',
+    'raise_answer'      => 'رفع الجواب',
     'answered'          => 'تمت الاجابة عليه',
     'post_translation'  => 'المنشور عبارة عن ترجمة ؟',
     'translation'       => 'الترجمة',

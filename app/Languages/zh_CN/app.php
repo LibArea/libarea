@@ -239,6 +239,7 @@ return [
     'default'           => '默认',
     'qa'                => '问答',
     'best_answer'       => '最佳答案',
+    'raise_answer'      => '提出答案',
     'answered'          => '已回答',
     'post_translation'  => '帖子是翻译?',
     'translation'       => '翻译',

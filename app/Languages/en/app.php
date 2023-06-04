@@ -239,6 +239,7 @@ return [
     'default'           => 'Default',
     'qa'                => 'Questions and answers',
     'best_answer'       => 'Best Answer',
+    'raise_answer'      => 'Raise answer',
     'answered'          => 'Answered',
     'post_translation'  => 'Post is translations ?',
     'translation'       => 'Translation',
