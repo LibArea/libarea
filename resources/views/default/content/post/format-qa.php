@@ -13,75 +13,8 @@
       <?php if ($answer['answer_published'] == 0 && $answer['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
       <div class="block-answer br-bottom<?php if ($answer['answer_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
-        <div class="right inline">
-          <div class="relative ml10">
-            <span class="trigger gray-600 text-sm">
-              <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
-              </svg>
-            </span>
-            <ul class="dropdown">
-
-              <?php if (Access::author('answer', $answer) === true) : ?>
-                <li>
-                  <a class="editansw gray" href="<?= url('content.edit', ['type' => 'answer', 'id' => $answer['answer_id']]); ?>">
-                    <svg class="icons">
-                      <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                    </svg>
-                    <?= __('app.edit'); ?>
-                  </a>
-                </li>
-              <?php endif; ?>
-
-              <li>
-                <?= Html::favorite($answer['answer_id'], 'answer', $answer['tid'], 'heading'); ?>
-              </li>
-
-              <?php if ($post['amount_content'] > 1) : ?>
-                <?php if (UserData::getUserId() == $post['post_user_id'] || UserData::checkAdmin()) : ?>
-                  <li>
-                    <a id="best_<?= $answer['answer_id']; ?>" data-id="<?= $answer['answer_id']; ?>" class="answer-best">
-                      <svg class="icons">
-                        <use xlink:href="/assets/svg/icons.svg#award"></use>
-                      </svg>
-                      <?= __('app.best_answer'); ?>
-                    </a>
-                  </li>
-                <?php endif; ?>
-              <?php endif; ?>
-
-              <?php if (UserData::checkAdmin()) : ?>
-                <li>
-                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-600">
-                    <svg class="icons">
-                      <use xlink:href="/assets/svg/icons.svg#trash-2"></use>
-                    </svg>
-                    <?= $answer['answer_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
-                  </a>
-                </li>
-              <?php endif; ?>
-
-              <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-                <li>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" data-a11y-dialog-show="my-dialog" class="gray-600">
-                    <svg class="icons">
-                      <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
-                    </svg>
-                    <?= __('app.report'); ?>
-                  </a>
-                </li>
-              <?php endif; ?>
-              <li>
-                <a rel="nofollow" class="gray-600" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>">
-                  <svg class="icons">
-                    <use xlink:href="/assets/svg/icons.svg#anchor"></use>
-                  </svg>
-                  <?= __('app.link'); ?>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+      
+        <?= insert('/content/post/answer-menu', ['post_url' => $post_url, 'post' => $post, 'answer' => $answer]); ?>
 
         <?php if ($answer['answer_lo']) : ?>
           <div title="<?= __('app.best_answer'); ?>" class="red right text-2xl p5">✓</div>
