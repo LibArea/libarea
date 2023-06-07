@@ -9,9 +9,9 @@
         <li class="tab-button<?php if (config('general.qa_site_format') == true) : ?> active<?php endif; ?>" data-id="qa"><?= __('app.qa'); ?></li>
 
         <?php if (UserData::getUserTl() >= config('trust-levels.tl_add_url')) : ?>
-          <li class="tab-button" data-id="url">URL</li>
+          <li class="tab-button" data-id="url"><?= __('app.url'); ?></li>
         <?php else : ?>
-          <li class="gray-600">URL</li>
+          <li class="gray-600"><?= __('app.url'); ?></li>
         <?php endif; ?>
       </ul>
     </div>
