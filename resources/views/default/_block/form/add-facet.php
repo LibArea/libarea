@@ -16,6 +16,4 @@
   <div class="text-sm gray-600">3 - 32 <?= __('app.characters'); ?> (a-z-0-9)</div>
 </fieldset>
 
-<div class="right mb15">
-  <?= Html::sumbit(__('app.add')); ?>
-</div>
+<?= Html::sumbit(__('app.add')); ?>

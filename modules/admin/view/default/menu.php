@@ -5,7 +5,7 @@
   </ul>
 </div>
 
-<main>
+<main class="w-100">
   <?php if ($data['type'] != 'admin') : ?>
     <div class="mb15">
       <?= insert('/_block/navigation/breadcrumbs', [

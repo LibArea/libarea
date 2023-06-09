@@ -7,28 +7,27 @@ Request::getHead()->addStyles('/assets/css/style.css?21');
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
-<body class="admin<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?>">
+<body class="admin<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if (Request::getCookie('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
 
-  <header class="d-header">
+  <header class="d-header<?php if ($post || $facet) : ?> scroll-hide-search<?php endif; ?>">
     <div class="wrap">
       <div class="d-header_contents">
-        <div class="none mb-block">
-          <div class="menu__button mr10">
-            <svg class="icons mr5">
-              <use xlink:href="/assets/svg/icons.svg#menu"></use>
-            </svg>
-          </div>
+        <div class="flex items-center gray-600 gap-min mr20">
+          <svg id="togglemenu" class="icons pointer">
+            <use xlink:href="/assets/svg/icons.svg#menu"></use>
+          </svg>
+
+          <svg class="icons menu__button none">
+            <use xlink:href="/assets/svg/icons.svg#menu"></use>
+          </svg>
+
+          <a class="logo" href="<?= url('admin'); ?>"><?= __('admin.home'); ?></a>
+          <div class="gray-600">/</div>
+          <a class="gray-600" href="/">
+            <?= __('admin.website'); ?>
+          </a>
         </div>
-        <div class="flex gap-max items-center">
-          <div class="flex gap-min justify-between items-center gray-600">
-            <a href="<?= url('admin'); ?>">
-              <span class="black"><?= __('admin.home'); ?></span>
-            </a>
-            <div class="gray-600">/</div>
-            <a class="gray-600" href="/">
-              <?= __('admin.website'); ?>
-            </a>
-          </div>
+        <div class="flex gap-max items-center w-90 ml20">
           <a class="<?= is_current(url('admin.users')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.users'); ?>">
             <svg class="icons mr5">
               <use xlink:href="/assets/svg/icons.svg#users"></use>
