@@ -17,7 +17,7 @@ class AddItemController extends Controller
 {
     use Slug;
     use Poll;
-    
+
     // Add Domain Form
     // Форма добавление домена
     public function index()
@@ -25,15 +25,15 @@ class AddItemController extends Controller
         if (Access::trustLevels(config('trust-levels.tl_add_item')) == false) {
             redirect('/web');
         }
-        
+
         // Adding from page topic / blog
         // Добавление со странице категории
         if ($category_id = Request::getInt('category_id')) {
-             $category  = FacetPresence::index($category_id, 'id', 'category');
+            $category  = FacetPresence::index($category_id, 'id', 'category');
         }
 
         $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
-        
+
         Request::getResources()->addBottomScript('/assets/js/catalog.js');
 
         return $this->render(
@@ -122,7 +122,7 @@ class AddItemController extends Controller
 
         return true;
     }
-    
+
     public function searchUrl()
     {
         $host = host(Request::getPost('url'));

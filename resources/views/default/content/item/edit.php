@@ -18,7 +18,7 @@ $domain = $data['domain']; ?>
       ]); ?>
 
       <fieldset class="gray-600">
-        id: <?= $domain['item_id']; ?> <span class="gray"><?= $domain['item_domain']; ?></span> 
+        id: <?= $domain['item_id']; ?> <span class="gray"><?= $domain['item_domain']; ?></span>
         - <span class="lowercase"><?= Html::langDate($domain['item_date']); ?></span>
       </fieldset>
 
@@ -33,9 +33,9 @@ $domain = $data['domain']; ?>
         <?= Img::website('favicon', host($domain['item_url']), ' mr5'); ?>
         <span class="add-favicon btn btn-small btn-primary" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
       <?php } ?>
-      
+
       <?= insert('/content/item/subsections', ['subsections' => $data['subsections'], 'item_id' => $domain['item_id']]); ?>
-      
+
       <form action="<?= url('content.change', ['type' => 'item']); ?>" method="post">
         <?= csrf_field() ?>
 

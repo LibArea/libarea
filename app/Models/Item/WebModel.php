@@ -7,6 +7,9 @@ use DB;
 
 class WebModel extends \Hleb\Scheme\App\Models\MainModel
 {
+    static $limit = 15;
+    static $first_page = 1;
+
     public static function sorts($sheet)
     {
         switch ($sheet) {
@@ -71,13 +74,13 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Получаем сайты по условиям
     // https://systemrequest.net/index.php/123/
-    public static function feedItem($page, $limit, $facets, $user, $topic_id, $sort, $grouping)
+    public static function feedItem($user, $facets, $topic_id, $sort, $grouping)
     {
         $group  = self::group($grouping);
         $facets = self::facets($facets, $topic_id);
         $sort   = $facets . self::sorts($sort);
 
-        $start  = ($page - 1) * $limit;
+        $start  = (self::$first_page - 1) * self::$limit;
         $sql = "SELECT DISTINCT
                     item_id,
                     item_title,
@@ -117,7 +120,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                 LEFT JOIN votes_item ON votes_item_item_id = item_id AND votes_item_user_id = :uid_two
                                     WHERE $group $sort LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
     public static function feedItemCount($facets, $facet_id, $sort, $grouping)
@@ -316,9 +319,9 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         return DB::run("SELECT signed_item_id, signed_user_id FROM items_signed WHERE signed_item_id = :item_id", ['item_id' => $item_id])->fetchAll();
     }
-    
+
     public static function getDomains($url)
-    {   
+    {
         $sql = "SELECT item_id, item_title, item_url, item_slug, item_domain, rel.*
                     FROM items 
                         LEFT JOIN
@@ -331,14 +334,14 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                             GROUP BY relation_item_id
                             ) AS rel
                                 ON rel.relation_item_id = item_id WHERE item_domain = :url";
-        
+
         return DB::run($sql, ['url' => $url])->fetchAll();
-    }   
+    }
 
     public static function getHost($host)
-    {   
+    {
         $sql = "SELECT item_id, item_title, item_url, item_slug, item_domain FROM items WHERE item_url LIKE :host LIMIT 5";
-        
+
         return DB::run($sql, ['host' => "%" . $host . "%"])->fetchAll();
     }
 

@@ -43,9 +43,6 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
    
     Route::get('/comments/deleted')->controller('Comment\CommentController', ['deleted'])->name('comments.deleted');
     
-    Route::get('/web/deleted')->controller('Item\HomeController', ['deleted'])->name('web.deleted');
-    Route::get('/web/audits')->controller('Item\HomeController', ['audits'])->name('web.audits');
-
     Route::get('/badges')->module('admin', 'App\Badges')->name('admin.badges');
     Route::get('/badges/add')->module('admin', 'App\Badges@add')->name('admin.badges.add');
     Route::get('/badges/{id}/edit')->module('admin', 'App\Badges@edit')->name('admin.badges.edit');
@@ -63,5 +60,4 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/logs')->module('admin', 'App\Logs')->name('admin.logs');
  
     Route::get('/deleted')->controller('HomeController', ['deleted'])->name('main.deleted'); 
- 
 Route::endGroup();

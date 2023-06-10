@@ -3,13 +3,13 @@
 use Hleb\Constructor\Handlers\Request; ?>
 <?php if (!empty($data['posts'])) : ?>
   <?php foreach ($data['posts'] as $post) : ?>
-      <div class="mb15">
-        <a class="black" href="<?= $post_url; ?>">
-          <h3 class="title"><?= $post['post_title']; ?>
-            <?= insert('/content/post/post-title', ['post' => $post]); ?>
-          </h3>
-        </a>
-      </div>
+    <div class="mb15">
+      <a class="black" href="<?= $post_url; ?>">
+        <h3 class="title"><?= $post['post_title']; ?>
+          <?= insert('/content/post/post-title', ['post' => $post]); ?>
+        </h3>
+      </a>
+    </div>
     </div>
   <?php endforeach; ?>
 <?php else : ?>

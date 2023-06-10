@@ -1,22 +1,22 @@
 <div class="item-cat">
-  <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]); 
-      $grouping = Request::get('grouping');
+  <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]);
+  $grouping = Request::get('grouping');
   ?>
   <div class="right"><?= insert('/content/item/characteristics', ['data' => $data, 'grouping' => $grouping]); ?></div>
   <h1 class="m0 flex gap">
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) : ?>
       <div class="flex gap text-xs">
-      <a class="gray-600" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
-        <svg class="icons">
+        <a class="gray-600" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
+          <svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#edit"></use>
           </svg>
-      </a>
-      <a class="gray-600" href="<?= url('admin.facets.type', ['type' => 'category']); ?>">
-        <svg class="icons">
+        </a>
+        <a class="gray-600" href="<?= url('admin.facets.type', ['type' => 'category']); ?>">
+          <svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#tool"></use>
           </svg>
-      </a>
+        </a>
       </div>
     <?php endif; ?>
   </h1>
@@ -25,7 +25,7 @@
 <?php if ($data['childrens']) : ?>
   <div class="item-categories">
     <?php foreach ($data['childrens'] as $lt) : ?>
-       <?php $url_cat = $grouping ? url('grouping.category', ['grouping' => $grouping, 'sort' => $data['sort'], 'slug' => $lt['facet_slug']]) : url('category', ['sort' => $data['sort'], 'slug' => $lt['facet_slug']]); ?>
+      <?php $url_cat = $grouping ? url('grouping.category', ['grouping' => $grouping, 'sort' => $data['sort'], 'slug' => $lt['facet_slug']]) : url('category', ['sort' => $data['sort'], 'slug' => $lt['facet_slug']]); ?>
       <div>
         <a class="text-2xl" href="<?= $url_cat; ?>">
           <?= $lt['facet_title']; ?>
@@ -91,7 +91,7 @@
     <?php else : ?>
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no'), 'icon' => 'info']); ?>
     <?php endif; ?>
-    
+
     <?php $url = url('category', ['sort' => 'all', 'slug' => $data['category']['facet_slug']]); ?>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $url); ?>
   </main>
@@ -102,10 +102,10 @@
       <div class="box bg-blue-200 max-w300">
         <h4 class="uppercase-box"><?= __('web.related_posts'); ?></h4>
         <ul>
-        <?php foreach ($data['related_posts'] as $rp) : ?>
-          <li class="mb15">
-            <a href="<?= post_slug($rp['id'], $rp['post_slug']); ?>"><?= $rp['value']; ?></a>
-          </li>
+          <?php foreach ($data['related_posts'] as $rp) : ?>
+            <li class="mb15">
+              <a href="<?= post_slug($rp['id'], $rp['post_slug']); ?>"><?= $rp['value']; ?></a>
+            </li>
           <?php endforeach; ?>
         </ul>
       </div>

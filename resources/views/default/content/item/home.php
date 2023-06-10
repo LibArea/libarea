@@ -17,7 +17,7 @@
               <?= $sub['title']; ?>
             </a>
           <?php endforeach; ?>
-        </div>  
+        </div>
       <?php endif; ?>
       <?php if (!empty($cat['help'])) : ?>
         <div class="text-sm gray-600 mb-none"><?= $cat['help']; ?>...</div>
@@ -28,8 +28,7 @@
 
 <div id="contentWrapper" class="wrap wrap-max">
   <main class="w-100">
-    <?php $title = ($data['sheet'] == 'main') ? __('web.new_sites') : __('web.' . $data['sheet']);  ?>
-    <h2 class="m0 mb10"><?= $title; ?></h2>
+    <h2 class="m0 mb10"><?= __('web.new_sites'); ?></h2>
     <?php if (!empty($data['items'])) : ?>
       <?= insert('/content/item/item-card', ['data' => $data, 'sort' => 'all']); ?>
     <?php else : ?>

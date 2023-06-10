@@ -1,5 +1,5 @@
-<ol itemscope itemtype = "https://schema.org/ItemList" class="list-items">
-  <?php foreach ($data['items'] as $item) : 
+<ol itemscope itemtype="https://schema.org/ItemList" class="list-items">
+  <?php foreach ($data['items'] as $item) :
     $parse  =  parse_url($item['item_url']); ?>
 
     <?php if ($item['item_published'] == 1) : ?>
@@ -56,7 +56,7 @@
                 <?php endif; ?>
                 <?php if ($item['item_telephone']) : ?>
                   <span class="gray-600 ml5"><?= $item['item_telephone']; ?></span>
-                <?php endif; ?>  
+                <?php endif; ?>
                 <div>
                   <svg class="icons gray ml5">
                     <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>

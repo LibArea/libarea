@@ -23,7 +23,7 @@
       <?php if ($tp['blog']) : ?>
          <a class="ml5 gray<?= $grouping == 'blog' ? ' active' : '' ?>" href="<?= url('grouping.category', ['grouping' => 'blog', 'sort' => $data['sort'], 'slug' => $data['category']['facet_slug']]); ?>"><?= __('web.blog'); ?></a>
       <?php endif; ?>
-      
+
       <?php if ($tp['goods']) : ?>
          <a class="ml5 gray<?= $grouping == 'goods' ? ' active' : '' ?>" href="<?= url('grouping.category', ['grouping' => 'goods', 'sort' => $data['sort'], 'slug' => $data['category']['facet_slug']]); ?>"><?= __('web.goods'); ?></a>
       <?php endif; ?>

@@ -27,7 +27,7 @@ class DetailedController extends Controller
     {
         $slug  = Request::get('slug');
         $id    = Request::getInt('id');
-        
+
         $item = self::presence($id, $slug);
 
         if ($item['item_published'] == 0) {
@@ -36,7 +36,7 @@ class DetailedController extends Controller
 
         $content_img = Img::PATH['thumbs'] . 'default.png';
         $host = host($item['item_url']);
-        
+
         if (file_exists(HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $host . '.png')) {
             $content_img =  Img::PATH['thumbs'] . $host . '.png';
         }
@@ -108,7 +108,7 @@ class DetailedController extends Controller
 
         return $fnBuilder($grouped[$group]);
     }
-    
+
     public static function presence($id, $slug)
     {
         // Check id and get content data
@@ -123,7 +123,7 @@ class DetailedController extends Controller
 
         return $content;
     }
-    
+
     public static function httpCode($url)
     {
         $ch = curl_init($url);
@@ -135,5 +135,4 @@ class DetailedController extends Controller
 
         return $http_code;
     }
-    
 }
