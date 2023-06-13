@@ -12,8 +12,8 @@ class UserAreaController extends Controller
 
     public function index()
     {
-        $pagesCount = UserAreaModel::getUserSitesCount($this->user['id']);
-        $items  = UserAreaModel::getUserSites($this->pageNumber, $this->limit, $this->user['id']);
+        $pagesCount = UserAreaModel::getUserSitesCount();
+        $items  = UserAreaModel::getUserSites($this->pageNumber, $this->limit);
         $count_site = UserData::checkAdmin() ? 0 : $pagesCount;
 
         return $this->render(
@@ -39,10 +39,10 @@ class UserAreaController extends Controller
     // Закладки по сайтам
     public function bookmarks()
     {
-        $items      = UserAreaModel::bookmarks($this->pageNumber, $this->limit, $this->user['id']);
-        $pagesCount = UserAreaModel::bookmarksCount($this->user['id']);
+        $items      = UserAreaModel::bookmarks($this->pageNumber, $this->limit);
+        $pagesCount = UserAreaModel::bookmarksCount();
 
-        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount();
 
         return $this->render(
             '/item/bookmarks',

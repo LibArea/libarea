@@ -74,8 +74,10 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Получаем сайты по условиям
     // https://systemrequest.net/index.php/123/
-    public static function feedItem($user, $facets, $topic_id, $sort, $grouping)
+    public static function feedItem($facets, $topic_id, $sort, $grouping)
     {
+        $user_id = UserData::getUserId();
+        
         $group  = self::group($grouping);
         $facets = self::facets($facets, $topic_id);
         $sort   = $facets . self::sorts($sort);
@@ -120,7 +122,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
                                 LEFT JOIN votes_item ON votes_item_item_id = item_id AND votes_item_user_id = :uid_two
                                     WHERE $group $sort LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $user['id'], 'uid_two' => $user['id'], 'start' => $start, 'limit' => self::$limit])->fetchAll();
+        return DB::run($sql, ['uid' => $user_id, 'uid_two' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
     public static function feedItemCount($facets, $facet_id, $sort, $grouping)

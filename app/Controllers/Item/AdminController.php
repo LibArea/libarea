@@ -18,7 +18,7 @@ class AdminController extends Controller
                 'meta'  => Meta::get(__('web.' . $sheet)),
                 'data'  => [
                     'sheet'             => $sheet,
-                    'items'             => WebModel::feedItem($this->user, false, false, $sheet, false),
+                    'items'             => WebModel::feedItem(false, false, $sheet, false),
                     'user_count_site'   => $this->user_count,
                     'audit_count'       => UserAreaModel::auditCount(),
                 ]

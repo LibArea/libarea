@@ -62,7 +62,7 @@ class DetailedController extends Controller
         $facets = WebModel::getItemTopic($item['item_id']);
         $similar = WebModel::itemSimilars($item['item_id'], $facets[0]['id'] ?? false, 3);
 
-        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount();
 
         // Отправка Last-Modified и обработка HTTP_IF_MODIFIED_SINCE
         $this->getDataModified($item['item_modified']);

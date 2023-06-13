@@ -36,7 +36,7 @@ class DirController extends Controller
             $related_posts = PostModel::postRelated($category['facet_post_related']);
         }
 
-        $items      = WebModel::feedItem($this->user, $childrens, $category['facet_id'], $sort, $grouping);
+        $items      = WebModel::feedItem($childrens, $category['facet_id'], $sort, $grouping);
         $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'],  $sort, $grouping);
 
         $m = [
@@ -48,7 +48,7 @@ class DirController extends Controller
         $description_info = $category['facet_title'] . '. ' . $category['facet_description'];
         $description  = __('web.' . $sort . '_desc', ['description_info' => $description_info]);
 
-        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount();
 
         return $this->render(
             '/item/sites',

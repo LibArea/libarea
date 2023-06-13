@@ -2,13 +2,14 @@
 
 namespace App\Models\Item;
 
+use UserData;
 use DB;
 
 class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
 {
     // Sites added by the user
     // Сайты добавленные участником
-    public static function getUserSites($page, $limit, $user_id)
+    public static function getUserSites($page, $limit)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT
@@ -43,21 +44,23 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
                                 WHERE item_user_id = :user_id AND item_is_deleted = 0
                                     ORDER BY item_id DESC LIMIT :start, :limit ";
 
-        return DB::run($sql, ['user_id' => $user_id, 'start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['user_id' => UserData::getUserId(), 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getUserSitesCount($user_id)
+    public static function getUserSitesCount()
     {
         $sql = "SELECT item_id, item_is_deleted FROM items WHERE item_user_id = :user_id AND item_is_deleted = 0 ORDER BY item_id DESC";
 
-        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
+        return  DB::run($sql, ['user_id' => UserData::getUserId()])->rowCount();
     }
 
     // Bookmarks
     // Закладки
-    public static function bookmarks($page, $limit, $user_id)
+    public static function bookmarks($page, $limit)
     {
+        $user_id = UserData::getUserId();
         $start  = ($page - 1) * $limit;
+
         $sql = "SELECT 
                     fav.tid, 
                     fav.user_id, 
@@ -101,11 +104,11 @@ class UserAreaModel extends \Hleb\Scheme\App\Models\MainModel
         return  DB::run($sql, ['user_id' => $user_id, 'uid_two' => $user_id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function bookmarksCount($user_id)
+    public static function bookmarksCount()
     {
         $sql = "SELECT user_id FROM favorites WHERE user_id = :user_id AND action_type = 'website'";
 
-        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
+        return  DB::run($sql, ['user_id' => UserData::getUserId()])->rowCount();
     }
 
     public static function auditCount()

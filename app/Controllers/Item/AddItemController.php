@@ -32,7 +32,7 @@ class AddItemController extends Controller
             $category  = FacetPresence::index($category_id, 'id', 'category');
         }
 
-        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount($this->user['id']);
+        $count_site = UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount();
 
         Request::getResources()->addBottomScript('/assets/js/catalog.js');
 
