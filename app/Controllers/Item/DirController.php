@@ -36,7 +36,7 @@ class DirController extends Controller
             $related_posts = PostModel::postRelated($category['facet_post_related']);
         }
 
-        $items      = WebModel::feedItem($this->pageNumber, $this->limit, $childrens, $this->user, $category['facet_id'], $sort, $grouping);
+        $items      = WebModel::feedItem($this->user, $childrens, $category['facet_id'], $sort, $grouping);
         $pagesCount = WebModel::feedItemCount($childrens,  $category['facet_id'],  $sort, $grouping);
 
         $m = [
