@@ -31,6 +31,7 @@ return [
     'posted'            => '已发布？',
     'necessarily'       => '必填',
     'status'            => '链接状态',
+    'refresh'           => '刷新',
     'there_program'     => '有一个项目？',
     'there_forum'       => '该网站有一个论坛？',
     'there_portal'      => '这是传送门吗？',

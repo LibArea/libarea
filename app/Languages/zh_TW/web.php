@@ -31,6 +31,7 @@ return [
     'posted'            => '张贴？',
     'necessarily'       => '需要填写',
     'status'            => '链接状态',
+    'refresh'           => '刷新',
     'there_program'     => '有计划吗？',
     'there_forum'       => '网站上有论坛吗？',
     'there_portal'      => '这是传送门吗？',
