@@ -14,6 +14,7 @@ return [
     'soft'              => 'Soft',
     'website'           => 'Website',
     'websites'          => 'Sites',
+    'comments'          => 'Comments',
     'on_website'        => 'To the website',
     'deleted'           => 'Remote',
     'facets'            => 'Facets',

@@ -20,7 +20,6 @@ class Home
                     'users_count'       => UserModel::getUsersCount('all'),
                     'last_visit'        => UserModel::getLastVisit(),
                     'logs'              => SearchModel::getSearchLogs(10),
-                    'replys'            => StatsModel::getReplys(10),
                     'bytes'             => self::freeDiskSpace(),
                     'type'              => 'admin',
                     'sheet'             => 'admin',

@@ -44,6 +44,12 @@ $user_count_site = $data['user_count_site'] ?? false;
   </li>
 
   <li>
+    <a <?= is_current(url('web.comments')) ? 'class="active"' : ''; ?> href="<?= url('web.comments'); ?>">
+      <?= __('web.comments'); ?>
+    </a>
+  </li>
+
+  <li>
     <a <?= is_current(url('web.deleted')) ? 'class="active"' : ''; ?> href="<?= url('web.deleted'); ?>">
       <?= __('web.deleted'); ?>
     </a>

@@ -14,6 +14,7 @@ return [
     'soft'              => '软件',
     'website'           => '网站',
     'websites'          => '站点',
+    'comments'          => '评论',
     'on_website'        => '转到网站',
     'deleted'           => '已删除',
     'facets'            => '部分',

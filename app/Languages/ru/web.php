@@ -14,6 +14,7 @@ return [
     'soft'              => 'Софт',
     'website'           => 'Сайт',
     'websites'          => 'Сайты',
+    'comments'          => 'Комментарии',
     'on_website'        => 'На сайт',
     'deleted'           => 'Удаленные',
     'facets'            => 'Фасеты',

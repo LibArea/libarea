@@ -6,6 +6,7 @@
 Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/web/deleted')->controller('Item\AdminController', ['deleted'])->name('web.deleted');
     Route::get('/web/audits')->controller('Item\AdminController', ['audits'])->name('web.audits');
+    Route::get('/web/comments')->controller('Item\AdminController@comments')->name('web.comments');
 Route::endGroup();
 
 Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();

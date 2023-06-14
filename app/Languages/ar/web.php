@@ -14,6 +14,7 @@ return [
     'soft'              => 'لين',
     'website'           => 'موقع الكتروني',
     'websites'          => 'مواقع',
+    'comments'          => 'تعليقات',
     'on_website'        => 'الى الموقع الالكتروني',
     'deleted'           => 'بعيد',
     'facets'            => 'جوانب',

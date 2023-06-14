@@ -351,4 +351,26 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     {
         return DB::run("SELECT item_slug FROM items WHERE item_slug = :slug", ['slug' => $slug])->fetch();
     }
+    
+    public static function getComments($limit)
+    {
+        $sql = "SELECT 
+                    reply_id,
+                    reply_user_id,                
+                    reply_item_id,
+                    reply_parent_id,
+                    reply_content as content,
+                    reply_date as date,
+                    item_id,
+                    item_slug,
+                    id, 
+                    login, 
+                    avatar
+                        FROM replys 
+                          LEFT JOIN users ON id = reply_user_id
+                          LEFT JOIN items ON item_id = reply_item_id
+                              ORDER BY reply_id DESC LIMIT :limit";
+
+        return DB::run($sql, ['limit' => $limit])->fetchAll();
+    }
 }

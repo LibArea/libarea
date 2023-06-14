@@ -14,6 +14,7 @@ return [
     'soft'              => 'Program',
     'website'           => 'Site-ul web',
     'websites'          => 'Site-uri',
+    'comments'          => 'Comentarii',
     'on_website'        => 'Spre site',
     'deleted'           => 'la distanta',
     'facets'            => 'Fațete',

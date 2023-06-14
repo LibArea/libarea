@@ -26,4 +26,16 @@ class AdminController extends Controller
             'item',
         );
     }
+    
+    public function comments()
+    {
+        return $this->render(
+            '/item/admin/comments',
+            [
+                'meta'  => Meta::get(__('web.comments')),
+                'data'  => ['comments'  => WebModel::getComments(20)]
+            ],
+            'item',
+        );
+    }
 }

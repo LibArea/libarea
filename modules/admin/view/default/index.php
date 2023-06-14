@@ -41,27 +41,6 @@
   </div>
 <?php endforeach; ?>
 
-<h4 class="uppercase-box mt15"><?= __('admin.reply'); ?></h4>
-
-<?php foreach ($data['replys'] as $reply) : ?>
-  <div class="gray text-sm">
-    <a class="gray-600" href="<?= url('profile', ['login' => $reply['login']]); ?>">
-      <?= Img::avatar($reply['avatar'], $reply['login'], 'img-sm', 'small'); ?>
-      <span class="mr5">
-        <?= $reply['login']; ?>
-      </span>
-    </a>
-    <span class="mr15 ml5 gray-600 lowercase">
-      <?= Html::langDate($reply['date']); ?>
-    </span>
-    <a class="black" href="<?= url('website', ['id' => $reply['item_id'], 'slug' => $reply['item_slug']]); ?>">
-      <svg class="icons">
-        <use xlink:href="/assets/svg/icons.svg#eye"></use>
-      </svg>
-    </a>
-    <div class="gray-600 mb15 ind-first-p"><?= markdown($reply['content'], 'line'); ?></div>
-  </div>
-<?php endforeach; ?>
 </main>
 
 <aside>
