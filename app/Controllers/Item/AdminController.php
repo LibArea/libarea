@@ -10,18 +10,30 @@ class AdminController extends Controller
 {
     protected $user_count = 0;
 
-    public function index($sheet)
+    public function audits()
     {
         return $this->render(
-            '/item/admin/index',
+            '/item/admin/audits',
             [
-                'meta'  => Meta::get(__('web.' . $sheet)),
+                'meta'  => Meta::get(__('web.audits')),
                 'data'  => [
-                    'sheet'             => $sheet,
-                    'items'             => WebModel::feedItem(false, false, $sheet, false),
+                    'sheet'             => 'audits',
+                    'items'             => WebModel::feedItem(false, false, 'audits', false),
                     'user_count_site'   => $this->user_count,
                     'audit_count'       => UserAreaModel::auditCount(),
                 ]
+            ],
+            'item',
+        );
+    }
+    
+    public function deleted()
+    {
+        return $this->render(
+            '/item/admin/deleted',
+            [
+                'meta'  => Meta::get(__('web.deleted')),
+                'data'  => ['items' => WebModel::feedItem(false, false, 'deleted', false)]
             ],
             'item',
         );
@@ -37,5 +49,29 @@ class AdminController extends Controller
             ],
             'item',
         );
+    }
+    
+    public function status()
+    {
+        return $this->render(
+            '/item/admin/status',
+            [
+                'meta'  => Meta::get(__('web.status')),
+                'data'  => ['status'  => []]
+            ],
+            'item',
+        );
+    }
+    
+    public static function httpCode($url)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_exec($ch);
+
+        $http_code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+
+        return $http_code;
     }
 }

@@ -102,6 +102,7 @@ return [
     'site_replay'           => '此网站已存在系统中',
 
     'data_help'         => '<i class="gray-600">标题格式:</i><br> «LibArea» — 社区<br><br><i class="gray-600">描述(无广告):</i><br> ...网站上有什么？<i>',
+    'admin_help'         => '僅對員工開放的封閉部分',
     
     'add_category'      => '添加类别',
     'add_website'       => '添加网站',
@@ -114,9 +115,7 @@ return [
     'main_desc'         => '目录中的站点列表按时间顺序排列。能够搜索、添加书签、按受欢迎程度排序',
     
     'deleted_title'     => '远程站点',
-    'deleted_desc'      => '...',
     'audits_title'      => '站点审核',
-    'audits_desc'       => '...',
     
     'all'               => '全部',
     'github'            => 'GitHub',

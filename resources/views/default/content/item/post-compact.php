@@ -1,6 +1,3 @@
-<?php
-
-use Hleb\Constructor\Handlers\Request; ?>
 <?php if (!empty($data['posts'])) : ?>
   <?php foreach ($data['posts'] as $post) : ?>
     <div class="mb15">

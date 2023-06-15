@@ -102,6 +102,7 @@ return [
     'site_replay'           => 'Such a site already exists in the system',
 
     'data_help'         => '<i class="gray-600">Title Format:</i><br> «LibArea» — community<br><br><i class="gray-600">Description (no ads)):</i><br> ...what is on the site?<i>',
+    'admin_help'         => 'Closed section available only to staff...',
     
     'add_category'      => 'Add category',
     'add_website'       => 'Add site',
@@ -114,9 +115,7 @@ return [
     'main_desc'         => 'List of sites in the directory placed in chronological order. Ability to search, bookmark, sort by popularity',
     
     'deleted_title'     => 'Remote Sites',
-    'deleted_desc'      => '...',
     'audits_title'      => 'Website audit',
-    'audits_desc'       => '...',
 
     'all'               => 'All',
     'github'            => 'GitHub',

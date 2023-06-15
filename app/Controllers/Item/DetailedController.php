@@ -123,16 +123,4 @@ class DetailedController extends Controller
 
         return $content;
     }
-
-    public static function httpCode($url)
-    {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_exec($ch);
-
-        $http_code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-        curl_close($ch);
-
-        return $http_code;
-    }
 }

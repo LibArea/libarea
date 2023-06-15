@@ -31,15 +31,8 @@ $user_count_site = $data['user_count_site'] ?? false;
   <li class="uppercase-box mt15"><?= __('admin.home'); ?></li>
 
   <li>
-    <a href="<?= url('content.add', ['type' => 'category']); ?>">
-      <?= __('web.add_category'); ?>
-    </a>
-  </li>
-
-  <li>
     <a <?= is_current(url('web.audits')) ? 'class="active"' : ''; ?> href="<?= url('web.audits'); ?>">
       <?= __('web.audits'); ?>
-      <?php if (!empty($data['audit_count'])) : ?><span class="red ml5">(<?= $data['audit_count']; ?>)</span><?php endif; ?>
     </a>
   </li>
 
@@ -52,6 +45,12 @@ $user_count_site = $data['user_count_site'] ?? false;
   <li>
     <a <?= is_current(url('web.deleted')) ? 'class="active"' : ''; ?> href="<?= url('web.deleted'); ?>">
       <?= __('web.deleted'); ?>
+    </a>
+  </li>
+
+  <li>
+    <a href="<?= url('content.add', ['type' => 'category']); ?>">
+      <?= __('web.add_category'); ?>
     </a>
   </li>
 

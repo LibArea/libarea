@@ -1,3 +1,7 @@
+<?php
+
+use Hleb\Constructor\Handlers\Request; ?>
+
 <div class="item-cat">
   <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]);
   $grouping = Request::get('grouping');
