@@ -3,8 +3,9 @@
 namespace App\Controllers\Item;
 
 use App\Controllers\Controller;
+use Hleb\Constructor\Handlers\Request;
 use App\Models\Item\{WebModel, UserAreaModel};
-use Meta;
+use Meta, Msg;
 
 class AdminController extends Controller
 {
@@ -53,6 +54,8 @@ class AdminController extends Controller
     
     public function status()
     {
+        Request::getResources()->addBottomScript('/assets/js/catalog.js');
+        
         return $this->render(
             '/item/admin/status',
             [
@@ -65,13 +68,26 @@ class AdminController extends Controller
     
     public static function httpCode($url)
     {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_exec($ch);
+        stream_context_set_default([
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+            ],
+        ]);
+            
+        $headers = get_headers($url);
 
-        $http_code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-        curl_close($ch);
+        return (empty($headers[0])) ? 404 : substr($headers[0], 9, 3);
+    }
+    
+    // Once a month
+    public static function updateStatus()
+    {
+        $items = WebModel::getForStatus();
+        foreach ($items as $row) {
+            WebModel::statusUpdate($row['item_id'], self::httpCode($row['item_url']));
+        }
 
-        return $http_code;
+        Msg::add(__('admin.completed'), 'success');
     }
 }

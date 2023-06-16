@@ -1,4 +1,5 @@
 const favicon = queryAll(".add-favicon"),
+  sturl = queryAll(".status"),
   screenshot = queryAll(".add-screenshot");
 
 // Write down a Favicon
@@ -17,6 +18,12 @@ isIdEmpty('find-url').onclick = function () {
     fetchSearchUrl();
   });
 }
+
+// URL Status Update
+sturl.forEach(el => el.addEventListener("click", function (e) {
+  makeRequest("/web/status/update");
+}));
+
 
 function fetchSearchUrl() {
   let url = getById("find-url").value;

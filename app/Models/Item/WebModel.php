@@ -373,4 +373,24 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
+    
+    public static function getForStatus()
+    {
+        
+        $url = DB::run("SELECT status_item_id FROM items_status WHERE status_date > CURDATE()-INTERVAL 1 WEEK")->fetchAll();
+        
+        $result = [];
+        foreach ($url as $ind => $row) {
+            $result[$ind] = $row['status_item_id'];
+        }
+        
+        $sql = "SELECT item_id, item_url FROM items WHERE item_is_deleted = 0 AND item_id NOT IN(" . implode(',', $result ?? []) . ")";
+        
+        return DB::run($sql)->fetchAll();
+    }
+    
+    public static function statusUpdate($item_id, $code)
+    {
+        return DB::run("INSERT INTO items_status(status_item_id,status_response) VALUES(:item_id,:code)", ['item_id' => $item_id, 'code' => $code]);
+    }
 }

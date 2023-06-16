@@ -13,6 +13,7 @@ Route::endGroup();
 Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::post('/web/favicon/add')->controller('Item\ImgController@favicon');
     Route::post('/web/screenshot/add')->controller('Item\ImgController@screenshot');
+    Route::post('/web/status/update')->controller('Item\AdminController@updateStatus');
     Route::get('/web/bookmarks')->controller('Item\UserAreaController@bookmarks')->name('web.bookmarks');
     Route::get('/web/my')->controller('Item\UserAreaController')->name('web.user.sites');
 Route::endGroup();
