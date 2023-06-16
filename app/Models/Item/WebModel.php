@@ -376,7 +376,6 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     
     public static function getForStatus()
     {
-        
         $url = DB::run("SELECT status_item_id FROM items_status WHERE status_date > CURDATE()-INTERVAL 1 WEEK")->fetchAll();
         
         $result = [];
@@ -392,5 +391,10 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     public static function statusUpdate($item_id, $code)
     {
         return DB::run("INSERT INTO items_status(status_item_id,status_response) VALUES(:item_id,:code)", ['item_id' => $item_id, 'code' => $code]);
+    }
+    
+    public static function getStatus($code)
+    {
+        return;
     }
 }

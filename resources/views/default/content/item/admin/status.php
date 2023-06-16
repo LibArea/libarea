@@ -1,3 +1,4 @@
+<?php $code = $data['code']; ?>
 <div id="contentWrapper" class="wrap wrap-max">
   <main class="w-100">
     <a class="text-sm" href="<?= url('web'); ?>">
@@ -15,9 +16,9 @@
         </div>
 
         <div class="mb20 text-sm">
-          <a class="ml10 gray-600 <?php if (2 == 1) : ?> active<?php endif; ?>" href="#">404</a>
-          <a class="mr15 ml15 gray-600<?php if (2 == 3) : ?> active<?php endif; ?>" href="#">403</a>
-          <a class="gray-600<?php if (1 == 1) : ?> active<?php endif; ?>" href="#">@</a>
+          <a class="ml10 gray-600 <?php if ($code != 404 || $code == 403) : ?> active<?php endif; ?>" href="<?= url('web.status', ['code' => 404]) ?>"><?= __('web.all'); ?></a>
+          <a class="mr15 ml15 gray-600<?php if ($code == 404) : ?> active<?php endif; ?>" href="<?= url('web.status', ['code' => 403]) ?>">404</a>
+          <a class="gray-600<?php if ($code == 403) : ?> active<?php endif; ?>" href="<?= url('web.status') ?>">403</a>
         </div>
 
         <?php foreach ($data['status'] as $st) : ?>

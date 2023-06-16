@@ -7,7 +7,7 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
     Route::get('/web/deleted')->controller('Item\AdminController@deleted')->name('web.deleted');
     Route::get('/web/audits')->controller('Item\AdminController@audits')->name('web.audits');
     Route::get('/web/comments')->controller('Item\AdminController@comments')->name('web.comments');
-    Route::get('/web/status')->controller('Item\AdminController@status')->name('web.status');
+    Route::get('/web/status/{code?}')->controller('Item\AdminController@status')->where(['code' => '[0-9]+'])->name('web.status');
 Route::endGroup();
 
 Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();

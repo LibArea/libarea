@@ -56,11 +56,13 @@ class AdminController extends Controller
     {
         Request::getResources()->addBottomScript('/assets/js/catalog.js');
         
+        $code = Request::get('code');
+        
         return $this->render(
             '/item/admin/status',
             [
                 'meta'  => Meta::get(__('web.status')),
-                'data'  => ['status'  => []]
+                'data'  => ['status'  => WebModel::getStatus($code), 'code'  => $code]
             ],
             'item',
         );
