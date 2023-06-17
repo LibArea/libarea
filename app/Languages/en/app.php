@@ -401,6 +401,7 @@ return [
     'notification_email'    => 'Notify by email',
     'notifications_limit'   => 'Showing last 100 notifications',
 
+    'ignore'                => 'Ignore',
     'ignored'               => 'Ignored',    
     'ignored_users'         => 'Ignored users',
     'ignored_users_help'    => 'Users whose posts you will not see in the feed.',

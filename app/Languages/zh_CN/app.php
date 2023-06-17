@@ -402,6 +402,7 @@ return [
     'notification_email'    => '通过邮件通知',
     'notifications_limit'   => '显示最后100条通知',
 
+    'ignore'                => '忽略',
     'ignored'               => '忽略',  
     'ignored_users'         => '忽略的用户',
     'ignored_users_help'    => '您不会在提要中看到其帖子的用户。',

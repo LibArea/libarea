@@ -39,7 +39,7 @@ endif;
         <?php else : ?>
           <div class="flex gap-max items-center">
             <?php $active = $data['ignored'] ? ' red' : ' gray-600'; ?>
-            <a id="ignore_<?= $profile['id']; ?>" class="add-ignore<?= $active; ?>" data-id="<?= $profile['id']; ?>">
+            <a title="<?= __('app.ignore'); ?>" id="ignore_<?= $profile['id']; ?>" class="add-ignore<?= $active; ?>" data-id="<?= $profile['id']; ?>">
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#lock"></use>
               </svg></i>

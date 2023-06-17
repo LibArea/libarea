@@ -401,6 +401,7 @@ return [
     'notification_email'    => 'Повідомляти по E-mail',
     'notifications_limit'   => 'Показано останні 100 повідомлень',
 
+    'ignore'                => 'Нехтувати',
     'ignored'               => 'Ігноровані',  
     'ignored_users'         => 'Ігноровані учасники',
     'ignored_users_help'    => 'Користувачі, чиї пости ви не бачитимете у стрічці.',

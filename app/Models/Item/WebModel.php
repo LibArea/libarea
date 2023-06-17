@@ -393,8 +393,20 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run("INSERT INTO items_status(status_item_id,status_response) VALUES(:item_id,:code)", ['item_id' => $item_id, 'code' => $code]);
     }
     
-    public static function getStatus($code)
+    public static function getStatus($page, $code)
     {
-        return;
+        $start = ($page - 1) * self::$limit;
+        $sql = "SELECT item_id, item_url, item_slug, rel.* 
+                    FROM items 
+                       LEFT JOIN (
+                            SELECT 
+                                status_item_id, status_response, 
+                                GROUP_CONCAT(status_response, '@', status_date SEPARATOR '@') AS status_list
+                                    FROM items_status GROUP BY status_item_id
+                        ) AS rel
+                             ON rel.status_item_id = item_id
+                                WHERE rel.status_response = :code AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :start, :limit";
+        
+        return DB::run($sql, ['code' => $code, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 }

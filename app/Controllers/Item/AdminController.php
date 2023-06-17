@@ -9,6 +9,7 @@ use Meta, Msg;
 
 class AdminController extends Controller
 {
+    protected $limit = 15;
     protected $user_count = 0;
 
     public function audits()
@@ -62,7 +63,12 @@ class AdminController extends Controller
             '/item/admin/status',
             [
                 'meta'  => Meta::get(__('web.status')),
-                'data'  => ['status'  => WebModel::getStatus($code), 'code'  => $code]
+                'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $this->pageNumber,
+                    'status'        => WebModel::getStatus($this->pageNumber, $code), 
+                    'code'          => $code
+                ]
             ],
             'item',
         );

@@ -401,6 +401,7 @@ return [
     'notification_email'    => 'Notificare prin e-mail',
     'notifications_limit'   => 'Se afișează ultimele 100 de notificări',
 
+    'ignore'                => 'Ignora',
     'ignored'               => 'Ignorat',    
     'ignored_users'         => 'Utilizatori ignorați',
     'ignored_users_help'    => 'Utilizatori ale căror postări nu le vei vedea în feed.',
