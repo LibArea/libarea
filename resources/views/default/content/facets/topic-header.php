@@ -3,7 +3,7 @@
     <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-lg', 'logo', 'max'); ?>
     <div>
       <h1 class="text-2xl mb-text-xl m0">
-        <?= $topic['facet_seo_title']; ?>
+        <?= $topic['facet_title']; ?>
         <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == UserData::getUserId()) : ?>
           <a class="gray-600" href="<?= url('content.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
             <svg class="icons">
