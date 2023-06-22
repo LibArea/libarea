@@ -1,0 +1,47 @@
+{
+  "background_color": "#ffffff",
+  "description": "Темы по интересам, лента, блоги. Каталог сайтов. Платформа для коллективных блогов, скрипт мультиблога, сообщества LibArea.",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "LibArea — сообщество",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "LibArea — сообщество",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "categories": [
+    "education",
+    "lifestyle",
+    "navigation",
+    "news",
+    "social",
+    "sports"
+  ],
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "16x16"
+    },
+    {
+      "src": "/favicon-120.ico",
+      "type": "image/x-icon",
+      "sizes": "120x120"
+    },
+    {
+      "src": "/favicon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "https://libarea.ru/assets/images/libarea.jpg",
+      "type": "image/jpeg",
+      "sizes": "1000x390"
+    },
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": []
+}
