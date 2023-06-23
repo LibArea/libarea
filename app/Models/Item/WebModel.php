@@ -393,6 +393,13 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run("INSERT INTO items_status(status_item_id,status_response) VALUES(:item_id,:code)", ['item_id' => $item_id, 'code' => $code]);
     }
     
+    public static function getIdStatus($id)
+    {
+        $sql = "SELECT status_response, status_date FROM items_status WHERE status_item_id = :id ORDER BY status_item_id DESC LIMIT :start, :limit";
+        
+        return DB::run($sql, ['id' => $id, 'start' => 0, 'limit' => self::$limit])->fetchAll();
+    }
+    
     public static function getStatus($page, $code)
     {
         $start = ($page - 1) * self::$limit;

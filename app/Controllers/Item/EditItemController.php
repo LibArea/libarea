@@ -57,6 +57,7 @@ class EditItemController extends Controller
                     'post_arr'      => $item_post_related,
                     'poll'          => PollModel::getQuestion($domain['item_poll']),
                     'subsections'   => RulesItem::getDomains($domain['item_domain']),
+                    'status'        => WebModel::getIdStatus($domain['item_id']),
                 ]
             ],
             'item',
