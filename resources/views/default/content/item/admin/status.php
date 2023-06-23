@@ -17,8 +17,8 @@
 
         <div class="mb20 text-sm">
           <a class="ml10 mr15 gray-600 <?php if ($code == 301) : ?> active<?php endif; ?>" href="<?= url('web.status', ['code' => 301]) ?>">301</a>
-          <a class="mr15 gray-600<?php if ($code == 302) : ?> active<?php endif; ?>" href="<?= url('web.status', ['code' => 301]) ?>">302</a>
-          <a class="mr15 gray-600<?php if ($code == 404) : ?> active<?php endif; ?>" href="<?= url('web.status', ['code' => 404]) ?>">404</a>
+          <a class="mr15 gray-600<?php if ($code == 302) : ?> active<?php endif; ?>" href="<?= url('web.status', ['code' => 302]) ?>">302</a>
+          <a class="mr15 gray-600<?php if ($code == 404 || $code == null) : ?> active<?php endif; ?>" href="<?= url('web.status', ['code' => 404]) ?>">404</a>
           <a class="gray-600<?php if ($code == 403) : ?> active<?php endif; ?>" href="<?= url('web.status', ['code' => 403]) ?>">403</a>
         </div>
 

@@ -383,14 +383,16 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
             $result[$ind] = $row['status_item_id'];
         }
         
-        $sql = "SELECT item_id, item_url FROM items WHERE item_is_deleted = 0 AND item_id NOT IN(" . implode(',', $result ?? []) . ")";
+        $not = $result ? "AND item_id NOT IN(" . implode(',', $result ?? 0) . ")" : '';
+        
+        $sql = "SELECT item_id, item_url FROM items WHERE item_is_deleted = 0 $not ORDER BY item_id LIMIT 30";
         
         return DB::run($sql)->fetchAll();
     }
     
     public static function statusUpdate($item_id, $code)
     {
-        return DB::run("INSERT INTO items_status(status_item_id,status_response) VALUES(:item_id,:code)", ['item_id' => $item_id, 'code' => $code]);
+        return DB::run("INSERT INTO items_status(status_item_id,status_response) VALUES(:item_id, :code)", ['item_id' => $item_id, 'code' => $code]);
     }
     
     public static function getIdStatus($id)
@@ -401,18 +403,20 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
     }
     
     public static function getStatus($page, $code)
-    {
+    {    
+        $code = $code ? $code : 404;
         $start = ($page - 1) * self::$limit;
+
         $sql = "SELECT item_id, item_url, item_slug, rel.* 
                     FROM items 
                        LEFT JOIN (
                             SELECT 
-                                status_item_id, status_response, 
+                                status_item_id, MAX(status_response) as st, 
                                 GROUP_CONCAT(status_response, '@', status_date SEPARATOR '@') AS status_list
                                     FROM items_status GROUP BY status_item_id
                         ) AS rel
                              ON rel.status_item_id = item_id
-                                WHERE rel.status_response = :code AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :start, :limit";
+                                WHERE rel.st = :code AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :start, :limit";
         
         return DB::run($sql, ['code' => $code, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }

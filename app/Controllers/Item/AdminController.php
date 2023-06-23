@@ -59,6 +59,8 @@ class AdminController extends Controller
         
         $code = Request::get('code');
         
+        $pagesCount = 0; // TODO
+        
         return $this->render(
             '/item/admin/status',
             [

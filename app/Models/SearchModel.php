@@ -72,6 +72,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
             item_title as title, 
             item_content as content,
             item_url,
+            item_slug,
             item_domain,
             item_votes as votes,
             item_count as count,
