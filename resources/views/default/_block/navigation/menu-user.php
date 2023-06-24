@@ -35,9 +35,8 @@ $login = $user['login'] ?? false;
     $tl = $item['tl'] ?? 0; ?>
 
     <?php if (!empty($item['hr'])) : ?>
-      <li>
-        <div class="m15"></div>
-      </li>
+      </ul>
+      <ul class="list-none user-nav mt15">
     <?php else : ?>
       <?php if (UserData::getRegType($tl)) : ?>
         <li>
