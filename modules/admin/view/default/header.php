@@ -9,7 +9,7 @@ Request::getHead()->addStyles('/assets/css/style.css?21');
 
 <body class="admin<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if (Request::getCookie('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
 
-  <header class="d-header<?php if ($post || $facet) : ?> scroll-hide-search<?php endif; ?>">
+  <header class="d-header">
     <div class="wrap">
       <div class="d-header_contents">
         <div class="flex items-center gray-600 gap-min mr20">
