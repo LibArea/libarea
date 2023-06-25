@@ -30,8 +30,13 @@
     let search_blog = await blog_search();
     let input = document.querySelector('#blog_id');
     let options = {
-      mode: "select",
       maxTags: 1,
+      dropdown: {
+        maxItems: 7, // <- максимум показов фасетов
+        classname: "tags-look", // <- пользова. имя класса для этого раскр. списка, чтобы оно могло быть целевым
+        enabled: 0, // <- показывать предложения по фокусировке
+        closeOnSelect: false // <- не скрывайте раскрывающийся список "Предложения" после выбора элемента
+      },
       callbacks: {
         "dropdown:show": async (e) => await blog_search(),
       },
