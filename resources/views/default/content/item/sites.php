@@ -49,14 +49,13 @@ use Hleb\Constructor\Handlers\Request; ?>
     <div class="ml20 mb20 mb-block">
       <?php foreach ($data['low_matching'] as $rl) : ?>
         <div class="inline mr20">
-          <a class="text-2xl" href="<?= url('category', ['sort' => $data['sort'], 'slug' => $rl['facet_slug']]); ?>">
+          <a class="text-2xl ml10" href="<?= url('category', ['sort' => $data['sort'], 'slug' => $rl['facet_slug']]); ?>">
             @<?= $rl['facet_title']; ?>
           </a>
           <?php if (UserData::checkAdmin()) : ?>
-            <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
+            <a class="text-sm ml5" href="<?= url('content.edit', ['type' => 'category', 'id' => $rl['facet_id']]); ?>">
               <sup class="gray-600"><svg class="icons">
                   <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                </svg> <small><?= $rl['facet_type']; ?></small></sup>
             </a>
           <?php endif; ?>
         </div>
