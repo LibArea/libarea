@@ -16,6 +16,8 @@ use App\Traits\Poll;
 use App\Traits\Slug;
 use App\Traits\Related;
 
+use Embed\Embed;
+
 class AddPostController extends Controller
 {
     use Poll;
@@ -180,26 +182,25 @@ class AddPostController extends Controller
 
     // Parsing
     // Парсинг
+    // https://lenta.ru/news/2023/06/25/fires/
+    // https://habr.com/ru/articles/743758/
     public function grabMeta()
     {
         $url    = Request::getPost('uri');
-        $meta   = new URLScraper($url);
+        $result = URLScraper::get($url);
 
-        $meta->parse();
-        $metaData = $meta->finalize();
-
-        return json_encode($metaData);
+        return json_encode($result, JSON_PRETTY_PRINT);
     }
 
     // Getting Open Graph Protocol Data 
     // Получаем данные Open Graph Protocol 
     public static function grabOgImg($post_url)
     {
-        $meta = new URLScraper($post_url);
-        $meta->parse();
-        $metaData = $meta->finalize();
+        $meta = URLScraper::get($post_url);
 
-        return UploadImage::thumbPost($metaData->image);
+        $image = $meta['image'] == NULL ? $meta['tags_meta']['twitter:image'] : $meta['image'];
+
+        return UploadImage::thumbPost($image);
     }
 
     // Recommend post

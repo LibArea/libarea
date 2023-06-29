@@ -2,247 +2,213 @@
 
 // MIT License
 // Copyright 2018 Bert Maurau
-// https://github.com/tommyku/php-html-meta-parser
-// FIX: UTF (test: https://lenta.ru/news/2021/09/09/fantastic_russians/)
-// TODO: https://github.com/jkphl/micrometa/blob/master/doc/index.md#items
+// https://github.com/BertMaurau/php-url-scraper/tree/master
 
 class URLScraper
 {
-	private static $STATUS = [
-		"initialized" => 0,
-		"success" => 1,
-		"fail" => 2
-	];
+    /**
+     * The initial URL
+     * @var string
+     */
+    public static $url;
 
-	private $metaData;
-	private $url;
-	private $html;
-	private $status;
-	private $meta;
+    /**
+     * The domain that the URL is hosted on
+     * @var string
+     */
+    public static $domain;
 
-	/**
-	 * __construct
-	 * 
-	 * Require the url of the webpage for meta data extraction
-	 *
-	 * @access public
-	 * @param  string $url
-	 */
-	public function __construct($url)
-	{
-		$this->url = $url;
-		$this->metaData = new StdClass;
-		$this->metaData->title = "";
-		$this->metaData->description = "";
-		$this->metaData->image = "";
-		$this->initialized();
-	}
+    /**
+     * Holds the fetched content (html data)
+     * @var string
+     */
+    public static $contents;
 
-	/**
-	 * parse
-	 * 
-	 * Parse the meta data from the given url and populate data member $metaData
-	 *
-	 * @access public
-	 * @return integer
-	 */
-	public function parse()
-	{
-		// load HTML as DOMDocument object for parsing
-		$this->html = new DOMDocument;
-		libxml_use_internal_errors(true);
-		// Recoding
-		$source = mb_convert_encoding(file_get_contents($this->url), 'HTML-ENTITIES', 'utf-8');
-		$this->html->loadHTML($source);
+    /**
+     * Will hold the title of the page
+     * @var string
+     */
+    public static $title;
 
-		// php built-in get_meta_tags() only read those with name "title", "description" and so on
-		// so I wrote my own version supporting twitter:title, og:title, etc.
-		$this->meta = $this->my_get_meta_tags($this->url);
+    /**
+     * Will hold the Description of the page
+     * @var string
+     */
+    public static $description;
 
-		$this->success(); // assume successful
+    /**
+     * Will hold the URL for the image
+     * @var string
+     */
+    public static $image;
 
-		// possible to add more method such as getAuthor()
-		$this->getTitle();
-		$this->getDescription();
-		$this->getImage();
+    /**
+     * Will hold all the Meta tags
+     * @var array
+     */
+    public static $tags_meta;
 
-		return $this->status;
-	}
+    /**
+     * Will hold all the OG tags
+     * @var array
+     */
+    public static $tags_og;
 
+    /**
+     * Fetch the HTML contents from the URL
+     * @param string $url
+     * @return string
+     */
+    private static function loadContents($url)
+    {
+        $curl_options = [
+            CURLOPT_RETURNTRANSFER => true, // return web page
+            CURLOPT_HEADER         => false, // don't return headers
+            CURLOPT_FOLLOWLOCATION => true, // follow redirects
+            CURLOPT_ENCODING       => "", // handle all encodings
+            CURLOPT_USERAGENT      => "spider", // who am i
+            CURLOPT_AUTOREFERER    => true, // set referrer on redirect
+            CURLOPT_CONNECTTIMEOUT => 60, // timeout on connect
+            CURLOPT_TIMEOUT        => 120, // timeout on response
+            CURLOPT_MAXREDIRS      => 5, // stop after 10 redirects
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false
+        ];
 
-	/**
-	 * finalize
-	 * 
-	 * Export the meta data parsed
-	 *
-	 * @access public
-	 * @return StdClass
-	 */
-	public function finalize()
-	{
-		$tmp = new StdClass;
-		$tmp->url = $this->url;
-		$tmp->title = $this->metaData->title;
-		$tmp->description = $this->metaData->description;
-		$tmp->image = $this->metaData->image;
-		$tmp->status = $this->status;
-		return $tmp;
-	}
+        $ch = curl_init($url);
+        curl_setopt_array($ch, $curl_options);
 
-	/**
-	 * my_get_meta_tags
-	 * 
-	 * Require the url to be parsed, read every meta tags found
-	 *
-	 * @access private
-	 * @param  string $url
-	 * @return array
-	 */
-	private function my_get_meta_tags($url)
-	{
-		$metatags = $this->html->getElementsByTagName("meta");
-		$tmeta = array();
-		for ($i = 0; $i < $metatags->length; ++$i) {
-			$item = $metatags->item($i);
-			$name = $item->getAttribute('name');
+        // Fetch the contents
+        self::$contents = curl_exec($ch);
 
-			if (empty($name)) {
-				// og meta tags, or twitter meta tags
-				$tmeta[$item->getAttribute('property')] = $item->getAttribute('content');
-			} else {
-				// conventional meta tags
-				$tmeta[$name] = $item->getAttribute('content');
-			}
-		}
-		return $tmeta;
-	}
+        curl_close($ch);
 
-	/**
-	 * initizlized
-	 * 
-	 * Set the state of the object to be initizlied
-	 *
-	 * @access private
-	 */
-	private function initialized()
-	{
-		$this->status = self::$STATUS["initialized"];
-	}
+        return self::$contents;
+    }
 
-	/**
-	 * success
-	 * 
-	 * Set the state of the object to be successful
-	 *
-	 * @access private
-	 */
-	private function success()
-	{
-		$this->status = self::$STATUS["success"];
-	}
+    /**
+     * Send a second request to just fetch the meta tags
+     * @param string $url
+     * @return array
+     */
+    private static function getMetaTags($url)
+    {
+        // If this fails, the OG tags (if available) gets parsed from the content first
+        self::$tags_meta = get_meta_tags($url);
+        return self::$tags_meta;
+    }
 
-	/**
-	 * fail
-	 * 
-	 * Set the state of the object to be failed
-	 *
-	 * @access private
-	 */
-	private function fail()
-	{
-		$this->status = self::$STATUS["fail"];
-	}
+    /**
+     * Parse the OG tags fron the HTML contents
+     * @param string $url
+     * @return array
+     */
+    private static function getOgTags()
+    {
+        preg_match_all('~<\s*meta\s+property="(og:[^"]+)"\s+content="([^"]*)~i', self::$contents, $matches);
+        $tags_og = [];
+        for ($i = 0; $i < count($matches[1]); $i++) {
+            $tags_og[trim(substr($matches[1][$i], 3))] = $matches[2][$i];
+        }
+        return self::$tags_og = $tags_og;
+    }
 
-	/**
-	 * getTitle
-	 * 
-	 * Read meta title based on priorities of the tag name/property, 
-	 * fallback to reading <title> and <h1> if meta title not present
-	 *
-	 * @access private
-	 */
-	private function getTitle()
-	{
-		if (isset($this->meta["og:title"])) {
-			$this->metaData->title = $this->meta["og:title"];
-			return;
-		}
+    /**
+     * Parse the domain from the URL
+     * @param string $url
+     * @return string
+     */
+    private static function getDomain($url)
+    {
+        $domain = parse_url($url, PHP_URL_HOST);
+        $domain = $domain ? $domain : parse_url($url, PHP_URL_PATH);
 
-		if (isset($this->meta["twitter:title"])) {
-			$this->metaData->title = $this->meta["twitter:title"];
-			return;
-		}
+        return self::$domain = $domain;
+    }
 
-		if (isset($this->meta["title"])) {
-			$this->metaData->title = $this->meta["title"];
-			return;
-		}
+    /**
+     * Parse the Title from the HTML contents
+     * @return string
+     */
+    private static function getTitle()
+    {
+        if (!self::$contents) {
+            self::loadContents(self::$url);
+        }
 
-		$title = $this->html->getElementsByTagName("title") or $title = $this->html->getElementsByTagName("h1");
-		// taking either the title or h1 tag
-		if (!$title->length) {
-			// if no h1 tag, nothing good enough to be the site title
-			$this->fail();
-			return;
-		} else {
-			$this->metaData->title = ($title->length) ? $title->item(0)->nodeValue : "";
-		}
-	}
+        return preg_match('/<title[^>]*>(.*?)<\/title>/ims', self::$contents, $matches) ? $matches[1] : null;
+    }
 
-	/**
-	 * getDescription
-	 * 
-	 * Read meta description based on priorities of the tag name/property. 
-	 * No fallback, it doesn't read anything except for the meta tag
-	 *
-	 * @access private
-	 */
-	private function getDescription()
-	{
-		if (isset($this->meta["og:description"])) {
-			$this->metaData->description = $this->meta["og:description"];
-			return;
-		}
+    /**
+     * Get the description of the page (first from OG then from Meta)
+     * @return string
+     */
+    private static function getDescription()
+    {
+        if (isset(self::$tags_og['description'])) {
+            return self::$tags_og['description'];
+        } else {
+            // Check for Meta tags
+            if (isset(self::$tags_meta['description'])) {
+                return self::$tags_meta['description'];
+            } else {
+                // set url as description
+                return self::$url;
+            }
+        }
+    }
 
-		if (isset($this->meta["twitter:description"])) {
-			$this->metaData->description = $this->meta["twitter:description"];
-			return;
-		}
+    /**
+     * Get the image of the page (only from OG)
+     * @return string
+     */
+    private static function getImage()
+    {
+        if (isset(self::$tags_og['image'])) {
+            return self::$tags_og['image'];
+        } else {
+            // set url as description
+            return null;
+        }
+    }
 
-		if (isset($this->meta["description"])) {
-			$this->metaData->description = $this->meta["description"];
-			return;
-		}
+    /**
+     * Main function to get all the information
+     * @param string $url
+     * @return array
+     */
+    public static function get($url)
+    {
 
-		$this->fail();
-		return;
-	}
+        // Set the URL
+        self::$url = $url;
 
-	/**
-	 * getImage
-	 * 
-	 * Read meta image url based on priorities of the tag name/property. 
-	 * No fallback, it doesn't read anything except for the meta tag
-	 *
-	 * @access private
-	 */
-	private function getImage()
-	{
-		if (isset($this->meta["og:image"])) {
-			$this->metaData->image = $this->meta["og:image"];
-			return;
-		}
+        // Parse the Domain
+        self::getDomain($url);
 
-		if (isset($this->meta["twitter:image"])) {
-			$this->metaData->image = $this->meta["twitter:image"];
-			return;
-		}
+        // Fetch the HTML contents
+        self::loadContents($url);
 
-		if (isset($this->meta["image"])) {
-			$this->metaData->image = $this->meta["image"];
-			return;
-		}
+        // Fetch the Meta tags
+        self::getMetaTags($url);
 
-		$this->fail();
-	}
-};
+        // Parse the OG Tags
+        self::getOgTags($url);
+
+        // Set the main values
+        self::$title = self::getTitle();
+        self::$description = self::getDescription();
+        self::$image = self::getImage();
+
+        // Return everything
+        return [
+            'url'         => self::$url,
+            'domain'      => self::$domain,
+            'title'       => self::$title,
+            'description' => self::$description,
+            'image'       => self::$image,
+            'tags_meta'   => self::$tags_meta,
+            'tags_og'     => self::$tags_og
+        ];
+    }
+}
