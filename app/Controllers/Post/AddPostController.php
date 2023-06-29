@@ -16,8 +16,6 @@ use App\Traits\Poll;
 use App\Traits\Slug;
 use App\Traits\Related;
 
-use Embed\Embed;
-
 class AddPostController extends Controller
 {
     use Poll;
