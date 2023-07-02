@@ -172,6 +172,8 @@ return [
     'cancel'            => 'Anulare',
     'reply'             => 'Răspuns',
 
+    'is_nsfw'           => 'Activați vizualizarea conținutului pentru adulți și NSFW (+ miniaturi estompate) în feed.',
+
     'delete_profile'    => 'Ștergeți profilul',
     'read_carefully'    => 'Citiți cu atenție, este foarte important!',
     'read_information'  => 'Sunteți pe cale să vă ștergeți profilul. Pentru a șterge un profil, trebuie să confirmați că sunteți pregătit să ștergeți toate informațiile enumerate. Ștergerea unui profil este o <strong>acțiune ireversibilă</strong>, nu veți putea recupera datele pierdute.',

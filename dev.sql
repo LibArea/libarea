@@ -1578,3 +1578,7 @@ CREATE TABLE `items_status` (
   PRIMARY KEY  (`status_id`),
   KEY `status_item_id` (`status_item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
+
+
+ALTER TABLE `posts` ADD `post_nsfw` TINYINT(1) NOT NULL DEFAULT '0' AFTER `post_published`;
+ALTER TABLE `users` ADD `nsfw` TINYINT(1) NOT NULL DEFAULT '0' AFTER `my_post`; 
