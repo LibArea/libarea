@@ -104,6 +104,12 @@
   <?php endif; ?>
 <?php endif; ?>
 
+<?php if (config('feed.nsfw')) : ?>
+  <fieldset>
+      <input type="checkbox" name="nsfw" <?php if ($post['post_nsfw'] == 1) : ?>checked <?php endif; ?>> <?= __('app.nsfw_post'); ?>
+  </fieldset>
+<?php endif; ?>
+
 <?php if (UserData::checkAdmin()) : ?>
   <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
 <?php endif; ?>

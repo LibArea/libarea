@@ -18,6 +18,7 @@ class MiddlewareModel extends \Hleb\Scheme\App\Models\MainModel
                     trust_level,
                     template,
                     lang,
+                    nsfw,
                     invitation_available,
                     ban_list,
                     is_deleted

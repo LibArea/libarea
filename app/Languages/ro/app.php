@@ -173,6 +173,7 @@ return [
     'reply'             => 'Răspuns',
 
     'is_nsfw'           => 'Activați vizualizarea conținutului pentru adulți și NSFW (+ miniaturi estompate) în feed.',
+    'nsfw_post'         => 'Este adultul de conținut (NSFW)?',
 
     'delete_profile'    => 'Ștergeți profilul',
     'read_carefully'    => 'Citiți cu atenție, este foarte important!',

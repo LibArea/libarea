@@ -173,6 +173,7 @@ return [
     'reply'             => 'Reply',
 
     'is_nsfw'           => 'Enable viewing adult content and NSFW (+blur thumbnails) in the feed.',
+    'nsfw_post'         => 'Is the content adult (NSFW)?',
 
     'delete_profile'    => 'Delete profile',
     'read_carefully'    => 'Read carefully, it\'s really important!',

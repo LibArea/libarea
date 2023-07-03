@@ -34,6 +34,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                     post_feature,
                     post_translation,
                     post_draft,
+                    post_nsfw,
                     post_date,
                     post_published,
                     post_user_id,

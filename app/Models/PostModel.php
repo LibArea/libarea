@@ -25,6 +25,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                                     post_user_id,
                                     post_closed,
                                     post_top,
+                                    post_nsfw,
                                     post_url,
                                     post_poll,
                                     post_url_domain)
@@ -45,6 +46,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                                     :post_user_id,
                                     :post_closed,
                                     :post_top,
+                                    :post_nsfw,
                                     :post_url,
                                     :post_poll,
                                     :post_url_domain)";
@@ -99,6 +101,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_tl,
                     post_lo,
                     post_top,
+                    post_nsfw,
                     post_url,
                     post_poll,
                     post_modified,
@@ -194,6 +197,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_date             = :post_date,
                     post_user_id          = :post_user_id,
                     post_draft            = :post_draft,
+                    post_nsfw             = :post_nsfw,
                     post_modified         = :post_modified,
                     post_content          = :post_content,
                     post_content_img      = :post_content_img,

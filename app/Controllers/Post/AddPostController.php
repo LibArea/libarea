@@ -101,6 +101,7 @@ class AddPostController extends Controller
 
         $translation = $fields['translation'] ?? false;
         $post_draft = $fields['post_draft'] ?? false;
+        $post_nsfw = $fields['post_nsfw'] ?? false;
         $closed = $fields['closed'] ?? false;
         $top = $fields['top'] ?? false;
 
@@ -118,6 +119,7 @@ class AddPostController extends Controller
                 'post_type'             => $type,
                 'post_translation'      => $translation == 'on' ? 1 : 0,
                 'post_draft'            => $post_draft == 'on' ? 1 : 0,
+                'post_nsfw'             => $post_nsfw == 'on' ? 1 : 0,
                 'post_ip'               => Request::getRemoteAddress(),
                 'post_published'        => ($trigger === false) ? 0 : 1,
                 'post_user_id'          => $this->user['id'],
@@ -182,6 +184,9 @@ class AddPostController extends Controller
     // Парсинг
     // https://lenta.ru/news/2023/06/25/fires/
     // https://habr.com/ru/articles/743758/
+    // https://github.com/chuoke/uri-meta
+    // https://github.com/search?q=get+meta+language%3APHP+language%3APHP&type=repositories&l=PHP&s=updated&o=desc&p=2
+    
     public function grabMeta()
     {
         $url    = Request::getPost('uri');

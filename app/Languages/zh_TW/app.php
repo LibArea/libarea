@@ -174,6 +174,7 @@ return [
     'reply'             => '要回答',
 
     'is_nsfw'           => '允許在提要中查看成人內容和 NSFW（+模糊縮略圖）。',
+    'nsfw_post'         => '内容适合成人吗？',
 
     'delete_profile'    => '删除配置文件',
     'read_carefully'    => '仔细阅读，真的很重要！',

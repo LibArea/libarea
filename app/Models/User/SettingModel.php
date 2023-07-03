@@ -19,6 +19,7 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
                     activated       = :activated,
                     limiting_mode   = :limiting_mode,
                     scroll          = :scroll,
+                    nsfw            = :nsfw,
                     template        = :template,
                     lang            = :lang,
                     updated_at      = :updated_at,

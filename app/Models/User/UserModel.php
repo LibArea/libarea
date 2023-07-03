@@ -108,6 +108,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     updated_at,
                     my_post,
                     ban_list,
+                    nsfw,
                     hits_count,
                     up_count,
                     is_deleted 

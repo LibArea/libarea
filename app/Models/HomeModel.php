@@ -40,6 +40,8 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         $display = self::display($type);
         $sort = self::sortDay($type);
 
+        $nsfw = (UserData::getUserNSFW()) ? "" : "AND post_nsfw = 0";
+
         $start = ($page - 1) * $limit;
         $sql = "SELECT DISTINCT
                 post_id,
@@ -48,6 +50,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 post_feature,
                 post_translation,
                 post_draft,
+                post_nsfw,
                 post_date,
                 post_published,
                 post_user_id,
@@ -86,7 +89,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                                 AND fav.user_id = :uid AND fav.action_type = 'post'  
                             LEFT JOIN votes_post 
                                 ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
-                                    WHERE $ignoring post_type != 'page' AND post_draft = 0 $string $display $sort LIMIT :start, :limit";
+                                    WHERE $ignoring post_type != 'page' AND post_draft = 0 $nsfw $string $display $sort LIMIT :start, :limit";
 
         return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
@@ -115,6 +118,8 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             }
         }
 
+        $nsfw = (UserData::getUserNSFW()) ? "" : "AND post_nsfw = 0";
+
         $display = self::display($type);
         $sql = "SELECT 
                     post_id
@@ -129,7 +134,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                             ) AS rel
                                 ON rel.relation_post_id = post_id 
                                     INNER JOIN users ON id = post_user_id
-                                        WHERE $ignoring post_draft = 0 $string $display";
+                                        WHERE $ignoring post_draft = 0 $nsfw $string $display";
 
         return DB::run($sql)->rowCount();
     }

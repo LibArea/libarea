@@ -85,6 +85,11 @@
       </div>
     <?php endif; ?>
 
+    <?php if (config('feed.nsfw')) : ?>
+      <fieldset>
+        <input type="checkbox" name="nsfw"> <?= __('app.nsfw_post'); ?>
+      </fieldset>
+    <?php endif; ?>
 
     <div class="last-content content-tabs<?php if (config('general.qa_site_format') == true) : ?> active<?php endif; ?>" id="qa">
       <div class="mb5"><?= __('app.text'); ?> Q&A <sup class="red">*</sup></div>

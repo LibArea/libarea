@@ -74,9 +74,16 @@
   </select>
 </fieldset>
 
+<h3 class="m0 mt15"><?= __('app.feed'); ?></h3>
 <fieldset>
   <input type="checkbox" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked <?php endif; ?>> <?= __('app.endless_scroll'); ?>
 </fieldset>
+
+<?php if (config('feed.nsfw')) : ?>
+  <fieldset>
+    <input type="checkbox" name="nsfw" <?php if ($data['user']['nsfw'] == 1) : ?>checked <?php endif; ?>> <?= __('app.is_nsfw'); ?>
+  </fieldset>
+<?php endif; ?>
 
 <div class="flex flex-row items-center justify-between mt20">
   <?= Html::sumbit(__('app.edit')); ?>
