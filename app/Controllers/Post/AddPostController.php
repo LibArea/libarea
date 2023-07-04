@@ -182,11 +182,6 @@ class AddPostController extends Controller
 
     // Parsing
     // Парсинг
-    // https://lenta.ru/news/2023/06/25/fires/
-    // https://habr.com/ru/articles/743758/
-    // https://github.com/chuoke/uri-meta
-    // https://github.com/search?q=get+meta+language%3APHP+language%3APHP&type=repositories&l=PHP&s=updated&o=desc&p=2
-    
     public function grabMeta()
     {
         $url    = Request::getPost('uri');
@@ -201,9 +196,7 @@ class AddPostController extends Controller
     {
         $meta = URLScraper::get($post_url);
 
-        $image = $meta['image'] == NULL ? $meta['tags_meta']['twitter:image'] : $meta['image'];
-
-        return UploadImage::thumbPost($image);
+        return UploadImage::thumbPost($meta['image']);
     }
 
     // Recommend post

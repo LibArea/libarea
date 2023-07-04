@@ -266,10 +266,14 @@ class UploadImage
                 copy($image, $local);
             }
 
-            $image = new SimpleImage();
-            $image->load($local);
-            $image->resizeToWidth(1050);
-            $image->save($path . $year . $filename . '.webp', "webp");
+            if (!file_exists($local)) {
+                return false;
+            }
+
+            $img = new SimpleImage();
+            $img->load($local);
+            $img->resizeToWidth(1050);
+            $img->save($path . $year . $filename . '.webp', "webp");
 
             if (file_exists($local)) {
                 @unlink($local);

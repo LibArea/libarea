@@ -20,7 +20,7 @@
   "authors": [
     {
       "name": "Evgeny Konchik",
-      "email": "dev@libarea.ru",
+      "email": "libarea@yandex.ru",
       "homepage": "https://libarea.ru"
     }
   ],
@@ -38,7 +38,9 @@
     "utopia-php/domains": "^0.3.1",
     "matthiasmullie/minify": "dev-master",
     "akh/typograf": "dev-master",
-    "phpmailer/phpmailer": "^6.8.0"
+    "phpmailer/phpmailer": "^6.8.0",
+    "symfony/dom-crawler": "6.0.x-dev",
+    "guzzlehttp/guzzle": "7.7.x-dev"
   },
   "autoload": {
     "classmap": [
