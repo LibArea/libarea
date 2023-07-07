@@ -40,6 +40,7 @@
     "akh/typograf": "dev-master",
     "phpmailer/phpmailer": "^6.8.0",
     "symfony/dom-crawler": "6.0.x-dev",
+    "symfony/css-selector": "6.0.x-dev",
     "guzzlehttp/guzzle": "7.7.x-dev"
   },
   "autoload": {
