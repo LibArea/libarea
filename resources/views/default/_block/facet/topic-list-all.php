@@ -21,7 +21,7 @@
           <use xlink:href="/assets/svg/icons.svg#mic"></use>
         </svg>
       <?php endif; ?>
-      <div class="mt10 gray">
+      <div class="mt10 gray flex justify-between">
         <?= fragment($facet['facet_short_description'], 32); ?>
         <span class="right gray-600">
           <svg class="icons">

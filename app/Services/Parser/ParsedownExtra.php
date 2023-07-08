@@ -246,7 +246,7 @@ class ParsedownExtra extends Parsedown
             return null;
         }
 
-        if (preg_match('/[ ]*{('.$this->regexAttribute.'+)}[ ]*$/', $Block['element']['text'], $matches, PREG_OFFSET_CAPTURE))
+        if (preg_match('/[ ]*{('.$this->regexAttribute.'+)}[ ]*$/', $Block['element']['text'] ?? false, $matches, PREG_OFFSET_CAPTURE))
         {
             $attributeString = $matches[1][0];
 

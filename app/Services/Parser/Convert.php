@@ -74,6 +74,7 @@ class Convert extends \ParsedownExtraPlugin
                 'width' => '576',
                 'height' => '324',
                 'src' => $src,
+                'class' => 'video-pl',
                 'frameborder' => '0',
                 'allow' => 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture',
                 'allowfullscreen' => '1'
