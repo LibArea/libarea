@@ -289,7 +289,10 @@ ul.last-content li a {
   padding: 0;
 }
 
-ul.last-content a.last-content_telo { display: block; }
+ul.last-content a.last-content_telo {
+  display: block;
+  word-wrap: break-word;
+}
 
 .uppercase-box {
   font-size: 0.75rem;

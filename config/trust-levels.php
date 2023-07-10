@@ -30,7 +30,7 @@ return [
 
     'tl_add_pm'         => 1, // Private messages (личные сообщения)
     
-    'tl_add_draft'      => 2, // Drafts (черновики) invite_limit
+    'tl_add_draft'      => 2, // Drafts (черновики)
 
     // С какого TL можно комментировать ответы в QA модели
     'tl_add_comm_qa'    => 2,
