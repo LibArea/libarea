@@ -87,7 +87,7 @@ $post   = $data['post'] ?? false;
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#bell"></use>
               </svg>
-              <span class="number"></span>
+              <span class="number-notif"></span>
             </a>
 
             <div class="relative">

@@ -31,7 +31,7 @@
         }).then(function(data) {
           if (data != false) {
             let notif = getById('notif');
-            let number = notif.querySelector('.number');
+            let number = notif.querySelector('.number-notif');
 
             notif.firstElementChild.classList.add("active");
 
