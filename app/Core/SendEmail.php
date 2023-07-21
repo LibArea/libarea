@@ -79,6 +79,14 @@ class SendEmail
                 $mail->SMTPSecure = 'ssl'; // PHPMailer::ENCRYPTION_SMTPS;  //Enable implicit TLS encryption
                 $mail->Port       = config('integration.smtp_port');        //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
+                /* $mail->SMTPOptions = [
+                    'ssl' => [
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    ]
+                ]; */
+
                 $mail->CharSet    = 'utf-8';
 
                 //Recipients

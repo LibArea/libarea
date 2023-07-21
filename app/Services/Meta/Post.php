@@ -16,7 +16,7 @@ class Post
             'type'      => 'article',
             'og'        => true,
             'imgurl'    => self::images($content),
-            'url'       => post_slug($content['post_id'], $content['post_slug']),
+            'url'       => post_slug((int)$content['post_id'], $content['post_slug']),
         ];
 
         Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');

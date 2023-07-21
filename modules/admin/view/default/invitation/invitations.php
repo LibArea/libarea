@@ -22,11 +22,11 @@
         <span class="lowercase gray-600 text-sm">
           <?= $inv['invitation_email']; ?>
           <sup>id<?= $inv['active_uid']; ?></sup>
-          — <?= Html::langDate($inv['active_time']); ?>
+          — <?= Html::langDate($inv['uid']['updated_at']); ?>
         </span>
       <?php else : ?>
-        <span class="gray-600 lowercase text-sm">
-          <?= $inv['invitation_email']; ?> — <?= Html::langDate($inv['add_time']); ?>
+        <span class="gray-600 lowercase text-sm">1
+          <?= $inv['invitation_email']; ?> — <?= Html::langDate($inv['uid']['created_at']); ?>
         </span>
       <?php endif; ?>
       </span>
