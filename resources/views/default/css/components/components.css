@@ -239,6 +239,7 @@ details[open] > summary {
   border-radius: 5px;
   padding: 1.25rem;
   margin-bottom: 1.25rem;
+  overflow-wrap: break-word;
 }
 
 .box-flex {
