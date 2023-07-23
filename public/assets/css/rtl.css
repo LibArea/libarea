@@ -24,3 +24,8 @@
   padding: 5px;
   float: left;
 }
+
+.showPassword {
+  left: 5px;
+  right: auto;
+}
