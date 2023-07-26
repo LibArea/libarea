@@ -13,7 +13,7 @@
     <?php foreach ($data['writers'] as $ind => $row) : ?>
       <div class="flex flex-auto items-center mb20">
         <div class="w94">
-          <?= $row['hits_count']; ?>
+          <?= Html::formatToHuman($row['hits_count']); ?>
         </div>
         <div class="flex">
           <a class="flex items-center hidden gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">

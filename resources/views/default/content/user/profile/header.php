@@ -79,7 +79,7 @@ endif;
           <?php if ($data['counts']['count_posts'] > 0) : ?>
             <div class="ml15 mr15 center box-number">
               <a class="focus-user sky" href="<?= url('profile.posts', ['login' => $profile['login']]); ?>">
-                <?= $data['counts']['count_posts']; ?>
+                <?= Html::formatToHuman($data['counts']['count_posts']); ?>
               </a>
               <div class="uppercase mt5 text-sm gray-600"><?= __('app.posts'); ?></div>
             </div>
@@ -90,7 +90,7 @@ endif;
           <?php if ($comentsCount > 0) : ?>
             <div class="ml15 mr15 center box-number">
               <a class="focus-user sky" href="<?= url('profile.comments', ['login' => $profile['login']]); ?>">
-                <?= $comentsCount; ?>
+                <?= Html::formatToHuman($comentsCount); ?>
               </a>
               <div class="uppercase mt5 text-sm gray-600"><?= __('app.comments'); ?></div>
             </div>

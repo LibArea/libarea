@@ -30,7 +30,7 @@
               <li class="mb10">
                 <a class="gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">
                   <?= Img::avatar($row['avatar'], $row['login'], 'img-sm', 'max'); ?>
-                  <?= $row['login']; ?> (<?= $row['hits_count']; ?>)
+                  <?= $row['login']; ?> (<?= Html::formatToHuman($row['hits_count']); ?>)
                 </a>
               </li>
             <?php endforeach; ?>
