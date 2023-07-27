@@ -21,7 +21,7 @@ return [
     // end
 
     'all_users'                 => '与会者名单',
-    'all_users_info'            => '参加者名单，按他们在网站上的活动顺序排列',
+    'all_users_info'            => '所有参加者均已在网站上注册',
     'all_users_desc'            => '参与者按照他们在网站上的活动顺序排列。 能够查看配置文件数据',
     
     'new_users'                 => '新成员',

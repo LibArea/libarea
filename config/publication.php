@@ -11,5 +11,5 @@ return [
     
     // Enable (true) merge responses if a member posts multiple responses one after the other
     // Включить (true) слияние ответов, если участник публикует множество ответов один за другим
-    'merge_answers' => false,
+    'merge_answers' => true,
 ]; 

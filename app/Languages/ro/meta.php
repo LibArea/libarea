@@ -21,7 +21,7 @@ return [
     // end
 
     'all_users'                 => 'Lista participanților',
-    'all_users_info'            => 'Lista participanților în ordinea activității lor pe site',
+    'all_users_info'            => 'Toți participanții s-au înscris pe site',
     'all_users_desc'            => 'Membrii aranjați în ordinea activității lor pe site. Posibilitatea de a vizualiza informațiile de profil',
     
     'new_users'                 => 'Membri noi',

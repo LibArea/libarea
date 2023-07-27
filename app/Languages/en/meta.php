@@ -21,7 +21,7 @@ return [
     // end
 
     'all_users'                 => 'List of participants',
-    'all_users_info'            => 'List of participants in the order of their activity on the site',
+    'all_users_info'            => 'All participants registered on the site',
     'all_users_desc'            => 'Members arranged in order of their activity on the site. Ability to view profile information',
     
     'new_users'                 => 'New Members',
