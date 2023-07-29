@@ -29,3 +29,5 @@
   left: 5px;
   right: auto;
 }
+
+.d-header_contents .btn-outline-primary { width: 120px; }
