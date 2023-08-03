@@ -46,7 +46,7 @@
             <?= $fav['item_title']; ?>
           </a>
           <span class="green text-sm">
-            <?= Img::website($fav['item_domain'], 'favicon', $fav['item_domain'], 'favicons'); ?>
+            <?= Img::website('favicon', host($fav['item_url']), 'favicons mr5'); ?>
             <?= $fav['item_domain']; ?>
             <a target="_blank" href="<?= $fav['item_url']; ?>" class="item_cleek" data-id="<?= $fav['item_id']; ?>" rel="nofollow noreferrer ugc">
               <svg class="icons icon-small ml5">

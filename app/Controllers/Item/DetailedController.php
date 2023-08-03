@@ -37,6 +37,8 @@ class DetailedController extends Controller
         $content_img = Img::PATH['thumbs'] . 'default.png';
         $host = host($item['item_url']);
 
+        Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
+
         if (file_exists(HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . $host . '.png')) {
             $content_img =  Img::PATH['thumbs'] . $host . '.png';
         }
