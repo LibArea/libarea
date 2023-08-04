@@ -42,19 +42,18 @@
             <?= $fav['post_title']; ?>
           </a>
         <?php elseif ($fav['action_type'] == 'website') : ?>
-          <a class="block" href="<?= url('web.website', ['slug' => $fav['item_domain']]); ?>">
+          <a class="block" href="<?= url('website', ['id' => $fav['item_id'], 'slug' => $fav['item_slug']]); ?>">
             <?= $fav['item_title']; ?>
           </a>
-          <span class="green text-sm">
+          <div class="text-sm">
+            <?= fragment($fav['item_content'], 82); ?>...
+          </div>
+          <div class="text-sm">
             <?= Img::website('favicon', host($fav['item_url']), 'favicons mr5'); ?>
-            <?= $fav['item_domain']; ?>
-            <a target="_blank" href="<?= $fav['item_url']; ?>" class="item_cleek" data-id="<?= $fav['item_id']; ?>" rel="nofollow noreferrer ugc">
-              <svg class="icons icon-small ml5">
-                <use xlink:href="/assets/svg/icons.svg#link"></use>
-              </svg>
+            <a target="_blank" href="<?= $fav['item_url']; ?>" class="item_cleek green" data-id="<?= $fav['item_id']; ?>" rel="nofollow noreferrer ugc">
               <?= $fav['item_url']; ?>
             </a>
-          </span>
+          </div>
         <?php else : ?>
           <a href="<?= post_slug($fav['post']['post_id'], $fav['post']['post_slug']); ?>#answer_<?= $fav['answer_id']; ?>">
             <?= $fav['post']['post_title']; ?>
