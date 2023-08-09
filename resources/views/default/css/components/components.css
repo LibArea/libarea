@@ -126,7 +126,7 @@ h5 {
 .box-search {
   position: relative;
   width: 63%;
-  margin: 10px 45px 10px 97px;
+  margin: 10px 45px 10px 0;
 }
 
 .d-header.show .d-header-post.none,
@@ -150,6 +150,14 @@ h5 {
 
 .d-header.scroll-hide-search.show .box-search { display: none; }
 /* end */
+
+.box-logo {
+  width: 209px;
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  color: var(--gray-600);
+}
 
 .cut-off {
   width: 75%;

@@ -14,7 +14,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?' . config('assembly-js-c
     <div class="wrap wrap-max">
       <div class="d-header_contents">
 
-        <div class="flex items-center gray-600 gap-min">
+        <div class="box-logo">
           <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>
         </div>
 

@@ -18,7 +18,7 @@ $post   = $data['post'] ?? false;
     <div class="wrap">
       <div class="d-header_contents">
 
-        <div class="flex items-center gray-600 gap-min">
+        <div class="box-logo">
           <svg id="togglemenu" class="icons pointer">
             <use xlink:href="/assets/svg/icons.svg#menu"></use>
           </svg>

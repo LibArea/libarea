@@ -12,15 +12,13 @@ Request::getHead()->addStyles('/assets/css/style.css?21');
   <header class="d-header">
     <div class="wrap">
       <div class="d-header_contents">
-        <div class="flex items-center gray-600 gap-min mr20">
-          <svg id="togglemenu" class="icons pointer">
-            <use xlink:href="/assets/svg/icons.svg#menu"></use>
-          </svg>
-
-          <svg class="icons menu__button none">
-            <use xlink:href="/assets/svg/icons.svg#menu"></use>
-          </svg>
-
+        <svg id="togglemenu" class="icons pointer">
+          <use xlink:href="/assets/svg/icons.svg#menu"></use>
+        </svg>
+        <svg class="icons menu__button none">
+          <use xlink:href="/assets/svg/icons.svg#menu"></use>
+        </svg>
+        <div class="box-logo ml10 mr20">
           <a class="logo" href="<?= url('admin'); ?>"><?= __('admin.home'); ?></a>
           <div class="gray-600">/</div>
           <a class="gray-600" href="/">
