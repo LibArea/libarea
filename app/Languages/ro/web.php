@@ -102,7 +102,7 @@ return [
     'website_correctness'   => 'Adresa (URL) site-ului nu este corectă',
     'site_replay'           => 'Un astfel de site există deja în sistem',
 
-    'data_help'         => '<i class="gray-600">Format antet:</i><br> «LibArea» — comunitate<br><br><i class="gray-600">Descriere (fără reclame):</i><br> ...ce este pe site?<i>',
+    'data_help'         => '<i class="gray-600">Format antet:</i><br> «LibArea» — comunitate<br><br><i class="gray-600">Descriere (fără reclame):</i><br> ...ce este pe site?',
     'admin_help'         => 'Secțiune închisă disponibilă numai personalului',
     
     'add_category'      => 'Adăugați o categorie',

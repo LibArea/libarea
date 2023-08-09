@@ -101,7 +101,7 @@ return [
     'website_correctness'   => 'The address (URL) of the site is not correct',
     'site_replay'           => 'Such a site already exists in the system',
 
-    'data_help'         => '<i class="gray-600">Title Format:</i><br> «LibArea» — community<br><br><i class="gray-600">Description (no ads)):</i><br> ...what is on the site?<i>',
+    'data_help'         => '<i class="gray-600">Title Format:</i><br> «LibArea» — community<br><br><i class="gray-600">Description (no ads)):</i><br> ...what is on the site?',
     'admin_help'         => 'Closed section available only to staff...',
     
     'add_category'      => 'Add category',

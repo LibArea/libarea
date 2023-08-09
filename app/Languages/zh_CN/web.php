@@ -101,7 +101,7 @@ return [
     'website_correctness'   => '网站地址（URL）不正确',
     'site_replay'           => '此网站已存在系统中',
 
-    'data_help'         => '<i class="gray-600">标题格式:</i><br> «LibArea» — 社区<br><br><i class="gray-600">描述(无广告):</i><br> ...网站上有什么？<i>',
+    'data_help'         => '<i class="gray-600">标题格式:</i><br> «LibArea» — 社区<br><br><i class="gray-600">描述(无广告):</i><br> ...网站上有什么？',
     'admin_help'         => '僅對員工開放的封閉部分',
     
     'add_category'      => '添加类别',

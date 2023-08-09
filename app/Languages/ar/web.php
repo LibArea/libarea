@@ -100,7 +100,7 @@ return [
     'website_correctness'   => 'العنون (الرابط) لهذا الموقع غير صحيح',
     'site_replay'           => 'موقع مماثل موجود بالفعل',
 
-    'data_help'         => '<i class="gray-600">صيغة العنوان:</i><br> «LibArea» — community<br><br><i class="gray-600">الوصف (بدون اعلانات)):</i><br> ...ماذا يوجد بالموقع؟<i>',
+    'data_help'         => '<i class="gray-600">صيغة العنوان:</i><br> «LibArea» — community<br><br><i class="gray-600">الوصف (بدون اعلانات)):</i><br> ...ماذا يوجد بالموقع؟',
     'admin_help'         => 'قسم مغلق متاح فقط للموظفين',
     
     'add_category'      => 'اضافة تصنيف',
