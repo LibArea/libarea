@@ -1,8 +1,8 @@
 <?= insert('/_block/add-js-css');
 $domain = $data['domain']; ?>
 
-<div id="contentWrapper" class="wrap wrap-max">
-  <main class="w-100">
+<div id="contentWrapper" class="wrap wrap-max justify-between">
+  <main>
     <div class="max-w780">
 
       <?= insert('/_block/navigation/breadcrumbs', [
@@ -59,7 +59,7 @@ $domain = $data['domain']; ?>
       <h4 class="uppercase-box"><?= __('web.help'); ?></h4>
       <?= __('web.data_help'); ?>
     </div>
-    
+
     <?php if (UserData::checkAdmin()) { ?>
       <div class="box border-lightgray text-sm">
         <h4 class="uppercase-box"><?= __('web.status'); ?></h4>

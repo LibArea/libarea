@@ -6,8 +6,6 @@ $post = $data['post'];
 <main class="wrap">
   <article class="post-full<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-      <div class="post-body">
-
         <div class="flex flex-row gap items-center">
           <?php if (!empty($data['blog'])) : ?>
             <a title="<?= $data['blog'][0]['facet_title']; ?>" class="text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
@@ -56,13 +54,12 @@ $post = $data['post'];
             <?= insert('/_block/admin-dropdown-post', ['post' => $post]); ?>
           <?php endif; ?>
         </div>
-      </div>
 
       <?php if ($post['post_thumb_img']) : ?>
         <?= Img::image($post['post_thumb_img'], $post['post_title'],  'thumb right ml15', 'post', 'thumbnails'); ?>
       <?php endif; ?>
 
-      <div class="post-body max-w780 full">
+      <div class="max-w780 full">
         <div class="content-body">
           <?= markdown($post['post_content'], 'text'); ?>
         </div>

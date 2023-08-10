@@ -27,7 +27,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?' . config('assembly-js-c
         </div>
 
         <?php if (!UserData::checkActiveUser()) : ?>
-          <div class="flex gap-max items-center">
+          <div class="flex gap-max items-center mb-mt5">
             <div id="toggledark" class="gray-600">
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
@@ -43,7 +43,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?' . config('assembly-js-c
             </a>
           </div>
         <?php else : ?>
-          <div class="flex gap-max items-center">
+          <div class="flex gap-max items-center mb-mt5">
             <a id="toggledark" class="gray-600"><svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg></a>

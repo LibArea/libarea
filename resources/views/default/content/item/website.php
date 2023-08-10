@@ -1,6 +1,6 @@
 <?php $item = $data['item']; ?>
-<div id="contentWrapper" class="wrap wrap-max">
-  <main class="w-100" itemscope itemtype="https://schema.org/WebSite">
+<div id="contentWrapper" class="wrap wrap-max justify-between">
+  <main itemscope itemtype="https://schema.org/WebSite">
     <a class="text-sm" href="<?= url('web'); ?>">
       << <?= __('app.catalog'); ?></a>
         <h1 itemprop="name" class="m0"><?= $item['item_title']; ?>

@@ -1,5 +1,5 @@
-<div id="contentWrapper" class="wrap wrap-max">
-  <main class="w-100">
+<div id="contentWrapper" class="wrap wrap-max justify-between">
+  <main>
     <a class="text-sm" href="<?= url('web'); ?>">
       << <?= __('web.catalog'); ?></a>
         <span class="gray-600">/ <?= __('web.deleted'); ?></span>

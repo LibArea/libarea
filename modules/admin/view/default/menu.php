@@ -5,7 +5,7 @@
   </ul>
 </div>
 
-<main class="w-100">
+<main class="indent-body">
   <?php if ($data['type'] != 'admin') : ?>
     <div class="mb15">
       <?= insert('/_block/navigation/breadcrumbs', [

@@ -1,10 +1,12 @@
 <main>
-  <?= insert('/content/user/setting/nav'); ?>
+  <div class="indent-body">
+    <?= insert('/content/user/setting/nav'); ?>
 
-  <form class="max-w780" action="<?= url('setting.change', ['type' => 'setting']); ?>" method="post">
-    <?php csrf_field(); ?>
-    <?= insert('/_block/form/setting', ['data' => $data]); ?>
-  </form>
+    <form class="max-w780" action="<?= url('setting.change', ['type' => 'setting']); ?>" method="post">
+      <?php csrf_field(); ?>
+      <?= insert('/_block/form/setting', ['data' => $data]); ?>
+    </form>
+  </div>
 </main>
 
 <aside>
@@ -34,57 +36,57 @@
   document.addEventListener('DOMContentLoaded', () => {
     let dialogEmail = getById('my-email');
     let dialog = new A11yDialog(dialogEmail);
-    
+
     dialogEmail.addEventListener('show', function(event) {
 
-        let flag = document.getElementById("flag");
-        flag.addEventListener('click', function(e) {
-            
-          let new_email = document.getElementById('in_email').value;
-            
-          dialog.hide();
+      let flag = document.getElementById("flag");
+      flag.addEventListener('click', function(e) {
 
-          fetch("/new/email", {
-              method: "POST",
-              body: "email=" + new_email + "&_token=" + token,
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+        let new_email = document.getElementById('in_email').value;
+
+        dialog.hide();
+
+        fetch("/new/email", {
+            method: "POST",
+            body: "email=" + new_email + "&_token=" + token,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          })
+          .then((response) => {
+            return response.json();
+          }).then((text) => {
+
+            if (text === 'errort') {
+              var text = '<?= __('msg.email_correctness'); ?>';
+              var color = 'red';
+            } else if (text === 'repeat') {
+              var text = '<?= __('msg.email_replay'); ?>';
+              var color = 'red';
+            } else {
+              var text = '<?= __('msg.new_email'); ?>';
+              var color = 'green';
+            }
+
+            Notice(text, 4500, {
+              valign: 'bottom',
+              align: 'center',
+              styles: {
+                backgroundColor: color,
+                fontSize: '18px'
               }
-            })
-            .then((response) => {
-              return response.json();
-            }).then((text) => {
-                
-                if (text === 'errort') {
-                   var text =  '<?= __('msg.email_correctness'); ?>';
-                   var color =  'red';
-                } else if (text === 'repeat') {  
-                   var text =  '<?= __('msg.email_replay'); ?>';
-                   var color =  'red';
-                } else {
-                    var text =  '<?= __('msg.new_email'); ?>';
-                    var color =  'green';
-                }  
-           
-                 Notice(text, 4500, {
-                    valign: 'bottom',
-                    align: 'center',
-                    styles: {
-                      backgroundColor: color,
-                      fontSize: '18px'
-                    }
-                  }); 
-
-                reload();
             });
-        });       
+
+            reload();
+          });
+      });
     });
-    
-   function reload(){
-      setTimeout(function(){
+
+    function reload() {
+      setTimeout(function() {
         location.reload();
       }, 1500)
     }
 
   });
-</script>  
+</script>

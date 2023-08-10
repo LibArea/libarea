@@ -4,7 +4,7 @@
     <p><?= __('web.banner_info'); ?>.</p>
   </div>
 <?php endif; ?>
-<div class="item-categories">
+<div class="item-categories mb-mt5">
   <?php foreach (config('catalog/home-categories') as $cat) : ?>
     <div class="categories-telo">
       <a class="text-2xl block" href="<?= url('category', ['sort' => 'all', 'slug' => $cat['url']]); ?>">
@@ -26,8 +26,8 @@
   <?php endforeach; ?>
 </div>
 
-<div id="contentWrapper" class="wrap wrap-max">
-  <main class="w-100">
+<div id="contentWrapper" class="wrap wrap-max justify-between">
+  <main>
     <h2 class="m0 mb10"><?= __('web.new_sites'); ?></h2>
     <?php if (!empty($data['items'])) : ?>
       <?= insert('/content/item/item-card', ['data' => $data, 'sort' => 'all']); ?>
@@ -36,9 +36,9 @@
     <?php endif; ?>
   </main>
   <aside>
-    <div class="box bg-beige max-w300"><?= __('web.sidebar_info'); ?></div>
+    <div class="box bg-beige"><?= __('web.sidebar_info'); ?></div>
     <?php if (UserData::checkActiveUser()) : ?>
-      <div class="box bg-lightgray max-w300">
+      <div class="box bg-lightgray">
         <h4 class="uppercase-box"><?= __('web.menu'); ?></h4>
         <ul class="menu">
           <?= insert('/_block/navigation/item/menu', ['data' => $data]); ?>

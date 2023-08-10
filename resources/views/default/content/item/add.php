@@ -1,6 +1,6 @@
 <?= insert('/_block/add-js-css'); ?>
-<div id="contentWrapper" class="wrap wrap-max">
-  <main class="w-100">
+<div id="contentWrapper" class="wrap wrap-max justify-between">
+  <main>
     <?= insert('/_block/navigation/breadcrumbs', [
       'list' => [
         [

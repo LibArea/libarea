@@ -1,5 +1,5 @@
-<div id="contentWrapper" class="wrap wrap-max">
-  <main class="w-100">
+<div id="contentWrapper" class="wrap wrap-max justify-between">
+  <main>
     <h2 class="mb20">
       <?= __($data['sheet'] . '_view'); ?>
       <?php if ($data['count'] != 0) : ?><sup class="gray-600 text-sm"><?= $data['count']; ?></sup><?php endif; ?>

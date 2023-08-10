@@ -1,12 +1,14 @@
 <?= insert('/_block/add-js-css');
 $post = $data['post']; ?>
 <main>
-  <h2 class="m0"><?= __('app.edit_' . $post['post_type']); ?></h2>
+  <div class="indent-body">
+    <h2 class="m0"><?= __('app.edit_' . $post['post_type']); ?></h2>
 
-  <form class="max-w780" action="<?= url('content.change', ['type' => $post['post_type']]); ?>" method="post" enctype="multipart/form-data">
-    <?= csrf_field() ?>
-    <?= insert('/_block/form/edit-post', ['post' => $post, 'data' => $data]); ?>
-  </form>
+    <form class="max-w780" action="<?= url('content.change', ['type' => $post['post_type']]); ?>" method="post" enctype="multipart/form-data">
+      <?= csrf_field() ?>
+      <?= insert('/_block/form/edit-post', ['post' => $post, 'data' => $data]); ?>
+    </form>
+  </div>
 </main>
 <aside>
   <div class="box bg-beige">

@@ -4,6 +4,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
 <main>
+  <div class="indent-body">
   <div class="flex justify-between mb15">
     <ul class="nav">
       <?= insert(
@@ -45,6 +46,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
   <?php else : ?>
     <?= __('app.team_not_users'); ?>
   <?php endif; ?>
+  </div>
 </main>
 <aside>
   <div class="box bg-beige">

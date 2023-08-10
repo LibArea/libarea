@@ -1,5 +1,5 @@
 <?php if (!empty($data['answers'])) : ?>
-  <div>
+  <div class="comment-body">
     <div class="flex justify-between mb20">
       <h2 class="lowercase mb15 text-2xl"><?= Html::numWord($post['amount_content'], __('app.num_answer'), true); ?></h2>
       <ul class="nav scroll-menu">
@@ -52,7 +52,7 @@
                   <?php endif; ?>
                   <?php if ($answer['answer_lo']) : ?>
                     <svg class="icons red">
-                       <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
+                      <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
                     </svg>
                   <?php endif; ?>
                 </div>

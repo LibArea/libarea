@@ -1,6 +1,6 @@
 <?php $code = $data['code']; ?>
-<div id="contentWrapper" class="wrap wrap-max">
-  <main class="w-100">
+<div id="contentWrapper" class="wrap wrap-max justify-between">
+  <main>
     <a class="text-sm" href="<?= url('web'); ?>">
       << <?= __('web.catalog'); ?></a>
         <span class="gray-600">/ <?= __('web.status'); ?></span>
@@ -24,8 +24,8 @@
 
         <?php foreach ($data['status'] as $st) : ?>
           <div class="gray text-sm">
-            <a href="<?= url('website', ['id' => $st['item_id'], 'slug' => $st['item_slug']]); ?>">#<?= $st['item_id']; ?></a> 
-            
+            <a href="<?= url('website', ['id' => $st['item_id'], 'slug' => $st['item_slug']]); ?>">#<?= $st['item_id']; ?></a>
+
             <span class="green"><?= $st['item_url']; ?></span>
             <?= status_it($st['status_list']); ?>
           </div>
@@ -35,14 +35,14 @@
 </div>
 
 
- <?php function status_it($list)
-    {
-        $status_list = preg_split('/(@)/', $list ?? false);
+<?php function status_it($list)
+{
+  $status_list = preg_split('/(@)/', $list ?? false);
 
-        $result = [];
-        foreach (array_chunk($status_list, 2) as $row) { 
-            $result[] = '' . $row[0] . ' - <small class="gray-600">' . $row[1] . '</small>  ';
-        }
+  $result = [];
+  foreach (array_chunk($status_list, 2) as $row) {
+    $result[] = '' . $row[0] . ' - <small class="gray-600">' . $row[1] . '</small>  ';
+  }
 
-        return implode($result);
-    } ?>
+  return implode($result);
+} ?>

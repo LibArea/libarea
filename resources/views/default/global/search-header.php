@@ -12,14 +12,13 @@ $q = $data['q'];
 <body <?php if (Request::getCookie('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
 
   <header class="d-header">
-    <div class="wrap wrap-max">
       <div class="d-header_contents">
 
         <div class="box-logo">
           <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>
         </div>
 
-        <div class="box-search ml20">
+        <div class="box-search">
           <form method="get" action="<?= url('search.go'); ?>">
             <input type="text" name="q" value="<?= $q; ?>" placeholder="<?= __('search.find'); ?>" class="search">
             <input name="cat" value="<?= $uri; ?>" type="hidden">
@@ -69,7 +68,6 @@ $q = $data['q'];
         <?php endif; ?>
 
       </div>
-    </div>
   </header>
   <div class="ml20">
     <ul class="nav inline">

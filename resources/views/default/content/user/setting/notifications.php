@@ -1,9 +1,11 @@
 <main>
-  <?= insert('/content/user/setting/nav'); ?>
-  <form class="max-w780" action="<?= url('setting.change', ['type' => 'notification']); ?>" method="post">
-    <?php csrf_field(); ?>
-    <?= insert('/_block/form/setting-notifications', ['data' => $data]); ?>
-  </form>
+  <div class="indent-body">
+    <?= insert('/content/user/setting/nav'); ?>
+    <form class="max-w780" action="<?= url('setting.change', ['type' => 'notification']); ?>" method="post">
+      <?php csrf_field(); ?>
+      <?= insert('/_block/form/setting-notifications', ['data' => $data]); ?>
+    </form>
+  </div>
 </main>
 
 <aside>

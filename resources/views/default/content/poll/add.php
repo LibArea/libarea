@@ -1,22 +1,24 @@
 <main>
-  <ul class="nav">
-    <li><a href="<?= url('polls'); ?>"><?= __('app.all'); ?></a></li>
-    <li class="active"><?= __('app.add_poll'); ?></li>
-  </ul>
-  <form action="<?= url('content.create', ['type' => 'poll']); ?>" id="myform" method="post">
-    <?= csrf_field() ?>
-    <fieldset class="max-w780">
-      <input type="text" name="title" />
-    </fieldset>
-    <fieldset class="max-w300">
-      <p><?= __('app.option'); ?> 1: <input type="text" id="in1" name="1" /></p>
-      <p><?= __('app.option'); ?> 2: <input type="text" id="in2" name="2" /></p>
-    </fieldset>
-    <div class="flex gap items-center">
-      <div class="add-el gray-600 text-sm">+ <?= __('app.option'); ?></div>
-      <?= Html::sumbit(__('app.add_poll')); ?>
-    </div>
-  </form>
+  <div class="indent-body">
+    <ul class="nav">
+      <li><a href="<?= url('polls'); ?>"><?= __('app.all'); ?></a></li>
+      <li class="active"><?= __('app.add_poll'); ?></li>
+    </ul>
+    <form action="<?= url('content.create', ['type' => 'poll']); ?>" id="myform" method="post">
+      <?= csrf_field() ?>
+      <fieldset class="max-w780">
+        <input type="text" name="title" />
+      </fieldset>
+      <fieldset class="max-w300">
+        <p><?= __('app.option'); ?> 1: <input type="text" id="in1" name="1" /></p>
+        <p><?= __('app.option'); ?> 2: <input type="text" id="in2" name="2" /></p>
+      </fieldset>
+      <div class="flex gap items-center">
+        <div class="add-el gray-600 text-sm">+ <?= __('app.option'); ?></div>
+        <?= Html::sumbit(__('app.add_poll')); ?>
+      </div>
+    </form>
+  </div>
 </main>
 <aside>
   <div class="box box-shadow-all text-sm">

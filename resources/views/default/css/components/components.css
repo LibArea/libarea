@@ -317,9 +317,13 @@ a:hover > img,
 .focus-id:hover { cursor: pointer } 
 .underline-hover:hover { text-decoration: underline; }
 
+.post-full,
+.comment-body,
+.d-header_contents,
+.indent-body { margin: 0 0.5rem 0 0.5rem; }
+
 .content-body {
   max-width: 810px;
-  margin-top: 15px;
   overflow-wrap: break-word;
 }
 

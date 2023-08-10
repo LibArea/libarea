@@ -5,15 +5,15 @@
     </h2>
 
     <?php
-    foreach ($data['answers'] as  $answer) : 
-    $post_url = post_slug($post['post_id'], $post['post_slug']);
+    foreach ($data['answers'] as  $answer) :
+      $post_url = post_slug($post['post_id'], $post['post_slug']);
     ?>
 
       <?php if ($answer['answer_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
       <?php if ($answer['answer_published'] == 0 && $answer['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
       <div class="block-answer br-bottom<?php if ($answer['answer_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
-      
+
         <?= insert('/content/post/answer-menu', ['post_url' => $post_url, 'post' => $post, 'answer' => $answer]); ?>
 
         <?php if ($answer['answer_lo']) : ?>

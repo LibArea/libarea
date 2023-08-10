@@ -1,11 +1,13 @@
 <?= insert('/_block/add-js-css'); ?>
 <main>
-  <h2 class="title"><?= __('app.add_post'); ?></h2>
+  <div class="indent-body">
+    <h2 class="title"><?= __('app.add_post'); ?></h2>
 
-  <form class="max-w780" action="<?= url('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
-    <?= csrf_field() ?>
-    <?= insert('/_block/form/add-post', ['data' => $data]); ?>
-  </form>
+    <form class="max-w780" action="<?= url('content.create', ['type' => 'post']); ?>" method="post" enctype="multipart/form-data">
+      <?= csrf_field() ?>
+      <?= insert('/_block/form/add-post', ['data' => $data]); ?>
+    </form>
+  </div>
 </main>
 <aside>
   <div class="box bg-beige">

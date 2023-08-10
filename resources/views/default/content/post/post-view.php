@@ -7,7 +7,6 @@ $blog = $data['blog'][0] ?? null;
 <main>
   <article class="post-full mb15<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-      <div class="post-body">
         <?php if (!empty($data['united'])) : ?>
           <div class="box bg-lightyellow mb15 gray-600">
             <svg class="icons">
@@ -64,7 +63,6 @@ $blog = $data['blog'][0] ?? null;
           <?php endif; ?>
 
         </div>
-      </div>
 
       <?php if ($post['post_thumb_img']) : ?>
         <div class="img-preview">
@@ -72,7 +70,7 @@ $blog = $data['blog'][0] ?? null;
         </div>
       <?php endif; ?>
 
-      <div class="post-body max-w780 full">
+      <div class="max-w780 full">
         <div class="content-body mb15">
           <?= markdown($post['post_content'], 'text'); ?>
         </div>

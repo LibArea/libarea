@@ -75,5 +75,10 @@ body.item.dark .box {
     margin-bottom: 10px;
   }  
 
+  .wrap.wrap-max {
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
+
   .item main { margin: 0.5rem; } 
 }

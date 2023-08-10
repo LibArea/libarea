@@ -85,8 +85,8 @@ use Hleb\Constructor\Handlers\Request; ?>
   <?php endif; ?>
 <?php endif; ?>
 
-<div id="contentWrapper" class="wrap wrap-max">
-  <main class="w-100">
+<div id="contentWrapper" class="wrap wrap-max justify-between">
+  <main>
     <?= insert('/_block/navigation/item/nav', ['data' => $data]); ?>
 
     <?php if (!empty($data['items'])) : ?>
@@ -99,10 +99,10 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $url); ?>
   </main>
   <aside>
-    <div class="box bg-beige max-w300"><?= markdown($data['category']['facet_info'] ?? '', 'line'); ?></div>
+    <div class="box bg-beige"><?= markdown($data['category']['facet_info'] ?? '', 'line'); ?></div>
 
     <?php if ($data['related_posts']) : ?>
-      <div class="box bg-blue-200 max-w300">
+      <div class="box bg-blue-200">
         <h4 class="uppercase-box"><?= __('web.related_posts'); ?></h4>
         <ul>
           <?php foreach ($data['related_posts'] as $rp) : ?>
@@ -115,7 +115,7 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?php endif; ?>
 
     <?php if (UserData::checkActiveUser()) : ?>
-      <div class="box bg-lightgray max-w300">
+      <div class="box bg-lightgray">
         <h4 class="uppercase-box"><?= __('web.menu'); ?></h4>
         <ul class="menu">
           <?= insert('/_block/navigation/item/menu', ['data' => $data]); ?>

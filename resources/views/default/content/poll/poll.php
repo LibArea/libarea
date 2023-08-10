@@ -1,6 +1,6 @@
 <?php
-  $answer_votes = 0; 
-  $count = $poll['count'] ? $poll['count'] : 1;
+$answer_votes = 0;
+$count = $poll['count'] ? $poll['count'] : 1;
 ?>
 
 <?php if ($poll['question']) : ?>
@@ -23,8 +23,8 @@
 
     <?php if (UserData::checkActiveUser()) : ?>
 
-      <?php 
-        foreach ($poll['answers'] as $value) :
+      <?php
+      foreach ($poll['answers'] as $value) :
         $num = $value['answer_votes'] / $count;
         $answer_votes += $value['answer_votes'];
       ?>
@@ -84,7 +84,7 @@
     <?php endif; ?>
 
     <div class="gray-600 text-sm mt15">
-      <?= __('app.total_votes'); ?>: <?= $answer_votes;?> • <span class="lowercase"><?= Html::langDate($poll['question']['poll_date']); ?></span>
+      <?= __('app.total_votes'); ?>: <?= $answer_votes; ?> • <span class="lowercase"><?= Html::langDate($poll['question']['poll_date']); ?></span>
     </div>
   </div>
 <?php endif; ?>

@@ -36,9 +36,9 @@
             <?= $answer['answer_ip']; ?>
           </a>
         <li>
-      <?php endif; ?>
+        <?php endif; ?>
 
-      <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
+        <?php if (UserData::getUserId() != $answer['answer_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
         <li>
           <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" data-a11y-dialog-show="my-dialog">
             <svg class="icons">
@@ -48,7 +48,7 @@
           </a>
         </li>
       <?php endif; ?>
-      
+
       <?php if ($post['amount_content'] > 1) : ?>
         <?php if (UserData::getUserId() == $post['post_user_id'] || UserData::checkAdmin()) : ?>
           <li>

@@ -40,9 +40,9 @@ $facet  = $data['facet'] ?? false; ?>
       </a>
     </div>
 
-    <div class="wrap items-center flex justify-between">
+    <div class="wrap items-center flex justify-between mb-mt5">
       <div class="flex items-center" id="find">
-        <a title="<?= __('app.home'); ?>" class="logo ml5" href="/">
+        <a title="<?= __('app.home'); ?>" class="logo" href="/">
           <?= config('meta.name'); ?>
         </a>
       </div>
@@ -75,10 +75,11 @@ $facet  = $data['facet'] ?? false; ?>
               </svg>
             </div>
 
-            <a id="notif" class="gray-600" href="<?= url('notifications'); ?>">
+            <a id="notif" class="gray-600 relative" href="<?= url('notifications'); ?>">
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#bell"></use>
               </svg>
+              <span class="number-notif"></span>
             </a>
 
             <div class="relative">

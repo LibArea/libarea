@@ -4,6 +4,7 @@
   <?= insert('/content/messages/dialogue-column', ['dialogs' => $data['dialogs']]); ?>
 </div>
 <div class="w-70 mb-w-100">
+  <div class="indent-body">
   <a class="gray" href="<?= url('messages'); ?>">
     < <?= __('app.all'); ?></a>
       <div class="gray-600"><?= $data['sheet']; ?></div>
@@ -43,4 +44,5 @@
           <div class="br-bottom mb15"></div>
         <?php endforeach; ?>
       <?php endif; ?>
+   </div>   
 </div>

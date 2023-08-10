@@ -14,7 +14,7 @@
   <link rel="icon" sizes="512x512" href="/favicon-512.png" type="image/png">
   <link rel="manifest" href="/manifest.json">
   <meta name="csrf-token" content="<?= csrf_token(); ?>">
-  
+
   <link rel="search" type="application/opensearchdescription+xml" href="<?= url('opensearch'); ?>" title="<?= __('app.search'); ?>">
 
   <?php if ($lang == 'ar') : ?>
