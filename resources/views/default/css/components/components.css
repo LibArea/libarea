@@ -29,7 +29,8 @@ h5 {
   right: -10px;
 }
 
-.number-notif.show { display: block; }
+.number-notif.show,
+.video-pl { display: block; }
 
 /* См. https://feathericons.com/ и https://tabler-icons.io/ */
 .icons {

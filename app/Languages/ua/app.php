@@ -399,6 +399,7 @@ return [
     'invite_features'   => 'Ви можете запросити друзів',
 
     'content_deleted'   => '{name} видалено',
+    'topic_deleted'     => 'Тема видалена',
 
     'endless_scroll'        => 'Увімкнути скролл у стрічці?',
     'notification_email'    => 'Повідомляти по E-mail',

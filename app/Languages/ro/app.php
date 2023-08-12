@@ -399,6 +399,7 @@ return [
     'invite_features'   => 'Puteți invita prieteni',
 
     'content_deleted'   => '{name} îndepărtat',
+    'topic_deleted'     => 'Subiectul a fost șters',
 
     'endless_scroll'        => 'Activați derularea infinită?',
     'notification_email'    => 'Notificare prin e-mail',

@@ -12,7 +12,7 @@
       <svg class="icons icon-max">
         <use xlink:href="/assets/svg/icons.svg#x-octagon"></use>
       </svg>
-      <div class="mt5 gray"><?= __('app.remote'); ?></div>
+      <div class="mt5 gray"><?= __('app.topic_deleted'); ?></div>
     </div>
   <?php endif; ?>
 </main>

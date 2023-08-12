@@ -396,6 +396,7 @@ return [
     'invite_features'       => 'يمكنك دعوة الاصدقاء',
 
     'content_deleted'       => '{name} محذوف',
+    'topic_deleted'         => 'تم حذف الموضوع',
 
     'endless_scroll'        => 'تفعيل التمرير الى لا نهاية؟',
     'notification_email'    => 'تنبيه بواسطة البريد الالكتروني',

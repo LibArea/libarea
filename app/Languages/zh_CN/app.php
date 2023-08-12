@@ -400,6 +400,7 @@ return [
     'invite_features'   => '你可以邀请朋友',
 
     'content_deleted'   => '{name} 已删除',
+    'topic_deleted'     => '该主题已被删除',
 
     'endless_scroll'        => '启用无限滚动？',
     'notification_email'    => '通过邮件通知',

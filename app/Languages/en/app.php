@@ -398,7 +398,8 @@ return [
     'invited_you'           => 'You were invited by a member from this site. Enter invite',
     'invite_features'       => 'You can invite friends',
 
-    'content_deleted'   => '{name} deleted',
+    'content_deleted'       => '{name} deleted',
+    'topic_deleted'         => 'The topic has been deleted',
 
     'endless_scroll'        => 'Enable infinite scroll?',
     'notification_email'    => 'Notify by email',

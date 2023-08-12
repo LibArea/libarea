@@ -321,16 +321,14 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         $result = $result ? $result : ['1' => 1];
         $sql = "SELECT 
-                facet_id,
-                facet_title,
-                facet_slug,
-                facet_img,
-                facet_description,
-                facet_count
-                    FROM facets
-                        WHERE facet_id NOT IN(" . implode(',', $result ?? []) . ")
-                            AND facet_type = 'topic'
-                                ORDER BY facet_count DESC LIMIT 5";
+                    facet_id,
+                    facet_title,
+                    facet_slug,
+                    facet_img
+                        FROM facets
+                            WHERE facet_id NOT IN(" . implode(',', $result ?? []) . ")
+                                AND facet_type = 'topic' AND facet_is_deleted = 0 
+                                    ORDER BY facet_count DESC LIMIT 5";
 
         return DB::run($sql)->fetchAll();
     }
