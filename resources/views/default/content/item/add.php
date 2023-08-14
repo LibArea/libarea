@@ -1,24 +1,26 @@
 <?= insert('/_block/add-js-css'); ?>
 <div id="contentWrapper" class="wrap wrap-max justify-between">
   <main>
-    <?= insert('/_block/navigation/breadcrumbs', [
-      'list' => [
-        [
-          'name' => __('web.catalog'),
-          'link' => url('web')
-        ], [
-          'name' => __('web.add_website'),
-          'link' => 'red'
-        ],
-      ]
-    ]); ?>
+    <div class="indent-body">
+      <?= insert('/_block/navigation/breadcrumbs', [
+        'list' => [
+          [
+            'name' => __('web.catalog'),
+            'link' => url('web')
+          ], [
+            'name' => __('web.add_website'),
+            'link' => 'red'
+          ],
+        ]
+      ]); ?>
 
-    <form action="<?= url('content.create', ['type' => 'item']); ?>" class="max-w780" method="post">
-      <?= csrf_field() ?>
-      <?= insert('/_block/form/select/category', ['category' => $data['category'], 'action' => 'add']); ?>
-      <?= insert('/_block/form/add-website'); ?>
-      <?= Html::sumbit(__('web.add')); ?>
-    </form>
+      <form action="<?= url('content.create', ['type' => 'item']); ?>" class="max-w780" method="post">
+        <?= csrf_field() ?>
+        <?= insert('/_block/form/select/category', ['category' => $data['category'], 'action' => 'add']); ?>
+        <?= insert('/_block/form/add-website'); ?>
+        <?= Html::sumbit(__('web.add')); ?>
+      </form>
+    </div>
   </main>
   <aside>
     <div class="box box-shadow-all text-sm">

@@ -3,7 +3,7 @@ $domain = $data['domain']; ?>
 
 <div id="contentWrapper" class="wrap wrap-max justify-between">
   <main>
-    <div class="max-w780">
+    <div class="indent-body max-w780">
 
       <?= insert('/_block/navigation/breadcrumbs', [
         'list' => [

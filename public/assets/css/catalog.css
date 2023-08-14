@@ -68,17 +68,17 @@ body.item.dark .box {
   .item-cat {
     padding: 20px 20px 20px 15px;
   }
-  
+
   .categories-telo,
   .item-categories > div {
     width: 99%;
     margin-bottom: 10px;
-  }  
+  }
 
   .wrap.wrap-max {
     padding-left: .5rem;
     padding-right: .5rem;
   }
 
-  .item main { margin: 0.5rem; } 
+  .list-items { padding: 0 5px 0 0; }
 }
