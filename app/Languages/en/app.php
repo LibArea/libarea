@@ -105,7 +105,7 @@ return [
     'reset'             => 'Reset',
     'invited_guests'    => 'Invited',
     'nickname'          => 'Nickname',
-    'name'              => 'Имя',
+    'name'              => 'Name',
     'password'          => 'Password',
     'new_password'      => 'New Password',
     'old_password'      => 'Old Password',
