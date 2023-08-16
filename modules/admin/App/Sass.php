@@ -9,18 +9,18 @@ class Sass
     public static function collect()
     {
         foreach (config('assembly-js-css.path_css') as $key => $putch) {
-            self::buildCss($putch, $key);
+            self::buildCss(HLEB_GLOBAL_DIRECTORY . $putch, $key);
         }
         
         foreach (config('assembly-js-css.path_js') as $key => $putch) {
-            self::buildJs($putch, $key);
+            self::buildJs(HLEB_GLOBAL_DIRECTORY . $putch, $key);
         }
         
     }
 
     public static function buildCss($putch, $key)
     {
-        $minifier = new Minify\CSS($putch . 'build.css');
+        $minifier = new Minify\CSS($putch);
         $minifier->minify(HLEB_PUBLIC_DIR . '/assets/css/' . $key . '.css');
 
         return true;

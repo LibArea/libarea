@@ -25,7 +25,7 @@ class Css
     {
         $iconList = [];
 
-        $sprite = file_get_contents(config('assembly-js-css.svg_path'));
+        $sprite = file_get_contents(HLEB_PUBLIC_DIR . config('assembly-js-css.svg_path'));
         $result = preg_match_all("/<symbol[^>]*id=\"([-_a-z0-9]+)\"[^>]*>/i", $sprite, $matches);
 
         if ($result > 0) {
