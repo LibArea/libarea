@@ -3,6 +3,7 @@
 namespace App\Validate;
 
 use App\Models\AuthModel;
+use App\Services\Сheck\EmailSpam;
 use App\Services\Integration\Google;
 
 class RulesRegistration extends Validator
@@ -53,6 +54,10 @@ class RulesRegistration extends Validator
         // Check Email
         // Проверим Email
         self::email($data['email'], $redirect);
+
+        if (EmailSpam::index($data['email']) === true) {
+            is_return(__('msg.email_forbidden'), 'error', $redirect);
+        } 
 
         if (is_array(AuthModel::checkRepetitions($data['email'], 'email'))) {
             is_return(__('msg.email_replay'), 'error', $redirect);

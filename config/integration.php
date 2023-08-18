@@ -36,7 +36,10 @@ return [
 
     // Screenshots of the service https://screenshotone.com/
     // Скриншоты сервиса https://screenshotone.com/
-    'sc_access_key' => '***',
-    'sc_secret_key' => '***',
+    'sc_access_key'         => '***',
+    'sc_secret_key'         => '***',
     
+    // Enable spam detection (email) on stopforumspam.com
+    // Включить определение спама (email) по stopforumspam.com 
+    'stopforumspam'         => false,
 ];

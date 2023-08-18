@@ -47,6 +47,7 @@ return [
     'code_incorrect'        => '代碼不正確或已被使用',
     'yes_email_pass'        => '現在您可以使用您的電子郵件和密碼了。',
     'email_replay'          => '此電子郵件已在網站上',
+    'email_forbidden'       => '禁止使用指定郵箱註冊',
     'multiple_accounts'     => '不要註冊多個帳戶',
     'five_width'            => '封面寬度小於 500px',
     'five_format'           => '文件类型错误',

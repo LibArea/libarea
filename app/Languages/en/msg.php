@@ -47,6 +47,7 @@ return [
     'code_incorrect'        => 'The code is incorrect or has already been used',
     'yes_email_pass'        => 'Now you can use your email and password.',
     'email_replay'          => 'This email is already on the site',
+    'email_forbidden'       => 'Registration with the specified e-mail is forbidden',
     'multiple_accounts'     => 'Do not register multiple accounts',
     'five_width'            => 'Cover width less than 500px',
     'five_format'           => 'Wrong file type',

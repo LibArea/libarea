@@ -47,6 +47,7 @@ return [
     'code_incorrect'        => 'Codul este incorect sau a fost deja folosit',
     'yes_email_pass'        => 'Acum vă puteți folosi adresa de e-mail și parola.',
     'email_replay'          => 'Acest e-mail este deja pe site',
+    'email_forbidden'       => 'Înregistrarea la adresa de e-mail specificată este interzisă',
     'multiple_accounts'     => 'Nu înregistrați mai multe conturi',
     'five_width'            => 'Lățimea copertei mai mică de 500 px',
     'five_format'           => 'Tip de fișier greșit',
