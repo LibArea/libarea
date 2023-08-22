@@ -81,7 +81,10 @@ main { width: calc(100% - 590px); }
   iframe,
   video  { width: 100%; }
 
-  .box { padding: 1rem; }
+  .box {
+    padding: 1rem;
+    border-radius: 0;
+  }
 
   aside,
   .mb-none,

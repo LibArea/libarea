@@ -1,5 +1,5 @@
 <?php if (!empty($data['answers'])) : ?>
-  <div>
+  <div class="comment-body">
     <h2 class="lowercase m0 text-2xl">
       <?= Html::numWord($post['amount_content'], __('app.num_answer'), true); ?>
     </h2>
