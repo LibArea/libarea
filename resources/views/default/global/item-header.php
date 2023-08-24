@@ -23,7 +23,7 @@ Request::getHead()->addStyles('/assets/css/catalog.css?' . config('assembly-js-c
             <input data-id="category" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
             <input name="cat" value="website" type="hidden">
           </form>
-          <div class="search-box none" id="search_items"></div>
+          <div class="box-results none" id="search_items"></div>
         </div>
 
         <?php if (!UserData::checkActiveUser()) : ?>

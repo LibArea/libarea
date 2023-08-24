@@ -54,7 +54,7 @@ $post   = $data['post'] ?? false;
           <form class="form" method="get" action="<?= url('search.go'); ?>">
             <input data-id="topic" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
           </form>
-          <div class="search-box none" id="search_items"></div>
+          <div class="box-results none" id="search_items"></div>
         </div>
 
         <?php if (!UserData::checkActiveUser()) : ?>

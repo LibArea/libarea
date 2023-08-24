@@ -24,7 +24,7 @@ $q = $data['q'];
             <input name="cat" value="<?= $uri; ?>" type="hidden">
             <?= csrf_field() ?>
           </form>
-          <div class="search-box none" id="search_items"></div>
+          <div class="box-results none" id="search_items"></div>
         </div>
 
         <?php if (!UserData::checkActiveUser()) : ?>

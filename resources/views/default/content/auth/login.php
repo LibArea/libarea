@@ -1,6 +1,6 @@
 <main>
   <div class="indent-body">
-    <h1 class="title-max"><?= __('app.authorization'); ?></h1>
+    <h1 class="title"><?= __('app.authorization'); ?></h1>
 
     <form action="<?= url('enterLogin'); ?>" method="post">
       <?php csrf_field(); ?>

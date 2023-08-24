@@ -104,6 +104,7 @@ h5 {
   height: 100%;
   position: relative;
   justify-content: space-between;
+  margin: 0 0.5rem 0 0.5rem;
 }
 
 /* Search */
@@ -115,19 +116,19 @@ h5 {
   border-color: transparent;
 }
 
-.search-box {
+.box-search {
+  position: relative;
+  width: 63%;
+  margin: 10px 45px 10px 0;
+}
+
+.box-results {
   position: absolute;
   border-radius: 3px;
   box-shadow: 0 2px 4px -1px rgba(0,0,0,.15);
   background-color: var(--white);
   padding: 15px;
   z-index: 2;
-}
-
-.box-search {
-  position: relative;
-  width: 63%;
-  margin: 10px 45px 10px 0;
 }
 
 .d-header.show .d-header-post.none,
@@ -230,12 +231,6 @@ details[open] > summary {
   font-size: 1.3125rem;
 }
 
-.title-max {
-  margin: 0 0 20px 0;
-  font-weight: 500;
-  font-size: 1.5rem;
-}
-
 .txt-closed {
   padding: 10px;
   background-color: lightyellow;
@@ -317,11 +312,6 @@ a:hover > img,
 
 .focus-id:hover { cursor: pointer } 
 .underline-hover:hover { text-decoration: underline; }
-
-.post-full,
-.comment-body,
-.d-header_contents,
-.indent-body { margin: 0 0.5rem 0 0.5rem; }
 
 .content-body {
   max-width: 810px;

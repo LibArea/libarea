@@ -106,6 +106,8 @@ img {
 .p5-10 { padding: 5px 10px; }
 .p10-5 { padding: 10px 5px; }
 
+.indent-body { margin: 0 8px; }
+
 /*
  * Used colors (and background) in LibArea project
  *

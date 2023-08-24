@@ -7,7 +7,7 @@
 return [
 
     // To force an update
-    'version'     => 21,
+    'version'     => 14,
 
     // Path to svg sprite
     // Путь к спрайту svg

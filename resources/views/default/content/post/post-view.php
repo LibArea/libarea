@@ -5,7 +5,7 @@ $blog = $data['blog'][0] ?? null;
 ?>
 
 <main>
-  <article class="post-full mb15<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
+  <article class="indent-body mb15<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
     <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
         <?php if (!empty($data['united'])) : ?>
           <div class="box bg-lightyellow mb15 gray-600">

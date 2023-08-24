@@ -1,6 +1,6 @@
 <main>
   <div class="indent-body">
-    <h1 class="title-max"><?= __('app.' . $data['sheet']); ?></h1>
+    <h1 class="title"><?= __('app.' . $data['sheet']); ?></h1>
 
     <form class="max-w300" action="<?= url('register.add'); ?>" id="registration" method="post">
       <?php csrf_field(); ?>

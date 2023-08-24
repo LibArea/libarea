@@ -1,5 +1,5 @@
 <?php if (!empty($data['answers'])) : ?>
-  <div class="comment-body">
+  <div class="indent-body">
     <div class="flex justify-between mb20">
       <h2 class="lowercase mb15 text-2xl"><?= Html::numWord($post['amount_content'], __('app.num_answer'), true); ?></h2>
       <ul class="nav scroll-menu">
