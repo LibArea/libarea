@@ -2,7 +2,7 @@
 $category = $data['category'] ?? null;
 if ($category) : ?>
   <div class="flex justify-between tems-center mr20 mb15">
-    <h2 class="inline m0"><?= Html::numWord($data['count'], __('web.num_website'), false); ?>: <?= $data['count']; ?></h2>
+    <h2 class="inline m0"><?= $data['count']; ?> <span class="lowercase"><?= Html::numWord($data['count'], __('web.num_website'), false); ?></spam></h2>
     <ul class="nav">
       <li<?php if ($data['sort'] == 'all') { ?> class="active" <?php } ?>>
         <a href="<?= url('category', ['sort' => 'all', 'slug' => $category['facet_slug']]); ?>">

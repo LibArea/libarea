@@ -10,7 +10,7 @@ use Hleb\Constructor\Handlers\Request; ?>
   <h1 class="m0 flex gap">
     <?= $data['category']['facet_title']; ?>
     <?php if (UserData::checkAdmin()) : ?>
-      <div class="flex gap text-xs">
+      <div class="flex gap">
         <a class="gray-600" href="<?= url('content.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
           <svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#edit"></use>
@@ -35,7 +35,7 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?= $lt['facet_title']; ?>
         </a> <sup class="gray-600"><?= $lt['counts']; ?></sup>
         <?php if (UserData::checkAdmin()) : ?>
-          <a class="ml5" href="<?= url('content.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
+          <a class="ml5 gray-600" href="<?= url('content.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
             <sup><svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#edit"></use>
               </svg></i>
