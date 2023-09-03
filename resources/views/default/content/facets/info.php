@@ -5,7 +5,7 @@
     <h2 class="m0"><?= __('app.wiki'); ?></h2>
     <?= markdown($topic['facet_info'] ?? '', 'text'); ?>
   </div>
-  <div class="box">
+  <div class="ml20">
     <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
   </div>
 </main>

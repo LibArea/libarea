@@ -19,7 +19,7 @@ class Filter
 
         $content = str_replace(["\r\n", "\r", "\n", "#"], ' ', $content);
 
-        $str =  str_replace(['&gt;', '{cut}', '/'], '', strip_tags($content));
+        $str =  str_replace(['&gt;', '{cut}'], '', strip_tags($content));
 
         return self::fragment($str, $lenght);
     }  

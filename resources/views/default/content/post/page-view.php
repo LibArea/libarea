@@ -36,7 +36,7 @@
       <div class="mt5 mb10">
         <a class="gray" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
           <svg class="icons">
-            <use xlink:href="/assets/svg/icons.svg#info"></use>
+            <use xlink:href="/assets/svg/icons.svg#chevrons-right"></use>
           </svg> <?= $row['post_title']; ?>
         </a>
       </div>
