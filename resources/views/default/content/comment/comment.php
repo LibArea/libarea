@@ -16,7 +16,7 @@ foreach ($comments as $comment) :
         </div>
         <div><?= Html::votes($comment, 'answer'); ?></div>
       </div>
-      <a class="block cut-off" href="<?= post_slug($comment['post_id'], $comment['post_slug']); ?>#answer_<?= $comment['answer_id']; ?>">
+      <a class="block" href="<?= post_slug($comment['post_id'], $comment['post_slug']); ?>#answer_<?= $comment['answer_id']; ?>">
         <?= $comment['post_title']; ?>
       </a>
       <div class="ind-first-p max-w780"><?= markdown($comment['answer_content']); ?></div>
@@ -34,7 +34,7 @@ foreach ($comments as $comment) :
         </div>
         <div><?= Html::votes($comment, 'comment'); ?></div>
       </div>
-      <a class="block cut-off" href="<?= post_slug($comment['post_id'], $comment['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
+      <a class="block" href="<?= post_slug($comment['post_id'], $comment['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
         <?= $comment['post_title']; ?>
       </a>
       <div class="ind-first-p"><?= markdown($comment['comment_content']); ?></div>
