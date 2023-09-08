@@ -21,7 +21,7 @@
   </div>
 </main>
 <aside>
-  <div class="box box-shadow-all text-sm">
+  <div class="box shadow text-sm">
     <h4 class="uppercase-box"><?= __('app.help'); ?></h4>
     <?= __('help.add_poll'); ?>
   </div>

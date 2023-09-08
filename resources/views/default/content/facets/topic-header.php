@@ -1,4 +1,4 @@
-<div class="flex or-width flex-col box box-fon">
+<div class="flex or-width flex-col box shadow-bottom">
   <div class="flex justify-center gap items-center mb20">
     <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-lg', 'logo', 'max'); ?>
     <div>

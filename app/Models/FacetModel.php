@@ -324,6 +324,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_id,
                     facet_title,
                     facet_slug,
+                    facet_description,
                     facet_img
                         FROM facets
                             WHERE facet_id NOT IN(" . implode(',', $result ?? []) . ")
