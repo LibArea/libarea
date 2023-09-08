@@ -1,4 +1,4 @@
-<?php if (!empty($data['posts'])) : ?> <?= insert('/_block/recommended-topics', ['data' => $data]); ?>
+<?php if (!empty($data['posts'])) : ?>
   <?php $n = 0;
   foreach ($data['posts'] as $post) :
     $n++; ?>
