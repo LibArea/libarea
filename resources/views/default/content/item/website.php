@@ -15,7 +15,7 @@
 
         <div class="flex justify-between gap-max mb-block">
           <div class="w-40 mb-w-100 img-preview">
-            <?= Img::website('thumb', host($item['item_url']), 'w-100 box-shadow'); ?>
+            <?= Img::website('thumb', host($item['item_url']), 'w-100 shadow-bottom'); ?>
           </div>
           <div class="w-60 mb-w-100">
             <?= markdown($item['item_content'], 'text'); ?>
@@ -138,12 +138,12 @@
         <?php endif; ?>
   </main>
   <aside>
-    <div class="box box-shadow-all mt15">
+    <div class="box shadow mt15">
       <?php if ($data['similar']) : ?>
         <h4 class="uppercase-box"><?= __('web.recommended'); ?></h4>
         <?php foreach ($data['similar'] as $link) : ?>
           <a class="inline mr20 mb15 block text-sm" href="<?= url('website', ['id' => $link['item_id'], 'slug' => $link['item_slug']]); ?>">
-            <?= Img::website('thumb', host($link['item_url']), 'w-100 box-shadow'); ?>
+            <?= Img::website('thumb', host($link['item_url']), 'w-100 shadow-bottom'); ?>
             <?= $link['item_title']; ?>
           </a>
         <?php endforeach; ?>

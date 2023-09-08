@@ -11,7 +11,7 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?php endif; ?>
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
-    <div class="box box-fon article_<?= $post['post_id']; ?>">
+    <div class="box shadow-bottom article_<?= $post['post_id']; ?>">
 
       <div class="flex justify-between">
         <div class="mb15">

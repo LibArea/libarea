@@ -23,7 +23,7 @@
     </div>
   </main>
   <aside>
-    <div class="box box-shadow-all text-sm">
+    <div class="box shadow text-sm">
       <h4 class="uppercase-box"><?= __('web.help'); ?></h4>
       <?= __('web.data_help'); ?>
       <div>

@@ -152,9 +152,10 @@ img {
  *
  * Другое
  */
-.box-shadow { box-shadow: 0 2px 4px -1px rgba(0,0,0,0.15); }
-.box-shadow-all { box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
-.box-shadow-top { box-shadow:  0 -5px 5px -5px rgba(0,0,0,0.15); }
+.shadow { box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+.shadow-top { box-shadow:  0 -5px 5px -5px rgba(0,0,0,0.15); }
+.shadow-bottom { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
+
 .br-gray { border: 1px solid var(--gray-300); }
 .br-top-dotted { border: 1px dotted #ddd; }
 .br-bottom { border-bottom: 1px solid #ddd; }

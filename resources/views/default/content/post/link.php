@@ -1,5 +1,5 @@
 <main>
-  <div class="box box-fon">
+  <div class="box shadow-bottom">
     <h1 class="m0"><?= __('app.domain') . ': ' . $data['site']; ?> <sup class="gray-600"><?= $data['count']; ?></sup></h1>
   </div>
   <?= insert('/content/post/post-card', ['data' => $data]); ?>

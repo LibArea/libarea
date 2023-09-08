@@ -6,7 +6,7 @@
   </center>
   <div class="grid-cols-2 mt15">
     <?php foreach ($data['topics'] as $topic) : ?>
-      <div class="box box-fon flex gap items-center justify-between">
+      <div class="box shadow-bottom flex gap items-center justify-between">
         <div>
           <a class="" title="<?= $topic['facet_title']; ?>" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
             <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>

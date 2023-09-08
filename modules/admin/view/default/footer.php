@@ -1,5 +1,5 @@
 </div>
-<footer class="footer box-shadow-top mt20">
+<footer class="footer shadow-top mt20">
   <div class="text-sm lowercase wrap">
     <?= config('meta.name'); ?> &copy; <?= date('Y'); ?> — <?= __('admin.home'); ?>
   </div>

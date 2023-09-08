@@ -1,4 +1,4 @@
-<?php if (!empty($data['posts'])) : ?>
+<?php if (!empty($data['posts'])) : ?> <?= insert('/_block/recommended-topics', ['data' => $data]); ?>
   <?php $n = 0;
   foreach ($data['posts'] as $post) :
     $n++; ?>
@@ -8,7 +8,7 @@
     <?php endif; ?>
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
-    <div class="box box-fon">
+    <div class="box shadow-bottom">
       <div class="flex items-center gap-min text-sm mb5">
         <a class="gray-600 flex gap-min items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm', 'max'); ?>
