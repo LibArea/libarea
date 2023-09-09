@@ -83,7 +83,7 @@ return [
     'business'          => 'Kinh doanh',
     'life'              => 'Trang chủ',
     'cms'               => 'CMS',
-    'life_help'         => 'Children, animals, hobbies...',
+    'life_help'         => 'Trẻ em, động vật, sở thích...',
     'security'          => 'Bảo mật...',
     'society'           => 'Xã hội và chính trị',
     'contact_information'   => 'Thông tin liên hệ',
@@ -105,8 +105,8 @@ return [
     'sidebar_info'      => 'Catalog of sites systematized by thematic headings.',
     'banner_info'       => 'Catalog of sites with annotations and screenshots. <br> Faceted rubrication, search. Bookmarks on resources with the ability to vote for sites, programs, rating',
     
-    'main_title'        => 'Website directory',
-    'main_desc'         => 'List of sites in the directory placed in chronological order. Ability to search, bookmark, sort by popularity',
+    'main_title'        => 'Thư mục website',
+    'main_desc'         => 'Danh sách các trang web trong thư mục được đặt theo thứ tự thời gian. Có khả năng tìm kiếm, đánh dấu, xếp theo độ phổ biến',
     
     'deleted_title'     => 'Remote Sites',
     'audits_title'      => 'Website audit',
