@@ -326,7 +326,7 @@ return [
     'post'          => 'Post',
     'posts'         => 'Posts',
 
-    'language'          => 'Localization',
+    'language'          => 'Ngôn ngữ',
     'ru_language'       => 'Русский',
     'ua_language'       => 'Український',
     'en_language'       => 'English',
@@ -336,10 +336,10 @@ return [
     'zh_CN_language'    => '简体中文',
     'zh_TW_language'    => '繁体中文',
     'ro_language'       => 'România',
-	'ar_language'       => 'العربية',
-
-    'type'              => 'Type',
-    'logo'              => 'logo',
+     'ar_language'       => 'العربية',
+     'vi_language'       => 'Tiếng Việt',
+    'type'              => 'Loại',
+    'logo'              => 'Biểu tượng',
     'last'              => 'Last thing',
     'recommended_size'  => 'Recommended Size',
 
