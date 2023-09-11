@@ -29,7 +29,7 @@ return [
     'add_section'           => 'Sections are used for grouping (navigation) by service articles.',
     'edit_topic'            => 'Topics are used to group (navigate) posts. This navigation, take it seriously.',
     'edit_blog'             => 'Blogs are usually created by contributors. The blog is assigned to a specific user.',
-    'edit_section'          => 'This is navigation editing for service pages (documentation). Take it seriously.',
+    'edit_section'          => 'Đây là sửa chữa điều hướng cho trang dịch vụ (Tài liệu). Thao tác một cách nghiêm túc.',
 
     'team_info'             => 'Thành viên khác cũng có thể đăng bài vào ghi chép của bạn — bạn cần phải cấp quyền truy cập cho họ.',
     'draft_info'            => 'Chỉ có tác giả mới đọc được bản nháp.',
