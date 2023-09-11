@@ -24,7 +24,7 @@ return [
     'successfully'          => 'Thành công!',
     'yes_repost'            => 'Phàn nàn đã được gửi đi!',
     'post_added'            => 'Bài đăng đã được thêm!',
-    'blog_added'            => 'Blog đã được thêm!',
+    'blog_added'            => 'Ghi chép đã được thêm!',
     'command_executed'      => 'Câu lệnh đã hoàn thành',
     'cover_removed'         => 'Ảnh bìa đã bị xóa',
     'select_topic'          => 'Chọn một chủ đề',
@@ -60,7 +60,7 @@ return [
     'invate_replay'         => 'Bạn đã gửi lời mời đến người dùng này',
     'invate_limit_stop'     => 'Bạn đã dùng hết số lời mời',
     'invite_created'        => 'Lời mời đã tạo',
-    'url_reserved'          => 'URL blog này đã được bảo lưu',
+    'url_reserved'          => 'URL ghi chép này đã được bảo lưu',
     'url_correctness'       => 'URL chính xác',
     
     'string_length'         => 'Độ dài không hợp lệ {name}',
