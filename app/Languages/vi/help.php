@@ -12,11 +12,11 @@ return [
     'setting_info'          => 'Fill in your name, this will help the participants to refer to you by your first name. <br><br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
     'avatar_info'           => 'Upload an avatar and cover photo for your profile. <br><br> When each user has a unique avatar, it becomes much easier to follow discussions!',
     'security_info'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more.',
-    'recover_info'          => 'After you click the "Reset" button, check your e-mail.',
-    'favorite_info'         => 'Posts, comments and questions in your bookmarks.',
-    'subscribed_info'       => 'Posts you follow. You will be notified of all new replies.',
-    'read_info'             => 'Read posts. History of the last 50 views.',
-    'notifications_info'    => 'You can mark all ads as read by clicking on the link: "I have read".',
+    'recover_info'          => 'Sau khi bạn nhấp chuột vào nút "Khởi tạo", kiểm tra e-mail của bạn.',
+    'favorite_info'         => 'Bài đăng, lời bình và câu hỏi trong đánh dấu trang của bạn.',
+    'subscribed_info'       => 'Bài đăng bạn đang theo dõi. Bạn sẽ được thông báo với tất cả trả lời mới.',
+    'read_info'             => 'Đọc bài đăng. Lịch sử của 50 lượt xem gần nhất.',
+    'notifications_info'    => 'Bạn có thể đánh dấu vào tất cả quảng cáo thành đã đọc bằng cách nhấp chuột vào liên kết: "Tôi đã đọc".',
     'notification_info'     => 'You can unsubscribe from all email notifications in this section.',
 
     'add_post'              => 'Use the tag <b>cut</b> (<svg class="icons"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br>  It hides under the cat part of the text following the tag (it will be written "Read more").',
@@ -31,9 +31,9 @@ return [
     'edit_blog'             => 'Blogs are usually created by contributors. The blog is assigned to a specific user.',
     'edit_section'          => 'This is navigation editing for service pages (documentation). Take it seriously.',
 
-    'team_info'             => 'Other participants can also post articles to your Blog — for this you need to grant them access.',
-    'draft_info'            => 'Only the author can read drafts.',
+    'team_info'             => 'Thành viên khác cũng có thể đăng bài vào ghi chép của bạn — bạn cần phải cấp quyền truy cập cho họ.',
+    'draft_info'            => 'Chỉ có tác giả mới đọc được bản nháp.',
     
-    'add_poll'              => 'Fill in all the fields. This survey can be used in other parts of the site (for example, in posts).',
+    'add_poll'              => 'Điền toàn bộ các trường. Khảo sát này cũng được sử dụng tại những nơi khác của site (ví dụ, trong bài đăng).',
     'poll_info'             => 'Bầu chọn của tôi theo thời gian.',
 ];
