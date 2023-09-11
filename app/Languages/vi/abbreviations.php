@@ -9,12 +9,12 @@
 return [
     'words' =>
     [
-        'CSS'           => 'Cascading Style Sheet',
-        'HTML'          => 'Hyper Text Markup Language',
+        'CSS'           => 'Ngôn ngữ tạo phong cách cho website',
+        'HTML'          => 'Ngôn ngữ đánh dấu siêu văn bản',
         'JS'            => 'JavaScript',
         'HLEB'          => 'PHP Framework',
-        'JavaScript'    => 'Programming language',
-        'SEO'           => 'Search engine optimization',
-        'Markdown'      => 'Lightweight markup language',
+        'JavaScript'    => 'Ngôn ngữ lập trình',
+        'SEO'           => 'Tối ưu cho máy tìm kiếm',
+        'Markdown'      => 'Ngôn ngữ đánh dấu đơn giản',
     ],
 ];
