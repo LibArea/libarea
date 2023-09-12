@@ -337,6 +337,7 @@ return [
     'zh_TW_language'    => '繁体中文',
     'ro_language'       => 'România',
 	'ar_language'       => 'العربية',
+    'vi_language'       => 'Tiếng Việt',
 
     'type'              => 'Type',
     'logo'              => 'logo',
