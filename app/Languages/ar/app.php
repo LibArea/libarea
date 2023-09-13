@@ -324,17 +324,6 @@ return [
     'posts'         => 'منشورات',
 
     'language'          => 'اللغة',
-    'ru_language'       => 'Русский',
-    'ua_language'       => 'Український',
-    'en_language'       => 'English',
-    'de_language'       => 'Deutsch',
-    'sk_language'       => 'Slovenský',
-    'fr_language'       => 'Français',
-    'zh_CN_language'    => '简体中文',
-    'zh_TW_language'    => '繁体中文',
-    'ro_language'       => 'România',
-	'ar_language'       => 'العربية',
-    'vi_language'       => 'Tiếng Việt',
 
     'type'              => 'نوع',
     'logo'              => 'شعار',

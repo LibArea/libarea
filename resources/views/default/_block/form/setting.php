@@ -55,22 +55,22 @@
 <fieldset>
   <label for="template"><?= __('app.template'); ?></label>
   <select name="template">
-    <?php foreach (config('general.templates') as $tpl) { ?>
+    <?php foreach (config('general.templates') as $tpl) : ?>
       <option <?php if ($data['user']['template'] == $tpl) { ?>selected<?php } ?> value="<?= $tpl; ?>">
         <?= __('app.' . $tpl); ?>
       </option>
-    <?php } ?>
+    <?php endforeach; ?>
   </select>
 </fieldset>
 
 <fieldset>
   <label for="post_content"><?= __('app.language'); ?></label>
   <select name="lang">
-    <?php foreach (config('general.languages') as $lang) {  ?>
-      <option <?php if ($data['user']['lang'] == $lang) { ?>selected<?php } ?> value="<?= $lang; ?>">
-        <?= __('app.' . $lang . '_language'); ?>
+    <?php foreach (config('general.languages') as $key => $lang) : ?>
+      <option <?php if ($data['user']['lang'] == $key) : ?>selected<?php endif; ?> value="<?= $key; ?>">
+        <?= $lang; ?>
       </option>
-    <?php } ?>
+    <?php endforeach; ?>
   </select>
 </fieldset>
 

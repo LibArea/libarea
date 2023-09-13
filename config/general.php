@@ -25,7 +25,19 @@ return [
     // Default localization (+ languages represented)
     // Локализация по умолчанию (+ какие языки есть в системе)
     'lang'              => 'ru',
-    'languages'         => ['ru', 'ua', 'de', 'en', 'fr', 'ro', 'ar', 'vi', 'zh_CN', 'zh_TW'],
+    'languages'         => [
+            'ru'        => 'Русский',
+            'ua'        => 'Український',
+            'en'        => 'English',
+            'de'        => 'Deutsch',
+            'sk'        => 'Slovenský',
+            'fr'        => 'Français',
+            'zh_CN'     => '简体中文',
+            'zh_TW'     => '繁体中文',
+            'ro'        => 'România',
+            'ar'        => 'العربية',
+            'vi'        => 'Tiếng Việt',
+        ],
 
     // Set to True to format Q&A posts (discussion option will be hidden)
     // Установить на True чтобы сделать формат постов Q&A (дискуссионный вариант будет скрыт)
