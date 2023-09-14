@@ -20,15 +20,15 @@
           <use xlink:href="/assets/svg/icons.svg#mic"></use>
         </svg>
       <?php endif; ?>
-      <div class="mt5 gray">
+      <div class="mt10 gray flex justify-between">
         <?= fragment($facet['facet_short_description'], 68); ?>
-        <span class="flex right gray-600 text-sm">
+        <span class="flex right gap-min gray-600 text-sm">
           <svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#post"></use>
           </svg>
           <?= $facet['facet_count']; ?>
           <?php if ($facet['facet_focus_count'] > 0) : ?>
-            <svg class="icons ml15">
+            <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#users"></use>
             </svg>
             <?= $facet['facet_focus_count']; ?>
