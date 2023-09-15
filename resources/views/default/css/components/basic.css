@@ -35,10 +35,9 @@ html {
   --violet: #f3f1ed;
   --red: #ef4444;
   --red-200: #fecaca;
-  --gray-100: #f3f4f6;
-  --gray-300: #ededed;
-  --gray-600: #9ca3af;
   --gray: #4b5563;
+  --gray-100: #f3f4f6;
+  --gray-600: #9ca3af;
   --blue: #3b82f6;
   --blue-100: #dbeafe;
   --slate: #cbd5e1;
@@ -70,9 +69,7 @@ img {
 }
 
 .top-sm { top: 70px; }
-.top-xl { top: 115px; }
 .mr-auto { margin: 0 auto; }
-.-ml40 { margin-left: -40px; }
 
 .m0 { margin: 0; }
 .m5 { margin: 5px; }
@@ -241,6 +238,5 @@ li.br-li-bottom-no:last-child { border-bottom: 1px solid transparent; }
 .block { display: block; }
 .table { display: table; }
 .inline { display: inline-block; }
-.list-style-none { list-style: none; }
 .break-all { word-break:break-all; }
 .pointer { cursor: pointer; }

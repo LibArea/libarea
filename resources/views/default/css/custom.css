@@ -4,7 +4,7 @@
  * Дополнительные стили
  */
 
-/* пример (example)
+/* пример 1 (example 1)
 
 @font-face {
   font-family: Roboto;
@@ -14,3 +14,11 @@
 body {
   font-family: Roboto, -apple-system,BlinkMacSystemFont,Arial,sans-serif;
 } */
+
+
+/* пример 2 (example 2)
+
+body { background-color: #f3f3f3; }
+.box {  background-color: #fff; }
+
+*/

@@ -32,4 +32,4 @@
 }
 
 .footer ul li a:hover,
-.footer .icon:hover { color: #111; }
+.footer .icon:hover { color: var(--black); }

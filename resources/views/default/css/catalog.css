@@ -43,7 +43,7 @@
 .item-categories {
   display: flex;
   flex-wrap: wrap;
-  background-color: #f3f1ed;
+  background-color: var(--violet);
   padding: 20px 20px 10px 30px;
   margin-bottom: 25px;
 }
@@ -56,11 +56,11 @@
 
 body.item.dark h2,
 body.item.dark .categories-telo a {
-  color: #111;
+  color: var(--black);
 }
 
 body.item.dark .box {
-  background-color: #d0d0d0;
+  background-color: var(--gray-100);
 }
 
 @media (max-width: 890px) {

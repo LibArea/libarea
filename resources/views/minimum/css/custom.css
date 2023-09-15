@@ -31,7 +31,7 @@ main { width: 100%; }
 }
 
 .logo {
-  background-color: #a20b0b;
+  background-color: var(--red);
   background-position: center;
   display: block;
   width: 32px;
@@ -39,7 +39,7 @@ main { width: 100%; }
   padding: 1px;
   position: relative;
   text-align: center;
-  color: #fff;
+  color: var(--white);
   font-size: 18px;
 }
 

@@ -49,7 +49,7 @@ fieldset.error input {
 select { background-color: var(--white); }
 
 input:focus,
-textarea:focus { border: 1px solid #9ccdf8; }
+textarea:focus { border: 1px solid var(--blue-100); }
 
 label {
   display: block;
@@ -57,4 +57,4 @@ label {
   font-size: 0.875rem;
 }
 
-::placeholder { color: #919191; } 
+::placeholder { color: var(--gray); } 

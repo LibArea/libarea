@@ -1,21 +1,17 @@
 <?php
 function internalRender($nodes)
 {
-    echo '<ul class="list-style-none mb20 mt10">';
     foreach ($nodes as $node) {
-        $minus = $node['reply_parent_id'] == 0 ? ' -ml40' : '';
+       
+        $none = $node['reply_parent_id'] == 0 ? ' list-none' : '';
         $delete = $node['reply_is_deleted'] == 1 ? ' bg-red-200' : '';
 
-        echo '<li class="hidden  mt20' . $minus . $delete . '">
-                    <div id="reply_' . $node['reply_id'] . '" class="text-sm">';
+        echo '<ul class="mt10' . $none . '"><li class="hidden mt20' . $delete . '">
+                <div id="reply_' . $node['reply_id'] . '" class="text-sm">';
 
-        echo '<div class="flex gap">'
+        echo '<div class="flex gap">' . Img::avatar($node['avatar'], $node['login'], 'img-sm', 'small')
 
-            . Img::avatar($node['avatar'], $node['login'], 'img-sm', 'small') .
-
-            '<span class="gray-600">' . $node['login'] . '</span>
-                    
-                    <span class=" gray-600 lowercase">' . Html::langDate($node['reply_date']) . '</span>';
+            . '<span class="gray-600">' . $node['login'] . '</span> <span class=" gray-600 lowercase">' . Html::langDate($node['reply_date']) . '</span>';
 
         if ($node['reply_parent_id'] != $node['reply_item_id'] && $node['reply_parent_id'] != 0) {
             echo '<a rel="nofollow" class="gray-600" href="#reply_' . $node['reply_parent_id'] . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#arrow-up"></use></svg></a>';
@@ -45,9 +41,8 @@ function internalRender($nodes)
             internalRender($node['children']);
         }
 
-        echo '</li>';
+        echo '</li></ul>';
     }
-    echo '</ul>';
 }
 
 echo internalRender($data['tree']);

@@ -119,9 +119,7 @@
         <?php if ($data['tree']) : ?>
           <h2><?= __('web.answers'); ?></h2>
           <div class="mt20 w-100 hidden">
-            <ul class="list-none mt20">
-              <?= insert('/content/item/replys', ['data' => $data]); ?>
-            </ul>
+            <?= insert('/content/item/replys', ['data' => $data]); ?>
           </div>
         <?php else : ?>
           <?php if ($item['item_close_replies'] == 0) : ?>

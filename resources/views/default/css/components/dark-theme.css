@@ -6,10 +6,10 @@
 
 body.dark {
   filter: invert(100%) hue-rotate(180deg);
-  background-color: #111;
+  background-color: var(--black);
 }
 
-body.dark .bg-white { background-color: var(--gray-300); }
+body.dark .bg-white { background-color: var(--gray-100); }
 body.dark img, body.dark iframe { filter: invert(100%) hue-rotate(180deg); }
 
 body.dark .bg-lightgray,
