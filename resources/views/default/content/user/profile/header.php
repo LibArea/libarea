@@ -2,7 +2,7 @@
 $profile = $data['profile'];
 $css = 'img-xl mt15 mb-w100 profile-ava';
 if ($profile['cover_art'] != 'cover_art.jpeg') :
-  $css = 'img-2xl mt60 mb-mt25 mb-img-2xl profile-ava';
+  $css = 'img-2xl mb-mt25 mb-img-2xl profile-ava';
 endif;
 ?>
 <style nonce="<?= $_SERVER['nonce']; ?>">

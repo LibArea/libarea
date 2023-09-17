@@ -44,7 +44,7 @@
 .profile-ava {
   position: absolute;
   z-index: 5;
-  margin-left: 15px;
+  margin: 60px 10px 0 15px;
   border-radius: 3px;
 }
 

@@ -1,4 +1,5 @@
-.dropdown {
+.dropdown,
+.delet-count {
   right: unset;
   left: 0;
 }
@@ -30,6 +31,5 @@
 
 .dropdown.user { padding: 1rem .7rem .7rem 0; }
 .d-header_contents .btn-outline-primary { width: 120px; }
-.delet-count { right: auto; }
 .box-search {  margin: 10px 0 10px 45px; }
 .block-answer .right { float: left; }
