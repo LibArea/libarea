@@ -198,7 +198,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
             $field_name = 'facet_title';
             $tl = UserData::getUserTl();
             $sql = "SELECT facet_id, facet_title, facet_type FROM facets 
-                    WHERE facet_title LIKE :facet_title AND facet_tl <= $tl AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 200";
+                    WHERE facet_title LIKE :facet_title AND facet_tl <= $tl AND facet_is_deleted = 0 AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 200";
         }
 
         $lists = DB::run($sql, [$field_name => "%" . $search . "%"])->fetchAll();
