@@ -33,7 +33,7 @@
 
     <div class="flex flex-wrap justify-between">
       <?php foreach ($data['users'] as $user) : ?>
-        <div class="w160 mb-w100 mb20 center">
+        <div class="w160 mb20 center">
           <a href="<?= url('profile', ['login' => $user['login']]); ?>">
             <?= Img::avatar($user['avatar'], $user['login'], 'img-lg', 'max'); ?>
             <div class="block mt5">

@@ -4,7 +4,7 @@ namespace App\Controllers\Post;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, NotificationModel};
+use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, PollModel, NotificationModel};
 use App\Services\Integration\{Discord, Telegram};
 use App\Services\Сheck\{PostPresence, FacetPresence};
 use UploadImage, URLScraper, Meta, UserData;
@@ -50,6 +50,7 @@ class AddPostController extends Controller
                     'showing-blog'  => array_merge(FacetModel::getTeamFacets('blog'), FacetModel::getFacetsUser('blog')),
                     'post_arr'      => PostModel::postRelatedAll(),
                     'type'          => 'add',
+                    'count_poll'    => PollModel::getUserQuestionsPollsCount(),
                 ]
             ]
         );

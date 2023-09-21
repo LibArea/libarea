@@ -110,7 +110,7 @@
       <div class="help"><?= __('app.necessarily'); ?></div>
     </div>
 
-    <?php if (UserData::getRegType(config('trust-levels.tl_add_poll'))) : ?>
+    <?php if (UserData::getRegType(config('trust-levels.tl_add_poll')) && $data['count_poll']) : ?>
       <?= insert('/_block/form/select/poll', ['poll' => false]); ?>
     <?php endif; ?>  
 

@@ -1,6 +1,6 @@
 <?php
 $profile = $data['profile'];
-$css = 'img-xl mt15 mb-w100 profile-ava';
+$css = 'img-xl mt15 mb-mt25 profile-ava';
 if ($profile['cover_art'] != 'cover_art.jpeg') :
   $css = 'img-2xl mb-mt25 mb-img-2xl profile-ava';
 endif;
@@ -12,7 +12,7 @@ endif;
   }
 </style>
 
-<div class="mb15 relative">
+<div class="relative">
   <?php if (UserData::checkAdmin()) : ?>
     <?= insert('/content/user/profile/deletion-statistics', ['count' => $data['delet_count']]); ?>
   <?php endif; ?>

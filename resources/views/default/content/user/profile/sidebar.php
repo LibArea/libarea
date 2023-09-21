@@ -42,7 +42,7 @@
     <div class="box bg-lightgray">
       <h4 class="uppercase-box"><?= __('app.created_by'); ?></h4>
       <?php foreach ($data['blogs'] as $blog) : ?>
-        <div class="w-100 mb-w100 mb15 flex flex-row">
+        <div class="w-100 mb15 flex flex-row">
           <a class="mr10" href="<?= url($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
             <?= Img::image($blog['facet_img'], $blog['facet_title'], 'img-lg', 'logo', 'max'); ?>
           </a>
