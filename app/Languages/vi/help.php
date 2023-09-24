@@ -9,9 +9,9 @@
 */
 
 return [
-    'setting_info'          => 'Fill in your name, this will help the participants to refer to you by your first name. <br><br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
-    'avatar_info'           => 'Upload an avatar and cover photo for your profile. <br><br> When each user has a unique avatar, it becomes much easier to follow discussions!',
-    'security_info'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more.',
+    'setting_info'          => 'Điền tên của bạn, điều này sẽ giúp những người tham gia gọi bạn bằng tên của bạn. <br><br> Hãy cho chúng tôi biết điều gì đó về bạn. Bạn có cơ hội tuyệt vời để cởi mở làm hài lòng người khác và tỏ ra là một người thú vị.',
+    'avatar_info'           => 'Tải lên ảnh đại diện và ảnh bìa cho hồ sơ của bạn. <br><br> Khi mỗi người dùng có một hình đại diện duy nhất, việc theo dõi các cuộc thảo luận sẽ trở nên dễ dàng hơn nhiều!',
+    'security_info'         => 'Đảm bảo tất cả mật khẩu của bạn có 8 ký tự trở lên, lý tưởng nhất là nhiều hơn.',
     'recover_info'          => 'Sau khi bạn nhấp chuột vào nút "Khởi tạo", kiểm tra e-mail của bạn.',
     'favorite_info'         => 'Bài đăng, lời bình và câu hỏi trong đánh dấu trang của bạn.',
     'subscribed_info'       => 'Bài đăng bạn đang theo dõi. Bạn sẽ được thông báo với tất cả trả lời mới.',
