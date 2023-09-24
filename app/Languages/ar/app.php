@@ -251,7 +251,6 @@ return [
     'source'            => 'المصدر',
     'website'           => 'الموقع الالكتروني',
     'websites'          => 'المواقع',
-    'sites'             => 'المواقع',
     'related'           => 'ذات صلة',
     'related_posts'     => 'منشورات ذات صلة',
     'parents'           => 'الرئيسيات',

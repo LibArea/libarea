@@ -254,7 +254,6 @@ return [
     'source'            => 'Nguồn',
     'website'           => 'Trang mạng',
     'websites'          => 'Trang web',
-    'sites'             => 'Trang web',
     'related'           => 'Có liên quan',
     'related_posts'     => 'Bài viết liên quan',
     'parents'           => 'Cha mẹ',

@@ -254,7 +254,6 @@ return [
     'source'            => 'Sursa',
     'website'           => 'Site web',
     'websites'          => 'Site-uri web',
-    'sites'             => 'Site-uri',
     'related'           => 'Legat',
     'related_posts'     => 'Postări similare',
     'parinti'           => 'parinti',

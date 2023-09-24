@@ -254,7 +254,6 @@ return [
     'source'            => '来源',
     'website'           => '网站',
     'websites'          => '网站',
-    'sites'             => '站点',
     'related'           => '相关',
     'related_posts'     => '相关帖子',
     'parents'           => '父',

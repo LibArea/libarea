@@ -254,7 +254,6 @@ return [
     'source'            => 'Source',
     'website'           => 'Website',
     'websites'          => 'Sites',
-    'sites'             => 'Sites',
     'related'           => 'Related',
     'related_posts'     => 'Related posts',
     'parents'           => 'Parents',

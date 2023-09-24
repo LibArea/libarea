@@ -254,7 +254,6 @@ return [
     'source'            => 'Источник',
     'website'           => 'Сайт',
     'websites'          => 'Сайты',
-    'sites'             => 'Сайты',
     'related'           => 'Связанное',
     'related_posts'     => 'Связанные посты',
     'parents'           => 'Родители',
