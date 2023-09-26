@@ -11,6 +11,11 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?php endif; ?>
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
+    
+    <?php if ($post['post_hidden'] == 1) : ?>
+       <?php if ($post['post_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
+    <?php endif; ?>
+    
     <div class="box shadow-bottom article_<?= $post['post_id']; ?>">
 
       <div class="flex justify-between">

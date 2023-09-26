@@ -44,4 +44,20 @@ class CommentController extends Controller
             ]
         );
     }
+   
+    // On the home page  
+    // На главной странице
+    public function lastComment()
+    {
+        $comments  = CommentModel::getComments(1, 5, 'all');
+
+        $result = [];
+        foreach ($comments as $ind => $row) {
+            $row['content'] = fragment($row['comment_content'], 98);
+            $row['date']    = Html::langDate($row['comment_date']);
+            $result[$ind]   = $row;
+        }
+
+        return json_encode($result, JSON_PRETTY_PRINT);
+    }
 }
