@@ -62,7 +62,7 @@
 
         <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL)) : ?>
           <fieldset>
-            <input type="checkbox" name="post_draft"> <?= __('app.draft_post'); ?>
+            <input type="checkbox" name="draft"> <?= __('app.draft_post'); ?>
           </fieldset>
 
           <?= insert('/_block/form/content-tl', ['data' => null]); ?>
@@ -90,6 +90,11 @@
         <input type="checkbox" name="nsfw"> <?= __('app.nsfw_post'); ?>
       </fieldset>
     <?php endif; ?>
+
+    <fieldset>
+      <input type="checkbox" name="hidden"> <?= __('app.hidden_post'); ?>
+      <div class="help"><?= __('app.hidden_post_help'); ?></div>
+    </fieldset>
 
     <div class="last-content content-tabs<?php if (config('general.qa_site_format') == true) : ?> active<?php endif; ?>" id="qa">
       <div class="mb5"><?= __('app.text'); ?> Q&A <sup class="red">*</sup></div>

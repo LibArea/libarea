@@ -176,6 +176,9 @@ return [
     'is_nsfw'           => '允許在提要中查看成人內容和 NSFW（+模糊縮略圖）。',
     'nsfw_post'         => '内容适合成人吗？',
 
+    'hidden_post'       => '通过链接访问？',
+    'hidden_post_help'  => '任何有链接的人都可以看到它。',
+
     'delete_profile'    => '删除配置文件',
     'read_carefully'    => '仔细阅读，真的很重要！',
     'read_information'  => '您即将删除您的个人资料。 要删除配置文件，您必须确认您已准备好删除列出的所有信息。 删除配置文件是<strong>不可逆操作</strong>，您将无法找回丢失的数据。',

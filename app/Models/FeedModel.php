@@ -35,6 +35,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                     post_translation,
                     post_draft,
                     post_nsfw,
+                    post_hidden,
                     post_date,
                     post_published,
                     post_user_id,
@@ -129,24 +130,26 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function sorting($sheet)
     {
+        $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
+        
         switch ($sheet) {
             case 'facet.feed':
-                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = 'post'";
+                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = 'post' $hidden";
                 break;
             case 'facet.feed.topic':
                 $string     = "WHERE facet_list LIKE :qa AND facet_list LIKE :topic AND post_draft = 0 AND post_type = 'post'";
                 break;
             case 'questions':
-                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 1";
+                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 1 $hidden";
                 break;
             case 'posts':
-                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 0";
+                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 0 $hidden";
                 break;
             case 'recommend':
-                $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = 'post'";
+                $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = 'post' $hidden";
                 break;
             case 'web.feed':
-                $string     = "WHERE post_url_domain = :qa AND post_draft = 0";
+                $string     = "WHERE post_url_domain = :qa AND post_draft = 0 $hidden";
                 break;
             case 'profile.posts':
                 $string     = "WHERE post_user_id  = :qa AND post_draft = 0 AND post_type = 'post'";

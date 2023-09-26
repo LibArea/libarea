@@ -1582,3 +1582,5 @@ CREATE TABLE `items_status` (
 
 ALTER TABLE `posts` ADD `post_nsfw` TINYINT(1) NOT NULL DEFAULT '0' AFTER `post_published`;
 ALTER TABLE `users` ADD `nsfw` TINYINT(1) NOT NULL DEFAULT '0' AFTER `my_post`; 
+
+ALTER TABLE `posts` ADD `post_hidden` TINYINT(1) NOT NULL DEFAULT '0' COMMENT 'Скрытый пост' AFTER `post_top`; 

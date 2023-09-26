@@ -40,7 +40,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         $display = self::display($type);
         $sort = self::sortDay($type);
 
-        $nsfw = (UserData::getUserNSFW()) ? "" : "AND post_nsfw = 0";
+        $nsfw = UserData::getUserNSFW() ? "" : "AND post_nsfw = 0";
 
         $start = ($page - 1) * $limit;
         $sql = "SELECT DISTINCT
@@ -51,6 +51,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 post_translation,
                 post_draft,
                 post_nsfw,
+                post_hidden,
                 post_date,
                 post_published,
                 post_user_id,
@@ -90,7 +91,6 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN votes_post 
                                 ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
                                     WHERE $ignoring post_type != 'page' AND post_draft = 0 $nsfw $string $display $sort LIMIT :start, :limit";
-
         return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
@@ -179,6 +179,8 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             $user_answer = "AND answer_user_id != $user_id AND post_tl <= $trust_level";
         }
 
+        $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
+
         $sql = "SELECT 
                     answer_id,
                     answer_post_id,
@@ -186,12 +188,13 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                     answer_date,
                     post_id,
                     post_slug,
+                    post_hidden,
                     login,
                     avatar
                         FROM answers 
                         LEFT JOIN users ON id = answer_user_id
                         RIGHT JOIN posts ON post_id = answer_post_id
-                            WHERE answer_is_deleted = 0 AND post_is_deleted = 0 
+                            WHERE answer_is_deleted = 0 AND post_is_deleted = 0 $hidden 
                                 $user_answer AND post_type = 'post'
                                     ORDER BY answer_id DESC LIMIT 5";
 

@@ -14,11 +14,11 @@ class CommentController extends Controller
     // Все комментарии (объединение ответов и комментариев для UX)
     public function index($sheet)
     {
-        $pagesCount = CommentModel::getCommentsCount($this->user, $sheet);
-        $comments   = CommentModel::getComments($this->pageNumber, $this->limit, $this->user, $sheet);
+        $pagesCount = CommentModel::getCommentsCount($sheet);
+        $comments   = CommentModel::getComments($this->pageNumber, $this->limit, $sheet);
 
         $pagesCount = AnswerModel::getAnswersCount($sheet);
-        $answers    = AnswerModel::getAnswers($this->pageNumber, $this->limit, $this->user, $sheet);
+        $answers    = AnswerModel::getAnswers($this->pageNumber, $this->limit, $sheet);
 
         $m = [
             'og'    => false,
@@ -43,19 +43,5 @@ class CommentController extends Controller
                 ]
             ]
         );
-    }
-
-    public function lastComment()
-    {
-        $comments  = CommentModel::getComments(1, 5, $this->user, 'all');
-
-        $result = [];
-        foreach ($comments as $ind => $row) {
-            $row['content'] = fragment($row['comment_content'], 98);
-            $row['date']    = Html::langDate($row['comment_date']);
-            $result[$ind]   = $row;
-        }
-
-        return json_encode($result, JSON_PRETTY_PRINT);
     }
 }

@@ -22,6 +22,8 @@ class Post
         Request::getResources()->addBottomScript('/assets/js/share/goodshare.min.js');
         Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
 
+        // TODO: и для скрытого поста?
+        // $content['post_hidden'] == 1
         if ($content['post_is_deleted'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
         }

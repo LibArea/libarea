@@ -101,8 +101,9 @@ class AddPostController extends Controller
         $post_related = $this->relatedPost();
 
         $translation = $fields['translation'] ?? false;
-        $post_draft = $fields['post_draft'] ?? false;
-        $post_nsfw = $fields['post_nsfw'] ?? false;
+        $post_draft = $fields['draft'] ?? false;
+        $post_nsfw = $fields['nsfw'] ?? false;
+        $post_hidden = $fields['hidden'] ?? false;
         $closed = $fields['closed'] ?? false;
         $top = $fields['top'] ?? false;
 
@@ -121,6 +122,7 @@ class AddPostController extends Controller
                 'post_translation'      => $translation == 'on' ? 1 : 0,
                 'post_draft'            => $post_draft == 'on' ? 1 : 0,
                 'post_nsfw'             => $post_nsfw == 'on' ? 1 : 0,
+                'post_hidden'           => $post_hidden == 'on' ? 1 : 0,
                 'post_ip'               => Request::getRemoteAddress(),
                 'post_published'        => ($trigger === false) ? 0 : 1,
                 'post_user_id'          => $this->user['id'],

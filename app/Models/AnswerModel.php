@@ -56,9 +56,9 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
 
     // All answers    
     // Все ответы
-    public static function getAnswers($page, $limit, $user, $sheet)
+    public static function getAnswers($page, $limit, $sheet)
     {
-        $user_id = $user['id'];
+        $user_id = UserData::getUserId();
         $sort = self::sorts($sheet);
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
@@ -112,9 +112,11 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function sorts($sheet)
     {
+        $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
+        
         switch ($sheet) {
             case 'all':
-                $sort     = "WHERE answer_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0";
+                $sort     = "WHERE answer_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0 $hidden";
                 break;
             case 'deleted':
                 $sort     = "WHERE answer_is_deleted = 1";
@@ -242,9 +244,9 @@ class AnswerModel extends \Hleb\Scheme\App\Models\MainModel
                         LEFT JOIN posts ON answer_post_id = post_id
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
                             AND votes_answer_user_id = :uid_vote
-                        WHERE answer_user_id = :user_id
-                        AND answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
-                        ORDER BY answer_id DESC LIMIT :start, :limit ";
+                        WHERE answer_user_id = :user_id AND post_hidden = 0
+                            AND answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
+                                ORDER BY answer_id DESC LIMIT :start, :limit ";
 
         return DB::run($sql, ['user_id' => $user_id, 'uid_vote' => $uid_vote, 'start' => $start, 'limit' => $limit])->fetchAll();
     }

@@ -91,8 +91,9 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     }
 
     // Все комментарии
-    public static function getComments($page, $limit, $user, $sheet)
+    public static function getComments($page, $limit, $sheet)
     {
+        $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
         $sort = self::sorts($sheet);
         $start  = ($page - 1) * $limit;
 
@@ -101,6 +102,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     post_title,
                     post_slug,
                     post_tl,
+                    post_hidden,
                     post_feature,
                     post_user_id,
                     post_closed,
@@ -126,14 +128,14 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                             JOIN posts ON comment_post_id = post_id AND post_tl <= :tl
                             LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
                                 AND votes_comment_user_id = :uid
-                                    WHERE $sort
+                                    WHERE $sort $hidden
                                         ORDER BY comment_id DESC LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $user['id'], 'start' => $start, 'limit' => $limit, 'tl' => $user['trust_level']])->fetchAll();
+        return DB::run($sql, ['uid' => UserData::getUserId(), 'start' => $start, 'limit' => $limit, 'tl' => UserData::getUserTl()])->fetchAll();
     }
 
     // Количество комментариев 
-    public static function getCommentsCount($user, $sheet)
+    public static function getCommentsCount($sheet)
     {
         $sort = self::sorts($sheet);
 
@@ -144,7 +146,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                             JOIN posts ON comment_post_id = post_id AND post_tl <= :tl
                                 WHERE $sort";
 
-        return DB::run($sql, ['tl' => $user['trust_level']])->rowCount();
+        return DB::run($sql, ['tl' => UserData::getUserTl()])->rowCount();
     }
 
     public static function sorts($sheet)
@@ -215,7 +217,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id
                             AND votes_comment_user_id = :id
                                 WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
-                                    AND post_is_deleted = 0 AND post_tl = 0
+                                    AND post_is_deleted = 0 AND post_tl = 0 AND post_hidden = 0
                                         ORDER BY comment_id DESC LIMIT :start, :limit";
 
         return DB::run($sql, ['user_id' => $user_id, 'id' => $id, 'start' => $start, 'limit' => $limit])->fetchAll();

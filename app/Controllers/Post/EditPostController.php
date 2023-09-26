@@ -124,6 +124,7 @@ class EditPostController extends Controller
                 'post_tl'               => Request::getPostInt('content_tl'),
                 'post_closed'           => Request::getPost('closed') == 'on' ? 1 : 0,
                 'post_nsfw'             => Request::getPost('nsfw') == 'on' ? 1 : 0,
+                'post_hidden'           => Request::getPost('hidden') == 'on' ? 1 : 0,
                 'post_top'              => Request::getPost('top') == 'on' ? 1 : 0,
                 'post_poll'             => $this->selectPoll(Request::getPost('poll_id')),
                 'post_modified'         => date("Y-m-d H:i:s"),

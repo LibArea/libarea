@@ -175,6 +175,9 @@ return [
     'is_nsfw'           => 'Cho phép xem nội dung người lớn và NSFW (+ làm mờ hình thu nhỏ) trong nguồn cấp dữ liệu.',
     'nsfw_post'         => 'Nội dung có dành cho người trưởng thành (NSFW) không?',
 
+    'hidden_post'       => 'Truy cập thông qua liên kết?',
+    'hidden_post_help'  => 'Bất cứ ai có liên kết đều có thể nhìn thấy nó.',
+
     'delete_profile'    => 'Xóa hồ sơ',
     'read_carefully'    => 'Hãy đọc kỹ, điều này thực sự quan trọng!',
     'read_information'  => 'Bạn sắp xóa hồ sơ của mình. Để xóa hồ sơ, bạn phải xác nhận rằng bạn sẵn sàng xóa tất cả thông tin được liệt kê. Xóa hồ sơ là một <strong>hành động không thể đảo ngược</strong>; bạn sẽ không thể khôi phục dữ liệu bị mất.',

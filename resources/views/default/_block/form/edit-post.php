@@ -110,6 +110,11 @@
   </fieldset>
 <?php endif; ?>
 
+<fieldset>
+  <input type="checkbox" name="hidden" <?php if ($post['post_hidden'] == 1) : ?>checked <?php endif; ?>> <?= __('app.hidden_post'); ?>
+  <div class="help"><?= __('app.hidden_post_help'); ?></div>
+</fieldset>
+
 <?php if (UserData::checkAdmin()) : ?>
   <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
 <?php endif; ?>
