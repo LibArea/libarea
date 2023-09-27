@@ -45,7 +45,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
                                 GROUP BY relation_post_id  
                     ) AS rel ON rel.relation_post_id = post_id  
                         LEFT JOIN users ON id = post_user_id 
-                            WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 and post_type = 'post'
+                            WHERE post_is_deleted = 0 AND post_draft = 0 AND post_tl = 0 AND post_hidden = 0 AND post_type = 'post'
                                 AND MATCH(post_title, post_content) AGAINST (:qa)
                                           LIMIT :start, :limit";
 
@@ -100,7 +100,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
             return DB::run($sql, ['qa' => "%" . $query . "%"])->rowCount();
         }
 
-        $sql = "SELECT post_id FROM posts WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 and post_type = 'post' AND MATCH(post_title, post_content) AGAINST (:qa)";
+        $sql = "SELECT post_id FROM posts WHERE post_is_deleted = 0 AND post_hidden = 0 AND post_draft = 0 AND post_tl = 0 AND post_type = 'post' AND MATCH(post_title, post_content) AGAINST (:qa)";
 
         if ($type == 'website') {
             $sql = "SELECT item_id FROM items WHERE item_is_deleted = 0 AND MATCH(item_title, item_content, item_domain) AGAINST (:qa)";
@@ -160,7 +160,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         $field_id   = $type . '_id';
         if ($type == 'post') {
             $field_name = 'post_title';
-            $sql = "SELECT post_id, post_title FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 AND post_type = 'post' ORDER BY post_id DESC LIMIT 100";
+            $sql = "SELECT post_id, post_title FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_hidden = 0 AND post_tl = 0 AND post_type = 'post' ORDER BY post_id DESC LIMIT 100";
         } elseif ($type == 'user') {
             $field_id = 'id';
             $field_name = 'login';
