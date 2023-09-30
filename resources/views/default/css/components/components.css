@@ -187,8 +187,6 @@ blockquote {
   display: table;
 }
 
-blockquote p { margin: 2px; }
-
 .blockquote-profile {
   margin-bottom: 20px;
   max-width: 300px;
@@ -336,8 +334,6 @@ ol.bg-red-200 {
   margin: 0.5em 0;
   max-width: 780px;
 }
-
-.ind-first-p p:first-child { margin-top: 3px; }
 
 article iframe {
   max-width: 560px;
