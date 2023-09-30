@@ -385,49 +385,51 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         if (empty($result)) return false;
 
         $sql = "SELECT 
-                    post_id,
-                    post_title,
-                    post_slug,
-                    post_feature,
-                    post_translation,
-                    post_draft,
-                    post_date,
-                    post_published,
-                    post_user_id,
-                    post_votes,
-                    post_hits_count,
-                    post_answers_count,
-                    post_comments_count,
-                    post_content,
-                    post_content_img,
-                    post_thumb_img,
-                    post_merged_id,
-                    post_closed,
-                    post_tl,
-                    post_lo,
-                    post_top,
-                    post_url_domain,
-                    post_is_deleted,
-                    rel.*,
-                    votes_post_item_id, votes_post_user_id,
-                    u.id, u.login, u.avatar, 
-                    fav.tid, fav.user_id, fav.action_type
-                    
-                        FROM posts
-                        LEFT JOIN
-                        ( SELECT 
-                                relation_post_id,
-                                GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
-                                FROM facets  
-                                    LEFT JOIN facets_posts_relation on facet_id = relation_facet_id
-                                        GROUP BY relation_post_id
-                        ) AS rel
-                            ON rel.relation_post_id = post_id 
+					post_id,
+					post_title,
+					post_slug,
+					post_feature,
+					post_translation,
+					post_draft,
+					post_date,
+					post_published,
+					post_user_id,
+					post_votes,
+					post_hits_count,
+					post_answers_count,
+					post_comments_count,
+					post_content,
+					post_content_img,
+					post_thumb_img,
+					post_merged_id,
+					post_closed,
+					post_tl,
+					post_lo,
+					post_top,
+					post_hidden,
+					post_nsfw,
+					post_url_domain,
+					post_is_deleted,
+					rel.*,
+					votes_post_item_id, votes_post_user_id,
+					u.id, u.login, u.avatar, 
+					fav.tid, fav.user_id, fav.action_type
 
-            INNER JOIN users u ON u.id = post_user_id
-            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $user_id
-            LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $user_id AND fav.action_type = 'post'
-                WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0 AND post_is_deleted = 0 ORDER BY post_id DESC LIMIT 50";
+						FROM posts
+						LEFT JOIN
+						( SELECT 
+								relation_post_id,
+								GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+								FROM facets  
+									LEFT JOIN facets_posts_relation on facet_id = relation_facet_id
+										GROUP BY relation_post_id
+						) AS rel
+							ON rel.relation_post_id = post_id 
+
+								INNER JOIN users u ON u.id = post_user_id
+								LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $user_id
+								LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $user_id AND fav.action_type = 'post'
+									WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0 AND post_is_deleted = 0 ORDER BY post_id DESC LIMIT 50";
 
         return DB::run($sql)->fetchAll();
     }
