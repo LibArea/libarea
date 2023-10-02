@@ -24,12 +24,16 @@ class Filter
         return self::fragment($str, $lenght);
     }  
     
+	// https://github.com/paragonie/constant_time_encoding/issues/26
+	// https://bugs.php.net/bug.php?id=80363
     public static function fragment(string $text, int $lenght = 150, string $charset = 'UTF-8')
     {
         if (mb_strlen($text, $charset) >= $lenght) {
             $wrap = wordwrap($text, $lenght, '~');
             return mb_substr($wrap, 0, mb_strpos($wrap, '~', 0, $charset), $charset) . '...';
         }
+
+		if (empty($text)) $text = '...';
 
         return $text;
     }
