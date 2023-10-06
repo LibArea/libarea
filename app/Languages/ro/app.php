@@ -176,7 +176,7 @@ return [
     'nsfw_post'         => 'Este adultul de conținut (NSFW)?',
 
     'hidden_post'       => 'Acces prin link?',
-    'hidden_post_help'  => 'Oricine are un link îl poate vedea.',
+    'hidden_post_help'  => 'Numai utilizatorii cu link îl pot vedea.',
 
     'delete_profile'    => 'Ștergeți profilul',
     'read_carefully'    => 'Citiți cu atenție, este foarte important!',

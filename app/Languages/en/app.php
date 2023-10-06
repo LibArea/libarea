@@ -176,7 +176,7 @@ return [
     'nsfw_post'         => 'Is the content adult (NSFW)?',
 
     'hidden_post'       => 'Access via link?',
-    'hidden_post_help'  => 'Anyone with a link can see it.',
+    'hidden_post_help'  => 'Only users with link can see it.',
 
     'delete_profile'    => 'Delete profile',
     'read_carefully'    => 'Read carefully, it\'s really important!',

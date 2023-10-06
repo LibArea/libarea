@@ -176,7 +176,7 @@ return [
     'nsfw_post'         => 'Nội dung có dành cho người trưởng thành (NSFW) không?',
 
     'hidden_post'       => 'Truy cập thông qua liên kết?',
-    'hidden_post_help'  => 'Bất cứ ai có liên kết đều có thể nhìn thấy nó.',
+    'hidden_post_help'  => 'Chỉ người dùng có liên kết mới có thể nhìn thấy nó.',
 
     'delete_profile'    => 'Xóa hồ sơ',
     'read_carefully'    => 'Hãy đọc kỹ, điều này thực sự quan trọng!',

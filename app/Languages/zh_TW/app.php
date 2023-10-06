@@ -177,7 +177,7 @@ return [
     'nsfw_post'         => '内容适合成人吗？',
 
     'hidden_post'       => '通过链接访问？',
-    'hidden_post_help'  => '任何有链接的人都可以看到它。',
+    'hidden_post_help'  => '只有拥有链接的用户才能看到它。',
 
     'delete_profile'    => '删除配置文件',
     'read_carefully'    => '仔细阅读，真的很重要！',
