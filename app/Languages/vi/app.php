@@ -14,7 +14,6 @@ return [
     'feed'              => 'Сho ăn',
     'poll'              => 'Bỏ phiếu',
     'polls'             => 'Bỏ phiếu',
-    'minimum'           => 'Tối thiểu',
     'closed'            => 'Đã đóng',
     'hi'                => 'Xin chào',
     'news'              => 'Tin tức',

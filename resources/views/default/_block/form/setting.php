@@ -55,9 +55,9 @@
 <fieldset>
   <label for="template"><?= __('app.template'); ?></label>
   <select name="template">
-    <?php foreach (config('general.templates') as $tpl) : ?>
-      <option <?php if ($data['user']['template'] == $tpl) { ?>selected<?php } ?> value="<?= $tpl; ?>">
-        <?= __('app.' . $tpl); ?>
+    <?php foreach (config('general.templates') as $key => $name) : ?>
+      <option <?php if ($data['user']['template'] == $key) { ?>selected<?php } ?> value="<?= $key; ?>">
+        <?= $key == config('general.template') ? __('app.default') : $name; ?>
       </option>
     <?php endforeach; ?>
   </select>

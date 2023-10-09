@@ -14,7 +14,6 @@ return [
     'feed'              => '饲料/饲料',
     'poll'              => '轮询',
     'polls'             => '投票',
-    'minimum'           => '最低限度',
     'closed'            => '关闭',
     'hi'                => '你好',
     'news'              => '新闻',

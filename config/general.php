@@ -14,13 +14,14 @@ return [
     // TRUE - только по приглашению
     'invite'            => false,
     
-    // Default template (default).
-    // Шаблон по умолчанию (default).
+    // Шаблон по умолчанию  + какие языки есть в системе
+    // Default template + what languages are in the system
     'template'          => 'default',
-    
-    // Which templates are available for users to choose from
-    // Какие шаблоны доступны для выбора участникам
-    'templates'         => ['default', 'qa', 'minimum'],
+    'templates'         => [
+            'default'   => 'Default',
+            'qa'        => 'Q&A',
+            'minimum'	=> 'Minimum',
+        ],
 
     // Default localization (+ languages represented)
     // Локализация по умолчанию (+ какие языки есть в системе)
