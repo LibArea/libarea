@@ -31,7 +31,7 @@ $login = $user['login'] ?? false;
     </li>
   <?php endif; ?>
 
-  <?php foreach ($list as $key => $item) :
+  <?php foreach (config('navigation/menu.user') as $key => $item) :
     $tl = $item['tl'] ?? 0; ?>
 
     <?php if (!empty($item['hr'])) : ?>

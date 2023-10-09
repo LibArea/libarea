@@ -61,7 +61,7 @@ $q = $data['q'];
                 <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
               </div>
               <div class="dropdown user">
-                <?= insert('/_block/navigation/menu-user', ['list' => config('navigation/menu.user')]); ?>
+                <?= insert('/_block/navigation/menu-user'); ?>
               </div>
             </div>
           </div>

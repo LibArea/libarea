@@ -15,7 +15,7 @@
               <?= Img::avatar($msg['msg_user']['avatar'], $msg['msg_user']['login'], 'img-base', 'small'); ?>
               <?= $msg['msg_user']['login']; ?> <span class="lowercase"><?= Html::langDate($msg['dialog_update_time']); ?></span>
             <?php endif; ?>
-			<div class="gray"><?= fragment($msg['message']['message_content'], 38); ?></div>
+			<div class="gray"><?= fragment($msg['message']['message_content'] ?? False, 38); ?></div>
           </div>
 
           <div class="lowercase text-sm right gray-600">
