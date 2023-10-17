@@ -1,0 +1,19 @@
+/*
+ * Additional styles
+ *
+ * Дополнительные стили
+ */
+ 
+body { background-color: #f3f3f3; }
+
+.box,
+.indent-body { background-color: #fff; }
+
+.indent-body { padding: 15px; }
+
+ul.nav > li.active {
+  background-color: #111;
+  color: #fff;
+}
+
+ul.nav > li.active > a { color: #fff; }

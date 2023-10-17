@@ -15,18 +15,6 @@ return [
     
     // Paths to template files
     'path_css' => [
-        // Base path to css files
-        // Базовый путь к css файлам
-        'style' => '/resources/views/default/css/build.css', 
-        
-        // Template for qa style
-        // Шаблон для стиля qa
-        'qa'    => '/resources/views/qa/css/build.css',
-        
-        // Template for minimum style
-        // Шаблон для стиля minimum
-        'minimum'   => '/resources/views/minimum/css/build.css',
-        
         // Single templates without assembly
         // Одиночные шаблоны без сборки
         'rtl'       => '/resources/views/default/css/rtl.css',
