@@ -4,16 +4,19 @@
  * Дополнительные стили
  */
  
-body { background-color: #f3f3f3; }
+body { background-color: var(--gray-100); }
 
 .box,
-.indent-body { background-color: #fff; }
+.box-flex,
+.indent-body { background-color: var(--white); }
 
 .indent-body { padding: 15px; }
 
 ul.nav > li.active {
-  background-color: #111;
-  color: #fff;
+  background-color: var(--black);
+  color: var(--white);
 }
 
-ul.nav > li.active > a { color: #fff; }
+ul.nav > li.active > a { color: var(--white); }
+
+.user-nav li:hover, .menu li.active, .menu li:hover { background-color: var(--white); }

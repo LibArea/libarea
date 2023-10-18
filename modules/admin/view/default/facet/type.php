@@ -90,7 +90,7 @@
     <h3 class="mb5"><?= __('admin.pages'); ?></h3>
     <?php foreach ($data['pages'] as $page) : ?>
       <div class="mb5">
-        <a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $page['post_slug']]); ?>">
+        <a href="<?= url('facet.article', ['facet_slug' => $data['facets'][0]['facet_slug'], 'slug' => $page['post_slug']]); ?>">
           <svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#info"></use>
           </svg> <?= $page['post_title']; ?> <sup class="gray-600">id:<?= $page['post_id']; ?></sup>

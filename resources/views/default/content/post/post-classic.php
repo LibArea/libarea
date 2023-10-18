@@ -70,7 +70,7 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?= Html::votes($post, 'post'); ?>
 
           <a class="gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
-            <span<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> class="green" <?php endif; ?>>
+            <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> green<?php endif; ?>">
               <?= $post['login']; ?>
               </span>
           </a>
