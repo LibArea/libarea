@@ -8,16 +8,8 @@ use App\Models\HomeModel;
 
 class HomeController extends Controller
 {
-    protected $limit = 15;
-
     public function index($sheet)
     {
-        $latest_answers = HomeModel::latestAnswers();
-        $topics_user    = HomeModel::subscription();
-        $pagesCount     = HomeModel::feedCount($topics_user, $sheet);
-        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $sheet);
-        $items          = HomeModel::latestItems(3); // (LIMIT)
-
         // Topics signed by the participant. If a guest, then default.    
         // Темы на которые подписан участник. Если гость, то дефолтные.
         $topics = \App\Models\FacetModel::advice();
@@ -27,15 +19,15 @@ class HomeController extends Controller
             [
                 'meta'  => Home::metadata($sheet),
                 'data'  => [
-                    'pagesCount'        => ceil($pagesCount / $this->limit),
+                    'pagesCount'        => HomeModel::feedCount($sheet),
                     'pNum'              => $this->pageNumber,
                     'sheet'             => $sheet,
-                    'type'              => 'main',
-                    'latest_answers'    => $latest_answers,
-                    'topics_user'       => $topics_user,
-                    'posts'             => $posts,
                     'topics'            => $topics,
-                    'items'             => $items,
+                    'type'              => 'main',
+                    'latest_answers'    => HomeModel::latestAnswers(),
+                    'topics_user'       => HomeModel::subscription(),
+                    'posts'             => HomeModel::feed($this->pageNumber, $sheet),
+                    'items'             => HomeModel::latestItems(),
                 ],
             ],
         );
@@ -45,10 +37,9 @@ class HomeController extends Controller
     // Бесконечный скролл
     public function scroll()
     {
-        $type = Request::get('type') == 'all' ? 'all' : 'main.feed';
+        $type	= Request::get('type') == 'all' ? 'all' : 'main.feed';
 
-        $topics_user    = HomeModel::subscription();
-        $posts          = HomeModel::feed($this->pageNumber, $this->limit, $topics_user, $type);
+        $posts	= HomeModel::feed($this->pageNumber, $type);
 
         $this->insert(
             '/content/post/type-post',
@@ -56,7 +47,7 @@ class HomeController extends Controller
                 'data'  => [
                     'pages' => $this->pageNumber,
                     'sheet' => 'main.feed',
-                    'posts' => $posts,
+                    'posts' => $posts, // $posts = empty($posts) ? 'null' : $posts;
 
                 ]
             ]

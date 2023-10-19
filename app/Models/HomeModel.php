@@ -9,14 +9,16 @@ use DB;
 
 class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 {
+	public static $limit = 15;
+	
     // Posts on the central page
     // Посты на центральной странице
-    public static function feed($page, $limit, $topics_user, $type)
+    public static function feed($page, $type)
     {
         $user_id = UserData::getUserId();
 
         $result = [];
-        foreach ($topics_user as $ind => $row) {
+        foreach (self::subscription() as $ind => $row) {
             $result[$ind] = $row['facet_id'];
         }
 
@@ -42,7 +44,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
         $nsfw = UserData::getUserNSFW() ? "" : "AND post_nsfw = 0";
 
-        $start = ($page - 1) * $limit;
+        $start = ($page - 1) * self::$limit;
         $sql = "SELECT DISTINCT
                 post_id,
                 post_title,
@@ -91,13 +93,13 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN votes_post 
                                 ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
                                     WHERE $ignoring post_type != 'page' AND post_draft = 0 $nsfw $string $display $sort LIMIT :start, :limit";
-        return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
-    public static function feedCount($topics_user, $type)
+    public static function feedCount($type)
     {
         $result = [];
-        foreach ($topics_user as $ind => $row) {
+        foreach (self::subscription() as $ind => $row) {
             $result[$ind] = $row['facet_id'];
         }
 
@@ -136,7 +138,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                                     INNER JOIN users ON id = post_user_id
                                         WHERE $ignoring post_draft = 0 $nsfw $string $display";
 
-        return DB::run($sql)->rowCount();
+        return ceil(DB::run($sql)->rowCount() / self::$limit);
     }
 
     public static function display($type)
@@ -201,7 +203,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetchAll();
     }
 
-    public static function latestItems($limit)
+    public static function latestItems($limit = 3)
     {
         $sql = "SELECT item_id, item_title, item_slug, item_domain FROM items WHERE item_published = 1 AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :limit";
 
