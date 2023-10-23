@@ -262,6 +262,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                                 id,
                                 login,                                 
                                 avatar,
+								created_at,
                                 is_deleted,
                                 about
                                     FROM users 

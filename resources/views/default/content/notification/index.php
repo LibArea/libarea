@@ -19,7 +19,7 @@
               <svg class="icons <?= $n['css']; ?>">
                 <use xlink:href="/assets/svg/icons.svg#<?= $n['icon']; ?>"></use>
               </svg>
-              <a class="black ml5" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
+              <a class="black ml5 nickname" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
               <span class="lowercase gray-600">
                 <?= __('app.' . $n['lang'], ['url' => '<a href="' . $url . '">', 'a' => '</a>']); ?>
                 — <?= Html::langDate($notif['time']); ?>

@@ -36,7 +36,7 @@
         <div class="w160 mb20 center">
           <a href="<?= url('profile', ['login' => $user['login']]); ?>">
             <?= Img::avatar($user['avatar'], $user['login'], 'img-lg', 'max'); ?>
-            <div class="block mt5">
+            <div class="block mt5 nickname<?php if (Html::loginColor($user['created_at'] ?? false)) : ?> green<?php endif; ?>">
               <?= $user['login']; ?>
             </div>
             <?php if ($user['name']) : ?>

@@ -39,7 +39,9 @@
 
               </div>
               <div class="text-sm gray-600 flex gap lowercase mb10">
-                <a class="brown" href="<?= url('profile', ['login' => $answer['login']]); ?>"><?= $answer['login']; ?></a>
+                <a class="gray-600<?php if (Html::loginColor($answer['created_at'] ?? false)) : ?> green<?php endif; ?>" href="<?= url('profile', ['login' => $answer['login']]); ?>">
+				  <span class="nickname"><?= $answer['login']; ?></span>
+				</a>
                 <span class="mb-none"><?= Html::langDate($answer['answer_date']); ?>
                   <?php if (empty($answer['edit'])) : ?>
                     (<?= __('app.ed'); ?>.)
@@ -66,8 +68,10 @@
                 <?= fragment($comment['comment_content'], 1500); ?>
                 <span class="gray-600"> — </span>
 
-                <a class="brown" href="<?= url('profile', ['login' => $comment['login']]); ?>"><?= $comment['login']; ?></a>
-
+                <a class="gray-600<?php if (Html::loginColor($comment['created_at'] ?? false)) : ?> green<?php endif; ?>" href="<?= url('profile', ['login' => $comment['login']]); ?>">
+				  <span class="nickname"><?= $comment['login']; ?></span>
+				</a>
+				
                 <span class="lowercase gray-600 ml5 mr5"><?= Html::langDate($comment['comment_date']); ?></span>
 
                 <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>

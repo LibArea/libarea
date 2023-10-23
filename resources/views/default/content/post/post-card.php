@@ -19,7 +19,7 @@
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm', 'max'); ?>
           <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> green<?php endif; ?>">
             <?= $post['login']; ?>
-            </span>
+          </span>
         </a>
         <div class="gray-600 lowercase"><?= Html::langDate($post['post_date']); ?></div>
 

@@ -122,7 +122,8 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     votes_comment_user_id,
                     id, 
                     login, 
-                    avatar
+                    avatar,
+					created_at
                         FROM comments 
                             JOIN users ON id = comment_user_id
                             JOIN posts ON comment_post_id = post_id AND post_tl <= :tl

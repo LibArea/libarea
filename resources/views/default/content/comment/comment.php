@@ -6,7 +6,7 @@ foreach ($comments as $comment) :
   <?php if (!empty($comment['answer_id'])) : ?>
     <?php if ($comment['answer_published'] == 0 && $comment['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
     <div class="content-body">
-      <div class="flex justify-between gap">
+      <div class="flex justify-between gap-min">
         <div class="flex gap">
           <a class="gray-600 flex gap-min" href="<?= url('profile', ['login' => $comment['login']]); ?>">
             <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm', 'small'); ?>
@@ -25,10 +25,12 @@ foreach ($comments as $comment) :
     <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
     <div class="content-body">
       <div class="flex justify-between gap">
-        <div class="flex gap">
+        <div class="flex gap-min">
           <a class="gray-600 flex gap-min" href="<?= url('profile', ['login' => $comment['login']]); ?>">
             <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm', 'small'); ?>
-            <?= $comment['login']; ?>
+            <span class="nickname<?php if (Html::loginColor($comment['created_at'] ?? false)) : ?> green<?php endif; ?>">
+              <?= $comment['login']; ?>
+            </span>
           </a>
           <span class="gray-600 lowercase"><?= Html::langDate($comment['comment_date']); ?></span>
         </div>

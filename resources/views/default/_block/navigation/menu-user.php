@@ -8,7 +8,7 @@ $login = $user['login'] ?? false;
   <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mt5 mr5', 'small'); ?>
   <?php if ($login) : ?>
     <div>
-      <a class="gray" href="/@<?= $login; ?>"><?= $login; ?></a>
+      <a class="gray nickname" href="/@<?= $login; ?>"><?= $login; ?></a>
       <div class="text-xs gray-600"><?= $user['email']; ?></div>
     </div>
   <?php endif; ?>

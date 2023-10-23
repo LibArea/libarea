@@ -31,7 +31,7 @@ $blog = $data['blog'][0] ?? null;
       <div class="text-sm flex gray-600 gap">
         <a class="gray-600" title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'small'); ?>
-          <?= $post['login']; ?>
+          <span class="nickname"><?= $post['login']; ?></span>
         </a>
 
         <span class="lowercase">
