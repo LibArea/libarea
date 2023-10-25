@@ -20,3 +20,9 @@ ul.nav > li.active {
 ul.nav > li.active > a { color: var(--white); }
 
 .user-nav li:hover, .menu li.active, .menu li:hover { background-color: var(--white); }
+
+.active  { color: #eab308; } 
+.menu .active .icons { stroke: #eab308; }
+
+.nickname { display: inline-block; }
+.nickname::first-letter { color: red; }
