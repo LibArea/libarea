@@ -242,7 +242,7 @@ return [
     'no_comments'       => 'Din păcate, încă nu există comentarii',
     'no_answers'        => 'Ne pare rău, încă nu există răspunsuri',
     'choose_dialogue'   => 'Selectați un dialog de vizualizat',
-    'default'           => 'Mod implicit',
+    'default'           => '(mod implicit)',
     'qa'                => 'Întrebări și răspunsuri',
     'best_answer'       => 'Cel mai bun răspuns',
     'raise_answer'      => 'Ridicați răspunsul',

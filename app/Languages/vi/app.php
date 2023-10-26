@@ -242,7 +242,7 @@ return [
     'no_comments'       => 'Xin lỗi, chưa có bình luận nào',
     'no_answers'        => 'Xin lỗi, chưa có câu trả lời',
     'choose_dialogue'   => 'Chọn hộp thoại để xem',
-    'default'           => 'Mặc định',
+    'default'           => '(mặc định)',
     'qa'                => 'Câu hỏi và câu trả lời',
     'best_answer'       => 'Câu trả lời hay nhất',
     'raise_answer'      => 'Đưa ra câu trả lời',

@@ -243,7 +243,7 @@ return [
     'no_comments'       => 'Unfortunately, there are no comments yet',
     'no_answers'        => 'Sorry, no answers yet',
     'choose_dialogue'   => 'Select a dialogue to view',
-    'default'           => 'Default',
+    'default'           => '(default)',
     'qa'                => 'Questions and answers',
     'best_answer'       => 'Best Answer',
     'raise_answer'      => 'Raise answer',

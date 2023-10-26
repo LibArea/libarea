@@ -57,7 +57,7 @@
   <select name="template">
     <?php foreach (config('general.templates') as $key => $name) : ?>
       <option <?php if ($data['user']['template'] == $key) { ?>selected<?php } ?> value="<?= $key; ?>">
-        <?= $key == config('general.template') ? __('app.default') : $name; ?>
+        <?= $key == config('general.template') ? $name . ' ' . __('app.default') : $name; ?>
       </option>
     <?php endforeach; ?>
   </select>
