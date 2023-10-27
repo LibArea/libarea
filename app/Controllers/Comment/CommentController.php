@@ -44,7 +44,7 @@ class CommentController extends Controller
             ]
         );
     }
-   
+
     // On the home page  
     // На главной странице
     public function lastComment()

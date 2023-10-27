@@ -64,18 +64,18 @@ class SettingController extends Controller
     function settingForm()
     {
         Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
-        
+
         $new = SettingModel::getNewEmail();
         $email = $new['email'] ?? null;
-        
-        if($code = Request::getGet('newemail')) {
-           if (SettingModel::available($code)) {
-               SettingModel::editEmail($email);
 
-               is_return(__('msg.change_saved'), 'success', url('setting'));
-           }
+        if ($code = Request::getGet('newemail')) {
+            if (SettingModel::available($code)) {
+                SettingModel::editEmail($email);
+
+                is_return(__('msg.change_saved'), 'success', url('setting'));
+            }
         }
-        
+
         return $this->render(
             '/user/setting/setting',
             [
@@ -229,7 +229,7 @@ class SettingController extends Controller
             ]
         );
     }
-    
+
     function deletion()
     {
         return $this->render(
@@ -239,7 +239,7 @@ class SettingController extends Controller
                 'data'  => []
             ]
         );
-    } 
+    }
 
     function notificationEdit()
     {
@@ -256,24 +256,24 @@ class SettingController extends Controller
 
         is_return(__('msg.change_saved'), 'success', '/setting/notifications');
     }
-    
+
     function newEmail()
     {
         $email = Request::getPost('email');
-        
+
         if (RulesUserSetting::rulesNewEmail($email) === false) {
             return json_encode('error');
-        } 
-        
+        }
+
         if (is_array(AuthModel::checkRepetitions($email, 'email'))) {
             return json_encode('repeat');
         }
-        
+
         $code = Html::randomString('crypto', 20);
-        
+
         SettingModel::setNewEmail($email, $code);
 
-        SendEmail::mailText($this->user['id'], 'new.email', ['link' => '/setting?newemail=' . $code, 'new_email' =>$email]);
+        SendEmail::mailText($this->user['id'], 'new.email', ['link' => '/setting?newemail=' . $code, 'new_email' => $email]);
 
         return json_encode('success');
     }
@@ -293,5 +293,4 @@ class SettingController extends Controller
 
         Session::logout();
     }
-    
 }

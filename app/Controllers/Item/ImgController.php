@@ -14,7 +14,7 @@ class ImgController extends Controller
         if (!UserData::checkAdmin()) {
             return false;
         }
-        
+
         $item_id    = Request::getPostInt('id');
         $item       = WebModel::getItemId($item_id);
         notEmptyOrView404($item);
@@ -36,17 +36,17 @@ class ImgController extends Controller
         // "https://www.google.com/s2/favicons?domain=" . $url;
         return "https://favicon.yandex.net/favicon/" . $url;
     }
-    
+
     public function screenshot()
     {
         if (!UserData::checkAdmin()) {
             return false;
         }
-        
+
         $item_id    = Request::getPostInt('id');
         $item       = WebModel::getItemId($item_id);
         notEmptyOrView404($item);
-        
+
         $puth = HLEB_PUBLIC_DIR . Img::PATH['thumbs'] . host($item['item_url']) . '.png';
 
         if (!file_exists($puth)) {
@@ -56,10 +56,10 @@ class ImgController extends Controller
 
         return true;
     }
-    
-    
+
+
     public static function getScreenshot($url)
-    {  
-        return "https://api.screenshotone.com/take?image_width=880&url=" . $url ."&access_key=" . config('integration.sc_access_key');
+    {
+        return "https://api.screenshotone.com/take?image_width=880&url=" . $url . "&access_key=" . config('integration.sc_access_key');
     }
 }

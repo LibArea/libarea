@@ -6,7 +6,6 @@ use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\FacetPresence;
 use App\Services\Meta\Facet;
-use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
 
 class TopicFacetController extends Controller

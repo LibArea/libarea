@@ -28,7 +28,7 @@ class AdminController extends Controller
             'item',
         );
     }
-    
+
     public function deleted()
     {
         return $this->render(
@@ -40,7 +40,7 @@ class AdminController extends Controller
             'item',
         );
     }
-    
+
     public function comments()
     {
         return $this->render(
@@ -52,15 +52,15 @@ class AdminController extends Controller
             'item',
         );
     }
-    
+
     public function status()
     {
         Request::getResources()->addBottomScript('/assets/js/catalog.js');
-        
+
         $code = Request::get('code');
-        
+
         $pagesCount = 0; // TODO
-        
+
         return $this->render(
             '/item/admin/status',
             [
@@ -68,14 +68,14 @@ class AdminController extends Controller
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $this->pageNumber,
-                    'status'        => WebModel::getStatus($this->pageNumber, $code), 
+                    'status'        => WebModel::getStatus($this->pageNumber, $code),
                     'code'          => $code
                 ]
             ],
             'item',
         );
     }
-    
+
     public static function httpCode($url)
     {
         stream_context_set_default([
@@ -84,12 +84,12 @@ class AdminController extends Controller
                 'verify_peer_name' => false,
             ],
         ]);
-            
+
         $headers = get_headers($url);
 
         return (empty($headers[0])) ? 404 : substr($headers[0], 9, 3);
     }
-    
+
     // Once a month
     public static function updateStatus()
     {

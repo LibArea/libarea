@@ -43,7 +43,7 @@ $sw = $sw ?? '?';
           <?php if ($type == 'website') : ?>
             <div class="text-sm mb5 lowercase">
               <span class="green">
-                <?= Img::website($result['item_domain'], 'favicon', $result['item_domain'], 'favicons mr5'); ?>
+				<?= Img::website('favicon', host($result['item_url']), 'favicons mr5'); ?>
                 <?= $result['item_domain']; ?>
               </span>
               <a class="gray-600 ml15" href="<?= url('website', ['id' => $result['item_id'], 'slug' => $result['item_slug']]); ?>"><?= __('web.more'); ?></a>

@@ -29,15 +29,15 @@ class AddPostController extends Controller
         // Adding from page topic / blog
         // Добавление со странице темы / блога
         $facet_id   = Request::getInt('facet_id');
-        
+
         if ($facet_id) {
-             $facet  =  FacetPresence::all($facet_id);
-             
-             if ($facet['facet_type'] == 'topic') {
-                 $topic  = FacetPresence::index($facet_id, 'id', 'topic');
-             } elseif ($facet['facet_type'] == 'blog' && $facet['facet_user_id'] == $this->user['id']) {
-                 $blog  = FacetPresence::index($facet_id, 'id', 'blog');
-             }   
+            $facet  =  FacetPresence::all($facet_id);
+
+            if ($facet['facet_type'] == 'topic') {
+                $topic  = FacetPresence::index($facet_id, 'id', 'topic');
+            } elseif ($facet['facet_type'] == 'blog' && $facet['facet_user_id'] == $this->user['id']) {
+                $blog  = FacetPresence::index($facet_id, 'id', 'blog');
+            }
         }
 
         return $this->render(

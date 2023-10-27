@@ -146,7 +146,7 @@ class ProfileController extends Controller
 
         return true;
     }
-    
+
     // Index profile or not
     public function indexing($profile_id)
     {
@@ -154,7 +154,7 @@ class ProfileController extends Controller
         if (($amount['count_answers'] + $amount['count_comments']) < 3) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
-        
+
         if (UserModel::isDeleted($profile_id)) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
