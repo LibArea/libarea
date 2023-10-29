@@ -17,9 +17,9 @@ use Hleb\Constructor\Handlers\Request; ?>
             <?= $post['post_votes']; ?>
             <div class="text-xs"> <?= Html::numWord($post['post_votes'], __('app.num_up'), false); ?></div>
           </div>
-          <?php $bg = $post['post_feature'] == 0 ? ' bg-green' : ' bg-teal'; ?>
+          <?php $bg = $post['post_feature'] == 0 ? ' bg-green' : ' bg-blue'; ?>
           <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
-          <div class="box-answer mt5 br-rd3 lowercase <?= $bg; ?> <?= $bg_url; ?>">
+          <div class="box-answer 11 mt5 br-rd3 lowercase <?= $bg; ?> <?= $bg_url; ?>">
             <a class="block white" href="<?= $post_url; ?>#comment">
               <?php $anw = $post['post_answers_count'] + $post['post_comments_count'];
               echo $anw; ?>

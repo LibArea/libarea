@@ -4,7 +4,7 @@
   <ul class="menu">
     <?php foreach ($dialogs as  $msg) : ?>
       <li class="mb5 p5 br-top-zebra
-      <?php if (!$msg['unread'] > 0) : ?> bg-purple<?php endif; ?>
+      <?php if (!$msg['unread'] > 0) : ?> bg-yellow<?php endif; ?>
       <?php if (Request::getMainUrl() == url('dialogues', ['id' => $msg['dialog_id']])) : ?> bg-beige<?php endif; ?>">
         <a class="justify-between" href="<?= url('dialogues', ['id' => $msg['dialog_id']]); ?>">
           <div class="gray-600 text-sm">

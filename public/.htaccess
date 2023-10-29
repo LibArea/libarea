@@ -1,7 +1,8 @@
 AddDefaultCharset UTF-8
 
-php_value session.cookie_httponly 1
-php_value session.cookie_secure 1
+# Remove the comment if you know what it is.
+# php_value session.cookie_httponly 1
+# php_value session.cookie_secure 1
 
 RewriteCond %{HTTP_HOST} ^www\.(.*)$
 RewriteRule ^(.*)$ http://%1/$1 [L,R=301]

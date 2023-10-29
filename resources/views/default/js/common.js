@@ -59,6 +59,7 @@ isIdEmpty('toggledark').onclick = function () {
     document.cookie = "dayNight" + "=" + "dark" + "; " + expires + ";path=/";
     document.getElementsByTagName('body')[0].classList.add('dark');
   }
+  location.reload();
 }
 
 // Navigation menu on/off
@@ -83,8 +84,9 @@ isIdEmpty('postmenu').onclick = function () {
     location.reload();
   } else {
     document.cookie = "postAppearance" + "=" + "classic" + "; " + expires + ";path=/";
-    location.reload();
+
   }
+  location.reload();
 }
 
 // search
@@ -160,11 +162,11 @@ showPassword.forEach(item =>
 function toggleType() {
   let input = getById('password');
   let icon = this.querySelector('svg');
-  if (icon.classList.contains('red-200')) {
-    icon.classList.remove('red-200');
+  if (icon.classList.contains('sky')) {
+    icon.classList.remove('sky');
     input.type = 'password';
   } else {
-    icon.classList.add('red-200');
+    icon.classList.add('sky');
     input.type = 'text';
   }
 }

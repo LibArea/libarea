@@ -43,11 +43,9 @@
   <div class="box bg-lightgray">.box .bg-lightgray</div>
   <div class="box bg-beige">.box .bg-beige</div>
   <div class="box bg-lightyellow">.box .bg-lightyellow</div>
-  <div class="box bg-purple">.box .bg-purple</div>
   <div class="box bg-red-200">.box .bg-red-200</div>
   <div class="box bg-green white">.box .bg-green</div>
   <div class="box bg-black white">.box .bg-black</div>
-  <div class="box bg-teal white">.box .bg-teal</div>
   <div class="box bg-blue white">.box .bg-blue</div>
   <div class="box bg-blue-100">.box .bg-blue-100</div>
 </div>
