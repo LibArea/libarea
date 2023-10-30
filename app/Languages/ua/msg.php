@@ -62,14 +62,14 @@ return [
     'invite_created'        => 'Інвайт створено',
     'url_reserved'          => 'Цей URL блог зарезервований',
     'url_correctness'       => 'URL не є коректним',
-    
+
     'string_length'         => 'Некоректна довжина {name}',
     'slug_correctness'      => '{name} повинен містити лише латиницю, цифри',
     'email_correctness'     => 'Неприпустимий e-mail',
-    
+
     'limit_day'             => 'Ви вичерпали ліміт на сьогодні',
     'content_audit'         => 'Ваше повідомлення надіслано на перевірку',
     'access_denied'         => 'Вам відмовлено у доступі',
-    
+
     'field_limit'           => 'Число полів досягло свого максимуму.',
 ];

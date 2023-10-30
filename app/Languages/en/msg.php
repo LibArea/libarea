@@ -62,14 +62,14 @@ return [
     'invite_created'        => 'Invite created',
     'url_reserved'          => 'This blog URL is reserved',
     'url_correctness'       => 'URL is not correct',
-    
+
     'string_length'         => 'Incorrect length {name}',
     'slug_correctness'      => '{name} must contain only Latin characters, numbers',
     'email_correctness'     => 'Invalid email',
-    
+
     'limit_day'             => 'You have reached the limit for today',
     'content_audit'         => 'Your message has been sent for review',
     'access_denied'         => 'You are denied access',
-    
+
     'field_limit'           => 'The number of fields has reached its maximum.',
 ];

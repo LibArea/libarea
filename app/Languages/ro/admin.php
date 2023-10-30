@@ -53,7 +53,7 @@ return [
     'remove'            => 'Șterge',
     'completed'         => 'Comanda finalizată',
     'reward_user'       => 'Recompensați participantul',
-    
+
     'topic'             => 'Subiect',
     'topics'            => 'Subiecte',
     'blog'              => 'Blog',
@@ -72,7 +72,7 @@ return [
     'item'              => 'Site-ul web',
     'invite'            => 'A invita',
     'report'            => 'O plangere',
-    
+
     'submenu'           => 'submeniu',
     'update'            => 'Reîmprospăta',
     'ban'               => 'Interzice',
@@ -114,27 +114,27 @@ return [
     'tl4_title'         => 'Regulat',
     'tl5_title'         => 'Lider',
     'tl10_title'        => 'Personal',
-    
+
     'deleted'           => 'Îndepărtat',
     'added'             => 'Adăugat',
     'restored'          => 'Restaurat',
-    
+
     // Settings section
     // Раздел настройки
     'settings'              => 'Setări',
     'interface'             => 'Interfață',
     'functions'             => 'Funcții',
-    
+
     'url_help'              => 'Adresa URL a site-ului (cu https)',
     'email_help'            => 'E-mail public pentru comunicare',
     'name_help'             => 'Numele scurt al site-ului',
     'title_help'            => 'Numele complet al site-ului',
-    
+
     'img_path'              => 'Calea către fotografie (intro pentru site)',
     'img_path_help'         => 'Folosit în og:image și în alte locuri când nu există o introducere în postare, de ex.',
     'img_path_web'          => 'Calea către fotografie (introducere pentru catalog)',
     'img_path_web_help'     => 'Folosit în og:image pentru directorul site-ului',
-    
+
     'banner_title'          => 'Antet banner',
     'banner_title_help'     => 'Titlul bannerului pe pagina principală a site-ului, dacă participantul nu este autorizat',
     'banner_desc'           => 'Corpul bannerului',
@@ -150,7 +150,7 @@ return [
     'count_like_feed_help'  => 'Câte aprecieri ar trebui să fie vizibile o postare pe pagina centrală a site-ului',
     'type_post_feed'        => 'Apariția postării în feed',
     'type_post_feed_help'   => 'Clasic sau Card. Dacă este clasic, atunci acesta este un design minimal',
-    
+
     'ads_home_post'         => 'Pagina principală, feed, după 4 postări',
     'ads_home_sidebar'      => 'Pagina de pornire, bară laterală',
     'ads_home_menu'         => 'Pagina principală, meniul din stânga',

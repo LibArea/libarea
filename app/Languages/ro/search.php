@@ -25,4 +25,3 @@ return [
     'help'              => 'Căutare pe site și multe altele...',
     'query'             => 'Cerere',
 ];
-

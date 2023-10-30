@@ -106,6 +106,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_post_related,
                     facet_focus_count,
                     facet_count,
+					facet_is_comments,
                     facet_is_deleted
                         FROM facets WHERE $sort AND facet_type = :type";
 
@@ -371,7 +372,8 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_user_id           = :facet_user_id, 
                     facet_top_level         = :facet_top_level, 
                     facet_post_related      = :facet_post_related, 
-                    facet_type              = :facet_type
+                    facet_type              = :facet_type,
+					facet_is_comments 		= :facet_is_comments
                         WHERE facet_id      = :facet_id";
 
         return  DB::run($sql, $params);

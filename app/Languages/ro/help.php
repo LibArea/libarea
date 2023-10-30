@@ -33,7 +33,7 @@ return [
 
     'team_info'             => 'Puteți partaja blogul dvs. cu alți utilizatori, acordându-le acces.',
     'draft_info'            => 'Doar autorul poate citi schițele.',
-    
+
     'add_poll'              => 'Completați toate câmpurile. Acest sondaj poate fi folosit în alte părți ale site-ului (de exemplu, în postări).',
     'poll_info'             => 'Voturile mele sunt sortate după timp.',
 ];

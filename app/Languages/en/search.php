@@ -25,4 +25,3 @@ return [
     'help'              => 'Site search and more...',
     'query'             => 'Query',
 ];
-

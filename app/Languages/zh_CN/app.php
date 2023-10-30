@@ -393,6 +393,11 @@ return [
     'content_deleted'   => '{name} 已删除',
     'topic_deleted'     => '该主题已被删除',
 
+    'facet_comments_disabled'	=> '禁止评论？',
+    'topic_comments_disabled'	=> '主题中禁用评论。',
+	'blog_comments_disabled'	=> '博客作者已禁用评论。',
+	'dir_comments_disabled'		=> '本节禁止发表评论。',
+
     'endless_scroll'        => '启用无限滚动？',
     'notification_email'    => '通过邮件通知',
     'notifications_limit'   => '显示最后100条通知',

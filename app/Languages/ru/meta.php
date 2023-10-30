@@ -61,7 +61,7 @@ return [
     'domain_desc'               => 'Группировка постов в сообществе по домену.',
 
     'all_comments'              => 'Все комментарии',
-    
+
     'feed_facet_desc'           => 'Общая лента. ',
     'feed_facet_posts_desc'     => 'Лента постов. ',
     'feed_facet_questions_desc' => 'Лента вопросов. ',

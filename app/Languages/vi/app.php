@@ -392,6 +392,11 @@ return [
     'content_deleted'   => '{name} đã xóa',
     'topic_deleted'     => 'Đã xóa chủ đề',
 
+    'facet_comments_disabled'	=> 'Tắt bình luận?',
+    'topic_comments_disabled'	=> 'Bình luận bị vô hiệu hóa trong chủ đề.',
+	'blog_comments_disabled'	=> 'Tác giả Blog đã vô hiệu hóa bình luận.',
+	'dir_comments_disabled'		=> 'Bình luận bị vô hiệu hóa trong phần này.',
+
     'endless_scroll'        => 'Cho phép cuộn trong nguồn cấp dữ liệu?',
     'notification_email'    => 'Thông báo qua email',
     'notifications_limit'   => 'Hiển thị 100 thông báo gần đây nhất',

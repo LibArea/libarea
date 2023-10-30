@@ -53,7 +53,7 @@ return [
     'remove'            => 'Delete',
     'completed'         => 'Command completed',
     'reward_user'       => 'Reward the participant',
-    
+
     'topic'             => 'Topic',
     'topics'            => 'Topics',
     'blog'              => 'Blog',
@@ -72,7 +72,7 @@ return [
     'item'              => 'Website',
     'invite'            => 'Invite',
     'report'            => 'A complaint',
-    
+
     'submenu'           => 'Submenu',
     'update'            => 'Update',
     'ban'               => 'Ban',
@@ -114,27 +114,27 @@ return [
     'tl4_title'         => 'Frequenter',
     'tl5_title'         => 'Leader',
     'tl10_title'        => 'Staff',
-    
+
     'deleted'           => 'Removed',
     'added'             => 'Added',
     'restored'          => 'Restored',
-    
+
     // Settings section
     // Раздел настройки
     'settings'              => 'Settings',
     'interface'             => 'Interface',
     'functions'             => 'Functions',
-    
+
     'url_help'              => 'Site URL (with https)',
     'email_help'            => 'Public email for communication',
     'name_help'             => 'Site short name',
     'title_help'            => 'Full site name',
-    
+
     'img_path'              => 'The path to the photo (intro for the site)',
     'img_path_help'         => 'Used in og:image and other places when there is no intro in the post, e.g.',
     'img_path_web'          => 'Path to photo (intro for catalog)',
     'img_path_web_help'     => 'Used in og:image for site directory',
-    
+
     'banner_title'          => 'Banner header',
     'banner_title_help'     => 'Banner title on the main page of the site, if the participant is not authorized',
     'banner_desc'           => 'Banner Body',
@@ -150,7 +150,7 @@ return [
     'count_like_feed_help'  => 'How many likes should a post get to be visible on the central page of the site',
     'type_post_feed'        => 'Appearance of the post in the feed',
     'type_post_feed_help'   => 'Classic or Card. If Classic, then this is a minimal design',
-    
+
     'ads_home_post'         => 'Home page, feed, after 4 posts',
     'ads_home_sidebar'      => 'Home page, sidebar',
     'ads_home_menu'         => 'Home page, under the left menu',
@@ -159,5 +159,5 @@ return [
     'ads_post_answer'       => 'Full post, after 2 replies',
     'ads_catalog_home'      => 'Main page of the catalog, under the banner',
     'ads_catalog_sidebar'   => 'Catalog sidebar',
-    
+
 ];

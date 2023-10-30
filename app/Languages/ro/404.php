@@ -14,4 +14,3 @@ return [
     'to_main'       => 'Spre casă',
     'error_404'     => 'Eroare 404',
 ];
-

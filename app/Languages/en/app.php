@@ -93,7 +93,7 @@ return [
     'write_message'     => 'To write a message',
     'send'              => 'Send',
     'information'       => 'Information',
-    'donate'            => 'Support the project', 
+    'donate'            => 'Support the project',
     'review'            => 'Review',
     'contacts'          => 'Contacts',
     'public_data'       => 'Public data visible in the profile.',
@@ -201,7 +201,7 @@ return [
     'entry_policy'      => 'Approve new members',
 
     'option'            => 'Option',
-    
+
     'back'              => 'Back',
     'edit'              => 'Change',
     'save'              => 'Save',
@@ -237,7 +237,7 @@ return [
     'no_cover'          => 'No covers yet',
     'no_invites'        => 'You have not created invitations',
     'no_content'        => 'Sorry, no content yet',
-    'no_dialogs'        => 'Sorry, there are no dialogues yet',    
+    'no_dialogs'        => 'Sorry, there are no dialogues yet',
     'no_posts'          => 'Sorry, no posts yet',
     'no_favorites'      => 'Sorry, there are no bookmarks yet',
     'no_comments'       => 'Unfortunately, there are no comments yet',
@@ -253,7 +253,7 @@ return [
     'format_Q&A'        => 'This is a question (will become a Q&A format) ?',
     'poll_closed'       => 'Is this poll closed?',
     'pin'               => 'Pin this post ?',
-    
+
     'source'            => 'Source',
     'website'           => 'Website',
     'websites'          => 'Sites',
@@ -305,7 +305,7 @@ return [
     'forgot_password'   => 'Forgot your password',
     'rules'             => 'Site rules',
     'restriction'       => 'Restrictions',
-    
+
     'text_closed'       => 'Without authorization it is forbidden to view this hidden text',
 
     /* Date and time + events */
@@ -367,7 +367,7 @@ return [
     'rec_posts'         => 'recommended posts',
     'topic_subs'        => 'Subscribe to topics and read them in the feed',
     'i_read'            => 'I read',
- 
+
     'message_PM'        => 'When the PM message came',
     'appeal_@'          => 'When contacted via @',
 
@@ -393,15 +393,20 @@ return [
     'content_deleted'       => '{name} deleted',
     'topic_deleted'         => 'The topic has been deleted',
 
+    'facet_comments_disabled'    => 'Disable comments?',
+    'topic_comments_disabled'    => 'Comments are disabled in the Topic.',
+    'blog_comments_disabled'    => 'The Blog author has disabled comments.',
+    'dir_comments_disabled'        => 'Comments are disabled in this Section.',
+
     'endless_scroll'        => 'Enable infinite scroll?',
     'notification_email'    => 'Notify by email',
     'notifications_limit'   => 'Showing last 100 notifications',
 
     'ignore'                => 'Ignore',
-    'ignored'               => 'Ignored',    
+    'ignored'               => 'Ignored',
     'ignored_users'         => 'Ignored users',
     'ignored_users_help'    => 'Users whose posts you will not see in the feed.',
-    'ignored_no'            => 'You don\'t have users that you ignore.', 
+    'ignored_no'            => 'You don\'t have users that you ignore.',
 
     'not_confirmed'         => 'not confirmed.',
     'resend_email'          => 'Check your email inbox or resend a new email.',

@@ -72,11 +72,11 @@ return [
     'closed'            => 'Discuțiile despre site sunt interzise. Autorul sau personalul a închis discuția.',
 
     'screenshot_time'   => 'Realizarea unei capturi de ecran poate dura ceva timp.',
- 
+
     'audits_home_title' => 'Auditul site-ului',
     'audits_home_desc'  => 'Site-uri luate în considerare',
     'num_website'       => ['Site-ul web', 'Site', 'Site-uri'],
-    
+
     'news'              => 'Știri și mass-media',
     'internet'          => 'Internet',
     'culture'           => 'Cultură și artă',
@@ -104,17 +104,17 @@ return [
 
     'data_help'         => '<i class="gray-600">Format antet:</i><br> «LibArea» — comunitate<br><br><i class="gray-600">Descriere (fără reclame):</i><br> ...ce este pe site?',
     'admin_help'         => 'Secțiune închisă disponibilă numai personalului',
-    
+
     'add_category'      => 'Adăugați o categorie',
     'add_website'       => 'Adăugați site',
     'edit_website'      => 'Editați site-ul',
-    
+
     'sidebar_info'      => 'Catalog de site-uri sistematizate pe rubrici tematice.',
     'banner_info'       => 'Catalog de site-uri cu adnotări și capturi de ecran. <br> Rubricare fațetă, căutare. Marcaje pe resurse cu posibilitatea de a vota site-uri, programe, rating',
-    
+
     'main_title'         => 'Director de site-uri',
     'main_desc'          => 'Lista site-urilor din director plasate în ordine cronologică. Abilitatea de a căuta, marca, sorta după popularitate',
-    
+
     'deleted_title' => 'Site-uri la distanță',
     'audits_title'  => 'Auditul site-ului',
 

@@ -62,7 +62,9 @@ class EditFacetController extends Controller
         $facet_user_id = $this->selectAuthor($facet['facet_user_id'], Request::getPost('user_id'));
 
         $post_related = $this->relatedPost();
+
         $facet_top_level = $data['facet_top_level'] ?? false;
+		$facet_is_comments = $data['facet_is_comments'] ?? false;
 
         FacetModel::edit(
             [
@@ -77,6 +79,7 @@ class EditFacetController extends Controller
                 'facet_top_level'           => $facet_top_level == 'on' ? 1 : 0,
                 'facet_post_related'        => $post_related,
                 'facet_type'                => $new_type,
+				'facet_is_comments'			=> $facet_is_comments == 'on' ? 1 : 0,
             ]
         );
 

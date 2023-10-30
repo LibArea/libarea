@@ -92,7 +92,7 @@ return [
     'write_message'     => 'Pentru a scrie un mesaj',
     'send'              => 'Trimite',
     'information'       => 'Informație',
-    'donate'            => 'Susține proiectul', 
+    'donate'            => 'Susține proiectul',
     'review'            => 'Revizuire',
     'contacts'          => 'Contacte',
     'public_data'       => 'Date publice vizibile în profil.',
@@ -180,7 +180,7 @@ return [
     'delete_profile'    => 'Ștergeți profilul',
     'read_carefully'    => 'Citiți cu atenție, este foarte important!',
     'read_information'  => 'Sunteți pe cale să vă ștergeți profilul. Pentru a șterge un profil, trebuie să confirmați că sunteți pregătit să ștergeți toate informațiile enumerate. Ștergerea unui profil este o <strong>acțiune ireversibilă</strong>, nu veți putea recupera datele pierdute.',
-    
+
     // Редактор
     'foto'              => 'A photo',
     'bold'              => 'îndrăzneţ',
@@ -236,7 +236,7 @@ return [
     'no_cover'          => 'Nicio copertă încă',
     'no_invites'        => 'Nu ați creat invitații',
     'no_content'        => 'Ne pare rău, încă nu există conținut',
-    'no_dialogs'        => 'Ne pare rău, încă nu există dialoguri',    
+    'no_dialogs'        => 'Ne pare rău, încă nu există dialoguri',
     'no_posts'          => 'Ne pare rău, încă nu există postări',
     'no_favorites'      => 'Ne pare rău, nu există încă marcaje',
     'no_comments'       => 'Din păcate, încă nu există comentarii',
@@ -252,7 +252,7 @@ return [
     'format_Q&A'        => 'Aceasta este o întrebare (Q&A)',
     'poll_closed'       => 'Acest sondaj este închis?',
     'pin'               => 'Fixați această postare',
-    
+
     'source'            => 'Sursa',
     'website'           => 'Site web',
     'websites'          => 'Site-uri web',
@@ -304,7 +304,7 @@ return [
     'forgot_password'   => 'Ați uitat parola',
     'rules'             => 'Regulile site-ului',
     'restriction'       => 'Restricții',
-    
+
     'text_closed'       => 'Fără autorizație este interzisă vizualizarea acestui text ascuns',
 
     /* Дата и время + события */
@@ -318,14 +318,14 @@ return [
     'num_view'      => ['Vizualizare', 'Vizualizare', 'Vizualizare'],
     'num_up'        => ['Voce', 'Voci', 'Voci'],
 
-     'comment'      => 'Comentariu',
-     'comments'     => 'Comentarii',
-     'answer'       => 'Răspuns',
-     'answers'      => 'Răspunsuri',
-     'message'      => 'Mesaj',
-     'messages'     => 'Mesaje',
-     'post'         => 'Postare',
-     'posts'        => 'Postări',
+    'comment'      => 'Comentariu',
+    'comments'     => 'Comentarii',
+    'answer'       => 'Răspuns',
+    'answers'      => 'Răspunsuri',
+    'message'      => 'Mesaj',
+    'messages'     => 'Mesaje',
+    'post'         => 'Postare',
+    'posts'        => 'Postări',
 
     'language'          => 'Localizare',
 
@@ -366,7 +366,7 @@ return [
     'rec_posts'         => 'postări recomandate',
     'topic_subs'        => 'Abonați-vă la subiecte și citiți-le în feed',
     'i_read'            => 'Citesc',
- 
+
     'message_PM'        => 'Când a venit mesajul PM',
     'appeal_@'          => 'Când sunteți contactat prin @',
 
@@ -392,15 +392,20 @@ return [
     'content_deleted'   => '{name} îndepărtat',
     'topic_deleted'     => 'Subiectul a fost șters',
 
+    'facet_comments_disabled'    => 'Dezactivați comentariile?',
+    'topic_comments_disabled'    => 'Comentariile sunt dezactivate în subiect.',
+    'blog_comments_disabled'    => 'Autorul blogului a dezactivat comentariile.',
+    'dir_comments_disabled'        => 'Comentariile sunt dezactivate în această secțiune.',
+
     'endless_scroll'        => 'Activați derularea infinită?',
     'notification_email'    => 'Notificare prin e-mail',
     'notifications_limit'   => 'Se afișează ultimele 100 de notificări',
 
     'ignore'                => 'Ignora',
-    'ignored'               => 'Ignorat',    
+    'ignored'               => 'Ignorat',
     'ignored_users'         => 'Utilizatori ignorați',
     'ignored_users_help'    => 'Utilizatori ale căror postări nu le vei vedea în feed.',
-    'ignored_no'            => 'Nu aveți utilizatori pe care să-i ignorați.', 
+    'ignored_no'            => 'Nu aveți utilizatori pe care să-i ignorați.',
 
     'not_confirmed'         => 'neconfirmat.',
     'resend_email'          => 'Verificați-vă căsuța de e-mail sau retrimiteți un e-mail nou.',

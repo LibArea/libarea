@@ -76,7 +76,7 @@ return [
     'audits_home_title' => 'Website audit',
     'audits_home_desc'  => 'Sites under consideration',
     'num_website'       => ['Site', 'Sites', 'Sites'],
-    
+
     'news'              => 'News and Media',
     'internet'          => 'Internet',
     'culture'           => 'Culture and art',
@@ -103,17 +103,17 @@ return [
 
     'data_help'         => '<i class="gray-600">Title Format:</i><br> «LibArea» — community<br><br><i class="gray-600">Description (no ads)):</i><br> ...what is on the site?',
     'admin_help'         => 'Closed section available only to staff...',
-    
+
     'add_category'      => 'Add category',
     'add_website'       => 'Add site',
     'edit_website'      => 'Edit site',
-    
+
     'sidebar_info'      => 'Catalog of sites systematized by thematic headings.',
     'banner_info'       => 'Catalog of sites with annotations and screenshots. <br> Faceted rubrication, search. Bookmarks on resources with the ability to vote for sites, programs, rating',
-    
+
     'main_title'        => 'Website directory',
     'main_desc'         => 'List of sites in the directory placed in chronological order. Ability to search, bookmark, sort by popularity',
-    
+
     'deleted_title'     => 'Remote Sites',
     'audits_title'      => 'Website audit',
 

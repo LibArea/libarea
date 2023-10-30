@@ -157,23 +157,36 @@ $blog = $data['blog'][0] ?? null;
 
       <?= insert('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
 
-      <?php if (UserData::checkActiveUser()) : ?>
-        <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
+      <?php
+      $is_comments = 0;
+      foreach ($data['facets'] as $ind => $facet) : ?>
+        <?php if ($facet['facet_is_comments'] != 0) {
+          $is_comments = $facet['facet_is_comments'];
+        } ?>
+      <?php endforeach; ?>
 
-          <form action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
-            <?= csrf_field() ?>
+      <?php if (empty($is_comments)) : ?>
 
-            <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
+        <?php if (UserData::checkActiveUser()) : ?>
+          <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
-            <div class="clear mt5">
-              <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
-              <input type="hidden" name="answer_id" value="0">
-              <?= Html::sumbit(__('app.reply')); ?>
-            </div>
-          </form>
+            <form action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+              <?= csrf_field() ?>
 
+              <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
+
+              <div class="clear mt5">
+                <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
+                <input type="hidden" name="answer_id" value="0">
+                <?= Html::sumbit(__('app.reply')); ?>
+              </div>
+            </form>
+
+          <?php endif; ?>
         <?php endif; ?>
+
       <?php endif; ?>
+
 
     <?php else : ?>
       <div class="box center bg-red-200">
@@ -181,16 +194,22 @@ $blog = $data['blog'][0] ?? null;
       </div>
     <?php endif; ?>
   </article>
-  <div id="comment"></div>
-  <?php if ($post['post_draft'] == 0) :
-    if ($post['post_feature'] == 0) :
-      insert('/content/post/format-discussion', ['data' => $data, 'post' => $post]);
+
+
+
+  <?php if (empty($is_comments)) : ?>
+
+    <div id="comment"></div>
+    <?php if ($post['post_draft'] == 0) :
+      $format = ($post['post_feature'] == 0) ? 'discussion' : 'qa';
+      insert('/content/post/format-' . $format, ['data' => $data, 'post' => $post]);
     else :
-      insert('/content/post/format-qa', ['data' => $data, 'post' => $post]);
-    endif;
-  else :
-    echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);
-  endif; ?>
+      echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);
+    endif; ?>
+
+  <?php else : ?>
+    <?php insert('/_block/no-content', ['type' => 'small', 'text' => __('app.topic_comments_disabled'), 'icon' => 'closed']); ?>
+  <?php endif; ?>
 </main>
 
 <aside>

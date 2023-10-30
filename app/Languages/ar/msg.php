@@ -62,14 +62,14 @@ return [
     'invite_created'        => 'تم انشاء الدعوة',
     'url_reserved'          => 'عنوان نطاق المدونة مستخدم',
     'url_correctness'       => 'عنوان النطاق غير صحيح',
-    
+
     'string_length'         => 'خطأ في الطول {name}',
     'slug_correctness'      => '{name} يجب ان يحتوي فقط على احرف لاتينية, ارقام',
     'email_correctness'     => 'بريد غير صالح',
-    
+
     'limit_day'             => 'لقد تجاوزت الحد المسموح لليوم',
     'content_audit'         => 'تم ارسال رسالتك للمراجعة',
     'access_denied'         => 'تم رفض الوصول الخاص بك',
-    
+
     'field_limit'           => 'بلغ عدد الحقول الحد الأقصى.',
 ];

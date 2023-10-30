@@ -62,14 +62,14 @@ return [
     'invite_created'        => 'Invitație creată',
     'url_reserved'          => 'URL-ul acestui blog este rezervat',
     'url_correctness'       => 'URL-ul nu este corect',
-    
+
     'string_length'         => 'Lungime incorectă {name}',
     'slug_correctness'      => '{name} trebuie să conțină numai caractere latine, numere',
     'email_correctness'     => 'E-mail invalid',
-    
+
     'limit_day'             => 'Ai atins limita pentru azi',
     'content_audit'         => 'Mesajul dvs. a fost trimis spre examinare',
     'access_denied'         => 'Vi se interzice accesul',
-    
+
     'field_limit'           => 'Numărul de câmpuri a atins maximul.',
 ];
