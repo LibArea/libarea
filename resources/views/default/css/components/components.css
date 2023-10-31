@@ -347,8 +347,6 @@ video {  max-width: 560px; }
   text-align: center;
 }
 
-.voters.active .score { color: var(--brown); }
-
 .qa-comment {
   font-size: 0.875rem;
   padding: 0.24rem 0;

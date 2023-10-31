@@ -126,7 +126,7 @@ ul.nav > li.active a:hover { color: var(--nav-color-active); }
 /* If it's tabs */
 .content-tabs { display: none; }
 
-.content-tabs.active {
+.content-tabs.tab_active {
   display: block;
   color: var(--nav-color-active);
 }

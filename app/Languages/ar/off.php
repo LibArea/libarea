@@ -18,4 +18,5 @@ return [
     'sign_in'               => 'تسجيل الدخول',
     'enter_password'        => 'ادخل كلمة السر',
     'under_reconstruction'  => 'الموقع تحت الصيانة, الدخول مسموح للطاقم فقط.',
+    'under_maintenance'  	=> 'نمط الصيانة.',
 ];

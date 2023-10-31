@@ -252,7 +252,7 @@ if (tabs_post) {
       e.target.classList.add("active");
 
       contents.forEach(content => {
-        content.classList.remove("active");
+        content.classList.remove("tab_active");
       });
 
       getById('inputQa').value = 0;
@@ -261,7 +261,7 @@ if (tabs_post) {
       }
       
       const element = getById(id);
-      element.classList.add("active");
+      element.classList.add("tab_active");
     }
   }
 }

@@ -18,4 +18,5 @@ return [
     'sign_in'               => '登录',
     'enter_password'        => '输入密码',
     'under_reconstruction'  => '正在重建站点。仅限工作人员进入。',
+    'under_maintenance'  	=> '维护模式',
 ];

@@ -18,4 +18,5 @@ return [
     'sign_in'               => 'Đăng nhập',
     'enter_password'        => 'Điền mật khẩu',
     'under_reconstruction'  => 'Site đang được tái cấu trúc. Lối vào chỉ dành cho người quản lý.',
+    'under_maintenance'  	=> 'Chế độ bảo trì',
 ];

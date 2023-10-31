@@ -59,7 +59,6 @@ isIdEmpty('toggledark').onclick = function () {
     document.cookie = "dayNight" + "=" + "dark" + "; " + expires + ";path=/";
     document.getElementsByTagName('body')[0].classList.add('dark');
   }
-  location.reload();
 }
 
 // Navigation menu on/off

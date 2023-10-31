@@ -18,4 +18,5 @@ return [
     'sign_in'               => 'Loghează-te',
     'enter_password'        => 'Introdu parola',
     'under_reconstruction'  => 'Site în reconstrucție. Intrarea numai pentru personal.',
+    'under_maintenance'  	=> 'Modul de întreținere',
 ];

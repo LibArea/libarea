@@ -10,7 +10,7 @@
 <body>
 
   <main class="box mr-auto max-w780">
-    <h1 class="text-3xl gray">Режим технического обслуживания</h1>
+    <h1 class="text-3xl gray"><?= __('off.maintenance'); ?></h1>
     <p class="gray-600"><?= __('off.under_reconstruction'); ?>...</p>
 
     <form class="max-w300" action="/login" method="post">
@@ -27,7 +27,7 @@
     </form>
 
   </main>
-  <div class="center gray-600 mt5 text-sm"><?php echo date ( 'Y' ) ; ?> © <?= config('meta.name'); ?></a>
+  <div class="center gray-600 mt5 text-sm"><?= date('Y'); ?> © <?= config('meta.name'); ?></a>
 
 </body>
 

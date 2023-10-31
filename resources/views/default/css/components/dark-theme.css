@@ -6,22 +6,22 @@
 
 
 body.dark {
-  --bg-color: #333;
+  --bg-color: #222;
   --text-color: #fff;
 
   --link-color: #118bee;
   --link-color-hover: #ef4444;
 
-  --nav-bg-active: #fcebd9;
-  --nav-color-active: #332f2f;
+  --nav-bg-active: #111;
+  --nav-color-active: #fff;
   
   --dropdown-bg: #fff;
   --dropdown-box-shadow: 0 6px 18px 0 rgba(14,21,47,.13),0 -2px 6px rgba(14,21,47,.03);
   
   --form-color-active: #3595f6;
-  --form-bg-color: #fff;
+  --form-bg-color: #333;
   --form-border-color: #ddd;
-  --form-text-color: #111;
+  --form-text-color: #fff;
 
   --header-bg: #111;
   --header-box-shadow: 0 1px 2px -1px rgb(0 0 0 / 25%);
@@ -40,10 +40,22 @@ body.dark {
   --white: #111;
   --gray: #a7a7a7;
   --gray-100: #111;
+  --violet: #111;
 }
  
 body.dark .EasyMDEContainer .CodeMirror {
-  background: var(--form-bg-color);
+  background-color: var(--form-bg-color);
+  color: var(--form-text-color);
 } 
 
 body.dark .box { background-color: #100d0d; }
+body.dark .tagify { background-color: var(--form-bg-color); }
+
+body.dark blockquote {
+  background-color: #5f5f67;
+  border-left: 3px solid #6d6e6f;
+}
+
+.bg-lightyellow {
+  background-color: #444;
+}
