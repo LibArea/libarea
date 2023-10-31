@@ -9,10 +9,9 @@
     </svg></span>
 </fieldset>
 
-<fieldset class="rememberme ">
+<fieldset class="flex gap-min gray">
   <input id="rememberme" name="rememberme" type="checkbox" value="1">
-  <label for="rememberme"><?= __('app.remember_me'); ?></label>
-  <div class="text-sm gray-600"></div>
+  <label class="m0" for="rememberme"><?= __('app.remember_me'); ?></label>
 </fieldset>
 
 <?= Html::sumbit(__('app.sign_in')); ?>

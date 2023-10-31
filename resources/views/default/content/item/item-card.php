@@ -21,7 +21,8 @@
                 <svg class="icons">
                   <use xlink:href="/assets/svg/icons.svg#edit"></use>
                 </svg>
-              </a> - <?= $item['item_following_link']; ?>
+              </a> 
+			  <span class="gray-600">- <?= $item['item_following_link']; ?></span>
             <?php endif; ?>
 
             <?php if (UserData::checkAdmin()) : ?>
@@ -39,7 +40,7 @@
                 </svg>
               </span>
             <?php endif; ?>
-            <div class="black" itemprop="description">
+            <div itemprop="description">
               <?= fragment($item['item_content'], 200); ?>
             </div>
             <div class="list-items__footer">
@@ -61,7 +62,7 @@
                   <svg class="icons gray ml5">
                     <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
                   </svg>
-                  <a itemprop="url" class="black lowercase" href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
+                  <a itemprop="url" class="lowercase" href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
                     <?= __('web.more'); ?>
                   </a>
                 </div>

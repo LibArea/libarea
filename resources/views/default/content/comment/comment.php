@@ -1,7 +1,7 @@
 <?php $n = 0;
 foreach ($comments as $comment) :
   $n++; ?>
-  <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
+  <?php if ($n != 1) { ?><div class="br-dotted mt10 mb10"></div><?php } ?>
 
   <?php if (!empty($comment['answer_id'])) : ?>
     <?php if ($comment['answer_published'] == 0 && $comment['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>

@@ -1,35 +1,36 @@
-.footer {
-  background-color: var(--white);
-  color: var(--gray-600);
+footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text-color);
   padding: 0.5rem;
   overflow: hidden;
   margin-top: 1rem;
+  box-shadow: var(--footer-box-shadow);
 }
 
-.footer.small-sidebar {
+footer.small-sidebar {
   background-color: transparent;
-  color: var(--gray-600);
+  color: var(--footer-text-color);
   font-size: .875rem;
   padding: 0 0.25rem;
   margin: 0 0.25rem;
 }
 
-.footer .icon {
-  color: var(--gray-600);
+footer .icon {
+  color: var(--footer-text-color);
   margin-right: 1rem;
 }
 
-.footer ul {
+footer ul {
   padding-left: 60px;
   list-style: none;
   margin: 0;
 }
 
-.footer ul li a {
+footer ul li a {
   font-size: 14px;
-  color: var(--gray-600);
+  color: var(--footer-text-color);
   margin-bottom: 5px;
 }
 
-.footer ul li a:hover,
-.footer .icon:hover { color: var(--black); }
+footer ul li a:hover,
+footer .icon:hover { color: var(--footer-color-active); }

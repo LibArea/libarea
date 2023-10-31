@@ -62,13 +62,13 @@ return [
     'invite_created'        => '邀请已创建',
     'url_reserved'          => '此博客网址已保留',
     'url_correctness'       => '网址不正确',
-    
+
     'string_length'         => '长度不正确 {name}',
     'slug_correctness'      => '{name} 必须包含拉丁字符、数字',
     'email_correctness'     => '邮箱无效',
-    
+
     'limit_day'             => '对于 {tl}，你已经达到今日限制“{name}”',
     'content_audit'         => '你的消息已发送待审核',
-    
+
     'field_limit'           => '字段数已达到最大值。',
 ];

@@ -4,17 +4,14 @@
  * Стили для форм
  */
 
-textarea {
-  width: 100%;
+input, select, textarea {
+  background-color: var(--form-bg-color);
+  border: 1px solid var(--form-border-color);
+  color: var(--form-text-color);
   font-size: 16px;
-  padding: 1px 6px;
-  border: 1px solid var(--slate);
 }
 
-input, select {
-  border: 1px solid var(--slate);
-  font-size: 16px;
-}
+textarea { width: 100%; }
 
 fieldset input:not([type=radio]):not([type=checkbox]):not([type=range]),
 fieldset select {
@@ -30,13 +27,6 @@ fieldset {
   margin: 10px 0;
 }
 
-fieldset.rememberme label {
-  display: inline;
-  vertical-align: middle;
-  margin-left: 5px;
-  color: var(--gray);
-}
-
 fieldset.error input {
   border-color: var(--red);
 }
@@ -46,10 +36,8 @@ fieldset.error input {
   color: var(--gray-600);
 }
 
-select { background-color: var(--white); }
-
 input:focus,
-textarea:focus { border: 1px solid var(--blue-100); }
+textarea:focus { border: 1px solid var(--form-color-active); }
 
 label {
   display: block;

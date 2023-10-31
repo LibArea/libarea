@@ -111,7 +111,7 @@ ul.nav {
 
 ul.nav > li { padding: 6px 12px; }
 ul.nav.small > li { padding: 3px 6px; }
-ul.nav > li > a { color: rgba(0, 0, 0, 0.5); }
+ul.nav > li > a { color: var(--gray-600); }
 
 ul.nav > li.active {
   background-color: var(--nav-bg-active);

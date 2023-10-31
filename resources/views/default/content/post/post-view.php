@@ -235,7 +235,7 @@ $blog = $data['blog'][0] ?? null;
   <?php endif; ?>
 
   <?php if ($post['post_content_img']) : ?>
-    <div class="box border-lightgray img-preview">
+    <div class="box br-lightgray img-preview">
       <img class="w-100 br-rd5" src="<?= Img::PATH['posts_cover'] . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php endif; ?>

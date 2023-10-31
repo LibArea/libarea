@@ -15,16 +15,16 @@ return [
 
   'test_subject' => '{name} — 邮件测试(管理面板)',
   'test_message' => '<p>此电子邮件是通过管理面板发送的测试邮件。</p>',
-   
+
   'activate_email_subject' => '{name} — 激活邮箱',
   'activate_email_message' => '<p>要继续注册，请先激活你的邮箱。 按照这个链接：</p><p>{url}</p>',
-   
+
   'new_email_subject' => '{name} — 更改电子邮件',
   'new_email_message' => '<p>要继续，请单击以下链接激活您的电子邮件：</p><p>{url}</p>',
-   
+
   'invite_reg_subject' => '{name} — 邀请加入(邀请)',
   'invite_reg_message' => '<p>你已被邀请加入社区。 如果你同意。请点击链接：</p><p>{url}</p>',
-   
+
   'footer' => '<p>此电子邮件是自动生成的。<br>你无需回复。</p><p>管理。<br>{name}</p>',
 
 ];

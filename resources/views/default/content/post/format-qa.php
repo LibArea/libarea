@@ -21,7 +21,7 @@
         <?php endif; ?>
 
         <?php if (UserData::getUserId() == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
-        <div class="br-top-dotted mb5"></div>
+        <div class="br-dotted mb5"></div>
         <ol class="list-none">
           <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
             <div class="max-w780">

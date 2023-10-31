@@ -29,7 +29,8 @@
                     <svg class="icons">
                       <use xlink:href="/assets/svg/icons.svg#edit"></use>
                     </svg>
-                  </a> - <?= $item['item_following_link']; ?>
+                  </a> 
+				  <span class="gray-600">- <?= $item['item_following_link']; ?></span>
                 <?php endif; ?>
 
                 <div class="black">

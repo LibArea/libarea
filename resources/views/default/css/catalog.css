@@ -20,7 +20,6 @@
 }
 
 .list-items__description {
-  color: var(--gray-600);
   margin-top: 5px;
   width: 100%;
 }
@@ -54,14 +53,15 @@
   margin-bottom: 10px;
 }
 
+/* Dark layout */
 body.item.dark h2,
 body.item.dark .categories-telo a {
-  color: var(--black);
+  color: #fff;
 }
 
-body.item.dark .box {
-  background-color: var(--gray-100);
-}
+body.item.dark .box { background-color: #222; }
+body.item.dark .item-categories { background-color: #111; }
+
 
 @media (max-width: 890px) {
   .item-categories,

@@ -1,6 +1,6 @@
 </div>
 
-<footer class="footer shadow-top" itemscope itemtype="http://schema.org/WPFooter">
+<footer itemscope itemtype="http://schema.org/WPFooter">
   <?php $type = $data['type'] ?? false; ?>
   <?php if (UserData::getUserScroll() == false || $type != 'main') : ?>
     <div class="wrap">

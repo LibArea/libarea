@@ -52,7 +52,7 @@ use Hleb\Constructor\Handlers\Request; ?>
 
   <?php if (is_array($data['topics'])) : ?>
     <?php if (count($data['topics']) > 0) : ?>
-      <div class="box border-lightgray">
+      <div class="box br-lightgray">
         <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
         <ul>
           <?php foreach ($data['topics'] as $recomm) : ?>
@@ -74,7 +74,7 @@ use Hleb\Constructor\Handlers\Request; ?>
   <?php endif; ?>
 
   <?php if (is_array($data['items'])) : ?>
-    <div class="box border-lightgray">
+    <div class="box br-lightgray">
       <h4 class="uppercase-box"><?= __('app.websites'); ?></h4>
       <ul>
         <?php foreach ($data['items'] as $item) : ?>

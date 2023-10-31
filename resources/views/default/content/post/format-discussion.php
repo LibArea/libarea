@@ -18,7 +18,7 @@
         <div class="gray-600 text-sm m10"><?= __('app.content_deleted', ['name' => __('app.answer')]); ?>...</div>
       <?php else : ?>
 
-        <?php if ($n != 1) : ?><div class="br-top-dotted mt10 mb10"></div><?php endif; ?>
+        <?php if ($n != 1) : ?><div class="br-dotted mt10 mb10"></div><?php endif; ?>
 
         <?php if ($answer['answer_published'] == 0 && $answer['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 

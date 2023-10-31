@@ -5,7 +5,7 @@
  */
 
 .logo {
-  color: var(--black);
+  color: var(--header-logo-color);
   font-size: 21px;
 }
 

@@ -93,7 +93,7 @@ return [
     'write_message'     => '寫信息',
     'send'              => '發送',
     'information'       => '信息',
-    'donate'            => '支持项目', 
+    'donate'            => '支持项目',
     'review'            => '審查',
     'contacts'          => '聯繫人',
     'public_data'       => '配置文件中可见的公共数据。',
@@ -181,7 +181,7 @@ return [
     'delete_profile'    => '删除配置文件',
     'read_carefully'    => '仔细阅读，真的很重要！',
     'read_information'  => '您即将删除您的个人资料。 要删除配置文件，您必须确认您已准备好删除列出的所有信息。 删除配置文件是<strong>不可逆操作</strong>，您将无法找回丢失的数据。',
-    
+
     // Редактор
     'foto'              => '照片',
     'bold'              => '脂肪',
@@ -201,7 +201,7 @@ return [
     'entry_policy'      => '批准新成员',
 
     'option'            => '选项',
-    
+
     'back'              => '返回',
     'edit'              => '要改变',
     'save'              => '储蓄',
@@ -237,7 +237,7 @@ return [
     'no_cover'          => '还没有封面',
     'no_invites'        => '您还没有创建任何邀请',
     'no_content'        => '不幸的是，还没有内容',
-    'no_dialogs'        => '不幸的是，还没有对话',    
+    'no_dialogs'        => '不幸的是，还没有对话',
     'no_posts'          => '不幸的是，还没有帖子',
     'no_favorites'      => '不幸的是，还没有书签',
     'no_comments'       => '不幸的是，还没有评论',
@@ -253,7 +253,7 @@ return [
     'format_Q&A'        => '这是一个问题（将成为问答形式）?',
     'poll_closed'       => '这个民意调查结束了吗？',
     'pin'               => '置顶此帖?',
-    
+
     'source'            => '一个来源',
     'website'           => '网站',
     'websites'          => '网站',
@@ -305,19 +305,19 @@ return [
     'forgot_password'   => '忘记密码',
     'rules'             => '网站规则',
     'restriction'       => '限制',
-    
+
     'text_closed'       => '未经授权禁止查看此隐藏文本',
 
     /* Дата и время + события */
-    'months'        => ['', '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月','十月', '十一月', '十二月'],
+    'months'        => ['', '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
     'today'         => '今天',
     'yesterday'     => '昨天',
 
-    'num_message'=>['消息','消息','消息'],
-    'num_answer'=>['答案','答案','答案'],
-    'num_post'=>['后','后','后'],
-    'num_view'=>['视图','视图','视图'],
-    'num_up'=>['声音','声音','声音'],
+    'num_message' => ['消息', '消息', '消息'],
+    'num_answer' => ['答案', '答案', '答案'],
+    'num_post' => ['后', '后', '后'],
+    'num_view' => ['视图', '视图', '视图'],
+    'num_up' => ['声音', '声音', '声音'],
 
     'comment'       => '评论',
     'comments'      => '评论',
@@ -367,7 +367,7 @@ return [
     'rec_posts'         => '推荐职位',
     'topic_subs'        => '订阅主题并在提要中阅读',
     'i_read'            => '我看了',
- 
+
     'message_PM'        => '当消息来到PM',
     'appeal_@'          => '当他们通过电话联系我的时候 @',
 
@@ -393,20 +393,20 @@ return [
     'content_deleted'   => '{name} 已删除',
     'topic_deleted'     => '该主题已被删除',
 
-    'facet_comments_disabled'	=> '禁止评论？',
-    'topic_comments_disabled'	=> '主题中禁用评论。',
-	'blog_comments_disabled'	=> '博客作者已禁用评论。',
-	'dir_comments_disabled'		=> '本节禁止发表评论。',
+    'facet_comments_disabled'    => '禁止评论？',
+    'topic_comments_disabled'    => '主题中禁用评论。',
+    'blog_comments_disabled'    => '博客作者已禁用评论。',
+    'dir_comments_disabled'        => '本节禁止发表评论。',
 
     'endless_scroll'        => '在feed中启用滚动？',
     'notification_email'    => '以电邮通知',
     'notifications_limit'   => '最后100个通知显示',
 
     'ignore'                => '忽略',
-    'ignored'               => '忽略',  
+    'ignored'               => '忽略',
     'ignored_users'         => '忽略的用户',
     'ignored_users_help'    => '您不会在提要中看到其帖子的用户。',
-    'ignored_no'            => '您没有忽略的用户。', 
+    'ignored_no'            => '您没有忽略的用户。',
 
     'not_confirmed'         => '还没有确定',
     'resend_email'          => '检查您的电子邮件收件箱或重新发送新电子邮件',

@@ -61,7 +61,7 @@ $domain = $data['domain']; ?>
     </div>
 
     <?php if (UserData::checkAdmin()) { ?>
-      <div class="box border-lightgray text-sm">
+      <div class="box br-lightgray text-sm">
         <h4 class="uppercase-box"><?= __('web.status'); ?></h4>
         <?php foreach ($data['status'] as $st) :  ?>
           <div><?= $st['status_response']; ?> <span class="gray-600">| <?= $st['status_date']; ?></span></div>

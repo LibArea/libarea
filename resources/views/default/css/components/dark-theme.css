@@ -4,16 +4,46 @@
  * Тёмная (ночная) тема
  */
 
+
 body.dark {
-  filter: invert(100%) hue-rotate(180deg);
-  background-color: var(--black);
+  --bg-color: #333;
+  --text-color: #fff;
+
+  --link-color: #118bee;
+  --link-color-hover: #ef4444;
+
+  --nav-bg-active: #fcebd9;
+  --nav-color-active: #332f2f;
+  
+  --dropdown-bg: #fff;
+  --dropdown-box-shadow: 0 6px 18px 0 rgba(14,21,47,.13),0 -2px 6px rgba(14,21,47,.03);
+  
+  --form-color-active: #3595f6;
+  --form-bg-color: #fff;
+  --form-border-color: #ddd;
+  --form-text-color: #111;
+
+  --header-bg: #111;
+  --header-box-shadow: 0 1px 2px -1px rgb(0 0 0 / 25%);
+  --header-text-color: #fff;
+  --header-logo-color: #fff;
+  --header-form-bg-color: #444;
+  --header-form-text-color: #fff;
+  
+  --footer-bg: #111;
+  --footer-box-shadow: 0 -5px 5px -5px rgb(0 0 0 / 15%);
+  --footer-text-color: #eee;
+  --footer-color-active: #ccc;
+ 
+  /* Colors used */	
+  --black: #fff;
+  --white: #111;
+  --gray: #a7a7a7;
+  --gray-100: #111;
 }
+ 
+body.dark .EasyMDEContainer .CodeMirror {
+  background: var(--form-bg-color);
+} 
 
-body.dark .bg-white { background-color: var(--gray-100); }
-body.dark img, body.dark iframe { filter: invert(100%) hue-rotate(180deg); }
-
-body.dark .bg-lightgray,
-body.dark .menu li.active,
-body.dark .CodeMirror { background-color: #d6d3d3; }
-
-body.dark .border-lightgray { border: 5px solid #d6d3d3; }
+body.dark .box { background-color: #100d0d; }

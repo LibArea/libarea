@@ -74,7 +74,7 @@
   <?php endif; ?>
 
   <?php if (!empty($data['participation'][0]['facet_id'])) : ?>
-    <div class="box border-lightgray">
+    <div class="box br-lightgray">
       <h4 class="uppercase-box"><?= __('app.understands'); ?></h4>
       <?php foreach ($data['participation'] as $part) : ?>
         <a class="gray-600 mr15 text-sm" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
@@ -84,7 +84,7 @@
     </div>
   <?php endif; ?>
 
-  <div class="box border-lightgray">
+  <div class="box br-lightgray">
     <h4 class="uppercase-box"><?= __('app.badges'); ?></h4>
     <div class="text-3xl">
       <span title="<?= __('app.medal_reg'); ?>"><svg class="icons icon-base sky">

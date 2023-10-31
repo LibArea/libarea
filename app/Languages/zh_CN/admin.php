@@ -53,7 +53,7 @@ return [
     'remove'            => '删除',
     'completed'         => '命令已执行',
     'reward_user'       => '奖励参与者',
-    
+
     'topic'             => '主题',
     'topics'            => '主题',
     'blog'              => '博客',
@@ -72,7 +72,7 @@ return [
     'item'              => '网站',
     'invite'            => '邀请',
     'report'            => '投诉',
-    
+
     'submenu'           => '子菜单',
     'update'            => '更新资料',
     'ban'               => '禁止',
@@ -114,27 +114,27 @@ return [
     'tl4_title'         => '常客',
     'tl5_title'         => '领袖',
     'tl10_title'        => '员工',
-    
+
     'deleted'           => '已移除',
     'added'             => '添加',
     'restored'          => '已恢复',
-    
+
     // Settings section
     // Раздел настройки
     'settings'              => '设置',
     'interface'             => '界面',
     'functions'             => '功能',
-    
+
     'url_help'              => '站点 URL（带有 https）',
     'email_help'            => '用于交流的公共电子邮件',
     'name_help'             => '网站简称',
     'title_help'            => '完整的站点名称',
-    
+
     'img_path'              => '照片的路径（网站介绍）',
     'img_path_help'         => '用于 og:image 和其他帖子中没有介绍的地方，例如',
     'img_path_web'          => '照片路径（目录介绍）',
     'img_path_web_help'     => '在 og:image 中用于站点目录',
-    
+
     'banner_title'          => '横幅标题',
     'banner_title_help'     => '网站主页上的横幅标题，如果参与者未经授权',
     'banner_desc'           => '横幅正文',
@@ -150,7 +150,7 @@ return [
     'count_like_feed_help'  => '一个帖子应该在网站的中心页面上显示多少个赞',
     'type_post_feed'        => '帖子在提要中的外观',
     'type_post_feed_help'   => '经典或卡片。 如果经典，那么这是一个最小的设计',
-    
+
     'ads_home_post'         => '主页，提要，4 个帖子后',
     'ads_home_sidebar'      => '主页、侧边栏',
     'ads_home_menu'         => '主页，左侧菜单',

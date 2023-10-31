@@ -72,11 +72,11 @@ return [
     'closed'            => '禁止讨论该网站。 作者或工作人员结束了讨论。',
 
     'screenshot_time'   => '截屏可能需要一些時間。',
- 
+
     'audits_home_title' => '现场审核',
     'audits_home_desc'  => '正在考虑的地点',
     'num_website'       => ['网站', '网站', '网站'],
-    
+
     'news'              => '新闻及传媒',
     'internet'          => '互联网',
     'culture'           => '文化艺术',
@@ -103,20 +103,20 @@ return [
 
     'data_help'         => '<i class="gray-600">标题格式:</i><br> «LibArea» — 社区<br><br><i class="gray-600">描述(无广告):</i><br> ...网站上有什么？',
     'admin_help'         => '僅對員工開放的封閉部分',
-    
+
     'add_category'      => '添加类别',
     'add_website'       => '添加网站',
     'edit_website'      => '更改网站',
-    
+
     'sidebar_info'      => '按主题标题系统化的网站目录。',
     'banner_info'       => '带有注释和屏幕截图的网站目录。 分面分类，搜索。 书签资源与投票的网站，程序，评级的能力',
-    
+
     'main_title'        => '网站目录',
     'main_desc'         => '按时间顺序排列的目录中的站点列表。 能够搜索，书签，按受欢迎程度排序',
-    
+
     'deleted_title'     => '远程站点',
     'audits_title'      => '现场审核',
-    
+
     'all'               => '全部',
     'github'            => 'GitHub',
     'forum'             => '论坛',
@@ -124,7 +124,7 @@ return [
     'portal'            => '门户网站',
     'reference'         => '百科全书',
     'goods'             => '商品和服务',
-    
+
     'top_title'         => '{name} -按受欢迎程度划分的网站',
     'top_desc'          => '按主题公布的网站名单 {description_info}',
     'all_title'         => '{name} -类别，按日期划分的网站',

@@ -62,14 +62,14 @@ return [
     'invite_created'        => '邀請已創建',
     'url_reserved'          => '此博客網址已保留',
     'url_correctness'       => '网址不正确',
-    
+
     'string_length'         => '長度不正確 {name}',
     'slug_correctness'      => '{name} 必須只包含拉丁字符、數字',
     'email_correctness'     => '不合規電郵',
-    
+
     'limit_day'             => '您已達到今天的限額',
     'content_audit'         => '您的消息已發送以供審核',
     'access_denied'         => '您被拒絕訪問',
-    
+
     'field_limit'           => '字段数已达到最大值。',
 ];
