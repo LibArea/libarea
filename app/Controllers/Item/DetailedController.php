@@ -5,6 +5,7 @@ namespace App\Controllers\Item;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\ItemPresence;
+use App\Services\Tree\buildTree;
 use App\Models\Item\{WebModel, ReplyModel, UserAreaModel};
 use App\Models\{PostModel, SubscriptionModel};
 use Meta, UserData, Img;
@@ -57,7 +58,7 @@ class DetailedController extends Controller
         }
 
         $flat = ReplyModel::get($item['item_id'], $this->user);
-        $tree = !empty($flat) ? self::buildTree(0, $flat) : false;
+        $tree = !empty($flat) ? buildTree::index(0, $flat, 'reply') : false;
 
         // Featured Content
         // Рекомендованный контент       
@@ -87,28 +88,6 @@ class DetailedController extends Controller
             ],
             'item',
         );
-    }
-
-    // https://stackoverflow.com/questions/4196157/create-array-tree-from-array-list/4196879#4196879
-    public static function buildTree($group, array $flatList)
-    {
-        $grouped = [];
-        foreach ($flatList as $node) {
-            $grouped[$node['reply_parent_id']][] = $node;
-        }
-
-        $fnBuilder = function ($siblings) use (&$fnBuilder, $grouped) {
-            foreach ($siblings as $k => $sibling) {
-                $id = $sibling['reply_id'];
-                if (isset($grouped[$id])) {
-                    $sibling['children'] = $fnBuilder($grouped[$id]);
-                }
-                $siblings[$k] = $sibling;
-            }
-            return $siblings;
-        };
-
-        return $fnBuilder($grouped[$group]);
     }
 
     public static function presence($id, $slug)
