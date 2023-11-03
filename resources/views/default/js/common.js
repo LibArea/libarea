@@ -292,12 +292,12 @@ if (tabs) {
           );
       }
       contents.forEach(content => {
-        content.classList.remove("active");
+        content.classList.remove("tab_active");
         content.classList.add("pointer");
       });
 
       const element = getById(id);
-      element.classList.add("active");
+      element.classList.add("tab_active");
       element.classList.remove("pointer");
     }
   }

@@ -10,7 +10,7 @@
         </li>
       </ul>
     </div>
-    <ul class="last-content content-tabs active" id="home">
+    <ul class="last-content content-tabs tab_active" id="home">
       <?php foreach ($latest_answers as $answer) : ?>
         <li>
           <div class="gray-600 flex items-center gap-min text-sm">
