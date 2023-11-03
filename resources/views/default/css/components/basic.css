@@ -51,17 +51,6 @@
   --footer-text-color: #9ca3af;
   --footer-color-active: #332f2f;
 
-
-	
- /*	TODO
-    --primary: #;
-	--secondary: #;
-	--tertiary: #;
-	--quaternary: #;
-	--highlight: #;
-	--success: #;  
- */
- 
   /* Colors used */	
   --black: #030303;
   --white: #fff;
@@ -202,8 +191,8 @@ img {
 .shadow-bottom { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
 
 .br-gray { border: 1px solid var(--gray-100); }
-.br-dotted { border: 1px dotted #ddd; }
-.br-bottom { border-bottom: 1px solid #ddd; }
+.br-dotted { border: 1px dotted var(--form-border-color); }
+.br-bottom { border-bottom: 1px solid var(--form-border-color); }
 .br-lightgray { border: 5px solid var(--gray-100); }
 
 li.br-top-zebra + li { border-top: 1px solid var(--gray-100); }

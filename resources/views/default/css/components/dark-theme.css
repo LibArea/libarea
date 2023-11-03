@@ -15,7 +15,7 @@ body.dark {
   --nav-bg-active: #111;
   --nav-color-active: #fff;
   
-  --dropdown-bg: #fff;
+  --dropdown-bg: #222;
   --dropdown-box-shadow: 0 6px 18px 0 rgba(14,21,47,.13),0 -2px 6px rgba(14,21,47,.03);
   
   --form-color-active: #3595f6;
@@ -53,6 +53,7 @@ body.dark {
   --gray: #a7a7a7;
   --gray-100: #111;
   --violet: #111;
+  --slate-100: #111;
 }
  
 body.dark .EasyMDEContainer .CodeMirror {
@@ -68,6 +69,7 @@ body.dark blockquote {
   border-left: 3px solid #6d6e6f;
 }
 
-.bg-lightyellow {
+body.dark .bg-lightyellow,
+body.dark .menu__left.menu__active .menu li {
   background-color: #444;
 }

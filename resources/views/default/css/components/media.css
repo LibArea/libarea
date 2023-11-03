@@ -30,7 +30,7 @@ main { width: calc(100% - 590px); }
     top: 0;
     bottom: 0;
     min-width: 180px;
-    background-color: #eaecf0;
+    background-color: var(--dropdown-bg);
     box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.25);
     overflow-x: hidden;
     position: absolute;
