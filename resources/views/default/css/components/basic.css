@@ -27,6 +27,18 @@
   --form-border-color: #ddd;
   --form-text-color: #111;
 
+  --button-text-color: #fff;
+  --button-bg-color: #0085ee;
+  --button-border-color: #0379d7;
+  --button-border-color-hover: #fff;
+
+  --button-outline-text-color: #0085ee;
+  --button-outline-bg-color: #fff;
+  --button-outline-border-color: #0379d7;
+  --button-outline-text-color-hover: #fff;
+  --button-outline-bg-color-hover: #0085ee;
+  --button-outline-border-color-hover: #0379d7;
+
   --header-bg: #fff;
   --header-box-shadow: 0 1px 2px -1px rgb(0 0 0 / 25%);
   --header-text-color: #9ca3af;
@@ -38,6 +50,8 @@
   --footer-box-shadow: 0 -5px 5px -5px rgb(0 0 0 / 15%);
   --footer-text-color: #9ca3af;
   --footer-color-active: #332f2f;
+
+
 	
  /*	TODO
     --primary: #;

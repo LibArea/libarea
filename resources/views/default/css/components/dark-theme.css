@@ -23,6 +23,18 @@ body.dark {
   --form-border-color: #ddd;
   --form-text-color: #fff;
 
+  --button-text-color: #fff;
+  --button-bg-color: #0085ee;
+  --button-border-color: #0379d7;
+  --button-border-color-hover: #fff;
+
+  --button-outline-text-color: #0085ee;
+  --button-outline-bg-color: #fff;
+  --button-outline-border-color: #0379d7;
+  --button-outline-text-color-hover: #fff;
+  --button-outline-bg-color-hover: #0085ee;
+  --button-outline-border-color-hover: #0379d7;
+
   --header-bg: #111;
   --header-box-shadow: 0 1px 2px -1px rgb(0 0 0 / 25%);
   --header-text-color: #fff;

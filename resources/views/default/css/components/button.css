@@ -23,28 +23,28 @@
 }
 
 .btn-primary {
-  color: var(--white);
-  background-color: #0085ee;
-  border-color: #0379d7;
+  color: var(--button-text-color);
+  background-color: var(--button-bg-color);
+  border-color: var(--button-border-color);
 }
 
 .btn-outline-primary {
-  color: #0085ee;
-  background-color: var(--white);
-  border-color: #0085ee;
+  color: var(--button-outline-text-color);
+  background-color: var(--button-outline-bg-color);
+  border-color: var(--button-outline-border-color);
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
-  color: var(--white);
+  color: var(--button-border-color-hover);
   opacity: 0.8;
 }
 
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
-  color: var(--white);
-  background-color: #0085ee;
-  border-color: #0379d7;
+  color: var(--button-outline-text-color-hover);
+  background-color: var(--button-outline-bg-color-hover);
+  border-color: var(--button-outline-border-color-hover);
 }
 
 .focus-id:hover{
