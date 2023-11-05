@@ -1,7 +1,6 @@
   <div class="mt5 tabs-post">
     <div class="mb15">
       <ul class="nav small">
-
         <?php if (config('general.qa_site_format') == false) : ?>
           <li class="tab-button active" data-id="post"><?= __('app.post'); ?></li>
         <?php endif; ?>
@@ -33,7 +32,7 @@
     <?php endif; ?>
 
     <?php if (config('general.qa_site_format') == false) : ?>
-      <div class="last-content content-tabs active" id="post">
+      <div class="last-content content-tabs tab_active" id="post">
         <div class="file-upload" id="file-drag">
           <div class="flex gap mb15">
             <img id="file-image" src="/assets/images/1px.jpg" alt="" class="w94 h94 br-gray">
@@ -96,7 +95,7 @@
       <div class="help"><?= __('app.hidden_post_help'); ?></div>
     </fieldset>
 
-    <div class="last-content content-tabs<?php if (config('general.qa_site_format') == true) : ?> active<?php endif; ?>" id="qa">
+    <div class="last-content content-tabs<?php if (config('general.qa_site_format') == true) : ?> tab_active<?php endif; ?>" id="qa">
       <div class="mb5"><?= __('app.text'); ?> Q&A <sup class="red">*</sup></div>
       <textarea name="content_qa"></textarea>
       <div class="help"><?= __('app.necessarily'); ?></div>

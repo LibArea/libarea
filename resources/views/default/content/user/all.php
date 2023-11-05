@@ -1,7 +1,7 @@
 <main class="w-100">
   <div class="indent-body">
     <div class="mb15">
-      <h1 class="text-xl mt5 m0"><?= __('meta.' . $data['sheet'] . '_users'); ?></h1>
+      <h1 class="title"><?= __('meta.' . $data['sheet'] . '_users'); ?></h1>
       <span class="gray-600 text-xs">
         <?= __('meta.' . $data['sheet'] . '_users_info'); ?>.
       </span>

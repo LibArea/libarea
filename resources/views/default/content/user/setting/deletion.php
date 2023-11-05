@@ -1,5 +1,5 @@
 <main>
-  <h1 class="text-xl mt5 m0"><?= __('app.delete_profile'); ?></h1>
+  <h1 class="title"><?= __('app.delete_profile'); ?></h1>
   <div class="max-w780 mb20">
     <p><?= __('app.read_carefully'); ?></p>
     <?= __('app.read_information'); ?>

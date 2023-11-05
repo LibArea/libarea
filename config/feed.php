@@ -7,7 +7,7 @@
 return [
     // How many likes should a post get to be visible on the central page of the site
     // Сколько лайков должен набрать пост, чтобы был виден на центральной странице сайта
-    'countLike' => 2,
+    'countLike' => 1,
     
     // Appearance of the post in the feed: classic or card. If true, then classic (minimum)
     // Внешний вид поста в ленте: classic или card. Если true, то classic (минимальный)

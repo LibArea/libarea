@@ -43,7 +43,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getUsersAll($page, $limit, $type)
     {
         $user_id = UserData::getUserId();
-        $sort = ($type == 'new') ? "ORDER BY created_at DESC" : "ORDER BY id = $user_id DESC, trust_level DESC";
+        $sort = ($type == 'new') ? "ORDER BY created_at DESC" : "ORDER BY id = $user_id DESC, avatar ASC";
 
         $start  = ($page - 1) * $limit;
         $sql = "SELECT  
