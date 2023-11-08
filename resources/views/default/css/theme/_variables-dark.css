@@ -6,21 +6,21 @@
 
 
 body.dark {
-  --bg-color: #222;
+  --bg-color: #202b38;
   --text-color: #fff;
 
   --link-color: #118bee;
   --link-color-hover: #ef4444;
 
-  --nav-bg-active: #111;
+  --nav-bg-active: #161f27;
   --nav-color-active: #fff;
   
-  --dropdown-bg: #222;
+  --dropdown-bg: #202b38;
   --dropdown-box-shadow: 0 6px 18px 0 rgba(14,21,47,.13),0 -2px 6px rgba(14,21,47,.03);
   
-  --form-color-active: #3595f6;
-  --form-bg-color: #333;
-  --form-border-color: #ddd;
+  --form-color-active: #1e2830;
+  --form-bg-color: #283541;
+  --form-border-color: #252830;
   --form-text-color: #fff;
 
   --button-text-color: #fff;
@@ -35,25 +35,25 @@ body.dark {
   --button-outline-bg-color-hover: #0085ee;
   --button-outline-border-color-hover: #0379d7;
 
-  --header-bg: #111;
+  --header-bg: #040a0f;
   --header-box-shadow: 0 1px 2px -1px rgb(0 0 0 / 25%);
   --header-text-color: #fff;
   --header-logo-color: #fff;
-  --header-form-bg-color: #444;
+  --header-form-bg-color: #161f27;
   --header-form-text-color: #fff;
   
-  --footer-bg: #111;
+  --footer-bg: #040a0f;
   --footer-box-shadow: 0 -5px 5px -5px rgb(0 0 0 / 15%);
   --footer-text-color: #eee;
   --footer-color-active: #ccc;
  
   /* Colors used */	
   --black: #fff;
-  --white: #111;
+  --white: #161f27;
   --gray: #a7a7a7;
-  --gray-100: #111;
-  --violet: #111;
-  --slate-100: #111;
+  --gray-100: #161f27;
+  --violet: #161f27;
+  --slate-100: #161f27;
 }
  
 body.dark .EasyMDEContainer .CodeMirror {
@@ -61,15 +61,20 @@ body.dark .EasyMDEContainer .CodeMirror {
   color: var(--form-text-color);
 } 
 
-body.dark .box { background-color: #100d0d; }
+body.dark .box { background-color: var(--gray-100); }
 body.dark .tagify { background-color: var(--form-bg-color); }
+
+body.dark .bg-lightyellow,
+body.dark .menu__left.menu__active .menu li {
+  background-color: var(--form-bg-color);
+}
+
+body.dark .content_tree:target, 
+body.dark .content_tree.edit {
+  background-color: var(--form-bg-color);
+}
 
 body.dark blockquote {
   background-color: #5f5f67;
   border-left: 3px solid #6d6e6f;
-}
-
-body.dark .bg-lightyellow,
-body.dark .menu__left.menu__active .menu li {
-  background-color: #444;
 }

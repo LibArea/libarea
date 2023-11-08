@@ -8,9 +8,9 @@
 @import './theme/_variables-light.css';
 @import './theme/_variables-dark.css';
 
-@import './parts/_basic.css';
 @import './parts/_components.css';
 @import './parts/_menu.css';
+@import './parts/_basic.css';
 @import './parts/_images.css';
 @import './parts/_inputs.css';
 @import './parts/_table.css';
