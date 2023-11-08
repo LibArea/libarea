@@ -5,21 +5,22 @@
  */
 
 /* Resources used for LibArea design */
-@import './components/components.css';
-@import './components/menu.css';
-@import './components/basic.css';
-@import './components/images.css';
-@import './components/inputs.css';
-@import './components/table.css';
-@import './components/button.css';
-@import './components/tags.css';
-@import './components/poll.css';
-@import './components/modal.css';
-@import './components/footer.css';
-@import './components/notifications.css';
-@import './components/media.css';
-@import './components/code.css';
+@import './theme/_variables-light.css';
+@import './theme/_variables-dark.css';
 
-@import './components/dark-theme.css';
+@import './parts/_basic.css';
+@import './parts/_components.css';
+@import './parts/_menu.css';
+@import './parts/_images.css';
+@import './parts/_inputs.css';
+@import './parts/_table.css';
+@import './parts/_button.css';
+@import './parts/_tags.css';
+@import './parts/_poll.css';
+@import './parts/_modal.css';
+@import './parts/_footer.css';
+@import './parts/_notifications.css';
+@import './parts/_media.css';
+@import './parts/_code.css';
 
 @import 'custom.css';
