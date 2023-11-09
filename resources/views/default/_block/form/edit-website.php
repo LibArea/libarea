@@ -51,7 +51,7 @@
   </fieldset>
 <?php endif; ?>
 
-<div class="p15 bg-blue-200">
+<div class="p15 bg-yellow">
   <h2 class="m0"><?= __('web.contact_information'); ?></h2>
 
   <fieldset>

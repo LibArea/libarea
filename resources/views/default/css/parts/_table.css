@@ -22,4 +22,4 @@ table thead th {
   text-align: left;
 }
 
-table tr:nth-of-type(2n) { background-color: var(--slate-100); }
+table tr:nth-of-type(2n) { background-color: var(--gray-100); }

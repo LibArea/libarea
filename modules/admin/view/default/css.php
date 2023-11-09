@@ -38,7 +38,6 @@
 <div class="box-flex flex-wrap gap">
   <div class="box">.box</div>
   <div class="box bg-yellow">.box .bg-yellow</div>
-  <div class="box bg-blue-200">.box .bg-blue-200</div>
   <div class="box bg-violet">.box .bg-violet</div>
   <div class="box bg-lightgray">.box .bg-lightgray</div>
   <div class="box bg-beige">.box .bg-beige</div>

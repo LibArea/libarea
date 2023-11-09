@@ -102,7 +102,7 @@ use Hleb\Constructor\Handlers\Request; ?>
     <div class="box bg-beige"><?= markdown($data['category']['facet_info'] ?? '', 'line'); ?></div>
 
     <?php if ($data['related_posts']) : ?>
-      <div class="box bg-blue-200">
+      <div class="box bg-yellow">
         <h4 class="uppercase-box"><?= __('web.related_posts'); ?></h4>
         <ul>
           <?php foreach ($data['related_posts'] as $rp) : ?>

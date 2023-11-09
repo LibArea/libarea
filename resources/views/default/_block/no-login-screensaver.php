@@ -1,4 +1,4 @@
-<div class="box bg-blue-200 gray center">
+<div class="box bg-yellow gray center">
   <?= __('app.not_registered'); ?>?
   <form action="<?= url('register'); ?>" class="m15 block">
     <?= Html::sumbit(__('app.create_account')); ?>
