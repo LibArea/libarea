@@ -4,7 +4,7 @@
     <span class="middle"><?= $text; ?></span>
   </div>
 <?php else : ?>   
-  <div class="box center gray-600">
+  <div id="no_content" class="box center gray-600">
     <svg class="icons icon-max"><use xlink:href="/assets/svg/icons.svg#<?= $icon; ?>"></use></svg>
     <div><?= $text; ?></div>
   </div>

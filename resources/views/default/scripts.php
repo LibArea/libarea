@@ -76,6 +76,9 @@
     function getPosts(path) {
       fetch(path)
         .then(res => res.text()).then((res) => {
+		  if (getById("no_content")) {
+			  return;
+		  }	  
           scroll.insertAdjacentHTML("beforeend", res);
           postPage += 1;
         })

@@ -173,7 +173,7 @@ $blog = $data['blog'][0] ?? null;
             <form action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
               <?= csrf_field() ?>
 
-              <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
+              <?= insert('/_block/form/editor', ['height'  => '170px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
 
               <div class="clear mt5">
                 <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
