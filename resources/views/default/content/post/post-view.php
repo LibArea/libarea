@@ -236,7 +236,7 @@ $blog = $data['blog'][0] ?? null;
 
   <?php if ($post['post_content_img']) : ?>
     <div class="box br-lightgray img-preview">
-      <img class="w-100 br-rd5" src="<?= Img::PATH['posts_cover'] . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
+      <img class="w-100" src="<?= Img::PATH['posts_cover'] . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
     </div>
   <?php endif; ?>
 
@@ -247,11 +247,11 @@ $blog = $data['blog'][0] ?? null;
         <div class="mb15 hidden flex gap text-sm">
           <a class="gray" href="<?= post_slug($rec_post['post_id'], $rec_post['post_slug']); ?>">
             <?php if ($rec_post['post_answers_count'] > 0) : ?>
-              <div class="p5-10 bg-green br-rd3 white center">
+              <div class="box-small bg-green">
                 <?= $rec_post['post_answers_count'] ?>
               </div>
             <?php else : ?>
-              <div class="p5-10 bg-lightgray br-rd3 gray center">0</div>
+              <div class="box-small bg-lightgray">0</div>
             <?php endif; ?>
           </a>
           <a class="black" href="<?= post_slug($rec_post['post_id'], $rec_post['post_slug']); ?>">

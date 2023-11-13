@@ -13,13 +13,13 @@ use Hleb\Constructor\Handlers\Request; ?>
       <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
       <li class="list-post br-top-zebra article_<?= $post['post_id']; ?>">
         <div class="flex mr15">
-          <div class="box-answer block bg-lightgray gray mt5 br-rd3 mb-none lowercase mr15">
+          <div class="box-answer block bg-lightgray gray mb-none  mr15">
             <?= $post['post_votes']; ?>
             <div class="text-xs"> <?= Html::numWord($post['post_votes'], __('app.num_up'), false); ?></div>
           </div>
           <?php $bg = $post['post_feature'] == 0 ? ' bg-green' : ' bg-blue'; ?>
           <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
-          <div class="box-answer 11 mt5 br-rd3 lowercase <?= $bg; ?> <?= $bg_url; ?>">
+          <div class="box-answer<?= $bg; ?><?= $bg_url; ?>">
             <a class="block white" href="<?= $post_url; ?>#comment">
               <?php $anw = $post['post_answers_count'] + $post['post_comments_count'];
               echo $anw; ?>

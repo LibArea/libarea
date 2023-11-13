@@ -5,7 +5,7 @@ namespace App\Controllers\Item;
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
 use App\Services\Сheck\ItemPresence;
-use App\Services\Tree\buildTree;
+use App\Services\Tree\BuildTree;
 use App\Models\Item\{WebModel, ReplyModel, UserAreaModel};
 use App\Models\{PostModel, SubscriptionModel};
 use Meta, UserData, Img;
@@ -58,7 +58,7 @@ class DetailedController extends Controller
         }
 
         $flat = ReplyModel::get($item['item_id'], $this->user);
-        $tree = !empty($flat) ? buildTree::index(0, $flat, 'reply') : false;
+        $tree = !empty($flat) ? BuildTree::index(0, $flat, 'reply') : false;
 
         // Featured Content
         // Рекомендованный контент       

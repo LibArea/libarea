@@ -246,6 +246,13 @@ details[open] > summary {
   overflow-wrap: break-word;
 }
 
+.box-small {
+  border-radius: 3px;
+  color: var(--white);
+  text-align: center;
+  padding: 5px 10px;
+}
+
 .box-flex {
   display: flex;
   border-radius: 5px;
@@ -338,14 +345,6 @@ article iframe {
 }
 
 video {  max-width: 560px; }
-
-.box-answer {
-  line-height: 1.3;
-  padding: 5px;
-  height: 48px;
-  width: 54px;
-  text-align: center;
-}
 
 .qa-comment {
   font-size: 0.875rem;
