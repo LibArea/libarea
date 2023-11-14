@@ -45,7 +45,7 @@ a:active {
 }
 
 img {
-  border-radius: 3px;
+  border-radius: var(--border-radius);
   vertical-align: middle;
 }
 
@@ -164,11 +164,6 @@ li.br-li-bottom-no:last-child { border-bottom: 1px solid transparent; }
 .text-6xl { font-size: 3.75rem; }
 .text-7xl { font-size: 4.5rem; }
 .text-8xl { font-size: 6rem; }
-
-.font-light { font-weight: 300; }
-.font-normal { font-weight: 400; }
-.font-medium { font-weight: 500; }
-.font-semibold { font-weight: 600; }
 
 .grid { display: grid; }
 .gap { gap: 1rem; }

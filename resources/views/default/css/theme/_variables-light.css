@@ -22,6 +22,8 @@
   --dropdown-bg: #fff;
   --dropdown-box-shadow: 0 6px 18px 0 rgba(14,21,47,.13),0 -2px 6px rgba(14,21,47,.03);
   
+  --border-radius: 3px; 
+  
   --form-color-active: #3595f6;
   --form-bg-color: #fff;
   --form-border-color: #ddd;
@@ -50,6 +52,7 @@
   --footer-box-shadow: 0 -5px 5px -5px rgb(0 0 0 / 15%);
   --footer-text-color: #9ca3af;
   --footer-color-active: #332f2f;
+  
 
   /* Colors used */	
   --black: #030303;

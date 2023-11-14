@@ -10,7 +10,7 @@
 .tag-violet,
 .tag-clear {
   font-size: 0.9rem;
-  border-radius: 3px;
+  border-radius: var(--border-radius);
   margin-left: 0.25em;
   padding: 0.08rem 0.35rem 0.15rem 0.35rem;
   text-transform: lowercase;

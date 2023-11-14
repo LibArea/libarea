@@ -1,6 +1,6 @@
 <main>
-  <div class="box">
-    <h1 class="mb10 text-2xl font-normal"><?= __('app.invite'); ?></h1>
+  <div class="indent-body">
+    <h1 class="title"><?= __('app.invite'); ?></h1>
     <form action="/invite" method="post">
       <?php csrf_field(); ?>
       <fieldset>

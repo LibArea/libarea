@@ -32,7 +32,7 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?php if ($bg_url) : ?>
             <span><?= __('app.news'); ?>:</span>
           <?php endif; ?>
-          <a class="font-normal text-xl" href="<?= $post_url; ?>">
+          <a class="text-xl" href="<?= $post_url; ?>">
             <?= $post['post_title']; ?>
             <?= insert('/content/post/post-title', ['post' => $post]); ?>
           </a>

@@ -22,6 +22,8 @@ body.dark {
   --form-bg-color: #283541;
   --form-border-color: #252830;
   --form-text-color: #fff;
+  
+  --border-radius: 3px; 
 
   --button-text-color: #fff;
   --button-bg-color: #0085ee;

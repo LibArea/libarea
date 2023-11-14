@@ -86,7 +86,7 @@
 .menu li.active,
 .menu li:hover {
   background-color: var(--gray-100);
-  border-radius: 3px;
+  border-radius: var(--border-radius);
 }
 
 .menu li:hover { transition-duration: .3s; }
@@ -115,7 +115,7 @@ ul.nav > li > a { color: var(--gray-600); }
 
 ul.nav > li.active {
   background-color: var(--nav-bg-active);
-  border-radius: 3px;
+  border-radius: var(--border-radius);
   color: var(--nav-color-active);
 }
 
