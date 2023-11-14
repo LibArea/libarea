@@ -9,7 +9,9 @@
   padding-right: 20px;
 }
 
-.menuno .menu__left { display: none; }
+.menuno .menu__left {
+  display: none;
+}
 
 .dropdown,
 .menu,
@@ -56,9 +58,11 @@
   font-size: 0.975rem;
 }
 
-.user-nav li a { margin-left: 10px; }
-/* end */
+.user-nav li a {
+  margin-left: 10px;
+}
 
+/* end */
 
 .dropdown.left {
   left: 0;
@@ -66,22 +70,25 @@
 }
 
 .menu a,
-.dropdown li > a,
-.dropdown li > div {
+.dropdown li>a,
+.dropdown li>div {
   color: var(--gray);
   padding: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: .7rem;
-  font-size: 0.875rem;
 }
 
-.dropdown li:hover > a,
-.dropdown li > a.active,
-.dropdown li > div.active { color: var(--link-color-hover); }
+.dropdown li:hover>a,
+.dropdown li>a.active,
+.dropdown li>div.active {
+  color: var(--link-color-hover);
+}
 
-.menu__left:not(.menu__active) li { margin-bottom: 3px; }
+.menu__left:not(.menu__active) li {
+  margin-bottom: 3px;
+}
 
 .menu li.active,
 .menu li:hover {
@@ -89,15 +96,22 @@
   border-radius: var(--border-radius);
 }
 
-.menu li:hover { transition-duration: .3s; }
-.menu li:hover > a { color: var(--gray); }
+.menu li:hover {
+  transition-duration: .3s;
+}
+
+.menu li:hover>a {
+  color: var(--gray);
+}
 
 .breadcrumbs li {
   display: inline;
-  color: var(--gray-600); 
+  color: var(--gray-600);
 }
 
-.breadcrumbs li:not(:last-child):after { content: " / "; }
+.breadcrumbs li:not(:last-child):after {
+  content: " / ";
+}
 
 /* Navigation */
 ul.nav {
@@ -109,22 +123,40 @@ ul.nav {
   padding: 0;
 }
 
-ul.nav > li { padding: 6px 12px; }
-ul.nav.small > li { padding: 3px 6px; }
-ul.nav > li > a { color: var(--gray-600); }
+ul.nav>li {
+  padding: 6px 12px;
+}
 
-ul.nav > li.active {
+ul.nav.small>li {
+  padding: 3px 6px;
+}
+
+ul.nav>li>a {
+  color: var(--gray-600);
+}
+
+ul.nav>li.active {
   background-color: var(--nav-bg-active);
   border-radius: var(--border-radius);
   color: var(--nav-color-active);
 }
 
-ul.nav > li.active > a { color: var(--nav-color-active); }
-ul.nav > li a:hover { color:  var(--link-color-hover); }
-ul.nav > li.active a:hover { color: var(--nav-color-active); }
+ul.nav>li.active>a {
+  color: var(--nav-color-active);
+}
+
+ul.nav>li a:hover {
+  color: var(--link-color-hover);
+}
+
+ul.nav>li.active a:hover {
+  color: var(--nav-color-active);
+}
 
 /* If it's tabs */
-.content-tabs { display: none; }
+.content-tabs {
+  display: none;
+}
 
 .content-tabs.tab_active {
   display: block;

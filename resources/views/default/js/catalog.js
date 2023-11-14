@@ -43,9 +43,9 @@ function fetchSearchUrl() {
         let obj = JSON.parse(text);
         let html = '<div class="flex">';
         for (let key in obj) {
-           if (obj[key].item_id) {
-             html += '<a class="block green text-sm mt5 mb5" href="/web/website/' + obj[key].item_id + '">' + obj[key].item_url + '</a>';
-           }  
+          if (obj[key].item_id) {
+            html += '<a class="block green text-sm mt5 mb5" href="/web/website/' + obj[key].item_id + '">' + obj[key].item_url + '</a>';
+          }
 
           html += '</div>';
         }

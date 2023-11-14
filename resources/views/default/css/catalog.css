@@ -4,7 +4,9 @@
  * Стили для каталога
  */
 
-.item-cat { padding: 0 30px 10px 30px; }
+.item-cat {
+  padding: 0 30px 10px 30px;
+}
 
 .list-items {
   margin: 0;
@@ -48,7 +50,7 @@
 }
 
 .categories-telo,
-.item-categories > div {
+.item-categories>div {
   width: 33%;
   margin-bottom: 10px;
 }
@@ -59,18 +61,24 @@ body.item.dark .categories-telo a {
   color: #fff;
 }
 
-body.item.dark .box { background-color: #222; }
-body.item.dark .item-categories { background-color: #111; }
+body.item.dark .box {
+  background-color: #222;
+}
+
+body.item.dark .item-categories {
+  background-color: #111;
+}
 
 
 @media (max-width: 890px) {
+
   .item-categories,
   .item-cat {
     padding: 20px 20px 20px 15px;
   }
 
   .categories-telo,
-  .item-categories > div {
+  .item-categories>div {
     width: 99%;
     margin-bottom: 10px;
   }
@@ -80,5 +88,7 @@ body.item.dark .item-categories { background-color: #111; }
     padding-right: .5rem;
   }
 
-  .list-items { padding: 0 5px 0 0; }
+  .list-items {
+    padding: 0 5px 0 0;
+  }
 }

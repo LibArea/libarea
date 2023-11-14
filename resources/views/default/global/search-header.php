@@ -12,62 +12,62 @@ $q = $data['q'];
 <body <?php if (Request::getCookie('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
 
   <header class="d-header">
-      <div class="d-header_contents">
+    <div class="d-header_contents">
 
-        <div class="box-logo">
-          <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>
-        </div>
-
-        <div class="box-search">
-          <form method="get" action="<?= url('search.go'); ?>">
-            <input type="text" name="q" value="<?= $q; ?>" placeholder="<?= __('search.find'); ?>" class="search">
-            <input name="cat" value="<?= $uri; ?>" type="hidden">
-            <?= csrf_field() ?>
-          </form>
-          <div class="box-results none" id="search_items"></div>
-        </div>
-
-        <?php if (!UserData::checkActiveUser()) : ?>
-          <div class="flex gap-max items-center">
-            <div id="toggledark" class="gray-600">
-              <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#sun"></use>
-              </svg>
-            </div>
-            <?php if (config('general.invite') == false) : ?>
-              <a class="gray min-w75 center mb-none block" href="<?= url('register'); ?>">
-                <?= __('app.registration'); ?>
-              </a>
-            <?php endif; ?>
-            <a class="btn btn-outline-primary min-w75" href="<?= url('login'); ?>">
-              <?= __('app.sign_in'); ?>
-            </a>
-          </div>
-        <?php else : ?>
-          <div class="flex gap-max items-center">
-            <a id="toggledark" class="gray-600 mb-none"><svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#sun"></use>
-              </svg></a>
-
-            <a id="notif" class="gray-600 relative mb-none" href="<?= url('notifications'); ?>">
-              <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#bell"></use>
-              </svg>
-              <span class="number-notif"></span>
-            </a>
-
-            <div class="relative">
-              <div class="trigger pointer">
-                <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
-              </div>
-              <div class="dropdown user">
-                <?= insert('/_block/navigation/menu-user'); ?>
-              </div>
-            </div>
-          </div>
-        <?php endif; ?>
-
+      <div class="box-logo">
+        <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>
       </div>
+
+      <div class="box-search">
+        <form method="get" action="<?= url('search.go'); ?>">
+          <input type="text" name="q" value="<?= $q; ?>" placeholder="<?= __('search.find'); ?>" class="search">
+          <input name="cat" value="<?= $uri; ?>" type="hidden">
+          <?= csrf_field() ?>
+        </form>
+        <div class="box-results none" id="search_items"></div>
+      </div>
+
+      <?php if (!UserData::checkActiveUser()) : ?>
+        <div class="flex gap-max items-center">
+          <div id="toggledark" class="gray-600">
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#sun"></use>
+            </svg>
+          </div>
+          <?php if (config('general.invite') == false) : ?>
+            <a class="gray min-w75 center mb-none block" href="<?= url('register'); ?>">
+              <?= __('app.registration'); ?>
+            </a>
+          <?php endif; ?>
+          <a class="btn btn-outline-primary min-w75" href="<?= url('login'); ?>">
+            <?= __('app.sign_in'); ?>
+          </a>
+        </div>
+      <?php else : ?>
+        <div class="flex gap-max items-center">
+          <a id="toggledark" class="gray-600 mb-none"><svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#sun"></use>
+            </svg></a>
+
+          <a id="notif" class="gray-600 relative mb-none" href="<?= url('notifications'); ?>">
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#bell"></use>
+            </svg>
+            <span class="number-notif"></span>
+          </a>
+
+          <div class="relative">
+            <div class="trigger pointer">
+              <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
+            </div>
+            <div class="dropdown user">
+              <?= insert('/_block/navigation/menu-user'); ?>
+            </div>
+          </div>
+        </div>
+      <?php endif; ?>
+
+    </div>
   </header>
   <div class="ml20">
     <ul class="nav inline">

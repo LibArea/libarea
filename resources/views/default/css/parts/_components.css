@@ -18,7 +18,7 @@ h5 {
 }
 
 .number-notif {
-  display: none;  
+  display: none;
   font-size: .72rem;
   color: #fff;
   background-color: red;
@@ -30,7 +30,9 @@ h5 {
 }
 
 .number-notif.show,
-.video-pl { display: block; }
+.video-pl {
+  display: block;
+}
 
 /* См. https://feathericons.com/ и https://tabler-icons.io/ */
 .icons {
@@ -51,7 +53,9 @@ h5 {
   height: 48px;
 }
 
-.icon-small { width: 15px; }
+.icon-small {
+  width: 15px;
+}
 
 .list-none {
   list-style: none;
@@ -71,7 +75,9 @@ h5 {
   margin-bottom: 15px;
 }
 
-.medium-zoom--opened .d-header { display: none; }
+.medium-zoom--opened .d-header {
+  display: none;
+}
 
 .banner {
   background-image: url(/assets/images/banner-fon.jpg);
@@ -127,7 +133,7 @@ h5 {
 .box-results {
   position: absolute;
   border-radius: 3px;
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,.15);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .15);
   background-color: var(--white);
   padding: 15px;
   z-index: 2;
@@ -139,9 +145,12 @@ h5 {
   position: relative;
   width: 100%;
   font-size: 18px;
-  white-space: nowrap; /* Запрещаем перенос строк */
-  overflow: hidden; /* Обрезаем все, что не помещается в область */
-  text-overflow: ellipsis; /* Добавляем многоточие */
+  white-space: nowrap;
+  /* Запрещаем перенос строк */
+  overflow: hidden;
+  /* Обрезаем все, что не помещается в область */
+  text-overflow: ellipsis;
+  /* Добавляем многоточие */
 }
 
 .v-line {
@@ -152,8 +161,9 @@ h5 {
   vertical-align: middle;
 }
 
-.d-header.scroll-hide-search.show .box-search { display: none; }
-/* end */
+.d-header.scroll-hide-search.show .box-search {
+  display: none;
+}
 
 .box-logo {
   width: 209px;
@@ -170,7 +180,9 @@ h5 {
   text-overflow: ellipsis;
 }
 
-aside { width: 340px; }
+aside {
+  width: 340px;
+}
 
 aside ul {
   list-style: none;
@@ -179,7 +191,9 @@ aside ul {
   font-size: 0.9375rem;
 }
 
-aside ul a { color: var(--gray); }
+aside ul a {
+  color: var(--gray);
+}
 
 blockquote {
   margin-left: 15px;
@@ -195,10 +209,12 @@ blockquote {
   word-wrap: break-word;
   padding: 0.1rem 1rem;
   border-left: 3px solid #d2d6dd;
-  font-size:.91rem
+  font-size: .91rem
 }
 
-.blockquote-profile p { margin: 2px; }
+.blockquote-profile p {
+  margin: 2px;
+}
 
 hr {
   border: none;
@@ -220,7 +236,7 @@ summary {
   font-size: 14px;
 }
 
-details[open] > summary {
+details[open]>summary {
   padding: 0 0 10px 0;
   color: #666;
 }
@@ -292,7 +308,9 @@ details[open] > summary {
   padding: 0.5rem 0;
 }
 
-ul.last-content li { margin-bottom: 15px; }
+ul.last-content li {
+  margin-bottom: 15px;
+}
 
 ul.last-content a.last-content_telo {
   display: block;
@@ -307,15 +325,26 @@ ul.last-content a.last-content_telo {
   font-weight: 500;
 }
 
-a:hover > img,
-.trigger img { opacity: 0.8; }
+a:hover>img,
+.trigger img {
+  opacity: 0.8;
+}
 
-.focus-id:hover { cursor: pointer } 
-.underline-hover:hover { text-decoration: underline; }
+.focus-id:hover {
+  cursor: pointer
+}
+
+.underline-hover:hover {
+  text-decoration: underline;
+}
 
 .content-body {
   max-width: 810px;
   overflow-wrap: break-word;
+}
+
+.content_tree {
+  word-wrap: break-word;
 }
 
 .content_tree:target,
@@ -332,7 +361,9 @@ ol.bg-red-200 {
 }
 
 .bg-red-200 .content_tree,
-.content_tree.bg-red-200 { background-color: var(--red-200); }
+.content_tree.bg-red-200 {
+  background-color: var(--red-200);
+}
 
 .ind-first-p p {
   margin: 0.5em 0;
@@ -344,7 +375,9 @@ article iframe {
   max-height: 320px;
 }
 
-video {  max-width: 560px; }
+video {
+  max-width: 560px;
+}
 
 .qa-comment {
   font-size: 0.875rem;
@@ -364,8 +397,8 @@ video {  max-width: 560px; }
 }
 
 .scroll-menu::-webkit-scrollbar {
-  width:0;
-  height:0
+  width: 0;
+  height: 0
 }
 
 .scroll-wrapper {
@@ -390,24 +423,39 @@ video {  max-width: 560px; }
   gap: 1rem;
 }
 
-.content_tree { word-wrap: break-word; }
-
 /*
  * Share icons
  *
  * Иконки, поделиться
  */
- 
+
 .icon-share {
   color: #fff;
   height: 28px;
   width: 28px;
   margin: 3px;
 }
- 
-.bg-vk { background-color: #07f; }
-.bg-ok { background-color: #eb722e; }
-.bg-tg { background-color: #64a9dc; }
-.bg-fb { background-color: #3b5998; }
-.bg-lj { background-color: #0d425a; }
-.bg-tw { background-color: #00aced; }
+
+.bg-vk {
+  background-color: #07f;
+}
+
+.bg-ok {
+  background-color: #eb722e;
+}
+
+.bg-tg {
+  background-color: #64a9dc;
+}
+
+.bg-fb {
+  background-color: #3b5998;
+}
+
+.bg-lj {
+  background-color: #0d425a;
+}
+
+.bg-tw {
+  background-color: #00aced;
+}

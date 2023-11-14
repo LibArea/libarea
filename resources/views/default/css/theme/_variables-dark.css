@@ -14,16 +14,16 @@ body.dark {
 
   --nav-bg-active: #161f27;
   --nav-color-active: #fff;
-  
+
   --dropdown-bg: #202b38;
-  --dropdown-box-shadow: 0 6px 18px 0 rgba(14,21,47,.13),0 -2px 6px rgba(14,21,47,.03);
-  
+  --dropdown-box-shadow: 0 6px 18px 0 rgba(14, 21, 47, .13), 0 -2px 6px rgba(14, 21, 47, .03);
+
   --form-color-active: #1e2830;
   --form-bg-color: #283541;
   --form-border-color: #252830;
   --form-text-color: #fff;
-  
-  --border-radius: 3px; 
+
+  --border-radius: 3px;
 
   --button-text-color: #fff;
   --button-bg-color: #0085ee;
@@ -43,13 +43,13 @@ body.dark {
   --header-logo-color: #fff;
   --header-form-bg-color: #161f27;
   --header-form-text-color: #fff;
-  
+
   --footer-bg: #040a0f;
   --footer-box-shadow: 0 -5px 5px -5px rgb(0 0 0 / 15%);
   --footer-text-color: #eee;
   --footer-color-active: #ccc;
- 
-  /* Colors used */	
+
+  /* Colors used */
   --black: #fff;
   --white: #161f27;
   --gray: #a7a7a7;
@@ -57,21 +57,26 @@ body.dark {
   --violet: #161f27;
   --slate-100: #161f27;
 }
- 
+
 body.dark .EasyMDEContainer .CodeMirror {
   background-color: var(--form-bg-color);
   color: var(--form-text-color);
-} 
+}
 
-body.dark .box { background-color: var(--gray-100); }
-body.dark .tagify { background-color: var(--form-bg-color); }
+body.dark .box {
+  background-color: var(--gray-100);
+}
+
+body.dark .tagify {
+  background-color: var(--form-bg-color);
+}
 
 body.dark .bg-lightyellow,
 body.dark .menu__left.menu__active .menu li {
   background-color: var(--form-bg-color);
 }
 
-body.dark .content_tree:target, 
+body.dark .content_tree:target,
 body.dark .content_tree.edit {
   background-color: var(--form-bg-color);
 }

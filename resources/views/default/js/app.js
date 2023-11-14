@@ -96,15 +96,15 @@ queryAll(".up-id")
         let number = parseInt(upScr.innerText);
 
         if (!number) {
-            number = 0;
+          number = 0;
         }
 
         if (act == true) {
-            new_cont = (number - parseInt(1));
+          new_cont = (number - parseInt(1));
         } else {
-            new_cont = (number + parseInt(1));
+          new_cont = (number + parseInt(1));
         }
-         
+
         upVot.classList.toggle('active');
         upScr.innerHTML = new_cont;
       });
@@ -140,10 +140,10 @@ queryAll(".add-poll")
     })
       .then(response => response.text())
       .then(text => {
-          location.reload();
+        location.reload();
       });
   }));
-  
+
 // Deleting a voting option
 delVotingOption.forEach(el => el.addEventListener("click", function (e) {
   makeRequest("/poll/option/del", options = { body: "id=" + el.dataset.id + "&_token=" + token })
@@ -159,7 +159,7 @@ queryAll(".add-ignore")
     })
       .then(response => response.text())
       .then(text => {
-          location.reload();
+        location.reload();
       });
   }));
 
@@ -236,7 +236,7 @@ queryAll(".editcomm")
             }));
         }
       );
-  })); 
+  }));
 
 // Add post tab
 const tabs_post = document.querySelector(".tabs-post");
@@ -256,13 +256,12 @@ if (tabs_post) {
       });
 
       getById('inputQa').value = 0;
-      if (id == 'qa') { 
+      if (id == 'qa') {
         getById('inputQa').value = 1;
       }
-      
+
       const element = getById(id);
       element.classList.add("tab_active");
     }
   }
 }
-  

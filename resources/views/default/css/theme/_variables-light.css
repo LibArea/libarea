@@ -5,10 +5,10 @@
  */
 
 :root {
-  --font-family: -apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  --font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   --line-height: 1.5;
   --font-size: 1rem;
-  
+
   /* Default (light) theme */
   --bg-color: #fff;
   --text-color: #030303;
@@ -18,12 +18,12 @@
 
   --nav-bg-active: #fcebd9;
   --nav-color-active: #332f2f;
-  
+
   --dropdown-bg: #fff;
-  --dropdown-box-shadow: 0 6px 18px 0 rgba(14,21,47,.13),0 -2px 6px rgba(14,21,47,.03);
-  
-  --border-radius: 3px; 
-  
+  --dropdown-box-shadow: 0 6px 18px 0 rgba(14, 21, 47, .13), 0 -2px 6px rgba(14, 21, 47, .03);
+
+  --border-radius: 3px;
+
   --form-color-active: #3595f6;
   --form-bg-color: #fff;
   --form-border-color: #ddd;
@@ -47,14 +47,13 @@
   --header-logo-color: #111;
   --header-form-bg-color: #f3f4f6;
   --header-form-text-color: #333;
-  
+
   --footer-bg: #fff;
   --footer-box-shadow: 0 -5px 5px -5px rgb(0 0 0 / 15%);
   --footer-text-color: #9ca3af;
   --footer-color-active: #332f2f;
-  
 
-  /* Colors used */	
+  /* Colors used */
   --black: #030303;
   --white: #fff;
   --yellow: #f7f7eb;

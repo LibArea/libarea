@@ -29,9 +29,8 @@
   color: var(--gray);
 }
 
-progress,          /* Все браузеры с поддержкой HTML5. */
-progress[role]     /* polyfill */
-{
+progress,
+progress[role] {
   /* Отключает стилизацию — обычно не требуется, но полезно знать. */
   appearance: none;
   -moz-appearance: none;
@@ -53,7 +52,9 @@ progress {
   overflow: hidden;
 }
 
-::-webkit-progress-bar { background: #f8f8f8; }
+::-webkit-progress-bar {
+  background: #f8f8f8;
+}
 
 /* См. https://libarea.ru/post/1384/dev-protestiruem-opros-prikreplennyy-k-postu
 progress::-webkit-progress-bar,
@@ -63,12 +64,12 @@ progress::-moz-progress-bar { background: #0085ee; } */
 
 progress[value^="0"]::-moz-progress-bar,
 progress[value^="1"]::-moz-progress-bar,
-progress[value^="2"]::-moz-progress-bar, 
+progress[value^="2"]::-moz-progress-bar,
 progress[value^="0"]::-webkit-progress-value,
 progress[value^="1"]::-webkit-progress-value,
 progress[value^="2"]::-webkit-progress-value {
   background-color: #0ea5e9;
-} 
+}
 
 
 
@@ -97,4 +98,3 @@ progress[value^="9"]::-webkit-progress-value,
 progress[value="100"]::-webkit-progress-value {
   background-color: red;
 }
-

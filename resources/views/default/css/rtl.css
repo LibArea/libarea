@@ -29,7 +29,18 @@
   right: auto;
 }
 
-.dropdown.user { padding: 1rem .7rem .7rem 0; }
-.d-header_contents .btn-outline-primary { width: 120px; }
-.box-search {  margin: 10px 0 10px 45px; }
-.block-answer .right { float: left; }
+.dropdown.user {
+  padding: 1rem .7rem .7rem 0;
+}
+
+.d-header_contents .btn-outline-primary {
+  width: 120px;
+}
+
+.box-search {
+  margin: 10px 0 10px 45px;
+}
+
+.block-answer .right {
+  float: left;
+}

@@ -1,9 +1,9 @@
 <?php
 
-use Hleb\Constructor\Handlers\Request; 
+use Hleb\Constructor\Handlers\Request;
 
-Request::getHead()->addStyles('/assets/css/style.css?' . config('assembly-js-css.version')); 
-Request::getHead()->addStyles('/assets/css/catalog.css?' . config('assembly-js-css.version')); 
+Request::getHead()->addStyles('/assets/css/style.css?' . config('assembly-js-css.version'));
+Request::getHead()->addStyles('/assets/css/catalog.css?' . config('assembly-js-css.version'));
 
 ?>
 

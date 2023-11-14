@@ -5,11 +5,11 @@
  */
 
 function getById(id) {
-	return document.getElementById(id);
+  return document.getElementById(id);
 };
 
 function queryAll(id) {
-	return document.querySelectorAll(id);
+  return document.querySelectorAll(id);
 };
 
 function isIdEmpty(elmId) {

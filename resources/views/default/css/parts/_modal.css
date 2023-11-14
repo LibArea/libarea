@@ -13,6 +13,7 @@
   width: 100%;
   height: 100%;
 }
+
 .model-inner {
   background-color: white;
   border-radius: var(--border-radius);
@@ -20,12 +21,14 @@
   padding: 2em;
   margin: auto;
 }
+
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid black;
-}     
+}
+
 .overlay {
   width: 100%;
   height: 100%;
@@ -94,5 +97,7 @@
 }
 
 @media screen and (min-width: 700px) {
-  .dialog-close { top: 5px; }
+  .dialog-close {
+    top: 5px;
+  }
 }

@@ -3,8 +3,8 @@
  *
  * Кнопки
  */
- 
- /* Buttons */
+
+/* Buttons */
 .btn {
   display: inline-block;
   font-weight: 400;
@@ -47,6 +47,6 @@
   border-color: var(--button-outline-border-color-hover);
 }
 
-.focus-id:hover{
+.focus-id:hover {
   opacity: 0.8;
 }
