@@ -34,7 +34,7 @@ Request::getHead()->addStyles('/assets/css/style.css?21');
           </a>
           <a class="<?= is_current(url('admin.facets.all')) ? ' active' : ' gray-600'; ?> mb-none" href="<?= url('admin.facets.all'); ?>">
             <svg class="icons mr5">
-              <use xlink:href="/assets/svg/icons.svg#facets"></use>
+              <use xlink:href="/assets/svg/icons.svg#grid"></use>
             </svg>
             <span class="mb-none middle text-sm"><?= __('admin.facets'); ?></span>
           </a>

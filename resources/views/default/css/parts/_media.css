@@ -21,7 +21,6 @@ main {
 }
 
 @media (max-width: 1050px) {
-
   .menu__left,
   #togglemenu {
     display: none;

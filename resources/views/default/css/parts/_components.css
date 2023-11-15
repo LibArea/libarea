@@ -146,11 +146,8 @@ h5 {
   width: 100%;
   font-size: 18px;
   white-space: nowrap;
-  /* Запрещаем перенос строк */
   overflow: hidden;
-  /* Обрезаем все, что не помещается в область */
   text-overflow: ellipsis;
-  /* Добавляем многоточие */
 }
 
 .v-line {
@@ -325,8 +322,8 @@ ul.last-content a.last-content_telo {
   font-weight: 500;
 }
 
-a:hover>img,
-.trigger img {
+.trigger img,
+a:hover>img {
   opacity: 0.8;
 }
 
