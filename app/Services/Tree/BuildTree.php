@@ -13,9 +13,9 @@ class BuildTree
             $grouped[$node[$type . '_parent_id']][] = $node;
         }
 
-        $fnBuilder = function ($siblings) use (&$fnBuilder, $grouped) {
+        $fnBuilder = function ($siblings) use (&$fnBuilder, $grouped, $type) {
             foreach ($siblings as $k => $sibling) {
-                $id = $sibling['reply_id'];
+                $id = $sibling[$type . '_id'];
                 if (isset($grouped[$id])) {
                     $sibling['children'] = $fnBuilder($grouped[$id]);
                 }
