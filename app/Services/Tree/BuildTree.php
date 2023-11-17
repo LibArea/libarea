@@ -13,17 +13,26 @@ class BuildTree
             $grouped[$node[$type . '_parent_id']][] = $node;
         }
 
+        $siblings = [];
         $fnBuilder = function ($siblings) use (&$fnBuilder, $grouped, $type) {
-            foreach ($siblings as $k => $sibling) {
-                $id = $sibling[$type . '_id'];
-                if (isset($grouped[$id])) {
-                    $sibling['children'] = $fnBuilder($grouped[$id]);
+            if ($siblings) {
+                foreach ($siblings as $k => $sibling) {
+                    $id = $sibling[$type . '_id'];
+                    if (isset($grouped[$id])) {
+                        $sibling['children'] = $fnBuilder($grouped[$id]);
+                    }
+                    $siblings[$k] = $sibling;
                 }
-                $siblings[$k] = $sibling;
             }
             return $siblings;
         };
 
-        return $fnBuilder($grouped[$group]);
+        if (isset($grouped[$group])) {
+            $tree = $fnBuilder($grouped[$group]);
+        } else {
+            $tree = [];
+        }
+
+        return $tree;
     }
 }

@@ -4,7 +4,6 @@
  * Тёмная (ночная) тема
  */
 
-
 body.dark {
   --bg-color: #202b38;
   --text-color: #fff;
@@ -25,26 +24,27 @@ body.dark {
 
   --border-radius: 3px;
 
-  --button-text-color: #fff;
-  --button-bg-color: #0085ee;
-  --button-border-color: #0379d7;
-  --button-border-color-hover: #fff;
+  --button-text-color: #bfcad3;
+  --button-bg-color: #1e2226;
+  --button-border-color: #1e2226;
+  --button-border-color-hover: #ddd;
 
-  --button-outline-text-color: #0085ee;
-  --button-outline-bg-color: #fff;
-  --button-outline-border-color: #0379d7;
-  --button-outline-text-color-hover: #fff;
-  --button-outline-bg-color-hover: #0085ee;
-  --button-outline-border-color-hover: #0379d7;
+  --button-outline-text-color: #bfcad3;
+  --button-outline-bg-color: #3f4851;
+  --button-outline-border-color: #3f4851;
 
-  --header-bg: #040a0f;
+  --button-outline-text-color-hover: #bfcad3;
+  --button-outline-bg-color-hover: #555f6a;
+  --button-outline-border-color-hover: #555f6a;
+
+  --header-bg: #1a2630;
   --header-box-shadow: 0 1px 2px -1px rgb(0 0 0 / 25%);
   --header-text-color: #fff;
   --header-logo-color: #fff;
   --header-form-bg-color: #161f27;
   --header-form-text-color: #fff;
 
-  --footer-bg: #040a0f;
+  --footer-bg: #1a2630;
   --footer-box-shadow: 0 -5px 5px -5px rgb(0 0 0 / 15%);
   --footer-text-color: #eee;
   --footer-color-active: #ccc;
