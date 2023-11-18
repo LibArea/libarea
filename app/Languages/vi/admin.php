@@ -88,6 +88,7 @@ return [
     'contacts'          => 'Liên lạc',
     'tools'             => 'Công cụ',
     'trust_level'       => 'Cấp độ tin cậy',
+	'number_comments'	=> 'КSố lượng bình luận',
     'logs'              => 'Nhật ký',
     'reports'           => 'Cờ (Phàn nàn)',
     'approve'           => 'Duyệt',

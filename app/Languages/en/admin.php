@@ -88,6 +88,7 @@ return [
     'contacts'          => 'Contacts',
     'tools'             => 'Tools',
     'trust_level'       => 'Trust level',
+	'number_comments'	=> 'Number of comments',
     'logs'              => 'Logs',
     'reports'           => 'Flags (complaints)',
     'approve'           => 'Approve',

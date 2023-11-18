@@ -88,6 +88,7 @@ return [
     'contacts'          => '联络人',
     'tools'             => '工具',
     'trust_level'       => '信任程度',
+	'number_comments'	=> '评论数',
     'logs'              => '日志',
     'reports'           => '旗帜(投诉)',
     'approve'           => '批准',

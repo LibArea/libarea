@@ -88,6 +88,7 @@ return [
     'contacts'          => 'Contacte',
     'tools'             => 'Instrumente',
     'trust_level'       => 'Nivel de încredere',
+	'number_comments'	=> 'Numărul de comentarii',
     'logs'              => 'Bușteni',
     'reports'           => 'Steaguri (reclamații)',
     'approve'           => 'Aproba',

@@ -88,6 +88,7 @@ return [
     'contacts'          => 'جهات الاتصال',
     'tools'             => 'الاداوات',
     'trust_level'       => 'مستوى الثقة',
+	'number_comments'	=> 'عدد التعليقات',
     'logs'              => 'السجلات',
     'reports'           => 'علم (شكوات)',
     'approve'           => 'موافقة',
