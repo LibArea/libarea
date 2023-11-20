@@ -5,8 +5,7 @@ if (dHeader) {
     scrolled = window.pageYOffset || document.documentElement.scrollTop;
     if (scrolled > 70) {
       document.querySelector(".d-header").classList.add('show');
-    }
-    if (70 > scrolled) {
+    } else {
       document.querySelector(".d-header").classList.remove('show');
     }
   }

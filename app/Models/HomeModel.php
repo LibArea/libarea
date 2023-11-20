@@ -171,7 +171,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
     // The last 5 responses on the main page
     // Последние 5 ответа на главной
-    public static function latestComments()
+    public static function latestComments($limit = 6)
     {
         $trust_level = UserData::getUserTl();
         $user_comment = "AND post_tl = 0";
@@ -197,9 +197,9 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                         RIGHT JOIN posts ON post_id = comment_post_id
                             WHERE comment_is_deleted = 0 AND post_is_deleted = 0 $hidden 
                                 $user_comment AND post_type = 'post'
-                                    ORDER BY comment_id DESC LIMIT 5";
+                                    ORDER BY comment_id DESC LIMIT :limit";
 
-        return DB::run($sql)->fetchAll();
+        return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
 
     public static function latestItems($limit = 3)

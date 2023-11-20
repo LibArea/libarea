@@ -318,12 +318,18 @@ a:hover > img { opacity: 0.8; }
   margin: 5px;
 }
 
-.content_tree:target,
-.content_tree.edit {
+.anchor-top:target ~ .content_tree {
   background-clip: content-box;
   background-color: lightyellow;
+  padding: 5px;
 }
 
+.anchor-top {
+  position: absolute;
+  display: block;
+  top: -75px;
+}
+	
 .comment-telo {
   margin: 20px 5px 20px 0;
   list-style: none;
@@ -331,23 +337,23 @@ a:hover > img { opacity: 0.8; }
 }
 
 .comment-level-1 {
-	width: 32px;
+  width: 32px;
 }
 
 .comment-level-2 {
-	width: 52px;
+  width: 52px;
 }
 
 .comment-level-3 {
-	width: 72px;
+  width: 72px;
 }
 
 .comment-level-4 {
-	width: 92px;
+  width: 92px;
 }
 
 .comment-level-5 {
-	width: 112px;
+  width: 112px;
 }
 
 .comment-level-left-1 {

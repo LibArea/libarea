@@ -1,7 +1,7 @@
 <?php if (!empty($data['comments'])) : ?>
   <div class="indent-body">
     <div class="flex justify-between mb20">
-      <h2 class="lowercase mb15 text-2xl"><?= Html::numWord($post['post_comments_count'], __('app.num_comment'), true); ?></h2>
+      <h2 class="lowercase mb15 text-2xl"><?= Html::numWord($post['post_comments_count'], __('app.num_answer'), true); ?></h2>
       <ul class="nav scroll-menu">
         <li<?php if ($data['sorting'] == 'top') : ?> class="active" <?php endif; ?>><a href="?sort=top#comment"><?= __('app.top'); ?></a></li>
           <li<?php if ($data['sorting'] == 'old') : ?> class="active" <?php endif; ?>><a href="?sort=old#comment"><?= __('app.new_ones'); ?></a></li>
@@ -23,11 +23,13 @@
 
           <?php if ($node['comment_published'] == 0 && $node['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
-          <ol class="comment-telo">
-            <li>
+		   
+          <ol class="comment-telo"> 
+            <li class="relative">
+			  <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
               <div class="comment-thread comment-level-<?= $level; ?>"></div>
 
-              <div class="content_tree relative comment-level-left-<?= $level; ?><?php if ($node['comment_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>" id="comment_<?= $node['comment_id']; ?>">
+              <div class="content_tree relative comment-level-left-<?= $level; ?><?php if ($node['comment_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
                 <div class="content-body">
                   <div class="flex justify-between">
                     <div class="flex text-sm gap-min">
@@ -66,8 +68,6 @@
                             <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
                           </svg></a>
                       <?php endif; ?>
-
-                      <span class="text-sm gray-600">вложение - <?= $level; ?> </span>
                     </div>
                     <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'discussion']); ?>
                   </div>
