@@ -313,11 +313,12 @@ return [
     'today'         => '今天',
     'yesterday'     => '昨天',
 
-    'num_message' => ['消息', '消息', '消息'],
-    'num_answer' => ['答案', '答案', '答案'],
-    'num_post' => ['后', '后', '后'],
-    'num_view' => ['视图', '视图', '视图'],
-    'num_up' => ['声音', '声音', '声音'],
+    'num_message' 	=> ['消息', '消息', '消息'],
+    'num_answer' 	=> ['答案', '答案', '答案'],
+	'num_comment'	=> ['注释','注释','注释'],
+    'num_post' 		=> ['后', '后', '后'],
+    'num_view' 		=> ['视图', '视图', '视图'],
+    'num_up' 		=> ['声音', '声音', '声音'],
 
     'comment'       => '评论',
     'comments'      => '评论',
@@ -360,7 +361,7 @@ return [
     'slug'              => 'SLUG',
     'email'             => 'Email',
     'wiki'              => 'Wiki',
-    'edit_answer'       => '让我们改变答案',
+	'edit_comment'		=> '更改注释',
     'enter'             => '进入',
     'enter_password'    => '输入密码',
 

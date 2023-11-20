@@ -89,7 +89,7 @@ use Hleb\Constructor\Handlers\Request; ?>
   <?php endif; ?>
 
   <div class="sticky top-sm">
-    <?= insert('/_block/latest-answers-tabs', ['latest_answers' => $data['latest_answers']]); ?>
+    <?= insert('/_block/latest-comments-tabs', ['latest_comments' => $data['latest_comments']]); ?>
 
     <?php if (UserData::getUserScroll()) : ?>
       <?= insert('/global/sidebar-footer'); ?>

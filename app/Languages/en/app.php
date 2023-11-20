@@ -315,6 +315,7 @@ return [
 
     'num_message'   => ['Message', 'Messages', 'Messages'],
     'num_answer'    => ['Answer', 'Answers', 'Answers'],
+    'num_comment'	=> ['Comment', 'Comments', 'Comments'],
     'num_post'      => ['Post', 'Posts', 'Posts'],
     'num_view'      => ['View', 'Views', 'Views'],
     'num_up'        => ['likes', 'likes', 'likes'],
@@ -360,7 +361,7 @@ return [
     'slug'              => 'SLUG',
     'email'             => 'Email',
     'wiki'              => 'Wiki',
-    'edit_answer'       => 'Let\'s change the answer',
+    'edit_comment'		=> 'Change the comment',
     'enter'             => 'Enter',
     'enter_password'    => 'Enter password',
 

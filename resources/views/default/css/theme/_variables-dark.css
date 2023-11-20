@@ -49,6 +49,8 @@ body.dark {
   --footer-text-color: #eee;
   --footer-color-active: #ccc;
 
+  --blockquote-bg: #2e3d49;
+
   /* Colors used */
   --black: #fff;
   --white: #161f27;
@@ -81,7 +83,22 @@ body.dark .content_tree.edit {
   background-color: var(--form-bg-color);
 }
 
+body.dark .content_tree {
+  word-wrap: break-word;
+  box-shadow: 0 15px 25px rgba(0,0,0,.1);
+  padding: 5px;
+}
+
 body.dark blockquote {
-  background-color: #5f5f67;
+  background-color: var(--blockquote-bg);
   border-left: 3px solid #6d6e6f;
+}
+
+body.dark :not(pre)>code[class*=language-], pre[class*=language-] {
+    background: var(--blockquote-bg);
+}
+
+body.dark code[class*=language-], pre[class*=language-] {
+    color: #eee;
+    text-shadow: none;
 }

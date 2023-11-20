@@ -9,246 +9,309 @@ use DB;
 
 class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 {
-    // Adding a comment
-    // Добавляем комментарий
-    public static function add($post_id, $answer_id, $comment_id, $content, $trigger)
+	public static $limit = 15;
+	
+    // Add an comment
+    // Добавим ответ
+    public static function add($post_id, $comment_id, $content, $trigger)
     {
-
         $params = [
-            'comment_post_id'       => $post_id,
-            'comment_answer_id'     => $answer_id,
-            'comment_parent_id'     => $comment_id,
-            'comment_content'       => $content,
-            'comment_published'     => ($trigger === false) ? 0 : 1,
-            'comment_ip'            => Request::getRemoteAddress(),
-            'comment_user_id'       => UserData::getUserId(),
+            'comment_post_id'    => $post_id,
+			'comment_parent_id'  => $comment_id,
+            'comment_content'    => $content,
+            'comment_published'  => ($trigger === false) ? 0 : 1,
+            'comment_ip'         => Request::getRemoteAddress(),
+            'comment_user_id'    => UserData::getUserId(),
         ];
 
         $sql = "INSERT INTO comments(comment_post_id, 
-                                        comment_answer_id, 
-                                        comment_parent_id, 
-                                        comment_content, 
-                                        comment_published, 
-                                        comment_ip, 
-                                        comment_user_id) 
-        
-                                VALUES(:comment_post_id, 
-                                        :comment_answer_id, 
-                                        :comment_parent_id, 
-                                        :comment_content, 
-                                        :comment_published, 
-                                        :comment_ip, 
-                                        :comment_user_id)";
+					comment_parent_id,
+                    comment_content, 
+                    comment_published, 
+                    comment_ip, 
+                    comment_user_id) 
+                       VALUES(:comment_post_id, 
+						   :comment_parent_id,
+                           :comment_content, 
+                           :comment_published, 
+                           :comment_ip, 
+                           :comment_user_id)";
 
         DB::run($sql, $params);
 
-        $sql_last_id    =   DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch();
-        $last_id        =   $sql_last_id['last_id'];
+        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch();
 
-        // Отмечаем комментарий, что за ним есть ответ
-        self::setThereComment($last_id, $params['comment_parent_id']);
-
-        $sql     = "SELECT * FROM answers WHERE answer_id = :comment_answer_id";
-        $answer  = DB::run($sql, ['comment_answer_id' => $params['comment_answer_id']])->fetch();
-
-        if ($answer['answer_after'] == 0) {
-            self::setThereAnswer($last_id, $params['comment_answer_id']);
-        }
-
-        // Add the number of comments for the post + 1
+        // Recalculating the number of responses for the post + 1
+        // Пересчитываем количество ответов для поста + 1
         PostModel::updateCount($post_id, 'comments');
 
-        return $last_id;
+        return $sql_last_id['last_id'];
     }
 
-    // Editing a comment
-    // Редактируем комментарий
+    // Editing the comment
+    // Редактируем ответ
     public static function edit($params)
     {
-        $sql = "UPDATE comments SET 
-                    comment_content     = :comment_content,
-                    comment_modified    = :comment_modified
-                         WHERE comment_id = :comment_id";
+        $sql_two = "UPDATE comments SET comment_content = :comment_content, 
+                        comment_modified = :comment_modified, comment_user_id = :comment_user_id
+                            WHERE comment_id = :comment_id";
 
-        return DB::run($sql, $params);
+        return DB::run($sql_two, $params);
     }
 
-    // Отметим комментарий, что за ним есть ответ
-    public static function setThereComment($last_id, $comment_id)
+    // All comments    
+    // Все ответы
+    public static function getComments($page, $sheet)
     {
-        $sql = "UPDATE comments SET comment_after = :last_id WHERE comment_id = :comment_id";
-
-        return DB::run($sql, ['last_id' => $last_id, 'comment_id' => $comment_id]);
-    }
-
-
-    // Отмечаем ответ, что за ним есть комментарии
-    public static function setThereAnswer($last_id, $answer_id)
-    {
-        $sql = "UPDATE answers SET answer_after = :last_id WHERE answer_id = :answer_id";
-
-        return DB::run($sql, ['last_id' => $last_id, 'answer_id' => $answer_id]);
-    }
-
-    // Все комментарии
-    public static function getComments($page, $limit, $sheet)
-    {
-        $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
+        $user_id = UserData::getUserId();
         $sort = self::sorts($sheet);
-        $start  = ($page - 1) * $limit;
-
-        $sql = "SELECT
+        $start  = ($page - 1) * self::$limit;
+        $sql = "SELECT 
                     post_id,
                     post_title,
                     post_slug,
-                    post_tl,
-                    post_hidden,
-                    post_feature,
                     post_user_id,
                     post_closed,
+                    post_feature,
                     post_is_deleted,
                     comment_id,
-                    comment_ip,
-                    comment_date,
                     comment_content,
-                    comment_post_id,
+                    comment_date,
                     comment_user_id,
-                    comment_parent_id,
-                    comment_published,
+                    comment_ip,
+                    comment_post_id,
                     comment_votes,
-                    comment_after,
                     comment_is_deleted,
+                    comment_published,
                     votes_comment_item_id, 
                     votes_comment_user_id,
-                    id, 
-                    login, 
-                    avatar,
-					created_at
-                        FROM comments 
-                            JOIN users ON id = comment_user_id
-                            JOIN posts ON comment_post_id = post_id AND post_tl <= :tl
-                            LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
-                                AND votes_comment_user_id = :uid
-                                    WHERE $sort $hidden
-                                        ORDER BY comment_id DESC LIMIT :start, :limit";
+                    fav.tid,
+                    fav.user_id,
+                    fav.action_type,
+                    u.id, 
+                    u.login, 
+                    u.avatar
+                        FROM comments
+                        INNER JOIN users u ON u.id = comment_user_id
+                        INNER JOIN posts ON comment_post_id = post_id 
+                        LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
+                            AND votes_comment_user_id = $user_id
+                        LEFT JOIN favorites fav ON fav.tid = comment_id
+                            AND fav.user_id  = $user_id
+                            AND fav.action_type = 'comment'    
+                        $sort
+                        ORDER BY comment_id DESC LIMIT :start, :limit ";
 
-        return DB::run($sql, ['uid' => UserData::getUserId(), 'start' => $start, 'limit' => $limit, 'tl' => UserData::getUserTl()])->fetchAll();
+        return DB::run($sql, ['start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
-    // Количество комментариев 
     public static function getCommentsCount($sheet)
     {
         $sort = self::sorts($sheet);
 
-        $sql = "SELECT 
-                    comment_id, 
-                    comment_is_deleted 
-                        FROM comments 
-                            JOIN posts ON comment_post_id = post_id AND post_tl <= :tl
-                                WHERE $sort";
+        $sql = "SELECT comment_id FROM comments INNER JOIN posts ON comment_post_id = post_id $sort";
 
-        return DB::run($sql, ['tl' => UserData::getUserTl()])->rowCount();
+        return DB::run($sql)->rowCount();
     }
 
     public static function sorts($sheet)
     {
-        return $sheet == 'all' ? "comment_is_deleted = 0" : "comment_is_deleted = 1";
+        $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
+        
+        switch ($sheet) {
+            case 'all':
+                $sort     = "WHERE comment_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0 $hidden";
+                break;
+            case 'deleted':
+                $sort     = "WHERE comment_is_deleted = 1";
+                break;
+        }
+
+        return $sort;
     }
 
-    // Получаем комментарии к ответу
-    public static function getCommentsAnswer($answer_id)
+    // Number of replies per post
+    // Количество ответов на пост
+    public static function getNumberComment($post_id)
     {
+        $sql = "SELECT comment_id FROM comments WHERE comment_post_id = :id AND comment_is_deleted = 0";
+
+        return DB::run($sql, ['id' => $post_id])->rowCount();
+    }
+
+    // Add the comment to the end of the post
+    // Добавим ответ в конец поста
+    public static function mergePost($post_id, $content)
+    {
+        $sql = "UPDATE posts SET post_content = CONCAT(post_content, :content) WHERE post_id = :post_id";
+
+        $content = "\n\n `+` " . $content;
+
+        return DB::run($sql, ['post_id' => $post_id, 'content' => $content]); 
+    }
+
+    // Getting comments in a post
+    // Получаем ответы в посте
+    public static function getCommentsPost($post_id, $type, $sorting = 'new')
+    {
+        $user_id = UserData::getUserId();
+
+        if ($type == 1) {
+            $sorting = 'top';
+        }
+
+        switch ($sorting) {
+            case 'top':
+                $sort = 'ORDER BY comment_lo DESC, comment_votes DESC';
+                break;
+            case 'old':
+                $sort = 'ORDER BY comment_id DESC';
+                break;
+                // new    
+            default:
+                $sort = '';
+                break;
+        }
+
         $sql = "SELECT 
                     comment_id,
-                    comment_user_id,                
-                    comment_answer_id,
-                    comment_parent_id,
-                    comment_content,
+                    comment_user_id,
+                    comment_post_id,
+					comment_parent_id,
                     comment_date,
-                    comment_votes,
+                    comment_content,
+                    comment_modified,
                     comment_published,
                     comment_ip,
-                    comment_after,
+                    comment_votes,
+                    comment_lo,
                     comment_is_deleted,
                     votes_comment_item_id, 
                     votes_comment_user_id,
-                    id, 
-                    login, 
-                    avatar,
-                    created_at
-                        FROM comments 
-                            LEFT JOIN users  ON id = comment_user_id
-                            LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 
-                            AND votes_comment_user_id = :user_id
-                                WHERE comment_answer_id = :answer_id";
+                    fav.tid,
+                    fav.user_id,
+                    fav.action_type,
+                    u.id, 
+                    u.login,
+                    u.avatar,
+                    u.created_at
+                        FROM comments
+                        LEFT JOIN users u ON u.id = comment_user_id
+                        LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
+                            AND votes_comment_user_id = $user_id
+                        LEFT JOIN favorites fav ON fav.tid = comment_id
+                            AND fav.user_id  = $user_id
+                            AND fav.action_type = 'comment'
+								WHERE comment_post_id = $post_id $sort";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId(), 'answer_id' => $answer_id])->fetchAll();
+        return DB::run($sql)->fetchAll();
     }
 
-    // Страница комментариев участника
-    public static function userComments($page, $limit, $user_id, $id)
+    // User responses
+    // Ответы участника
+    public static function userComments($page, $user_id, $uid_vote)
     {
-        $start  = ($page - 1) * $limit;
+        $start  = ($page - 1) * self::$limit;
         $sql = "SELECT 
                     comment_id,
-                    comment_user_id,                
-                    comment_answer_id,
-                    comment_parent_id,
-                    comment_content,
+                    comment_user_id,
+                    comment_post_id,
                     comment_date,
+                    comment_content,
+                    comment_modified,
                     comment_published,
-                    comment_votes,
                     comment_ip,
-                    comment_after,
+                    comment_votes,
                     comment_is_deleted,
                     votes_comment_item_id, 
                     votes_comment_user_id,
-                    post_id, 
-                    post_slug,
+                    post_id,
                     post_title,
+                    post_slug,
                     post_user_id,
                     post_closed,
                     post_is_deleted,
                     id, 
                     login, 
                     avatar
-                        FROM comments 
-                            LEFT JOIN users  ON id = comment_user_id
-                            LEFT JOIN posts  ON comment_post_id = post_id 
-                            LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id
-                            AND votes_comment_user_id = :id
-                                WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
-                                    AND post_is_deleted = 0 AND post_tl = 0 AND post_hidden = 0
-                                        ORDER BY comment_id DESC LIMIT :start, :limit";
+                        FROM comments
+                        LEFT JOIN users ON id = comment_user_id
+                        LEFT JOIN posts ON comment_post_id = post_id
+                        LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
+                            AND votes_comment_user_id = :uid_vote
+                        WHERE comment_user_id = :user_id AND post_hidden = 0
+                            AND comment_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
+                                ORDER BY comment_id DESC LIMIT :start, :limit ";
 
-        return DB::run($sql, ['user_id' => $user_id, 'id' => $id, 'start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id, 'uid_vote' => $uid_vote, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
-    // Количество комментариев участника
     public static function userCommentsCount($user_id)
     {
         $sql = "SELECT 
                     comment_id
-                        FROM comments 
-                        LEFT JOIN posts  ON comment_post_id = post_id 
+                        FROM comments
+                        LEFT JOIN posts ON comment_post_id = post_id
                             WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
-                                AND post_is_deleted = 0 AND post_tl = 0";
+                                AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0";
 
         return DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 
-    // Получаем комментарий по id комментария
-    public static function getCommentsId($comment_id)
+    // Information on the id of the comment
+    // Информацию по id ответа
+    public static function getCommentId($comment_id)
     {
         $sql = "SELECT 
                     comment_id,
-                    comment_content,
+                    comment_post_id,
                     comment_user_id,
                     comment_date,
-                    comment_post_id,
+                    comment_modified,
+                    comment_published,
+                    comment_ip,
+                    comment_votes,
+                    comment_content,
+                    comment_lo,
                     comment_is_deleted
-                        FROM comments WHERE comment_id = :comment_id";
+                        FROM comments 
+                            WHERE comment_id = :comment_id";
 
-        return DB::run($sql, ['comment_id' => $comment_id])->fetch();
+        return  DB::run($sql, ['comment_id' => $comment_id])->fetch();
+    }
+
+    /* 
+     *  Best comment
+     */
+
+    // Choice of the best comment
+    // Выбор лучшего ответа
+    public static function setBest($post_id, $comment_id, $selected_best_comment)
+    {
+        if ($selected_best_comment) {
+            DB::run("UPDATE comments SET comment_lo = 0 WHERE comment_id = :id", ['id' => $selected_best_comment]);
+        }
+
+        self::setCommentBest($comment_id);
+
+        self::commentPostBest($post_id, $comment_id);
+    }
+
+    // Let's write down the id of the participant who chose the best comment
+    // Запишем id участника выбравший лучший ответ
+    public static function setCommentBest($comment_id)
+    {
+        $sql = "UPDATE comments SET comment_lo = :user_id WHERE comment_id = :comment_id";
+
+        return  DB::run($sql, ['comment_id' => $comment_id, 'user_id' => UserData::getUserId()]);
+    }
+
+    // Rewriting the number of the selected best comment in the post
+    // Переписываем номер выбранного лучший ответ в посте
+    public static function commentPostBest($post_id, $comment_id)
+    {
+        $sql_two = "UPDATE posts SET post_lo = :comment_id WHERE post_id = :post_id";
+
+        return DB::run($sql_two, ['post_id' => $post_id, 'comment_id' => $comment_id]);
     }
 }

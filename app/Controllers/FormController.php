@@ -55,8 +55,8 @@ class FormController extends Controller
             return (new Poll\EditPollController)->index();
         }
 
-        if ($this->type === 'answer') {
-            return (new Answer\EditAnswerController)->index();
+        if ($this->type === 'comment') {
+            return (new Comment\EditCommentController)->index();
         }
 
         if ($this->type === 'item') {
@@ -81,10 +81,6 @@ class FormController extends Controller
 
         if (in_array($this->type, ['topic', 'blog', 'category', 'section'])) {
             return (new Facets\AddFacetController)->create($this->type);
-        }
-
-        if ($this->type === 'answer') {
-            return (new Answer\AddAnswerController)->create();
         }
 
         if ($this->type === 'comment') {
@@ -129,10 +125,6 @@ class FormController extends Controller
 
         if ($this->type === 'poll') {
             return (new Poll\EditPollController)->change();
-        }
-
-        if ($this->type === 'answer') {
-            return (new Answer\EditAnswerController)->change();
         }
 
         if ($this->type === 'comment') {

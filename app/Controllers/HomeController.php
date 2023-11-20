@@ -24,7 +24,7 @@ class HomeController extends Controller
                     'sheet'             => $sheet,
                     'topics'            => $topics,
                     'type'              => 'main',
-                    'latest_answers'    => HomeModel::latestAnswers(),
+                    'latest_comments'	=> HomeModel::latestComments(),
                     'topics_user'       => HomeModel::subscription(),
                     'posts'             => HomeModel::feed($this->pageNumber, $sheet),
                     'items'             => HomeModel::latestItems(),

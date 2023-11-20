@@ -52,6 +52,8 @@
   --footer-box-shadow: 0 -5px 5px -5px rgb(0 0 0 / 15%);
   --footer-text-color: #9ca3af;
   --footer-color-active: #332f2f;
+  
+  --blockquote-bg: #f3f3f6;
 
   /* Colors used */
   --black: #030303;

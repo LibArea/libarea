@@ -145,9 +145,9 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     post_id,
                     post_title,
                     post_slug,
-                    answer_id,
-                    answer_post_id,
-                    answer_content,
+                    comment_id,
+                    comment_post_id,
+                    comment_content,
                     item_id,
                     item_title,
                     item_url,
@@ -156,7 +156,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     item_domain
                         FROM favorites fav
                             LEFT JOIN posts ON post_id = fav.tid AND fav.action_type = 'post'
-                            LEFT JOIN answers ON answer_id = fav.tid AND fav.action_type = 'answer'
+                            LEFT JOIN comments ON comment_id = fav.tid AND fav.action_type = 'comment'
                             LEFT JOIN items ON item_id = fav.tid AND fav.action_type = 'website'
                               LEFT JOIN folders_relation fr ON fr.tid = fav.tid
                               LEFT JOIN folders fol ON folder_id = fol.id AND fol.user_id = :uid2
@@ -218,8 +218,6 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
 
         $sql = "SELECT 
                     (SELECT COUNT(post_id) FROM posts WHERE post_user_id = $user_id and post_draft = 0 and post_is_deleted = $condition) AS count_posts,
-                  
-                    (SELECT COUNT(answer_id) FROM answers WHERE answer_user_id = $user_id and answer_is_deleted = $condition) AS count_answers,
                   
                     (SELECT COUNT(comment_id) FROM comments WHERE comment_user_id = $user_id and comment_is_deleted = $condition) AS count_comments,
                             

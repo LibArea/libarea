@@ -6,7 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Services\Meta\Profile;
 use App\Controllers\Controller;
 use App\Models\User\{UserModel, BadgeModel};
-use App\Models\{FacetModel, FeedModel, AnswerModel, CommentModel, PostModel, IgnoredModel};
+use App\Models\{FacetModel, FeedModel, CommentModel, PostModel, IgnoredModel};
 use UserData;
 
 use App\Traits\Views;
@@ -71,18 +71,8 @@ class ProfileController extends Controller
     {
         $profile   = $this->profile();
 
-        $answers    = AnswerModel::userAnswers($this->pageNumber, $this->limit, $profile['id'], $this->user['id']);
-        $answerCount = AnswerModel::userAnswersCount($profile['id']);
-
-        $comments   = CommentModel::userComments($this->pageNumber, $this->limit, $profile['id'], $this->user['id']);
-        $commentCount = CommentModel::userCommentsCount($profile['id']);
-
-        $pagesCount = $answerCount + $commentCount;
-
-        $mergedArr = array_merge($comments, $answers);
-        usort($mergedArr, function ($a, $b) {
-            return ($b['comment_date'] ?? $b['answer_date']) <=> ($a['comment_date'] ?? $a['answer_date']);
-        });
+        $comments    = CommentModel::userComments($this->pageNumber, $profile['id'], $this->user['id']);
+        $commentsCount = CommentModel::userCommentsCount($profile['id']);
 
         $this->indexing($profile['id']);
 
@@ -90,7 +80,7 @@ class ProfileController extends Controller
             '/user/profile/comments',
             [
                 'meta'  => Profile::metadata('profile_comments', $profile),
-                'data'  => array_merge($this->sidebar($pagesCount, $profile), ['comments' => $mergedArr]),
+                'data'  => array_merge($this->sidebar($commentsCount, $profile), ['comments' => $comments]),
             ]
         );
     }
@@ -151,7 +141,7 @@ class ProfileController extends Controller
     public function indexing($profile_id)
     {
         $amount = UserModel::contentCount($profile_id, 'active');
-        if (($amount['count_answers'] + $amount['count_comments']) < 3) {
+        if (($amount['count_comments']) < 3) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
 

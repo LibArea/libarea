@@ -10,7 +10,7 @@
 <body>
 
   <main class="box mr-auto max-w780">
-    <h1 class="text-3xl gray"><?= __('off.maintenance'); ?></h1>
+    <h1 class="text-3xl gray"><?= __('off.under_maintenance'); ?></h1>
     <p class="gray-600"><?= __('off.under_reconstruction'); ?>...</p>
 
     <form class="max-w300" action="/login" method="post">

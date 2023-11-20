@@ -21,6 +21,10 @@
   <label><?= __('admin.trust_level'); ?></label>
   <div class="update btn btn-primary" data-type="tl"><?= __('admin.update'); ?></div>
 </fieldset>
+<fieldset>
+  <label><?= __('admin.number_comments'); ?></label>
+  <div class="update btn btn-primary" data-type="post"><?= __('admin.update'); ?></div>
+</fieldset>
 <fieldset class="max-w300">
   <label for="mail"><?= __('admin.email'); ?></label>
   <form action="<?= url('admin.test.mail'); ?>" method="post">

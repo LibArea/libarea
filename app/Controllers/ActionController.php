@@ -15,7 +15,7 @@ class ActionController extends Controller
         $content_id = Request::getPostInt('content_id');
         $type       = Request::getPost('type');
 
-        $allowed = ['post', 'comment', 'answer', 'reply', 'item'];
+        $allowed = ['post', 'comment', 'reply', 'item'];
         if (!in_array($type, $allowed)) {
             return false;
         }
@@ -23,6 +23,7 @@ class ActionController extends Controller
         // Access check 
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($content_id, $type);
+		
         if (Access::author($type, $info_type) == false) {
             redirect('/');
         }
@@ -36,11 +37,6 @@ class ActionController extends Controller
                 $post = PostModel::getPost($info_type['comment_post_id'], 'id', $this->user);
                 $url  = post_slug($info_type['comment_post_id'], $post['post_slug']) . '#comment_' . $info_type['comment_id'];
                 $action_type = 'comment';
-                break;
-            case 'answer':
-                $post = PostModel::getPost($info_type['answer_post_id'], 'id', $this->user);
-                $url  = post_slug($info_type['answer_post_id'], $post['post_slug']) . '#answer_' . $info_type['answer_id'];
-                $action_type = 'answer';
                 break;
             case 'reply':
                 $url  = '/';

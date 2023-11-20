@@ -9,7 +9,7 @@
 return [
     'all'               => 'Toate',
     'posts'             => 'Postări',
-    'answers'           => 'Răspunsuri',
+    'comments'          => 'Comentarii',
     'websites'          => 'Site-uri',
     'registration'      => 'Înregistrare',
     'sign_in'           => 'Conectare',

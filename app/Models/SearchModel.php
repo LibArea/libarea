@@ -14,8 +14,8 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
             return self::getWebsite($page, $limit, $query);
         }
 
-        if ($type == 'answer') {
-            return self::getAnswers($page, $limit, $query);
+        if ($type == 'comment') {
+            return self::getComments($page, $limit, $query);
         }
 
         return self::getPosts($page, $limit, $query);
@@ -52,14 +52,14 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['qa' => $query, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getAnswers($page, $limit, $query)
+    public static function getComments($page, $limit, $query)
     {
         $start  = ($page - 1) * $limit;
-        $sql = "SELECT answer_id, answer_content, post_id, post_slug, post_title as title
-                    FROM answers  
-                    LEFT JOIN posts ON answer_post_id = post_id 
+        $sql = "SELECT comment_id, comment_content, post_id, post_slug, post_title as title
+                    FROM comments  
+                    LEFT JOIN posts ON comment_post_id = post_id 
                         WHERE post_is_deleted = 0
-                            AND answer_content LIKE :qa LIMIT :start, :limit";
+                            AND comment_content LIKE :qa LIMIT :start, :limit";
 
         return DB::run($sql, ['qa' => "%" . $query . "%", 'start' => $start, 'limit' => $limit])->fetchAll();
     }
@@ -94,8 +94,8 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function getSearchCount($query, $type)
     {
-        if ($type == 'answer') {
-            $sql = "SELECT answer_id FROM answers LEFT JOIN posts ON answer_post_id = post_id WHERE post_is_deleted = 0 AND answer_content LIKE :qa";
+        if ($type == 'comment') {
+            $sql = "SELECT comment_id FROM comments LEFT JOIN posts ON comment_post_id = post_id WHERE post_is_deleted = 0 AND comment_content LIKE :qa";
 
             return DB::run($sql, ['qa' => "%" . $query . "%"])->rowCount();
         }

@@ -72,13 +72,11 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
                 (SELECT COUNT(*) FROM 
                     posts WHERE post_user_id = $user_id and post_is_deleted = 0) AS t1Count,
                 (SELECT COUNT(*) FROM 
-                    answers WHERE answer_user_id = $user_id and answer_is_deleted = 0) AS t2Count,
-                (SELECT COUNT(*) FROM 
-                    comments WHERE comment_user_id = $user_id and comment_is_deleted = 0) AS t3Count";
+                    comments WHERE comment_user_id = $user_id and comment_is_deleted = 0) AS t2Count";
 
         $lists  = DB::run($sql)->fetch();
 
-        return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];
+        return $lists['t1Count'] + $lists['t2Count'];
     }
 
     // Member Content Posting Frequency 

@@ -76,7 +76,7 @@ class Html
         return ((int)$a[2] . " " . $months[$later] . " " . $a[0]);
     }
 
-    // Voting for posts, replies, comments and sites
+    // Voting for posts, replies, answer and sites
     public static function votes($content, $type, $icon = 'heart')
     {
         $count = $content[$type . '_votes'] > 0 ?  $content[$type . '_votes'] : '';

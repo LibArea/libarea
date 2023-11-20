@@ -6,7 +6,7 @@
       </ul>
     </div>
     <?php if (!empty($data['comments'])) : ?>
-      <?= insert('/content/comment/comment', ['comments' => $data['comments']]); ?>
+      <?= insert('/content/comments/comment', ['comments' => $data['comments']]); ?>
 
       <?php $path = ($data['sheet'] == 'deleted') ? url('comments.deleted') : '/comments'; ?>
       <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $path); ?>

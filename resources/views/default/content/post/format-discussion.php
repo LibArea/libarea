@@ -1,209 +1,111 @@
-<?php if (!empty($data['answers'])) : ?>
+<?php if (!empty($data['comments'])) : ?>
   <div class="indent-body">
     <div class="flex justify-between mb20">
-      <h2 class="lowercase mb15 text-2xl"><?= Html::numWord($post['amount_content'], __('app.num_answer'), true); ?></h2>
+      <h2 class="lowercase mb15 text-2xl"><?= Html::numWord($post['post_comments_count'], __('app.num_comment'), true); ?></h2>
       <ul class="nav scroll-menu">
         <li<?php if ($data['sorting'] == 'top') : ?> class="active" <?php endif; ?>><a href="?sort=top#comment"><?= __('app.top'); ?></a></li>
           <li<?php if ($data['sorting'] == 'old') : ?> class="active" <?php endif; ?>><a href="?sort=old#comment"><?= __('app.new_ones'); ?></a></li>
             <li<?php if ($data['sorting'] == '') : ?> class="active" <?php endif; ?>><a href="./<?= $post['post_slug']; ?>#comment"><?= __('app.by_date'); ?></a></li>
       </ul>
     </div>
-    <?php $n = 0;
-    foreach ($data['answers'] as  $answer) :
-      $n++;
-      $post_url = post_slug($post['post_id'], $post['post_slug']);
+
+    <?php
+    function internalRender($nodes, $post, $level = 0)
+    {
+      foreach ($nodes as  $node) :
+
+        $level =  $level > 5 ? 5 : $level;
     ?>
 
-      <?php if ($answer['answer_is_deleted'] == 1 && !UserData::checkAdmin()) : ?>
-        <div class="gray-600 text-sm m10"><?= __('app.content_deleted', ['name' => __('app.answer')]); ?>...</div>
-      <?php else : ?>
+        <?php if ($node['comment_is_deleted'] == 1 && !UserData::checkAdmin()) : ?>
+          <div class="gray-600 text-sm m10"><?= __('app.content_deleted', ['name' => __('app.comment')]); ?>...</div>
+        <?php else : ?>
 
-        <?php if ($n != 1) : ?><div class="br-dotted mt10 mb10"></div><?php endif; ?>
+          <?php if ($node['comment_published'] == 0 && $node['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
-        <?php if ($answer['answer_published'] == 0 && $answer['answer_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
+          <ol class="comment-telo">
+            <li>
+              <div class="comment-thread comment-level-<?= $level; ?>"></div>
 
-        <ol class="mb20 list-none<?php if ($answer['answer_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
-
-          <li class="content_tree" id="answer_<?= $answer['answer_id']; ?>">
-            <div class="content-body">
-              <div class="flex justify-between">
-                <div class="flex text-sm gap">
-                  <a class="gray-600" href="<?= url('profile', ['login' => $answer['login']]); ?>">
-                    <?= Img::avatar($answer['avatar'], $answer['login'], 'img-sm mr5', 'small'); ?>
-                    <span class="nickname<?php if (Html::loginColor($answer['created_at'])) : ?> green<?php endif; ?>">
-                      <?= $answer['login']; ?>
-                    </span>
-                  </a>
-                  <?php if ($post['post_user_id'] == $answer['answer_user_id']) : ?>
-                    <svg class="icons icon-small sky">
-                      <use xlink:href="/assets/svg/icons.svg#mic"></use>
-                    </svg>
-                  <?php endif; ?>
-                  <span class="gray-600 lowercase">
-                    <?= Html::langDate($answer['answer_date']); ?>
-                  </span>
-                  <?php if (empty($answer['edit'])) : ?>
-                    <span class="gray-600">
-                      (<?= __('app.ed'); ?>.)
-                    </span>
-                  <?php endif; ?>
-                  <?php if ($answer['answer_published'] == 0 && UserData::checkAdmin()) : ?>
-                    <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
-                  <?php endif; ?>
-                  <?php if ($answer['answer_lo']) : ?>
-                    <svg class="icons red">
-                      <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
-                    </svg>
-                  <?php endif; ?>
-                </div>
-                <?= insert('/content/post/answer-menu', ['post_url' => $post_url, 'post' => $post, 'answer' => $answer]); ?>
-              </div>
-              <div class="ind-first-p">
-                <?= markdown($answer['answer_content'], 'text'); ?>
-              </div>
-            </div>
-            <div class="flex text-sm gap mt10">
-              <?= Html::votes($answer, 'answer'); ?>
-
-              <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                <a data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray-600"><?= __('app.reply'); ?></a>
-              <?php endif; ?>
-
-            </div>
-            <div data-insert="<?= $answer['answer_id']; ?>" id="insert_id_<?= $answer['answer_id']; ?>" class="none"></div>
-          </li>
-        </ol>
-
-      <?php endif; ?>
-
-      <?php foreach ($answer['comments'] as  $comment) : ?>
-
-        <?php if ($comment['comment_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
-        <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
-
-        <ol class="list-none">
-          <li class="content_tree mb20 ml15<?php if ($comment['comment_parent_id'] > 0) : ?> ml30<?php endif; ?><?php if ($comment['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>" id="comment_<?= $comment['comment_id']; ?>">
-            <div class="flex justify-between">
-              <div class="text-sm flex gap">
-                <a class="gray-600" href="<?= url('profile', ['login' => $comment['login']]); ?>">
-                  <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm', 'small'); ?>
-                  <span class="nickname<?php if (Html::loginColor($comment['created_at'])) : ?> green<?php endif; ?>">
-                    <?= $comment['login']; ?>
-                  </span>
-                </a>
-                <?php if ($post['post_user_id'] == $comment['comment_user_id']) : ?>
-                  <svg class="icons icon-small sky">
-                    <use xlink:href="/assets/svg/icons.svg#mic"></use>
-                  </svg>
-                <?php endif; ?>
-                <span class="gray-600 lowercase">
-                  <?= Html::langDate($comment['comment_date']); ?>
-                </span>
-                <?php if ($comment['comment_parent_id'] > 0) : ?>
-                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_parent_id']; ?>"><svg class="icons icon-small">
-                      <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
-                    </svg></a>
-                <?php else : ?>
-                  <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><svg class="icons icon-small">
-                      <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
-                    </svg></a>
-                <?php endif; ?>
-
-                <?php if ($comment['comment_published'] == 0 && UserData::checkAdmin()) : ?>
-                  <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
-                <?php endif; ?>
-              </div>
-
-              <div class="right inline">
-                <div class="relative ml10">
-                  <span class="trigger gray-600 text-sm">
-                    <svg class="icons">
-                      <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
-                    </svg>
-                  </span>
-                  <ul class="dropdown">
-
-                    <?php if (Access::author('comment', $comment) === true) : ?>
-                      <li>
-                        <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray-600">
-                          <svg class="icons">
-                            <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                          </svg>
-                          <?= __('app.edit'); ?>
-                        </a>
-                      </li>
-                    <?php endif; ?>
-
-                    <?php if (UserData::checkAdmin()) : ?>
-                      <li>
-                        <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray-600">
-                          <svg class="icons">
-                            <use xlink:href="/assets/svg/icons.svg#trash-2"></use>
-                          </svg>
-                          <?= $comment['comment_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="<?= url('admin.logip', ['ip' => $comment['comment_ip']]); ?>">
-                          <svg class="icons">
-                            <use xlink:href="/assets/svg/icons.svg#info"></use>
-                          </svg>
-                          <?= $comment['comment_ip']; ?>
-                        </a>
-                      <li>
+              <div class="content_tree relative comment-level-left-<?= $level; ?><?php if ($node['comment_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>" id="comment_<?= $node['comment_id']; ?>">
+                <div class="content-body">
+                  <div class="flex justify-between">
+                    <div class="flex text-sm gap-min">
+                      <a class="gray-600" href="<?= url('profile', ['login' => $node['login']]); ?>">
+                        <?= Img::avatar($node['avatar'], $node['login'], 'img-sm mr5', 'small'); ?>
+                        <span class="nickname<?php if (Html::loginColor($node['created_at'])) : ?> green<?php endif; ?>">
+                          <?= $node['login']; ?>
+                        </span>
+                      </a>
+                      <?php if ($post['post_user_id'] == $node['comment_user_id']) : ?>
+                        <svg class="icons icon-small sky">
+                          <use xlink:href="/assets/svg/icons.svg#mic"></use>
+                        </svg>
+                      <?php endif; ?>
+                      <span class="gray-600 lowercase">
+                        <?= Html::langDate($node['comment_date']); ?>
+                      </span>
+                      <?php if (strtotime($node['comment_modified']) < strtotime($node['comment_date'])) : ?>
+                        <span class="gray-600">
+                          (<?= __('app.ed'); ?>.)
+                        </span>
+                      <?php endif; ?>
+                      <?php if ($node['comment_published'] == 0 && UserData::checkAdmin()) : ?>
+                        <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
+                      <?php endif; ?>
+                      <?php if ($node['comment_lo']) : ?>
+                        <svg class="icons red">
+                          <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
+                        </svg>
                       <?php endif; ?>
 
-                      <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
-                      <li>
-                        <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" data-a11y-dialog-show="my-dialog" class="gray-600">
-                          <svg class="icons">
-                            <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
-                          </svg>
-                          <?= __('app.report'); ?>
-                        </a>
-                      </li>
-                    <?php endif; ?>
-                    <li>
-                      <a class="gray-600" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>">
-                        <svg class="icons icon-small">
-                          <use xlink:href="/assets/svg/icons.svg#anchor"></use>
-                        </svg>
-                        <?= __('app.link'); ?>
-                      </a>
-                    </li>
-                  </ul>
+                      <?php if ($node['comment_parent_id'] > 0) : ?>
+
+                        <a class="gray-600" rel="nofollow" href="<?= post_slug($post['post_id'], $post['post_slug']); ?>#comment_<?= $node['comment_parent_id']; ?>">
+                          <svg class="icons icon-small">
+                            <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
+                          </svg></a>
+                      <?php endif; ?>
+
+                      <span class="text-sm gray-600">вложение - <?= $level; ?> </span>
+                    </div>
+                    <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'discussion']); ?>
+                  </div>
+                  <div class="ind-first-p">
+                    <?= markdown($node['comment_content'], 'text'); ?>
+                  </div>
                 </div>
+                <div class="flex text-sm gap mt10 ml5">
+                  <?= Html::votes($node, 'comment'); ?>
+
+                  <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+                    <a data-comment_id="<?= $node['comment_id']; ?>" class="add-comment gray-600"><?= __('app.reply'); ?></a>
+                  <?php endif; ?>
+
+                </div>
+                <div data-insert="<?= $node['comment_id']; ?>" id="insert_id_<?= $node['comment_id']; ?>" class="none"></div>
               </div>
-            </div>
-            <div class="ind-first-p">
-              <?= markdown($comment['comment_content'], 'text'); ?>
-            </div>
-            <div class="text-sm flex gap">
-              <?= Html::votes($comment, 'comment'); ?>
 
-              <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                <a data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment gray-600">
-                  <?= __('app.reply'); ?>
-                </a>
-              <?php endif; ?>
+              <?php if (isset($node['children'])) {
+                internalRender($node['children'], $post, $level + 1);
+              } ?>
 
-            </div>
-            <div data-insert="<?= $comment['comment_id']; ?>" id="insert_id_<?= $comment['comment_id']; ?>" class="none"></div>
-          </li>
-        </ol>
-      <?php endforeach; ?>
-    <?php endforeach; ?>
+            </li>
+          </ol>
+        <?php endif; ?>
+
+    <?php endforeach;
+    }
+
+    echo internalRender($data['comments'], $data['post']);
+    ?>
   </div>
 <?php else : ?>
-  <?php if ($post['post_closed'] != 1) : ?>
-    <?php if (UserData::checkActiveUser()) : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'info']); ?>
-    <?php else : ?>
-      <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_auth'), 'icon' => 'info']); ?>
-    <?php endif; ?>
+  <?php if ($post['post_closed'] == 1) : ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.close'), 'icon' => 'closed']);  ?>
+  <?php elseif (!UserData::checkActiveUser()) : ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_auth'), 'icon' => 'info']); ?>
+  <?php else : ?>	
+	<?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'info']); ?>
   <?php endif; ?>
 <?php endif; ?>
-
-<?php if ($post['post_closed'] == 1) :
-  echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.close'), 'icon' => 'closed']);
-endif; ?>

@@ -6,11 +6,21 @@ use DB;
 
 class ConsoleModel extends \Hleb\Scheme\App\Models\MainModel
 {
+	// Let's recalculate the number of posts in the Topics
+	// Пересчитаем количество постов в Темах
     public static function recalculateTopic()
     {
         $sql = "UPDATE facets SET facet_count = (SELECT count(relation_post_id) FROM facets_posts_relation 
-                       
                        LEFT JOIN posts ON relation_post_id = post_id WHERE relation_facet_id = facet_id AND post_is_deleted = 0)";
+
+        return DB::run($sql);
+    }
+
+	// Let's recalculate the number of сщььутеы in the Posts
+	// Пересчитаем количество комментариев в Постах
+    public static function recalculateCountCommentPost()
+    {
+        $sql = "UPDATE posts SET post_comments_count = (SELECT count(comment_post_id) FROM comments WHERE comment_post_id = post_id AND comment_is_deleted = 0)";
 
         return DB::run($sql);
     }
@@ -20,14 +30,12 @@ class ConsoleModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT 
                     (SELECT SUM(post_votes) FROM posts WHERE post_user_id = $uid) 
                             AS count_posts,
-                    (SELECT SUM(answer_votes) FROM answers WHERE answer_user_id = $uid) 
-                            AS count_answers,
                     (SELECT SUM(comment_votes) FROM comments WHERE comment_user_id = $uid) 
                             AS count_comments";
 
         $user = DB::run($sql)->fetch();
-        // Вернем сумму, но этот запрос необходим будет далее именно по отдельным типам 
-        return $user['count_posts'] + $user['count_answers'] + $user['count_comments'];
+
+        return $user['count_posts'] + $user['count_comments'];
     }
 
     public static function allUsers()

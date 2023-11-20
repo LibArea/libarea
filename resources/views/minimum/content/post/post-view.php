@@ -123,7 +123,7 @@ $post = $data['post'];
 
           <div class="clear mb15">
             <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
-            <input type="hidden" name="answer_id" value="0">
+            <input type="hidden" name="comment_id" value="0">
             <?= Html::sumbit(__('app.reply')); ?>
           </div>
         </form>

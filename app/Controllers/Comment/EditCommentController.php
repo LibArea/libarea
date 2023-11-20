@@ -4,59 +4,71 @@ namespace App\Controllers\Comment;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Services\Сheck\{PostPresence, CommentPresence};
+use App\Services\Сheck\PostPresence;
+use App\Services\Сheck\CommentPresence;
 use App\Models\CommentModel;
+use App\Models\User\UserModel;
 use App\Validate\Validator;
-use Access;
+use Meta, Access;
+
+use App\Traits\Author;
 
 class EditCommentController extends Controller
 {
-    // Comment Editing Form
-    // Форма редактирования комментария
+    use Author;
+
+    // Edit form comment
     public function index()
     {
-        // Access verification
-        // Проверка доступа 
-        $comment    = CommentPresence::index(Request::getPostInt('comment_id'));
+        $comment = CommentPresence::index(Request::getInt('id'));
         if (Access::author('comment', $comment) == false) {
             return false;
         }
 
-        insert(
-            '/_block/form/edit-comment',
+        $post = PostPresence::index($comment['comment_post_id'], 'id');
+
+        return $this->render(
+            '/comments/edit',
             [
+                'meta'  => Meta::get(__('app.edit_comment')),
                 'data'  => [
-                    'comment_id'        => $comment['comment_id'],
-                    'comment_content'   => $comment['comment_content'],
-                ],
-                'user'   => $this->user
+                    'post'      => $post,
+                    'comment'	=> $comment,
+                    'user'      => UserModel::getUser($comment['comment_user_id'], 'id'),
+                    'sheet'     => 'edit-answers',
+                    'type'      => 'comment',
+                ]
             ]
         );
     }
 
     public function change()
     {
-        // Access verification 
-        $comment = CommentPresence::index(Request::getPostInt('comment_id'));
+        $comment_id  = Request::getPostInt('comment_id');
+        $content    = $_POST['content']; // для Markdown
+
+        // Access check
+        $comment = CommentModel::getCommentId($comment_id);
+
         if (Access::author('comment', $comment) == false) {
-            redirect('/');
+            return false;
         }
 
         $post = PostPresence::index($comment['comment_post_id'], 'id');
 
-        $redirect = post_slug($post['post_id'], $post['post_slug']) . '#comment_' . $comment['comment_id'];
+        $url_post = post_slug($comment['comment_post_id'], $post['post_slug']);
 
-        $content = $_POST['comment']; // для Markdown
-        Validator::length($content, 3, 5500, 'content', $redirect);
+        Validator::Length($content, 6, 5000, 'content', url('content.edit', ['type' => 'comment', 'id' => $comment['comment_id']]));
 
         CommentModel::edit(
             [
-                'comment_id'        => $comment['comment_id'],
-                'comment_content'   => $content,
-                'comment_modified'  => date("Y-m-d H:i:s"),
+                'comment_id'         => $comment['comment_id'],
+                'comment_content'    => $content,
+                'comment_user_id'    => $this->selectAuthor($comment['comment_user_id'], Request::getPost('user_id')),
+                'comment_modified'   => date("Y-m-d H:i:s"),
             ]
         );
 
-        redirect($redirect);
+        is_return(__('msg.change_saved'), 'success', $url_post . '#comment_' . $comment['comment_id']);
     }
 }

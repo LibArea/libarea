@@ -41,7 +41,6 @@ class RssModel extends \Hleb\Scheme\App\Models\MainModel
                     post_published,
                     post_user_id,
                     post_votes,
-                    post_answers_count,
                     post_comments_count,
                     post_content,
                     post_content_img,

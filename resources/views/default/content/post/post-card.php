@@ -8,11 +8,11 @@
     <?php endif; ?>
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
-    
+
     <?php if ($post['post_hidden'] == 1) : ?>
-       <?php if ($post['post_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
+      <?php if ($post['post_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
     <?php endif; ?>
-    
+
     <div class="box shadow-bottom">
       <div class="flex items-center gap-min text-sm mb5">
         <a class="gray-600 flex gap-min items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
@@ -86,12 +86,12 @@
             </svg>
             <?= $post['post_hits_count'] == 0 ? 1 : $post['post_hits_count']; ?>
           </div>
-          <?php if ($post['post_answers_count'] != 0) : ?>
+          <?php if ($post['post_comments_count'] != 0) : ?>
             <a class="flex gray-600 gap-min" href="<?= $post_url; ?>#comment">
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#comments"></use>
               </svg>
-              <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
+              <?= $post['post_comments_count']; ?>
             </a>
           <?php endif; ?>
         </div>

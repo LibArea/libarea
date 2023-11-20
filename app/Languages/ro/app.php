@@ -314,6 +314,7 @@ return [
 
     'num_message'   => ['Mesaj', 'Mesaje', 'Mesaje'],
     'num_answer'    => ['Răspuns', 'Răspuns', 'Răspunsuri'],
+    'num_comment'	=> ['Comentariu', 'Comentariu', 'Comentarii'],
     'num_post'      => ['Postează', 'Postează', 'Postează'],
     'num_view'      => ['Vizualizare', 'Vizualizare', 'Vizualizare'],
     'num_up'        => ['Voce', 'Voci', 'Voci'],
@@ -359,7 +360,7 @@ return [
     'slug'              => 'SLUG',
     'email'             => 'Email',
     'wiki'              => 'Wiki',
-    'edit_answer'       => 'Să schimbăm răspunsul',
+    'edit_comment'		=> 'Schimbă comentariul',
     'enter'             => 'Introduce',
     'enter_password'    => 'Introdu parola',
 

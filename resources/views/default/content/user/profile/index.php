@@ -25,11 +25,11 @@
               </a>
               <div class="text-sm mt5 gray-600 lowercase">
                 <?= $data['my_post']['post_date'] ?>
-                <?php if ($data['my_post']['post_answers_count'] != 0) : ?>
+                <?php if ($data['my_post']['post_comments_count'] != 0) : ?>
                   <span class="right">
                     <svg class="icons">
                       <use xlink:href="/assets/svg/icons.svg#comments"></use>
-                    </svg> <?= $data['my_post']['post_answers_count']; ?>
+                    </svg> <?= $data['my_post']['post_comments_count']; ?>
                   </span>
                 <?php endif; ?>
               </div>

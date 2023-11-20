@@ -10,7 +10,7 @@ return [
     'all'               => 'الكل',
     'posts'             => 'المنشورات',
     'websites'          => 'المواقع',
-    'answers'           => 'اجابات',
+    'comments'          => 'تعليقات',
     'registration'      => 'التسجيل',
     'sign_in'           => 'تسجيل الدخول',
     'find'              => 'البحث...',

@@ -49,10 +49,10 @@ class UserController extends Controller
         $result = [];
         foreach ($favorites as $ind => $row) {
             if ($row['action_type'] == 'post') {
-                $row['answer_post_id'] = $row['post_id'];
+                $row['comment_post_id'] = $row['post_id'];
             }
 
-            $row['post']    = PostModel::getPost($row['answer_post_id'], 'id', $this->user);
+            $row['post']    = PostModel::getPost($row['comment_post_id'], 'id', $this->user);
             $result[$ind]   = $row;
         }
 

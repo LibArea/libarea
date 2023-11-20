@@ -59,25 +59,6 @@ isIdEmpty('colorPicker').onclick = function () {
   }, false);
 }
 
-// Call the form for adding / edit a reply
-reply.forEach(el => el.addEventListener("click", function (e) {
-  let reply = document.querySelector('#reply_addentry' + el.dataset.id);
-  fetch("/reply/" + el.dataset.type, {
-    method: "POST",
-    body: "id=" + el.dataset.id + "&item_id=" + el.dataset.item_id + "&_token=" + token,
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-  })
-    .then(response => response.text())
-    .then(text => {
-      reply.classList.add("block");
-      reply.innerHTML = text;
-      queryAll("#cancel_comment")
-        .forEach(el => el.addEventListener("click", function (e) {
-          reply.classList.remove("block");
-        }));
-    });
-}));
-
 // Up
 queryAll(".up-id")
   .forEach(el => el.addEventListener("click", function (e) {
@@ -164,13 +145,13 @@ queryAll(".add-ignore")
   }));
 
 
-// Choice of Best Answer  
-queryAll(".answer-best")
+// Choice of Best Comment  
+queryAll(".comment-best")
   .forEach(el => el.addEventListener("click", function (e) {
     fetch("/best", {
       method: "POST",
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: "answer_id=" + el.dataset.id + "&_token=" + token,
+      body: "comment_id=" + el.dataset.id + "&_token=" + token,
     })
       .then(response => response.text())
       .then(text => {
@@ -207,35 +188,6 @@ queryAll("#graburl")
       }).catch(function (error) {
         // error
       })
-  }));
-
-// Edit comment
-queryAll(".editcomm")
-  .forEach(el => el.addEventListener("click", function (e) {
-    let comment_id = el.dataset.comment_id;
-    let comment = document.querySelector('#insert_id_' + el.dataset.comment_id);
-
-    fetch("/comment/editform", {
-      method: "POST",
-      body: "comment_id=" + comment_id,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(
-        response => {
-          return response.text();
-        }
-      ).then(
-        text => {
-          getById("comment_" + comment_id).classList.add("edit");
-          comment.classList.add("block");
-          comment.innerHTML = text;
-
-          queryAll("#cancel_comment")
-            .forEach(el => el.addEventListener("click", function (e) {
-              comment.classList.remove("block");
-            }));
-        }
-      );
   }));
 
 // Add post tab

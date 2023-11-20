@@ -18,19 +18,19 @@ let token = document.querySelector("meta[name='csrf-token']").getAttribute("cont
 queryAll(".add-comment")
   .forEach(el => el.addEventListener("click", function (e) {
 
-    let answer_id = insert_id = el.dataset.answer_id;
-    let comment_id = el.dataset.comment_id;
+    let comment_id = insert_id = el.dataset.comment_id;
+    let post_id = el.dataset.post_id;
 
-    if (comment_id) {
-      insert_id = el.dataset.comment_id;
+    if (post_id) {
+      insert_id = el.dataset.post_id;
     }
 
     let comment = document.querySelector('#insert_id_' + insert_id);
     comment.classList.add("block");
 
-    fetch("/comments/addform", {
+    fetch("/comment/addform", {
       method: "POST",
-      body: "answer_id=" + answer_id + "&comment_id=" + comment_id + "&_token=" + token,
+      body: "post_id=" + post_id + "&comment_id=" + comment_id + "&_token=" + token,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
       .then(
@@ -301,8 +301,7 @@ if (tabs) {
       element.classList.remove("pointer");
     }
   }
-}
-
+}											
 /* MIT license https://github.com/vivekweb2013/toastmaker */
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {

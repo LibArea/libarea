@@ -7,7 +7,8 @@ use App\Controllers\Controller;
 use App\Services\Сheck\PostPresence;
 use App\Services\Сheck\FacetPresence;
 use App\Services\Meta\Post;
-use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel, FeedModel};
+use App\Services\Tree\BuildTree;
+use App\Models\{PostModel, CommentModel, SubscriptionModel, FeedModel};
 use Meta, UserData;
 
 use App\Traits\Views;
@@ -28,6 +29,7 @@ class PostController extends Controller
     {
         $slug  = Request::get('slug');
         $id    = Request::getInt('id');
+		$sorting  = Request::getGet('sort');
 
         $content = self::presence($type, $id, $slug);
 
@@ -48,18 +50,14 @@ class PostController extends Controller
             redirect(url('facet.article', ['facet_slug' => 'info', 'slug' => $content['post_slug']]));
         }
 
-        // Q&A (post_feature == 1) or Discussiona
-        $content['amount_content'] = ($content['post_feature'] == 0) ? $content['post_comments_count'] + $content['post_answers_count'] : $content['post_answers_count'];
-
-        // Get replies and comments on the post
-        $answers = $this->answersPost($content['post_id'], $content['post_feature'], $sorting  = Request::getGet('sort'));
-
         if ($content['post_related']) {
             $related_posts = PostModel::postRelated($content['post_related']);
         }
 
         // Sending Last-Modified and handling HTTP_IF_MODIFIED_SINCE
         $this->getDataModified($content['post_modified']);
+
+		$comments = CommentModel::getCommentsPost($content['post_id'], $content['post_feature'], $sorting);	
 
         if ($type == 'post') {
             return $this->render(
@@ -68,7 +66,7 @@ class PostController extends Controller
                     'meta'  => Post::metadata($content),
                     'data'  => [
                         'post'          => $content,
-                        'answers'       => $answers,
+                        'comments'		=> BuildTree::index(0, $comments),
                         'recommend'     => PostModel::postSimilars($content['post_id'], $facets[0]['facet_id'] ?? null),
                         'related_posts' => $related_posts ?? '',
                         'post_signed'   => SubscriptionModel::getFocus($content['post_id'], 'post'),
@@ -101,26 +99,6 @@ class PostController extends Controller
                 ]
             ]
         );
-    }
-
-    // Get replies and comments on the post
-    // Получим ответы и комментарии на пост
-    public function answersPost($post_id, $post_feature, $sorting)
-    {
-        $post_answers = AnswerModel::getAnswersPost($post_id, $post_feature, $sorting);
-
-        $answers = [];
-        foreach ($post_answers as $ind => $row) {
-
-            if (strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
-                $row['edit'] = 1;
-            }
-            // TODO: N+1 см. AnswerModel()
-            $row['comments'] = CommentModel::getCommentsAnswer($row['answer_id']);
-            $answers[$ind]   = $row;
-        }
-
-        return $answers;
     }
 
     public static function presence($type, $id, $slug)

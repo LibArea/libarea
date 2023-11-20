@@ -10,7 +10,7 @@ class CommentPresence
 {
     public static function index(int $comment_id): array
     {
-        $comment = CommentModel::getCommentsId($comment_id);;
+        $comment = CommentModel::getCommentId($comment_id);
 
         notEmptyOrView404($comment);
 

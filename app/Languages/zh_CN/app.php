@@ -312,11 +312,12 @@ return [
     'today'         => '今天',
     'yesterday'     => '昨天',
 
-    'num_message' => ['消息', '消息', '消息'],
-    'num_answer' => ['回复', '回复', '回复'],
-    'num_post' => ['帖子', '帖子', '帖子'],
-    'num_view' => ['查看', '查看', '查看'],
-    'num_up' => ['喜欢', '喜欢', '喜欢'],
+    'num_message' 	=> ['消息', '消息', '消息'],
+    'num_answer' 	=> ['回复', '回复', '回复'],
+	'num_comment'	=> ['注释','注释','注释'],
+    'num_post' 		=> ['帖子', '帖子', '帖子'],
+    'num_view' 		=> ['查看', '查看', '查看'],
+    'num_up' 		=> ['喜欢', '喜欢', '喜欢'],
 
     'comment'       => '评论',
     'comments'      => '评论',
@@ -360,7 +361,7 @@ return [
     'slug'              => '别名',
     'email'             => '邮箱',
     'wiki'              => 'Wiki',
-    'edit_answer'       => '让我们更改答复',
+	'edit_comment'		=> '更改注释',
     'enter'             => '输入',
     'enter_password'    => '输入密码',
 

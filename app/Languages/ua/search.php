@@ -9,7 +9,7 @@
 return [
     'all'               => 'Всі',
     'posts'             => 'Пости',
-    'answers'           => 'Відповіді',
+    'comments'          => 'Коментарі',
     'websites'          => 'Сайти',
     'registration'      => 'Реєстрація',
     'sign_in'           => 'Увійти',

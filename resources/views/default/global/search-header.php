@@ -74,8 +74,8 @@ $q = $data['q'];
       <li<?php if ($uri == 'post') : ?> class="active" <?php endif; ?>>
         <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=post"><?= __('search.posts'); ?></a>
         </li>
-        <li<?php if ($uri == 'answer') : ?> class="active" <?php endif; ?>>
-          <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=answer"><?= __('search.answers'); ?></a>
+        <li<?php if ($uri == 'comment') : ?> class="active" <?php endif; ?>>
+          <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=comment"><?= __('search.comments'); ?></a>
           </li>
           <li<?php if ($uri == 'website') : ?> class="active" <?php endif; ?>>
             <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=website"><?= __('search.websites'); ?></a>

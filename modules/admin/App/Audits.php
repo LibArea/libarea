@@ -4,7 +4,7 @@ namespace Modules\Admin\App;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Models\{PostModel, AnswerModel, CommentModel};
+use App\Models\{PostModel, CommentModel};
 use Modules\Admin\App\Models\LogModel;
 use Meta;
 
@@ -22,13 +22,11 @@ class Audits extends Controller
 
             if ($row['action_type'] == 'post') {
                 $row['content'] = PostModel::getPost($row['content_id'], 'id', $this->user);
-            } elseif ($row['action_type'] == 'answer') {
-                $row['content'] = AnswerModel::getAnswerId($row['content_id']);
-
-                $row['post'] = PostModel::getPost($row['content']['answer_post_id'], 'id', $this->user);
             } elseif ($row['action_type'] == 'comment') {
-                $row['content'] = CommentModel::getCommentsId($row['content_id']);
-            }
+                $row['content'] = CommentModel::getCommentId($row['content_id']);
+
+                $row['post'] = PostModel::getPost($row['content']['comment_post_id'], 'id', $this->user);
+            } 
 
             $result[$ind]   = $row;
         }

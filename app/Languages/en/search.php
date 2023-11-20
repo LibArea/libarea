@@ -9,7 +9,7 @@
 return [
     'all'               => 'All',
     'posts'             => 'Posts',
-    'answers'           => 'Answers',
+    'comments'          => 'Comments',
     'websites'          => 'Sites',
     'registration'      => 'Registration',
     'sign_in'           => 'To come in',

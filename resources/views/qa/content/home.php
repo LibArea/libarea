@@ -50,7 +50,7 @@
   <?php endif; ?>
 
   <div class="sticky top-sm">
-    <?= insert('/_block/latest-answers-tabs', ['latest_answers' => $data['latest_answers']]); ?>
+    <?= insert('/_block/latest-comments-tabs', ['latest_answers' => $data['latest_answers']]); ?>
 
     <?php if (UserData::getUserScroll()) : ?>
       <?= insert('/global/sidebar-footer'); ?>

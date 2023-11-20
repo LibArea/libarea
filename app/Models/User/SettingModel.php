@@ -89,8 +89,7 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
                         setting_email_pm        = :setting_email_pm,
                         setting_email_appealed  = :setting_email_appealed,
                         setting_email_post      = :setting_email_post,
-                        setting_email_answer    = :setting_email_answer,
-                        setting_email_comment   = :setting_email_comment
+                        setting_email_answer    = :setting_email_answer
                             WHERE setting_user_id = :setting_user_id";
 
         if (!self::countNotifications($params['setting_user_id'])) {
@@ -99,14 +98,12 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
                             setting_email_pm, 
                             setting_email_appealed,
                             setting_email_post,
-                            setting_email_answer,
-                            setting_email_comment) 
+                            setting_email_answer) 
                                 VALUES(:setting_user_id, 
                                     :setting_email_pm, 
                                     :setting_email_appealed,
                                     :setting_email_post,
-                                    :setting_email_answer,
-                                    :setting_email_comment)";
+                                    :setting_email_answer)";
         }
 
         return DB::run($sql, $params);

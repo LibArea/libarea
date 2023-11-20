@@ -38,7 +38,7 @@
         <td class="text-sm">
           <div class="content-telo">
             <?php $content = $audit['content'][$audit['action_type'] . '_content']; ?>
-            <?= fragment($content, 200); ?>
+            <?= fragment($content ?? 'no', 200); ?>
           </div>
 
           (id:<?= $audit['id']; ?>)

@@ -4,47 +4,42 @@ namespace App\Controllers\Comment;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Services\Сheck\PostPresence;
-use App\Services\Сheck\AnswerPresence;
-use App\Models\{NotificationModel, ActionModel, AnswerModel, CommentModel};
+use App\Services\Сheck\{PostPresence, CommentPresence};
+use App\Models\{NotificationModel, ActionModel, CommentModel, PostModel};
 use App\Validate\Validator;
+use UserData;
 
 class AddCommentController extends Controller
 {
-    // Show the form for adding a comment
+    // Show the form for adding a комментария
     // Покажем форму добавление комментария
     public function index()
     {
-        insert(
-            '/_block/form/add-comment',
-            [
-                'data'  => [
-                    'answer_id'  => Request::getPostInt('answer_id'),
-                    'comment_id' => Request::getPostInt('comment_id'),
-                ],
-            ]
-        );
+        insert('/_block/form/add-comment');
     }
-
-    // Adding a comment
+	
     public function create()
-    {
-        $answer_id  = Request::getPostInt('answer_id');   // на какой ответ
-        $comment_id = Request::getPostInt('comment_id');  // на какой комментарий
-
-        $answer = AnswerPresence::index($answer_id);
-
-        $post   = PostPresence::index($answer['answer_post_id'], 'id');
-
+    {		
+		if ($post_id = Request::getPostInt('post_id')) { 
+			$post = PostPresence::index($post_id, 'id');
+		}
+		
+	  	if ($comment_id = Request::getPostInt('comment_id')) { 
+			$comment = CommentPresence::index($comment_id);
+			$post = PostPresence::index($comment['comment_post_id'], 'id');
+		}
+	 
         $url_post = post_slug($post['post_id'], $post['post_slug']);
-
-        Validator::Length($content = $_POST['comment'], 6, 2024, 'content', $url_post);
+ 
+        Validator::Length($content = $_POST['content'], 6, 5000, 'content', $url_post);
 
         // Let's check the stop words, url
-        // Проверим стоп слова, url
+        // Проверим стоп слова и url
         $trigger = (new \App\Services\Audit())->prohibitedContent($content);
 
-        $last_id = CommentModel::add($post['post_id'], $answer_id, $comment_id, $content, $trigger);
+        $this->union($post, $url_post, $content);
+
+        $last_id = CommentModel::add($post['post_id'], $comment_id, $content, $trigger);
 
         // Add an audit entry and an alert to the admin
         // Аудит и оповещение персоналу
@@ -54,13 +49,13 @@ class AddCommentController extends Controller
 
         $url = $url_post . '#comment_' . $last_id;
 
-        $this->notif($answer_id, $comment_id, $content, $url);
+        $this->notifPost($content, $post, $comment_id, $url);
 
         ActionModel::addLogs(
             [
                 'id_content'    => $last_id,
                 'action_type'   => 'comment',
-                'action_name'   => 'added',
+                'action_name'   => 'comment',
                 'url_content'   => $url,
             ]
         );
@@ -68,30 +63,57 @@ class AddCommentController extends Controller
         redirect($url);
     }
 
-    // Notifications when adding a comment
-    // Уведомления при добавлении комментария
-    public function notif($answer_id, $comment_id, $content, $url)
+    public function union($post, $url_post, $content)
     {
-        // Notification to the author of the answer that there is a comment (do not write to ourselves) 
-        // Оповещение автору ответа, что есть комментарий (себе не записываем)
-        $answ = AnswerModel::getAnswerId($answer_id);
-        if ($this->user['id'] != $answ['answer_user_id']) {
-            NotificationModel::send($answ['answer_user_id'], NotificationModel::TYPE_COMMENT_ANSWER, $url);
+        if (config('publication.merge_answer_post') == false) {
+            return true;
         }
 
-        if ($comment_id) {
-            $comment = CommentModel::getCommentsId($comment_id);
-            if ($this->user['id'] != $comment['comment_user_id']) {
-                if ($answ['answer_user_id'] != $comment['comment_user_id']) {
-                    NotificationModel::send($comment['comment_user_id'], NotificationModel::TYPE_COMMENT_COMMENT, $url);
-                }
-            }
+        // Staff can write a response under their post
+        // Персонал может писать ответ под своим постом
+        if (UserData::checkAdmin()) {
+            return true;
         }
 
+        // If there are no replies to the post and the author of the post = the author of the comment, then add the comment to the end of the post
+        // Если ответов на пост нет и автор поста = автора ответа, то дописываем ответ в конец поста
+        if ((CommentModel::getNumberComment($post['post_id']) == null) && ($post['post_user_id'] == $this->user['id'])) {
+
+            CommentModel::mergePost($post['post_id'], $content);
+
+            redirect($url_post);
+        }
+
+        return true;
+    }
+
+    // Notifications when adding a answer
+    // Уведомления при добавлении ответа
+    public function notifPost($content, $post, $comment_id, $url)
+    {
         // Contact via @
         // Обращение через @
         if ($message = \App\Services\Parser\Content::parseUsers($content, true, true)) {
-            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_COMMENT, $message, $url, $comment['comment_user_id']);
+            (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_ANSWER, $message, $url, $post['post_user_id']);
+        }
+
+        // Who is following this question/post
+        // Кто подписан на данный вопрос / пост
+        if ($focus_all = PostModel::getFocusUsersPost($post['post_id'])) {
+            foreach ($focus_all as $focus_user) {
+                if ($focus_user['signed_user_id'] != $this->user['id']) {
+                    NotificationModel::send($focus_user['signed_user_id'], NotificationModel::TYPE_AMSWER_POST, $url);
+                }
+            }
+        }
+		
+		// Notifications when adding a comment
+		// Уведомления при добавлении комментария
+		if ($comment_id) {
+            $comment = CommentModel::getCommentId($comment_id);
+            if ($this->user['id'] != $comment['comment_user_id']) {
+              NotificationModel::send($comment['comment_user_id'], NotificationModel::TYPE_COMMENT_COMMENT, $url);
+            }
         }
     }
 }

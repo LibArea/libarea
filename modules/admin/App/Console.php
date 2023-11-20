@@ -11,7 +11,7 @@ class Console
     public static function index()
     {
         $choice  = Request::getPost('type');
-        $allowed = ['css', 'topic', 'up', 'tl', 'indexer'];
+        $allowed = ['css', 'topic', 'post', 'up', 'tl'];
         if (!in_array($choice, $allowed)) {
             redirect(url('admin.tools'));
         }
@@ -21,6 +21,13 @@ class Console
     public static function topic()
     {
         ConsoleModel::recalculateTopic();
+
+        self::consoleRedirect();
+    }
+
+    public static function post()
+    {
+        ConsoleModel::recalculateCountCommentPost();
 
         self::consoleRedirect();
     }

@@ -8,7 +8,7 @@
       <div class="mb15"><?= __('app.comments'); ?> <b><?= $data['profile']['login']; ?></b></div>
       <?php if (!empty($data['comments'])) : ?>
 	    <div class="box">
-          <?= insert('/content/comment/comment', ['comments' => $data['comments']]); ?>
+          <?= insert('/content/comments/comment', ['comments' => $data['comments']]); ?>
           <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/comments'); ?>
 		</div>
       <?php else : ?>

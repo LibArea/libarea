@@ -9,7 +9,7 @@
 return [
     'all'               => 'Tất cả',
     'posts'             => 'Bài viết',
-    'answers'           => 'Trả lời',
+    'comments'          => 'Bình luận',
     'websites'          => 'Trang',
     'registration'      => 'Đăng ký',
     'sign_in'           => 'Cần đi vào',

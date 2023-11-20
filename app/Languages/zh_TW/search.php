@@ -9,7 +9,7 @@
 return [
     'all'               => '全部',
     'posts'             => '帖子',
-    'answers'           => '答案',
+    'comments'          => '评论',
     'websites'          => '網站',
     'registration'      => '登記',
     'sign_in'           => '進來',

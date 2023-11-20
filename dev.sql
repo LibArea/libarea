@@ -1579,10 +1579,56 @@ CREATE TABLE `items_status` (
   KEY `status_item_id` (`status_item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
 
-
 ALTER TABLE `posts` ADD `post_nsfw` TINYINT(1) NOT NULL DEFAULT '0' AFTER `post_published`;
 ALTER TABLE `users` ADD `nsfw` TINYINT(1) NOT NULL DEFAULT '0' AFTER `my_post`; 
-
 ALTER TABLE `posts` ADD `post_hidden` TINYINT(1) NOT NULL DEFAULT '0' COMMENT 'Скрытый пост' AFTER `post_top`; 
-
 ALTER TABLE `facets` ADD `facet_is_comments` TINYINT(1) NOT NULL DEFAULT '0' COMMENT 'Are comments closed (posts, websites...)?' AFTER `facet_type`; 
+
+
+ALTER TABLE `answers` ADD `answer_parent_id` INT(11) NOT NULL DEFAULT '0' AFTER `answer_post_id`; 
+
+INSERT INTO answers (answer_post_id, 
+					answer_user_id, 
+					answer_parent_id,
+					answer_date, 
+					answer_modified, 
+					answer_ip, 
+					answer_content, 
+					answer_published, 
+					answer_is_deleted)
+		SELECT comment_post_id, 
+				comment_user_id, 
+				comment_answer_id,
+				comment_date, 
+				comment_modified,
+				comment_ip, 
+				comment_content, 
+				comment_published, 
+				comment_is_deleted
+						FROM comments WHERE comment_parent_id = 0;
+
+
+ALTER TABLE `posts` DROP `post_comments_count`;
+ALTER TABLE `answers` DROP `answer_order`;
+ALTER TABLE `answers` DROP `answer_after`;
+ALTER TABLE `users_setting` DROP `setting_email_comment`;
+
+
+UPDATE files SET file_type = 'comment' WHERE file_type = 'answer';
+
+DROP TABLE `votes_comment`;
+ALTER TABLE `votes_answer` RENAME TO `votes_comment`;
+
+ALTER TABLE `votes_comment` CHANGE `votes_answer_id` `votes_comment_id` INT(11) NOT NULL AUTO_INCREMENT, CHANGE `votes_answer_item_id` `votes_comment_item_id` INT(11) NOT NULL, CHANGE `votes_answer_points` `votes_comment_points` INT(11) NOT NULL, CHANGE `votes_answer_ip` `votes_comment_ip` VARCHAR(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL, CHANGE `votes_answer_user_id` `votes_comment_user_id` INT(11) NOT NULL DEFAULT '1', CHANGE `votes_answer_date` `votes_comment_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+
+DROP TABLE `comments`;
+ALTER TABLE `answers` RENAME TO `comments`;
+
+ALTER TABLE `comments` CHANGE `answer_id` `comment_id` INT(11) NOT NULL AUTO_INCREMENT, CHANGE `answer_post_id` `comment_post_id` INT(11) NOT NULL DEFAULT '0', CHANGE `answer_parent_id` `comment_parent_id` INT(11) NOT NULL DEFAULT '0', CHANGE `answer_user_id` `comment_user_id` INT(11) NOT NULL DEFAULT '0', CHANGE `answer_date` `comment_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, CHANGE `answer_modified` `comment_modified` TIMESTAMP NOT NULL DEFAULT '2020-12-31 03:00:00', CHANGE `answer_published` `comment_published` TINYINT(1) NOT NULL DEFAULT '1', CHANGE `answer_ip` `comment_ip` VARBINARY(16) NULL DEFAULT NULL, CHANGE `answer_votes` `comment_votes` SMALLINT(6) NOT NULL DEFAULT '0', CHANGE `answer_content` `comment_content` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL, CHANGE `answer_lo` `comment_lo` INT(11) NOT NULL DEFAULT '0', CHANGE `answer_is_deleted` `comment_is_deleted` TINYINT(1) NOT NULL DEFAULT '0';
+
+ALTER TABLE `posts` CHANGE `post_answers_count` `post_comments_count` INT(11) NULL DEFAULT '0'; 
+
+UPDATE `audits`  SET `action_type` = 'comment' WHERE `action_type` = 'answer';
+
+UPDATE `favorites` SET `action_type` = 'comment' WHERE `action_type` = 'answer'; 

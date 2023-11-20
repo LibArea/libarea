@@ -23,20 +23,17 @@ class Audit extends Base
         $content_type   = Request::getPost('type');
         $post_id        = Request::getPostInt('post_id');
         $content_id     = Request::getPostInt('content_id');
-
+ 
         // Limit the flags
         if ($this->user['trust_level'] < config('trust-levels.tl_add_report')) return 1;
 
         if (AuditModel::getSpeedReport($this->user['id']) > config('trust-levels.perDay_report')) return 1;
-
+ 
         $post = PostPresence::index($post_id, 'id');
+ 
+        if (!in_array($content_type, ['post', 'comment'])) return false;
 
-        if (!in_array($content_type, ['post', 'answer', 'comment'])) return false;
-
-        $type_id    = $content_type == 'answer' ? 'answer_' . $content_id : 'comment_' . $content_id;
-        $url        = post_slug($post['post_id'], $post['post_slug']) . '#' . $type_id;
-
-        $this->create($content_type, $content_id, $url, 'report');
+        $this->create($content_type, $content_id, $post, 'report');
 
         return true;
     }
@@ -127,7 +124,7 @@ class Audit extends Base
         return false;
     }
 
-    public function create(string $type, int $last_content_id, string $url, string $type_notification = 'audit')
+    public function create(string $type, int $last_content_id, array $post, string $type_notification = 'audit')
     {
         $action_type = ($type_notification == 'audit') ? NotificationModel::TYPE_AUDIT : NotificationModel::TYPE_REPORT;
 
@@ -139,6 +136,8 @@ class Audit extends Base
                 'content_id'        => $last_content_id,
             ]
         );
+
+		$url = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#' . 'comment_' . $last_content_id;
 
         // Send notification type 21 (audit) to administrator (id 1) 
         // Отправим тип уведомления 21 (аудит) администратору (id 1)

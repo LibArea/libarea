@@ -314,6 +314,7 @@ return [
 
     'num_message'   => ['Tin nhắn', 'Tin nhắn', 'Tin nhắn'],
     'num_answer'    => ['Trả lời', 'Trả lời', 'Câu trả lời'],
+    'num_comment'	=> ['Bình Luận', 'Bình Luận', 'Bình Luận'],
     'num_post'      => ['Bài đăng', 'Bài đăng', 'Postov'],
     'num_view'      => ['Chế độ xem', 'Lượt xem', 'Lượt xem'],
     'num_up'        => ['Giọng nói', 'Giọng nói', 'Giọng nói'],
@@ -359,7 +360,7 @@ return [
     'slug'              => 'SLUG',
     'email'             => 'Email',
     'wiki'              => 'Wiki',
-    'edit_answer'       => 'Hãy thay đổi câu trả lời',
+    'edit_comment'		=> 'Thay đổi nhận xé',
     'enter'             => 'Đi vào',
     'enter_password'    => 'Nhập mật khẩu',
 

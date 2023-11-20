@@ -170,14 +170,14 @@ $blog = $data['blog'][0] ?? null;
         <?php if (UserData::checkActiveUser()) : ?>
           <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
-            <form action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
+            <form action="<?= url('content.create', ['type' => 'comment']); ?>" accept-charset="UTF-8" method="post">
               <?= csrf_field() ?>
 
-              <?= insert('/_block/form/editor', ['height'  => '170px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
+              <?= insert('/_block/form/editor', ['height'  => '170px', 'type' => 'comment', 'id' => $post['post_id']]); ?>
 
               <div class="clear mt5">
                 <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
-                <input type="hidden" name="answer_id" value="0">
+                <input type="hidden" name="comment_id" value="0">
                 <?= Html::sumbit(__('app.reply')); ?>
               </div>
             </form>
@@ -246,9 +246,9 @@ $blog = $data['blog'][0] ?? null;
       <?php foreach ($data['recommend'] as  $rec_post) : ?>
         <div class="mb15 hidden flex gap text-sm">
           <a class="gray" href="<?= post_slug($rec_post['post_id'], $rec_post['post_slug']); ?>">
-            <?php if ($rec_post['post_answers_count'] > 0) : ?>
+            <?php if ($rec_post['post_comments_count'] > 0) : ?>
               <div class="box-small bg-green">
-                <?= $rec_post['post_answers_count'] ?>
+                <?= $rec_post['post_comments_count'] ?>
               </div>
             <?php else : ?>
               <div class="box-small bg-lightgray">0</div>

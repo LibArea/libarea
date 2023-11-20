@@ -59,7 +59,6 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 post_user_id,
                 post_votes,
                 post_hits_count,
-                post_answers_count,
                 post_comments_count,
                 post_content,
                 post_content_img,
@@ -172,33 +171,33 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 
     // The last 5 responses on the main page
     // Последние 5 ответа на главной
-    public static function latestAnswers()
+    public static function latestComments()
     {
         $trust_level = UserData::getUserTl();
-        $user_answer = "AND post_tl = 0";
+        $user_comment = "AND post_tl = 0";
 
         if ($user_id = UserData::getUserId()) {
-            $user_answer = "AND answer_user_id != $user_id AND post_tl <= $trust_level";
+            $user_comment = "AND comment_user_id != $user_id AND post_tl <= $trust_level";
         }
 
         $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
 
         $sql = "SELECT 
-                    answer_id,
-                    answer_post_id,
-                    answer_content,
-                    answer_date,
+                    comment_id,
+                    comment_post_id,
+                    comment_content,
+                    comment_date,
                     post_id,
                     post_slug,
                     post_hidden,
                     login,
                     avatar
-                        FROM answers 
-                        LEFT JOIN users ON id = answer_user_id
-                        RIGHT JOIN posts ON post_id = answer_post_id
-                            WHERE answer_is_deleted = 0 AND post_is_deleted = 0 $hidden 
-                                $user_answer AND post_type = 'post'
-                                    ORDER BY answer_id DESC LIMIT 5";
+                        FROM comments 
+                        LEFT JOIN users ON id = comment_user_id
+                        RIGHT JOIN posts ON post_id = comment_post_id
+                            WHERE comment_is_deleted = 0 AND post_is_deleted = 0 $hidden 
+                                $user_comment AND post_type = 'post'
+                                    ORDER BY comment_id DESC LIMIT 5";
 
         return DB::run($sql)->fetchAll();
     }

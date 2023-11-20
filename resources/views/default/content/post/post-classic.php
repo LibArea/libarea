@@ -11,11 +11,11 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?php endif; ?>
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
-    
+
     <?php if ($post['post_hidden'] == 1) : ?>
-       <?php if ($post['post_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
+      <?php if ($post['post_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
     <?php endif; ?>
-    
+
     <div class="box shadow-bottom article_<?= $post['post_id']; ?>">
 
       <div class="flex justify-between">
@@ -72,17 +72,17 @@ use Hleb\Constructor\Handlers\Request; ?>
           <a class="gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
             <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> green<?php endif; ?>">
               <?= $post['login']; ?>
-              </span>
+            </span>
           </a>
 
           <div class="gray-600 lowercase"><?= Html::langDate($post['post_date']); ?></div>
 
-          <?php if ($post['post_answers_count'] != 0) : ?>
+          <?php if ($post['post_comments_count'] != 0) : ?>
             <a class="flex gray-600" href="<?= $post_url; ?>#comment">
               <svg class="icons mr5">
                 <use xlink:href="/assets/svg/icons.svg#comments"></use>
               </svg>
-              <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
+              <?= $post['post_comments_count']; ?>
             </a>
           <?php endif; ?>
 

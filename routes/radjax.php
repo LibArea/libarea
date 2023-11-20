@@ -1,7 +1,6 @@
 <?php
 
 Radjax\Route::get("/search/api", ["post"], "App\Controllers\SearchController@api", ["protected" => true, "session_saved" => false]);
-Radjax\Route::get("/more/comments", ["post"], "App\Controllers\Comment\CommentController@lastComment", ["protected" => true, "session_saved" => false]); 
  
 $access = 'App\Middleware\Before\UserAuth@index'; 
 Radjax\Route::get("/post/profile", ["post"], "App\Controllers\Post\PostController@postProfile", ["protected" => true, "before" => $access]);
@@ -16,6 +15,6 @@ Radjax\Route::get("/votes", ["post"], "App\Services\Votes", ["protected" => true
 Radjax\Route::get("/poll", ["post"], "App\Controllers\Poll\PollController@vote", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/favorite", ["post"], "App\Services\Favorite", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/ignored", ["post"], "App\Services\Ignored", ["protected" => true, "before" => $access]);
-Radjax\Route::get("/best", ["post"], "App\Services\AnswerBest", ["protected" => true, "before" => $access]);
+Radjax\Route::get("/best", ["post"], "App\Services\CommentBest", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/flag/repost", ["post"], "App\Services\Audit", ["protected" => true, "before" => $access]);
 Radjax\Route::get("/notif", ["post"], "App\Controllers\NotificationController@get", ["protected" => false, "before" => $access]);

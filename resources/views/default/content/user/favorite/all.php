@@ -55,13 +55,13 @@
             </a>
           </div>
         <?php else : ?>
-          <a href="<?= post_slug($fav['post']['post_id'], $fav['post']['post_slug']); ?>#answer_<?= $fav['answer_id']; ?>">
+          <a href="<?= post_slug($fav['post']['post_id'], $fav['post']['post_slug']); ?>#comment_<?= $fav['comment_id']; ?>">
             <?= $fav['post']['post_title']; ?>
           </a>
         <?php endif; ?>
 
-        <?php if ($fav['action_type'] == 'answer') : ?>
-          <div> <?= markdown($fav['answer_content'], 'text'); ?></div>
+        <?php if ($fav['action_type'] == 'comment') : ?>
+          <div> <?= markdown($fav['comment_content'], 'text'); ?></div>
         <?php endif; ?>
 
         <?php if ($fav['tag_id']) : ?>

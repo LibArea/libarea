@@ -21,10 +21,9 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
           <div class="box-answer<?= $bg; ?><?= $bg_url; ?>">
             <a class="block white" href="<?= $post_url; ?>#comment">
-              <?php $anw = $post['post_answers_count'] + $post['post_comments_count'];
-              echo $anw; ?>
+              <?= $post['post_comments_count']; ?>
             </a>
-            <div class="text-xs white"> <?= Html::numWord($anw, __('app.num_answer'), false); ?></div>
+            <div class="text-xs white"> <?= Html::numWord($anw, __('app.num_comment'), false); ?></div>
           </div>
         </div>
 

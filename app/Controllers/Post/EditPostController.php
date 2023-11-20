@@ -183,7 +183,7 @@ class EditPostController extends Controller
         $type       = Request::get('type');
         $id         = Request::getInt('id');
 
-        if (!in_array($type, ['post-telo', 'answer'])) {
+        if (!in_array($type, ['post-telo', 'comment'])) {
             return false;
         }
 

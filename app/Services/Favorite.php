@@ -6,7 +6,7 @@ namespace App\Services;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\Item\WebModel;
-use App\Models\{FavoriteModel, PostModel, AnswerModel};
+use App\Models\{FavoriteModel, PostModel, CommentModel};
 
 class Favorite extends Base
 {
@@ -15,7 +15,7 @@ class Favorite extends Base
         $content_id = Request::getPostInt('content_id');
         $type       = Request::getPost('type');
 
-        $allowed = ['post', 'website', 'answer'];
+        $allowed = ['post', 'website', 'comment'];
         if (!in_array($type, $allowed)) {
             return false;
         }
@@ -36,8 +36,8 @@ class Favorite extends Base
             case 'website':
                 $content  = WebModel::getItemId($content_id);
                 break;
-            case 'answer':
-                $content  = AnswerModel::getAnswerId($content_id);
+            case 'comment':
+                $content  = CommentModel::getCommentId($content_id);
                 break;
         }
 

@@ -21,7 +21,7 @@ h5 {
   display: none;
   font-size: .72rem;
   color: #fff;
-  background-color: red;
+  background-color: var(--red);
   padding: 1px 6px;
   border-radius: 50%;
   position: absolute;
@@ -30,9 +30,7 @@ h5 {
 }
 
 .number-notif.show,
-.video-pl {
-  display: block;
-}
+.video-pl { display: block; }
 
 /* См. https://feathericons.com/ и https://tabler-icons.io/ */
 .icons {
@@ -53,9 +51,7 @@ h5 {
   height: 48px;
 }
 
-.icon-small {
-  width: 15px;
-}
+.icon-small { width: 15px; }
 
 .list-none {
   list-style: none;
@@ -75,9 +71,7 @@ h5 {
   margin-bottom: 15px;
 }
 
-.medium-zoom--opened .d-header {
-  display: none;
-}
+.medium-zoom--opened .d-header { display: none; }
 
 .banner {
   background-image: url(/assets/images/banner-fon.jpg);
@@ -133,7 +127,7 @@ h5 {
 .box-results {
   position: absolute;
   border-radius: 3px;
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .15);
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.15);
   background-color: var(--white);
   padding: 15px;
   z-index: 2;
@@ -158,9 +152,7 @@ h5 {
   vertical-align: middle;
 }
 
-.d-header.scroll-hide-search.show .box-search {
-  display: none;
-}
+.d-header.scroll-hide-search.show .box-search { display: none; }
 
 .box-logo {
   width: 209px;
@@ -177,9 +169,7 @@ h5 {
   text-overflow: ellipsis;
 }
 
-aside {
-  width: 340px;
-}
+aside { width: 340px; }
 
 aside ul {
   list-style: none;
@@ -188,13 +178,11 @@ aside ul {
   font-size: 0.9375rem;
 }
 
-aside ul a {
-  color: var(--gray);
-}
+aside ul a { color: var(--gray); }
 
 blockquote {
   margin-left: 15px;
-  background-color: #f3f3f6;
+  background-color: var(--blockquote-bg);
   padding: 0.1rem 1rem;
   border-left: 3px solid #d2d6dd;
   display: table;
@@ -206,12 +194,10 @@ blockquote {
   word-wrap: break-word;
   padding: 0.1rem 1rem;
   border-left: 3px solid #d2d6dd;
-  font-size: .91rem
+  font-size:.91rem
 }
 
-.blockquote-profile p {
-  margin: 2px;
-}
+.blockquote-profile p { margin: 2px; }
 
 hr {
   border: none;
@@ -233,7 +219,7 @@ summary {
   font-size: 14px;
 }
 
-details[open]>summary {
+details[open] > summary {
   padding: 0 0 10px 0;
   color: #666;
 }
@@ -305,9 +291,7 @@ details[open]>summary {
   padding: 0.5rem 0;
 }
 
-ul.last-content li {
-  margin-bottom: 15px;
-}
+ul.last-content li { margin-bottom: 15px; }
 
 ul.last-content a.last-content_telo {
   display: block;
@@ -323,44 +307,82 @@ ul.last-content a.last-content_telo {
 }
 
 .trigger img,
-a:hover>img {
-  opacity: 0.8;
-}
+a:hover > img { opacity: 0.8; }
 
-.focus-id:hover {
-  cursor: pointer
-}
-
-.underline-hover:hover {
-  text-decoration: underline;
-}
+.focus-id:hover { cursor: pointer } 
+.underline-hover:hover { text-decoration: underline; }
 
 .content-body {
   max-width: 810px;
   overflow-wrap: break-word;
-}
-
-.content_tree {
-  word-wrap: break-word;
+  margin: 5px;
 }
 
 .content_tree:target,
 .content_tree.edit {
   background-clip: content-box;
   background-color: lightyellow;
-  margin-top: -70px;
-  padding-top: 70px;
 }
 
-ol.bg-red-200 {
-  display: table;
-  width: 100%;
+.comment-telo {
+  margin: 20px 5px 20px 0;
+  list-style: none;
+  padding: 0;
+}
+
+.comment-level-1 {
+	width: 32px;
+}
+
+.comment-level-2 {
+	width: 52px;
+}
+
+.comment-level-3 {
+	width: 72px;
+}
+
+.comment-level-4 {
+	width: 92px;
+}
+
+.comment-level-5 {
+	width: 112px;
+}
+
+.comment-level-left-1 {
+  margin-left: 36px;
+}
+
+.comment-level-left-2 {
+  margin-left: 56px;
+}
+
+.comment-level-left-3 {
+  margin-left: 76px;
+}
+
+.comment-level-left-4 {
+  margin-left: 96px;
+}
+
+.comment-level-left-5 {
+  margin-left: 116px;
+}
+
+.comment-thread {
+  border: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.qa-comment {
+  font-size: 0.875rem;
+  padding: 0.24rem 0;
 }
 
 .bg-red-200 .content_tree,
-.content_tree.bg-red-200 {
-  background-color: var(--red-200);
-}
+.content_tree.bg-red-200 { background-color: var(--red-200); }
 
 .ind-first-p p {
   margin: 0.5em 0;
@@ -372,14 +394,7 @@ article iframe {
   max-height: 320px;
 }
 
-video {
-  max-width: 560px;
-}
-
-.qa-comment {
-  font-size: 0.875rem;
-  padding: 0.24rem 0;
-}
+video {  max-width: 560px; }
 
 .showPassword {
   position: absolute;
@@ -394,8 +409,8 @@ video {
 }
 
 .scroll-menu::-webkit-scrollbar {
-  width: 0;
-  height: 0
+  width:0;
+  height:0
 }
 
 .scroll-wrapper {
@@ -425,34 +440,17 @@ video {
  *
  * Иконки, поделиться
  */
-
+ 
 .icon-share {
   color: #fff;
   height: 28px;
   width: 28px;
   margin: 3px;
 }
-
-.bg-vk {
-  background-color: #07f;
-}
-
-.bg-ok {
-  background-color: #eb722e;
-}
-
-.bg-tg {
-  background-color: #64a9dc;
-}
-
-.bg-fb {
-  background-color: #3b5998;
-}
-
-.bg-lj {
-  background-color: #0d425a;
-}
-
-.bg-tw {
-  background-color: #00aced;
-}
+ 
+.bg-vk { background-color: #07f; }
+.bg-ok { background-color: #eb722e; }
+.bg-tg { background-color: #64a9dc; }
+.bg-fb { background-color: #3b5998; }
+.bg-lj { background-color: #0d425a; }
+.bg-tw { background-color: #00aced; }

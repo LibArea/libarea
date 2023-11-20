@@ -28,10 +28,10 @@
             <div class="gray-600 lowercase text-sm">
               <?= Html::langDate($post['post_date']); ?>
             </div>
-            <?php if ($post['post_answers_count'] != 0) : ?>
+            <?php if ($post['post_comments_count'] != 0) : ?>
               <span class="gray-600">&#183;</span>
               <a class="flex lowercase gray-600" href="<?= $post_url; ?>#comment">
-                <?= Html::numWord($post['post_answers_count'] + $post['post_comments_count'], __('app.num_answer'), true); ?>
+                <?= Html::numWord($post['post_comments_count'], __('app.num_comment'), true); ?>
               </a>
             <?php endif; ?>
           </div>

@@ -30,7 +30,7 @@ class SearchController extends Controller
         $q      = Request::getGet('q');
         $type   = Request::getGet('cat');
 
-        if (!in_array($type, ['post', 'website', 'answer'])) {
+        if (!in_array($type, ['post', 'website', 'comment'])) {
             $type = 'post';
         }
 
@@ -44,6 +44,7 @@ class SearchController extends Controller
             }
 
             $results = SearchModel::getSearch($this->pageNumber, $this->limit, $q, $type);
+
             $count_results =  SearchModel::getSearchCount($q, $type);
 
             $user_id = UserData::getUserId();

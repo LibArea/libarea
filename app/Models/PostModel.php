@@ -94,7 +94,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_user_id,
                     post_ip,
                     post_votes,
-                    post_answers_count,
                     post_comments_count,
                     post_content,
                     post_content_img,
@@ -147,7 +146,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     post_title,
                     post_slug,
                     post_feature,
-                    post_answers_count,
+                    post_comments_count,
                     post_type
                         FROM posts
                             LEFT JOIN facets_posts_relation on post_id = relation_post_id
@@ -163,7 +162,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['post_id' => $post_id, 'user_id' => UserData::getUserId(), 'tl' => $tl, 'limit' => $limit, 'facet_id' => $facet_id])->fetchAll();
     }
 
-    // $type (comments / answers / hits)
+    // $type (comments / hits)
     public static function updateCount($post_id, $type)
     {
         $sql = "UPDATE posts SET post_" . $type . "_count = (post_" . $type . "_count + 1) WHERE post_id = :post_id";
@@ -397,7 +396,6 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
 					post_user_id,
 					post_votes,
 					post_hits_count,
-					post_answers_count,
 					post_comments_count,
 					post_content,
 					post_content_img,

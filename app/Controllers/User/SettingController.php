@@ -250,7 +250,6 @@ class SettingController extends Controller
                 'setting_email_appealed'    => Request::getPostInt('setting_email_appealed'),
                 'setting_email_post'        => 0,
                 'setting_email_answer'      => 0,
-                'setting_email_comment'     => 0,
             ]
         );
 
