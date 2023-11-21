@@ -13,7 +13,6 @@
     function internalRender($nodes, $post, $level = 0)
     {
       foreach ($nodes as  $node) :
-
         $level =  $level > 5 ? 5 : $level;
     ?>
 
@@ -23,7 +22,6 @@
 
           <?php if ($node['comment_published'] == 0 && $node['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
-		   
           <ol class="comment-telo"> 
             <li class="relative">
 			  <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
@@ -39,6 +37,11 @@
                           <?= $node['login']; ?>
                         </span>
                       </a>
+                      <?php if ($node['comment_is_mobile']) : ?>
+                        <svg class="icons icon-small green">
+                          <use xlink:href="/assets/svg/icons.svg#mobile"></use>
+                        </svg>
+                      <?php endif; ?>
                       <?php if ($post['post_user_id'] == $node['comment_user_id']) : ?>
                         <svg class="icons icon-small sky">
                           <use xlink:href="/assets/svg/icons.svg#mic"></use>
@@ -48,7 +51,7 @@
                         <?= Html::langDate($node['comment_date']); ?>
                       </span>
                       <?php if (strtotime($node['comment_modified']) < strtotime($node['comment_date'])) : ?>
-                        <span class="gray-600">
+                        <span class="gray-600 mb-none">
                           (<?= __('app.ed'); ?>.)
                         </span>
                       <?php endif; ?>

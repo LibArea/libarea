@@ -318,6 +318,11 @@ a:hover > img { opacity: 0.8; }
   margin: 5px;
 }
 
+.content-body img.medium-zoom-image {
+  max-width: 350px;
+  border: 1px solid #666;
+}
+
 .anchor-top:target ~ .content_tree {
   background-clip: content-box;
   background-color: lightyellow;

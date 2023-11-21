@@ -1632,3 +1632,5 @@ ALTER TABLE `posts` CHANGE `post_answers_count` `post_comments_count` INT(11) NU
 UPDATE `audits`  SET `action_type` = 'comment' WHERE `action_type` = 'answer';
 
 UPDATE `favorites` SET `action_type` = 'comment' WHERE `action_type` = 'answer'; 
+
+ALTER TABLE `comments` ADD `comment_is_mobile` TINYINT(1) NOT NULL DEFAULT '0' AFTER `comment_lo`; 

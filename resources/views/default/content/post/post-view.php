@@ -266,7 +266,7 @@ $blog = $data['blog'][0] ?? null;
 </aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    mediumZoom(document.querySelectorAll('.content_tree img:not(.emoji), .post img:not(.emoji), .content-body p img:not(.emoji)'));
+    mediumZoom(document.querySelectorAll('.post img:not(.emoji), .content-body .ind-first-p img:not(.emoji)'));
 
     // Добавим цитирование    
     function get_text() {

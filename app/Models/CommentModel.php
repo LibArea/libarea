@@ -13,7 +13,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 	
     // Add an comment
     // Добавим ответ
-    public static function add($post_id, $comment_id, $content, $trigger)
+    public static function add($post_id, $comment_id, $content, $trigger, $mobile)
     {
         $params = [
             'comment_post_id'    => $post_id,
@@ -22,6 +22,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
             'comment_published'  => ($trigger === false) ? 0 : 1,
             'comment_ip'         => Request::getRemoteAddress(),
             'comment_user_id'    => UserData::getUserId(),
+			'comment_is_mobile'  => ($mobile === false) ? 0 : 1,
         ];
 
         $sql = "INSERT INTO comments(comment_post_id, 
@@ -29,13 +30,15 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     comment_content, 
                     comment_published, 
                     comment_ip, 
-                    comment_user_id) 
+                    comment_user_id,
+					comment_is_mobile) 
                        VALUES(:comment_post_id, 
 						   :comment_parent_id,
                            :comment_content, 
                            :comment_published, 
                            :comment_ip, 
-                           :comment_user_id)";
+                           :comment_user_id,
+						   :comment_is_mobile)";
 
         DB::run($sql, $params);
 
@@ -185,6 +188,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
                     comment_ip,
                     comment_votes,
                     comment_lo,
+					comment_is_mobile,
                     comment_is_deleted,
                     votes_comment_item_id, 
                     votes_comment_user_id,

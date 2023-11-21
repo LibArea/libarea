@@ -102,3 +102,7 @@ body.dark code[class*=language-], pre[class*=language-] {
     color: #eee;
     text-shadow: none;
 }
+
+body.dark .anchor-top:target~.content_tree {
+  background-color: #2f3b4a;
+}

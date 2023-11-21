@@ -4,6 +4,7 @@ namespace App\Controllers\Comment;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
+use App\Services\DetectMobile;
 use App\Services\Сheck\{PostPresence, CommentPresence};
 use App\Models\{NotificationModel, ActionModel, CommentModel, PostModel};
 use App\Validate\Validator;
@@ -39,7 +40,7 @@ class AddCommentController extends Controller
 
         $this->union($post, $url_post, $content);
 
-        $last_id = CommentModel::add($post['post_id'], $comment_id, $content, $trigger);
+        $last_id = CommentModel::add($post['post_id'], $comment_id, $content, $trigger, DetectMobile::index());
 
         // Add an audit entry and an alert to the admin
         // Аудит и оповещение персоналу
