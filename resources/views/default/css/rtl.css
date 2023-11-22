@@ -44,3 +44,32 @@
 .block-comment .right {
   float: left;
 }
+
+.comment_level-left-0 {
+  margin-right: 15px;
+}
+
+.comment_level-left-1 {
+  margin-right: 36px;
+}
+
+.comment_level-left-2 {
+  margin-right: 56px;
+}
+
+.comment_level-left-3 {
+  margin-right: 76px;
+}
+
+.comment_level-left-4 {
+  margin-right: 96px;
+}
+
+.comment_level-left-5 {
+  margin-right: 116px;
+}
+
+li .comment_folder {
+  float: right;
+  margin-left: 12px;
+}

@@ -21,6 +21,7 @@ main {
 }
 
 @media (max-width: 1050px) {
+
   .menu__left,
   #togglemenu {
     display: none;
@@ -76,46 +77,26 @@ main {
     background-color: #fff;
     padding-left: 10px;
   }
-  
-	.comment-level-1 {
-	  width: 12px;
-	}
 
-	.comment-level-2 {
-	  width: 32px;
-	}
+  .comment_level-left-1 {
+    margin-left: 16px;
+  }
 
-	.comment-level-3 {
-	  width: 52px;
-	}
+  .comment_level-left-2 {
+    margin-left: 36px;
+  }
 
-	.comment-level-4 {
-	  width: 72px;
-	}
+  .comment_level-left-3 {
+    margin-left: 56px;
+  }
 
-	.comment-level-5 {
-	  width: 92px;
-	}
+  .comment_level-left-4 {
+    margin-left: 76px;
+  }
 
-	.comment-level-left-1 {
-	  margin-left: 16px;
-	}
-
-	.comment-level-left-2 {
-	  margin-left: 36px;
-	}
-
-	.comment-level-left-3 {
-	  margin-left: 56px;
-	}
-
-	.comment-level-left-4 {
-	  margin-left: 76px;
-	}
-
-	.comment-level-left-5 {
-	  margin-left: 96px;
-	}
+  .comment_level-left-5 {
+    margin-left: 96px;
+  }
 }
 
 @media (max-width: 780px) {
@@ -146,11 +127,11 @@ main {
   .mb-text-xl {
     font-size: 1.25rem;
   }
-  
+
   .text-2xl {
     font-size: 1.1rem;
   }
-  
+
   .logo {
     font-size: 18px;
   }

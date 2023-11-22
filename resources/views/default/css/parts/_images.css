@@ -105,7 +105,8 @@
 
 .cut-post img,
 .content-body img,
-.medium-zoom-image {
+.medium-zoom-image,
+.comment_body img {
   max-width: 100%;
 }
 

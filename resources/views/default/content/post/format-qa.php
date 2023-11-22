@@ -8,14 +8,16 @@
     function internalRender($nodes, $post, $level = 0, $type = 'comment')
     {
       foreach ($nodes as  $node) :
-
         $level =  $level > 1 ? 1 : $level;
+		$level =  $level == 0 ? '0_0' : $level;
     ?>
 
         <?php if ($node['comment_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
         <?php if ($node['comment_published'] == 0 && $node['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
 
-        <div class="block-comment br-bottom<?php if ($node['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
+        <div class="block-comment<?php if ($node['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
+
+ 
 
           <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $level]); ?>
 
@@ -24,15 +26,15 @@
           <?php endif; ?>
 
           <?php if (UserData::getUserId() == $node['comment_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
-          <div class="br-dotted mb5"></div>
+		  
           <ol class="list-none">
-            <li class="content_tree" id="comment_<?= $node['comment_id']; ?>">
-              <div class="comment-comm comment-thread comment-level-<?= $level; ?>"></div>
-              <div class="comment-level-left-<?= $level; ?>" id="comment_<?= $node['comment_id']; ?>">
-                <div class="max-w780 ind-first-p">
+            <li class="comment" id="comment_<?= $node['comment_id']; ?>">
+              <div class="comment-comm comment_thread"></div>
+              <div class="comment_body comment_level-left-<?= $level; ?>" id="comment_<?= $node['comment_id']; ?>">
+                <div class="max-w780 ind-first-p ml5">
                   <?= markdown($node['comment_content'], 'text'); ?>
                 </div>
-                <div class="flex text-sm justify-between">
+                <div class="comment_footer justify-between">
                   <div class="flex gap">
                     <?php if ($type != 'qa') : ?>
                       <?= Html::votes($node, 'comment'); ?>
@@ -44,22 +46,25 @@
                       <?php endif; ?>
                     <?php endif; ?>
                   </div>
-                  <div class="text-sm gray-600 flex gap lowercase mb5">
+                  <div class="gray-600 flex gap lowercase mb5">
                     <a class="gray-600<?php if (Html::loginColor($node['created_at'] ?? false)) : ?> green<?php endif; ?>" href="<?= url('profile', ['login' => $node['login']]); ?>">
                       <span class="nickname"><?= $node['login']; ?></span>
                     </a>
                     <span class="mb-none"><?= Html::langDate($node['comment_date']); ?>
-					  <?php if ($type != 'qa') : ?>
+                      <?php if ($type != 'qa') : ?>
                         <?php if (empty($node['edit'])) : ?>
                           (<?= __('app.ed'); ?>.)
                         <?php endif; ?>
-					  <?php endif; ?>
-					</span>
+                      <?php endif; ?>
+                    </span>
                     <?php if ($node['comment_published'] == 0 && UserData::checkAdmin()) : ?>
                       <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
                     <?php endif; ?>
                   </div>
                 </div>
+				 <?php if ($level == '0_0') :?><div class="mb5 br-bottom"><?php endif; ?>
+				 <?php if ($level == 1) :?><div class="br-dotted"></div><?php endif; ?>
+				 
                 <div data-insert="<?= $node['comment_id']; ?>" id="insert_id_<?= $node['comment_id']; ?>" class="none"></div>
             </li>
           </ol>

@@ -78,14 +78,14 @@ body.dark .menu__left.menu__active .menu li {
   background-color: var(--form-bg-color);
 }
 
-body.dark .content_tree:target,
-body.dark .content_tree.edit {
+body.dark .comment:target,
+body.dark .comment.edit {
   background-color: var(--form-bg-color);
 }
 
-body.dark .content_tree {
+body.dark .comment {
   word-wrap: break-word;
-  box-shadow: 0 15px 25px rgba(0,0,0,.1);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, .1);
   padding: 5px;
 }
 
@@ -94,15 +94,17 @@ body.dark blockquote {
   border-left: 3px solid #6d6e6f;
 }
 
-body.dark :not(pre)>code[class*=language-], pre[class*=language-] {
-    background: var(--blockquote-bg);
+body.dark :not(pre)>code[class*=language-],
+pre[class*=language-] {
+  background: var(--blockquote-bg);
 }
 
-body.dark code[class*=language-], pre[class*=language-] {
-    color: #eee;
-    text-shadow: none;
+body.dark code[class*=language-],
+pre[class*=language-] {
+  color: #eee;
+  text-shadow: none;
 }
 
-body.dark .anchor-top:target~.content_tree {
+body.dark .anchor-top:target~.comment {
   background-color: #2f3b4a;
 }

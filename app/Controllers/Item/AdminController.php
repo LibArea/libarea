@@ -20,7 +20,7 @@ class AdminController extends Controller
                 'meta'  => Meta::get(__('web.audits')),
                 'data'  => [
                     'sheet'             => 'audits',
-                    'items'             => WebModel::feedItem(false, false, 'audits', false),
+                    'items'             => WebModel::feedItem(false, false, $this->pageNumber, 'audits', false),
                     'user_count_site'   => $this->user_count,
                     'audit_count'       => UserAreaModel::auditCount(),
                 ]

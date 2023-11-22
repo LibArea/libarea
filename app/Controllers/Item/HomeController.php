@@ -16,7 +16,7 @@ class HomeController extends Controller
                 'meta'  => self::metadata(),
                 'data'  => [
                     'sheet'             => 'main',
-                    'items'             => WebModel::feedItem(false, false, 'main', false),
+                    'items'             => WebModel::feedItem(false, false, $this->pageNumber, 'main', false),
                     'user_count_site'   => UserData::checkAdmin() ? 0 : UserAreaModel::getUserSitesCount(),
                     'audit_count'       => UserAreaModel::auditCount(),
                 ]

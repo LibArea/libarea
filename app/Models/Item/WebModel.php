@@ -8,7 +8,6 @@ use DB;
 class WebModel extends \Hleb\Scheme\App\Models\MainModel
 {
     static $limit = 15;
-    static $first_page = 1;
 
     public static function sorts($sheet)
     {
@@ -74,7 +73,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Получаем сайты по условиям
     // https://systemrequest.net/index.php/123/
-    public static function feedItem($facets, $topic_id, $sort, $grouping)
+    public static function feedItem($facets, $topic_id, $page, $sort, $grouping)
     {
         $user_id = UserData::getUserId();
         
@@ -82,7 +81,7 @@ class WebModel extends \Hleb\Scheme\App\Models\MainModel
         $facets = self::facets($facets, $topic_id);
         $sort   = $facets . self::sorts($sort);
 
-        $start  = (self::$first_page - 1) * self::$limit;
+        $start  = ($page - 1) * self::$limit;
         $sql = "SELECT DISTINCT
                     item_id,
                     item_title,
