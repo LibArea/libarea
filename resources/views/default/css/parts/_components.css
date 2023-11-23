@@ -335,13 +335,14 @@ a:hover>img {
   text-decoration: underline;
 }
 
-.content-body {
+.content-body,
+.comment-body {
   max-width: 810px;
   overflow-wrap: break-word;
   margin: 5px;
 }
 
-.content-body img.medium-zoom-image {
+.comment_body img.medium-zoom-image {
   max-width: 330px;
   border: 1px solid #666;
 }
@@ -359,7 +360,7 @@ a:hover>img {
 }
 
 .comments {
-  margin: 20px 5px 20px 0;
+  margin: 20px 0 20px 0;
   list-style: none;
   padding: 0;
 }
@@ -374,6 +375,10 @@ a:hover>img {
 .comment,
 .comments li {
   position: relative;
+}
+
+.comment_text {
+  word-wrap: break-word;
 }
 
 .comment_level-left-0 {

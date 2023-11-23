@@ -153,6 +153,10 @@ main {
     height: 75px;
   }
 
+  .comment_body img.medium-zoom-image {
+    max-width: 280px;
+  }
+
   .title {
     font-size: 1.2125rem;
   }

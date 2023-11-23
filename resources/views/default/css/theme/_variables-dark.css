@@ -95,12 +95,12 @@ body.dark blockquote {
 }
 
 body.dark :not(pre)>code[class*=language-],
-pre[class*=language-] {
+body.dark pre[class*=language-] {
   background: var(--blockquote-bg);
 }
 
 body.dark code[class*=language-],
-pre[class*=language-] {
+body.dark pre[class*=language-] {
   color: #eee;
   text-shadow: none;
 }
