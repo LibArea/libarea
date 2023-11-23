@@ -11,9 +11,9 @@
         <?php endif; ?>
 
         <?php if ($data['sorting'] == 'old') : ?>
-          <li class="active"><?= __('app.new_ones'); ?></li>
+          <li class="active mb-none"><?= __('app.new_ones'); ?></li>
         <?php else : ?>
-          <li><a href="?sort=old#comment"><?= __('app.new_ones'); ?></a></li>
+          <li class="mb-none"><a href="?sort=old#comment"><?= __('app.new_ones'); ?></a></li>
         <?php endif; ?>
 
         <?php if ($data['sorting'] == '') : ?>

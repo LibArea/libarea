@@ -291,6 +291,7 @@ return [
     'markdown'          => 'يدعم التنسيق',
     'write'             => 'كتابة',
     'in_profile'        => 'في الملف الشخصي',
+    'from_profile'      => 'من الملف الشخصي',
     'request'           => 'طلب',
     'results'           => 'نتائج',
     'format_cover_post' => 'العرض, اكثر من 500px. افقي',

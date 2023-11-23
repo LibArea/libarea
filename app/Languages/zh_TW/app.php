@@ -295,6 +295,7 @@ return [
     'markdown'          => '支援服务 Markdown',
     'write'             => '写',
     'in_profile'        => '在个人资料中',
+    'from_profile'      => '从个人资料',
     'request'           => '请求',
     'results'           => '结果',
     'format_cover_post' => '宽度，500px以上。 方向是水平的',

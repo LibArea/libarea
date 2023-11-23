@@ -49,18 +49,6 @@ $blog = $data['blog'][0] ?? null;
               <?= __('app.edit'); ?>
             </a>
           <?php endif; ?>
-
-          <?php if (UserData::getUserLogin() == $post['login']) : ?>
-            <?php if ($post['my_post'] == $post['post_id']) : ?>
-              <span class="add-profile" data-post="<?= $post['post_id']; ?>">
-                - <?= __('app.in_profile'); ?>
-              </span>
-            <?php else : ?>
-              <span class="add-profile active" data-post="<?= $post['post_id']; ?>">
-                + <?= __('app.in_profile'); ?>
-              </span>
-            <?php endif; ?>
-          <?php endif; ?>
           <?= insert('/_block/admin-dropdown-post', ['post' => $post]); ?>
         <?php endif; ?>
 
