@@ -59,7 +59,7 @@ $post = $data['post'];
         <?= Img::image($post['post_thumb_img'], $post['post_title'],  'thumb right ml15', 'post', 'thumbnails'); ?>
       <?php endif; ?>
 
-      <div class="max-w780 full">
+      <div class="max-w780">
         <div class="content-body">
           <?= markdown($post['post_content'], 'text'); ?>
         </div>

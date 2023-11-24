@@ -9,7 +9,7 @@
     {
       foreach ($nodes as  $node) :
         $level =  $level > 1 ? 1 : $level;
-		$level =  $level == 0 ? '0_0' : $level;
+		$indent =  $level == 0 ? '0_0' : $level;
     ?>
 
         <?php if ($node['comment_is_deleted'] == 1 && !UserData::checkAdmin()) continue; ?>
@@ -19,7 +19,7 @@
 
  
 
-          <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $level]); ?>
+          <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
 
           <?php if ($node['comment_lo']) : ?>
             <div title="<?= __('app.best_answer'); ?>" class="red right text-2xl p5">✓</div>
@@ -30,7 +30,7 @@
           <ol class="list-none">
             <li class="comment" id="comment_<?= $node['comment_id']; ?>">
               <div class="comment-comm comment_thread"></div>
-              <div class="comment_body comment_level-left-<?= $level; ?>" id="comment_<?= $node['comment_id']; ?>">
+              <div class="comment_body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
                 <div class="max-w780 ind-first-p ml5">
                   <?= markdown($node['comment_content'], 'text'); ?>
                 </div>
