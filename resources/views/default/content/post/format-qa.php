@@ -17,10 +17,6 @@
 
         <div class="block-comment<?php if ($node['comment_is_deleted'] == 1) : ?> m5 bg-red-200<?php endif; ?>">
 
- 
-
-          <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
-
           <?php if ($node['comment_lo']) : ?>
             <div title="<?= __('app.best_answer'); ?>" class="red right text-2xl p5">✓</div>
           <?php endif; ?>
@@ -31,6 +27,9 @@
             <li class="comment" id="comment_<?= $node['comment_id']; ?>">
               <div class="comment-comm comment_thread"></div>
               <div class="comment_body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
+			  
+			    <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
+			  
                 <div class="max-w780 ind-first-p ml5">
                   <?= markdown($node['comment_content'], 'text'); ?>
                 </div>
@@ -62,10 +61,11 @@
                     <?php endif; ?>
                   </div>
                 </div>
-				 <?php if ($level == '0_0') :?><div class="mb5 br-bottom"><?php endif; ?>
+				 <?php if ($indent == '0_0') :?><div class="mb5 br-bottom"></div><?php endif; ?>
 				 <?php if ($level == 1) :?><div class="br-dotted"></div><?php endif; ?>
 				 
                 <div data-insert="<?= $node['comment_id']; ?>" id="insert_id_<?= $node['comment_id']; ?>" class="none"></div>
+				</div>
             </li>
           </ol>
         </div>
