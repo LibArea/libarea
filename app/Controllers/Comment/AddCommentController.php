@@ -38,7 +38,8 @@ class AddCommentController extends Controller
         // Проверим стоп слова и url
         $trigger = (new \App\Services\Audit())->prohibitedContent($content);
 
-        $this->union($post, $url_post, $content);
+        $this->joinPost($content, $post, $url_post);
+        $this->joinComment($content, $url_post, $comment);
 
         $last_id = CommentModel::add($post['post_id'], $comment_id, $content, $trigger, DetectMobile::index());
 
@@ -64,9 +65,9 @@ class AddCommentController extends Controller
         redirect($url);
     }
 
-    public function union($post, $url_post, $content)
+    public function joinPost($content, $post, $url_post)
     {
-        if (config('publication.merge_answer_post') == false) {
+        if (config('publication.merge_comment_post') == false) {
             return true;
         }
 
@@ -87,6 +88,24 @@ class AddCommentController extends Controller
 
         return true;
     }
+	
+	public function joinComment($content, $url_post, $parent)
+	{
+        if (config('publication.merge_comments') == false) {
+            return true;
+        }
+
+		// If the participant has already responded to a specific comment and comments again
+		// Если участник уже дал ответ на конкретный комментарий и комментирует повторно
+		if ($comment = CommentModel::isResponseUser($parent['comment_id'])) {
+			
+			CommentModel::mergeComment($content, $comment['comment_id']);
+			
+			redirect($url_post  . '#comment_' . $comment['comment_id']);
+		}
+		
+		return true;
+	}
 
     // Notifications when adding a answer
     // Уведомления при добавлении ответа

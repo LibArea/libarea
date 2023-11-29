@@ -153,6 +153,15 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['post_id' => $post_id, 'content' => $content]); 
     }
 
+	// Is the last response to a specific comment a participant's comment
+	// Является ли последний ответ на конкретный комментарий комментарием участника
+	public static function isResponseUser($comment_id)
+	{
+        $sql = "SELECT comment_id FROM comments WHERE comment_parent_id = :id AND comment_user_id = :user_id";
+
+        return DB::run($sql, ['id' => $comment_id, 'user_id' => UserData::getUserId()])->fetch();
+	}
+
     // Getting comments in a post
     // Получаем ответы в посте
     public static function getCommentsPost($post_id, $type, $sorting = 'new')
@@ -269,6 +278,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT 
                     comment_id,
                     comment_post_id,
+					comment_parent_id,
                     comment_user_id,
                     comment_date,
                     comment_modified,
