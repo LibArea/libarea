@@ -136,6 +136,7 @@ Route::get('/posts')->controller('HomeController', ['posts'])->name('main.posts'
 Route::get('/all')->controller('HomeController', ['all'])->name('main.all');
 
 Route::get('/sitemap.xml')->controller('RssController');
+Route::get('/rss/all/posts')->controller('RssController@postsAll');
 Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 

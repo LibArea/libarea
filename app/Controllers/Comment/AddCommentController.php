@@ -71,8 +71,8 @@ class AddCommentController extends Controller
             return true;
         }
 
-        // Staff can write a response under their post
-        // Персонал может писать ответ под своим постом
+        // The staff can write a comment under their post
+        // Персонал может писать комментарий под своим постом
         if (UserData::checkAdmin()) {
             return true;
         }
@@ -92,6 +92,12 @@ class AddCommentController extends Controller
 	public function joinComment($content, $url_post, $parent)
 	{
         if (config('publication.merge_comments') == false) {
+            return true;
+        }
+
+        // The staff can write a repeated comment
+        // Персонал может писать повторный комментарий
+        if (UserData::checkAdmin()) {
             return true;
         }
 

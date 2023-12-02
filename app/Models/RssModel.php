@@ -6,13 +6,21 @@ use DB;
 
 class RssModel extends \Hleb\Scheme\App\Models\MainModel
 {
+    // The last 500 posts
+    // Последние 500 постов
+    public static function getPosts()
+    {
+        $sql = "SELECT post_id, post_slug, post_title, post_content, post_date, post_content_img FROM posts 
+					WHERE post_is_deleted = 0 AND post_tl = 0 AND post_draft = 0 ORDER BY post_id DESC LIMIT 500";
+
+        return  DB::run($sql)->fetchAll();
+    }
+
     // All posts for Sitemap
     // Все посты для Sitemap
     public static function getPostsSitemap()
     {
-        $sql = "SELECT post_id, post_slug, post_tl, post_is_deleted, post_draft
-                    FROM posts 
-                      WHERE post_is_deleted != 1 AND post_tl = 0 AND post_draft != 1";
+        $sql = "SELECT post_id, post_slug FROM posts WHERE post_is_deleted = 0 AND post_tl = 0 AND post_draft = 0";
 
         return  DB::run($sql)->fetchAll();
     }
@@ -78,16 +86,9 @@ class RssModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['qa' => "%" . $facet_slug . "%"])->fetchAll();
     }
 
-
     public static function getTopicSlug($facet_slug)
     {
-        $sql = "SELECT 
-                    facet_id,
-                    facet_title,
-                    facet_description,
-                    facet_slug,
-                    facet_img
-                        FROM facets WHERE facet_slug = :facet_slug";
+        $sql = "SELECT facet_id, facet_title, facet_description, facet_slug FROM facets WHERE facet_slug = :facet_slug";
 
         return DB::run($sql, ['facet_slug' => $facet_slug])->fetch();
     }

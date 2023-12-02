@@ -1,9 +1,8 @@
 <?= '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <rss xmlns:yandex="http://news.yandex.ru" xmlns:media="http://search.yahoo.com/mrss/" xmlns:turbo="http://turbo.yandex.ru" version="2.0">
   <channel>
-    <title><?= $topic['facet_title']; ?></title>
-    <link><?= config('meta.url'); ?>/topic/<?= $topic['facet_slug']; ?></link>
-    <description><?= $topic['facet_description']; ?></description>
+    <title><?= __('app.posts'); ?></title>
+    <link><?= config('meta.url'); ?>/rss/posts</link>
     <language><?= config('general.lang'); ?></language>
     <?php foreach ($data['posts'] as $post) : ?>
       <item turbo="true">

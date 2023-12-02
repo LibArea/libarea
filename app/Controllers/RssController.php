@@ -14,7 +14,6 @@ class RssController extends Controller
             'default/content/rss/sitemap',
             [
                 'data' => [
-                    'url'       => config('meta.url'),
                     'topics'    => RssModel::getTopicsSitemap(),
                     'posts'     => RssModel::getPostsSitemap(),
                 ]
@@ -29,12 +28,13 @@ class RssController extends Controller
         $topic      = RssModel::getTopicSlug($topic_slug);
         notEmptyOrView404($topic);
 
+		$posts  = RssModel::getPostsFeed($topic_slug);
+
         includeCachedTemplate(
             'default/content/rss/turbo-feed',
             [
                 'data' => [
-                    'url'   => config('meta.url'),
-                    'posts' => self::posts($topic_slug),
+                    'posts' => self::posts($posts),
                 ],
                 'topic' => $topic,
             ]
@@ -47,22 +47,37 @@ class RssController extends Controller
         $topic_slug = Request::get('slug');
         $topic      = RssModel::getTopicSlug($topic_slug);
         notEmptyOrView404($topic);
+		
+		$posts  = RssModel::getPostsFeed($topic_slug);
 
         includeCachedTemplate(
             'default/content/rss/rss-feed',
             [
                 'data'  => [
-                    'url'       => config('meta.url'),
-                    'posts'     => self::posts($topic_slug),
+                    'posts'     => self::posts($posts),
                 ],
                 'topic' => $topic,
             ]
         );
     }
 
-    public static function posts($slug)
+   // Route::get('/rss/posts')->controller...
+    public static function postsAll()
     {
-        $posts  = RssModel::getPostsFeed($slug);
+		$posts  = RssModel::getPosts();
+ 
+        includeCachedTemplate(
+            'default/content/rss/posts',
+            [
+                'data'  => [
+                    'posts'     => self::posts($posts),
+                ]
+            ]
+        );
+    }
+
+    public static function posts($posts)
+    {
         $result = [];
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
