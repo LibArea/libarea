@@ -38,7 +38,7 @@ class Votes extends Base
     {
         // Checking allowed content types
         // Проверим разрешенные типы контента
-        if (!in_array($type, ['post', 'comment', 'answer', 'item', 'reply'])) {
+        if (!in_array($type, ['post', 'comment', 'item', 'reply'])) {
             return false;
         }
         

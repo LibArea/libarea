@@ -102,4 +102,4 @@
   </div>
 </div>
 
-<?= insert('/_block/share', ['title' => __('app.share_topic'), 'url' => config('meta.url') . url('topic', ['slug' => $topic['facet_slug']])]); ?>
+<?= insert('/_block/dialog/share', ['title' => __('app.share_topic'), 'url' => config('meta.url') . url('topic', ['slug' => $topic['facet_slug']])]); ?>

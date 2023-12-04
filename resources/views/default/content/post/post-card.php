@@ -103,7 +103,7 @@
   <?php endforeach; ?>
 <?php else : ?>
   <?php if (UserData::checkActiveUser()) : ?>
-    <?= insert('/_block/recommended-topics', ['data' => $data]); ?>
+    <?= insert('/_block/facet/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>
   <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>
 <?php endif; ?>

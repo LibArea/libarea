@@ -160,7 +160,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         $field_id   = $type . '_id';
         if ($type == 'post') {
             $field_name = 'post_title';
-            $sql = "SELECT post_id, post_title FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_hidden = 0 AND post_tl = 0 AND post_type = 'post' ORDER BY post_id DESC LIMIT 100";
+            $sql = "SELECT post_id, post_title FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_hidden = 0 AND post_tl = 0 AND post_type = 'post' ORDER BY post_id DESC LIMIT 500";
         } elseif ($type == 'user') {
             $field_id = 'id';
             $field_name = 'login';

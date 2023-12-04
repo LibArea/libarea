@@ -152,4 +152,4 @@
   </aside>
 </div>
 
-<?= insert('/_block/share', ['title' => __('app.share_website'), 'url' => config('meta.url') . url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']])]); ?>
+<?= insert('/_block/dialog/share', ['title' => __('app.share_website'), 'url' => config('meta.url') . url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']])]); ?>

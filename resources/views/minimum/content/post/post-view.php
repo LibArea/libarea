@@ -180,4 +180,4 @@ $post = $data['post'];
     }
   });
 </script>
-<?= insert('/_block/js-msg-flag'); ?>
+<?= insert('/_block/dialog/msg-flag'); ?>

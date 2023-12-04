@@ -25,18 +25,14 @@ class EditCommentController extends Controller
             return false;
         }
 
-        $post = PostPresence::index($comment['comment_post_id'], 'id');
-
         return $this->render(
             '/comments/edit',
             [
                 'meta'  => Meta::get(__('app.edit_comment')),
                 'data'  => [
-                    'post'      => $post,
                     'comment'	=> $comment,
+                    'post'      => PostPresence::index($comment['comment_post_id'], 'id'),
                     'user'      => UserModel::getUser($comment['comment_user_id'], 'id'),
-                    'sheet'     => 'edit-answers',
-                    'type'      => 'comment',
                 ]
             ]
         );

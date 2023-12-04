@@ -12,7 +12,7 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
 {
     public static function authorId(int $content_id, string $type)
     {
-        // $type = post / comment / answer / item
+        // $type = post / comment / item
         $sql = "SELECT " . $type . "_id, " . $type . "_user_id FROM " . $type . "s WHERE " . $type . "_id = :content_id";
 
         $result = DB::run($sql, ['content_id' => $content_id])->fetch();

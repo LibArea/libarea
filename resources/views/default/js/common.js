@@ -240,7 +240,7 @@ if (button) {
       nav.classList.toggle('menu__active')
     }
   })
-}
+};
 
 window.addEventListener('click', e => {
   if (!e.target.closest('.menu__active') && !e.target.closest('.menu__button')) {
@@ -248,59 +248,8 @@ window.addEventListener('click', e => {
       nav.classList.remove('menu__active')
     }
   }
-})
-
-const tabs = document.querySelector(".wrapper");
-if (tabs) {
-  const tabButton = queryAll(".tab-button");
-  const contents = queryAll(".content-tabs");
-  const items = document.querySelector(".more_go");
-  tabs.onclick = e => {
-    const id = e.target.dataset.id;
-    if (id) {
-      tabButton.forEach(btn => {
-        btn.classList.remove("active");
-        btn.classList.add("pointer");
-      });
-      e.target.classList.add("active");
-      e.target.classList.remove("pointer");
-
-      if (id == 'more_comment') {
-        fetch("/more/comments", {
-          method: "POST",
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: "query=all&_token=" + token,
-        })
-          .then(
-            response => {
-              return response.text();
-            }
-          ).then(
-            text => {
-              let obj = JSON.parse(text);
-              let html = '';
-              for (let key in obj) {
-                html += '<li><a href="/@' + obj[key].login + '"><img class="img-sm mr5" src="/uploads/users/avatars/small/' + obj[key].avatar + '"></a>';
-                html += '<span class="middle text-sm lowercase gray-600">' + obj[key].date + '</span>';
-                html += '<a class="last-content_telo" href="/post/' + obj[key].post_id + '/' + obj[key].post_slug + '#comment_' + obj[key].comment_id + '">' + obj[key].content + '</a></li>';
-              }
-              if (!Object.keys(obj).length == 0) {
-                items.innerHTML = html;
-              }
-            }
-          );
-      }
-      contents.forEach(content => {
-        content.classList.remove("tab_active");
-        content.classList.add("pointer");
-      });
-
-      const element = getById(id);
-      element.classList.add("tab_active");
-      element.classList.remove("pointer");
-    }
-  }
-}											
+});
+									
 /* MIT license https://github.com/vivekweb2013/toastmaker */
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {

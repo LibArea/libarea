@@ -274,7 +274,7 @@ $blog = $data['blog'][0] ?? null;
       if (text) {
         let comment = document.getElementById('qcomment');
         if (comment) {
-          comment.innerHTML = '> ' + text;
+          comment.innerHTML = '> ' + text + '\r\n';
         }
       }
     }
@@ -285,5 +285,5 @@ $blog = $data['blog'][0] ?? null;
     }
   });
 </script>
-<?= insert('/_block/js-msg-flag'); ?>
-<?= insert('/_block/share', ['title' => __('app.share_post'), 'url' => config('meta.url') . post_slug($post['post_id'], $post['post_slug'])]); ?>
+<?= insert('/_block/dialog/msg-flag'); ?>
+<?= insert('/_block/dialog/share', ['title' => __('app.share_post'), 'url' => config('meta.url') . post_slug($post['post_id'], $post['post_slug'])]); ?>

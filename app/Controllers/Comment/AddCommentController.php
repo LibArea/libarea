@@ -39,7 +39,7 @@ class AddCommentController extends Controller
         $trigger = (new \App\Services\Audit())->prohibitedContent($content);
 
         $this->joinPost($content, $post, $url_post);
-        $this->joinComment($content, $url_post, $comment);
+        $this->joinComment($content, $url_post, $comment ?? []);
 
         $last_id = CommentModel::add($post['post_id'], $comment_id, $content, $trigger, DetectMobile::index());
 
