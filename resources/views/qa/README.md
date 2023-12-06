@@ -1,3 +1,3 @@
-Simple Q&A design
+## Как создать свой шаблон
 
-Дизайн «Вопросов и ответов» выполненный в строгом стиле
+Смотрим: https://libarea.ru/post/1557/kak-sozdat-svoy-shablon-dlya-libarea

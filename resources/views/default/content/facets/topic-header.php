@@ -83,6 +83,10 @@
             'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/questions',
             'title' => __('app.questions'),
           ], [
+            'id'    => 'facet.top',
+            'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/top',
+            'title' => __('app.top'),
+          ], [
             'id'      => 'facet.recommend',
             'url'     => url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
             'title'   => __('app.recommended'),
@@ -101,5 +105,7 @@
     </svg>
   </div>
 </div>
+
+<?= insert('/_block/navigation/sorting-day', ['sheet' => $data['sheet']]); ?>
 
 <?= insert('/_block/dialog/share', ['title' => __('app.share_topic'), 'url' => config('meta.url') . url('topic', ['slug' => $topic['facet_slug']])]); ?>

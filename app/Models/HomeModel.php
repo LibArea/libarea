@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Hleb\Constructor\Handlers\Request;
+use App\Services\Feed\Sorting;
 use App\Models\IgnoredModel;
 use UserData;
 use DB;
@@ -40,7 +40,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         $display = self::display($type);
-        $sort = self::sortDay($type);
+        $sort = Sorting::day($type);
 
         $nsfw = UserData::getUserNSFW() ? "" : "AND post_nsfw = 0";
 
@@ -207,31 +207,6 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT item_id, item_title, item_slug, item_domain FROM items WHERE item_published = 1 AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :limit";
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();
-    }
-
-    public static function sortDay($type)
-    {
-        $sort = "ORDER BY post_top DESC, post_date DESC";
-        
-        if ($type == 'top') {
-
-            $sort_day = Request::getGet('sort_day');
-            $sortDay = (int)$sort_day ?? null;
-
-            switch ($sortDay) {
-                case 1:
-                    $sort =  "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 1 WEEK DESC";
-                    break;
-                case 3:
-                    $sort =  "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
-                    break;
-                default:
-                    $sort =  "ORDER BY post_votes DESC";
-                    break;
-            }
-        }
-        
-        return $sort;
     }
 
     // Facets (topic, blogs) all / subscribed

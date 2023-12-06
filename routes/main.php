@@ -105,6 +105,7 @@ Route::get('/comments')->controller('Comment\CommentController', ['all'])->name(
 Route::get('/topics/new')->controller('Facets\AllFacetController', ['new', 'topic'])->name('topics.new');
 Route::get('/topic/{slug}/recommend')->controller('Facets\TopicFacetController', ['recommend'])->where(['slug' => '[a-z0-9-]+'])->name('topic.recommend');
 Route::get('/topic/{slug}/questions')->controller('Facets\TopicFacetController', ['questions'])->where(['slug' => '[a-z0-9-]+'])->name('topic.questions');
+Route::get('/topic/{slug}/top')->controller('Facets\TopicFacetController', ['top'])->where(['slug' => '[a-z0-9-]+'])->name('topic.top');
 Route::get('/topic/{slug}/posts')->controller('Facets\TopicFacetController', ['posts'])->where(['slug' => '[a-z0-9-]+'])->name('topic.posts');
 Route::get('/topic/{slug}/info')->controller('Facets\TopicFacetController@info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 Route::get('/topic/{slug}/writers')->controller('Facets\TopicFacetController@writers')->where(['slug' => '[a-z0-9-]+'])->name('topic.writers');

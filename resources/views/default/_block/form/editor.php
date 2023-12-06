@@ -14,7 +14,7 @@
       placeholder: "<?= __('app.markdown'); ?>...",
       imageUploadEndpoint: "/backend/upload/<?= $type; ?>/<?= $id; ?>",
       previewImagesInEditor: true,
-      uploadImage: true,
+      uploadImage: false,
       inputStyle: 'contenteditable',
       nativeSpellcheck: true,
       <?php if (Translate::getLang() == 'ar') : ?>direction: 'rtl',<?php endif; ?>

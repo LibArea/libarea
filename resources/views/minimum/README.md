@@ -1,3 +1,3 @@
-This is a test design to show you how to create your own template.
+## Как создать свой шаблон
 
-Это тестовый дизайн, чтобы показать на примере создание своего шаблона
+Смотрим: https://libarea.ru/post/1557/kak-sozdat-svoy-shablon-dlya-libarea

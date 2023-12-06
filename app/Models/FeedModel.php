@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Feed\Sorting;
 use UserData;
 use DB;
 
@@ -10,7 +11,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
     public static function feed($page, $limit, $sheet, $slug, $topic = '')
     {
         $user_id    = UserData::getUserId();
-        $string     = self::sorting($sheet);
+        $string     = self::display($sheet);
 
         // Deleted post, banned from showing in the feed and limited by TL (trust_level)
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
@@ -19,12 +20,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
 
         // Sorting posts by conditions
         // Сортировка постов по условиям
-        $sort = "ORDER BY post_comments_count DESC";
-        if (in_array($sheet, ['facet.feed', 'web.feed', 'questions', 'posts'])) {
-            $sort = "ORDER BY post_top DESC, post_date DESC";
-        } elseif (in_array($sheet, ['admin.posts.all', 'admin.posts.ban', 'profile.posts'])) {
-            $sort = "ORDER BY post_date DESC";
-        }
+        $sort = Sorting::day($sheet);
 
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
@@ -76,10 +72,6 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                                         
                                 $string $display $sort LIMIT :start, :limit";
 
-        if (in_array($sheet, ['facet.feed', 'recommend', 'questions', 'posts'])) {
-            return DB::run($sql, ['qa' => "%" . $slug . "@%", 'start' => $start, 'limit' => $limit])->fetchAll();
-        }
-
         if (in_array($sheet, ['profile.posts', 'web.feed'])) {
              return DB::run($sql, ['qa' => $slug, 'start' => $start, 'limit' => $limit])->fetchAll();
         }
@@ -87,11 +79,13 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
         if ($sheet == 'facet.feed.topic') {
             return DB::run($sql, ['qa' => "%" . $slug . "@%", 'topic' => "%" . $topic . "@%", 'start' => $start, 'limit' => $limit])->fetchAll();
         }
+		
+		return DB::run($sql, ['qa' => "%" . $slug . "@%", 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function feedCount($sheet, $slug, $topic = '')
     {
-        $string     = self::sorting($sheet);
+        $string     = self::display($sheet);
         $user_id    = UserData::getUserId();
 
         $trust_level = ($user_id == 0) ? "AND post_tl = 0" : "AND post_tl <= " . UserData::getUserTl();
@@ -112,10 +106,6 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                         ) AS rel ON rel.relation_post_id = post_id 
                             $string $display";
 
-        if (in_array($sheet, ['facet.feed', 'recommend', 'questions', 'posts'])) {
-             return DB::run($sql, ['qa' => "%" . $slug . "@%"])->rowCount();
-        }
-
         if (in_array($sheet, ['profile.posts', 'web.feed'])) {
              return DB::run($sql, ['qa' => $slug])->rowCount() ;
         }
@@ -124,14 +114,15 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
             return DB::run($sql, ['qa' => "%" . $slug . "@%", 'topic' => "%" . $topic . "@%"])->rowCount();
         }
 
-        return;
+        return DB::run($sql, ['qa' => "%" . $slug . "@%"])->rowCount();
     }
 
-    public static function sorting($sheet)
+    public static function display($sheet)
     {
         $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
         
         switch ($sheet) {
+			case 'top':
             case 'facet.feed':
                 $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = 'post' $hidden";
                 break;
