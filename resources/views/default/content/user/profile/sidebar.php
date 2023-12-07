@@ -6,7 +6,6 @@
   </div>
 
   <div class="mb20">
-    <h4 class="uppercase-box"><?= __('app.contacts'); ?></h4>
     <div class="gray-600 mt5">
       <svg class="icons">
         <use xlink:href="/assets/svg/icons.svg#calendar"></use>
@@ -28,18 +27,12 @@
             <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
           <?php endif; ?>
         </div>
-      <?php else : ?>
-        <?php if ('location' == $block['title']) : ?>
-          <div class="mb20">
-            <span class="gray-600"><?= $block['lang']; ?>: ...</span>
-          </div>
-        <?php endif; ?>
       <?php endif; ?>
     <?php endforeach; ?>
   </div>
 
   <?php if ($data['blogs']) : ?>
-    <div class="box bg-lightgray">
+    <div class="box bg-yellow">
       <h4 class="uppercase-box"><?= __('app.created_by'); ?></h4>
       <?php foreach ($data['blogs'] as $blog) : ?>
         <div class="w-100 mb15 flex flex-row">

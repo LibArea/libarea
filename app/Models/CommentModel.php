@@ -13,11 +13,11 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 	
     // Add an comment
     // Добавим ответ
-    public static function add($post_id, $comment_id, $content, $trigger, $mobile)
+    public static function add($post_id, $parent_id, $content, $trigger, $mobile)
     {
         $params = [
             'comment_post_id'    => $post_id,
-			'comment_parent_id'  => $comment_id,
+			'comment_parent_id'  => $parent_id,
             'comment_content'    => $content,
             'comment_published'  => ($trigger === false) ? 0 : 1,
             'comment_ip'         => Request::getRemoteAddress(),
@@ -151,6 +151,17 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
         $content = "\n\n `+` " . $content;
 
         return DB::run($sql, ['post_id' => $post_id, 'content' => $content]); 
+    }
+
+    // Add the answer to the end of the last comment (if there is a repeat comment)
+    // Добавим ответ в конец последнего комментария (если есть повторное комментирования)
+    public static function mergeComment($content, $comment_id)
+    {
+        $sql = "UPDATE comments SET comment_content = CONCAT(comment_content, :content) WHERE comment_id = :comment_id";
+
+        $content = "\n\n `+` " . $content;
+
+        return DB::run($sql, ['comment_id' => $comment_id, 'content' => $content]); 
     }
 
 	// Is the last response to a specific comment a participant's comment

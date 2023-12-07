@@ -21,7 +21,7 @@
             <div title="<?= __('app.best_answer'); ?>" class="red right text-2xl p5">✓</div>
           <?php endif; ?>
 
-          <?php if (UserData::getUserId() == $node['comment_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
+          <?php if (UserData::getUserId() == $node['comment_user_id']) { ?> <?php $otvet = 1; ?><?php } ?>
 		  
           <ol class="list-none">
             <li class="comment" id="comment_<?= $node['comment_id']; ?>">
@@ -30,7 +30,7 @@
 			  
 			    <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
 			  
-                <div class="max-w780 ind-first-p ml5">
+                <div class="max-w780 ind-first-p ml5<?php if($level == 1) : ?> text-sm<?php endif; ?>">
                   <?= markdown($node['comment_content'], 'text'); ?>
                 </div>
                 <div class="comment_footer justify-between">
@@ -41,7 +41,7 @@
 
                     <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                       <?php if ($post['post_closed'] == 0 ?? $post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                        <a data-comment_id="<?= $node['comment_id']; ?>" class="add-comment gray"><?= __('app.reply'); ?></a>
+                        <a data-comment_id="<?= $node['comment_id']; ?>" class="add-comment gray-600"><?= __('app.reply'); ?></a>
                       <?php endif; ?>
                     <?php endif; ?>
                   </div>
