@@ -16,28 +16,40 @@ class AddCommentController extends Controller
     // Покажем форму добавление комментария
     public function index()
     {
-        insert('/_block/form/add-comment');
+        insert(
+            '/_block/form/form-to-add',
+            [
+                'data'  => [
+                    'id'	=> Request::getPostInt('id'),
+					'type'	=> 'comment',
+                ]
+            ]
+        );
     }
 	
     public function create()
     {		
 		if ($post_id = Request::getPostInt('post_id')) { 
-			$post = PostPresence::index($post_id, 'id');
+			$post = PostPresence::index($post_id);
 		}
 
 		// Will get the id of the comment that is being answered (if there is one, i.e. not the root comment)
 		// Получит id комментария на который идет ответ (если он есть, т.е. не корневой комментарий)
-	  	if ($parent_id = Request::getPostInt('comment_id')) {
+	  	if ($parent_id = Request::getPostInt('id')) {
 			
 			// Let's check if there is a comment
 		    // Проверим наличие комментария
 			$comment = CommentPresence::index($parent_id);
+
+			notEmptyOrView404($comment);
 
 			// Let's check that this comment belongs to a post that is
 		    // Проверим, что данный комментарий принадлежит посту который есть
 			$post = PostPresence::index($comment['comment_post_id'], 'id');
 		}
 	 
+		notEmptyOrView404($post);
+
         $url_post = post_slug($post['post_id'], $post['post_slug']);
  
         Validator::Length($content = $_POST['content'], 6, 5000, 'content', $url_post);

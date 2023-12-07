@@ -4,7 +4,6 @@
       <?= csrf_field() ?>
       <textarea rows="5" minlength="6" name="content"><?= $data['content']; ?></textarea>
       <fieldset>
-        <input type="hidden" name="el_id" value="<?= $data['el_id']; ?>">
         <input type="hidden" name="id" value="<?= $data['id']; ?>">
         <?= Html::sumbit(__('app.edit')); ?>
         <span id="cancel" class="text-sm inline ml5 gray"><?= __('app.cancel'); ?></span>

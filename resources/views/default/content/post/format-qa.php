@@ -24,9 +24,9 @@
           <?php if (UserData::getUserId() == $node['comment_user_id']) { ?> <?php $otvet = 1; ?><?php } ?>
 		  
           <ol class="list-none">
-            <li class="comment" id="comment_<?= $node['comment_id']; ?>">
-              <div class="comment-comm comment_thread"></div>
-              <div class="comment_body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
+            <li class="comment">
+			  <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
+              <div class="comment comment_body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
 			  
 			    <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
 			  
@@ -41,7 +41,7 @@
 
                     <?php if (UserData::getRegType(config('trust-levels.tl_add_comm_qa'))) : ?>
                       <?php if ($post['post_closed'] == 0 ?? $post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                        <a data-comment_id="<?= $node['comment_id']; ?>" class="add-comment gray-600"><?= __('app.reply'); ?></a>
+						<a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
                       <?php endif; ?>
                     <?php endif; ?>
                   </div>
@@ -64,7 +64,7 @@
 				 <?php if ($indent == '0_0') :?><div class="mb5 br-bottom"></div><?php endif; ?>
 				 <?php if ($level == 1) :?><div class="br-dotted"></div><?php endif; ?>
 				 
-                <div data-insert="<?= $node['comment_id']; ?>" id="insert_id_<?= $node['comment_id']; ?>" class="none"></div>
+				  <div id="el_addentry<?= $node['comment_id']; ?>" class="none"></div> 
 				</div>
             </li>
           </ol>

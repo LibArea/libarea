@@ -45,14 +45,13 @@ class EditCommentController extends Controller
 
         // Access check
         $comment = CommentModel::getCommentId($comment_id);
-
         if (Access::author('comment', $comment) == false) {
             return false;
         }
 
         $post = PostPresence::index($comment['comment_post_id'], 'id');
 
-        $url_post = post_slug($comment['comment_post_id'], $post['post_slug']);
+		notEmptyOrView404($post);
 
         Validator::Length($content, 6, 5000, 'content', url('content.edit', ['type' => 'comment', 'id' => $comment['comment_id']]));
 
@@ -65,6 +64,6 @@ class EditCommentController extends Controller
             ]
         );
 
-        is_return(__('msg.change_saved'), 'success', $url_post . '#comment_' . $comment['comment_id']);
+        is_return(__('msg.change_saved'), 'success', post_slug($comment['comment_post_id'], $post['post_slug']) . '#comment_' . $comment['comment_id']);
     }
 }

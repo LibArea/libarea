@@ -13,39 +13,24 @@ if (dHeader) {
 
 let token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
-// Call the form for adding a comment
-queryAll(".add-comment")
-  .forEach(el => el.addEventListener("click", function (e) {
-
-    let comment_id = insert_id = el.dataset.comment_id;
-    let post_id = el.dataset.post_id;
-
-    if (post_id) {
-      insert_id = el.dataset.post_id;
-    }
-
-    let comment = document.querySelector('#insert_id_' + insert_id);
-    comment.classList.add("block");
-
-    fetch("/comment/addform", {
-      method: "POST",
-      body: "post_id=" + post_id + "&comment_id=" + comment_id + "&_token=" + token,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then(
-        response => {
-          return response.text();
-        }
-      ).then(
-        text => {
-          comment.innerHTML = text;
-          queryAll("#cancel_comment")
-            .forEach(el => el.addEventListener("click", function (e) {
-              comment.classList.remove("block");
-            }));
-        }
-      );
-  }));
+// Call the form for adding / edit
+queryAll(".activ-form").forEach(el => el.addEventListener("click", function (e) { 
+  let reply = document.querySelector('#el_addentry' + el.dataset.id);
+  fetch("/activatingform/" + el.dataset.type, {
+    method: "POST",
+    body: "id=" + el.dataset.id + "&_token=" + token,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  })
+    .then(response => response.text())
+    .then(text => {
+      reply.classList.add("block");
+      reply.innerHTML = text;
+      queryAll("#cancel")
+        .forEach(el => el.addEventListener("click", function (e) {
+          reply.classList.remove("block");
+        }));
+    });
+}));
 
 // Toggle dark mode
 isIdEmpty('toggledark').onclick = function () {

@@ -50,6 +50,7 @@ class ReplyModel extends \Hleb\Scheme\App\Models\MainModel
                     reply_content as content,
                     reply_date,
                     reply_user_id,
+					reply_item_id,
                     reply_published,
                     reply_is_deleted
                         FROM replys WHERE reply_id = :reply_id";

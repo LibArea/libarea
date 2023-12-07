@@ -4,7 +4,7 @@ namespace App\Controllers\Item;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Services\Сheck\ItemPresence;
+use App\Services\Сheck\{ItemPresence, ReplyPresence};
 use App\Models\Item\{WebModel, ReplyModel};
 use App\Models\{ActionModel, NotificationModel};
 use App\Validate\Validator;
@@ -26,7 +26,7 @@ class ReplyController extends Controller
         }
 
         insert(
-            '/_block/form/editable-opening-form',
+            '/_block/form/form-for-editing',
             [
                 'data'  => [
 					'type'   	=> 'reply',
@@ -40,20 +40,20 @@ class ReplyController extends Controller
 
     public function change()
     {
-        $id         = Request::getPostInt('id');
-        $el_id    	= Request::getPostInt('el_id');
-        $content	= $_POST['content']; // для Markdown
-		
-        $item 	= ItemPresence::index($el_id);
+        $reply_id  = Request::getPostInt('id');
+        $content    = $_POST['content']; // для Markdown
 
+        // Access check
+        $reply = ReplyModel::getId($reply_id);
+        if (Access::author('reply', $reply) == false) {
+            return false;
+        }
+
+        $item = ItemPresence::index($reply['reply_item_id']);
+
+		notEmptyOrView404($item);
         $url = url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]);
         Validator::Length($content, 6, 555, 'content', $url);
-
-        // Access verification 
-        $reply = ReplyModel::getId($id);
-        if (Access::author('reply', $reply) === false) {
-            redirect('/');
-        }
 
         $redirect  = $url . '#reply_' . $reply['reply_id'];
 
@@ -72,11 +72,27 @@ class ReplyController extends Controller
     // Добавление ответа
     public function create()
     {
-        $id         = Request::getPostInt('id');
-        $item_id    = Request::getPostInt('item_id');
-        $content    = $_POST['content']; // для Markdown
+		if ($item_id = Request::getPostInt('item_id')) { 
+			$item = ItemPresence::index($item_id, 'id');
+		}
+		
+		// Will get the id of the comment that is being answered (if there is one, i.e. not the root comment)
+		// Получит id комментария на который идет ответ (если он есть, т.е. не корневой комментарий)
+	  	if ($parent_id = Request::getPostInt('id')) {
+			
+			// Let's check if there is a comment
+		    // Проверим наличие комментария
+			$reply = ReplyPresence::index($parent_id);
 
-        $item = ItemPresence::index($item_id);
+			// Let's check that this comment belongs to a post that is
+		    // Проверим, что данный комментарий принадлежит посту который есть
+			$item = ItemPresence::index($reply['reply_item_id'], 'id');
+		}
+		
+        $content = $_POST['content']; // для Markdown
+		
+		notEmptyOrView404($item);
+		notEmptyOrView404($reply);
 
         $website_url = url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]);
         Validator::Length($content, 6, 555, 'content', $website_url);
@@ -87,7 +103,7 @@ class ReplyController extends Controller
 
         $last_id = ReplyModel::add(
             [
-                'reply_parent_id'   => $id,
+                'reply_parent_id'   => $parent_id,
                 'reply_item_id'     => $item['item_id'],
                 'reply_content'     => $content,
                 'reply_type'        => 'web',
@@ -130,11 +146,12 @@ class ReplyController extends Controller
     public function addForma()
     {
         insert(
-            '/_block/form/add-reply',
+            '/_block/form/form-to-add',
             [
                 'data'  => [
                     'id'        => Request::getPostInt('id'),
-                    'item_id'   => Request::getPostInt('item_id'),
+                   // 'item_id'   => Request::getPostInt('item_id'),
+					'type'   => 'reply',
                 ],
                 'user'   => $this->user
             ]

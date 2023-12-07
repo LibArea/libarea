@@ -5,7 +5,7 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::post('/backend/upload/{type}/{id}')->controller('Post\EditPostController@uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
     Route::post('/status/action')->controller('ActionController@deletingAndRestoring');
     Route::post('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
-    Route::post('/reply/editform')->controller('Item\ReplyController');
+    Route::post('/activatingform/editreply')->controller('Item\ReplyController');
     // @ users | posts | topics | category
     Route::post('/search/{type}')->controller('SearchController@select')->where(['type' => '[a-z]+']);
      
@@ -79,8 +79,8 @@ Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();
 Route::endGroup();
 
 Route::getProtect();
-    Route::post('/comment/addform')->controller('Comment\AddCommentController');
-    Route::post('/reply/addform')->controller('Item\ReplyController@addForma');
+    Route::post('/activatingform/addcomment')->controller('Comment\AddCommentController');
+    Route::post('/activatingform/addreply')->controller('Item\ReplyController@addForma');
 Route::endProtect();    
   
 Route::get('/search')->controller('SearchController', ['post'])->name('search');

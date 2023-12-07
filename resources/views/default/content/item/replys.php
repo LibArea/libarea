@@ -6,8 +6,9 @@ function internalRender($nodes)
         $none = $node['reply_parent_id'] == 0 ? ' list-none' : '';
         $delete = $node['reply_is_deleted'] == 1 ? ' bg-red-200' : '';
 
-        echo '<ul class="mt10' . $none . '"><li class="hidden mt20' . $delete . '">
-                <div id="reply_' . $node['reply_id'] . '" class="text-sm">';
+        echo '<ul class="mt10' . $none . '"><li class="relative mt20' . $delete . '">
+                <a id="reply_' . $node['reply_id'] . '" class="anchor-top"></a>
+				<div class="comment">';
 
         echo '<div class="flex gap">' . Img::avatar($node['avatar'], $node['login'], 'img-sm', 'small')
 
@@ -27,11 +28,11 @@ function internalRender($nodes)
                     <div class="flex gap">' . Html::votes($node, 'reply');
 
         if (UserData::getUserTl() >= config('trust-levels.tl_add_reply')) {
-            echo '<a data-el_id="' . $node['reply_item_id'] . '" data-type="addform" data-id="' . $node['reply_id'] . '" class="edit-form gray-600">' . __('web.reply') . '</a>';
+            echo '<a data-id="' . $node['reply_id'] . '" data-type="addreply" class="activ-form gray-600">' . __('web.reply') . '</a>';
         }
 
         if (UserData::getUserId() == $node['reply_user_id']) {
-            echo '<a data-el_id="' . $node['reply_item_id'] . '" data-type="editform" data-id="' . $node['reply_id'] . '" class="edit-form gray-600">' . __('web.edit') . '</a>';
+            echo '<a data-id="' . $node['reply_id'] . '" data-type="editreply" class="activ-form gray-600">' . __('web.edit') . '</a>';
         }
 
         echo '</div></div>

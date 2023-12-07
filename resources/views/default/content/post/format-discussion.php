@@ -99,11 +99,11 @@
                   <?= Html::votes($node, 'comment'); ?>
 
                   <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
-                    <a data-comment_id="<?= $node['comment_id']; ?>" class="add-comment gray-600"><?= __('app.reply'); ?></a>
+                    <a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
                   <?php endif; ?>
 
                 </div>
-                <div data-insert="<?= $node['comment_id']; ?>" id="insert_id_<?= $node['comment_id']; ?>" class="none"></div>
+                <div id="el_addentry<?= $node['comment_id']; ?>" class="none"></div>
               </div>
 
               <?php if (isset($node['children'])) {

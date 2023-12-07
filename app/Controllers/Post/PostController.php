@@ -106,7 +106,7 @@ class PostController extends Controller
         // Check id and get content data
         // Проверим id и получим данные контента
         if ($type == 'post') {
-            $content = PostPresence::index($id, 'id');
+            $content = PostPresence::index($id);
 
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
