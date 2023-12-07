@@ -6,7 +6,7 @@ const focusId = queryAll(".focus-id"),
   addProfile = queryAll(".add-profile"),
   postRecommend = queryAll(".post-recommend"),
   typeAction = queryAll(".type-action"),
-  reply = queryAll(".actreply");
+  editForm = queryAll(".edit-form");
 
 // Subscribe to a topic / post
 focusId.forEach(el => el.addEventListener("click", function (e) {
@@ -217,3 +217,25 @@ if (tabs_post) {
     }
   }
 }
+
+// Call the form for adding / edit
+editForm.forEach(el => el.addEventListener("click", function (e) { 
+  let reply = document.querySelector('#el_addentry' + el.dataset.id);
+  
+  console.log(reply);
+  
+  fetch("/reply/" + el.dataset.type, {
+    method: "POST",
+    body: "id=" + el.dataset.id + "&el_id=" + el.dataset.el_id + "&_token=" + token,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  })
+    .then(response => response.text())
+    .then(text => {
+      reply.classList.add("block");
+      reply.innerHTML = text;
+      queryAll("#cancel")
+        .forEach(el => el.addEventListener("click", function (e) {
+          reply.classList.remove("block");
+        }));
+    });
+}));

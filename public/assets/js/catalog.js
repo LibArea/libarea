@@ -3,4 +3,3 @@ sturl.forEach(el=>el.addEventListener("click",function(e){makeRequest("/web/stat
 html+='</div>'}
 if(!Object.keys(obj).length==0){let items=getById("search_url");items.classList.add("block");items.innerHTML=html}
 let menu=document.querySelector('.none.block');if(menu){document.onclick=function(e){if(event.target.className!='.none.block'){let items=getById("search_url");items.classList.remove("block")}}}})}
-reply.forEach(el=>el.addEventListener("click",function(e){let reply=document.querySelector('#reply_addentry'+el.dataset.id);fetch("/reply/"+el.dataset.type,{method:"POST",body:"id="+el.dataset.id+"&item_id="+el.dataset.item_id+"&_token="+token,headers:{'Content-Type':'application/x-www-form-urlencoded'}}).then(response=>response.text()).then(text=>{reply.classList.add("block");reply.innerHTML=text;queryAll("#cancel_comment").forEach(el=>el.addEventListener("click",function(e){reply.classList.remove("block")}))})}))

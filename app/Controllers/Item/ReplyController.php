@@ -26,11 +26,12 @@ class ReplyController extends Controller
         }
 
         insert(
-            '/_block/form/edit-reply',
+            '/_block/form/editable-opening-form',
             [
                 'data'  => [
+					'type'   	=> 'reply',
                     'id'        => $id,
-                    'item_id'   => Request::getPostInt('item_id'),
+                    'el_id'   	=> Request::getPostInt('el_id'),
                     'content'   => $reply['content'],
                 ],
             ]
@@ -40,10 +41,10 @@ class ReplyController extends Controller
     public function change()
     {
         $id         = Request::getPostInt('id');
-        $item_id    = Request::getPostInt('item_id');
-        $content    = $_POST['content']; // для Markdown
-
-        $item = ItemPresence::index($item_id);
+        $el_id    	= Request::getPostInt('el_id');
+        $content	= $_POST['content']; // для Markdown
+		
+        $item 	= ItemPresence::index($el_id);
 
         $url = url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]);
         Validator::Length($content, 6, 555, 'content', $url);

@@ -27,15 +27,15 @@ function internalRender($nodes)
                     <div class="flex gap">' . Html::votes($node, 'reply');
 
         if (UserData::getUserTl() >= config('trust-levels.tl_add_reply')) {
-            echo '<a data-item_id="' . $node['reply_item_id'] . '" data-type="addform" data-id="' . $node['reply_id'] . '" class="actreply gray-600">' . __('web.reply') . '</a>';
+            echo '<a data-el_id="' . $node['reply_item_id'] . '" data-type="addform" data-id="' . $node['reply_id'] . '" class="edit-form gray-600">' . __('web.reply') . '</a>';
         }
 
         if (UserData::getUserId() == $node['reply_user_id']) {
-            echo '<a data-item_id="' . $node['reply_item_id'] . '" data-type="editform" data-id="' . $node['reply_id'] . '" class="actreply gray-600">' . __('web.edit') . '</a>';
+            echo '<a data-el_id="' . $node['reply_item_id'] . '" data-type="editform" data-id="' . $node['reply_id'] . '" class="edit-form gray-600">' . __('web.edit') . '</a>';
         }
 
         echo '</div></div>
-                 <div id="reply_addentry' . $node['reply_id'] . '" class="none"></div>';
+                 <div id="el_addentry' . $node['reply_id'] . '" class="none"></div>';
 
         if (isset($node['children'])) {
             internalRender($node['children']);
