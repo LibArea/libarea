@@ -137,6 +137,7 @@ class Users extends Controller
                 'lang'          => $user['lang'] ?? 'ru',
                 'scroll'        => Request::getPost('scroll') == 'on' ? 1 : 0,
                 'nsfw'          => Request::getPost('nsfw') == 'on' ? 1 : 0,
+                'post_design'   => Request::getPost('post_design') == 'on' ? 1 : 0,
                 'trust_level'   => $data['trust_level'] ?? 1,
                 'updated_at'    => date('Y-m-d H:i:s'),
                 'color'         => Request::getPostString('color', '#339900'),

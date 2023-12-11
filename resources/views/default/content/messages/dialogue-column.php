@@ -3,6 +3,9 @@
 <?php if (!empty($dialogs)) : ?>
   <ul class="menu">
     <?php foreach ($dialogs as  $msg) : ?>
+	
+	  <?php if ($msg['msg_to_user']['is_deleted'] == 1 || $msg['msg_user']['is_deleted'] == 1) continue; ?>
+	
       <li class="mb5 p5 br-top-zebra
       <?php if (!$msg['unread'] > 0) : ?> bg-yellow<?php endif; ?>
       <?php if (Request::getMainUrl() == url('dialogues', ['id' => $msg['dialog_id']])) : ?> bg-beige<?php endif; ?>">
