@@ -22,8 +22,8 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
                     dialog_sender_count,
                     dialog_recipient_count
                         FROM messages_dialog 
-                          WHERE dialog_sender_id = $user_id OR dialog_recipient_id = $user_id
-                            ORDER BY dialog_update_time DESC";
+								WHERE dialog_sender_id = $user_id OR dialog_recipient_id = $user_id
+									ORDER BY dialog_update_time DESC";
 
         return DB::run($sql)->fetchAll();
     }
@@ -70,8 +70,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
         // Отправитель
         if ($messages_dialog['dialog_sender_id'] == $user_id) {
 
-            $sql = "UPDATE messages_dialog SET dialog_sender_unread = :user_id 
-            WHERE dialog_sender_unread = 0 AND dialog_id = :dialog_id";
+            $sql = "UPDATE messages_dialog SET dialog_sender_unread = :user_id WHERE dialog_sender_unread = 0 AND dialog_id = :dialog_id";
 
             DB::run($sql, ['user_id' => $user_id, 'dialog_id' => $dialog_id]);
 
@@ -86,8 +85,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
         // Получатель
         if ($messages_dialog['dialog_recipient_id'] == $user_id) {
 
-            $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :user_id 
-                        WHERE dialog_recipient_unread = 0 AND dialog_id = :dialog_id";
+            $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :user_id WHERE dialog_recipient_unread = 0 AND dialog_id = :dialog_id";
 
             DB::run($sql, ['user_id' => $user_id, 'dialog_id' => $dialog_id]);
         }
@@ -208,8 +206,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     // Creating a message
     public static function createMessage($params)
     {
-        $sql = "INSERT INTO messages(message_dialog_id, message_content, message_sender_id)
-                            VALUES(:message_dialog_id, :message_content, :message_sender_id)";
+        $sql = "INSERT INTO messages(message_dialog_id, message_content, message_sender_id) VALUES(:message_dialog_id, :message_content, :message_sender_id)";
 
         DB::run($sql, $params);
     }

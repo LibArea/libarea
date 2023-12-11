@@ -85,6 +85,12 @@
   </fieldset>
 <?php endif; ?>
 
+
+<h3 class="m0 mt15"><?= __('app.post_appearance'); ?></h3>
+<fieldset>
+  <input type="checkbox" name="post_design" <?php if ($data['user']['post_design'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_design_card'); ?>
+</fieldset>
+
 <div class="flex flex-row items-center justify-between mt20">
   <?= Html::sumbit(__('app.edit')); ?>
   <?php if (config('general.deleting_profile')) : ?>

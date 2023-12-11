@@ -61,14 +61,14 @@ class AddCommentController extends Controller
 		// Different conditions for combining a comment (with a post or your previous one)
         // Различные условия объединения комментария (с постом или своим предыдущим)  
         $this->joinPost($content, $post, $url_post);
-        $this->joinComment($content, $url_post, $comment ?? []);
+        $this->joinComment($content, $url_post, $comment ?? false);
 
         $last_id = CommentModel::add($post['post_id'], $parent_id, $content, $trigger, DetectMobile::index());
 
         // Add an audit entry and an alert to the admin
         // Аудит и оповещение персоналу
         if ($trigger === false) {
-            (new \App\Services\Audit())->create('comment', $last_id, url('admin.audits'));
+            (new \App\Services\Audit())->create('comment', $last_id, $post, url('admin.audits'));
         }
 
         $url = $url_post . '#comment_' . $last_id;
@@ -114,13 +114,17 @@ class AddCommentController extends Controller
 	public function joinComment($content, $url_post, $parent)
 	{
         if (config('publication.merge_comments') == false) {
-            return true;
+            return false;
         }
+		
+		if ($parent == false) {
+			return false;
+		}
 
         // The staff can write a repeated comment
         // Персонал может писать повторный комментарий
         if (UserData::checkAdmin()) {
-            return true;
+            return false;
         }
 
 		// If the participant has already responded to a specific comment and comments again

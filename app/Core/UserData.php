@@ -252,6 +252,11 @@ class UserData
     {
         return self::$myAccount['nsfw'] ?? false;
     }
+	
+    static public function getUserPostDesign()
+    {
+        return self::$myAccount['post_design'] ?? false;
+    }
     
     static public function getUserBlog()
     {

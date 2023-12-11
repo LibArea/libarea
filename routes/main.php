@@ -131,7 +131,6 @@ Route::get('/domain/{domain}')->controller('Post\PostController@domain')->where(
 Route::type(['get', 'post'])->get('/cleek')->controller('Item\DirController@cleek');
 
 Route::get('/')->controller('HomeController', ['feed'])->name('main'); 
-Route::get('/top')->controller('HomeController', ['top'])->name('main.top');
 Route::get('/questions')->controller('HomeController', ['questions'])->name('main.questions');
 Route::get('/posts')->controller('HomeController', ['posts'])->name('main.posts');
 Route::get('/all')->controller('HomeController', ['all'])->name('main.all');

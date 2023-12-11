@@ -104,6 +104,7 @@ class SettingController extends Controller
                 'limiting_mode'        => $user['limiting_mode'],
                 'scroll'               => Request::getPost('scroll') == 'on' ? 1 : 0,
                 'nsfw'                 => Request::getPost('nsfw') == 'on' ? 1 : 0,
+				'post_design'		   => Request::getPost('post_design') == 'on' ? 1 : 0,
                 'trust_level'          => $user['trust_level'],
                 'updated_at'           => date('Y-m-d H:i:s'),
                 'color'                => Request::getPostString('color', '#339900'),

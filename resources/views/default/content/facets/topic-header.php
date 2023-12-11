@@ -64,16 +64,16 @@
   </div>
 </div>
 
-<div class="flex justify-between mb20">
+<div class="flex justify-between items-center mb20">
   <ul class="nav scroll-menu">
     <?= insert(
       '/_block/navigation/nav',
       [
         'list' =>  [
           [
-            'id'      => 'facet.feed',
-            'url'     => url('topic', ['slug' => $topic['facet_slug']]),
-            'title'   => __('app.feed'),
+            'id'	=> 'facet.feed',
+            'url'	=> url('topic', ['slug' => $topic['facet_slug']]),
+            'title'	=> __('app.feed'),
           ], [
             'id'    => 'facet.posts',
             'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/posts',
@@ -81,31 +81,23 @@
           ], [
             'id'    => 'facet.questions',
             'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/questions',
-            'title' => __('app.questions'),
+            'title'	=> __('app.questions'),
           ], [
-            'id'    => 'facet.top',
-            'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/top',
-            'title' => __('app.top'),
+            'id'	=> 'facet.recommend',
+            'url'	=> url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
+            'title'	=> __('app.recommended'),
           ], [
-            'id'      => 'facet.recommend',
-            'url'     => url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
-            'title'   => __('app.recommended'),
-          ], [
-            'id'      => 'writers',
-            'url'     => url('topic.writers', ['slug' => $topic['facet_slug']]),
-            'title'   => __('app.writers'),
+            'id'	=> 'writers',
+            'url'	=> url('topic.writers', ['slug' => $topic['facet_slug']]),
+            'title'	=> __('app.writers'),
           ]
         ]
       ]
     ); ?>
   </ul>
-  <div title="<?= __('app.post_appearance'); ?>" id="postmenu" class="m5">
-    <svg class="icons pointer gray-600">
-      <use xlink:href="/assets/svg/icons.svg#grid"></use>
-    </svg>
+  <div class="relative">
+    <?= insert('/_block/navigation/sorting-day'); ?>
   </div>
 </div>
-
-<?= insert('/_block/navigation/sorting-day', ['sheet' => $data['sheet']]); ?>
 
 <?= insert('/_block/dialog/share', ['title' => __('app.share_topic'), 'url' => config('meta.url') . url('topic', ['slug' => $topic['facet_slug']])]); ?>

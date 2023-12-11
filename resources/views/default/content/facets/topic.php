@@ -5,7 +5,11 @@
 
     <?= insert('/content/post/type-post', ['data' => $data]); ?>
 
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('topic', ['slug' => $topic['facet_slug']])); ?>
+    <?php 
+      $sort = Request::getGet('sort'); 
+      $sort = $sort ? '&sort=' . $sort : '';
+    ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('topic', ['slug' => $topic['facet_slug']]), '?', $sort); ?>
 
   <?php else : ?>
     <div class="box center gray-600">

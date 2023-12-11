@@ -109,6 +109,7 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     my_post,
                     ban_list,
                     nsfw,
+					post_design,
                     hits_count,
                     up_count,
                     is_deleted 

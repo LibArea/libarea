@@ -3,18 +3,14 @@
 use Hleb\Constructor\Handlers\Request; ?>
 
 <main>
-  <div class="flex justify-between mb20">
+  <div class="flex justify-between items-center mb20">
     <ul class="nav scroll-menu">
       <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
     </ul>
-    <div title="<?= __('app.post_appearance'); ?>" id="postmenu" class="m5">
-      <svg class="icons pointer gray-600">
-        <use xlink:href="/assets/svg/icons.svg#grid"></use>
-      </svg>
-    </div>
+	<div class="relative">
+      <?= insert('/_block/navigation/sorting-day'); ?>
+	</div>
   </div>
-
-  <?= insert('/_block/navigation/sorting-day', ['sheet' => $data['sheet']]); ?>
 
   <?= insert('/content/post/type-post', ['data' => $data]); ?>
 
@@ -22,7 +18,11 @@ use Hleb\Constructor\Handlers\Request; ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>
   <?php else : ?>
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
+    <?php 
+      $sort = Request::getGet('sort'); 
+      $sort = $sort ? '&sort=' . $sort : '';
+    ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null, '?', $sort); ?>
   <?php endif; ?>
 </main>
 

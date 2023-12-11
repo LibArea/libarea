@@ -122,7 +122,6 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
         $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
         
         switch ($sheet) {
-			case 'top':
             case 'facet.feed':
                 $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = 'post' $hidden";
                 break;

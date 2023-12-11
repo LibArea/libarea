@@ -126,7 +126,7 @@ class Html
     }
 
     // Page pagination
-    public static function pagination($pNum, $pagesCount, $sheet, $other, $sign = '?')
+    public static function pagination($pNum, $pagesCount, $sheet, $other, $sign = '?', $sort = null)
     {
         if ($pNum > $pagesCount) {
             return null;
@@ -135,20 +135,18 @@ class Html
         $other = empty($other) ? '' : $other;
         $first = empty($other) ? '/' : $other;
 
-        if (in_array($sheet, ['all', 'top', 'questions', 'posts'])) {
+		$page = $other . '';
+        if (in_array($sheet, ['all', 'questions', 'posts'])) {
             $page  = $other . '/' . $sheet;
-            $first = $other . '/' . $sheet;
-        } else {
-            $page = $other . '';
         }
 
         $html = '<div class="flex gap">';
 
         if ($pNum != 1) {
             if (($pNum - 1) == 1) {
-                $html .= '<a class="p5" href="' . $first . '"><< ' . ($pNum - 1) . '</a>';
+                $html .= '<a class="p5" href="' . $first . $sort . '"><< ' . ($pNum - 1) . '</a>';
             } else {
-                $html .= '<a class="p5" href="' . $page . $sign . 'page=' . ($pNum - 1) . '"><< ' . ($pNum - 1) . '</a>';
+                $html .= '<a class="p5" href="' . $page . $sign . 'page=' . ($pNum - 1) . $sort . '"><< ' . ($pNum - 1) . '</a>';
             }
         }
 
@@ -158,18 +156,18 @@ class Html
 
         if ($pagesCount > $pNum) {
             if ($pagesCount > $pNum + 1) {
-                $html .= '<a class="p5" href="' . $page . $sign . 'page=' . ($pNum + 1) . '"> ' . ($pNum + 1) . ' </a>';
+                $html .= '<a class="p5" href="' . $page . $sign . 'page=' . ($pNum + 1) . $sort . '"> ' . ($pNum + 1) . ' </a>';
             }
 
             if ($pagesCount > $pNum + 2) {
-                $html .= '<a class="p5" href="' . $page . $sign . 'page=' . ($pNum + 2) . '"> ' . ($pNum + 2) . '</a>';
+                $html .= '<a class="p5" href="' . $page . $sign . 'page=' . ($pNum + 2) . $sort . '"> ' . ($pNum + 2) . '</a>';
             }
 
             if ($pagesCount > $pNum + 3) {
                 $html .= '...';
             }
 
-            $html .= '<a class="p5 lowercase gray-600" href="' . $page . $sign . 'page=' . ($pNum + 1) . '">' . __('app.page') . ' ' . ($pNum + 1) . ' >></a>';
+            $html .= '<a class="p5 lowercase gray-600" href="' . $page . $sign . 'page=' . ($pNum + 1) . $sort . '">' . __('app.page') . ' ' . ($pNum + 1) . ' >></a>';
         }
 
         $html .= '</div>';

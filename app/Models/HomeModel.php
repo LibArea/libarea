@@ -28,21 +28,21 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             $resultNotUser[$ind] = $row['ignored_id'];
         }
 
-        $ignoring = "post_user_id NOT IN(0) AND";
-        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ") AND";
+        $ignoring = "post_user_id NOT IN(0)";
+        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ")";
 
-        $string = "";
-        if ($type != 'all' && $type != 'top') {
+        $subscription = "";
+        if ($type != 'all') {
             if ($user_id) {
-                $string = "AND relation_facet_id IN(0)";
-                if ($result) $string = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")";
+                $subscription = "AND relation_facet_id IN(0)";
+                if ($result) $subscription = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")"; 
             }
         }
 
         $display = self::display($type);
         $sort = Sorting::day($type);
 
-        $nsfw = UserData::getUserNSFW() ? "" : "AND post_nsfw = 0";
+        $nsfw = UserData::getUserNSFW() ? "" : "post_nsfw = 0";
 
         $start = ($page - 1) * self::$limit;
         $sql = "SELECT DISTINCT
@@ -91,7 +91,8 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                                 AND fav.user_id = :uid AND fav.action_type = 'post'  
                             LEFT JOIN votes_post 
                                 ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
-                                    WHERE $ignoring post_type != 'page' AND post_draft = 0 $nsfw $string $display $sort LIMIT :start, :limit";
+                                    WHERE post_type != 'page' AND post_draft = 0 AND $ignoring AND $nsfw $subscription $display $sort LIMIT :start, :limit";
+				
         return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
@@ -108,18 +109,18 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             $resultNotUser[$ind] = $row['ignored_id'];
         }
 
-        $ignoring = "post_user_id NOT IN(0) AND";
-        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ") AND";
+        $ignoring = "post_user_id NOT IN(0)";
+        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ")";
 
-        $string = "";
-        if ($type != 'all' && $type != 'top') {
+        $subscription = "";
+        if ($type != 'all') {
             if (UserData::getUserId()) {
-                $string = "AND f_id IN(0)";
-                if ($result) $string = "AND f_id IN(" . implode(',', $result ?? []) . ")";
+                $subscription = "AND f_id IN(0)";
+                if ($result) $subscription = "AND f_id IN(" . implode(',', $result ?? []) . ")";
             }
         }
 
-        $nsfw = (UserData::getUserNSFW()) ? "" : "AND post_nsfw = 0";
+        $nsfw = (UserData::getUserNSFW()) ? "" : "post_nsfw = 0";
 
         $display = self::display($type);
         $sql = "SELECT 
@@ -135,7 +136,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                             ) AS rel
                                 ON rel.relation_post_id = post_id 
                                     INNER JOIN users ON id = post_user_id
-                                        WHERE $ignoring post_draft = 0 $nsfw $string $display";
+                                        WHERE post_type != 'page' AND post_draft = 0 AND $ignoring AND $nsfw $subscription $display";
 
         return ceil(DB::run($sql)->rowCount() / self::$limit);
     }
@@ -155,7 +156,6 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             case 'deleted':
                 $display =  "AND post_is_deleted = 1";
                 break;
-            case 'top':
             case 'all':
                 $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
                 break;

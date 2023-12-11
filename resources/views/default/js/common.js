@@ -58,20 +58,6 @@ isIdEmpty('togglemenu').onclick = function () {
   }
 }
 
-// Post appearance
-isIdEmpty('postmenu').onclick = function () {
-  let mode = getCookie("postAppearance");
-  let expires = defTime();
-  if (mode == "classic") {
-    document.cookie = "postAppearance" + "=" + "card" + "; " + expires + ";path=/";
-    location.reload();
-  } else {
-    document.cookie = "postAppearance" + "=" + "classic" + "; " + expires + ";path=/";
-
-  }
-  location.reload();
-}
-
 // search
 isIdEmpty('find').onclick = function () {
   getById('find').addEventListener('keydown', function () {

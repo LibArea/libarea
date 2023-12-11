@@ -30,7 +30,6 @@
               $id     = UserData::getUserId();
             endif;
             ?>
-	
             <div class="flex gap-min items-center">
               <?= Img::avatar($ava, $login, 'img-base', 'max'); ?>
               <a class="gray-600" href="<?= url('profile', ['login' => $login]); ?>"><?= $login; ?></a>
