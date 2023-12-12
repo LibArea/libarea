@@ -22,6 +22,7 @@ class MiddlewareModel extends \Hleb\Scheme\App\Models\MainModel
 					post_design,
                     invitation_available,
                     ban_list,
+					device_id,
                     is_deleted
                         FROM users
                                 WHERE id = :id";

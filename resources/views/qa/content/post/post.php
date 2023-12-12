@@ -23,7 +23,7 @@ use Hleb\Constructor\Handlers\Request; ?>
             <a class="block white" href="<?= $post_url; ?>#comment">
               <?= $post['post_comments_count']; ?>
             </a>
-            <div class="text-xs white"> <?= Html::numWord($anw, __('app.num_comment'), false); ?></div>
+            <div class="text-xs white"><?= Html::numWord($post['post_comments_count'], __('app.num_answer'), false); ?></div>
           </div>
         </div>
 

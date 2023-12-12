@@ -2,7 +2,10 @@
 <script src="/assets/js/medium-zoom.js"></script>
 <script src="/assets/js/prism/prism.js"></script>
 
-<?php if (UserData::checkActiveUser()) : ?><script src="/assets/js/app.js"></script><?php endif; ?>
+<?php if (UserData::checkActiveUser()) : ?>
+  <script src="/assets/js/app.js"></script>
+  <?= insert('/device-id'); ?>
+<?php endif; ?>
 
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>

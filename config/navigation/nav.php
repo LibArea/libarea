@@ -76,10 +76,6 @@ return [
       'url'   => url('main.questions'),
       'title' => __('app.questions'),
     ], [
-      'id'    => 'main.top',
-      'url'   => url('main.top'),
-      'title' => __('app.top'),
-    ], [
       'tl'    => UserData::REGISTERED_ADMIN,
       'id'    => 'main.deleted',
       'url'   => url('main.deleted'),

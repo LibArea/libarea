@@ -1634,3 +1634,7 @@ UPDATE `audits`  SET `action_type` = 'comment' WHERE `action_type` = 'answer';
 UPDATE `favorites` SET `action_type` = 'comment' WHERE `action_type` = 'answer'; 
 
 ALTER TABLE `comments` ADD `comment_is_mobile` TINYINT(1) NOT NULL DEFAULT '0' AFTER `comment_lo`; 
+
+ALTER TABLE `users` ADD `post_design` TINYINT(1) NOT NULL DEFAULT '0' COMMENT 'The appearance of the post in the feed: 0 - classic, 1 - card ...' AFTER `nsfw`; 
+
+ALTER TABLE `users` ADD `device_id` VARCHAR(50) NULL AFTER `up_count`;

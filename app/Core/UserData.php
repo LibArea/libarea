@@ -257,7 +257,12 @@ class UserData
     {
         return self::$myAccount['post_design'] ?? false;
     }
-    
+	
+    static public function getDeviceID()
+    {
+        return self::$myAccount['device_id'] ?? false;
+    }
+
     static public function getUserBlog()
     {
         return MiddlewareModel::getBlog(self::getUserId());
