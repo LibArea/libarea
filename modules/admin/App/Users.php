@@ -48,11 +48,13 @@ class Users extends Controller
     // Повторы IP
     public function logsIp($option)
     {
-        $user_ip    = Request::get('ip');
-        if ($option == 'users.logip') {
-            $user_all   = UserModel::getUserLogsId($user_ip);
+        $item = Request::get('item');
+        if ($option == 'logip') {
+			$user_all	= UserModel::getUserSearchRegIp($item);
+		} else if ($option == 'deviceid') {	
+			$user_all	= UserModel::getUserSearchDeviceID($item);
         } else {
-            $user_all   = UserModel::getUserRegsId($user_ip);
+            $user_all   = UserModel::getUserRegsId($item);
         }
 
         $results = [];
@@ -62,7 +64,7 @@ class Users extends Controller
         }
 
         return view(
-            '/view/default/user/logip',
+            '/view/default/user/search',
             [
                 'meta'  => Meta::get(__('admin.search')),
                 'data'  => [

@@ -105,17 +105,34 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
     // By logs
     public static function lastVisitLogs($uid)
     {
-        $sql = "SELECT 
-                    MAX(add_date) as latest_date,
-                    MAX(user_ip) as latest_ip,
-                    user_id
-                        FROM users_agent_logs 
-                            WHERE user_id = :uid GROUP BY user_id";
+        $sql = "SELECT add_date as latest_date, user_ip as latest_ip, device_id, user_id FROM users_agent_logs WHERE user_id = :uid ORDER BY id DESC";
 
         return DB::run($sql, ['uid' => $uid])->fetch();
     }
 
-    public static function getUserRegsId($ip)
+    public static function getUserSearchDeviceID($item)
+    {
+        $sql = "SELECT 
+                    log.device_id,
+                    log.add_date,
+                    u.id,
+					u.login,
+                    u.name,
+                    u.email,
+                    u.avatar,
+                    u.created_at,
+                    u.reg_ip,
+                    u.invitation_id,
+                    u.trust_level,
+                    u.ban_list
+                        FROM users_agent_logs log
+						    LEFT JOIN users u ON u.id = log.user_id 
+								WHERE log.device_id = :item";
+
+        return DB::run($sql, ['item' => $item])->fetchAll();
+    }
+
+    public static function getUserSearchRegIp($item)
     {
         $sql = "SELECT 
                     id,
@@ -128,9 +145,9 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
                     invitation_id,
                     trust_level,
                     ban_list
-                        FROM users WHERE reg_ip = :ip";
+                        FROM users WHERE reg_ip = :item";
 
-        return DB::run($sql, ['ip' => $ip])->fetchAll();
+        return DB::run($sql, ['item' => $item])->fetchAll();
     }
 
     // ip for logs

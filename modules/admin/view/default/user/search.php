@@ -23,8 +23,9 @@
         <?php if ($user['name']) : ?>
           (<?= $user['name']; ?>)
         <?php endif; ?>
-        <sup class="red">TL:<?= $user['trust_level']; ?></sup>
-        <div class=" gray-600">
+        <sup class="gray-600">TL:<?= $user['trust_level']; ?></sup> 
+		 <sup class="red"><?= $user['device_id']; ?></sup>
+        <div class="gray-600">
         <?= $user['email']; ?> | 
         <?= $user['created_at']; ?> | 
         <?php if ($data['option'] == 'logs') : ?>

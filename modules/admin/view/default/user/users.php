@@ -69,7 +69,7 @@
           <?php endif; ?>
         </td>
         <td class="text-sm align-right mb-none">
-          <a class="gray-600" href="<?= url('admin.regip', ['ip' => $user['reg_ip']]); ?>">
+          <a class="gray-600" href="<?= url('admin.regip', ['item' => $user['reg_ip']]); ?>">
             <?= $user['reg_ip']; ?>
           </a>
           <?php if ($user['duplicat_ip_reg'] > 1) : ?>
@@ -80,7 +80,7 @@
         </td>
         <td class="text-sm align-right mb-none">
           <?php if (!empty($user['last_visit_logs']['latest_ip'])) : ?>
-            <a class="gray-600" href="<?= url('admin.logip', ['ip' => $user['last_visit_logs']['latest_ip']]); ?>">
+            <a class="gray-600" href="<?= url('admin.logip', ['item' => $user['last_visit_logs']['latest_ip']]); ?>">
               <?= $user['last_visit_logs']['latest_ip']; ?>
             </a>
             <br>
@@ -88,6 +88,8 @@
           <?php if (!empty($user['last_visit_logs']['latest_date'])) : ?>
             <?= $user['last_visit_logs']['latest_date']; ?>
           <?php endif; ?>
+		  <br>
+		  <a href="<?= url('admin.device', ['item' => $user['last_visit_logs']['device_id']]); ?>"><?= $user['last_visit_logs']['device_id']; ?></a>
         </td>
         <td class="center">
           <?php if ($user['trust_level'] != UserData::REGISTERED_ADMIN) : ?>
