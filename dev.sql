@@ -1637,4 +1637,4 @@ ALTER TABLE `comments` ADD `comment_is_mobile` TINYINT(1) NOT NULL DEFAULT '0' A
 
 ALTER TABLE `users` ADD `post_design` TINYINT(1) NOT NULL DEFAULT '0' COMMENT 'The appearance of the post in the feed: 0 - classic, 1 - card ...' AFTER `nsfw`; 
 
-ALTER TABLE `users` ADD `device_id` VARCHAR(50) NULL AFTER `up_count`;
+ALTER TABLE `users_agent_logs` ADD `device_id` VARCHAR(50) NULL AFTER `user_ip`; 
