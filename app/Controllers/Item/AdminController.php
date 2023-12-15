@@ -35,7 +35,7 @@ class AdminController extends Controller
             '/item/admin/deleted',
             [
                 'meta'  => Meta::get(__('web.deleted')),
-                'data'  => ['items' => WebModel::feedItem(false, false, 'deleted', false)]
+                'data'  => ['items' => WebModel::feedItem(false, false, $this->pageNumber, 'deleted', false)]
             ],
             'item',
         );
