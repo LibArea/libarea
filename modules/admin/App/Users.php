@@ -156,4 +156,21 @@ class Users extends Controller
 
         is_return(__('msg.change_saved'), 'success', url('admin.user.edit', ['id' => $data['user_id']]));
     }
+	
+    public function history()
+    {
+        $user_id    = Request::getInt('id');
+        if (!$user = UserModel::getUser($user_id, 'id')) redirect(url('admin'));
+
+        return view(
+            '/view/default/user/history',
+            [
+                'meta'  => Meta::get(__('admin.history')),
+                'data'  => [
+                    'type'      => $this->type,
+                    'results'	=> userModel::userHistory($user_id),
+                ]
+            ]
+        );
+    }
 }

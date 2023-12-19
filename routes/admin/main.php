@@ -27,9 +27,11 @@ Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
 
     Route::get('/users/ban')->module('admin', 'App\Users', ['ban'])->name('admin.users.ban');
     Route::get('/users/{id}/edit')->module('admin', 'App\Users@edit', ['edit'])->name('admin.user.edit');
+	Route::get('/users/{id}/history')->module('admin', 'App\Users@history', ['history'])->name('admin.user.history');
     Route::get('/users')->module('admin', 'App\Users', ['all'])->name('admin.users');       
-    Route::get('/logip/{ip}')->module('admin', 'App\Users@logsIp', ['logip'])->where(['ip' => '[0-9].+'])->name('admin.logip');
-    Route::get('/regip/{ip}')->module('admin', 'App\Users@logsIp', ['regip'])->where(['ip' => '[0-9].+'])->name('admin.regip');
+    Route::get('/logip/{item}')->module('admin', 'App\Users@logsIp', ['logip'])->where(['item' => '[0-9].+'])->name('admin.logip');
+    Route::get('/regip/{item}')->module('admin', 'App\Users@logsIp', ['regip'])->where(['item' => '[0-9].+'])->name('admin.regip');
+	Route::get('/device/{item}')->module('admin', 'App\Users@logsIp', ['deviceid'])->where(['item' => '[0-9].+'])->name('admin.device');
     
     Route::get('/audits')->module('admin', 'App\Audits', ['all', 'audits'])->name('admin.audits');
     Route::get('/audits/approved')->module('admin', 'App\Audits', ['ban', 'audits'])->name('admin.audits.ban');

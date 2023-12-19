@@ -110,6 +110,13 @@ class UserModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['uid' => $uid])->fetch();
     }
 
+    public static function userHistory($uid)
+    {
+        $sql = "SELECT add_date, user_ip, device_id, user_id FROM users_agent_logs WHERE user_id = :uid ORDER BY add_date DESC LIMIT 50";
+
+        return DB::run($sql, ['uid' => $uid])->fetchAll();
+    }
+
     public static function getUserSearchDeviceID($item)
     {
         $sql = "SELECT 
