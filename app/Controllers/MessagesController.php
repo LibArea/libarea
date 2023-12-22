@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{MessagesModel, NotificationModel};
+use App\Validate\Validator;
 use Meta;
 
 class MessagesController extends Controller
@@ -172,5 +173,44 @@ class MessagesController extends Controller
         }
 
         return true;
+    }
+	
+    // Let's show the editing form
+    // Покажем форму редактирования
+    public function addForma()
+    {
+		$id = Request::getPostInt('id');
+		$message = MessagesModel::getMessage($id);
+
+        insert(
+            '/_block/form/form-for-editing',
+            [
+                'data'  => [
+                    'id'		=> $id,
+					'content'	=> $message['message_content'],
+					'type' 		=> 'message',
+                ]
+            ]
+        );
+    }
+	
+    public function change()
+    {
+        $id  = Request::getPostInt('id');
+        $content = $_POST['content']; // для Markdown
+
+        // Access check
+        $message = MessagesModel::getMessage($id);
+		notEmptyOrView404($message);
+		
+		if ($message['message_sender_id'] != $this->user['id']) {
+		   is_return(__('msg.went_wrong'), 'error', url('dialogues', ['id' => $message['message_dialog_id']]));
+		}
+		
+        Validator::Length($content, 6, 5000, 'content', url('dialogues', ['id' => $message['message_dialog_id']]));
+
+        MessagesModel::edit($id, $content);
+
+        is_return(__('msg.change_saved'), 'success', url('dialogues', ['id' => $message['message_dialog_id']]));
     }
 }

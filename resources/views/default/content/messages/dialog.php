@@ -41,7 +41,7 @@
               <?= $val['message_content']; ?> 
 
 			  <?php if($val['message_sender_id'] == UserData::getUserId()) : ?>
-				<a ata-el_id="<?= $val['message_id']; ?>" data-type="message" data-action="editform" data-id="<?= $val['message_dialog_id']; ?>" class="edit-form right"><?= __('app.edit'); ?></a>
+				<a data-type="editmessage" data-id="<?= $val['message_id']; ?>" class="activ-form right text-sm gray-600"><?= __('app.edit'); ?></a>
 			  <?php endif; ?>
             </div>
 			<div id="el_addentry<?= $val['message_id']; ?>" class="none"></div>

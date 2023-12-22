@@ -93,6 +93,11 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
         return $dialog_id;
     }
 
+    public static function getMessage(int $id)
+    {
+        return DB::run("SELECT message_content, message_sender_id, message_dialog_id FROM messages WHERE message_id = ?", [$id])->fetch();
+    }
+
     // Последнее сообщение в диалоге
     public static function getMessageOne(int $dialog_id)
     {
@@ -281,4 +286,9 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql)->fetch();
     }
+	
+	public static function edit($id, $content)
+	{
+        DB::run("UPDATE messages SET message_content = :content WHERE message_id = :id", ['content' => $content, 'id' => $id]);
+	}
 }

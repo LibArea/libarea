@@ -139,6 +139,10 @@ class FormController extends Controller
             return (new Item\EditItemController)->change();
         }
 
+        if ($this->type === 'message') {
+            return (new MessagesController)->change();
+        }
+
         return false;
     }
 }
