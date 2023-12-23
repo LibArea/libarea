@@ -30,18 +30,20 @@
               $id     = UserData::getUserId();
             endif;
             ?>
-            <div class="flex gap-min items-center">
+            <div class="flex gap-min items-center gray-600 lowercase text-sm">
               <?= Img::avatar($ava, $login, 'img-base', 'max'); ?>
               <a class="gray-600" href="<?= url('profile', ['login' => $login]); ?>"><?= $login; ?></a>
-              <div class="gray-600 lowercase text-sm">
-                <?= Html::langDate($val['message_add_time']); ?>
-              </div>
+              <?= Html::langDate($val['message_date']); ?>
+			  <?php if($val['message_modified']) : ?>
+				(<?= __('app.ed'); ?>)
+			  <?php endif; ?>
             </div>
             <div class="max-w780">
               <?= $val['message_content']; ?> 
-
 			  <?php if($val['message_sender_id'] == UserData::getUserId()) : ?>
-				<a data-type="editmessage" data-id="<?= $val['message_id']; ?>" class="activ-form right text-sm gray-600"><?= __('app.edit'); ?></a>
+			    <?php if (Access::limiTime($val['message_date'], 30) === true) : ?>
+				  <a data-type="editmessage" data-id="<?= $val['message_id']; ?>" class="activ-form right text-sm gray-600"><?= __('app.edit'); ?></a>
+				<?php endif; ?>
 			  <?php endif; ?>
             </div>
 			<div id="el_addentry<?= $val['message_id']; ?>" class="none"></div>

@@ -54,7 +54,7 @@ class Users extends Controller
 		} else if ($option == 'deviceid') {	
 			$user_all	= UserModel::getUserSearchDeviceID($item);
         } else {
-            $user_all   = UserModel::getUserRegsId($item);
+            $user_all   = UserModel::getUserSearchRegIp($item);
         }
 
         $results = [];

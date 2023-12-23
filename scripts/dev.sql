@@ -1638,3 +1638,6 @@ ALTER TABLE `comments` ADD `comment_is_mobile` TINYINT(1) NOT NULL DEFAULT '0' A
 ALTER TABLE `users` ADD `post_design` TINYINT(1) NOT NULL DEFAULT '0' COMMENT 'The appearance of the post in the feed: 0 - classic, 1 - card ...' AFTER `nsfw`; 
 
 ALTER TABLE `users_agent_logs` ADD `device_id` VARCHAR(50) NULL AFTER `user_ip`; 
+
+ALTER TABLE `messages` CHANGE `message_add_time` `message_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP; 
+ALTER TABLE `messages` ADD `message_modified` TIMESTAMP NULL DEFAULT NULL AFTER `message_date`; 

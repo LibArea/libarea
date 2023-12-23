@@ -106,7 +106,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
                     message_sender_id,
                     message_dialog_id,
                     message_content,
-                    message_add_time,
+                    message_date,
                     message_sender_remove,
                     message_recipient_remove,
                     message_receipt
@@ -124,7 +124,8 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
                     message_sender_id,
                     message_dialog_id,
                     message_content,
-                    message_add_time,
+                    message_date,
+					message_modified,
                     message_sender_remove,
                     message_recipient_remove,
                     message_receipt
@@ -289,6 +290,6 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 	
 	public static function edit($id, $content)
 	{
-        DB::run("UPDATE messages SET message_content = :content WHERE message_id = :id", ['content' => $content, 'id' => $id]);
+        DB::run("UPDATE messages SET message_content = :content, message_modified = :modified WHERE message_id = :id", ['content' => $content, 'modified' => date("Y-m-d H:i:s"), 'id' => $id]);
 	}
 }
