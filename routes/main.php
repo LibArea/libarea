@@ -81,6 +81,7 @@ Route::endGroup();
 Route::getProtect();
     Route::post('/activatingform/addcomment')->controller('Comment\AddCommentController');
     Route::post('/activatingform/addreply')->controller('Item\ReplyController@addForma');
+	Route::post('/activatingform/editmessage')->controller('MessagesController@addForma');
 Route::endProtect();    
   
 Route::get('/search')->controller('SearchController', ['post'])->name('search');

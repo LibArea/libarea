@@ -7,6 +7,8 @@
   ]
 ); ?>
 
+<?= includeTemplate('/view/default/user/info'); ?>
+
 <table>
   <thead>
     <th><?= __('admin.device_id'); ?></th>
