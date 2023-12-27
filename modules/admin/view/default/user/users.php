@@ -89,8 +89,9 @@
             <?= $user['last_visit_logs']['latest_date']; ?>
           <?php endif; ?>
 		  <br>
-		  <a href="<?= url('admin.device', ['item' => $user['last_visit_logs']['device_id']]); ?>"><?= $user['last_visit_logs']['device_id']; ?></a>
-		  
+		  <?php if (!empty($user['last_visit_logs']['device_id'])) : ?>
+		    <a href="<?= url('admin.device', ['item' => $user['last_visit_logs']['device_id']]); ?>"><?= $user['last_visit_logs']['device_id']; ?></a>
+		  <?php endif; ?>
 		  <a class="gray-600 text-sm" href="<?= url('admin.user.history', ['id' => $user['id']]); ?>"><?= __('admin.history'); ?></a>
         </td>
         <td class="center">

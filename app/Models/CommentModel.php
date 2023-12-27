@@ -144,7 +144,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Add the comment to the end of the post
     // Добавим ответ в конец поста
-    public static function mergePost($post_id, $content)
+    public static function mergePost($content, $post_id)
     {
         $sql = "UPDATE posts SET post_content = CONCAT(post_content, :content) WHERE post_id = :post_id";
 
