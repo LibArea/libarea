@@ -53,7 +53,7 @@ $sw = $sw ?? '?';
             <?= fragment($result['comment_content'], 250); ?>
           <?php else : ?>
             <div>
-              <?= Html::facets($result['facet_list'], 'topic', 'tag mr15'); ?>
+              <?= Html::facets($result['facet_list'], 'topic', 'tag-violet mr15'); ?>
             </div>
             <?= fragment($result['content'], 250); ?>
           <?php endif; ?>

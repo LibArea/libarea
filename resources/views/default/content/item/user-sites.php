@@ -22,7 +22,7 @@
                     <?= __('web.moderation'); ?>
                   </span>
                 <?php endif; ?>
-                <?= Html::facets($item['facet_list'], 'category', 'tag mr15', 'all'); ?>
+                <?= Html::facets($item['facet_list'], 'category', 'tag-violet mr15', 'all'); ?>
 
                 <?php if (Access::author('item', $item) === true) : ?>
                   <a href="<?= url('content.edit', ['type' => 'item', 'id' => $item['item_id']]); ?>">

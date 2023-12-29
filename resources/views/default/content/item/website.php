@@ -31,7 +31,7 @@
               'state'           => is_array($data['item_signed']),
             ]); ?>
             <div class="mt15">
-              <?= Html::facets($item['facet_list'], 'category', 'tag', 'all'); ?>
+              <?= Html::facets($item['facet_list'], 'category', 'tag-violet', 'all'); ?>
             </div>
             <div class="tems-center flex gap mt15">
               <?= Html::votes($item, 'item'); ?>
@@ -52,7 +52,7 @@
                     <?php if ($site['item_id'] != $item['item_id']) : ?>
                       <div class="mb15">
                         <a href="<?= url('website', ['id' => $site['item_id'], 'slug' => $site['item_slug']]); ?>"><?= $site['item_title']; ?></a>
-                        <?= Html::facets($site['facet_list'], 'category', 'tag mr15'); ?>
+                        <?= Html::facets($site['facet_list'], 'category', 'tag-violet mr15'); ?>
                         <?php if (UserData::checkAdmin()) : ?>
                           <a href="<?= url('content.edit', ['type' => 'item', 'id' => $site['item_id']]); ?>">
                             <svg class="icons gray-600">

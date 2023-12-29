@@ -4,7 +4,7 @@
       <?php foreach ($subsections as $site) : ?>
         <div class="mb15<?php if ($site['item_id'] == $item_id) : ?>  bg-white p5-10<?php endif; ?>">
           <a href="<?= url('website', ['id' => $site['item_id'], 'slug' => $site['item_slug']]); ?>"><?= $site['item_title']; ?></a>
-          <?= Html::facets($site['facet_list'], 'category', 'tag mr15'); ?>
+          <?= Html::facets($site['facet_list'], 'category', 'tag-violet mr15'); ?>
           <?php if ($site['item_id'] != $item_id) : ?>
             <a href="<?= url('content.edit', ['type' => 'item', 'id' => $site['item_id']]); ?>">
               <svg class="icons gray-600">

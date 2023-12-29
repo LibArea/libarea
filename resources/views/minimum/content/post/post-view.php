@@ -16,7 +16,7 @@ $post = $data['post'];
           <?php if (!empty($data['facets'])) : ?>
             <div class="lowercase">
               <?php foreach ($data['facets'] as $topic) : ?>
-                <a class="tag" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
+                <a class="tag-yellow" href="<?= url('topic', ['slug' => $topic['facet_slug']]); ?>">
                   <?= $topic['facet_title']; ?>
                 </a>
               <?php endforeach; ?>

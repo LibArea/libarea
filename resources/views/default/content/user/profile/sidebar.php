@@ -69,11 +69,13 @@
   <?php if (!empty($data['participation'][0]['facet_id'])) : ?>
     <div class="box br-lightgray">
       <h4 class="uppercase-box"><?= __('app.understands'); ?></h4>
-      <?php foreach ($data['participation'] as $part) : ?>
-        <a class="gray-600 mr15 text-sm" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
-          <?= $part['facet_title']; ?>
-        </a>
-      <?php endforeach; ?>
+	  <div class="flex flex-wrap gap lowercase">
+        <?php foreach ($data['participation'] as $part) : ?>
+          <a class="gray-600 text-sm" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
+            <?= $part['facet_title']; ?>
+          </a>
+        <?php endforeach; ?>
+	  </div>
     </div>
   <?php endif; ?>
 

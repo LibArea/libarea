@@ -4,7 +4,6 @@
  * Теги (фасеты)
  */
 
-.tag,
 .tag-grey,
 .tag-yellow,
 .tag-violet,
@@ -15,16 +14,6 @@
   padding: 0.08rem 0.35rem 0.15rem 0.35rem;
   text-transform: lowercase;
   text-decoration: none;
-}
-
-.tag {
-  background-color: #ddebf9;
-  color: #4596de;
-}
-
-.tag:hover {
-  background-color: #5fb878;
-  color: #fff;
 }
 
 .tag-grey {

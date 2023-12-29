@@ -7,7 +7,6 @@
   ]
 ); ?>
 <h4><?= __('admin.topics'); ?>:</h4>
-<a href="#" class="tag">.tag</a>
 <a href="#" class="tag-grey">.tag-grey</a>
 <a href="#" class="tag-violet">.tag-violet</a>
 <a href="#" class="tag-yellow">.tag-yellow</a>
