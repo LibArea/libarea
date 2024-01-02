@@ -50,7 +50,7 @@ class Users extends Controller
     {
         $item = Request::get('item');
         if ($option == 'logip') {
-			$user_all	= UserModel::getUserSearchRegIp($item);
+			$user_all	= UserModel::getUserLogsId($item);
 		} else if ($option == 'deviceid') {	
 			$user_all	= UserModel::getUserSearchDeviceID($item);
         } else {

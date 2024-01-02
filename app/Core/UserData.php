@@ -57,7 +57,7 @@ class UserData
     static protected $user = null;
 
 
-    static public function checkAccordance($type, $compare)
+    public static function checkAccordance($type, $compare)
     {
         $check = self::getRegType($type, $compare);
         if (!$check) {
@@ -71,7 +71,7 @@ class UserData
      * Возвращает массив значений, если пользователь зарегистрирован
      * TODO: возможно поменять название...
      */
-    static public function get()
+    public static function get()
     {
         if (self::$user !== null) {
             return self::$user;
@@ -92,7 +92,7 @@ class UserData
         return self::$user;
     }
 
-    static public function getAccount()
+    public static function getAccount()
     {
         if (self::$myAccount !== null) {
             return self::$myAccount;
@@ -135,7 +135,7 @@ class UserData
      * @param string|null $cp
      * @return bool
      */
-    static public function getRegType($type, $cp = '>='): bool
+    public static function getRegType($type, $cp = '>='): bool
     {
         $t = self::getUserTl();
 
@@ -159,7 +159,7 @@ class UserData
      * Проверка на администратора и выше.
      * @return bool
      */
-    static public function checkAdmin(): bool
+    public static function checkAdmin(): bool
     {
         return self::getUserTl() == self::REGISTERED_ADMIN;
     }
@@ -169,7 +169,7 @@ class UserData
      * Проверка на любого незаблокированного пользователя.
      * @return bool
      */
-    static public function checkActiveUser(): bool
+    public static function checkActiveUser(): bool
     {
         return self::getUserTl() >= self::USER_FIRST_LEVEL;
     }
@@ -178,7 +178,7 @@ class UserData
      * Returns the trust level if the user is registere.
      * Возвращает уровень доверия, если пользователь зарегистрирован.
      */
-    static public function getUserTl(): int
+    public static function getUserTl(): int
     {
         $t = self::getAccount();
 
@@ -189,7 +189,7 @@ class UserData
      * Returns the trust level if the user is registere.
      * Возвращает уровень доверия, если пользователь зарегистрирован.
      */
-    static public function getUserId(): int
+    public static function getUserId(): int
     {
         return self::$myAccount['id'] ?? self::USER_ZERO_LEVEL;
     }
@@ -198,7 +198,7 @@ class UserData
      * Returns the member template.
      * Возвращает шаблон участника.
      */
-    static public function getUserTheme()
+    public static function getUserTheme()
     {
         return self::$myAccount['template'] ?? config('general.template');
     }
@@ -207,7 +207,7 @@ class UserData
      * Returns the member template.
      * Возвращает шаблон участника.
      */
-    static public function getLimitingMode()
+    public static function getLimitingMode()
     {
         return self::$myAccount['limiting_mode'];
     }
@@ -216,7 +216,7 @@ class UserData
      * Returns the member's avatar file (default).
      * Возвращает файл аватара участника (по умолчанию дефолтный).
      */
-    static public function getUserAvatar()
+    public static function getUserAvatar()
     {
         return self::$myAccount['avatar'];
     }
@@ -225,7 +225,7 @@ class UserData
      * Returns the login (nickname) of the participant.
      * Возвращает логин (никнейм) участника.
      */
-    static public function getUserLogin()
+    public static function getUserLogin()
     {
         return self::$myAccount['login'];
     }
@@ -234,7 +234,7 @@ class UserData
      * Returns the localization of the participant (otherwise by default)
      * Возвращает локализацию участника (в противном случае по умолчанию).
      */
-    static public function getUserLang()
+    public static function getUserLang()
     {
         return self::$myAccount['lang'] ?? config('general.lang');
     }
@@ -243,23 +243,29 @@ class UserData
      * Returns whether the member has scroll enabled.
      * Возвращает, включен ли скролл у участника.
      */
-    static public function getUserScroll()
+    public static function getUserScroll()
     {
         return self::$myAccount['scroll'] ?? false;
     }
     
-    static public function getUserNSFW()
+    public static function getUserNSFW()
     {
         return self::$myAccount['nsfw'] ?? false;
     }
 	
-    static public function getUserPostDesign()
+    public static function getUserPostDesign()
     {
         return self::$myAccount['post_design'] ?? false;
     }
 	
-    static public function getUserBlog()
+    public static function getUserBlog()
     {
         return MiddlewareModel::getBlog(self::getUserId());
     }
+	
+    public static function getUserSubscription()
+    {
+        return MiddlewareModel::getSubscription(self::getUserId());
+    }
 }
+

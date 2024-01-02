@@ -300,25 +300,13 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
-    public static function userReads()
-    {
-        $sql = "SELECT 
-                    signed_facet_id                  
-                        FROM facets_signed 
-                            WHERE signed_user_id = :user_id";
-
-        return DB::run($sql, ['user_id' => UserData::getUserId()])->fetchAll();
-    }
-
     // Topics to which the participant is not subscribed
     // Темы на которые участник не подписан
-    public static function advice()
+    public static function advice($subscription)
     {
-        $userReads = self::userReads();
-
         $result = [];
-        foreach ($userReads as $ind => $row) {
-            $result[$ind] = $row['signed_facet_id'];
+        foreach ($subscription as $ind => $row) {
+            $result[$ind] = $row['facet_id'];
         }
 
         $result = $result ? $result : ['1' => 1];

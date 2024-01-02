@@ -25,7 +25,7 @@
         </a>
       </li>
       <li>
-        <a class="gray-6005" href="<?= url('admin.logip', ['ip' => $post['post_ip']]); ?>">
+        <a class="gray-6005" href="<?= url('admin.logip', ['item' => $post['post_ip']]); ?>">
           &#183; <?= $post['post_ip']; ?>
         </a>
       </li>

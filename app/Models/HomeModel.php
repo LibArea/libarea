@@ -13,12 +13,12 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 	
     // Posts on the central page
     // Посты на центральной странице
-    public static function feed($page, $type)
+    public static function feed($page, $type, $subscription)
     {
         $user_id = UserData::getUserId();
 
         $result = [];
-        foreach (self::subscription() as $ind => $row) {
+        foreach ($subscription as $ind => $row) {
             $result[$ind] = $row['facet_id'];
         }
 
@@ -96,10 +96,10 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
-    public static function feedCount($type)
+    public static function feedCount($type, $subscription)
     {
         $result = [];
-        foreach (self::subscription() as $ind => $row) {
+        foreach ($subscription as $ind => $row) {
             $result[$ind] = $row['facet_id'];
         }
 
@@ -207,24 +207,5 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT item_id, item_title, item_slug, item_domain FROM items WHERE item_published = 1 AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :limit";
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();
-    }
-
-    // Facets (topic, blogs) all / subscribed
-    // Фасеты (темы, блоги) все / подписан
-    public static function subscription()
-    {
-        $sql = "SELECT 
-                    facet_id, 
-                    facet_slug, 
-                    facet_title,
-                    facet_user_id,
-                    facet_img,
-                    facet_type                   
-                        FROM facets 
-                           LEFT JOIN facets_signed ON signed_facet_id = facet_id 
-                                WHERE signed_user_id = :id AND (facet_type = 'topic' OR facet_type = 'blog')
-                                    ORDER BY facet_id DESC";
-
-        return DB::run($sql, ['id' => UserData::getUserId()])->fetchAll();
     }
 }

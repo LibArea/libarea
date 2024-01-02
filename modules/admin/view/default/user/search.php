@@ -25,8 +25,10 @@
         <?php if ($user['name']) : ?>
           (<?= $user['name']; ?>)
         <?php endif; ?>
-        <sup class="gray-600">TL:<?= $user['trust_level']; ?></sup> 
-		 <sup class="red"><?= $user['device_id']; ?></sup>
+        <sup class="gray-600">TL:<?= $user['trust_level']; ?></sup>
+        <?php if (!empty($user['device_id'])) : ?>		
+		  <sup class="red"><?= $user['device_id']; ?></sup>
+		<?php endif; ?> 
         <div class="gray-600">
         <?= $user['email']; ?> | 
         <?= $user['created_at']; ?> | 
