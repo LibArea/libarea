@@ -41,8 +41,10 @@ class HomeController extends Controller
     public function scroll()
     {
         $type	= Request::get('type') == 'all' ? 'all' : 'main.feed';
+		
+		$subscription = UserData::getUserSubscription();
 
-        $posts	= HomeModel::feed($this->pageNumber, $type);
+        $posts	= HomeModel::feed($this->pageNumber, $type, $subscription);
 
         $this->insert(
             '/content/post/type-post',
