@@ -85,12 +85,12 @@ class MessagesController extends Controller
                 if ($dialog['dialog_sender_id'] == $this->user['id'] and $val['message_sender_remove']) {
                     unset($list[$key]);
                 } else if ($dialog['dialog_sender_id'] != $this->user['id'] and $val['message_recipient_remove']) {
-                    unset($list[$key]); 
+                    unset($list[$key]);
                 } else {
                     $list[$key]['message_content']  =  markdown($val['message_content'], 'text');
                     $list[$key]['login']   = $recipient_user['login'];
                     $list[$key]['avatar']  = $recipient_user['avatar'];
-                   // $list[$key]['unread']  = $dialog['dialog_sender_unread'];
+                    // $list[$key]['unread']  = $dialog['dialog_sender_unread'];
                 }
             }
         }
@@ -174,26 +174,26 @@ class MessagesController extends Controller
 
         return true;
     }
-	
+
     // Let's show the editing form
     // Покажем форму редактирования
     public function addForma()
     {
-		$id = Request::getPostInt('id');
-		$message = MessagesModel::getMessage($id);
+        $id = Request::getPostInt('id');
+        $message = MessagesModel::getMessage($id);
 
         insert(
             '/_block/form/form-for-editing',
             [
                 'data'  => [
-                    'id'		=> $id,
-					'content'	=> $message['message_content'],
-					'type' 		=> 'message',
+                    'id'        => $id,
+                    'content'    => $message['message_content'],
+                    'type'         => 'message',
                 ]
             ]
         );
     }
-	
+
     public function change()
     {
         $id  = Request::getPostInt('id');
@@ -201,12 +201,12 @@ class MessagesController extends Controller
 
         // Access check
         $message = MessagesModel::getMessage($id);
-		notEmptyOrView404($message);
-		
-		if ($message['message_sender_id'] != $this->user['id']) {
-		   is_return(__('msg.went_wrong'), 'error', url('dialogues', ['id' => $message['message_dialog_id']]));
-		}
-		
+        notEmptyOrView404($message);
+
+        if ($message['message_sender_id'] != $this->user['id']) {
+            is_return(__('msg.went_wrong'), 'error', url('dialogues', ['id' => $message['message_dialog_id']]));
+        }
+
         Validator::Length($content, 6, 5000, 'content', url('dialogues', ['id' => $message['message_dialog_id']]));
 
         MessagesModel::edit($id, $content);

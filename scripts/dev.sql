@@ -1641,3 +1641,10 @@ ALTER TABLE `users_agent_logs` ADD `device_id` VARCHAR(50) NULL AFTER `user_ip`;
 
 ALTER TABLE `messages` CHANGE `message_add_time` `message_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP; 
 ALTER TABLE `messages` ADD `message_modified` TIMESTAMP NULL DEFAULT NULL AFTER `message_date`; 
+
+CREATE TABLE `users_preferences` (
+  `user_id` int(11) NOT NULL,
+  `facet_id` int(11) default NULL,
+  `type` int(6) default NULL,
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

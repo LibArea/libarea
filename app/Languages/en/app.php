@@ -413,6 +413,12 @@ return [
     'ignored_users'         => 'Ignored users',
     'ignored_users_help'    => 'Users whose posts you will not see in the feed.',
     'ignored_no'            => 'You don\'t have users that you ignore.',
+	
+	'preferences_help' 		=> 'Spaces (topics, blogs) that you prefer. <p>They will also be shown on the main page of the site.</p>',
+	'signed_facets' 		=> 'Topics, blogs you follow',
+	'signed_facets_help'	=> 'You can select any number, but only the first {num} will be shown',
+	'add_menu_signed' 		=> 'Add preferences',
+	'show_sites_block' 		=> 'Show the Sites block?',
 
     'not_confirmed'         => 'not confirmed.',
     'resend_email'          => 'Check your email inbox or resend a new email.',

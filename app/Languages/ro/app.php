@@ -412,6 +412,12 @@ return [
     'ignored_users_help'    => 'Utilizatori ale căror postări nu le vei vedea în feed.',
     'ignored_no'            => 'Nu aveți utilizatori pe care să-i ignorați.',
 
+	'preferences_help' 		=> 'Spații (subiecte, bloguri) pe care le preferați. <p>Vor fi afișate și pe pagina principală a site-ului.</p>',
+	'signed_facets' 		=> 'Subiecte, bloguri pe care le urmăriți',
+	'signed_facets_help'	=> 'Puteți selecta orice număr, dar numai primul {num} va fi afișat',
+	'add_menu_signed' 		=> 'Adăugați preferințe',
+	'show_sites_block' 		=> 'Arată site-urile bloc?'
+
     'not_confirmed'         => 'neconfirmat.',
     'resend_email'          => 'Verificați-vă căsuța de e-mail sau retrimiteți un e-mail nou.',
 

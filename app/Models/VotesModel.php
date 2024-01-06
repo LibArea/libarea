@@ -71,7 +71,7 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
     // Записываем голосование в таблицу конктена
     public static function saveContent(int $content_id, string $type, string $action = '+ 1')
     {
-        $sql = "UPDATE " . $type . "s SET " . $type . "_votes = (" . $type . "_votes " . $action .") WHERE " . $type . "_id = :content_id";
+        $sql = "UPDATE " . $type . "s SET " . $type . "_votes = (" . $type . "_votes " . $action . ") WHERE " . $type . "_id = :content_id";
 
         return DB::run($sql, ['content_id' => $content_id]);
     }

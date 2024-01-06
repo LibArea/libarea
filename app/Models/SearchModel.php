@@ -152,7 +152,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
-    
+
     // Find content for forms
     // Поиск контента для форм
     public static function getSelect($search, $type)
@@ -172,20 +172,19 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         } elseif ($type == 'poll') {
             $field_name = 'poll_title';
             $sql = "SELECT poll_id, poll_title FROM polls WHERE poll_title LIKE :poll_title AND poll_is_deleted = 0 AND poll_user_id = " . UserData::getUserId();
-            
+
             if (UserData::checkAdmin()) {
                 $sql = "SELECT poll_id, poll_title FROM polls WHERE poll_title LIKE :poll_title AND poll_is_deleted = 0";
             }
-            
         } else {
             $condition = '';
             if (!UserData::checkAdmin()) {
                 if ($type == 'blog') {
-                    
+
                     $blog = FacetModel::getFacetsUser('blog');
                     $teams = FacetModel::getTeamFacets('blog');
 
-                    $resultUsers = [];                    
+                    $resultUsers = [];
                     foreach (array_merge($teams, $blog) as $ind => $row) {
                         $resultUsers[$ind] = $row['facet_id'];
                     }
@@ -212,5 +211,5 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         }
 
         return json_encode($response);
-    }    
+    }
 }

@@ -412,6 +412,12 @@ return [
     'ignored_users_help'    => 'Những người dùng có bài đăng mà bạn sẽ không nhìn thấy trong nguồn cấp dữ liệu của mình.',
     'ignored_no'            => 'Bạn không có người dùng mà bạn đang bỏ qua.',
 
+	'preferences_help' 		=> 'Không gian (chủ đề, blog) mà bạn thích. <p>Chúng cũng sẽ được hiển thị trên trang chính của trang web.</p>',
+	'signed_facets' 		=> 'Chủ đề, blog bạn theo dõi',
+	'signed_facets_help'	=> 'Bạn có thể chọn bất kỳ số nào, nhưng chỉ có {num} đầu tiên được hiển thị',
+	'add_menu_signed' 		=> 'Thêm tùy chọn',
+	'show_sites_block' 		=> 'Hiển thị khối Trang web?'
+
     'not_confirmed'         => 'không được xác nhận.',
     'resend_email'          => 'Kiểm tra email của bạn hoặc gửi lại email mới.',
 

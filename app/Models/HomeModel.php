@@ -9,16 +9,16 @@ use DB;
 
 class HomeModel extends \Hleb\Scheme\App\Models\MainModel
 {
-	public static $limit = 15;
-	
+    public static $limit = 15;
+
     // Posts on the central page
     // Посты на центральной странице
-    public static function feed($page, $type, $subscription)
+    public static function feed($page, $type)
     {
         $user_id = UserData::getUserId();
 
         $result = [];
-        foreach ($subscription as $ind => $row) {
+        foreach (self::userReads() as $ind => $row) {
             $result[$ind] = $row['facet_id'];
         }
 
@@ -35,7 +35,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         if ($type != 'all') {
             if ($user_id) {
                 $subscription = "AND relation_facet_id IN(0)";
-                if ($result) $subscription = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")"; 
+                if ($result) $subscription = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")";
             }
         }
 
@@ -92,14 +92,14 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN votes_post 
                                 ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
                                     WHERE post_type != 'page' AND post_draft = 0 AND $ignoring AND $nsfw $subscription $display $sort LIMIT :start, :limit";
-				
+
         return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
-    public static function feedCount($type, $subscription)
+    public static function feedCount($type)
     {
         $result = [];
-        foreach ($subscription as $ind => $row) {
+        foreach (self::userReads() as $ind => $row) {
             $result[$ind] = $row['facet_id'];
         }
 
@@ -163,7 +163,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                 $display =  "AND post_is_deleted = 0 AND post_votes >= $countLike AND post_tl <= " . $trust_level;
                 if (UserData::checkActiveUser()) {
                     $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
-                }    
+                }
         }
 
         return $display;
@@ -207,5 +207,31 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT item_id, item_title, item_slug, item_domain FROM items WHERE item_published = 1 AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :limit";
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();
+    }
+
+    public static function userReads()
+    {
+        $sql = "SELECT signed_facet_id as facet_id FROM facets_signed WHERE signed_user_id = :user_id";
+
+        return DB::run($sql, ['user_id' => UserData::getUserId()])->fetchAll();
+    }
+
+    // Facets (topic, blogs) all / subscribed
+    // Фасеты (темы, блоги) все / подписан
+    public static function getSubscription()
+    {
+        $sql = "SELECT 
+                    facet_id, 
+                    facet_slug, 
+                    facet_title,
+                    facet_user_id,
+                    facet_img,
+                    facet_type                   
+                        FROM facets 
+                           LEFT JOIN facets_signed ON signed_facet_id = facet_id 
+                                WHERE signed_user_id = :id AND (facet_type = 'topic' OR facet_type = 'blog')
+                                    ORDER BY facet_id DESC";
+
+        return DB::run($sql, ['id' => UserData::getUserId()])->fetchAll();
     }
 }

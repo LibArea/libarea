@@ -23,7 +23,7 @@ class ActionController extends Controller
         // Access check 
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($content_id, $type);
-		
+
         if (Access::author($type, $info_type) == false) {
             redirect('/');
         }

@@ -4,14 +4,14 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Services\Meta\Home;
+use App\Models\User\PreferencesModel;
 use App\Models\HomeModel;
-use UserData;
 
 class HomeController extends Controller
 {
     public function index($sheet)
     {
-        $subscription = UserData::getUserSubscription();
+        $subscription = HomeModel::getSubscription($this->user['id']);
 
         // Topics signed by the participant. If a guest, then default.    
         // Темы на которые подписан участник. Если гость, то дефолтные.
@@ -22,14 +22,14 @@ class HomeController extends Controller
             [
                 'meta'  => Home::metadata($sheet),
                 'data'  => [
-                    'pagesCount'        => HomeModel::feedCount($sheet, $subscription),
+                    'pagesCount'        => HomeModel::feedCount($sheet),
                     'pNum'              => $this->pageNumber,
                     'sheet'             => $sheet,
                     'topics'            => $topics,
                     'type'              => 'main',
-                    'latest_comments'	=> HomeModel::latestComments(),
-                    'topics_user'       => $subscription,
-                    'posts'             => HomeModel::feed($this->pageNumber, $sheet, $subscription),
+                    'latest_comments'    => HomeModel::latestComments(),
+                    'facets'               => PreferencesModel::getMenu(),
+                    'posts'             => HomeModel::feed($this->pageNumber, $sheet),
                     'items'             => HomeModel::latestItems(),
                 ],
             ],
@@ -40,11 +40,7 @@ class HomeController extends Controller
     // Бесконечный скролл
     public function scroll()
     {
-        $type	= Request::get('type') == 'all' ? 'all' : 'main.feed';
-		
-		$subscription = UserData::getUserSubscription();
-
-        $posts	= HomeModel::feed($this->pageNumber, $type, $subscription);
+        $type    = Request::get('type') == 'all' ? 'all' : 'main.feed';
 
         $this->insert(
             '/content/post/type-post',
@@ -52,7 +48,7 @@ class HomeController extends Controller
                 'data'  => [
                     'pages' => $this->pageNumber,
                     'sheet' => 'main.feed',
-                    'posts' => $posts, // $posts = empty($posts) ? 'null' : $posts;
+                    'posts' => HomeModel::feed($this->pageNumber, $type),
 
                 ]
             ]

@@ -9,20 +9,20 @@ use DB;
 
 class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 {
-	public static $limit = 15;
-	
+    public static $limit = 15;
+
     // Add an comment
     // Добавим ответ
     public static function add($post_id, $parent_id, $content, $trigger, $mobile)
     {
         $params = [
             'comment_post_id'    => $post_id,
-			'comment_parent_id'  => $parent_id,
+            'comment_parent_id'  => $parent_id,
             'comment_content'    => $content,
             'comment_published'  => ($trigger === false) ? 0 : 1,
             'comment_ip'         => Request::getRemoteAddress(),
             'comment_user_id'    => UserData::getUserId(),
-			'comment_is_mobile'  => ($mobile === false) ? 0 : 1,
+            'comment_is_mobile'  => ($mobile === false) ? 0 : 1,
         ];
 
         $sql = "INSERT INTO comments(comment_post_id, 
@@ -120,7 +120,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     public static function sorts($sheet)
     {
         $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
-        
+
         switch ($sheet) {
             case 'all':
                 $sort     = "WHERE comment_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0 $hidden";
@@ -150,7 +150,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 
         $content = "\n\n `+` " . $content;
 
-        return DB::run($sql, ['post_id' => $post_id, 'content' => $content]); 
+        return DB::run($sql, ['post_id' => $post_id, 'content' => $content]);
     }
 
     // Add the answer to the end of the last comment (if there is a repeat comment)
@@ -161,17 +161,17 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 
         $content = "\n\n `+` " . $content;
 
-        return DB::run($sql, ['comment_id' => $comment_id, 'content' => $content]); 
+        return DB::run($sql, ['comment_id' => $comment_id, 'content' => $content]);
     }
 
-	// Is the last response to a specific comment a participant's comment
-	// Является ли последний ответ на конкретный комментарий комментарием участника
-	public static function isResponseUser($comment_id)
-	{
+    // Is the last response to a specific comment a participant's comment
+    // Является ли последний ответ на конкретный комментарий комментарием участника
+    public static function isResponseUser($comment_id)
+    {
         $sql = "SELECT comment_id FROM comments WHERE comment_parent_id = :id AND comment_user_id = :user_id";
 
         return DB::run($sql, ['id' => $comment_id, 'user_id' => UserData::getUserId()])->fetch();
-	}
+    }
 
     // Getting comments in a post
     // Получаем ответы в посте

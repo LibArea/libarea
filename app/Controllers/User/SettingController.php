@@ -4,7 +4,7 @@ namespace App\Controllers\User;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Controllers\Controller;
-use App\Models\User\{SettingModel, UserModel};
+use App\Models\User\{SettingModel, UserModel, PreferencesModel};
 use App\Models\{IgnoredModel, AuthModel, ActionModel};
 use UploadImage, Session, Meta, UserData, Img, Html, SendEmail;
 
@@ -32,6 +32,9 @@ class SettingController extends Controller
             case 'ignored':
                 return $this->ignored();
                 break;
+            case 'preferences':
+                return $this->preferences();
+                break;
             case 'deletion':
                 return $this->deletion();
                 break;
@@ -49,6 +52,9 @@ class SettingController extends Controller
                 break;
             case 'security':
                 return $this->securityEdit();
+                break;
+            case 'preferences':
+                return $this->preferencesEdit();
                 break;
             case 'notification':
                 return $this->notificationEdit();
@@ -104,7 +110,7 @@ class SettingController extends Controller
                 'limiting_mode'        => $user['limiting_mode'],
                 'scroll'               => Request::getPost('scroll') == 'on' ? 1 : 0,
                 'nsfw'                 => Request::getPost('nsfw') == 'on' ? 1 : 0,
-				'post_design'		   => Request::getPost('post_design') == 'on' ? 1 : 0,
+                'post_design'           => Request::getPost('post_design') == 'on' ? 1 : 0,
                 'trust_level'          => $user['trust_level'],
                 'updated_at'           => date('Y-m-d H:i:s'),
                 'color'                => Request::getPostString('color', '#339900'),
@@ -292,5 +298,35 @@ class SettingController extends Controller
         );
 
         Session::logout();
+    }
+
+    function preferences()
+    {
+        return $this->render(
+            '/user/setting/preferences',
+            [
+                'meta'  => Meta::get(__('app.preferences')),
+                'data'  => [
+                    'facets'         => PreferencesModel::get($this->pageNumber),
+                    'pagesCount'    => PreferencesModel::getCount(),
+                    'blocks'        => PreferencesModel::getBlocks(),
+                    'pNum'             => $this->pageNumber,
+                    'facet_arr'     => []
+                ]
+            ]
+        );
+    }
+
+    function preferencesEdit()
+    {
+        if (!is_array($data = Request::getPost('id'))) {
+
+            PreferencesModel::removal();
+            is_return(__('msg.change_saved'), 'success', '/setting/preferences');
+        }
+
+        PreferencesModel::edit($data);
+
+        is_return(__('msg.change_saved'), 'success', '/setting/preferences');
     }
 }

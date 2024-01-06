@@ -25,7 +25,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "UPDATE " . $type . "s SET " . $type . "_is_deleted = $value WHERE " . $type . "_id = :type_id";
 
         DB::run($sql, ['type_id' => $type_id]);
-        
+
         self::recalculate($type, $type_id, $status);
     }
 
@@ -36,12 +36,12 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
         if (!in_array($type, ['comment', 'answer'])) {
             return false;
         }
-        
+
         $post  = DB::run("SELECT  " . $type . "_post_id  FROM " . $type . "s WHERE " . $type . "_id = :type_id", ['type_id' => $type_id])->fetch();
-        
+
         $action = $status == 1 ? "+1" : "-1";
 
-        $sql = "UPDATE posts SET post_" . $type . "s_count = (post_" . $type . "s_count " . $action .") WHERE post_id = :type_id";
+        $sql = "UPDATE posts SET post_" . $type . "s_count = (post_" . $type . "s_count " . $action . ") WHERE post_id = :type_id";
 
         DB::run($sql, ['type_id' => $post[$type . '_post_id']]);
     }

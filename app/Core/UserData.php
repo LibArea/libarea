@@ -186,8 +186,8 @@ class UserData
     }
 
     /**
-     * Returns the trust level if the user is registere.
-     * Возвращает уровень доверия, если пользователь зарегистрирован.
+     * Returns the participant id if the user is registered.
+     * Возвращает id участника, если пользователь зарегистрирован.
      */
     public static function getUserId(): int
     {
@@ -261,11 +261,6 @@ class UserData
     public static function getUserBlog()
     {
         return MiddlewareModel::getBlog(self::getUserId());
-    }
-	
-    public static function getUserSubscription()
-    {
-        return MiddlewareModel::getSubscription(self::getUserId());
     }
 }
 

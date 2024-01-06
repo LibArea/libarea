@@ -73,14 +73,14 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                                 $string $display $sort LIMIT :start, :limit";
 
         if (in_array($sheet, ['profile.posts', 'web.feed'])) {
-             return DB::run($sql, ['qa' => $slug, 'start' => $start, 'limit' => $limit])->fetchAll();
+            return DB::run($sql, ['qa' => $slug, 'start' => $start, 'limit' => $limit])->fetchAll();
         }
 
         if ($sheet == 'facet.feed.topic') {
             return DB::run($sql, ['qa' => "%" . $slug . "@%", 'topic' => "%" . $topic . "@%", 'start' => $start, 'limit' => $limit])->fetchAll();
         }
-		
-		return DB::run($sql, ['qa' => "%" . $slug . "@%", 'start' => $start, 'limit' => $limit])->fetchAll();
+
+        return DB::run($sql, ['qa' => "%" . $slug . "@%", 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function feedCount($sheet, $slug, $topic = '')
@@ -107,7 +107,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
                             $string $display";
 
         if (in_array($sheet, ['profile.posts', 'web.feed'])) {
-             return DB::run($sql, ['qa' => $slug])->rowCount() ;
+            return DB::run($sql, ['qa' => $slug])->rowCount();
         }
 
         if ($sheet == 'facet.feed.topic') {
@@ -120,7 +120,7 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
     public static function display($sheet)
     {
         $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
-        
+
         switch ($sheet) {
             case 'facet.feed':
                 $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = 'post' $hidden";

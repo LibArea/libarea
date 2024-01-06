@@ -413,6 +413,12 @@ return [
     'ignored_users_help'    => '您不会在提要中看到其帖子的用户。',
     'ignored_no'            => '您没有忽略的用户。',
 
+	'preferences_help' 		=> '您喜欢的空间（主题、博客）。 <p>它们还将显示在网站的主页上。</p>',
+	'signed_facets' 		=> '您关注的主题、博客',
+	'signed_facets_help'	=> '您可以选择任意数字，但只会显示第一个 {num}',
+	'add_menu_signed' 		=> '添加偏好设置',
+	'show_sites_block' 		=> '显示网站块？'
+
     'not_confirmed'         => '还没有确定',
     'resend_email'          => '检查您的电子邮件收件箱或重新发送新电子邮件',
 

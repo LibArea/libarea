@@ -28,7 +28,7 @@ class RssController extends Controller
         $topic      = RssModel::getTopicSlug($topic_slug);
         notEmptyOrView404($topic);
 
-		$posts  = RssModel::getPostsFeed($topic_slug);
+        $posts  = RssModel::getPostsFeed($topic_slug);
 
         includeCachedTemplate(
             'default/content/rss/turbo-feed',
@@ -47,8 +47,8 @@ class RssController extends Controller
         $topic_slug = Request::get('slug');
         $topic      = RssModel::getTopicSlug($topic_slug);
         notEmptyOrView404($topic);
-		
-		$posts  = RssModel::getPostsFeed($topic_slug);
+
+        $posts  = RssModel::getPostsFeed($topic_slug);
 
         includeCachedTemplate(
             'default/content/rss/rss-feed',
@@ -61,11 +61,11 @@ class RssController extends Controller
         );
     }
 
-   // Route::get('/rss/posts')->controller...
+    // Route::get('/rss/posts')->controller...
     public static function postsAll()
     {
-		$posts  = RssModel::getPosts();
- 
+        $posts  = RssModel::getPosts();
+
         includeCachedTemplate(
             'default/content/rss/posts',
             [

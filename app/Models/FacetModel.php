@@ -9,7 +9,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 {
     const NO_REMOVAL = 0;
     const DELETED = 1;
-    
+
     // All facets
     // Все фасеты
     public static function getFacetsAll($page, $limit, $sort, $type)
@@ -617,7 +617,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql)->fetchAll();
     }
-    
+
     public static function breadcrumb($facet_id)
     {
         $sql = "with recursive
