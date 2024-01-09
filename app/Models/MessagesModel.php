@@ -30,7 +30,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Check if the dialog exists or not
     public static function availability(int $user_id)
-    {   
+    {
         $id = UserData::getUserId();
         $sql = "SELECT dialog_id FROM messages_dialog 
                     WHERE (dialog_sender_id = $id AND dialog_recipient_id = $user_id) 
@@ -61,8 +61,8 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     // Recalculation viewed or not
     public static function setMessageRead($dialog_id, $receipt = true)
     {
-        $user_id = UserData::getUserId(); 
-        
+        $user_id = UserData::getUserId();
+
         if (!$messages_dialog = self::getDialogById($dialog_id)) {
             return false;
         }
@@ -148,7 +148,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     public static function sendMessage($dialog_recipient_id, $message_content)
     {
         $dialog_sender_id = UserData::getUserId();
-        
+
         if (!$dialog_sender_id or !$dialog_recipient_id or !$message_content) {
             return false;
         }
@@ -258,7 +258,6 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 
             $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :recipient WHERE dialog_id = :dialog_id";
             return  DB::run($sql, ['recipient' => 0, 'dialog_id' => $dialog_id]);
-            
         } else {
 
             $sql = "UPDATE messages_dialog SET dialog_sender_unread = :sender WHERE dialog_id = :dialog_id";
@@ -287,9 +286,9 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql)->fetch();
     }
-	
-	public static function edit($id, $content)
-	{
+
+    public static function edit($id, $content)
+    {
         DB::run("UPDATE messages SET message_content = :content, message_modified = :modified WHERE message_id = :id", ['content' => $content, 'modified' => date("Y-m-d H:i:s"), 'id' => $id]);
-	}
+    }
 }

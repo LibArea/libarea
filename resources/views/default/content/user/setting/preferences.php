@@ -1,3 +1,4 @@
+<?php $block = $data['blocks'][0] ?? false; ?>
 <main>
   <div class="indent-body">
     <?= insert('/content/user/setting/nav'); ?>
@@ -7,7 +8,7 @@
         <?php csrf_field(); ?>
 
         <div class="mb15">
-          <input name="id[]" value="-1" type="checkbox" <?php if ($data['blocks'][0]['facet_id'] == -1) : ?> checked<?php endif; ?>> <?= __('app.show_sites_block'); ?>
+          <input name="id[]" value="-1" type="checkbox" <?php if ($block) : ?><?php if ($block['facet_id'] == -1) : ?> checked<?php endif; ?><?php endif; ?>> <?= __('app.show_sites_block'); ?>
         </div>
 
         <h2 class="title"><?= __('app.signed_facets'); ?></h2>

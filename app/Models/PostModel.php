@@ -6,7 +6,7 @@ use UserData;
 use DB;
 
 class PostModel extends \Hleb\Scheme\App\Models\MainModel
-{   
+{
     public static function create($params)
     {
         $sql = "INSERT INTO posts(post_title, 
@@ -370,7 +370,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
     public static function getPostsListUser($type)
     {
         $user_id = UserData::getUserId();
-        
+
         $result = [];
         if ($type == 'subscribed') {
             foreach (self::getFocusPostUser() as $ind => $row) {

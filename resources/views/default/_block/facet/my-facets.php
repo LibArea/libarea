@@ -9,20 +9,13 @@
 		<?php endif; ?>
 	</h4>
 
-	<?php if (!$topics_user) : ?>
-		<a class="text-sm" href="<?= url('setting', ['type' => 'preferences']); ?>">
-			<svg class="icons">
-				<use xlink:href="/assets/svg/icons.svg#edit"></use>
-			</svg>
-			<?= __('app.add'); ?></a>
-		<span class="text-sm lowercase gray-600 "><?= __('app.preferences'); ?>...</span>
-	<?php endif; ?>
-
 	<ul>
-		<?php
+		<?php $i = 0;
 		foreach ($topics_user as $topic) :
 
 			if ($topic['type'] == 2) continue;
+
+			$i++;
 
 			$url = url('topic', ['slug' => $topic['facet_slug']]);
 			$blog = '';
@@ -54,5 +47,11 @@
 				<?php endif; ?>
 			</li>
 		<?php endforeach; ?>
+
+		<?php if ($i < 1) : ?>
+			<a class="red text-sm" href="<?= url('setting', ['type' => 'preferences']); ?>">
+				+ <?= __('app.add'); ?></a>
+			<span class="text-sm lowercase gray-600 "><?= __('app.preferences'); ?>...</span>
+		<?php endif; ?>
 	</ul>
 </div>

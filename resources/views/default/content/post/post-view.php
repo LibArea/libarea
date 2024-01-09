@@ -38,9 +38,9 @@ $blog = $data['blog'][0] ?? null;
           <?= Html::langDate($post['post_date']); ?>
         </span>
         <?php if ($post['modified']) : ?>
-		  <span class="mb-none">
+          <span class="mb-none">
             (<?= __('app.ed'); ?>)
-		  </span>
+          </span>
         <?php endif; ?>
 
         <?php if (UserData::checkActiveUser()) : ?>

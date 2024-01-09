@@ -12,12 +12,12 @@ class IgnoredModel extends \Hleb\Scheme\App\Models\MainModel
         if ($ignored_id == 0) {
             return false;
         }
-        
+
         // We can't ignored ourselves
         if ($ignored_id == UserData::getUserId()) {
             return false;
         }
-        
+
         $result = self::getUserIgnored($ignored_id);
 
         if (is_array($result)) {
@@ -42,7 +42,7 @@ class IgnoredModel extends \Hleb\Scheme\App\Models\MainModel
 
         return  DB::run($sql, ['ignored_id' => $ignored_id, 'user_id' => UserData::getUserId()])->fetch();
     }
-    
+
     public static function getIgnoredUsers(int $limit)
     {
         $sql = "SELECT i.ignored_id,

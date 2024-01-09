@@ -68,19 +68,21 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?php endif; ?>
   <?php endif; ?>
 
-  <?php if ($data['facets'][0]['type'] == 2) : ?>
-    <div class="box br-lightgray">
-      <h4 class="uppercase-box"><?= __('app.websites'); ?></h4>
-      <ul>
-        <?php foreach ($data['items'] as $item) : ?>
-          <li class="mt15">
-            <a href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
-              <?= $item['item_title']; ?> <span class="green"><?= $item['item_domain']; ?></span>
-            </a>
-          </li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
+  <?php if ($block = $data['facets'][0] ?? false) : ?>
+    <?php if ($block['type'] == 2) : ?>
+      <div class="box br-lightgray">
+        <h4 class="uppercase-box"><?= __('app.websites'); ?></h4>
+        <ul>
+          <?php foreach ($data['items'] as $item) : ?>
+            <li class="mt15">
+              <a href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
+                <?= $item['item_title']; ?> <span class="green"><?= $item['item_domain']; ?></span>
+              </a>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
   <?php endif; ?>
 
   <div class="sticky top-sm">

@@ -310,7 +310,7 @@ class SettingController extends Controller
                     'facets'         => PreferencesModel::get($this->pageNumber),
                     'pagesCount'    => PreferencesModel::getCount(),
                     'blocks'        => PreferencesModel::getBlocks(),
-                    'pNum'             => $this->pageNumber,
+                    'pNum'			=> $this->pageNumber,
                     'facet_arr'     => []
                 ]
             ]

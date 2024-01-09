@@ -97,7 +97,7 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
 
         DB::run($sql, ['question_id' => $question_id, 'title' => $title]);
     }
-    
+
     public static function editClosed($question_id, $is_closed)
     {
         $sql = "UPDATE polls SET poll_is_closed = :is_closed WHERE poll_id = :question_id";
@@ -111,7 +111,7 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
 
         DB::run($sql, ['id' => $key, 'title' => $title, 'question_id' => $question_id]);
     }
-    
+
     public static function accordance($answer_id)
     {
         $sql = "SELECT poll_user_id 
@@ -121,13 +121,13 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
 
         return DB::run($sql, ['answer_id' => $answer_id, 'user_id' => UserData::getUserId()])->fetch();
     }
-    
+
     public static function delVariant($answer_id)
     {
         if (!self::accordance($answer_id)) {
             return true;
         }
-        
+
         return DB::run("DELETE FROM polls_answers WHERE answer_id = :answer_id", ['answer_id' => $answer_id]);
     }
 }
