@@ -116,6 +116,7 @@ class PostModel extends \Hleb\Scheme\App\Models\MainModel
                     u.id,
                     u.login,
                     u.avatar,
+					u.created_at,
                     up_count,
                     my_post,
                     votes_post_item_id,

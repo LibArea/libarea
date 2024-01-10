@@ -33,7 +33,7 @@ class Audit extends Base
  
         if (!in_array($content_type, ['post', 'comment'])) return false;
 
-        $this->create($content_type, $content_id, $post, 'report');
+        $this->create($content_type, $content_id, '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comment_' .  $content_id, 'report');
 
         return true;
     }
@@ -42,7 +42,6 @@ class Audit extends Base
     // Проверим стоп слова, url
     public function prohibitedContent(string $content)
     {
-
         if (!self::stopUrl($content, (int)$this->user['id'])) {
             return false;
         }
@@ -124,7 +123,7 @@ class Audit extends Base
         return false;
     }
 
-    public function create(string $type, int $last_content_id, array $post, string $type_notification = 'audit')
+    public function create(string $type, int $last_content_id, string $url, string $type_notification = 'audit')
     {
         $action_type = ($type_notification == 'audit') ? NotificationModel::TYPE_AUDIT : NotificationModel::TYPE_REPORT;
 
@@ -136,8 +135,6 @@ class Audit extends Base
                 'content_id'        => $last_content_id,
             ]
         );
-
-		$url = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#' . 'comment_' . $last_content_id;
 
         // Send notification type 21 (audit) to administrator (id 1) 
         // Отправим тип уведомления 21 (аудит) администратору (id 1)

@@ -137,7 +137,7 @@ class AddPostController extends Controller
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            (new \App\Services\Audit())->create('post', $last_id, url('admin.audits'));
+            (new \App\Services\Audit())->create('post', $last_id, post_slug($last_id, $slug));
         }
 
         $url_content = post_slug($last_id, $slug);

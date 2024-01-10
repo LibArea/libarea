@@ -68,7 +68,10 @@ class AddCommentController extends Controller
         // Add an audit entry and an alert to the admin
         // Аудит и оповещение персоналу
         if ($trigger === false) {
-            (new \App\Services\Audit())->create('comment', $last_id, $post, url('admin.audits'));
+			
+			$url = $url_post . '#' . 'comment_' . $last_id;
+			
+            (new \App\Services\Audit())->create('comment', $last_id, $url);
         }
 
         $url = $url_post . '#comment_' . $last_id;
