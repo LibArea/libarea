@@ -345,6 +345,7 @@ a:hover>img {
 .comment_body img.medium-zoom-image {
   max-width: 330px;
   border: 1px solid #666;
+  display: block;
 }
 
 .anchor-top:target~.comment {

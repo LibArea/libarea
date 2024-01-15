@@ -417,7 +417,7 @@ return [
 	'signed_facets' 		=> '您关注的主题、博客',
 	'signed_facets_help'	=> '您可以选择任意数字，但只会显示第一个 {num}',
 	'add_menu_signed' 		=> '添加偏好设置',
-	'show_sites_block' 		=> '显示网站块？'
+	'show_sites_block' 		=> '显示网站块？',
 
     'not_confirmed'         => '还没有确定',
     'resend_email'          => '检查您的电子邮件收件箱或重新发送新电子邮件',

@@ -416,7 +416,7 @@ return [
 	'signed_facets' 		=> 'Subiecte, bloguri pe care le urmăriți',
 	'signed_facets_help'	=> 'Puteți selecta orice număr, dar numai primul {num} va fi afișat',
 	'add_menu_signed' 		=> 'Adăugați preferințe',
-	'show_sites_block' 		=> 'Arată site-urile bloc?'
+	'show_sites_block' 		=> 'Arată site-urile bloc?',
 
     'not_confirmed'         => 'neconfirmat.',
     'resend_email'          => 'Verificați-vă căsuța de e-mail sau retrimiteți un e-mail nou.',

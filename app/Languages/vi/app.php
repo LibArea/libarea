@@ -416,7 +416,7 @@ return [
 	'signed_facets' 		=> 'Chủ đề, blog bạn theo dõi',
 	'signed_facets_help'	=> 'Bạn có thể chọn bất kỳ số nào, nhưng chỉ có {num} đầu tiên được hiển thị',
 	'add_menu_signed' 		=> 'Thêm tùy chọn',
-	'show_sites_block' 		=> 'Hiển thị khối Trang web?'
+	'show_sites_block' 		=> 'Hiển thị khối Trang web?',
 
     'not_confirmed'         => 'không được xác nhận.',
     'resend_email'          => 'Kiểm tra email của bạn hoặc gửi lại email mới.',
