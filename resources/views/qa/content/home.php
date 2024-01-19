@@ -29,19 +29,22 @@
     </div>
   <?php endif; ?>
 
-  <?= insert('/_block/facet/my-facets', ['topics_user' => $data['topics_user']]); ?>
-
   <?php if (is_array($data['topics'])) : ?>
     <?php if (count($data['topics']) > 0) : ?>
-      <div class="box bg-lightgray">
+      <div class="box br-lightgray">
         <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
         <ul>
-          <?php foreach ($data['topics'] as $key => $recomm) : ?>
-            <li class="mb20">
-              <a href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
-                <?= Img::image($recomm['facet_img'], $recomm['facet_title'], 'img-base mr5', 'logo', 'max'); ?>
+          <?php foreach ($data['topics'] as $recomm) : ?>
+            <li class="flex justify-between items-center mb10">
+              <a class="flex items-center gap-min" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
+                <?= Img::image($recomm['facet_img'], $recomm['facet_title'], 'img-base', 'logo', 'max'); ?>
                 <?= $recomm['facet_title']; ?>
               </a>
+              <?php if (UserData::getUserId()) : ?>
+                <div data-id="<?= $recomm['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center">
+                  <?= __('app.read'); ?>
+                </div>
+              <?php endif; ?>
             </li>
           <?php endforeach; ?>
         </ul>

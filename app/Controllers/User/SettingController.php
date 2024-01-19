@@ -307,7 +307,7 @@ class SettingController extends Controller
             [
                 'meta'  => Meta::get(__('app.preferences')),
                 'data'  => [
-                    'facets'         => PreferencesModel::get($this->pageNumber),
+                    'signed'		=> PreferencesModel::get($this->pageNumber),
                     'pagesCount'    => PreferencesModel::getCount(),
                     'blocks'        => PreferencesModel::getBlocks(),
                     'pNum'			=> $this->pageNumber,

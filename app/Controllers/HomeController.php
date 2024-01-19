@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Services\Meta\Home;
-use App\Models\User\PreferencesModel;
 use App\Models\HomeModel;
 
 class HomeController extends Controller
@@ -27,8 +26,7 @@ class HomeController extends Controller
                     'sheet'             => $sheet,
                     'topics'            => $topics,
                     'type'              => 'main',
-                    'latest_comments'    => HomeModel::latestComments(),
-                    'facets'               => PreferencesModel::getMenu(),
+                    'latest_comments'	=> HomeModel::latestComments(),
                     'posts'             => HomeModel::feed($this->pageNumber, $sheet),
                     'items'             => HomeModel::latestItems(),
                 ],

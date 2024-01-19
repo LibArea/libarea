@@ -116,6 +116,6 @@ $post   = $data['post'] ?? false;
 
     <nav class="menu__left mb-none">
       <ul class="menu sticky top-sm">
-        <?= insert('/_block/navigation/menu', ['type' => $type, 'list' => config('navigation/menu.left')]); ?>
+        <?= insert('/_block/navigation/menu', ['type' => $type, 'topics_user' => $topics_user, 'list' => config('navigation/menu.left')]); ?>
       </ul>
     </nav>

@@ -41,10 +41,6 @@ use Hleb\Constructor\Handlers\Request; ?>
     </div>
   <?php endif; ?>
 
-  <?php if (UserData::checkActiveUser()) : ?>
-    <?= insert('/_block/facet/my-facets', ['topics_user' => $data['facets']]); ?>
-  <?php endif; ?>	
-
   <?php if (is_array($data['topics'])) : ?>
     <?php if (count($data['topics']) > 0) : ?>
       <div class="box br-lightgray">
@@ -68,7 +64,7 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?php endif; ?>
   <?php endif; ?>
 
-  <?php if ($block = $data['facets'][0] ?? false) : ?>
+  <?php if ($block = $topics_user[0] ?? false) : ?>
     <?php if ($block['type'] == 2) : ?>
       <div class="box br-lightgray">
         <h4 class="uppercase-box"><?= __('app.websites'); ?></h4>

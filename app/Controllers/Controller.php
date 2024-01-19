@@ -44,6 +44,10 @@ class Controller extends MainController
             $footer =  'default';
         }
 
+		// Personal menu, preference of facets on all pages of the site	
+		// Персональное меню, предпочтение из фасетов на все страницы сайта
+		$data['topics_user'] = UserData::getUserFacets();
+
         return render(
             [
                 $header . '/global/' . $part . '-header',

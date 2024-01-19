@@ -250,7 +250,7 @@ return [
     'best_answer'       => 'Найкраща відповідь',
     'raise_answer'      => 'Підняти відповідь',
     'answered'          => 'Відповіли',
-    'post_translation'  => 'Піст є перекладом?',
+    'post_translation'  => 'Пост є перекладом?',
     'translation'       => 'Переклад',
     'format_Q&A'        => 'Це питання (стане форматом Q&A)?',
     'poll_closed'       => 'Це опитування закрите?',
@@ -329,7 +329,7 @@ return [
     'answers'       => 'Відповіді',
     'message'       => 'Повідомлення',
     'messages'      => 'Повідомлення',
-    'post'          => 'Піст',
+    'post'          => 'Пост',
     'posts'         => 'Пости',
 
     'language'          => 'Локалізація',

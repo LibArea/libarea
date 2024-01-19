@@ -16,9 +16,9 @@
           <?= __('app.signed_facets_help', ['num' => config('facets.quantity_home')]); ?>
         </span>
 
-        <?php if ($data['facets']) : ?>
+        <?php if ($data['signed']) : ?>
           <div class="tasks__list mt15 mb15">
-            <?php foreach ($data['facets'] as $facet) : ?>
+            <?php foreach ($data['signed'] as $facet) : ?>
               <div class="flex flex-row items-center gap-min mb15 tasks__item">
                 <input name="id[]" value="<?= $facet['facet_id']; ?>" type="checkbox" <?php if ($facet['facet_output']) : ?> checked<?php endif; ?>>
                 <a title="<?= $facet['facet_title']; ?>" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]); ?>">

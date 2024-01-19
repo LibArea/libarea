@@ -2,6 +2,7 @@
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\MiddlewareModel;
+use App\Models\User\PreferencesModel;
 
 class UserData
 {
@@ -261,6 +262,11 @@ class UserData
     public static function getUserBlog()
     {
         return MiddlewareModel::getBlog(self::getUserId());
+    }
+	
+    public static function getUserFacets()
+    {
+        return PreferencesModel::getMenu();
     }
 }
 
