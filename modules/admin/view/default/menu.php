@@ -1,7 +1,22 @@
 <?= includeTemplate('/view/default/header', ['meta' => $meta]); ?>
 <div class="menu__left">
   <ul class="menu">
-    <?= insert('/_block/navigation/menu', ['type' => $data['type'], 'list' => config('navigation/menu.admin')]); ?>
+
+    <?php foreach (config('navigation/menu.admin') as $key => $item) :
+      $css = empty($item['css']) ? false : $item['css'];
+      $isActive = $item['id'] == $data['type'] ? 'active' : false;
+      $class = ($css || $isActive) ? ' class="' . $isActive . ' ' .  $css . '"'   : ''; ?>
+
+      <li<?= $class; ?>>
+        <a href="<?= $item['url']; ?>">
+          <?php if (!empty($item['icon'])) : ?><svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#<?= $item['icon']; ?>"></use>
+            </svg><?php endif; ?>
+          <?= $item['title']; ?>
+        </a>
+        </li>
+      <?php endforeach; ?>
+
   </ul>
 </div>
 
