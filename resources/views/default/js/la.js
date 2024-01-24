@@ -45,3 +45,15 @@ function getCookie(cookieName) {
   }
   return "";
 }
+
+function toggleMode(cookieName, firstMode, secondMode) {
+  let mode = getCookie(cookieName);
+  let expires = getDefaultTime();
+  if (mode == firstMode) {
+    document.cookie = cookieName + "=" + secondMode + "; " + expires + ";path=/";
+    document.getElementsByTagName('body')[0].classList.remove(firstMode);
+  } else {
+    document.cookie = cookieName + "=" + firstMode + "; " + expires + ";path=/";
+    document.getElementsByTagName('body')[0].classList.add(firstMode);
+  }
+}

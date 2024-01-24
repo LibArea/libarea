@@ -1,191 +1,164 @@
+// Header visibility on scroll
 let scrolled;
-let dHeader = document.querySelector(".d-header");
-if (dHeader) {
+let header = document.querySelector(".d-header");
+
+if (header) {
   window.onscroll = function () {
     scrolled = window.pageYOffset || document.documentElement.scrollTop;
     if (scrolled > 70) {
-      document.querySelector(".d-header").classList.add('show');
+      header.classList.add('show');
     } else {
-      document.querySelector(".d-header").classList.remove('show');
+      header.classList.remove('show');
     }
-  }
+  };
 }
 
+// Fetch CSRF token
 let token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
-// Call the form for adding / edit
-queryAll(".activ-form").forEach(el => el.addEventListener("click", function (e) { 
-  let reply = document.querySelector('#el_addentry' + el.dataset.id);
-  fetch("/activatingform/" + el.dataset.type, {
-    method: "POST",
-    body: "id=" + el.dataset.id + "&_token=" + token,
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-  })
-    .then(response => response.text())
-    .then(text => {
-      reply.classList.add("block");
-      reply.innerHTML = text;
-      queryAll("#cancel")
-        .forEach(el => el.addEventListener("click", function (e) {
-          reply.classList.remove("block");
-        }));
-    });
-}));
+// Activate form event listeners
+document.querySelectorAll(".activ-form").forEach(element => {
+  element.addEventListener("click", function () {
+    let reply = document.querySelector('#el_addentry' + element.dataset.id);
+    fetch("/activatingform/" + element.dataset.type, {
+      method: "POST",
+      body: "id=" + element.dataset.id + "&_token=" + token,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then(response => response.text())
+      .then(text => {
+        reply.classList.add("block");
+        reply.innerHTML = text;
+        document.querySelectorAll("#cancel").forEach(cancelButton => {
+          cancelButton.addEventListener("click", function () {
+            reply.classList.remove("block");
+          });
+        });
+      });
+  });
+});
 
 // Toggle dark mode
 isIdEmpty('toggledark').onclick = function () {
-  let mode = getCookie("dayNight");
-  let expires = getDefaultTime();
-  if (mode == "dark") {
-    document.cookie = "dayNight" + "=" + "light" + "; " + expires + ";path=/";
-    document.getElementsByTagName('body')[0].classList.remove('dark');
-  } else {
-    document.cookie = "dayNight" + "=" + "dark" + "; " + expires + ";path=/";
-    document.getElementsByTagName('body')[0].classList.add('dark');
-  }
-}
+  toggleMode("dayNight", "dark", "light");
+};
 
-// Navigation menu on/off
+// Toggle navigation menu
 isIdEmpty('togglemenu').onclick = function () {
-  let mode = getCookie("menuYesNo");
-  let expires = getDefaultTime();
-  if (mode == "menuno") {
-    document.cookie = "menuYesNo" + "=" + "menuyes" + "; " + expires + ";path=/";
-    document.getElementsByTagName('body')[0].classList.remove('menuno');
-  } else {
-    document.cookie = "menuYesNo" + "=" + "menuno" + "; " + expires + ";path=/";
-    document.getElementsByTagName('body')[0].classList.add('menuno');
-  }
-}
+  toggleMode("menuYesNo", "menuno", "menuyes");
+};
 
-// search
+// Search functionality
 isIdEmpty('find').onclick = function () {
-  getById('find').addEventListener('keydown', function () {
-    fetchSearch();
-  });
-}
+  getById('find').addEventListener('keydown', fetchSearch);
+};
 
 function fetchSearch() {
   let query = getById("find").value;
   let type = getById("find").dataset.id;
   if (query.length < 2) return;
-  let url = type == 'category' ? '/web/dir/all/' : '/topic/';
+
+  let url = type === 'category' ? '/web/dir/all/' : '/topic/';
 
   fetch("/search/api", {
     method: "POST",
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: "query=" + query + "&type=" + type + "&_token=" + token,
   })
-    .then(
-      response => {
-        return response.text();
+    .then(response => response.text())
+    .then(text => {
+      let results = JSON.parse(text);
+      let html = '<div class="flex">';
+
+      for (let key in results) {
+        if (type == 'category') {
+          // Category-specific rendering
+          html += renderLink('/web/dir/all/', results[key].facet_slug, results[key].facet_title);
+          html += renderLink('/web/website/', results[key].item_id, results[key].title);
+        } else {
+          // Other type-specific rendering
+          html += renderLink('/topic/', results[key].facet_slug, results[key].facet_title);
+          html += renderLink('/post/', results[key].post_id, results[key].title);
+        }
+        html += '</div>';
       }
-    ).then(
-      text => {
-        let obj = JSON.parse(text);
-        let html = '<div class="flex">';
-        for (let key in obj) {
-          if (type == 'category') {
-            if (obj[key].facet_slug) {
-              html += '<a class="sky block text-sm mb15 mr10" href="/web/dir/all/' + obj[key].facet_slug + '">' + obj[key].facet_title + '</a>';
-            }
-            if (obj[key].item_id) {
-              html += '<a class="block black text-sm mb10" href="/web/website/' + obj[key].item_id + '">' + obj[key].title + '</a>';
-            }
-          } else {
-            if (obj[key].facet_slug) {
-              html += '<a class="sky block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">' + obj[key].facet_title + '</a>';
-            }
-            if (obj[key].post_id) {
-              html += '<a class="block black text-sm mb10" href="/post/' + obj[key].post_id + '">' + obj[key].title + '</a>';
-            }
-          }
-          html += '</div>';
-        }
 
-        if (!Object.keys(obj).length == 0) {
-          let items = getById("search_items");
-          items.classList.add("block");
-          items.innerHTML = html;
-        }
+      if (Object.keys(results).length !== 0) {
+        let items = getById("search_items");
+        items.classList.add("block");
+        items.innerHTML = html;
+      }
 
-        let menu = document.querySelector('.none.block');
-        if (menu) {
-          document.onclick = function (e) {
-            if (event.target.className != '.none.block') {
-              let items = getById("search_items");
-              items.classList.remove("block");
-            };
+      let menu = document.querySelector('.none.block');
+      if (menu) {
+        document.onclick = function (event) {
+          if (event.target.className != '.none.block') {
+            let items = getById("search_items");
+            items.classList.remove("block");
           };
-        }
+        };
       }
-    );
+    });
 }
 
-// Show / hide password 
-let showPassword = queryAll('.showPassword');
-showPassword.forEach(item =>
-  item.addEventListener('click', toggleType)
-);
+// Function to render links based on type
+function renderLink(baseURL, identifier, title) {
+  if (identifier) {
+    return '<a class="sky block text-sm mb15 mr10" href="' + baseURL + identifier + '">' + title + '</a>';
+  }
+  return '';
+}
 
-function toggleType() {
-  let input = getById('password');
+// Show/hide password functionality
+let showPasswordButtons = queryAll('.showPassword');
+showPasswordButtons.forEach(button => {
+  button.addEventListener('click', togglePasswordVisibility);
+});
+
+function togglePasswordVisibility() {
+  let passwordInput = getById('password');
   let icon = this.querySelector('svg');
+
   if (icon.classList.contains('sky')) {
     icon.classList.remove('sky');
-    input.type = 'password';
+    passwordInput.type = 'password';
   } else {
     icon.classList.add('sky');
-    input.type = 'text';
+    passwordInput.type = 'text';
   }
 }
 
-queryAll(".item_cleek")
-  .forEach(el => el.addEventListener("click", function (e) {
-    let id = el.dataset.id;
+// Item cleek event listeners
+queryAll(".item_cleek").forEach(element => {
+  element.addEventListener("click", function () {
+    let id = element.dataset.id;
     fetch("/cleek", {
       method: "POST",
       body: "id=" + id,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
-      .then((response) => {
-        return;
-      }).then((text) => {
-        //...
+      .then(() => {
+        // Handle response if needed
       });
-  }));
+  });
+});
 
-/*
- *	Drop-down menus (user) and lists
- *	Выпадающие меню (user) и списки
- */
-let elm = queryAll(".trigger");
-elm.forEach(function (elm) {
-  elm.addEventListener("click", function (e) {
-    e.stopPropagation();
-    let sibling = elm.nextElementSibling,
-      firstVisible = elm.querySelector('.block'),
-      dropDown;
+// Drop-down menus (user) and lists
+let triggerElements = queryAll(".trigger");
 
-    /*
-     * Remove the block class if an element is already in the DOM
-     * TODO: next, it's worth getting rid of the use of `style` on the page everywhere
-     * to tighten the Content Security Policy
-     * 
-     * Удалим block класс, если элемент уже есть в DOM
-     * TODO: далее везде стоит избавится от задействования `style` на странице
-     * чтобы ужесточить Content Security Policy
-     */
+triggerElements.forEach(triggerElement => {
+  triggerElement.addEventListener("click", function (event) {
+    event.stopPropagation();
+    let sibling = triggerElement.nextElementSibling;
+    let firstVisible = triggerElement.querySelector('.block');
+
     if (firstVisible) {
-      // fadeOut(firstVisible);
       firstVisible.classList.remove("block");
     }
 
     if (!sibling.classList.contains("block")) {
-      // fadeIn(sibling);
       sibling.classList.add("block");
     } else {
-      // fadeOut(sibling);
       sibling.classList.remove("block");
     }
   });
@@ -193,35 +166,32 @@ elm.forEach(function (elm) {
   document.addEventListener("click", function () {
     let block = document.querySelector(".dropdown.block");
     if (block) {
-      // fadeOut(block);
       block.classList.remove("block");
     }
   });
 });
 
-/*
- *	Left drop-down general menu (navigation)
- *	Левое выпадающее общее меню (навигация)
- */
-const button = document.querySelector('.menu__button')
-const nav = document.querySelector('.menu__left')
-if (button) {
-  button.addEventListener('click', () => {
-    if (nav) {
-      nav.classList.toggle('menu__active')
-    }
-  })
-};
+// Left drop-down general menu (navigation)
+const menuButton = document.querySelector('.menu__button');
+const leftMenu = document.querySelector('.menu__left');
 
-window.addEventListener('click', e => {
-  if (!e.target.closest('.menu__active') && !e.target.closest('.menu__button')) {
-    if (nav) {
-      nav.classList.remove('menu__active')
+if (menuButton) {
+  menuButton.addEventListener('click', () => {
+    if (leftMenu) {
+      leftMenu.classList.toggle('menu__active');
+    }
+  });
+}
+
+window.addEventListener('click', event => {
+  if (!event.target.closest('.menu__active') && !event.target.closest('.menu__button')) {
+    if (leftMenu) {
+      leftMenu.classList.remove('menu__active');
     }
   }
 });
-									
-/* MIT license https://github.com/vivekweb2013/toastmaker */
+
+// Toast notifications library (MIT license)
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(factory);
@@ -233,49 +203,43 @@ window.addEventListener('click', e => {
 }(this, function (global) {
 
   var Notice = function (text, timeout, options) {
-    // Validate mandatory options
     var validate = function (arg, argName, type, isMandatory, allowedValues) {
       var actualType = Array.isArray(arg) ? "array" : typeof arg;
       if (isMandatory && (arg == null || arg === ''))
-        throw new Error("Invalid argument '" + argName + "'. Argument is either empty, null or undefined");
+        throw new Error("Invalid argument '" + argName + "'. Argument is either empty, null, or undefined");
       if (actualType !== type)
         throw new Error("Invalid argument '" + argName + "'. Type must be " + type + " but found " + actualType);
       if (allowedValues && allowedValues.indexOf(arg) == -1)
         throw new Error("Invalid value " + arg + " specified for argument '" + argName + "'. Allowed - " + allowedValues.join(" | "));
     }
 
-    // Initialize & validate the options
     validate(text, "text", "string", true);
     options = options || {};
     validate(options, "options", "object");
     timeout = timeout || 3000;
     validate(timeout, "timeout", "number");
-    options.styles = options.styles || {}; // Object with style properties
+    options.styles = options.styles || {};
     validate(options.styles, "styles", "object");
-    options.align = options.align || "center" // left | center | right
+    options.align = options.align || "center";
     validate(options.align, "align", "string", true, ["left", "center", "right"]);
-    options.valign = options.valign || "bottom"; // top | bottom
+    options.valign = options.valign || "bottom";
     validate(options.valign, "valign", "string", true, ["top", "bottom"]);
     options.classList = options.classList || [];
     validate(options.classList, "classList", "array");
 
     var alignmentClasses = ["notice", "notice-" + options.valign, "notice-" + options.align];
-    options.classList = options.classList.concat(alignmentClasses) // Array of css class names
+    options.classList = options.classList.concat(alignmentClasses);
 
-    // Create toast element
     var toast = document.createElement('div');
 
-    // Add css classes to toast element
-    options.classList.forEach(function (c) {
-      if (typeof c != "string") throw new Error("Invalid css class '" + JSON.stringify(c) + "'. CSS class must be of type string");
-      toast.classList.add(c);
+    options.classList.forEach(function (cssClass) {
+      if (typeof cssClass != "string") throw new Error("Invalid css class '" + JSON.stringify(cssClass) + "'. CSS class must be of type string");
+      toast.classList.add(cssClass);
     });
 
-    // Add text message to toast element
     var content = document.createTextNode(text);
     toast.appendChild(content);
 
-    // Add styles to the toast element
     toast.style.animationDuration = timeout / 1000 + "s";
     for (var prop in options.styles) {
       if (typeof options.styles[prop] != 'string' && typeof options.styles[prop] != "number")
@@ -284,7 +248,6 @@ window.addEventListener('click', e => {
       toast.style[prop] = options.styles[prop];
     }
 
-    // Inject toast element to DOM
     document.body.appendChild(toast);
     setTimeout(function () {
       document.body.removeChild(toast);
