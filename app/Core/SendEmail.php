@@ -25,6 +25,9 @@ class SendEmail
             }
         }
 
+		$lang = $user['lang'] ?? config('general.lang');
+		Translate::setLang($lang);
+
         $text_footer    = __('mail.footer', ['name' => config('meta.url')]);
         $user_email     = $user['email'];
         $url            = config('meta.url');

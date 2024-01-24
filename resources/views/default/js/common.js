@@ -35,7 +35,7 @@ queryAll(".activ-form").forEach(el => el.addEventListener("click", function (e) 
 // Toggle dark mode
 isIdEmpty('toggledark').onclick = function () {
   let mode = getCookie("dayNight");
-  let expires = defTime();
+  let expires = getDefaultTime();
   if (mode == "dark") {
     document.cookie = "dayNight" + "=" + "light" + "; " + expires + ";path=/";
     document.getElementsByTagName('body')[0].classList.remove('dark');
@@ -48,7 +48,7 @@ isIdEmpty('toggledark').onclick = function () {
 // Navigation menu on/off
 isIdEmpty('togglemenu').onclick = function () {
   let mode = getCookie("menuYesNo");
-  let expires = defTime();
+  let expires = getDefaultTime();
   if (mode == "menuno") {
     document.cookie = "menuYesNo" + "=" + "menuyes" + "; " + expires + ";path=/";
     document.getElementsByTagName('body')[0].classList.remove('menuno');
