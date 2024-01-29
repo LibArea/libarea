@@ -57,110 +57,115 @@ class EditPostController extends Controller
         );
     }
 
-    public function change()
-    {
-        $post = PostPresence::index($post_id = Request::getPostInt('post_id'));
+	public function change()
+	{
+		$post_id = Request::getPostInt('post_id');
+		$post = PostPresence::index($post_id);
 
-        $content    = $_POST['content']; // for Markdown
-        $post_draft = Request::getPost('post_draft') == 'on' ? 1 : 0;
-        $draft      = Request::getPost('draft');
+		$content = $_POST['content']; // for Markdown
+		$post_draft = Request::getPost('post_draft') == 'on' ? 1 : 0;
+		$draft = Request::getPost('draft');
 
-        $blog = FacetModel::getFacetsUser('blog');
-        $this->checkingEditPermissions($post, $blog);
+		$blog = FacetModel::getFacetsUser('blog');
+		$this->checkingEditPermissions($post, $blog);
 
-        $redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
+		$redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
 
-        RulesPost::rules($title = Request::getPost('post_title'), $content, $redirect);
+		RulesPost::rules($title = Request::getPost('post_title'), $content, $redirect);
 
-        // Form hacking
-        if ($post['post_draft'] == 0) {
-            $draft = 0;
-        }
+		// Form hacking
+		if ($post['post_draft'] == 0) {
+			$draft = 0;
+		}
 
-        $post_date = $post['post_date'];
-        if ($draft == 1 && $post_draft == 0) {
-            $post_date = date("Y-m-d H:i:s");
-        }
+		$post_date = $post['post_date'];
+		if ($draft == 1 && $post_draft == 0) {
+			$post_date = date("Y-m-d H:i:s");
+		}
 
-        // Post cover
-        if (!empty($_FILES['images']['name'])) {
-            $post_img = UploadImage::coverPost($_FILES['images'], $post, $redirect);
-        }
-        $post_img = $post_img ?? $post['post_content_img'];
+		// Post cover
+		$post_img = $post['post_content_img'];
+		if (!empty($_FILES['images']['name'])) {
+			$post_img = UploadImage::coverPost($_FILES['images'], $post, $redirect);
+		}
 
-        // Related topics
-        $fields = Request::getPost() ?? [];
-        $new_type = self::addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
+		// Related topics
+		$fields = Request::getPost() ?? [];
+		$new_type = $this->addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
 
-        $post_related = $this->relatedPost();
+		$post_related = $this->relatedPost();
 
-        if (UserData::checkAdmin()) {
-            $post_merged_id = Request::getPostInt('post_merged_id');
-            $post_slug = Request::getPost('post_slug');
-            if ($post_slug != $post['post_slug']) {
-                if (PostModel::getSlug($slug = $this->getSlug($post_slug))) {
-                    $slug = $slug . "-";
-                }
-            }
-        }
+		if (UserData::checkAdmin()) {
+			$post_merged_id = Request::getPostInt('post_merged_id');
+			$post_slug = Request::getPost('post_slug');
+			if ($post_slug != $post['post_slug']) {
+				if (PostModel::getSlug($slug = $this->getSlug($post_slug))) {
+					$slug = $slug . "-";
+				}
+			}
+		}
 
-        $post_feature = config('general.qa_site_format') === true ? 'on' : Request::getPost('post_feature');
+		$post_feature = config('general.qa_site_format') === true ? 'on' : Request::getPost('post_feature');
 
-        PostModel::editPost(
-            [
-                'post_id'               => $post_id,
-                'post_title'            => $title,
-                'post_slug'             => $slug ?? $post['post_slug'],
-                'post_feature'          => $post_feature == 'on' ? 1 : 0,
-                'post_type'             => $new_type,
-                'post_translation'      => Request::getPost('translation') == 'on' ? 1 : 0,
-                'post_date'             => $post_date,
-                'post_user_id'          => $this->selectAuthor($post['post_user_id'], Request::getPost('user_id')),
-                'post_draft'            => $post_draft,
-                'post_content'          => $content,
-                'post_content_img'      => $post_img ?? '',
-                'post_related'          => $post_related ?? '',
-                'post_merged_id'        => $post_merged_id ?? 0,
-                'post_tl'               => Request::getPostInt('content_tl'),
-                'post_closed'           => Request::getPost('closed') == 'on' ? 1 : 0,
-                'post_nsfw'             => Request::getPost('nsfw') == 'on' ? 1 : 0,
-                'post_hidden'           => Request::getPost('hidden') == 'on' ? 1 : 0,
-                'post_top'              => Request::getPost('top') == 'on' ? 1 : 0,
-                'post_poll'             => $this->selectPoll(Request::getPost('poll_id')),
-                'post_modified'         => date("Y-m-d H:i:s"),
-            ]
-        );
+		PostModel::editPost([
+			'post_id' 			=> $post_id,
+			'post_title' 		=> $title,
+			'post_slug' 		=> $slug ?? $post['post_slug'],
+			'post_feature' 		=> $post_feature == 'on' ? 1 : 0,
+			'post_type' 		=> $new_type,
+			'post_translation'	=> Request::getPost('translation') == 'on' ? 1 : 0,
+			'post_date' 		=> $post_date,
+			'post_user_id' 		=> $this->selectAuthor($post['post_user_id'], Request::getPost('user_id')),
+			'post_draft' 		=> $post_draft,
+			'post_content' 		=> $content,
+			'post_content_img' 	=> $post_img ?? '',
+			'post_related' 		=> $post_related ?? '',
+			'post_merged_id' 	=> $post_merged_id ?? 0,
+			'post_tl' 			=> Request::getPostInt('content_tl'),
+			'post_closed' 		=> Request::getPost('closed') == 'on' ? 1 : 0,
+			'post_nsfw' 		=> Request::getPost('nsfw') == 'on' ? 1 : 0,
+			'post_hidden' 		=> Request::getPost('hidden') == 'on' ? 1 : 0,
+			'post_top' 			=> Request::getPost('top') == 'on' ? 1 : 0,
+			'post_poll' 		=> $this->selectPoll(Request::getPost('poll_id')),
+			'post_modified' 	=> date("Y-m-d H:i:s"),
+		]);
 
-        is_return(__('msg.change_saved'), 'success', url('post_id', ['id' => $post['post_id']]));
-    }
+		is_return(__('msg.change_saved'), 'success', url('post_id', ['id' => $post['post_id']]));
+	}
 
     // Add fastes (blogs, topics) to the post 
-    public static function addFacetsPost($fields, $content_id, $redirect)
-    {
-        $new_type = 'post';
-        $facets = $fields['facet_select'] ?? false;
-        if (!$facets) {
-            is_return(__('msg.select_topic'), 'error', $redirect);
-        }
-        $topics = json_decode($facets, true);
+	public static function addFacetsPost($fields, $content_id, $redirect)
+	{
+		$new_type = 'post';
+		$facets = $fields['facet_select'] ?? false;
 
-        $section  = $fields['section_select'] ?? false;
-        if ($section) {
-            $new_type = 'page';
-            $OneFacets = json_decode($section, true);
-        }
+		if (!$facets) {
+			is_return(__('msg.select_topic'), 'error', $redirect);
+		}
 
-        $blog_post  = $fields['blog_select'] ?? false;
-        if ($blog_post) {
-            $TwoFacets = json_decode($blog_post, true);
-        }
+		$topics = json_decode($facets, true);
 
-        $GeneralFacets = array_merge($OneFacets ?? [], $TwoFacets ?? []);
+		$section = $fields['section_select'] ?? false;
+		$OneFacets = [];
 
-        FacetModel::addPostFacets(array_merge($GeneralFacets ?? [], $topics), $content_id);
+		if ($section) {
+			$new_type = 'page';
+			$OneFacets = json_decode($section, true);
+		}
 
-        return $new_type;
-    }
+		$blog_post = $fields['blog_select'] ?? false;
+		$TwoFacets = [];
+
+		if ($blog_post) {
+			$TwoFacets = json_decode($blog_post, true);
+		}
+
+		$GeneralFacets = array_merge($OneFacets, $TwoFacets);
+
+		FacetModel::addPostFacets(array_merge($GeneralFacets, $topics), $content_id);
+
+		return $new_type;
+	}
 
     // Cover Removal
     function imgPostRemove()

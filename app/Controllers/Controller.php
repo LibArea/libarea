@@ -27,36 +27,37 @@ class Controller extends MainController
         return $pageNumber <= 1 ? 1 : $pageNumber;
     }
 
-    public static function render(string $name, array $data = [], string $part = 'base')
-    {
-        self::closing();
+	public static function render(string $name, array $data = [], string $part = 'base')
+	{
+		self::closing();
 
-        $body = $header = $footer  = UserData::getUserTheme() . DIRECTORY_SEPARATOR;
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $body . '/content' . $name . '.php')) {
-            $body =  'default';
-        }
+		$body = UserData::getUserTheme() . DIRECTORY_SEPARATOR;
+		$header = $body . '/global/' . $part . '-header';
+		$footer = $body . '/global/' . $part . '-footer';
 
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $header . '/global/' . $part . '-header.php')) {
-            $header =  'default';
-        }
+		if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $body . '/content' . $name . '.php')) {
+			$body = 'default';
+		}
 
-        if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $footer . '/global/' . $part . '-footer.php')) {
-            $footer =  'default';
-        }
+		if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $header . '.php')) {
+			$header = 'default/global/' . $part . '-header';
+		}
 
-		// Personal menu, preference of facets on all pages of the site	
-		// Персональное меню, предпочтение из фасетов на все страницы сайта
+		if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $footer . '.php')) {
+			$footer = 'default/global/' . $part . '-footer';
+		}
+
 		$data['topics_user'] = UserData::getUserFacets();
 
-        return render(
-            [
-                $header . '/global/' . $part . '-header',
-                $body . '/content' . $name,
-                $footer . '/global/' . $part . '-footer'
-            ],
-            $data
-        );
-    }
+		return render(
+			[
+				$header,
+				$body . '/content' . $name,
+				$footer
+			],
+			$data
+		);
+	}
 
     public static function closing()
     {
