@@ -29,7 +29,7 @@
         </li>
 
         <li>
-          <a href="<?= url('admin.logip', ['ip' => $comment['comment_ip']]); ?>">
+          <a href="<?= url('admin.logip', ['item' => $comment['comment_ip']]); ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#info"></use>
             </svg>
