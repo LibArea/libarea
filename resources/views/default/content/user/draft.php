@@ -8,8 +8,8 @@
     <?php if (!empty($data['drafts'])) : ?>
       <?php foreach ($data['drafts'] as $draft) : ?>
         <div class="box bg-lightgray">
-          <a href="<?= post_slug($draft['post_id'], $draft['post_slug']); ?>">
-            <h3 class="text-2xl m0"><?= $draft['post_title']; ?></h3>
+          <a class="text-xl" href="<?= post_slug($draft['post_id'], $draft['post_slug']); ?>">
+            <?= $draft['post_title']; ?>
           </a>
           <div class="mr5 text-sm gray-600 lowercase">
             <?= Html::langDate($draft['post_date']); ?>
