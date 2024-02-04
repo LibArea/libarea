@@ -371,7 +371,7 @@ return [
     'enter_password'    => 'Enter password',
 
     'rec_posts'         => 'recommended posts',
-    'topic_subs'        => 'Subscribe to topics and read them in the feed',
+    'topic_subs'        => 'Subscribe to topics and read them in the feed!',
     'i_read'            => 'I read',
 
     'message_PM'        => 'When the PM message came',

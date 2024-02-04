@@ -7,7 +7,7 @@
       <?= insert('/_block/form/registration'); ?>
     </form>
 
-    <p><?= __('app.agree_rules'); ?>.</p>
+    <p><?= __('app.agree_rules'); ?></p>
     <p><?= __('help.security_info'); ?></p>
   </div>
 </main>

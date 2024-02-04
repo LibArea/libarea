@@ -19,7 +19,7 @@
         <span class="mr5 ml15 text-sm"><a href="<?= url('login'); ?>"><?= __('app.sign_in'); ?></a></span>
       </fieldset>
     </form>
-    <p><?= __('app.agree_rules'); ?>.</p>
+    <p><?= __('app.agree_rules'); ?></p>
     <p><?= __('help.recover_info'); ?></p>
   </div>
 </main>

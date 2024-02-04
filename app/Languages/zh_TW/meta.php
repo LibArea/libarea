@@ -33,7 +33,7 @@ return [
     'all_blogs_desc'            => '博客在网站上注册的顺序，能够查看创建的博客，订阅它们，查看统计信息',
 
     'new_blogs'                 => '新博客',
-    'new_blogs_info'            => '网站上的博客最近添加',
+    'new_blogs_info'            => '网站上的博客最近添加。',
     'new_blogs_desc'            => '该网站上的博客最近添加。 参与者的个人博客，订阅有趣博客的能力',
 
     'my_blogs'                  => '我的博客',
@@ -41,7 +41,7 @@ return [
     'my_blogs_desc'             => '我阅读或创建的博客',
 
     'all_topics'                => '所有题目',
-    'all_topics_info'           => '网站上的所有主题都是按其受欢迎程度的顺序排列的',
+    'all_topics_info'           => '网站上的所有主题都是按其受欢迎程度的顺序排列的。',
     'all_topics_desc'           => '按受欢迎程度顺序排列的主题页面。 通过定位的帖子数量，订阅博客的能力',
 
     'new_topics'                => '新课题',

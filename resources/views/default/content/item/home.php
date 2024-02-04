@@ -1,7 +1,7 @@
 <?php if (!UserData::checkActiveUser()) : ?>
   <div class="banner mt5 mb-none">
     <h1><?= __('web.main_title'); ?></h1>
-    <p><?= __('web.banner_info'); ?>.</p>
+    <p><?= __('web.banner_info'); ?></p>
   </div>
 <?php endif; ?>
 <div class="item-categories mb-mt5">

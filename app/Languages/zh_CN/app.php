@@ -345,7 +345,7 @@ return [
     'auth_comm'         => '你必须登录才能发表评论',
     'not_registered'    => '发帖，回复，评论... <br>你还没有注册',
     'invalid'           => '无效',
-    'agree_rules'       => '继续，即表示你同意<a href="/info/article/privacy">使用条款</a>',
+    'agree_rules'       => '继续，即表示你同意<a href="/info/article/privacy">使用条款</a>。',
     'limit_content'     => '你已用尽在网站上添加的限制',
     'reg_invite'        => '邀请注册',
     'details_here'      => '详情如下',
@@ -370,7 +370,7 @@ return [
     'enter_password'    => '输入密码',
 
     'rec_posts'         => '推荐帖子',
-    'topic_subs'        => '订阅主题并在提要中阅读',
+    'topic_subs'        => '订阅主题并在提要中阅读!',
     'i_read'            => '我看过',
 
     'message_PM'        => '当PM消息到来时',

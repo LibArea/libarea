@@ -3,7 +3,7 @@
     <div class="mb15">
       <h1 class="title"><?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's'); ?></h1>
       <span class="gray-600 text-xs">
-        <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>.
+        <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>
       </span>
     </div>
 

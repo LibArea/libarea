@@ -33,7 +33,7 @@ return [
     'all_blogs_desc'            => 'Blogs in the order of their registration on the site, the ability to view created blogs, subscribe to them, view statistics',
 
     'new_blogs'                 => 'New blogs',
-    'new_blogs_info'            => 'Blogs on the site added recently',
+    'new_blogs_info'            => 'Blogs on the site added recently.',
     'new_blogs_desc'            => 'Blogs on the site added recently. Personal blogs of participants, the possibility of subscribing to interesting blogs',
 
     'my_blogs'                  => 'My blogs',
@@ -41,7 +41,7 @@ return [
     'my_blogs_desc'             => 'Blogs I read or created',
 
     'all_topics'                => 'All topics',
-    'all_topics_info'           => 'All topics on the site in order of their popularity',
+    'all_topics_info'           => 'All topics on the site in order of their popularity.',
     'all_topics_desc'           => 'A page of topics arranged in order of popularity. By the number of posted posts, the ability to subscribe to blogs',
 
     'new_topics'                => 'New themes',

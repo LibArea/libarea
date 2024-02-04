@@ -15,7 +15,7 @@
     <?php if (config('general.invite') == 1) : ?>
       <div class="max-w780 mt20"><?= __('auth.invate_text'); ?></div>
     <?php endif; ?>
-    <p><?= __('app.agree_rules'); ?>.</p>
+    <p><?= __('app.agree_rules'); ?></p>
   </div>
 </main>
 <aside>

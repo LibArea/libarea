@@ -103,7 +103,7 @@ return [
     'edit_website'      => 'Sửa trang web',
     
     'sidebar_info'      => 'Catalog of sites systematized by thematic headings.',
-    'banner_info'       => 'Catalog of sites with annotations and screenshots. <br> Faceted rubrication, search. Bookmarks on resources with the ability to vote for sites, programs, rating',
+    'banner_info'       => 'Catalog of sites with annotations and screenshots. <br> Faceted rubrication, search. Bookmarks on resources with the ability to vote for sites, programs, rating.',
     
     'main_title'        => 'Thư mục website',
     'main_desc'         => 'Danh sách các trang web trong thư mục được đặt theo thứ tự thời gian. Có khả năng tìm kiếm, đánh dấu, xếp theo độ phổ biến',
