@@ -88,17 +88,6 @@ function is_return(string $text, string $status, string $redirect = '/')
     redirect($redirect);
 }
 
-function hook_action(string $name, array $params = [])
-{
-    return App\Hook\Hook::action($name, $params);
-}
-
-function hook_filter(string $name, string $data, array $params = [])
-{
-    return App\Hook\Hook::filter($name, $data, $params);
-}
-
-// mixed $params (c PHP 8.0)
 function notEmptyOrView404($params)
 {
     if (empty($params)) {

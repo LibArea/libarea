@@ -10,8 +10,6 @@ class Sorting
 {
     public static function day(string $type)
     {
-        $sort = "ORDER BY post_top DESC, post_date DESC";
-
 		switch (Request::getGet('sort')) {
 			case 'TopMonth':
 				$sort =  "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 1 WEEK DESC";
@@ -29,8 +27,7 @@ class Sorting
 				$sort =  "ORDER BY post_hits_count DESC";
 				break;
 			default:
-				 $sort = "ORDER BY post_top DESC, post_date DESC";
-				break;
+			$sort = "ORDER BY post_top DESC, post_date DESC";
 		}
         
         return $sort;
