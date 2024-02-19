@@ -22,13 +22,13 @@ class UserController extends Controller
 
         $m = [
             'og'    => false,
-            'url'   => url($sheet),
+            'url'   => url('users.' . $sheet),
         ];
 
         return $this->render(
             '/user/all',
             [
-                'meta'  => Meta::get(__('meta.' . $sheet . '_users'), __('meta.' . $sheet . 'users_desc'), $m),
+                'meta'  => Meta::get(__('meta.' . $sheet . '_users'), __('meta.' . $sheet . '_users_desc'), $m),
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => 'users',
