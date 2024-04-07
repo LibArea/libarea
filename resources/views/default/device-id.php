@@ -1,4 +1,4 @@
-<?php if (\App\Controllers\DeviceController::index() == NULL) : ?>
+<?php if (\App\Controllers\DeviceController::index()) : ?>
   <script src="/assets/js/device/client.base.min.js"></script>
   <script nonce="<?= config('main', 'nonce'); ?>">
 	const client = new ClientJS();

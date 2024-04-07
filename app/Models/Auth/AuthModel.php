@@ -9,8 +9,14 @@ use Hleb\Static\DB;
 
 class AuthModel extends Model
 {
-    // Check for repetitions  
-    // Проверка на повторы
+    /**
+     * Check for repetitions
+     * Проверка на повторы
+     *
+     * @param string $params
+     * @param string $type
+     * @return array|boolean
+     */
     public static function checkRepetitions(string $params, string $type): array|bool
     {
         $field = ($type == 'email') ? 'email' : 'login';
@@ -20,8 +26,13 @@ class AuthModel extends Model
         return DB::run($sql, ['params' => $params])->fetch();
     }
 
-    // Login is banned and the ban is not lifted, then ban and ip 
-    // Login забанен и бан не снят, то запретить и ip
+    /**
+     * Login is banned and the ban is not lifted, then ban and ip 
+     * Login забанен и бан не снят, то запретить и ip
+     *
+     * @param string $ip
+     * @return void
+     */
     public static function repeatIpBanRegistration(string $ip)
     {
         $sql = "SELECT
@@ -66,8 +77,13 @@ class AuthModel extends Model
         return DB::run($sql, $params);
     }
 
-    // Get an authentication token by selector 
-    // Получаем токен аутентификации по селектору
+    /**
+     * Get an authentication token by selector 
+     * Получаем токен аутентификации по селектору
+     *
+     * @param string $selector
+     * @return array|boolean
+     */
     public static function getAuthTokenBySelector(string $selector): array|bool
     {
         $sql = "SELECT
@@ -142,8 +158,13 @@ class AuthModel extends Model
         return DB::run($sql, ['email' => $email])->fetch();
     }
 
-    // Does the user find in the ban list
-    // Находит ли пользователь в бан- листе
+    /**
+     * Does the user find in the ban list
+     * Находит ли пользователь в бан- листе
+     *
+     * @param integer $user_id
+     * @return array|boolean
+     */
     public static function isBan(int $user_id): array|bool
     {
         $sql = "SELECT
@@ -155,8 +176,13 @@ class AuthModel extends Model
         return DB::run($sql, ['user_id' => $user_id])->fetch();
     }
 
-    // Whether the user is in silent mode
-    // Находит ли пользователь в бесшумном режиме
+    /**
+     * Whether the user is in silent mode
+     * Находит ли пользователь в бесшумном режиме
+     *
+     * @param integer $user_id
+     * @return array
+     */
     public static function isLimitingMode(int $user_id): array
     {
         $sql = "SELECT id, limiting_mode FROM users WHERE id = :user_id AND limiting_mode = 1";
@@ -164,8 +190,13 @@ class AuthModel extends Model
         return DB::run($sql, ['user_id' => $user_id])->fetch();
     }
 
-    // Is the user activated (e-mail)
-    // Активирован ли пользователь (e-mail)
+    /**
+     * Is the user activated (email)
+     * Активирован ли пользователь (e-mail)
+     *
+     * @param integer $user_id
+     * @return array|boolean
+     */
     public static function isActivated(int $user_id): array|bool
     {
         $sql = "SELECT id, activated FROM users WHERE id = :user_id AND activated = 1";
@@ -173,8 +204,13 @@ class AuthModel extends Model
         return DB::run($sql, ['user_id' => $user_id])->fetch();
     }
 
-    // Has the user been deleted?
-    // Удален ли пользователь?
+    /**
+     * Has the user been deleted?
+     * Удален ли пользователь?
+     *
+     * @param integer $user_id
+     * @return array|boolean
+     */
     public static function isDeleted(int $user_id): array|bool
     {
         $sql = "SELECT id, is_deleted FROM users WHERE id = :user_id AND is_deleted = 1";
@@ -182,8 +218,13 @@ class AuthModel extends Model
         return DB::run($sql, ['user_id' => $user_id])->fetch();
     }
 	
-    // Check activation code e-mail
-    // Проверяем код активации e-mail
+    /**
+     * Check activation code email
+     * Проверяем код активации e-mail
+     *
+     * @param string $code
+     * @return array|boolean
+     */
     public static function getEmailActivate(string $code): array|bool
     {
         $sql = "SELECT

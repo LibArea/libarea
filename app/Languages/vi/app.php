@@ -28,9 +28,9 @@ return [
     'one_month'         => 'Tháng',
     'three_months'      => '3 tháng',
     'all_time'          => 'Mọi lúc',
-    'year'          	=> 'Năm',
-	'commented' 		=> 'Đã bình luận về',
-	'viewed' 			=> 'Xem',
+    'year'              => 'Năm',
+    'commented'         => 'Đã bình luận về',
+    'viewed'            => 'Xem',
     'admin'             => 'Quản trị viên',
     'well'              => 'Khỏe',
     'development'       => 'Phát triển',
@@ -220,7 +220,7 @@ return [
     'edit_blog'         => 'Chỉnh sửa blog',
     'edit_page'         => 'Chỉnh sửa trang',
     'edit_section'      => 'Chỉnh sửa phần',
-    
+
     'share_post'        => 'Chia sẻ bài viết',
     'share_topic'       => 'Chia sẻ chủ đề',
     'share_blog'        => 'Chia sẻ blog',
@@ -318,7 +318,7 @@ return [
 
     'num_message'   => ['Tin nhắn', 'Tin nhắn', 'Tin nhắn'],
     'num_answer'    => ['Trả lời', 'Trả lời', 'Câu trả lời'],
-    'num_comment'	=> ['Bình Luận', 'Bình Luận', 'Bình Luận'],
+    'num_comment'   => ['Bình Luận', 'Bình Luận', 'Bình Luận'],
     'num_post'      => ['Bài đăng', 'Bài đăng', 'Postov'],
     'num_view'      => ['Chế độ xem', 'Lượt xem', 'Lượt xem'],
     'num_up'        => ['Giọng nói', 'Giọng nói', 'Giọng nói'],
@@ -364,9 +364,11 @@ return [
     'slug'              => 'SLUG',
     'email'             => 'Email',
     'wiki'              => 'Wiki',
-    'edit_comment'		=> 'Thay đổi nhận xé',
-	'move_comment'		=> 'Hãy di chuyển bình luận',
-	'move'             	=> 'Di chuyển',
+    'edit_comment'      => 'Thay đổi nhận xé',
+    'move_comment'      => 'Hãy di chuyển bình luận',
+    'move_title'        => 'Tiêu đề bài viết',
+    'move_add_help'     => 'Sáng tạo từ bình luận của bài viết',
+    'move'              => 'Di chuyển',
     'enter'             => 'Đi vào',
     'enter_password'    => 'Nhập mật khẩu',
 
@@ -399,10 +401,10 @@ return [
     'content_deleted'   => '{name} đã xóa',
     'topic_deleted'     => 'Đã xóa chủ đề',
 
-    'facet_comments_disabled'	=> 'Tắt bình luận?',
-    'topic_comments_disabled'	=> 'Bình luận bị vô hiệu hóa trong chủ đề.',
-	'blog_comments_disabled'	=> 'Tác giả Blog đã vô hiệu hóa bình luận.',
-	'dir_comments_disabled'		=> 'Bình luận bị vô hiệu hóa trong phần này.',
+    'facet_comments_disabled'    => 'Tắt bình luận?',
+    'topic_comments_disabled'    => 'Bình luận bị vô hiệu hóa trong chủ đề.',
+    'blog_comments_disabled'    => 'Tác giả Blog đã vô hiệu hóa bình luận.',
+    'dir_comments_disabled'        => 'Bình luận bị vô hiệu hóa trong phần này.',
 
     'endless_scroll'        => 'Cho phép cuộn trong nguồn cấp dữ liệu?',
     'notification_email'    => 'Thông báo qua email',
@@ -414,11 +416,11 @@ return [
     'ignored_users_help'    => 'Những người dùng có bài đăng mà bạn sẽ không nhìn thấy trong nguồn cấp dữ liệu của mình.',
     'ignored_no'            => 'Bạn không có người dùng mà bạn đang bỏ qua.',
 
-	'preferences_help' 		=> 'Không gian (chủ đề, blog) mà bạn thích. <p>Chúng cũng sẽ được hiển thị trên trang chính của trang web.</p>',
-	'signed_facets' 		=> 'Chủ đề, blog bạn theo dõi',
-	'signed_facets_help'	=> 'Bạn có thể chọn bất kỳ số nào, nhưng chỉ có {num} đầu tiên được hiển thị',
-	'add_menu_signed' 		=> 'Thêm tùy chọn',
-	'show_sites_block' 		=> 'Hiển thị khối Trang web?',
+    'preferences_help'         => 'Không gian (chủ đề, blog) mà bạn thích. <p>Chúng cũng sẽ được hiển thị trên trang chính của trang web.</p>',
+    'signed_facets'         => 'Chủ đề, blog bạn theo dõi',
+    'signed_facets_help'    => 'Bạn có thể chọn bất kỳ số nào, nhưng chỉ có {num} đầu tiên được hiển thị',
+    'add_menu_signed'         => 'Thêm tùy chọn',
+    'show_sites_block'         => 'Hiển thị khối Trang web?',
 
     'not_confirmed'         => 'không được xác nhận.',
     'resend_email'          => 'Kiểm tra email của bạn hoặc gửi lại email mới.',
@@ -437,9 +439,9 @@ return [
     'notif_edit_website'        => 'đã thay đổi trang web, {url}hãy kiểm tra xem{a}',
     'notif_approved_website'    => '(người điều hành) {url}đã thay đổi (phê duyệt) trang web của bạn{a}',
     'notif_add_website_comment' => '{url}đã nhận xét về trang web{a} bạn đã đăng ký',
-	
-	'github'	=> 'GitHub',
-	'skype' 	=> 'Skype',
-	'telegram' 	=> 'Telegram',
-	'vk' 		=> 'VK (dịch vụ)',
+
+    'github'    => 'GitHub',
+    'skype'     => 'Skype',
+    'telegram'     => 'Telegram',
+    'vk'         => 'VK (dịch vụ)',
 ];
