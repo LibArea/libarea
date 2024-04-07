@@ -5,7 +5,7 @@ if ($profile['cover_art'] != 'cover_art.jpeg') :
   $css = 'img-2xl mb-mt25 mb-img-2xl profile-ava';
 endif;
 ?>
-<style nonce="<?= $_SERVER['nonce']; ?>">
+<style nonce="<?= config('main', 'nonce'); ?>">
   .bg-profile {
     background: <?= $profile['color']; ?>;
     min-height: 90px;
@@ -13,7 +13,7 @@ endif;
 </style>
 
 <div class="relative">
-  <?php if (UserData::checkAdmin()) : ?>
+  <?php if ($container->user()->admin()) : ?>
     <?= insert('/content/user/profile/deletion-statistics', ['count' => $data['delet_count']]); ?>
   <?php endif; ?>
 
@@ -28,9 +28,9 @@ endif;
   <?php endif; ?>
   <div class="profile-header-footer mt15">
 
-    <?php if (UserData::checkActiveUser()) : ?>
+    <?php if ($container->user()->active()) : ?>
       <div class="right m15">
-        <?php if ($profile['id'] == UserData::getUserId()) : ?>
+        <?php if ($profile['id'] == $container->user()->id()) : ?>
           <a class="btn btn-primary" title="<?= __('app.settings'); ?>" href="<?= url('setting'); ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#settings"></use>

@@ -1,23 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\User;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Controllers\Controller;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
 use App\Models\User\UserModel;
 use App\Models\{PostModel, FolderModel};
-use Meta;
+use Meta, Html;
 
 class UserController extends Controller
 {
     protected $limit = 35;
 
-    // All users
-    // Все пользователи
-    function index($sheet)
+    public function all(): void
+    {
+        $this->callIndex('all');
+    }
+
+    public function new(): void
+    {
+        $this->callIndex('new');
+    }
+
+    /**
+     * All users
+     * Все пользователи
+     *
+     * @param [type] $sheet
+     * @return void
+     */
+    function callIndex($sheet)
     {
         $usersCount = UserModel::getUsersAllCount();
-        $users      = UserModel::getUsersAll($this->pageNumber, $this->limit, $sheet);
+        $users      = UserModel::getUsersAll(Html::pageNumber(), $this->limit, $sheet);
         notEmptyOrView404($users);
 
         $m = [
@@ -25,7 +42,7 @@ class UserController extends Controller
             'url'   => url('users.' . $sheet),
         ];
 
-        return $this->render(
+        return render(
             '/user/all',
             [
                 'meta'  => Meta::get(__('meta.' . $sheet . '_users'), __('meta.' . $sheet . '_users_desc'), $m),
@@ -33,15 +50,19 @@ class UserController extends Controller
                     'sheet'         => $sheet,
                     'type'          => 'users',
                     'pagesCount'    => ceil($usersCount / $this->limit),
-                    'pNum'          => $this->pageNumber,
+                    'pNum'          => Html::pageNumber(),
                     'users'         => $users
                 ]
             ]
         );
     }
 
-    // Member bookmarks page
-    // Страница закладок участника
+    /**
+     * Member bookmarks page
+     * Страница закладок участника
+     *
+     * @return void
+     */
     function favorites()
     {
         $favorites = UserModel::userFavorite();
@@ -52,11 +73,11 @@ class UserController extends Controller
                 $row['comment_post_id'] = $row['post_id'];
             }
 
-            $row['post']    = PostModel::getPost($row['comment_post_id'], 'id', $this->user);
+            $row['post']    = PostModel::getPost($row['comment_post_id'], 'id');
             $result[$ind]   = $row;
         }
 
-        return $this->render(
+        return render(
             '/user/favorite/all',
             [
                 'meta'  => Meta::get(__('app.favorites')),
@@ -64,23 +85,23 @@ class UserController extends Controller
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
                     'favorites' => $result,
-                    'tags'      => FolderModel::get('favorite', $this->user['id']),
+                    'tags'      => FolderModel::get('favorite', $this->container->user()->id()),
                 ]
             ]
         );
     }
 
-
-    // Participant's folder page (for bookmarks)
-    // Страница папок участника (для закладок)
+    /**
+     * Participant's folder page (for bookmarks)
+     * Страница папок участника (для закладок)
+     *
+     * @return void
+     */
     function folders()
     {
-        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
-        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
+        $folders = FolderModel::get('favorite', $this->container->user()->id());
 
-        $folders = FolderModel::get('favorite', $this->user['id']);
-
-        return $this->render(
+        return render(
             '/user/favorite/folders',
             [
                 'meta'  => Meta::get(__('app.folders')),
@@ -94,26 +115,35 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function foldersFavorite()
     {
-        return $this->render(
+        return render(
             '/user/favorite/all',
             [
                 'meta'  => Meta::get(__('app.favorites')),
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
-                    'favorites' => UserModel::userFavorite(Request::getInt('id'))
+                    'favorites' => UserModel::userFavorite(Request::get('id')->asInt())
                 ]
             ]
         );
     }
 
-    // Member Draft Page
-    // Страница черновиков участника
+    /**
+     * Member Draft Page
+     * Страница черновиков участника
+     *
+     * @return void
+     */
     function drafts()
     {
-        return $this->render(
+        return render(
             '/user/draft',
             [
                 'meta'  => Meta::get(__('app.drafts')),
@@ -126,16 +156,20 @@ class UserController extends Controller
         );
     }
 
-    // User preferences page
-    // Страница предпочтений пользователя
+    /**
+     * User preferences page
+     * Страница предпочтений пользователя
+     *
+     * @return void
+     */
     public function subscribed()
     {
-        return $this->render(
+        return render(
             '/user/favorite/read-subscribed',
             [
                 'meta'  => Meta::get(__('app.subscribed')),
                 'data'  => [
-                    'h1'    => __('app.subscribed') . ' ' . $this->user['login'],
+                    'h1'    => __('app.subscribed') . ' ' . $this->container->user()->login(),
                     'sheet' => 'subscribed',
                     'type'  => 'favorites',
                     'posts' => PostModel::getPostsListUser('subscribed')
@@ -144,16 +178,20 @@ class UserController extends Controller
         );
     }
 
-    // User preferences page
-    // Страница предпочтений пользователя
+    /**
+     * User preferences page
+     * Страница предпочтений пользователя
+     *
+     * @return void
+     */
     public function read()
     {
-        return $this->render(
+        return render(
             '/user/favorite/read-subscribed',
             [
                 'meta'  => Meta::get(__('app.i_read')),
                 'data'  => [
-                    'h1'    => __('app.i_read') . ' ' . $this->user['login'],
+                    'h1'    => __('app.i_read') . ' ' . $this->container->user()->login(),
                     'sheet' => 'read',
                     'type'  => 'favorites',
                     'posts' => PostModel::getPostsListUser('read')

@@ -17,11 +17,11 @@
               [
                 'id'    => $data['sheet'] . '_users_all',
                 'url'   => url('users.all'),
-                'title' => __('app.all'),
+                'title' => 'app.all',
               ], [
                 'id'    => $data['sheet'] . '_users_new',
                 'url'   => url('users.new'),
-                'title' => __('app.new_ones'),
+                'title' => 'app.new_ones',
               ],
             ]
           ]
@@ -33,7 +33,7 @@
 
     <div class="flex flex-wrap justify-between">
       <?php foreach ($data['users'] as $user) : ?>
-        <div class="w160 mb20 center">
+        <div class="w160 mb20">
           <a href="<?= url('profile', ['login' => $user['login']]); ?>">
             <?= Img::avatar($user['avatar'], $user['login'], 'img-lg', 'max'); ?>
             <div class="block mt5 nickname<?php if (Html::loginColor($user['created_at'] ?? false)) : ?> green<?php endif; ?>">

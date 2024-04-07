@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Validate;
 
-use App\Models\AuthModel;
-use App\Services\Сheck\EmailSpam;
-use App\Services\Integration\Google;
+use App\Models\Auth\AuthModel;
+use App\Content\Сheck\EmailSpam;
+use App\Content\Integration\Google;
+use Msg;
 
 class RulesRegistration extends Validator
 {
@@ -16,15 +19,15 @@ class RulesRegistration extends Validator
         // Check ip for ban
         // Запрет Ip на бан
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
-            is_return(__('msg.multiple_accounts'), 'error', $redirect);
+            Msg::redirect(__('msg.multiple_accounts'), 'error', $redirect);
         }
 
         // Let's check the verification code
         // Проверим код проверки
         if (!$invitation_code) {
-            if (config('integration.captcha')) {
+            if (config('integration', 'captcha')) {
                 if (!Google::checkCaptchaCode()) {
-                    is_return(__('msg.code_error'), 'error', $redirect);
+                    Msg::redirect(__('msg.code_error'), 'error', $redirect);
                 }
             }
             // Если хакинг формы (If form hacking)
@@ -34,21 +37,21 @@ class RulesRegistration extends Validator
         // Check login
         // Проверим login
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $data['login'])) {
-            is_return(__('msg.slug_correctness'), 'error', $redirect);
+            Msg::redirect(__('msg.slug_correctness'), 'error', $redirect);
         }
 
         self::length($data['login'], 3, 12, 'nickname', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $data['login'])) {
-            is_return(__('msg.nick_character'), 'error', $redirect);
+            Msg::redirect(__('msg.nick_character'), 'error', $redirect);
         }
 
-        if (in_array($data['login'], config('stop-nickname'))) {
-            is_return(__('msg.nick_exist'), 'error', $redirect);
+        if (in_array($data['login'], config('stop-nickname', 'list'))) {
+            Msg::redirect(__('msg.nick_exist'), 'error', $redirect);
         }
 
         if (is_array(AuthModel::checkRepetitions($data['login'], 'login'))) {
-            is_return(__('msg.nick_exist'), 'error', $redirect);
+            Msg::redirect(__('msg.nick_exist'), 'error', $redirect);
         }
 
         // Check Email
@@ -56,17 +59,17 @@ class RulesRegistration extends Validator
         self::email($data['email'], $redirect);
 
         if (EmailSpam::index($data['email']) === true) {
-            is_return(__('msg.email_forbidden'), 'error', $redirect);
+            Msg::redirect(__('msg.email_forbidden'), 'error', $redirect);
         } 
 
         if (is_array(AuthModel::checkRepetitions($data['email'], 'email'))) {
-            is_return(__('msg.email_replay'), 'error', $redirect);
+            Msg::redirect(__('msg.email_replay'), 'error', $redirect);
         }
 
         $arr = explode('@', $data['email']);
         $domain = array_pop($arr);
-        if (in_array($domain, config('stop-email'))) {
-            is_return(__('msg.email_replay'), 'error', $redirect);
+        if (in_array($domain, config('stop-email', 'list'))) {
+            Msg::redirect(__('msg.email_replay'), 'error', $redirect);
         }
 
         // Let's check the password
@@ -74,11 +77,11 @@ class RulesRegistration extends Validator
         self::length($data['password'], 8, 32, 'password', $redirect);
 
         if (substr_count($data['password'], ' ') > 0) {
-            is_return(__('msg.password_spaces'), 'error', $redirect);
+            Msg::redirect(__('msg.password_spaces'), 'error', $redirect);
         }
 
         if ($data['password'] != $data['password_confirm']) {
-            is_return(__('msg.pass_match_err'), 'error', $redirect);
+            Msg::redirect(__('msg.pass_match_err'), 'error', $redirect);
         }
 
         return $inv_uid;

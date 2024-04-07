@@ -2,8 +2,8 @@
   <div class="indent-body">
     <?= insert('/content/user/setting/nav'); ?>
 
-    <form class="max-w780" action="<?= url('setting.change', ['type' => 'setting']); ?>" method="post">
-      <?php csrf_field(); ?>
+    <form class="max-w780" action="<?= url('setting.edit.profile', method: 'post'); ?>" method="post">
+      <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/setting', ['data' => $data]); ?>
     </form>
   </div>
@@ -32,7 +32,7 @@
   </div>
 </div>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', () => {
     let dialogEmail = getById('my-email');
     let dialog = new A11yDialog(dialogEmail);

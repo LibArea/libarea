@@ -50,7 +50,7 @@ img {
 }
 
 .top-sm {
-  top: 70px;
+  top: 72px;
 }
 
 .mr-auto {
@@ -240,10 +240,6 @@ img {
 
 .bg-beige {
   background-color: var(--beige);
-}
-
-.active {
-  color: var(--red);
 }
 
 /*

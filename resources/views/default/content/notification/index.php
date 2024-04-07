@@ -13,7 +13,7 @@
         $profile = url('profile', ['login' => $notif['login']]);
       ?>
 
-        <?php foreach (config('notification') as $key => $n) : ?>
+        <?php foreach (config('notification', 'list') as $key => $n) : ?>
           <?php if ($n['id'] == $notif['type']) : ?>
             <div class="br-bottom p5<?php if ($notif['flag'] == 0) { ?> bg-lightyellow<?php } ?>">
               <svg class="icons <?= $n['css']; ?>">
@@ -22,7 +22,7 @@
               <a class="black ml5 nickname" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
               <span class="lowercase gray-600">
                 <?= __('app.' . $n['lang'], ['url' => '<a href="' . $url . '">', 'a' => '</a>']); ?>
-                — <?= Html::langDate($notif['time']); ?>
+                — <?= langDate($notif['time']); ?>
               </span>
               <?php if ($notif['flag'] == 0) : ?><sup class="ml5 red">✔</sup><?php endif; ?>
             </div>

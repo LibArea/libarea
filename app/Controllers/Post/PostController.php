@@ -1,19 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\Post;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Controllers\Controller;
-use App\Services\Сheck\PostPresence;
-use App\Services\Сheck\FacetPresence;
-use App\Services\Meta\Post;
-use App\Services\Tree\BuildTree;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
+
+use App\Content\Сheck\PostPresence;
+use App\Content\Сheck\FacetPresence;
 use App\Models\{PostModel, CommentModel, SubscriptionModel, FeedModel};
-use Meta, UserData;
 
 use App\Traits\Views;
 use App\Traits\Poll;
 use App\Traits\LastDataModified;
+use BuildTree, Html, Meta;
 
 class PostController extends Controller
 {
@@ -23,17 +24,32 @@ class PostController extends Controller
 
     protected $limit = 25;
 
-    // Full post
-    // Полный пост
-    public function index($type)
+    public function post(): void
     {
-        $slug  = Request::get('slug');
-        $id    = Request::getInt('id');
-		$sorting  = Request::getGet('sort');
+        $this->callIndex('post');
+    }
 
-        $content = self::presence($type, $id, $slug);
+    public function page(): void
+    {
+        $this->callIndex('info.page');
+    }
 
-        $this->setPostView($content['post_id'], $this->user['id']);
+    /**
+     * Full post
+     * Полный пост
+     *
+     * @param [type] $type
+     * @return void
+     */
+    public function callIndex(string $type)
+    {
+        $slug  = Request::param('slug')->asString();
+        $id    = Request::param('id')->asPositiveInt();
+        $sorting  = Request::get('sort')->value();
+
+        $content = $this->presence($type, $id, $slug);
+
+        $this->setPostView($content['post_id'], $this->container->user()->id());
 
         $content['modified'] = $content['post_date'] != $content['post_modified'] ? true : false;
 
@@ -41,7 +57,7 @@ class PostController extends Controller
         $blog   = PostModel::getPostTopic($content['post_id'], 'blog');
 
         // Show the draft only to the author
-        if ($content['post_draft'] == 1 && $content['post_user_id'] != $this->user['id']) {
+        if ($content['post_draft'] == 1 && $content['post_user_id'] != $this->container->user()->id()) {
             redirect('/');
         }
 
@@ -57,17 +73,17 @@ class PostController extends Controller
         // Sending Last-Modified and handling HTTP_IF_MODIFIED_SINCE
         $this->getDataModified($content['post_modified']);
 
-		$comments = CommentModel::getCommentsPost($content['post_id'], $content['post_feature'], $sorting);	
+        $comments = CommentModel::getCommentsPost($content['post_id'], $content['post_feature'], $sorting);
 
         if ($type == 'post') {
-            return $this->render(
+            return render(
                 '/post/post-view',
                 [
-                    'meta'  => Post::metadata($content),
+                    'meta'  => Meta::post($content),
                     'data'  => [
                         'post'          => $content,
-                        'comments'		=> BuildTree::index(0, $comments),
-                        'recommend'     => PostModel::postSimilars($content['post_id'], $facets[0]['facet_id'] ?? null),
+                        'comments'      => BuildTree::index(0, $comments),
+                        'recommend'     => PostModel::postSimilars($content['post_id'], (int)$facets[0]['facet_id'] ?? null),
                         'related_posts' => $related_posts ?? '',
                         'post_signed'   => SubscriptionModel::getFocus($content['post_id'], 'post'),
                         'facet_signed'  => SubscriptionModel::getFocus($blog[0]['facet_id'] ?? null, 'facet'),
@@ -83,25 +99,25 @@ class PostController extends Controller
             );
         }
 
-        $slug_facet = Request::get('facet_slug');
-        $facet  = FacetPresence::index($slug_facet, 'slug', 'section');
+        $slug_facet = Request::param('facet_slug')->asString();
+        $page  = FacetPresence::index($slug_facet, 'slug', 'section');
 
-        return $this->render(
+        return render(
             '/post/page-view',
             [
-                'meta'  => Post::metadata($content),
+                'meta'  => Meta::post($content),
                 'data'  => [
                     'sheet' => 'page',
                     'type'  => $type,
                     'page'  => $content,
-                    'facet' => $facet,
-                    'pages' => PostModel::recent($facet['facet_id'], $content['post_id'])
+                    'facet' => [],
+                    'pages' => PostModel::recent($page['facet_id'], $content['post_id'])
                 ]
             ]
         );
     }
 
-    public static function presence($type, $id, $slug)
+    public function presence(string $type, int $id, string|null $slug)
     {
         // Check id and get content data
         // Проверим id и получим данные контента
@@ -110,7 +126,7 @@ class PostController extends Controller
 
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
-            if (config('meta.slug_post') == true) {
+            if (config('meta', 'slug_post') == true) {
                 if ($slug != $content['post_slug']) {
                     redirect(post_slug($content['post_id'], $content['post_slug']));
                 }
@@ -118,8 +134,8 @@ class PostController extends Controller
 
             // Redirect when merging a post
             // Редирект при слиянии поста
-            if ($content['post_merged_id'] > 0 && !UserData::checkAdmin()) {
-                redirect(url('post_id', ['id' => $content['post_merged_id']]));
+            if ($content['post_merged_id'] > 0 && !$this->container->user()->admin()) {
+                redirect(url('post.id', ['id' => $content['post_merged_id']]));
             }
 
             return $content;
@@ -128,15 +144,19 @@ class PostController extends Controller
         return PostPresence::index($slug, 'slug');
     }
 
-    // Posting your post on your profile
-    // Размещение своего поста у себя в профиле
+    /**
+     * Posting your post on your profile
+     * Размещение своего поста у себя в профиле
+     *
+     * @return void
+     */
     public function postProfile()
     {
-        $post = PostPresence::index($post_id = Request::getPostInt('post_id'), 'id');
+        $post = PostPresence::index($post_id = Request::post('post_id')->asInt(), 'id');
 
         // Access check
         // Проверка доступа
-        if ($post['post_user_id'] != UserData::getUserId()) {
+        if ($post['post_user_id'] != $this->container->user()->id()) {
             redirect('/');
         }
 
@@ -146,17 +166,21 @@ class PostController extends Controller
             return false;
         }
 
-        return PostModel::setPostProfile($post_id, $this->user['id']);
+        return PostModel::setPostProfile($post_id, $this->container->user()->id());
     }
 
-    // Posts by domain
-    // Посты по домену
+    /**
+     * Posts by domain
+     * Посты по домену
+     *
+     * @return void
+     */
     public function domain()
     {
-        $site = PostModel::availabilityDomain($domain = Request::get('domain'));
+        $site = PostModel::availabilityDomain($domain = Request::param('domain')->asString());
         notEmptyOrView404($site);
 
-        $posts      = FeedModel::feed($this->pageNumber, $this->limit, 'web.feed', $domain);
+        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'web.feed', $domain);
         $pagesCount = FeedModel::feedCount('web.feed', $domain);
 
         $m = [
@@ -164,13 +188,13 @@ class PostController extends Controller
             'url'   => url('domain', ['domain' => $domain]),
         ];
 
-        return $this->render(
+        return render(
             '/post/link',
             [
                 'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('meta.domain_desc') . ': ' . $domain, $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $this->pageNumber,
+                    'pNum'          => Html::pageNumber(),
                     'posts'         => $posts,
                     'count'         => $pagesCount,
                     'list'          => PostModel::listDomain($domain),
@@ -181,10 +205,15 @@ class PostController extends Controller
         );
     }
 
-    // Last 5 pages by content id
-    // Последние 5 страниц по id контенту
-    public function last($content_id)
+    /**
+     * Last 5 pages by content id
+     * Последние 5 страниц по id контенту
+     *
+     * @param integer $content_id
+     * @return array|false
+     */
+    public function last(int $content_id): array|false
     {
-        return PostModel::recent($content_id, null);
+        return PostModel::recent($content_id, false);
     }
 }

@@ -1,6 +1,6 @@
-<?php if (App\Services\DeviceID::get() == NULL) : ?>
+<?php if (\App\Controllers\DeviceController::index() == NULL) : ?>
   <script src="/assets/js/device/client.base.min.js"></script>
-  <script nonce="<?= $_SERVER['nonce']; ?>">
+  <script nonce="<?= config('main', 'nonce'); ?>">
 	const client = new ClientJS();
 	const id = client.getFingerprint();
     fetch("/device", {

@@ -1,11 +1,13 @@
 <?php
+$user = $container->user()->get();
 $type = $type ?? false;
-foreach ($list as $key => $item) :
+
+foreach ($menu as $key => $item) :
 	$tl = $item['tl'] ?? 0; ?>
 	<?php if (!empty($item['hr'])) : ?>
-		<?php if (UserData::checkActiveUser()) : ?><li class="m15"></li><?php endif; ?>
+		<?php if ($user['id'] > 0) : ?><li class="m15"></li><?php endif; ?>
 	<?php else : ?>
-		<?php if (UserData::getRegType($tl)) :
+		<?php if ($user['trust_level'] >= $tl) :
 			$css = empty($item['css']) ? false : $item['css'];
 			$isActive = $item['id'] == $type ? 'active' : false;
 			$class = ($css || $isActive) ? ' class="' . $isActive . ' ' .  $css . '"'   : ''; ?>
@@ -13,19 +15,22 @@ foreach ($list as $key => $item) :
 					<?php if (!empty($item['icon'])) : ?><svg class="icons">
 							<use xlink:href="/assets/svg/icons.svg#<?= $item['icon']; ?>"></use>
 						</svg><?php endif; ?>
-					<?= $item['title']; ?></a></li>
+					<?= __($item['title']); ?></a></li>
 			<?php endif; ?>
 		<?php endif; ?>
 	<?php endforeach; ?>
 
-	<?php if (UserData::checkActiveUser()) : ?>
-		<br>
+	<?php if ($user['id'] > 0) : ?>
 		<?php if ($topics_user) : ?>
-			<a class="right text-sm" title="<?= __('app.edit'); ?>" href="<?= url('setting', ['type' => 'preferences']); ?>">
-				<sup><svg class="icons gray-600">
-						<use xlink:href="/assets/svg/icons.svg#edit"></use>
-					</svg></sup>
-			</a>
+			<div class="flex justify-between items-center">
+				<h4 class="mb5"><?= __('app.preferences'); ?></h3>
+
+					<a class="text-sm" title="<?= __('app.edit'); ?>" href="<?= url('setting.preferences'); ?>">
+						<sup><svg class="icons gray-600">
+								<use xlink:href="/assets/svg/icons.svg#edit"></use>
+							</svg></sup>
+					</a>
+			</div>
 		<?php endif; ?>
 
 		<?php $i = 0;
@@ -52,10 +57,11 @@ foreach ($list as $key => $item) :
 		<?php endforeach; ?>
 
 		<?php if ($i < 1) : ?>
-			<div class="ml10">
-				<a class="red text-sm" href="<?= url('setting', ['type' => 'preferences']); ?>">
-					+ <?= __('app.add'); ?></a>
-				<span class="text-sm lowercase ml15 gray-600 "><?= __('app.preferences'); ?>...</span>
+			<div class="mt15 ml10">
+				<a class="red text-sm" href="<?= url('setting.preferences'); ?>">
+					<span class="red">+</span> <?= __('app.add'); ?></a>
+				<span class="text-sm lowercase ml20 gray-600 "><?= __('app.preferences'); ?>...</span>
 			</div>
 		<?php endif; ?>
+
 	<?php endif; ?>

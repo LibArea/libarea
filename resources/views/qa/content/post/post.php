@@ -1,13 +1,9 @@
-<?php
-
-use Hleb\Constructor\Handlers\Request; ?>
-
 <?php if (!empty($data['posts'])) : ?>
   <ul class="list-none">
     <?php $n = 0;
     foreach ($data['posts'] as $post) :
       $n++; ?>
-      <?php if (UserData::getUserId() == 0 && $n == 6) : ?>
+      <?php if ($container->user()->id() == 0 && $n == 6) : ?>
         <?= insert('/_block/no-login-screensaver'); ?>
       <?php endif; ?>
       <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
@@ -59,7 +55,7 @@ use Hleb\Constructor\Handlers\Request; ?>
             </div>
           </div>
 
-          <?php if (Request::getMainUrl() == '/subscribed') : ?>
+          <?php if ($container->request()->getUri()->getPath() == '/subscribed') : ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id tag-violet right">
               <?= __('app.unsubscribe'); ?>
             </div>
@@ -69,7 +65,7 @@ use Hleb\Constructor\Handlers\Request; ?>
     <?php endforeach; ?>
   </ul>
 <?php else : ?>
-  <?php if (UserData::checkActiveUser()) : ?>
+  <?php if ($container->user()->active()) : ?>
     <?= insert('/_block/facet/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>
   <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>

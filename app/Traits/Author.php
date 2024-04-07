@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use UserData;
+use Hleb\Static\Container;
 
 trait Author
 {
@@ -12,7 +12,8 @@ trait Author
             return $user_id;
         }
 
-        if (UserData::checkAdmin()) {
+        $container = Container::getContainer();
+        if ($container->user()->admin()) {
             $answer_user_new = json_decode($user_new, true);
             return $answer_user_new[0]['id'];
         }

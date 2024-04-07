@@ -1,9 +1,9 @@
 <main>
   <div class="indent-body">
     <h2><?= __('app.invites'); ?></h2>
-    <?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
-      <form method="post" action="<?= url('content.create', ['type' => 'invitation']); ?>">
-        <?php csrf_field(); ?>
+    <?php if ($container->access()->limitTl(2)) : ?>
+      <form method="post" action="<?= url('add.invitation', method: 'post'); ?>">
+        <?= $container->csrf()->field(); ?>
 
         <fieldset>
           <input type="email" name="email">
@@ -25,11 +25,11 @@
               - <?= __('app.registered'); ?>
             </div>
 
-            <?php if (UserData::checkAdmin()) : ?>
+            <?php if ($container->user()->admin()) : ?>
               <?= __('app.link_used'); ?>:
               <?= $invite['invitation_email']; ?>
               <code class="block w-90">
-                <?= config('meta.url'); ?><?= url('invite.reg', ['code' => $invite['invitation_code']]); ?>
+                <?= config('meta', 'url'); ?><?= url('invite.reg', ['code' => $invite['invitation_code']]); ?>
               </code>
             <?php endif; ?>
 
@@ -38,7 +38,7 @@
             <?= __('app.for'); ?> (<?= $invite['invitation_email']; ?>)
             <?= __('app.can_send_link'); ?>:
             <code class="block w-90">
-              <?= config('meta.url'); ?><?= url('invite.reg', ['code' => $invite['invitation_code']]); ?>
+              <?= config('meta', 'url'); ?><?= url('invite.reg', ['code' => $invite['invitation_code']]); ?>
             </code>
           <?php endif; ?>
 

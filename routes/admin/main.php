@@ -1,65 +1,94 @@
 <?php
 
-Route::prefix('/mod/admin');
-Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
+use App\Middlewares\DefaultMiddleware;
+use App\Bootstrap\Services\Auth\RegType;
 
-    Route::get('/')->module('admin', 'App\Home')->name('admin');
+use Modules\Admin\Controllers\{
+    AdminController,
+    UsersController,
+    FacetsController,
+    ToolsController,
+    SettingController,
+    LogsController,
+    AuditsController,
+    WordsController,
+    BadgesController,
+    InvitationsController,
+    CssController,
+    ConsoleController,
+};
 
-    Route::post('/test/mail')->module('admin', 'App\Console@testMail')->name('admin.test.mail');
-    Route::post('/user/ban')->module('admin', 'App\Users@banUser');
-    Route::post('/word/ban')->module('admin', 'App\Words@deletes');
-    Route::post('/audit/status')->module('admin', 'App\Audits@statusApproved');
-    Route::post('/reports/saw')->module('admin', 'App\Audits@saw');
-    Route::post('/topic/ban')->module('admin', 'App\Facets@deletes');
-    Route::post('/badge/remove')->module('admin', 'App\Badges@remove');
-    Route::post('/manual/update')->module('admin', 'App\Console'); 
-    
-    Route::getProtect();
-        Route::post('/badge/user/create')->module('admin', 'App\Badges@rewarding')->name('admin.user.badge.create');
-        Route::post('/badge/create')->module('admin', 'App\Badges@create')->name('admin.badge.create');
-        Route::post('/badge/edit/{id}')->module('admin', 'App\Badges@change')->name('admin.badge.change');
-        Route::post('/word/create')->module('admin', 'App\Words@create')->name('admin.word.create');
-        Route::post('/user/edit/{id}')->module('admin', 'App\Users@change')->name('admin.user.change');
-        Route::post('/setting/edit')->module('admin', 'App\Setting@change')->name('admin.setting.change');
-    Route::endProtect();
-  
-    Route::get('/tools')->module('admin', 'App\Tools')->name('admin.tools');
+use App\Controllers\{
+	Comment\CommentController,
+	Comment\EditCommentController,
+	HomeController,
+};	
 
-    Route::get('/users/ban')->module('admin', 'App\Users', ['ban'])->name('admin.users.ban');
-    Route::get('/users/{id}/edit')->module('admin', 'App\Users@edit', ['edit'])->name('admin.user.edit');
-	Route::get('/users/{id}/history')->module('admin', 'App\Users@history', ['history'])->name('admin.user.history');
-    Route::get('/users')->module('admin', 'App\Users', ['all'])->name('admin.users');       
-    Route::get('/logip/{item}')->module('admin', 'App\Users@logsIp', ['logip'])->where(['item' => '[0-9].+'])->name('admin.logip');
-    Route::get('/regip/{item}')->module('admin', 'App\Users@logsIp', ['regip'])->where(['item' => '[0-9].+'])->name('admin.regip');
-	Route::get('/device/{item}')->module('admin', 'App\Users@logsIp', ['deviceid'])->where(['item' => '[0-9].+'])->name('admin.device');
-    
-    Route::get('/audits')->module('admin', 'App\Audits', ['all', 'audits'])->name('admin.audits');
-    Route::get('/audits/approved')->module('admin', 'App\Audits', ['ban', 'audits'])->name('admin.audits.ban');
-    Route::get('/report')->module('admin', 'App\Audits', ['all', 'reports'])->name('admin.reports');
+Route::toGroup()
+	->prefix('/mod/admin/')
+	->middleware(DefaultMiddleware::class, data: [RegType::REGISTERED_ADMIN, '=']);
 
-    Route::get('/invitations')->module('admin', 'App\Invitations')->name('admin.invitations');
-    
-    Route::get('/setting')->module('admin', 'App\Setting', ['settings'])->name('admin.settings.general');
-    Route::get('/setting/interface')->module('admin', 'App\Setting', ['interface'])->name('admin.settings.interface');
-    Route::get('/setting/advertising')->module('admin', 'App\Setting', ['advertising'])->name('admin.settings.advertising');
-   
-    Route::get('/comments/deleted')->controller('Comment\CommentController', ['deleted'])->name('comments.deleted');
-    
-    Route::get('/badges')->module('admin', 'App\Badges')->name('admin.badges');
-    Route::get('/badges/add')->module('admin', 'App\Badges@add')->name('admin.badges.add');
-    Route::get('/badges/{id}/edit')->module('admin', 'App\Badges@edit')->name('admin.badges.edit');
-    Route::get('/badges/user/add/{id}')->module('admin', 'App\Badges@addUser')->name('admin.badges.user.add');
-  
-    Route::get('/words/add')->module('admin', 'App\Words@add')->name('words.add');
-    Route::get('/words')->module('admin', 'App\Words')->name('admin.words');
-    
-    Route::get('/facets')->module('admin', 'App\Facets')->name('admin.facets.all');
-    Route::get('/facets/{type}')->module('admin', 'App\Facets@type')->where(['type' => '[a-z]+'])->name('admin.facets.type');
-    Route::get('/facets/ban/{type}')->module('admin', 'App\Facets@ban')->where(['type' => '[a-z]+'])->name('admin.facets.ban.type');
+	Route::get('/')->module('admin', AdminController::class)->name('admin');
+	Route::post('/test/mail')->module('admin', ConsoleController::class, 'testMail')->name('admin.test.mail');
+	Route::post('/user/ban')->module('admin', UsersController::class, 'banUser');
+	Route::post('/word/ban')->module('admin', WordsController::class, 'deletes');
+	Route::post('/audit/status')->module('admin', AuditsController::class, 'statusApproved');
+	Route::post('/reports/saw')->module('admin', AuditsController::class, 'saw');
+	Route::post('/topic/ban')->module('admin', FacetsController::class, 'deletes');
+	Route::post('/badge/remove')->module('admin', BadgesController::class, 'remove');
+	Route::post('/manual/update')->module('admin', ConsoleController::class);
 
-    Route::get('/css')->module('admin', 'App\Css')->name('admin.css');
-    Route::get('/logs/search')->module('admin', 'App\Logs@logsSearch')->name('admin.logs.search');
-    Route::get('/logs')->module('admin', 'App\Logs')->name('admin.logs');
- 
-    Route::get('/deleted')->controller('HomeController', ['deleted'])->name('main.deleted'); 
+	Route::toGroup()->protect();
+		Route::post('/badge/user/create')->module('admin', BadgesController::class, 'rewarding')->name('admin.user.badge.create');
+		Route::post('/badge/create')->module('admin', BadgesController::class, 'create')->name('admin.badge.create');
+		Route::post('/badge/edit/{id}')->module('admin', BadgesController::class, 'edit')->where(['id' => '[0-9]+'])->name('admin.badge.edit');
+		Route::post('/word/create')->module('admin', WordsController::class, 'create')->name('admin.word.create');
+		Route::post('/user/edit/{id}')->module('admin', UsersController::class, 'edit')->where(['id' => '[0-9]+'])->name('admin.user.edit');
+		Route::post('/setting/edit')->module('admin', SettingController::class, 'edit')->name('admin.setting.edit');
+	Route::endGroup();
+
+	// nav
+	Route::get('/users')->module('admin', UsersController::class)->name('admin.users');
+	Route::get('/facets')->module('admin', FacetsController::class)->name('admin.facets.all');
+	Route::get('/tools')->module('admin', ToolsController::class)->name('admin.tools');
+
+	// menu
+	Route::get('/setting')->module('admin', SettingController::class)->name('admin.settings.general');
+	Route::get('/setting/interface')->module('admin', SettingController::class)->name('admin.settings.interface');
+	Route::get('/setting/advertising')->module('admin', SettingController::class)->name('admin.settings.advertising');
+
+	Route::get('/edit/comment/transfer/{id}')->controller(EditCommentController::class, 'transfer')->where(['id' => '[0-9]+'])->name('admin.comment.transfer.form.edit'); 
+
+	Route::get('/audits')->module('admin', AuditsController::class)->name('admin.audits');
+	Route::get('/invitations')->module('admin', InvitationsController::class)->name('admin.invitations');
+	Route::get('/logs/search')->module('admin', LogsController::class, 'logsSearch')->name('admin.logs.search');
+	Route::get('/logs')->module('admin', LogsController::class)->name('admin.logs');
+	Route::get('/words')->module('admin', WordsController::class)->name('admin.words');
+	Route::get('/badges')->module('admin', BadgesController::class)->name('admin.badges');
+	Route::get('/css')->module('admin', CssController::class)->name('admin.css');
+
+	Route::get('/words/add')->module('admin', WordsController::class, 'add')->name('words.add');
+
+	Route::get('/audits/approved')->module('admin', AuditsController::class)->name('admin.audits.ban');
+	Route::get('/report')->module('admin', AuditsController::class)->name('admin.reports');
+
+	Route::get('/users/ban')->module('admin', UsersController::class, 'ban')->name('admin.users.ban');
+	Route::get('/users/{id}/edit')->module('admin', UsersController::class, 'editForm')->where(['id' => '[0-9]+'])->name('admin.user.edit.form');
+	Route::get('/users/{id}/history')->module('admin', UsersController::class, 'history')->where(['id' => '[0-9]+'])->name('admin.user.history');
+
+	Route::get('/logip/{item}')->module('admin', UsersController::class, 'logip')->where(['item' => '[0-9].+'])->name('admin.logip');
+	Route::get('/regip/{item}')->module('admin', UsersController::class, 'regip')->where(['item' => '[0-9].+'])->name('admin.regip');
+	Route::get('/deviceid/{item}')->module('admin', UsersController::class, 'deviceid')->where(['item' => '[0-9].+'])->name('admin.device');
+
+	Route::get('/badges/add')->module('admin', BadgesController::class, 'add')->name('admin.badges.add');
+	Route::get('/badges/{id}/edit')->module('admin', BadgesController::class, 'editBadge')->where(['id' => '[0-9]+'])->name('admin.badges.edit');
+	Route::get('/badges/user/add/{id}')->module('admin', BadgesController::class, 'addUser')->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
+
+	Route::get('/facets/{type}')->module('admin', FacetsController::class, 'type')->where(['type' => '[a-z]+'])->name('admin.facets.type');
+	Route::get('/facets/ban/{type}')->module('admin', FacetsController::class, 'ban')->where(['type' => '[a-z]+'])->name('admin.facets.ban.type');
+
+    // Deleted: posts in the feed, comments
+    // Удаленные: посты в ленте, комментарии
+	Route::get('/deleted')->controller(HomeController::class, 'deleted')->name('main.deleted');
+	Route::get('comments/deleted')->controller(CommentController::class, 'deleted')->name('comments.deleted');
 Route::endGroup();

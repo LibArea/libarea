@@ -5,7 +5,7 @@
       <?php foreach ($related_posts as $related) : ?>
         <li class="flex items-center mt10">
           <svg class="icons gray-600">
-              <use xlink:href="/assets/svg/icons.svg#chevrons-right"></use>
+            <use xlink:href="/assets/svg/icons.svg#chevrons-right"></use>
           </svg>
           <a href="<?= post_slug($related['id'], $related['post_slug']); ?>">
             <?= $related['value']; ?>

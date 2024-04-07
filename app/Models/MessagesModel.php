@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
+class MessagesModel extends Model
 {
     // All dialogs
     public static function getMessages()
     {
-        $user_id = UserData::getUserId();
+        $user_id = self::container()->user()->id();
         $sql = "SELECT  
                     dialog_id,
                     dialog_sender_id,
@@ -31,7 +31,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     // Check if the dialog exists or not
     public static function availability(int $user_id)
     {
-        $id = UserData::getUserId();
+        $id = self::container()->user()->id();
         $sql = "SELECT dialog_id FROM messages_dialog 
                     WHERE (dialog_sender_id = $id AND dialog_recipient_id = $user_id) 
                         OR (dialog_sender_id = $user_id AND dialog_recipient_id = $id)";
@@ -61,7 +61,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     // Recalculation viewed or not
     public static function setMessageRead($dialog_id, $receipt = true)
     {
-        $user_id = UserData::getUserId();
+        $user_id = self::container()->user()->id();
 
         if (!$messages_dialog = self::getDialogById($dialog_id)) {
             return false;
@@ -147,7 +147,7 @@ class MessagesModel extends \Hleb\Scheme\App\Models\MainModel
     // Записываем личное сообщение
     public static function sendMessage($dialog_recipient_id, $message_content)
     {
-        $dialog_sender_id = UserData::getUserId();
+        $dialog_sender_id = self::container()->user()->id();
 
         if (!$dialog_sender_id or !$dialog_recipient_id or !$message_content) {
             return false;

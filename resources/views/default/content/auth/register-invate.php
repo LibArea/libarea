@@ -1,8 +1,8 @@
 <main>
   <div class="indent-body">
     <h1><?= __('app.reg_invite'); ?></h1>
-    <form class="max-w300" action="<?= url('register.add'); ?>" method="post">
-      <?php csrf_field(); ?>
+    <form class="max-w300" action="<?= url('register.add', method: 'post'); ?>" method="post">
+      <?= $container->csrf()->field(); ?>
 
       <fieldset>
         <label for="login"><?= __('app.nickname'); ?></label>

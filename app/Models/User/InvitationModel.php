@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\User;
 
-use Hleb\Constructor\Handlers\Request;
-use UserData;
-use DB;
+use Hleb\Static\Request;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
+class InvitationModel extends Model
 {
     public static function get()
     {
@@ -28,13 +30,13 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
     // Создадим инвайт для участника
     public static function create($invitation_code, $invitation_email)
     {
-        $user_id = UserData::getUserId();
+        $user_id = self::container()->user()->id();
 
         $params = [
             'uid'               => $user_id,
             'invitation_code'   => $invitation_code,
             'invitation_email'  => $invitation_email,
-            'add_ip'            => Request::getRemoteAddress(),
+            'add_ip'            => Request::getUri()->getIp(),
         ];
 
         $sql = "INSERT INTO invitations(uid, 
@@ -84,7 +86,7 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
                             WHERE uid = :user_id
                             ORDER BY invitation_date DESC";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId()])->fetchAll();
+        return DB::run($sql, ['user_id' => self::container()->user()->id()])->fetchAll();
     }
 
     // Проверим не активированный инвайт
@@ -107,7 +109,7 @@ class InvitationModel extends \Hleb\Scheme\App\Models\MainModel
         $params = [
             'uid'               => $inv_uid,
             'active_status'     => 1,
-            'active_ip'         => Request::getRemoteAddress(),
+            'active_ip'         => Request::getUri()->getIp(),
             'active_time'       => date('Y-m-d H:i:s'),
             'active_uid'        => $active_uid,
             'invitation_code'   => $invitation_code,

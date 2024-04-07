@@ -1,5 +1,25 @@
 <div class="flex justify-between mb15">
   <ul class="nav scroll-menu">
-    <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.favorites')]); ?>
+    <?= insert('/_block/navigation/nav', [
+      'list' => [
+        [
+          'id'    => 'favorites',
+          'url'   => url('favorites'),
+          'title' => 'app.favorites',
+        ], [
+          'id'    => 'read',
+          'url'   => url('read'),
+          'title' => 'app.i_read',
+        ], [
+          'id'    => 'subscribed',
+          'url'   => url('subscribed'),
+          'title' => 'app.subscribed',
+        ], [
+          'id'    => 'folders',
+          'url'   => url('favorites.folders'),
+          'title' => 'app.folders',
+        ],
+      ],
+    ]); ?>
   </ul>
 </div>

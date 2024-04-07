@@ -1,7 +1,7 @@
 <div class="max-w780 mt10">
-  <?php if (UserData::checkActiveUser()) : ?>
-    <form action="<?= url('content.change', ['type' => $data['type']]); ?>" accept-charset="UTF-8" method="post">
-      <?= csrf_field() ?>
+  <?php if ($container->user()->active()) : ?>
+    <form action="<?= url('edit.' . $data['type'], method: 'post'); ?>" accept-charset="UTF-8" method="post">
+      <?= $container->csrf()->field(); ?>
       <textarea rows="5" minlength="6" name="content"><?= $data['content']; ?></textarea>
       <fieldset>
         <input type="hidden" name="id" value="<?= $data['id']; ?>">

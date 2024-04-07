@@ -365,6 +365,8 @@ return [
     'email'             => 'Email',
     'wiki'              => 'Wiki',
     'edit_comment'		=> 'Schimbă comentariul',
+	'move_comment'		=> 'Să mutăm comentariul',
+	'move'             	=> 'Mișcare',
     'enter'             => 'Introduce',
     'enter_password'    => 'Introdu parola',
 
@@ -436,4 +438,8 @@ return [
     'notif_approved_website'    => '(moderator) {url}a schimbat (a aprobat) site-ul dvs. web{a}',
     'notif_add_website_comment' => '{url}a comentat pe site-ul{a} la care v-ați abonat',
 
+	'github'	=> 'GitHub',
+	'skype' 	=> 'Skype',
+	'telegram' 	=> 'Telegram',
+	'vk' 		=> 'VK (servicii)',
 ];

@@ -7,14 +7,14 @@
   </div>
 <?php } ?>
 
-<form class="max-w780" action="<?= url('content.create', ['type' => 'folder']); ?>" method="post" enctype="multipart/form-data">
-  <?php csrf_field(); ?>
+<form class="max-w780" action="<?= url('add.folder', method: 'post'); ?>" method="post" enctype="multipart/form-data">
+  <?= $container->csrf()->field(); ?>
   <input name='cat-outside' class='tagify' placeholder='<?= __('app.add'); ?>...'>
   <fieldset>
     <?= Html::sumbit(__('app.add')); ?>
   </fieldset>
 </form>
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener("DOMContentLoaded", async () => {
     var input = document.querySelector('input[name=cat-outside]')
     var tagify = new Tagify(input, {

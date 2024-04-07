@@ -1,8 +1,8 @@
 <main>
   <div class="indent-body">
     <?= insert('/content/user/setting/nav'); ?>
-    <form method="post" action="<?= url('setting.change', ['type' => 'avatar']); ?>" enctype="multipart/form-data">
-      <?= csrf_field() ?>
+    <form method="post" action="<?= url('setting.edit.avatar', method: 'post'); ?>" enctype="multipart/form-data">
+      <?= $container->csrf()->field(); ?>
 
       <div class="file-upload" id="file-drag">
         <div class="mb-block">
@@ -19,7 +19,7 @@
       </div>
 
       <fieldset class="clear gray">
-        <div class="mb5 text-sm"><?= __('app.recommended_size'); ?>: 240x240px (jpg, jpeg, png)</div>
+        <div class="mb5 text-sm"><?= __('app.recommended_size'); ?>: 240x240px (jpg, jpeg, png, webp)</div>
         <?= Html::sumbit(__('app.download')); ?>
       </fieldset>
 
@@ -28,7 +28,7 @@
           <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
             <div class="relative mr15">
               <img class="block br-gray max-w-100" src="<?= Img::cover($data['user']['cover_art'], 'user'); ?>">
-              <a class="right text-sm" href="<?= url('setting', ['type' => 'cover_remove']); ?>">
+              <a class="right text-sm" href="<?= url('delete.user.cover', ['id' => $container->user()->id()]); ?>">
                 <?= __('app.remove'); ?>
               </a>
             </div>
@@ -50,7 +50,7 @@
       </fieldset>
 
       <fieldset>
-        <div class="text-sm gray mb15"><?= __('app.recommended_size'); ?>: 1920x240px (jpg, jpeg, png)</div>
+        <div class="text-sm gray mb15"><?= __('app.recommended_size'); ?>: 1920x240px (jpg, jpeg, png, webp)</div>
         <?= Html::sumbit(__('app.download')); ?>
       </fieldset>
     </form>

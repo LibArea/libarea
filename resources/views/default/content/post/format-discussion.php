@@ -25,17 +25,17 @@
     </div>
 
     <?php
-    function internalRender($nodes, $post, $level = 0)
+    function internalRender($container, $nodes, $post, $level = 0)
     {
       foreach ($nodes as  $node) :
         $level =  $level > 5 ? 5 : $level;
     ?>
 
-        <?php if ($node['comment_is_deleted'] == 1 && !UserData::checkAdmin()) : ?>
+        <?php if ($node['comment_is_deleted'] == 1 && !$container->user()->admin()) : ?>
           <div class="gray-600 text-sm m10"><?= __('app.content_deleted', ['name' => __('app.comment')]); ?>...</div>
         <?php else : ?>
 
-          <?php if ($node['comment_published'] == 0 && $node['comment_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
+          <?php if ($node['comment_published'] == 0 && $node['comment_user_id'] != $container->user()->id() && !$container->user()->admin()) continue; ?>
 
           <ol class="comments">
             <li>
@@ -65,14 +65,14 @@
                         </svg>
                       <?php endif; ?>
                       <span class="gray-600 lowercase">
-                        <?= Html::langDate($node['comment_date']); ?>
+                        <?= langDate($node['comment_date']); ?>
                       </span>
                       <?php if (strtotime($node['comment_modified']) < strtotime($node['comment_date'])) : ?>
                         <span class="gray-600 mb-none">
                           (<?= __('app.ed'); ?>.)
                         </span>
                       <?php endif; ?>
-                      <?php if ($node['comment_published'] == 0 && UserData::checkAdmin()) : ?>
+                      <?php if ($node['comment_published'] == 0 && $container->user()->admin()) : ?>
                         <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
                       <?php endif; ?>
                       <?php if ($node['comment_lo']) : ?>
@@ -98,7 +98,7 @@
                 <div class="comment_footer">
                   <?= Html::votes($node, 'comment'); ?>
 
-                  <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+                  <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
                     <a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
                   <?php endif; ?>
 
@@ -107,7 +107,7 @@
               </div>
 
               <?php if (isset($node['children'])) {
-                internalRender($node['children'], $post, $level + 1);
+                internalRender($container, $node['children'], $post, $level + 1);
               } ?>
 
             </li>
@@ -117,13 +117,13 @@
     <?php endforeach;
     }
 
-    echo internalRender($data['comments'], $data['post']);
+    echo internalRender($container, $data['comments'], $data['post']);
     ?>
   </div>
 <?php else : ?>
   <?php if ($post['post_closed'] == 1) : ?>
     <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.close'), 'icon' => 'closed']);  ?>
-  <?php elseif (!UserData::checkActiveUser()) : ?>
+  <?php elseif (!$container->user()->active()) : ?>
     <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_auth'), 'icon' => 'info']); ?>
   <?php else : ?>
     <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'info']); ?>

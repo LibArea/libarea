@@ -1,8 +1,8 @@
 <main>
   <div class="indent-body">
     <h2 class="text-xl"><?= __('app.add_' . $data['type']); ?></h2>
-    <form class="max-w780" action="<?= url('content.create', ['type' => $data['type']]); ?>" method="post" enctype="multipart/form-data">
-      <?= csrf_field() ?>
+    <form class="max-w780" action="<?= url('add.facet', ['type' => $data['type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
+      <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/add-facet'); ?>
     </form>
   </div>

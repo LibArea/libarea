@@ -140,10 +140,6 @@ main {
     gap: 1.5rem;
   }
 
-  .footer ul {
-    padding-left: 0;
-  }
-
   .mb-img-2xl {
     height: 65px;
     width: 65px;
@@ -191,6 +187,10 @@ main {
   main,
   .menuno main {
     width: 100%;
+  }
+
+  footer ul {
+    padding-left: 0;
   }
 
   .wrap {

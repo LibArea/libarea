@@ -1,4 +1,4 @@
-<?php if (UserData::checkAdmin()) : ?>
+<?php if ($container->user()->admin()) : ?>
   <div class="relative ml10">
     <span class="trigger text-sm">
       <svg class="icons">
@@ -29,18 +29,20 @@
           &#183; <?= $post['post_ip']; ?>
         </a>
       </li>
-      <?php if (UserData::getUserLogin() == $post['login']) : ?>
+      <?php if ($container->user()->login() == $post['login']) : ?>
         <?php if ($post['my_post'] == $post['post_id']) : ?>
-           <li>
-		   <a class="add-profile active" data-post="<?= $post['post_id']; ?>">
-             &#183; <?= __('app.from_profile'); ?>
-          </a> </li>
+          <li>
+            <a class="add-profile active" data-post="<?= $post['post_id']; ?>">
+              &#183; <?= __('app.from_profile'); ?>
+            </a>
+          </li>
         <?php else : ?>
           <li>
-		  <a class="add-profile gray" data-post="<?= $post['post_id']; ?>">
-             &#183; <?= __('app.in_profile'); ?>
-          </a> </li>
-        <?php endif; ?> 
+            <a class="add-profile gray" data-post="<?= $post['post_id']; ?>">
+              &#183; <?= __('app.in_profile'); ?>
+            </a>
+          </li>
+        <?php endif; ?>
       <?php endif; ?>
     </ul>
   </div>

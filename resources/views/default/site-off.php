@@ -14,7 +14,7 @@
     <p class="gray-600"><?= __('off.under_reconstruction'); ?>...</p>
 
     <form class="max-w300" action="/login" method="post">
-      <?php csrf_field(); ?>
+      <?= $container->csrf()->field(); ?>
       <fieldset>
         <label for="email"><?= __('off.email'); ?></label>
         <input type="text" placeholder="<?= __('off.enter'); ?>  e-mail" name="email">
@@ -27,7 +27,7 @@
     </form>
 
   </main>
-  <div class="center gray-600 mt5 text-sm"><?= date('Y'); ?> © <?= config('meta.name'); ?></a>
+  <div class="center gray-600 mt5 text-sm"><?= date('Y'); ?> © <?= config('meta', 'name'); ?></a>
 
 </body>
 

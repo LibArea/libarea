@@ -5,7 +5,7 @@ $post = $data['post'];
 
 <main class="wrap">
   <article class="indent-body<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
-    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+    <?php if ($post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
         <div class="flex flex-row gap items-center">
           <?php if (!empty($data['blog'])) : ?>
             <a title="<?= $data['blog'][0]['facet_title']; ?>" class="text-sm" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
@@ -28,18 +28,18 @@ $post = $data['post'];
           <?= insert('/content/post/post-title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm lowercase flex gap gray-600">
-          <?= Html::langDate($post['post_date']); ?>
+          <?= langDate($post['post_date']); ?>
           <?php if ($post['modified']) : ?>
             (<?= __('app.ed'); ?>)
           <?php endif; ?>
 
-          <?php if (UserData::checkActiveUser()) : ?>
-            <?php if (UserData::getUserLogin() == $post['login']  || UserData::checkAdmin()) : ?>
-              <a class="gray-600" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
+          <?php if ($container->user()->active()) : ?>
+            <?php if ($container->user()->login() == $post['login']  || $container->user()->admin()) : ?>
+              <a class="gray-600" href="<?= url('post.form.edit', ['id' => $post['post_id']]); ?>">
                 <?= __('app.edit'); ?>
               </a>
             <?php endif; ?>
-            <?php if (UserData::getUserLogin() == $post['login']) : ?>
+            <?php if ($container->user()->login() == $post['login']) : ?>
               <?php if ($post['my_post'] == $post['post_id']) : ?>
                 <span class="add-profile active" data-post="<?= $post['post_id']; ?>">
                   + <?= __('app.in_profile'); ?>
@@ -94,7 +94,7 @@ $post = $data['post'];
         </div>
       </div>
       <div class="items-center flex gap-max">
-        <?php if (UserData::checkActiveUser()) : ?>
+        <?php if ($container->user()->active()) : ?>
           <?php if (is_array($data['post_signed'])) : ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 gray-600">
               <?= __('app.unsubscribe'); ?>
@@ -113,11 +113,11 @@ $post = $data['post'];
       </div>
     </div>
 
-    <?php if (UserData::checkActiveUser()) : ?>
+    <?php if ($container->user()->active()) : ?>
       <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
-        <form action="<?= url('content.create', ['type' => 'answer']); ?>" accept-charset="UTF-8" method="post">
-          <?= csrf_field() ?>
+        <form action="<?= url('add.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
+          <?= $container->csrf()->field(); ?>
 
           <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
 
@@ -150,7 +150,7 @@ $post = $data['post'];
     endif; ?>
   </div>
 </main>
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', () => {
     mediumZoom(document.querySelectorAll('.content img:not(.emoji), .post img:not(.emoji), .content-body p img:not(.emoji)'));
     // Добавим цитирование    

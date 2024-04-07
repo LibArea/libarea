@@ -7,6 +7,7 @@
  */
 
 return [
+  'list' =>  [
     'vvaa1.com',
     'vixej.com',
     'slowimo.com',
@@ -35,6 +36,8 @@ return [
     'mailopenr.com',
     'arpizol.com',
     'protonmail.com',
+	'mailwebber.com',
+	'farironalds.com',
 
     'ustalks.xyz',
     'supmail.xyz',
@@ -49,4 +52,5 @@ return [
     'dropmail.me',
     'post.cz',
     'xmc.pl',
+  ],
 ];

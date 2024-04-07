@@ -1,18 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Models\User\UserModel;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
 use App\Models\{MessagesModel, NotificationModel};
+use App\Models\User\UserModel;
 use App\Validate\Validator;
-use Meta;
+use Meta, Msg;
 
 class MessagesController extends Controller
 {
     public function index()
     {
-        return $this->render(
+        return render(
             '/messages/index',
             [
                 'meta'  => Meta::get(__('app.private_messages')),
@@ -23,8 +26,12 @@ class MessagesController extends Controller
         );
     }
 
-    // All dialogues
-    // Все диалоги    
+    /**
+     * All dialogues
+     * Все диалоги   
+     *
+     * @return void
+     */
     public function dialogs()
     {
         $result = [];
@@ -35,18 +42,18 @@ class MessagesController extends Controller
             foreach ($messages_dialog as $ind => $row) {
 
                 // Принимающий  AND $row['dialog_recipient_count']
-                if ($row['dialog_recipient_id'] == $this->user['id']) {
+                if ($row['dialog_recipient_id'] == $this->container->user()->id()) {
                     $row['unread']   = $row['dialog_recipient_unread'];
                     $row['count']    = $row['dialog_recipient_count'];
 
                     // Отправляющий  AND $row['dialog_sender_count']    
-                } else if ($row['dialog_sender_id'] == $this->user['id']) {
+                } else if ($row['dialog_sender_id'] == $this->container->user()->id()) {
                     $row['unread']   = $row['dialog_sender_unread'];
                     $row['count']    = $row['dialog_sender_count'];
                 }
 
-                $row['msg_user']    = UserModel::getUser($row['dialog_sender_id'], 'id');
-                $row['msg_to_user'] = UserModel::getUser($row['dialog_recipient_id'], 'id');
+                $row['msg_user']    = UserModel::get($row['dialog_sender_id'], 'id');
+                $row['msg_to_user'] = UserModel::get($row['dialog_recipient_id'], 'id');
                 $row['message']     = MessagesModel::getMessageOne($row['dialog_id']);
                 $result[$ind]       = $row;
             }
@@ -57,13 +64,13 @@ class MessagesController extends Controller
 
     public function dialog()
     {
-        $id = Request::getInt('id');
+        $id = Request::param('id')->asPositiveInt();
         if (!$dialog = MessagesModel::getDialogById($id)) {
-            is_return(__('msg.no_dialogue'), 'error', url('messages', ['login' => $this->user['login']]));
+            Msg::redirect(__('msg.no_dialogue'), 'error', url('messages'));
         }
 
-        if ($dialog['dialog_recipient_id'] != $this->user['id'] and $dialog['dialog_sender_id'] != $this->user['id']) {
-            is_return(__('msg.no_topic'), 'error', url('messages', ['login' => $this->user['login']]));
+        if ($dialog['dialog_recipient_id'] != $this->container->user()->id() and $dialog['dialog_sender_id'] != $this->container->user()->id()) {
+            Msg::redirect(__('msg.no_topic'), 'error', url('messages'));
         }
 
         // update views, etc. 
@@ -75,16 +82,16 @@ class MessagesController extends Controller
         // dialog_recipient_unread
         if ($list = MessagesModel::getMessageByDialogId($id)) {
 
-            if ($dialog['dialog_sender_id'] != $this->user['id']) {
-                $recipient_user = UserModel::getUser($dialog['dialog_sender_id'], 'id');
+            if ($dialog['dialog_sender_id'] != $this->container->user()->id()) {
+                $recipient_user = UserModel::get($dialog['dialog_sender_id'], 'id');
             } else {
-                $recipient_user = UserModel::getUser($dialog['dialog_recipient_id'], 'id');
+                $recipient_user = UserModel::get($dialog['dialog_recipient_id'], 'id');
             }
 
             foreach ($list as $key => $val) {
-                if ($dialog['dialog_sender_id'] == $this->user['id'] and $val['message_sender_remove']) {
+                if ($dialog['dialog_sender_id'] == $this->container->user()->id() and $val['message_sender_remove']) {
                     unset($list[$key]);
-                } else if ($dialog['dialog_sender_id'] != $this->user['id'] and $val['message_recipient_remove']) {
+                } else if ($dialog['dialog_sender_id'] != $this->container->user()->id() and $val['message_recipient_remove']) {
                     unset($list[$key]);
                 } else {
                     $list[$key]['message_content']  =  markdown($val['message_content'], 'text');
@@ -95,7 +102,7 @@ class MessagesController extends Controller
             }
         }
 
-        return $this->render(
+        return render(
             '/messages/dialog',
             [
                 'meta'  => Meta::get(__('app.dialogue')),
@@ -109,13 +116,17 @@ class MessagesController extends Controller
         );
     }
 
-    // Form for sending personal messages from the profile 
-    // Форма отправки личных сообщений из профиля
+    /**
+     * Form for sending personal messages from the profile 
+     * Форма отправки личных сообщений из профиля
+     *
+     * @return void
+     */
     public function messages()
     {
         $this->limitTl();
 
-        $user  = UserModel::getUser(Request::get('login'), 'slug');
+        $user  = UserModel::get(Request::param('login')->asString(), 'slug');
         notEmptyOrView404($user);
 
         // If the dialog exists, then redirect to it
@@ -124,7 +135,7 @@ class MessagesController extends Controller
             redirect('/messages/' . $dialog['dialog_id']);
         }
 
-        return $this->render(
+        return render(
             '/messages/user-add-messages',
             [
                 'meta'  => Meta::get(__('app.send_message')),
@@ -136,24 +147,28 @@ class MessagesController extends Controller
         );
     }
 
-    // Sending a private message to a user 
-    // Отправка сообщения участнику
-    public function create()
+    /**
+     * Sending a private message to a user
+     * Отправка сообщения участнику
+     *
+     * @return void
+     */
+    public function add()
     {
         $content        = $_POST['content']; // для Markdown
-        $recipient_id   = Request::getPost('recipient');
+        $recipient_id   = Request::post('recipient')->value();
 
         $this->limitTl();
 
         // Private message is empty
         // Если личное сообщение пустое
         if ($content == '') {
-            is_return(__('msg.enter_content'), 'error', url('messages', ['login' => $this->user['login']]));
+            Msg::redirect(__('msg.enter_content'), 'error', url('messages', ['login' => $this->container->user()->login()]));
         }
 
         // If the user does not exist 
         // Если пользователя не существует
-        $user  = UserModel::getUser($recipient_id, 'id');
+        $user  = UserModel::get($recipient_id, 'id');
         notEmptyOrView404($user);
 
         $dialog_id = MessagesModel::sendMessage($recipient_id, $content);
@@ -164,22 +179,30 @@ class MessagesController extends Controller
         redirect($url);
     }
 
-    // We will limit the sending of PMs if the level of trust is low
-    // Ограничим отправк ЛС, если уровень доверия низок
+    /**
+     * We will limit the sending of PMs if the level of trust is low
+     * Ограничим отправк ЛС, если уровень доверия низок
+     *
+     * @return void
+     */
     public function limitTl()
     {
-        if (config('trust-levels.tl_add_pm') > $this->user['trust_level']) {
+        if (config('trust-levels', 'tl_add_pm') > $this->container->user()->tl()) {
             redirect('/');
         }
 
         return true;
     }
 
-    // Let's show the editing form
-    // Покажем форму редактирования
+    /**
+     * Let's show the editing form
+     * Покажем форму редактирования
+     *
+     * @return void
+     */
     public function addForma()
     {
-        $id = Request::getPostInt('id');
+        $id = Request::post('id')->asInt();
         $message = MessagesModel::getMessage($id);
 
         insert(
@@ -194,23 +217,23 @@ class MessagesController extends Controller
         );
     }
 
-    public function change()
+    public function edit()
     {
-        $id  = Request::getPostInt('id');
+        $id  = Request::post('id')->asInt();
         $content = $_POST['content']; // для Markdown
 
         // Access check
         $message = MessagesModel::getMessage($id);
         notEmptyOrView404($message);
 
-        if ($message['message_sender_id'] != $this->user['id']) {
-            is_return(__('msg.went_wrong'), 'error', url('dialogues', ['id' => $message['message_dialog_id']]));
+        if ($message['message_sender_id'] != $this->container->user()->id()) {
+            Msg::redirect(__('msg.went_wrong'), 'error', url('dialogues', ['id' => $message['message_dialog_id']]));
         }
 
         Validator::Length($content, 6, 5000, 'content', url('dialogues', ['id' => $message['message_dialog_id']]));
 
         MessagesModel::edit($id, $content);
 
-        is_return(__('msg.change_saved'), 'success', url('dialogues', ['id' => $message['message_dialog_id']]));
+        Msg::redirect(__('msg.change_saved'), 'success', url('dialogues', ['id' => $message['message_dialog_id']]));
     }
 }

@@ -90,6 +90,7 @@ return [
     'life_help'         => 'Дітям, тварини, хобі...',
     'security'          => 'Безпека...',
     'society'           => 'Суспільство та політика',
+	'hi_tech'			=> 'Hi-Tech',
 
     'contact_information'   => 'Контактна інформація',
     'telephone'             => 'Телефон',

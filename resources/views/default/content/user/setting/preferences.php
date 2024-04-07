@@ -4,8 +4,8 @@
     <?= insert('/content/user/setting/nav'); ?>
 
     <div class="mt20">
-      <form action="<?= url('setting.change', ['type' => 'preferences']); ?>" accept-charset="UTF-8" method="post">
-        <?php csrf_field(); ?>
+      <form action="<?= url('setting.edit.preferences', method: 'post'); ?>" accept-charset="UTF-8" method="post">
+        <?= $container->csrf()->field(); ?>
 
         <div class="mb15">
           <input name="id[]" value="-1" type="checkbox" <?php if ($block) : ?><?php if ($block['facet_id'] == -1) : ?> checked<?php endif; ?><?php endif; ?>> <?= __('app.show_sites_block'); ?>
@@ -13,7 +13,7 @@
 
         <h2 class="title"><?= __('app.signed_facets'); ?></h2>
         <span class="gray-600 text-xs">
-          <?= __('app.signed_facets_help', ['num' => config('facets.quantity_home')]); ?>
+          <?= __('app.signed_facets_help', ['num' => config('facets', 'quantity_home')]); ?>
         </span>
 
         <?php if ($data['signed']) : ?>
@@ -48,7 +48,7 @@
   </div>
 </aside>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   const tasksListElement = document.querySelector(`.tasks__list`);
   const taskElements = tasksListElement.querySelectorAll(`.tasks__item`);
 

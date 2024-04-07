@@ -3,17 +3,17 @@
   foreach ($data['posts'] as $post) :
     $n++; ?>
 
-    <?php if (!UserData::checkActiveUser() && $n == 6) : ?>
+    <?php if (!$container->user()->active() && $n == 6) : ?>
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
 
     <?php if ($post['post_hidden'] == 1) : ?>
-      <?php if ($post['post_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
+      <?php if ($post['post_user_id'] != $container->user()->id() && !$container->user()->admin()) continue; ?>
     <?php endif; ?>
 
-    <div class="box shadow-bottom">
+    <div class="box">
       <div class="flex items-center gap-min text-sm mb5">
         <a class="gray-600 flex gap-min items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm', 'max'); ?>
@@ -21,7 +21,7 @@
             <?= $post['login']; ?>
           </span>
         </a>
-        <div class="gray-600 lowercase"><?= Html::langDate($post['post_date']); ?></div>
+        <div class="gray-600 lowercase"><?= langDate($post['post_date']); ?></div>
 
         <?php $type = $data['type'] ?? 'topic';
         if ($type != 'blog') : ?>
@@ -66,7 +66,7 @@
             <?php endif; ?>
           <?php endif; ?>
 
-          <?php $arr = \App\Services\Parser\Content::cut($post['post_content']);
+          <?php $arr = \App\Content\Parser\Content::cut($post['post_content']);
           echo markdown($arr['content']); ?>
         </div>
 
@@ -102,7 +102,7 @@
     </div>
   <?php endforeach; ?>
 <?php else : ?>
-  <?php if (UserData::checkActiveUser()) : ?>
+  <?php if ($container->user()->active()) : ?>
     <?= insert('/_block/facet/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>
   <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>

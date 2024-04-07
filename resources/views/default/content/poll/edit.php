@@ -4,8 +4,8 @@
       <li><a href="<?= url('polls'); ?>"><?= __('app.all'); ?></a></li>
       <li class="active"><?= __('app.edit_poll'); ?></li>
     </ul>
-    <form action="<?= url('content.change', ['type' => 'poll']); ?>" id="myform" method="post">
-      <?= csrf_field() ?>
+    <form action="<?= url('edit.poll', method: 'post'); ?>" id="myform" method="post">
+      <?= $container->csrf()->field(); ?>
       <fieldset class="max-w780">
         <input type="text" name="title" value="<?= htmlEncode($data['question']['poll_title']); ?>">
       </fieldset>

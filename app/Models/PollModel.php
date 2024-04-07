@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Hleb\Constructor\Handlers\Request;
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
+use Hleb\Static\Request;
 
-class PollModel extends \Hleb\Scheme\App\Models\MainModel
+class PollModel extends Model
 {
     public static function getQuestion($question_id)
     {
@@ -41,19 +43,19 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
         $start  = ($page - 1) * $limit;
         $sql = "SELECT poll_id, poll_title, poll_date FROM polls WHERE poll_user_id = :user_id ORDER BY poll_id DESC LIMIT :start, :limit";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId(), 'start' => $start, 'limit' => $limit])->fetchAll();
+        return DB::run($sql, ['user_id' => self::container()->user()->id(), 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function getUserQuestionsPollsCount()
     {
         $sql = "SELECT poll_title, poll_date FROM polls WHERE poll_user_id = :user_id";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId()])->rowCount();
+        return DB::run($sql, ['user_id' => self::container()->user()->id()])->rowCount();
     }
 
     public static function createQuestion($title)
     {
-        DB::run("INSERT INTO polls(poll_title, poll_user_id) VALUES(:title, :user_id)", ['title' => $title, 'user_id' => UserData::getUserId()]);
+        DB::run("INSERT INTO polls(poll_title, poll_user_id) VALUES(:title, :user_id)", ['title' => $title, 'user_id' => self::container()->user()->id()]);
 
         $sql =  DB::run("SELECT LAST_INSERT_ID() as id")->fetch();
 
@@ -73,7 +75,7 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT vote_answer_id, vote_date FROM polls_votes WHERE vote_question_id = :question_id AND vote_user_id = :user_id";
 
-        return DB::run($sql, ['question_id' => $question_id, 'user_id' => UserData::getUserId()])->fetch();
+        return DB::run($sql, ['question_id' => $question_id, 'user_id' => self::container()->user()->id()])->fetch();
     }
 
     public static function vote($question_id, $answer_id)
@@ -88,7 +90,7 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
 
         $sql = "INSERT INTO polls_votes(vote_question_id, vote_answer_id, vote_user_id, vote_ip) VALUES(:question_id, :answer_id, :user_id, :ip)";
 
-        return DB::run($sql, ['question_id' => $question_id, 'answer_id' => $answer_id, 'user_id' => UserData::getUserId(), 'ip' => Request::getRemoteAddress()]);
+        return DB::run($sql, ['question_id' => $question_id, 'answer_id' => $answer_id, 'user_id' => self::container()->user()->id(), 'ip' => Request::getUri()->getIp()]);
     }
 
     public static function editTitle($question_id, $title)
@@ -119,7 +121,7 @@ class PollModel extends \Hleb\Scheme\App\Models\MainModel
                         LEFT JOIN polls ON poll_id = answer_question_id 
                             WHERE answer_id = :answer_id  AND poll_user_id = :user_id";
 
-        return DB::run($sql, ['answer_id' => $answer_id, 'user_id' => UserData::getUserId()])->fetch();
+        return DB::run($sql, ['answer_id' => $answer_id, 'user_id' => self::container()->user()->id()])->fetch();
     }
 
     public static function delVariant($answer_id)

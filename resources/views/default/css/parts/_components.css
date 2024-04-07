@@ -99,12 +99,6 @@ h5 {
   padding-right: 1rem;
 }
 
-.wrap.wrap-max {
-  max-width: 100%;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
 .d-header_contents {
   display: flex;
   align-items: center;
@@ -312,6 +306,12 @@ ul.last-content li {
 ul.last-content a.last-content_telo {
   display: block;
   word-wrap: break-word;
+  background-color: #f8fafc;
+  padding: 3px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-top: 5px;
+  border: 3px;
 }
 
 .uppercase-box {

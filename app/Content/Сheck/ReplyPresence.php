@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Content\Сheck;
+
+use App\Models\Item\ReplyModel;
+
+class ReplyPresence
+{
+    public static function index(int $reply_id): array
+    {
+        $reply = ReplyModel::getId($reply_id);
+
+        notEmptyOrView404($reply);
+
+        return $reply;
+    }
+}

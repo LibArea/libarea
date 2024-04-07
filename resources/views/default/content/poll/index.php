@@ -4,7 +4,7 @@
       <ul class="nav">
         <li class="active"><?= __('app.polls'); ?></li>
       </ul>
-      <div><a class="btn btn-outline-primary btn-small" href="<?= url('content.add', ['type' => 'poll']) ?>">+ <?= __('app.add_poll'); ?></a></div>
+      <div><a class="btn btn-outline-primary btn-small" href="<?= url('poll.form.add') ?>">+ <?= __('app.add_poll'); ?></a></div>
     </div>
     <?php if (!empty($data['polls'])) : ?>
 

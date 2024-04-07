@@ -2,7 +2,7 @@
 <main>
   <div class="indent-body">
     <article<?php if ($page['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>
-      <?php if ($page['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+      <?php if ($page['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
         <h1>
           <?= $page['post_title']; ?>
         </h1>
@@ -19,8 +19,8 @@
         <?= Html::votes($page, 'post'); ?>
         <div class="gray-600 italic ml15">
           <?= $page['post_modified']; ?>
-          <?php if (Access::author('post', $page) === true) : ?>
-            <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('content.edit', ['type' => $page['post_type'], 'id' => $page['post_id']]); ?>">
+          <?php if ($container->access()->author('post', $page) === true) : ?>
+            <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('post.form.edit', ['id' => $page['post_id']]); ?>">
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#edit"></use>
               </svg>
@@ -41,7 +41,7 @@
         </a>
       </div>
     <?php endforeach; ?>
-    <?php if (UserData::checkAdmin()) : ?>
+    <?php if ($container->user()->admin()) : ?>
       <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icons">
           <use xlink:href="/assets/svg/icons.svg#edit"></use>
         </svg> <?= __('app.edit'); ?></a>

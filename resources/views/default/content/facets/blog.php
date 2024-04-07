@@ -12,17 +12,17 @@ if ($blog['facet_is_deleted'] == 0) : ?>
               [
                 'id'    => 'main.feed',
                 'url'   => url('blog', ['slug' => $blog['facet_slug']]),
-                'title' => __('app.feed'),
+                'title' => 'app.feed',
               ], [
 
                 'id'    => 'main.all',
                 'url'   => url('blog.posts', ['slug' => $blog['facet_slug']]),
-                'title' => __('app.posts'),
+                'title' => 'app.posts',
               ], [
 
                 'id'    => 'main.all',
                 'url'   => url('blog.questions', ['slug' => $blog['facet_slug']]),
-                'title' => __('app.questions'),
+                'title' => 'app.questions',
               ],
             ]; ?>
             <?= insert('/_block/navigation/nav', ['list' => $list]); ?>
@@ -50,7 +50,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#calendar"></use>
               </svg>
-              <span class="middle lowercase"><?= Html::langDate($blog['facet_date']); ?></span>
+              <span class="middle lowercase"><?= langDate($blog['facet_date']); ?></span>
             </div>
           </div>
 

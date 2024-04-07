@@ -1,21 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use App\Services\Feed\Sorting;
-use App\Models\IgnoredModel;
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class HomeModel extends \Hleb\Scheme\App\Models\MainModel
+use App\Traits\SortingPostDay;
+use App\Models\IgnoredModel;
+
+class HomeModel extends Model
 {
     public static $limit = 15;
 
-    // Posts on the central page
-    // Посты на центральной странице
-    public static function feed($page, $type)
+    /**
+     * Posts on the central page
+     * Посты на центральной странице
+     *
+     * @param integer $page
+     * @param string $type
+     * @return void
+     */
+    public static function feed(int $page, string $type = 'feed'): array|false
     {
-        $user_id = UserData::getUserId();
+        $user_id = self::container()->user()->id();
 
         $result = [];
         foreach (self::userReads() as $ind => $row) {
@@ -28,21 +37,21 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             $resultNotUser[$ind] = $row['ignored_id'];
         }
 
-        $ignoring = "post_user_id NOT IN(0)";
-        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ")";
+        $ignoring = "post_user_id NOT IN(0) AND";
+        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ") AND";
 
         $subscription = "";
         if ($type != 'all') {
             if ($user_id) {
-                $subscription = "AND relation_facet_id IN(0)";
-                if ($result) $subscription = "AND relation_facet_id IN(" . implode(',', $result ?? []) . ")";
+                $subscription = "relation_facet_id IN(0) AND";
+                if ($result) $subscription = "relation_facet_id IN(" . implode(',', $result ?? []) . ") AND";
             }
         }
 
         $display = self::display($type);
-        $sort = Sorting::day($type);
+        $sort = SortingPostDay::get($type);
 
-        $nsfw = UserData::getUserNSFW() ? "" : "post_nsfw = 0";
+        $nsfw = self::container()->user()->nsfw() ? "" : "post_nsfw = 0 AND";
 
         $start = ($page - 1) * self::$limit;
         $sql = "SELECT DISTINCT
@@ -91,12 +100,19 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                                 AND fav.user_id = :uid AND fav.action_type = 'post'  
                             LEFT JOIN votes_post 
                                 ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
-                                    WHERE post_type != 'page' AND post_draft = 0 AND $ignoring AND $nsfw $subscription $display $sort LIMIT :start, :limit";
+                                    WHERE post_type != 'page' AND post_draft = 0 AND $ignoring $nsfw $subscription $display $sort LIMIT :start, :limit";
 
-        return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
+return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
-    public static function feedCount($type)
+    /**
+     * Number of posts
+     * Количество постов
+     *
+     * @param string $type
+     * @return void
+     */
+    public static function feedCount(string $type)
     {
         $result = [];
         foreach (self::userReads() as $ind => $row) {
@@ -109,20 +125,22 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
             $resultNotUser[$ind] = $row['ignored_id'];
         }
 
-        $ignoring = "post_user_id NOT IN(0)";
-        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ")";
+        $ignoring = "post_user_id NOT IN(0) AND";
+        if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ") AND";
 
         $subscription = "";
         if ($type != 'all') {
-            if (UserData::getUserId()) {
-                $subscription = "AND f_id IN(0)";
-                if ($result) $subscription = "AND f_id IN(" . implode(',', $result ?? []) . ")";
+            if (self::container()->user()->id()) {
+                $subscription = "f_id IN(0) AND";
+                if ($result) $subscription = "f_id IN(" . implode(',', $result ?? []) . ") AND";
             }
         }
 
-        $nsfw = (UserData::getUserNSFW()) ? "" : "post_nsfw = 0";
+        $nsfw = (self::container()->user()->tl()) ? "" : "post_nsfw = 0 AND";
 
         $display = self::display($type);
+
+
         $sql = "SELECT 
                     post_id
                         FROM posts
@@ -136,51 +154,56 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                             ) AS rel
                                 ON rel.relation_post_id = post_id 
                                     INNER JOIN users ON id = post_user_id
-                                        WHERE post_type != 'page' AND post_draft = 0 AND $ignoring AND $nsfw $subscription $display";
+                                        WHERE post_type != 'page' AND post_draft = 0 AND $ignoring $nsfw $subscription $display";
 
         return ceil(DB::run($sql)->rowCount() / self::$limit);
     }
 
-    public static function display($type)
+    public static function display(string $type)
     {
-        $countLike = config('feed.countLike');
-        $trust_level = UserData::getUserTl();
+        $countLike = config('feed', 'countLike');
+        $trust_level = self::container()->user()->tl();
 
         switch ($type) {
             case 'questions':
-                $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 1";
+                $display =  "post_is_deleted = 0 AND post_tl <=  $trust_level  AND post_feature = 1";
                 break;
             case 'posts':
-                $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level . " AND post_feature = 0";
+                $display =  "post_is_deleted = 0 AND post_tl <=  $trust_level  AND post_feature = 0";
                 break;
             case 'deleted':
-                $display =  "AND post_is_deleted = 1";
+                $display =  "post_is_deleted = 1";
                 break;
             case 'all':
-                $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
+                $display =  "post_is_deleted = 0 AND post_tl <= $trust_level";
                 break;
             default:
-                $display =  "AND post_is_deleted = 0 AND post_votes >= $countLike AND post_tl <= " . $trust_level;
-                if (UserData::checkActiveUser()) {
-                    $display =  "AND post_is_deleted = 0 AND post_tl <= " . $trust_level;
+                $display =  "post_is_deleted = 0 AND post_votes >= $countLike AND post_tl <= $trust_level";
+                if (self::container()->user()->active()) {
+                    $display =  "post_is_deleted = 0 AND post_tl <= $trust_level";
                 }
         }
 
         return $display;
     }
 
-    // The last 5 responses on the main page
-    // Последние 5 ответа на главной
-    public static function latestComments($limit = 6)
+    /**
+     * The last 5 responses on the main page
+     * Последние 5 ответа на главной
+     *
+     * @param integer $limit
+     * @return array
+     */
+    public static function latestComments(int $limit = 5): array
     {
-        $trust_level = UserData::getUserTl();
+        $trust_level = self::container()->user()->tl();
         $user_comment = "AND post_tl = 0";
 
-        if ($user_id = UserData::getUserId()) {
+        if ($user_id = self::container()->user()->id()) {
             $user_comment = "AND comment_user_id != $user_id AND post_tl <= $trust_level";
         }
 
-        $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
+        $hidden = self::container()->user()->admin() ? "" : "AND post_hidden = 0";
 
         $sql = "SELECT 
                     comment_id,
@@ -188,6 +211,7 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                     comment_content,
                     comment_date,
                     post_id,
+					post_title,
                     post_slug,
                     post_hidden,
                     login,
@@ -202,23 +226,27 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
 
-    public static function latestItems($limit = 3)
+    public static function latestItems(int $limit = 3): array|false
     {
         $sql = "SELECT item_id, item_title, item_slug, item_domain FROM items WHERE item_published = 1 AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :limit";
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
 
-    public static function userReads()
+    public static function userReads(): iterable|object
     {
         $sql = "SELECT signed_facet_id as facet_id FROM facets_signed WHERE signed_user_id = :user_id";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId()])->fetchAll();
+        return DB::run($sql, ['user_id' => self::container()->user()->id()])->fetchAll();
     }
 
-    // Facets (topic, blogs) all / subscribed
-    // Фасеты (темы, блоги) все / подписан
-    public static function getSubscription()
+    /**
+     * Facets (topic, blogs) all / subscribed
+     * Фасеты (темы, блоги) все / подписан
+     *
+     * @return boolean
+     */
+    public static function getSubscription(): array|bool
     {
         $sql = "SELECT 
                     facet_id, 
@@ -232,6 +260,6 @@ class HomeModel extends \Hleb\Scheme\App\Models\MainModel
                                 WHERE signed_user_id = :id AND (facet_type = 'topic' OR facet_type = 'blog')
                                     ORDER BY facet_id DESC";
 
-        return DB::run($sql, ['id' => UserData::getUserId()])->fetchAll();
+        return DB::run($sql, ['id' => self::container()->user()->id()])->fetchAll();
     }
 }

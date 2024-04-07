@@ -1,17 +1,19 @@
 <?php
-$user = UserData::get();
-$blog = UserData::getUserBlog();
+
+$blog = $container->user()->blog();
+$user = $container->user()->get();
+
 $login = $user['login'] ?? false;
 ?>
 <span class="right-close pointer">x</span>
 <div class="user-box">
-  <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base mt5 mr5', 'small'); ?>
-  <?php if ($login) : ?>
+  <a href="/@<?= $login; ?>" title="<?= __('app.in_profile'); ?>">
+    <?= Img::avatar($user['avatar'], $user['login'], 'img-base mr5', 'small'); ?>
     <div>
-      <a class="gray nickname" href="/@<?= $login; ?>"><?= $login; ?></a>
+      <span class="gray nickname"><?= $login; ?></span>
       <div class="text-xs gray-600"><?= $user['email']; ?></div>
-    </div>
-  <?php endif; ?>
+  </a>
+</div>
 </div>
 
 <ul class="list-none user-nav">
@@ -31,23 +33,23 @@ $login = $user['login'] ?? false;
     </li>
   <?php endif; ?>
 
-  <?php foreach (config('navigation/menu.user') as $key => $item) :
+  <?php foreach ($menu as $key => $item) :
     $tl = $item['tl'] ?? 0; ?>
 
     <?php if (!empty($item['hr'])) : ?>
-      </ul>
-      <ul class="list-none user-nav mt15">
-    <?php else : ?>
-      <?php if (UserData::getRegType($tl)) : ?>
-        <li>
-          <a href="<?= $item['url']; ?>">
-            <?php if (!empty($item['icon'])) : ?><svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#<?= $item['icon']; ?>"></use>
-              </svg><?php endif; ?>
-            <?= $item['title']; ?>
-          </a>
-        </li>
-      <?php endif; ?>
-    <?php endif; ?>
-  <?php endforeach; ?>
+</ul>
+<ul class="list-none user-nav mt15">
+<?php else : ?>
+  <?php if ($user['trust_level'] >= $tl) : ?>
+    <li>
+      <a href="<?= url($item['url'], endPart: false); ?>">
+        <?php if (!empty($item['icon'])) : ?><svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#<?= $item['icon']; ?>"></use>
+          </svg><?php endif; ?>
+        <?= __($item['title']); ?>
+      </a>
+    </li>
+  <?php endif; ?>
+<?php endif; ?>
+<?php endforeach; ?>
 </ul>

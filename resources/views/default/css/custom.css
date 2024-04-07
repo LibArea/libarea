@@ -4,7 +4,7 @@
  * Дополнительные стили
  */
 
-/* пример 1 (example 1)
+/* пример (example)
 
 @font-face {
   font-family: Roboto;
@@ -15,9 +15,15 @@ body {
   font-family: Roboto, -apple-system,BlinkMacSystemFont,Arial,sans-serif;
 } */
 
-/* пример 2 (example 2)
+.box,
+.box-flex,
+.indent-body { background-color: var(--white); }
 
-body { background-color: #f3f3f3; }
-.box {  background-color: #fff; }
+.nickname { display: inline-block; }
+.nickname::first-letter { color: red; }
 
-*/
+.indent-body { padding: 15px; }
+
+.active  { color: #eab308; } 
+ul.nav > li.active > a { color: var(--nav-color-active); }
+.menu .active .icons { stroke: #eab308; }

@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers;
 
-use Hleb\Constructor\Handlers\Request;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
 use App\Models\FolderModel;
+use Msg;
 
 class FolderController extends Controller
 {
@@ -12,14 +16,14 @@ class FolderController extends Controller
         FolderModel::get($type);
     }
 
-    public function create()
+    public function add()
     {
-        $cat    = Request::getPost() ?? [];
+        $cat    = Request::allPost() ?? [];
         $arr    = $cat['cat-outside'] ?? [];
 
         $url    = url('favorites.folders');
         if (empty($arr)) {
-            is_return(__('app.necessarily'), 'success', $url);
+            Msg::redirect(__('app.necessarily'), 'success', $url);
         }
 
         $folders = json_decode($arr, true);
@@ -29,23 +33,31 @@ class FolderController extends Controller
         redirect($url);
     }
 
-    // Deleting the linked content folder
-    // Удаление папки привязанному контенту
+    /**
+     * Deleting the linked content folder
+     * Удаление папки привязанному контенту
+     *
+     * @return void
+     */
     public function delFolderContent()
     {
-        $tid    = Request::getPostInt('tid');
-        $type   = Request::getPost('type');
+        $tid    = Request::post('tid')->asInt();
+        $type   = Request::post('type')->value();
 
         return FolderModel::deletingFolderContent($tid, $type);
     }
 
-    // Link folder to content 
-    // Привязываем папку к контенту
+    /**
+     * Link folder to content 
+     * Привязываем папку к контенту
+     *
+     * @return void
+     */
     public function addFolderContent()
     {
-        $id     = Request::getPostInt('id');
-        $tid    = Request::getPostInt('tid');
-        $type   = Request::getPost('type');
+        $id     = Request::post('id')->asInt();
+        $tid    = Request::post('tid')->asInt();
+        $type   = Request::post('type')->value();
 
         $allowed = ['favorite', 'blog'];
         if (!in_array($type, $allowed)) return false;
@@ -53,12 +65,16 @@ class FolderController extends Controller
         FolderModel::saveFolderContent($id, $tid, $type);
     }
 
-    // Delete the folder itself
-    // Удаляем саму папку
+    /**
+     * Delete the folder itself
+     * Удаляем саму папку
+     *
+     * @return void
+     */
     public function delFolder()
     {
-        $id     = Request::getPostInt('id');
-        $type   = Request::getPost('type');
+        $id     = Request::post('id')->asInt();
+        $type   = Request::post('type')->value();
 
         return FolderModel::deletingFolder($id, $type);
     }

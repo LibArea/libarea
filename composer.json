@@ -1,67 +1,75 @@
 {
-  "name": "libarea/libarea",
-  "description": "A platform for collective blogs and social media platform, forum, question and answer service. Website directory, search.",
-  "type": "project",
-  "keywords": [
-    "hleb",
-    "libarea",
-    "social-network",
-    "directory",
-    "community",
-    "search",
-    "facets",
-    "blogs",
-    "blog",
-    "mvc",
-    "php"
-  ],
-  "homepage": "https://github.com/libarea/libarea",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Evgeny Konchik",
-      "email": "libarea@yandex.ru",
-      "homepage": "https://libarea.ru"
-    }
-  ],
-  "require": {
-    "php": ">=8.0",
-    "ext-pdo": "*",
-    "phphleb/framework": ">=1.7.0",
-    "phphleb/imageresizer": "dev-master",
-    "phphleb/debugpan": "1.*",
-    "phphleb/radjax": "dev-master",
-    "phphleb/muller": "dev-main",
-    "phphleb/combinator": "dev-main",
-    "cocur/slugify": "^4.3",
-    "donatj/phpuseragentparser": "dev-master",
-    "utopia-php/domains": "^0.3.1",
-    "matthiasmullie/minify": "dev-master",
-    "akh/typograf": "dev-master",
-    "phpmailer/phpmailer": "^6.8.0",
-    "symfony/dom-crawler": "6.0.x-dev",
-    "symfony/css-selector": "6.0.x-dev",
-    "guzzlehttp/guzzle": "7.7.x-dev",
-    "gemorroj/stop-spam": "dev-master"
-  },
-  "autoload": {
-    "classmap": [
-      "app/",
-      "vendor/phphleb",
-      "modules/"
-    ],
-    "psr-4": {
-      "App\\": "app/",
-      "Phphleb\\": "vendor/phphleb/",
-      "Hleb\\": "vendor/phphleb/framework/",
-      "Modules\\": "modules/"
+	"name": "libarea/libarea",
+	"description": "A platform for collective blogs and social media platform, forum, question and answer service. Website directory, search.",
+	"type": "project",
+	"keywords": [
+		"hleb",
+		"libarea",
+		"social-network",
+		"directory",
+		"community",
+		"search",
+		"facets",
+		"blogs",
+		"blog",
+		"mvc",
+		"php"
+	],
+	"homepage": "https://github.com/libarea/libarea",
+	"license": "MIT",
+	"authors": [
+	{
+		"name": "Evgeny Konchik",
+		"email": "libarea@yandex.ru",
+		"homepage": "https://libarea.ru"
+	}
+	],
+    "require": {
+        "php": ">=8.2.0",
+        "ext-pdo": "*",
+        "phphleb/framework": "^2.0.1",
+        "phphleb/migration": "dev-main",
+		"phphleb/imageresizer": "dev-master",
+		"phphleb/muller": "dev-main",
+		"cocur/slugify": "^4.3",
+		"donatj/phpuseragentparser": "dev-master",
+		"utopia-php/domains": "^0.3.1",
+		"matthiasmullie/minify": "dev-master",
+		"akh/typograf": "dev-master",
+		"phpmailer/phpmailer": "^6.8.0",
+		"symfony/dom-crawler": "6.0.x-dev",
+		"symfony/css-selector": "6.0.x-dev",
+		"guzzlehttp/guzzle": "7.7.x-dev",
+		"gemorroj/stop-spam": "dev-master"
     },
-    "files": [
-        "app/helpers.php"
-    ]
-  },
-  "config": {
-    "optimize-autoloader": true
-  },
-  "minimum-stability": "dev"
+    "autoload": {
+        "classmap": [
+            "app/",
+            "vendor/phphleb",
+			"modules/"
+        ],
+        "psr-4": {
+            "Phphleb\\": "vendor/phphleb/",
+            "Hleb\\": "vendor/phphleb/framework/",
+            "App\\": "app/",
+			"Modules\\": "modules/"
+        },
+        "exclude-from-classmap": [
+            "/storage/",
+            "/config/",
+            "/routes/",
+            "/vendor/phphleb/tests/",
+            "/vendor/phphleb/framework/Optional/",
+            "/vendor/phphleb/docs/match-directory"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php console project-setup-task --clear"
+        ]
+    },
+    "minimum-stability": "dev"
 }

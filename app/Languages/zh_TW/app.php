@@ -346,7 +346,7 @@ return [
     'auth_comm'         => '你必须登录才能发表评论',
     'not_registered'    => '发布，回复，评论。.. <br>您还没有注册',
     'invalid'           => '无效',
-    'agree_rules'       => '继续，即表示您同意<a href="/info/article/privacy">网站使用条款</a>。',
+    'agree_rules'       => '继续，即表示您同意<a href="/info/article/privacy">网站使用条款</a>',
     'reg_invite'        => '邀请登记',
     'details_here'      => '详情如下',
     'breaking_rules'    => '违反规则',
@@ -366,11 +366,13 @@ return [
     'email'             => 'Email',
     'wiki'              => 'Wiki',
 	'edit_comment'		=> '更改注释',
+	'move_comment'		=> '我们把评论移过去吧',
+    'move'             	=> '移动',
     'enter'             => '进入',
     'enter_password'    => '输入密码',
 
     'rec_posts'         => '推荐职位',
-    'topic_subs'        => '订阅主题并在提要中阅读!',
+    'topic_subs'        => '订阅主题并在提要中阅读',
     'i_read'            => '我看了',
 
     'message_PM'        => '当消息来到PM',
@@ -437,4 +439,8 @@ return [
     'notif_approved_website'    => '（主持人）{url}更改（批准）您的网站{a}',
     'notif_add_website_comment' => '{url}在您订阅的网站{a}上发表评论',
 
+	'github'	=> 'GitHub',
+	'skype' 	=> 'Skype',
+	'telegram' 	=> 'Telegram',
+	'vk' 		=> 'VK (服务)',
 ];

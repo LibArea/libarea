@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
+class NotificationModel extends Model
 {
     // $action_type
     // 1 - сообщение 
@@ -88,7 +88,7 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
     public static function send($recipient_id, $action_type, $url)
     {
         $params = [
-            'sender_id'    => UserData::getUserId(),
+            'sender_id'    => self::container()->user()->id(),
             'recipient_id' => $recipient_id,
             'action_type'  => $action_type,
             'url'          => $url,
@@ -116,12 +116,12 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
 
             $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :user_id AND action_type = :type AND sender_id = :sender_id";
 
-            return DB::run($sql, ['user_id' => UserData::getUserId(), 'type' => self::TYPE_PRIVATE_MESSAGES, 'sender_id' => $info['sender_id']]);
+            return DB::run($sql, ['user_id' => self::container()->user()->id(), 'type' => self::TYPE_PRIVATE_MESSAGES, 'sender_id' => $info['sender_id']]);
         }
 
         $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :user_id AND id = :notif_id";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId(), 'notif_id' => $notif_id]);
+        return DB::run($sql, ['user_id' => self::container()->user()->id(), 'notif_id' => $notif_id]);
     }
 
     public static function getNotification($id)
@@ -145,6 +145,6 @@ class NotificationModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_id = :user_id";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId()]);
+        return DB::run($sql, ['user_id' => self::container()->user()->id()]);
     }
 }

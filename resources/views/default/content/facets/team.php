@@ -13,12 +13,12 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
           'list' => [
             [
               'id'        => 'topic',
-              'url'       => url('content.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
-              'title'     => __('app.edit_' . $data['type']),
+              'url'       => url('facet.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
+              'title'     => 'app.edit_' . $data['type'],
             ], [
               'id'        => 'blog',
-              'url'       => url('team.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
-              'title'     => __('app.team'),
+              'url'       => url('team.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
+              'title'     => 'app.team',
             ]
           ]
         ]
@@ -27,8 +27,8 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     <a class="gray-600" href="<?= $url; ?>"><?= __('app.go_to'); ?></a>
   </div>
 
-  <form class="max-w780" action="<?= url('team.change', ['id' => $fs['facet_id'], 'type' => $data['type']]); ?>" method="post">
-    <?= csrf_field() ?>
+  <form class="max-w780" action="<?= url('team.edit', ['id' => $fs['facet_id'], 'type' => $data['type']], method: 'post'); ?>" method="post">
+    <?= $container->csrf()->field(); ?>
 
     <?= insert('/_block/form/select/users-team', ['users' => $data['users_team']]); ?>
 
@@ -54,3 +54,4 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     <?= __('help.team_info'); ?>
   </div>
 </aside>
+<?= insert('/_block/add-js-css'); ?>

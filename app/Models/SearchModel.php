@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use App\Models\FacetModel;
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class SearchModel extends \Hleb\Scheme\App\Models\MainModel
+class SearchModel extends Model
 {
     public static function getSearch($page, $limit, $query, $type)
     {
@@ -168,17 +169,17 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
         } elseif ($type == 'team') {
             $field_id = 'id';
             $field_name = 'login';
-            $sql = "SELECT id, login, trust_level, activated FROM users WHERE activated = 1 AND login LIKE :login AND id !=" . UserData::getUserId();
+            $sql = "SELECT id, login, trust_level, activated FROM users WHERE activated = 1 AND login LIKE :login AND id !=" . self::container()->user()->id();
         } elseif ($type == 'poll') {
             $field_name = 'poll_title';
-            $sql = "SELECT poll_id, poll_title FROM polls WHERE poll_title LIKE :poll_title AND poll_is_deleted = 0 AND poll_user_id = " . UserData::getUserId();
+            $sql = "SELECT poll_id, poll_title FROM polls WHERE poll_title LIKE :poll_title AND poll_is_deleted = 0 AND poll_user_id = " . self::container()->user()->id();
 
-            if (UserData::checkAdmin()) {
+            if (self::container()->user()->admin()) {
                 $sql = "SELECT poll_id, poll_title FROM polls WHERE poll_title LIKE :poll_title AND poll_is_deleted = 0";
             }
         } else {
             $condition = '';
-            if (!UserData::checkAdmin()) {
+            if (!self::container()->user()->admin()) {
                 if ($type == 'blog') {
 
                     $blog = FacetModel::getFacetsUser('blog');
@@ -195,7 +196,7 @@ class SearchModel extends \Hleb\Scheme\App\Models\MainModel
 
             $field_id = 'facet_id';
             $field_name = 'facet_title';
-            $tl = UserData::getUserTl();
+            $tl = self::container()->user()->tl();
             $sql = "SELECT facet_id, facet_title, facet_type FROM facets 
                     WHERE facet_title LIKE :facet_title AND facet_tl <= $tl AND facet_is_deleted = 0 AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 200";
         }

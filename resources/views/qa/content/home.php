@@ -1,12 +1,12 @@
 <main>
 
   <ul class="nav scroll-menu">
-    <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
+    <?= insert('/_block/navigation/nav', ['list' => config('menu', 'home')]); ?>
   </ul>
 
   <?= insert('/content/post/post', ['data' => $data]); ?>
 
-  <?php if (UserData::getUserScroll()) : ?>
+  <?php if ($container->user()->scroll()) : ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>
   <?php else : ?>
@@ -15,11 +15,11 @@
 </main>
 
 <aside>
-  <?php if (!UserData::checkActiveUser()) : ?>
+  <?php if (!$container->user()->active()) : ?>
     <div class="box bg-lightgray text-sm">
       <h4 class="uppercase-box"><?= __('app.authorization'); ?></h4>
-      <form class="max-w300" action="<?= url('enterLogin'); ?>" method="post">
-        <?php csrf_field(); ?>
+      <form class="max-w300" action="<?= url('authorization', method: 'post'); ?>" method="post">
+        <?= $container->csrf()->field(); ?>
         <?= insert('/_block/form/login'); ?>
         <fieldset class="gray-600 center">
           <?= __('app.agree_rules'); ?>
@@ -40,7 +40,7 @@
                 <?= Img::image($recomm['facet_img'], $recomm['facet_title'], 'img-base', 'logo', 'max'); ?>
                 <?= $recomm['facet_title']; ?>
               </a>
-              <?php if (UserData::getUserId()) : ?>
+              <?php if ($container->user()->id()) : ?>
                 <div data-id="<?= $recomm['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center">
                   <?= __('app.read'); ?>
                 </div>
@@ -55,7 +55,7 @@
   <div class="sticky top-sm">
     <?= insert('/_block/latest-comments-tabs', ['latest_comments' => $data['latest_comments']]); ?>
 
-    <?php if (UserData::getUserScroll()) : ?>
+    <?php if (U$container->user()->scroll()) : ?>
       <?= insert('/global/sidebar-footer'); ?>
     <?php endif; ?>
   </div>

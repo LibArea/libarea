@@ -3,7 +3,7 @@
     <input name='user_id' id="user_id">
 </fieldset>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
     const user_search = async (props = {}) => {
         const settings = {
             method: 'POST',
@@ -18,7 +18,7 @@
             body: JSON.stringify(props)
         };
         try {
-            const fetchResponse = await fetch('/search/team', settings);
+            const fetchResponse = await fetch('/search/select/team', settings);
             return await fetchResponse.json();
         } catch (e) {
             return e;

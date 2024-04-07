@@ -11,7 +11,7 @@
         <?php if ($data['profile']['my_post'] != false && $data['my_post']['post_is_deleted'] != true) : ?>
           <div class="box bg-violet">
             <h4 class="uppercase-box"><?= __('app.selected_post'); ?>
-              <?php if ($data['profile']['id'] == UserData::getUserId()) : ?>
+              <?php if ($data['profile']['id'] == $container->user()->id()) : ?>
                 <a class="add-profile right" data-post="<?= $data['my_post']['post_id']; ?>">
                   <svg class="icons gray-600">
                     <use xlink:href="/assets/svg/icons.svg#trash"></use>

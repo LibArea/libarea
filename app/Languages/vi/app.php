@@ -345,7 +345,7 @@ return [
     'auth_comm'         => 'Bạn phải đăng nhập để gửi bình luận',
     'not_registered'    => 'Đăng, trả lời, bình luận... <br>Bạn chưa đăng ký',
     'invalid'           => 'Không hợp lệ',
-    'agree_rules'       => 'Bằng cách tiếp tục, bạn đồng ý với <a href="/info/article/privacy">Điều khoản sử dụng</a> của trang web.',
+    'agree_rules'       => 'Bằng cách tiếp tục, bạn đồng ý với <a href="/info/article/privacy">Điều khoản sử dụng</a> của trang web',
     'reg_invite'        => 'Đăng ký bằng lời mời',
     'details_here'      => 'Chi tiết tại đây',
     'break_rules'       => 'Phá vỡ quy tắc',
@@ -365,11 +365,13 @@ return [
     'email'             => 'Email',
     'wiki'              => 'Wiki',
     'edit_comment'		=> 'Thay đổi nhận xé',
+	'move_comment'		=> 'Hãy di chuyển bình luận',
+	'move'             	=> 'Di chuyển',
     'enter'             => 'Đi vào',
     'enter_password'    => 'Nhập mật khẩu',
 
     'rec_posts'         => 'bài viết được đề xuất',
-    'topic_subs'        => 'Đăng ký các chủ đề và đọc chúng trong nguồn cấp dữ liệu của bạn!',
+    'topic_subs'        => 'Đăng ký các chủ đề và đọc chúng trong nguồn cấp dữ liệu của bạn',
     'i_read'            => 'Tôi đọc',
 
     'message_PM'        => 'Khi nào tin nhắn đến vào PM',
@@ -435,5 +437,9 @@ return [
     'notif_edit_website'        => 'đã thay đổi trang web, {url}hãy kiểm tra xem{a}',
     'notif_approved_website'    => '(người điều hành) {url}đã thay đổi (phê duyệt) trang web của bạn{a}',
     'notif_add_website_comment' => '{url}đã nhận xét về trang web{a} bạn đã đăng ký',
-
+	
+	'github'	=> 'GitHub',
+	'skype' 	=> 'Skype',
+	'telegram' 	=> 'Telegram',
+	'vk' 		=> 'VK (dịch vụ)',
 ];

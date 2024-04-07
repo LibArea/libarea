@@ -2,11 +2,11 @@
 
 <footer itemscope itemtype="http://schema.org/WPFooter">
   <?php $type = $data['type'] ?? false; ?>
-  <?php if (UserData::getUserScroll() == false || $type != 'main') : ?>
+  <?php if ($container->user()->scroll() == false || $type != 'main') : ?>
     <div class="wrap">
       <div class="left">
         <div class="mb5">
-          <?= config('meta.name'); ?> &copy; <?= date('Y'); ?>
+          <?= config('meta', 'name'); ?> &copy; <?= date('Y'); ?>
           <span class="mb-none">— <?= __('app.community'); ?></span>
         </div>
         <a rel="nofollow noopener" class="icon" title="DISCORD" href="https://discord.gg/adJnPEGZZZ"><svg class="icons max">
@@ -28,10 +28,9 @@
         <ul class="mb-none">
           <li><a itemprop="url" href="<?= url('users.all'); ?>"><?= __('app.users'); ?></a></li>
           <li><a itemprop="url" href="<?= url('comments'); ?>"><?= __('app.comments'); ?></a></li>
-          <li><a itemprop="url" href="<?= url('web'); ?>"><?= __('app.catalog'); ?></a></li>
         </ul>
         <ul>
-          <?php foreach (config('facets.page') as $page) : ?>
+          <?php foreach (config('facets', 'page') as $page) : ?>
             <li><a itemprop="url" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $page]); ?>"><?= __('app.' . $page); ?></a></li>
           <?php endforeach; ?>
         </ul>

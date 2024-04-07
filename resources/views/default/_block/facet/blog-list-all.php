@@ -15,7 +15,7 @@
           'state'           => $facet['signed_facet_id'],
         ]); ?>
       </span>
-      <?php if (UserData::getUserId() == $facet['facet_user_id']) : ?>
+      <?php if ($container->user()->id() == $facet['facet_user_id']) : ?>
         <svg class="icons icon-small sky">
           <use xlink:href="/assets/svg/icons.svg#mic"></use>
         </svg>

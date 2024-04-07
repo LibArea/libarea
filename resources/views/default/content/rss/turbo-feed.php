@@ -2,12 +2,12 @@
 <rss xmlns:yandex="http://news.yandex.ru" xmlns:media="http://search.yahoo.com/mrss/" xmlns:turbo="http://turbo.yandex.ru" version="2.0">
   <channel>
     <title><?= $topic['facet_title']; ?></title>
-    <link><?= config('meta.url'); ?>/topic/<?= $topic['facet_slug']; ?></link>
+    <link><?= config('meta', 'url'); ?>/topic/<?= $topic['facet_slug']; ?></link>
     <description><?= $topic['facet_description']; ?></description>
-    <language><?= config('general.lang'); ?></language>
+    <language><?= config('general', 'lang'); ?></language>
     <?php foreach ($data['posts'] as $post) : ?>
       <item turbo="true">
-        <link><?= config('meta.url'); ?><?= post_slug($post['post_id'], $post['post_slug']); ?></link>
+        <link><?= config('meta', 'url'); ?><?= post_slug($post['post_id'], $post['post_slug']); ?></link>
         <pubDate><?= $post['post_date']; ?></pubDate>
         <turbo:content>
           <![CDATA[

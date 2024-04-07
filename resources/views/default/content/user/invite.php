@@ -2,7 +2,7 @@
   <div class="indent-body">
     <h1 class="title"><?= __('app.invite'); ?></h1>
     <form action="/invite" method="post">
-      <?php csrf_field(); ?>
+      <?= $container->csrf()->field(); ?>
       <fieldset>
         <label for="invite"><?= __('app.code'); ?></label>
         <input type="text" name="invite" id="invite">
@@ -14,7 +14,7 @@
         </span>
       </fieldset>
     </form>
-    <?php if (config('general.invite') == true) : ?>
+    <?php if (config('general', 'invite') == true) : ?>
       <?= __('auth.invate_text'); ?>
     <?php endif; ?>
   </div>

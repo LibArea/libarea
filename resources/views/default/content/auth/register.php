@@ -2,12 +2,12 @@
   <div class="indent-body">
     <h1 class="title"><?= __('app.' . $data['sheet']); ?></h1>
 
-    <form class="max-w300" action="<?= url('register.add'); ?>" id="registration" method="post">
-      <?php csrf_field(); ?>
+    <form class="max-w300" action="<?= url('register.add', method: 'post'); ?>" id="registration" method="post">
+      <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/registration'); ?>
     </form>
 
-    <p><?= __('app.agree_rules'); ?></p>
+    <p><?= __('app.agree_rules'); ?>.</p>
     <p><?= __('help.security_info'); ?></p>
   </div>
 </main>
@@ -18,7 +18,7 @@
   </div>
 </aside>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   const nicknameEl = document.querySelector('#login');
   const emailEl = document.querySelector('#email');
   const passwordEl = document.querySelector('#password');

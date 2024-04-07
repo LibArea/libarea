@@ -2,11 +2,11 @@
 <rss xmlns:yandex="http://news.yandex.ru" xmlns:media="http://search.yahoo.com/mrss/" xmlns:turbo="http://turbo.yandex.ru" version="2.0">
   <channel>
     <title><?= __('app.posts'); ?></title>
-    <link><?= config('meta.url'); ?>/rss/posts</link>
-    <language><?= config('general.lang'); ?></language>
+    <link><?= config('meta', 'url'); ?>/rss/posts</link>
+    <language><?= config('general', 'lang'); ?></language>
     <?php foreach ($data['posts'] as $post) : ?>
       <item turbo="true">
-        <link><?= config('meta.url'); ?><?= post_slug($post['post_id'], $post['post_slug']); ?></link>
+        <link><?= config('meta', 'url'); ?><?= post_slug($post['post_id'], $post['post_slug']); ?></link>
         <pubDate><?= $post['post_date']; ?></pubDate>
         <turbo:content>
           <![CDATA[

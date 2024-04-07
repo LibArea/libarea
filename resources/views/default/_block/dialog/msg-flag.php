@@ -1,5 +1,5 @@
-<?php if (UserData::getUserTl() >= config('trust-levels.tl_add_report')) : ?>
-  <script nonce="<?= $_SERVER['nonce']; ?>">
+<?php if ($container->user()->tl() >= config('trust-levels', 'tl_add_report')) : ?>
+  <script nonce="<?= config('main', 'nonce'); ?>">
     document.addEventListener('DOMContentLoaded', () => {
 
       let dialogEl = document.getElementById('my-dialog')

@@ -2,9 +2,10 @@
 
 namespace App\Models\User;
 
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class BadgeModel extends \Hleb\Scheme\App\Models\MainModel
+class BadgeModel extends Model
 {
     // Все награды
     public static function getAll()

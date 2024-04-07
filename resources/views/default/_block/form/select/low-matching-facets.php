@@ -3,7 +3,7 @@
   <input name="facet_matching" id="facet_id_matching">
 </fieldset>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   var facet_search = async (props = {}) => {
     var settings = {
       method: 'POST',
@@ -18,7 +18,7 @@
       body: JSON.stringify(props)
     };
     try {
-      const fetchResponse = await fetch('/search/<?= $type; ?>', settings);
+      const fetchResponse = await fetch('/search/select/<?= $type; ?>', settings);
       return await fetchResponse.json();
     } catch (e) {
       return e;

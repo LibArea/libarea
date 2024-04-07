@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Hleb\Constructor\Handlers\Request;
+use Hleb\Static\Request;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 use App\Models\PostModel;
-use UserData;
-use DB;
 
-class CommentModel extends \Hleb\Scheme\App\Models\MainModel
+class CommentModel extends Model
 {
     public static $limit = 15;
 
@@ -20,8 +22,8 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
             'comment_parent_id'  => $parent_id,
             'comment_content'    => $content,
             'comment_published'  => ($trigger === false) ? 0 : 1,
-            'comment_ip'         => Request::getRemoteAddress(),
-            'comment_user_id'    => UserData::getUserId(),
+            'comment_ip'         => Request::getUri()->getIp(),
+            'comment_user_id'    => self::container()->user()->id(),
             'comment_is_mobile'  => ($mobile === false) ? 0 : 1,
         ];
 
@@ -66,7 +68,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     // Все ответы
     public static function getComments($page, $sheet)
     {
-        $user_id = UserData::getUserId();
+        $user_id = self::container()->user()->id();
         $sort = self::sorts($sheet);
         $start  = ($page - 1) * self::$limit;
         $sql = "SELECT 
@@ -119,7 +121,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
 
     public static function sorts($sheet)
     {
-        $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
+        $hidden = self::container()->user()->admin() ? "" : "AND post_hidden = 0";
 
         switch ($sheet) {
             case 'all':
@@ -170,14 +172,14 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT comment_id FROM comments WHERE comment_parent_id = :id AND comment_user_id = :user_id";
 
-        return DB::run($sql, ['id' => $comment_id, 'user_id' => UserData::getUserId()])->fetch();
+        return DB::run($sql, ['id' => $comment_id, 'user_id' => self::container()->user()->id()])->fetch();
     }
 
     // Getting comments in a post
     // Получаем ответы в посте
     public static function getCommentsPost($post_id, $type, $sorting = 'new')
     {
-        $user_id = UserData::getUserId();
+        $user_id = self::container()->user()->id();
 
         if ($type == 1) {
             $sorting = 'top';
@@ -328,7 +330,7 @@ class CommentModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "UPDATE comments SET comment_lo = :user_id WHERE comment_id = :comment_id";
 
-        return  DB::run($sql, ['comment_id' => $comment_id, 'user_id' => UserData::getUserId()]);
+        return  DB::run($sql, ['comment_id' => $comment_id, 'user_id' => self::container()->user()->id()]);
     }
 
     // Rewriting the number of the selected best comment in the post

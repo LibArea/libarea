@@ -1,37 +1,33 @@
-<?php
-
-use Hleb\Constructor\Handlers\Request; ?>
-
 <main>
   <div class="flex justify-between items-center mb20">
     <ul class="nav scroll-menu">
-      <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
+      <?= insert('/_block/navigation/config/home-nav'); ?>
     </ul>
-	<div class="relative">
+    <div class="relative">
       <?= insert('/_block/navigation/sorting-day'); ?>
-	</div>
+    </div>
   </div>
 
   <?= insert('/content/post/type-post', ['data' => $data]); ?>
 
-  <?php if (UserData::getUserScroll()) : ?>
+  <?php if ($container->user()->scroll()) : ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>
   <?php else : ?>
-    <?php 
-      $sort = Request::getGet('sort'); 
-      $sort = $sort ? '&sort=' . $sort : '';
+    <?php
+    $sort = $container->request()->get('sort')->value();
+    $sort = $sort ? '&sort=' . $sort : '';
     ?>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null, '?', $sort); ?>
   <?php endif; ?>
 </main>
 
 <aside>
-  <?php if (!UserData::checkActiveUser()) : ?>
-    <div class="box bg-lightgray text-sm">
+  <?php if (!$container->user()->active()) : ?>
+    <div class="box text-sm">
       <h4 class="uppercase-box"><?= __('app.authorization'); ?></h4>
-      <form class="max-w300" action="<?= url('enterLogin'); ?>" method="post">
-        <?php csrf_field(); ?>
+      <form class="max-w300" action="<?= url('authorization', method: 'post'); ?>" method="post">
+        <?= $container->csrf()->field(); ?>
         <?= insert('/_block/form/login'); ?>
         <fieldset class="gray-600 center">
           <?= __('app.agree_rules'); ?>
@@ -43,7 +39,7 @@ use Hleb\Constructor\Handlers\Request; ?>
 
   <?php if (is_array($data['topics'])) : ?>
     <?php if (count($data['topics']) > 0) : ?>
-      <div class="box br-lightgray">
+      <div class="box">
         <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
         <ul>
           <?php foreach ($data['topics'] as $recomm) : ?>
@@ -52,7 +48,7 @@ use Hleb\Constructor\Handlers\Request; ?>
                 <?= Img::image($recomm['facet_img'], $recomm['facet_title'], 'img-base', 'logo', 'max'); ?>
                 <?= $recomm['facet_title']; ?>
               </a>
-              <?php if (UserData::getUserId()) : ?>
+              <?php if ($container->user()->id()) : ?>
                 <div data-id="<?= $recomm['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red center">
                   <?= __('app.read'); ?>
                 </div>
@@ -66,7 +62,7 @@ use Hleb\Constructor\Handlers\Request; ?>
 
   <?php if ($block = $topics_user[0] ?? false) : ?>
     <?php if ($block['type'] == 2) : ?>
-      <div class="box br-lightgray">
+      <div class="box">
         <h4 class="uppercase-box"><?= __('app.websites'); ?></h4>
         <ul>
           <?php foreach ($data['items'] as $item) : ?>
@@ -84,7 +80,7 @@ use Hleb\Constructor\Handlers\Request; ?>
   <div class="sticky top-sm">
     <?= insert('/_block/latest-comments-tabs', ['latest_comments' => $data['latest_comments']]); ?>
 
-    <?php if (UserData::getUserScroll()) : ?>
+    <?php if ($container->user()->scroll()) : ?>
       <?= insert('/global/sidebar-footer'); ?>
     <?php endif; ?>
   </div>

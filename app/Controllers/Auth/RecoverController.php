@@ -1,16 +1,62 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\Auth;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Controllers\Controller;
-use App\Models\User\{SettingModel, UserModel};
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
+use App\Models\User\{UserModel, SettingModel};
+use App\Models\Auth\AuthModel;
 use App\Validate\Validator;
-use App\Services\Integration\Google;
-use SendEmail, Meta, Html, Msg, UserData;
+use App\Content\Integration\Google;
+use SendEmail, Meta, Html, Msg;
 
 class RecoverController extends Controller
 {
+    public function index()
+    {
+        $email      = Request::post('email')->value();
+        $redirect   = url('recover');
+
+        if (config('integration', 'captcha')) {
+            if (!Google::checkCaptchaCode()) {
+                Msg::redirect(__('msg.code_error'), 'error', $redirect);
+            }
+        }
+
+        Validator::email($email = Request::post('email')->value(), $redirect);
+
+        $uInfo = AuthModel::userInfo($email);
+
+        if (empty($uInfo['email'])) {
+            Msg::redirect(__('msg.no_user'), 'error', $redirect);
+        }
+
+        if ($uInfo['ban_list'] == 1) {
+            Msg::redirect(__('msg.account_verified'), 'error', $redirect);
+        }
+
+        $code = $uInfo['id'] . '-' . Html::randomString('crypto', 24);
+        AuthModel::initRecover(
+            [
+                'activate_date'     => date('Y-m-d H:i:s'),
+                'activate_user_id'  => $uInfo['id'],
+                'activate_code'     => $code,
+            ]
+        );
+
+        SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => url('recover.code', ['code' => $code])]);
+
+        Msg::redirect(__('msg.new_password_email'), url('login'));
+    }
+
+    /**
+     * Password Change page
+     * Страница смены пароля
+     *
+     * @return void
+     */
     public function showPasswordForm()
     {
         $m = [
@@ -18,7 +64,7 @@ class RecoverController extends Controller
             'url'   => url('recover'),
         ];
 
-        return $this->render(
+        return render(
             '/auth/recover',
             [
                 'meta'  => Meta::get(__('app.password_recovery'), __('app.recover_info'), $m),
@@ -30,60 +76,26 @@ class RecoverController extends Controller
         );
     }
 
-    public function index()
-    {
-        $email      = Request::getPost('email');
-        $redirect   = url('recover');
-
-        if (config('integration.captcha')) {
-            if (!Google::checkCaptchaCode()) {
-                is_return(__('msg.code_error'), 'error', $redirect);
-            }
-        }
-
-        Validator::email($email = Request::getPost('email'), $redirect);
-
-        $uInfo = UserModel::userInfo($email);
-
-        if (empty($uInfo['email'])) {
-            is_return(__('msg.no_user'), 'error', $redirect);
-        }
-
-        // Проверка на заблокированный аккаунт
-        if ($uInfo['ban_list'] == UserData::BANNED_USER) {
-            is_return(__('msg.account_verified'), 'error', $redirect);
-        }
-
-        $code = $uInfo['id'] . '-' . Html::randomString('crypto', 24);
-        UserModel::initRecover(
-            [
-                'activate_date'     => date('Y-m-d H:i:s'),
-                'activate_user_id'  => $uInfo['id'],
-                'activate_code'     => $code,
-            ]
-        );
-
-        // Отправка e-mail
-        SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => url('recover.code', ['code' => $code])]);
-
-        is_return(__('msg.new_password_email'), url('login'));
-    }
-
-    // Страница установки нового пароля
+    /**
+     * The page for setting a new password
+     * Страница установки нового пароля
+     *
+     * @return void
+     */
     public function showRemindForm()
     {
-        $code       = Request::get('code');
-        $user_id    = UserModel::getPasswordActivate($code);
+        $code       = Request::param('code')->asString();
+        $user_id    = AuthModel::getPasswordActivate($code);
 
         if (!$user_id) {
             Msg::add(__('msg.went_wrong'), 'error');
             redirect(url('login'));
         }
 
-        $user = UserModel::getUser($user_id['activate_user_id'], 'id');
+        $user = UserModel::get($user_id['activate_user_id'], 'id');
         notEmptyOrView404($user);
 
-        return $this->render(
+        return render(
             '/auth/newrecover',
             [
                 'meta'  => Meta::get(__('app.password recovery'), __('app.recover_info')),
@@ -99,9 +111,9 @@ class RecoverController extends Controller
 
     public function remindNew()
     {
-        $password   = Request::getPost('password');
-        $code       = Request::getPost('code');
-        $user_id    = Request::getPost('user_id');
+        $password   = Request::post('password')->value();
+        $code       = Request::post('code')->value();
+        $user_id    = Request::post('user_id')->asInt();
 
         if (!$user_id) {
             return false;
@@ -112,23 +124,28 @@ class RecoverController extends Controller
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         SettingModel::editPassword(['id' => $user_id, 'password' => $newpass]);
 
-        UserModel::editRecoverFlag($user_id);
+        AuthModel::editRecoverFlag($user_id);
 
-        is_return(__('msg.change_saved'), 'success', url('login'));
+        Msg::redirect(__('msg.change_saved'), 'success', url('login'));
     }
 
-    // Проверка корректности E-mail
-    public function ActivateEmail()
+    /**
+     * Checking the correctness of the Email
+     * Проверка корректности E-mail
+     *
+     * @return void
+     */
+    public function activateEmail()
     {
-        $code = Request::get('code');
-        $activate_email = UserModel::getEmailActivate($code);
+        $code = Request::param('code')->asString();
+        $activate_email = AuthModel::getEmailActivate($code);
 
         if (!$activate_email) {
             Msg::add(__('msg.code_incorrect'), 'error');
             redirect('/');
         }
 
-        UserModel::EmailActivate($activate_email['user_id']);
+        AuthModel::setEmailActivate($activate_email['user_id']);
 
         Msg::add(__('msg.yes_email_pass'), 'success');
         redirect(url('login'));

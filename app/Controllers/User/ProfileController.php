@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\User;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Services\Meta\Profile;
-use App\Controllers\Controller;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, FeedModel, CommentModel, PostModel, IgnoredModel};
-use UserData;
+use Html, Meta;
 
 use App\Traits\Views;
 
@@ -17,25 +18,27 @@ class ProfileController extends Controller
 
     protected $limit = 15;
 
-    // Member page (profile) 
-    // Страница участника (профиль)
+    /**
+     * Member page (profile) 
+     * Страница участника (профиль)
+     *
+     * @return void
+     */
     function index()
     {
-        $profile    = $this->profile();
+        $profile = $this->profile();
 
         if (!$profile['about']) {
             $profile['about'] = __('app.riddle') . '...';
         }
 
-        $posts      = FeedModel::feed($this->pageNumber, $this->limit, 'profile.posts', $profile['id']);
+        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
 
-        $this->indexing($profile['id']);
-
-        return $this->render(
+        return render(
             '/user/profile/index',
             [
-                'meta'  => Profile::metadata('profile', $profile),
+                'meta'  => Meta::profile('profile', $profile),
                 'data'  => array_merge(
                     $this->sidebar($pagesCount, $profile),
                     [
@@ -47,49 +50,52 @@ class ProfileController extends Controller
         );
     }
 
-    // User posts
+    /**
+     * User posts
+     *
+     * @return void
+     */
     public function posts()
     {
         $profile    = $this->profile();
 
-        $posts      = FeedModel::feed($this->pageNumber, $this->limit, 'profile.posts', $profile['id']);
+        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
 
-        $this->indexing($profile['id']);
-
-        return $this->render(
+        return render(
             '/user/profile/posts',
             [
-                'meta'  => Profile::metadata('profile_posts', $profile),
+                'meta'  => Meta::profile('profile_posts', $profile),
                 'data'  => array_merge($this->sidebar($pagesCount, $profile), ['posts' => $posts]),
             ]
         );
     }
 
-    // User comments
+    /**
+     * User comments
+     *
+     * @return void
+     */
     public function comments()
     {
-        $profile   = $this->profile();
+        $profile    = $this->profile();
+        $comments    = CommentModel::userComments(Html::pageNumber(), $profile['id'], $this->container->user()->id());
+        $commentsCount    = CommentModel::userCommentsCount($profile['id']);
 
-        $comments    = CommentModel::userComments($this->pageNumber, $profile['id'], $this->user['id']);
-        $commentsCount = CommentModel::userCommentsCount($profile['id']);
-
-        $this->indexing($profile['id']);
-
-        return $this->render(
+        return render(
             '/user/profile/comments',
             [
-                'meta'  => Profile::metadata('profile_comments', $profile),
+                'meta'  => Meta::profile('profile_comments', $profile),
                 'data'  => array_merge($this->sidebar($commentsCount, $profile), ['comments' => $comments]),
             ]
         );
     }
 
-    public function sidebar($pagesCount, $profile)
+    public function sidebar(int $pagesCount, array $profile)
     {
         return [
             'pagesCount'    => ceil($pagesCount / $this->limit),
-            'pNum'          => $this->pageNumber,
+            'pNum'          => Html::pageNumber(),
             'profile'       => $profile,
             'type'          => 'profile',
             'delet_count'   => UserModel::contentCount($profile['id'], 'remote'),
@@ -97,7 +103,7 @@ class ProfileController extends Controller
             'topics'        => FacetModel::getFacetsTopicProfile($profile['id']),
             'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
             'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
-            'my_post'       => PostModel::getPost($profile['my_post'], 'id', $this->user),
+            'my_post'       => PostModel::getPost($profile['my_post'], 'id', $this->container->user()->get()),
             'button_pm'     => $this->accessPm($profile['id']),
             'ignored'       => IgnoredModel::getUserIgnored($profile['id']),
         ];
@@ -105,48 +111,33 @@ class ProfileController extends Controller
 
     public function profile()
     {
-        $result = Request::get('login');
-        notEmptyOrView404($profile = UserModel::getUser($result, 'slug'));
+        $result = Request::param('login')->value();
 
-        if ($profile['ban_list'] == 1) {
-            Request::getHead()->addMeta('robots', 'noindex');
-        }
+        notEmptyOrView404($profile = UserModel::get($result, 'slug'));
 
         $this->setProfileView($profile['id']);
-
-        if (UserData::checkAdmin()) {
-            Request::getResources()->addBottomScript('/assets/js/admin.js');
-        }
 
         return $profile;
     }
 
-    // Sending personal messages
-    public function accessPm($for_user_id)
+    /**
+     * Sending personal messages
+     *
+     * @param integer $for_user_id
+     * @return void
+     */
+    public function accessPm(int $for_user_id)
     {
         // We forbid sending to ourselves
-        if ($this->user['id'] == $for_user_id) {
+        if ($this->container->user()->id() == $for_user_id) {
             return false;
         }
 
         // If the trust level is less than the established one
-        if ($this->user['trust_level'] < config('trust-levels.tl_add_pm')) {
+        if ($this->container->user()->tl() < config('trust-levels', 'tl_add_pm')) {
             return false;
         }
 
         return true;
-    }
-
-    // Index profile or not
-    public function indexing($profile_id)
-    {
-        $amount = UserModel::contentCount($profile_id, 'active');
-        if (($amount['count_comments']) < 3) {
-            Request::getHead()->addMeta('robots', 'noindex');
-        }
-
-        if (UserModel::isDeleted($profile_id)) {
-            Request::getHead()->addMeta('robots', 'noindex');
-        }
     }
 }

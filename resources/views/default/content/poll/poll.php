@@ -7,8 +7,8 @@ $count = $poll['count'] ? $poll['count'] : 1;
   <div class="poll">
     <h2 class="title mb10">
       <?= $poll['question']['poll_title']; ?>
-      <?php if (UserData::checkAdmin()) : ?>
-        <sup><a href="<?= url('content.edit', ['type' => 'poll', 'id' => $poll['question']['poll_id']]) ?>">
+      <?php if ($container->user()->admin()) : ?>
+        <sup><a href="<?= url('poll.form.edit', ['id' => $poll['question']['poll_id']]) ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>
@@ -21,7 +21,7 @@ $count = $poll['count'] ? $poll['count'] : 1;
       <?php endif; ?>
     </h2>
 
-    <?php if (UserData::checkActiveUser()) : ?>
+    <?php if ($container->user()->active()) : ?>
 
       <?php
       foreach ($poll['answers'] as $value) :
@@ -84,7 +84,7 @@ $count = $poll['count'] ? $poll['count'] : 1;
     <?php endif; ?>
 
     <div class="gray-600 text-sm mt15">
-      <?= __('app.total_votes'); ?>: <?= $answer_votes; ?> • <span class="lowercase"><?= Html::langDate($poll['question']['poll_date']); ?></span>
+      <?= __('app.total_votes'); ?>: <?= $answer_votes; ?> • <span class="lowercase"><?= langDate($poll['question']['poll_date']); ?></span>
     </div>
   </div>
 <?php endif; ?>

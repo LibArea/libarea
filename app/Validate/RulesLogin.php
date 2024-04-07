@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Validate;
 
-use App\Models\User\UserModel;
+use App\Models\Auth\AuthModel;
+use Msg;
 
 class RulesLogin extends Validator
 {
@@ -12,28 +15,28 @@ class RulesLogin extends Validator
 
         self::email($data['email'], $redirect);
 
-        $user = UserModel::userInfo($data['email']);
+        $user = AuthModel::userInfo($data['email']);
 
         if (empty($user['id'])) {
-            is_return(__('msg.no_user'), 'error', $redirect);
+            Msg::redirect(__('msg.no_user'), 'error', $redirect);
         }
 
         // Is it on the ban list
         // Находится ли в бан- листе
-        if (UserModel::isBan($user['id'])) {
-            is_return(__('msg.account_verified'), 'error', $redirect);
+        if (AuthModel::isBan($user['id'])) {
+            Msg::redirect(__('msg.account_verified'), 'error', $redirect);
         }
 
-        if (!UserModel::isActivated($user['id'])) {
-            is_return(__('msg.not_activated'), 'error', $redirect);
+        if (!AuthModel::isActivated($user['id'])) {
+            Msg::redirect(__('msg.not_activated'), 'error', $redirect);
         }
 
-        if (UserModel::isDeleted($user['id'])) {
-            is_return(__('msg.no_user'), 'error', '/');
+        if (AuthModel::isDeleted($user['id'])) {
+            Msg::redirect(__('msg.no_user'), 'error', '/');
         }
 
         if (!password_verify($data['password'], $user['password'])) {
-            is_return(__('msg.not_correct'), 'error', $redirect);
+            Msg::redirect(__('msg.not_correct'), 'error', $redirect);
         }
 
         return $user;

@@ -11,14 +11,14 @@
         <use xlink:href="/assets/svg/icons.svg#calendar"></use>
       </svg>
       <span class="middle lowercase text-sm">
-        <?= Html::langDate($profile['created_at']); ?>
+        <?= langDate($profile['created_at']); ?>
       </span>
     </div>
 
-    <?php foreach (config('user/profile') as $block) : ?>
+    <?php foreach (config('profile', 'sidebar') as $block) : ?>
       <?php if ($profile[$block['title']]) : ?>
         <div class="mt5">
-          <span class="gray-600"><?= $block['lang']; ?>:</span>
+          <span class="gray-600"><?= __($block['lang']); ?>:</span>
           <?php if ($block['url']) : ?>
             <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
               <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
@@ -69,13 +69,13 @@
   <?php if (!empty($data['participation'][0]['facet_id'])) : ?>
     <div class="box br-lightgray">
       <h4 class="uppercase-box"><?= __('app.understands'); ?></h4>
-	  <div class="flex flex-wrap gap lowercase">
+      <div class="flex flex-wrap gap lowercase">
         <?php foreach ($data['participation'] as $part) : ?>
           <a class="gray-600 text-sm" href="<?= url('topic', ['slug' => $part['facet_slug']]); ?>">
             <?= $part['facet_title']; ?>
           </a>
         <?php endforeach; ?>
-	  </div>
+      </div>
     </div>
   <?php endif; ?>
 
@@ -96,11 +96,11 @@
     </div>
   </div>
 
-  <?php if (UserData::checkAdmin()) : ?>
+  <?php if ($container->user()->admin()) : ?>
     <div class="box bg-yellow">
       <h4 class="uppercase-box"><?= __('app.admin'); ?></h4>
       <div class="mt5">
-        <?php if ($profile['trust_level'] != UserData::REGISTERED_ADMIN) : ?>
+        <?php if ($profile['trust_level'] != 10) : ?>
           <?php if ($profile['ban_list'] == 1) : ?>
             <span class="type-ban gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
               <svg class="icons">
@@ -117,7 +117,7 @@
             </span>
           <?php endif; ?>
         <?php endif; ?>
-        <a class="gray mb5 block" href="<?= url('admin.user.edit', ['id' => $profile['id']]); ?>">
+        <a class="gray mb5 block" href="<?= url('admin.user.edit.form', ['id' => $profile['id']]); ?>">
           <svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#settings"></use>
           </svg>

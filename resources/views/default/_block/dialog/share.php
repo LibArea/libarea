@@ -51,8 +51,7 @@
     </div>
   </div>
 </div>
-
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', () => {
     let dialogEl = getById('id-share');
     let dialog = new A11yDialog(dialogEl);

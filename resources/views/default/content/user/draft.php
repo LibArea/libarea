@@ -12,7 +12,7 @@
             <?= $draft['post_title']; ?>
           </a>
           <div class="mr5 text-sm gray-600 lowercase">
-            <?= Html::langDate($draft['post_date']); ?>
+            <?= langDate($draft['post_date']); ?>
           </div>
         </div>
       <?php endforeach; ?>

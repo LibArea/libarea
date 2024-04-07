@@ -1,11 +1,10 @@
-<?= insert('/_block/add-js-css');
-$post = $data['post']; ?>
+<?php $post = $data['post']; ?>
 <main>
   <div class="indent-body">
     <h2 class="m0"><?= __('app.edit_' . $post['post_type']); ?></h2>
 
-    <form class="max-w780" action="<?= url('content.change', ['type' => $post['post_type']]); ?>" method="post" enctype="multipart/form-data">
-      <?= csrf_field() ?>
+    <form class="max-w780" action="<?= url('edit.post', ['type' => $post['post_type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
+      <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/edit-post', ['post' => $post, 'data' => $data]); ?>
     </form>
   </div>
@@ -16,3 +15,5 @@ $post = $data['post']; ?>
     <?= __('help.edit_' . $post['post_type']); ?>
   </div>
 </aside>
+
+<?= insert('/_block/add-js-css'); ?>

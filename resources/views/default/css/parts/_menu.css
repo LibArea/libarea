@@ -92,7 +92,7 @@
 
 .menu li.active,
 .menu li:hover {
-  background-color: var(--gray-100);
+  background-color: var(--white);
   border-radius: var(--border-radius);
 }
 
@@ -160,5 +160,4 @@ ul.nav>li.active a:hover {
 
 .content-tabs.tab_active {
   display: block;
-  color: var(--nav-color-active);
 }

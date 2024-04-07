@@ -2,7 +2,7 @@
   <?= insert('/content/facets/blog-header', ['data' => $data]); ?>
 
   <div class="flex gap mb-block">
-    <main>
+    <main class="w-70">
       <?php if (!empty($data['read'])) : ?>
         <div class="flex gap items-center">
           <svg class="icons red icon-base">

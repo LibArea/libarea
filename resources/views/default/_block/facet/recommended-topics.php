@@ -1,9 +1,4 @@
-<?php if (Request::getUri() == '/') : ?>
-  <center>
-    <a class="btn btn-outline-primary center" href="/topics">
-      <?= __('app.topic_subs'); ?>
-    </a>
-  </center>
+<?php if ($container->request()->getUri()->getPath() == '/') : ?>
   <div class="grid-cols-2 mt15">
     <?php foreach ($data['topics'] as $topic) : ?>
       <div class="box shadow-bottom flex gap items-center justify-between">
@@ -20,4 +15,9 @@
       </div>
     <?php endforeach; ?>
   </div>
+  <center>
+    <a class="btn btn-outline-primary center mb20" href="/topics">
+      <?= __('app.topic_subs'); ?>!
+    </a>
+  </center>
 <?php endif; ?>

@@ -4,7 +4,7 @@
   <div class="help">6 - 250 <?= __('app.characters'); ?></div>
 </fieldset>
 
-<?php if (UserData::checkAdmin()) : ?>
+<?php if ($container->user()->admin()) : ?>
   <fieldset>
     <label for="post_slug">SLUG (URL)</label>
     <input minlength="6" maxlength="250" value="<?= $post['post_slug']; ?>" type="text" required name="post_slug">
@@ -22,7 +22,7 @@
   ]); ?>
 <?php endif; ?>
 
-<?php if (UserData::checkAdmin()) : ?>
+<?php if ($container->user()->admin()) : ?>
   <?= insert('/_block/form/select/section', ['data' => $data]); ?>
 <?php endif; ?>
 
@@ -46,7 +46,7 @@
         <div>
           <?= Img::image($post['post_content_img'], $post['post_title'], 'w160', 'post', 'cover'); ?>
           <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
-          <a class="img-remove text-sm" href="/post/img/<?= $post['post_id']; ?>/remove">
+          <a class="img-remove text-sm" href="<?= url('delete.post.cover', ['id' => $post['post_id']]); ?>">
             <?= __('app.remove'); ?>
           </a>
         </div>
@@ -66,7 +66,7 @@
 
 <?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $post['post_content'], 'cut' => true, 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
-<?php if (UserData::getRegType(UserData::USER_SECOND_LEVEL)) : ?>
+<?php if ($container->access()->limitTl(2)) : ?>
   <?php if ($post['post_draft'] == 1) : ?>
     <fieldset>
       <input type="checkbox" name="post_draft" <?php if ($post['post_draft'] == 1) : ?>checked <?php endif; ?>> <?= __('app.draft_post'); ?>
@@ -77,8 +77,8 @@
 <?php if ($post['post_type'] == 'post') : ?>
   <?= insert('/_block/form/content-tl', ['data' => $post['post_tl']]); ?>
 
-  <?php if (config('general.qa_site_format') == true) : ?>
-    <?php if (UserData::checkAdmin()) : ?>
+  <?php if (config('general', 'qa_site_format') == true) : ?>
+    <?php if ($container->user()->admin()) : ?>
       <fieldset>
         <input type="checkbox" name="post_feature" <?php if ($post['post_feature'] == 1) : ?>checked <?php endif; ?>> <?= __('app.format_Q&A'); ?>
       </fieldset>
@@ -97,14 +97,14 @@
     <input type="checkbox" name="translation" <?php if ($post['post_translation'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_translation'); ?>
   </fieldset>
 
-  <?php if (UserData::checkAdmin()) : ?>
+  <?php if ($container->user()->admin()) : ?>
     <fieldset>
       <input type="checkbox" name="top" <?php if ($post['post_top'] == 1) : ?>checked <?php endif; ?>> <?= __('app.pin'); ?>
     </fieldset>
   <?php endif; ?>
 <?php endif; ?>
 
-<?php if (config('feed.nsfw')) : ?>
+<?php if (config('feed', 'nsfw')) : ?>
   <fieldset>
       <input type="checkbox" name="nsfw" <?php if ($post['post_nsfw'] == 1) : ?>checked <?php endif; ?>> <?= __('app.nsfw_post'); ?>
   </fieldset>
@@ -115,7 +115,7 @@
   <div class="help"><?= __('app.hidden_post_help'); ?></div>
 </fieldset>
 
-<?php if (UserData::checkAdmin()) : ?>
+<?php if ($container->user()->admin()) : ?>
   <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
 <?php endif; ?>
 
@@ -123,7 +123,7 @@
   <?= insert('/_block/form/select/related-posts', ['data' => $data]); ?>
 <?php endif; ?>
 
-<?php if (UserData::checkAdmin()) : ?>
+<?php if ($container->user()->admin()) : ?>
   <fieldset>
     <label for="post_title"><?= __('app.id_merged_post'); ?></label>
     <input value="<?= $post['post_merged_id']; ?>" type="text" name="post_merged_id">
@@ -131,7 +131,7 @@
   </fieldset>
 <?php endif; ?>
 
-<?php if (UserData::getRegType(config('trust-levels.tl_add_poll'))) : ?>
+<?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_poll'))) : ?>
   <?= insert('/_block/form/select/poll', ['poll' => $data['poll']]); ?>
 <?php endif; ?>  
 

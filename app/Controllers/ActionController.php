@@ -1,19 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers;
 
-use Hleb\Constructor\Handlers\Request;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
 use App\Models\{ActionModel, PostModel};
-use Access;
 
 class ActionController extends Controller
 {
-    // Deleting and restoring content 
-    // Удаление и восстановление контента
+    /**
+     * Deleting and restoring content 
+     * Удаление и восстановление контента
+     *
+     * @return void
+     */
     public function deletingAndRestoring()
     {
-        $content_id = Request::getPostInt('content_id');
-        $type       = Request::getPost('type');
+        $content_id = Request::post('content_id')->asInt();
+        $type       = Request::post('type')->value();
 
         $allowed = ['post', 'comment', 'reply', 'item'];
         if (!in_array($type, $allowed)) {
@@ -24,7 +30,7 @@ class ActionController extends Controller
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($content_id, $type);
 
-        if (Access::author($type, $info_type) == false) {
+        if ($this->container->access()->author($type, $info_type) == false) {
             redirect('/');
         }
 
@@ -34,7 +40,7 @@ class ActionController extends Controller
                 $action_type = 'post';
                 break;
             case 'comment':
-                $post = PostModel::getPost($info_type['comment_post_id'], 'id', $this->user);
+                $post = PostModel::getPost($info_type['comment_post_id'], 'id', $this->container->user()->get());
                 $url  = post_slug($info_type['comment_post_id'], $post['post_slug']) . '#comment_' . $info_type['comment_id'];
                 $action_type = 'comment';
                 break;

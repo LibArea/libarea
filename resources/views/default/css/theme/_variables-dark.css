@@ -96,6 +96,11 @@ body.dark blockquote {
   border-left: 3px solid #6d6e6f;
 }
 
+body.dark code {
+  color: #f5f2f0;
+  background-color: var(--blockquote-bg);
+}
+
 body.dark :not(pre)>code[class*=language-],
 body.dark pre[class*=language-] {
   background: var(--blockquote-bg);
@@ -113,3 +118,8 @@ body.dark .anchor-top:target~.comment {
 
 body.dark .tagify { --tags-border-color: #555; }
 body.dark .tagify { background-color: var(--tagify-bg-color); }
+
+body.dark ul.last-content a.last-content_telo {
+  background-color: var(--blockquote-bg);
+  border-radius: var(--border-radius);
+}

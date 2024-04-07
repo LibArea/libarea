@@ -3,7 +3,7 @@
   <input name="blog_select" id="blog_id">
 </fieldset>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   let blog_search = async (props = {}) => {
     const settings = {
       method: 'POST',
@@ -18,7 +18,7 @@
       body: JSON.stringify(props)
     };
     try {
-      const fetchResponse = await fetch('/search/blog', settings);
+      const fetchResponse = await fetch('/search/select/blog', settings);
       return await fetchResponse.json();
     } catch (e) {
       return e;

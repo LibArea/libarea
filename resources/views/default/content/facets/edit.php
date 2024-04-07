@@ -1,5 +1,5 @@
 <?= insert('/_block/add-js-css');
-$fs = $data['facet'];
+$fs = $data['facet_inf'];
 $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
@@ -13,12 +13,12 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
             'list' => [
               [
                 'id'        => 'topic',
-                'url'       => url('content.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
-                'title'     => __('app.edit_' . $data['type']),
+                'url'       => url('facet.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
+                'title'     => 'app.edit_' . $data['type'],
               ], [
                 'id'        => 'team',
-                'url'       => url('team.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
-                'title'     => __('app.team'),
+                'url'       => url('team.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
+                'title'     => 'app.team',
               ]
             ]
           ]
@@ -27,8 +27,8 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <a class="gray-600" href="<?= $url; ?>"><?= __('app.go_to'); ?></a>
     </div>
 
-    <form class="max-w780" action="<?= url('content.change', ['type' => $fs['facet_type']]); ?>" method="post" enctype="multipart/form-data">
-      <?= csrf_field() ?>
+    <form class="max-w780" action="<?= url('edit.facet', ['type' => $fs['facet_type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
+      <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/facet-type', ['type' => $fs['facet_type']]); ?>
 
       <div class="file-upload mb10 mt15" id="file-drag">
@@ -85,7 +85,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
         <div class="help">3 - 32 <?= __('app.characters'); ?> (a-z-0-9)</div>
       </fieldset>
 
-      <?php if ($fs['facet_type'] != 'blog' && UserData::checkAdmin()) : ?>
+      <?php if ($fs['facet_type'] != 'blog' && $container->user()->admin()) : ?>
 
         <?= insert('/_block/form/select/low-facets', [
           'data'          => $data,
@@ -144,7 +144,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       </fieldset>
 	<?php endif; ?>
 
-    <?php if (UserData::checkAdmin()) : ?>
+    <?php if ($container->user()->admin()) : ?>
       <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
     <?php endif; ?>
 

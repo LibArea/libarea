@@ -4,8 +4,8 @@
       <li><a href="<?= url('polls'); ?>"><?= __('app.all'); ?></a></li>
       <li class="active"><?= __('app.add_poll'); ?></li>
     </ul>
-    <form action="<?= url('content.create', ['type' => 'poll']); ?>" id="myform" method="post">
-      <?= csrf_field() ?>
+    <form action="<?= url('add.poll', method: 'post'); ?>" id="myform" method="post">
+      <?= $container->csrf()->field(); ?>
       <fieldset class="max-w780">
         <input type="text" name="title" />
       </fieldset>
@@ -27,7 +27,7 @@
   </div>
 </aside>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   let maxFieldLimit = 6;
 
   queryAll(".add-el").forEach(el => el.addEventListener("click", function(e) {

@@ -7,10 +7,10 @@
     <main class="flex-auto">
       <div class="mb15"><?= __('app.comments'); ?> <b><?= $data['profile']['login']; ?></b></div>
       <?php if (!empty($data['comments'])) : ?>
-	    <div class="box">
+        <div class="box">
           <?= insert('/content/comments/comment', ['comments' => $data['comments']]); ?>
           <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/comments'); ?>
-		</div>
+        </div>
       <?php else : ?>
         <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'info']); ?>
       <?php endif; ?>

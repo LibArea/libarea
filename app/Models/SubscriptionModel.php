@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use DB;
-use UserData;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class SubscriptionModel extends \Hleb\Scheme\App\Models\MainModel
+class SubscriptionModel extends Model
 {
     // $type: post | facet
     public static function getFocus($content_id, $type)
@@ -13,7 +13,7 @@ class SubscriptionModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT signed_" . $type . "_id, signed_user_id FROM " . $type . "s_signed 
                     WHERE signed_" . $type . "_id = :content_id AND signed_user_id = :user_id";
 
-        return DB::run($sql, ['content_id' => $content_id, 'user_id' => UserData::getUserId()])->fetch();
+        return DB::run($sql, ['content_id' => $content_id, 'user_id' => self::container()->user()->id()])->fetch();
     }
 
     public static function focus($content_id, $type)
@@ -38,7 +38,7 @@ class SubscriptionModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "DELETE FROM " . $type . "s_signed WHERE signed_" . $type . "_id = :content_id AND signed_user_id = :user_id";
 
-        DB::run($sql, ['content_id' => $content_id, 'user_id' => UserData::getUserId()]);
+        DB::run($sql, ['content_id' => $content_id, 'user_id' => self::container()->user()->id()]);
     }
 
     public static function updateFocus($content_id, $type)
@@ -52,6 +52,6 @@ class SubscriptionModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "INSERT INTO " . $type . "s_signed(signed_" . $type . "_id, signed_user_id) VALUES(:content_id, :user_id)";
 
-        DB::run($sql, ['content_id' => $content_id, 'user_id' => UserData::getUserId()]);
+        DB::run($sql, ['content_id' => $content_id, 'user_id' => self::container()->user()->id()]);
     }
 }

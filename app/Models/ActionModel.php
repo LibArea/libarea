@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class ActionModel extends \Hleb\Scheme\App\Models\MainModel
+class ActionModel extends Model
 {
     // Get information on the content depending on the type
     // Получим информацию по контенту в зависимости от типа
@@ -91,7 +91,7 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
                         WHERE " . $type . "_user_id = :user_id
                         AND " . $type . "_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
-        return  DB::run($sql, ['user_id' => UserData::getUserId()])->rowCount();
+        return  DB::run($sql, ['user_id' => self::container()->user()->id()])->rowCount();
     }
 
     // Let's write the logs
@@ -99,8 +99,8 @@ class ActionModel extends \Hleb\Scheme\App\Models\MainModel
     public static function addLogs($data)
     {
         $params = [
-            'user_id'       => UserData::getUserId(),
-            'user_login'    => UserData::getUserLogin(),
+            'user_id'       => self::container()->user()->id(),
+            'user_login'    => self::container()->user()->login(),
             'id_content'    => $data['id_content'],
             'action_type'   => $data['action_type'],
             'action_name'   => $data['action_name'],

@@ -2,13 +2,13 @@
 
 namespace App\Traits;
 
-use Hleb\Constructor\Handlers\Request;
+use Hleb\Static\Request;
 
 trait Related
 {
     private function relatedPost()
     {
-        $data = Request::getPost();
+        $data = Request::allPost();
         $json_post  = $data['post_select'] ?? false;
         if ($json_post) {
             $arr_post   = json_decode($json_post, true);

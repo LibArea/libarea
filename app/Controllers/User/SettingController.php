@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\User;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Controllers\Controller;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
+
 use App\Models\User\{SettingModel, UserModel, PreferencesModel};
-use App\Models\{IgnoredModel, AuthModel, ActionModel};
-use UploadImage, Session, Meta, UserData, Img, Html, SendEmail;
+use App\Models\{IgnoredModel, ActionModel};
+use App\Models\Auth\AuthModel;
+use UploadImage, Meta, Img, Html, SendEmail, Msg;
 
 use App\Validate\RulesUserSetting;
 
@@ -14,80 +18,61 @@ class SettingController extends Controller
 {
     protected $limit = 25;
 
-    function index()
+    public function profile(): void
     {
-        switch (Request::get('type')) {
-            case 'avatar':
-                return $this->avatarForm();
-                break;
-            case 'security':
-                return $this->securityForm();
-                break;
-            case 'notifications':
-                return $this->notificationForm();
-                break;
-            case 'cover_remove':
-                return $this->coverRemove();
-                break;
-            case 'ignored':
-                return $this->ignored();
-                break;
-            case 'preferences':
-                return $this->preferences();
-                break;
-            case 'deletion':
-                return $this->deletion();
-                break;
-            default:
-                return $this->settingForm();
-                break;
-        }
+        $this->edit();
     }
 
-    function change()
+    public function avatar(): void
     {
-        switch (Request::get('type')) {
-            case 'avatar':
-                return $this->avatarEdit();
-                break;
-            case 'security':
-                return $this->securityEdit();
-                break;
-            case 'preferences':
-                return $this->preferencesEdit();
-                break;
-            case 'notification':
-                return $this->notificationEdit();
-                break;
-            default:
-                return $this->edit();
-                break;
-        }
+        $this->avatarEdit();
     }
 
-    // Profile setup form
-    // Форма настройки профиля
-    function settingForm()
+    public function security(): void
     {
-        Request::getResources()->addBottomScript('/assets/js/dialog/dialog.js');
+        $this->securityEdit();
+    }
 
+    public function preferences(): void
+    {
+        $this->preferencesEdit();
+    }
+
+    public function notification(): void
+    {
+        $this->notificationEdit();
+    }
+
+    public function coverUserRemove(): void
+    {
+        $this->coverRemove();
+    }
+
+    /**
+     * Profile setup form
+     * Форма настройки профиля
+     *
+     * @return void
+     */
+    public function index()
+    {
         $new = SettingModel::getNewEmail();
         $email = $new['email'] ?? null;
 
-        if ($code = Request::getGet('newemail')) {
+        if ($code = Request::get('newemail')->value()) {
             if (SettingModel::available($code)) {
                 SettingModel::editEmail($email);
 
-                is_return(__('msg.change_saved'), 'success', url('setting'));
+                Msg::redirect(__('msg.change_saved'), 'success', url('setting'));
             }
         }
 
-        return $this->render(
+        return render(
             '/user/setting/setting',
             [
                 'meta'  => Meta::get(__('app.setting')),
                 'data'  => [
-                    'user'  => UserModel::getUser($this->user['login'], 'slug'),
+                    'user'  => UserModel::get($this->container->user()->login(), 'slug'),
                     'new_email' => $email,
                 ]
             ]
@@ -96,53 +81,58 @@ class SettingController extends Controller
 
     function edit()
     {
-        RulesUserSetting::rulesSetting($data = Request::getPost());
+        $user_id = $this->container->user()->id();
+        RulesUserSetting::rulesSetting($data = Request::allPost());
 
-        $user = UserModel::getUser($this->user['id'], 'id');
+        $user = UserModel::get($user_id, 'id');
 
         SettingModel::edit(
             [
-                'id'                   => $this->user['id'],
+                'id'                   => $user_id,
                 'email'                => $user['email'],
                 'login'                => $user['login'],
                 'name'                 => $data['name'],
                 'activated'            => $user['activated'],
                 'limiting_mode'        => $user['limiting_mode'],
-                'scroll'               => Request::getPost('scroll') == 'on' ? 1 : 0,
-                'nsfw'                 => Request::getPost('nsfw') == 'on' ? 1 : 0,
-                'post_design'           => Request::getPost('post_design') == 'on' ? 1 : 0,
+                'scroll'               => Request::post('scroll')->value() == 'on' ? 1 : 0,
+                'nsfw'                 => Request::post('nsfw')->value() == 'on' ? 1 : 0,
+                'post_design'           => Request::post('post_design')->value() == 'on' ? 1 : 0,
                 'trust_level'          => $user['trust_level'],
                 'updated_at'           => date('Y-m-d H:i:s'),
-                'color'                => Request::getPostString('color', '#339900'),
+                'color'                => Request::post('color')->asString('#339900'),
                 'about'                => $_POST['about'], // for Markdown
                 'template'             => $data['template'] ?? 'default',
                 'lang'                 => $data['lang'] ?? 'ru',
                 'whisper'              => $user['whisper'] ?? '',
-                'website'              => Request::getPostString('website', null),
-                'location'             => Request::getPostString('location', null),
+                'website'              => Request::post('website')->asString(''),
+                'location'             => Request::post('location')->asString(''),
                 'public_email'         => $data['public_email'] ?? null,
-                'github'               => Request::getPostString('github', null),
-                'skype'                => Request::getPostString('skype', null),
-                'telegram'             => Request::getPostString('telegram', null),
-                'vk'                   => Request::getPostString('vk', null),
+                'github'               => Request::post('github')->asString(''),
+                'skype'                => Request::post('skype')->asString(''),
+                'telegram'             => Request::post('telegram')->asString(''),
+                'vk'                   => Request::post('vk')->asString(''),
             ]
         );
 
-        is_return(__('msg.change_saved'), 'success', url('setting'));
+        Msg::redirect(__('msg.change_saved'), 'success', url('setting'));
     }
 
-    // Avatar and cover upload form
-    // Форма загрузки аватарки и обложики
+    /**
+     * Avatar and cover upload form
+     * Форма загрузки аватарки и обложики
+     *
+     * @return void
+     */
     function avatarForm()
     {
-        Request::getResources()->addBottomScript('/assets/js/uploads.js');
+        // Request::getResources()->addBottomScript('/assets/js/uploads.js');
 
-        return $this->render(
+        return render(
             '/user/setting/avatar',
             [
                 'meta'  => Meta::get(__('app.avatar')),
                 'data'  => [
-                    'user'  => UserModel::getUser($this->user['login'], 'slug'),
+                    'user'  => UserModel::get($this->container->user()->login(), 'slug'),
                 ]
             ]
         );
@@ -150,16 +140,20 @@ class SettingController extends Controller
 
     function avatarEdit()
     {
-        UploadImage::set($_FILES, $this->user['id'], 'user');
+        UploadImage::set($_FILES, $this->container->user()->id(), 'user');
 
-        is_return(__('msg.change_saved'), 'success', '/setting/avatar');
+        Msg::redirect(__('msg.change_saved'), 'success', '/setting/avatar');
     }
 
-    // Change password form
-    // Форма изменение пароля
+    /**
+     * Change password form
+     * Форма изменение пароля
+     *
+     * @return void
+     */
     function securityForm()
     {
-        return $this->render(
+        return render(
             '/user/setting/security',
             [
                 'meta'  => Meta::get(__('app.security')),
@@ -170,25 +164,30 @@ class SettingController extends Controller
 
     function securityEdit()
     {
-        $data = Request::getPost();
+        $data = Request::allPost();
 
-        RulesUserSetting::rulesSecurity($data, $this->user['email']);
+        RulesUserSetting::rulesSecurity($data, $this->container->user()->email());
 
         $newpass = password_hash($data['password2'], PASSWORD_BCRYPT);
 
-        SettingModel::editPassword(['id' => $this->user['id'], 'password' => $newpass]);
+        SettingModel::editPassword(['id' => $this->container->user()->id(), 'password' => $newpass]);
 
-        is_return(__('msg.successfully'), 'success');
+        Msg::redirect(__('msg.successfully'), 'success');
     }
 
-    // Cover Removal
-    // Удаление обложки
+    /**
+     * Cover Removal
+     * Удаление обложки
+     *
+     * @return void
+     */
     function coverRemove()
     {
-        $user = UserModel::getUser($this->user['login'], 'slug');
+        $user = UserModel::get($this->container->user()->login(), 'slug');
 
+        // Only the author and the admin can delete
         // Удалять может только автор и админ
-        if ($user['id'] != $this->user['id'] && UserData::checkAdmin()) {
+        if ($user['id'] != $this->container->user()->id() && $this->container->user()->admin()) {
             redirect('/');
         }
 
@@ -206,27 +205,31 @@ class SettingController extends Controller
             ]
         );
 
-        is_return(__('msg.change_saved'), 'success', '/setting/avatar');
+        Msg::redirect(__('msg.change_saved'), 'success', '/setting/avatar');
     }
 
-    // Member preference setting form
-    // Форма настройки предпочтений участника
+    /**
+     * Member preference setting form
+     * Форма настройки предпочтений участника
+     *
+     * @return void
+     */
     function notificationForm()
     {
-        return $this->render(
+        return render(
             '/user/setting/notifications',
             [
                 'meta'  => Meta::get(__('app.notifications')),
                 'data'  => [
-                    'notif' => SettingModel::getNotifications($this->user['id']),
+                    'notif' => SettingModel::getNotifications($this->container->user()->id()),
                 ]
             ]
         );
     }
 
-    function ignored()
+    function ignoredForm()
     {
-        return $this->render(
+        return render(
             '/user/setting/ignored',
             [
                 'meta'  => Meta::get(__('app.ignored')),
@@ -239,7 +242,7 @@ class SettingController extends Controller
 
     function deletion()
     {
-        return $this->render(
+        return render(
             '/user/setting/deletion',
             [
                 'meta'  => Meta::get(__('app.delete_profile')),
@@ -252,20 +255,20 @@ class SettingController extends Controller
     {
         SettingModel::setNotifications(
             [
-                'setting_user_id'           => $this->user['id'],
-                'setting_email_pm'          => Request::getPostInt('setting_email_pm'),
-                'setting_email_appealed'    => Request::getPostInt('setting_email_appealed'),
+                'setting_user_id'           => $this->container->user()->id(),
+                'setting_email_pm'          => Request::post('setting_email_pm')->asInt(),
+                'setting_email_appealed'    => Request::post('setting_email_appealed')->asInt(),
                 'setting_email_post'        => 0,
                 'setting_email_answer'      => 0,
             ]
         );
 
-        is_return(__('msg.change_saved'), 'success', '/setting/notifications');
+        Msg::redirect(__('msg.change_saved'), 'success', '/setting/notifications');
     }
 
     function newEmail()
     {
-        $email = Request::getPost('email');
+        $email = Request::post('email')->value();
 
         if (RulesUserSetting::rulesNewEmail($email) === false) {
             return json_encode('error');
@@ -279,38 +282,38 @@ class SettingController extends Controller
 
         SettingModel::setNewEmail($email, $code);
 
-        SendEmail::mailText($this->user['id'], 'new.email', ['link' => '/setting?newemail=' . $code, 'new_email' => $email]);
+        SendEmail::mailText($this->container->user()->id(), 'new.email', ['link' => '/setting?newemail=' . $code, 'new_email' => $email]);
 
         return json_encode('success');
     }
 
     public function deleteActivation()
     {
-        SettingModel::deletionUser($this->user['id']);
+        SettingModel::deletionUser($this->container->user()->id());
 
         ActionModel::addLogs(
             [
-                'id_content'    => $this->user['id'],
+                'id_content'    => $this->container->user()->id(),
                 'action_type'   => 'profile',
                 'action_name'   => 'deleted',
-                'url_content'   => url('profile', ['login' => $this->user['login']]),
+                'url_content'   => url('profile', ['login' => $this->container->user()->login()]),
             ]
         );
 
-        Session::logout();
+        $this->container->auth()->logout();
     }
 
-    function preferences()
+    function preferencesForm()
     {
-        return $this->render(
+        return render(
             '/user/setting/preferences',
             [
                 'meta'  => Meta::get(__('app.preferences')),
                 'data'  => [
-                    'signed'		=> PreferencesModel::get($this->pageNumber),
+                    'signed'        => PreferencesModel::get(Html::pageNumber()),
                     'pagesCount'    => PreferencesModel::getCount(),
                     'blocks'        => PreferencesModel::getBlocks(),
-                    'pNum'			=> $this->pageNumber,
+                    'pNum'          => Html::pageNumber(),
                     'facet_arr'     => []
                 ]
             ]
@@ -319,14 +322,14 @@ class SettingController extends Controller
 
     function preferencesEdit()
     {
-        if (!is_array($data = Request::getPost('id'))) {
+        if (!is_array($data = Request::post('id')->value())) {
 
             PreferencesModel::removal();
-            is_return(__('msg.change_saved'), 'success', '/setting/preferences');
+            Msg::redirect(__('msg.change_saved'), 'success', '/setting/preferences');
         }
 
         PreferencesModel::edit($data);
 
-        is_return(__('msg.change_saved'), 'success', '/setting/preferences');
+        Msg::redirect(__('msg.change_saved'), 'success', '/setting/preferences');
     }
 }

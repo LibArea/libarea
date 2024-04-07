@@ -21,7 +21,6 @@ return [
     'tl_add_team'       => 2,
 
     'tl_add_post'       => 1,
-    'tl_add_answer'     => 1,
     'tl_add_comment'    => 1,
     'tl_add_item'       => 2, // Catalog (каталог)
     'tl_add_reply'      => 2, // Catalog (каталог)
@@ -29,7 +28,7 @@ return [
     'tl_add_poll'       => 2,
 
     'tl_add_pm'         => 1, // Private messages (личные сообщения)
-    
+
     'tl_add_draft'      => 2, // Drafts (черновики)
 
     // С какого TL можно комментировать ответы в QA модели
@@ -59,7 +58,6 @@ return [
     'perDay_team'       => 3,
 
     'perDay_post'       => 3,
-    'perDay_answer'     => 5,
     'perDay_comment'    => 8,
     'perDay_item'       => 1, // Catalog (каталог)
     'perDay_reply'      => 3, // Catalog (каталог)
@@ -84,7 +82,7 @@ return [
     |
     */
 
-    'edit_time_post'    => 30,
+    'edit_time_post'    => 60,
     'edit_time_answer'  => 30,
     'edit_time_comment' => 30,
     'edit_time_item'    => 0,

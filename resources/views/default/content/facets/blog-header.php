@@ -15,9 +15,9 @@
 
     <h1 class="mb-block mb-text-xl m0 ml15">
       <?= $data['facet']['facet_seo_title']; ?>
-      <?php if (UserData::checkAdmin() || $data['facet']['facet_user_id'] == UserData::getUserId()) : ?>
+      <?php if ($container->user()->admin() || $data['facet']['facet_user_id'] == $container->user()->id()) : ?>
         <sup>
-          <a class="ml5" href="<?= url('content.edit', ['type' => 'blog', 'id' => $data['facet']['facet_id']]); ?>">
+          <a class="ml5" href="<?= url('facet.form.edit', ['type' => 'blog', 'id' => $data['facet']['facet_id']]); ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>

@@ -5,54 +5,56 @@
  */
 
 return [
+  'contacts' => [
     [
       'url'       => 'website',
       'addition'  => false,
       'title'     => 'website',
-      'lang'      => __('app.url'),
+      'lang'      => 'app.url',
       'help'      => 'https://site.ru',
       'name'      => 'website'
     ], [
       'url'       => false,
       'addition'  => false,
       'title'     => 'location',
-      'lang'      => __('app.city'),
-      'help'      => __('app.for_example') . ': Moscow',
+      'lang'      => 'app.city',
+      'help'      => '',
       'name'      => 'location'
     ], [
       'url'       => 'public_email',
       'addition'  => 'mailto:',
       'title'     => 'public_email',
-      'lang'      => 'Email',
+      'lang'      => 'app.email',
       'help'      => '**@**.ru',
       'name'      => 'public_email'
     ], [
       'url'       => 'github',
       'addition'  => 'https://github.com/',
       'title'     => 'github',
-      'lang'      => 'GitHub',
-      'help'      => 'https://github.com/<b>NICK</b>',
+      'lang'      => 'app.github',
+      'help'      => 'https://github.com/NICK',
       'name'      => 'github'
     ], [
       'url'       => 'skype',
       'addition'  => 'skype:',
       'title'     => 'skype',
-      'lang'      => 'Skype',
+      'lang'      => 'app.skype',
       'help'      => 'skype:<b>NICK</b>',
       'name'      => 'skype'
     ], [
       'url'       => 'telegram',
       'addition'  => 'https://t.me/',
       'title'     => 'telegram',
-      'lang'      => 'Telegram',
-      'help'      => 'https://t.me/<b>NICK</b>',
+      'lang'      => 'app.telegram',
+      'help'      => 'https://t.me/NICK',
       'name'      => 'telegram'
     ], [
       'url'       => 'vk',
       'addition'  => 'https://vk.com/',
       'title'     => 'vk',
-      'lang'      => 'Vk',
-      'help'      => 'https://vk.com/<b>NICK</b>',
+      'lang'      => 'app.vk',
+      'help'      => 'https://vk.com/NICK',
       'name'      => 'vk'
     ],
-  ];
+  ],
+];

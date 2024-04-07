@@ -1,21 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use App\Services\Feed\Sorting;
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
+use Sorting;
 
-class FeedModel extends \Hleb\Scheme\App\Models\MainModel
+class FeedModel extends Model
 {
     public static function feed($page, $limit, $sheet, $slug, $topic = '')
     {
-        $user_id    = UserData::getUserId();
+        $user_id    = self::container()->user()->id();
         $string     = self::display($sheet);
 
         // Deleted post, banned from showing in the feed and limited by TL (trust_level)
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
-        $trust_level =  ($user_id == 0) ? "AND post_tl = 0" : "AND post_tl <= " . UserData::getUserTl();
+        $trust_level =  ($user_id == 0) ? "AND post_tl = 0" : "AND post_tl <= " . self::container()->user()->tl();
         $display = "AND post_is_deleted = 0 $trust_level";
 
         // Sorting posts by conditions
@@ -86,9 +88,9 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
     public static function feedCount($sheet, $slug, $topic = '')
     {
         $string     = self::display($sheet);
-        $user_id    = UserData::getUserId();
+        $user_id    = self::container()->user()->id();
 
-        $trust_level = ($user_id == 0) ? "AND post_tl = 0" : "AND post_tl <= " . UserData::getUserTl();
+        $trust_level = ($user_id == 0) ? "AND post_tl = 0" : "AND post_tl <= " . self::container()->user()->tl();
         $display = "AND post_is_deleted = 0 $trust_level";
 
         $sql = "SELECT 
@@ -117,9 +119,9 @@ class FeedModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['qa' => "%" . $slug . "@%"])->rowCount();
     }
 
-    public static function display($sheet)
+    public static function display(string $sheet)
     {
-        $hidden = UserData::checkAdmin() ? "" : "AND post_hidden = 0";
+        $hidden = self::container()->user()->admin() ? "" : "AND post_hidden = 0";
 
         switch ($sheet) {
             case 'facet.feed':

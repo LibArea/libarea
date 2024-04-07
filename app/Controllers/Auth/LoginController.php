@@ -1,38 +1,48 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\Auth;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Controllers\Controller;
-use App\Models\User\UserModel;
-use Meta;
-
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
+use App\Bootstrap\Services\Auth\{Login, Action, Remember};
 use App\Validate\RulesLogin;
+use Meta;
 
 class LoginController extends Controller
 {
-    public function index()
+    /**
+     * Authorization
+     * Авториация
+     *
+     * @return void
+     */
+    public function index(): void
     {
-        $data = Request::getPost();
-
+        $data = Request::input();
         $user = RulesLogin::rules($data);
 
         // If you clicked "Remember", it establishes a user session and registers it
         // Если нажал "Запомнить", то устанавливает сеанс пользователя и регистрирует его
         $rememberMe = $data['rememberme'] ?? false;
         if ($rememberMe == 1) {
-            (new \App\Controllers\Auth\RememberController())->rememberMe($user['id']);
+            Remember::rememberMe($user['id']);
         }
 
-        (new \App\Controllers\Auth\SessionController())->set($user['id']);
+        Action::set($user['id']);
 
-        self::setUserLog($user['id']);
+        Login::setUserLog($user['id']);
 
         redirect('/');
     }
 
-    // Login page
-    // Страница авторизации
+    /**
+     * Login page
+     * Страница авторизации
+     *
+     * @return void
+     */
     public function showLoginForm()
     {
         $m = [
@@ -40,7 +50,7 @@ class LoginController extends Controller
             'url'   => url('login'),
         ];
 
-        return $this->render(
+        return render(
             '/auth/login',
             [
                 'meta'  => Meta::get(__('app.sign_in'), __('auth.login_info'), $m),
@@ -48,21 +58,6 @@ class LoginController extends Controller
                     'sheet' => 'sign.in',
                     'type'  => 'login',
                 ]
-            ]
-        );
-    }
-
-    // Let's record the participant's data: browser, platform...
-    // Запишем данные участника: браузера, платформы...
-    public static function setUserLog($user_id)
-    {
-        $info = parse_user_agent();
-        UserModel::setLogAgent(
-            [
-                'user_id'       => $user_id,
-                'user_browser'  => $info['browser'] . ' ' . $info['version'],
-                'user_os'       => $info['platform'],
-                'user_ip'       => Request::getRemoteAddress(),
             ]
         );
     }

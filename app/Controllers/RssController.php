@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-use Hleb\Constructor\Handlers\Request;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
 use App\Models\RssModel;
 
 class RssController extends Controller
@@ -10,7 +11,7 @@ class RssController extends Controller
     // Route::get('/sitemap.xml')
     public function index()
     {
-        includeCachedTemplate(
+        insertCacheTemplate(
             'default/content/rss/sitemap',
             [
                 'data' => [
@@ -24,13 +25,13 @@ class RssController extends Controller
     // Route::get('/turbo-feed/topic/{slug}')
     public function turboFeed()
     {
-        $topic_slug = Request::get('slug');
+        $topic_slug = Request::param('slug')->asString();
         $topic      = RssModel::getTopicSlug($topic_slug);
         notEmptyOrView404($topic);
 
         $posts  = RssModel::getPostsFeed($topic_slug);
 
-        includeCachedTemplate(
+        insertCacheTemplate(
             'default/content/rss/turbo-feed',
             [
                 'data' => [
@@ -44,13 +45,13 @@ class RssController extends Controller
     // Route::get('/rss-feed/topic/{slug}')
     public function rssFeed()
     {
-        $topic_slug = Request::get('slug');
+        $topic_slug = Request::param('slug')->asString();
         $topic      = RssModel::getTopicSlug($topic_slug);
         notEmptyOrView404($topic);
 
         $posts  = RssModel::getPostsFeed($topic_slug);
 
-        includeCachedTemplate(
+        insertCacheTemplate(
             'default/content/rss/rss-feed',
             [
                 'data'  => [
@@ -66,7 +67,7 @@ class RssController extends Controller
     {
         $posts  = RssModel::getPosts();
 
-        includeCachedTemplate(
+        insertCacheTemplate(
             'default/content/rss/posts',
             [
                 'data'  => [

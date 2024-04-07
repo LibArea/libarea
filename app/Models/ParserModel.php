@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class ParserModel extends \Hleb\Scheme\App\Models\MainModel
+class ParserModel extends Model
 {
     // Member information (id, slug) for @nickname
     // Информация по участнику (id, slug) для @nickname

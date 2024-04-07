@@ -1,22 +1,19 @@
-<?php
-
-use Hleb\Constructor\Handlers\Request; ?>
 <?php if (!empty($data['posts'])) : ?>
   <?php $n = 0;
   foreach ($data['posts'] as $post) :
     $n++; ?>
 
-    <?php if (!UserData::checkActiveUser() && $n == 6) : ?>
+    <?php if (!$container->user()->active() && $n == 6) : ?>
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
 
     <?php if ($post['post_hidden'] == 1) : ?>
-      <?php if ($post['post_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) continue; ?>
+      <?php if ($post['post_user_id'] != $container->user()->id() && !$container->user()->admin()) continue; ?>
     <?php endif; ?>
 
-    <div class="box shadow-bottom article_<?= $post['post_id']; ?>">
+    <div class="box article_<?= $post['post_id']; ?>">
 
       <div class="flex justify-between">
         <div class="mb15">
@@ -70,12 +67,12 @@ use Hleb\Constructor\Handlers\Request; ?>
           <?= Html::votes($post, 'post'); ?>
 
           <a class="gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
-            <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> green<?php endif; ?>">
+            <span class="nickname<?php if (Html::loginColor($post['created_at'])) : ?> green<?php endif; ?>">
               <?= $post['login']; ?>
             </span>
           </a>
 
-          <div class="gray-600 lowercase"><?= Html::langDate($post['post_date']); ?></div>
+          <div class="gray-600 lowercase"><?= langDate($post['post_date']); ?></div>
 
           <?php if ($post['post_comments_count'] != 0) : ?>
             <a class="flex gray-600" href="<?= $post_url; ?>#comment">
@@ -86,7 +83,7 @@ use Hleb\Constructor\Handlers\Request; ?>
             </a>
           <?php endif; ?>
 
-          <?php if (Request::getMainUrl() == '/subscribed') : ?>
+          <?php if ($container->request()->getUri()->getPath() == '/subscribed') : ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id tag-violet right">
               <?= __('app.unsubscribe'); ?>
             </div>
@@ -100,7 +97,7 @@ use Hleb\Constructor\Handlers\Request; ?>
     </div>
   <?php endforeach; ?>
 <?php else : ?>
-  <?php if (UserData::checkActiveUser()) : ?>
+  <?php if ($container->user()->active()) : ?>
     <?= insert('/_block/facet/recommended-topics', ['data' => $data]); ?>
   <?php endif; ?>
   <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>

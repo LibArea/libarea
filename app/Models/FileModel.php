@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class FileModel extends \Hleb\Scheme\App\Models\MainModel
+class FileModel extends Model
 {
     public static function set($params)
     {
@@ -38,13 +38,13 @@ class FileModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM files 
                            WHERE file_user_id = :user_id AND file_is_deleted = 0 LIMIT :start, :limit";
 
-        return  DB::run($sql, ['user_id' => UserData::getUserId(), 'start' => $start, 'limit' => $limit])->fetchAll();
+        return  DB::run($sql, ['user_id' => self::container()->user()->id(), 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function removal($file_path)
     {
         $sql = "UPDATE files SET file_is_deleted = 1 WHERE file_path = :file_path AND file_user_id = :user_id";
 
-        return DB::run($sql, ['file_path' => $file_path, 'user_id' => UserData::getUserId()]);
+        return DB::run($sql, ['file_path' => $file_path, 'user_id' => self::container()->user()->id()]);
     }
 }

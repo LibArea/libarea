@@ -1,25 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\Poll;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Controllers\Controller;
-use App\Services\Сheck\PollPresence;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
+use App\Content\Сheck\PollPresence;
 use App\Models\PollModel;
-use Access, Meta;
+use Meta, Msg;
 
 class EditPollController extends Controller
 {
-    // Edit form
-    // Форма редактирования
+    /**
+     * Edit form
+     * Форма редактирования
+     *
+     * @return void
+     */
     public function index()
     {
-        $question   = PollPresence::index($id = Request::getInt('id'));
+        $question   = PollPresence::index($id = Request::param('id')->asInt());
         $answers    = PollModel::getAnswers($id);
 
         $this->checkingEditPermissions($question);
 
-        return $this->render(
+        return render(
             '/poll/edit',
             [
                 'meta'  => Meta::get(__('app.edit_poll')),
@@ -33,17 +39,17 @@ class EditPollController extends Controller
         );
     }
 
-    public function change()
+    public function edit()
     {
-        $question   = PollPresence::index($id = Request::getPostInt('id'));
+        $question   = PollPresence::index($id = Request::post('id')->asInt());
 
         $this->checkingEditPermissions($question);
 
-        $data = Request::getPost();
+        $data = Request::allPost();
 
         PollModel::editTitle($id, $data['title']);
-        
-        $is_closed = Request::getPost('closed') == 'on' ? 1 : 0;
+
+        $is_closed = Request::post('closed')->value() == 'on' ? 1 : 0;
         PollModel::editClosed($id, $is_closed);
 
         foreach ($data as $key => $title) {
@@ -52,22 +58,22 @@ class EditPollController extends Controller
             }
         }
 
-        is_return(__('msg.change_saved'), 'success', url('poll', ['id' => $id]));
+        Msg::redirect(__('msg.change_saved'), 'success', url('poll', ['id' => $id]));
     }
 
     public function checkingEditPermissions($question)
     {
         // Only the site author and staff can edit
         // Редактировать может только автор сайта и персонал
-        if (Access::author('poll', $question) === false) {
-            is_return(__('msg.access_denied'), 'error');
+        if ($this->container->access()->author('poll', $question) === false) {
+            Msg::redirect(__('msg.access_denied'), 'error');
         }
 
         return true;
     }
-    
+
     public function deletingVariant()
-    {   
-         return PollModel::delVariant(Request::getPostInt('id'));
+    {
+        return PollModel::delVariant(Request::post('id')->asInt());
     }
 }

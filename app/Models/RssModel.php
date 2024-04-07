@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class RssModel extends \Hleb\Scheme\App\Models\MainModel
+class RssModel extends Model
 {
     // The last 500 posts
     // Последние 500 постов

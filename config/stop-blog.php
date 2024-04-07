@@ -4,6 +4,7 @@
  */
 
 return [
+  'list' => [
     'admin',
     'login',
     'dev',
@@ -19,5 +20,6 @@ return [
     'agouti',
     'dev',
     'mod',
-    'meta'
+    'meta',
+  ],
 ];

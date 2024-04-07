@@ -4,8 +4,8 @@
     <div>
       <h1 class="text-2xl mb-text-xl m0">
         <?= $topic['facet_title']; ?>
-        <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == UserData::getUserId()) : ?>
-          <a class="gray-600" href="<?= url('content.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
+        <?php if ($container->user()->admin() || $topic['facet_user_id'] == $container->user()->id()) : ?>
+          <a class="gray-600" href="<?= url('facet.form.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>
@@ -66,38 +66,11 @@
 
 <div class="flex justify-between items-center mb20">
   <ul class="nav scroll-menu">
-    <?= insert(
-      '/_block/navigation/nav',
-      [
-        'list' =>  [
-          [
-            'id'	=> 'facet.feed',
-            'url'	=> url('topic', ['slug' => $topic['facet_slug']]),
-            'title'	=> __('app.feed'),
-          ], [
-            'id'    => 'facet.posts',
-            'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/posts',
-            'title' => __('app.posts'),
-          ], [
-            'id'    => 'facet.questions',
-            'url'   => url('topic', ['slug' => $topic['facet_slug']]) . '/questions',
-            'title'	=> __('app.questions'),
-          ], [
-            'id'	=> 'facet.recommend',
-            'url'	=> url('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
-            'title'	=> __('app.recommended'),
-          ], [
-            'id'	=> 'writers',
-            'url'	=> url('topic.writers', ['slug' => $topic['facet_slug']]),
-            'title'	=> __('app.writers'),
-          ]
-        ]
-      ]
-    ); ?>
+    <?= insert('/_block/navigation/config/topic-nav', ['slug' => $topic['facet_slug']]); ?>  
   </ul>
   <div class="relative">
     <?= insert('/_block/navigation/sorting-day'); ?>
   </div>
 </div>
 
-<?= insert('/_block/dialog/share', ['title' => __('app.share_topic'), 'url' => config('meta.url') . url('topic', ['slug' => $topic['facet_slug']])]); ?>
+<?= insert('/_block/dialog/share', ['title' => __('app.share_topic'), 'url' => config('meta', 'url') . url('topic', ['slug' => $topic['facet_slug']])]); ?>

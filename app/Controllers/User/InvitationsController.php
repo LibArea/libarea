@@ -1,21 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\User;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Controllers\Controller;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
 use App\Models\ActionModel;
 use App\Models\User\InvitationModel;
-use SendEmail, Meta, Html;
+use SendEmail, Meta, Html, Msg;
 
 use App\Validate\RulesUserInvitation;
 
 class InvitationsController extends Controller
 {
-    // Show the form for creating an invite
+    /**
+     * Show the form for creating an invite
+     *
+     * @return void
+     */
     public function inviteForm()
     {
-        return $this->render(
+        return render(
             '/user/invite',
             [
                 'meta'  => Meta::get(__('app.invite')),
@@ -24,26 +30,30 @@ class InvitationsController extends Controller
         );
     }
 
-    // User invite page
+    /**
+     * User invite page
+     *
+     * @return void
+     */
     function invitationForm()
     {
-        return $this->render(
+        return render(
             '/user/invitation',
             [
                 'meta'  => Meta::get(__('app.invites')),
                 'data'  => [
                     'invitations'   => InvitationModel::userResult(),
-                    'count_invites' => $this->user['invitation_available'],
+                    'count_invites' => $this->container->user()->get()['invitation_available'],
                 ]
             ]
         );
     }
 
-    function create()
+    function add()
     {
-        $invitation_email = Request::getPost('email');
+        $invitation_email = Request::post('email')->value();
 
-        RulesUserInvitation::rulesInvite($invitation_email, $this->user['invitation_available']);
+        RulesUserInvitation::rulesInvite($invitation_email, $this->container->user()->get()['invitation_available']);
 
         $invitation_code = Html::randomString('crypto', 24);
 
@@ -51,15 +61,21 @@ class InvitationsController extends Controller
 
         $this->escort($invitation_code, $invitation_email);
 
-        is_return(__('msg.invite_created'), 'success', url('invitations'));
+        Msg::redirect(__('msg.invite_created'), 'success', url('invitations'));
     }
 
-    // We will send an email and write logs
-    function escort($invitation_code, $invitation_email)
+    /**
+     * We will send an email and write logs
+     *
+     * @param string $invitation_code
+     * @param string $invitation_email
+     * @return void
+     */
+    function escort(string $invitation_code, string $invitation_email)
     {
         $link = url('invite.reg', ['code' => $invitation_code]);
 
-        SendEmail::mailText($this->user['id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
+        SendEmail::mailText($this->container->user()->id(), 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
         ActionModel::addLogs(
             [

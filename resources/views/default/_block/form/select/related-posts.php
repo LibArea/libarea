@@ -7,7 +7,7 @@
   <input name="post_select" id="post_id">
 </fieldset>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
  document.addEventListener("DOMContentLoaded", async () => {
   var input = document.querySelector('#post_id');   
   let tagify_post = new Tagify(input, {
@@ -32,7 +32,7 @@
     // покажем анимацию загрузки и скроем раскрывающийся список предложений
     tagify_post.loading(true).dropdown.hide.call(tagify_post);
     
-    fetch("/search/post", {
+    fetch("/search/select/post", {
       method: "POST",
       body: "q=" + encodeURIComponent(term),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

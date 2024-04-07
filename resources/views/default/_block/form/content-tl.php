@@ -1,8 +1,8 @@
 <fieldset>
   <label for="post_content"><?= __('app.for'); ?> TL</label>
   <select name="content_tl">
-    <?php for ($i = 0; $i <= UserData::getUserTl(); $i++) {
-      if ($i == UserData::USER_FIFTH_LEVEL + 1) {
+    <?php for ($i = 0; $i <= $container->user()->tl(); $i++) {
+      if ($i == 5) {
         break;
       }
     ?>

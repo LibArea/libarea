@@ -3,7 +3,7 @@
     <?php $n = 0;
     foreach ($data['posts'] as $post) :
       $n++; ?>
-      <?php if (!UserData::checkActiveUser() && $n == 6) : ?>
+      <?php if (!$container->user()->active() && $n == 6) : ?>
         <?= insert('/_block/no-login-screensaver'); ?>
       <?php endif; ?>
       <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
@@ -26,7 +26,7 @@
               <?= $post['login']; ?>
             </a>
             <div class="gray-600 lowercase text-sm">
-              <?= Html::langDate($post['post_date']); ?>
+              <?= langDate($post['post_date']); ?>
             </div>
             <?php if ($post['post_comments_count'] != 0) : ?>
               <span class="gray-600">&#183;</span>
@@ -40,7 +40,7 @@
     <?php endforeach; ?>
     </ul>
   <?php else : ?>
-    <?php if (UserData::checkActiveUser()) : ?>
+    <?php if ($container->user()->active()) : ?>
       <?= insert('/_block/facet/recommended-topics', ['data' => $data]); ?>
     <?php endif; ?>
     <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.no_content'), 'icon' => 'post']); ?>

@@ -1,13 +1,13 @@
   <div class="mt5 tabs-post">
     <div class="mb15">
       <ul class="nav small">
-        <?php if (config('general.qa_site_format') == false) : ?>
+        <?php if (config('general', 'qa_site_format') == false) : ?>
           <li class="tab-button active" data-id="post"><?= __('app.post'); ?></li>
         <?php endif; ?>
 
-        <li class="tab-button<?php if (config('general.qa_site_format') == true) : ?> active<?php endif; ?>" data-id="qa"><?= __('app.qa'); ?></li>
+        <li class="tab-button<?php if (config('general', 'qa_site_format') == true) : ?> active<?php endif; ?>" data-id="qa"><?= __('app.qa'); ?></li>
 
-        <?php if (UserData::getUserTl() >= config('trust-levels.tl_add_url')) : ?>
+        <?php if ($container->user()->tl() >= config('trust-levels', 'tl_add_url')) : ?>
           <li class="tab-button" data-id="url"><?= __('app.url'); ?></li>
         <?php else : ?>
           <li class="gray-600"><?= __('app.url'); ?></li>
@@ -31,7 +31,7 @@
       ]); ?>
     <?php endif; ?>
 
-    <?php if (config('general.qa_site_format') == false) : ?>
+    <?php if (config('general', 'qa_site_format') == false) : ?>
       <div class="last-content content-tabs tab_active" id="post">
         <div class="file-upload" id="file-drag">
           <div class="flex gap mb15">
@@ -59,24 +59,23 @@
           'cut'      => true
         ]); ?>
 
-        <?php if (UserData::getRegType(UserData::USER_FIRST_LEVEL)) : ?>
+        <?php if ($container->access()->limitTl(2)) : ?>
           <fieldset>
             <input type="checkbox" name="draft"> <?= __('app.draft_post'); ?>
           </fieldset>
-
+		<?php endif; ?>
+		
           <?= insert('/_block/form/content-tl', ['data' => null]); ?>
 
           <fieldset>
             <input type="checkbox" name="closed"> <?= __('app.post_closed'); ?>
           </fieldset>
 
-        <?php endif; ?>
-
         <fieldset>
           <input type="checkbox" name="translation"> <?= __('app.post_translation'); ?>
         </fieldset>
 
-        <?php if (UserData::checkAdmin()) : ?>
+        <?php if ($container->user()->admin()) : ?>
           <fieldset>
             <input type="checkbox" name="top"> <?= __('app.pin'); ?>
           </fieldset>
@@ -84,7 +83,7 @@
       </div>
     <?php endif; ?>
 
-    <?php if (config('feed.nsfw')) : ?>
+    <?php if (config('feed', 'nsfw')) : ?>
       <fieldset>
         <input type="checkbox" name="nsfw"> <?= __('app.nsfw_post'); ?>
       </fieldset>
@@ -95,14 +94,14 @@
       <div class="help"><?= __('app.hidden_post_help'); ?></div>
     </fieldset>
 
-    <div class="last-content content-tabs<?php if (config('general.qa_site_format') == true) : ?> tab_active<?php endif; ?>" id="qa">
+    <div class="last-content content-tabs<?php if (config('general', 'qa_site_format') == true) : ?> tab_active<?php endif; ?>" id="qa">
       <div class="mb5"><?= __('app.text'); ?> Q&A <sup class="red">*</sup></div>
       <textarea name="content_qa"></textarea>
       <div class="help"><?= __('app.necessarily'); ?></div>
     </div>
 
     <div class="last-content content-tabs" id="url">
-      <?php if (UserData::getRegType(config('trust-levels.tl_add_url'))) : ?>
+      <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_url'))) : ?>
         <fieldset class="flex items-center gap-min">
           <input id="link" placeholder="<?= __('app.url_parsing'); ?>" class="post_url" type="text" name="post_url" />
           <div class="w-30"><input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= __('app.to_extract'); ?>" /></div>
@@ -114,7 +113,7 @@
       <div class="help"><?= __('app.necessarily'); ?></div>
     </div>
 
-    <?php if (UserData::getRegType(config('trust-levels.tl_add_poll')) && $data['count_poll']) : ?>
+    <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_poll')) && $data['count_poll']) : ?>
       <?= insert('/_block/form/select/poll', ['poll' => false]); ?>
     <?php endif; ?>  
 

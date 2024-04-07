@@ -3,7 +3,7 @@
 <textarea id="editor" name="content"><?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?></textarea>
 
 <div id="editor"></div>
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', function() {
     let content = '';
     const easyMDE = new EasyMDE({
@@ -35,8 +35,8 @@
 
       toolbar: [
         <?php
-        $conf_editor = config('editor/buttons');
-        if (!empty($message)) $conf_editor = config('editor/message');
+        $conf_editor = config('buttons',  'config');
+        if (!empty($message)) $conf_editor = config('editor', 'config');
         ?>
         <?php foreach ($conf_editor as $row) : ?>
           <?php if (!empty($row['separator']) == 'separator') : ?> '|',
@@ -44,7 +44,7 @@
               name: '<?= $row['name']; ?>',
               action: <?= $row['action']; ?>,
               icon: '<?= $row['icon']; ?>',
-              title: '<?= $row['title']; ?>',
+              title: '<?= __($row['title']); ?>',
             },
           <?php endif; ?>
         <?php endforeach; ?>

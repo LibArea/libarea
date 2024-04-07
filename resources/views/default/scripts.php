@@ -1,21 +1,22 @@
 <script src="/assets/js/common.js"></script>
 <script src="/assets/js/medium-zoom.js"></script>
 <script src="/assets/js/prism/prism.js"></script>
-
-<?php if (UserData::checkActiveUser()) : ?>
+ 
+<?php if ($container->user()->active()) : ?>
   <script src="/assets/js/app.js"></script>
   <?= insert('/device-id'); ?>
 <?php endif; ?>
 
-<?= getRequestResources()->getBottomStyles(); ?>
-<?= getRequestResources()->getBottomScripts(); ?>
+<?php if ($container->user()->admin()) : ?>
+  <script src="/assets/js/admin.js"></script>
+<?php endif; ?>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', () => {
     mediumZoom(queryAll('.img-preview img'));
   });
-  <?php if (UserData::checkActiveUser()) : ?>
-    const update_time = <?= config('general.notif_update_time'); ?>;
+  <?php if ($container->user()->active()) : ?>
+    const update_time = <?= config('general', 'notif_update_time'); ?>;
 
     function load_notification() {
       fetch("/notif", {
@@ -60,7 +61,7 @@
 
   <?= Msg::get(); ?>
 
-  <?php if (UserData::getUserScroll()) : ?>
+  <?php if ($container->user()->scroll()) : ?>
     // Что будет смотреть
     const coolDiv = getById("scroll");
 

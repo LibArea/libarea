@@ -18,5 +18,5 @@ return [
     'sign_in'               => 'Sign in',
     'enter_password'        => 'Enter password',
     'under_reconstruction'  => 'Site under reconstruction. Entrance for staff only.',
-    'under_maintenance'  	=> 'Maintenance mode',
+    'under_maintenance'     => 'Maintenance mode',
 ];

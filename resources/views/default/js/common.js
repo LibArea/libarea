@@ -57,13 +57,12 @@ function fetchSearch() {
   let query = getById("find").value;
   let type = getById("find").dataset.id;
   if (query.length < 2) return;
-
   let url = type === 'category' ? '/web/dir/all/' : '/topic/';
 
   fetch("/search/api", {
     method: "POST",
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: "query=" + query + "&type=" + type + "&_token=" + token,
+    body: "query=" + query + "&type=" + type,
   })
     .then(response => response.text())
     .then(text => {

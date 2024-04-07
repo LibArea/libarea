@@ -1,15 +1,10 @@
 <?php
-
-use Hleb\Constructor\Handlers\Request;
-
-Request::getHead()->addStyles('/assets/css/style.css?' . config('assembly-js-css.version'));
-Request::getHead()->addStyles('/assets/css/minimum.css?' . config('assembly-js-css.version'));
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
-<body class="body-minimum<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if (Request::getCookie('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
+<body class="body-minimum<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if ($container->cookies()->get('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
   <header class="text-header wrap">
     <div class="d-header_contents justify-between">
 
@@ -18,18 +13,18 @@ $facet  = $data['facet'] ?? false; ?>
           L
         </a>
         <ul class="nav scroll-menu mb-w150">
-          <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.home')]); ?>
+          <?= insert('/_block/navigation/config/home-nav'); ?>
         </ul>
       </div>
 
-      <?php if (!UserData::checkActiveUser()) : ?>
+      <?php if (!$container->user()->active()) : ?>
         <div class="flex gap-max items-center">
           <div id="toggledark" class="mb-none">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#sun"></use>
             </svg>
           </div>
-          <?php if (config('general.invite') == false) : ?>
+          <?php if (config('general', 'invite') == false) : ?>
             <a class="gray min-w75 center block" href="<?= url('register'); ?>">
               <?= __('app.registration'); ?>
             </a>
@@ -57,10 +52,10 @@ $facet  = $data['facet'] ?? false; ?>
 
           <div class="relative">
             <div class="trigger">
-              <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
+              <?= Img::avatar($container->user()->avatar(), $container->user()->login(), 'img-base', 'small'); ?>
             </div>
             <ul class="dropdown user">
-              <?= insert('/_block/navigation/menu-user'); ?>
+              <?= insert('/_block/navigation/config/user-menu'); ?>
             </ul>
           </div>
         </div>

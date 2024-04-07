@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\User;
 
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class PreferencesModel extends \Hleb\Scheme\App\Models\MainModel
+class PreferencesModel extends Model
 {
   public static $limit = 50;
 
@@ -14,7 +16,7 @@ class PreferencesModel extends \Hleb\Scheme\App\Models\MainModel
 
   public static function get($page)
   {
-    $user_id = UserData::getUserId();
+    $user_id = self::container()->user()->id();
     $start = ($page - 1) * self::$limit;
 
     $sql = "SELECT 
@@ -43,14 +45,14 @@ class PreferencesModel extends \Hleb\Scheme\App\Models\MainModel
                         LEFT JOIN facets_signed fs ON fs.signed_facet_id = f.facet_id 
 							WHERE fs.signed_user_id = :user_id AND (f.facet_type = 'topic' OR f.facet_type = 'blog')";
 
-    return ceil(DB::run($sql, ['user_id' => UserData::getUserId()])->rowCount() / self::$limit);
+    return ceil(DB::run($sql, ['user_id' => self::container()->user()->id()])->rowCount() / self::$limit);
   }
 
   public static function getBlocks()
   {
     $sql = "SELECT facet_id FROM users_preferences WHERE user_id = :user_id AND type = :type";
 
-    return DB::run($sql, ['user_id' => UserData::getUserId(), 'type' => self::TYPE_BLOCKS])->fetchAll();
+    return DB::run($sql, ['user_id' => self::container()->user()->id(), 'type' => self::TYPE_BLOCKS])->fetchAll();
   }
 
   public static function edit($data)
@@ -61,7 +63,7 @@ class PreferencesModel extends \Hleb\Scheme\App\Models\MainModel
 
       $type = $favet_id < 0 ? self::TYPE_BLOCKS : self::TYPE_TOPICS_BLOG;
 
-      DB::run("INSERT INTO users_preferences(facet_id, user_id, type) VALUES (:facet_id, :user_id, :type)", ['facet_id' => $favet_id, 'user_id' => UserData::getUserId(), 'type' => $type]);
+      DB::run("INSERT INTO users_preferences(facet_id, user_id, type) VALUES (:facet_id, :user_id, :type)", ['facet_id' => $favet_id, 'user_id' => self::container()->user()->id(), 'type' => $type]);
     }
 
     return;
@@ -69,12 +71,12 @@ class PreferencesModel extends \Hleb\Scheme\App\Models\MainModel
 
   public static function removal()
   {
-    return DB::run("DELETE FROM users_preferences WHERE user_id = ?", [UserData::getUserId()]);
+    return DB::run("DELETE FROM users_preferences WHERE user_id = ?", [self::container()->user()->id()]);
   }
 
   public static function getMenu()
   {
-    $limit = config('facets.quantity_home');
+    $limit = config('facets', 'quantity_home');
 
     $sql = "SELECT 
                     fs.facet_id, 
@@ -87,6 +89,12 @@ class PreferencesModel extends \Hleb\Scheme\App\Models\MainModel
 						FROM users_preferences pr
 							LEFT JOIN facets fs ON fs.facet_id = pr.facet_id WHERE pr.user_id = :user_id LIMIT $limit"; // AND pr.facet_id > 0
 
-    return DB::run($sql, ['user_id' => UserData::getUserId()])->fetchAll();
+    return DB::run($sql, ['user_id' => self::container()->user()->id()])->fetchAll();
   }
+  
+    public static function getBlog(int $id): false|array
+    {
+        return DB::run("SELECT facet_slug FROM facets WHERE facet_user_id = :id AND facet_type = 'blog'", ['id' => $id])->fetch();
+    }
+  
 }

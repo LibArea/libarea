@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use DB;
-use UserData;
-use Hleb\Constructor\Handlers\Request;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
+use Hleb\Static\Request;
 
-class VotesModel extends \Hleb\Scheme\App\Models\MainModel
+class VotesModel extends Model
 {
     public static function authorId(int $content_id, string $type)
     {
@@ -28,7 +28,7 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
                     FROM votes_" . $type . "  
                         WHERE votes_" . $type . "_item_id = :content_id AND votes_" . $type . "_user_id = :author_id";
 
-        return  DB::run($sql, ['content_id' => $content_id, 'author_id' => UserData::getUserId()])->fetch();
+        return  DB::run($sql, ['content_id' => $content_id, 'author_id' => self::container()->user()->id()])->fetch();
     }
 
     // Like frequency per day 
@@ -38,7 +38,7 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
         $sql = "SELECT votes_" . $type . "_item_id FROM votes_" . $type . "
                     WHERE votes_" . $type . "_user_id = :user_id AND votes_" . $type . "_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
-        return  DB::run($sql, ['user_id' => UserData::getUserId()])->rowCount();
+        return  DB::run($sql, ['user_id' => self::container()->user()->id()])->rowCount();
     }
 
     public static function save(int $content_id, string $type)
@@ -46,8 +46,8 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
         $params = [
             'item_id'   => $content_id,
             'points'    => 1,
-            'ip'        => Request::getRemoteAddress(),
-            'user_id'   => UserData::getUserId(),
+            'ip'        => Request::getUri()->getIp(),
+            'user_id'   => self::container()->user()->id(),
         ];
 
         $sql = "INSERT INTO votes_" . $type . "(votes_" . $type . "_item_id, 
@@ -64,7 +64,7 @@ class VotesModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "DELETE FROM votes_" . $type . " WHERE votes_" . $type . "_item_id = :item_id AND votes_" . $type . "_user_id = :user_id";
 
-        DB::run($sql, ['item_id'   => $content_id, 'user_id' => UserData::getUserId()]);
+        DB::run($sql, ['item_id'   => $content_id, 'user_id' => self::container()->user()->id()]);
     }
 
     // Recording the vote in the content table

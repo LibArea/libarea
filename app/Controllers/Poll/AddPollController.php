@@ -1,19 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\Poll;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Controllers\Controller;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
 use App\Models\{PollModel, ActionModel};
-use Meta;
+use Meta, Msg;
 
 class AddPollController extends Controller
 {
-    // Poll Add Form
-    // Форма добавление опроса
+    /**
+     * Poll Add Form
+     * Форма добавление опроса
+     *
+     * @return void
+     */
     public function index()
     {
-        return $this->render(
+
+        return render(
             '/poll/add',
             [
                 'meta'      => Meta::get(__('app.add_poll')),
@@ -24,11 +31,15 @@ class AddPollController extends Controller
         );
     }
 
-    // Adding a poll
-    // Добавим опрос
-    public function create()
+    /**
+     * Adding a poll
+     * Добавим опрос
+     *
+     * @return void
+     */
+    public function add()
     {
-        if (!is_array($data = Request::getPost())) {
+        if (!is_array($data = Request::allPost())) {
             return false;
         }
 
@@ -47,6 +58,6 @@ class AddPollController extends Controller
             ]
         );
 
-        is_return(__('msg.post_added'), 'success', url('polls'));
+        Msg::redirect(__('msg.post_added'), 'success', url('polls'));
     }
 }

@@ -71,11 +71,6 @@
   color: var(--green);
 }
 
-.label-red {
-  background-color: #fff4e8;
-  color: var(--red);
-}
-
 .label-teal {
   background-color: var(--teal);
   color: var(--white);

@@ -1,11 +1,16 @@
 AddDefaultCharset UTF-8
+RewriteEngine On
 
-# Remove the comment if you know what it is.
+# If in production, uncomment
+# Если в производстве, раскомментируйте
+
+# RewriteCond %{SERVER_PORT} !^443$
+# RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$
+# RewriteRule ^(.*)$ http://%1/$1 [L,R=301]
+
 # php_value session.cookie_httponly 1
 # php_value session.cookie_secure 1
-
-RewriteCond %{HTTP_HOST} ^www\.(.*)$
-RewriteRule ^(.*)$ http://%1/$1 [L,R=301]
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
@@ -23,8 +28,5 @@ RewriteRule ^(.*)$ http://%1/$1 [L,R=301]
     AddType image/x-icon .ico
     ExpiresByType image/x-icon "access plus 1 day"
     ExpiresByType image/svg "access plus 1 hour"
-    ExpiresByType application/x-font-ttf "access plus 1 year"
-    ExpiresByType application/x-font-woff "access plus 1 year"
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/webp "access plus 1 year"
 </ifModule>
+

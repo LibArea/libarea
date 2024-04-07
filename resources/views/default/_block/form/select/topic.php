@@ -9,7 +9,7 @@
   <div class="help"><?= __('app.necessarily'); ?>...</div>
 </fieldset>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   var focus_search = async (props = {}) => {
     var settings = {
       method: 'POST',
@@ -24,7 +24,7 @@
       body: JSON.stringify(props)
     };
     try {
-      const fetchResponse = await fetch('/search/topic', settings);
+      const fetchResponse = await fetch('/search/select/topic', settings);
       return await fetchResponse.json();
     } catch (e) {
       return e;

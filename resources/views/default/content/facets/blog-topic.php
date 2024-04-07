@@ -12,7 +12,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
         </div>
         <div class="right">
           <a class="btn btn-outline-primary right" href="<?= url('topic', ['slug' => $data['topic']['facet_slug']]) ?>"><?= __('app.more_content'); ?></a>
-          <div class="text-sm gray-600 clear"><?= __('app.read_more_posts'); ?> <?= config('meta.name'); ?></div>
+          <div class="text-sm gray-600 clear"><?= __('app.read_more_posts'); ?> <?= config('meta', 'name'); ?></div>
         </div>
       </div>
     </div>

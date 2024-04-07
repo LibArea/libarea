@@ -1,6 +1,6 @@
 <?= Img::avatar($data['user']['avatar'], $data['user']['login'], 'mr5 ml5 ava', 'small'); ?>
 <span class="mr5 ml5">
-  <a title="<?= __('app.profile'); ?>" href="<?= url('profile', ['login' => UserData::getUserLogin()]); ?>">
+  <a title="<?= __('app.profile'); ?>" href="<?= url('profile', ['login' => $container->user()->login()]); ?>">
     <?= $data['user']['login']; ?>
   </a>
 </span>
@@ -35,9 +35,9 @@
 
 <h3 class="m0 mt15"><?= __('app.contacts'); ?></h3>
 <div class="gray-600 text-sm"><?= __('app.public_data'); ?></div>
-<?php foreach (config('user/setting') as $block) : ?>
+<?php foreach (config('setting', 'contacts') as $block) : ?>
   <fieldset>
-    <label for="post_title"><?= $block['lang']; ?></label>
+    <label for="post_title"><?= __($block['lang']); ?></label>
     <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
     <?php if ($block['help']) : ?>
       <div class="help"><?= $block['help']; ?></div>
@@ -55,9 +55,9 @@
 <fieldset>
   <label for="template"><?= __('app.template'); ?></label>
   <select name="template">
-    <?php foreach (config('general.templates') as $key => $name) : ?>
+    <?php foreach (config('general', 'templates') as $key => $name) : ?>
       <option <?php if ($data['user']['template'] == $key) { ?>selected<?php } ?> value="<?= $key; ?>">
-        <?= $key == config('general.template') ? $name . ' ' . __('app.default') : $name; ?>
+        <?= $key == config('general', 'template') ? $name . ' ' . __('app.default') : $name; ?>
       </option>
     <?php endforeach; ?>
   </select>
@@ -66,7 +66,7 @@
 <fieldset>
   <label for="post_content"><?= __('app.language'); ?></label>
   <select name="lang">
-    <?php foreach (config('general.languages') as $key => $lang) : ?>
+    <?php foreach (config('general', 'languages') as $key => $lang) : ?>
       <option <?php if ($data['user']['lang'] == $key) : ?>selected<?php endif; ?> value="<?= $key; ?>">
         <?= $lang; ?>
       </option>
@@ -79,7 +79,7 @@
   <input type="checkbox" name="scroll" <?php if ($data['user']['scroll'] == 1) : ?>checked <?php endif; ?>> <?= __('app.endless_scroll'); ?>
 </fieldset>
 
-<?php if (config('feed.nsfw')) : ?>
+<?php if (config('feed', 'nsfw')) : ?>
   <fieldset>
     <input type="checkbox" name="nsfw" <?php if ($data['user']['nsfw'] == 1) : ?>checked <?php endif; ?>> <?= __('app.is_nsfw'); ?>
   </fieldset>
@@ -93,7 +93,7 @@
 
 <div class="flex flex-row items-center justify-between mt20">
   <?= Html::sumbit(__('app.edit')); ?>
-  <?php if (config('general.deleting_profile')) : ?>
+  <?php if (config('general', 'deleting_profile')) : ?>
     <a href="setting/deletion" class="gray-600"><?= __('app.delete_profile'); ?></a>
   <?php endif; ?>  
 </div>

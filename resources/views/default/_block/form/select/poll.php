@@ -3,7 +3,7 @@
     <input name='poll_id' id="poll_id">
   </fieldset>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
     const poll_search = async (props = {}) => {
         const settings = {
             method: 'POST',
@@ -18,7 +18,7 @@
             body: JSON.stringify(props)
         };
         try {
-            const fetchResponse = await fetch('/search/poll', settings);
+            const fetchResponse = await fetch('/search/select/poll', settings);
             return await fetchResponse.json();
         } catch (e) {
             return e;

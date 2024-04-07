@@ -1,52 +1,91 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Services\Meta\Home;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
 use App\Models\HomeModel;
+use Meta, Html;
 
 class HomeController extends Controller
 {
-    public function index($sheet)
+    public function feed(): void
     {
-        $subscription = HomeModel::getSubscription($this->user['id']);
+        $this->callIndex('feed');
+    }
+
+    public function questions(): void
+    {
+        $this->callIndex('questions');
+    }
+
+    public function posts(): void
+    {
+        $this->callIndex('posts');
+    }
+
+    public function all(): void
+    {
+        $this->callIndex('all');
+    }
+
+    public function deleted(): void
+    {
+        $this->callIndex('deleted');
+    }
+
+    /**
+     * The central page of the site
+     * Центральная страница сайта
+     *
+     * @param string $sheet
+     * @return void
+     */
+    private function callIndex(string $sheet)
+    {
+        $subscription = HomeModel::getSubscription($this->container->user()->id());
 
         // Topics signed by the participant. If a guest, then default.    
         // Темы на которые подписан участник. Если гость, то дефолтные.
         $topics = \App\Models\FacetModel::advice($subscription);
 
-        return $this->render(
-            '/home',
+        return render(
+            'home',
             [
-                'meta'  => Home::metadata($sheet),
+                'meta'  => Meta::home($sheet),
                 'data'  => [
                     'pagesCount'        => HomeModel::feedCount($sheet),
-                    'pNum'              => $this->pageNumber,
+                    'pNum'              => Html::pageNumber(),
                     'sheet'             => $sheet,
                     'topics'            => $topics,
                     'type'              => 'main',
-                    'latest_comments'	=> HomeModel::latestComments(),
-                    'posts'             => HomeModel::feed($this->pageNumber, $sheet),
-                    'items'             => HomeModel::latestItems(),
+                    'latest_comments'   => HomeModel::latestComments(),
+                    'posts'             => HomeModel::feed(Html::pageNumber(), $sheet),
+                    'items'             => HomeModel::latestItems() ?? [],
                 ],
             ],
         );
     }
 
-    // Infinite scroll
-    // Бесконечный скролл
-    public function scroll()
+    /**
+     * Infinite scroll
+     * Бесконечный скролл
+     *
+     * @return void
+     */
+    public function scroll(): void
     {
-        $type    = Request::get('type') == 'all' ? 'all' : 'main.feed';
+        $type = Request::param('type')->value() == 'all' ? 'all' : 'main.feed';
 
-        $this->insert(
+        insert(
             '/content/post/type-post',
             [
                 'data'  => [
-                    'pages' => $this->pageNumber,
+                    'pages' => Html::pageNumber(),
                     'sheet' => 'main.feed',
-                    'posts' => HomeModel::feed($this->pageNumber, $type),
+                    'posts' => HomeModel::feed(Html::pageNumber(), $type),
 
                 ]
             ]

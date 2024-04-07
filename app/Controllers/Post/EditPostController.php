@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\Post;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Controllers\Controller;
-use App\Services\Сheck\PostPresence;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
+use App\Content\Сheck\PostPresence;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel, PollModel};
-use UploadImage, Meta, Access, UserData;
+use UploadImage, Meta, Msg;
 
 use App\Traits\Slug;
 use App\Traits\Poll;
@@ -18,60 +20,64 @@ use App\Validate\RulesPost;
 
 class EditPostController extends Controller
 {
-    use Slug;
-    use Poll;
-    use Author;
-    use Related;
+	use Slug;
+	use Poll;
+	use Author;
+	use Related;
 
-    // Post edit form
-    // Форма редактирования post
-    public function index()
-    {
-        $post = PostPresence::index(Request::getInt('id'), 'id');
-
-        $post_related = [];
-        if ($post['post_related']) {
-            $post_related = PostModel::postRelated($post['post_related']);
-        }
-
-        $blog = FacetModel::getFacetsUser('blog');
-        $this->checkingEditPermissions($post, $blog);
-
-        return $this->render(
-            '/post/edit',
-            [
-                'meta'  => Meta::get(__('app.edit_' . $post['post_type'])),
-                'data'  => [
-                    'sheet'         => 'edit-post',
-                    'type'          => 'edit',
-                    'post'          => $post,
-                    'user'          => UserModel::getUser($post['post_user_id'], 'id'),
-                    'blog'          => $blog,
-                    'post_arr'      => $post_related,
-                    'topic_arr'     => PostModel::getPostFacet($post['post_id'], 'topic'),
-                    'blog_arr'      => PostModel::getPostFacet($post['post_id'], 'blog'),
-                    'section_arr'   => PostModel::getPostFacet($post['post_id'], 'section'),
-                    'poll'          => PollModel::getQuestion($post['post_poll']),
-                ]
-            ]
-        );
-    }
-
-	public function change()
+	/**
+	 * Post edit form
+	 * Форма редактирования post
+	 *
+	 * @return void
+	 */
+	public function index()
 	{
-		$post_id = Request::getPostInt('post_id');
-		$post = PostPresence::index($post_id);
+		$post = PostPresence::index(Request::param('id')->asPositiveInt(), 'id');
 
-		$content = $_POST['content']; // for Markdown
-		$post_draft = Request::getPost('post_draft') == 'on' ? 1 : 0;
-		$draft = Request::getPost('draft');
+		$post_related = [];
+		if ($post['post_related']) {
+			$post_related = PostModel::postRelated($post['post_related']);
+		}
 
 		$blog = FacetModel::getFacetsUser('blog');
 		$this->checkingEditPermissions($post, $blog);
 
-		$redirect = url('content.edit', ['type' => $post['post_type'], 'id' => $post_id]);
+		return render(
+			'/post/edit',
+			[
+				'meta'  => Meta::get(__('app.edit_' . $post['post_type'])),
+				'data'  => [
+					'sheet'         => 'edit-post',
+					'type'          => 'edit',
+					'post'          => $post,
+					'user'          => UserModel::get($post['post_user_id'], 'id'),
+					'blog'          => $blog,
+					'post_arr'      => $post_related,
+					'topic_arr'     => PostModel::getPostFacet($post['post_id'], 'topic'),
+					'blog_arr'      => PostModel::getPostFacet($post['post_id'], 'blog'),
+					'section_arr'   => PostModel::getPostFacet($post['post_id'], 'section'),
+					'poll'          => PollModel::getQuestion($post['post_poll']),
+				]
+			]
+		);
+	}
 
-		RulesPost::rules($title = Request::getPost('post_title'), $content, $redirect);
+	public function edit()
+	{
+		$post_id = Request::post('post_id')->asInt();
+		$post = PostPresence::index($post_id);
+
+		$content = $_POST['content']; // for Markdown
+		$post_draft = Request::post('post_draft')->asInt() == 'on' ? 1 : 0;
+		$draft = Request::post('draft')->asInt();
+
+		$blog = FacetModel::getFacetsUser('blog');
+		$this->checkingEditPermissions($post, $blog);
+
+		$redirect = url($post['post_type'] . '.form.edit', ['id' => $post_id]);
+
+		RulesPost::rules($title = Request::post('post_title')->value(), $content, $redirect);
 
 		// Form hacking
 		if ($post['post_draft'] == 0) {
@@ -90,14 +96,14 @@ class EditPostController extends Controller
 		}
 
 		// Related topics
-		$fields = Request::getPost() ?? [];
+		$fields = Request::allPost() ?? [];
 		$new_type = $this->addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
 
 		$post_related = $this->relatedPost();
 
-		if (UserData::checkAdmin()) {
-			$post_merged_id = Request::getPostInt('post_merged_id');
-			$post_slug = Request::getPost('post_slug');
+		if ($this->container->user()->admin()) {
+			$post_merged_id = Request::post('post_merged_id')->asInt();
+			$post_slug = Request::post('post_slug')->value();
 			if ($post_slug != $post['post_slug']) {
 				if (PostModel::getSlug($slug = $this->getSlug($post_slug))) {
 					$slug = $slug . "-";
@@ -105,7 +111,7 @@ class EditPostController extends Controller
 			}
 		}
 
-		$post_feature = config('general.qa_site_format') === true ? 'on' : Request::getPost('post_feature');
+		$post_feature = config('general', 'qa_site_format') === true ? 'on' : Request::post('post_feature');
 
 		PostModel::editPost([
 			'post_id' 			=> $post_id,
@@ -113,34 +119,41 @@ class EditPostController extends Controller
 			'post_slug' 		=> $slug ?? $post['post_slug'],
 			'post_feature' 		=> $post_feature == 'on' ? 1 : 0,
 			'post_type' 		=> $new_type,
-			'post_translation'	=> Request::getPost('translation') == 'on' ? 1 : 0,
+			'post_translation'	=> Request::post('translation')->value() == 'on' ? 1 : 0,
 			'post_date' 		=> $post_date,
-			'post_user_id' 		=> $this->selectAuthor($post['post_user_id'], Request::getPost('user_id')),
+			'post_user_id' 		=> $this->selectAuthor($post['post_user_id'], Request::post('user_id')->value()),
 			'post_draft' 		=> $post_draft,
 			'post_content' 		=> $content,
 			'post_content_img' 	=> $post_img ?? '',
 			'post_related' 		=> $post_related ?? '',
 			'post_merged_id' 	=> $post_merged_id ?? 0,
-			'post_tl' 			=> Request::getPostInt('content_tl'),
-			'post_closed' 		=> Request::getPost('closed') == 'on' ? 1 : 0,
-			'post_nsfw' 		=> Request::getPost('nsfw') == 'on' ? 1 : 0,
-			'post_hidden' 		=> Request::getPost('hidden') == 'on' ? 1 : 0,
-			'post_top' 			=> Request::getPost('top') == 'on' ? 1 : 0,
-			'post_poll' 		=> $this->selectPoll(Request::getPost('poll_id')),
+			'post_tl' 			=> Request::post('content_tl')->asInt(),
+			'post_closed' 		=> Request::post('closed')->value() == 'on' ? 1 : 0,
+			'post_nsfw' 		=> Request::post('nsfw')->value() == 'on' ? 1 : 0,
+			'post_hidden' 		=> Request::post('hidden')->value() == 'on' ? 1 : 0,
+			'post_top' 			=> Request::post('top')->value() == 'on' ? 1 : 0,
+			'post_poll' 		=> $this->selectPoll(Request::post('poll_id')->asInt()),
 			'post_modified' 	=> date("Y-m-d H:i:s"),
 		]);
 
-		is_return(__('msg.change_saved'), 'success', url('post_id', ['id' => $post['post_id']]));
+		Msg::redirect(__('msg.change_saved'), 'success', url('post.id', ['id' => $post['post_id']]));
 	}
 
-    // Add fastes (blogs, topics) to the post 
-	public static function addFacetsPost($fields, $content_id, $redirect)
+	/**
+	 * Add fastes (blogs, topics) to the post 
+	 *
+	 * @param [type] $fields
+	 * @param [type] $content_id
+	 * @param [type] $redirect
+	 * @return void
+	 */
+	public static function addFacetsPost(array $fields, int $content_id, string $redirect)
 	{
 		$new_type = 'post';
 		$facets = $fields['facet_select'] ?? false;
 
 		if (!$facets) {
-			is_return(__('msg.select_topic'), 'error', $redirect);
+			Msg::redirect(__('msg.select_topic'), 'error', $redirect);
 		}
 
 		$topics = json_decode($facets, true);
@@ -167,51 +180,56 @@ class EditPostController extends Controller
 		return $new_type;
 	}
 
-    // Cover Removal
-    function imgPostRemove()
-    {
-        $post = PostPresence::index(Request::getInt('id'), 'id');
+	/**
+	 * Cover Removal
+	 *
+	 * @return void
+	 */
+	function coverPostRemove()
+	{
+		$post = PostPresence::index(Request::param('id')->asPositiveInt(), 'id');
 
-        if (Access::author('post', $post) == false) {
-            is_return(__('msg.went_wrong'), 'error');
-        }
+		// Удалять может только автор
+		// Only the author can delete it
+		if ($this->container->access()->author('post', $post) == false) {
+			Msg::redirect(__('msg.went_wrong'), 'error');
+		}
 
-        PostModel::setPostImgRemove($post['post_id']);
-        UploadImage::coverPostRemove($post['post_content_img']);
+		PostModel::setPostImgRemove($post['post_id']);
+		UploadImage::coverPostRemove($post['post_content_img']);
 
-        is_return(__('msg.cover_removed'), 'success', url('content.edit', ['type' => 'post', 'id' => $post['post_id']]));
-    }
+		Msg::redirect(__('msg.cover_removed'), 'success', url('post.form.edit', ['id' => $post['post_id']]));
+	}
 
-    public function uploadContentImage()
-    {
-        $user_id    = $this->user['id'];
-        $type       = Request::get('type');
-        $id         = Request::getInt('id');
+	public function uploadContentImage()
+	{
+		$type       = Request::param('type')->value();
+		$id         = Request::param('id')->asInt();
 
-        if (!in_array($type, ['post-telo', 'comment'])) {
-            return false;
-        }
+		if (!in_array($type, ['post-telo', 'comment'])) {
+			return false;
+		}
 
-        $img = $_FILES['image'];
-        if ($_FILES['image']['name']) {
-            return json_encode(['data' => ['filePath' => UploadImage::postImg($img, $type, $id)]]);
-        }
+		$img = $_FILES['image'];
+		if ($_FILES['image']['name']) {
+			return json_encode(['data' => ['filePath' => UploadImage::postImg($img, $type, $id)]]);
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    public function checkingEditPermissions($post, $blog)
-    {
-        if (empty($blog)) {
-            if (Access::author('post', $post) == false) {
-                is_return(__('msg.access_denied'), 'error');
-            }
-        } else {
-            if (Access::postAuthorAndTeam($post, $blog[0]['facet_user_id'] ?? 0) == false) {
-                is_return(__('msg.access_denied'), 'error');
-            }
-        }
+	public function checkingEditPermissions(array $post, array $blog)
+	{
+		if (empty($blog)) {
+			if ($this->container->access()->author('post', $post) == false) {
+				Msg::redirect(__('msg.access_denied'), 'error');
+			}
+		} else {
+			if ($this->container->access()->postAuthor($post, $blog[0]['facet_user_id'] ?? 0) == false) {
+				Msg::redirect(__('msg.access_denied'), 'error');
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

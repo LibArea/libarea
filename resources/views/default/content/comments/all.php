@@ -2,7 +2,22 @@
   <div class="indent-body">
     <div class="flex justify-between mb20">
       <ul class="nav">
-        <?= insert('/_block/navigation/nav', ['list' => config('navigation/nav.comments')]); ?>
+        <?= insert('/_block/navigation/nav', [
+          'list' => [
+            [
+              'tl'    => 0, // not authorized
+              'id'    => 'comments.all',
+              'url'   => 'comments',
+              'title' => 'app.comments',
+            ],
+            [
+              'tl'    => 10, // admin
+              'id'    => 'comments.deleted',
+              'url'   => 'comments.deleted',
+              'title' => 'app.deleted',
+            ],
+          ]
+        ]); ?>
       </ul>
     </div>
     <?php if (!empty($data['comments'])) : ?>

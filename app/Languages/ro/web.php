@@ -91,6 +91,7 @@ return [
     'life_help'         => 'Copii, animale, hobby-uri...',
     'security'          => 'Siguranță...',
     'society'           => 'Societatea si politica',
+	'hi_tech'			=> 'Hi-Tech',
 
     'contact_information'   => 'Informatii de contact',
     'telephone'             => 'Telefon',

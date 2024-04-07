@@ -90,6 +90,7 @@ return [
     'life_help'         => 'Children, animals, hobbies...',
     'security'          => 'Security...',
     'society'           => 'Society and politics',
+    'hi_tech'           => 'Hi-Tech',
 
     'contact_information'   => 'Contact Information',
     'telephone'             => 'Telephone',
@@ -109,7 +110,7 @@ return [
     'edit_website'      => 'Edit site',
 
     'sidebar_info'      => 'Catalog of sites systematized by thematic headings.',
-    'banner_info'       => 'Catalog of sites with annotations and screenshots. <br> Faceted rubrication, search. Bookmarks on resources with the ability to vote for sites, programs, rating.',
+    'banner_info'       => 'Catalog of sites with annotations and screenshots. <br> Faceted rubrication, search. Bookmarks on resources with the ability to vote for sites, programs, rating',
 
     'main_title'        => 'Website directory',
     'main_desc'         => 'List of sites in the directory placed in chronological order. Ability to search, bookmark, sort by popularity',

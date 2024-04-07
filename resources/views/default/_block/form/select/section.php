@@ -4,7 +4,7 @@
   <div class="help"><?= __('app.post_page'); ?>...</div>
 </fieldset>
 
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   let section_search = async (props = {}) => {
     const settings = {
       method: 'POST',
@@ -19,7 +19,7 @@
       body: JSON.stringify(props)
     };
     try {
-      const fetchResponse = await fetch('/search/section', settings);
+      const fetchResponse = await fetch('/search/select/section', settings);
       return await fetchResponse.json();
     } catch (e) {
       return e;

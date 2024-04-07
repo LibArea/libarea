@@ -8,15 +8,15 @@
 	
       <li class="mb5 p5 br-top-zebra
       <?php if (!$msg['unread'] > 0) : ?> bg-yellow<?php endif; ?>
-      <?php if (Request::getMainUrl() == url('dialogues', ['id' => $msg['dialog_id']])) : ?> bg-beige<?php endif; ?>">
+      <?php if ($container->request()->getUri()->getPath() == url('dialogues', ['id' => $msg['dialog_id']])) : ?> bg-beige<?php endif; ?>">
         <a class="justify-between" href="<?= url('dialogues', ['id' => $msg['dialog_id']]); ?>">
           <div class="gray-600 text-sm">
-            <?php if ($msg['dialog_sender_id'] == UserData::getUserId()) : ?>
+            <?php if ($msg['dialog_sender_id'] == $container->user()->id()) : ?>
               <?= Img::avatar($msg['msg_to_user']['avatar'], $msg['msg_to_user']['login'], 'img-base', 'small'); ?>
-              <?= $msg['msg_to_user']['login']; ?> <span class="lowercase"><?= Html::langDate($msg['dialog_update_time']); ?></span>
+              <?= $msg['msg_to_user']['login']; ?> <span class="lowercase"><?= langDate($msg['dialog_update_time']); ?></span>
             <?php else : ?>
               <?= Img::avatar($msg['msg_user']['avatar'], $msg['msg_user']['login'], 'img-base', 'small'); ?>
-              <?= $msg['msg_user']['login']; ?> <span class="lowercase"><?= Html::langDate($msg['dialog_update_time']); ?></span>
+              <?= $msg['msg_user']['login']; ?> <span class="lowercase"><?= langDate($msg['dialog_update_time']); ?></span>
             <?php endif; ?>
 			<div class="gray"><?= fragment($msg['message']['message_content'] ?? False, 38); ?></div>
           </div>

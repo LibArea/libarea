@@ -3,7 +3,7 @@
     <div class="mb15">
       <h1 class="title"><?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's'); ?></h1>
       <span class="gray-600 text-xs">
-        <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>
+        <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>.
       </span>
     </div>
 
@@ -17,18 +17,18 @@
               [
                 'id'    => $data['type'] . '_all',
                 'url'   => url($data['type'] . 's.all'),
-                'title' => __('app.all'),
+                'title' => 'app.all',
               ],
               [
                 'id'    => $data['type'] . '_new',
                 'url'   => url($data['type'] . 's.new'),
-                'title' => __('app.new_ones'),
+                'title' => 'app.new_ones',
               ],
               [
                 'tl'    => 1,
                 'id'    => $data['type'] . '_my',
                 'url'   => url($data['type'] . 's.my'),
-                'title' => __('app.reading'),
+                'title' => 'app.reading',
               ],
             ]
           ]
@@ -37,10 +37,10 @@
 
       </ul>
 
-      <?php if (Access::trustLevels(config('trust-levels.tl_add_' . $data['type']))) : ?>
-        <?php if ($data['countUserFacet'] == 0 || UserData::checkAdmin()) : ?>
+      <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_' . $data['type']))) : ?>
+        <?php if ($data['countUserFacet'] == 0 || $container->user()->admin()) : ?>
           <p class="text-xl">
-            <a class="btn btn-outline-primary btn-small" href="<?= url('content.add', ['type' => $data['type']]); ?>">
+            <a class="btn btn-outline-primary btn-small" href="<?= url('facet.form.add', ['type' => $data['type']]); ?>">
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#plus"></use>
               </svg>

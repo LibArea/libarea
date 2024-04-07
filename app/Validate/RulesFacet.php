@@ -1,20 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Validate;
 
 use App\Models\FacetModel;
-use UserData;
+use Hleb\Static\Container;
+use Msg;
 
 class RulesFacet extends Validator
 {
     public static function rulesAdd($data, $facet_type)
     {
-        $redirect = ($facet_type == 'category') ? url('web') : url('content.add', ['type' => $facet_type]);
+        $container = Container::getContainer();
+        $redirect = ($facet_type == 'category') ? url('web') : url('facet.form.add', ['type' => $facet_type]);
 
         if ($facet_type == 'blog') {
-            if (!UserData::checkAdmin()) {
-                if (in_array($data['facet_slug'], config('stop-blog'))) {
-                    is_return(__('msg.went_wrong'), 'error', $redirect);
+            if (!$container->user()->admin()) {
+                if (in_array($data['facet_slug'], config('stop-blog', 'list'))) {
+                    Msg::redirect(__('msg.went_wrong'), 'error', $redirect);
                 }
             }
         }
@@ -26,40 +30,42 @@ class RulesFacet extends Validator
         self::Length($data['facet_slug'], 3, 43, 'slug', $redirect);
 
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $data['facet_slug'])) {
-            is_return(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
+            Msg::redirect(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
         }
 
         if (FacetModel::uniqueSlug($data['facet_slug'], $facet_type)) {
-            is_return(__('msg.repeat_url'), 'error', $redirect);
+            Msg::redirect(__('msg.repeat_url'), 'error', $redirect);
         }
 
         if (preg_match('/\s/', $data['facet_slug']) || strpos($data['facet_slug'], ' ')) {
-            is_return(__('msg.url_gaps'), 'error', $redirect);
+            Msg::redirect(__('msg.url_gaps'), 'error', $redirect);
         }
     }
 
     public static function rulesEdit($data, $facet)
     {
+        $container = Container::getContainer();
+
         // ['topic', 'blog', 'category', 'section']
-        if (!in_array($data['facet_type'], config('facets.permitted'))) {
-            is_return(__('msg.went_wrong'), 'error');
+        if (!in_array($data['facet_type'], config('facets', 'permitted'))) {
+            Msg::redirect(__('msg.went_wrong'), 'error');
         }
 
         if ($facet == false) {
-            is_return(__('msg.went_wrong'), 'error');
+            Msg::redirect(__('msg.went_wrong'), 'error');
         }
 
-        $redirect = url('content.edit', ['type' => $facet['facet_type'], 'id' => $facet['facet_id']]);
+        $redirect = url('facet.form.edit', ['type' => $facet['facet_type'], 'id' => $facet['facet_id']]);
 
         // Доступ получает только автор и админ
-        if ($facet['facet_user_id'] != UserData::getUserId() && !UserData::checkAdmin()) {
-            is_return(__('msg.went_wrong'), 'error', $redirect);
+        if ($facet['facet_user_id'] != $container->user()->id() && !$container->user()->admin()) {
+            Msg::redirect(__('msg.went_wrong'), 'error', $redirect);
         }
 
         // Изменять тип темы может только персонал
         $new_type = $facet['facet_type'];
         if ($data['facet_type'] != $facet['facet_type']) {
-            if (UserData::checkAdmin()) $new_type = $data['facet_type'];
+            if ($container->user()->admin()) $new_type = $data['facet_type'];
         }
 
         // Проверка длины
@@ -72,17 +78,17 @@ class RulesFacet extends Validator
         self::Length($data['facet_slug'], 3, 32, 'slug', $redirect);
 
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $data['facet_slug'])) {
-            is_return(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
+            Msg::redirect(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
         }
 
         if (preg_match('/\s/', $data['facet_slug']) || strpos($data['facet_slug'], ' ')) {
-            is_return(__('msg.url_gaps'), 'error', $redirect);
+            Msg::redirect(__('msg.url_gaps'), 'error', $redirect);
         }
 
         // Проверим повтор URL                       
         if ($data['facet_slug'] != $facet['facet_slug']) {
             if (FacetModel::uniqueSlug($data['facet_slug'], $new_type)) {
-                is_return(__('msg.repeat_url'), 'error', $redirect);
+                Msg::redirect(__('msg.repeat_url'), 'error', $redirect);
             }
         }
 

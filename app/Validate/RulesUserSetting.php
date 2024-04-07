@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Validate;
 
-use App\Models\User\UserModel;
+use App\Models\Auth\AuthModel;
+use Msg;
 
 class RulesUserSetting extends Validator
 {
@@ -20,23 +23,23 @@ class RulesUserSetting extends Validator
         return true;
     }
 
-    public static function rulesSecurity($data, $email)
+    public static function rulesSecurity(array $data, string $email)
     {
         $redirect   = '/setting/security';
 
         if ($data['password2'] != $data['password3']) {
-            is_return(__('msg.pass_match_err'), 'error', $redirect);
+            Msg::redirect(__('msg.pass_match_err'), 'error', $redirect);
         }
 
         if (substr_count($data['password2'], ' ') > 0) {
-            is_return(__('msg.password_spaces'), 'error', $redirect);
+            Msg::redirect(__('msg.password_spaces'), 'error', $redirect);
         }
 
         self::length($data['password2'], 8, 32, 'password', $redirect);
 
-        $userInfo   = UserModel::userInfo($email);
+        $userInfo   = AuthModel::userInfo($email);
         if (!password_verify($data['password'], $userInfo['password'])) {
-            is_return(__('msg.old_error'), 'error', $redirect);
+            Msg::redirect(__('msg.old_error'), 'error', $redirect);
         }
 
         return true;

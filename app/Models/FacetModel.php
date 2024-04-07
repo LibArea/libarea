@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class FacetModel extends \Hleb\Scheme\App\Models\MainModel
+class FacetModel extends Model
 {
     const NO_REMOVAL = 0;
     const DELETED = 1;
 
     // All facets
     // Все фасеты
-    public static function getFacetsAll($page, $limit, $sort, $type)
+    public static function getFacetsAll(int $page, int $limit, string  $sort, string $type)
     {
         $signet = self::sorts($sort, $type);
 
@@ -36,10 +38,10 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id
                                 $signet LIMIT :start, :limit";
 
-        return DB::run($sql, ['start' => $start, 'limit' => $limit, 'user_id' => UserData::getUserId()])->fetchAll();
+        return DB::run($sql, ['start' => $start, 'limit' => $limit, 'user_id' => self::container()->user()->id()])->fetchAll();
     }
 
-    public static function getFacetsAllCount($sort, $type)
+    public static function getFacetsAllCount(string $sort, string $type)
     {
         $signet = self::sorts($sort, $type);
 
@@ -52,14 +54,14 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                         FROM facets 
                             LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id $signet";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId()])->rowCount();
+        return DB::run($sql, ['user_id' => self::container()->user()->id()])->rowCount();
     }
 
-    public static function sorts($sort, $type)
+    public static function sorts(string $sort, string $type)
     {
         switch ($sort) {
             case 'my':
-                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " AND signed_user_id = " .  UserData::getUserId() . " ORDER BY facet_count DESC";
+                $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " AND signed_user_id = " .  self::container()->user()->id() . " ORDER BY facet_count DESC";
                 break;
             case 'new':
                 $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " ORDER BY facet_id DESC";
@@ -80,7 +82,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Cell information (id, slug) 
     // Информация по фасету (id, slug)
-    public static function getFacet($params, $name, $type)
+    public static function getFacet(int|string $params, string $name, string $type)
     {
         $sort = "facet_id = :params";
         if ($name == 'slug') {
@@ -115,7 +117,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Let's check the uniqueness of slug depending on the type of tree
     // Проверим уникальность slug в зависимости от типа дерева
-    public static function uniqueSlug($facet_slug, $facet_type)
+    public static function uniqueSlug(string $facet_slug, string $facet_type)
     {
         $sql = "SELECT facet_slug, facet_type FROM facets WHERE facet_slug = :slug AND facet_type = :type";
 
@@ -124,7 +126,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Let's check the uniqueness of id
     // Проверим уникальность id
-    public static function uniqueById($facet_id)
+    public static function uniqueById(int $facet_id)
     {
         $sql = "SELECT facet_id, facet_slug, facet_type, facet_user_id, facet_is_deleted FROM facets WHERE facet_id = :id";
 
@@ -133,7 +135,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Facet owner 
     // Собственник фасета
-    public static function getOwnerFacet($user_id, $type)
+    public static function getOwnerFacet(int $user_id, string $type)
     {
         $sql = "SELECT 
                     facet_id,
@@ -161,7 +163,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['user_id' => $user_id, 'type' => $type])->fetchAll();
     }
 
-    public static function addPostFacets($rows, $post_id)
+    public static function addPostFacets(array $rows, int $post_id)
     {
         self::deleteRelation($post_id, 'post');
 
@@ -176,7 +178,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return true;
     }
 
-    public static function addItemFacets($rows, $item_id)
+    public static function addItemFacets(array $rows, int $item_id)
     {
         self::deleteRelation($item_id, 'item');
 
@@ -194,7 +196,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Main trees
     // Основные деревья
-    public static function addLowFacetRelation($rows, $topic_id)
+    public static function addLowFacetRelation(array $rows, int $topic_id)
     {
         self::deleteRelation($topic_id, 'topic');
 
@@ -212,7 +214,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Cross -links
     // Перекрестные связи
-    public static function addLowFacetMatching($rows, $topic_id)
+    public static function addLowFacetMatching(array $rows, int $topic_id)
     {
         self::deleteRelation($topic_id, 'matching');
 
@@ -228,7 +230,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return true;
     }
 
-    public static function deleteRelation($id, $type)
+    public static function deleteRelation(int $id, string $type)
     {
         $sql = "DELETE FROM facets_items_relation WHERE relation_item_id = $id";
         if ($type == 'post') {
@@ -244,14 +246,14 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Changing img
     // Изменение img
-    public static function setImg($params)
+    public static function setImg(array $params)
     {
         return DB::run("UPDATE facets SET facet_img = :facet_img WHERE facet_id = :facet_id", $params);
     }
 
     // TOP of facet authors.
     // TOP авторов фасета.
-    public static function getWriters($facet_id, $limit)
+    public static function getWriters(int $facet_id, int $limit)
     {
         $sql = "SELECT SUM(post_hits_count) as hits_count, 
                     rel.*
@@ -277,7 +279,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Participant contribution
     // Вклад участника
-    public static function participation($user_id)
+    public static function participation(int $user_id)
     {
         $sql = " SELECT 
                     relation_facet_id as count,
@@ -302,7 +304,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Topics to which the participant is not subscribed
     // Темы на которые участник не подписан
-    public static function advice($subscription)
+    public static function advice(array|bool $subscription)
     {
         $result = [];
         foreach ($subscription as $ind => $row) {
@@ -324,7 +326,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetchAll();
     }
 
-    public static function add($params)
+    public static function add(array $params)
     {
         $sql = "INSERT INTO facets(facet_title, 
                         facet_description, 
@@ -348,7 +350,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return  DB::run("SELECT LAST_INSERT_ID() as facet_id")->fetch();
     }
 
-    public static function edit($params)
+    public static function edit(array $params)
     {
         $sql = "UPDATE facets 
                     SET facet_title         = :facet_title,  
@@ -373,7 +375,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $user_id
      * @param  string $type (topic | blog)
      */
-    public static function getFacetsUser($type)
+    public static function getFacetsUser(string $type)
     {
         $sql = "SELECT 
                     facet_id, 
@@ -383,7 +385,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                     facet_type
                         FROM facets WHERE facet_user_id = :user_id AND facet_type = :type";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId(), 'type' => $type])->fetchAll();
+        return DB::run($sql, ['user_id' => self::container()->user()->id(), 'type' => $type])->fetchAll();
     }
 
     // Number of faces created by the contributor
@@ -392,7 +394,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $user_id
      * @param  string $type (topic | blog)
      */
-    public static function countFacetsUser($user_id, $type)
+    public static function countFacetsUser(int $user_id, string $type)
     {
         $sql = "SELECT facet_id FROM facets WHERE facet_user_id = :user_id AND facet_type = :type";
 
@@ -406,7 +408,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $facet_id
      * @param  int $limit
      */
-    public static function getFocusUsers($facet_id, $page, $limit)
+    public static function getFocusUsers(int $facet_id, int $page, int $limit)
     {
         $start = ($page - 1) * $limit;
         $sql = "SELECT 
@@ -423,7 +425,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['facet_id' => $facet_id, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getFocusUsersCount($facet_id)
+    public static function getFocusUsersCount(int $facet_id)
     {
         $sql = "SELECT 
                     id
@@ -439,7 +441,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $facet_id
      * @return Response
      */
-    public static function getHighMatching($facet_id)
+    public static function getHighMatching(int $facet_id)
     {
         $sql = "SELECT 
                     facet_id id,
@@ -462,7 +464,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $facet_id
      * @return
      */
-    public static function getLowMatching($facet_id)
+    public static function getLowMatching(int $facet_id)
     {
         $sql = "SELECT 
                     facet_id id,
@@ -485,7 +487,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $facet_id
      * @return
      */
-    public static function getHighLevelList($facet_id)
+    public static function getHighLevelList(int $facet_id)
     {
         $sql = "SELECT 
                     facet_id id,
@@ -508,7 +510,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
      * @param  int $facet_id
      * @internal
      */
-    public static function getLowLevelList($facet_id)
+    public static function getLowLevelList(int $facet_id)
     {
         $sql = "SELECT 
                     facet_id id,
@@ -542,7 +544,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetchAll();
     }
 
-    public static function setCover($params)
+    public static function setCover(array $params)
     {
         $sql = "UPDATE facets 
                     SET facet_cover_art = :facet_cover_art
@@ -558,7 +560,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
 
     // Team Members
     // Участники в команде
-    public static function getUsersTeam($facet_id)
+    public static function getUsersTeam(int $facet_id)
     {
         $sql = "SELECT 
                     id,
@@ -571,7 +573,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
 
-    public static function getTeamFacets($type)
+    public static function getTeamFacets(string $type)
     {
         $sql = "SELECT
                     team_facet_id as facet_id,
@@ -580,16 +582,16 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
                             LEFT JOIN facets ON team_facet_id = facet_id
                                 WHERE team_user_id = :user_id AND facet_type = :type";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId(), 'type' => $type])->fetchAll();
+        return DB::run($sql, ['user_id' => self::container()->user()->id(), 'type' => $type])->fetchAll();
     }
 
     // Add, change users in the team
     // Добавим, изменим пользователей в команде
-    public static function editUsersTeam($rows, $facet_id)
+    public static function editUsersTeam(array $rows, int $facet_id)
     {
         self::deleteUsersTeam($facet_id);
 
-        foreach ($rows as $row) {
+        foreach ($rows as $row) { 
             $user_id    = $row['id'];
             $sql        = "INSERT INTO facets_users_team (team_facet_id, team_user_id) VALUES (:facet_id, :user_id)";
 
@@ -599,7 +601,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return true;
     }
 
-    public static function deleteUsersTeam($facet_id)
+    public static function deleteUsersTeam(int $facet_id)
     {
         return DB::run("DELETE FROM facets_users_team WHERE team_facet_id = :facet_id", ['facet_id' => $facet_id]);
     }
@@ -618,7 +620,7 @@ class FacetModel extends \Hleb\Scheme\App\Models\MainModel
         return DB::run($sql)->fetchAll();
     }
 
-    public static function breadcrumb($facet_id)
+    public static function breadcrumb(int $facet_id)
     {
         $sql = "with recursive
             n (facet_id, facet_slug, facet_title, lvl) as (

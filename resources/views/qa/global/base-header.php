@@ -1,15 +1,10 @@
 <?php
-
-use Hleb\Constructor\Handlers\Request;
-
-Request::getHead()->addStyles('/assets/css/style.css?' . config('assembly-js-css.version'));
-Request::getHead()->addStyles('/assets/css/qa.css?' . config('assembly-js-css.version'));
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false; ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
-<body <?php if (Request::getCookie('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
+<body <?php if ($container->cookies()->get('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
 
   <header class="bg-white mb10">
     <div class="br-bottom wrap mb10 mb-none items-center flex gap">
@@ -43,18 +38,18 @@ $facet  = $data['facet'] ?? false; ?>
     <div class="wrap items-center flex justify-between mb-mt5">
       <div class="flex items-center" id="find">
         <a title="<?= __('app.home'); ?>" class="logo" href="/">
-          <?= config('meta.name'); ?>
+          <?= config('meta', 'name'); ?>
         </a>
       </div>
 
-      <?php if (!UserData::checkActiveUser()) : ?>
+      <?php if (!$container->user()->active()) : ?>
         <div class="flex gap-max items-center">
           <div id="toggledark" class="gray-600 mb-none">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#sun"></use>
             </svg>
           </div>
-          <?php if (config('general.invite') == false) : ?>
+          <?php if (config('general', 'invite') == false) : ?>
             <a class="gray min-w75 center block" href="<?= url('register'); ?>">
               <?= __('app.registration'); ?>
             </a>
@@ -84,10 +79,10 @@ $facet  = $data['facet'] ?? false; ?>
 
             <div class="relative">
               <div class="trigger">
-                <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
+                <?= Img::avatar($container->user()->avatar(), $container->user()->login(), 'img-base', 'small'); ?>
               </div>
               <ul class="dropdown user">
-                <?= insert('/_block/navigation/menu-user'); ?>
+                <?= insert('/_block/navigation/config/user-menu'); ?>
               </ul>
             </div>
 

@@ -1,20 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\Auth;
 
-use Hleb\Scheme\App\Controllers\MainController;
+use Hleb\Base\Controller;
 use App\Models\User\UserModel;
-use App\Models\AuthModel;
+use App\Models\Auth\AuthModel;
+use App\Bootstrap\Services\Auth\Action;
 use Html;
 
-class RememberController extends MainController
+class RememberController extends Controller
 {
-    // Есть cookie «запомнить меня»?
-    // Если есть, то проверим по таблице `users_auth_tokens`...
-    public static function check($remember)
+    /**
+     * Есть cookie «запомнить меня»?
+     * Если есть, то проверим по таблице `users_auth_tokens`...
+     *
+     * @param string $remember
+     * @return boolean
+     */
+    public static function check(string $remember): bool
     {
         if (empty($remember)) {
-            return;
+            return false;
         }
 
         // Получим наш селектор | значение валидатора
@@ -33,7 +41,7 @@ class RememberController extends MainController
         }
 
         // Получение данных по id
-        $user = UserModel::getUser($token['auth_user_id'], 'id');
+        $user = UserModel::get($token['auth_user_id'], 'id');
 
         // Нет пользователя
         if (empty($user)) {
@@ -48,20 +56,26 @@ class RememberController extends MainController
 
                 AuthModel::deleteTokenByUserId($token['auth_user_id']);
 
-                return;
+                return true;
             }
         }
 
-        (new \App\Controllers\Auth\SessionController())->set($user['id']);
+        Action::set($user['id']);
 
         self::rememberMeReset($token['auth_user_id'], $selector);
 
         return true;
     }
 
-    // Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»
-    // Сбросить валидатор и обновить БД
-    public static function rememberMeReset($user_id, $selector)
+    /**
+     * Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»
+     * Сбросить валидатор и обновить БД
+     *
+     * @param integer $user_id
+     * @param mixed $selector
+     * @return void
+     */
+    public static function rememberMeReset(int $user_id, mixed $selector)
     {
         // Получаем по селектору       
         $existingToken = AuthModel::getAuthTokenBySelector($selector);
@@ -90,7 +104,7 @@ class RememberController extends MainController
     }
 
     // Запомнить меня
-    public static function rememberMe($user_id)
+    public static function rememberMe(int $user_id)
     {
         $rememberMeExpire       = 30;
         $selector               = Html::randomString('crypto', 12);

@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers\Post;
 
-use Hleb\Constructor\Handlers\Request;
-use App\Controllers\Controller;
+use Hleb\Static\Request;
+use Hleb\Base\Controller;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, PollModel, NotificationModel};
-use App\Services\Integration\{Discord, Telegram};
-use App\Services\Сheck\{PostPresence, FacetPresence};
-use UploadImage, URLScraper, Meta, UserData;
+use App\Content\Integration\{Discord, Telegram};
+use App\Content\Сheck\{PostPresence, FacetPresence};
+use UploadImage, URLScraper, Meta, Msg;
 
 use Utopia\Domains\Domain;
 use App\Validate\RulesPost;
@@ -22,25 +24,27 @@ class AddPostController extends Controller
     use Slug;
     use Related;
 
-    // Form adding a post / page
-    // Форма добавление поста / страницы
+    /**
+     * Form adding a post / page
+     * Форма добавление поста / страницы
+     *
+     * @return void
+     */
     public function index()
     {
         // Adding from page topic / blog
         // Добавление со странице темы / блога
-        $facet_id   = Request::getInt('facet_id');
+        $facet_id   = Request::get('facet_id')->asInt();
 
         if ($facet_id) {
             $facet  =  FacetPresence::all($facet_id);
-
             if ($facet['facet_type'] == 'topic') {
                 $topic  = FacetPresence::index($facet_id, 'id', 'topic');
-            } elseif ($facet['facet_type'] == 'blog' && $facet['facet_user_id'] == $this->user['id']) {
+            } elseif ($facet['facet_type'] == 'blog' && $facet['facet_user_id'] == $this->container->user()->id()) {
                 $blog  = FacetPresence::index($facet_id, 'id', 'blog');
             }
         }
-
-        return $this->render(
+        return render(
             '/post/add',
             [
                 'meta'      => Meta::get(__('app.add_post')),
@@ -56,35 +60,40 @@ class AddPostController extends Controller
         );
     }
 
-    // Add post 
-    // Добавим пост
-    public function create($type)
+    /**
+     * Add post 
+     * Добавим пост
+     *
+     * @param [type] $type
+     * @return void
+     */
+    public function add(string $type)
     {
-        if ($post_url = Request::getPost('post_url')) {
+        if ($post_url = Request::post('post_url')->value()) {
             $site = $this->addUrl($post_url);
         }
 
-        $blog_id    = Request::getPostInt('blog_id');
-        $fields     = Request::getPost() ?? [];
+        $blog_id    = Request::post('blog_id')->value();
+        $fields     = Request::allPost() ?? [];
 
         $content = $_POST['content'] == '' ? $_POST['content_qa'] : $_POST['content'];
         $content = $content == '' ? $_POST['content_url'] : $content;
 
         if ($type == 'page') {
-            $count  = FacetModel::countFacetsUser($this->user['id'], 'blog');
+            $count  = FacetModel::countFacetsUser($this->container->user()->id(), 'blog');
             notEmptyOrView404($count);
         }
 
         // Use to return
         // Используем для возврата
-        $redirect = url('content.add', ['type' => 'post']);
+        $redirect = url('post.form.add');
         if ($blog_id > 0) {
-            $redirect = url('content.add', ['type' => 'post']) . '/' . $blog_id;
+            $redirect = $redirect . '/' . $blog_id;
         }
 
         // Let's check the stop words, url
         // Проверим стоп слова и url
-        $trigger = (new \App\Services\Audit())->prohibitedContent($content);
+        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
 
         RulesPost::rules($fields['post_title'], $content, $redirect);
 
@@ -107,7 +116,7 @@ class AddPostController extends Controller
         $closed = $fields['closed'] ?? false;
         $top = $fields['top'] ?? false;
 
-        $post_feature = config('general.qa_site_format') === true ? 1 : Request::getPostInt('post_feature');
+        $post_feature = config('general', 'qa_site_format') === true ? 1 : Request::post('post_feature')->asInt();
 
         $last_id = PostModel::create(
             [
@@ -123,21 +132,21 @@ class AddPostController extends Controller
                 'post_draft'            => $post_draft == 'on' ? 1 : 0,
                 'post_nsfw'             => $post_nsfw == 'on' ? 1 : 0,
                 'post_hidden'           => $post_hidden == 'on' ? 1 : 0,
-                'post_ip'               => Request::getRemoteAddress(),
+                'post_ip'               => Request::getUri()->getIp(),
                 'post_published'        => ($trigger === false) ? 0 : 1,
-                'post_user_id'          => $this->user['id'],
+                'post_user_id'          => $this->container->user()->id(),
                 'post_url'              => $post_url ?? '',
                 'post_url_domain'       => $site['post_url_domain'] ?? '',
                 'post_tl'               => $fields['content_tl'] ?? 0,
                 'post_closed'           => $closed == 'on' ? 1 : 0,
                 'post_top'              => $top == 'on' ? 1 : 0,
-                'post_poll'             => $this->selectPoll(Request::getPost('poll_id')),
+                'post_poll'             => $this->selectPoll(Request::post('poll_id')->asInt()),
             ]
         );
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            (new \App\Services\Audit())->create('post', $last_id, post_slug($last_id, $slug));
+            (new \App\Controllers\AuditController())->create('post', $last_id, post_slug($last_id, $slug));
         }
 
         $url_content = post_slug($last_id, $slug);
@@ -150,7 +159,7 @@ class AddPostController extends Controller
 
         // Contact via @
         // Обращение через @
-        if ($message = \App\Services\Parser\Content::parseUsers($content, true, true)) {
+        if ($message = \App\Content\Parser\Content::parseUsers($content, true, true)) {
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $url_content);
         }
 
@@ -167,13 +176,18 @@ class AddPostController extends Controller
             ]
         );
 
-        is_return(__('msg.post_added'), 'success', $url_content);
+        Msg::redirect(__('msg.post_added'), 'success', $url_content);
     }
 
-    // Since this is for the post, we will get a preview and analysis of the domain ...
-    public function addUrl($post_url)
+    /**
+     * Since this is for the post, we will get a preview and analysis of the domain...
+     *
+     * @param [type] $post_url
+     * @return void
+     */
+    public function addUrl(string $post_url)
     {
-        $domain             = new Domain(host($post_url));
+        $domain = new Domain(host($post_url));
 
         $site = [
             'og_img'            => self::grabOgImg($post_url),
@@ -183,32 +197,45 @@ class AddPostController extends Controller
         return $site;
     }
 
-    // Parsing
-    // Парсинг
+    /**
+     * Parsing
+     * Парсинг
+     *
+     * @return void
+     */
     public function grabMeta()
     {
-        $url    = Request::getPost('uri');
+        $url    = Request::post('uri')->value();
         $result = URLScraper::get($url);
 
         return json_encode($result, JSON_PRETTY_PRINT);
     }
 
-    // Getting Open Graph Protocol Data 
-    // Получаем данные Open Graph Protocol 
-    public static function grabOgImg($post_url)
+    /**
+     * Getting Open Graph Protocol Data
+     * Получаем данные Open Graph Protocol 
+     *
+     * @param [type] $post_url
+     * @return void
+     */
+    public static function grabOgImg(string $post_url)
     {
         $meta = URLScraper::get($post_url);
 
         return UploadImage::thumbPost($meta['image']);
     }
 
-    // Recommend post
-    // Рекомендовать пост
+    /**
+     * Recommend post
+     * Рекомендовать пост
+     *
+     * @return void
+     */
     public function recommend()
     {
-        $post_id = Request::getPostInt('post_id');
+        $post_id = Request::post('post_id')->asInt();
 
-        if (!UserData::checkAdmin()) {
+        if (!$this->container->user()->admin()) {
             return false;
         }
 
@@ -219,19 +246,19 @@ class AddPostController extends Controller
         return true;
     }
 
-    public function addIntegration($content, $url_content, $fields)
+    public function addIntegration(string $content, string $url_content, array $fields)
     {
         $post_draft = $fields['post_draft'] ?? false;
 
         if ($fields['content_tl'] == 0 && $post_draft == 0) {
 
             // Discord
-            if (config('integration.discord')) {
+            if (config('integration', 'discord')) {
                 Discord::AddWebhook($content, $fields['post_title'], $url_content);
             }
 
             // Telegram
-            if (config('integration.telegram')) {
+            if (config('integration', 'telegram')) {
                 Telegram::AddWebhook($content, $fields['post_title'], $url_content);
             }
         }

@@ -1,20 +1,19 @@
 <?php
 
-use Hleb\Constructor\Handlers\Request;
-
-Request::getHead()->addStyles('/assets/css/style.css?' . config('assembly-js-css.version'));
+/**
+ * @var $container App\Bootstrap\ContainerInterface 
+ */
+$container->user()->get();
 
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;
 $post   = $data['post'] ?? false;
-
 ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
-<body class="general<?php if (Request::getCookie('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if (Request::getCookie('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
+<body class="general<?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?><?php if ($container->cookies()->get('menuYesNo')->value() == 'menuno') : ?> menuno<?php endif; ?>">
   <header class="d-header<?php if ($post || $facet) : ?> scroll-hide-search<?php endif; ?>">
-
     <div class="wrap">
       <div class="d-header_contents">
 
@@ -27,9 +26,9 @@ $post   = $data['post'] ?? false;
             <use xlink:href="/assets/svg/icons.svg#menu"></use>
           </svg>
 
-          <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta.name'); ?></a>
+          <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
         </div>
-
+ 
         <?php if ($post) : ?>
           <div class="d-header-post none">
             <span class="v-line mb-none"></span>
@@ -39,9 +38,11 @@ $post   = $data['post'] ?? false;
           </div>
         <?php endif; ?>
 
-        <?php if ($facet) : ?>
+        <?php 
+		$facetIcon = $facet == 'topic' ? $facet : false;
+		if ($facetIcon) : ?>
           <div class="d-header-facet none">
-            <span class="v-line mb-none"></span>
+            <span class="v-line mb-none"></span>    
             <a class="mb-none" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]) ?>">
               <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-base mr15', 'logo', 'max'); ?>
               <?= $facet['facet_title']; ?>
@@ -57,14 +58,14 @@ $post   = $data['post'] ?? false;
           <div class="box-results none" id="search_items"></div>
         </div>
 
-        <?php if (!UserData::checkActiveUser()) : ?>
+        <?php if (!$container->user()->active()) : ?>
           <div class="flex gap-max items-center">
             <div id="toggledark" class="gray-600">
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg>
             </div>
-            <?php if (config('general.invite') == false) : ?>
+            <?php if (config('general', 'invite') == false) : ?>
               <a class="gray min-w75 center mb-none block" href="<?= url('register'); ?>">
                 <?= __('app.registration'); ?>
               </a>
@@ -74,7 +75,6 @@ $post   = $data['post'] ?? false;
             </a>
           </div>
         <?php else : ?>
-
           <div class="flex gap-max items-center">
 
             <?= Html::addPost($facet['facet_id'] ?? false); ?>
@@ -92,29 +92,28 @@ $post   = $data['post'] ?? false;
 
             <div class="relative">
               <div class="trigger pointer">
-                <?= Img::avatar(UserData::getUserAvatar(), UserData::getUserLogin(), 'img-base', 'small'); ?>
+                <?= Img::avatar($container->user()->avatar(), $container->user()->login(), 'img-base', 'small'); ?>
               </div>
               <div class="dropdown user">
-                <?= insert('/_block/navigation/menu-user'); ?>
+                <?= insert('/_block/navigation/config/user-menu'); ?>
               </div>
             </div>
           </div>
         <?php endif; ?>
-
+ 
       </div>
     </div>
   </header>
-  <?php if (!UserData::checkActiveUser() && $type == 'main') : ?>
-    <div class="banner mb-none<?php if (Request::getCookie('dayNight') == 'dark') : ?> none<?php endif; ?>">
-      <h1><?= config('meta.banner_title'); ?></h1>
-      <p><?= config('meta.banner_desc'); ?>...</p>
+  <?php if (!$container->user()->active() && $type == 'main') : ?>
+    <div class="banner mb-none<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> none<?php endif; ?>">
+      <h1><?= config('meta', 'banner_title'); ?></h1>
+      <p><?= config('meta', 'banner_desc'); ?>...</p>
     </div>
   <?php endif; ?>
 
   <div id="contentWrapper" class="wrap">
-
     <nav class="menu__left mb-none">
-      <ul class="menu sticky top-sm">
-        <?= insert('/_block/navigation/menu', ['type' => $type, 'topics_user' => $topics_user, 'list' => config('navigation/menu.left')]); ?>
-      </ul>
-    </nav>
+	  <ul class="menu sticky top-sm">
+	    <?= insert('/_block/navigation/config/left-menu', ['type' => $type, 'topics_user' => $topics_user]); ?>
+	  </ul>
+	</nav>

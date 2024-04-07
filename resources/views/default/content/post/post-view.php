@@ -6,7 +6,7 @@ $blog = $data['blog'][0] ?? null;
 
 <main>
   <article class="indent-body<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
-    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) : ?>
+    <?php if ($post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
       <?php if (!empty($data['united'])) : ?>
         <div class="box bg-lightyellow mb15 gray-600">
           <svg class="icons">
@@ -15,7 +15,7 @@ $blog = $data['blog'][0] ?? null;
           <?= __('app.post_merged'); ?>
           <?php foreach ($data['united'] as $merged) : ?>
             (id <?= $merged['post_id']; ?>):
-            <?php if (UserData::checkAdmin()) : ?>
+            <?php if ($container->user()->admin()) : ?>
               <a href="/post/<?= $merged['post_id']; ?>"><?= $merged['post_title']; ?></a>
             <?php else : ?>
               <?= $merged['post_title']; ?>
@@ -35,7 +35,7 @@ $blog = $data['blog'][0] ?? null;
         </a>
 
         <span class="lowercase">
-          <?= Html::langDate($post['post_date']); ?>
+          <?= langDate($post['post_date']); ?>
         </span>
         <?php if ($post['modified']) : ?>
           <span class="mb-none">
@@ -43,9 +43,9 @@ $blog = $data['blog'][0] ?? null;
           </span>
         <?php endif; ?>
 
-        <?php if (UserData::checkActiveUser()) : ?>
-          <?php if (Access::postAuthorAndTeam($post, $blog['facet_user_id'] ?? 0) == true || $post['post_draft'] == true) : ?>
-            <a class="gray-600 lowercase" href="<?= url('content.edit', ['type' => 'post', 'id' => $post['post_id']]); ?>">
+        <?php if ($container->user()->active()) : ?>
+          <?php if ($container->access()->postAuthor($post, $blog['facet_user_id'] ?? 0) == true || $post['post_draft'] == true) : ?>
+            <a class="gray-600 lowercase" href="<?= url('post.form.edit', ['id' => $post['post_id']]); ?>">
               <?= __('app.edit'); ?>
             </a>
           <?php endif; ?>
@@ -119,7 +119,7 @@ $blog = $data['blog'][0] ?? null;
           </div>
         </div>
         <div class="items-center flex gap-max">
-          <?php if (UserData::checkActiveUser()) : ?>
+          <?php if ($container->user()->active()) : ?>
             <?php if (is_array($data['post_signed'])) : ?>
               <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 gray-600">
                 <?= __('app.unsubscribe'); ?>
@@ -157,11 +157,11 @@ $blog = $data['blog'][0] ?? null;
 
       <?php if (empty($is_comments)) : ?>
 
-        <?php if (UserData::checkActiveUser()) : ?>
+        <?php if ($container->user()->active()) : ?>
           <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
-            <form action="<?= url('content.create', ['type' => 'comment']); ?>" accept-charset="UTF-8" method="post">
-              <?= csrf_field() ?>
+            <form action="<?= url('add.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
+              <?= $container->csrf()->field(); ?>
 
               <?= insert('/_block/form/editor', ['height'  => '170px', 'type' => 'comment', 'id' => $post['post_id']]); ?>
 
@@ -188,7 +188,6 @@ $blog = $data['blog'][0] ?? null;
 
 
   <?php if (empty($is_comments)) : ?>
-
     <div id="comment"></div>
     <?php if ($post['post_draft'] == 0) :
       $format = ($post['post_feature'] == 0) ? 'discussion' : 'qa';
@@ -214,7 +213,7 @@ $blog = $data['blog'][0] ?? null;
               <?= $topic['facet_title']; ?>
             </a>
           </div>
-          <?php if (!$topic['signed_facet_id'] && UserData::getUserId()) : ?>
+          <?php if (!$topic['signed_facet_id'] && $container->user()->id()) : ?>
             <div data-id="<?= $topic['facet_id']; ?>" data-type="facet" class="focus-id right inline text-sm red">
               <?= __('app.read'); ?>
             </div>
@@ -254,7 +253,7 @@ $blog = $data['blog'][0] ?? null;
     <!-- мой блог -->
   <?php endif; ?>
 </aside>
-<script nonce="<?= $_SERVER['nonce']; ?>">
+<script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', () => {
     mediumZoom(document.querySelectorAll('.post img:not(.emoji), .content-body img:not(.emoji), .comment_body .ind-first-p img:not(.emoji)'));
 
@@ -285,5 +284,6 @@ $blog = $data['blog'][0] ?? null;
     }
   });
 </script>
+<script src="/assets/js/dialog/dialog.js"></script>
 <?= insert('/_block/dialog/msg-flag'); ?>
-<?= insert('/_block/dialog/share', ['title' => __('app.share_post'), 'url' => config('meta.url') . post_slug($post['post_id'], $post['post_slug'])]); ?>
+<?= insert('/_block/dialog/share', ['title' => __('app.share_post'), 'url' => config('meta', 'url') . post_slug($post['post_id'], $post['post_slug'])]); ?>

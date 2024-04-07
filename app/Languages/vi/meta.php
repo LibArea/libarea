@@ -33,7 +33,7 @@ return [
     'all_blogs_desc'            => 'Ghi chép được xếp theo thứ tự đăng ký, khả năng xem ghi chép đã tạo, mô tả đến họ, xem thống kê',
 
     'new_blogs'                 => 'Ghi chép mới',
-    'new_blogs_info'            => 'Ghi chép mới được tạo.',
+    'new_blogs_info'            => 'Ghi chép mới được tạo',
     'new_blogs_desc'            => 'Ghi chép được tạo gần đây. Ghi chép cá nhân của những người tham gia, mức độ đăng ký ghi chép sở thích', 
     
     'my_blogs'                  => 'Ghi chép của tôi',
@@ -41,7 +41,7 @@ return [
     'my_blogs_desc'             => 'Ghi chép tôi đã đọc hay tạo ra',
     
     'all_topics'                => 'Tất cả chủ đề',
-    'all_topics_info'           => 'Tất cả chủ đề trên site này xếp theo độ phổ biến.',
+    'all_topics_info'           => 'Tất cả chủ đề trên site này xếp theo độ phổ biến',
     'all_topics_desc'           => 'Trang gồm các chủ đề được xếp theo độ phổ biến. Theo số bài đăng được đưa lên, khả năng đăng ký với các ghi chép',
     
     'new_topics'                => 'Chủ đề mới',

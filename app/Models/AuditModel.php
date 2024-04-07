@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class AuditModel extends \Hleb\Scheme\App\Models\MainModel
+class AuditModel extends Model
 {
     // Add an entry to the audit table (audit or flag)
     // Добавим запись в таблицу аудита (аудит или флаг)

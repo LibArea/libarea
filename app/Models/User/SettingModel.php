@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\User;
 
-use UserData;
-use DB;
+use Hleb\Base\Model;
+use Hleb\Static\DB;
 
-class SettingModel extends \Hleb\Scheme\App\Models\MainModel
+class SettingModel extends Model
 {
     // Editing a profile
     // Редактирование профиля
@@ -127,13 +129,13 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT email FROM users_email_story WHERE user_id = :user_id AND email_activate_flag = :flag";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId(), 'flag' => 0])->fetch();
+        return DB::run($sql, ['user_id' => self::container()->user()->id(), 'flag' => 0])->fetch();
     }
     
     public static function setNewEmail($email, $code)
     {
         $params = [
-            'user_id'               => UserData::getUserId(),
+            'user_id'               => self::container()->user()->id(),
             'email'                 => $email,
             'email_code'            => $code,
         ];
@@ -147,16 +149,16 @@ class SettingModel extends \Hleb\Scheme\App\Models\MainModel
     {
         $sql = "SELECT email_activate_flag FROM users_email_story WHERE email_code = :code AND user_id = :user_id AND email_activate_flag = :flag";
 
-        return DB::run($sql, ['code' => $code, 'user_id' => UserData::getUserId(), 'flag' => 0])->fetch();
+        return DB::run($sql, ['code' => $code, 'user_id' => self::container()->user()->id(), 'flag' => 0])->fetch();
     }
 
     public static function editEmail($email)
     {
-        DB::run("UPDATE users SET email = :email WHERE id = :user_id", ['user_id' => UserData::getUserId(), 'email' => $email]);
+        DB::run("UPDATE users SET email = :email WHERE id = :user_id", ['user_id' => self::container()->user()->id(), 'email' => $email]);
         
         $sql = "UPDATE users_email_story SET email_activate_flag = :flag WHERE user_id = :user_id AND email = :email";
 
-        return DB::run($sql, ['user_id' => UserData::getUserId(), 'email' => $email, 'flag' => 1]);
+        return DB::run($sql, ['user_id' => self::container()->user()->id(), 'email' => $email, 'flag' => 1]);
     }
     
     public static function deletionUser($user_id)

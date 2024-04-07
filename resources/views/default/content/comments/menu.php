@@ -7,9 +7,9 @@
     </span>
     <ul class="dropdown">
 
-      <?php if (Access::author('comment', $comment) === true) : ?>
+      <?php if ($container->access()->author('comment', $comment) === true) : ?>
         <li>
-          <a class="editansw" href="<?= url('content.edit', ['type' => 'comment', 'id' => $comment['comment_id']]); ?>">
+          <a class="editansw" href="<?= url('comment.form.edit', ['id' => $comment['comment_id']]); ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>
@@ -18,7 +18,7 @@
         </li>
       <?php endif; ?>
 
-      <?php if (UserData::checkAdmin()) : ?>
+      <?php if ($container->user()->admin()) : ?>
         <li>
           <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
             <svg class="icons">
@@ -27,7 +27,14 @@
             <?= $comment['comment_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
           </a>
         </li>
-
+        <li>
+           <a class="editansw" href="<?= url('admin.comment.transfer.form.edit', ['id' => $comment['comment_id']]); ?>">
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
+            </svg>
+            <?= __('app.move'); ?>
+          </a>
+        </li>
         <li>
           <a href="<?= url('admin.logip', ['item' => $comment['comment_ip']]); ?>">
             <svg class="icons">
@@ -38,7 +45,7 @@
         <li>
         <?php endif; ?>
 
-        <?php if (UserData::getUserId() != $comment['comment_user_id'] && UserData::getRegType(config('trust-levels.tl_add_report'))) : ?>
+        <?php if ($container->user()->id() != $comment['comment_user_id'] && $container->access()->limitTl(config('trust-levels', 'tl_add_report'))) : ?>
         <li>
           <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" data-a11y-dialog-show="my-dialog">
             <svg class="icons">
@@ -51,7 +58,7 @@
 
       <?php if ($type == 'qa') : ?>
         <?php if ($post['post_comments_count'] > 1 && $level == 0) : ?>
-          <?php if (UserData::getUserId() == $post['post_user_id'] || UserData::checkAdmin()) : ?>
+          <?php if ($container->user()->id() == $post['post_user_id'] || $container->user()->admin()) : ?>
             <li>
               <a id="best_<?= $comment['comment_id']; ?>" data-id="<?= $comment['comment_id']; ?>" class="comment-best">
                 <svg class="icons">

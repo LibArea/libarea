@@ -1,7 +1,6 @@
 <p align="center">
 <a href="https://github.com/LibArea/libarea/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT%20(Free)-brightgreen.svg" alt="License: MIT"></a>
-<img src="https://img.shields.io/badge/PHP-^7.4.0-blue" alt="PHP">
-<img src="https://img.shields.io/badge/PHP-8-blue" alt="PHP">
+<img src="https://img.shields.io/badge/PHP-8.2-blue" alt="PHP">
 </p>
 
 # LibArea
@@ -30,17 +29,11 @@ Site-based test design (https://lobste.rs/)
 
 ![LibArea test design](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libarea-test.jpg)
 
-More details: https://libarea.ru/post/777/dev-sozdanie-novogo-sablona-test
-
 **Demo:** https://libarea.ru/
 
 ### For testing (Installation)
 
 Install the package through [Composer](http://getcomposer.org/). 
-
-Run the Composer require command from the Terminal:
-
-    composer create-project libarea/libarea
 
 Further:
 
@@ -49,36 +42,12 @@ Further:
 *   Log in to your account using administrator credentials: `ss@sdf.ru` / `qwer14qwer14`
 *   Or user: `test@test.ru` / `test@test.ru`
 
-PHP 8+, MySQL 8+ or > MariaDB 10.2.2
+PHP >= 8.2, MySQL 8+ or > MariaDB 10.2.2
 
-Fully assembled releases can be downloaded at the office. support site: https://libarea.com/
 
 **The Public Directory**
 
 The `public` directory contains the `index.php` file, which is the entry point for all requests entering your application and configures autoloading. This directory also houses your assets such as images, JavaScript, and CSS.
-
-More information: https://libarea.com/
-
-...
-
-#### PHP Micro-Framework HLEB
-
-https://github.com/phphleb/hleb
-
-Routing > Controllers > Models > Page Builder > Debug Panel
-
-A distinctive feature of the micro-framework HLEB is the minimalism of the code and the speed of work.
-
-#### Security
-
-If you discover any security related issues within LibArea, please send an e-mail to dev@libarea.ru instead of using the issue tracker. All security vulnerabilities will be promptly addressed.
-
----
-
-Using examples: Dmoz catalog, Yandex catalog, I want to create and test universal and easy navigation through different types of content. Facet scheme and other ideas.
-
-Используя примеры: каталог Dmoz, каталог Яндекса хочется создать и проверить универсальную и легкую навигацию по разным типам контента. Фасетную схему и другие идеи.
-
 
 ---
 
