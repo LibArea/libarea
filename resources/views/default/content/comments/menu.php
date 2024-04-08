@@ -28,7 +28,7 @@
           </a>
         </li>
         <li>
-           <a class="editansw" href="<?= url('admin.comment.transfer.form.edit', ['id' => $comment['comment_id']]); ?>">
+          <a class="editansw" href="<?= url('admin.comment.transfer.form.edit', ['id' => $comment['comment_id']]); ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
             </svg>

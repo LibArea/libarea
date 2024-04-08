@@ -367,6 +367,8 @@ return [
     'wiki'              => 'Wiki',
     'edit_comment'      => '更改注释',
     'move_comment'      => '我们把评论移过去吧',
+    'move_comment_post' => '将评论移至另一篇文章',
+    'move_title_post' 	=> '我应该将评论移至哪个帖子？',
     'move_title'        => '文章标题',
     'move_add_help'     => '来自帖子评论的创作',
     'move'              => '移动',

@@ -366,6 +366,8 @@ return [
     'wiki'              => 'Wiki',
     'edit_comment'      => 'Schimbă comentariul',
     'move_comment'      => 'Să mutăm comentariul',
+    'move_comment_post' => 'Mutați comentariul la o altă postare',
+    'move_title_post' 	=> 'La ce postare ar trebui să mut comentariul?',
     'move_title'        => 'Titlul postării',
     'move_add_help'     => 'Creații din comentariul Postului',
     'move'              => 'Mișcare',

@@ -366,6 +366,8 @@ return [
     'wiki'              => 'Wiki',
     'edit_comment'      => 'Thay đổi nhận xé',
     'move_comment'      => 'Hãy di chuyển bình luận',
+    'move_comment_post' => 'Di chuyển bình luận sang bài viết khác',
+    'move_title_post' 	=> 'Tôi nên chuyển bình luận đến bài viết nào?',
     'move_title'        => 'Tiêu đề bài viết',
     'move_add_help'     => 'Sáng tạo từ bình luận của bài viết',
     'move'              => 'Di chuyển',

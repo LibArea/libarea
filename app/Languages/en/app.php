@@ -368,6 +368,8 @@ return [
     'wiki'              => 'Wiki',
     'edit_comment'		=> 'Change the comment',
     'move_comment'		=> 'Let\'s move the comment',
+    'move_comment_post' => 'Move comment to another post',
+    'move_title_post' 	=> 'Which post should I move the comment to?',
     'move_title'		=> 'Post title',
     'move_add_help'		=> 'Creations from Post\'s comment',
     'move'				=> 'Move',
