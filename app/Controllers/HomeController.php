@@ -45,24 +45,29 @@ class HomeController extends Controller
      */
     private function callIndex(string $sheet)
     {
-        $subscription = HomeModel::getSubscription($this->container->user()->id());
+        $subscription = HomeModel::getSubscription();
 
         // Topics signed by the participant. If a guest, then default.    
         // Темы на которые подписан участник. Если гость, то дефолтные.
         $topics = \App\Models\FacetModel::advice($subscription);
+
+        $signed = [];
+        foreach ($subscription as $ind => $row) {
+            $signed[$ind] = $row['facet_id'];
+        }
 
         return render(
             'home',
             [
                 'meta'  => Meta::home($sheet),
                 'data'  => [
-                    'pagesCount'        => HomeModel::feedCount($sheet),
+                    'pagesCount'        => HomeModel::feedCount($signed, $sheet),
                     'pNum'              => Html::pageNumber(),
                     'sheet'             => $sheet,
                     'topics'            => $topics,
                     'type'              => 'main',
                     'latest_comments'   => HomeModel::latestComments(),
-                    'posts'             => HomeModel::feed(Html::pageNumber(), $sheet),
+                    'posts'             => HomeModel::feed($signed, Html::pageNumber(), $sheet),
                     'items'             => HomeModel::latestItems() ?? [],
                 ],
             ],

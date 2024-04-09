@@ -22,14 +22,9 @@ class HomeModel extends Model
      * @param string $type
      * @return void
      */
-    public static function feed(int $page, string $type = 'feed'): array|false
+    public static function feed(array $signed, int $page, string $type = 'feed'): array|false
     {
         $user_id = self::container()->user()->id();
-
-        $result = [];
-        foreach (self::userReads() as $ind => $row) {
-            $result[$ind] = $row['facet_id'];
-        }
 
         $resultNotUser = [];
         $ignored = IgnoredModel::getIgnoredUsers(50);
@@ -44,7 +39,7 @@ class HomeModel extends Model
         if ($type != 'all') {
             if ($user_id) {
                 $subscription = "relation_facet_id IN(0) AND";
-                if ($result) $subscription = "relation_facet_id IN(" . implode(',', $result ?? []) . ") AND";
+                if ($signed) $subscription = "relation_facet_id IN(" . implode(',', $signed ?? []) . ") AND";
             }
         }
 
@@ -102,7 +97,7 @@ class HomeModel extends Model
                                 ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
                                     WHERE post_type != 'page' AND post_draft = 0 AND $ignoring $nsfw $subscription $display $sort LIMIT :start, :limit";
 
-return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
+		return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
     /**
@@ -112,13 +107,8 @@ return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 
      * @param string $type
      * @return void
      */
-    public static function feedCount(string $type)
+    public static function feedCount(array $signed, string $type = 'feed')
     {
-        $result = [];
-        foreach (self::userReads() as $ind => $row) {
-            $result[$ind] = $row['facet_id'];
-        }
-
         $resultNotUser = [];
         $ignored = IgnoredModel::getIgnoredUsers(50);
         foreach ($ignored as $ind => $row) {
@@ -132,7 +122,7 @@ return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 
         if ($type != 'all') {
             if (self::container()->user()->id()) {
                 $subscription = "f_id IN(0) AND";
-                if ($result) $subscription = "f_id IN(" . implode(',', $result ?? []) . ") AND";
+                if ($signed) $subscription = "f_id IN(" . implode(',', $signed ?? []) . ") AND";
             }
         }
 
@@ -231,13 +221,6 @@ return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 
         $sql = "SELECT item_id, item_title, item_slug, item_domain FROM items WHERE item_published = 1 AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :limit";
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();
-    }
-
-    public static function userReads(): iterable|object
-    {
-        $sql = "SELECT signed_facet_id as facet_id FROM facets_signed WHERE signed_user_id = :user_id";
-
-        return DB::run($sql, ['user_id' => self::container()->user()->id()])->fetchAll();
     }
 
     /**
