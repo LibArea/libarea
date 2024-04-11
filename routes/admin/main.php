@@ -59,7 +59,10 @@ Route::toGroup()
 
 	Route::get('/edit/comment/transfer/{id}')->controller(EditCommentController::class, 'transfer')->where(['id' => '[0-9]+'])->name('admin.comment.transfer.form.edit'); 
 
-	Route::get('/audits')->module('admin', AuditsController::class)->name('admin.audits');
+	Route::get('/audits')->module('admin', AuditsController::class, 'all')->name('admin.audits');
+	Route::get('/audits/approved')->module('admin', AuditsController::class, 'audits')->name('admin.audits.ban');
+	Route::get('/report')->module('admin', AuditsController::class, 'report')->name('admin.reports');
+	
 	Route::get('/invitations')->module('admin', InvitationsController::class)->name('admin.invitations');
 	Route::get('/logs/search')->module('admin', LogsController::class, 'logsSearch')->name('admin.logs.search');
 	Route::get('/logs')->module('admin', LogsController::class)->name('admin.logs');
@@ -68,9 +71,6 @@ Route::toGroup()
 	Route::get('/css')->module('admin', CssController::class)->name('admin.css');
 
 	Route::get('/words/add')->module('admin', WordsController::class, 'add')->name('words.add');
-
-	Route::get('/audits/approved')->module('admin', AuditsController::class)->name('admin.audits.ban');
-	Route::get('/report')->module('admin', AuditsController::class)->name('admin.reports');
 
 	Route::get('/users/ban')->module('admin', UsersController::class, 'ban')->name('admin.users.ban');
 	Route::get('/users/{id}/edit')->module('admin', UsersController::class, 'editForm')->where(['id' => '[0-9]+'])->name('admin.user.edit.form');

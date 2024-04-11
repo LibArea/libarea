@@ -14,15 +14,25 @@ class AuditsController extends Module
 {
     protected $limit = 55;
 
-    public function index()
+    public function all()
     {
-		
-		$sheet = '';
-		$type = '';
-		
-		// Route::get('/audits')->module('admin', 'App\Audits', ['all', 'audits'])->name('admin.audits');
+        return $this->callIndex('all');
+    }
+
+    public function audits()
+    {
+        return $this->callIndex('audits');
+    }
+
+    public function report()
+    {
+        return $this->callIndex('report');
+    }
+
+    public function callIndex($sheet)
+    {
         $pagesCount = LogModel::getAuditsAllCount($sheet);
-        $audits     = LogModel::getAuditsAll(Html::pageNumber(), $this->limit, $sheet, $type);
+        $audits     = LogModel::getAuditsAll(Html::pageNumber(), $this->limit, $sheet);
 
         $result = [];
         foreach ($audits  as $ind => $row) {
@@ -41,9 +51,9 @@ class AuditsController extends Module
         return view(
             '/audit/audits',
             [
-                'meta'  => Meta::get(__('admin.' . $type)),
+                'meta'  => Meta::get(__('admin.' . $sheet)),
                 'data' => [
-                    'type'          => $type,
+                    'type'          => $sheet,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => Html::pageNumber(),
                     'audits'        => $result,

@@ -36,10 +36,10 @@ class LogModel extends Model
     }
 
     // Страница аудита
-    public static function getAuditsAll($page, $limit, $sheet, $type)
+    public static function getAuditsAll($page, $limit, $sheet)
     {
         $sort   = $sheet == 'ban' ? 'AND a.read_flag = 1' : 'AND a.read_flag = 0';
-        $type   = $type == 'audits' ? 'audit' : 'report';
+        $type   = $sheet == 'audits' ? 'audit' : 'report';
         $sort   = $type == 'report' ? '' : $sort;
 
         $start  = ($page - 1) * $limit;

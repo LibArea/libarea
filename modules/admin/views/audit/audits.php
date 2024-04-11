@@ -49,7 +49,7 @@
             <span class="mr5 ml5 red"> audit </span>
           <?php endif; ?>
           <span class="mr5 ml5"> &#183; </span>
-          <a class="mr5 ml5" href="<?= url('admin.user.edit', ['id' => $audit['id']]); ?>">
+          <a class="mr5 ml5" href="<?= url('admin.user.edit.form', ['id' => $audit['id']]); ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>
@@ -90,7 +90,7 @@
           <?php if ($audit['type_belonging'] == 'audit') : ?>
             <?php if ($audit['read_flag'] == 1) : ?>
               id:
-              <a href="<?= url('admin.user.edit', ['id' => $audit['audit_id']]); ?>">
+              <a href="<?= url('admin.user.edit.form', ['id' => $audit['audit_id']]); ?>">
                 <?= $audit['user_id']; ?>
               </a>
             <?php else : ?>

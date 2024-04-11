@@ -139,7 +139,7 @@ class BadgesController extends Module
             ]
         );
 
-        Msg::redirect(__('msg.successfully'), 'success', url('admin.user.edit', ['id' => $uid]));
+        Msg::redirect(__('msg.successfully'), 'success', url('admin.user.edit.form', ['id' => $uid]));
     }
 
     public function edit()
