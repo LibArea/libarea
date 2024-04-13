@@ -162,5 +162,8 @@ return [
             'https://mc.yandex.ru',
             'https://yastatic.net',
         ],
+		'img-src' => [
+			'https://*.userapi.com/impg/',
+		]
     ],
 ];
