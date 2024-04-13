@@ -34,6 +34,10 @@ return [
             'pass' => '',
             'options' => [
                 // \PDO::ATTR_PERSISTENT => TRUE
+				
+				// https://www.reddit.com/r/PHP/comments/142uqr3/did_something_change_in_php_8_to_make_pdo_return/				
+				// \PDO::ATTR_EMULATE_PREPARES => false,
+				// \PDO::ATTR_STRINGIFY_FETCHES => false,
             ],
         ],
 
