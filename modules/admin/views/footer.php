@@ -4,6 +4,9 @@
     <?= __('admin.home'); ?> &copy; <?= date('Y'); ?> 
   </div>
 </footer>
+
+<script src="/assets/js/common.js"></script>
+<script src="/assets/js/app.js"></script>
 <script src="/assets/js/admin.js"></script>
 
 <script nonce="<?= config('main', 'nonce'); ?>">

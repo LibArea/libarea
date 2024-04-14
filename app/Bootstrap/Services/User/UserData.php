@@ -22,8 +22,6 @@ class UserData
 
     static protected $id = null;
 
-    static protected $user = null;
-
     static protected $myAccount = null;
 
     /**
@@ -37,11 +35,9 @@ class UserData
             return self::$myAccount;
         }
 
-        $t = self::getAccount();
+        self::getAccount();
 
-        self::$user = $t ?? self::noAuth();
-
-        return self::$user;
+        return self::$myAccount ?? self::noAuth();
     }
 
     public static function getAccount()
@@ -66,19 +62,22 @@ class UserData
         Translate::setLang($lang);
 
         self::$myAccount = $user ?? self::noAuth();
-
-        return self::$myAccount;
     }
 
     public static function noAuth(): array
     {
         return [
-            'id'           	=> RegType::USER_ZERO_LEVEL,
-            'trust_level'  	=> RegType::USER_ZERO_LEVEL,
-            'scroll'       	=> RegType::USER_ZERO_LEVEL,
-            'template'     	=> config('general', 'template'),
-            'lang'         	=> config('general', 'lang'),
-            'nsfw'			=> RegType::USER_ZERO_LEVEL,
+            'id'               => RegType::USER_ZERO_LEVEL,
+            'trust_level'      => RegType::USER_ZERO_LEVEL,
+            'scroll'           => RegType::USER_ZERO_LEVEL,
+            'nsfw'            => RegType::USER_ZERO_LEVEL,
+            'template'         => config('general', 'template'),
+            'lang'             => config('general', 'lang'),
+            'post_design'     => false,
+            'limiting_mode' => false,
+            'avatar'         => false,
+            'login'            => false,
+            'email'            => false,
         ];
     }
 
@@ -112,7 +111,7 @@ class UserData
      */
     public static function getUserTl(): int
     {
-        return  self::get()['trust_level'] ?? RegType::USER_ZERO_LEVEL;
+        return  self::get()['trust_level'];
     }
 
     /**
@@ -123,7 +122,7 @@ class UserData
      */
     public static function getUserId(): int
     {
-        return self::get()['id']; //  ?? RegType::USER_ZERO_LEVEL
+        return self::get()['id'];
     }
 
     /**
@@ -134,7 +133,7 @@ class UserData
      */
     public static function getUserTheme()
     {
-        return self::get()['template'] ?? config('general', 'template');
+        return self::get()['template'];
     }
 
     /**
@@ -155,7 +154,7 @@ class UserData
      */
     public static function getUserAvatar(): string|false
     {
-        return self::get()['avatar'] ?? false;
+        return self::get()['avatar'];
     }
 
     /**
@@ -166,7 +165,7 @@ class UserData
      */
     public static function getUserLogin(): string|false
     {
-        return self::get()['login'] ?? false;
+        return self::get()['login'];
     }
 
     /**
@@ -177,7 +176,7 @@ class UserData
      */
     public static function getUserLang(): string
     {
-        return self::get()['lang'] ?? config('general', 'lang');
+        return self::get()['lang'];
     }
 
     /**
@@ -199,7 +198,7 @@ class UserData
      */
     public static function getUserNSFW(): int
     {
-        return self::get()['nsfw'] ?? RegType::USER_ZERO_LEVEL;
+        return self::get()['nsfw'];
     }
 
     /**
@@ -221,7 +220,7 @@ class UserData
      */
     public static function getUserPostDesign()
     {
-        return self::get()['post_design'] ?? false;
+        return self::get()['post_design'];
     }
 
     /**

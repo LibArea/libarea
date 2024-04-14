@@ -6,7 +6,7 @@ use App\Bootstrap\Services\Auth\Action;
 
 class AuthService implements AuthInterface
 {
-    public function logout(): bool
+    public function logout(): void
     {
         return Action::logout();
     }

@@ -14,5 +14,5 @@ namespace App\Bootstrap\Services;
 interface AuthInterface
 {
     public function get(): array;
-	public function logout(): bool;
+    public function logout(): void;
 }

@@ -34,7 +34,7 @@ class Html
         $result = [];
         foreach (array_chunk($facets, 3) as $row) {
             if ($row[0] == 'topic') {
-                    $result[] = '<a class="' . $css . '" href="' . url('blog.topic', ['slug' => $blog_slug, 'tslug' => $row[1]]) . '">' . $row[2] . '</a>';
+                $result[] = '<a class="' . $css . '" href="' . url('blog.topic', ['slug' => $blog_slug, 'tslug' => $row[1]]) . '">' . $row[2] . '</a>';
             }
         }
 
@@ -140,7 +140,7 @@ class Html
         $other = empty($other) ? '' : $other;
         $first = empty($other) ? '/' : $other;
 
-		$page = $other . '';
+        $page = $other . '';
         if (in_array($sheet, ['all', 'questions', 'posts'])) {
             $page  = $other . '/' . $sheet;
         }
@@ -258,42 +258,42 @@ class Html
     {
         return '<button type="submit" name="action" class="btn btn-primary" value="submit">' . $text . '</button>';
     }
-	
+
     public static function breadcrumb($list)
     {
-		$html = '<ul itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumbs">';
+        $html = '<ul itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumbs">';
 
-		  end($list);
-		  $last_item_key   = key($list);
+        end($list);
+        $last_item_key   = key($list);
 
-		  $show_last = true;
+        $show_last = true;
 
-		  foreach ($list as $key => $item) :
-			if ($key != $last_item_key) :
-		
-			  $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
-				if (!empty($item['link'])) :
-				   $html .= '<a itemprop="item" href="' . $item['link'] . '"><span itemprop="name">' . $item['name'] . '</span></a>';
-				else :
-				   $html .= '<span itemprop="name">' . $item['name'] . '</span>';
-				endif;
-				$html .= '<meta itemprop="position" content="' . $key + 1 . '">';
-			  $html .= '</li>';
-			 else :
-			 
-			  // Отобразим последний элемент 
-			  $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="active">
+        foreach ($list as $key => $item) :
+            if ($key != $last_item_key) :
+
+                $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+                if (!empty($item['link'])) :
+                    $html .= '<a itemprop="item" href="' . $item['link'] . '"><span itemprop="name">' . $item['name'] . '</span></a>';
+                else :
+                    $html .= '<span itemprop="name">' . $item['name'] . '</span>';
+                endif;
+                $html .= '<meta itemprop="position" content="' . $key + 1 . '">';
+                $html .= '</li>';
+            else :
+
+                // Отобразим последний элемент 
+                $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="active">
 				<span itemprop="name"> ' . $item['name'] . ' </span>
 				<meta itemprop="position" content="' . $key + 1 . '">
 			  </li>';
-			 endif;
-		  endforeach; 
-		  
-		$html .= '</ul>';
+            endif;
+        endforeach;
 
-		return $html;
+        $html .= '</ul>';
+
+        return $html;
     }
-	
+
     public static function pageNumber()
     {
         $page = Request::get('page')->value();
@@ -301,5 +301,4 @@ class Html
 
         return $pageNumber <= 1 ? 1 : $pageNumber;
     }
-	
 }

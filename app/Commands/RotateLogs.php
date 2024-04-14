@@ -38,7 +38,7 @@ class RotateLogs extends Task
         );
         foreach ($logs as $log) {
             $logPath = $log->getRealPath();
-            if(!is_writable($logPath)) {
+            if (!is_writable($logPath)) {
                 $user = @exec('whoami');
                 echo "Permission denied! It is necessary to assign rights to the directory `sudo chmod -R 766 ./storage` and the current user " . ($user ? "`$user`" : '') . PHP_EOL;
                 $code = self::ERROR_CODE;

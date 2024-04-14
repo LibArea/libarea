@@ -45,16 +45,15 @@ class Meta
                     $output .= "<meta property=\"twitter:image\" content=\"" . config('meta', 'url') . $m['imgurl'] . "\">";
                 }
             }
-			
-			if (!empty($m['indexing'])) {
+
+            if (!empty($m['indexing'])) {
                 $output .= "<meta name=\"robots\" content=\"noindex\">";
             }
-			
         }
 
         return $output;
     }
-	
+
     public static function home(string $sheet)
     {
         switch ($sheet) {
@@ -80,22 +79,22 @@ class Meta
 
         return self::get(config('meta', $sheet . '_title'), config('meta',  $sheet . '_desc'), $meta);
     }
-	
+
     public static function post(array $content): string
     {
         $indexing =  ($content['post_is_deleted'] == 1) ? true : false;
-		
-        $meta = ['type' => 'article', 'indexing' 	=> $indexing];
 
-		if ($indexing === false) {
-			$meta = [
-				'published_time' => $content['post_date'],
-				'type'      => 'article',
-				'og'        => true,
-				'imgurl'    => self::images($content),
-				'url'       => post_slug((int)$content['post_id'], $content['post_slug']),
-			];
-		} 	
+        $meta = ['type' => 'article', 'indexing'     => $indexing];
+
+        if ($indexing === false) {
+            $meta = [
+                'published_time' => $content['post_date'],
+                'type'      => 'article',
+                'og'        => true,
+                'imgurl'    => self::images($content),
+                'url'       => post_slug((int)$content['post_id'], $content['post_slug']),
+            ];
+        }
 
         $description  = (fragment($content['post_content'], 250) == '') ? strip_tags($content['post_title']) : fragment($content['post_content'], 250);
 
@@ -114,7 +113,7 @@ class Meta
 
         return $content_img;
     }
-	
+
     public static function profile(string $sheet, array $user): string
     {
         if ($sheet == 'profile') {
@@ -144,28 +143,28 @@ class Meta
 
         return self::get(htmlEncode($title), htmlEncode($description), $meta);
     }
-	
-	// Индексация профиля: условия
-	// Если количество лайков меньше 3, если профиль удален и если он в бан листе
+
+    // Индексация профиля: условия
+    // Если количество лайков меньше 3, если профиль удален и если он в бан листе
     public static function profileMeta(array $user, string $url): array
     {
         $meta = ['og' => false];
         if ($user['up_count'] > 3) {
-			$meta = [
-				'og'        => true,
-				'imgurl'    => '/uploads/users/avatars/' . $user['avatar'],
-				'url'       => $url,
-			];
-		}
+            $meta = [
+                'og'        => true,
+                'imgurl'    => '/uploads/users/avatars/' . $user['avatar'],
+                'url'       => $url,
+            ];
+        }
 
         if ($user['ban_list'] == 1 || $user['is_deleted'] == 1) {
             $meta['indexing'] = true;
         }
- 		
-		return $meta;
-	}
-	
-	
+
+        return $meta;
+    }
+
+
     public static function facet(string $sheet, array $facet, string $type = 'topic', array $topic = []): string
     {
         switch ($sheet) {
@@ -213,7 +212,7 @@ class Meta
 
         if ($facet['facet_is_deleted'] == 1) {
             $meta['indexing'] = true;
-			$meta['og'] = false;
+            $meta['og'] = false;
         }
 
         return self::get($title, $description, $meta);

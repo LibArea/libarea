@@ -67,4 +67,5 @@
   </div>
 </aside>
  
+<?= insertTemplate('footer'); ?>
  

@@ -40,7 +40,7 @@ class ProjectSetupTask extends Task
             $this->generateKey();
             $this->localConfiguration();
             $this->deleteRequirementsFile();
-        } catch (\Throwable){
+        } catch (\Throwable) {
             exit('Failed to set up project...' . PHP_EOL);
         }
         if ($arg === '--clear') {

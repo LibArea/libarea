@@ -23,7 +23,7 @@ foreach ($menu as $key => $item) :
 	<?php if ($user['id'] > 0) : ?>
 		<?php if ($topics_user) : ?>
 			<div class="flex justify-between items-center">
-				<h4 class="mb5"><?= __('app.preferences'); ?></h3>
+				<h4 class="mb5 ml5"><?= __('app.preferences'); ?></h3>
 
 					<a class="text-sm" title="<?= __('app.edit'); ?>" href="<?= url('setting.preferences'); ?>">
 						<sup><svg class="icons gray-600">

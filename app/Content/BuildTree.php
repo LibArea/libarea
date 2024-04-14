@@ -25,7 +25,7 @@ class BuildTree
             return $siblings;
         };
 
-		$tree = [];
+        $tree = [];
         if (isset($grouped[$group])) {
             $tree = $fnBuilder($grouped[$group]);
         }

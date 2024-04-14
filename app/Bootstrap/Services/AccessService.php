@@ -20,13 +20,13 @@ class AccessService implements AccessInterface
     {
         return Сhecks::limitsLevel($tl);
     }
-	
-	public function postingFrequency(string $type)
+
+    public function postingFrequency(string $type)
     {
         return Сhecks::postingFrequency($type);
     }
-	
-	public function limitTime(string $adding_time, int $limit_time)
+
+    public function limitTime(string $adding_time, int $limit_time)
     {
         return Сhecks::limitTime($adding_time, $limit_time);
     }

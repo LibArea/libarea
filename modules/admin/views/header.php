@@ -29,8 +29,6 @@ $lang = Translate::getLang();
     <link rel="stylesheet" href="/assets/css/rtl.css" type="text/css">
   <?php endif; ?>
   <script src="/assets/js/la.js"></script>
-  <script src="/assets/js/common.js"></script>
-  <script src="/assets/js/app.js"></script>
 </head>
 
 <body class="admin<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if ($container->cookies()->get('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
@@ -84,4 +82,4 @@ $lang = Translate::getLang();
       </div>
     </div>
   </header>
-  <div id="contentWrapper" class="wrap">
+  <div id="contentWrapper" class="wrap"> 

@@ -11,11 +11,14 @@ class RulesLogin extends Validator
 {
     public static function rules($data)
     {
-        $redirect   = url('login');
+        $redirect = url('login');
 
         self::email($data['email'], $redirect);
 
         $user = AuthModel::userInfo($data['email']);
+
+		//var_dump($user['id']);
+		//exit;
 
         if (empty($user['id'])) {
             Msg::redirect(__('msg.no_user'), 'error', $redirect);

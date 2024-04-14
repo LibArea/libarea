@@ -27,8 +27,8 @@ class SendEmail
             }
         }
 
-		$lang = $user['lang'] ?? config('general', 'lang');
-		Translate::setLang($lang);
+        $lang = $user['lang'] ?? config('general', 'lang');
+        Translate::setLang($lang);
 
         $text_footer    = __('mail.footer', ['name' => config('meta', 'url')]);
         $user_email     = $user['email'];
@@ -107,9 +107,7 @@ class SendEmail
                 return true;
             } catch (Exception $e) {
                 throw AutorizationException::Smtp("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-            }        
-                        
-            
+            }
         } else {
             $mail = new \Phphleb\Muller\StandardMail(false);
             $mail->setNameFrom(config('meta', 'name')); // вот тут было длинное

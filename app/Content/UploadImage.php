@@ -41,9 +41,9 @@ class UploadImage
         $name = $img['name'];
 
         if ($name) {
-            
+
             self::fileTypeCheck($img['type'], '/');
-            
+
             $filename =  $pref . $content_id . '-' . time();
             $file = $img['tmp_name'];
 
@@ -94,7 +94,7 @@ class UploadImage
         $month      = date('n') . '/';
         $file       = $img['tmp_name'];
         $filename   = 'post-' . time();
-        
+
         self::fileTypeCheck($img['type'], '/');
 
         // For the body of the post, if png then we will not change the file extension
@@ -173,8 +173,8 @@ class UploadImage
 
             // Удалим старую, кроме дефолтной
             if ($cover_art != $default_img && $cover_art != $new_cover) {
-                    @unlink($path_cover_img . $cover_art);
-                if ($cover_art != false) {    
+                @unlink($path_cover_img . $cover_art);
+                if ($cover_art != false) {
                     @unlink($path_cover_small . $cover_art);
                 }
             }
@@ -201,9 +201,9 @@ class UploadImage
 
         $width_h  = getimagesize($img['tmp_name']);
         if ($width_h < 500) {
-            is_return(__('msg.five_width'), 'error', $redirect);
+            Msg::redirect(__('msg.five_width'), 'error', $redirect);
         }
- 
+
         $path = HLEB_PUBLIC_DIR . Img::PATH['posts_cover'];
         $year = date('Y') . '/';
         $file = $img['tmp_name'];
@@ -225,7 +225,7 @@ class UploadImage
             if ($post_content_img != false) {
                 @unlink($path . $post_content_img);
             }
-            
+
             FileModel::removal($post_content_img);
         }
 
@@ -294,15 +294,15 @@ class UploadImage
             mkdir($path, 0777, true);
         }
     }
-    
+
     public static function fileTypeCheck($type, $redirect)
     {
         // permitted
-        $types = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']; 
+        $types = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
         if (!in_array($type, $types)) {
-            is_return(__('msg.five_format'), 'error', $redirect);
+            Msg::redirect(__('msg.five_format'), 'error', $redirect);
         }
 
         return true;
-    }    
+    }
 }

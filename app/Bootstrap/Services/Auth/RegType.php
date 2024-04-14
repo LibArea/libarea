@@ -60,7 +60,7 @@ final class RegType
      */
     public static function check(int|array $type, string|null $cp = '>='): bool
     {
-        $tl = UserData::getAccount()['trust_level'] ?? self::USER_ZERO_LEVEL;
+        $tl = UserData::getUserTl(); // ?? self::USER_ZERO_LEVEL;
 
         return ((\is_integer($type) && (
             ($cp == '=' && $tl === $type) ||

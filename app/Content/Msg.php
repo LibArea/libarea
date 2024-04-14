@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Hleb\Reference\RedirectInterface;
- 
+
 class Msg
 {
     public static function get()
@@ -29,11 +29,11 @@ class Msg
     {
         $_SESSION['msg'] = ['msg' => $msg, 'status' => $status];
     }
-	
-	public static function redirect(string $text, string $status, string $redirect = '/')
-	{
- 		self::add($text, $status);
 
-		redirect($redirect);
-	}
+    public static function redirect(string $text, string $status, string $redirect = '/')
+    {
+        self::add($text, $status);
+
+        redirect($redirect);
+    }
 }

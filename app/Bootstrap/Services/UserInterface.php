@@ -16,5 +16,5 @@ interface UserInterface
     public function scroll(): int;
     public function blog();
     public function design();
-	public function limitingMode(): int;
+    public function limitingMode(): int;
 }

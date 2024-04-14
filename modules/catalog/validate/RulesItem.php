@@ -30,7 +30,7 @@ class RulesItem extends Validator
     {
         $redirect = url('item.form.add');
 
-        $item = WebModel::getItemId($data['item_id']);
+        $item = WebModel::getItemId((int)$data['item_id']);
         if (!$item) {
             return true;
         }

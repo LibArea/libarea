@@ -8,7 +8,7 @@ class UserService implements UserInterface
 {
     public function get(): array
     {
-        return UserData::getAccount();
+        return UserData::get();
     }
 
     public function id(): int
@@ -65,9 +65,9 @@ class UserService implements UserInterface
     {
         return UserData::getUserPostDesign();
     }
-	
-	public function limitingMode(): int
-	{
-		return UserData::getLimitingMode();
+
+    public function limitingMode(): int
+    {
+        return UserData::getLimitingMode();
     }
 }

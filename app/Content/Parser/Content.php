@@ -53,7 +53,7 @@ class Content
 
         if (UserData::getUserLang() == 'ru') {
             return self::typograf($text);
-        }            
+        }
 
         return $text;
     }
@@ -74,13 +74,13 @@ class Content
         $t->addRule($simpleRule); */
 
         // https://github.com/akhx/typograf/blob/master/docs/RULES.md
-        $t->disableRule('Nbsp\*'); 
+        $t->disableRule('Nbsp\*');
         $t->disableRule('Space\*');
-        $t->disableRule('Html\*');        
+        $t->disableRule('Html\*');
 
         return $t->apply($text);
     }
-    
+
     public static function emoji($content)
     {
         $pathEmoji =  '/assets/images/emoji/';
@@ -210,9 +210,9 @@ class Content
 
                 if ($user_info) {
                     $content = str_replace('@' . $login, '[@' . $login . '](/@' .  $login . ')', $content);
- 
+
                     if ($to_uid) {
-                       $content_uid = str_replace('@' . $login, '@' . $user_info['id'], $content_uid);
+                        $content_uid = str_replace('@' . $login, '@' . $user_info['id'], $content_uid);
                     }
 
                     if ($with_user) {

@@ -6,7 +6,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class URLScraper
 {
-    public static function get($url)
+    public static function get(string $url): array
     {
         // Create a client to make the HTTP request
         $client = new \GuzzleHttp\Client();
