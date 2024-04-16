@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Bootstrap\Services\Auth;
 
-use App\Models\User\UserModel;
 use App\Models\Auth\AuthModel;
 use Html;
 
@@ -19,7 +18,7 @@ class Remember
      * @param string $remember
      * @return bool
      */
-    public static function check(string $remember): bool
+    public static function check(string $remember): bool|array
     {
         if (empty($remember)) {
             return false;
@@ -43,7 +42,7 @@ class Remember
 
         // Getting data by id
         // Получение данных по id
-        $user = UserModel::get($token['auth_user_id'], 'id');
+        $user = AuthModel::getUser($token['auth_user_id'], 'id');
 
         if (empty($user)) {
             return false;
@@ -65,7 +64,7 @@ class Remember
 
         self::rememberMeReset($token['auth_user_id'], $selector);
 
-        return true;
+        return $user;
     }
 
     /**

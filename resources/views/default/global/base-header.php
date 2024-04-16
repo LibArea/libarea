@@ -3,7 +3,7 @@
 /**
  * @var $container App\Bootstrap\ContainerInterface 
  */
-$container->user()->get();
+// $container->user()->get();
 
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;

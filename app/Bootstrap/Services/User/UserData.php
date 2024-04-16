@@ -54,30 +54,30 @@ class UserData
         } else {
             $remember = Cookies::get('remember')->value();
             if ($remember ?? false) {
-                Remember::check($remember);
+                $user = Remember::check($remember);
             }
         }
 
         $lang = $user['lang'] ?? config('general', 'lang');
         Translate::setLang($lang);
 
-        self::$myAccount = $user ?? self::noAuth();
+        return self::$myAccount = $user ?? self::noAuth();
     }
 
     public static function noAuth(): array
     {
         return [
-            'id'               => RegType::USER_ZERO_LEVEL,
-            'trust_level'      => RegType::USER_ZERO_LEVEL,
-            'scroll'           => RegType::USER_ZERO_LEVEL,
-            'nsfw'            => RegType::USER_ZERO_LEVEL,
-            'template'         => config('general', 'template'),
-            'lang'             => config('general', 'lang'),
-            'post_design'     => false,
-            'limiting_mode' => false,
-            'avatar'         => false,
-            'login'            => false,
-            'email'            => false,
+            'id'                => RegType::USER_ZERO_LEVEL,
+            'trust_level'       => RegType::USER_ZERO_LEVEL,
+            'scroll'            => RegType::USER_ZERO_LEVEL,
+            'nsfw'              => RegType::USER_ZERO_LEVEL,
+            'template'          => config('general', 'template'),
+            'lang'              => config('general', 'lang'),
+            'post_design'       => false,
+            'limiting_mode'     => false,
+            'avatar'            => false,
+            'login'             => false,
+            'email'             => false,
         ];
     }
 
