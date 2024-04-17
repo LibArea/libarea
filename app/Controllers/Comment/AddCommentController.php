@@ -76,7 +76,7 @@ class AddCommentController extends Controller
 
             $url = $url_post . '#' . 'comment_' . $last_id;
 
-            (new \App\Controllers\AuditController())->create('comment', $last_id, $url);
+            (new \App\Controllers\AuditController())->create('comment', (int)$last_id, $url);
         }
 
         $url = $url_post . '#comment_' . $last_id;

@@ -27,14 +27,14 @@
             <?= $comment['comment_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
           </a>
         </li>
-        <li>
+        <!--li>
           <a class="editansw" href="<?= url('admin.comment.transfer.form.edit', ['id' => $comment['comment_id']]); ?>">
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
             </svg>
             <?= __('app.move'); ?>
           </a>
-        </li>
+        </li-->
         <li>
           <a href="<?= url('admin.logip', ['item' => $comment['comment_ip']]); ?>">
             <svg class="icons">

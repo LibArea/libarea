@@ -3,7 +3,6 @@
 /**
  * @var $container App\Bootstrap\ContainerInterface 
  */
-// $container->user()->get();
 
 $type   = $data['type'] ?? false;
 $facet  = $data['facet'] ?? false;
@@ -28,7 +27,7 @@ $post   = $data['post'] ?? false;
 
           <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
         </div>
- 
+
         <?php if ($post) : ?>
           <div class="d-header-post none">
             <span class="v-line mb-none"></span>
@@ -38,11 +37,11 @@ $post   = $data['post'] ?? false;
           </div>
         <?php endif; ?>
 
-        <?php 
-		$facetIcon = $facet == 'topic' ? $facet : false;
-		if ($facetIcon) : ?>
+        <?php
+        $facetIcon = $facet == 'topic' ? $facet : false;
+        if ($facetIcon) : ?>
           <div class="d-header-facet none">
-            <span class="v-line mb-none"></span>    
+            <span class="v-line mb-none"></span>
             <a class="mb-none" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]) ?>">
               <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-base mr15', 'logo', 'max'); ?>
               <?= $facet['facet_title']; ?>
@@ -100,7 +99,7 @@ $post   = $data['post'] ?? false;
             </div>
           </div>
         <?php endif; ?>
- 
+
       </div>
     </div>
   </header>
@@ -113,7 +112,7 @@ $post   = $data['post'] ?? false;
 
   <div id="contentWrapper" class="wrap">
     <nav class="menu__left mb-none">
-	  <ul class="menu sticky top-sm">
-	    <?= insert('/_block/navigation/config/left-menu', ['type' => $type, 'topics_user' => $topics_user]); ?>
-	  </ul>
-	</nav>
+      <ul class="menu sticky top-sm">
+        <?= insert('/_block/navigation/config/left-menu', ['type' => $type, 'topics_user' => $topics_user]); ?>
+      </ul>
+    </nav>

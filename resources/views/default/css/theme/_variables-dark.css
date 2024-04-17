@@ -58,10 +58,10 @@ body.dark {
   --gray-100: #161f27;
   --violet: #161f27;
   --slate-100: #161f27;
-  
+
   /* Tagify */
   --tagify-bg-color: #283541;
-  --tagify-dd-bg-color: #283541;  
+  --tagify-dd-bg-color: #283541;
   --tagify-dd-color-primary: #283541;
   --tags-border-color: #555;
 }
@@ -116,8 +116,13 @@ body.dark .anchor-top:target~.comment {
   background-color: #2f3b4a;
 }
 
-body.dark .tagify { --tags-border-color: #555; }
-body.dark .tagify { background-color: var(--tagify-bg-color); }
+body.dark .tagify {
+  --tags-border-color: #555;
+}
+
+body.dark .tagify {
+  background-color: var(--tagify-bg-color);
+}
 
 body.dark ul.last-content a.last-content_telo {
   background-color: var(--blockquote-bg);

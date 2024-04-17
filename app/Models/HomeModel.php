@@ -97,7 +97,7 @@ class HomeModel extends Model
                                 ON votes_post_item_id = post_id AND votes_post_user_id = :uid2
                                     WHERE post_type != 'page' AND post_draft = 0 AND $ignoring $nsfw $subscription $display $sort LIMIT :start, :limit";
 
-		return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
+        return DB::run($sql, ['uid' => $user_id, 'uid2' => $user_id, 'start' => $start, 'limit' => self::$limit])->fetchAll();
     }
 
     /**
@@ -178,44 +178,12 @@ class HomeModel extends Model
     }
 
     /**
-     * The last 5 responses on the main page
-     * Последние 5 ответа на главной
+     * Latest sites
+     * Последние сайты
      *
      * @param integer $limit
-     * @return array
+     * @return array|false
      */
-    public static function latestComments(int $limit = 5): array
-    {
-        $trust_level = self::container()->user()->tl();
-        $user_comment = "AND post_tl = 0";
-
-        if ($user_id = self::container()->user()->id()) {
-            $user_comment = "AND comment_user_id != $user_id AND post_tl <= $trust_level";
-        }
-
-        $hidden = self::container()->user()->admin() ? "" : "AND post_hidden = 0";
-
-        $sql = "SELECT 
-                    comment_id,
-                    comment_post_id,
-                    comment_content,
-                    comment_date,
-                    post_id,
-					post_title,
-                    post_slug,
-                    post_hidden,
-                    login,
-                    avatar
-                        FROM comments 
-                        LEFT JOIN users ON id = comment_user_id
-                        RIGHT JOIN posts ON post_id = comment_post_id
-                            WHERE comment_is_deleted = 0 AND post_is_deleted = 0 $hidden 
-                                $user_comment AND post_type = 'post'
-                                    ORDER BY comment_id DESC LIMIT :limit";
-
-        return DB::run($sql, ['limit' => $limit])->fetchAll();
-    }
-
     public static function latestItems(int $limit = 3): array|false
     {
         $sql = "SELECT item_id, item_title, item_slug, item_domain FROM items WHERE item_published = 1 AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :limit";
@@ -226,10 +194,8 @@ class HomeModel extends Model
     /**
      * Facets (topic, blogs) all / subscribed
      * Фасеты (темы, блоги) все / подписан
-     *
-     * @return boolean
      */
-    public static function getSubscription(): array|bool
+    public static function getSubscription()
     {
         $sql = "SELECT 
                     facet_id, 

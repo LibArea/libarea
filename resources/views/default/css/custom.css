@@ -17,13 +17,30 @@ body {
 
 .box,
 .box-flex,
-.indent-body { background-color: var(--white); }
+.indent-body {
+  background-color: var(--white);
+}
 
-.nickname { display: inline-block; }
-.nickname::first-letter { color: red; }
+.nickname {
+  display: inline-block;
+}
 
-.indent-body { padding: 15px; }
+.nickname::first-letter {
+  color: red;
+}
 
-.active  { color: #eab308; } 
-ul.nav > li.active > a { color: var(--nav-color-active); }
-.menu .active .icons { stroke: #eab308; }
+.indent-body {
+  padding: 15px;
+}
+
+.active {
+  color: #eab308;
+}
+
+ul.nav>li.active>a {
+  color: var(--nav-color-active);
+}
+
+.menu .active .icons {
+  stroke: #eab308;
+}

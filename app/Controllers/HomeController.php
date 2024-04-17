@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Models\HomeModel;
+use App\Models\{HomeModel, CommentModel};
 use Meta, Html;
 
 class HomeController extends Controller
@@ -56,6 +56,7 @@ class HomeController extends Controller
             $signed[$ind] = $row['facet_id'];
         }
 
+
         return render(
             'home',
             [
@@ -66,7 +67,7 @@ class HomeController extends Controller
                     'sheet'             => $sheet,
                     'topics'            => $topics,
                     'type'              => 'main',
-                    'latest_comments'   => HomeModel::latestComments(),
+                    'latest_comments'   => CommentModel::latestComments(),
                     'posts'             => HomeModel::feed($signed, Html::pageNumber(), $sheet),
                     'items'             => HomeModel::latestItems() ?? [],
                 ],
@@ -84,14 +85,20 @@ class HomeController extends Controller
     {
         $type = Request::param('type')->value() == 'all' ? 'all' : 'main.feed';
 
+        $subscription = HomeModel::getSubscription();
+
+        $signed = [];
+        foreach ($subscription as $ind => $row) {
+            $signed[$ind] = $row['facet_id'];
+        }
+
         insert(
             '/content/post/type-post',
             [
                 'data'  => [
                     'pages' => Html::pageNumber(),
                     'sheet' => 'main.feed',
-                    'posts' => HomeModel::feed(Html::pageNumber(), $type),
-
+                    'posts' => HomeModel::feed($signed, Html::pageNumber(), $type),
                 ]
             ]
         );
