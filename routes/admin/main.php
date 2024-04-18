@@ -47,8 +47,9 @@ Route::toGroup()
 		Route::post('/setting/edit')->module('admin', SettingController::class, 'edit')->name('admin.setting.edit');
 	Route::endGroup();
 
-	// nav
-	Route::get('/users')->module('admin', UsersController::class)->name('admin.users');
+	Route::get('/users')->module('admin', UsersController::class, 'all')->name('admin.users');
+	Route::get('/users/ban')->module('admin', UsersController::class, 'ban')->name('admin.users.ban');
+	
 	Route::get('/facets')->module('admin', FacetsController::class)->name('admin.facets.all');
 	Route::get('/tools')->module('admin', ToolsController::class)->name('admin.tools');
 
@@ -72,7 +73,6 @@ Route::toGroup()
 
 	Route::get('/words/add')->module('admin', WordsController::class, 'add')->name('words.add');
 
-	Route::get('/users/ban')->module('admin', UsersController::class, 'ban')->name('admin.users.ban');
 	Route::get('/users/{id}/edit')->module('admin', UsersController::class, 'editForm')->where(['id' => '[0-9]+'])->name('admin.user.edit.form');
 	Route::get('/users/{id}/history')->module('admin', UsersController::class, 'history')->where(['id' => '[0-9]+'])->name('admin.user.history');
 

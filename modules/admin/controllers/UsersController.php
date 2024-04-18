@@ -19,10 +19,20 @@ class UsersController extends Module
 
     protected $limit = 20;
 
-    public function index()
+	public function all()
     {
-        $pagesCount = UserModel::getUsersCount('all');
-        $user_all   = UserModel::getUsers(Html::pageNumber(), $this->limit, 'all');
+        return $this->userIndex('all');
+    }
+
+	public function ban()
+    {
+        return $this->userIndex('ban');
+    }
+
+    public function userIndex($option)
+    {
+        $pagesCount = UserModel::getUsersCount($option);
+        $user_all   = UserModel::getUsers(Html::pageNumber(), $this->limit, $option);
 
         $result = [];
         foreach ($user_all as $ind => $row) {
@@ -42,7 +52,7 @@ class UsersController extends Module
                     'pNum'          => Html::pageNumber(),
                     'alluser'       => $result,
                     'type'          => $this->type,
-                    'sheet'         => 'all',
+                    'sheet'         => $option,
                     'users_count'   => $pagesCount,
                 ]
             ]

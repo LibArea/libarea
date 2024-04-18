@@ -39,9 +39,6 @@
             <div class="block mt5 nickname<?php if (Html::loginColor($user['created_at'] ?? false)) : ?> green<?php endif; ?>">
               <?= $user['login']; ?>
             </div>
-            <?php if ($user['name']) : ?>
-              <span class="gray text-sm"><?= $user['name']; ?></span>
-            <?php endif; ?>
           </a>
         </div>
       <?php endforeach; ?>

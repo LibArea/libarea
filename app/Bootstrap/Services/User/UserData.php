@@ -120,7 +120,7 @@ class UserData
      * 
      * @return integer
      */
-    public static function getUserId(): int
+    public static function getUserId(): int|null
     {
         return self::get()['id'];
     }
