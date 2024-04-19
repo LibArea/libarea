@@ -1,13 +1,13 @@
 <?php
-$user = $container->user()->get();
+
 $type = $type ?? false;
 
 foreach ($menu as $key => $item) :
 	$tl = $item['tl'] ?? 0; ?>
 	<?php if (!empty($item['hr'])) : ?>
-		<?php if ($user['id'] > 0) : ?><li class="m15"></li><?php endif; ?>
+		<?php if ($container->user()->id() > 0) : ?><li class="m15"></li><?php endif; ?>
 	<?php else : ?>
-		<?php if ($user['trust_level'] >= $tl) :
+		<?php if ($container->user()->tl() >= $tl) :
 			$css = empty($item['css']) ? false : $item['css'];
 			$isActive = $item['id'] == $type ? 'active' : false;
 			$class = ($css || $isActive) ? ' class="' . $isActive . ' ' .  $css . '"'   : ''; ?>
@@ -20,7 +20,7 @@ foreach ($menu as $key => $item) :
 		<?php endif; ?>
 	<?php endforeach; ?>
 
-	<?php if ($user['id'] > 0) : ?>
+	<?php if ($container->user()->id() > 0) : ?>
 		<?php if ($topics_user) : ?>
 			<div class="flex justify-between items-center">
 				<h4 class="mb5 ml5"><?= __('app.preferences'); ?></h3>

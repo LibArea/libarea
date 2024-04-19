@@ -1,5 +1,5 @@
-<?php 
-  $topic = $data['facet'];
+<?php
+$topic = $data['facet'];
 ?>
 <main>
   <?php if ($topic['facet_is_deleted'] == 0) : ?>
@@ -7,9 +7,9 @@
 
     <?= insert('/content/post/type-post', ['data' => $data]); ?>
 
-    <?php 
-      $sort = $container->request()->get('sort')->value(); 
-      $sort = $sort ? '&sort=' . $sort : '';
+    <?php
+    $sort = $container->request()->get('sort')->value();
+    $sort = $sort ? '&sort=' . $sort : '';
     ?>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('topic', ['slug' => $topic['facet_slug']]), '?', $sort); ?>
 
@@ -36,10 +36,10 @@
               <li class="mb10">
                 <a class="gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">
                   <?= Img::avatar($row['avatar'], $row['login'], 'img-sm', 'max'); ?>
-				  <span class="nickname<?php if (Html::loginColor($row['created_at'] ?? false)) : ?> green<?php endif; ?>">
-                    <?= $row['login']; ?> 
-			      </span>
-				  (<?= Html::formatToHuman($row['hits_count']); ?>)
+                  <span class="nickname<?php if (Html::loginColor($row['created_at'] ?? false)) : ?> green<?php endif; ?>">
+                    <?= $row['login']; ?>
+                  </span>
+                  (<?= Html::formatToHuman($row['hits_count']); ?>)
                 </a>
               </li>
             <?php endforeach; ?>

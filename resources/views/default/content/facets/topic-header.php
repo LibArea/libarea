@@ -66,7 +66,7 @@
 
 <div class="flex justify-between items-center mb20">
   <ul class="nav scroll-menu">
-    <?= insert('/_block/navigation/config/topic-nav', ['slug' => $topic['facet_slug']]); ?>  
+    <?= insert('/_block/navigation/config/topic-nav', ['slug' => $topic['facet_slug']]); ?>
   </ul>
   <div class="relative">
     <?= insert('/_block/navigation/sorting-day'); ?>

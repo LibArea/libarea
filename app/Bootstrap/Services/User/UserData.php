@@ -18,10 +18,6 @@ use Translate;
 
 class UserData
 {
-    static protected $type = null;
-
-    static protected $id = null;
-
     static protected $myAccount = null;
 
     /**
@@ -44,24 +40,32 @@ class UserData
     {
         $account = Session::get('account');
 
-        if (!empty($account['id'])) {
-
-            $user = AuthModel::getUser($account['id']);
-
-            if ($user['ban_list'] == RegType::BANNED_USER) {
-                Action::annul($user['id']);
-            }
-        } else {
-            $remember = Cookies::get('remember')->value();
+        if (empty($account['id'])) {
+		
+			$remember = Cookies::get('remember')->value();
             if ($remember ?? false) {
                 $user = Remember::check($remember);
             }
+			
+        } else {
+		
+			$user = AuthModel::getUser($account['id']);
+            if ($user['ban_list'] == RegType::BANNED_USER) {
+                Action::annul($user['id']);
+            }
+      
         }
-
+		
         $lang = $user['lang'] ?? config('general', 'lang');
         Translate::setLang($lang);
 
-        return self::$myAccount = $user ?? self::noAuth();
+		if (empty($user['id'])) {
+			return self::$myAccount = self::noAuth();
+		}
+
+		Translate::setLang($user['lang']);
+
+		return self::$myAccount = $user;
     }
 
     public static function noAuth(): array
@@ -104,6 +108,17 @@ class UserData
     }
 
     /**
+     * Returns the participant id if the user is registered.
+     * Возвращает id участника, если пользователь зарегистрирован.
+     * 
+     * @return integer
+     */
+    public static function getUserId(): int
+    {
+        return self::get()['id'];
+    }
+
+    /**
      * Returns the trust level if the user is registere.
      * Возвращает уровень доверия, если пользователь зарегистрирован.
      *
@@ -115,23 +130,12 @@ class UserData
     }
 
     /**
-     * Returns the participant id if the user is registered.
-     * Возвращает id участника, если пользователь зарегистрирован.
-     * 
-     * @return integer
-     */
-    public static function getUserId(): int|null
-    {
-        return self::get()['id'];
-    }
-
-    /**
      * Returns the member template.
      * Возвращает шаблон участника.
      * 
      * @return array
      */
-    public static function getUserTheme()
+    public static function getUserTheme(): string
     {
         return self::get()['template'];
     }
@@ -207,7 +211,7 @@ class UserData
      *
      * @return string
      */
-    public static function getUserEmail(): string
+    public static function getUserEmail(): string|false
     {
         return self::get()['email'];
     }

@@ -1,6 +1,6 @@
 <?= insert('/meta', ['meta' => $meta]); ?>
 
-<body>
+<body class="general<?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?>">
 
   <div class="box-center">
     <form action="<?= url('search.go'); ?>">

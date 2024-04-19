@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Hleb\Reference\RedirectInterface;
-
 class Msg
 {
     public static function get()

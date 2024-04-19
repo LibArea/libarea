@@ -142,7 +142,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <fieldset>
         <input type="checkbox" name="facet_is_comments" <?php if ($fs['facet_is_comments'] == 1) : ?>checked <?php endif; ?>> <?= __('app.facet_comments_disabled'); ?>
       </fieldset>
-	<?php endif; ?>
+    <?php endif; ?>
 
     <?php if ($container->user()->admin()) : ?>
       <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
