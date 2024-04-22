@@ -84,6 +84,10 @@ body.item.dark .item-categories {
 
 @media (max-width: 890px) {
 
+  .item main {
+    width: 100%;
+  }
+
   .item-categories,
   .item-cat {
     padding: 20px 20px 20px 15px;
@@ -97,5 +101,9 @@ body.item.dark .item-categories {
 
   .list-items {
     padding: 0 5px 0 0;
+  }
+  
+  .indent-body {
+    padding: 0;
   }
 }

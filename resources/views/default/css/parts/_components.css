@@ -105,7 +105,7 @@ h5 {
   height: 100%;
   position: relative;
   justify-content: space-between;
-  margin: 0 0.5rem 0 0.5rem;
+  margin: 0 0.3rem 0 0.3rem;
 }
 
 /* Search */
@@ -248,8 +248,8 @@ details[open]>summary {
 
 .box {
   border-radius: 5px;
-  padding: 1.25rem;
-  margin-bottom: 1.25rem;
+  padding: 15px;
+  margin-bottom: 20px;
   overflow-wrap: break-word;
 }
 
@@ -266,8 +266,8 @@ details[open]>summary {
   position: relative;
   flex-direction: row;
   align-items: center;
-  padding: 1.25rem;
-  margin-bottom: 1.25rem;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
 .box-center {
@@ -349,7 +349,6 @@ a:hover>img {
 }
 
 .anchor-top:target~.comment {
-  /*background-clip: content-box;*/
   background-color: lightyellow;
   padding: 5px;
 }

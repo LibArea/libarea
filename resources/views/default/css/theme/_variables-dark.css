@@ -128,3 +128,7 @@ body.dark ul.last-content a.last-content_telo {
   background-color: var(--blockquote-bg);
   border-radius: var(--border-radius);
 }
+
+body.dark .menu .bg-beige {
+  background-color: var(--form-bg-color);
+}

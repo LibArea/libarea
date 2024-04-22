@@ -203,7 +203,7 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_ZERO
 		Route::post('/login')->controller(LoginController::class)->name('authorization');
     Route::endGroup();
 
-    Route::get('/invite')->controller(InvitationsController::class, '@inviteForm')->name('invite');
+    Route::get('/invite')->controller(InvitationsController::class, 'inviteForm')->name('invite');
 	Route::get('/register')->controller(RegisterController::class, 'showRegisterForm')->name('register');
     Route::get('/register/invite/{code}')->controller(RegisterController::class, 'showInviteForm')->where(['code' => '[a-z0-9-]+'])->name('invite.reg');
     Route::get('/recover')->controller(RecoverController::class, 'showPasswordForm')->name('recover');  

@@ -4,7 +4,7 @@
   <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]);
   $grouping = $container->request()->param('grouping')->value();
   ?>
-  <div class="right"><?= insertTemplate('characteristics', ['data' => $data, 'grouping' => $grouping]); ?></div>
+  <div class="right mb-none"><?= insertTemplate('characteristics', ['data' => $data, 'grouping' => $grouping]); ?></div>
   <h1 class="m0 flex gap">
     <?= $data['category']['facet_title']; ?>
     <?php if ($container->user()->admin()) : ?>
