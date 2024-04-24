@@ -135,13 +135,13 @@ $blog = $data['blog'][0] ?? null;
             </a>
           <?php endif; ?>
 
-          <div data-a11y-dialog-show="id-share">
+          <div class="pointer" data-a11y-dialog-show="id-share">
             <svg class="icons gray-600">
               <use xlink:href="/assets/svg/icons.svg#share"></use>
             </svg>
           </div>
 
-          <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'text-2xl ml5'); ?>
+          <?= Html::favorite($post['post_id'], 'post', $post['tid']); ?>
         </div>
       </div>
 

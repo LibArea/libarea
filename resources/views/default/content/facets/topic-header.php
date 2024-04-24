@@ -48,7 +48,7 @@
       </a>
     </div>
 
-    <div data-a11y-dialog-show="id-share">
+    <div class="pointer" data-a11y-dialog-show="id-share">
       <svg class="icons gray-600">
         <use xlink:href="/assets/svg/icons.svg#share"></use>
       </svg>

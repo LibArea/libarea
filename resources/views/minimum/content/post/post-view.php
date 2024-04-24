@@ -109,7 +109,7 @@ $post = $data['post'];
             + <?= __('app.read'); ?>
           </a>
         <?php endif; ?>
-        <?= Html::favorite($post['post_id'], 'post', $post['tid'], 'text-2xl ml5'); ?>
+        <?= Html::favorite($post['post_id'], 'post', $post['tid']); ?>
       </div>
     </div>
 

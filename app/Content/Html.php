@@ -107,7 +107,7 @@ class Html
         $html = '<div class="click-no-auth gray-600"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg>' . $head . '</div>';
         if (UserData::checkActiveUser()) {
             $active = $tid ? 'active' : 'gray-600';
-            $html = '<div id="favorite_' . $content_id . '" class="add-favorite ' . $active . '" data-id="' . $content_id . '" data-type="' . $type . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg></i>' . $head . '</div>';
+            $html = '<div id="favorite_' . $content_id . '" class="add-favorite pointer ' . $active . '" data-id="' . $content_id . '" data-type="' . $type . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg></i>' . $head . '</div>';
         }
 
         return $html;

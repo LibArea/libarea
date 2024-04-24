@@ -39,7 +39,7 @@
               <div class="tems-center flex gap mt15">
                 <?= Html::votes($item, 'item'); ?>
 
-                <div data-a11y-dialog-show="id-share">
+                <div class="pointer" data-a11y-dialog-show="id-share">
                   <svg class="icons gray-600">
                     <use xlink:href="/assets/svg/icons.svg#share"></use>
                   </svg>
