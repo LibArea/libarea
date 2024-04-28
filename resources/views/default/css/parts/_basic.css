@@ -214,10 +214,6 @@ img {
   background-color: var(--yellow);
 }
 
-.bg-lightyellow {
-  background-color: lightyellow;
-}
-
 .bg-lightgray {
   background-color: var(--gray-100);
 }

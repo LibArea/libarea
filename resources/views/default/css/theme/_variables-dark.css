@@ -54,7 +54,7 @@ body.dark {
   /* Colors used */
   --black: #fff;
   --white: #161f27;
-  --yellow: #f7f7eb; /*not changed*/
+  --yellow: #2f3b4a;
   --brown: #f5caa3;
   --green: #16a34a; /*not changed*/
   --sky: #0ea5e9; /*not changed*/
@@ -62,7 +62,7 @@ body.dark {
   --red: #ef4444; /*not changed*/
   --red-200: #fecaca; /*not changed*/
   --gray: #a7a7a7;
-  --gray-100: #161f27;
+  --gray-100: #202a32;
   --gray-600: #9ca3af; /*not changed*/
   --blue: #3b82f6; /*not changed*/
   --slate: #161f27;
@@ -81,11 +81,6 @@ body.dark .EasyMDEContainer .CodeMirror {
   color: var(--form-text-color);
 }
 
-body.dark .box {
-  background-color: var(--gray-100);
-}
-
-body.dark .bg-lightyellow,
 body.dark .menu__left.menu__active .menu li {
   background-color: var(--form-bg-color);
 }
@@ -101,19 +96,10 @@ body.dark .comment {
   padding: 5px;
 }
 
-body.dark .anchor-top:target~.comment {
-  background-color: #2f3b4a;
-}
-
 body.dark .tagify {
   --tags-border-color: #555;
 }
 
 body.dark .tagify {
   background-color: var(--tagify-bg-color);
-}
-
-body.dark ul.last-content a.last-content_telo {
-  background-color: var(--blockquote-bg);
-  border-radius: var(--border-radius);
 }

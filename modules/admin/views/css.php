@@ -40,7 +40,6 @@
   <div class="box bg-violet">.box .bg-violet</div>
   <div class="box bg-lightgray">.box .bg-lightgray</div>
   <div class="box bg-beige">.box .bg-beige</div>
-  <div class="box bg-lightyellow">.box .bg-lightyellow</div>
   <div class="box bg-red-200">.box .bg-red-200</div>
   <div class="box bg-green white">.box .bg-green</div>
   <div class="box bg-black white">.box .bg-black</div>

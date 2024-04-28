@@ -190,7 +190,7 @@ blockquote {
   margin-left: 15px;
   background-color: var(--blockquote-bg);
   padding: 0.1rem 1rem;
-  border-left: 3px solid #d2d6dd;
+  border-left: 3px solid var(--gray-600);
   display: table;
 }
 
@@ -199,7 +199,7 @@ blockquote {
   max-width: 300px;
   word-wrap: break-word;
   padding: 0.1rem 1rem;
-  border-left: 3px solid #d2d6dd;
+  border-left: 3px solid var(--gray-600);
   font-size: .91rem
 }
 
@@ -210,7 +210,7 @@ blockquote {
 hr {
   border: none;
   clear: both;
-  background-color: #ddd;
+  background-color: var(--gray-100);
   height: 1px;
 }
 
@@ -251,6 +251,7 @@ details[open]>summary {
   padding: 15px;
   margin-bottom: 20px;
   overflow-wrap: break-word;
+  background-color: var(--white);
 }
 
 .box-small {
@@ -268,6 +269,7 @@ details[open]>summary {
   align-items: center;
   padding: 15px;
   margin-bottom: 20px;
+  background-color: var(--white);
 }
 
 .box-center {
@@ -306,12 +308,12 @@ ul.last-content li {
 ul.last-content a.last-content_telo {
   display: block;
   word-wrap: break-word;
-  background-color: #f8fafc;
+  background-color: var(--bg-color);
   padding: 3px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   margin-top: 5px;
-  border: 3px;
+  border-radius: var(--border-radius);
 }
 
 .uppercase-box {
@@ -349,7 +351,7 @@ a:hover>img {
 }
 
 .anchor-top:target~.comment {
-  background-color: lightyellow;
+  background-color: var(--yellow);
   padding: 5px;
 }
 

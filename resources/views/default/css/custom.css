@@ -15,12 +15,6 @@ body {
   font-family: Roboto, -apple-system,BlinkMacSystemFont,Arial,sans-serif;
 } */
 
-.box,
-.box-flex,
-.indent-body {
-  background-color: var(--white);
-}
-
 .nickname {
   display: inline-block;
 }
@@ -31,6 +25,7 @@ body {
 
 .indent-body {
   padding: 15px;
+  background-color: var(--white);
 }
 
 .active {

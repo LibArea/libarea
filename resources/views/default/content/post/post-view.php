@@ -8,7 +8,7 @@ $blog = $data['blog'][0] ?? null;
   <article class="indent-body<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
     <?php if ($post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
       <?php if (!empty($data['united'])) : ?>
-        <div class="box bg-lightyellow mb15 gray-600">
+        <div class="box bg-yellow mb15 gray-600">
           <svg class="icons">
             <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
           </svg>
