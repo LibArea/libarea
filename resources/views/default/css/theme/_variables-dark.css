@@ -25,7 +25,7 @@ body.dark {
   --border-radius: 3px;
 
   --button-text-color: #bfcad3;
-  --button-bg-color: #1e2226;
+  --button-bg-color: #202a34;
   --button-border-color: #1e2226;
   --button-border-color-hover: #ddd;
 
@@ -54,10 +54,20 @@ body.dark {
   /* Colors used */
   --black: #fff;
   --white: #161f27;
+  --yellow: #f7f7eb; /*not changed*/
+  --brown: #f5caa3;
+  --green: #16a34a; /*not changed*/
+  --sky: #0ea5e9; /*not changed*/
+  --violet: #313e49;
+  --red: #ef4444; /*not changed*/
+  --red-200: #fecaca; /*not changed*/
   --gray: #a7a7a7;
   --gray-100: #161f27;
-  --violet: #161f27;
-  --slate-100: #161f27;
+  --gray-600: #9ca3af; /*not changed*/
+  --blue: #3b82f6; /*not changed*/
+  --slate: #161f27;
+  --beige: #283541;
+  
 
   /* Tagify */
   --tagify-bg-color: #283541;
@@ -91,27 +101,6 @@ body.dark .comment {
   padding: 5px;
 }
 
-body.dark blockquote {
-  background-color: var(--blockquote-bg);
-  border-left: 3px solid #6d6e6f;
-}
-
-body.dark code {
-  color: #f5f2f0;
-  background-color: var(--blockquote-bg);
-}
-
-body.dark :not(pre)>code[class*=language-],
-body.dark pre[class*=language-] {
-  background: var(--blockquote-bg);
-}
-
-body.dark code[class*=language-],
-body.dark pre[class*=language-] {
-  color: #eee;
-  text-shadow: none;
-}
-
 body.dark .anchor-top:target~.comment {
   background-color: #2f3b4a;
 }
@@ -127,8 +116,4 @@ body.dark .tagify {
 body.dark ul.last-content a.last-content_telo {
   background-color: var(--blockquote-bg);
   border-radius: var(--border-radius);
-}
-
-body.dark .menu .bg-beige {
-  background-color: var(--form-bg-color);
 }
