@@ -51,7 +51,7 @@ foreach ($menu as $key => $item) :
 			<li class="mt15 flex gap items-center justify-between">
 				<a class="flex gap-min items-center" href="<?= $url; ?>">
 					<?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-sm', 'logo', 'max'); ?>
-					<span class="middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
+					<?= $topic['facet_title']; ?> <?= $blog; ?>
 				</a>
 			</li>
 		<?php endforeach; ?>

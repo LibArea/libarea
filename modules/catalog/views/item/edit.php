@@ -75,4 +75,6 @@ $domain = $data['domain']; ?>
   </aside>
 </div>
 
+<script src="/assets/js/catalog.js"></script>
+
 <?= insertTemplate('footer'); ?>

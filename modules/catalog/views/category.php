@@ -41,12 +41,10 @@
         <?php endif; ?>
       </div>
     <?php endforeach; ?>
-  </div>
 
-  <?php if ($data['low_matching']) : ?>
-    <div class="ml20 mb20 mb-block wrap">
+    <?php if ($data['low_matching']) : ?>
       <?php foreach ($data['low_matching'] as $rl) : ?>
-        <div class="inline mr20">
+        <div>
           <a class="text-2xl ml10" href="<?= url('category', ['sort' => $data['sort'], 'slug' => $rl['facet_slug']]); ?>">
             @<?= $rl['facet_title']; ?>
           </a>
@@ -58,8 +56,8 @@
           <?php endif; ?>
         </div>
       <?php endforeach; ?>
-    </div>
-  <?php endif; ?>
+    <?php endif; ?>
+  </div>
 
 <?php else : ?>
 

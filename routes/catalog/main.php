@@ -54,9 +54,9 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::REGISTERE
 Route::endGroup();
 
 Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRST_LEVEL, '>=']);
-	Route::get('/web/favicon/add')->module('catalog', ImgController::class, 'favicon');
-	Route::get('/web/screenshot/add')->module('catalog', ImgController::class, 'screenshot');
-	Route::get('/web/status/update')->module('catalog', AdminController::class, 'updateStatus');
+	Route::post('/web/favicon/add')->module('catalog', ImgController::class, 'favicon');
+	Route::post('/web/screenshot/add')->module('catalog', ImgController::class, 'screenshot');
+	Route::post('/web/status/update')->module('catalog', AdminController::class, 'updateStatus');
 	Route::get('/web/bookmarks')->module('catalog', UserAreaController::class, 'bookmarks')->name('web.bookmarks');
 	Route::get('/web/my')->module('catalog', UserAreaController::class)->name('web.user.sites');
 Route::endGroup();
