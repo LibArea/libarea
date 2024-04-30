@@ -16,45 +16,47 @@ $post   = $data['post'] ?? false;
     <div class="wrap">
       <div class="d-header_contents">
 
-        <div class="box-logo">
-          <svg id="togglemenu" class="icons pointer">
-            <use xlink:href="/assets/svg/icons.svg#menu"></use>
-          </svg>
+        <div class="flex flex-auto">
+          <div class="box-logo">
+            <svg id="togglemenu" class="icons pointer">
+              <use xlink:href="/assets/svg/icons.svg#menu"></use>
+            </svg>
 
-          <svg class="icons menu__button none">
-            <use xlink:href="/assets/svg/icons.svg#menu"></use>
-          </svg>
+            <svg class="icons menu__button none">
+              <use xlink:href="/assets/svg/icons.svg#menu"></use>
+            </svg>
 
-          <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
-        </div>
-
-        <?php if ($post) : ?>
-          <div class="d-header-post none">
-            <span class="v-line mb-none"></span>
-            <a class="mb-none" href="<?= post_slug($post['post_id'], $post['post_slug']) ?>">
-              <?= $data['post']['post_title'] ?>
-            </a>
+            <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
           </div>
-        <?php endif; ?>
 
-        <?php
-        $facetIcon = $facet == 'topic' ? $facet : false;
-        if ($facetIcon) : ?>
-          <div class="d-header-facet none">
-            <span class="v-line mb-none"></span>
-            <a class="mb-none" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]) ?>">
-              <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-base mr15', 'logo', 'max'); ?>
-              <?= $facet['facet_title']; ?>
-            </a>
-            <span class="gray-600 text-sm lowercase mb-none"> - <?= $facet['facet_short_description']; ?></span>
+          <?php if ($post) : ?>
+            <div class="d-header-post none">
+              <span class="v-line mb-none"></span>
+              <a class="mb-none" href="<?= post_slug($post['post_id'], $post['post_slug']) ?>">
+                <?= $data['post']['post_title'] ?>
+              </a>
+            </div>
+          <?php endif; ?>
+
+          <?php
+          $facetIcon = $facet == 'topic' ? $facet : false;
+          if ($facetIcon) : ?>
+            <div class="d-header-facet none">
+              <span class="v-line mb-none"></span>
+              <a class="mb-none" href="<?= url($facet['facet_type'], ['slug' => $facet['facet_slug']]) ?>">
+                <?= Img::image($facet['facet_img'], $facet['facet_title'], 'img-base mr15', 'logo', 'max'); ?>
+                <?= $facet['facet_title']; ?>
+              </a>
+              <span class="gray-600 text-sm lowercase mb-none"> - <?= $facet['facet_short_description']; ?></span>
+            </div>
+          <?php endif; ?>
+
+          <div class="box-search mb-none">
+            <form class="form" method="get" action="<?= url('search.go'); ?>">
+              <input data-id="topic" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
+            </form>
+            <div class="box-results none" id="search_items"></div>
           </div>
-        <?php endif; ?>
-
-        <div class="box-search mb-none">
-          <form class="form" method="get" action="<?= url('search.go'); ?>">
-            <input data-id="topic" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
-          </form>
-          <div class="box-results none" id="search_items"></div>
         </div>
 
         <?php if (!$container->user()->active()) : ?>
@@ -65,11 +67,11 @@ $post   = $data['post'] ?? false;
               </svg>
             </div>
             <?php if (config('general', 'invite') == false) : ?>
-              <a class="gray min-w75 center mb-none block" href="<?= url('register'); ?>">
+              <a class="gray center mb-none block" href="<?= url('register'); ?>">
                 <?= __('app.registration'); ?>
               </a>
             <?php endif; ?>
-            <a class="btn btn-outline-primary min-w75" href="<?= url('login'); ?>">
+            <a class="btn btn-outline-primary" href="<?= url('login'); ?>">
               <?= __('app.sign_in'); ?>
             </a>
           </div>

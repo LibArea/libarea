@@ -351,10 +351,6 @@ li.br-li-bottom-no:last-child {
   max-width: 300px;
 }
 
-.min-w75 {
-  min-width: 75px;
-}
-
 .text-xs {
   font-size: 0.75rem;
 }

@@ -11,17 +11,19 @@ $q = $data['q'];
     <div class="wrap">
       <div class="d-header_contents">
 
-        <div class="box-logo">
-          <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
-        </div>
+        <div class="flex flex-auto">
+          <div class="box-logo">
+            <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
+          </div>
 
-        <div class="box-search">
-          <form method="get" action="<?= url('search.go'); ?>">
-            <input type="text" name="q" value="<?= $q; ?>" placeholder="<?= __('search.find'); ?>" class="search">
-            <input name="cat" value="<?= $uri; ?>" type="hidden">
-            <?= $container->csrf()->field(); ?>
-          </form>
-          <div class="box-results none" id="search_items"></div>
+          <div class="box-search">
+            <form method="get" action="<?= url('search.go'); ?>">
+              <input type="text" name="q" value="<?= $q; ?>" placeholder="<?= __('search.find'); ?>" class="search">
+              <input name="cat" value="<?= $uri; ?>" type="hidden">
+              <?= $container->csrf()->field(); ?>
+            </form>
+            <div class="box-results none" id="search_items"></div>
+          </div>
         </div>
 
         <?php if (!$container->user()->active()) : ?>
@@ -32,11 +34,11 @@ $q = $data['q'];
               </svg>
             </div>
             <?php if (config('general', 'invite') == false) : ?>
-              <a class="gray min-w75 center mb-none block" href="<?= url('register'); ?>">
+              <a class="gray center mb-none block" href="<?= url('register'); ?>">
                 <?= __('app.registration'); ?>
               </a>
             <?php endif; ?>
-            <a class="btn btn-outline-primary min-w75" href="<?= url('login'); ?>">
+            <a class="btn btn-outline-primary" href="<?= url('login'); ?>">
               <?= __('app.sign_in'); ?>
             </a>
           </div>

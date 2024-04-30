@@ -25,11 +25,11 @@ $facet  = $data['facet'] ?? false; ?>
             </svg>
           </div>
           <?php if (config('general', 'invite') == false) : ?>
-            <a class="gray min-w75 center block" href="<?= url('register'); ?>">
+            <a class="gray center block" href="<?= url('register'); ?>">
               <?= __('app.registration'); ?>
             </a>
           <?php endif; ?>
-          <a class="btn min-w75 btn-outline-primary" href="<?= url('login'); ?>">
+          <a class="btn btn-outline-primary" href="<?= url('login'); ?>">
             <?= __('app.sign_in'); ?>
           </a>
         </div>

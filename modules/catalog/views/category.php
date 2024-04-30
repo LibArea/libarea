@@ -36,7 +36,7 @@
           <a class="ml5 gray-600" href="<?= url('facet.form.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
             <sup><svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#edit"></use>
-              </svg></i>
+              </svg></sup>
           </a>
         <?php endif; ?>
       </div>
@@ -52,6 +52,7 @@
             <a class="text-sm ml5" href="<?= url('facet.form.edit', ['type' => 'category', 'id' => $rl['facet_id']]); ?>">
               <sup class="gray-600"><svg class="icons">
                   <use xlink:href="/assets/svg/icons.svg#edit"></use>
+				</svg></sup>   
             </a>
           <?php endif; ?>
         </div>

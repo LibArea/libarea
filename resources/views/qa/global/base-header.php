@@ -7,7 +7,7 @@ $facet  = $data['facet'] ?? false; ?>
 <body <?php if ($container->cookies()->get('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
 
   <header class="bg-white mb10">
-    <div class="br-bottom wrap mb10 mb-none items-center flex gap">
+    <div class="br-bottom wrap mb-none items-center flex gap mb5">
       <a class="p5 black text-xs" href="/topics">
         <svg class="icons icon-small">
           <use xlink:href="/assets/svg/icons.svg#hash"></use>
@@ -50,11 +50,11 @@ $facet  = $data['facet'] ?? false; ?>
             </svg>
           </div>
           <?php if (config('general', 'invite') == false) : ?>
-            <a class="gray min-w75 center block" href="<?= url('register'); ?>">
+            <a class="gray center block" href="<?= url('register'); ?>">
               <?= __('app.registration'); ?>
             </a>
           <?php endif; ?>
-          <a class="btn min-w75 btn-outline-primary" href="<?= url('login'); ?>">
+          <a class="btn btn-outline-primary" href="<?= url('login'); ?>">
             <?= __('app.sign_in'); ?>
           </a>
         </div>
@@ -78,7 +78,7 @@ $facet  = $data['facet'] ?? false; ?>
             </a>
 
             <div class="relative">
-              <div class="trigger">
+              <div class="trigger mb5">
                 <?= Img::avatar($container->user()->avatar(), $container->user()->login(), 'img-base', 'small'); ?>
               </div>
               <ul class="dropdown user">

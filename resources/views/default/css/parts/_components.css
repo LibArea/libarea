@@ -120,8 +120,7 @@ h5 {
 
 .box-search {
   position: relative;
-  width: 63%;
-  margin: 10px 45px 10px 0;
+  width: 55%;
 }
 
 .box-results {
@@ -157,7 +156,7 @@ h5 {
 }
 
 .box-logo {
-  width: 209px;
+  width: 222px;
   align-items: center;
   display: flex;
   gap: 0.5rem;
