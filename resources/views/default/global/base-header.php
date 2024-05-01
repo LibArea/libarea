@@ -39,7 +39,8 @@ $post   = $data['post'] ?? false;
           <?php endif; ?>
 
           <?php
-          $facetIcon = $facet == 'topic' ? $facet : false;
+		  $facet_type = $facet['facet_type'] ?? false;
+          $facetIcon = $facet_type == 'topic' ? $facet : false;
           if ($facetIcon) : ?>
             <div class="d-header-facet none">
               <span class="v-line mb-none"></span>
