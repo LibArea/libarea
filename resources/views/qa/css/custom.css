@@ -3,8 +3,10 @@
  *
  * Дополнительные стили
  */
- 
-main { width: calc(100% - 220px); }
+
+main {
+  width: calc(100% - 220px);
+}
 
 .box-answer {
   line-height: 1.3;
@@ -18,9 +20,12 @@ main { width: calc(100% - 220px); }
 }
 
 @media (max-width: 1050px) {
-  main { width: 100%; }
+  main {
+    width: 100%;
+  }
+
   .wrap {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
-}  
+}

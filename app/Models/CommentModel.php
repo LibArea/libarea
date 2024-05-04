@@ -283,6 +283,20 @@ class CommentModel extends Model
     }
 
     /**
+     * Let's check if the participant has a response (in the comments) to the post.
+     * Проверим, есть ли ответ участника (в комментариях) на пост.
+     *
+     * @param integer $post_id
+     * @return boolean
+     */
+    public static function isAnswerUser(int $post_id)
+    {
+        $sql = "SELECT comment_id FROM comments WHERE comment_parent_id = 0 AND comment_post_id = :post_id AND comment_user_id = :user_id";
+
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => self::container()->user()->id()])->fetch();
+    }
+
+    /**
      * User responses
      * Ответы участника
      *

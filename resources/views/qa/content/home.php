@@ -55,7 +55,7 @@
   <div class="sticky top-sm">
     <?= insert('/_block/latest-comments-tabs', ['latest_comments' => $data['latest_comments']]); ?>
 
-    <?php if (U$container->user()->scroll()) : ?>
+    <?php if ($container->user()->scroll()) : ?>
       <?= insert('/global/sidebar-footer'); ?>
     <?php endif; ?>
   </div>

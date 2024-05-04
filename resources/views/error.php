@@ -1,4 +1,5 @@
 <?php
+
 /**
  * HTML template for the HTTP GET method error page.
  *
@@ -9,15 +10,18 @@
  * @var $apiVersion int
  * @var $uriPrefix string
  */
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width" />
-    <meta name="robots" content="noindex, noarchive" />
-    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
-    <title><?= $httpCode . '. ' . $message ?></title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width" />
+  <meta name="robots" content="noindex, noarchive" />
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+  <title><?= $httpCode . '. ' . $message ?></title>
 </head>
+
 <body class="body-bg-fon mt30">
 
   <main class="max-w780 mr-auto box">
@@ -31,4 +35,5 @@
 </body>
 
 </body>
+
 </html>

@@ -76,7 +76,7 @@ class Meta
             'imgurl'    => config('meta', 'img_path'),
             'url'       => $url,
         ];
-
+		
         return self::get(config('meta', $sheet . '_title'), config('meta',  $sheet . '_desc'), $meta);
     }
 

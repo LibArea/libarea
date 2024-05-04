@@ -3,7 +3,7 @@
  *
  * Дополнительные стили
  */
- 
+
 body {
   max-width: 1080px;
   padding-bottom: 2em;
@@ -11,7 +11,9 @@ body {
   margin: 0 auto;
 }
 
-main { width: 100%; }
+main {
+  width: 100%;
+}
 
 .text-header {
   top: 0;
@@ -43,7 +45,18 @@ main { width: 100%; }
   font-size: 18px;
 }
 
-.logo:hover { color: var(--gray-600); }
-.mt3 { margin-top: 3px; }
-.pt20 { padding-top: 20px; }
-.no-flex > div.flex { display: block; }
+.logo:hover {
+  color: var(--gray-600);
+}
+
+.mt3 {
+  margin-top: 3px;
+}
+
+.pt20 {
+  padding-top: 20px;
+}
+
+.no-flex>div.flex {
+  display: block;
+}

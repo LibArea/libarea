@@ -56,7 +56,6 @@ class HomeController extends Controller
             $signed[$ind] = $row['facet_id'];
         }
 
-
         return render(
             'home',
             [

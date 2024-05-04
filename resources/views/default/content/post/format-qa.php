@@ -21,9 +21,6 @@
             <div title="<?= __('app.best_answer'); ?>" class="red right text-2xl p5">✓</div>
           <?php endif; ?>
 
-          <?php // не работает...
-		  if ($container->user()->id() == $node['comment_user_id']) { ?> <?php $otvet = 1; ?><?php } ?>
-
             <ol class="list-none">
               <li class="comment">
                 <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
@@ -87,7 +84,7 @@
   <?php endif; ?>
 <?php endif; ?>
 
-<?php if (!empty($otvet)) : ?>
+<?php if ($data['is_answer']) : ?>
   <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.you_answered'), 'icon' => 'info']); ?>
 <?php else : ?>
   <?php if ($container->user()->active()) : ?>

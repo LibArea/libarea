@@ -94,6 +94,7 @@ class PostController extends Controller
                         'sheet'         => 'article',
                         'type'          => 'post',
                         'poll'          => $this->getPoll($content['post_poll']),
+                        'is_answer'     => CommentModel::isAnswerUser($content['post_id']),
                     ]
                 ]
             );
