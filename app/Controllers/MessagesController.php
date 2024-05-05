@@ -156,7 +156,7 @@ class MessagesController extends Controller
     public function add()
     {
         $content        = $_POST['content']; // для Markdown
-        $recipient_id   = Request::post('recipient')->value();
+        $recipient_id   = Request::post('recipient')->asInt();
 
         $this->limitTl();
 

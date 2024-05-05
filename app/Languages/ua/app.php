@@ -411,6 +411,7 @@ return [
     'endless_scroll'        => 'Увімкнути скролл у стрічці?',
     'notification_email'    => 'Повідомляти по E-mail',
     'notifications_limit'   => 'Показано останні 100 повідомлень',
+	'notifications_page'   	=> 'Усі сповіщення',
 
     'ignore'                => 'Нехтувати',
     'ignored'               => 'Ігноровані',

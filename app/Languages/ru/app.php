@@ -412,6 +412,7 @@ return [
     'endless_scroll'        => 'Включить скролл в ленте?',
     'notification_email'    => 'Уведомлять по E-mail',
     'notifications_limit'   => 'Показаны последние 100 уведомлений',
+    'notifications_page'   	=> 'Все уведомления',
 
     'ignore'                => 'Игнорировать',
     'ignored'               => 'Игнорированные',

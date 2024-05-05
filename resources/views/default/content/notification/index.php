@@ -1,9 +1,9 @@
 <main>
   <div class="box-flex bg-violet justify-between">
     <?= __('app.notifications'); ?>
-    <form action="<?= url('notif.remove'); ?>" class="right">
+    <a href="<?= url('notif.remove'); ?>" class="right">
       <?= Html::sumbit(__('app.i_read')); ?>
-    </form>
+    </a>
   </div>
 
   <div class="bg-white mb15">

@@ -140,6 +140,10 @@ main {
     gap: 1.5rem;
   }
 
+  .dropdown.notif {
+	min-width: 265px;
+  }
+
   .mb-img-2xl {
     height: 65px;
     width: 65px;
@@ -177,6 +181,10 @@ main {
     padding: 1rem;
     border-radius: 0;
   }
+  
+  .box-logo {
+    width: auto;
+  }  
 
   aside,
   .mb-none,

@@ -39,7 +39,7 @@ $post   = $data['post'] ?? false;
           <?php endif; ?>
 
           <?php
-		  $facet_type = $facet['facet_type'] ?? false;
+          $facet_type = $facet['facet_type'] ?? false;
           $facetIcon = $facet_type == 'topic' ? $facet : false;
           if ($facetIcon) : ?>
             <div class="d-header-facet none">
@@ -85,12 +85,15 @@ $post   = $data['post'] ?? false;
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg></a>
 
-            <a id="notif" class="gray-600 relative" href="<?= url('notifications'); ?>">
-              <svg class="icons">
-                <use xlink:href="/assets/svg/icons.svg#bell"></use>
-              </svg>
-              <span class="number-notif"></span>
-            </a>
+            <div class="relative">
+              <div id="el_notif" class="none"></div>
+              <a id="notif" class="add-notif gray-600 relative">
+                <svg class="icons">
+                  <use xlink:href="/assets/svg/icons.svg#bell"></use>
+                </svg>
+                <span class="number-notif"></span>
+              </a>
+            </div>
 
             <div class="relative">
               <div class="trigger pointer">

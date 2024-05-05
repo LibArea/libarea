@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Hleb\Base\Model;
@@ -47,8 +49,15 @@ class NotificationModel extends Model
     const WEBSITE_APPROVED          = 32; // approved
     const TYPE_ADD_REPLY_WEBSITE    = 34; // replica added to the site
 
-    // Лист уведомлений
-    public static function listNotification($user_id)
+    /**
+     * Notification sheet
+     * Лист уведомлений
+     *
+     * @param integer $user_id
+     * @param integer $limit
+     * @return void
+     */
+    public static function listNotification(int $user_id, int $limit = 100)
     {
         $sql = "SELECT
                     n.id as notif_id,
@@ -65,13 +74,12 @@ class NotificationModel extends Model
                         FROM notifications n
                         JOIN users u ON u.id = n.sender_id
                             WHERE n.recipient_id = :user_id
-                                ORDER BY n.id DESC LIMIT 100";
+                                ORDER BY n.id DESC LIMIT :limit";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll();
+        return DB::run($sql, ['user_id' => $user_id, 'limit' => $limit])->fetchAll();
     }
 
-    // Уведомления
-    public static function get($user_id)
+    public static function get(int $user_id)
     {
         $sql = "SELECT
                     recipient_id,
@@ -84,8 +92,16 @@ class NotificationModel extends Model
         return DB::run($sql, ['user_id' => $user_id])->fetchAll();
     }
 
-    // Отправка
-    public static function send($recipient_id, $action_type, $url)
+    /**
+     * Sending notifications
+     * Отправка уведомлений
+     *
+     * @param integer $recipient_id
+     * @param integer $action_type
+     * @param string $url
+     * @return void
+     */
+    public static function send(int $recipient_id, int $action_type, string $url)
     {
         $params = [
             'sender_id'    => self::container()->user()->id(),
@@ -106,9 +122,14 @@ class NotificationModel extends Model
         return DB::run($sql, $params);
     }
 
-    // Notification viewed (change flag)
-    // Оповещение просмотрено (меняем флаг)
-    public static function updateMessagesUnread($notif_id)
+    /**
+     * Notification viewed (change flag)
+     * Оповещение просмотрено (меняем флаг)
+     *
+     * @param integer $notif_id
+     * @return void
+     */
+    public static function updateMessagesUnread(int $notif_id)
     {
         $info = self::getNotification($notif_id);
 
@@ -124,7 +145,7 @@ class NotificationModel extends Model
         return DB::run($sql, ['user_id' => self::container()->user()->id(), 'notif_id' => $notif_id]);
     }
 
-    public static function getNotification($id)
+    public static function getNotification(int $id)
     {
         $sql = "SELECT
                     id,

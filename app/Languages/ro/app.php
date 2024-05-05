@@ -411,6 +411,7 @@ return [
     'endless_scroll'        => 'Activați derularea infinită?',
     'notification_email'    => 'Notificare prin e-mail',
     'notifications_limit'   => 'Se afișează ultimele 100 de notificări',
+    'notifications_page'   	=> 'Toate notificările',
 
     'ignore'                => 'Ignora',
     'ignored'               => 'Ignorat',

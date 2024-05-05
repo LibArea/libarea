@@ -18,8 +18,8 @@
   
   <meta name="csrf-token" content="<?= csrf_token(); ?>">
   
-  <link rel="stylesheet" href="/assets/css/style.css?<?= config('assembly-js-css', 'version'); ?>" type="text/css">
-  <link rel="stylesheet" href="/assets/css/qa.css?<?= config('assembly-js-css', 'version'); ?>" type="text/css">
+  <link rel="stylesheet" href="/assets/css/style.css?<?= config('general', 'version'); ?>" type="text/css">
+  <link rel="stylesheet" href="/assets/css/qa.css?<?= config('general', 'version'); ?>" type="text/css">
 
   <?php if ($lang == 'ar') : ?>
     <link rel="stylesheet" href="/assets/css/rtl.css" type="text/css">

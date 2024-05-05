@@ -412,6 +412,7 @@ return [
     'endless_scroll'        => '在feed中启用滚动？',
     'notification_email'    => '以电邮通知',
     'notifications_limit'   => '最后100个通知显示',
+	'notifications_page'   	=> '所有通知',
 
     'ignore'                => '忽略',
     'ignored'               => '忽略',

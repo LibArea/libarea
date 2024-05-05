@@ -66,13 +66,14 @@ class Img
     {
         $path = ($type == 'thumb') ? self::PATH['thumbs'] : self::PATH['favicons'];
         $itemprop = ($type == 'thumb') ? 'itemprop="image"' : '';
-        $imgPath = HLEB_PUBLIC_DIR . $path . $host . '.png';
+		$img = $path . $host . '.png';
+        $imgPath = HLEB_PUBLIC_DIR . $img;
 
         if (file_exists($imgPath)) {
-            return '<img ' . $itemprop . ' class="' . $css . '" src="' . $imgPath . '" title="' . $host . '" alt="' . $host . '">';
+            return '<img ' . $itemprop . ' class="' . $css . '" src="' . $img . '" title="' . $host . '" alt="' . $host . '">';
         }
 
-        return '<img class="mr5 ' . $css . '" src="' . $path . 'no-link.png" title="' . $host . '" alt="' . $host . '">';
+        return '<img class="mr5 ' . $css . '" src="' . config('meta', 'url') . $path . 'no-link.png" title="' . $host . '" alt="' . $host . '">';
     }
 
     /**

@@ -7,7 +7,12 @@ use Hleb\Static\DB;
 
 class MessagesModel extends Model
 {
-    // All dialogs
+    /**
+     * All dialogs
+     * Все диалоги
+     *
+     * @return void
+     */
     public static function getMessages()
     {
         $user_id = self::container()->user()->id();
@@ -28,7 +33,13 @@ class MessagesModel extends Model
         return DB::run($sql)->fetchAll();
     }
 
-    // Check if the dialog exists or not
+    /**
+     * Check if the dialog exists or not
+     * Проверим, существует ли диалог или нет
+     *
+     * @param integer $user_id
+     * @return void
+     */
     public static function availability(int $user_id)
     {
         $id = self::container()->user()->id();
@@ -39,7 +50,13 @@ class MessagesModel extends Model
         return DB::run($sql)->fetch();
     }
 
-    // We get a dialog by id
+    /**
+     * We get a dialog by id
+     * Получаем диалог по id
+     *
+     * @param integer $dialog_id
+     * @return void
+     */
     public static function getDialogById(int $dialog_id)
     {
         $sql = "SELECT  
@@ -98,7 +115,13 @@ class MessagesModel extends Model
         return DB::run("SELECT message_content, message_sender_id, message_dialog_id FROM messages WHERE message_id = ?", [$id])->fetch();
     }
 
-    // Последнее сообщение в диалоге
+    /**
+     * Last message in the conversation
+     * Последнее сообщение в диалоге
+     *
+     * @param integer $dialog_id
+     * @return void
+     */
     public static function getMessageOne(int $dialog_id)
     {
         $sql = "SELECT  
@@ -144,7 +167,14 @@ class MessagesModel extends Model
         return $message;
     }
 
-    // Записываем личное сообщение
+    /**
+     * Recording a personal message
+     * Записываем личное сообщение
+     *
+     * @param [type] $dialog_recipient_id
+     * @param [type] $message_content
+     * @return void
+     */
     public static function sendMessage($dialog_recipient_id, $message_content)
     {
         $dialog_sender_id = self::container()->user()->id();
@@ -184,8 +214,14 @@ class MessagesModel extends Model
         return $messages_dialog_id;
     }
 
-    // Creating a dialog
-    public static function createDialog($params)
+    /**
+     * Creating a dialog
+     * Создание диалога
+     *
+     * @param array $params
+     * @return void
+     */
+    public static function createDialog(array $params)
     {
         $sql = "INSERT INTO messages_dialog(dialog_sender_id, 
                                         dialog_sender_unread, 
@@ -208,17 +244,28 @@ class MessagesModel extends Model
         return $sql_last_id['last_id'];
     }
 
-
-    // Creating a message
-    public static function createMessage($params)
+    /**
+     * Creating a message
+     * Создание сообщения
+     *
+     * @param array $params
+     * @return void
+     */
+    public static function createMessage(array $params)
     {
         $sql = "INSERT INTO messages(message_dialog_id, message_content, message_sender_id) VALUES(:message_dialog_id, :message_content, :message_sender_id)";
 
         DB::run($sql, $params);
     }
 
-
-    // Changing the number of messages
+    /**
+     * Changing the number of messages
+     * Изменение количества сообщений
+     *
+     * @param integer $dialog_id
+     * @param integer $user_id
+     * @return void
+     */
     public static function updateDialogCount(int $dialog_id, int $user_id)
     {
         if (!$inbox_dialog = self::getDialogById($dialog_id)) {
@@ -265,7 +312,14 @@ class MessagesModel extends Model
         }
     }
 
-    // User Information
+    /**
+     * Receiving data from a dialogue
+     * Получение данных по диалогу
+     *
+     * @param integer $dialog_sender_id
+     * @param integer $dialog_recipient_id
+     * @return void
+     */
     public static function getDialogByUser(int $dialog_sender_id, int $dialog_recipient_id)
     {
         $sql = "SELECT  
@@ -287,7 +341,15 @@ class MessagesModel extends Model
         return DB::run($sql)->fetch();
     }
 
-    public static function edit($id, $content)
+    /**
+     * Editing
+     * Редактирование
+     *
+     * @param integer $id
+     * @param string $content
+     * @return void
+     */
+    public static function edit(int $id, string $content)
     {
         DB::run("UPDATE messages SET message_content = :content, message_modified = :modified WHERE message_id = :id", ['content' => $content, 'modified' => date("Y-m-d H:i:s"), 'id' => $id]);
     }

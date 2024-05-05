@@ -411,6 +411,7 @@ return [
     'endless_scroll'        => 'تفعيل التمرير الى لا نهاية؟',
     'notification_email'    => 'تنبيه بواسطة البريد الالكتروني',
     'notifications_limit'   => 'اظهار 100 اشعار على الاقل',
+	'notifications_page'   	=> 'جميع الإخطارات',
 
     'ignore'                => 'يتجاهل',
     'ignored'               => 'تم تجاهلهم',

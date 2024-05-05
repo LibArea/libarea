@@ -412,6 +412,7 @@ return [
     'endless_scroll'        => '启用无限滚动？',
     'notification_email'    => '通过邮件通知',
     'notifications_limit'   => '显示最后100条通知',
+	'notifications_page'   	=> '所有通知',
 
     'ignore'                => '忽略',
     'ignored'               => '忽略',

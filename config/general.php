@@ -40,6 +40,9 @@ return [
         'vi'        => 'Tiếng Việt',
     ],
 
+    // To force an update (css)
+    'version'     	=> 21,
+
     // Set to True to format Q&A posts (discussion option will be hidden)
     // Установить на True чтобы сделать формат постов Q&A (дискуссионный вариант будет скрыт)
     'qa_site_format'    => false,

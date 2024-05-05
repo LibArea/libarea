@@ -48,7 +48,7 @@ class NotificationController extends Controller
     {
         NotificationModel::setRemove();
 
-        redirect(url('notifications'));
+        redirect(Request::getHeaders()['referer'][0]);
     }
 
     public function get()
@@ -89,5 +89,17 @@ class NotificationController extends Controller
         }
 
         return true;
+    }
+	
+    public function addForma()
+    {
+        insert(
+            '/content/notification/notif-model',
+            [
+                'data'  => [
+                    'notifications'    => NotificationModel::listNotification($this->container->user()->id(), 8),
+                ]
+            ]
+        );
     }
 }

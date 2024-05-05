@@ -413,6 +413,7 @@ return [
     'endless_scroll'        => 'Enable infinite scroll?',
     'notification_email'    => 'Notify by email',
     'notifications_limit'   => 'Showing last 100 notifications',
+    'notifications_page'   	=> 'All notifications',
 
     'ignore'                => 'Ignore',
     'ignored'               => 'Ignored',

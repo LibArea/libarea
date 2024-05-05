@@ -215,7 +215,7 @@ Route::endGroup();
 Route::toGroup()->protect();
     Route::post('/activatingform/addcomment')->controller(AddCommentController::class);
 	Route::post('/activatingform/editmessage')->controller(MessagesController::class, 'addForma');
-	 
+	Route::post('/activatingnatifpopup')->controller(NotificationController::class, 'addForma'); 
 Route::endGroup();	
 
 Route::post('/search/api')->controller(SearchController::class, 'api');

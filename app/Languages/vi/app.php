@@ -411,6 +411,7 @@ return [
     'endless_scroll'        => 'Cho phép cuộn trong nguồn cấp dữ liệu?',
     'notification_email'    => 'Thông báo qua email',
     'notifications_limit'   => 'Hiển thị 100 thông báo gần đây nhất',
+	'notifications_page'   	=> 'Tất cả thông báo',
 
     'ignore'                => 'Phớt lờ',
     'ignored'               => 'Làm ngơ',

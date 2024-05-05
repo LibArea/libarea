@@ -56,9 +56,6 @@ return [
 	 * Css и JS
 	 */
 	
-    // To force an update
-    'version'     => 108,
-
     // Path to svg sprite
     // Путь к спрайту svg
     'svg_path'  => '/assets/svg/icons.svg',

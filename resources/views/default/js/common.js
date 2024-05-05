@@ -38,6 +38,29 @@ document.querySelectorAll(".activ-form").forEach(element => {
   });
 });
 
+
+// Activate form event listeners
+document.querySelectorAll(".add-notif").forEach(element => {
+  element.addEventListener("click", function () {
+    let notif = document.querySelector('#el_notif');
+    fetch("/activatingnatifpopup", {
+      method: "POST",
+      body: "id=" + element.dataset.id + "&_token=" + token,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then(response => response.text())
+      .then(text => {
+        notif.classList.add("block");
+        notif.innerHTML = text;
+        document.querySelectorAll("#cancel").forEach(cancelButton => {
+          cancelButton.addEventListener("click", function () {
+            notif.classList.remove("block");
+          });
+        });
+      });
+  });
+});
+
 // Toggle dark mode
 isIdEmpty('toggledark').onclick = function () {
   toggleMode("dayNight", "dark", "light");
