@@ -72,7 +72,7 @@
 .menu a,
 .dropdown li>a,
 .dropdown li>div {
-  color: var(--gray);
+  color: var(--black);
   padding: 5px;
   display: flex;
   flex-direction: row;
@@ -132,7 +132,7 @@ ul.nav.small>li {
 }
 
 ul.nav>li>a {
-  color: var(--gray-600);
+  color: var(--gray);
 }
 
 ul.nav>li.active {

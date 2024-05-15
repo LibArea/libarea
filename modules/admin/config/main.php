@@ -55,7 +55,7 @@ return [
 	/*
 	 * Css и JS
 	 */
-	
+
     // Path to svg sprite
     // Путь к спрайту svg
     'svg_path'  => '/assets/svg/icons.svg',

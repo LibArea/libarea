@@ -10,7 +10,7 @@
   --font-size: 1rem;
 
   /* Default (light) theme */
-  --bg-color: #f9f9fa;
+  --bg-color: #f3f6f7;
   --text-color: #030303;
 
   --link-color: #118bee;
@@ -66,7 +66,7 @@
   --red: #ef4444;
   --red-200: #fecaca;
   --gray: #4b5563;
-  --gray-100: #f3f4f6;
+  --gray-100: #f6f8fc;
   --gray-600: #9ca3af;
   --blue: #3b82f6;
   --slate: #cbd5e1;

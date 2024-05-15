@@ -29,7 +29,7 @@ $topic = $data['facet'];
 
     <?php if (!empty($data['writers'])) : ?>
       <div class="sticky top-sm">
-        <div class="box bg-lightgray text-sm">
+        <div class="box text-sm">
           <h4 class="uppercase-box"><?= __('app.writers'); ?></h4>
           <ul>
             <?php foreach ($data['writers'] as $ind => $row) : ?>

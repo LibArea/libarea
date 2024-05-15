@@ -16,7 +16,7 @@
 
 <aside>
   <?php if (!$container->user()->active()) : ?>
-    <div class="box bg-lightgray text-sm">
+    <div class="box text-sm">
       <h4 class="uppercase-box"><?= __('app.authorization'); ?></h4>
       <form class="max-w300" action="<?= url('authorization', method: 'post'); ?>" method="post">
         <?= $container->csrf()->field(); ?>
