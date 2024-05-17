@@ -203,7 +203,7 @@ $blog = $data['blog'][0] ?? null;
 
 <aside>
   <?php if (!empty($data['facets'])) : ?>
-    <div class="box bg-lightgray">
+    <div class="box">
       <h4 class="uppercase-box"><?= __('app.topics'); ?></h4>
       <?php foreach ($data['facets'] as $topic) : ?>
         <div class="flex justify-between items-center">

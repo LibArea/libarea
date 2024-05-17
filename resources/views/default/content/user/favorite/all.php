@@ -11,7 +11,7 @@
 
   <?php if (!empty($data['favorites'])) : ?>
     <?php foreach ($data['favorites'] as $fav) : ?>
-      <div class="box bg-lightgray relative">
+      <div class="box relative">
         <div class="left gray-600 mr5"> <?= __('app.' . $fav['action_type']); ?>:</div>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">

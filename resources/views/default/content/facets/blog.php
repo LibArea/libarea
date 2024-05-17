@@ -55,7 +55,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
           </div>
 
           <?php if ($data['users_team']) : ?>
-            <div class="box bg-lightgray">
+            <div class="box">
               <h4 class="uppercase-box"><?= __('app.team'); ?></h4>
               <?php foreach ($data['users_team'] as $usr) : ?>
                 <div class="mb15">
@@ -67,7 +67,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
           <?php endif; ?>
 
           <?php if ($data['focus_users']) : ?>
-            <div class="box bg-lightgray">
+            <div class="box">
               <h4 class="uppercase-box"><?= __('app.reads'); ?>
                 <a href="<?= url('blog.read', ['slug' => $blog['facet_slug']]) ?>" title="<?= __('app.more'); ?>" class="gray-600" href="">...</a>
               </h4>
@@ -86,7 +86,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
 
           <?php if ($data['info']) : ?>
             <div class="sticky top-sm">
-              <div class="box bg-lightgray img-preview">
+              <div class="box img-preview">
                 <?= $data['info']; ?>
               </div>
             </div>

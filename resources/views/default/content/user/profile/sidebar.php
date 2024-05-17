@@ -53,7 +53,7 @@
   <?php endif; ?>
 
   <?php if ($data['topics']) : ?>
-    <div class="box bg-lightgray">
+    <div class="box">
       <h4 class="uppercase-box"><?= __('app.is_reading'); ?></h4>
       <?php foreach ($data['topics'] as  $topic) : ?>
         <div class="mt5 mb10">

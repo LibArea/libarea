@@ -33,7 +33,7 @@
     <aside>
       <?php if ($data['info']) : ?>
         <div class="sticky top-sm">
-          <div class="box bg-lightgray content-body">
+          <div class="box content-body">
             <?= $data['info']; ?>
           </div>
         </div>
