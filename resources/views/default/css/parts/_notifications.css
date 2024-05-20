@@ -44,8 +44,7 @@
 
 
 .dropdown.notif {
-  top: -5px;
-  right: -15px;
+  margin-top: 40px;
   padding: 1rem 0 0.7rem 0;
   min-width: 305px;
 }
