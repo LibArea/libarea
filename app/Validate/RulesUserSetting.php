@@ -37,7 +37,7 @@ class RulesUserSetting extends Validator
 
         self::length($data['password2'], 8, 32, 'password', $redirect);
 
-        $userInfo   = AuthModel::userInfo($email);
+        $userInfo   = AuthModel::getUser($email, 'email');
         if (!password_verify($data['password'], $userInfo['password'])) {
             Msg::redirect(__('msg.old_error'), 'error', $redirect);
         }

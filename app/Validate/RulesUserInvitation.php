@@ -16,7 +16,7 @@ class RulesUserInvitation extends Validator
 
         self::email($email, $redirect);
 
-        $user = AuthModel::userInfo($email);
+        $user = AuthModel::getUser($email, 'email');
         if (!empty($user['email'])) {
             Msg::redirect(__('msg.user_already'), 'error', $redirect);
         }

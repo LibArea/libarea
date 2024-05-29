@@ -38,7 +38,7 @@
   </div>
 </main>
 <aside>
-  <div class="box bg-beige sticky top-sm">
+  <div class="box sticky top-sm">
     <?= __('help.notifications_info'); ?>
   </div>
 </aside>

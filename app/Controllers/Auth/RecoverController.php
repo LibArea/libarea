@@ -27,7 +27,7 @@ class RecoverController extends Controller
 
         Validator::email($email = Request::post('email')->value(), $redirect);
 
-        $uInfo = AuthModel::userInfo($email);
+        $uInfo = AuthModel::getUser($email, 'email');
 
         if (empty($uInfo['email'])) {
             Msg::redirect(__('msg.no_user'), 'error', $redirect);

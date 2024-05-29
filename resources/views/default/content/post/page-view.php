@@ -31,7 +31,7 @@
   </div>
 </main>
 <aside>
-  <div class="box sticky top-sm bg-beige">
+  <div class="box sticky top-sm">
     <?php foreach ($data['pages'] as $ind => $row) : ?>
       <div class="mt5 mb10">
         <a class="gray" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">

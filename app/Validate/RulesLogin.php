@@ -15,10 +15,7 @@ class RulesLogin extends Validator
 
         self::email($data['email'], $redirect);
 
-        $user = AuthModel::userInfo($data['email']);
-
-		//var_dump($user['id']);
-		//exit;
+        $user = AuthModel::getUser($data['email'], 'email');
 
         if (empty($user['id'])) {
             Msg::redirect(__('msg.no_user'), 'error', $redirect);

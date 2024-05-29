@@ -12,7 +12,7 @@
 </main>
 
 <aside>
-  <div class="box bg-beige">
+  <div class="box">
     <?= __('app.read_carefully'); ?>
   </div>
 </aside>

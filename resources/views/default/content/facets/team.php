@@ -49,7 +49,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
   </div>
 </main>
 <aside>
-  <div class="box bg-beige">
+  <div class="box">
     <h4 class="uppercase-box"><?= __('app.help'); ?></h4>
     <?= __('help.team_info'); ?>
   </div>

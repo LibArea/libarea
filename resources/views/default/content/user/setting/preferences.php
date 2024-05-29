@@ -43,7 +43,7 @@
 </main>
 
 <aside>
-  <div class="box bg-beige">
+  <div class="box">
     <?= __('app.preferences_help'); ?>
   </div>
 </aside>

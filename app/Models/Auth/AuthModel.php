@@ -115,14 +115,20 @@ class AuthModel extends Model
         return DB::run($sql, ['user_id' => $user_id]);
     }
 	
-    public static function getUser(int $id): array
+    public static function getUser(int|string $params, string $field = 'id'): array|bool
     {
+		if (!in_array($field, ['id', 'login', 'email'])) {
+           return false;
+        }
+		
         $sql = "SELECT 
                     id,
                     login,
+					name,
                     limiting_mode,
                     scroll,
                     email,
+					password,
                     avatar,
                     trust_level,
                     template,
@@ -133,31 +139,11 @@ class AuthModel extends Model
                     ban_list,
                     is_deleted
                         FROM users
-                                WHERE id = :id";
+                                WHERE $field = :params";
 
-        return DB::run($sql, ['id' => $id])->fetch();
+        return DB::run($sql, ['params' => $params])->fetch();
     }
 	
-    public static function userInfo(string $email): array|bool
-    {
-        $sql = "SELECT 
-                   id, 
-                   email, 
-                   password,
-                   login,
-                   name,
-                   template,
-                   lang,
-                   avatar,
-                   trust_level,
-                   ban_list,
-                   limiting_mode
-                        FROM users 
-                            WHERE email = :email";
-
-        return DB::run($sql, ['email' => $email])->fetch();
-    }
-
     /**
      * Does the user find in the ban list
      * Находит ли пользователь в бан- листе

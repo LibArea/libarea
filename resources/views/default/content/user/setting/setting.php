@@ -10,7 +10,7 @@
 </main>
 
 <aside>
-  <div class="box bg-beige">
+  <div class="box">
     <?= __('help.setting_info'); ?>
   </div>
 </aside>

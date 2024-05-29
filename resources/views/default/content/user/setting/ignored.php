@@ -25,7 +25,7 @@
 </main>
 
 <aside>
-  <div class="box bg-beige">
+  <div class="box">
     <?= __('app.ignored_users_help'); ?>
   </div>
 </aside>

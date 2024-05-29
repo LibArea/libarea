@@ -9,7 +9,7 @@
 </main>
 
 <aside>
-  <div class="box bg-beige">
+  <div class="box">
     <?= __('help.notification_info'); ?>
   </div>
 </aside>

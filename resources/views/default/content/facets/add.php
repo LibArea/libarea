@@ -9,7 +9,7 @@
 </main>
 
 <aside>
-  <div class="box bg-beige">
+  <div class="box">
     <h4 class="uppercase-box"><?= __('app.help'); ?></h4>
     <?= __('help.add_' . $data['type']); ?>
   </div>
