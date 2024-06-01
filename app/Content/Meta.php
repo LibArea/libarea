@@ -157,7 +157,15 @@ class Meta
             ];
         }
 
+		// If the user is on the ban list or deleted, then we prohibit indexing of the profile
+		// Если пользователь в бан листе или удален, то запрещаем индексацию профиля
         if ($user['ban_list'] == 1 || $user['is_deleted'] == 1) {
+            $meta['indexing'] = true;
+        }
+		
+		// If the user has not contributed, then the profile is prohibited from indexing (by the number of likes)
+		// Если пользователь не внес вклад, то профиль запретить к индексированию (по количеству лайков)
+        if ($user['up_count'] < 3) {
             $meta['indexing'] = true;
         }
 

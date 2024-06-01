@@ -46,11 +46,6 @@
   <div class="box bg-blue white">.box .bg-blue</div>
 </div>
 
-<div class="box-flex flex-wrap gap">
-  <div class="box border-lightgray">.box .border-lightgray</div>
-  <div class="label border-lightgray">.label .border-lightgray</div>
-</div>
-
 <h4><?= __('admin.icons'); ?>:</h4>
 <div class="flex flex-wrap gap">
   <?php foreach ($data['lists'] as $topic) : ?>
