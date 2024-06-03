@@ -140,7 +140,7 @@ class AddPostController extends Controller
                 'post_tl'               => $fields['content_tl'] ?? 0,
                 'post_closed'           => $closed == 'on' ? 1 : 0,
                 'post_top'              => $top == 'on' ? 1 : 0,
-                'post_poll'             => $this->selectPoll(Request::post('poll_id')->asInt()),
+                'post_poll'             => $this->selectPoll(Request::post('poll_id')->value()),
             ]
         );
 

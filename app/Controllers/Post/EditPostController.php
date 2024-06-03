@@ -132,7 +132,7 @@ class EditPostController extends Controller
 			'post_nsfw' 		=> Request::post('nsfw')->value() == 'on' ? 1 : 0,
 			'post_hidden' 		=> Request::post('hidden')->value() == 'on' ? 1 : 0,
 			'post_top' 			=> Request::post('top')->value() == 'on' ? 1 : 0,
-			'post_poll' 		=> $this->selectPoll(Request::post('poll_id')->asInt()),
+			'post_poll' 		=> $this->selectPoll(Request::post('poll_id')->value()),
 			'post_modified' 	=> date("Y-m-d H:i:s"),
 		]);
 
