@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Traits;
 
 use App\Models\PollModel;
 
 trait Poll
 {
-    public function getPoll($poll_id)
+    public function getPoll(int $poll_id): array
     {
         $count      = PollModel::getAllVotesCount($poll_id);
 
@@ -18,14 +20,14 @@ trait Poll
         ];
     }
     
-    private function selectPoll($poll_id)
+    private function selectPoll(string $params): int
     {
-        if (!$poll_id) {
+        if (!$params) {
             return 0;
         }
 
-        $id = json_decode($poll_id, true);
+        $id = json_decode($params, true);
 
-        return $id[0]['id'];
+        return (int)$id[0]['id'];
     }
 }
