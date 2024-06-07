@@ -17,6 +17,12 @@ class PollController extends Controller
 
     protected $limit = 15;
 
+    /**
+     * All surveys for a specific user
+     * Все опросы для конкретного пользователя
+     *
+     * @return void
+     */
     public function index()
     {
         $polls      = PollModel::getUserQuestionsPolls(Html::pageNumber(), $this->limit);
@@ -36,6 +42,12 @@ class PollController extends Controller
         );
     }
 
+    /**
+     * View the survey
+     * Просмотр  опроса
+     *
+     * @return void
+     */
     public function poll()
     {
         $id = Request::param('id')->asInt();
@@ -52,11 +64,19 @@ class PollController extends Controller
         );
     }
 
+    /**
+     * Choosing an option in the survey
+     * Выбор варианта в опросе
+     *
+     * @return void
+     */
     public function vote()
     {
         $question_id = Request::post('question_id')->asInt();
         $answer_id = Request::post('answer_id')->asInt();
 
-        return PollModel::vote($question_id, $answer_id);
+        PollModel::vote($question_id, $answer_id);
+		
+		return true;
     }
 }
