@@ -9,7 +9,7 @@ use Hleb\Static\DB;
 
 class SearchModel extends Model
 {
-    public static function getSearch($page, $limit, $query, $type)
+    public static function getSearch(int $page, int $limit, string $query, string $type)
     {
         if ($type == 'website') {
             return self::getWebsite($page, $limit, $query);
@@ -22,7 +22,7 @@ class SearchModel extends Model
         return self::getPosts($page, $limit, $query);
     }
 
-    public static function getPosts($page, $limit, $query)
+    public static function getPosts(int $page, int $limit, string $query)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT DISTINCT 
@@ -47,13 +47,12 @@ class SearchModel extends Model
                     ) AS rel ON rel.relation_post_id = post_id  
                         LEFT JOIN users ON id = post_user_id 
                             WHERE post_is_deleted = 0 AND post_draft = 0 AND post_tl = 0 AND post_hidden = 0 AND post_type = 'post'
-                                AND MATCH(post_title, post_content) AGAINST (:qa)
-                                          LIMIT :start, :limit";
+                                AND MATCH(post_title, post_content) AGAINST (:qa) LIMIT :start, :limit";
 
         return DB::run($sql, ['qa' => $query, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getComments($page, $limit, $query)
+    public static function getComments(int $page, int $limit, string $query)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT comment_id, comment_content, post_id, post_slug, post_title as title
@@ -65,7 +64,7 @@ class SearchModel extends Model
         return DB::run($sql, ['qa' => "%" . $query . "%", 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getWebsite($page, $limit, $query)
+    public static function getWebsite(int $page,int $limit, string $query)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT DISTINCT 
@@ -93,7 +92,7 @@ class SearchModel extends Model
         return DB::run($sql, ['qa' => $query, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getSearchCount($query, $type)
+    public static function getSearchCount(string $query, string $type)
     {
         if ($type == 'comment') {
             $sql = "SELECT comment_id FROM comments LEFT JOIN posts ON comment_post_id = post_id WHERE post_is_deleted = 0 AND comment_content LIKE :qa";
@@ -110,7 +109,7 @@ class SearchModel extends Model
         return DB::run($sql, ['qa' => $query])->rowCount();
     }
 
-    public static function getSearchTags($query, $type, $limit)
+    public static function getSearchTags(string $query, string $type, int $limit)
     {
         $sql = "SELECT 
                     facet_slug, 
@@ -118,13 +117,12 @@ class SearchModel extends Model
                     facet_title,
                     facet_type,
                     facet_img
-                        FROM facets WHERE facet_type = :type AND (facet_title LIKE :qa1 OR facet_slug LIKE :qa2)
-                            LIMIT :limit";
+                        FROM facets WHERE facet_type = :type AND (facet_title LIKE :qa1 OR facet_slug LIKE :qa2) LIMIT :limit";
 
         return DB::run($sql, ['type' => $type, 'qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%", 'limit' => $limit])->fetchAll();
     }
 
-    public static function setSearchLogs($params)
+    public static function setSearchLogs(array $params)
     {
         $sql = "INSERT INTO search_logs(request, 
                             action_type, 
@@ -140,7 +138,7 @@ class SearchModel extends Model
         DB::run($sql, $params);
     }
 
-    public static function getSearchLogs($limit)
+    public static function getSearchLogs(int $limit)
     {
         $sql = "SELECT 
                     request, 
@@ -154,34 +152,51 @@ class SearchModel extends Model
         return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
 
-    // Find content for forms
-    // Поиск контента для форм
-    public static function getSelect($search, $type)
+    /**
+     * Find content for forms
+     * Поиск контента для форм
+     *
+     * @param string $search
+     * @param string $type
+     * @return void
+     */
+    public static function getSelect(null|string $search, string $type)
     {
         $field_id   = $type . '_id';
-        if ($type == 'post') {
-            $field_name = 'post_title';
-            $sql = "SELECT post_id, post_title FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_hidden = 0 AND post_tl = 0 AND post_type = 'post' ORDER BY post_id DESC LIMIT 500";
-        } elseif ($type == 'user') {
-            $field_id = 'id';
-            $field_name = 'login';
-            $sql = "SELECT id, login, trust_level, activated FROM users WHERE activated = 1 AND login LIKE :login";
-        } elseif ($type == 'team') {
-            $field_id = 'id';
-            $field_name = 'login';
-            $sql = "SELECT id, login, trust_level, activated FROM users WHERE activated = 1 AND login LIKE :login AND id !=" . self::container()->user()->id();
-        } elseif ($type == 'poll') {
-            $field_name = 'poll_title';
-            $sql = "SELECT poll_id, poll_title FROM polls WHERE poll_title LIKE :poll_title AND poll_is_deleted = 0 AND poll_user_id = " . self::container()->user()->id();
+        $field_name = '';
+        $sql = '';
 
-            if (self::container()->user()->admin()) {
+        switch ($type) {
+            case 'post':
+                $field_name = 'post_title';
+                $sql = "SELECT post_id, post_title FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_hidden = 0 AND post_tl = 0 AND post_type = 'post' ORDER BY post_id DESC LIMIT 500";
+                break;
+
+            case 'user':
+            case 'team':
+                $field_id = 'id';
+                $field_name = 'login';
+                $sql = "SELECT id, login, trust_level, activated FROM users WHERE activated = 1 AND login LIKE :login";
+                if ($type == 'team') {
+                    $sql .= " AND id !=" . self::container()->user()->id();
+                }
+                break;
+
+            case 'poll':
+                $field_name = 'poll_title';
                 $sql = "SELECT poll_id, poll_title FROM polls WHERE poll_title LIKE :poll_title AND poll_is_deleted = 0";
-            }
-        } else {
-            $condition = '';
-            if (!self::container()->user()->admin()) {
-                if ($type == 'blog') {
 
+                if (!self::container()->user()->admin()) {
+                    $sql .= " AND poll_user_id = " . self::container()->user()->id();
+                } 
+                break;
+
+            default:
+                $field_id = 'facet_id';
+                $field_name = 'facet_title';
+                $condition = '';
+
+                if (!self::container()->user()->admin() && $type == 'blog') {
                     $blog = FacetModel::getFacetsUser('blog');
                     $teams = FacetModel::getTeamFacets('blog');
 
@@ -192,13 +207,11 @@ class SearchModel extends Model
 
                     $condition =  "AND facet_id IN(" . implode(',', $resultUsers ?? []) . ")";
                 }
-            }
 
-            $field_id = 'facet_id';
-            $field_name = 'facet_title';
-            $tl = self::container()->user()->tl();
-            $sql = "SELECT facet_id, facet_title, facet_type FROM facets 
-                    WHERE facet_title LIKE :facet_title AND facet_tl <= $tl AND facet_is_deleted = 0 AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 200";
+                $tl = self::container()->user()->tl();
+                $sql = "SELECT facet_id, facet_title, facet_type FROM facets 
+					WHERE facet_title LIKE :facet_title AND facet_tl <= $tl AND facet_is_deleted = 0 AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 200";
+                break;
         }
 
         $lists = DB::run($sql, [$field_name => "%" . $search . "%"])->fetchAll();
