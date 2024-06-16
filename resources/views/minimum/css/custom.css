@@ -45,8 +45,9 @@ main {
   font-size: 18px;
 }
 
-.logo:hover {
-  color: var(--gray-600);
+.logo:hover,
+.logo:active {
+  color: var(--white);
 }
 
 .mt3 {

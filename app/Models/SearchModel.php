@@ -64,7 +64,7 @@ class SearchModel extends Model
         return DB::run($sql, ['qa' => "%" . $query . "%", 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getWebsite(int $page,int $limit, string $query)
+    public static function getWebsite(int $page, int $limit, string $query)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT DISTINCT 
@@ -156,7 +156,7 @@ class SearchModel extends Model
      * Find content for forms
      * Поиск контента для форм
      *
-     * @param string $search
+     * @param null|string $search
      * @param string $type
      * @return void
      */
@@ -188,7 +188,7 @@ class SearchModel extends Model
 
                 if (!self::container()->user()->admin()) {
                     $sql .= " AND poll_user_id = " . self::container()->user()->id();
-                } 
+                }
                 break;
 
             default:

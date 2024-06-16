@@ -67,7 +67,7 @@ function render(string $name, array $data = [], string $part = 'base')
     $header = $body . '/global/' . $part . '-header';
     $footer = $body . '/global/' . $part . '-footer';
 
-    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $body . '/content' . $name . '.php')) {
+    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $body . '/content/' . $name . '.php')) {
         $body = 'default';
     }
 
