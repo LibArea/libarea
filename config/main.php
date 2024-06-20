@@ -164,6 +164,10 @@ return [
         ],
 		'img-src' => [
 			'https://*.userapi.com/impg/',
+		],
+		// For some versions of Elge browser
+		'font-src' => [
+			'https://libarea.ru',
 		]
     ],
 ];

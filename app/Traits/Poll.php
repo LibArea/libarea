@@ -20,7 +20,7 @@ trait Poll
         ];
     }
     
-    private function selectPoll(string $params): int
+    private function selectPoll(null|string $params): int
     {
         if (!$params) {
             return 0;
