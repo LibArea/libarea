@@ -140,8 +140,8 @@ class EditItemController extends Module
         // Если сайт сменил статус (например, после редактирования)
         if ($item['item_published'] != $published) {
 
-            $recipient_id = $this->container->user()->admin() ? $new_user_id : 1;
-            $action_type = $this->container->user()->admin() ? NotificationModel::WEBSITE_APPROVED : NotificationModel::TYPE_EDIT_WEBSITE;
+            $recipient_id	= $this->container->user()->admin() ? $new_user_id : 1;
+            $action_type 	= $this->container->user()->admin() ? NotificationModel::WEBSITE_APPROVED : NotificationModel::TYPE_EDIT_WEBSITE;
 
             NotificationModel::send($recipient_id, $action_type, url('web'));
         }

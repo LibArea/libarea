@@ -86,10 +86,9 @@
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#github"></use>
               </svg>
-              <a target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                <a target="_blank" href="<?= $item['item_url']; ?>" class="item_cleek" data-id="<?= $item['item_id']; ?>" rel="nofollow noreferrer ugc">
-                  <?= $item['item_github_url']; ?>
-                </a>
+              <a target="_blank" href="<?= $item['item_github_url']; ?>" class="item_cleek" data-id="<?= $item['item_id']; ?>" rel="nofollow noreferrer ugc">
+                <?= $item['item_github_url']; ?>
+              </a>
             </p>
           <?php endif; ?>
 
