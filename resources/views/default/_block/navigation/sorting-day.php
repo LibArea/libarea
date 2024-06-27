@@ -23,18 +23,20 @@ $day = $container->request()->get('sort')->value();
 <ul class="dropdown menu">
   <li<?php if ($day == 'TopMonth') : ?> class="active" <?php endif; ?>>
     <a class="gray-600 text-sm" href="?sort=TopMonth"><?= __('app.one_month'); ?></a>
-    </li>
-    <li<?php if ($day == 'TopThreeMonths') : ?> class="active" <?php endif; ?>>
-      <a class="gray-600 text-sm" href="?sort=TopThreeMonths"><?= __('app.three_months'); ?></a>
-      </li>
-      <li<?php if ($day == 'TopYear') : ?> class="active" <?php endif; ?>>
-        <a class="gray-600 text-sm" href="?sort=TopYear"><?= __('app.year'); ?></a>
-        </li>
-        <hr>
-        <li<?php if ($day == 'MostComments') : ?> class="active" <?php endif; ?>>
-          <a class="gray-600 text-sm" href="?sort=MostComments"><?= __('app.commented'); ?></a>
-          </li>
-          <li<?php if ($day == 'Viewed') : ?> class="active" <?php endif; ?>>
-            <a class="gray-600 text-sm" href="?sort=Viewed"><?= __('app.viewed'); ?></a>
-            </li>
+  </li>
+  <li<?php if ($day == 'TopThreeMonths') : ?> class="active" <?php endif; ?>>
+    <a class="gray-600 text-sm" href="?sort=TopThreeMonths"><?= __('app.three_months'); ?></a>
+  </li>
+  <li<?php if ($day == 'TopYear') : ?> class="active" <?php endif; ?>>
+    <a class="gray-600 text-sm" href="?sort=TopYear"><?= __('app.year'); ?></a>
+  </li>
+  <li>
+    <hr>
+  </li>
+  <li<?php if ($day == 'MostComments') : ?> class="active" <?php endif; ?>>
+    <a class="gray-600 text-sm" href="?sort=MostComments"><?= __('app.commented'); ?></a>
+  </li>
+  <li<?php if ($day == 'Viewed') : ?> class="active" <?php endif; ?>>
+    <a class="gray-600 text-sm" href="?sort=Viewed"><?= __('app.viewed'); ?></a>
+  </li>
 </ul>
