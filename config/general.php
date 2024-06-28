@@ -30,6 +30,7 @@ return [
         'ru'        => 'Русский',
         'ua'        => 'Український',
         'en'        => 'English',
+        'tr'        => 'Turkish',
         'de'        => 'Deutsch',
         'sk'        => 'Slovenský',
         'fr'        => 'Français',
