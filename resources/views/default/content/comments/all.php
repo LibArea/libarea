@@ -7,13 +7,13 @@
             [
               'tl'    => 0, // not authorized
               'id'    => 'comments.all',
-              'url'   => 'comments',
+              'url'   => url('comments'),
               'title' => 'app.comments',
             ],
             [
               'tl'    => 10, // admin
               'id'    => 'comments.deleted',
-              'url'   => 'comments.deleted',
+              'url'   => url('comments.deleted'),
               'title' => 'app.deleted',
             ],
           ]
@@ -24,6 +24,7 @@
       <?= insert('/content/comments/comment', ['comments' => $data['comments']]); ?>
 
       <?php $path = ($data['sheet'] == 'deleted') ? url('comments.deleted') : '/comments'; ?>
+      
       <?= Html::pagination($data['pNum'], $data['pagesCount'], false, $path); ?>
     <?php else : ?>
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'info']); ?>
