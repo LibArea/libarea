@@ -38,7 +38,7 @@
           <?= $user['reg_ip']; ?>
         <?php endif; ?>
         <?php if ($user['duplicat_ip_reg'] > 1) : ?>
-          <br> <sup class="red">(<?= $user['duplicat_ip_reg']; ?>)</sup>
+          <sup class="red"> (<?= $user['duplicat_ip_reg']; ?>)</sup>
         <?php endif; ?>
         </div>
       </td>

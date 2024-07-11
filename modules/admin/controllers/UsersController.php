@@ -89,7 +89,7 @@ class UsersController extends Module
 
         $results = [];
         foreach ($user_all as $ind => $row) {
-            $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['id']);
+            $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['reg_ip']);
             $results[$ind]      = $row;
         }
 
@@ -133,7 +133,7 @@ class UsersController extends Module
         if (!$user = UserModel::getUser($user_id, 'id')) redirect(url('admin'));
 
         $user['isBan']              = BanUserModel::isBan($user_id);
-        $user['duplicat_ip_reg']    = UserModel::duplicatesRegistrationCount($user_id);
+        $user['duplicat_ip_reg']    = UserModel::duplicatesRegistrationCount($user['reg_ip']);
         $user['last_visit_logs']    = UserModel::lastVisitLogs($user_id);
         $user['badges']             = BadgeModel::getBadgeUserAll($user_id);
 

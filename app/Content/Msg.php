@@ -17,7 +17,7 @@ class Msg
                 $options = "3500, { valign: 'top', align: 'right', styles: { backgroundColor: 'red', fontSize: '18px' } }";
             }
 
-            $html .= "Notice('" . $msg['msg'] . "', $options);";
+            $html .= self::createMsgScript($msg['msg'], $options);
         }
 
         return $html;
@@ -33,5 +33,10 @@ class Msg
         self::add($text, $status);
 
         redirect($redirect);
+    }
+
+    private static function createMsgScript($message, $options)
+    {
+        return "Notice('$message', $options);";
     }
 }

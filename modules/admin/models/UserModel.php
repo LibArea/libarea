@@ -9,9 +9,16 @@ use Hleb\Static\DB;
 
 class UserModel extends Model
 {
-    // Users Page
-    // Страница участников
-    public static function getUsers($page, $limit, $sheet)
+    /**
+     * Users Page
+     * Страница участников
+     *
+     * @param integer $page
+     * @param integer $limit
+     * @param string $sheet
+     * @return void
+     */
+    public static function getUsers(int $page, int $limit, string $sheet)
     {
         $string = ($sheet == 'ban') ? "WHERE ban_list > 0 ORDER BY id DESC LIMIT" : "ORDER BY id DESC LIMIT";
 
@@ -44,7 +51,7 @@ class UserModel extends Model
         return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
 
-    public static function getUsersCount($sheet)
+    public static function getUsersCount(string $sheet)
     {
         $string = ($sheet == 'ban') ? 'WHERE ban_list > 0' : '';
 
@@ -53,8 +60,14 @@ class UserModel extends Model
         return  DB::run($sql)->rowCount();
     }
 
-    // Member information (id, slug)
-    public static function getUser($params, $name)
+    /**
+     * Member information (id, slug)
+     *
+     * @param integer|string $params
+     * @param string $name
+     * @return void
+     */
+    public static function getUser(int|string $params, string $name)
     {
         $sort = ($name == 'slug') ? "login = :params" : "id = :params";
 
@@ -97,30 +110,40 @@ class UserModel extends Model
         return $result->fetch();
     }
 
-    // Number of IP duplicates by `user_reg_ip` field
-    public static function duplicatesRegistrationCount($ip)
+    /**
+     * Number of IP duplicates by `user_reg_ip` field
+     *
+     * @param string $ip
+     * @return void
+     */
+    public static function duplicatesRegistrationCount(string $ip)
     {
         $sql = "SELECT id, reg_ip FROM users WHERE reg_ip = :ip";
 
         return DB::run($sql, ['ip' => $ip])->rowCount();
     }
 
-    // By logs
-    public static function lastVisitLogs($uid)
+    /**
+     * By logs
+     *
+     * @param integer $id
+     * @return void
+     */
+    public static function lastVisitLogs(int $id)
     {
-        $sql = "SELECT add_date as latest_date, user_ip as latest_ip, device_id, user_id FROM users_agent_logs WHERE user_id = :uid ORDER BY id DESC";
+        $sql = "SELECT add_date as latest_date, user_ip as latest_ip, device_id, user_id FROM users_agent_logs WHERE user_id = :id ORDER BY id DESC";
 
-        return DB::run($sql, ['uid' => $uid])->fetch();
+        return DB::run($sql, ['id' => $id])->fetch();
     }
 
-    public static function userHistory($uid)
+    public static function userHistory(int $id)
     {
-        $sql = "SELECT add_date, user_ip, device_id, user_id FROM users_agent_logs WHERE user_id = :uid ORDER BY add_date DESC LIMIT 50";
+        $sql = "SELECT add_date, user_ip, device_id, user_id FROM users_agent_logs WHERE user_id = :id ORDER BY add_date DESC LIMIT 50";
 
-        return DB::run($sql, ['uid' => $uid])->fetchAll();
+        return DB::run($sql, ['id' => $id])->fetchAll();
     }
 
-    public static function getUserSearchDeviceID($item)
+    public static function getUserSearchDeviceID(string $item)
     {
         $sql = "SELECT 
                     log.device_id,
@@ -142,7 +165,7 @@ class UserModel extends Model
         return DB::run($sql, ['item' => $item])->fetchAll();
     }
 
-    public static function getUserSearchRegIp($item)
+    public static function getUserSearchRegIp(string $item)
     {
         $sql = "SELECT 
                     id,
@@ -160,8 +183,13 @@ class UserModel extends Model
         return DB::run($sql, ['item' => $item])->fetchAll();
     }
 
-    // ip for logs
-    public static function getUserLogsId($ip)
+    /**
+     * ip for logs
+     *
+     * @param string $ip
+     * @return void
+     */
+    public static function getUserLogsId(string $ip)
     {
         $sql = "SELECT 
                     id,
@@ -183,7 +211,7 @@ class UserModel extends Model
                                 FROM users_agent_logs 
                                 WHERE user_ip = :ip GROUP BY user_id
                             ) as latest_date ON latest_date.user_id = id";
-                            
+
         return DB::run($sql, ['ip' => $ip])->fetchAll();
     }
 

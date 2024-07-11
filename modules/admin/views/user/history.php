@@ -15,7 +15,9 @@
     <th><?= __('admin.ip'); ?></th>
     <th><?= __('admin.time'); ?></th>
   </thead>
-  <?php foreach ($data['results'] as $user) :  ?>
+  <?php foreach ($data['results'] as $user) : 
+	if (!$user['device_id']) continue;
+  ?>
     <tr>
       <td>
         <a href="<?= url('admin.device', ['item' => $user['device_id']]); ?>"><?= $user['device_id']; ?></a>
