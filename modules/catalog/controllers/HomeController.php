@@ -12,6 +12,8 @@ class HomeController extends Module
 {
     public function index()
     {
+		Translate::setLang($this->container->user()->get()['lang']);
+		
         return view(
             'home',
             [
