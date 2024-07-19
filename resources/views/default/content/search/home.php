@@ -12,7 +12,7 @@
     </form>
     <div class="center">
       <div class="text-sm gray-600"><?= __('search.help'); ?></div>
-      <a class="text-sm" title="<?= __('search.to_main'); ?>" href="/"><?= config('meta', 'name'); ?></a>
+      <a class="text-sm" title="<?= __('search.on_website'); ?>" href="/"><?= config('meta', 'name'); ?></a>
     </div>
   </div>
 
