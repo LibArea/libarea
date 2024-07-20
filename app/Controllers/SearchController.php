@@ -7,7 +7,7 @@ namespace App\Controllers;
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Models\SearchModel;
-use Translate, Meta, Html;
+use Meta, Html;
 
 class SearchController extends Controller
 {
@@ -21,7 +21,7 @@ class SearchController extends Controller
      */
     public function index()
     {
-		Translate::setLang($this->container->user()->get()['lang']);
+		$this->container->user()->id();
 		
         return view(
             '/default/content/search/home',

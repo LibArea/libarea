@@ -6,13 +6,13 @@ namespace Modules\Catalog\Controllers;
 
 use Hleb\Base\Module;
 use Modules\Catalog\Models\{WebModel, UserAreaModel};
-use Html, Meta, Translate;
+use Html, Meta;
 
 class HomeController extends Module
 {
     public function index()
     {
-		Translate::setLang($this->container->user()->get()['lang']);
+		$this->container->user()->id();
 		
         return view(
             'home',

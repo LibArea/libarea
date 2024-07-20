@@ -38,9 +38,9 @@
       <?php endif; ?>
   </main>
   <aside>
-    <div class="box bg-beige"><?= __('web.sidebar_info'); ?></div>
+    <div class="box gray"><?= __('web.sidebar_info'); ?></div>
     <?php if ($container->user()->active()) : ?>
-      <div class="box bg-lightgray">
+      <div class="box">
         <h4 class="uppercase-box"><?= __('web.menu'); ?></h4>
         <ul class="menu">
           <?= insertTemplate('/navigation/menu', ['data' => $data]); ?>

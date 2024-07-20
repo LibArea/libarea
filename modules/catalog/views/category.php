@@ -98,7 +98,7 @@
     </div>
   </main>
   <aside>
-    <div class="box bg-beige"><?= markdown($data['category']['facet_info'] ?? '', 'line'); ?></div>
+    <div class="box gray"><?= markdown($data['category']['facet_info'] ?? '', 'line'); ?></div>
 
     <?php if ($data['related_posts']) : ?>
       <div class="box bg-yellow">
@@ -114,7 +114,7 @@
     <?php endif; ?>
 
     <?php if ($container->user()->active()) : ?>
-      <div class="box bg-lightgray">
+      <div class="box">
         <h4 class="uppercase-box"><?= __('web.menu'); ?></h4>
         <ul class="menu">
           <?= insertTemplate('/navigation/menu', ['data' => $data]); ?>
