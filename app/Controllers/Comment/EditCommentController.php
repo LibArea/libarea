@@ -70,7 +70,7 @@ class EditCommentController extends Controller
             [
                 'comment_id'         => $comment['comment_id'],
                 'comment_content'    => $content,
-                'comment_user_id'    => $this->selectAuthor($comment['comment_user_id'], Request::post('user_id')->value()),
+                'comment_user_id'    => $this->selectAuthor($comment['comment_user_id'], (int)Request::post('user_id')->value()),
                 'comment_modified'   => date("Y-m-d H:i:s"),
             ]
         );
