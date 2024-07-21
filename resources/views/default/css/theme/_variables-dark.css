@@ -81,6 +81,10 @@ body.dark .EasyMDEContainer .CodeMirror {
   color: var(--form-text-color);
 }
 
+body.dark .EasyMDEContainer .editor-preview {
+    background: var(--form-bg-color);
+}
+
 body.dark .comment:target,
 body.dark .comment.edit {
   background-color: var(--form-bg-color);
