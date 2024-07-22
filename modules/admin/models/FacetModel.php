@@ -9,9 +9,15 @@ use Hleb\Static\DB;
 
 class FacetModel extends Model
 {
-    // Theme Tree
-    // Дерево тем
-    public static function get($type, $sort)
+    /**
+     * Theme Tree
+     * Дерево тем
+     *
+     * @param string $type
+     * @param string $sort
+     * @return void
+     */
+    public static function get(string $type, string $sort)
     {
         $sort = $sort == 'ban' ? 'AND facet_is_deleted = 1' : '';
 
@@ -49,8 +55,12 @@ class FacetModel extends Model
         return  DB::run('SELECT type_id, type_code, type_lang FROM facets_types');
     }
 
-    // Posts where there are no topics
-    // Посты где нет тем
+    /**
+     * Posts where there are no topics
+     * Посты где нет тем
+     *
+     * @return void
+     */
     public static function getNoTopic()
     {
         $sql = "SELECT DISTINCT
@@ -60,24 +70,34 @@ class FacetModel extends Model
                     post_type
                         FROM posts
                             LEFT JOIN facets_posts_relation on relation_post_id = post_id
-                                WHERE relation_facet_id is NULL 
-                                       AND post_is_deleted = 0 AND post_draft = 0";
+                                WHERE relation_facet_id is NULL AND post_draft = 0";
 
         return DB::run($sql)->fetchAll();
     }
 
-    // Let's check the uniqueness of id
-    // Проверим уникальность id
-    public static function uniqueById($facet_id)
+    /**
+     * Let's check the uniqueness of id
+     * Проверим уникальность id
+     *
+     * @param integer $facet_id
+     * @return void
+     */
+    public static function uniqueById(int $facet_id)
     {
         $sql = "SELECT facet_id, facet_slug, facet_type, facet_user_id, facet_is_deleted FROM facets WHERE facet_id = :id";
 
         return DB::run($sql, ['id' => $facet_id])->fetch();
     }
 
-    // Delete (ban) the facet
-    // Удалим (забаним) фасет
-    public static function ban($id, $status)
+    /**
+     * Delete (ban) the facet
+     * Удалим (забаним) фасет
+     *
+     * @param integer $id
+     * @param integer $status
+     * @return void
+     */
+    public static function ban(int $id, int $status)
     {
         $sql = "UPDATE facets SET facet_is_deleted = 1 where facet_id = :id";
         if ($status == 1) {
@@ -86,7 +106,7 @@ class FacetModel extends Model
 
         DB::run($sql, ['id' => $id]);
     }
-    
+
     public static function getPostsTheSection()
     {
         $sql = "SELECT distinct (post_id),
