@@ -2,7 +2,11 @@
 
 <div class="mb-none">
   <div class="blockquote-profile">
-    <?= markdown($profile['about'] ?? __('app.riddle') . '...'); ?>
+    <?php if ($profile['about'] == 'Riddle...') : ?>
+		<?= __('app.riddle'); ?>...
+	<?php else : ?>
+		<?= markdown($profile['about']); ?>
+	<?php endif; ?>
   </div>
 
   <div class="mb20">

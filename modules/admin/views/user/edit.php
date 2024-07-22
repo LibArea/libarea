@@ -11,12 +11,7 @@
 
 <form action="<?= url('admin.user.edit', ['id' => $data['user']['id']], method: 'post'); ?>" method="post">
   <?= $container->csrf()->field(); ?>
-  <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
-    <a class="right text-sm" href="<?= url('delete.cover', ['login' => $data['user']['login']]); ?>">
-      <?= __('admin.remove'); ?>
-    </a>
-    <br>
-  <?php endif; ?>
+
   <img width="325" height="115" class="right" src="<?= Img::cover($data['user']['cover_art'], 'user'); ?>">
   <?= Img::avatar($data['user']['avatar'], $data['user']['login'], 'avatar', 'max'); ?>
 
@@ -152,7 +147,6 @@
     <input type="hidden" name="user_id" value="<?= $data['user']['id']; ?>">
     <?= Html::sumbit(__('app.edit')); ?>
   </fieldset>
-
 
 </form>
 
