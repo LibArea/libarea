@@ -5,7 +5,7 @@
     <?php if ($profile['about'] == 'Riddle...') : ?>
 		<?= __('app.riddle'); ?>...
 	<?php else : ?>
-		<?= markdown($profile['about']); ?>
+		<?= markdown($profile['about'] ??  __('app.riddle')); ?>
 	<?php endif; ?>
   </div>
 

@@ -1,5 +1,4 @@
 <div>
-  <hr>
   <a rel="nofollow noopener" class="icon gray-600" title="DISCORD" href="https://discord.gg/adJnPEGZZZ"><svg class="icons">
       <use xlink:href="/assets/svg/icons.svg#discord"></use>
     </svg></a>

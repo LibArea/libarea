@@ -104,7 +104,7 @@ class EditFacetController extends Controller
             $low_facet = json_decode($lows, true);
             $low_arr = $low_facet ?? [];
 
-            FacetModel::addLowFacetRelation($low_arr, $data['facet_id']);
+            FacetModel::addLowFacetRelation($low_arr, (int)$data['facet_id']);
         } else {
             FacetModel::deleteRelation((int)$data['facet_id'], 'topic');
         }
@@ -115,7 +115,7 @@ class EditFacetController extends Controller
             $match_facet    = json_decode($matching, true);
             $match_arr      = $match_facet ?? [];
 
-            FacetModel::addLowFacetMatching($match_arr, $data['facet_id']);
+            FacetModel::addLowFacetMatching($match_arr, (int)$data['facet_id']);
         } else {
             FacetModel::deleteRelation((int)$data['facet_id'], 'matching');
         }
