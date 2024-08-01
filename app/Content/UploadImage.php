@@ -253,8 +253,12 @@ class UploadImage
     }
 
     // Thumb for post
-    public static function thumbPost($image)
+    public static function thumbPost(null|string $image)
     {
+		if ($image === null) {
+			return false;
+		}
+		
         $ext = pathinfo(parse_url($image, PHP_URL_PATH), PATHINFO_EXTENSION);
         if (in_array($ext, array('jpg', 'jpeg', 'png'))) {
 
