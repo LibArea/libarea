@@ -76,7 +76,7 @@ class PollController extends Controller
         $answer_id = Request::post('answer_id')->asInt();
 
         PollModel::vote($question_id, $answer_id);
-		
-		return true;
+
+        return true;
     }
 }

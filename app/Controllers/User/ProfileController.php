@@ -86,7 +86,7 @@ class ProfileController extends Controller
             '/user/profile/comments',
             [
                 'meta'  => Meta::profile('profile_comments', $profile),
-                'data'  => array_merge($this->sidebar($commentsCount, $profile), ['comments' => $comments]),
+                'data'  => array_merge($this->sidebar((int)$commentsCount, $profile), ['comments' => $comments]),
             ]
         );
     }

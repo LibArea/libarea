@@ -165,22 +165,23 @@ class AddCommentController extends Controller
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_ANSWER, $message, $url, $post['post_user_id']);
         }
 
-        // Who is following this question/post
-        // Кто подписан на данный вопрос / пост
-        if ($focus_all = PostModel::getFocusUsersPost($post['post_id'])) {
-            foreach ($focus_all as $focus_user) {
-                if ($focus_user['signed_user_id'] != $this->container->user()->id()) {
-                    NotificationModel::send($focus_user['signed_user_id'], NotificationModel::TYPE_AMSWER_POST, $url);
-                }
-            }
-        }
-
         // Notifications when adding a comment
         // Уведомления при добавлении комментария
         if ($parent_id) {
             $comment = CommentModel::getCommentId($parent_id);
             if ($this->container->user()->id() != $comment['comment_user_id']) {
                 NotificationModel::send($comment['comment_user_id'], NotificationModel::TYPE_COMMENT_COMMENT, $url);
+            }
+        } else {
+
+            // Who is following this question/post
+            // Кто подписан на данный вопрос / пост
+            if ($focus_all = PostModel::getFocusUsersPost($post['post_id'])) {
+                foreach ($focus_all as $focus_user) {
+                    if ($focus_user['signed_user_id'] != $this->container->user()->id()) {
+                        NotificationModel::send($focus_user['signed_user_id'], NotificationModel::TYPE_AMSWER_POST, $url);
+                    }
+                }
             }
         }
     }

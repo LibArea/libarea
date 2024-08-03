@@ -90,7 +90,7 @@ class NotificationController extends Controller
 
         return true;
     }
-	
+
     public function addForma()
     {
         insert(

@@ -9,8 +9,12 @@ use Hleb\Static\DB;
 
 class RssModel extends Model
 {
-    // The last 500 posts
-    // Последние 500 постов
+    /**
+     * The last 500 posts
+     * Последние 500 постов
+     *
+     * @return void
+     */
     public static function getPosts()
     {
         $sql = "SELECT post_id, post_slug, post_title, post_content, post_date, post_content_img FROM posts 
@@ -19,8 +23,12 @@ class RssModel extends Model
         return  DB::run($sql)->fetchAll();
     }
 
-    // All posts for Sitemap
-    // Все посты для Sitemap
+    /**
+     * All posts for Sitemap
+     * Все посты для Sitemap
+     *
+     * @return void
+     */
     public static function getPostsSitemap()
     {
         $sql = "SELECT post_id, post_slug FROM posts WHERE post_is_deleted = 0 AND post_tl = 0 AND post_draft = 0";
@@ -28,8 +36,12 @@ class RssModel extends Model
         return  DB::run($sql)->fetchAll();
     }
 
-    // All Topics for Sitemap
-    // Все Темы для Sitemap
+    /**
+     * All Topics for Sitemap
+     * Все Темы для Sitemap
+     *
+     * @return void
+     */
     public static function getTopicsSitemap()
     {
         $sql = "SELECT facet_slug FROM facets WHERE facet_type = 'topic'";
@@ -37,8 +49,13 @@ class RssModel extends Model
         return  DB::run($sql)->fetchAll();
     }
 
-    // Posts by id Topics for rss
-    // Посты по id Темы для rss
+    /**
+     * Posts by id Topics for rss
+     * Посты по id Темы для rss
+     *
+     * @param [type] $facet_slug
+     * @return void
+     */
     public static function getPostsFeed($facet_slug)
     {
         $sql = "SELECT 

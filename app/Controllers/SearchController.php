@@ -21,8 +21,8 @@ class SearchController extends Controller
      */
     public function index()
     {
-		$this->container->user()->id();
-		
+        $this->container->user()->id();
+
         return view(
             '/default/content/search/home',
             [

@@ -20,8 +20,14 @@ class VotesModel extends Model
         return $result[$type . '_user_id'];
     }
 
-    // Checking if the user has voted
-    // Проверяем, голосовал ли пользователь
+    /**
+     * Checking if the user has voted
+     * Проверяем, голосовал ли пользователь
+     *
+     * @param integer $content_id
+     * @param string $type
+     * @return void
+     */
     public static function status(int $content_id, string $type)
     {
         $sql = "SELECT votes_" . $type . "_item_id,  votes_" . $type . "_user_id, votes_" . $type . "_date
@@ -31,9 +37,14 @@ class VotesModel extends Model
         return  DB::run($sql, ['content_id' => $content_id, 'author_id' => self::container()->user()->id()])->fetch();
     }
 
-    // Like frequency per day 
-    // Частота размещения лайков в день 
-    public static function getSpeedVotesDay($type)
+    /**
+     * Like frequency per day 
+     * Частота размещения лайков в день 
+     *
+     * @param string $type
+     * @return void
+     */
+    public static function getSpeedVotesDay(string $type)
     {
         $sql = "SELECT votes_" . $type . "_item_id FROM votes_" . $type . "
                     WHERE votes_" . $type . "_user_id = :user_id AND votes_" . $type . "_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
@@ -67,8 +78,15 @@ class VotesModel extends Model
         DB::run($sql, ['item_id'   => $content_id, 'user_id' => self::container()->user()->id()]);
     }
 
-    // Recording the vote in the content table
-    // Записываем голосование в таблицу конктена
+    /**
+     * Recording the vote in the content table
+     * Записываем голосование в таблицу конктена
+     *
+     * @param integer $content_id
+     * @param string $type
+     * @param string $action
+     * @return void
+     */
     public static function saveContent(int $content_id, string $type, string $action = '+ 1')
     {
         $sql = "UPDATE " . $type . "s SET " . $type . "_votes = (" . $type . "_votes " . $action . ") WHERE " . $type . "_id = :content_id";
