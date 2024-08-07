@@ -234,18 +234,11 @@ class CommentModel extends Model
             $sorting = 'top';
         }
 
-        switch ($sorting) {
-            case 'top':
-                $sort = 'ORDER BY comment_lo DESC, comment_votes DESC';
-                break;
-            case 'old':
-                $sort = 'ORDER BY comment_id DESC';
-                break;
-                // new    
-            default:
-                $sort = '';
-                break;
-        }
+		$sort = match ($sorting) {
+			'top'		=> 'ORDER BY comment_lo DESC, comment_votes DESC',
+			'old'		=> 'ORDER BY comment_id DESC',
+			default		=> '',
+		};
 
         $sql = "SELECT 
                     comment_id,

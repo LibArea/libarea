@@ -7,8 +7,9 @@ namespace App\Models;
 use Hleb\Base\Model;
 use Hleb\Static\DB;
 
-use App\Traits\SortingPostDay;
 use App\Models\IgnoredModel;
+use Sorting;
+
 
 class HomeModel extends Model
 {
@@ -44,7 +45,7 @@ class HomeModel extends Model
         }
 
         $display = self::display($type);
-        $sort = SortingPostDay::get($type);
+        $sort = Sorting::day($type);
 
         $nsfw = self::container()->user()->nsfw() ? "" : "post_nsfw = 0 AND";
 

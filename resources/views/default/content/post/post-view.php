@@ -115,7 +115,7 @@ $blog = $data['blog'][0] ?? null;
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#eye"></use>
             </svg>
-            <?= $post['post_hits_count'] == 0 ? 1 : $post['post_hits_count']; ?>
+            <?= $post['post_hits_count'] == 0 ? 1 : Html::formatToHuman($post['post_hits_count']); ?>
           </div>
         </div>
         <div class="items-center flex gap-max">

@@ -84,7 +84,7 @@
             <svg class="icons">
               <use xlink:href="/assets/svg/icons.svg#eye"></use>
             </svg>
-            <?= $post['post_hits_count'] == 0 ? 1 : $post['post_hits_count']; ?>
+            <?= $post['post_hits_count'] == 0 ? 1 : Html::formatToHuman($post['post_hits_count']); ?>
           </div>
           <?php if ($post['post_comments_count'] != 0) : ?>
             <a class="flex gray-600 gap-min" href="<?= $post_url; ?>#comment">
