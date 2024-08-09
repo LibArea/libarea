@@ -45,10 +45,10 @@ if ($container->user()->id() > 0) {
                 $blog = '<sup class="red">b</span>';
                 $url = url('blog', ['slug' => $topic['facet_slug']]);
             }
-
-            echo '<li class="mt15 flex gap items-center justify-between">';
+ 
+            echo '<li class="mt15 text-sm flex gap items-center justify-between">';
             echo '<a class="flex gap-min items-center" href="'.$url.'">';
-            echo Img::image($topic['facet_img'], $topic['facet_title'], 'img-sm', 'logo', 'max');
+			echo Img::image($topic['facet_img'], $topic['facet_title'], 'img-sm', 'logo', 'max');
             echo $topic['facet_title'].' '.$blog;
             echo '</a></li>';
         }

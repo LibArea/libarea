@@ -1,5 +1,5 @@
 <div class="flex or-width flex-col box shadow-bottom">
-  <div class="flex justify-center gap items-center mb20">
+  <div class="flex gap items-center mb20">
     <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-lg', 'logo', 'max'); ?>
     <div>
       <h1 class="text-2xl mb-text-xl m0">
@@ -25,36 +25,29 @@
     ]); ?>
   </div>
 
-  <div class="flex justify-center gap text-sm gray-600 lowercase">
-    <div>
+  <div class="flex justify-between text-sm gray-600 lowercase">
+    <div class="flex gap-min">
       <svg class="icons">
         <use xlink:href="/assets/svg/icons.svg#users"></use>
       </svg>
       <?= $topic['facet_focus_count']; ?> <span class="mb-none"><?= __('app.reads'); ?></span>
-    </div>
 
-    <div>
-      <svg class="icons">
+      <svg class="icons ml15">
         <use xlink:href="/assets/svg/icons.svg#post"></use>
       </svg>
       <?= $topic['facet_count']; ?> <span class="mb-none"><?= Html::numWord($topic['facet_count'], __('app.num_post'), false); ?></span>
     </div>
-
-    <div>
+    <div class="flex gap">
       <a class="gray-600 ml30" href="<?= url('topic.info', ['slug' => $topic['facet_slug']]); ?>">
         <svg class="icons">
           <use xlink:href="/assets/svg/icons.svg#info"></use>
         </svg>
       </a>
-    </div>
 
-    <div class="pointer" data-a11y-dialog-show="id-share">
-      <svg class="icons gray-600">
+      <svg class="icons gray-600 pointer" data-a11y-dialog-show="id-share">
         <use xlink:href="/assets/svg/icons.svg#share"></use>
       </svg>
-    </div>
 
-    <div>
       <a class="gray-600" href="/rss-feed/topic/<?= $topic['facet_slug']; ?>">
         <svg class="icons">
           <use xlink:href="/assets/svg/icons.svg#rss"></use>
