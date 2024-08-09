@@ -17,6 +17,25 @@ h5 {
   font-weight: 600;
 }
 
+.number-svg {
+  right: -6px;
+  top: -3px;
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  fill: none;
+  stroke: currentColor;
+}
+
+.bg-yellow .number-svg {
+  border: 2px solid #7186fc;
+  background-color: #7186fc;
+  color: #fff;
+}
+
 .number-notif {
   display: none;
   font-size: .72rem;

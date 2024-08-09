@@ -9,17 +9,20 @@
 
         <?php foreach (config('notification', 'list') as $key => $n) : ?>
           <?php if ($n['id'] == $notif['type']) : ?>
-            <div class="br-bottom text-sm p5<?php if ($notif['flag'] == 0) { ?> bg-yellow<?php } ?>">
-              <a class="black ml5 nickname" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
-              <span class="lowercase gray-600">
-                <?= __('app.' . $n['lang'], ['url' => '<a href="' . $url . '">', 'a' => '</a>']); ?>
-                <div class="ml5 flex gap-min items-center">
-                  <svg class="icons <?= $n['css']; ?>">
-                    <use xlink:href="/assets/svg/icons.svg#<?= $n['icon']; ?>"></use>
-                  </svg>
+            <div class="br-bottom flex gap-min text-sm p5<?php if ($notif['flag'] == 0) { ?> bg-yellow<?php } ?>">
+              <div class="relative img-base">
+                <?= Img::avatar($notif['avatar'], $notif['login'], 'img-base', 'min'); ?>
+                <svg class="number-svg <?= $n['css']; ?>">
+                  <use xlink:href="/assets/svg/icons.svg#<?= $n['icon']; ?>"></use>
+                </svg>
+              </div>
+              <div>
+                <a class="black ml5 nickname" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
+                <span class="lowercase gray-600">
+                  <?= __('app.' . $n['lang'], ['url' => '<a href="' . $url . '">', 'a' => '</a>']); ?>
                   — <?= langDate($notif['time']); ?>
-                </div>
-              </span>
+                </span>
+              </div>
             </div>
           <?php endif; ?>
         <?php endforeach; ?>

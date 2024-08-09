@@ -56,19 +56,12 @@ class Meta
 
     public static function home(string $sheet)
     {
-        switch ($sheet) {
-            case 'questions':
-                $url    = '/questions';
-                break;
-            case 'posts':
-                $url    = '/posts';
-                break;
-            case 'top':
-                $url    = '/top';
-                break;
-            default:
-                $url    = '/';
-        }
+		$url = match ($sheet) {
+			'questions'	=> '/questions',
+			'posts'		=> '/posts',
+			'top'		=> '/top',
+			default		=> '/',
+		};
 
         $meta = [
             'main'      => 'main',

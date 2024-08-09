@@ -141,7 +141,7 @@ main {
   }
 
   .dropdown.notif {
-	min-width: 265px;
+    min-width: 265px;
   }
 
   .mb-img-2xl {
@@ -181,10 +181,10 @@ main {
     padding: 1rem;
     border-radius: 0;
   }
-  
+
   .box-logo {
     width: auto;
-  }  
+  }
 
   aside,
   .mb-none,
@@ -205,5 +205,5 @@ main {
     padding-left: 0;
     padding-right: 0;
   }
-  
+
 }

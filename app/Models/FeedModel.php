@@ -123,29 +123,15 @@ class FeedModel extends Model
     {
         $hidden = self::container()->user()->admin() ? "" : "AND post_hidden = 0";
 
-        switch ($sheet) {
-            case 'facet.feed':
-                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = 'post' $hidden";
-                break;
-            case 'facet.feed.topic':
-                $string     = "WHERE facet_list LIKE :qa AND facet_list LIKE :topic AND post_draft = 0 AND post_type = 'post'";
-                break;
-            case 'questions':
-                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 1 $hidden";
-                break;
-            case 'posts':
-                $string     = "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 0 $hidden";
-                break;
-            case 'recommend':
-                $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = 'post' $hidden";
-                break;
-            case 'web.feed':
-                $string     = "WHERE post_url_domain = :qa AND post_draft = 0 $hidden";
-                break;
-            case 'profile.posts':
-                $string     = "WHERE post_user_id  = :qa AND post_draft = 0 AND post_type = 'post'";
-                break;
-        }
+		return match ($sheet) {
+			'facet.feed'		=> "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = 'post'" . $hidden,
+			'facet.feed.topic'	=> "WHERE facet_list LIKE :qa AND facet_list LIKE :topic AND post_draft = 0 AND post_type = 'post'",
+			'questions'			=> "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 1" . $hidden,
+			'posts'				=> "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 0" . $hidden,
+			'recommend'			=> "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = 'post'" . $hidden,
+			'web.feed'			=> "WHERE post_url_domain = :qa AND post_draft = 0" . $hidden,
+			'profile.posts'		=> "WHERE post_user_id = :qa AND post_draft = 0 AND post_type = 'post'",
+		};
 
         return $string;
     }
