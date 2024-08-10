@@ -18,11 +18,11 @@ $post   = $data['post'] ?? false;
 
         <div class="flex flex-auto">
           <div class="box-logo">
-            <svg id="togglemenu" class="icons pointer">
+            <svg id="togglemenu" class="icons pointer icon-bold">
               <use xlink:href="/assets/svg/icons.svg#menu"></use>
             </svg>
 
-            <svg class="icons menu__button none">
+            <svg class="icons menu__button none icon-bold">
               <use xlink:href="/assets/svg/icons.svg#menu"></use>
             </svg>
 
@@ -81,14 +81,16 @@ $post   = $data['post'] ?? false;
 
             <?= Html::addPost($facet['facet_id'] ?? false); ?>
 
-            <a id="toggledark" class="gray-600"><svg class="icons">
+            <a id="toggledark" class="gray-600">
+			  <svg class="icons icon-bold">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
-              </svg></a>
+              </svg>
+			</a>
 
             <div class="relative">
               <div id="el_notif" class="none"></div>
               <a id="notif" class="add-notif gray-600 relative">
-                <svg class="icons">
+                <svg class="icons icon-bold">
                   <use xlink:href="/assets/svg/icons.svg#bell"></use>
                 </svg>
                 <span class="number-notif"></span>

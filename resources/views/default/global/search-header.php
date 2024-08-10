@@ -44,12 +44,14 @@ $q = $data['q'];
           </div>
         <?php else : ?>
           <div class="flex gap-max items-center">
-            <a id="toggledark" class="gray-600 mb-none"><svg class="icons">
+            <a id="toggledark" class="gray-600 mb-none">
+			  <svg class="icons icon-bold">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
-              </svg></a>
+              </svg>
+			</a>
 
             <a id="notif" class="gray-600 relative mb-none" href="<?= url('notifications'); ?>">
-              <svg class="icons">
+              <svg class="icons icon-bold">
                 <use xlink:href="/assets/svg/icons.svg#bell"></use>
               </svg>
               <span class="number-notif"></span>

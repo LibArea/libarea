@@ -22,7 +22,7 @@
         <?php if (!$container->user()->active()) : ?>
           <div class="flex gap-max items-center mb-mt5">
             <div id="toggledark" class="gray-600">
-              <svg class="icons">
+              <svg class="icons icon-bold">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg>
             </div>
@@ -37,12 +37,14 @@
           </div>
         <?php else : ?>
           <div class="flex gap-max items-center mb-mt5">
-            <a id="toggledark" class="gray-600"><svg class="icons">
+            <a id="toggledark" class="gray-600">
+			  <svg class="icons icon-bold">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
-              </svg></a>
+              </svg>
+			</a>
 
             <a id="notif" class="gray-600 relative" href="<?= url('notifications'); ?>">
-              <svg class="icons">
+              <svg class="icons icon-bold">
                 <use xlink:href="/assets/svg/icons.svg#bell"></use>
               </svg>
               <span class="number-notif"></span>

@@ -76,6 +76,10 @@ h5 {
   width: 15px;
 }
 
+.icon-bold {
+  stroke-width: 2;
+}
+
 .list-none {
   list-style: none;
   padding: 0;

@@ -95,7 +95,7 @@ class EditItemController extends Module
         $published = $published == 'on' ? 1 : 0;
         $published = $this->container->user()->admin() ? $published : 0;
 
-        $new_user_id = $this->selectAuthor($item['item_user_id'], Request::post('user_id')->value());
+        $new_user_id = $this->selectAuthor($item['item_user_id'], (int)Request::post('user_id')->value());
 
         if ($this->container->user()->admin()) {
             $item_slug = Request::post('item_slug')->value();
