@@ -63,7 +63,7 @@ $post   = $data['post'] ?? false;
         <?php if (!$container->user()->active()) : ?>
           <div class="flex gap-max items-center">
             <div id="toggledark" class="gray-600">
-              <svg class="icons">
+              <svg class="icons icon-bold">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg>
             </div>

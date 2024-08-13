@@ -18,7 +18,7 @@
             <span class="lowercase"><?= langDate($comment['comment_date']); ?></span>
           </div>
           <a class="last-content_telo" href="<?= post_slug($comment['post_id'], $comment['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
-            <?php if (mb_strlen($fragment = fragment($comment['comment_content'], 98), 'utf-8') < 5) : ?>
+            <?php if (mb_strlen($fragment = fragment($comment['comment_content'], 78), 'utf-8') < 5) : ?>
               <span class="lowercase">+ <?= __('app.comment'); ?>...</span>
             <?php else : ?>
               <?= $fragment; ?>
