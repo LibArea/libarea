@@ -200,6 +200,12 @@ return [
     'drop_image'        => 'Trageți o imagine pentru a o încărca.',
     'attach_files'      => 'Fișierele pot fi lipite din clipboard.',
 
+	'h2'      			=> 'Titlul 2',
+	'h3'      			=> 'Titlul 3',
+	'checklist'      	=> 'Lista',
+	'inline_code'      	=> 'Cod inline',
+	'code_block'      	=> 'Cod bloc',
+
     'entry_policy'      => 'Aprobați noi membri',
 
     'option'            => 'Opțiune',

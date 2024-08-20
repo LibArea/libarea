@@ -200,6 +200,12 @@ return [
     'drop_image'        => 'Kéo và thả hình ảnh để tải nó lên.',
     'attach_files'      => 'Các tập tin có thể được chèn từ bộ đệm.',
 
+	'h2'      			=> 'Tiêu đề 2',
+	'h3'      			=> 'Tiêu đề 3',
+	'checklist'      	=> 'Danh sách',
+	'inline_code'      	=> 'Mã nội tuyến',
+	'code_block'      	=> 'Khối mã',
+
     'entry_policy'      => 'Phê duyệt người tham gia tham gia',
 
     'option'            => 'Lựa chọn',

@@ -202,6 +202,12 @@ return [
     'drop_image'        => 'Drag an image to upload it.',
     'attach_files'      => 'Files can be pasted from clipboard.',
 
+	'h2'      			=> 'Heading 2',
+	'h3'      			=> 'Heading 3',
+	'checklist'      	=> 'List',
+	'inline_code'      	=> 'Inline Code',
+	'code_block'      	=> 'Code Block',
+
     'entry_policy'      => 'Approve new members',
 
     'option'            => 'Option',
