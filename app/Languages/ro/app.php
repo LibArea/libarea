@@ -206,6 +206,10 @@ return [
 	'inline_code'      	=> 'Cod inline',
 	'code_block'      	=> 'Cod bloc',
 
+	'switching'      	=> 'Comutare',
+	'editing'      		=> 'Editare',
+	'icons'      		=> 'Icoane',
+
     'entry_policy'      => 'Aprobați noi membri',
 
     'option'            => 'Opțiune',

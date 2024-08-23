@@ -50,14 +50,7 @@
           </div>
         </div>
 
-        <?= insert('/_block/form/editor', [
-          'autosave'  => 'addPostId',
-          'title'     => __('app.post'),
-          'height'    => '250px',
-          'type'     => 'post-telo',
-          'id'       => 0,
-          'cut'      => true
-        ]); ?>
+        <?= insert('/_block/form/editor/toolbar-img', ['title' => __('app.post'), 'height' => 'auto', 'type' => 'post-telo', 'id' => 0]); ?>
 
         <?php if ($container->access()->limitTl(2)) : ?>
           <fieldset>

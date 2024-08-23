@@ -119,7 +119,7 @@ $post = $data['post'];
         <form action="<?= url('add.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
           <?= $container->csrf()->field(); ?>
 
-          <?= insert('/_block/form/editor', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
+          <?= insert('/_block/form/editor/notoolbar-img', ['height'  => '250px', 'type' => 'answer', 'id' => $post['post_id']]); ?>
 
           <div class="clear mb15">
             <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">

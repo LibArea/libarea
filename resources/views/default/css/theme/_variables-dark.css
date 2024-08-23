@@ -76,13 +76,10 @@ body.dark {
   --tags-border-color: #555;
 }
 
-body.dark .EasyMDEContainer .CodeMirror {
+body.dark .cherry-editor.cherry-editor--full,
+body.dark .cherry-editor .CodeMirror  {
   background-color: var(--form-bg-color);
   color: var(--form-text-color);
-}
-
-body.dark .EasyMDEContainer .editor-preview {
-    background: var(--form-bg-color);
 }
 
 body.dark .comment:target,

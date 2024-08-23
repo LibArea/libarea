@@ -200,12 +200,14 @@ return [
     'select_image'      => '请选择图像',
     'drop_image'        => '拖放图像以上传它。',
     'attach_files'      => '可以从缓冲区插入文件',
-
 	'h2'      			=> '标题 2',
 	'h3'      			=> '标题 3',
 	'checklist'      	=> '列表',
 	'inline_code'      	=> '内联代码',
 	'code_block'      	=> '代码块',
+	'switching'      	=> '切换',
+	'editing'      		=> '编辑',
+	'icons'      		=> '图标',
 
     'entry_policy'      => '批准新成员',
 

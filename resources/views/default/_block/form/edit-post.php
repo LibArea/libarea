@@ -64,7 +64,7 @@
   </div>
 <?php endif; ?>
 
-<?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $post['post_content'], 'cut' => true, 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
+<?= insert('/_block/form/editor/toolbar-img', ['height'  => '300px', 'content' => $post['post_content'], 'title' => __('app.post'), 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
 
 <?php if ($container->access()->limitTl(2)) : ?>
   <?php if ($post['post_draft'] == 1) : ?>

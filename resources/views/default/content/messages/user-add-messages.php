@@ -1,5 +1,3 @@
-<?php insert('/_block/add-js-css'); ?>
-
 <main>
   <div class="indent-body">
     <h1 class="title">
@@ -8,12 +6,14 @@
         <?= __('app.all_messages'); ?>
       </a>
     </h1>
-    <form action="<?= url('add.message', method: 'post'); ?>" method="post">
-      <?= $container->csrf()->field(); ?>
-      <input type="hidden" name="recipient" value="<?= $data['recipient_uid']; ?>" />
-      <?= insert('/_block/form/editor', ['height'  => '150px', 'type' => 'message', 'id' => '', 'message' => true]); ?>
-      <?= Html::sumbit(__('app.send')); ?>
-    </form>
+	<div class="hidden">
+      <form action="<?= url('add.message', method: 'post'); ?>" method="post">
+        <?= $container->csrf()->field(); ?>
+        <input type="hidden" name="recipient" value="<?= $data['recipient_uid']; ?>" />
+        <?= insert('/_block/form/editor/toolbar-noimg', ['height'  => 'auto', 'type' => 'message', 'id' => '']); ?>
+        <div class="right mt15"><?= Html::sumbit(__('app.send')); ?></div>
+      </form>
+	</div>
   </div>
 </main>
 <aside>

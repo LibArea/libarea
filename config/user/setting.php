@@ -32,28 +32,28 @@ return [
       'addition'  => 'https://github.com/',
       'title'     => 'github',
       'lang'      => 'app.github',
-      'help'      => 'https://github.com/NICK',
+      'help'      => 'https://github.com/***',
       'name'      => 'github'
     ], [
       'url'       => 'skype',
       'addition'  => 'skype:',
       'title'     => 'skype',
       'lang'      => 'app.skype',
-      'help'      => 'skype:<b>NICK</b>',
+      'help'      => 'skype:<b>***</b>',
       'name'      => 'skype'
     ], [
       'url'       => 'telegram',
       'addition'  => 'https://t.me/',
       'title'     => 'telegram',
       'lang'      => 'app.telegram',
-      'help'      => 'https://t.me/NICK',
+      'help'      => 'https://t.me/***',
       'name'      => 'telegram'
     ], [
       'url'       => 'vk',
       'addition'  => 'https://vk.com/',
       'title'     => 'vk',
       'lang'      => 'app.vk',
-      'help'      => 'https://vk.com/NICK',
+      'help'      => 'https://vk.com/***',
       'name'      => 'vk'
     ],
   ],

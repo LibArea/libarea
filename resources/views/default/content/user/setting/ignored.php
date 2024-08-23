@@ -1,7 +1,6 @@
 <main>
+  <?= insert('/content/user/setting/nav'); ?>
   <div class="indent-body">
-    <?= insert('/content/user/setting/nav'); ?>
-
     <h2><?= __('app.ignored_users'); ?></h2>
 
     <?php if ($data['ignored']) : ?>

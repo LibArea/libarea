@@ -124,7 +124,7 @@ ul.nav {
 }
 
 ul.nav>li {
-  padding: 6px 12px;
+  padding: 4px 8px;
 }
 
 ul.nav.small>li {
@@ -136,8 +136,7 @@ ul.nav>li>a {
 }
 
 ul.nav>li.active {
-  background-color: var(--nav-bg-active);
-  border-radius: var(--border-radius);
+  border-bottom: 2px solid var(--blue);
   color: var(--nav-color-active);
 }
 

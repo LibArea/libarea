@@ -37,5 +37,5 @@ ul.nav>li.active>a {
 }
 
 .menu .active .icons {
-  stroke: #eab308;
+  stroke: var(--blue);
 }

@@ -201,12 +201,14 @@ return [
     'select_image'      => 'Please select an image',
     'drop_image'        => 'Drag an image to upload it.',
     'attach_files'      => 'Files can be pasted from clipboard.',
-
 	'h2'      			=> 'Heading 2',
 	'h3'      			=> 'Heading 3',
 	'checklist'      	=> 'List',
 	'inline_code'      	=> 'Inline Code',
 	'code_block'      	=> 'Code Block',
+	'switching'      	=> 'Switching',
+	'editing'      		=> 'Editing',
+	'icons'      		=> 'Icons',
 
     'entry_policy'      => 'Approve new members',
 

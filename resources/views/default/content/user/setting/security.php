@@ -1,7 +1,6 @@
 <main>
+  <?= insert('/content/user/setting/nav'); ?>
   <div class="indent-body">
-    <?= insert('/content/user/setting/nav'); ?>
-
     <form class="max-w300" action="<?= url('setting.edit.security', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/setting-security'); ?>

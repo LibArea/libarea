@@ -121,16 +121,16 @@ class FeedModel extends Model
 
     public static function display(string $sheet)
     {
-        $hidden = self::container()->user()->admin() ? "" : "AND post_hidden = 0";
+        $hidden = self::container()->user()->admin() ? '' : 'AND post_hidden = 0';
 
 		return match ($sheet) {
-			'facet.feed'		=> "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = 'post'" . $hidden,
-			'facet.feed.topic'	=> "WHERE facet_list LIKE :qa AND facet_list LIKE :topic AND post_draft = 0 AND post_type = 'post'",
-			'questions'			=> "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 1" . $hidden,
-			'posts'				=> "WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 0" . $hidden,
-			'recommend'			=> "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = 'post'" . $hidden,
-			'web.feed'			=> "WHERE post_url_domain = :qa AND post_draft = 0" . $hidden,
-			'profile.posts'		=> "WHERE post_user_id = :qa AND post_draft = 0 AND post_type = 'post'",
+			'facet.feed'		=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'post\'' . $hidden,
+			'facet.feed.topic'	=> 	'WHERE facet_list LIKE :qa AND facet_list LIKE :topic AND post_draft = 0 AND post_type = \'post\'',
+			'questions'			=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 1 ' . $hidden,
+			'posts'				=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_feature = 0 ' . $hidden ,
+			'recommend'			=>	'WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = \'post\'' . $hidden,
+			'web.feed'			=> 	'WHERE post_url_domain = :qa AND post_draft = 0 ' . $hidden,
+			'profile.posts'		=> 	'WHERE post_user_id = :qa AND post_draft = 0 AND post_type = \'post\'',
 		};
 
         return $string;

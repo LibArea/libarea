@@ -141,10 +141,10 @@ class CommentModel extends Model
 
     public static function sorts(string $sheet)
     {
-        $hidden = self::container()->user()->admin() ? "" : "AND post_hidden = 0";
+        $hidden = self::container()->user()->admin() ? '' : 'AND post_hidden = 0';
 
 		return match ($sheet) {
-			'all'		=> 'WHERE comment_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0' . $hidden,
+			'all'		=> 'WHERE comment_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0 ' . $hidden,
 			'deleted'	=> 'WHERE comment_is_deleted = 1',
 			default		=> 'WHERE comment_is_deleted = 0 AND post_is_deleted = 0',
 		};

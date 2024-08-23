@@ -55,7 +55,7 @@ $blog = $data['blog'][0] ?? null;
       </div>
 
       <?php if ($post['post_thumb_img']) : ?>
-        <div class="img-preview">
+        <div class="img-preview mt10">
           <?= Img::image($post['post_thumb_img'], $post['post_title'],  'medium-zoom-image', 'post', 'thumbnails'); ?>
         </div>
       <?php endif; ?>
@@ -163,7 +163,7 @@ $blog = $data['blog'][0] ?? null;
             <form action="<?= url('add.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
               <?= $container->csrf()->field(); ?>
 
-              <?= insert('/_block/form/editor', ['height'  => '170px', 'type' => 'comment', 'id' => $post['post_id']]); ?>
+              <?= insert('/_block/form/editor/notoolbar-img', ['height'  => '170px', 'type' => 'comment', 'id' => $post['post_id'], 'title' => __('app.reply')]); ?>
 
               <div class="clear mt5">
                 <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
@@ -236,7 +236,7 @@ $blog = $data['blog'][0] ?? null;
         <div class="mb15 hidden flex gap text-sm">
           <a class="gray" href="<?= post_slug($rec_post['post_id'], $rec_post['post_slug']); ?>">
             <?php if ($rec_post['post_comments_count'] > 0) : ?>
-              <div class="box-small bg-green">
+              <div class="box-small bg-blue">
                 <?= $rec_post['post_comments_count'] ?>
               </div>
             <?php else : ?>

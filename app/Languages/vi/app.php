@@ -206,6 +206,10 @@ return [
 	'inline_code'      	=> 'Mã nội tuyến',
 	'code_block'      	=> 'Khối mã',
 
+	'switching'      	=> 'Chuyển đổi',
+	'editing'      		=> 'Chỉnh sửa',
+	'icons'      		=> 'Biểu tượng',
+
     'entry_policy'      => 'Phê duyệt người tham gia tham gia',
 
     'option'            => 'Lựa chọn',

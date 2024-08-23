@@ -1,8 +1,7 @@
 <?php $block = $data['blocks'][0] ?? false; ?>
 <main>
+  <?= insert('/content/user/setting/nav'); ?>
   <div class="indent-body">
-    <?= insert('/content/user/setting/nav'); ?>
-
     <div class="mt20">
       <form action="<?= url('setting.edit.preferences', method: 'post'); ?>" accept-charset="UTF-8" method="post">
         <?= $container->csrf()->field(); ?>

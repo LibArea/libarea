@@ -8,7 +8,7 @@
     <form class="max-w780" action="<?= url('edit.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
       <?= $container->csrf()->field(); ?>
 
-      <?= insert('/_block/form/editor', ['height'  => '300px', 'content' => $data['comment']['comment_content'], 'type' => 'comment', 'id' => $data['post']['post_id']]); ?>
+      <?= insert('/_block/form/editor/notoolbar-img', ['height'  => '300px', 'content' => $data['comment']['comment_content'], 'type' => 'comment', 'id' => $data['post']['post_id']]); ?>
 
       <?php if ($container->user()->admin()) : ?>
         <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>

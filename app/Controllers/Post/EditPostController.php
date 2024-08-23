@@ -210,8 +210,8 @@ class EditPostController extends Controller
 			return false;
 		}
 
-		$img = $_FILES['image'];
-		if ($_FILES['image']['name']) {
+		$img = $_FILES['file'];
+		if ($_FILES['file']['name']) {
 			return json_encode(['data' => ['filePath' => UploadImage::postImg($img, $type, $id)]]);
 		}
 

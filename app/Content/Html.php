@@ -49,7 +49,7 @@ class Html
             $url_add = $url_add . '/' . $facet_id;
         }
 
-        return '<a title="' . __('app.add_post') . '" href="' . $url_add . '" class="sky"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg></a>';
+        return '<a title="' . __('app.add_post') . '" href="' . $url_add . '" class="blue"><svg class="icons icon-bold"><use xlink:href="/assets/svg/icons.svg#plus"></use></svg></a>';
     }
 
     // Localization of dates and events....
@@ -156,7 +156,7 @@ class Html
         }
 
         if ($pagesCount > $pNum) {
-            $html .= '<div class="bg-green p5-10 white">' . ($pNum) . '</div>';
+            $html .= '<div class="bg-blue p5-10 white">' . ($pNum) . '</div>';
         }
 
         if ($pagesCount > $pNum) {

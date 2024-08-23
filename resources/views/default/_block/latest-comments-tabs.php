@@ -1,12 +1,6 @@
 <?php if (!empty($latest_comments)) : ?>
   <div class="box">
-    <div class="mb15">
-      <ul class="nav small">
-        <li class="tab-button active" data-id="home">
-          <?= __('app.comments'); ?>
-        </li>
-      </ul>
-    </div>
+    <h4 class="uppercase-box"><?= __('app.comments'); ?></h4>
     <ul class="last-content content-tabs tab_active" id="home">
       <?php foreach ($latest_comments as $comment) : ?>
         <li>

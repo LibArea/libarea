@@ -49,7 +49,7 @@ if ($container->user()->id() > 0) {
             echo '<li class="mt15 text-sm flex gap items-center justify-between">';
             echo '<a class="flex gap-min items-center" href="'.$url.'">';
 			echo Img::image($topic['facet_img'], $topic['facet_title'], 'img-sm', 'logo', 'max');
-            echo $topic['facet_title'].' '.$blog;
+            echo '<span>' . $topic['facet_title'].' '.$blog. '</span>';
             echo '</a></li>';
         }
 

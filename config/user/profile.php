@@ -20,7 +20,7 @@ return [
 			'url'       => 'public_email',
 			'addition'  => 'mailto:',
 			'title'     => 'public_email',
-			'lang'      => 'app.еmail',
+			'lang'      => 'app.email',
 		], [
 			'url'       => 'github',
 			'addition'  => false,
