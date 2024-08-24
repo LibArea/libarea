@@ -16,13 +16,15 @@
     </div>
   </div>
 
-  <div class="flex gray-600 justify-center gap mb20">
-    <?= Html::signed([
-      'type'            => 'facet',
-      'id'              => $topic['facet_id'],
-      'content_user_id' => $topic['facet_user_id'],
-      'state'           => is_array($data['facet_signed']),
-    ]); ?>
+  <div class="gray-600 mb20">
+    <div class="right">
+      <?= Html::signed([
+        'type'            => 'facet',
+        'id'              => $topic['facet_id'],
+        'content_user_id' => $topic['facet_user_id'],
+        'state'           => is_array($data['facet_signed']),
+      ]); ?>
+	</div>
   </div>
 
   <div class="flex justify-between text-sm gray-600 lowercase">

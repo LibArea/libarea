@@ -36,7 +36,7 @@
   </div>
 
   <?php if ($data['blogs']) : ?>
-    <div class="box bg-yellow">
+    <div class="box">
       <h4 class="uppercase-box"><?= __('app.created_by'); ?></h4>
       <?php foreach ($data['blogs'] as $blog) : ?>
         <div class="w-100 mb15 flex flex-row">

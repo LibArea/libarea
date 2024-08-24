@@ -37,21 +37,10 @@ $blog = $data['blog'][0] ?? null;
         <span class="lowercase">
           <?= langDate($post['post_date']); ?>
         </span>
-        <?php if ($post['modified']) : ?>
-          <span class="mb-none">
-            (<?= __('app.ed'); ?>)
-          </span>
-        <?php endif; ?>
 
         <?php if ($container->user()->active()) : ?>
-          <?php if ($container->access()->postAuthor($post, $blog['facet_user_id'] ?? 0) == true || $post['post_draft'] == true) : ?>
-            <a class="gray-600 lowercase" href="<?= url('post.form.edit', ['id' => $post['post_id']]); ?>">
-              <?= __('app.edit'); ?>
-            </a>
-          <?php endif; ?>
           <?= insert('/_block/admin-dropdown-post', ['post' => $post]); ?>
         <?php endif; ?>
-
       </div>
 
       <?php if ($post['post_thumb_img']) : ?>
