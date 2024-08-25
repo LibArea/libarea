@@ -2,7 +2,7 @@
   <div class="indent-body">
     <h1 class="title"><?= __('app.' . $data['sheet']); ?></h1>
 
-    <form class="max-w300" action="<?= url('register.add', method: 'post'); ?>" id="registration" method="post">
+    <form class="max-w300 mb-max-w-100" action="<?= url('register.add', method: 'post'); ?>" id="registration" method="post">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/registration'); ?>
     </form>

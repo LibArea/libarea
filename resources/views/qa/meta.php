@@ -25,4 +25,5 @@
     <link rel="stylesheet" href="/assets/css/rtl.css" type="text/css">
   <?php endif; ?>
   <script src="/assets/js/la.js"></script>
+  <script src="/assets/js/prism/prism.js"></script>
 </head>

@@ -1,6 +1,5 @@
 <script src="/assets/js/common.js"></script>
 <script src="/assets/js/medium-zoom.js"></script>
-<script src="/assets/js/prism/prism.js"></script>
  
 <?php if ($container->user()->active()) : ?>
   <script src="/assets/js/app.js"></script>

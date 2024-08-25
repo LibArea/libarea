@@ -177,6 +177,10 @@ main {
     width: 100%;
   }
 
+  .mb-max-w-100 {
+    max-width: 100%;
+  }
+
   .box {
     padding: 1rem;
     border-radius: 0;

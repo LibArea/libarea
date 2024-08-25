@@ -5,20 +5,6 @@
     </svg>
   </span>
   <ul class="dropdown">
-    <?php if ($post['modified']) : ?>
-      <li>
-        <div class="lowercase">
-          &#183; <?= langDate($post['post_modified']); ?> <div class="gray-600">(<?= __('app.ed'); ?>)</span>
-          </div>
-      </li>
-    <?php else : ?>
-      <li>
-        <div class="lowercase">
-          &#183; <?= langDate($post['post_date']); ?>
-        </div>
-      </li>
-    <?php endif; ?>
-
     <?php if ($container->user()->login() == $post['login']) : ?>
       <?php if ($post['my_post'] == $post['post_id']) : ?>
         <li>
@@ -67,6 +53,19 @@
           &#183; <?= $post['post_ip']; ?>
         </a>
       </li>
+	<?php endif; ?>  
+    <?php if ($post['modified']) : ?>
+      <li>
+        <div class="lowercase">
+          &#183; <?= langDate($post['post_modified']); ?> <div class="gray-600">(<?= __('app.ed'); ?>)</span>
+          </div>
+      </li>
+    <?php else : ?>
+      <li>
+        <div class="lowercase">
+          &#183; <?= langDate($post['post_date']); ?>
+        </div>
+      </li>
+    <?php endif; ?>
   </ul>
-<?php endif; ?>
 </div>

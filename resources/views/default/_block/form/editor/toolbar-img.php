@@ -114,7 +114,7 @@
 			// sidebar: ['togglePreview'],
 
 			// Плавающую панель инструментов, при выделении текста
-			bubble: ['bold', 'italic', 'strikethrough', 'quote', 'list', 'image'],
+			bubble: ['bold', 'italic', 'strikethrough', 'quote', 'inlineCode'],
 			// Панель подсказок
 			float: ['h2', 'h3', '|', 'checklist', 'quote', 'code', 'image'],
 		},
