@@ -2,7 +2,7 @@
 $day = $container->request()->get('sort')->value();
 ?>
 
-<span title="<?= __('app.top'); ?>" class="trigger gray-600">
+<span title="<?= __('app.top'); ?>" class="trigger gray-600 ml30">
   <span class="mb-none">
     <?php if ($day == 'TopMonth') : ?>
       <?= __('app.one_month'); ?>

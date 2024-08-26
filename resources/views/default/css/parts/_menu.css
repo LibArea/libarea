@@ -114,6 +114,13 @@
 }
 
 /* Navigation */
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 ul.nav {
   list-style: none;
   align-items: center;
@@ -124,7 +131,7 @@ ul.nav {
 }
 
 ul.nav>li {
-  padding: 4px 8px;
+  padding: 2px 8px;
 }
 
 ul.nav.small>li {

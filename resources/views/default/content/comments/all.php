@@ -1,6 +1,6 @@
 <main>
   <div class="indent-body">
-    <div class="flex justify-between mb20">
+    <div class="nav-bar">
       <ul class="nav">
         <?= insert('/_block/navigation/nav', [
           'list' => [

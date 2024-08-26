@@ -62,7 +62,7 @@ $facet  = $data['facet'] ?? false; ?>
         <div>
           <div class="flex gap-max items-center">
 
-            <?= Html::addPost($facet); ?>
+            <?= Html::addPost($facet['facet_id'] ?? false); ?>
 
             <div id="toggledark" class="only-icon">
               <svg class="icons">

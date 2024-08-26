@@ -59,7 +59,7 @@
   </div>
 </div>
 
-<div class="flex justify-between items-center mb20">
+<div class="nav-bar">
   <ul class="nav scroll-menu">
     <?= insert('/_block/navigation/config/topic-nav', ['slug' => $topic['facet_slug']]); ?>
   </ul>

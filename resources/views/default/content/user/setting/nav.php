@@ -1,4 +1,4 @@
-<div class="mb20">
+<div class="nav-bar">
   <ul class="nav scroll-menu">
     <?= insert('/_block/navigation/config/setting-nav'); ?>
   </ul>

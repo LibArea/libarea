@@ -1,8 +1,9 @@
 <main>
-
-  <ul class="nav scroll-menu">
-    <?= insert('/_block/navigation/nav', ['list' => config('menu', 'home')]); ?>
-  </ul>
+  <div class="nav-bar">
+    <ul class="nav scroll-menu">
+	  <?= insert('/_block/navigation/config/home-nav'); ?>
+    </ul>
+  </div>	
 
   <?= insert('/content/post/post', ['data' => $data]); ?>
 

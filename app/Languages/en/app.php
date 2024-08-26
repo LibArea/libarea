@@ -322,7 +322,7 @@ return [
     'text_closed'       => 'Without authorization it is forbidden to view this hidden text',
 
     /* Date and time + events */
-    'months'        => ['', 'January', 'February', 'Martha', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    'months'        => ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     'today'         => 'Today',
     'yesterday'     => 'Yesterday',
 

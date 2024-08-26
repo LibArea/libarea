@@ -165,6 +165,10 @@ main {
   .title {
     font-size: 1.2125rem;
   }
+  
+  .nav-bar {
+	margin: 0 10px 20px 10px;
+  }
 
   .mb-block,
   #contentWrapper {

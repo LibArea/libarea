@@ -7,7 +7,7 @@
       </span>
     </div>
 
-    <div class="flex justify-between mb20">
+    <div class="nav-bar">
       <ul class="nav scroll-menu">
 
         <?= insert(

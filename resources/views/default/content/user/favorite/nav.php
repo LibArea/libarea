@@ -1,4 +1,4 @@
-<div class="flex justify-between mb15">
+<div class="nav-bar">
   <ul class="nav scroll-menu">
     <?= insert('/_block/navigation/nav', [
       'list' => [

@@ -6,7 +6,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
 
     <div class="flex gap mt20">
       <main class="flex-auto">
-        <div class="flex justify-between mb20">
+        <div class="nav-bar">
           <ul class="nav scroll-menu">
             <?php $list =  [
               [
