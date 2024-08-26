@@ -72,7 +72,12 @@
 			codemirror: {
 				// placeholder: "<?= __('app.text'); ?>...",
 			},
+			codemirror: {
+			  autofocus: false,
+			},
+			keepDocumentScrollAfterInit: false,
 		},
+		 autoScrollByHashAfterInit: false,
 
 		toolbars: {
 			// Определите верхнюю панель инструментов

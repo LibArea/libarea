@@ -13,7 +13,7 @@
 </main>
 
 <aside>
-  <div class="p15 bg-violet">
+  <div class="box">
     <?= __('auth.mail_confirm'); ?>
   </div>
 </aside>

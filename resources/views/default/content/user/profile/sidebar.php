@@ -104,6 +104,26 @@
     <div class="box bg-yellow">
       <h4 class="uppercase-box"><?= __('app.admin'); ?></h4>
       <div class="mt5">
+        <a class="gray mb5 block" href="<?= url('admin.user.edit.form', ['id' => $profile['id']]); ?>">
+          <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#settings"></use>
+          </svg>
+          <span class="middle"><?= __('app.edit'); ?></span>
+        </a>
+        <a class="gray block mb5" href="<?= url('admin.badges.user.add', ['id' => $profile['id']]); ?>">
+          <svg class="icons">
+            <use xlink:href="/assets/svg/icons.svg#award"></use>
+          </svg>
+          <span class="middle"><?= __('app.reward_user'); ?></span>
+        </a>
+        <?php if ($profile['whisper']) : ?>
+          <div class="tips text-sm gray-600">
+            <svg class="icons">
+              <use xlink:href="/assets/svg/icons.svg#info"></use>
+            </svg>
+            <?= $profile['whisper']; ?>
+          </div>
+        <?php endif; ?>
         <?php if ($profile['trust_level'] != 10) : ?>
           <?php if ($profile['ban_list'] == 1) : ?>
             <span class="type-ban gray mb5 block" data-id="<?= $profile['id']; ?>" data-type="user">
@@ -117,29 +137,9 @@
               <svg class="icons">
                 <use xlink:href="/assets/svg/icons.svg#alert-circle"></use>
               </svg>
-              <?= __('app.ban_it'); ?>
+              <span class="middle"><?= __('app.ban_it'); ?></span>
             </span>
           <?php endif; ?>
-        <?php endif; ?>
-        <a class="gray mb5 block" href="<?= url('admin.user.edit.form', ['id' => $profile['id']]); ?>">
-          <svg class="icons">
-            <use xlink:href="/assets/svg/icons.svg#settings"></use>
-          </svg>
-          <span class="middle"><?= __('app.edit'); ?></span>
-        </a>
-        <a class="gray block" href="<?= url('admin.badges.user.add', ['id' => $profile['id']]); ?>">
-          <svg class="icons">
-            <use xlink:href="/assets/svg/icons.svg#award"></use>
-          </svg>
-          <span class="middle"><?= __('app.reward_user'); ?></span>
-        </a>
-        <?php if ($profile['whisper']) : ?>
-          <div class="tips text-sm gray-600">
-            <svg class="icons">
-              <use xlink:href="/assets/svg/icons.svg#info"></use>
-            </svg>
-            <?= $profile['whisper']; ?>
-          </div>
         <?php endif; ?>
         <hr>
         <span class="gray">id<?= $profile['id']; ?> | Tl<?= $profile['trust_level']; ?> | <?= $profile['email']; ?></span>
