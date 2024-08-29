@@ -450,7 +450,5 @@ return [
         'trust-levels'	=> '/config/trust-levels.php',
         'setting'     	=> '/config/user/setting.php',
         'profile'     	=> '/config/user/profile.php',
-        'editor'		=> '/config/editor/message.php',
-        'buttons'		=> '/config/editor/buttons.php',
     ],
 ];
