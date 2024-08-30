@@ -15,7 +15,7 @@ foreach ($menu as $key => $item) :
             $class = ($css || $isActive) ? ' class="' . $isActive . ' ' .  $css . '"' : '';
             echo '<li'.$class.'><a href="'.$item['url'].'">';
             if (!empty($item['icon'])) {
-                echo '<svg class="icons"><use xlink:href="/assets/svg/icons.svg#'.$item['icon'].'"></use></svg>';
+                echo '<svg class="icon"><use xlink:href="/assets/svg/icons.svg#'.$item['icon'].'"></use></svg>';
             }
             echo __($item['title']).'</a></li>';
         }
@@ -26,8 +26,8 @@ if ($container->user()->id() > 0) {
     if ($topics_user) {
         echo '<div class="flex justify-between items-center">';
         echo '<h4 class="mb5 ml5">'.__('app.preferences').'</h3>';
-        echo '<a class="text-sm" title="'.__('app.edit').'" href="'.url('setting.preferences').'">';
-        echo '<sup><svg class="icons gray-600"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></sup>';
+        echo '<a class="text-sm gray-600" title="'.__('app.edit').'" href="'.url('setting.preferences').'">';
+        echo '<sup><svg class="icon gray-600"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></sup>';
         echo '</a></div>';
 
         $i = 0;

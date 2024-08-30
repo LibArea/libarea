@@ -29,7 +29,7 @@ $q = $data['q'];
         <?php if (!$container->user()->active()) : ?>
           <div class="flex gap-max items-center">
             <div id="toggledark" class="gray-600">
-              <svg class="icons icon-bold">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg>
             </div>
@@ -45,13 +45,13 @@ $q = $data['q'];
         <?php else : ?>
           <div class="flex gap-max items-center">
             <a id="toggledark" class="gray-600 mb-none">
-			  <svg class="icons icon-bold">
+			  <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg>
 			</a>
 
             <a id="notif" class="gray-600 relative mb-none" href="<?= url('notifications'); ?>">
-              <svg class="icons icon-bold">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#bell"></use>
               </svg>
               <span class="number-notif"></span>

@@ -4,7 +4,7 @@
   <div class="indent-body">
     <?php if (!empty($data['writers'])) : ?>
       <div class="flex gap items-center">
-        <svg class="icons red icon-base">
+        <svg class="icon red">
           <use xlink:href="/assets/svg/icons.svg#award"></use>
         </svg>
         <h2 class="gray-600 m0"><?= __('app.by_deposit'); ?></h2>
@@ -12,13 +12,13 @@
       <hr class="mb20">
       <?php foreach ($data['writers'] as $ind => $row) : ?>
         <div class="flex flex-auto items-center mb20">
-          <div class="w94">
+          <div class="w60">
             <?= Html::formatToHuman($row['hits_count']); ?>
           </div>
           <div class="flex">
             <a class="flex items-center hidden gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">
               <?= Img::avatar($row['avatar'], $row['login'], 'img-base', 'max'); ?>
-              <div class="ml5">
+              <div class="ml10">
                 <div class="gray-600<?php if (Html::loginColor($row['created_at'] ?? false)) : ?> green<?php endif; ?>">
                   <span class="nickname"><?= $row['login']; ?></span>
                 </div>
@@ -37,7 +37,7 @@
 </main>
 <aside>
   <div class="box gray-600">
-    <svg class="icons">
+    <svg class="icon">
       <use xlink:href="/assets/svg/icons.svg#calendar"></use>
     </svg>
     <span class="middle"><?= langDate($topic['facet_date']); ?></span>

@@ -72,7 +72,7 @@ $post = $data['post'];
         <?php endif; ?>
         <?php if ($post['post_url_domain']) : ?>
           <?= __('app.source'); ?>:
-          <svg class="icons">
+          <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#link"></use>
           </svg>
           <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
@@ -87,7 +87,7 @@ $post = $data['post'];
       <div class="items-center flex gap gray-600">
         <?= Html::votes($post, 'post'); ?>
         <div class="items-center flex gap-min">
-          <svg class="icons">
+          <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#eye"></use>
           </svg>
           <?= $post['post_hits_count'] == 0 ? 1 : $post['post_hits_count']; ?>
@@ -146,7 +146,7 @@ $post = $data['post'];
         insert('/content/post/format-qa', ['data' => $data, 'post' => $post]);
       endif;
     else :
-      echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);
+      echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);
     endif; ?>
   </div>
 </main>

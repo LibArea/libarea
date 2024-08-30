@@ -48,7 +48,7 @@
         <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
       <?php endif; ?>
       (ed. <?= $data['user']['updated_at']; ?>) |
-      <svg class="icons">
+      <svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#eye"></use>
       </svg> <?= $data['user']['hits_count']; ?>
     </span>

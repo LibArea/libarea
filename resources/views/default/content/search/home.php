@@ -5,7 +5,7 @@
   <div class="box-center">
     <form action="<?= url('search.go'); ?>">
       <input class="search-input br5" placeholder="<?= __('search.name'); ?>..." name="q">
-      <button class="search-button-icon br5 pointer"><svg class="icons">
+      <button class="search-button-icon br5 pointer"><svg class="icon">
           <use xlink:href="/assets/svg/icons.svg#search"></use>
         </svg></button>
       <?= $container->csrf()->field(); ?>

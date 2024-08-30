@@ -15,7 +15,7 @@ $topic = $data['facet'];
 
   <?php else : ?>
     <div class="box center gray-600">
-      <svg class="icons icon-max">
+      <svg class="icon max">
         <use xlink:href="/assets/svg/icons.svg#x-octagon"></use>
       </svg>
       <div class="mt5 gray"><?= __('app.topic_deleted'); ?></div>
@@ -35,7 +35,7 @@ $topic = $data['facet'];
             <?php foreach ($data['writers'] as $ind => $row) : ?>
               <li class="mb10">
                 <a class="gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">
-                  <?= Img::avatar($row['avatar'], $row['login'], 'img-sm', 'max'); ?>
+                  <?= Img::avatar($row['avatar'], $row['login'], 'img-sm mr5', 'max'); ?>
                   <span class="nickname<?php if (Html::loginColor($row['created_at'] ?? false)) : ?> green<?php endif; ?>">
                     <?= $row['login']; ?>
                   </span>

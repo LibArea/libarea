@@ -9,14 +9,14 @@ $count = $poll['count'] ? $poll['count'] : 1;
       <?= $poll['question']['poll_title']; ?>
       <?php if ($container->user()->admin()) : ?>
         <sup><a href="<?= url('poll.form.edit', ['id' => $poll['question']['poll_id']]) ?>">
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>
           </a></sup>
       <?php endif; ?>
       <?php if ($poll['question']['poll_is_closed']) : ?>
-        <svg class="icons green">
-          <use xlink:href="/assets/svg/icons.svg#closed"></use>
+        <svg class="icon green">
+          <use xlink:href="/assets/svg/icons.svg#lock"></use>
         </svg>
       <?php endif; ?>
     </h2>
@@ -38,7 +38,7 @@ $count = $poll['count'] ? $poll['count'] : 1;
             <div class="poll-result">
               <div class="poll-label"><?= $value['answer_title']; ?>
                 <?php if ($poll['isVote']['vote_answer_id'] == $value['answer_id']) : ?>
-                  <svg class="icons red right">
+                  <svg class="icon red right">
                     <use xlink:href="/assets/svg/icons.svg#selected"></use>
                   </svg>
                 <?php endif; ?>
@@ -69,7 +69,7 @@ $count = $poll['count'] ? $poll['count'] : 1;
           <div class="poll-result">
             <div class="poll-label"><?= $value['answer_title']; ?>
               <?php if ($poll['isVote']['vote_answer_id'] ?? false == $value['answer_id']) : ?>
-                <svg class="icons red right">
+                <svg class="icon red right">
                   <use xlink:href="/assets/svg/icons.svg#selected"></use>
                 </svg>
               <?php endif; ?>

@@ -7,7 +7,7 @@
           <?= Html::facets($site['facet_list'], 'category', 'tag-violet mr15'); ?>
           <?php if ($site['item_id'] != $item_id) : ?>
             <a href="<?= url('item.form.edit', ['id' => $site['item_id']]); ?>">
-              <svg class="icons gray-600">
+              <svg class="icon gray-600">
                 <use xlink:href="/assets/svg/icons.svg#edit"></use>
               </svg>
             </a>

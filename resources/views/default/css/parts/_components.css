@@ -53,32 +53,68 @@ h5 {
   display: block;
 }
 
-/* См. https://feathericons.com/ и https://tabler-icons.io/ */
-.icons {
-  width: 21px;
-  height: 21px;
-  fill: none;
-  stroke: currentColor;
+/* См. https://github.com/VKCOM/icons */
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
   vertical-align: middle;
 }
 
-.icon-max {
+.icon.small {
+  width: 16px;
+}
+
+.icon.max {
   width: 121px;
   height: 121px;
 }
 
-.icon-base {
-  width: 48px;
+.menu .icon,
+.dropdown ul .icon {
+  color: var(--gray);
+}
+
+.menu .active .icon {
+  color: var(--blue);
+}
+/* end */
+
+/*
+ * Share icons
+ *
+ * Иконки, поделиться
+ */
+
+.icon-share {
   height: 48px;
+  width: 48px;
 }
 
-.icon-small {
-  width: 15px;
+.icon.vk {
+  color: #07f;
 }
 
-.icon-bold {
-  stroke-width: 2;
+.icon.ok {
+  color: #eb722e;
 }
+
+.icon.tg {
+  color: #64a9dc;
+}
+
+.icon.fb {
+  color: #3b5998;
+}
+
+.icon.lj {
+  color: #0d425a;
+}
+
+.icon.tw {
+  color: #00aced;
+}
+/* end */
 
 .list-none {
   list-style: none;
@@ -531,41 +567,4 @@ video {
   position: absolute;
   display: flex;
   gap: 1rem;
-}
-
-/*
- * Share icons
- *
- * Иконки, поделиться
- */
-
-.icon-share {
-  color: #fff;
-  height: 28px;
-  width: 28px;
-  margin: 3px;
-}
-
-.bg-vk {
-  background-color: #07f;
-}
-
-.bg-ok {
-  background-color: #eb722e;
-}
-
-.bg-tg {
-  background-color: #64a9dc;
-}
-
-.bg-fb {
-  background-color: #3b5998;
-}
-
-.bg-lj {
-  background-color: #0d425a;
-}
-
-.bg-tw {
-  background-color: #00aced;
 }

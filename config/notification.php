@@ -9,7 +9,7 @@ return [
 'list' => [
     ['id' => 1, 'icon' => 'mail', 'css' => 'green', 'lang' => 'notif_add_pm'],
     ['id' => 2, 'icon' => 'bi-lightbulb', 'css' => 'gray', 'lang' => 'notif_add_post'],
-    ['id' => 3, 'icon' => 'answers', 'css' => 'brown', 'lang' => 'notif_add_answer'],
+    ['id' => 3, 'icon' => 'reply', 'css' => 'brown', 'lang' => 'notif_add_answer'],
     ['id' => 4, 'icon' => 'comments', 'css' => 'gray-600', 'lang' => 'notif_add_comment'],
 
     ['id' => 5, 'icon' => 'comments', 'css' => 'gray', 'lang' => 'notif_add_comment_comment'],

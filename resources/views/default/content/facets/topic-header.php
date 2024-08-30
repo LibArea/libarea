@@ -6,7 +6,7 @@
         <?= $topic['facet_title']; ?>
         <?php if ($container->user()->admin() || $topic['facet_user_id'] == $container->user()->id()) : ?>
           <a class="gray-600" href="<?= url('facet.form.edit', ['type' => 'topic', 'id' => $topic['facet_id']]); ?>">
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>
           </a>
@@ -24,34 +24,34 @@
         'content_user_id' => $topic['facet_user_id'],
         'state'           => is_array($data['facet_signed']),
       ]); ?>
-	</div>
+    </div>
   </div>
 
   <div class="flex justify-between text-sm gray-600 lowercase">
     <div class="flex gap-min">
-      <svg class="icons">
+      <svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#users"></use>
       </svg>
       <?= $topic['facet_focus_count']; ?> <span class="mb-none"><?= __('app.reads'); ?></span>
 
-      <svg class="icons ml15">
+      <svg class="icon ml15">
         <use xlink:href="/assets/svg/icons.svg#post"></use>
       </svg>
       <?= $topic['facet_count']; ?> <span class="mb-none"><?= Html::numWord($topic['facet_count'], __('app.num_post'), false); ?></span>
     </div>
     <div class="flex gap">
       <a class="gray-600 ml30" href="<?= url('topic.info', ['slug' => $topic['facet_slug']]); ?>">
-        <svg class="icons">
+        <svg class="icon">
           <use xlink:href="/assets/svg/icons.svg#info"></use>
         </svg>
       </a>
 
-      <svg class="icons gray-600 pointer" data-a11y-dialog-show="id-share">
+      <svg class="icon gray-600 pointer" data-a11y-dialog-show="id-share">
         <use xlink:href="/assets/svg/icons.svg#share"></use>
       </svg>
 
       <a class="gray-600" href="/rss-feed/topic/<?= $topic['facet_slug']; ?>">
-        <svg class="icons">
+        <svg class="icon">
           <use xlink:href="/assets/svg/icons.svg#rss"></use>
         </svg>
       </a>

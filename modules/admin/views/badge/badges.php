@@ -40,7 +40,7 @@
         </td>
         <td class="center">
           <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.badges.edit', ['id' => $bg['badge_id']]); ?>">
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>
           </a>

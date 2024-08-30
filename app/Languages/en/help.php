@@ -19,7 +19,7 @@ return [
     'notifications_info'    => 'You can mark all ads as read by clicking on the link: "I have read".',
     'notification_info'     => 'You can unsubscribe from all email notifications in this section.',
 
-    'add_post'              => 'Use the tag <b>cut</b> (<svg class="icons"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br>  It hides under the cat part of the text following the tag (it will be written "Read more").',
+    'add_post'              => 'Use the tag <b>cut</b> (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br>  It hides under the cat part of the text following the tag (it will be written "Read more").',
     'edit_page'             => 'Official documentation should be error-free and written more in a formal manner.',
     'edit_post'             => 'See what the post looks like on the feed page and in the full version. Improve it here.',
     'add_topic'             => 'A topic is a node (for navigation) used by the system to organize content. The theme is a single point of view, the interpretation of various things, phenomena and other concepts.',

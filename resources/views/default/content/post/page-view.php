@@ -21,7 +21,7 @@
           <?= $page['post_modified']; ?>
           <?php if ($container->access()->author('post', $page) === true) : ?>
             <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('post.form.edit', ['id' => $page['post_id']]); ?>">
-              <svg class="icons">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#edit"></use>
               </svg>
             </a>
@@ -35,14 +35,14 @@
     <?php foreach ($data['pages'] as $ind => $row) : ?>
       <div class="mt5 mb10">
         <a class="gray" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
-          <svg class="icons">
+          <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#chevrons-right"></use>
           </svg> <?= $row['post_title']; ?>
         </a>
       </div>
     <?php endforeach; ?>
     <?php if ($container->user()->admin()) : ?>
-      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icons">
+      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icon">
           <use xlink:href="/assets/svg/icons.svg#edit"></use>
         </svg> <?= __('app.edit'); ?></a>
     <?php endif; ?>

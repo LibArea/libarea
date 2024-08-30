@@ -46,7 +46,7 @@
 
           <?php if ($post['post_url_domain']) : ?>
             <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-              <svg class="icons">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#link"></use>
               </svg> <?= $post['post_url_domain']; ?>
             </a>
@@ -81,14 +81,14 @@
         <div class="flex gap text-sm flex-row">
           <?= Html::votes($post, 'post'); ?>
           <div class="flex gray-600 gap-min">
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#eye"></use>
             </svg>
             <?= $post['post_hits_count'] == 0 ? 1 : Html::formatToHuman($post['post_hits_count']); ?>
           </div>
           <?php if ($post['post_comments_count'] != 0) : ?>
             <a class="flex gray-600 gap-min" href="<?= $post_url; ?>#comment">
-              <svg class="icons">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#comments"></use>
               </svg>
               <?= $post['post_comments_count']; ?>

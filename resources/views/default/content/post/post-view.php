@@ -9,7 +9,7 @@ $blog = $data['blog'][0] ?? null;
     <?php if ($post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
       <?php if (!empty($data['united'])) : ?>
         <div class="box bg-yellow mb15 gray-600">
-          <svg class="icons">
+          <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#git-merge"></use>
           </svg>
           <?= __('app.post_merged'); ?>
@@ -63,7 +63,7 @@ $blog = $data['blog'][0] ?? null;
         <?php if ($post['post_url_domain']) : ?>
           <div class="italic mb15 text-sm table gray">
             <?= __('app.source'); ?>:
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#link"></use>
             </svg>
             <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
@@ -79,7 +79,7 @@ $blog = $data['blog'][0] ?? null;
 
       <div class="flex flex-row items-center text-sm mt15">
         <?php if (!empty($data['facets'])) : ?>
-          <svg class="icons gray-600">
+          <svg class="icon gray-600">
             <use xlink:href="/assets/svg/icons.svg#hash"></use>
           </svg>
           <?php foreach ($data['facets'] as $topic) : ?>
@@ -101,7 +101,7 @@ $blog = $data['blog'][0] ?? null;
         <div class="items-center flex gap gray-600">
           <?= Html::votes($post, 'post'); ?>
           <div class="items-center flex gap-min">
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#eye"></use>
             </svg>
             <?= $post['post_hits_count'] == 0 ? 1 : Html::formatToHuman($post['post_hits_count']); ?>
@@ -125,7 +125,7 @@ $blog = $data['blog'][0] ?? null;
           <?php endif; ?>
 
           <div class="pointer" data-a11y-dialog-show="id-share">
-            <svg class="icons gray-600">
+            <svg class="icon gray-600">
               <use xlink:href="/assets/svg/icons.svg#share"></use>
             </svg>
           </div>
@@ -182,11 +182,11 @@ $blog = $data['blog'][0] ?? null;
       $format = ($post['post_feature'] == 0) ? 'discussion' : 'qa';
       insert('/content/post/format-' . $format, ['data' => $data, 'post' => $post]);
     else :
-      echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'closed']);
+      echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);
     endif; ?>
 
   <?php else : ?>
-    <?php insert('/_block/no-content', ['type' => 'small', 'text' => __('app.topic_comments_disabled'), 'icon' => 'closed']); ?>
+    <?php insert('/_block/no-content', ['type' => 'small', 'text' => __('app.topic_comments_disabled'), 'icon' => 'lock']); ?>
   <?php endif; ?>
 </main>
 

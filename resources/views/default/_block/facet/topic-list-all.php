@@ -17,14 +17,14 @@
         ]); ?>
       </span>
       <?php if ($container->user()->id() == $facet['facet_user_id']) : ?>
-        <svg class="icons icon-small sky">
+        <svg class="icon small sky">
           <use xlink:href="/assets/svg/icons.svg#mic"></use>
         </svg>
       <?php endif; ?>
       <div class="mt10 gray flex justify-between">
         <?= fragment($facet['facet_short_description'], 32); ?>
         <span class="right gray-600">
-          <svg class="icons">
+          <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#post"></use>
           </svg>
           <?= $facet['facet_count']; ?>

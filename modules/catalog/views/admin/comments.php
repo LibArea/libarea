@@ -22,7 +22,7 @@
               <?= langDate($comment['date']); ?>
             </span>
             <a class="black" href="<?= url('website', ['id' => $comment['item_id'], 'slug' => $comment['item_slug']]); ?>">
-              <svg class="icons">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#eye"></use>
               </svg>
             </a>

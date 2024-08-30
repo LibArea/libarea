@@ -50,7 +50,7 @@
 <div class="flex flex-wrap gap">
   <?php foreach ($data['lists'] as $topic) : ?>
     <div class="center box">
-      <svg class="icons">
+      <svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#<?= $topic; ?>"></use>
       </svg>
       <div class="gray-600"><?= $topic; ?></div>
@@ -58,12 +58,11 @@
   <?php endforeach; ?>
 </div>
 
-<pre><code>&lt;svg class="icons"&gt;
+<pre><code>&lt;svg class="icon"&gt;
    &lt;use xlink:href="/assets/svg/icons.svg#ID"&gt;&lt;/use&gt;
 &lt;/svg&gt;</code></pre>
 
-<li><a rel="nofollow noopener" href="https://feathericons.com/">https://feathericons.com/</a></li>
-<li><a rel="nofollow noopener" href="https://tabler-icons.io/">https://tabler-icons.io/</a></li>
+  <a rel="nofollow noopener" href="https://github.com/VKCOM/icons">https://github.com/VKCOM/icons</a>
 
 </main>
 

@@ -32,7 +32,7 @@ endif;
       <div class="right m15">
         <?php if ($profile['id'] == $container->user()->id()) : ?>
           <a class="btn btn-primary" title="<?= __('app.settings'); ?>" href="<?= url('setting'); ?>">
-            <svg class="icons icon-bold">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#settings"></use>
             </svg>
           </a>
@@ -40,14 +40,14 @@ endif;
           <div class="flex gap-max items-center">
             <?php $active = $data['ignored'] ? ' red' : ' gray-600'; ?>
             <a title="<?= __('app.ignore'); ?>" id="ignore_<?= $profile['id']; ?>" class="add-ignore<?= $active; ?>" data-id="<?= $profile['id']; ?>">
-              <svg class="icons icon-bold">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#lock"></use>
               </svg></i>
             </a>
 
             <?php if ($data['button_pm'] === true) : ?>
               <a title="<?= __('app.write_message'); ?>" href="<?= url('send.messages', ['login' => $profile['login']]); ?>">
-                <svg class="icons icon-bold">
+                <svg class="icon">
                   <use xlink:href="/assets/svg/icons.svg#mail"></use>
                 </svg>
               </a>
@@ -60,15 +60,15 @@ endif;
 
     <div class="flex">
       <h1 class="mb-block mb-text-xl m15 flex flex-auto">
-          <?= $profile['login']; ?>
-          <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
+        <?= $profile['login']; ?>
+        <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
 
-              <?php if ($profile['up_count'] > 0) : ?>
-                  <svg class="icons red">
-                    <use xlink:href="/assets/svg/icons.svg#heart"></use>
-                  </svg>
-                  <sup class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></sup>
-              <?php endif; ?>
+          <?php if ($profile['up_count'] > 0) : ?>
+            <svg class="icon red">
+              <use xlink:href="/assets/svg/icons.svg#heart"></use>
+            </svg>
+            <sup class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></sup>
+          <?php endif; ?>
       </h1>
 
       <div class="m10 mb-none right">
@@ -100,15 +100,15 @@ endif;
 <div class="none mb-block ml15">
   <div class="blockquote-profile">
     <?php if ($profile['about'] == 'Riddle...') : ?>
-		<?= __('app.riddle'); ?>...
-	<?php else : ?>
-		<?= markdown($profile['about'] ??  __('app.riddle')); ?>
-	<?php endif; ?>
+      <?= __('app.riddle'); ?>...
+    <?php else : ?>
+      <?= markdown($profile['about'] ??  __('app.riddle')); ?>
+    <?php endif; ?>
   </div>
 
   <div class="mb20">
     <div class="gray-600 mt5">
-      <svg class="icons">
+      <svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#calendar"></use>
       </svg>
       <span class="middle lowercase text-sm">

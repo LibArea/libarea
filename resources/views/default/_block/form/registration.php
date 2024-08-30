@@ -15,7 +15,7 @@
 <fieldset>
   <label for="password"><?= __('app.password'); ?></label>
   <input id="password" name="password" type="password" autocomplete="off" required>
-  <span class="showPassword"><svg class="icons">
+  <span class="showPassword"><svg class="icon">
       <use xlink:href="/assets/svg/icons.svg#eye"></use>
     </svg></span>
   <div class="help">>= 8 <?= __('app.characters'); ?>...</div>

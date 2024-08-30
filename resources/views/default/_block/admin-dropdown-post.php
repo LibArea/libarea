@@ -1,6 +1,6 @@
 <div class="relative ml10">
   <span class="trigger text-sm">
-    <svg class="icons">
+    <svg class="icon">
       <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
     </svg>
   </span>

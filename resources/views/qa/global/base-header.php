@@ -9,27 +9,27 @@ $facet  = $data['facet'] ?? false; ?>
   <header class="bg-white mb10">
     <div class="br-bottom wrap mb-none items-center flex gap mb5">
       <a class="p5 black text-xs" href="/topics">
-        <svg class="icons icon-small">
+        <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#hash"></use>
         </svg> <?= __('app.topics'); ?>
       </a>
       <a class="black text-xs" href="/blogs">
-        <svg class="icons icon-small">
+        <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#post"></use>
         </svg> <?= __('app.blogs'); ?>
       </a>
       <a class="black text-xs" href="/users">
-        <svg class="icons icon-small">
+        <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#users"></use>
         </svg> <?= __('app.users'); ?>
       </a>
       <a class="black text-xs" href="/web">
-        <svg class="icons icon-small">
+        <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#link"></use>
         </svg> <?= __('app.catalog'); ?>
       </a>
       <a class="black text-xs" href="/search">
-        <svg class="icons icon-small">
+        <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#search"></use>
         </svg> <?= __('app.search'); ?>
       </a>
@@ -45,7 +45,7 @@ $facet  = $data['facet'] ?? false; ?>
       <?php if (!$container->user()->active()) : ?>
         <div class="flex gap-max items-center">
           <div id="toggledark" class="gray-600 mb-none">
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#sun"></use>
             </svg>
           </div>
@@ -65,13 +65,13 @@ $facet  = $data['facet'] ?? false; ?>
             <?= Html::addPost($facet['facet_id'] ?? false); ?>
 
             <div id="toggledark" class="only-icon">
-              <svg class="icons">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg>
             </div>
 
             <a id="notif" class="gray-600 relative" href="<?= url('notifications'); ?>">
-              <svg class="icons">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#bell"></use>
               </svg>
               <span class="number-notif"></span>

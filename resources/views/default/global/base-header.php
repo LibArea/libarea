@@ -18,11 +18,11 @@ $post   = $data['post'] ?? false;
 
         <div class="flex flex-auto">
           <div class="box-logo">
-            <svg id="togglemenu" class="icons pointer icon-bold">
+            <svg id="togglemenu" class="icon pointer">
               <use xlink:href="/assets/svg/icons.svg#menu"></use>
             </svg>
 
-            <svg class="icons menu__button none icon-bold">
+            <svg class="icon menu__button none">
               <use xlink:href="/assets/svg/icons.svg#menu"></use>
             </svg>
 
@@ -63,7 +63,7 @@ $post   = $data['post'] ?? false;
         <?php if (!$container->user()->active()) : ?>
           <div class="flex gap-max items-center">
             <div id="toggledark" class="gray-600">
-              <svg class="icons icon-bold">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg>
             </div>
@@ -82,7 +82,7 @@ $post   = $data['post'] ?? false;
             <?= Html::addPost($facet['facet_id'] ?? false); ?>
 
             <a id="toggledark" class="gray-600">
-			  <svg class="icons icon-bold">
+			  <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
               </svg>
 			</a>
@@ -90,7 +90,7 @@ $post   = $data['post'] ?? false;
             <div class="relative">
               <div id="el_notif" class="none"></div>
               <a id="notif" class="add-notif gray-600 relative">
-                <svg class="icons icon-bold">
+                <svg class="icon">
                   <use xlink:href="/assets/svg/icons.svg#bell"></use>
                 </svg>
                 <span class="number-notif"></span>

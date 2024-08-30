@@ -19,7 +19,7 @@ return [
     'notifications_info'    => '"Okudum" bağlantısını tıklayarak tüm reklamları okundu olarak işaretleyebilirsiniz.',
     'notification_info'     => 'YBu bölümdeki tüm e-posta bildirimlerinden aboneliğinizi iptal edebilirsiniz.',
 
-    'add_post'              => '<b>cut</b> etiketini kullanın (<svg class="icons"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).< br><br> Etiketini takip eden metnin kedi kısmının altına gizlenir ("Devamını oku" yazacaktır).',
+    'add_post'              => '<b>cut</b> etiketini kullanın (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).< br><br> Etiketini takip eden metnin kedi kısmının altına gizlenir ("Devamını oku" yazacaktır).',
     'edit_page'             => 'Resmi belgeler hatasız olmalı ve daha resmi bir şekilde yazılmalıdır.',
     'edit_post'             => 'Gönderinin besleme sayfasında ve tam sürümde nasıl göründüğünü görün. Burayı geliştirin.',
     'add_topic'             => 'Konu, sistem tarafından içeriği düzenlemek için kullanılan bir düğümdür (gezinme için). Tema tek bir bakış açısıdır, çeşitli şeylerin, olayların ve diğer kavramların yorumlanmasıdır.',

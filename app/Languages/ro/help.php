@@ -19,7 +19,7 @@ return [
     'notifications_info'    => 'Puteți marca toate anunțurile ca citite făcând clic pe linkul: „Am citit”.',
     'notification_info'     => 'Vă puteți dezabona de la toate notificările prin e-mail din această secțiune.',
 
-    'add_post'              => 'Folosește eticheta <b>cut</b> (<svg class="icons"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br> Se ascunde sub pisica partea de text care urmează etichetei (va fi scris „Citește mai mult”).',
+    'add_post'              => 'Folosește eticheta <b>cut</b> (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br> Se ascunde sub pisica partea de text care urmează etichetei (va fi scris „Citește mai mult”).',
     'edit_page'             => 'Documentația oficială ar trebui să nu aibă erori și să fie scrisă mai mult într-o manieră formală.',
     'edit_post'             => 'Vezi cum arată postarea pe pagina de feed și în versiunea completă. Îmbunătățiți-l aici.',
     'add_topic'             => 'Un subiect este un nod (pentru navigare) folosit de sistem pentru a organiza conținutul. Tema este un singur punct de vedere, interpretarea diferitelor lucruri, fenomene și alte concepte.',

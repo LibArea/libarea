@@ -2,7 +2,9 @@
 <link as="font" href="/assets/js/editor/ch-icon.woff2">
 <?php if (!empty($title)) : ?><?= $title; ?>:<?php endif; ?>
 <div name="content" id="markdown-container"></div>
-<div class="source none"><pre><?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?></pre></div> 
+<div class="source none">
+	<pre><?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?></pre>
+</div>
 
 <script src="/assets/js/editor/cherry-markdown.core.js"></script>
 <script nonce="<?= config('main', 'nonce'); ?>">
@@ -73,11 +75,11 @@
 				// placeholder: "<?= __('app.text'); ?>...",
 			},
 			codemirror: {
-			  autofocus: false,
+				autofocus: false,
 			},
 			keepDocumentScrollAfterInit: false,
 		},
-		 autoScrollByHashAfterInit: false,
+		autoScrollByHashAfterInit: false,
 
 		toolbars: {
 			// Определите верхнюю панель инструментов

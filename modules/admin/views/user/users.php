@@ -47,7 +47,7 @@
           <?php if ($user['invitation_id'] != 0) : ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php endif; ?>
           <?php if ($user['whisper']) : ?>
             <span title="<?= $user['whisper']; ?>" class="tips text-sm gray-600">
-              <svg class="icons green">
+              <svg class="icon green">
                 <use xlink:href="/assets/svg/icons.svg#info"></use>
               </svg>
             </span>
@@ -113,7 +113,7 @@
         </td>
         <td class="center">
           <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.user.edit.form', ['id' => $user['id']]); ?>">
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>
           </a>

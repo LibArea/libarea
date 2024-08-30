@@ -17,7 +17,7 @@ footer.small-sidebar {
 
 footer .icon {
   color: var(--footer-text-color);
-  margin-right: 1rem;
+  margin-right: 5px;
 }
 
 footer ul {

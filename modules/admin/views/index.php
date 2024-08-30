@@ -8,7 +8,7 @@
 ); ?>
 <h4 class="uppercase-box">
   <?= __('admin.users'); ?>
-  <a href="<?= url('admin.users'); ?>"><svg class="icons">
+  <a href="<?= url('admin.users'); ?>"><svg class="icon">
       <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
     </svg>
   </a>
@@ -23,7 +23,7 @@
 
 <h4 class="uppercase-box mt15">
   <?= __('admin.search'); ?>
-  <a href="<?= url('admin.logs.search'); ?>"><svg class="icons">
+  <a href="<?= url('admin.logs.search'); ?>"><svg class="icon">
       <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
     </svg>
   </a>
@@ -44,10 +44,10 @@
 <aside>
   <div class="box bg-white">
     <h3 class="uppercase-box"><?= __('admin.useful_resources'); ?></h3>
-    <p><svg class="icons">
+    <p><svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#link"></use>
       </svg> <a href="https://libarea.ru">LibArea.ru</a></p>
-    <p><svg class="icons">
+    <p><svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#github"></use>
       </svg> <a href="https://discord.gg/adJnPEGZZZ">Discord</a></p>
     <hr>

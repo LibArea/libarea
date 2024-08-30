@@ -16,7 +16,7 @@ $day = $container->request()->get('sort')->value();
       <?= __('app.viewed'); ?>
     <?php endif; ?>
   </span>
-  <svg class="icons pointer gray-600">
+  <svg class="icon pointer gray-600">
     <use xlink:href="/assets/svg/icons.svg#sort-descending"></use>
   </svg>
 </span>

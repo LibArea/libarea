@@ -34,7 +34,7 @@
 
             <?php if ($post['post_url_domain']) : ?>
               <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-                <svg class="icons mb-none">
+                <svg class="icon mb-none">
                   <use xlink:href="/assets/svg/icons.svg#link"></use>
                 </svg> <?= $post['post_url_domain']; ?>
               </a>
@@ -76,7 +76,7 @@
 
           <?php if ($post['post_comments_count'] != 0) : ?>
             <a class="flex gray-600" href="<?= $post_url; ?>#comment">
-              <svg class="icons mr5">
+              <svg class="icon mr5">
                 <use xlink:href="/assets/svg/icons.svg#comments"></use>
               </svg>
               <?= $post['post_comments_count']; ?>

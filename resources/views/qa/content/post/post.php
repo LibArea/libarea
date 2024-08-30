@@ -37,7 +37,7 @@
               <?= Html::facets($post['facet_list'], 'topic', 'tag-grey'); ?>
               <?php if ($post['post_url_domain']) : ?>
                 <a class="gray-600 text-sm ml10" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-                  <svg class="icons">
+                  <svg class="icon">
                     <use xlink:href="/assets/svg/icons.svg#link"></use>
                   </svg> <?= $post['post_url_domain']; ?>
                 </a>

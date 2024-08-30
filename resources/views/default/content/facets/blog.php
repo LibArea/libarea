@@ -28,7 +28,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
             <?= insert('/_block/navigation/nav', ['list' => $list]); ?>
           </ul>
           <div title="<?= __('app.post_appearance'); ?>" id="postmenu" class="m5">
-            <svg class="icons pointer gray-600">
+            <svg class="icon pointer gray-600">
               <use xlink:href="/assets/svg/icons.svg#grid"></use>
             </svg>
           </div>
@@ -47,7 +47,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
               <span class="ml5"><?= $data['user']['login']; ?></span>
             </a>
             <div class="gray-600 text-sm mt5">
-              <svg class="icons">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#calendar"></use>
               </svg>
               <span class="middle lowercase"><?= langDate($blog['facet_date']); ?></span>
@@ -99,7 +99,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
 <?php else : ?>
   <main>
     <div class="box center gray-600">
-      <svg class="icons icon-max">
+      <svg class="icon max">
         <use xlink:href="/assets/svg/icons.svg#x-octagon"></use>
       </svg>
       <div class="mt5 gray"><?= __('app.remote'); ?></div>

@@ -48,7 +48,7 @@
         'hr'    => 'hr',
       ], [
         'tl'    => 10,
-        'icon'  => 'users',
+        'icon'  => 'users-2',
         'url'   => 'admin',
         'title' => 'app.admin',
         'id'    => '',

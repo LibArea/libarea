@@ -14,7 +14,7 @@
           <div class="list-items__description">
             <?php if (!empty($delete_fav)) : ?>
               <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $item['item_id']; ?>" data-type="website">
-                <svg class="icons gray-600">
+                <svg class="icon gray-600">
                   <use xlink:href="/assets/svg/icons.svg#trash"></use>
                 </svg>
               </span>
@@ -28,14 +28,14 @@
                 <?= $item['item_domain']; ?>
                 <?php if ($item['item_github_url']) : ?>
                   <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                    <svg class="icons">
+                    <svg class="icon">
                       <use xlink:href="/assets/svg/icons.svg#github"></use>
                     </svg>
                     <?= $item['item_title_soft']; ?>
                   </a>
                 <?php endif; ?>
                 <div>
-                  <svg class="icons gray ml5">
+                  <svg class="icon gray ml5">
                     <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
                   </svg>
                   <a class="black " href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
@@ -44,7 +44,7 @@
 
                   <?php if ($container->access()->author('item', $item) === true) : ?>
                     <a class="ml10" href="<?= url('item.form.edit', ['id' => $item['item_id']]); ?>">
-                      <svg class="icons">
+                      <svg class="icon">
                         <use xlink:href="/assets/svg/icons.svg#edit"></use>
                       </svg>
                     </a> <span class="gray-600">- <?= $item['item_following_link']; ?></span>
@@ -70,12 +70,12 @@
     <?php else : ?>
       <?php if ($container->user()->admin()) : ?>
         <div class="mt15 mb15">
-          <svg class="icons">
+          <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#link"></use>
           </svg>
           <?= $item['item_title']; ?> (<?= $item['item_domain']; ?>)
           <a class="ml15" href="<?= url('item.form.edit', ['id' => $item['item_id']]); ?>">
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>
           </a>

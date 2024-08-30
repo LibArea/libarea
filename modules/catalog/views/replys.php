@@ -15,7 +15,7 @@ function internalRender($container, $nodes)
             . '<span class="gray-600">' . $node['login'] . '</span> <span class=" gray-600 lowercase">' . langDate($node['reply_date']) . '</span>';
 
         if ($node['reply_parent_id'] != $node['reply_item_id'] && $node['reply_parent_id'] != 0) {
-            echo '<a rel="nofollow" class="gray-600" href="#reply_' . $node['reply_parent_id'] . '"><svg class="icons"><use xlink:href="/assets/svg/icons.svg#arrow-up"></use></svg></a>';
+            echo '<a rel="nofollow" class="gray-600" href="#reply_' . $node['reply_parent_id'] . '"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#arrow-up"></use></svg></a>';
         }
 
         if ($container->user()->admin()) {

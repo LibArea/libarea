@@ -110,5 +110,5 @@
 <?php endif;  ?>
 
 <?php if ($post['post_closed'] == 1) :
-  echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'closed']);
+  echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'lock']);
 endif; ?>

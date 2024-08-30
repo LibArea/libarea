@@ -55,12 +55,12 @@
                         </span>
                       </a>
                       <?php if ($node['comment_is_mobile']) : ?>
-                        <svg class="icons icon-small green">
+                        <svg class="icon small green">
                           <use xlink:href="/assets/svg/icons.svg#mobile"></use>
                         </svg>
                       <?php endif; ?>
                       <?php if ($post['post_user_id'] == $node['comment_user_id']) : ?>
-                        <svg class="icons icon-small sky">
+                        <svg class="icon small sky">
                           <use xlink:href="/assets/svg/icons.svg#mic"></use>
                         </svg>
                       <?php endif; ?>
@@ -76,7 +76,7 @@
                         <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
                       <?php endif; ?>
                       <?php if ($node['comment_lo']) : ?>
-                        <svg class="icons red">
+                        <svg class="icon red">
                           <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
                         </svg>
                       <?php endif; ?>
@@ -84,7 +84,7 @@
                       <?php if ($node['comment_parent_id'] > 0) : ?>
 
                         <a class="gray-600" rel="nofollow" href="<?= post_slug($post['post_id'], $post['post_slug']); ?>#comment_<?= $node['comment_parent_id']; ?>">
-                          <svg class="icons icon-small">
+                          <svg class="icon small">
                             <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
                           </svg></a>
                       <?php endif; ?>
@@ -122,7 +122,7 @@
   </div>
 <?php else : ?>
   <?php if ($post['post_closed'] == 1) : ?>
-    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.close'), 'icon' => 'closed']);  ?>
+    <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.close'), 'icon' => 'lock']);  ?>
   <?php elseif (!$container->user()->active()) : ?>
     <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_auth'), 'icon' => 'info']); ?>
   <?php else : ?>

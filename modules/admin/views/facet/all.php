@@ -9,7 +9,7 @@
 
 <?php foreach ($data['types_facets'] as $type) : ?>
   <a class="flex gap-min items-center mb10" href="<?= url('admin.facets.type', ['type' => $type['type_code']]); ?>">
-    <svg class="icons">
+    <svg class="icon">
       <use xlink:href="/assets/svg/icons.svg#circle"></use>
     </svg>
     <?= __('admin.' . $type['type_lang']); ?>

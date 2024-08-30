@@ -19,7 +19,7 @@ return [
     'notifications_info'    => '您可以通过点击链接将所有广告标记为已读：“我已阅读”。',
     'notification_info'     => '您可以在此部分取消订阅所有电子邮件通知。',
 
-    'add_post'              => '使用标签<b>cut</b> (<svg class="icons"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br>它隐藏在标签后面的文本的 cat 部分下（它将被写成“阅读更多”）。',
+    'add_post'              => '使用标签<b>cut</b> (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).<br><br>它隐藏在标签后面的文本的 cat 部分下（它将被写成“阅读更多”）。',
     'edit_page'             => '官方文档应该没有错误，并且以正式的方式编写。',
     'edit_post'             => '在提要页面和完整版中查看帖子的外观。在这里改进它。',
     'add_topic'             => '主题是系统用来组织内容的节点（用于导航）。主题是单一的观点，对各种事物、现象和其他概念的解释。',

@@ -10,7 +10,7 @@
 
       <li<?= $class; ?>>
         <a href="<?= url($item['url']); ?>">
-          <?php if (!empty($item['icon'])) : ?><svg class="icons">
+          <?php if (!empty($item['icon'])) : ?><svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#<?= $item['icon']; ?>"></use>
             </svg><?php endif; ?>
           <?= __($item['title']); ?>

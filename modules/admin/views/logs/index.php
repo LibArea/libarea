@@ -26,7 +26,7 @@
         <th><?= __('admin.type'); ?></th>
         <th><?= __('admin.action'); ?></th>
         <th><?= __('admin.time'); ?></th>
-        <th class="w30"><svg class="icons">
+        <th class="w30"><svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#eye"></use>
           </svg></th>
       </thead>
@@ -42,7 +42,7 @@
           <td class="gray-600"><?= __('admin.' . $log['action_type']); ?></td>
           <td><?= __('admin.' . $log['action_name'], ['name' => __('admin.' . $log['action_type'])]); ?></td>
           <td class="gray-600"><?= langDate($log['add_date']); ?></td>
-          <td><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><svg class="icons">
+          <td><a target="_blank" rel="noopener noreferrer" href="<?= $log['url_content']; ?>"><svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#eye"></use>
               </svg></a></td>
         </tr>

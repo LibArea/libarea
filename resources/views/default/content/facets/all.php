@@ -41,7 +41,7 @@
         <?php if ($data['countUserFacet'] == 0 || $container->user()->admin()) : ?>
           <p class="text-xl">
             <a class="btn btn-outline-primary btn-small" href="<?= url('facet.form.add', ['type' => $data['type']]); ?>">
-              <svg class="icons">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#plus"></use>
               </svg>
               <?= __('app.add'); ?>

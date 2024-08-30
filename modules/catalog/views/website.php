@@ -9,7 +9,7 @@
           <h1 itemprop="name" class="m0"><?= $item['item_title']; ?>
             <?php if ($container->user()->admin()) : ?>
               <a class="text-sm ml5" href="<?= url('item.form.edit', ['id' => $item['item_id']]); ?>">
-                <svg class="icons">
+                <svg class="icon">
                   <use xlink:href="/assets/svg/icons.svg#edit"></use>
                 </svg>
               </a>
@@ -40,7 +40,7 @@
                 <?= Html::votes($item, 'item'); ?>
 
                 <div class="pointer" data-a11y-dialog-show="id-share">
-                  <svg class="icons gray-600">
+                  <svg class="icon gray-600">
                     <use xlink:href="/assets/svg/icons.svg#share"></use>
                   </svg>
                 </div>
@@ -58,7 +58,7 @@
                           <?= Html::facets($site['facet_list'], 'category', 'tag-violet mr15'); ?>
                           <?php if ($container->user()->admin()) : ?>
                             <a href="<?= url('item.form.edit', ['id' => $site['item_id']]); ?>">
-                              <svg class="icons gray-600">
+                              <svg class="icon gray-600">
                                 <use xlink:href="/assets/svg/icons.svg#edit"></use>
                               </svg>
                             </a>
@@ -83,7 +83,7 @@
               <?= markdown($item['item_content_soft'], 'text'); ?>
             </div>
             <p>
-              <svg class="icons">
+              <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#github"></use>
               </svg>
               <a target="_blank" href="<?= $item['item_github_url']; ?>" class="item_cleek" data-id="<?= $item['item_id']; ?>" rel="nofollow noreferrer ugc">
@@ -126,14 +126,14 @@
           <?php else : ?>
             <?php if ($item['item_close_replies'] == 0) : ?>
               <div class="mt20">
-                <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no_answers'), 'icon' => 'closed']); ?>
+                <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.no_answers'), 'icon' => 'lock']); ?>
               </div>
             <?php endif; ?>
           <?php endif; ?>
 
           <?php if ($item['item_close_replies'] == 1) : ?>
             <div class="mt20">
-              <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.closed'), 'icon' => 'closed']); ?>
+              <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('web.closed'), 'icon' => 'lock']); ?>
             </div>
           <?php endif; ?>
     </div>

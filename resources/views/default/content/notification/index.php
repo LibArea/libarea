@@ -16,7 +16,7 @@
         <?php foreach (config('notification', 'list') as $key => $n) : ?>
           <?php if ($n['id'] == $notif['type']) : ?>
             <div class="br-bottom p5<?php if ($notif['flag'] == 0) { ?> bg-yellow<?php } ?>">
-              <svg class="icons <?= $n['css']; ?>">
+              <svg class="icon <?= $n['css']; ?>">
                 <use xlink:href="/assets/svg/icons.svg#<?= $n['icon']; ?>"></use>
               </svg>
               <a class="black ml5 nickname" href="<?= $profile; ?>"><?= $notif['login']; ?></a>

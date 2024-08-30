@@ -36,10 +36,10 @@ $lang = Translate::getLang();
   <header class="d-header">
     <div class="wrap">
       <div class="d-header_contents">
-        <svg id="togglemenu" class="icons pointer">
+        <svg id="togglemenu" class="icon pointer">
           <use xlink:href="/assets/svg/icons.svg#menu"></use>
         </svg>
-        <svg class="icons menu__button none">
+        <svg class="icon menu__button none">
           <use xlink:href="/assets/svg/icons.svg#menu"></use>
         </svg>
         <div class="box-logo ml10 mr20">
@@ -51,26 +51,26 @@ $lang = Translate::getLang();
         </div>
         <div class="flex gap-max items-center w-90 ml20">
           <a class="<?= is_current(url('admin.users')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.users'); ?>">
-            <svg class="icons mr5">
+            <svg class="icon mr5">
               <use xlink:href="/assets/svg/icons.svg#users"></use>
             </svg>
             <span class="mb-none middle text-sm"><?= __('admin.users'); ?></span>
           </a>
           <a class="<?= is_current(url('admin.facets.all')) ? ' active' : ' gray-600'; ?> mb-none" href="<?= url('admin.facets.all'); ?>">
-            <svg class="icons mr5">
+            <svg class="icon mr5">
               <use xlink:href="/assets/svg/icons.svg#grid"></use>
             </svg>
             <span class="mb-none middle text-sm"><?= __('admin.facets'); ?></span>
           </a>
           <a class="<?= is_current(url('admin.tools')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.tools'); ?>">
-            <svg class="icons mr5">
+            <svg class="icon mr5">
               <use xlink:href="/assets/svg/icons.svg#tool"></use>
             </svg>
             <span class="mb-none middle text-sm"><?= __('admin.tools'); ?></span>
           </a>
           <!-- Hide so as not to embarrass
           <a class="<?= is_current(url('admin.settings.general')) ? ' active' : ' gray-600'; ?> mb-none" href="<?= url('admin.settings.general'); ?>">
-            <svg class="icons mr5">
+            <svg class="icon mr5">
               <use xlink:href="/assets/svg/icons.svg#settings"></use>
             </svg>
             <span class="mb-none middle text-sm"><?= __('admin.settings'); ?></span>

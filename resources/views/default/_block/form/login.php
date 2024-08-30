@@ -4,7 +4,7 @@
 
 <fieldset class="max-w300 mb-max-w-100">
   <input id="password" name="password" type="password" placeholder="<?= __('app.password'); ?>" required="">
-  <span class="showPassword"><svg class="icons">
+  <span class="showPassword"><svg class="icon">
       <use xlink:href="/assets/svg/icons.svg#eye"></use>
     </svg></span>
 </fieldset>

@@ -10,12 +10,12 @@
     <?php if ($container->user()->admin()) : ?>
       <div class="flex gap">
         <a class="gray-600" href="<?= url('facet.form.edit', ['type' => 'category', 'id' => $data['category']['facet_id']]); ?>">
-          <svg class="icons">
+          <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#edit"></use>
           </svg>
         </a>
         <a class="gray-600" href="<?= url('admin.facets.type', ['type' => 'category']); ?>">
-          <svg class="icons">
+          <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#tool"></use>
           </svg>
         </a>
@@ -34,7 +34,7 @@
         </a> <sup class="gray-600"><?= $lt['counts']; ?></sup>
         <?php if ($container->user()->admin()) : ?>
           <a class="ml5 gray-600" href="<?= url('facet.form.edit', ['type' => 'category', 'id' => $lt['facet_id']]); ?>">
-            <sup><svg class="icons">
+            <sup><svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#edit"></use>
               </svg></sup>
           </a>
@@ -50,7 +50,7 @@
           </a>
           <?php if ($container->user()->admin()) : ?>
             <a class="text-sm ml5" href="<?= url('facet.form.edit', ['type' => 'category', 'id' => $rl['facet_id']]); ?>">
-              <sup class="gray-600"><svg class="icons">
+              <sup class="gray-600"><svg class="icon">
                   <use xlink:href="/assets/svg/icons.svg#edit"></use>
 				</svg></sup>   
             </a>
@@ -71,7 +71,7 @@
           </a>
           <?php if ($container->user()->admin()) : ?>
             <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
-              <sup class="gray-600"><svg class="icons">
+              <sup class="gray-600"><svg class="icon">
                   <use xlink:href="/assets/svg/icons.svg#edit"></use>
                 </svg> <small><?= $rl['facet_type']; ?></small></sup>
             </a>

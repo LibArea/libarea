@@ -13,7 +13,7 @@
             <h4 class="uppercase-box"><?= __('app.selected_post'); ?>
               <?php if ($data['profile']['id'] == $container->user()->id()) : ?>
                 <a class="add-profile right" data-post="<?= $data['my_post']['post_id']; ?>">
-                  <svg class="icons gray-600">
+                  <svg class="icon gray-600">
                     <use xlink:href="/assets/svg/icons.svg#trash"></use>
                   </svg>
                 </a>
@@ -27,7 +27,7 @@
                 <?= $data['my_post']['post_date'] ?>
                 <?php if ($data['my_post']['post_comments_count'] != 0) : ?>
                   <span class="right">
-                    <svg class="icons">
+                    <svg class="icon">
                       <use xlink:href="/assets/svg/icons.svg#comments"></use>
                     </svg> <?= $data['my_post']['post_comments_count']; ?>
                   </span>

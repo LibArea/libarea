@@ -12,7 +12,7 @@
         <div class="flex justify-between mt10 mb20">
           <?= insertTemplate('/admin/menu'); ?>
           <div class="status btn btn-outline-primary">
-            <svg class="icons text-xl">
+            <svg class="icon text-xl">
               <use xlink:href="/assets/svg/icons.svg#chart"></use>
             </svg>
             <?= __('web.refresh'); ?>

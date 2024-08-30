@@ -20,7 +20,7 @@ $facet  = $data['facet'] ?? false; ?>
       <?php if (!$container->user()->active()) : ?>
         <div class="flex gap-max items-center">
           <div id="toggledark" class="mb-none">
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#sun"></use>
             </svg>
           </div>
@@ -39,12 +39,12 @@ $facet  = $data['facet'] ?? false; ?>
 
           <?= Html::addPost($facet['facet_id'] ?? false); ?>
 
-          <div id="toggledark"><svg class="icons">
+          <div id="toggledark"><svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#sun"></use>
             </svg></div>
 
           <a id="notif" class="gray-600 relative" href="<?= url('notifications'); ?>">
-            <svg class="icons">
+            <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#bell"></use>
             </svg>
             <span class="number-notif"></span>

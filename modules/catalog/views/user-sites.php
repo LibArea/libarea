@@ -28,7 +28,7 @@
 
                 <?php if ($container->access()->author('item', $item) === true) : ?>
                   <a href="<?= url('item.form.edit', ['id' => $item['item_id']]); ?>">
-                    <svg class="icons">
+                    <svg class="icon">
                       <use xlink:href="/assets/svg/icons.svg#edit"></use>
                     </svg>
                   </a>
@@ -44,7 +44,7 @@
                     <?= $item['item_domain']; ?>
                     <?php if ($item['item_github_url']) : ?>
                       <a class="ml15 gray-600 mb-none" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                        <svg class="icons">
+                        <svg class="icon">
                           <use xlink:href="/assets/svg/icons.svg#github"></use>
                         </svg>
                         <?= $item['item_title_soft']; ?>
@@ -52,7 +52,7 @@
                     <?php endif; ?>
                     <?php if ($item['item_published'] == 1) : ?>
                       <div>
-                        <svg class="icons">
+                        <svg class="icon">
                           <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
                         </svg>
                         <a class="black" href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
