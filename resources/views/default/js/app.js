@@ -14,7 +14,7 @@ focusId.forEach(el => el.addEventListener("click", function (e) {
 
 // Adding Folders
 saveFolder.forEach(el => el.addEventListener("click", function (e) {
-  makeRequest("/folder/content/save", options = { body: "id=" + el.dataset.id + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid })
+  makeRequest("/folder/content/save", options = { body: "id=" + el.dataset.id + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token})
 }));
 
 // Add or remove your post to your profile 

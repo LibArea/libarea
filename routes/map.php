@@ -146,6 +146,8 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 
 		Route::post('/folder/content/del')->controller(FolderController::class, 'delFolderContent');
 		Route::post('/folder/del')->controller(FolderController::class, 'delFolder');
+		Route::post('/folder/content/save')->controller(FolderController::class, 'addFolderContent');
+		
 	
 		Route::post('/focus')->controller(SubscriptionController::class);
 		

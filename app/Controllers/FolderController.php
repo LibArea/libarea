@@ -44,7 +44,9 @@ class FolderController extends Controller
         $tid    = Request::post('tid')->asInt();
         $type   = Request::post('type')->value();
 
-        return FolderModel::deletingFolderContent($tid, $type);
+        FolderModel::deletingFolderContent($tid, $type);
+
+        return true;
     }
 
     /**
@@ -76,6 +78,8 @@ class FolderController extends Controller
         $id     = Request::post('id')->asInt();
         $type   = Request::post('type')->value();
 
-        return FolderModel::deletingFolder($id, $type);
+        FolderModel::deletingFolder($id, $type);
+
+        return true;
     }
 }

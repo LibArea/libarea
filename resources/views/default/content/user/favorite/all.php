@@ -31,7 +31,7 @@
                   <div class="save-folder gray-600 text-sm p5" data-id="<?= $tag['id']; ?>" data-tid="<?= $fav['tid']; ?>" data-type="favorite"><?= $tag['value']; ?></div>
                 <?php endforeach; ?>
               <?php else : ?>
-                <?= __('app.no'); ?>...
+                <a href="<?= url('favorites.folders'); ?>"><?= __('app.no'); ?>...</a>
               <?php endif;  ?>
             </span>
           </div>
