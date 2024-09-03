@@ -10,10 +10,8 @@
       </fieldset>
     </form>
   <?php else : ?>
-    <textarea rows="5" disabled="disabled" placeholder="<?= __('app.auth_comm'); ?>."></textarea>
-    <div>
-      <?= Html::sumbit(__('app.reply')); ?>
-      <span id="cancel" class="text-sm inline ml5 gray"><?= __('app.cancel'); ?></span>
+    <div class="gray-600 text-sm">
+      <?= __('app.no_auth'); ?>.
     </div>
   <?php endif; ?>
 </div>

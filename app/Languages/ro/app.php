@@ -352,7 +352,6 @@ return [
     'you_answered'      => 'Ai răspuns deja la această întrebare',
     'need_login'        => 'Este necesară autentificarea',
     'no_auth'           => 'Pentru a scrie un comentariu sau a adăuga conținut pe site, vă puteți <a href="/login">autentifica</a>',
-    'auth_comm'         => 'Trebuie să fii autentificat pentru a lăsa un comentariu.',
     'not_registered'    => 'Postează, răspunde, comentează... <br>Nu te-ai înregistrat încă',
     'invalid'           => 'Invalid',
     'agree_rules'       => 'Continuând, sunteți de acord cu <a href="/info/article/privacy">Termenii de utilizare</a> ai site-ului',

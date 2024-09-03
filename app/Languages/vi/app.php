@@ -352,7 +352,6 @@ return [
     'you_answered'      => 'Bạn đã trả lời câu hỏi này',
     'need_login'        => 'Bạn cần đăng nhập',
     'no_auth'           => 'Để phản hồi, bạn có thể <a href="/login">đăng nhập</a>',
-    'auth_comm'         => 'Bạn phải đăng nhập để gửi bình luận',
     'not_registered'    => 'Đăng, trả lời, bình luận... <br>Bạn chưa đăng ký',
     'invalid'           => 'Không hợp lệ',
     'agree_rules'       => 'Bằng cách tiếp tục, bạn đồng ý với <a href="/info/article/privacy">Điều khoản sử dụng</a> của trang web',

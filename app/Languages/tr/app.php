@@ -344,7 +344,6 @@ return [
     'you_answered'      => 'Sen zaten bu soruyu cevapladın.',
     'need_login'        => 'Giriş gerekli',
     'no_auth'           => 'Cevap için <a href="/login">giriş yapabilirsiniz</a>',
-    'auth_comm'         => 'Yorum bırakmak için giriş yapmalısınız',
     'not_registered'    => 'Gönderin, yanıtlayın, yorum yapın... <br>Henüz kaydolmadınız',
     'invalid'           => 'Geçersiz',
     'agree_rules'       => 'Devam ederek sitemizdeki <a href="/info/article/privacy">Kullanım Şartları</a> kabul etmiş olursunuz',

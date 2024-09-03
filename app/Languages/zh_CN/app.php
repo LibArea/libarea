@@ -350,7 +350,6 @@ return [
     'you_answered'      => '你已经回答了此问题',
     'need_login'        => '你需要登录',
     'no_auth'           => '要回答，你需要<a href="/login">登录</a>',
-    'auth_comm'         => '你必须登录才能发表评论',
     'not_registered'    => '发帖，回复，评论... <br>你还没有注册',
     'invalid'           => '无效',
     'agree_rules'       => '继续，即表示你同意<a href="/info/article/privacy">使用条款</a>',

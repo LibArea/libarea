@@ -352,7 +352,6 @@ return [
     'you_answered'      => 'You already answered this question',
     'need_login'        => 'Login required',
     'no_auth'           => 'For an answer, you can <a href="/login">log in</a>',
-    'auth_comm'         => 'You must be logged in to leave a comment',
     'not_registered'    => 'Post, reply, comment... <br>You have not registered yet',
     'invalid'           => 'Invalid',
     'agree_rules'       => 'By continuing, you agree to <a href="/info/article/privacy">Terms of Use</a> site',
