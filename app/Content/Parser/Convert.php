@@ -54,16 +54,18 @@ class Convert extends \ParsedownExtraPlugin
     {
         if (!$Element) return $Element;
 
-        // Using YouTube on different types of links
         // https://www.youtube.com/shorts/bcXZ88y3Po0
         // https://www.youtube.com/watch?v=Fydyy-ypavU
         // https://youtu.be/Fydyy-ypavU
         // https://rutube.ru/video/17eecf937aa7d9eb19edbb7aec6679b4/
+		// https://vk.com/video-192140232_456242709
         if (preg_match('/^(?:https?\:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.?be)\/(?:shorts|watch\?v=)?(.+)$/i', $Element['element']['attributes']['href'], $id)) {
-
             $src = 'https://www.youtube.com/embed/' . $id[1];
-        } elseif (preg_match('/[http|https]+:\/\/(?:www\.|)rutube\.ru\/video\/([a-zA-Z0-9_\-]+)\//i', $Element['element']['attributes']['href'], $id)) {
+			
+		} elseif (preg_match('/video-([\d]+)_(\d+)/i', $Element['element']['attributes']['href'], $id)) {
+            $src = "https://vk.com/video_ext.php?oid=-{$id[1]}&id={$id[2]}&hd=2&autoplay=1";
 
+        } elseif (preg_match('/[http|https]+:\/\/(?:www\.|)rutube\.ru\/video\/([a-zA-Z0-9_\-]+)\//i', $Element['element']['attributes']['href'], $id)) {
             $src = 'https://rutube.ru/video/embed/' . $id[1];
         }
 
