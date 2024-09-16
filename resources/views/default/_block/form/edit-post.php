@@ -136,9 +136,6 @@
 <?php endif; ?>  
 
 <p>
-  <?php if ($post['post_draft'] == 1) : ?>
-    <input type="hidden" name="draft" value="1">
-  <?php endif; ?>
   <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
   <?= Html::sumbit(__('app.edit')); ?>
 </p>

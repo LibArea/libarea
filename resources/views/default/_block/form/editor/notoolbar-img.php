@@ -68,14 +68,15 @@
 
 		editor: {
 			name: 'content',
+			
+			//defaultModel: 'previewOnly',
+			
 			defaultModel: 'editOnly', // edit&preview|editOnly|previewOnly
 			height: '<?= $height; ?>',
 			showSuggestList: false,
 			codemirror: {
-				// placeholder: "<?= __('app.text'); ?>...",
-			},
-			codemirror: {
 				autofocus: false,
+				// placeholder: "<?= __('app.text'); ?>...",
 			},
 			keepDocumentScrollAfterInit: false,
 		},
@@ -94,6 +95,7 @@
 			bubble: ['bold', 'italic', 'strikethrough', 'quote', 'inlineCode'],
 			// Панель подсказок
 			float: ['h2', 'h3', '|', 'checklist', 'quote', 'code', 'image'],
+
 		},
 	});
 </script>

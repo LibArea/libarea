@@ -19,7 +19,7 @@
     <?php if (!empty($data['post_arr'])) { ?>
       whitelist: JSON.parse('<?= json_encode($data['post_arr']); ?>'),
     <?php } ?>
-    maxTags: 3, // <- ограничим выбор фасетов
+    maxTags: 8, // <- ограничим выбор фасетов
    });
  
   let abortCtrl; // за прерывание вызова

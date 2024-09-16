@@ -69,8 +69,7 @@ class EditPostController extends Controller
 		$post = PostPresence::index($post_id);
 
 		$content = $_POST['content']; // for Markdown
-		$post_draft = Request::post('post_draft')->asInt() == 'on' ? 1 : 0;
-		$draft = Request::post('draft')->asInt();
+		$post_draft = Request::post('post_draft')->value() == 'on' ? 1 : 0;
 
 		$blog = FacetModel::getFacetsUser('blog');
 		$this->checkingEditPermissions($post, $blog);
@@ -79,15 +78,7 @@ class EditPostController extends Controller
 
 		RulesPost::rules($title = Request::post('post_title')->value(), $content, $redirect);
 
-		// Form hacking
-		if ($post['post_draft'] == 0) {
-			$draft = 0;
-		}
-
-		$post_date = $post['post_date'];
-		if ($draft == 1 && $post_draft == 0) {
-			$post_date = date("Y-m-d H:i:s");
-		}
+		$post_date = ($post['post_draft'] == 1 && $post_draft == 0) ? date("Y-m-d H:i:s") : $post['post_date'];
 
 		// Post cover
 		$post_img = $post['post_content_img'];
