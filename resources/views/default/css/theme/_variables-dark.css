@@ -77,7 +77,8 @@ body.dark {
 }
 
 body.dark .cherry-editor.cherry-editor--full,
-body.dark .cherry-editor .CodeMirror  {
+body.dark .cherry-editor .CodeMirror,
+body.dark .cherry-previewer  {
   background-color: var(--form-bg-color);
   color: var(--form-text-color);
 }
@@ -85,6 +86,10 @@ body.dark .cherry-editor .CodeMirror  {
 body.dark .comment:target,
 body.dark .comment.edit {
   background-color: var(--form-bg-color);
+}
+
+body.dark .cherry-editor .cm-s-default .cm-variable-2 {
+    color: var(--black);
 }
 
 body.dark .comment {
