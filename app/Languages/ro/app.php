@@ -174,7 +174,7 @@ return [
     'cancel'            => 'Anulare',
     'reply'             => 'Răspuns',
 
-    'is_nsfw'           => 'Activați vizualizarea conținutului pentru adulți și NSFW (+ miniaturi estompate) în feed.',
+    'is_nsfw'           => 'Activați vizualizarea conținutului pentru adulți și NSFW în feedul dvs.',
     'nsfw_post'         => 'Este adultul de conținut (NSFW)?',
 
     'hidden_post'       => 'Acces prin link?',

@@ -176,7 +176,7 @@ return [
     'cancel'            => 'Cancel',
     'reply'             => 'Reply',
 
-    'is_nsfw'           => 'Enable viewing adult content and NSFW (+blur thumbnails) in the feed.',
+    'is_nsfw'           => 'Enable viewing of adult and NSFW content in the feed.',
     'nsfw_post'         => 'Is the content adult (NSFW)?',
 
     'hidden_post'       => 'Access via link?',

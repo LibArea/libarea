@@ -10,7 +10,7 @@
         <form action="<?= url('add.message', method: 'post'); ?>" method="post">
           <?= $container->csrf()->field(); ?>
           <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />
-          <?= insert('/_block/form/editor/toolbar-noimg', ['height'  => '100%', 'type' => 'message', 'id' => '']); ?>
+          <?= insert('/_block/form/editor/toolbar-noimg', ['height'  => '150px', 'type' => 'message', 'id' => '']); ?>
           <div class="right mt15"><?= Html::sumbit(__('app.reply')); ?></div>
         </form>
       </div>

@@ -18,6 +18,7 @@ class Content
         $text = self::parse($text);
         $text = self::details($text);
         $text = self::facets($text);
+		$text = self::gif($text);
 
         return self::emoji($text);
     }
@@ -101,6 +102,37 @@ class Content
             $img = $pathEmoji . $matches[1] . $file_ext;
             return str_replace($matches[0], ' <img alt="' . $matches[1] . '" class="emoji" src="' . $img . '"> ', $content);
         }
+
+        return  $content;
+    }
+
+    public static function gif($content)
+    {	
+		preg_match_all('/\:(\w+)\:/mUs', strip_tags($content), $matchs);
+
+		if (is_array($matchs[1])) {
+
+            $match_name = [];
+            foreach ($matchs[1] as $key => $name) {
+                if (in_array($name, $match_name)) {
+                    continue;
+                }
+
+                $match_name[] = $name;
+            }
+
+            $match_name = array_unique($match_name);
+
+            arsort($match_name);
+
+            foreach ($match_name as $key => $name) {
+
+				$img = '/assets/images/gif/' . $name . '.gif';
+				$content = str_replace(':' . $name . ':', '<img class="gif" alt="' . $name . '" src="' . $img . '">', $content);
+           
+            }
+		 
+		}
 
         return  $content;
     }

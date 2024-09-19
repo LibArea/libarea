@@ -175,7 +175,7 @@ return [
     'cancel'            => '取消',
     'reply'             => '要回答',
 
-    'is_nsfw'           => '允許在提要中查看成人內容和 NSFW（+模糊縮略圖）。',
+    'is_nsfw'           => '允许在您的 Feed 中查看成人和 NSFW 内容。',
     'nsfw_post'         => '内容适合成人吗？',
 
     'hidden_post'       => '通过链接访问？',

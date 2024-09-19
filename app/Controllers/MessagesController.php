@@ -163,7 +163,8 @@ class MessagesController extends Controller
         // Private message is empty
         // Если личное сообщение пустое
         if ($content == '') {
-            Msg::redirect(__('msg.enter_content'), 'error', url('messages', ['login' => $this->container->user()->login()]));
+			$dialog = MessagesModel::availability($recipient_id );
+            Msg::redirect(__('msg.enter_content'), 'error', url('dialogues', ['id' => $dialog['dialog_id']]));
         }
 
         // If the user does not exist 

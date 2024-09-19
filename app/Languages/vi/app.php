@@ -174,7 +174,7 @@ return [
     'cancel'            => 'Hủy bỏ',
     'reply'             => 'Trả lời',
 
-    'is_nsfw'           => 'Cho phép xem nội dung người lớn và NSFW (+ làm mờ hình thu nhỏ) trong nguồn cấp dữ liệu.',
+    'is_nsfw'           => 'Cho phép xem nội dung người lớn và NSFW trong nguồn cấp dữ liệu của bạn.',
     'nsfw_post'         => 'Nội dung có dành cho người trưởng thành (NSFW) không?',
 
     'hidden_post'       => 'Truy cập thông qua liên kết?',
