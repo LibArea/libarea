@@ -31,9 +31,9 @@ class ConsoleModel extends Model
     public static function allUp(int $uid)
     {
         $sql = "SELECT 
-                    (SELECT SUM(post_votes) FROM posts WHERE post_user_id = $uid) 
+                    (SELECT SUM(post_votes) FROM posts WHERE post_user_id = $uid AND post_is_deleted = 0) 
                             AS count_posts,
-                    (SELECT SUM(comment_votes) FROM comments WHERE comment_user_id = $uid) 
+                    (SELECT SUM(comment_votes) FROM comments WHERE comment_user_id = $uid AND comment_is_deleted = 0) 
                             AS count_comments";
 
         $user = DB::run($sql)->fetch();
