@@ -82,7 +82,7 @@ Route::toGroup()
 
 	Route::get('/badges/add')->module('admin', BadgesController::class, 'add')->name('admin.badges.add');
 	Route::get('/badges/{id}/edit')->module('admin', BadgesController::class, 'editBadge')->where(['id' => '[0-9]+'])->name('admin.badges.edit');
-	Route::get('/badges/user/add/{id}')->module('admin', BadgesController::class, 'addUser')->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
+	Route::get('/badges/user/add/{id}')->module('admin', BadgesController::class, 'addBadgeUser')->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
 
 	Route::get('/facets/{type}')->module('admin', FacetsController::class, 'type')->where(['type' => '[a-z]+'])->name('admin.facets.type');
 	Route::get('/facets/ban/{type}')->module('admin', FacetsController::class, 'ban')->where(['type' => '[a-z]+'])->name('admin.facets.ban.type');

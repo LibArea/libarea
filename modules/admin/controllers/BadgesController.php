@@ -109,9 +109,9 @@ class BadgesController extends Module
      *
      * @return void
      */
-    public function addUser()
+    public function addBadgeUser()
     {
-        $user_id    = Request::get('id')->asInt();
+        $user_id    = Request::param('id')->asInt();
         $user       = UserModel::getUser($user_id, 'id');
 
         return view(
