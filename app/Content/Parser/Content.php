@@ -7,6 +7,7 @@ namespace App\Content\Parser;
 use App\Content\Parser\{Convert, Filter};
 use App\Models\ParserModel;
 use App\Bootstrap\Services\User\UserData;
+use LitEmoji\LitEmoji;
 use Img;
 
 class Content
@@ -18,9 +19,9 @@ class Content
         $text = self::parse($text);
         $text = self::details($text);
         $text = self::facets($text);
-		$text = self::gif($text);
+        $text = LitEmoji::encodeUnicode($text);
 
-        return self::emoji($text);
+        return self::gif($text);
     }
 
     public static function parse(string $content)
@@ -82,35 +83,11 @@ class Content
         return $t->apply($text);
     }
 
-    public static function emoji($content)
-    {
-        $pathEmoji =  '/assets/images/emoji/';
-
-        $smiles = array(':)', ':-)');
-        $content = str_replace($smiles, ' <img alt="smile" class="emoji" src="' . $pathEmoji . 'smile.png"> ', $content);
-
-        if (preg_match('/\:(\w+)\:/mUs', $content, $matches)) {
-            $path =  HLEB_PUBLIC_DIR . "/assets/images/emoji/" . $matches[1];
-            $file_ext = "";
-            if (file_exists($path . ".png"))
-                $file_ext = ".png";
-            else if (file_exists($path . ".gif"))
-                $file_ext = ".gif";
-            if ($file_ext === "")
-                return $content;
-
-            $img = $pathEmoji . $matches[1] . $file_ext;
-            return str_replace($matches[0], ' <img alt="' . $matches[1] . '" class="emoji" src="' . $img . '"> ', $content);
-        }
-
-        return  $content;
-    }
-
     public static function gif($content)
-    {	
-		preg_match_all('/\:(\w+)\:/mUs', strip_tags($content), $matchs);
+    {
+        preg_match_all('/\:(\w+)\:/mUs', strip_tags($content), $matchs);
 
-		if (is_array($matchs[1])) {
+        if (is_array($matchs[1])) {
 
             $match_name = [];
             foreach ($matchs[1] as $key => $name) {
@@ -127,12 +104,13 @@ class Content
 
             foreach ($match_name as $key => $name) {
 
-				$img = '/assets/images/gif/' . $name . '.gif';
-				$content = str_replace(':' . $name . ':', '<img class="gif" alt="' . $name . '" src="' . $img . '">', $content);
-           
+                $img = '/assets/images/gif/' . $name . '.gif';
+                if (file_exists('.' . $img))
+                    $content = str_replace(':' . $name . ':', '<img class="gif" alt="' . $name . '" src="' . $img . '">', $content);
+                else
+                    $content = $content;
             }
-		 
-		}
+        }
 
         return  $content;
     }

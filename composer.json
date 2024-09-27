@@ -40,7 +40,9 @@
 		"symfony/dom-crawler": "7.1.x-dev",
 		"symfony/css-selector": "7.1.x-dev",
 		"guzzlehttp/guzzle": "7.9.x-dev",
-		"gemorroj/stop-spam": "dev-master"
+		"gemorroj/stop-spam": "dev-master",
+		"phphleb/idnaconv": "dev-main",
+		"elvanto/litemoji": "dev-master"
     },
     "autoload": {
         "classmap": [

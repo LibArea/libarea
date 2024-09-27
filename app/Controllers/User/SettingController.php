@@ -125,8 +125,6 @@ class SettingController extends Controller
      */
     function avatarForm()
     {
-        // Request::getResources()->addBottomScript('/assets/js/uploads.js');
-
         return render(
             '/user/setting/avatar',
             [
