@@ -131,7 +131,7 @@ class EditItemController extends Module
                 'item_telephone'        => $data['telephone'] ?? null,
                 'item_email'            => $data['email'] ?? null,
                 'item_vk'               => $data['vk'] ?? null,
-                'item_poll'             => $this->selectPoll(Request::post('poll_id')->value()),
+                'item_poll'             => $this->selectPoll(Request::post('poll_id')->value() ?? ''),
                 'item_telegram'         => $data['telegram'] ?? null,
             ]
         );

@@ -25,7 +25,7 @@ Route::get('/web/website/{id}/{slug?}')->module('catalog', DetailedController::c
 Route::post('/search/web/url')->module('catalog', AddItemController::class, 'searchUrl');
 
 // Формы добавления контента
-Route::get('/add/item')->module('catalog', AddItemController::class)->name('item.form.add');
+Route::get('/add/item/{id?}')->module('catalog', AddItemController::class)->where(['id' => '[0-9]+'])->name('item.form.add');
 Route::get('/add/category')->module('catalog', AddItemController::class)->name('category.form.add');
 // Формы изменение контента
 Route::get('/edit/item/{id}')->module('catalog', EditItemController::class)->where(['id' => '[0-9]+'])->name('item.form.edit');

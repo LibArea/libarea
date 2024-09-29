@@ -70,7 +70,7 @@
             @<?= $rl['facet_title']; ?>
           </a>
           <?php if ($container->user()->admin()) : ?>
-            <a class="text-sm ml5" href="<?= url('category.edit', ['id' => $rl['facet_id']]); ?>">
+            <a class="text-sm ml5" href="<?= url('facet.form.edit', ['type' => 'category', 'id' => $rl['facet_id']]); ?>">
               <sup class="gray-600"><svg class="icon">
                   <use xlink:href="/assets/svg/icons.svg#edit"></use>
                 </svg> <small><?= $rl['facet_type']; ?></small></sup>

@@ -34,7 +34,7 @@ class AddItemController extends Module
 
         // Adding from page topic / blog
         // Добавление со странице категории
-        if ($category_id = Request::get('category_id')->asInt()) {
+        if ($category_id = Request::param('id')->asInt()) {
             $category  = FacetPresence::index($category_id, 'id', 'category');
         }
 
@@ -85,7 +85,7 @@ class AddItemController extends Module
                 'item_published'        => $published,
                 'item_user_id'          => $this->container->user()->id(),
                 'item_close_replies'    => Request::post('close_replies')->value() == 'on' ? 1 : null,
-                'item_poll'             => $this->selectPoll(Request::post('poll_id')->asInt()),
+                'item_poll'             => $this->selectPoll(Request::post('poll_id')->value() ?? ''),
             ]
         );
 

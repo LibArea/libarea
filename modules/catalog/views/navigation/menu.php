@@ -1,6 +1,6 @@
 <?php 
 $category = $data['category'] ?? false;
-$url = $category ? url('item.form.add') . '/' . $category['facet_id'] : url('item.form.add');
+$url = $category ? url('item.form.add', ['id' => $category['facet_id']]) : url('item.form.add', endPart: false);
 $user_count_site = $data['user_count_site'] ?? false; 
 ?>
 
