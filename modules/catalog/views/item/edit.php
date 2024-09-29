@@ -23,9 +23,13 @@ $domain = $data['domain']; ?>
         <fieldset class="gray-600">
           id: <?= $domain['item_id']; ?> <span class="gray"><?= $domain['item_domain']; ?></span>
           - <span class="lowercase"><?= langDate($domain['item_date']); ?></span>
+		  
+		  <?php if ($domain['item_published'] == 1) : ?>
+		  -  <a class="lowercase" target="_blank" href="<?= url('website', ['id' => $domain['item_id'], 'slug' => $domain['item_slug']]); ?>"><?= __('web.more'); ?></a>
+		  <?php endif; ?>
         </fieldset>
 
-        <?php if ($container->user()->admin()) { ?>
+        <?php if ($container->user()->admin()) : ?>
           <div class="flex gap items-center mb15 mb-none">
             <div class="img-preview">
               <?= Img::website('thumb', host($domain['item_url']), 'list-items__thumb-image'); ?>
@@ -35,7 +39,7 @@ $domain = $data['domain']; ?>
           </div>
           <?= Img::website('favicon', host($domain['item_url']), ' mr5'); ?>
           <span class="add-favicon btn btn-small btn-primary" data-id="<?= $domain['item_id']; ?>">+ favicon</span>
-        <?php } ?>
+        <?php endif; ?>
 
         <?= insertTemplate('subsections', ['subsections' => $data['subsections'], 'item_id' => $domain['item_id']]); ?>
 

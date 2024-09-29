@@ -13,7 +13,7 @@ class RulesItem extends Validator
 {
     public static function rulesAdd($data)
     {
-        $redirect = url('item.form.add');
+        $redirect = url('item.form.add', endPart: false);
 
         self::url($data['url'], $redirect);
 
@@ -28,7 +28,7 @@ class RulesItem extends Validator
 
     public static function rulesEdit($data)
     {
-        $redirect = url('item.form.add');
+        $redirect = url('item.form.add', endPart: false);
 
         $item = WebModel::getItemId((int)$data['item_id']);
         if (!$item) {
