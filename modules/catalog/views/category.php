@@ -1,4 +1,4 @@
-<?= insertTemplate('header', ['meta' => $meta]); ?>
+<?= insertTemplate('header', ['meta' => $meta, 'category' => $data['category']]); ?>
 
 <div class="item-cat wrap">
   <?= insert('/_block/navigation/breadcrumbs', ['list' => $data['breadcrumb']]);

@@ -1,8 +1,4 @@
-<?php 
-$category = $data['category'] ?? false;
-$url = $category ? url('item.form.add', ['id' => $category['facet_id']]) : url('item.form.add', endPart: false);
-$user_count_site = $data['user_count_site'] ?? false; 
-?>
+<?php $user_count_site = $data['user_count_site'] ?? false; ?>
 
 <li>
   <a <?= is_current(url('web.user.sites')) ? 'class="active"' : ''; ?> href="<?= url('web.user.sites'); ?>">
@@ -12,14 +8,6 @@ $user_count_site = $data['user_count_site'] ?? false;
     <?php endif; ?>
   </a>
 </li>
-
-<?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_item')) || ($user_count_site != false)) : ?>
-  <li>
-    <a href="<?= $url; ?>">
-      <?= __('web.add_website'); ?>
-    </a>
-  </li>
-<?php endif; ?>
 
 <li>
   <a <?= is_current(url('web.bookmarks')) ? 'class="active"' : ''; ?> href="<?= url('web.bookmarks'); ?>">

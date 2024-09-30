@@ -1,4 +1,8 @@
-<?= insertTemplate('/meta', ['meta' => $meta]); ?>
+<?= insertTemplate('/meta', ['meta' => $meta]); 
+	$user_count_site = $data['user_count_site'] ?? false; 
+	$category = $category ?? false;
+	$url = $category ? url('item.form.add', ['id' => $category['facet_id']]) : url('item.form.add', endPart: false);
+?>
 
 <body class="item<?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?>">
   <header class="d-header scroll-hide-search">
@@ -37,6 +41,12 @@
           </div>
         <?php else : ?>
           <div class="flex gap-max items-center mb-mt5">
+			<?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_item')) || ($user_count_site != false)) : ?>
+				<a class="blue" title="<?= __('web.add_website'); ?>" href="<?= $url; ?>">
+				  <svg class="icon icon-bold"><use xlink:href="/assets/svg/icons.svg#write"></use></svg>
+				</a>
+			<?php endif; ?>
+		  
             <a id="toggledark" class="gray-600">
 			  <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
