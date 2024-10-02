@@ -97,6 +97,8 @@ h5 {
 
 .icon.ok {
   color: #eb722e;
+  height: 47px;
+  width: 44px;
 }
 
 .icon.tg {
@@ -402,7 +404,7 @@ a:hover>img {
   margin: 5px;
 }
 
-.comment_body img.medium-zoom-image {
+.comment-body img.medium-zoom-image {
   max-width: 330px;
   border: 1px solid #666;
   display: block;
@@ -425,7 +427,7 @@ a:hover>img {
   padding: 0;
 }
 
-.comment_footer {
+.comment-footer {
   display: flex;
   gap: 1rem;
   font-size: .875rem;
@@ -477,11 +479,11 @@ a:hover>img {
 }
 
 
-li input.comment_folder_button {
+li input.comment-folder-button {
   display: none;
 }
 
-li .comment_folder {
+li .comment-folder {
   font-size: 9pt;
   color: var(--gray-600);
   letter-spacing: 0.1em;
@@ -492,22 +494,22 @@ li .comment_folder {
   margin-left: -22px;
 }
 
-li .comment_folder:before {
+li .comment-folder:before {
   content: "[-]";
 }
 
-li .comment_folder_button:checked~.comment .comment_folder:before {
+li .comment-folder-button:checked~.comment .comment-folder:before {
   content: "[+]";
 }
 
-li .comment_folder_button:checked~.comment .comment_text,
-li .comment_folder_button:checked~.comment .comment_footer {
+li .comment-folder-button:checked~.comment .comment-text,
+li .comment-folder-button:checked~.comment .comment-footer {
   display: none;
 }
 
-li .comment_folder_button:checked~ol.comments ol,
-li .comment_folder_button:checked~ol.comments div.comment,
-li .comment_folder_button:checked~ol.comments li {
+li .comment-folder-button:checked~ol.comments ol,
+li .comment-folder-button:checked~ol.comments div.comment,
+li .comment-folder-button:checked~ol.comments li {
   display: none;
 }
 

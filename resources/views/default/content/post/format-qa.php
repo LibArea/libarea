@@ -24,14 +24,14 @@
             <ol class="list-none">
               <li class="comment">
                 <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
-                <div class="comment comment_body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
+                <div class="comment comment-body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
 
                   <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
 
                   <div class="max-w780 ind-first-p ml5<?php if ($level == 1) : ?> text-sm<?php endif; ?>">
                     <?= markdown($node['comment_content'], 'text'); ?>
                   </div>
-                  <div class="comment_footer justify-between">
+                  <div class="comment-footer justify-between">
                     <div class="flex gap">
                       <?php if ($type != 'qa') : ?>
                         <?= Html::votes($node, 'comment'); ?>

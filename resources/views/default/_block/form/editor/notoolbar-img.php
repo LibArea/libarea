@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/assets/js/editor/cherry-markdown.min.css" type="text/css">
 <link as="font" href="/assets/js/editor/ch-icon.woff2">
 <?php if (!empty($title)) : ?><?= $title; ?>:<?php endif; ?>
-<div name="content" id="markdown-container"></div>
+<div name="content" id="markdown-container" spellcheck="true"></div>
 <div class="source none">
 	<pre><?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?></pre>
 </div>
@@ -30,6 +30,9 @@
 			return `{cut}`;
 		}
 	});
+
+	var textarea = document.createElement('textarea');
+	textarea.setAttribute('spellcheck', 'true');
 
 	var mdText = document.querySelector('.source pre')?.innerText;
 
@@ -68,19 +71,14 @@
 
 		editor: {
 			name: 'content',
-			
-			//defaultModel: 'previewOnly',
-			
 			defaultModel: 'editOnly', // edit&preview|editOnly|previewOnly
 			height: '<?= $height; ?>',
 			showSuggestList: false,
 			codemirror: {
 				autofocus: false,
-				// placeholder: "<?= __('app.text'); ?>...",
 			},
-			keepDocumentScrollAfterInit: false,
+			keepDocumentScrollAfterInit: true,
 		},
-		autoScrollByHashAfterInit: false,
 
 		toolbars: {
 			// Определите верхнюю панель инструментов
@@ -95,7 +93,6 @@
 			bubble: ['bold', 'italic', 'strikethrough', 'quote', 'inlineCode'],
 			// Панель подсказок
 			float: ['h2', 'h3', '|', 'checklist', 'quote', 'code', 'image'],
-
 		},
 	});
 </script>

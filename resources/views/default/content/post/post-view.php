@@ -244,7 +244,7 @@ $blog = $data['blog'][0] ?? null;
 </aside>
 <script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    mediumZoom(document.querySelectorAll('.post img:not(.emoji, .gif), .content-body img:not(.emoji, .gif), .comment_body .ind-first-p img:not(.emoji, .gif)'));
+    mediumZoom(document.querySelectorAll('.post img:not(.emoji, .gif), .content-body img:not(.emoji, .gif), .comment-body .ind-first-p img:not(.emoji, .gif)'));
 
     // Добавим цитирование    
     function get_text() {
@@ -273,6 +273,7 @@ $blog = $data['blog'][0] ?? null;
     }
   });
 </script>
+
 <script src="/assets/js/dialog/dialog.js"></script>
 <?= insert('/_block/dialog/msg-flag'); ?>
 <?= insert('/_block/dialog/share', ['title' => __('app.share_post'), 'url' => config('meta', 'url') . post_slug($post['post_id'], $post['post_slug'])]); ?>

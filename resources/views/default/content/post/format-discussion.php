@@ -40,12 +40,12 @@
           <ol class="comments">
             <li>
               <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
-              <input id="comment_folder_<?= $node['comment_id']; ?>" class="comment_folder_button" type="checkbox">
+              <input id="comment_folder_<?= $node['comment_id']; ?>" class="comment-folder-button" type="checkbox">
 
               <div class="comment comment_level-left-<?= $level; ?><?php if ($node['comment_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
-                <label for="comment_folder_<?= $node['comment_id']; ?>" class="comment_folder comment_thread"></label>
+                <label for="comment_folder_<?= $node['comment_id']; ?>" class="comment-folder comment_thread"></label>
 
-                <div class="comment_body">
+                <div class="comment-body">
                   <div class="flex justify-between">
                     <div class="flex text-sm gap-min">
                       <a class="gray-600" href="<?= url('profile', ['login' => $node['login']]); ?>">
@@ -91,11 +91,11 @@
                     </div>
                     <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'discussion']); ?>
                   </div>
-                  <div class="comment_text ind-first-p">
+                  <div class="comment-text ind-first-p">
                     <?= markdown($node['comment_content'], 'text'); ?>
                   </div>
                 </div>
-                <div class="comment_footer">
+                <div class="comment-footer">
                   <?= Html::votes($node, 'comment'); ?>
 
                   <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>

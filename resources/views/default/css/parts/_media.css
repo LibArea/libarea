@@ -153,12 +153,12 @@ main {
     height: 75px;
   }
 
-  li .comment_folder {
+  li .comment-folder {
     font-size: 11pt;
     margin-left: -25px;
   }
 
-  .comment_body img.medium-zoom-image {
+  .comment-body img.medium-zoom-image {
     max-width: 280px;
   }
 

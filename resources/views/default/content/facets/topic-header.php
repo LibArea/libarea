@@ -68,6 +68,5 @@
   </div>
 </div>
 
-<?= insert('/_block/dialog/share', ['title' => __('app.share_topic'), 'url' => config('meta', 'url') . url('topic', ['slug' => $topic['facet_slug']])]); ?>
-
 <script src="/assets/js/dialog/dialog.js"></script>
+<?= insert('/_block/dialog/share', ['title' => __('app.share_topic'), 'url' => config('meta', 'url') . url('topic', ['slug' => $topic['facet_slug']])]); ?>
