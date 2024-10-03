@@ -31,9 +31,6 @@
 		}
 	});
 
-	var textarea = document.createElement('textarea');
-	textarea.setAttribute('spellcheck', 'true');
-
 	var mdText = document.querySelector('.source pre')?.innerText;
 
 	var cherry = new Cherry({

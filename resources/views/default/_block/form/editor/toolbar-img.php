@@ -95,9 +95,6 @@
 			defaultModel: 'editOnly', // edit&preview|editOnly|previewOnly
 			height: '<?= $height; ?>',
 			showSuggestList: false,
-			codemirror: {
-				// placeholder: "<?= __('app.text'); ?>...",
-			},
 		},
 
 		toolbars: {

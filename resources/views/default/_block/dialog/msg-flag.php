@@ -49,12 +49,12 @@
 
       <h2 class="uppercase-box"><?= __('app.report'); ?></h2>
 
-        <p id="my-dialog-description">
-          <?= __('app.report_info'); ?>
-        </p>
+      <p id="my-dialog-description">
+        <?= __('app.report_info'); ?>
+      </p>
 
-        <button id="flag" class="btn btn-primary mr5" type="submit" name="button"><?= __('app.report'); ?></button>
-        <span data-a11y-dialog-hide class="text-sm inline gray"><?= __('app.cancel'); ?></span>
+      <button id="flag" class="btn btn-primary mr5" type="submit" name="button"><?= __('app.report'); ?></button>
+      <span data-a11y-dialog-hide class="text-sm inline gray"><?= __('app.cancel'); ?></span>
     </div>
   </div>
 <?php endif; ?>
