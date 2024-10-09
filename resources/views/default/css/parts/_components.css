@@ -202,13 +202,14 @@ h5 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 550px;
 }
 
 .v-line {
   border-left: 1px solid var(--gray-600);
   height: 20px;
   display: inline-block;
-  margin: 0 10px 0 37px;
+  margin: 0 10px 0 5px;
   vertical-align: middle;
 }
 

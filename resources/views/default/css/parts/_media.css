@@ -97,6 +97,11 @@ main {
   .comment_level-left-5 {
     margin-left: 96px;
   }
+  
+  .d-header.show .d-header-post.none,
+  .d-header.show .d-header-facet.none {
+    max-width: 300px;
+  }
 }
 
 @media (max-width: 780px) {
