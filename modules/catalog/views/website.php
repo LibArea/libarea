@@ -155,8 +155,7 @@
   </aside>
 </div>
 
-<?= insert('/_block/dialog/share', ['title' => __('app.share_website'), 'url' => config('meta', 'url') . url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']])]); ?>
-
 <script src="/assets/js/dialog/dialog.js"></script>
+<?= insert('/_block/dialog/share', ['title' => __('app.share_website'), 'url' => config('meta', 'url') . url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']])]); ?>
 
 <?= insertTemplate('footer'); ?>

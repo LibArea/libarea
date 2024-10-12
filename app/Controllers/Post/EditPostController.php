@@ -112,7 +112,7 @@ class EditPostController extends Controller
 			'post_type' 		=> $new_type,
 			'post_translation'	=> Request::post('translation')->value() == 'on' ? 1 : 0,
 			'post_date' 		=> $post_date,
-			'post_user_id' 		=> $this->selectAuthor($post['post_user_id'], (int)Request::post('user_id')->value()),
+			'post_user_id' 		=> $this->selectAuthor($post['post_user_id'], Request::post('user_id')->value()),
 			'post_draft' 		=> $post_draft,
 			'post_content' 		=> $content,
 			'post_content_img' 	=> $post_img ?? '',

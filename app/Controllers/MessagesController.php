@@ -8,7 +8,7 @@ use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Models\{MessagesModel, NotificationModel};
 use App\Models\User\UserModel;
-use App\Validate\Validator;
+use App\Validate\{Validator, RulesMessage};
 use Meta, Msg;
 
 class MessagesController extends Controller
@@ -160,12 +160,9 @@ class MessagesController extends Controller
 
         $this->limitTl();
 
-        // Private message is empty
-        // Если личное сообщение пустое
-        if ($content == '') {
-			$dialog = MessagesModel::availability($recipient_id );
-            Msg::redirect(__('msg.enter_content'), 'error', url('dialogues', ['id' => $dialog['dialog_id']]));
-        }
+		$dialog = MessagesModel::availability($recipient_id );
+
+        RulesMessage::rules($content, url('dialogues', ['id' => $dialog['dialog_id']]));
 
         // If the user does not exist 
         // Если пользователя не существует

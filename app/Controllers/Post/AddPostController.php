@@ -118,6 +118,12 @@ class AddPostController extends Controller
 
         $post_feature = config('general', 'qa_site_format') === true ? 1 : Request::post('post_feature')->asInt();
 
+		// Let's check the presence of the facet before adding it	
+		// Проверим наличие фасета перед добавлением	
+		if (!$facets = $fields['facet_select'] ?? false) {
+			Msg::redirect(__('msg.select_topic'), 'error', $redirect);
+		}
+
         $last_id = PostModel::create(
             [
                 'post_title'            => $fields['post_title'],

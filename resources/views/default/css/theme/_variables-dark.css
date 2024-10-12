@@ -76,20 +76,22 @@ body.dark {
   --tags-border-color: #555;
 }
 
-body.dark .cherry-editor.cherry-editor--full,
-body.dark .cherry-editor .CodeMirror,
-body.dark .cherry-previewer  {
+body.dark .cherry.theme__light .cherry-toolbar,
+body.dark .cherry.theme__light .cherry-floatmenu,
+body.dark .cherry.theme__light .cherry-bubble,
+body.dark .cherry.theme__light .cherry-sidebar,
+body.dark .cherry.theme__light .cherry-editor,
+body.dark .cherry.theme__light .cherry-editor .CodeMirror  {
   background-color: var(--form-bg-color);
   color: var(--form-text-color);
 }
 
-body.dark .comment:target,
-body.dark .comment.edit {
-  background-color: var(--form-bg-color);
-}
-
-body.dark .cherry-editor .cm-s-default .cm-variable-2 {
-    color: var(--black);
+body.dark .cherry.theme__light .cherry-editor .CodeMirror .CodeMirror-scroll span,
+body.dark .cherry.theme__light .cherry-toolbar .cherry-toolbar-button,
+body.dark .cherry.theme__light .cherry-floatmenu .cherry-toolbar-button,
+body.dark .cherry.theme__light .cherry-bubble .cherry-toolbar-button,
+body.dark .cherry.theme__light .cherry-sidebar .cherry-toolbar-button {
+  color: var(--form-text-color);
 }
 
 body.dark .comment {
