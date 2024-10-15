@@ -514,8 +514,7 @@ li .comment-folder-button:checked~ol.comments li {
   display: none;
 }
 
-.bg-red-200 .comment,
-.comment.bg-red-200 {
+.comments .comment.bg-red-200 {
   background-color: var(--red-200);
 }
 

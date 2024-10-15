@@ -54,8 +54,8 @@ class VotesController extends Controller
             return false;
         }
 
-        // We check that the participant does not vote for their content (post / answer / comment / item)
-        // Проверяем, чтобы участник не голосовал за свой контент (post / answer / comment / item)
+        // We check that the participant does not vote for their content (post / comment / item / reply)
+        // Проверяем, чтобы участник не голосовал за свой контент (post / comment / item / reply)
         if ($this->container->user()->id() == VotesModel::authorId($content_id, $type)) {
             return false;
         }

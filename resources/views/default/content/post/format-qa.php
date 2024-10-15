@@ -93,7 +93,7 @@
       <form class="mb15 mt20" action="<?= url('add.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
         <?= $container->csrf()->field(); ?>
         <?= insert('/_block/form/editor/notoolbar-img', [
-          'height'  => '250px',
+          'height'  => '170px',
           'id'      => $post['post_id'],
           'type'    => 'comment',
         ]); ?>
