@@ -67,7 +67,7 @@
                       <span class="gray-600 lowercase">
                         <?= langDate($node['comment_date']); ?>
                       </span>
-                      <?php if (strtotime($node['comment_modified']) < strtotime($node['comment_date'])) : ?>
+                      <?php if (strtotime($node['comment_modified']) > strtotime($node['comment_date'])) : ?>
                         <span class="gray-600 mb-none">
                           (<?= __('app.ed'); ?>.)
                         </span>

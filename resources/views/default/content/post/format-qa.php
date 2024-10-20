@@ -47,13 +47,7 @@
                       <a class="gray-600<?php if (Html::loginColor($node['created_at'] ?? false)) : ?> green<?php endif; ?>" href="<?= url('profile', ['login' => $node['login']]); ?>">
                         <span class="nickname"><?= $node['login']; ?></span>
                       </a>
-                      <span class="mb-none"><?= langDate($node['comment_date']); ?>
-                        <?php if ($type != 'qa') : ?>
-                          <?php if (empty($node['edit'])) : ?>
-                            (<?= __('app.ed'); ?>.)
-                          <?php endif; ?>
-                        <?php endif; ?>
-                      </span>
+                      <span class="mb-none"><?= langDate($node['comment_date']); ?></span>
                       <?php if ($node['comment_published'] == 0 && $container->user()->admin()) : ?>
                         <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
                       <?php endif; ?>
