@@ -85,7 +85,7 @@ class FacetModel extends Model
     public static function getFacet(int|string $params, string $name, string $type)
     {
         $sort = "facet_id = :params";
-        if ($name == 'slug') {
+        if ($name === 'slug') {
             $sort = "facet_slug = :params";
         }
 
@@ -439,9 +439,8 @@ class FacetModel extends Model
     // Вверх по структуре связанные деревья (РОДИТЕЛИ)
     /**
      * @param  int $facet_id
-     * @return Response
      */
-    public static function getHighMatching(int $facet_id)
+    public static function getHighMatching(int $facet_id): false|array
     {
         $sql = "SELECT 
                     facet_id id,

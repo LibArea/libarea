@@ -14,7 +14,7 @@ class LoginController extends Controller
 {
     /**
      * Authorization
-     * Авториация
+     * Авторизация
      *
      * @return void
      */
@@ -40,17 +40,15 @@ class LoginController extends Controller
     /**
      * Login page
      * Страница авторизации
-     *
-     * @return void
      */
-    public function showLoginForm()
+    public function showLoginForm(): void
     {
         $m = [
             'og'    => false,
             'url'   => url('login'),
         ];
 
-        return render(
+        render(
             '/auth/login',
             [
                 'meta'  => Meta::get(__('app.sign_in'), __('auth.login_info'), $m),

@@ -8,7 +8,7 @@ class Curl
     {
         $curl = curl_init();
 
-        if (strpos($url, 'https') !== false) {
+        if (str_contains($url, 'https')) {
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         }

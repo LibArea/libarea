@@ -112,7 +112,7 @@ class FeedModel extends Model
             return DB::run($sql, ['qa' => $slug])->rowCount();
         }
 
-        if ($sheet == 'facet.feed.topic') {
+        if ($sheet === 'facet.feed.topic') {
             return DB::run($sql, ['qa' => "%" . $slug . "@%", 'topic' => "%" . $topic . "@%"])->rowCount();
         }
 
@@ -132,7 +132,7 @@ class FeedModel extends Model
 			'web.feed'			=> 	'WHERE post_url_domain = :qa AND post_draft = 0 ' . $hidden,
 			'profile.posts'		=> 	'WHERE post_user_id = :qa AND post_draft = 0 AND post_type = \'post\'',
 		};
-
+        /** @toDo здесь возможно нужно выбрасывать ошибку вместо этой переменной. */
         return $string;
     }
 }

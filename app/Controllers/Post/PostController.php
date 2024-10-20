@@ -75,8 +75,8 @@ class PostController extends Controller
 
         $comments = CommentModel::getCommentsPost($content['post_id'], $content['post_feature'], $sorting);
 
-        if ($type == 'post') {
-            return render(
+        if ($type === 'post') {
+            render(
                 '/post/post-view',
                 [
                     'meta'  => Meta::post($content),
@@ -103,7 +103,7 @@ class PostController extends Controller
         $slug_facet = Request::param('facet_slug')->asString();
         $page  = FacetPresence::index($slug_facet, 'slug', 'section');
 
-        return render(
+        render(
             '/post/page-view',
             [
                 'meta'  => Meta::post($content),
@@ -122,7 +122,7 @@ class PostController extends Controller
     {
         // Check id and get content data
         // Проверим id и получим данные контента
-        if ($type == 'post') {
+        if ($type === 'post') {
             $content = PostPresence::index($id);
 
             // If the post slug is different from the data in the database
@@ -148,10 +148,8 @@ class PostController extends Controller
     /**
      * Posting your post on your profile
      * Размещение своего поста у себя в профиле
-     *
-     * @return void
      */
-    public function postProfile()
+    public function postProfile(): false|string
     {
         $post = PostPresence::index($post_id = Request::post('post_id')->asInt(), 'id');
 
@@ -189,7 +187,7 @@ class PostController extends Controller
             'url'   => url('domain', ['domain' => $domain]),
         ];
 
-        return render(
+        render(
             '/post/link',
             [
                 'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('meta.domain_desc') . ': ' . $domain, $m),

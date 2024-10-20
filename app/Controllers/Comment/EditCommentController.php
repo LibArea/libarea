@@ -24,14 +24,14 @@ class EditCommentController extends Controller
      *
      * @return void
      */
-    public function index()
+    public function index(): void
     {
         $comment = CommentPresence::index(Request::param('id')->asPositiveInt());
-        if ($this->container->access()->author('comment', $comment) == false) {
-            return false;
+        if (!$this->container->access()->author('comment', $comment)) {
+            return;
         }
 
-        return render(
+        render(
             '/comments/edit',
             [
                 'meta'  => Meta::get(__('app.edit_comment')),
@@ -56,8 +56,8 @@ class EditCommentController extends Controller
         $content    = $_POST['content']; // для Markdown
 
         $comment = CommentModel::getCommentId($comment_id);
-        if ($this->container->access()->author('comment', $comment) == false) {
-            return false;
+        if (!$this->container->access()->author('comment', $comment)) {
+            return;
         }
 
         $post = PostPresence::index($comment['comment_post_id'], 'id');
@@ -86,11 +86,11 @@ class EditCommentController extends Controller
      *
      * @return void
      */
-    public function transfer()
+    public function transfer(): void
     {
         $comment = CommentPresence::index(Request::param('id')->asPositiveInt());
 
-        return render(
+        render(
             '/comments/transfer',
             [
                 'meta'  => Meta::get(__('app.edit_comment')),

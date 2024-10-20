@@ -10,7 +10,7 @@ use App\Models\FacetModel;
 
 class RedirectController extends Controller
 {
-    public function index()
+    public function index(): void
     {
         $facet_id  = Request::param('id')->asPositiveInt();
         $facet = FacetModel::uniqueById($facet_id);

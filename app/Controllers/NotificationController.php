@@ -13,7 +13,7 @@ class NotificationController extends Controller
 {
     public function index()
     {
-        return render(
+        render(
             '/notification/index',
             [
                 'meta'  => Meta::get(__('app.notifications')),
@@ -27,10 +27,8 @@ class NotificationController extends Controller
     /**
      * Change the subscription flag read or not (follow the link) 
      * Изменяем флаг подписки прочитан или нет (переход по ссылке)
-     *
-     * @return void
      */
-    public function read()
+    public function read(): bool
     {
         $notif_id   = Request::param('id')->asInt();
         $info       = NotificationModel::getNotification($notif_id);
@@ -42,6 +40,8 @@ class NotificationController extends Controller
         NotificationModel::updateMessagesUnread($notif_id);
 
         redirect($info['url']);
+
+        return true;
     }
 
     public function remove()
@@ -64,7 +64,6 @@ class NotificationController extends Controller
      * @param array $message
      * @param string $url
      * @param integer|null $owner_id
-     * @return void
      */
     public function mention(int $action_type, array $message, string $url, int|null $owner_id = null)
     {

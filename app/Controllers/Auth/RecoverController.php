@@ -16,8 +16,7 @@ class RecoverController extends Controller
 {
     public function index()
     {
-        $email      = Request::post('email')->value();
-        $redirect   = url('recover');
+        $redirect  = url('recover');
 
         if (config('integration', 'captcha')) {
             if (!Google::checkCaptchaCode()) {
@@ -57,14 +56,14 @@ class RecoverController extends Controller
      *
      * @return void
      */
-    public function showPasswordForm()
+    public function showPasswordForm(): void
     {
         $m = [
             'og'    => false,
             'url'   => url('recover'),
         ];
 
-        return render(
+        render(
             '/auth/recover',
             [
                 'meta'  => Meta::get(__('app.password_recovery'), __('app.recover_info'), $m),
@@ -82,7 +81,7 @@ class RecoverController extends Controller
      *
      * @return void
      */
-    public function showRemindForm()
+    public function showRemindForm(): void
     {
         $code       = Request::param('code')->asString();
         $user_id    = AuthModel::getPasswordActivate($code);
@@ -95,7 +94,7 @@ class RecoverController extends Controller
         $user = UserModel::get($user_id['activate_user_id'], 'id');
         notEmptyOrView404($user);
 
-        return render(
+        render(
             '/auth/newrecover',
             [
                 'meta'  => Meta::get(__('app.password recovery'), __('app.recover_info')),
@@ -127,6 +126,8 @@ class RecoverController extends Controller
         AuthModel::editRecoverFlag($user_id);
 
         Msg::redirect(__('msg.change_saved'), 'success', url('login'));
+
+        return true;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Catalog\Controllers;
 
+use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
 use Hleb\Base\Module;
 use Modules\Catalog\Сheck\ItemPresence;
@@ -21,15 +22,13 @@ class DetailedController extends Module
     use LastDataModified;
     use Poll;
 
-    protected $limit = 25;
+    protected $limit = 25; /** @toDo не используется? */
 
     /**
      * Detailed site page
      * Детальная страница сайта
-     *
-     * @return void
      */
-    public function index()
+    public function index(): View
     {
         $slug  = Request::param('slug')->value();
         $id    = Request::param('id')->asInt();

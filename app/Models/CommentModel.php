@@ -22,7 +22,7 @@ class CommentModel extends Model
      * @param string $content
      * @param integer $trigger
      * @param integer $mobile
-     * @return void
+     * @return mixed
      */
     public static function add(int $post_id, int $parent_id, string $content, $trigger, $mobile)
     {
@@ -67,7 +67,6 @@ class CommentModel extends Model
      * Редактируем ответ
      *
      * @param array $params
-     * @return void
      */
     public static function edit(array $params)
     {
@@ -84,9 +83,8 @@ class CommentModel extends Model
      *
      * @param integer $page
      * @param string $sheet
-     * @return void
      */
-    public static function getComments(int $page, string $sheet)
+    public static function getComments(int $page, string $sheet): false|array
     {
         $user_id = self::container()->user()->id();
         $sort = self::sorts($sheet);
@@ -155,7 +153,6 @@ class CommentModel extends Model
      * Количество ответов на пост
      *
      * @param integer $post_id
-     * @return void
      */
     public static function getNumberComment(int $post_id)
     {
@@ -170,7 +167,6 @@ class CommentModel extends Model
      *
      * @param string $content
      * @param integer $post_id
-     * @return void
      */
     public static function mergePost(string $content, int $post_id)
     {
@@ -187,7 +183,6 @@ class CommentModel extends Model
      *
      * @param string $content
      * @param integer $comment_id
-     * @return void
      */
     public static function mergeComment(string $content, int $comment_id)
     {
@@ -291,7 +286,7 @@ class CommentModel extends Model
      * @param integer $page
      * @param integer $user_id
      * @param integer $uid_vote
-     * @return void
+     * @return array|false
      */
     public static function userComments(int $page, int $user_id, int $uid_vote)
     {
@@ -335,7 +330,7 @@ class CommentModel extends Model
      * Количество ответов участника
      *
      * @param integer $user_id
-     * @return void
+     * @return int
      */
     public static function userCommentsCount(int $user_id)
     {
@@ -402,7 +397,6 @@ class CommentModel extends Model
      * Запишем id участника выбравший лучший ответ
      *
      * @param integer $comment_id
-     * @return void
      */
     public static function setCommentBest(int $comment_id)
     {
@@ -417,7 +411,6 @@ class CommentModel extends Model
      *
      * @param integer $post_id
      * @param integer $comment_id
-     * @return void
      */
     public static function commentPostBest(int $post_id, int $comment_id)
     {

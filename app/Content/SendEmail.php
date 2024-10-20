@@ -19,7 +19,7 @@ class SendEmail
 
         $user   = UserModel::get($uid, 'id');
 
-        if ($type == 'appealed') {
+        if ($type === 'appealed') {
             $setting = SettingModel::getNotifications($uid);
             $appealed = $setting['setting_email_appealed'] ?? 0;
             if ($appealed == 0) {
@@ -65,6 +65,8 @@ class SendEmail
         }
 
         self::send($user_email, $subject, $message . $text_footer);
+
+        return true;
     }
 
     public static function send($email, $subject = '', $message = '')

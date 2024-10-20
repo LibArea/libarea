@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use Hleb\Base\Module;
+use Hleb\Constructor\Data\View;
 use Meta;
 
 class CssController extends Module
 {
-    public function index()
+    public function index(): View
     {
         return view(
             'css',
@@ -24,7 +25,7 @@ class CssController extends Module
         );
     }
 
-    public static function iconList()
+    public static function iconList(): array
     {
         $iconList = [];
 

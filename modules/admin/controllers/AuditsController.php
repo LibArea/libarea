@@ -37,9 +37,9 @@ class AuditsController extends Module
         $result = [];
         foreach ($audits  as $ind => $row) {
 
-            if ($row['action_type'] == 'post') {
+            if ($row['action_type'] === 'post') {
                 $row['content'] = PostModel::getPost($row['content_id'], 'id', $this->container->user()->get());
-            } elseif ($row['action_type'] == 'comment') {
+            } elseif ($row['action_type'] === 'comment') {
                 $row['content'] = CommentModel::getCommentId($row['content_id']);
 
                 $row['post'] = PostModel::getPost($row['content']['comment_post_id'], 'id', $this->container->user()->get());

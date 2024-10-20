@@ -5,7 +5,7 @@ declare(strict_types=1);
 class Img
 {
     // File paths for storing avatars, banners, etc.
-    const PATH = [
+    public const PATH = [
         'avatars'               => '/uploads/users/avatars/',
         'avatars_small'         => '/uploads/users/avatars/small/',
         'users_cover'           => '/uploads/users/cover/',
@@ -29,9 +29,9 @@ class Img
      * @param string $style
      * @param string $type
      * @param string $size
-     * @return void
+     * @return string
      */
-    public static function image(string $file, string $alt, string $style, string $type, string $size)
+    public static function image(string $file, string $alt, string $style, string $type, string $size): string
     {
         $imgPath = self::generateImagePath($file, $type, $size);
 
@@ -45,9 +45,9 @@ class Img
      * @param string $alt
      * @param string $style
      * @param string $size
-     * @return void
+     * @return string
      */
-    public static function avatar(string $file, string $alt, string $style, string $size)
+    public static function avatar(string $file, string $alt, string $style, string $size): string
     {
         $imgPath = self::generateImagePath($file, 'avatar', $size);
 
@@ -59,13 +59,13 @@ class Img
      *
      * @param string $type
      * @param string $host
-     * @param string $css
-     * @return void
+     * @param string|null $css
+     * @return string
      */
-    public static function website(string $type, string $host, string|null $css = '')
+    public static function website(string $type, string $host, string|null $css = ''): string
     {
-        $path = ($type == 'thumb') ? self::PATH['thumbs'] : self::PATH['favicons'];
-        $itemprop = ($type == 'thumb') ? 'itemprop="image"' : '';
+        $path = ($type === 'thumb') ? self::PATH['thumbs'] : self::PATH['favicons'];
+        $itemprop = ($type === 'thumb') ? 'itemprop="image"' : '';
 		$img = $path . $host . '.png';
         $imgPath = HLEB_PUBLIC_DIR . $img;
 
@@ -81,11 +81,11 @@ class Img
      *
      * @param string $file
      * @param string $type
-     * @return void
+     * @return string
      */
-    public static function cover(string $file, string $type)
+    public static function cover(string $file, string $type): string
     {
-        return $type == 'blog' ? self::PATH['facets_cover'] . $file : self::PATH['users_cover'] . $file;
+        return $type === 'blog' ? self::PATH['facets_cover'] . $file : self::PATH['users_cover'] . $file;
     }
 
     /**
@@ -94,21 +94,21 @@ class Img
      * @param string $file
      * @param string $type
      * @param string $size
-     * @return void
+     * @return string
      */
-    private static function generateImagePath(string $file, string $type, string $size)
+    private static function generateImagePath(string $file, string $type, string $size): string
     {
         $path = '';
 
         switch ($type) {
             case 'post':
-                $path = ($size == 'thumbnails') ? self::PATH['posts_thumb'] : self::PATH['posts_cover'];
+                $path = ($size === 'thumbnails') ? self::PATH['posts_thumb'] : self::PATH['posts_cover'];
                 break;
             case 'avatar':
-                $path = ($size == 'small') ? self::PATH['avatars_small'] : self::PATH['avatars'];
+                $path = ($size === 'small') ? self::PATH['avatars_small'] : self::PATH['avatars'];
                 break;
             case 'logo':
-                $path = ($size == 'small') ? self::PATH['facets_logo_small'] : self::PATH['facets_logo'];
+                $path = ($size === 'small') ? self::PATH['facets_logo_small'] : self::PATH['facets_logo'];
                 break;
         }
 

@@ -37,7 +37,7 @@ class EditFacetController extends Controller
             redirect('/');
         }
 
-        return render(
+        render(
             '/facets/edit',
             [
                 'meta'  => Meta::get(__('app.edit') . ' | ' . $facet['facet_title']),

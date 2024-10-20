@@ -21,7 +21,7 @@ class InvitationsController extends Controller
      */
     public function inviteForm()
     {
-        return render(
+        render(
             '/user/invite',
             [
                 'meta'  => Meta::get(__('app.invite')),
@@ -37,7 +37,7 @@ class InvitationsController extends Controller
      */
     function invitationForm()
     {
-        return render(
+        render(
             '/user/invitation',
             [
                 'meta'  => Meta::get(__('app.invites')),

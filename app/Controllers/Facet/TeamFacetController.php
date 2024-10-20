@@ -12,7 +12,7 @@ use Meta, Msg;
 
 class TeamFacetController extends Controller
 {
-    public function index()
+    public function index(): void
     {
         $type   = $this->accessType(Request::param('type')->asString());
         $facet  = FacetPresence::index(Request::param('id')->asPositiveInt(), 'id', $type);
@@ -21,7 +21,7 @@ class TeamFacetController extends Controller
 
         $users_team = FacetModel::getUsersTeam($facet['facet_id']);
 
-        return render(
+        render(
             '/facets/team',
             [
                 'meta'  => Meta::get(__('app.team') . ' | ' . $facet['facet_title']),
@@ -41,7 +41,7 @@ class TeamFacetController extends Controller
      *
      * @return void
      */
-    public function edit()
+    public function edit(): void
     {
         $type = $this->accessType(Request::param('type')->asString());
         $facet = FacetPresence::index(Request::param('id')->asPositiveInt(), 'id', $type);
@@ -61,7 +61,7 @@ class TeamFacetController extends Controller
      *
      * @param array $users
      * @param int $content_id
-     * @return void
+     * @return true
      */
     public static function editUser(array $users, int $content_id)
     {

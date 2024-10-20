@@ -16,13 +16,13 @@ trait Breadcrumb
     public static function forming($facet, $sort, $type)
     {
         // Now we can expand if other types are needed
-        $arr = ($type == 'category') ? [['name' => __('web.catalog'), 'link' => url('web')]] : [];
+        $arr = ($type === 'category') ? [['name' => __('web.catalog'), 'link' => url('web')]] : [];
 
         $result = [];
         foreach ($facet as $row) {
             
             // Route::get('/web/{grouping}/dir/{sort}/{slug}')
-            $url = ($type == 'category') ? url('category', ['sort' => $sort, 'slug' => $row['link']]) : [];
+            $url = ($type === 'category') ? url('category', ['sort' => $sort, 'slug' => $row['link']]) : [];
             
             $result[] = ["name" => $row['name'], "link" => $url];
         }

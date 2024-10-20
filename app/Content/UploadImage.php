@@ -295,7 +295,9 @@ class UploadImage
     static function createDir($path)
     {
         if (!is_dir($path)) {
-            mkdir($path, 0777, true);
+            if (!mkdir($path, 0777, true) && !is_dir($path)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));
+            }
         }
     }
 

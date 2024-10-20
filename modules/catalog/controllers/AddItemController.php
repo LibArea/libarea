@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Catalog\Controllers;
 
+use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
 use Hleb\Base\Module;
 use App\Content\Сheck\FacetPresence;
@@ -23,12 +24,10 @@ class AddItemController extends Module
     /**
      * Add Domain Form
      * Форма добавление домена
-     *
-     * @return void
      */
-    public function index()
+    public function index(): View
     {
-        if ($this->container->access()->limitTl(config('trust-levels', 'tl_add_item')) == false) {
+        if (!$this->container->access()->limitTl(config('trust-levels', 'tl_add_item'))) {
             redirect('/web');
         }
 
@@ -68,7 +67,7 @@ class AddItemController extends Module
 
         // Instant accommodation for staff only
         // Мгновенное размещение только для персонала
-        $published = Request::post('published')->value() == 'on' ? 1 : 0;
+        $published = Request::post('published')->value() === 'on' ? 1 : 0;
         $published = $this->container->user()->admin() ? $published : 0;
 
         if (WebModel::getSlug($slug = $this->getSlug($data['title']))) {
@@ -84,7 +83,7 @@ class AddItemController extends Module
                 'item_slug'             => $slug,
                 'item_published'        => $published,
                 'item_user_id'          => $this->container->user()->id(),
-                'item_close_replies'    => Request::post('close_replies')->value() == 'on' ? 1 : null,
+                'item_close_replies'    => Request::post('close_replies')->value() === 'on' ? 1 : null,
                 'item_poll'             => $this->selectPoll(Request::post('poll_id')->value() ?? ''),
             ]
         );
@@ -124,9 +123,8 @@ class AddItemController extends Module
      * Оповещение персоналу
      *
      * @param int $trust_level
-     * @return void
      */
-    public function notif(int $trust_level)
+    public function notif(int $trust_level): true
     {
         if ($trust_level != 10) {
             NotificationModel::send(1,  NotificationModel::TYPE_ADD_WEBSITE, url('web.audits'));

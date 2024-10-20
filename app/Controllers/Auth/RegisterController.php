@@ -20,7 +20,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function showRegisterForm()
+    public function showRegisterForm(): void
     {
         // If the invite system is enabled
         if (config('general', 'invite') == true) {
@@ -32,7 +32,7 @@ class RegisterController extends Controller
             'url'   => url('register'),
         ];
 
-        return render(
+        render(
             '/auth/register',
             [
                 'meta'  => Meta::get(__('app.registration'), __('help.security_info'), $m),
@@ -111,7 +111,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function showInviteForm()
+    public function showInviteForm(): void
     {
         $code   = Request::param('code')->asString();
         $invate = InvitationModel::available($code);
@@ -120,7 +120,7 @@ class RegisterController extends Controller
             Msg::redirect(__('msg.code_incorrect'), 'error', '/');
         }
 
-        return render(
+        render(
             '/auth/register-invate',
             [
                 'meta'  => Meta::get(__('app.reg_invite')),

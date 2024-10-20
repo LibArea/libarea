@@ -13,7 +13,7 @@ class Msg
         if ($msg) {
             $options = "3500, { valign: 'top', align: 'right' }";
 
-            if ($msg['status'] == 'error') {
+            if ($msg['status'] === 'error') {
                 $options = "3500, { valign: 'top', align: 'right', styles: { backgroundColor: 'red', fontSize: '18px' } }";
             }
 

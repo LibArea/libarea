@@ -16,7 +16,7 @@ class ConsoleController extends Module
     {
         $choice  = Request::post('type')->value();
         $allowed = ['css', 'topic', 'post', 'up', 'tl'];
-        if (!in_array($choice, $allowed)) {
+        if (!in_array($choice, $allowed, true)) {
             redirect(url('admin.tools'));
         }
         self::$choice();
@@ -84,7 +84,7 @@ class ConsoleController extends Module
 
     public static function consoleRedirect()
     {
-        if (PHP_SAPI != 'cli') {
+        if (PHP_SAPI !== 'cli') {
             Msg::add(__('admin.completed'), 'success');
         }
         return true;

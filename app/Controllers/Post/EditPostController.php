@@ -43,7 +43,7 @@ class EditPostController extends Controller
 		$blog = FacetModel::getFacetsUser('blog');
 		$this->checkingEditPermissions($post, $blog);
 
-		return render(
+		render(
 			'/post/edit',
 			[
 				'meta'  => Meta::get(__('app.edit_' . $post['post_type'])),
@@ -63,13 +63,13 @@ class EditPostController extends Controller
 		);
 	}
 
-	public function edit()
-	{
+	public function edit(): void
+    {
 		$post_id = Request::post('post_id')->asInt();
 		$post = PostPresence::index($post_id);
 
 		$content = $_POST['content']; // for Markdown
-		$post_draft = Request::post('post_draft')->value() == 'on' ? 1 : 0;
+		$post_draft = Request::post('post_draft')->value() === 'on' ? 1 : 0;
 
 		$blog = FacetModel::getFacetsUser('blog');
 		$this->checkingEditPermissions($post, $blog);
@@ -88,7 +88,7 @@ class EditPostController extends Controller
 
 		// Related topics
 		$fields = Request::allPost() ?? [];
-		$new_type = $this->addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
+		$new_type = self::addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
 
 		$post_related = $this->relatedPost();
 
@@ -130,16 +130,16 @@ class EditPostController extends Controller
 		Msg::redirect(__('msg.change_saved'), 'success', url('post.id', ['id' => $post['post_id']]));
 	}
 
-	/**
-	 * Add fastes (blogs, topics) to the post 
-	 *
-	 * @param [type] $fields
-	 * @param [type] $content_id
-	 * @param [type] $redirect
-	 * @return void
-	 */
-	public static function addFacetsPost(array $fields, int $content_id, string $redirect)
-	{
+    /**
+     * Add fastes (blogs, topics) to the post
+     *
+     * @param array $fields
+     * @param int $content_id
+     * @param string $redirect
+     * @return string
+     */
+	public static function addFacetsPost(array $fields, int $content_id, string $redirect): string
+    {
 		$new_type = 'post';
 		$facets = $fields['facet_select'] ?? false;
 

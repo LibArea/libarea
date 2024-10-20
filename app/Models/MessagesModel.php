@@ -10,8 +10,6 @@ class MessagesModel extends Model
     /**
      * All dialogs
      * Все диалоги
-     *
-     * @return void
      */
     public static function getMessages()
     {
@@ -38,7 +36,6 @@ class MessagesModel extends Model
      * Проверим, существует ли диалог или нет
      *
      * @param integer $user_id
-     * @return void
      */
     public static function availability(int $user_id)
     {
@@ -55,7 +52,6 @@ class MessagesModel extends Model
      * Получаем диалог по id
      *
      * @param integer $dialog_id
-     * @return void
      */
     public static function getDialogById(int $dialog_id)
     {
@@ -120,7 +116,6 @@ class MessagesModel extends Model
      * Последнее сообщение в диалоге
      *
      * @param integer $dialog_id
-     * @return void
      */
     public static function getMessageOne(int $dialog_id)
     {
@@ -173,7 +168,6 @@ class MessagesModel extends Model
      *
      * @param [type] $dialog_recipient_id
      * @param [type] $message_content
-     * @return void
      */
     public static function sendMessage($dialog_recipient_id, $message_content)
     {
@@ -219,7 +213,6 @@ class MessagesModel extends Model
      * Создание диалога
      *
      * @param array $params
-     * @return void
      */
     public static function createDialog(array $params)
     {
@@ -264,7 +257,6 @@ class MessagesModel extends Model
      *
      * @param integer $dialog_id
      * @param integer $user_id
-     * @return void
      */
     public static function updateDialogCount(int $dialog_id, int $user_id)
     {
@@ -302,14 +294,12 @@ class MessagesModel extends Model
         DB::run($sql_dialog, $params);
 
         if ($inbox_dialog['dialog_sender_id'] == $user_id) {
-
             $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :recipient WHERE dialog_id = :dialog_id";
             return  DB::run($sql, ['recipient' => 0, 'dialog_id' => $dialog_id]);
-        } else {
-
-            $sql = "UPDATE messages_dialog SET dialog_sender_unread = :sender WHERE dialog_id = :dialog_id";
-            return  DB::run($sql, ['sender' => 0, 'dialog_id' => $dialog_id]);
         }
+
+        $sql = "UPDATE messages_dialog SET dialog_sender_unread = :sender WHERE dialog_id = :dialog_id";
+        return  DB::run($sql, ['sender' => 0, 'dialog_id' => $dialog_id]);
     }
 
     /**
@@ -318,7 +308,6 @@ class MessagesModel extends Model
      *
      * @param integer $dialog_sender_id
      * @param integer $dialog_recipient_id
-     * @return void
      */
     public static function getDialogByUser(int $dialog_sender_id, int $dialog_recipient_id)
     {

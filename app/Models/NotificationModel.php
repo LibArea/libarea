@@ -55,7 +55,6 @@ class NotificationModel extends Model
      *
      * @param integer $user_id
      * @param integer $limit
-     * @return void
      */
     public static function listNotification(int $user_id, int $limit = 100)
     {
@@ -99,7 +98,6 @@ class NotificationModel extends Model
      * @param integer $recipient_id
      * @param integer $action_type
      * @param string $url
-     * @return void
      */
     public static function send(int $recipient_id, int $action_type, string $url)
     {
@@ -127,7 +125,6 @@ class NotificationModel extends Model
      * Оповещение просмотрено (меняем флаг)
      *
      * @param integer $notif_id
-     * @return void
      */
     public static function updateMessagesUnread(int $notif_id)
     {

@@ -42,7 +42,7 @@ class UserController extends Controller
             'url'   => url('users.' . $sheet),
         ];
 
-        return render(
+        render(
             '/user/all',
             [
                 'meta'  => Meta::get(__('meta.' . $sheet . '_users'), __('meta.' . $sheet . '_users_desc'), $m),
@@ -77,7 +77,7 @@ class UserController extends Controller
             $result[$ind]   = $row;
         }
 
-        return render(
+        render(
             '/user/favorite/all',
             [
                 'meta'  => Meta::get(__('app.favorites')),
@@ -99,9 +99,10 @@ class UserController extends Controller
      */
     function folders()
     {
+        /** @toDo здесь возможно, ошибка, так как у get() только один параметр */
         $folders = FolderModel::get('favorite', $this->container->user()->id());
 
-        return render(
+        render(
             '/user/favorite/folders',
             [
                 'meta'  => Meta::get(__('app.folders')),
@@ -122,7 +123,7 @@ class UserController extends Controller
      */
     public function foldersFavorite()
     {
-        return render(
+        render(
             '/user/favorite/all',
             [
                 'meta'  => Meta::get(__('app.favorites')),
@@ -143,7 +144,7 @@ class UserController extends Controller
      */
     function drafts()
     {
-        return render(
+        render(
             '/user/draft',
             [
                 'meta'  => Meta::get(__('app.drafts')),
@@ -164,7 +165,7 @@ class UserController extends Controller
      */
     public function subscribed()
     {
-        return render(
+        render(
             '/user/favorite/read-subscribed',
             [
                 'meta'  => Meta::get(__('app.subscribed')),
@@ -186,7 +187,7 @@ class UserController extends Controller
      */
     public function read()
     {
-        return render(
+        render(
             '/user/favorite/read-subscribed',
             [
                 'meta'  => Meta::get(__('app.i_read')),

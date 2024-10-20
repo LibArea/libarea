@@ -37,7 +37,7 @@ class HomeModel extends Model
         if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ") AND";
 
         $subscription = "";
-        if ($type != 'all') {
+        if ($type !== 'all') {
             if ($user_id) {
                 $subscription = "relation_facet_id IN(0) AND";
                 if ($signed) $subscription = "relation_facet_id IN(" . implode(',', $signed ?? []) . ") AND";
@@ -106,7 +106,6 @@ class HomeModel extends Model
      * Количество постов
      *
      * @param string $type
-     * @return void
      */
     public static function feedCount(array $signed, string $type = 'feed')
     {
@@ -120,7 +119,7 @@ class HomeModel extends Model
         if ($resultNotUser) $ignoring = "post_user_id NOT IN(" . implode(',', $resultNotUser ?? []) . ") AND";
 
         $subscription = "";
-        if ($type != 'all') {
+        if ($type !== 'all') {
             if (self::container()->user()->id()) {
                 $subscription = "f_id IN(0) AND";
                 if ($signed) $subscription = "f_id IN(" . implode(',', $signed ?? []) . ") AND";

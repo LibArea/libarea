@@ -11,8 +11,8 @@ use Meta, Msg, Html;
 
 class AdminController extends Module
 {
-    protected $limit = 15;
-    protected $user_count = 0;
+    protected const LIMIT = 15;
+    protected const USER_COUNT = 0;
 
     public function audits()
     {
@@ -23,7 +23,7 @@ class AdminController extends Module
                 'data'  => [
                     'sheet'             => 'audits',
                     'items'             => WebModel::feedItem(false, false, Html::pageNumber(), 'audits', false),
-                    'user_count_site'   => $this->user_count,
+                    'user_count_site'   => self::USER_COUNT,
                     'audit_count'       => UserAreaModel::auditCount(),
                 ]
             ],
@@ -63,7 +63,7 @@ class AdminController extends Module
             [
                 'meta'  => Meta::get(__('web.status')),
                 'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pagesCount'    => ceil($pagesCount / self::LIMIT),
                     'pNum'          => Html::pageNumber(),
                     'status'        => WebModel::getStatus(Html::pageNumber(), $code),
                     'code'          => $code

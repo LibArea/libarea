@@ -12,7 +12,7 @@ use Msg;
 
 class AuditController extends Controller
 {
-    const REGISTERED_ADMIN_ID = 1;
+    public const REGISTERED_ADMIN_ID = 1;
 
     public function index()
     {
@@ -39,9 +39,8 @@ class AuditController extends Controller
      * Проверим стоп слова, url
      *
      * @param string $content
-     * @return void
      */
-    public function prohibitedContent(string $content)
+    public function prohibitedContent(string $content): bool
     {
         if (!self::stopUrl($content, (int)$this->container->user()->id())) {
             return false;
@@ -60,9 +59,8 @@ class AuditController extends Controller
      *
      * @param string $content
      * @param integer $user_id
-     * @return void
      */
-    public static function stopUrl(string $content, int $user_id)
+    public static function stopUrl(string $content, int $user_id): bool
     {
         if (self::estimationUrl($content)) {
             $all_count = ActionModel::allContentUserCount($user_id);
@@ -81,9 +79,8 @@ class AuditController extends Controller
      *
      * @param string $content
      * @param integer $user_id
-     * @return void
      */
-    public static function stopWords(string $content, int $user_id)
+    public static function stopWords(string $content, int $user_id): bool
     {
         if (self::stopWordsExists($content)) {
             $all_count = ActionModel::allContentUserCount($user_id);
@@ -101,7 +98,6 @@ class AuditController extends Controller
      * Для триггера URL
      *
      * @param string $content
-     * @return void
      */
     public static function estimationUrl(string $content)
     {
@@ -117,7 +113,6 @@ class AuditController extends Controller
      * Проверим наличия слова в стоп листе (аудит в админ-панели)
      *
      * @param string $content
-     * @return void
      */
     public static function stopWordsExists(string $content)
     {
@@ -131,13 +126,13 @@ class AuditController extends Controller
                 continue;
             }
 
-            if (substr($word, 0, 1) == '{' and substr($word, -1, 1) == '}') {
+            if ($word[0] === '{' && $word[strlen($word) - 1] === '}') {
 
                 if (preg_match(substr($word, 1, -1), $content)) {
                     return true;
                 }
             } else {
-                if (strstr($content, $word)) {
+                if (str_contains($content, $word)) {
                     return true;
                 }
             }
@@ -148,7 +143,7 @@ class AuditController extends Controller
 
     public function create(string $type, int $last_content_id, string $url, string $type_notification = 'audit')
     {
-        $action_type = ($type_notification == 'audit') ? NotificationModel::TYPE_AUDIT : NotificationModel::TYPE_REPORT;
+        $action_type = ($type_notification === 'audit') ? NotificationModel::TYPE_AUDIT : NotificationModel::TYPE_REPORT;
 
         AuditModel::add(
             [

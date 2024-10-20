@@ -56,7 +56,7 @@ class HomeController extends Controller
             $signed[$ind] = $row['facet_id'];
         }
 
-        return render(
+        render(
             'home',
             [
                 'meta'  => Meta::home($sheet),

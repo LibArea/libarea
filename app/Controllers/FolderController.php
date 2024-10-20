@@ -36,8 +36,6 @@ class FolderController extends Controller
     /**
      * Deleting the linked content folder
      * Удаление папки привязанному контенту
-     *
-     * @return void
      */
     public function delFolderContent()
     {
@@ -62,7 +60,7 @@ class FolderController extends Controller
         $type   = Request::post('type')->value();
 
         $allowed = ['favorite', 'blog'];
-        if (!in_array($type, $allowed)) return false;
+        if (!in_array($type, $allowed, true)) return;
 
         FolderModel::saveFolderContent($id, $tid, $type);
     }
@@ -70,10 +68,8 @@ class FolderController extends Controller
     /**
      * Delete the folder itself
      * Удаляем саму папку
-     *
-     * @return void
      */
-    public function delFolder()
+    public function delFolder(): true
     {
         $id     = Request::post('id')->asInt();
         $type   = Request::post('type')->value();

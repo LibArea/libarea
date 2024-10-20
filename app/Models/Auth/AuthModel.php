@@ -19,7 +19,7 @@ class AuthModel extends Model
      */
     public static function checkRepetitions(string $params, string $type): array|bool
     {
-        $field = ($type == 'email') ? 'email' : 'login';
+        $field = ($type === 'email') ? 'email' : 'login';
 
         $sql = "SELECT login, email FROM users WHERE $field = :params";
 
@@ -31,7 +31,6 @@ class AuthModel extends Model
      * Login забанен и бан не снят, то запретить и ip
      *
      * @param string $ip
-     * @return void
      */
     public static function repeatIpBanRegistration(string $ip)
     {

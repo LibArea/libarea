@@ -53,7 +53,7 @@ class Content
 
         $text = $Parsedown->text($content);
 
-        if (UserData::getUserLang() == 'ru') {
+        if (UserData::getUserLang() === 'ru') {
             return self::typograf($text);
         }
 
@@ -90,7 +90,7 @@ class Content
         if (is_array($matchs[1])) {
 
             $match_name = [];
-            foreach ($matchs[1] as $key => $name) {
+            foreach ($matchs[1] as $name) {
                 if (in_array($name, $match_name)) {
                     continue;
                 }
@@ -105,10 +105,9 @@ class Content
             foreach ($match_name as $key => $name) {
 
                 $img = '/assets/images/gif/' . $name . '.gif';
-                if (file_exists('.' . $img))
+                if (file_exists('.' . $img)) {
                     $content = str_replace(':' . $name . ':', '<img class="gif" alt="' . $name . '" src="' . $img . '">', $content);
-                else
-                    $content = $content;
+                }
             }
         }
 

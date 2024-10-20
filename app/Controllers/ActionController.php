@@ -13,8 +13,6 @@ class ActionController extends Controller
     /**
      * Deleting and restoring content 
      * Удаление и восстановление контента
-     *
-     * @return void
      */
     public function deletingAndRestoring()
     {

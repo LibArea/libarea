@@ -67,7 +67,7 @@ class SettingController extends Controller
             }
         }
 
-        return render(
+        render(
             '/user/setting/setting',
             [
                 'meta'  => Meta::get(__('app.setting')),
@@ -125,7 +125,7 @@ class SettingController extends Controller
      */
     function avatarForm()
     {
-        return render(
+        render(
             '/user/setting/avatar',
             [
                 'meta'  => Meta::get(__('app.avatar')),
@@ -151,7 +151,7 @@ class SettingController extends Controller
      */
     function securityForm()
     {
-        return render(
+        render(
             '/user/setting/security',
             [
                 'meta'  => Meta::get(__('app.security')),
@@ -214,7 +214,7 @@ class SettingController extends Controller
      */
     function notificationForm()
     {
-        return render(
+        render(
             '/user/setting/notifications',
             [
                 'meta'  => Meta::get(__('app.notifications')),
@@ -227,7 +227,7 @@ class SettingController extends Controller
 
     function ignoredForm()
     {
-        return render(
+        render(
             '/user/setting/ignored',
             [
                 'meta'  => Meta::get(__('app.ignored')),
@@ -240,7 +240,7 @@ class SettingController extends Controller
 
     function deletion()
     {
-        return render(
+        render(
             '/user/setting/deletion',
             [
                 'meta'  => Meta::get(__('app.delete_profile')),
@@ -303,7 +303,7 @@ class SettingController extends Controller
 
     function preferencesForm()
     {
-        return render(
+        render(
             '/user/setting/preferences',
             [
                 'meta'  => Meta::get(__('app.preferences')),

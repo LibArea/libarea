@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Models\SearchModel;
@@ -16,10 +17,8 @@ class SearchController extends Controller
     /**
      * Search engine home page
      * Главная страница поисковой системы
-     *
-     * @return void
      */
-    public function index()
+    public function index(): View
     {
         $this->container->user()->id();
 
@@ -33,7 +32,7 @@ class SearchController extends Controller
 
     public function openSearch()
     {
-        return insertCacheTemplate('/default/content/search/open-search', sec: 28800); // 8 часов
+        insertCacheTemplate('/default/content/search/open-search', sec: 28800); // 8 часов
     }
 
     public function go()
@@ -72,8 +71,8 @@ class SearchController extends Controller
 
         $count = $count_results ?? 0;
 
-        $facet = $type == 'post' ? 'topic' : 'category';
-        return render(
+        $facet = $type === 'post' ? 'topic' : 'category';
+        render(
             '/search/search',
             [
                 'meta'  => Meta::get(__('search.title')),
@@ -110,8 +109,7 @@ class SearchController extends Controller
 
     private function validateInput($input)
     {
-        $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $input->asString());
-        return $search;
+        return preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $input->asString());
     }
 
     private function validateType($type)

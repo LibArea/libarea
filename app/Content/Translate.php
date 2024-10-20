@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 class Translate
 {
-    protected static $language = [];
+    protected static array $language = [];
 
     protected static $locale;
 
@@ -82,7 +82,7 @@ class Translate
         $row = current(explode('.', $parsedLine));
         $key = substr($parsedLine, strlen($row) + 1);
 
-        static::$language[$locale][$file][$row][$key] ?? null;
+        return static::$language[$locale][$file][$row][$key] ?? null;
     }
 
     public static function analyze($line, $locale)

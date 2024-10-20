@@ -17,10 +17,9 @@ class AddPollController extends Controller
      *
      * @return void
      */
-    public function index()
+    public function index(): void
     {
-
-        return render(
+        render(
             '/poll/add',
             [
                 'meta'      => Meta::get(__('app.add_poll')),
@@ -40,7 +39,7 @@ class AddPollController extends Controller
     public function add()
     {
         if (!is_array($data = Request::allPost())) {
-            return false;
+            return;
         }
 
         $last_id = PollModel::createQuestion($data['title']);

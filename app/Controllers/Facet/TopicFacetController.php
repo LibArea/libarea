@@ -12,7 +12,7 @@ use Html, Meta;
 
 class TopicFacetController extends Controller
 {
-    protected $limit = 25;
+    protected int $limit = 25;
 
     public function recommend(): void
     {
@@ -58,7 +58,7 @@ class TopicFacetController extends Controller
         $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($sheet, $facet['facet_slug']);
 
-        return render(
+        render(
             '/facets/topic',
             [
                 'meta'  => Meta::facet($sheet, $facet),
@@ -85,7 +85,7 @@ class TopicFacetController extends Controller
      */
     public function info()
     {
-        return render(
+        render(
             '/facets/info',
             [
                 'meta'  => Meta::facet('info', $this->presence()),
@@ -108,7 +108,7 @@ class TopicFacetController extends Controller
      */
     public function writers()
     {
-        return render(
+        render(
             '/facets/writers',
             [
                 'meta'  => Meta::facet('writers', $this->presence()),
@@ -138,7 +138,7 @@ class TopicFacetController extends Controller
         ];
     }
 
-    public function presence()
+    public function presence(): array
     {
         return FacetPresence::index(Request::param('slug')->asString(), 'slug', 'topic');
     }

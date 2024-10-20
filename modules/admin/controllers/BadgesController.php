@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
 use Hleb\Base\Module;
 use Modules\Admin\Models\{BadgeModel, UserModel};
@@ -17,10 +18,8 @@ class BadgesController extends Module
     /**
      * All awards
      * Все награды
-     *
-     * @return void
      */
-    public function index()
+    public function index(): View
     {
         return view(
             '/badge/badges',
@@ -37,10 +36,8 @@ class BadgesController extends Module
     /**
      * Form for adding an award
      * Форма добавления награды
-     *
-     * @return void
      */
-    public function add()
+    public function add(): View
     {
         return view(
             '/badge/add',
@@ -56,10 +53,8 @@ class BadgesController extends Module
     /**
      * Reward change form 
      * Форма изменения награды
-     *
-     * @return void
      */
-    public function editBadge()
+    public function editBadge(): View
     {
         $badge_id   = Request::param('id')->asPositiveInt();
         $badge      = BadgeModel::getId($badge_id);
@@ -106,10 +101,8 @@ class BadgesController extends Module
     /**
      * Participant award form
      * Форма награждения участника
-     *
-     * @return void
      */
-    public function addBadgeUser()
+    public function addBadgeUser(): View
     {
         $user_id    = Request::param('id')->asInt();
         $user       = UserModel::getUser($user_id, 'id');

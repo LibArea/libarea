@@ -16,9 +16,8 @@ class UserModel extends Model
      * @param integer $page
      * @param integer $limit
      * @param string $sheet
-     * @return void
      */
-    public static function getUsers(int $page, int $limit, string $sheet)
+    public static function getUsers(int $page, int $limit, string $sheet): false|array
     {
         $string = ($sheet == 'ban') ? "WHERE ban_list > 0 ORDER BY id DESC LIMIT" : "ORDER BY id DESC LIMIT";
 
@@ -65,7 +64,7 @@ class UserModel extends Model
      *
      * @param integer|string $params
      * @param string $name
-     * @return void
+     * @return mixed
      */
     public static function getUser(int|string $params, string $name)
     {
@@ -114,9 +113,8 @@ class UserModel extends Model
      * Number of IP duplicates by `user_reg_ip` field
      *
      * @param string $ip
-     * @return void
      */
-    public static function duplicatesRegistrationCount(string $ip)
+    public static function duplicatesRegistrationCount(string $ip): int
     {
         $sql = "SELECT id, reg_ip FROM users WHERE reg_ip = :ip";
 
@@ -127,7 +125,7 @@ class UserModel extends Model
      * By logs
      *
      * @param integer $id
-     * @return void
+     * @return mixed
      */
     public static function lastVisitLogs(int $id)
     {
@@ -187,9 +185,9 @@ class UserModel extends Model
      * ip for logs
      *
      * @param string $ip
-     * @return void
+     * @return false|array
      */
-    public static function getUserLogsId(string $ip)
+    public static function getUserLogsId(string $ip): false|array
     {
         $sql = "SELECT 
                     id,

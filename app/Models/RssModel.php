@@ -12,8 +12,6 @@ class RssModel extends Model
     /**
      * The last 500 posts
      * Последние 500 постов
-     *
-     * @return void
      */
     public static function getPosts()
     {
@@ -26,8 +24,6 @@ class RssModel extends Model
     /**
      * All posts for Sitemap
      * Все посты для Sitemap
-     *
-     * @return void
      */
     public static function getPostsSitemap()
     {
@@ -39,8 +35,6 @@ class RssModel extends Model
     /**
      * All Topics for Sitemap
      * Все Темы для Sitemap
-     *
-     * @return void
      */
     public static function getTopicsSitemap()
     {
@@ -54,7 +48,6 @@ class RssModel extends Model
      * Посты по id Темы для rss
      *
      * @param [type] $facet_slug
-     * @return void
      */
     public static function getPostsFeed($facet_slug)
     {

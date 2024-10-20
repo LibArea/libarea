@@ -6,6 +6,7 @@ namespace Modules\Admin\Models;
 
 use Hleb\Base\Model;
 use Hleb\Static\DB;
+use Hleb\Static\Request;
 
 class InvitationModel extends Model
 {

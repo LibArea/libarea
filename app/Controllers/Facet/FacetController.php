@@ -10,7 +10,7 @@ use Meta, Html;
 
 class FacetController extends Controller
 {
-    protected $limit = 40;
+    protected int $limit = 40;
 
     public function blogAll(): void
     {
@@ -55,7 +55,7 @@ class FacetController extends Controller
         $title = __('meta.' . $sheet . '_' . $type . 's');
         $desc = __('meta.' . $sheet . '_' . $type . 's_desc');
 
-        return render(
+        render(
             '/facets/all',
             [
                 'meta'  => Meta::get($title, $desc, $m),

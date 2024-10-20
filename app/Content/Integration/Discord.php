@@ -25,7 +25,7 @@ class Discord
         $color      = hexdec("3366ff");
 
         // Формируем даты
-        $timestamp  = date("c", strtotime("now"));
+        $timestamp  = date("c");
 
         $json_data  = json_encode([
 
@@ -77,5 +77,7 @@ class Discord
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         Curl::index($webhookurl, $json_data, ['Content-type: application/json']);
+
+        return true;
     }
 }
