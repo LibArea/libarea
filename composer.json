@@ -27,7 +27,7 @@
     "require": {
         "php": ">=8.2.0",
         "ext-pdo": "*",
-		"ext-curl": "*",
+        "ext-curl": "*",
         "phphleb/framework": "^2.0.1",
         "phphleb/migration": "dev-main",
 		"phphleb/imageresizer": "dev-master",
