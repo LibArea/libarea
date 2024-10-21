@@ -92,7 +92,7 @@ class EditItemController extends Module
         // If not staff, then we make the site inactive 
         // Если не персонал, то делаем сайт не активным
         $published = $data['published'] ?? false;
-        $published = $published == 'on' ? 1 : 0;
+        $published = $published === 'on' ? 1 : 0;
         $published = $this->container->user()->admin() ? $published : 0;
 
         $new_user_id = $this->selectAuthor($item['item_user_id'], Request::post('user_id')->value());
@@ -160,8 +160,8 @@ class EditItemController extends Module
         Msg::redirect(__('msg.change_saved'), 'success', url('web'));
     }
 
-    public static function toggle($value)
+    public static function toggle($value): ?int
     {
-        return $value == 'on' ? 1 : null;
+        return $value === 'on' ? 1 : null;
     }
 }

@@ -109,7 +109,7 @@ class Meta
 
     public static function profile(string $sheet, array $user): string
     {
-        if ($sheet == 'profile') {
+        if ($sheet === 'profile') {
             $information = $user['about'];
         }
 

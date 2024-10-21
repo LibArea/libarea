@@ -171,7 +171,7 @@ class WebModel extends Model
      * Детальная информация по id
      *
      * @param integer $id
-     * @return void
+     * @return mixed
      */
     public static function getItemId(int $id)
     {
@@ -235,7 +235,7 @@ class WebModel extends Model
      * Добавим домен
      *
      * @param array $params
-     * @return void
+     * @return mixed
      */
     public static function add(array $params)
     {
@@ -303,9 +303,8 @@ class WebModel extends Model
      * Темы по ссылке
      *
      * @param [type] $item_id
-     * @return void
      */
-    public static function getItemTopic($item_id)
+    public static function getItemTopic($item_id): false|array
     {
         $sql = "SELECT
                     facet_id id,
@@ -326,9 +325,8 @@ class WebModel extends Model
      * @param integer $item_id
      * @param integer $facet_id
      * @param integer $limit
-     * @return void
      */
-    public static function itemSimilars(int $item_id, int $facet_id, int $limit = 3)
+    public static function itemSimilars(int $item_id, int $facet_id, int $limit = 3): false|array
     {
         $sql = "SELECT 
                     item_id,

@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use Hleb\Base\Module;
+use Hleb\Constructor\Data\View;
 use Modules\Admin\Models\SettingModel;
 use Meta, Msg;
 
 class SettingController extends Module
 {
-    private static $cache = null;
+    private static ?array $cache = null;
 
-    public function index($type)
+    public function index($type): View
     {
         return view(
             '/setting/' . $type,

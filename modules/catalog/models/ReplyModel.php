@@ -15,7 +15,6 @@ class ReplyModel extends Model
      *
      * @param integer $id
      * @param array $user
-     * @return void
      */
     public static function get(int $id, array $user)
     {
@@ -54,7 +53,7 @@ class ReplyModel extends Model
      * Получаем ответ по id
      *
      * @param integer $reply_id
-     * @return void
+     * @return mixed
      */
     public static function getId(int $reply_id)
     {
@@ -76,7 +75,7 @@ class ReplyModel extends Model
      * Добавляем реплику
      *
      * @param array $params
-     * @return void
+     * @return mixed
      */
     public static function add(array $params)
     {
@@ -108,15 +107,15 @@ class ReplyModel extends Model
      * Редактируем реплику
      *
      * @param array $params
-     * @return void
+     * @return bool
      */
-    public static function edit(array $params)
+    public static function edit(array $params): bool
     {
         $sql = "UPDATE replys SET 
                     reply_content     = :reply_content,
                     reply_modified    = :reply_modified
                          WHERE reply_id = :reply_id";
 
-        return DB::run($sql, $params);
+        return (bool)DB::run($sql, $params);
     }
 }

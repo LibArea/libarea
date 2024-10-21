@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use Hleb\Base\Module;
+use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
 
 use App\Models\User\SettingModel;
@@ -15,24 +16,24 @@ use Meta, Html, Msg;
 
 class UsersController extends Module
 {
-    protected $type = 'users';
+    protected const TYPE = 'users';
 
-    protected $limit = 20;
+    protected const LIMIT = 20;
 
-	public function all()
+	public function all(): View
     {
         return $this->userIndex('all');
     }
 
-	public function ban()
+	public function ban(): View
     {
         return $this->userIndex('ban');
     }
 
-    public function userIndex($option)
+    public function userIndex($option): View
     {
         $pagesCount = UserModel::getUsersCount($option);
-        $user_all   = UserModel::getUsers(Html::pageNumber(), $this->limit, $option);
+        $user_all   = UserModel::getUsers(Html::pageNumber(), self::LIMIT, $option);
 
         $result = [];
         foreach ($user_all as $ind => $row) {
@@ -48,10 +49,10 @@ class UsersController extends Module
             [
                 'meta'  => Meta::get(__('admin.users')),
                 'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pagesCount'    => ceil($pagesCount / self::LIMIT),
                     'pNum'          => Html::pageNumber(),
                     'alluser'       => $result,
-                    'type'          => $this->type,
+                    'type'          => self::TYPE,
                     'sheet'         => $option,
                     'users_count'   => $pagesCount,
                 ]
@@ -79,9 +80,9 @@ class UsersController extends Module
     {
         $item = Request::param('item')->asString();
 
-        if ($option == 'logip') {
+        if ($option === 'logip') {
             $user_all    = UserModel::getUserLogsId($item);
-        } else if ($option == 'deviceid') {
+        } else if ($option === 'deviceid') {
             $user_all    = UserModel::getUserSearchDeviceID($item);
         } else {
             $user_all   = UserModel::getUserSearchRegIp($item);
@@ -100,7 +101,7 @@ class UsersController extends Module
                 'data'  => [
                     'results'   => $results,
                     'option'    => $option,
-                    'type'      => $this->type,
+                    'type'      => self::TYPE,
                 ]
             ]
         );
@@ -109,10 +110,8 @@ class UsersController extends Module
     /**
      * Ban a participant
      * Бан участнику
-     *
-     * @return void
      */
-    public function banUser()
+    public function banUser(): true
     {
         $user_id = Request::post('id')->asInt();
 
@@ -124,10 +123,8 @@ class UsersController extends Module
     /**
      * The edit member page
      * Страница редактирование участника
-     *
-     * @return void
      */
-    public function editForm()
+    public function editForm(): View
     {
         $user_id    = Request::param('id')->asInt();
         if (!$user = UserModel::getUser($user_id, 'id')) redirect(url('admin'));
@@ -142,14 +139,14 @@ class UsersController extends Module
             [
                 'meta'  => Meta::get(__('admin.edit')),
                 'data'  => [
-                    'type'      => $this->type,
+                    'type'      => self::TYPE,
                     'user'      => $user,
                 ]
             ]
         );
     }
 
-    public function edit()
+    public function edit(): bool
     {
         $data = Request::allPost();
 
@@ -172,13 +169,13 @@ class UsersController extends Module
                 'email'         => $data['email'],
                 'whisper'       => $data['whisper'],
                 'name'          => $data['name'],
-                'activated'     => Request::post('activated')->value() == 'on' ? 1 : 0,
-                'limiting_mode' => Request::post('limiting_mode')->value() == 'on' ? 1 : 0,
+                'activated'     => Request::post('activated')->value() === 'on' ? 1 : 0,
+                'limiting_mode' => Request::post('limiting_mode')->value() === 'on' ? 1 : 0,
                 'template'      => $user['template'] ?? 'default',
                 'lang'          => $user['lang'] ?? 'ru',
-                'scroll'        => Request::post('scroll')->value() == 'on' ? 1 : 0,
-                'nsfw'          => Request::post('nsfw')->value() == 'on' ? 1 : 0,
-                'post_design'   => Request::post('post_design')->value() == 'on' ? 1 : 0,
+                'scroll'        => Request::post('scroll')->value() === 'on' ? 1 : 0,
+                'nsfw'          => Request::post('nsfw')->value() === 'on' ? 1 : 0,
+                'post_design'   => Request::post('post_design')->value() === 'on' ? 1 : 0,
                 'trust_level'   => $data['trust_level'] ?? 1,
                 'updated_at'    => date('Y-m-d H:i:s'),
                 'color'         => Request::post('color')->asString('#339900'),
@@ -190,14 +187,15 @@ class UsersController extends Module
                 'skype'         => Request::post('skype')->asString(''),
                 'telegram'      => Request::post('telegram')->asString(''),
                 'vk'            => Request::post('vk')->asString(''),
-                'vk'            => Request::post('vk')->asString(''),
             ]
         );
 
         Msg::redirect(__('msg.change_saved'), 'success', url('admin.user.edit.form', ['id' => $data['user_id']]));
+
+        return true;
     }
 
-    public function history()
+    public function history(): View
     {
         $user_id    = Request::param('id')->asInt();
         if (!$user = UserModel::getUser($user_id, 'id')) redirect(url('admin'));
@@ -207,7 +205,7 @@ class UsersController extends Module
             [
                 'meta'  => Meta::get(__('admin.history')),
                 'data'  => [
-                    'type'      => $this->type,
+                    'type'      => self::TYPE,
                     'results'    => userModel::userHistory($user_id),
                 ]
             ]

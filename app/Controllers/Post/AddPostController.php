@@ -38,13 +38,13 @@ class AddPostController extends Controller
 
         if ($facet_id) {
             $facet  =  FacetPresence::all($facet_id);
-            if ($facet['facet_type'] == 'topic') {
+            if ($facet['facet_type'] === 'topic') {
                 $topic  = FacetPresence::index($facet_id, 'id', 'topic');
-            } elseif ($facet['facet_type'] == 'blog' && $facet['facet_user_id'] == $this->container->user()->id()) {
+            } elseif ($facet['facet_type'] === 'blog' && $facet['facet_user_id'] == $this->container->user()->id()) {
                 $blog  = FacetPresence::index($facet_id, 'id', 'blog');
             }
         }
-        return render(
+        render(
             '/post/add',
             [
                 'meta'      => Meta::get(__('app.add_post')),
@@ -61,13 +61,13 @@ class AddPostController extends Controller
     }
 
     /**
-     * Add post 
+     * Add post
      * Добавим пост
      *
-     * @param [type] $type
+     * @param string $type
      * @return void
      */
-    public function add(string $type)
+    public function add(string $type): void
     {
         if ($post_url = Request::post('post_url')->value()) {
             $site = $this->addUrl($post_url);
@@ -79,7 +79,7 @@ class AddPostController extends Controller
         $content = $_POST['content'] == '' ? $_POST['content_qa'] : $_POST['content'];
         $content = $content == '' ? $_POST['content_url'] : $content;
 
-        if ($type == 'page') {
+        if ($type === 'page') {
             $count  = FacetModel::countFacetsUser($this->container->user()->id(), 'blog');
             notEmptyOrView404($count);
         }
@@ -156,12 +156,12 @@ class AddPostController extends Controller
         }
 
         $url_content = post_slug($last_id, $slug);
-        if ($type == 'page') {
+        if ($type === 'page') {
             $url_content = url('info.page', ['slug' => $slug]);
         }
 
         // Add fastes (blogs, topics) to the post 
-        $type = (new \App\Controllers\Post\EditPostController())->addFacetsPost($fields, $last_id, $url_content);
+        $type = (new \App\Controllers\Post\EditPostController())::addFacetsPost($fields, $last_id, $url_content);
 
         // Contact via @
         // Обращение через @
@@ -188,8 +188,9 @@ class AddPostController extends Controller
     /**
      * Since this is for the post, we will get a preview and analysis of the domain...
      *
-     * @param [type] $post_url
-     * @return void
+     * @param string $post_url
+     * @return array
+     * @throws \Exception
      */
     public function addUrl(string $post_url)
     {
@@ -219,10 +220,10 @@ class AddPostController extends Controller
 
     /**
      * Getting Open Graph Protocol Data
-     * Получаем данные Open Graph Protocol 
+     * Получаем данные Open Graph Protocol
      *
-     * @param [type] $post_url
-     * @return void
+     * @param string $post_url
+     * @return false|string
      */
     public static function grabOgImg(string $post_url)
     {
@@ -234,10 +235,8 @@ class AddPostController extends Controller
     /**
      * Recommend post
      * Рекомендовать пост
-     *
-     * @return void
      */
-    public function recommend()
+    public function recommend(): bool
     {
         $post_id = Request::post('post_id')->asInt();
 

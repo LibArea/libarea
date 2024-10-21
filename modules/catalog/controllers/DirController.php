@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Catalog\Controllers;
 
+use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
 use Hleb\Base\Module;
 use Modules\Catalog\Сheck\ItemPresence;
@@ -17,15 +18,13 @@ class DirController extends Module
 {
     use Breadcrumb;
 
-    protected $limit = 25;
+    protected const LIMIT = 25;
 
     /**
      * List of sites by topic (sites by "category")
      * Лист сайтов по темам (сайты по "категориям")
-     *
-     * @return void
      */
-    public function index()
+    public function index(): View
     {
         $grouping = Request::param('grouping')->value();
 		
@@ -64,7 +63,7 @@ class DirController extends Module
                 'data'  => [
                     'sort'              => $sort,
                     'count'             => $pagesCount,
-                    'pagesCount'        => ceil($pagesCount / $this->limit),
+                    'pagesCount'        => ceil($pagesCount / self::LIMIT),
                     'pNum'              => Html::pageNumber(),
                     'related_posts'     => $related_posts ?? false,
                     'items'             => $items,

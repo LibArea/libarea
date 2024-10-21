@@ -22,7 +22,7 @@ class AddFacetController extends Controller
     {
         $facet_type = Request::param('type')->asString();
 
-        return render(
+        render(
             '/facets/add',
             [
                 'meta'  => Meta::get(__('app.add_' . $facet_type)),
@@ -63,7 +63,7 @@ class AddFacetController extends Controller
 
         SubscriptionModel::focus($new_facet_id['facet_id'], 'facet');
 
-        $msg = $type == 'blog' ? __('msg.blog_added') : __('msg.change_saved');
+        $msg = $type === 'blog' ? __('msg.blog_added') : __('msg.change_saved');
 
         $url = url('redirect.facet', ['id' => $new_facet_id['facet_id']]);
 

@@ -15,7 +15,7 @@ class PollController extends Controller
 {
     use Poll;
 
-    protected $limit = 15;
+    protected int $limit = 15;
 
     /**
      * All surveys for a specific user
@@ -28,7 +28,7 @@ class PollController extends Controller
         $polls      = PollModel::getUserQuestionsPolls(Html::pageNumber(), $this->limit);
         $pagesCount = PollModel::getUserQuestionsPollsCount();
 
-        return render(
+        render(
             '/poll/index',
             [
                 'meta'      => Meta::get(__('app.polls')),
@@ -52,7 +52,7 @@ class PollController extends Controller
     {
         $id = Request::param('id')->asInt();
 
-        return render(
+        render(
             '/poll/view',
             [
                 'meta'  => Meta::get(__('app.poll')),
@@ -70,13 +70,11 @@ class PollController extends Controller
      *
      * @return void
      */
-    public function vote()
+    public function vote(): void
     {
         $question_id = Request::post('question_id')->asInt();
         $answer_id = Request::post('answer_id')->asInt();
 
         PollModel::vote($question_id, $answer_id);
-
-        return true;
     }
 }

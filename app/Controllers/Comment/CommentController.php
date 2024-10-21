@@ -24,12 +24,12 @@ class CommentController extends Controller
 
     /**
      * All comments
-     * Все комменатрии
+     * Все комментарии
      *
      * @param string $sheet
      * @return void
      */
-    public function callIndex(string $sheet)
+    public function callIndex(string $sheet): void
     {
         $pagesCount = CommentModel::getCommentsCount($sheet);
         $comments   = CommentModel::getComments(Html::pageNumber(), $sheet);
@@ -39,7 +39,7 @@ class CommentController extends Controller
             'url'   => url('comments'),
         ];
 
-        return render(
+        render(
             '/comments/all',
             [
                 'meta'  => Meta::get(__('meta.all_comments'), __('meta.comments_desc'), $m),

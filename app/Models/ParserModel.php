@@ -13,7 +13,7 @@ class ParserModel extends Model
     // Информация по участнику (id, slug) для @nickname
     public static function getUser($params, $type)
     {
-        $field = ($type == 'slug') ? "login" : "id";
+        $field = ($type === 'slug') ? "login" : "id";
 
         $sql = "SELECT id, login FROM users WHERE $field = :params AND activated = 1 AND is_deleted = 0";
 

@@ -75,14 +75,14 @@ class RememberController extends Controller
      * @param mixed $selector
      * @return void
      */
-    public static function rememberMeReset(int $user_id, mixed $selector)
+    public static function rememberMeReset(int $user_id, mixed $selector): void
     {
         // Получаем по селектору       
         $existingToken = AuthModel::getAuthTokenBySelector($selector);
 
         if (empty($existingToken)) {
             self::rememberMe($user_id);
-            return true;
+            return;
         }
 
         $rememberMeExpire = 30;

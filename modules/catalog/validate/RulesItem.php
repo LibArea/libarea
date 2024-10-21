@@ -48,10 +48,11 @@ class RulesItem extends Validator
         return WebModel::getDomains($url);
     }
 
-    public static function getRegisterable($url)
+    /**
+     * @throws \Exception
+     */
+    public static function getRegisterable($url): string
     {
-        $domain = new Domain(host($url));
-
-        return $domain->getRegisterable();
+        return (new Domain(host($url)))->getRegisterable();
     }
 }

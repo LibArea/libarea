@@ -8,7 +8,7 @@ use App\Validate\Validator;
 
 class RulesBadge extends Validator
 {
-    public static function rules(array $data, string $icon)
+    public static function rules(array $data, string $icon): true
     {
         $redirect = url('admin.badges');
 

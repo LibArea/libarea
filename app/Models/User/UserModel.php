@@ -11,7 +11,7 @@ class UserModel extends Model
 {
     public static function get(int|string $params, string $name = 'id')
     {
-        $sort = ($name == 'id') ? "id = :params" : "login = :params";
+        $sort = ($name === 'id') ? "id = :params" : "login = :params";
         $sql = "SELECT 
                     id,
                     login,
@@ -219,7 +219,7 @@ class UserModel extends Model
      */
     public static function contentCount($user_id, $type = 0)
     {
-        $condition = $type == 'remote' ? 1 : 0;
+        $condition = $type === 'remote' ? 1 : 0;
 
         $sql = "SELECT 
                     (SELECT COUNT(post_id) FROM posts WHERE post_user_id = $user_id and post_draft = 0 and post_is_deleted = $condition) AS count_posts,

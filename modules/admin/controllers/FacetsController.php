@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use Hleb\Base\Module;
+use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
 use Modules\Admin\Models\{StatsModel, FacetModel};
 use Meta;
@@ -14,10 +15,8 @@ class FacetsController extends Module
     /**
      * Let's show the types of facets
      * Покажем типы фасетов
-     *
-     * @return void
      */
-    public function index()
+    public function index(): View
     {
         return view(
             'facet/all',
@@ -36,14 +35,12 @@ class FacetsController extends Module
     /**
      * Show faces by type
      * Покажем грани по типам
-     *
-     * @return void
      */
-    public function type()
+    public function type(): View
     {
         $type = self::faceTypes(Request::param('type')->asString());
 
-        $pages = $type == 'section' ? FacetModel::getPostsTheSection() : false;
+        $pages = $type === 'section' ? FacetModel::getPostsTheSection() : false;
 
         return view(
             '/facet/type',
@@ -69,9 +66,8 @@ class FacetsController extends Module
      * @param int $level
      * @param array $data
      * @param array $tree
-     * @return void
      */
-    public static function builder(int $chaid_id, int $level, array $data, array $tree = [])
+    public static function builder(int $chaid_id, int $level, array $data, array $tree = []): array
     {
         $level++;
         foreach ($data as $part) {
@@ -87,10 +83,8 @@ class FacetsController extends Module
     /**
      * Deleted Faces 
      * Удаленные грани
-     *
-     * @return void
      */
-    public function ban()
+    public function ban(): View
     {
         $type = self::faceTypes(Request::param('type')->asString());
 
@@ -110,10 +104,8 @@ class FacetsController extends Module
     /**
      * Remove Facet 
      * Удалим фасет
-     *
-     * @return void
      */
-    public function deletes()
+    public function deletes(): true
     {
         $id = Request::post('id')->asInt();
 
@@ -128,9 +120,9 @@ class FacetsController extends Module
      * Проверка на разрешенные типы граней
      *
      * @param string $type
-     * @return void
+     * @return false|string
      */
-    public static function faceTypes(string $type)
+    public static function faceTypes(string $type): false|string
     {
         $allowed = ['topic', 'blog', 'category', 'section'];
         if (!in_array($type, $allowed)) {

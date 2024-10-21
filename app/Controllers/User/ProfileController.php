@@ -24,7 +24,7 @@ class ProfileController extends Controller
      *
      * @return void
      */
-    function index()
+    function index(): void
     {
         $profile = $this->profile();
 
@@ -35,7 +35,7 @@ class ProfileController extends Controller
         $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
 
-        return render(
+        render(
             '/user/profile/index',
             [
                 'meta'  => Meta::profile('profile', $profile),
@@ -62,7 +62,7 @@ class ProfileController extends Controller
         $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
 
-        return render(
+        render(
             '/user/profile/posts',
             [
                 'meta'  => Meta::profile('profile_posts', $profile),
@@ -82,7 +82,7 @@ class ProfileController extends Controller
         $comments    = CommentModel::userComments(Html::pageNumber(), $profile['id'], $this->container->user()->id());
         $commentsCount    = CommentModel::userCommentsCount($profile['id']);
 
-        return render(
+        render(
             '/user/profile/comments',
             [
                 'meta'  => Meta::profile('profile_comments', $profile),

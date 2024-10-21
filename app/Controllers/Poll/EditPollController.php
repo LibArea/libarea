@@ -18,14 +18,14 @@ class EditPollController extends Controller
      *
      * @return void
      */
-    public function index()
+    public function index(): void
     {
         $question   = PollPresence::index($id = Request::param('id')->asInt());
         $answers    = PollModel::getAnswers($id);
 
         $this->checkingEditPermissions($question);
 
-        return render(
+        render(
             '/poll/edit',
             [
                 'meta'  => Meta::get(__('app.edit_poll')),
@@ -49,7 +49,7 @@ class EditPollController extends Controller
 
         PollModel::editTitle($id, $data['title']);
 
-        $is_closed = Request::post('closed')->value() == 'on' ? 1 : 0;
+        $is_closed = Request::post('closed')->value() === 'on' ? 1 : 0;
         PollModel::editClosed($id, $is_closed);
 
         foreach ($data as $key => $title) {
@@ -72,8 +72,8 @@ class EditPollController extends Controller
         return true;
     }
 
-    public function deletingVariant()
+    public function deletingVariant(): bool
     {
-        return PollModel::delVariant(Request::post('id')->asInt());
+        return (bool) PollModel::delVariant(Request::post('id')->asInt());
     }
 }

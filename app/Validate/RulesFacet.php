@@ -13,9 +13,9 @@ class RulesFacet extends Validator
     public static function rulesAdd($data, $facet_type)
     {
         $container = Container::getContainer();
-        $redirect = ($facet_type == 'category') ? url('web') : url('facet.form.add', ['type' => $facet_type]);
+        $redirect = ($facet_type === 'category') ? url('web') : url('facet.form.add', ['type' => $facet_type]);
 
-        if ($facet_type == 'blog') {
+        if ($facet_type === 'blog') {
             if (!$container->user()->admin()) {
                 if (in_array($data['facet_slug'], config('stop-blog', 'list'))) {
                     Msg::redirect(__('msg.went_wrong'), 'error', $redirect);

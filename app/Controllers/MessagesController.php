@@ -15,7 +15,7 @@ class MessagesController extends Controller
 {
     public function index()
     {
-        return render(
+        render(
             '/messages/index',
             [
                 'meta'  => Meta::get(__('app.private_messages')),
@@ -29,10 +29,8 @@ class MessagesController extends Controller
     /**
      * All dialogues
      * Все диалоги   
-     *
-     * @return void
      */
-    public function dialogs()
+    public function dialogs(): array
     {
         $result = [];
         $messages_dialog = MessagesModel::getMessages();
@@ -102,7 +100,7 @@ class MessagesController extends Controller
             }
         }
 
-        return render(
+        render(
             '/messages/dialog',
             [
                 'meta'  => Meta::get(__('app.dialogue')),
@@ -135,7 +133,7 @@ class MessagesController extends Controller
             redirect('/messages/' . $dialog['dialog_id']);
         }
 
-        return render(
+        render(
             '/messages/user-add-messages',
             [
                 'meta'  => Meta::get(__('app.send_message')),
@@ -179,11 +177,9 @@ class MessagesController extends Controller
 
     /**
      * We will limit the sending of PMs if the level of trust is low
-     * Ограничим отправк ЛС, если уровень доверия низок
-     *
-     * @return void
+     * Ограничим отправку ЛС, если уровень доверия низок
      */
-    public function limitTl()
+    public function limitTl(): true
     {
         if (config('trust-levels', 'tl_add_pm') > $this->container->user()->tl()) {
             redirect('/');

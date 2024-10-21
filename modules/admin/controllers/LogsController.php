@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use Hleb\Base\Module;
+use Hleb\Constructor\Data\View;
 use Modules\Admin\Models\{SearchModel, LogModel};
 use Meta, Html;
 
@@ -17,10 +18,8 @@ class LogsController extends Module
     /**
      * Member activity log
      * Журнал логов действий участников
-     *
-     * @return void
      */
-    public function index()
+    public function index(): View
     {
         $logs       = LogModel::getLogs(Html::pageNumber(), $this->limit);
         $pagesCount = LogModel::getLogsCount();
@@ -42,10 +41,8 @@ class LogsController extends Module
     /**
      * Search log
      * Журнал логов поиска
-     *
-     * @return void
      */
-    public function logsSearch()
+    public function logsSearch(): View
     {
         return view(
             '/logs/search',

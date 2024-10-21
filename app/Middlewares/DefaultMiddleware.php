@@ -19,6 +19,5 @@ class DefaultMiddleware extends Middleware
         if (!$check) {
             redirect('/');
         }
-        return;
     }
 }

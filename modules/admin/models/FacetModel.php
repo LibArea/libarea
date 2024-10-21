@@ -15,11 +15,10 @@ class FacetModel extends Model
      *
      * @param string $type
      * @param string $sort
-     * @return void
      */
-    public static function get(string $type, string $sort)
+    public static function get(string $type, string $sort): false|array
     {
-        $sort = $sort == 'ban' ? 'AND facet_is_deleted = 1' : '';
+        $sort = $sort === 'ban' ? 'AND facet_is_deleted = 1' : '';
 
         $sql = "SELECT
                 facet_id,
@@ -58,10 +57,8 @@ class FacetModel extends Model
     /**
      * Posts where there are no topics
      * Посты где нет тем
-     *
-     * @return void
      */
-    public static function getNoTopic()
+    public static function getNoTopic(): false|array
     {
         $sql = "SELECT DISTINCT
                     post_id,
@@ -80,7 +77,7 @@ class FacetModel extends Model
      * Проверим уникальность id
      *
      * @param integer $facet_id
-     * @return void
+     * @return mixed
      */
     public static function uniqueById(int $facet_id)
     {
@@ -107,7 +104,7 @@ class FacetModel extends Model
         DB::run($sql, ['id' => $id]);
     }
 
-    public static function getPostsTheSection()
+    public static function getPostsTheSection(): false|array
     {
         $sql = "SELECT distinct (post_id),
                     post_title,

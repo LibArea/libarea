@@ -24,7 +24,7 @@ class SubscriptionModel extends Model
 
             self::removalFocus($content_id, $type);
 
-            return self::updateFocus($content_id, $type);
+            self::updateFocus($content_id, $type);
         }
 
         self::insertFocus($content_id, $type);

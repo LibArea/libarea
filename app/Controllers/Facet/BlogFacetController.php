@@ -41,7 +41,7 @@ class BlogFacetController extends Controller
     {
         $facet  = FacetPresence::index(Request::param('slug')->value(), 'slug', 'blog');
 
-        if ($facet['facet_type'] == 'topic') {
+        if ($facet['facet_type'] === 'topic') {
             echo view('error', ['httpCode' => 404, 'message' => __('404.page_not') . ' <br> ' . __('404.page_removed')]);
             exit();
         }
@@ -49,7 +49,7 @@ class BlogFacetController extends Controller
         $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($sheet, $facet['facet_slug']);
 
-        return render(
+        render(
             '/facets/blog',
             [
                 'meta'  => Meta::facet($sheet, $facet, 'blog'),
@@ -85,7 +85,7 @@ class BlogFacetController extends Controller
         $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'facet.feed.topic', $facet['facet_slug'], $topic['facet_slug']);
         $pagesCount = FeedModel::feedCount('facet.feed.topic', $facet['facet_slug'], $topic['facet_slug']);
 
-        return render(
+        render(
             '/facets/blog-topic',
             [
                 'meta'  => Meta::facet('blog.topics', $facet, 'blog', $topic),

@@ -12,7 +12,7 @@ class BuildTree
         }
 
         $siblings = [];
-        $fnBuilder = function ($siblings) use (&$fnBuilder, $grouped, $type) {
+        $fnBuilder = static function ($siblings) use (&$fnBuilder, $grouped, $type) {
             if ($siblings) {
                 foreach ($siblings as $k => $sibling) {
                     $id = $sibling[$type . '_id'];

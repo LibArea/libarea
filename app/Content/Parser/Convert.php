@@ -7,8 +7,13 @@ namespace App\Content\Parser;
 // https://github.com/erusev/parsedown/wiki/Tutorial:-Create-Extensions
 class Convert extends \ParsedownExtraPlugin
 {
+    /**
+     * @throws \Exception
+     */
     function __construct()
     {
+        parent::__construct(); // Судя по всему нужно вызвать родительский конструктор сначала.
+
         $this->InlineTypes['{'][] = 'Video';
         $this->InlineTypes['{'][] = 'Red';
 

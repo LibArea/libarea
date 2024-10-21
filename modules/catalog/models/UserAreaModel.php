@@ -15,9 +15,8 @@ class UserAreaModel extends Model
      *
      * @param integer $page
      * @param integer $limit
-     * @return void
      */
-    public static function getUserSites(int $page, int $limit)
+    public static function getUserSites(int $page, int $limit): false|array
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT

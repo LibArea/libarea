@@ -10,13 +10,13 @@ use Hleb\Static\DB;
 class FacetModel extends Model
 {
     /**
-     * Cell information (id, slug) 
+     * Cell information (id, slug)
      * Информация по фасету (id, slug)
      *
      * @param string|integer $params
      * @param string $name
      * @param integer $trust_level
-     * @return void
+     * @return mixed
      */
     public static function get(string|int $params, string $name, int $trust_level)
     {
@@ -56,13 +56,12 @@ class FacetModel extends Model
 
     /**
      * Getting subcategories based on nested sites
-     * Получаем подкатегории с учетов вложенных сайтов 
+     * Получаем подкатегории с учетов вложенных сайтов
      *
      * @param integer $facet_id
      * @param string|bool $screening
-     * @return void
      */
-    public static function getChildrens(int $facet_id, string|bool $screening)
+    public static function getChildrens(int $facet_id, string|bool $screening): false|array
     {
         $go = '';
         $os = config('main', 'type');
@@ -88,11 +87,10 @@ class FacetModel extends Model
     /**
      * Down the structure  (CHILDREN)
      * Вниз по структуре связанных деревьев (ДЕТИ)
-     * 
+     *
      * @param  int $facet_id
-     * @return
      */
-    public static function getLowMatching(int $facet_id)
+    public static function getLowMatching(int $facet_id): false|array
     {
         $sql = "SELECT 
                     facet_id,

@@ -11,7 +11,7 @@ class LimitsMiddleware extends Middleware
 {
     // Mute mode
     // Немой режим
-    const MUTE_MODE_USER = 1;
+    public const MUTE_MODE_USER = 1;
 
     /**
      * Check for silent mode

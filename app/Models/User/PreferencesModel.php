@@ -11,8 +11,8 @@ class PreferencesModel extends Model
 {
   public static $limit = 50;
 
-  const TYPE_TOPICS_BLOG = 1;  // Topics and blogs in the right "Reading" section
-  const TYPE_BLOCKS = 2;  // Various blocks, for example, recent sites
+  public const TYPE_TOPICS_BLOG = 1;  // Topics and blogs in the right "Reading" section
+  public const TYPE_BLOCKS = 2;  // Various blocks, for example, recent sites
 
   public static function get($page)
   {
@@ -59,7 +59,7 @@ class PreferencesModel extends Model
   {
     self::removal();
 
-    foreach ($data as $kay => $favet_id) {
+    foreach ($data as $favet_id) {
 
       $type = $favet_id < 0 ? self::TYPE_BLOCKS : self::TYPE_TOPICS_BLOG;
 

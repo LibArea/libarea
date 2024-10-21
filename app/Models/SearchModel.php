@@ -11,11 +11,11 @@ class SearchModel extends Model
 {
     public static function getSearch(int $page, int $limit, string $query, string $type)
     {
-        if ($type == 'website') {
+        if ($type === 'website') {
             return self::getWebsite($page, $limit, $query);
         }
 
-        if ($type == 'comment') {
+        if ($type === 'comment') {
             return self::getComments($page, $limit, $query);
         }
 
@@ -158,7 +158,6 @@ class SearchModel extends Model
      *
      * @param null|string $search
      * @param string $type
-     * @return void
      */
     public static function getSelect(null|string $search, string $type)
     {

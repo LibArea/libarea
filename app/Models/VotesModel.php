@@ -26,7 +26,6 @@ class VotesModel extends Model
      *
      * @param integer $content_id
      * @param string $type
-     * @return void
      */
     public static function status(int $content_id, string $type)
     {
@@ -42,7 +41,6 @@ class VotesModel extends Model
      * Частота размещения лайков в день 
      *
      * @param string $type
-     * @return void
      */
     public static function getSpeedVotesDay(string $type)
     {
@@ -85,7 +83,6 @@ class VotesModel extends Model
      * @param integer $content_id
      * @param string $type
      * @param string $action
-     * @return void
      */
     public static function saveContent(int $content_id, string $type, string $action = '+ 1')
     {

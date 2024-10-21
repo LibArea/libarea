@@ -12,7 +12,7 @@ use Meta, Html;
 
 class ReadController extends Controller
 {
-    protected $limit = 20;
+    protected int $limit = 20;
 
     /**
      * "Read" page in blogs
@@ -27,7 +27,7 @@ class ReadController extends Controller
         $read = FacetModel::getFocusUsers($facet['facet_id'], Html::pageNumber(), $this->limit);
         $pagesCount = FacetModel::getFocusUsersCount($facet['facet_id']);
 
-        return render(
+        render(
             '/facets/read',
             [
                 'meta'  => Meta::get(__('app.read') . ' | ' . $facet['facet_title']),
@@ -37,7 +37,6 @@ class ReadController extends Controller
                     'type'          => 'read',
                     'facet'         => $facet,
                     'read'          => $read,
-                    'info'          => markdown($facet['facet_info'] ?? '', 'text'),
                     'info'          => markdown($facet['facet_info'] ?? '', 'text'),
                     'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], 'facet'),
                 ]

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
 use Hleb\Base\Module;
 use Modules\Admin\Models\WordModel;
@@ -30,10 +31,8 @@ class WordsController extends Module
     /**
      * The form for adding a stop word
      * Форма добавления стоп-слова
-     *
-     * @return void
      */
-    public function add()
+    public function add(): View
     {
         return view(
             '/word/add',
