@@ -1,26 +1,19 @@
 <?= '<?xml version="1.0" encoding="UTF-8"?>'; ?>
-<rss xmlns:yandex="http://news.yandex.ru" xmlns:media="http://search.yahoo.com/mrss/" xmlns:turbo="http://turbo.yandex.ru" version="2.0">
+<?php $url = config('meta', 'url'); ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title><?= __('app.posts'); ?></title>
     <link><?= config('meta', 'url'); ?>/rss/posts</link>
-    <language><?= config('general', 'lang'); ?></language>
+	<description>RSS feed</description>
     <?php foreach ($data['posts'] as $post) : ?>
-      <item turbo="true">
-        <link><?= config('meta', 'url'); ?><?= post_slug($post['post_id'], $post['post_slug']); ?></link>
-        <pubDate><?= $post['post_date']; ?></pubDate>
-        <turbo:content>
-          <![CDATA[
-             <header>
-                <h1><?= $post['post_title']; ?></h1>
-             </header>
-              <?php if ($post['post_content_img']) { ?>
-                  <figure>
-                      <?= Img::image($post['post_content_img'], $post['post_title'], 'img-post', 'post', 'cover'); ?>
-                  </figure>
-              <?php } ?>    
-              <?= $post['post_content']; ?>
-          ]]>
-        </turbo:content>
+      <item>
+        <title><![CDATA[{{ <?= $post['post_title']; ?> }}]]></title>
+        <description>
+          <![CDATA[{{ <?= strip_tags($post['post_content']); ?> }}]]>
+        </description>
+        <link><?= $url; ?><?= post_slug($post['post_id'], $post['post_slug']); ?></link>
+        <pubDate><?= date(DATE_RFC822, strtotime($post['post_date'])); ?></pubDate>
+        <guid><?= $url; ?><?= post_slug($post['post_id'], $post['post_slug']); ?></guid>
       </item>
     <?php endforeach; ?>
   </channel>
