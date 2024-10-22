@@ -34,7 +34,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <div class="file-upload mb10 mt15" id="file-drag">
         <div class="flex">
           <?= Img::image($fs['facet_img'], $fs['facet_title'], 'img-xl', 'logo', 'max'); ?>
-          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="img-xl br-gray">
+          <img id="file-image" class="img-xl br-gray bg-white">
         </div>
         <div id="start" class="mt10">
           <input class="text-xs" id="file-upload" type="file" name="images" accept="image/*" />

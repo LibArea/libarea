@@ -38,8 +38,7 @@
             </div>
           <?php endif; ?>
           <div id="start">
-            <img id="file-image" src="/assets/images/1px.jpg" alt="" class="h94">
-
+            <img id="file-image" class="img-xl br-gray bg-white">
             <input id="file-upload" type="file" name="cover" accept="image/*" />
             <div id="notimage" class="none">Please select an image</div>
           </div>

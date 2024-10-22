@@ -52,7 +52,7 @@
         </div>
       <?php endif; ?>
 
-      <img id="file-image" src="/assets/images/1px.jpg" alt="" class="w94 h94 br-gray">
+      <img id="file-image" class="img-xl br-gray bg-white">
     </div>
     <div id="start" class="mt10">
       <input id="file-upload" type="file" name="images" accept="image/*" />

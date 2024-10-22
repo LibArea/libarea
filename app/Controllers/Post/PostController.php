@@ -98,24 +98,26 @@ class PostController extends Controller
                     ]
                 ]
             );
-        }
 
-        $slug_facet = Request::param('facet_slug')->asString();
-        $page  = FacetPresence::index($slug_facet, 'slug', 'section');
+        } else {
 
-        render(
-            '/post/page-view',
-            [
-                'meta'  => Meta::post($content),
-                'data'  => [
-                    'sheet' => 'page',
-                    'type'  => $type,
-                    'page'  => $content,
-                    'facet' => [],
-                    'pages' => PostModel::recent($page['facet_id'], $content['post_id'])
-                ]
-            ]
-        );
+			$slug_facet = Request::param('facet_slug')->asString();
+			$page  = FacetPresence::index($slug_facet, 'slug', 'section');
+
+			render(
+				'/post/page-view',
+				[
+					'meta'  => Meta::post($content),
+					'data'  => [
+						'sheet' => 'page',
+						'type'  => $type,
+						'page'  => $content,
+						'facet' => [],
+						'pages' => PostModel::recent($page['facet_id'], $content['post_id'])
+					]
+				]
+			);
+		}
     }
 
     public function presence(string $type, int $id, string|null $slug)
