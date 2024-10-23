@@ -1,9 +1,7 @@
-<?php $url = config('meta', 'url'); ?>
-
-<?= '<?xml version="1.0" encoding="UTF-8" ?>'; ?>
+<?= '<?xml version="1.0" encoding="UTF-8" ?>'; ?><?php $url = config('meta', 'url'); ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc><?php $url; ?></loc>
+    <loc><?= $url; ?></loc>
     <priority>1.0</priority>
     <changefreq>daily</changefreq>
   </url>
