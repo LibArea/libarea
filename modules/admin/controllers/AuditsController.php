@@ -43,7 +43,7 @@ class AuditsController extends Module
                 $row['content'] = CommentModel::getCommentId($row['content_id']);
 
                 $row['post'] = PostModel::getPost($row['content']['comment_post_id'], 'id', $this->container->user()->get());
-            } 
+            }
 
             $result[$ind]   = $row;
         }

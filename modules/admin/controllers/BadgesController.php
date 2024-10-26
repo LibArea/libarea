@@ -140,7 +140,7 @@ class BadgesController extends Module
         $badge_id   = Request::param('id')->asPositiveInt();
         $badge      = BadgeModel::getId($badge_id);
         $data       = Request::allPost();
-		
+
         $redirect   = url('admin.badges');
 
         if (!$badge['badge_id']) {

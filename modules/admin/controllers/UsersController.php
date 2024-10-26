@@ -9,7 +9,7 @@ use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
 
 use App\Models\User\SettingModel;
-use Modules\Admin\Models\{UserModel, BanUserModel, BadgeModel};
+use Modules\Admin\Models\{UserModel, BanUserModel, BadgeModel, SearchModel};
 use App\Validate\Validator;
 
 use Meta, Html, Msg;
@@ -20,12 +20,12 @@ class UsersController extends Module
 
     protected const LIMIT = 20;
 
-	public function all(): View
+    public function all(): View
     {
         return $this->userIndex('all');
     }
 
-	public function ban(): View
+    public function ban(): View
     {
         return $this->userIndex('ban');
     }
@@ -95,7 +95,7 @@ class UsersController extends Module
         }
 
         return view(
-            '/user/search',
+            '/user/search-ip',
             [
                 'meta'  => Meta::get(__('admin.search')),
                 'data'  => [
@@ -207,6 +207,39 @@ class UsersController extends Module
                 'data'  => [
                     'type'      => self::TYPE,
                     'results'    => userModel::userHistory($user_id),
+                ]
+            ]
+        );
+    }
+
+    public function search(): View
+    {
+        return view(
+            '/user/search',
+            [
+                'meta'  => Meta::get(__('admin.search')),
+                'data'  => [
+                    'type'      => self::TYPE,
+                ]
+            ]
+        );
+    }
+
+    public function userSearch()
+    {
+        $q = Request::post('q')->value();
+        if ($q) {
+            $results = SearchModel::getSearchUsers(Html::pageNumber(), self::LIMIT, $q);
+        }
+
+        return view(
+            '/user/search',
+            [
+                'meta'  => Meta::get(__('admin.search')),
+                'data'  => [
+                    'type'    => self::TYPE,
+                    'results' => $results ?? false,
+                    'q' => $q,
                 ]
             ]
         );

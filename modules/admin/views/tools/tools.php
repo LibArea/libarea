@@ -32,7 +32,7 @@
     <div class="help"><?= __('admin.test_email'); ?>...</div>
 
     <?= Html::sumbit(__('admin.send')); ?>
-   </form>
+  </form>
 </fieldset>
 </main>
 

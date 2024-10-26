@@ -1,4 +1,6 @@
-<?php use App\Bootstrap\Services\Auth\RegType; ?>
+<?php
+
+use App\Bootstrap\Services\Auth\RegType; ?>
 
 <?= insertTemplate(
   'menu',
@@ -14,6 +16,10 @@
         'id' => 'users.ban',
         'url' => url('admin.users.ban'),
         'name' => __('admin.deleted'),
+      ], [
+        'id' => 'users.search',
+        'url' => url('admin.users.search'),
+        'name' => __('admin.search'),
       ]
     ]
   ]
@@ -90,11 +96,11 @@
           <?php if (!empty($user['last_visit_logs']['latest_date'])) : ?>
             <?= $user['last_visit_logs']['latest_date']; ?>
           <?php endif; ?>
-		  <br>
-		  <?php if (!empty($user['last_visit_logs']['device_id'])) : ?>
-		    <a href="<?= url('admin.device', ['item' => $user['last_visit_logs']['device_id']]); ?>"><?= $user['last_visit_logs']['device_id']; ?></a>
-		  <?php endif; ?>
-		  <a class="gray-600 text-sm" href="<?= url('admin.user.history', ['id' => $user['id']]); ?>"><?= __('admin.history'); ?></a>
+          <br>
+          <?php if (!empty($user['last_visit_logs']['device_id'])) : ?>
+            <a href="<?= url('admin.device', ['item' => $user['last_visit_logs']['device_id']]); ?>"><?= $user['last_visit_logs']['device_id']; ?></a>
+          <?php endif; ?>
+          <a class="gray-600 text-sm" href="<?= url('admin.user.history', ['id' => $user['id']]); ?>"><?= __('admin.history'); ?></a>
         </td>
         <td class="center">
           <?php if ($user['trust_level'] != RegType::REGISTERED_ADMIN) : ?>

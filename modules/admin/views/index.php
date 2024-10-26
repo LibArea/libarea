@@ -66,6 +66,5 @@
     <?php endif; ?>
   </div>
 </aside>
- 
+
 <?= insertTemplate('footer'); ?>
- 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use Hleb\Base\Module;
-
 use Hleb\Constructor\Data\View;
 use Modules\Admin\Models\{StatsModel, FacetModel, UserModel, SearchModel};
 use Meta;
@@ -31,7 +30,7 @@ class AdminController extends Module
             ]
         );
     }
-	
+
     public static function freeDiskSpace(): string
     {
         $size   = disk_total_space(HLEB_GLOBAL_DIR);

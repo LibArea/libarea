@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 /**
  * @var $container App\Bootstrap\ContainerInterface 
  */
 
-$lang = Translate::getLang(); 
+$lang = Translate::getLang();
 
 ?>
 
@@ -15,15 +15,15 @@ $lang = Translate::getLang();
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <?= $meta; ?>
-  
+
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
   <link rel="icon" sizes="512x512" href="/favicon-512.png" type="image/png">
 
   <meta name="csrf-token" content="<?= csrf_token(); ?>">
-  
+
   <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
   <?php if ($lang == 'ar') : ?>
     <link rel="stylesheet" href="/assets/css/rtl.css" type="text/css">
@@ -82,4 +82,4 @@ $lang = Translate::getLang();
       </div>
     </div>
   </header>
-  <div id="contentWrapper" class="wrap"> 
+  <div id="contentWrapper" class="wrap">

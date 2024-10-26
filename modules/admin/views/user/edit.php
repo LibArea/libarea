@@ -1,4 +1,6 @@
-<?php use App\Bootstrap\Services\Auth\RegType; ?>
+<?php
+
+use App\Bootstrap\Services\Auth\RegType; ?>
 
 <?= insertTemplate(
   'menu',
@@ -23,7 +25,7 @@
       </a>
       <?php if ($data['user']['is_deleted'] == 1) : ?>
         (<span class="red"><?= __('admin.deleted'); ?></span>)
-      <?php endif; ?> 
+      <?php endif; ?>
     </label>
     <?php if ($data['user']['trust_level'] != RegType::REGISTERED_ADMIN) : ?>
       <?php if ($data['user']['ban_list']) : ?>

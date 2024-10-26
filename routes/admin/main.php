@@ -45,10 +45,12 @@ Route::toGroup()
 		Route::post('/word/create')->module('admin', WordsController::class, 'create')->name('admin.word.create');
 		Route::post('/user/edit/{id}')->module('admin', UsersController::class, 'edit')->where(['id' => '[0-9]+'])->name('admin.user.edit');
 		Route::post('/setting/edit')->module('admin', SettingController::class, 'edit')->name('admin.setting.edit');
+		Route::post('/users/search/go')->module('admin', UsersController::class, 'UserSearch')->where(['type' => '[a-zA-Z0-9]+'])->name('admin.user.search');
 	Route::endGroup();
 
 	Route::get('/users')->module('admin', UsersController::class, 'all')->name('admin.users');
 	Route::get('/users/ban')->module('admin', UsersController::class, 'ban')->name('admin.users.ban');
+	Route::get('/users/search')->module('admin', UsersController::class, 'search')->name('admin.users.search');
 	
 	Route::get('/facets')->module('admin', FacetsController::class)->name('admin.facets.all');
 	Route::get('/tools')->module('admin', ToolsController::class)->name('admin.tools');

@@ -62,7 +62,7 @@
    &lt;use xlink:href="/assets/svg/icons.svg#ID"&gt;&lt;/use&gt;
 &lt;/svg&gt;</code></pre>
 
-  <a rel="nofollow noopener" href="https://github.com/VKCOM/icons">https://github.com/VKCOM/icons</a>
+<a rel="nofollow noopener" href="https://github.com/VKCOM/icons">https://github.com/VKCOM/icons</a>
 
 </main>
 

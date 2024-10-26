@@ -25,15 +25,15 @@
   <?php if ($data['type'] != 'admin') : ?>
     <div class="mb15">
       <?= breadcrumb([
-          [
-            'name' => __('admin.home'),
-             'link' => url('admin')
-          ], [
-            'name' => __('admin.' . $data['type']),
-            'link' => $data['type']
-          ],
-        ]); 
-		?>
+        [
+          'name' => __('admin.home'),
+          'link' => url('admin')
+        ], [
+          'name' => __('admin.' . $data['type']),
+          'link' => $data['type']
+        ],
+      ]);
+      ?>
     </div>
 
 

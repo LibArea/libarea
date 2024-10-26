@@ -15,15 +15,15 @@
     <th><?= __('admin.ip'); ?></th>
     <th><?= __('admin.time'); ?></th>
   </thead>
-  <?php foreach ($data['results'] as $user) : 
-	if (!$user['device_id']) continue;
+  <?php foreach ($data['results'] as $user) :
+    if (!$user['device_id']) continue;
   ?>
     <tr>
       <td>
         <a href="<?= url('admin.device', ['item' => $user['device_id']]); ?>"><?= $user['device_id']; ?></a>
       </td>
       <td>
-	    <a href="<?= url('admin.regip', ['item' => $user['user_ip']]); ?>"><?= $user['user_ip']; ?></a>
+        <a href="<?= url('admin.regip', ['item' => $user['user_ip']]); ?>"><?= $user['user_ip']; ?></a>
       </td>
       <td>
         <?= $user['add_date']; ?>

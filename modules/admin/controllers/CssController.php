@@ -38,5 +38,5 @@ class CssController extends Module
         }
 
         return $iconList;
-    } 
+    }
 }

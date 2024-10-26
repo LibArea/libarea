@@ -22,4 +22,12 @@ class SearchModel extends Model
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();
     }
+	
+	public static function getSearchUsers(int $page, int $limit, string $query)
+    {
+        $start  = ($page - 1) * $limit;
+        $sql = "SELECT id, login, name, email, trust_level FROM users WHERE login LIKE :qa LIMIT :start, :limit";
+
+        return DB::run($sql, ['qa' => "%" . $query . "%", 'start' => $start, 'limit' => $limit])->fetchAll();
+    }
 }

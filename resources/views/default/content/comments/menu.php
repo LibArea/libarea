@@ -5,7 +5,7 @@
         <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
       </svg>
     </span>
-    <ul class="dropdown">
+    <ul class="dropdown text-sm">
 
       <?php if ($container->access()->author('comment', $comment) === true) : ?>
         <li>
@@ -21,10 +21,14 @@
       <?php if ($container->user()->admin()) : ?>
         <li>
           <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
-            <svg class="icon">
+            <svg class="icon<?php if ($comment['comment_is_deleted'] == 1) : ?> sky<?php endif; ?>">
               <use xlink:href="/assets/svg/icons.svg#trash-2"></use>
             </svg>
-            <?= $comment['comment_is_deleted'] == 1 ? __('app.recover') : __('app.remove'); ?>
+          <?php if ($comment['comment_is_deleted'] == 1) : ?>
+            <span class="sky"><?= __('app.recover'); ?></span>
+          <?php else : ?>
+             <?= __('app.remove'); ?>
+          <?php endif; ?>
           </a>
         </li>
         <!--li>
