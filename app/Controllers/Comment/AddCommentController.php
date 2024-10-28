@@ -137,11 +137,11 @@ class AddCommentController extends Controller
 
         // If the participant has already responded to a specific comment and comments again
         // Если участник уже дал ответ на конкретный комментарий и комментирует повторно
-        if (CommentModel::isResponseUser($parent['comment_id'])) {
+        if ($comment = CommentModel::isResponseUser($parent['comment_id'])) {
 
-            CommentModel::mergeComment($content, $parent['comment_id']);
+            CommentModel::mergeComment($content, $comment['comment_id']);
 
-            redirect($url_post  . '#comment_' . $parent['comment_id']);
+            redirect($url_post  . '#comment_' . $comment['comment_id']);
         }
 
         return true;

@@ -158,14 +158,16 @@ class MessagesController extends Controller
 
         $this->limitTl();
 
-		$dialog = MessagesModel::availability($recipient_id );
-
-        RulesMessage::rules($content, url('dialogues', ['id' => $dialog['dialog_id']]));
+		$dialog = MessagesModel::availability($recipient_id);
 
         // If the user does not exist 
         // Если пользователя не существует
         $user  = UserModel::get($recipient_id, 'id');
         notEmptyOrView404($user);
+
+
+		$dialog_url = !empty($dialog['dialog_id']) ? url('dialogues', ['id' => $dialog['dialog_id']]) : url('profile', ['login' =>  $user['login']]);
+		RulesMessage::rules($content, $dialog_url);
 
         $dialog_id = MessagesModel::sendMessage($recipient_id, $content);
         $url = '/messages/' . $dialog_id;
