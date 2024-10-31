@@ -227,9 +227,11 @@ class UsersController extends Module
 
     public function userSearch()
     {
-        $q = Request::post('q')->value();
-        if ($q) {
-            $results = SearchModel::getSearchUsers(Html::pageNumber(), self::LIMIT, $q);
+        $login = Request::post('login')->value();
+		$ip = Request::post('ip')->value();
+
+        if ($login || $ip) {
+            $results = SearchModel::getSearchUsers(Html::pageNumber(), self::LIMIT, $login, $ip);
         }
 
         return view(
@@ -237,9 +239,10 @@ class UsersController extends Module
             [
                 'meta'  => Meta::get(__('admin.search')),
                 'data'  => [
-                    'type'    => self::TYPE,
-                    'results' => $results ?? false,
-                    'q' => $q,
+                    'type'    	=> self::TYPE,
+                    'results'	=> $results ?? false,
+                    'login'		=> $login,
+					'ip'		=> $ip,
                 ]
             ]
         );

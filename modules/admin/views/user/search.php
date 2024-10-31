@@ -25,7 +25,11 @@
   <?= $container->csrf()->field(); ?>
   <fieldset>
     <label for="word"><?= __('admin.nickname'); ?></label>
-    <input type="text" name="q">
+    <input type="text" name="login">
+  </fieldset>
+    <fieldset>
+    <label for="word"><?= __('admin.ip'); ?></label>
+    <input type="text" name="ip">
   </fieldset>
   <?= Html::sumbit(__('admin.search')); ?>
 </form>
@@ -42,18 +46,17 @@
     <?php endif; ?>
     <sup class="gray-600">TL:<?= $user['trust_level']; ?></sup>
     <span class="green"> - <?= $user['email']; ?></span>
-    <?php if ($user['trust_level'] == 10) : ?>
-      ---
-    <?php else : ?>
+    <?php if ($user['trust_level'] != 10) : ?>
       <a title="<?= __('admin.edit'); ?>" href="<?= url('admin.user.edit.form', ['id' => $user['id']]); ?>">
         <svg class="icon">
           <use xlink:href="/assets/svg/icons.svg#edit"></use>
         </svg>
       </a>
-    <?php endif; ?> <br>
+    <?php endif; ?> 
+	<sup class="gray-600"><?= $user['reg_ip']; ?></sup> <br>
   <?php endforeach; ?>
 <?php else : ?>
-  <?php if (!empty($data['q'])) : ?><p><?= __('search.no_results'); ?>...</p><?php endif; ?>
+  <?php if (!empty($data['login']) || !empty($data['ip']) ) : ?><p><?= __('search.no_results'); ?>...</p><?php endif; ?>
 <?php endif; ?>
 </main>
 </div>
