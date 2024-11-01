@@ -25,11 +25,11 @@
   <?= $container->csrf()->field(); ?>
   <fieldset>
     <label for="word"><?= __('admin.nickname'); ?></label>
-    <input type="text" name="login">
+    <input type="text" name="login" value="<?php if (!empty($data['login'])) : ?><?= $data['login']; ?><?php endif; ?>">
   </fieldset>
     <fieldset>
     <label for="word"><?= __('admin.ip'); ?></label>
-    <input type="text" name="ip">
+    <input type="text" name="ip" value="<?php if (!empty($data['ip'])) : ?><?= $data['ip']; ?><?php endif; ?>">
   </fieldset>
   <?= Html::sumbit(__('admin.search')); ?>
 </form>

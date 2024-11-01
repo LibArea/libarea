@@ -103,7 +103,7 @@ class ProfileController extends Controller
             'topics'        => FacetModel::getFacetsTopicProfile($profile['id']),
             'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
             'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
-            'my_post'       => PostModel::getPost($profile['my_post'], 'id', $this->container->user()->get()),
+            'my_post'       => PostModel::getPost($profile['my_post'], 'id'),
             'button_pm'     => $this->accessPm($profile['id']),
             'ignored'       => IgnoredModel::getUserIgnored($profile['id']),
         ];
