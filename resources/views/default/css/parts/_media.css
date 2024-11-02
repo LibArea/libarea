@@ -218,5 +218,31 @@ main {
     padding-left: 0;
     padding-right: 0;
   }
+  
+  .comment_level-left-1 {
+    margin-left: 10px;
+  }
+
+  .comment_level-left-2 {
+    margin-left: 20px;
+  }
+
+  .comment_level-left-3 {
+    margin-left: 30px;
+  }
+
+  .comment_level-left-4 {
+    margin-left: 40px;
+  }
+
+  .comment_level-left-5 {
+    margin-left: 40px;
+  }
+
+ .comment_level-left-3 img.medium-zoom-image,
+ .comment_level-left-4 img.medium-zoom-image,
+ .comment_level-left-5 img.medium-zoom-image {
+    max-width: 180px;
+  }
 
 }
