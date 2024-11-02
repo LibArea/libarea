@@ -42,53 +42,7 @@ $facet  = $data['facet'] ?? false; ?>
         </a>
       </div>
 
-      <?php if (!$container->user()->active()) : ?>
-        <div class="flex gap-max items-center">
-          <div id="toggledark" class="gray-600 mb-none">
-            <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#sun"></use>
-            </svg>
-          </div>
-          <?php if (config('general', 'invite') == false) : ?>
-            <a class="gray center block" href="<?= url('register'); ?>">
-              <?= __('app.registration'); ?>
-            </a>
-          <?php endif; ?>
-          <a class="btn btn-outline-primary" href="<?= url('login'); ?>">
-            <?= __('app.sign_in'); ?>
-          </a>
-        </div>
-      <?php else : ?>
-        <div>
-          <div class="flex gap-max items-center">
-
-            <?= Html::addPost($facet['facet_id'] ?? false); ?>
-
-            <div id="toggledark" class="only-icon">
-              <svg class="icon">
-                <use xlink:href="/assets/svg/icons.svg#sun"></use>
-              </svg>
-            </div>
-
-            <a id="notif" class="gray-600 relative" href="<?= url('notifications'); ?>">
-              <svg class="icon">
-                <use xlink:href="/assets/svg/icons.svg#bell"></use>
-              </svg>
-              <span class="number-notif"></span>
-            </a>
-
-            <div class="relative">
-              <div class="trigger mb5">
-                <?= Img::avatar($container->user()->avatar(), $container->user()->login(), 'img-base', 'small'); ?>
-              </div>
-              <ul class="dropdown user">
-                <?= insert('/_block/navigation/config/user-menu'); ?>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-      <?php endif;  ?>
+      <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?> 
     </div>
   </header>
   <div id="contentWrapper" class="wrap">
