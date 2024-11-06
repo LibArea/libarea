@@ -1,13 +1,18 @@
-<?php $profile = $data['profile']; ?>
+<?php 
+  $profile = $data['profile']; 
+  $counts = $data['counts']['count_posts'] + $data['counts']['count_comments'];
+?>
 
 <div class="mb-none">
-  <div class="blockquote-profile">
-    <?php if ($profile['about'] == 'Riddle...') : ?>
-      <?= __('app.riddle'); ?>...
-    <?php else : ?>
-      <?= markdown($profile['about'] ??  __('app.riddle')); ?>
-    <?php endif; ?>
-  </div>
+  <?php if ($counts > 3) : ?>
+    <div class="blockquote-profile">
+      <?php if ($profile['about'] == 'Riddle...') : ?>
+        <?= __('app.riddle'); ?>...
+      <?php else : ?>
+	    <?= markdown($profile['about'] ??  __('app.riddle')); ?>
+      <?php endif; ?>
+    </div>
+  <?php endif; ?>
 
   <div class="mb20">
     <div class="gray-600 mt5">
@@ -22,12 +27,15 @@
     <?php foreach (config('profile', 'sidebar') as $block) : ?>
       <?php if ($profile[$block['title']]) : ?>
         <div class="mt5">
-          <span class="gray-600"><?= __($block['lang']); ?>:</span>
           <?php if ($block['url']) : ?>
-            <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
-              <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-            </a>
+		    <?php if ($counts > 3) : ?>
+			  <span class="gray-600"><?= __($block['lang']); ?>:</span>
+              <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
+                <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
+              </a>
+			<?php endif; ?>
           <?php else : ?>
+		    <span class="gray-600"><?= __($block['lang']); ?>:</span>
             <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
           <?php endif; ?>
         </div>
