@@ -194,7 +194,7 @@ return [
     'preview'           => 'Xem trước',
     'toggle_two'        => 'Hai cửa sổ',
     'fullscreen'        => 'Toàn màn hình',
-    'spoiler'           => 'Tiết lộ nội dung',
+    'spoiler'           => 'Spoiler',
     'spoiler_auth'      => 'Chỉ dành cho người dùng được ủy quyền',
     'select_image'      => 'Please select an image',
     'drop_image'        => 'Kéo và thả hình ảnh để tải nó lên.',
@@ -263,7 +263,7 @@ return [
     'post_translation'  => 'Bài viết này có phải là bản dịch không?',
     'translation'       => 'Dịch',
     'format_Q&A'        => 'Đây có phải là một câu hỏi không (nó sẽ trở thành dạng Hỏi & Đáp) phải không?',
-    'poll_closed'       => 'Cuộc thăm dò ý kiến ​​này đã đóng chưa?',
+    'poll_closed'       => 'Cuộc thăm dò ý kiến này đã đóng chưa?',
     'pin'               => 'Ghim bài đăng này?',
 
     'source'            => 'Nguồn',
