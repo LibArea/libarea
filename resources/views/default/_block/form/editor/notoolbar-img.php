@@ -46,23 +46,7 @@
 			image: false,
 		},
 
-		locale: '<?= Translate::getLang(); ?>',
-		locales: {
-			<?= Translate::getLang(); ?>: {
-				bold: "<?= __('app.bold'); ?>",
-				italic: "<?= __('app.italic'); ?>",
-				strikethrough: "<?= __('app.strikethrough'); ?>",
-				h2: "<?= __('app.h2'); ?>",
-				h3: "<?= __('app.h3'); ?>",
-				checklist: "<?= __('app.'); ?>",
-				quote: "<?= __('app.quote'); ?>",
-				table: "<?= __('app.table'); ?>",
-				inlineCode: "<?= __('app.inline_code'); ?>",
-				codeBlock: "<?= __('app.code_block'); ?>",
-				link: "<?= __('app.link'); ?>",
-				image: "<?= __('app.foto'); ?>"
-			},
-		},
+		<?= insert('/_block/form/editor/localization'); ?>
 
 		togglePreview: false,
 

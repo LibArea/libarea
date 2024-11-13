@@ -14,27 +14,7 @@
 		id: 'markdown-container',
 		value: mdText,
 
-		locale: '<?= Translate::getLang(); ?>',
-		locales: {
-			<?= Translate::getLang(); ?>: {
-				bold: "<?= __('app.bold'); ?>",
-				italic: "<?= __('app.italic'); ?>",
-				strikethrough: "<?= __('app.strikethrough'); ?>",
-				h2: "<?= __('app.h2'); ?>",
-				h3: "<?= __('app.h3'); ?>",
-				checklist: "<?= __('app.'); ?>",
-				quote: "<?= __('app.quote'); ?>",
-				table: "<?= __('app.table'); ?>",
-				inlineCode: "<?= __('app.inline_code'); ?>",
-				codeBlock: "<?= __('app.code_block'); ?>",
-				link: "<?= __('app.link'); ?>",
-				image: "<?= __('app.foto'); ?>",
-				switchModel: "<?= __('app.switching'); ?>",
-				switchPreview: "<?= __('app.view'); ?>",
-				switchEdit: "<?= __('app.editing'); ?>",
-				fullScreen: "<?= __('app.fullscreen'); ?>",
-			},
-		},
+		<?= insert('/_block/form/editor/localization'); ?>
 
 		togglePreview: false,
 
