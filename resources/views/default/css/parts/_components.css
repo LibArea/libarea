@@ -570,3 +570,7 @@ video {
   display: flex;
   gap: 1rem;
 }
+
+.medium-zoom--opened #markdown-container {
+  display: none;	
+}
