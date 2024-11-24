@@ -51,4 +51,8 @@ return [
     // Если false, то URL постов будет: /post/id
     // в противном случае: /post/id/slug
     'slug_post'          => true,
+	
+	// Create (true) or not an IMG of a post (for og:image markup) from the title, the author's nickname and his avatar (+ background)
+	// Создавать (true) или нет IMG поста (для разметки og:image) из заголовка, ника автора и его аватара (+ фон)
+    'img_generate'		=> false,
 ];
