@@ -3,6 +3,7 @@
 use App\Middlewares\{DefaultMiddleware, LimitsMiddleware};
 
 use App\Bootstrap\Services\Auth\RegType;
+use App\Meta\OgImage;
 
 use App\Controllers\{
 	HomeController,
@@ -254,3 +255,4 @@ Route::get('/sitemap.xml')->controller(RssController::class);
 Route::get('/rss/all/posts')->controller(RssController::class, 'postsAll');
 Route::get('/turbo-feed/topic/{slug}')->controller(RssController::class, 'turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/rss-feed/topic/{slug}')->controller(RssController::class, 'rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
+Route::get('/og-image/{id}')->controller(PostController::class, 'OgImage')->where(['id' => '[0-9-]+'])->name('og.image');

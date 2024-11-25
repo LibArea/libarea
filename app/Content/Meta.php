@@ -56,12 +56,12 @@ class Meta
 
     public static function home(string $sheet)
     {
-		$url = match ($sheet) {
-			'questions'	=> '/questions',
-			'posts'		=> '/posts',
-			'top'		=> '/top',
-			default		=> '/',
-		};
+        $url = match ($sheet) {
+            'questions'    => '/questions',
+            'posts'        => '/posts',
+            'top'        => '/top',
+            default        => '/',
+        };
 
         $meta = [
             'main'      => 'main',
@@ -69,7 +69,7 @@ class Meta
             'imgurl'    => config('meta', 'img_path'),
             'url'       => $url,
         ];
-		
+
         return self::get(config('meta', $sheet . '_title'), config('meta',  $sheet . '_desc'), $meta);
     }
 
@@ -79,12 +79,17 @@ class Meta
 
         $meta = ['type' => 'article', 'indexing'     => $indexing];
 
+        $imgurl = self::postImage($content);
+        if (config('meta', 'img_generate') === true) {
+            $imgurl = url('og.image', ['id' => $content['post_id']]);
+        }
+
         if ($indexing === false) {
             $meta = [
                 'published_time' => $content['post_date'],
                 'type'      => 'article',
                 'og'        => true,
-                'imgurl'    => self::images($content),
+                'imgurl'    => $imgurl,
                 'url'       => post_slug((int)$content['post_id'], $content['post_slug']),
             ];
         }
@@ -94,7 +99,8 @@ class Meta
         return self::get(htmlEncode(strip_tags($content['post_title'])), htmlEncode($description), $meta);
     }
 
-    public static function images(array $content): string
+
+    public static function postImage(array $content): string
     {
         $content_img  = config('meta', 'img_path');
 
@@ -150,14 +156,14 @@ class Meta
             ];
         }
 
-		// If the user is on the ban list or deleted, then we prohibit indexing of the profile
-		// Если пользователь в бан листе или удален, то запрещаем индексацию профиля
+        // If the user is on the ban list or deleted, then we prohibit indexing of the profile
+        // Если пользователь в бан листе или удален, то запрещаем индексацию профиля
         if ($user['ban_list'] == 1 || $user['is_deleted'] == 1) {
             $meta['indexing'] = true;
         }
-		
-		// If the user has not contributed, then the profile is prohibited from indexing (by the number of likes)
-		// Если пользователь не внес вклад, то профиль запретить к индексированию (по количеству лайков)
+
+        // If the user has not contributed, then the profile is prohibited from indexing (by the number of likes)
+        // Если пользователь не внес вклад, то профиль запретить к индексированию (по количеству лайков)
         if ($user['up_count'] < 3) {
             $meta['indexing'] = true;
         }

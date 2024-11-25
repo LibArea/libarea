@@ -14,7 +14,7 @@ use App\Models\{PostModel, CommentModel, SubscriptionModel, FeedModel};
 use App\Traits\Views;
 use App\Traits\Poll;
 use App\Traits\LastDataModified;
-use BuildTree, Html, Meta;
+use BuildTree, Html, Meta, MetaImage, Img;
 
 class PostController extends Controller
 {
@@ -98,26 +98,25 @@ class PostController extends Controller
                     ]
                 ]
             );
-
         } else {
 
-			$slug_facet = Request::param('facet_slug')->asString();
-			$page  = FacetPresence::index($slug_facet, 'slug', 'section');
+            $slug_facet = Request::param('facet_slug')->asString();
+            $page  = FacetPresence::index($slug_facet, 'slug', 'section');
 
-			render(
-				'/post/page-view',
-				[
-					'meta'  => Meta::post($content),
-					'data'  => [
-						'sheet' => 'page',
-						'type'  => $type,
-						'page'  => $content,
-						'facet' => [],
-						'pages' => PostModel::recent($page['facet_id'], $content['post_id'])
-					]
-				]
-			);
-		}
+            render(
+                '/post/page-view',
+                [
+                    'meta'  => Meta::post($content),
+                    'data'  => [
+                        'sheet' => 'page',
+                        'type'  => $type,
+                        'page'  => $content,
+                        'facet' => [],
+                        'pages' => PostModel::recent($page['facet_id'], $content['post_id'])
+                    ]
+                ]
+            );
+        }
     }
 
     public function presence(string $type, int $id, string|null $slug)
@@ -216,5 +215,13 @@ class PostController extends Controller
     public function last(int $content_id): array|false
     {
         return PostModel::recent($content_id, false);
+    }
+
+    public function OgImage()
+    {
+        $id = Request::param('id')->value();
+        $post = PostPresence::index($id);
+
+        MetaImage::get($post['post_title'], $post['login'], Img::PATH['avatars'] .  $post['avatar'],  Meta::postImage($post));
     }
 }
