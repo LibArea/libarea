@@ -1,6 +1,6 @@
 <?php if (!empty($data['comments'])) : ?>
   <div class="indent-body">
-    <h2 class="lowercase m0 text-2xl">
+    <h2 class="lowercase text-2xl">
       <?= Html::numWord($post['post_comments_count'], __('app.num_comment'), true); ?>
     </h2>
  
@@ -28,7 +28,7 @@
 
                   <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
 
-                  <div class="max-w780 ind-first-p ml5<?php if ($level == 1) : ?> text-sm<?php endif; ?>">
+                  <div class="comment-text ml5<?php if ($level == 1) : ?> text-sm<?php endif; ?>">
                     <?= markdown($node['comment_content'], 'text'); ?>
                   </div>
                   <div class="comment-footer justify-between">

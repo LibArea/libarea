@@ -218,7 +218,7 @@ h5 {
 }
 
 .box-logo {
-  width: 222px;
+  width: 242px;
   align-items: center;
   display: flex;
   gap: 0.5rem;
@@ -432,7 +432,7 @@ a:hover>img {
   display: flex;
   gap: 1rem;
   font-size: .875rem;
-  margin: 10px 0 0 5px;
+  margin-left: 5px;
 }
 
 .comment,
@@ -518,9 +518,12 @@ li .comment-folder-button:checked~ol.comments li {
   background-color: var(--red-200);
 }
 
-.ind-first-p p {
-  margin: 0.5em 0;
-  max-width: 780px;
+.comment-text p {
+    margin: 0.1em 0 1em 0;
+}
+
+.comment-text blockquote p {
+    margin: 0.6em 0 0.6em 0;
 }
 
 article iframe {

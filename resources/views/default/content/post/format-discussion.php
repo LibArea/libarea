@@ -91,7 +91,7 @@
                     </div>
                     <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'discussion']); ?>
                   </div>
-                  <div class="comment-text ind-first-p">
+                  <div class="comment-text">
                     <?= markdown($node['comment_content'], 'text'); ?>
                   </div>
                 </div>
