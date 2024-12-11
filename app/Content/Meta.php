@@ -75,7 +75,7 @@ class Meta
 
     public static function post(array $content): string
     {
-        $indexing =  ($content['post_is_deleted'] == 1) ? true : false;
+        $indexing = ($content['post_is_deleted'] == 1 || $content['post_published'] == 0) ? true : false;
 
         $meta = ['type' => 'article', 'indexing'     => $indexing];
 

@@ -7,13 +7,14 @@
 <?php if ($post['post_tl']) : ?> <span class="brown italic text-sm ml5">tl<?= $post['post_tl']; ?></span> <?php endif; ?>
 <?php if ($post['post_nsfw']) : ?> <span class="red text-sm ml5">NSFW</span> <?php endif; ?>
 <?php if ($post['post_hidden']) : ?> <svg class="icon gray-600"><use xlink:href="/assets/svg/icons.svg#eye"></use></svg> <?php endif; ?>
+<?php if ($post['post_published'] == 0 && $container->user()->admin()) : ?> <sup class="red lowercase"><?= __('app.audits'); ?></sub><?php endif; ?>
 <?php if ($post['post_merged_id']) : ?>
   <span class="red">
     <svg class="icon"><use xlink:href="/assets/svg/icons.svg#git-merge"></use></svg>
     <?php 
 
 	if ($container->user()->admin()) : ?>
-      <a href="/post/<?= $post['post_merged_id']; ?>">id <?= $post['post_merged_id']; ?></a>
+      <a href="<?= url('post.id', ['id' => $post['post_merged_id']]); ?>id <?= $post['post_merged_id']; ?></a>
     <?php endif; ?>
   </span>
 <?php endif; ?>
