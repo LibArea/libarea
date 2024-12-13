@@ -21,7 +21,7 @@ class AuditsController extends Module
 
     public function audits()
     {
-        return $this->callIndex('audits');
+        return $this->callIndex('audit');
     }
 
     public function report()

@@ -118,4 +118,5 @@
 
 <?= pagination($data['pNum'], $data['pagesCount'], false, url('admin.audits')); ?>
 </main>
+
 <?= insertTemplate('footer'); ?>

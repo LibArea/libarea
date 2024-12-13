@@ -36,11 +36,19 @@ class LogModel extends Model
     }
 
     // Страница аудита
-    public static function getAuditsAll($page, $limit, $sheet)
-    {
-        $sort   = $sheet == 'ban' ? 'AND a.read_flag = 1' : 'AND a.read_flag = 0';
-        $type   = $sheet == 'audits' ? 'audit' : 'report';
-        $sort   = $type == 'report' ? '' : $sort;
+    public static function getAuditsAll($page, $limit, $type)
+    { 
+      switch ($type) {
+            case 'report':
+                $sort = '';
+                break;
+            case 'audit':
+                $sort = 'AND a.read_flag = 1';
+                break;
+            default: // all
+                $sort = 'AND a.read_flag = 0';
+				$type = 'audit';
+        } 
 
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
@@ -61,7 +69,7 @@ class LogModel extends Model
 
     public static function getAuditsAllCount($sheet)
     {
-        $sort = ($sheet == 'ban') ? "read_flag = 1" : "read_flag = 0";
+        $sort = ($sheet == 'audit') ? "read_flag = 1" : "read_flag = 0";
 
         $sql = "SELECT id, read_flag FROM audits WHERE $sort";
 
