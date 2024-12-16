@@ -11,7 +11,7 @@ $post   = $data['post'] ?? false;
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
-<body class="general<?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?><?php if ($container->cookies()->get('menuYesNo')->value() == 'menuno') : ?> menuno<?php endif; ?>">
+<body class="<?= $type; ?><?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?><?php if ($container->cookies()->get('menuYesNo')->value() == 'menuno') : ?> menuno<?php endif; ?>">
   <header class="d-header<?php if ($post || $facet) : ?> scroll-hide-search<?php endif; ?>">
     <div class="wrap">
       <div class="d-header_contents">

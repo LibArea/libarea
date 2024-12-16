@@ -82,7 +82,6 @@
                       <?php endif; ?>
 
                       <?php if ($node['comment_parent_id'] > 0) : ?>
-
                         <a class="gray-600" rel="nofollow" href="<?= post_slug($post['post_id'], $post['post_slug']); ?>#comment_<?= $node['comment_parent_id']; ?>">
                           <svg class="icon small">
                             <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>

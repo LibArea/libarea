@@ -30,4 +30,14 @@ class AccessService implements AccessInterface
     {
         return Сhecks::limitTime($adding_time, $limit_time);
     }
+
+    public function auditСontent(string $type_content, array $content)
+    {
+        return Сhecks::auditСontent($type_content, $content);
+    }
+
+    public function hiddenPost(array $content)
+    {
+        return Сhecks::hiddenPost($content);
+    }
 }

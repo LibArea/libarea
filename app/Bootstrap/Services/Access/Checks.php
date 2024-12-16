@@ -13,7 +13,7 @@ class Сhecks
 {
     public static function postingFrequency(string $path)
     {
-		$type = basename($path);
+        $type = basename($path);
 
         // TODO: Изменим поля в DB, чтобы использовать limitContent для messages и invitation: 
         if (in_array($type, ['post', 'comment', 'item', 'poll'])) {
@@ -129,12 +129,12 @@ class Сhecks
          *
          * Лимит по времени.
          */
-         
-         $time_edit = config('trust-levels', 'edit_time_' . $type_content);
-         if ($type_content == 'post') {
-             $time_edit = $info_type['post_draft'] == 1 ? 0 : config('trust-levels', 'edit_time_post'); 
-         }
-         
+
+        $time_edit = config('trust-levels', 'edit_time_' . $type_content);
+        if ($type_content == 'post') {
+            $time_edit = $info_type['post_draft'] == 1 ? 0 : config('trust-levels', 'edit_time_post');
+        }
+
         if (self::limitTime($info_type[$type_content . '_date'], $time_edit) === false) {
             return false;
         }
@@ -173,16 +173,58 @@ class Сhecks
          *
          * Лимит по времени.
          */
-        $time_edit = $info_type['post_draft'] == 1 ? 0 : config('trust-levels', 'edit_time_post'); 
+        $time_edit = $info_type['post_draft'] == 1 ? 0 : config('trust-levels', 'edit_time_post');
         if (self::limitTime($info_type['post_date'], $time_edit) === false) {
             return false;
         }
 
         return true;
     }
-	
+
+    /**
+     * Content audit (posts, comments...). Visible only to the staff and the author.
+     * Аудит контента (посты, комментарии...). Виден только персоналу и автору.
+     * 
+     * @param string $type_content
+     * @param array $content
+     * @return boolean
+     */
+
+    public static function auditСontent(string $type_content, array $content): bool
+    {
+        if (UserData::checkAdmin()) {
+            return false;
+        }
+
+        if ($content[$type_content . '_user_id'] != UserData::getUserId() && $content[$type_content . '_published'] == 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Hidden post. Visible only to the staff and the author.
+     * Скрытые пост. Виден только персоналу и автору.
+     *
+     * @param array $post
+     * @return boolean
+     */
+    public static function hiddenPost(array $post): bool
+    {
+        if (UserData::checkAdmin()) {
+            return false;
+        }
+
+        if ($post['post_user_id'] != UserData::getUserId() && $post['post_hidden'] != 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static function limitsLevel(int $type): bool
     {
-		return RegType::check($type, '>=');
-	}
+        return RegType::check($type, '>=');
+    }
 }

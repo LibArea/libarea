@@ -94,7 +94,7 @@ class MetaImage
 		}
 
 		// Отрисовываем подзаголовок (Автор)
-		imagettftext($image, 24, 0, $margin, $height - 60, $textColor, $fontPath, $author);
+		imagettftext($image, 24, 0, $margin, $height - 80, $textColor, $fontPath, $author);
 
 		// Добавляем логотип
 		if (isset($avatar)) {

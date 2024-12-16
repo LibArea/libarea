@@ -9,9 +9,8 @@
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
 
-    <?php if ($post['post_hidden'] == 1) : ?>
-      <?php if ($post['post_user_id'] != $container->user()->id() && !$container->user()->admin()) continue; ?>
-    <?php endif; ?>
+	<?php if ($container->access()->hiddenPost($post)) continue; ?>
+	<?php if ($container->access()->auditСontent('post', $post)) continue; ?>
 
     <div class="box">
       <div class="flex items-center gap-min text-sm mb5">
