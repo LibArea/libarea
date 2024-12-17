@@ -52,10 +52,10 @@
                     <?php endif; ?>
                     <?php if ($item['item_published'] == 1) : ?>
                       <div>
-                        <svg class="icon">
+                        <svg class="icon gray-600 ml5">
                           <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
                         </svg>
-                        <a class="black" href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
+                        <a class="lowercase" href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
                           <?= __('web.more'); ?>
                         </a>
                       </div>

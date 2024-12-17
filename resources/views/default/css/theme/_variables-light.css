@@ -5,8 +5,8 @@
  */
 
 :root {
-  --font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-  --line-height: 1.5;
+  --font-family: "Roboto", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --line-height: 1.5rem;
   --font-size: 1rem;
 
   /* Default (light) theme */

@@ -59,7 +59,7 @@
                   <span class="gray-600 ml5 mb-none"><?= $item['item_telephone']; ?></span>
                 <?php endif; ?>
                 <div>
-                  <svg class="icon gray ml5">
+                  <svg class="icon gray-600 ml5">
                     <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
                   </svg>
                   <a itemprop="url" class="lowercase" href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug'] ?? 'slug']); ?>">

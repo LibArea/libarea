@@ -35,10 +35,10 @@
                   </a>
                 <?php endif; ?>
                 <div>
-                  <svg class="icon gray ml5">
+                  <svg class="icon gray-600 ml5">
                     <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
                   </svg>
-                  <a class="black " href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
+                  <a class="lowercase" href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
                     <?= __('web.more'); ?>
                   </a>
 
