@@ -1,9 +1,9 @@
 <main class="w-100">
   <div class="indent-body">
     <div class="mb15">
-      <h1 class="title"><?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's'); ?></h1>
+      <h1 class="title"><?= __('meta.' . $data['sheet'] . '_' . $data['type']); ?></h1>
       <span class="gray-600 text-xs">
-        <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . 's_info'); ?>.
+        <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . '_info'); ?>.
       </span>
     </div>
 
@@ -16,18 +16,18 @@
             'list' => [
               [
                 'id'    => $data['type'] . '_all',
-                'url'   => url($data['type'] . 's.all'),
+                'url'   => url($data['type'] . '.all'),
                 'title' => 'app.all',
               ],
               [
                 'id'    => $data['type'] . '_new',
-                'url'   => url($data['type'] . 's.new'),
+                'url'   => url($data['type'] . '.new'),
                 'title' => 'app.new_ones',
               ],
               [
                 'tl'    => 1,
                 'id'    => $data['type'] . '_my',
-                'url'   => url($data['type'] . 's.my'),
+                'url'   => url($data['type'] . '.my'),
                 'title' => 'app.reading',
               ],
             ]
@@ -37,10 +37,11 @@
 
       </ul>
 
-      <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_' . $data['type']))) : ?>
+	  <?php $type =  $data['type'] === 'blogs' ? 'blog' : 'topic'; ?>
+      <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_' . $type))) : ?>
         <?php if ($data['countUserFacet'] == 0 || $container->user()->admin()) : ?>
           <p class="text-xl">
-            <a class="btn btn-outline-primary btn-small" href="<?= url('facet.form.add', ['type' => $data['type']]); ?>">
+            <a class="btn btn-outline-primary btn-small" href="<?= url('facet.form.add', ['type' => $type]); ?>">
               <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#plus"></use>
               </svg>
@@ -52,7 +53,7 @@
     </div>
 
     <?php if (!empty($data['facets'])) : ?>
-      <?php if ($data['type'] == 'blog') : ?>
+      <?php if ($type == 'blog') : ?>
         <div class="mb20">
           <?= insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
         </div>
@@ -65,6 +66,6 @@
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'info']); ?>
     <?php endif; ?>
 
-    <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url($data['type'] . 's.' . $data['sheet'])); ?>
+    <?= Html::pagination($data['pNum'], $data['pagesCount'], false, url($data['type'] . '.' . $data['sheet'])); ?>
   </div>
 </main>

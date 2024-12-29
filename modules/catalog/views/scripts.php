@@ -1,9 +1,9 @@
-<script src="/assets/js/common.js"></script>
-<script src="/assets/js/medium-zoom.js"></script>
-<script src="/assets/js/prism/prism.js"></script>
+<script src="/assets/js/common.js?<?= config('general', 'version'); ?>"></script>
+<script src="/assets/js/medium-zoom.js?<?= config('general', 'version'); ?>"></script>
+<script src="/assets/js/prism/prism.js?<?= config('general', 'version'); ?>"></script>
 
 <?php if (UserData::checkActiveUser()) : ?>
-  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/app.js?<?= config('general', 'version'); ?>"></script>
   <?= insert('/device-id'); ?>
 <?php endif; ?>
 

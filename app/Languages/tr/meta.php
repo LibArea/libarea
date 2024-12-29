@@ -52,14 +52,12 @@ return [
     'my_topics_info'            => 'Abone olduğum konular',
     'my_topics_desc'            => 'Okuduğum veya oluşturduğum konular',
 
-    'comments_all_info'         => 'Tüm yorumlar...',
-    'comments_deleted_info'     => 'Sİlinen yorumlar...',
-    'answers_all_info'          => 'Tüm cevaplar...',
-    'answers_deleted_info'      => 'Silinen cevaplar...',
+    'all_comments'      		=> 'Tüm yorumlar',
+    'all_comments_info'         => 'Tüm yorumlar...',
+    'all_comments_desc'     	=> 'Toplumdaki öncelik sırasına göre tüm yorumlar (yanıt başına)',
+    'deleted_comments_info'     => 'Sİlinen yorumlar...',
 
-    'comments_desc'     => 'Toplumdaki öncelik sırasına göre tüm yorumlar (yanıt başına)',
-    'domain_desc'       => 'Topluluktaki gönderileri etki alanına göre gruplama',
-    'all_comments'      => 'Tüm yorumlar',
+    'domain_desc'       		=> 'Topluluktaki gönderileri etki alanına göre gruplama',
 
     'feed_facet_desc'           => 'Genel akış. ',
     'feed_facet_posts_desc'     => 'Gönderi akışı. ',

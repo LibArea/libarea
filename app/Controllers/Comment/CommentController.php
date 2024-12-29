@@ -42,12 +42,12 @@ class CommentController extends Controller
         render(
             '/comments/all',
             [
-                'meta'  => Meta::get(__('meta.all_comments'), __('meta.comments_desc'), $m),
+                'meta'  => Meta::get(__('meta.all_comments'), __('meta.all_comments_desc'), $m),
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => Html::pageNumber(),
                     'sheet'         => $sheet,
-                    'type'          => 'comments',
+                    'type'          => 'all_comments',
                     'comments'      => $comments,
                 ]
             ]

@@ -60,7 +60,7 @@ $post   = $data['post'] ?? false;
           </div>
         </div>
 
-        <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?> 
+        <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?>
       </div>
     </div>
   </header>
@@ -72,8 +72,10 @@ $post   = $data['post'] ?? false;
   <?php endif; ?>
 
   <div id="contentWrapper" class="wrap">
-    <nav class="menu__left mb-none">
-      <ul class="menu sticky top-sm">
-        <?= insert('/_block/navigation/config/left-menu', ['type' => $type, 'topics_user' => $topics_user]); ?>
-      </ul>
-    </nav>
+    <div class="nav-sidebar">
+      <nav class="menu__left mb-none">
+        <ul class="menu sticky top-sm">
+          <?= insert('/_block/navigation/config/left-menu', ['type' => $type, 'topics_user' => $topics_user]); ?>
+        </ul>
+      </nav>
+    </div>

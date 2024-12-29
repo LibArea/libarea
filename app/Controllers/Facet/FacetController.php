@@ -14,32 +14,32 @@ class FacetController extends Controller
 
     public function blogAll(): void
     {
-        $this->callIndex('all', 'blog');
+        $this->callIndex('all', 'blogs');
     }
 
     public function topicAll(): void
     {
-        $this->callIndex('all', 'topic');
+        $this->callIndex('all', 'topics');
     }
 
     public function blogNew(): void
     {
-        $this->callIndex('new', 'blog');
+        $this->callIndex('new', 'blogs');
     }
 
     public function topicNew(): void
     {
-        $this->callIndex('new', 'topic');
+        $this->callIndex('new', 'topics');
     }
 
     public function blogMy(): void
     {
-        $this->callIndex('my', 'blog');
+        $this->callIndex('my', 'blogs');
     }
 
     public function  topicMy(): void
     {
-        $this->callIndex('my', 'topic');
+        $this->callIndex('my', 'topics');
     }
 
     public function callIndex($sheet, $type)
@@ -49,11 +49,11 @@ class FacetController extends Controller
 
         $m = [
             'og'    => true,
-            'url'   => url($type . 's.' . $sheet),
+            'url'   => url($type . '.' . $sheet),
         ];
 
-        $title = __('meta.' . $sheet . '_' . $type . 's');
-        $desc = __('meta.' . $sheet . '_' . $type . 's_desc');
+        $title = __('meta.' . $sheet . '_' . $type);
+        $desc = __('meta.' . $sheet . '_' . $type . '_desc');
 
         render(
             '/facets/all',

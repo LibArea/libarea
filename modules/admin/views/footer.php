@@ -5,9 +5,9 @@
   </div>
 </footer>
 
-<script src="/assets/js/common.js"></script>
-<script src="/assets/js/app.js"></script>
-<script src="/assets/js/admin.js"></script>
+<script src="/assets/js/common.js?<?= config('general', 'version'); ?>"></script>
+<script src="/assets/js/app.js?<?= config('general', 'version'); ?>"></script>
+<script src="/assets/js/admin.js?<?= config('general', 'version'); ?>"></script>
 
 <script nonce="<?= config('main', 'nonce'); ?>">
   <?= Msg::get(); ?>

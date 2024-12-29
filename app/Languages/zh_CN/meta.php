@@ -52,14 +52,12 @@ return [
     'my_topics_info'            => '我订阅的主题',
     'my_topics_desc'            => '我阅读或创建的主题',
 
-    'comments.all_info'         => '所有评论...',
-    'comments.deleted_info'     => '已删除评论...',
-    'answers.all_info'          => '所有回复...',
-    'answers.deleted_info'      => '已删除回复...',
+    'all_comments'      		=> '所有评论',
+    'all_comments_info'         => '所有评论...',
+    'all_comments_desc'			=> '所有评论(每条回复)按社区优先顺序排列',
+    'deleted_comments_info'     => '已删除评论...',
 
-    'comments_desc'     => '所有评论(每条回复)按社区优先顺序排列',
-    'domain_desc'       => '按领域对社区中的帖子进行分组',
-    'all_comments'      => '所有评论',
+    'domain_desc'       		=> '按领域对社区中的帖子进行分组',
 
     'feed_facet_desc'           => '一般胶带。 ',
     'feed_facet_posts_desc'     => '发布提要。 ',

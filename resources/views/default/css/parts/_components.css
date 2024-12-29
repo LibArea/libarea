@@ -41,7 +41,7 @@ h5 {
   font-size: .72rem;
   color: #fff;
   background-color: var(--red);
-  padding: 1px 6px;
+  padding: 0 7px;
   border-radius: 50%;
   position: absolute;
   top: -7px;

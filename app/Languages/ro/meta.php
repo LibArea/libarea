@@ -52,14 +52,12 @@ return [
     'my_topics_info'            => 'Subiecte la care sunt abonat',
     'my_topics_desc'            => 'Subiecte pe care le-am citit sau creat',
 
-    'comments_all_info'         => 'Toate comentariile...',
-    'comments_deleted_info'     => 'Comentarii eliminate...',
-    'answers_all_info'          => 'Toate răspunsurile...',
-    'answers_deleted_info'      => 'Răspunsuri șterse...',
+    'all_comments'      		=> 'Toate comentariile',
+    'all_comments_info'         => 'Toate comentariile...',
+    'all_comments_desc'     	=> 'Toate comentariile (pe răspunsuri) în ordinea priorității în comunitate',
+    'deleted_comments_info'     => 'Comentarii eliminate...',
 
-    'comments_desc'     => 'Toate comentariile (pe răspunsuri) în ordinea priorității în comunitate',
-    'domain_desc'       => 'Gruparea postărilor din comunitate după domeniu',
-    'all_comments'      => 'Toate comentariile',
+    'domain_desc'       		=> 'Gruparea postărilor din comunitate după domeniu',
 
     'feed_facet_desc'           => 'Bandă generală. ',
     'feed_facet_posts_desc'     => 'Postați feedul. ',

@@ -4,13 +4,18 @@
  * Выпадающее меню и навигация
  */
 
-.menu__left {
-  width: 210px;
-  padding-right: 20px;
-  margin-right: 20px;
+.nav-sidebar {
+  height: calc(100dvh - 190px);
+  align-self: start;
+  overflow-y: auto;
+  position: sticky;
+  top: 72px;
+  z-index: 98;
+  width: 225px;
+  padding-right: 30px;
 }
 
-.menuno .menu__left {
+.menuno .nav-sidebar {
   display: none;
 }
 

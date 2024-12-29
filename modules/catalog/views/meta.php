@@ -28,7 +28,7 @@ $lang = Translate::getLang();
   <link rel="stylesheet" href="/assets/css/style.css?<?= config('general', 'version'); ?>" type="text/css">
   <link rel="stylesheet" href="/assets/css/catalog.css?<?= config('general', 'version'); ?>" type="text/css">
   <?php if ($lang == 'ar') : ?>
-    <link rel="stylesheet" href="/assets/css/rtl.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/rtl.css?<?= config('general', 'version'); ?>" type="text/css">
   <?php endif; ?>
-  <script src="/assets/js/la.js"></script>
+  <script src="/assets/js/la.js?<?= config('general', 'version'); ?>"></script>
 </head>

@@ -195,7 +195,7 @@ triggerElements.forEach(triggerElement => {
 
 // Left drop-down general menu (navigation)
 const menuButton = document.querySelector('.menu__button');
-const leftMenu = document.querySelector('.menu__left');
+const leftMenu = document.querySelector('.nav-sidebar');
 
 if (menuButton) {
   menuButton.addEventListener('click', () => {

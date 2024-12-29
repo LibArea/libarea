@@ -59,6 +59,8 @@ class FacetModel extends Model
 
     public static function sorts(string $sort, string $type)
     {
+		$type = $type === 'blogs' ? 'blog' : 'topic';
+		
         switch ($sort) {
             case 'my':
                 $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " AND signed_user_id = " .  self::container()->user()->id() . " ORDER BY facet_count DESC";

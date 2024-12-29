@@ -32,6 +32,28 @@ body {
   margin: 0;
 }
 
+/* W3C standard, сейчас только для Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--form-border-color) var(--bg-color);
+}
+
+/* для Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--form-border-color);
+  border-radius: 5px;
+  border: 3px solid var(--bg-color);
+}
+
 a {
   color: var(--link-color);
   cursor: pointer;
@@ -408,7 +430,7 @@ li.br-li-bottom-no:last-child {
 }
 
 .gap-min {
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .gap-max {

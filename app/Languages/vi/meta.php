@@ -52,14 +52,12 @@ return [
     'my_topics_info'            => 'Chủ đề tôi đã đăng ký',
     'my_topics_desc'            => 'Chủ đề tôi đã đọc hoặc tạo',
 
-    'comments_all_info'         => 'Tất cả bình luận...',
-    'comments_deleted_info'     => 'Bình luận đã xóa...',
-    'answers_all_info'          => 'Tất cả câu trả lời...',
-    'answers_deleted_info'      => 'Phản hồi đã bị xóa...',
+    'all_comments'      		=> 'Tất cả lời bình',
+    'all_comments_info'         => 'Tất cả bình luận...',
+    'all_comments_desc'     	=> 'Tất cả lời bình (theo trả lời) theo mức độ ưu tiên',
+    'deleted_comments_info'     => 'Bình luận đã xóa...',
     
-    'comments_desc'     => 'Tất cả lời bình (theo trả lời) theo mức độ ưu tiên',
-    'domain_desc'       => 'Bài đăng được nhóm theo tên miền',
-    'all_comments'      => 'Tất cả lời bình',
+    'domain_desc'       		=> 'Bài đăng được nhóm theo tên miền',
     
     'feed_facet_desc'           => 'Nguồn tin chung. ',
     'feed_facet_posts_desc'     => 'Nguồn tin bài đăng. ',

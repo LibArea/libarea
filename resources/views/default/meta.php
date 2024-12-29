@@ -23,6 +23,6 @@
   <?php if ($lang == 'ar') : ?>
     <link rel="stylesheet" href="/assets/css/rtl.css" type="text/css">
   <?php endif; ?>
-  <script src="/assets/js/la.js"></script>
-  <script src="/assets/js/prism/prism.js"></script>
+  <script src="/assets/js/la.js?<?= config('general', 'version'); ?>"></script>
+  <script src="/assets/js/prism/prism.js?<?= config('general', 'version'); ?>"></script>
 </head>

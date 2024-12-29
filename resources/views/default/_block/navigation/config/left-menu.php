@@ -11,22 +11,22 @@
 				'url'   => url('topics.all'),
 				'title' => 'app.topics',
 				'icon'  => 'hash',
-				'id'    => 'topic',
+				'id'    => 'topics',
 			], [
 				'url'   => url('blogs.all'),
 				'title' => 'app.blogs',
 				'icon'  => 'book',
-				'id'    => 'blog',
+				'id'    => 'blogs',
 			], [
 				'url'   => url('users.all'),
 				'title' => 'app.users',
 				'icon'  => 'users',
-				'id'    => 'users',
+				'id'    => 'all_users',
 			], [
 				'url'   => url('comments'),
 				'title' => 'app.comments',
 				'icon'  => 'comments',
-				'id'    => 'comments',
+				'id'    => 'all_comments',
 			],
 
 			/* Вы можете закомментировать эту секцию */

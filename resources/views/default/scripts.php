@@ -1,13 +1,13 @@
-<script src="/assets/js/common.js"></script>
+<script src="/assets/js/common.js?<?= config('general', 'version'); ?>"></script>
 <script src="/assets/js/medium-zoom.js"></script>
  
 <?php if ($container->user()->active()) : ?>
-  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/app.js?<?= config('general', 'version'); ?>"></script>
   <?= insert('/device-id'); ?>
 <?php endif; ?>
 
 <?php if ($container->user()->admin()) : ?>
-  <script src="/assets/js/admin.js"></script>
+  <script src="/assets/js/admin.js?<?= config('general', 'version'); ?>"></script>
 <?php endif; ?>
 
 <script nonce="<?= config('main', 'nonce'); ?>">

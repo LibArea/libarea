@@ -48,7 +48,7 @@ class UserController extends Controller
                 'meta'  => Meta::get(__('meta.' . $sheet . '_users'), __('meta.' . $sheet . '_users_desc'), $m),
                 'data'  => [
                     'sheet'         => $sheet,
-                    'type'          => 'users',
+                    'type'          => 'all_users',
                     'pagesCount'    => ceil($usersCount / $this->limit),
                     'pNum'          => Html::pageNumber(),
                     'users'         => $users

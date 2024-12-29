@@ -52,14 +52,12 @@ return [
     'my_topics_info'            => 'المواضيع التي اشترك بها',
     'my_topics_desc'            => 'المواضيع التي اَقرءها او قمت بأنشائها',
 
-    'comments_all_info'         => 'كل التعليقات...',
-    'comments_deleted_info'     => 'ازالة التعلقيات...',
-    'answers_all_info'          => 'كل الاجابات...',
-    'answers_deleted_info'      => 'الردود المحذوفة...',
-
-    'comments_desc'             => 'كل التعليقات (لكل ردود) مرتبة حسب الأولوية في المجتمع',
-    'domain_desc'               => 'تجميع المشاركات في المجتمع حسب النطاق',
     'all_comments'              => 'كل التعليقات',
+    'all_comments_info'         => 'كل التعليقات...',
+    'all_comments_desc'         => 'كل التعليقات (لكل ردود) مرتبة حسب الأولوية في المجتمع',
+    'deleted_comments_info'     => 'ازالة التعلقيات...',
+
+    'domain_desc'               => 'تجميع المشاركات في المجتمع حسب النطاق',
 
     'feed_facet_desc'           => 'التدفق العام ',
     'feed_facet_posts_desc'     => 'تدفق النشور',

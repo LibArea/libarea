@@ -1,24 +1,26 @@
 <?= insertTemplate('header', ['meta' => $meta]); ?>
 
-<div class="menu__left">
-  <ul class="menu">
+<div class="nav-sidebar">
+  <div class="menu__left">
+    <ul class="menu">
 
-    <?php foreach (config('main', 'menu') as $key => $item) :
-      $css = empty($item['css']) ? false : $item['css'];
-      $isActive = $item['id'] == $data['type'] ? 'active' : false;
-      $class = ($css || $isActive) ? ' class="' . $isActive . ' ' .  $css . '"'   : ''; ?>
+      <?php foreach (config('main', 'menu') as $key => $item) :
+        $css = empty($item['css']) ? false : $item['css'];
+        $isActive = $item['id'] == $data['type'] ? 'active' : false;
+        $class = ($css || $isActive) ? ' class="' . $isActive . ' ' .  $css . '"'   : ''; ?>
 
-      <li<?= $class; ?>>
-        <a href="<?= url($item['url']); ?>">
-          <?php if (!empty($item['icon'])) : ?><svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#<?= $item['icon']; ?>"></use>
-            </svg><?php endif; ?>
-          <?= __($item['title']); ?>
-        </a>
-        </li>
-      <?php endforeach; ?>
+        <li<?= $class; ?>>
+          <a href="<?= url($item['url']); ?>">
+            <?php if (!empty($item['icon'])) : ?><svg class="icon">
+                <use xlink:href="/assets/svg/icons.svg#<?= $item['icon']; ?>"></use>
+              </svg><?php endif; ?>
+            <?= __($item['title']); ?>
+          </a>
+          </li>
+        <?php endforeach; ?>
 
-  </ul>
+    </ul>
+  </div>
 </div>
 
 <main class="indent-body">
@@ -35,7 +37,6 @@
       ]);
       ?>
     </div>
-
 
     <ul class="nav">
       <?php foreach ($menus as $menu) : ?>

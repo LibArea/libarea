@@ -23,6 +23,7 @@ main {
 @media (max-width: 1050px) {
 
   .menu__left,
+  .nav-sidebar,
   #togglemenu {
     display: none;
   }
@@ -58,22 +59,25 @@ main {
     overflow-x: hidden;
     position: absolute;
     padding-right: 0;
+	scrollbar-width: thin;
   }
 
-  .menu__left.menu__active,
-  .menu__left.menu-none.menu__active {
+  .nav-sidebar.menu__active,
+  .nav-sidebar.menu__active .menu__left,
+  .nav-sidebar.menu__active .menu__left.menu-none {
     opacity: 1;
     visibility: visible;
     transition: 0.25s;
     position: fixed;
     display: block;
+	padding-right: 20px;
   }
 
-  .menu__left.menu__active ul.top-sm {
+  .menu__active .menu__left ul.top-sm {
     top: 0;
   }
 
-  .menu__left.menu__active .menu li {
+  .nav-sidebar.menu__active .menu__left .menu li {
     background-color: var(--white);
     padding-left: 10px;
   }

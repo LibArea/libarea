@@ -59,7 +59,7 @@ endif;
     <?php endif; ?>
 
     <div class="flex">
-      <h1 class="mb-block mb-text-xl m15 flex flex-auto">
+      <h1 class="mb-block mb-text-xl m15 gap-min flex flex-auto">
         <?= $profile['login']; ?>
         <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
 
@@ -67,7 +67,7 @@ endif;
             <svg class="icon red">
               <use xlink:href="/assets/svg/icons.svg#heart"></use>
             </svg>
-            <sup class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></sup>
+            <span class="text-sm gray-600 inline"><?= Html::formatToHuman($profile['up_count']); ?></span>
           <?php endif; ?>
       </h1>
 
