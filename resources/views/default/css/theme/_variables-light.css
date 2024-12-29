@@ -7,7 +7,7 @@
 :root {
   --font-family: "Roboto", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   --line-height: 1.5rem;
-  --font-size: 1rem;
+  --font-size: 1.063rem;
 
   /* Default (light) theme */
   --bg-color: #f3f6f7;

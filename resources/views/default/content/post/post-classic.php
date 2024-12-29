@@ -66,7 +66,7 @@
           <?= Html::votes($post, 'post'); ?>
 
           <a class="gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
-            <span class="nickname<?php if (Html::loginColor($post['created_at'])) : ?> green<?php endif; ?>">
+            <span class="nickname<?php if (Html::loginColor($post['created_at'])) : ?> new<?php endif; ?>">
               <?= $post['login']; ?>
             </span>
           </a>

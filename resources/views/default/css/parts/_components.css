@@ -69,15 +69,6 @@ h5 {
   width: 121px;
   height: 121px;
 }
-
-.menu .icon,
-.dropdown ul .icon {
-  color: var(--gray);
-}
-
-.menu .active .icon {
-  color: var(--blue);
-}
 /* end */
 
 /*
@@ -218,7 +209,7 @@ h5 {
 }
 
 .box-logo {
-  width: 242px;
+  width: 252px;
   align-items: center;
   display: flex;
   gap: 0.5rem;
@@ -296,7 +287,11 @@ details[open]>summary {
 .title {
   margin: 0;
   font-weight: 500;
-  font-size: 1.3125rem;
+  font-size: 1.375rem;
+}
+
+.title sup {
+  font-size: 1rem;
 }
 
 .txt-closed {

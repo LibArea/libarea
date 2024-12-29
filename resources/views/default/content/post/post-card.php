@@ -16,7 +16,7 @@
       <div class="flex items-center gap-min text-sm mb5">
         <a class="gray-600 flex gap-min items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm', 'max'); ?>
-          <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> green<?php endif; ?>">
+          <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> new<?php endif; ?>">
             <?= $post['login']; ?>
           </span>
         </a>

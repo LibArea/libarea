@@ -11,7 +11,7 @@
   position: sticky;
   top: 72px;
   z-index: 98;
-  width: 225px;
+  width: 245px;
   padding-right: 30px;
 }
 
@@ -83,6 +83,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  min-width: 0;
   gap: .7rem;
 }
 
@@ -92,8 +93,14 @@
   color: var(--link-color-hover);
 }
 
+.nav-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .menu__left:not(.menu__active) li {
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 }
 
 .menu li.active,
@@ -117,6 +124,19 @@
 
 .breadcrumbs li:not(:last-child):after {
   content: " / ";
+}
+
+.menu .icon,
+.dropdown ul .icon {
+  color: var(--gray);
+}
+
+.menu .active .icon {
+  color: var(--blue);
+}
+
+.menu .icon.gray-600 {
+  color: var(--gray-600);
 }
 
 /* Navigation */

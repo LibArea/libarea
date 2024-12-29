@@ -46,19 +46,20 @@ if ($container->user()->id() > 0) {
                 $url = url('blog', ['slug' => $topic['facet_slug']]);
             }
  
-            echo '<li class="mt15 text-sm flex gap items-center justify-between">';
+            echo '<li class="mt15 flex gap items-center justify-between">';
             echo '<a class="flex gap-min items-center" href="'.$url.'">';
 			echo Img::image($topic['facet_img'], $topic['facet_title'], 'img-sm', 'logo', 'max');
-            echo '<span>' . $topic['facet_title'].' '.$blog. '</span>';
+            echo '<div class="nav-overflow">' . $topic['facet_title'].' '.$blog. '</div>';
             echo '</a></li>';
         }
-
-		if ($i < 1) {
-			echo '<div class="mt15 ml10">';
-			echo '<a class="red text-sm" href="'.url('setting.preferences').'">';
-			echo '<span class="red">+</span> '.__('app.add').'</a>';
-			echo '<span class="text-sm lowercase ml20 gray-600">'.__('app.preferences').'...</span>';
-			echo '</div>';
-		}
     }  
+	
+	if (!empty($i) < 1 || !$topics_user) {
+		echo '<div class="mt15 ml10">';
+		echo '<a class="red text-sm" href="'.url('setting.preferences').'">';
+		echo '<span class="red">+</span> '.__('app.add').'</a>';
+		echo '<span class="text-sm lowercase ml20 gray-600">'.__('app.preferences').'...</span>';
+		echo '</div>';
+	}
+
 }

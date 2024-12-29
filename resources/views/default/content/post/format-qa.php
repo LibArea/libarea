@@ -44,8 +44,8 @@
                       <?php endif; ?>
                     </div>
                     <div class="gray-600 flex gap lowercase mb5">
-                      <a class="gray-600<?php if (Html::loginColor($node['created_at'] ?? false)) : ?> green<?php endif; ?>" href="<?= url('profile', ['login' => $node['login']]); ?>">
-                        <span class="nickname"><?= $node['login']; ?></span>
+                      <a class="gray-600" href="<?= url('profile', ['login' => $node['login']]); ?>">
+                        <span class="nickname<?php if (Html::loginColor($node['created_at'])) : ?> new<?php endif; ?>"><?= $node['login']; ?></span>
                       </a>
                       <span class="mb-none"><?= langDate($node['comment_date']); ?></span>
                       <?php if ($node['comment_published'] == 0 && $container->user()->admin()) : ?>

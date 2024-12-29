@@ -36,7 +36,7 @@ $topic = $data['facet'];
               <li class="mb10">
                 <a class="gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">
                   <?= Img::avatar($row['avatar'], $row['login'], 'img-sm mr5', 'max'); ?>
-                  <span class="nickname<?php if (Html::loginColor($row['created_at'] ?? false)) : ?> green<?php endif; ?>">
+                  <span class="nickname<?php if (Html::loginColor($row['created_at'] ?? false)) : ?> new<?php endif; ?>">
                     <?= $row['login']; ?>
                   </span>
                   (<?= Html::formatToHuman($row['hits_count']); ?>)

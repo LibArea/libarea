@@ -19,7 +19,7 @@
             <a class="flex items-center hidden gray-600" href="<?= url('profile', ['login' => $row['login']]); ?>">
               <?= Img::avatar($row['avatar'], $row['login'], 'img-base', 'max'); ?>
               <div class="ml10">
-                <div class="gray-600<?php if (Html::loginColor($row['created_at'] ?? false)) : ?> green<?php endif; ?>">
+                <div class="gray-600<?php if (Html::loginColor($row['created_at'] ?? false)) : ?> new<?php endif; ?>">
                   <span class="nickname"><?= $row['login']; ?></span>
                 </div>
                 <?php if ($row['about']) : ?>

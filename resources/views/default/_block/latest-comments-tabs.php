@@ -7,7 +7,7 @@
           <div class="gray-600 flex items-center gap-min text-sm">
             <a class="flex gray-600 gap-min items-center" title="<?= $comment['login']; ?>" href="<?= url('profile', ['login' => $comment['login']]); ?>">
               <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm', 'small'); ?>
-              <span class="nickname"><?= $comment['login']; ?></span>
+              <span class="nickname<?php if (Html::loginColor($comment['created_at'])) : ?> new<?php endif; ?>"><?= $comment['login']; ?></span>
             </a>
             <span class="lowercase"><?= langDate($comment['comment_date']); ?></span>
           </div>

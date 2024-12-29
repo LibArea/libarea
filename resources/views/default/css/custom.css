@@ -4,17 +4,6 @@
  * Дополнительные стили
  */
 
-/* пример (example)
-
-@font-face {
-  font-family: Roboto;
-  src: url(/assets/fonts/Roboto.ttf);
-}
-
-body {
-  font-family: Roboto, -apple-system,BlinkMacSystemFont,Arial,sans-serif;
-} */
-
 @font-face {
   font-family: Roboto;
   src: url(/assets/fonts/Roboto-Regular.ttf);
@@ -22,10 +11,15 @@ body {
 
 .nickname {
   display: inline-block;
+  color: var(--black);
 }
 
 .nickname::first-letter {
   color: red;
+}
+
+.nickname.new::first-letter {
+  color: var(--green);
 }
 
 .indent-body {

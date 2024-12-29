@@ -31,7 +31,7 @@ $blog = $data['blog'][0] ?? null;
       <div class="text-sm flex gray-600 gap">
         <a class="gray-600" title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'small'); ?>
-          <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> green<?php endif; ?>"><?= $post['login']; ?></span>
+          <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> new<?php endif; ?>"><?= $post['login']; ?></span>
         </a>
 
         <span class="lowercase">

@@ -447,7 +447,8 @@ class CommentModel extends Model
                     post_slug,
                     post_hidden,
                     login,
-                    avatar
+                    avatar,
+					created_at
                         FROM comments 
                         LEFT JOIN users ON id = comment_user_id
                         RIGHT JOIN posts ON post_id = comment_post_id

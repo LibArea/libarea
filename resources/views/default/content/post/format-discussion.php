@@ -50,7 +50,7 @@
                     <div class="flex text-sm gap-min">
                       <a class="gray-600" href="<?= url('profile', ['login' => $node['login']]); ?>">
                         <?= Img::avatar($node['avatar'], $node['login'], 'img-sm mr5', 'small'); ?>
-                        <span class="nickname<?php if (Html::loginColor($node['created_at'])) : ?> green<?php endif; ?>">
+                        <span class="nickname<?php if (Html::loginColor($node['created_at'])) : ?> new<?php endif; ?>">
                           <?= $node['login']; ?>
                         </span>
                       </a>
