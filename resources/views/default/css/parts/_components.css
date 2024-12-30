@@ -302,6 +302,8 @@ details[open]>summary {
   color: var(--gray-600);
 }
 
+article,
+.indent-body,
 .box {
   border-radius: 5px;
   padding: 15px;

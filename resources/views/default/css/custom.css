@@ -22,11 +22,6 @@
   color: var(--green);
 }
 
-.indent-body {
-  padding: 15px;
-  background-color: var(--white);
-}
-
 .active {
   color: #eab308;
 }

@@ -9,10 +9,10 @@
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
 
-	<?php if ($container->access()->hiddenPost($post)) continue; ?>
-	<?php if ($container->access()->auditСontent('post', $post)) continue; ?>
+    <?php if ($container->access()->hiddenPost($post)) continue; ?>
+    <?php if ($container->access()->auditСontent('post', $post)) continue; ?>
 
-    <div class="box">
+    <article>
       <div class="flex items-center gap-min text-sm mb5">
         <a class="gray-600 flex gap-min items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm', 'max'); ?>
@@ -98,7 +98,7 @@
           <?= Html::favorite($post['post_id'], 'post', $post['tid']); ?>
         </div>
       </div>
-    </div>
+    </article>
   <?php endforeach; ?>
 <?php else : ?>
   <?php if ($container->user()->active()) : ?>

@@ -9,11 +9,10 @@
 
     <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
 
-	<?php if ($container->access()->hiddenPost($post)) continue; ?>
-	<?php if ($container->access()->auditСontent('post', $post)) continue; ?>
+    <?php if ($container->access()->hiddenPost($post)) continue; ?>
+    <?php if ($container->access()->auditСontent('post', $post)) continue; ?>
 
-    <div class="box article_<?= $post['post_id']; ?>">
-
+    <article>
       <div class="flex justify-between">
         <div class="mb15">
           <a class="black" href="<?= $post_url; ?>">
@@ -92,8 +91,7 @@
           <?= Html::favorite($post['post_id'], 'post', $post['tid']); ?>
         </div>
       </div>
-
-    </div>
+    </article>
   <?php endforeach; ?>
 <?php else : ?>
   <?php if ($container->user()->active()) : ?>

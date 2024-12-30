@@ -5,7 +5,7 @@ $blog = $data['blog'][0] ?? null;
 ?>
 
 <main>
-  <article class="indent-body<?php if ($post['post_is_deleted'] == 1) : ?> bg-red-200<?php endif; ?>">
+  <article<?php if ($post['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>
     <?php if ($post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
       <?php if (!empty($data['united'])) : ?>
         <div class="box bg-yellow mb15 gray-600">
@@ -172,22 +172,22 @@ $blog = $data['blog'][0] ?? null;
         <?= __('app.content_deleted', ['name' => __('app.post')]); ?>...
       </div>
     <?php endif; ?>
-  </article>
+    </article>
 
 
 
-  <?php if (empty($is_comments)) : ?>
-    <div id="comment"></div>
-    <?php if ($post['post_draft'] == 0) :
-      $format = ($post['post_feature'] == 0) ? 'discussion' : 'qa';
-      insert('/content/post/format-' . $format, ['data' => $data, 'post' => $post]);
-    else :
-      echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);
-    endif; ?>
+    <?php if (empty($is_comments)) : ?>
+      <div id="comment"></div>
+      <?php if ($post['post_draft'] == 0) :
+        $format = ($post['post_feature'] == 0) ? 'discussion' : 'qa';
+        insert('/content/post/format-' . $format, ['data' => $data, 'post' => $post]);
+      else :
+        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);
+      endif; ?>
 
-  <?php else : ?>
-    <?php insert('/_block/no-content', ['type' => 'small', 'text' => __('app.topic_comments_disabled'), 'icon' => 'lock']); ?>
-  <?php endif; ?>
+    <?php else : ?>
+      <?php insert('/_block/no-content', ['type' => 'small', 'text' => __('app.topic_comments_disabled'), 'icon' => 'lock']); ?>
+    <?php endif; ?>
 </main>
 
 <aside>
