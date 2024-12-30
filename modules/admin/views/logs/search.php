@@ -27,8 +27,8 @@
     <?php foreach ($data['logs'] as $log) : ?>
       <tr>
         <td class="gray-600">
-          <a target="_blank" rel="noreferrer" href="/search/go?q=<?= $log['request']; ?>&type=<?= $log['action_type']; ?>">
-            <?= $log['request']; ?>
+          <a target="_blank" rel="noreferrer" href="/search/go?q=<?= htmlEncode($log['request']); ?>&type=<?= $log['action_type']; ?>">
+            <?= htmlEncode($log['request']); ?>
           </a>
         </td>
         <td class="gray-600"> <?= __('admin.' . $log['action_type']); ?> | <?= langDate($log['add_date']); ?></td>

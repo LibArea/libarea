@@ -18,7 +18,7 @@ $q = $data['q'];
 
           <div class="box-search">
             <form method="get" action="<?= url('search.go'); ?>">
-              <input type="text" name="q" value="<?= $q; ?>" placeholder="<?= __('search.find'); ?>" class="search">
+              <input type="text" name="q" value="<?= htmlEncode($q); ?>" placeholder="<?= __('search.find'); ?>" class="search">
               <input name="cat" value="<?= $uri; ?>" type="hidden">
               <?= $container->csrf()->field(); ?>
             </form>
@@ -34,13 +34,13 @@ $q = $data['q'];
   <div id="contentWrapper" class="wrap mb20">
     <ul class="nav inline ml10">
       <li<?php if ($uri == 'post') : ?> class="active" <?php endif; ?>>
-        <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=post"><?= __('search.posts'); ?></a>
+        <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=post"><?= __('search.posts'); ?></a>
       </li>
       <li<?php if ($uri == 'comment') : ?> class="active" <?php endif; ?>>
-        <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=comment"><?= __('search.comments'); ?></a>
+        <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=comment"><?= __('search.comments'); ?></a>
       </li>
       <li<?php if ($uri == 'website') : ?> class="active" <?php endif; ?>>
-        <a href="<?= url('search.go'); ?>?q=<?= $q; ?>&cat=website"><?= __('search.websites'); ?></a>
+        <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=website"><?= __('search.websites'); ?></a>
       </li>
     </ul>
   </div>

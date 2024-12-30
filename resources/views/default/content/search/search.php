@@ -59,7 +59,7 @@ $sw = $sw ?? '?';
         </div>
       <?php endforeach; ?>
 
-      <?php $url = 'go?q=' . $data['q'] . '&cat=' . $data['type'] . '/'; ?>
+      <?php $url = 'go?q=' . htmlEncode($data['q']) . '&cat=' . $data['type'] . '/'; ?>
 
       <?= Html::pagination($data['pNum'], $data['pagesCount'], null, $url, '&'); ?>
 

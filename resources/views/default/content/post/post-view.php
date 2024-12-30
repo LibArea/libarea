@@ -24,7 +24,7 @@ $blog = $data['blog'][0] ?? null;
         </div>
       <?php endif; ?>
 
-      <h1 class="m0"><?= $post['post_title']; ?>
+      <h1 class="m0 mb5"><?= $post['post_title']; ?>
         <?= insert('/content/post/post-title', ['post' => $post]); ?>
       </h1>
 
