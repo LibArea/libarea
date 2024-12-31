@@ -1,7 +1,7 @@
 <?php $topic = $data['facet']; ?>
 <main>
   <?= insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
-  <div class="indent-body">
+  <div class="box">
     <?php if (!empty($data['writers'])) : ?>
       <div class="flex gap items-center">
         <svg class="icon red">

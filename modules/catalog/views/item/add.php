@@ -3,7 +3,7 @@
 <?= insert('/_block/add-js-css'); ?>
 <div id="contentWrapper" class="wrap">
   <main>
-    <div class="indent-body">
+    <div class="box">
       <?= insert('/_block/navigation/breadcrumbs', [
         'list' => [
           [

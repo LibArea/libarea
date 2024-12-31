@@ -17,7 +17,7 @@ if (header) {
 let token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
 // Activate form event listeners
-document.querySelectorAll(".activ-form").forEach(element => {
+queryAll(".activ-form").forEach(element => {
   element.addEventListener("click", function () {
     let reply = document.querySelector('#el_addentry' + element.dataset.id);
     fetch("/activatingform/" + element.dataset.type, {
@@ -29,7 +29,7 @@ document.querySelectorAll(".activ-form").forEach(element => {
       .then(text => {
         reply.classList.add("block");
         reply.innerHTML = text;
-        document.querySelectorAll("#cancel").forEach(cancelButton => {
+        queryAll("#cancel").forEach(cancelButton => {
           cancelButton.addEventListener("click", function () {
             reply.classList.remove("block");
           });
@@ -38,9 +38,8 @@ document.querySelectorAll(".activ-form").forEach(element => {
   });
 });
 
-
 // Activate form event listeners
-document.querySelectorAll(".add-notif").forEach(element => {
+queryAll(".add-notif").forEach(element => {
   element.addEventListener("click", function () {
     let notif = document.querySelector('#el_notif');
     fetch("/activatingnatifpopup", {
@@ -52,7 +51,7 @@ document.querySelectorAll(".add-notif").forEach(element => {
       .then(text => {
         notif.classList.add("block");
         notif.innerHTML = text;
-        document.querySelectorAll("#cancel").forEach(cancelButton => {
+        queryAll("#cancel").forEach(cancelButton => {
           cancelButton.addEventListener("click", function () {
             notif.classList.remove("block");
           });
@@ -122,6 +121,14 @@ function fetchSearch() {
       }
     });
 }
+
+const search = document.querySelector('.box-search')
+const btn = document.querySelector('.button-search')
+const input = document.querySelector('.search')
+btn.addEventListener('click', () => {
+  search.classList.toggle('active')
+  input.focus()
+}) 
 
 // Function to render links based on type
 function renderLink(baseURL, identifier, title) {

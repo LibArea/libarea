@@ -1,5 +1,5 @@
 <main>
-  <div class="indent-body">
+  <div class="box">
     <div class="flex justify-between mb20">
       <ul class="nav">
         <li class="active"><?= __('app.polls'); ?></li>

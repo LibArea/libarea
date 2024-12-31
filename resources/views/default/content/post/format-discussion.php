@@ -1,5 +1,5 @@
 <?php if (!empty($data['comments'])) : ?>
-  <div class="indent-body">
+  <div class="box">
     <div class="flex justify-between mb20">
       <h2 class="lowercase mb15 text-2xl"><?= Html::numWord($post['post_comments_count'], __('app.num_answer'), true); ?></h2>
 

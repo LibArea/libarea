@@ -4,7 +4,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
 <main>
-  <div class="indent-body">
+  <div class="box">
     <div class="nav-bar">
       <ul class="nav">
         <?= insert(

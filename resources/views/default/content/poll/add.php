@@ -1,5 +1,5 @@
 <main>
-  <div class="indent-body">
+  <div class="box">
     <ul class="nav">
       <li><a href="<?= url('polls'); ?>"><?= __('app.all'); ?></a></li>
       <li class="active"><?= __('app.add_poll'); ?></li>

@@ -5,8 +5,7 @@ $domain = $data['domain']; ?>
 
 <div id="contentWrapper" class="wrap">
   <main>
-    <div class="indent-body">
-      <div class="indent-body max-w780">
+    <div class="box max-w780">
 
         <?= insert('/_block/navigation/breadcrumbs', [
           'list' => [
@@ -59,7 +58,6 @@ $domain = $data['domain']; ?>
           <input type="hidden" name="item_id" value="<?= $domain['item_id']; ?>">
           <?= Html::sumbit(__('web.edit')); ?>
         </form>
-      </div>
     </div>
   </main>
   <aside>

@@ -1,4 +1,4 @@
-<div class="indent-body">
+<div class="box">
 <h2 class="uppercase-box"><?= __('app.dialogues'); ?></h2>
 <?php if (!empty($dialogs)) : ?>
   <ul class="menu">

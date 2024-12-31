@@ -5,7 +5,7 @@
 
 <div class="mb-none">
   <?php if ($counts > 3) : ?>
-    <div class="blockquote-profile">
+    <div class="box blockquote-profile">
       <?php if ($profile['about'] == 'Riddle...') : ?>
         <?= __('app.riddle'); ?>...
       <?php else : ?>
@@ -14,7 +14,7 @@
     </div>
   <?php endif; ?>
 
-  <div class="mb20">
+  <div class="box">
     <div class="gray-600 mt5">
       <svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#calendar"></use>

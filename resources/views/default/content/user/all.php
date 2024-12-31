@@ -1,5 +1,5 @@
 <main class="w-100">
-  <div class="indent-body">
+  <div class="box">
     <div class="mb15">
       <h1 class="title"><?= __('meta.' . $data['sheet'] . '_users'); ?></h1>
       <span class="gray-600 text-xs">

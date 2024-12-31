@@ -1,5 +1,5 @@
 <main>
-  <div class="indent-body">
+  <div class="box">
     <h1 class="title"><?= __('app.authorization'); ?></h1>
 
     <form action="<?= url('authorization', method: 'post'); ?>" method="post">

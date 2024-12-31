@@ -1,6 +1,6 @@
 <main>
   <?= insert('/content/user/setting/nav'); ?>
-  <div class="indent-body">
+  <div class="box">
     <form class="max-w780" action="<?= url('setting.edit.profile', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/setting', ['data' => $data]); ?>

@@ -1,5 +1,5 @@
 <main>
-  <div class="indent-body">
+  <div class="box">
     <h1><?= __('app.password_recovery'); ?></h1>
     <form class="max-w300" action="<?= url('new.pass', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>

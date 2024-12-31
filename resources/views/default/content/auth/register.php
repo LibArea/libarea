@@ -1,5 +1,5 @@
 <main>
-  <div class="indent-body">
+  <div class="box">
     <h1 class="title"><?= __('app.' . $data['sheet']); ?></h1>
 
     <form class="max-w300 mb-max-w-100" action="<?= url('register.add', method: 'post'); ?>" id="registration" method="post">

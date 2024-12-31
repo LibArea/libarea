@@ -1,5 +1,5 @@
 <main>
-  <div class="indent-body">
+  <div class="box">
     <h2><?= __('app.invites'); ?></h2>
     <?php if ($container->access()->limitTl(2)) : ?>
       <form method="post" action="<?= url('add.invitation', method: 'post'); ?>">

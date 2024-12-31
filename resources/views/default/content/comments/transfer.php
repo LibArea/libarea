@@ -2,7 +2,7 @@
 
 <?php if ($container->user()->admin()) : ?>
 	<main>
-		<div class="indent-body">
+		<div class="box">
 			<a href="/"><?= __('app.home'); ?></a> / <span class="gray-600"><?= __('app.move_comment'); ?>:</span>
 
 			<h2 class="m0"><?= $data['post']['post_title']; ?></h2>

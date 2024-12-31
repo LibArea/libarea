@@ -3,7 +3,7 @@
 <?php $item = $data['item']; ?>
 <div id="contentWrapper" class="wrap">
   <main itemscope itemtype="https://schema.org/WebSite">
-    <div class="indent-body">
+    <div class="box">
       <a class="text-sm" href="<?= url('web'); ?>">
         << <?= __('app.catalog'); ?></a>
           <h1 itemprop="name" class="m0"><?= $item['item_title']; ?>

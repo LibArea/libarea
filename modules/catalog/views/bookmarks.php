@@ -2,7 +2,7 @@
 
 <div id="contentWrapper" class="wrap justify-between">
   <main>
-    <div class="indent-body">
+    <div class="box">
       <h1 class="m0 mb15">
         <?= __($data['sheet'] . '_view'); ?>
         <?php if ($data['count'] != 0) : ?><sup class="gray-600 text-sm"><?= $data['count']; ?></sup><?php endif; ?>

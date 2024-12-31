@@ -1,6 +1,6 @@
 <?= insert('/_block/add-js-css'); ?>
 <main>
-  <div class="indent-body">
+  <div class="box">
     <h2 class="title"><?= __('app.add_post'); ?></h2>
 
     <form class="max-w780" action="<?= url('add.post', ['type' => 'post'], method: 'post'); ?>" method="post" enctype="multipart/form-data">

@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<main class="indent-body">
+<main class="box">
   <?php if ($data['type'] != 'admin') : ?>
     <div class="mb15">
       <?= breadcrumb([

@@ -1,7 +1,7 @@
 <?= insert('/_block/add-js-css'); ?>
 
 <main>
-  <div class="indent-body">
+  <div class="box">
     <a href="/"><?= __('app.home'); ?></a> / <span class="gray-600"><?= __('app.edit_comment'); ?>:</span>
     <a class="mb5 block" href="<?= post_slug($data['post']['post_id'], $data['post']['post_slug']); ?>"><?= $data['post']['post_title']; ?></a>
 

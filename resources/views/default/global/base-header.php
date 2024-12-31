@@ -52,12 +52,23 @@ $post   = $data['post'] ?? false;
             </div>
           <?php endif; ?>
 
-          <div class="box-search mb-none">
+          <!--div class="box-search mb-none">
+            <form class="form" method="get" action="<?= url('search.go'); ?>">
+              <input data-id="topic" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
+            </form>
+            <div class="box-results none" id="search_items"></div>
+          </div-->
+		  
+ 
+		 
+   <div class="box-search relative">
             <form class="form" method="get" action="<?= url('search.go'); ?>">
               <input data-id="topic" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
             </form>
             <div class="box-results none" id="search_items"></div>
           </div>
+		 
+		  
         </div>
 
         <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?>

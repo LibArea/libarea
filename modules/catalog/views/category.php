@@ -84,7 +84,7 @@
 
 <div id="contentWrapper" class="wrap">
   <main>
-    <div class="indent-body">
+    <div class="box">
       <?= insertTemplate('/navigation/nav', ['data' => $data]); ?>
 
       <?php if (!empty($data['items'])) : ?>

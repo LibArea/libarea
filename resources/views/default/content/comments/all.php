@@ -1,5 +1,5 @@
 <main>
-  <div class="indent-body">
+  <div class="box">
     <div class="nav-bar">
       <ul class="nav">
         <?= insert('/_block/navigation/nav', [

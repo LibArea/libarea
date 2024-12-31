@@ -1,6 +1,6 @@
 <main>
   <?= insert('/content/user/setting/nav'); ?>
-  <div class="indent-body">
+  <div class="box">
     <form method="post" action="<?= url('setting.edit.avatar', method: 'post'); ?>" enctype="multipart/form-data">
       <?= $container->csrf()->field(); ?>
 

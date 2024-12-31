@@ -1,5 +1,5 @@
 <main>
-  <div class="indent-body">
+  <div class="box">
     <div class="mb15">
       <ul class="nav">
         <li class="active"><?= __('app.drafts'); ?></li>

@@ -2,7 +2,7 @@
   <?= insert('/content/messages/dialogue-column', ['dialogs' => $data['dialogs']]); ?>
 </div>
 <div class="w-70 mb-w-100">
-  <div class="indent-body">
+  <div class="box">
   <a class="gray" href="<?= url('messages'); ?>">
     < <?= __('app.all'); ?></a>
       <div class="gray-600"><?= $data['sheet']; ?></div>

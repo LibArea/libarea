@@ -23,8 +23,14 @@
           </div>
         </div>
 
+ <div class="flex gap-max items-center mb-mt5">
+    <div class="button-search ml20 mb-none">
+		<svg class="icon">
+		   <use xlink:href="/assets/svg/icons.svg#search"></use>
+		</svg>
+	</div>
+ 
         <?php if (!$container->user()->active()) : ?>
-          <div class="flex gap-max items-center mb-mt5">
             <div id="toggledark" class="gray-600">
               <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#sun"></use>
@@ -38,9 +44,7 @@
             <a class="btn btn-outline-primary" href="<?= url('login'); ?>">
               <?= __('app.sign_in'); ?>
             </a>
-          </div>
         <?php else : ?>
-          <div class="flex gap-max items-center mb-mt5">
 			<?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_item')) || ($user_count_site != false)) : ?>
 				<a class="blue" title="<?= __('web.add_website'); ?>" href="<?= $url; ?>">
 				  <svg class="icon icon-bold"><use xlink:href="/assets/svg/icons.svg#write"></use></svg>
@@ -68,8 +72,8 @@
                 <?= insert('/_block/navigation/config/user-menu'); ?>
               </div>
             </div>
-          </div>
         <?php endif; ?>
+		 </div>
       </div>
     </div>
   </header>

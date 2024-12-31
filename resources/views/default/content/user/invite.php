@@ -1,5 +1,5 @@
 <main>
-  <div class="indent-body">
+  <div class="box">
     <h1 class="title"><?= __('app.invite'); ?></h1>
     <form action="/invite" method="post">
       <?= $container->csrf()->field(); ?>

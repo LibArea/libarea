@@ -12,7 +12,7 @@ endif;
   }
 </style>
 
-<div class="relative">
+<div class="relative mb10">
   <?php if ($container->user()->admin()) : ?>
     <?= insert('/content/user/profile/deletion-statistics', ['count' => $data['delet_count']]); ?>
   <?php endif; ?>
@@ -26,7 +26,7 @@ endif;
   <?php else : ?>
     <div class="box-cover-img relative bg-profile"></div>
   <?php endif; ?>
-  <div class="profile-header-footer mt15">
+  <div class="profile-header-footer mt20">
 
     <?php if ($container->user()->active()) : ?>
       <div class="right m15">
@@ -97,8 +97,8 @@ endif;
   </div>
 </div>
 
-<div class="none mb-block ml15">
-  <div class="blockquote-profile">
+<div class="none mb-block box">
+  <div class="blockquote-profile box">
     <?php if ($profile['about'] == 'Riddle...') : ?>
       <?= __('app.riddle'); ?>...
     <?php else : ?>
@@ -106,7 +106,6 @@ endif;
     <?php endif; ?>
   </div>
 
-  <div class="mb20">
     <div class="gray-600 mt5">
       <svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#calendar"></use>
@@ -130,5 +129,4 @@ endif;
         </div>
       <?php endif; ?>
     <?php endforeach; ?>
-  </div>
 </div>

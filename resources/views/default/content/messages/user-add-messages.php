@@ -1,5 +1,5 @@
 <main>
-  <div class="indent-body">
+  <div class="box">
     <h1 class="title">
       <?= __('app.send_message'); ?> <?= $container->user()->login(); ?> / <?= $data['login']; ?>
       <a class="right text-sm" href="<?= url('messages'); ?>">

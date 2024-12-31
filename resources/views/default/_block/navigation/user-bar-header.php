@@ -1,5 +1,13 @@
+<div class="flex gap-max items-center">
+
+
+<div class="button-search ml20 mb-none">
+		<svg class="icon">
+		   <use xlink:href="/assets/svg/icons.svg#search"></use>
+		</svg>
+	</div>
+
 <?php if (!$container->user()->active()) : ?>
-  <div class="flex gap-max items-center">
 	<div id="toggledark" class="gray-600">
 	  <svg class="icon">
 		<use xlink:href="/assets/svg/icons.svg#sun"></use>
@@ -13,10 +21,7 @@
 	<a class="btn btn-outline-primary" href="<?= url('login'); ?>">
 	  <?= __('app.sign_in'); ?>
 	</a>
-  </div>
 <?php else : ?>
-  <div class="flex gap-max items-center">
-
 	<?= Html::addPost($facet_id ?? false); ?>
 
 	<a id="toggledark" class="gray-600">
@@ -43,5 +48,5 @@
 		<?= insert('/_block/navigation/config/user-menu'); ?>
 	  </div>
 	</div>
-  </div>
 <?php endif; ?>
+</div>
