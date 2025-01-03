@@ -18,11 +18,11 @@ $post   = $data['post'] ?? false;
 
         <div class="flex flex-auto">
           <div class="box-logo">
-            <svg id="togglemenu" class="icon pointer">
+            <svg id="togglemenu" class="icon large pointer">
               <use xlink:href="/assets/svg/icons.svg#menu"></use>
             </svg>
 
-            <svg class="icon menu__button none">
+            <svg class="icon large menu__button none">
               <use xlink:href="/assets/svg/icons.svg#menu"></use>
             </svg>
 
@@ -51,24 +51,13 @@ $post   = $data['post'] ?? false;
               <span class="gray-600 text-sm lowercase mb-none"> - <?= $facet['facet_short_description']; ?></span>
             </div>
           <?php endif; ?>
-
-          <!--div class="box-search mb-none">
-            <form class="form" method="get" action="<?= url('search.go'); ?>">
-              <input data-id="topic" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
-            </form>
-            <div class="box-results none" id="search_items"></div>
-          </div-->
-		  
- 
 		 
-   <div class="box-search relative">
+		  <div class="box-search relative">
             <form class="form" method="get" action="<?= url('search.go'); ?>">
               <input data-id="topic" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
             </form>
             <div class="box-results none" id="search_items"></div>
           </div>
-		 
-		  
         </div>
 
         <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?>

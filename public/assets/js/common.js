@@ -3,11 +3,11 @@ let token=document.querySelector("meta[name='csrf-token']").getAttribute("conten
 html+='</div>'}
 if(Object.keys(results).length!==0){let items=getById("search_items");items.classList.add("block");items.innerHTML=html}
 let menu=document.querySelector('.none.block');if(menu){document.onclick=function(event){if(event.target.className!='.none.block'){let items=getById("search_items");items.classList.remove("block")}}}})}
-const search=document.querySelector('.box-search')
-const btn=document.querySelector('.button-search')
-const input=document.querySelector('.search')
-btn.addEventListener('click',()=>{search.classList.toggle('active')
-input.focus()})
+let search=document.querySelector('.box-search')
+let btn=document.querySelector('.button-search')
+let input=document.querySelector('.search')
+if(btn){btn.addEventListener('click',()=>{search.classList.toggle('active')
+input.focus()})}
 function renderLink(baseURL,identifier,title){if(identifier){return'<a class="sky block text-sm mb15 mr10" href="'+baseURL+identifier+'">'+title+'</a>'}
 return''}
 let showPasswordButtons=queryAll('.showPassword');showPasswordButtons.forEach(button=>{button.addEventListener('click',togglePasswordVisibility)});function togglePasswordVisibility(){let passwordInput=getById('password');let icon=this.querySelector('svg');if(icon.classList.contains('sky')){icon.classList.remove('sky');passwordInput.type='password'}else{icon.classList.add('sky');passwordInput.type='text'}}

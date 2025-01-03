@@ -49,7 +49,7 @@ class Html
             $url_add = $url_add . '/' . $facet_id;
         }
 
-        return '<a title="' . __('app.add_post') . '" href="' . $url_add . '" class="blue"><svg class="icon icon-bold"><use xlink:href="/assets/svg/icons.svg#write"></use></svg></a>';
+        return '<a title="' . __('app.add_post') . '" href="' . $url_add . '" class="blue"><svg class="icon large icon-bold"><use xlink:href="/assets/svg/icons.svg#write"></use></svg></a>';
     }
 
     // Localization of dates and events....

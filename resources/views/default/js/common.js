@@ -122,13 +122,16 @@ function fetchSearch() {
     });
 }
 
-const search = document.querySelector('.box-search')
-const btn = document.querySelector('.button-search')
-const input = document.querySelector('.search')
-btn.addEventListener('click', () => {
-  search.classList.toggle('active')
-  input.focus()
-}) 
+// When you click, the search bar pops up
+let search = document.querySelector('.box-search')
+let btn = document.querySelector('.button-search')
+let input = document.querySelector('.search')
+if (btn) {
+  btn.addEventListener('click', () => {
+    search.classList.toggle('active')
+    input.focus()
+  }) 
+}
 
 // Function to render links based on type
 function renderLink(baseURL, identifier, title) {

@@ -1,5 +1,5 @@
 <?php if ($type == 'small') : ?>
-  <div class="p15 gray-600 bg-violet mt15">
+  <div class="box">
     <svg class="icon green">
       <use xlink:href="/assets/svg/icons.svg#<?= $icon; ?>"></use>
     </svg>

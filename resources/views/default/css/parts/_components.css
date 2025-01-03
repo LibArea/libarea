@@ -41,11 +41,14 @@ h5 {
   font-size: .72rem;
   color: #fff;
   background-color: var(--red);
-  padding: 0 7px;
   border-radius: 50%;
   position: absolute;
-  top: -7px;
-  right: -4px;
+  top: -5px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  line-height: 16px;
 }
 
 .number-notif.show,
@@ -63,6 +66,11 @@ h5 {
 
 .icon.small {
   width: 16px;
+}
+
+.icon.large {
+  width: 28px;
+  height: 28px;	
 }
 
 .icon.max {
@@ -230,6 +238,7 @@ h5 {
   display: flex;
   gap: 0.5rem;
   color: var(--gray-600);
+  margin-left: 4px;
 }
 
 .cut-off {

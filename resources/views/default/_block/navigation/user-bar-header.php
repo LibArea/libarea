@@ -1,15 +1,14 @@
 <div class="flex gap-max items-center">
 
-
-<div class="button-search ml20 mb-none">
-		<svg class="icon">
-		   <use xlink:href="/assets/svg/icons.svg#search"></use>
-		</svg>
-	</div>
+  <div class="button-search ml20 mb-none">
+	<svg class="icon large">
+	   <use xlink:href="/assets/svg/icons.svg#search"></use>
+	</svg>
+  </div>
 
 <?php if (!$container->user()->active()) : ?>
 	<div id="toggledark" class="gray-600">
-	  <svg class="icon">
+	  <svg class="icon large">
 		<use xlink:href="/assets/svg/icons.svg#sun"></use>
 	  </svg>
 	</div>
@@ -25,7 +24,7 @@
 	<?= Html::addPost($facet_id ?? false); ?>
 
 	<a id="toggledark" class="gray-600">
-	  <svg class="icon">
+	  <svg class="icon large">
 		<use xlink:href="/assets/svg/icons.svg#sun"></use>
 	  </svg>
 	</a>
@@ -33,7 +32,7 @@
 	<div class="relative">
 	  <div id="el_notif" class="none"></div>
 	  <a id="notif" class="add-notif gray-600 relative">
-		<svg class="icon">
+		<svg class="icon large">
 		  <use xlink:href="/assets/svg/icons.svg#bell"></use>
 		</svg>
 		<span class="number-notif"></span>

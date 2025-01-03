@@ -9,7 +9,7 @@
   align-self: start;
   overflow-y: auto;
   position: sticky;
-  top: 72px;
+  top: 75px;
   z-index: 98;
   width: 245px;
   padding-right: 30px;
@@ -58,7 +58,7 @@
 }
 
 .user-box {
-  padding: 0 0 0.7rem 1rem;
+  padding: 0 0 0.4rem 1rem;
   display: flex;
   align-items: center;
   font-size: 0.975rem;
@@ -79,7 +79,7 @@
 .dropdown li>a,
 .dropdown li>div {
   color: var(--black);
-  padding: 5px;
+  padding: 8px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -144,7 +144,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 5px 0 20px 0;
 }
 
 ul.nav {

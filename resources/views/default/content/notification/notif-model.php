@@ -1,6 +1,6 @@
 <div class="dropdown notif block">
   <span class="right-close pointer">x</span>
-  <div>
+  <div class="mt10">
     <?php if (!empty($data['notifications'])) : ?>
       <?php foreach ($data['notifications'] as  $notif) :
         $url = url('notif.read', ['id' => $notif['notif_id']]);
@@ -29,7 +29,7 @@
 
       <?php endforeach; ?>
 
-      <div class="p15">
+      <div class="p15 lowercase">
         <a href="<?= url('notifications'); ?>"><?= __('app.notifications_page'); ?></a>
         <a href="<?= url('notif.remove'); ?>" class="right gray-600">
           <?= __('app.i_read'); ?>
