@@ -130,7 +130,7 @@ class UserController extends Controller
                 'data'  => [
                     'sheet'     => 'favorites',
                     'type'      => 'favorites',
-                    'favorites' => UserModel::userFavorite(Request::get('id')->asInt())
+                    'favorites' => UserModel::userFavorite(Request::param('id')->asInt())
                 ]
             ]
         );

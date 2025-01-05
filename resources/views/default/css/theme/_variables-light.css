@@ -8,6 +8,7 @@
   --font-family: "Roboto", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   --line-height: 1.5rem;
   --font-size: 1.063rem;
+  --border-radius: 0.313rem;
 
   /* Default (light) theme */
   --bg-color: #f3f6f7;
@@ -21,8 +22,6 @@
 
   --dropdown-bg: #fff;
   --dropdown-box-shadow: 0 6px 18px 0 rgba(14, 21, 47, .13), 0 -2px 6px rgba(14, 21, 47, .03);
-
-  --border-radius: 3px;
 
   --form-color-active: #3595f6;
   --form-bg-color: #fff;

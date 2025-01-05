@@ -11,6 +11,7 @@ textarea {
   border: 1px solid var(--form-border-color);
   color: var(--form-text-color);
   font-size: 16px;
+  border-radius: var(--border-radius);
 }
 
 textarea {

@@ -10,7 +10,7 @@
   overflow-y: auto;
   position: sticky;
   top: 75px;
-  z-index: 98;
+  z-index: 45;
   width: 245px;
   padding-right: 30px;
 }
@@ -41,6 +41,7 @@
   padding: 0.5rem;
   z-index: 15;
   min-width: 215px;
+  border-radius: var(--border-radius);
 }
 
 /* right user menu */

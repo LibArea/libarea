@@ -84,6 +84,7 @@
 .tagify {
   width: 100%;
   max-width: 780px;
+  border-radius: var(--border-radius);
 }
 
 .tagify--noTags[required] {

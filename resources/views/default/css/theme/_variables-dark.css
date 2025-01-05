@@ -14,15 +14,13 @@ body.dark {
   --nav-bg-active: #161f27;
   --nav-color-active: #fff;
 
-  --dropdown-bg: #202b38;
+  --dropdown-bg: #1a2630;
   --dropdown-box-shadow: 0 6px 18px 0 rgba(14, 21, 47, .13), 0 -2px 6px rgba(14, 21, 47, .03);
 
   --form-color-active: #1e2830;
   --form-bg-color: #283541;
   --form-border-color: #555;
   --form-text-color: #fff;
-
-  --border-radius: 3px;
 
   --button-text-color: #bfcad3;
   --button-bg-color: #202a34;
@@ -93,6 +91,17 @@ body.dark .cherry.theme__light .cherry-bubble .cherry-toolbar-button,
 body.dark .cherry.theme__light .cherry-sidebar .cherry-toolbar-button {
   color: var(--form-text-color);
 }
+
+body.dark .cherry.theme__light .cherry-editor .CodeMirror .CodeMirror-scroll .cm-url,
+body.dark .cherry.theme__light .cherry-editor .CodeMirror .CodeMirror-selected  {
+  background-color: var(--button-bg-color);
+  color: var(--form-text-color);
+}
+
+body.dark  [data-toolbar-theme="dark"] .cherry-bubble .cherry-bubble-top {
+  border-bottom-color: var(--gray-600);
+}
+
 
 body.dark .comment {
   word-wrap: break-word;

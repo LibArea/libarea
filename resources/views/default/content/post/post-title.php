@@ -11,10 +11,8 @@
 <?php if ($post['post_merged_id']) : ?>
   <span class="red">
     <svg class="icon"><use xlink:href="/assets/svg/icons.svg#git-merge"></use></svg>
-    <?php 
-
-	if ($container->user()->admin()) : ?>
-      <a href="<?= url('post.id', ['id' => $post['post_merged_id']]); ?>id <?= $post['post_merged_id']; ?></a>
+    <?php if ($container->user()->admin()) : ?>
+      <a href="<?= url('post.id', ['id' => $post['post_merged_id']]); ?>"> id <?= $post['post_merged_id']; ?></a>
     <?php endif; ?>
   </span>
 <?php endif; ?>

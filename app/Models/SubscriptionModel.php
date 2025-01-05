@@ -25,11 +25,13 @@ class SubscriptionModel extends Model
             self::removalFocus($content_id, $type);
 
             self::updateFocus($content_id, $type);
-        }
 
-        self::insertFocus($content_id, $type);
+        } else {
 
-        $sql = "UPDATE " . $type . "s SET " . $type . "_focus_count = (" . $type . "_focus_count + 1) WHERE " . $type . "_id = :content_id";
+			self::insertFocus($content_id, $type);
+
+			$sql = "UPDATE " . $type . "s SET " . $type . "_focus_count = (" . $type . "_focus_count + 1) WHERE " . $type . "_id = :content_id";
+		}
 
         return DB::run($sql, ['content_id' => $content_id]);
     }
