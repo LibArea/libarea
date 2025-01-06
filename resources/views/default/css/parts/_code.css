@@ -8,7 +8,7 @@ code {
   color: var(--brown);
   background-color: var(--violet);
   padding: 3px;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   font-size: 14px;
 }
 
@@ -85,7 +85,7 @@ pre[class*=language-] {
 
 :not(pre)>code[class*=language-] {
   padding: .1em;
-  border-radius: .3em;
+  border-radius: var(--rounded);
   white-space: normal
 }
 
@@ -200,7 +200,7 @@ div.code-toolbar>.toolbar>.toolbar-item>button {
   padding: 0;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none
+  -ms-user-select: none;
 }
 
 div.code-toolbar>.toolbar>.toolbar-item>a,
@@ -212,7 +212,7 @@ div.code-toolbar>.toolbar>.toolbar-item>span {
   background: var(--violet);
   background: rgba(224, 224, 224, .2);
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, .2);
-  border-radius: .5em
+  border-radius: var(--rounded);
 }
 
 div.code-toolbar>.toolbar>.toolbar-item>a:focus,
@@ -222,5 +222,5 @@ div.code-toolbar>.toolbar>.toolbar-item>button:hover,
 div.code-toolbar>.toolbar>.toolbar-item>span:focus,
 div.code-toolbar>.toolbar>.toolbar-item>span:hover {
   color: inherit;
-  text-decoration: none
+  text-decoration: none;
 }

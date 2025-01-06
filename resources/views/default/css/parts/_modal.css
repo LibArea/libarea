@@ -16,7 +16,7 @@
 
 .model-inner {
   background-color: white;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   max-width: 600px;
   padding: 2em;
   margin: auto;
@@ -73,7 +73,7 @@
   padding: 1em;
   max-width: 90%;
   width: 600px;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
 }
 
 @media screen and (min-width: 700px) {

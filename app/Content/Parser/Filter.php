@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Content\Parser;
 
 use Parsedown;
+use LitEmoji\LitEmoji;
 
 class Filter
 {
@@ -26,6 +27,8 @@ class Filter
 
     public static function fragment(string $text, int $lenght = 150, string $charset = 'UTF-8')
     {
+		$text = LitEmoji::encodeUnicode($text);
+		
         if (mb_strlen($text, $charset) >= $lenght) {
             $wrap = wordwrap($text, $lenght, '~');
             $ret = mb_strpos($wrap, '~', 0, $charset);

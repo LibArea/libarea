@@ -1,5 +1,5 @@
 <script src="/assets/js/common.js?<?= config('general', 'version'); ?>"></script>
-<script src="/assets/js/medium-zoom.js"></script>
+<script src="/assets/js/zooom.js?<?= config('general', 'version'); ?>"></script> 
  
 <?php if ($container->user()->active()) : ?>
   <script src="/assets/js/app.js?<?= config('general', 'version'); ?>"></script>
@@ -12,7 +12,28 @@
 
 <script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    mediumZoom(queryAll('.img-preview img'));
+	 new Zooom("img-preview img, .comment-text img:not(.emoji, .gif), .content-body img:not(.emoji, .gif)", {
+	  // control layer positions
+	  zIndex: 99,
+
+	  // animation time in number
+	  animationTime: 300,
+
+	  // cursor type
+	  cursor: {
+		in: "zoom-in",
+		out: "zoom-out",
+	  },
+
+	  // overlay layer color and opacity, rgba, hsla, ...
+	  overlay: "rgba(255,255,255,0.9)",
+
+	  // callback function
+	  // see usage example docs/index.html
+	  onResize: function () {},
+	  onOpen: function (element) {},
+	  onClose: function (element) {},
+	});
   });
   <?php if ($container->user()->active()) : ?>
     const update_time = <?= config('general', 'notif_update_time'); ?>;

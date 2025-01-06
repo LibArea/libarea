@@ -74,7 +74,7 @@ return [
         'la'            => '/resources/views/default/js/',
         'common'        => '/resources/views/default/js/', 
         'admin'         => '/resources/views/default/js/', 
-        'medium-zoom'   => '/resources/views/default/js/',
+        'zooom'   		=> '/resources/views/default/js/',
         'app'           => '/resources/views/default/js/', 
         'uploads'       => '/resources/views/default/js/',
         'catalog'       => '/resources/views/default/js/',

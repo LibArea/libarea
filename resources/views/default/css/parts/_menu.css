@@ -41,7 +41,7 @@
   padding: 0.5rem;
   z-index: 15;
   min-width: 215px;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
 }
 
 /* right user menu */
@@ -107,7 +107,7 @@
 .menu li.active,
 .menu li:hover {
   background-color: var(--white);
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
 }
 
 .menu li:hover {

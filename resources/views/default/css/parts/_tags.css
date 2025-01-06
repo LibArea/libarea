@@ -9,7 +9,7 @@
 .tag-violet,
 .tag-clear {
   font-size: 0.9rem;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   margin-left: 0.25em;
   padding: 0.08rem 0.35rem 0.15rem 0.35rem;
   text-transform: lowercase;
@@ -84,7 +84,7 @@
 .tagify {
   width: 100%;
   max-width: 780px;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
 }
 
 .tagify--noTags[required] {

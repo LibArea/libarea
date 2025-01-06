@@ -8,7 +8,7 @@
   animation-name: toastEffect;
   animation-timing-function: ease-in;
   background-color: var(--gray);
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   color: var(--white);
   display: inline-block;
   padding: 2px 20px;

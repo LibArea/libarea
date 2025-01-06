@@ -152,7 +152,6 @@ $post = $data['post'];
 </main>
 <script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    mediumZoom(document.querySelectorAll('.content img:not(.emoji), .post img:not(.emoji), .content-body p img:not(.emoji)'));
     // Добавим цитирование    
     function get_text() {
       var text;

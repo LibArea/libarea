@@ -22,7 +22,7 @@ h5 {
   top: -3px;
   background-color: #fff;
   border: 2px solid #fff;
-  border-radius: 50%;
+  border-radius: var(--rounded-full);
   width: 16px;
   height: 16px;
   position: absolute;
@@ -41,7 +41,7 @@ h5 {
   font-size: .72rem;
   color: #fff;
   background-color: var(--red);
-  border-radius: 50%;
+  border-radius: var(--rounded-full);
   position: absolute;
   top: -5px;
   right: -2px;
@@ -135,16 +135,12 @@ h5 {
   margin-bottom: 15px;
 }
 
-.medium-zoom--opened .d-header {
-  display: none;
-}
-
 .banner {
   background-image: url(/assets/images/banner-fon.jpg);
   background-size: cover;
   filter: brightness(1.1);
   text-align: center;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   padding: 1.25rem 0;
   margin-top: -1rem;
   margin-bottom: 1.25rem;
@@ -170,8 +166,7 @@ h5 {
 
 /* Search */
 .search {
- /* width: 100%; */
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   background-color: var(--header-form-bg-color);
   color: var(--header-form-text-color);
   padding: 9px;
@@ -200,7 +195,7 @@ h5 {
 
 .box-results {
   position: absolute;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .15);
   background-color: var(--white);
   padding: 15px;
@@ -288,7 +283,7 @@ hr {
 }
 
 details {
-  border-radius: 0 0 3px 3px;
+  border-radius: var(--rounded);
   background-color: #f5f5fa;
   padding: 2px 6px;
   margin: 0 0 15px 0;
@@ -296,13 +291,13 @@ details {
 
 summary {
   background-color: #f5f5fa;
-  color: #666;
+  color: var(--gray);
   font-size: 14px;
 }
 
 details[open]>summary {
   padding: 0 0 10px 0;
-  color: #666;
+  color: var(--gray);
 }
 
 .title {
@@ -325,7 +320,7 @@ details[open]>summary {
 
 article,
 .box {
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   padding: 15px;
   margin-bottom: 20px;
   overflow-wrap: break-word;
@@ -333,7 +328,7 @@ article,
 }
 
 .box-small {
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   color: var(--white);
   text-align: center;
   padding: 5px 10px;
@@ -341,7 +336,7 @@ article,
 
 .box-flex {
   display: flex;
-  border-radius: var(--border-radius);
+  border-radius:var(--rounded);
   position: relative;
   flex-direction: row;
   align-items: center;
@@ -362,7 +357,7 @@ article,
   width: 300px;
   height: 50px;
   padding-left: 1.25rem;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
 }
 
 .search-button-icon {
@@ -371,7 +366,7 @@ article,
   width: 50px;
   color: #4f5b66;
   font-size: 18px;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
 }
 
 .list-post {
@@ -391,7 +386,7 @@ ul.last-content a.last-content_telo {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   margin-top: 5px;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
 }
 
 .uppercase-box {
@@ -422,9 +417,9 @@ a:hover>img {
   margin: 5px;
 }
 
-.comment-body img.medium-zoom-image {
+.comment-body img:not(.img-sm, .emoji, .gif) {
   max-width: 330px;
-  border: 1px solid #666;
+  border: 1px solid var(--gray);
   display: block;
 }
 
@@ -589,8 +584,4 @@ video {
   position: absolute;
   display: flex;
   gap: 1rem;
-}
-
-.medium-zoom--opened #markdown-container {
-  display: none;	
 }

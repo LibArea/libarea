@@ -167,7 +167,7 @@ main {
     margin-left: -25px;
   }
 
-  .comment-body img.medium-zoom-image {
+  .comment-body img {
     max-width: 280px;
   }
 
@@ -196,7 +196,7 @@ main {
 
   .box {
     padding: 1rem;
-    border-radius: 0;
+    border-radius: var(--rounded-none);
   }
 
   .box-logo {
@@ -243,9 +243,9 @@ main {
     margin-left: 40px;
   }
 
- .comment_level-left-3 img.medium-zoom-image,
- .comment_level-left-4 img.medium-zoom-image,
- .comment_level-left-5 img.medium-zoom-image {
+ .comment_level-left-3 img,
+ .comment_level-left-4 img,
+ .comment_level-left-5 img {
     max-width: 180px;
   }
 

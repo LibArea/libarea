@@ -48,7 +48,7 @@ progress {
   margin-bottom: 20px;
   background: #f8f8f8;
   height: 7px;
-  border-radius: 500px;
+  border-radius: var(--rounded-full);
   overflow: hidden;
 }
 

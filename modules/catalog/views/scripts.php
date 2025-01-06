@@ -1,5 +1,5 @@
 <script src="/assets/js/common.js?<?= config('general', 'version'); ?>"></script>
-<script src="/assets/js/medium-zoom.js?<?= config('general', 'version'); ?>"></script>
+<script src="/assets/js/zooom.js?<?= config('general', 'version'); ?>"></script>
 <script src="/assets/js/prism/prism.js?<?= config('general', 'version'); ?>"></script>
 
 <?php if (UserData::checkActiveUser()) : ?>

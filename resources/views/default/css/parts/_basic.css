@@ -50,7 +50,7 @@ body {
 
 *::-webkit-scrollbar-thumb {
   background-color: var(--form-border-color);
-  border-radius: 5px;
+  border-radius: var(--rounded);
   border: 3px solid var(--bg-color);
 }
 
@@ -67,7 +67,7 @@ a:active {
 }
 
 img {
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
   vertical-align: middle;
 }
 

@@ -45,7 +45,7 @@ $blog = $data['blog'][0] ?? null;
 
       <?php if ($post['post_thumb_img']) : ?>
         <div class="img-preview mt10">
-          <?= Img::image($post['post_thumb_img'], $post['post_title'],  'medium-zoom-image', 'post', 'thumbnails'); ?>
+          <?= Img::image($post['post_thumb_img'], $post['post_title'],  'zooom', 'post', 'thumbnails'); ?>
         </div>
       <?php endif; ?>
 
@@ -244,8 +244,6 @@ $blog = $data['blog'][0] ?? null;
 </aside>
 <script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', () => {
-    mediumZoom(document.querySelectorAll('.comment-text img:not(.emoji, .gif), .content-body img:not(.emoji, .gif)'));
-
     // Добавим цитирование    
     function get_text() {
       var text;

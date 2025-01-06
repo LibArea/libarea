@@ -51,10 +51,4 @@
    </div>   
 </div>
 
-<script nonce="<?= config('main', 'nonce'); ?>">
-  document.addEventListener('DOMContentLoaded', () => {
-    mediumZoom(document.querySelectorAll('.content-body img:not(.emoji, .gif)'));
-  });
-</script>
-
 <script src="/assets/js/dialog/dialog.js"></script>

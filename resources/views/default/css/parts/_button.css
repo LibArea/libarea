@@ -14,7 +14,7 @@
   background-color: transparent;
   border: 1px solid transparent;
   padding: 0.35rem 1rem;
-  border-radius: var(--border-radius);
+  border-radius: var(--rounded);
 }
 
 .btn-small {
