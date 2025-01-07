@@ -8,29 +8,7 @@
 
   <div class="bg-white mb15">
     <?php if (!empty($data['notifications'])) : ?>
-      <?php foreach ($data['notifications'] as  $notif) :
-        $url = url('notif.read', ['id' => $notif['notif_id']]);
-        $profile = url('profile', ['login' => $notif['login']]);
-      ?>
-
-        <?php foreach (config('notification', 'list') as $key => $n) : ?>
-          <?php if ($n['id'] == $notif['type']) : ?>
-            <div class="br-bottom p5<?php if ($notif['flag'] == 0) { ?> bg-yellow<?php } ?>">
-              <svg class="icon <?= $n['css']; ?>">
-                <use xlink:href="/assets/svg/icons.svg#<?= $n['icon']; ?>"></use>
-              </svg>
-              <a class="black ml5 nickname" href="<?= $profile; ?>"><?= $notif['login']; ?></a>
-              <span class="lowercase gray-600">
-                <?= __('app.' . $n['lang'], ['url' => '<a href="' . $url . '">', 'a' => '</a>']); ?>
-                — <?= langDate($notif['time']); ?>
-              </span>
-              <?php if ($notif['flag'] == 0) : ?><sup class="ml5 red">✔</sup><?php endif; ?>
-            </div>
-          <?php endif; ?>
-        <?php endforeach; ?>
-
-      <?php endforeach; ?>
-
+	  <?= insert('/content/notification/cell', ['data' => $data, 'size' => '']); ?>
       <div class="p15 center gray-600"><?= __('app.notifications_limit'); ?></div>
     <?php else : ?>
       <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_content'), 'icon' => 'info']); ?>

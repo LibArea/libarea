@@ -69,6 +69,7 @@ class NotificationModel extends Model
                     n.is_deleted,
                     u.id, 
                     u.login, 
+					u.created_at,
                     u.avatar
                         FROM notifications n
                         JOIN users u ON u.id = n.sender_id

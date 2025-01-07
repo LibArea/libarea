@@ -26,7 +26,7 @@
 	  },
 
 	  // overlay layer color and opacity, rgba, hsla, ...
-	  overlay: "rgba(255,255,255,0.9)",
+	  overlay: "<?= $container->cookies()->get('dayNight')->value() == 'dark' ? '#283541' : '#fff';  ?>",
 
 	  // callback function
 	  // see usage example docs/index.html

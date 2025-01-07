@@ -3,17 +3,8 @@
   <div class="relative hidden">
     <img class="box-cover-img" src="<?= Img::cover($data['facet']['facet_cover_art'], 'blog'); ?>" alt="<?= $data['facet']['facet_title']; ?>">
   </div>
-  <div class="mt20">
-    <div class="right m15 mb-mt5 gray-600">
-      <?= Html::signed([
-        'type'            => 'facet',
-        'id'              => $data['facet']['facet_id'],
-        'content_user_id' => $data['facet']['facet_user_id'],
-        'state'           => is_array($data['facet_signed']),
-      ]); ?>
-    </div>
-
-    <h1 class="mb-block mb-text-xl m0 ml15">
+  <div class="flex justify-between mt20">
+    <h1 class="mb-block mb-text-xl mt20 ml15 mb-mt5">
       <?= $data['facet']['facet_seo_title']; ?>
       <?php if ($container->user()->admin() || $data['facet']['facet_user_id'] == $container->user()->id()) : ?>
         <sup>
@@ -26,8 +17,17 @@
       <?php endif; ?>
     </h1>
 
-    <div class="mt0 m15 mb-none">
-      <?= $data['facet']['facet_short_description']; ?>
+    <div class="m15 mb-mt5 gray-600">
+      <?= Html::signed([
+        'type'            => 'facet',
+        'id'              => $data['facet']['facet_id'],
+        'content_user_id' => $data['facet']['facet_user_id'],
+        'state'           => is_array($data['facet_signed']),
+      ]); ?>
     </div>
   </div>
+
+    <div class="ml15 mb15 mb-none">
+      <?= $data['facet']['facet_short_description']; ?>
+    </div>
 </div>

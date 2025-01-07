@@ -78,7 +78,6 @@ main {
   }
 
   .nav-sidebar.menu__active .menu__left .menu li {
-    background-color: var(--white);
     padding-left: 10px;
   }
 

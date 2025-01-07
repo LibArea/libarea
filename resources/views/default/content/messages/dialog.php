@@ -29,7 +29,7 @@
             ?>
             <div class="flex gap-min items-center gray-600 lowercase text-sm">
               <?= Img::avatar($ava, $login, 'img-base', 'max'); ?>
-              <a class="gray-600" href="<?= url('profile', ['login' => $login]); ?>"><?= $login; ?></a>
+              <a class="black nickname" href="<?= url('profile', ['login' => $login]); ?>"><?= $login; ?></a>
               <?= langDate($val['message_date']); ?>
 			  <?php if($val['message_modified']) : ?>
 				(<?= __('app.ed'); ?>)

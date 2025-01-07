@@ -26,7 +26,7 @@
                 <use xlink:href="/assets/svg/icons.svg#plus"></use>
               </svg></span>
             <span class="dropdown">
-              <?php if ($data['tags']) : ?>
+              <?php if (!empty($data['tags'])) : ?>
                 <?php foreach ($data['tags'] as $tag) : ?>
                   <div class="save-folder gray-600 text-sm p5" data-id="<?= $tag['id']; ?>" data-tid="<?= $fav['tid']; ?>" data-type="favorite"><?= $tag['value']; ?></div>
                 <?php endforeach; ?>

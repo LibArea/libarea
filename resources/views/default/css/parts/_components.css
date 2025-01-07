@@ -284,13 +284,13 @@ hr {
 
 details {
   border-radius: var(--rounded);
-  background-color: #f5f5fa;
+  background-color: var(--gray-100);
   padding: 2px 6px;
   margin: 0 0 15px 0;
 }
 
 summary {
-  background-color: #f5f5fa;
+  background-color: var(--gray-100);
   color: var(--gray);
   font-size: 14px;
 }
@@ -312,7 +312,7 @@ details[open]>summary {
 
 .txt-closed {
   padding: 10px;
-  background-color: lightyellow;
+  background-color: var(--yellow);
   margin-bottom: 15px;
   display: inherit;
   color: var(--gray-600);
