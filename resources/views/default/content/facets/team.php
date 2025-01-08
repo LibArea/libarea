@@ -27,7 +27,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <a class="gray-600" href="<?= $url; ?>"><?= __('app.go_to'); ?></a>
     </div>
 
-    <form class="max-w780" action="<?= url('team.edit', ['id' => $fs['facet_id'], 'type' => $data['type']], method: 'post'); ?>" method="post">
+    <form class="max-w-md" action="<?= url('team.edit', ['id' => $fs['facet_id'], 'type' => $data['type']], method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
 
       <?= insert('/_block/form/select/users-team', ['users' => $data['users_team']]); ?>

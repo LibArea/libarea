@@ -25,7 +25,7 @@
   <label><?= __('admin.number_comments'); ?></label>
   <div class="update btn btn-primary" data-type="post"><?= __('admin.update'); ?></div>
 </fieldset>
-<fieldset class="max-w300">
+<fieldset class="max-w-sm">
   <label for="mail"><?= __('admin.email'); ?></label>
   <form action="<?= url('admin.test.mail', method: 'post'); ?>" method="post">
     <input type="mail" name="mail" value="" required>

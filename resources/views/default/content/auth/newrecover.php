@@ -1,7 +1,7 @@
 <main>
   <div class="box">
     <h1><?= __('app.password_recovery'); ?></h1>
-    <form class="max-w300" action="<?= url('new.pass', method: 'post'); ?>" method="post">
+    <form class="max-w-sm" action="<?= url('new.pass', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
       <fieldset>
         <label for="password"><?= __('app.new_password'); ?></label>

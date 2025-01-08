@@ -7,7 +7,7 @@
             <?= Img::image($topic['facet_img'], $topic['facet_title'], 'img-base', 'logo', 'max'); ?>
             <?= $topic['facet_title']; ?>
           </a>
-          <div class="mt5 text-sm max-w780 gray">
+          <div class="mt5 text-sm max-w-md gray">
             <?= $topic['facet_description']; ?>
           </div>
         </div>

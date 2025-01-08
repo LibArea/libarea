@@ -14,6 +14,10 @@
   --rounded: 0.313rem; /* 5px */
   --rounded-full: 9999px;
   
+  --max-w-full: 100%;
+  --max-w-sm: 300px;
+  --max-w-md: 800px;
+  
   /* Default (light) theme */
   --bg-color: #f3f6f7;
   --text-color: #030303;

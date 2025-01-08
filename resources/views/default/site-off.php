@@ -9,11 +9,11 @@
 
 <body>
 
-  <main class="box mr-auto max-w780">
+  <main class="box mr-auto max-w-md">
     <h1 class="text-3xl gray"><?= __('off.under_maintenance'); ?></h1>
     <p class="gray-600"><?= __('off.under_reconstruction'); ?>...</p>
 
-    <form class="max-w300" action="/login" method="post">
+    <form class="max-w-sm" action="/login" method="post">
       <?= $container->csrf()->field(); ?>
       <fieldset>
         <label for="email"><?= __('off.email'); ?></label>

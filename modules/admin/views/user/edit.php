@@ -135,7 +135,7 @@ use App\Bootstrap\Services\Auth\RegType; ?>
 
 
   <?php foreach (config('setting', 'contacts') as $block) : ?>
-    <fieldset class="max-w300">
+    <fieldset class="max-w-sm">
       <label for="post_title"><?= __($block['lang']); ?></label>
       <input maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
       <?php if ($block['help']) : ?>

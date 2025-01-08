@@ -49,7 +49,7 @@ $blog = $data['blog'][0] ?? null;
         </div>
       <?php endif; ?>
 
-      <div class="max-w780">
+      <div class="max-w-md">
         <div class="content-body mb15">
           <?= markdown($post['post_content'], 'text'); ?>
         </div>

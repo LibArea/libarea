@@ -21,7 +21,7 @@
   ]
 ); ?>
 
-<form class="max-w780" action="<?= url('admin.user.search', method: 'post'); ?>" method="post">
+<form class="max-w-md" action="<?= url('admin.user.search', method: 'post'); ?>" method="post">
   <?= $container->csrf()->field(); ?>
   <fieldset>
     <label for="word"><?= __('admin.nickname'); ?></label>

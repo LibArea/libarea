@@ -27,13 +27,13 @@
         <div class="mb-block">
           <?php if ($data['user']['cover_art'] != 'cover_art.jpeg') : ?>
             <div class="relative mr15">
-              <img class="block br-gray max-w-100" src="<?= Img::cover($data['user']['cover_art'], 'user'); ?>">
+              <img class="block br-gray max-w-sm" src="<?= Img::cover($data['user']['cover_art'], 'user'); ?>">
               <a class="right text-sm" href="<?= url('delete.user.cover', ['id' => $container->user()->id()]); ?>">
                 <?= __('app.remove'); ?>
               </a>
             </div>
           <?php else : ?>
-            <div class="block br-gray max-w-100 text-sm gray p15">
+            <div class="block br-gray max-w-sm text-sm gray p15">
               <?= __('app.no_cover'); ?>...
             </div>
           <?php endif; ?>

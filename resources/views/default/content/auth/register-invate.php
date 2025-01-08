@@ -1,7 +1,7 @@
 <main>
   <div class="box">
     <h1><?= __('app.reg_invite'); ?></h1>
-    <form class="max-w300" action="<?= url('register.add', method: 'post'); ?>" method="post">
+    <form class="max-w-sm" action="<?= url('register.add', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
 
       <fieldset>

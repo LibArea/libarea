@@ -5,7 +5,7 @@
     <a href="/"><?= __('app.home'); ?></a> / <span class="gray-600"><?= __('app.edit_comment'); ?>:</span>
     <a class="mb5 block" href="<?= post_slug($data['post']['post_id'], $data['post']['post_slug']); ?>"><?= $data['post']['post_title']; ?></a>
 
-    <form class="max-w780" action="<?= url('edit.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
+    <form class="max-w-md" action="<?= url('edit.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
       <?= $container->csrf()->field(); ?>
 
       <?= insert('/_block/form/editor/notoolbar-img', ['height'  => '300px', 'content' => $data['comment']['comment_content'], 'type' => 'comment', 'id' => $data['post']['post_id']]); ?>

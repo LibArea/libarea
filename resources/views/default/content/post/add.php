@@ -3,7 +3,7 @@
   <div class="box">
     <h2 class="title"><?= __('app.add_post'); ?></h2>
 
-    <form class="max-w780" action="<?= url('add.post', ['type' => 'post'], method: 'post'); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w-md" action="<?= url('add.post', ['type' => 'post'], method: 'post'); ?>" method="post" enctype="multipart/form-data">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/add-post', ['data' => $data]); ?>
     </form>

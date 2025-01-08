@@ -73,13 +73,13 @@
           </div>
 
           <?php if ($item['item_poll']) : ?>
-            <div class="mt15 max-w780"><?= insert('/content/poll/poll', ['poll' => $data['poll']]); ?></div>
+            <div class="mt15 max-w-md"><?= insert('/content/poll/poll', ['poll' => $data['poll']]); ?></div>
           <?php endif; ?>
 
           <?php if ($item['item_is_soft'] == 1) : ?>
             <h2><?= __('web.soft'); ?></h2>
             <h3><?= $item['item_title_soft']; ?></h3>
-            <div class="gray-600 max-w780">
+            <div class="gray-600 max-w-md">
               <?= markdown($item['item_content_soft'], 'text'); ?>
             </div>
             <p>
@@ -100,7 +100,7 @@
 
           <?php if ($item['item_close_replies'] == 0) : ?>
             <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_reply'))) : ?>
-              <form class="max-w780" action="<?= url('add.reply', method: 'post'); ?>" accept-charset="UTF-8" method="post">
+              <form class="max-w-md" action="<?= url('add.reply', method: 'post'); ?>" accept-charset="UTF-8" method="post">
                 <?= $container->csrf()->field(); ?>
 
                 <?php insert('/_block/form/textarea', [

@@ -1,8 +1,8 @@
-<fieldset class="max-w300 mb-max-w-100">
+<fieldset class="max-w-sm mb-max-w-full">
   <input name="email" type="email" placeholder="<?= __('app.email'); ?>" required="">
 </fieldset>
 
-<fieldset class="max-w300 mb-max-w-100">
+<fieldset class="max-w-sm mb-max-w-full">
   <input id="password" name="password" type="password" placeholder="<?= __('app.password'); ?>" required="">
   <span class="showPassword"><svg class="icon">
       <use xlink:href="/assets/svg/icons.svg#eye"></use>

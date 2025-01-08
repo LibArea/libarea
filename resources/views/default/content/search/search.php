@@ -54,7 +54,7 @@ $sw = $sw ?? '?';
             <div>
               <?= Html::facets($result['facet_list'], 'topic', 'tag-clear mr15'); ?>
             </div>
-            <div class="max-w780"><?= fragment($result['content'], 250); ?></div>
+            <div class="max-w-md"><?= fragment($result['content'], 250); ?></div>
           <?php endif; ?>
         </div>
       <?php endforeach; ?>

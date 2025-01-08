@@ -6,10 +6,10 @@
     </ul>
     <form action="<?= url('edit.poll', method: 'post'); ?>" id="myform" method="post">
       <?= $container->csrf()->field(); ?>
-      <fieldset class="max-w780">
+      <fieldset class="max-w-md">
         <input type="text" name="title" value="<?= htmlEncode($data['question']['poll_title']); ?>">
       </fieldset>
-      <fieldset class="max-w780">
+      <fieldset class="max-w-md">
         <?php foreach ($data['answers'] as $value) : ?>
           <div class="flex gap mb10">
             <input type="text" id="in<?= $value['answer_id']; ?>" name="<?= $value['answer_id']; ?>" value="<?= htmlEncode($value['answer_title']); ?>">

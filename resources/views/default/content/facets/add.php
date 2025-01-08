@@ -1,7 +1,7 @@
 <main>
   <div class="box">
     <h2 class="text-xl"><?= __('app.add_' . $data['type']); ?></h2>
-    <form class="max-w780" action="<?= url('add.facet', ['type' => $data['type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w-md" action="<?= url('add.facet', ['type' => $data['type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/add-facet'); ?>
     </form>

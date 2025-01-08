@@ -69,9 +69,14 @@
   border: 1px solid #f3f3f3;
 }
 
+.cut-post img.cut-preview {
+  max-width: calc(100% + 30px);
+  margin-left: -15px;
+  border-radius: 0px;
+}
+
 .cut-post img,
-.content-body img,
-.comment-body img {
+.content-body img {
   max-width: 100%;
 }
 

@@ -52,15 +52,15 @@
           <?php endif; ?>
         </div>
 
-        <div class="cut-post max-w780">
+        <div class="cut-post max-w-md">
           <?php if ($post['post_content_img']) : ?>
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= Img::image($post['post_content_img'], $post['post_title'], 'mt10', 'post', 'cover'); ?>
+              <?= Img::image($post['post_content_img'], $post['post_title'], 'mt10 cut-preview', 'post', 'cover'); ?>
             </a>
           <?php else : ?>
             <?php if ($post['post_thumb_img']) : ?>
               <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                <?= Img::image($post['post_thumb_img'], $post['post_title'],  'mt10', 'post', 'thumbnails'); ?>
+                <?= Img::image($post['post_thumb_img'], $post['post_title'],  'mt10 cut-preview', 'post', 'thumbnails'); ?>
               </a>
             <?php endif; ?>
           <?php endif; ?>

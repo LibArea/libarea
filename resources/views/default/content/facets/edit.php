@@ -27,7 +27,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <a class="gray-600" href="<?= $url; ?>"><?= __('app.go_to'); ?></a>
     </div>
 
-    <form class="max-w780" action="<?= url('edit.facet', ['type' => $fs['facet_type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w-md" action="<?= url('edit.facet', ['type' => $fs['facet_type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/facet-type', ['type' => $fs['facet_type']]); ?>
 
@@ -109,7 +109,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
       <fieldset>
         <label for="facet_description"><?= __('app.meta_description'); ?><sup class="red">*</sup></label>
-        <textarea class="add max-w780" rows="6" minlength="3" name="facet_description"><?= $fs['facet_description']; ?></textarea>
+        <textarea class="add max-w-md" rows="6" minlength="3" name="facet_description"><?= $fs['facet_description']; ?></textarea>
         <div class="help">> 3 <?= __('app.characters'); ?></div>
       </fieldset>
 
@@ -121,7 +121,7 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 
       <fieldset>
         <?= __('app.information'); ?> (sidebar / info)<sup class="red">*</sup>
-        <textarea class="add max-w780 block" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
+        <textarea class="add max-w-md block" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
         <div class="mb20 help">Markdown, > 14 <?= __('app.characters'); ?></div>
 
         <?php if ($fs['facet_type'] != 'blog') : ?>

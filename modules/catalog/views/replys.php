@@ -24,7 +24,7 @@ function internalRender($container, $nodes)
 
         echo '</div>';
 
-        echo '<div class="max-w780 text-base ind-first-p">' . markdown($node['content'], 'text') . '</div>
+        echo '<div class="max-w-md text-base ind-first-p">' . markdown($node['content'], 'text') . '</div>
                     <div class="flex gap">' . Html::votes($node, 'reply');
 
         if ($container->user()->tl() >= config('trust-levels', 'tl_add_reply')) {

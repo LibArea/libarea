@@ -1,4 +1,4 @@
-<div class="cm_addentry max-w780 mt10">
+<div class="cm_addentry max-w-md mt10">
   <?php if ($container->user()->active()) : ?>
     <form action="<?= url('add.' . $data['type'], method: 'post'); ?>" accept-charset="UTF-8" method="post">
       <?= $container->csrf()->field(); ?>

@@ -7,7 +7,7 @@
   </div>
 <?php } ?>
 
-<form class="max-w780" action="<?= url('add.folder', method: 'post'); ?>" method="post" enctype="multipart/form-data">
+<form class="max-w-md" action="<?= url('add.folder', method: 'post'); ?>" method="post" enctype="multipart/form-data">
   <?= $container->csrf()->field(); ?>
   <input name='cat-outside' class='tagify' placeholder='<?= __('app.add'); ?>...'>
   <fieldset>

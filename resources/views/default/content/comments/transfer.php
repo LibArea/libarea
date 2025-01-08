@@ -8,7 +8,7 @@
 			<h2 class="m0"><?= $data['post']['post_title']; ?></h2>
 			<div class="label label-orange"><?= $data['comment']['comment_content'];  ?></div>
 
-			<form class="max-w780 mb20" action="" accept-charset="UTF-8" method="post">
+			<form class="max-w-md mb20" action="" accept-charset="UTF-8" method="post">
 				<?= $container->csrf()->field(); ?>
 
 				<b><?= __('app.being_developed'); ?>...</b>
@@ -28,7 +28,7 @@
 
 			<h3><?= __('app.move_comment_post'); ?></h3>
 
-			<form class="max-w780 mt20" action="" accept-charset="UTF-8" method="post">
+			<form class="max-w-md mt20" action="" accept-charset="UTF-8" method="post">
 				<?= $container->csrf()->field(); ?>
 
 				<?= insert('/_block/form/select/move-post'); ?>

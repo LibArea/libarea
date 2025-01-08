@@ -5,7 +5,7 @@
       <h1 class="m0 mb20">
         <?= $page['post_title']; ?>
       </h1>
-      <div class="max-w780">
+      <div class="max-w-md">
         <?= markdown($page['post_content'], 'text'); ?>
       </div>
     <?php else : ?>

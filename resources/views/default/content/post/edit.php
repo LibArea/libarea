@@ -3,7 +3,7 @@
   <div class="box">
     <h2 class="m0"><?= __('app.edit_' . $post['post_type']); ?></h2>
 
-    <form class="max-w780" action="<?= url('edit.post', ['type' => $post['post_type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
+    <form class="max-w-md" action="<?= url('edit.post', ['type' => $post['post_type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/edit-post', ['post' => $post, 'data' => $data]); ?>
     </form>

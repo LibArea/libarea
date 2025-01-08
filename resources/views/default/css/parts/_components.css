@@ -417,8 +417,11 @@ a:hover>img {
   margin: 5px;
 }
 
-.comment-body img:not(.img-sm, .emoji, .gif) {
+.comment-body img {
   max-width: 330px;
+}
+
+.comment-body img:not(.img-sm, .emoji, .gif) {
   border: 1px solid var(--gray);
   display: block;
 }

@@ -167,7 +167,7 @@ main {
   }
 
   .comment-body img {
-    max-width: 280px;
+    max-width: 240px;
   }
 
   .title {
@@ -183,14 +183,16 @@ main {
     display: block;
   }
 
+  main,
+  .menuno main,
   .mb-w-100,
   iframe,
   video {
-    width: 100%;
+    width: var(--max-w-full);
   }
 
-  .mb-max-w-100 {
-    max-width: 100%;
+  .mb-max-w-full {
+    max-width: var(--max-w-full);
   }
 
   .box {
@@ -206,11 +208,6 @@ main {
   .mb-none,
   ul.setting>li>a>i {
     display: none;
-  }
-
-  main,
-  .menuno main {
-    width: 100%;
   }
 
   footer ul {

@@ -16,7 +16,7 @@
         ]
       ]); ?>
 
-      <form action="<?= url('add.item', method: 'post'); ?>" class="max-w780" method="post">
+      <form action="<?= url('add.item', method: 'post'); ?>" class="max-w-md" method="post">
         <?= $container->csrf()->field(); ?>
         <?= insertTemplate('/form/category', ['category' => $data['category'], 'action' => 'add']); ?>
         <?= insertTemplate('/form/add-website'); ?>

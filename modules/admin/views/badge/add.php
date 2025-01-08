@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<form class="max-w780" action="<?= url('admin.badge.create', method: 'post'); ?>" method="post">
+<form class="max-w-md" action="<?= url('admin.badge.create', method: 'post'); ?>" method="post">
   <?= $container->csrf()->field(); ?>
   <fieldset>
     <label for="badge_title"><?= __('admin.title'); ?></label>

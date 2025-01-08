@@ -6,10 +6,10 @@
     </ul>
     <form action="<?= url('add.poll', method: 'post'); ?>" id="myform" method="post">
       <?= $container->csrf()->field(); ?>
-      <fieldset class="max-w780">
+      <fieldset class="max-w-md">
         <input type="text" name="title" />
       </fieldset>
-      <fieldset class="max-w300">
+      <fieldset class="max-w-sm">
         <p><?= __('app.option'); ?> 1: <input type="text" id="in1" name="1" /></p>
         <p><?= __('app.option'); ?> 2: <input type="text" id="in2" name="2" /></p>
       </fieldset>

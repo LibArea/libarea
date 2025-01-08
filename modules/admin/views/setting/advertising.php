@@ -6,7 +6,7 @@ foreach ($data['settings'] as $val) {
 ?>
 
 <div>
-  <form class="max-w780" action="<?= url('admin.setting.edit', method: 'post'); ?>" method="post">
+  <form class="max-w-md" action="<?= url('admin.setting.edit', method: 'post'); ?>" method="post">
     <?= $container->csrf()->field(); ?>
     <h2><?= __('admin.advertising'); ?></h2>
     <fieldset>

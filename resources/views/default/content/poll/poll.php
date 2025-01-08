@@ -30,7 +30,7 @@ $count = $poll['count'] ? $poll['count'] : 1;
       ?>
 
         <?php if ($poll['isVote'] || $poll['question']['poll_is_closed'] == 1) : ?>
-          <div class="mb10 max-w780">
+          <div class="mb10 max-w-md">
             <div class="poll-count">
               <strong><?= round($num * 100, 1); ?>%</strong>
               <div><?= $value['answer_votes']; ?></div>
@@ -49,7 +49,7 @@ $count = $poll['count'] ? $poll['count'] : 1;
             </div>
           </div>
         <?php else : ?>
-          <div data-id="<?= $poll['question']['poll_id']; ?>" data-answer="<?= $value['answer_id']; ?>" class="add-poll mb10 max-w780 gray">
+          <div data-id="<?= $poll['question']['poll_id']; ?>" data-answer="<?= $value['answer_id']; ?>" class="add-poll mb10 max-w-md gray">
             <label><input type="checkbox"><?= $value['answer_title']; ?></label>
           </div>
         <?php endif; ?>
@@ -61,7 +61,7 @@ $count = $poll['count'] ? $poll['count'] : 1;
         $num = $value['answer_votes'] / $count;
         $answer_votes += $value['answer_votes'];
       ?>
-        <div class="mb10 max-w780">
+        <div class="mb10 max-w-md">
           <div class="poll-count">
             <strong><?= round($num * 100, 1); ?>%</strong>
             <div><?= $value['answer_votes']; ?></div>

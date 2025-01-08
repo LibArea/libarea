@@ -1,4 +1,4 @@
-<div class="max-w780 mt10">
+<div class="max-w-md mt10">
   <?php if ($container->user()->active()) : ?>
     <form action="<?= url('edit.' . $data['type'], method: 'post'); ?>" accept-charset="UTF-8" method="post">
       <?= $container->csrf()->field(); ?>
