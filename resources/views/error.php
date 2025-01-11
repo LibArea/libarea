@@ -24,7 +24,7 @@
 
 <body class="body-bg-fon mt30">
 
-  <main class="max-w780 mr-auto box">
+  <main class="max-w-md mr-auto box">
     <h1 class="text-3xl gray"><?= $httpCode ?></h1>
     <p class="gray-600">
       <?= $message ?>

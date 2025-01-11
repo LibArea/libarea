@@ -33,22 +33,7 @@
 
     <?php if (config('general', 'qa_site_format') == false) : ?>
       <div class="last-content content-tabs tab_active" id="post">
-        <div class="file-upload" id="file-drag">
-          <div class="flex gap mb15">
-            <img id="file-image" class="img-xl br-gray bg-white">
-            <div id="start">
-              <input id="file-upload" type="file" name="images" accept="image/*" />
-              <div class="text-sm gray-600 mt5">
-                <?= __('app.format_cover_post'); ?>.
-              </div>
-              <i class="fa fa-download" aria-hidden="true"></i>
-              <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
-            </div>
-          </div>
-          <div id="response" class="hidden">
-            <div id="messages"></div>
-          </div>
-        </div>
+        <?= insert('/_block/form/cropper/post-foto', ['post' => []]); ?>
 
         <?= insert('/_block/form/editor/toolbar-img', ['title' => __('app.post'), 'height' => '300px', 'type' => 'post-telo', 'id' => 0]); ?>
 

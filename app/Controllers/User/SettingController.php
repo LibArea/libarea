@@ -139,8 +139,6 @@ class SettingController extends Controller
     function avatarEdit()
     {
         UploadImage::set($_FILES, $this->container->user()->id(), 'user');
-
-        Msg::redirect(__('msg.change_saved'), 'success', '/setting/avatar');
     }
 
     /**

@@ -12,6 +12,10 @@ class UploadImage
 {
     public static function set($file, $content_id, $type)
     {
+		if (self::fileTypeCheck($file['images']['type']) === true) {
+		   Msg::redirect(__('msg.five_format'), 'error', '/');
+		}
+		
         if (!empty($file['images']['name'])) {
             self::img($file['images'], $content_id, $type);
         }
@@ -41,8 +45,6 @@ class UploadImage
         $name = $img['name'];
 
         if ($name) {
-
-            self::fileTypeCheck($img['type'], '/');
 
             $filename =  $pref . $content_id . '-' . time();
             $file = $img['tmp_name'];
@@ -95,8 +97,6 @@ class UploadImage
         $file       = $img['tmp_name'];
         $filename   = 'post-' . time();
 
-        self::fileTypeCheck($img['type'], '/');
-
         // For the body of the post, if png then we will not change the file extension
         // Для тела поста, если png то не будем менять расширение файла
         $file_type = ($img['type'] == 'image/png') ? 'png' : 'webp';
@@ -137,19 +137,19 @@ class UploadImage
                 // 1920px / 350px
                 $path_cover_img     = HLEB_PUBLIC_DIR . Img::PATH['users_cover'];
                 $path_cover_small   = HLEB_PUBLIC_DIR . Img::PATH['users_cover_small'];
+				$redirect = '/setting/avatars';
                 break;
             default:
                 $path_cover_img     = HLEB_PUBLIC_DIR . Img::PATH['facets_cover'];
                 $path_cover_small   = HLEB_PUBLIC_DIR . Img::PATH['facets_cover_small'];
+				$redirect = '/';
         }
 
         $pref = 'cover-';
         $default_img = 'cover_art.jpeg';
 
         if ($img) {
-
-            self::fileTypeCheck($img['type'], '/');
-
+			
             $filename =  $pref . $content_id . '-' . time();
             $file_cover = $img['tmp_name'];
 
@@ -196,8 +196,9 @@ class UploadImage
     // Post cover
     public static function coverPost($img, $post, $redirect)
     {
-        // Width check
-        self::fileTypeCheck($img['type'], $redirect);
+		if (self::fileTypeCheck($img['type']) === true) {
+		   Msg::redirect(__('msg.five_format'), 'error', '/');
+		}
 
         $width_h  = getimagesize($img['tmp_name']);
         if ($width_h < 500) {
@@ -301,14 +302,14 @@ class UploadImage
         }
     }
 
-    public static function fileTypeCheck($type, $redirect)
+    public static function fileTypeCheck($type)
     {
         // permitted
         $types = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
         if (!in_array($type, $types)) {
-            Msg::redirect(__('msg.five_format'), 'error', $redirect);
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

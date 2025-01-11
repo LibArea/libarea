@@ -50,7 +50,7 @@ class EditFacetController extends Controller
                     'user'              => UserModel::get($facet['facet_user_id'], 'id'),
                     'sheet'             => $facet['facet_type'] . 's',
                     'type'              => $type,
-                    'facet_inf'            => $facet,
+                    'facet_inf'			=> $facet,
                 ]
             ]
         );
@@ -66,7 +66,8 @@ class EditFacetController extends Controller
         $new_type = RulesFacet::rulesEdit($data, $facet);
 
         UploadImage::set($_FILES, $facet['facet_id'], 'facet');
-
+		
+		
         $facet_user_id = $this->selectAuthor($facet['facet_user_id'], Request::post('user_id')->value());
 
         $post_related = $this->relatedPost();
@@ -87,13 +88,54 @@ class EditFacetController extends Controller
                 'facet_top_level'           => $facet_top_level == 'on' ? 1 : 0,
                 'facet_post_related'        => $post_related,
                 'facet_type'                => $new_type,
-                'facet_is_comments'            => $facet_is_comments == 'on' ? 1 : 0,
+                'facet_is_comments'			=> $facet_is_comments == 'on' ? 1 : 0,
             ]
         );
 
         self::setModification($data);
 
         Msg::redirect(__('msg.change_saved'), 'success', url('redirect.facet', ['id' => $data['facet_id']]));
+    }
+	
+    /**
+     * Avatar and cover upload form
+     * Форма загрузки аватарки и обложики
+     *
+     * @return void
+     */
+    function logoForm()
+    {
+        $type = Request::param('type')->asString();
+        $facet  = FacetPresence::index(Request::param('id')->asInt(), 'id', $type);
+
+        // Доступ получает только автор и админ
+        if ($facet['facet_user_id'] != $this->container->user()->id() && !$this->container->user()->admin()) {
+            redirect('/');
+        }
+		
+        render(
+            '/facets/edit-logo',
+            [
+                'meta'  => Meta::get(__('app.logo')),
+                'data'  => [
+                    'type'		=> $type,
+                    'facet_inf'	=> $facet,
+                ]
+            ]
+        );
+    }
+
+    function logoEdit()
+    {
+        $type = Request::param('type')->asString();
+        $facet  = FacetPresence::index(Request::param('facet_id')->asInt(), 'id', $type);
+
+        // Доступ получает только автор и админ
+        if ($facet['facet_user_id'] != $this->container->user()->id() && !$this->container->user()->admin()) {
+            redirect('/');
+        }
+
+        UploadImage::set($_FILES, $facet['facet_id'], 'facet');
     }
 
     public static function setModification($data)

@@ -93,3 +93,10 @@ img.emoji {
   display: inline-block;
   border-color: transparent;
 }
+
+.prevImg {
+  max-width: 100%;
+  max-height: 400px;
+  display: block;
+  margin-top: 20px;
+}

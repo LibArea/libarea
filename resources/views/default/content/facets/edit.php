@@ -1,6 +1,6 @@
-<?= insert('/_block/add-js-css');
-$fs = $data['facet_inf'];
-$url = url('redirect.facet', ['id' => $fs['facet_id']]);
+<?php 
+  $fs = $data['facet_inf'];
+  $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
 
 <main>
@@ -16,6 +16,10 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
                 'url'       => url('facet.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.edit_' . $data['type'],
               ], [
+                'id'        => 'topic',
+                'url'       => url('facet.form.logo.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
+                'title'     => 'app.logo',
+              ], [
                 'id'        => 'team',
                 'url'       => url('team.form.edit', ['type' => $data['type'], 'id' => $fs['facet_id']]),
                 'title'     => 'app.team',
@@ -27,46 +31,10 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
       <a class="gray-600" href="<?= $url; ?>"><?= __('app.go_to'); ?></a>
     </div>
 
-    <form class="max-w-md" action="<?= url('edit.facet', ['type' => $fs['facet_type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
+	<form class="max-w-md" action="<?= url('edit.facet', ['type' => $fs['facet_type']], method: 'post'); ?>" method="post" enctype="multipart/form-data">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/facet-type', ['type' => $fs['facet_type']]); ?>
-
-      <div class="file-upload mb10 mt15" id="file-drag">
-        <div class="flex">
-          <?= Img::image($fs['facet_img'], $fs['facet_title'], 'img-xl', 'logo', 'max'); ?>
-          <img id="file-image" class="img-xl br-gray bg-white">
-        </div>
-        <div id="start" class="mt10">
-          <input class="text-xs" id="file-upload" type="file" name="images" accept="image/*" />
-          <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
-        </div>
-        <div id="response" class="hidden">
-          <div id="messages"></div>
-        </div>
-      </div>
-      <?php if ($fs['facet_type'] == 'blog') : ?>
-        <div class="file-upload mb20" id="file-drag">
-          <div class="flex3">
-            <?php if ($fs['facet_cover_art']) : ?>
-              <div class="mr20">
-                <img src="<?= Img::cover($fs['facet_cover_art'], 'blog'); ?>" class="w-100 br-gray">
-                <input type="hidden" name="cover" value="<?= $fs['facet_cover_art']; ?>">
-              </div>
-            <?php endif; ?>
-            <div class="mt10" id="start">
-              <input class="text-xs" id="file-upload" type="file" name="cover" accept="image/*" />
-              <div id="notimage" class="none">Please select an image</div>
-            </div>
-          </div>
-          <div id="response" class="hidden">
-            <div id="messages"></div>
-          </div>
-        </div>
-      <?php endif; ?>
-      <div class="mb20">
-        <?= Html::sumbit(__('app.download')); ?>
-      </div>
-      <hr>
+	  
       <fieldset>
         <label for="facet_title"><?= __('app.title'); ?><sup class="red">*</sup></label>
         <input minlength="3" maxlength="64" type="text" name="facet_title" value="<?= htmlEncode($fs['facet_title']); ?>">

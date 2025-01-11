@@ -40,28 +40,7 @@
 <?php endif; ?>
 
 <?php if ($post['post_type'] == 'post') : ?>
-  <div class="file-upload mb20" id="file-drag">
-    <div class="flex gap">
-      <?php if ($post['post_content_img']) : ?>
-        <div>
-          <?= Img::image($post['post_content_img'], $post['post_title'], 'w160', 'post', 'cover'); ?>
-          <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
-          <a class="img-remove text-sm" href="<?= url('delete.post.cover', ['id' => $post['post_id']]); ?>">
-            <?= __('app.remove'); ?>
-          </a>
-        </div>
-      <?php endif; ?>
-
-      <img id="file-image" class="img-xl br-gray bg-white">
-    </div>
-    <div id="start" class="mt10">
-      <input id="file-upload" type="file" name="images" accept="image/*" />
-      <div id="notimage" class="none"><?= __('app.select_image'); ?></div>
-    </div>
-    <div id="response" class="hidden">
-      <div id="messages"></div>
-    </div>
-  </div>
+    <?= insert('/_block/form/cropper/post-foto', ['post' => $post]); ?>
 <?php endif; ?>
 
 <?= insert('/_block/form/editor/toolbar-img', ['height'  => '300px', 'content' => $post['post_content'], 'title' => __('app.post'), 'type' => 'post-telo', 'id' => $post['post_id']]); ?>
