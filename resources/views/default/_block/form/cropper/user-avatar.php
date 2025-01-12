@@ -6,7 +6,7 @@
 <div class="prevImg">
 	<img id="previsaoImagemAva" style="display:none;">
 </div>
-<button id="btnUploadAva" style="display:none;"><?= __('app.download'); ?></button>
+<button id="btnUploadAva" class="btn btn-primary" style="display:none;"><?= __('app.download'); ?></button>
 
 <script nonce="<?= config('main', 'nonce'); ?>">
 	let cropper;

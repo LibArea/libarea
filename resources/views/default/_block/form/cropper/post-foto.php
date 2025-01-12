@@ -1,23 +1,26 @@
 <div class="mb20">
-	<div>
-		<?php if (!empty($post['post_content_img'])) : ?>
-			 <?= Img::image($post['post_content_img'], $post['post_title'], 'block br-gray max-w-full mb15', 'post', 'cover'); ?>
-			  <a class="img-remove text-sm" href="<?= url('delete.post.cover', ['id' => $post['post_id']]); ?>">
-				<?= __('app.remove'); ?>
-			  </a>
-		<?php else : ?>
-			<div class="br-gray text-sm gray mb15">
-				<?= __('app.no_cover'); ?>...
-			</div>
-		<?php endif; ?>
-		<input type="file" id="txtCaminhoImagemCover" name="images" accept="image/*">
+	<?php if (!empty($post['post_content_img'])) : ?>
+		 <?= Img::image($post['post_content_img'], $post['post_title'], 'block br-gray max-w-full mb15', 'post', 'cover'); ?>
+		  <a class="img-remove text-sm" href="<?= url('delete.post.cover', ['id' => $post['post_id']]); ?>">
+			<?= __('app.remove'); ?>
+		  </a>
+	<?php else : ?>
+		<div class="br-gray text-sm gray mb15">
+			<?= __('app.no_cover'); ?>...
+		</div>
+		
+		<input type="file" id="txtCaminhoImagemCover" accept="image/*">
+		
+		
+		<img id="inputImg" style="display:none;">
+		<input type="hidden" id="UpImg" name="images" accept="image/*">
+	<?php endif; ?>
 
-	</div>
 	<div id="prev" class="prevImg">
 		<img id="previsaoImagemCover" style="display:none;">
 	</div>
 
-	<div id="btnUploadCover" style="display:none;"><?= __('app.download'); ?></div>
+	<div id="btnUploadCover" class="btn btn-primary" style="display:none;"><?= __('app.download'); ?></div>
 </div>
 
 <script nonce="<?= config('main', 'nonce'); ?>">
@@ -28,6 +31,7 @@
 	const btnUploadCover = document.getElementById('btnUploadCover');
 	const prev = document.getElementById('prev');
 	const inputImg = document.getElementById('inputImg');
+	const UpImg = document.getElementById('UpImg');
 
 	txtCaminhoImagemCover.addEventListener('change', (event) => {
 		const file = event.target.files[0];
@@ -59,8 +63,17 @@
 
 				formData.append('cover', blob, 'tmp_name.php');
 				
-				//prev.style.display = 'none';
-				txtCaminhoImagemCover.value = blob;
+				//previsaoImagemCover.setAttribute("src", '');
+				
+				var croppedImageDataURL = cropperAva.getCroppedCanvas();
+				
+				prev.style.display = 'none';
+				 
+				inputImg.style.display = 'block'; 
+				 
+				inputImg.setAttribute("src", croppedImageDataURL.toDataURL("image/jpeg"));
+				
+				UpImg.setAttribute("value", croppedImageDataURL.toDataURL("image/jpeg"));
 
 				/* fetch('<?= url('setting.edit.avatar', method: 'post'); ?>', {
 						method: 'POST',

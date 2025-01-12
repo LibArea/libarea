@@ -12,10 +12,6 @@ class UploadImage
 {
     public static function set($file, $content_id, $type)
     {
-		if (self::fileTypeCheck($file['images']['type']) === true) {
-		   Msg::redirect(__('msg.five_format'), 'error', '/');
-		}
-		
         if (!empty($file['images']['name'])) {
             self::img($file['images'], $content_id, $type);
         }
@@ -28,6 +24,10 @@ class UploadImage
 
     public static function img($img, $content_id, $type)
     {
+		if (self::fileTypeCheck($img['type']) === true) {
+		   Msg::redirect(__('msg.five_format'), 'error', '/');
+		}
+		
         switch ($type) {
             case 'facet':
                 $path_img       = HLEB_PUBLIC_DIR . Img::PATH['facets_logo'];
@@ -132,6 +132,10 @@ class UploadImage
     // Member cover
     public static function cover($img, $content_id, $type)
     {
+		if (self::fileTypeCheck($img['type']) === true) {
+		   Msg::redirect(__('msg.five_format'), 'error', '/');
+		}
+		
         switch ($type) {
             case 'user':
                 // 1920px / 350px
@@ -193,29 +197,23 @@ class UploadImage
         return false;
     }
 
-    // Post cover
     public static function coverPost($img, $post, $redirect)
     {
-		if (self::fileTypeCheck($img['type']) === true) {
-		   Msg::redirect(__('msg.five_format'), 'error', '/');
-		}
-
-        $width_h  = getimagesize($img['tmp_name']);
-        if ($width_h < 500) {
-            Msg::redirect(__('msg.five_width'), 'error', $redirect);
-        }
-
+		[$imageInfo, $tempFile] =  Img::createTempImage($img);
+	
         $path = HLEB_PUBLIC_DIR . Img::PATH['posts_cover'];
         $year = date('Y') . '/';
-        $file = $img['tmp_name'];
+
         $filename = 'c-' . time();
 
         self::createDir($path . $year);
 
         $image = new SimpleImage();
-        $image->load($file);
+        $image->load($tempFile);
         $image->resizeToWidth(1050);
         $image->save($path . $year . $filename . '.webp', "webp");
+
+		unlink($tempFile);
 
         $post_img = $year . $filename . '.webp';
 
@@ -230,8 +228,6 @@ class UploadImage
             FileModel::removal($post_content_img);
         }
 
-        // Img::PATH['posts_cover'] добавить после запроса.
-        // UPDATE files SET file_path = CONCAT('/uploads/posts/cover/', file_path) where file_type = 'post';
         FileModel::set(
             [
                 'file_path'         => $post_img,

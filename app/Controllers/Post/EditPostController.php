@@ -65,6 +65,9 @@ class EditPostController extends Controller
 
 	public function edit(): void
     {
+		
+	 	$img = Request::post('images')->value();
+		
 		$post_id = Request::post('post_id')->asInt();
 		$post = PostPresence::index($post_id);
 
@@ -82,8 +85,8 @@ class EditPostController extends Controller
 
 		// Post cover
 		$post_img = $post['post_content_img'];
-		if (!empty($_FILES['images']['name'])) {
-			$post_img = UploadImage::coverPost($_FILES['images'], $post, $redirect);
+		if (!empty($img)) {
+			$post_img = UploadImage::coverPost($img, $post, $redirect);
 		}
 
 		// Related topics

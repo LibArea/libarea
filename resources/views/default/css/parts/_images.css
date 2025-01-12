@@ -94,9 +94,11 @@ img.emoji {
   border-color: transparent;
 }
 
+
+#inputImg,
 .prevImg {
   max-width: 100%;
   max-height: 400px;
   display: block;
-  margin-top: 20px;
+  margin: 20px 0 15px 0;
 }

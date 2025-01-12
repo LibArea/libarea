@@ -114,4 +114,77 @@ class Img
 
         return $path . $file;
     }
+	
+	// Cоздания изображения из строки данных
+	public static function createImageFromString($imageData)
+	{
+		if (!$imageData) {
+			return null;
+		}
+
+		$temp_dir = HLEB_GLOBAL_DIR . '/storage/tmp';
+
+		$tempFile = tempnam($temp_dir, 'og_image');
+		if ($tempFile === false) {
+			error_log("Не удалось создать временный файл");
+			return null;
+		}
+
+		file_put_contents($tempFile, $imageData);
+
+		$imageInfo = getimagesize($tempFile);
+		if (!$imageInfo) {
+			unlink($tempFile);
+			error_log("Не удалось получить информацию об изображении");
+			return null;
+		}
+
+		$image = null;
+		switch ($imageInfo[2]) {
+			case IMAGETYPE_JPEG:
+				$image = imagecreatefromjpeg($tempFile);
+				break;
+			case IMAGETYPE_PNG:
+				$image = imagecreatefrompng($tempFile);
+				break;
+			case IMAGETYPE_WEBP:
+				$image = imagecreatefromwebp($tempFile);
+				break;
+		}
+
+		unlink($tempFile);
+
+		return $image;
+	}
+	
+	public static function createTempImage($imageData)
+	{
+		if (!$imageData) {
+			return null;
+		}
+
+    	 $data = explode( ',', $imageData);
+
+		// Obtain the original content (usually binary data)
+		$imageData = base64_decode($data[1]);
+
+		$temp_dir = HLEB_GLOBAL_DIR . '/storage/tmp';
+
+		$tempFile = tempnam($temp_dir, 'og_image');
+		if ($tempFile === false) {
+			error_log("Не удалось создать временный файл");
+			return null;
+		}
+
+		file_put_contents($tempFile, $imageData);
+
+		$imageInfo = getimagesize($tempFile);
+		if (!$imageInfo) {
+			unlink($tempFile);
+			error_log("Не удалось получить информацию об изображении");
+			return null;
+		}
+
+		return [$imageInfo, $tempFile];
+	}
 }

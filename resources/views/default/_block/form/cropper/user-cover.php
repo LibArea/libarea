@@ -5,7 +5,7 @@
 			<?= __('app.remove'); ?>
 		</a>
 	<?php else : ?>
-		<div class="br-gray text-sm gray mb15">
+		<div class="br-gray text-sm gray mb15 mt20">
 			<?= __('app.no_cover'); ?>...
 		</div>
 	<?php endif; ?>
@@ -15,7 +15,7 @@
 <div class="prevImg">
 	<img id="previsaoImagemCover" style="display:none;">
 </div>
-<button id="btnUploadCover" style="display:none;"><?= __('app.download'); ?></button>
+<button id="btnUploadCover" class="btn btn-primary" style="display:none;"><?= __('app.download'); ?></button>
 
 <script nonce="<?= config('main', 'nonce'); ?>">
 	let cropperAva;

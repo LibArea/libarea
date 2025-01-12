@@ -16,7 +16,7 @@ class MetaImage
 		// Устанавливаем фон и определяем цвет текста
 		if ($bgImage) {
 			$imageData = self::loadImageFromUrl($bgImage);
-			$bgImage = self::createImageFromString($imageData);
+			$bgImage = Img::createImageFromString($imageData);
 
 			if ($bgImage) {
 				// Получаем размеры фонового изображения
@@ -99,7 +99,7 @@ class MetaImage
 		// Добавляем логотип
 		if (isset($avatar)) {
 			$logoData = self::loadImageFromUrl($avatar);
-			$logoImage = self::createImageFromString($logoData);
+			$logoImage = Img::createImageFromString($logoData);
 
 			if ($logoImage) {
 				$logoWidth = imagesx($logoImage);
@@ -129,47 +129,6 @@ class MetaImage
 		header('Content-Type: image/png');
 		imagepng($image);
 		imagedestroy($image);
-	}
-
-	// Cоздания изображения из строки данных
-	public static function createImageFromString($imageData)
-	{
-		if (!$imageData) {
-			return null;
-		}
-
-		$temp_dir = HLEB_GLOBAL_DIR . '/storage/tmp';
-
-		$tempFile = tempnam($temp_dir, 'og_image');
-		if ($tempFile === false) {
-			error_log("Не удалось создать временный файл");
-			return null;
-		}
-
-		file_put_contents($tempFile, $imageData);
-
-		$imageInfo = getimagesize($tempFile);
-		if (!$imageInfo) {
-			unlink($tempFile);
-			error_log("Не удалось получить информацию об изображении");
-			return null;
-		}
-
-		$image = null;
-		switch ($imageInfo[2]) {
-			case IMAGETYPE_JPEG:
-				$image = imagecreatefromjpeg($tempFile);
-				break;
-			case IMAGETYPE_PNG:
-				$image = imagecreatefrompng($tempFile);
-				break;
-			case IMAGETYPE_WEBP:
-				$image = imagecreatefromwebp($tempFile);
-				break;
-		}
-
-		unlink($tempFile);
-		return $image;
 	}
 
 	// Перенос текста
