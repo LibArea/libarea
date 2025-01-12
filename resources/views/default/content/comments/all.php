@@ -32,6 +32,6 @@
 </main>
 <aside>
   <div class="box sticky top-sm">
-    <?= __('meta.comments_desc'); ?>
+    <?= __('meta.all_comments_desc'); ?>
   </div>
 </aside>

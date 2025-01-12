@@ -52,14 +52,14 @@ return [
     'my_topics_info'            => 'Topics I subscribe to',
     'my_topics_desc'            => 'Topics I read or created',
 
-    'comments_all_info'         => 'All comments...',
     'comments_deleted_info'     => 'Removed Comments...',
     'answers_all_info'          => 'All answers...',
     'answers_deleted_info'      => 'Deleted responses...',
 
-    'comments_desc'     => 'All comments (per replies) in order of priority in the community',
-    'domain_desc'       => 'Grouping posts in the community by domain',
-    'all_comments'      => 'All comments',
+    'all_comments'      		=> 'All comments',
+    'all_comments_desc'     	=> 'All comments (per replies) in order of priority in the community',
+    'all_comments_info'         => 'All comments...',
+    'domain_desc'       		=> 'Grouping posts in the community by domain',
 
     'feed_facet_desc'           => 'General feed. ',
     'feed_facet_posts_desc'     => 'Post feed. ',
