@@ -44,7 +44,7 @@
         <ul>
           <?php foreach ($data['topics'] as $recomm) : ?>
             <li class="flex justify-between items-center mb10">
-              <a class="flex items-center gap-min" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
+              <a class="flex items-center gap-sm" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
                 <?= Img::image($recomm['facet_img'], $recomm['facet_title'], 'img-sm', 'logo', 'small'); ?>
                 <?= $recomm['facet_title']; ?>
               </a>

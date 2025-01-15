@@ -46,9 +46,8 @@
                 <label for="comment_folder_<?= $node['comment_id']; ?>" class="comment-folder comment_thread"></label>
 
                 <div class="comment-body">
-                  <div class="flex justify-between">
-                    <div class="flex text-sm gap-min">
-                      <a class="gray-600" href="<?= url('profile', ['login' => $node['login']]); ?>">
+                    <div class="user-info">
+                      <a href="<?= url('profile', ['login' => $node['login']]); ?>">
                         <?= Img::avatar($node['avatar'], $node['login'], 'img-sm mr5', 'small'); ?>
                         <span class="nickname<?php if (Html::loginColor($node['created_at'])) : ?> new<?php endif; ?>">
                           <?= $node['login']; ?>
@@ -64,11 +63,11 @@
                           <use xlink:href="/assets/svg/icons.svg#mic"></use>
                         </svg>
                       <?php endif; ?>
-                      <span class="gray-600 lowercase">
+                      <span class="lowercase">
                         <?= langDate($node['comment_date']); ?>
                       </span>
                       <?php if (strtotime($node['comment_modified']) > strtotime($node['comment_date'])) : ?>
-                        <span class="gray-600 mb-none">
+                        <span class="mb-none">
                           (<?= __('app.ed'); ?>.)
                         </span>
                       <?php endif; ?>
@@ -88,8 +87,6 @@
                           </svg></a>
                       <?php endif; ?>
                     </div>
-                     
-                  </div>
                   <div class="comment-text">
                     <?= markdown($node['comment_content'], 'text'); ?>
                   </div>

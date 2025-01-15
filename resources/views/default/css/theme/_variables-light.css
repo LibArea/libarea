@@ -1,24 +1,10 @@
 /*
- * Basic Styles
+ * Default (light) theme
  *
- * Базовые стили
+ * Тема по умолчанию (светлая)
  */
 
 :root {
-  --font-family: "Roboto", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-  --line-height: 1.5rem;
-  --font-size: 1.063rem;
-  
-  --rounded-none: 0px;
-  /* --rounded-sm: 0.125rem; /* 2px */
-  --rounded: 0.313rem; /* 5px */
-  --rounded-full: 9999px;
-  
-  --max-w-full: 100%;
-  --max-w-sm: 300px;
-  --max-w-md: 800px;
-  
-  /* Default (light) theme */
   --bg-color: #f3f6f7;
   --text-color: #030303;
 

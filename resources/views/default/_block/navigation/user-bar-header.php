@@ -1,5 +1,4 @@
-<div class="flex gap-max items-center">
-
+<div class="flex gap-lg items-center">
   <div class="button-search ml20 mb-none">
 	<svg class="icon large">
 	   <use xlink:href="/assets/svg/icons.svg#search"></use>

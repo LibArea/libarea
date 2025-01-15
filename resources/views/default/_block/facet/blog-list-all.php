@@ -22,7 +22,7 @@
       <?php endif; ?>
       <div class="mt10 gray flex justify-between">
         <?= fragment($facet['facet_short_description'], 68); ?>
-        <span class="flex right gap-min gray-600 text-sm">
+        <span class="flex right gap-sm gray-600 text-sm">
           <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#post"></use>
           </svg>

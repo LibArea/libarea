@@ -4,9 +4,9 @@ foreach ($comments as $comment) :
   <?php if ($n != 1) { ?><div class="br-dotted mt10 mb10"></div><?php } ?>
   <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != $container->user()->id() && !$container->user()->admin()) continue; ?>
   <div class="content-body">
-    <div class="flex justify-between gap-min">
-      <div class="flex gap-min">
-        <a class="gray-600 flex gap-min" href="<?= url('profile', ['login' => $comment['login']]); ?>">
+    <div class="flex justify-between gap-sm">
+      <div class="flex gap-sm">
+        <a class="gray-600 flex gap-sm" href="<?= url('profile', ['login' => $comment['login']]); ?>">
           <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm', 'small'); ?>
           <?= $comment['login']; ?>
         </a>

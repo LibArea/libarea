@@ -86,14 +86,14 @@ $post = $data['post'];
     <div class="p15 br-gray items-center flex justify-between">
       <div class="items-center flex gap gray-600">
         <?= Html::votes($post, 'post'); ?>
-        <div class="items-center flex gap-min">
+        <div class="items-center flex gap-sm">
           <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#eye"></use>
           </svg>
           <?= $post['post_hits_count'] == 0 ? 1 : $post['post_hits_count']; ?>
         </div>
       </div>
-      <div class="items-center flex gap-max">
+      <div class="items-center flex gap-lg">
         <?php if ($container->user()->active()) : ?>
           <?php if (is_array($data['post_signed'])) : ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 gray-600">

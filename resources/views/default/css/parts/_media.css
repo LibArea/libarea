@@ -144,8 +144,8 @@ main {
     font-size: 18px;
   }
 
-  .gap-max {
-    gap: 1.5rem;
+  .gap-lg {
+    gap: var(--gap-base);
   }
 
   .dropdown.notif {

@@ -16,7 +16,7 @@
             <?php endif; ?>
           </h1>
 
-          <div class="flex justify-between gap-max mb-block">
+          <div class="flex justify-between gap-lg mb-block">
             <div class="w-40 mb-w-100 img-preview">
               <?= Img::website('thumb', host($item['item_url']), 'w-100 shadow-bottom'); ?>
             </div>

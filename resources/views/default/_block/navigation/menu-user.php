@@ -11,7 +11,7 @@ $login = $user['login'] ?? false;
     <?= Img::avatar($user['avatar'], $user['login'], 'img-base mr5', 'small'); ?>
     <div>
       <span class="gray nickname"><?= $login; ?></span>
-      <div class="text-xs gray-600"><?= $user['email']; ?></div>
+      <div class="text-sm gray-600"><?= $user['email']; ?></div>
   </a>
 </div>
 </div>
@@ -20,12 +20,12 @@ $login = $user['login'] ?? false;
   <?php if ($blog) : ?>
     <li>
       <hr>
-      <a class="text-xs gray-600" href="<?= url('blog', ['slug' => $blog['facet_slug']]); ?>">
+      <a class="text-sm gray-600" href="<?= url('blog', ['slug' => $blog['facet_slug']]); ?>">
         <div class="block w-100">
-          <div class="uppercase text-xs gray-600 text-xs"><?= __('app.my_blog'); ?></div>
+          <div class="uppercase text-sm gray-600"><?= __('app.my_blog'); ?></div>
           <b><?= $blog['facet_slug']; ?></b>
         </div>
-        <div class="right text-xs gray-600"><svg class="icon">
+        <div class="right text-sm gray-600"><svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#chevron-right"></use>
           </svg></div>
       </a>

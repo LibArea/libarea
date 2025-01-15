@@ -9,7 +9,7 @@
     </svg></span>
 </fieldset>
 
-<fieldset class="flex gap-min gray">
+<fieldset class="flex gap-sm gray">
   <input id="rememberme" name="rememberme" type="checkbox" value="1">
   <label class="m0" for="rememberme"><?= __('app.remember_me'); ?></label>
 </fieldset>

@@ -27,7 +27,7 @@
               $id     = $container->user()->id();
             endif;
             ?>
-            <div class="flex gap-min items-center gray-600 lowercase text-sm">
+            <div class="flex gap-sm items-center gray-600 lowercase text-sm">
               <?= Img::avatar($ava, $login, 'img-base', 'max'); ?>
               <a class="black nickname" href="<?= url('profile', ['login' => $login]); ?>"><?= $login; ?></a>
               <?= langDate($val['message_date']); ?>

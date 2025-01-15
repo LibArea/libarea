@@ -82,7 +82,7 @@
               <?= __('admin.remove'); ?>
             <?php endif; ?>
           </a>
-          <div class="lowercase text-xs">
+          <div class="lowercase text-sm">
             <?= __('admin.content'); ?>
           </div>
         </td>
@@ -97,7 +97,7 @@
               <a data-status="<?= $audit['action_type']; ?>" data-id="<?= $audit['content'][$audit['action_type'] . '_id']; ?>" class="audit-status text-sm">
                 <?= __('admin.approve'); ?>
               </a>
-              <div class="text-xs"><?= __('admin.off_mode'); ?></div>
+              <div class="text-sm"><?= __('admin.off_mode'); ?></div>
             <?php endif; ?>
           <?php else : ?>
             <div class="<?php if ($audit['read_flag'] == 0) : ?> bg-red-200<?php endif; ?>">

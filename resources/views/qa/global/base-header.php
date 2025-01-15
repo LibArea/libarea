@@ -8,27 +8,27 @@ $facet  = $data['facet'] ?? false; ?>
 
   <header class="bg-white mb10">
     <div class="br-bottom wrap mb-none items-center flex gap mb5">
-      <a class="p5 black text-xs" href="/topics">
+      <a class="p5 black text-sm" href="/topics">
         <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#hash"></use>
         </svg> <?= __('app.topics'); ?>
       </a>
-      <a class="black text-xs" href="/blogs">
+      <a class="black text-sm" href="/blogs">
         <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#post"></use>
         </svg> <?= __('app.blogs'); ?>
       </a>
-      <a class="black text-xs" href="/users">
+      <a class="black text-sm" href="/users">
         <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#users"></use>
         </svg> <?= __('app.users'); ?>
       </a>
-      <a class="black text-xs" href="/web">
+      <a class="black text-sm" href="/web">
         <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#link"></use>
         </svg> <?= __('app.catalog'); ?>
       </a>
-      <a class="black text-xs" href="/search">
+      <a class="black text-sm" href="/search">
         <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#search"></use>
         </svg> <?= __('app.search'); ?>

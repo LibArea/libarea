@@ -5,7 +5,7 @@ $profile = url('profile', ['login' => $notif['login']]);
 
 <?php foreach (config('notification', 'list') as $key => $n) : ?>
   <?php if ($n['id'] == $notif['type']) : ?>
-	<div class="br-bottom flex items-center <?= $size; ?> gap-min p5<?php if ($notif['flag'] == 0) { ?> bg-yellow<?php } ?>">
+	<div class="br-bottom flex items-center <?= $size; ?> gap-sm p5<?php if ($notif['flag'] == 0) { ?> bg-yellow<?php } ?>">
 	  <div class="relative img-base mr5">
 		<?= Img::avatar($notif['avatar'], $notif['login'], 'img-base', 'min'); ?>
 		<svg class="number-svg <?= $n['css']; ?>">

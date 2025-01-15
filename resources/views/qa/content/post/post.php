@@ -11,7 +11,7 @@
         <div class="flex mr15">
           <div class="box-answer block bg-lightgray gray mb-none  mr15">
             <?= $post['post_votes']; ?>
-            <div class="text-xs"> <?= Html::numWord($post['post_votes'], __('app.num_up'), false); ?></div>
+            <div class="text-sm"> <?= Html::numWord($post['post_votes'], __('app.num_up'), false); ?></div>
           </div>
           <?php $bg = $post['post_feature'] == 0 ? ' bg-green' : ' bg-blue'; ?>
           <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
@@ -19,7 +19,7 @@
             <a class="block white" href="<?= $post_url; ?>#comment">
               <?= $post['post_comments_count']; ?>
             </a>
-            <div class="text-xs white"><?= Html::numWord($post['post_comments_count'], __('app.num_answer'), false); ?></div>
+            <div class="text-sm white"><?= Html::numWord($post['post_comments_count'], __('app.num_answer'), false); ?></div>
           </div>
         </div>
 
@@ -44,7 +44,7 @@
               <?php endif; ?>
             </div>
 
-            <div class="gray-600 text-xs">
+            <div class="gray-600 text-sm">
               <span class="mb-none">
                 <?= $post['post_date'] ?> ·
                 <?= Html::numWord($post['post_hits_count'], __('app.num_view'), true); ?> ·

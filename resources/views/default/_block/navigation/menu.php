@@ -47,7 +47,7 @@ if ($container->user()->id() > 0) {
             }
  
             echo '<li class="mt15 flex gap items-center justify-between">';
-            echo '<a class="flex gap-min items-center" href="'.$url.'">';
+            echo '<a class="flex gap-sm items-center" href="'.$url.'">';
 			echo Img::image($topic['facet_img'], $topic['facet_title'], 'img-sm', 'logo', 'max');
             echo '<div class="nav-overflow">' . $topic['facet_title'].' '.$blog. '</div>';
             echo '</a></li>';

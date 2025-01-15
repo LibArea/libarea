@@ -24,12 +24,8 @@ $blog = $data['blog'][0] ?? null;
         </div>
       <?php endif; ?>
 
-      <h1 class="m0 mb5"><?= $post['post_title']; ?>
-        <?= insert('/content/post/post-title', ['post' => $post]); ?>
-      </h1>
-
-      <div class="text-sm flex gray-600 gap">
-        <a class="gray-600" title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
+      <div class="user-info">
+        <a title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'small'); ?>
           <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> new<?php endif; ?>"><?= $post['login']; ?></span>
         </a>
@@ -42,6 +38,10 @@ $blog = $data['blog'][0] ?? null;
           <?= insert('/_block/admin-dropdown-post', ['post' => $post]); ?>
         <?php endif; ?>
       </div>
+
+      <h1 class="m0 mb5"><?= $post['post_title']; ?>
+        <?= insert('/content/post/post-title', ['post' => $post]); ?>
+      </h1>
 
       <?php if ($post['post_thumb_img']) : ?>
         <div class="img-preview mt10">
@@ -100,14 +100,14 @@ $blog = $data['blog'][0] ?? null;
       <div class="mt15 mb15 items-center flex justify-between">
         <div class="items-center flex gap gray-600">
           <?= Html::votes($post, 'post'); ?>
-          <div class="items-center flex gap-min">
+          <div class="items-center flex gap-sm">
             <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#eye"></use>
             </svg>
             <?= $post['post_hits_count'] == 0 ? 1 : Html::formatToHuman($post['post_hits_count']); ?>
           </div>
         </div>
-        <div class="items-center flex gap-max">
+        <div class="items-center flex gap-lg">
           <?php if ($container->user()->active()) : ?>
             <?php if (is_array($data['post_signed'])) : ?>
               <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 gray-600">

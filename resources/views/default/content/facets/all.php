@@ -2,7 +2,7 @@
   <div class="box">
     <div class="mb15">
       <h1 class="title"><?= __('meta.' . $data['sheet'] . '_' . $data['type']); ?></h1>
-      <span class="gray-600 text-xs">
+      <span class="gray-600 text-sm">
         <?= __('meta.' . $data['sheet'] . '_' . $data['type'] . '_info'); ?>.
       </span>
     </div>
@@ -58,7 +58,7 @@
           <?= insert('/_block/facet/blog-list-all', ['facets' => $data['facets']]); ?>
         </div>
       <?php else : ?>
-        <div class="flex justify-between gap-max flex-wrap mb20">
+        <div class="flex justify-between gap-lg flex-wrap mb20">
           <?= insert('/_block/facet/topic-list-all', ['facets' => $data['facets']]); ?>
         </div>
       <?php endif; ?>

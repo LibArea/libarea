@@ -8,7 +8,7 @@ $facet  = $data['facet'] ?? false; ?>
   <header class="text-header wrap">
     <div class="d-header_contents justify-between">
 
-      <div class="flex gap-max items-center">
+      <div class="flex gap-lg items-center">
         <a title="<?= __('app.home'); ?>" class="logo" href="/">
           L
         </a>

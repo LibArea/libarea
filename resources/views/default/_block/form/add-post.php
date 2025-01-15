@@ -80,7 +80,7 @@
 
     <div class="last-content content-tabs" id="url">
       <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_url'))) : ?>
-        <fieldset class="flex items-center gap-min">
+        <fieldset class="flex items-center gap-sm">
           <input id="link" placeholder="<?= __('app.url_parsing'); ?>" class="post_url" type="text" name="post_url" />
           <div class="w-30"><input id="graburl" readonly="readonly" class="btn btn-outline-primary" name="submit_url" value="<?= __('app.to_extract'); ?>" /></div>
         </fieldset>

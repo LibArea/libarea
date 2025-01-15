@@ -23,7 +23,7 @@
           </div>
         </div>
 
- <div class="flex gap-max items-center mb-mt5">
+ <div class="flex gap-lg items-center mb-mt5">
     <div class="button-search ml20 mb-none">
 		<svg class="icon">
 		   <use xlink:href="/assets/svg/icons.svg#search"></use>

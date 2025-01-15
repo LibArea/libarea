@@ -1,5 +1,5 @@
 <?php foreach ($data['characteristics'] as $tp) : ?>
-   <div class="text-xs">
+   <div class="text-sm">
       <?php if ($grouping) : ?>
          <a class="ml5 green" href="<?= url('category', ['sort' => $data['sort'], 'slug' => $data['category']['facet_slug']]); ?>"><?= __('web.all'); ?></a>
       <?php endif; ?>

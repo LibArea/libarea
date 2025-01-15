@@ -5,6 +5,8 @@
  */
 
 /* Resources used for LibArea design */
+@import './parts/_variables-common.css';
+
 @import './theme/_variables-light.css';
 @import './theme/_variables-dark.css';
 

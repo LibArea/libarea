@@ -49,7 +49,7 @@ $lang = Translate::getLang();
             <?= __('admin.website'); ?>
           </a>
         </div>
-        <div class="flex gap-max items-center w-90 ml20">
+        <div class="flex gap-lg items-center w-90 ml20">
           <a class="<?= is_current(url('admin.users')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.users'); ?>">
             <svg class="icon mr5">
               <use xlink:href="/assets/svg/icons.svg#users"></use>

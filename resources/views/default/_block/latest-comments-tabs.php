@@ -4,8 +4,8 @@
     <ul class="last-content content-tabs tab_active" id="home">
       <?php foreach ($latest_comments as $comment) : ?>
         <li>
-          <div class="gray-600 flex items-center gap-min text-sm">
-            <a class="flex gray-600 gap-min items-center" title="<?= $comment['login']; ?>" href="<?= url('profile', ['login' => $comment['login']]); ?>">
+          <div class="gray-600 flex items-center gap-sm text-sm">
+            <a class="flex gray-600 gap-sm items-center" title="<?= $comment['login']; ?>" href="<?= url('profile', ['login' => $comment['login']]); ?>">
               <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm', 'small'); ?>
               <span class="nickname<?php if (Html::loginColor($comment['created_at'])) : ?> new<?php endif; ?>"><?= $comment['login']; ?></span>
             </a>

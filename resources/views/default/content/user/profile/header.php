@@ -37,7 +37,7 @@ endif;
             </svg>
           </a>
         <?php else : ?>
-          <div class="flex gap-max items-center">
+          <div class="flex gap-lg items-center">
             <?php $active = $data['ignored'] ? ' red' : ' gray-600'; ?>
             <a title="<?= __('app.ignore'); ?>" id="ignore_<?= $profile['id']; ?>" class="add-ignore<?= $active; ?>" data-id="<?= $profile['id']; ?>">
               <svg class="icon">
@@ -59,7 +59,7 @@ endif;
     <?php endif; ?>
 
     <div class="flex">
-      <h1 class="mb-block mb-text-xl m15 gap-min flex flex-auto">
+      <h1 class="mb-block mb-text-xl m15 gap-sm flex flex-auto">
         <?= $profile['login']; ?>
         <?php if ($profile['name']) : ?> / <?= $profile['name']; ?><?php endif; ?>
 

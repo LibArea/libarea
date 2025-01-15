@@ -13,14 +13,14 @@
     <?php if ($container->access()->auditСontent('post', $post)) continue; ?>
 
     <article>
-      <div class="flex items-center gap-min text-sm mb5">
-        <a class="gray-600 flex gap-min items-center" href="<?= url('profile', ['login' => $post['login']]); ?>">
-          <?= Img::avatar($post['avatar'], $post['login'], 'img-sm', 'max'); ?>
+      <div class="user-info">
+        <a href="<?= url('profile', ['login' => $post['login']]); ?>">
+          <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'max'); ?>
           <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> new<?php endif; ?>">
             <?= $post['login']; ?>
           </span>
         </a>
-        <div class="gray-600 lowercase"><?= langDate($post['post_date']); ?></div>
+        <div class="lowercase"><?= langDate($post['post_date']); ?></div>
 
         <?php $type = $data['type'] ?? 'topic';
         if ($type != 'blog') : ?>
@@ -79,14 +79,14 @@
       <div class="flex flex-row items-center justify-between">
         <div class="flex gap text-sm flex-row">
           <?= Html::votes($post, 'post'); ?>
-          <div class="flex gray-600 gap-min">
+          <div class="flex gray-600 gap-sm">
             <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#eye"></use>
             </svg>
             <?= $post['post_hits_count'] == 0 ? 1 : Html::formatToHuman($post['post_hits_count']); ?>
           </div>
           <?php if ($post['post_comments_count'] != 0) : ?>
-            <a class="flex gray-600 gap-min" href="<?= $post_url; ?>#comment">
+            <a class="flex gray-600 gap-sm" href="<?= $post_url; ?>#comment">
               <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#comments"></use>
               </svg>

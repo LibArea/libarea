@@ -28,7 +28,7 @@
   </div>
 
   <div class="flex justify-between text-sm gray-600 lowercase">
-    <div class="flex gap-min">
+    <div class="flex gap-sm">
       <svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#users"></use>
       </svg>

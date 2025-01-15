@@ -1,0 +1,31 @@
+/*
+ * Common variables
+ *
+ * Общие переменные
+ */
+
+:root {
+  --font-family: "Roboto", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --line-height: 1.5rem;
+  
+  --font-size-sm: 0.875rem;  
+  --font-size-base: 1.063rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  
+  --gap-none: 0px;
+  --gap-sm: 0.4rem;
+  --gap-base: 1rem;
+  --gap-lg:  2.5rem;
+  
+  --rounded-none: 0px;
+  --rounded-sm: 0.125rem; /* 2px */
+  --rounded: 0.313rem; /* 5px */
+  --rounded-full: 9999px;
+  
+  --max-w-full: 100%;
+  --max-w-sm: 300px;
+  --max-w-md: 800px;
+}

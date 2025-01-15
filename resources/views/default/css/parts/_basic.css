@@ -25,7 +25,7 @@ html {
 body {
   line-height: var(--line-height);
   font-family: var(--font-family);
-  font-size: var(--font-size);
+  font-size: var(--font-size-base);
   background-color: var(--bg-color);
   color: var(--text-color);
   padding: 0;
@@ -373,52 +373,28 @@ li.br-li-bottom-no:last-child {
   max-width: var(--max-w-sm);
 }
 
-.text-xs {
-  font-size: 0.75rem;
-}
-
 .text-sm {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
 }
 
 .text-base {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
 
 .text-lg {
-  font-size: 1.125rem;
+  font-size: var(--font-size-lg);
 }
 
 .text-xl {
-  font-size: 1.25rem;
+  font-size: var(--font-size-xl);
 }
 
 .text-2xl {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
 }
 
 .text-3xl {
-  font-size: 1.875rem;
-}
-
-.text-4xl {
-  font-size: 2.25rem;
-}
-
-.text-5xl {
-  font-size: 3rem;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-}
-
-.text-7xl {
-  font-size: 4.5rem;
-}
-
-.text-8xl {
-  font-size: 6rem;
+  font-size: var(--font-size-3xl);
 }
 
 .grid {
@@ -426,15 +402,15 @@ li.br-li-bottom-no:last-child {
 }
 
 .gap {
-  gap: 1rem;
+  gap: var(--gap-base);
 }
 
-.gap-min {
-  gap: 0.4rem;
+.gap-sm {
+  gap: var(--gap-sm);
 }
 
-.gap-max {
-  gap: 2.5rem;
+.gap-lg {
+  gap: var(--gap-lg);
 }
 
 .flex {
