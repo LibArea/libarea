@@ -494,6 +494,16 @@ a:hover>img {
   padding: 0.24rem 0;
 }
 
+.reply-to {
+  display: none;
+  color: var(--gray-600);
+  margin-top: -2px;
+}
+
+
+.comment-body:hover .reply-to {
+  display: block;
+}
 
 li input.comment-folder-button {
   display: none;

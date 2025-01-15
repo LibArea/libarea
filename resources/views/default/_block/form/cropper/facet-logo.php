@@ -26,9 +26,19 @@
 					cropper.destroy();
 				}
 				cropper = new Cropper(previsaoImagemAva, {
-					aspectRatio: 4 / 4,
-					viewMode: 2,
-
+				    dragMode: 'move',
+					autoCropArea: 0.85,
+					restore: false,
+					guides: false,
+					center: false,
+					highlight: false,
+					cropBoxMovable: false,
+					cropBoxResizable: false,
+					toggleDragModeOnDblclick: false,
+					data: {
+					  width: 165,
+					  height: 165,
+					},
 				});
 
 				btnUploadAva.style.display = 'inline';

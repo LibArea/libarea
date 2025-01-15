@@ -5,12 +5,11 @@
 			<?= __('app.remove'); ?>
 		  </a>
 	<?php else : ?>
-		<div class="br-gray text-sm gray mb15">
-			<?= __('app.no_cover'); ?>...
+		<div class="text-sm gray mb15">
+			<?= __('app.no_cover'); ?>.  <?= __('app.format_cover_post'); ?>.
 		</div>
 		
 		<input type="file" id="txtCaminhoImagemCover" accept="image/*">
-		
 		
 		<img id="inputImg" style="display:none;">
 		<input type="hidden" id="UpImg" name="images" accept="image/*">
@@ -44,12 +43,21 @@
 					cropperAva.destroy();
 				}
 				cropperAva = new Cropper(previsaoImagemCover, {
-					aspectRatio: 16 / 8,
-					viewMode: 2,
-
+				    dragMode: 'move',
+					autoCropArea: 0.65,
+					restore: false,
+					guides: false,
+					center: false,
+					highlight: false,
+					cropBoxMovable: true,
+					cropBoxResizable: false,
+					toggleDragModeOnDblclick: false,
+					data:{
+					  width: 1050,
+					  height: 500,
+					},	
 				});
 
-				btnUploadCover.style.display = 'inline';
 				btnUploadCover.style.display = 'inline';
 			};
 			reader.readAsDataURL(file);

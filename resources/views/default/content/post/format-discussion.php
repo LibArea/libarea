@@ -82,13 +82,13 @@
                       <?php endif; ?>
 
                       <?php if ($node['comment_parent_id'] > 0) : ?>
-                        <a class="gray-600" rel="nofollow" href="<?= post_slug($post['post_id'], $post['post_slug']); ?>#comment_<?= $node['comment_parent_id']; ?>">
+                        <a class="reply-to" rel="nofollow" href="<?= post_slug($post['post_id'], $post['post_slug']); ?>#comment_<?= $node['comment_parent_id']; ?>">
                           <svg class="icon small">
                             <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
                           </svg></a>
                       <?php endif; ?>
                     </div>
-                    <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'discussion']); ?>
+                     
                   </div>
                   <div class="comment-text">
                     <?= markdown($node['comment_content'], 'text'); ?>
@@ -100,7 +100,7 @@
                   <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
                     <a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
                   <?php endif; ?>
-
+                  <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'discussion']); ?> 
                 </div>
                 <div id="el_addentry<?= $node['comment_id']; ?>" class="none"></div>
               </div>
