@@ -59,9 +59,9 @@
                         </svg>
                       <?php endif; ?>
                       <?php if ($post['post_user_id'] == $node['comment_user_id']) : ?>
-                        <svg class="icon small sky">
-                          <use xlink:href="/assets/svg/icons.svg#mic"></use>
-                        </svg>
+                        <span class="small lowercase green">
+                          <?= __('app.author'); ?>
+                        </span>
                       <?php endif; ?>
                       <span class="lowercase">
                         <?= langDate($node['comment_date']); ?>

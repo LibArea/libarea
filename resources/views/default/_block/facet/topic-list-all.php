@@ -17,9 +17,9 @@
         ]); ?>
       </span>
       <?php if ($container->user()->id() == $facet['facet_user_id']) : ?>
-        <svg class="icon small sky">
-          <use xlink:href="/assets/svg/icons.svg#mic"></use>
-        </svg>
+		<span class="small lowercase green">
+		  <?= __('app.author'); ?>
+		</span>
       <?php endif; ?>
       <div class="mt10 gray flex justify-between">
         <?= fragment($facet['facet_short_description'], 32); ?>

@@ -63,12 +63,12 @@ class Convert extends \ParsedownExtraPlugin
         // https://www.youtube.com/watch?v=Fydyy-ypavU
         // https://youtu.be/Fydyy-ypavU
         // https://rutube.ru/video/17eecf937aa7d9eb19edbb7aec6679b4/
-		// https://vk.com/video-192140232_456242709
+		// https://vkvideo.ru/video67745190_163988084
         if (preg_match('/^(?:https?\:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.?be)\/(?:shorts|watch\?v=)?(.+)$/i', $Element['element']['attributes']['href'], $id)) {
             $src = 'https://www.youtube.com/embed/' . $id[1];
 			
-		} elseif (preg_match('/video-([\d]+)_(\d+)/i', $Element['element']['attributes']['href'], $id)) {
-            $src = "https://vk.com/video_ext.php?oid=-{$id[1]}&id={$id[2]}&hd=2&autoplay=1";
+		} elseif (preg_match('/video([\d]+)_(\d+)/i', $Element['element']['attributes']['href'], $id)) {
+            $src = "https://vk.com/video_ext.php?oid={$id[1]}&id={$id[2]}&hd=1&autoplay=1";
 
         } elseif (preg_match('/[http|https]+:\/\/(?:www\.|)rutube\.ru\/video\/([a-zA-Z0-9_\-]+)\//i', $Element['element']['attributes']['href'], $id)) {
             $src = 'https://rutube.ru/video/embed/' . $id[1];

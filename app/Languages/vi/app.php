@@ -310,7 +310,7 @@ return [
     'from_profile'      => 'Từ hồ sơ',
     'request'           => 'Lời yêu cầu',
     'results'           => 'Kết quả',
-    'format_cover_post' => 'Chiều rộng lớn hơn 500px. Định hướng ngang',
+    'format_cover_post' => 'Chiều rộng lớn hơn 900px. Định hướng ngang',
 
     'close'             => 'Đã đóng',
     'post_closed'       => 'Bài đăng đã đóng?',

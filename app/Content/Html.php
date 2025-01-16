@@ -86,14 +86,14 @@ class Html
     {
         $count = $content[$type . '_votes'] > 0 ?  $content[$type . '_votes'] : '';
 
-        $html = '<div class="flex gap-min gray-600"><div class="up-id click-no-auth"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score"> ' . $count . '</div></div>';
+        $html = '<div class="flex gap-sm gray-600"><div class="up-id click-no-auth"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score"> ' . $count . '</div></div>';
 
         if (UserData::checkActiveUser()) {
             if (UserData::getUserId() == $content[$type . '_user_id']) {
-                $html = '<div class="active flex gap-min"><div class="up-id"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
+                $html = '<div class="active flex gap-sm"><div class="up-id"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
             } else {
                 $active = $content['votes_' . $type . '_user_id'] ? 'active ' : '';
-                $html = '<div id="up' . $content[$type . '_id'] . '" class="' . $active . 'flex gap-min gray-600"><div data-id="' . $content[$type . '_id'] . '" data-type="' . $type . '" class="up-id pointer"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
+                $html = '<div id="up' . $content[$type . '_id'] . '" class="' . $active . 'flex gap-sm gray-600"><div data-id="' . $content[$type . '_id'] . '" data-type="' . $type . '" class="up-id pointer"><svg class="icon"><use xlink:href="/assets/svg/icons.svg#' . $icon . '"></use></svg></div><div class="score">' . $count . '</div></div>';
             }
         }
 

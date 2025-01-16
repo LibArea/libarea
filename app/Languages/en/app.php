@@ -310,7 +310,7 @@ return [
     'from_profile'      => 'From profile',
     'request'           => 'Запрос',
     'results'           => 'Results',
-    'format_cover_post' => 'Width, more than 500px. Orientation horizontal',
+    'format_cover_post' => 'Width, more than 900px. Orientation horizontal',
 
     'close'             => 'Close',
     'post_closed'       => 'Post closed ?',

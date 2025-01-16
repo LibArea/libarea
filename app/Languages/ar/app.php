@@ -308,7 +308,7 @@ return [
     'from_profile'      => 'من الملف الشخصي',
     'request'           => 'طلب',
     'results'           => 'نتائج',
-    'format_cover_post' => 'العرض, اكثر من 500px. افقي',
+    'format_cover_post' => 'العرض ، أكبر من 900 بكسل. الاتجاه أفقي',
 
     'close'             => 'مغلق',
     'post_closed'       => 'منشور مغلق ؟',

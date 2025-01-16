@@ -310,7 +310,7 @@ return [
     'from_profile'      => 'Din profil',
     'request'           => 'Solicitare',
     'results'           => 'Rezultate',
-    'format_cover_post' => 'Lățime, mai mult de 500 px. Orientare orizontală',
+    'format_cover_post' => 'Lățime, mai mult de 900 px. Orientare orizontală',
 
     'close'             => 'Închide',
     'post_closed'       => 'Oprește comentariile',

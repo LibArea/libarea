@@ -309,7 +309,7 @@ return [
     'from_profile'      => '从个人资料',
     'request'           => '请求',
     'results'           => '结果',
-    'format_cover_post' => '宽度，500px以上。 方向是水平的',
+    'format_cover_post' => '宽度，900px以上。 方向是水平的',
 
     'close'             => '关闭它',
     'post_closed'       => '该职位已关闭 ?',

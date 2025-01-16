@@ -1,12 +1,12 @@
 <?php if (!empty($latest_comments)) : ?>
   <div class="box">
     <h4 class="uppercase-box"><?= __('app.comments'); ?></h4>
-    <ul class="last-content content-tabs tab_active" id="home">
+    <ul class="last-content">
       <?php foreach ($latest_comments as $comment) : ?>
         <li>
-          <div class="gray-600 flex items-center gap-sm text-sm">
-            <a class="flex gray-600 gap-sm items-center" title="<?= $comment['login']; ?>" href="<?= url('profile', ['login' => $comment['login']]); ?>">
-              <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm', 'small'); ?>
+          <div class="user-info">
+            <a title="<?= $comment['login']; ?>" href="<?= url('profile', ['login' => $comment['login']]); ?>">
+              <?= Img::avatar($comment['avatar'], $comment['login'], 'img-sm mr5', 'small'); ?>
               <span class="nickname<?php if (Html::loginColor($comment['created_at'])) : ?> new<?php endif; ?>"><?= $comment['login']; ?></span>
             </a>
             <span class="lowercase"><?= langDate($comment['comment_date']); ?></span>

@@ -302,7 +302,7 @@ return [
     'from_profile'      => 'Profilden',
     'request'           => 'İstek',
     'results'           => 'Sonuçlar',
-    'format_cover_post' => 'Genişlik, 500 pikselden fazla. Yönlendirme yatay',
+    'format_cover_post' => 'Genişlik, 900 pikselden fazla. Yönlendirme yatay',
 
     'close'             => 'Kapat',
     'post_closed'       => 'Mesaj kapatıldı mı?',

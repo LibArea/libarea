@@ -225,7 +225,7 @@ $blog = $data['blog'][0] ?? null;
         <div class="mb15 hidden flex gap text-sm">
           <a class="gray" href="<?= post_slug($rec_post['post_id'], $rec_post['post_slug']); ?>">
             <?php if ($rec_post['post_comments_count'] > 0) : ?>
-              <div class="box-small bg-blue">
+              <div class="box-small bg-blue mt5">
                 <?= $rec_post['post_comments_count'] ?>
               </div>
             <?php else : ?>
