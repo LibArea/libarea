@@ -5,18 +5,14 @@
  */
 
 .nav-sidebar {
-  height: calc(100dvh - 190px);
+  height: calc(100dvh - 150px);
   align-self: start;
   overflow-y: auto;
   position: sticky;
   top: 75px;
   z-index: 45;
-  width: 245px;
+  width: 265px;
   padding-right: 30px;
-}
-
-.menuno .nav-sidebar {
-  display: none;
 }
 
 .dropdown,

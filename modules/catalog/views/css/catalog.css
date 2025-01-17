@@ -81,12 +81,14 @@ body.item.dark .item-categories {
   background-color: #111;
 }
 
-
-@media (max-width: 890px) {
-
+@media (max-width: 1120px) {
   .item main {
     width: 100%;
   }
+}
+
+
+@media (max-width: 890px) {
 
   .item-categories,
   .item-cat {

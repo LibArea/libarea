@@ -1,16 +1,16 @@
 <div class="mb20">
 	<?php if (!empty($post['post_content_img'])) : ?>
-		 <?= Img::image($post['post_content_img'], $post['post_title'], 'block br-gray max-w-full mb15', 'post', 'cover'); ?>
-		  <a class="img-remove text-sm" href="<?= url('delete.post.cover', ['id' => $post['post_id']]); ?>">
+		<?= Img::image($post['post_content_img'], $post['post_title'], 'block br-gray max-w-full mb15', 'post', 'cover'); ?>
+		<a class="img-remove text-sm" href="<?= url('delete.post.cover', ['id' => $post['post_id']]); ?>">
 			<?= __('app.remove'); ?>
-		  </a>
+		</a>
 	<?php else : ?>
 		<div class="text-sm gray mb15">
-			<?= __('app.no_cover'); ?>.  <?= __('app.format_cover_post'); ?>.
+			<?= __('app.no_cover'); ?>. <?= __('app.format_cover_post'); ?>.
 		</div>
-		
+
 		<input type="file" id="txtCaminhoImagemCover" accept="image/*">
-		
+
 		<img id="inputImg" style="display:none;">
 		<input type="hidden" id="UpImg" name="images" accept="image/*">
 	<?php endif; ?>
@@ -43,7 +43,7 @@
 					cropperAva.destroy();
 				}
 				cropperAva = new Cropper(previsaoImagemCover, {
-				    dragMode: 'move',
+					dragMode: 'move',
 					autoCropArea: 0.65,
 					restore: false,
 					guides: false,
@@ -52,10 +52,10 @@
 					cropBoxMovable: true,
 					cropBoxResizable: false,
 					toggleDragModeOnDblclick: false,
-					data:{
-					  width: 1050,
-					  height: 500,
-					},	
+					data: {
+						width: 1050,
+						height: 500,
+					},
 				});
 
 				btnUploadCover.style.display = 'inline';
@@ -63,24 +63,24 @@
 			reader.readAsDataURL(file);
 		}
 	});
-	
+
 	btnUploadCover.addEventListener('click', () => {
 		if (cropperAva) {
 			cropperAva.getCroppedCanvas().toBlob((blob) => {
 				const formData = new FormData();
 
 				formData.append('cover', blob, 'tmp_name.php');
-				
+
 				//previsaoImagemCover.setAttribute("src", '');
-				
+
 				var croppedImageDataURL = cropperAva.getCroppedCanvas();
-				
+
 				prev.style.display = 'none';
-				 
-				inputImg.style.display = 'block'; 
-				 
+
+				inputImg.style.display = 'block';
+
 				inputImg.setAttribute("src", croppedImageDataURL.toDataURL("image/jpeg"));
-				
+
 				UpImg.setAttribute("value", croppedImageDataURL.toDataURL("image/jpeg"));
 
 				/* fetch('<?= url('setting.edit.avatar', method: 'post'); ?>', {
@@ -96,5 +96,4 @@
 			});
 		}
 	});
-
 </script>

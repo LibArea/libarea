@@ -15,7 +15,7 @@
     <article>
       <div class="user-info">
         <a href="<?= url('profile', ['login' => $post['login']]); ?>">
-          <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'max'); ?>
+          <?= Img::avatar($post['avatar'], '', 'img-sm mr5', 'max'); ?>
           <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> new<?php endif; ?>">
             <?= $post['login']; ?>
           </span>

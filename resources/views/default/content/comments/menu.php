@@ -24,11 +24,11 @@
             <svg class="icon<?php if ($comment['comment_is_deleted'] == 1) : ?> sky<?php endif; ?>">
               <use xlink:href="/assets/svg/icons.svg#trash-2"></use>
             </svg>
-          <?php if ($comment['comment_is_deleted'] == 1) : ?>
-            <span class="sky"><?= __('app.recover'); ?></span>
-          <?php else : ?>
-             <?= __('app.remove'); ?>
-          <?php endif; ?>
+            <?php if ($comment['comment_is_deleted'] == 1) : ?>
+              <span class="sky"><?= __('app.recover'); ?></span>
+            <?php else : ?>
+              <?= __('app.remove'); ?>
+            <?php endif; ?>
           </a>
         </li>
         <!--li>

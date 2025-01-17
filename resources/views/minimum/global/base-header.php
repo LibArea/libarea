@@ -4,7 +4,7 @@ $facet  = $data['facet'] ?? false; ?>
 
 <?= insert('/meta', ['meta' => $meta]); ?>
 
-<body class="body-minimum<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if ($container->cookies()->get('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
+<body class="body-minimum<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> dark<?php endif; ?>">
   <header class="text-header wrap">
     <div class="d-header_contents justify-between">
 

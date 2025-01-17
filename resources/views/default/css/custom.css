@@ -7,6 +7,7 @@
 @font-face {
   font-family: Roboto;
   src: url(/assets/fonts/Roboto-Regular.ttf);
+  font-display: swap;
 }
 
 .nickname {

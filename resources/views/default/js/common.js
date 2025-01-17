@@ -65,11 +65,6 @@ isIdEmpty('toggledark').onclick = function () {
   toggleMode("dayNight", "dark", "light");
 };
 
-// Toggle navigation menu
-isIdEmpty('togglemenu').onclick = function () {
-  toggleMode("menuYesNo", "menuno", "menuyes");
-};
-
 // Search functionality
 isIdEmpty('find').onclick = function () {
   getById('find').addEventListener('keydown', fetchSearch);

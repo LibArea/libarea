@@ -2,7 +2,9 @@
   <div class="box">
     <h1 class="title"><?= __('app.authorization'); ?></h1>
 
-    <form action="<?= url('authorization', method: 'post'); ?>" method="post">
+    <div class="gray-600 text-sm mb20"><?= __('auth.login_info'); ?></div> 
+
+    <form class="mt20 mb20" action="<?= url('authorization', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
       <?= insert('/_block/form/login'); ?>
 
@@ -18,8 +20,3 @@
     <p><?= __('app.agree_rules'); ?>.</p>
   </div>
 </main>
-<aside>
-  <div class="box">
-    <?= __('auth.login_info'); ?>
-  </div>
-</aside>

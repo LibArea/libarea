@@ -5,39 +5,56 @@
  */
 
 main {
-  width: calc(100% - 590px);
+  width: 780px;	
 }
 
-.admin main {
-  width: calc(100% - 210px);
-}
-
-.menuno main {
-  width: calc(100% - 340px);
-}
-
-.menuno main.w-100 {
+.info .main-container,
+.register .main-container,
+.login .main-container {
   width: 100%;
+  background-color: #fff;
+  justify-content: center;
+}
+
+@media (max-width: 1340px) {
+ aside {
+    width: 280px;	
+  }
+  
+  main {
+    width: 700px;	
+  }
+}
+
+@media (max-width: 1220px) {
+ aside {
+    width: 240px;	
+  }
+  
+  main {
+    width: 640px;	
+  }
+}
+
+@media (max-width: 1120px) {
+  aside {
+    display: none;
+  }
+
+  main {
+    width: 800px;	
+  }
 }
 
 @media (max-width: 1050px) {
 
-  .menu__left,
-  .nav-sidebar,
-  #togglemenu {
-    display: none;
+  .nav-sidebar {
+	display: none;
   }
 
-  aside {
-    min-width: 240px;
-  }
-
-  main {
-    width: calc(100% - 250px);
-  }
-
-  .admin main {
-    width: 100%;
+  .main-container,
+   main {
+    width: var(--max-w-full);	
   }
 
   .menu__button {
@@ -183,8 +200,6 @@ main {
     display: block;
   }
 
-  main,
-  .menuno main,
   .mb-w-100,
   iframe,
   video {
@@ -204,9 +219,7 @@ main {
     width: auto;
   }
 
-  aside,
-  .mb-none,
-  ul.setting>li>a>i {
+  .mb-none  {
     display: none;
   }
 

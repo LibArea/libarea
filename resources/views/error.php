@@ -22,7 +22,7 @@
   <title><?= $httpCode . '. ' . $message ?></title>
 </head>
 
-<body class="body-bg-fon mt30">
+<body class="body-bg-fon mt30 <?php if ($container->cookies()->get('dayNight') == 'dark') : ?> dark<?php endif; ?>">
 
   <main class="max-w-md mr-auto box">
     <h1 class="text-3xl gray"><?= $httpCode ?></h1>

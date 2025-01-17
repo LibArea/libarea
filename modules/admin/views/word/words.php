@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<a class="sky mb15" href="<?= url($data['type'] . '.add'); ?>"> <?= __('admin.add'); ?> </a>
+<a class="btn btn-primary right" href="<?= url($data['type'] . '.add'); ?>"> <?= __('admin.add'); ?> </a>
 <?php if (!empty($data['words'])) : ?>
   <?php foreach ($data['words'] as $key => $word) : ?>
     <p>

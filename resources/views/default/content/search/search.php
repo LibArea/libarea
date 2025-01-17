@@ -2,7 +2,7 @@
 $type = $data['type'];
 $sw = $sw ?? '?';
 ?>
-<div id="contentWrapper" class="wrap menuno">
+<div id="contentWrapper" class="wrap">
   <main>
     <?php foreach ($data['tags'] as $tag) : ?>
       <?php $url = $type == 'post' ? url('topic', ['slug' => $tag['facet_slug']]) : url('category', ['sort' => 'all', 'slug' => $tag['facet_slug']]); ?>

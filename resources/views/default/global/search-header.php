@@ -26,7 +26,7 @@ $q = $data['q'];
           </div>
         </div>
 
-		<?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?> 
+        <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?>
       </div>
     </div>
   </header>
@@ -35,12 +35,12 @@ $q = $data['q'];
     <ul class="nav inline ml10">
       <li<?php if ($uri == 'post') : ?> class="active" <?php endif; ?>>
         <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=post"><?= __('search.posts'); ?></a>
-      </li>
-      <li<?php if ($uri == 'comment') : ?> class="active" <?php endif; ?>>
-        <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=comment"><?= __('search.comments'); ?></a>
-      </li>
-      <li<?php if ($uri == 'website') : ?> class="active" <?php endif; ?>>
-        <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=website"><?= __('search.websites'); ?></a>
-      </li>
+        </li>
+        <li<?php if ($uri == 'comment') : ?> class="active" <?php endif; ?>>
+          <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=comment"><?= __('search.comments'); ?></a>
+          </li>
+          <li<?php if ($uri == 'website') : ?> class="active" <?php endif; ?>>
+            <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=website"><?= __('search.websites'); ?></a>
+            </li>
     </ul>
   </div>

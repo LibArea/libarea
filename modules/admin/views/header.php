@@ -31,14 +31,11 @@ $lang = Translate::getLang();
   <script src="/assets/js/la.js?<?= config('general', 'version'); ?>"></script>
 </head>
 
-<body class="admin<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> dark<?php endif; ?><?php if ($container->cookies()->get('menuYesNo') == 'menuno') : ?> menuno<?php endif; ?>">
+<body class="admin<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> dark<?php endif; ?>">
 
   <header class="d-header">
     <div class="wrap">
       <div class="d-header_contents">
-        <svg id="togglemenu" class="icon pointer">
-          <use xlink:href="/assets/svg/icons.svg#menu"></use>
-        </svg>
         <svg class="icon menu__button none">
           <use xlink:href="/assets/svg/icons.svg#menu"></use>
         </svg>

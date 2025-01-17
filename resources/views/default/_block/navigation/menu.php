@@ -17,7 +17,7 @@ foreach ($menu as $key => $item) :
             if (!empty($item['icon'])) {
                 echo '<svg class="icon"><use xlink:href="/assets/svg/icons.svg#'.$item['icon'].'"></use></svg>';
             }
-            echo __($item['title']).'</a></li>';
+            echo '<div class="nav-overflow">' . __($item['title']).'</div></a></li>';
         }
     }
 endforeach;
@@ -25,7 +25,7 @@ endforeach;
 if ($container->user()->id() > 0) {
     if ($topics_user) {
         echo '<div class="flex justify-between items-center">';
-        echo '<h4 class="mb5 ml5">'.__('app.preferences').'</h3>';
+        echo '<h4 class="mt15 mb5 ml10 uppercase-box">'.__('app.preferences').'</h3>';
         echo '<a class="text-sm gray-600" title="'.__('app.edit').'" href="'.url('setting.preferences').'">';
         echo '<sup><svg class="icon gray-600"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></sup>';
         echo '</a></div>';
@@ -42,11 +42,11 @@ if ($container->user()->id() > 0) {
             $blog = '';
 
             if ($topic['facet_type'] == 'blog') {
-                $blog = '<sup class="red">b</span>';
+                $blog = '<sup class="red">b</sup>';
                 $url = url('blog', ['slug' => $topic['facet_slug']]);
             }
  
-            echo '<li class="mt15 flex gap items-center justify-between">';
+            echo '<li>';
             echo '<a class="flex gap-sm items-center" href="'.$url.'">';
 			echo Img::image($topic['facet_img'], $topic['facet_title'], 'img-sm', 'logo', 'max');
             echo '<div class="nav-overflow">' . $topic['facet_title'].' '.$blog. '</div>';

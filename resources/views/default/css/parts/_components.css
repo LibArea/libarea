@@ -136,7 +136,7 @@ h5 {
 }
 
 .banner {
-  background-image: url(/assets/images/banner-fon.jpg);
+  background-image: url(/assets/images/banner-fon.webp);
   background-size: cover;
   filter: brightness(1.1);
   text-align: center;
@@ -164,6 +164,13 @@ h5 {
   margin: 0 0.3rem 0 0.3rem;
 }
 
+.main-container {
+  display: flex;
+  gap: var(--gap-base);;
+  justify-content: space-between;
+  max-width: 1120px;
+}
+
 /* Search */
 .search {
   border-radius: var(--rounded);
@@ -185,7 +192,7 @@ h5 {
   width: 100%;
   display: none;
   transition: all 0.6s ease;
-
+  margin-left: 42px;
 }
 
 .box-search.active .search {
@@ -228,7 +235,7 @@ h5 {
 }
 
 .box-logo {
-  width: 252px;
+  width: 270px;
   align-items: center;
   display: flex;
   gap: 0.5rem;
@@ -256,6 +263,10 @@ aside ul {
 
 aside ul a {
   color: var(--gray);
+}
+
+footer {
+  padding-top: 30px;
 }
 
 blockquote {

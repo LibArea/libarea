@@ -35,7 +35,7 @@ class Img
     {
         $imgPath = self::generateImagePath($file, $type, $size);
 
-        return '<img class="' . $style . '" src="' . $imgPath . '" title="' . $alt . '" alt="' . $alt . '">';
+        return '<img class="' . $style . '" src="' . $imgPath . '" alt="' . $alt . '">';
     }
 
     /**
@@ -51,7 +51,7 @@ class Img
     {
         $imgPath = self::generateImagePath($file, 'avatar', $size);
 
-        return '<img class="' . $style . '" src="' . $imgPath . '" title="' . $alt . '" alt="' . $alt . '">';
+        return '<img class="' . $style . '" src="' . $imgPath . '" alt="' . $alt . '">';
     }
 
     /**

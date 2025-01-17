@@ -9,14 +9,9 @@
 
     <p><?= __('app.agree_rules'); ?>.</p>
     <p><?= __('help.security_info'); ?></p>
+	<p><?= __('auth.mail_confirm'); ?></p>
   </div>
 </main>
-
-<aside>
-  <div class="box">
-    <?= __('auth.mail_confirm'); ?>
-  </div>
-</aside>
 
 <script nonce="<?= config('main', 'nonce'); ?>">
   const nicknameEl = document.querySelector('#login');

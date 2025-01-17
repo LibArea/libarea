@@ -109,7 +109,7 @@ class PostController extends Controller
                     'meta'  => Meta::post($content),
                     'data'  => [
                         'sheet' => 'page',
-                        'type'  => $type,
+                        'type'  => 'info',
                         'page'  => $content,
                         'facet' => [],
                         'pages' => PostModel::recent($page['facet_id'], $content['post_id'])

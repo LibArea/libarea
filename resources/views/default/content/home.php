@@ -45,7 +45,7 @@
           <?php foreach ($data['topics'] as $recomm) : ?>
             <li class="flex justify-between items-center mb10">
               <a class="flex items-center gap-sm" href="<?= url('topic', ['slug' => $recomm['facet_slug']]); ?>">
-                <?= Img::image($recomm['facet_img'], $recomm['facet_title'], 'img-sm', 'logo', 'small'); ?>
+                <?= Img::image($recomm['facet_img'], '', 'img-sm', 'logo', 'small'); ?>
                 <?= $recomm['facet_title']; ?>
               </a>
               <?php if ($container->user()->id()) : ?>
@@ -79,9 +79,5 @@
 
   <div class="sticky top-sm">
     <?= insert('/_block/latest-comments-tabs', ['latest_comments' => $data['latest_comments']]); ?>
-
-    <?php if ($container->user()->scroll()) : ?>
-      <?= insert('/global/sidebar-footer'); ?>
-    <?php endif; ?>
   </div>
 </aside>

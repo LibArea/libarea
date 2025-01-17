@@ -2,10 +2,10 @@
 <main>
   <article<?php if ($page['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>
     <?php if ($page['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
-      <h1 class="m0 mb20">
+      <h1>
         <?= $page['post_title']; ?>
       </h1>
-      <div class="max-w-md">
+      <div class="max-w-md mb20">
         <?= markdown($page['post_content'], 'text'); ?>
       </div>
     <?php else : ?>
@@ -27,11 +27,22 @@
         <?php endif; ?>
       </div>
     </div>
-
     </article>
-</main>
-<aside>
-  <div class="box sticky top-sm">
+	
+ <div class="box">
+
+	<div class="flex gap">
+	<h2 class="m0 mb20"><?= __('app.pages'); ?></h2> 
+
+   
+        <?php if ($container->user()->admin()) : ?>
+      <a class="text-sm gray-600 lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icon">
+          <use xlink:href="/assets/svg/icons.svg#edit"></use>
+        </svg></a>
+    <?php endif; ?>
+
+	</div>
+	
     <?php foreach ($data['pages'] as $ind => $row) : ?>
       <div class="mt5 mb10">
         <a class="gray" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
@@ -41,10 +52,6 @@
         </a>
       </div>
     <?php endforeach; ?>
-    <?php if ($container->user()->admin()) : ?>
-      <a class="text-sm lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icon">
-          <use xlink:href="/assets/svg/icons.svg#edit"></use>
-        </svg> <?= __('app.edit'); ?></a>
-    <?php endif; ?>
-  </div>
-</aside>
+  </div>	
+</main>
+ 

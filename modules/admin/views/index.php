@@ -50,6 +50,9 @@
     <p><svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#github"></use>
       </svg> <a href="https://discord.gg/adJnPEGZZZ">Discord</a></p>
+    <p><svg class="icon">
+        <use xlink:href="/assets/svg/icons.svg#vk"></use>
+      </svg> <a href="https://vk.com/libarea">ВКонтакте</a></p>
     <hr>
     <p>PC: <?= php_uname('s'); ?> <?php echo php_uname('r'); ?></p>
     <p>PHP: <?= PHP_VERSION; ?></p>

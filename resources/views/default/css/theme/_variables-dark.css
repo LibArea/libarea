@@ -102,7 +102,6 @@ body.dark  [data-toolbar-theme="dark"] .cherry-bubble .cherry-bubble-top {
   border-bottom-color: var(--gray-600);
 }
 
-
 body.dark .comment {
   word-wrap: break-word;
   box-shadow: 0 15px 25px rgba(0, 0, 0, .1);
@@ -113,6 +112,7 @@ body.dark .tagify {
   --tags-border-color: #555;
 }
 
+body.dark .dialog-content,
 body.dark .tagify {
   background-color: var(--tagify-bg-color);
 }
