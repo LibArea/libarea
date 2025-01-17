@@ -131,6 +131,7 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
     Route::get('/edit/comment/{id}')->controller(EditCommentController::class)->where(['id' => '[0-9]+'])->name('comment.form.edit'); 
 	Route::get('/edit/poll/{id}')->controller(EditPollController::class)->where(['id' => '[0-9]+'])->name('poll.form.edit'); 
 	Route::get('/edit/facet/{type}/{id}')->controller(EditFacetController::class)->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('facet.form.edit'); 
+	Route::get('/edit/facet/logo/{type}/{id}')->controller(EditFacetController::class, 'logoForm')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('facet.form.logo.edit'); 
 	Route::get('/team/edit/{type}/{id}')->controller(TeamFacetController::class)->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('team.form.edit');
 	
 	Route::get('/redirect/facet/{id}')->controller(RedirectController::class)->where(['id' => '[0-9]+'])->name('redirect.facet');
@@ -178,6 +179,7 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 		Route::post('/edit/content/{type}')->controller(EditPostController::class, 'edit')->where(['type' => '[a-z]+'])->name('edit.post');
 		Route::post('/edit/comment')->controller(EditCommentController::class, 'edit')->name('edit.comment');
 		Route::post('/edit/facet/{type}')->controller(EditFacetController::class, 'edit')->where(['type' => '[a-z]+'])->name('edit.facet');
+		Route::post('/edit/facet/logo/{type}/{facet_id}')->controller(EditFacetController::class, 'logoEdit')->where(['type' => '[a-z]+', 'facet_id' => '[0-9]+'])->name('edit.logo.facet');
 		Route::post('/edit/poll')->controller(EditPollController::class, 'edit')->name('edit.poll');
 		Route::post('/edit/message')->controller(MessagesController::class, 'edit')->name('edit.message');
 
