@@ -25,7 +25,7 @@ function __(string $key = null, array $params = [])
 function post_slug(int $id, string $slug = '')
 {
     if (config('meta', 'slug_post') == false) {
-        return url('postId', ['id' => $id]);
+        return url('post.id', ['id' => $id]);
     }
 
     return url('post', ['id' => $id, 'slug' => $slug]);
