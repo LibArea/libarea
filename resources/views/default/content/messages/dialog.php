@@ -1,7 +1,7 @@
-<div class="w-30 mr20 mb-none">
+<aside>
   <?= insert('/content/messages/dialogue-column', ['dialogs' => $data['dialogs']]); ?>
-</div>
-<div class="w-70 mb-w-100">
+</aside>
+<main>
   <div class="box">
   <a class="gray" href="<?= url('messages'); ?>">
     < <?= __('app.all'); ?></a>
@@ -49,6 +49,6 @@
         <?php endforeach; ?>
       <?php endif; ?>
    </div>   
-</div>
+</main>
 
 <script src="/assets/js/dialog/dialog.js"></script>

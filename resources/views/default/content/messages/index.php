@@ -1,10 +1,10 @@
-<div class="w-30 mb-w-100">
+<aside>
   <?= insert('/content/messages/dialogue-column', ['dialogs' => $data['dialogs']]); ?>
-</div>
+</aside>
 <?php if (!empty($data['dialogs'])) : ?>
-  <div class="w-70 ml20 mb-none">
+  <main>
     <div class="box sticky top-sm">
       <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('app.choose_dialogue'), 'icon' => 'mail']); ?>
     </div>
-  </div>
+  </main>
 <?php endif; ?>
