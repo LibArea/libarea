@@ -4,6 +4,10 @@
  * Дополнительные стили
  */
 
+body {
+  background-color: var(--white);
+}
+
 main {
   width: calc(100% - 220px);
 }
@@ -21,7 +25,7 @@ main {
 
 @media (max-width: 1050px) {
   main {
-    width: 100%;
+    width: var(--max-w-full);
   }
 
   .wrap {

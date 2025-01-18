@@ -1,10 +1,4 @@
 <div class="flex gap-lg items-center">
-  <div class="button-search gray-600 ml20 mb-none">
-	<svg class="icon large">
-	   <use xlink:href="/assets/svg/icons.svg#search"></use>
-	</svg>
-  </div>
-
 <?php if (!$container->user()->active()) : ?>
 	<div id="toggledark" class="gray-600">
 	  <svg class="icon large">

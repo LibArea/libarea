@@ -13,15 +13,15 @@
         </div>
         <div>
           <div>
-            <a class="text-lg" href="<?= $post_url; ?>">
+            <a class="text-xl" href="<?= $post_url; ?>">
               <?= $post['post_title']; ?>
               <?= insert('/content/post/post-title', ['post' => $post]); ?>
             </a>
             <?= Html::facets($post['facet_list'], 'blog', 'tag'); ?>
             <?= Html::facets($post['facet_list'], 'topic', 'tag-yellow'); ?>
           </div>
-          <div class="flex text-sm gap mt3">
-            <a class="flex items-center gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
+          <div class="flex text-sm gap-sm mt3">
+            <a class="flex items-center gray" href="<?= url('profile', ['login' => $post['login']]); ?>">
               <?= Img::avatar($post['avatar'], $post['login'], 'img-sm-min', 'small'); ?>
               <?= $post['login']; ?>
             </a>

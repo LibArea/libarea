@@ -20,8 +20,8 @@ h5 {
 .number-svg {
   right: -6px;
   top: -3px;
-  background-color: #fff;
-  border: 2px solid #fff;
+  background-color: var(--white);
+  border: 2px solid var(--white);
   border-radius: var(--rounded-full);
   width: 16px;
   height: 16px;
@@ -33,13 +33,13 @@ h5 {
 .bg-yellow .number-svg {
   border: 2px solid #7186fc;
   background-color: #7186fc;
-  color: #fff;
+  color: var(--white);
 }
 
 .number-notif {
   display: none;
   font-size: .72rem;
-  color: #fff;
+  color: var(--white);
   background-color: var(--red);
   border-radius: var(--rounded-full);
   position: absolute;
@@ -610,7 +610,7 @@ video {
   z-index: 3;
   right: 10px;
   font-size: 0.8em;
-  color: #fff;
+  color: var(--white);
   background-color: rgba(0, 0, 0, 0.3);
   padding: 1px 6px;
   position: absolute;

@@ -7,7 +7,7 @@
 body {
   max-width: 1080px;
   padding-bottom: 2em;
-  background-color: var(--color-bg);
+  background-color: var(--white);
   margin: 0 auto;
 }
 
@@ -60,4 +60,8 @@ main {
 
 .no-flex>div.flex {
   display: block;
+}
+
+aside .box {
+  background-color: var(--gray-100);
 }
