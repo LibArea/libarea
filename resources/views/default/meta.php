@@ -26,5 +26,7 @@
   <script src="/assets/js/la.js?<?= config('general', 'version'); ?>"></script>
   <script src="/assets/js/prism/prism.js?<?= config('general', 'version'); ?>"></script>
   
-  <link rel="preload" fetchpriority="high" as="image" href="/assets/images/banner-fon.webp" type="image/webp">
+  <?php if (!$container->user()->active() && $type == 'main') : ?>
+    <link rel="preload" fetchpriority="high" as="image" href="/assets/images/banner-fon.webp" type="image/webp">
+  <?php endif; ?>
 </head>

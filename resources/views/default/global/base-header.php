@@ -9,7 +9,7 @@ $facet  = $data['facet'] ?? false;
 $post   = $data['post'] ?? false;
 ?>
 
-<?= insert('/meta', ['meta' => $meta]); ?>
+<?= insert('/meta', ['meta' => $meta, 'type' => $type]); ?>
 
 <body class="<?= $type; ?><?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?>">
   <header class="d-header<?php if ($post || $facet) : ?> scroll-hide-search<?php endif; ?>">

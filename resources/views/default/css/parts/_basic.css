@@ -51,7 +51,7 @@ body {
 *::-webkit-scrollbar-thumb {
   background-color: var(--form-border-color);
   border-radius: var(--rounded);
-  border: 3px solid var(--bg-color);
+  border: 2px solid var(--bg-color);
 }
 
 a {
