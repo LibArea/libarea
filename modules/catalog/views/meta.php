@@ -31,4 +31,8 @@ $lang = Translate::getLang();
     <link rel="stylesheet" href="/assets/css/rtl.css?<?= config('general', 'version'); ?>" type="text/css">
   <?php endif; ?>
   <script src="/assets/js/la.js?<?= config('general', 'version'); ?>"></script>
+  
+  <?php if (!$container->user()->active()) : ?>
+    <link rel="preload" fetchpriority="high" as="image" href="/assets/images/banner-fon.webp" type="image/webp">
+  <?php endif; ?>
 </head>
