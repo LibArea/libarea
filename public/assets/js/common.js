@@ -3,12 +3,10 @@ let token=document.querySelector("meta[name='csrf-token']").getAttribute("conten
 html+='</div>'}
 if(Object.keys(results).length!==0){let items=getById("search_items");items.classList.add("block");items.innerHTML=html}
 let menu=document.querySelector('.none.block');if(menu){document.onclick=function(event){if(event.target.className!='.none.block'){let items=getById("search_items");items.classList.remove("block")}}}})}
-let search=document.querySelector('.box-search')
-let btn=document.querySelector('.button-search')
 let input=document.querySelector('.search')
-if(btn){btn.addEventListener('click',()=>{search.classList.toggle('active')
-input.focus()})}
-function renderLink(baseURL,identifier,title){if(identifier){return'<a class="sky block text-sm mb15 mr10" href="'+baseURL+identifier+'">'+title+'</a>'}
+const btnSearch=document.querySelector(".button-search");const search=document.querySelector(".box-search");const toggleSearch=function(){search.classList.toggle("active");input.focus()}
+if(btnSearch){btnSearch.addEventListener("click",function(e){e.stopPropagation();toggleSearch()})}
+document.addEventListener("click",function(e){const target=e.target;const its_search=target==search||search.contains(target);const its_btnSearch=target==btnSearch;const search_is_active=search.classList.contains("active");if(!its_search&&!its_btnSearch&&search_is_active){toggleSearch()}});function renderLink(baseURL,identifier,title){if(identifier){return'<a class="sky block text-sm mb15 mr10" href="'+baseURL+identifier+'">'+title+'</a>'}
 return''}
 let showPasswordButtons=queryAll('.showPassword');showPasswordButtons.forEach(button=>{button.addEventListener('click',togglePasswordVisibility)});function togglePasswordVisibility(){let passwordInput=getById('password');let icon=this.querySelector('svg');if(icon.classList.contains('sky')){icon.classList.remove('sky');passwordInput.type='password'}else{icon.classList.add('sky');passwordInput.type='text'}}
 queryAll(".item_cleek").forEach(element=>{element.addEventListener("click",function(){let id=element.dataset.id;fetch("/cleek",{method:"POST",body:"id="+id,headers:{'Content-Type':'application/x-www-form-urlencoded'}}).then(()=>{})})});let triggerElements=queryAll(".trigger");triggerElements.forEach(triggerElement=>{triggerElement.addEventListener("click",function(event){event.stopPropagation();let sibling=triggerElement.nextElementSibling;let firstVisible=triggerElement.querySelector('.block');if(firstVisible){firstVisible.classList.remove("block")}

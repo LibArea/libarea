@@ -192,7 +192,6 @@ h5 {
   width: 100%;
   display: none;
   transition: all 0.6s ease;
-  margin-left: 42px;
 }
 
 .box-search.active .search {

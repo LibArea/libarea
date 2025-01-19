@@ -118,15 +118,33 @@ function fetchSearch() {
 }
 
 // When you click, the search bar pops up
-let search = document.querySelector('.box-search')
-let btn = document.querySelector('.button-search')
 let input = document.querySelector('.search')
-if (btn) {
-  btn.addEventListener('click', () => {
-    search.classList.toggle('active')
-    input.focus()
-  }) 
+const btnSearch = document.querySelector(".button-search");
+const search = document.querySelector(".box-search");
+const toggleSearch = function () {
+  search.classList.toggle("active");
+  input.focus()
 }
+
+if (btnSearch) {
+  btnSearch.addEventListener("click", function (e) {
+    e.stopPropagation();
+    toggleSearch();
+  });
+}
+
+document.addEventListener("click", function (e) {
+  const target = e.target;
+  const its_search = target == search || search.contains(target);
+  const its_btnSearch = target == btnSearch;
+  const search_is_active = search.classList.contains("active");
+
+  if (!its_search && !its_btnSearch && search_is_active) {
+    toggleSearch();
+  }
+});
+
+
 
 // Function to render links based on type
 function renderLink(baseURL, identifier, title) {
