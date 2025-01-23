@@ -1,6 +1,6 @@
 </div>
 <footer>
-  <div class="wrap">
+  <div class="wrap gray-600">
     <?= config('meta', 'name'); ?> &copy; <?= date('Y'); ?> — <span class="lowercase"><?= __('search.name'); ?></span>
 </footer>
 

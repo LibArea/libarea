@@ -86,6 +86,8 @@
                             <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
                           </svg></a>
                       <?php endif; ?>
+					  
+					  <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'discussion']); ?>
                     </div>
                   <div class="comment-text">
                     <?= markdown($node['comment_content'], 'text'); ?>
@@ -97,7 +99,6 @@
                   <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
                     <a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
                   <?php endif; ?>
-                  <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'discussion']); ?> 
                 </div>
                 <div id="el_addentry<?= $node['comment_id']; ?>" class="none"></div>
               </div>

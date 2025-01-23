@@ -37,8 +37,8 @@ class SearchController extends Controller
 
     public function go()
     {
-        $q      = Request::get('q')->value();
-        $type   = Request::get('cat')->value();
+        $q      = Request::post('q')->value();
+        $type   = Request::post('cat')->value();
 
         if (!in_array($type, ['post', 'website', 'comment'])) {
             $type = 'post';
@@ -91,6 +91,10 @@ class SearchController extends Controller
             'search',
         );
     }
+
+	public function searchPage() {
+		
+	}
 
     public function api()
     {

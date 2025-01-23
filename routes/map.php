@@ -57,13 +57,12 @@ Route::get('/posts')->controller(HomeController::class, 'posts')->name('main.pos
 Route::get('/all')->controller(HomeController::class, 'all')->name('main.all');
 
 Route::get('/search')->controller(SearchController::class, 'index', ['post'])->name('search');
-Route::get('/search/go')->controller(SearchController::class, 'go', ['post'])->name('search.go');
+Route::match(['get', 'post'], '/search/go')->controller(SearchController::class, 'go', ['post'])->protect()->name('search.go');
 
 Route::get('/blogs')->controller(FacetController::class, 'blogAll')->name('blogs.all');
 Route::get('/blogs/new')->controller(FacetController::class, 'blogNew')->name('blogs.new');
 Route::get('/topics')->controller(FacetController::class, 'topicAll')->name('topics.all');
 Route::get('/topics/new')->controller(FacetController::class, 'topicNew')->name('topics.new');
-
 
 Route::get('/users')->controller(UserController::class, 'all')->name('users.all');
 Route::get('/users/new')->controller(UserController::class, 'new')->name('users.new');
@@ -204,7 +203,6 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_ZERO
         Route::post('/recover/send')->controller(RecoverController::class)->name('recover.send'); 
         Route::post('/recover/send/pass')->controller(RecoverController::class, 'remindNew')->name('new.pass'); 
         Route::post('/register/add')->controller(RegisterController::class)->name('register.add');
-        //Route::post('/login')->controller(LoginController::class)->name('enterLogin');
 		Route::post('/login')->controller(LoginController::class)->name('authorization');
     Route::endGroup();
 

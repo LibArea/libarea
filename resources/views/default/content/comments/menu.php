@@ -1,5 +1,4 @@
-<div class="right inline">
-  <div class="relative ml10">
+  <div class="menu-comment">
     <span class="trigger gray-600 text-sm">
       <svg class="icon">
         <use xlink:href="/assets/svg/icons.svg#more-horizontal"></use>
@@ -90,4 +89,3 @@
 
     </ul>
   </div>
-</div>

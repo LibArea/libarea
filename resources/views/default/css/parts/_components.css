@@ -6,6 +6,7 @@
 
 #contentWrapper {
   display: flex;
+  justify-content: space-between;
   gap: 1.25rem;
 }
 
@@ -150,7 +151,7 @@ h5 {
 .wrap {
   margin: 0 auto;
   height: 100%;
-  max-width: 1436px;
+  max-width: 1520px;
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -166,9 +167,8 @@ h5 {
 
 .main-container {
   display: flex;
-  gap: var(--gap-base);;
-  justify-content: space-between;
-  max-width: 1120px;
+  gap: var(--gap-base);
+  width: 1120px;
 }
 
 /* Search */
@@ -184,7 +184,7 @@ h5 {
 
 .form,
 .box-search {
-  width: 100%;
+  width: 90%;
 }
 
 .box-search .search {
@@ -519,6 +519,12 @@ a:hover>img {
   margin-top: -2px;
 }
 
+.menu-comment {
+  display: none;
+  position: relative;
+}
+
+.comment-body:hover .menu-comment,
 .comment-body:hover .reply-to {
   display: block;
 }

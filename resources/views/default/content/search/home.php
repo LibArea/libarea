@@ -1,9 +1,9 @@
-<?= insert('/meta', ['meta' => $meta]); ?>
+<?= insert('/meta', ['meta' => $meta, 'type' => 'home-search']); ?>
 
-<body class="general<?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?>">
+<body class="home-search<?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?>">
 
   <div class="box-center">
-    <form action="<?= url('search.go'); ?>">
+    <form method="post" action="<?= url('search.go', method: 'post'); ?>">
       <input class="search-input br5" placeholder="<?= __('search.name'); ?>..." name="q">
       <button class="search-button-icon br5 pointer"><svg class="icon">
           <use xlink:href="/assets/svg/icons.svg#search"></use>

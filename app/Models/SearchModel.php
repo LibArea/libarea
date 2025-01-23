@@ -109,7 +109,7 @@ class SearchModel extends Model
         return DB::run($sql, ['qa' => $query])->rowCount();
     }
 
-    public static function getSearchTags(string $query, string $type, int $limit)
+    public static function getSearchTags(null|string $query, string $type, int $limit)
     {
         $sql = "SELECT 
                     facet_slug, 

@@ -25,9 +25,6 @@
               <li class="comment">
                 <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
                 <div class="comment comment-body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
-
-                  <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
-
                   <div class="comment-text ml5<?php if ($level == 1) : ?> text-sm<?php endif; ?>">
                     <?= markdown($node['comment_content'], 'text'); ?>
                   </div>
@@ -42,6 +39,8 @@
                           <a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
                         <?php endif; ?>
                       <?php endif; ?>
+					  
+					  <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
                     </div>
                     <div class="gray-600 flex gap lowercase mb5">
                       <a class="gray-600" href="<?= url('profile', ['login' => $node['login']]); ?>">
