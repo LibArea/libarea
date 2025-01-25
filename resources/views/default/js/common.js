@@ -135,12 +135,14 @@ if (btnSearch) {
 
 document.addEventListener("click", function (e) {
   const target = e.target;
-  const its_search = target == search || search.contains(target);
-  const its_btnSearch = target == btnSearch;
-  const search_is_active = search.classList.contains("active");
+  if (search) {
+	  const its_search = target == search || search.contains(target);
+	  const its_btnSearch = target == btnSearch;
+	  const search_is_active = search.classList.contains("active");
 
-  if (!its_search && !its_btnSearch && search_is_active) {
-    toggleSearch();
+	  if (!its_search && !its_btnSearch && search_is_active) {
+		toggleSearch();
+	  }
   }
 });
 
