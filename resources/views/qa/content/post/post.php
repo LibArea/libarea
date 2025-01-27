@@ -7,7 +7,7 @@
         <?= insert('/_block/no-login-screensaver'); ?>
       <?php endif; ?>
       <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
-      <li class="list-post br-top-zebra article_<?= $post['post_id']; ?>">
+      <li class="list-post zebra article_<?= $post['post_id']; ?>">
         <div class="flex mr15">
           <div class="box-answer block bg-lightgray gray mb-none  mr15">
             <?= $post['post_votes']; ?>

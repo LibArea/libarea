@@ -285,10 +285,6 @@ img {
   border: 5px solid var(--gray-100);
 }
 
-li.br-top-zebra+li {
-  border-top: 1px solid var(--gray-100);
-}
-
 li.br-li-bottom-no:last-child {
   border-bottom: 1px solid transparent;
 }

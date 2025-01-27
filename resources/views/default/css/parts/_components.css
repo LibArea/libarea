@@ -182,9 +182,8 @@ h5 {
 
 }
 
-.form,
 .box-search {
-  width: 90%;
+  width: 80%;
 }
 
 .box-search .search {
@@ -621,4 +620,17 @@ video {
   position: absolute;
   display: flex;
   gap: 1rem;
+}
+
+li.zebra {
+  padding: 5px;
+  list-style: none;
+}
+
+li.zebra+li {
+  border-top: 1px solid var(--gray-100);
+}
+
+.menu li.zebra:hover {
+  background-color: var(--gray-100);
 }

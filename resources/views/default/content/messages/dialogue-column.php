@@ -6,7 +6,7 @@
 	
 	  <?php if ($msg['msg_to_user']['is_deleted'] == 1 || $msg['msg_user']['is_deleted'] == 1) continue; ?>
 	
-      <li class="mb5 p5 br-top-zebra
+      <li class="zebra
       <?php if (!$msg['unread'] > 0) : ?> bg-yellow<?php endif; ?>
       <?php if ($container->request()->getUri()->getPath() == url('dialogues', ['id' => $msg['dialog_id']])) : ?> bg-beige<?php endif; ?>">
         <a class="justify-between" href="<?= url('dialogues', ['id' => $msg['dialog_id']]); ?>">

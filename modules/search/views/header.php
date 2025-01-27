@@ -19,14 +19,22 @@ $q = $data['q'];
   </header>
 
   <div class="wrap mb20">
-    <form id="s-page" method="post" action="<?= url('search.go', method: 'post'); ?>">
+    <form id="s-page" method="get" action="<?= url('search.go'); ?>">
       <input class="search w-100 bg-white" type="text" name="q" value="<?= htmlEncode($q); ?>" placeholder="<?= __('search.find'); ?>" class="search">
       <input name="cat" value="<?= $uri; ?>" type="hidden">
-      <?= $container->csrf()->field(); ?>
-      <div>
-        <button class="btn btn-small<?php if ($uri == 'post') : ?> btn-primary<?php else : ?> btn-outline-primary<?php endif; ?>" name="cat" value="post" form="s-page"><?= __('search.posts'); ?></button>
-        <button class="btn btn-small<?php if ($uri == 'comment') : ?> btn-primary<?php else : ?> btn-outline-primary<?php endif; ?>" name="cat" value="comment" form="s-page"><?= __('search.comments'); ?></button>
-        <button class="btn btn-small<?php if ($uri == 'website') : ?> btn-primary<?php else : ?> btn-outline-primary<?php endif; ?>" name="cat" value="website" form="s-page"><?= __('search.websites'); ?></button>
-      </div>
     </form>
+  </div>
+
+  <div id="contentWrapper" class="wrap mb20">
+    <ul class="nav inline ml10">
+      <li<?php if ($uri == 'post') : ?> class="active" <?php endif; ?>>
+        <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=post"><?= __('search.posts'); ?></a>
+        </li>
+        <li<?php if ($uri == 'comment') : ?> class="active" <?php endif; ?>>
+          <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=comment"><?= __('search.comments'); ?></a>
+          </li>
+          <li<?php if ($uri == 'website') : ?> class="active" <?php endif; ?>>
+            <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=website"><?= __('search.websites'); ?></a>
+            </li>
+    </ul>
   </div>

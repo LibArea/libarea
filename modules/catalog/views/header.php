@@ -15,10 +15,9 @@
           </div>
 
           <div class="box-search mb-none">
-            <form class="form" method="post" action="<?= url('search.go', method: 'post'); ?>">
+            <form class="form" method="get" action="<?= url('search.go'); ?>">
               <input data-id="category" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
               <input name="cat" value="website" type="hidden">
-			  <?= $container->csrf()->field(); ?>
             </form>
             <div class="box-results none" id="search_items"></div>
           </div>

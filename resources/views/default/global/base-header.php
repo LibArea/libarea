@@ -49,9 +49,8 @@ $post   = $data['post'] ?? false;
           <?php endif; ?>
 
           <div class="box-search relative">
-            <form class="form" method="post" action="<?= url('search.go', method: 'post'); ?>">
+            <form class="form" method="get" action="<?= url('search.go'); ?>">
               <input data-id="topic" type="text" name="q" autocomplete="off" id="find" placeholder="<?= __('app.find'); ?>" class="search">
-              <?= $container->csrf()->field(); ?>
             </form>
             <div class="box-results none" id="search_items"></div>
           </div>

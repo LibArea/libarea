@@ -3,12 +3,11 @@
 <body class="home-search<?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?>">
 
   <div class="box-center">
-    <form method="post" action="<?= url('search.go', method: 'post'); ?>">
+    <form method="get" action="<?= url('search.go'); ?>">
       <input class="search-input br5" placeholder="<?= __('search.name'); ?>..." name="q">
       <button class="search-button-icon br5 pointer"><svg class="icon">
           <use xlink:href="/assets/svg/icons.svg#search"></use>
         </svg></button>
-      <?= $container->csrf()->field(); ?>
     </form>
     <div class="center">
       <div class="text-sm gray-600"><?= __('search.help'); ?></div>

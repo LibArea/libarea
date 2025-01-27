@@ -23,6 +23,10 @@ main {
   margin-top: 5px;
 }
 
+.box-answer .text-sm {
+  font-size: 0.77rem;
+}
+
 @media (max-width: 1050px) {
   main {
     width: var(--max-w-full);

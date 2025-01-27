@@ -258,4 +258,13 @@ main {
     max-width: 180px;
   }
 
+  .cherry .cherry-toolbar {
+	padding: 0 5px;
+  }
+  
+  .cherry-toolbar-button.cherry-toolbar-split,
+  .cherry-toolbar-button.cherry-toolbar-strike {
+	  display: none;
+  }
+
 }

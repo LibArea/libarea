@@ -1,3 +1,5 @@
+<?= insertTemplate('header', ['meta' => $meta, 'data' => $data, 'type' => 'search']); ?>
+
 <?php
 $type = $data['type'];
 $sw = $sw ?? '?';
@@ -59,15 +61,17 @@ $sw = $sw ?? '?';
         </div>
       <?php endforeach; ?>
 
-      <?php $url = 'go?q=' . htmlEncode($data['q']) . '&cat=' . $data['type'] . '/'; ?>
+      <?php $url = 'go?q=' . htmlEncode($data['q']) . '&cat=' . $data['type'] . ''; ?>
 
       <?= Html::pagination($data['pNum'], $data['pagesCount'], null, $url, '&'); ?>
 
     <?php else : ?>
-      <?= insert('/content/search/no-result', ['query' => $data['q']]); ?>
+      <?= insertTemplate('no-result', ['query' => $data['q']]); ?>
     <?php endif; ?>
   </main>
   <aside>
     <div></div>
   </aside>
 </div>
+
+<?= insertTemplate('footer'); ?>

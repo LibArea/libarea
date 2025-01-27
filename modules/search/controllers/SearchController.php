@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Controllers;
+namespace Modules\Search\Controllers;
 
 use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
-use Hleb\Base\Controller;
-use App\Models\SearchModel;
+use Hleb\Base\Module;
+use Modules\Search\Models\SearchModel;
 use Meta, Html;
 
-class SearchController extends Controller
+class SearchController extends Module
 {
     protected $limit = 10;
 
@@ -23,7 +23,7 @@ class SearchController extends Controller
         $this->container->user()->id();
 
         return view(
-            '/default/content/search/home',
+            'home',
             [
                 'meta'  => Meta::get(__('search.title'), __('search.desc', ['name' => config('meta', 'name')])),
             ]
@@ -32,13 +32,13 @@ class SearchController extends Controller
 
     public function openSearch()
     {
-        insertCacheTemplate('/default/content/search/open-search', sec: 28800); // 8 часов
+        insertCacheTemplate('open-search', sec: 28800); // 8 часов
     }
 
     public function go()
     {
-        $q      = Request::post('q')->value();
-        $type   = Request::post('cat')->value();
+        $q      = Request::get('q')->value();
+        $type   = Request::get('cat')->value();
 
         if (!in_array($type, ['post', 'website', 'comment'])) {
             $type = 'post';
@@ -72,8 +72,8 @@ class SearchController extends Controller
         $count = $count_results ?? 0;
 
         $facet = $type === 'post' ? 'topic' : 'category';
-        render(
-            '/search/search',
+        return view(
+            'search',
             [
                 'meta'  => Meta::get(__('search.title')),
                 'data'  => [
@@ -87,14 +87,13 @@ class SearchController extends Controller
                     'pagesCount'    => ceil($count / $this->limit),
                     'pNum'          => Html::pageNumber(),
                 ]
-            ],
-            'search',
+            ]
         );
     }
 
-	public function searchPage() {
-		
-	}
+    public function searchPage()
+    {
+    }
 
     public function api()
     {
@@ -120,15 +119,5 @@ class SearchController extends Controller
     {
         $belong = $type->asString();
         return $belong === 'topic' ? 'topic' : 'category';
-    }
-
-    // Related posts, content author change, facets 
-    // Связанные посты, изменение автора контента, фасеты
-    public function select()
-    {
-        $type       = $this->validateInput(Request::param('type'));
-        $search     = Request::post('q')->value();
-
-        return SearchModel::getSelect($search, $type);
     }
 }

@@ -7,7 +7,7 @@ use App\Meta\OgImage;
 
 use App\Controllers\{
 	HomeController,
-	SearchController,
+	FormController,
 	AuditController,
 	ActionController,
 	MessagesController,
@@ -56,9 +56,6 @@ Route::get('/questions')->controller(HomeController::class, 'questions')->name('
 Route::get('/posts')->controller(HomeController::class, 'posts')->name('main.posts');
 Route::get('/all')->controller(HomeController::class, 'all')->name('main.all');
 
-Route::get('/search')->controller(SearchController::class, 'index', ['post'])->name('search');
-Route::match(['get', 'post'], '/search/go')->controller(SearchController::class, 'go', ['post'])->protect()->name('search.go');
-
 Route::get('/blogs')->controller(FacetController::class, 'blogAll')->name('blogs.all');
 Route::get('/blogs/new')->controller(FacetController::class, 'blogNew')->name('blogs.new');
 Route::get('/topics')->controller(FacetController::class, 'topicAll')->name('topics.all');
@@ -80,7 +77,7 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 
 	Route::get('/logout')->controller(LogoutController::class, 'logout')->name('logout');
 	Route::get('/favorites')->controller(UserController::class, 'favorites')->name('favorites');
-	Route::post('/search/select/{type}')->controller(SearchController::class, 'select')->where(['type' => '[a-z]+']);
+	Route::post('/search/select/{type}')->controller(FormController::class)->where(['type' => '[a-z]+']);
 	Route::post('/post/grabtitle')->controller(AddPostController::class, 'grabMeta');
 	Route::post('/status/action')->controller(ActionController::class, 'deletingAndRestoring');
 
@@ -221,8 +218,6 @@ Route::toGroup()->protect();
 	Route::post('/activatingnatifpopup')->controller(NotificationController::class, 'addForma'); 
 Route::endGroup();	
 
-Route::post('/search/api')->controller(SearchController::class, 'api');
- 
 Route::get('/domain/{domain}')->controller(PostController::class, 'domain')->where(['domain' => '[a-z0-9-.]+'])->name('domain');
 
 // Other pages without authorization
@@ -248,8 +243,6 @@ Route::get('/blog/{slug}/questions')->controller(BlogFacetController::class, 'qu
 Route::get('/blog/{slug}/posts')->controller(BlogFacetController::class, 'posts')->where(['slug' => '[a-z0-9-]+'])->name('blog.posts');
 Route::get('/blog/{slug}/read')->controller(ReadController::class)->where(['slug' => '[a-z0-9-]+'])->name('blog.read');
 Route::get('/blog/{slug}')->controller(BlogFacetController::class, 'feed')->where(['slug' => '[a-z0-9-]+'])->name('blog');
-
-Route::get('/search/opensearch')->controller(SearchController::class, 'openSearch')->name('opensearch');
 
 Route::get('/sitemap.xml')->controller(RssController::class);
 Route::get('/rss/all/posts')->controller(RssController::class, 'postsAll');
