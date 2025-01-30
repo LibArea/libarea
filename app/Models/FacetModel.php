@@ -588,9 +588,13 @@ class FacetModel extends Model
 
     // Add, change users in the team
     // Добавим, изменим пользователей в команде
-    public static function editUsersTeam(array $rows, int $facet_id)
+    public static function editUsersTeam(null|array $rows, int $facet_id)
     {
         self::deleteUsersTeam($facet_id);
+
+		if ($rows === null) {
+			return true;
+		}
 
         foreach ($rows as $row) { 
             $user_id    = $row['id'];
