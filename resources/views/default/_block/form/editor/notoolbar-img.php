@@ -2,9 +2,9 @@
 <link as="font" href="/assets/js/editor/ch-icon.woff2">
 <?php if (!empty($title)) : ?><?= $title; ?>:<?php endif; ?>
 <div name="content" id="markdown-container" spellcheck="true"></div>
-<div class="source none">
-	<pre><?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?></pre>
-</div>
+<textarea id="source" class="none">
+  <?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?>
+</textarea>
 
 <script src="/assets/js/editor/cherry-markdown.core.js"></script>
 <script nonce="<?= config('main', 'nonce'); ?>">
@@ -31,11 +31,9 @@
 		}
 	});
 
-	var mdText = document.querySelector('.source pre')?.innerText;
-
 	var cherry = new Cherry({
 		id: 'markdown-container',
-		value: mdText,
+		value: document.getElementById("source").value,
 
 		fileUpload: fileUpload,
 

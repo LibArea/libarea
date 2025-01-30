@@ -223,6 +223,7 @@ return [
     'add_blog'          => 'Adaugă blog',
     'add_category'      => 'Adăugați o categorie',
     'add_poll'          => 'Adăugați sondaj',
+    'add_comment'		=> 'Lasă un comentariu',
     'edit_poll'         => 'Editați sondajul',
     'edit_category'     => 'Schimbați categoria',
     'edit_post'         => 'Editează postarea',

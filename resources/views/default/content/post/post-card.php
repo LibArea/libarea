@@ -68,36 +68,44 @@
           <?php $arr = \App\Content\Parser\Content::cut($post['post_content']);
           echo markdown($arr['content']); ?>
         </div>
-
-        <?php if ($arr['button']) : ?>
-          <a class="btn btn-outline-primary" href="<?= post_slug($post['post_id'], $post['post_slug']); ?>">
-            <?= __('app.read_more'); ?>
-          </a>
-        <?php endif; ?>
       </div>
 
-      <div class="flex flex-row items-center justify-between">
-        <div class="flex gap text-sm flex-row">
+      <div class="flex flex-row text-sm items-center justify-between">
+        <div class="flex gap flex-row">
           <?= Html::votes($post, 'post'); ?>
-          <div class="flex gray-600 gap-sm">
-            <svg class="icon">
-              <use xlink:href="/assets/svg/icons.svg#eye"></use>
-            </svg>
-            <?= $post['post_hits_count'] == 0 ? 1 : Html::formatToHuman($post['post_hits_count']); ?>
-          </div>
-          <?php if ($post['post_comments_count'] != 0) : ?>
-            <a class="flex gray-600 gap-sm" href="<?= $post_url; ?>#comment">
-              <svg class="icon">
-                <use xlink:href="/assets/svg/icons.svg#comments"></use>
-              </svg>
-              <?= $post['post_comments_count']; ?>
-            </a>
-          <?php endif; ?>
-        </div>
-        <div class="flex flex-row items-center">
           <?= Html::favorite($post['post_id'], 'post', $post['tid']); ?>
         </div>
+
+        <div class="flex gray-600 gap-sm">
+          <svg class="icon">
+            <use xlink:href="/assets/svg/icons.svg#eye"></use>
+          </svg>
+          <?= $post['post_hits_count'] == 0 ? 1 : Html::formatToHuman($post['post_hits_count']); ?>
+        </div>
       </div>
+
+      <?php if ($post['post_closed'] != 1) : ?>
+        <hr class="linta-100">
+        <a class="flex flex-row items-center justify-between gray-600 gap-sm" href="<?= $post_url; ?>#comment">
+          <div>
+            <svg class="icon">
+              <use xlink:href="/assets/svg/icons.svg#comments"></use>
+            </svg>
+
+            <span class="lowercase text-sm">
+              <?php if ($post['post_comments_count'] != 0) : ?>
+                <?= Html::numWord($post['post_comments_count'], __('app.num_comment'), true); ?>
+              <?php else : ?>
+                <?= __('app.add_comment'); ?>
+              <?php endif; ?>
+            </span>
+          </div>
+
+          <svg class="icon">
+            <use xlink:href="/assets/svg/icons.svg#chevron-right"></use>
+          </svg>
+        </a>
+      <?php endif; ?>
     </article>
   <?php endforeach; ?>
 <?php else : ?>

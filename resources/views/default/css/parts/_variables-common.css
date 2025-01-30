@@ -6,7 +6,7 @@
 
 :root {
   --font-family: "Roboto", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-  --line-height: 1.5rem;
+  --line-height: 1.6rem;
 
   --font-size-sm: 0.875rem;
   --font-size-base: 1.063rem;
@@ -16,9 +16,9 @@
   --font-size-3xl: 1.875rem;
 
   --gap-none: 0px;
-  --gap-sm: 0.4rem;
-  --gap-base: 1rem;
-  --gap-lg: 2.5rem;
+  --gap-sm: 0.375rem;
+  --gap-base: 1.125rem;
+  --gap-lg: 2rem;
 
   --rounded-none: 0px;
   --rounded-sm: 0.125rem;

@@ -221,6 +221,7 @@ return [
     'add_blog'          => 'اضافة مدونة',
     'add_category'      => 'اضافة الفئة',
     'add_poll'          => 'إضافة استطلاع',
+    'add_comment'		=> 'اترك تعليقا',
     'edit_poll'         => 'تحرير الاستطلاع',
     'edit_category'     => 'تعديل الفئة',
     'edit_post'         => 'تعديل المنشور',

@@ -248,8 +248,12 @@ h5 {
   text-overflow: ellipsis;
 }
 
+main {
+  width: 820px;	
+}
+
 aside {
-  width: 340px;
+  width: 320px;
 }
 
 aside ul {
@@ -330,17 +334,10 @@ details[open]>summary {
 article,
 .box {
   border-radius: var(--rounded);
-  padding: 15px;
+  padding: 20px 24px;
   margin-bottom: 20px;
   overflow-wrap: break-word;
   background-color: var(--white);
-}
-
-.box-small {
-  border-radius: var(--rounded);
-  color: var(--white);
-  text-align: center;
-  padding: 5px 10px;
 }
 
 .box-flex {
@@ -391,9 +388,7 @@ ul.last-content a.last-content_telo {
   display: block;
   word-wrap: break-word;
   background-color: var(--gray-100);
-  padding: 3px;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding: 12px;
   margin-top: 5px;
   border-radius: var(--rounded);
 }
@@ -633,4 +628,10 @@ li.zebra+li {
 
 .menu li.zebra:hover {
   background-color: var(--gray-100);
+}
+
+.linta-100 {
+  margin-left: -25px;
+  margin-right: -25px;
+  margin-bottom: 14px;
 }

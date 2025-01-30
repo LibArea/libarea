@@ -223,6 +223,7 @@ return [
     'add_blog'          => 'Add blog',
     'add_category'      => 'Add Category',
     'add_poll'          => 'Add Poll',
+    'add_comment'		=> 'Leave a comment',
     'edit_poll'         => 'Edit Poll',
     'edit_category'     => 'Change Category',
     'edit_post'         => 'Edit Post',

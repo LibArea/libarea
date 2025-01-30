@@ -157,6 +157,7 @@ class PostModel extends Model
                     post_slug,
                     post_feature,
                     post_comments_count,
+					post_hits_count,
                     post_type
                         FROM posts
                             LEFT JOIN facets_posts_relation on post_id = relation_post_id

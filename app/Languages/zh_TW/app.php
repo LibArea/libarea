@@ -222,6 +222,7 @@ return [
     'add_blog'          => '添加博客',
     'add_category'      => '添加类别',
     'add_poll'          => '添加投票',
+    'add_comment'		=> '发表评论',
     'edit_poll'         => '编辑投票',
     'edit_category'     => '更改類別',
     'edit_post'         => '编辑帖子',

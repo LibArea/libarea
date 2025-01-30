@@ -223,6 +223,7 @@ return [
     'add_blog'          => 'Thêm blog',
     'add_category'      => 'Thêm danh mục',
     'add_poll'          => 'Thêm cuộc thăm dò',
+    'add_comment'		=> 'Để lại một bình luận',
     'edit_poll'         => 'Chỉnh sửa cuộc thăm dò',
     'edit_category'     => 'Chỉnh sửa danh mục',
     'edit_post'         => 'Chỉnh sửa bài viết',

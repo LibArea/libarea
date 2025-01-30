@@ -70,8 +70,8 @@
 }
 
 .cut-post img.cut-preview {
-  max-width: calc(100% + 30px);
-  margin-left: -15px;
+  max-width: calc(100% + 50px);
+  margin-left: -25px;
   border-radius: 0px;
 }
 

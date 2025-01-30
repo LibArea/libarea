@@ -166,15 +166,12 @@ $blog = $data['blog'][0] ?? null;
 
       <?php endif; ?>
 
-
     <?php else : ?>
       <div class="box center bg-red-200">
         <?= __('app.content_deleted', ['name' => __('app.post')]); ?>...
       </div>
     <?php endif; ?>
     </article>
-
-
 
     <?php if (empty($is_comments)) : ?>
       <div id="comment"></div>
@@ -222,19 +219,26 @@ $blog = $data['blog'][0] ?? null;
     <div class="box sticky top-sm">
       <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
       <?php foreach ($data['recommend'] as  $rec_post) : ?>
-        <div class="mb15 hidden flex gap text-sm">
-          <a class="gray" href="<?= post_slug($rec_post['post_id'], $rec_post['post_slug']); ?>">
+        <div class="text-sm2">
+          <a class="black" href="<?= post_slug($rec_post['post_id'], $rec_post['post_slug']); ?>">
+            <?= fragment($rec_post['post_title'], 58); ?>
+          </a>
+          <div class="text-sm gray-600 items-center flex gap mb15">
+            <div class="items-center flex gap-sm mt5">
+              <svg class="icon">
+                <use xlink:href="/assets/svg/icons.svg#eye"></use>
+              </svg>
+              <?= HTML::formatToHuman($rec_post['post_hits_count']); ?>
+            </div>
             <?php if ($rec_post['post_comments_count'] > 0) : ?>
-              <div class="box-small bg-blue mt5">
+              <div class="items-center flex gap-sm mt5">
+                <svg class="icon">
+                  <use xlink:href="/assets/svg/icons.svg#comments"></use>
+                </svg>
                 <?= $rec_post['post_comments_count'] ?>
               </div>
-            <?php else : ?>
-              <div class="box-small bg-lightgray">0</div>
             <?php endif; ?>
-          </a>
-          <a class="black" href="<?= post_slug($rec_post['post_id'], $rec_post['post_slug']); ?>">
-            <?= $rec_post['post_title']; ?>
-          </a>
+          </div>
         </div>
       <?php endforeach; ?>
     </div>
