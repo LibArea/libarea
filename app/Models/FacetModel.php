@@ -593,7 +593,7 @@ class FacetModel extends Model
         self::deleteUsersTeam($facet_id);
 
 		if ($rows === null) {
-			return true;
+			return false;
 		}
 
         foreach ($rows as $row) { 

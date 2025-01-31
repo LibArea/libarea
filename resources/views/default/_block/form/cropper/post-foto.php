@@ -71,8 +71,6 @@
 
 				formData.append('cover', blob, 'tmp_name.php');
 
-				//previsaoImagemCover.setAttribute("src", '');
-
 				var croppedImageDataURL = cropperAva.getCroppedCanvas();
 
 				prev.style.display = 'none';
@@ -82,17 +80,6 @@
 				inputImg.setAttribute("src", croppedImageDataURL.toDataURL("image/jpeg"));
 
 				UpImg.setAttribute("value", croppedImageDataURL.toDataURL("image/jpeg"));
-
-				/* fetch('<?= url('setting.edit.avatar', method: 'post'); ?>', {
-						method: 'POST',
-						headers: {
-							'X-CSRF-TOKEN': '<?= csrf_token(); ?>'
-						},
-						body: formData
-					})
-					.then((response) => {
-						location.reload();
-					}); */
 			});
 		}
 	});

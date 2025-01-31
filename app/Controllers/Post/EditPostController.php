@@ -65,7 +65,6 @@ class EditPostController extends Controller
 
 	public function edit(): void
     {
-		
 	 	$img = Request::post('images')->value();
 		
 		$post_id = Request::post('post_id')->asInt();

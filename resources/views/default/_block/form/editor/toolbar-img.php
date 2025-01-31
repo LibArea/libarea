@@ -3,10 +3,7 @@
 <?php if (!empty($title)) : ?><?= $title; ?>:<?php endif; ?>
 
 <div name="content" id="markdown-container"></div>
-
-<textarea id="source" class="none">
-  <?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?>
-</textarea>
+<textarea id="source" class="none"><?php if (!empty($content)) : ?><?= $content; ?><?php endif; ?></textarea>
 
 <script src="/assets/js/editor/cherry-markdown.core.js"></script>
 <script nonce="<?= config('main', 'nonce'); ?>">

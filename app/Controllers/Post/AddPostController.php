@@ -73,6 +73,7 @@ class AddPostController extends Controller
             $site = $this->addUrl($post_url);
         }
 
+		$img = Request::post('images')->value();
         $blog_id    = Request::post('blog_id')->value();
         $fields     = Request::allPost() ?? [];
 
@@ -99,9 +100,9 @@ class AddPostController extends Controller
 
         // Post cover
         // Обложка поста
-        if (!empty($_FILES['images']['name'])) {
-            $post_img = UploadImage::coverPost($_FILES['images'], 0, $redirect);
-        }
+		if (!empty($img)) {
+			$post_img = UploadImage::coverPost($img, 0, $redirect);
+		}
 
         if (PostModel::getSlug($slug = $this->getSlug($fields['post_title']))) {
             $slug = $slug . "-";
