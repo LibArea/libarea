@@ -631,7 +631,5 @@ li.zebra+li {
 }
 
 .linta-100 {
-  margin-left: -25px;
-  margin-right: -25px;
-  margin-bottom: 14px;
+  margin: 15px -25px;
 }

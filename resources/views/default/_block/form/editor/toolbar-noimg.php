@@ -6,9 +6,14 @@
 
 <script src="/assets/js/editor/cherry-markdown.core.js"></script>
 <script nonce="<?= config('main', 'nonce'); ?>">
+	async function fileUpload(file, callback) {
+		return false;
+	}
+
 	var cherry = new Cherry({
 		id: 'markdown-container',
 		value: document.getElementById("source").value,
+		fileUpload: fileUpload,
 
 		<?= insert('/_block/form/editor/localization'); ?>
 
