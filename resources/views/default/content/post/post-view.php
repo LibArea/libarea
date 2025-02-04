@@ -215,7 +215,7 @@ $blog = $data['blog'][0] ?? null;
     </div>
   <?php endif; ?>
 
-  <?php if ($data['recommend']) : ?>
+   <?php if ($data['recommend'] && $post['post_is_deleted'] != 1) : ?>
     <div class="box sticky top-sm">
       <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
       <?php foreach ($data['recommend'] as  $rec_post) : ?>

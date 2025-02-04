@@ -27,6 +27,10 @@ main {
   font-size: 0.77rem;
 }
 
+.top-sm {
+  top: 5px;
+}
+
 @media (max-width: 1050px) {
   main {
     width: var(--max-w-full);
