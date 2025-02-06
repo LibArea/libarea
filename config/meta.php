@@ -7,10 +7,6 @@
 return [
     'url'               => 'https://libarea.ru',
 
-    // For removing: nofollow noreferrer noopener
-    // Для удаления атрибутов: nofollow noreferrer noopener
-    'white_list_hosts'  => ['libarea.ru', 'libarea.com'],
-
     // SEO
     'name'              => 'LibArea',
     'title'             => 'LibArea — сообщество (скрипт мультиблога)',
