@@ -172,7 +172,7 @@ class Html
                 $html .= '...';
             }
 
-            $html .= '<a class="p5 lowercase gray-600" href="' . $page . $sign . 'page=' . ($pNum + 1) . $sort . '">' . __('app.page') . ' ' . ($pNum + 1) . ' >></a>';
+            $html .= '<a class="p5 lowercase gray-600" href="' . $page . $sign . 'page=' . ($pNum + 1) . $sort . '"><span class="mb-none">' . __('app.page') . '</span> ' . ($pNum + 1) . ' >></a>';
         }
 
         $html .= '</div>';

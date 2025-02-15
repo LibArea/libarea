@@ -249,3 +249,5 @@ Route::get('/rss/all/posts')->controller(RssController::class, 'postsAll');
 Route::get('/turbo-feed/topic/{slug}')->controller(RssController::class, 'turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/rss-feed/topic/{slug}')->controller(RssController::class, 'rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/og-image/{id}')->controller(PostController::class, 'OgImage')->where(['id' => '[0-9-]+'])->name('og.image');
+
+Route::get('/editor/test')->controller(PostController::class, 'editorTest');

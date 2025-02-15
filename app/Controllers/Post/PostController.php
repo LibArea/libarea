@@ -224,4 +224,15 @@ class PostController extends Controller
 
         MetaImage::get($post['post_title'], $post['login'], Img::PATH['avatars'] .  $post['avatar'],  Meta::postImage($post));
     }
+	
+    public function editorTest()
+    {
+        render(
+            '/post/editor-test',
+            [
+                'meta'  => Meta::get(__('app.development'), __('meta.development'), ['og'    => false]),
+                'data'  => ['type' => 'test']
+            ]
+        );
+    }
 }

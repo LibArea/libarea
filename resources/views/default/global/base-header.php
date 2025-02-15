@@ -21,7 +21,6 @@ $post   = $data['post'] ?? false;
             <svg class="icon large menu__button none">
               <use xlink:href="/assets/svg/icons.svg#menu"></use>
             </svg>
-
             <a title="<?= __('app.home'); ?>" class="logo" href="/"><?= config('meta', 'name'); ?></a>
           </div>
 
