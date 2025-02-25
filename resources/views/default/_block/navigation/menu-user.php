@@ -6,15 +6,14 @@ $user = $container->user()->get();
 $login = $user['login'] ?? false;
 ?>
 <span class="right-close pointer">x</span>
-<div class="user-box">
-  <a href="/@<?= $login; ?>" title="<?= __('app.in_profile'); ?>">
-    <?= Img::avatar($user['avatar'], $user['login'], 'img-base mr5', 'small'); ?>
-    <div>
-      <span class="gray nickname"><?= $login; ?></span>
-      <div class="text-sm gray-600"><?= $user['email']; ?></div>
-  </a>
-</div>
-</div>
+
+<a class="user-box" href="/@<?= $login; ?>" title="<?= __('app.in_profile'); ?>">
+  <?= Img::avatar($user['avatar'], $user['login'], 'img-base mr5', 'small'); ?>
+  <div>
+    <div class="gray nickname"><?= $login; ?></div>
+    <div class="text-sm gray-600"><?= $user['email']; ?></div>
+  </div>
+</a>
 
 <ul class="list-none user-nav">
   <?php if ($blog) : ?>

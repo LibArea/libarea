@@ -57,8 +57,8 @@
     <?php if ($post['modified']) : ?>
       <li>
         <div class="lowercase">
-          &#183; <?= langDate($post['post_modified']); ?> <div class="gray-600">(<?= __('app.ed'); ?>)</span>
-          </div>
+          &#183; <?= langDate($post['post_modified']); ?> <span class="gray-600">(<?= __('app.ed'); ?>)</span>
+        </div>
       </li>
     <?php else : ?>
       <li>

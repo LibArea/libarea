@@ -19,5 +19,4 @@ new Vditor('vditor', {
   cdn: "/assets/js/editor-test/",
    mode: "wysiwyg",
 })
-
 </script-->
