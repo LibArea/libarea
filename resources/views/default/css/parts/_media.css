@@ -7,7 +7,6 @@
 .info .main-container,
 .register .main-container,
 .login .main-container {
-  width: 100%;
   background-color: var(--white);
   justify-content: center;
 }

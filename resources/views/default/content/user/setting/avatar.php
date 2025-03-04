@@ -1,5 +1,3 @@
-<?= insert('/_block/add-js-css'); ?>
-
 <main>
   <?= insert('/content/user/setting/nav'); ?>
   <div class="box">
@@ -13,3 +11,6 @@
     <?= __('help.avatar_info'); ?>
   </div>
 </aside>
+
+<script src="/assets/js/cropper/cropper.min.js"></script>
+<link rel="stylesheet" href="/assets/js/cropper/cropper.min.css" type="text/css">

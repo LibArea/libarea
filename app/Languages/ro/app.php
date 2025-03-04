@@ -14,6 +14,7 @@ return [
     'feed'              => 'Flux',
     'poll'              => 'Sondaj',
     'polls'             => 'Sondaje',
+	'headings' 			=> 'Cuprins',
     'closed'            => 'Închis',
     'hi'                => 'Hei',
     'news'              => 'Știri',

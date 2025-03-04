@@ -1,7 +1,4 @@
-<?php 
-insert('/_block/add-js-css');
-$post = $data['post']; 
-?>
+<?php $post = $data['post']; ?>
 
 <main class="wrap">
   <article<?php if ($post['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>

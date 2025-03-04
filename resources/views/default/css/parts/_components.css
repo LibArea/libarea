@@ -428,6 +428,7 @@ a:hover>img {
   max-width: 810px;
   overflow-wrap: break-word;
   margin: 5px;
+  position: relative;
 }
 
 .comment-body img {
@@ -442,6 +443,13 @@ a:hover>img {
 .anchor-top:target~.comment {
   background-color: var(--yellow);
   padding: 5px;
+}
+
+.anchor:target {
+  padding-top: 55px;
+  margin-top: -55px;
+  -webkit-background-clip: content-box;
+  background-clip: content-box;
 }
 
 .anchor-top {

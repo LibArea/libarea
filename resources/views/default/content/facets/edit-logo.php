@@ -1,4 +1,4 @@
-<?= insert('/_block/add-js-css');
+<?php
 $fs = $data['facet_inf'];
 $url = url('redirect.facet', ['id' => $fs['facet_id']]);
 ?>
@@ -46,3 +46,6 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     <?= __('help.edit_' . $data['type']); ?>
   </div>
 </aside>
+
+<script src="/assets/js/cropper/cropper.min.js"></script>
+<link rel="stylesheet" href="/assets/js/cropper/cropper.min.css" type="text/css">

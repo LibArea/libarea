@@ -1,5 +1,4 @@
-<?php
-insert('/_block/add-js-css');
+<?php 
 $post = $data['post'];
 $blog = $data['blog'][0] ?? null;
 ?>
@@ -51,7 +50,22 @@ $blog = $data['blog'][0] ?? null;
 
       <div class="max-w-md">
         <div class="content-body mb15">
-          <?= markdown($post['post_content'], 'text'); ?>
+          <?php $markdown = markdown($post['post_content'], 'text');
+          if (Html::headings($markdown, post_slug($post['post_id'], $post['post_slug'])) == false) : ?>
+
+            <?= $markdown; ?>
+
+          <?php else : ?>
+
+            <?php $content = Html::headings($markdown, post_slug($post['post_id'], $post['post_slug'])); ?>
+
+            <div class="mt20">
+              <b><?= __('app.headings'); ?></b>
+              <?= $content['head']; ?>
+            </div>
+
+            <?= $content['text']; ?>
+          <?php endif; ?>
         </div>
         <?php if ($post['post_url_domain']) : ?>
           <div class="mb15">
@@ -215,7 +229,7 @@ $blog = $data['blog'][0] ?? null;
     </div>
   <?php endif; ?>
 
-   <?php if ($data['recommend'] && $post['post_is_deleted'] != 1) : ?>
+  <?php if ($data['recommend'] && $post['post_is_deleted'] != 1) : ?>
     <div class="box sticky top-sm">
       <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
       <?php foreach ($data['recommend'] as  $rec_post) : ?>

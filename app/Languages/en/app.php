@@ -14,6 +14,7 @@ return [
     'feed'              => 'Feed',
     'poll'              => 'Poll',
     'polls'             => 'Polls',
+	'headings' 			=> 'Table of Contents',
     'minimum'           => 'Minimum',
     'closed'            => 'Сlosed',
     'hi'                => 'Hey',

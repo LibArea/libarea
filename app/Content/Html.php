@@ -301,4 +301,52 @@ class Html
 
         return $pageNumber <= 1 ? 1 : $pageNumber;
     }
+
+    public static function headings($html_string, $slug)
+    {
+        if (!preg_match_all('#<h([1-5])>(.*?)</h[1-5]>#', $html_string, $resultats)) {
+            return false;
+        }
+
+        $from = $to = array();
+        $depth = 0;
+        $start = null;
+
+        $head = '<ul id="box-head" class="list-none">';
+        foreach ($resultats[2] as $i => $header) {
+            $header = preg_replace('#\s+#', ' ', trim(rtrim($header, ':!.?;')));
+            $anchor = str_replace(' ', '-', $header);
+            $header = "<a href=\"{$slug}#{$anchor}\">{$header}</a>";
+
+            if ($depth > 0) {
+                if ($resultats[1][$i] > $depth) {
+                    while ($resultats[1][$i] > $depth) {
+                        $head .= '<ul>';
+                        $depth++;
+                    }
+                } elseif ($resultats[1][$i] < $depth) {
+                    while ($resultats[1][$i] < $depth) {
+                        $head .= '</ul>';
+                        $depth--;
+                    }
+                }
+            }
+            $depth = $resultats[1][$i];
+            if ($start === null) {
+                $start = $depth;
+            }
+            $head .= '<li>' . $header . '</li>';
+
+            $from[$i] = $resultats[0][$i];
+            $to[$i] = '<a class="anchor black" name="' . $anchor . '">' . $resultats[0][$i] . '</a>';
+        }
+
+        for ($i = 0; $i <= ($depth - $start); $i++) {
+            $head .= "</ul>";
+        }
+
+        $text = str_replace($from, $to, $html_string);
+
+        return $data = ['head' => $head, 'text' => $text];
+    }
 }

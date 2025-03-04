@@ -24,7 +24,7 @@ endforeach;
 
 if ($container->user()->id() > 0) {
     if ($topics_user) {
-        echo '<div class="flex justify-between items-center">';
+        echo '<div class="flex items-center">';
         echo '<h4 class="mt15 mb5 ml10 uppercase-box">'.__('app.preferences').'</h3>';
         echo '<a class="text-sm gray-600" title="'.__('app.edit').'" href="'.url('setting.preferences').'">';
         echo '<sup><svg class="icon gray-600"><use xlink:href="/assets/svg/icons.svg#edit"></use></svg></sup>';

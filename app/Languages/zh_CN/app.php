@@ -14,6 +14,7 @@ return [
     'feed'              => '主题',
     'poll'              => '轮询',
     'polls'             => '投票',
+	'headings' 			=> '目录',
     'closed'            => '关闭',
     'hi'                => '嗨',
     'news'              => '新闻',

@@ -1,5 +1,3 @@
-<?= insert('/_block/add-js-css'); ?>
-
 <main>
   <div class="box">
     <a href="/"><?= __('app.home'); ?></a> / <span class="gray-600"><?= __('app.edit_comment'); ?>:</span>
@@ -20,3 +18,6 @@
     </form>
   </div>
 </main>
+
+<script src="/assets/js/tag/tagify.min.js"></script>
+<link rel="stylesheet" href="/assets/js/tag/tagify.css" type="text/css">

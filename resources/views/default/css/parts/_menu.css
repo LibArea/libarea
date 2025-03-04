@@ -7,12 +7,16 @@
 .nav-sidebar {
   height: calc(100dvh - 100px);
   align-self: start;
-  overflow-y: auto;
+  overflow-y: hidden;
   position: sticky;
   top: 75px;
   z-index: 45;
   width: 265px;
   padding-right: 30px;
+}
+
+.nav-sidebar:hover {
+  overflow-y: auto;
 }
 
 .dropdown,
@@ -82,6 +86,7 @@
   align-items: center;
   min-width: 0;
   gap: .7rem;
+  max-width: 190px;
 }
 
 .dropdown li:hover>a,
@@ -104,6 +109,7 @@
 .menu li:hover {
   background-color: var(--white);
   border-radius: var(--rounded);
+  max-width: 190px;
 }
 
 .menu li:hover {

@@ -54,4 +54,6 @@ $url = url('redirect.facet', ['id' => $fs['facet_id']]);
     <?= __('help.team_info'); ?>
   </div>
 </aside>
-<?= insert('/_block/add-js-css'); ?>
+
+<script src="/assets/js/tag/tagify.min.js"></script>
+<link rel="stylesheet" href="/assets/js/tag/tagify.css" type="text/css">
