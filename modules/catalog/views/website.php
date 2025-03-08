@@ -99,7 +99,7 @@
           <?php endif; ?>
 
           <?php if ($item['item_close_replies'] == 0) : ?>
-            <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_reply'))) : ?>
+            <?php if ($container->access()->limitTl(config('main', 'tl_add_reply'))) : ?>
               <form class="max-w-md" action="<?= url('add.reply', method: 'post'); ?>" accept-charset="UTF-8" method="post">
                 <?= $container->csrf()->field(); ?>
 
@@ -156,6 +156,6 @@
 </div>
 
 <script src="/assets/js/dialog/dialog.js"></script>
-<?= insert('/_block/dialog/share', ['title' => __('app.share_website'), 'url' => config('meta', 'url') . url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']])]); ?>
+<?= insert('/_block/dialog/share', ['title' => __('app.share_website'), 'url' => config('main', 'url') . url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']])]); ?>
 
 <?= insertTemplate('footer'); ?>

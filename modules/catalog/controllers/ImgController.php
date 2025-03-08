@@ -62,6 +62,6 @@ class ImgController extends Module
 
     public static function getScreenshot(string $url)
     {
-        return "https://api.screenshotone.com/take?image_width=880&url=" . $url . "&access_key=" . config('integration', 'sc_access_key');
+        return "https://api.screenshotone.com/take?image_width=880&url=" . $url . "&access_key=" . config('main', 'sc_access_key');
     }
 }

@@ -104,6 +104,6 @@
   </div>
 <?php endif; ?>
 
-<?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_poll'))) : ?>
+<?php if ($container->access()->limitTl(config('main', 'tl_add_poll'))) : ?>
   <?= insert('/_block/form/select/poll', ['poll' => $poll]); ?>
 <?php endif; ?>  

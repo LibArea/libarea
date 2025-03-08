@@ -45,7 +45,7 @@
               <?= __('app.sign_in'); ?>
             </a>
         <?php else : ?>
-			<?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_item')) || ($user_count_site != false)) : ?>
+			<?php if ($container->access()->limitTl(config('main', 'tl_add_item')) || ($user_count_site != false)) : ?>
 				<a class="blue" title="<?= __('web.add_website'); ?>" href="<?= $url; ?>">
 				  <svg class="icon icon-bold"><use xlink:href="/assets/svg/icons.svg#write"></use></svg>
 				</a>

@@ -1,6 +1,5 @@
 <?= insertTemplate('header', ['meta' => $meta]); ?>
 
-<?= insert('/_block/add-js-css'); ?>
 <div id="contentWrapper" class="wrap">
   <main>
     <div class="box">
@@ -31,5 +30,8 @@
       <div>
   </aside>
 </div>
+
+<script src="/assets/js/tag/tagify.min.js"></script>
+<link rel="stylesheet" href="/assets/js/tag/tagify.css" type="text/css">
 
 <?= insertTemplate('footer'); ?>

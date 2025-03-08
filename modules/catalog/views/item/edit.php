@@ -1,7 +1,5 @@
-<?= insertTemplate('header', ['meta' => $meta]); ?>
-
-<?= insert('/_block/add-js-css');
-$domain = $data['domain']; ?>
+<?= insertTemplate('header', ['meta' => $meta]);
+$domain = $data['domain'];  ?>
 
 <div id="contentWrapper" class="wrap">
   <main>
@@ -78,5 +76,7 @@ $domain = $data['domain']; ?>
 </div>
 
 <script src="/assets/js/catalog.js"></script>
+<script src="/assets/js/tag/tagify.min.js"></script>
+<link rel="stylesheet" href="/assets/js/tag/tagify.css" type="text/css">
 
 <?= insertTemplate('footer'); ?>

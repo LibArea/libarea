@@ -27,7 +27,7 @@ class AddItemController extends Module
      */
     public function index(): View
     {
-        if (!$this->container->access()->limitTl(config('trust-levels', 'tl_add_item'))) {
+        if (!$this->container->access()->limitTl(config('main', 'tl_add_item'))) {
             redirect('/web');
         }
 

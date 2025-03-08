@@ -18,12 +18,9 @@ return [
     'tl_add_topic'      => 10,
     'tl_add_category'   => 10, // Catalog (каталог)
     'tl_add_section'    => 10, // Service pages (служебные страницы)
-    'tl_add_team'       => 2,
 
     'tl_add_post'       => 1,
     'tl_add_comment'    => 1,
-    'tl_add_item'       => 2, // Catalog (каталог)
-    'tl_add_reply'      => 2, // Catalog (каталог)
 
     'tl_add_poll'       => 2,
 
@@ -59,8 +56,6 @@ return [
 
     'perDay_post'       => 3,
     'perDay_comment'    => 8,
-    'perDay_item'       => 1, // Catalog (каталог)
-    'perDay_reply'      => 3, // Catalog (каталог)
 
     'perDay_poll'       => 3,
 
@@ -85,8 +80,6 @@ return [
     'edit_time_post'    => 60,
     'edit_time_answer'  => 30,
     'edit_time_comment' => 30,
-    'edit_time_item'    => 0,
-    'edit_time_reply'   => 0,
     'edit_time_poll'    => 0,
 
     /*
