@@ -180,22 +180,6 @@ class FacetModel extends Model
         return true;
     }
 
-    public static function addItemFacets(array $rows, int $item_id)
-    {
-        self::deleteRelation($item_id, 'item');
-
-        foreach ($rows as $row) {
-            $facet_id   = $row['id'];
-            if ($item_id == $row['id']) return true;
-            $sql = "INSERT INTO facets_items_relation (relation_facet_id, relation_item_id) 
-                        VALUES ($facet_id, $item_id)";
-
-            DB::run($sql);
-        }
-
-        return true;
-    }
-
     // Main trees
     // Основные деревья
     public static function addLowFacetRelation(array $rows, int $topic_id)
@@ -234,10 +218,8 @@ class FacetModel extends Model
 
     public static function deleteRelation(int $id, string $type)
     {
-        $sql = "DELETE FROM facets_items_relation WHERE relation_item_id = $id";
-        if ($type == 'post') {
-            $sql = "DELETE FROM facets_posts_relation WHERE relation_post_id = $id";
-        } elseif ($type == 'topic') {
+        $sql = "DELETE FROM facets_posts_relation WHERE relation_post_id = $id";
+        if ($type == 'topic') {
             $sql = "DELETE FROM facets_relation WHERE facet_parent_id = $id";
         } elseif ($type == 'matching') {
             $sql = "DELETE FROM facets_matching WHERE matching_parent_id = $id";
@@ -556,7 +538,7 @@ class FacetModel extends Model
 
     public static function types()
     {
-        return  DB::run('SELECT type_id, type_code, type_lang FROM facets_types');
+        return  DB::run('SELECT type_id, type_code, type_lang FROM facets_types')->fetchAll();
     }
 
     // Team Members

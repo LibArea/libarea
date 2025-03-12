@@ -27,18 +27,7 @@
 				'title' => 'app.comments',
 				'icon'  => 'comments',
 				'id'    => 'all_comments',
-			],
-
-			/* Вы можете закомментировать эту секцию */
-			[
-				'url'   => url('web'),
-				'title' => 'app.catalog',
-				'icon'  => 'link',
-				'id'    => 'catalog',
-			],
-			/* end */
-
-			[
+			], [
 				'url'   => url('search'),
 				'title' => 'app.search',
 				'icon'  => 'search',

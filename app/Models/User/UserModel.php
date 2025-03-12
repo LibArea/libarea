@@ -164,20 +164,13 @@ class UserModel extends Model
                     post_slug,
                     comment_id,
                     comment_post_id,
-                    comment_content,
-                    item_id,
-                    item_title,
-                    item_url,
-                    item_slug,
-                    item_content,
-                    item_domain
+                    comment_content
                         FROM favorites fav
                             LEFT JOIN posts ON post_id = fav.tid AND fav.action_type = 'post'
                             LEFT JOIN comments ON comment_id = fav.tid AND fav.action_type = 'comment'
-                            LEFT JOIN items ON item_id = fav.tid AND fav.action_type = 'website'
                               LEFT JOIN folders_relation fr ON fr.tid = fav.tid
                               LEFT JOIN folders fol ON folder_id = fol.id AND fol.user_id = :uid2
-                                WHERE fav.user_id = :user_id $tag ORDER BY fav.id DESC LIMIT 100";
+                                WHERE fav.action_type != 'website' AND fav.user_id = :user_id $tag ORDER BY fav.id DESC LIMIT 100";
 
         return DB::run($sql, ['user_id' => $user_id, 'uid2' => $user_id])->fetchAll();
     }
@@ -224,10 +217,8 @@ class UserModel extends Model
         $sql = "SELECT 
                     (SELECT COUNT(post_id) FROM posts WHERE post_user_id = $user_id and post_draft = 0 and post_is_deleted = $condition) AS count_posts,
                   
-                    (SELECT COUNT(comment_id) FROM comments WHERE comment_user_id = $user_id and comment_is_deleted = $condition) AS count_comments,
+                    (SELECT COUNT(comment_id) FROM comments WHERE comment_user_id = $user_id and comment_is_deleted = $condition) AS count_comments";
                             
-                    (SELECT COUNT(item_id) FROM items WHERE item_user_id = $user_id and item_is_deleted = $condition) AS count_items";
-
         return DB::run($sql)->fetch();
     }
 	

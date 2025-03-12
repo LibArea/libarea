@@ -178,20 +178,6 @@ class HomeModel extends Model
     }
 
     /**
-     * Latest sites
-     * Последние сайты
-     *
-     * @param integer $limit
-     * @return array|false
-     */
-    public static function latestItems(int $limit = 3): array|false
-    {
-        $sql = "SELECT item_id, item_title, item_slug, item_domain FROM items WHERE item_published = 1 AND item_is_deleted = 0 ORDER BY item_id DESC LIMIT :limit";
-
-        return DB::run($sql, ['limit' => $limit])->fetchAll();
-    }
-
-    /**
      * Facets (topic, blogs) all / subscribed
      * Фасеты (темы, блоги) все / подписан
      */

@@ -40,8 +40,8 @@ class FavoriteModel extends Model
     }
 
     public static function getUserFavorite($content_id, $type)
-    {
-        $sql = "SELECT tid, user_id, action_type FROM favorites 
+    { 
+		$sql = "SELECT tid, user_id, action_type FROM favorites 
                     WHERE tid = :content_id AND user_id = :user_id AND action_type = :type";
 
         return  DB::run($sql, ['content_id' => $content_id, 'user_id' => self::container()->user()->id(), 'type' => $type])->fetch();

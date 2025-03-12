@@ -68,7 +68,6 @@ class HomeController extends Controller
                     'type'              => 'main',
                     'latest_comments'   => CommentModel::latestComments(4),
                     'posts'             => HomeModel::feed($signed, Html::pageNumber(), $sheet),
-                    'items'             => HomeModel::latestItems() ?? [],
                 ],
             ],
         );
