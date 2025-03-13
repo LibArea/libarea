@@ -6,10 +6,6 @@
       <form action="<?= url('setting.edit.preferences', method: 'post'); ?>" accept-charset="UTF-8" method="post">
         <?= $container->csrf()->field(); ?>
 
-        <div class="mb15">
-          <input name="id[]" value="-1" type="checkbox" <?php if ($block) : ?><?php if ($block['facet_id'] == -1) : ?> checked<?php endif; ?><?php endif; ?>> <?= __('app.show_sites_block'); ?>
-        </div>
-
         <h2 class="title"><?= __('app.signed_facets'); ?></h2>
         <span class="gray-600 text-sm">
           <?= __('app.signed_facets_help', ['num' => config('facets', 'quantity_home')]); ?>

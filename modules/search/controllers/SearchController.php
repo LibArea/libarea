@@ -40,7 +40,7 @@ class SearchController extends Module
         $q      = Request::get('q')->value();
         $type   = Request::get('cat')->value();
 
-        if (!in_array($type, ['post', 'website', 'comment'])) {
+        if (!in_array($type, ['post', 'comment'])) {
             $type = 'post';
         }
 
@@ -100,7 +100,7 @@ class SearchController extends Module
         $query = $this->validateInput(Request::post('query'));
         $type = $this->validateType(Request::post('type'));
 
-        $content = $type === 'topic' ? 'post' : 'website';
+        $content = $type === 'topic' ? 'post' : 'comment';
 
         $topics = SearchModel::getSearchTags($query, $type, 3);
         $posts = SearchModel::getSearch(1, 5, $query, $content);

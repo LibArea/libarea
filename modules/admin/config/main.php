@@ -58,14 +58,13 @@ return [
 
     // Path to svg sprite
     // Путь к спрайту svg
-    'svg_path'  => '/assets/svg/icons.svg',
+    'svg_path'  	=> '/assets/svg/icons.svg',
     
     // Paths to template files
 	// Separate style files that may not be included in the templates
 	// Отдельные файлы стилей, которые могут не включаться в шаблоны
     'path_css' => [
         'rtl'       => '/resources/views/default/css/rtl.css',
-        'catalog'   => '/modules/catalog/views/css/catalog.css',
     ],
 
     // Base path to js files
@@ -76,7 +75,6 @@ return [
         'admin'         => '/resources/views/default/js/', 
         'zooom'   		=> '/resources/views/default/js/',
         'app'           => '/resources/views/default/js/', 
-        'catalog'       => '/resources/views/default/js/',
      ],  
 
 ];

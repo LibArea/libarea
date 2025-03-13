@@ -41,19 +41,6 @@
           <a href="<?= post_slug($fav['post_id'], $fav['post_slug']); ?>">
             <?= $fav['post_title']; ?>
           </a>
-        <?php elseif ($fav['action_type'] == 'website') : ?>
-          <a class="block" href="<?= url('website', ['id' => $fav['item_id'], 'slug' => $fav['item_slug']]); ?>">
-            <?= $fav['item_title']; ?>
-          </a>
-          <div class="text-sm">
-            <?= fragment($fav['item_content'], 82); ?>...
-          </div>
-          <div class="text-sm">
-            <?= Img::website('favicon', host($fav['item_url']), 'favicons mr5'); ?>
-            <a target="_blank" href="<?= $fav['item_url']; ?>" class="item_cleek green" data-id="<?= $fav['item_id']; ?>" rel="nofollow noreferrer ugc">
-              <?= $fav['item_url']; ?>
-            </a>
-          </div>
         <?php else : ?>
           <a href="<?= post_slug($fav['post']['post_id'], $fav['post']['post_slug']); ?>#comment_<?= $fav['comment_id']; ?>">
             <?= $fav['post']['post_title']; ?>

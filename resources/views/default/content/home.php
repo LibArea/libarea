@@ -60,23 +60,6 @@
     <?php endif; ?>
   <?php endif; ?>
 
-  <?php if ($block = $topics_user[0] ?? false) : ?>
-    <?php if ($block['type'] == 2) : ?>
-      <div class="box">
-        <h4 class="uppercase-box"><?= __('app.websites'); ?></h4>
-        <ul>
-          <?php foreach ($data['items'] as $item) : ?>
-            <li class="mt15">
-              <a href="<?= url('website', ['id' => $item['item_id'], 'slug' => $item['item_slug']]); ?>">
-                <?= $item['item_title']; ?> <span class="green"><?= $item['item_domain']; ?></span>
-              </a>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      </div>
-    <?php endif; ?>
-  <?php endif; ?>
-
   <div class="sticky top-sm">
     <?= insert('/_block/latest-comments-tabs', ['latest_comments' => $data['latest_comments']]); ?>
   </div>

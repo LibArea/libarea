@@ -33,8 +33,5 @@ $q = $data['q'];
         <li<?php if ($uri == 'comment') : ?> class="active" <?php endif; ?>>
           <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=comment"><?= __('search.comments'); ?></a>
           </li>
-          <li<?php if ($uri == 'website') : ?> class="active" <?php endif; ?>>
-            <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=website"><?= __('search.websites'); ?></a>
-            </li>
     </ul>
   </div>

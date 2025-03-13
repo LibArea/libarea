@@ -11,10 +11,6 @@ class SearchModel extends Model
 {
     public static function getSearch(int $page, int $limit, string $query, string $type)
     {
-        if ($type === 'website') {
-            return self::getWebsite($page, $limit, $query);
-        }
-
         if ($type === 'comment') {
             return self::getComments($page, $limit, $query);
         }
@@ -62,34 +58,6 @@ class SearchModel extends Model
                             AND comment_content LIKE :qa LIMIT :start, :limit";
 
         return DB::run($sql, ['qa' => "%" . $query . "%", 'start' => $start, 'limit' => $limit])->fetchAll();
-    }
-
-    public static function getWebsite(int $page, int $limit, string $query)
-    {
-        $start  = ($page - 1) * $limit;
-        $sql = "SELECT DISTINCT 
-            item_id, 
-            item_title as title, 
-            item_content as content,
-            item_url,
-            item_slug,
-            item_domain,
-            item_votes as votes,
-            item_count as count,
-            rel.*
-                FROM facets_items_relation  
-                LEFT JOIN items ON relation_item_id = item_id 
-                LEFT JOIN ( SELECT  
-                        relation_item_id,  
-                        GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list  
-                        FROM facets  
-                        LEFT JOIN facets_items_relation on facet_id = relation_facet_id  
-                            GROUP BY relation_item_id  
-                ) AS rel ON rel.relation_item_id = item_id  
-                        WHERE item_is_deleted = 0
-                            AND MATCH(item_title, item_content, item_domain) AGAINST (:qa) LIMIT :start, :limit";
-
-        return DB::run($sql, ['qa' => $query, 'start' => $start, 'limit' => $limit])->fetchAll();
     }
 
     public static function getSearchCount(string $query, string $type)
