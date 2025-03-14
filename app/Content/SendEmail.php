@@ -32,34 +32,35 @@ class SendEmail
 
         $text_footer    = __('mail.footer', ['name' => config('meta', 'url')]);
         $user_email     = $user['email'];
-        $url            = config('meta', 'url');
+        $url            = config('meta', 'url') . $variables['link'];
+		$name           = config('meta', 'name');
 
         switch ($type) {
             case 'changing.password':
-                $subject    = __('mail.changing_password_subject', ['name' => config('meta', 'name')]);
-                $message    = __('mail.changing_password_message', ['url' => $url . $variables['newpass_link']]);
+                $subject    = __('mail.changing_password_subject', ['name' => $name]);
+                $message    = __('mail.changing_password_message', ['url' => $url]);
                 break;
             case 'appealed':
-                $subject    = __('mail.appealed_subject', ['name' => config('meta', 'name')]);
-                $message    = __('mail.appealed_message', ['url' => $url . url('notifications')]);
+                $subject    = __('mail.appealed_subject', ['name' => $name]);
+                $message    = __('mail.appealed_message', ['url' => $url]);
                 break;
             case 'activate.email':
-                $subject    = __('mail.activate_email_subject', ['name' => config('meta', 'name')]);
-                $message    = __('mail.activate_email_message', ['url' => $url . $variables['link']]);
+                $subject    = __('mail.activate_email_subject', ['name' => $name]);
+                $message    = __('mail.activate_email_message', ['url' => $url]);
                 break;
             case 'new.email':
                 $user_email = $variables['new_email'];
-                $subject    = __('mail.new_email_subject', ['name' => config('meta', 'name')]);
-                $message    = __('mail.new_email_message', ['url' => $url . $variables['link']]);
+                $subject    = __('mail.new_email_subject', ['name' => $name]);
+                $message    = __('mail.new_email_message', ['url' => $url]);
                 break;
             case 'invite.reg':
                 $user_email = $variables['invitation_email'];
-                $subject    = __('mail.invite_reg_subject', ['name' => config('meta', 'name')]);
-                $message    = __('mail.invite_reg_message', ['url' => $url . $variables['link']]);
+                $subject    = __('mail.invite_reg_subject', ['name' => $name]);
+                $message    = __('mail.invite_reg_message', ['url' => $url]);
                 break;
             default:
                 $user_email = $variables['email'];
-                $subject    = __('mail.test_subject', ['name' => config('meta', 'name')]);
+                $subject    = __('mail.test_subject', ['name' => $name]);
                 $message    = __('mail.test_message');
                 break;
         }

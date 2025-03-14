@@ -45,7 +45,7 @@ class RecoverController extends Controller
             ]
         );
 
-        SendEmail::mailText($uInfo['id'], 'changing.password', ['newpass_link' => url('recover.code', ['code' => $code])]);
+        SendEmail::mailText($uInfo['id'], 'changing.password', ['link' => url('recover.code', ['code' => $code])]);
 
         Msg::redirect(__('msg.new_password_email'), url('login'));
     }

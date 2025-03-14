@@ -84,7 +84,7 @@ class NotificationController extends Controller
 
             NotificationModel::send($recipient_id, $action_type, $url);
 
-            SendEmail::mailText($recipient_id, 'appealed');
+            SendEmail::mailText($recipient_id, 'appealed', ['link' => url('notifications')]);
         }
 
         return true;

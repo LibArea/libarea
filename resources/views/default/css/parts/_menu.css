@@ -120,6 +120,10 @@
   color: var(--gray);
 }
 
+.mess li:hover {
+  background-color: var(--gray-100);
+}
+
 .breadcrumbs li {
   display: inline;
   color: var(--gray-600);

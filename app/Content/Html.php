@@ -314,8 +314,8 @@ class Html
 
         $head = '<ul id="box-head" class="list-none">';
         foreach ($resultats[2] as $i => $header) {
-            $header = preg_replace('#\s+#', ' ', trim(rtrim($header, ':!.?;')));
-            $anchor = str_replace(' ', '-', $header);
+            $header = strip_tags(preg_replace('#\s+#', ' ', trim(rtrim($header, ':!.?;'))));
+            $anchor = strip_tags(str_replace(' ', '-', $header));
             $header = "<a href=\"{$slug}#{$anchor}\">{$header}</a>";
 
             if ($depth > 0) {
@@ -338,7 +338,7 @@ class Html
             $head .= '<li>' . $header . '</li>';
 
             $from[$i] = $resultats[0][$i];
-            $to[$i] = '<a class="anchor black" name="' . $anchor . '">' . $resultats[0][$i] . '</a>';
+            $to[$i] = '<a class="anchor black" name="' . $anchor . '">' . strip_tags($resultats[0][$i]) . '</a>';
         }
 
         for ($i = 0; $i <= ($depth - $start); $i++) {

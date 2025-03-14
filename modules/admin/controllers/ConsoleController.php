@@ -68,7 +68,7 @@ class ConsoleController extends Module
     public static function testMail()
     {
         $email  = Request::post('mail')->value();
-        SendEmail::mailText(1, 'admin.test', ['email' => $email]);
+        SendEmail::mailText(1, 'admin.test', ['email' => $email, 'link' => false]);
 
         Msg::add(__('admin.completed'), 'success');
 
