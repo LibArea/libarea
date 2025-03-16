@@ -16,7 +16,7 @@ class SassController extends Module
 
             $name = ($key === 'default') ? 'style' : $key;
 
-            $this->buildCss(HLEB_GLOBAL_DIR . '/resources/views/' . $key . '/css/build.css', $name);
+            $this->buildCss(HLEB_GLOBAL_DIR . '/resources/views/' . $key . '/assets/css/build.css', $name);
         }
 
         // Generic js

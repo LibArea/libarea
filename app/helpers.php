@@ -59,31 +59,26 @@ function insert(string $hlTemplatePath, array $params = [])
     require TEMPLATES . DIRECTORY_SEPARATOR . $tpl_puth . '.php';
 }
 
-function render(string $name, array $data = [], string $part = 'base')
+function render(string $name, array $data = [])
 {
-    closing();
-
-    $body = UserData::getUserTheme() . DIRECTORY_SEPARATOR;
-    $header = $body . '/global/' . $part . '-header';
-    $footer = $body . '/global/' . $part . '-footer';
-
-    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $body . '/content/' . $name . '.php')) {
-        $body = 'default';
+	$userTheme = UserData::getUserTheme();
+	
+	$mainTheme = $userTheme; 
+    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $userTheme . '/main.php')) {
+		$mainTheme = 'default';
+    }
+	
+	$contentTheme = $userTheme . '/content/';
+    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $userTheme . '/content/' . $name)) {
+		$contentTheme = 'default/content/';
     }
 
-    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $header . '.php')) {
-        $header = 'default/global/' . $part . '-header';
-    }
+	$page_content = view($contentTheme . $name, ['data' => $data['data']]);
 
-    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $footer . '.php')) {
-        $footer = 'default/global/' . $part . '-footer';
-    }
+	$data['data']['topics_user'] = UserData::getUserFacets();
+		
 
-    $data['topics_user'] = UserData::getUserFacets();
-
-    echo view($header, $data);
-    echo view($body . '/content/' . $name, $data);
-    echo view($footer, $data);
+	echo view($mainTheme . '/main', ['content' => $page_content, 'data' => $data['data'], 'meta' => $data['meta']]);
 }
 
 function closing()

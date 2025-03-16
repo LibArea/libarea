@@ -1,8 +1,8 @@
 <?php
-$type   = $data['type'] ?? false;
-$facet  = $data['facet'] ?? false; ?>
+$facet  = $data['facet'] ?? false;
+?>
 
-<?= insert('/meta', ['meta' => $meta]); ?>
+<?= insert('/global/header', ['meta' => $meta]); ?>
 
 <body <?php if ($container->cookies()->get('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
 
@@ -42,7 +42,13 @@ $facet  = $data['facet'] ?? false; ?>
         </a>
       </div>
 
-      <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?> 
+      <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?>
     </div>
   </header>
   <div id="contentWrapper" class="wrap">
+
+    <?= $content; ?>
+
+  </div>
+
+  <?= insert('/global/footer'); ?>

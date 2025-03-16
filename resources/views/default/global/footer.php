@@ -3,7 +3,7 @@
  
 <?php if ($container->user()->active()) : ?>
   <script src="/assets/js/app.js?<?= config('general', 'version'); ?>"></script>
-  <?= insert('/device-id'); ?>
+  <?= insert('/_block/device-id'); ?>
 <?php endif; ?>
 
 <?php if ($container->user()->admin()) : ?>
@@ -128,7 +128,7 @@
   <?php endif; ?>
 </script>
 
-<?= insert('/metrika'); ?>
+<?= insert('/banner/metrika'); ?>
 
 </body>
 

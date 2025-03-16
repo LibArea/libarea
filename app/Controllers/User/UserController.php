@@ -43,7 +43,7 @@ class UserController extends Controller
         ];
 
         render(
-            '/user/all',
+            'user/all',
             [
                 'meta'  => Meta::get(__('meta.' . $sheet . '_users'), __('meta.' . $sheet . '_users_desc'), $m),
                 'data'  => [

@@ -64,17 +64,17 @@ return [
 	// Separate style files that may not be included in the templates
 	// Отдельные файлы стилей, которые могут не включаться в шаблоны
     'path_css' => [
-        'rtl'       => '/resources/views/default/css/rtl.css',
+        'rtl'       => '/resources/views/default/assets/css/rtl.css',
     ],
 
     // Base path to js files
     // Базовый путь к js файлам    
     'path_js' => [
-        'la'            => '/resources/views/default/js/',
-        'common'        => '/resources/views/default/js/', 
-        'admin'         => '/resources/views/default/js/', 
-        'zooom'   		=> '/resources/views/default/js/',
-        'app'           => '/resources/views/default/js/', 
+        'la'            => '/resources/views/default/assets/js/',
+        'common'        => '/resources/views/default/assets/js/', 
+        'admin'         => '/resources/views/default/assets/js/', 
+        'zooom'   		=> '/resources/views/default/assets/js/',
+        'app'           => '/resources/views/default/assets/js/', 
      ],  
 
 ];
