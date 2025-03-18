@@ -3,7 +3,7 @@ $uri = $data['type'] ?? 'post';
 $q = $data['q'];
 ?>
 
-<?= insert('/meta', ['meta' => $meta, 'type' => 'search']); ?>
+<?= insert('global/header', ['meta' => $meta, 'type' => 'search']); ?>
 
 <body class="search-page<?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?>">
 
