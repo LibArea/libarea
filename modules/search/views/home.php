@@ -1,4 +1,4 @@
-<?= insert('/global/header', ['meta' => $meta, 'type' => 'home-search']); ?>
+<?= insert('global/header', ['meta' => $meta, 'type' => 'home-search']); ?>
 
 <body class="home-search<?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?>">
 

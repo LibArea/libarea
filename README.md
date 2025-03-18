@@ -21,10 +21,6 @@ Second design (Q&A) in the system:
 
 ![LibArea topics](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libarea3.jpg)
 
-Directory of sites (programs) uses a faceted scheme:
-
-![LibArea catalog](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/catalog.jpg)
-
 Site-based test design (https://lobste.rs/)
 
 ![LibArea test design](https://raw.githubusercontent.com/LibArea/libarea/main/public/assets/images/libarea-test.jpg)
