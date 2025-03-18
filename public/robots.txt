@@ -9,11 +9,5 @@ Disallow: /s/flud/*
 Disallow: /page/*
 Disallow: /*/page/*
 Disallow: /page
-Disallow: /web/edit/*
-Disallow: /web/github/*
-Disallow: /web/forum/*
-Disallow: /web/portal/*
-Disallow: /web/reference/*
-Disallow: /web/blog/*
 Disallow: /rss-feed/*
 Disallow: /*?*
