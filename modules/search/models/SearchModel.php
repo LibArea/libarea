@@ -70,10 +70,6 @@ class SearchModel extends Model
 
         $sql = "SELECT post_id FROM posts WHERE post_is_deleted = 0 AND post_hidden = 0 AND post_draft = 0 AND post_tl = 0 AND post_type = 'post' AND MATCH(post_title, post_content) AGAINST (:qa)";
 
-        if ($type == 'website') {
-            $sql = "SELECT item_id FROM items WHERE item_is_deleted = 0 AND MATCH(item_title, item_content, item_domain) AGAINST (:qa)";
-        }
-
         return DB::run($sql, ['qa' => $query])->rowCount();
     }
 

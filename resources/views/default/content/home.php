@@ -23,6 +23,8 @@
 </main>
 
 <aside>
+  <?= insert('/banner/home-sidebar-240-400'); ?>
+
   <?php if (!$container->user()->active()) : ?>
     <div class="box text-sm">
       <h4 class="uppercase-box"><?= __('app.authorization'); ?></h4>

@@ -87,15 +87,9 @@ function fetchSearch() {
       let html = '<div class="flex">';
 
       for (let key in results) {
-        if (type == 'category') {
-          // Category-specific rendering
-          html += renderLink('/web/dir/all/', results[key].facet_slug, results[key].facet_title);
-          html += renderLink('/web/website/', results[key].item_id, results[key].title);
-        } else {
-          // Other type-specific rendering
-          html += renderLink('/topic/', results[key].facet_slug, results[key].facet_title);
-          html += renderLink('/post/', results[key].post_id, results[key].title);
-        }
+        // Other type-specific rendering
+        html += renderLink('/topic/', results[key].facet_slug, results[key].facet_title);
+        html += renderLink('/post/', results[key].post_id, results[key].title);
         html += '</div>';
       }
 

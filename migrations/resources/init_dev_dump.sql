@@ -374,83 +374,6 @@ CREATE TABLE `invitations` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `items`
---
-
-CREATE TABLE `items` (
-  `item_id` int(11) NOT NULL,
-  `item_url` varchar(255) DEFAULT NULL,
-  `item_slug` varchar(255) DEFAULT NULL,
-  `item_domain` varchar(255) DEFAULT NULL,
-  `item_title` varchar(255) DEFAULT NULL,
-  `item_content` text DEFAULT NULL,
-  `item_title_soft` varchar(255) DEFAULT NULL,
-  `item_content_soft` text DEFAULT NULL,
-  `item_published` tinyint(1) NOT NULL DEFAULT 1,
-  `item_user_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Who added',
-  `item_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `item_modified` timestamp NOT NULL DEFAULT current_timestamp(),
-  `item_is_forum` tinyint(1) DEFAULT NULL COMMENT 'The site has a forum',
-  `item_is_portal` tinyint(1) DEFAULT NULL COMMENT 'This is a portal',
-  `item_is_blog` tinyint(1) DEFAULT NULL COMMENT 'This is a blog',
-  `item_is_reference` tinyint(1) DEFAULT NULL COMMENT 'Is this a reference site',
-  `item_is_goods` tinyint(1) DEFAULT NULL COMMENT 'The site contains goods and services',
-  `item_is_soft` tinyint(1) DEFAULT NULL COMMENT 'There is a program (script)',
-  `item_is_github` tinyint(1) DEFAULT NULL COMMENT 'The site is on GitHub',
-  `item_github_url` varchar(255) DEFAULT NULL COMMENT 'URL on GitHub',
-  `item_telephone` varchar(55) DEFAULT NULL COMMENT 'Contact phone',
-  `item_email` varchar(55) DEFAULT NULL COMMENT 'Public email address',
-  `item_vk` varchar(55) DEFAULT NULL COMMENT 'Page in VKontakte',
-  `item_telegram` varchar(55) DEFAULT NULL COMMENT 'Page in Telegram',
-  `item_post_related` varchar(255) DEFAULT NULL,
-  `item_focus_count` int(11) DEFAULT NULL,
-  `item_close_replies` tinyint(1) DEFAULT NULL,
-  `item_votes` int(11) NOT NULL DEFAULT 0,
-  `item_count` int(11) NOT NULL DEFAULT 1,
-  `item_following_link` int(11) NOT NULL DEFAULT 1,
-  `item_poll` smallint(6) NOT NULL DEFAULT 0 COMMENT 'Для опроса',
-  `item_is_deleted` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `items`
---
-
-INSERT INTO `items` (`item_id`, `item_url`, `item_slug`, `item_domain`, `item_title`, `item_content`, `item_title_soft`, `item_content_soft`, `item_published`, `item_user_id`, `item_date`, `item_modified`, `item_is_forum`, `item_is_portal`, `item_is_blog`, `item_is_reference`, `item_is_goods`, `item_is_soft`, `item_is_github`, `item_github_url`, `item_telephone`, `item_email`, `item_vk`, `item_telegram`, `item_post_related`, `item_focus_count`, `item_close_replies`, `item_votes`, `item_count`, `item_following_link`, `item_poll`, `item_is_deleted`) VALUES
-(1, 'https://libarea.ru', 'libarea', 'libarea.ru', '«LibArea» — сообщество по интересам', 'Лучшие публикации за сутки. Темы, личные дневники, группы. Каталог сайтов и программ, поиск..', 'LibArea', 'Discussion (forum) and Q&A platform. Community based on PHP Micro-Framework HLEB. (Zhihu, Quora clone)', 1, 1, '2021-06-20 13:35:02', '2023-02-16 08:48:43', NULL, NULL, NULL, NULL, NULL, 1, 1, 'https://github.com/LibArea/libarea', NULL, NULL, NULL, NULL, '2', 0, 0, 1, 1, 1, 0, 0),
-(2, 'https://github.com', 'github', 'github.com', '«GitHub» — веб-сервис для хостинга IT-проектов', 'Веб-сервис, хостинговая платформа  для программистов основанная на системе контроля версий Git. Бесплатные, платные версии репозитория.', '', '', 1, 1, '2021-11-02 17:30:40', '2023-02-16 08:48:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', 0, 0, 1, 1, 1, 0, 0),
-(3, 'https://hleb2framework.ru', 'phphleb', 'hleb2framework.ru', '«HLEB» — микрофреймворк', 'Документация и описание Micro-Framework(а) использующий базовую реализацию MVC на PHP. Установить, настройка, структура проекта. Маршрутизация, контроллеры и модели.', 'HLEB', 'Отличительной особенностью микропрограммы HLEB является минимализм кода и скорость работы. Выбор данного фреймворка позволяет запустить полноценный продукт с минимальными временными затратами и обращениями к документации; это легко, просто и быстро. \r\n\r\nВ то же время он решает типовые задачи, такие как маршрутизация, перенос действий на контроллеры, поддержка модели, то есть базовая реализация MVC. Это самый минимум, необходимый для быстрого запуска приложения.', 1, 1, '2021-11-08 02:02:24', '2023-02-16 08:48:43', NULL, NULL, NULL, NULL, NULL, 1, 1, 'https://github.com/phphleb/hleb', NULL, NULL, NULL, NULL, '', 0, 0, 1, 1, 1, 0, 0),
-(4, 'https://ispserver.ru', 'ispserver', 'ispserver.ru', '«ISPserveru» — хостинг-провайдер', 'Веб-хостинг, VPS и выделенные серверы в трёх дата-центрах в Москве и Германии. Информация по панели управления ISPmanager. Контакты, обратная связь.', '', '', 1, 1, '2021-11-12 00:50:54', '2023-02-16 08:48:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', 0, 0, 1, 1, 1, 0, 0),
-(5, 'https://sourceforge.net', 'sourceforge', 'sourceforge.net', '«Sourceforge» — проекты с открытым исходным кодом', 'Список проектов с открытым исходным кодом. Перечень проектов, нуждающиеся в помощи. Возможность загрузить различные материалы. Информация на английском языке.', '', '', 1, 1, '2021-11-12 01:12:18', '2023-02-16 08:48:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', 0, 0, 1, 1, 1, 0, 0);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `items_signed`
---
-
-CREATE TABLE `items_signed` (
-  `signed_id` int(11) NOT NULL,
-  `signed_item_id` int(11) NOT NULL,
-  `signed_user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `items_status`
---
-
-CREATE TABLE `items_status` (
-  `status_id` int(11) NOT NULL,
-  `status_item_id` int(11) NOT NULL,
-  `status_response` varchar(15) NOT NULL,
-  `status_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `messages`
 --
 
@@ -641,28 +564,6 @@ CREATE TABLE `posts_view` (
 
 INSERT INTO `posts_view` (`view_id`, `view_post_id`, `view_user_id`, `view_date`) VALUES
 (1, 3, 1, '2024-03-03 02:01:04');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `replys`
---
-
-CREATE TABLE `replys` (
-  `reply_id` int(11) NOT NULL,
-  `reply_parent_id` int(11) NOT NULL,
-  `reply_item_id` int(11) NOT NULL,
-  `reply_content` text NOT NULL,
-  `reply_type` varchar(32) NOT NULL DEFAULT 'web' COMMENT 'web, soft...',
-  `reply_user_id` int(11) NOT NULL,
-  `reply_ip` varchar(64) NOT NULL,
-  `reply_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `reply_modified` datetime NOT NULL DEFAULT current_timestamp(),
-  `reply_count` int(7) NOT NULL DEFAULT 0,
-  `reply_votes` int(7) NOT NULL DEFAULT 0,
-  `reply_published` tinyint(1) NOT NULL DEFAULT 1,
-  `reply_is_deleted` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -934,21 +835,6 @@ CREATE TABLE `votes_comment` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `votes_item`
---
-
-CREATE TABLE `votes_item` (
-  `votes_item_id` int(11) NOT NULL,
-  `votes_item_item_id` int(11) NOT NULL,
-  `votes_item_points` int(11) NOT NULL,
-  `votes_item_ip` varchar(45) NOT NULL,
-  `votes_item_user_id` int(11) NOT NULL DEFAULT 1,
-  `votes_item_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `votes_post`
 --
 
@@ -1126,26 +1012,6 @@ ALTER TABLE `invitations`
   ADD KEY `active_status` (`active_status`);
 
 --
--- Индексы таблицы `items`
---
-ALTER TABLE `items`
-  ADD PRIMARY KEY (`item_id`);
-ALTER TABLE `items` ADD FULLTEXT KEY `item_title` (`item_title`,`item_content`,`item_domain`);
-
---
--- Индексы таблицы `items_signed`
---
-ALTER TABLE `items_signed`
-  ADD PRIMARY KEY (`signed_id`);
-
---
--- Индексы таблицы `items_status`
---
-ALTER TABLE `items_status`
-  ADD PRIMARY KEY (`status_id`),
-  ADD KEY `status_item_id` (`status_item_id`);
-
---
 -- Индексы таблицы `messages`
 --
 ALTER TABLE `messages`
@@ -1219,12 +1085,6 @@ ALTER TABLE `posts_view`
   ADD PRIMARY KEY (`view_id`),
   ADD KEY `view_user_id` (`view_user_id`),
   ADD KEY `view_post_id` (`view_post_id`);
-
---
--- Индексы таблицы `replys`
---
-ALTER TABLE `replys`
-  ADD PRIMARY KEY (`reply_id`);
 
 --
 -- Индексы таблицы `search_logs`
@@ -1321,15 +1181,6 @@ ALTER TABLE `votes_comment`
   ADD KEY `votes_answer_item_id` (`votes_comment_item_id`,`votes_comment_user_id`),
   ADD KEY `votes_answer_ip` (`votes_comment_item_id`,`votes_comment_ip`),
   ADD KEY `votes_answer_user_id` (`votes_comment_user_id`);
-
---
--- Индексы таблицы `votes_item`
---
-ALTER TABLE `votes_item`
-  ADD PRIMARY KEY (`votes_item_id`),
-  ADD KEY `votes_item_item_id` (`votes_item_item_id`,`votes_item_user_id`) USING BTREE,
-  ADD KEY `votes_item_user_id` (`votes_item_user_id`) USING BTREE,
-  ADD KEY `votes_item_ip` (`votes_item_item_id`,`votes_item_ip`) USING BTREE;
 
 --
 -- Индексы таблицы `votes_post`
@@ -1438,24 +1289,6 @@ ALTER TABLE `invitations`
   MODIFY `invitation_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `items`
---
-ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT для таблицы `items_signed`
---
-ALTER TABLE `items_signed`
-  MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `items_status`
---
-ALTER TABLE `items_status`
-  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT для таблицы `messages`
 --
 ALTER TABLE `messages`
@@ -1508,12 +1341,6 @@ ALTER TABLE `posts_signed`
 --
 ALTER TABLE `posts_view`
   MODIFY `view_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT для таблицы `replys`
---
-ALTER TABLE `replys`
-  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `search_logs`
@@ -1592,12 +1419,6 @@ ALTER TABLE `users_setting`
 --
 ALTER TABLE `votes_comment`
   MODIFY `votes_comment_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `votes_item`
---
-ALTER TABLE `votes_item`
-  MODIFY `votes_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `votes_post`
