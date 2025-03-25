@@ -10,10 +10,10 @@ use App\Models\FacetModel;
 
 class RedirectController extends Controller
 {
-    public function index(): void
-    {
-        $facet_id  = Request::param('id')->asPositiveInt();
-        $facet = FacetModel::uniqueById($facet_id);
+	public function index(): void
+	{
+		$facet_id  = Request::param('id')->asPositiveInt();
+		$facet = FacetModel::uniqueById($facet_id);
 
 		$utl = match ($facet['facet_type']) {
 			'topic'		=> url('topic', ['slug' => $facet['facet_slug']]),
@@ -23,6 +23,6 @@ class RedirectController extends Controller
 			default		=> url('home'),
 		};
 
-        redirect($utl);
-    }
+		redirect($utl);
+	}
 }

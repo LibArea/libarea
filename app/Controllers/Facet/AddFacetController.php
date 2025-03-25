@@ -9,7 +9,7 @@ use Hleb\Base\Controller;
 use App\Models\{FacetModel, SubscriptionModel, ActionModel};
 use Meta, Msg;
 
-use App\Validate\RulesFacet;
+use App\Content\Сheck\RulesFacet;
 
 class AddFacetController extends Controller
 {
@@ -44,7 +44,7 @@ class AddFacetController extends Controller
 
         $data = Request::allPost();
 
-        RulesFacet::rulesAdd($data, $facet_type);
+        RulesFacet::add($data, $facet_type);
 
         $type = $facet_type ?? 'topic';
 

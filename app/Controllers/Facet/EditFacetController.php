@@ -6,7 +6,7 @@ namespace App\Controllers\Facet;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\FacetPresence;
+use App\Content\Сheck\Availability;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
 use UploadImage, Meta, Msg;
@@ -14,7 +14,8 @@ use UploadImage, Meta, Msg;
 use App\Traits\Author;
 use App\Traits\Related;
 
-use App\Validate\RulesFacet;
+
+use App\Content\Сheck\RulesFacet;
 
 class EditFacetController extends Controller
 {
@@ -30,7 +31,7 @@ class EditFacetController extends Controller
     public function index()
     {
         $type = Request::param('type')->asString();
-        $facet  = FacetPresence::index(Request::param('id')->asInt(), 'id', $type);
+        $facet  = Availability::facet(Request::param('id')->asInt(), 'id', $type);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->container->user()->id() && !$this->container->user()->admin()) {
@@ -50,7 +51,7 @@ class EditFacetController extends Controller
                     'user'              => UserModel::get($facet['facet_user_id'], 'id'),
                     'sheet'             => $facet['facet_type'] . 's',
                     'type'              => $type,
-                    'facet_inf'			=> $facet,
+                    'facet_inf'            => $facet,
                 ]
             ]
         );
@@ -63,11 +64,11 @@ class EditFacetController extends Controller
         // Получим массив данных существующего фасета и проверим его наличие
         $facet = FacetModel::uniqueById((int)$data['facet_id'] ?? 0);
 
-        $new_type = RulesFacet::rulesEdit($data, $facet);
+        $new_type = RulesFacet::edit($data, $facet);
 
         UploadImage::set($_FILES, $facet['facet_id'], 'facet');
-		
-		
+
+
         $facet_user_id = $this->selectAuthor($facet['facet_user_id'], Request::post('user_id')->value());
 
         $post_related = $this->relatedPost();
@@ -88,7 +89,7 @@ class EditFacetController extends Controller
                 'facet_top_level'           => $facet_top_level == 'on' ? 1 : 0,
                 'facet_post_related'        => $post_related,
                 'facet_type'                => $new_type,
-                'facet_is_comments'			=> $facet_is_comments == 'on' ? 1 : 0,
+                'facet_is_comments'            => $facet_is_comments == 'on' ? 1 : 0,
             ]
         );
 
@@ -96,7 +97,7 @@ class EditFacetController extends Controller
 
         Msg::redirect(__('msg.change_saved'), 'success', url('redirect.facet', ['id' => $data['facet_id']]));
     }
-	
+
     /**
      * Avatar and cover upload form
      * Форма загрузки аватарки и обложики
@@ -106,20 +107,20 @@ class EditFacetController extends Controller
     function logoForm()
     {
         $type = Request::param('type')->asString();
-        $facet  = FacetPresence::index(Request::param('id')->asInt(), 'id', $type);
+        $facet  = Availability::facet(Request::param('id')->asInt(), 'id', $type);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->container->user()->id() && !$this->container->user()->admin()) {
             redirect('/');
         }
-		
+
         render(
             '/facets/edit-logo',
             [
                 'meta'  => Meta::get(__('app.logo')),
                 'data'  => [
-                    'type'		=> $type,
-                    'facet_inf'	=> $facet,
+                    'type'        => $type,
+                    'facet_inf'    => $facet,
                 ]
             ]
         );
@@ -128,7 +129,7 @@ class EditFacetController extends Controller
     function logoEdit()
     {
         $type = Request::param('type')->asString();
-        $facet  = FacetPresence::index(Request::param('facet_id')->asInt(), 'id', $type);
+        $facet  = Availability::facet(Request::param('facet_id')->asInt(), 'id', $type);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->container->user()->id() && !$this->container->user()->admin()) {
@@ -167,7 +168,7 @@ class EditFacetController extends Controller
 
     public function pages()
     {
-        $facet  = FacetPresence::index(Request::get('id')->asInt(), 'id', 'blog');
+        $facet  = Availability::facet(Request::get('id')->asInt(), 'id', 'blog');
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->container->user()->id() && !$this->container->user()->admin()) {

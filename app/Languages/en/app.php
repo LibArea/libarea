@@ -344,6 +344,13 @@ return [
     'post'          => 'Post',
     'posts'         => 'Posts',
 
+	'article'		=> 'Article',
+	'articles'		=> 'Articles',
+	'write_article'	=> 'Write an article',
+	'write_post' 	=> 'Write a post',
+	'ask_question'	=> 'Ask a question',
+	'note_via_url' 	=> 'Note via URL',
+
     'language'          => 'Localization',
 
     'type'              => 'Type',

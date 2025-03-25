@@ -9,7 +9,7 @@ use Hleb\Base\Controller;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\Auth\AuthModel;
 use App\Bootstrap\Services\Auth\{Action, Register};
-use App\Validate\RulesRegistration;
+use App\Content\Сheck\Registration;
 use SendEmail, Meta, Html, Msg;
 
 class RegisterController extends Controller
@@ -55,7 +55,7 @@ class RegisterController extends Controller
         $inv_user_id  = Request::post('invitation_id')->asInt();
         $reg_ip  = Request::getUri()->getIp();
         $data    = Request::allPost();
-        $inv_uid = RulesRegistration::rules($data, $reg_ip, $inv_user_id);
+        $inv_uid = Registration::rules($data, $reg_ip, $inv_user_id);
 
         $active_uid = UserModel::create(
             [

@@ -7,7 +7,7 @@ namespace App\Controllers\Auth;
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Bootstrap\Services\Auth\{Login, Action, Remember};
-use App\Validate\RulesLogin;
+use App\Content\Сheck\Validator;
 use Meta;
 
 class LoginController extends Controller
@@ -21,7 +21,7 @@ class LoginController extends Controller
     public function index(): void
     {
         $data = Request::input();
-        $user = RulesLogin::rules($data);
+        $user = Validator::login($data);
 
         // If you clicked "Remember", it establishes a user session and registers it
         // Если нажал "Запомнить", то устанавливает сеанс пользователя и регистрирует его

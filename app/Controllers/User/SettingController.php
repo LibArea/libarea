@@ -14,6 +14,8 @@ use UploadImage, Meta, Img, Html, SendEmail, Msg;
 
 use App\Validate\RulesUserSetting;
 
+use App\Content\Сheck\Validator;
+
 class SettingController extends Controller
 {
     protected $limit = 25;
@@ -82,7 +84,7 @@ class SettingController extends Controller
     function edit()
     {
         $user_id = $this->container->user()->id();
-        RulesUserSetting::rulesSetting($data = Request::allPost());
+        Validator::setting($data = Request::allPost());
 
         $user = UserModel::get($user_id, 'id');
 
@@ -162,7 +164,7 @@ class SettingController extends Controller
     {
         $data = Request::allPost();
 
-        RulesUserSetting::rulesSecurity($data, $this->container->user()->email());
+        RValidator::security($data, $this->container->user()->email());
 
         $newpass = password_hash($data['password2'], PASSWORD_BCRYPT);
 
@@ -266,7 +268,7 @@ class SettingController extends Controller
     {
         $email = Request::post('email')->value();
 
-        if (RulesUserSetting::rulesNewEmail($email) === false) {
+        if (Validator::rulesNewEmail($email) === false) {
             return json_encode('error');
         }
 

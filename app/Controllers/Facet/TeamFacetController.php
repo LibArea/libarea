@@ -6,7 +6,7 @@ namespace App\Controllers\Facet;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\FacetPresence;
+use App\Content\Сheck\Availability;
 use App\Models\FacetModel;
 use Meta, Msg;
 
@@ -15,7 +15,7 @@ class TeamFacetController extends Controller
     public function index(): void
     {
         $type   = $this->accessType(Request::param('type')->asString());
-        $facet  = FacetPresence::index(Request::param('id')->asPositiveInt(), 'id', $type);
+        $facet  = Availability::facet(Request::param('id')->asPositiveInt(), 'id', $type);
 
         $this->access($facet['facet_user_id']);
 
@@ -44,7 +44,7 @@ class TeamFacetController extends Controller
     public function edit(): void
     {
         $type = $this->accessType(Request::param('type')->asString());
-        $facet = FacetPresence::index(Request::param('id')->asPositiveInt(), 'id', $type);
+        $facet = Availability::facet(Request::param('id')->asPositiveInt(), 'id', $type);
 
         $this->access($facet['facet_user_id']);
 

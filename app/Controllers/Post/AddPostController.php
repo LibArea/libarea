@@ -8,11 +8,10 @@ use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, PollModel, NotificationModel};
 use App\Content\Integration\{Discord, Telegram};
-use App\Content\Сheck\{PostPresence, FacetPresence};
+use App\Content\Сheck\{Validator, Availability};
 use UploadImage, URLScraper, Meta, Msg;
 
 use Utopia\Domains\Domain;
-use App\Validate\RulesPost;
 
 use App\Traits\Poll;
 use App\Traits\Slug;
@@ -24,30 +23,51 @@ class AddPostController extends Controller
     use Slug;
     use Related;
 
+    public function article(): void
+    {
+        $this->callIndex('article');
+    }
+
+    public function question(): void
+    {
+        $this->callIndex('question');
+    }
+
+    public function post(): void
+    {
+        $this->callIndex('post');
+    }
+
+    public function note(): void
+    {
+        $this->callIndex('note');
+    }
+
     /**
      * Form adding a post / page
      * Форма добавление поста / страницы
      *
      * @return void
      */
-    public function index()
+    public function callIndex(string $sheet)
     {
         // Adding from page topic / blog
         // Добавление со странице темы / блога
-        $facet_id   = Request::get('facet_id')->asInt();
+        $facet_id   = Request::param('facet_id')->asInt();
 
         if ($facet_id) {
-            $facet  =  FacetPresence::all($facet_id);
+            $facet  =  Availability::allFacet($facet_id);
             if ($facet['facet_type'] === 'topic') {
-                $topic  = FacetPresence::index($facet_id, 'id', 'topic');
+                $topic  = Availability::facet($facet_id, 'id', 'topic');
             } elseif ($facet['facet_type'] === 'blog' && $facet['facet_user_id'] == $this->container->user()->id()) {
-                $blog  = FacetPresence::index($facet_id, 'id', 'blog');
+                $blog  = Availability::facet($facet_id, 'id', 'blog');
             }
         }
+
         render(
-            '/post/add',
+            '/post/add/' . $sheet,
             [
-                'meta'      => Meta::get(__('app.add_post')),
+                'meta'    => Meta::get(__('app.' . $sheet)),
                 'data'  => [
                     'topic'         => $topic ?? false,
                     'blog'          => $blog ?? false,
@@ -73,80 +93,59 @@ class AddPostController extends Controller
             $site = $this->addUrl($post_url);
         }
 
-		$img = Request::post('images')->value();
-        $blog_id    = Request::post('blog_id')->value();
-        $fields     = Request::allPost() ?? [];
-
-        $content = $_POST['content'] == '' ? $_POST['content_qa'] : $_POST['content'];
-        $content = $content == '' ? $_POST['content_url'] : $content;
+        $data    = Request::getParsedBody();
 
         if ($type === 'page') {
             $count  = FacetModel::countFacetsUser($this->container->user()->id(), 'blog');
             notEmptyOrView404($count);
         }
 
-        // Use to return
-        // Используем для возврата
-        $redirect = url('post.form.add');
-        if ($blog_id > 0) {
-            $redirect = $redirect . '/' . $blog_id;
-        }
-
         // Let's check the stop words, url
         // Проверим стоп слова и url
-        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
+        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($data['content']);
 
-        RulesPost::rules($fields['post_title'], $content, $redirect);
+        $redirect = url('article.form.add', endPart: false);
+        Validator::article($data, $redirect);
 
         // Post cover
         // Обложка поста
-		if (!empty($img)) {
-			$post_img = UploadImage::coverPost($img, 0, $redirect);
-		}
+        if (!empty($data['images'])) {
+            $post_img = UploadImage::coverPost($data['images'], 0, $redirect);
+        }
 
-        if (PostModel::getSlug($slug = $this->getSlug($fields['post_title']))) {
+        if (PostModel::getSlug($slug = $this->getSlug($data['title']))) {
             $slug = $slug . "-";
         }
 
         $post_related = $this->relatedPost();
 
-        $translation = $fields['translation'] ?? false;
-        $post_draft = $fields['draft'] ?? false;
-        $post_nsfw = $fields['nsfw'] ?? false;
-        $post_hidden = $fields['hidden'] ?? false;
-        $closed = $fields['closed'] ?? false;
-        $top = $fields['top'] ?? false;
-
-        $post_feature = config('general', 'qa_site_format') === true ? 1 : Request::post('post_feature')->asInt();
-
-		// Let's check the presence of the facet before adding it	
-		// Проверим наличие фасета перед добавлением	
-		if (!$facets = $fields['facet_select'] ?? false) {
-			Msg::redirect(__('msg.select_topic'), 'error', $redirect);
-		}
+        $required_fields = ['translation', 'draft', 'nsfw', 'hidden', 'closed', 'top'];
+        foreach ($required_fields as $field) {
+            $fields[$field] = (!empty($data[$field]) == 'on') ?  1 : 0;
+        }
 
         $last_id = PostModel::create(
             [
-                'post_title'            => $fields['post_title'],
-                'post_content'          => $content,
+                'post_title'            => $data['title'],
+                'post_content'          => $data['content'],
                 'post_content_img'      => $post_img ?? '',
                 'post_thumb_img'        => $site['og_img'] ?? '',
                 'post_related'          => $post_related  ?? '',
                 'post_slug'             => $slug,
-                'post_feature'          => $post_feature,
+                'post_feature'          => config('general', 'qa_site_format') === true ? 1 : 0,
                 'post_type'             => $type,
-                'post_translation'      => $translation == 'on' ? 1 : 0,
-                'post_draft'            => $post_draft == 'on' ? 1 : 0,
-                'post_nsfw'             => $post_nsfw == 'on' ? 1 : 0,
-                'post_hidden'           => $post_hidden == 'on' ? 1 : 0,
+                'post_translation'      => $fields['translation'],
+                'post_draft'            => $fields['draft'],
+                'post_nsfw'             => $fields['nsfw'],
+                'post_hidden'           => $fields['hidden'],
                 'post_ip'               => Request::getUri()->getIp(),
                 'post_published'        => ($trigger === false) ? 0 : 1,
                 'post_user_id'          => $this->container->user()->id(),
                 'post_url'              => $post_url ?? '',
                 'post_url_domain'       => $site['post_url_domain'] ?? '',
-                'post_tl'               => $fields['content_tl'] ?? 0,
-                'post_closed'           => $closed == 'on' ? 1 : 0,
-                'post_top'              => $top == 'on' ? 1 : 0,
+                'post_tl'               => $data['content_tl'] ?? 0,
+                'post_closed'           => $fields['closed'],
+                'post_top'              => $fields['top'],
                 'post_poll'             => $this->selectPoll(Request::post('poll_id')->value() ?? ''),
             ]
         );
@@ -162,15 +161,15 @@ class AddPostController extends Controller
         }
 
         // Add fastes (blogs, topics) to the post 
-        $type = (new \App\Controllers\Post\EditPostController())::addFacetsPost($fields, $last_id, $url_content);
+        $type = (new \App\Controllers\Post\EditPostController())::addFacetsPost($data, $last_id, $url_content);
 
         // Contact via @
         // Обращение через @
-        if ($message = \App\Content\Parser\Content::parseUsers($content, true, true)) {
+        if ($message = \App\Content\Parser\Content::parseUsers($data['content'], true, true)) {
             (new \App\Controllers\NotificationController())->mention(NotificationModel::TYPE_ADDRESSED_POST, $message, $url_content);
         }
 
-        $this->addIntegration($content, $url_content, $fields);
+        $this->addIntegration($data['content'], $url_content, $data);
 
         SubscriptionModel::focus($last_id, 'post');
 
@@ -245,7 +244,7 @@ class AddPostController extends Controller
             return false;
         }
 
-        $post = PostPresence::index($post_id);
+        $post = Availability::post($post_id);
 
         ActionModel::setRecommend($post_id, $post['post_is_recommend']);
 

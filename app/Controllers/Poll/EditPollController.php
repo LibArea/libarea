@@ -6,7 +6,7 @@ namespace App\Controllers\Poll;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\PollPresence;
+use App\Content\Сheck\Availability;
 use App\Models\PollModel;
 use Meta, Msg;
 
@@ -20,7 +20,7 @@ class EditPollController extends Controller
      */
     public function index(): void
     {
-        $question   = PollPresence::index($id = Request::param('id')->asInt());
+        $question   = Availability::poll($id = Request::param('id')->asInt());
         $answers    = PollModel::getAnswers($id);
 
         $this->checkingEditPermissions($question);
@@ -41,7 +41,7 @@ class EditPollController extends Controller
 
     public function edit()
     {
-        $question   = PollPresence::index($id = Request::post('id')->asInt());
+        $question   = Availability::poll($id = Request::post('id')->asInt());
 
         $this->checkingEditPermissions($question);
 

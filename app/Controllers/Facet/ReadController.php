@@ -6,7 +6,7 @@ namespace App\Controllers\Facet;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\FacetPresence;
+use App\Content\Сheck\Availability;
 use App\Models\{FacetModel, SubscriptionModel};
 use Meta, Html;
 
@@ -22,7 +22,7 @@ class ReadController extends Controller
      */
     public function index()
     {
-        $facet  = FacetPresence::index(Request::param('slug')->asString(), 'slug', 'blog');
+        $facet  = Availability::facet(Request::param('slug')->asString(), 'slug', 'blog');
 
         $read = FacetModel::getFocusUsers($facet['facet_id'], Html::pageNumber(), $this->limit);
         $pagesCount = FacetModel::getFocusUsersCount($facet['facet_id']);

@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Validate;
+namespace App\Content\Сheck;
 
 use App\Models\Auth\AuthModel;
 use App\Content\Сheck\EmailSpam;
 use App\Content\Integration\Google;
 use Msg;
 
-class RulesRegistration extends Validator
+use Respect\Validation\Validator as v;
+
+class Registration
 {
     public static function rules(array $data, string $reg_ip, int $inv_uid)
     {
@@ -40,7 +42,9 @@ class RulesRegistration extends Validator
 
         // Let's check the password
         // Проверим пароль
-        self::length($data['password'], 8, 32, 'password', $redirect);
+        if (v::stringType()->length(8, 32)->validate($data['password']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.password') . '»']), 'error', $redirect);
+        }
 
         if (substr_count($data['password'], ' ') > 0) {
             Msg::redirect(__('msg.password_spaces'), 'error', $redirect);
@@ -63,15 +67,11 @@ class RulesRegistration extends Validator
      */
     public static function checkLogin(string $login, string $redirect)
     {
-        if (!preg_match('/^[a-zA-Z0-9-]+$/u', $login)) {
-            Msg::redirect(__('msg.slug_correctness'), 'error', $redirect);
+        if (v::alnum()->length(3, 12)->validate($login) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.nickname') . '»']), 'error', $redirect);
         }
 
-        self::length($login, 3, 12, 'nickname', $redirect);
-
-        if (preg_match('/(\w)\1{3,}/', $login)) {
-            Msg::redirect(__('msg.nick_character'), 'error', $redirect);
-        }
+        exit;
 
         if (in_array($login, config('stop-nickname', 'list'))) {
             Msg::redirect(__('msg.nick_exist'), 'error', $redirect);
@@ -92,7 +92,9 @@ class RulesRegistration extends Validator
      */
     public static function checkEmail(string $email, string $redirect)
     {
-        self::email($email, $redirect);
+        if (v::email()->isValid($email) === false) {
+            Msg::redirect(__('msg.email_correctness'), 'error', $redirect);
+        }
 
         if (EmailSpam::index($email) === true) {
             Msg::redirect(__('msg.email_forbidden'), 'error', $redirect);

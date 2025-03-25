@@ -6,7 +6,7 @@ namespace App\Controllers\Facet;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\FacetPresence;
+use App\Content\Сheck\Availability;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel};
 use Meta, Html;
@@ -39,7 +39,7 @@ class BlogFacetController extends Controller
      */
     public function callIndex(string $sheet)
     {
-        $facet  = FacetPresence::index(Request::param('slug')->value(), 'slug', 'blog');
+        $facet  = Availability::facet(Request::param('slug')->value(), 'slug', 'blog');
 
         if ($facet['facet_type'] === 'topic') {
             echo view('error', ['httpCode' => 404, 'message' => __('404.page_not') . ' <br> ' . __('404.page_removed')]);
@@ -79,8 +79,8 @@ class BlogFacetController extends Controller
      */
     public function topic()
     {
-        $facet  = FacetPresence::index(Request::get('slug')->value(), 'slug', 'blog');
-        $topic  = FacetPresence::index(Request::get('tslug')->value(), 'slug', 'topic');
+        $facet  = Availability::facet(Request::get('slug')->value(), 'slug', 'blog');
+        $topic  = Availability::facet(Request::get('tslug')->value(), 'slug', 'topic');
 
         $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'facet.feed.topic', $facet['facet_slug'], $topic['facet_slug']);
         $pagesCount = FeedModel::feedCount('facet.feed.topic', $facet['facet_slug'], $topic['facet_slug']);

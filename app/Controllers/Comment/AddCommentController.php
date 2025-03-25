@@ -6,9 +6,8 @@ namespace App\Controllers\Comment;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\{PostPresence, CommentPresence};
+use App\Content\Сheck\{Validator, Availability};
 use App\Models\{NotificationModel, ActionModel, CommentModel, PostModel};
-use App\Validate\Validator;
 use DetectMobile;
 
 class AddCommentController extends Controller
@@ -35,7 +34,7 @@ class AddCommentController extends Controller
     public function add()
     {
         if ($post_id = Request::post('post_id')->asInt()) {
-            $post = PostPresence::index($post_id);
+            $post = Availability::post($post_id);
         }
 
         // Will get the id of the comment that is being answered (if there is one, i.e. not the root comment)
@@ -44,31 +43,33 @@ class AddCommentController extends Controller
 
             // Let's check if there is a comment
             // Проверим наличие комментария
-            $comment = CommentPresence::index($parent_id);
+            $comment = Availability::comment($parent_id);
 
             notEmptyOrView404($comment);
 
             // Let's check that this comment belongs to a post that is
             // Проверим, что данный комментарий принадлежит посту который есть
-            $post = PostPresence::index($comment['comment_post_id'], 'id');
+            $post = Availability::post($comment['comment_post_id'], 'id');
         }
 
         notEmptyOrView404($post);
 
         $url_post = post_slug($post['post_id'], $post['post_slug']);
 
-        Validator::Length($content = $_POST['content'], 6, 5000, 'content', $url_post);
+        $data = Request::getParsedBody();
+
+        Validator::comment($data, $url_post);
 
         // Let's check the stop words, url
         // Проверим стоп слова и url
-        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($content);
+        $trigger = (new \App\Controllers\AuditController())->prohibitedContent($data['content']);
 
         // Different conditions for combining a comment (with a post or your previous one)
         // Различные условия объединения комментария (с постом или своим предыдущим)  
-        $this->joinPost($content, $post, $url_post);
-        $this->joinComment($content, $url_post, $comment ?? false);
+        $this->joinPost($data['content'], $post, $url_post);
+        $this->joinComment($data['content'], $url_post, $comment ?? false);
 
-        $last_id = CommentModel::add($post['post_id'], $parent_id, $content, $trigger, DetectMobile::index());
+        $last_id = CommentModel::add($post['post_id'], $parent_id, $data['content'], $trigger, DetectMobile::index());
 
         // Add an audit entry and an alert to the admin
         // Аудит и оповещение персоналу
@@ -81,7 +82,7 @@ class AddCommentController extends Controller
 
         $url = $url_post . '#comment_' . $last_id;
 
-        $this->notifPost($content, $post, $parent_id, $url);
+        $this->notifPost($data['content'], $post, $parent_id, $url);
 
         ActionModel::addLogs(
             [

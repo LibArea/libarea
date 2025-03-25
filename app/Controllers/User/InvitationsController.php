@@ -8,9 +8,8 @@ use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Models\ActionModel;
 use App\Models\User\InvitationModel;
+use App\Content\Сheck\Validator;
 use SendEmail, Meta, Html, Msg;
-
-use App\Validate\RulesUserInvitation;
 
 class InvitationsController extends Controller
 {
@@ -53,7 +52,7 @@ class InvitationsController extends Controller
     {
         $invitation_email = Request::post('email')->value();
 
-        RulesUserInvitation::rulesInvite($invitation_email, $this->container->user()->get()['invitation_available']);
+        Validator::invite($invitation_email, $this->container->user()->get()['invitation_available']);
 
         $invitation_code = Html::randomString('crypto', 24);
 

@@ -7,16 +7,15 @@ namespace App\Bootstrap\Services\Auth;
 use Hleb\Static\Request;
 use App\Models\User\UserModel;
 use App\Bootstrap\Services\Auth\Remember;
+use App\Content\Сheck\Validator;
 use Meta;
-
-use App\Validate\RulesLogin;
 
 class Login
 {
     public function index(): void
     {
         $data = Request::allPost();
-        $user = RulesLogin::rules($data);
+        $user = Validator::login($data);
 
         // If you clicked "Remember", it establishes a user session and registers it
         // Если нажал "Запомнить", то устанавливает сеанс пользователя и регистрирует его

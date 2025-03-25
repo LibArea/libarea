@@ -8,7 +8,7 @@ use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Models\{MessagesModel, NotificationModel};
 use App\Models\User\UserModel;
-use App\Validate\{Validator, RulesMessage};
+use App\Content\Сheck\Validator;
 use Meta, Msg;
 
 class MessagesController extends Controller
@@ -153,23 +153,23 @@ class MessagesController extends Controller
      */
     public function add()
     {
-        $content        = $_POST['content']; // для Markdown
-        $recipient_id   = Request::post('recipient')->asInt();
-
-        $this->limitTl();
-
-		$dialog = MessagesModel::availability($recipient_id);
-
+		$data	= Request::getParsedBody();
+		
+		$recipient_id = (int)$data['recipient'];
+		
         // If the user does not exist 
         // Если пользователя не существует
         $user  = UserModel::get($recipient_id, 'id');
         notEmptyOrView404($user);
+		
+		$this->limitTl();
 
+		$dialog = MessagesModel::availability($recipient_id);
 
 		$dialog_url = !empty($dialog['dialog_id']) ? url('dialogues', ['id' => $dialog['dialog_id']]) : url('profile', ['login' =>  $user['login']]);
-		RulesMessage::rules($content, $dialog_url);
+		Validator::message($data, $dialog_url);
 
-        $dialog_id = MessagesModel::sendMessage($recipient_id, $content);
+        $dialog_id = MessagesModel::sendMessage($recipient_id, $data['content']);
         $url = '/messages/' . $dialog_id;
 
         NotificationModel::send($recipient_id, NotificationModel::TYPE_PRIVATE_MESSAGES, $url);
@@ -215,10 +215,9 @@ class MessagesController extends Controller
 
     public function edit()
     {
-        $id  = Request::post('id')->asInt();
-        $content = $_POST['content']; // для Markdown
+		$data	= Request::getParsedBody();
+		$id = (int)$data['id'];
 
-        // Access check
         $message = MessagesModel::getMessage($id);
         notEmptyOrView404($message);
 
@@ -226,9 +225,9 @@ class MessagesController extends Controller
             Msg::redirect(__('msg.went_wrong'), 'error', url('dialogues', ['id' => $message['message_dialog_id']]));
         }
 
-        Validator::Length($content, 6, 5000, 'content', url('dialogues', ['id' => $message['message_dialog_id']]));
+        Validator::message($data, url('dialogues', ['id' => $message['message_dialog_id']]));
 
-        MessagesModel::edit($id, $content);
+        MessagesModel::edit($id, $data['content']);
 
         Msg::redirect(__('msg.change_saved'), 'success', url('dialogues', ['id' => $message['message_dialog_id']]));
     }

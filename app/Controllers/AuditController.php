@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\PostPresence;
+use App\Content\Сheck\Availability;
 use App\Models\{ActionModel, AuditModel, NotificationModel};
 use Msg;
 
@@ -25,7 +25,7 @@ class AuditController extends Controller
 
         if (AuditModel::getSpeedReport($this->container->user()->id()) > config('trust-levels', 'perDay_report')) return 1;
 
-        $post = PostPresence::index($post_id, 'id');
+        $post = Availability::post($post_id, 'id');
 
         if (!in_array($content_type, ['post', 'comment'])) return false;
 

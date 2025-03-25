@@ -7,14 +7,16 @@ namespace App\Controllers\Post;
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
 
-use App\Content\Сheck\PostPresence;
-use App\Content\Сheck\FacetPresence;
+use App\Content\Сheck\Availability;
 use App\Models\{PostModel, CommentModel, SubscriptionModel, FeedModel};
 
 use App\Traits\Views;
 use App\Traits\Poll;
 use App\Traits\LastDataModified;
 use BuildTree, Html, Meta, MetaImage, Img;
+
+use Parsedown;
+use League\HTMLToMarkdown\HtmlConverter;
 
 class PostController extends Controller
 {
@@ -101,7 +103,7 @@ class PostController extends Controller
         } else {
 
             $slug_facet = Request::param('facet_slug')->asString();
-            $page  = FacetPresence::index($slug_facet, 'slug', 'section');
+            $page  = Availability::facet($slug_facet, 'slug', 'section');
 
             render(
                 '/post/page-view',
@@ -124,7 +126,7 @@ class PostController extends Controller
         // Check id and get content data
         // Проверим id и получим данные контента
         if ($type === 'post') {
-            $content = PostPresence::index($id);
+            $content = Availability::post($id);
 
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
@@ -143,7 +145,7 @@ class PostController extends Controller
             return $content;
         }
 
-        return PostPresence::index($slug, 'slug');
+        return Availability::post($slug, 'slug');
     }
 
     /**
@@ -152,7 +154,7 @@ class PostController extends Controller
      */
     public function postProfile(): false|string
     {
-        $post = PostPresence::index($post_id = Request::post('post_id')->asInt(), 'id');
+        $post = Availability::post($post_id = Request::post('post_id')->asInt(), 'id');
 
         // Access check
         // Проверка доступа
@@ -220,19 +222,37 @@ class PostController extends Controller
     public function OgImage()
     {
         $id = Request::param('id')->value();
-        $post = PostPresence::index($id);
+        $post = Availability::post($id);
 
         MetaImage::get($post['post_title'], $post['login'], Img::PATH['avatars'] .  $post['avatar'],  Meta::postImage($post));
     }
-	
+
     public function editorTest()
     {
+        $md = Availability::post(1936);
+
+        $Parsedown = new Parsedown();
+        $Parsedown->setSafeMode(true);
+
+        $md_content =  $Parsedown->text($md['post_content']);
+
         render(
             '/post/editor-test',
             [
                 'meta'  => Meta::get(__('app.development'), __('meta.development'), ['og'    => false]),
-                'data'  => ['type' => 'test']
+                'data'  => ['type' => 'test', 'md' => $md_content]
             ]
         );
+    }
+
+    public function addEditTest()
+    {
+        $html = Request::post('content')->value();
+
+        $converter = new HtmlConverter(array('strip_tags' => true));
+
+        $markdown = $converter->convert($html);
+
+        print_r('<pre>' . $markdown . '</pre>');
     }
 }

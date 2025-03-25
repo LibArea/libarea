@@ -6,7 +6,7 @@ namespace App\Controllers\Comment;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\{PostPresence, CommentPresence};
+use App\Content\Сheck\Availability;
 use App\Models\CommentModel;
 
 class CommentBestController extends Controller
@@ -21,11 +21,11 @@ class CommentBestController extends Controller
     {
         // Get the comment data (for which the "best comment" is selected)     
         // Получим данные комментария (на который выбирается "лучший ответ")
-        $comment = CommentPresence::index(Request::post('comment_id')->asInt());
+        $comment = Availability::comment(Request::post('comment_id')->asInt());
 
         // Get the data of the post that has this comment       
         // Получим данные поста в котором есть этот ответ
-        $post = PostPresence::index($comment['comment_post_id'], 'id');
+        $post = Availability::post($comment['comment_post_id'], 'id');
 
         // Let's check the access. Only the staff and the author of the post can choose the best comment (without regard to time)
         // Проверим доступ. Только персонал и автор поста может выбирать лучший ответ (без учета времени)

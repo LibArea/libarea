@@ -6,7 +6,7 @@ namespace App\Controllers\Facet;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\FacetPresence;
+use App\Content\Сheck\Availability;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
 use Html, Meta;
 
@@ -140,6 +140,6 @@ class TopicFacetController extends Controller
 
     public function presence(): array
     {
-        return FacetPresence::index(Request::param('slug')->asString(), 'slug', 'topic');
+        return Availability::facet(Request::param('slug')->asString(), 'slug', 'topic');
     }
 }

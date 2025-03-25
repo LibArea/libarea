@@ -6,7 +6,7 @@ namespace App\Controllers\Post;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\PostPresence;
+use App\Content\Сheck\{Validator, Availability};
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel, PollModel};
 use UploadImage, Meta, Msg;
@@ -15,8 +15,6 @@ use App\Traits\Slug;
 use App\Traits\Poll;
 use App\Traits\Author;
 use App\Traits\Related;
-
-use App\Validate\RulesPost;
 
 class EditPostController extends Controller
 {
@@ -33,7 +31,7 @@ class EditPostController extends Controller
 	 */
 	public function index()
 	{
-		$post = PostPresence::index(Request::param('id')->asPositiveInt(), 'id');
+		$post = Availability::post(Request::param('id')->asPositiveInt(), 'id');
 
 		$post_related = [];
 		if ($post['post_related']) {
@@ -64,11 +62,11 @@ class EditPostController extends Controller
 	}
 
 	public function edit(): void
-    {
-	 	$img = Request::post('images')->value();
-		
+	{
+		$img = Request::post('images')->value();
+
 		$post_id = Request::post('post_id')->asInt();
-		$post = PostPresence::index($post_id);
+		$post = Availability::post($post_id);
 
 		$content = $_POST['content']; // for Markdown
 		$post_draft = Request::post('post_draft')->value() === 'on' ? 1 : 0;
@@ -78,7 +76,7 @@ class EditPostController extends Controller
 
 		$redirect = url($post['post_type'] . '.form.edit', ['id' => $post_id]);
 
-		RulesPost::rules($title = Request::post('post_title')->value(), $content, $redirect);
+		Validator::article($title = Request::post('post_title')->value(), $content, $redirect);
 
 		$post_date = ($post['post_draft'] == 1 && $post_draft == 0) ? date("Y-m-d H:i:s") : $post['post_date'];
 
@@ -132,16 +130,16 @@ class EditPostController extends Controller
 		Msg::redirect(__('msg.change_saved'), 'success', url('post.id', ['id' => $post['post_id']]));
 	}
 
-    /**
-     * Add fastes (blogs, topics) to the post
-     *
-     * @param array $fields
-     * @param int $content_id
-     * @param string $redirect
-     * @return string
-     */
+	/**
+	 * Add fastes (blogs, topics) to the post
+	 *
+	 * @param array $fields
+	 * @param int $content_id
+	 * @param string $redirect
+	 * @return string
+	 */
 	public static function addFacetsPost(array $fields, int $content_id, string $redirect): string
-    {
+	{
 		$new_type = 'post';
 		$facets = $fields['facet_select'] ?? false;
 
@@ -180,7 +178,7 @@ class EditPostController extends Controller
 	 */
 	function coverPostRemove()
 	{
-		$post = PostPresence::index(Request::param('id')->asPositiveInt(), 'id');
+		$post = Availability::post(Request::param('id')->asPositiveInt(), 'id');
 
 		// Удалять может только автор
 		// Only the author can delete it

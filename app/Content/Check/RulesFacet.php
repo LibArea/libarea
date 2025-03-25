@@ -2,15 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Validate;
+namespace App\Content\Сheck;
 
 use App\Models\FacetModel;
 use Hleb\Static\Container;
 use Msg;
 
-class RulesFacet extends Validator
+use Respect\Validation\Validator as v;
+
+class RulesFacet
 {
-    public static function rulesAdd($data, $facet_type)
+    public static function add($data, $facet_type)
     {
         $container = Container::getContainer();
         $redirect = ($facet_type === 'category') ? url('web') : url('facet.form.add', ['type' => $facet_type]);
@@ -23,14 +25,16 @@ class RulesFacet extends Validator
             }
         }
 
-        self::Length($data['facet_title'], 3, 64, 'title', $redirect);
-        self::Length($data['facet_short_description'], 9, 160, 'short_description', $redirect);
+        if (v::stringType()->length(3, 64)->validate($data['facet_title']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.title') . '»']), 'error', $redirect);
+        }
 
-        // Slug
-        self::Length($data['facet_slug'], 3, 43, 'slug', $redirect);
+        if (v::stringType()->length(9, 160)->validate($data['facet_short_description']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.short_description') . '»']), 'error', $redirect);
+        }
 
-        if (!preg_match('/^[a-zA-Z0-9-]+$/u', $data['facet_slug'])) {
-            Msg::redirect(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
+        if (v::slug()->length(3, 43)->validate($data['facet_slug']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
         }
 
         if (FacetModel::uniqueSlug($data['facet_slug'], $facet_type)) {
@@ -42,7 +46,7 @@ class RulesFacet extends Validator
         }
     }
 
-    public static function rulesEdit($data, $facet)
+    public static function edit($data, $facet)
     {
         $container = Container::getContainer();
 
@@ -69,20 +73,25 @@ class RulesFacet extends Validator
         }
 
         // Проверка длины
-        self::Length($data['facet_title'], 3, 64, 'title', $redirect);
-        self::Length($data['facet_description'], 3, 225, 'meta_description', $redirect);
-        self::Length($data['facet_short_description'], 9, 160, 'short_description', $redirect);
-        self::Length($data['facet_seo_title'], 3, 225, 'slug', $redirect);
-
-        // Slug
-        self::Length($data['facet_slug'], 3, 32, 'slug', $redirect);
-
-        if (!preg_match('/^[a-zA-Z0-9-]+$/u', $data['facet_slug'])) {
-            Msg::redirect(__('msg.slug_correctness', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
+        if (v::stringType()->length(3, 64)->validate($data['facet_title']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.title') . '»']), 'error', $redirect);
         }
 
-        if (preg_match('/\s/', $data['facet_slug']) || strpos($data['facet_slug'], ' ')) {
-            Msg::redirect(__('msg.url_gaps'), 'error', $redirect);
+        if (v::stringType()->length(3, 225)->validate($data['facet_description']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.meta_description') . '»']), 'error', $redirect);
+        }
+
+        if (v::stringType()->length(9, 160)->validate($data['facet_short_description']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.short_description') . '»']), 'error', $redirect);
+        }
+
+        if (v::stringType()->length(3, 225)->validate($data['facet_seo_title']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
+        }
+
+        // Slug
+        if (v::slug()->length(3, 43)->validate($data['facet_slug']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.slug') . '»']), 'error', $redirect);
         }
 
         // Проверим повтор URL                       

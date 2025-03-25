@@ -6,10 +6,9 @@ namespace App\Controllers\Comment;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\{PostPresence, CommentPresence};
+use App\Content\Сheck\{Validator, Availability};
 use App\Models\CommentModel;
 use App\Models\User\UserModel;
-use App\Validate\Validator;
 use Meta, Msg;
 
 use App\Traits\Author;
@@ -26,7 +25,7 @@ class EditCommentController extends Controller
      */
     public function index(): void
     {
-        $comment = CommentPresence::index(Request::param('id')->asPositiveInt());
+        $comment = Availability::comment(Request::param('id')->asPositiveInt());
         if (!$this->container->access()->author('comment', $comment)) {
             return;
         }
@@ -37,7 +36,7 @@ class EditCommentController extends Controller
                 'meta'  => Meta::get(__('app.edit_comment')),
                 'data'  => [
                     'comment'   => $comment,
-                    'post'      => PostPresence::index($comment['comment_post_id'], 'id'),
+                    'post'      => Availability::post($comment['comment_post_id'], 'id'),
                     'user'      => UserModel::get($comment['comment_user_id'], 'id'),
                 ]
             ]
@@ -52,24 +51,24 @@ class EditCommentController extends Controller
      */
     public function edit()
     {
-        $comment_id  = Request::post('comment_id')->asInt();
-        $content    = $_POST['content']; // для Markdown
+        $data   = Request::getParsedBody();
+        $comment_id  = (int)$data['comment_id'];
 
         $comment = CommentModel::getCommentId($comment_id);
         if (!$this->container->access()->author('comment', $comment)) {
             return;
         }
 
-        $post = PostPresence::index($comment['comment_post_id'], 'id');
+        $post = Availability::post($comment['comment_post_id'], 'id');
 
         notEmptyOrView404($post);
 
-        Validator::Length($content, 6, 5000, 'content', url('comment.form.edit', ['id' => $comment_id]));
+        Validator::comment($data, url('comment.form.edit', ['id' => $comment_id]));
 
         CommentModel::edit(
             [
                 'comment_id'         => $comment['comment_id'],
-                'comment_content'    => $content,
+                'comment_content'    => $data['content'],
                 'comment_user_id'    => $this->selectAuthor($comment['comment_user_id'], Request::post('user_id')->value()),
                 'comment_modified'   => date("Y-m-d H:i:s"),
             ]
@@ -88,7 +87,7 @@ class EditCommentController extends Controller
      */
     public function transfer(): void
     {
-        $comment = CommentPresence::index(Request::param('id')->asPositiveInt());
+        $comment = Availability::comment(Request::param('id')->asPositiveInt());
 
         render(
             '/comments/transfer',
@@ -96,7 +95,7 @@ class EditCommentController extends Controller
                 'meta'  => Meta::get(__('app.edit_comment')),
                 'data'  => [
                     'comment'   => $comment,
-                    'post'      => PostPresence::index($comment['comment_post_id'], 'id'),
+                    'post'      => Availability::post($comment['comment_post_id'], 'id'),
                     'user'      => UserModel::get($comment['comment_user_id'], 'id'),
                 ]
             ]

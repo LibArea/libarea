@@ -44,12 +44,28 @@ class Html
     // Blog, topic or category
     public static function addPost($facet_id)
     {
-        $url_add = url('post.form.add');
-        if (!empty($facet_id)) {
-            $url_add = $url_add . '/' . $facet_id;
-        }
+        $url_article	= (!empty($facet_id)) ?  url('article.form.add', ['facet_id' => $facet_id]) : url('article.form.add', endPart: false);
+		$url_post 		= (!empty($facet_id)) ?  url('post.form.add', ['facet_id' => $facet_id]) : url('post.form.add', endPart: false);
+		$url_question 	= (!empty($facet_id)) ?  url('question.form.add', ['facet_id' => $facet_id]) : url('question.form.add', endPart: false);
+		$url_note 		= (!empty($facet_id)) ?  url('note.form.add', ['facet_id' => $facet_id]) : url('note.form.add', endPart: false);
 
-        return '<a title="' . __('app.add_post') . '" href="' . $url_add . '" class="blue"><svg class="icon large icon-bold"><use xlink:href="/assets/svg/icons.svg#write"></use></svg></a>';
+		$html = '<div class="relative">
+			<div class="trigger pointer">
+				<svg class="icon large sky icon-bold"><use xlink:href="/assets/svg/icons.svg#write"></use></svg>
+			</div>
+			<div class="dropdown user"> 
+			    <span class="right-close pointer">x</span>
+				<ul class="list-none user-nav">
+					<li><a href="' . $url_article . '" class="sky">' .   __('app.add_article') . '</a></li>
+					<li><a href="' . $url_post  .  '" class="blue">' .   __('app.add_post') . '</a></li>
+					<li><a href="' . $url_question  .  '" class="blue">' .   __('app.add_question') . '</a></li>
+					<li><a href="' . $url_note  .  '" class="blue">' .   __('app.add_note') . '</a></li>
+				</ul>	
+			</div>
+		</div>';
+		
+		return $html;
+		
     }
 
     // Localization of dates and events....
