@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controllers\Post;
+namespace App\Controllers\Publication;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
@@ -16,7 +16,7 @@ use App\Traits\Poll;
 use App\Traits\Author;
 use App\Traits\Related;
 
-class EditPostController extends Controller
+class EditPublicationController extends Controller
 {
 	use Slug;
 	use Poll;
@@ -42,12 +42,11 @@ class EditPostController extends Controller
 		$this->checkingEditPermissions($post, $blog);
 
 		render(
-			'/publications/edit',
+			'/publications/edit/index',
 			[
 				'meta'  => Meta::get(__('app.edit_' . $post['post_type'])),
 				'data'  => [
 					'sheet'         => 'edit-post',
-					'type'          => 'edit',
 					'post'          => $post,
 					'user'          => UserModel::get($post['post_user_id'], 'id'),
 					'blog'          => $blog,
@@ -61,34 +60,52 @@ class EditPostController extends Controller
 		);
 	}
 
-	public function edit(): void
+    public function editArticle(): void
+    {
+        $this->callEdit('article');
+    }
+
+    public function editQuestion(): void
+    {
+        $this->callEdit('question');
+    }
+
+    public function editPost(): void
+    {
+        $this->callEdit('post');
+    }
+
+    public function editNote(): void
+    {
+        $this->callEdit('note');
+    }
+
+
+	public function callEdit(string $type): void
 	{
-		$img = Request::post('images')->value();
+		$data = Request::getParsedBody();
+		$post = Availability::content($data['id']);
 
-		$post_id = Request::post('post_id')->asInt();
-		$post = Availability::content($post_id);
-
-		$content = $_POST['content']; // for Markdown
-		$post_draft = Request::post('post_draft')->value() === 'on' ? 1 : 0;
+		$post_draft = $data['post_draft'] ?? false === 'on' ? 1 : 0;
 
 		$blog = FacetModel::getFacetsUser('blog');
 		$this->checkingEditPermissions($post, $blog);
 
-		$redirect = url($post['post_type'] . '.form.edit', ['id' => $post_id]);
+		$redirect = url($post['post_type'] . '.form.edit', ['id' => $data['id']]);
 
-		Validator::article($title = Request::post('post_title')->value(), $content, $redirect);
+		Validator::publication($data, $type, $redirect);
 
 		$post_date = ($post['post_draft'] == 1 && $post_draft == 0) ? date("Y-m-d H:i:s") : $post['post_date'];
 
 		// Post cover
 		$post_img = $post['post_content_img'];
-		if (!empty($img)) {
-			$post_img = UploadImage::coverPost($img, $post, $redirect);
+		if (!empty($data['images'])) {
+			$post_img = UploadImage::coverPost($data['images'], $post, $redirect);
 		}
 
 		// Related topics
 		$fields = Request::allPost() ?? [];
-		$new_type = self::addFacetsPost($fields, $post_id, $post['post_type'], $redirect);
+		$new_type = self::addFacetsPost($fields, (int)$data['id'], $post['post_type'], $redirect);
 
 		$post_related = $this->relatedPost();
 
@@ -103,15 +120,15 @@ class EditPostController extends Controller
 		}
 
 		PostModel::editPost([
-			'post_id' 			=> $post_id,
-			'post_title' 		=> $title,
+			'post_id' 			=> $data['id'],
+			'post_title' 		=> $title ?? '',
 			'post_slug' 		=> $slug ?? $post['post_slug'],
 			'post_type' 		=> $new_type,
 			'post_translation'	=> Request::post('translation')->value() == 'on' ? 1 : 0,
 			'post_date' 		=> $post_date,
 			'post_user_id' 		=> $this->selectAuthor($post['post_user_id'], Request::post('user_id')->value()),
 			'post_draft' 		=> $post_draft,
-			'post_content' 		=> $content,
+			'post_content' 		=> $data['content'],
 			'post_content_img' 	=> $post_img ?? '',
 			'post_related' 		=> $post_related ?? '',
 			'post_merged_id' 	=> $post_merged_id ?? 0,
@@ -124,7 +141,7 @@ class EditPostController extends Controller
 			'post_modified' 	=> date("Y-m-d H:i:s"),
 		]);
 
-		Msg::redirect(__('msg.change_saved'), 'success', url('post.id', ['id' => $post['post_id']]));
+		Msg::redirect(__('msg.change_saved'), 'success', url('post.id', ['id' => $data['id']]));
 	}
 
 	/**

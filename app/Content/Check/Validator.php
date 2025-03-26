@@ -12,13 +12,14 @@ use Respect\Validation\Validator as v;
 
 class Validator
 {
-    public static function article($data, $redirect)
+    public static function publication($data, $type, $redirect)
     {
-        $title = str_replace("&nbsp;", '', $data['title']);
-
-        if (v::stringType()->length(6, 250)->validate($title) === false) {
-            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.title') . '»']), 'error', $redirect);
-        }
+		if ($type != 'post') {
+			$title = str_replace("&nbsp;", '', $data['title']);
+			if (v::stringType()->length(6, 250)->validate($title) === false) {
+				Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.title') . '»']), 'error', $redirect);
+			}
+		}
 
         if (v::stringType()->length(6, 25000)->validate($data['content']) === false) {
             Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.content') . '»']), 'error', $redirect);

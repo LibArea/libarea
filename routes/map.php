@@ -19,9 +19,9 @@ use App\Controllers\{
 	FolderController,
 	IgnoredController,
 	RssController,
-	Post\PostController,
-	Post\EditPostController,
-	Post\AddPostController,
+	Publication\PublicationController,
+	Publication\EditPublicationController,
+	Publication\AddPublicationController,
 	Comment\CommentController,
 	Comment\AddCommentController,
 	Comment\EditCommentController,
@@ -74,12 +74,12 @@ Route::get('/comments')->controller(CommentController::class, 'all')->name('comm
  */
 Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRST_LEVEL, '>=']);
 
-    Route::post('/backend/upload/{type}/{id}')->controller(EditPostController::class, 'uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
+    Route::post('/backend/upload/{type}/{id}')->controller(EditPublicationController::class, 'uploadContentImage')->where(['type' => '[a-z-]+', 'id' => '[0-9]+']);
 
 	Route::get('/logout')->controller(LogoutController::class, 'logout')->name('logout');
 	Route::get('/favorites')->controller(UserController::class, 'favorites')->name('favorites');
 	Route::post('/search/select/{type}')->controller(FormController::class)->where(['type' => '[a-z]+']);
-	Route::post('/post/grabtitle')->controller(AddPostController::class, 'grabMeta');
+	Route::post('/post/grabtitle')->controller(AddPublicationController::class, 'grabMeta');
 	Route::post('/status/action')->controller(ActionController::class, 'deletingAndRestoring');
 
 	Route::get('/blogs/my')->controller(FacetController::class, 'blogMy')->name('blogs.my');
@@ -117,17 +117,17 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
     Route::get('/favorites/folders/{id}')->controller(UserController::class, 'foldersFavorite')->where(['id' => '[0-9]+'])->name('favorites.folder.id');
 	
 	// Формы добавления контента
-	Route::get('/add/article/{facet_id?}')->controller(AddPostController::class, 'article')->where(['facet_id' => '[0-9]+'])->name('article.form.add');
-	Route::get('/add/question/{facet_id?}')->controller(AddPostController::class, 'question')->where(['facet_id' => '[0-9]+'])->name('question.form.add');
-	Route::get('/add/post/{facet_id?}')->controller(AddPostController::class, 'post')->where(['facet_id' => '[0-9]+'])->name('post.form.add');
-	Route::get('/add/note/{facet_id?}')->controller(AddPostController::class, 'note')->where(['facet_id' => '[0-9]+'])->name('note.form.add');
+	Route::get('/add/article/{facet_id?}')->controller(AddPublicationController::class, 'article')->where(['facet_id' => '[0-9]+'])->name('article.form.add');
+	Route::get('/add/question/{facet_id?}')->controller(AddPublicationController::class, 'question')->where(['facet_id' => '[0-9]+'])->name('question.form.add');
+	Route::get('/add/post/{facet_id?}')->controller(AddPublicationController::class, 'post')->where(['facet_id' => '[0-9]+'])->name('post.form.add');
+	Route::get('/add/note/{facet_id?}')->controller(AddPublicationController::class, 'note')->where(['facet_id' => '[0-9]+'])->name('note.form.add');
 	
 	Route::get('/add/poll')->controller(AddPollController::class)->name('poll.form.add');
 	Route::get('/add/facet/{type}')->controller(AddFacetController::class)->where(['type' => '[a-z]+'])->name('facet.form.add');
 
     // Формы изменение контента
-	Route::get('/edit/post/{id}')->controller(EditPostController::class)->where(['id' => '[0-9]+'])->name('post.form.edit');
-	Route::get('/edit/page/{id}')->controller(EditPostController::class)->where(['id' => '[0-9]+'])->name('page.form.edit');
+	Route::get('/edit/post/{id}')->controller(EditPublicationController::class)->where(['id' => '[0-9]+'])->name('post.form.edit');
+	Route::get('/edit/page/{id}')->controller(EditPublicationController::class)->where(['id' => '[0-9]+'])->name('page.form.edit');
     Route::get('/edit/comment/{id}')->controller(EditCommentController::class)->where(['id' => '[0-9]+'])->name('comment.form.edit'); 
 	Route::get('/edit/poll/{id}')->controller(EditPollController::class)->where(['id' => '[0-9]+'])->name('poll.form.edit'); 
 	Route::get('/edit/facet/{type}/{id}')->controller(EditFacetController::class)->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('facet.form.edit'); 
@@ -136,15 +136,15 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 	
 	Route::get('/redirect/facet/{id}')->controller(RedirectController::class)->where(['id' => '[0-9]+'])->name('redirect.facet');
 	
-	Route::get('/post/img/{id}/remove')->controller(EditPostController::class, 'coverPostRemove')->where(['id' => '[0-9]+'])->name('delete.post.cover');
+	Route::get('/post/img/{id}/remove')->controller(EditPublicationController::class, 'coverPostRemove')->where(['id' => '[0-9]+'])->name('delete.post.cover');
 	Route::get('/cover/img/{id}/remove')->controller(SettingController::class, 'coverUserRemove')->where(['id' => '[0-9]+'])->name('delete.user.cover');
 
     Route::toGroup()->protect();
 		Route::post('/favorite')->controller(FavoriteController::class);
 		Route::post('/votes')->controller(VotesController::class);
 		Route::post('/flag/repost')->controller(AuditController::class); 
-		Route::post('/post/profile')->controller(PostController::class, 'postProfile'); 
-		Route::post('/post/recommend')->controller(AddPostController::class, 'recommend'); 
+		Route::post('/post/profile')->controller(PublicationController::class, 'postProfile'); 
+		Route::post('/post/recommend')->controller(AddPublicationController::class, 'recommend'); 
 
 		Route::post('/folder/content/del')->controller(FolderController::class, 'delFolderContent');
 		Route::post('/folder/del')->controller(FolderController::class, 'delFolder');
@@ -153,7 +153,7 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 	
 		Route::post('/focus')->controller(SubscriptionController::class);
 		
-		Route::post('/post/recommend')->controller(AddPostController::class, 'recommend'); 
+		Route::post('/post/recommend')->controller(AddPublicationController::class, 'recommend'); 
 		
 		Route::post('/ignored')->controller(IgnoredController::class);
 		Route::post('/best')->controller(CommentBestController::class);
@@ -176,7 +176,13 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 		Route::post('/user/edit/notification')->controller(SettingController::class, 'notification')->where(['type' => '[a-z]+'])->name('setting.edit.notification');
 
 		Route::post('/team/edit/{type}/{id}')->controller(TeamFacetController::class, 'edit')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('team.edit');
-		Route::post('/edit/content/{type}')->controller(EditPostController::class, 'edit')->where(['type' => '[a-z]+'])->name('edit.post');
+		
+		Route::post('/edit/content/article')->controller(EditPublicationController::class, 'editArticle')->name('edit.article');
+		Route::post('/edit/content/question')->controller(EditPublicationController::class, 'editQuestion')->name('edit.question');
+		Route::post('/edit/content/post')->controller(EditPublicationController::class, 'editPost')->name('edit.post');
+		Route::post('/edit/content/note')->controller(EditPublicationController::class, 'editNote')->name('edit.note');
+		
+		
 		Route::post('/edit/comment')->controller(EditCommentController::class, 'edit')->name('edit.comment');
 		Route::post('/edit/facet/{type}')->controller(EditFacetController::class, 'edit')->where(['type' => '[a-z]+'])->name('edit.facet');
 		Route::post('/edit/facet/logo/{type}/{facet_id}')->controller(EditFacetController::class, 'logoEdit')->where(['type' => '[a-z]+', 'facet_id' => '[0-9]+'])->name('edit.logo.facet');
@@ -187,10 +193,10 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 		Route::post('/add/folder')->controller(FolderController::class, 'add')->name('add.folder');
 		
 		
-		Route::post('/add/content/article')->controller(AddPostController::class, 'addArticle')->name('add.article');
-		Route::post('/add/content/question')->controller(AddPostController::class, 'addQuestion')->name('add.question');
-		Route::post('/add/content/post')->controller(AddPostController::class, 'addArticle')->name('add.post');
-		Route::post('/add/content/note')->controller(AddPostController::class, 'addNote')->name('add.note');
+		Route::post('/add/content/article')->controller(AddPublicationController::class, 'addArticle')->name('add.article');
+		Route::post('/add/content/question')->controller(AddPublicationController::class, 'addQuestion')->name('add.question');
+		Route::post('/add/content/post')->controller(AddPublicationController::class, 'addPost')->name('add.post');
+		Route::post('/add/content/note')->controller(AddPublicationController::class, 'addNote')->name('add.note');
 		
 		
 		Route::post('/add/comment')->controller(AddCommentController::class, 'add')->name('add.comment');
@@ -229,14 +235,21 @@ Route::toGroup()->protect();
 	Route::post('/activatingnatifpopup')->controller(NotificationController::class, 'addForma'); 
 Route::endGroup();	
 
-Route::get('/domain/{domain}')->controller(PostController::class, 'domain')->where(['domain' => '[a-z0-9-.]+'])->name('domain');
+Route::get('/domain/{domain}')->controller(PublicationController::class, 'domain')->where(['domain' => '[a-z0-9-.]+'])->name('domain');
 
-// Other pages without authorization
-Route::get('/post/{id}')->controller(PostController::class, 'post')->where(['id' => '[0-9]+'])->name('post.id');
-Route::get('/post/{id}/{slug}')->controller(PostController::class, 'post')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
+// Other pages without authorization articles
+
+Route::get('/articles/{id}')->controller(PublicationController::class, 'article')->where(['id' => '[0-9]+'])->name('article.id');
+Route::get('/articles/{id}/{slug}')->controller(PublicationController::class, 'article')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('article');
+
+Route::get('/question/{id}')->controller(PublicationController::class, 'question')->where(['id' => '[0-9]+'])->name('question.id');
+Route::get('/question/{id}/{slug}')->controller(PublicationController::class, 'question')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('question');
+
+Route::get('/posts/{id}')->controller(PublicationController::class, 'post')->where(['id' => '[0-9]+'])->name('post.id');
+Route::get('/posts/{id}/{slug}')->controller(PublicationController::class, 'post')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
 // Страницы info
-Route::get('/{facet_slug}/article/{slug}')->controller(PostController::class, 'page')->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('facet.article'); 
+Route::get('/{facet_slug}/article/{slug}')->controller(PublicationController::class, 'page')->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('facet.article'); 
 
 Route::get('/@{login}')->controller(ProfileController::class)->where(['login' => '[A-Za-z0-9-]+'])->name('profile');
 Route::get('/@{login}/posts')->controller(ProfileController::class, 'posts')->where(['login' => '[A-Za-z0-9-]+'])->name('profile.posts');
@@ -258,11 +271,11 @@ Route::get('/blog/{slug}')->controller(BlogFacetController::class, 'feed')->wher
 Route::get('/sitemap.xml')->controller(RssController::class);
 Route::get('/rss/all/posts')->controller(RssController::class, 'postsAll');
 Route::get('/rss-feed/topic/{slug}')->controller(RssController::class, 'rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
-Route::get('/og-image/{id}')->controller(PostController::class, 'OgImage')->where(['id' => '[0-9-]+'])->name('og.image');
+Route::get('/og-image/{id}')->controller(PublicationController::class, 'OgImage')->where(['id' => '[0-9-]+'])->name('og.image');
 
 
 // Тестирование
 Route::toGroup()->protect();
-	Route::post('/add/content/test-edit')->controller(PostController::class, 'addEditTest')->name('add.post-edit');
+	Route::post('/add/content/test-edit')->controller(PublicationController::class, 'addEditTest')->name('add.post-edit');
 Route::endGroup();	
-Route::get('/editor/test')->controller(PostController::class, 'editorTest');
+Route::get('/editor/test')->controller(PublicationController::class, 'editorTest');

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controllers\Post;
+namespace App\Controllers\Publication;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
@@ -17,7 +17,7 @@ use App\Traits\Poll;
 use App\Traits\Slug;
 use App\Traits\Related;
 
-class AddPostController extends Controller
+class AddPublicationController extends Controller
 {
     use Poll;
     use Slug;
@@ -115,7 +115,7 @@ class AddPostController extends Controller
             $site = $this->addUrl($post_url);
         }
 
-        $data    = Request::getParsedBody();
+        $data = Request::getParsedBody();
 
         if ($type === 'page') {
             $count  = FacetModel::countFacetsUser($this->container->user()->id(), 'blog');
@@ -126,8 +126,8 @@ class AddPostController extends Controller
         // Проверим стоп слова и url
         $trigger = (new \App\Controllers\AuditController())->prohibitedContent($data['content']);
 
-        $redirect = url($type . 'e.form.add', endPart: false);
-        Validator::article($data, $redirect);
+        $redirect = url($type . '.form.add', endPart: false);
+        Validator::publication($data, $type, $redirect);
 
         // Post cover
         // Обложка поста
@@ -135,9 +135,14 @@ class AddPostController extends Controller
             $post_img = UploadImage::coverPost($data['images'], 0, $redirect);
         }
 
-        if (PostModel::getSlug($slug = $this->getSlug($data['title']))) {
-            $slug = $slug . "-";
-        }
+
+		if ($type != 'post') {
+			if (PostModel::getSlug($slug = $this->getSlug($data['title']))) {
+				$slug = $slug . "-";
+			}
+		} else {
+			$slug = 'post-' . date('d-m-Y');
+		}
 
         $post_related = $this->relatedPost();
 
@@ -148,7 +153,7 @@ class AddPostController extends Controller
 
         $last_id = PostModel::create(
             [
-                'post_title'            => $data['title'],
+                'post_title'            => $data['title'] ?? '',
                 'post_content'          => $data['content'],
                 'post_content_img'      => $post_img ?? '',
                 'post_thumb_img'        => $site['og_img'] ?? '',
@@ -173,16 +178,16 @@ class AddPostController extends Controller
 
         // Add an audit entry and an alert to the admin
         if ($trigger === false) {
-            (new \App\Controllers\AuditController())->create('post', $last_id, post_slug($last_id, $slug));
+            (new \App\Controllers\AuditController())->create('post', $last_id, post_slug($type, $last_id, $slug));
         }
 
-        $url_content = post_slug($last_id, $slug);
+        $url_content = post_slug($type, $last_id, $slug);
         if ($type === 'page') {
             $url_content = url('info.page', ['slug' => $slug]);
         }
-
+		
         // Add fastes (blogs, topics) to the post 
-        $type = (new \App\Controllers\Post\EditPostController())::addFacetsPost($data, $last_id, $url_content);
+        $type = (new \App\Controllers\Publication\EditPublicationController())::addFacetsPost($data, $last_id, $url_content);
 
         // Contact via @
         // Обращение через @

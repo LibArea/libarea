@@ -7,7 +7,7 @@
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
 
-    <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
+    <?php $post_url = post_slug($post['post_type'], $post['post_id'], $post['post_slug']); ?>
 
     <?php if ($container->access()->hiddenPost($post)) continue; ?>
     <?php if ($container->access()->auditСontent('post', $post)) continue; ?>

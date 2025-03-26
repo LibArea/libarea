@@ -51,7 +51,7 @@ $blog = $data['blog'][0] ?? null;
       <div class="max-w-md">
         <div class="content-body mb15">
           <?php $markdown = markdown($post['post_content'], 'text');
-          if (Html::headings($markdown, post_slug($post['post_id'], $post['post_slug'])) == false) : ?>
+          if (Html::headings($markdown, post_slug($post['post_type'], $post['post_id'], $post['post_slug'])) == false) : ?>
 
             <?= $markdown; ?>
 
@@ -292,4 +292,4 @@ $blog = $data['blog'][0] ?? null;
 
 <script src="/assets/js/dialog/dialog.js"></script>
 <?= insert('/_block/dialog/msg-flag'); ?>
-<?= insert('/_block/dialog/share', ['title' => __('app.share_post'), 'url' => config('meta', 'url') . post_slug($post['post_id'], $post['post_slug'])]); ?>
+<?= insert('/_block/dialog/share', ['title' => __('app.share_post'), 'url' => config('meta', 'url') . post_slug($post['post_type'], $post['post_id'], $post['post_slug'])]); ?>

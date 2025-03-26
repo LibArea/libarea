@@ -445,6 +445,7 @@ class CommentModel extends Model
                     post_id,
 					post_title,
                     post_slug,
+					post_type,
                     post_hidden,
                     login,
                     avatar,

@@ -22,13 +22,13 @@ function __(string $key = null, array $params = [])
     return Translate::get($key, $params);
 }
 
-function post_slug(int $id, string $slug = '')
+function post_slug(string $type, int $id, string $slug = '')
 {
     if (config('meta', 'slug_post') == false) {
-        return url('post.id', ['id' => $id]);
+        return url($type . '.id', ['id' => $id]);
     }
 
-    return url('post', ['id' => $id, 'slug' => $slug]);
+    return url($type, ['id' => $id, 'slug' => $slug]);
 }
 
 function is_current($url)

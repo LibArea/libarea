@@ -79,7 +79,7 @@
       <?php endif; ?>
 
       <li>
-        <a rel="nofollow" class="gray-600" href="<?= post_slug($post['post_id'], $post['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
+        <a rel="nofollow" class="gray-600" href="<?= post_slug($post['post_type'], $post['post_id'], $post['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
           <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#anchor"></use>
           </svg>

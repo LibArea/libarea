@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controllers\Post;
+namespace App\Controllers\Publication;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
@@ -18,7 +18,7 @@ use BuildTree, Html, Meta, MetaImage, Img;
 use Parsedown;
 use League\HTMLToMarkdown\HtmlConverter;
 
-class PostController extends Controller
+class PublicationController extends Controller
 {
     use Views;
     use Poll;
@@ -29,6 +29,21 @@ class PostController extends Controller
     public function post(): void
     {
         $this->callIndex('post');
+    }
+
+    public function article(): void
+    {
+        $this->callIndex('article');
+    }
+
+    public function question(): void
+    {
+        $this->callIndex('question');
+    }
+
+    public function note(): void
+    {
+        $this->callIndex('note');
     }
 
     public function page(): void
@@ -77,11 +92,31 @@ class PostController extends Controller
 
         $comments = CommentModel::getCommentsPost($content['post_id'], $content['post_type'], $sorting);
 
-        if ($type === 'post') {
+        if ($type === 'page') {
+			
+            $slug_facet = Request::param('facet_slug')->asString();
+            $page  = Availability::facet($slug_facet, 'slug', 'section');
+
+            render(
+                '/publications/view/page',
+                [
+                    'meta'  => Meta::publication($type, $content),
+                    'data'  => [
+                        'sheet' => 'page',
+                        'type'  => 'info',
+                        'page'  => $content,
+                        'facet' => [],
+                        'pages' => PostModel::recent($page['facet_id'], $content['post_id'])
+                    ]
+                ]
+            );
+
+        } else {
+
             render(
                 '/publications/view/post',
                 [
-                    'meta'  => Meta::post($content),
+                    'meta'  => Meta::publication($type, $content),
                     'data'  => [
                         'post'          => $content,
                         'comments'      => BuildTree::index(0, $comments),
@@ -100,24 +135,7 @@ class PostController extends Controller
                     ]
                 ]
             );
-        } else {
 
-            $slug_facet = Request::param('facet_slug')->asString();
-            $page  = Availability::facet($slug_facet, 'slug', 'section');
-
-            render(
-                '/publications/view/page',
-                [
-                    'meta'  => Meta::post($content),
-                    'data'  => [
-                        'sheet' => 'page',
-                        'type'  => 'info',
-                        'page'  => $content,
-                        'facet' => [],
-                        'pages' => PostModel::recent($page['facet_id'], $content['post_id'])
-                    ]
-                ]
-            );
         }
     }
 
@@ -132,7 +150,7 @@ class PostController extends Controller
             // Если slug поста отличается от данных в базе
             if (config('meta', 'slug_post') == true) {
                 if ($slug != $content['post_slug']) {
-                    redirect(post_slug($content['post_id'], $content['post_slug']));
+                    redirect(post_slug($type, $content['post_id'], $content['post_slug']));
                 }
             }
 

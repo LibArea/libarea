@@ -77,13 +77,13 @@ class Meta
         return self::get(config('meta', $type . '_title'), config('meta',  $type . '_desc'), $meta);
     }
 
-    public static function post(array $content): string
+    public static function publication(string $type, array $content): string
     {
         $indexing = ($content['post_is_deleted'] == 1 || $content['post_published'] == 0) ? true : false;
 
         $meta = ['type' => 'article', 'indexing'     => $indexing];
 
-        $imgurl = self::postImage($content);
+        $imgurl = self::publicationImage($content);
         if (config('meta', 'img_generate') === true) {
             $imgurl = url('og.image', ['id' => $content['post_id']]);
         }
@@ -94,7 +94,7 @@ class Meta
                 'type'      => 'article',
                 'og'        => true,
                 'imgurl'    => $imgurl,
-                'url'       => post_slug((int)$content['post_id'], $content['post_slug']),
+                'url'       => post_slug($type, (int)$content['post_id'], $content['post_slug']),
             ];
         }
 
@@ -104,7 +104,7 @@ class Meta
     }
 
 
-    public static function postImage(array $content): string
+    public static function publicationImage(array $content): string
     {
         $content_img  = config('meta', 'img_path');
 
