@@ -54,9 +54,9 @@ class HomeModel extends Model
                 post_id,
                 post_title,
                 post_slug,
-                post_feature,
                 post_translation,
                 post_draft,
+				post_type,
                 post_nsfw,
                 post_hidden,
                 post_date,
@@ -155,11 +155,11 @@ class HomeModel extends Model
         $trust_level = self::container()->user()->tl();
 
         switch ($type) {
-            case 'questions':
-                $display =  "post_is_deleted = 0 AND post_tl <=  $trust_level  AND post_feature = 1";
-                break;
-            case 'posts':
-                $display =  "post_is_deleted = 0 AND post_tl <=  $trust_level  AND post_feature = 0";
+            case 'question':
+			case 'post':
+			case 'article':
+			case 'note':
+                $display =  "post_is_deleted = 0 AND post_tl <=  $trust_level  AND post_type = '$type'";
                 break;
             case 'deleted':
                 $display =  "post_is_deleted = 1";

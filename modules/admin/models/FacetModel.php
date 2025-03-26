@@ -51,7 +51,7 @@ class FacetModel extends Model
 
     public static function types()
     {
-        return  DB::run('SELECT type_id, type_code, type_lang FROM facets_types');
+        return  DB::run("SELECT type_id, type_code, type_lang FROM facets_types WHERE type_code != 'category'");
     }
 
     /**

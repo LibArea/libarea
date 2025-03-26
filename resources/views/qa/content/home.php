@@ -5,7 +5,7 @@
     </ul>
   </div>	
 
-  <?= insert('/content/post/post', ['data' => $data]); ?>
+  <?= insert('/content/publications/item', ['data' => $data]); ?>
 
   <?php if ($container->user()->scroll()) : ?>
     <div id="scrollArea"></div>

@@ -23,9 +23,9 @@ class CommentBestController extends Controller
         // Получим данные комментария (на который выбирается "лучший ответ")
         $comment = Availability::comment(Request::post('comment_id')->asInt());
 
-        // Get the data of the post that has this comment       
-        // Получим данные поста в котором есть этот ответ
-        $post = Availability::post($comment['comment_post_id'], 'id');
+        // Get the data of the content that has this comment       
+        // Получим данные контента (поста, статьи...) в котором есть этот ответ
+        $post = Availability::content($comment['comment_post_id'], 'id');
 
         // Let's check the access. Only the staff and the author of the post can choose the best comment (without regard to time)
         // Проверим доступ. Только персонал и автор поста может выбирать лучший ответ (без учета времени)

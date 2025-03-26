@@ -5,7 +5,7 @@ $topic = $data['facet'];
   <?php if ($topic['facet_is_deleted'] == 0) : ?>
     <?= insert('/content/facets/topic-header', ['topic' => $topic, 'data' => $data]); ?>
 
-    <?= insert('/content/post/type-post', ['data' => $data]); ?>
+    <?= insert('/content/publications/choice', ['data' => $data]); ?>
 
     <?php
     $sort = $container->request()->get('sort')->value();

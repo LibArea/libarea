@@ -23,11 +23,6 @@ $facet  = $data['facet'] ?? false;
           <use xlink:href="/assets/svg/icons.svg#users"></use>
         </svg> <?= __('app.users'); ?>
       </a>
-      <a class="black text-sm" href="/web">
-        <svg class="icon small">
-          <use xlink:href="/assets/svg/icons.svg#link"></use>
-        </svg> <?= __('app.catalog'); ?>
-      </a>
       <a class="black text-sm" href="/search">
         <svg class="icon small">
           <use xlink:href="/assets/svg/icons.svg#search"></use>

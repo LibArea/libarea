@@ -39,7 +39,7 @@ $blog = $data['blog'][0] ?? null;
       </div>
 
       <h1 class="m0 mb5"><?= $post['post_title']; ?>
-        <?= insert('/content/post/post-title', ['post' => $post]); ?>
+        <?= insert('/content/publications/title', ['post' => $post]); ?>
       </h1>
 
       <?php if ($post['post_thumb_img']) : ?>
@@ -161,7 +161,7 @@ $blog = $data['blog'][0] ?? null;
       <?php if (empty($is_comments)) : ?>
 
         <?php if ($container->user()->active()) : ?>
-          <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
+          <?php if ($post['post_type'] != 'question' && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
             <form action="<?= url('add.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
               <?= $container->csrf()->field(); ?>
@@ -190,8 +190,8 @@ $blog = $data['blog'][0] ?? null;
     <?php if (empty($is_comments)) : ?>
       <div id="comment"></div>
       <?php if ($post['post_draft'] == 0) :
-        $format = ($post['post_feature'] == 0) ? 'discussion' : 'qa';
-        insert('/content/post/format-' . $format, ['data' => $data, 'post' => $post]);
+        $format = ($post['post_type'] == 'article') ? 'discussion' : 'qa';
+        insert('/content/publications/format-' . $format, ['data' => $data, 'post' => $post]);
       else :
         echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);
       endif; ?>

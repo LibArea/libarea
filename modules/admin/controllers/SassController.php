@@ -24,8 +24,8 @@ class SassController extends Module
             $this->buildJs(HLEB_GLOBAL_DIR . $putch, $key);
         }
 
-        // Separate style files that may not be included in the templates (example: catalog.css, rtl.css)
-        // Отдельные файлы стилей, которые могут не войти в шаблоны (пример: catalog.css, rtl.css)
+        // Separate style files that may not be included in the templates (example: rtl.css)
+        // Отдельные файлы стилей, которые могут не войти в шаблоны (пример: rtl.css)
         foreach (config('main', 'path_css') as $key => $putch) {
             $this->buildCss(HLEB_GLOBAL_DIR . $putch, $key);
         }

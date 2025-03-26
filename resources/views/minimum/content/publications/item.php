@@ -15,7 +15,7 @@
           <div>
             <a class="text-xl" href="<?= $post_url; ?>">
               <?= $post['post_title']; ?>
-              <?= insert('/content/post/post-title', ['post' => $post]); ?>
+              <?= insert('/content/publications/title', ['post' => $post]); ?>
             </a>
             <?= Html::facets($post['facet_list'], 'blog', 'tag'); ?>
             <?= Html::facets($post['facet_list'], 'topic', 'tag-yellow'); ?>

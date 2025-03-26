@@ -8,13 +8,13 @@ use App\Models\{CommentModel, PostModel, FacetModel, PollModel};
 
 class Availability
 {
-    public static function post(int|string $element, string $type_element = 'id'): array
+    public static function content(int|string $element, string $type_element = 'id'): array
     {
-        $post = PostModel::getPost($element, $type_element);
+        $content = PostModel::getPost($element, $type_element);
 
-        notEmptyOrView404($post);
+        notEmptyOrView404($content);
 
-        return $post;
+        return $content;
     }
 
 

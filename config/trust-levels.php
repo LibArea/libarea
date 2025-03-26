@@ -16,7 +16,7 @@ return [
 
     'tl_add_blog'       => 1,
     'tl_add_topic'      => 10,
-    'tl_add_category'   => 10, // Catalog (каталог)
+    'tl_add_category'   => 10,
     'tl_add_section'    => 10, // Service pages (служебные страницы)
 
     'tl_add_post'       => 1,
@@ -50,7 +50,7 @@ return [
 
     'perDay_blog'       => 1,
     'perDay_topic'      => 0,
-    'perDay_category'   => 0, // Catalog (каталог)
+    'perDay_category'   => 0,
     'perDay_section'    => 0, // Service pages (служебные страницы)
     'perDay_team'       => 3,
 

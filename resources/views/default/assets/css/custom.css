@@ -15,16 +15,12 @@
   color: var(--black);
 }
 
-.nickname::first-letter {
-  color: red;
-}
-
 .nickname.new::first-letter {
   color: var(--green);
 }
 
 .active {
-  color: #eab308;
+  color: red;
 }
 
 ul.nav>li.active>a {

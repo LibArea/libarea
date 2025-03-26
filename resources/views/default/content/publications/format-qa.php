@@ -25,7 +25,7 @@
               <li class="comment">
                 <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
                 <div class="comment comment-body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
-                  <div class="comment-text ml5<?php if ($level == 1) : ?> text-sm<?php endif; ?>">
+                  <div class="comment-text<?php if ($level == 1) : ?> text-sm<?php endif; ?>">
                     <?= markdown($node['comment_content'], 'text'); ?>
                   </div>
                   <div class="comment-footer justify-between">
@@ -81,7 +81,7 @@
   <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.you_answered'), 'icon' => 'info']); ?>
 <?php else : ?>
   <?php if ($container->user()->active()) : ?>
-    <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
+    <?php if ($post['post_type'] == 'question' && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
       <form class="mb15 mt20" action="<?= url('add.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
         <?= $container->csrf()->field(); ?>

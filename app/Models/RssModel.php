@@ -55,7 +55,7 @@ class RssModel extends Model
                     post_id,
                     post_title,
                     post_slug,
-                    post_feature,
+                    post_type,
                     post_translation,
                     post_draft,
                     post_date,

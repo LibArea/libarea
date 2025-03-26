@@ -34,7 +34,7 @@ class AddCommentController extends Controller
     public function add()
     {
         if ($post_id = Request::post('post_id')->asInt()) {
-            $post = Availability::post($post_id);
+            $post = Availability::content($post_id);
         }
 
         // Will get the id of the comment that is being answered (if there is one, i.e. not the root comment)
@@ -49,7 +49,7 @@ class AddCommentController extends Controller
 
             // Let's check that this comment belongs to a post that is
             // Проверим, что данный комментарий принадлежит посту который есть
-            $post = Availability::post($comment['comment_post_id'], 'id');
+            $post = Availability::content($comment['comment_post_id'], 'id');
         }
 
         notEmptyOrView404($post);

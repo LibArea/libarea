@@ -18,14 +18,17 @@ return [
     'read_info'             => 'Gönderileri okuyun. Son 50 görüntülemenin geçmişi.',
     'notifications_info'    => '"Okudum" bağlantısını tıklayarak tüm reklamları okundu olarak işaretleyebilirsiniz.',
     'notification_info'     => 'YBu bölümdeki tüm e-posta bildirimlerinden aboneliğinizi iptal edebilirsiniz.',
-
-    'add_post'              => '<b>cut</b> etiketini kullanın (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).< br><br> Etiketini takip eden metnin kedi kısmının altına gizlenir ("Devamını oku" yazacaktır).',
+	
+    'add_post'              => 'Daha iyi okunabilmesi için lütfen düzgün yazmaya çalışın.',
+	'add_article' 			=> '<b>cut</b> etiketini kullanın (<svg class="icon"><use xlink:href="/assets/svg/icons.svg#cut"></use></svg>).< br><br> Etiketini takip eden metnin kedi kısmının altına gizlenir ("Devamını oku" yazacaktır).',
+	'add_question' 			=> 'Soru büyük harfle başlar ve soru işaretiyle biter.',
+	'add_note'				=> 'Parse işlemi tam olarak başarılı olmadıysa. Gerekli alanları manuel olarak doldurun.',
+	'add_page'				=> 'Bu resmi belgelerdir. Hatasız yazmaya çalışın.',
+	
     'edit_page'             => 'Resmi belgeler hatasız olmalı ve daha resmi bir şekilde yazılmalıdır.',
     'edit_post'             => 'Gönderinin besleme sayfasında ve tam sürümde nasıl göründüğünü görün. Burayı geliştirin.',
     'add_topic'             => 'Konu, sistem tarafından içeriği düzenlemek için kullanılan bir düğümdür (gezinme için). Tema tek bir bakış açısıdır, çeşitli şeylerin, olayların ve diğer kavramların yorumlanmasıdır.',
-    'add_blog'              => 'Kategoriler dizini (siteler, programlar) ifade eder. Bunları yalnızca doldurulacak yeterli site olduğunda oluşturun.',
-    'add_category'          => 'Kategoriler site dizininde kullanılır. Boş kategoriler oluşturmayın.',
-    'edit_category'         => 'Kategoriyi, içindeki siteleri yansıtacak şekilde düzenleyin. Doğru bir açıklama yazın ve kısa bir başlık seçin.',
+    'add_blog'              => 'İngilizce olarak benzersiz bir URL (SLUG) oluşturun.',
     'add_section'           => 'Bölümler, servis makalelerine göre gruplama (gezinme) için kullanılır.',
     'edit_topic'            => 'Konular gönderileri gruplandırmak (gezinmek) için kullanılır. Bu navigasyonu ciddiye alın.',
     'edit_blog'             => 'Bloglar genellikle katkıda bulunanlar tarafından oluşturulur. Blog belirli bir kullanıcıya atanır.',

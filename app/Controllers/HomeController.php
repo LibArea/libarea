@@ -18,12 +18,17 @@ class HomeController extends Controller
 
     public function questions(): void
     {
-        $this->callIndex('questions');
+        $this->callIndex('question');
     }
 
     public function posts(): void
     {
-        $this->callIndex('posts');
+        $this->callIndex('post');
+    }
+
+    public function articles(): void
+    {
+        $this->callIndex('article');
     }
 
     public function all(): void
@@ -91,7 +96,7 @@ class HomeController extends Controller
         }
 
         insert(
-            '/content/post/type-post',
+            '/content/publications/choice',
             [
                 'data'  => [
                     'pages' => Html::pageNumber(),

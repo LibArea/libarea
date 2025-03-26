@@ -12,10 +12,14 @@
         'url'   => url('home'),
         'title' => 'app.feed',
       ], [
+        'id'    => 'main.articles',
+        'url'   => url('main.articles'),
+        'title' => 'app.articles',
+      ], [
         'id'    => 'main.posts',
         'url'   => url('main.posts'),
         'title' => 'app.posts',
-      ], [
+      ],  [
         'id'    => 'main.questions',
         'url'   => url('main.questions'),
         'title' => 'app.questions',

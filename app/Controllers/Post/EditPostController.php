@@ -31,7 +31,7 @@ class EditPostController extends Controller
 	 */
 	public function index()
 	{
-		$post = Availability::post(Request::param('id')->asPositiveInt(), 'id');
+		$post = Availability::content(Request::param('id')->asPositiveInt(), 'id');
 
 		$post_related = [];
 		if ($post['post_related']) {
@@ -42,7 +42,7 @@ class EditPostController extends Controller
 		$this->checkingEditPermissions($post, $blog);
 
 		render(
-			'/post/edit',
+			'/publications/edit',
 			[
 				'meta'  => Meta::get(__('app.edit_' . $post['post_type'])),
 				'data'  => [
@@ -66,7 +66,7 @@ class EditPostController extends Controller
 		$img = Request::post('images')->value();
 
 		$post_id = Request::post('post_id')->asInt();
-		$post = Availability::post($post_id);
+		$post = Availability::content($post_id);
 
 		$content = $_POST['content']; // for Markdown
 		$post_draft = Request::post('post_draft')->value() === 'on' ? 1 : 0;
@@ -102,13 +102,10 @@ class EditPostController extends Controller
 			}
 		}
 
-		$post_feature = config('general', 'qa_site_format') === true ? 'on' : Request::post('post_feature');
-
 		PostModel::editPost([
 			'post_id' 			=> $post_id,
 			'post_title' 		=> $title,
 			'post_slug' 		=> $slug ?? $post['post_slug'],
-			'post_feature' 		=> $post_feature == 'on' ? 1 : 0,
 			'post_type' 		=> $new_type,
 			'post_translation'	=> Request::post('translation')->value() == 'on' ? 1 : 0,
 			'post_date' 		=> $post_date,
@@ -178,7 +175,7 @@ class EditPostController extends Controller
 	 */
 	function coverPostRemove()
 	{
-		$post = Availability::post(Request::param('id')->asPositiveInt(), 'id');
+		$post = Availability::content(Request::param('id')->asPositiveInt(), 'id');
 
 		// Удалять может только автор
 		// Only the author can delete it

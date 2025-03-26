@@ -22,7 +22,7 @@
         </div>
 
         <h1 class="m0"><?= $post['post_title']; ?>
-          <?= insert('/content/post/post-title', ['post' => $post]); ?>
+          <?= insert('/content/publications/title', ['post' => $post]); ?>
         </h1>
         <div class="text-sm lowercase flex gap gray-600">
           <?= langDate($post['post_date']); ?>
@@ -111,7 +111,7 @@
     </div>
 
     <?php if ($container->user()->active()) : ?>
-      <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
+      <?php if ($post['post_type'] == 'article' && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
 
         <form action="<?= url('add.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
           <?= $container->csrf()->field(); ?>
@@ -137,10 +137,10 @@
   <div id="comment"></div>
   <div class="ml10">
     <?php if ($post['post_draft'] == 0) :
-      if ($post['post_feature'] == 0) :
-        insert('/content/post/format-discussion', ['data' => $data, 'post' => $post]);
+      if ($post['post_type'] == 'question') :
+        insert('/content/publications/format-discussion', ['data' => $data, 'post' => $post]);
       else :
-        insert('/content/post/format-qa', ['data' => $data, 'post' => $post]);
+        insert('/content/publications/format-qa', ['data' => $data, 'post' => $post]);
       endif;
     else :
       echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);

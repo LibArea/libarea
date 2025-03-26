@@ -40,10 +40,6 @@ return [
     // To force an update (css, js)
     'version' 	=> 121,
 
-    // Set to True to format Q&A posts (discussion option will be hidden)
-    // Установить на True чтобы сделать формат постов Q&A (дискуссионный вариант будет скрыт)
-    'qa_site_format'    => false,
-
     // Real time notifications. Update: 15 seconds
     // Уведомления в реальном времени. Обновление: 15 секунд
     'notif_update_time' =>  15000,

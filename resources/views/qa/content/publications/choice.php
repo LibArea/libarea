@@ -1,0 +1,1 @@
+<?= insert('/content/publications/item', ['data' => $data]); ?>

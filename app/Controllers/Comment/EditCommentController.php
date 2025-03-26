@@ -36,7 +36,7 @@ class EditCommentController extends Controller
                 'meta'  => Meta::get(__('app.edit_comment')),
                 'data'  => [
                     'comment'   => $comment,
-                    'post'      => Availability::post($comment['comment_post_id'], 'id'),
+                    'post'      => Availability::content($comment['comment_post_id'], 'id'),
                     'user'      => UserModel::get($comment['comment_user_id'], 'id'),
                 ]
             ]
@@ -59,7 +59,7 @@ class EditCommentController extends Controller
             return;
         }
 
-        $post = Availability::post($comment['comment_post_id'], 'id');
+        $post = Availability::content($comment['comment_post_id'], 'id');
 
         notEmptyOrView404($post);
 
@@ -95,7 +95,7 @@ class EditCommentController extends Controller
                 'meta'  => Meta::get(__('app.edit_comment')),
                 'data'  => [
                     'comment'   => $comment,
-                    'post'      => Availability::post($comment['comment_post_id'], 'id'),
+                    'post'      => Availability::content($comment['comment_post_id'], 'id'),
                     'user'      => UserModel::get($comment['comment_user_id'], 'id'),
                 ]
             ]

@@ -95,7 +95,7 @@ class CommentModel extends Model
                     post_slug,
                     post_user_id,
                     post_closed,
-                    post_feature,
+                    post_type,
                     post_is_deleted,
                     comment_id,
                     comment_content,
@@ -216,11 +216,11 @@ class CommentModel extends Model
      * @param string $sorting
      * @return array
      */
-    public static function getCommentsPost(int $post_id, int $type, string|null $sorting = 'new')
+    public static function getCommentsPost(int $post_id, string $type, string|null $sorting = 'new')
     {
         $user_id = self::container()->user()->id();
 
-        if ($type == 1) {
+        if ($type == 'questions') {
             $sorting = 'top';
         }
 
@@ -453,7 +453,7 @@ class CommentModel extends Model
                         LEFT JOIN users ON id = comment_user_id
                         RIGHT JOIN posts ON post_id = comment_post_id
                             WHERE comment_is_deleted = 0 AND post_is_deleted = 0 $hidden 
-                                $user_comment AND post_type = 'post'
+                                $user_comment 
                                     ORDER BY comment_id DESC LIMIT :limit";
 
         return DB::run($sql, ['limit' => $limit])->fetchAll();

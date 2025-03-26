@@ -33,7 +33,7 @@ class PostController extends Controller
 
     public function page(): void
     {
-        $this->callIndex('info.page');
+        $this->callIndex('page');
     }
 
     /**
@@ -75,11 +75,11 @@ class PostController extends Controller
         // Sending Last-Modified and handling HTTP_IF_MODIFIED_SINCE
         $this->getDataModified($content['post_modified']);
 
-        $comments = CommentModel::getCommentsPost($content['post_id'], $content['post_feature'], $sorting);
+        $comments = CommentModel::getCommentsPost($content['post_id'], $content['post_type'], $sorting);
 
         if ($type === 'post') {
             render(
-                '/post/post-view',
+                '/publications/view/post',
                 [
                     'meta'  => Meta::post($content),
                     'data'  => [
@@ -106,7 +106,7 @@ class PostController extends Controller
             $page  = Availability::facet($slug_facet, 'slug', 'section');
 
             render(
-                '/post/page-view',
+                '/publications/view/page',
                 [
                     'meta'  => Meta::post($content),
                     'data'  => [
@@ -126,7 +126,7 @@ class PostController extends Controller
         // Check id and get content data
         // Проверим id и получим данные контента
         if ($type === 'post') {
-            $content = Availability::post($id);
+            $content = Availability::content($id);
 
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
@@ -145,7 +145,7 @@ class PostController extends Controller
             return $content;
         }
 
-        return Availability::post($slug, 'slug');
+        return Availability::content($slug, 'slug');
     }
 
     /**
@@ -154,7 +154,7 @@ class PostController extends Controller
      */
     public function postProfile(): false|string
     {
-        $post = Availability::post($post_id = Request::post('post_id')->asInt(), 'id');
+        $post = Availability::content($post_id = Request::post('post_id')->asInt(), 'id');
 
         // Access check
         // Проверка доступа
@@ -191,7 +191,7 @@ class PostController extends Controller
         ];
 
         render(
-            '/post/link',
+            '/publications/link',
             [
                 'meta'  => Meta::get(__('app.domain') . ': ' . $domain, __('meta.domain_desc') . ': ' . $domain, $m),
                 'data'  => [
@@ -222,14 +222,14 @@ class PostController extends Controller
     public function OgImage()
     {
         $id = Request::param('id')->value();
-        $post = Availability::post($id);
+        $post = Availability::content($id);
 
         MetaImage::get($post['post_title'], $post['login'], Img::PATH['avatars'] .  $post['avatar'],  Meta::postImage($post));
     }
 
     public function editorTest()
     {
-        $md = Availability::post(1936);
+        $md = Availability::content(1936);
 
         $Parsedown = new Parsedown();
         $Parsedown->setSafeMode(true);
@@ -237,7 +237,7 @@ class PostController extends Controller
         $md_content =  $Parsedown->text($md['post_content']);
 
         render(
-            '/post/editor-test',
+            '/publications/editor-test',
             [
                 'meta'  => Meta::get(__('app.development'), __('meta.development'), ['og'    => false]),
                 'data'  => ['type' => 'test', 'md' => $md_content]

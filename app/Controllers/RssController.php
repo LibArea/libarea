@@ -22,26 +22,6 @@ class RssController extends Controller
         );
     }
 
-    // Route::get('/turbo-feed/topic/{slug}')
-    public function turboFeed()
-    {
-        $topic_slug = Request::param('slug')->asString();
-        $topic      = RssModel::getTopicSlug($topic_slug);
-        notEmptyOrView404($topic);
-
-        $posts  = RssModel::getPostsFeed($topic_slug);
-
-        insertCacheTemplate(
-            'default/content/rss/turbo-feed',
-            [
-                'data' => [
-                    'posts' => self::posts($posts),
-                ],
-                'topic' => $topic,
-            ]
-        );
-    }
-
     // Route::get('/rss-feed/topic/{slug}')
     public function rssFeed()
     {

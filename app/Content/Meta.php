@@ -57,13 +57,14 @@ class Meta
         return $output;
     }
 
-    public static function home(string $sheet)
+    public static function home(string $type)
     {
-        $url = match ($sheet) {
-            'questions'    => '/questions',
-            'posts'        => '/posts',
-            'top'        => '/top',
-            default        => '/',
+        $url = match ($type) {
+            'question'	=> '/questions',
+			'article'	=> '/articles',
+            'post'		=> '/posts',
+            'top'		=> '/top',
+            default		=> '/',
         };
 
         $meta = [
@@ -73,7 +74,7 @@ class Meta
             'url'       => $url,
         ];
 
-        return self::get(config('meta', $sheet . '_title'), config('meta',  $sheet . '_desc'), $meta);
+        return self::get(config('meta', $type . '_title'), config('meta',  $type . '_desc'), $meta);
     }
 
     public static function post(array $content): string

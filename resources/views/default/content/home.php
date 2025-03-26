@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <?= insert('/content/post/type-post', ['data' => $data]); ?>
+  <?= insert('/content/publications/choice', ['data' => $data]); ?>
 
   <?php if ($container->user()->scroll()) : ?>
     <div id="scrollArea"></div>

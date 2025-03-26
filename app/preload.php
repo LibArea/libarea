@@ -12,4 +12,4 @@ $constraint = "default-src 'self' " . implode(' ', $resources['default-src']) .
     "; script-src 'self'  " . implode(' ', $resources['script-src']) .
     " 'nonce-{$nonce}'; font-src " . implode(' ', $resources['font-src']) . "; img-src 'self' " . implode(' ', $resources['img-src']) . " data: blob:;";
 
-// header('Content-Security-Policy: ' . $constraint);
+header('Content-Security-Policy: ' . $constraint);

@@ -34,7 +34,7 @@
           </div>
         <?php endif; ?>
 
-        <?= insert('/content/post/type-post', ['data' => $data]); ?>
+        <?= insert('/content/publications/choice', ['data' => $data]); ?>
 
         <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/posts'); ?>
       </main>

@@ -49,7 +49,7 @@ class AddPostController extends Controller
      *
      * @return void
      */
-    public function callIndex(string $sheet)
+    public function callIndex(string $type)
     {
         // Adding from page topic / blog
         // Добавление со странице темы / блога
@@ -65,20 +65,42 @@ class AddPostController extends Controller
         }
 
         render(
-            '/post/add/' . $sheet,
+            '/publications/add/index',
             [
-                'meta'    => Meta::get(__('app.' . $sheet)),
+                'meta'    => Meta::get(__('app.' . $type)),
                 'data'  => [
                     'topic'         => $topic ?? false,
                     'blog'          => $blog ?? false,
                     'showing-blog'  => array_merge(FacetModel::getTeamFacets('blog'), FacetModel::getFacetsUser('blog')),
                     'post_arr'      => PostModel::postRelatedAll(),
-                    'type'          => 'add',
+                    'type'          => $type,
                     'count_poll'    => PollModel::getUserQuestionsPollsCount(),
                 ]
             ]
         );
     }
+
+
+    public function addArticle(): void
+    {
+        $this->callAdd('article');
+    }
+
+    public function addQuestion(): void
+    {
+        $this->callAdd('question');
+    }
+
+    public function addPost(): void
+    {
+        $this->callAdd('post');
+    }
+
+    public function addNote(): void
+    {
+        $this->callAdd('note');
+    }
+
 
     /**
      * Add post
@@ -87,7 +109,7 @@ class AddPostController extends Controller
      * @param string $type
      * @return void
      */
-    public function add(string $type): void
+    public function  callAdd(string $type): void
     {
         if ($post_url = Request::post('post_url')->value()) {
             $site = $this->addUrl($post_url);
@@ -104,7 +126,7 @@ class AddPostController extends Controller
         // Проверим стоп слова и url
         $trigger = (new \App\Controllers\AuditController())->prohibitedContent($data['content']);
 
-        $redirect = url('article.form.add', endPart: false);
+        $redirect = url($type . 'e.form.add', endPart: false);
         Validator::article($data, $redirect);
 
         // Post cover
@@ -132,7 +154,6 @@ class AddPostController extends Controller
                 'post_thumb_img'        => $site['og_img'] ?? '',
                 'post_related'          => $post_related  ?? '',
                 'post_slug'             => $slug,
-                'post_feature'          => config('general', 'qa_site_format') === true ? 1 : 0,
                 'post_type'             => $type,
                 'post_translation'      => $fields['translation'],
                 'post_draft'            => $fields['draft'],
@@ -244,7 +265,7 @@ class AddPostController extends Controller
             return false;
         }
 
-        $post = Availability::post($post_id);
+        $post = Availability::content($post_id);
 
         ActionModel::setRecommend($post_id, $post['post_is_recommend']);
 

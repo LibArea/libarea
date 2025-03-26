@@ -25,11 +25,11 @@ class AuditController extends Controller
 
         if (AuditModel::getSpeedReport($this->container->user()->id()) > config('trust-levels', 'perDay_report')) return 1;
 
-        $post = Availability::post($post_id, 'id');
+        $content = Availability::content($post_id, 'id');
 
         if (!in_array($content_type, ['post', 'comment'])) return false;
 
-        $this->create($content_type, $content_id, '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comment_' .  $content_id, 'report');
+        $this->create($content_type, $content_id, '/post/' . $content['post_id'] . '/' . $content['post_slug'] . '#comment_' .  $content_id, 'report');
 
         return true;
     }

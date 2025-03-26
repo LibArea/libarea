@@ -13,7 +13,7 @@
             <?= $post['post_votes']; ?>
             <div class="text-sm"> <?= Html::numWord($post['post_votes'], __('app.num_up'), false); ?></div>
           </div>
-          <?php $bg = $post['post_feature'] == 0 ? ' bg-green' : ' bg-blue'; ?>
+          <?php $bg = $post['post_type'] == 'article' ? ' bg-green' : ' bg-blue'; ?>
           <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
           <div class="box-answer<?= $bg; ?><?= $bg_url; ?>">
             <a class="block white" href="<?= $post_url; ?>#comment">
@@ -29,7 +29,7 @@
           <?php endif; ?>
           <a class="text-xl" href="<?= $post_url; ?>">
             <?= $post['post_title']; ?>
-            <?= insert('/content/post/post-title', ['post' => $post]); ?>
+            <?= insert('/content/publications/title', ['post' => $post]); ?>
           </a>
           <div class="flex flex-row flex-auto items-center justify-between lowercase">
             <div class="flex-auto">

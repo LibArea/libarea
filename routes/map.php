@@ -54,6 +54,7 @@ use App\Controllers\{
 Route::get('/')->controller(HomeController::class, 'feed')->name('home');
 Route::get('/questions')->controller(HomeController::class, 'questions')->name('main.questions');
 Route::get('/posts')->controller(HomeController::class, 'posts')->name('main.posts');
+Route::get('/articles')->controller(HomeController::class, 'articles')->name('main.articles');
 Route::get('/all')->controller(HomeController::class, 'all')->name('main.all');
 
 Route::get('/blogs')->controller(FacetController::class, 'blogAll')->name('blogs.all');
@@ -116,8 +117,11 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
     Route::get('/favorites/folders/{id}')->controller(UserController::class, 'foldersFavorite')->where(['id' => '[0-9]+'])->name('favorites.folder.id');
 	
 	// Формы добавления контента
-	Route::get('/add/post')->controller(AddPostController::class)->name('post.form.add');
-	Route::get('/add/post/{facet_id}')->controller(AddPostController::class)->where(['facet_id' => '[0-9]+']);
+	Route::get('/add/article/{facet_id?}')->controller(AddPostController::class, 'article')->where(['facet_id' => '[0-9]+'])->name('article.form.add');
+	Route::get('/add/question/{facet_id?}')->controller(AddPostController::class, 'question')->where(['facet_id' => '[0-9]+'])->name('question.form.add');
+	Route::get('/add/post/{facet_id?}')->controller(AddPostController::class, 'post')->where(['facet_id' => '[0-9]+'])->name('post.form.add');
+	Route::get('/add/note/{facet_id?}')->controller(AddPostController::class, 'note')->where(['facet_id' => '[0-9]+'])->name('note.form.add');
+	
 	Route::get('/add/poll')->controller(AddPollController::class)->name('poll.form.add');
 	Route::get('/add/facet/{type}')->controller(AddFacetController::class)->where(['type' => '[a-z]+'])->name('facet.form.add');
 
@@ -181,7 +185,14 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 
 		// Отправка и добавление контента
 		Route::post('/add/folder')->controller(FolderController::class, 'add')->name('add.folder');
-		Route::post('/add/content/{type}')->controller(AddPostController::class, 'add')->where(['type' => '[a-z]+'])->name('add.post');
+		
+		
+		Route::post('/add/content/article')->controller(AddPostController::class, 'addArticle')->name('add.article');
+		Route::post('/add/content/question')->controller(AddPostController::class, 'addQuestion')->name('add.question');
+		Route::post('/add/content/post')->controller(AddPostController::class, 'addArticle')->name('add.post');
+		Route::post('/add/content/note')->controller(AddPostController::class, 'addNote')->name('add.note');
+		
+		
 		Route::post('/add/comment')->controller(AddCommentController::class, 'add')->name('add.comment');
 		Route::post('/add/facet/{type}')->controller(AddFacetController::class, 'add')->where(['type' => '[a-z]+'])->name('add.facet');
 		Route::post('/add/poll')->controller(AddPollController::class, 'add')->name('add.poll');
@@ -246,8 +257,12 @@ Route::get('/blog/{slug}')->controller(BlogFacetController::class, 'feed')->wher
 
 Route::get('/sitemap.xml')->controller(RssController::class);
 Route::get('/rss/all/posts')->controller(RssController::class, 'postsAll');
-Route::get('/turbo-feed/topic/{slug}')->controller(RssController::class, 'turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/rss-feed/topic/{slug}')->controller(RssController::class, 'rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/og-image/{id}')->controller(PostController::class, 'OgImage')->where(['id' => '[0-9-]+'])->name('og.image');
 
+
+// Тестирование
+Route::toGroup()->protect();
+	Route::post('/add/content/test-edit')->controller(PostController::class, 'addEditTest')->name('add.post-edit');
+Route::endGroup();	
 Route::get('/editor/test')->controller(PostController::class, 'editorTest');
