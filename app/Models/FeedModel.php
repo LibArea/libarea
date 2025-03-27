@@ -122,12 +122,12 @@ class FeedModel extends Model
         return DB::run($sql, ['qa' => "%" . $slug . "@%"])->rowCount();
     }
 
-    public static function display(string $sheet)
+    public static function display(string $type)
     {
-        $hidden = self::container()->user()->admin() ? '' : 'AND post_hidden = 0';
+        $hidden = self::container()->user()->admin() ? '' : ' AND post_hidden = 0';
 
-		return match ($sheet) {
-			'facet.feed'		=> 	'WHERE facet_list LIKE :qa AND post_draft = 0' . $hidden,
+		return match ($type) {
+			'facet.feed'		=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 ' . $hidden,
 			'facet.feed.topic'	=> 	'WHERE facet_list LIKE :qa AND facet_list LIKE :topic AND post_draft = 0 AND post_type = \'post\'',
 			'question'			=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'question\' ' . $hidden,
 			'article'			=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'article\' ' . $hidden ,
@@ -135,9 +135,11 @@ class FeedModel extends Model
 			'note'				=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'note\' ' . $hidden ,
 			'recommend'			=>	'WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = \'post\'' . $hidden,
 			'web.feed'			=> 	'WHERE post_url_domain = :qa AND post_draft = 0 ' . $hidden,
-			'profile.posts'		=> 	'WHERE post_user_id = :qa AND post_draft = 0 AND post_type = \'post\'',
+			'profile.posts'		=> 	'WHERE post_user_id = :qa AND post_draft = 0',
 		};
         /** @toDo здесь возможно нужно выбрасывать ошибку вместо этой переменной. */
+		
+	
         return $string;
     }
 }

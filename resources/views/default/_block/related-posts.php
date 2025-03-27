@@ -7,7 +7,7 @@
           <svg class="icon gray-600">
             <use xlink:href="/assets/svg/icons.svg#chevrons-right"></use>
           </svg>
-          <a href="<?= post_slug($related['id'], $related['post_slug']); ?>">
+          <a href="<?= post_slug($related['post_type'], $related['id'], $related['post_slug']); ?>">
             <?= $related['value']; ?>
           </a>
         </li>

@@ -231,6 +231,7 @@ class PublicationModel extends Model
                     post_id as id, 
                     post_title as value,
                     post_slug,
+					post_type,
                     post_content_img
                         FROM posts 
                            WHERE post_id IN(0, " . $post_related . ") AND post_is_deleted = 0 AND post_tl = 0";

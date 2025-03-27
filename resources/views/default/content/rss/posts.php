@@ -11,9 +11,9 @@
         <description>
           <![CDATA[{{ <?= strip_tags($post['post_content']); ?> }}]]>
         </description>
-        <link><?= $url; ?><?= post_slug($post['post_id'], $post['post_slug']); ?></link>
+        <link><?= $url; ?><?= post_slug($post['post_type'], $post['post_id'], $post['post_slug']); ?></link>
         <pubDate><?= date(DATE_RFC822, strtotime($post['post_date'])); ?></pubDate>
-        <guid><?= $url; ?><?= post_slug($post['post_id'], $post['post_slug']); ?></guid>
+        <guid><?= $url; ?><?= post_slug($post['post_type'], $post['post_id'], $post['post_slug']); ?></guid>
       </item>
     <?php endforeach; ?>
   </channel>

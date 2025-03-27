@@ -17,7 +17,7 @@
               <?php endif; ?>
             </h4>
             <div class="mt5">
-              <a class="text-2xl" href="<?= post_slug($data['my_post']['post_id'], $data['my_post']['post_slug']); ?>">
+              <a class="text-2xl" href="<?= post_slug($data['my_post']['post_type'], $data['my_post']['post_id'], $data['my_post']['post_slug']); ?>">
                 <?= $data['my_post']['post_title']; ?>
               </a>
               <div class="text-sm mt5 gray-600 lowercase">

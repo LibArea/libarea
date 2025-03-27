@@ -2,7 +2,7 @@
   <div class="box">
     <h1 class="m0"><?= __('app.domain') . ': ' . $data['site']; ?> <sup class="gray-600"><?= $data['count']; ?></sup></h1>
   </div>
-  <?= insert('/content/publications/post-card', ['data' => $data]); ?>
+  <?= insert('/content/publications/item-card', ['data' => $data]); ?>
   <?= Html::pagination($data['pNum'], $data['pagesCount'], null, url('domain', ['domain' => $data['site']])); ?>
 </main>
 <aside>

@@ -6,7 +6,7 @@
       <?php if ($container->user()->id() == 0 && $n == 6) : ?>
         <?= insert('/_block/no-login-screensaver'); ?>
       <?php endif; ?>
-      <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
+      <?php $post_url = post_slug($post['post_type'], $post['post_id'], $post['post_slug']); ?>
       <li class="list-post zebra article_<?= $post['post_id']; ?>">
         <div class="flex mr15">
           <div class="box-answer block bg-lightgray gray mb-none  mr15">

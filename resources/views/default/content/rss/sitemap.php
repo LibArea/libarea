@@ -15,7 +15,7 @@
   <?php endforeach; ?>
   <?php foreach ($data['posts'] as $post) : ?>
     <url>
-      <loc><?= $url; ?><?= post_slug($post['post_id'], $post['post_slug']); ?></loc>
+      <loc><?= $url; ?><?= post_slug($post['post_type'], $post['post_id'], $post['post_slug']); ?></loc>
       <priority>0.5</priority>
       <changefreq>daily</changefreq>
     </url>

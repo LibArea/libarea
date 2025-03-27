@@ -61,7 +61,7 @@ $blog = $data['blog'][0] ?? null;
 
           <?php else : ?>
 
-            <?php $content = Html::headings($markdown, post_slug($post['post_id'], $post['post_slug'])); ?>
+            <?php $content = Html::headings($markdown, post_slug($post['post_type'], $post['post_id'], $post['post_slug'])); ?>
 
             <div class="mt20">
               <b><?= __('app.headings'); ?></b>

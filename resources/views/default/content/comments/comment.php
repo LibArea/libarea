@@ -12,7 +12,7 @@
         </div>
         <?= Html::votes($comment, 'comment'); ?>
       </div>
-      <a class="block" href="<?= post_slug($comment['post_id'], $comment['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
+      <a class="block" href="<?= post_slug($comment['post_type'], $comment['post_id'], $comment['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
         <?= $comment['post_title']; ?>
       </a>
       <div class="comment-text"><?= markdown($comment['comment_content']); ?></div>

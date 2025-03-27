@@ -38,11 +38,11 @@
         <?php endif; ?>
 
         <?php if ($fav['action_type'] == 'post') : ?>
-          <a href="<?= post_slug($fav['post_id'], $fav['post_slug']); ?>">
+          <a href="<?= post_slug($fav['post_type'], $fav['post_id'], $fav['post_slug']); ?>">
             <?= $fav['post_title']; ?>
           </a>
         <?php else : ?>
-          <a href="<?= post_slug($fav['post']['post_id'], $fav['post']['post_slug']); ?>#comment_<?= $fav['comment_id']; ?>">
+          <a href="<?= post_slug($fav['post_type'], $fav['post']['post_id'], $fav['post']['post_slug']); ?>#comment_<?= $fav['comment_id']; ?>">
             <?= $fav['post']['post_title']; ?>
           </a>
         <?php endif; ?>
