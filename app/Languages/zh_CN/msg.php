@@ -69,6 +69,8 @@ return [
 
     'limit_day'             => '对于 {tl}，你已经达到今日限制“{name}”',
     'content_audit'         => '你的消息已发送待审核',
+    'access_denied'         => '你被拒绝进入',
+	'type_not_allowed'		=> '这种类型的发布是不允许的',
 
     'field_limit'           => '字段数已达到最大值。',
 ];

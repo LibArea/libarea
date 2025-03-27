@@ -170,7 +170,7 @@ return [
     'recover'           => 'Khôi phục',
     'download'          => 'Tải xuống',
     'password_recovery' => 'Khôi phục mật khẩu',
-    'draft_post'        => 'Đây có phải là một bài viết nháp?',
+    'is_draft'        	=> 'Đây có phải là một bản nháp?',
     'drafts'            => 'Bản nháp',
     'cancel'            => 'Hủy bỏ',
     'reply'             => 'Trả lời',
@@ -404,7 +404,7 @@ return [
     'nickname_replay'   => 'Biệt danh này đã có trên trang web',
 
     'english'           => 'Tiếng Anh',
-    'post_page'         => 'Nếu điền vào, Bài đăng sẽ là Trang (trong tài liệu)',
+    'info_page'			=> 'Đối với tài liệu',
     'work_email'        => 'Email công việc (dành cho tài khoản <b>kích hoạt</b>)<br>Working email (for <b>account activation</b>)',
 
     'view_post_tl'      => 'Ai có thể xem bài viết (từ TL nào)',

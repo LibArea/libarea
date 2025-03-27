@@ -7,7 +7,7 @@ namespace App\Controllers\User;
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Models\User\{UserModel, BadgeModel};
-use App\Models\{FacetModel, FeedModel, CommentModel, PostModel, IgnoredModel};
+use App\Models\{FacetModel, FeedModel, CommentModel, PublicationModel, IgnoredModel};
 use Html, Meta;
 
 use App\Traits\Views;
@@ -103,7 +103,7 @@ class ProfileController extends Controller
             'topics'        => FacetModel::getFacetsTopicProfile($profile['id']),
             'blogs'         => FacetModel::getOwnerFacet($profile['id'], 'blog'),
             'badges'        => BadgeModel::getBadgeUserAll($profile['id']),
-            'my_post'       => PostModel::getPost($profile['my_post'], 'id'),
+            'my_post'       => PublicationModel::getPost($profile['my_post'], 'id'),
             'button_pm'     => $this->accessPm($profile['id']),
             'ignored'       => IgnoredModel::getUserIgnored($profile['id']),
         ];

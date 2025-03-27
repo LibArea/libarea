@@ -6,7 +6,7 @@ namespace App\Controllers\Publication;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Models\{SubscriptionModel, ActionModel, PostModel, FacetModel, PollModel, NotificationModel};
+use App\Models\{SubscriptionModel, ActionModel, PublicationModel, FacetModel, PollModel, NotificationModel};
 use App\Content\Integration\{Discord, Telegram};
 use App\Content\Сheck\{Validator, Availability};
 use UploadImage, URLScraper, Meta, Msg;
@@ -36,6 +36,11 @@ class AddPublicationController extends Controller
     public function post(): void
     {
         $this->callIndex('post');
+    }
+
+    public function page(): void
+    {
+        $this->callIndex('page');
     }
 
     public function note(): void
@@ -72,7 +77,7 @@ class AddPublicationController extends Controller
                     'topic'         => $topic ?? false,
                     'blog'          => $blog ?? false,
                     'showing-blog'  => array_merge(FacetModel::getTeamFacets('blog'), FacetModel::getFacetsUser('blog')),
-                    'post_arr'      => PostModel::postRelatedAll(),
+                    'post_arr'      => PublicationModel::postRelatedAll(),
                     'type'          => $type,
                     'count_poll'    => PollModel::getUserQuestionsPollsCount(),
                 ]
@@ -94,6 +99,11 @@ class AddPublicationController extends Controller
     public function addPost(): void
     {
         $this->callAdd('post');
+    }
+
+    public function addPage(): void
+    {
+        $this->callAdd('page');
     }
 
     public function addNote(): void
@@ -137,7 +147,7 @@ class AddPublicationController extends Controller
 
 
 		if ($type != 'post') {
-			if (PostModel::getSlug($slug = $this->getSlug($data['title']))) {
+			if (PublicationModel::getSlug($slug = $this->getSlug($data['title']))) {
 				$slug = $slug . "-";
 			}
 		} else {
@@ -151,7 +161,7 @@ class AddPublicationController extends Controller
             $fields[$field] = (!empty($data[$field]) == 'on') ?  1 : 0;
         }
 
-        $last_id = PostModel::create(
+        $last_id = PublicationModel::create(
             [
                 'post_title'            => $data['title'] ?? '',
                 'post_content'          => $data['content'],
@@ -183,7 +193,7 @@ class AddPublicationController extends Controller
 
         $url_content = post_slug($type, $last_id, $slug);
         if ($type === 'page') {
-            $url_content = url('info.page', ['slug' => $slug]);
+            $url_content = url('admin.facets.all');
         }
 		
         // Add fastes (blogs, topics) to the post 

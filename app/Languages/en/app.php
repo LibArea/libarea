@@ -172,7 +172,7 @@ return [
     'recover'           => 'Reestablish',
     'download'          => 'Download',
     'password_recovery' => 'Password recovery',
-    'draft_post'        => 'Is this a draft post ?',
+    'is_draft'        	=> 'Is this a draft?',
     'drafts'            => 'Drafts',
     'cancel'            => 'Cancel',
     'reply'             => 'Reply',
@@ -426,7 +426,7 @@ return [
     'nickname_replay'       => 'This nickname is already on the site',
 
     'english'               => 'English',
-    'post_page'             => 'If filled out, then the Post will be a Page (in the documentation)',
+    'info_page'         	=> 'For documentation',
     'work_email'            => 'Working email (for <b>account activation</b>)',
 
     'view_post_tl'          => 'Who can view the post (from which TL)',

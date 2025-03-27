@@ -39,6 +39,8 @@
     </span>
   </div>
 <?php endforeach; ?>
+
+<p><a class="btn btn-outline-primary btn-small" href="<?= url('page.form.add');?>">+ <?= __('app.add_page'); ?></a></p>
 </main>
 
 <aside>

@@ -21,6 +21,7 @@ use Modules\Admin\Controllers\{
 use App\Controllers\{
 	Comment\CommentController,
 	Comment\EditCommentController,
+	Publication\AddPublicationController,
 	HomeController,
 };	
 
@@ -46,6 +47,7 @@ Route::toGroup()
 		Route::post('/user/edit/{id}')->module('admin', UsersController::class, 'edit')->where(['id' => '[0-9]+'])->name('admin.user.edit');
 		Route::post('/setting/edit')->module('admin', SettingController::class, 'edit')->name('admin.setting.edit');
 		Route::post('/users/search/go')->module('admin', UsersController::class, 'UserSearch')->where(['type' => '[a-zA-Z0-9]+'])->name('admin.user.search');
+		Route::post('/add/content/page')->controller(AddPublicationController::class, 'addPage')->name('add.page');
 	Route::endGroup();
 
 	Route::get('/users')->module('admin', UsersController::class, 'all')->name('admin.users');
@@ -93,4 +95,6 @@ Route::toGroup()
     // Удаленные: посты в ленте, комментарии
 	Route::get('/deleted')->controller(HomeController::class, 'deleted')->name('main.deleted');
 	Route::get('comments/deleted')->controller(CommentController::class, 'deleted')->name('comments.deleted');
+	
+	Route::get('/add/page')->controller(AddPublicationController::class, 'page')->name('page.form.add');
 Route::endGroup();

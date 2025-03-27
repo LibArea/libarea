@@ -12,7 +12,7 @@
 
 <details class="mt15">
   <summary><?= __('app.other'); ?></summary>
-  <?= insert('/content/publications/add/add-details', ['data' => $data]); ?>	
+  <?= insert('/content/publications/add/add-details', ['data' => $data]); ?>
 </details>
 
 <p><?= Html::sumbit(__('app.create')); ?></p>

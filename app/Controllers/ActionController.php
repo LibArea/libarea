@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Models\{ActionModel, PostModel};
+use App\Models\{ActionModel, PublicationModel};
 
 class ActionController extends Controller
 {
@@ -34,21 +34,16 @@ class ActionController extends Controller
 
         switch ($type) {
             case 'post':
-                $url  = post_slug($info_type['post_id'], $info_type['post_slug']);
-                $action_type = 'post';
+			case 'note':
+			case 'article':
+			case 'question':
+                $url  = post_slug($type, $info_type['post_id'], $info_type['post_slug']);
+                $action_type = $type;
                 break;
             case 'comment':
-                $post = PostModel::getPost($info_type['comment_post_id'], 'id', $this->container->user()->get());
-                $url  = post_slug($info_type['comment_post_id'], $post['post_slug']) . '#comment_' . $info_type['comment_id'];
+                $post = PublicationModel::getPost($info_type['comment_post_id'], 'id', $this->container->user()->get());
+                $url  = post_slug($info_type['post_type'], $info_type['comment_post_id'], $post['post_slug']) . '#comment_' . $info_type['comment_id'];
                 $action_type = 'comment';
-                break;
-            case 'reply':
-                $url  = '/';
-                $action_type = 'reply';
-                break;
-            case 'item':
-                $url  = url('web.deleted');
-                $action_type = 'item';
                 break;
         }
 

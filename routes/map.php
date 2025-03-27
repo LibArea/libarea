@@ -122,13 +122,13 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 	Route::get('/add/question/{facet_id?}')->controller(AddPublicationController::class, 'question')->where(['facet_id' => '[0-9]+'])->name('question.form.add');
 	Route::get('/add/post/{facet_id?}')->controller(AddPublicationController::class, 'post')->where(['facet_id' => '[0-9]+'])->name('post.form.add');
 	Route::get('/add/note/{facet_id?}')->controller(AddPublicationController::class, 'note')->where(['facet_id' => '[0-9]+'])->name('note.form.add');
+	 
 	
 	Route::get('/add/poll')->controller(AddPollController::class)->name('poll.form.add');
 	Route::get('/add/facet/{type}')->controller(AddFacetController::class)->where(['type' => '[a-z]+'])->name('facet.form.add');
 
     // Формы изменение контента
 	Route::get('/edit/publication/{id}')->controller(EditPublicationController::class)->where(['id' => '[0-9]+'])->name('publication.form.edit');
-	
 	
     Route::get('/edit/comment/{id}')->controller(EditCommentController::class)->where(['id' => '[0-9]+'])->name('comment.form.edit'); 
 	Route::get('/edit/poll/{id}')->controller(EditPollController::class)->where(['id' => '[0-9]+'])->name('poll.form.edit'); 
@@ -183,6 +183,7 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 		Route::post('/edit/content/question')->controller(EditPublicationController::class, 'editQuestion')->name('edit.question');
 		Route::post('/edit/content/post')->controller(EditPublicationController::class, 'editPost')->name('edit.post');
 		Route::post('/edit/content/note')->controller(EditPublicationController::class, 'editNote')->name('edit.note');
+		Route::post('/edit/content/page')->controller(EditPublicationController::class, 'editPage')->name('edit.page');
 		
 		Route::post('/edit/comment')->controller(EditCommentController::class, 'edit')->name('edit.comment');
 		Route::post('/edit/facet/{type}')->controller(EditFacetController::class, 'edit')->where(['type' => '[a-z]+'])->name('edit.facet');
@@ -198,7 +199,6 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 		Route::post('/add/content/question')->controller(AddPublicationController::class, 'addQuestion')->name('add.question');
 		Route::post('/add/content/post')->controller(AddPublicationController::class, 'addPost')->name('add.post');
 		Route::post('/add/content/note')->controller(AddPublicationController::class, 'addNote')->name('add.note');
-		
 		
 		Route::post('/add/comment')->controller(AddCommentController::class, 'add')->name('add.comment');
 		Route::post('/add/facet/{type}')->controller(AddFacetController::class, 'add')->where(['type' => '[a-z]+'])->name('add.facet');
@@ -254,7 +254,7 @@ Route::get('/notes/{id}/{slug}')->controller(PublicationController::class, 'note
 
 
 // Страницы info
-Route::get('/{facet_slug}/article/{slug}')->controller(PublicationController::class, 'page')->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('facet.article'); 
+Route::get('/{facet_slug}/article/{slug}')->controller(PublicationController::class, 'page')->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('page'); 
 
 Route::get('/@{login}')->controller(ProfileController::class)->where(['login' => '[A-Za-z0-9-]+'])->name('profile');
 Route::get('/@{login}/posts')->controller(ProfileController::class, 'posts')->where(['login' => '[A-Za-z0-9-]+'])->name('profile.posts');
@@ -264,6 +264,8 @@ Route::get('/topic/{slug}/recommend')->controller(TopicFacetController::class, '
 Route::get('/topic/{slug}/questions')->controller(TopicFacetController::class, 'questions')->where(['slug' => '[a-z0-9-]+'])->name('topic.questions');
 Route::get('/topic/{slug}/top')->controller(TopicFacetController::class, 'top')->where(['slug' => '[a-z0-9-]+'])->name('topic.top');
 Route::get('/topic/{slug}/posts')->controller(TopicFacetController::class, 'posts')->where(['slug' => '[a-z0-9-]+'])->name('topic.posts');
+Route::get('/topic/{slug}/articles')->controller(TopicFacetController::class, 'articles')->where(['slug' => '[a-z0-9-]+'])->name('topic.articles');
+Route::get('/topic/{slug}/notes')->controller(TopicFacetController::class, 'notes')->where(['slug' => '[a-z0-9-]+'])->name('topic.notes');
 Route::get('/topic/{slug}/info')->controller(TopicFacetController::class, 'info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 Route::get('/topic/{slug}/writers')->controller(TopicFacetController::class, 'writers')->where(['slug' => '[a-z0-9-]+'])->name('topic.writers');
 Route::get('/topic/{slug}')->controller(TopicFacetController::class, 'feed')->where(['slug' => '[a-z0-9-]+'])->name('topic');

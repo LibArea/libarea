@@ -170,7 +170,7 @@ return [
     'recover'           => 'Restabili',
     'download'          => 'Descarca',
     'password_recovery' => 'Recuperare parola',
-    'draft_post'        => 'Este o postare nefinalizata',
+    'is_draft'        	=> 'Este un proiect?',
     'drafts'            => 'Ciorne',
     'cancel'            => 'Anulare',
     'reply'             => 'Răspuns',
@@ -404,7 +404,7 @@ return [
     'nickname_replay'   => 'Acest pseudonim este deja pe site',
 
     'english'           => 'Engleză',
-    'post_page'         => 'Dacă este completat, atunci Postarea va fi o pagină (în documentație)',
+    'info_page'         => 'Pentru documentare',
     'work_email'        => 'E-mail (pentru <b>activarea contului</b>)',
 
     'view_post_tl'      => 'Cine poate vizualiza postarea (din care TL)',

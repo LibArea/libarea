@@ -8,7 +8,7 @@ use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Content\Сheck\Availability;
 use App\Models\User\UserModel;
-use App\Models\{FacetModel, PostModel};
+use App\Models\{FacetModel, PublicationModel};
 use UploadImage, Meta, Msg;
 
 use App\Traits\Author;
@@ -45,7 +45,7 @@ class EditFacetController extends Controller
                 'data'  => [
                     'low_matching'      => FacetModel::getLowMatching($facet['facet_id']),
                     'high_matching'     => FacetModel::getHighMatching($facet['facet_id']),
-                    'post_arr'          => PostModel::postRelated($facet['facet_post_related']),
+                    'post_arr'          => PublicationModel::postRelated($facet['facet_post_related']),
                     'high_arr'          => FacetModel::getHighLevelList($facet['facet_id']),
                     'low_arr'           => FacetModel::getLowLevelList($facet['facet_id']),
                     'user'              => UserModel::get($facet['facet_user_id'], 'id'),

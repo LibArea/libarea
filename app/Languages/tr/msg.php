@@ -70,6 +70,7 @@ return [
     'limit_day'             => 'Bugün için sınıra ulaştınız',
     'content_audit'         => 'Mesajınız incelenmek üzere gönderildi',
     'access_denied'         => 'Erişiminiz reddedildi',
+	'type_not_allowed'		=> 'Veri yayın türüne izin verilmiyor',
 
     'field_limit'           => 'Alan sayısı maksimuma ulaştı.',
 ];

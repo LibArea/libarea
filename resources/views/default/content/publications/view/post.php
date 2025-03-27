@@ -1,4 +1,4 @@
-<?php 
+<?php
 $post = $data['post'];
 $blog = $data['blog'][0] ?? null;
 ?>
@@ -23,7 +23,9 @@ $blog = $data['blog'][0] ?? null;
         </div>
       <?php endif; ?>
 
-	  <?= insert('/content/publications/type-publication', ['type' => $post['post_type']]); ?>	
+      <div class="uppercase-box">
+        <?= insert('/content/publications/type-publication', ['type' => $post['post_type']]); ?>
+      </div>
 
       <div class="user-info">
         <a title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
@@ -234,24 +236,28 @@ $blog = $data['blog'][0] ?? null;
   <?php if ($data['recommend'] && $post['post_is_deleted'] != 1) : ?>
     <div class="box sticky top-sm">
       <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
-      <?php foreach ($data['recommend'] as  $rec_post) : ?>
+      <?php foreach ($data['recommend'] as  $rec) : ?>
         <div class="text-sm2">
-          <a class="black" href="<?= post_slug($rec_post['post_id'], $rec_post['post_slug']); ?>">
-            <?= fragment($rec_post['post_title'], 58); ?>
+          <a class="black" href="<?= post_slug($rec['post_type'], $rec['post_id'], $rec['post_slug']); ?>">
+            <?= fragment($rec['post_title'], 58); ?>
           </a>
           <div class="text-sm gray-600 items-center flex gap mb15">
+            <div class="items-center flex gap-sm mt5">
+              <?= insert('/content/publications/type-publication', ['type' => $rec['post_type']]); ?>
+            </div>
+
             <div class="items-center flex gap-sm mt5">
               <svg class="icon">
                 <use xlink:href="/assets/svg/icons.svg#eye"></use>
               </svg>
-              <?= HTML::formatToHuman($rec_post['post_hits_count']); ?>
+              <?= HTML::formatToHuman($rec['post_hits_count']); ?>
             </div>
-            <?php if ($rec_post['post_comments_count'] > 0) : ?>
+            <?php if ($rec['post_comments_count'] > 0) : ?>
               <div class="items-center flex gap-sm mt5">
                 <svg class="icon">
                   <use xlink:href="/assets/svg/icons.svg#comments"></use>
                 </svg>
-                <?= $rec_post['post_comments_count'] ?>
+                <?= $rec['post_comments_count'] ?>
               </div>
             <?php endif; ?>
           </div>

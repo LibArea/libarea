@@ -7,7 +7,7 @@ namespace App\Controllers\Facet;
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Content\Сheck\Availability;
-use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
+use App\Models\{FeedModel, SubscriptionModel, FacetModel, PublicationModel};
 use Html, Meta;
 
 class TopicFacetController extends Controller
@@ -21,7 +21,7 @@ class TopicFacetController extends Controller
 
     public function questions(): void
     {
-        $this->callIndex('questions');
+        $this->callIndex('question');
     }
 
     public function top(): void
@@ -31,7 +31,17 @@ class TopicFacetController extends Controller
 
     public function posts(): void
     {
-        $this->callIndex('posts');
+        $this->callIndex('post');
+    }
+
+    public function articles(): void
+    {
+        $this->callIndex('article');
+    }
+	
+    public function notes(): void
+    {
+        $this->callIndex('note');
     }
 
     public function feed(): void
@@ -43,10 +53,10 @@ class TopicFacetController extends Controller
      * Posts in the topic 
      * Посты по теме
      *
-     * @param [type] $sheet
+     * @param [type] $type
      * @return void
      */
-    public function callIndex($sheet)
+    public function callIndex($type)
     {
         $facet  = $this->presence();
 
@@ -55,20 +65,20 @@ class TopicFacetController extends Controller
             exit();
         }
 
-        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, $sheet, $facet['facet_slug']);
-        $pagesCount = FeedModel::feedCount($sheet, $facet['facet_slug']);
+        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, $type, $facet['facet_slug']);
+        $pagesCount = FeedModel::feedCount($type, $facet['facet_slug']);
 
         render(
             '/facets/topic',
             [
-                'meta'  => Meta::facet($sheet, $facet),
+                'meta'  => Meta::facet($type, $facet),
                 'data'  => array_merge(
                     $this->sidebar(),
                     [
                         'pagesCount'    => ceil($pagesCount / $this->limit),
                         'pNum'          => Html::pageNumber(),
                         'posts'         => $posts,
-                        'sheet'         => $sheet,
+                        'sheet'         => $type,
                         'type'          => 'topic',
                     ]
                 ),
@@ -130,7 +140,7 @@ class TopicFacetController extends Controller
         return [
             'facet'         => $facet,
             'facet_signed'  => SubscriptionModel::getFocus($facet['facet_id'], 'facet'),
-            'related_posts' => PostModel::postRelated($facet['facet_post_related'] ?? null),
+            'related_posts' => PublicationModel::postRelated($facet['facet_post_related'] ?? null),
             'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
             'writers'       => FacetModel::getWriters($facet['facet_id'], 15),
             'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),

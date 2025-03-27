@@ -8,7 +8,7 @@ use Hleb\Static\Request;
 use Hleb\Base\Controller;
 
 use App\Content\Сheck\Availability;
-use App\Models\{PostModel, CommentModel, SubscriptionModel, FeedModel};
+use App\Models\{PublicationModel, CommentModel, SubscriptionModel, FeedModel};
 
 use App\Traits\Views;
 use App\Traits\Poll;
@@ -70,8 +70,8 @@ class PublicationController extends Controller
 
         $content['modified'] = $content['post_date'] != $content['post_modified'] ? true : false;
 
-        $facets = PostModel::getPostTopic($content['post_id'], 'topic');
-        $blog   = PostModel::getPostTopic($content['post_id'], 'blog');
+        $facets = PublicationModel::getPostTopic($content['post_id'], 'topic');
+        $blog   = PublicationModel::getPostTopic($content['post_id'], 'blog');
 
         // Show the draft only to the author
         if ($content['post_draft'] == 1 && $content['post_user_id'] != $this->container->user()->id()) {
@@ -80,11 +80,11 @@ class PublicationController extends Controller
 
         // If the post type is a page, then depending on the conditions we make a redirect
         if ($content['post_type'] == 'page' && $id > 0) {
-            redirect(url('facet.article', ['facet_slug' => 'info', 'slug' => $content['post_slug']]));
+            redirect(url('page', ['facet_slug' => 'info', 'slug' => $content['post_slug']]));
         }
 
         if ($content['post_related']) {
-            $related_posts = PostModel::postRelated($content['post_related']);
+            $related_posts = PublicationModel::postRelated($content['post_related']);
         }
 
         // Sending Last-Modified and handling HTTP_IF_MODIFIED_SINCE
@@ -94,8 +94,7 @@ class PublicationController extends Controller
 
         if ($type === 'page') {
 			
-            $slug_facet = Request::param('facet_slug')->asString();
-            $page  = Availability::facet($slug_facet, 'slug', 'section');
+            $page  = Availability::facet('info', 'slug', 'section');
 
             render(
                 '/publications/view/page',
@@ -106,7 +105,7 @@ class PublicationController extends Controller
                         'type'  => 'info',
                         'page'  => $content,
                         'facet' => [],
-                        'pages' => PostModel::recent($page['facet_id'], $content['post_id'])
+                        'pages' => PublicationModel::morePages($content['post_id'])
                     ]
                 ]
             );
@@ -120,12 +119,12 @@ class PublicationController extends Controller
                     'data'  => [
                         'post'          => $content,
                         'comments'      => BuildTree::index(0, $comments),
-                        'recommend'     => PostModel::postSimilars($content['post_id'], (int)$facets[0]['facet_id'] ?? null),
+                        'recommend'     => PublicationModel::postSimilars($content['post_id'], (int)$facets[0]['facet_id'] ?? null),
                         'related_posts' => $related_posts ?? '',
                         'post_signed'   => SubscriptionModel::getFocus($content['post_id'], 'post'),
                         'facet_signed'  => SubscriptionModel::getFocus($blog[0]['facet_id'] ?? null, 'facet'),
                         'facets'        => $facets,
-                        'united'        => PostModel::getPostMerged($content['post_id']),
+                        'united'        => PublicationModel::getPostMerged($content['post_id']),
                         'blog'          => $blog ?? null,
                         'sorting'       => $sorting ?? null,
                         'sheet'         => 'article',
@@ -186,7 +185,7 @@ class PublicationController extends Controller
             return false;
         }
 
-        return PostModel::setPostProfile($post_id, $this->container->user()->id());
+        return PublicationModel::setPostProfile($post_id, $this->container->user()->id());
     }
 
     /**
@@ -197,7 +196,7 @@ class PublicationController extends Controller
      */
     public function domain()
     {
-        $site = PostModel::availabilityDomain($domain = Request::param('domain')->asString());
+        $site = PublicationModel::availabilityDomain($domain = Request::param('domain')->asString());
         notEmptyOrView404($site);
 
         $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'web.feed', $domain);
@@ -217,7 +216,7 @@ class PublicationController extends Controller
                     'pNum'          => Html::pageNumber(),
                     'posts'         => $posts,
                     'count'         => $pagesCount,
-                    'list'          => PostModel::listDomain($domain),
+                    'list'          => PublicationModel::listDomain($domain),
                     'site'          => $domain,
                     'type'          => 'domain',
                 ]
@@ -234,7 +233,7 @@ class PublicationController extends Controller
      */
     public function last(int $content_id): array|false
     {
-        return PostModel::recent($content_id, false);
+        return PublicationModel::recent($content_id, false);
     }
 
     public function OgImage()

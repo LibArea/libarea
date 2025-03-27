@@ -3,7 +3,7 @@
     <h2 class="lowercase text-2xl">
       <?= Html::numWord($post['post_comments_count'], __('app.num_comment'), true); ?>
     </h2>
- 
+
     <?php
     function internalRender($container, $nodes, $post, $level = 0, $type = 'comment')
     {
@@ -21,44 +21,44 @@
             <div title="<?= __('app.best_answer'); ?>" class="red right text-2xl p5">✓</div>
           <?php endif; ?>
 
-            <ol class="list-none">
-              <li class="comment">
-                <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
-                <div class="comment comment-body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
-                  <div class="comment-text<?php if ($level == 1) : ?> text-sm<?php endif; ?>">
-                    <?= markdown($node['comment_content'], 'text'); ?>
-                  </div>
-                  <div class="comment-footer justify-between">
-                    <div class="flex gap">
-                      <?php if ($type != 'qa') : ?>
-                        <?= Html::votes($node, 'comment'); ?>
-                      <?php endif; ?>
-
-                      <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_comm_qa'))) : ?>
-                        <?php if ($post['post_closed'] == 0 ?? $post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
-                          <a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
-                        <?php endif; ?>
-                      <?php endif; ?>
-					  
-					  <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
-                    </div>
-                    <div class="gray-600 flex gap lowercase mb5">
-                      <a class="gray-600" href="<?= url('profile', ['login' => $node['login']]); ?>">
-                        <span class="nickname<?php if (Html::loginColor($node['created_at'])) : ?> new<?php endif; ?>"><?= $node['login']; ?></span>
-                      </a>
-                      <span class="mb-none"><?= langDate($node['comment_date']); ?></span>
-                      <?php if ($node['comment_published'] == 0 && $container->user()->admin()) : ?>
-                        <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
-                      <?php endif; ?>
-                    </div>
-                  </div>
-                  <?php if ($indent == '0_0') : ?><div class="mb5 br-bottom"></div><?php endif; ?>
-                  <?php if ($level == 1) : ?><div class="br-dotted"></div><?php endif; ?>
-
-                  <div id="el_addentry<?= $node['comment_id']; ?>" class="none"></div>
+          <ol class="list-none">
+            <li class="comment">
+              <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
+              <div class="comment comment-body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
+                <div class="comment-text<?php if ($level == 1) : ?> text-sm<?php endif; ?>">
+                  <?= markdown($node['comment_content'], 'text'); ?>
                 </div>
-              </li>
-            </ol>
+                <div class="comment-footer justify-between">
+                  <div class="flex gap">
+                    <?php if ($type != 'qa') : ?>
+                      <?= Html::votes($node, 'comment'); ?>
+                    <?php endif; ?>
+
+                    <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_comm_qa'))) : ?>
+                      <?php if ($post['post_closed'] == 0 ?? $post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
+                        <a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
+                      <?php endif; ?>
+                    <?php endif; ?>
+
+                    <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
+                  </div>
+                  <div class="gray-600 flex gap lowercase mb5">
+                    <a class="gray-600" href="<?= url('profile', ['login' => $node['login']]); ?>">
+                      <span class="nickname<?php if (Html::loginColor($node['created_at'])) : ?> new<?php endif; ?>"><?= $node['login']; ?></span>
+                    </a>
+                    <span class="mb-none"><?= langDate($node['comment_date']); ?></span>
+                    <?php if ($node['comment_published'] == 0 && $container->user()->admin()) : ?>
+                      <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
+                    <?php endif; ?>
+                  </div>
+                </div>
+                <?php if ($indent == '0_0') : ?><div class="mb5 br-bottom"></div><?php endif; ?>
+                <?php if ($level == 1) : ?><div class="br-dotted"></div><?php endif; ?>
+
+                <div id="el_addentry<?= $node['comment_id']; ?>" class="none"></div>
+              </div>
+            </li>
+          </ol>
         </div>
 
         <?php if (isset($node['children'])) {

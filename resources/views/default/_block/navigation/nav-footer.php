@@ -1,5 +1,5 @@
 <li>
-  <a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => 'information']); ?>">
+  <a href="<?= url('page', ['facet_slug' => 'info', 'slug' => 'information']); ?>">
     <svg class="icon">
       <use xlink:href="/assets/svg/icons.svg#chevrons-right"></use>
     </svg>
@@ -7,7 +7,7 @@
   </a>
 </li>
 <li>
-  <a href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => 'donate']); ?>">
+  <a href="<?= url('page', ['facet_slug' => 'info', 'slug' => 'donate']); ?>">
     <svg class="icon red">
       <use xlink:href="/assets/svg/icons.svg#donate"></use>
     </svg>

@@ -19,21 +19,15 @@
         'id'    => 'main.posts',
         'url'   => url('main.posts'),
         'title' => 'app.posts',
-      ],   [ 
-	  'id'    => 'main.notes',
+      ], [
+        'id'    => 'main.notes',
         'url'   => url('main.notes'),
         'title' => 'app.notes',
-      ],  	  [
+      ], [
         'id'    => 'main.questions',
         'url'   => url('main.questions'),
         'title' => 'app.questions',
-      ],
-      /* [
-      'id'    => 'main.top',
-      'url'   => 'main.top',
-      'title' => 'app.top',
-    ], */
-      [
+      ], [
         'tl'    => 10,
         'id'    => 'main.deleted',
         'url'   => url('main.deleted'),

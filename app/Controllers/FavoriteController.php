@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Models\{FavoriteModel, PostModel, CommentModel};
+use App\Models\{FavoriteModel, PublicationModel, CommentModel};
 
 class FavoriteController extends Controller
 {
@@ -31,7 +31,7 @@ class FavoriteController extends Controller
     {
         switch ($type) {
             case 'post':
-                $content  = PostModel::getPostId($content_id);
+                $content  = PublicationModel::getPostId($content_id);
                 break;
             case 'comment':
                 $content  = CommentModel::getCommentId($content_id);

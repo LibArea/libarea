@@ -1,4 +1,5 @@
 <?php $page = $data['page']; ?>
+
 <main>
   <article<?php if ($page['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>
     <?php if ($page['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
@@ -28,30 +29,25 @@
       </div>
     </div>
     </article>
-	
- <div class="box">
 
-	<div class="flex gap">
-	<h2 class="m0 mb20"><?= __('app.pages'); ?></h2> 
-
-   
+    <div class="box">
+      <div class="flex gap">
+        <h2 class="m0 mb20"><?= __('app.pages'); ?></h2>
         <?php if ($container->user()->admin()) : ?>
-      <a class="text-sm gray-600 lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icon">
-          <use xlink:href="/assets/svg/icons.svg#edit"></use>
-        </svg></a>
-    <?php endif; ?>
-
-	</div>
-	
-    <?php foreach ($data['pages'] as $ind => $row) : ?>
-      <div class="mt5 mb10">
-        <a class="gray" href="<?= url('facet.article', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
-          <svg class="icon">
-            <use xlink:href="/assets/svg/icons.svg#chevrons-right"></use>
-          </svg> <?= $row['post_title']; ?>
-        </a>
+          <a class="text-sm gray-600 lowercase" href="<?= url('admin.facets.type', ['type' => 'section']); ?>"><svg class="icon">
+              <use xlink:href="/assets/svg/icons.svg#edit"></use>
+            </svg></a>
+        <?php endif; ?>
       </div>
-    <?php endforeach; ?>
-  </div>	
+
+      <?php foreach ($data['pages'] as $ind => $row) : ?>
+        <div class="mt5 mb10">
+          <a class="gray" href="<?= url('page', ['facet_slug' => 'info', 'slug' => $row['post_slug']]); ?>">
+            <svg class="icon">
+              <use xlink:href="/assets/svg/icons.svg#chevrons-right"></use>
+            </svg> <?= $row['post_title']; ?>
+          </a>
+        </div>
+      <?php endforeach; ?>
+    </div>
 </main>
- 

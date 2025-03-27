@@ -4,27 +4,15 @@
   <div class="help">6 - 250 <?= __('app.characters'); ?></div>
 </fieldset>
 
-<?php if ($container->user()->admin()) : ?>
-  <fieldset>
-    <label for="post_slug">SLUG (URL)</label>
-    <input minlength="6" maxlength="250" value="<?= $item['post_slug']; ?>" type="text" required name="post_slug">
-    <div class="help">> 6 <?= __('app.characters'); ?></div>
-  </fieldset>
-<?php endif; ?>
+<fieldset>
+  <label for="post_slug">SLUG (URL)</label>
+  <input minlength="6" maxlength="250" value="<?= $item['post_slug']; ?>" type="text" required name="post_slug">
+  <div class="help">> 6 <?= __('app.characters'); ?></div>
+</fieldset>
 
 <?= insert('/_block/form/select/topic', ['data' => $data, 'action' => 'edit']); ?>
 
-<?php if (!empty($data['blog'])) : ?>
-  <?= insert('/_block/form/select/blog', [
-    'data'        => $data,
-    'action'      => 'edit',
-    'title'       => __('app.blogs'),
-  ]); ?>
-<?php endif; ?>
-
-<?php if ($container->user()->admin()) : ?>
-  <?= insert('/_block/form/select/section', ['data' => $data]); ?>
-<?php endif; ?>
+<?= insert('/_block/form/select/section', ['data' => $data]); ?>
 
 <?php if ($item['post_url']) : ?>
   <div class="mb20 2flex">
@@ -45,11 +33,13 @@
 
 <?= insert('/_block/form/editor/toolbar-img', ['height'  => '300px', 'content' => $item['post_content'], 'title' => __('app.post'), 'type' => 'post-telo', 'id' => $item['post_id']]); ?>
 
-
-<details class="mt15">
-  <summary><?= __('app.other'); ?></summary>
-  <?= insert('/content/publications/edit/edit-details', ['data' => $data, 'item' => $item]); ?>
-</details>
+<?php if ($container->access()->limitTl(2)) : ?>
+  <?php if ($item['post_draft'] == 1) : ?>
+    <fieldset>
+      <input type="checkbox" name="post_draft" <?php if ($item['post_draft'] == 1) : ?>checked <?php endif; ?>> <?= __('app.is_draft'); ?>
+    </fieldset>
+  <?php endif; ?>
+<?php endif; ?>
 
 <p>
   <input type="hidden" name="id" value="<?= $item['post_id']; ?>">

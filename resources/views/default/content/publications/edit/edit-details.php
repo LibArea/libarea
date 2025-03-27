@@ -1,23 +1,31 @@
-<?= insert('/_block/form/content-tl', ['data' => $item['post_tl']]); ?>
-
-  <fieldset>
-    <input type="checkbox" name="closed" <?php if ($item['post_closed'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_closed'); ?>
-  </fieldset>
-
-  <fieldset>
-    <input type="checkbox" name="translation" <?php if ($item['post_translation'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_translation'); ?>
-  </fieldset>
-
-  <?php if ($container->user()->admin()) : ?>
+<?php if ($container->access()->limitTl(2)) : ?>
+  <?php if ($item['post_draft'] == 1) : ?>
     <fieldset>
-      <input type="checkbox" name="top" <?php if ($item['post_top'] == 1) : ?>checked <?php endif; ?>> <?= __('app.pin'); ?>
+      <input type="checkbox" name="post_draft" <?php if ($item['post_draft'] == 1) : ?>checked <?php endif; ?>> <?= __('app.is_draft'); ?>
     </fieldset>
   <?php endif; ?>
+<?php endif; ?>
+
+<?= insert('/_block/form/content-tl', ['data' => $item['post_tl']]); ?>
+
+<fieldset>
+  <input type="checkbox" name="closed" <?php if ($item['post_closed'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_closed'); ?>
+</fieldset>
+
+<fieldset>
+  <input type="checkbox" name="translation" <?php if ($item['post_translation'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_translation'); ?>
+</fieldset>
+
+<?php if ($container->user()->admin()) : ?>
+  <fieldset>
+    <input type="checkbox" name="top" <?php if ($item['post_top'] == 1) : ?>checked <?php endif; ?>> <?= __('app.pin'); ?>
+  </fieldset>
+<?php endif; ?>
 
 
 <?php if (config('feed', 'nsfw')) : ?>
   <fieldset>
-      <input type="checkbox" name="nsfw" <?php if ($item['post_nsfw'] == 1) : ?>checked <?php endif; ?>> <?= __('app.nsfw_post'); ?>
+    <input type="checkbox" name="nsfw" <?php if ($item['post_nsfw'] == 1) : ?>checked <?php endif; ?>> <?= __('app.nsfw_post'); ?>
   </fieldset>
 <?php endif; ?>
 
@@ -44,4 +52,4 @@
 
 <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_poll'))) : ?>
   <?= insert('/_block/form/select/poll', ['poll' => $data['poll']]); ?>
-<?php endif; ?> 
+<?php endif; ?>

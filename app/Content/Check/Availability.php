@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Content\Сheck;
 
-use App\Models\{CommentModel, PostModel, FacetModel, PollModel};
+use App\Models\{CommentModel, PublicationModel, FacetModel, PollModel};
 
 class Availability
 {
     public static function content(int|string $element, string $type_element = 'id'): array
     {
-        $content = PostModel::getPost($element, $type_element);
+        $content = PublicationModel::getPost($element, $type_element);
 
         notEmptyOrView404($content);
 

@@ -7,7 +7,7 @@ namespace App\Controllers\User;
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Models\User\UserModel;
-use App\Models\{PostModel, FolderModel};
+use App\Models\{PublicationModel, FolderModel};
 use Meta, Html;
 
 class UserController extends Controller
@@ -73,7 +73,7 @@ class UserController extends Controller
                 $row['comment_post_id'] = $row['post_id'];
             }
 
-            $row['post']    = PostModel::getPost($row['comment_post_id'], 'id');
+            $row['post']    = PublicationModel::getPost($row['comment_post_id'], 'id');
             $result[$ind]   = $row;
         }
 
@@ -173,7 +173,7 @@ class UserController extends Controller
                     'h1'    => __('app.subscribed') . ' ' . $this->container->user()->login(),
                     'sheet' => 'subscribed',
                     'type'  => 'favorites',
-                    'posts' => PostModel::getPostsListUser('subscribed')
+                    'posts' => PublicationModel::getPostsListUser('subscribed')
                 ]
             ]
         );
@@ -195,7 +195,7 @@ class UserController extends Controller
                     'h1'    => __('app.i_read') . ' ' . $this->container->user()->login(),
                     'sheet' => 'read',
                     'type'  => 'favorites',
-                    'posts' => PostModel::getPostsListUser('read')
+                    'posts' => PublicationModel::getPostsListUser('read')
                 ]
             ]
         );

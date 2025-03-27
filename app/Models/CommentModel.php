@@ -7,7 +7,7 @@ namespace App\Models;
 use Hleb\Static\Request;
 use Hleb\Base\Model;
 use Hleb\Static\DB;
-use App\Models\PostModel;
+use App\Models\PublicationModel;
 
 class CommentModel extends Model
 {
@@ -57,7 +57,7 @@ class CommentModel extends Model
 
         // Recalculating the number of responses for the post + 1
         // Пересчитываем количество ответов для поста + 1
-        PostModel::updateCount($post_id, 'comments');
+        PublicationModel::updateCount($post_id, 'comments');
 
         return $sql_last_id['last_id'];
     }

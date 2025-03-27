@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Models\PostModel;
+use App\Models\PublicationModel;
 use App\Models\User\UserModel;
 
 trait Views
@@ -14,10 +14,10 @@ trait Views
         }
 
         if (!isset($_SESSION['pagenumbers'][$post_id])) {
-            PostModel::updateCount($post_id, 'hits');
+            PublicationModel::updateCount($post_id, 'hits');
             $_SESSION['pagenumbers'][$post_id] = $post_id;
             if ($user_id > 0) {
-                PostModel::updateViews($post_id, $user_id);
+                PublicationModel::updateViews($post_id, $user_id);
             }
         }
         return true;

@@ -7,7 +7,7 @@ namespace App\Controllers\Comment;
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Content\Сheck\{Validator, Availability};
-use App\Models\{NotificationModel, ActionModel, CommentModel, PostModel};
+use App\Models\{NotificationModel, ActionModel, CommentModel, PublicationModel};
 use DetectMobile;
 
 class AddCommentController extends Controller
@@ -177,7 +177,7 @@ class AddCommentController extends Controller
 
             // Who is following this question/post
             // Кто подписан на данный вопрос / пост
-            if ($focus_all = PostModel::getFocusUsersPost($post['post_id'])) {
+            if ($focus_all = PublicationModel::getFocusUsersPost($post['post_id'])) {
                 foreach ($focus_all as $focus_user) {
                     if ($focus_user['signed_user_id'] != $this->container->user()->id()) {
                         NotificationModel::send($focus_user['signed_user_id'], NotificationModel::TYPE_AMSWER_POST, $url);

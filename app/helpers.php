@@ -24,6 +24,8 @@ function __(string $key = null, array $params = [])
 
 function post_slug(string $type, int $id, string $slug = '')
 {
+	if ($type == 'page') return;
+	
     if (config('meta', 'slug_post') == false) {
         return url($type . '.id', ['id' => $id]);
     }

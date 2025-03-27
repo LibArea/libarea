@@ -16,12 +16,15 @@ class Сhecks
         $type = basename($path);
 
         // TODO: Изменим поля в DB, чтобы использовать limitContent для messages и invitation: 
-        if (in_array($type, ['post', 'comment', 'item', 'poll'])) {
+        if (in_array($type, ['post', 'article', 'question', 'note', 'page', 'comment', 'poll'])) {
             if (self::limitContent($type) === false) {
                 Msg::add(__('msg.limit_day'), 'error');
                 redirect('/');
             }
-        }
+        } else {
+			Msg::add(__('msg.type_not_allowed'), 'error');
+            redirect('/');
+		}
     }
 
     /**

@@ -13,8 +13,10 @@
     <?php if ($container->access()->auditСontent('post', $post)) continue; ?>
 
     <article>
-      <?= insert('/content/publications/type-publication', ['type' => $post['post_type']]); ?>		
-		
+      <div class="uppercase-box">
+        <?= insert('/content/publications/type-publication', ['type' => $post['post_type']]); ?>
+      </div>
+
       <div class="user-info">
         <a href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], '', 'img-sm mr5', 'max'); ?>

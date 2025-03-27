@@ -75,12 +75,12 @@
     <h3 class="mb5"><?= __('admin.pages'); ?></h3>
     <?php foreach ($data['pages'] as $page) : ?>
       <div class="mb5">
-        <a href="<?= url('facet.article', ['facet_slug' => $data['facets'][0]['facet_slug'], 'slug' => $page['post_slug']]); ?>">
+        <a href="<?= url('page', ['facet_slug' => $data['facets'][0]['facet_slug'], 'slug' => $page['post_slug']]); ?>">
           <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#info"></use>
           </svg> <?= $page['post_title']; ?> <sup class="gray-600">id:<?= $page['post_id']; ?></sup>
         </a>
-        <a class="gray-600 ml10" href="<?= url($page['post_type'] . '.form.edit', ['id' => $page['post_id']]) ?>">
+        <a class="gray-600 ml10" href="<?= url('publication.form.edit', ['id' => $page['post_id']]); ?>">
           <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#edit"></use>
           </svg>

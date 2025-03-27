@@ -8,7 +8,7 @@ use Hleb\Static\Request;
 use Hleb\Base\Controller;
 use App\Content\Сheck\{Validator, Availability};
 use App\Models\User\UserModel;
-use App\Models\{FacetModel, PostModel, PollModel};
+use App\Models\{FacetModel, PublicationModel, PollModel};
 use UploadImage, Meta, Msg;
 
 use App\Traits\Slug;
@@ -35,7 +35,7 @@ class EditPublicationController extends Controller
 
 		$post_related = [];
 		if ($post['post_related']) {
-			$post_related = PostModel::postRelated($post['post_related']);
+			$post_related = PublicationModel::postRelated($post['post_related']);
 		}
 
 		$blog = FacetModel::getFacetsUser('blog');
@@ -51,9 +51,9 @@ class EditPublicationController extends Controller
 					'user'          => UserModel::get($post['post_user_id'], 'id'),
 					'blog'          => $blog,
 					'post_arr'      => $post_related,
-					'topic_arr'     => PostModel::getPostFacet($post['post_id'], 'topic'),
-					'blog_arr'      => PostModel::getPostFacet($post['post_id'], 'blog'),
-					'section_arr'   => PostModel::getPostFacet($post['post_id'], 'section'),
+					'topic_arr'     => PublicationModel::getPostFacet($post['post_id'], 'topic'),
+					'blog_arr'      => PublicationModel::getPostFacet($post['post_id'], 'blog'),
+					'section_arr'   => PublicationModel::getPostFacet($post['post_id'], 'section'),
 					'poll'          => PollModel::getQuestion($post['post_poll']),
 				]
 			]
@@ -113,13 +113,13 @@ class EditPublicationController extends Controller
 			$post_merged_id = Request::post('post_merged_id')->asInt();
 			$post_slug = Request::post('post_slug')->value();
 			if ($post_slug != $post['post_slug']) {
-				if (PostModel::getSlug($slug = $this->getSlug($post_slug))) {
+				if (PublicationModel::getSlug($slug = $this->getSlug($post_slug))) {
 					$slug = $slug . "-";
 				}
 			}
 		}
 
-		PostModel::editPost([
+		PublicationModel::editPost([
 			'post_id' 			=> $data['id'],
 			'post_title' 		=> $title ?? '',
 			'post_slug' 		=> $slug ?? $post['post_slug'],
@@ -200,7 +200,7 @@ class EditPublicationController extends Controller
 			Msg::redirect(__('msg.went_wrong'), 'error');
 		}
 
-		PostModel::setPostImgRemove($post['post_id']);
+		PublicationModel::setPostImgRemove($post['post_id']);
 		UploadImage::coverPostRemove($post['post_content_img']);
 
 		Msg::redirect(__('msg.cover_removed'), 'success', url('publication.form.edit', ['id' => $post['post_id']]));

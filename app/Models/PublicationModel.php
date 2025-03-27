@@ -7,7 +7,7 @@ namespace App\Models;
 use Hleb\Base\Model;
 use Hleb\Static\DB;
 
-class PostModel extends Model
+class PublicationModel extends Model
 {
     /**
      * Creating a post
@@ -162,7 +162,7 @@ class PostModel extends Model
                                     AND post_draft = 0
                                     AND post_tl <= :tl 
                                     AND post_user_id != :user_id
-                                    AND post_type = 'post'
+                                    AND post_type != 'page'
                                     AND relation_facet_id = :facet_id
                                         ORDER BY post_id DESC LIMIT :limit";
 
@@ -450,10 +450,24 @@ class PostModel extends Model
                     post_type
                         FROM facets_posts_relation 
                             LEFT JOIN posts on post_id = relation_post_id
-                                WHERE relation_facet_id = :facet_id AND post_type = 'page'
+                                WHERE relation_facet_id = :facet_id 
                                     $sort
                                         ORDER BY post_id DESC LIMIT 5";
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
+    }
+	
+    public static function morePages(int $id)
+    {
+        $sql = "SELECT 
+                    post_id,
+                    post_slug,
+                    post_title,
+                    post_type
+                        FROM posts
+                            WHERE post_id != :id AND post_type = 'page'
+                                ORDER BY post_id DESC LIMIT 5";
+
+        return DB::run($sql, ['id' => $id])->fetchAll();
     }
 }

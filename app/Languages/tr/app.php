@@ -171,7 +171,7 @@ return [
     'recover'           => 'Yeniden kur',
     'download'          => 'İndir',
     'password_recovery' => 'Şifre kurtarma',
-    'draft_post'        => 'Bu bir arşiv gönderi mi?',
+    'is_draft'        	=> 'Bu taslak mı?',
     'drafts'            => 'Arşivler',
     'cancel'            => 'İptal Et',
     'reply'             => 'Cevapla',
@@ -394,7 +394,7 @@ return [
     'nickname_replay'       => 'Bu kullanıcı adı zaten sitede mevcut',
 
     'english'               => 'İngilizce',
-    'post_page'             => 'Doldurulursa Gönderi bir Sayfa olacaktır (belgelerde)',
+    'info_page'         	=> 'Belgeler için',
     'work_email'            => 'Çalışan e-posta (<b>hesap etkinleştirme</b> için)',
 
     'view_post_tl'          => 'Gönderiyi kimler görebilir (hangi TL\'den)',

@@ -70,6 +70,7 @@ return [
     'limit_day'             => 'Bạn đã đạt giới hạn trong ngày',
     'content_audit'         => 'Tin nhắn của bạn đã được gửi đi chờ xem xét',
     'access_denied'         => 'Bạn bị từ chối truy cập',
+	'type_not_allowed'		=> 'Loại ấn phẩm này không được phép',
     
     'field_limit'           => 'Số trường đã đạt giới hạn tối đa.',
 ];

@@ -33,6 +33,7 @@ class FeedModel extends Model
                     post_slug,
                     post_translation,
                     post_draft,
+					post_type,
                     post_nsfw,
                     post_hidden,
                     post_date,
@@ -126,11 +127,12 @@ class FeedModel extends Model
         $hidden = self::container()->user()->admin() ? '' : 'AND post_hidden = 0';
 
 		return match ($sheet) {
-			'facet.feed'		=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'post\'' . $hidden,
+			'facet.feed'		=> 	'WHERE facet_list LIKE :qa AND post_draft = 0' . $hidden,
 			'facet.feed.topic'	=> 	'WHERE facet_list LIKE :qa AND facet_list LIKE :topic AND post_draft = 0 AND post_type = \'post\'',
-			'questions'			=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'questions\' ' . $hidden,
-			'article'			=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_typee = \'article\' ' . $hidden ,
-			'posts'				=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_typee = \'post\' ' . $hidden ,
+			'question'			=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'question\' ' . $hidden,
+			'article'			=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'article\' ' . $hidden ,
+			'post'				=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'post\' ' . $hidden ,
+			'note'				=> 	'WHERE facet_list LIKE :qa AND post_draft = 0 AND post_type = \'note\' ' . $hidden ,
 			'recommend'			=>	'WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_draft = 0 AND post_type = \'post\'' . $hidden,
 			'web.feed'			=> 	'WHERE post_url_domain = :qa AND post_draft = 0 ' . $hidden,
 			'profile.posts'		=> 	'WHERE post_user_id = :qa AND post_draft = 0 AND post_type = \'post\'',

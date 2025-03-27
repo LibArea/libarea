@@ -40,23 +40,14 @@
 <?php endif; ?>
 
 <?php if ($item['post_type'] == 'post') : ?>
-    <?= insert('/_block/form/cropper/post-foto', ['post' => $item]); ?>
+  <?= insert('/_block/form/cropper/post-foto', ['post' => $item]); ?>
 <?php endif; ?>
 
 <?= insert('/_block/form/editor/toolbar-img', ['height'  => '300px', 'content' => $item['post_content'], 'title' => __('app.post'), 'type' => 'post-telo', 'id' => $item['post_id']]); ?>
 
-<?php if ($container->access()->limitTl(2)) : ?>
-  <?php if ($item['post_draft'] == 1) : ?>
-    <fieldset>
-      <input type="checkbox" name="post_draft" <?php if ($item['post_draft'] == 1) : ?>checked <?php endif; ?>> <?= __('app.draft_post'); ?>
-    </fieldset>
-  <?php endif; ?>
-<?php endif; ?>
-
-
 <details class="mt15">
   <summary><?= __('app.other'); ?></summary>
-  <?= insert('/content/publications/edit/edit-details', ['data' => $data, 'item' => $item]); ?>	
+  <?= insert('/content/publications/edit/edit-details', ['data' => $data, 'item' => $item]); ?>
 </details>
 
 <p>

@@ -170,7 +170,7 @@ return [
     'recover'           => '重建',
     'download'          => '下载',
     'password_recovery' => '找回密码',
-    'draft_post'        => '这是草稿帖吗?',
+    'is_draft'        	=> '这是草稿吗?',
     'drafts'            => '草稿',
     'cancel'            => '取消',
     'reply'             => '回复',
@@ -403,7 +403,7 @@ return [
     'nickname_replay'   => '这个昵称已在网站上使用',
 
     'english'           => '英语',
-    'post_page'         => '如果填写，帖子将是一个页面(在文档中)',
+    'info_page'			=> '有关文件',
     'work_email'        => '工作邮箱(用于<b>帐户激活</b>)',
 
     'view_post_tl'      => '谁可以查看帖子(从哪个TL)',

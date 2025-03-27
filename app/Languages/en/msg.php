@@ -70,6 +70,7 @@ return [
     'limit_day'             => 'You have reached the limit for today',
     'content_audit'         => 'Your message has been sent for review',
     'access_denied'         => 'You are denied access',
+	'type_not_allowed'		=> 'This type of publication is not allowed',
 
     'field_limit'           => 'The number of fields has reached its maximum.',
 ];

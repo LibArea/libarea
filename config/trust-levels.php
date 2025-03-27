@@ -19,13 +19,14 @@ return [
     'tl_add_category'   => 10,
     'tl_add_section'    => 10, // Service pages (служебные страницы)
 
+    'tl_add_page'       => 10, // For documentation (для документации, служебные)
     'tl_add_post'       => 1,
+    'tl_add_article'    => 1,
+    'tl_add_question'   => 1,
+    'tl_add_note'       => 1,
     'tl_add_comment'    => 1,
-
     'tl_add_poll'       => 2,
-
     'tl_add_pm'         => 1, // Private messages (личные сообщения)
-
     'tl_add_draft'      => 2, // Drafts (черновики)
 
     // С какого TL можно комментировать ответы в QA модели

@@ -14,10 +14,10 @@
 
     <article>
       <div class="flex justify-between">
-	  
-	  
         <div class="mb15">
-		  <?= insert('/content/publications/type-publication', ['type' => $post['post_type']]); ?>	
+          <div class="uppercase-box">
+            <?= insert('/content/publications/type-publication', ['type' => $post['post_type']]); ?>
+          </div>
 
           <a class="black" href="<?= $post_url; ?>">
             <h3 class="title"><?= $post['post_title']; ?>
@@ -68,15 +68,15 @@
         <div class="flex gap text-sm flex-row">
           <?= Html::votes($post, 'post'); ?>
 
-         <div class="flex gap-sm">
-          <a class="gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
-            <span class="nickname<?php if (Html::loginColor($post['created_at'])) : ?> new<?php endif; ?>">
-              <?= $post['login']; ?>
-            </span>
-          </a>
+          <div class="flex gap-sm">
+            <a class="gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
+              <span class="nickname<?php if (Html::loginColor($post['created_at'])) : ?> new<?php endif; ?>">
+                <?= $post['login']; ?>
+              </span>
+            </a>
 
-          <div class="gray-600 lowercase"><?= langDate($post['post_date']); ?></div>
-</div>
+            <div class="gray-600 lowercase"><?= langDate($post['post_date']); ?></div>
+          </div>
 
           <?php if ($post['post_comments_count'] != 0) : ?>
             <a class="flex gray-600" href="<?= $post_url; ?>#comment">

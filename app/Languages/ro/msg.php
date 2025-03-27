@@ -70,6 +70,7 @@ return [
     'limit_day'             => 'Ai atins limita pentru azi',
     'content_audit'         => 'Mesajul dvs. a fost trimis spre examinare',
     'access_denied'         => 'Vi se interzice accesul',
+	'type_not_allowed'		=> 'Acest tip de publicare nu este permis',
 
     'field_limit'           => 'Numărul de câmpuri a atins maximul.',
 ];
