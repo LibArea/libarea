@@ -17,16 +17,7 @@
 	  
 	  
         <div class="mb15">
-		
-			<div class="uppercase-box">
-				<?php if ($post['post_type'] === 'question') : ?>
-				  <span class="brown"><?= __('app.question'); ?></span>
-				<?php elseif ($post['post_type'] == 'post') : ?>
-				  <span class="sky"><?= __('app.post'); ?></span>
-				<?php else : ?>
-				  <span class="green"><?= __('app.article'); ?></span>
-				<?php endif; ?>
-			</div>
+		  <?= insert('/content/publications/type-publication', ['type' => $post['post_type']]); ?>	
 
           <a class="black" href="<?= $post_url; ?>">
             <h3 class="title"><?= $post['post_title']; ?>

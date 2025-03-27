@@ -32,7 +32,7 @@
 
           <?php if ($container->user()->active()) : ?>
             <?php if ($container->user()->login() == $post['login']  || $container->user()->admin()) : ?>
-              <a class="gray-600" href="<?= url('post.form.edit', ['id' => $post['post_id']]); ?>">
+              <a class="gray-600" href="<?= url('publication.form.edit', ['id' => $post['post_id']]); ?>">
                 <?= __('app.edit'); ?>
               </a>
             <?php endif; ?>

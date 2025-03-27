@@ -91,7 +91,7 @@ class EditPublicationController extends Controller
 		$blog = FacetModel::getFacetsUser('blog');
 		$this->checkingEditPermissions($post, $blog);
 
-		$redirect = url($post['post_type'] . '.form.edit', ['id' => $data['id']]);
+		$redirect = url('publication.form.edit', ['id' => $data['id']]);
 
 		Validator::publication($data, $type, $redirect);
 
@@ -203,7 +203,7 @@ class EditPublicationController extends Controller
 		PostModel::setPostImgRemove($post['post_id']);
 		UploadImage::coverPostRemove($post['post_content_img']);
 
-		Msg::redirect(__('msg.cover_removed'), 'success', url('post.form.edit', ['id' => $post['post_id']]));
+		Msg::redirect(__('msg.cover_removed'), 'success', url('publication.form.edit', ['id' => $post['post_id']]));
 	}
 
 	public function uploadContentImage()

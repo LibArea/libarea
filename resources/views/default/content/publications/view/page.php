@@ -19,7 +19,7 @@
       <div class="gray-600 italic ml15">
         <?= $page['post_modified']; ?>
         <?php if ($container->access()->author('post', $page) === true) : ?>
-          <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('post.form.edit', ['id' => $page['post_id']]); ?>">
+          <a class="gray-600 ml5" title="<?= __('app.edit'); ?>" href="<?= url('publication.form.edit', ['id' => $page['post_id']]); ?>">
             <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#edit"></use>
             </svg>

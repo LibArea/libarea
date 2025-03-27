@@ -31,6 +31,11 @@ class HomeController extends Controller
         $this->callIndex('article');
     }
 
+    public function notes(): void
+    {
+        $this->callIndex('note');
+    }
+
     public function all(): void
     {
         $this->callIndex('all');

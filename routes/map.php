@@ -55,6 +55,7 @@ Route::get('/')->controller(HomeController::class, 'feed')->name('home');
 Route::get('/questions')->controller(HomeController::class, 'questions')->name('main.questions');
 Route::get('/posts')->controller(HomeController::class, 'posts')->name('main.posts');
 Route::get('/articles')->controller(HomeController::class, 'articles')->name('main.articles');
+Route::get('/notes')->controller(HomeController::class, 'notes')->name('main.notes');
 Route::get('/all')->controller(HomeController::class, 'all')->name('main.all');
 
 Route::get('/blogs')->controller(FacetController::class, 'blogAll')->name('blogs.all');
@@ -126,8 +127,9 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 	Route::get('/add/facet/{type}')->controller(AddFacetController::class)->where(['type' => '[a-z]+'])->name('facet.form.add');
 
     // Формы изменение контента
-	Route::get('/edit/post/{id}')->controller(EditPublicationController::class)->where(['id' => '[0-9]+'])->name('post.form.edit');
-	Route::get('/edit/page/{id}')->controller(EditPublicationController::class)->where(['id' => '[0-9]+'])->name('page.form.edit');
+	Route::get('/edit/publication/{id}')->controller(EditPublicationController::class)->where(['id' => '[0-9]+'])->name('publication.form.edit');
+	
+	
     Route::get('/edit/comment/{id}')->controller(EditCommentController::class)->where(['id' => '[0-9]+'])->name('comment.form.edit'); 
 	Route::get('/edit/poll/{id}')->controller(EditPollController::class)->where(['id' => '[0-9]+'])->name('poll.form.edit'); 
 	Route::get('/edit/facet/{type}/{id}')->controller(EditFacetController::class)->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('facet.form.edit'); 
@@ -181,7 +183,6 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 		Route::post('/edit/content/question')->controller(EditPublicationController::class, 'editQuestion')->name('edit.question');
 		Route::post('/edit/content/post')->controller(EditPublicationController::class, 'editPost')->name('edit.post');
 		Route::post('/edit/content/note')->controller(EditPublicationController::class, 'editNote')->name('edit.note');
-		
 		
 		Route::post('/edit/comment')->controller(EditCommentController::class, 'edit')->name('edit.comment');
 		Route::post('/edit/facet/{type}')->controller(EditFacetController::class, 'edit')->where(['type' => '[a-z]+'])->name('edit.facet');
@@ -247,6 +248,10 @@ Route::get('/question/{id}/{slug}')->controller(PublicationController::class, 'q
 
 Route::get('/posts/{id}')->controller(PublicationController::class, 'post')->where(['id' => '[0-9]+'])->name('post.id');
 Route::get('/posts/{id}/{slug}')->controller(PublicationController::class, 'post')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
+
+Route::get('/notes/{id}')->controller(PublicationController::class, 'note')->where(['id' => '[0-9]+'])->name('note.id');
+Route::get('/notes/{id}/{slug}')->controller(PublicationController::class, 'note')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('note');
+
 
 // Страницы info
 Route::get('/{facet_slug}/article/{slug}')->controller(PublicationController::class, 'page')->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('facet.article'); 

@@ -23,6 +23,8 @@ $blog = $data['blog'][0] ?? null;
         </div>
       <?php endif; ?>
 
+	  <?= insert('/content/publications/type-publication', ['type' => $post['post_type']]); ?>	
+
       <div class="user-info">
         <a title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
           <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'small'); ?>

@@ -224,6 +224,21 @@ return [
     'add_blog'          => 'Add blog',
     'add_category'      => 'Add Category',
     'add_poll'          => 'Add Poll',
+	
+	// New
+	'article'			=> 'Статья',
+	'articles'			=> 'Статьи',
+	'note'				=> 'Заметка',
+	'notes'				=> 'Заметки',
+	'add_article'		=> 'Написать статью',
+	'add_post' 			=> 'Написать пост',
+	'add_question'		=> 'Задать вопрос',
+	'add_note'	 		=> 'Заметка через URL',
+	'edit_article' 		=> 'Изменить статью',
+	'edit_note'			=> 'Изменить заметку',
+	'edit_question'		=> 'Изменить вопрос',
+	
+	
     'add_comment'		=> 'Leave a comment',
     'edit_poll'         => 'Edit Poll',
     'edit_category'     => 'Change Category',

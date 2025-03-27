@@ -23,7 +23,7 @@
 
     <?php if ($container->access()->postAuthor($post, $blog['facet_user_id'] ?? 0) == true || $post['post_draft'] == true) : ?>
       <li>
-        <a class="lowercase" href="<?= url('post.form.edit', ['id' => $post['post_id']]); ?>">
+        <a class="lowercase" href="<?= url('publication.form.edit', ['id' => $post['post_id']]); ?>">
           &#183; <?= __('app.edit'); ?>
         </a>
       </li>

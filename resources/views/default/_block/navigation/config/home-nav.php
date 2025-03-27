@@ -19,7 +19,11 @@
         'id'    => 'main.posts',
         'url'   => url('main.posts'),
         'title' => 'app.posts',
-      ],  [
+      ],   [ 
+	  'id'    => 'main.notes',
+        'url'   => url('main.notes'),
+        'title' => 'app.notes',
+      ],  	  [
         'id'    => 'main.questions',
         'url'   => url('main.questions'),
         'title' => 'app.questions',
