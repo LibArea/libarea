@@ -109,7 +109,7 @@ class SendEmail
                 $mail->send();
                 return true;
             } catch (Exception $e) {
-                throw AutorizationException::Smtp("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+                return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
         } else {
             $mail = new \Phphleb\Muller\StandardMail(false);

@@ -10,9 +10,10 @@ use Hleb\Static\Request;
 
 use App\Models\User\SettingModel;
 use Modules\Admin\Models\{UserModel, BanUserModel, BadgeModel, SearchModel};
-use App\Validate\Validator;
 
 use Meta, Html, Msg;
+
+use Respect\Validation\Validator as v;
 
 class UsersController extends Module
 {
@@ -156,10 +157,14 @@ class UsersController extends Module
 
         $redirect = url('admin.user.edit.form', ['id' => $user['id']]);
 
-        Validator::length($data['login'], 3, 15, 'login', $redirect);
+        if (v::stringType()->length(3, 15)->validate($data['login']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.login') . '»']), 'error', $redirect);
+        }
 
         if ($data['email']) {
-            Validator::email(Request::post('email')->value(), $redirect);
+			if (v::email()->isValid($data['email']) === false) {
+                Msg::redirect(__('msg.email_correctness'), 'error', $redirect);
+            }
         }
 
         SettingModel::edit(

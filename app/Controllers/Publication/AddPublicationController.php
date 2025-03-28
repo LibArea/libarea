@@ -127,11 +127,6 @@ class AddPublicationController extends Controller
 
         $data = Request::getParsedBody();
 
-        if ($type === 'page') {
-            $count  = FacetModel::countFacetsUser($this->container->user()->id(), 'blog');
-            notEmptyOrView404($count);
-        }
-
         // Let's check the stop words, url
         // Проверим стоп слова и url
         $trigger = (new \App\Controllers\AuditController())->prohibitedContent($data['content']);

@@ -6,16 +6,17 @@ namespace App\Bootstrap\Services\Auth;
 
 use Hleb\Static\Request;
 use App\Models\Auth\AuthModel;
-use App\Validate\Validator;
 use App\Content\Integration\Google;
 use App\Bootstrap\Services\Auth\RegType;
 use SendEmail, Html, Msg;
+
+use Respect\Validation\Validator as v;
 
 class Recover
 {
     public function index()
     {
-        $email      = Request::post('email');
+        $email      = Request::post('email')->value();
         $redirect   = url('recover');
 
         if (config('integration', 'captcha')) {
@@ -24,7 +25,9 @@ class Recover
             }
         }
 
-        Validator::email($email = Request::post('email')->value(), $redirect);
+        if (v::email()->isValid($email) === false) {
+            Msg::redirect(__('msg.email_correctness'), 'error', $redirect);
+        }
 
         $uInfo = AuthModel::getUser($email, 'email');
 

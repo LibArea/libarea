@@ -93,7 +93,7 @@ class PublicationController extends Controller
         $comments = CommentModel::getCommentsPost($content['post_id'], $content['post_type'], $sorting);
 
         if ($type === 'page') {
-			
+
             $page  = Availability::facet('info', 'slug', 'section');
 
             render(
@@ -109,7 +109,6 @@ class PublicationController extends Controller
                     ]
                 ]
             );
-
         } else {
 
             render(
@@ -134,7 +133,6 @@ class PublicationController extends Controller
                     ]
                 ]
             );
-
         }
     }
 
@@ -241,7 +239,7 @@ class PublicationController extends Controller
         $id = Request::param('id')->value();
         $post = Availability::content($id);
 
-        MetaImage::get($post['post_title'], $post['login'], Img::PATH['avatars'] .  $post['avatar'],  Meta::postImage($post));
+        MetaImage::get($post['post_title'], $post['login'], Img::PATH['avatars'] .  $post['avatar'],  Meta::publicationImage($post));
     }
 
     public function editorTest()

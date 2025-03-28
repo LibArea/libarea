@@ -80,11 +80,21 @@ class EditPublicationController extends Controller
         $this->callEdit('note');
     }
 
+    public function editPage(): void
+    {
+        $this->callEdit('page');
+    }
 
 	public function callEdit(string $type): void
 	{
 		$data = Request::getParsedBody();
 		$post = Availability::content($data['id']);
+
+        if ($type === 'page') {
+			if (!$this->container->user()->admin()) {
+				redirect('/');
+			}
+        }
 
 		$post_draft = $data['post_draft'] ?? false === 'on' ? 1 : 0;
 
@@ -121,7 +131,7 @@ class EditPublicationController extends Controller
 
 		PublicationModel::editPost([
 			'post_id' 			=> $data['id'],
-			'post_title' 		=> $title ?? '',
+			'post_title' 		=> $data['title'] ?? '',
 			'post_slug' 		=> $slug ?? $post['post_slug'],
 			'post_type' 		=> $new_type,
 			'post_translation'	=> Request::post('translation')->value() == 'on' ? 1 : 0,

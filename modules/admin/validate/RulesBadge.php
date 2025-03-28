@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Validate;
 
-use App\Validate\Validator;
+use Respect\Validation\Validator as v;
 
 class RulesBadge extends Validator
 {
@@ -12,9 +12,17 @@ class RulesBadge extends Validator
     {
         $redirect = url('admin.badges');
 
-        self::Length($data['badge_title'], 4, 25, 'msg.title', $redirect);
-        self::Length($data['badge_description'], 12, 250, 'msg.description', $redirect);
-        self::Length($icon, 12, 250, 'msg.icon', $redirect);
+        if (v::stringType()->length(4, 25)->validate($data['badge_title']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.title') . '»']), 'error', $redirect);
+        }
+		
+        if (v::stringType()->length(12, 250)->validate($data['badge_description']) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.description') . '»']), 'error', $redirect);
+        }
+		
+        if (v::stringType()->length(12, 250)->validate($icon) === false) {
+            Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.icon') . '»']), 'error', $redirect);
+        }
 
         return true;
     }

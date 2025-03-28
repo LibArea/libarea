@@ -181,7 +181,7 @@ class EditFacetController extends Controller
                 'meta'  => Meta::get(__('app.edit') . ' | ' . $facet['facet_title']),
                 'data'  => [
                     'facet' => $facet,
-                    'pages' => (new \App\Controllers\Post\PostController())->last($facet['facet_id']),
+                    'pages' => (new \App\Controllers\Publication\PublicationController())->last($facet['facet_id']),
                     'sheet' => $facet['facet_type'] . 's',
                     'type'  => 'pages',
                 ]

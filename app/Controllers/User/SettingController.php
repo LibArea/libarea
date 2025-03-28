@@ -12,8 +12,6 @@ use App\Models\{IgnoredModel, ActionModel};
 use App\Models\Auth\AuthModel;
 use UploadImage, Meta, Img, Html, SendEmail, Msg;
 
-use App\Validate\RulesUserSetting;
-
 use App\Content\Сheck\Validator;
 
 class SettingController extends Controller
@@ -164,7 +162,7 @@ class SettingController extends Controller
     {
         $data = Request::allPost();
 
-        RValidator::security($data, $this->container->user()->email());
+        Validator::security($data, $this->container->user()->email());
 
         $newpass = password_hash($data['password2'], PASSWORD_BCRYPT);
 
