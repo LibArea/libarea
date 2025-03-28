@@ -15,6 +15,7 @@ use App\Traits\Slug;
 use App\Traits\Poll;
 use App\Traits\Author;
 use App\Traits\Related;
+use App\Traits\AddFacetsContent;
 
 class EditPublicationController extends Controller
 {
@@ -22,6 +23,7 @@ class EditPublicationController extends Controller
 	use Poll;
 	use Author;
 	use Related;
+	use AddFacetsContent;
 
 	/**
 	 * Post edit form
@@ -112,6 +114,10 @@ class EditPublicationController extends Controller
 		if (!empty($data['images'])) {
 			$post_img = UploadImage::coverPost($data['images'], $post, $redirect);
 		}
+
+		// Add fastes (blogs, topics) to the content
+		$fields = Request::allPost() ?? [];
+		$this->addFacets($fields, (int)$data['id'], $redirect);
 
 		$post_related = $this->relatedPost();
 

@@ -880,21 +880,6 @@ CREATE TABLE `votes_post` (
 INSERT INTO `votes_post` (`votes_post_id`, `votes_post_item_id`, `votes_post_points`, `votes_post_ip`, `votes_post_user_id`, `votes_post_date`) VALUES
 (1, 2, 1, '127.0.0.1', 1, '2021-08-16 01:29:32');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `votes_reply`
---
-
-CREATE TABLE `votes_reply` (
-  `votes_reply_id` int(11) NOT NULL,
-  `votes_reply_item_id` int(11) NOT NULL,
-  `votes_reply_points` int(11) NOT NULL,
-  `votes_reply_ip` varchar(45) NOT NULL,
-  `votes_reply_user_id` int(11) NOT NULL DEFAULT 1,
-  `votes_reply_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Индексы сохранённых таблиц
 --
@@ -1218,15 +1203,6 @@ ALTER TABLE `votes_post`
   ADD KEY `votes_post_user_id` (`votes_post_user_id`);
 
 --
--- Индексы таблицы `votes_reply`
---
-ALTER TABLE `votes_reply`
-  ADD PRIMARY KEY (`votes_reply_id`),
-  ADD KEY `votes_reply_item_id` (`votes_reply_item_id`,`votes_reply_user_id`) USING BTREE,
-  ADD KEY `votes_reply_user_id` (`votes_reply_user_id`) USING BTREE,
-  ADD KEY `votes_reply_ip` (`votes_reply_item_id`,`votes_reply_ip`) USING BTREE;
-
---
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -1451,9 +1427,3 @@ ALTER TABLE `votes_comment`
 --
 ALTER TABLE `votes_post`
   MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT для таблицы `votes_reply`
---
-ALTER TABLE `votes_reply`
-  MODIFY `votes_reply_id` int(11) NOT NULL AUTO_INCREMENT;

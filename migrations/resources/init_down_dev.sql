@@ -40,4 +40,3 @@ DROP TABLE `users_preferences`;
 DROP TABLE `users_setting`;
 DROP TABLE `votes_comment`;
 DROP TABLE `votes_post`;
-DROP TABLE `votes_reply`;

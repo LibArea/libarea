@@ -111,8 +111,6 @@ class PublicationController extends Controller
             );
         } else {
 
- 
-
             render(
                 '/publications/view/content',
                 [

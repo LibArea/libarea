@@ -98,6 +98,10 @@ class Meta
             ];
         }
 
+		if ($content['post_type'] == 'post') {
+			$content['post_title'] = fragment($content['post_content'], 80);
+		}
+
         $description  = (fragment($content['post_content'], 250) == '') ? strip_tags($content['post_title']) : fragment($content['post_content'], 250);
 
         return self::get(htmlEncode(strip_tags($content['post_title'])), htmlEncode($description), $meta);

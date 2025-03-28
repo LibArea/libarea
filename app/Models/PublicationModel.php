@@ -152,6 +152,7 @@ class PublicationModel extends Model
                     post_id,
                     post_title,
                     post_slug,
+					post_content,
                     post_comments_count,
 					post_hits_count,
                     post_type

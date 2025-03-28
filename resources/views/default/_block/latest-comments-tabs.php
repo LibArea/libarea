@@ -22,7 +22,13 @@
             <svg class="icon gray-600">
               <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
             </svg>
-            <a href="<?= post_slug($comment['post_type'], $comment['post_id'], $comment['post_slug']); ?>" class="black"> <?= fragment($comment['post_title'], 38); ?></a>
+            <a href="<?= post_slug($comment['post_type'], $comment['post_id'], $comment['post_slug']); ?>" class="black"> 
+				<?php if ($comment['post_type'] == 'post') : ?>
+				  <?= fragment($comment['comment_content'], 38); ?>
+				<?php else : ?>
+				  <?= fragment($comment['post_title'], 38); ?>
+				<?php endif; ?>
+			</a>	
           </div>
         </li>
       <?php endforeach; ?>

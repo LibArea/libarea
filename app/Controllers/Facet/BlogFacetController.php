@@ -56,7 +56,7 @@ class BlogFacetController extends Controller
             exit();
         }
 
-        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, $sheet, $facet['facet_slug']);
+        $contents	= FeedModel::feed(Html::pageNumber(), $this->limit, $sheet, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($sheet, $facet['facet_slug']);
 
         render(
@@ -69,7 +69,7 @@ class BlogFacetController extends Controller
                     'sheet'         => $sheet,
                     'type'          => 'user.blog',
                     'facet'         => $facet,
-                    'posts'         => $posts,
+                    'contents'		=> $contents,
                     'users_team'    => FacetModel::getUsersTeam($facet['facet_id']),
                     'user'          => UserModel::get($facet['facet_user_id'], 'id'),
                     'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 1, 5),

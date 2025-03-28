@@ -14,12 +14,19 @@ if ($blog['facet_is_deleted'] == 0) : ?>
                 'url'   => url('blog', ['slug' => $blog['facet_slug']]),
                 'title' => 'app.feed',
               ], [
-
+                'id'    => 'main.all',
+                'url'   => url('blog.articles', ['slug' => $blog['facet_slug']]),
+                'title' => 'app.articles',
+              ], [
                 'id'    => 'main.all',
                 'url'   => url('blog.posts', ['slug' => $blog['facet_slug']]),
                 'title' => 'app.posts',
               ], [
 
+                'id'    => 'main.all',
+                'url'   => url('blog.notes', ['slug' => $blog['facet_slug']]),
+                'title' => 'app.notes',
+              ], [
                 'id'    => 'main.all',
                 'url'   => url('blog.questions', ['slug' => $blog['facet_slug']]),
                 'title' => 'app.questions',

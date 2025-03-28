@@ -193,13 +193,15 @@ $blog = $data['blog'][0] ?? null;
 
     <?php if (empty($is_comments)) : ?>
       <div id="comment"></div>
-      <?php if ($item['post_draft'] == 0) :
-        $format = ($item['post_type'] == 'article') ? 'discussion' : 'qa';
-        insert('/content/publications/format-' . $format, ['data' => $data, 'item' => $item]);
-      else :
-        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);
-      endif; ?>
-
+	      <?php if ($item['post_draft'] == 0) :
+			  if ($item['post_type'] == 'question') :
+				insert('/content/publications/format-qa', ['data' => $data, 'item' => $item]);
+			  else :
+				insert('/content/publications/format-discussion', ['data' => $data, 'item' => $item]);
+			  endif;
+			else :
+			  echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);
+			endif; ?>
     <?php else : ?>
       <?php insert('/_block/no-content', ['type' => 'small', 'text' => __('app.topic_comments_disabled'), 'icon' => 'lock']); ?>
     <?php endif; ?>
@@ -239,7 +241,11 @@ $blog = $data['blog'][0] ?? null;
       <?php foreach ($data['recommend'] as  $rec) : ?>
         <div class="text-sm2">
           <a class="black" href="<?= post_slug($rec['post_type'], $rec['post_id'], $rec['post_slug']); ?>">
-            <?= fragment($rec['post_title'], 58); ?>
+		    <?php if ($rec['post_type'] == 'post') : ?>
+			  <?= fragment($rec['post_content'], 58); ?>
+		    <?php else : ?>
+              <?= fragment($rec['post_title'], 58); ?>
+			<?php endif; ?>
           </a>
           <div class="text-sm gray-600 items-center flex gap mb15">
             <div class="items-center flex gap-sm mt5">

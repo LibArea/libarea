@@ -271,6 +271,8 @@ Route::get('/topic/{slug}/writers')->controller(TopicFacetController::class, 'wr
 Route::get('/topic/{slug}')->controller(TopicFacetController::class, 'feed')->where(['slug' => '[a-z0-9-]+'])->name('topic');
 
 Route::get('/blog/{slug}/questions')->controller(BlogFacetController::class, 'questions')->where(['slug' => '[a-z0-9-]+'])->name('blog.questions');
+Route::get('/blog/{slug}/articles')->controller(BlogFacetController::class, 'articles')->where(['slug' => '[a-z0-9-]+'])->name('blog.articles');
+Route::get('/blog/{slug}/notes')->controller(BlogFacetController::class, 'notes')->where(['slug' => '[a-z0-9-]+'])->name('blog.notes');
 Route::get('/blog/{slug}/posts')->controller(BlogFacetController::class, 'posts')->where(['slug' => '[a-z0-9-]+'])->name('blog.posts');
 Route::get('/blog/{slug}/read')->controller(ReadController::class)->where(['slug' => '[a-z0-9-]+'])->name('blog.read');
 Route::get('/blog/{slug}')->controller(BlogFacetController::class, 'feed')->where(['slug' => '[a-z0-9-]+'])->name('blog');

@@ -16,12 +16,14 @@ use Utopia\Domains\Domain;
 use App\Traits\Poll;
 use App\Traits\Slug;
 use App\Traits\Related;
+use App\Traits\AddFacetsContent;
 
 class AddPublicationController extends Controller
 {
     use Poll;
     use Slug;
     use Related;
+	use AddFacetsContent;
 
     public function article(): void
     {
@@ -191,8 +193,8 @@ class AddPublicationController extends Controller
             $url_content = url('admin.facets.all');
         }
 		
-        // Add fastes (blogs, topics) to the post 
-        $type = (new \App\Controllers\Publication\EditPublicationController())::addFacetsPost($data, $last_id, $url_content);
+        // Add fastes (blogs, topics) to the content
+		$this->addFacets($data, $last_id, $url_content);
 
         // Contact via @
         // Обращение через @
