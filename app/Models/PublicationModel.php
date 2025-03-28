@@ -374,7 +374,7 @@ class PublicationModel extends Model
         return DB::run($sql, ['user_id' => self::container()->user()->id()])->fetchAll();
     }
 
-    public static function getPostsListUser(string $type)
+    public static function getContentListUser(string $type)
     {
         $user_id = self::container()->user()->id();
 
@@ -395,6 +395,7 @@ class PublicationModel extends Model
 					post_id,
 					post_title,
 					post_slug,
+					post_type,
 					post_translation,
 					post_draft,
 					post_date,
@@ -433,7 +434,7 @@ class PublicationModel extends Model
 
 								INNER JOIN users u ON u.id = post_user_id
 								LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $user_id
-								LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $user_id AND fav.action_type = 'post'
+								LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = $user_id 
 									WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0 AND post_is_deleted = 0 ORDER BY post_id DESC LIMIT 50";
 
         return DB::run($sql)->fetchAll();

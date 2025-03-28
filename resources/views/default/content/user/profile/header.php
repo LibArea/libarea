@@ -78,7 +78,7 @@ endif;
               <a class="focus-user sky" href="<?= url('profile.posts', ['login' => $profile['login']]); ?>">
                 <?= Html::formatToHuman($data['counts']['count_posts']); ?>
               </a>
-              <div class="uppercase mt5 text-sm gray-600"><?= __('app.posts'); ?></div>
+              <div class="uppercase mt5 text-sm gray-600"><?= __('app.publications'); ?></div>
             </div>
           <?php endif; ?>
 
@@ -106,27 +106,27 @@ endif;
     <?php endif; ?>
   </div>
 
-    <div class="gray-600 mt5">
-      <svg class="icon">
-        <use xlink:href="/assets/svg/icons.svg#calendar"></use>
-      </svg>
-      <span class="middle lowercase text-sm">
-        <?= langDate($profile['created_at']); ?>
-      </span>
-    </div>
+  <div class="gray-600 mt5">
+    <svg class="icon">
+      <use xlink:href="/assets/svg/icons.svg#calendar"></use>
+    </svg>
+    <span class="middle lowercase text-sm">
+      <?= langDate($profile['created_at']); ?>
+    </span>
+  </div>
 
-    <?php foreach (config('profile', 'sidebar') as $block) : ?>
-      <?php if ($profile[$block['title']]) : ?>
-        <div class="mt5">
-          <span class="gray-600"><?= __($block['lang']); ?>:</span>
-          <?php if ($block['url']) : ?>
-            <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
-              <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-            </a>
-          <?php else : ?>
+  <?php foreach (config('profile', 'sidebar') as $block) : ?>
+    <?php if ($profile[$block['title']]) : ?>
+      <div class="mt5">
+        <span class="gray-600"><?= __($block['lang']); ?>:</span>
+        <?php if ($block['url']) : ?>
+          <a href="<?php if ($block['addition']) : ?><?= $block['addition']; ?><?php endif; ?><?= $profile[$block['url']]; ?>" rel="noopener nofollow ugc">
             <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
-          <?php endif; ?>
-        </div>
-      <?php endif; ?>
-    <?php endforeach; ?>
+          </a>
+        <?php else : ?>
+          <span class="mr5 ml5"><?= $profile[$block['title']]; ?></span>
+        <?php endif; ?>
+      </div>
+    <?php endif; ?>
+  <?php endforeach; ?>
 </div>

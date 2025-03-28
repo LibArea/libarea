@@ -1,7 +1,7 @@
 <main>
   <?= insert('/content/user/favorite/nav', ['data' => $data]); ?>
   <div class="mt10">
-    <?= insert('/content/publications/post-classic', ['data' => $data]); ?>
+    <?= insert('/content/publications/item-classic', ['data' => $data]); ?>
   </div>
 </main>
 <aside>

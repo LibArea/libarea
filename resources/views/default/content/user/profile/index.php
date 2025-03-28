@@ -38,7 +38,7 @@
 
         <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/posts'); ?>
       </main>
-	  <aside>
+      <aside>
         <?= insert('/content/user/profile/sidebar', ['data' => $data]); ?>
       </aside>
     </div>

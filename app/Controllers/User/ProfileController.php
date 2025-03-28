@@ -32,7 +32,7 @@ class ProfileController extends Controller
             $profile['about'] = __('app.riddle') . '...';
         }
 
-        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
+        $contents = FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
 
         render(
@@ -42,7 +42,7 @@ class ProfileController extends Controller
                 'data'  => array_merge(
                     $this->sidebar($pagesCount, $profile),
                     [
-                        'posts' => $posts,
+                        'contents' => $contents,
                         'participation' => FacetModel::participation($profile['id'])
                     ]
                 ),
@@ -55,18 +55,18 @@ class ProfileController extends Controller
      *
      * @return void
      */
-    public function posts()
+    public function contents()
     {
-        $profile    = $this->profile();
+        $profile	= $this->profile();
 
-        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
+        $contents	= FeedModel::feed(Html::pageNumber(), $this->limit, 'profile.posts', $profile['id']);
         $pagesCount = FeedModel::feedCount('profile.posts', $profile['id']);
 
         render(
-            '/user/profile/posts',
+            '/user/profile/contents',
             [
                 'meta'  => Meta::profile('profile_posts', $profile),
-                'data'  => array_merge($this->sidebar($pagesCount, $profile), ['posts' => $posts]),
+                'data'  => array_merge($this->sidebar($pagesCount, $profile), ['contents' => $contents]),
             ]
         );
     }

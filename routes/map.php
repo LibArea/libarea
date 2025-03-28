@@ -257,7 +257,7 @@ Route::get('/notes/{id}/{slug}')->controller(PublicationController::class, 'note
 Route::get('/{facet_slug}/article/{slug}')->controller(PublicationController::class, 'page')->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('page'); 
 
 Route::get('/@{login}')->controller(ProfileController::class)->where(['login' => '[A-Za-z0-9-]+'])->name('profile');
-Route::get('/@{login}/posts')->controller(ProfileController::class, 'posts')->where(['login' => '[A-Za-z0-9-]+'])->name('profile.posts');
+Route::get('/@{login}/contents')->controller(ProfileController::class, 'contents')->where(['login' => '[A-Za-z0-9-]+'])->name('profile.posts');
 Route::get('/@{login}/comments')->controller(ProfileController::class, 'comments')->where(['login' => '[A-Za-z0-9-]+'])->name('profile.comments');
 
 Route::get('/topic/{slug}/recommend')->controller(TopicFacetController::class, 'recommend')->where(['slug' => '[a-z0-9-]+'])->name('topic.recommend');

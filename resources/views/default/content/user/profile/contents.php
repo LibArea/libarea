@@ -2,7 +2,7 @@
   <?= insert('/content/user/profile/header', ['data' => $data]); ?>
   <div class="flex gap">
     <main class="flex-auto">
-      <div class="mb15"><?= __('app.posts'); ?> <b><?= $data['profile']['login']; ?></b></div>
+      <div class="mb15"><?= __('app.publications'); ?> <b><?= $data['profile']['login']; ?></b></div>
 
       <?= insert('/content/publications/choice', ['data' => $data]); ?>
 

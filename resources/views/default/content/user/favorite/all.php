@@ -12,7 +12,9 @@
   <?php if (!empty($data['favorites'])) : ?>
     <?php foreach ($data['favorites'] as $fav) : ?>
       <div class="box relative">
-        <div class="left gray-600 mr5"> <?= __('app.' . $fav['action_type']); ?>:</div>
+        <div class="uppercase-box">
+          <?= insert('/content/publications/type-publication', ['type' => $fav['post_type']]); ?>
+        </div>
 
         <span id="fav-comm" class="add-favorite right ml15 text-sm" data-front="personal" data-id="<?= $fav['tid']; ?>" data-type="<?= $fav['action_type']; ?>">
           <svg class="icon gray-600">
@@ -37,15 +39,13 @@
           </div>
         <?php endif; ?>
 
-        <?php if ($fav['action_type'] == 'post') : ?>
-          <a href="<?= post_slug($fav['post_type'], $fav['post_id'], $fav['post_slug']); ?>">
-            <?= $fav['post_title']; ?>
-          </a>
-        <?php else : ?>
-          <a href="<?= post_slug($fav['post_type'], $fav['post']['post_id'], $fav['post']['post_slug']); ?>#comment_<?= $fav['comment_id']; ?>">
+        <a href="<?= post_slug($fav['post_type'], $fav['post']['post_id'], $fav['post']['post_slug']); ?>#comment_<?= $fav['comment_id']; ?>">
+          <?php if ($fav['post_type'] == 'post') : ?>
+            <?= markdown($fav['post']['post_content']); ?>
+          <?php else : ?>
             <?= $fav['post']['post_title']; ?>
-          </a>
-        <?php endif; ?>
+          <?php endif; ?>
+        </a>
 
         <?php if ($fav['action_type'] == 'comment') : ?>
           <div> <?= markdown($fav['comment_content'], 'text'); ?></div>
@@ -59,7 +59,6 @@
             <sup class="del-folder-content gray-600" data-tid="<?= $fav['tid']; ?>" data-type="favorite">x</sup>
           </div>
         <?php endif; ?>
-
       </div>
     <?php endforeach; ?>
   <?php else : ?>

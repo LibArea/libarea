@@ -173,7 +173,7 @@ class UserController extends Controller
                     'h1'    => __('app.subscribed') . ' ' . $this->container->user()->login(),
                     'sheet' => 'subscribed',
                     'type'  => 'favorites',
-                    'posts' => PublicationModel::getPostsListUser('subscribed')
+                    'contents' => PublicationModel::getContentListUser('subscribed'),
                 ]
             ]
         );
@@ -195,7 +195,7 @@ class UserController extends Controller
                     'h1'    => __('app.i_read') . ' ' . $this->container->user()->login(),
                     'sheet' => 'read',
                     'type'  => 'favorites',
-                    'posts' => PublicationModel::getPostsListUser('read')
+                    'contents' => PublicationModel::getContentListUser('read')
                 ]
             ]
         );

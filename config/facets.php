@@ -11,7 +11,7 @@ return [
 
   // To check existing facet types
   // Для проверки существующих типов фасетов
-  'permitted'     => ['topic', 'blog', 'category', 'section'],
+  'permitted'     => ['topic', 'blog', 'section'],
 
   // Types of faces
   // Типы граней

@@ -113,10 +113,6 @@ class EditPublicationController extends Controller
 			$post_img = UploadImage::coverPost($data['images'], $post, $redirect);
 		}
 
-		// Related topics
-		$fields = Request::allPost() ?? [];
-		$new_type = self::addFacetsPost($fields, (int)$data['id'], $post['post_type'], $redirect);
-
 		$post_related = $this->relatedPost();
 
 		if ($this->container->user()->admin()) {
@@ -133,7 +129,7 @@ class EditPublicationController extends Controller
 			'post_id' 			=> $data['id'],
 			'post_title' 		=> $data['title'] ?? '',
 			'post_slug' 		=> $slug ?? $post['post_slug'],
-			'post_type' 		=> $new_type,
+			'post_type' 		=> $type,
 			'post_translation'	=> Request::post('translation')->value() == 'on' ? 1 : 0,
 			'post_date' 		=> $post_date,
 			'post_user_id' 		=> $this->selectAuthor($post['post_user_id'], Request::post('user_id')->value()),
@@ -152,47 +148,6 @@ class EditPublicationController extends Controller
 		]);
 
 		Msg::redirect(__('msg.change_saved'), 'success', url('post.id', ['id' => $data['id']]));
-	}
-
-	/**
-	 * Add fastes (blogs, topics) to the post
-	 *
-	 * @param array $fields
-	 * @param int $content_id
-	 * @param string $redirect
-	 * @return string
-	 */
-	public static function addFacetsPost(array $fields, int $content_id, string $redirect): string
-	{
-		$new_type = 'post';
-		$facets = $fields['facet_select'] ?? false;
-
-		if (!$facets) {
-			Msg::redirect(__('msg.select_topic'), 'error', $redirect);
-		}
-
-		$topics = json_decode($facets, true);
-
-		$section = $fields['section_select'] ?? false;
-		$OneFacets = [];
-
-		if ($section) {
-			$new_type = 'page';
-			$OneFacets = json_decode($section, true);
-		}
-
-		$blog_post = $fields['blog_select'] ?? false;
-		$TwoFacets = [];
-
-		if ($blog_post) {
-			$TwoFacets = json_decode($blog_post, true);
-		}
-
-		$GeneralFacets = array_merge($OneFacets, $TwoFacets);
-
-		FacetModel::addPostFacets(array_merge($GeneralFacets, $topics), $content_id);
-
-		return $new_type;
 	}
 
 	/**
