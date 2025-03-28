@@ -16,7 +16,6 @@ $facet  = $data['facet'] ?? false; ?>
           <?= insert('/_block/navigation/config/home-nav'); ?>
         </ul>
       </div>
-
       <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?>
     </div>
   </header>

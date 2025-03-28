@@ -6,16 +6,13 @@ namespace App\Controllers\Facet;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
-use App\Content\Сheck\Availability;
+use App\Content\Сheck\{Availability, Validator};
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PublicationModel};
 use UploadImage, Meta, Msg;
 
 use App\Traits\Author;
 use App\Traits\Related;
-
-
-use App\Content\Сheck\RulesFacet;
 
 class EditFacetController extends Controller
 {
@@ -64,7 +61,7 @@ class EditFacetController extends Controller
         // Получим массив данных существующего фасета и проверим его наличие
         $facet = FacetModel::uniqueById((int)$data['facet_id'] ?? 0);
 
-        $new_type = RulesFacet::edit($data, $facet);
+        $new_type = Validator::editFacet($data, $facet);
 
         UploadImage::set($_FILES, $facet['facet_id'], 'facet');
 

@@ -1,6 +1,8 @@
 <?php foreach ($comments as $comment) : ?>
   <?php if ($comment['comment_published'] == 0 && $comment['comment_user_id'] != $container->user()->id() && !$container->user()->admin()) continue; ?>
   <div class="box">
+    <?= insert('/content/publications/type-publication', ['type' => $comment['post_type']]); ?>
+  
     <div class="comment-body">
       <div class="flex justify-between">
         <div class="user-info">
@@ -13,9 +15,15 @@
         <?= Html::votes($comment, 'comment'); ?>
       </div>
       <a class="block" href="<?= post_slug($comment['post_type'], $comment['post_id'], $comment['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
-        <?= $comment['post_title']; ?>
+	    <?php if ($comment['post_type'] === 'post') : ?>
+	      <div class="comment-text"><?= markdown($comment['comment_content']); ?></div>
+	    <?php else : ?>
+          <?= $comment['post_title']; ?>
+		<?php endif; ?>
       </a>
-      <div class="comment-text"><?= markdown($comment['comment_content']); ?></div>
+	  <?php if ($comment['post_type'] != 'post') : ?>
+		<div class="comment-text"><?= markdown($comment['comment_content']); ?></div>
+	  <?php endif; ?>
     </div>
   </div>
 <?php endforeach; ?>

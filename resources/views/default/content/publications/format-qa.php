@@ -1,11 +1,11 @@
 <?php if (!empty($data['comments'])) : ?>
   <div class="box">
     <h2 class="lowercase text-2xl">
-      <?= Html::numWord($post['post_comments_count'], __('app.num_comment'), true); ?>
+      <?= Html::numWord($item['post_comments_count'], __('app.num_comment'), true); ?>
     </h2>
 
     <?php
-    function internalRender($container, $nodes, $post, $level = 0, $type = 'comment')
+    function internalRender($container, $nodes, $item, $level = 0, $type = 'comment')
     {
       foreach ($nodes as  $node) :
         $level =  $level > 1 ? 1 : $level;
@@ -35,12 +35,12 @@
                     <?php endif; ?>
 
                     <?php if ($container->access()->limitTl(config('trust-levels', 'tl_add_comm_qa'))) : ?>
-                      <?php if ($post['post_closed'] == 0 ?? $post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
+                      <?php if ($item['post_closed'] == 0 ?? $item['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
                         <a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
                       <?php endif; ?>
                     <?php endif; ?>
 
-                    <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
+                    <?= insert('/content/comments/menu', ['item' => $item, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
                   </div>
                   <div class="gray-600 flex gap lowercase mb5">
                     <a class="gray-600" href="<?= url('profile', ['login' => $node['login']]); ?>">
@@ -62,17 +62,17 @@
         </div>
 
         <?php if (isset($node['children'])) {
-          internalRender($container, $node['children'], $post, $level + 1, 'qa');
+          internalRender($container, $node['children'], $item, $level + 1, 'qa');
         } ?>
 
     <?php endforeach;
     }
-    echo internalRender($container, $data['comments'], $data['post']);
+    echo internalRender($container, $data['comments'], $item);
     ?>
 
   </div>
 <?php else : ?>
-  <?php if ($post['post_closed'] != 1) : ?>
+  <?php if ($item['post_closed'] != 1) : ?>
     <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_comments'), 'icon' => 'info']); ?>
   <?php endif; ?>
 <?php endif; ?>
@@ -81,18 +81,18 @@
   <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.you_answered'), 'icon' => 'info']); ?>
 <?php else : ?>
   <?php if ($container->user()->active()) : ?>
-    <?php if ($post['post_type'] == 'question' && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
+    <?php if ($item['post_type'] == 'question' && $item['post_draft'] == 0 && $item['post_closed'] == 0) : ?>
 
       <form class="mb15 mt20" action="<?= url('add.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
         <?= $container->csrf()->field(); ?>
         <?= insert('/_block/form/editor/notoolbar-img', [
           'height'  => '170px',
-          'id'      => $post['post_id'],
+          'id'      => $item['post_id'],
           'type'    => 'comment',
         ]); ?>
 
         <div class="clear mt5">
-          <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
+          <input type="hidden" name="post_id" value="<?= $item['post_id']; ?>">
           <input type="hidden" name="comment_id" value="0">
           <?= Html::sumbit(__('app.reply')); ?>
         </div>
@@ -102,6 +102,6 @@
   <?php endif; ?>
 <?php endif;  ?>
 
-<?php if ($post['post_closed'] == 1) :
+<?php if ($item['post_closed'] == 1) :
   echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.question_closed'), 'icon' => 'lock']);
 endif; ?>

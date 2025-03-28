@@ -74,7 +74,7 @@ class EditCommentController extends Controller
             ]
         );
 
-        Msg::redirect(__('msg.change_saved'), 'success', post_slug($comment['comment_post_id'], $post['post_slug']) . '#comment_' . $comment['comment_id']);
+        Msg::redirect(__('msg.change_saved'), 'success', post_slug($post['post_type'], $comment['comment_post_id'], $post['post_slug']) . '#comment_' . $comment['comment_id']);
     }
 
     /**

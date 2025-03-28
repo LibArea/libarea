@@ -1,25 +1,25 @@
-<?php if (!empty($data['posts'])) : ?>
+<?php if (!empty($data['contents'])) : ?>
   <ul class="list-none">
     <?php $n = 0;
-    foreach ($data['posts'] as $post) :
+    foreach ($data['contents'] as $item) :
       $n++; ?>
       <?php if ($container->user()->id() == 0 && $n == 6) : ?>
         <?= insert('/_block/no-login-screensaver'); ?>
       <?php endif; ?>
-      <?php $post_url = post_slug($post['post_type'], $post['post_id'], $post['post_slug']); ?>
-      <li class="list-post zebra article_<?= $post['post_id']; ?>">
+      <?php $url = post_slug($item['post_type'], $item['post_id'], $item['post_slug']); ?>
+      <li class="list-content zebra article_<?= $item['post_id']; ?>">
         <div class="flex mr15">
           <div class="box-answer block bg-lightgray gray mb-none  mr15">
-            <?= $post['post_votes']; ?>
-            <div class="text-sm"> <?= Html::numWord($post['post_votes'], __('app.num_up'), false); ?></div>
+            <?= $item['post_votes']; ?>
+            <div class="text-sm"> <?= Html::numWord($item['post_votes'], __('app.num_up'), false); ?></div>
           </div>
-          <?php $bg = $post['post_type'] == 'article' ? ' bg-green' : ' bg-blue'; ?>
-          <?php $bg_url = $post['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
+          <?php $bg = $item['post_type'] == 'article' ? ' bg-green' : ' bg-blue'; ?>
+          <?php $bg_url = $item['post_url_domain'] == NULL ? '' : ' bg-blue'; ?>
           <div class="box-answer<?= $bg; ?><?= $bg_url; ?>">
-            <a class="block white" href="<?= $post_url; ?>#comment">
-              <?= $post['post_comments_count']; ?>
+            <a class="block white" href="<?= $url; ?>#comment">
+              <?= $item['post_comments_count']; ?>
             </a>
-            <div class="text-sm white"><?= Html::numWord($post['post_comments_count'], __('app.num_answer'), false); ?></div>
+            <div class="text-sm white"><?= Html::numWord($item['post_comments_count'], __('app.num_answer'), false); ?></div>
           </div>
         </div>
 
@@ -27,36 +27,36 @@
           <?php if ($bg_url) : ?>
             <span><?= __('app.news'); ?>:</span>
           <?php endif; ?>
-          <a class="text-xl" href="<?= $post_url; ?>">
-            <?= $post['post_title']; ?>
-            <?= insert('/content/publications/title', ['post' => $post]); ?>
+          <a class="text-xl" href="<?= $url; ?>">
+            <?= $item['post_title']; ?>
+            <?= insert('/content/publications/title', ['item' => $item]); ?>
           </a>
           <div class="flex flex-row flex-auto items-center justify-between lowercase">
             <div class="flex-auto">
-              <?= Html::facets($post['facet_list'], 'blog', 'tag-yellow'); ?>
-              <?= Html::facets($post['facet_list'], 'topic', 'tag-grey'); ?>
-              <?php if ($post['post_url_domain']) : ?>
-                <a class="gray-600 text-sm ml10" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
+              <?= Html::facets($item['facet_list'], 'blog', 'tag-yellow'); ?>
+              <?= Html::facets($item['facet_list'], 'topic', 'tag-grey'); ?>
+              <?php if ($item['post_url_domain']) : ?>
+                <a class="gray-600 text-sm ml10" href="<?= url('domain', ['domain' => $item['post_url_domain']]); ?>">
                   <svg class="icon">
                     <use xlink:href="/assets/svg/icons.svg#link"></use>
-                  </svg> <?= $post['post_url_domain']; ?>
+                  </svg> <?= $item['post_url_domain']; ?>
                 </a>
               <?php endif; ?>
             </div>
 
             <div class="gray-600 text-sm">
               <span class="mb-none">
-                <?= $post['post_date'] ?> ·
-                <?= Html::numWord($post['post_hits_count'], __('app.num_view'), true); ?> ·
+                <?= $item['post_date'] ?> ·
+                <?= Html::numWord($item['post_hits_count'], __('app.num_view'), true); ?> ·
               </span>
-              <a href="<?= url('profile', ['login' => $post['login']]); ?>">
-                <?= $post['login']; ?>
+              <a href="<?= url('profile', ['login' => $item['login']]); ?>">
+                <?= $item['login']; ?>
               </a>
             </div>
           </div>
 
           <?php if ($container->request()->getUri()->getPath() == '/subscribed') : ?>
-            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id tag-violet right">
+            <div data-id="<?= $item['post_id']; ?>" data-type="post" class="focus-id tag-violet right">
               <?= __('app.unsubscribe'); ?>
             </div>
           <?php endif; ?>

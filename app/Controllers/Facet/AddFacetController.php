@@ -6,10 +6,9 @@ namespace App\Controllers\Facet;
 
 use Hleb\Static\Request;
 use Hleb\Base\Controller;
+use App\Content\Сheck\Validator;
 use App\Models\{FacetModel, SubscriptionModel, ActionModel};
 use Meta, Msg;
-
-use App\Content\Сheck\RulesFacet;
 
 class AddFacetController extends Controller
 {
@@ -44,7 +43,7 @@ class AddFacetController extends Controller
 
         $data = Request::allPost();
 
-        RulesFacet::add($data, $facet_type);
+        Validator::addFacet($data, $facet_type);
 
         $type = $facet_type ?? 'topic';
 

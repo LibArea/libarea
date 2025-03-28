@@ -1,5 +1,5 @@
 <main class="wrap">
-  <?= insert('/content/publications/post', ['data' => $data]); ?>
+  <?= insert('/content/publications/choice', ['data' => $data]); ?>
   <?php if ($container->user()->scroll()) : ?>
     <div id="scrollArea"></div>
     <div id="scroll"></div>

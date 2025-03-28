@@ -1,4 +1,4 @@
-<?php $item = $data['post']; ?>
+<?php $item = $data['content']; ?>
 <main>
   <div class="box">
     <h2 class="m0"><?= __('app.edit_' . $item['post_type']); ?></h2>

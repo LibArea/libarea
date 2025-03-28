@@ -69,13 +69,13 @@
   border: 1px solid #f3f3f3;
 }
 
-.cut-post img.cut-preview {
+.cut-content img.cut-preview {
   max-width: calc(100% + 50px);
   margin-left: -25px;
   border-radius: 0px;
 }
 
-.cut-post img,
+.cut-content img,
 .content-body img {
   max-width: 100%;
 }

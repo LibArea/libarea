@@ -1,11 +1,11 @@
 <?php
-$post = $data['post'];
+$item = $data['contents'];
 $blog = $data['blog'][0] ?? null;
 ?>
 
 <main>
-  <article<?php if ($post['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>
-    <?php if ($post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
+  <article<?php if ($item['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>
+    <?php if ($item['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
       <?php if (!empty($data['united'])) : ?>
         <div class="box bg-yellow mb15 gray-600">
           <svg class="icon">
@@ -24,44 +24,44 @@ $blog = $data['blog'][0] ?? null;
       <?php endif; ?>
 
       <div class="uppercase-box">
-        <?= insert('/content/publications/type-publication', ['type' => $post['post_type']]); ?>
+        <?= insert('/content/publications/type-publication', ['type' => $item['post_type']]); ?>
       </div>
 
       <div class="user-info">
-        <a title="<?= $post['login']; ?>" href="<?= url('profile', ['login' => $post['login']]); ?>">
-          <?= Img::avatar($post['avatar'], $post['login'], 'img-sm mr5', 'small'); ?>
-          <span class="nickname<?php if (Html::loginColor($post['created_at'] ?? false)) : ?> new<?php endif; ?>"><?= $post['login']; ?></span>
+        <a title="<?= $item['login']; ?>" href="<?= url('profile', ['login' => $item['login']]); ?>">
+          <?= Img::avatar($item['avatar'], $item['login'], 'img-sm mr5', 'small'); ?>
+          <span class="nickname<?php if (Html::loginColor($item['created_at'] ?? false)) : ?> new<?php endif; ?>"><?= $item['login']; ?></span>
         </a>
 
         <span class="lowercase">
-          <?= langDate($post['post_date']); ?>
+          <?= langDate($item['post_date']); ?>
         </span>
 
         <?php if ($container->user()->active()) : ?>
-          <?= insert('/_block/admin-dropdown-post', ['post' => $post]); ?>
+          <?= insert('/_block/admin-dropdown-content', ['post' => $item]); ?>
         <?php endif; ?>
       </div>
 
-      <h1 class="m0 mb5"><?= $post['post_title']; ?>
-        <?= insert('/content/publications/title', ['post' => $post]); ?>
+      <h1 class="m0 mb5"><?= $item['post_title']; ?>
+        <?= insert('/content/publications/title', ['item' => $item]); ?>
       </h1>
 
-      <?php if ($post['post_thumb_img']) : ?>
+      <?php if ($item['post_thumb_img']) : ?>
         <div class="img-preview mt10">
-          <?= Img::image($post['post_thumb_img'], $post['post_title'],  'zooom', 'post', 'thumbnails'); ?>
+          <?= Img::image($item['post_thumb_img'], $item['post_title'],  'zooom', 'post', 'thumbnails'); ?>
         </div>
       <?php endif; ?>
 
       <div class="max-w-md">
         <div class="content-body mb15">
-          <?php $markdown = markdown($post['post_content'], 'text');
-          if (Html::headings($markdown, post_slug($post['post_type'], $post['post_id'], $post['post_slug'])) == false) : ?>
+          <?php $markdown = markdown($item['post_content'], 'text');
+          if (Html::headings($markdown, post_slug($item['post_type'], $item['post_id'], $item['post_slug'])) == false) : ?>
 
             <?= $markdown; ?>
 
           <?php else : ?>
 
-            <?php $content = Html::headings($markdown, post_slug($post['post_type'], $post['post_id'], $post['post_slug'])); ?>
+            <?php $content = Html::headings($markdown, post_slug($item['post_type'], $item['post_id'], $item['post_slug'])); ?>
 
             <div class="mt20">
               <b><?= __('app.headings'); ?></b>
@@ -71,27 +71,27 @@ $blog = $data['blog'][0] ?? null;
             <?= $content['text']; ?>
           <?php endif; ?>
         </div>
-        <?php if ($post['post_url_domain']) : ?>
+        <?php if ($item['post_url_domain']) : ?>
           <div class="mb15">
-            <a rel="nofollow noreferrer ugc" target="_blank" class="btn btn-outline-primary" href="<?= $post['post_url']; ?>">
+            <a rel="nofollow noreferrer ugc" target="_blank" class="btn btn-outline-primary" href="<?= $item['post_url']; ?>">
               <?= __('app.details_here'); ?>
             </a>
           </div>
         <?php endif; ?>
-        <?php if ($post['post_url_domain']) : ?>
+        <?php if ($item['post_url_domain']) : ?>
           <div class="italic mb15 text-sm table gray">
             <?= __('app.source'); ?>:
             <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#link"></use>
             </svg>
-            <a class="gray" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
-              <?= $post['post_url_domain']; ?>
+            <a class="gray" href="<?= url('domain', ['domain' => $item['post_url_domain']]); ?>">
+              <?= $item['post_url_domain']; ?>
             </a>
           </div>
         <?php endif; ?>
       </div>
 
-      <?php if ($post['post_poll']) : ?>
+      <?php if ($item['post_poll']) : ?>
         <?= insert('/content/poll/poll', ['poll' => $data['poll']]); ?>
       <?php endif; ?>
 
@@ -117,22 +117,22 @@ $blog = $data['blog'][0] ?? null;
 
       <div class="mt15 mb15 items-center flex justify-between">
         <div class="items-center flex gap gray-600">
-          <?= Html::votes($post, 'post'); ?>
+          <?= Html::votes($item, 'post'); ?>
           <div class="items-center flex gap-sm">
             <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#eye"></use>
             </svg>
-            <?= $post['post_hits_count'] == 0 ? 1 : Html::formatToHuman($post['post_hits_count']); ?>
+            <?= $item['post_hits_count'] == 0 ? 1 : Html::formatToHuman($item['post_hits_count']); ?>
           </div>
         </div>
         <div class="items-center flex gap-lg">
           <?php if ($container->user()->active()) : ?>
             <?php if (is_array($data['post_signed'])) : ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 gray-600">
+              <div data-id="<?= $item['post_id']; ?>" data-type="post" class="focus-id right mt5 gray-600">
                 <?= __('app.unsubscribe'); ?>
               </div>
             <?php else : ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id right mt5 red">
+              <div data-id="<?= $item['post_id']; ?>" data-type="post" class="focus-id right mt5 red">
                 + <?= __('app.read'); ?>
               </div>
             <?php endif; ?>
@@ -148,7 +148,7 @@ $blog = $data['blog'][0] ?? null;
             </svg>
           </div>
 
-          <?= Html::favorite($post['post_id'], 'post', $post['tid']); ?>
+          <?= Html::favorite($item['post_id'], 'post', $item['tid']); ?>
         </div>
       </div>
 
@@ -165,15 +165,15 @@ $blog = $data['blog'][0] ?? null;
       <?php if (empty($is_comments)) : ?>
 
         <?php if ($container->user()->active()) : ?>
-          <?php if ($post['post_type'] != 'question' && $post['post_draft'] == 0 && $post['post_closed'] == 0) : ?>
+          <?php if ($item['post_type'] != 'question' && $item['post_draft'] == 0 && $item['post_closed'] == 0) : ?>
 
             <form action="<?= url('add.comment', method: 'post'); ?>" accept-charset="UTF-8" method="post">
               <?= $container->csrf()->field(); ?>
 
-              <?= insert('/_block/form/editor/notoolbar-img', ['height'  => '170px', 'type' => 'comment', 'id' => $post['post_id'], 'title' => __('app.reply')]); ?>
+              <?= insert('/_block/form/editor/notoolbar-img', ['height'  => '170px', 'type' => 'comment', 'id' => $item['post_id'], 'title' => __('app.reply')]); ?>
 
               <div class="clear mt5">
-                <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
+                <input type="hidden" name="post_id" value="<?= $item['post_id']; ?>">
                 <input type="hidden" name="comment_id" value="0">
                 <?= Html::sumbit(__('app.reply')); ?>
               </div>
@@ -193,9 +193,9 @@ $blog = $data['blog'][0] ?? null;
 
     <?php if (empty($is_comments)) : ?>
       <div id="comment"></div>
-      <?php if ($post['post_draft'] == 0) :
-        $format = ($post['post_type'] == 'article') ? 'discussion' : 'qa';
-        insert('/content/publications/format-' . $format, ['data' => $data, 'post' => $post]);
+      <?php if ($item['post_draft'] == 0) :
+        $format = ($item['post_type'] == 'article') ? 'discussion' : 'qa';
+        insert('/content/publications/format-' . $format, ['data' => $data, 'item' => $item]);
       else :
         echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);
       endif; ?>
@@ -227,13 +227,13 @@ $blog = $data['blog'][0] ?? null;
     </div>
   <?php endif; ?>
 
-  <?php if ($post['post_content_img']) : ?>
+  <?php if ($item['post_content_img']) : ?>
     <div class="box br-lightgray img-preview">
-      <img class="w-100" src="<?= Img::PATH['posts_cover'] . $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>">
+      <img class="w-100" src="<?= Img::PATH['posts_cover'] . $item['post_content_img']; ?>" alt="<?= $item['post_title']; ?>">
     </div>
   <?php endif; ?>
 
-  <?php if ($data['recommend'] && $post['post_is_deleted'] != 1) : ?>
+  <?php if ($data['recommend'] && $item['post_is_deleted'] != 1) : ?>
     <div class="box sticky top-sm">
       <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
       <?php foreach ($data['recommend'] as  $rec) : ?>
@@ -300,4 +300,4 @@ $blog = $data['blog'][0] ?? null;
 
 <script src="/assets/js/dialog/dialog.js"></script>
 <?= insert('/_block/dialog/msg-flag'); ?>
-<?= insert('/_block/dialog/share', ['title' => __('app.share_post'), 'url' => config('meta', 'url') . post_slug($post['post_type'], $post['post_id'], $post['post_slug'])]); ?>
+<?= insert('/_block/dialog/share', ['title' => __('app.share_post'), 'url' => config('meta', 'url') . post_slug($item['post_type'], $item['post_id'], $item['post_slug'])]); ?>

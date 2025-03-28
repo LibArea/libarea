@@ -54,7 +54,7 @@ class AddCommentController extends Controller
 
         notEmptyOrView404($post);
 
-        $url_post = post_slug($post['post_id'], $post['post_slug']);
+        $url_post = post_slug($post['post_type'], $post['post_id'], $post['post_slug']);
 
         $data = Request::getParsedBody();
 

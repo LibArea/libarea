@@ -77,7 +77,7 @@ class HomeController extends Controller
                     'topics'            => $topics,
                     'type'              => 'main',
                     'latest_comments'   => CommentModel::latestComments(4),
-                    'posts'             => HomeModel::feed($signed, Html::pageNumber(), $sheet),
+                    'contents'			=> HomeModel::feed($signed, Html::pageNumber(), $sheet),
                 ],
             ],
         );

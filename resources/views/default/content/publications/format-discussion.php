@@ -1,7 +1,7 @@
 <?php if (!empty($data['comments'])) : ?>
   <div class="box">
     <div class="flex justify-between mb20">
-      <h2 class="lowercase mb15 text-2xl"><?= Html::numWord($post['post_comments_count'], __('app.num_answer'), true); ?></h2>
+      <h2 class="lowercase mb15 text-2xl"><?= Html::numWord($item['post_comments_count'], __('app.num_answer'), true); ?></h2>
 
       <ul class="nav scroll-menu">
         <?php if ($data['sorting'] == 'top') : ?>
@@ -19,13 +19,13 @@
         <?php if ($data['sorting'] == '') : ?>
           <li class="active"><?= __('app.by_date'); ?></li>
         <?php else : ?>
-          <li><a href="<?= $post['post_slug']; ?>#comment"><?= __('app.by_date'); ?></a></li>
+          <li><a href="<?= $item['post_slug']; ?>#comment"><?= __('app.by_date'); ?></a></li>
         <?php endif; ?>
       </ul>
     </div>
 
     <?php
-    function internalRender($container, $nodes, $post, $level = 0)
+    function internalRender($container, $nodes, $item, $level = 0)
     {
       foreach ($nodes as  $node) :
         $level =  $level > 5 ? 5 : $level;
@@ -58,7 +58,7 @@
                         <use xlink:href="/assets/svg/icons.svg#mobile"></use>
                       </svg>
                     <?php endif; ?>
-                    <?php if ($post['post_user_id'] == $node['comment_user_id']) : ?>
+                    <?php if ($item['post_user_id'] == $node['comment_user_id']) : ?>
                       <span class="small lowercase green">
                         <?= __('app.author'); ?>
                       </span>
@@ -81,13 +81,13 @@
                     <?php endif; ?>
 
                     <?php if ($node['comment_parent_id'] > 0) : ?>
-                      <a class="reply-to" rel="nofollow" href="<?= post_slug($post['post_type'], $post['post_id'], $post['post_slug']); ?>#comment_<?= $node['comment_parent_id']; ?>">
+                      <a class="reply-to" rel="nofollow" href="<?= post_slug($item['post_type'], $item['post_id'], $item['post_slug']); ?>#comment_<?= $node['comment_parent_id']; ?>">
                         <svg class="icon small">
                           <use xlink:href="/assets/svg/icons.svg#arrow-up"></use>
                         </svg></a>
                     <?php endif; ?>
 
-                    <?= insert('/content/comments/menu', ['post' => $post, 'comment' => $node, 'type' => 'discussion']); ?>
+                    <?= insert('/content/comments/menu', ['item' => $item, 'comment' => $node, 'type' => 'discussion']); ?>
                   </div>
                   <div class="comment-text">
                     <?= markdown($node['comment_content'], 'text'); ?>
@@ -96,7 +96,7 @@
                 <div class="comment-footer">
                   <?= Html::votes($node, 'comment'); ?>
 
-                  <?php if ($post['post_closed'] == 0 && $post['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
+                  <?php if ($item['post_closed'] == 0 && $item['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
                     <a data-id="<?= $node['comment_id']; ?>" data-type="addcomment" class="activ-form gray-600"><?= __('app.reply'); ?></a>
                   <?php endif; ?>
                 </div>
@@ -104,7 +104,7 @@
               </div>
 
               <?php if (isset($node['children'])) {
-                internalRender($container, $node['children'], $post, $level + 1);
+                internalRender($container, $node['children'], $item, $level + 1);
               } ?>
 
             </li>
@@ -114,11 +114,11 @@
     <?php endforeach;
     }
 
-    echo internalRender($container, $data['comments'], $data['post']);
+    echo internalRender($container, $data['comments'], $item);
     ?>
   </div>
 <?php else : ?>
-  <?php if ($post['post_closed'] == 1) : ?>
+  <?php if ($item['post_closed'] == 1) : ?>
     <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.close'), 'icon' => 'lock']);  ?>
   <?php elseif (!$container->user()->active()) : ?>
     <?= insert('/_block/no-content', ['type' => 'small', 'text' => __('app.no_auth'), 'icon' => 'info']); ?>

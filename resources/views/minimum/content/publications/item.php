@@ -1,37 +1,37 @@
-<?php if (!empty($data['posts'])) : ?>
+<?php if (!empty($data['contents'])) : ?>
   <div class="list-none">
     <?php $n = 0;
-    foreach ($data['posts'] as $post) :
+    foreach ($data['contents'] as $item) :
       $n++; ?>
       <?php if (!$container->user()->active() && $n == 6) : ?>
         <?= insert('/_block/no-login-screensaver'); ?>
       <?php endif; ?>
-      <?php $post_url = post_slug($post['post_type'], $post['post_id'], $post['post_slug']); ?>
-      <li class="list-post article_<?= $post['post_id']; ?>">
+      <?php $url = post_slug($item['post_type'], $item['post_id'], $item['post_slug']); ?>
+      <li class="list-content article_<?= $item['post_id']; ?>">
         <div class="w40 mt3 no-flex center">
-          <?= Html::votes($post, 'post', 'arrow-up'); ?>
+          <?= Html::votes($item, 'post', 'arrow-up'); ?>
         </div>
         <div>
           <div>
-            <a class="text-xl" href="<?= $post_url; ?>">
-              <?= $post['post_title']; ?>
-              <?= insert('/content/publications/title', ['post' => $post]); ?>
+            <a class="text-xl" href="<?= $url; ?>">
+              <?= $item['post_title']; ?>
+              <?= insert('/content/publications/title', ['item' => $item]); ?>
             </a>
-            <?= Html::facets($post['facet_list'], 'blog', 'tag'); ?>
-            <?= Html::facets($post['facet_list'], 'topic', 'tag-yellow'); ?>
+            <?= Html::facets($item['facet_list'], 'blog', 'tag'); ?>
+            <?= Html::facets($item['facet_list'], 'topic', 'tag-yellow'); ?>
           </div>
           <div class="flex text-sm gap-sm mt3">
-            <a class="flex items-center gray" href="<?= url('profile', ['login' => $post['login']]); ?>">
-              <?= Img::avatar($post['avatar'], $post['login'], 'img-sm-min', 'small'); ?>
-              <?= $post['login']; ?>
+            <a class="flex items-center gray" href="<?= url('profile', ['login' => $item['login']]); ?>">
+              <?= Img::avatar($item['avatar'], $item['login'], 'img-sm-min', 'small'); ?>
+              <?= $item['login']; ?>
             </a>
             <div class="gray-600 lowercase text-sm">
-              <?= langDate($post['post_date']); ?>
+              <?= langDate($item['post_date']); ?>
             </div>
-            <?php if ($post['post_comments_count'] != 0) : ?>
+            <?php if ($item['post_comments_count'] != 0) : ?>
               <span class="gray-600">&#183;</span>
-              <a class="flex lowercase gray-600" href="<?= $post_url; ?>#comment">
-                <?= Html::numWord($post['post_comments_count'], __('app.num_comment'), true); ?>
+              <a class="flex lowercase gray-600" href="<?= $url; ?>#comment">
+                <?= Html::numWord($item['post_comments_count'], __('app.num_comment'), true); ?>
               </a>
             <?php endif; ?>
           </div>

@@ -1,62 +1,62 @@
-<?php if (!empty($data['posts'])) : ?>
+<?php if (!empty($data['contents'])) : ?>
   <?php $n = 0;
-  foreach ($data['posts'] as $post) :
+  foreach ($data['contents'] as $item) :
     $n++; ?>
 
     <?php if (!$container->user()->active() && $n == 6) : ?>
       <?= insert('/_block/no-login-screensaver'); ?>
     <?php endif; ?>
 
-    <?php $post_url = post_slug($post['post_id'], $post['post_slug']); ?>
+    <?php $url = post_slug($item['post_type'], $item['post_id'], $item['post_slug']); ?>
 
-    <?php if ($container->access()->hiddenPost($post)) continue; ?>
-    <?php if ($container->access()->auditСontent('post', $post)) continue; ?>
+    <?php if ($container->access()->hiddenPost($item)) continue; ?>
+    <?php if ($container->access()->auditСontent('post', $item)) continue; ?>
 
     <article>
       <div class="flex justify-between">
         <div class="mb15">
           <div class="uppercase-box">
-            <?= insert('/content/publications/type-publication', ['type' => $post['post_type']]); ?>
+            <?= insert('/content/publications/type-publication', ['type' => $item['post_type']]); ?>
           </div>
 
-          <a class="black" href="<?= $post_url; ?>">
-            <h3 class="title"><?= $post['post_title']; ?>
-              <?= insert('/content/publications/title', ['post' => $post]); ?>
+          <a class="black" href="<?= $url; ?>">
+            <h3 class="title"><?= $item['post_title']; ?>
+              <?= insert('/content/publications/title', ['item' => $item]); ?>
             </h3>
           </a>
           <div class="flex gap lowercase">
 
             <?php $type = $data['type'] ?? 'topic';
             if ($type == 'blog') : ?>
-              <?= Html::facets_blog($data['facet']['facet_slug'], $post['facet_list'], 'gray-600 text-sm'); ?>
+              <?= Html::facets_blog($data['facet']['facet_slug'], $item['facet_list'], 'gray-600 text-sm'); ?>
             <?php else : ?>
-              <?= Html::facets($post['facet_list'], 'blog', 'brown text-sm'); ?>
-              <?= Html::facets($post['facet_list'], 'topic', 'gray-600 text-sm'); ?>
+              <?= Html::facets($item['facet_list'], 'blog', 'brown text-sm'); ?>
+              <?= Html::facets($item['facet_list'], 'topic', 'gray-600 text-sm'); ?>
             <?php endif; ?>
 
-            <?php if ($post['post_url_domain']) : ?>
-              <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $post['post_url_domain']]); ?>">
+            <?php if ($item['post_url_domain']) : ?>
+              <a class="gray-600 text-sm" href="<?= url('domain', ['domain' => $item['post_url_domain']]); ?>">
                 <svg class="icon mb-none">
                   <use xlink:href="/assets/svg/icons.svg#link"></use>
-                </svg> <?= $post['post_url_domain']; ?>
+                </svg> <?= $item['post_url_domain']; ?>
               </a>
             <?php endif; ?>
           </div>
-          <div class="cut-post mb-none">
-            <?= fragment($post['post_content'], 250); ?>
+          <div class="cut-content mb-none">
+            <?= fragment($item['post_content'], 250); ?>
           </div>
         </div>
 
-        <?php if ($post['post_content_img'] || $post['post_thumb_img']) : ?>
+        <?php if ($item['post_content_img'] || $item['post_thumb_img']) : ?>
           <div class="w200 mb-w80">
-            <?php if ($post['post_content_img']) : ?>
-              <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                <?= Img::image($post['post_content_img'], $post['post_title'], 'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'cover'); ?>
+            <?php if ($item['post_content_img']) : ?>
+              <a title="<?= $item['post_title']; ?>" href="<?= $url; ?>">
+                <?= Img::image($item['post_content_img'], $item['post_title'], 'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'cover'); ?>
               </a>
             <?php else : ?>
-              <?php if ($post['post_thumb_img']) : ?>
-                <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                  <?= Img::image($post['post_thumb_img'], $post['post_title'],  'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'thumbnails'); ?>
+              <?php if ($item['post_thumb_img']) : ?>
+                <a title="<?= $item['post_title']; ?>" href="<?= $url; ?>">
+                  <?= Img::image($item['post_thumb_img'], $item['post_title'],  'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'thumbnails'); ?>
                 </a>
               <?php endif; ?>
             <?php endif; ?>
@@ -66,35 +66,35 @@
 
       <div class="flex flex-row items-center justify-between">
         <div class="flex gap text-sm flex-row">
-          <?= Html::votes($post, 'post'); ?>
+          <?= Html::votes($item, 'post'); ?>
 
           <div class="flex gap-sm">
-            <a class="gray-600" href="<?= url('profile', ['login' => $post['login']]); ?>">
-              <span class="nickname<?php if (Html::loginColor($post['created_at'])) : ?> new<?php endif; ?>">
-                <?= $post['login']; ?>
+            <a class="gray-600" href="<?= url('profile', ['login' => $item['login']]); ?>">
+              <span class="nickname<?php if (Html::loginColor($item['created_at'])) : ?> new<?php endif; ?>">
+                <?= $item['login']; ?>
               </span>
             </a>
 
-            <div class="gray-600 lowercase"><?= langDate($post['post_date']); ?></div>
+            <div class="gray-600 lowercase"><?= langDate($item['post_date']); ?></div>
           </div>
 
-          <?php if ($post['post_comments_count'] != 0) : ?>
-            <a class="flex gray-600" href="<?= $post_url; ?>#comment">
+          <?php if ($item['post_comments_count'] != 0) : ?>
+            <a class="flex gray-600" href="<?= $url; ?>#comment">
               <svg class="icon mr5">
                 <use xlink:href="/assets/svg/icons.svg#comments"></use>
               </svg>
-              <?= $post['post_comments_count']; ?>
+              <?= $item['post_comments_count']; ?>
             </a>
           <?php endif; ?>
 
           <?php if ($container->request()->getUri()->getPath() == '/subscribed') : ?>
-            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id tag-violet right">
+            <div data-id="<?= $item['post_id']; ?>" data-type="post" class="focus-id tag-violet right">
               <?= __('app.unsubscribe'); ?>
             </div>
           <?php endif; ?>
         </div>
         <div class="flex flex-row items-center">
-          <?= Html::favorite($post['post_id'], 'post', $post['tid']); ?>
+          <?= Html::favorite($item['post_id'], 'post', $item['tid']); ?>
         </div>
       </div>
     </article>

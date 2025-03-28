@@ -50,7 +50,7 @@
 
         <?php if ($container->user()->id() != $comment['comment_user_id'] && $container->access()->limitTl(config('trust-levels', 'tl_add_report'))) : ?>
         <li>
-          <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" data-a11y-dialog-show="my-dialog">
+          <a data-post_id="<?= $item['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" data-a11y-dialog-show="my-dialog">
             <svg class="icon">
               <use xlink:href="/assets/svg/icons.svg#x-octagon"></use>
             </svg>
@@ -60,8 +60,8 @@
       <?php endif; ?>
 
       <?php if ($type == 'qa') : ?>
-        <?php if ($post['post_comments_count'] > 1 && $level == 0) : ?>
-          <?php if ($container->user()->id() == $post['post_user_id'] || $container->user()->admin()) : ?>
+        <?php if ($item['post_comments_count'] > 1 && $level == 0) : ?>
+          <?php if ($container->user()->id() == $item['post_user_id'] || $container->user()->admin()) : ?>
             <li>
               <a id="best_<?= $comment['comment_id']; ?>" data-id="<?= $comment['comment_id']; ?>" class="comment-best">
                 <svg class="icon">
@@ -79,7 +79,7 @@
       <?php endif; ?>
 
       <li>
-        <a rel="nofollow" class="gray-600" href="<?= post_slug($post['post_type'], $post['post_id'], $post['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
+        <a rel="nofollow" class="gray-600" href="<?= post_slug($item['post_type'], $item['post_id'], $item['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
           <svg class="icon">
             <use xlink:href="/assets/svg/icons.svg#anchor"></use>
           </svg>

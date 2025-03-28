@@ -111,12 +111,14 @@ class PublicationController extends Controller
             );
         } else {
 
+ 
+
             render(
-                '/publications/view/post',
+                '/publications/view/content',
                 [
                     'meta'  => Meta::publication($type, $content),
                     'data'  => [
-                        'post'          => $content,
+                        'contents'		=> $content,
                         'comments'      => BuildTree::index(0, $comments),
                         'recommend'     => PublicationModel::postSimilars($content['post_id'], (int)$facets[0]['facet_id'] ?? null),
                         'related_posts' => $related_posts ?? '',

@@ -71,7 +71,7 @@ function render(string $name, array $data = [])
     }
 	
 	$contentTheme = $userTheme . '/content/';
-    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $userTheme . '/content/' . $name)) {
+    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $userTheme . '/content/' . $name . '.php')) {
 		$contentTheme = 'default/content/';
     }
 

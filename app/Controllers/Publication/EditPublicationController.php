@@ -31,30 +31,30 @@ class EditPublicationController extends Controller
 	 */
 	public function index()
 	{
-		$post = Availability::content(Request::param('id')->asPositiveInt(), 'id');
+		$content = Availability::content(Request::param('id')->asPositiveInt(), 'id');
 
 		$post_related = [];
-		if ($post['post_related']) {
-			$post_related = PublicationModel::postRelated($post['post_related']);
+		if ($content['post_related']) {
+			$post_related = PublicationModel::postRelated($content['post_related']);
 		}
 
 		$blog = FacetModel::getFacetsUser('blog');
-		$this->checkingEditPermissions($post, $blog);
+		$this->checkingEditPermissions($content, $blog);
 
 		render(
 			'/publications/edit/index',
 			[
-				'meta'  => Meta::get(__('app.edit_' . $post['post_type'])),
+				'meta'  => Meta::get(__('app.edit_' . $content['post_type'])),
 				'data'  => [
-					'sheet'         => 'edit-post',
-					'post'          => $post,
-					'user'          => UserModel::get($post['post_user_id'], 'id'),
+					'sheet'         => 'edit-content',
+					'content'		=> $content,
+					'user'          => UserModel::get($content['post_user_id'], 'id'),
 					'blog'          => $blog,
 					'post_arr'      => $post_related,
-					'topic_arr'     => PublicationModel::getPostFacet($post['post_id'], 'topic'),
-					'blog_arr'      => PublicationModel::getPostFacet($post['post_id'], 'blog'),
-					'section_arr'   => PublicationModel::getPostFacet($post['post_id'], 'section'),
-					'poll'          => PollModel::getQuestion($post['post_poll']),
+					'topic_arr'     => PublicationModel::getPostFacet($content['post_id'], 'topic'),
+					'blog_arr'      => PublicationModel::getPostFacet($content['post_id'], 'blog'),
+					'section_arr'   => PublicationModel::getPostFacet($content['post_id'], 'section'),
+					'poll'          => PollModel::getQuestion($content['post_poll']),
 				]
 			]
 		);
