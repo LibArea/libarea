@@ -51,6 +51,11 @@ class PublicationController extends Controller
         $this->callIndex('page');
     }
 
+    public function redirect(): void
+    {
+        $this->callIndex('redirect');
+    }
+
     /**
      * Full post
      * Полный пост
@@ -138,16 +143,19 @@ class PublicationController extends Controller
 
     public function presence(string $type, int $id, string|null $slug)
     {
+		$content = Availability::content($id);
+		if ($type === 'redirect') {
+			redirect(post_slug($content['post_type'], $content['post_id'], $content['post_slug']));
+		}
+
         // Check id and get content data
         // Проверим id и получим данные контента
         if ($type === 'post') {
-            $content = Availability::content($id);
-
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
             if (config('meta', 'slug_post') == true) {
                 if ($slug != $content['post_slug']) {
-                    redirect(post_slug($type, $content['post_id'], $content['post_slug']));
+                    redirect(post_slug($content['post_type'], $content['post_id'], $content['post_slug']));
                 }
             }
 

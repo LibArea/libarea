@@ -249,9 +249,12 @@ Route::get('/question/{id}/{slug}')->controller(PublicationController::class, 'q
 Route::get('/posts/{id}')->controller(PublicationController::class, 'post')->where(['id' => '[0-9]+'])->name('post.id');
 Route::get('/posts/{id}/{slug}')->controller(PublicationController::class, 'post')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
+// Если посты старые, то редирект
+// http://***/post/1953/a-esli-perenesti-podval-v-levuyu-kolonku#comment_7181
+Route::get('/post/{id}/{slug?}')->controller(PublicationController::class, 'redirect')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('redirect');
+
 Route::get('/notes/{id}')->controller(PublicationController::class, 'note')->where(['id' => '[0-9]+'])->name('note.id');
 Route::get('/notes/{id}/{slug}')->controller(PublicationController::class, 'note')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('note');
-
 
 // Страницы info
 Route::get('/{facet_slug}/article/{slug}')->controller(PublicationController::class, 'page')->where(['facet_slug' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('page'); 
@@ -281,7 +284,6 @@ Route::get('/sitemap.xml')->controller(RssController::class);
 Route::get('/rss/all/posts')->controller(RssController::class, 'postsAll');
 Route::get('/rss-feed/topic/{slug}')->controller(RssController::class, 'rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/og-image/{id}')->controller(PublicationController::class, 'OgImage')->where(['id' => '[0-9-]+'])->name('og.image');
-
 
 // Тестирование
 Route::toGroup()->protect();

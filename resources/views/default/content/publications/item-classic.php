@@ -17,11 +17,16 @@
         <div class="mb15">
           <div class="uppercase-box">
             <?= insert('/content/publications/type-publication', ['type' => $item['post_type']]); ?>
+			<?php if ($item['post_type'] == 'post') : ?>
+			   <div class="right"><?= insert('/content/publications/title', ['item' => $item]); ?></div>
+			<?php endif; ?>
           </div>
 
           <a class="black" href="<?= $url; ?>">
             <h3 class="title"><?= $item['post_title']; ?>
-              <?= insert('/content/publications/title', ['item' => $item]); ?>
+              <?php if ($item['post_type'] != 'post') : ?>
+				<?= insert('/content/publications/title', ['item' => $item]); ?>
+			   <?php endif; ?>
             </h3>
           </a>
           <div class="flex gap lowercase">
