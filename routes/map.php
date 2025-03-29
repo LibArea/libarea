@@ -243,8 +243,8 @@ Route::get('/domain/{domain}')->controller(PublicationController::class, 'domain
 Route::get('/articles/{id}')->controller(PublicationController::class, 'article')->where(['id' => '[0-9]+'])->name('article.id');
 Route::get('/articles/{id}/{slug}')->controller(PublicationController::class, 'article')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('article');
 
-Route::get('/question/{id}')->controller(PublicationController::class, 'question')->where(['id' => '[0-9]+'])->name('question.id');
-Route::get('/question/{id}/{slug}')->controller(PublicationController::class, 'question')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('question');
+Route::get('/questions/{id}')->controller(PublicationController::class, 'question')->where(['id' => '[0-9]+'])->name('question.id');
+Route::get('/questions/{id}/{slug}')->controller(PublicationController::class, 'question')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('question');
 
 Route::get('/posts/{id}')->controller(PublicationController::class, 'post')->where(['id' => '[0-9]+'])->name('post.id');
 Route::get('/posts/{id}/{slug}')->controller(PublicationController::class, 'post')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');

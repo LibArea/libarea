@@ -25,6 +25,7 @@ class SearchModel extends Model
                 post_id, 
                 post_title as title, 
                 post_slug, 
+				post_type, 
                 post_published, 
                 post_user_id, 
                 post_votes as votes, 
@@ -42,7 +43,7 @@ class SearchModel extends Model
                                 GROUP BY relation_post_id  
                     ) AS rel ON rel.relation_post_id = post_id  
                         LEFT JOIN users ON id = post_user_id 
-                            WHERE post_is_deleted = 0 AND post_draft = 0 AND post_tl = 0 AND post_hidden = 0 AND post_type = 'post'
+                            WHERE post_is_deleted = 0 AND post_draft = 0 AND post_tl = 0 AND post_hidden = 0 AND post_type != 'page' AND post_type != 'note'
                                 AND MATCH(post_title, post_content) AGAINST (:qa) LIMIT :start, :limit";
 
         return DB::run($sql, ['qa' => $query, 'start' => $start, 'limit' => $limit])->fetchAll();
@@ -51,7 +52,7 @@ class SearchModel extends Model
     public static function getComments(int $page, int $limit, string $query)
     {
         $start  = ($page - 1) * $limit;
-        $sql = "SELECT comment_id, comment_content, post_id, post_slug, post_title as title
+        $sql = "SELECT comment_id, comment_content, post_id, post_slug, post_type, post_title as title
                     FROM comments  
                     LEFT JOIN posts ON comment_post_id = post_id 
                         WHERE post_is_deleted = 0

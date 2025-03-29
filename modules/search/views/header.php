@@ -1,5 +1,5 @@
 <?php
-$uri = $data['type'] ?? 'post';
+$uri = $data['type'] ?? 'content';
 $q = $data['q'];
 ?>
 
@@ -27,8 +27,8 @@ $q = $data['q'];
 
   <div id="contentWrapper" class="wrap mb20">
     <ul class="nav inline ml10">
-      <li<?php if ($uri == 'post') : ?> class="active" <?php endif; ?>>
-        <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=post"><?= __('search.posts'); ?></a>
+      <li<?php if ($uri == 'content') : ?> class="active" <?php endif; ?>>
+        <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=content"><?= __('app.content'); ?></a>
         </li>
         <li<?php if ($uri == 'comment') : ?> class="active" <?php endif; ?>>
           <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=comment"><?= __('search.comments'); ?></a>

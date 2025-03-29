@@ -52,6 +52,10 @@ class Сhecks
          *
          * In config: perDay_post
          */
+		if (in_array($type, ['post', 'article', 'question', 'note', 'page'])) {
+			$type = 'post';
+        } 
+		 
         $сount = ActionModel::getSpeedDay($type);
 
         $total = config('trust-levels', 'perDay_' . $type) * config('trust-levels', 'multiplier_' . UserData::getUserTl());

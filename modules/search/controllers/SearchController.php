@@ -40,9 +40,12 @@ class SearchController extends Module
         $q      = Request::get('q')->value();
         $type   = Request::get('cat')->value();
 
-        if (!in_array($type, ['post', 'comment'])) {
-            $type = 'post';
+ 
+
+        if (!in_array($type, ['content', 'comment'])) {
+            $type = 'content';
         }
+
 
         $sw = microtime(true);
 
@@ -71,7 +74,7 @@ class SearchController extends Module
 
         $count = $count_results ?? 0;
 
-        $facet = $type === 'post' ? 'topic' : 'category';
+
         return view(
             'search',
             [
@@ -81,7 +84,7 @@ class SearchController extends Module
                     'type'          => $type,
                     'sheet'         => 'admin',
                     'q'             => $q ?? null,
-                    'tags'          => SearchModel::getSearchTags($q ?? null, $facet, 4),
+                    'tags'          => SearchModel::getSearchTags($q ?? null, 'topic', 4),
                     'sw'            => round((microtime(true) - $sw ?? 0) * 1000, 4),
                     'count'         => $count,
                     'pagesCount'    => ceil($count / $this->limit),
@@ -98,7 +101,7 @@ class SearchController extends Module
     public function api()
     {
         $query = $this->validateInput(Request::post('query'));
-        $type = $this->validateType(Request::post('type'));
+        $type = Request::post('type');
 
         $content = $type === 'topic' ? 'post' : 'comment';
 
@@ -113,11 +116,5 @@ class SearchController extends Module
     private function validateInput($input)
     {
         return preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $input->asString());
-    }
-
-    private function validateType($type)
-    {
-        $belong = $type->asString();
-        return $belong === 'topic' ? 'topic' : 'category';
     }
 }

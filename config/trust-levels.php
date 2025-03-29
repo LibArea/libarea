@@ -28,11 +28,7 @@ return [
     'tl_add_poll'       => 2,
     'tl_add_pm'         => 1, // Private messages (личные сообщения)
     'tl_add_draft'      => 2, // Drafts (черновики)
-
-    // С какого TL можно комментировать ответы в QA модели
-    'tl_add_comm_qa'    => 2,
-    // С какого TL можно размещать ссылки: Reddit
-    'tl_add_url'        => 3,
+    'tl_add_comm_qa'    => 2, // С какого TL можно комментировать ответы в QA модели
 
     // Уровень TL, до которого (включая) отправка жалоб невозможна
     // TL level, up to which (including) sending complaints is not possible
