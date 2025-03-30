@@ -163,6 +163,13 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 		Route::post('/poll/option/del')->controller(EditPollController::class);
 		Route::post('/poll')->controller(PollController::class, 'vote');
 		Route::post('/new/email')->controller(SettingController::class, 'newEmail');
+		
+		// Отправка и изменение контента
+		Route::post('/user/edit/profile')->controller(SettingController::class, 'profile')->where(['type' => '[a-z]+'])->name('setting.edit.profile');
+		Route::post('/user/edit/avatar')->controller(SettingController::class, 'avatar')->where(['type' => '[a-z]+'])->name('setting.edit.avatar');
+		Route::post('/user/edit/security')->controller(SettingController::class, 'security')->where(['type' => '[a-z]+'])->name('setting.edit.security');
+		Route::post('/user/edit/preferences')->controller(SettingController::class, 'preferences')->where(['type' => '[a-z]+'])->name('setting.edit.preferences');
+		Route::post('/user/edit/notification')->controller(SettingController::class, 'notification')->where(['type' => '[a-z]+'])->name('setting.edit.notification');
 	Route::endGroup();	
 
     Route::post('/notif')->controller(NotificationController::class, 'get');
@@ -171,12 +178,6 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
     Route::toGroup()->middleware(LimitsMiddleware::class)->protect();
 	
 		// Отправка и изменение контента
-		Route::post('/user/edit/profile')->controller(SettingController::class, 'profile')->where(['type' => '[a-z]+'])->name('setting.edit.profile');
-		Route::post('/user/edit/avatar')->controller(SettingController::class, 'avatar')->where(['type' => '[a-z]+'])->name('setting.edit.avatar');
-		Route::post('/user/edit/security')->controller(SettingController::class, 'security')->where(['type' => '[a-z]+'])->name('setting.edit.security');
-		Route::post('/user/edit/preferences')->controller(SettingController::class, 'preferences')->where(['type' => '[a-z]+'])->name('setting.edit.preferences');
-		Route::post('/user/edit/notification')->controller(SettingController::class, 'notification')->where(['type' => '[a-z]+'])->name('setting.edit.notification');
-
 		Route::post('/team/edit/{type}/{id}')->controller(TeamFacetController::class, 'edit')->where(['type' => '[a-z]+', 'id' => '[0-9]+'])->name('team.edit');
 		
 		Route::post('/edit/content/article')->controller(EditPublicationController::class, 'editArticle')->name('edit.article');

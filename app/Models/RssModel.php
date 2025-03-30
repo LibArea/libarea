@@ -15,7 +15,7 @@ class RssModel extends Model
      */
     public static function getPosts()
     {
-        $sql = "SELECT post_id, post_slug, post_title, post_content, post_date, post_content_img FROM posts 
+        $sql = "SELECT post_id, post_slug, post_type, post_title, post_content, post_date, post_content_img FROM posts 
 					WHERE post_is_deleted = 0 AND post_tl = 0 AND post_draft = 0 ORDER BY post_id DESC LIMIT 500";
 
         return  DB::run($sql)->fetchAll();
@@ -27,7 +27,7 @@ class RssModel extends Model
      */
     public static function getPostsSitemap()
     {
-        $sql = "SELECT post_id, post_slug FROM posts WHERE post_is_deleted = 0 AND post_tl = 0 AND post_draft = 0";
+        $sql = "SELECT post_id, post_slug, post_type FROM posts WHERE post_is_deleted = 0 AND post_tl = 0 AND post_draft = 0";
 
         return  DB::run($sql)->fetchAll();
     }

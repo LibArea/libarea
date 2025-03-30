@@ -50,8 +50,8 @@ class TopicFacetController extends Controller
     }
 
     /**
-     * Posts in the topic 
-     * Посты по теме
+     * Contents in the topic 
+     * Содержимое (посты, статьи...) по теме
      *
      * @param [type] $type
      * @return void
@@ -65,7 +65,7 @@ class TopicFacetController extends Controller
             exit();
         }
 
-        $posts      = FeedModel::feed(Html::pageNumber(), $this->limit, $type, $facet['facet_slug']);
+        $contents	= FeedModel::feed(Html::pageNumber(), $this->limit, $type, $facet['facet_slug']);
         $pagesCount = FeedModel::feedCount($type, $facet['facet_slug']);
 
         render(
@@ -77,7 +77,7 @@ class TopicFacetController extends Controller
                     [
                         'pagesCount'    => ceil($pagesCount / $this->limit),
                         'pNum'          => Html::pageNumber(),
-                        'posts'         => $posts,
+                        'contents'		=> $contents,
                         'sheet'         => $type,
                         'type'          => 'topic',
                     ]
