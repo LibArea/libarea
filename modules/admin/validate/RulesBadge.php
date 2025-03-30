@@ -6,7 +6,7 @@ namespace Modules\Admin\Validate;
 
 use Respect\Validation\Validator as v;
 
-class RulesBadge extends Validator
+class RulesBadge
 {
     public static function rules(array $data, string $icon): true
     {
