@@ -38,7 +38,7 @@
   <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
 <?php endif; ?>
 
-<?php if ($item['post_type'] == 'post') : ?>
+<?php if ($item['post_type'] != 'post') : ?>
   <?= insert('/_block/form/select/related-posts', ['data' => $data]); ?>
 <?php endif; ?>
 

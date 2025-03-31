@@ -16,7 +16,7 @@
       </div>
       <a class="block" href="<?= post_slug($comment['post_type'], $comment['post_id'], $comment['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
 	    <?php if ($comment['post_type'] === 'post') : ?>
-	      <div class="comment-text"><?= markdown($comment['comment_content']); ?></div>
+	      <div class="comment-text black"><?= markdown($comment['comment_content']); ?></div>
 	    <?php else : ?>
           <?= $comment['post_title']; ?>
 		<?php endif; ?>

@@ -13,14 +13,8 @@
     <?php if ($container->access()->auditСontent('post', $item)) continue; ?>
 
     <article>
-      <div class="uppercase-box">
-        <?= insert('/content/publications/type-publication', ['type' => $item['post_type']]); ?>
-		
-		<?php if ($item['post_type'] == 'post') : ?>
-		   <div class="right"><?= insert('/content/publications/title', ['item' => $item]); ?></div>
-		<?php endif; ?>
-      </div>
-
+      <div class="right"><?= insert('/content/publications/title', ['item' => $item]); ?></div>
+     
       <div class="user-info">
         <a href="<?= url('profile', ['login' => $item['login']]); ?>">
           <?= Img::avatar($item['avatar'], '', 'img-sm mr5', 'max'); ?>
@@ -34,18 +28,16 @@
         if ($type != 'blog') : ?>
           <?= Html::facets($item['facet_list'], 'blog', 'brown'); ?>
         <?php endif; ?>
-
       </div>
       <div class="mb15">
-        <a class="black" href="<?= $url; ?>">
-          <h3 class="title"><?= $item['post_title']; ?>
-		    <?php if ($item['post_type'] != 'post') : ?>
-				<?= insert('/content/publications/title', ['item' => $item]); ?>
-			<?php endif; ?>
-          </h3>
-        </a>
-
-        <div class="flex gap lowercase">
+	    <?php if ($item['post_type'] != 'post') : ?>
+			<a class="black" href="<?= $url; ?>">
+			  <h3 class="title"><?= $item['post_title']; ?></h3>
+			</a>
+        <?php endif; ?>   
+        <div class="flex gap lowercase text-sm">
+		   <?= insert('/content/publications/type-publication', ['type' => $item['post_type']]); ?>
+		
           <?php $type = $data['type'] ?? 'topic';
           if ($type == 'blog') : ?>
             <?= Html::facets_blog($data['facet']['facet_slug'], $item['facet_list'], 'gray-600 text-sm'); ?>
@@ -74,9 +66,13 @@
               </a>
             <?php endif; ?>
           <?php endif; ?>
-
-          <?php $arr = \App\Content\Parser\Content::cut($item['post_content']);
-          echo markdown($arr['content']); ?>
+ 
+          <?php if ($item['post_type'] == 'post') : ?><a class="black" href="<?= $url; ?>"><?php endif; ?>
+			  <?php $arr = \App\Content\Parser\Content::cut($item['post_content']);
+			  echo markdown($arr['content']); ?>
+		  <?php if ($item['post_type'] == 'post') : ?></a><?php endif; ?>
+		  
+		  
         </div>
       </div>
 

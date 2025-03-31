@@ -354,7 +354,8 @@ class Html
             $head .= '<li>' . $header . '</li>';
 
             $from[$i] = $resultats[0][$i];
-            $to[$i] = '<a class="anchor black" name="' . $anchor . '">' . strip_tags($resultats[0][$i]) . '</a>';
+
+            $to[$i] = '<a class="anchor black" name="' . $anchor . '">' . $resultats[0][$i] . '</a>';
         }
 
         for ($i = 0; $i <= ($depth - $start); $i++) {

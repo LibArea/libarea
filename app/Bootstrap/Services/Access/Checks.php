@@ -16,7 +16,7 @@ class Сhecks
         $type = basename($path);
 
         // TODO: Изменим поля в DB, чтобы использовать limitContent для messages и invitation: 
-        if (in_array($type, ['post', 'article', 'question', 'note', 'page', 'comment', 'poll'])) {
+        if (in_array($type, ['post', 'article', 'question', 'note', 'page', 'comment', 'poll', 'blog', 'message'])) {
             if (self::limitContent($type) === false) {
                 Msg::add(__('msg.limit_day'), 'error');
                 redirect('/');
@@ -44,6 +44,10 @@ class Сhecks
         if (self::trustLevels(config('trust-levels', 'tl_add_' . $type)) == false) {
             return false;
         }
+
+		if (in_array($type, ['blog', 'message'])) {
+			return true;
+		}	
 
         /**
          * Limit per day for the level of confidence, taking into account coefficients.

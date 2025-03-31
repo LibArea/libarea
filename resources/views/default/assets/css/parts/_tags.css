@@ -85,6 +85,7 @@
   width: 100%;
   max-width: 780px;
   border-radius: var(--rounded);
+  background-color: var(--white);
 }
 
 .tagify--noTags[required] {

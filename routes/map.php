@@ -170,6 +170,8 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 		Route::post('/user/edit/security')->controller(SettingController::class, 'security')->where(['type' => '[a-z]+'])->name('setting.edit.security');
 		Route::post('/user/edit/preferences')->controller(SettingController::class, 'preferences')->where(['type' => '[a-z]+'])->name('setting.edit.preferences');
 		Route::post('/user/edit/notification')->controller(SettingController::class, 'notification')->where(['type' => '[a-z]+'])->name('setting.edit.notification');
+		
+		Route::post('/edit/facet/logo/{type}/{facet_id}')->controller(EditFacetController::class, 'logoEdit')->where(['type' => '[a-z]+', 'facet_id' => '[0-9]+'])->name('edit.logo.facet');
 	Route::endGroup();	
 
     Route::post('/notif')->controller(NotificationController::class, 'get');
@@ -188,7 +190,7 @@ Route::toGroup()->middleware(DefaultMiddleware::class, data: [RegType::USER_FIRS
 		
 		Route::post('/edit/comment')->controller(EditCommentController::class, 'edit')->name('edit.comment');
 		Route::post('/edit/facet/{type}')->controller(EditFacetController::class, 'edit')->where(['type' => '[a-z]+'])->name('edit.facet');
-		Route::post('/edit/facet/logo/{type}/{facet_id}')->controller(EditFacetController::class, 'logoEdit')->where(['type' => '[a-z]+', 'facet_id' => '[0-9]+'])->name('edit.logo.facet');
+		 
 		Route::post('/edit/poll')->controller(EditPollController::class, 'edit')->name('edit.poll');
 		Route::post('/edit/message')->controller(MessagesController::class, 'edit')->name('edit.message');
 

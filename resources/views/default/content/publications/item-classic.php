@@ -15,22 +15,15 @@
     <article>
       <div class="flex justify-between">
         <div class="mb15">
-          <div class="uppercase-box">
+          <div class="right"><?= insert('/content/publications/title', ['item' => $item]); ?></div>
+
+		  <?php if ($item['post_type'] != 'post') : ?>
+            <a class="black" href="<?= $url; ?>">
+              <h3 class="title"><?= $item['post_title']; ?></h3>
+            </a>
+		  <?php endif; ?>	
+          <div class="flex gap text-sm lowercase">
             <?= insert('/content/publications/type-publication', ['type' => $item['post_type']]); ?>
-			<?php if ($item['post_type'] == 'post') : ?>
-			   <div class="right"><?= insert('/content/publications/title', ['item' => $item]); ?></div>
-			<?php endif; ?>
-          </div>
-
-          <a class="black" href="<?= $url; ?>">
-            <h3 class="title"><?= $item['post_title']; ?>
-              <?php if ($item['post_type'] != 'post') : ?>
-				<?= insert('/content/publications/title', ['item' => $item]); ?>
-			   <?php endif; ?>
-            </h3>
-          </a>
-          <div class="flex gap lowercase">
-
             <?php $type = $data['type'] ?? 'topic';
             if ($type == 'blog') : ?>
               <?= Html::facets_blog($data['facet']['facet_slug'], $item['facet_list'], 'gray-600 text-sm'); ?>
@@ -47,9 +40,11 @@
               </a>
             <?php endif; ?>
           </div>
+		   <?php if ($item['post_type'] = 'post') : ?><a class="black" href="<?= $url; ?>"><?php endif; ?>
           <div class="cut-content mb-none">
             <?= fragment($item['post_content'], 250); ?>
           </div>
+		  <?php if ($item['post_type'] = 'post') : ?></a><?php endif; ?>
         </div>
 
         <?php if ($item['post_content_img'] || $item['post_thumb_img']) : ?>
