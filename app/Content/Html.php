@@ -318,6 +318,7 @@ class Html
         return $pageNumber <= 1 ? 1 : $pageNumber;
     }
 
+	// Заголовки к контенту
     public static function headings($html_string, $slug)
     {
         if (!preg_match_all('#<h([1-5])>(.*?)</h[1-5]>#', $html_string, $resultats)) {
