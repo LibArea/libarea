@@ -9,9 +9,9 @@ class ActionModel extends Model
 {
     // Get information on the content depending on the type
     // Получим информацию по контенту в зависимости от типа
-    public static function getInfoTypeContent($type_id, $type)
+    public static function getInfoTypeContent($id, $type)
     {
-        $sql = "select * from " . $type . "s WHERE " . $type . "_id = " . $type_id . "";
+        $sql = "select * from " . $type . "s WHERE " . $type . "_id = " . $id . "";
 
         return DB::run($sql)->fetch();
     }
