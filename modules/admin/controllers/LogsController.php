@@ -6,7 +6,8 @@ namespace Modules\Admin\Controllers;
 
 use Hleb\Base\Module;
 use Hleb\Constructor\Data\View;
-use Modules\Admin\Models\{SearchModel, LogModel};
+use Modules\Admin\Models\LogModel;
+use Modules\Search\Models\SearchModel;
 use Meta, Html;
 
 class LogsController extends Module

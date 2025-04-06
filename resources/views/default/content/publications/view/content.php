@@ -240,39 +240,14 @@ $blog = $data['blog'][0] ?? null;
     </div>
   <?php endif; ?>
 
-  <?php if ($data['recommend'] && $item['post_is_deleted'] != 1) : ?>
+  <?php if ($data['similar'] && $item['post_is_deleted'] != 1) : ?>
     <div class="box sticky top-sm">
       <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
-      <?php foreach ($data['recommend'] as  $rec) : ?>
-        <div class="text-sm2">
-          <a class="black" href="<?= post_slug($rec['post_type'], $rec['post_id'], $rec['post_slug']); ?>">
-		    <?php if ($rec['post_type'] == 'post') : ?>
-			  <?= fragment($rec['post_content'], 58); ?>
-		    <?php else : ?>
-              <?= fragment($rec['post_title'], 58); ?>
-			<?php endif; ?>
+      <?php foreach ($data['similar'] as  $rec) : ?>
+	      <?php $url =  (config('general', 'search_engine') == true) ? $rec['url'] : post_slug($rec['post_type'], $rec['post_id'], $rec['post_slug']);  ?>
+          <a class="black mb20 block" href="<?= $url; ?>">
+		     <?= $rec['title']; ?>
           </a>
-          <div class="text-sm gray-600 items-center flex gap mb15">
-            <div class="items-center flex gap-sm mt5">
-              <?= insert('/content/publications/type-publication', ['type' => $rec['post_type']]); ?>
-            </div>
-
-            <div class="items-center flex gap-sm mt5">
-              <svg class="icon">
-                <use xlink:href="/assets/svg/icons.svg#eye"></use>
-              </svg>
-              <?= HTML::formatToHuman($rec['post_hits_count']); ?>
-            </div>
-            <?php if ($rec['post_comments_count'] > 0) : ?>
-              <div class="items-center flex gap-sm mt5">
-                <svg class="icon">
-                  <use xlink:href="/assets/svg/icons.svg#comments"></use>
-                </svg>
-                <?= $rec['post_comments_count'] ?>
-              </div>
-            <?php endif; ?>
-          </div>
-        </div>
       <?php endforeach; ?>
     </div>
   <?php else : ?>

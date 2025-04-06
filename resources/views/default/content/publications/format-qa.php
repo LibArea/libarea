@@ -25,6 +25,22 @@
             <li class="comment">
               <a class="anchor-top" id="comment_<?= $node['comment_id']; ?>"></a>
               <div class="comment comment-body comment_level-left-<?= $indent; ?>" id="comment_<?= $node['comment_id']; ?>">
+			  
+			  <div class="user-info mb10">
+			    <a href="<?= url('profile', ['login' => $node['login']]); ?>">
+                      <?= Img::avatar($node['avatar'], $node['login'], 'img-sm mr5', 'small'); ?>
+                      <span class="nickname<?php if (Html::loginColor($node['created_at'])) : ?> new<?php endif; ?>">
+                        <?= $node['login']; ?>
+                      </span>
+                </a>
+                    <span class="lowercase"><?= langDate($node['comment_date']); ?></span>
+                    <?php if ($node['comment_published'] == 0 && $container->user()->admin()) : ?>
+                      <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
+                    <?php endif; ?>
+			  
+				<?= insert('/content/comments/menu', ['item' => $item, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
+			   
+			   </div>
                 <div class="comment-text<?php if ($level == 1) : ?> text-sm<?php endif; ?>">
                   <?= markdown($node['comment_content'], 'text'); ?>
                 </div>
@@ -40,19 +56,11 @@
                       <?php endif; ?>
                     <?php endif; ?>
 
-                    <?= insert('/content/comments/menu', ['item' => $item, 'comment' => $node, 'type' => 'qa', 'level' => $indent]); ?>
+              
                   </div>
-                  <div class="gray-600 flex gap lowercase mb5">
-                    <a class="gray-600" href="<?= url('profile', ['login' => $node['login']]); ?>">
-                      <span class="nickname<?php if (Html::loginColor($node['created_at'])) : ?> new<?php endif; ?>"><?= $node['login']; ?></span>
-                    </a>
-                    <span class="mb-none"><?= langDate($node['comment_date']); ?></span>
-                    <?php if ($node['comment_published'] == 0 && $container->user()->admin()) : ?>
-                      <span class="ml15 red lowercase"><?= __('app.audits'); ?></span>
-                    <?php endif; ?>
-                  </div>
+               
                 </div>
-                <?php if ($indent == '0_0') : ?><div class="mb5 br-bottom"></div><?php endif; ?>
+                <?php if ($indent == '0_0') : ?><div class="mt5 mb5 br-bottom"></div><?php endif; ?>
                 <?php if ($level == 1) : ?><div class="br-dotted"></div><?php endif; ?>
 
                 <div id="el_addentry<?= $node['comment_id']; ?>" class="none"></div>

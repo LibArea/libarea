@@ -141,35 +141,6 @@ class PublicationModel extends Model
         return DB::run($sql, $data)->fetch();
     }
 
-    // Recommended posts
-    // This should not be your own post, whose TL is not higher than the participant, the post is not a draft, not deleted, etc.
-    // Рекомендованные посты
-    // Это должен быть не свой пост, у которого TL не выше участника, пост не черновик, не удален и т.д.
-    public static function postSimilars(int $post_id, int $facet_id, int $limit = 5)
-    {
-        $tl = self::container()->user()->tl() == null ? 0 : self::container()->user()->tl();
-        $sql = "SELECT 
-                    post_id,
-                    post_title,
-                    post_slug,
-					post_content,
-                    post_comments_count,
-					post_hits_count,
-                    post_type
-                        FROM posts
-                            LEFT JOIN facets_posts_relation on post_id = relation_post_id
-                                WHERE post_id != :post_id 
-                                    AND post_is_deleted = 0
-                                    AND post_draft = 0
-                                    AND post_tl <= :tl 
-                                    AND post_user_id != :user_id
-                                    AND post_type != 'page'
-                                    AND relation_facet_id = :facet_id
-                                        ORDER BY post_id DESC LIMIT :limit";
-
-        return DB::run($sql, ['post_id' => $post_id, 'user_id' => self::container()->user()->id(), 'tl' => $tl, 'limit' => $limit, 'facet_id' => $facet_id])->fetchAll();
-    }
-
     // $type (comments / hits)
     public static function updateCount(int $post_id, string $type)
     {
@@ -472,5 +443,34 @@ class PublicationModel extends Model
                                 ORDER BY post_id DESC LIMIT 5";
 
         return DB::run($sql, ['id' => $id])->fetchAll();
+    }
+	
+    // Recommended posts
+    // This should not be your own post, whose TL is not higher than the participant, the post is not a draft, not deleted, etc.
+    // Рекомендованные посты
+    // Это должен быть не свой пост, у которого TL не выше участника, пост не черновик, не удален и т.д.
+    public static function postSimilars(int $post_id, int $facet_id, int $limit = 5)
+    {
+        $tl = self::container()->user()->tl() == null ? 0 : self::container()->user()->tl();
+        $sql = "SELECT 
+                    post_id,
+                    post_title as title,
+                    post_slug,
+					post_content,
+                    post_comments_count,
+					post_hits_count,
+                    post_type
+                        FROM posts
+                            LEFT JOIN facets_posts_relation on post_id = relation_post_id
+                                WHERE post_id != :post_id 
+                                    AND post_is_deleted = 0
+                                    AND post_draft = 0
+                                    AND post_tl <= :tl 
+                                    AND post_user_id != :user_id
+                                    AND post_type != 'page'
+                                    AND relation_facet_id = :facet_id
+                                        ORDER BY post_id DESC LIMIT :limit";
+
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => self::container()->user()->id(), 'tl' => $tl, 'limit' => $limit, 'facet_id' => $facet_id])->fetchAll();
     }
 }

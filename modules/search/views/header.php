@@ -20,7 +20,7 @@ $q = $data['q'];
 
   <div class="wrap mb20">
     <form id="s-page" method="get" action="<?= url('search.go'); ?>">
-      <input class="search w-100 bg-white" type="text" name="q" value="<?= htmlEncode($q); ?>" placeholder="<?= __('search.find'); ?>" class="search">
+      <input class="search w-100" type="text" name="q" value="<?= htmlEncode($q); ?>" placeholder="<?= __('search.find'); ?>" class="search">
       <input name="cat" value="<?= $uri; ?>" type="hidden">
     </form>
   </div>
@@ -30,8 +30,8 @@ $q = $data['q'];
       <li<?php if ($uri == 'content') : ?> class="active" <?php endif; ?>>
         <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=content"><?= __('app.content'); ?></a>
         </li>
-        <li<?php if ($uri == 'comment') : ?> class="active" <?php endif; ?>>
+        <!--li<?php if ($uri == 'comment') : ?> class="active" <?php endif; ?>>
           <a href="<?= url('search.go'); ?>?q=<?= htmlEncode($q); ?>&cat=comment"><?= __('search.comments'); ?></a>
-          </li>
+          </li-->
     </ul>
   </div>

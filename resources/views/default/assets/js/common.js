@@ -65,52 +65,6 @@ isIdEmpty('toggledark').onclick = function () {
   toggleMode("dayNight", "dark", "light");
 };
 
-// Search functionality
-isIdEmpty('find').onclick = function () {
-  getById('find').addEventListener('keydown', fetchSearch);
-};
-
-function fetchSearch() {
-  let query = getById("find").value;
-  let type = getById("find").dataset.id;
-  if (query.length < 2) return;
-  let url = type === 'category' ? '/web/dir/all/' : '/topic/';
-
-  fetch("/search/api", {
-    method: "POST",
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: "query=" + query + "&type=" + type,
-  })
-    .then(response => response.text())
-    .then(text => {
-      let results = JSON.parse(text);
-      let html = '<div class="flex">';
-
-      for (let key in results) {
-        // Other type-specific rendering
-        html += renderLink('/topic/', results[key].facet_slug, results[key].facet_title);
-        html += renderLink('/post/', results[key].post_id, results[key].title);
-        html += '</div>';
-      }
-
-      if (Object.keys(results).length !== 0) {
-        let items = getById("search_items");
-        items.classList.add("block");
-        items.innerHTML = html;
-      }
-
-      let menu = document.querySelector('.none.block');
-      if (menu) {
-        document.onclick = function (event) {
-          if (event.target.className != '.none.block') {
-            let items = getById("search_items");
-            items.classList.remove("block");
-          };
-        };
-      }
-    });
-}
-
 // When you click, the search bar pops up
 let input = document.querySelector('.search')
 const btnSearch = document.querySelector(".button-search");

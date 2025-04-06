@@ -7,15 +7,23 @@ namespace Modules\Admin\Controllers;
 use Hleb\Static\Request;
 use Hleb\Base\Module;
 use App\Bootstrap\Services\Auth\RegType;
+use Modules\Search\Models\SearchModel;
 use Modules\Admin\Models\ConsoleModel;
+
 use SendEmail, Msg;
+
+use S2\Rose\Stemmer\PorterStemmerRussian;
+use S2\Rose\Stemmer\PorterStemmerEnglish;
+use S2\Rose\Entity\Indexable;
+use S2\Rose\Indexer;
+
 
 class ConsoleController extends Module
 {
     public static function index()
     {
         $choice  = Request::post('type')->value();
-        $allowed = ['css', 'topic', 'post', 'up', 'tl'];
+        $allowed = ['css', 'topic', 'post', 'up', 'tl', 'allContents', 'allFacets', 'allIndex', 'newIndex'];
         if (!in_array($choice, $allowed, true)) {
             redirect(url('admin.tools'));
         }
@@ -94,4 +102,99 @@ class ConsoleController extends Module
     {
         return true;
     }
+	
+	public static function allIndex()
+	{
+		// Удалим и заново построим таблицы при полной индексации
+		$storage = SearchModel::PdoStorage();
+		$storage->erase(); 
+		
+		self::allContents();
+		self::allFacets();
+	}
+	
+    public static function allContents()
+    {
+		$indexer = self::indexer();
+		 
+		// Индексируем контент 
+		$contents = SearchModel::getContentsAll(); 
+		foreach ($contents as $item) {
+
+			$indexable = new Indexable(
+				(string)$item['post_id'], 
+				$item['post_title'],
+				markdown($item['post_content'], 'text'),
+				1 // 1 - статьи
+			);
+
+			$url =  post_slug($item['post_type'], $item['post_id'], $item['post_slug']) ?? 'null';
+
+			$indexable->setUrl((string)$url);
+
+			$indexer->index($indexable);
+		} 
+		 
+		self::consoleRedirect(); 
+    }
+	
+    public static function allFacets()
+    {
+		$indexer = self::indexer();
+		 
+		// Индексируем Фасеты  
+		$facets = SearchModel::getFacetsAll();
+		foreach ($facets as $facet) {
+			
+			$indexableCat = new Indexable(
+				(string)$facet['facet_id'],
+				$facet['facet_title'],
+				$facet['facet_info'] ?? '-',
+				2 // 2 - фасеты
+			);
+			
+			$indexableCat->setUrl($facet['facet_slug']);				
+			
+			$indexer->index($indexableCat);
+		}
+		 
+		self::consoleRedirect(); 
+    }
+	
+    public static function newIndex()
+    {
+		$indexer = self::indexer();
+		 
+		$lastId = SearchModel::getLastIDContent();
+
+		$contents = SearchModel::newIndexContent($lastId);
+		
+		foreach ($contents as $item) {
+			
+			$indexable = new Indexable(
+				(string)$item['post_id'], 
+				$item['post_title'],
+				markdown($item['post_content'], 'text'),
+				1 // 1 - статьи
+			);
+
+			$url =  post_slug($item['post_type'], $item['post_id'], $item['post_slug']) ?? 'null';
+
+			$indexable->setUrl((string)$url);			
+			
+			$indexer->index($indexable);
+		}
+		 
+		self::consoleRedirect(); 
+    }
+	
+	public static function indexer()
+	{
+		$storage = SearchModel::PdoStorage();
+		 
+		$stemmer = new PorterStemmerRussian(new PorterStemmerEnglish());
+		
+		return new Indexer($storage, $stemmer);
+	}
+	
 }

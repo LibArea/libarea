@@ -44,7 +44,9 @@
 		"gemorroj/stop-spam": "dev-master",
 		"phphleb/idnaconv": "dev-main",
 		"elvanto/litemoji": "dev-master",
-		"respect/validation": "2.4.x-dev"
+		"league/html-to-markdown": "5.2.x-dev",
+		"respect/validation": "2.4.x-dev",
+		"s2/rose": "dev-master"
     },
     "autoload": {
         "classmap": [

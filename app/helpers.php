@@ -85,7 +85,7 @@ function render(string $name, array $data = [])
 
 function closing()
 {
-    if (config('general', '.site_disabled')  && !UserData::checkAdmin()) {
+    if (config('general', 'site_disabled')  && !UserData::checkAdmin()) {
         insert('site-off');
         exit();
     }

@@ -152,8 +152,8 @@ h5 {
   margin: 0 auto;
   height: 100%;
   max-width: 1520px;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .d-header_contents {
@@ -640,4 +640,8 @@ li.zebra+li {
 
 .linta-100 {
   margin: 15px -25px;
+}
+
+.search-page {
+  background-color: var(--white);
 }

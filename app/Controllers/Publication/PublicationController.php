@@ -18,6 +18,9 @@ use BuildTree, Html, Meta, MetaImage, Img;
 use Parsedown;
 use League\HTMLToMarkdown\HtmlConverter;
 
+use Modules\Search\Models\SearchModel;
+use S2\Rose\Entity\ExternalId;
+
 class PublicationController extends Controller
 {
     use Views;
@@ -116,6 +119,13 @@ class PublicationController extends Controller
             );
         } else {
 
+            if (config('general', 'search_engine') == true) {  
+				$storage = SearchModel::PdoStorage();
+				$similar = $storage->getSimilar(new ExternalId($content['post_id'], 1), false, 1, 5 , 5);
+			} else {
+				$similar = PublicationModel::postSimilars($content['post_id'], (int)$facets[0]['facet_id'] ?? null);
+			}
+			
             render(
                 '/publications/view/content',
                 [
@@ -123,7 +133,7 @@ class PublicationController extends Controller
                     'data'  => [
                         'contents'		=> $content,
                         'comments'      => BuildTree::index(0, $comments),
-                        'recommend'     => PublicationModel::postSimilars($content['post_id'], (int)$facets[0]['facet_id'] ?? null),
+                        'similar'     	=> $similar,
                         'related_posts' => $related_posts ?? '',
                         'post_signed'   => SubscriptionModel::getFocus($content['post_id'], 'post'),
                         'facet_signed'  => SubscriptionModel::getFocus($blog[0]['facet_id'] ?? null, 'facet'),
@@ -143,7 +153,12 @@ class PublicationController extends Controller
 
     public function presence(string $type, int $id, string|null $slug)
     {
-		$content = Availability::content($id);
+		if ($type == 'page') {
+			$content = Availability::content($slug, 'slug');
+		} else {
+			$content = Availability::content($id);
+		}
+		
 		if ($type === 'redirect') {
 			redirect(post_slug($content['post_type'], $content['post_id'], $content['post_slug']));
 		}

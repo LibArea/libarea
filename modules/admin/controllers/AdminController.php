@@ -6,7 +6,8 @@ namespace Modules\Admin\Controllers;
 
 use Hleb\Base\Module;
 use Hleb\Constructor\Data\View;
-use Modules\Admin\Models\{StatsModel, FacetModel, UserModel, SearchModel};
+use Modules\Admin\Models\{StatsModel, FacetModel, UserModel};
+use Modules\Search\Models\SearchModel;
 use Meta;
 
 class AdminController extends Module

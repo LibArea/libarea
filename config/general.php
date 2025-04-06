@@ -13,7 +13,11 @@ return [
     // TRUE - by invitation only
     // TRUE - только по приглашению
     'invite'            => false,
-
+	
+    // TRUE - enable search engine (requires indexing settings)
+    // TRUE - включить поисковую систему (требуется настройка индексации) 
+    'search_engine'		=> false,
+	
     // Шаблон по умолчанию  + какие языки есть в системе
     // Default template + what languages are in the system
     'template'  => 'default',
@@ -54,7 +58,7 @@ return [
 
     // Email of the site administration
     // Email администрации сайта
-    'email'             => 'libarea@yandex.ru',
+    'email'             => 'my@email.ru',
 
     // Confirm sender (email must be configured on the server).
     // Подтвердить отправителя (email должен быть настроен на сервере).

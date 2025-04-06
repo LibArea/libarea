@@ -220,7 +220,7 @@ class CommentModel extends Model
     {
         $user_id = self::container()->user()->id();
 
-        if ($type == 'questions') {
+        if ($type == 'question') {
             $sorting = 'top';
         }
 

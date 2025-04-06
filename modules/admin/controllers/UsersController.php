@@ -9,7 +9,8 @@ use Hleb\Constructor\Data\View;
 use Hleb\Static\Request;
 
 use App\Models\User\SettingModel;
-use Modules\Admin\Models\{UserModel, BanUserModel, BadgeModel, SearchModel};
+use Modules\Admin\Models\{UserModel, BanUserModel, BadgeModel};
+use Modules\Search\Models\SearchModel;
 
 use Meta, Html, Msg;
 
