@@ -8,7 +8,7 @@
   ]); ?>
 <?php endif; ?>
 
-<?= insert('/_block/form/editor/toolbar-img', ['title' => __('app.post'), 'height' => '300px', 'type' => 'post-telo', 'id' => 0]); ?>
+<?= insert('/_block/form/editor/toolbar-img', ['height' => '300px', 'type' => 'post-telo', 'id' => 0]); ?>
 
 <details class="mt15">
   <summary><?= __('app.other'); ?></summary>

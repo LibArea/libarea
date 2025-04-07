@@ -1,14 +1,18 @@
-<fieldset>
-  <label for="title"><?= __('app.heading'); ?></label>
-  <input minlength="6" maxlength="250" id="title" value="<?= htmlEncode($item['post_title']); ?>" type="text" required name="title">
-  <div class="help">6 - 250 <?= __('app.characters'); ?></div>
+<fieldset class="form-big">
+  <div class="form-label input-label"><label><?= __('app.heading'); ?></label></div>
+  <div class="form-element">
+    <input minlength="6" maxlength="250" id="title" value="<?= htmlEncode($item['post_title']); ?>" type="text" required name="title">
+    <div class="help">6 - 250 <?= __('app.characters'); ?></div>
+  </div>
 </fieldset>
 
 <?php if ($container->user()->admin()) : ?>
   <fieldset>
-    <label for="post_slug">SLUG (URL)</label>
-    <input minlength="6" maxlength="250" value="<?= $item['post_slug']; ?>" type="text" required name="post_slug">
-    <div class="help">> 6 <?= __('app.characters'); ?></div>
+    <div class="form-label input-label"><label>SLUG (URL)</label></div>
+    <div class="form-element">
+      <input minlength="6" maxlength="250" value="<?= $item['post_slug']; ?>" type="text" required name="post_slug">
+      <div class="help">> 6 <?= __('app.characters'); ?></div>
+    </div>
   </fieldset>
 <?php endif; ?>
 

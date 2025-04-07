@@ -1,7 +1,9 @@
-<fieldset>
-  <label for="post_title"><?= __('app.heading'); ?> <sup class="red">*</sup></label>
-  <input id="title" type="text" required="" name="title">
-  <div class="help">6 - 250 <?= __('app.characters'); ?></div>
+<fieldset class="form-big">
+  <div class="form-label input-label"><label><?= __('app.heading'); ?></label></div>
+  <div class="form-element">
+    <input id="title" type="text" required="" name="title">
+    <div class="help">6 - 250 <?= __('app.characters'); ?></div>
+  </div>
 </fieldset>
 
 <?= insert('/_block/form/select/topic', ['topic'  => $data['topic'], 'action' => 'add']); ?>
@@ -16,7 +18,7 @@
 
 <?= insert('/_block/form/cropper/post-foto', ['post' => []]); ?>
 
-<?= insert('/_block/form/editor/toolbar-img', ['title' => __('app.post'), 'height' => '300px', 'type' => 'post-telo', 'id' => 0]); ?>
+<?= insert('/_block/form/editor/toolbar-img', ['height' => '300px', 'type' => 'post-telo', 'id' => 0]); ?>
 
 <details class="mt15">
   <summary><?= __('app.other'); ?></summary>

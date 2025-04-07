@@ -18,7 +18,7 @@
   --dropdown-box-shadow: 0 6px 18px 0 rgba(14, 21, 47, .13), 0 -2px 6px rgba(14, 21, 47, .03);
 
   --form-color-active: #3595f6;
-  --form-bg-color: #fff;
+  --form-bg-color: #ebf0f0;
   --form-border-color: #ddd;
   --form-text-color: #111;
 
@@ -38,7 +38,7 @@
   --header-box-shadow: 0 1px 2px -1px rgb(0 0 0 / 25%);
   --header-text-color: #9ca3af;
   --header-logo-color: #111;
-  --header-form-bg-color: #f9f9fa;
+  --header-form-bg-color: #ebf0f0;
   --header-form-text-color: #333;
 
   --footer-bg: #fff;

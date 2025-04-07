@@ -116,3 +116,15 @@ body.dark .dialog-content,
 body.dark .tagify {
   background-color: var(--tagify-bg-color);
 }
+
+body.dark .tagify__tag > div {
+  color: var(--form-text-color);
+}
+
+body.dark  .tagify__tag > div::before {
+  box-shadow: 0 0 0 1.2rem #1a1818 inset;
+}
+
+body.dark .tagify__tag__removeBtn {
+  color: var(--gray);
+}

@@ -1,4 +1,4 @@
-<main>
+<main class="w-100">
   <?= insert('/content/user/setting/nav'); ?>
   <div class="box">
     <h2><?= __('app.ignored_users'); ?></h2>
@@ -18,13 +18,11 @@
         </div>
       <?php endforeach; ?>
     <?php else : ?>
-      <span class="gray-600"><?= __('app.ignored_no'); ?></span>
+      <div class="gray-600 mb20"><?= __('app.ignored_no'); ?></div>
     <?php endif; ?>
+
+    <div class="box-info">
+      <?= __('app.ignored_users_help'); ?>
+    </div>
   </div>
 </main>
-
-<aside>
-  <div class="box">
-    <?= __('app.ignored_users_help'); ?>
-  </div>
-</aside>

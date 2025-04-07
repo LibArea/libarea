@@ -12,24 +12,24 @@ textarea {
   color: var(--form-text-color);
   font-size: 16px;
   border-radius: var(--rounded);
+  padding: 6px;
 }
 
 textarea {
   width: 100%;
 }
 
-fieldset input:not([type=radio]):not([type=checkbox]):not([type=range]),
+/*fieldset input:not([type=radio]):not([type=checkbox]):not([type=range]),
 fieldset select {
   width: 100%;
   min-height: 34px;
   padding: 5px;
-}
+} */
 
 fieldset {
-  padding: 0;
   border: 0;
   position: relative;
-  margin: 10px 0;
+  padding: 10px 0;
 }
 
 fieldset.error input {
@@ -54,4 +54,66 @@ label {
 
 ::placeholder {
   color: var(--gray);
+}
+
+ .form-element .tagify,
+.form-element input,
+.form-element select,
+.form-element textarea {
+  background-color: var(--form-bg-color);
+  border: none;
+  color: var(--form-text-color);
+  font-size: 16px;
+  border-radius: var(--rounded);
+  padding: 6px;
+  width: 80%;
+}
+
+.form-label {
+    float: left;
+    width: 17.07%;
+    padding: 0 20px 0 0;
+    line-height: 18px;
+    margin-top: 2px;
+    word-wrap: break-word;
+	color: var(--gray);
+}
+
+.form-element {
+    margin-left: 17.07%;
+    margin-bottom: 4px;
+    width: 82.93%;
+}
+
+fieldset.form-big input[type="text"] {
+  font-size: 24px;
+}
+
+fieldset.form-big .input-label {
+  margin-top: 14px;
+}
+
+@media screen and (max-width: 735px) {
+    fieldset .input-label {
+        margin: 0;
+    }
+
+    .form-element, .form-control-sublabel {
+        width: 100%;
+        margin-left: 0;
+    }
+
+  fieldset .form-label {
+    width: 100%;
+    padding: 0 0 6px 0;
+    vertical-align: baseline;
+    margin: 0;
+  }
+  
+	.form-element .tagify,
+	.form-element input,
+	.form-element select,
+	.form-element textarea {
+	  width: 100%;
+	}
 }

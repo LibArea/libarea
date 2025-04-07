@@ -1,18 +1,15 @@
-<main>
+<main class="w-100">
   <?= insert('/content/user/setting/nav'); ?>
   <div class="box">
-    <form class="max-w-md" action="<?= url('setting.edit.profile', method: 'post'); ?>" method="post">
+    <form class="mb20" action="<?= url('setting.edit.profile', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
-      <?= insert('/_block/form/setting', ['data' => $data]); ?>
+      <?= insert('/content/user/setting/form/setting', ['data' => $data]); ?>
     </form>
+    <div class="box-info">
+      <?= __('help.setting_info'); ?>
+    </div>
   </div>
 </main>
-
-<aside>
-  <div class="box">
-    <?= __('help.setting_info'); ?>
-  </div>
-</aside>
 
 <div class="dialog-container" id="my-email" aria-hidden="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-description">
   <div class="dialog-overlay" data-a11y-dialog-hide></div>

@@ -1,15 +1,12 @@
-<main>
+<main class="w-100">
   <?= insert('/content/user/setting/nav'); ?>
   <div class="box">
-    <form class="max-w-sm" action="<?= url('setting.edit.security', method: 'post'); ?>" method="post">
+    <form class="mb20" action="<?= url('setting.edit.security', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
-      <?= insert('/_block/form/setting-security'); ?>
+      <?= insert('/content/user/setting/form/setting-security'); ?>
     </form>
+    <div class="box-info">
+      <?= __('help.security_info'); ?>
+    </div>
   </div>
 </main>
-
-<aside>
-  <div class="box">
-    <?= __('help.security_info'); ?>
-  </div>
-</aside>

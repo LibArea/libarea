@@ -1,6 +1,8 @@
 <fieldset>
-  <label><?= __('app.blog'); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?></label>
-  <input name="blog_select" id="blog_id">
+	<div class="form-label input-label"><label><?= __('app.blog'); ?></label></div>
+	<div class="form-element">
+		<input name="blog_select" id="blog_id">
+	</div>
 </fieldset>
 
 <script nonce="<?= config('main', 'nonce'); ?>">

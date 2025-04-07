@@ -1,12 +1,9 @@
 <fieldset>
-  <label>
-    <?= __('app.topics'); ?> <sup class="red">*</sup>
-  </label>
-
-  <?php if ($action == 'edit' || $action == 'add') { ?>
-    <input name="facet_select" id="topic_id" required>
-  <?php } ?>
-  <div class="help"><?= __('app.necessarily'); ?>...</div>
+	<div class="form-label input-label"><label><?= __('app.topics'); ?> </label></div>
+	<div class="form-element">
+		<input name="facet_select" id="topic_id" required>
+		<div class="help"><?= __('app.necessarily'); ?></div>
+	</div>
 </fieldset>
 
 <script nonce="<?= config('main', 'nonce'); ?>">

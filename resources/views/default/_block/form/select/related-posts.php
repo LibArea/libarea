@@ -3,8 +3,10 @@
 // Related posts
 ?>
 <fieldset>
-  <label><?= __('app.related_posts'); ?></label>
-  <input name="post_select" id="post_id">
+	<div class="form-label input-label"><label><?= __('app.related_posts'); ?></label></div>
+	<div class="form-element">
+		<input name="post_select" id="post_id">
+	</div>
 </fieldset>
 
 <script nonce="<?= config('main', 'nonce'); ?>">

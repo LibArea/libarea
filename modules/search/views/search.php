@@ -6,18 +6,17 @@ $sw = $sw ?? '?';
 ?>
 <div id="contentWrapper" class="wrap">
   <main>
-  
+
     <?php if (!empty($data['results'])) : ?>
-	<div class="flex mb20">
-		<?php foreach ($data['tags'] as $tag) : ?>
-		  <?php $url = url('topic', ['slug' => $tag['slug']]); ?>
-		  <a class="tag-yellow" href="<?= $url; ?>">
-			<?= $tag['title']; ?>
-		  </a>
-		<?php endforeach; ?>
-	</div>
-	<?php endif; ?>
-	
+      <div class="flex mb20">
+        <?php foreach ($data['tags'] as $tag) : ?>
+          <?php $url = url('topic', ['slug' => $tag['slug']]); ?>
+          <a class="tag-yellow" href="<?= $url; ?>">
+            <?= $tag['title']; ?>
+          </a>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
 
     <?php if (!empty($data['results'])) : ?>
 
@@ -27,17 +26,25 @@ $sw = $sw ?? '?';
       </div>
 
       <?php foreach ($data['results'] as $result) :
-        $url_content =  ($type == 'comment') ? $url_content . '#comment_' . $result['comment_id'] : $result['url'];
+        if (config('general', 'search_engine') == false) {
+          $url_content = '';
+        } else {
+          $url_content =  ($type == 'comment') ? $url_content . '#comment_' . $result['comment_id'] : $result['url'];
+        }
       ?>
 
         <div class="mb20">
-            <a class="text-xl" target="_blank" rel="nofollow noreferrer" href="<?= $url_content; ?>">
-              <?= $result['title']; ?>
-            </a>
+          <a class="text-xl" target="_blank" rel="nofollow noreferrer" href="<?= $url_content; ?>">
+            <?= $result['title']; ?>
+          </a>
           <?php if ($type == 'comment') : ?>
             <?= fragment($result['comment_content'], 250); ?>
           <?php else : ?>
-            <div class="max-w-md"><?= $result['content']; ?></div>
+            <?php if (config('general', 'search_engine') == false) : ?>
+              <div class="max-w-md"><?= fragment($result['content'], 250); ?></div>
+            <?php else : ?>
+              <div class="max-w-md"><?= $result['content']; ?></div>
+            <?php endif; ?>
           <?php endif; ?>
         </div>
       <?php endforeach; ?>

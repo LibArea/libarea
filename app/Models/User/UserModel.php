@@ -50,15 +50,15 @@ class UserModel extends Model
 
         return DB::run($sql, ['params' => $params])->fetch();
     }
-	
-	public static function setLogAgent(array $params)
+
+    public static function setLogAgent(array $params)
     {
         $sql = "INSERT INTO users_agent_logs(user_id, user_browser, user_os, user_ip) 
                     VALUES(:user_id, :user_browser, :user_os, :user_ip)";
 
         return DB::run($sql, $params);
     }
-	
+
     public static function create(array $params)
     {
         $sql = "INSERT INTO users(login, 
@@ -91,9 +91,9 @@ class UserModel extends Model
 
         return $sql_last_id['last_id'];
     }
-	
-	
-	public static function getUsersAll(int $page, int $limit, string $type): array|false
+
+
+    public static function getUsersAll(int $page, int $limit, string $type): array|false
     {
         $user_id = self::container()->user()->id();
         $sort = ($type == 'new') ? "ORDER BY created_at DESC" : "ORDER BY id = $user_id DESC, avatar ASC";
@@ -123,12 +123,12 @@ class UserModel extends Model
 
         return DB::run($sql, ['start' => $start, 'limit' => $limit])->fetchAll();
     }
-	
+
     public static function getUsersAllCount(): int
     {
         return  DB::run("SELECT id, is_deleted FROM users WHERE ban_list = 0")->rowCount();
     }
-	
+
     // Profile views
     // Просмотры профиля
     public static function userHits(int $user_id)
@@ -148,7 +148,7 @@ class UserModel extends Model
     public static function userFavorite($tag_id = null): array|false
     {
         $user_id = self::container()->user()->id();
-        
+
         $tag = '';
         if ($tag_id) $tag = 'AND fol.id = ' . $tag_id;
 
@@ -188,6 +188,7 @@ class UserModel extends Model
                    post_id,
                    post_title,
                    post_slug,
+					post_type,
                    post_user_id,
                    post_draft,
                    post_is_deleted,
@@ -204,7 +205,7 @@ class UserModel extends Model
 
         return DB::run($sql, ['user_id' => self::container()->user()->id()])->fetchAll();
     }
-	
+
     /**
      * Amount of member content
      * оличество контента участника
@@ -219,10 +220,10 @@ class UserModel extends Model
                     (SELECT COUNT(post_id) FROM posts WHERE post_user_id = $user_id and post_draft = 0 and post_is_deleted = $condition) AS count_posts,
                   
                     (SELECT COUNT(comment_id) FROM comments WHERE comment_user_id = $user_id and comment_is_deleted = $condition) AS count_comments";
-                            
+
         return DB::run($sql)->fetch();
     }
-	
+
     // Has the user been deleted?
     // Удален ли пользователь?
     public static function isDeleted($user_id)

@@ -27,32 +27,30 @@
 </fieldset>
 
 <?php if (config('general', 'search_engine') == true) : ?>
+  <div class="box bg-lightgray">
+    <i><?= __('admin.update_index'); ?></i>
 
-<div class="box bg-lightgray">
-	<i><?= __('admin.update_index'); ?></i>
+    <fieldset>
+      <label><?= __('admin.update'); ?></label>
+      <div class="update btn btn-primary" data-type="newIndex"><?= __('admin.only_new'); ?></div>
+    </fieldset>
 
-	<fieldset>
-	  <label><?= __('admin.update'); ?></label>
-	  <div class="update btn btn-primary" data-type="newIndex"><?= __('admin.only_new'); ?></div>
-	</fieldset>
+    <details class="mt15">
+      <summary><?= __('app.other'); ?></summary>
+      <fieldset>
+        <div class="update btn btn-primary" data-type="allContents"><?= __('admin.content'); ?></div>
+      </fieldset>
 
-	<details class="mt15">
-	  <summary><?= __('app.other'); ?></summary>
-		<fieldset>
-		  <div class="update btn btn-primary" data-type="allContents"><?= __('admin.content'); ?></div>
-		</fieldset>
+      <fieldset>
+        <div class="update btn btn-primary" data-type="allFacets"><?= __('admin.facets'); ?></div>
+      </fieldset>
 
-		<fieldset>
-		  <div class="update btn btn-primary" data-type="allFacets"><?= __('admin.facets'); ?></div>
-		</fieldset>
-
-		<fieldset>
-		  <div class="update btn btn-outline-primary" data-type="allIndex"><?= __('admin.all_index'); ?></div>
-		</fieldset>
-	</details>
-</div>
+      <fieldset>
+        <div class="update btn btn-outline-primary" data-type="allIndex"><?= __('admin.all_index'); ?></div>
+      </fieldset>
+    </details>
+  </div>
 <?php endif; ?>
-
 
 <fieldset class="max-w-sm">
   <label for="mail"><?= __('admin.email'); ?></label>

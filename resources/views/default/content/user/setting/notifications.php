@@ -1,15 +1,12 @@
-<main>
+<main class="w-100">
   <?= insert('/content/user/setting/nav'); ?>
   <div class="box">
-    <form class="max-w-md" action="<?= url('setting.edit.notification', method: 'post'); ?>" method="post">
+    <form class="mb20" action="<?= url('setting.edit.notification', method: 'post'); ?>" method="post">
       <?= $container->csrf()->field(); ?>
-      <?= insert('/_block/form/setting-notifications', ['data' => $data]); ?>
+      <?= insert('/content/user/setting/form/setting-notifications', ['data' => $data]); ?>
     </form>
+    <div class="box-info">
+      <?= __('help.notification_info'); ?>
+    </div>
   </div>
 </main>
-
-<aside>
-  <div class="box">
-    <?= __('help.notification_info'); ?>
-  </div>
-</aside>

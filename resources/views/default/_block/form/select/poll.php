@@ -1,7 +1,9 @@
-  <fieldset>
-    <label><?= __('app.poll'); ?></label>
-    <input name='poll_id' id="poll_id">
-  </fieldset>
+<fieldset>
+	<div class="form-label input-label"><label><?= __('app.poll'); ?></label></div>
+	<div class="form-element">
+		<input name='poll_id' id="poll_id">
+	</div>
+</fieldset>
 
 <script nonce="<?= config('main', 'nonce'); ?>">
     const poll_search = async (props = {}) => {

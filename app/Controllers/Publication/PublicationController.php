@@ -165,7 +165,7 @@ class PublicationController extends Controller
 
         // Check id and get content data
         // Проверим id и получим данные контента
-        if ($type === 'post') {
+        if ($type != 'page') {
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
             if (config('meta', 'slug_post') == true) {

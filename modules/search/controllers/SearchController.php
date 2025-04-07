@@ -43,67 +43,80 @@ class SearchController extends Module
     public function go()
     {
         $time_start = microtime(true);
-		
-		$type	= Request::get('cat')->value();
-        $q	= Request::get('q')->value();
 
-        $storage = SearchModel::PdoStorage();
+        $type    = Request::get('cat')->value();
+        $q    = Request::get('q')->value();
 
-	    $stemmer = new PorterStemmerRussian(new PorterStemmerEnglish());
-        $finder    = new Finder($storage, $stemmer);
 
-        $query = new Query($q);
-        $query
-            ->setLimit($this->limit)  // 10 results per page
-            ->setOffset(Html::pageNumber() - 1) // third page
-        ;
+        if (config('general', 'search_engine') == true) {
+            $storage = SearchModel::PdoStorage();
 
-        $finder->setHighlightTemplate('<mark>%s</mark>'); // Выделим найденный фрагмент желтым
-        $finder->setSnippetLineSeparator(' ... '); // Разделитель фрагментов, в данном случае
+            $stemmer = new PorterStemmerRussian(new PorterStemmerEnglish());
+            $finder    = new Finder($storage, $stemmer);
 
-        $resultSet = $finder->find($query->setInstanceId(1));
+            $query = new Query($q);
+            $query
+                ->setLimit($this->limit)  // 10 results per page
+                ->setOffset(Html::pageNumber() - 1) // third page
+            ;
 
-        $totalHits = $resultSet->getTotalCount();
+            $finder->setHighlightTemplate('<mark>%s</mark>'); // Выделим найденный фрагмент желтым
+            $finder->setSnippetLineSeparator(' ... '); // Разделитель фрагментов, в данном случае
 
-        $items = $resultSet->getItems();
+            $resultSet = $finder->find($query->setInstanceId(1));
 
-        $result = [];
-        foreach ($items as $key => $item) {
-            $result[$key]['id'] = $item->getId();
-            $result[$key]['url'] = $item->getUrl();
-            $result[$key]['title'] = $item->getHighlightedTitle($stemmer);
-            $result[$key]['content'] = $item->getSnippet();
+            $totalHits = $resultSet->getTotalCount();
+
+            $items = $resultSet->getItems();
+
+            $result = [];
+            foreach ($items as $key => $item) {
+                $result[$key]['id'] = $item->getId();
+                $result[$key]['url'] = $item->getUrl();
+                $result[$key]['title'] = $item->getHighlightedTitle($stemmer);
+                $result[$key]['content'] = $item->getSnippet();
+            }
+        }
+
+        if (config('general', 'search_engine') == false) {
+
+            $result = SearchModel::getSearch(Html::pageNumber(), $this->limit, $q);
+
+            $totalHits =  SearchModel::getSearchCount($q);
+
+            $resultFacetAll = SearchModel::getSearchTags($q ?? null, 'topic', 4);
         }
 
         $time_end = microtime(true);
 
-		$user_id = $this->container->user()->id();
-		SearchModel::setSearchLogs(
-			[
-				'request'       => $q,
-				'action_type'   => 'search',
-				'add_ip'        => Request::getUri()->getIp(),
-				'user_id'       => $user_id > 0 ? $user_id : 1,
-				'count_results' => $totalHits,
-			]
-		);
-	  
+        $user_id = $this->container->user()->id();
+        SearchModel::setSearchLogs(
+            [
+                'request'       => $q,
+                'action_type'   => 'search',
+                'add_ip'        => Request::getUri()->getIp(),
+                'user_id'       => $user_id > 0 ? $user_id : 1,
+                'count_results' => $totalHits,
+            ]
+        );
 
 
-		// Поиск по фасетам, + свои правила выделения.
-        $query
-            ->setLimit(4)  // 4 results per page
-            ->setOffset(0) // third page
-        ;
+        if (config('general', 'search_engine') == true) {
+            // Поиск по фасетам, + свои правила выделения.
+            $query
+                ->setLimit(4)  // 4 results per page
+                ->setOffset(0) // third page
+            ;
 
-        $finder->setHighlightTemplate('<b>%s</b>');
-        $resultFacet = $finder->find($query->setInstanceId(2));
-        $facets = $resultFacet->getItems();
+            $finder->setHighlightTemplate('<b>%s</b>');
+            $resultFacet = $finder->find($query->setInstanceId(2));
+            $facets = $resultFacet->getItems();
 
-        $resultFacetAll = [];
-        foreach ($facets as $key => $item) {
-            $resultFacetAll[$key]['slug'] = $item->getUrl();
-            $resultFacetAll[$key]['title'] = $item->getHighlightedTitle($stemmer);
+            $resultFacetAll = [];
+            foreach ($facets as $key => $item) {
+                $resultFacetAll[$key]['slug'] = $item->getUrl();
+                $resultFacetAll[$key]['title'] = $item->getHighlightedTitle($stemmer);
+            }
         }
 
         return view(
@@ -116,7 +129,7 @@ class SearchController extends Module
                     'sheet'         => 'admin',
                     'q'             => $q ?? null,
                     'tags'          => $resultFacetAll,
-                    'time'			=> $time_end - $time_start,
+                    'time'            => $time_end - $time_start,
                     'count'         => $totalHits,
                     'pagesCount'    => ceil($totalHits / $this->limit),
                     'pNum'          => Html::pageNumber(),
@@ -125,27 +138,5 @@ class SearchController extends Module
         );
     }
 
-    public function searchPage()
-    {
-    }
-
-    public function api()
-    {
-        $query = $this->validateInput(Request::post('query'));
-        $type = Request::post('type');
-
-        $content = $type === 'topic' ? 'post' : 'comment';
-
-        $topics = SearchModel::getSearchTags($query, $type, 3);
-        $posts = SearchModel::getSearch(1, 5, $query, $content);
-
-        $result = array_merge($topics, $posts);
-
-        return json_encode($result, JSON_PRETTY_PRINT);
-    }
-
-    private function validateInput($input)
-    {
-        return preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $input->asString());
-    }
+    public function searchPage() {}
 }

@@ -6,8 +6,6 @@
   <?php endif; ?>
 <?php endif; ?>
 
-<?= insert('/_block/form/content-tl', ['data' => $item['post_tl']]); ?>
-
 <fieldset>
   <input type="checkbox" name="closed" <?php if ($item['post_closed'] == 1) : ?>checked <?php endif; ?>> <?= __('app.post_closed'); ?>
 </fieldset>
@@ -22,7 +20,6 @@
   </fieldset>
 <?php endif; ?>
 
-
 <?php if (config('feed', 'nsfw')) : ?>
   <fieldset>
     <input type="checkbox" name="nsfw" <?php if ($item['post_nsfw'] == 1) : ?>checked <?php endif; ?>> <?= __('app.nsfw_post'); ?>
@@ -34,6 +31,8 @@
   <div class="help"><?= __('app.hidden_post_help'); ?></div>
 </fieldset>
 
+<?= insert('/_block/form/content-tl', ['data' => $item['post_tl']]); ?>
+
 <?php if ($container->user()->admin()) : ?>
   <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
 <?php endif; ?>
@@ -44,9 +43,11 @@
 
 <?php if ($container->user()->admin()) : ?>
   <fieldset>
-    <label for="post_title"><?= __('app.id_merged_post'); ?></label>
-    <input value="<?= $item['post_merged_id']; ?>" type="text" name="post_merged_id">
-    <div class="help"><?= __('app.post_merged_info'); ?></div>
+    <div class="form-label input-label"><label><?= __('app.id_merged'); ?></label></div>
+    <div class="form-element">
+      <input value="<?= $item['post_merged_id']; ?>" type="text" name="post_merged_id">
+      <div class="help"><?= __('app.id_merged_info'); ?></div>
+    </div>
   </fieldset>
 <?php endif; ?>
 

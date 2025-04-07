@@ -1,7 +1,9 @@
 <fieldset>
-  <label><?= __('app.section'); ?></label>
-  <input name="section_select" id="section_id">
-  <div class="help"><?= __('app.info_page'); ?>...</div>
+	<div class="form-label input-label"><label><?= __('app.section'); ?> </label></div>
+	<div class="form-element">
+		<input name="section_select" id="section_id">
+		<div class="help"><?= __('app.info_page'); ?></div>
+	</div>
 </fieldset>
 
 <script nonce="<?= config('main', 'nonce'); ?>">
