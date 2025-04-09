@@ -168,7 +168,7 @@ h5 {
 .main-container {
   display: flex;
   gap: var(--gap-base);
-  width: 1120px;
+  width: 1070px;
 }
 
 /* Search */

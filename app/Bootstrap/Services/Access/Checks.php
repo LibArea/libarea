@@ -140,7 +140,6 @@ class Сhecks
          *
          * Лимит по времени.
          */
-
         $time_edit = config('trust-levels', 'edit_time_' . $type_content);
         if ($type_content == 'post') {
             $time_edit = $info_type['post_draft'] == 1 ? 0 : config('trust-levels', 'edit_time_post');

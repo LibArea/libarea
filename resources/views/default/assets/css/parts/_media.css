@@ -11,7 +11,7 @@
   justify-content: center;
 }
 
-@media (max-width: 1340px) {
+@media (max-width: 1345px) {
  aside {
     width: 280px;	
   }
@@ -21,7 +21,7 @@
   }
 }
 
-@media (max-width: 1220px) {
+@media (max-width: 1280px) {
  aside {
     width: 240px;	
   }
@@ -31,7 +31,7 @@
   }
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1160px) {
   aside {
     display: none;
   }
@@ -41,8 +41,7 @@
   }
 }
 
-@media (max-width: 1050px) {
-
+@media (max-width: 1060px) {
   .nav-sidebar {
 	display: none;
   }

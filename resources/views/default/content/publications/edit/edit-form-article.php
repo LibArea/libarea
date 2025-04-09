@@ -30,20 +30,7 @@
   <?= insert('/_block/form/select/section', ['data' => $data]); ?>
 <?php endif; ?>
 
-<?php if ($item['post_url']) : ?>
-  <div class="mb20 2flex">
-    <div class="mb5" for="post_title">URL:
-      <a target="_blank" rel="noreferrer ugc" href="<?= $item['post_url']; ?>" class="text-sm">
-        <?= $item['post_url']; ?>
-      </a>
-    </div>
-    <?php if ($item['post_thumb_img']) : ?>
-      <?= Img::image($item['post_thumb_img'], $item['post_title'], 'w94', 'post', 'thumbnails'); ?>
-    <?php endif; ?>
-  </div>
-<?php endif; ?>
-
-<?php if ($item['post_type'] == 'post') : ?>
+<?php if ($item['post_type'] != 'page') : ?>
   <?= insert('/_block/form/cropper/post-foto', ['post' => $item]); ?>
 <?php endif; ?>
 

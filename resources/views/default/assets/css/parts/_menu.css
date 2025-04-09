@@ -138,6 +138,10 @@
   color: var(--gray);
 }
 
+.menu .icon {
+  min-width: 24px;
+}
+
 .menu .active .icon {
   color: var(--blue);
 }
