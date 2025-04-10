@@ -43,12 +43,7 @@
   </div>
 <?php endif; ?>
 
-<?php if ($item['post_type'] == 'post') : ?>
-  <?= insert('/_block/form/cropper/post-foto', ['post' => $item]); ?>
-<?php endif; ?>
-
 <?= insert('/_block/form/editor/toolbar-img', ['height'  => '300px', 'content' => $item['post_content'], 'title' => __('app.post'), 'type' => 'post-telo', 'id' => $item['post_id']]); ?>
-
 
 <details class="mt15">
   <summary><?= __('app.other'); ?></summary>

@@ -30,9 +30,7 @@
   <?= insert('/_block/form/select/section', ['data' => $data]); ?>
 <?php endif; ?>
 
-<?php if ($item['post_type'] != 'page') : ?>
-  <?= insert('/_block/form/cropper/post-foto', ['post' => $item]); ?>
-<?php endif; ?>
+<?= insert('/_block/form/cropper/post-foto', ['post' => $item]); ?>
 
 <?= insert('/_block/form/editor/toolbar-img', ['height'  => '300px', 'content' => $item['post_content'], 'title' => __('app.post'), 'type' => 'post-telo', 'id' => $item['post_id']]); ?>
 

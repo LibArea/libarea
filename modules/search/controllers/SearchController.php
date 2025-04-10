@@ -47,6 +47,7 @@ class SearchController extends Module
         $type    = Request::get('cat')->value();
         $q    = Request::get('q')->value();
 
+		if ($q === null) return false;
 
         if (config('general', 'search_engine') == true) {
             $storage = SearchModel::PdoStorage();

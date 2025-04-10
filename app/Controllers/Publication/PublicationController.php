@@ -160,7 +160,12 @@ class PublicationController extends Controller
 		}
 		
 		if ($type === 'redirect') {
-			redirect(post_slug($content['post_type'], $content['post_id'], $content['post_slug']));
+			
+			$url = post_slug($content['post_type'], $content['post_id'], $content['post_slug']);
+			
+			$url =  ($url === null) ? '/' : $url;
+			
+			redirect($url);
 		}
 
         // Check id and get content data

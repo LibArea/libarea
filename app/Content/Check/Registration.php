@@ -24,6 +24,7 @@ class Registration
             Msg::redirect(__('msg.multiple_accounts'), 'error', $redirect);
         }
 
+
         // Let's check the verification code
         // Проверим код проверки
         if (!$invitation_code) {
@@ -70,8 +71,6 @@ class Registration
         if (v::alnum()->length(3, 12)->validate($login) === false) {
             Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.nickname') . '»']), 'error', $redirect);
         }
-
-        exit;
 
         if (in_array($login, config('stop-nickname', 'list'))) {
             Msg::redirect(__('msg.nick_exist'), 'error', $redirect);
