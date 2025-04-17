@@ -41,14 +41,14 @@
             <?php endif; ?>
           </div>
 		   <?php if ($item['post_type'] = 'post') : ?><a class="black" href="<?= $url; ?>"><?php endif; ?>
-          <div class="cut-content mb-none">
+          <div class="cut-content">
             <?= fragment($item['post_content'], 250); ?>
           </div>
 		  <?php if ($item['post_type'] = 'post') : ?></a><?php endif; ?>
         </div>
 
         <?php if ($item['post_content_img'] || $item['post_thumb_img']) : ?>
-          <div class="w200 mb-w80">
+          <div class="w200 mb-w80 mb-none">
             <?php if ($item['post_content_img']) : ?>
               <a title="<?= $item['post_title']; ?>" href="<?= $url; ?>">
                 <?= Img::image($item['post_content_img'], $item['post_title'], 'w160 mb-w80 mt5 ml15 mb-ml10', 'post', 'cover'); ?>

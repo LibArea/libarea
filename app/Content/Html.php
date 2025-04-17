@@ -161,7 +161,7 @@ class Html
             $page  = $other . '/' . $sheet;
         }
 
-        $html = '<div class="flex gap">';
+        $html = '<div class="pagination">';
 
         if ($pNum != 1) {
             if (($pNum - 1) == 1) {

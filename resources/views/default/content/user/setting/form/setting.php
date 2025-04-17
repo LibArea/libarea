@@ -20,8 +20,8 @@
 <fieldset class="form-big">
   <div class="form-label input-label"><label><?= __('app.name'); ?></label></div>
   <div class="form-element">
-    <input maxlength="11" value="<?= $data['user']['name']; ?>" type="text" name="name">
-    <div class="help">0 - 11 <?= __('app.characters'); ?></div>
+    <input maxlength="18" value="<?= $data['user']['name']; ?>" type="text" name="name">
+    <div class="help">0 - 18 <?= __('app.characters'); ?></div>
   </div>
 </fieldset>
 

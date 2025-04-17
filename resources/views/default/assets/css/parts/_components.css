@@ -629,7 +629,7 @@ video {
   padding: 1px 6px;
   position: absolute;
   display: flex;
-  gap: 1rem;
+  gap: var(--gap-base);
 }
 
 li.zebra {
@@ -651,4 +651,10 @@ li.zebra+li {
 
 .search-page {
   background-color: var(--white);
+}
+
+.pagination {
+  display: flex;
+  gap: var(--gap-base);
+  margin-bottom: 50px;
 }

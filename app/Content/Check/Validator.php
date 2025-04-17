@@ -121,7 +121,7 @@ class Validator
     {
         $redirect = url('setting');
 
-        if (v::stringType()->length(0, 11)->validate($data['name']) === false) {
+        if (v::stringType()->length(0, 18)->validate($data['name']) === false) {
             Msg::redirect(__('msg.string_length', ['name' => '«' . __('msg.name') . '»']), 'error', $redirect);
         }
 

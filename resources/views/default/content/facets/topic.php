@@ -12,7 +12,6 @@ $topic = $data['facet'];
     $sort = $sort ? '&sort=' . $sort : '';
     ?>
     <?= Html::pagination($data['pNum'], $data['pagesCount'], $data['sheet'], url('topic', ['slug' => $topic['facet_slug']]), '?', $sort); ?>
-
   <?php else : ?>
     <div class="box center gray-600">
       <svg class="icon max">

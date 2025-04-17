@@ -71,8 +71,6 @@
 			  <?php $arr = \App\Content\Parser\Content::cut($item['post_content']);
 			  echo markdown($arr['content']); ?>
 		  <?php if ($item['post_type'] == 'post') : ?></a><?php endif; ?>
-		  
-		  
         </div>
       </div>
 
