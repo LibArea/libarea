@@ -56,7 +56,7 @@ $facet = $data['facet'] ?? false
   </header>
 
   <?php if (!$container->user()->active() && $type == 'main') : ?>
-    <div class="banner mb-none<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> none<?php endif; ?>">
+    <div class="banner mb-none">
       <h1><?= config('meta', 'banner_title'); ?></h1>
       <p><?= config('meta', 'banner_desc'); ?>...</p>
     </div>
@@ -81,9 +81,7 @@ $facet = $data['facet'] ?? false
       </nav>
     </div>
     <div class="main-container">
-
       <?= $content; ?>
-
     </div>
   </div>
 

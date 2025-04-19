@@ -128,3 +128,9 @@ body.dark  .tagify__tag > div::before {
 body.dark .tagify__tag__removeBtn {
   color: var(--gray);
 }
+
+body.dark .banner {
+  background-color: var(--gray-100);
+  background-image: none;
+  color: #fff; 
+}

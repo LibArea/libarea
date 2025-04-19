@@ -656,5 +656,5 @@ li.zebra+li {
 .pagination {
   display: flex;
   gap: var(--gap-base);
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
