@@ -5,25 +5,25 @@
     </svg>
   </span>
   <ul class="dropdown">
-    <?php if ($container->user()->login() == $post['login']) : ?>
-      <?php if ($post['my_post'] == $post['post_id']) : ?>
+    <?php if ($container->user()->login() == $item['login']) : ?>
+      <?php if ($item['my_post'] == $item['post_id']) : ?>
         <li>
-          <a class="add-profile active lowercase" data-post="<?= $post['post_id']; ?>">
+          <a class="add-profile active lowercase" data-post="<?= $item['post_id']; ?>">
             &#183; <?= __('app.from_profile'); ?>
           </a>
         </li>
       <?php else : ?>
         <li>
-          <a class="add-profile gray-600 lowercase" data-post="<?= $post['post_id']; ?>">
+          <a class="add-profile gray-600 lowercase" data-post="<?= $item['post_id']; ?>">
             &#183; <?= __('app.in_profile'); ?>
           </a>
         </li>
       <?php endif; ?>
     <?php endif; ?>
 
-    <?php if ($container->access()->postAuthor($post, $blog['facet_user_id'] ?? 0) == true || $post['post_draft'] == true) : ?>
+    <?php if ($container->access()->postAuthor($item, $blog['facet_user_id'] ?? 0) == true || $item['post_draft'] == true) : ?>
       <li>
-        <a class="lowercase" href="<?= url('publication.form.edit', ['id' => $post['post_id']]); ?>">
+        <a class="lowercase" href="<?= url('publication.form.edit', ['id' => $item['post_id']]); ?>">
           &#183; <?= __('app.edit'); ?>
         </a>
       </li>
@@ -31,8 +31,8 @@
 
     <?php if ($container->user()->admin()) : ?>
       <li>
-        <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action text-sm lowercase">
-          <?php if ($post['post_is_deleted'] == 1) : ?>
+        <a data-type="post" data-id="<?= $item['post_id']; ?>" class="type-action text-sm lowercase">
+          <?php if ($item['post_is_deleted'] == 1) : ?>
             <span class="sky">&#183; <?= __('app.recover'); ?></span>
           <?php else : ?>
             &#183; <?= __('app.remove'); ?>
@@ -40,8 +40,8 @@
         </a>
       </li>
       <li>
-        <a data-id="<?= $post['post_id']; ?>" class="post-recommend lowercase">
-          <?php if ($post['post_is_recommend'] == 1) : ?>
+        <a data-id="<?= $item['post_id']; ?>" class="post-recommend lowercase">
+          <?php if ($item['post_is_recommend'] == 1) : ?>
             <span class="sky"> &#183; <?= __('app.recommended'); ?></span>
           <?php else : ?>
             &#183; <?= __('app.recommended'); ?>
@@ -49,21 +49,21 @@
         </a>
       </li>
       <li>
-        <a href="<?= url('admin.logip', ['item' => $post['post_ip']]); ?>">
-          &#183; <?= $post['post_ip']; ?>
+        <a href="<?= url('admin.logip', ['item' => $item['post_ip']]); ?>">
+          &#183; <?= $item['post_ip']; ?>
         </a>
       </li>
 	<?php endif; ?>  
-    <?php if ($post['modified']) : ?>
+    <?php if ($item['modified']) : ?>
       <li>
         <div class="lowercase">
-          &#183; <?= langDate($post['post_modified']); ?> <span class="gray-600">(<?= __('app.ed'); ?>)</span>
+          &#183; <?= langDate($item['post_modified']); ?> <span class="gray-600">(<?= __('app.ed'); ?>)</span>
         </div>
       </li>
     <?php else : ?>
       <li>
         <div class="lowercase">
-          &#183; <?= langDate($post['post_date']); ?>
+          &#183; <?= langDate($item['post_date']); ?>
         </div>
       </li>
     <?php endif; ?>

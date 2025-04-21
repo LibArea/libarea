@@ -593,13 +593,6 @@ video {
   max-width: 560px;
 }
 
-.showPassword {
-  position: absolute;
-  color: var(--gray-600);
-  right: 5px;
-  margin: 5px;
-}
-
 .scroll-menu {
   overflow-x: auto;
   scrollbar-width: none;

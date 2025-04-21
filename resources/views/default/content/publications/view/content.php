@@ -41,7 +41,7 @@ $blog = $data['blog'][0] ?? null;
         </span>
 
         <?php if ($container->user()->active()) : ?>
-          <?= insert('/_block/admin-dropdown-content', ['post' => $item]); ?>
+          <?= insert('/_block/admin-dropdown-content', ['item' => $item]); ?>
         <?php endif; ?>
       </div>
 

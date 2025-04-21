@@ -93,6 +93,13 @@ fieldset.form-big .input-label {
   margin-top: 14px;
 }
 
+.showPassword {
+  position: absolute;
+  color: var(--gray-600);
+  right: 5px;
+  margin: 2px;
+}
+
 @media screen and (max-width: 735px) {
     fieldset .input-label {
         margin: 0;
