@@ -158,7 +158,7 @@ class PublicationController extends Controller
 		} else {
 			$content = Availability::content($id);
 		}
-		
+
 		if ($type === 'redirect') {
 			
 			$url = post_slug($content['post_type'], $content['post_id'], $content['post_slug']);
@@ -170,7 +170,7 @@ class PublicationController extends Controller
 
         // Check id and get content data
         // Проверим id и получим данные контента
-        if ($type != 'page') {
+        if ($content['post_type'] != 'page') {
             // If the post slug is different from the data in the database
             // Если slug поста отличается от данных в базе
             if (config('meta', 'slug_post') == true) {
@@ -188,7 +188,7 @@ class PublicationController extends Controller
             return $content;
         }
 
-        return Availability::content($slug, 'slug');
+        return Availability::content($content['post_slug'], 'slug');
     }
 
     /**
