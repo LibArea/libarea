@@ -27,18 +27,16 @@
         }
         cropper = new Cropper(previsaoImagemAva, {
           dragMode: 'move',
-          autoCropArea: 0.85,
+          aspectRatio: 1 / 1,
           restore: false,
           guides: false,
-          center: false,
+          center: true,
           highlight: false,
           cropBoxMovable: false,
-          cropBoxResizable: false,
+          // cropBoxResizable: false,
           toggleDragModeOnDblclick: false,
-          data: {
-            width: 165,
-            height: 165,
-          },
+          minCropBoxWidth: 160,
+          minCropBoxHeight: 160,
         });
 
         btnUploadAva.style.display = 'inline';
