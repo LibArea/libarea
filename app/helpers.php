@@ -153,3 +153,21 @@ function redirect(string $url): void
     $container = Container::getContainer();
     $container->redirect()->to($url, status: 303);
 }
+
+
+function modeDayNight()
+{
+    $container = Container::getContainer();
+
+	$cookies = $container->cookies()->get('dayNight')->value();
+	
+	if ($cookies == 'dark') {
+		return ' dark';
+	}
+	
+	if ($cookies == 'light') {
+		return ' light';
+	}
+	
+	return (config('general', 'night_mode') == 'dark') ? ' dark' : ' light';
+}

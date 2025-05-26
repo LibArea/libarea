@@ -62,7 +62,18 @@ queryAll(".add-notif").forEach(element => {
 
 // Toggle dark mode
 isIdEmpty('toggledark').onclick = function () {
-  toggleMode("dayNight", "dark", "light");
+  let mode = getCookie("dayNight");
+  let expires = getDefaultTime();
+  let firstMode = "dark";
+  let secondMode = "light";
+  let cookieName = "dayNight";
+
+  if (mode == firstMode) {
+    document.cookie = cookieName + "=" + secondMode + "; " + expires + ";path=/";
+  } else {
+    document.cookie = cookieName + "=" + firstMode + "; " + expires + ";path=/";
+  }
+   location.reload();
 };
 
 // When you click, the search bar pops up

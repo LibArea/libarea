@@ -6,7 +6,7 @@ $facet = $data['facet'] ?? false
 
 <?= insert('/global/header', ['meta' => $meta, 'type' => $type]); ?>
 
-<body class="<?= $type; ?><?php if ($container->cookies()->get('dayNight')->value() == 'dark') : ?> dark<?php endif; ?>">
+<body class="<?= $type; ?><?= modeDayNight(); ?>">
   <header class="d-header<?php if ($post || $facet) : ?> scroll-hide-search<?php endif; ?>">
     <div class="wrap">
       <div class="d-header_contents">

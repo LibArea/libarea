@@ -17,6 +17,10 @@ return [
     // TRUE - enable search engine (requires indexing settings)
     // TRUE - включить поисковую систему (требуется настройка индексации) 
     'search_engine'		=> false,
+
+    // TRUE - Night mode is on by default (dark)
+    // TRUE - ночной режим включен по умолчанию (темный)
+	'night_mode'	=> false,
 	
     // Шаблон по умолчанию  + какие языки есть в системе
     // Default template + what languages are in the system
