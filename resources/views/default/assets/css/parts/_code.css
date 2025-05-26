@@ -162,7 +162,8 @@ pre[class*=language-] {
 }
 
 div.code-toolbar {
-  position: relative
+  position: relative;
+  max-width: 695px;
 }
 
 div.code-toolbar>.toolbar {

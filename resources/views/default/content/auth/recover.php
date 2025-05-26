@@ -5,8 +5,7 @@
       <?= $container->csrf()->field(); ?>
 
       <fieldset>
-        <label for="post_title"><?= __('app.email'); ?></label>
-        <input type="email" required="" name="email">
+        <input type="email" required="" placeholder="<?= __('app.email'); ?>"  name="email">
       </fieldset>
 
       <?= insert('/_block/form/captcha'); ?>

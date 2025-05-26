@@ -11,6 +11,12 @@
   justify-content: center;
 }
 
+@media (min-width: 1445px) {
+  .main-container {
+	  width: 1180px;
+	}
+}
+
 @media (max-width: 1345px) {
  aside {
     width: 280px;	

@@ -436,6 +436,7 @@ a:hover>img {
   overflow-wrap: break-word;
   margin: 5px;
   position: relative;
+  word-break: break-word;
 }
 
 .comment-body img {
