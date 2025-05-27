@@ -59,8 +59,8 @@ class FacetModel extends Model
 
     public static function sorts(string $sort, string $type)
     {
-		$type = $type === 'blogs' ? 'blog' : 'topic';
-		
+        $type = $type === 'blogs' ? 'blog' : 'topic';
+
         switch ($sort) {
             case 'my':
                 $signet = "WHERE facet_type = '$type' AND facet_is_deleted = " . self::NO_REMOVAL . " AND signed_user_id = " .  self::container()->user()->id() . " ORDER BY facet_count DESC";
@@ -347,6 +347,7 @@ class FacetModel extends Model
                     facet_top_level         = :facet_top_level, 
                     facet_post_related      = :facet_post_related, 
                     facet_type              = :facet_type,
+					facet_tl              	= :facet_tl,
 					facet_is_comments 		= :facet_is_comments
                         WHERE facet_id      = :facet_id";
 
@@ -574,11 +575,11 @@ class FacetModel extends Model
     {
         self::deleteUsersTeam($facet_id);
 
-		if ($rows === null) {
-			return false;
-		}
+        if ($rows === null) {
+            return false;
+        }
 
-        foreach ($rows as $row) { 
+        foreach ($rows as $row) {
             $user_id    = $row['id'];
             $sql        = "INSERT INTO facets_users_team (team_facet_id, team_user_id) VALUES (:facet_id, :user_id)";
 

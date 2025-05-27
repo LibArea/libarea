@@ -114,6 +114,8 @@
 
     <?php if ($container->user()->admin()) : ?>
       <?= insert('/_block/form/select/user', ['user' => $data['user']]); ?>
+	  
+	  <?= insert('/_block/form/content-tl', ['data' => $fs['facet_tl']]); ?>
     <?php endif; ?>
 
     <fieldset>

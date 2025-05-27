@@ -13,6 +13,6 @@
 		  
 		<?php } ?>
 	  </select>
-		<div class="help"><?= __('app.view_post_tl'); ?></div>
+		<div class="help"><?= __('app.view_content_tl'); ?></div>
 	</div>
 </fieldset>

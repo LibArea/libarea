@@ -145,6 +145,15 @@ class AddCommentController extends Controller
             redirect($url_post  . '#comment_' . $comment['comment_id']);
         }
 
+		//  Если участник отвечает на свой комментарий
+		$userComm = CommentModel::getCommentId($parent['comment_id']);
+		if ($userComm['comment_user_id'] == $this->container->user()->id()) {
+		
+            CommentModel::mergeComment($content, $userComm['comment_id']);
+
+            redirect($url_post  . '#comment_' . $userComm['comment_id']);	
+		}
+
         return true;
     }
 
