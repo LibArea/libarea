@@ -116,8 +116,7 @@ class EditPublicationController extends Controller
 		}
 
 		// Add fastes (blogs, topics) to the content
-		$fields = Request::allPost() ?? [];
-		$this->addFacets($fields, (int)$data['id'], $redirect);
+		$this->addFacets($data, (int)$data['id'], $redirect);
 
 		$post_related = $this->relatedPost();
 
