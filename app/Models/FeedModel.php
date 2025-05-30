@@ -74,7 +74,7 @@ class FeedModel extends Model
                             LEFT JOIN favorites fav ON fav.tid = post_id AND fav.user_id = " . $user_id . " AND fav.action_type = 'post'
                             LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = " . $user_id . "
                                         
-                                $string $display $nsfw $sort LIMIT :start, :limit";
+                                $string $display AND post_type != 'page' $nsfw $sort LIMIT :start, :limit";
 
         if (in_array($sheet, ['profile.posts', 'web.feed'])) {
             return DB::run($sql, ['qa' => $slug, 'start' => $start, 'limit' => $limit])->fetchAll();
@@ -109,7 +109,7 @@ class FeedModel extends Model
                                     LEFT JOIN facets_posts_relation on facet_id = relation_facet_id 
                                         GROUP BY relation_post_id  
                         ) AS rel ON rel.relation_post_id = post_id 
-                            $string $display $nsfw";
+                            $string $display AND post_type != 'page' $nsfw";
 
         if (in_array($sheet, ['profile.posts', 'web.feed'])) {
             return DB::run($sql, ['qa' => $slug])->rowCount();
