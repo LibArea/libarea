@@ -1,4 +1,4 @@
-<main class="w-100">
+<main class="max">
   <div class="box">
     <h2 class="mt5"><?= __('app.add_' . $data['type']); ?></h2>
     <form class="mb20" action="<?= url('add.' . $data['type'], method: 'post'); ?>" method="post" enctype="multipart/form-data">

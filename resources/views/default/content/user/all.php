@@ -1,4 +1,4 @@
-<main class="w-100">
+<main class="max">
   <div class="box">
     <div class="mb15">
       <h1 class="title"><?= __('meta.' . $data['sheet'] . '_users'); ?></h1>

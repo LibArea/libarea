@@ -8,9 +8,6 @@ $facet = $data['facet'] ?? false
 
 <body class="<?= $type; ?><?= modeDayNight(); ?>">
   <header class="d-header<?php if ($post || $facet) : ?> scroll-hide-search<?php endif; ?>">
-    <div class="wrap">
-      <div class="d-header_contents">
-
         <div class="flex flex-auto">
           <div class="box-logo">
             <svg class="icon large menu__button none">
@@ -51,21 +48,11 @@ $facet = $data['facet'] ?? false
         </div>
 
         <?= insert('/_block/navigation/user-bar-header', ['facet_id' => $facet['facet_id'] ?? false]); ?>
-      </div>
-    </div>
   </header>
 
-  <?php if (!$container->user()->active() && $type == 'main') : ?>
-    <div class="banner mb-none">
-      <h1><?= config('meta', 'banner_title'); ?></h1>
-      <p><?= config('meta', 'banner_desc'); ?>...</p>
-    </div>
-  <?php endif; ?>
-
-  <div id="contentWrapper" class="wrap">
-    <div class="nav-sidebar">
-      <nav class="menu__left sticky mb-none">
-        <ul class="menu top-sm">
+  <div id="contentWrapper">
+      <nav class="menu__left mb-none">
+        <ul class="menu">
           <?= insert('/_block/navigation/config/left-menu', ['type' => $type, 'topics_user' => $data['topics_user']]); ?>
         </ul>
         <footer>
@@ -75,14 +62,10 @@ $facet = $data['facet'] ?? false
           </ul>
           <div class="ml10 mb5 text-sm gray-600">
             <?= config('meta', 'name'); ?> &copy; <?= date('Y'); ?>
-            <span class="mb-none">— <?= __('app.community'); ?></span>
           </div>
         </footer>
       </nav>
-    </div>
-    <div class="main-container">
-      <?= $content; ?>
-    </div>
+    <?= $content; ?>
   </div>
 
   <?= insert('/global/footer'); ?>

@@ -53,7 +53,7 @@
           &#183; <?= $item['post_ip']; ?>
         </a>
       </li>
-	<?php endif; ?>  
+    <?php endif; ?>
     <?php if ($item['modified']) : ?>
       <li>
         <div class="lowercase">

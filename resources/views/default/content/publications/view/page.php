@@ -1,6 +1,6 @@
 <?php $page = $data['page']; ?>
 
-<main>
+<main class="max">
   <article<?php if ($page['post_is_deleted'] == 1) : ?> class="bg-red-200" <?php endif; ?>>
     <?php if ($page['post_is_deleted'] == 0 || $container->user()->admin()) : ?>
       <h1>

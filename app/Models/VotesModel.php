@@ -90,4 +90,11 @@ class VotesModel extends Model
 
         return DB::run($sql, ['content_id' => $content_id]);
     }
+
+    public static function checkingContent(int $id, string $type)
+    {
+        $sql = "SELECT " . $type . "_id FROM " . $type . "s WHERE " . $type . "_id = :id AND " . $type . "_is_deleted = 0";
+
+        return DB::run($sql, ['id' => $id])->fetch();
+    }
 }

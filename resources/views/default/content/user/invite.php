@@ -20,7 +20,7 @@
   </div>
 </main>
 <aside>
-  <div class="box text-sm sticky top-sm">
+  <div class="box text-sm sticky">
     <?= __('app.invited_you'); ?>
   </div>
 </aside>

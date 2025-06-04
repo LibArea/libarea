@@ -143,6 +143,7 @@ class PublicationController extends Controller
                         'sorting'       => $sorting ?? null,
                         'sheet'         => 'article',
                         'type'          => 'post',
+						'post' 			=> $content,
                         'poll'          => $this->getPoll($content['post_poll']),
                         'is_answer'     => CommentModel::isAnswerUser($content['post_id']),
                     ]

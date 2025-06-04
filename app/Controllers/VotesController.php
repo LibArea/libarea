@@ -44,18 +44,18 @@ class VotesController extends Controller
     {
         // Checking allowed content types
         // Проверим разрешенные типы контента
-        if (!in_array($type, ['post', 'comment', 'item', 'reply'])) {
+        if (!in_array($type, ['post', 'comment'])) {
             return false;
         }
 
-        // Prohibit substitution, negative and zero values
-        // Запретим подмену, отрицательные и нулевые значения
-        if ($content_id <= 0) {
+        // Let's check for content
+        // Проверим на наличие контента
+        if (!VotesModel::checkingContent($content_id, $type)) {
             return false;
         }
 
-        // We check that the participant does not vote for their content (post / comment / item / reply)
-        // Проверяем, чтобы участник не голосовал за свой контент (post / comment / item / reply)
+        // We check that the participant does not vote for their content (post / comment )
+        // Проверяем, чтобы участник не голосовал за свой контент (post / comment )
         if ($this->container->user()->id() == VotesModel::authorId($content_id, $type)) {
             return false;
         }

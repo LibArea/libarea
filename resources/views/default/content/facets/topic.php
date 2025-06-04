@@ -27,7 +27,7 @@ $topic = $data['facet'];
     <?= insert('/_block/facet/topic', ['data' => $data]); ?>
 
     <?php if (!empty($data['writers'])) : ?>
-      <div class="sticky top-sm">
+      <div class="sticky">
         <div class="box text-sm">
           <h4 class="uppercase-box"><?= __('app.writers'); ?></h4>
           <ul>

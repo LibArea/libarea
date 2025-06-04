@@ -1,4 +1,4 @@
-<main class="w-100">
+<main class="max">
   <div class="box">
     <h1 class="title"><?= __('app.delete_profile'); ?></h1>
     <div class="max-w-md mb20">

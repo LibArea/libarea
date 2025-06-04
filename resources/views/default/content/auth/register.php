@@ -1,4 +1,4 @@
-<main>
+<main class="max">
   <div class="box">
     <h1 class="title"><?= __('app.' . $data['sheet']); ?></h1>
 

@@ -5,7 +5,7 @@
   </div>
 </main>
 <aside>
-  <div class="box sticky top-sm">
+  <div class="box sticky">
     <?= __('help.' . $data['sheet'] . '_info'); ?>
   </div>
 </aside>

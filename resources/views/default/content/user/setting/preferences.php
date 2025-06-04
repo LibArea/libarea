@@ -1,5 +1,5 @@
 <?php $block = $data['blocks'][0] ?? false; ?>
-<main class="w-100">
+<main class="max">
   <?= insert('/content/user/setting/nav'); ?>
   <div class="box">
 

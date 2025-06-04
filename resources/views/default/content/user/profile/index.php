@@ -1,10 +1,12 @@
-<div class="flex flex-col w-100">
-  <?php if ($data['profile']['is_deleted']) : ?>
+<main>
+	 
+
+	 <?php if ($data['profile']['is_deleted']) : ?>
     <?= insert('/_block/no-content', ['type' => 'max', 'text' => __('msg.no_user'), 'icon' => 'user']); ?>
-  <?php else : ?>
-    <?= insert('/content/user/profile/header', ['data' => $data]); ?>
-    <div class="flex gap">
-      <main class="flex-auto">
+<?php else : ?>
+    
+	   <?= insert('/content/user/profile/header', ['data' => $data]); ?>
+	  
         <?php if ($data['profile']['my_post'] != false && $data['my_post']['post_is_deleted'] != true) : ?>
           <div class="box bg-violet">
             <h4 class="uppercase-box"><?= __('app.selected_post'); ?>
@@ -40,7 +42,6 @@
       </main>
       <aside>
         <?= insert('/content/user/profile/sidebar', ['data' => $data]); ?>
-      </aside>
-    </div>
+  
   <?php endif; ?>
-</div>
+ 

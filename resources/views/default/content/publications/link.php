@@ -6,7 +6,7 @@
   <?= Html::pagination($data['pNum'], $data['pagesCount'], null, url('domain', ['domain' => $data['site']])); ?>
 </main>
 <aside>
-  <div class="sticky top-sm">
+  <div class="sticky">
     <div class="box">
       <?php if (!empty($data['list'])) : ?>
         <h4 class="uppercase-box"><?= __('app.domains'); ?></h4>

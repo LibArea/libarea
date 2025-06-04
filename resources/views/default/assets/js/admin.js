@@ -9,4 +9,3 @@ report.forEach(el => el.addEventListener("click", () => makeRequest("/mod/admin/
 badge.forEach(el => el.addEventListener("click", () => makeRequest("/mod/admin/badge/remove", { body: `id=${el.dataset.id}&uid=${el.dataset.uid}` })));
 audit.forEach(el => el.addEventListener("click", () => makeRequest("/mod/admin/audit/status", { body: `status=${el.dataset.id}@${el.dataset.status}` })));
 update.forEach(el => el.addEventListener("click", () => makeRequest("/mod/admin/manual/update", { body: `type=${el.dataset.type}` })));
-

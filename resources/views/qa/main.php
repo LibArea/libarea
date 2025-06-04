@@ -6,7 +6,7 @@ $facet  = $data['facet'] ?? false;
 
 <body <?php if ($container->cookies()->get('dayNight') == 'dark') : ?>class="dark" <?php endif; ?>>
 
-  <header class="bg-white mb10">
+  <header class="bg-white mb10 ml20 mr20">
     <div class="br-bottom wrap mb-none items-center flex gap mb5">
       <a class="p5 black text-sm" href="/topics">
         <svg class="icon small">

@@ -1,4 +1,4 @@
-<main>
+<main class="max">
   <div class="box">
     <h1><?= __('app.password_recovery'); ?></h1>
     <form class="max-w-sm" action="<?= url('new.pass', method: 'post'); ?>" method="post">

@@ -17,11 +17,11 @@
         <div class="mb15">
           <div class="right"><?= insert('/content/publications/title', ['item' => $item]); ?></div>
 
-		  <?php if ($item['post_type'] != 'post') : ?>
+          <?php if ($item['post_type'] != 'post') : ?>
             <a class="black" href="<?= $url; ?>">
               <h3 class="title"><?= $item['post_title']; ?></h3>
             </a>
-		  <?php endif; ?>	
+          <?php endif; ?>
           <div class="flex gap text-sm lowercase">
             <?= insert('/content/publications/type-publication', ['type' => $item['post_type']]); ?>
             <?php $type = $data['type'] ?? 'topic';
@@ -40,11 +40,12 @@
               </a>
             <?php endif; ?>
           </div>
-		   <?php if ($item['post_type'] = 'post') : ?><a class="black" href="<?= $url; ?>"><?php endif; ?>
-          <div class="cut-content">
-            <?= fragment($item['post_content'], 250); ?>
-          </div>
-		  <?php if ($item['post_type'] = 'post') : ?></a><?php endif; ?>
+          <?php if ($item['post_type'] = 'post') : ?><a class="black" href="<?= $url; ?>"><?php endif; ?>
+            <div class="cut-content">
+              <?= fragment($item['post_content'], 250); ?>
+            </div>
+            <?php if ($item['post_type'] = 'post') : ?>
+            </a><?php endif; ?>
         </div>
 
         <?php if ($item['post_content_img'] || $item['post_thumb_img']) : ?>

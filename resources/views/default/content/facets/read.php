@@ -32,7 +32,7 @@
     </main>
     <aside>
       <?php if ($data['info']) : ?>
-        <div class="sticky top-sm">
+        <div class="sticky">
           <div class="box content-body">
             <?= $data['info']; ?>
           </div>

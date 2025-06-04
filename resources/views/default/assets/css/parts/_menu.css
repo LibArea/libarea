@@ -4,19 +4,17 @@
  * Выпадающее меню и навигация
  */
 
-.nav-sidebar {
-  height: calc(100dvh - 100px);
-  align-self: start;
-  overflow-y: hidden;
-  position: sticky;
-  top: 75px;
-  z-index: 45;
-  width: 265px;
-  padding-right: 30px;
-}
-
-.nav-sidebar:hover {
+nav {
+    left: 0;
+min-width: 19rem;
+  overflow-x: hidden;
   overflow-y: auto;
+max-width: 19rem;
+    padding: 2rem;
+    display: block;
+    position: fixed;
+    top: 3.75rem;
+    height: 100%;
 }
 
 .dropdown,
@@ -109,7 +107,6 @@
 .menu li:hover {
   background-color: var(--white);
   border-radius: var(--rounded);
-  max-width: 190px;
 }
 
 .menu li:hover {
@@ -190,6 +187,10 @@ ul.nav>li.active>a {
 
 ul.nav>li a:hover {
   color: var(--link-color-hover);
+}
+
+ul.nav>li.active>a {
+  color: var(--nav-color-active);
 }
 
 ul.nav>li.active a:hover {

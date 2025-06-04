@@ -1,4 +1,4 @@
-<main class="w-100">
+<main class="max">
   <?= insert('/content/user/setting/nav'); ?>
   <div class="box">
     <?= insert('/_block/form/cropper/user-avatar', ['data' => $data['user']]); ?>

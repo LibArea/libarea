@@ -55,7 +55,7 @@
   </div>
 </main>
 <aside>
-  <div class="box sticky top-sm">
+  <div class="box sticky">
     <?= __('app.invite_features'); ?>
   </div>
 </aside>

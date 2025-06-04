@@ -1,5 +1,5 @@
 <?php $item = $data['content']; ?>
-<main class="w-100">
+<main class="max">
   <div class="box">
     <h2 class="mt5"><?= __('app.edit_' . $item['post_type']); ?></h2>
     <form class="mb20" action="<?= url('edit.' . $item['post_type'], method: 'post'); ?>" method="post" enctype="multipart/form-data">

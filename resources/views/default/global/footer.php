@@ -1,6 +1,6 @@
 <script src="/assets/js/common.js?<?= config('general', 'version'); ?>"></script>
-<script src="/assets/js/zooom.js?<?= config('general', 'version'); ?>"></script> 
- 
+<script src="/assets/js/zooom.js?<?= config('general', 'version'); ?>"></script>
+
 <?php if ($container->user()->active()) : ?>
   <script src="/assets/js/app.js?<?= config('general', 'version'); ?>"></script>
   <?= insert('/_block/device-id'); ?>
@@ -12,32 +12,32 @@
 
 <script nonce="<?= config('main', 'nonce'); ?>">
   document.addEventListener('DOMContentLoaded', () => {
-	 new Zooom("img-preview img, .comment-text img:not(.emoji, .gif), .content-body img:not(.emoji, .gif)", {
-	  // control layer positions
-	  zIndex: 99,
+    new Zooom("img-preview img, .comment-text img:not(.emoji, .gif), .content-body img:not(.emoji, .gif)", {
+      // control layer positions
+      zIndex: 99,
 
-	  // animation time in number
-	  animationTime: 300,
+      // animation time in number
+      animationTime: 300,
 
-	  // cursor type
-	  cursor: {
-		in: "zoom-in",
-		out: "zoom-out",
-	  },
+      // cursor type
+      cursor: {
+        in: "zoom-in",
+        out: "zoom-out",
+      },
 
-	  // overlay layer color and opacity, rgba, hsla, ...
-	  overlay: "<?= $container->cookies()->get('dayNight')->value() == 'dark' ? '#283541' : '#fff';  ?>",
+      // overlay layer color and opacity, rgba, hsla, ...
+      overlay: "<?= $container->cookies()->get('dayNight')->value() == 'dark' ? '#283541' : '#fff';  ?>",
 
-	  // callback function
-	  // see usage example docs/index.html
-	  onResize: function () {},
-	  onOpen: function (element) {},
-	  onClose: function (element) {},
-	});
+      // callback function
+      // see usage example docs/index.html
+      onResize: function() {},
+      onOpen: function(element) {},
+      onClose: function(element) {},
+    });
   });
   <?php if ($container->user()->active()) : ?>
     const update_time = <?= config('general', 'notif_update_time'); ?>;
-	const site_name = "<?= config('meta', 'title'); ?>";
+    const site_name = "<?= config('meta', 'title'); ?>";
 
     function load_notification() {
       fetch("/notif", {
@@ -62,16 +62,17 @@
 
             number.classList.add("show");
             number.innerHTML = data.length;
-			
-			notif_title('\uD83D\uDCAC (+'+ data.length +') ' + site_name + '', '\uD83D\uDD14 (+'+ data.length +') ' + site_name + '');
+
+            notif_title('\uD83D\uDCAC (+' + data.length + ') ' + site_name + '', '\uD83D\uDD14 (+' + data.length + ') ' + site_name + '');
           }
         }).catch(function(error) {
           // error
         });
     }
-	function notif_title(o, a) {
-		document.title == o ? (document.title = a) : (document.title = o)
-	}
+
+    function notif_title(o, a) {
+      document.title == o ? (document.title = a) : (document.title = o)
+    }
     setInterval(function() {
       load_notification();
     }, update_time);

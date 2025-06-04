@@ -53,7 +53,7 @@
     <?php endif; ?>
   <?php endif; ?>
 
-  <div class="sticky top-sm">
+  <div class="sticky">
     <?= insert('/_block/latest-comments-tabs', ['latest_comments' => $data['latest_comments']]); ?>
   </div>
 </aside>

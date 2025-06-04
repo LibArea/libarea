@@ -66,7 +66,7 @@
   <?php endif; ?>
 </main>
 <aside>
-  <div class="box sticky top-sm">
+  <div class="box sticky">
     <?= __('help.favorite_info'); ?>
   </div>
 </aside>

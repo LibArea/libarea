@@ -22,7 +22,7 @@
   </div>
 </main>
 <aside>
-  <div class="box sticky top-sm">
+  <div class="box sticky">
     <?= __('help.poll_info'); ?>
   </div>
 </aside>

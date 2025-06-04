@@ -74,13 +74,6 @@ class PublicationModel extends Model
         return DB::run($sql, ['slug' => $slug])->fetch();
     }
 
-    public static function getPostId(int $post_id)
-    {
-        $sql = "SELECT post_id, post_title, post_slug FROM posts WHERE post_id = :post_id";
-
-        return DB::run($sql, ['post_id' => $post_id])->fetchAll();
-    }
-
     // Full post 
     // Полная версия поста  
     public static function getPost(string|int|null $params, string $name)
@@ -430,7 +423,7 @@ class PublicationModel extends Model
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll();
     }
-	
+
     public static function morePages(int $id)
     {
         $sql = "SELECT 
@@ -444,7 +437,7 @@ class PublicationModel extends Model
 
         return DB::run($sql, ['id' => $id])->fetchAll();
     }
-	
+
     // Recommended posts
     // This should not be your own post, whose TL is not higher than the participant, the post is not a draft, not deleted, etc.
     // Рекомендованные посты

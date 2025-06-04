@@ -4,57 +4,25 @@
  * Медиа-запросы
  */
 
-.info .main-container,
-.register .main-container,
-.login .main-container {
-  background-color: var(--white);
-  justify-content: center;
-}
-
-@media (min-width: 1445px) {
-  .main-container {
-	  width: 1180px;
-	}
-}
-
-@media (max-width: 1345px) {
- aside {
-    width: 280px;	
-  }
-  
-  main {
-    width: 700px;	
-  }
-}
-
-@media (max-width: 1280px) {
- aside {
-    width: 240px;	
-  }
-  
-  main {
-    width: 640px;	
-  }
-}
-
-@media (max-width: 1160px) {
+@media (max-width: 1220px) {
   aside {
     display: none;
   }
 
   main {
-    width: 800px;	
+    margin-right: 0;
   }
 }
 
 @media (max-width: 1060px) {
   .nav-sidebar {
-	display: none;
+    display: none;
   }
 
-  .main-container,
-   main {
-    width: var(--max-w-full);	
+  main {
+    width: var(--max-w-full);
+    margin-left: 0;
+    padding: 0;
   }
 
   .menu__button {
@@ -76,22 +44,18 @@
     overflow-x: hidden;
     position: absolute;
     padding-right: 0;
-	scrollbar-width: thin;
+    scrollbar-width: thin;
   }
 
-  .nav-sidebar.menu__active,
-  .nav-sidebar.menu__active .menu__left,
-  .nav-sidebar.menu__active .menu__left.menu-none {
+  nav.menu__active,
+  nav.menu__active .menu__left,
+  nav.menu__active .menu__left.menu-none {
     opacity: 1;
     visibility: visible;
     transition: 0.25s;
     position: fixed;
     display: block;
-	padding-right: 20px;
-  }
-
-  .menu__active .menu__left ul.top-sm {
-    top: 0;
+    padding-right: 20px;
   }
 
   .nav-sidebar.menu__active .menu__left .menu li {
@@ -117,7 +81,7 @@
   .comment_level-left-5 {
     margin-left: 96px;
   }
-  
+
   .d-header.show .d-header-post.none,
   .d-header.show .d-header-facet.none {
     max-width: 300px;
@@ -190,9 +154,9 @@
   .title {
     font-size: 1.2125rem;
   }
-  
+
   .nav-bar {
-	margin: 0 10px 20px 10px;
+    margin: 0 10px 20px 10px;
   }
 
   .mb-block,
@@ -219,7 +183,7 @@
     width: auto;
   }
 
-  .mb-none  {
+  .mb-none {
     display: none;
   }
 
@@ -231,7 +195,7 @@
     padding-left: 0;
     padding-right: 0;
   }
-  
+
   .comment_level-left-1 {
     margin-left: 10px;
   }
@@ -252,19 +216,19 @@
     margin-left: 40px;
   }
 
- .comment_level-left-3 img,
- .comment_level-left-4 img,
- .comment_level-left-5 img {
+  .comment_level-left-3 img,
+  .comment_level-left-4 img,
+  .comment_level-left-5 img {
     max-width: 180px;
   }
 
   .cherry .cherry-toolbar {
-	padding: 0 5px;
+    padding: 0 5px;
   }
-  
+
   .cherry-toolbar-button.cherry-toolbar-split,
   .cherry-toolbar-button.cherry-toolbar-strike {
-	  display: none;
+    display: none;
   }
 
 }

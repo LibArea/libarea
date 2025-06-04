@@ -1,4 +1,4 @@
-<main class="w-100">
+<main class="max">
   <?= insert('/content/user/setting/nav'); ?>
   <div class="box">
     <h2><?= __('app.ignored_users'); ?></h2>

@@ -71,13 +71,14 @@ h5 {
 
 .icon.large {
   width: 28px;
-  height: 28px;	
+  height: 28px;
 }
 
 .icon.max {
   width: 121px;
   height: 121px;
 }
+
 /* end */
 
 /*
@@ -116,6 +117,7 @@ h5 {
 .icon.tw {
   color: #00aced;
 }
+
 /* end */
 
 .list-none {
@@ -125,6 +127,7 @@ h5 {
 }
 
 .d-header {
+  display: flex;
   top: 0;
   z-index: 6;
   position: sticky;
@@ -132,8 +135,10 @@ h5 {
   color: var(--header-text-color);
   box-shadow: var(--header-box-shadow);
   backface-visibility: hidden;
+  align-items: center;
   height: 3.5em;
-  margin-bottom: 15px;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 .banner {
@@ -141,33 +146,11 @@ h5 {
   background-size: cover;
   filter: brightness(1.1);
   text-align: center;
+  border-radius: var(--rounded);
   padding: 1.25rem 0;
   margin-top: -1rem;
   margin-bottom: 1.25rem;
   color: #333;
-}
-
-.wrap {
-  margin: 0 auto;
-  height: 100%;
-  max-width: 1520px;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.d-header_contents {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  position: relative;
-  justify-content: space-between;
-  margin: 0 0.3rem 0 0.3rem;
-}
-
-.main-container {
-  display: flex;
-  gap: var(--gap-base);
-  width: 1070px;
 }
 
 /* Search */
@@ -183,6 +166,12 @@ h5 {
 
 .box-search {
   width: 80%;
+  align-items: center;
+  display: flex;
+}
+
+.form {
+  width: 100%;
 }
 
 .box-search .search {
@@ -208,13 +197,11 @@ h5 {
 
 .d-header.show .d-header-post.none,
 .d-header.show .d-header-facet.none {
-  display: block;
+  display: flex;
   position: relative;
   width: 100%;
   font-size: 18px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  align-items: center;
   max-width: 550px;
 }
 
@@ -248,11 +235,24 @@ h5 {
 }
 
 main {
-  width: 820px;	
+  padding: 2rem;
+  margin-left: 300px;
+  margin-right: 21rem;
+  max-width: 1000px;
+  min-height: auto;
+  width: 100%;
 }
 
 aside {
-  width: 320px;
+  width: 21rem;
+  padding: 2rem 1rem;
+  display: block;
+  position: fixed;
+  top: 3.75rem;
+  height: 100%;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 aside ul {
@@ -276,6 +276,11 @@ blockquote {
   padding: 0.1rem 1rem;
   border-left: 3px solid var(--gray-600);
   display: table;
+}
+
+main.max {
+  margin-right: 0;
+  max-width: 1560px;
 }
 
 .blockquote-profile {
@@ -341,7 +346,7 @@ article,
 
 .box-flex {
   display: flex;
-  border-radius:var(--rounded);
+  border-radius: var(--rounded);
   position: relative;
   flex-direction: row;
   align-items: center;
@@ -387,7 +392,7 @@ article,
 }
 
 ul.last-content li {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 ul.last-content a.last-content_telo {
@@ -577,11 +582,11 @@ li .comment-folder-button:checked~ol.comments li {
 }
 
 .comment-text p {
-    margin: 0.1em 0 1em 0;
+  margin: 0.1em 0 1em 0;
 }
 
 .comment-text blockquote p {
-    margin: 0.6em 0 0.6em 0;
+  margin: 0.6em 0 0.6em 0;
 }
 
 article iframe {
@@ -649,5 +654,13 @@ li.zebra+li {
 .pagination {
   display: flex;
   gap: var(--gap-base);
-  margin-bottom: 20px;
+}
+
+.nickname {
+  display: inline-block;
+  color: var(--black);
+}
+
+.nickname.new::first-letter {
+  color: var(--green);
 }

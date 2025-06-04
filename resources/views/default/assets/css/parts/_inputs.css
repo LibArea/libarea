@@ -56,7 +56,7 @@ label {
   color: var(--gray);
 }
 
- .form-element .tagify,
+.form-element .tagify,
 .form-element input,
 .form-element select,
 .form-element textarea {
@@ -70,19 +70,19 @@ label {
 }
 
 .form-label {
-    float: left;
-    width: 17.07%;
-    padding: 0 20px 0 0;
-    line-height: 18px;
-    margin-top: 2px;
-    word-wrap: break-word;
-	color: var(--gray);
+  float: left;
+  width: 17.07%;
+  padding: 0 20px 0 0;
+  line-height: 18px;
+  margin-top: 2px;
+  word-wrap: break-word;
+  color: var(--gray);
 }
 
 .form-element {
-    margin-left: 17.07%;
-    margin-bottom: 4px;
-    width: 82.93%;
+  margin-left: 17.07%;
+  margin-bottom: 4px;
+  width: 82.93%;
 }
 
 fieldset.form-big input[type="text"] {
@@ -101,14 +101,15 @@ fieldset.form-big .input-label {
 }
 
 @media screen and (max-width: 735px) {
-    fieldset .input-label {
-        margin: 0;
-    }
+  fieldset .input-label {
+    margin: 0;
+  }
 
-    .form-element, .form-control-sublabel {
-        width: 100%;
-        margin-left: 0;
-    }
+  .form-element,
+  .form-control-sublabel {
+    width: 100%;
+    margin-left: 0;
+  }
 
   fieldset .form-label {
     width: 100%;
@@ -116,11 +117,11 @@ fieldset.form-big .input-label {
     vertical-align: baseline;
     margin: 0;
   }
-  
-	.form-element .tagify,
-	.form-element input,
-	.form-element select,
-	.form-element textarea {
-	  width: 100%;
-	}
+
+  .form-element .tagify,
+  .form-element input,
+  .form-element select,
+  .form-element textarea {
+    width: 100%;
+  }
 }

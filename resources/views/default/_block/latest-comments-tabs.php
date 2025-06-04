@@ -10,7 +10,7 @@
               <span class="nickname<?php if (Html::loginColor($comment['created_at'])) : ?> new<?php endif; ?>"><?= $comment['login']; ?></span>
             </a>
             <span class="lowercase"><?= langDate($comment['comment_date']); ?></span>
-			<!--span class="lowercase"><?= insert('/content/publications/type-publication', ['type' => $comment['post_type']]); ?></span-->
+            <!--span class="lowercase"><?= insert('/content/publications/type-publication', ['type' => $comment['post_type']]); ?></span-->
           </div>
           <a class="last-content_telo" href="<?= post_slug($comment['post_type'], $comment['post_id'], $comment['post_slug']); ?>#comment_<?= $comment['comment_id']; ?>">
             <?php if (mb_strlen($fragment = fragment($comment['comment_content'], 78), 'utf-8') < 5) : ?>
@@ -19,16 +19,16 @@
               <?= $fragment; ?>
             <?php endif; ?>
           </a>
-		  <?php if ($comment['post_type'] != 'post') : ?>
-          <div class="text-sm flex items-center">
-            <svg class="icon gray-600">
-              <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
-            </svg>
-            <a href="<?= post_slug($comment['post_type'], $comment['post_id'], $comment['post_slug']); ?>" class="black"> 
-				<?= fragment($comment['post_title'], 32); ?>
-			</a>	
-          </div>
-		    <?php endif; ?>
+          <?php if ($comment['post_type'] != 'post') : ?>
+            <div class="text-sm flex items-center">
+              <svg class="icon gray-600">
+                <use xlink:href="/assets/svg/icons.svg#corner-down-right"></use>
+              </svg>
+              <a href="<?= post_slug($comment['post_type'], $comment['post_id'], $comment['post_slug']); ?>" class="black">
+                <?= fragment($comment['post_title'], 32); ?>
+              </a>
+            </div>
+          <?php endif; ?>
         </li>
       <?php endforeach; ?>
     </ul>

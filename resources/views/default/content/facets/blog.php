@@ -92,7 +92,7 @@ if ($blog['facet_is_deleted'] == 0) : ?>
           <?php endif; ?>
 
           <?php if ($data['info']) : ?>
-            <div class="sticky top-sm">
+            <div class="sticky">
               <div class="box img-preview">
                 <?= $data['info']; ?>
               </div>

@@ -73,7 +73,7 @@ isIdEmpty('toggledark').onclick = function () {
   } else {
     document.cookie = cookieName + "=" + firstMode + "; " + expires + ";path=/";
   }
-   location.reload();
+  location.reload();
 };
 
 // When you click, the search bar pops up
@@ -95,13 +95,13 @@ if (btnSearch) {
 document.addEventListener("click", function (e) {
   const target = e.target;
   if (search) {
-	  const its_search = target == search || search.contains(target);
-	  const its_btnSearch = target == btnSearch;
-	  const search_is_active = search.classList.contains("active");
+    const its_search = target == search || search.contains(target);
+    const its_btnSearch = target == btnSearch;
+    const search_is_active = search.classList.contains("active");
 
-	  if (!its_search && !its_btnSearch && search_is_active) {
-		toggleSearch();
-	  }
+    if (!its_search && !its_btnSearch && search_is_active) {
+      toggleSearch();
+    }
   }
 });
 
@@ -179,7 +179,7 @@ triggerElements.forEach(triggerElement => {
 
 // Left drop-down general menu (navigation)
 const menuButton = document.querySelector('.menu__button');
-const leftMenu = document.querySelector('.nav-sidebar');
+const leftMenu = document.querySelector('nav.menu__left');
 
 if (menuButton) {
   menuButton.addEventListener('click', () => {

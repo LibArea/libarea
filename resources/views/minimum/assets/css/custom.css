@@ -12,17 +12,10 @@ body {
 }
 
 main {
-  width: 100%;
-}
-
-.text-header {
-  top: 0;
-  z-index: 50;
-  position: sticky;
-  background-color: var(--white);
-  backface-visibility: hidden;
-  height: 3.5em;
-  margin-bottom: 15px;
+  margin-right: 0;
+  max-width: 1560px;
+  margin-left: 0;
+  padding: 1rem;
 }
 
 .img-sm-min {
@@ -43,15 +36,12 @@ main {
   text-align: center;
   color: var(--white);
   font-size: 18px;
+  margin-right: 20px;
 }
 
 .logo:hover,
 .logo:active {
   color: var(--white);
-}
-
-.mt3 {
-  margin-top: 3px;
 }
 
 .pt20 {

@@ -39,10 +39,14 @@
       <div x-ref="element"></div>
 
       <textarea type="hidden" name="content" id="hidden-content" hidden><?= $data['md']; ?> </textarea>
+
+
+
+      <RichTextEditor modules={{ table: {}, codeHighlight: true }} />
     </div>
 </main>
 
-<script type="module" src="/assets/js/editor-test/editor.js"></script>
+<script type="module" src="/assets/js/editor/1/quill-react-commercial.min.js"></script>
 
 <style>
   .tiptap {

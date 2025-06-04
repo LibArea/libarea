@@ -25,9 +25,9 @@ $blog = $data['blog'][0] ?? null;
 
       <div class="uppercase-box">
         <?= insert('/content/publications/type-publication', ['type' => $item['post_type']]); ?>
-		<?php if ($item['post_type'] == 'post') : ?>
-		  <div class="right"><?= insert('/content/publications/title', ['item' => $item]); ?></div>
-		<?php endif; ?>
+        <?php if ($item['post_type'] == 'post') : ?>
+          <div class="right"><?= insert('/content/publications/title', ['item' => $item]); ?></div>
+        <?php endif; ?>
       </div>
 
       <div class="user-info">
@@ -46,9 +46,9 @@ $blog = $data['blog'][0] ?? null;
       </div>
 
       <h1 class="m0 mb5"><?= $item['post_title']; ?>
-	    <?php if ($item['post_type'] != 'post') : ?>
+        <?php if ($item['post_type'] != 'post') : ?>
           <?= insert('/content/publications/title', ['item' => $item]); ?>
-		<?php endif; ?>  
+        <?php endif; ?>
       </h1>
 
       <?php if ($item['post_thumb_img']) : ?>
@@ -152,8 +152,9 @@ $blog = $data['blog'][0] ?? null;
               <use xlink:href="/assets/svg/icons.svg#share"></use>
             </svg>
           </div>
-
-          <?= Html::favorite($item['post_id'], 'post', $item['tid']); ?>
+          <?php if ($item['post_draft'] == 0) : ?>
+            <?= Html::favorite($item['post_id'], 'post', $item['tid']); ?>
+          <?php endif; ?>
         </div>
       </div>
 
@@ -198,15 +199,15 @@ $blog = $data['blog'][0] ?? null;
 
     <?php if (empty($is_comments)) : ?>
       <div id="comment"></div>
-	      <?php if ($item['post_draft'] == 0) :
-			  if ($item['post_type'] == 'question') :
-				insert('/content/publications/format-qa', ['data' => $data, 'item' => $item]);
-			  else :
-				insert('/content/publications/format-discussion', ['data' => $data, 'item' => $item]);
-			  endif;
-			else :
-			  echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);
-			endif; ?>
+      <?php if ($item['post_draft'] == 0) :
+        if ($item['post_type'] == 'question') :
+          insert('/content/publications/format-qa', ['data' => $data, 'item' => $item]);
+        else :
+          insert('/content/publications/format-discussion', ['data' => $data, 'item' => $item]);
+        endif;
+      else :
+        echo insert('/_block/no-content', ['type' => 'small', 'text' => __('app.this_draft'), 'icon' => 'lock']);
+      endif; ?>
     <?php else : ?>
       <?php insert('/_block/no-content', ['type' => 'small', 'text' => __('app.topic_comments_disabled'), 'icon' => 'lock']); ?>
     <?php endif; ?>
@@ -241,13 +242,13 @@ $blog = $data['blog'][0] ?? null;
   <?php endif; ?>
 
   <?php if ($data['similar'] && $item['post_is_deleted'] != 1) : ?>
-    <div class="box sticky top-sm">
+    <div class="box sticky">
       <h4 class="uppercase-box"><?= __('app.recommended'); ?></h4>
       <?php foreach ($data['similar'] as  $rec) : ?>
-	      <?php $url =  (config('general', 'search_engine') == true) ? $rec['url'] : post_slug($rec['post_type'], $rec['post_id'], $rec['post_slug']);  ?>
-          <a class="black mb20 block" href="<?= $url; ?>">
-		     <?= $rec['title']; ?>
-          </a>
+        <?php $url =  (config('general', 'search_engine') == true) ? $rec['url'] : post_slug($rec['post_type'], $rec['post_id'], $rec['post_slug']);  ?>
+        <a class="black mb20 block" href="<?= $url; ?>">
+          <?= $rec['title']; ?>
+        </a>
       <?php endforeach; ?>
     </div>
   <?php else : ?>

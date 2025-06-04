@@ -13,7 +13,7 @@ use App\Bootstrap\Services\User\UserData;
  */
 
 // @param  string|null $key
-function __(string $key = null, array $params = [])
+function __(?string $key = null, array $params = [])
 {
     if ($key === null) {
         return $key;

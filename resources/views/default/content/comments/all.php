@@ -29,7 +29,7 @@
   <?php endif; ?>
 </main>
 <aside>
-  <div class="box sticky top-sm">
+  <div class="box sticky">
     <?= __('meta.all_comments_desc'); ?>
   </div>
 </aside>

@@ -9,7 +9,7 @@ body {
 }
 
 main {
-  width: calc(100% - 220px);
+  margin-left: 0;
 }
 
 .box-answer {
@@ -25,10 +25,6 @@ main {
 
 .box-answer .text-sm {
   font-size: 0.77rem;
-}
-
-.top-sm {
-  top: 5px;
 }
 
 @media (max-width: 1050px) {

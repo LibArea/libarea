@@ -141,11 +141,11 @@ class CommentModel extends Model
     {
         $hidden = self::container()->user()->admin() ? '' : 'AND post_hidden = 0';
 
-		return match ($sheet) {
-			'all'		=> 'WHERE comment_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0 ' . $hidden,
-			'deleted'	=> 'WHERE comment_is_deleted = 1',
-			default		=> 'WHERE comment_is_deleted = 0 AND post_is_deleted = 0',
-		};
+        return match ($sheet) {
+            'all'        => 'WHERE comment_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0 ' . $hidden,
+            'deleted'    => 'WHERE comment_is_deleted = 1',
+            default        => 'WHERE comment_is_deleted = 0 AND post_is_deleted = 0',
+        };
     }
 
     /**
@@ -224,11 +224,11 @@ class CommentModel extends Model
             $sorting = 'top';
         }
 
-		$sort = match ($sorting) {
-			'top'		=> 'ORDER BY comment_lo DESC, comment_votes DESC',
-			'old'		=> 'ORDER BY comment_id DESC',
-			default		=> '',
-		};
+        $sort = match ($sorting) {
+            'top'        => 'ORDER BY comment_lo DESC, comment_votes DESC',
+            'old'        => 'ORDER BY comment_id DESC',
+            default        => '',
+        };
 
         $sql = "SELECT 
                     comment_id,

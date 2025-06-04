@@ -8,6 +8,13 @@
     </div>
   </div>
 
+  <?php if (!$container->user()->active()) : ?>
+    <div class="banner mt20">
+      <h1><?= config('meta', 'banner_title'); ?></h1>
+      <p><?= config('meta', 'banner_desc'); ?>...</p>
+    </div>
+  <?php endif; ?>
+
   <?= insert('/content/publications/choice', ['data' => $data]); ?>
 
   <?php if ($container->user()->scroll()) : ?>
@@ -62,7 +69,5 @@
     <?php endif; ?>
   <?php endif; ?>
 
-  <div class="sticky top-sm">
-    <?= insert('/_block/latest-comments-tabs', ['latest_comments' => $data['latest_comments']]); ?>
-  </div>
+  <?= insert('/_block/latest-comments-tabs', ['latest_comments' => $data['latest_comments']]); ?>
 </aside>

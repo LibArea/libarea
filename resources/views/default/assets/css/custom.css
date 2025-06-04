@@ -10,19 +10,6 @@
   font-display: swap;
 }
 
-.nickname {
-  display: inline-block;
-  color: var(--black);
-}
-
-.nickname.new::first-letter {
-  color: var(--green);
-}
-
 .active {
   color: red;
-}
-
-ul.nav>li.active>a {
-  color: var(--nav-color-active);
 }

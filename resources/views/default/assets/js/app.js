@@ -14,7 +14,7 @@ focusId.forEach(el => el.addEventListener("click", function (e) {
 
 // Adding Folders
 saveFolder.forEach(el => el.addEventListener("click", function (e) {
-  makeRequest("/folder/content/save", options = { body: "id=" + el.dataset.id + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token})
+  makeRequest("/folder/content/save", options = { body: "id=" + el.dataset.id + "&type=" + el.dataset.type + "&tid=" + el.dataset.tid + "&_token=" + token })
 }));
 
 // Add or remove your post to your profile 
@@ -71,6 +71,8 @@ queryAll(".up-id")
       }).then((text) => {
 
         let upVot = document.querySelector('#up' + el.dataset.id);
+
+        if (!upVot) return;
         let act = upVot.classList.contains('active');
         let upScr = upVot.querySelector('.score');
         let number = parseInt(upScr.innerText);
@@ -104,6 +106,7 @@ queryAll(".add-favorite")
           location.reload();
         } else {
           let dom = document.querySelector("#favorite_" + el.dataset.id);
+          if (!dom) return;
           dom.classList.toggle("active");
         }
       });

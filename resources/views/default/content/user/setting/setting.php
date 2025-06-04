@@ -1,4 +1,4 @@
-<main class="w-100">
+<main class="max">
   <?= insert('/content/user/setting/nav'); ?>
   <div class="box">
     <form class="mb20" action="<?= url('setting.edit.profile', method: 'post'); ?>" method="post">
