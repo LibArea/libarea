@@ -205,6 +205,12 @@ h5 {
   max-width: 550px;
 }
 
+.d-header.show .d-header-post.none a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .v-line {
   border-left: 1px solid var(--gray-600);
   height: 20px;
