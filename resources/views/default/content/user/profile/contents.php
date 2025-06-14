@@ -5,7 +5,7 @@
 
       <?= insert('/content/publications/choice', ['data' => $data]); ?>
 
-      <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/posts'); ?>
+      <?= Html::pagination($data['pNum'], $data['pagesCount'], false, '/@' . $data['profile']['login'] . '/contents'); ?>
     </main>
     <aside>
       <?= insert('/content/user/profile/sidebar', ['data' => $data]); ?>

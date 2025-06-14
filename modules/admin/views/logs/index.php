@@ -8,7 +8,8 @@
         'id'    => 'audits.all',
         'url'   => url('admin.logs'),
         'name'  => __('admin.logs'),
-      ], [
+      ],
+      [
         'id'    => 'audits.all',
         'url'   => url('admin.logs.search'),
         'name'  => __('admin.search'),

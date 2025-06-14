@@ -34,49 +34,46 @@ $lang = Translate::getLang();
 <body class="admin<?php if ($container->cookies()->get('dayNight') == 'dark') : ?> dark<?php endif; ?>">
 
   <header class="d-header">
-    <div class="wrap">
-      <div class="d-header_contents">
-        <svg class="icon menu__button none">
-          <use xlink:href="/assets/svg/icons.svg#menu"></use>
+    <svg class="icon menu__button none">
+      <use xlink:href="/assets/svg/icons.svg#menu"></use>
+    </svg>
+    <div class="box-logo ml10 mr20">
+      <a href="<?= url('admin'); ?>"><?= __('admin.home'); ?></a>
+      <div class="gray-600">/</div>
+      <a class="gray-600" href="/">
+        <?= __('admin.website'); ?>
+      </a>
+    </div>
+    <div class="flex gap-lg items-center w-90 ml20">
+      <a class="<?= is_current(url('admin.users')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.users'); ?>">
+        <svg class="icon mr5">
+          <use xlink:href="/assets/svg/icons.svg#users"></use>
         </svg>
-        <div class="box-logo ml10 mr20">
-          <a href="<?= url('admin'); ?>"><?= __('admin.home'); ?></a>
-          <div class="gray-600">/</div>
-          <a class="gray-600" href="/">
-            <?= __('admin.website'); ?>
-          </a>
-        </div>
-        <div class="flex gap-lg items-center w-90 ml20">
-          <a class="<?= is_current(url('admin.users')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.users'); ?>">
-            <svg class="icon mr5">
-              <use xlink:href="/assets/svg/icons.svg#users"></use>
-            </svg>
-            <span class="mb-none middle text-sm"><?= __('admin.users'); ?></span>
-          </a>
-          <a class="<?= is_current(url('admin.facets.all')) ? ' active' : ' gray-600'; ?> mb-none" href="<?= url('admin.facets.all'); ?>">
-            <svg class="icon mr5">
-              <use xlink:href="/assets/svg/icons.svg#grid"></use>
-            </svg>
-            <span class="mb-none middle text-sm"><?= __('admin.facets'); ?></span>
-          </a>
-          <a class="<?= is_current(url('admin.tools')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.tools'); ?>">
-            <svg class="icon mr5">
-              <use xlink:href="/assets/svg/icons.svg#tool"></use>
-            </svg>
-            <span class="mb-none middle text-sm"><?= __('admin.tools'); ?></span>
-          </a>
-          <!-- Hide so as not to embarrass
+        <span class="mb-none middle text-sm"><?= __('admin.users'); ?></span>
+      </a>
+      <a class="<?= is_current(url('admin.facets.all')) ? ' active' : ' gray-600'; ?> mb-none" href="<?= url('admin.facets.all'); ?>">
+        <svg class="icon mr5">
+          <use xlink:href="/assets/svg/icons.svg#grid"></use>
+        </svg>
+        <span class="mb-none middle text-sm"><?= __('admin.facets'); ?></span>
+      </a>
+      <a class="<?= is_current(url('admin.tools')) ? ' active' : ' gray-600'; ?>" href="<?= url('admin.tools'); ?>">
+        <svg class="icon mr5">
+          <use xlink:href="/assets/svg/icons.svg#tool"></use>
+        </svg>
+        <span class="mb-none middle text-sm"><?= __('admin.tools'); ?></span>
+      </a>
+      <!-- Hide so as not to embarrass
           <a class="<?= is_current(url('admin.settings.general')) ? ' active' : ' gray-600'; ?> mb-none" href="<?= url('admin.settings.general'); ?>">
             <svg class="icon mr5">
               <use xlink:href="/assets/svg/icons.svg#settings"></use>
             </svg>
             <span class="mb-none middle text-sm"><?= __('admin.settings'); ?></span>
           </a> -->
-        </div>
-        <div class="mb-block">
-          <span class="mb-none gray-600"><?= $container->request()->getUri()->getIp(); ?></span>
-        </div>
-      </div>
     </div>
+    <div class="flex gap-lg items-center">
+      <span class="mb-none gray-600"><?= $container->request()->getUri()->getIp(); ?></span>
+    </div>
+
   </header>
-  <div id="contentWrapper" class="wrap">
+  <div id="contentWrapper">
